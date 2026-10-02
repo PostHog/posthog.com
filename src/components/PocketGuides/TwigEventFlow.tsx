@@ -57,7 +57,7 @@ export default function TwigEventFlow({
     useEffect(() => {
         if (!autoplay || !inView || manual) return
 
-        const choices: StaySetting[] = ['Forest', 'City', 'Coast']
+        const choices: StaySetting[] = ['City', 'Coast', 'Forest']
         const timeouts: number[] = []
         let firstMove = true
         const advance = () => {

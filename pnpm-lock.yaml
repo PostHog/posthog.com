@@ -75,8 +75,8 @@ importers:
         specifier: 0.8.0
         version: 0.8.0(react@18.3.1)
       '@posthog/hedgehog-mode':
-        specifier: ^0.0.56
-        version: 0.0.56(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.0.60
+        version: 0.0.60(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/icons':
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3616,8 +3616,8 @@ packages:
       react:
         optional: true
 
-  '@posthog/hedgehog-mode@0.0.56':
-    resolution: {integrity: sha512-I6PjNTR4BfVMXbgO3XQOPTirclJx8hHaR58j6ebB9ZXJohHVkS3eFUmLmJuc+q4baKs9ZU1kGn0K76pYhOUHFg==}
+  '@posthog/hedgehog-mode@0.0.60':
+    resolution: {integrity: sha512-NPxA6Rg2u3jY36d9i8QUbggauaBuJ8rhd0c74sWnDgla7cjh8ZcjGCtTEjHtVWundHU7JII43+iNrSD1bUvQ+w==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
@@ -6072,10 +6072,9 @@ packages:
     engines: {node: '>=10.0.0'}
     deprecated: this version has critical issues, please update to the latest version
 
-  '@xmldom/xmldom@0.8.13':
-    resolution: {integrity: sha512-KRYzxepc14G/CEpEGc3Yn+JKaAeT63smlDr+vjB8jRfgTBBI9wRj/nkQEO+ucV8p8I9bfKLWp37uHgFrbntPvw==}
+  '@xmldom/xmldom@0.8.15':
+    resolution: {integrity: sha512-/5NV/vDALVFDXgLmfsy9TRCBlKwO2LNBFzpzvb9iIj+jR+eSc6DLYYvVOdivT/jm7MtU6TebYuRmzEOI7w40UA==}
     engines: {node: '>=10.0.0'}
-    deprecated: this version has critical issues, please update to the latest version
 
   '@xstate/fsm@1.6.5':
     resolution: {integrity: sha512-b5o1I6aLNeYlU/3CPlj/Z91ybk1gUsKT+5NAJI+2W4UjvS5KLG28K9v5UvNoFVjHV8PajVZ00RH3vnjyQO7ZAw==}
@@ -13567,8 +13566,8 @@ packages:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
     engines: {node: '>= 6'}
 
-  pixi.js@8.19.0:
-    resolution: {integrity: sha512-pq1O6emA/GFjjeF+8d3Pb5t7knD8FsnfWGqQcRjYjsqFZ7QdzG1XgjLDUu0DFJRbafjV5+g8iNLFBx0b9649lg==}
+  pixi.js@8.20.1:
+    resolution: {integrity: sha512-akLVBMLvQbaEViqsmVraK0Njer1q4Q4lm4iNKuzvBiFrV8q+6/+HluJN3sWIwO663IBeQtUUS/CaXFJZs6ffXQ==}
 
   pkg-dir@3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
@@ -21561,11 +21560,11 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@posthog/hedgehog-mode@0.0.56(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@posthog/hedgehog-mode@0.0.60(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       gsap: 3.13.0
       matter-js: 0.20.0
-      pixi.js: 8.19.0
+      pixi.js: 8.20.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-shadow: 20.6.0(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -24973,7 +24972,7 @@ snapshots:
 
   '@xmldom/xmldom@0.8.11': {}
 
-  '@xmldom/xmldom@0.8.13': {}
+  '@xmldom/xmldom@0.8.15': {}
 
   '@xstate/fsm@1.6.5': {}
 
@@ -35947,12 +35946,12 @@ snapshots:
 
   pirates@4.0.7: {}
 
-  pixi.js@8.19.0:
+  pixi.js@8.20.1:
     dependencies:
       '@pixi/colord': 2.9.6
       '@types/earcut': 3.0.0
       '@webgpu/types': 0.1.72
-      '@xmldom/xmldom': 0.8.13
+      '@xmldom/xmldom': 0.8.15
       earcut: 3.0.2
       eventemitter3: 5.0.1
       gifuct-js: 2.1.2

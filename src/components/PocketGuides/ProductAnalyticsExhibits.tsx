@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
+import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorCode, InspectorStatus } from './PostHogInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
 import ExhibitResetButton from './ExhibitResetButton'
 
@@ -83,7 +83,7 @@ export function AutocaptureFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector className="[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent">
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 {clickedLabel ? (
                     <>
                         <InspectorCode
@@ -137,7 +137,7 @@ export function FilterPropertiesFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector className="[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent">
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 {choice && capturedAt ? (
                     <InspectorCode label="Event payload · selected properties" value={eventPayload} />
                 ) : (
@@ -245,7 +245,7 @@ export function DestinationChartFigure(): JSX.Element {
                     </div>
                 </div>
             </section>
-            <PostHogInspector className="[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent">
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 {selectedEvent && eventPayload ? (
                     <InspectorCode
                         label="Event payload · selected properties"

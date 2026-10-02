@@ -162,6 +162,11 @@
             "statusCode": 302
         },
         {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/product-analytics",
             "destination": "/docs/product-analytics/learn/introduction",
             "statusCode": 301
@@ -658,6 +663,11 @@
         {
             "source": "/docs/mcp:ext(\\.md)?",
             "destination": "/docs/model-context-protocol:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
             "statusCode": 301
         },
         {

@@ -1,0 +1,59 @@
+---
+title: Send a broadcast
+---
+
+A broadcast sends one email to a group of people, once or on a schedule. Use it for one-off sends like announcements, or recurring sends like a weekly newsletter, when you don't need a multi-step [workflow](/docs/workflows/workflow-builder).
+
+Open **Broadcasts** from the **Messaging** section of the products menu, then click **New broadcast**. A step-by-step editor guides you through five steps: **Recipients**, **Goal**, **Content**, **Schedule**, and **Review**. PostHog saves your progress as a draft, so you can leave and come back later.
+
+## 1. Recipients
+
+Choose who gets the email with **Add condition**. You can filter by [person properties](/docs/data/persons), [cohorts](/docs/data/cohorts), or distinct IDs. A person must match all of your conditions. With no conditions, the broadcast goes to everyone in your project.
+
+The step shows an estimate of how many people the broadcast reaches. PostHog sends only one email to each address, so two people with the same email address get one email.
+
+## 2. Goal
+
+A goal is optional. It counts the recipients who do something after they get the email, like sign up or make a purchase. Pick **Set a conversion goal** and choose the event or filters that count as a conversion.
+
+## 3. Content
+
+Pick a sender, write a subject, and design the email. You can start from a [message template](/docs/workflows/library) or build the email in the editor.
+
+You can also ask [PostHog AI](/docs/posthog-ai) to write or change the email. It opens on this step, and its changes show in the editor. See [Create emails with PostHog AI](/docs/workflows/create-emails-ai) for prompt tips.
+
+## 4. Schedule
+
+Choose when the email goes out:
+
+| Option         | What it does                                                                      |
+| -------------- | --------------------------------------------------------------------------------- |
+| **Send now**   | Sends the email as soon as you launch the broadcast                               |
+| **Send later** | Sends the email once, at a date and time you pick                                 |
+| **Recurring**  | Sends the email on a repeating schedule, like every Monday at 9am                 |
+
+Each option that sets a time also has a timezone. Recurring broadcasts use the same schedule picker as [batch triggers](/docs/workflows/workflow-builder#recurring-schedule), so you can type a schedule in plain English and check the next occurrences before you launch.
+
+To spread a large send over time, select **Limit sending rate** and set how many emails go out per minute or per hour.
+
+## 5. Review
+
+Check the recipients, goal, email, and schedule before you launch. Emails can't be unsent.
+
+Use **Send test email** to send the email to an address you enter. Nobody in the audience receives the test. Then click **Send now** or **Schedule broadcast** to launch it.
+
+If the audience is larger than your project's batch limit, PostHog doesn't send the broadcast. Go back to **Recipients** and add filters to narrow it.
+
+## After you launch
+
+The broadcast page shows its status and how many emails were sent, delivered, opened, and clicked. If you set a goal, it also shows how many recipients converted. The **Broadcasts** list shows the same numbers for every broadcast.
+
+To change a scheduled broadcast, click **Stop and edit**. This moves it back to a draft.
+
+When you no longer need a broadcast, archive it from its menu in the list. An archived broadcast can be restored as a draft or deleted. You can't archive a broadcast while it's sending.
+
+## Broadcasts and workflows
+
+A broadcast is a workflow with a batch trigger and one email step. The **Broadcasts** list also shows existing workflows with that shape, marked with a **Workflow** tag.
+
+To add more steps, like delays, conditions, or a second message, build a [workflow with a batch trigger](/docs/workflows/workflow-builder#batch-triggers) instead.

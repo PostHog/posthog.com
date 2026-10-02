@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/org-definitions',
             },
             {
+                name: 'Revenue views',
+                url: '/handbook/growth/revops/revenue-views',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -4181,6 +4185,10 @@ export const docsMenu = {
                                 {
                                     name: 'Supported aggregations',
                                     url: '/docs/sql/aggregations',
+                                },
+                                {
+                                    name: 'Classifying rows with AI',
+                                    url: '/docs/sql/ai-functions',
                                 },
                                 {
                                     name: 'Optimizing SQL queries',
@@ -7570,18 +7578,34 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/mcp-analytics/installation',
+                        },
+                        {
+                            name: 'TypeScript',
+                            url: '/docs/mcp-analytics/installation/typescript',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/mcp-analytics/installation/python',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/mcp-analytics/installation/go',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/mcp-analytics/installation/ruby',
+                        },
+                    ],
                 },
                 {
                     name: 'MCP SDK v2',
                     url: '/docs/mcp-analytics/sdk-v2',
                     icon: 'IconCode',
                     color: 'purple',
-                },
-                {
-                    name: 'Custom servers',
-                    url: '/docs/mcp-analytics/custom-servers',
-                    icon: 'IconServer',
-                    color: 'teal',
                 },
                 {
                     name: 'Surfaces',
@@ -8167,6 +8191,10 @@ export const docsMenu = {
                             url: '/docs/workflows/create-emails-ai',
                         },
                         {
+                            name: 'Send a broadcast',
+                            url: '/docs/workflows/broadcasts',
+                        },
+                        {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
@@ -8577,6 +8605,12 @@ export const docsMenu = {
                     url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
                 },
             ],
         },
