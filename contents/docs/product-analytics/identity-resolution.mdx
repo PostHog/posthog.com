@@ -210,7 +210,7 @@ The symptoms vary by feature, but the root cause is always the same – two dist
 | **Experiments** | Exposure exists but conversion missing | Exposure on anonymous ID, conversion on identified ID |
 | **Session Replay** | Recording breaks at login | `distinct_id` changed mid-session without linkage |
 | **Funnels** | Conversion attributed to wrong user | Events split across unlinked persons |
-| **Error Tracking** | One new user for each error | Transient IDs creating a new person per error |
+| **Error Tracking** | Phantom users with one error each | Transient IDs creating a new person per error |
 
 In every case, the fix is upstream: ensure the right identity strategy is in place and that IDs are linked before the events that need to be connected.
 
