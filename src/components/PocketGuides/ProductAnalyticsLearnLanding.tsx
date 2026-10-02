@@ -107,12 +107,12 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 id="learn-through-story"
                 className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
             >
-                <div className="mb-5 flex items-center gap-3">
-                    <IconBook className="size-6 shrink-0 text-blue" />
-                    <h2 className="m-0 text-2xl font-bold">Learn through a story</h2>
-                </div>
                 <div className="grid items-start gap-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
                     <div>
+                        <div className="mb-5 flex items-center gap-3">
+                            <IconBook className="size-6 shrink-0 text-blue" />
+                            <h2 className="m-0 text-2xl font-bold">Learn through a story</h2>
+                        </div>
                         <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
                             Follow engineers as they build a product.
                         </p>
@@ -145,12 +145,12 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 id="learn-by-doing"
                 className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
             >
-                <div className="mb-5 flex items-center gap-3">
-                    <IconPlay className="size-6 shrink-0 text-orange" />
-                    <h2 className="m-0 text-2xl font-bold">Learn by doing</h2>
-                </div>
                 <div className="grid items-start gap-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
                     <div>
+                        <div className="mb-5 flex items-center gap-3">
+                            <IconPlay className="size-6 shrink-0 text-orange" />
+                            <h2 className="m-0 text-2xl font-bold">Learn by doing</h2>
+                        </div>
                         <h3 className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
                             Explore a fully instrumented product.
                         </h3>
