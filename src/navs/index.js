@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/org-definitions',
             },
             {
+                name: 'Revenue views',
+                url: '/handbook/growth/revops/revenue-views',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
