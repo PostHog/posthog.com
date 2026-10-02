@@ -1,0 +1,40 @@
+---
+title: Getting started with sources & destinations (ETL)
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+ETL stands for extract, transform, load. In PostHog, it means two things:
+
+- **Sources** are where data comes from. There are 1,300+ of them, including Stripe, HubSpot, Salesforce, and your own Postgres.
+- **Destinations** are where the rows land. Your PostHog warehouse by default, and optionally your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob.
+
+## 1. Connect a source
+
+[Linking a source](/docs/data-warehouse/sources) covers the full setup: credentials, picking tables, sync frequency, and the IP addresses to add to your allowlist. Each connector also has its own page for the credentials it needs.
+
+If your tool isn't in the list, the [custom REST source](/docs/data-warehouse/sources/custom-rest-source) can usually reach it.
+
+## 2. Choose where the rows land
+
+By default, a source writes to your PostHog warehouse and you can query it right away.
+
+To send the same rows to your own database or object store, set a [destination](/docs/etl/destinations). Read that page first if the source has already synced. Adding a destination starts a full resync, and every destination is billed for the rows it receives.
+
+## 3. Query what you synced
+
+Synced tables use the same query engine as the events your product sends, so you can join them. Start with [querying the warehouse](/docs/data-warehouse/query) and [joins](/docs/data-warehouse/join).
+
+## 4. Check on it
+
+The [ETL page](/docs/etl/monitoring) opens with the tables that have stopped syncing, then shows rows written per destination, tables syncing, and runs in progress.
+
+When a sync fails, [warehouse troubleshooting](/docs/data-warehouse/troubleshooting) covers the common causes.
+
+## What it costs
+
+Rows you sync in are billed on the managed warehouse product, and the first million each month are free. Rows you write to an external destination are billed separately. See [ETL pricing](/docs/etl/pricing).

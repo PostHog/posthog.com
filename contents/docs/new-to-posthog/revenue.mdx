@@ -19,7 +19,7 @@ There are two options for tracking revenue in PostHog.
 
 Gathering data about revenue can be straightforward: you know exactly when you get paid, and hopefully you can work backwards from that to the precursor events you should also measure.
 
-Start with the place in the product where money changes hands. Put an event there. In addition, capture metadata using event properties: how much money the customer paid and what they paid for. 
+Start with the place in the product where money changes hands. Put an event there. In addition, capture metadata using event properties: how much money the customer paid and what they paid for.
 
 If you're selling subscriptions, record the subscription timeframe. If you're selling products, include the products they purchased. For example:
 
@@ -46,13 +46,13 @@ If we've got an upsell or call to action that lists a specific price, that's gre
 
 ## Option 2 – Automating revenue capture with data warehouse
 
-Even at the earliest stages of a business, data can be scattered between multiple services, forcing you to constantly open multiple browser tabs just to keep up, which means your events might not give you all the data you need. 
+Even at the earliest stages of a business, data can be scattered between multiple services, forcing you to constantly open multiple browser tabs just to keep up, which means your events might not give you all the data you need.
 
 Instead of setting up complex event-sending pipelines, you can bring the data directly into PostHog's data warehouse and analyze it all from there.
 
 PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then build custom insights that traverse your events and external sources together.
 
-You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/cdp/sources/stripe) and [Chargebee](/docs/cdp/sources/chargebee). 
+You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/data-warehouse/sources/stripe) and [Chargebee](/docs/data-warehouse/sources/chargebee).
 
 Just don't forget to capture the events *leading* to revenue.
 
@@ -75,9 +75,9 @@ With revenue logged, you need a way to see it.
 
 A **trends** insight is a great start for your revenue reporting:
 
-- Create a new trends insight  
-- Edit the **series** to choose your revenue-bearing event  
-- In the aggregation menu to the right of the selected event, choose **property value > sum**  
+- Create a new trends insight
+- Edit the **series** to choose your revenue-bearing event
+- In the aggregation menu to the right of the selected event, choose **property value > sum**
 - In the rightmost menu, choose the property that captures the revenue from your event
 
 It will look like something like this:

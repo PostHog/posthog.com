@@ -15,11 +15,11 @@ export default function Sources(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data sources & import - PostHog context warehouse"
+                title="Sources & destinations (ETL) - PostHog context warehouse"
                 description="Learn about all the ways to get data into PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Data sources & import (ELT)">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Data sources & import (ETL)">
                 <WarehouseWizardHint className="my-4" />
                 <p>
                     Connect your external databases, SaaS tools, ad platforms, and more to sync data in bulk into your

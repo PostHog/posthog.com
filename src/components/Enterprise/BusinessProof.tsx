@@ -103,7 +103,7 @@ const PILLARS: Pillar[] = [
             {
                 title: 'Sync from your warehouse',
                 detail: 'Pull tables from Snowflake, BigQuery, Redshift, Postgres, MySQL, SQL Server, ClickHouse, Databricks, and object storage.',
-                href: '/docs/cdp/sources',
+                href: '/docs/data-warehouse/sources',
             },
             {
                 title: 'Export back out',

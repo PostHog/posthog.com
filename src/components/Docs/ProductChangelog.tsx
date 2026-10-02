@@ -29,6 +29,7 @@ const productConfigMap: Record<string, ProductConfig> = {
     experiments: { topic: 'Experiments', teams: ['experiments'] },
     surveys: { topic: 'Surveys', teams: ['surveys'] },
     'data warehouse': { topic: 'Data warehouse', teams: ['data warehouse', 'clickhouse'] },
+    etl: { topic: 'Data warehouse', teams: ['warehouse sources'] },
     'data pipelines': { topic: 'CDP', teams: ['batch exports'] },
     workflows: { topic: 'Workflows', teams: ['workflows'] },
     'error tracking': { topic: 'Error tracking', teams: ['error tracking'] },

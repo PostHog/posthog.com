@@ -11,6 +11,7 @@ import * as Icons from '@posthog/icons'
 export const BROWSE_TOOLS_HANDLES = [
     'product_analytics',
     'web_analytics',
+    'etl',
     'ai_observability',
     'session_replay',
     'replay_vision',

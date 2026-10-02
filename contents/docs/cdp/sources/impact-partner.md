@@ -16,7 +16,7 @@ import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The impact.com Partner connector syncs the data your partner (publisher) account sees on [impact.com](https://impact.com): the brand programs you've joined, the conversions credited to you, and the invoices for your earnings. If your account is a brand (advertiser) account, use the [impact.com source](/docs/cdp/sources/impact) instead.
+The impact.com Partner connector syncs the data your partner (publisher) account sees on [impact.com](https://impact.com): the brand programs you've joined, the conversions credited to you, and the invoices for your earnings. If your account is a brand (advertiser) account, use the [impact.com source](/docs/data-warehouse/sources/impact) instead.
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ The `Actions` table supports incremental sync on `EventDate`, and `Invoices` on 
 
 ## Troubleshooting
 
-- **Invalid credentials when connecting**: check that the Account SID and Auth Token belong to a partner (publisher) account. Brand and agency accounts use different APIs, so a brand token won't validate here. For brand accounts, use the [impact.com source](/docs/cdp/sources/impact).
+- **Invalid credentials when connecting**: check that the Account SID and Auth Token belong to a partner (publisher) account. Brand and agency accounts use different APIs, so a brand token won't validate here. For brand accounts, use the [impact.com source](/docs/data-warehouse/sources/impact).
 - **Missing older actions**: the impact.com API only returns actions from the last 3 years, so the initial backfill stops there.
 
 <TroubleshootingLink />

@@ -70,7 +70,7 @@ export const dataPipelines = {
         },
         {
             name: 'Link sources',
-            url: '/docs/cdp/sources',
+            url: '/docs/data-warehouse/sources',
             icon: 'IconBook',
             color: 'blue',
             featured: true,
@@ -78,11 +78,11 @@ export const dataPipelines = {
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/sources/',
+                    url: '/docs/data-warehouse/sources/',
                 },
                 {
                     name: 'Incoming webhooks',
-                    url: '/docs/cdp/sources/incoming-webhooks',
+                    url: '/docs/data-warehouse/sources/incoming-webhooks',
                 },
                 {
                     name: 'Sources',
@@ -6594,6 +6594,75 @@ export const docsMenu = {
             ],
         },
         ...[dataPipelines],
+        {
+            name: 'Sources & destinations',
+            url: '/docs/etl/start-here',
+            color: 'purple',
+            icon: 'IconDatabase',
+            description: 'Sync data from 1,300+ sources, then write it wherever you need it',
+            children: [
+                {
+                    name: 'Sources & destinations (ETL)',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/etl/start-here',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Sources',
+                },
+                {
+                    name: 'Browse all sources',
+                    url: '/docs/data-warehouse/sources',
+                    icon: 'IconPlug',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Destinations',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/etl/destinations',
+                    icon: 'IconServer',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Running it',
+                },
+                {
+                    name: 'Monitoring your syncs',
+                    url: '/docs/etl/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/etl/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/data-warehouse/troubleshooting',
+                    icon: 'IconWarning',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Changelog',
+                    url: '/docs/etl/changelog',
+                    icon: 'IconList',
+                    color: 'blue',
+                },
+            ],
+        },
         {
             name: 'Data Warehouse',
             url: '/docs/data-warehouse',

@@ -89,31 +89,31 @@ const setupSteps: {
         description: (
             <>
                 Pick a source from the list. Authenticate. Done.{' '}
-                <Link to="/docs/cdp/sources/stripe" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/stripe" state={{ newWindow: true }}>
                     Stripe
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/postgres" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/postgres" state={{ newWindow: true }}>
                     Postgres
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/salesforce" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/salesforce" state={{ newWindow: true }}>
                     Salesforce
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/hubspot" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/hubspot" state={{ newWindow: true }}>
                     HubSpot
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/s3" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/s3" state={{ newWindow: true }}>
                     S3
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/mongodb" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/mongodb" state={{ newWindow: true }}>
                     MongoDB
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/clickhouse" state={{ newWindow: true }}>
+                <Link to="/docs/data-warehouse/sources/clickhouse" state={{ newWindow: true }}>
                     ClickHouse
                 </Link>
                 , they all sync on a schedule you control, with schema drift handled automatically.

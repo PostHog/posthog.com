@@ -375,7 +375,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
 
     // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
     // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
-    // which render /docs/cdp/sources/* content — are covered either way. Scoped to /docs so the
+    // which render /docs/data-warehouse/sources/* content — are covered either way. Scoped to /docs so the
     // handbook and the Using PostHog manual, which share this template, stay unchanged.
     const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
 

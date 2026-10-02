@@ -20,6 +20,7 @@ import { aiEvals } from './productData/ai_evals'
 import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
+import { etl } from './productData/etl'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
 import { posthogDesktop } from './productData/posthog_desktop'
@@ -45,6 +46,7 @@ const initialProducts = [
     posthogDesktop,
     endpoints,
     replayVision,
+    etl,
 ]
 
 export default function useProducts() {

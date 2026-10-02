@@ -1,0 +1,47 @@
+---
+title: Destinations
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+A source doesn't have to stop at PostHog. Point a table at your own database or object store, and PostHog writes the rows there on the same schedule it syncs them.
+
+## Where you can write
+
+| Destination | Notes |
+| --- | --- |
+| PostHog warehouse | The default. A source with no destinations set writes here. |
+| Postgres | Your own instance, reachable from PostHog's IP addresses. |
+| Snowflake | |
+| BigQuery | |
+| Redshift | |
+| Databricks | |
+| S3 | Files, not tables. |
+| Azure Blob | Files, not tables. |
+
+The PostHog warehouse is one of this list rather than a special case. When a table has no destinations set, PostHog resolves it to your warehouse, which is why sources you configured before destinations existed carry on unchanged.
+
+## Setting a destination
+
+Set destinations on a source and every table under it follows. Override a single table when it belongs somewhere else.
+
+Destinations reuse the same connections as [batch exports](/docs/cdp/batch-exports), so a warehouse you already connected is ready to pick. Credentials live on the connection, not on the destination.
+
+> **Adding a destination to a source that has already synced starts a full resync of its tables.** The new destination has none of the history, so PostHog refills it from the beginning. Every destination the source writes to is billed for the rows it receives during that resync, including ones that already had the data. Check the row counts before you turn one on.
+
+## Which do I want, destinations or batch exports?
+
+Both write to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. They move different data.
+
+- **ETL destinations** move rows PostHog imported from a source: your Stripe charges, your HubSpot contacts, your own Postgres tables.
+- **[Batch exports](/docs/cdp/batch-exports)** move the events, persons, and sessions PostHog captured.
+
+If you want your Stripe data in Snowflake, that's a destination. If you want your product analytics events in Snowflake, that's a batch export. Teams often run both.
+
+## Checking what lands
+
+The [ETL page](/docs/etl/monitoring) shows rows written per destination over the window you pick, so a destination that stopped receiving rows shows up as a flat line.

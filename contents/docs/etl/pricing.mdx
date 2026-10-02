@@ -1,0 +1,32 @@
+---
+title: ETL pricing
+sidebar: Docs
+showTitle: true
+---
+
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
+
+ETL doesn't have its own bill. Rows you sync in are billed on the managed warehouse product, and rows you write to an external destination are billed on data pipelines. Each has its own free allowance.
+
+## Syncing rows in
+
+<Pricing productType="data_warehouse" />
+
+The first million rows each month are free. Historical syncs are free for the first seven days of each new source, so backfilling a large table when you first connect it doesn't land on your first bill.
+
+Most sources sync incrementally, meaning PostHog copies only what changed since the last run rather than the whole table. That's the biggest lever on what you pay. [Cutting costs](/docs/data-warehouse/cutting-costs) covers sync frequency and auditing tables nobody queries.
+
+## Writing rows out
+
+Rows written to an external destination are billed per row exported, separately from the rows you synced in. If a source writes to two destinations, each one is billed for the rows it receives.
+
+This is why adding a destination to a source that has already synced is worth checking first. PostHog refills the new destination from the beginning, and that resync is billed. See [destinations](/docs/etl/destinations).
+
+## An example
+
+You sync 5 million Stripe rows a month into PostHog and write the same rows to your own Snowflake:
+
+- 5 million rows synced in, minus the 1 million free, billed on managed warehouse.
+- 5 million rows written out to Snowflake, billed on data pipelines, minus that product's free allowance.
+
+Writing to the PostHog warehouse alone doesn't incur the second charge.
