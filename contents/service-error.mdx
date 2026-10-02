@@ -23,9 +23,3 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 <p className='-mt-4 flex flex-col items-center justify-center text-center sm:block'>
     <a href="https://status.posthog.com/">Check PostHog Status</a>
 </p>
-
-<>{typeof window !== 'undefined' && location.hash && (
-    <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-semibold text-sm text-center opacity-50">
-        Error ID: {location.hash.slice(1)}
-    </span>
-)}</>
