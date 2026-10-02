@@ -304,16 +304,19 @@ Once a sentiment evaluation is running, the **Sentiment** tab in AI Observabilit
 
 You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
 
-The MCP server provides six evaluation management tools:
+The MCP server provides these evaluation management tools:
 
-| Tool                | Description                                                    |
-| ------------------- | -------------------------------------------------------------- |
-| `evaluations-get`   | List evaluations with optional search and enabled filter       |
-| `evaluation-get`    | Get a specific evaluation by UUID                              |
-| `evaluation-create` | Create LLM judge or Hog code evaluations                       |
-| `evaluation-update` | Update evaluation config, name, or enabled status              |
-| `evaluation-delete` | Delete an evaluation (soft delete)                             |
-| `evaluation-run`    | Trigger an async evaluation run on a specific generation event |
+| Tool                       | Description                                                             |
+| -------------------------- | ----------------------------------------------------------------------- |
+| `llma-evaluation-list`     | List evaluations, with an optional search term and enabled filter       |
+| `llma-evaluation-get`      | Get one evaluation by UUID                                              |
+| `llma-evaluation-create`   | Create an LLM-as-a-judge, code-based (Hog), or sentiment evaluation     |
+| `llma-evaluation-update`   | Update the configuration, name, or enabled status of an evaluation      |
+| `llma-evaluation-delete`   | Soft-delete an evaluation. Past results stay                            |
+| `llma-evaluation-run`      | Run an evaluation on one generation event. The run is asynchronous      |
+| `llma-evaluation-test-hog` | Test Hog code against recent data before you save it to an evaluation   |
+
+For the full list, including the tools for evaluation reports and directories, see [Use AI Observability over PostHog MCP](/docs/ai-observability/surfaces/mcp). That list is generated from the MCP tool catalog at build time, so it stays current.
 
 This enables teams to manage evaluations programmatically from agent workflows without using the web UI.
 
