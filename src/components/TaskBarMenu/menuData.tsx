@@ -19,6 +19,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
+import { TWIG_URL } from '../../constants'
 
 interface DocsMenuItem {
     name: string
@@ -36,7 +37,7 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
 }
 
 // Static Docs menu. Edit this list directly when a docs section moves or a new one is added.
-export const docsMenuItems: MenuItemType[] = [
+const docsMenuItems: MenuItemType[] = [
     { type: 'item', label: 'Overview', link: '/docs', icon: <Icons.IconHome className="size-4 text-purple" /> },
     { type: 'separator' },
     { type: 'label', label: 'Get started' },
@@ -181,17 +182,24 @@ export const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+        label: 'Explore Twig',
+        link: TWIG_URL,
+        external: true,
+        icon: <Icons.IconPlay className="size-4 text-orange" />,
     },
     {
         type: 'item',
         label: 'Pocket guides',
         link: '/pocket-guides',
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
+        icon: <Icons.IconCompass className="size-4 text-blue" />,
     },
-    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-purple" /> },
+    {
+        type: 'item',
+        label: 'Tutorials',
+        link: '/tutorials',
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
 ]
 
 // Tools promoted to the top level of the Products menu, in display order.
