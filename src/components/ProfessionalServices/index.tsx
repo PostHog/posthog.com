@@ -485,7 +485,7 @@ export const ProfessionalServices = () => {
                 </div>
 
                 <p className="mb-12 text-center @xl:text-left">
-                    Our FDEs do the hands-on work in your codebase and your PostHog instance, and hand it back in a
+                    Our FDEs do the hands-on engineering work in your codebase and your PostHog instance, and hand it back in a
                     state your team can run without us.
                 </p>
 
