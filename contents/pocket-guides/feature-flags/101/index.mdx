@@ -10,11 +10,11 @@ section: Instrument
 
 # Feature Flags 101
 
-A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false` – or, for a multivariate flag, with a variant such as `control` or `test`. You change the flag's configuration in PostHog, and the code stays the same.
+A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false`, or, for a multivariate flag, a variant such as `control` or `test`. You change the flag's configuration in PostHog, and the code stays the same.
 
 ## Deploy is not release
 
-Without a flag, shipping a change and giving it to users are the same event: the deploy lands, and everyone gets the new code at once. A flag splits them apart. You deploy `new-checkout` turned off, and the new code sits in production doing nothing. Releasing it is a change in PostHog – who gets it, how many, and for how long – and so is taking it back.
+Without a flag, shipping a change and giving it to users are the same event: the deploy lands, and everyone gets the new code at once. A flag splits them apart. You deploy `new-checkout` turned off, and the new code sits in production doing nothing. Releasing it is a change in PostHog, and so is taking it back: you decide who gets it, how many, and for how long.
 
 The check itself is a few lines. On the server, it runs once at the top of the request, with the signed-in user's ID:
 
@@ -26,6 +26,8 @@ if (flags.isEnabled(NEW_CHECKOUT_FLAG)) {
 }
 return renderCheckout()
 ```
+
+Evaluate once, where the request comes in, and pass the result down. Each extra evaluation deeper in the stack is another chance for the identity or configuration to change and, when the server sends evaluations to PostHog, another network request.
 
 ## Three inputs, one stable answer
 
@@ -43,11 +45,7 @@ For the rollout percentage, PostHog hashes the flag key and the distinct ID (or,
 | Rollout percentage | 50% |
 | Result | `true`, because 0.19 is under 0.50 |
 
-The same inputs produce the same result on every check, so when a flag gives someone the "wrong" answer, the flag isn't broken. First check whether the flag's configuration or one of the inputs changed. A common cause is the distinct ID: a browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Once you know who the user is, call `identify()` before checking the flag.
-
-## Evaluate once per request
-
-Evaluate flags once, where the request comes in, and pass the result down. Each extra evaluation deeper in the stack is another chance for the identity or configuration to change – and, when the server sends evaluations to PostHog, another network request.
+The same inputs produce the same result on every check, so when a flag gives someone the "wrong" answer, look for what changed: the flag's configuration or one of the inputs. A common cause is the distinct ID: a browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Once you know who the user is, call `identify()` before checking the flag.
 
 ## Decide what happens before the answer arrives
 

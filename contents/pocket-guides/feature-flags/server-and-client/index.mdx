@@ -16,9 +16,7 @@ section: Instrument
 
 # Server and client
 
-PostHog can evaluate a flag in the browser, on the server, or in both places. Choose the runtime based on where the gated code runs and which side has the data needed to evaluate it.
-
-This page explains the tradeoffs, how to keep evaluations consistent, and how to pass a server result to the client. An agent adding flag checks can follow the same rules <SeeFig n={1} />.
+PostHog can evaluate a flag in the browser, on the server, or in both places. Choose the runtime based on where the gated code runs and which side has the data needed to evaluate it. An agent adding flag checks can follow the same rules <SeeFig n={1} />.
 
 ## Choose where a flag is evaluated
 
@@ -30,11 +28,11 @@ Evaluate a flag on the side that runs the code it gates and holds the properties
 | Browser | The gated code is UI, and the browser knows every property the conditions use | `getFeatureFlag()`, after `identify()` |
 | Server, then browser | Both sides need the answer, or the UI needs it for the first render | Evaluate on the server and bootstrap the result for the first render; the browser then evaluates again |
 
-Default to one side per flag. A flag evaluated separately on the server and in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. When both sides need the answer, evaluate on the server and bootstrap the result into the browser for the first render, as the last section shows. The browser then evaluates the flag again, so keep identity and properties the same on both sides, as described in [Keep identity and properties consistent](#keep-identity-and-properties-consistent). For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
+Default to one side per flag. A flag evaluated separately on the server and in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. When both sides need the answer, bootstrap the server's result for the first render; the browser then evaluates again, so [identity and properties must match](#keep-identity-and-properties-consistent). For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
 
 ## On the server, evaluate locally
 
-With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. A fetch that downloads the definitions counts as 10 flag requests, and a poll where nothing changed counts as 1, however many local checks your server makes, so local evaluation is cheaper as well as faster.
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. Billing follows the fetches, not the checks: a fetch that downloads the definitions counts as 10 flag requests, and a poll where nothing changed counts as 1. Local evaluation is cheaper as well as faster.
 
 The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the Feature Flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
 

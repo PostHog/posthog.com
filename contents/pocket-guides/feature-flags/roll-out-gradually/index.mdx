@@ -35,7 +35,7 @@ A typical ladder for `new-checkout`:
 | Step | Who's eligible | Watch | Continue when | Roll back when |
 | --- | --- | --- | --- | --- |
 | Team | `email ends with @yourcompany.com` | Your own use in production | The team used it for real work and found no blockers | Anything a customer would notice |
-| 5% | A small share of everyone else | Errors, replays, and checkout conversion for people with the flag | Both match people without the flag over a day of normal traffic | Errors rise or conversion drops |
+| 5% | A small share of everyone else | Errors, replays, and checkout conversion for people with the flag | Errors and conversion match people without the flag over a day of normal traffic | Errors rise or conversion drops |
 | 25% | A bigger share | The same, plus load on the services checkout calls | The same | The same, or latency climbs |
 | 100% | Everyone | The same | Nothing left to watch: schedule the cleanup | The same |
 
@@ -55,7 +55,7 @@ A rollout is only as safe as what you watch between steps. Watch the signals the
 
 ## When to continue or roll back
 
-Write down both answers before you raise the percentage, not after you see the numbers. Continue when the signals for people with the flag match those without it. Roll back, by lowering the percentage or [switching the flag off](/pocket-guides/feature-flags/off-switch), when they don't.
+Before you raise the percentage, and before you see the numbers, write down when you'll continue and when you'll roll back. Continue when the signals for people with the flag match those without it. Roll back, by lowering the percentage or [switching the flag off](/pocket-guides/feature-flags/off-switch), when they don't.
 
 If you already know the next step and its date, schedule the flag change and let PostHog make it.
 

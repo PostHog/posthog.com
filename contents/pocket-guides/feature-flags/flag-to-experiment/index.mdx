@@ -40,7 +40,7 @@ Write the hypothesis and pick the primary metric before you start, so the result
 
 The experiment's flag decides who's eligible, the same way a rollout does. An experiment needs a multivariate flag with at least two variants, one of them named `control` <SeeFig n={1} />. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one.
 
-Keep each person in one variant for the whole experiment. By default, a person exposed to more than one variant is left out of the results entirely, so every switch shrinks your sample. Switching happens when the distinct ID changes between checks. Call `identify()` before the first check, check once, and keep the variant.
+Keep each person in one variant for the whole experiment. By default, a person exposed to more than one variant is left out of the results entirely, so every switch shrinks your sample. Switching happens when the distinct ID changes between checks. Call `identify()` before the first check, or turn on flag persistence across authentication so the variant survives login.
 
 ## Exposure happens at the check
 
@@ -50,7 +50,7 @@ So put the check where the experience splits, after every other condition. An ea
 
 ## Ship the winner, then remove the flag
 
-When the primary metric has an answer, roll the winning variant out to everyone, and then [clean up the flag](/pocket-guides/feature-flags/cleanup): an experiment flag is temporary by design. When you end an experiment, PostHog can open the cleanup PR for you.
+When the primary metric has an answer, roll the winning variant out to everyone, and then [clean up the flag](/pocket-guides/feature-flags/cleanup): an experiment flag is temporary by design.
 
 <Action />
 
