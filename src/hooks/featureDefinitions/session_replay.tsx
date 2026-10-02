@@ -30,7 +30,7 @@ export const sessionReplayFeatures = {
         },
         event_timeline: {
             name: 'Event timeline',
-            description: 'See events triggered during recordings',
+            description: 'See events triggered during recordings (requires product analytics)',
         },
         highlights: {
             name: 'Highlights',
