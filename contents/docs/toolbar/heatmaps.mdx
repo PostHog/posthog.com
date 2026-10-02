@@ -188,6 +188,61 @@ For example, if the product pages on an ecommerce site use a URL format of `http
 
 ![Toolbar heatmaps popover menu being used to add a wildcard into the URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-heatmap-wildcard.png)
 
+## Bot protection and firewalls
+
+PostHog draws the heatmap over a screenshot of your page. A shared browser fleet renders that screenshot. The fleet uses hundreds of rotating addresses and a standard headless browser user agent, so there is no address or user agent that your firewall can match. This is why PostHog does not publish an IP list for heatmap screenshots. A list that changes is worse than no list.
+
+Use the screenshot cookie instead. Each project can send a secret cookie named `__ph_heatmap_render` with its screenshot requests. Your bot protection rule matches the cookie value and lets the screenshot through, while every other headless browser stays blocked.
+
+### Approve a hostname and generate the value
+
+A project admin must do these steps in [project settings under **Heatmaps**](https://app.posthog.com/settings/project-heatmaps#heatmap-screenshot-cookie):
+
+1. Add each hostname that needs the cookie to **Approved screenshot hostnames**, then click **Save approved hostnames**.
+2. Click **Generate screenshot value**. PostHog shows the cookie and its value one time.
+3. Add a rule in your bot protection settings that matches the cookie value. See [the example rule below](#example-firewall-rule).
+
+Hostnames must be exact. `www.example.com` does not approve `example.com` or any other subdomain, and you cannot use a URL, a wildcard, a port, or an IP address. Approve the destination of a redirect too, because the cookie does not follow a redirect to a hostname you did not approve.
+
+PostHog sends the cookie only when all of these are true:
+
+| Condition | Why |
+| --- | --- |
+| The page uses HTTPS | The cookie is `Secure`, so PostHog never sends it over HTTP |
+| The page hostname is on your approved list | The cookie is set for that exact host, with no `Domain` attribute, so a child or sibling host never receives it |
+| Your project has a generated value | A project with no value renders without the cookie |
+| Cookie delivery is on for your installation | The settings page shows a banner when your installation has delivery off |
+
+If PostHog cannot send the cookie, the screenshot still runs without it. The heatmap page and the settings page tell you which condition failed.
+
+### Example firewall rule
+
+The cookie carries a secret, so match the value, not only the name. In Cloudflare, create a WAF custom rule with the **Skip** action and this expression:
+
+```
+http.host eq "www.example.com"
+and any(http.request.cookies["__ph_heatmap_render"][*] eq "<your screenshot value>")
+```
+
+Other firewalls use different syntax, but the shape is the same: match the host and the exact cookie value, then skip the bot checks.
+
+Skip only the bot checks that block the screenshot. Keep authentication, rate limits, and your other security rules on. The cookie proves that a request comes from your project's screenshot, and nothing more. A screenshot cannot use it to sign in.
+
+### Rotate the value
+
+Click **Rotate value** in the same settings section, then replace the value in your bot protection rule. New screenshots use the new value at once, but the old value works until you remove it from your rule. Rotate the value when someone who should not have it can read your rule.
+
+### Screenshot fails with 403 or 429
+
+A 403 and a 429 have different causes, and the cookie fixes only one of them.
+
+| Status | Cause | What to do |
+| --- | --- | --- |
+| 403 | A bot protection rule blocked the screenshot | Approve the hostname, generate the value, and add the rule above |
+| 429 | A rate limit rejected the screenshot | A cookie rule does not raise a rate limit. PostHog requests your page one time for each target width, so allow that small burst, or raise the limit for requests that carry the cookie |
+
+If your page stays blocked, you can read the heatmap over a session recording instead. See [screenshot or iframe heatmap fails to load](#screenshot-or-iframe-heatmap-fails-to-load).
+
 ## Troubleshooting
 
 ### Heatmap is captured, but site is not showing
@@ -202,6 +257,8 @@ In app, PostHog overlays the heatmap over your site in an iframe. You can allow 
 | EU     | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
 
 ### Screenshot or iframe heatmap fails to load
+
+If bot protection blocks the screenshot, see [bot protection and firewalls](#bot-protection-and-firewalls) first.
 
 If screenshot generation fails or your site blocks iframe embedding (due to auth walls, bot protection, or `Content-Security-Policy` restrictions), PostHog automatically searches for recent session recordings that visited the same page and suggests up to three of them.
 
