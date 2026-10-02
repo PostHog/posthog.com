@@ -26,6 +26,8 @@ The SDK does three things:
 
 The SDK reuses an echoed UUIDv7 that matches the handles it creates. It replaces missing or arbitrary values with a new handle to avoid merging unrelated conversations.
 
+The Go SDK mints a handle only when the call has no transport session. When there is one, it ignores an invalid value instead. It never mints a handle for an unknown tool, a handler error, or an `input_required` round.
+
 <a id="how-it-lands-in-events" />
 
 ## Event properties

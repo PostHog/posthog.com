@@ -26,7 +26,7 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 
 ## Configure `identify`
 
-`identify` is a callback that returns an identity or nothing. It runs on each request. The SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request.
+`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. Except in Go, the SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request. Go has no cache, so the resolver runs once for each captured event.
 
 <MultiLanguage>
 
@@ -66,6 +66,25 @@ async def identify(request, extra):
 instrument(server, posthog, MCPAnalyticsOptions(identify=identify))
 ```
 
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithIdentity(func(ctx context.Context, req *mcp.CallToolRequest) (posthogmcpsdk.Identity, error) {
+		if req.Extra == nil || req.Extra.TokenInfo == nil {
+			return posthogmcpsdk.Identity{}, nil
+		}
+		user, err := lookupUser(ctx, req.Extra.TokenInfo.UserID)
+		if err != nil {
+			return posthogmcpsdk.Identity{}, err
+		}
+		return posthogmcpsdk.Identity{
+			DistinctID:    user.ID,
+			SetProperties: posthog.NewProperties().Set("plan", user.Plan),
+			Groups:        posthog.NewGroups().Set("organization", user.OrgID),
+		}, nil
+	}),
+)
+```
+
 ```ruby file=Ruby
 PostHog::MCP.instrument(
   server, posthog,
@@ -78,7 +97,7 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
-In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`.
+In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`. In Go, go-sdk gives you `req.Extra.Header` and `req.Extra.TokenInfo`.
 
 An identity has three fields, named in each language's style:
 
@@ -89,15 +108,15 @@ An identity has three fields, named in each language's style:
 When the callback returns an identity, the SDK:
 
 1. Uses the distinct ID as the event's `distinct_id` for that session.
-2. Emits a `$identify` event the first time it sees the identity, or when the identity changes for that session.
+2. Emits a `$identify` event the first time it sees the identity, or when the identity changes for that session. The Go SDK doesn't emit `$identify`.
 3. Adds `$groups` to later events.
-4. Caches the identity per session, so an unchanged identity doesn't send another `$identify`.
+4. Caches the identity per session, so an unchanged identity doesn't send another `$identify`. The Go SDK has no cache.
 
 ## Identity merges
 
 An MCP session can emit events before authentication completes. For example, `$mcp_initialize` may occur before you identify the user. These events use the session ID.
 
-When the SDK emits `$identify`, it sets `$anon_distinct_id` to the prior session ID so PostHog can merge the anonymous events. Later events use the distinct ID. Events with no resolved identity stay on the `ses_` distinct ID, without a person profile.
+When the SDK emits `$identify`, it sets `$anon_distinct_id` to the prior session ID so PostHog can merge the anonymous events. Later events use the distinct ID. The Go SDK sends no `$identify`, so it never merges anonymous events. Events with no resolved identity stay on the `ses_` distinct ID, without a person profile.
 
 For stateless servers that recover a session from a token, the SDK suppresses the first `$identify` after `initialize` to avoid duplicates across instances. If identity only becomes available later, those earlier anonymous events may remain unmerged. Resolve identity during `initialize` when possible.
 
