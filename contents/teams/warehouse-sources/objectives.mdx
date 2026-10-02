@@ -1,46 +1,56 @@
 
-Objective: Make the MCP a first-class way to work with warehouse sources (Marcus)
+Objective: Build the features data engineers expect (Daniel)
 
 * **Key Results:**
-    * Bring source setup into the wizard, and into general usage too – when someone asks about data we don't have yet (e.g. "tell me about revenue" without Stripe synced), proactively offer to set up the right source.
-    * Build a context layer for the MCP so it understands the user's data, including the business knowledge we already capture.
-    * Run more user interviews to understand how people actually use the MCP and where it falls short.
-    * Dogfood heavily so we feel the rough edges before users do.
-    * Support editing existing sources from the MCP – not just adding them – including sync schedules and column selection.
-    * Add analytics and insights on MCP usage so we can see what's working and what isn't.
-    * Solve the secrets problem: find a secure way to get users' credentials to the MCP, likely via a Vault, AWS Secrets Manager, or 1Password integration.
+    * Ship SCD2 tables so users can see how a record changed over time.
+    * Add governance features that give data teams control over who can see what.
+    * Support PrivateLink and the other major cloud providers, so data moves over a private connection.
 
 
-Objective: Improve pipeline stability and scaling (Estefania)
+Objective: Ship reverse ETL and move towards data engineering needs (Tom)
 
 * **Key Results:**
-    * Ship pipeline v3 to handle larger workloads and scale more reliably.
-    * Reduce the error rate across syncs, with a particular focus on eliminating out-of-memory failures and improving error handling.
-    * Build better support tooling so the team can diagnose and resolve pipeline issues faster.
+    * Launch rETL, so users can push PostHog data back into the tools they run on.
+    * Separate the data engineer ICP from the product engineer ICP, and decide which one each feature serves.
+    * Shift the roadmap towards data engineering needs, away from product engineering ones.
 
 
-Objective: Expand and harden our source catalog (Tom)
-
-* **Key Results:**
-    * Add more sources to widen the range of data users can bring into PostHog.
-    * Automate more of source healing and creation – including using sample data from production to validate fixes and auto-merge them when they pass.
-    * Improve support tooling to make it easier to triage and fix source issues.
-    * Add more verbose logging so failures are easier to understand and debug.
-    * Write better documentation for sources so users can self-serve.
-
-
-Objective: Integrate warehouse data with more PostHog products (Daniel)
+Objective: Improve the surfaces people use to work with their data (Tom)
 
 * **Key Results:**
-    * Ship warehouse person properties – a long-standing request from Arthur. Ingestion has concerns, but we believe they're solvable.
-    * Identify which other products could benefit from warehouse data, such as logs and exceptions.
-    * Explore a generic API layer for exposing warehouse source and data-modeling data to other products internally.
+    * Find what the MCP is still missing, and improve the parts that already exist.
+    * Fix the parts of the UI people still use heavily, and point users to the MCP for the tasks it does better.
+    * Make the difference between ClickHouse and the managed warehouse clear in the UI, so users know what we charge them for.
+    * Ship self-driving signals, so the product tells users about problems in their data.
 
 
-Objective: Bonus objectives
+Objective: Make the pipeline cheaper, more accurate and broader (Estefania + Tom)
 
 * **Key Results:**
-    * Establish activation and retention metrics for the product (Anna).
-    * Review and refine pricing (Anna).
-    * Run more user interviews to guide the roadmap (Anna / Marcus).
-    * Publish an engineering blog post about our work (anyone).
+    * Decrease the cost of running the pipeline, and improve our margins.
+    * Give users a more accurate and more real-time view of their data.
+    * Ship the ETL product.
+    * Move the billing team off Fivetran and onto our own pipeline.
+    * Fill the gaps in the sources we already have, including missing fields and tables.
+    * Support Iceberg, Delta Lake and DuckLake for tools outside PostHog.
+    * Build better support and debugging tools, so we can diagnose sync problems faster.
+    * Add more sources, always and forever.
+
+
+Objective: Tell people what we built (Lizzie + Tom)
+
+* **Key Results:**
+    * Launch the ETL product, with marketing behind it.
+    * Publish engineering blog posts about our work.
+    * Explain when to use the CDP, rETL, batch exports and data pipelines, so users pick the right one.
+    * Close the gap between data engineers and product engineers in how we talk about the product.
+    * Run a marketing series: "data engineering for product engineers".
+
+
+Objective: Learn what users actually want from us (Anna)
+
+* **Key Results:**
+    * Improve retention. We currently do nothing about customers who churn.
+    * Run more customer interviews, because we get too little feedback today.
+    * Talk to data engineers too, not only product engineers.
+    * Run MCP and UI interviews, to find where each surface falls short.
