@@ -263,6 +263,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['ingestion'],
         label: 'feature/team-ingestion',
     },
+    inbox: {
+        feature: 'Inbox',
+        owner: ['self-driving'],
+        label: false,
+    },
     insights: {
         feature: 'Insights',
         owner: ['product-analytics'],
@@ -509,7 +514,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Inbox',
+        feature: 'Signals',
         owner: ['self-driving'],
         label: 'feature/signals',
     },
