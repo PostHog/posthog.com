@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Tube ads",
+        "slug": "tube-ads",
+        "category": "out-of-home"
+    },
+    {
+        "name": "Billboards",
+        "slug": "billboards",
+        "category": "out-of-home"
+    },
+    {
+        "name": "Bus ads",
+        "slug": "bus-ads",
+        "category": "out-of-home"
+    },
+    {
+        "name": "Posters",
+        "slug": "posters",
+        "category": "misc"
+    },
+    {
+        "name": "Games",
+        "slug": "games",
+        "category": "misc"
+    }
+]
