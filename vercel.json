@@ -656,6 +656,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301

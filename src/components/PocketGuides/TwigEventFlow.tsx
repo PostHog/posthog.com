@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import type { StaySetting } from '@posthog/twig-components/filters'
 import PostHogEventInspector from './PostHogEventInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
+import ExhibitResetButton from './ExhibitResetButton'
 
 type VisitorCursor = {
     x: number
@@ -21,13 +22,25 @@ export default function TwigEventFlow({
     const [clicked, setClicked] = useState<string | null>(null)
     const [capturedAt, setCapturedAt] = useState<string | null>(null)
     const [eventCount, setEventCount] = useState(0)
-    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('All')
+    const [visitorSetting, setVisitorSetting] = useState<StaySetting>('Forest')
     const [inView, setInView] = useState(false)
     const [manual, setManual] = useState(false)
     const [cursor, setCursor] = useState<VisitorCursor | null>(null)
+    const [resetKey, setResetKey] = useState(0)
     const rootRef = useRef<HTMLDivElement>(null)
     const twigRef = useRef<HTMLDivElement>(null)
     const nextChoice = useRef(0)
+
+    const reset = (): void => {
+        setClicked(null)
+        setCapturedAt(null)
+        setEventCount(0)
+        setVisitorSetting('Forest')
+        setManual(false)
+        setCursor(null)
+        setResetKey((key) => key + 1)
+        nextChoice.current = 0
+    }
 
     useEffect(() => {
         if (!autoplay || !rootRef.current) return
@@ -44,7 +57,7 @@ export default function TwigEventFlow({
     useEffect(() => {
         if (!autoplay || !inView || manual) return
 
-        const choices: StaySetting[] = ['Forest', 'City', 'Coast']
+        const choices: StaySetting[] = ['City', 'Coast', 'Forest']
         const timeouts: number[] = []
         let firstMove = true
         const advance = () => {
@@ -96,15 +109,16 @@ export default function TwigEventFlow({
             if (interval !== undefined) window.clearInterval(interval)
             timeouts.forEach((timeout) => window.clearTimeout(timeout))
         }
-    }, [autoplay, inView, manual])
+    }, [autoplay, inView, manual, resetKey])
 
     return (
         <div ref={rootRef} className="twig-click-demo @container">
+            <ExhibitResetButton onReset={reset} />
             <div className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
                     <TwigBrowseFigure
+                        key={resetKey}
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}
-                        initialSetting="All"
                         controlledSetting={autoplay ? visitorSetting : undefined}
                         onFilter={(setting) => {
                             setClicked(setting)

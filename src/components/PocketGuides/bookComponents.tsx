@@ -5,6 +5,12 @@ import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigEventFigure from './TwigEventFigure'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
+import {
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionGroupingFigure,
+    SessionReplayLinkFigure,
+} from './ProductAnalyticsIdentityExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -52,6 +58,10 @@ export const bookMdxComponents = {
     AutocaptureFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,
+    SessionGroupingFigure,
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionReplayLinkFigure,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
