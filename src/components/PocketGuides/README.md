@@ -240,7 +240,8 @@ pages declare.
 The Product Analytics Learn hub previews three paths: an agent prompt, the story reader, and
 the external Twig demo. Its sidebar uses section anchors; chapters belong to the standalone
 Pocket Guide reader, not the hub. The story introduction leads directly into the engineers'
-first question. The reader's return link goes back to Learn.
+first question. Bookshelf covers open the Product Analytics reader directly. Its shelf navigation
+returns to All pocket guides, while a separate Learn link opens the learning hub.
 The Events and properties chapter uses `BrowseStays` and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` adds local filter state and package photos.
 `TwigEventFlow` places the inspector beside a compact Twig view when its container is wide

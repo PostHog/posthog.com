@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
 
-import { volumeById } from '../../constants/pocketGuides.ts'
+import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides.ts'
 
 const vercelConfig = JSON.parse(readFileSync(new URL('../../../vercel.json', import.meta.url), 'utf8'))
 
@@ -11,7 +11,8 @@ test('Product Analytics is the next volume and is configured to count both orien
 
     assert.equal(volume?.volume, 5)
     assert.equal(volume?.countOrientationPages, true)
-    assert.equal(volume?.learnPath, '/docs/product-analytics/learn')
+    assert.ok(volume)
+    assert.equal(pocketGuideUrl(volume), '/pocket-guides/product-analytics')
 })
 
 test('Product Analytics keeps the standalone reader separate from its learning hub', () => {
@@ -26,6 +27,18 @@ test('Product Analytics keeps the standalone reader separate from its learning h
         false,
         'The retired PostHog volume must remain a 404'
     )
+})
+
+test('other volumes keep their configured entry routes', () => {
+    for (const [id, expected] of [
+        ['ai-observability', '/docs/ai-observability/learn'],
+        ['session-replay', '/docs/session-replay/learn'],
+        ['self-driving', '/pocket-guides/self-driving'],
+    ]) {
+        const volume = volumeById(id)
+        assert.ok(volume)
+        assert.equal(pocketGuideUrl(volume), expected)
+    }
 })
 
 test('every client-only Learn chapter route is rewritten to its Gatsby page', () => {

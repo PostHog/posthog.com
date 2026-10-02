@@ -68,10 +68,9 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
     const previous = pages[index - 1]
     const next = pages[index + 1]
     const total = pageCount(pages)
-    const shelf =
-        volumeIdFromUrl(url) === 'product-analytics'
-            ? { url: '/docs/product-analytics/learn', label: 'Back to Learn' }
-            : SHELF
+    const isProductAnalytics = volumeIdFromUrl(url) === 'product-analytics'
+    const shelf = isProductAnalytics ? { ...SHELF, label: 'All pocket guides' } : SHELF
+    const learn = isProductAnalytics ? { url: '/docs/product-analytics/learn', label: 'Learn' } : undefined
 
     usePageTurnKeys(previous ? previous.url : shelf.url, next?.url)
 
@@ -105,6 +104,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                     next={nextTurn}
                     tabs={bookTabs(pages, url)}
                     shelf={shelf}
+                    learn={learn}
                     position={{ page: entry.page, total }}
                     fontSize={fontSize}
                     onFontSize={stepFontSize}
