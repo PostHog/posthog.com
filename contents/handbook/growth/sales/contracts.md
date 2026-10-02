@@ -13,7 +13,7 @@ For customers who want to sign up for an annual (or longer) plan there is some a
 The credit term only extends beyond 12 months (e.g. to 24 months for a two-year deal) if the customer pays the full amount for the entire term upfront (e.g. the full two-year amount paid upfront). How the credits are allocated depends on how the customer pays:
 
 -   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
--   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
+-   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second. Unused credit from one year rolls over into the next year of the same contract. Read [multi-year credit allocation](/handbook/growth/sales/contract-rules#paid-yearly) for who sends the subsequent invoices.
 
 ### Customers with organizations in more than one region
 
@@ -98,9 +98,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
-8. If they are buying credits upfront but must pay by credit card, change:
-    - Payment Terms to `Net 1 from Signature Date`.
-    - Payment Method to `Bank Transfer or Credit Card`.
+8. Keep the payment method as bank transfer. We don't accept credit card payments for credits bought upfront, so don't change the Payment Method to allow credit card. See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
 
@@ -188,6 +186,23 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
 > We only provide our default BAA for platform package subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform package - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. Customers on a platform package trial are not eligible to sign a BAA. You'll need to convert their trial to a regular subscription first, before they can sign it. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20k, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $250/month.
+
+## Replacing a DPA or BAA
+
+An organization can have only one DPA and one BAA. Customers generate them self-serve from the [Legal documents page](https://app.posthog.com/legal). To generate a new one (for example, if they signed under the wrong legal entity or the company changed its name), the old document must be deleted first.
+
+- **Not signed yet:** An organization admin can delete the document from the Legal documents page. This voids the PandaDoc envelope, so the old signing link stops working.
+- **Signed:** Customers can't delete signed documents. A staff member deletes it in Django admin. Open the organization in Django admin, find the document in the legal documents list, open it using the "change" button, and click "Delete". You can also search for it under Legal documents in Django admin.
+
+After you delete a signed document:
+
+1. Delete or archive the document in PandaDoc yourself. The delete removes the PostHog record and the stored PDF, but it doesn't change PandaDoc, because PandaDoc can't void a completed document.
+2. For a BAA, AI data processing and AI training stay off for the organization. An owner can turn them back on in organization settings.
+3. Ask the customer to generate and sign a new document from the Legal documents page.
+
+If the customer is a new legal entity, they should use a separate organization instead. They can generate a new DPA there and move their projects across.
+
+If a document was signed outside PandaDoc (for example, a counter-signed custom DPA), you can upload the signed PDF from Legal documents in Django admin with "Add legal document". Delete the existing document of that type first.
 
 ## Non-disclosure Agreement (NDA)
 In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 

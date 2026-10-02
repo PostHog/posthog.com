@@ -61,6 +61,28 @@
             ]
         },
         {
+            "source": "/.well-known/oauth/:app/client-metadata.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -114,9 +136,56 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/ko/newsletter/:path*",
+            "destination": "/newsletter/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/ko",
+            "destination": "/",
+            "statusCode": 302
+        },
+        {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics",
+            "destination": "/docs/product-analytics/learn/introduction",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
         {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
@@ -597,6 +666,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301
@@ -659,6 +733,11 @@
         {
             "source": "/sitemap.xml",
             "destination": "/sitemap/sitemap-0.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
             "statusCode": 301
         },
         {
@@ -1886,6 +1965,10 @@
         {
             "source": "/docs/api/people:ext(\\.md)?",
             "destination": "/docs/api/persons:ext?"
+        },
+        {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?"
         },
         {
             "source": "/handbook/engineering/k8s-overview",

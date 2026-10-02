@@ -384,7 +384,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         ...job,
         parent: job.parent
             ? {
-                  customFields: (job.parent.customFields || []).filter(({ title }) => title === 'Timezone(s)'),
+                  customFields: (job.parent.customFields || []).filter(({ title }) =>
+                      ['Timezone(s)', 'Salary'].includes(title)
+                  ),
               }
             : null,
     }))

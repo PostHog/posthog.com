@@ -40,8 +40,8 @@ createRoot(document.getElementById('root')).render(
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconWarning" title="Don't directly import PostHog" type="fyi">
+<CalloutBox icon="IconWarning" title="Use the usePostHog hook in components" type="fyi">
 
-  Do not directly import `posthog` apart from installation as shown above. This will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and `usePostHog` hook.
+  Inside React components, use the `usePostHog` hook to access PostHog. Outside components, you can import `posthog` directly, as long as it's the instance you initialized above. Events captured before `posthog.init()` runs are dropped.
 
 </CalloutBox>

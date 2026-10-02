@@ -1,0 +1,9 @@
+@font-face {
+    font-family: TwigHalfrePocketGuide;
+    src: url('/pocket-guides/posthog/Halfre.ttf') format('truetype');
+    font-display: swap;
+}
+
+.twig-pocket-mockup {
+    font-family: TwigHalfrePocketGuide, sans-serif;
+}

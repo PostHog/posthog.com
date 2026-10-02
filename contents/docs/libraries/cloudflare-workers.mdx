@@ -136,6 +136,32 @@ As a framework-agnostic alternative, you can `import { waitUntil } from 'cloudfl
 
 We recommend creating a new PostHog client per request. Workers may reuse globals across requests on the same isolate, but the shutdown/flush lifecycle makes per-request instantiation safer.
 
+## Durable Objects and local evaluation
+
+When using [local evaluation](/docs/feature-flags/local-evaluation) inside a Durable Object, disable automatic flag polling if the object needs to hibernate or shut down while idle. Polling timers can keep the object active and extend billable duration, even when flag definitions come from a shared cache.
+
+With Cloudflare compatibility dates of `2026-10-01` or later, pending timers also prevent idle eviction without a connected client. Earlier dates can enable this behavior with `durable_object_io_tasks_prevent_eviction`. See [Cloudflare's lifecycle change](https://developers.cloudflare.com/changelog/post/2026-10-01-pending-io-keep-alive/).
+
+In `posthog-node` 5.55.0 or later, set `featureFlagsPollingInterval` to `null` to disable feature flag polling timers:
+
+```js
+const posthog = new PostHog(env.POSTHOG_PROJECT_TOKEN, {
+  host: env.POSTHOG_HOST,
+  secretKey: env.POSTHOG_FEATURE_FLAGS_SECURE_API_KEY,
+  featureFlagsPollingInterval: null,
+})
+```
+
+Store your [feature flags secure API key](/docs/feature-flags/local-evaluation) in the `POSTHOG_FEATURE_FLAGS_SECURE_API_KEY` secret binding.
+
+Definitions still load when you create the client. The SDK consults your configured cache provider or fetches them from PostHog. If the cache is empty and the client has no definitions, the SDK fetches them from PostHog. Local evaluation waits for the initial load.
+
+After loading, the client keeps its in-memory definitions without refreshing them automatically. If your application needs updated definitions, `await posthog.reloadFeatureFlags()` explicitly reloads them. Choose a refresh frequency based on how quickly your application needs flag changes. Do not reload on every request or WebSocket message: each reload can fetch definitions from PostHog and increase costs. A failed refresh can leave the previous definitions in use.
+
+You can also use a separate Worker with a Cron Trigger to [refresh a shared KV cache](/docs/feature-flags/local-evaluation/distributed-environments#caches-without-locking). New clients load the updated cache. Existing clients still need an explicit reload to read it.
+
+This option disables only the feature flag polling timer. Requests, event flushing, and other pending work can still delay hibernation or shutdown.
+
 ## Further reading
 
 - [Node.js SDK reference](/docs/libraries/node)
