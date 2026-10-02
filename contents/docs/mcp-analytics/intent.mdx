@@ -17,7 +17,7 @@ Explicit context always wins. If the agent passes a non-empty `context`, the fal
 
 Intent capture is on by default. The SDK adds a `context` string to compatible tool schemas and removes it before your handler runs when it can confirm it injected the field. An application-owned `context` argument is preserved.
 
-Every SDK adds the `context` argument by default. TypeScript and Ruby advertise it as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit it without failing validation.
+Every SDK adds the `context` argument by default. TypeScript, Go, and Ruby advertise it as required. Python makes it optional on raw low-level servers and standalone FastMCP. Calls can omit it without failing validation.
 
 What the agent sees in the schema:
 
@@ -78,15 +78,17 @@ PostHog::MCP.instrument(
 
 </MultiLanguage>
 
+The Go SDK uses a fixed prompt.
+
 ### Disabling the injected argument
 
-Turn off the injected argument with `context: false` in TypeScript and Ruby, or `MCPAnalyticsOptions(context=False)` in Python. Use an intent fallback if you still want to capture intent. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
+Turn off the injected argument with `context: false` in TypeScript and Ruby, `MCPAnalyticsOptions(context=False)` in Python, or `posthogmcpsdk.WithContextParameter(false)` in Go. Use an intent fallback if you still want to capture intent. The Go SDK has no fallback, so with `WithContextParameter(false)` it captures no intent, not even a tool's own `context` argument. Model capture and conversation IDs have separate options. [Disable those options](/docs/mcp-analytics/events#model-capture) to stop their schema changes.
 
 ## The intent fallback callback
 
 A client can omit the SDK-injected `context` argument. Without a fallback, the event has no `$mcp_intent`.
 
-The SDK calls the fallback (`intentFallback` in TypeScript, `intent_fallback` in Python and Ruby) when the agent provides no context. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
+The SDK calls the fallback (`intentFallback` in TypeScript, `intent_fallback` in Python and Ruby) when the agent provides no context. The Go SDK doesn't have a fallback yet. It captures a non-empty result as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
 
 The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect your tool arguments. It doesn't cache results. Whatever logic you want goes in your callback.
 
