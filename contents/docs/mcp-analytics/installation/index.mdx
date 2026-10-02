@@ -28,6 +28,8 @@ Every SDK sends the same `$mcp_*` events with the same defaults, so your insight
 | --- | --- | --- | --- | --- |
 | Tool calls and failures (`$mcp_tool_call`, `$exception`) | Yes | Yes | Yes | Yes |
 | Tool listings, handshakes, and resource reads | Yes | Yes | No | Yes |
+| Unknown-tool calls (`$mcp_unknown_tool`) | No | No | Yes | No |
+| `input_required` rounds (`$mcp_input_required`) | No | No | Yes | No |
 | [Agent intent](/docs/mcp-analytics/intent) (`context` argument) | Yes | Yes | Yes | Yes |
 | Intent fallback callback | Yes | Yes | No | Yes |
 | [Model capture](/docs/mcp-analytics/events#model-capture) | Yes | Yes | Yes | Yes |
@@ -39,5 +41,7 @@ Every SDK sends the same `$mcp_*` events with the same defaults, so your insight
 | Custom dispatchers | Yes | Yes | Yes | Yes |
 | Wizard | Yes | Yes | No | No |
 | Support | Beta | Beta | Beta | Experimental |
+
+The Go SDK sends no `$identify` event.
 
 All SDKs remove credentials and binary content from captured payloads. See [Privacy](/docs/mcp-analytics/privacy).
