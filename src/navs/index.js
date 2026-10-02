@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/org-definitions',
             },
             {
+                name: 'Revenue views',
+                url: '/handbook/growth/revops/revenue-views',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -4181,6 +4185,10 @@ export const docsMenu = {
                                 {
                                     name: 'Supported aggregations',
                                     url: '/docs/sql/aggregations',
+                                },
+                                {
+                                    name: 'Classifying rows with AI',
+                                    url: '/docs/sql/ai-functions',
                                 },
                                 {
                                     name: 'Optimizing SQL queries',
@@ -8167,6 +8175,10 @@ export const docsMenu = {
                             url: '/docs/workflows/create-emails-ai',
                         },
                         {
+                            name: 'Send a broadcast',
+                            url: '/docs/workflows/broadcasts',
+                        },
+                        {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
@@ -8577,6 +8589,12 @@ export const docsMenu = {
                     url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
                 },
             ],
         },

@@ -57,11 +57,11 @@ Opting out status is persisted automatically using:
 - **`posthog.optOut`** file in your app's support directory for iOS
 - **`.posthog-rn.json`** for React Native
 
-For browsers, you can control how long the opt out state is persisted by setting `opt_out_capturing_persistence_type` to either `local_storage` or `cookies`.
+Set `opt_out_capturing_persistence_type` to `localStorage` or `cookie` to choose where the browser stores the opt out state.
 
 ```js-web
-posthog.init('<ph_project_token>', {
-    opt_out_capturing_persistence_type: 'local_storage',
+posthog.init("<ph_project_token>", {
+    opt_out_capturing_persistence_type: "localStorage",
 });
 ```
 

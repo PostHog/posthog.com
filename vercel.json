@@ -162,6 +162,11 @@
             "statusCode": 302
         },
         {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/ai-observability/:path*",
             "destination": "/docs/ai-observability/learn/:path*",
             "statusCode": 301
