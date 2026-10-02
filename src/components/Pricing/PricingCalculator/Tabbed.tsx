@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconInfo, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
@@ -337,7 +337,9 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
     const [selectedTypes, setSelectedTypes] = useState<string[]>(() => Array.from(new Set(defaultProducts)))
     const [addingProduct, setAddingProduct] = useState(false)
     const [productSearch, setProductSearch] = useState('')
-    const addProductRef = useRef(null)
+    const addProductRef = useRef<HTMLDivElement>(null)
+    const unaddedProductsRef = useRef<HTMLDivElement>(null)
+    const revealedByFind = useRef(false)
     const { products: initialProducts, setVolume, setProduct } = useProducts()
     const [urlRestored, setUrlRestored] = useState(false)
     const { computeRate } = useDesktopPricing(selectedTypes.includes('posthog_code'))
@@ -510,9 +512,28 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
         }
     }, [])
 
+    const hasAvailableProducts = availableProducts.length > 0
+
+    useLayoutEffect(() => {
+        const el = unaddedProductsRef.current
+        if (!el) return
+        if (!addingProduct) el.setAttribute('hidden', 'until-found')
+        const onBeforeMatch = () => {
+            revealedByFind.current = true
+            setAddingProduct(true)
+        }
+        el.addEventListener('beforematch', onBeforeMatch)
+        return () => el.removeEventListener('beforematch', onBeforeMatch)
+    }, [addingProduct, hasAvailableProducts])
+
     useEffect(() => {
-        if (!addingProduct) return
-        addProductRef.current?.querySelector('input')?.focus()
+        if (!addingProduct) {
+            revealedByFind.current = false
+            return
+        }
+        if (!revealedByFind.current) {
+            addProductRef.current?.querySelector('input')?.focus()
+        }
         const onPointerDown = (event) => {
             if (!addProductRef.current?.contains(event.target)) {
                 setAddingProduct(false)
@@ -686,8 +707,12 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                                 </span>
                                 <span className="opacity-60">{availableProducts.length} more</span>
                             </button>
-                            {addingProduct && (
-                                <div className="absolute z-50 left-0 top-0 right-0 overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl border border-primary">
+                            <div
+                                ref={unaddedProductsRef}
+                                hidden={!addingProduct}
+                                className="absolute z-50 left-0 top-0 right-0"
+                            >
+                                <div className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl border border-primary">
                                     <div className="flex items-center gap-2 px-2.5 py-2 border-b border-primary">
                                         <IconSearch className="size-4 text-muted shrink-0" />
                                         <input
@@ -759,7 +784,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                                         )}
                                     </div>
                                 </div>
-                            )}
+                            </div>
                         </div>
                     )}
                     <div className="mt-2 pt-1 border-t border-primary">
