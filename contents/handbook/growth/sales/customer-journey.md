@@ -6,6 +6,46 @@ showTitle: true
 
 This is a rough articulation of the phases a paid and "sales-sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each phase. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's phase and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
 
+## The lifecycle at a glance
+
+Phases run left to right in the order a customer moves through them. The roles under each phase are who is actively on the account at that point.
+
+```mermaid
+flowchart LR
+    subgraph PRE["PRESALES — inferred from product signals unless sales is engaged"]
+        direction LR
+        EXP["<b>Exploring</b><br>BDR"]
+        EVA["<b>Evaluating</b><br>TAE"]
+        PRV["<b>Proving</b><br>TAE + FDE"]
+        BUY["<b>Buying</b><br>TAE"]
+        EXP -->|"qualified"| EVA
+        EVA --> PRV
+        PRV --> BUY
+    end
+
+    subgraph POST["POSTSALES — a CSM is on the account from day one and never leaves"]
+        direction LR
+        IMP["<b>Implementing</b><br>CSM + Onboarding + FDE"]
+        RAM["<b>Ramping</b><br>CSM + TAM"]
+        EXD["<b>Expanding</b><br>CSM + TAM"]
+        STE["<b>Steady state</b><br>CSM"]
+        IMP --> RAM
+        RAM --> EXD
+        EXD --> STE
+    end
+
+    BUY ==>|"<b>Closed won</b><br>TAE hands over to CSM"| IMP
+    STE -.->|"new expansion opp,<br>TAM re-added"| EXD
+    SELF["<b>Self-serve account</b> crosses $20k ARR<br>with no sales contact"] -.->|"skips Implementing"| RAM
+```
+
+Two things the diagram deliberately leaves out, because they apply everywhere rather than at one point:
+
+- **At risk is a status, not a phase.** It can apply in any postsales phase. The phase doesn't change and the account isn't reassigned. Where both are on the account, the CSM and TAM co-own the save.
+- **Automation is the base layer** everywhere direct human coverage isn't needed. Below-$500 MRR accounts and sub-$20k steady-state accounts have no human owner by design.
+
+The sections below break each phase down, and the [coverage map](#coverage-map) has the full role-by-phase grid including conditional coverage.
+
 ## The phases
 
 ### Presales
