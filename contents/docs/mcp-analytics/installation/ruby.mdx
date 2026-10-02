@@ -1,0 +1,250 @@
+---
+title: Ruby MCP Analytics installation
+platformLogo: ruby
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+<CalloutBox icon="IconFlask" title="The Ruby SDK is experimental and unsupported" type="caution">
+
+`PostHog::MCP` is **experimental and not officially supported**. The MCP Analytics team doesn't maintain it. Its API, its options, and the `$mcp_*` events it captures may change in a minor `posthog-ruby` release, and the gem logs a warning when you require it.
+
+Try it, and report bugs or send patches to [posthog-ruby](https://github.com/PostHog/posthog-ruby/issues). Don't build production reporting on it yet.
+
+</CalloutBox>
+
+`PostHog::MCP` ships inside the [`posthog-ruby`](/docs/libraries/ruby) gem. It instruments an `MCP::Server` from the official [Ruby MCP SDK](https://github.com/modelcontextprotocol/ruby-sdk) (`mcp` gem `>= 1.4`), whether you register tools as `MCP::Tool` classes or with `define_tool`. It works over stdio and Streamable HTTP, and serves both the `2025-11-25` and `2026-07-28` protocol revisions.
+
+You need Ruby 3.0+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
+
+<Steps>
+
+<Step title="Install the gem" badge="required">
+
+```ruby
+gem "posthog-ruby"
+```
+
+`PostHog::MCP.instrument` needs the `mcp` gem at runtime. You already have it, because you built your server with it.
+
+</Step>
+
+<Step title="Wrap your server" badge="required">
+
+```ruby
+require "posthog/mcp"
+
+posthog = PostHog::Client.new(
+  api_key: ENV.fetch("POSTHOG_PROJECT_TOKEN"),
+  host: "https://us.i.posthog.com" # or https://eu.i.posthog.com
+)
+server = MCP::Server.new(name: "my-server", version: "1.0.0", tools: [SearchEvents])
+
+# register more tools, prompts, and resources as usual...
+
+analytics = PostHog::MCP.instrument(server, posthog)
+```
+
+If your app uses [`posthog-rails`](/docs/libraries/ruby) and calls `PostHog.init`, leave out the client. The SDK uses `PostHog.client`:
+
+```ruby
+PostHog::MCP.instrument(server)
+```
+
+`instrument` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). On Ruby 3.2+, `analytics.capture` also works from a thread or fiber that the tool starts. On Ruby 3.0 and 3.1, such an event gets its own `$session_id` on HTTP servers.
+
+</Step>
+
+<Step title="Send queued events on shutdown" badge="required">
+
+Captured events go into the `posthog-ruby` client's queue. Call `posthog.shutdown` when the process stops:
+
+```ruby
+at_exit { posthog.shutdown }
+```
+
+</Step>
+
+<Step title="Check your first events" badge="required">
+
+Connect an agent to your server and call a tool. Then open the [activity feed](https://app.posthog.com/activity/explore) and filter for `event = $mcp_tool_call`. See [the event reference](/docs/mcp-analytics/events) for every property.
+
+</Step>
+
+</Steps>
+
+## Log to stderr on stdio servers
+
+A stdio MCP server uses `$stdout` for the protocol. The SDK's own messages go only to the `logger:` you pass. The experimental notice and configuration warnings go to stderr. Point the core SDK's logger away from stdout too:
+
+```ruby
+PostHog::Logging.logger = Logger.new($stderr)
+```
+
+## Stateless and multi-pod servers
+
+A stateless server creates a new instance for each request, often on a different pod. Without correlation, each request gets its own `$session_id`, and events after `initialize` lose the client name and version.
+
+When `MCP::Server::Transports::StreamableHTTPTransport` runs with `stateless: true`, the SDK puts a token in the `Mcp-Session-Id` response header at `initialize`. The token carries the session ID and client metadata. Clients send it back, so any pod reads the same values. There's nothing to configure.
+
+When you build the Rack app yourself, add the middleware once:
+
+```ruby
+use PostHog::MCP::RackMiddleware
+```
+
+The middleware reads no request or response body. The decoded token is available to your app as `env["posthog_mcp.session"]`.
+
+Stateful HTTP servers need nothing. The SDK hashes the transport's session ID, so a session survives restarts. On `2026-07-28` requests, the SDK never sends `Mcp-Session-Id`, so use [conversation IDs](/docs/mcp-analytics/conversation-id) or [`identify`](/docs/mcp-analytics/identifying-users) to group calls there.
+
+## Configuration
+
+Pass options as keyword arguments:
+
+```ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  report_missing: true,
+  identify: ->(request, extra) { { distinct_id: "user_123", properties: { plan: "pro" } } }
+)
+```
+
+| Option | Default | What it does |
+| --- | --- | --- |
+| `context` | `true` | Add a `context` argument to capture [agent intent](/docs/mcp-analytics/intent). Pass `{ description: }` to change its prompt. |
+| `intent_fallback` | – | `(request, extra) -> String \| nil`. Supplies intent when the agent sends no `context`. |
+| `capture_model` | `true` | Add an `llm_model` argument and capture the [calling model](/docs/mcp-analytics/events#model-capture). |
+| `enable_conversation_id` | `true` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
+| `identify` | – | `(request, extra) -> Hash \| nil`, or a static Hash, with `distinct_id:`, `properties:`, and `groups:`. See [Identifying users](/docs/mcp-analytics/identifying-users). |
+| `report_missing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
+| `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
+| `enable_exception_autocapture` | `true` | Emit a `$exception` event for each failed tool call. |
+| `before_send` | – | `(payload) -> payload \| nil`. Change or drop each event before it's sent. |
+| `event_properties` | – | `(request, extra) -> Hash`. Adds properties to every event. |
+| `logger` | no-op | `->(message) { ... }`. A stdio-safe sink. Never writes to stdout. |
+
+Callbacks receive `extra["headers"]`, a Hash with lowercase keys on HTTP transports and an empty Hash on stdio:
+
+```ruby
+identify = lambda do |_request, extra|
+  resolve_user(extra["headers"]["authorization"])
+end
+```
+
+The SDK removes the arguments it adds before your tool's `call` runs, so `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
+
+Events are truncated to the 32 KB message limit of `posthog-ruby`, because the client drops larger messages. MCP events report `$lib: "posthog-ruby-mcp"`. The client you pass in keeps its own `$lib` for everything else it sends.
+
+## Custom dispatchers
+
+Use this only when your app handles the MCP protocol itself: a Rack or Rails endpoint that parses the JSON-RPC body and routes `tools/list` and `tools/call` by hand, without an `MCP::Server`.
+
+`PostHog::MCP::Client` is a `PostHog::Client` subclass. Create it once, and use it for everything else too. It needs nothing beyond `posthog-ruby`:
+
+```ruby
+require "posthog/mcp"
+
+posthog = PostHog::MCP::Client.new(
+  api_key: ENV.fetch("POSTHOG_PROJECT_TOKEN"),
+  host: "https://us.i.posthog.com"
+)
+```
+
+It also takes `missing_capability_tool_name:`, `mcp_exception_autocapture:`, and `capture_model:`. This path doesn't add conversation IDs.
+
+### 1. Prepare the tool list
+
+When you answer `tools/list`, pass your tool descriptors through `prepare_tool_list`. It returns new Hashes and leaves yours unchanged:
+
+```ruby
+def handle_tools_list
+  posthog.prepare_tool_list(MY_TOOLS, report_missing: true)
+end
+```
+
+It adds a required `context` argument and an optional `llm_model` argument to every tool. With `report_missing: true`, it also adds the `get_more_tools` tool. Pass `context: false` or `capture_model: false` to skip an argument.
+
+### 2. Prepare each tool call
+
+Before the tool runs, pass its name, the raw arguments, and its own `inputSchema` through `prepare_tool_call`. The result has `args` without the added arguments, `intent` and `intent_source`, `llm_model` and `llm_model_source`, and `is_missing_capability`:
+
+```ruby
+prepared = posthog.prepare_tool_call(name, arguments, input_schema: tool[:inputSchema])
+
+if prepared.is_missing_capability
+  posthog.capture_missing_capability(context: prepared.intent, distinct_id: user_id)
+  return PostHog::MCP.get_more_tools_result
+end
+```
+
+With `input_schema:`, a `context` or `llm_model` field that your tool declares stays in `args`. Without it, the SDK always removes both names.
+
+### 3. Capture the call
+
+After the tool runs, call `capture_tool_call`. On a failure, pass `error:` with the exception or a message. The SDK sets `$mcp_error_type` and `$mcp_error_message`, and emits `$exception`:
+
+```ruby
+started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+begin
+  result = run_tool(name, prepared.args)
+rescue StandardError => e
+  posthog.capture_tool_call(
+    name,
+    parameters: prepared.args,
+    duration_ms: (Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000,
+    is_error: true,
+    error: e,
+    distinct_id: user_id
+  )
+  raise
+end
+
+posthog.capture_tool_call(
+  name,
+  intent: prepared.intent,
+  intent_source: prepared.intent_source,
+  llm_model: prepared.llm_model,
+  llm_model_source: prepared.llm_model_source,
+  parameters: prepared.args,
+  response: result,
+  duration_ms: (Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000,
+  distinct_id: user_id
+)
+```
+
+| Method | Event | Call it when |
+| --- | --- | --- |
+| `capture_initialize(client_name:, client_version:, protocol_version:, ...)` | `$mcp_initialize` | You answer a `2025-11-25` `initialize` handshake. |
+| `capture_tools_list(tool_names:, ...)` | `$mcp_tools_list` | You answer `tools/list`. |
+| `capture_tool_call(name, ...)` | `$mcp_tool_call` and `$exception` | A tool ran. |
+| `capture_missing_capability(context:, ...)` | `$mcp_missing_capability` | The agent called `get_more_tools`. |
+
+### 4. Attribute the caller
+
+Every capture method takes the same keywords. Pass them on every call:
+
+| Keyword | Becomes | Where to get it |
+| --- | --- | --- |
+| `distinct_id:` | the event's person | Your auth, such as the OAuth subject. |
+| `session_id:` | `$session_id` | The session middleware, below. |
+| `set_properties:` | `$set` | Person properties, such as name or plan. |
+| `groups:` | `$groups` | `{ organization: org_id }`. |
+| `client_user_agent:`, `vendor_client:` | `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` headers. |
+| `protocol_version:` | `$mcp_protocol_version` | `params.protocolVersion` on `initialize`, or the `MCP-Protocol-Version` header. |
+
+For `session_id:`, add `use PostHog::MCP::RackMiddleware`. When you accept an `initialize`, call the hook it leaves in `env["posthog_mcp.mint"]`:
+
+```ruby
+session = env["posthog_mcp.mint"]&.call(
+  client_name: params["clientInfo"]["name"],
+  client_version: params["clientInfo"]["version"],
+  protocol_version: params["protocolVersion"]
+)
+```
+
+The middleware sends the token in the `Mcp-Session-Id` header. On later requests, pass `session_id: env["posthog_mcp.session"]&.session_id`. The hook is `nil` when the client already sent a token back, and returns `nil` for a `2026-07-28` client. If you issue your own session header instead, pass `PostHog::MCP.derive_session_id_from_mcp_session(your_id)`, so one connection always maps to one `$session_id`.
+
+### 5. Flush
+
+Call `posthog.flush` at the end of a short-lived request handler, or `posthog.shutdown` when the process stops.

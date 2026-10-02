@@ -6,15 +6,29 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 Missing-capability reports show what agents need but your server does not support. Without these reports, an agent may stop or try a tool name that does not exist.
 
-Enable `reportMissing` to capture these reports.
+Turn on missing-capability reports to capture them. They're off by default.
 
 ## Enabling
 
-```ts
+<MultiLanguage>
+
+```ts file=TypeScript
 instrument(server, posthog, {
   reportMissing: true,
 })
 ```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(server, posthog, report_missing: true)
+```
+
+</MultiLanguage>
 
 The SDK registers a virtual tool named `get_more_tools`. It advertises this tool through `tools/list`. The description asks the agent to call it when the available tools cannot satisfy a request.
 
@@ -43,7 +57,7 @@ LIMIT 50
 
 ## Complementary signal: advertised but uncalled
 
-`reportMissing` tells you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* – tools the agent saw but never invoked.
+Missing-capability reports tell you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* – tools the agent saw but never invoked.
 
 ```sql
 WITH listed AS (
