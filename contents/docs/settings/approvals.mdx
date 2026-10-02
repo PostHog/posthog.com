@@ -63,9 +63,9 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 
 Approvals currently support gating the following actions:
 
-| Resource      | Gateable actions                           |
-| ------------- | ------------------------------------------ |
-| Feature flags | Enable, disable, change rollout percentage |
+| Resource      | Gateable actions                                                      |
+| ------------- | --------------------------------------------------------------------- |
+| Feature flags | Enable, disable, change rollout percentage, change release conditions |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
 
@@ -97,6 +97,8 @@ Each approval policy includes:
 ### Conditions
 
 Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+
+> **Note**: For **Update feature flag** policies, select the **Release conditions** field to require approval when someone adds, removes, or edits a flag's release conditions. Release conditions are only gated by a policy that selects them.
 
 | Condition type    | Description                                                     | Example                                       |
 | ----------------- | --------------------------------------------------------------- | --------------------------------------------- |
