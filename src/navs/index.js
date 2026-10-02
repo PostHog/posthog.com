@@ -1343,6 +1343,10 @@ export const handbookSidebar = [
                         name: 'Giving credits to customers',
                         url: '/handbook/growth/revops/credits',
                     },
+                    {
+                        name: 'Consolidating billing across organizations',
+                        url: '/handbook/growth/revops/billing-consolidation',
+                    },
                 ],
             },
         ],
