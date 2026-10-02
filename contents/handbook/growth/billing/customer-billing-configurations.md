@@ -65,8 +65,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
      - Usage from all the organizations is added together and reported against the shared subscription.
      - The customer pays for each add-on one time. No override is necessary.
      - The customer cannot see a spend breakdown for each organization.
-     - All the organizations show the same combined usage and forecast numbers in the billing UI.
-     - Billing limits for each organization are not reliable. A limit applies to the combined pool, and the organization that reported last wins.
+     - Shared billing has limitations around usage displays, forecasting, and billing limits. Before recommending this setup, [review the limitations](https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations) (PostHog team only) and explain the relevant limitations to the customer.
      - Internally, MRR and invoices attach to the canonical organization, which is the organization with the lowest customer ID. The other organizations show no MRR in our own tools, which include flags, campaigns, and Vitally.
      - Use this option when the customer does not know the split, and their finance team does not need the spend for each organization.
 
