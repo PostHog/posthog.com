@@ -1015,6 +1015,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/use-case-selling",
+            "destination": "/handbook/growth/use-case-selling/use-case-selling",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/revops/icp-scoring",
             "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
