@@ -245,7 +245,6 @@ if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
 | `identify` | – | `(request, extra) => UserIdentity \| null`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
-| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits `$mcp_feedback`. Covers what `reportMissing` covers, so enable only one. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |

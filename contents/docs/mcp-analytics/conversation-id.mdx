@@ -62,7 +62,7 @@ LIMIT 50
 
 <CalloutBox icon="IconWarning" title="Some tools can't take the injection" type="caution">
 
-The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips tools without an input schema. It logs a warning and returns no handle for these tools. The Go SDK skips them silently, with no warning, and also skips tools with a non-object schema or their own `conversation_id` argument. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user.
+The SDK cannot add `conversation_id` to schemas that use `oneOf`, `allOf`, `anyOf`, or `$ref`. It also skips tools without an input schema. It logs a warning and returns no handle for these tools. Use [`identify`](/docs/mcp-analytics/identifying-users) to group their calls by user.
 
 A client with a stale cached tool listing does not know about the new parameter. The `ttlMs` setting on `tools/list` can extend this period.
 
@@ -72,7 +72,7 @@ A client with a stale cached tool listing does not know about the new parameter.
 
 The SDK returns the handle as a `{"conversation_id":"…"}` text block. Clients that display raw tool results also display this JSON. The block contains data rather than an instruction because hardened clients can treat instructions in tool results as prompt injection.
 
-The SDK preserves structured output and result metadata. Clients that only consume structured output may never see the text block, so they may not echo the handle. In Go, the SDK also adds the handle as `_mcp_instructions` to the `outputSchema` and `structuredContent` of tools with a plain object output schema.
+The SDK preserves structured output and result metadata. Clients that only consume structured output may never see the text block, so they may not echo the handle.
 
 </CalloutBox>
 

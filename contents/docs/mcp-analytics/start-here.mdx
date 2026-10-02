@@ -12,7 +12,7 @@ import WizardCommand from 'components/WizardCommand'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
-The MCP Analytics SDKs are pre-1.0. We're building them in public, so event shapes and options may still change. Pin a specific version.
+The TypeScript package `@posthog/mcp` is pre-1.0. The Python integration is in beta, and the Ruby integration is experimental. We're building them in public, so event shapes and options may still change. Pin a specific version.
 
 </CalloutBox>
 
@@ -106,7 +106,7 @@ at_exit { posthog.shutdown }
 
 </MultiLanguage>
 
-Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports and agent feedback are opt-in. The Ruby SDK is [experimental](/docs/mcp-analytics/installation/ruby).
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The Ruby SDK is [experimental](/docs/mcp-analytics/installation/ruby).
 
 For TypeScript and Python servers, the wizard does the setup for you:
 

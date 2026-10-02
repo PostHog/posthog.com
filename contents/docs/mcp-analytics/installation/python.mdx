@@ -139,7 +139,6 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `report_missing` | `False` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
-| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits `$mcp_feedback`. Covers what `report_missing` covers, so enable only one. |
 | `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
@@ -215,7 +214,7 @@ posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **
 posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
 ```
 
-`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `collect_feedback`, `server_build`, `missing_capability_tool_name`, and `mcp_exception_autocapture`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
+`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, and `mcp_exception_autocapture`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
 
 The two transport headers in `common` matter. `clientInfo.name` reports `claude-code` for the CLI, Agent SDK, VS Code extension, and desktop app. `client_user_agent` tells those builds apart, and `vendor_client` separates Anthropic's products, such as Claude.ai and Claude Design. `instrument()` reads both headers for you. Leave them unset on stdio.
 

@@ -68,7 +68,7 @@ Returned values must be JSON-serializable. The SDK catches callback errors and s
 
 ## Send a custom event
 
-Use `analytics.capture()` for events that aren't MCP requests, such as UI feedback or workflow milestones. It uses the SDK's sanitization, current server session and identity, and `beforeSend` hook. It returns a promise you can `await`.
+Use `analytics.capture()` for events that aren't MCP requests, such as UI feedback or workflow milestones. It uses the SDK's sanitization, current server session and identity, and `beforeSend` hook. In TypeScript it returns a promise, and in Python it returns a coroutine, so `await` it. In Ruby it runs synchronously and returns `nil`.
 
 Custom capture has no request context and doesn't run the event properties callback. Pass custom metadata in `properties`.
 
