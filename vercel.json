@@ -5870,6 +5870,16 @@
             "destination": "/customers/headshotpro"
         },
         {
+            "source": "/customers/assemblyai",
+            "destination": "/customers",
+            "statusCode": 301
+        },
+        {
+            "source": "/customers/phantom",
+            "destination": "/customers",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/api/user:ext(\\.md)?",
             "destination": "/docs/api/users:ext?"
         },
