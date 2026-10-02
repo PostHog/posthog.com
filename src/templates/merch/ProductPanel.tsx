@@ -70,12 +70,12 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         return category.name
     }
 
-    // Available quantity
+    // Remaining store stock, not the number you get in one order
     let available = 'not tracked'
     if (selectedVariant && typeof selectedVariant.quantityAvailable === 'number') {
-        available = selectedVariant.quantityAvailable.toString()
+        available = `${selectedVariant.quantityAvailable} left`
     } else if (typeof product.totalInventory === 'number' && product.totalInventory > 0) {
-        available = product.totalInventory.toString()
+        available = `${product.totalInventory} left`
     }
 
     // Date added
@@ -148,6 +148,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <SizeGuide title={product.title} />
 
+            {productKit && <p className="text-sm text-secondary mb-0">Limit: one kit per company.</p>}
+
             <div className="hidden">
                 <Quantity value={quantity} onChange={setQuantity} disabled={productKit} />
             </div>
@@ -209,7 +211,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             )}
 
             <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm [&_a]:underline [&_a]:font-semibold">
-                <div className="text-secondary">Available</div>
+                <div className="text-secondary">In stock</div>
                 <div className="col-span-3">{available}</div>
 
                 {productBrand && (
