@@ -18,7 +18,7 @@ import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
-import { useCartStore } from './store'
+import { useCartStore, useCartStoreHydration } from './store'
 import Link from 'components/Link'
 
 // Category configuration with icons and display order
@@ -159,7 +159,6 @@ const defaultAsideWidth = 396
 export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
-    const [cartIsOpen, setCartIsOpen] = useState(false)
     const [orderHistoryIsOpen, setOrderHistoryIsOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [hasInitialized, setHasInitialized] = useState(false)
@@ -171,6 +170,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const { getJwt, user } = useUser()
     const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
     const addToCart = useCartStore((state) => state.update)
+    // the cart panel flag lives in the store, so a re-render of this page cannot close the panel
+    const cartIsOpen = useCartStore((state) => state.isOpen)
+    const setCartIsOpen = useCartStore((state) => state.setIsOpen)
+    const hasHydrated = useCartStoreHydration()
     const hasProcessedAddToCart = useRef(false)
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -186,9 +189,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [products]
     )
 
-    // Initialize state from URL parameters on mount only
+    // Initialize state from URL parameters on mount only, after the cart is read from local storage
     useEffect(() => {
-        if (typeof window !== 'undefined' && transformedProducts && !hasInitialized) {
+        if (typeof window !== 'undefined' && transformedProducts && hasHydrated && !hasInitialized) {
             const urlParams = new URLSearchParams(window.location.search)
             const productHandle = urlParams.get('product')
             const state = urlParams.get('state')
@@ -245,14 +248,15 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                     setSelectedProduct(product)
                     setCartIsOpen(false)
                 }
-            } else if (state === 'cart') {
-                setCartIsOpen(true)
+            } else {
+                // the URL decides whether the cart panel is open, not the persisted flag
+                setCartIsOpen(state === 'cart')
                 setSelectedProduct(null)
             }
 
             setHasInitialized(true)
         }
-    }, [transformedProducts, hasInitialized, addToCart])
+    }, [transformedProducts, hasHydrated, hasInitialized, addToCart])
 
     // Update URL when selectedProduct, cartIsOpen, or selectedCategory changes (only after initialization)
     useEffect(() => {

@@ -8,6 +8,7 @@ import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
 import { getAvailableQuantity, getCartVariables } from './utils'
 import { graphql, useStaticQuery } from 'gatsby'
+import usePostHog from 'hooks/usePostHog'
 
 type CheckoutProps = {
     className?: string
@@ -44,7 +45,9 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     }))
     const [isCheckingOut, setIsCheckingOut] = React.useState(false)
     const [showAdjustments, setShowAdjustments] = React.useState(false)
+    const [hasFailed, setHasFailed] = React.useState(false)
     const discountCode = useCartStore((state) => state.discountCode)
+    const posthog = usePostHog()
     const { allProducts } = useStaticQuery(graphql`
         {
             allProducts: allShopifyProduct {
@@ -61,25 +64,20 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     const handleCheckout = useCallback(() => {
         setIsCheckingOut(true)
         setShowAdjustments(false)
+        setHasFailed(false)
         async function checkoutMutation() {
-            setIsCheckingOut(true)
-
             let cart: Cart | null = null
 
             if (cartId) {
-                cart = (await getCartQuery(cartId)) as Cart
+                cart = await getCartQuery(cartId)
             }
 
             if (!cart) {
-                const createCartVariables = getCartVariables(cartItems)
-                cart = (await createCartQuery(createCartVariables)) as Cart
-                const newCartId = cart.id
-                setCartId(newCartId)
+                cart = await createCartQuery(getCartVariables(cartItems))
+                setCartId(cart.id)
             }
 
             const itemsExceedingQuantityAvailable: AdjustedLineItem[] = []
-
-            if (cart === null) return
 
             for (const item of cartItems) {
                 if (item.product.tags?.includes('digital')) {
@@ -149,12 +147,22 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
             }
 
             const checkoutUrl = getCheckoutUrl(cart, discountCode)
-            if (checkoutUrl) {
-                window.location.href = checkoutUrl
+            if (!checkoutUrl) {
+                throw new Error('Shopify returned no checkout URL')
             }
+
+            // the browser leaves the page here, so the button keeps its loading state
+            window.location.href = checkoutUrl
         }
-        checkoutMutation()
-    }, [setIsCheckingOut, discountCode, cartItems])
+        checkoutMutation().catch((error: unknown) => {
+            posthog?.capture('merch_checkout_failed', {
+                error: error instanceof Error ? error.message : String(error),
+                cart_item_count: cartItems.length,
+            })
+            setHasFailed(true)
+            setIsCheckingOut(false)
+        })
+    }, [cartId, cartItems, discountCode, allProducts, posthog, setCartId, setCartItems])
 
     const classes = cn(
         ' py-2.5 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black',
@@ -164,6 +172,11 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     return (
         <div className={classes}>
             {adjustedItems.length > 0 && <AdjustedLineItems className="my-4" lineItems={adjustedItems} />}
+            {hasFailed && (
+                <p role="alert" className="mb-2 text-sm font-normal text-red dark:text-yellow">
+                    We could not start your checkout. Please try again.
+                </p>
+            )}
             <div className="flex justify-end">
                 <CallToAction
                     onClick={handleCheckout}
