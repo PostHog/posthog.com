@@ -67,6 +67,30 @@ posthog.init("<ph_project_token>", {
 
 To persist opt out across sessions and devices, you can save your user's opt out preferences in your app logic. On launch, you can check if the user has opted out and set the opt out state accordingly.
 
+### Share consent across subdomains
+
+By default, the JavaScript SDK stores consent in `localStorage`, which belongs to one origin. A choice made on `www.example.com` is not automatically shared with `app.example.com`, even when their analytics identity cookie is shared.
+
+If one consent decision should cover both subdomains, add cookie-based consent storage to your existing initialization on each subdomain. Keep your existing capture and consent-gating settings:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    api_host: "<ph_client_api_host>",
+    defaults: "<ph_posthog_js_defaults>",
+    opt_out_capturing_persistence_type: "cookie",
+})
+```
+
+For subdomains of your own parent domain, [`cross_subdomain_cookie`](/docs/libraries/js/config) is enabled by default. Keep it enabled on both subdomains so the first-party consent cookie can be shared. This does not share consent across unrelated domains.
+
+Use the same project token and consent storage settings on both. If you set `consent_persistence_name`, use the same name on both subdomains too.
+
+Call `posthog.opt_in_capturing()` or `posthog.opt_out_capturing()` when the visitor makes a choice. That choice is then available to the SDK on both subdomains.
+
+For a banner that uses SDK consent status, show it only when `posthog.get_explicit_consent_status()` is `"pending"`. This setting does not share a [consent management platform's](#using-posthog-with-a-consent-management-platform-cmp) separate consent state.
+
+Keep the default `localStorage` consent storage if the subdomains need separate consent decisions. Consent storage is separate from your capture policy. Use [consent gating](#using-posthog-with-a-consent-management-platform-cmp) or [cookieless tracking](#cookieless-tracking) to control when PostHog captures events.
+
 ### Opting out by default
 
 To opt users out by default, set `opt_out_capturing_by_default` to `true` in the `init` call.  
