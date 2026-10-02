@@ -16,7 +16,7 @@ Try it, and report bugs or send patches to [posthog-ruby](https://github.com/Pos
 
 `PostHog::MCP` ships inside the [`posthog-ruby`](/docs/libraries/ruby) gem. It instruments an `MCP::Server` from the official [Ruby MCP SDK](https://github.com/modelcontextprotocol/ruby-sdk) (`mcp` gem `>= 1.4`), whether you register tools as `MCP::Tool` classes or with `define_tool`. It works over stdio and Streamable HTTP, and serves both the `2025-11-25` and `2026-07-28` protocol revisions.
 
-You need Ruby 3.0+ and a PostHog [project token](/docs/getting-started/project-token). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
+You need Ruby 3.0+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
