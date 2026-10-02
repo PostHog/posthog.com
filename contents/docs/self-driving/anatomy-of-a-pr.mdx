@@ -56,7 +56,9 @@ The verdict: the problem is real, the fix is concrete, and the report is marked 
 
 ## 4. The pull request
 
-Because the report is actionable, an implementation agent builds the fix in a sandbox:
+When PR generation is on, an actionable report starts an implementation agent that builds the fix in a sandbox. If your team turns PR generation off in the self-driving settings, the actionable report stays in your inbox for review and manual follow-up.
+
+In this example, PR generation is on, so the agent builds the fix:
 
 1. It clones your repo and creates a branch like `ai-fix/checkout-discount-null`.
 2. It writes the change: handle the legacy coupon format and add the missing guard, plus a regression test that reproduces the original failure.
