@@ -190,19 +190,29 @@ For example, if the product pages on an ecommerce site use a URL format of `http
 
 ## Troubleshooting
 
-### Heatmap is captured, but site is not showing
+### Live preview not loading
 
-If you're viewing heatmaps [in-app](https://app.posthog.com/heatmaps) and the heatmap appears over a blank page, your site may be blocking it from being displayed in an `<iframe>`.
+When you select live preview mode, PostHog runs a preflight check that fetches your page server-side and inspects its response headers. If the page blocks iframe embedding or returns an error, PostHog shows a specific message explaining the problem and offers to switch to screenshot mode instead.
 
-In app, PostHog overlays the heatmap over your site in an iframe. You can allow PostHog to place your site in an `<iframe>` by updating your `Content-Security-Policy` header.
+The two most common reasons a live preview fails to load:
+
+**Your site blocks iframe embedding.** Many platforms (including Shopify) send `Content-Security-Policy: frame-ancestors 'none'` or `X-Frame-Options: DENY` by default, which prevents the live preview from rendering your page. If you control your server's headers, you can allow PostHog to embed your site by updating your `Content-Security-Policy` header:
 
 | Region | Content Security Policy                                                   |
 | ------ | ------------------------------------------------------------------------- |
 | US     | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
 | EU     | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
 
-### Screenshot or iframe heatmap fails to load
+If you can't change these headers, use screenshot mode instead.
 
-If screenshot generation fails or your site blocks iframe embedding (due to auth walls, bot protection, or `Content-Security-Policy` restrictions), PostHog automatically searches for recent session recordings that visited the same page and suggests up to three of them.
+**Your site returns an HTTP error.** If your site's host or CDN returns a 4xx or 5xx status code (such as a 429 rate limit or a 403 challenge page), PostHog shows the status code and a short excerpt of the response so you can identify the issue. Check your site's rate limits and firewall rules, then try again.
 
-Click any suggested recording to open the session player, then click **View heatmap** to view heatmap data overlaid on the recording snapshot. This provides an alternative path to heatmap data when traditional rendering methods don't work.
+### Screenshot captures an error page
+
+When PostHog generates a screenshot heatmap, it checks the HTTP status code returned by your page during the render. If your page returns a non-2xx status (e.g., 429, 403, or 500), PostHog fails the heatmap with the actual error status rather than saving a screenshot of the error page. The error message includes the status code and identifies that it came from your site's host or CDN, not from PostHog.
+
+### Using session recordings as a fallback
+
+If both live preview and screenshot modes don't work for your site (due to auth walls, bot protection, or other restrictions), PostHog automatically searches for recent session recordings that visited the same page and suggests up to three of them.
+
+Click any suggested recording to open the session player, then click **View heatmap** to view heatmap data overlaid on the recording snapshot.
