@@ -1,71 +1,67 @@
 ---
 title: Feature Flags 101
 shortTitle: Feature Flags 101
-subtitle: What a flag is, how PostHog decides who gets it, and where to check it.
+subtitle: How a flag separates deploy from release, and how PostHog decides who gets it.
 pocketGuideOrder: 1
 section: Instrument
 ---
-
-<LeftPage>
-
-<ExampleFigure
-    n={1}
-    caption="The backend check the wizard wrote. The key comes from a constants module, and the distinct ID is your signed-in user's ID."
->
-
-```js
-// Node, once at the top of the request
-const flags = await posthog.evaluateFlags(user.id)
-
-if (flags.isEnabled(BACKEND_FLAG)) {
-  logger.info('backend flag on')
-}
-```
-
-</ExampleFigure>
-
-<ExampleFigure
-    n={2}
-    caption="The answer comes from a hash of the flag key and the distinct ID. The rollout percentage sets the cut-off."
->
-
-| Step | Value |
-| --- | --- |
-| Hash `wizard-example-backend-flag.user-123` | 0.31 |
-| Rollout percentage | 50% |
-| 0.31 is under 0.50 | `true`, every time, while the flag keeps these settings |
-
-</ExampleFigure>
-
-</LeftPage>
 
 <RightPage>
 
 # Feature Flags 101
 
-A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false`, or a variant name like `control` or `test`. You change the answer in PostHog, and the code stays the same <SeeFig n={1} />.
+A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false` – or, for a multivariate flag, with a variant such as `control` or `test`. You change the flag's configuration in PostHog, and the code stays the same.
 
-## Your two example flags
+## Deploy is not release
 
-If you ran the wizard, you have two flags to try this on: `wizard-example-backend-flag` and `wizard-example-frontend-flag`. The wizard checks each one once, on its own side of your app, and gates something harmless on it (a log line or a small label), so nothing changes until you turn them on. An API with no frontend gets only the backend flag. The wizard also writes `posthog-feature-flags-report.md`, with a link to each flag and the file that checks it.
+Without a flag, shipping a change and giving it to users are the same event: the deploy lands, and everyone gets the new code at once. A flag splits them apart. You deploy `new-checkout` turned off, and the new code sits in production doing nothing. Releasing it is a change in PostHog – who gets it, how many, and for how long – and so is taking it back.
 
-## Same person, same answer
+The check itself is a few lines. On the server, it runs once at the top of the request, with the signed-in user's ID:
 
-PostHog hashes the flag key with the person's <Term name="distinct id">distinct ID</Term> into a number between 0 and 1, and if that number is under the rollout percentage, the person gets the flag <SeeFig n={2} />. The same key and the same distinct ID give the same answer on every check.
+```js
+const flags = await posthog.evaluateFlags(user.id)
 
-So when a flag gives someone the "wrong" answer, the flag isn't broken. One of its inputs changed, and that input is almost always the distinct ID: a browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Call `identify()` first.
+if (flags.isEnabled(NEW_CHECKOUT_FLAG)) {
+  return renderNewCheckout()
+}
+return renderCheckout()
+```
+
+## Three inputs, one stable answer
+
+PostHog evaluates a flag from three inputs:
+
+- **The flag's configuration**: its <Term name="release condition">release conditions</Term>, rollout percentage, and variants, which you set in PostHog.
+- **Identity**: the person's <Term name="distinct id">distinct ID</Term>, which your code passes in.
+- **Properties**: facts about the person or their company, like their plan or country, that the release conditions filter on.
+
+For the rollout percentage, PostHog hashes the flag key and the distinct ID (or, for a group flag, the group key) into a number between 0 and 1. If that number is under the rollout percentage, the flag is enabled:
+
+| Input | Value |
+| --- | --- |
+| Hash of `new-checkout` and `user-42` | 0.19 |
+| Rollout percentage | 50% |
+| Result | `true`, because 0.19 is under 0.50 |
+
+The same inputs produce the same result on every check, so when a flag gives someone the "wrong" answer, the flag isn't broken. First check whether the flag's configuration or one of the inputs changed. A common cause is the distinct ID: a browser that checks a flag before `identify()` runs is asking about an anonymous visitor, not your user. Once you know who the user is, call `identify()` before checking the flag.
 
 ## Evaluate once per request
 
-Check the flag once, where the request comes in, and pass the value down. Each extra check deeper in the stack is another chance at a different answer, and on a server that doesn't evaluate locally, another network request. That's why the wizard puts each check at exactly one call site.
+Evaluate flags once, where the request comes in, and pass the result down. Each extra evaluation deeper in the stack is another chance for the identity or configuration to change – and, when the server sends evaluations to PostHog, another network request.
 
-## Every check gets recorded
+## Decide what happens before the answer arrives
 
-Each check sends a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got, and the SDK drops repeats. That event is how PostHog knows who saw what: Experiments counts exposures from it, and the wizard's Check step looks for it when it finishes.
+In the browser, flags load asynchronously, and until they arrive `getFeatureFlag()` returns `undefined`, not `false`. Decide what your code does in that gap, and make it the behavior you already trust:
 
-## "Not loaded yet" is not "off"
+```js
+const showNewCheckout = posthog.getFeatureFlag(NEW_CHECKOUT_FLAG) ?? false
+```
 
-In the browser, flags load asynchronously, and until they arrive `getFeatureFlag()` returns `undefined`, not `false`. Decide on purpose what your code does in that gap, or read [the next page](/pocket-guides/feature-flags/server-and-client) and close the gap entirely.
+You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, which [the next page](/pocket-guides/feature-flags/server-and-client) covers.
+
+## Flag checks record exposure
+
+When the SDK checks a flag, it captures a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got, and the SDK drops repeats. That event is how PostHog knows who saw what: Experiments counts exposures from it, and it's one signal for telling a flag nobody checks anymore from one that's still in use, as [cleanup](/pocket-guides/feature-flags/cleanup) explains.
 
 <SeeAlso>
 

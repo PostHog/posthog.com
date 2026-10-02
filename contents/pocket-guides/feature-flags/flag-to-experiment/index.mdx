@@ -12,12 +12,9 @@ pocketGuideCta:
 
 <LeftPage>
 
-<ScreenshotFigure
+<VariantsFigure
     n={1}
-    product="feature_flags"
-    screenshot="multivariate"
-    alt="A multivariate flag with control and test variants, each with its own rollout percentage"
-    caption="An experiment runs on a multivariate flag with a control variant."
+    caption="The variants on new-checkout: control keeps the three-step checkout, test gets the one-page version."
 />
 
 </LeftPage>
@@ -26,23 +23,34 @@ pocketGuideCta:
 
 # From flag to experiment
 
-A rollout asks whether a change is safe. An <Term name="experiment">experiment</Term> asks whether it's better, and in PostHog it runs on a flag with variants <SeeFig n={1} />.
+A rollout asks whether a change is safe. An <Term name="experiment">experiment</Term> asks whether it's better. A flag with `control` and `test` variants splits people between two versions, but the split alone measures nothing. An experiment adds the parts that turn a split into an answer.
 
-## You already have the pieces
+## The four parts of an experiment
 
-An experiment needs a multivariate flag with at least two variants, one of them named `control`. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one. A person counts as exposed when a `$feature_flag_called` event comes in, and your checks already send it. Only exposed people count in the results, and anything they did before exposure is ignored.
+| Part | The question it answers | For `new-checkout` |
+| --- | --- | --- |
+| Hypothesis | What do you expect to change, and why? | A one-page checkout will convert better than the three-step one |
+| Eligible population | Who can be in it? | Signed-in people who reach checkout |
+| Primary metric | What number decides it? | Checkout conversion rate |
+| Exposure moment | When does a person count as in it? | When the checkout page decides which version to render |
 
-## The 101 rules matter more here
+Write the hypothesis and pick the primary metric before you start, so the result can't be read to fit whatever happened. The other two parts live on the flag.
 
-A person who switches variants mid-experiment counts in both groups and muddies both results. Switching happens when the distinct ID changes between checks, so call `identify()` before the first check, check once, and keep the variant.
+## The population lives in the release conditions
 
-## Check the flag as late as you can
+The experiment's flag decides who's eligible, the same way a rollout does. An experiment needs a multivariate flag with at least two variants, one of them named `control` <SeeFig n={1} />. Use an existing flag that has those, with `control` as its first variant, or let the experiment create one.
 
-Put the check where the experience splits, after every other condition. An earlier check counts people who never see the change as exposed, and they dilute your results.
+Keep each person in one variant for the whole experiment. By default, a person exposed to more than one variant is left out of the results entirely, so every switch shrinks your sample. Switching happens when the distinct ID changes between checks. Call `identify()` before the first check, check once, and keep the variant.
 
-## When it ends
+## Exposure happens at the check
 
-Ship the winning variant, then delete the flag. When you end an experiment, PostHog can open the cleanup PR for you.
+A person counts as exposed when a `$feature_flag_called` event comes in, and your flag checks already send it. Only exposed people count in the results, and anything they did before exposure is ignored.
+
+So put the check where the experience splits, after every other condition. An earlier check counts people who never see the change as exposed, and they dilute your results. A check on the checkout page counts people who saw a checkout. A check on the home page counts everyone who visited.
+
+## Ship the winner, then remove the flag
+
+When the primary metric has an answer, roll the winning variant out to everyone, and then [clean up the flag](/pocket-guides/feature-flags/cleanup): an experiment flag is temporary by design. When you end an experiment, PostHog can open the cleanup PR for you.
 
 <Action />
 

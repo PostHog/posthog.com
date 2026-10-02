@@ -37,6 +37,15 @@ describe('pocket guide pages', () => {
         assert.deepEqual(pagesWithHoggies, [])
     })
 
+    test('write a lone code block or table as Markdown, not inside a figure', () => {
+        const volumesPredatingTheRule = ['context-warehouse']
+        const figureWrappingOnlyMarkdown = /<\w+Figure\b[^>]*>\s*(```[\s\S]*?```|(\|[^\n]*\|\s*)+)\s*<\/\w+Figure>/
+        const pagesWithMarkdownFigures = guidePages
+            .filter((page) => !volumesPredatingTheRule.includes(path.relative(guidesDir, page).split(path.sep)[0]))
+            .filter((page) => figureWrappingOnlyMarkdown.test(readFileSync(page, 'utf8')))
+        assert.deepEqual(pagesWithMarkdownFigures, [])
+    })
+
     test('show the wizard command through <Setup />, never as a raw command', () => {
         const pagesWithRawCommand = guidePages.filter((page) =>
             /npx (-y )?@posthog\/wizard/.test(readFileSync(page, 'utf8'))

@@ -7,33 +7,17 @@ section: Release
 pocketGuideCta:
   kind: prompt
   label: Ask PostHog AI
-  note: Swap in your own email domain first.
-  requires:
-    label: Needs a feature flag in your project. The wizard makes two.
+  note: Needs a feature flag in your project. Swap in its key and your email domain first.
   prompt: >-
-    Roll out wizard-example-frontend-flag to everyone whose email ends with @<my company domain>
+    Roll out <my flag key> to everyone whose email ends with @<my company domain>
     at 100%, and to 5% of all other users.
 ---
 
 <LeftPage>
 
-<ExampleFigure n={1} caption="A typical ladder. People who got the flag at 5% still have it at 25%.">
-
-| Step | Who gets it | Then |
-| --- | --- | --- |
-| Team | `email ends with @yourcompany.com` | Poke at it in production |
-| 5% | Everyone else, a few at a time | Watch errors and replays |
-| 25% | More of everyone | Same again |
-| 100% | Everyone | Schedule the cleanup |
-
-</ExampleFigure>
-
-<ScreenshotFigure
-    n={2}
-    product="feature_flags"
-    screenshot="release-conditions"
-    alt="A flag's release conditions, with property filters and a rollout percentage in each condition set"
-    caption="Release conditions on one flag. A person who matches any set gets the flag."
+<ReleaseConditionsFigure
+    n={1}
+    caption="Two condition sets on new-checkout: the team at 100%, then 5% of everyone else."
 />
 
 </LeftPage>
@@ -42,25 +26,38 @@ pocketGuideCta:
 
 # Roll out gradually
 
-A flag at 0% is live code that nobody runs. This page lets people in a few at a time, so a bug reaches 5% of your users instead of all of them <SeeFig n={1} />.
+A flag at 0% is live code that nobody runs. A rollout lets people in a few at a time, so a bug reaches 5% of your users instead of all of them. Every step answers the same three questions: who is eligible, what signal are you watching, and what would make you continue or roll back.
 
-## Release conditions
+## The rollout ladder
 
-Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={2} />. A condition set matches when every property filter passes and the person falls inside its rollout percentage, and a person who matches any set gets the flag.
+A typical ladder for `new-checkout`:
 
-## Start with your team
+| Step | Who's eligible | Watch | Continue when | Roll back when |
+| --- | --- | --- | --- | --- |
+| Team | `email ends with @yourcompany.com` | Your own use in production | The team used it for real work and found no blockers | Anything a customer would notice |
+| 5% | A small share of everyone else | Errors, replays, and checkout conversion for people with the flag | Both match people without the flag over a day of normal traffic | Errors rise or conversion drops |
+| 25% | A bigger share | The same, plus load on the services checkout calls | The same | The same, or latency climbs |
+| 100% | Everyone | The same | Nothing left to watch: schedule the cleanup | The same |
 
-At PostHog, a flag often starts with only the engineer who made the change. Next comes the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains`, because `contains` also matches lookalike domains. Your team uses the feature in production before any customer sees it.
+## Who is eligible
 
-## Then a percentage
+Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={1} />. A condition set matches when every property filter passes and the person falls inside its rollout percentage, and a person who matches any set gets the flag.
+
+At PostHog, a flag often starts with only the engineer who made the change. Next comes the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains`, because `contains` also matches lookalike domains.
 
 Then add a set for everyone at a small percentage, as low as 0.01%. Raising the percentage moves the cut-off and changes nobody's hash, so everyone who had the flag keeps it while new people join.
 
-A rollout is only as safe as what you watch between steps. Before each raise, look for new errors and watch replays of people who have the flag. If you already know the next step, schedule the flag change and let PostHog make it.
+To narrow who's eligible, target a <Term name="cohort">cohort</Term> (your beta testers), a <Term name="person property">person property</Term> (their plan), a country if GeoIP is on, or a whole company with group analytics. Target the data where it lives. If your server knows the plan, evaluate on the server and pass the plan in. If the plan lives in Stripe, sync it in as a warehouse property and target it like any other property.
 
-## Target who gets it
+## What to watch
 
-You can target a <Term name="cohort">cohort</Term> (your beta testers), a <Term name="person property">person property</Term> (their plan), a country if GeoIP is on, or a whole company with group analytics. Target the data where it lives. If your server knows the plan, evaluate on the server and pass the plan in. If the plan lives in Stripe, sync it in as a warehouse property and target it like any other property.
+A rollout is only as safe as what you watch between steps. Watch the signals the change could break: new errors, replays of people who have the flag, and the one metric the change is meant to move. Compare people with the flag to people without it, so a bad day for everyone doesn't read as a bad rollout.
+
+## When to continue or roll back
+
+Write down both answers before you raise the percentage, not after you see the numbers. Continue when the signals for people with the flag match those without it. Roll back, by lowering the percentage or [switching the flag off](/pocket-guides/feature-flags/off-switch), when they don't.
+
+If you already know the next step and its date, schedule the flag change and let PostHog make it.
 
 <Action />
 

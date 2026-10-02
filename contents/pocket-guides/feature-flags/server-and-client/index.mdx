@@ -1,24 +1,14 @@
 ---
 title: Server and client
 shortTitle: Server and client
-subtitle: One flag per side, evaluated where the data lives, with the same person on both.
+subtitle: Evaluate where the code and data live, then keep both sides agreeing on who the person is.
 pocketGuideOrder: 2
 section: Instrument
 ---
 
 <LeftPage>
 
-<ExampleFigure n={1} caption="One flag per side, one person across both.">
-
-| Side | Call | Why |
-| --- | --- | --- |
-| Server | `evaluateFlags(user.id)` | Local evaluation from cached definitions, with your data right there |
-| Browser | `posthog.identify(user.id)` | Same ID, so the hash matches |
-| Browser | `bootstrap.featureFlags` | Values the server already has, so there's no flicker |
-
-</ExampleFigure>
-
-<SkillFigure n={2} caption="The skill itself. It uses the same rules the wizard follows. Copy it and give it to your agent before you add your next flag." />
+<SkillFigure n={1} caption="A skill that applies this page's rules. Copy it and give it to your agent before it adds your next flag check." />
 
 </LeftPage>
 
@@ -26,33 +16,41 @@ section: Instrument
 
 # Server and client
 
-The wizard made one flag for your backend and one for your frontend, not one flag for both. That's the recommended pattern, not a platform limit: each side gates its own code with its own flag. This page explains why, and how to keep both sides agreeing about who a person is <SeeFig n={1} />.
+PostHog can evaluate a flag in the browser, on the server, or in both places. Choose the runtime based on where the gated code runs and which side has the data needed to evaluate it.
 
-## One flag, one side
+This page explains the tradeoffs, how to keep evaluations consistent, and how to pass a server result to the client. An agent adding flag checks can follow the same rules <SeeFig n={1} />.
 
-A flag checked on the server and again in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. Pick one side for each flag. For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
+## Choose where a flag is evaluated
+
+Evaluate a flag on the side that runs the code it gates and holds the properties its release conditions filter on.
+
+| Evaluate on | When | How |
+| --- | --- | --- |
+| Server | The gated code runs on the server, or the conditions use data only the server has, like the plan or account age | `evaluateFlags(user.id)`, with local evaluation |
+| Browser | The gated code is UI, and the browser knows every property the conditions use | `getFeatureFlag()`, after `identify()` |
+| Server, then browser | Both sides need the answer, or the UI needs it for the first render | Evaluate on the server and bootstrap the result for the first render; the browser then evaluates again |
+
+Default to one side per flag. A flag evaluated separately on the server and in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. When both sides need the answer, evaluate on the server and bootstrap the result into the browser for the first render, as the last section shows. The browser then evaluates the flag again, so keep identity and properties the same on both sides, as described in [Keep identity and properties consistent](#keep-identity-and-properties-consistent). For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
 
 ## On the server, evaluate locally
 
-With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. Each definitions fetch counts as 10 flag requests, however many local checks your server makes, so local evaluation is cheaper as well as faster.
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions every 30 seconds (every 5 minutes in Go) and evaluates them in-process, so a check makes no network request. A fetch that downloads the definitions counts as 10 flag requests, and a poll where nothing changed counts as 1, however many local checks your server makes, so local evaluation is cheaper as well as faster.
 
 The trade is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs the Feature Flags secure API key, which stays on the server. Never ship it to a browser or a mobile app.
 
-After a cold start the SDK has no definitions yet, so checks return `undefined` until the first fetch lands. Give every check a default. When a check can't be evaluated locally, the SDK asks PostHog instead, unless you set `onlyEvaluateLocally`.
+When a check can't be evaluated locally, for example before the first definitions fetch lands, the SDK asks PostHog instead, unless you set `onlyEvaluateLocally`. Give every check a default for the case where neither gives an answer.
 
-## Same person on both sides
+## Keep identity and properties consistent
 
-The hash uses the distinct ID, so if your server checks with `user.id` while the browser still has an anonymous ID, one person can get a different answer on each side. In the browser, call `identify()` with the ID your server uses, before any flag check.
+For most flags the hash uses the distinct ID, so if your server checks with `user.id` while the browser still has an anonymous ID, one person can get a different answer on each side. In the browser, call `identify()` with the ID your server uses, before any flag check.
 
-## Bootstrap to stop the flicker
+Properties need the same care. If a condition filters on `plan`, the server passes the plan it knows, and the browser needs the same value, either as a person property or set with `setPersonPropertiesForFlags()` before the check. A side that doesn't have the property can reach a different answer from the side that does.
+
+## Pass the server's result to the client
 
 If the server already knows the answer, send it with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render and never flashes the old version. The web, React Native, iOS, Android, and Flutter SDKs all support it.
 
 Two catches. Bootstrapping seeds only flags that are on, so a flag your server evaluated as off never arrives: the browser reads it as `undefined`, not `false`, and your default in code decides what renders. And the first full `/flags` response replaces everything you bootstrapped.
-
-## Take this skill with you
-
-The wizard followed these rules for your two example flags. For every flag after those, hand your agent the skill <SeeFig n={2} />.
 
 <SeeAlso>
 

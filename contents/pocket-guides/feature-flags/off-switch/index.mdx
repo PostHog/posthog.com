@@ -11,9 +11,34 @@ pocketGuideCta:
   note: Find the flag and switch it off.
 ---
 
-<LeftPage>
+<RightPage>
 
-<ExampleFigure n={1} caption="From alert to off, with no rollback and no deploy.">
+# The off switch
+
+A rollback is a revert, a build, and a deploy, and your users see the bug for as long as all three take. If the change is behind a flag, you switch the flag off in PostHog instead, and each place that checks it stops serving the feature the next time it gets fresh flags.
+
+An off switch you can trust has four parts: a safe default, a tested fallback, a known propagation time, and monitoring that tells you when to flip it.
+
+## A safe default
+
+The off switch works only if the off path still works. Keep the old code working until the flag is gone, and make it the answer whenever the flag isn't a clear `true`:
+
+```js
+const useNewCheckout = flags.getFlag(NEW_CHECKOUT_FLAG) ?? false
+
+if (!useNewCheckout) return renderCheckout()
+return renderNewCheckout()
+```
+
+A disabled flag, a flag that hasn't loaded yet, and a check that gets no answer all land on the path that already works.
+
+## A tested fallback
+
+Test that path before you need it. Flip the flag off in staging and confirm the old path works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is a kill switch you hope works.
+
+## A known propagation time
+
+A disabled flag stops matching everywhere it's checked, but each side notices at its own pace. Here's `new-checkout` being switched off:
 
 | Time | What happens |
 | --- | --- |
@@ -21,43 +46,14 @@ pocketGuideCta:
 | 14:11 | Checkout errors triple for people with the flag |
 | 14:12 | Flag disabled in PostHog |
 | 14:12 | Servers that evaluate remotely: off on the next request |
-| ≤14:13 | Servers that evaluate locally: off at the next poll (30s by default) |
-| Later | Browsers: off at the next flag fetch (reload, identify, property change) |
+| By 14:13 | Servers that evaluate locally: off at the next poll, 30 seconds by default |
+| Later | Browsers: off at the next flag fetch |
 
-</ExampleFigure>
+A browser fetches flags on page load, on `identify()`, on a property or group change, and on `reloadFeatureFlags()`, so a tab that stays open can keep the old value for a while. If the feature does damage for as long as one tab holds it, check that flag on the server.
 
-<ExampleFigure n={2} caption="Disabled, unreachable, and not loaded all end up on the path that already works.">
+## Monitoring that tells you to flip it
 
-```js
-const useNewCheckout = flags.getFlag(CHECKOUT_FLAG) ?? false
-
-if (!useNewCheckout) return renderCheckout()
-return renderNewCheckout()
-```
-
-</ExampleFigure>
-
-</LeftPage>
-
-<RightPage>
-
-# The off switch
-
-A rollback is a revert, a build, and a deploy, and your users see the bug for as long as all three take. If the change is behind a flag, you turn the flag off and skip all three <SeeFig n={1} />.
-
-## How fast "off" arrives
-
-A disabled flag returns `false` everywhere it's checked, and how fast each side notices depends on how it evaluates. A server that asks PostHog on every request sees the change on its next request. A server that evaluates locally sees it at its next poll, 30 seconds by default. A browser sees it the next time the SDK fetches flags (page load, `identify()`, a property or group change, or `reloadFeatureFlags()`), so an open tab can keep the old value for a while.
-
-## Make "off" the safe path
-
-The off switch works only if the off path still works. Keep the old code working until the flag is gone, and make it the default for a flag that hasn't loaded or a server that can't reach PostHog <SeeFig n={2} />. Then a PostHog outage lands your users in the same place as a kill.
-
-Test that path before you need it. Flip the flag off in staging and confirm the old path works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is a kill switch you hope works.
-
-## Switches you keep
-
-Some flags are meant to stay: a switch for an expensive feature under load, or a disaster recovery switch. Most flags are temporary, and these are the deliberate exceptions. If you run your own cleanup automation, tag them as intentionally dormant so it skips them.
+You can only flip the switch as fast as you notice. The 14:11 in the timeline above came from watching, not from a customer email. Put an alert on the signal the change could break, like checkout errors, filtered to people with the flag, so it fires within minutes of the raise. Then send flag changes to Slack, so everyone watching the incident knows who flipped what and when.
 
 <Action />
 

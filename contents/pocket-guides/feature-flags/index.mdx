@@ -13,6 +13,8 @@ pocketGuideOrder: 0
 
 A <Term name="feature flag">feature flag</Term> separates deploying code from releasing it. You merge the change turned off, then decide from PostHog who gets it: your team first, then 5% of users, then everyone. If errors climb at 5%, you flip the flag off, and nobody waits on a revert.
 
+This guide follows one flag, `new-checkout`, through its whole life: checked in code, rolled out a few people at a time, switched off when something breaks, tuned with a payload, tested as an experiment, and removed once it has done its job.
+
 ## Where to start
 
 Jump to the page for the job in front of you:
@@ -26,11 +28,9 @@ Jump to the page for the job in front of you:
 
 New to flags? Start with [Feature Flags 101](/pocket-guides/feature-flags/101).
 
-Every page assumes a PostHog SDK is in your app. The wizard installs one and creates two example flags that start at 0%, or you can [install it yourself](/docs/feature-flags/installation):
+Every page assumes a PostHog SDK is in your app. [Install it yourself](/docs/feature-flags/installation), or let the wizard install it for you:
 
 <Setup />
-
-The rest of the guide follows those two flags from 0% to deleted.
 
 <Frontispiece />
 

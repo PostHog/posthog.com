@@ -113,6 +113,10 @@ after the prose.
 
 Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
 
+Write code samples and tables as native Markdown in the prose. A figure is for an exhibit
+Markdown can't render, like annotated mock UI; `pocketGuides.test.ts` fails a figure whose only
+content is a code block or a table.
+
 ### How the reader lays a page out
 
 Every page is one linear scroll. `ReaderWrapper` (ReaderWrapper.tsx) re-orders the compiled
