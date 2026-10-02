@@ -79,26 +79,55 @@ const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
+    hasLanding,
+    interactiveLearningUrl,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
+    hasLanding?: boolean
+    interactiveLearningUrl?: string
 }) => {
     const pages = useBookPages(volumeId)
+
+    if (hasLanding && interactiveLearningUrl) {
+        const storyPages = pages.map((page) => ({
+            name: page.shortTitle || page.title,
+            url: page.isFrontMatter ? `${basePath}/introduction` : learnChapterPath(basePath, page),
+        }))
+
+        return (
+            <TreeMenu
+                appearance="sidebar"
+                activeUrl={currentPath}
+                items={[
+                    {
+                        name: 'Learn through a story',
+                        url: `${basePath}/introduction`,
+                        children: storyPages,
+                    },
+                    { name: 'Learn by doing', url: interactiveLearningUrl },
+                    { name: 'Have your agent teach you', url: `${basePath}#agent-teacher` },
+                ]}
+            />
+        )
+    }
+
     return (
         <nav>
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
                 {pages.map((page) => {
-                    const to = learnChapterPath(basePath, page)
+                    const to =
+                        page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
                     const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
                     return (
                         <li key={page.url} className="m-0 p-0">
                             <Link
                                 to={to}
-                                className={`block w-full px-2 py-1 rounded text-sm hover:bg-accent ${
+                                className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                                     active
-                                        ? 'font-semibold text-primary bg-accent'
-                                        : 'text-secondary hover:text-primary'
+                                        ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
+                                        : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
                                 }`}
                             >
                                 <span data-sidebar-label>{page.shortTitle || page.title}</span>
@@ -123,8 +152,16 @@ interface BuildProductMenuTabsArgs {
               name: string
               productMenu?: ProductNavItem[]
               pricingMenu?: ProductNavItem[]
+              /**
+               * Docs URL slug, when the docs don't live at `/docs/<product slug>`
+               * under an entry named after the product. Set it and the Docs tab
+               * is looked up by `/docs/<docsSlug>` instead of by product name.
+               */
+              docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
+              /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
+              interactiveLearningUrl?: string
           }
         | null
         | undefined
@@ -173,14 +210,24 @@ export function buildProductMenuTabs({
 }: BuildProductMenuTabsArgs): MenuTab[] {
     if (!productData) return []
 
-    const { slug: productSlug, name: productName, productMenu = [], pricingMenu = [], pocketGuideVolume } = productData
+    const {
+        slug: productSlug,
+        name: productName,
+        productMenu = [],
+        pricingMenu = [],
+        pocketGuideVolume,
+        interactiveLearningUrl,
+        docsSlug,
+    } = productData
+    const hasLearnLanding = Boolean(interactiveLearningUrl)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
 
-    const docsEntry = docsMenu.children.find(
-        ({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase()
-    )
+    const docsBasePath = `/docs/${docsSlug ?? productSlug}`
+    const docsEntry = docsSlug
+        ? docsMenu.children.find(({ url }: { url?: string }) => url === docsBasePath)
+        : docsMenu.children.find(({ name }: { name: string }) => name.toLowerCase() === productName.toLowerCase())
     const docsChildren = docsEntry?.children || []
     const resolvedNavStyle: 'grouped' | 'listed' = navStyle ?? docsEntry?.navStyle ?? 'listed'
 
@@ -226,7 +273,7 @@ export function buildProductMenuTabs({
             value: 'docs',
             icon: TAB_ICON.docs,
             default: activeSurface === 'docs',
-            href: `/docs/${productSlug}`,
+            href: docsBasePath,
             menu: (
                 <DocsTreeMenu
                     items={docsChildren}
@@ -246,11 +293,14 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
+            navigateOnActiveClick: hasLearnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
+                    hasLanding={hasLearnLanding}
+                    interactiveLearningUrl={interactiveLearningUrl}
                 />
             ),
         })

@@ -19,6 +19,7 @@ import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
+import { TWIG_URL } from '../../constants'
 
 export const productAnalytics = {
     ...getTool('product_analytics'),
@@ -27,6 +28,9 @@ export const productAnalytics = {
     categoryName: 'Analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
+    pocketGuideVolume: 'product-analytics',
+    // One setting powers both the Product Analytics Learn landing and its active-tab navigation.
+    interactiveLearningUrl: TWIG_URL,
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,

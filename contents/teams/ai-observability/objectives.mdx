@@ -1,44 +1,67 @@
-### Q3 2026 objectives
+### Q4 2026 objectives
 
-#### Objective 1: Self-driving proactiveness
+#### Objective 1: Finish the UI redesign <TeamMember name="Carlos Marchal" photo />
 
-**Motivation:** AI Observability should not be a place users only visit after something goes wrong. It should proactively detect problems, surface the right signals in Slack and PostHog, and help teams improve their AI products before users complain.
-
-**What we'll ship:**
-- **Daily digest in Slack** - a daily summary of the most important AIO changes, regressions, and failures
-- **Easy anomaly detection alerts in Slack** - a simple way to set up alerts for cost, latency, error, volume, sentiment, and evaluation regressions
-- **More AI Observability signals** - emit useful signals from more places in the product so the Self-Driving inbox has concrete issues to work on
-- **Suggested online evals** - automatically suggest online evaluations when problems are detected
-- **PostHog AI products dogfooding** - use our online evaluations to effectively improve PostHog's AI products
-
-#### Objective 2: Multimodal + large context ingestion
-
-**Motivation:** Teams are building AI products that contain images/audio/video/documents messages, as well as large text context. AI Observability needs to capture and display that content.
+**Motivation:** Every tab in the core tracing product should help users find issues with their AI agents and features. The redesign will make these tabs more useful and provide a consistent experience across the product.
 
 **What we'll ship:**
-- **Multimodal and large context event ingestion** - a way to ingest multimodal and large text content inputs and outputs on AIO events
-- **Multimodal and large context in trace views** - display captured multimodal and large text content in traces
 
-#### Objective 3: UI simplification
+- **UI redesign** – redesign all tabs in the core tracing product around finding issues with AI agents and features, with consistent navigation and interactions
+- **Matching MCP tools and skills** – add tools and skills that mirror the new UI pages, so coding agents can find the same high-priority issues with AI agents and features through MCP
 
-**Motivation:** The current navigation and trace experience make basic conversation review harder than it should be.
+#### Objective 2: Roll out offline evals <TeamMember name="Radu Raicea" photo />
 
-**What we'll ship:**
-- **Simple conversation view** - redesign the single trace view so users can read a conversation without unnecessary metadata, nesting, or visual noise
-- **Trace detail redesign** - keep advanced trace, span, generation, tool, cost, latency, and metadata details available without making them the default reading experience
-- **Navigation simplification** - review whether Traces, Generations, Sessions, Sentiment, and Evals need separate top-level tabs, and merge or rename concepts where that makes the product easier to understand
-
-#### Objective 4: Offline evals and datasets
-
-**Motivation:** Teams need a way to inspect offline evaluation experiments and manage the production examples they use for evaluations.
+**Motivation:** Offline evals shipped internally in Q3. We now need to roll them out to external users, iterate on their feedback, and reach general availability.
 
 **What we'll ship:**
-- **Offline eval experiment dashboard** - a dashboard to view offline evaluation experiments
-- **Dataset manager** - a focused interface for creating, updating, and organizing datasets from traces and sessions
-- **Programmatic dataset access** - APIs or SDK helpers to fetch and update datasets made from traces and sessions
 
-#### What we're not shipping
+- **External rollout and iteration** – roll out offline evals to external users and improve the experience based on their feedback
+- **Billing and data retention** – add billing support and apply data retention policies to offline evaluation data
+- **General availability** – bring offline evals to general availability after the external rollout and iteration
 
-- Running evals on multimodal content
-- Executing offline evals in our infrastructure
-- An SDK for defining offline evaluators; we want to stay agnostic and let users use any open source evaluation library
+#### Objective 3: Multimodal general availability <TeamMember name="Carlos Marchal" photo />
+
+**Motivation:** Multimodal ingestion and trace views are available. We need to make them generally available with clear limits and pricing, and support large text content too.
+
+**What we'll ship:**
+
+- **General availability** – finalize the cap and pricing for multimodal content
+- **Large text content** – extend multimodal storage and ingestion support to large text inputs and outputs
+
+#### Objective 4: Query and loading optimization
+
+**Motivation:** Slow queries and loading times make investigations frustrating. We need improvements in both the UI and the underlying queries.
+
+**What we'll ship:**
+
+- **UI optimizations** – improve loading performance in the UI <TeamMember name="Carlos Marchal" photo />
+- **Query performance investigation** – investigate lower-level speedups for slow queries <TeamMember name="Radu Raicea" photo />
+
+#### Objective 5: Useful clusters <TeamMember name="Radu Raicea" photo />
+
+**Motivation:** Clusters need to surface useful, actionable findings, and their cost needs to make sense for the product.
+
+**What we'll ship:**
+
+- **Opt-in clusters** – make clustering opt-in
+- **Customizable summarization prompts** – give teams control over how their traces are summarized for clustering
+- **Richer cluster centroids** – enrich centroids with evaluation results and show how they evolve over time
+- **Pricing exploration** – explore pricing that makes clustering sustainable
+
+#### Objective 6: Online evals improvements <TeamMember name="Bernat Torres" photo />
+
+**Motivation:** Teams need evaluations that go beyond boolean results, work with multimodal content, and make the results easy to understand.
+
+**What we'll ship:**
+
+- **More output types** – support categorical, multi-categorical, and numerical evaluation results
+- **Multimodal evaluations** – evaluate multimodal content
+- **Results reporting** – improve the UI for reporting evaluation results
+
+#### Objective 7: Use case / agent primitive <TeamMember name="Bernat Torres" photo />
+
+**Motivation:** Teams need to distinguish between the different use cases and agents in their product to understand their behavior.
+
+**What we'll ship:**
+
+- **Use case / agent primitive** – introduce a way to organize AI Observability data by use case or agent

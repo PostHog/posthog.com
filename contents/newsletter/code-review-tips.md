@@ -37,7 +37,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-a-month#humans-dont-need-to-review-every-pr).
 
-The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of [their own blind spots](/newsletter/if-ai-writes-all-the-code-whats-left#3-deciding-how-to-build-and-implement).[^1]
+The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of [their own blind spots](/newsletter/when-ai-writes-all-code#3-deciding-how-to-build-and-implement).[^1]
 
 For the same reason, it’s better to have multiple agents with different instructions and goals to cover more gaps,[^2] as well as different models and providers for different reviewers.[^3]
 
@@ -133,10 +133,10 @@ We still use #dev-stamp-exchange when the agent can’t auto-accept or route, bu
 
 ### Steal this
 
-The code for StampHog is available [in the PostHog repo](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
+The code for StampHog is available [in the PostHog repo](https://github.com/PostHog/posthog/tree/master/products/stamphog/packages/pr-approval-agent). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
 
 ```llm
-Read https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md and build the equivalent for the repo at <path>. 
+Read https://github.com/PostHog/posthog/blob/master/products/stamphog/packages/pr-approval-agent/README.md and build the equivalent for the repo at <path>.
 
 Copy the architecture; preserve its safety invariants exactly (fail closed, never request changes or merge, LLM can tighten gates but never loosen). 
 

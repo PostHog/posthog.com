@@ -29,7 +29,7 @@ This is a vague aspiration and "[agent-first software](/newsletter/agent-first-p
 
 The current era of software is designed for humans to do all the work, but in 2030, agents will be the ones **doing**. Agents have shown that they can do the obvious stuff themselves. What does this leave humans to do?
 
-1. **Judging and deciding.** Humans will approve, prioritize, [choose direction](/newsletter/if-ai-writes-all-the-code-whats-left#2-setting-direction), and resolve ambiguity.
+1. **Judging and deciding.** Humans will approve, prioritize, [choose direction](/newsletter/when-ai-writes-all-code#2-setting-direction), and resolve ambiguity.
 
 2. **Understanding and trusting.** Humans will evaluate whether it worked, if it's safe, and what's changed.
 
@@ -61,7 +61,7 @@ But chat isn't enough because sometimes reading a paragraph is worse than glanci
 
 <Caption>A look at the generative UI we're working on for PostHog</Caption>
 
-Most generative UI will be disposable, but some will become artifacts: outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, and even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with.
+Most generative UI will be disposable, but some will become [artifacts](/newsletter/multiplayer-ai#2-most-collaboration-happens-before-and-after-writing-the-code): outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, and even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with.
 
 ## Build UI when text isn't enough
 

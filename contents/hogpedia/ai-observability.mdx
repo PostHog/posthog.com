@@ -1,0 +1,73 @@
+---
+title: AI observability
+description: AI observability records what an application's calls to a language model did – the prompt, the response, the tools used, the latency, the tokens, and the cost. PostHog built it to watch its own AI assistant and released it as a product in February 2025.
+hogpedia:
+    categories: ['Products']
+    aliases: ['LLM observability', 'LLM analytics']
+    infobox:
+        title: AI observability
+        hog: HedgehogRoboHog
+        rows:
+            - label: Type
+              value: Observability tool
+            - label: Answers
+              value: What are the model calls doing?
+            - label: Released
+              value: February 2025
+            - label: Records
+              value: Prompts, responses, tools, latency, tokens, cost
+            - label: Documentation
+              value: '[/docs/ai-engineering](/docs/ai-engineering)'
+    seeAlso:
+        - 'PostHog|/hogpedia/posthog'
+        - 'History of PostHog|/hogpedia/history-of-posthog'
+        - 'Error tracking|/hogpedia/error-tracking'
+    references:
+        - id: 1
+          text: 'PostHog handbook, "How we got here" (February 2025)'
+          url: /handbook/story
+        - id: 2
+          text: 'PostHog AI Observability'
+          url: /ai-observability
+        - id: 3
+          text: 'PostHog documentation, AI engineering'
+          url: /docs/ai-engineering
+    external:
+        - title: 'PostHog AI Observability'
+          url: /ai-observability
+        - title: 'AI engineering documentation'
+          url: /docs/ai-engineering
+---
+
+**AI observability** is the practice of recording what an application's calls to a language model actually did: the prompt sent, the response returned, the tools called, how long it took, how many tokens it used, and what it cost. **AI Observability** is also the name of the PostHog product that does this.<Ref id="2" />
+
+## What problem it solves
+
+A feature built on a language model fails differently from ordinary code. It rarely throws an exception. It returns an answer that is worse than the last one, or slower, or four times more expensive, and nothing in the application reports a fault.
+
+Three properties make this hard to manage without dedicated tooling:
+
+- **Cost is variable per call.** A change to a prompt can multiply a bill without changing any code.
+- **Quality is not a boolean.** There is no exit status that indicates a bad answer.
+- **The failure is in the content.** Diagnosis needs the prompt and the response, not a stack trace.
+
+## Origin
+
+PostHog built AI observability for itself. The handbook records that PostHog AI became a product customers used every day around February 2025, that PostHog was its own heaviest user, and that the company needed to see what PostHog AI was costing and how people used it. It concluded that every other team building on models had the same problem, and released the tooling as a product.<Ref id="1" />
+
+This is a recurring pattern at PostHog, and it is worth noting as such: several products began as internal tooling.
+
+## How it works in PostHog
+
+An SDK wraps the model client, so each call is captured as an event with the request, the response, the token counts, the latency, and the computed cost.<Ref id="3" /> Related calls are grouped into a trace, which is what makes a multi-step agent legible – a single answer may involve several model calls and several tool calls.
+
+From there the data behaves like any other PostHog event data. Cost can be broken down per user, per model, or per feature. Evaluations can score new generations as they arrive, which turns an opinion about quality into a number that can be tracked.<Ref id="3" />
+
+## How it relates to other PostHog products
+
+| Product | Relationship |
+| --- | --- |
+| [Product analytics](/hogpedia/product-analytics) | Model calls are events, so cost and usage are ordinary insights. |
+| [Error tracking](/hogpedia/error-tracking) | Covers the exceptions; AI observability covers the answers that were merely bad. |
+| [Session replay](/hogpedia/session-replay) | Shows what the person did with the answer they received. |
+| [Experiments](/hogpedia/experiments) | Two prompts or two models can be compared as variants. |

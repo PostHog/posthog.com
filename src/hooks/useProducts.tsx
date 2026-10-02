@@ -16,6 +16,7 @@ import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
 import { aiObservability } from './productData/ai_observability'
+import { aiEvals } from './productData/ai_evals'
 import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
@@ -37,6 +38,7 @@ const initialProducts = [
     experiments,
     posthog_ai,
     aiObservability,
+    aiEvals,
     logs,
     workflows,
     inbox,

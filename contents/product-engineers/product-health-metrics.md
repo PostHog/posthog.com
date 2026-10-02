@@ -140,7 +140,7 @@ As examples, let's go over some types of products and look at what a good health
 
 Later-stage companies with mature products and product-market fit generally care more about health metrics. This is because they care more about providing a consistent, high-quality experience than finding product-market fit.
 
-[Early-stage startups](/blog/early-stage-analytics) searching for [product-market fit](/blog/measure-product-market-fit) often pivot and require radically different metrics. This doesn’t mean early products are "sick," they just haven’t figured out what "healthy" means yet.
+[Early-stage startups](/blog/early-stage-analytics) searching for [product-market fit](/founders/measure-product-market-fit) often pivot and require radically different metrics. This doesn’t mean early products are "sick," they just haven’t figured out what "healthy" means yet.
 
 Ultimately, using product health metrics should help you understand the well-being of your product and business. If they don't help improve these, it’s a sign to rethink your health regime towards something that does.
 

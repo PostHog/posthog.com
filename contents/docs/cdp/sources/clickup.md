@@ -9,12 +9,6 @@ availability:
 sourceId: ClickUp
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The ClickUp connector pulls your ClickUp data — workspaces, spaces, folders, lists, tasks, and goals — into the PostHog data warehouse.
 
 ## Adding a data source

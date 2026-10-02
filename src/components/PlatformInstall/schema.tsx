@@ -14,6 +14,7 @@ import Link from 'components/Link'
 import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
 import { IconArrowUpRight } from '@posthog/icons'
 import { buildWizardCommand } from './buildCommand'
+import { MCP_SERVER_URL as MCP_URL } from '../../constants'
 
 export type InstallMethod = {
     label: string
@@ -68,7 +69,6 @@ export type InstallSchema = {
 
 const iconClass = 'size-4'
 
-const MCP_URL = 'https://mcp.posthog.com/mcp'
 // Displayed clean (`npx @posthog/wizard mcp add`); copied with `-y` and `@latest` pinned but hidden
 // from view, matching the inline command.
 const { displayCommand: wizardCommand, copyCommand: wizardCommandCopy } = buildWizardCommand({

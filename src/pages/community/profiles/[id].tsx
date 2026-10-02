@@ -1738,41 +1738,6 @@ export default function ProfilePage({ params }: PageProps) {
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
-                            {(isCurrentUser || isModerator) && (
-                                <div className="flex gap-2 mt-4">
-                                    {isEditing ? (
-                                        <>
-                                            <OSButton
-                                                size="md"
-                                                variant="secondary"
-                                                onClick={() => {
-                                                    setIsEditing(false)
-                                                    resetForm()
-                                                }}
-                                            >
-                                                Cancel
-                                            </OSButton>
-                                            <OSButton
-                                                size="md"
-                                                variant="primary"
-                                                onClick={submitForm}
-                                                disabled={isSubmitting}
-                                            >
-                                                {isSubmitting ? 'Saving...' : 'Save'}
-                                            </OSButton>
-                                        </>
-                                    ) : (
-                                        <OSButton
-                                            size="md"
-                                            variant="secondary"
-                                            width="full"
-                                            onClick={() => setIsEditing(true)}
-                                        >
-                                            Edit profile
-                                        </OSButton>
-                                    )}
-                                </div>
-                            )}
                         </div>
 
                         <div className="flex-grow @container">
@@ -1848,6 +1813,38 @@ export default function ProfilePage({ params }: PageProps) {
             </ScrollArea>
             <div className="border-primary sticky border-t bottom-0">
                 <HeaderBar
+                    showCustomLeft={
+                        (isCurrentUser || isModerator) && (
+                            <div className="flex gap-2">
+                                {isEditing ? (
+                                    <>
+                                        <OSButton
+                                            size="md"
+                                            variant="secondary"
+                                            onClick={() => {
+                                                setIsEditing(false)
+                                                resetForm()
+                                            }}
+                                        >
+                                            Cancel
+                                        </OSButton>
+                                        <OSButton
+                                            size="md"
+                                            variant="primary"
+                                            onClick={submitForm}
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? 'Saving...' : 'Save'}
+                                        </OSButton>
+                                    </>
+                                ) : (
+                                    <OSButton size="md" variant="secondary" onClick={() => setIsEditing(true)}>
+                                        Edit profile
+                                    </OSButton>
+                                )}
+                            </div>
+                        )
+                    }
                     rightActionButtons={
                         <>
                             {isModerator && (
