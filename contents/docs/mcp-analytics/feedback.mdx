@@ -1,0 +1,131 @@
+---
+title: Collecting agent feedback
+---
+
+Agent feedback lets the agent tell you about your server while it works: a capability it needed, a tool that failed or confused it, or something that worked well. Each report becomes a `$mcp_feedback` event.
+
+Feedback is off by default. The TypeScript and Python SDKs support it. The Ruby SDK doesn't yet.
+
+## Turn on feedback
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  collectFeedback: true,
+})
+```
+
+```python file=Python
+from posthog.mcp.types import MCPAnalyticsOptions
+
+instrument(server, posthog, MCPAnalyticsOptions(collect_feedback=True))
+```
+
+</MultiLanguage>
+
+The SDK adds a virtual tool named `send_feedback` to `tools/list`. Its description asks the agent to call it when it has feedback. The SDK answers the call itself, so your handlers never see it. If your server already has a tool named `send_feedback`, the SDK doesn't add its own.
+
+Feedback covers what [missing capabilities](/docs/mcp-analytics/missing-capability) cover, as `feedback_type: "missing_capability"`. Turn on only one of the two.
+
+## What gets captured
+
+The agent fills in these arguments. Each becomes a property on the `$mcp_feedback` event:
+
+| Argument | Property | Values |
+| --- | --- | --- |
+| `feedback_type` (required) | `$mcp_feedback_type` | `"missing_capability"`, `"issue"`, `"praise"`, or `"other"` |
+| `summary` (required) | `$mcp_feedback_summary` | Free text, up to 2,048 characters |
+| `details` | `$mcp_feedback_details` | Free text, up to 2,048 characters |
+| `friction_points` | `$mcp_feedback_friction_points` | Free text, up to 2,048 characters |
+| `suggested_improvement` | `$mcp_feedback_suggested_improvement` | Free text, up to 2,048 characters |
+| `tool_name` | `$mcp_feedback_tool` | The tool the feedback is about |
+| `sentiment` | `$mcp_feedback_sentiment` | `"positive"`, `"neutral"`, `"negative"`, or `"mixed"` |
+| `task_completed` | `$mcp_feedback_task_completed` | `true` or `false` |
+
+The summary and details together also become `$mcp_intent`. The SDK redacts personal data and credentials from the free text. The event has no `$mcp_parameters`, so the raw report never reaches PostHog.
+
+Find the most common issues:
+
+```sql
+SELECT
+  properties.$mcp_feedback_tool AS tool,
+  properties.$mcp_feedback_summary AS summary,
+  count() AS reports
+FROM events
+WHERE event = '$mcp_feedback'
+  AND properties.$mcp_feedback_type = 'issue'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY tool, summary
+ORDER BY reports DESC
+LIMIT 50
+```
+
+## Add your own report fields
+
+Declare extra arguments with JSON Schema. Each one becomes a `$mcp_feedback_<name>` property. The SDK drops arguments you didn't declare, and values that don't match the declared type:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  collectFeedback: {
+    extraProperties: {
+      area: { type: "string", enum: ["search", "billing", "auth"], description: "Which part of the product this is about" },
+    },
+    extraRequired: ["area"],
+  },
+})
+```
+
+```python file=Python
+from posthog.mcp.types import CollectFeedbackOptions, MCPAnalyticsOptions
+
+instrument(server, posthog, MCPAnalyticsOptions(
+    collect_feedback=CollectFeedbackOptions(
+        extra_properties={
+            "area": {"type": "string", "enum": ["search", "billing", "auth"], "description": "Which part of the product this is about"},
+        },
+        extra_required=["area"],
+    ),
+))
+```
+
+</MultiLanguage>
+
+A name that a built-in field already uses, such as `type` or `summary`, fails at configuration.
+
+## Send reports to your own systems
+
+Pass a handler to route each report, for example to your issue tracker. Return a string to replace the reply the agent receives. The SDK sends the `$mcp_feedback` event even when your handler fails:
+
+<MultiLanguage>
+
+```ts file=TypeScript
+instrument(server, posthog, {
+  collectFeedback: {
+    onFeedback: async (report) => {
+      await createTicket(report.summary, report.details)
+      return "Thanks, we filed this for the team."
+    },
+  },
+})
+```
+
+```python file=Python
+from posthog.mcp.types import CollectFeedbackOptions, MCPAnalyticsOptions
+
+async def on_feedback(report):
+    await create_ticket(report.summary, report.details)
+    return "Thanks, we filed this for the team."
+
+instrument(server, posthog, MCPAnalyticsOptions(
+    collect_feedback=CollectFeedbackOptions(on_feedback=on_feedback),
+))
+```
+
+</MultiLanguage>
+
+The reply is captured as `$mcp_response` without the free-text redaction, so don't repeat the agent's report in it.
+
+To rename the tool or change its description, set `toolName` and `description` (`tool_name` and `description` in Python). Custom dispatchers pass the same options to `PostHogMCP` and route reports themselves from the prepared call.
