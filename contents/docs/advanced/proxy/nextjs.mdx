@@ -187,6 +187,16 @@ If requests to your proxy path return 404:
 3. Check the rewrite order: static and array rules must come before the catch-all
 4. If you have middleware (`middleware.ts` or `proxy.ts`), check its `matcher` doesn't catch your proxy path. A catch-all matcher redirects the capture endpoints – you'll see something like `POST /yourpath/s` become a 307 to `/en/yourpath/s` that 404s, while `/yourpath/static/*.js` still loads. Add your proxy path to the matcher: `matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)']`
 
+### Your firewall blocks requests to your own site
+
+A rewrite serves PostHog under your own origin, so your web application firewall (WAF) inspects PostHog traffic with the rules you wrote for your own application. You see `403` responses on the proxy path, or blocks across your whole site after the first proxied event.
+
+Rewrites return PostHog's response headers unchanged, and `next.config.js` cannot delete a response header. If a cookie in the proxied response is the cause, you must move to a proxy that builds the response itself, such as a [Cloudflare worker that deletes the header](/docs/advanced/proxy/proxy-reference#your-firewall-blocks-requests-to-your-own-site).
+
+As a quick test, delete the cookies for your domain and start the SDK with `persistence: 'localStorage'`. This removes PostHog's own cookie. If the blocks stop, that cookie was the cause.
+
+For the full diagnosis, see [your firewall blocks requests to your own site](/docs/advanced/proxy/proxy-reference#your-firewall-blocks-requests-to-your-own-site) in the proxy reference.
+
 ### Trailing slash conflicts with SEO
 
 The `skipTrailingSlashRedirect` setting is required for PostHog API requests but can cause SEO issues if pages become accessible at both `/page` and `/page/`.
