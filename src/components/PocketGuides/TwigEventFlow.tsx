@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import ExploreTwigLink from './ExploreTwigLink'
 import PostHogEventInspector from './PostHogEventInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
+import ExhibitResetButton from './ExhibitResetButton'
 
 type VisitorCursor = {
     x: number
@@ -26,9 +26,21 @@ export default function TwigEventFlow({
     const [inView, setInView] = useState(false)
     const [manual, setManual] = useState(false)
     const [cursor, setCursor] = useState<VisitorCursor | null>(null)
+    const [resetKey, setResetKey] = useState(0)
     const rootRef = useRef<HTMLDivElement>(null)
     const twigRef = useRef<HTMLDivElement>(null)
     const nextChoice = useRef(0)
+
+    const reset = (): void => {
+        setClicked(null)
+        setCapturedAt(null)
+        setEventCount(0)
+        setVisitorSetting('All')
+        setManual(false)
+        setCursor(null)
+        setResetKey((key) => key + 1)
+        nextChoice.current = 0
+    }
 
     useEffect(() => {
         if (!autoplay || !rootRef.current) return
@@ -97,13 +109,15 @@ export default function TwigEventFlow({
             if (interval !== undefined) window.clearInterval(interval)
             timeouts.forEach((timeout) => window.clearTimeout(timeout))
         }
-    }, [autoplay, inView, manual])
+    }, [autoplay, inView, manual, resetKey])
 
     return (
         <div ref={rootRef} className="twig-click-demo @container">
+            <ExhibitResetButton onReset={reset} />
             <div className="grid gap-3">
                 <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
                     <TwigBrowseFigure
+                        key={resetKey}
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}
                         initialSetting="All"
                         controlledSetting={autoplay ? visitorSetting : undefined}
@@ -161,7 +175,6 @@ export default function TwigEventFlow({
                     eventCount={eventCount}
                 />
             </div>
-            <ExploreTwigLink />
         </div>
     )
 }

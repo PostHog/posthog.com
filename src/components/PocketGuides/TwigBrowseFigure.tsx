@@ -28,36 +28,42 @@ export default function TwigBrowseFigure({
     const [search, setSearch] = useState('')
     const selectedSetting = controlledSetting ?? setting
     return (
-        <div className="twig-browser overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] p-4 text-[#2d2b29] [&_.vac-eyebrow]:hidden @md:p-6">
-            <BrowseStays
-                id={id}
-                setting={selectedSetting}
-                search={search}
-                onSearchChange={setSearch}
-                onSettingChange={(next) => {
-                    setSetting(next)
-                    onFilter?.(next, filterStays(next, search).length)
-                }}
-                renderStay={(stay) => (
-                    <article className="vac-card" key={stay.id}>
-                        <button
-                            type="button"
-                            className="w-full cursor-pointer border-0 bg-transparent p-0 text-left text-inherit"
-                            onClick={() => onOpen?.(stay)}
-                            aria-label={`Open ${stay.title || stay.location || stay.id}`}
-                        >
-                            <StayCardContent
-                                stay={stay}
-                                image={
-                                    <div className="vac-image">
-                                        <img src={photos[stay.setting]} alt={stay.images[0]?.alt || ''} />
-                                    </div>
-                                }
-                            />
-                        </button>
-                    </article>
-                )}
-            />
-        </div>
+        <section
+            aria-label="Twig"
+            className="twig-browser overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29] [&_.vac-eyebrow]:hidden"
+        >
+            <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
+            <div className="p-4 @md:p-6">
+                <BrowseStays
+                    id={id}
+                    setting={selectedSetting}
+                    search={search}
+                    onSearchChange={setSearch}
+                    onSettingChange={(next) => {
+                        setSetting(next)
+                        onFilter?.(next, filterStays(next, search).length)
+                    }}
+                    renderStay={(stay) => (
+                        <article className="vac-card" key={stay.id}>
+                            <button
+                                type="button"
+                                className="w-full cursor-pointer border-0 bg-transparent p-0 text-left text-inherit"
+                                onClick={() => onOpen?.(stay)}
+                                aria-label={`Open ${stay.title || stay.location || stay.id}`}
+                            >
+                                <StayCardContent
+                                    stay={stay}
+                                    image={
+                                        <div className="vac-image">
+                                            <img src={photos[stay.setting]} alt={stay.images[0]?.alt || ''} />
+                                        </div>
+                                    }
+                                />
+                            </button>
+                        </article>
+                    )}
+                />
+            </div>
+        </section>
     )
 }

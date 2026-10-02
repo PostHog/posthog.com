@@ -1,20 +1,22 @@
 import React from 'react'
-import { Logo } from '@posthog/brand/logo'
 
 const BORDER = 'border-[#d3d0c8]'
 
 /** The PostHog side of Twig interactions, styled like a light developer inspector. */
-export default function PostHogInspector({ children }: { children: React.ReactNode }): JSX.Element {
+export default function PostHogInspector({
+    children,
+    className = '',
+}: {
+    children: React.ReactNode
+    className?: string
+}): JSX.Element {
     return (
         <section
-            aria-label="PostHog inspector"
-            className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm`}
+            aria-label="Inspector"
+            className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm [&_details]:!m-0 [&_details]:!rounded-none [&_details]:!border-0 [&_details]:!bg-transparent [&_details]:!pb-0 ${className}`}
         >
             <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}>
-                <span aria-hidden="true" className="flex shrink-0 items-center">
-                    <Logo layout="logomark" size={20} />
-                </span>
-                PostHog inspector
+                Inspector
             </div>
             <div aria-live="polite" className="min-w-0 text-sm">
                 {children}
@@ -43,6 +45,99 @@ export function InspectorCode({ label, value, meta }: { label: string; value: st
                 </span>
             </div>
             {isElement ? <ElementTree value={value} /> : <EventTree value={value} />}
+        </div>
+    )
+}
+
+export function InspectorJavaScript({
+    lines,
+    highlightedLine,
+    meta,
+}: {
+    lines: string[]
+    highlightedLine: number
+    meta?: string
+}): JSX.Element {
+    return (
+        <div className={`min-w-0 border-b ${BORDER}`}>
+            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#faf8f3] px-3 text-xs`}>
+                <span className="border-b-2 border-orange py-2 font-semibold text-[#292724]">SDK call</span>
+                {meta && (
+                    <span
+                        className={`ml-auto rounded border ${BORDER} bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold text-[#292724]`}
+                    >
+                        {meta}
+                    </span>
+                )}
+            </div>
+            <div className="px-3 py-2">
+                <div className="flex items-center gap-2 rounded bg-[#e4e5df] px-3 py-2 font-code text-xs font-semibold text-[#5f5a52]">
+                    <svg aria-hidden="true" className="size-3 shrink-0" viewBox="0 0 12 12">
+                        <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                    browser tracking code
+                </div>
+                <div className="ml-[5px] mt-2 border-l border-[#dedad2] pl-4">
+                    <pre className="!m-0 overflow-x-auto !rounded-none !border-0 !bg-transparent !p-0 font-code text-[11px] leading-5">
+                        <code className="!rounded-none !border-0 !bg-transparent !p-0 !shadow-none">
+                            {lines.map((line, index) => (
+                                <span
+                                    key={`${index}-${line}`}
+                                    className={`block min-h-5 whitespace-pre pr-2 ${
+                                        index === highlightedLine ? 'font-semibold' : ''
+                                    }`}
+                                >
+                                    {index === highlightedLine ? (
+                                        <mark className="bg-[#fff0dc] px-1 text-inherit">{line}</mark>
+                                    ) : (
+                                        line
+                                    )}
+                                </span>
+                            ))}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export function InspectorDetails({
+    tab,
+    title,
+    meta,
+    rows,
+}: {
+    tab: string
+    title: string
+    meta?: string
+    rows: Array<{ label: string; value: string }>
+}): JSX.Element {
+    return (
+        <div className={`min-w-0 border-b ${BORDER}`}>
+            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#faf8f3] px-3 text-xs`}>
+                <span className="border-b-2 border-orange py-2 font-semibold text-[#292724]">{tab}</span>
+                {meta && (
+                    <span
+                        className={`ml-auto rounded border ${BORDER} bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold text-[#292724]`}
+                    >
+                        {meta}
+                    </span>
+                )}
+            </div>
+            <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
+                <details open className="min-w-0 px-3">
+                    <summary className="cursor-pointer select-none text-[#5f5a52]">{title}</summary>
+                    <div className="ml-[5px] border-l border-[#dedad2] pl-4">
+                        {rows.map(({ label, value }) => (
+                            <div key={`${label}-${value}`} className="whitespace-pre">
+                                <span className="text-[#77529a]">{label}</span>:{' '}
+                                <span className="text-[#9a4b1c]">{JSON.stringify(value)}</span>
+                            </div>
+                        ))}
+                    </div>
+                </details>
+            </div>
         </div>
     )
 }
