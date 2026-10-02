@@ -5591,8 +5591,12 @@
             "destination": "/docs/cdp/sources/zendesk:ext?"
         },
         {
+            "source": "/docs/data-warehouse/setup:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/start-here:ext?"
+        },
+        {
             "source": "/docs/data-warehouse/setup/",
-            "destination": "/docs/data-warehouse/query/"
+            "destination": "/docs/data-warehouse/start-here/"
         },
         {
             "source": "/handbook/growth/marketing/content",
