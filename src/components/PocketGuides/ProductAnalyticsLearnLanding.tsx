@@ -29,10 +29,10 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
     const counts = usePocketGuideCounts()
 
     return (
-        <div className="not-prose mx-auto max-w-5xl pb-12 text-primary">
+        <div className="not-prose mx-auto max-w-5xl pb-8 text-primary">
             <section
                 id="overview"
-                className="grid scroll-mt-20 items-center gap-6 @2xl/reader-content:grid-cols-[minmax(0,1fr)_240px]"
+                className="grid scroll-mt-20 items-center gap-4 @lg/reader-content:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] @2xl/reader-content:gap-8"
             >
                 <div>
                     <p className="mb-3 mt-0 text-sm font-semibold text-secondary">PostHog Learn</p>
@@ -41,40 +41,33 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                         Learn what to track, what your data means, and how to answer questions about your product.
                     </p>
                 </div>
-                <div className="mx-auto w-44 @2xl/reader-content:w-full" aria-hidden="true">
-                    <HedgehogEinstein className="h-auto w-full" />
+                <div
+                    className="relative isolate mx-auto w-56 max-w-full @lg/reader-content:w-full @lg/reader-content:max-w-[320px]"
+                    aria-hidden="true"
+                >
+                    <div className="pointer-events-none absolute inset-8 -z-10 rounded-full bg-blue/10 blur-2xl" />
+                    <HedgehogEinstein className="h-auto w-full drop-shadow-lg" />
                 </div>
             </section>
 
-            <section id="agent-teacher" className="mt-14 scroll-mt-20 border-t border-primary pt-8">
+            <section
+                id="agent-teacher"
+                className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
+            >
                 <div className="mb-5 flex items-start gap-3">
                     <IconTerminal className="mt-1 size-6 shrink-0 text-purple" />
                     <h2 className="m-0 text-2xl font-bold">Have your agent teach you</h2>
                 </div>
                 <div className="grid items-start gap-6 @2xl/reader-content:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
                     <div>
-                        <p className="mt-0 mb-3 text-lg leading-relaxed">
+                        <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
                             Learn with examples from your own product and data.
                         </p>
                         <p className="m-0 leading-relaxed text-secondary">
                             Open your coding agent in your project and send this prompt. It will use your existing data
                             to teach one concept at a time, with small exercises you can try.
                         </p>
-                    </div>
-                    <div className="min-w-0">
-                        <div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-                            <SingleCodeBlock
-                                language="text"
-                                label={<></>}
-                                showLabel
-                                showCopy
-                                showLineNumbers={false}
-                                showAskAI={false}
-                            >
-                                {AGENT_TEACHING_PROMPT}
-                            </SingleCodeBlock>
-                        </div>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <div className="mt-5 flex flex-wrap gap-3">
                             <OSButton
                                 type="button"
                                 variant="primary"
@@ -95,17 +88,34 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                             </OSButton>
                         </div>
                     </div>
+                    <div className="min-w-0 [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+                        <SingleCodeBlock
+                            language="text"
+                            label={<></>}
+                            showLabel
+                            showCopy
+                            showLineNumbers={false}
+                            showAskAI={false}
+                        >
+                            {AGENT_TEACHING_PROMPT}
+                        </SingleCodeBlock>
+                    </div>
                 </div>
             </section>
 
-            <section id="learn-through-story" className="mt-14 scroll-mt-20 border-t border-primary pt-8">
+            <section
+                id="learn-through-story"
+                className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
+            >
                 <div className="mb-5 flex items-center gap-3">
                     <IconBook className="size-6 shrink-0 text-blue" />
                     <h2 className="m-0 text-2xl font-bold">Learn through a story</h2>
                 </div>
-                <div className="grid gap-6 @2xl/reader-content:grid-cols-2">
+                <div className="grid items-start gap-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
                     <div>
-                        <p className="mt-0 mb-3 text-lg leading-relaxed">Follow engineers as they build a product.</p>
+                        <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
+                            Follow engineers as they build a product.
+                        </p>
                         <p className="mt-0 mb-5 leading-relaxed text-secondary">
                             Follow their journey from shipping features to discovering how people use them. See how they
                             decide what to track and use that data to answer questions about their product.
@@ -115,7 +125,11 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                         </OSButton>
                     </div>
                     {volume && (
-                        <div className="mx-auto w-full max-w-[240px] self-center">
+                        <div className="relative isolate mx-auto w-full max-w-[210px] @2xl/reader-content:max-w-[230px]">
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-blue/10 blur-2xl"
+                            />
                             <Cover
                                 volume={volume}
                                 count={counts[volume.id] ?? 0}
@@ -127,12 +141,15 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 </div>
             </section>
 
-            <section id="learn-by-doing" className="mt-14 scroll-mt-20 border-t border-primary pt-8">
+            <section
+                id="learn-by-doing"
+                className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
+            >
                 <div className="mb-5 flex items-center gap-3">
                     <IconPlay className="size-6 shrink-0 text-orange" />
                     <h2 className="m-0 text-2xl font-bold">Learn by doing</h2>
                 </div>
-                <div className="grid gap-6 @2xl/reader-content:grid-cols-2">
+                <div className="grid items-start gap-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
                     <div>
                         <h3 className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
                             Explore a fully instrumented product.
@@ -146,11 +163,15 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                         </OSButton>
                     </div>
                     <figure
-                        className="vac-app relative m-0 w-full max-w-md justify-self-center pb-16 pr-8"
+                        className="vac-app relative isolate m-0 w-full max-w-[360px] justify-self-center pb-12 pr-6"
                         role="img"
                         aria-label="PostHog Playground preview: stay_filter_selected with destination_type set to Coast, with Cursor Hog in front."
                     >
-                        <div className="vac-developer-theme overflow-hidden border" aria-hidden="true">
+                        <div
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-6 -z-10 rounded-full bg-blue/10 blur-2xl"
+                        />
+                        <div className="vac-developer-theme overflow-hidden border shadow-lg" aria-hidden="true">
                             <div className="vac-dock-header border-b">
                                 <h3 className="!m-0 flex items-center gap-2 !text-base">
                                     <Logo layout="logomark" size={20} />
