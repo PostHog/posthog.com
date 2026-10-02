@@ -23,6 +23,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
 import { OSInput } from 'components/OSForm'
 import { formatTeamName } from 'lib/utils'
+import { jobCardAlt, jobDescription } from './OG/cardText'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -76,6 +77,7 @@ interface JobProps {
             info: any
             id: string
             parent: any
+            publishedDate?: string
             fields: {
                 tableOfContents: any
                 html: string
@@ -293,6 +295,7 @@ export default function Job({
             info,
             id,
             parent,
+            publishedDate,
             fields: { tableOfContents, html, title, slug, locations },
         },
     },
@@ -310,6 +313,37 @@ export default function Job({
         ({ title }: { title: string }) => title === 'Mission & objectives'
     )?.value
     const showObjectives = missionAndObjectives !== 'false'
+    // Hand-written summary from Ashby. When it is empty, the meta description is generated from the card facts.
+    const websiteDescription = parent?.customFields
+        ?.find(({ title }: { title: string }) => title === 'Website description')
+        ?.value?.replace(/<[^>]+>/g, ' ')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/\s+/g, ' ')
+        .trim()
+    const jobPostingStructuredData = {
+        '@context': 'https://schema.org',
+        '@type': 'JobPosting',
+        title,
+        description: (info?.descriptionHtml || '').replace('<p><em>#LI-DNI</em></p>', '').replace('<p>#LI-DNI</p>', ''),
+        ...(publishedDate ? { datePosted: publishedDate } : {}),
+        hiringOrganization: {
+            '@type': 'Organization',
+            name: 'PostHog',
+            sameAs: 'https://posthog.com',
+            logo: 'https://posthog.com/brand/posthog-logo-stacked.png',
+        },
+        jobLocationType: 'TELECOMMUTE',
+        ...(locations?.length > 0
+            ? {
+                  applicantLocationRequirements: locations.map((name: string) => ({
+                      '@type': 'AdministrativeArea',
+                      name,
+                  })),
+              }
+            : {}),
+        url: `https://posthog.com${slug}`,
+    }
     // Group jobs by role grouping
     const jobGroups = useMemo(() => {
         const groups: { [key: string]: any[] } = {}
@@ -462,8 +496,11 @@ export default function Job({
         <>
             <SEO
                 title={`${title} - PostHog`}
+                description={websiteDescription || jobDescription({ role: title, timezone, slug })}
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageAlt={jobCardAlt({ role: title, timezone })}
                 imageType="absolute"
+                structuredData={jobPostingStructuredData}
             />
             <ReaderView
                 title={jobTitle}
@@ -815,6 +852,7 @@ export const query = graphql`
         ashbyJobPosting(id: { eq: $id }) {
             id
             departmentName
+            publishedDate
             fields {
                 tableOfContents {
                     value

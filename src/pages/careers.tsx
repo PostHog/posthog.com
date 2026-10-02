@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { Transparency } from '../components/Careers/Transparency'
 import { SEO } from '../components/seo'
+import { CAREERS_CARD_ALT } from '../templates/OG/cardText'
 import MegaQuote from 'components/Careers/MegaQuote'
 import CompanyHandbook from 'components/Careers/Handbook'
 import IdealEmployeeProfile from 'components/Careers/IdealEmployeeProfile'
@@ -55,6 +56,7 @@ const IndexPage = () => {
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers-og.jpeg${
                     latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
                 }`}
+                imageAlt={CAREERS_CARD_ALT}
                 imageType="absolute"
             />
             <Editor

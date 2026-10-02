@@ -335,10 +335,12 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         slug
                     }
                     frontmatter {
+                        title
                         featuredImage {
                             publicURL
                         }
                     }
+                    timeToRead
                 }
             }
             customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {

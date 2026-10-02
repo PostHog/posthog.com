@@ -204,7 +204,7 @@ const SmallTeamsPage = () => {
             <SEO
                 title="Small teams – PostHog"
                 description="PostHog teams and their missions"
-                image={`/images/og/teams.jpg`}
+                image={`/images/small-teams.png`}
             />
             <Editor
                 type="teams"

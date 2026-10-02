@@ -38,6 +38,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
+import { docsCardText } from './OG/cardText'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import useProduct from 'hooks/useProduct'
 import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
@@ -351,6 +352,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
+        timeToRead,
     } = post
 
     const sourceFields = postHogSource?.sourceFields ?? null
@@ -489,9 +491,10 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         <>
             <SEO
                 title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
-                description={seo?.metaDescription || excerpt}
+                description={seo?.metaDescription || excerpt || docsCardText({ title, slug, timeToRead })}
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageAlt={docsCardText({ title, slug, timeToRead })}
                 imageType="absolute"
                 // Flag-gated pages are always noindexed: the content ships in the static
                 // HTML, so we at least keep it out of search engines while in beta.
@@ -556,6 +559,7 @@ export const query = graphql`
             id
             body
             excerpt(pruneLength: 150)
+            timeToRead
             fields {
                 slug
                 commits {

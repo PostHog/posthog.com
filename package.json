@@ -39,6 +39,7 @@
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "check-src-links": "node scripts/check-src-links.js",
         "check-product-changelogs": "node scripts/check-product-changelogs.js",
+        "check-og-llms-titles": "node scripts/check-og-llms-titles.js",
         "generate-md-redirects": "node scripts/generate-md-redirects.js",
         "generate-brand-assets": "node scripts/generate-brand-assets.mjs",
         "strapi-sync": "npx --yes tsx@4.20.6 scripts/run-post-build-tasks.ts strapi",

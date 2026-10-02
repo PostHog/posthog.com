@@ -1,0 +1,22 @@
+[
+    { "prefix": "/docs/getting-started", "name": "Getting started", "color": "#0457FF", "hog": "rocket" },
+    { "prefix": "/docs/libraries", "name": "SDKs", "color": "#A0CA21", "hog": "reading" },
+    { "prefix": "/docs/api", "name": "API", "color": "#0457FF", "hog": "waiter-server" },
+    { "prefix": "/docs/model-context-protocol", "name": "MCP", "color": "#1490E8", "hog": "code-bubble" },
+    { "prefix": "/docs/self-host", "name": "Self-host", "color": "#35B14E", "hog": "gardeners" },
+    { "prefix": "/docs/product-analytics", "name": "Product Analytics", "color": "#1490E8", "hog": "chart-hog" },
+    { "prefix": "/docs/web-analytics", "name": "Web Analytics", "color": "#47C861", "hog": "magnifying-glass-2" },
+    { "prefix": "/docs/session-replay", "name": "Session Replay", "color": "#FFA81C", "hog": "director" },
+    { "prefix": "/docs/replay-vision", "name": "Replay Vision", "color": "#FFA81C", "hog": "x-ray" },
+    { "prefix": "/docs/feature-flags", "name": "Feature Flags", "color": "#2F9E84", "hog": "mountie" },
+    { "prefix": "/docs/experiments", "name": "Experiments", "color": "#A737D2", "hog": "scientist" },
+    { "prefix": "/docs/error-tracking", "name": "Error Tracking", "color": "#FF5C1C", "hog": "panic" },
+    { "prefix": "/docs/surveys", "name": "Surveys", "color": "#FF474D", "hog": "survey" },
+    { "prefix": "/docs/data-warehouse", "name": "Data Warehouse", "color": "#A737D2", "hog": "organized" },
+    { "prefix": "/docs/ai-observability", "name": "AI Observability", "color": "#6D4FFF", "hog": "robo-hog" },
+    { "prefix": "/docs/workflows", "name": "Workflows", "color": "#43DAB3", "hog": "workflows" },
+    { "prefix": "/docs/logs", "name": "Logs", "color": "#FF474D", "hog": "campfire-cowboy" },
+    { "prefix": "/docs", "name": "Docs", "color": "#1490E8", "hog": "reading-is-magic" },
+    { "prefix": "/handbook", "name": "Handbook", "color": "#F7A501", "hog": "office-worker" },
+    { "prefix": "/tutorials", "name": "Tutorials", "color": "#F7A501", "hog": "einstein" }
+]

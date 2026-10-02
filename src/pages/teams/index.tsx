@@ -169,7 +169,7 @@ const TeamsPage = () => {
             <SEO
                 title="Teams – PostHog"
                 description="PostHog teams and their missions"
-                image={`/images/og/teams.jpg`}
+                image={`/images/small-teams.png`}
             />
             <ReaderView
                 title="Small teams"

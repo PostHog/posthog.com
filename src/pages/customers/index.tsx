@@ -548,7 +548,7 @@ export default function Customers(): JSX.Element {
 
     return (
         <>
-            <SEO title="Customers – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO title="Customers – PostHog" description="" />
             <ReaderView
                 hideTitle
                 proseSize="lg"

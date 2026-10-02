@@ -8,7 +8,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 export default function QuickCallsScript(): JSX.Element {
     return (
         <>
-            <SEO title="quick calls script.txt – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO title="quick calls script.txt – PostHog" description="" />
             <Editor showFilters title="quick calls script" type="txt" slug="/quick-calls-script">
                 <ScrollArea>
                     <div className="bg-tan rounded-md relative @xl:float-right @xl:w-1/2 @xl:ml-4">

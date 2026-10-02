@@ -7,12 +7,12 @@ import pLimit from 'p-limit'
 import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
-import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import blogTemplate from '../src/templates/OG/blog.js'
+import careersTemplate from '../src/templates/OG/careers.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import jobTemplate from '../src/templates/OG/job.js'
-import { flattenMenu } from './utils'
+import { formatTimezone, getSection, readTimeText } from '../src/templates/OG/cardText'
 
 const limit = pLimit(10)
 const ogLimit = pLimit(20)
@@ -39,26 +39,12 @@ export const createCareersOG = async () => {
         height: 630,
     })
 
-    const url = 'https://posthog.com/careers-og/'
-    console.log(`Creating OG image for: ${url}`)
+    console.log('Creating OG image for: /careers')
 
-    await page.goto(url, {
+    await page.setContent(careersTemplate(), {
         waitUntil: ['domcontentloaded', 'networkidle0'],
     })
-
-    await page.waitForTimeout(1000)
-
-    await page.addStyleTag({
-        content: `
-            body {
-                width: 1200px;
-                height: 630px;
-            }
-            .ToastRoot {
-                display: none;
-            }
-            `,
-    })
+    await page.evaluateHandle('document.fonts.ready')
 
     await page.screenshot({
         type: 'jpeg',
@@ -153,50 +139,18 @@ export const createOGImages = async (data) => {
         )
     }
 
-    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
-
-    // Docs and Handbook OG
+    // Docs, handbook, and tutorial OG. The card needs only a title, so pages with an empty
+    // excerpt (pages built from snippets) or no contributors still get an image.
     for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
-        const { title } = post.frontmatter
-        const { timeToRead, excerpt, fields, parent } = post
-        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
-        const contributors = fields?.contributors.map((contributor) => {
-            const { avatar, username } = contributor
-            return {
-                username,
-                avatar,
-            }
-        })
-        let breadcrumbs = null
-        docsHandbookMenus.some((item) => {
-            if (item.url === fields.slug) {
-                breadcrumbs = item.breadcrumb
-                return true
-            }
-        })
+        const title = post.frontmatter?.title
+        const slug = post.fields?.slug
+        const section = slug && getSection(slug)
+        if (!title || !section) continue
         jobs.push(
             ogLimit(() =>
                 createOG({
-                    html: docsHandbookTemplate({
-                        font,
-                        title,
-                        timeToRead,
-                        excerpt,
-                        lastUpdated,
-                        contributors,
-                        breadcrumbs: [
-                            {
-                                name: fields.slug.startsWith('/docs')
-                                    ? 'Docs'
-                                    : fields.slug.startsWith('/tutorials')
-                                    ? 'Tutorials'
-                                    : 'Handbook',
-                            },
-                            ...(breadcrumbs || []),
-                        ],
-                    }),
-                    slug: fields.slug,
+                    html: docsHandbookTemplate({ title, readTime: readTimeText(post.timeToRead), section, slug }),
+                    slug,
                 })
             )
         )
@@ -232,7 +186,7 @@ export const createOGImages = async (data) => {
         jobs.push(
             ogLimit(() =>
                 createOG({
-                    html: jobTemplate({ role: title, font, timezone }),
+                    html: jobTemplate({ role: title, timezone: formatTimezone(timezone) }),
                     slug,
                 })
             )

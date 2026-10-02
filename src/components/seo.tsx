@@ -10,6 +10,8 @@ interface SEOProps {
     title: string
     description?: string
     image?: string
+    /** Alt text for the OG image. Defaults to a fixed text for the default card, else the title. */
+    imageAlt?: string
     article?: boolean
     canonicalUrl?: string
     noindex?: boolean
@@ -21,6 +23,10 @@ interface SEOProps {
     structuredData?: Record<string, any> | Record<string, any>[]
     documentRkey?: string
 }
+
+// Describes static/images/og/default.png. Change it when that image changes.
+const DEFAULT_IMAGE_ALT =
+    "PostHog: your product's context layer. A hedgehog in a burger costume, with a Get started free button."
 
 // PostHog's AT Protocol identity, used for Standard.site discovery links
 const STANDARD_SITE_DID = 'did:plc:go7eemqz4y5nhonj4kg5w2p6'
@@ -34,6 +40,7 @@ export const SEO = ({
     title,
     description,
     image,
+    imageAlt,
     article,
     canonicalUrl,
     noindex,
@@ -65,6 +72,7 @@ export const SEO = ({
             imageType === 'absolute' || image?.startsWith('http')
                 ? image
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
+        imageAlt: imageAlt || (!image || image === defaultImage ? DEFAULT_IMAGE_ALT : title || defaultTitle),
         url: `${siteUrl}${pathname}`,
         // Callers may pass a site-relative path; canonical links have to be absolute.
         canonical: canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl,
@@ -116,12 +124,14 @@ export const SEO = ({
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && <meta property="og:description" content={seo.description} />}
             {seo.image && <meta property="og:image" content={seo.image} />}
+            {seo.image && <meta property="og:image:alt" content={seo.imageAlt} />}
 
             <meta name="twitter:card" content="summary_large_image" />
             {twitterUsername && <meta name="twitter:creator" content={twitterUsername} />}
             {seo.title && <meta name="twitter:title" content={seo.title} />}
             {seo.description && <meta name="twitter:description" content={seo.description} />}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
+            {seo.image && <meta name="twitter:image:alt" content={seo.imageAlt} />}
             <meta name="twitter:site" content="@PostHog" />
 
             {structuredDataItems.map((item, i) => (

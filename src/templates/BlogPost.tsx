@@ -4,6 +4,7 @@ import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
+import { docsCardText } from './OG/cardText'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -284,7 +285,7 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
 }
 export default function BlogPost({ data, pageContext, location, mobile = false }) {
     const { postData } = data
-    const { body, excerpt, fields } = postData
+    const { body, excerpt, fields, timeToRead } = postData
     const {
         date,
         title,
@@ -296,6 +297,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         tags,
         seo,
     } = postData?.frontmatter
+    // This template also renders tutorials, which get the tame docs-style OG card.
+    const tutorialCardText = fields.slug.startsWith('/tutorials/')
+        ? docsCardText({ title, slug: fields.slug, timeToRead })
+        : undefined
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const category = postData?.parent?.category
@@ -388,9 +393,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         <>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
-                description={seo?.metaDescription || excerpt}
+                description={seo?.metaDescription || excerpt || tutorialCardText}
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageAlt={tutorialCardText}
                 imageType="absolute"
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
                 documentRkey={
@@ -468,6 +474,7 @@ export const query = graphql`
             id
             body
             excerpt(pruneLength: 150)
+            timeToRead
             fields {
                 slug
                 pageViews

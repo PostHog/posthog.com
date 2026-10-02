@@ -71,7 +71,11 @@ export default function NewTeam(props: TeamPageProps) {
 
     return (
         <>
-            <SEO title="New Team – PostHog" description="Create a new team at PostHog" image={`/images/og/teams.jpg`} />
+            <SEO
+                title="New Team – PostHog"
+                description="Create a new team at PostHog"
+                image={`/images/small-teams.png`}
+            />
             <ReaderView
                 title="New Team"
                 hideTitle={true}
