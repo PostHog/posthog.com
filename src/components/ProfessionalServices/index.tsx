@@ -75,7 +75,10 @@ const ServicesTable = () => {
                     content: (
                         <ul className="-my-1">
                             <li>Move you from Amplitude, Mixpanel, Heap, LaunchDarkly, GA, or Pendo</li>
-                            <li>We'll import your historic data and buy out existing contracts</li>
+                            <li>
+                                Replace the old SDKs in your codebase, rebuild your dashboards, and import your history
+                            </li>
+                            <li>We'll buy out existing contracts</li>
                         </ul>
                     ),
                 },
@@ -99,13 +102,13 @@ const ServicesTable = () => {
         {
             cells: [
                 {
-                    content: <ServiceLink label="Training" to="training" />,
+                    content: <ServiceLink label="Integration" to="integration" />,
                 },
                 {
                     content: (
                         <ul className="-my-1">
-                            <li>Best practices, team onboarding, and hands-on sessions</li>
-                            <li>Remote by default, on-site available</li>
+                            <li>Connect your data sources (Stripe, Snowflake, Hubspot, Zendesk)</li>
+                            <li>Set up pipelines, destinations, and real-time workflows</li>
                         </ul>
                     ),
                 },
@@ -114,13 +117,13 @@ const ServicesTable = () => {
         {
             cells: [
                 {
-                    content: <ServiceLink label="Integration" to="integration" />,
+                    content: <ServiceLink label="Training" to="training" />,
                 },
                 {
                     content: (
                         <ul className="-my-1">
-                            <li>Connect your data sources (Stripe, Snowflake, Hubspot, Zendesk)</li>
-                            <li>Set up pipelines, destinations, and real-time workflows</li>
+                            <li>Best practices, team onboarding, and hands-on sessions</li>
+                            <li>Remote by default, on-site available</li>
                         </ul>
                     ),
                 },
@@ -485,8 +488,8 @@ export const ProfessionalServices = () => {
                 </div>
 
                 <p className="mb-12 text-center @xl:text-left">
-                    Our FDEs do the hands-on engineering work in your codebase and your PostHog instance, and hand it back in a
-                    state your team can run without us.
+                    Our FDEs do the hands-on engineering work in your codebase and your PostHog instance, and hand it
+                    back in a state your team can run without us.
                 </p>
 
                 <h2 className="clear-both">How we can help</h2>
@@ -507,6 +510,7 @@ export const ProfessionalServices = () => {
                             subtitle="(your old tool's invoice, on us)"
                             rows={[
                                 { label: 'old subscription', price: 'on us' },
+                                { label: 'SDK swap in your codebase', price: 'included' },
                                 { label: 'historic data import', price: 'included' },
                                 { label: 'recreating same functionality', price: 'included' },
                             ]}
@@ -523,7 +527,9 @@ export const ProfessionalServices = () => {
                             <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
                                 <em>old</em>
                             </RoughAnnotation>
-                            {' dusty tool? We handle the entire migration, historic data included, and we '}
+                            {
+                                ' dusty tool? We handle the entire migration, from swapping the SDKs in your codebase to rebuilding your dashboards, and we '
+                            }
                             <GreenHighlight>
                                 <strong>buy out your existing contract</strong>
                             </GreenHighlight>
@@ -533,9 +539,18 @@ export const ProfessionalServices = () => {
                 >
                     <Deliverables
                         items={[
-                            'Historic data imported and reconciled against the old tool',
-                            'Event taxonomy mapped and documented',
-                            'Core dashboards and functionality rebuilt in PostHog',
+                            <>
+                                <strong>Event taxonomy</strong> mapped from the old tool and documented
+                            </>,
+                            <>
+                                <strong>PostHog SDKs</strong> implemented in place of the old tracking logic
+                            </>,
+                            <>
+                                <strong>Core dashboards and functionality</strong> rebuilt in PostHog
+                            </>,
+                            <>
+                                <strong>Historic data</strong> imported and reconciled against the old tool
+                            </>,
                         ]}
                     />
                     <p className="text-sm text-secondary !mb-2 mt-5">Guides for migration to PostHog from...</p>
@@ -577,46 +592,6 @@ export const ProfessionalServices = () => {
                             </>,
                             <>
                                 <strong>An audit report</strong> of what was wrong, what we changed, and what to watch
-                            </>,
-                        ]}
-                    />
-                </ServiceSection>
-
-                <ServiceSection
-                    id="training"
-                    title="Training"
-                    sticker={StickerELearning}
-                    stickerClassName="-rotate-2"
-                    image="https://res.cloudinary.com/dmukukwp6/image/upload/w_520,c_scale/e_make_transparent:20/e_trim/posthog.com/contents/images/newsletter/feature-images/teacher.png"
-                    imageAlt="A hedgehog in a graduation cap holding a stack of books"
-                    lead={
-                        <>
-                            {'Your team will know their analytics from their elbows, with '}
-                            <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
-                                <strong className="inline-block">minimal meetings</strong>
-                            </RoughAnnotation>
-                            {'. Remote by default, '}
-                            <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                                <em>on-site if you want it</em>
-                            </RoughAnnotation>
-                            {', hedgehog stickers included.'}
-                        </>
-                    }
-                >
-                    <Deliverables
-                        items={[
-                            <>
-                                <strong>Hands-on sessions</strong> built around your data and your questions, not a
-                                generic deck
-                            </>,
-                            <>
-                                <strong>Remote by default:</strong> async docs, video calls, Slack support
-                            </>,
-                            <>
-                                <strong>On-site available</strong> if you want face-to-face sessions (we'll travel)
-                            </>,
-                            <>
-                                <strong>Merch included,</strong> because everyone deserves a hedgehog sticker
                             </>,
                         ]}
                     />
@@ -667,6 +642,45 @@ export const ProfessionalServices = () => {
                             </>,
                             <>
                                 <strong>A data model your team can extend</strong> without re-learning how it was built
+                            </>,
+                        ]}
+                    />
+                </ServiceSection>
+                <ServiceSection
+                    id="training"
+                    title="Training"
+                    sticker={StickerELearning}
+                    stickerClassName="-rotate-2"
+                    image="https://res.cloudinary.com/dmukukwp6/image/upload/w_520,c_scale/e_make_transparent:20/e_trim/posthog.com/contents/images/newsletter/feature-images/teacher.png"
+                    imageAlt="A hedgehog in a graduation cap holding a stack of books"
+                    lead={
+                        <>
+                            {'Your team will know their analytics from their elbows, with '}
+                            <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
+                                <strong className="inline-block">minimal meetings</strong>
+                            </RoughAnnotation>
+                            {'. Remote by default, '}
+                            <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
+                                <em>on-site if you want it</em>
+                            </RoughAnnotation>
+                            {', hedgehog stickers included.'}
+                        </>
+                    }
+                >
+                    <Deliverables
+                        items={[
+                            <>
+                                <strong>Hands-on sessions</strong> built around your data and your questions, not a
+                                generic deck
+                            </>,
+                            <>
+                                <strong>Remote by default:</strong> async docs, video calls, Slack support
+                            </>,
+                            <>
+                                <strong>On-site available</strong> if you want face-to-face sessions (we'll travel)
+                            </>,
+                            <>
+                                <strong>Merch included,</strong> because everyone deserves a hedgehog sticker
                             </>,
                         ]}
                     />
@@ -761,7 +775,7 @@ export const ProfessionalServices = () => {
                     <div className="flex flex-wrap gap-3">
                         <QuoteCTA />
                         <CallToAction
-                            href="/blog/forward-deployed-engineer"
+                            href="/teams/forward-deployed-engineering"
                             type="secondary"
                             size="md"
                             state={{ newWindow: true }}
