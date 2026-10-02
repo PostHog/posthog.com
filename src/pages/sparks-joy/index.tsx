@@ -116,7 +116,7 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'time-machine',
-                                trigger: <span>Time machine (1)</span>,
+                                trigger: <span>Time machine (2)</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
@@ -126,6 +126,14 @@ export default function SparkJoy(): JSX.Element {
                                                 label="Hogspace"
                                                 url="/hogspace"
                                                 Icon={<AppIcon name="handbook" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogbook"
+                                                url="/hogbook"
+                                                Icon={<AppIcon name="forums" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>
