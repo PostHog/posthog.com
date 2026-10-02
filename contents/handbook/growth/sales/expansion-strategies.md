@@ -163,3 +163,5 @@ For accounts over $60k ARR with multiple teams, **expand into new teams** is usu
 **Build champions** and **move upward** are not standalone strategies — they're how you enable the other two. You build champions so they can pull you into new teams. You move upward so leadership can mandate adoption across the org. They're force multipliers, not end goals.
 
 The best TAMs are running 2-3 of these in parallel on their largest accounts. One team is going deeper on products. A champion in that team is introducing you to another team. And you're building toward an executive conversation that ties it all together into an annual commitment.
+
+When the expansion is a new product or a tool replacement, ask whether the customer would benefit from an [FDE engagement](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) to implement it alongside the sale. These engagements are optional, and not every customer needs one.

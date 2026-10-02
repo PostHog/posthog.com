@@ -21,6 +21,8 @@ We use the "AM Managed" Segment in Vitally to show that an account is part of so
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
+An [FDE engagement](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) is one of the tools you can offer, most often when you join an account and when you sell a new product. Raising it is optional and up to you.
+
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Ben will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
 #### TAM At-Risk Accounts review meeting
