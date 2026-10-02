@@ -122,6 +122,11 @@ If you need more control or Salesforce isn't cooperating:
 - AWS disbursements take time (check the disbursement schedule)
 - Verify the offer was actually accepted in AWS
 
+**Overdue invoice alert for an AWS deal:**
+- The Stripe invoice stays open until AWS disburses the funds to us, so overdue alerts in Slack are expected – ignore them
+- Do not mark the invoice as paid in Stripe when the customer tells you they paid through AWS. The customer pays AWS first, and AWS pays us later on its disbursement schedule
+- Only the billing team marks an AWS Marketplace invoice as paid, after the funds arrive
+
 ### Pro tips
 - **Double-check AWS Account IDs** - This is where most mistakes happen
 - **Always set payment terms on the offer** - If you don't, AWS uses the buyer's default terms
