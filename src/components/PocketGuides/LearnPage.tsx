@@ -23,7 +23,6 @@ export interface LearnLandingProps {
     productName: string
     description: string
     pocketGuideUrl: string
-    interactiveLearningUrl: string
 }
 
 /** Page shell shared by the index and per-chapter routes. */
@@ -38,13 +37,11 @@ export default function LearnPage({
     const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
-    const interactiveLearningUrl = productData?.interactiveLearningUrl as string | undefined
-    const isLearnLanding = Boolean(!chapter && volumeId && Landing && interactiveLearningUrl)
+    const isLearnLanding = Boolean(volumeId && Landing && !chapter)
     const landingProps = {
         productName: productData?.name,
         description,
-        pocketGuideUrl: `${surfaceBasePath(productData?.slug, 'learn')}/introduction`,
-        interactiveLearningUrl,
+        pocketGuideUrl: `/pocket-guides/${volumeId}`,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({
         productData,
@@ -52,6 +49,11 @@ export default function LearnPage({
         activeSurface: 'learn',
         currentPath: location?.pathname,
     })
+
+    const guide = volumeId ? (
+        <LearnSurface volumeId={volumeId} chapter={chapter} basePath={surfaceBasePath(productData.slug, 'learn')} />
+    ) : null
+
     return (
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
@@ -65,15 +67,8 @@ export default function LearnPage({
                 productSelect={<ProductSwitcher activeHandle={productHandle} />}
             >
                 <article ref={contentRef}>
-                    {isLearnLanding && Landing && interactiveLearningUrl ? (
-                        <Landing {...landingProps} />
-                    ) : volumeId ? (
-                        <LearnSurface
-                            volumeId={volumeId}
-                            chapter={chapter}
-                            basePath={surfaceBasePath(productData.slug, 'learn')}
-                        />
-                    ) : null}
+                    {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
+                    {!isLearnLanding ? guide : null}
                 </article>
             </ReaderView>
         </>

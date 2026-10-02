@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
 
-import { IconBook, IconChevronLeft, IconChevronRight, IconHome, IconList } from '@posthog/icons'
+import { IconChevronLeft, IconChevronRight, IconGraduationCap, IconHome, IconList } from '@posthog/icons'
 
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 export interface BookTab {
     label: string
@@ -25,6 +26,8 @@ interface BookReaderProps {
     tabs?: BookTab[]
     /** The way out – a sidebar control and a foot link. */
     shelf?: { url: string; label: string }
+    /** A separate learning hub, when the volume has one. Never replaces the shelf. */
+    learn?: { url: string; label: string }
     /** Where you are, printed in the foot line. Front matter is unnumbered. */
     position?: { page?: number; total: number }
     /** Reading size control; the default body size comes from the docs prose styles. */
@@ -150,6 +153,7 @@ export default function BookReader({
     next,
     tabs,
     shelf,
+    learn,
     position,
     fontSize,
     onFontSize,
@@ -187,45 +191,80 @@ export default function BookReader({
         />
     )
 
+    const destinationControl = (url: string, label: string, icon: React.ReactNode, compact = false) => (
+        <Tooltip
+            side="bottom"
+            sideOffset={6}
+            trigger={
+                <Link
+                    to={url}
+                    aria-label={label}
+                    className={
+                        compact
+                            ? edgeTabClasses()
+                            : 'flex size-8 items-center justify-center rounded text-secondary no-underline hover:bg-accent hover:text-primary'
+                    }
+                >
+                    {icon}
+                </Link>
+            }
+        >
+            {label}
+        </Tooltip>
+    )
+
     return (
         <div className="relative flex h-full min-h-0 w-full flex-col @4xl:flex-row">
             <aside
                 aria-label="Pocket guide sidebar"
                 className="m-4 mr-0 hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden rounded-md border border-primary @4xl:flex"
             >
+                {(shelf || learn || readingSizeControls) && (
+                    <div
+                        role="group"
+                        aria-label="Controls"
+                        className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-primary px-3 py-2"
+                    >
+                        <div className="flex items-center gap-1">
+                            {shelf &&
+                                destinationControl(
+                                    shelf.url,
+                                    'All pocket guides',
+                                    <IconHome className="size-4" aria-hidden="true" />
+                                )}
+                            {learn &&
+                                destinationControl(
+                                    learn.url,
+                                    'More Learn content',
+                                    <IconGraduationCap className="size-4" aria-hidden="true" />
+                                )}
+                        </div>
+                        {readingSizeControls}
+                    </div>
+                )}
                 {tabs && tabs.length > 0 && (
                     <nav aria-label="Pocket guide contents" className="min-h-0 flex-1 overflow-y-auto">
                         <ContentsList tabs={tabs} />
                     </nav>
                 )}
-                {(shelf || readingSizeControls) && (
-                    <div
-                        role="group"
-                        aria-label="Controls"
-                        className="flex shrink-0 items-center justify-between gap-3 border-t border-primary px-3 py-2"
-                    >
-                        {shelf && (
-                            <Link
-                                to={shelf.url}
-                                title={shelf.label}
-                                className="flex h-7 items-center gap-1.5 rounded px-1.5 text-xs text-secondary no-underline hover:bg-accent hover:text-primary"
-                            >
-                                <IconHome className="size-4" />
-                                Home
-                            </Link>
-                        )}
-                        {readingSizeControls}
-                    </div>
-                )}
             </aside>
             {/* Book tabs: in-flow above the page on narrow containers (floating tabs would sit
                 on the text), attached to the left edge at reading widths. */}
             <div className="relative z-30 flex shrink-0 flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0 @4xl:hidden">
-                {shelf && (
-                    <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={edgeTabClasses()}>
-                        <IconBook className="size-4" />
-                    </Link>
-                )}
+                {shelf &&
+                    destinationControl(
+                        shelf.url,
+                        'All pocket guides',
+                        <IconHome className="size-4" aria-hidden="true" />,
+                        true
+                    )}
+                {learn &&
+                    destinationControl(
+                        learn.url,
+                        'More Learn content',
+                        <IconGraduationCap className="size-4" aria-hidden="true" />,
+                        true
+                    )}
                 {tabs && tabs.length > 0 && (
                     <button
                         type="button"
@@ -300,7 +339,7 @@ export default function BookReader({
                                     {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
                                     {shelf && prev?.url !== shelf.url && (
                                         <Link to={shelf.url} className="text-secondary hover:text-primary">
-                                            All guides
+                                            {learn ? shelf.label : 'All guides'}
                                         </Link>
                                     )}
                                     {position?.page && (
