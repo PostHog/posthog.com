@@ -59,7 +59,7 @@ He wanted to build it, but I thought it was a terrible idea. I thought it would 
 
 Karl disagreed and built it anyway. It ended up being wildly popular with customers, and changed our entire company strategy!
 
-This success made me realize PostHog could be more than just product analytics. So we built [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), and we’re still extending it with [web analytics](/web-analytics), a [data warehouse](/data-warehouse), and error monitoring (currently in alpha).
+This success made me realize PostHog could be more than just product analytics. So we built [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), and we’re still extending it with [web analytics](/web-analytics), a [data warehouse](/context-warehouse), and error monitoring (currently in alpha).
 
 And all this because a single engineer disagreed with the CEO.
 
