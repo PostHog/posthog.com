@@ -29,7 +29,7 @@ contents/pocket-guides/<volume>/
 
 **One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
 off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volume is a directory
-plus a row in `src/constants/pocketGuides.ts` – no reader changes. The shelf counts a volume's
+plus a few registry entries (see [Adding a volume](#adding-a-volume)) – no reader changes. The shelf counts a volume's
 use cases by `pocketGuideOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
 
 **Teach inside the book.** A reader who leaves for the docs mid-page usually doesn't come back, so
@@ -45,6 +45,18 @@ the sibling SKILL.md), and every other volume authors its own in the `pocketGuid
 renders it with `<Action />` – today a PostHog AI prompt (`kind: prompt`) or a plain destination
 (`kind: link`). Both shapes also drive the pinned bar at the foot of the reader, so the page's
 action and the shortcut to it can't drift apart.
+
+## Adding a volume
+
+`pnpm test:pocket-guides` checks every rule below and runs in the deploy preview workflow.
+
+| Where | What | Why |
+|---|---|---|
+| `contents/pocket-guides/<id>/` | `index.mdx` at order 0 with `<Setup />` and `<Frontispiece />`, a 101 at order 1 | The reader builds the book from this directory |
+| `src/constants/pocketGuides.ts` | The shelf row | Cover, spine, and volume number |
+| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
+| `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard command for the volume, if it has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
+| `pocketGuideVolume` in `src/hooks/productData/<product>.tsx`, and `src/pages/docs/<product>/learn/[...chapter].tsx` | The docs Learn tab, for a volume with `docsProduct` | The product's docs link to the book it teaches |
 
 ## Authoring a page
 
@@ -86,6 +98,8 @@ after the prose.
 |---|---|
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
 | `<Eyebrow>` | The small line above a title-page heading |
+| `<Setup />` | The volume's wizard command, for the front matter |
+| `<Frontispiece />` | The volume's hedgehog illustration, for the title page |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
@@ -99,6 +113,10 @@ after the prose.
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
 Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
+
+Write code samples and tables as native Markdown in the prose. A figure is for an exhibit
+Markdown can't render, like annotated mock UI; `pocketGuides.test.ts` fails a figure whose only
+content is a code block or a table.
 
 ### How the reader lays a page out
 

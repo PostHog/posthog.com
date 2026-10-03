@@ -24,6 +24,7 @@ export const featureFlags = {
     Icon: IconToggle,
     type: 'feature_flags',
     teamSlug: 'feature-flags',
+    pocketGuideVolume: 'feature-flags',
     forumTopicId: 360,
     color: 'seagreen',
     colorSecondary: 'seagreen',

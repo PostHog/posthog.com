@@ -1,0 +1,37 @@
+---
+title: Feature Flags
+shortTitle: Introduction
+subtitle: 'Ship code turned off, then decide from PostHog who gets it and when it goes away.'
+pocketGuideOrder: 0
+---
+
+<LeftPage>
+
+<Eyebrow>Pocket guide to</Eyebrow>
+
+# Feature Flags
+
+A <Term name="feature flag">feature flag</Term> separates deploying code from releasing it. You merge the change turned off, then decide from PostHog who gets it: your team first, then 5% of users, then everyone. If errors climb at 5%, you flip the flag off, and nobody waits on a revert.
+
+This guide follows one flag, `new-checkout`, through its whole life: checked in code, rolled out a few people at a time, switched off when something breaks, tuned with a payload, tested as an experiment, and removed once it has done its job.
+
+## Where to start
+
+New to flags? Start with [Feature Flags 101](/pocket-guides/feature-flags/101).
+
+Jump to the page for what you are working on:
+
+- Letting a few people try a change first: [Rollouts](/pocket-guides/feature-flags/roll-out-gradually)
+- Something broke and has to go dark now: [The off switch](/pocket-guides/feature-flags/off-switch)
+- Checking a flag on the server and in the browser: [Server and client](/pocket-guides/feature-flags/server-and-client)
+- Changing copy or limits without a deploy: [Payloads](/pocket-guides/feature-flags/payloads)
+- Testing whether a change is better: [Experiments](/pocket-guides/feature-flags/flag-to-experiment)
+- Deleting flags that finished their job: [Cleaning up](/pocket-guides/feature-flags/cleanup)
+
+Every page assumes a PostHog SDK is in your app. [Install it yourself](/docs/feature-flags/installation), or let the wizard install it for you:
+
+<Setup />
+
+<Frontispiece />
+
+</LeftPage>

@@ -1,0 +1,62 @@
+---
+title: Payloads
+shortTitle: Payloads
+subtitle: Ship settings, not just on and off.
+pocketGuideOrder: 5
+section: Release
+pocketGuideCta:
+  kind: prompt
+  label: Ask PostHog AI
+  note: Needs a feature flag in your project. Swap in its key first.
+  prompt: 'Add a JSON payload {"buttonLabel": "Pay now"} to <my flag key>.'
+---
+
+<RightPage>
+
+# Payloads
+
+A flag decides whether someone gets a feature, and a <Term name="payload">payload</Term> lets it decide how that feature behaves. A payload is any JSON value that PostHog sends with the flag's answer, so you can change copy, limits, or config from PostHog without a deploy.
+
+## Choose where a value lives
+
+A value can live in four places. Ask these questions in order, and stop at the first yes:
+
+1. **Is it a secret, or has it stopped changing?** Keep it in your code or config. A value that hasn't changed in six months belongs in the codebase.
+2. **Does everyone get it, with no flag gating a feature?** Use a remote config flag, like an announcement banner: one payload, no targeting.
+3. **Does it differ between variants?** Put it on a multivariate flag, with one payload per variant, like different copy or pricing for each.
+4. **Does it belong to a feature some people have?** Put it on the boolean flag that gates the feature, like the settings of the new checkout below.
+
+## Keep a default in code
+
+For `new-checkout`, the payload holds the settings of the new checkout:
+
+```json
+{
+  "buttonLabel": "Pay now",
+  "maxSavedCards": 5
+}
+```
+
+Read the payload once, where you read the flag, and fall back to a value in code when it's missing:
+
+```js
+const checkoutConfig =
+  posthog.getFeatureFlagPayload(NEW_CHECKOUT_FLAG) ??
+  { buttonLabel: 'Continue', maxSavedCards: 3 }
+```
+
+If you bootstrap flags, bootstrap their payloads too, with `featureFlagPayloads`.
+
+## Payloads are not secrets
+
+Every payload a client SDK loads is visible to anyone who opens the browser's network tab, which is why the first question comes first. Remote config can encrypt a payload, but then only your server can read it, with a personal API key. Keep keys and credentials out of anything a client loads, and keep real secrets in your config, not in a flag.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Payloads](/docs/feature-flags/creating-feature-flags#payloads) · [Remote config](/docs/feature-flags/remote-config) · [Flags vs configuration](/product-engineers/feature-flags-vs-configuration)
+
+</SeeAlso>
+
+</RightPage>
