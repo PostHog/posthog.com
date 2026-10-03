@@ -237,6 +237,8 @@ To get accurate results for our experiment, we also need to capture a `$feature_
 
 This is known as an exposure event and shows a user is part of the experiment. It requires another POST request like this:
 
+> **Note:** The middleware runs for every request to a matched path. A browser can request a path before a person views the page. This exposure event then counts a person who never saw your test. [Avoid biased results](#avoid-biased-results) explains how to capture the exposure in the browser instead.
+
 ```js
 //... rest of code, after flag evaluation
 
@@ -401,6 +403,71 @@ export default function PHProvider({ children }) {
 ```
 
 When we relaunch our application and go to either of the test or control routes, the middleware redirects users to the correct page, their experience remains consistent across reloads, and our redirect test is successfully running.
+
+## Avoid biased results
+
+A redirect test can give you invalid results. There are two risks to manage.
+
+### The redirect makes the variants different
+
+The middleware only redirects a person when their variant does not match the path they request. A person who requests `/control` and gets the `control` variant sees no redirect. A person who requests `/control` and gets the `test` variant waits for an extra request. The extra request adds latency, changes the URL in the address bar, and can remove the referrer. Your results then measure the redirect as well as the page.
+
+To remove this difference, serve both variants from one URL with a [rewrite](https://nextjs.org/docs/app/building-your-application/routing/middleware#nextresponserewrite). A rewrite returns different content for the same URL, so both variants get one request:
+
+```js
+// middleware.js
+// Add '/offer' to the matcher config to run the middleware on the public path
+if (request.nextUrl.pathname === '/offer') {
+  // Clone the URL so the rewrite keeps the query string
+  const url = request.nextUrl.clone()
+  url.pathname = flagResponse === 'test' ? '/test' : '/control'
+  const newResponse = NextResponse.rewrite(url)
+  newResponse.cookies.set('bootstrapData', JSON.stringify(bootstrapData))
+  return newResponse
+}
+```
+
+Some tests cannot use a rewrite. For example, the two variants can be separate sites. In that case, redirect both variants, so that each variant pays the cost of the extra request.
+
+> **Note:** The `bootstrapData` cookie is set for one host, so it does not reach a different domain. Subdomains still share one distinct ID, because `cross_subdomain_cookie` is `true` by default. For variants on different domains, set up [cross-domain tracking](/tutorials/cross-domain-tracking). Without it, the destination site creates a new distinct ID, so the exposure does not match the variant you assigned.
+
+### Prefetching can create false exposures
+
+A browser can request a URL before a person views the page. A Next.js [`Link`](https://nextjs.org/docs/app/api-reference/components/link) component prefetches the pages it points to. An in-app browser, like the one in a chat or social app, requests a URL to build a link preview. Each of these requests runs the middleware. The middleware then sends an exposure event for a person who never saw the page. These false exposures hide the effect of your change, because they add people to the experiment who cannot convert.
+
+To prevent this, capture the exposure in the browser after the page becomes visible. Remove the exposure request from the middleware. The bootstrap data gives PostHog the distinct ID and the variant, so `getFeatureFlag` returns the variant at once and sends the `$feature_flag_called` event. If the flags are not ready, the `onFeatureFlags` subscription captures the exposure when they load. A repeated call does not inflate your results, because PostHog counts one exposure per person per variant:
+
+```js
+// app/test/page.js
+'use client'
+import { useEffect } from 'react'
+import { usePostHog } from '@posthog/react'
+
+export default function Test() {
+  const posthog = usePostHog()
+
+  useEffect(() => {
+    const captureExposure = () => {
+      if (document.visibilityState !== 'visible') return
+      // This call sends the exposure event
+      posthog.getFeatureFlag('main-redirect')
+    }
+
+    // This runs at once if the flags are ready, and again when they load
+    const unsubscribe = posthog.onFeatureFlags(captureExposure)
+    document.addEventListener('visibilitychange', captureExposure)
+
+    return () => {
+      unsubscribe()
+      document.removeEventListener('visibilitychange', captureExposure)
+    }
+  }, [posthog])
+
+  // ... rest of the page
+}
+```
+
+Add the same code to the control page. To read more about exposure events, see [Exposures](/docs/experiments/exposures).
 
 ## Further reading
 
