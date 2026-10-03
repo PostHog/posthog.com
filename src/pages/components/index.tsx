@@ -157,6 +157,13 @@ export default function Components(): JSX.Element {
         }))
     }, [data.allTeams.nodes, profileIdToSqueakId])
 
+    // State for OSSelect examples
+    const [selectValues, setSelectValues] = useState<Record<string, any>>({})
+    const selectDemo = (key: string) => ({
+        value: selectValues[key],
+        onChange: (value: any) => setSelectValues((prev) => ({ ...prev, [key]: value })),
+    })
+
     // State for Combobox examples
     const [comboboxTags, setComboboxTags] = useState<any[]>([])
     const [comboboxMembers, setComboboxMembers] = useState<any[]>([])
@@ -2052,6 +2059,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Status"
+                                        {...selectDemo('status')}
                                         options={[
                                             { label: 'In Progress', value: 'in-progress' },
                                             { label: 'Complete', value: 'complete' },
@@ -2061,6 +2069,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="Priority"
+                                        {...selectDemo('priority')}
                                         options={[
                                             { label: 'Low', value: 'low' },
                                             { label: 'Medium', value: 'medium' },
@@ -2079,6 +2088,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Small"
+                                        {...selectDemo('sizeSm')}
                                         size="sm"
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2089,6 +2099,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="Medium"
+                                        {...selectDemo('sizeMd')}
                                         size="md"
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2099,6 +2110,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="Large"
+                                        {...selectDemo('sizeLg')}
                                         size="lg"
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2116,6 +2128,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Row direction"
+                                        {...selectDemo('directionRow')}
                                         direction="row"
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2126,6 +2139,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="Column direction"
+                                        {...selectDemo('directionColumn')}
                                         direction="column"
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2143,6 +2157,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="With description"
+                                        {...selectDemo('description')}
                                         description="Choose the appropriate status for this item"
                                         options={[
                                             { label: 'Draft', value: 'draft' },
@@ -2153,6 +2168,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="With tooltip"
+                                        {...selectDemo('tooltip')}
                                         tooltip="This determines the visibility of your content"
                                         options={[
                                             { label: 'Public', value: 'public' },
@@ -2180,6 +2196,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Searchable (default)"
+                                        {...selectDemo('searchable')}
                                         options={[
                                             { label: 'Apple', value: 'apple', description: 'A red fruit' },
                                             { label: 'Banana', value: 'banana', description: 'A yellow fruit' },
@@ -2199,6 +2216,7 @@ export default function Components(): JSX.Element {
                                     />
                                     <OSSelect
                                         label="Non-searchable"
+                                        {...selectDemo('nonSearchable')}
                                         searchable={false}
                                         options={[
                                             { label: 'Option 1', value: '1' },
@@ -2216,6 +2234,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Invalid selection"
+                                        {...selectDemo('error')}
                                         touched={true}
                                         error="Please select a valid option"
                                         options={[
@@ -2234,6 +2253,7 @@ export default function Components(): JSX.Element {
                                 <div className="space-y-4">
                                     <OSSelect
                                         label="Full featured"
+                                        {...selectDemo('fullFeatured')}
                                         required
                                         tooltip="Choose your team for this project"
                                         description="This will determine who has access to this project"
