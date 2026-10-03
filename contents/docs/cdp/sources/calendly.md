@@ -9,13 +9,7 @@ availability:
 sourceId: Calendly
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
-The Calendly connector syncs your scheduling data – event types, scheduled events, groups, organization memberships, and routing forms – into PostHog.
+The Calendly connector syncs your scheduling data – event types, scheduled events, invitees, contacts, groups, organization memberships, and routing forms – into PostHog.
 
 ## Adding a data source
 
@@ -32,12 +26,16 @@ Once the syncs are complete, you can start using Calendly data in PostHog.
 | Table | Description | Sync method |
 | ----- | ----------- | ----------- |
 | `event_types` | Event types configured in your Calendly organization | Full refresh |
-| `scheduled_events` | Scheduled meetings, synced incrementally on `start_time` | Incremental |
+| `event_type_memberships` | Hosts assigned to each event type | Full refresh |
+| `scheduled_events` | Scheduled meetings, synced incrementally on `start_time` | Webhook, incremental, or full refresh |
+| `invitees` | People who booked a scheduled event, with their answers, tracking, and cancellation details | Full refresh |
+| `contacts` | People in your Calendly contacts directory | Full refresh |
 | `groups` | Groups within your Calendly organization | Full refresh |
-| `organization_memberships` | Members of your Calendly organization | Full refresh |
+| `organization_memberships` | Members of your Calendly organization, with their roles | Full refresh |
 | `routing_forms` | Routing forms configured in your organization | Full refresh |
+| `routing_form_submissions` | Completed routing form submissions, and where each respondent was routed | Full refresh |
 
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
+**Webhook** tables receive each change from Calendly as it happens. **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Configuration
 
