@@ -524,9 +524,6 @@ module.exports = {
                 patterns: ['docs/published/**', 'docs/onboarding/**', 'products/*/skills/*/SKILL.md'],
             },
         },
-        // {
-        //     resolve: 'gatsby-plugin-no-sourcemaps',
-        // },
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
             : [algoliaConfig]),

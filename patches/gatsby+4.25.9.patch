@@ -1,0 +1,42 @@
+diff --git a/node_modules/gatsby/cache-dir/navigation.js b/node_modules/gatsby/cache-dir/navigation.js
+index 9bf8fbb..b0610ad 100644
+--- a/node_modules/gatsby/cache-dir/navigation.js
++++ b/node_modules/gatsby/cache-dir/navigation.js
+@@ -85,7 +85,27 @@ const navigate = (to, options = {}) => {
+     })
+   }, 1000)
+ 
+-  loader.loadPage(pathname + search).then(pageResources => {
++  // When chunks from two builds are combined in one page, `loader` can resolve
++  // to a module whose `loadPage` returns no promise. The recovery branches
++  // below then never run, and the click does nothing at all.
++  const hardNavigate = () => {
++    clearTimeout(timeoutId)
++    window.location = pathname + search + hash
++  }
++
++  let loadingPageResources
++  try {
++    loadingPageResources = loader.loadPage(pathname + search)
++  } catch {
++    loadingPageResources = null
++  }
++
++  if (!loadingPageResources || typeof loadingPageResources.then !== `function`) {
++    hardNavigate()
++    return
++  }
++
++  loadingPageResources.then(pageResources => {
+     // If no page resources, then refresh the page
+     // Do this, rather than simply `window.location.reload()`, so that
+     // pressing the back/forward buttons work - otherwise when pressing
+@@ -122,7 +142,7 @@ const navigate = (to, options = {}) => {
+     }
+     reachNavigate(to, options)
+     clearTimeout(timeoutId)
+-  })
++  }, hardNavigate)
+ }
+ 
+ function shouldUpdateScroll(prevRouterProps, { location }) {
