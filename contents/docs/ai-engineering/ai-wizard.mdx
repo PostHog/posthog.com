@@ -41,7 +41,9 @@ Running the wizard automatically:
 8. Optionally installs the [PostHog MCP server](/docs/model-context-protocol) for your AI agent
 
 <Caption>
+
 The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js application
+
 </Caption>
 
 ## AI wizard installation
@@ -77,6 +79,7 @@ Running `npx @posthog/wizard` starts the default integration flow. The wizard al
 | `wizard audit <subcommand>` | Audit an existing integration – see [Audit subcommands](#audit-subcommands) |
 | `wizard revenue-analytics` | Wire up Stripe + PostHog revenue analytics |
 | `wizard mcp-analytics` | Instrument your own MCP server with [MCP Analytics](/docs/mcp-analytics) |
+| `wizard feature-flags` | Add feature flags on Next.js App Router (server eval + client bootstrap) – see [AI wizard installation](/docs/feature-flags/installation/ai-wizard) |
 | `wizard ai-observability` | Instrument your LLM calls with [AI Observability](/docs/ai-observability) |
 | `wizard replay-vision` | Turn on Session Replay and create [Replay Vision](/docs/replay-vision) scanners written for your product |
 | `wizard migrate` | Migrate from another analytics or feature-flag vendor |

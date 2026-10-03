@@ -1,0 +1,93 @@
+---
+title: AI wizard feature flags installation
+platformIconName: IconSparkles
+---
+
+import WizardCommand from 'components/WizardCommand'
+import CalloutBox from 'components/Docs/CalloutBox'
+import { Steps, Step } from 'components/Docs/Steps'
+
+`wizard feature-flags` adds the cheap feature flags path to an **existing** PostHog install. It evaluates flags once per request on the server with `evaluateFlags()`, bootstraps those values into the client so the first paint has no flicker and no extra `/flags` fetch, and turns `/flags` polling off in CI.
+
+You still create and target flags in PostHog. This command is the first-hour wiring: one evaluation per request, the same distinct id on server and client, and a kill switch that stays off until you raise rollout. For SDK snippets without the wizard, see [adding feature flag code](/docs/feature-flags/adding-feature-flag-code).
+
+This command is not:
+
+- Default `npx @posthog/wizard` — that installs product analytics. Run it first if PostHog is not initialized.
+- `wizard audit feature-flags` — that is a read-only usage and cost audit after you already have flags.
+- The [PostHog MCP surface](/docs/feature-flags/surfaces/mcp) or [PostHog AI](/docs/feature-flags/manage-flags-ai) — those manage flags from an editor or the app. This command wires evaluation into your Next.js app.
+
+## AI wizard
+
+The fastest way to get this wiring is the wizard (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<WizardCommand command="feature-flags" />
+
+<CalloutBox icon="IconWarning" title="Next.js App Router 15.3+ only" type="caution">
+
+This command instruments **Next.js App Router 15.3 or newer** (`app/` directory). Pages Router, older Next.js, and other frameworks abort. For those stacks, follow [manual installation](/docs/feature-flags/installation) and [bootstrapping](/docs/feature-flags/bootstrapping).
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Not on npm @latest yet" type="fyi">
+
+The command ships in [wizard pull request 1192](https://github.com/PostHog/wizard/pull/1192) and [context-mill pull request 378](https://github.com/PostHog/context-mill/pull/378). Until those merge, `npx @posthog/wizard@latest feature-flags` will not find it. Use a local wizard build, or wait for the next npm release.
+
+</CalloutBox>
+
+## What it does
+
+<Steps>
+
+<Step title="Run it in your app repo" badge="required">
+
+From the Next.js project that already has PostHog installed, run the command above. Authenticate if the wizard asks.
+
+If PostHog is not initialized, the run aborts and tells you to run `npx @posthog/wizard` first, then re-run `wizard feature-flags`.
+
+</Step>
+
+<Step title="Confirm one UI path, or skip" badge="required">
+
+The wizard asks once. **Skip is first:** no new flag, no UI change. Confirm: one boolean flag, **active, 0% rollout**, plus one additive UI path (a new, visibly flagged element, not a wrap around existing critical logic). Auth, checkout, payments, and data-mutation handlers stay ungated. Flag-off (including 0%) is current behavior.
+
+</Step>
+
+<Step title="What it changes in code" badge="required">
+
+The wizard:
+
+- Calls `evaluateFlags()` once per request on the server
+- Bootstraps those values into the client `PostHogProvider`
+- Turns `/flags` polling off in CI so tests do not bill you
+
+It does not add local evaluation. See [bootstrapping](/docs/feature-flags/bootstrapping) and [cutting costs](/docs/feature-flags/cutting-costs) for why this path is cheaper.
+
+</Step>
+
+<Step title="Test the kill switch" badge="recommended">
+
+In PostHog, raise the flag's rollout to 100%. Reload the app. The gated UI appears. Set rollout back to 0%. Production users keep seeing today's UI until someone raises rollout in PostHog.
+
+</Step>
+
+</Steps>
+
+## For agents
+
+Paste this page's URL into any coding agent as a prompt:
+
+`https://posthog.com/docs/feature-flags/installation/ai-wizard.md`
+
+Or run the same skill without the TUI:
+
+```bash
+npx @posthog/wizard skill feature-flags-setup
+```
+
+## Related
+
+- [Bootstrapping](/docs/feature-flags/bootstrapping)
+- [Cutting costs](/docs/feature-flags/cutting-costs)
+- [`wizard audit feature-flags`](/docs/ai-engineering/ai-wizard#audit-subcommands)
+- [Manage flags over MCP](/docs/feature-flags/surfaces/mcp)
