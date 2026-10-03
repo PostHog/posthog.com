@@ -50,7 +50,7 @@ const planSummary = [
             'Generous free tier on all products',
             'Advanced product features',
             '6 projects',
-            '7 year data retention',
+            '2 year data retention',
             'Email support',
             'Pay only for what you use',
             <>
