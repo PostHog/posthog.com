@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
 import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
-import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ClerkLogo from '../components/CustomerLogos/ClerkLogo'
@@ -36,7 +35,6 @@ import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesign
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PaperLogo from '../components/CustomerLogos/PaperLogo'
-import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
@@ -234,33 +232,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: AirbusLogo,
         height: 8,
         featured: true,
-    },
-    assemblyai: {
-        name: 'AssemblyAI',
-        yc: 'S17',
-        toolsUsed: ['experiments', 'product_analytics'],
-        industries: ['API Platform'],
-        users: ['Leadership', 'Marketing', 'Engineering'],
-        notes: 'Speech-to-text and audio intelligence API',
-        logo: AssemblyAILogo,
-        featured: false,
-        height: 10,
-        quotes: {
-            alberto_santos: {
-                name: 'Alberto Santos',
-                role: 'Web & Brand Lead',
-                image: {
-                    thumb: '/images/customers/alberto.jpg',
-                },
-                products: {
-                    product_analytics:
-                        "Finally having a full view of what users do has helped us so much. It's helped us improve conversion, improve our support, and optimize the user journey through the platform.",
-                },
-                quotes: [
-                    'PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.',
-                ],
-            },
-        },
     },
     arena: {
         name: 'Arena',
@@ -1150,32 +1121,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: PaperLogo,
         featured: true,
         height: 11,
-    },
-    phantom: {
-        name: 'Phantom',
-        toolsUsed: ['data_warehouse', 'feature_flags'],
-        industries: ['Cryptocurrency & blockchain'],
-        users: ['Leadership', 'Product', 'Engineering'],
-        notes: 'Crypto wallet',
-        logo: PhantomLogo,
-        featured: false,
-        height: 10,
-        quotes: {
-            francesco_agosti: {
-                name: 'Francesco Agosti',
-                role: 'CTO & Co-founder',
-                image: {
-                    thumb: '/images/customers/francesco.jpg',
-                },
-                products: {
-                    feature_flags:
-                        "Feature flags are really, really critical for us and you don't see them as a feature in other analytics tools. They are very valuable though, because you can often use feature flag data to make other product decisions.",
-                },
-                quotes: [
-                    'I liked how PostHog was open-source and how it just worked out of the box from the get-go. It lets you use your own database and it was really easy to deploy and get going.',
-                ],
-            },
-        },
     },
     pry: {
         name: 'Pry',

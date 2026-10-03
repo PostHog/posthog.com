@@ -127,7 +127,7 @@ For more info, you can read the [Experimentation user guide](/docs/user-guides/e
 
 [Feature flags](/docs/user-guides/feature-flags) are often used to turn new features on under certain conditions, so that you can test things with a certain [cohort](/docs/user-guides/cohorts) or user segment. But you can also use them globally, then leverage the flag as a kill switch to turn features off in the event of an emergency. 
 
-When [Phantom](/customers/phantom) started using PostHog, it couldn't deploy new updates or features to all users instantly. In Phantom's case this was because the product was a browser extension. Using Feature Flags as kill switches gave them a degree of control not normally available to such products. 
+If users cannot receive updates at once, use a feature flag as a kill switch. Turn off the feature while you fix the problem.
 
 ## 9. Track the performance of marketing campaigns
 
@@ -149,7 +149,7 @@ It's also great for marketing and website teams. For example, we know visitors c
 
 You can track any sort of event in PostHog, including failures or other sorts of errors. All you need to do is put an [action](/docs/data/actions) or [event](/docs/user-guides/events) next to the error, find some other unique identifier you can use - such as views of a /404 page.
 
-Tracking errors can be enormously useful for deciding where to invest engineering time, or when to prioritize areas of your product. [Phantom](https://posthog.com/customers/phantom), for example, used this to prioritize updates to their infrastructure by tracking failure rates for payments across their platform.
+Track failure events to find problems and decide which fixes to do first.
 
 ## 12. Watch users interact with your acquisition funnel
 
