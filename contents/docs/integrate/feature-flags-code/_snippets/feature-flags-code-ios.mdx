@@ -63,7 +63,11 @@ To handle this, you can use the `onFeatureFlags` callback to be notified when fl
 
 ```swift
 let subscription = PostHogSDK.shared.onFeatureFlags { loaded in
-    // feature flags are guaranteed to be available at this point
+    if loaded.errorsLoading {
+        // Loading failed, so the flags are the last known values, which can be empty.
+        // Fall back to your default experience if you need fresh values.
+        return
+    }
     if PostHogSDK.shared.isFeatureEnabled("flag-key") {
         // do something
     }
@@ -83,17 +87,23 @@ The callback receives a `PostHogFeatureFlagsLoaded` object with the following pr
 
 - `variants: [String: Any]`: The values of the enabled feature flags, keyed by flag key. A value is `true` for an enabled boolean flag, or the variant key for a multivariate flag.
 
-- `errorsLoading: Bool`: `true` if the latest attempt to load feature flags failed, for example because the device is offline. The flags and variants then hold the last known values, which can be empty.
+- `errorsLoading: Bool`: `true` if the latest attempt to load feature flags failed, for example because the device is offline. The flags and variants then hold the last known values, which can be empty – for example, on a fresh install with no [bootstrap values](/docs/feature-flags/bootstrapping). In that case, `isFeatureEnabled` returns `false` because the flag is unknown, not because PostHog evaluated it as disabled.
 
 On versions earlier than 3.89.0, observe the `PostHogSDK.didReceiveFeatureFlags` notification instead. Register the observer before calling `setup()`:
 
 ```swift
-NotificationCenter.default.addObserver(
-    self,
-    selector: #selector(receiveFeatureFlags),
-    name: PostHogSDK.didReceiveFeatureFlags,
-    object: nil
-)
+let observer = NotificationCenter.default.addObserver(
+    forName: PostHogSDK.didReceiveFeatureFlags,
+    object: nil,
+    queue: .main
+) { _ in
+    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+        // do something
+    }
+}
+
+// Later, to stop receiving updates
+NotificationCenter.default.removeObserver(observer)
 ```
 
 Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` method. This allows you to execute logic immediately after the flags are reloaded:
