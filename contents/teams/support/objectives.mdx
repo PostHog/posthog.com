@@ -1,5 +1,136 @@
-## Q3 2026
+## Q4 2026
 
+### Fix what customers feel most
+
+<details>
+<summary>Stop customers getting ignored: fewer SLA breaches, especially on escalations (<TeamMember name="Abigail Richardson" photo />)</summary>
+
+- **Rationale:** Q3 SLA attainment dropped to 81.2%, and enterprise first response went from ~7 hours to 29 hours, and a number of escalated tickets have been left too long. Some of this will be due to the change from Zendesk - but we need to do better.
+- **What we'll ship:** Team notifications for upcoming SLA breaches, call out teams with the tickets that are breached by the longest, a way of pulling breached escalated tickets back into the support queue so that the team can follow up, and a way of flagging tickets where customers are checking in on the ticket with no reply.
+- **We'll know we're successful when:** SLA attainment for Q4 is better than SLA attainment for Q3, response times for top customers are improving, and the average length of breached tickets is decreasing. 
+
+</details>
+
+<details>
+<summary>Give logged-out users a better support experience (<TeamMember name="Eleftheria Trivyzaki" photo />)</summary>
+
+- **Rationale:** Customers who can't log in get a preview of our reply and a button that makes them log in, which doesn't help if logging in is the problem.
+- **What we'll ship:** A logged-out experience where customers can read and reply without logging in, likely by using cross-channel replies so a ticket raised in one channel can be answered from another (i.e. widget to email). 
+- **We'll know we're successful when:** Logged-out customers can get help end-to-end without logging in, and the feedback about it stops.
+
+</details>
+
+<details>
+<summary>Make data deletion and retention tickets go away (<TeamMember name="Ben Lea" photo />)</summary>
+
+- **Rationale:** Deletion and retention are one of our biggest ticket sources, self-serve deletion doesn't work well.
+- **What we'll ship:** Ben will own the deletion and retention tickets. We will provide input into the owning team's self-serve deletion work, and make sure we have clear answers on the new retention model.
+- **We'll know we're successful when:** Deletion and retention tickets drop, and customers can delete their own data without us doing it for them.
+
+</details>
+
+<details>
+<summary>Spot data sync issues and tell customers before they write in (<TeamMember name="Kyle Swank" photo />)</summary>
+
+- **Rationale:** The warehouse sources team already spots sync issues and Tom's bot raises PRs for them, but nobody tells the affected customers.
+- **What we'll ship:** A way to pick up detected sync issues, find the affected customers, and either make it clearer in-app and/or raise proactive tickets on the customer's behalf.
+- **We'll know we're successful when:** We let customers know about sync issues before they contact us, and inbound sync tickets go down.
+
+</details>
+
+### Fight the AI slop
+
+<details>
+<summary>Deslop the Slop Before It Slops (<TeamMember name="Phillip Ramirez" photo />)</summary>
+
+- **Rationale:** AI agents draft and file tickets on a customer's behalf with no guidance on what a useful ticket contains, or how to make one readable by a human. 
+- **What we'll ship:** guidance and a skill that AI agents can use while drafting a ticket. We'll look to tackle verbosity in AI tickets by outlining an ideal ticket structure, steer agents to obtain information we might need (like links, errors, etc), and specific information (like what the user asked for, what they tried, and why they are asking support for help)
+- **We'll know we're successful when:** tickets submitted by AI agents are concise and useful, without needing to ask for more information as a first step.
+
+</details>
+
+<details>
+<summary>Use AI to make AI-written tickets less tiring to read (<TeamMember name="Ben Haynes" photo />)</summary>
+
+- **Rationale:** Plenty of the tickets we receive are AI-written text pasted into the support sidebar: long, with unnecessary questions or statements, missing error messages, product areas or repro steps. Reading them all day is slow and wears the team down.
+- **What we'll ship:** Tooling in HogDesk that uses AI to cut received slop tickets down to what the customer actually needs, and flag what's missing.
+- **We'll know we're successful when:** The team spends less time and energy reading AI-written tickets.
+
+</details>
+
+<details>
+<summary>Let customers show us the problem with feedback recordings (<TeamMember name="Luke Belton" photo />)</summary>
+
+- **Rationale:** AI fatigue is growing, and customers respond well to a human conversation. A recording tells us more than an AI summary.
+- **What we'll ship:** A way for customers to record and attach a short Loom-style video of their problem when raising a ticket.
+- **We'll know we're successful when:** we are receiving tickets from customers with recordings showing us their issues.
+
+</details>
+
+### Make self-serve support actually good
+
+<details>
+<summary>Let customers debug their own replays with PostHog AI (<TeamMember name="Christian Rafferty" photo />)</summary>
+
+- **Rationale:** customers frequently ask why their replay looks incorrect. This involves us inspecting the customer's website or tracing through their JSON by hand, which could be automated.
+- **What we'll ship:** A "Debug this replay" button that opens PostHog AI with the replay's JSON attached, new skills to read the JSON effectively, and the diagnosis is saved back to the replay to help all users in the project. We'll do a flagged rollout starting with ourselves.
+- **We'll know we're successful when:** customers are using this functionality and Replay ticket numbers are reduced.
+
+</details>
+
+<details>
+<summary>Improve docs from a support perspective (<TeamMember name="Alin-emanuel Cîciu" photo />)</summary>
+
+- **Rationale:** We've put in several docs updates recently where the information was wrong or out of date, and customers' AI agents rely on our docs to help them. We also lost support's feedback loop into docs when we moved from Zendesk to PostHog support.
+- **What we'll ship:** fixes and improvements to the docs and the workflows/processes that update them. We need an understanding of what's allowing docs to get out of date, and a way to comb through the docs and find where they're now wrong. We'll also look to reinstate support feedback into the docs team, and consider self-driving docs updates off the back of support tickets.
+- **We'll know we're successful when:** We know which docs are wrong and why, support feedback reaches the docs team again, and tickets caused by outdated docs go down.
+
+</details>
+
+<details>
+<summary>Understand the quality of support customers get from PostHog AI (<TeamMember name="Christiaan Hendriksen" photo /> and <TeamMember name="Luke Belton" photo />)</summary>
+
+- **Rationale:** PostHog AI is already acting as first-line support, but it's a black box. We don't know how much support it's doing, the quality of those customer interactions, or where they're getting stuck.
+- **What we'll ship:** A plan for what to capture (how many conversations are support questions, common topics, wrong or suboptimal recommendations, tickets caused by earlier AI advice, frustrated conversations, etc), run a time-boxed 2–3 week deep dive once the new PostHog AI harness is live, then use the findings to decide what ownership should look like.
+- **We'll know we're successful when:** We have a way of surfacing analysis and customer-related feedback from AI conversations, and gaps are reaching SMEs as skill and docs fixes.
+
+</details>
+
+### Tooling to make support better and faster
+
+<details>
+<summary>Build a PostHog CLI for support (<TeamMember name="Xander Jones" photo />)</summary>
+
+- **Rationale:** There are repeated tasks that support perform which are currently being done via MCP, as a one-off script, or via an AI session. A deterministic, tested CLI would be faster, do the same thing reliably every time, and save us tokens.
+- **What we'll ship:** Xander's existing CLI tooling made generic, with robust testing, so the team can add targeted tools to it, starting with bulk property pruning and smoother impersonation.
+- **We'll know we're successful when:** The team uses it for repeat tasks instead of scripts or AI sessions
+
+</details>
+
+<details>
+<summary>Give our support agents a memory of tickets (<TeamMember name="Steven Shults" photo />)</summary>
+
+- **Rationale:** Our agents learn things on every ticket, but they write to sandboxes that get wiped on restart, so knowledge never builds up and the same mistakes repeat across agents. Giving them more shared context means fewer iterations, and faster resolution, even if the investigation is continued by a different team member.
+- **What we'll ship:** A shared, persistent ticket memory. Notes would be stored alongside each ticket, corrections that every agent learns from, and personal preferences per engineer, as well as notes stored in a shared place for knowledge that can be applied to later tickets.
+- **We'll know we're successful when:** AI agents build on earlier investigations and corrections instead of repeating them, and the team spends less time iterating with agents on each ticket.
+
+</details>
+
+
+<details>
+<summary>Improve incident handling for support and experience for Slack customers (<TeamMember name="Chris Shine" photo />)</summary>
+
+- **Rationale:** More efficient incident handling makes customers more happy.
+- **What we'll ship:** Better automatic identification and tagging for tickets related to an ongoing incident. An easy way to bulk assign incident tickets (or maybe auto-assign to the watcher), create a standard response draft for all tickets related to the incident, link out to the incident Slack channel, and look into syncing the support watcher with incident.io. Look into the use of Sherlock and HogDesk.
+- **We'll know we're successful when:** Incident tickets are tagged automatically and accurately, anyone can find and easily answer them from one place, and Slack customers understand when an outage would affect raising tickets.
+
+</details>
+
+
+## Previous goals
+
+<details>
+<summary>Q3 2026</summary>
 
 The big shift this quarter is the switchover from Zendesk to conversations, so every goal below assumes we are working in conversations. SLA attainment will be harder to measure and easy to let slip, so our overriding aim is to protect the customer experience through the transition: hold response times and SLA attainment as steady as we can, and keep CSAT high. Success this quarter looks like customers barely noticing the switchover.
 
@@ -122,8 +253,8 @@ The big shift this quarter is the switchover from Zendesk to conversations, so e
 </details>
 
 
-## Previous goals
- 
+</details>
+
 <details>
 <summary>Q2 2026</summary>
 This quarter we're driving SLA attainment and response times in one direction: up. We want consistent week-on-week improvement, with our Q2 average beating Q1. Every goal below is pointed at making that happen — through deeper product knowledge, faster investigations, and fewer tickets raised in the first place.
