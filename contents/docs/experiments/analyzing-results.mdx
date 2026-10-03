@@ -115,7 +115,7 @@ When you change the baseline, all statistical comparisons – delta, confidence 
 
 Click on any variant in the delta chart to access detailed results. This opens a panel showing the same statistics as the hover popup, plus a **View recordings** button.
 
-Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
+Click **View recordings** to open the experiment's **Recordings** tab with the variant and the metric already selected. Click the caret next to the button to select a different group of sessions, such as the people who didn't finish the funnel, or every recording of that variant. See [watching session recordings](#watching-session-recordings) below.
 
 ### Time series analysis
 
@@ -154,6 +154,31 @@ Use this chart to:
 1. **Check if results are stable**: Look for results that stay consistent over several days. If your results keep flip-flopping between positive and negative, you might need more time or there could be an issue with your experiment.
 2. **Spot unusual patterns**: Find spikes or dips that might be skewing your overall results. For example, a single day with unusual traffic could make your entire experiment look significant when it's actually not.
 3. **Decide when to stop**: When the confidence interval narrows and results stay consistent for several days, you have enough data to make a decision.
+
+## Watching session recordings
+
+The numbers tell you what changed. [Session recordings](/docs/session-replay) tell you why. Each experiment has a **Recordings** tab that shows the sessions of the people in the test.
+
+PostHog selects these people from their [exposures](/docs/experiments/exposures), and not from a filter on your metric events. The list starts at each person's first exposure. This includes the people who never fired a metric event, which is often the group that explains a variant that lost.
+
+Use the controls at the top of the tab to make the list smaller:
+
+- **Variant** – Shows the people who saw one variant.
+- **All sessions** or **Exposed in session** – **All sessions** shows every session of an exposed person, from the first exposure onward. **Exposed in session** shows only the sessions in which PostHog captured the exposure. Use **Exposed in session** when you want to watch the moment a person entered the experiment.
+- **Metric filter** – Shows the sessions that fired the events of one of your metrics. For a funnel metric, you can show the people who finished the funnel, or the people who didn't finish it.
+
+When you open a recording from this tab, the player starts approximately one second before the exposure. You don't have to search for the moment the person entered the experiment.
+
+> **Note:** The metric filter matches the events in a session. The experiment analysis counts differently – it applies the [funnel attribution type](/docs/product-analytics/funnels#attribution-types), for example. Use the recordings to understand behavior, and the results above to read the numbers.
+
+### If the list is empty
+
+The tab tells you which of these things happened:
+
+- No session matched your filter in the period that PostHog checked.
+- The variants behaved the same, so there is nothing to compare.
+- Your [replay settings](/docs/session-replay/how-to-control-which-sessions-you-record) kept no recording of the matched sessions.
+- The exposures carry no session. An experiment that enrolls people from a backend SDK sends its exposure events without a session ID. If your client events carry the feature flag property, PostHog matches recordings with those events instead. If they don't, there is nothing to match, and more time will not change this. See [exposures](/docs/experiments/exposures).
 
 ## Interpreting different scenarios
 
