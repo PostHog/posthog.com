@@ -76,9 +76,16 @@ function getRedirectSources() {
     return [...(vercelConfig.redirects || []), ...(vercelConfig.rewrites || [])].map((entry) => entry.source)
 }
 
+const OPTIONAL_MD_SUFFIX = ':ext(\\.md)?'
+
 function matchesRedirect(url, sources) {
     return sources.some((source) => {
-        const dynamicStart = Math.min(...[source.indexOf('/:'), source.indexOf('(')].filter((index) => index !== -1))
+        if (source.endsWith(OPTIONAL_MD_SUFFIX)) {
+            // Vercel matches this source on the base path and its .md form only, never on a descendant
+            const base = source.slice(0, -OPTIONAL_MD_SUFFIX.length)
+            return url === base || url === `${base}.md`
+        }
+        const dynamicStart = Math.min(...[source.indexOf(':'), source.indexOf('(')].filter((index) => index !== -1))
         if (dynamicStart !== Infinity) {
             const prefix = source.slice(0, dynamicStart)
             return prefix !== '' && (url === prefix || url.startsWith(prefix.endsWith('/') ? prefix : prefix + '/'))
@@ -124,7 +131,7 @@ function shouldExclude(url) {
         return true
     }
     const base = normalizeUrl(url)
-    if (CONFIG.EXCLUDE_PATTERNS.some((pattern) => base.includes(pattern))) {
+    if (CONFIG.EXCLUDE_PATTERNS.some((pattern) => base.startsWith(pattern))) {
         return true
     }
     return CONFIG.EXCLUDED_EXTENSIONS.some((extension) => base.endsWith(extension))
