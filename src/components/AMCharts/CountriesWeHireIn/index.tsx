@@ -13,7 +13,6 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Iran: { code: 'IR', reason: 'sanctions' },
     'North Korea': { code: 'KP', reason: 'sanctions' },
     Russia: { code: 'RU', reason: 'sanctions' },
-    Syria: { code: 'SY', reason: 'sanctions' },
 
     // High employer costs (EOR not available)
     Belgium: { code: 'BE', reason: 'high-cost' },
@@ -89,6 +88,7 @@ const countryRestrictions: { [key: string]: CountryRestriction } = {
     Thailand: { code: 'TH', reason: 'timezone' },
     'Timor-Leste': { code: 'TL', reason: 'timezone' },
     Tonga: { code: 'TO', reason: 'timezone' },
+    Syria: { code: 'SY', reason: 'timezone' },
     Turkey: { code: 'TR', reason: 'timezone' },
     Turkmenistan: { code: 'TM', reason: 'timezone' },
     Tuvalu: { code: 'TV', reason: 'timezone' },
