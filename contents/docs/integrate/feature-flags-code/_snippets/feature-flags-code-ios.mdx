@@ -77,7 +77,7 @@ let subscription = PostHogSDK.shared.onFeatureFlags { loaded in
 subscription.unsubscribe()
 ```
 
-The callback runs on the main thread. It's called when flags load – including from [bootstrap values](/docs/feature-flags/bootstrapping) – and again whenever they change, for example after `reloadFeatureFlags()`, `identify()`, or `reset()`. If flags have already loaded when you register, it's called shortly afterwards with the current values. You can register before calling `setup()`.
+The callback runs on the main thread. It's called when flags load – including from [bootstrap values](/docs/feature-flags/bootstrapping) – and again each time they're reloaded, for example after `reloadFeatureFlags()`, `reset()`, or an `identify()` or `group()` call that changes the distinct ID or group. A reload doesn't have to change any values, so treat each call as "flags may have changed". If flags have already loaded when you register, it's called shortly afterwards with the current values. You can register before calling `setup()`.
 
 #### Callback parameters
 
