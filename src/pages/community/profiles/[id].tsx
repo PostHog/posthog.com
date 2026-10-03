@@ -336,6 +336,38 @@ const Input = ({
     )
 }
 
+const cropAvatarToSquare = (file: File, position: { x: number; y: number }): Promise<File> => {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => {
+            const size = 400
+            const canvas = document.createElement('canvas')
+            canvas.width = size
+            canvas.height = size
+            const ctx = canvas.getContext('2d')
+            if (!ctx) {
+                reject(new Error('Canvas not supported'))
+                return
+            }
+            const scale = Math.max(size / img.naturalWidth, size / img.naturalHeight)
+            const drawWidth = img.naturalWidth * scale
+            const drawHeight = img.naturalHeight * scale
+            const x = (size - drawWidth) * (position.x / 100)
+            const y = (size - drawHeight) * (position.y / 100)
+            ctx.drawImage(img, x, y, drawWidth, drawHeight)
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    reject(new Error('Failed to crop avatar'))
+                    return
+                }
+                resolve(new File([blob], file.name || 'avatar.png', { type: 'image/png' }))
+            }, 'image/png')
+        }
+        img.onerror = reject
+        img.src = URL.createObjectURL(file)
+    })
+}
+
 const AvatarBlock = ({
     profile,
     isEditing,
@@ -353,17 +385,48 @@ const AvatarBlock = ({
 }) => {
     const { isModerator } = useUser()
     const inputRef = useRef<HTMLInputElement>(null)
+    const imgRef = useRef<HTMLImageElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const dragStateRef = useRef<{ x: number; y: number; posX: number; posY: number } | null>(null)
     const [imageURL, setImageURL] = useState(values?.avatar)
+    const avatarPosition = values.avatarPosition || { x: 50, y: 50 }
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         const file = e.target.files[0]
+        if (!file) return
         setFieldValue('avatar', file)
+        setFieldValue('avatarPosition', { x: 50, y: 50 })
         const reader = new FileReader()
         reader.onloadend = () => {
             reader?.result && setImageURL(reader.result)
         }
 
         reader.readAsDataURL(file)
+    }
+
+    const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+        dragStateRef.current = { x: e.clientX, y: e.clientY, posX: avatarPosition.x, posY: avatarPosition.y }
+    }
+
+    const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (!dragStateRef.current || !imgRef.current || !containerRef.current) return
+        const containerWidth = containerRef.current.clientWidth
+        const containerHeight = containerRef.current.clientHeight
+        const scale = Math.max(
+            containerWidth / imgRef.current.naturalWidth,
+            containerHeight / imgRef.current.naturalHeight
+        )
+        const overflowX = imgRef.current.naturalWidth * scale - containerWidth
+        const overflowY = imgRef.current.naturalHeight * scale - containerHeight
+        const dx = e.clientX - dragStateRef.current.x
+        const dy = e.clientY - dragStateRef.current.y
+        const newX = overflowX > 0 ? Math.min(100, Math.max(0, dragStateRef.current.posX - (dx / overflowX) * 100)) : 50
+        const newY = overflowY > 0 ? Math.min(100, Math.max(0, dragStateRef.current.posY - (dy / overflowY) * 100)) : 50
+        setFieldValue('avatarPosition', { x: newX, y: newY })
+    }
+
+    const handlePointerUp = () => {
+        dragStateRef.current = null
     }
 
     useEffect(() => {
@@ -378,17 +441,17 @@ const AvatarBlock = ({
         <div className="relative flex flex-col items-center mb-4 bg-primary rounded-md overflow-hidden border border-primary">
             {isEditing && (
                 <div className="absolute right-0 top-0 flex items-center">
-                    <div className="relative p-2 border-l border-b border-primary rounded-bl-md bg-primary overflow-hidden">
+                    <label className="relative p-2 border-l border-b border-primary rounded-bl-md bg-primary overflow-hidden cursor-pointer block">
                         <IconUpload className="size-5" />
                         <input
                             ref={inputRef}
                             onChange={handleChange}
                             accept=".jpg, .png, .gif, .jpeg"
-                            className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer z-10"
+                            className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
                             name="avatar"
                             type="file"
                         />
-                    </div>
+                    </label>
                     {imageURL && !isModerator && (
                         <button
                             onClick={() => setFieldValue('avatar', null)}
@@ -399,7 +462,18 @@ const AvatarBlock = ({
                     )}
                 </div>
             )}
-            <Avatar className="w-full border-b border-primary" src={imageURL} color={profile.color} />
+            <Avatar
+                className="w-full border-b border-primary"
+                src={imageURL}
+                color={profile.color}
+                position={avatarPosition}
+                imgRef={imgRef}
+                containerRef={containerRef}
+                draggable={isEditing && !!imageURL}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+            />
             {isEditing ? (
                 <div className="p-3 w-full space-y-3">
                     <Input
@@ -980,11 +1054,38 @@ const ProfileSkeleton = () => {
     )
 }
 
-const Avatar = (props: { className?: string; src?: string; color?: string }) => {
+const Avatar = (props: {
+    className?: string
+    src?: string
+    color?: string
+    position?: { x: number; y: number }
+    imgRef?: React.RefObject<HTMLImageElement>
+    containerRef?: React.RefObject<HTMLDivElement>
+    draggable?: boolean
+    onPointerDown?: (e: React.PointerEvent<HTMLDivElement>) => void
+    onPointerMove?: (e: React.PointerEvent<HTMLDivElement>) => void
+    onPointerUp?: (e: React.PointerEvent<HTMLDivElement>) => void
+}) => {
     return (
-        <div className={`overflow-hidden aspect-square bg-${props.color} ${props.className}`}>
+        <div
+            ref={props.containerRef}
+            className={`overflow-hidden aspect-square bg-${props.color} ${props.className} ${
+                props.draggable ? 'cursor-move touch-none' : ''
+            }`}
+            onPointerDown={props.draggable ? props.onPointerDown : undefined}
+            onPointerMove={props.draggable ? props.onPointerMove : undefined}
+            onPointerUp={props.draggable ? props.onPointerUp : undefined}
+            onPointerLeave={props.draggable ? props.onPointerUp : undefined}
+        >
             {props.src ? (
-                <img className="w-full object-fill" alt="" src={props.src} />
+                <img
+                    ref={props.imgRef}
+                    className="w-full h-full object-cover pointer-events-none select-none"
+                    style={props.position ? { objectPosition: `${props.position.x}% ${props.position.y}%` } : undefined}
+                    alt=""
+                    draggable={false}
+                    src={props.src}
+                />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1438,6 +1539,7 @@ export default function ProfilePage({ params }: PageProps) {
             github: profile?.github,
             discord: profile?.discord,
             avatar: getAvatarURL(profile),
+            avatarPosition: { x: 50, y: 50 },
             firstName: profile?.firstName,
             lastName: profile?.lastName,
             location: profile?.location,
@@ -1455,7 +1557,7 @@ export default function ProfilePage({ params }: PageProps) {
             tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
             userRole: getUserRoleId(profile),
         },
-        onSubmit: async ({ avatar, images, userRole, ...values }) => {
+        onSubmit: async ({ avatar, avatarPosition, images, userRole, ...values }) => {
             try {
                 posthog?.capture('squeak profile update start', {
                     profileId: id,
@@ -1501,8 +1603,9 @@ export default function ProfilePage({ params }: PageProps) {
                 let image = avatar
 
                 if (avatar && typeof avatar === 'object') {
+                    const croppedAvatar = await cropAvatarToSquare(avatar, avatarPosition || { x: 50, y: 50 })
                     const formData = new FormData()
-                    formData.append('files', avatar)
+                    formData.append('files', croppedAvatar)
 
                     const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
                         method: 'POST',
