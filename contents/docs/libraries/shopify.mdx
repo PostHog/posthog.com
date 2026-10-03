@@ -28,6 +28,15 @@ This guide walks you through integrating PostHog into your Shopify store using a
 
 > To confirm PostHog is configured correctly, visit your store and then check if the events from your session appear in the [PostHog activity tab](https://us.posthog.com/events). This may take a few minutes.
 
+### If your events do not appear
+
+If your session does not appear in the activity tab, check these two causes first:
+
+- **The token is for a different project.** The capture endpoint accepts any valid project token. If you use the token of another project, your requests succeed, but the events go to that project. Compare the token in `theme.liquid` with the token in the ["Project variables" section of your project settings](https://app.posthog.com/settings/project#variables).
+- **A third-party app sends the events.** If you use an unofficial Shopify app instead of the snippet, that app controls which events it sends and which token it sends them with. We cannot support these apps. Install the snippet manually with the steps above, then test again.
+
+For all other causes, such as ad blockers or a misconfigured library, see [Product analytics troubleshooting](/docs/product-analytics/troubleshooting#why-are-events-not-appearing-in-my-project).
+
 ### Enabling heatmap
 
 The heatmap won't work on Shopify out of the box because Shopify has very strict CSP headers, particularly `frame-ancestors`.
