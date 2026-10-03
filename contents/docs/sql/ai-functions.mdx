@@ -1,5 +1,5 @@
 ---
-title: Classifying rows with AI
+title: SQL AI functions
 sidebar: Docs
 showTitle: true
 availability:
@@ -7,6 +7,10 @@ availability:
     selfServe: full
     enterprise: full
 ---
+
+PostHog SQL includes AI functions that classify query rows and generate embeddings for semantic search.
+
+## Classifying rows with AI
 
 The `jev()` and `decide()` SQL functions use a small AI model to answer a question about each row of a query. You can use them to tag support messages, sort feedback into categories, or flag events that match a description, without writing the rules yourself.
 
@@ -41,13 +45,13 @@ ORDER BY feedback DESC
 
 `decide()` works the same way and also takes a `model` argument, either `'jeeves'` (the default, and what `jev()` uses) or `'jevk5'`. For example, `decide(message, 'Is this spam?', model := 'jevk5')`.
 
-## Where your data goes
+### Where your data goes
 
 PostHog builds and hosts both models. They run on PostHog's own servers in the same region as your project, so your data is not sent to a third-party AI provider such as OpenAI or Anthropic. If your project is in the EU, the evaluation also stays in the EU.
 
-Jeeves, the default model, is open source. Its code, training data and benchmark results are in the [PostHog/jeeves](https://github.com/PostHog/jeeves) repository.
+Jeeves, the default model, is open source. Its code, training data, and benchmark results are in the [PostHog/jeeves](https://github.com/PostHog/jeeves) repository.
 
-## Limits
+### Limits
 
 - Use the function as a named column in a `SELECT`. To filter or sort on its result, wrap it in a subquery and filter in the outer query.
 - Each query has two limits, and the error tells you the current value of whichever one you hit:
@@ -56,6 +60,34 @@ Jeeves, the default model, is open source. Its code, training data and benchmark
 - Each input can be up to 8 KiB of text. Convert other types with `toString()`. Empty (`NULL`) inputs are skipped.
 - Identical inputs with the same question are only evaluated once per query.
 
-## Pricing
+### Pricing
 
 Each evaluation uses [PostHog AI](/docs/posthog-ai) credits and appears under PostHog AI on your billing page. If your organization runs out of credits, the query stops with an error that says so.
+
+## Find similar text with embeddings
+
+Use `embedText()` to convert text into an embedding, which is an array of numbers that represents its meaning. Pair it with `cosineDistance()` to find stored text with a similar meaning. A lower distance means a closer match.
+
+The function has two arguments:
+
+- `text` - The text to embed.
+- `model_name` - The embedding model. Use `text-embedding-3-small-1536` for 1,536 values or `text-embedding-3-large-3072` for 3,072 values.
+
+Both arguments must be string literals. You can't pass a column or another expression because PostHog generates the embedding when it compiles the query.
+
+For example, this query finds documents that are similar to a natural-language description:
+
+```sql
+SELECT
+    content,
+    cosineDistance(
+        embedding,
+        embedText('users seeing errors during checkout', 'text-embedding-3-small-1536')
+    ) AS distance
+FROM document_embeddings
+WHERE model_name = 'text-embedding-3-small-1536'
+ORDER BY distance ASC
+LIMIT 10
+```
+
+The model in `embedText()` must match the model for the stored embeddings. You can't compare embeddings from models that return different numbers of values.
