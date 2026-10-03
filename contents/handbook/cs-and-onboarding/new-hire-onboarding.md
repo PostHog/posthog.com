@@ -26,6 +26,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 **Focus on:**
 
 - Setting up the day-to-day tools you'll be using - Vitally, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
+- Joining the `cs@posthog.com` [Google Group](https://groups.google.com/a/posthog.com/g/cs/about) - it's self-serve, and it's how you get the emails that go out to the CS team. Don't mark them as spam, Google will quietly unsubscribe you.
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
