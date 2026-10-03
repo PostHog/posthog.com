@@ -22,8 +22,29 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 - Set the `Host` header to the PostHog domain (e.g., `Host: us.i.posthog.com`). Without this, you'll get 401 errors.
 - Allow `GET` and `POST`** on all paths.
 - Support 64MB request bodies, session recordings can be large.
-- Forward `X-Forwarded-For` to preserve client IPs for geolocation.
+- Forward `X-Forwarded-For` to preserve client IP addresses for geolocation. See [client IP resolution](#client-ip-resolution).
 - Avoid obvious paths like `/analytics`, `/posthog`, or `/ph`. Use `/e` or `/ingest` instead.
+
+### Client IP resolution
+
+PostHog sets country, region, and city from the client IP address of the request. It resolves that address from the first of these headers that holds an IP address:
+
+1. `X-Forwarded-For` (leftmost address)
+2. `Forwarded`
+3. `X-Real-Ip`
+4. `Fly-Client-Ip`
+5. `True-Client-Ip`
+6. `CF-Connecting-Ip`
+7. `CloudFront-Viewer-Address`
+
+If none of them is present, PostHog uses the address of the connection.
+
+Two results follow from this order:
+
+- PostHog does not read platform geolocation headers, such as `x-vercel-ip-city` or `cloudfront-viewer-country`. Only the IP address counts.
+- A proxy that puts its own address in `X-Forwarded-For` hides the visitor's address, even when a later header still holds it.
+
+An event that already has an `$ip` property keeps that value. PostHog uses the request IP address only when the event has no `$ip`.
 
 ### SDK configuration
 
@@ -110,6 +131,8 @@ posthog.init('<ph_project_token>', {
 ### Wrong geolocation / same location for all users
 
 Your proxy isn't forwarding client IPs. Set the `X-Forwarded-For` header to the original client IP. If behind multiple proxies (e.g., Cloudflare + your proxy), ensure you're forwarding the original IP, not an intermediate one.
+
+To confirm, open a recent event in the [activity feed](https://us.posthog.com/activity/explore) and read its `$ip` property. If `$ip` is the same for visitors in different places, it is a proxy IP address. See [client IP resolution](#client-ip-resolution) for the header order and the `$ip` alternative.
 
 ### Large recordings failing
 
