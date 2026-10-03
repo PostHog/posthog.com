@@ -189,4 +189,4 @@ Working at PostHog is a grab bag of weird, fun, intense, goofy, and hard work. A
 
 The weird stuff isn't a distraction from the real work because it’s how we do the real work. Being genuine and being effective aren't at odds. If anything, the customer who got a crocheted hedgehog is probably more likely to take your call about trying that new product we launched than the one who got a quarterly business review PDF.
 
-If you think this sounds like a place you'd want to work, [we're always hiring](/careers).
+If you think this sounds like a place you'd want to work, we're always hiring. Our [NA](/careers/technical-customer-success-manager-americas) and [EU](/careers/technical-customer-success-manager-emea) TCSM roles are open now.
