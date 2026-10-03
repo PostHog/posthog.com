@@ -181,6 +181,27 @@ In the above code, we capture the event with details like `userID`, `order_numbe
 
 We recommend _only_ using a Shopify pixel for tracking conversions. If using a pixel for other events (like `collection_viewed` or `product_viewed`), you may see CORS errors when viewing those webpages. While it doesn't affect the functionality of the pixel, everything else can be done using PostHog installed globally on your site.
 
+#### Why PostHog records fewer checkouts than Shopify
+
+The pixel captures events in the shopper's browser, and browsers lose some of those events. If you compare a `checkout_completed` count in PostHog with your Shopify order count, PostHog shows fewer orders. Three causes explain the gap:
+
+- **The browser blocks the request.** Ad blockers and privacy browsers block requests to PostHog, and client-side code cannot prevent this. [Set up a reverse proxy](/docs/advanced/proxy) to send the events through your own domain instead.
+- **The shopper does not give consent.** Shopify loads a custom pixel only after the shopper grants every permission that the pixel declares as required. Orders from shoppers who decline the banner produce no event at all. To see which permissions your pixel declares, go to **Settings** > **Customer events**, open the **Custom pixels** tab, and select your pixel. Shopify's [pixel privacy docs](https://shopify.dev/docs/api/web-pixels-api/pixel-privacy) explain the setting.
+- **The shopper leaves the page too early.** The pixel downloads the PostHog library, and then it sends the event. A shopper who closes the tab immediately after the order can leave before both steps finish.
+
+You cannot remove all of this loss. A gap between a few percent and about a third of your orders is consistent with these three causes. A gap near 100% is a different problem, because it means the pixel never runs. See [product analytics troubleshooting](/docs/product-analytics/troubleshooting#why-are-events-not-appearing-in-my-project) for that case.
+
+PostHog has no "enable `sendBeacon`" option, so do not look for one. PostHog already sends the queued events with [`navigator.sendBeacon()`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) when the page unloads, and this needs no configuration. A beacon returns no response body, so PostHog uses a beacon only for requests that need no response. The `transport` option in the [JavaScript config](/docs/libraries/js/config) selects the transport for a single request, and it does not reduce the loss above.
+
+#### Reconciling with your Shopify orders
+
+Add a [Shopify data warehouse source](/docs/cdp/sources/shopify) when you need a complete order count. The source reads the Shopify Admin API on a schedule, so ad blockers, consent, and page unloads cannot affect it. Select the **Orders** object to sync every order, and **Abandoned checkouts** to sync the checkouts that did not convert. The `read_orders` scope is enough for order data.
+
+The two paths answer different questions, so use both:
+
+- The pixel shows what the shopper did before the order, and it joins the order to the rest of their session.
+- The source shows how many orders you really have, and what each order was worth.
+
 #### Tracking items added to the cart
 
 To track _which_ product a user adds to their cart, we can use a `data-ph-capture-attribute` on the 'Add to cart' button (generally in `product.liquid` in Shopify). While this still requires adding code, it's less involved than creating a custom event. For example, capturing the product title and price (divided by 100) looks like this:
