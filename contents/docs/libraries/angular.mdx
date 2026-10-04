@@ -48,7 +48,7 @@ PostHog automatically tracks your pageviews by hooking up to the browser's `navi
 
 To [capture custom events](/docs/product-analytics/capture-events), import `posthog` and call `posthog.capture()`. Below is an example of how to do this in a component:
 
-```typescript file=app.component.ts
+```typescript file="app.component.ts"
 import { Component } from '@angular/core';
 import posthog from 'posthog-js'
 
@@ -74,7 +74,7 @@ The recorder tool attempts to detect when an Angular zone is present and avoid t
 - If you followed the installation instructions for Angular v17 and above, you don't need to do anything. 
 - If you followed the installation instructions for Angular v16 and below and you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
 
-```ts file=posthog.service.ts
+```ts file="posthog.service.ts"
 import { Injectable } from '@angular/core';
 import posthog from 'posthog-js'
 
@@ -102,7 +102,7 @@ To use PostHog with Angular server-side rendering (SSR), you need to:
 
 Update your `posthog.service.ts` to restrict the initialization of the PostHog web JS client to the client-side. The web SDK uses methods that are not available on the server side, so we need to check if we're on the client side before initializing PostHog.
 
-```ts file=posthog.service.ts focusOnLines=5-21
+```ts file="posthog.service.ts" focusOnLines="5-21"
 import { Injectable, NgZone, Inject } from "@angular/core";
 import posthog from "posthog-js";
 import { environment } from "../../environments/environment";
@@ -145,7 +145,7 @@ First, install the `posthog-node` package to run on the server side.
 
 Then, add the following code to the `server.ts` file:
 
-```ts file=server.ts
+```ts file="server.ts"
 // src/server.ts
 
 import { environment } from './environments/environment';

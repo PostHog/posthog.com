@@ -882,7 +882,7 @@ fieldset {
         @apply mt-4;
     }
 
-    code:not('.article-content-ignore') {
+    code:not(.article-content-ignore) {
         @apply font-code font-medium text-sm border border-primary bg-accent  rounded-sm px-1 py-0.5;
     }
 
@@ -1382,13 +1382,6 @@ body.dark {
     }
 }
 
-.contributor-images > .gatsby-image-wrapper {
-    height: 50px;
-    width: 50px;
-
-    @apply rounded m-1;
-}
-
 .appearance-none {
     appearance: none;
     -webkit-appearance: none;
@@ -1417,119 +1410,6 @@ body.dark {
     &.rc-slider-mark-text-active {
         @apply text-secondary font-bold;
     }
-}
-
-/* Slider base styles */
-.slick-slider {
-    position: relative;
-
-    display: block;
-    box-sizing: border-box;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -ms-touch-action: pan-y;
-    touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.slick-list {
-    @apply relative block overflow-hidden m-0 p-0;
-
-    button.active {
-        span {
-            @apply opacity-100;
-        }
-    }
-}
-.slick-list:focus {
-    outline: none;
-}
-.slick-list.dragging {
-    cursor: pointer;
-    cursor: hand;
-}
-
-.slick-slider .slick-track,
-.slick-slider .slick-list {
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.about-nav {
-    .slick-track {
-        position: relative;
-        top: 0;
-        left: 0;
-
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-
-        > div:first-child {
-            @apply pl-4;
-        }
-
-        > div:last-child {
-            @apply pr-4;
-        }
-    }
-    .slick-track:before,
-    .slick-track:after {
-        display: table;
-
-        content: '';
-    }
-    .slick-track:after {
-        clear: both;
-    }
-    .slick-loading .slick-track {
-        visibility: hidden;
-    }
-}
-
-.slick-slide {
-    @apply pt-4 mdlg:pt-6 lg:pt-8 xl:pt-10 hidden float-left h-full min-h-[1px];
-
-    > div {
-        @apply h-full;
-    }
-}
-[dir='rtl'] .slick-slide {
-    float: right;
-}
-.slick-slide img {
-    display: block;
-}
-.slick-slide.slick-loading img {
-    display: none;
-}
-.slick-slide.dragging img {
-    pointer-events: none;
-}
-.slick-initialized .slick-slide {
-    display: block;
-}
-.slick-loading .slick-slide {
-    visibility: hidden;
-}
-.slick-vertical .slick-slide {
-    display: block;
-
-    height: auto;
-
-    border: 1px solid transparent;
-}
-.slick-arrow.slick-hidden {
-    display: none;
 }
 
 .company-submenu-item-container {
@@ -1943,40 +1823,6 @@ body.dark {
     }
 }
 
-.tutorials-slider .slick-list {
-    overflow: visible;
-
-    .slick-slide:last-of-type {
-        > div > div {
-            border-right: 0px;
-        }
-    }
-}
-
-.home-slider-buttons {
-    .slick-list {
-        @apply overflow-visible;
-    }
-    .slick-track {
-        @apply flex;
-        & > div {
-            @apply h-[inherit];
-        }
-    }
-}
-
-.home-slider {
-    .slick-slide {
-        @apply overflow-hidden;
-    }
-    .slick-track {
-        @apply flex;
-        & > div {
-            @apply h-[inherit];
-        }
-    }
-}
-
 .docsearch-no-label {
     @apply -mr-3;
     .DocSearch-Button-Keys {
@@ -2027,36 +1873,6 @@ body.dark {
         > ul {
             grid-column: 2 / span 2;
         }
-    }
-}
-
-.product-hogs-slider {
-    .slick-list {
-        @apply -mt-16 md:-mt-20 -mb-8 md:mb-0;
-    }
-    .slick-track {
-        @apply flex items-end;
-        .slick-slide {
-            @apply -ml-12;
-        }
-    }
-}
-
-.about-nav .slick-track,
-.careers-nav .slick-track,
-.product-nav .slick-track {
-    @apply md:!flex md:!justify-center md:!w-auto md:!transform-none;
-}
-
-.internal-nav-slider {
-    .slick-slide {
-        @apply p-0;
-        > div {
-            @apply flex;
-        }
-    }
-    .slick-track {
-        @apply !flex;
     }
 }
 
@@ -2225,7 +2041,9 @@ li.squeak-left-border {
 .company-name-enter-active {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 100ms, transform 250ms;
+    transition:
+        opacity 100ms,
+        transform 250ms;
 }
 .company-name-exit {
     opacity: 1;
@@ -2234,13 +2052,17 @@ li.squeak-left-border {
 .company-name-exit-active {
     opacity: 0;
     transform: translateY(-100%);
-    transition: opacity 500ms, transform 500ms;
+    transition:
+        opacity 500ms,
+        transform 500ms;
 }
 
 .slide-1,
 .slide-2,
 .slide-3 {
-    transition: transform 0.75s ease-in-out, opacity 0.75s ease-in-out;
+    transition:
+        transform 0.75s ease-in-out,
+        opacity 0.75s ease-in-out;
     transform: translateY(20%) scale(0.9);
     opacity: 0;
 }
@@ -2248,7 +2070,9 @@ li.squeak-left-border {
 .slide-1.opacity-100,
 .slide-2.opacity-100,
 .slide-3.opacity-100 {
-    transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transition:
+        transform 0.25s ease-in-out,
+        opacity 0.25s ease-in-out;
     transform: translateY(0%) scale(1);
     opacity: 1;
 }
@@ -2277,7 +2101,8 @@ li.squeak-left-border {
 }
 
 .cursor-play {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="45" height="45" viewBox="0 0 33 33"><g fill="%23fff" filter="url(%23a)"><path fill-rule="evenodd" d="M16.25 6.75a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17Zm-10 8.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10Z" clip-rule="evenodd"/><path d="M14.25 18.054v-5.608a.5.5 0 0 1 .782-.413l4.112 2.804a.5.5 0 0 1 0 .826l-4.112 2.804a.5.5 0 0 1-.782-.413Z"/></g><defs><filter id="a" width="32" height="32" x=".25" y=".25" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="3"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_15894_119681"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_15894_119681" result="shape"/></filter></defs></svg>'),
+    cursor:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="45" height="45" viewBox="0 0 33 33"><g fill="%23fff" filter="url(%23a)"><path fill-rule="evenodd" d="M16.25 6.75a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17Zm-10 8.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10Z" clip-rule="evenodd"/><path d="M14.25 18.054v-5.608a.5.5 0 0 1 .782-.413l4.112 2.804a.5.5 0 0 1 0 .826l-4.112 2.804a.5.5 0 0 1-.782-.413Z"/></g><defs><filter id="a" width="32" height="32" x=".25" y=".25" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="3"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_15894_119681"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_15894_119681" result="shape"/></filter></defs></svg>'),
         auto;
 }
 
@@ -2409,16 +2234,6 @@ li.squeak-left-border {
     td {
         code {
             @apply whitespace-nowrap text-sm;
-        }
-    }
-}
-
-.image-slider {
-    .slick-slide {
-        @apply pt-0;
-
-        img {
-            @apply mx-auto;
         }
     }
 }
@@ -2624,10 +2439,22 @@ body.dark .max-ai-body {
                 content: attr(data-text);
                 position: absolute;
                 z-index: -1;
-                text-shadow: 0.01em 0em 0 #802700, 0em 0.01em 0 #c23d00, 0.02em 0.01em 0 #802700,
-                    0.01em 0.02em 0 #c23d00, 0.03em 0.02em 0 #802700, 0.02em 0.03em 0 #c23d00, 0.04em 0.03em 0 #802700,
-                    0.03em 0.04em 0 #c23d00, 0.05em 0.04em 0 #802700, 0.04em 0.05em 0 #c23d00, 0.06em 0.05em 0 #802700,
-                    0.05em 0.06em 0 #c23d00, 0.07em 0.06em 0 #802700, 0.06em 0.07em 0 #c23d00, 0.08em 0.07em 0 #802700,
+                text-shadow:
+                    0.01em 0em 0 #802700,
+                    0em 0.01em 0 #c23d00,
+                    0.02em 0.01em 0 #802700,
+                    0.01em 0.02em 0 #c23d00,
+                    0.03em 0.02em 0 #802700,
+                    0.02em 0.03em 0 #c23d00,
+                    0.04em 0.03em 0 #802700,
+                    0.03em 0.04em 0 #c23d00,
+                    0.05em 0.04em 0 #802700,
+                    0.04em 0.05em 0 #c23d00,
+                    0.06em 0.05em 0 #802700,
+                    0.05em 0.06em 0 #c23d00,
+                    0.07em 0.06em 0 #802700,
+                    0.06em 0.07em 0 #c23d00,
+                    0.08em 0.07em 0 #802700,
                     0.07em 0.08em 0 #c23d00;
             }
         }
@@ -2770,11 +2597,27 @@ body.dark .max-ai-body {
             content: attr(data-text);
             position: absolute;
             z-index: -1;
-            text-shadow: 0.01em 0em 0 #161616, 0em 0.01em 0 #8d8d8d, 0.02em 0.01em 0 #161616, 0.01em 0.02em 0 #8d8d8d,
-                0.03em 0.02em 0 #161616, 0.02em 0.03em 0 #8d8d8d, 0.04em 0.03em 0 #161616, 0.03em 0.04em 0 #8d8d8d,
-                0.05em 0.04em 0 #161616, 0.04em 0.05em 0 #8d8d8d, 0.06em 0.05em 0 #161616, 0.05em 0.06em 0 #8d8d8d,
-                0.07em 0.06em 0 #161616, 0.06em 0.07em 0 #8d8d8d, 0.08em 0.07em 0 #161616, 0.07em 0.08em 0 #8d8d8d,
-                0.09em 0.08em 0 #161616, 0.08em 0.09em 0 #8d8d8d, 0.1em 0.09em 0 #161616, 0.09em 0.1em 0 #8d8d8d;
+            text-shadow:
+                0.01em 0em 0 #161616,
+                0em 0.01em 0 #8d8d8d,
+                0.02em 0.01em 0 #161616,
+                0.01em 0.02em 0 #8d8d8d,
+                0.03em 0.02em 0 #161616,
+                0.02em 0.03em 0 #8d8d8d,
+                0.04em 0.03em 0 #161616,
+                0.03em 0.04em 0 #8d8d8d,
+                0.05em 0.04em 0 #161616,
+                0.04em 0.05em 0 #8d8d8d,
+                0.06em 0.05em 0 #161616,
+                0.05em 0.06em 0 #8d8d8d,
+                0.07em 0.06em 0 #161616,
+                0.06em 0.07em 0 #8d8d8d,
+                0.08em 0.07em 0 #161616,
+                0.07em 0.08em 0 #8d8d8d,
+                0.09em 0.08em 0 #161616,
+                0.08em 0.09em 0 #8d8d8d,
+                0.1em 0.09em 0 #161616,
+                0.09em 0.1em 0 #8d8d8d;
         }
     }
 
@@ -2978,62 +2821,59 @@ article.reader-view-content-container:has(.quest-sidebar) {
     }
 }
 
-/* On mobile, always present AppWindows as expanded (full-screen) regardless of SSR windowed state. */
-@media (max-width: 767px) {
-    #app-container div[data-app='AppWindow']:not([data-fixed-size]) {
-        @apply size-full rounded-tr-none rounded-tl-none;
-    }
-
-    #app-container div[data-app='AppWindow']:not([data-fixed-size]) > .size-full.flex-grow {
-        @apply rounded-tr-none rounded-tl-none;
-    }
-
-    #app-container div[data-app='AppWindow']:not([data-fixed-size]) .window-expand-control {
-        @apply hidden;
-    }
-
-    #app-container #taskbar {
-        @apply rounded-bl-none rounded-br-none;
-    }
+/*
+ * The page window. The site shows one page at a time; its mode is on <html data-window>:
+ * windowed, expanded, or closed (closed shows the desktop). CSS sizes the window, so the server
+ * HTML is right for every mode and nothing jumps when the page hydrates.
+ */
+[data-app='DesktopViewport'] {
+    container: desktop / inline-size;
 }
 
-#app-container[data-window-expanded] #taskbar {
-    @apply rounded-bl-none rounded-br-none;
+div[data-app='AppWindow'][data-page] {
+    @apply h-[95%] w-[80%] shadow-md;
 }
 
-#app-container[data-window-snapped-left]:not([data-window-expanded]) #taskbar {
-    @apply rounded-bl-none;
+html[data-window='expanded'] div[data-app='AppWindow'][data-page] {
+    @apply size-full rounded-tr-none rounded-tl-none border-t shadow-none;
 }
 
-#app-container[data-window-snapped-right]:not([data-window-expanded]) #taskbar {
-    @apply rounded-br-none;
-}
-
-#app-container[data-window-expanded] div[data-app='AppWindow'][data-expanded]:not([data-fixed-size]) {
-    @apply size-full rounded-tr-none rounded-tl-none;
-}
-
-#app-container[data-window-expanded]
-    div[data-app='AppWindow'][data-expanded]:not([data-fixed-size])
-    > .size-full.flex-grow {
+html[data-window='expanded'] div[data-app='AppWindow'][data-page] > .size-full.flex-grow {
     @apply rounded-tr-none rounded-tl-none;
 }
 
-#app-container[data-window-snapped-left] div[data-app='AppWindow'][data-snapped='left']:not([data-fixed-size]) {
-    @apply rounded-tl-none rounded-tr-none rounded-br-none;
+html[data-window='closed'] div[data-app='AppWindow'][data-page] {
+    display: none;
 }
 
-#app-container[data-window-snapped-right] div[data-app='AppWindow'][data-snapped='right']:not([data-fixed-size]) {
-    @apply rounded-tl-none rounded-tr-none rounded-bl-none;
+html[data-window='expanded'] #app-container #taskbar {
+    @apply rounded-bl-none rounded-br-none;
 }
 
-/* Per-page windowed width overrides (desktop only; mobile stays full-screen above). */
-@media (min-width: 768px) {
-    #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]),
-    #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/pricing']:not([data-fixed-size]) {
-        max-width: 1200px;
+/* Wide pages keep a readable width when windowed. */
+html:not([data-window='expanded']) div[data-app='AppWindow'][data-page][data-path='/'],
+html:not([data-window='expanded']) div[data-app='AppWindow'][data-page][data-path='/pricing'] {
+    max-width: 1200px;
+}
+
+/* On a narrow desktop the page window always fills it. */
+@container desktop (max-width: 767px) {
+    div[data-app='AppWindow'][data-page] {
+        @apply size-full max-w-none rounded-tr-none rounded-tl-none;
+    }
+
+    div[data-app='AppWindow'][data-page] > .size-full.flex-grow {
+        @apply rounded-tr-none rounded-tl-none;
+    }
+
+    div[data-app='AppWindow'][data-page] .window-expand-control {
+        @apply hidden;
+    }
+}
+
+@media (max-width: 767px) {
+    #app-container #taskbar {
+        @apply rounded-bl-none rounded-br-none;
     }
 }
 
@@ -3180,15 +3020,19 @@ div[data-radix-popper-content-wrapper] {
    app's login screen. Two layers: a soft warm glow that does not repeat, over a
    16px dot grid that does. Used by the pricing hero. */
 .paper-desk {
-    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.05), transparent 70%),
+    background-image:
+        radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.05), transparent 70%),
         radial-gradient(hsla(0, 0%, 7%, 0.055) 1.4px, transparent 0);
     background-repeat: no-repeat, repeat;
-    background-size: auto, 16px 16px;
+    background-size:
+        auto,
+        16px 16px;
     background-color: #eef0e7;
 }
 
 .dark .paper-desk {
-    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.07), transparent 70%),
+    background-image:
+        radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.07), transparent 70%),
         radial-gradient(hsla(0, 0%, 100%, 0.07) 1.4px, transparent 0);
     background-color: #1a1a1a;
 }
@@ -3204,7 +3048,7 @@ html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizar
 }
 
 /* `#:~:text=` fragment highlight. Same yellow as Tailwind's `yellow` token
-   (see tailwind.config.js), matching the site's search-result highlight
+   (see tailwind.config.cjs), matching the site's search-result highlight
    (mark[data-markjs='true']) at the same opacity for visual consistency. */
 ::highlight(text-fragment-target) {
     background-color: rgb(247 165 1 / 0.4);
@@ -3217,8 +3061,6 @@ html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizar
 @media print {
     html,
     body,
-    #___gatsby,
-    #gatsby-focus-wrapper,
     #app-container,
     [data-app='DesktopViewport'],
     [data-app='WindowList'] {

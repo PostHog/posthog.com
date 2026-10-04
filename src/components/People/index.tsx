@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
@@ -25,6 +24,12 @@ import {
     findEmployeeByName,
 } from 'components/HogMap/usePeopleGeo'
 import PeopleMapSearch from 'components/HogMap/PeopleMapSearch'
+import { navigate } from 'lib/navigation'
+import teamMembersJson from '@data/people-team-members.json'
+import type { TeamMembers } from '~/data-layer/queries/people'
+
+/** Current team members, longest-serving first. */
+export const teamMembers = teamMembersJson as TeamMembers
 
 export const TeamMember = (props: any) => {
     const {
@@ -116,8 +121,8 @@ export const TeamMember = (props: any) => {
                                                 pineappleOnPizza === true
                                                     ? 'StickerPineappleYes'
                                                     : pineappleOnPizza === false
-                                                    ? 'StickerPineappleNo'
-                                                    : 'StickerPineappleUnknown'
+                                                      ? 'StickerPineappleNo'
+                                                      : 'StickerPineappleUnknown'
                                             }
                                         />
                                     }
@@ -125,8 +130,8 @@ export const TeamMember = (props: any) => {
                                     {pineappleOnPizza === true
                                         ? 'Loves'
                                         : pineappleOnPizza === false
-                                        ? 'Hates'
-                                        : 'Undecided about'}{' '}
+                                          ? 'Hates'
+                                          : 'Undecided about'}{' '}
                                     pineapple on pizza
                                 </Tooltip>
                             </ZoomHover>
@@ -269,15 +274,16 @@ export const TeamMember = (props: any) => {
                             )}
 
                             <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all text-black">
-                                <ReactMarkdown
-                                    className="text-sm bio-preview"
-                                    rehypePlugins={[rehypeRaw] as any}
-                                    components={{
-                                        a: ({ children }) => <span>{children}</span>,
-                                    }}
-                                >
-                                    {biography || getBioPlaceholder() + ' Ask me if hot dogs are a form of taco!'}
-                                </ReactMarkdown>
+                                <div className="text-sm bio-preview">
+                                    <ReactMarkdown
+                                        rehypePlugins={[rehypeRaw] as any}
+                                        components={{
+                                            a: ({ children }) => <span>{children}</span>,
+                                        }}
+                                    >
+                                        {biography || getBioPlaceholder() + ' Ask me if hot dogs are a form of taco!'}
+                                    </ReactMarkdown>
+                                </div>
                             </div>
                         </div>
                     </>
@@ -295,12 +301,9 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
     const [isInitialized, setIsInitialized] = useState(false)
     const [focusNonce, setFocusNonce] = useState(0)
 
-    const {
-        team: { teamMembers },
-        allTeams,
-    } = useStaticQuery(teamQuery)
+    const teamCrestMap = useTeamCrestMap()
 
-    const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
+    const token = typeof window !== 'undefined' ? import.meta.env.PUBLIC_MAPBOX_TOKEN : undefined
     const isClient = typeof window !== 'undefined'
 
     // The map uses dashed terms (#Lorena-Viana, #toronto); the list uses URI encoding.
@@ -358,11 +361,6 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
     }
 
     const teamSize = teamMembers.length - 1
-
-    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
-        acc[team.name] = team.crest?.data?.attributes?.url
-        return acc
-    }, {})
 
     const availableFilters = useMemo(
         () => [
@@ -580,61 +578,3 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
         </div>
     )
 }
-
-export const teamQuery = graphql`
-    query TeamQuery {
-        team: allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { id: { ne: null } } } }, squeakId: { ne: 28378 } }
-            sort: { fields: startDate, order: ASC }
-        ) {
-            teamMembers: nodes {
-                squeakId
-                avatar {
-                    url
-                }
-                biography
-                lastName
-                firstName
-                companyRole
-                country
-                color
-                location
-                pronouns
-                pineappleOnPizza
-                startDate
-                teams {
-                    data {
-                        id
-                        attributes {
-                            name
-                            slug
-                        }
-                    }
-                }
-                leadTeams {
-                    data {
-                        attributes {
-                            name
-                        }
-                    }
-                }
-            }
-        }
-        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-            nodes {
-                id
-                name
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                miniCrest {
-                    gatsbyImageData(width: 20, height: 20)
-                }
-            }
-        }
-    }
-`

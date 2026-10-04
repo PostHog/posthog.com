@@ -13,7 +13,7 @@ queries against the data did not need to support much beyond time-range filterin
 
 ## Schema
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 CREATE TABLE sharded_app_metrics
 (
     team_id Int64,
@@ -36,9 +36,10 @@ PARTITION BY toYYYYMM(timestamp)
 ORDER BY (team_id, plugin_config_id, job_id, category, toStartOfHour(timestamp), error_type, error_uuid)
 ```
 
-<details><summary>Click here to see supporting tables</summary>
+<details>
+<summary>Click here to see supporting tables</summary>
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 CREATE TABLE app_metrics
 (
     team_id Int64,

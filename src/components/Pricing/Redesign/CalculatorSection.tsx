@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useLocation } from '@reach/router'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { scrollToElement } from 'components/ScrollToElement'
+import { useLocation } from 'lib/navigation'
 
 /**
  * The pricing calculator as a plain, always-visible section.

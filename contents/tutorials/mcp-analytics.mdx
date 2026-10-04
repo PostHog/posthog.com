@@ -49,7 +49,7 @@ Then call `instrument(server, posthog)` once at startup. You bring your own `pos
 
 <MultiLanguage>
 
-```typescript file=SDK-v1
+```typescript file="SDK-v1"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -64,7 +64,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
 instrument(server, posthog)
 ```
 
-```typescript file=SDK-v2
+```typescript file="SDK-v2"
 import { McpServer } from "@modelcontextprotocol/server"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -189,7 +189,7 @@ Now that we built our MCP server, let's take a look our MCP tools in the `tools.
 
 For this tutorial, we've hardcoded simple datasets and results for the tools to fetch. 
 
-```typescript file=./src/tools.ts
+```typescript file="./src/tools.ts"
 /**
 * In-memory inventory (pretend this is a database)
 */
@@ -259,7 +259,7 @@ It has three core abilities:
 2. Capture errors
 3. Close the analytics client
 
-```typescript file=./src/analytics.ts
+```typescript file="./src/analytics.ts"
 
 export interface AnalyticsProvider {
   /**
@@ -299,7 +299,7 @@ The `withAnalytics()` function:
 - Preserves normal error handling
 - Works without an analytics provider
 
-```typescript file=./src/analytics.ts
+```typescript file="./src/analytics.ts"
 
 export async function withAnalytics<T>(
   analytics: AnalyticsProvider | undefined,
@@ -341,7 +341,7 @@ Now let's send those analytics somewhere useful. In the `posthog.ts` file, we in
 The `PostHogAnalyticsProvider` class leverages the PostHog [Node.js SDK](/docs/libraries/node) to capture [custom events](/docs/product-analytics/capture-events) for product analytics and exceptions for built-in [error tracking](/docs/error-tracking).
 
 
-```typescript file=./src/posthog.ts
+```typescript file="./src/posthog.ts"
 
 import { PostHog } from "posthog-node";
 import { AnalyticsProvider } from "./analytics.js";
@@ -423,7 +423,7 @@ export class PostHogAnalyticsProvider implements AnalyticsProvider {
 
 Now let's see how these tools are registered with the MCP server in the `server.ts` file.
 
-```typescript file=src/server.ts
+```typescript file="src/server.ts"
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -486,7 +486,7 @@ Notice how each tool handler function is wrapped with the `withAnalytics()` wrap
 
 In the main `index.tsx` file, the `PostHogAnalyticsProvider` is injected into the MCP server on initialization.
 
-```typescript file=./src/index.ts
+```typescript file="./src/index.ts"
 
 import "dotenv/config";
 import { startStdioServer, stopStdioServer } from "./server.js";

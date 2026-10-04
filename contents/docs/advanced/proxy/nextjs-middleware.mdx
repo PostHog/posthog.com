@@ -67,7 +67,7 @@ Create a file named `proxy.js` (or `proxy.ts` for TypeScript) in your project ro
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 import { NextResponse } from 'next/server'
 
 export function proxy(request) {
@@ -97,7 +97,7 @@ export const config = {
 }
 ```
 
-```js file=EU
+```js file="EU"
 import { NextResponse } from 'next/server'
 
 export function proxy(request) {
@@ -134,7 +134,7 @@ export const config = {
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 import { NextResponse } from 'next/server'
 
 export function middleware(request) {
@@ -164,7 +164,7 @@ export const config = {
 }
 ```
 
-```js file=EU
+```js file="EU"
 import { NextResponse } from 'next/server'
 
 export function middleware(request) {
@@ -234,14 +234,14 @@ In your application code, update your PostHog initialization to use your proxy p
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
   api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
   api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
@@ -286,7 +286,7 @@ If you see errors, check [troubleshooting](#troubleshooting) below.
 
 If requests to your proxy path return 404 or don't get proxied:
 
-1. Verify your `proxy.js` (or `middleware.js` for Next.js <16) file is in the project root (same level as `app` or `pages`), not inside those folders
+1. Verify your `proxy.js` (or `middleware.js` for Next.js &lt;16) file is in the project root (same level as `app` or `pages`), not inside those folders
 2. Check that the `matcher` pattern matches your proxy path
 3. Restart your dev server after creating or modifying the proxy file
 
@@ -296,7 +296,7 @@ If you're using Clerk or similar auth solutions, handle PostHog routes before au
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname.startsWith('/yourpath')) {
@@ -325,7 +325,7 @@ export default authMiddleware({
 })
 ```
 
-```js file=EU
+```js file="EU"
 export default authMiddleware({
   beforeAuth(req) {
     if (req.nextUrl.pathname.startsWith('/yourpath')) {

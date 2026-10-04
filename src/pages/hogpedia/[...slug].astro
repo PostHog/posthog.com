@@ -1,0 +1,28 @@
+---
+// Hogpedia articles and talk pages. The Main Page and the meta pages are views in src/views/hogpedia.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type HogpediaEntry, assertNotReserved, hogpediaArticle, hogpediaPath } from '../../lib/content/hogpedia'
+import { isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    const entries = await getCollection('hogpedia')
+    const ids = new Set(entries.map((entry) => entry.id))
+    entries.forEach(assertNotReserved)
+    return entries
+        .filter((entry) => !isViewPath(hogpediaPath(entry)))
+        .map((entry) => ({ params: { slug: entry.id }, props: { entry, ids } }))
+}
+
+interface Props {
+    entry: HogpediaEntry
+    ids: Set<string>
+}
+
+const article = hogpediaArticle(Astro.props.entry, Astro.props.ids)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Hogpedia.tsx" props={article} content={article.body} />
+</Site>

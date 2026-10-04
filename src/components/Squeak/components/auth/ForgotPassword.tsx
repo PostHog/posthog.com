@@ -20,7 +20,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setMessage, setParentVi
             email: values.email,
         }
 
-        const { error } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/forgot-password`, {
+        const { error } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/auth/forgot-password`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

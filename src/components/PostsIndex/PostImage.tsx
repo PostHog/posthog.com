@@ -1,12 +1,12 @@
 import React from 'react'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { IconNewspaper } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PostSummary } from './types'
+import { ResponsiveImage, getImage } from 'components/Image'
 
 type PostImageProps = {
     post: PostSummary
-    /** Applied to the image wrapper (Gatsby/Cloudinary render one). */
+    /** Applied to the image wrapper (ResponsiveImage and CloudinaryImage render one). */
     className?: string
     /** Applied to the `<img>` itself — where object-fit/cropping belongs. */
     imgClassName?: string
@@ -16,7 +16,7 @@ type PostImageProps = {
 
 /**
  * A post's featured image, degrading through the shapes it can arrive in:
- * processed Gatsby image → Cloudinary URL → raw URL → placeholder.
+ * responsive image data → Cloudinary URL → raw URL → placeholder.
  */
 export default function PostImage({
     post,
@@ -28,7 +28,7 @@ export default function PostImage({
     const publicURL = post.frontmatter.featuredImage?.publicURL
 
     return image ? (
-        <GatsbyImage image={image} alt={post.frontmatter.title} className={className} imgClassName={imgClassName} />
+        <ResponsiveImage image={image} alt={post.frontmatter.title} className={className} imgClassName={imgClassName} />
     ) : publicURL?.startsWith('https://res.cloudinary.com/') ? (
         <CloudinaryImage
             src={publicURL as `https://res.cloudinary.com/${string}`}

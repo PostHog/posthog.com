@@ -6,7 +6,7 @@ import InstallWebPackageManagers from "../install-web-package-managers.mdx"
 
 Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project token in your [project settings](https://app.posthog.com/project/settings).
 
-```shell file=.env.local
+```shell file=".env.local"
 NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
@@ -19,7 +19,7 @@ Next.js provides the [`instrumentation-client.ts|js`](https://nextjs.org/docs/ap
 
 <MultiLanguage>
 
-```js file=instrumentation-client.js
+```js file="instrumentation-client.js"
 import posthog from 'posthog-js'
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
@@ -28,7 +28,7 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
 });
 ```
 
-```ts file=instrumentation-client.ts
+```ts file="instrumentation-client.ts"
 import posthog from 'posthog-js'
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN!, {

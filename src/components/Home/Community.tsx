@@ -6,8 +6,8 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { DotLottiePlayer } from '@dotlottie/react-player'
+import { useBreakpoint } from 'hooks/useBreakpoint'
 
 const CommunityHogs = () => {
     const { websiteTheme } = useValues(layoutLogic)

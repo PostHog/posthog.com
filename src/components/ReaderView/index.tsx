@@ -17,9 +17,7 @@ import { Popover } from '../RadixUI/Popover'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
-import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { TreeMenu } from 'components/TreeMenu'
@@ -27,7 +25,6 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import * as PostHogIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
@@ -35,7 +32,6 @@ import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
-import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
@@ -49,6 +45,9 @@ import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 import { shouldNavigateMenuTab } from './tabNavigation'
+import { navigate, useLocation } from 'lib/navigation'
+import { MDXRenderer } from 'components/MDXRenderer'
+import { ResponsiveImage, getImage } from 'components/Image'
 
 dayjs.extend(relativeTime)
 
@@ -229,7 +228,7 @@ const ContributorsSmall = ({ contributors }) => {
                                         src={image}
                                     />
                                 ) : gatsbyImage ? (
-                                    <GatsbyImage
+                                    <ResponsiveImage
                                         image={gatsbyImage}
                                         alt={name}
                                         className={`w-6 h-6 border border-primary rounded-full overflow-hidden bg-${
@@ -1177,8 +1176,8 @@ const LeftSidebar = ({
                     mobile
                         ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
-                        : 'z-30'
+                          ? `z-50 shadow-2xl ${PANEL_BG}`
+                          : 'z-30'
                 }`}
             >
                 {/* Middle content — always rendered so the bottom row stays
@@ -1658,8 +1657,8 @@ function ReaderViewContent({
         fullWidthContent || body?.type !== 'mdx'
             ? 'max-w-full'
             : contentMaxWidthClass
-            ? contentMaxWidthClass
-            : 'mx-auto max-w-2xl'
+              ? contentMaxWidthClass
+              : 'mx-auto max-w-2xl'
 
     return (
         <SearchProvider>
@@ -1772,7 +1771,7 @@ function ReaderViewContent({
                                     {body?.featuredImage && !body?.featuredVideo && (
                                         <div className="not-prose mb-6 relative">
                                             <div className="text-center">
-                                                <GatsbyImage
+                                                <ResponsiveImage
                                                     image={getImage(body.featuredImage)}
                                                     alt={title}
                                                     className="rounded"
@@ -1800,8 +1799,8 @@ function ReaderViewContent({
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass
-                                                    ? contentMaxWidthClass
-                                                    : 'mx-auto max-w-2xl'
+                                                      ? contentMaxWidthClass
+                                                      : 'mx-auto max-w-2xl'
                                             }`}
                                         >
                                             {title}
@@ -1813,8 +1812,8 @@ function ReaderViewContent({
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass
-                                                    ? contentMaxWidthClass
-                                                    : 'mx-auto max-w-2xl'
+                                                      ? contentMaxWidthClass
+                                                      : 'mx-auto max-w-2xl'
                                             }`}
                                         >
                                             {belowTitle}
@@ -1826,8 +1825,8 @@ function ReaderViewContent({
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass
-                                                    ? contentMaxWidthClass
-                                                    : 'mx-auto max-w-2xl'
+                                                      ? contentMaxWidthClass
+                                                      : 'mx-auto max-w-2xl'
                                             }`}
                                         >
                                             {body?.contributors && (
@@ -1860,8 +1859,8 @@ function ReaderViewContent({
                                                     fullWidthContent || body?.type !== 'mdx'
                                                         ? 'max-w-full'
                                                         : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
+                                                          ? contentMaxWidthClass
+                                                          : 'mx-auto max-w-2xl'
                                                 }`}
                                             >
                                                 <TableOfContents

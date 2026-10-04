@@ -21,7 +21,7 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
   Add the following to your `rollup.config.js` file:
 
-  ```js file=rollup.config.js
+  ```js file="rollup.config.js"
   import posthog from '@posthog/rollup-plugin'
 
   export default {
@@ -64,7 +64,7 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
 If your build uses [`@rollup/plugin-typescript`](https://www.npmjs.com/package/@rollup/plugin-typescript), set `sourceMap: true` and `inlineSources: true` in your `tsconfig.json` so the PostHog plugin receives the source maps it needs to upload:
 
-```json file=tsconfig.json
+```json file="tsconfig.json"
 {
   "compilerOptions": {
     "sourceMap": true,

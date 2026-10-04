@@ -114,7 +114,8 @@ export default function useCompanies({
     const { getJwt } = useUser()
     const [search, setSearch] = useState('')
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
+        (offset) =>
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/companies?${query(offset, companyFilters, jobFilters)}`,
         async (url: string) => {
             return fetch(url).then((r) => r.json())
         },
@@ -168,7 +169,7 @@ export default function useCompanies({
     const deleteCompany = async (companyId: number, companyName: string) => {
         if (confirm(`Are you sure you want to delete ${companyName}?`)) {
             const jwt = await getJwt()
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/companies/${companyId}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/companies/${companyId}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${jwt}`,

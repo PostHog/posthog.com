@@ -53,7 +53,7 @@ Replace the default worker code with this:
 
 <MultiLanguage>
 
-```javascript file=US
+```javascript file="US"
 const API_HOST = "us.i.posthog.com"
 const ASSET_HOST = "us-assets.i.posthog.com"
 
@@ -103,7 +103,7 @@ export default {
 };
 ```
 
-```javascript file=EU
+```javascript file="EU"
 const API_HOST = "eu.i.posthog.com"
 const ASSET_HOST = "eu-assets.i.posthog.com"
 
@@ -178,14 +178,14 @@ In your application code, update your PostHog initialization to use your worker'
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
@@ -272,14 +272,14 @@ In your application code, update your PostHog initialization to use your CNAME d
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'

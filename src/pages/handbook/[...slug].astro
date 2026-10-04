@@ -1,0 +1,30 @@
+---
+// Handbook pages: contents/handbook, plus the engineering handbook pages published from the
+// posthog/posthog repo.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type HandbookEntry, handbookPage } from '../../lib/content/handbook'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    // On a clash, the page in contents/ wins over the one from the posthog/posthog repo.
+    const entries = new Map<string, HandbookEntry>()
+    for (const entry of [...(await getCollection('posthogHandbook')), ...(await getCollection('handbook'))]) {
+        if (entry.data.title) entries.set(entry.id, entry)
+    }
+    return [...entries.values()]
+        .filter((entry) => !isViewPath(entryPath('/handbook', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id === 'index' ? undefined : entry.id }, props: { entry } }))
+}
+
+interface Props {
+    entry: HandbookEntry
+}
+
+const page = handbookPage(Astro.props.entry)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Handbook.tsx" props={{ page }} content={page.body} />
+</Site>

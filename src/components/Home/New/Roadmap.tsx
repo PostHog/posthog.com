@@ -1,8 +1,5 @@
-import { graphql } from 'gatsby'
 import React, { useEffect } from 'react'
-import { useStaticQuery } from 'gatsby'
 import OSTable from 'components/OSTable'
-import { Link } from 'gatsby'
 import { IconArrowRight, IconCalendar, IconThumbsUp, IconUndo } from '@posthog/icons'
 import OSTabs from 'components/OSTabs'
 import Markdown from 'markdown-to-jsx'
@@ -12,6 +9,12 @@ import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import ProgressBar from 'components/ProgressBar'
 import { preparePreviewText } from 'components/Editor/SearchUtils'
+import { Link } from 'lib/navigation'
+import homeTabsJson from '@data/roadmap-home-tabs.json'
+import type { RoadmapHomeTabs } from '~/data-layer/queries/roadmap'
+
+const homeTabs = homeTabsJson as RoadmapHomeTabs
+
 const Table = ({ columns, rows }: { columns: any; rows: any }) => {
     return (
         <div>
@@ -76,7 +79,7 @@ const VoteButton = ({ roadmap, onLike }: { roadmap: any; onLike: () => void }) =
     )
 }
 
-const UnderConsiderationTable = ({ data }: { data: any }) => {
+const UnderConsiderationTable = () => {
     const {
         roadmaps: initialRoadmaps,
         mutate,
@@ -98,12 +101,9 @@ const UnderConsiderationTable = ({ data }: { data: any }) => {
     const roadmaps = React.useMemo(() => {
         return initialRoadmaps.map((roadmap) => {
             const likeCount = roadmap?.attributes?.likes?.data?.length || 0
-            const staticLikeCount =
-                data.nodes.find((node: any) => node.squeakId === roadmap.id)?.githubPages?.[0]?.reactions
-                    ?.total_count || 0
-            return { ...roadmap, likes: likeCount + staticLikeCount }
+            return { ...roadmap, likes: likeCount }
         })
-    }, [initialRoadmaps, data])
+    }, [initialRoadmaps])
 
     return isLoading ? (
         <ProgressBar />
@@ -162,32 +162,6 @@ const Description = ({ description, buttonClassName = '' }: { description: strin
 }
 
 export default function Roadmap({ frame }: { frame: boolean }) {
-    const { wip, underConsideration } = useStaticQuery(graphql`
-        {
-            wip: allSqueakRoadmap(
-                filter: { complete: { ne: true }, projectedCompletion: { ne: null } }
-                sort: { fields: createdAt }
-            ) {
-                nodes {
-                    id
-                    title
-                    betaAvailable
-                    description
-                }
-            }
-            underConsideration: allSqueakRoadmap(
-                filter: { dateCompleted: { eq: null }, projectedCompletion: { eq: null } }
-            ) {
-                nodes {
-                    id
-                    squeakId
-                    title
-                    betaAvailable
-                    description
-                }
-            }
-        }
-    `)
     return (
         <OSTabs
             className="relative flex flex-col h-full min-h-0 mt-4"
@@ -195,7 +169,7 @@ export default function Roadmap({ frame }: { frame: boolean }) {
             contentPadding={frame}
             tabs={[
                 {
-                    label: `wip (${wip.nodes.length})`,
+                    label: `wip (${homeTabs.wipCount})`,
                     value: 'wip',
                     content: (
                         <Table
@@ -204,14 +178,14 @@ export default function Roadmap({ frame }: { frame: boolean }) {
                                 { name: 'idea', width: 'minmax(150px,1fr)', align: 'left' as const },
                                 { name: 'description', width: 'minmax(200px,2fr)', align: 'left' as const },
                             ]}
-                            rows={wip.nodes.slice(0, 5).map((node, idx) => ({
+                            rows={homeTabs.wip.map((node, idx) => ({
                                 cells: [
                                     { content: idx + 1 },
                                     {
                                         content: node.title + (node.betaAvailable ? ' (beta)' : ''),
                                     },
                                     {
-                                        content: <Description description={node.description} />,
+                                        content: <Description description={node.description ?? ''} />,
                                     },
                                 ],
                             }))}
@@ -219,9 +193,9 @@ export default function Roadmap({ frame }: { frame: boolean }) {
                     ),
                 },
                 {
-                    label: `under consideration (${underConsideration.nodes.length})`,
+                    label: `under consideration (${homeTabs.underConsiderationCount})`,
                     value: 'under-consideration',
-                    content: <UnderConsiderationTable data={underConsideration} />,
+                    content: <UnderConsiderationTable />,
                 },
             ]}
         />

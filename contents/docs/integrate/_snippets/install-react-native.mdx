@@ -28,7 +28,7 @@ The recommended way to set up PostHog for React Native is to use the `PostHogPro
 
 To set up `PostHogProvider`, add it to your `App.js` or `App.ts` file:
 
-```react-native file=App.js
+```react-native file="App.js"
 // App.(js|ts)
 import { usePostHog, PostHogProvider } from 'posthog-react-native'
 ...
@@ -61,7 +61,7 @@ const MyComponent = () => {
 
 If you prefer not to use the provider, you can initialize PostHog in its own file and import the instance from there:
 
-```react-native file=posthog.ts
+```react-native file="posthog.ts"
 import PostHog from 'posthog-react-native'
 
 export const posthog = new PostHog('<ph_project_token>', {

@@ -4,10 +4,11 @@ Renders PostHog MCP tools for one product feature, grouped into families: a bold
 title with a one-line description, then the tool names as minimal pills (hover shows the
 tool's summary).
 
-Data comes from `McpTool` GraphQL nodes sourced at build time in `gatsby/sourceNodes.ts`,
-which fetches `services/mcp/schema/tool-definitions-all.json` from the
-[PostHog monorepo](https://github.com/PostHog/posthog) (branch `GATSBY_POSTHOG_BRANCH`,
-default `master`). That schema file is kept in sync with the MCP source by a CI drift
+Data comes from `McpTool` nodes sourced at build time by `mcpToolSource` in
+`src/data-layer/sources/posthogApi.ts`, which fetches `services/mcp/schema/tool-definitions-all.json` from the
+[PostHog monorepo](https://github.com/PostHog/posthog) (branch `POSTHOG_BRANCH`,
+default `master`). The `products-mcp-tools` query in `src/data-layer/queries/products.ts` writes them
+to `@data/products-mcp-tools.json`, which the component imports. That schema file is kept in sync with the MCP source by a CI drift
 check, so the list updates automatically on every site build – nothing is hand-maintained
 except the family grouping below.
 

@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import useEarlyAccessFeatures, { EarlyAccessFeature } from './useEarlyAccessFeatures'
+import teamMembersJson from '@data/roadmap-team-members.json'
+import type { TeamMembers } from '~/data-layer/queries/roadmap'
 
 export interface RoadmapEarlyAccessFeature extends EarlyAccessFeature {
     teamSlug?: string
@@ -45,11 +46,8 @@ const roleNameCandidates = (name: string): string[] => {
     return stripped && stripped !== normalized ? [normalized, stripped] : [normalized]
 }
 
-interface SqueakTeamOwnershipNode {
-    slug: string
-    name: string
-    profiles?: { data?: { attributes?: { firstName?: string; lastName?: string } }[] }
-}
+/** Small teams with their members' full names. */
+const teams = teamMembersJson as TeamMembers
 
 /**
  * Adds small-team ownership to each Early Access Feature, resolved from the feature's
@@ -67,39 +65,18 @@ export function useRoadmapEarlyAccessFeatures({
 }: UseRoadmapEarlyAccessFeaturesOptions = {}): UseRoadmapEarlyAccessFeaturesResult {
     const earlyAccessFeatures = useEarlyAccessFeatures()
 
-    const { allSqueakTeam } = useStaticQuery<{ allSqueakTeam: { nodes: SqueakTeamOwnershipNode[] } }>(graphql`
-        {
-            allSqueakTeam {
-                nodes {
-                    slug
-                    name
-                    profiles {
-                        data {
-                            attributes {
-                                firstName
-                                lastName
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
     const { teamSlugByPerson, teamSlugByTeamName, teamSlugs } = useMemo(() => {
         const byPerson: Record<string, string> = {}
         const byTeamName: Record<string, string> = {}
         const slugs = new Set<string>()
-        allSqueakTeam.nodes.forEach((team) => {
+        teams.forEach((team) => {
             if (!team.slug) {
                 return
             }
             slugs.add(team.slug)
             byTeamName[normalizeName(team.name)] = team.slug
-            team.profiles?.data?.forEach((profile) => {
-                const fullName = normalizeName(
-                    [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' ')
-                )
+            team.members.forEach((member) => {
+                const fullName = normalizeName(member)
                 // People can appear on multiple teams (e.g. leads); keep their first team.
                 if (fullName && !byPerson[fullName]) {
                     byPerson[fullName] = team.slug
@@ -107,7 +84,7 @@ export function useRoadmapEarlyAccessFeatures({
             })
         })
         return { teamSlugByPerson: byPerson, teamSlugByTeamName: byTeamName, teamSlugs: slugs }
-    }, [allSqueakTeam])
+    }, [])
 
     const teamForFeature = useCallback(
         (feature: EarlyAccessFeature): string | undefined => {

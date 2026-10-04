@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { IconShieldLock, IconWarning } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import Link from 'components/Link'
@@ -8,6 +7,10 @@ import { useUser } from 'hooks/useUser'
 import RewardCard from './RewardCard'
 import TransactionTitle from './TransactionTitle'
 import type { Reward, Wallet } from './types'
+import rewardsJson from '@data/roadmap-rewards.json'
+
+// `Reward.image` is a string, but the data allows null. Every reward has an image today.
+const rewards = rewardsJson as Reward[]
 
 interface PointsProps {
     /** The wallet to display. Only read when `readOnly` is set. */
@@ -19,24 +22,6 @@ interface PointsProps {
 }
 
 export default function Points({ wallet: walletProp, readOnly = false, firstName }: PointsProps = {}) {
-    const {
-        allReward: { nodes: rewards },
-    } = useStaticQuery<{ allReward: { nodes: Reward[] } }>(graphql`
-        query {
-            allReward {
-                nodes {
-                    id
-                    handle
-                    title
-                    description
-                    price
-                    image
-                    merchStoreHandle
-                    discountAmount
-                }
-            }
-        }
-    `)
     const { user } = useUser()
     // Keyed off `readOnly` rather than `walletProp` presence: members who've never earned
     // points have no wallet at all, and falling back would show the moderator their own balance.

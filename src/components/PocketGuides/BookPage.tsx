@@ -1,12 +1,8 @@
 import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-
 import Explorer from 'components/Explorer'
 import { getProseClasses } from '../../constants'
-
 import { EnableScoutBar } from 'components/SelfDrivingInbox/EnableScout'
-
 import { ActionBar } from './Action'
 import BookReader from './BookReader'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
@@ -23,6 +19,7 @@ import {
     usePageTurnKeys,
     volumeIdFromUrl,
 } from './bookModel'
+import { MDXRenderer } from 'components/MDXRenderer'
 
 /** The page body: the reader's wrapper interleaves each figure after the block citing it. */
 function MdxBody({

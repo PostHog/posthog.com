@@ -1,6 +1,6 @@
 import React from 'react'
-import CheckIcon from '../../images/check.svg'
-import MinusIcon from '../../images/x.svg'
+import CheckIcon from '../../images/check.svg?url'
+import MinusIcon from '../../images/x.svg?url'
 import InfoIcon from '../InfoIcon/Index'
 import Link from 'components/Link'
 

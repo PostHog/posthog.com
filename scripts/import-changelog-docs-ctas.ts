@@ -11,7 +11,7 @@
  *   npx --yes tsx@4.20.6 scripts/import-changelog-docs-ctas.ts           # dry run: list planned writes
  *   STRAPI_TOKEN=... npx --yes tsx@4.20.6 scripts/import-changelog-docs-ctas.ts --write
  *
- * Reads use the public API (STRAPI_API_HOST or GATSBY_SQUEAK_API_HOST).
+ * Reads use the public API (STRAPI_API_HOST or PUBLIC_SQUEAK_API_HOST).
  * Writes require STRAPI_TOKEN with update permission on the roadmap type.
  */
 import path from 'path'
@@ -22,7 +22,7 @@ import { getDescriptionDocsPath } from '../src/components/Changelog/docsLinks'
 dotenv.config({ path: path.resolve(process.cwd(), '.env.production') })
 dotenv.config({ path: path.resolve(process.cwd(), '.env') })
 
-const apiHost = process.env.STRAPI_API_HOST || process.env.GATSBY_SQUEAK_API_HOST
+const apiHost = process.env.STRAPI_API_HOST || process.env.PUBLIC_SQUEAK_API_HOST
 const write = process.argv.includes('--write')
 
 type RoadmapEntry = {
@@ -73,7 +73,7 @@ const updateRoadmapCta = async (id: number, url: string) => {
 }
 
 const main = async () => {
-    if (!apiHost) throw new Error('Set STRAPI_API_HOST or GATSBY_SQUEAK_API_HOST')
+    if (!apiHost) throw new Error('Set STRAPI_API_HOST or PUBLIC_SQUEAK_API_HOST')
     if (write && !process.env.STRAPI_TOKEN) throw new Error('--write requires STRAPI_TOKEN')
 
     const entries = await fetchCompletedRoadmaps()

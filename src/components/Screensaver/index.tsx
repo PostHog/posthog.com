@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback, lazy, Suspense } from 'react'
 
-// react-lottie bundles lottie-web (~600 KiB); load it on demand instead of on every page.
-const Lottie = typeof window !== 'undefined' ? lazy(() => import('react-lottie')) : () => null
+// The Lottie player bundles a renderer; load it on demand instead of on every page.
+const DotLottiePlayer =
+    typeof window !== 'undefined'
+        ? lazy(() => import('@dotlottie/react-player').then((module) => ({ default: module.DotLottiePlayer })))
+        : () => null
 
 interface ScreensaverProps {
     isActive: boolean
@@ -15,15 +18,6 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
     const logoSizeRef = useRef({ width: 200, height: 200 })
 
     // Load the lottie animation
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        path: '/lotties/loading.json',
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        },
-    }
-
     const updatePosition = useCallback(() => {
         if (!isActive) return
 
@@ -96,12 +90,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                 }}
             >
                 <Suspense fallback={null}>
-                    <Lottie
-                        options={defaultOptions}
-                        height={logoSizeRef.current.height}
-                        width={logoSizeRef.current.width}
-                        eventListeners={[]}
-                    />
+                    <DotLottiePlayer src="/lotties/loading.json" loop autoplay className="size-full" />
                 </Suspense>
             </div>
 

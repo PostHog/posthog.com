@@ -1,5 +1,6 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import customerStoriesJson from '@data/content-customer-stories.json'
+import type { CustomerStories } from '~/data-layer/queries/content'
 
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
@@ -8,11 +9,11 @@ import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ClerkLogo from '../components/CustomerLogos/ClerkLogo'
-import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
-import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png?url'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png?url'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
-import CreatifyLogo from '../images/customers/creatify-light.png'
-import CreatifyLogoDark from '../images/customers/creatify-dark.png'
+import CreatifyLogo from '../images/customers/creatify-light.png?url'
+import CreatifyLogoDark from '../images/customers/creatify-dark.png?url'
 import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
@@ -24,10 +25,10 @@ import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
-import CounterPressLogo from '../images/customers/counterpress-light.svg'
-import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
-import CroissantLogo from '../images/customers/croissant-light.png'
-import CroissantLogoDark from '../images/customers/croissant-dark.png'
+import CounterPressLogo from '../images/customers/counterpress-light.svg?url'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg?url'
+import CroissantLogo from '../images/customers/croissant-light.png?url'
+import CroissantLogoDark from '../images/customers/croissant-dark.png?url'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
@@ -42,14 +43,14 @@ import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
 import RailwayLogo from '../components/CustomerLogos/RailwayLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
-import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
-import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
+import RayfitLogoDark from '../images/customers/rayfitLogodark.png?url'
+import RayfitLogoLight from '../images/customers/rayfitLogolight.png?url'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
-import SupedLogo from '../images/customers/suped-light.png'
-import SupedLogoDark from '../images/customers/suped-dark.png'
+import SupedLogo from '../images/customers/suped-light.png?url'
+import SupedLogoDark from '../images/customers/suped-dark.png?url'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
@@ -61,8 +62,8 @@ import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
 import WisprFlowLogo from 'components/CustomerLogos/WisprFlow'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
-import ZealotLogo from '../images/customers/zealot-light.png'
-import ZealotLogoDark from '../images/customers/zealot-dark.png'
+import ZealotLogo from '../images/customers/zealot-light.png?url'
+import ZealotLogoDark from '../images/customers/zealot-dark.png?url'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
@@ -1804,63 +1805,51 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
 export const useCustomers = () => {
     const { products } = useProducts()
 
-    // Query only to detect which customers have case studies
-    const data = useStaticQuery(graphql`
-        query {
-            allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-
-    // Create a set of customer slugs that have MDX case studies
-    const customersWithCaseStudies = new Set(
-        data.allCustomers.nodes.map((node: any) => node.fields.slug.split('/').pop() || '')
-    )
+    // The customer slugs that have MDX case studies
+    const customersWithCaseStudies = new Set(customerStoriesJson as CustomerStories)
 
     const getProductTitleByHandle = (handle: string) => {
         return products.find((product) => product.handle === handle)?.name
     }
 
     // Transform customer data with product titles and case study info
-    const customers = Object.entries(CUSTOMER_DATA).reduce((acc, [key, customer]) => {
-        // Use logo if available, otherwise fall back to legacy logo URLs
-        let logo = customer.logo
-        if (!logo && customer.legacyLogo && customer.legacyLogoDark) {
-            logo = {
-                light: customer.legacyLogo,
-                dark: customer.legacyLogoDark,
+    const customers = Object.entries(CUSTOMER_DATA).reduce(
+        (acc, [key, customer]) => {
+            // Use logo if available, otherwise fall back to legacy logo URLs
+            let logo = customer.logo
+            if (!logo && customer.legacyLogo && customer.legacyLogoDark) {
+                logo = {
+                    light: customer.legacyLogo,
+                    dark: customer.legacyLogoDark,
+                }
             }
-        }
 
-        const customerWithSlug: Customer = {
-            ...customer,
-            slug: key,
-            logo,
-            // Keep original handles for product lookup
-            toolsUsedHandles: customer.toolsUsed || [],
-            // Convert handles to human-readable product names for display
-            toolsUsed:
-                customer.toolsUsed
-                    ?.map((tool) => getProductTitleByHandle(tool))
-                    .filter((name): name is string => name !== undefined) || [],
-            // Dynamically check if customer has a case study
-            hasCaseStudy: customersWithCaseStudies.has(key),
-        }
+            const customerWithSlug: Customer = {
+                ...customer,
+                slug: key,
+                logo,
+                // Keep original handles for product lookup
+                toolsUsedHandles: customer.toolsUsed || [],
+                // Convert handles to human-readable product names for display
+                toolsUsed:
+                    customer.toolsUsed
+                        ?.map((tool) => getProductTitleByHandle(tool))
+                        .filter((name): name is string => name !== undefined) || [],
+                // Dynamically check if customer has a case study
+                hasCaseStudy: customersWithCaseStudies.has(key),
+            }
 
-        // Remove legacy fields from final object
-        delete (customerWithSlug as any).legacyLogo
-        delete (customerWithSlug as any).legacyLogoDark
+            // Remove legacy fields from final object
+            delete (customerWithSlug as any).legacyLogo
+            delete (customerWithSlug as any).legacyLogoDark
 
-        return {
-            ...acc,
-            [key]: customerWithSlug,
-        }
-    }, {} as Record<string, Customer>)
+            return {
+                ...acc,
+                [key]: customerWithSlug,
+            }
+        },
+        {} as Record<string, Customer>
+    )
 
     const getCustomer = (slug: string): Customer | undefined => {
         return customers[slug]

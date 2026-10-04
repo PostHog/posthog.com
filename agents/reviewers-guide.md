@@ -77,8 +77,8 @@ Name the most risky or most controversial parts of the PR. This is the part of t
 ```markdown
 ### What to look at
 
-1. **[`gatsby/onCreateNode.ts:88`](<permalink>)** — I add `rawBody` to every MDX
-   node. This runs for all ~4,000 content files at build time. A mistake here
+1. **[`src/lib/mdx/integration.mjs:88`](<permalink>)** — I add `rawBody` to every MDX
+   entry. This runs for all ~4,000 content files at build time. A mistake here
    breaks the whole build, not one page. Check the null guard on line 90.
 2. **[`src/components/Blog/index.tsx:41`](<permalink>)** — the 265 words-per-minute
    constant is my judgment call, not a product decision. Push back if you want a

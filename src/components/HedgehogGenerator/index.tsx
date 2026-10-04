@@ -277,7 +277,7 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
         async (jobId: string, jwt: string, signal: AbortSignal): Promise<GeneratedImage | null> => {
             while (!signal.aborted) {
                 const statusResponse = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/generate/status/${jobId}`,
+                    `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/generate/status/${jobId}`,
                     {
                         headers: { Authorization: `Bearer ${jwt}` },
                         signal,
@@ -326,7 +326,7 @@ export default function HedgehogGenerator({ onGenerated }: { onGenerated?: () =>
                 throw new Error('You must be logged in to generate images')
             }
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/generate/image`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/generate/image`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

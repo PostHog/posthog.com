@@ -1,4 +1,3 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
 import { cn } from '../../utils'
 import { Price } from './Price'
@@ -6,6 +5,7 @@ import { Quantity } from './Quantity'
 import { useCartStore } from './store'
 import { getLineItemImage } from './transforms'
 import { CartItem } from './types'
+import { ResponsiveImage } from 'components/Image'
 
 type LineItemsProps = {
     className?: string
@@ -40,7 +40,7 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
                             new
                         </div>
                     )}
-                    <GatsbyImage
+                    <ResponsiveImage
                         className="w-full rounded-md overflow-hidden aspect-square"
                         image={image}
                         alt={`${item.product.title} - ${item.title}`}

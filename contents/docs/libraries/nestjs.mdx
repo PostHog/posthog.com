@@ -36,7 +36,7 @@ The `PostHogInterceptor` is a NestJS interceptor that automatically propagates c
 
 In your `main.ts`, create a PostHog client and register the interceptor globally:
 
-```ts file=main.ts
+```ts file="main.ts"
 import { NestFactory } from '@nestjs/core'
 import { PostHog } from 'posthog-node'
 import { PostHogInterceptor } from 'posthog-node/nestjs'
@@ -83,7 +83,7 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 With the interceptor active, any `posthog.capture()` call within a request automatically includes the propagated context:
 
-```ts file=app.controller.ts
+```ts file="app.controller.ts"
 import { Controller, Get, Post, Body } from '@nestjs/common'
 import { PostHog } from 'posthog-node'
 
@@ -109,7 +109,7 @@ The `PostHogInterceptor` supports optional exception capture. When enabled, it a
 
 By default, exception capture is **disabled**. To enable it:
 
-```ts file=main.ts
+```ts file="main.ts"
 // Capture server errors (5xx) only (default threshold)
 app.useGlobalInterceptors(
   new PostHogInterceptor(posthog, { captureExceptions: true })
@@ -120,7 +120,7 @@ app.useGlobalInterceptors(
 
 By default, 4xx errors (like `NotFoundException` or `BadRequestException`) are skipped – only 5xx errors are captured. You can lower the threshold:
 
-```ts file=main.ts
+```ts file="main.ts"
 // Also capture 4xx errors
 app.useGlobalInterceptors(
   new PostHogInterceptor(posthog, {

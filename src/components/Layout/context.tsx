@@ -1,11 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react'
 import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
-import { useLocation } from '@reach/router'
-import { navigate } from 'gatsby'
 import { isSafeInternalPath } from 'lib/utils'
 import { useActions } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
+import { useLocation, navigate } from 'lib/navigation'
 
 export const Context = createContext<any>(undefined)
 

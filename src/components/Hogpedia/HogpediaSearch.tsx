@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
-import { navigate } from 'gatsby'
 import Link from 'components/Link'
 import { useHogpediaArticles, onlyArticles, findEasterEgg, HogpediaArticleSummary } from './data'
+import { navigate } from 'lib/navigation'
 
 /**
  * A Fuse index over the Hogpedia articles.

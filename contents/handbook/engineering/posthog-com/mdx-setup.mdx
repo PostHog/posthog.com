@@ -18,22 +18,21 @@ Not in scope here - but it's essentially React in Markdown.
 
 ### Page creation
 
-Website pages are automatically created for all MD and MDX files using Gatsby's createPages API. Slugs are automatically generated based on the file title, and the design template for each page is determined based on the folder the file resides in.
+Website pages are automatically created for all MDX files. Astro content collections load the files in `contents/` (the collections are in `src/content.config.ts`, and their folders and schemas are in `src/content/schemas.ts`). For each content type, a route file in `src/pages/` uses `getStaticPaths` to create a page for each entry. Slugs are automatically generated based on the file path, and the design template for each page is determined based on the folder the file resides in.
 
 ### Design templates
 
-There are currently 5 templates:
+The main templates (in `src/templates/`) are:
 
 -   **Handbook / Docs** - Files located in `contents/handbook` and `contents/docs`
--   **Blog post** - Files located in `contents/blog`
+-   **Blog post** - Files located in `contents/blog`, `contents/customers`, and the other post folders
 -   **Blog category** - Automatically created based on categories used in blog posts
--   **Customer** - Files located in `contents/customers`
 -   **Plain** - All other files located in `contents`
 
-Each template is passed a unique automatically generated ID that is used to query the data contained inside of the post.
+Each route builds the props for its template from the collection entry, with a builder in `src/lib/content/` (for example, `docs.ts` and `handbook.ts`).
 
-The GraphQL query inside of each template will return everything we need, from content to frontmatter, and we use the component
-`MDXRenderer` to render the body, and `MDXProvider` to pass some context that is available to all MDX pages.
+The props contain everything we need, from frontmatter to the content key of the body, and we use the component
+`MDXRenderer` (`src/components/MDXRenderer`) to render the body, and `MDXProvider` to pass some context that is available to all MDX pages.
 
 In this case, we pass references to components that can then be used without imports directly on MDX pages, like this hedgehog:
 
@@ -53,13 +52,11 @@ import { Transition } from '@headlessui/react'
 <Transition>{/* ... */}</Transition>
 ```
 
-> Currently, almost every component on the site is available automatically. This will eventually change because it causes some performance issues. For now, if you need a reference for which components you should be using in your MDX, check out our [MDX components handbook page](/handbook/engineering/posthog-com/markdown).
+> Currently, the components in `src/mdxGlobalComponents.js` are available automatically. If you need a reference for which components you should be using in your MDX, check out our [MDX components handbook page](/handbook/engineering/posthog-com/markdown).
 
-### mdxImportGen
+### Global components
 
-The `mdxImportGen.js` script handles global MDX imports automatically. This is currently a quick implementation that can improve
-and be made more robust in the pre-commit process. Essentially, it prepares a file based on all the components in our `src/components` directory
-which is then used to pass the components to `MDXProvider`, making them available everywhere.
+`src/mdxGlobalComponents.js` exports `shortcodes`, the components that every MDX page can use without an import. The templates pass these components to `MDXProvider`, making them available everywhere. To make a component global, import it in this file and add it to `shortcodes`.
 
 Doing globally available imports this way was important for 3 main reasons:
 

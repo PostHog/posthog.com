@@ -7,7 +7,11 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
 import OSButton from 'components/OSButton'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import profilesJson from '@data/people-profiles.json'
+import type { Profiles } from '~/data-layer/queries/people'
+import { Link } from 'lib/navigation'
+
+const profiles = profilesJson as Profiles
 
 interface VideoChapter {
     title: string
@@ -354,45 +358,14 @@ function VideoCard({ video, onClick }: { video: Video; onClick: () => void }) {
 
 // Component to fetch and display author's team and pineapple preference
 function AuthorInfo({ name }: { name: string }) {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    firstName
-                    lastName
-                    squeakId
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    color
-                    pineappleOnPizza
-                    teams {
-                        data {
-                            attributes {
-                                slug
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+    const person = profiles.find(
+        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 
     if (!person) return null
 
-    const teamSlug = person.teams?.data?.[0]?.attributes?.slug
-    const avatarUrl = person.avatar?.formats?.thumbnail?.url
+    const teamSlug = person.teamSlug
+    const avatarUrl = person.avatar
     const fullName = `${person.firstName} ${person.lastName}`
     const color = person.color || 'red'
 

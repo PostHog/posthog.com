@@ -2,11 +2,11 @@ import { Form, Formik, useFormikContext } from 'formik'
 import React, { createContext, InputHTMLAttributes, RefObject, useContext, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { button } from 'components/CallToAction'
-import { useLocation } from '@reach/router'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
 import * as Yup from 'yup'
 import { IconCheck } from '@posthog/icons'
+import { useLocation } from 'lib/navigation'
 
 interface CustomFieldOption {
     label: string
@@ -473,8 +473,8 @@ export default function HubSpotForm({
                                         ? Yup.array().of(Yup.string()).required(`${field.label} is a required field`)
                                         : Yup.string().required(`${field.label} is a required field`)
                                     : field.fieldType === 'checkbox'
-                                    ? Yup.array().of(Yup.string())
-                                    : Yup.string(),
+                                      ? Yup.array().of(Yup.string())
+                                      : Yup.string(),
                             ])
                         )
                     )

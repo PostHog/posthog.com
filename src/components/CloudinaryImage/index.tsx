@@ -2,7 +2,9 @@ import React from 'react'
 import { Image, Transformation } from 'cloudinary-react'
 
 const isCloudinaryImage = (url: string): boolean => {
-    const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
+    const cloudinaryUrlPattern = new RegExp(
+        `https://res.cloudinary.com/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}/`
+    )
     return cloudinaryUrlPattern.test(url)
 }
 
@@ -37,7 +39,7 @@ export default function CloudinaryImage({
             <Image
                 {...other}
                 publicId={cloudinaryPublicId}
-                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                cloudName={import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}
                 className={imgClassName}
                 secure
             >

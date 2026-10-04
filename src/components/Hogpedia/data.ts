@@ -1,4 +1,5 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import articlesJson from '@data/content-hogpedia-articles.json'
+import type { HogpediaArticles } from '~/data-layer/queries/content'
 
 export type HogpediaArticleSummary = {
     slug: string
@@ -9,19 +10,6 @@ export type HogpediaArticleSummary = {
     isTalk: boolean
 }
 
-type QueryNode = {
-    excerpt: string
-    fields: { slug: string }
-    frontmatter: {
-        title: string
-        description?: string
-        hogpedia?: {
-            aliases?: string[]
-            categories?: string[]
-        }
-    }
-}
-
 /**
  * Every Hogpedia article, read at build time.
  *
@@ -29,40 +17,7 @@ type QueryNode = {
  * Special:AllPages. All four therefore agree with the files on disk, and none of them can
  * name an article that does not exist.
  */
-export const useHogpediaArticles = (): HogpediaArticleSummary[] => {
-    const data = useStaticQuery(graphql`
-        query HogpediaArticles {
-            allMdx(
-                filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }
-                sort: { fields: frontmatter___title, order: ASC }
-            ) {
-                nodes {
-                    excerpt(pruneLength: 180)
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        description
-                        hogpedia {
-                            aliases
-                            categories
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    return (data.allMdx.nodes as QueryNode[]).map((node) => ({
-        slug: node.fields.slug.replace(/\/$/, ''),
-        title: node.frontmatter.title,
-        description: node.frontmatter.description || node.excerpt,
-        aliases: node.frontmatter.hogpedia?.aliases || [],
-        categories: node.frontmatter.hogpedia?.categories || [],
-        isTalk: node.fields.slug.startsWith('/hogpedia/talk/'),
-    }))
-}
+export const useHogpediaArticles = (): HogpediaArticleSummary[] => articlesJson as HogpediaArticles
 
 /** Articles only. Talk pages are not articles, the same as on any encyclopedia. */
 export const onlyArticles = (articles: HogpediaArticleSummary[]): HogpediaArticleSummary[] =>

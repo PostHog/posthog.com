@@ -74,11 +74,11 @@ Add a **Run Script** build phase:
 
 <MultiLanguage>
 
-```bash file=Swift Package Manager
+```bash file="Swift Package Manager"
 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file="CocoaPods"
 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
@@ -103,11 +103,11 @@ By default, only debug symbols are uploaded. To include source code snippets in 
 
 <MultiLanguage>
 
-```bash file=Swift Package Manager
+```bash file="Swift Package Manager"
 POSTHOG_INCLUDE_SOURCE=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file="CocoaPods"
 POSTHOG_INCLUDE_SOURCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
@@ -123,11 +123,11 @@ If PostHog already has a dSYM with the same UUID but different content, the uplo
 
 <MultiLanguage>
 
-```bash file=Swift Package Manager
+```bash file="Swift Package Manager"
 POSTHOG_SKIP_ON_CONFLICT=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file="CocoaPods"
 POSTHOG_SKIP_ON_CONFLICT=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
@@ -153,13 +153,13 @@ To verify everything is working end-to-end, force a test crash and confirm it ap
 
 <MultiLanguage>
 
-```swift file=SwiftUI
+```swift file="SwiftUI"
 Button("Test Crash") {
     fatalError("PostHog test crash")
 }
 ```
 
-```swift file=UIKit
+```swift file="UIKit"
 let button = UIButton(type: .system)
 button.setTitle("Test Crash", for: .normal)
 button.addTarget(self, action: #selector(testCrash), for: .touchUpInside)

@@ -1,0 +1,22 @@
+---
+// SDK type pages: /docs/references/<sdk or sdk-version>/types/<type> (src/lib/content/sdkReference.ts).
+import PageIsland from '../../../../../islands/PageIsland.astro'
+import Site from '../../../../../layouts/Site.astro'
+import { sdkTypePages } from '../../../../../lib/content/sdkReference'
+import type { SdkTypeProps } from '../../../../../templates/sdk/SdkType'
+
+export function getStaticPaths() {
+    return sdkTypePages().map(({ props }) => ({
+        params: { reference: props.slugPrefix, type: props.typeData.id },
+        props,
+    }))
+}
+
+type Props = SdkTypeProps
+
+const props = Astro.props
+---
+
+<Site>
+    <PageIsland module="/src/templates/sdk/SdkType.tsx" props={props} />
+</Site>

@@ -45,7 +45,7 @@ Tracing is off until you set the `traces` option on the client. When tracing is 
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 await posthog.withSpan('POST /api/chat', { kind: 'server' }, async (span) => {
   const traceId = span.traceparent()?.split('-')[1]
 
@@ -60,7 +60,7 @@ await posthog.withSpan('POST /api/chat', { kind: 'server' }, async (span) => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 with posthog.start_span("POST /api/chat", kind="server") as span:
     traceparent = span.traceparent()
     trace_id = traceparent.split("-")[1] if traceparent else None
@@ -81,13 +81,13 @@ If you instrument with the OpenTelemetry SDKs, read the trace ID from the active
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 import { trace } from '@opentelemetry/api'
 
 const traceId = trace.getActiveSpan()?.spanContext().traceId
 ```
 
-```python file=Python
+```python file="Python"
 from opentelemetry import trace
 
 span_context = trace.get_current_span().get_span_context()
@@ -104,7 +104,7 @@ Some proxies store the trace ID from the header as a dashed UUID, for example `4
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 // Caller: pass the trace context onward
 const traceparent = span.traceparent()
 await fetch('https://llm-proxy.internal/chat', {
@@ -114,7 +114,7 @@ await fetch('https://llm-proxy.internal/chat', {
 })
 ```
 
-```python file=Python
+```python file="Python"
 # Receiver: continue the trace and reuse its ID
 with posthog.start_span(
     "POST /chat",

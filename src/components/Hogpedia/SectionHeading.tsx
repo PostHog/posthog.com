@@ -12,8 +12,8 @@ import { useHogpediaArticle, articleSourceUrls } from './context'
  * cites no first-party page, it falls back to the article's own source, and then to the
  * GitHub editor for the file.
  *
- * The heading id comes from `github-slugger`, the same package
- * `gatsby-remark-autolink-headers` uses, so the Contents box anchors match.
+ * The heading id comes from `github-slugger`, the same package the table of contents uses
+ * (`src/lib/mdx/headings.mjs`), so the Contents box anchors match.
  */
 const slugger = new Slugger()
 

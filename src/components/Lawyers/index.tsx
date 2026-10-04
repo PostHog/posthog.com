@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import { YouTube, LinkedIn } from 'components/Icons'
 

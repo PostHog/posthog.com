@@ -41,7 +41,7 @@ On your Next.js app, you can get the distinct ID using `posthog.get_distinct_id`
 
 For Next.js you should call `posthog.get_distinct_id` in `useEffect` to ensure it's called after PostHog is initialized and right after the page is loaded.
 
-```tsx focusOnLines=6-8
+```tsx focusOnLines="6-8"
 'use client'
 import posthog from 'posthog-js'
 import { useEffect, useState } from 'react'
@@ -68,7 +68,7 @@ export default function Home() {
 
 Using the distinct ID, you can create a deeplink that will take the user to the mobile app when the user clicks on it. You should attach other properties to the deeplink like UTM parameters to track attribution.
 
-```tsx focusOnLines=10-17
+```tsx focusOnLines="10-17"
 'use client'
 import posthog from 'posthog-js'
 import { useEffect, useState } from 'react'
@@ -107,7 +107,7 @@ If the user is not authenticated on the mobile app, you can call `posthog.identi
 - If the web app is also unidentified, this will create a person in PostHog that links the web and mobile events.
 - If the web app is identified, this will create a person in PostHog that links the web and mobile events.
 
-```swift focusOnLines=13-17
+```swift focusOnLines="13-17"
 class DeeplinkHandler: ObservableObject {
   func handleDeeplink(_ url: URL) {
 
@@ -137,7 +137,7 @@ class DeeplinkHandler: ObservableObject {
 
 If the user is already authenticated on the mobile app, you can call `posthog.alias` with the distinct ID **passed in the deeplink**. Assuming you've already identified the authenticated user on the mobile app, this will attach the distinct ID to the existing person in PostHog.
 
-```swift focusOnLines=13-17
+```swift focusOnLines="13-17"
 class DeeplinkHandler: ObservableObject {
   func handleDeeplink(_ url: URL) {
 

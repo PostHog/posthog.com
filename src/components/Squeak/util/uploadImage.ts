@@ -11,7 +11,7 @@ export default async function uploadImage(
         formData.append('field', ref.field)
     }
 
-    const imageRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+    const imageRes = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/upload`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -21,7 +21,7 @@ export default async function uploadImage(
 
     const imageData = await imageRes.json()
     if (ref?.folderId) {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/add-media`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-folders/add-media`, {
             method: 'POST',
             body: JSON.stringify({ mediaId: imageData?.[0]?.id, folderId: ref.folderId }),
             headers: {

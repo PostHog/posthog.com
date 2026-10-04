@@ -26,7 +26,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import { Check2 } from 'components/Icons'
-import { navigate } from 'gatsby'
 import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
@@ -38,6 +37,7 @@ import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
+import { navigate } from 'lib/navigation'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -167,7 +167,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
     const { getJwt } = useUser()
     const handleClick = async () => {
         if (confirm('Are you sure you want to delete this thread?')) {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/questions/${questionID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -337,7 +337,7 @@ const AskMax = ({
     useEffect(() => {
         const askMax = async () => {
             try {
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
+                const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/ask-max`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -704,7 +704,7 @@ export function Question(props: QuestionProps) {
                                                     View in PostHog
                                                 </Link>
                                                 <Link
-                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                    to={`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
                                                     externalNoIcon
                                                     className="font-bold"
                                                 >

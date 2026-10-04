@@ -3,8 +3,8 @@ import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
 import OSTable from 'components/OSTable'
 import { IconArrowUpRight } from '@posthog/icons'
-import { Link } from 'gatsby'
 import OSButton from 'components/OSButton'
+import { Link } from 'lib/navigation'
 
 const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
 

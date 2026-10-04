@@ -1,9 +1,12 @@
 import React, { useMemo, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
-import { getLogo } from '../../../constants/logos'
 import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxonomy'
+import installFrameworkGridJson from '@data/content-install-framework-grid.json'
+import type { InstallFrameworkGridData } from '~/data-layer/queries/content'
+
+const { libraryLogos, productInstallUrls: installUrls } = installFrameworkGridJson as InstallFrameworkGridData
+const productInstallUrls = new Set(installUrls)
 
 /**
  * Shared framework picker driven by the install `TAXONOMY` (single source of
@@ -25,16 +28,6 @@ interface InstallFrameworkGridProps {
     className?: string
 }
 
-type MdxSlugNode = { fields: { slug: string } }
-type LibraryNode = {
-    fields: { slug: string }
-    frontmatter: {
-        title?: string
-        platformLogo?: string
-        icon?: { publicURL?: string } | null
-    }
-}
-
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
 
 const subheading = 'text-[11px] font-semibold text-secondary m-0 mb-1'
@@ -49,53 +42,6 @@ const InstallFrameworkGrid = ({
     const [query, setQuery] = useState('')
     const isSearching = query.trim().length > 0
     const lowerQuery = query.trim().toLowerCase()
-
-    const data = useStaticQuery<{
-        libraries: { nodes: LibraryNode[] }
-        productInstalls: { nodes: MdxSlugNode[] }
-    }>(graphql`
-        query InstallFrameworkGridQuery {
-            libraries: allMdx(filter: { fields: { slug: { regex: "/^/docs/libraries/[^/]+$/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        platformLogo
-                        icon {
-                            publicURL
-                        }
-                    }
-                }
-            }
-            productInstalls: allMdx(filter: { fields: { slug: { regex: "/^/docs/[^/]+/installation/[^/]+$/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-
-    const libraryMeta = useMemo(() => {
-        const map = new Map<string, { logo?: string; title?: string }>()
-        data?.libraries?.nodes?.forEach((node) => {
-            const match = node.fields.slug.match(/^\/docs\/libraries\/([^/]+)/)
-            if (!match) return
-            const fm = node.frontmatter || {}
-            const logo = fm.platformLogo ? getLogo(fm.platformLogo) : fm.icon?.publicURL
-            map.set(match[1], { logo, title: fm.title })
-        })
-        return map
-    }, [data])
-
-    const productInstallUrls = useMemo(() => {
-        const set = new Set<string>()
-        data?.productInstalls?.nodes?.forEach((node) => set.add(node.fields.slug))
-        return set
-    }, [data])
 
     const resolveUrl = (item: InstallItem): string => {
         if (productSlug) {
@@ -112,15 +58,15 @@ const InstallFrameworkGrid = ({
 
     const renderTile = (item: InstallItem, keyPrefix: string) => {
         const url = resolveUrl(item)
-        const meta = libraryMeta.get(item.librarySlug)
+        const logo = libraryLogos[item.librarySlug]
         return (
             <li key={`${keyPrefix}-${item.slug}`} className="m-0 list-none break-inside-avoid">
                 <Link
                     to={url}
                     className="group flex items-center gap-2 py-1.5 px-1 rounded hover:bg-accent text-primary no-underline"
                 >
-                    {meta?.logo ? (
-                        <img src={meta.logo} alt="" className="w-5 h-5 object-contain shrink-0" />
+                    {logo ? (
+                        <img src={logo} alt="" className="w-5 h-5 object-contain shrink-0" />
                     ) : (
                         <span className="w-5 h-5 shrink-0 inline-block rounded bg-accent" aria-hidden />
                     )}

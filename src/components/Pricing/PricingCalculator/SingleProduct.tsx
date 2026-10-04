@@ -4,7 +4,7 @@ import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from '../Prici
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../Plans'
 import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
+import AutosizeInput from 'components/AutosizeInput'
 
 export default function SingleProductPricing({ productType }: { productType: string }) {
     const { products, setVolume } = useProducts()

@@ -1,8 +1,8 @@
 import React from 'react'
 import { CTA as PlanCTA } from 'components/Pricing/Plans'
-import GrassAngled from '../../../images/grass-tuft-angled.png'
-import GrassFolded from '../../../images/grass-tuft-folded.png'
-import GrassFan from '../../../images/grass-tuft-fan.png'
+import GrassAngled from '../../../images/grass-tuft-angled.png?url'
+import GrassFolded from '../../../images/grass-tuft-folded.png?url'
+import GrassFan from '../../../images/grass-tuft-fan.png?url'
 
 /**
  * Transparent "PostHog 3000" art, trimmed and capped at 800px by Cloudinary.
@@ -109,9 +109,8 @@ export default function Hero(): JSX.Element {
                         </div>
                     </div>
 
-                    {/* Plain <img>: this repo has gatsby-plugin-image but NOT gatsby-plugin-sharp,
-                        so StaticImage/GatsbyImage will fail the build. Intrinsic dimensions are set
-                        so the column reserves the right height before the remote art loads. */}
+                    {/* Plain <img>, with intrinsic dimensions so the column reserves the right height
+                        before the remote art loads. */}
                     <div className="shrink-0 self-center w-56 @2xl:w-64 @4xl:w-80 relative">
                         <TuftLayer tufts={BEHIND_TUFTS} className="z-0" />
 

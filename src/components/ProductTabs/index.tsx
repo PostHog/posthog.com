@@ -6,34 +6,35 @@ import OSButton from 'components/OSButton'
 import { APP_COUNT } from '../../constants'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { useApp } from '../../context/App'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useWindow } from '../../context/Window'
+import { ResponsiveImage } from 'components/Image'
+import homeImagesJson from '@data/content-home-images.json'
+import type { HomeImages } from '~/data-layer/queries/content'
+
+const homeImages = homeImagesJson as HomeImages
 
 const Image = ({
-    images,
     src,
     alt,
     width,
     height,
     imgClassName,
 }: {
-    images: any
     src: string
     alt: string
     width?: number
     height?: number
     imgClassName: string
 }) => {
-    const image = images.find((image: any) => image.publicURL === src)
-    if (!image?.childImageSharp?.gatsbyImageData) {
+    const image = homeImages.find((image) => image.url === src)?.image
+    if (!image) {
         return <CloudinaryImage src={src as any} alt={alt} width={width} height={height} imgClassName={imgClassName} />
     }
 
     return (
-        <GatsbyImage
+        <ResponsiveImage
             loading="eager"
-            image={getImage(image)}
+            image={image}
             alt={alt}
             width={width}
             height={height}
@@ -77,25 +78,6 @@ export default function ProductTabs({ productHandles, className, selectedStage }
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
 
-    const {
-        mdx: {
-            frontmatter: { images },
-        },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "" }) {
-                frontmatter {
-                    images {
-                        publicURL
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
     useEffect(() => {
         // Find the container with aria-label="Company stage"
         const container = document.querySelector('[aria-label="Company stage"]')
@@ -123,8 +105,8 @@ export default function ProductTabs({ productHandles, className, selectedStage }
             const product = Array.isArray(allProducts)
                 ? allProducts.find((p: any) => p.handle === handle)
                 : allProducts?.handle === handle
-                ? allProducts
-                : null
+                  ? allProducts
+                  : null
             return product as Product | null
         })
         .filter((product): product is Product => product !== null)
@@ -182,7 +164,6 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                             }`}
                         >
                             <Image
-                                images={images}
                                 src={
                                     isDark && product.screenshots.home.srcDark
                                         ? product.screenshots.home.srcDark

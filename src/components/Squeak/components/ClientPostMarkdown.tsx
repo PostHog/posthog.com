@@ -1,9 +1,9 @@
 import React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { defaultUrlTransform } from 'react-markdown'
+import { codeText } from './Markdown'
 import rehypeSanitize from 'rehype-sanitize'
 import { ZoomImage } from 'components/ZoomImage'
-import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 
 export const ClientPostMarkdown = ({
@@ -12,27 +12,24 @@ export const ClientPostMarkdown = ({
     allowedElements,
 }: {
     children: string
-    transformImageUri?: TransformImage | undefined
+    transformImageUri?: (src: string) => string
     allowedElements?: string[]
 }) => {
     return (
-        // transformImageUri is safe, rehypeSanitize sanitizes all HTML output
+        // urlTransform is safe, rehypeSanitize sanitizes all HTML output
         // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
         <ReactMarkdown
             allowedElements={allowedElements}
             remarkPlugins={[remarkGfm]}
-            transformImageUri={transformImageUri}
+            urlTransform={(url, key) =>
+                key === 'src' && transformImageUri ? transformImageUri(url) : defaultUrlTransform(url)
+            }
             rehypePlugins={[rehypeSanitize]}
-            className=""
             components={{
                 pre: ({ children }) => {
                     return (
                         <>
-                            <Highlight
-                                {...defaultProps}
-                                code={(children[0] as any)?.props?.children[0]}
-                                language={'js' as Language}
-                            >
+                            <Highlight {...defaultProps} code={codeText(children)} language={'js' as Language}>
                                 {({ className, style, tokens, getLineProps, getTokenProps }) => (
                                     <pre className={`${className} whitespace-pre-wrap`} style={style}>
                                         {tokens.map((line, i) => (

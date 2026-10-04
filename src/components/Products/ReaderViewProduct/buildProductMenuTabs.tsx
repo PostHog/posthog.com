@@ -170,7 +170,7 @@ interface BuildProductMenuTabsArgs {
      * on the active surface. Used by `ProductNav` for in-page anchor scrolling
      * within the article column's ScrollArea. Only the tab whose `value`
      * matches `activeSurface` uses this ref; the other tabs fall back to
-     * cross-page Gatsby links.
+     * cross-page links.
      */
     contentRef?: React.RefObject<HTMLElement>
     /** Seeds which tab is active on first render. */

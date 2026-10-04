@@ -87,7 +87,7 @@ uv run handbook-audio --dry-run --upload-s3 --dir engineering
 
 | Mode | Command | Description |
 |------|---------|-------------|
-| **Single file** | `uv run handbook-audio contents/handbook/values.md` | Generate one specific file |
+| **Single file** | `uv run handbook-audio contents/handbook/values.mdx` | Generate one specific file |
 | **Directory** 🆕 | `uv run handbook-audio --dir engineering/ai` | Generate all files in a directory |
 | **Search** | `uv run handbook-audio --search "engineering"` | Generate files matching text pattern |
 | **All** | `uv run handbook-audio --all` | Generate ALL handbook files |

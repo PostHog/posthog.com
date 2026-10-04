@@ -1,0 +1,25 @@
+---
+// Pocket guide pages: contents/pocket-guides, rendered into the book layout. The shelf at
+// /pocket-guides is a view.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type PocketGuideEntry, isPocketGuidePage, pocketGuidePage } from '../../lib/content/templates'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    return (await getCollection('pocketGuides'))
+        .filter((entry) => isPocketGuidePage(entry) && !isViewPath(entryPath('/pocket-guides', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id === 'index' ? undefined : entry.id }, props: { entry } }))
+}
+
+interface Props {
+    entry: PocketGuideEntry
+}
+
+const page = pocketGuidePage(Astro.props.entry)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Template.tsx" props={page} content={page.body} />
+</Site>

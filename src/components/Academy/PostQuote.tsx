@@ -1,8 +1,11 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import slugify from 'slugify'
+import profilesJson from '@data/people-profiles.json'
+import type { Profiles } from '~/data-layer/queries/people'
+
+const profiles = profilesJson as Profiles
 
 interface PostQuoteProps {
     title?: string
@@ -17,57 +20,16 @@ const PostQuote: React.FC<PostQuoteProps> = ({
     quote,
     authorName,
 }) => {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                    companyRole
-                    location
-                    country
-                    startDate
-                    color
-                    leadTeams {
-                        data {
-                            id
-                        }
-                    }
-                    teams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === authorName.toLowerCase()
+    const person = profiles.find(
+        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === authorName.toLowerCase()
     )
 
     if (!person) {
         return null
     }
 
-    const { firstName, lastName, country, startDate, squeakId, avatar, teams, leadTeams, color } = person
-    const teamName = teams?.data?.[0]?.attributes?.name
-    const isTeamLead = leadTeams.data.length > 0
-    const teamURL = `/teams/${slugify(teamName, { lower: true })}`
+    const { firstName, lastName, startDate, squeakId, avatar, teamName, isTeamLead, color } = person
+    const teamURL = `/teams/${slugify(teamName as string, { lower: true })}`
 
     return (
         <div className="px-4 xl:px-8 mb-8">
@@ -83,12 +45,8 @@ const PostQuote: React.FC<PostQuoteProps> = ({
                                         color ? `bg-${color}` : 'bg-orange'
                                     }`}
                                 >
-                                    {avatar?.formats?.thumbnail?.url ? (
-                                        <img
-                                            src={avatar.formats.thumbnail.url}
-                                            alt={`${firstName} ${lastName}`}
-                                            className="size-24"
-                                        />
+                                    {avatar ? (
+                                        <img src={avatar} alt={`${firstName} ${lastName}`} className="size-24" />
                                     ) : (
                                         <CloudinaryImage
                                             alt=""
@@ -114,7 +72,7 @@ const PostQuote: React.FC<PostQuoteProps> = ({
                             <p className="m-0 flex justify-center items-end space-x-1 mt-2 opacity-60">
                                 <span className="text-xs leading-none">
                                     Joined in{' '}
-                                    {new Date(startDate).toLocaleDateString('en-US', {
+                                    {new Date(startDate as string).toLocaleDateString('en-US', {
                                         month: 'long',
                                         year: 'numeric',
                                     })}

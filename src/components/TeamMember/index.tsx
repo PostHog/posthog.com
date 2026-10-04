@@ -1,9 +1,12 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import { Link } from 'gatsby'
+import { Link } from 'lib/navigation'
+import profilesJson from '@data/people-profiles.json'
+import type { Profiles } from '~/data-layer/queries/people'
+
+const profiles = profilesJson as Profiles
 
 export const TeamMemberLink = ({
     firstName,
@@ -20,22 +23,23 @@ export const TeamMemberLink = ({
     children,
     href,
 }: {
-    firstName: string
-    lastName?: string
-    squeakId?: string
-    avatar?: { formats: { thumbnail: { url: string } } }
-    companyRole?: string
-    location?: string
-    country?: string
-    color?: string
+    firstName: string | null
+    lastName?: string | null
+    squeakId?: number
+    /** The avatar thumbnail URL. */
+    avatar?: string | null
+    companyRole?: string | null
+    location?: string | null
+    country?: string | null
+    color?: string | null
     className?: string
     photo?: boolean
     showOnlyFirstName?: boolean
     children?: JSX.Element
     href?: string
 }): JSX.Element => {
-    const displayName = showOnlyFirstName ? firstName : [firstName, lastName].filter(Boolean).join(' ')
-    const avatarUrl = avatar?.formats?.thumbnail?.url
+    const displayName = (showOnlyFirstName ? firstName : [firstName, lastName].filter(Boolean).join(' ')) ?? undefined
+    const avatarUrl = avatar ?? undefined
 
     // The invisible block is necessary to make sure we have the proper width
     // with the `relative inline-block` parent when we include a photo
@@ -156,34 +160,8 @@ export default function TeamMember({
     showOnlyFirstName?: boolean
     children?: JSX.Element
 }): JSX.Element | null {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                    companyRole
-                    location
-                    country
-                    color
-                }
-            }
-        }
-    `)
-
-    const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+    const person = profiles.find(
+        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 
     return person ? (

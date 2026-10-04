@@ -5,20 +5,20 @@ This directory contains the video library data structure for PostHog's video lib
 ## Files
 
 - **`videos.ts`** - Source of truth for video data. Manually maintained list of videos.
-- **`public/videos-metadata.json`** - Auto-generated file with enriched metadata (thumbnails, titles) from YouTube and Wistia APIs. Created at build time and served as a static asset.
+- **`static/videos-metadata.json`** - Auto-generated (and gitignored) file with enriched metadata (thumbnails, titles) from YouTube and Wistia APIs. Created when the dev server or a build starts, and served as a static asset.
 
 ## How It Works
 
 ### Build Time Enrichment
 
-During the Gatsby build (`onPreBootstrap` hook), the system:
+When the dev server or a build starts, `writeVideosMetadata()` in `src/data-layer/artifacts.ts`:
 
 1. Reads the base video data from `videos.ts`
 2. Fetches metadata from video APIs:
    - **Wistia**: Uses the oEmbed API to get thumbnails and titles (no API key needed)
    - **YouTube**: Uses predictable thumbnail URLs (e.g., `https://img.youtube.com/vi/{videoId}/maxresdefault.jpg`)
    - **YouTube Titles** (optional): Fetches from YouTube Data API v3 if `YOUTUBE_API_KEY` env var is set
-3. Writes enriched data to `public/videos-metadata.json` (served as a static asset)
+3. Writes enriched data to `static/videos-metadata.json` (served as a static asset)
 
 ### Runtime Usage
 
@@ -28,13 +28,13 @@ The `useVideos()` hook:
 - Gracefully falls back to base data if fetch fails
 - Used by `/videos` (library page) and `/videos/play` (player page)
 
-### Why public/ Directory?
+### Why the static/ directory?
 
-Writing to `public/` ensures the file is:
+Writing to `static/` (Astro's `publicDir`) ensures the file is:
 - ✅ Served as a static asset on Vercel/CDN
 - ✅ Available at `/videos-metadata.json` URL
 - ✅ Cached and served efficiently
-- ✅ No webpack bundling issues or timing concerns
+- ✅ Not part of the JavaScript bundle
 
 ## Adding New Videos
 
@@ -50,7 +50,7 @@ Writing to `public/` ensures the file is:
 }
 ```
 
-2. Run a build - thumbnails and titles will be automatically fetched from the video platform APIs
+2. Restart the dev server (`pnpm start`) or run a build - thumbnails and titles will be automatically fetched from the video platform APIs
 
 ## Environment Variables
 

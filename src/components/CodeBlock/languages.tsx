@@ -1,18 +1,16 @@
 import React from 'react'
 import type { Language } from 'prism-react-renderer'
-import Prism from 'prism-react-renderer/prism'
-;(typeof global !== 'undefined' ? global : window).Prism = Prism
-
-require('prismjs/components/prism-php')
-require('prismjs/components/prism-ruby')
-require('prismjs/components/prism-java')
-require('prismjs/components/prism-swift')
-require('prismjs/components/prism-dart')
-require('prismjs/components/prism-elixir')
-require('prismjs/components/prism-rust')
-require('prismjs/components/prism-kotlin')
-require('prismjs/components/prism-groovy')
-require('prismjs/components/prism-csharp')
+import './prismGlobal'
+import 'prismjs/components/prism-php'
+import 'prismjs/components/prism-ruby'
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-swift'
+import 'prismjs/components/prism-dart'
+import 'prismjs/components/prism-elixir'
+import 'prismjs/components/prism-rust'
+import 'prismjs/components/prism-kotlin'
+import 'prismjs/components/prism-groovy'
+import 'prismjs/components/prism-csharp'
 
 type LanguageMap = {
     [key: string]: {

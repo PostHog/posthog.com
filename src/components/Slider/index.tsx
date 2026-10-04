@@ -1,7 +1,7 @@
 import { IconChevronDown } from '@posthog/icons'
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { useLocation } from '@reach/router'
+import { useLocation } from 'lib/navigation'
 
 export default function Slider({ className = '', activeIndex, children }) {
     const ref = useRef<HTMLUListElement>(null)
@@ -54,8 +54,9 @@ export default function Slider({ className = '', activeIndex, children }) {
                     type="button"
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                    className={`absolute top-0 -left-4 md:left-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${firstInView ? '-z-10 opacity-0' : 'z-10'
-                        }`}
+                    className={`absolute top-0 -left-4 md:left-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        firstInView ? '-z-10 opacity-0' : 'z-10'
+                    }`}
                 >
                     <IconChevronDown className="w-8 h-8 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
@@ -93,8 +94,9 @@ export default function Slider({ className = '', activeIndex, children }) {
                     type="button"
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
-                    className={`absolute top-0 -right-4 md:right-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${lastInView ? '-z-10 opacity-0' : 'z-10'
-                        }`}
+                    className={`absolute top-0 -right-4 md:right-0 h-[calc(100%-2px)] flex justify-end items-center w-8 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${
+                        lastInView ? '-z-10 opacity-0' : 'z-10'
+                    }`}
                 >
                     <IconChevronDown className="w-8 h-8 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>

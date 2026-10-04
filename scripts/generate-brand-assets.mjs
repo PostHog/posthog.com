@@ -6,7 +6,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import sharp from 'sharp'
 import { Logo } from '@posthog/brand/logo'
 
-// Materialize stable /brand URLs from the canonical package before Gatsby copies static/ to public/.
+// Materialize stable /brand URLs from the canonical package before Astro copies static/ to dist/.
 // package.json lifecycle hooks run this automatically for the standard build commands.
 const outputDirectory = fileURLToPath(new URL('../static/brand/', import.meta.url))
 

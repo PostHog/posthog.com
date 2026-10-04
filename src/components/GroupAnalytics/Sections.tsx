@@ -1,8 +1,7 @@
 import React from 'react'
-import { useStaticQuery } from 'gatsby'
 import OSButton from 'components/OSButton'
 import { PricingTiers } from 'components/Pricing/Plans'
-import { allProductsData } from 'components/Pricing/Pricing'
+import { billingProducts } from 'components/Pricing/Pricing'
 import { CARD_H3, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct'
 
@@ -59,13 +58,7 @@ export const GroupAnalyticsInstallation = ({ id }: SectionComponentProps) => (
 )
 
 const useGroupAnalyticsPricing = () => {
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
-
-    const productAddons = billingProducts.flatMap((product: any) => product.addons || [])
+    const productAddons = billingProducts.flatMap((product) => product.addons || [])
     const addon = productAddons.find(
         (candidate: any) =>
             candidate.name === 'Group Analytics' ||
@@ -95,7 +88,7 @@ export const GroupAnalyticsPricing = ({ id }: SectionComponentProps) => {
             <div className="border border-primary rounded p-6 bg-primary mb-8">
                 {plan.flat_rate ? (
                     <div className="flex items-baseline">
-                        <strong className="text-4xl text-primary">${plan.unit_amount_usd.replace('.00', '')}</strong>
+                        <strong className="text-4xl text-primary">${plan.unit_amount_usd?.replace('.00', '')}</strong>
                         <span className="text-base text-secondary ml-1">/mo</span>
                     </div>
                 ) : (

@@ -1,7 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import CodeBlock from 'components/Home/CodeBlock'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 
 function CaptureFormInputs() {
     return (

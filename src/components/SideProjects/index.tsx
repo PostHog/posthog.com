@@ -4,25 +4,19 @@ import OSButton from 'components/OSButton'
 import { OSInput } from 'components/OSForm'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { PROFILE_COLORS } from 'constants/profileColors'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import { useWindow } from '../../context/Window'
+import creatorProfilesJson from '@data/people-creator-profiles.json'
+import type { CreatorProfiles } from '~/data-layer/queries/people'
 
-const API_HOST = process.env.GATSBY_SQUEAK_API_HOST
+const API_HOST = import.meta.env.PUBLIC_SQUEAK_API_HOST
 
-export type CreatorProfile = {
-    squeakId: string
-    firstName?: string
-    lastName?: string
-    companyRole?: string
-    github?: string
-    color?: string
-    avatar?: { url?: string; formats?: { thumbnail?: { url?: string } } }
-    teams?: { data?: { id: number }[] }
-}
+export type CreatorProfile = CreatorProfiles[number]
+
+const creatorProfiles = creatorProfilesJson as CreatorProfiles
 
 export type SideProject = {
     id?: number
@@ -114,38 +108,7 @@ export const isAlumniProject = (
     return !isCurrentTeamMember(findCreatorProfile(profiles, frontmatter))
 }
 
-export const useCreatorProfiles = (): CreatorProfile[] => {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    squeakId
-                    firstName
-                    lastName
-                    companyRole
-                    github
-                    color
-                    avatar {
-                        url
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    teams {
-                        data {
-                            id
-                        }
-                    }
-                }
-            }
-        }
-    `)
-    return nodes
-}
+export const useCreatorProfiles = (): CreatorProfile[] => creatorProfiles
 
 const normalizeGitHub = (github?: string): string | undefined =>
     github
@@ -483,11 +446,11 @@ export const SideProjectForm = ({
     const canSubmit =
         Boolean(
             values.title.trim() &&
-                values.description.trim() &&
-                values.projectAuthor.trim() &&
-                (githubUrl || liveUrl) &&
-                (!githubUrl || isValidProjectUrl(githubUrl)) &&
-                (!liveUrl || isValidProjectUrl(liveUrl))
+            values.description.trim() &&
+            values.projectAuthor.trim() &&
+            (githubUrl || liveUrl) &&
+            (!githubUrl || isValidProjectUrl(githubUrl)) &&
+            (!liveUrl || isValidProjectUrl(liveUrl))
         ) && !submitting
 
     const handleSubmit = async (event: React.FormEvent) => {

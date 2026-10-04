@@ -1,0 +1,214 @@
+---
+title: PostHog.com site architecture
+---
+
+PostHog.com doesn’t behave like a normal website. Instead, it runs inside a desktop-style environment where every page opens in a window. This guide explains how that system works under the hood.
+
+## Core architecture
+
+PostHog.com runs on Astro with a custom windowing system built from React islands. The entire site operates inside a desktop-like environment. The page window replaces traditional page navigation.
+
+At a high level, every route renders the **Site layout** (`src/layouts/Site.astro`). The layout renders three React islands: the **Chrome** (taskbar and global overlays), the **Desktop** (wallpaper, icons, and dialog windows), and the **Page** island, which displays the page inside an **AppWindow** component. The app state in `src/context/App.tsx` manages global state and window logic for all three islands.
+
+### Key components
+
+* **App state** (`src/context/App.tsx`) – Core state management and window system
+* **Site layout** (`src/layouts/Site.astro`) – Desktop layout and the islands
+* **Islands** (`src/islands/Chrome.tsx`, `src/islands/Desktop.tsx`, `src/islands/Page.tsx`) – The taskbar, the desktop, and the page window
+* **AppWindow** (`src/components/AppWindow/index.tsx`) – The window frame for the page and for dialogs
+* **Desktop** (`src/components/Desktop/index.tsx`) – Desktop environment with wallpapers and icons
+
+## How pages become windows
+
+Every page route in `src/pages/` renders the Site layout with one page island. For example, `src/pages/[...page].astro` serves the page components in `src/views/`:
+
+```astro
+<Site>
+    <PageIsland module={route.module} props={{ data, pageContext: {}, params: {} }} />
+</Site>
+```
+
+`PageIsland` (`src/islands/PageIsland.astro`) receives:
+
+* `module` – The module path of the page component, a view in `src/views/` or a template in `src/templates/`
+* `props` – The props for the page component
+* `content` – The main MDX module of the page, if it has one
+
+It loads the page component and its content on the server, then renders the page island (`src/islands/Page.tsx`). The page island creates the page window and registers it with the app state.
+
+## The app state system
+
+Located at `src/context/App.tsx`, the app state is the core of our windowing system.
+
+### Window state management
+
+Astro hydrates each island as a separate React root, so React context cannot share state between islands. Instead, the app state is a module-level store (`src/lib/store.ts`). Every island reads and writes the same store:
+
+```tsx
+interface AppState {
+    pageWindow?: AppWindow
+    dialogs: AppWindow[]
+    windowMode: WindowMode
+    // ...
+}
+```
+
+The site shows one page window at a time (`pageWindow`). Dialogs, such as sign-in, display options, and contact forms, open as fixed-size windows above the page (`dialogs`).
+
+Each window object contains:
+
+* `element` – The React component to render
+* `key` – The window identifier, and its entry in `appSettings`
+* `path` – Route path
+* `size` and `sizeConstraints` – Width/height dimensions
+* `appSettings` – Window-specific configuration
+
+Components read the store through hooks such as `useApp`, `useAppActions`, and `useWindowMode`.
+
+### Core functions
+
+Key window management functions include:
+
+* `addWindow()` – Opens a dialog window
+* `closeWindow()` – Closes a dialog, or closes the page window to show the desktop
+* `bringToFront()` – Moves a dialog to the top
+* `updateWindow()` – Updates the window settings, or expands the page window
+* `setWindowMode()` – Sets the page window mode (`windowed`, `expanded`, or `closed`)
+
+### Window routing behavior
+
+Navigation to a different page goes through Astro's `<ClientRouter />`. The router replaces the page island and keeps the chrome and desktop islands mounted, so nothing blinks. A change to only the query string or the hash of the current page uses the History API (`src/lib/navigation.tsx`), so the page island re-renders and does not remount.
+
+To open a dialog, call `addWindow(element, { key })`. If a dialog with the same key is open, the new dialog replaces it.
+
+## App settings configuration
+
+Window behavior is controlled by the `appSettings` object in `src/context/App.tsx`. Each route or dialog key can have custom settings:
+
+```tsx
+export const appSettings: Record<string, AppSetting> = {
+    '/talk-to-a-human': {
+        size: { min: { width: 500, height: 500 }, fixed: true, autoHeight: true },
+        modal: { type: 'standard' },
+    },
+    '/display-options': {
+        size: { min: { width: 600, height: 550 }, fixed: true, autoHeight: true },
+        toolbar: true,
+        closeOnEscape: true,
+    },
+    // More route configurations...
+}
+```
+
+### Configuration options
+
+* **size.min** – Window dimensions
+* **size.fixed** – Opens the window as a fixed-size dialog over the page
+* **size.autoHeight** – Auto-adjust height to content
+* **modal.type** – Modal style (`standard`, `side`, or `floating`)
+* **closeOnEscape** – Close the window with the `Escape` key
+* **toolbar** – Show a toolbar with the window title
+* **hideTitle** – Hide the title in the toolbar
+
+## The Site layout
+
+`src/layouts/Site.astro` handles the actual desktop rendering:
+
+```astro
+<div data-scheme="primary" id="app-container" class="h-dvh flex flex-col p-2">
+    <Chrome client:load transition:persist="chrome" url={url} />
+    <div data-app="DesktopViewport" class="flex-grow relative min-h-0 overflow-clip">
+        <Desktop client:load transition:persist="desktop" url={url} />
+        <div data-app="WindowList" class="absolute inset-0 flex justify-center items-center pointer-events-none">
+            <Fragment set:html={page} />
+        </div>
+    </div>
+</div>
+```
+
+It renders:
+
+* Taskbar at the top, search, chat, and toasts (the Chrome island)
+* Desktop background, icons, and dialog windows (the Desktop island)
+* The page window (the page island)
+
+The Chrome and Desktop islands use `transition:persist`, so they stay mounted when the visitor goes to a different page. The layout also writes the `<head>` tags that the page's `<SEO>` component records during server rendering.
+
+## Window implementation
+
+Individual windows are implemented in `src/components/AppWindow/index.tsx`. Each window is wrapped in a Window Provider so that child components can access the current window object via the `useWindow` hook.
+
+### Key features
+
+* **Expanding** – The page window can expand to fill the desktop
+* **Closing** – Close the page window to show the desktop
+* **Dialogs** – Fixed-size windows open over the page
+* **Narrow screens** – On a narrow desktop, the page window always fills it (a container query in `src/styles/global.css`)
+* **Chrome** – Window controls (expand and close buttons)
+
+### Window lifecycle
+
+1. **Creation** – The page island creates the page window and registers it with `registerPageWindow()`
+2. **Rendering** – The server renders the full HTML, and the browser hydrates it
+3. **Interaction** – User can expand, restore, or close the window
+4. **Navigation** – The router replaces the page island. If the window was closed, the next page opens it again
+
+## Window modes
+
+The page window mode is on `<html data-window>`:
+
+* **windowed** – The page shows in a window on the desktop
+* **expanded** – The page window fills the desktop
+* **closed** – The page window is hidden, and the desktop shows
+
+CSS in `src/styles/global.css` sizes the page window from this attribute. The server HTML is correct for every mode, so nothing jumps after the page loads.
+
+## Keyboard shortcuts
+
+Global keyboard shortcuts are handled in the app state (`src/context/App.tsx`):
+
+**Navigation and search**
+
+* `/` or `Cmd+K` – Open search
+* `?` – Open chat
+
+**Appearance**
+
+* `,` – Display options
+* `m` – Toggle theme (system, light, dark)
+* `\` – Cycle wallpapers
+
+**Window control**
+
+* `Shift + ↑` – Expand or restore the page window
+* `Shift + ↓` or `Shift + W` – Close the top dialog, or close the page window
+* `Shift + X` – Close all windows
+* `Shift + C` – Copy the page link
+
+## SEO compatibility
+
+Despite the desktop interface, the site maintains full SEO compatibility:
+
+* Pages are statically generated at build time
+* Each route has proper HTML structure, canonical tags, and metadata
+* Search engines crawl normal static files
+* Client-side windowing does not affect crawling
+
+## Development workflow
+
+When working on the windowing system:
+
+1. **Test window creation** – Ensure new pages open in the page window properly
+2. **Check window modes** – Verify the windowed, expanded, and closed modes
+3. **Test interactions** – Expand, restore, and close functionality, and dialogs
+4. **Verify navigation** – The taskbar and desktop stay mounted, and nothing blinks between pages
+5. **Narrow screens** – Ensure the page window fills a narrow desktop
+
+## Common debugging
+
+* **Dialogs not appearing** – Check `appSettings` configuration for the route or dialog key
+* **Sizing issues** – Verify the `data-window` rules in `src/styles/global.css`
+* **Hydration problems** – Check the browser console for hydration errors from the page island
+* **State sync issues** – Use React DevTools to inspect the islands, and check the store in `src/context/App.tsx`
+
+This architecture allows PostHog.com to feel like a desktop operating system while maintaining the benefits of a static website for performance and SEO.

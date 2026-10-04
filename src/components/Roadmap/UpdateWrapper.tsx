@@ -20,7 +20,7 @@ export const RoadmapSuccess = ({
             <p className="!m-0">{description}</p>
             <Link
                 external
-                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::roadmap.roadmap/${id}`}
+                to={`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::roadmap.roadmap/${id}`}
                 className="mt-2 text-sm"
             >
                 View in Strapi
@@ -101,7 +101,7 @@ export default function UpdateWrapper({
             'Unpublishing this roadmap item will remove it from the roadmap and it will need to be republished via Strapi. No data will be lost. Are you sure you want to unpublish?'
         )
         if (confirmed) {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps/${id}`, {
                 body: JSON.stringify({
                     data: {
                         publishedAt: null,
@@ -152,7 +152,7 @@ export default function UpdateWrapper({
                 },
             },
         } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
             jwt
                 ? {
                       headers: {

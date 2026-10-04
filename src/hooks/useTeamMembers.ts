@@ -81,7 +81,7 @@ export function useTeamMembers() {
             try {
                 const token = await getJwt()
                 const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
-                const apiUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles`
+                const apiUrl = `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles`
                 const populate = {
                     avatar: { fields: ['url'] },
                     teams: { fields: ['name'] },
@@ -151,7 +151,7 @@ export function useTeamMembers() {
         }
 
         try {
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
+            const res = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles/${profileId}`, {
                 method: 'PUT',
                 body: JSON.stringify({ data: apiData }),
                 headers: {

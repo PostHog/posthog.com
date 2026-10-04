@@ -112,7 +112,7 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 2. Create a new `.tsx` file: `docs/onboarding/your-product/filename.tsx`
 3. Export a step function and Installation component. Use `createInstallation` to automatically handle the rendering:
 
-   ```tsx file=docs/onboarding/feature-flags/python.tsx
+   ```tsx file="docs/onboarding/feature-flags/python.tsx"
    import { OnboardingComponentsContext, createInstallation } from 'scenes/onboarding/OnboardingDocsContentWrapper'
    import { getPythonSteps as getPythonStepsPA } from '../product-analytics/python'
    import { StepDefinition } from '../steps'
@@ -155,7 +155,7 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 4. For reusable snippets, create them in `docs/onboarding/<product>/_snippets/` and export a named component.
 5. Create the in-app wrapper in `frontend/src/scenes/onboarding/sdks/your-product/`. Use the `withOnboardingDocsWrapper` helper:
 
-   ```tsx file=frontend/src/scenes/onboarding/sdks/feature-flags/FeatureFlagsSDKInstructions.tsx
+   ```tsx file="frontend/src/scenes/onboarding/sdks/feature-flags/FeatureFlagsSDKInstructions.tsx"
    import { PythonInstallation, BooleanFlagSnippet, MultivariateFlagSnippet } from '@posthog/shared-onboarding/feature-flags'
    import { PythonEventCapture } from '@posthog/shared-onboarding/product-analytics'
    import { withOnboardingDocsWrapper } from '../shared/onboardingWrappers'
@@ -191,7 +191,7 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 
 2. Create a **single TSX wrapper file** at `contents/docs/<product>/installation/_snippets/<prefix>-installation-wrapper.tsx` that exports all SDK wrappers:
 
-   ```tsx file=contents/docs/session-replay/installation/_snippets/sr-installation-wrapper.tsx
+   ```tsx file="contents/docs/session-replay/installation/_snippets/sr-installation-wrapper.tsx"
    import React from 'react'
    import {
        JSWebInstallation,
@@ -233,7 +233,7 @@ For a complete working example, see the **[Session Replay](/docs/session-replay/
 
 3. Create an MDX stub file for each SDK at `contents/docs/<product>/installation/<name>.mdx`:
 
-   ```mdx file=contents/docs/session-replay/installation/react.mdx
+   ```mdx file="contents/docs/session-replay/installation/react.mdx"
    ---
    title: React session replay installation
    platformLogo: react
@@ -263,7 +263,7 @@ Installing an SDK for Workflows is optional. Because of this, Workflows doesn't 
 
 Instead, Workflows reuses the Product Analytics `Installation` components directly and transforms them with a `modifySteps` function at the in-app level:
 
-```tsx file=frontend/src/scenes/onboarding/sdks/workflows/WorkflowsSDKInstructions.tsx
+```tsx file="frontend/src/scenes/onboarding/sdks/workflows/WorkflowsSDKInstructions.tsx"
 import { ReactInstallation, PythonInstallation } from '@posthog/shared-onboarding/product-analytics'
 import { withOnboardingDocsWrapper } from '../shared/onboardingWrappers'
 

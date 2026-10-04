@@ -34,12 +34,14 @@ const fetchAllPosts = async (folder: string): Promise<PostNode[]> => {
             },
             { encodeValuesOnly: true }
         )
-    const first = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(1)}`).then((r) => r.json())
+    const first = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/posts?${buildQuery(1)}`).then((r) =>
+        r.json()
+    )
     const pageCount = first?.meta?.pagination?.pageCount || 1
     // allSettled so a single flaky page doesn't drop every post, which would empty the whole nav.
     const rest = await Promise.allSettled(
         Array.from({ length: Math.max(0, pageCount - 1) }, (_, i) =>
-            fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(i + 2)}`).then((r) => r.json())
+            fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/posts?${buildQuery(i + 2)}`).then((r) => r.json())
         )
     )
     const restData = rest.flatMap((r) => (r.status === 'fulfilled' ? r.value?.data || [] : []))

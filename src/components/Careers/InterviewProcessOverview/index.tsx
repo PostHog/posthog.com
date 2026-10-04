@@ -1,7 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, useRef } from 'react'
 import InterviewProcess from 'components/Job/InterviewProcess'
-import { StaticImage } from 'gatsby-plugin-image'
 
 export const InterviewProcessOverview = () => {
     return (

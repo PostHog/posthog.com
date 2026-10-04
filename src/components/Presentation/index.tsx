@@ -6,11 +6,11 @@ import { ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconInfo, IconGear } from '@posthog/icons'
 import PresentationMode from './FullScreen'
 import { motion } from 'framer-motion'
-import { navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import ContactSales from 'components/ContactSales'
 import PresentationForm from './Utilities/PresentationForm'
+import { navigate } from 'lib/navigation'
 
 // Mapping for team query parameter - makes URL less conspicuous
 const TEAM_QUERY_MAP: Record<string, string> = {
@@ -106,7 +106,7 @@ const getPanelStateFromURL = (param: string, configDefault?: boolean): boolean =
     if (typeof window === 'undefined') return configDefault ?? true
     const params = new URLSearchParams(window.location.search)
     const value = params.get(param)
-    return value !== null ? value === 'true' : configDefault ?? true
+    return value !== null ? value === 'true' : (configDefault ?? true)
 }
 
 const getTeamSlugFromURL = (configDefault?: string): string | undefined => {

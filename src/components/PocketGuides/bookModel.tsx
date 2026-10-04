@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
-
 import { BookTab } from 'components/PocketGuides/BookReader'
 import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
 import { InboxTemplate } from 'components/SelfDrivingInbox/types'
+import { navigate } from 'lib/navigation'
+import pocketGuidesJson from '@data/content-pocket-guides.json'
+import type { PocketGuideCta, PocketGuidePages } from '~/data-layer/queries/content'
 
 export const SHELF = { url: '/pocket-guides', label: 'Return to bookshelf' }
 
-/** Trailing slashes come and go between Gatsby's slugs and `location.pathname`. */
+/** Trailing slashes come and go between content slugs and `location.pathname`. */
 export function normalizeUrl(url: string): string {
     return url.replace(/\/$/, '')
 }
@@ -34,79 +35,36 @@ export interface BookPageEntry {
 }
 
 /** A non-scout chapter's CTA, authored in `pocketGuideCta:` frontmatter so the pinned bar can read it too. */
-export interface BookPageCta {
-    /** `prompt` hands the reader a PostHog AI prompt; `link` sends them somewhere. */
-    kind?: 'prompt' | 'link'
-    label?: string
-    /** The prompt itself, for `kind: prompt`. */
-    prompt?: string
-    /** Where the button goes. Defaults to PostHog AI for prompts. */
-    href?: string
-    /** One line under the button: what happens when they act. */
-    note?: string
-    /** What has to be true first, printed under the button with the setup command. */
-    requires?: { label: string }
-}
+export type BookPageCta = PocketGuideCta
 
 /** The book in reading order, built from content – folios, tabs, and turns all derive from it. */
 export function useBookPages(volumeId: string): BookPageEntry[] {
-    // Every volume in one query, filtered to this one below: `useStaticQuery` can't take a
-    // variable, and the whole shelf is a few dozen pages.
-    const data = useStaticQuery(graphql`
-        query PocketGuideBookPagesQuery {
-            # No trailing slash after the volume: its own index page is /pocket-guides/<volume>
-            # exactly, and it belongs in the book.
-            pages: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        shortTitle
-                        pocketGuideOrder
-                        pocketGuideCta {
-                            kind
-                            label
-                            prompt
-                            href
-                            note
-                            requires {
-                                label
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
     const templates = useSelfDrivingTemplates()
 
     return useMemo(() => {
         const byUrl = new Map(templates.map((template) => [normalizeUrl(template.url), template]))
 
-        const pages = (data?.pages?.nodes || [])
+        const pages = (pocketGuidesJson as PocketGuidePages)
             // This volume only. SKILL files and `_` starters aren't pages; no `pocketGuideOrder` keeps
             // a draft unlisted.
             .filter(
-                (node: any) =>
-                    volumeIdFromUrl(node.fields.slug) === volumeId &&
-                    !node.fields.slug.endsWith('/SKILL') &&
-                    !/\/_/.test(node.fields.slug) &&
-                    typeof node.frontmatter?.pocketGuideOrder === 'number'
+                (node) =>
+                    volumeIdFromUrl(node.slug) === volumeId &&
+                    !node.slug.endsWith('/SKILL') &&
+                    !/\/_/.test(node.slug) &&
+                    typeof node.pocketGuideOrder === 'number'
             )
-            .map((node: any) => {
-                const url = normalizeUrl(node.fields.slug)
-                const order = node.frontmatter.pocketGuideOrder
+            .map((node): BookPageEntry => {
+                const url = normalizeUrl(node.slug)
+                const order = node.pocketGuideOrder as number
                 return {
                     url,
-                    title: node.frontmatter.title,
-                    shortTitle: node.frontmatter.shortTitle || node.frontmatter.title,
+                    title: node.title ?? '',
+                    shortTitle: node.shortTitle || node.title || '',
                     order,
                     isFrontMatter: order === 0,
                     template: byUrl.get(url),
-                    cta: node.frontmatter.pocketGuideCta || undefined,
+                    cta: node.pocketGuideCta || undefined,
                 }
             })
             .sort((a: BookPageEntry, b: BookPageEntry) => a.order - b.order)
@@ -114,7 +72,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
         // Numbering runs after the front matter, so inserting a chapter renumbers the rest.
         let page = 0
         return pages.map((entry: BookPageEntry) => (entry.isFrontMatter ? entry : { ...entry, page: ++page }))
-    }, [data, templates, volumeId])
+    }, [templates, volumeId])
 }
 
 /** How a page is named when you're turning toward it: the short name, same as the contents

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-
 import { Dialog } from '@headlessui/react'
 import { Close } from 'components/Icons/Icons'
-
 import { QuestionForm } from 'components/Squeak'
 import { CallToAction } from 'components/CallToAction'
-import { navigate } from 'gatsby'
+import { navigate } from 'lib/navigation'
 
 type QuestionFormProps = {
     onSubmit?: () => void

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const hubspot = require('@hubspot/api-client')
+import hubspot from '@hubspot/api-client'
 
 const handler = async (req, res) => {
     let { body } = req

@@ -1,13 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import HogpediaShell from 'components/Hogpedia/HogpediaShell'
-import { buildSectionSources, primarySource } from 'components/Hogpedia/context'
 import TableOfContents, { TocItem } from 'components/Hogpedia/TableOfContents'
 import Infobox from 'components/Hogpedia/Infobox'
 import MaintenanceBanner from 'components/Hogpedia/MaintenanceBanner'
@@ -15,6 +12,8 @@ import References, { Ref } from 'components/Hogpedia/References'
 import CitationNeeded from 'components/Hogpedia/CitationNeeded'
 import { SeeAlso, CategoryLinks } from 'components/Hogpedia/ArticleFooter'
 import { makeSectionHeading } from 'components/Hogpedia/SectionHeading'
+import { MDXRenderer } from 'components/MDXRenderer'
+import type { HogpediaArticleProps } from '../lib/content/hogpedia'
 
 /**
  * A Hogpedia article.
@@ -60,23 +59,18 @@ const nestToc = (flat: { value: string; url: string; depth: number }[] = []): To
 }
 
 export default function HogpediaArticle({
-    data: { article, talkPage },
-    pageContext: { tableOfContents, slug },
-}: any): JSX.Element {
-    const { body, excerpt, frontmatter, fields, parent } = article
-    const { title, description, hogpedia } = frontmatter
-    const meta = hogpedia || {}
-    const filePath = parent?.relativePath
-    // `gitLogLatestDate` falls back to "now" when the build has no GitHub token, so it
-    // would print today's date for every article. Only the real commit log is trusted.
-    const lastModified = fields?.commits?.[0]?.date
-        ? new Date(fields.commits[0].date).toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-          })
-        : undefined
-    const summary = description || excerpt
+    body,
+    slug,
+    title,
+    summary,
+    filePath,
+    meta,
+    tableOfContents,
+    hasTalkPage,
+    sectionSources,
+    primarySource,
+    lastModified,
+}: HogpediaArticleProps): JSX.Element {
     const toc = nestToc(tableOfContents)
     // A talk page lives at /hogpedia/talk/<slug> and renders through the same template. It
     // gets the "Talk:" prefix, the discussion tab, and no index – an editorial argument is
@@ -99,10 +93,10 @@ export default function HogpediaArticle({
                     tagline={isTalk ? 'This is the discussion page for the article above.' : undefined}
                     slug={slug}
                     filePath={filePath}
-                    hasTalkPage={isTalk || !!talkPage}
-                    referenceIds={(meta.references || []).map((r: { id: string }) => String(r.id))}
-                    sectionSources={buildSectionSources(article.rawBody, meta.references)}
-                    primarySource={primarySource(meta.references)}
+                    hasTalkPage={hasTalkPage}
+                    referenceIds={(meta.references || []).map((r) => r.id)}
+                    sectionSources={sectionSources}
+                    primarySource={primarySource}
                     currentTab={isTalk ? 'discussion' : 'article'}
                     lastModified={lastModified}
                 >
@@ -141,7 +135,7 @@ export default function HogpediaArticle({
                                     'External links'
                                 )}
                                 <ul>
-                                    {meta.external.map((entry: { title: string; url: string }) => (
+                                    {meta.external.map((entry) => (
                                         <li key={entry.url}>
                                             <Link to={entry.url} externalNoIcon className="hp-external">
                                                 {entry.title}
@@ -158,61 +152,3 @@ export default function HogpediaArticle({
         </>
     )
 }
-
-export const query = graphql`
-    query HogpediaArticle($id: String!, $talkSlug: String!) {
-        article: mdx(id: { eq: $id }) {
-            body
-            rawBody
-            excerpt(pruneLength: 165)
-            fields {
-                slug
-                commits {
-                    date
-                    message
-                    url
-                    author {
-                        login
-                        html_url
-                    }
-                }
-            }
-            frontmatter {
-                title
-                description
-                hogpedia {
-                    notices
-                    categories
-                    aliases
-                    seeAlso
-                    infobox {
-                        title
-                        hog
-                        caption
-                        rows {
-                            label
-                            value
-                        }
-                    }
-                    references {
-                        id
-                        text
-                        url
-                    }
-                    external {
-                        title
-                        url
-                    }
-                }
-            }
-            parent {
-                ... on File {
-                    relativePath
-                }
-            }
-        }
-        talkPage: mdx(fields: { slug: { eq: $talkSlug } }) {
-            id
-        }
-    }
-`

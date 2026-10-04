@@ -51,13 +51,13 @@ cost_per_1000_chars = 0.30  # ← Change to match your ElevenLabs plan
 
 ```bash
 # Single file
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 
 # All files
 uv run handbook-audio --all
 
 # Test without API calls
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 ```
 
 ### 3. View cost metrics
@@ -148,7 +148,7 @@ with client.text_to_speech.with_raw_response.convert(...) as response:
 ```bash
 # Dry run (no API calls)
 cd scripts/hogfm
-uv run handbook-audio --dry-run ../../contents/handbook/values.md
+uv run handbook-audio --dry-run ../../contents/handbook/values.mdx
 
 # Output shows:
 # 💰 [DRY RUN] Would save cost metrics to: public/handbook-audio/values.cost.json

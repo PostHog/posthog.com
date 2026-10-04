@@ -12,7 +12,7 @@ type TopicSelectorProps = {
 
 export const TopicSelector = (props: TopicSelectorProps) => {
     const { data } = useSWR<StrapiRecord<TopicData>[]>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?sort=label:asc&pagination[pageSize]=100`,
+        `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/topics?sort=label:asc&pagination[pageSize]=100`,
         async (url) => {
             const res = await fetch(url)
             const { data } = await res.json()

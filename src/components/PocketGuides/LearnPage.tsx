@@ -1,12 +1,10 @@
 import React, { useRef } from 'react'
-import { useLocation } from '@reach/router'
-
 import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
-
 import LearnSurface from './LearnSurface'
+import { useLocation } from 'lib/navigation'
 
 interface LearnPageProps {
     /** `handle` from `src/hooks/productData/*`, e.g. `ai_observability`. */

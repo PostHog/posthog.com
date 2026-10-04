@@ -10,7 +10,7 @@ touch posthog.astro
 
 In this file, add your `Web snippet` which you can find in [your project settings](https://us.posthog.com/settings/project#snippet). Be sure to include the `is:inline` directive [to prevent Astro from processing it](https://docs.astro.build/en/guides/client-side-scripts/#opting-out-of-processing), or you will get Typescript and build errors that property 'posthog' does not exist on type 'Window & typeof globalThis'.
 
-```astro file=posthog.astro
+```astro file="posthog.astro"
 ---
 // src/components/posthog.astro
 ---
@@ -40,7 +40,7 @@ touch PostHogLayout.astro
 
 Add the following code to `PostHogLayout.astro`:
 
-```astro file=PostHogLayout.astro
+```astro file="PostHogLayout.astro"
 ---
 import PostHog from '../components/posthog.astro'
 ---
@@ -51,7 +51,7 @@ import PostHog from '../components/posthog.astro'
 
 Lastly, update `index.astro` to wrap your existing app components with the new Layout:
 
-```astro file=index.astro
+```astro file="index.astro"
 ---
 import PostHogLayout from '../layouts/PostHogLayout.astro';
 ---

@@ -1,21 +1,12 @@
 import { Select } from 'components/RadixUI/Select'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import changelogFiltersJson from '@data/roadmap-changelog-filters.json'
+import type { ChangelogFilters } from '~/data-layer/queries/roadmap'
+
+const changelogFilters = changelogFiltersJson as ChangelogFilters
 
 export default function TeamFilter({ onChange, value }: { onChange: (value: string) => void; value: string }) {
-    const data = useStaticQuery(graphql`
-        {
-            allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }) {
-                group(field: teams___data___attributes___name) {
-                    fieldValue
-                }
-            }
-        }
-    `)
-    const teams = data.allRoadmap.group.map((team: { fieldValue: string }) => ({
-        label: team.fieldValue,
-        value: team.fieldValue,
-    }))
+    const teams = changelogFilters.teams.map((team) => ({ label: team, value: team }))
     return (
         <Select
             defaultValue={value}

@@ -1,0 +1,29 @@
+---
+// /docs/data-warehouse/sources/<slug>: a generated page for a source without a docs page, or the
+// source's /docs/cdp/sources docs page (src/lib/content/integrations.ts).
+import PageIsland from '../../../../islands/PageIsland.astro'
+import Site from '../../../../layouts/Site.astro'
+import { docsPage } from '../../../../lib/content/docs'
+import { type IntegrationPage, integrationPages } from '../../../../lib/content/integrations'
+
+export async function getStaticPaths() {
+    return (await integrationPages())
+        .filter(({ path }) => path.startsWith('/docs/data-warehouse/sources/'))
+        .map((page) => ({ params: { slug: page.path.split('/').pop() }, props: { page } }))
+}
+
+interface Props {
+    page: IntegrationPage
+}
+
+const { page } = Astro.props
+const docs = page.template === 'Handbook' ? docsPage(page.entry) : null
+---
+
+<Site>
+    {docs ? (
+        <PageIsland module="/src/templates/Handbook.tsx" props={{ page: docs }} content={docs.body} />
+    ) : page.template === 'DataWarehouseSource' ? (
+        <PageIsland module="/src/templates/DataWarehouseSource.tsx" props={{ source: page.source }} />
+    ) : null}
+</Site>

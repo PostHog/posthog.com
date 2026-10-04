@@ -4,25 +4,24 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog.com is built and maintained in-house by the <SmallTeam slug="website" />. You've probably never seen a Gatsby.js site like this before. <TeamMember name="Eli Kinsey" photo /> is the mastermind behind how the site is structured.
+PostHog.com is built and maintained in-house by the <SmallTeam slug="website" />. You've probably never seen an Astro site like this before. <TeamMember name="Eli Kinsey" photo /> is the mastermind behind how the site is structured.
 
 For more context, [read why we designed our website to look like an operating system](/blog/why-os).
 
 ## The "operating system"
 
-1. At the top level, `gatsby-browser.tsx` loads `<Wrapper />`
-1. `<Wrapper />` renders the chrome of the "operating system"
-1. `<TaskBarMenu />` – the MacOS-style menu bar
-1. `<Desktop />` – the desktop app icons and desktop background
-1. `<AppWindow />` – the chrome for each app and where the content renders
-1. `<CookieBannerToast />`
-1. `<AppWindow />` loads `<WindowProvider />` and `<WindowContainer />`.
-- This contains the window's top bar with the minimize, maximize, and close buttons. It also supports window resizing.
+1. At the top level, `src/layouts/Site.astro` renders the chrome of the "operating system" as React islands
+1. `<Chrome />` (`src/islands/Chrome.tsx`) – loads `<TaskBarMenu />` (the MacOS-style menu bar), search, chat, `<CookieBannerToast />`, and toasts
+1. `<Desktop />` (`src/islands/Desktop.tsx`) – the desktop app icons, desktop background, and dialog windows
+1. The page island (`src/islands/Page.tsx`) – loads `<AppWindow />`, the chrome for each app and where the content renders
+1. The `<Chrome />` and `<Desktop />` islands use `transition:persist`, so they stay mounted when you go to a different page
+1. `<AppWindow />` loads `<WindowProvider />`.
+- This contains the window's top bar with the expand and close buttons.
 - Inside here is where the contents of each app renders
 
 ## The apps
 
-Each "app" is simply a page like a normal Gatsby site. There are a handful of apps:
+Each "app" is simply a page component in `src/views/` or `src/templates/`. There are a handful of apps:
 
 1. `<ReaderView />` – used for all long-form content like the docs, handbook, blog
 1. `<Editor />` – a WYSIWYG page editor
@@ -36,7 +35,7 @@ Let's look at a product page to see how it uses the `<Presentation />` template.
 
 ### Example: `posthog.com/session-replay`
 
-This page (`/src/pages/session-replay/index.tsx`) includes two critical pieces:
+This page (`/src/views/session-replay/index.tsx`) includes two critical pieces:
 
 1. `<SlidesTemplate />` – the views where the content will display
 1. Defines the `PRODUCT_HANDLE`
@@ -71,7 +70,7 @@ When the `session_replay` handle is passed into `useProduct`, it looks up the pr
 | Service | Purpose |
 | ------------- | ------------------------------------------------------ |
 | Vercel | Hosting |
-| Gatsby | Static site framework |
+| Astro | Static site framework |
 | GitHub | Source code repository |
 | Ashby (API) | Applicant tracking system |
 | Algolia (API) | Site search |

@@ -11,8 +11,8 @@ name: Auto Label PRs
 #   content   Every file in the PR is under contents/. Lets reviewers filter
 #             content-only PRs out of code-review queues (e.g. `-label:content`).
 #   handbook  Every file in the PR is under contents/handbook/.
-#   website   Every file in the PR is website code (src/, gatsby/, api/, plugins/,
-#             static/, or a root gatsby-* config file).
+#   website   Every file in the PR is website code (src/, api/,
+#             static/, or a root astro.config.mjs or middleware.ts).
 #
 # content/handbook/website are "only touches" rules, so they're recomputed on
 # every push: a PR that starts handbook-only and later gains a src/ file loses
@@ -75,7 +75,7 @@ jobs:
                   total=$(wc -l <<< "$files")
                   in_contents=$(grep -cE '^contents/' <<< "$files" || true)
                   in_handbook=$(grep -cE '^contents/handbook/' <<< "$files" || true)
-                  in_website=$(grep -cE '^(src|gatsby|api|plugins|static)/|^gatsby-(config|node|browser|ssr)\.' <<< "$files" || true)
+                  in_website=$(grep -cE '^(src|api|static)/|^(astro\.config\.mjs|middleware\.ts)$' <<< "$files" || true)
 
                   add=()
                   remove=()

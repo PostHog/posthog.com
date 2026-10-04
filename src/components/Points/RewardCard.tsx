@@ -35,8 +35,8 @@ function RewardImage({
                         (reward.discountAmount || 0) <= 10
                             ? 'bg-gradient-to-br'
                             : (reward.discountAmount || 0) <= 30
-                            ? 'bg-gradient-to-b'
-                            : 'bg-gradient-to-tl'
+                              ? 'bg-gradient-to-b'
+                              : 'bg-gradient-to-tl'
                     }`}
                 >
                     <span className="text-5xl font-black text-black drop-shadow-sm">${reward.discountAmount}</span>
@@ -131,7 +131,7 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
 
         try {
             const jwt = await getJwt()
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/redeem`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/points/redeem`, {
                 method: 'POST',
                 body: JSON.stringify({
                     handle: reward.handle,
@@ -166,10 +166,10 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                 state === 'success'
                     ? 'border-green bg-green/5 dark:bg-green/10'
                     : isActive
-                    ? 'border-orange bg-orange/5 dark:bg-orange/10'
-                    : canRedeem
-                    ? 'border-primary'
-                    : 'border-primary opacity-60'
+                      ? 'border-orange bg-orange/5 dark:bg-orange/10'
+                      : canRedeem
+                        ? 'border-primary'
+                        : 'border-primary opacity-60'
             }`}
         >
             {state === 'idle' && (

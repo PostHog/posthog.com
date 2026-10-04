@@ -6,7 +6,7 @@ import InstallNodePackageManagers from "./install-node-package-managers.mdx"
 
 Then, initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [load function](https://kit.svelte.dev/docs/load#page-data):
 
-```js file=routes/+page.server.js
+```js file="routes/+page.server.js"
 import { PostHog } from 'posthog-node';
 
 export async function load() {

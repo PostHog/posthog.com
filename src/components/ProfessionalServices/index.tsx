@@ -6,9 +6,12 @@ import { IconArrowRightDown, IconArrowUpRight } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Editor from 'components/Editor'
-import { graphql, useStaticQuery } from 'gatsby'
 import { ScrollToElement } from 'components/ScrollToElement'
 import OSTable from 'components/OSTable'
+import teamRostersJson from '@data/people-team-rosters.json'
+import type { TeamRosters } from '~/data-layer/queries/people'
+
+const teamRosters = teamRostersJson as TeamRosters
 
 const ServiceLink = ({ label, to }: { label: string; to: string }) => (
     <ScrollToElement targetId={to} as="span" className="group font-semibold cursor-pointer whitespace-nowrap underline">
@@ -129,47 +132,13 @@ const ProcessStep = ({ number, title, description }: { number: number; title: st
 )
 
 const TeamProfiles = () => {
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam {
-                nodes {
-                    id
-                    name
-                    slug
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                color
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    leadProfiles {
-                        data {
-                            id
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const salesCSTeam = allTeams.nodes.find((t: any) => t.slug === 'sales-cs')
+    const salesCSTeam = teamRosters.find((t) => t.slug === 'sales-cs')
     const profiles = salesCSTeam?.profiles?.data || []
     const leadProfiles = salesCSTeam?.leadProfiles?.data || []
 
     const sortedProfiles = profiles.slice().sort((a: any, b: any) => {
-        const aIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === a.id)
-        const bIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === b.id)
+        const aIsLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === a.id)
+        const bIsLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === b.id)
         return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
     })
 
@@ -206,7 +175,7 @@ const TeamProfiles = () => {
                     .reverse()
                     .map(({ id, attributes: { firstName, lastName, avatar, color } }: any, index: number) => {
                         const name = [firstName, lastName].filter(Boolean).join(' ')
-                        const isTeamLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === id)
+                        const isTeamLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === id)
 
                         return (
                             <span

@@ -95,7 +95,7 @@ The service principal needs the following permissions:
 
 You can grant these permissions using SQL commands in Databricks:
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 -- Grant catalog permissions
 GRANT USE CATALOG ON CATALOG `<catalog_name>` TO `<service_principal_id_or_group>`;
 

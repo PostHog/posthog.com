@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import OSTable from 'components/OSTable'
 import { Logo } from '@posthog/brand/logo'
 import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import { Link } from 'lib/navigation'
 
 interface Customer {
     slug: string

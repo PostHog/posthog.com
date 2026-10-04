@@ -17,8 +17,9 @@ export default function TeamRoadmap({ team }: { team?: string }) {
         </p>
     ) : (
         <ul className="list-none m-0 p-0 flex flex-col gap-4">
-            {futureRoadmaps?.map((node: IRoadmap) => {
-                return <InProgress more className="" key={node.title} {...node} />
+            {futureRoadmaps.map((node) => {
+                // The query only ships the fields InProgress reads for team roadmaps.
+                return <InProgress more className="" key={node.title} {...(node as unknown as IRoadmap)} />
             })}
         </ul>
     )

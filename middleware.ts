@@ -5,9 +5,10 @@
  * use the same user-agent split.
  *
  * This has to be middleware rather than a `vercel.json` rewrite. Vercel gives
- * the filesystem precedence over rewrites, and Gatsby writes an index.html for
- * every one of these paths, so a rewrite is never reached. Middleware is the
- * only hook that runs ahead of the filesystem.
+ * the filesystem precedence over rewrites, and the build writes an index.html
+ * for every one of these paths (Astro's 'directory' build format), so a rewrite
+ * is never reached. Middleware is the only hook that runs ahead of the
+ * filesystem.
  *
  * Two costs are worth knowing before this ships — see the PR description:
  *   1. The matcher is path-only. Vercel's generic (non-Next.js) middleware
@@ -22,8 +23,8 @@ export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
 }
 
-const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
-const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "i")
+const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
+const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
     const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')

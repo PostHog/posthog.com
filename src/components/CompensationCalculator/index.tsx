@@ -1,7 +1,6 @@
 import React from 'react'
 import { RadioGroup } from '@headlessui/react'
 import Combobox from './Combobox'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { locationFactor } from './compensation_data/location_factor'
 import { sfBenchmark } from './compensation_data/sf_benchmark'
 import { levelModifier } from './compensation_data/level_modifier'
@@ -9,6 +8,7 @@ import { stepModifier } from './compensation_data/step_modifier'
 import { currencyData } from './compensation_data/currency'
 import { IconInfo, IconMultiply } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { useBreakpoint } from 'hooks/useBreakpoint'
 
 const formatCur = (val: number, currency = 'USD') => {
     currency = currencyData[currency] ? currency : 'USD'
@@ -104,7 +104,7 @@ export const CompensationCalculator = ({
     const [step, setStep] = React.useState<string | null>('Established')
 
     React.useEffect(() => {
-        if (typeof window !== undefined) {
+        if (typeof window !== 'undefined') {
             const savedState: {
                 job?: string | null
                 country?: string | null

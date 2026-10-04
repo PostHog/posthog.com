@@ -8,17 +8,15 @@ import type {
     ShopifyMediaItem,
     ShopifyProduct,
 } from './types'
-import { IUrlBuilderArgs, getImageData, IGatsbyImageData } from 'gatsby-plugin-image'
+import { UrlBuilderArgs, getImageData, ResponsiveImageData } from 'components/Image'
 
 export function getCartVariables(cartItems: CartItem[], discountCode?: string): CreateCartVariables {
     const createCartVariables: CreateCartVariables = {
         input: {
-            lines: cartItems.map(
-                (item): CartLineInput => ({
-                    merchandiseId: item.shopifyId,
-                    quantity: item.count,
-                })
-            ),
+            lines: cartItems.map((item): CartLineInput => ({
+                merchandiseId: item.shopifyId,
+                quantity: item.count,
+            })),
         },
     }
 
@@ -60,7 +58,7 @@ export function getProductImages(media: ShopifyMediaItem[]): ShopifyMediaImage[]
 
 export const getAvailableQuantity = async (id: string) => {
     try {
-        const { data } = await fetch(`https://${process.env.GATSBY_MYSHOPIFY_URL}/api/2023-10/graphql.json`, {
+        const { data } = await fetch(`https://${import.meta.env.PUBLIC_MYSHOPIFY_URL}/api/2023-10/graphql.json`, {
             method: 'POST',
             headers: shopifyHeaders,
             body: JSON.stringify({
@@ -85,7 +83,7 @@ export const getAvailableQuantity = async (id: string) => {
 
 export const itemIsAvailableForSale = async (item: CartItem) => {
     const product = await fetch(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
+        `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/brilliant/inventory/${
             item.shopifyId.split('gid://shopify/ProductVariant/')[1]
         }`
     ).then((res) => res.json())
@@ -95,7 +93,7 @@ export const itemIsAvailableForSale = async (item: CartItem) => {
 
 const validFormats = new Set([`jpg`, `jpeg`, `png`, `webp`, `auto`])
 
-export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<unknown>): string {
+export function urlBuilder({ width, height, baseUrl, format }: UrlBuilderArgs<unknown>): string {
     if (!validFormats.has(format)) {
         console.warn(`${format} is not a valid format. Valid formats are: ${Array.from(validFormats).join(`, `)}`)
         format = `auto`
@@ -132,7 +130,7 @@ export function calculateAspectRatioDimensions(image: any, targetWidth = 500): {
     return { width: targetWidth, height: proportionalHeight }
 }
 
-export function getShopifyImage({ image, ...args }: any): IGatsbyImageData {
+export function getShopifyImage({ image, ...args }: any): ResponsiveImageData {
     const { originalSrc: baseUrl, width: sourceWidth, height: sourceHeight } = image
 
     return getImageData({

@@ -28,16 +28,9 @@ import {
 } from './pricingLogic'
 
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
-import { useStaticQuery } from 'gatsby'
-import { allProductsData } from './Pricing'
+import { billingProducts } from './Pricing'
 
 export const useProducts = () => {
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
-
     const {
         productAnalyticsCost,
         sessionRecordingCost,

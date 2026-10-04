@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react'
-import { navigate } from 'gatsby'
 import OSSelect from 'components/OSForm/select'
 import { useSidebarExpanded } from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
+import { navigate } from 'lib/navigation'
 
 interface ProductSwitcherProps {
     /** Handle of the currently active product (matches `product.handle`). */

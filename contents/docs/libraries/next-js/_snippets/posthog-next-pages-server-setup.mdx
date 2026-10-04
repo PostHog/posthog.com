@@ -1,6 +1,6 @@
 Create a shared PostHog module with `createPostHog()`, then call the returned `getPostHog` with the request context inside `getServerSideProps` to evaluate feature flags.
 
-```ts file=lib/posthog.ts
+```ts file="lib/posthog.ts"
 import { createPostHog } from '@posthog/next/pages'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
@@ -13,7 +13,7 @@ export const { getPostHog } = createPostHog({
 })
 ```
 
-```tsx file=pages/dashboard.tsx
+```tsx file="pages/dashboard.tsx"
 import type { GetServerSideProps } from 'next'
 import { getPostHog } from '@/lib/posthog'
 
@@ -31,7 +31,7 @@ Without `getDistinctId`, PostHog can use the identity cookie and tracing headers
 
 The Pages Router provider doesn't have the App Router's `bootstrapFlags` prop. For the same no-flicker behavior, evaluate flags in `getServerSideProps` and pass the result through `pageProps`:
 
-```tsx file=pages/dashboard.tsx
+```tsx file="pages/dashboard.tsx"
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const posthog = await getPostHog(ctx)
     const posthogBootstrap = await posthog.getAllFlagsAndPayloads()
@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 Then wire the bootstrap data into the provider:
 
-```tsx file=pages/_app.tsx
+```tsx file="pages/_app.tsx"
 import type { AppProps } from 'next/app'
 import { PostHogProvider, PostHogPageView } from '@posthog/next/pages'
 

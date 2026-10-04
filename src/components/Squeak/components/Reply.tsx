@@ -47,7 +47,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
     const handleHelpful = async (helpful: boolean) => {
         setLoading(true)
         if (helpful) {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max/publish/${replyID}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/ask-max/publish/${replyID}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -55,7 +55,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
                 },
             })
         } else {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/replies/${replyID}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${await getJwt()}`,
@@ -111,7 +111,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
                 },
             })
 
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/replies/${replyID}`, {
                 method: 'PUT',
                 body: JSON.stringify({
                     data: {
@@ -240,8 +240,8 @@ const VoteButton = ({ id, type, voted, votes }: { id: number; type: 'up' | 'down
                         ? '!bg-green !text-white !border-green'
                         : ''
                     : voted
-                    ? '!bg-red !text-white !border-red'
-                    : ''
+                      ? '!bg-red !text-white !border-red'
+                      : ''
             }
         >
             <strong>{votes}</strong>
@@ -343,7 +343,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
         () => reply?.attributes?.downvoteProfiles?.data?.length,
         [reply?.attributes?.downvoteProfiles]
     )
-    const isMax = profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    const isMax = profile?.data?.id === Number(import.meta.env.PUBLIC_AI_PROFILE_ID)
 
     return profile?.data ? (
         <div className={`transition-opacity duration-300 ${pendingDelete ? 'opacity-30 pointer-events-none' : ''}`}>

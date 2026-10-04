@@ -24,7 +24,7 @@ contents/pocket-guides/<volume>/
     └── SKILL.md           the scout itself, rendered as a figure (scout volumes only)
 ```
 
-`gatsby/createPages.ts` already routes everything under `contents/pocket-guides/` through
+`src/pages/pocket-guides/[...slug].astro` already routes everything under `contents/pocket-guides/` through
 `src/templates/Template.tsx`, which hands any `/pocket-guides/` slug to `BookPage`.
 
 **One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
@@ -139,14 +139,6 @@ your <Term name="inbox" /> and the pull request it becomes…
 Block components (`<Watches />`, `<Enable />`, the figures) are meant to start their own line.
 Only inline ones – `<Term>` – need to stay mid-sentence.
 
-There is a mirror-image trap at the site level: the `gatsby-remark-inline-jsx-paragraphs` plugin
-wraps any *standalone single-line self-closing* component in a `<p>` so docs prose keeps its
-max-width. For block components here that produced invalid `<p><figure>` nesting, so the plugin
-skips everything under `contents/pocket-guides/` (see the guard at the top of
-`plugins/gatsby-remark-inline-jsx-paragraphs/index.js`). If a figure ever renders wrapped in a
-paragraph again, check that guard first – and note Gatsby caches compiled MDX, so the fix only
-shows after the `.mdx` file itself changes (or `pnpm clean`).
-
 ## The reader UI
 
 - **`BookReader`** – wide windows pin the Contents panel on the left, with a compact Home and
@@ -217,7 +209,7 @@ and **returns `null` when nothing matches** – most products have no volume, so
 is always safe. Adding a product to the mechanism is one line: set `docsProduct` on its volume in
 `src/constants/pocketGuides.ts`.
 
-Both it and the "Learn it by use case" block on `/self-driving` (`src/pages/self-driving/index.tsx`)
+Both it and the "Learn it by use case" block on `/self-driving` (`src/views/self-driving/index.tsx`)
 render `VolumeCard`, so the card is defined once. `VolumeCard` takes the pitch, the link, and the
 button label as props, because those are the only things the two surfaces disagree on – the docs
 pages send a reader to the volume, `/self-driving` sends them to the whole shelf.
@@ -228,13 +220,14 @@ clipping the card would cut it off.
 In `.mdx`, wrap the component in a `<div>`. On its own line MDX treats it as a paragraph and emits
 `<p>`, which cannot legally hold the cover's `<article>` and `<header>`.
 
-Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
+Volume metadata lives in `src/constants/pocketGuides.ts` (data only, so code outside React can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in
 `components/SelfDrivingInbox/README.md`.
 
-**Adding a frontmatter field** needs a matching declaration in
-`gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
-pages declare.
+**Adding a frontmatter field**: the `pocketGuide` zod schema in `src/content/schemas.ts` is a
+loose object, so an undeclared field passes through (declare it there to type and validate it).
+Components read pocket guide frontmatter through the `content-pocket-guides` query in
+`src/data-layer/queries/content.ts`, which picks each field by name, so add the field there too.
 
 ### Twig in Product Analytics
 

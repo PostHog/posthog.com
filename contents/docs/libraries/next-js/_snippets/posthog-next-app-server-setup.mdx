@@ -1,6 +1,6 @@
 Create a shared PostHog module with `createPostHog()`. Use the returned `getPostHog` to evaluate feature flags in Server Components and capture events from request or action handlers.
 
-```ts file=lib/posthog.ts
+```ts file="lib/posthog.ts"
 import 'server-only'
 import { createPostHog } from '@posthog/next'
 import { auth } from '@/auth'
@@ -12,7 +12,7 @@ export const { getPostHog } = createPostHog({
 })
 ```
 
-```tsx file=app/dashboard/page.tsx
+```tsx file="app/dashboard/page.tsx"
 import { getPostHog } from '@/lib/posthog'
 
 export default async function DashboardPage() {

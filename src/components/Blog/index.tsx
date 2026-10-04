@@ -1,45 +1,21 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Avatar from 'components/CommunityQuestions/Avatar'
 import Link from 'components/Link'
-import PostLayout from 'components/PostLayout'
 import Toggle from 'components/Toggle'
-import { graphql } from 'gatsby'
-import { GatsbyImage, getImage, ImageDataLike, StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
-import Layout from '../Layout'
-import { SEO } from '../seo'
-import slugify from 'slugify'
-import { NewsletterForm } from 'components/NewsletterForm'
-import { homeCategories } from './constants/categories'
-import { capitalize } from 'instantsearch.js/es/lib/utils'
-import CommunityCTA from 'components/CommunityCTA'
-import { CallToAction } from 'components/CallToAction'
+import React from 'react'
+import { ResponsiveImage } from 'components/Image'
+import type { PostCard } from '../../lib/content/posts'
 
-interface IPost {
-    featuredImage?: ImageDataLike
-    slug: string
-    title: string
-    category?: string
-    date: string
-    authors: {
-        name: string
-        image: ImageDataLike
-        profile: {
-            avatar?: {
-                url: string
-            }
-        }
-    }[]
+interface IPost extends Omit<PostCard, 'id'> {
     imgClassName?: string
 }
 
-export const Post = ({ featuredImage, slug, title, category, date, authors, imgClassName }: IPost) => {
-    const image = featuredImage && getImage(featuredImage)
+export const Post = ({ featuredImage: image, slug, title, category, date, authors, imgClassName }: IPost) => {
     return (
         <div className="relative rounded-md overflow-hidden z-10 h-full w-full">
             <Link className="!text-white !hover:text-white cta" to={slug}>
                 {image ? (
-                    <GatsbyImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
+                    <ResponsiveImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
                 ) : (
                     <CloudinaryImage
                         className={imgClassName ?? 'w-full'}
@@ -54,10 +30,10 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
                     </h3>
                     <p className="m-0 !text-sm font-light mt-1">{date}</p>
                     <ul className="list-none m-0 p-0 mt-auto space-x-4 hidden md:flex">
-                        {authors?.slice(0, 2).map(({ name, image, profile }) => {
+                        {authors?.slice(0, 2).map(({ name, avatar }) => {
                             return (
                                 <li className="flex space-x-2 items-center" key={name}>
-                                    <Avatar url={profile?.avatar?.url} image={image} />
+                                    <Avatar url={avatar} image={undefined} />
                                     <span>{name}</span>
                                 </li>
                             )
@@ -69,7 +45,17 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
     )
 }
 
-export const Posts = ({ posts, title, action, titleBorder }) => {
+export const Posts = ({
+    posts,
+    title,
+    action,
+    titleBorder,
+}: {
+    posts: PostCard[]
+    title?: React.ReactNode
+    action?: React.ReactNode
+    titleBorder?: boolean
+}) => {
     return (
         <section className="mb-6">
             {title && (
@@ -85,15 +71,7 @@ export const Posts = ({ posts, title, action, titleBorder }) => {
                 </div>
             )}
             <ul className="list-none m-0 p-0 grid md:grid-cols-2 gap-4">
-                {posts.map((post) => {
-                    const {
-                        node: {
-                            id,
-                            frontmatter: { date, title, featuredImage, authors, category },
-                            fields: { slug },
-                        },
-                    } = post
-
+                {posts.map(({ id, date, title, featuredImage, authors, category, slug }) => {
                     return (
                         <li
                             className="relative active:top-[1px] active:scale-[.99] shadow-lg after:rounded-md after:-inset-1.5 after:absolute"
@@ -125,114 +103,3 @@ export const PostToggle = ({ onChange, checked }) => {
         />
     )
 }
-
-const CategoryPosts = ({ categoryToShow, categories }) => {
-    const categoryData = categories.group.find(({ category }) => category === categoryToShow)
-    if (!categoryData) return null
-    const { category, edges } = categoryData
-    const slug = slugify(category, { lower: true })
-    const url = `/blog/categories/${slug}`
-    return (
-        <Posts
-            key={category}
-            title={category}
-            posts={edges}
-            action={
-                <Link
-                    className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-primary hover:bg-accent relative active:top-[1px] active:scale-[.99]"
-                    to={url}
-                >
-                    View all
-                </Link>
-            }
-        />
-    )
-}
-
-const Blog = ({
-    data: {
-        allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
-        categories,
-    },
-}) => {
-    const [allPostsFilter, setAllPostsFilter] = useState<'latest' | 'popular'>('latest')
-    return (
-        <Layout>
-            <SEO title="Blog - PostHog" />
-
-            <PostLayout article={false} title="Blog" hideSidebar hideSurvey>
-                <h1 className="mb-6 mt-0">Blog</h1>
-                <Posts
-                    titleBorder
-                    title={`${capitalize(allPostsFilter)} articles`}
-                    posts={allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent}
-                    action={
-                        <Link
-                            to="/blog/all"
-                            className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-primary hover:bg-accent relative active:top-[1px] active:scale-[.99]"
-                        >
-                            View all
-                        </Link>
-                    }
-                />
-                <NewsletterForm />
-
-                <div className="pb-2 mb-5 flex justify-between items-center">
-                    <h4 className="opacity-50 text-base m-0">Browse by topic</h4>
-                </div>
-
-                {homeCategories.slice(0, 4).map((categoryToShow) => {
-                    return (
-                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
-                    )
-                })}
-                <CommunityCTA />
-                {homeCategories.slice(4).map((categoryToShow) => {
-                    return (
-                        <CategoryPosts key={categoryToShow} categories={categories} categoryToShow={categoryToShow} />
-                    )
-                })}
-                <CallToAction width="full" type="secondary" to="/blog/all">
-                    View all latest posts
-                </CallToAction>
-            </PostLayout>
-        </Layout>
-    )
-}
-
-export default Blog
-
-export const BlogFragment = graphql`
-    fragment BlogFragment on Mdx {
-        fields {
-            slug
-        }
-        id
-        excerpt(pruneLength: 250)
-        frontmatter {
-            date(formatString: "MMM D, YYYY")
-            title
-            rootPage
-            category
-            featuredImage {
-                publicURL
-                childImageSharp {
-                    gatsbyImageData(width: 480, height: 270)
-                }
-            }
-            authors: authorData {
-                handle
-                name
-                role
-                link_type
-                link_url
-                profile {
-                    avatar {
-                        url
-                    }
-                }
-            }
-        }
-    }
-`

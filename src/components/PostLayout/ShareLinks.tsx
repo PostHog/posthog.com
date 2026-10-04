@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useLocation } from '@reach/router'
 import { LinkedIn, LinkIcon, Mail, Twitter } from 'components/Icons'
 import { usePost } from './hooks'
 import Tooltip from 'components/Tooltip'
+import { useLocation } from 'lib/navigation'
 
 const ShareLink = ({ children, url }: { children: React.ReactNode; url: string }) => {
     const width = 626

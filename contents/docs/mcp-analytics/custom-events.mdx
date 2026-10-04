@@ -10,7 +10,7 @@ Pass a callback to attach extra properties to automatically captured MCP events.
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 import { instrument, getRequestHeaders } from "@posthog/mcp"
 
 const analytics = instrument(server, posthog, {
@@ -21,7 +21,7 @@ const analytics = instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 import os
 from posthog.mcp import instrument, get_request_headers
 from posthog.mcp.types import MCPAnalyticsOptions
@@ -35,7 +35,7 @@ def event_properties(request, extra):
 analytics = instrument(server, posthog, MCPAnalyticsOptions(event_properties=event_properties))
 ```
 
-```go file=Go
+```go file="Go"
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 	posthogmcpsdk.WithProperties(func(ctx context.Context, req *mcp.CallToolRequest, result *mcp.CallToolResult, err error) (posthog.Properties, error) {
 		props := posthog.NewProperties().Set("$app_version", os.Getenv("GIT_SHA"))
@@ -47,7 +47,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 )
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 analytics = PostHog::MCP.instrument(
   server, posthog,
   event_properties: ->(_request, extra) { { "$app_version" => ENV.fetch("GIT_SHA", "unknown"), "request_id" => extra["headers"]["x-request-id"] } }
@@ -90,7 +90,7 @@ You name the event. It's sent verbatim – it's your event, so it is **not** `$`
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 const analytics = instrument(server, posthog)
 
 await analytics.capture({
@@ -99,13 +99,13 @@ await analytics.capture({
 })
 ```
 
-```python file=Python
+```python file="Python"
 analytics = instrument(server, posthog)
 
 await analytics.capture("feedback_submitted", {"rating": 5})
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 analytics = PostHog::MCP.instrument(server, posthog)
 
 analytics.capture("feedback_submitted", { rating: 5 })

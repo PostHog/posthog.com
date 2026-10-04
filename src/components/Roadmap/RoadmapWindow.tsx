@@ -98,7 +98,7 @@ export default function RoadmapWindow({
                 },
             },
         } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
             jwt
                 ? {
                       headers: {
@@ -147,14 +147,14 @@ export default function RoadmapWindow({
                                     status !== 'complete'
                                         ? undefined
                                         : id
-                                        ? 'Roadmap updated successfully'
-                                        : 'Roadmap created successfully',
+                                          ? 'Roadmap updated successfully'
+                                          : 'Roadmap created successfully',
                                 description:
                                     status === 'complete'
                                         ? 'Your changes will be live on the next build.'
                                         : id
-                                        ? 'Roadmap updated successfully'
-                                        : 'Roadmap created successfully',
+                                          ? 'Roadmap updated successfully'
+                                          : 'Roadmap created successfully',
                             })
                             onSubmit?.()
                         }}

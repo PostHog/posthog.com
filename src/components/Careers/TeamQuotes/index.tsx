@@ -1,30 +1,15 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { StaticImage } from 'gatsby-plugin-image'
 import Stickers from 'components/ProfileStickers'
-import slugify from 'slugify'
 import Link from 'components/Link'
 import Masonry from 'react-masonry-css'
+import profilesJson from '@data/people-profiles.json'
+import type { Profile, Profiles } from '~/data-layer/queries/people'
 
-const TeamMemberLink = (person) => {
-    const {
-        firstName,
-        lastName,
-        country,
-        startDate,
-        pineappleOnPizza,
-        squeakId,
-        avatar,
-        teams,
-        leadTeams,
-        quotes,
-        color,
-    } = person ?? {}
+const profiles = profilesJson as Profiles
 
-    const teamName = teams?.data?.[0]?.attributes?.name
-    const isTeamLead = leadTeams.data.length > 0
-    const teamURL = teamName ? `/teams/${slugify(teamName, { lower: true })}` : undefined
+const TeamMemberLink = (person: Profile) => {
+    const { firstName, lastName, squeakId, avatar, quotes, color } = person ?? {}
 
     return (
         <div className="flex flex-col items-center mb-8 xl:mb-12">
@@ -49,7 +34,7 @@ const TeamMemberLink = (person) => {
                 >
                     {person ? (
                         <img
-                            src={avatar?.formats?.thumbnail?.url}
+                            src={avatar ?? undefined}
                             alt={`${firstName} ${lastName}`}
                             className={`size-20 ${color ? `bg-${color}` : 'bg-orange'}`}
                         />
@@ -69,7 +54,7 @@ const TeamMemberLink = (person) => {
                     href={`/community/profiles/${squeakId}`}
                     className="text-red dark:text-yellow font-semibold inline-block"
                 >
-                    {person ? [firstName, lastName].filter(Boolean).join(' ') : name}
+                    {[firstName, lastName].filter(Boolean).join(' ')}
                 </Link>
                 <br />
                 <span className="text-sm opacity-75">{person.companyRole && `${person.companyRole}`}</span>
@@ -79,49 +64,7 @@ const TeamMemberLink = (person) => {
 }
 
 const TeamMember: React.FC<{ name: string }> = ({ name }) => {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                    companyRole
-                    location
-                    country
-                    startDate
-                    leadTeams {
-                        data {
-                            id
-                        }
-                    }
-                    teams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                    quotes {
-                        id
-                        quote
-                    }
-                    color
-                }
-            }
-        }
-    `)
-
-    const person = nodes.find(
+    const person = profiles.find(
         ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 

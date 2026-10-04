@@ -58,7 +58,7 @@ In your project root, create or update `vercel.json`:
 
 <MultiLanguage>
 
-```json file=US
+```json file="US"
 {
   "rewrites": [
     {
@@ -77,7 +77,7 @@ In your project root, create or update `vercel.json`:
 }
 ```
 
-```json file=EU
+```json file="EU"
 {
   "rewrites": [
     {
@@ -117,14 +117,14 @@ In your application code, update your PostHog initialization:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'
@@ -196,14 +196,14 @@ If your rewrites aren't matching correctly, ensure you're using Vercel's named p
 
 <MultiLanguage>
 
-```json file=US
+```json file="US"
 {
   "source": "/yourpath/:path(.*)",
   "destination": "https://us.i.posthog.com/:path"
 }
 ```
 
-```json file=EU
+```json file="EU"
 {
   "source": "/yourpath/:path(.*)",
   "destination": "https://eu.i.posthog.com/:path"

@@ -6,7 +6,7 @@ on:
             - 'contents/docs/**/changelog.mdx'
             - 'src/components/Docs/ProductChangelog.tsx'
             - 'src/navs/index.js'
-            - 'scripts/check-product-changelogs.js'
+            - 'scripts/check-product-changelogs.cjs'
             - '.github/workflows/product-changelog-check.yml'
 
 permissions:
@@ -28,4 +28,4 @@ jobs:
 
             # No dependencies needed — the script only reads files.
             - name: Check product changelog pages
-              run: node scripts/check-product-changelogs.js
+              run: node scripts/check-product-changelogs.cjs

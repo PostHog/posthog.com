@@ -6,7 +6,7 @@ import { useWindow } from '../../../../context/Window'
 import Wizard from 'components/Wizard'
 import { SQUEAK_HOST } from 'lib/strapi'
 
-import SecurityHog from '../../../../images/security-hog.png'
+import SecurityHog from '../../../../images/security-hog.png?url'
 import { IconSpinner } from '@posthog/icons'
 
 const Input = ({

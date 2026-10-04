@@ -68,9 +68,9 @@ export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
             return
         }
 
-        // The .md files are written in onPostBuild, so they don't exist under `gatsby develop`.
-        // Assume they're there rather than verifying, so the control is still reachable in dev —
-        // the copy action itself will 404 there. See README.
+        // The .md files are written after `astro build` (astro:build:done), so they don't exist
+        // under `pnpm start`. Assume they're there rather than verifying, so the control is still
+        // reachable in dev. The copy action itself will 404 there. See README.
         if (process.env.NODE_ENV === 'development') {
             setExists(true)
             return
@@ -99,7 +99,7 @@ interface MarkdownActionsProps {
 /**
  * "Copy page" split button — copies the page's raw markdown, with a menu for viewing it or
  * handing it to an LLM. Renders on any page with a generated `.md` counterpart (see
- * `gatsby/rawMarkdownUtils.ts`) and returns null everywhere else.
+ * `src/lib/seo/markdown.ts`) and returns null everywhere else.
  */
 export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, className = '' }) => {
     const [copied, setCopied] = useState(false)

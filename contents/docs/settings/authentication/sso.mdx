@@ -6,19 +6,6 @@ availability:
   free: partial
   selfServe: partial
   enterprise: full
-  features:
-    jitUserProvisioning:
-      free: false
-      selfServe: false
-      boost: true
-      scale: true
-      enterprise: true
-    ssoEnforcement:
-      free: false
-      selfServe: false
-      boost: true
-      scale: true
-      enterprise: true
 ---
 
 ## Single sign-on
@@ -51,7 +38,7 @@ Adding a `TXT` record depends on your DNS provider (e.g. Cloudflare, Google Doma
 
 ## Just-in-time user provisioning
 
-<FeatureAvailability availability={_frontmatter.availability.features.jitUserProvisioning} />
+<FeatureAvailability availability={{ free: false, selfServe: false, boost: true, scale: true, enterprise: true }} />
 
 Just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. PostHog Cloud supports GitHub, GitLab, Google, and SAML if you have configured it.
 
@@ -59,7 +46,7 @@ To enable just-in-time user provisioning, navigate to Authentication domains in 
 
 ## SSO enforcement
 
-<FeatureAvailability availability={_frontmatter.availability.features.ssoEnforcement} />
+<FeatureAvailability availability={{ free: false, selfServe: false, boost: true, scale: true, enterprise: true }} />
 
 You may want to force users log in and/or sign up to your organization using a specific SSO provider.
 

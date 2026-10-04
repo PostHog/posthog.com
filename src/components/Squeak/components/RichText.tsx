@@ -106,7 +106,7 @@ const isModProfile = (profile) => profile.attributes?.isTeamMember || !!profile.
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
     const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
-    const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    const isAI = profile.id === Number(import.meta.env.PUBLIC_AI_PROFILE_ID)
     const isMod = isModProfile(profile)
 
     return (
@@ -290,7 +290,12 @@ export default function RichText({
         accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/gif': ['.gif'] },
     })
 
-    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '', value: string) => {
+    const replaceSelection = (
+        selectionStart: number | undefined,
+        selectionEnd: number | undefined,
+        text = '',
+        value: string
+    ) => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
     }
 
@@ -400,7 +405,7 @@ export default function RichText({
     const handleProfileSelect = (profile, selectionStart) => {
         const { selectionEnd } = getTextSelection()
         const mention =
-            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+            profile.id === Number(import.meta.env.PUBLIC_AI_PROFILE_ID)
                 ? `@max `
                 : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
@@ -555,7 +560,7 @@ export default function RichText({
                         />
 
                         {isDragActive && (
-                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:dark: after:rounded-md">
+                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-primary after:rounded-md">
                                 <p className="m-0 font-semibold">Drop image here</p>
                             </div>
                         )}

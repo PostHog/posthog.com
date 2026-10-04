@@ -1,43 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useStaticQuery, graphql, navigate } from 'gatsby'
 import Link from 'components/Link'
 import { IconSearch } from '@posthog/icons'
 import dayjs from 'dayjs'
+import { navigate } from 'lib/navigation'
+import templatesJson from '@data/products-templates.json'
+import type { Templates } from '~/data-layer/queries/products'
 
-interface MdxTemplate {
-    id: string
-    fields: {
-        slug: string
-    }
-    frontmatter: {
-        thumbnail?: {
-            publicURL: string
-        }
-        title: string
-        subtitle?: string
-        badge?: string
-        price?: string
-        filters?: {
-            type?: string[]
-            maintainer?: string
-        }
-    }
-}
-
-interface WorkflowTemplate {
-    templateId: string
-    name: string
-    description: string
-    image_url: string
-    created_at: string
-    fields: {
-        slug: string
-    }
-    created_by: {
-        first_name: string
-        last_name: string
-    } | null
-}
+const templates = templatesJson as Templates
 
 interface UnifiedTemplate {
     id: string
@@ -157,66 +126,19 @@ function TemplateCard({ template }: { template: UnifiedTemplate }) {
 
 export default function TemplatesLibrary(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState('')
-    const data = useStaticQuery(graphql`
-        query TemplatesLibraryQuery {
-            mdxTemplates: allMdx(filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        thumbnail {
-                            publicURL
-                        }
-                        title
-                        subtitle
-                        badge
-                        price
-                        filters {
-                            type
-                            maintainer
-                        }
-                    }
-                }
-            }
-            workflowTemplates: allPostHogWorkflowTemplate {
-                nodes {
-                    templateId
-                    fields {
-                        slug
-                    }
-                    name
-                    description
-                    image_url
-                    created_at
-                    created_by {
-                        first_name
-                        last_name
-                    }
-                }
-            }
-        }
-    `)
+    const mdxTemplates: UnifiedTemplate[] = templates.mdxTemplates.map((t) => ({
+        id: t.id,
+        name: t.title,
+        description: t.subtitle || '',
+        type: t.type as UnifiedTemplate['type'],
+        tags: getTagsForTemplate(t.title),
+        image_url: t.thumbnailUrl ?? undefined,
+        url: t.url,
+        badge: t.badge ?? undefined,
+        author: t.maintainer ?? undefined,
+    }))
 
-    const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || []).map((t: MdxTemplate) => {
-        const types = t.frontmatter.filters?.type || []
-        const type = types[0]
-
-        return {
-            id: t.id,
-            name: t.frontmatter.title,
-            description: t.frontmatter.subtitle || '',
-            type,
-            tags: getTagsForTemplate(t.frontmatter.title),
-            image_url: t.frontmatter.thumbnail?.publicURL,
-            url: t.fields.slug,
-            badge: t.frontmatter.badge,
-            author: t.frontmatter.filters?.maintainer,
-        }
-    })
-
-    const workflowTemplates: UnifiedTemplate[] = (data.workflowTemplates?.nodes || []).map((t: WorkflowTemplate) => {
+    const workflowTemplates: UnifiedTemplate[] = templates.workflowTemplates.map((t) => {
         const isNew = t.created_at ? dayjs(t.created_at).isAfter(dayjs().subtract(30, 'day')) : false
 
         return {
@@ -225,8 +147,8 @@ export default function TemplatesLibrary(): JSX.Element {
             description: t.description || '',
             type: 'workflow' as const,
             tags: getTagsForTemplate(t.name),
-            image_url: t.image_url,
-            url: `/templates/workflow/${t.fields.slug}`,
+            image_url: t.image_url ?? undefined,
+            url: `/templates/workflow/${t.slug}`,
             badge: isNew ? 'New' : undefined,
             author: t.created_by
                 ? `${t.created_by.first_name || ''} ${t.created_by.last_name || ''}`.trim()

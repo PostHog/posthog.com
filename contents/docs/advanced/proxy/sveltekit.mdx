@@ -54,7 +54,7 @@ Create a file at `src/hooks.server.ts`:
 
 <MultiLanguage>
 
-```ts file=US
+```ts file="US"
 import type { Handle } from '@sveltejs/kit'
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -100,7 +100,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 }
 ```
 
-```ts file=EU
+```ts file="EU"
 import type { Handle } from '@sveltejs/kit'
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -166,7 +166,7 @@ In your SvelteKit app, initialize PostHog with your proxy path. Create or update
 
 <MultiLanguage>
 
-```ts file=US
+```ts file="US"
 // src/lib/posthog.ts
 import posthog from 'posthog-js'
 import { browser } from '$app/environment'
@@ -182,7 +182,7 @@ export function initPostHog() {
 }
 ```
 
-```ts file=EU
+```ts file="EU"
 // src/lib/posthog.ts
 import posthog from 'posthog-js'
 import { browser } from '$app/environment'

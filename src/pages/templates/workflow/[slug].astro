@@ -1,0 +1,19 @@
+---
+// Workflow templates, from the PostHog API (PostHogWorkflowTemplate nodes).
+import { getCollection } from 'astro:content'
+import PageIsland from '../../../islands/PageIsland.astro'
+import Site from '../../../layouts/Site.astro'
+import { type WorkflowTemplateProps, templatesMenu, workflowTemplatePages } from '../../../lib/content/templates'
+import { MINIMAL_BUILD } from '../../../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return workflowTemplatePages(templatesMenu(await getCollection('templates')))
+}
+
+type Props = WorkflowTemplateProps
+---
+
+<Site>
+    <PageIsland module="/src/templates/WorkflowTemplate.tsx" props={Astro.props} />
+</Site>

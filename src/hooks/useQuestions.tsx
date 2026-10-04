@@ -1,5 +1,4 @@
 import React from 'react'
-
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 import { QuestionData, StrapiResult, StrapiRecord } from 'lib/strapi'
@@ -184,7 +183,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite<
         StrapiResult<QuestionData[]>
     >(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(offset, options, isModerator)}`,
+        (offset) => `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/questions?${query(offset, options, isModerator)}`,
         async (url: string) => {
             const jwt = await getJwt()
             return fetch(url, user && jwt ? { headers: { Authorization: `Bearer ${jwt}` } } : undefined).then((r) =>

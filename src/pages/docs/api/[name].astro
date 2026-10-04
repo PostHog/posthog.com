@@ -1,0 +1,29 @@
+---
+// API reference pages: one per group of OpenAPI operations (src/lib/content/apiReference.ts).
+import PageIsland from '../../../islands/PageIsland.astro'
+import Site from '../../../layouts/Site.astro'
+import { type ApiEndpointPage, apiEndpointPages } from '../../../lib/content/apiReference'
+import { MINIMAL_BUILD } from '../../../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return (await apiEndpointPages()).map(({ path, page }) => ({
+        params: { name: path.replace(/^\/docs\/api\//, '') },
+        props: { endpoint: page },
+    }))
+}
+
+interface Props {
+    endpoint: ApiEndpointPage
+}
+
+const { endpoint } = Astro.props
+// The overview and every operation's notes, so none of them renders behind a Suspense boundary.
+const content = [
+    ...new Set([endpoint.overview, ...Object.values(endpoint.operations)].filter((key): key is string => !!key)),
+]
+---
+
+<Site>
+    <PageIsland module="/src/templates/ApiEndpoint.tsx" props={{ endpoint }} content={content} />
+</Site>

@@ -99,19 +99,19 @@ This guide covers both the App Router and Pages Router. You'll need a PostHog in
 
 <MultiLanguage>
 
-```bash file=npm
+```bash file="npm"
 npm install --save @posthog/next
 ```
 
-```bash file=Yarn
+```bash file="Yarn"
 yarn add @posthog/next
 ```
 
-```bash file=pnpm
+```bash file="pnpm"
 pnpm add @posthog/next
 ```
 
-```bash file=Bun
+```bash file="Bun"
 bun add @posthog/next
 ```
 
@@ -123,7 +123,7 @@ bun add @posthog/next
 
 Add these to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project token in your [project settings](https://app.posthog.com/project/settings).
 
-```shell file=.env.local
+```shell file=".env.local"
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
@@ -136,7 +136,7 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 
 The middleware seeds an identity cookie on first visit so client and server share the same user, and optionally proxies API requests through your domain.
 
-```ts file=middleware.ts
+```ts file="middleware.ts"
 import { postHogMiddleware } from '@posthog/next'
 
 export default postHogMiddleware({ proxy: true })
@@ -290,7 +290,7 @@ For server-side events and feature flag evaluations, PostHog can use the client-
 
 `@posthog/next` enables automatic browser exception capture by default. On Next.js 15 and later, capture server-side request errors by exporting `onRequestError` from your root `instrumentation.ts` file:
 
-```ts file=instrumentation.ts
+```ts file="instrumentation.ts"
 export { onRequestError } from '@posthog/next'
 ```
 
@@ -343,7 +343,7 @@ Pass `clientOptions.tracing_headers` to customize the hostnames that receive the
 
 If your app requires consent before setting cookies, disable anonymous cookie seeding in middleware:
 
-```ts file=middleware.ts
+```ts file="middleware.ts"
 export default postHogMiddleware({
     proxy: true,
     seedAnonymousCookie: false,
@@ -360,7 +360,7 @@ Then initialize the client with capture disabled until you opt in:
 
 Pass an object to `proxy` to customize the ingest path or host:
 
-```ts file=middleware.ts
+```ts file="middleware.ts"
 export default postHogMiddleware({
     proxy: {
         pathPrefix: '/analytics',

@@ -1,0 +1,27 @@
+---
+// Dashboard and survey templates: contents/templates. The /templates listing is a view.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type TemplateEntry, type MenuItem, templatePage, templatesMenu } from '../../lib/content/templates'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    const entries = await getCollection('templates')
+    const menu = templatesMenu(entries)
+    return entries
+        .filter((entry) => !isViewPath(entryPath('/templates', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id }, props: { entry, menu } }))
+}
+
+interface Props {
+    entry: TemplateEntry
+    menu: MenuItem[]
+}
+
+const page = templatePage(Astro.props.entry, Astro.props.menu)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Template.tsx" props={page} content={page.body} />
+</Site>

@@ -49,7 +49,7 @@ import SvelteInstallServer from "../integrate/_snippets/install-svelte-server.md
 
 To use client-side feature flags, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
 
-```js file=routes/+page.svelte
+```js file="routes/+page.svelte"
 <script>
   import posthog from 'posthog-js'
   import { browser } from '$app/environment'
@@ -71,7 +71,7 @@ To use client-side feature flags, import PostHog into your Svelte component and 
 
 To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
 
-```js file=routes/+page.server.js
+```js file="routes/+page.server.js"
 import { PostHog } from 'posthog-node';
 
 const client = new PostHog(

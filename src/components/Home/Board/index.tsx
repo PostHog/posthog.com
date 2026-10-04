@@ -67,13 +67,15 @@ import useProducts from 'hooks/useProducts'
 import { CallToAction } from 'components/CallToAction'
 import { Feature } from 'components/Roadmap'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import { graphql } from 'gatsby'
-import { useStaticQuery } from 'gatsby'
+import githubReactionsJson from '@data/roadmap-github-reactions.json'
+import type { RoadmapGithubReactions } from '~/data-layer/queries/roadmap'
 import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
 import Link from 'components/Link'
+
+const githubReactions = githubReactionsJson as RoadmapGithubReactions
 
 type Product = {
     name: string
@@ -97,7 +99,6 @@ type Product = {
     }
     roadmapID?: number
     badge?: string
-    roadmap?: any
 }
 
 const products: Product[] = [
@@ -636,7 +637,7 @@ const RoadmapProductDetails = ({
     })
     const roadmap = roadmaps[0]
     const likeCount = roadmap?.attributes?.likes?.data?.length || 0
-    const staticLikeCount = product.roadmap?.githubPages?.[0]?.reactions?.total_count || 0
+    const staticLikeCount = (roadmapID && githubReactions[roadmapID]) || 0
 
     return (
         <div className="bg-white dark:bg-accent-dark border border-input md:max-w-[700px] w-full overflow-hidden">
@@ -914,21 +915,6 @@ const ProductButton = ({
     )
 }
 export default function Hero(): JSX.Element {
-    const { staticRoadmaps } = useStaticQuery(graphql`
-        {
-            staticRoadmaps: allSqueakRoadmap {
-                nodes {
-                    githubPages {
-                        reactions {
-                            total_count
-                        }
-                    }
-                    squeakId
-                }
-            }
-        }
-    `)
-
     const [productModalOpen, setProductModalOpen] = useState(false)
     const [activeStatus, setActiveStatus] = useState<string>('All products')
     const groupedProducts = useMemo(() => {
@@ -939,10 +925,7 @@ export default function Hero(): JSX.Element {
                 if (!groupedProducts[type]) {
                     groupedProducts[type] = []
                 }
-                groupedProducts[type].push({
-                    ...product,
-                    roadmap: staticRoadmaps.nodes.find((roadmap) => roadmap.squeakId === product.roadmapID),
-                })
+                groupedProducts[type].push({ ...product })
             })
         })
         return [...Object.entries(groupedProducts)].sort(

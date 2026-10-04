@@ -12,11 +12,11 @@ import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import Mixtapes from './Mixtapes'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { navigate } from 'gatsby'
 import { motion } from 'framer-motion'
 import DanceMode from 'components/DanceMode'
 import { useWindow } from '../../context/Window'
 import { extractVideoId } from './utils'
+import { navigate } from 'lib/navigation'
 
 const getRandomWaveformBars = () => Array.from({ length: 60 }, () => Math.random() * 80 + 20)
 
@@ -73,7 +73,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
         try {
             const jwt = await getJwt()
             const response = await fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`,
+                `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/mixtapes/${mixtapeId}?populate=*`,
                 jwt
                     ? {
                           headers: {

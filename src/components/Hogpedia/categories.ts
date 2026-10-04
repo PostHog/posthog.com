@@ -18,7 +18,7 @@ export const categoryPath = (category: string): string => `/hogpedia/category/${
 /**
  * Page names under `/hogpedia/` that `src/pages/hogpedia/` owns.
  *
- * `gatsby/createPages.ts` throws when an article slug collides with one of these, so a new
+ * `src/lib/content/hogpedia.ts` throws when an article slug collides with one of these, so a new
  * article can never silently shadow the Main Page or a meta page.
  */
 export const HOGPEDIA_RESERVED = [

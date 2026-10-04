@@ -5,11 +5,10 @@ import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import { useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
-import { navigate } from 'gatsby'
 import { SQUEAK_HOST } from 'lib/strapi'
-
-import SecurityHog from '../../../../images/security-hog.png'
+import SecurityHog from '../../../../images/security-hog.png?url'
 import { IconSpinner } from '@posthog/icons'
+import { navigate } from 'lib/navigation'
 
 const Input = ({
     label,

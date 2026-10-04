@@ -2,14 +2,13 @@ import React, { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { navigate } from 'gatsby'
-import { useLocation } from '@reach/router'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
+import { navigate, useLocation } from 'lib/navigation'
 interface AccordionItem {
     title: string
     content: React.ReactNode

@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
@@ -7,8 +6,9 @@ import SourceConfiguration from 'components/Product/Sources/Configuration'
 import SourceTables from 'components/Product/Sources/Tables'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import { getProseClasses } from '../constants'
+import type { DataWarehouseSourcePage } from '../lib/content/integrations'
 
-interface SourceField {
+export interface SourceField {
     name: string
     label: string
     type: string
@@ -17,7 +17,7 @@ interface SourceField {
     caption: string
 }
 
-interface SourceTable {
+export interface SourceTable {
     name: string
     label: string
     description: string
@@ -26,23 +26,12 @@ interface SourceTable {
     primary_keys: string[]
 }
 
-export default function DataWarehouseSource({
-    data,
-}: {
-    data: {
-        postHogSource: {
-            sourceId: string
-            name: string
-            icon_url: string
-            caption: string
-            permissionsCaption: string
-            beta: boolean
-            sourceFields: SourceField[]
-            tables: SourceTable[]
-        }
-    }
-}): JSX.Element {
-    const { sourceId, name, icon_url, caption, permissionsCaption, beta, sourceFields, tables } = data.postHogSource
+export interface DataWarehouseSourceProps {
+    source: DataWarehouseSourcePage
+}
+
+export default function DataWarehouseSource({ source }: DataWarehouseSourceProps): JSX.Element {
+    const { name, icon_url, caption, permissionsCaption, beta, sourceFields, tables } = source
 
     return (
         <>
@@ -101,32 +90,3 @@ export default function DataWarehouseSource({
         </>
     )
 }
-
-export const query = graphql`
-    query ($id: String!) {
-        postHogSource(id: { eq: $id }) {
-            sourceId
-            name
-            icon_url
-            caption
-            permissionsCaption
-            beta
-            sourceFields {
-                name
-                label
-                type
-                required
-                placeholder
-                caption
-            }
-            tables {
-                name
-                label
-                description
-                sync_methods
-                incremental_fields
-                primary_keys
-            }
-        }
-    }
-`

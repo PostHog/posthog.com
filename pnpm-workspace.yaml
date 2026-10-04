@@ -1,7 +1,3 @@
-packages:
-    - .
-    - plugins/*
-
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
     - '@posthog/brand'
@@ -14,11 +10,6 @@ minimumReleaseAgeExclude:
     - '@typecaast/skins'
 blockExoticSubdeps: true
 trustPolicy: no-downgrade
-
-# Hoist Gatsby's internal dependencies for webpack compatibility
-publicHoistPattern:
-    - '*webpack-hot-middleware*'
-    - '*error-stack-parser*'
-    - '*platform*'
-    - '*css.escape*'
-    - '*anser*'
+trustPolicyExclude:
+    - 'semver@5.7.2 || 6.3.1'
+    - 'chokidar@4.0.3'

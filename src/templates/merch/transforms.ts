@@ -1,8 +1,8 @@
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { ShopifyProduct, ShopifyProductVariant } from './types'
 import { getShopifyImage } from './utils'
+import { ResponsiveImageData } from 'components/Image'
 
-export function getLineItemImage(variant: ShopifyProductVariant): IGatsbyImageData | null {
+export function getLineItemImage(variant: ShopifyProductVariant): ResponsiveImageData | null {
     if (variant.media.length) {
         return getShopifyImage({ image: variant.media[0].preview.image })
     }

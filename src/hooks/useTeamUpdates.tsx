@@ -15,7 +15,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
     const fetchUpdates = async () => {
         if (!teamName) return
         const { data: teamData } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
                     filters: {
                         name: {
@@ -29,7 +29,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
         const teamID = teamData[0]?.id
         setTeamID(teamID)
         const { data } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${qs.stringify(
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/team-updates?${qs.stringify(
                 {
                     populate: ['question.id', 'roadmap.id', 'team.id'],
                     sort: ['createdAt:desc'],

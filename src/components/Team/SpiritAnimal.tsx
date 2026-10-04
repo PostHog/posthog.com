@@ -127,7 +127,7 @@ const SpiritAnimalForm = ({
                         limit: 100,
                     },
                 })
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${query}`)
+                await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams?${query}`)
                     .then((res) => res.json())
                     .then((data) => {
                         const takenAnimals = data.data

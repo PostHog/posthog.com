@@ -15,10 +15,10 @@ uv sync
 # See .env template below
 
 # Test with a dry run
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 
 # Generate audio
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 ```
 
 ## Environment setup
@@ -91,10 +91,10 @@ handbook-audio/
 
 ```bash
 # Dry run (no API call)
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 
 # Generate audio
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 ```
 
 ### Directory mode 🆕
@@ -270,7 +270,7 @@ exists = audio_file_exists(slug, output_dir)
 
 ```bash
 # Quick test with a simple file
-python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.mdx
 
 # Test with component-heavy file (best for validation)
 python scripts/handbook-audio/generate.py --dry-run contents/handbook/engineering/posthog-com/markdown.mdx
@@ -288,7 +288,7 @@ Dry-run mode:
 export ELEVENLABS_API_KEY="your-key"
 
 # Short file (no chunking)
-python scripts/handbook-audio/generate.py contents/handbook/values.md
+python scripts/handbook-audio/generate.py contents/handbook/values.mdx
 
 # Long file (triggers chunking)
 python scripts/handbook-audio/generate.py contents/handbook/engineering/posthog-com/markdown.mdx
@@ -310,7 +310,7 @@ Generated audio files and associated files can be automatically uploaded to S3 w
 
 ```bash
 # Generate and upload to S3
-python scripts/handbook-audio/generate.py --upload-s3 contents/handbook/values.md
+python scripts/handbook-audio/generate.py --upload-s3 contents/handbook/values.mdx
 
 # Generate all files and upload to S3
 python scripts/handbook-audio/generate.py --all --upload-s3

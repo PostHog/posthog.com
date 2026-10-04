@@ -1,4 +1,4 @@
-import { CassetteLabelBackground } from 'data/cassetteBackgrounds'
+import { CassetteLabelBackground } from '../../data/cassetteBackgrounds'
 
 // YouTube API types
 export interface YTPlayer {

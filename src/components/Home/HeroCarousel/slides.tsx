@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { IconFlag, IconLightBulb, IconRocket, IconSearch, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -9,6 +8,8 @@ import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
+import heroDestinationsJson from '@data/products-hero-destinations.json'
+import type { HeroDestinations } from '~/data-layer/queries/products'
 
 const pickedSourceSlugs = [
     'postgres',
@@ -33,9 +34,11 @@ const batchExportItems = [
     { label: 'Redshift', url: '/docs/cdp/batch-exports/redshift', logoKey: 'redshift' },
 ]
 
-const pickedDestinationSlugs = ['zapier', 'hubspot', 'salesforce', 'intercom', 'customerio', 'zendesk', 'webhook']
+// The non-coming-soon destination count, and the featured destinations (picked in the query).
+const heroDestinations = heroDestinationsJson as HeroDestinations
 
-const getIconUrl = (iconUrl: string) => (iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`)
+const getIconUrl = (iconUrl: string | null) =>
+    iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
 
 const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehouse', 'bi'] as const
 
@@ -95,39 +98,17 @@ export const OnePlaceSlide = () => {
     const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
     const sourceCount = platforms.length
 
-    const { allDestinations } = useStaticQuery(graphql`
-        query HeroDestinationData {
-            allDestinations: allPostHogPipeline(
-                filter: { type: { eq: "destination" }, status: { ne: "coming_soon" } }
-            ) {
-                totalCount
-                nodes {
-                    slug
-                    name
-                    icon_url
-                    mdx {
-                        fields {
-                            slug
-                        }
-                    }
-                }
-            }
-        }
-    `)
-    const destinationCount = allDestinations?.totalCount || 0
+    const destinationCount = heroDestinations.count
 
     const pickedSources = pickedSourceSlugs
         .map((slug) => platforms.find((p: any) => p.url.endsWith(`/${slug}`)))
         .filter(Boolean)
 
-    const pickedDestinations = pickedDestinationSlugs
-        .map((slug) => allDestinations?.nodes?.find((n: any) => n.slug === slug))
-        .filter(Boolean)
-        .map((n: any) => ({
-            label: n.name,
-            url: n.mdx?.fields?.slug || `/docs/cdp/destinations/${n.slug}`,
-            image: getIconUrl(n.icon_url),
-        }))
+    const pickedDestinations = heroDestinations.featured.map((destination) => ({
+        label: destination.name,
+        url: destination.url,
+        image: getIconUrl(destination.icon_url),
+    }))
 
     const exportDestinations = [...batchExportItems, ...pickedDestinations]
 

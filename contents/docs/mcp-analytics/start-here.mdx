@@ -40,19 +40,19 @@ Install the SDK for your server's language:
 
 <MultiLanguage>
 
-```bash file=TypeScript
+```bash file="TypeScript"
 npm install @posthog/mcp posthog-node
 ```
 
-```bash file=Python
+```bash file="Python"
 pip install posthog
 ```
 
-```bash file=Go
+```bash file="Go"
 go get github.com/posthog/posthog-go/posthogmcpsdk
 ```
 
-```bash file=Ruby
+```bash file="Ruby"
 bundle add posthog-ruby
 ```
 
@@ -62,7 +62,7 @@ Set `POSTHOG_PROJECT_TOKEN` in your environment. Wrap your existing server once,
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
@@ -78,7 +78,7 @@ process.on("SIGTERM", async () => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 import os
 from posthog import Posthog
 from posthog.mcp import instrument
@@ -95,7 +95,7 @@ await analytics.flush()
 posthog.shutdown()
 ```
 
-```go file=Go
+```go file="Go"
 client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog.Config{
 	Endpoint: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
@@ -109,7 +109,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 )
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 require "posthog/mcp"
 
 posthog = PostHog::Client.new(
@@ -175,7 +175,7 @@ To inspect, change, or drop events before they're sent, add a before-send hook. 
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, {
   beforeSend: (event) => {
     delete event.properties.$mcp_response // keep tool results out of PostHog
@@ -184,7 +184,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp.types import MCPAnalyticsOptions
 
 def before_send(event):
@@ -194,13 +194,13 @@ def before_send(event):
 instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
 ```
 
-```go file=Go
+```go file="Go"
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 	posthogmcpsdk.WithCaptureResponses(false), // keep tool results out of PostHog
 )
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(
   server, posthog,
   before_send: lambda do |event|
@@ -299,7 +299,7 @@ By default, each event uses an SDK-generated session ID. Add an identify callbac
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 import { instrument, getRequestHeaders } from "@posthog/mcp"
 
 instrument(server, posthog, {
@@ -310,7 +310,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp import get_request_headers
 from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
 
@@ -321,7 +321,7 @@ async def identify(request, extra):
 instrument(server, posthog, MCPAnalyticsOptions(identify=identify))
 ```
 
-```go file=Go
+```go file="Go"
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 	posthogmcpsdk.WithIdentity(func(ctx context.Context, req *mcp.CallToolRequest) (posthogmcpsdk.Identity, error) {
 		if req.Extra == nil || req.Extra.TokenInfo == nil {
@@ -332,7 +332,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 )
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(
   server, posthog,
   identify: ->(_request, extra) {
@@ -362,15 +362,15 @@ Turn on missing-capability reports to add the `get_more_tools` virtual tool. Age
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, { reportMissing: true })
 ```
 
-```python file=Python
+```python file="Python"
 instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(server, posthog, report_missing: true)
 ```
 

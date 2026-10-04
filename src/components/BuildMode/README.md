@@ -1,13 +1,14 @@
 # BuildMode
 
-The newsletter-specific building blocks for `/newsletter` (`src/pages/newsletter.tsx`) — the
-newsletter's rebranded home. The page itself is only the `ReaderView` shell, the layout, and the
-GraphQL query; what it renders lives here and in `src/components/PostsIndex/`, which holds the
+The newsletter-specific building blocks for `/newsletter` (`src/views/newsletter.tsx`), the
+newsletter's rebranded home. The page itself is only the `ReaderView` shell and the layout. Its
+`data` prop comes from `sectionIndexData('newsletter')` in `src/lib/content/posts.ts` (wired up in
+`src/lib/routes/viewData.ts`); what it renders lives here and in `src/components/PostsIndex/`, which holds the
 generic posts-index pieces (featured post, gallery, tag filter, search/sort) shared with `/blog`.
 See that folder's README for those files and the shared conventions.
 
 These components live under `src/components/` rather than beside the page because **every file under
-`src/pages/` becomes a route in Gatsby** — a colocated `Hero.tsx` would ship as
+`src/views/` becomes a route** (`src/lib/routes/views.ts`), so a colocated `Hero.tsx` would ship as
 `/newsletter/Hero`.
 
 ## The page, top to bottom

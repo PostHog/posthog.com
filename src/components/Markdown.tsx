@@ -9,9 +9,8 @@ interface MarkdownProps {
 }
 
 export const Markdown = ({ children, className, components }: MarkdownProps) => {
-    return (
+    const markdown = (
         <ReactMarkdown
-            className={className}
             components={{
                 a: ({ node, ...props }) => <Link {...props} />,
                 ...components,
@@ -20,6 +19,8 @@ export const Markdown = ({ children, className, components }: MarkdownProps) => 
             {children}
         </ReactMarkdown>
     )
+    // react-markdown 9 dropped `className`; version 8 wrapped the output in a div for it.
+    return className ? <div className={className}>{markdown}</div> : markdown
 }
 
 export default Markdown

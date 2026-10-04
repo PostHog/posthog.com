@@ -29,11 +29,11 @@ import { cassetteLabelBackgrounds } from '../../data/cassetteBackgrounds'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
-import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { extractVideoId } from './utils'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
+import { Link, navigate } from 'lib/navigation'
 
 interface SortableTrackProps {
     track: Track
@@ -251,8 +251,8 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
             try {
                 const jwt = await getJwt()
                 const url = isEditMode
-                    ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${id}`
-                    : `${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes`
+                    ? `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/mixtapes/${id}`
+                    : `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/mixtapes`
                 const method = isEditMode ? 'PUT' : 'POST'
 
                 const response = await fetch(url, {
@@ -361,11 +361,14 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         const loadMixtape = async () => {
             try {
                 const jwt = await getJwt()
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/mixtapes/${id}?populate=*`, {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                })
+                const response = await fetch(
+                    `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/mixtapes/${id}?populate=*`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
+                )
 
                 if (!response.ok) {
                     throw new Error('Failed to load mixtape')

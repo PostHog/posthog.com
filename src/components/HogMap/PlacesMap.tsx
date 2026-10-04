@@ -91,7 +91,7 @@ export default function PlacesMap({
     const searchRef = useRef<any>(null)
     const searchMarkerRef = useRef<any>(null)
 
-    const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
+    const token = typeof window !== 'undefined' ? import.meta.env.PUBLIC_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
 
     const { places, coordsByPlaceId } = usePlacesMapData(isClient, getJwt)
@@ -191,8 +191,8 @@ export default function PlacesMap({
             const filteredPlaces = !Array.isArray(currentLayers)
                 ? placesRef.current // Show all if layers is undefined
                 : currentLayers.length === 0
-                ? [] // Show none if layers is empty array
-                : placesRef.current.filter((p) => currentLayers.includes(p.type))
+                  ? [] // Show none if layers is empty array
+                  : placesRef.current.filter((p) => currentLayers.includes(p.type))
 
             // Use Mapbox clusters when zoomed out
             if (zoom < CLUSTER_ZOOM) {

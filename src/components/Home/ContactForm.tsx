@@ -3,7 +3,6 @@ import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState 
 import { useFormik } from 'formik'
 import { button } from 'components/CallToAction'
 import * as Yup from 'yup'
-import { useLocation } from '@reach/router'
 import Link from 'components/Link'
 import { animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
@@ -11,6 +10,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from '../../hooks/usePostHog'
+import { useLocation } from 'lib/navigation'
 
 const inputContainerClasses = `text-sm`
 

@@ -2,15 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { Skeleton } from './Views/Default'
 import Spinner from 'components/Spinner'
 import { child, container } from 'components/CallToAction'
-
 import Link from 'components/Link'
-import { useLocation } from '@reach/router'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isToday from 'dayjs/plugin/isToday'
 import { useLayoutData } from 'components/Layout/hooks'
 import LikeButton from './LikeButton'
+import { useLocation } from 'lib/navigation'
+import { useBreakpoint } from 'hooks/useBreakpoint'
 dayjs.extend(relativeTime)
 dayjs.extend(isToday)
 

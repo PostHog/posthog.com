@@ -1,0 +1,16 @@
+---
+// One page per event, built from the Strapi events. Events added after the build open through the
+// client-side view in src/views/events/[strapiID].tsx.
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type EventProps, eventPages } from '../../lib/content/events'
+import { MINIMAL_BUILD } from '../../data-layer/env'
+
+export const getStaticPaths = () => (MINIMAL_BUILD() ? [] : eventPages())
+
+type Props = EventProps
+---
+
+<Site>
+    <PageIsland module="/src/templates/Event.tsx" props={Astro.props} />
+</Site>

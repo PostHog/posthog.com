@@ -52,7 +52,7 @@ export default function TeamUpdate({
 
                     const {
                         data: { id: updateID },
-                    } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates`, {
+                    } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/team-updates`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function TeamUpdate({
                     }).then((res) => res.json())
 
                     const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+                    await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/questions`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ export default function TeamUpdate({
         const {
             data: [team],
         } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
                     populate: ['profiles', 'leadProfiles'],
                     filters: {

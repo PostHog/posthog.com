@@ -1,120 +1,20 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Mark from 'mark.js'
+import jobsJson from '@data/people-jobs.json'
+import type { Jobs } from '~/data-layer/queries/people'
 
-const query = graphql`
-    query CareersHero {
-        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-            jobs: nodes {
-                fields {
-                    title
-                    slug
-                    html
-                }
-                parent {
-                    ... on AshbyJob {
-                        customFields {
-                            value
-                            title
-                        }
-                    }
-                }
-                externalLink
-                departmentName
-                info {
-                    descriptionHtml
-                }
-            }
-            departments: group(field: departmentName) {
-                title: fieldValue
-            }
-        }
-        allTeams: allSqueakTeam {
-            nodes {
-                id
-                name
-                description
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                crestOptions {
-                    textColor
-                    textShadow
-                    fontSize
-                    frame
-                    frameColor
-                    plaque
-                    plaqueColor
-                    imageScale
-                    imageXOffset
-                    imageYOffset
-                }
-                leadProfiles {
-                    data {
-                        id
-                    }
-                }
-                profiles {
-                    data {
-                        id
-                        attributes {
-                            country
-                            firstName
-                            lastName
-                            companyRole
-                            location
-                            startDate
-                            pineappleOnPizza
-                            leadTeams {
-                                data {
-                                    attributes {
-                                        name
-                                    }
-                                }
-                            }
-                            avatar {
-                                data {
-                                    attributes {
-                                        url
-                                    }
-                                }
-                            }
-                            color
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+const originalJobs = jobsJson as Jobs
 
 export const CareersHero = () => {
-    const {
-        allAshbyJobPosting: { departments, jobs: originalJobs },
-        allTeams: { nodes: allTeams },
-    } = useStaticQuery(query)
-
     const [searchQuery, setSearchQuery] = useState('')
     const jobListRef = useRef<HTMLDivElement>(null)
     const markedRef = useRef<Mark | null>(null)
 
-    const allJobs = originalJobs.filter((job: any) =>
-        job.fields.title.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    const allJobs = originalJobs.filter((job) => job.title.toLowerCase().includes(searchQuery.toLowerCase()))
 
     const [selectedJob, setSelectedJob] = useState(allJobs[0])
-    const teamsField = selectedJob?.parent?.customFields.find((field: { title: string }) => field.title === 'Teams')
-    const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
-
-    // Compute the current team name - either the selected one or default to first team
-    const currentTeamName = selectedTeamName || teams[0] || ''
-    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === currentTeamName.toLowerCase())
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -122,11 +22,11 @@ export const CareersHero = () => {
     const totalPositions = useMemo(() => {
         const uniqueRoles = new Map()
 
-        allJobs.forEach((job: any) => {
-            const jobTitle = job.fields.title
+        allJobs.forEach((job) => {
+            const jobTitle = job.title
             if (!uniqueRoles.has(jobTitle)) {
-                const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
-                const teams = teamsField ? JSON.parse(teamsField.value) : []
+                const teamsField = job.customFields.find((field) => field.title === 'Teams')
+                const teams = teamsField ? JSON.parse(teamsField.value as string) : []
                 // Count the number of teams hiring for this role (minimum 1)
                 uniqueRoles.set(jobTitle, Math.max(teams.length, 1))
             }

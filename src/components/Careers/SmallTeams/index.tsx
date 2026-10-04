@@ -1,35 +1,16 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import slugify from 'slugify'
 import CloudinaryImage from 'components/CloudinaryImage'
-
 import OSButton from 'components/OSButton'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { ResponsiveImage } from 'components/Image'
+import careersSmallTeamsJson from '@data/people-careers-small-teams.json'
+import type { CareersSmallTeams } from '~/data-layer/queries/people'
+
+const { teams, memberCount: profilesTotalCount } = careersSmallTeamsJson as CareersSmallTeams
 
 export const SmallTeams = () => {
-    const {
-        allTeams,
-        profiles: { totalCount: profilesTotalCount },
-    } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    miniCrest {
-                        gatsbyImageData(width: 64, height: 64)
-                    }
-                }
-            }
-            profiles: allSqueakProfile(filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }) {
-                totalCount
-            }
-        }
-    `)
-
     // NOTE: Eventually we should round to the hundreds, but this is fine for now, we're not there yet :)
     const roundedProfilesTotalCount = Math.floor(profilesTotalCount / 10) * 10
 
@@ -60,10 +41,10 @@ export const SmallTeams = () => {
             <fieldset className="rounded [&_legend]:!bg-transparent">
                 <legend>Our small teams</legend>
                 <div className="@xl:columns-2 @3xl:columns-3 text-center -mx-4 md:mx-0 md:gap-x-8">
-                    {allTeams.nodes
-                        .sort((a: any, b: any) => a.name.localeCompare(b.name))
-                        .map(({ id, name, slug, miniCrest }: any) => {
-                            const gatsbyImageMiniCrest = getImage(miniCrest)
+                    {teams
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map(({ id, name, slug, miniCrest }) => {
+                            const gatsbyImageMiniCrest = miniCrest ?? undefined
                             return (
                                 <OSButton
                                     asLink
@@ -77,7 +58,7 @@ export const SmallTeams = () => {
                                 >
                                     <div className="size-8">
                                         {gatsbyImageMiniCrest ? (
-                                            <GatsbyImage
+                                            <ResponsiveImage
                                                 image={gatsbyImageMiniCrest}
                                                 alt={`${name} Team`}
                                                 className="size-8"

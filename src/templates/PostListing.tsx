@@ -12,12 +12,14 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 import slugify from 'slugify'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import postCategoriesJson from '@data/roadmap-post-categories.json'
+import type { PostCategories } from '~/data-layer/queries/roadmap'
 import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
 import { IconSpinner } from '@posthog/icons'
 import LikeButton from 'components/Edition/LikeButton'
 import Modal from 'components/Modal'
 import { Authentication } from 'components/Squeak'
+import { navigate } from 'lib/navigation'
 
 dayjs.extend(relativeTime)
 
@@ -73,42 +75,27 @@ export const FeaturedImage = ({ url }: { url: string }) => {
     )
 }
 
-export default function Posts({ pageContext, location }) {
+// Categories (one per folder) with their tag labels, and every tag across them, sorted.
+const { categories, allTags } = postCategoriesJson as PostCategories
+
+export interface PostListingProps {
+    /** The post category folder to filter by. Unset on /posts. */
+    root?: string
+    /** The tag label to filter by, on /<folder>/<tag> pages. */
+    selectedTag?: string
+    location: { pathname: string; search: string }
+}
+
+export default function Posts({ root: rootFolder, selectedTag: rootTag, location }: PostListingProps) {
     const [loginModalOpen, setLoginModalOpen] = useState(false)
-    const { allPostCategory } = useStaticQuery(graphql`
-        {
-            allPostCategory(
-                filter: {
-                    attributes: {
-                        folder: { nin: [null, "customers", "spotlight", "changelog", "comparisons", "notes", "repost"] }
-                    }
-                }
-            ) {
-                nodes {
-                    attributes {
-                        label
-                        folder
-                        post_tags {
-                            data {
-                                attributes {
-                                    label
-                                    folder
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
     const articleRef = useRef<HTMLDivElement>(null)
     const initialFilters = useMemo(() => {
         const searchParams = new URLSearchParams(location?.search)
         const category = searchParams.get('category')
         const tag = searchParams.get('tag')
         return {
-            root: category ? (category === 'all' ? null : category) : pageContext.root || null,
-            tag: tag ? (tag === 'all' ? null : tag) : pageContext.selectedTag,
+            root: category ? (category === 'all' ? null : category) : rootFolder || null,
+            tag: tag ? (tag === 'all' ? null : tag) : rootTag,
             author: searchParams.get('author') ? Number(searchParams.get('author')) : undefined,
         }
     }, [])
@@ -125,29 +112,7 @@ export default function Posts({ pageContext, location }) {
             initialFilters.author
         )
     )
-    const allTags = useMemo(
-        () =>
-            allPostCategory.nodes
-                .flatMap((category) => category.attributes.post_tags.data)
-                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
-                .filter(
-                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
-                ),
-        []
-    )
-    const selectedCategory = useMemo(
-        () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
-        [root]
-    )
-    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
-    const allCategories = useMemo(
-        () =>
-            allPostCategory.nodes.filter(
-                (category, index, self) =>
-                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
-            ),
-        []
-    )
+    const tags = root === null ? allTags : categories.find((category) => category.folder === root)?.tags
 
     const scrollToTop = () => {
         const viewport = articleRef.current?.closest('[data-radix-scroll-area-viewport]')
@@ -167,9 +132,9 @@ export default function Posts({ pageContext, location }) {
     const handleFilterChange = (filters) => {
         if (filters.post_tags) {
             const currentRoot = filters.root?.value || root
-            const exists = allCategories
-                .find((category) => category.attributes.folder === currentRoot)
-                ?.attributes.post_tags.data.some((tag) => tag.attributes.label === filters.post_tags.value)
+            const exists = categories
+                .find((category) => category.folder === currentRoot)
+                ?.tags.includes(filters.post_tags.value)
             const selectedTag = currentRoot === null || exists ? filters.post_tags.value : null
             setSelectedTag(selectedTag)
         }
@@ -201,7 +166,7 @@ export default function Posts({ pageContext, location }) {
                 encodeValuesOnly: true,
             }
         )
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+        fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles?${query}`)
             .then((res) => res.json())
             .then((data) => {
                 setAuthors(data?.data)
@@ -217,10 +182,10 @@ export default function Posts({ pageContext, location }) {
     useEffect(() => {
         if (typeof window === 'undefined') return
         const searchParams = new URLSearchParams()
-        if (root !== (pageContext.root || null)) {
+        if (root !== (rootFolder || null)) {
             searchParams.set('category', root ?? 'all')
         }
-        if ((selectedTag || null) !== (pageContext.selectedTag || null)) {
+        if ((selectedTag || null) !== (rootTag || null)) {
             searchParams.set('tag', selectedTag ?? 'all')
         }
         if (selectedAuthor) {
@@ -278,14 +243,14 @@ export default function Posts({ pageContext, location }) {
                                 label: 'All',
                                 value: null,
                             },
-                            ...allCategories.map((category) => ({
-                                label: category.attributes.label,
-                                value: category.attributes.folder,
+                            ...categories.map((category) => ({
+                                label: category.label,
+                                value: category.folder,
                             })),
                         ],
                         operator: 'eq',
                     },
-                    ...(tags?.length > 0
+                    ...(tags && tags.length > 0
                         ? [
                               {
                                   label: 'tags',
@@ -297,8 +262,8 @@ export default function Posts({ pageContext, location }) {
                                           value: null,
                                       },
                                       ...tags.map((tag) => ({
-                                          label: tag.attributes.label,
-                                          value: tag.attributes.label,
+                                          label: tag,
+                                          value: tag,
                                       })),
                                   ],
                                   operator: 'includes',

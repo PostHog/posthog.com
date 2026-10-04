@@ -104,7 +104,7 @@ This guide walks you through setting up PostHog for React Router V7 in data mode
 
 In data mode, you'll need to wrap your `RouterProvider` with the `PostHogProvider` context. This passes an initialized PostHog client to your app.
 
-```tsx file=app/index.tsx
+```tsx file="app/index.tsx"
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -163,7 +163,7 @@ This initializes PostHog and passes it to your app through the `PostHogProvider`
 
 PostHog can capture exceptions thrown in your app through an error boundary. React Router in data mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `RootErrorBoundary` from your `app/root.tsx` file.
 
-```tsx file=app/root.tsx
+```tsx file="app/root.tsx"
 import { usePostHog } from '@posthog/react'
 
 export function RootErrorBoundary() {

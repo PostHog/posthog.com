@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const md5 = require('md5')
+import md5 from 'md5'
 
 const handler = async (req, res) => {
     let { body } = req

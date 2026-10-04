@@ -74,13 +74,13 @@ No changes needed - cost tracking is automatic:
 
 ```bash
 # Single file (outputs .mp3, .txt, and .cost.json)
-python scripts/hogfm/handbook/generate.py contents/handbook/values.md
+python scripts/hogfm/handbook/generate.py contents/handbook/values.mdx
 
 # All files with cost tracking
 python scripts/hogfm/handbook/generate.py --all
 
 # Dry run (shows estimated characters/cost)
-python scripts/hogfm/handbook/generate.py --dry-run contents/handbook/values.md
+python scripts/hogfm/handbook/generate.py --dry-run contents/handbook/values.mdx
 ```
 
 ## Analyzing costs

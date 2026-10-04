@@ -1,9 +1,9 @@
 // Host for client-side Squeak/Strapi calls (auth + the authenticated session).
-// Override via GATSBY_SQUEAK_AUTH_HOST — e.g. a local Strapi instance — for testing;
+// Override via PUBLIC_SQUEAK_AUTH_HOST — e.g. a local Strapi instance — for testing;
 // defaults to the normal API host so prod and other devs are unaffected. Note:
-// build-time sourcing (gatsby-source-squeak) uses GATSBY_SQUEAK_API_HOST directly and
+// build-time sourcing (src/data-layer) uses PUBLIC_SQUEAK_API_HOST directly and
 // is intentionally NOT affected by this, so it stays on the full-data cloud backend.
-export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
+export const SQUEAK_HOST = import.meta.env.PUBLIC_SQUEAK_AUTH_HOST || import.meta.env.PUBLIC_SQUEAK_API_HOST
 
 // Strapi helper types
 export type StrapiResult<T> = StrapiData<T> &

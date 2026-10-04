@@ -3,7 +3,6 @@ import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState 
 import { useFormik } from 'formik'
 import { button } from 'components/CallToAction'
 import * as Yup from 'yup'
-import { useLocation } from '@reach/router'
 import Link from 'components/Link'
 import { animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
@@ -11,6 +10,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import usePostHog from 'hooks/usePostHog'
+import { useLocation } from 'lib/navigation'
 
 const inputContainerClasses = `p-1 bg-primary border-b border-primary group active:bg-white dark:active:bg-border-dark/50 hover:bg-white/25 dark:hover:bg-border-dark/25 focus-within:bg-white dark:focus-within:bg-border-dark/50 relative text-left`
 

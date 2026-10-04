@@ -1,4 +1,5 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import questionPagesJson from '@data/content-question-pages.json'
+import type { QuestionPages } from '~/data-layer/queries/content'
 
 export interface ContentNode {
     fields: {
@@ -18,26 +19,9 @@ export interface ContentData {
 }
 
 /**
- * Hook to fetch content from multiple directories (tutorials, product-engineers, founders)
- * for use in product pages' QuestionsSlide component
+ * Content for product pages' QuestionsSlide component: the tutorials, product engineer and founder
+ * posts, and docs pages that product questions link to.
  */
 export function useContentData(): ContentData {
-    const data = useStaticQuery(graphql`
-        query ContentDataQuery {
-            allMdx(filter: { fields: { slug: { regex: "/^/(tutorials|product-engineers|founders|docs)/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-        }
-    `)
-
-    return data
+    return { allMdx: { nodes: questionPagesJson as QuestionPages } }
 }

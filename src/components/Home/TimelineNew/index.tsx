@@ -1,6 +1,7 @@
-import { graphql, useStaticQuery } from 'gatsby'
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
-import moment from 'moment'
+import milestonesJson from '@data/roadmap-milestones.json'
+import type { RoadmapMilestones } from '~/data-layer/queries/roadmap'
+import dayjs from 'dayjs'
 import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
@@ -12,7 +13,7 @@ const getFirstRoadmap = (roadmaps: any, year: string, month: string) => roadmaps
 const groupRoadmaps = (roadmaps: any) =>
     roadmaps.reduce((acc, node) => {
         const [year, month] = node.dateCompleted.split('-')
-        const monthName = moment(month, 'MM').format('MMMM')
+        const monthName = dayjs(`2000-${String(month).padStart(2, '0')}-01`).format('MMMM')
         if (!acc[year]) {
             acc[year] = {}
         }
@@ -89,26 +90,7 @@ function RoadmapDetail({
 }
 
 export default function TimelineNew() {
-    const {
-        allSqueakRoadmap: { nodes },
-    } = useStaticQuery(graphql`
-        query {
-            allSqueakRoadmap(filter: { milestone: { eq: true } }, sort: { fields: dateCompleted }) {
-                nodes {
-                    squeakId
-                    dateCompleted(formatString: "YYYY-MM-DD")
-                    title
-                    projectedCompletion(formatString: "YYYY-MM-DD")
-                    category
-                    cta {
-                        url
-                    }
-                    description
-                }
-            }
-        }
-    `)
-
+    const nodes = milestonesJson as RoadmapMilestones
     const [allRoadmaps, setAllRoadmaps] = useState(nodes)
     const [roadmapsGrouped, setRoadmapsGrouped] = useState(groupRoadmaps(nodes))
     const firstYear = useMemo(() => getFirstYear(roadmapsGrouped), [])
@@ -128,7 +110,7 @@ export default function TimelineNew() {
 
     useEffect(() => {
         const [year, month] = activeRoadmap.dateCompleted.split('-')
-        const monthName = moment(month, 'MM').format('MMMM')
+        const monthName = dayjs(`2000-${String(month).padStart(2, '0')}-01`).format('MMMM')
         setActiveYear(year)
         setActiveMonth(monthName)
     }, [activeRoadmap])

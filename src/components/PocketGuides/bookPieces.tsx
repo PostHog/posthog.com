@@ -117,19 +117,21 @@ function BookLink({ href, ...props }: any): JSX.Element {
 
 /** The parent reader supplies docs prose styles; only book-specific behavior is mapped here. */
 export const proseComponents = {
-    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`.
-    pre: ({ children }: any) => <>{children}</>,
-    code: ({ className, children }: any) => (
-        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-            <SingleCodeBlock
-                language={String(className ?? '').replace('language-', '') || 'text'}
-                showCopy
-                showAskAI={false}
-            >
-                {String(children).replace(/\n$/, '')}
-            </SingleCodeBlock>
-        </div>
-    ),
-    inlineCode: InlineCode,
+    // A fenced block is <pre><code className="language-x">; inline code is a bare <code>.
+    pre: ({ children }: any) => {
+        const { className, children: code } = children?.props ?? {}
+        return (
+            <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+                <SingleCodeBlock
+                    language={String(className ?? '').replace('language-', '') || 'text'}
+                    showCopy
+                    showAskAI={false}
+                >
+                    {String(code ?? '').replace(/\n$/, '')}
+                </SingleCodeBlock>
+            </div>
+        )
+    },
+    code: InlineCode,
     a: (props: any) => <BookLink {...props} />,
 }

@@ -21,7 +21,7 @@ Create one PostHog client for your app. Register the hooks and error handler in 
 
 Process-level `enableExceptionAutocapture` does not capture errors that Fastify handles. Use `setErrorHandler` to capture these errors.
 
-```js file=server.mjs
+```js file="server.mjs"
 import Fastify from "fastify"
 import { PostHog } from "posthog-node"
 

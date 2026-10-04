@@ -10,14 +10,21 @@ The easiest way to create a new product page is using the `SlidesTemplate` compo
 
 ```tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'your_product_handle'
 
 export default function YourProductPage(): JSX.Element {
-    const data = useStaticQuery(/* your GraphQL query */)
+    const contentData = useContentData()
+
+    // SlidesTemplate reads the billing products as `allProductData.nodes[0].products`.
+    const data = {
+        allProductData: { nodes: [{ products: billingProductsJson }] },
+        ...contentData,
+    }
 
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }
@@ -226,77 +233,28 @@ interface ProductData {
 
 ### Method 1: Using SlidesTemplate (Recommended)
 
-1. Create a new file in `src/pages/[product-name]/index.tsx`
+1. Create a new file in `src/views/[product-name]/index.tsx`
 2. Set up the basic structure:
 
 ```tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'your_product_handle'
 
 export default function YourProductPage(): JSX.Element {
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-            allProductData {
-                nodes {
-                    products {
-                        name
-                        type
-                        unit
-                        addons {
-                            name
-                            type
-                            unit
-                            plans {
-                                name
-                                plan_key
-                                included_if
-                                features {
-                                    key
-                                    name
-                                    description
-                                    limit
-                                    note
-                                }
-                            }
-                        }
-                        plans {
-                            name
-                            plan_key
-                            free_allocation
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                limit
-                                note
-                            }
-                            tiers {
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    // Pages that product questions link to (from the `content-question-pages` query)
+    const contentData = useContentData()
+
+    // Billing products (from the `products-billing` query). SlidesTemplate reads them as
+    // `allProductData.nodes[0].products`.
+    const data = {
+        allProductData: { nodes: [{ products: billingProductsJson }] },
+        ...contentData,
+    }
 
     // Optional: Customize slides
     const slides = createSlideConfig({
@@ -337,7 +295,7 @@ Each slide component accepts specific props and can be customized:
 
 ## Notes
 
--   The GraphQL query fetches tutorial data and product data that's shared across all products
+-   `data` combines the billing products (`@data/products-billing.json`) with the pages that product questions link to (`useContentData()`). Both are shared across all products. The queries are in `src/data-layer/queries/products.ts` and `src/data-layer/queries/content.ts`
 -   Each slide component is designed to handle missing data gracefully
 -   TypeScript interfaces ensure type safety when passing props
 -   Components use PostHog's design system colors and spacing

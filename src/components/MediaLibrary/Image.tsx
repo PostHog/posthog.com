@@ -20,7 +20,7 @@ const formatDuration = (ms: number): string => {
     return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
 }
 
-const CLOUDINARY_BASE = `https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}`
+const CLOUDINARY_BASE = `https://res.cloudinary.com/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}`
 
 interface ImageProps {
     name?: string
@@ -125,7 +125,7 @@ export default function Image({
     }
 
     const addTagToMedia = async (tagId: string, jwt: string) => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/add-media`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-tags/add-media`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
             body: JSON.stringify({ mediaId: id, tagId }),
@@ -134,7 +134,7 @@ export default function Image({
     }
 
     const removeTagFromMedia = async (tagId: string, jwt: string) => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags/remove-media`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-tags/remove-media`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
             body: JSON.stringify({ mediaId: id, tagId }),
@@ -181,7 +181,7 @@ export default function Image({
             const jwt = await getJwt()
             if (!jwt) return
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-tags`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
                 body: JSON.stringify({ data: { label } }),
@@ -214,14 +214,14 @@ export default function Image({
             if (!jwt) return
 
             if (currentFolderId) {
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
+                await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
                     body: JSON.stringify({ mediaId: id, folderId: currentFolderId }),
                 })
             }
 
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/add-media`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-folders/add-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
                 body: JSON.stringify({ mediaId: id, folderId: Number(targetFolderId) }),
@@ -250,7 +250,7 @@ export default function Image({
             const jwt = await getJwt()
             if (!jwt) return
 
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-folders/remove-media`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
                 body: JSON.stringify({ mediaId: id, folderId: currentFolderId }),
@@ -279,7 +279,7 @@ export default function Image({
             const jwt = await getJwt()
             if (!jwt) return
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload/files/${id}`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/upload/files/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${jwt}`,

@@ -63,13 +63,11 @@ This is the repository for the PostHog website. We treat it like a product. It c
     pnpm start
     ```
 
-    > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
+    > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `pnpm build && pnpm serve`
 
 3.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8001`!
-    
-    > **Note:** You'll also see a second link: `http://localhost:8001/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).
 
 See full instructions on [developing PostHog.com locally in our manual](https://posthog.com/handbook/engineering/posthog-com/developing-the-website).
 
@@ -77,7 +75,7 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`
-2. Run `pnpm clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`
+2. Run `pnpm clean && pnpm start` or delete `node_modules` and `.cache`
 3. Make sure you're not in an activated flox environment for a different project
 4. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
@@ -99,13 +97,13 @@ To see your local version of the posts section, `/posts` needs to be visited dir
 
 ### Cloudflare PR previews
 
-[PR previews](https://github.com/PostHog/posthog.com/blob/master/.github/workflows/deploy-preview.yml) build with **`GATSBY_MINIMAL=true`** (same idea as `pnpm build:minimal`). **Post listing pages** such as `/tutorials`, `/blog`, and `/posts` are **not** generated, so those URLs may break in the preview. **Open the direct URL** to your doc or post (e.g. `/tutorials/your-slug`) to review changes. Listings and search stay aligned with production after merge to `master`. More detail: [Developing the website → PR preview deployments](https://posthog.com/handbook/engineering/posthog-com/developing-the-website#pr-preview-deployments-cloudflare-pages).
+[PR previews](https://github.com/PostHog/posthog.com/blob/master/.github/workflows/deploy-preview.yml) build with **`MINIMAL_BUILD=true`** (same idea as `pnpm build:minimal`). **Post listing pages** such as `/tutorials`, `/blog`, and `/posts` are **not** generated, so those URLs may break in the preview. **Open the direct URL** to your doc or post (e.g. `/tutorials/your-slug`) to review changes. Listings and search stay aligned with production after merge to `master`. More detail: [Developing the website → PR preview deployments](https://posthog.com/handbook/engineering/posthog-com/developing-the-website#pr-preview-deployments-cloudflare-pages).
 
 ### Developing the merch store
 Additional environment variables are needed to develop the merch store:
 - `SHOPIFY_APP_PASSWORD`
-- `GATSBY_MYSHOPIFY_URL`
-- `GATSBY_SHOPIFY_STOREFRONT_TOKEN`
+- `PUBLIC_MYSHOPIFY_URL`
+- `PUBLIC_SHOPIFY_STOREFRONT_TOKEN`
 
 Currently, these environment variables are excluded from Vercel preview builds to disable merch store node creation and speed up build times on non-merch related PRs.
 
@@ -114,11 +112,8 @@ Currently, these environment variables are excluded from Vercel preview builds t
 To develop a dynamic open graph image:
 
 1. Run `pnpm build` with both the `ASHBY_API_KEY` and `GITHUB_API_KEY` set.
-1. In `gatsby/onPostBuild.ts`, temporarily comment out the following:
-    ```
-    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
-    ```
-1. Find the generated open graph image in `public/og-images/`
+1. Run `pnpm og-images`.
+1. Find the generated open graph image in `dist/og-images/`
 
 ## Contributing
 

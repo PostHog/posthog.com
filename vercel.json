@@ -1,4 +1,8 @@
 {
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "framework": "astro",
+    "buildCommand": "pnpm build",
+    "outputDirectory": "dist",
     "git": {
         "deploymentEnabled": {
             "master": true,
@@ -97,6 +101,10 @@
         }
     ],
     "rewrites": [
+        {
+            "source": "/events/:id((?!\\[).+)",
+            "destination": "/events/[strapiID]/index.html"
+        },
         {
             "source": "/docs/references/:slug(.*-\\d.*).md",
             "destination": "/docs/references/version-unavailable.md"

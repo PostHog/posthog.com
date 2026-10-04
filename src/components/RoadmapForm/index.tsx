@@ -18,7 +18,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import menu from '../../navs'
 import * as Icons from '@posthog/icons'
 import { toJpeg } from 'html-to-image'
-import { graphql, useStaticQuery } from 'gatsby'
+import hogImagesJson from '@data/products-hog-images.json'
+import type { HogImages } from '~/data-layer/queries/products'
 import { capitalizeFirstLetter } from '../../utils'
 import { topicIcons } from 'components/Questions/TopicsTable'
 import { OSInput, OSSelect } from 'components/OSForm'
@@ -108,7 +109,7 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
     useEffect(() => {
         const fetchPage = (page: number) =>
             fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${qs.stringify({
+                `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles?${qs.stringify({
                     populate: ['avatar', 'teams'],
                     pagination: {
                         page,
@@ -204,19 +205,10 @@ const RangeSlider = ({
     )
 }
 
-const HogSelector = ({ value, onChange }) => {
-    const {
-        allCloudinaryImage: { nodes: allHogs },
-    } = useStaticQuery(graphql`
-        {
-            allCloudinaryImage(filter: { folder: { eq: "hogs" } }) {
-                nodes {
-                    secure_url
-                    public_id
-                }
-            }
-        }
-    `)
+// Hedgehog images from the Cloudinary "hogs" folder.
+const allHogs = hogImagesJson as HogImages
+
+const HogSelector = ({ value, onChange }: { value: string; onChange: (url: string) => void }) => {
     const [hogs, setHogs] = useState(allHogs)
     const [searchValue, setSearchValue] = useState('')
 
@@ -602,15 +594,15 @@ export default function RoadmapForm({
                                   dateCompleted,
                               }
                             : status === 'in-progress'
-                            ? {
-                                  complete: false,
-                                  projectedCompletion: dayjs().add(1, 'year'),
-                              }
-                            : {
-                                  complete: false,
-                                  dateCompleted: null,
-                                  projectedCompletion: null,
-                              }),
+                              ? {
+                                    complete: false,
+                                    projectedCompletion: dayjs().add(1, 'year'),
+                                }
+                              : {
+                                    complete: false,
+                                    dateCompleted: null,
+                                    projectedCompletion: null,
+                                }),
                         ...(uploadedFeaturedImage
                             ? {
                                   image: uploadedFeaturedImage?.id,
@@ -626,7 +618,7 @@ export default function RoadmapForm({
                     },
                 })
                 const { data: roadmap } = await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id ?? ''}`,
+                    `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps/${id ?? ''}`,
                     {
                         body: data,
                         method: id ? 'PUT' : 'POST',

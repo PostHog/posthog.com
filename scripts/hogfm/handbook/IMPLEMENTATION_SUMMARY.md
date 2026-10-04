@@ -97,10 +97,10 @@ No changes needed to existing commands - cost tracking is automatic:
 
 ```bash
 # Dry run (shows cost estimation)
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 
 # Generate with cost tracking
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 
 # Process all files with cost tracking
 uv run handbook-audio --all
@@ -174,11 +174,11 @@ See [COST_TRACKING.md](./COST_TRACKING.md) for detailed analysis commands, inclu
 Tested with dry-run mode:
 
 ```bash
-$ uv run handbook-audio --dry-run ../../contents/handbook/values.md
+$ uv run handbook-audio --dry-run ../../contents/handbook/values.mdx
 
 🎙️  Handbook Audio Generator [DRY RUN MODE]
 
-Processing: /Users/jonmccallum/Development/posthog.com/contents/handbook/values.md
+Processing: /Users/jonmccallum/Development/posthog.com/contents/handbook/values.mdx
   ✓ Processed 5742 characters
   📝 [DRY RUN] Would save text to: public/handbook-audio/values.txt
   🎙️  [DRY RUN] Would generate audio for: Values

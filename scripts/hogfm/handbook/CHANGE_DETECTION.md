@@ -42,7 +42,7 @@ uv run handbook-audio --allowed-only
 $ uv run handbook-audio --allowed-only --upload-s3
 
 [1/10] values.md
-Processing: contents/handbook/values.md
+Processing: contents/handbook/values.mdx
   ✓ Processed 5742 characters
   🆕 First generation (no existing file in S3)
   📝 Saved parsed text to: public/handbook-audio/values.elevenlabs-input.txt
@@ -62,7 +62,7 @@ Processing: contents/handbook/values.md
 $ uv run handbook-audio --allowed-only --upload-s3
 
 [1/10] values.md
-Processing: contents/handbook/values.md
+Processing: contents/handbook/values.mdx
   ✓ Processed 5742 characters
   ⏭️  Content unchanged, skipping generation
 ```
@@ -75,7 +75,7 @@ Processing: contents/handbook/values.md
 $ uv run handbook-audio --allowed-only --upload-s3
 
 [1/10] values.md
-Processing: contents/handbook/values.md
+Processing: contents/handbook/values.mdx
   ✓ Processed 5742 characters
   🔄 Content changed, regenerating audio
   📝 Saved parsed text to: public/handbook-audio/values.elevenlabs-input.txt
@@ -343,7 +343,7 @@ The first run will always generate all files (no existing S3 files to compare).
 aws s3 cp s3://bucket/handbook/values.elevenlabs-input.txt local-old.txt
 
 # Generate new text locally (dry-run)
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 
 # Compare
 diff local-old.txt public/handbook-audio/values.elevenlabs-input.txt

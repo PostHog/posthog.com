@@ -1,7 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconAsterisk,
     IconBolt,
@@ -24,7 +23,6 @@ import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
-import { graphql, useStaticQuery } from 'gatsby'
 import ContentViewer from 'components/ContentViewer'
 import SessionReplay from 'components/Home/CodeBlocks/SessionReplay'
 import { docsMenu } from '../../../navs'

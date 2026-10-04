@@ -1,4 +1,4 @@
-/** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
+/** The volumes on the shelf. Data only, so the build (`src/lib/content/`) can import it in Node. */
 
 /** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
 export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'

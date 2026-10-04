@@ -1,0 +1,61 @@
+---
+// The desktop shell around every page: taskbar and desktop (persisted across page changes, so they
+// never blink) and the page window.
+//
+// The page island renders first, so the <SEO> component inside it can record the page's head tags
+// (src/lib/head.ts). Then the layout writes <head> with them.
+import { ClientRouter } from 'astro:transitions'
+import '@fontsource-variable/ibm-plex-sans'
+import '@fontsource-variable/ibm-plex-sans/wght-italic.css'
+import '../styles/global.css'
+import Head from '../components/Head.astro'
+import Chrome from '../islands/Chrome'
+import Desktop from '../islands/Desktop'
+import { defaultHead, takeContent, takeHead } from '../lib/head'
+
+const { pathname } = Astro.url
+const url = Astro.url.href
+const page = await Astro.slots.render('default')
+const head = takeHead(pathname) ?? defaultHead(pathname)
+const contentKeys = takeContent(pathname)
+---
+
+<html lang={head.lang ?? 'en'} data-window="windowed">
+    <head>
+        <Head head={head} pathname={pathname} />
+        <!-- Content modules the page renders; the client:page directive loads them before hydrating. -->
+        <script is:inline type="application/json" id="page-content" set:html={JSON.stringify(contentKeys)} />
+        <ClientRouter fallback="none" />
+        <script is:inline>
+            // Astro's router replaces <html> attributes and <body> on navigation. Keep the visitor's
+            // theme, display settings, window mode, and dismissed hints on the incoming page, so
+            // nothing flashes back to defaults.
+            document.addEventListener('astro:before-swap', (event) => {
+                const next = event.newDocument
+                next.body.className = document.body.className
+                for (const name of ['data-skin', 'data-wallpaper', 'data-reduce-transparency']) {
+                    const value = document.body.getAttribute(name)
+                    if (value !== null) next.body.setAttribute(name, value)
+                }
+                const mode = document.documentElement.dataset.window
+                next.documentElement.dataset.window = mode === 'closed' ? 'windowed' : mode || 'windowed'
+                for (const name of document.documentElement.classList) next.documentElement.classList.add(name)
+            })
+        </script>
+    </head>
+    <body class="light" data-wallpaper="keyboard-garden" data-reduce-transparency="false">
+        <script is:inline src="/scripts/theme-init.js"></script>
+        <div data-scheme="primary" id="app-container" class="h-dvh flex flex-col p-2">
+            <Chrome client:load transition:persist="chrome" url={url} />
+            <div data-app="DesktopViewport" class="flex-grow relative min-h-0 overflow-clip">
+                <Desktop client:load transition:persist="desktop" url={url} />
+                <div
+                    data-app="WindowList"
+                    class="absolute inset-0 flex justify-center items-center pointer-events-none"
+                >
+                    <Fragment set:html={page} />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

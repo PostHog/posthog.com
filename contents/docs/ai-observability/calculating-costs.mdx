@@ -66,7 +66,7 @@ If you know your pricing per token, you can set the following [custom properties
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
@@ -93,7 +93,7 @@ const response = await openai.responses.create({
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.ai.openai import OpenAI
 from posthog import Posthog
 
@@ -135,7 +135,7 @@ If you're [manually capturing](/docs/ai-observability/installation/manual-captur
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 // After making your LLM call and calculating costs
 posthog.capture('$ai_generation', {
   $ai_trace_id: traceId,
@@ -149,7 +149,7 @@ posthog.capture('$ai_generation', {
 })
 ```
 
-```python file=Python
+```python file="Python"
 # After making your LLM call and calculating costs
 posthog.capture(
     event='$ai_generation',

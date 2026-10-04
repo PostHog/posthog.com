@@ -14,7 +14,7 @@
  *
  * This is the curated marketing layer. The canonical agent skills live in the
  * monorepo (`products/<product>/skills/<name>/SKILL.md`) and are ingested at build time as
- * `AgentSkill` nodes — see gatsby/onCreateNode.ts and hooks/skills.tsx.
+ * `AgentSkill` nodes — see src/data-layer/sources/local.ts and hooks/skills.tsx.
  */
 
 export type IncomingSkill = {

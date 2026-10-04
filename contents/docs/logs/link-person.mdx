@@ -34,7 +34,7 @@ When you emit logs directly via OpenTelemetry from a backend — Python, Go, Nod
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 import { logs } from "@opentelemetry/api-logs";
 
 const logger = logs.getLogger("my-app");
@@ -55,7 +55,7 @@ app.post("/api/checkout", async (req, res) => {
 });
 ```
 
-```python file=Python
+```python file="Python"
 import logging
 
 logger = logging.getLogger(__name__)
@@ -75,7 +75,7 @@ def checkout():
     return jsonify({"success": True})
 ```
 
-```go file=Go
+```go file="Go"
 import (
     "go.opentelemetry.io/otel/attribute"
     "go.opentelemetry.io/otel/log"

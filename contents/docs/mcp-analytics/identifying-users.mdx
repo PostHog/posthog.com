@@ -30,7 +30,7 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 import { instrument, getRequestHeaders } from "@posthog/mcp"
 
 instrument(server, posthog, {
@@ -48,7 +48,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp import instrument, get_request_headers
 from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
 
@@ -66,7 +66,7 @@ async def identify(request, extra):
 instrument(server, posthog, MCPAnalyticsOptions(identify=identify))
 ```
 
-```go file=Go
+```go file="Go"
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 	posthogmcpsdk.WithIdentity(func(ctx context.Context, req *mcp.CallToolRequest) (posthogmcpsdk.Identity, error) {
 		if req.Extra == nil || req.Extra.TokenInfo == nil {
@@ -85,7 +85,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 )
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(
   server, posthog,
   identify: lambda do |_request, extra|

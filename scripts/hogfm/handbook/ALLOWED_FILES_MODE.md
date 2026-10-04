@@ -292,7 +292,7 @@ For **manual/ad-hoc usage**, use `--dir` or `--search` instead.
 | `--all` | Regenerate everything | `uv run handbook-audio --all` |
 | `--dir` | Regenerate a section | `uv run handbook-audio --dir engineering` |
 | `--search` | Find files by text | `uv run handbook-audio --search "support"` |
-| `<file>` | Single file | `uv run handbook-audio contents/handbook/values.md` |
+| `<file>` | Single file | `uv run handbook-audio contents/handbook/values.mdx` |
 
 ## Monitoring
 

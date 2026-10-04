@@ -1,7 +1,7 @@
 import cntl from 'cntl'
 import { Logo } from '@posthog/brand/logo'
-import { Link } from 'gatsby'
 import React from 'react'
+import { Link } from 'lib/navigation'
 
 export interface CrumbProps {
     url?: string

@@ -29,7 +29,7 @@ You can add custom properties to any LLM generation using the `posthogProperties
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
@@ -55,7 +55,7 @@ const response = await openai.responses.create({
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.ai.openai import OpenAI
 from posthog import Posthog
 
@@ -91,7 +91,7 @@ Track LLM usage by subscription tier or payment plan to monitor costs and usage 
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 const getSubscriptionTier = (userId) => {
   // Your logic to determine the user subscription tier
   return user.subscription?.tier || 'free'
@@ -109,7 +109,7 @@ const response = await openai.responses.create({
 })
 ```
 
-```python file=Python
+```python file="Python"
 def get_subscription_tier(user_id):
     # Your logic to determine the user's subscription tier
     return user.subscription.tier if user.subscription else 'free'
@@ -134,7 +134,7 @@ Track different versions of your prompts to measure improvements:
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 const PROMPT_VERSION = "v2.3.1"
 const PROMPT_ID = "customer_support_agent"
 
@@ -155,7 +155,7 @@ const response = await anthropic.messages.create({
 })
 ```
 
-```python file=Python
+```python file="Python"
 PROMPT_VERSION = "v2.3.1"
 PROMPT_ID = "customer_support_agent"
 
@@ -184,7 +184,7 @@ Set meaningful names for your LLM generations to improve trace readability:
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 // For Vercel AI SDK
 import { withTracing } from '@posthog/ai'
 import { generateText } from 'ai'
@@ -207,7 +207,7 @@ const { text } = await generateText({
 })
 ```
 
-```python file=Python
+```python file="Python"
 response = client.responses.create(
     model="gpt-5",
     messages=messages,

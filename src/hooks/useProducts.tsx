@@ -1,7 +1,7 @@
 import React from 'react'
-// import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { graphql, useStaticQuery } from 'gatsby'
+import billingProductsJson from '@data/products-billing.json'
+import type { BillingProducts } from '~/data-layer/queries/products'
 import { useMemo, useState } from 'react'
 
 // Import individual product data
@@ -48,11 +48,7 @@ const initialProducts = [
 ]
 
 export default function useProducts() {
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
+    const billingProducts = billingProductsJson as BillingProducts
 
     const baseProducts = useMemo(
         () =>
@@ -113,109 +109,3 @@ export default function useProducts() {
 
     return { products, setVolume, setProduct, monthlyTotal }
 }
-
-const allProductsData = graphql`
-    query {
-        allProductData {
-            nodes {
-                products {
-                    description
-                    docs_url
-                    image_url
-                    icon_key
-                    inclusion_only
-                    contact_support
-                    addons {
-                        contact_support
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        name
-                        type
-                        unit
-                        legacy_product
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        plans {
-                            description
-                            docs_url
-                            free_allocation
-                            image_url
-                            name
-                            plan_key
-                            product_key
-                            unit
-                            flat_rate
-                            unit_amount_usd
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                    name
-                    type
-                    unit
-                    usage_key
-                    legacy_product
-                    plans {
-                        description
-                        docs_url
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        free_allocation
-                        image_url
-                        included_if
-                        name
-                        plan_key
-                        product_key
-                        contact_support
-                        unit_amount_usd
-                        tiers {
-                            current_amount_usd
-                            current_usage
-                            flat_amount_usd
-                            unit_amount_usd
-                            up_to
-                        }
-                        unit
-                    }
-                }
-            }
-        }
-    }
-`

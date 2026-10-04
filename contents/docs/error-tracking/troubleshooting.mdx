@@ -62,7 +62,7 @@ This happens when you reject a promise with a string instead of an `Error` objec
 
 <MultiLanguage>
 
-```js file=Without stack trace
+```js file="Without stack trace"
 new Promise((resolve, reject) => {
   reject("Something went wrong"); // String has no stack trace
 });
@@ -70,7 +70,7 @@ new Promise((resolve, reject) => {
 Promise.reject("Something went wrong");
 ```
 
-```js file=With stack trace
+```js file="With stack trace"
 new Promise((resolve, reject) => {
   reject(new Error("Something went wrong")); // Error includes stack trace
 });

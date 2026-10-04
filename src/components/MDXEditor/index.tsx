@@ -31,10 +31,10 @@ import {
     CAN_UNDO_COMMAND,
 } from 'lexical'
 import { mergeRegister } from '@lexical/utils'
-import { navigate } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'components/Link'
+import { navigate } from 'lib/navigation'
+import { MDXRenderer } from 'components/MDXRenderer'
 
 export default function MDXEditor({
     body,
@@ -70,10 +70,13 @@ export default function MDXEditor({
     const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
 
     const mdxComponents = useMemo(() => {
-        return jsxComponentDescriptors.reduce((acc, descriptor) => {
-            acc[descriptor.name] = descriptor.Editor
-            return acc
-        }, {} as Record<string, React.ComponentType<any>>)
+        return jsxComponentDescriptors.reduce(
+            (acc, descriptor) => {
+                acc[descriptor.name] = descriptor.Editor
+                return acc
+            },
+            {} as Record<string, React.ComponentType<any>>
+        )
     }, [])
 
     useEffect(() => {
@@ -110,12 +113,12 @@ export default function MDXEditor({
                                 alignment === 1
                                     ? 'left'
                                     : alignment === 2
-                                    ? 'center'
-                                    : alignment === 3
-                                    ? 'right'
-                                    : alignment === 4
-                                    ? 'justify'
-                                    : 'left'
+                                      ? 'center'
+                                      : alignment === 3
+                                        ? 'right'
+                                        : alignment === 4
+                                          ? 'justify'
+                                          : 'left'
                             )
                         }
                     }

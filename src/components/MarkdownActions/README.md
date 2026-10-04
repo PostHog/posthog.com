@@ -24,15 +24,15 @@ The component owns its own visibility and its own wrapper element — callers ne
 
 ## Where the markdown comes from
 
-`.md` files are generated at build time in `onPostBuild`, from two separate code paths in
-`gatsby/rawMarkdownUtils.ts`:
+`.md` files are generated after `astro build` by `src/integrations/seoOutputs.ts`, from two separate code
+paths in `src/lib/seo/markdown.ts`:
 
 - `generateRawMarkdownPages` — every MDX page under `MARKDOWN_CONTENT_PATHS`
-  (`/docs`, `/handbook`, `/blog`, `/newsletter`), minus an `excludeTerms` list.
+  (`/docs`, `/handbook`, `/blog`, `/newsletter`), minus an `EXCLUDED_SLUG_TERMS` list.
 - `generateSdkReferencesMarkdown` — `/docs/references/<id>`, which are **not** MDX.
 
 Everything else under `/docs` (API endpoint pages, CDP destinations, warehouse sources, the hand-written
-`src/pages/docs/*.tsx` pages) has no `.md` at all.
+`src/views/docs/*.tsx` pages) has no `.md` at all.
 
 ## Visibility: reserve the slot, then reveal
 
@@ -52,7 +52,7 @@ a second later — and if the dropdown happened to be open, it was torn out of t
 read as the panel flashing and vanishing.
 
 The cost of this shape is a reserved empty slot (roughly one button's height, right-aligned above the title)
-on pages under a markdown path that have no generated `.md` — in production that is the `excludeTerms` set,
+on pages under a markdown path that have no generated `.md`. In production that is the `EXCLUDED_SLUG_TERMS` set,
 e.g. `/handbook/teams/*`. That is deliberate: dead space is a much cheaper failure than a control that
 disappears while you are clicking it.
 
@@ -61,15 +61,15 @@ tree while unresolved, so nothing is focusable before it is usable.
 
 ### In preview builds the control never appears
 
-`.md` generation runs in `onPostBuild`, which returns early on `GATSBY_MINIMAL === 'true'`
-(`gatsby/onPostBuild.ts`). Preview deploys are minimal builds, so **no `.md` files exist there at all** and
+`.md` generation runs in `src/integrations/seoOutputs.ts`, which skips everything when `MINIMAL_BUILD=true`.
+Preview deploys are minimal builds, so **no `.md` files exist there at all** and
 every `HEAD` 404s — the control stays invisible for every page. This is expected, not a bug: there is no
 markdown to copy in a preview. Verify this control in a full local build or in production.
 
 `HEAD` results are cached in module-level `Map`s, so each URL is checked once per session rather than once
-per mount. Under `gatsby develop` no `.md` files exist, so the check is skipped entirely and the optimistic
-gate stands — **the copy action will 404 in dev.** To exercise it for real without a full build, drop a file
-at `static/docs/<slug>.md`; Gatsby serves `static/` in develop.
+per mount. Under `pnpm start` (astro dev) no `.md` files exist, so the check is skipped entirely and the
+optimistic gate stands: **the copy action will 404 in dev.** To exercise it for real without a full build,
+drop a file at `static/docs/<slug>.md`; the dev server serves `static/` (the Astro `publicDir`).
 
 ## Where it's rendered
 

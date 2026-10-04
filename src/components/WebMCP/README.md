@@ -20,9 +20,9 @@ standard lists the tools and calls them. Gemini in Chrome is the first announced
 | --- | --- | --- |
 | `search_docs` | `query`, optional `type` | Searches the Algolia index that powers site search. Returns up to 8 hits as JSON. |
 | `read_page` | optional `path` | Fetches the `.md` twin of a page under `MARKDOWN_CONTENT_PATHS`. No path means the current page. |
-| `get_site_overview` | none | Returns `/platform.md`, the machine-readable platform overview built in `onPostBuild`. |
+| `get_site_overview` | none | Returns `/platform.md`, the machine-readable platform overview built by `src/integrations/seoOutputs.ts`. |
 | `read_skill` | optional `name` or `product` | Lists agent skills by product, or fetches one `SKILL.md` from the monorepo. Every listing and skill ends with the source URL and the two install paths from the docs. |
-| `navigate_page` | `path` | Calls Gatsby `navigate`. Refuses paths that are not on this origin. |
+| `navigate_page` | `path` | Calls `navigate` from `lib/navigation`. Refuses paths that are not on this origin. |
 | `ask_max` | `question` | Opens the PostHog AI chat overlay with the question. The answer stays in the chat panel. |
 | `get_mcp_connection_info` | none | Returns the PostHog MCP server URL, the auth method, and the wizard setup command. |
 | `get_install_instructions` | none | Returns the wizard command to run locally, and what the wizard does. |
@@ -39,10 +39,10 @@ call.
 The tools exist for a visitor as soon as the browser exposes `document.modelContext`. There is no feature flag.
 
 Chrome ships WebMCP as an origin trial in versions 149 to 156, and plans to enable it by default in 157. During
-the trial, the site must serve a per-origin token or the API is undefined and nothing registers. `src/html.tsx`
-renders `<meta http-equiv="origin-trial">` when `GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN` is set. Register the origin at
+the trial, the site must serve a per-origin token or the API is undefined and nothing registers. `src/components/Head.astro`
+renders `<meta http-equiv="origin-trial">` when `PUBLIC_WEBMCP_ORIGIN_TRIAL_TOKEN` is set. Register the origin at
 [developer.chrome.com/origintrials](https://developer.chrome.com/origintrials) and set the token in Vercel. The
-token is public by design, so the `GATSBY_` prefix is fine. Before Chrome 157, unsetting the token is the only
+token is public by design, so the `PUBLIC_` prefix is fine. Before Chrome 157, unsetting the token is the only
 switch. After Chrome 157, removing the tools means removing the component.
 
 ## Testing locally
@@ -54,8 +54,9 @@ switch. After Chrome 157, removing the tools means removing the component.
    to call one. Chrome 153 expects the arguments as a JSON string and returns the result as a string.
 
 `read_page` and `get_site_overview` return an error result in development, because the `.md` files and
-`/platform.md` are written in `onPostBuild` and do not exist under `gatsby develop`. Test those two against a
-preview deploy or production.
+`/platform.md` are written after `astro build` by `src/integrations/seoOutputs.ts` and do not exist under
+`pnpm start`. Preview deploys skip them too (`MINIMAL_BUILD=true`). Test those two against a full local build
+(`pnpm build`) or production.
 
 ## Telemetry
 

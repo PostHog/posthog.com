@@ -382,7 +382,7 @@ Every method except `traceparent()`, `tracestate()`, and `end()` returns the spa
 
 Spans use [W3C Trace Context](https://www.w3.org/TR/trace-context/), so a trace can span several services. Pass an inbound `traceparent` header as `parent` to continue a trace another service started, and send `span.traceparent()` onward when you call out.
 
-```python file=app.py
+```python file="app.py"
 import requests
 from flask import request
 

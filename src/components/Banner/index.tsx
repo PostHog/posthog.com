@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'gatsby'
 import { useLayoutData } from '../Layout/hooks'
 import { IconWarning, IconX } from '@posthog/icons'
+import { Link } from 'lib/navigation'
 
 function setCookie(name, value, days) {
     let expires = ''

@@ -1,7 +1,7 @@
 import { IconArrowLeft, IconArrowRight, IconSpinner } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { groupBy as _groupBy } from 'lodash'
+import _groupBy from 'lodash/groupBy'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { CallToAction } from 'components/CallToAction'
 import OSButton from 'components/OSButton'
@@ -188,8 +188,8 @@ const Row = ({
                 columns?.[cellIndex]?.align === 'right'
                     ? 'text-right'
                     : columns?.[cellIndex]?.align === 'center'
-                    ? 'text-center'
-                    : ''
+                      ? 'text-center'
+                      : ''
             } ${cell.className || ''}`}
                             style={cell.style}
                         >

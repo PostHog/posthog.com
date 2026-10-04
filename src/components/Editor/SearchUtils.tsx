@@ -249,7 +249,7 @@ export interface FuseResult<T> {
 }
 
 // Create a configured Fuse.js instance
-export const createFuseInstance = <T extends unknown>(
+export const createFuseInstance = <T,>(
     items: T[],
     searchKeys: string[] | { name: string; weight: number }[]
 ): Fuse<T> => {

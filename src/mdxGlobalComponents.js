@@ -1,4 +1,4 @@
-// AUTO GENERATED FILE
+// Components every MDX page can use without importing them. Templates pass these to MDXProvider.
 
 import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
@@ -11,18 +11,15 @@ import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
-import { Images } from './components/Careers/Images'
 import CloudinaryImage from './components/CloudinaryImage'
 import { ComparisonTable } from './components/ComparisonTable'
 import ProductComparisonTable from './components/ProductComparisonTable'
 import ProductList from './components/ProductList'
 import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
-import { ContentViewer } from './components/ContentViewer'
 import { Step, Steps } from './components/Docs/Steps'
 import EmbeddedSurvey from './components/Docs/EmbeddedSurvey'
 import { Drawer } from './components/Drawer'
-import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
 import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
@@ -30,13 +27,10 @@ import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { AdvisoryAnchor } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
-import { HubSpotForm } from './components/HubSpotForm'
 import ImageSlider from './components/ImageSlider'
-import { KeyboardShortcut } from './components/KeyboardShortcut'
-import { Label } from './components/Label'
 import Link from './components/Link'
 import LoopGame from './components/LoopGame'
-import { List } from './components/List'
+import List from './components/List'
 import { LPCTA } from './components/LPCTA'
 import { MaxCTA } from './components/MaxCTA'
 import OSButton from './components/OSButton'
@@ -46,12 +40,9 @@ import { Quote } from './components/Pricing/Quote'
 import PricingCalculator from './components/Pricing/PricingCalculator/Embedded'
 import { PrivateLink } from './components/PrivateLink'
 import { ProductOS } from './components/Product/ProductOS'
-import { Competitor } from './components/Products/Competitor'
-import { DocsLinks } from './components/Products/DocsLinks'
 import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
 import { Marquee } from './components/Products/Marquee'
-import { MobileSlides } from './components/Products/MobileSlides'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
 import { SmoothScroll } from './components/Products/SmoothScroll'
@@ -60,11 +51,8 @@ import { TextCard } from './components/Products/TextCard'
 import { TutorialCard } from './components/Products/TutorialCard'
 import { ProductScreenshot } from './components/ProductScreenshot'
 import { ProductVideo } from './components/ProductVideo'
-import { QuickLinks } from './components/QuickLinks'
 import { Quote2 } from './components/Quote2'
 import { RainbowText } from './components/RainbowText'
-import { Signatures } from './components/Signatures'
-import { SlackPage } from './components/SlackPage'
 import SmallTeam from './components/SmallTeam'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -89,26 +77,20 @@ export const shortcodes = {
     Caption,
     HearAboutUsCarousel,
     CloudinaryImage,
-    Images,
     ImageSlider,
     ComparisonTable,
     ProductComparisonTable,
     ProductList,
     Snippet,
     CompensationCalculator,
-    ContentViewer,
     Drawer,
-    lib,
     Emoji,
     FeatureAvailability,
     FormulaScreenshot,
     GDPRForm,
     AdvisoryAnchor,
     HiddenSection,
-    HubSpotForm,
-    KeyboardShortcut,
     LPCTA,
-    Label,
     List,
     OverflowXSection,
     Quote,
@@ -121,22 +103,16 @@ export const shortcodes = {
     ProductOS,
     ProductScreenshot,
     ProductVideo,
-    Competitor,
-    DocsLinks,
     FAQ,
     Feature,
     Marquee,
-    MobileSlides,
     PairsWith,
     Question,
     SmoothScroll,
     Subfeature,
     TextCard,
     TutorialCard,
-    QuickLinks,
     Quote2,
-    Signatures,
-    SlackPage,
     Squeak,
     StarRepoButton,
     TracksCTA,
@@ -157,4 +133,7 @@ export const shortcodes = {
     WizardCommand,
     WizardCTA,
     EmbeddedSurvey,
+    // Wraps the parts of a CDP docs page that the CDP index (Product/Pipelines) hides; it provides its
+    // own `HideOnCDPIndex` that renders nothing. On the docs page itself, the content shows.
+    HideOnCDPIndex: ({ children }) => children,
 }

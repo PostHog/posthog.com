@@ -1,8 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { navigate, graphql, useStaticQuery } from 'gatsby'
-// @ts-expect-error @gatsbyjs/reach-router does not ship TypeScript declarations.
-import { useLocation } from '@gatsbyjs/reach-router'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import {
     IconCheck,
     IconArrowRight,
@@ -30,6 +26,10 @@ import { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAcces
 import useRoadmapEarlyAccessFeatures from 'hooks/useRoadmapEarlyAccessFeatures'
 import usePostHog from 'hooks/usePostHog'
 import { ROADMAP_STAGE_STYLES } from './roadmapStageStyles'
+import { navigate, useLocation } from 'lib/navigation'
+import { ResponsiveImage, getImage } from 'components/Image'
+import roadmapTeamsJson from '@data/people-roadmap-teams.json'
+import type { RoadmapTeams } from '~/data-layer/queries/people'
 
 const featurePreviewUrl = (flagKey: string): string =>
     `https://us.posthog.com/settings/user-feature-previews#${flagKey}`
@@ -86,22 +86,8 @@ const STAGES: StageDefinition[] = [
 type TeamPerson = { id?: string; name: string; role?: string; avatar?: string }
 type TeamInfo = { name: string; miniCrest?: Parameters<typeof getImage>[0] }
 
-interface SqueakProfileNode {
-    id?: string | number
-    attributes?: {
-        firstName?: string
-        lastName?: string
-        companyRole?: string
-        avatar?: { data?: { attributes?: { url?: string } } }
-    }
-}
-
-interface SqueakTeamNode {
-    slug: string
-    name: string
-    miniCrest?: Parameters<typeof getImage>[0]
-    profiles?: { data?: SqueakProfileNode[] }
-}
+// Team slug -> the team's name and mini crest, and the people on it.
+const { teamInfoBySlug, peopleByTeamSlug } = roadmapTeamsJson as RoadmapTeams
 
 type ChipSize = 'sm' | 'md'
 
@@ -449,7 +435,7 @@ const FeatureCard = ({
                 </span>
             </span>
             {crest && (
-                <GatsbyImage
+                <ResponsiveImage
                     image={crest}
                     alt={`${team?.name ?? teamSlug} team mini crest`}
                     className="size-9 shrink-0"
@@ -716,52 +702,6 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
 
     useEffect(() => setMounted(true), [])
 
-    const { allSqueakTeam } = useStaticQuery<{ allSqueakTeam: { nodes: SqueakTeamNode[] } }>(graphql`
-        {
-            allSqueakTeam {
-                nodes {
-                    slug
-                    name
-                    miniCrest {
-                        gatsbyImageData(width: 40, height: 40)
-                    }
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                firstName
-                                lastName
-                                companyRole
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const { teamInfoBySlug, peopleByTeamSlug } = useMemo(() => {
-        const teams: Record<string, TeamInfo> = {}
-        const people: Record<string, TeamPerson[]> = {}
-        allSqueakTeam.nodes.forEach((node) => {
-            teams[node.slug] = { name: node.name, miniCrest: node.miniCrest }
-            people[node.slug] = (node.profiles?.data || []).map((profile) => ({
-                id: profile.id ? String(profile.id) : undefined,
-                name: [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' '),
-                role: profile.attributes?.companyRole || undefined,
-                avatar: profile.attributes?.avatar?.data?.attributes?.url || undefined,
-            }))
-        })
-        return { teamInfoBySlug: teams, peopleByTeamSlug: people }
-    }, [allSqueakTeam])
-
     const allFeatures = useMemo(() => [...grouped.comingSoon, ...grouped.beta], [grouped.beta, grouped.comingSoon])
     const total = allFeatures.length
 
@@ -949,7 +889,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         navigate(roadmapUrl(location.search), { replace: true })
     }
     const activeTeamSlug = activeFeature ? teamForFeature(activeFeature) : undefined
-    const drawerTitle = pitchOpen ? 'Pitch a roadmap idea' : activeFeature?.name ?? 'Roadmap feature'
+    const drawerTitle = pitchOpen ? 'Pitch a roadmap idea' : (activeFeature?.name ?? 'Roadmap feature')
 
     return (
         <div ref={roadmapRootRef} className="relative flex min-w-0 flex-col gap-3">

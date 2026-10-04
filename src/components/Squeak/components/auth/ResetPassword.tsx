@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useUser } from 'hooks/useUser'
-import { navigate } from 'gatsby'
 import { inputClasses, labelClasses } from '../Authentication'
 import Button from '../Button'
+import { navigate } from 'lib/navigation'
 
 type ResetPasswordProps = {
     setMessage: (message: any) => void
@@ -23,7 +23,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ setMessage, setParentView
             password: values.password,
             passwordConfirmation: values.password,
         }
-        const { error, user } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/reset-password`, {
+        const { error, user } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/auth/reset-password`, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {

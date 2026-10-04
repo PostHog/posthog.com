@@ -1,32 +1,32 @@
 {
+    "extends": "astro/tsconfigs/strict",
     "compilerOptions": {
-        "baseUrl": "./src",
+        "jsx": "react-jsx",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        // Import roots, matching `alias` in astro.config.mjs.
         "paths": {
-            "types/*": ["./types/*"]
+            "~/*": ["./src/*"],
+            "@data/*": ["./.cache/data-layer/queries/*"],
+            "lib/*": ["./src/lib/*"],
+            "types": ["./src/types"],
+            "types/*": ["./src/types/*"],
+            "templates/*": ["./src/templates/*"],
+            "images/*": ["./src/images/*"],
+            "components/*": ["./src/components/*"],
+            "constants/*": ["./src/constants/*"],
+            "constants": ["./src/constants"],
+            "logic/*": ["./src/logic/*"],
+            "hooks/*": ["./src/hooks/*"],
+            "docs/*": ["./.cache/posthog-main-repo/docs/*"],
+            "onboarding/*": ["./.cache/posthog-main-repo/docs/onboarding/*"]
         },
-        // https://www.sitepoint.com/react-with-typescript-best-practices/
-        "allowJs": true, // Allow JavaScript files to be compiled
-        "skipLibCheck": true, // Skip type checking of all declaration files
-        "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs") and enables CJS/AMD/UMD style imports (import fs from "fs")
-        "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
-        "strict": true, // Enable all strict type checking options
-        "strictNullChecks": true,
-        "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
-        "module": "esnext", // Specify module code generation
-        "moduleResolution": "node", // Resolve modules using Node.js style
-        "resolveJsonModule": true, // Include modules imported with .json extension
-        "noEmit": true, // Do not emit output (meaning do not compile code, only perform type checking)
-        "jsx": "react", // Support JSX in .tsx files
-        "sourceMap": true, // Generate corrresponding .map file
-        "declaration": true, // Generate corresponding .d.ts file
-        "noUnusedLocals": true, // Report errors on unused locals
-        "noUnusedParameters": true, // Report errors on unused parameters
-        "experimentalDecorators": true, // Enables experimental support for ES decorators
-        "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
-        "lib": ["dom", "es2019.array"]
+        // Much of the codebase predates these; turning them on is a separate cleanup.
+        "verbatimModuleSyntax": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "experimentalDecorators": true
     },
-    "include": ["src/**/*"],
-    // *.test.ts files are run directly by `node --test`, which needs explicit .ts import
-    // extensions and node: builtins – neither of which this config is set up for
-    "exclude": ["node_modules/**/*", "staticfiles/**/*", "frontend/dist/**/*", "src/**/*.test.ts"]
+    "include": [".astro/types.d.ts", "src/**/*", "scripts/**/*.ts", "astro.config.mjs", "middleware.ts"],
+    "exclude": ["dist", "node_modules", "src/**/*.test.ts"]
 }

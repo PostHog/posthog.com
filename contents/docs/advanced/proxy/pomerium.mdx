@@ -84,14 +84,14 @@ In your application code, update your PostHog initialization:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
@@ -130,7 +130,7 @@ Add these routes to your Pomerium `config.yaml`:
 
 <MultiLanguage>
 
-```yaml file=US
+```yaml file="US"
 routes:
   - from: https://e.yourdomain.com
     to: https://us.i.posthog.com
@@ -159,7 +159,7 @@ routes:
     name: "PostHog Assets (array)"
 ```
 
-```yaml file=EU
+```yaml file="EU"
 routes:
   - from: https://e.yourdomain.com
     to: https://eu.i.posthog.com
@@ -215,14 +215,14 @@ In your application code, update your PostHog initialization:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'

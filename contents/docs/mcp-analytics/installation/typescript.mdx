@@ -44,7 +44,7 @@ Call `instrument(server, posthog)` once, before the server accepts requests. Pas
 
 <MultiLanguage>
 
-```ts file=SDK-v1
+```ts file="SDK-v1"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -62,7 +62,7 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 })
 ```
 
-```ts file=SDK-v2
+```ts file="SDK-v2"
 import { McpServer } from "@modelcontextprotocol/server"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"

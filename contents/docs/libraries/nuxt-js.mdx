@@ -29,19 +29,19 @@ Install the PostHog Nuxt module using your package manager:
 
 <MultiLanguage>
 
-```bash file=npm
+```bash file="npm"
 npm install @posthog/nuxt
 ```
 
-```bash file=Yarn
+```bash file="Yarn"
 yarn add @posthog/nuxt
 ```
 
-```bash file=pnpm
+```bash file="pnpm"
 pnpm add @posthog/nuxt
 ```
 
-```bash file=Bun
+```bash file="Bun"
 bun add @posthog/nuxt
 ```
 
@@ -64,14 +64,14 @@ import TracingHeaders from '../_snippets/tracing-headers.mdx'
 
 Store your PostHog keys in environment variables rather than hard-coding them. Add them to a `.env` file (and to your hosting provider). You can find these values in [your project settings](https://us.posthog.com/settings/project).
 
-```shell file=.env
+```shell file=".env"
 NUXT_PUBLIC_POSTHOG_KEY=<ph_project_token>
 NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 Then reference them when you add the module to your `nuxt.config.ts` file:
 
-```typescript file=nuxt.config.ts
+```typescript file="nuxt.config.ts"
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   posthogConfig: {
@@ -90,7 +90,7 @@ export default defineNuxtConfig({
 
 The module provides the `usePostHog()` composable which is auto-imported and available in all your Vue components:
 
-```vue file=app/pages/index.vue
+```vue file="app/pages/index.vue"
 <script setup>
 const posthog = usePostHog()
 
@@ -109,7 +109,7 @@ The `@posthog/nuxt` module makes your config available at `runtimeConfig.public.
 
 First, create a server utility to reuse the PostHog client across requests:
 
-```typescript file=server/utils/posthog.ts
+```typescript file="server/utils/posthog.ts"
 import { PostHog } from 'posthog-node'
 
 let client: PostHog | null = null
@@ -127,7 +127,7 @@ export function useServerPostHog(): PostHog {
 
 Then use it in your server routes:
 
-```typescript file=server/api/example.ts
+```typescript file="server/api/example.ts"
 export default defineEventHandler((event) => {
   const posthog = useServerPostHog()
 

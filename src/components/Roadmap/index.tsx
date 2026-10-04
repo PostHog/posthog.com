@@ -16,14 +16,14 @@ import {
     IconPencil,
     IconDownload,
 } from '@posthog/icons'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import githubReactionsJson from '@data/roadmap-github-reactions.json'
+import type { RoadmapGithubReactions } from '~/data-layer/queries/roadmap'
 import { Skeleton } from 'components/Questions/QuestionsTable'
-import groupBy from 'lodash.groupby'
+import groupBy from 'lodash/groupBy'
 import UpdateWrapper from './UpdateWrapper'
 import RoadmapForm from 'components/RoadmapForm'
 import Link from 'components/Link'
 import slugify from 'slugify'
-import { useLocation } from '@reach/router'
 import Slider from 'components/Slider'
 import CommunityLayout from 'components/Community/Layout'
 import { companyMenu } from '../../navs'
@@ -47,6 +47,9 @@ import { Scroll } from 'lucide-react'
 import { useApp } from '../../context/App'
 import RoadmapWindow from './RoadmapWindow'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
+import { navigate, useLocation } from 'lib/navigation'
+
+const githubReactions = githubReactionsJson as RoadmapGithubReactions
 
 interface IGitHubPage {
     title: string
@@ -344,22 +347,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         }
     }, [search])
 
-    // Add the staticRoadmaps query back
-    const { staticRoadmaps } = useStaticQuery(graphql`
-        {
-            staticRoadmaps: allSqueakRoadmap {
-                nodes {
-                    githubPages {
-                        reactions {
-                            total_count
-                        }
-                    }
-                    squeakId
-                }
-            }
-        }
-    `)
-
     // Process the roadmaps to include like counts and other data
     const roadmaps = useMemo(() => {
         // If no items with highlights, return empty array
@@ -369,16 +356,14 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         return roadmapsWithHighlights.map(({ item, highlightedFields }) => {
             const { id, attributes } = item
             const likeCount = attributes?.likes?.data?.length || 0
-            const staticLikeCount =
-                staticRoadmaps.nodes.find((node: any) => node.squeakId === id)?.githubPages?.[0]?.reactions
-                    ?.total_count || 0
+            const staticLikeCount = githubReactions[id] || 0
             return {
                 id,
                 attributes: { ...attributes, likeCount: likeCount + staticLikeCount },
                 highlightedFields,
             }
         })
-    }, [roadmapsWithHighlights, staticRoadmaps.nodes])
+    }, [roadmapsWithHighlights])
 
     const roadmapsGroupedByTeam = groupBy(
         roadmaps,

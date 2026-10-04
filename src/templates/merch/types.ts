@@ -1,5 +1,11 @@
-import type { IGatsbyImageData } from 'gatsby-plugin-image'
-import { GraphQLError } from 'graphql'
+import { type ResponsiveImageData } from 'components/Image'
+
+/** An error in a Shopify GraphQL response. */
+interface GraphQLError {
+    message: string
+    path?: (string | number)[]
+    extensions?: Record<string, unknown>
+}
 
 export type CollectionPageContext = {
     currentPage: number
@@ -13,7 +19,7 @@ export type CollectionPageContext = {
 
 export type ImageLocalFile = {
     childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
+        gatsbyImageData: ResponsiveImageData
     }
 }
 
@@ -297,7 +303,7 @@ export type CartCreateReponse = {
 }
 
 /**
- * Gatsby source nodes
+ * Data layer source
  */
 
 export type MetaobjectsCollection = Pick<ShopifyCollection, 'handle' | 'title'>
@@ -329,13 +335,13 @@ export interface MetaobjectsResponseData {
 }
 
 /**
- * Gatsby page creation
+ * Page creation
  */
 export type MerchNavItems = MetaobjectsCollection & {
     url: string
 }
 
-export interface GatsbyContentResponse {
+export interface MerchContentResponse {
     data: {
         allMerchNavigation: {
             nodes: MetaobjectsCollection[]

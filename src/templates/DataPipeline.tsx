@@ -2,7 +2,6 @@ import PostLayout from 'components/PostLayout'
 import { dataPipelines, docsMenu } from '../navs'
 import React from 'react'
 import Layout from 'components/Layout'
-import { graphql } from 'gatsby'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import SEO from 'components/seo'
@@ -10,37 +9,14 @@ import { getIconUrl, NotifyMe } from 'components/Product/Pipelines'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
 import { getProseClasses } from '../constants'
+import type { DataPipelinePage } from '../lib/content/integrations'
 
-export default function DataPipeline({
-    data,
-}: {
-    data: {
-        postHogPipeline: {
-            name: string
-            description: string
-            inputs_schema: any
-            id: string
-            type: string
-            icon_url: string
-            status: string
-            introSnippet: string
-            installationSnippet: string
-        }
-    }
-}): JSX.Element {
-    const {
-        postHogPipeline: {
-            name,
-            description,
-            inputs_schema,
-            id,
-            type,
-            icon_url,
-            status,
-            introSnippet,
-            installationSnippet,
-        },
-    } = data
+export interface DataPipelineProps {
+    pipeline: DataPipelinePage
+}
+
+export default function DataPipeline({ pipeline }: DataPipelineProps): JSX.Element {
+    const { name, description, inputs_schema, id, type, icon_url, status, introSnippet, installationSnippet } = pipeline
 
     const segmentWarning =
         "> The configuration process for this destination mirrors Segment's setup. We've automatically modified the documentation from third-party sources to show you how to set up this destination with PostHog."
@@ -113,7 +89,7 @@ export default function DataPipeline({
                                     Creative Commons Attribution 4.0 International License
                                 </a>
                                 . The content may have been modified according to{' '}
-                                <a href="https://github.com/PostHog/posthog.com/blob/master/gatsby/sourceNodes.ts">
+                                <a href="https://github.com/PostHog/posthog.com/blob/master/src/data-layer/sources/posthogApi.ts">
                                     this code
                                 </a>
                                 .
@@ -125,26 +101,3 @@ export default function DataPipeline({
         </>
     )
 }
-
-export const query = graphql`
-    query ($id: String!) {
-        postHogPipeline(id: { eq: $id }) {
-            id
-            name
-            description
-            type
-            icon_url
-            inputs_schema {
-                key
-                type
-                label
-                secret
-                required
-                description
-            }
-            status
-            introSnippet
-            installationSnippet
-        }
-    }
-`

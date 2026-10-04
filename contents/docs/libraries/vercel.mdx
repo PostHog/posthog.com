@@ -64,7 +64,7 @@ This ensures your events get sent to PostHog and no background processes are lef
 
 <MultiLanguage>
 
-```js file=after
+```js file="after"
 // app/api/after/route.js
 import { after } from 'next/server'
 import PostHogClient from '../../posthog'
@@ -80,7 +80,7 @@ export async function POST(request) {
 }
 ```
 
-```js file=waitUntil
+```js file="waitUntil"
 // app/api/wait/route.js
 import { waitUntil } from '@vercel/functions';
 import PostHogClient from '../../posthog'

@@ -1,21 +1,7 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import sourcePlatformsJson from '@data/products-source-platforms.json'
+import type { SourcePlatforms } from '~/data-layer/queries/products'
 
-export default function useSourcePlatforms() {
-    const { allPostHogSource } = useStaticQuery(graphql`
-        query SourcePlatforms {
-            allPostHogSource(filter: { unreleased: { ne: true } }, sort: { fields: name, order: ASC }) {
-                nodes {
-                    name
-                    slug
-                    icon_url
-                }
-            }
-        }
-    `)
-
-    return allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/data-warehouse/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
+/** Released managed sources, A to Z, as `{ label, url, image }`. */
+export default function useSourcePlatforms(): SourcePlatforms {
+    return sourcePlatformsJson as SourcePlatforms
 }

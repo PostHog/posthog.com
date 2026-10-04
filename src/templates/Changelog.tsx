@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import { IconArchive, IconDownload, IconPencil, IconPlus, IconShieldLock, IconX } from '@posthog/icons'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'
@@ -21,16 +20,15 @@ import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import type { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useWindow } from '../context/Window'
 import { ZoomImage } from 'components/ZoomImage'
 import { CallToAction } from 'components/CallToAction'
 import { Heading } from 'components/Heading'
 import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
-import { useLocation } from '@reach/router'
 import MediaPlayer from 'components/MediaPlayer'
+import { navigate, useLocation } from 'lib/navigation'
+import { ResponsiveImage, type ResponsiveImageData } from 'components/Image'
 
 dayjs.extend(utc)
 
@@ -57,7 +55,7 @@ type RoadmapNode = {
         url?: string
     }
     media?: {
-        gatsbyImageData?: IGatsbyImageData
+        gatsbyImageData?: ResponsiveImageData
     }
     profiles?: {
         data?: Array<{
@@ -135,7 +133,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                     <ZoomImage>
                         <Video
                             publicId={media?.data?.attributes?.provider_metadata?.public_id}
-                            cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                            cloudName={import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}
                             className="max-w-2xl w-full"
                             autoPlay
                             loop
@@ -202,7 +200,7 @@ const Roadmap = ({
             'Unpublishing will remove this item from the changelog on the next build. You can republish it later in Strapi. No data will be lost.'
         )
         if (confirmed) {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${roadmap.id}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps/${roadmap.id}`, {
                 body: JSON.stringify({
                     data: {
                         publishedAt: null,
@@ -274,7 +272,7 @@ const Roadmap = ({
                         {roadmap.media?.gatsbyImageData && (
                             <div className="mt-4 px-4 not-prose">
                                 <ZoomImage>
-                                    <GatsbyImage
+                                    <ResponsiveImage
                                         image={roadmap.media.gatsbyImageData}
                                         alt={roadmap.title}
                                         className="rounded"

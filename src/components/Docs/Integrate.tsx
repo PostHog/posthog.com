@@ -1,201 +1,32 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import List from 'components/List'
-import { getLogo } from '../../constants/logos'
+import integrateLibrariesJson from '@data/content-integrate-libraries.json'
+import type { IntegrateLibraries } from '~/data-layer/queries/content'
 
-type LibraryNode = {
-    fields: {
-        slug: string
-    }
-    frontmatter: {
-        title: string
-        platformLogo?: string
-        icon?: {
-            publicURL: string
-        }
-        features: LibraryFeatures | null
-    }
-}
+const { sdks, frameworks } = integrateLibrariesJson as IntegrateLibraries
 
-type FrameworkNode = {
-    fields: {
-        slug: string
-    }
-    frontmatter: {
-        title: string
-        sidebarTitle?: string
-        platformLogo?: string
-        icon?: {
-            publicURL: string
-        }
-    }
-}
-
-type LibraryFeatures = {
-    eventCapture: boolean
-    autoCapture: boolean
-    featureFlags: boolean
-    groupAnalytics: boolean
-    sessionRecording: boolean
-    userIdentification: boolean
-    surveys: boolean
-    aiObservability: boolean
-    errorTracking: boolean
-}
-
-type LibraryData = {
-    sdks: {
-        nodes: LibraryNode[]
-    }
-    frameworks: {
-        nodes: FrameworkNode[]
-    }
-}
-
-export const SDKs = () => {
-    const { sdks } = useStaticQuery<LibraryData>(query)
-
+export const SDKs = (): JSX.Element => {
     return (
         <List
             className="grid @sm:grid-cols-2 @xl:grid-cols-3"
-            items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, platformLogo, icon } }) => ({
-                label: title,
+            items={sdks.map(({ slug, label, image }) => ({
+                label,
                 url: slug,
-                image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
+                image: image ?? undefined,
             }))}
         />
     )
 }
 
-export const Frameworks = () => {
-    const { frameworks } = useStaticQuery<LibraryData>(query)
-
+export const Frameworks = (): JSX.Element => {
     return (
         <List
             className="grid @sm:grid-cols-2 @xl:grid-cols-3"
-            items={frameworks.nodes.map(
-                ({ fields: { slug }, frontmatter: { title, sidebarTitle, platformLogo, icon } }) => ({
-                    label: sidebarTitle || title,
-                    url: slug,
-                    image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
-                })
-            )}
+            items={frameworks.map(({ slug, label, image }) => ({
+                label,
+                url: slug,
+                image: image ?? undefined,
+            }))}
         />
     )
 }
-
-const query = graphql`
-    {
-        sdks: allMdx(
-            filter: {
-                fields: {
-                    slug: {
-                        in: [
-                            "/docs/libraries/js"
-                            "/docs/libraries/android"
-                            "/docs/libraries/elixir"
-                            "/docs/libraries/flutter"
-                            "/docs/libraries/go"
-                            "/docs/libraries/ios"
-                            "/docs/libraries/java"
-                            "/docs/libraries/kmp"
-                            "/docs/libraries/node"
-                            "/docs/libraries/php"
-                            "/docs/libraries/python"
-                            "/docs/libraries/react"
-                            "/docs/libraries/react-native"
-                            "/docs/libraries/roblox"
-                            "/docs/libraries/ruby"
-                            "/docs/libraries/rust"
-                            "/docs/libraries/unity"
-                        ]
-                    }
-                }
-            }
-            sort: { fields: fields___pageViews, order: DESC }
-        ) {
-            nodes {
-                ...sdk
-            }
-        }
-        frameworks: allMdx(
-            filter: {
-                fields: {
-                    slug: {
-                        in: [
-                            "/docs/libraries/angular"
-                            "/docs/libraries/astro"
-                            "/docs/libraries/bubble"
-                            "/docs/libraries/discord"
-                            "/docs/libraries/django"
-                            "/docs/libraries/docusaurus"
-                            "/docs/libraries/flask"
-                            "/docs/libraries/framer"
-                            "/docs/libraries/gatsby"
-                            "/docs/libraries/github"
-                            "/docs/libraries/google-tag-manager"
-                            "/docs/libraries/laravel"
-                            "/docs/libraries/next-js"
-                            "/docs/libraries/nuxt-js"
-                            "/docs/libraries/phoenix"
-                            "/docs/libraries/remix"
-                            "/docs/libraries/retool"
-                            "/docs/libraries/rudderstack"
-                            "/docs/libraries/segment"
-                            "/docs/libraries/slack"
-                            "/docs/libraries/shopify"
-                            "/docs/libraries/svelte"
-                            "/docs/libraries/vue-js"
-                            "/docs/libraries/webflow"
-                            "/docs/libraries/woocommerce"
-                            "/docs/libraries/wordpress"
-                        ]
-                    }
-                }
-            }
-            sort: { fields: slug, order: ASC }
-        ) {
-            nodes {
-                ...framework
-            }
-        }
-    }
-
-    fragment framework on Mdx {
-        fields {
-            slug
-        }
-        frontmatter {
-            title
-            sidebarTitle
-            platformLogo
-            icon {
-                publicURL
-            }
-        }
-    }
-
-    fragment sdk on Mdx {
-        fields {
-            slug
-        }
-        frontmatter {
-            title
-            platformLogo
-            icon {
-                publicURL
-            }
-            features {
-                eventCapture
-                userIdentification
-                autoCapture
-                sessionRecording
-                featureFlags
-                groupAnalytics
-                surveys
-                aiObservability
-                errorTracking
-            }
-        }
-    }
-`

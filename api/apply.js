@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const request = require('request')
-const multiparty = require('multiparty')
-const fs = require('fs')
+import request from 'request'
+import multiparty from 'multiparty'
+import fs from 'fs'
 
 const submitApplication = async (req) => {
     const form = new multiparty.Form()

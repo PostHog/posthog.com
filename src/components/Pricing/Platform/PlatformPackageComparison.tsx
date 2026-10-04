@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { IconCheck } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import useCloud from 'hooks/useCloud'
 import usePostHogInstance from 'hooks/usePostHogInstance'
 import { usePlatform } from './usePlatform'
+import { Link } from 'lib/navigation'
 
 /**
  * The two blocks that answer "what's in a platform package": the packages themselves, and a

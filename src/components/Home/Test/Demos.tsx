@@ -7,7 +7,6 @@ import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import useProduct from 'hooks/useProduct'
-import { graphql, Link, useStaticQuery } from 'gatsby'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
@@ -36,6 +35,7 @@ import {
     DigitDash,
 } from 'components/OSIcons'
 import TVScreen from './TV'
+import { Link } from 'lib/navigation'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -103,8 +103,7 @@ const getPromptsForSlide = (slide: string) =>
 // Helper component to use hooks for product data
 function ProductTrigger({ handle }: { handle: string }) {
     const product = useProduct({ handle }) as
-        | { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string }
-        | undefined
+        { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string } | undefined
     const Icon = product?.Icon
     return (
         <div className="flex items-center gap-2">

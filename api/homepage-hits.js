@@ -1,0 +1,11 @@
+const handler = async (_req, res) => {
+    const data = await fetch(`https://us.posthog.com/shared/aH0asDUbyFXPGSo6JOPryoycVhX7EA.json`).then((res) =>
+        res.json()
+    )
+
+    const count = data?.insight?.result?.[0]?.aggregated_value
+
+    return res.status(200).json(count)
+}
+
+export default handler

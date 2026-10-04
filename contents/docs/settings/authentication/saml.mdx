@@ -6,16 +6,9 @@ availability:
   free: none
   selfServe: none
   enterprise: full
-  features:
-    saml:
-      free: false
-      selfServe: false
-      boost: false
-      scale: true
-      enterprise: true
 ---
 
-<FeatureAvailability availability={_frontmatter.availability.features.saml} />
+<FeatureAvailability availability={{ free: false, selfServe: false, boost: false, scale: true, enterprise: true }} />
 
 Security Assertion Markup Language (SAML) enables users to access multiple systems with a single set of credentials. This is helpful for growing organizations that require centralized user management in an Identity Provider (IdP).
 
@@ -143,12 +136,12 @@ You can quickly connect OneLogin and PostHog by using the prebuilt integration.
    />
 
 7. Select **Save configuration** in PostHog.
-  <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_28_onelogin_posthog_saml_configuration_light_6192b2052d.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_28_onelogin_posthog_saml_configuration_dark_5e8ee21d99.png"
-    alt="PostHog UI showing SAML configuration"
-    classes="rounded"
-  />
+   <ProductScreenshot
+     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_28_onelogin_posthog_saml_configuration_light_6192b2052d.png"
+     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_28_onelogin_posthog_saml_configuration_dark_5e8ee21d99.png"
+     alt="PostHog UI showing SAML configuration"
+     classes="rounded"
+   />
 
 The next time you enter your email address during login, you will see an option to login using SAML.
 
@@ -309,7 +302,7 @@ The next time you enter your email address during login, you will see an option 
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_saml_step_10_225870e4a8.png"
     alt="Okta admin UI showing application form with default relay state field"
     classes="rounded"
-   />
+    />
 
 11. In Okta, scroll down to **Attribute Statements** add the following statements:
   <table>

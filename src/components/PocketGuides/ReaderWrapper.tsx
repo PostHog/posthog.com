@@ -1,8 +1,9 @@
 import React from 'react'
+import { SeeFig } from './bookPieces'
 
 /**
  * Authoring markers, not layout: `<LeftPage>` holds a page's figures, `<RightPage>` its prose.
- * The reader's wrapper consumes both by `mdxType` and interleaves them – these components only
+ * The reader's wrapper finds both by component and interleaves them – these components only
  * render if something bypasses the wrapper, so they pass their children through unstyled.
  */
 export const LeftPage = ({ children }: { children: React.ReactNode }): JSX.Element => <>{children}</>
@@ -14,8 +15,8 @@ function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
         if (!React.isValidElement(child)) {
             return
         }
-        const props = child.props as { mdxType?: string; n?: number; children?: React.ReactNode }
-        if (props.mdxType === 'SeeFig' && typeof props.n === 'number') {
+        const props = child.props as { n?: number; children?: React.ReactNode }
+        if (child.type === SeeFig && typeof props.n === 'number') {
             found.add(props.n)
         }
         if (props.children) {
@@ -26,7 +27,7 @@ function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
 
 /**
  * The reader: as the MDX `wrapper` it re-orders the compiled LeftPage/RightPage trees (matched
- * by `mdxType` and `n`) so each figure follows the first block citing it.
+ * by component, and figures by their `n`) so each figure follows the first block citing it.
  */
 export default function ReaderWrapper({ children }: { children: React.ReactNode }): JSX.Element {
     // Non-figure left-page content (the front matter's title block) leads the column.
@@ -38,23 +39,23 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
         if (!React.isValidElement(page)) {
             return
         }
-        const type = (page.props as { mdxType?: string }).mdxType
-        if (type === 'LeftPage') {
+        if (page.type === LeftPage) {
             React.Children.forEach(
                 (page.props as { children?: React.ReactNode }).children as React.ReactNode[],
                 (child) => {
                     if (!React.isValidElement(child)) {
                         return
                     }
-                    const props = child.props as { mdxType?: string; n?: number }
-                    if (typeof props.n === 'number' && (props.mdxType ?? '').endsWith('Figure')) {
+                    // Every numbered element on a left page is a figure (<SomethingFigure n={2}>).
+                    const props = child.props as { n?: number }
+                    if (typeof props.n === 'number') {
                         figures.set(props.n, child)
                     } else {
                         preface.push(child)
                     }
                 }
             )
-        } else if (type === 'RightPage') {
+        } else if (page.type === RightPage) {
             prose = React.Children.toArray((page.props as { children?: React.ReactNode }).children)
         } else {
             // Anything authored outside the two pages still renders, after the prose.

@@ -3,8 +3,8 @@ import { LoginView, ProfileMenu, SavedStaysView } from '@posthog/twig-components
 import { SavedStay } from '@posthog/twig-components/saved-stay'
 import { StayCardContent } from '@posthog/twig-components/stay-card'
 import { stays } from '@posthog/twig-components/catalog'
-import cabin from '@posthog/twig-components/assets/cabin.jpg'
-import coast from '@posthog/twig-components/assets/coast.jpg'
+import cabin from '@posthog/twig-components/assets/cabin.jpg?url'
+import coast from '@posthog/twig-components/assets/coast.jpg?url'
 import '@posthog/twig-components/catalog.css'
 import '@posthog/twig-components/lab.css'
 
@@ -157,10 +157,10 @@ export function SessionGroupingFigure(): JSX.Element {
                         {completed
                             ? 'Both events have the same distinct ID and session ID: one anonymous visitor, one visit.'
                             : selected === 'Forest'
-                            ? 'Forest captured. Select Coast next.'
-                            : selected === 'Coast'
-                            ? 'Coast captured. Select Forest too.'
-                            : 'Select Forest, then Coast to capture both events.'}
+                              ? 'Forest captured. Select Coast next.'
+                              : selected === 'Coast'
+                                ? 'Coast captured. Select Forest too.'
+                                : 'Select Forest, then Coast to capture both events.'}
                     </InspectorStatus>
                 </PostHogInspector>
             </div>
@@ -619,8 +619,8 @@ export function SessionReplayLinkFigure(): JSX.Element {
                                 playing
                                     ? 'Pause replay'
                                     : positionMs >= durationMs - 50
-                                    ? 'Replay visit'
-                                    : 'Play replay'
+                                      ? 'Replay visit'
+                                      : 'Play replay'
                             }
                             className="col-start-1 row-start-2 grid size-7 place-items-center border-0 bg-transparent p-0 shadow-none"
                             type="button"

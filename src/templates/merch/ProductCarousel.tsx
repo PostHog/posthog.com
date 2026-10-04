@@ -1,10 +1,10 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import React, { useMemo, useState, useEffect } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductImages, getShopifyImage, calculateAspectRatioDimensions } from './utils'
+import { ResponsiveImage } from 'components/Image'
 
 type ProductCarouselProps = {
     className?: string
@@ -20,7 +20,7 @@ const Image = ({ index, image, title }: { index: number; image: { preview: { ima
 
     return (
         <div className={`keen-slider__slide number-slide${index}} max-w-full bg-white`}>
-            <GatsbyImage className="w-full aspect-square" image={memoizedImage} alt={title} />
+            <ResponsiveImage className="w-full aspect-square" image={memoizedImage} alt={title} />
         </div>
     )
 }
@@ -66,7 +66,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
 
     if (images.length === 1)
         return (
-            <GatsbyImage
+            <ResponsiveImage
                 className="w-full rounded-md overflow-hidden aspect-square"
                 image={memoizedImage}
                 alt={product.title}

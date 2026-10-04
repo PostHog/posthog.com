@@ -41,7 +41,7 @@ Handles that don't resolve to a product with a `name` and `slug` are silently sk
 - Links use `state={{ newWindow: true }}` so product pages open in a new OS-style window.
 - Icon colors use the dynamic `text-${product.color}` pattern – all colors used by the default handles are in `safelist.txt`. If you add a handle with a new color, confirm it's safelisted.
 - Layout uses container queries only (`@sm:`); the label stacks above the strip in narrow containers.
-- SSR-safe: data comes from `useProduct()` (Gatsby static query); no browser globals.
+- SSR-safe: data comes from `useProduct()` (static product data plus build-time JSON from `@data/products-billing.json`); no browser globals.
 
 
 ## Compact product list

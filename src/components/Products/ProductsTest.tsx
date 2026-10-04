@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
 import { IconArrowRight, IconArrowUpRight, IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
@@ -15,6 +14,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
+import { navigate } from 'lib/navigation'
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
     alpha: 'bg-orange',
@@ -104,8 +104,7 @@ const VIDEO_CONTROL_CLASS =
 
 function ProductTrigger({ handle }: { handle: string }) {
     const product = useProduct({ handle }) as
-        | { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string }
-        | undefined
+        { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string } | undefined
     const Icon = product?.Icon
     return (
         <div className="flex items-center gap-2">

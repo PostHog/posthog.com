@@ -36,22 +36,21 @@ import SideModal from '../../Modal/SideModal'
 import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
-import { useStaticQuery, graphql } from 'gatsby'
 import { PostHogAIQuestionInput } from 'components/MaxQuestionInput'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
 import { VoteBox } from 'components/Roadmap'
-import { useToast } from '../../../hooks/toast'
+import { useToast } from '../../../context/Toast'
 import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { Authentication } from 'components/Squeak'
 import Markdown from 'components/Squeak/components/Markdown'
-import headlineImg from './headline.svg'
-import betaDesktopImg from './beta-desktop.svg'
-import betaMobileImg from './beta-mobile.svg'
-import descriptionDesktopImg from './description-desktop.svg'
-import descriptionMobileImg from './description-mobile.svg'
+import headlineImg from './headline.svg?url'
+import betaDesktopImg from './beta-desktop.svg?url'
+import betaMobileImg from './beta-mobile.svg?url'
+import descriptionDesktopImg from './description-desktop.svg?url'
+import descriptionMobileImg from './description-mobile.svg?url'
 import usePostHog from 'hooks/usePostHog'
 import WizardCommand from 'components/WizardCommand'
 
@@ -166,7 +165,7 @@ const Roadmap = () => {
             const token = await getJwt()
             const isSubscribed = !!subscribed[roadmap.id]
             const res = await fetch(
-                `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${roadmap.id}/${
+                `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmap/${roadmap.id}/${
                     isSubscribed ? 'unsubscribe' : 'subscribe'
                 }`,
                 {
@@ -324,8 +323,8 @@ const Roadmap = () => {
                                                             {subscribed[roadmap.id]
                                                                 ? 'Unsubscribe'
                                                                 : roadmap.attributes.betaAvailable
-                                                                ? 'Request early access'
-                                                                : 'Get updates'}
+                                                                  ? 'Request early access'
+                                                                  : 'Get updates'}
                                                             {!subscribed[roadmap.id] &&
                                                                 !roadmap.attributes.betaAvailable && (
                                                                     <Tooltip

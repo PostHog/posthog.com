@@ -39,7 +39,7 @@ import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 For ASP.NET Core apps using `PostHog.AspNetCore`, add request context middleware before routes that call PostHog. This reads incoming PostHog tracing headers and attaches request metadata to captures, exceptions, and feature flag evaluation inside the request.
 
-```csharp file=Program.cs
+```csharp file="Program.cs"
 using PostHog;
 using PostHog.AspNetCore;
 

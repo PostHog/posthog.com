@@ -2,7 +2,7 @@ We use the Composition API as it provides better accessibility, maintainability,
 
 PostHog initializes as a singleton, so you can initialize it in your `main.ts` file **before** you mount your app. This ensures PostHog is initialized before any other code runs.
 
-```ts file=src/main.ts
+```ts file="src/main.ts"
 // src/main.ts
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

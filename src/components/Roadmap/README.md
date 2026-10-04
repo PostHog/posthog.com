@@ -4,10 +4,10 @@
 
 ## Data ownership
 
-- `useEarlyAccessFeatures` owns the feature data. It starts with Gatsby's build-time `EarlyAccessFeature` nodes, then revalidates with PostHog JS in the browser.
+- `useEarlyAccessFeatures` owns the feature data. It starts with the build-time `EarlyAccessFeature` nodes (the `roadmap-early-access-features` query, imported as `@data/roadmap-early-access-features.json`), then revalidates with PostHog JS in the browser.
 - The hook supplies the feature stage, title, description, documentation URL, flag key, creation date, waitlist count, and waitlist survey payload.
 - `useRoadmapEarlyAccessFeatures` resolves each feature's small team from the feature's assignee in PostHog (served by the public EAF endpoint as a display name): a `role` assignee matches a team by name or slug, and a `user` assignee matches a team member profile by full name and takes that person's team. It can filter the canonical roadmap to one team for embedded views such as `/ai`.
-- `allSqueakTeam` supplies display names, mini crests, and member profiles. Features without a match remain visible and can be filtered as `Unassigned`.
+- The `people-roadmap-teams` query (`@data/people-roadmap-teams.json`) supplies display names, mini crests, and member profiles. Features without a match remain visible and can be filtered as `Unassigned`.
 
 Do not duplicate this data in the component, add hard-coded feature cards, or reintroduce a hard-coded feature-to-team map. To change a feature's team, change its assignee on the early access feature in the PostHog app.
 

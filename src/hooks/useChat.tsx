@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
-import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
 import { ChatFrame } from 'components/Chat'
 import { useApp } from '../context/App'
+import { navigate } from 'lib/navigation'
 
 interface ChatContextType {
     hasUnread: boolean

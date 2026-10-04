@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SEO from 'components/seo'
-import { Script } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SalesforceForm from 'components/SalesforceForm'
 import { useWindow } from '../../context/Window'
@@ -52,16 +51,21 @@ interface ContactSalesProps {
 
 export default function ContactSales({ formConfig }: ContactSalesProps) {
     const { appWindow } = useWindow()
+
+    // Loads the form script once, after hydration.
+    useEffect(() => {
+        if (!formConfig || document.getElementById('default-form-script')) return
+        const script = document.createElement('script')
+        script.id = 'default-form-script'
+        script.src = '/scripts/default-form-script.js'
+        document.body.appendChild(script)
+    }, [formConfig])
+
     if (!formConfig) {
         return null
     }
 
     const initialValues = appWindow?.location?.state?.initialValues ?? undefined
 
-    return (
-        <>
-            <Script id="default-form-script" src="/scripts/default-form-script.js" />
-            <SalesforceForm {...formConfig} initialValues={initialValues} />
-        </>
-    )
+    return <SalesforceForm {...formConfig} initialValues={initialValues} />
 }

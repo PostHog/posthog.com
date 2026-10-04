@@ -1,4 +1,4 @@
-import { ImageDataLike } from 'gatsby-plugin-image'
+import { ImageDataLike } from 'components/Image'
 
 /** A `/newsletter/*` MDX node, shaped by the `/newsletter` page query. */
 export type PostSummary = {

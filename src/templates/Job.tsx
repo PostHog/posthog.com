@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
-import { graphql, navigate } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import Link from 'components/Link'
@@ -10,7 +9,6 @@ import { sfBenchmark } from 'components/CompensationCalculator/compensation_data
 import { benefits } from 'components/Careers/Benefits'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { companyMenu } from '../navs'
 import TeamMember from 'components/TeamMember'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -23,6 +21,9 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
 import { OSInput } from 'components/OSForm'
 import { formatTeamName } from 'lib/utils'
+import { navigate } from 'lib/navigation'
+import { MDXRenderer } from 'components/MDXRenderer'
+import type { GitHubIssue, JobProps } from '../lib/content/jobs'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -45,13 +46,6 @@ const roleGroupingOrder = ['Engineering', 'Product', 'Design', 'Marketing', 'Sal
 
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
-interface GitHubIssue {
-    url: string
-    number: number
-    title: string
-    labels?: Array<{ name: string; url: string }>
-}
-
 interface TableOfContentsItem {
     value: string
     url: string
@@ -63,31 +57,6 @@ interface ParsedContentItem {
     trigger: React.ReactNode
     content: React.ReactNode
     title: string
-}
-
-interface JobProps {
-    data: {
-        teams: any
-        objectives: any
-        mission: any
-        allJobPostings: any
-        ashbyJobPosting: {
-            departmentName: string
-            info: any
-            id: string
-            parent: any
-            fields: {
-                tableOfContents: any
-                html: string
-                title: string
-                slug: string
-                locations: any
-            }
-        }
-    }
-    pageContext: {
-        gitHubIssues: GitHubIssue[]
-    }
 }
 
 // Separate component for left sidebar to prevent re-renders
@@ -283,20 +252,18 @@ const LeftSidebarContent = React.memo(
 LeftSidebarContent.displayName = 'LeftSidebarContent'
 
 export default function Job({
-    data: {
-        teams,
-        objectives,
-        mission,
-        allJobPostings,
-        ashbyJobPosting: {
-            departmentName,
-            info,
-            id,
-            parent,
-            fields: { tableOfContents, html, title, slug, locations },
-        },
+    teams,
+    objectives,
+    mission,
+    allJobPostings,
+    posting: {
+        departmentName,
+        info,
+        id,
+        parent,
+        fields: { tableOfContents, html, title, slug, locations },
     },
-    pageContext: { gitHubIssues },
+    gitHubIssues,
 }: JobProps) {
     // State variables
     const [showTableOfContents, setShowTableOfContents] = useState(false)
@@ -314,7 +281,7 @@ export default function Job({
     const jobGroups = useMemo(() => {
         const groups: { [key: string]: any[] } = {}
 
-        allJobPostings.nodes.forEach((job: any) => {
+        allJobPostings.forEach((job: any) => {
             const roleGroupingField = job.parent?.customFields?.find(
                 (field: { title: string }) => field.title === 'Role grouping'
             )
@@ -365,7 +332,7 @@ export default function Job({
             name: groupName,
             jobs: groups[groupName],
         }))
-    }, [allJobPostings.nodes])
+    }, [allJobPostings])
 
     // Get all jobs in a flat array
     const allJobs = useMemo(() => {
@@ -383,8 +350,8 @@ export default function Job({
         })
     }, [searchQuery, allJobs])
 
-    const multipleTeams = teams?.nodes?.length > 1
-    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `${teams?.nodes?.[0]?.name} Team` : ''
+    const multipleTeams = teams.length > 1
+    const teamName = multipleTeams ? 'Multiple teams' : teams[0]?.name ? `${teams[0]?.name} Team` : ''
 
     const [jobTitle] = title.split(' - ')
 
@@ -462,7 +429,7 @@ export default function Job({
         <>
             <SEO
                 title={`${title} - PostHog`}
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                image={`${import.meta.env.PUBLIC_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
                 imageType="absolute"
             />
             <ReaderView
@@ -578,7 +545,7 @@ export default function Job({
                         <div className="@xl:col-span-2 @container">
                             <div className="sticky top-4">
                                 <h2 className="mt-0 mb-2 leading-tight text-base text-center">
-                                    {teams?.nodes?.length > 0 ? (
+                                    {teams.length > 0 ? (
                                         multipleTeams ? (
                                             'Teams hiring for this role'
                                         ) : (
@@ -589,11 +556,7 @@ export default function Job({
                                     )}
                                 </h2>
 
-                                <TeamsSidebar
-                                    teams={teams?.nodes || []}
-                                    multipleTeams={multipleTeams}
-                                    isCompact={true}
-                                />
+                                <TeamsSidebar teams={teams} multipleTeams={multipleTeams} isCompact={true} />
                             </div>
                         </div>
                     </div>
@@ -809,135 +772,3 @@ export default function Job({
         </>
     )
 }
-
-export const query = graphql`
-    query JobQuery($id: String!, $objectives: String!, $mission: String!, $teams: [String]) {
-        ashbyJobPosting(id: { eq: $id }) {
-            id
-            departmentName
-            fields {
-                tableOfContents {
-                    value
-                    url
-                    depth
-                }
-                html
-                title
-                slug
-                locations
-            }
-            parent {
-                ... on AshbyJob {
-                    customFields {
-                        value
-                        title
-                    }
-                }
-            }
-            info {
-                descriptionHtml
-                applicationFormDefinition {
-                    sections {
-                        fields {
-                            isRequired
-                            descriptionPlain
-                            field {
-                                type
-                                title
-                                isNullable
-                                path
-                                selectableValues {
-                                    label
-                                    value
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        allJobPostings: allAshbyJobPosting {
-            nodes {
-                departmentName
-                fields {
-                    title
-                    slug
-                }
-                parent {
-                    ... on AshbyJob {
-                        customFields {
-                            value
-                            title
-                        }
-                    }
-                }
-            }
-        }
-        objectives: mdx(fields: { slug: { eq: $objectives } }) {
-            body
-        }
-        mission: mdx(fields: { slug: { eq: $mission } }) {
-            body
-        }
-        teams: allSqueakTeam(filter: { name: { in: $teams } }) {
-            nodes {
-                id
-                name
-                slug
-                description
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                crestOptions {
-                    textColor
-                    textShadow
-                    fontSize
-                    frame
-                    frameColor
-                    plaque
-                    plaqueColor
-                    imageScale
-                    imageXOffset
-                    imageYOffset
-                }
-                leadProfiles {
-                    data {
-                        id
-                    }
-                }
-                profiles {
-                    data {
-                        id
-                        attributes {
-                            country
-                            firstName
-                            lastName
-                            pineappleOnPizza
-                            location
-                            color
-                            companyRole
-                            leadTeams {
-                                data {
-                                    attributes {
-                                        name
-                                    }
-                                }
-                            }
-                            avatar {
-                                data {
-                                    attributes {
-                                        url
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`

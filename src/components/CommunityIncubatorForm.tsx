@@ -1,7 +1,6 @@
 import * as React from 'react'
 import usePostHog from 'hooks/usePostHog'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { IconCheck } = require('@posthog/icons') as { IconCheck: React.FC<any> }
+import { IconCheck } from '@posthog/icons'
 import { useRef, useState } from 'react'
 import { CallToAction } from './CallToAction'
 import { OSInput, OSTextarea } from 'components/OSForm'

@@ -29,7 +29,7 @@ bun add posthog-node
 
 Create a PostHog client and register the `PostHogInterceptor` globally with `captureExceptions` enabled:
 
-```ts file=main.ts
+```ts file="main.ts"
 import { NestFactory } from '@nestjs/core'
 import { PostHog } from 'posthog-node'
 import { PostHogInterceptor } from 'posthog-node/nestjs'
@@ -88,7 +88,7 @@ To link server-side errors with client sessions and users, configure [`tracing_h
 
 You can also manually capture exceptions anywhere in your NestJS application using `captureException`:
 
-```ts file=app.controller.ts
+```ts file="app.controller.ts"
 import { Controller, Post, Body } from '@nestjs/common'
 import { PostHog } from 'posthog-node'
 

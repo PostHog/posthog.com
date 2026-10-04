@@ -17,7 +17,7 @@ export const defaultQuickQuestions = [
 ]
 
 const defaultBaseSettings: InkeepBaseSettings = {
-    apiKey: process.env.GATSBY_INKEEP_API_KEY,
+    apiKey: import.meta.env.PUBLIC_INKEEP_API_KEY,
     primaryBrandColor: '#E5E7E0',
     organizationDisplayName: 'PostHog',
     colorMode: {

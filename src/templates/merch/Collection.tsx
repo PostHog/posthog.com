@@ -400,7 +400,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
     const fetchOrders = async () => {
         try {
-            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+            const { data } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/orders`, {
                 headers: {
                     Authorization: `Bearer ${await getJwt()}`,
                 },
@@ -502,8 +502,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 cartIsOpen
                                     ? 'Cart'
                                     : orderHistoryIsOpen
-                                    ? 'Order History'
-                                    : selectedProduct?.title || 'Product'
+                                      ? 'Order History'
+                                      : selectedProduct?.title || 'Product'
                             }
                         >
                             {cartIsOpen ? (

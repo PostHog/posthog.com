@@ -1,8 +1,12 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { StaticImage } from 'gatsby-plugin-image'
-import React, { useEffect, useState } from 'react'
-import Lottie from 'react-lottie'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
+
+// The Lottie player bundles a renderer; load it on demand instead of on every page.
+const DotLottiePlayer =
+    typeof window !== 'undefined'
+        ? lazy(() => import('@dotlottie/react-player').then((module) => ({ default: module.DotLottiePlayer })))
+        : () => null
 
 export default function CommunityCTA() {
     const [hog1Data, setHog1Data] = useState<any | null>(null)
@@ -30,14 +34,9 @@ export default function CommunityCTA() {
         <div className="flex md:flex-row flex-col items-center md:space-x-4 md:space-y-0 space-y-4 px-2 justify-center rounded-md mb-6 pb-12 md:pt-12 md:max-h-[250px] overflow-hidden">
             <div className="flex-shrink-0">
                 {hog1Data ? (
-                    <Lottie
-                        width={300}
-                        options={{
-                            loop: true,
-                            autoplay: true,
-                            animationData: hog1Data,
-                        }}
-                    />
+                    <Suspense fallback={null}>
+                        <DotLottiePlayer src={hog1Data} loop autoplay style={{ width: 300 }} />
+                    </Suspense>
                 ) : (
                     <CloudinaryImage
                         width={300}

@@ -141,7 +141,7 @@ If a section's slug already matches a key in `templateRegistry` (see `templates/
 **Product page** – one-liner that just hands the `productHandle` to `ProductReaderView`. The hook supplies everything else.
 
 ```tsx
-// src/pages/session-replay/index.tsx
+// src/views/session-replay/index.tsx
 import ProductReaderView from 'components/Products/ReaderViewProduct'
 
 export default function SessionReplay(): JSX.Element {
@@ -152,7 +152,7 @@ export default function SessionReplay(): JSX.Element {
 **Pricing page** – same component, plus `surface="pricing"`:
 
 ```tsx
-// src/pages/session-replay/pricing.tsx
+// src/views/session-replay/pricing.tsx
 import ProductReaderView from 'components/Products/ReaderViewProduct'
 
 export default function SessionReplayPricing(): JSX.Element {
@@ -169,7 +169,7 @@ export default function SessionReplayPricing(): JSX.Element {
 **Docs page** – provides its own body, opts in to the shared sidebar:
 
 ```tsx
-// src/pages/docs/session-replay.tsx
+// src/views/docs/session-replay.tsx
 import ReaderView from 'components/ReaderView'
 import { buildProductMenuTabs } from 'components/Products/ReaderViewProduct'
 import useProduct from 'hooks/useProduct'
@@ -198,7 +198,6 @@ Templates live in [`templates/`](./templates) and are registered in [`templates/
 interface SectionComponentProps {
     id: string          // from the menu item's slug
     productData: any    // from useProduct({ handle })
-    data: any           // pass-through from the page (GraphQL result)
     allProducts: any[]
 }
 ```
@@ -286,7 +285,7 @@ Switching products always navigates to the product root (`/<newSlug>`). Surface-
 | `index.tsx`                | `ProductReaderView` (entry point for the Product + Pricing surfaces) + barrel exports. Takes `surface?: 'product' \| 'pricing'`. |
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
-| `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
+| `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
 | `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; always navigates to `/<slug>`. |
 | `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
 | `templates/`               | One file per section template + the `templateRegistry`.            |

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLocation } from '@reach/router'
 import { IconLink } from '../OSIcons'
+import { useLocation } from 'lib/navigation'
 
 export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const [visible, setVisible] = useState(false)

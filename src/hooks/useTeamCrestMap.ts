@@ -1,15 +1,10 @@
-import { teamQuery } from 'components/People'
+import teamCrestsJson from '@data/people-team-crests.json'
+import type { TeamCrests } from '~/data-layer/queries/people'
 
-import { useStaticQuery } from 'gatsby'
+// Crests are Cloudinary uploads.
+const teamCrests = teamCrestsJson as Record<keyof TeamCrests, `https://res.cloudinary.com/${string}`>
 
-export default function useTeamCrestMap() {
-    const { allTeams } = useStaticQuery(teamQuery)
-
-    // Create a map of team names to crest data for quick lookup
-    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
-        acc[team.name] = team.crest?.data?.attributes?.url
-        return acc
-    }, {})
-
-    return teamCrestMap
+/** Team name -> crest URL. */
+export default function useTeamCrestMap(): typeof teamCrests {
+    return teamCrests
 }

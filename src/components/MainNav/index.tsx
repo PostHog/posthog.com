@@ -19,7 +19,6 @@ import {
 import { Placement } from '@popperjs/core'
 import * as icons from '@posthog/icons'
 import { IconExternal } from '@posthog/icons'
-import { useLocation } from '@reach/router'
 import { CallToAction } from 'components/CallToAction'
 import { useLayoutData } from 'components/Layout/hooks'
 import { SignupCTA } from 'components/SignupCTA'
@@ -36,6 +35,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
+import { useLocation } from 'lib/navigation'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -63,7 +63,7 @@ export default function Orders() {
     const [orders, setOrders] = useState([])
 
     const fetchOrders = async () => {
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
+        const { data } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/orders`, {
             headers: {
                 Authorization: `Bearer ${await getJwt()}`,
             },

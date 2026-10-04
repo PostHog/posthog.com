@@ -13,7 +13,6 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
-import { navigate } from 'gatsby'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
@@ -29,10 +28,14 @@ import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch, AlgoliaSearchResults } from 'components/Search/InlineSearch'
+import { navigate } from 'lib/navigation'
 dayjs.extend(relativeTime)
 
-// lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
-const Lottie = typeof window !== 'undefined' ? lazy(() => import('lottie-react')) : () => null
+// The Lottie player bundles a renderer; load it on demand instead of on every page.
+const DotLottiePlayer =
+    typeof window !== 'undefined'
+        ? lazy(() => import('@dotlottie/react-player').then((module) => ({ default: module.DotLottiePlayer })))
+        : () => null
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
     const { user } = useUser()
@@ -362,8 +365,8 @@ const QuestionToolbar = ({
                                                         ? 'rotate-90'
                                                         : '-rotate-90'
                                                     : expandable
-                                                    ? 'rotate-180'
-                                                    : ''
+                                                      ? 'rotate-180'
+                                                      : ''
                                             }`}
                                         />
                                     }
@@ -635,16 +638,22 @@ export default function Inbox(props) {
                                             {isLoading && (
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Suspense fallback={null}>
-                                                        <Lottie
-                                                            animationData={hourglassAnimation}
+                                                        <div
                                                             className="size-6 opacity-75 dark:hidden"
                                                             title="Loading questions..."
-                                                        />
-                                                        <Lottie
-                                                            animationData={hourglassAnimationWhite}
+                                                        >
+                                                            <DotLottiePlayer src={hourglassAnimation} loop autoplay />
+                                                        </div>
+                                                        <div
                                                             className="size-6 opacity-75 hidden dark:block"
                                                             title="Loading questions..."
-                                                        />
+                                                        >
+                                                            <DotLottiePlayer
+                                                                src={hourglassAnimationWhite}
+                                                                loop
+                                                                autoplay
+                                                            />
+                                                        </div>
                                                     </Suspense>
                                                 </div>
                                             )}

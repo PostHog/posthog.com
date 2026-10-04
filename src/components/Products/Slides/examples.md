@@ -2,18 +2,22 @@
 
 Here are some examples showing different ways to use the `SlidesTemplate` component for various PostHog products.
 
+Each example builds `data` the same way: the billing products from `@data/products-billing.json`, in the `allProductData.nodes[0].products` shape that `SlidesTemplate` reads, plus `useContentData()` for the questions slide. See `src/views/hog/index.tsx`.
+
 ## Example 1: Simple Product Page (Analytics)
 
 ```tsx
-// src/pages/analytics/index.tsx
+// src/views/analytics/index.tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 const PRODUCT_HANDLE = 'analytics'
 
 export default function AnalyticsPage(): JSX.Element {
-    const data = useStaticQuery(/* standard GraphQL query */)
+    const contentData = useContentData()
+    const data = { allProductData: { nodes: [{ products: billingProductsJson }] }, ...contentData }
     
     // Use all default slides
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
@@ -23,15 +27,17 @@ export default function AnalyticsPage(): JSX.Element {
 ## Example 2: Minimal Product Page (Feature Flags)
 
 ```tsx
-// src/pages/feature-flags/index.tsx
+// src/views/feature-flags/index.tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 const PRODUCT_HANDLE = 'feature_flags'
 
 export default function FeatureFlagsPage(): JSX.Element {
-    const data = useStaticQuery(/* standard GraphQL query */)
+    const contentData = useContentData()
+    const data = { allProductData: { nodes: [{ products: billingProductsJson }] }, ...contentData }
     
     // Only include essential slides
     const slides = createSlideConfig({
@@ -45,15 +51,17 @@ export default function FeatureFlagsPage(): JSX.Element {
 ## Example 3: Reordered Product Page (A/B Testing)
 
 ```tsx
-// src/pages/ab-testing/index.tsx
+// src/views/ab-testing/index.tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 const PRODUCT_HANDLE = 'ab_testing'
 
 export default function ABTestingPage(): JSX.Element {
-    const data = useStaticQuery(/* standard GraphQL query */)
+    const contentData = useContentData()
+    const data = { allProductData: { nodes: [{ products: billingProductsJson }] }, ...contentData }
     
     // Put pricing up front, exclude comparisons
     const slides = createSlideConfig({
@@ -71,17 +79,19 @@ export default function ABTestingPage(): JSX.Element {
 ## Example 4: Custom Slides (Data Warehouse)
 
 ```tsx
-// src/pages/data-warehouse/index.tsx
+// src/views/data-warehouse/index.tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 import { DataSourcesSlide } from './DataSourcesSlide'
 import { IntegrationsSlide } from './IntegrationsSlide'
 
 const PRODUCT_HANDLE = 'data_warehouse'
 
 export default function DataWarehousePage(): JSX.Element {
-    const data = useStaticQuery(/* standard GraphQL query */)
+    const contentData = useContentData()
+    const data = { allProductData: { nodes: [{ products: billingProductsJson }] }, ...contentData }
     
     // Add custom slides specific to data warehouse
     const slides = createSlideConfig({
@@ -108,15 +118,17 @@ export default function DataWarehousePage(): JSX.Element {
 ## Example 5: Enterprise Product Page
 
 ```tsx
-// src/pages/enterprise/index.tsx
+// src/views/enterprise/index.tsx
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
+import billingProductsJson from '@data/products-billing.json'
 
 const PRODUCT_HANDLE = 'enterprise'
 
 export default function EnterprisePage(): JSX.Element {
-    const data = useStaticQuery(/* standard GraphQL query */)
+    const contentData = useContentData()
+    const data = { allProductData: { nodes: [{ products: billingProductsJson }] }, ...contentData }
     
     const slides = createSlideConfig({
         // Different order for enterprise focus

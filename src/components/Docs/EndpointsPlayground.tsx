@@ -5,7 +5,7 @@ import { useApp } from '../../context/App'
 import { IconChevronDown, IconTerminal } from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import OSButton from 'components/OSButton'
-import AutosizeInput from 'react-input-autosize'
+import AutosizeInput from 'components/AutosizeInput'
 
 export interface QueryScenario {
     id: string
@@ -130,8 +130,8 @@ LIMIT 5`,
                 domain === 'docs.example.com'
                     ? ['/getting-started', '/api-reference', '/tutorials', '/changelog', '/faq']
                     : domain === 'app.example.com'
-                    ? ['/dashboard', '/settings', '/projects', '/analytics', '/team']
-                    : ['/pricing', '/features', '/about', '/blog', '/contact']
+                      ? ['/dashboard', '/settings', '/projects', '/analytics', '/team']
+                      : ['/pricing', '/features', '/about', '/blog', '/contact']
             return {
                 results: pages.map((page, i) => ({
                     page,

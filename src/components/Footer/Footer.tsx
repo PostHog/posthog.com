@@ -4,7 +4,7 @@ import { Logo } from '@posthog/brand/logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
 import { GitHub, LinkedIn, YouTube, Twitter } from 'components/Icons/Icons'
-import { useLocation } from '@reach/router'
+import { useLocation } from 'lib/navigation'
 
 const linklist: IProps[] = [
     {

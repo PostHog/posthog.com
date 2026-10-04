@@ -37,7 +37,8 @@
  * const platforms = usePlatformList('docs/revenue-analytics/payment-platforms', 'payment platform')
  */
 
-import { useStaticQuery, graphql } from 'gatsby'
+import platformPagesJson from '@data/content-platform-pages.json'
+import type { PlatformPages } from '~/data-layer/queries/content'
 import { docsMenu } from '../../navs'
 import { getLogo } from '../../constants/logos'
 
@@ -109,40 +110,22 @@ export default function usePlatformList(
     titleSuffix?: string,
     options?: UsePlatformListOptions
 ): Platform[] {
-    const { allMdx } = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { frontmatter: { title: { ne: null } } }) {
-                nodes {
-                    slug
-                    frontmatter {
-                        title
-                        platformLabel
-                        platformLogo
-                        platformIconName
-                        platformSourceType
-                    }
-                }
-            }
-        }
-    `)
-
     const pathPattern = new RegExp(`^${basePath}/[^/]+$`)
 
-    const result = allMdx.nodes
-        .filter((node: any) => {
+    const result = (platformPagesJson as PlatformPages)
+        .filter((node) => {
             if (!pathPattern.test(node.slug)) return false
             if (node.slug === basePath || node.slug.endsWith(`${basePath}/index`)) return false
-            if (options?.platformSourceType && node.frontmatter.platformSourceType !== options.platformSourceType)
-                return false
+            if (options?.platformSourceType && node.platformSourceType !== options.platformSourceType) return false
             return true
         })
-        .map((node: any) => {
+        .map((node) => {
             // Prefer an explicit `platformLabel` when set — the strip-suffix
             // fallback breaks when provider names overlap the suffix (e.g.
             // "Fireworks AI Observability installation" stripping to "Fireworks").
-            let label = node.frontmatter.platformLabel || node.frontmatter.title
+            let label = node.platformLabel || node.title
 
-            if (!node.frontmatter.platformLabel && titleSuffix) {
+            if (!node.platformLabel && titleSuffix) {
                 // Extract versioning content in title (ex: "(v3.6 and below)")
                 const parenMatch = label.match(/\(([^)]+)\)/)
                 const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''
@@ -160,13 +143,13 @@ export default function usePlatformList(
                 url: `/${node.slug}`,
             }
 
-            if (node.frontmatter.platformLogo) {
-                const logoUrl = getLogo(node.frontmatter.platformLogo)
+            if (node.platformLogo) {
+                const logoUrl = getLogo(node.platformLogo)
                 if (logoUrl) {
                     platform.image = logoUrl
                 }
-            } else if (node.frontmatter.platformIconName) {
-                platform.icon = node.frontmatter.platformIconName
+            } else if (node.platformIconName) {
+                platform.icon = node.platformIconName
             }
 
             return platform

@@ -1,6 +1,6 @@
-import { navigate } from 'gatsby'
 import React from 'react'
 import useProduct from './useProduct'
+import { navigate } from 'lib/navigation'
 
 // Define the navigation structure with handles
 const productOSStructure = [

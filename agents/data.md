@@ -9,7 +9,7 @@ PostHog is a multi-product company. Data is stored in structured files in centra
 1. **Tool identity:** `src/data/tools.ts`
    - Build-safe source for shared identity and descriptions
    - Search-only titles, descriptions, and aliases are explicitly named
-   - Used by Gatsby as well as the runtime product hooks
+   - Used by the build (data layer, SEO outputs) as well as the runtime product hooks
    - Include only distinct Tools; duplicate or UI-only product cards stay in runtime data
    - Keep icons, billing, relationships, and presentation content in the existing runtime data
 

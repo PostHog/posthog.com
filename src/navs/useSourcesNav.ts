@@ -1,20 +1,10 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import sources from '@data/sources-nav.json'
 import { SELF_HOSTED_SOURCES } from '../constants/sources'
 
-export default function useSourcesNav(basePath = '/docs/data-warehouse/sources'): { url?: string; name: string }[] {
-    const { allPostHogSource } = useStaticQuery(graphql`
-        query SourcesNav {
-            allPostHogSource(filter: { unreleased: { ne: true } }, sort: { fields: name, order: ASC }) {
-                nodes {
-                    slug
-                    name
-                    beta
-                }
-            }
-        }
-    `)
+type SourceNavItem = { slug: string; name: string; beta?: boolean }
 
-    const managed = allPostHogSource.nodes.map((node: any) => ({
+export function getSourcesNav(basePath = '/docs/data-warehouse/sources'): { url?: string; name: string }[] {
+    const managed = (sources as SourceNavItem[]).map((node) => ({
         url: `${basePath}/${node.slug}`,
         name: node.name,
         ...(node.beta && {
@@ -32,3 +22,5 @@ export default function useSourcesNav(basePath = '/docs/data-warehouse/sources')
 
     return [...managed, { name: 'Self-managed' }, ...selfManaged]
 }
+
+export default getSourcesNav

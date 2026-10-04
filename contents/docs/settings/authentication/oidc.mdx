@@ -6,16 +6,9 @@ availability:
     free: none
     selfServe: none
     enterprise: full
-    features:
-        oidc:
-            free: false
-            selfServe: false
-            boost: false
-            scale: true
-            enterprise: true
 ---
 
-<FeatureAvailability availability={_frontmatter.availability.features.oidc} />
+<FeatureAvailability availability={{ free: false, selfServe: false, boost: false, scale: true, enterprise: true }} />
 
 OpenID Connect (OIDC) enables users to access multiple systems with a single set of credentials. This is helpful for growing organizations that require centralized user management in an Identity Provider (IdP).
 

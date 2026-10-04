@@ -14,8 +14,8 @@ Hogpedia links to first-party sources for its claims. The product docs remain th
 | `contents/hogpedia/talk/*.mdx` | The discussion pages. |
 | `src/templates/Hogpedia.tsx` | The article template. |
 | `src/templates/HogpediaCategory.tsx` | A category listing. |
-| `src/pages/hogpedia/` | The Main Page and the meta pages. |
-| `src/pages/sparks-joy/` | Lists Hogpedia under "Time machine", the section for parody recreations. |
+| `src/views/hogpedia/` | The Main Page and the meta pages. |
+| `src/views/sparks-joy/` | Lists Hogpedia under "Time machine", the section for parody recreations. |
 | `src/components/Hogpedia/` | The skin and the article furniture. |
 
 ## Where the Main Page gets its content
@@ -30,9 +30,9 @@ Hogpedia links to first-party sources for its claims. The product docs remain th
 
 `Special:RecentChanges` reads the PostHog changelog – the same `allRoadmap` records that `/changelog` renders. It lists changes to the software, says so, and links to the repository commit log for edits to the articles themselves.
 
-Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites. The link is in `src/pages/sparks-joy/index.tsx`, alongside the other Time machine profiles. The taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
+Hogpedia is listed on `/sparks-joy` under **Time machine**, the group for parody recreations of old websites. The link is in `src/views/sparks-joy/index.tsx`, alongside the other Time machine profiles. The taskbar's "Things that spark joy" entry is a plain link to the page and has no submenu.
 
-Pages are created in `gatsby/createPages.ts`. Articles are excluded from the generic `Plain` loop there and get their own loop, which also builds a page per category. The frontmatter types are declared in `gatsby/createSchemaCustomization.ts` under `FrontmatterHogpedia`.
+Pages are created by `src/pages/hogpedia/[...slug].astro` and `src/pages/hogpedia/category/[category].astro`, with builders in `src/lib/content/hogpedia.ts`. Articles are their own `hogpedia` content collection, so the generic `Plain` route (`src/pages/[...plain].astro`) never sees them. The frontmatter is validated by the `hogpediaArticle` zod schema in `src/content/schemas.ts`.
 
 ## Adding an article
 
@@ -76,13 +76,13 @@ In the body, use Markdown plus two components:
 
 ## Rules
 
-**Do not invent facts.** Every claim comes from a first-party PostHog file. `contents/handbook/story.md` for the timeline, `contents/docs/glossary.mdx` for definitions, `contents/handbook/company/lore.md` for lore, `src/data/tools.ts` for product names. A figure that changes over time links to its source rather than repeating the number.
+**Do not invent facts.** Every claim comes from a first-party PostHog file. `contents/handbook/story.mdx` for the timeline, `contents/docs/glossary.mdx` for definitions, `contents/handbook/company/lore.mdx` for lore, `src/data/tools.ts` for product names. A figure that changes over time links to its source rather than repeating the number.
 
 **No dead links.** Hogpedia has no red links. Link only to an article that exists. A sidebar or tab item with nothing behind it renders as plain text, not as a link. The hand-written Main Page modules are filtered against the live article index, so a rename cannot leave a broken link behind. A build-time link check covers the rest.
 
 **Never `import * as` from `@posthog/brand/hoggies`.** An article names its hog as a string, so the component is looked up at run time – but a namespace import defeats tree-shaking and pulls all 130-odd illustrations into every page that renders one. Each one inlines its own SVG path data, on the order of 240 KB of module source. That added about 8 MB of JavaScript before `hogs.ts` existed. To use a new illustration in an infobox, add a named import and an entry to the `HOGS` registry in `src/components/Hogpedia/hogs.ts`.
 
-The Main Page's "Featured hog" rotates through the same registry for the same reason, so it adds no weight. Widening it to the whole library needs the illustrations served as images rather than inlined: `@posthog/brand/hoggies/png` exports URLs that would be free, but Gatsby's webpack rules turn the referenced file into a JS module and the package's own `new URL()` resolves to that module instead of the image, so it needs a webpack asset rule first.
+The Main Page's "Featured hog" rotates through the same registry for the same reason, so it adds no weight. Widening it to the whole library needs the illustrations served as images rather than inlined: `@posthog/brand/hoggies/png` exports URLs that would be free (each module resolves its image with `new URL('./<name>.png', import.meta.url)`). Nothing on the site uses them yet, so check that Vite resolves those URLs to the image files, in `pnpm start` and in `pnpm build`, before you rely on them.
 
 **Centre illustrations with auto margins, not `text-align`.** Tailwind's preflight sets `img, svg { display: block }` site-wide, so `text-align: center` on a container does nothing to the image inside it.
 
@@ -113,7 +113,7 @@ A screenshot at a fixed viewport width does not prove a container query. Drag-re
 Three things read live state rather than fake it:
 
 - **`[edit]`, "view source" and "history"** build GitHub URLs from the article's own `relativePath`. They open the real file.
-- **Special:RecentChanges** reads the commit log via `gatsby-source-git-metadata`. That plugin needs `GITHUB_API_KEY` and attaches nothing without one, so the page has an honest empty state that links to GitHub. Never fall back to `gitLogLatestDate` for a "last modified" line: the plugin defaults it to the current time, so it would print today's date for every article.
+- **Special:RecentChanges** reads the shipped Strapi `Roadmap` entries through the `roadmap-recent-changes` query in `src/data-layer/queries/roadmap.ts`. A build without Strapi yields nothing, so the page has an honest empty state that links to GitHub. Never use a content node's `parent.fields.gitLogLatestDate` for a "last modified" line: `src/data-layer/content.ts` sets it to the build time, so it would print today's date for every article. Real commit dates are in the `GitMetadata` nodes (`gitMetadataSource` in `src/data-layer/sources/github.ts`), which need `GITHUB_API_KEY`.
 - **Special:Random** server-renders a full article list and jumps to a random one on mount. Never pick a random value during render – it would differ between server and client.
 
 For the same reason, the Main Page's rotating modules derive their choice from the date, in `MainPageModules.tsx`.

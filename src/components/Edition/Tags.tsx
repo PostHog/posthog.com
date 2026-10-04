@@ -1,8 +1,8 @@
-import { navigate } from 'gatsby'
 import React, { useContext } from 'react'
 import { PostsContext } from './Posts'
 import * as Icons from '@posthog/icons'
 import Slider from 'components/Slider'
+import { navigate } from 'lib/navigation'
 
 const Tag = ({ name, active, onClick, icon, color }) => {
     const Icon = Icons[icon]
@@ -46,7 +46,7 @@ export default function Tags() {
                         },
                         active: !tag,
                     },
-                    ...activeMenu?.children,
+                    ...(activeMenu?.children ?? []),
                 ].map((menuItem, index) => {
                     return (
                         <Tag

@@ -10,8 +10,8 @@ export const getPluginImageSrc = (plugin: LibraryPluginType): string | null =>
     plugin.imageLink
         ? plugin.imageLink
         : plugin.url.includes('github')
-        ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
-        : null
+          ? `https://raw.githubusercontent.com/${plugin.url.split('hub.com/')[1]}/main/logo.png`
+          : null
 
 export const getCookie = (name: string): string | null => {
     let cookieValue = null
@@ -39,12 +39,6 @@ export const setCookie = (name: string, value: string, days: number, domain?: st
     const domainStr = domain ? `; domain=${domain}` : ''
     document.cookie = name + '=' + (value || '') + expires + domainStr + '; path=/'
 }
-
-export const generateRandomHtmlId = (): string =>
-    Math.random()
-        .toString(36)
-        .replace(/[^a-z]+/g, '')
-        .substr(2, 10)
 
 export const mergeClassList = (...args: (string | null | undefined | false)[]): string =>
     args.filter((classList) => !!classList).join(' ')
@@ -96,7 +90,7 @@ export const isURL = (s: string): boolean => {
 
 // Guard for `navigate()` targets that arrive from cross-window postMessage. Only
 // same-origin absolute paths like "/docs/foo" are allowed. This blocks "javascript:"
-// and "data:" URLs (which Gatsby's navigate() would run via window.location, giving
+// and "data:" URLs (which navigate() would run via window.location, giving
 // XSS) as well as "//" and "/\" host paths (open redirect) from an untrusted sender.
 export const isSafeInternalPath = (path: unknown): path is string => {
     if (typeof path !== 'string' || !path.startsWith('/') || /^\/[/\\]/.test(path)) {

@@ -4,7 +4,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import { getParams, getSortOption, sortOptions } from '../BlogPost'
 import { IconBookmark, IconBookmarkSolid, IconChevronLeft, IconSort, IconSpinner } from '@posthog/icons'
-import { Sidebar as FoundersSidebar } from '../../pages/founders'
+import { Sidebar as FoundersSidebar } from '../../views/founders'
 import { useUser } from '../../hooks/useUser'
 import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
@@ -47,11 +47,15 @@ const Post = ({ post }: { post: any }) => {
     )
 }
 
-export default function Tag({
-    pageContext: { root, selectedTag, title },
-}: {
-    pageContext: { root: string; selectedTag: string }
-}) {
+export interface HubTagProps {
+    /** The hub folder: "founders" or "product-engineers". */
+    root: string
+    /** The tag label. */
+    selectedTag: string
+    title: string
+}
+
+export default function Tag({ root, selectedTag, title }: HubTagProps) {
     const [sort, setSort] = useState(getSortOption(root))
     const [params, setParams] = useState(getParams(root, selectedTag, getSortOption(root).sort))
     const { posts, isLoading, isValidating, fetchMore, hasMore } = usePosts({ params })

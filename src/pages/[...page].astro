@@ -1,0 +1,31 @@
+---
+// Pages from src/views (see src/lib/routes/views.ts). Content routes such as /docs/* have their
+// own route files; Astro prefers those for the URLs they build.
+import PageIsland from '../islands/PageIsland.astro'
+import Site from '../layouts/Site.astro'
+import { type ViewRoute, viewRoutes } from '../lib/routes/views'
+import { viewData } from '../lib/routes/viewData'
+
+export function getStaticPaths() {
+    return viewRoutes
+        .filter((route) => route.path !== '/404')
+        .map((route) => ({ params: { page: route.path === '/' ? undefined : route.path.slice(1) }, props: { route } }))
+}
+
+interface Props {
+    route: ViewRoute
+}
+
+const { route } = Astro.props
+const data = await viewData(route.module)
+// Views that render a `pages` entry (about, media) get its MDX module as `data.body`.
+const body = (data as { body?: unknown } | undefined)?.body
+---
+
+<Site>
+    <PageIsland
+        module={route.module}
+        props={{ data, pageContext: {}, params: {} }}
+        content={typeof body === 'string' ? body : undefined}
+    />
+</Site>

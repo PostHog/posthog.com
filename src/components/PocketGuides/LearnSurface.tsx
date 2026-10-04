@@ -1,40 +1,14 @@
 import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
-
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
+import { MDXRenderer } from 'components/MDXRenderer'
+import pocketGuidesJson from '@data/content-pocket-guides.json'
+import type { PocketGuidePages } from '~/data-layer/queries/content'
 
-interface LearnBodyNode {
-    body: string
-    fields: { slug: string }
-}
-
-/** Every guide body by url; `useStaticQuery` takes no variables, so read the whole shelf. */
-function useBookBodies(): Map<string, string> {
-    const data = useStaticQuery(graphql`
-        query PocketGuideLearnBodiesQuery {
-            pages: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
-                nodes {
-                    body
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-    return React.useMemo(() => {
-        const map = new Map<string, string>()
-        ;(data?.pages?.nodes ?? []).forEach((node: LearnBodyNode) => {
-            if (node?.fields?.slug) {
-                map.set(normalizeUrl(node.fields.slug), node.body)
-            }
-        })
-        return map
-    }, [data])
-}
+/** A guide's content module, by url. */
+const bodyFor = (url: string): string | undefined =>
+    (pocketGuidesJson as PocketGuidePages).find((page) => normalizeUrl(page.slug) === normalizeUrl(url))?.id
 
 interface LearnSurfaceProps {
     volumeId: string
@@ -47,7 +21,6 @@ interface LearnSurfaceProps {
 /** One chapter of a volume, rendered in the docs reader. */
 export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfaceProps): JSX.Element | null {
     const pages = useBookPages(volumeId)
-    const bodies = useBookBodies()
 
     const entry = React.useMemo(() => {
         if (pages.length === 0) {
@@ -57,7 +30,7 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
         return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
     }, [pages, chapter])
 
-    const body = entry && bodies.get(normalizeUrl(entry.url))
+    const body = entry && bodyFor(entry.url)
     if (!entry || !body) {
         return null
     }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
-import groupBy from 'lodash.groupby'
+import groupBy from 'lodash/groupBy'
 import { IconCheck, IconX } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
 import OSButton from 'components/OSButton'
@@ -9,6 +8,10 @@ import Toggle from 'components/Toggle'
 import { SectionComponentProps } from '../types'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Link from 'components/Link'
+import billingProductsJson from '@data/products-billing.json'
+import type { BillingProducts } from '~/data-layer/queries/products'
+
+const billingProducts = billingProductsJson as BillingProducts
 
 type PlanFeatureValue = string | number | boolean
 
@@ -140,7 +143,7 @@ const formatAllocation = (allocation: number | undefined, unit: string | undefin
  *   - Product pricing (tiers, free allocation, per-product features):
  *     useProduct({ handle }) → billing.plans / billing.addons
  *   - Platform-wide features (projects, team members, SSO, etc.):
- *     useStaticQuery → allProductData → type === 'platform_and_support'
+ *     products-billing query → type === 'platform_and_support'
  *     Free plan: included_if === 'no_active_subscription'
  *     Paid plan: included_if === 'has_subscription'
  *     entitlement_only features are filtered out (display-only entitlements).
@@ -174,34 +177,9 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const billing = product?.billingData
     const [showDifferencesOnly, setShowDifferencesOnly] = useState(true)
 
-    const { allProductData } = useStaticQuery(graphql`
-        query PlatformAndSupportFeatures {
-            allProductData {
-                nodes {
-                    products {
-                        type
-                        plans {
-                            plan_key
-                            included_if
-                            features {
-                                key
-                                name
-                                limit
-                                note
-                                unit
-                                entitlement_only
-                                category
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const platformProduct = allProductData?.nodes?.[0]?.products?.find((p: any) => p.type === 'platform_and_support')
-    const platformFreePlan = platformProduct?.plans?.find((p: any) => p.included_if === 'no_active_subscription')
-    const platformPaidPlan = platformProduct?.plans?.find((p: any) => p.included_if === 'has_subscription')
+    const platformProduct = billingProducts.find((p) => p.type === 'platform_and_support')
+    const platformFreePlan = platformProduct?.plans?.find((p) => p.included_if === 'no_active_subscription')
+    const platformPaidPlan = platformProduct?.plans?.find((p) => p.included_if === 'has_subscription')
 
     if (!billing?.plans?.length || !productData) return null
 

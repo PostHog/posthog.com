@@ -4,10 +4,10 @@ Renders the canonical agent skills for one product as a list of cards: skill nam
 the `posthog:*` MCP tools the skill calls (as minimal pills), and a link to the SKILL.md source
 on GitHub.
 
-Data comes from the `AgentSkill` GraphQL nodes ingested at build time from the
+Data comes from the `AgentSkill` nodes ingested at build time from the
 [PostHog monorepo](https://github.com/PostHog/posthog) (`products/<product>/skills/<name>/SKILL.md`)
-via the `posthog-main-repo` `gatsby-source-git` source – see `gatsby/onCreateNode.ts` and
-`useAgentSkills()` in `src/hooks/skills.tsx`. The list updates automatically on every site build;
+via the sparse clone in `.cache/posthog-main-repo` – see `agentSkillSource` in
+`src/data-layer/sources/local.ts` and `useAgentSkills()` in `src/hooks/skills.tsx`. The list updates automatically on every site build;
 nothing here is hand-maintained.
 
 Installation guidance lives in the docs page prose and points at the

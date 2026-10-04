@@ -169,7 +169,7 @@ Example reading CLI credentials from a gitignored `.env` file at build time:
 }
 ```
 
-```bash file=.env
+```bash file=".env"
 POSTHOG_CLI_API_KEY=phx_your_personal_api_key
 POSTHOG_CLI_PROJECT_ID=12345
 # EU Cloud only
@@ -298,11 +298,11 @@ In Xcode, add a **Run Script** build phase to your main app target and place it 
 
 <MultiLanguage>
 
-```bash file=CocoaPods
+```bash file="CocoaPods"
 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager
+```bash file="Swift Package Manager"
 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
@@ -317,11 +317,11 @@ To also upload native source files for source-code context (iOS only), prefix th
 
 <MultiLanguage>
 
-```bash file=CocoaPods
+```bash file="CocoaPods"
 POSTHOG_INCLUDE_SOURCE=1 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager
+```bash file="Swift Package Manager"
 POSTHOG_INCLUDE_SOURCE=1 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
@@ -333,7 +333,7 @@ This is the same flow as the [iOS dSYM upload guide](/docs/error-tracking/upload
 
 In `android/build.gradle`, add the [PostHog Android Gradle plugin](/docs/error-tracking/upload-mappings/android) to your `buildscript` dependencies (and make sure `mavenCentral()` is in the `buildscript` repositories):
 
-```gradle file=android/build.gradle
+```gradle file="android/build.gradle"
 buildscript {
     repositories {
         mavenCentral()
@@ -346,7 +346,7 @@ buildscript {
 
 Then apply the plugin in `android/app/build.gradle`:
 
-```gradle file=android/app/build.gradle
+```gradle file="android/app/build.gradle"
 apply plugin: "com.posthog.android"
 ```
 
@@ -354,7 +354,7 @@ The plugin uploads ProGuard/R8 mapping files and injects a matching map-id durin
 
 If you enable `androidNdkCrashes`, also upload the `.so` debug symbols so NDK crash stack traces resolve. This needs the Gradle plugin 1.5.0 or later. Enable the upload in `android/app/build.gradle`:
 
-```gradle file=android/app/build.gradle
+```gradle file="android/app/build.gradle"
 posthog {
     uploadNativeSymbols.set(true)
 }

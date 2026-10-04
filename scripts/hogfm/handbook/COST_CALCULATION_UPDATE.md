@@ -112,7 +112,7 @@ uv sync
 Cost tracking is automatic:
 
 ```bash
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 ```
 
 Output:

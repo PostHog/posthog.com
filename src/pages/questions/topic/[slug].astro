@@ -1,0 +1,26 @@
+---
+// Forum topic pages: one per Squeak topic. /questions/topic/max is a view.
+import PageIsland from '../../../islands/PageIsland.astro'
+import Site from '../../../layouts/Site.astro'
+import { nodes } from '../../../data-layer'
+import type { SqueakTopicNode } from '../../../data-layer/types'
+import { isViewPath } from '../../../lib/routes/views'
+import type { QuestionsTopicProps } from '../../../templates/QuestionsTopic'
+import { MINIMAL_BUILD } from '../../../data-layer/env'
+
+export function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return nodes<SqueakTopicNode>('SqueakTopic')
+        .filter((topic) => topic.slug && !isViewPath(`/questions/topic/${topic.slug}`))
+        .map(({ id, squeakId, label, slug }) => ({
+            params: { slug },
+            props: { data: { topic: { id, squeakId, label } } } satisfies QuestionsTopicProps,
+        }))
+}
+
+type Props = QuestionsTopicProps
+---
+
+<Site>
+    <PageIsland module="/src/templates/QuestionsTopic.tsx" props={Astro.props} />
+</Site>

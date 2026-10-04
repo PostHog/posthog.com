@@ -1,8 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
-import { StaticImage } from 'gatsby-plugin-image'
 import ReactCountryFlag from 'react-country-flag'
 import Stickers from 'components/ProfileStickers'
 import useTeam from 'hooks/useTeam'
@@ -10,13 +8,14 @@ import { IconCake } from '@posthog/icons'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import Link from 'components/Link'
+import profilesJson from '@data/people-profiles.json'
+import type { Profile, Profiles } from '~/data-layer/queries/people'
 
-const TeamMemberLink = (person) => {
-    const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, color } =
+const profiles = profilesJson as Profiles
+
+const TeamMemberLink = (person: Profile) => {
+    const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teamName, isTeamLead, color } =
         person ?? {}
-
-    const teamName = teams?.data?.[0]?.attributes?.name
-    const isTeamLead = leadTeams.data.length > 0
     const teamURL = teamName ? `/teams/${slugify(teamName, { lower: true })}` : undefined
 
     return (
@@ -29,11 +28,7 @@ const TeamMemberLink = (person) => {
                         }`}
                     >
                         {person ? (
-                            <img
-                                src={avatar?.formats?.thumbnail?.url}
-                                alt={`${firstName} ${lastName}`}
-                                className="size-24"
-                            />
+                            <img src={avatar ?? undefined} alt={`${firstName} ${lastName}`} className="size-24" />
                         ) : (
                             <CloudinaryImage
                                 alt=""
@@ -44,7 +39,7 @@ const TeamMemberLink = (person) => {
                         )}
                     </div>
                 </div>
-                <strong>{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</strong>
+                <strong>{[firstName, lastName].filter(Boolean).join(' ')}</strong>
             </a>
 
             <div className="text-sm">
@@ -52,7 +47,7 @@ const TeamMemberLink = (person) => {
                 {teamName && (
                     <div className="text-[13px]">
                         <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
-                        <Link to={teamURL} state={{ newWindow: true }} className="font-semibold underline">
+                        <Link to={teamURL!} state={{ newWindow: true }} className="font-semibold underline">
                             {teamName} Team
                         </Link>
                     </div>
@@ -60,11 +55,12 @@ const TeamMemberLink = (person) => {
             </div>
 
             <div className="mt-2 flex space-x-1 justify-center">
+                {/* Stickers handles missing values, but its props are typed as required. */}
                 <Stickers
-                    country={country}
-                    location={person.location}
+                    country={country as string}
+                    location={person.location as string}
                     isTeamLead={isTeamLead}
-                    pineappleOnPizza={pineappleOnPizza}
+                    pineappleOnPizza={pineappleOnPizza as boolean}
                 />
             </div>
             <div>
@@ -78,45 +74,7 @@ const TeamMemberLink = (person) => {
 }
 
 const TeamMember: React.FC<{ name: string }> = ({ name }) => {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                    companyRole
-                    location
-                    country
-                    startDate
-                    color
-                    leadTeams {
-                        data {
-                            id
-                        }
-                    }
-                    teams {
-                        data {
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const person = nodes.find(
+    const person = profiles.find(
         ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 

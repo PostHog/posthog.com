@@ -20,7 +20,7 @@ import NuxtInstall from "../integrate/_snippets/install-nuxt.mdx"
 
 PostHog can then be accessed throughout your Nuxt.js using the provider accessor, for example:
 
-```vue filename=index.vue
+```vue file="index.vue"
 <script setup>
    const { $posthog } = useNuxtApp()
    if ($posthog) {
@@ -52,7 +52,7 @@ import InstallNodePackageManagers from "../integrate/_snippets/install-node-pack
 
 Add your PostHog API key and host to your `nuxt.config.js` file, reading them from environment variables. If you've already done this when adding PostHog to the client side, you can skip this step.
 
-```js file=nuxt.config.js
+```js file="nuxt.config.js"
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
 
 Initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [server route](https://nuxt.com/docs/guide/directory-structure/server#server-routes):
 
-```js file=server/api/example.js focusOnLines=7-27
+```js file="server/api/example.js" focusOnLines="7-27"
 export default defineEventHandler(async (event) => {
   const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogToken}_posthog`)
   const distinctID = rawCookie ? JSON.parse(rawCookie)?.distinct_id : undefined

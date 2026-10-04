@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import usePostHog from './usePostHog'
+import earlyAccessFeaturesJson from '@data/roadmap-early-access-features.json'
+import type { StaticEarlyAccessFeatures } from '~/data-layer/queries/roadmap'
 
 export type EarlyAccessFeatureStage = 'concept' | 'alpha' | 'beta' | 'general-availability'
 
@@ -19,7 +20,7 @@ export interface EarlyAccessFeature {
     createdAt?: number
     /**
      * Signups on the linked waitlist survey, aggregated at build time (needs a personal API
-     * key — see gatsby/sourceNodes.ts). Null/undefined when unknown.
+     * key — see src/data-layer/sources/strapi.ts). Null/undefined when unknown.
      */
     waitlistCount?: number | null
     /**
@@ -89,7 +90,7 @@ interface UseEarlyAccessFeaturesResult {
 
 /**
  * PostHog Early Access Features, grouped by stage. Stale-while-revalidate:
- *  - Seeded from build-time nodes (`gatsby/sourceNodes.ts` → `EarlyAccessFeature`), so the
+ *  - Seeded from build-time nodes (the `roadmap-early-access-features` query), so the
  *    list server-renders instantly and is indexable.
  *  - Revalidated client-side via posthog-js once it loads, so features added in-app since
  *    the last deploy still appear without a rebuild.
@@ -102,30 +103,10 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
     const { stages = DEFAULT_STAGES, forceReload = true } = options
     const posthog = usePostHog()
 
-    const staticData = useStaticQuery(graphql`
-        query EarlyAccessFeaturesQuery {
-            allEarlyAccessFeature {
-                nodes {
-                    name
-                    description
-                    stage
-                    documentationUrl
-                    flagKey
-                    featureId
-                    waitlistCount
-                    payload
-                    assignee {
-                        type
-                        name
-                    }
-                }
-            }
-        }
-    `)
-    const staticFeatures: EarlyAccessFeature[] = (staticData?.allEarlyAccessFeature?.nodes || []).map(
-        (node: EarlyAccessFeature & { featureId?: string }) => ({
-            ...node,
-            createdAt: createdAtFromId(node.featureId),
+    const staticFeatures: EarlyAccessFeature[] = (earlyAccessFeaturesJson as StaticEarlyAccessFeatures).map(
+        ({ featureId, ...feature }) => ({
+            ...(feature as Omit<EarlyAccessFeature, 'createdAt'>),
+            createdAt: createdAtFromId(featureId),
         })
     )
 
@@ -142,7 +123,7 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
         }
 
         // Attach each feature's waitlist survey by matching the survey's linked_flag_key to
-        // the feature's flagKey (mirrors the build-time join in gatsby/sourceNodes.ts).
+        // the feature's flagKey (mirrors the build-time join in src/data-layer/sources/strapi.ts).
         // Explicit payload from the feature wins; the flag-key join is the fallback.
         const applyFeatures = (result: EarlyAccessFeature[]) => {
             // Keep the build-time list when the live response is empty/invalid.

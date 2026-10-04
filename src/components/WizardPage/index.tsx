@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
@@ -13,6 +12,10 @@ import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
+import wizardPageJson from '@data/content-wizard-page.json'
+import type { EditorPage } from '~/data-layer/queries/content'
+
+const wizardPage = wizardPageJson as EditorPage
 
 function WizardHeader(): JSX.Element {
     return (
@@ -301,17 +304,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 
-export default function Wizard() {
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "wizard" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
+export default function Wizard(): JSX.Element {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -330,8 +323,8 @@ export default function Wizard() {
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
-                mdxBody={mdxBody}
+                body={wizardPage.rawBody}
+                mdxBody={wizardPage.body ?? undefined}
                 maxWidth={900}
             />
         </>

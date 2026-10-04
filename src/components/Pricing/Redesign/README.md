@@ -62,7 +62,7 @@ The green highlight on "for free." uses `bg-green/25` with `text-green-dark` / `
 
 The source is already transparent. Cloudinary trims its empty margins, caps it at 800px, and serves an optimized format. It stays a plain `<img>` because the transformation chain is part of the URL.
 
-**Also don't reach for `StaticImage` or `GatsbyImage` here.** This repo lists `gatsby-plugin-image` in `gatsby-config.js` but *not* `gatsby-plugin-sharp`, so any use of those components fails the build with `ERROR #11321 – Gatsby-plugin-sharp wasn't setup correctly`. Several files import `StaticImage` without ever rendering it, which makes it look supported when it isn't. (The grass tufts still use direct webpack imports from `src/images/`; `src/custom.d.ts` declares `*.png` so those type-check.)
+**No need for `ResponsiveImage` here.** `StaticImage` no longer exists, and `ResponsiveImage` (`components/Image`) renders `ResponsiveImageData` from the data layer inside a wrapper `div`, which adds nothing for a single Cloudinary URL. (The grass tufts use direct Vite imports from `src/images/`; `src/custom.d.ts` declares `*.png` so those type-check.)
 
 **Backdrop:** the dotted panel uses the `.paper-desk` class added at the bottom of `src/styles/global.css`, ported from the `.PaperDesk` rule on the PostHog app's login screen — a non-repeating warm glow layered over a repeating 16px dot grid. It's plain CSS rather than Tailwind because a two-layer background with per-layer `background-repeat` and `background-size` is unreadable as arbitrary utilities, and it needs a `.dark` override (light dots on dark instead of dark dots on light).
 
@@ -173,7 +173,7 @@ The notch needs room above the panel or `overflow-hidden` clips it — that's wh
 
 Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto` transition (not `RadixUI/Accordion`), content mounted only after the first open, and `invisible` once collapsed so its links leave the tab order.
 
-**The CTA is still a `<Link to="/platform-packages">`** whose `onClick` calls `preventDefault`. Gatsby's `Link` skips navigating when the event is already default-prevented, so that's the whole opt-out — and because the `to` is real, cmd-click, middle-click, and the "Open in new PostHog window" context menu still open the page. It carries `aria-expanded` and `aria-controls` for the panel.
+**The CTA is still a `<Link to="/platform-packages">`** whose `onClick` calls `preventDefault`. The `Link` in `lib/navigation` skips navigating when the event is already default-prevented, so that's the whole opt-out. Because the `to` is real, cmd-click, middle-click, and the "Open in new PostHog window" context menu still open the page. It carries `aria-expanded` and `aria-controls` for the panel.
 
 **Panel content comes from `Platform/PlatformPackageComparison`,** two components (`PlatformPackageList`, `PlatformFeatureTable`) extracted from the `/platform-packages` page so the prices and feature lists exist once. The page keeps its own intro and "get started" copy; the panel has neither, and doesn't link out to the page for them either. The panel answers the question the CTA asked and stops — the card's own CTA is the way to the page, for anyone who wants it.
 

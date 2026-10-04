@@ -28,7 +28,7 @@ Kotlin Multiplatform apps produce different debug symbols for each target. Confi
 
 If your Android release uses ProGuard or R8, apply the PostHog Android Gradle plugin to the Android application module. The plugin injects a mapping ID into the app and uploads the matching mapping file during the Gradle build.
 
-```kotlin file=androidApp/build.gradle.kts
+```kotlin file="androidApp/build.gradle.kts"
 plugins {
     id("com.android.application")
     id("com.posthog.android") version "<version>"

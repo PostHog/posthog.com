@@ -51,7 +51,7 @@ Create a file named `proxy.js`:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 const API_HOST = 'us.i.posthog.com'
 const ASSET_HOST = 'us-assets.i.posthog.com'
 
@@ -123,7 +123,7 @@ export default function proxy({ prefix }) {
 }
 ```
 
-```js file=EU
+```js file="EU"
 const API_HOST = 'eu.i.posthog.com'
 const ASSET_HOST = 'eu-assets.i.posthog.com'
 
@@ -277,14 +277,14 @@ In your application code, update your PostHog initialization:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:3000/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'http://localhost:3000/yourpath',
   ui_host: 'https://eu.posthog.com'

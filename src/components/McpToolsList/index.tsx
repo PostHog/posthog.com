@@ -1,5 +1,6 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import mcpToolsJson from '@data/products-mcp-tools.json'
+import type { McpTools } from '~/data-layer/queries/products'
 import Link from 'components/Link'
 
 type McpTool = {
@@ -56,18 +57,8 @@ const AIO_FAMILIES: Family[] = [
     { title: 'Summarization', description: 'AI trace summarization', match: ['llma-summarization-'] },
 ]
 
-const allMcpToolsQuery = graphql`
-    query {
-        allMcpTool {
-            nodes {
-                name
-                title
-                summary
-                feature
-            }
-        }
-    }
-`
+// Every MCP tool, A to Z by name.
+const allMcpTools = mcpToolsJson as McpTools
 
 type McpToolsListProps = {
     /** Feature tag in the MCP schema to list tools for, e.g. "llm_analytics" */
@@ -77,10 +68,7 @@ type McpToolsListProps = {
 }
 
 export default function McpToolsList({ feature, families = AIO_FAMILIES }: McpToolsListProps): JSX.Element {
-    const data = useStaticQuery(allMcpToolsQuery)
-    const tools = ((data?.allMcpTool?.nodes ?? []) as McpTool[])
-        .filter((tool) => tool.feature === feature)
-        .sort((a, b) => a.name.localeCompare(b.name))
+    const tools: McpTool[] = allMcpTools.filter((tool) => tool.feature === feature)
 
     if (tools.length === 0) {
         // Builds without network access source no tools – point at the schema instead of rendering nothing

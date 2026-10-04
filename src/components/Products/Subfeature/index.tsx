@@ -1,6 +1,6 @@
 import React from 'react'
 import * as PostHogIcons from '@posthog/icons'
-import { IFeature, IFeatureGridProps } from '../../../types'
+import type { IFeature, IFeatureGridProps } from '../../../types'
 
 export const FeatureTitle = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
     <h3 className={`text-[17px] mb-1 leading-tight ${className}`}>{children}</h3>

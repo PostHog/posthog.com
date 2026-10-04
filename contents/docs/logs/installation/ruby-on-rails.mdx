@@ -15,7 +15,7 @@ import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
 Add the following gems to your `Gemfile` with `require: false` — `posthog-rails` loads them only when log forwarding is enabled:
 
-```ruby file=Gemfile
+```ruby file="Gemfile"
 gem 'opentelemetry-sdk', require: false
 gem 'opentelemetry-logs-sdk', '>= 0.6.0', require: false
 gem 'opentelemetry-exporter-otlp-logs', require: false
@@ -35,7 +35,7 @@ bundle install
 
 In `config/initializers/posthog.rb`, enable log forwarding:
 
-```ruby file=config/initializers/posthog.rb
+```ruby file="config/initializers/posthog.rb"
 PostHog::Rails.configure do |config|
   config.logs_enabled = true
 end

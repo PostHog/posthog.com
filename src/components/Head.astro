@@ -1,0 +1,78 @@
+---
+// The tags every page's <head> carries: the page's own SEO data (from <SEO>, see src/lib/head.ts)
+// plus the site-wide feed, sitemap, and manifest links.
+import { isMarkdownContentPath } from '../constants'
+import { type HeadData, siteMetadata } from '../lib/head'
+
+interface Props {
+    head: HeadData
+    pathname: string
+}
+
+const { head, pathname } = Astro.props
+const { siteUrl, twitterUsername } = siteMetadata
+// PostHog's AT Protocol identity, used for Standard.site discovery links
+const STANDARD_SITE_DID = 'did:plc:go7eemqz4y5nhonj4kg5w2p6'
+const posthogInit = import.meta.env.PUBLIC_POSTHOG_API_KEY && import.meta.env.PUBLIC_POSTHOG_API_HOST
+const originTrialToken = import.meta.env.PUBLIC_WEBMCP_ORIGIN_TRIAL_TOKEN
+---
+
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="naver-site-verification" content="a58db4b98c2bf9e4b52a4aa0c20fcf1fcdab2793" />
+<title>{head.title}</title>
+{head.noindex && <meta name="robots" content="noindex" />}
+<meta name="description" content={head.description} />
+{head.image && <meta name="image" content={head.image} />}
+<link rel="canonical" href={head.canonical} />
+{pathname.startsWith('/blog') && (
+    <link rel="site.standard.publication" href={`at://${STANDARD_SITE_DID}/site.standard.publication/blog`} />
+)}
+{head.documentRkey && (
+    <link rel="site.standard.document" href={`at://${STANDARD_SITE_DID}/site.standard.document/${head.documentRkey}`} />
+)}
+{head.languageAlternates.map(({ hrefLang, href }) => (
+    <link rel="alternate" hreflang={hrefLang} href={href} />
+))}
+<!-- Site-wide signpost so LLM crawlers on any page can discover the Markdown index. -->
+<link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
+{isMarkdownContentPath(pathname) && (
+    <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
+)}
+<link rel="alternate" type="application/rss+xml" title="PostHog's RSS Feed" href="/rss.xml" />
+{pathname.startsWith('/changelog') && (
+    <link rel="alternate" type="application/rss+xml" title="PostHog Changelog" href="/changelog.rss" />
+)}
+<link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#E5E7E0" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+{[48, 72, 96, 144, 192, 256, 384, 512].map((size) => (
+    <link rel="apple-touch-icon" sizes={`${size}x${size}`} href={`/icons/icon-${size}x${size}.png`} />
+))}
+
+<meta property="og:url" content={head.url} />
+<meta property="og:type" content={head.article ? 'article' : 'website'} />
+<meta property="og:title" content={head.title} />
+<meta property="og:description" content={head.description} />
+{head.image && <meta property="og:image" content={head.image} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content={twitterUsername} />
+<meta name="twitter:title" content={head.title} />
+<meta name="twitter:description" content={head.description} />
+{head.image && <meta name="twitter:image" content={head.image} />}
+<meta name="twitter:site" content="@PostHog" />
+{head.structuredData.map((item) => (
+    <script type="application/ld+json" set:html={JSON.stringify(item)} />
+))}
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/squeak-bold-webfont.woff2" crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff" href="/fonts/squeak-bold-webfont.woff" crossorigin="anonymous" />
+{posthogInit && <script is:inline src="/scripts/posthog-init.js" />}
+{
+    /* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext is
+       undefined for visitors and the tools in components/WebMCP register nothing. */
+    originTrialToken && <meta http-equiv="origin-trial" content={originTrialToken} />
+}

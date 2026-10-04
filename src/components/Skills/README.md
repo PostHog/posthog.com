@@ -46,10 +46,11 @@ with gaps filled from the ingested monorepo skills (see below).
 ## Canonical skills ingestion
 
 `products/*/skills/*/SKILL.md` from the [monorepo](https://github.com/PostHog/posthog) are
-pulled at build time (via the `posthog-main-repo` `gatsby-source-git` patterns) and parsed
-into `AgentSkill` nodes in [`gatsby/onCreateNode.ts`](../../../gatsby/onCreateNode.ts) (typed
-in `gatsby/createSchemaCustomization.ts`). They are blocked from MDX transformation, so they
-never create pages. `useAgentSkills()` / `useFlowToolResolver()` expose them — currently used
+pulled at build time (via the sparse clone in `.cache/posthog-main-repo`, see
+[`src/data-layer/posthogRepo.ts`](../../data-layer/posthogRepo.ts)) and parsed into `AgentSkill`
+nodes by `agentSkillSource` in [`src/data-layer/sources/local.ts`](../../data-layer/sources/local.ts)
+(typed as `AgentSkillNode` in `src/data-layer/types.ts`). They are outside the content
+collections, so they never create pages. `useAgentSkills()` / `useFlowToolResolver()` expose them, currently used
 to enrich the `flow`-tool → product mapping (`product` folder → posthog.com handle).
 
 ## Components

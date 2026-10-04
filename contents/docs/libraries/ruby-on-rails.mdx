@@ -25,7 +25,7 @@ This guide walks you through integrating PostHog into your Rails app using the [
 
 Add both gems to your Gemfile:
 
-```ruby file=Gemfile
+```ruby file="Gemfile"
 gem 'posthog-ruby', require: 'posthog'
 gem 'posthog-rails'
 ```
@@ -58,7 +58,7 @@ This creates `config/initializers/posthog.rb` with sensible defaults and documen
 
 The generated initializer includes the most common options:
 
-```ruby file=config/initializers/posthog.rb
+```ruby file="config/initializers/posthog.rb"
 # Rails-specific configuration
 PostHog::Rails.configure do |config|
   config.auto_capture_exceptions = true           # Enable automatic exception capture (default: false)
@@ -121,14 +121,14 @@ You can find your project token and instance address in [your project settings](
 > rails credentials:edit
 > ```
 >
-> ```yaml file=config/credentials.yml.enc
+> ```yaml file="config/credentials.yml.enc"
 > posthog:
 >   api_key: <ph_project_token>
 >   host: <ph_client_api_host>
 >   personal_api_key: phx_xxxxxxxxx
 > ```
 >
-> ```ruby file=config/initializers/posthog.rb
+> ```ruby file="config/initializers/posthog.rb"
 > config.api_key = Rails.application.credentials.posthog[:api_key]
 > config.host = Rails.application.credentials.posthog[:host]
 > config.personal_api_key = Rails.application.credentials.posthog[:personal_api_key]
@@ -405,7 +405,7 @@ See our [Ruby SDK docs](/docs/libraries/ruby#local-evaluation) for details on lo
 
 In your test environment, disable network calls with test mode:
 
-```ruby file=config/environments/test.rb
+```ruby file="config/environments/test.rb"
 PostHog.init do |config|
   config.api_key = '<ph_project_token>'
   config.test_mode = true
@@ -414,7 +414,7 @@ end
 
 Or in your specs:
 
-```ruby file=spec/rails_helper.rb
+```ruby file="spec/rails_helper.rb"
 RSpec.configure do |config|
   config.before(:each) do
     allow(PostHog).to receive(:capture)

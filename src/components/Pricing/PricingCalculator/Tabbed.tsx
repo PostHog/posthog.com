@@ -4,8 +4,7 @@ import { IconInfo, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
-import { Link, useStaticQuery } from 'gatsby'
-import { allProductsData } from '../Pricing'
+import { billingProducts } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import UsageSliderRow, { UsageSliderHeader } from './UsageSliderRow'
 import { afterFirstFree, formatCompact, pluralizeUnit } from '../utils'
@@ -26,6 +25,7 @@ import usePostHog from 'hooks/usePostHog'
 import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 import { useApp } from '../../../context/App'
 import AllProductsRatesModal, { ALL_PRODUCTS_RATES_MODAL_KEY } from './AllProductsRatesModal'
+import { Link } from 'lib/navigation'
 
 export const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only, hidePrice }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -326,13 +326,8 @@ export interface TabbedProps {
 }
 
 export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: TabbedProps = {}) {
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
     const [analyticsData, setAnalyticsData] = useState<Record<string, any>>(getDefaultAnalyticsData)
-    const platform = billingProducts.find((product) => product.type === 'platform_and_support')
+    const platform = billingProducts.find((product) => product.type === 'platform_and_support')!
     const [activeType, setActiveType] = useState<string | null>(defaultProducts[0] ?? null)
     const [selectedTypes, setSelectedTypes] = useState<string[]>(() => Array.from(new Set(defaultProducts)))
     const [addingProduct, setAddingProduct] = useState(false)
@@ -396,11 +391,11 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
     const initialProductAddons = useMemo(() => buildProductAddons(products, addonDefaults), [])
     const initialPlatformAddons = useMemo(() => {
         const initialAddons = []
-        platform.addons.forEach((addon) => {
+        platform.addons!.forEach((addon) => {
             initialAddons.push({
                 type: addon.type,
                 checked: false,
-                price: Number(addon.plans[addon.plans.length - 1].unit_amount_usd.split('.')[0]),
+                price: Number(addon.plans[addon.plans.length - 1].unit_amount_usd!.split('.')[0]),
                 legacy_product: addon.legacy_product,
             })
         })
@@ -408,7 +403,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
     }, [])
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
-    const visiblePlatformAddons = platform.addons.filter((addon) => !addon.legacy_product)
+    const visiblePlatformAddons = platform.addons!.filter((addon) => !addon.legacy_product)
     const platformPackagesTotal = platformAddons
         .filter((addon) => addon.checked)
         .reduce((sum, addon) => sum + (addon.price || 0), 0)
@@ -455,8 +450,8 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
             params.calculator === PLATFORM_PACKAGES_TYPE
                 ? PLATFORM_PACKAGES_TYPE
                 : selected.includes(params.calculator as string)
-                ? (params.calculator as string)
-                : selected[0] ?? null
+                  ? (params.calculator as string)
+                  : (selected[0] ?? null)
         )
         let restoredAnalytics = analyticsData
         const restoredProducts = products.map((product) => {
@@ -748,8 +743,8 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                                                             {billedWith
                                                                 ? `via ${billedWith}`
                                                                 : startsAt && unit
-                                                                ? `$${startsAt}/${unit}`
-                                                                : null}
+                                                                  ? `$${startsAt}/${unit}`
+                                                                  : null}
                                                         </span>
                                                     </button>
                                                 )

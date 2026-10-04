@@ -1,5 +1,4 @@
 import PostLayout from 'components/PostLayout'
-import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import { SEO } from 'components/seo'
 import Layout from 'components/Layout'
@@ -9,14 +8,16 @@ import { NewsletterForm } from 'components/NewsletterForm'
 import CommunityCTA from 'components/CommunityCTA'
 import StartupsCTA from 'components/StartupsCTA'
 import { companyMenu } from '../navs'
+import type { PageInfo, PostCard } from '../lib/content/posts'
 
-const BlogCategory = ({
-    data: {
-        allPostsRecent: { edges: allPostsRecent },
-        allPostsPopular: { edges: allPostsPopular },
-    },
-    pageContext: { category, slug, numPages, currentPage, base },
-}) => {
+export interface BlogCategoryProps extends PageInfo {
+    category: string
+    slug: string
+    recent: PostCard[]
+    popular: PostCard[]
+}
+
+const BlogCategory = ({ category, slug, numPages, currentPage, base, recent, popular }: BlogCategoryProps) => {
     const [allPostsFilter, setAllPostsFilter] = useState<'latest' | 'popular'>('latest')
     const handleToggleChange = (checked: boolean) => {
         const postsFilter = checked ? 'popular' : 'latest'
@@ -25,10 +26,10 @@ const BlogCategory = ({
     }
 
     useEffect(() => {
-        setAllPostsFilter(localStorage.getItem('postsFilter') || 'latest')
+        setAllPostsFilter(localStorage.getItem('postsFilter') === 'popular' ? 'popular' : 'latest')
     }, [])
 
-    const posts = allPostsFilter === 'popular' ? allPostsPopular : allPostsRecent
+    const posts = allPostsFilter === 'popular' ? popular : recent
 
     return (
         <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
@@ -57,34 +58,3 @@ const BlogCategory = ({
 }
 
 export default BlogCategory
-
-export const pageQuery = graphql`
-    query ($skip: Int!, $limit: Int!, $category: String) {
-        allPostsRecent: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
-        ) {
-            totalCount
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-        allPostsPopular: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { isFuture: { eq: false }, frontmatter: { category: { eq: $category }, date: { ne: null } } }
-        ) {
-            totalCount
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-    }
-`

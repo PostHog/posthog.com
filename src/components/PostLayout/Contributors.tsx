@@ -1,13 +1,15 @@
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IContributor } from './types'
 import { Image, Transformation } from 'cloudinary-react'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { ResponsiveImage, getImage } from 'components/Image'
 
 const isCloudinaryImage = (url: string): boolean => {
-    const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
+    const cloudinaryUrlPattern = new RegExp(
+        `https://res.cloudinary.com/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}/`
+    )
     return cloudinaryUrlPattern.test(url)
 }
 
@@ -29,7 +31,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
                     <Image
                         className={`rounded-full ${imgClassName}`}
                         publicId={cloudinaryPublicId}
-                        cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                        cloudName={import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}
                         secure
                     >
                         <Transformation width="100" crop="scale" />
@@ -38,7 +40,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
                     <img className={`rounded-full ${imgClassName}`} src={image} />
                 )
             ) : gatsbyImage ? (
-                <GatsbyImage
+                <ResponsiveImage
                     imgClassName={`rounded-full ${imgClassName}`}
                     image={gatsbyImage}
                     alt={name}
@@ -82,7 +84,7 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
                     src={image}
                 />
             ) : gatsbyImage ? (
-                <GatsbyImage
+                <ResponsiveImage
                     image={gatsbyImage}
                     alt={name}
                     className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import { generateRandomHtmlId, getCookie } from '../../lib/utils'
+import { getCookie } from '../../lib/utils'
 import { Listbox, Tab } from '@headlessui/react'
 import { SelectorIcon } from '@heroicons/react/outline'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -15,7 +15,7 @@ import usePostHog from 'hooks/usePostHog'
 import { useAppSettings, useAppActions } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
-import { useLocation } from '@reach/router'
+import { useLocation } from 'lib/navigation'
 
 type LanguageOption = {
     label?: string
@@ -23,7 +23,7 @@ type LanguageOption = {
     file?: string
     code: string
     focusOnLines?: string
-    runInPostHog?: string
+    runInPostHog?: boolean
 }
 
 type CodeBlockProps = {
@@ -63,51 +63,47 @@ type MdxCodeBlock = {
     children: MdxCodeBlockChildren[] | MdxCodeBlockChildren
 }
 
-// Optional metastring properties
+// Props from a code fence's meta (```js file="app.js")
 type MetaStringProps = {
-    metastring?: string
     file?: string
     showLineNumbers?: boolean
     label?: string
     unavailable?: boolean
     focusOnLines?: string
-    runInPostHog?: string
+    runInPostHog?: boolean
 }
 
+type CodeProps = {
+    className?: string
+    children: string
+} & MetaStringProps
+
+// A code element (`<code className="language-js">`), or a `<pre>` wrapping one: the shape MDX gives a
+// fenced code block, alone or as a child of <MultiLanguage>.
 type MdxCodeBlockChildren = {
-    props: {
-        mdxType: string
-        className: string
-        label?: string
-        children: {
-            key: string | null
-            props: {
-                className: string
-                mdxType: string
-                children: string
-            } & MetaStringProps
-        }
-    } & MetaStringProps
+    props: (CodeProps | { children: { props: CodeProps } }) & MetaStringProps
+}
+
+function codeProps(child: MdxCodeBlockChildren | undefined): CodeProps | null {
+    const props = child?.props as any
+    if (!props) return null
+    if (typeof props.children === 'string' || props.className?.includes('language-')) return props as CodeProps
+    return (props.children?.props as CodeProps | undefined) ?? null
 }
 
 export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element | null => {
-    if (children?.props?.className?.includes('language-mermaid')) {
-        return <Mermaid>{children.props.children}</Mermaid>
+    if (
+        (children as MdxCodeBlockChildren)?.props &&
+        codeProps(children as MdxCodeBlockChildren)?.className?.includes('language-mermaid')
+    ) {
+        return <Mermaid>{codeProps(children as MdxCodeBlockChildren)!.children}</Mermaid>
     }
     const childArray = Array.isArray(children) ? children : [children]
 
     const languages = childArray
-        .filter((child) => child.props.mdxType === 'pre' || child.props.mdxType === 'code')
-        .map((child) => {
-            const {
-                className = '',
-                label,
-                file,
-                children,
-                focusOnLines,
-                runInPostHog,
-            } = child.props.mdxType === 'code' ? child.props : child.props.children.props
-
+        .map(codeProps)
+        .filter((code): code is CodeProps => !!code && typeof code.children === 'string')
+        .map(({ className = '', label, file, children, focusOnLines, runInPostHog }) => {
             const matches = className.match(/language-(?<lang>.*)/)
             const language = matches && matches.groups && matches.groups.lang ? matches.groups.lang : ''
 
@@ -115,7 +111,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock): JSX.Element 
                 label,
                 language: language.toLowerCase(),
                 file,
-                code: children as string,
+                code: children,
                 focusOnLines,
                 runInPostHog,
             }
@@ -197,7 +193,8 @@ export const CodeBlock = ({
         return null
     }
 
-    const codeBlockId = generateRandomHtmlId()
+    // Same id on the server and in the browser, so hydration matches. Colons are not valid in url(#…).
+    const codeBlockId = `code-${React.useId().replace(/:/g, '')}`
     const { siteSettings } = useAppSettings()
     const { openNewChat } = useAppActions()
     const { appWindow } = useWindow()
@@ -400,7 +397,7 @@ export const CodeBlock = ({
                             const activeLanguage = languages[selectedIndex] || currentLanguage
                             return (
                                 <>
-                                    {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
+                                    {activeLanguage.runInPostHog !== false && activeLanguage.language === 'sql' && (
                                         <div className="relative flex items-center justify-center px-1">
                                             <a
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}

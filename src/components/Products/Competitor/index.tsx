@@ -1,5 +1,4 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 
 export const VsCompetitor = ({ title, children, image, className }) => {
     return (

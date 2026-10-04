@@ -104,7 +104,7 @@ This guide walks you through setting up PostHog for React Router V7 in framework
 
 In framework mode, you'll also need to set `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
 
-```ts file=vite.config.ts
+```ts file="vite.config.ts"
 // ... imports
 
 export default defineConfig({
@@ -127,7 +127,7 @@ export default defineConfig({
 
 In framework mode, your app enters from the `app/entry.client.tsx` file. In this file, you'll need to initialize the PostHog SDK and pass it to your app through the `PostHogProvider` context.
 
-```tsx file=app/entry.client.tsx
+```tsx file="app/entry.client.tsx"
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
@@ -188,7 +188,7 @@ To help PostHog track your user sessions across the client and server, you'll ne
 
 PostHog can capture exceptions thrown in your app through an error boundary. React Router in framework mode has a built-in error boundary that you can use to capture exceptions. You can create an error boundary by exporting `ErrorBoundary` from your `app/root.tsx` file.
 
-```tsx file=app/root.tsx
+```tsx file="app/root.tsx"
 import { usePostHog } from '@posthog/react'
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -230,7 +230,7 @@ Next, create a server-side middleware to help you capture server-side events. Th
 - Fetch the session and distinct ID from the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers and pass them to your request as a [context](/docs/libraries/node#contexts). This automatically identifies the user and session for you in all subsequent event captures.
 - Calls `shutdown()` on the PostHog client to ensure all events are sent before the request is completed.
 
-```ts file=app/lib/posthog-middleware.ts
+```ts file="app/lib/posthog-middleware.ts"
 import { PostHog } from "posthog-node";
 import type { RouterContextProvider } from "react-router";
 import type { Route } from "../+types/root";
@@ -264,7 +264,7 @@ export const posthogMiddleware: Route.MiddlewareFunction = async ({ request, con
 
 Then, you'll need to register the middleware in your app in the `app/root.tsx` file by exporting it in the `Route.MiddlewareFunction[]` array.
 
-```tsx file=app/root.tsx
+```tsx file="app/root.tsx"
 import { posthogMiddleware } from './lib/posthog-middleware';
 
 export const middleware: Route.MiddlewareFunction[] = [
@@ -281,7 +281,7 @@ At this point, you should be able to capture server-side events and see them in 
 
 In a route, you can access the PostHog client from the context and capture an event. The middleware assigns the session ID and the distinct ID. This ensures that the system associates events with the correct user and session.
 
-```tsx file=app/routes/api.checkout.ts
+```tsx file="app/routes/api.checkout.ts"
 import type { PostHogContext } from "../lib/posthog-middleware";
 
 export async function action({ request, context }: Route.ActionArgs) {

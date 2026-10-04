@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Dialog as RadixDialog } from 'radix-ui'
-import { navigate } from 'gatsby'
 import { InstantSearch, useConfigure, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
 import usePostHog from 'hooks/usePostHog'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
@@ -16,6 +15,7 @@ import SearchInput from './SearchInput'
 import { spotlightOptionId } from './SpotlightRow'
 import SuggestionList from './SuggestionList'
 import type { AlgoliaRecord, NavItem, SpotlightSearchResult, SuggestionItem } from './types'
+import { navigate } from 'lib/navigation'
 
 // Actions only make sense for short trigger-word queries ("dark mode",
 // "wallpaper") — long or question-shaped queries never surface them
@@ -412,8 +412,8 @@ function SpotlightSearchContent({
                                                         ? spotlightOptionId('filter', filterMenuIndex)
                                                         : undefined
                                                     : navItems[selectedIndex]
-                                                    ? spotlightOptionId('result', selectedIndex)
-                                                    : undefined
+                                                      ? spotlightOptionId('result', selectedIndex)
+                                                      : undefined
                                                 : undefined
                                         }
                                         controlsId={

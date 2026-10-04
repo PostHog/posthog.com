@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react'
-import { Link } from 'gatsby'
 import getLevel from '../util/getLevel'
 import Tooltip from '../../RadixUI/Tooltip'
+import { Link } from 'lib/navigation'
 
 const HOGFATHER_IMG =
     'https://res.cloudinary.com/dmukukwp6/image/upload/w_200,h_200,c_fill,q_100,f_png/hedgehog_4d76d5fc_b1a5_49b5_9c22_dd1540ab2eef_a4c517f5d1.png'

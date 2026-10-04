@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import { getLogo, getDarkClassForLogo } from 'constants/logos'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
+import { navigate } from 'lib/navigation'
+import integrationsJson from '@data/products-integrations.json'
+import type { Integrations } from '~/data-layer/queries/products'
 
-const getIconUrl = (iconUrl: string) => {
+const integrations = integrationsJson as Integrations
+
+/** A row of the library: a source, destination, or transformation. */
+type LibraryPipeline = {
+    name: string
+    slug: string | null
+    icon_url?: string | null
+    status: string
+    type: string
+    category: string[]
+    description: string | null
+    docsSlug?: string | null
+}
+
+const getIconUrl = (iconUrl?: string | null) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
 }
 
-const Title = ({ pipeline }: { pipeline: any }) => {
+const Title = ({ pipeline }: { pipeline: LibraryPipeline }) => {
     const url =
-        (pipeline.status !== 'coming_soon' && pipeline.mdx?.fields?.slug) ||
+        (pipeline.status !== 'coming_soon' && pipeline.docsSlug) ||
         (pipeline.status !== 'coming_soon' &&
             pipeline.type === 'source' &&
             pipeline.slug &&
@@ -27,7 +43,9 @@ const Title = ({ pipeline }: { pipeline: any }) => {
             <img
                 src={getIconUrl(pipeline.icon_url)}
                 alt={pipeline.name}
-                className={`w-6 h-6 object-contain flex-shrink-0 ${getDarkClassForLogo(pipeline.icon_url)}`}
+                className={`w-6 h-6 object-contain flex-shrink-0 ${getDarkClassForLogo(
+                    pipeline.icon_url ?? undefined
+                )}`}
             />
             {url ? (
                 <Link to={url} state={{ newWindow: true }}>
@@ -50,65 +68,21 @@ const slugifyCategory = (category: string): string => {
 
 // Helper function to unslugify category names
 const unslugifyCategory = (slug: string, categories: string[]): string | null => {
-    const slugToCategory = categories.reduce((acc, cat) => {
-        acc[slugifyCategory(cat)] = cat
-        return acc
-    }, {} as Record<string, string>)
+    const slugToCategory = categories.reduce(
+        (acc, cat) => {
+            acc[slugifyCategory(cat)] = cat
+            return acc
+        },
+        {} as Record<string, string>
+    )
     return slugToCategory[slug] || null
 }
 
 export default function IntegrationsLibrary(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState('')
-    const data = useStaticQuery(graphql`
-        query {
-            sources: allPostHogSource {
-                nodes {
-                    name
-                    slug
-                    icon_url
-                    unreleased
-                }
-            }
-            destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
-                nodes {
-                    id
-                    slug
-                    name
-                    category
-                    description
-                    icon_url
-                    type
-                    mdx {
-                        fields {
-                            slug
-                        }
-                    }
-                    status
-                }
-            }
-            transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
-                nodes {
-                    id
-                    slug
-                    name
-                    category
-                    description
-                    icon_url
-                    type
-                    mdx {
-                        fields {
-                            slug
-                        }
-                    }
-                    status
-                }
-            }
-        }
-    `)
-
     // Combine all pipelines data
-    const allPipelines = [
-        ...(data.sources?.nodes || []).map((s: any) => ({
+    const allPipelines: LibraryPipeline[] = [
+        ...integrations.sources.map((s) => ({
             ...s,
             status: s.unreleased ? 'coming_soon' : 'live',
             type: 'source',
@@ -124,12 +98,12 @@ export default function IntegrationsLibrary(): JSX.Element {
             category: ['Cloud storage'],
             description: `Link ${s.name} data to PostHog`,
         })),
-        ...(data.destinations?.nodes || []).map((d: any) => ({
+        ...integrations.destinations.map((d) => ({
             ...d,
             status: d.status === 'coming_soon' ? 'coming_soon' : 'live',
             type: 'destination',
         })),
-        ...(data.transformations?.nodes || []).map((t: any) => ({
+        ...integrations.transformations.map((t) => ({
             ...t,
             status: t.status === 'coming_soon' ? 'coming_soon' : 'live',
             type: 'transformation',

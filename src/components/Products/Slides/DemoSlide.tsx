@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { IconInfo, IconLightBulb, IconSend } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { Link } from 'lib/navigation'
 
 interface DemoSlideProps {
     productHandle: string

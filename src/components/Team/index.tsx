@@ -3,11 +3,9 @@ import { PineappleText } from 'components/Job/Sidebar'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { Question } from 'components/Squeak'
 import useTeamUpdates from 'hooks/useTeamUpdates'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { kebabCase } from 'lib/utils'
 import React, { useState, useEffect, useMemo } from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/RadixUI/Tooltip'
 import SEO from 'components/seo'
@@ -29,6 +27,13 @@ import uploadImage from 'components/Squeak/util/uploadImage'
 import * as yup from 'yup'
 import Section from './Section'
 import Header from './Header'
+import useTeamCrestMap from 'hooks/useTeamCrestMap'
+import jobsJson from '@data/people-jobs.json'
+import teamsJson from '@data/people-teams.json'
+import type { Job, Jobs, Teams } from '~/data-layer/queries/people'
+
+const jobs = jobsJson as Jobs
+const allTeams = teamsJson as Teams
 import Profile, { ProfileData } from './Profile'
 import Roadmap from './Roadmap'
 import { Tabs } from 'radix-ui'
@@ -46,6 +51,8 @@ import {
 import ZoomHover from 'components/ZoomHover'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { normalizeSlug } from './utils'
+import { navigate } from 'lib/navigation'
+import { MDXRenderer } from 'components/MDXRenderer'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -190,15 +197,15 @@ export const TeamMemberCard = ({
     )
 }
 
-const JobCard = ({ job }: { job: any }) => {
-    const locationField = job.parent.customFields.find((field: any) => field.title === 'Location(s)')
-    const timezoneField = job.parent.customFields.find((field: any) => field.title === 'Timezone(s)')
+const JobCard = ({ job }: { job: Job }) => {
+    const locationField = job.customFields.find((field) => field.title === 'Location(s)')
+    const timezoneField = job.customFields.find((field) => field.title === 'Timezone(s)')
 
     return (
         <ZoomHover size="lg" className="!flex h-full w-full aspect-[3/4]">
             <div className="group container-size not-prose aspect-[3/4] border border-primary bg-teal block rounded max-w-96 relative hover:z-20">
                 <Link
-                    to={`${job.fields.slug}`}
+                    to={`${job.slug}`}
                     state={{ newWindow: true }}
                     className="h-full w-full p-4 flex flex-col justify-between"
                 >
@@ -209,9 +216,7 @@ const JobCard = ({ job }: { job: any }) => {
                                     Open role
                                 </span>
                             </div>
-                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">
-                                {job.fields.title}
-                            </h3>
+                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">{job.title}</h3>
                             <div className="text-black/80 text-sm space-y-1">
                                 {locationField?.value && <p className="m-0">📍 {locationField.value}</p>}
                                 {timezoneField?.value && <p className="m-0">🕒 {timezoneField.value}</p>}
@@ -267,55 +272,15 @@ export default function Team({
     } = team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
-    const {
-        allSlackEmoji: { totalCount: totalSlackEmojis },
-        allTeams,
-        allTeamSlugs,
-        allAshbyJobPosting,
-    } = useStaticQuery(graphql`
-        {
-            allSlackEmoji {
-                totalCount
-            }
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-            allTeamSlugs: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
-                nodes {
-                    slug
-                }
-            }
-            allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-                nodes {
-                    fields {
-                        title
-                        slug
-                    }
-                    parent {
-                        ... on AshbyJob {
-                            customFields {
-                                value
-                                title
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
     const existingTeamSlugs = useMemo(
-        () => new Set((allTeamSlugs?.nodes || []).map((node: any) => node?.slug?.toLowerCase()).filter(Boolean)),
-        [allTeamSlugs?.nodes]
+        () =>
+            new Set(
+                allTeams
+                    .filter((team) => team.name !== 'Hedgehogs')
+                    .map((team) => team.slug?.toLowerCase())
+                    .filter(Boolean)
+            ),
+        []
     )
 
     const { handleChange, handleBlur, values, submitForm, setFieldValue, touched, errors } = useFormik({
@@ -411,8 +376,8 @@ export default function Team({
                     image: uploadedTeamImage
                         ? uploadedTeamImage.id
                         : other.teamImage === null
-                        ? null
-                        : teamImage?.image?.data?.id,
+                          ? null
+                          : teamImage?.image?.data?.id,
                     caption: teamImageCaption,
                 },
                 crestOptions,
@@ -483,7 +448,7 @@ export default function Team({
             data: {
                 attributes: { slug },
             },
-        } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams`, {
+        } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams`, {
             headers: {
                 Authorization: `Bearer ${jwt}`,
                 'content-type': 'application/json',
@@ -536,15 +501,11 @@ export default function Team({
 
     const teamEmojis = emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
 
-    // Create a map of team names to crest data for quick lookup
-    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
-        acc[team.name] = team.crest?.data?.attributes?.url
-        return acc
-    }, {})
+    const teamCrestMap = useTeamCrestMap()
 
     // Filter jobs that are assigned to this team
-    const teamJobs = allAshbyJobPosting.nodes.filter((job: any) => {
-        const teamsField = job.parent.customFields.find((field: any) => field.title === 'Teams')
+    const teamJobs = jobs.filter((job) => {
+        const teamsField = job.customFields.find((field) => field.title === 'Teams')
         if (!teamsField) return false
         const teams = JSON.parse(teamsField.value || '[]')
         return teams.includes(name)
@@ -664,84 +625,84 @@ export default function Team({
                                   </li>
                               ))
                             : profiles?.data || values.teamMembers
-                            ? [...((editing ? values.teamMembers : profiles?.data) || [])]
-                                  .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                  .map((profile) => {
-                                      const {
-                                          id,
-                                          attributes: {
-                                              avatar,
-                                              firstName,
-                                              lastName,
-                                              country,
-                                              location,
-                                              companyRole,
-                                              pineappleOnPizza,
-                                          },
-                                      } = profile
-                                      const name = [firstName, lastName].filter(Boolean).join(' ')
-                                      return (
-                                          <li key={id} className="rounded-md relative">
-                                              <TeamMember
-                                                  avatar={{
-                                                      url: avatar?.data?.attributes?.url || avatar?.url,
-                                                  }}
-                                                  firstName={firstName}
-                                                  lastName={lastName}
-                                                  companyRole={companyRole}
-                                                  country={country}
-                                                  location={location}
-                                                  squeakId={id}
-                                                  color={profile.attributes.color || 'yellow'}
-                                                  biography={profile.attributes.biography || ''}
-                                                  teamCrestMap={teamCrestMap}
-                                                  pineappleOnPizza={pineappleOnPizza}
-                                                  startDate={profile.attributes.startDate}
-                                                  isTeamLead={isTeamLead(id)}
-                                                  viewingOwnTeam={true}
-                                              />
-                                              {editing && (
-                                                  <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
-                                                      <button
-                                                          onClick={() => removeTeamMember(id)}
-                                                          className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
-                                                          title="Remove team member"
-                                                      >
-                                                          <IconX className="w-4 h-4" />
-                                                      </button>
-                                                      <Tooltip
-                                                          trigger={
-                                                              <button
-                                                                  onClick={() => handleTeamLead(id, isTeamLead(id))}
-                                                                  className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
-                                                                      isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
-                                                                  }`}
-                                                              >
-                                                                  <IconCrown className="w-4 h-4" />
-                                                              </button>
-                                                          }
-                                                          delay={0}
-                                                      >
-                                                          <>
-                                                              <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
-                                                              {isTeamLead(id)
-                                                                  ? 'Remove as team lead'
-                                                                  : 'Set as team lead'}
-                                                          </>
-                                                      </Tooltip>
-                                                  </div>
-                                              )}
-                                          </li>
-                                      )
-                                  })
-                            : new Array(4).fill(0).map((_, i) => (
-                                  <li key={i}>
-                                      <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                  </li>
-                              ))}
+                              ? [...((editing ? values.teamMembers : profiles?.data) || [])]
+                                    .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                    .map((profile) => {
+                                        const {
+                                            id,
+                                            attributes: {
+                                                avatar,
+                                                firstName,
+                                                lastName,
+                                                country,
+                                                location,
+                                                companyRole,
+                                                pineappleOnPizza,
+                                            },
+                                        } = profile
+                                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                                        return (
+                                            <li key={id} className="rounded-md relative">
+                                                <TeamMember
+                                                    avatar={{
+                                                        url: avatar?.data?.attributes?.url || avatar?.url,
+                                                    }}
+                                                    firstName={firstName}
+                                                    lastName={lastName}
+                                                    companyRole={companyRole}
+                                                    country={country}
+                                                    location={location}
+                                                    squeakId={id}
+                                                    color={profile.attributes.color || 'yellow'}
+                                                    biography={profile.attributes.biography || ''}
+                                                    teamCrestMap={teamCrestMap}
+                                                    pineappleOnPizza={pineappleOnPizza}
+                                                    startDate={profile.attributes.startDate}
+                                                    isTeamLead={isTeamLead(id)}
+                                                    viewingOwnTeam={true}
+                                                />
+                                                {editing && (
+                                                    <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
+                                                        <button
+                                                            onClick={() => removeTeamMember(id)}
+                                                            className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                            title="Remove team member"
+                                                        >
+                                                            <IconX className="w-4 h-4" />
+                                                        </button>
+                                                        <Tooltip
+                                                            trigger={
+                                                                <button
+                                                                    onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                                    className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                                        isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                                    }`}
+                                                                >
+                                                                    <IconCrown className="w-4 h-4" />
+                                                                </button>
+                                                            }
+                                                            delay={0}
+                                                        >
+                                                            <>
+                                                                <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
+                                                                {isTeamLead(id)
+                                                                    ? 'Remove as team lead'
+                                                                    : 'Set as team lead'}
+                                                            </>
+                                                        </Tooltip>
+                                                    </div>
+                                                )}
+                                            </li>
+                                        )
+                                    })
+                              : new Array(4).fill(0).map((_, i) => (
+                                    <li key={i}>
+                                        <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                    </li>
+                                ))}
                         {/* Add job cards for open roles */}
-                        {teamJobs.map((job: any) => (
-                            <li key={job.fields.slug} className="rounded-md relative">
+                        {teamJobs.map((job) => (
+                            <li key={job.slug} className="rounded-md relative">
                                 <JobCard job={job} />
                             </li>
                         ))}

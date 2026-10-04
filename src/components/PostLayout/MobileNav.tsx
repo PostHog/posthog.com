@@ -2,12 +2,11 @@ import { Chevron, RightArrow } from 'components/Icons'
 import { AnimatePresence, useDragControls, useMotionValue, useTransform, motion } from 'framer-motion'
 import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import { IMenu } from './types'
-import { useLocation } from '@reach/router'
-import { navigate } from 'gatsby'
 import slugify from 'slugify'
 import { useLayoutData } from 'components/Layout/hooks'
 import * as Icons from '@posthog/icons'
 import { createPortal } from 'react-dom'
+import { useLocation, navigate } from 'lib/navigation'
 
 interface IGetActiveMenu {
     menu: IMenu[]

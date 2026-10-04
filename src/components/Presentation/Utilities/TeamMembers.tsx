@@ -1,7 +1,10 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import teamRostersJson from '@data/people-team-rosters.json'
+import type { TeamRosters } from '~/data-layer/queries/people'
+
+const teamRosters = teamRostersJson as TeamRosters
 
 interface SalesRep {
     name: string
@@ -17,40 +20,6 @@ interface TeamMembersProps {
 }
 
 export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep }: TeamMembersProps) {
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam {
-                nodes {
-                    id
-                    name
-                    slug
-                    profiles {
-                        data {
-                            id
-                            attributes {
-                                color
-                                firstName
-                                lastName
-                                avatar {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    leadProfiles {
-                        data {
-                            id
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
     // If a specific sales rep is assigned, show only that person
     if (salesRep && salesRep.name && salesRep.photo) {
         return (
@@ -82,7 +51,7 @@ export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep }
     }
 
     // Find the team by slug
-    const team = allTeams.nodes.find((t: any) => t.slug === teamSlug)
+    const team = teamRosters.find((t) => t.slug === teamSlug)
 
     if (!team || !team.profiles?.data?.length) {
         return null
@@ -93,8 +62,8 @@ export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep }
 
     // Sort profiles to show team leads first
     const sortedProfiles = profiles.slice().sort((a: any, b: any) => {
-        const aIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === a.id)
-        const bIsLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === b.id)
+        const aIsLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === a.id)
+        const bIsLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === b.id)
         return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
     })
 
@@ -126,7 +95,7 @@ export default function TeamMembers({ teamSlug = 'sales-product-led', salesRep }
                         .reverse()
                         .map(({ id, attributes: { firstName, lastName, avatar, color } }: any, index: number) => {
                             const name = [firstName, lastName].filter(Boolean).join(' ')
-                            const isTeamLead = leadProfiles.some(({ id: leadID }: { id: string }) => leadID === id)
+                            const isTeamLead = leadProfiles.some(({ id: leadID }: { id: number }) => leadID === id)
 
                             return (
                                 <span

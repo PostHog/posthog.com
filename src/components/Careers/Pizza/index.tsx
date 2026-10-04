@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
 import {
     StickerPineapple,
     StickerPineappleYes,
@@ -15,6 +12,10 @@ import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { pizzaPhotos } from './photos'
+import { ResponsiveImage } from 'components/Image'
+import pizzaTeamsJson from '@data/people-pizza-teams.json'
+import type { PizzaTeams } from '~/data-layer/queries/people'
+import { Link } from 'lib/navigation'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -177,27 +178,9 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-interface TeamData {
-    id: string
-    name: string
-    slug: string
-    miniCrest: {
-        gatsbyImageData: any
-    }
-    profiles: {
-        data: Array<{
-            attributes: {
-                pineappleOnPizza: boolean
-            }
-        }>
-    }
-}
+const pizzaTeams = pizzaTeamsJson as PizzaTeams
 
-interface TeamWithPercentage {
-    name: string
-    slug: string
-    pineapplePercentage: string
-}
+type TeamWithPercentage = PizzaTeams[number]
 
 export const Pizza = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -223,39 +206,7 @@ export const Pizza = () => {
         setActiveIndex(null)
     }
 
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    miniCrest {
-                        gatsbyImageData(width: 80, height: 80)
-                    }
-                    profiles {
-                        data {
-                            attributes {
-                                pineappleOnPizza
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const teamsWithPineapplePercentage = allTeams.nodes.map((team: TeamData): TeamWithPercentage => {
-        const teamLength = team.profiles?.data?.length || 0
-        const pineappleLovers = team.profiles?.data?.filter(({ attributes }) => attributes.pineappleOnPizza).length || 0
-        const percentage = teamLength > 0 ? (pineappleLovers / teamLength) * 100 : 0
-
-        return {
-            name: team.name,
-            slug: team.slug,
-            pineapplePercentage: percentage.toFixed(1),
-        }
-    })
+    const teamsWithPineapplePercentage = pizzaTeams
 
     const groupedTeams: {
         moreThan50: TeamWithPercentage[]
@@ -320,13 +271,12 @@ export const Pizza = () => {
 
                     <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.moreThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData?.miniCrest)
+                            const teamMiniCrest = team.miniCrest ?? undefined
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
                                         {teamMiniCrest && (
-                                            <GatsbyImage
+                                            <ResponsiveImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
                                                 className="mr-2 size-10"
@@ -380,13 +330,12 @@ export const Pizza = () => {
 
                     <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.exactly50.map((team) => {
-                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData?.miniCrest)
+                            const teamMiniCrest = team.miniCrest ?? undefined
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
                                         {teamMiniCrest && (
-                                            <GatsbyImage
+                                            <ResponsiveImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
                                                 className="mr-2 size-10"
@@ -438,13 +387,12 @@ export const Pizza = () => {
 
                     <ul className="not-prose list-none p-0 space-y-3">
                         {groupedTeams.lessThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData?.miniCrest)
+                            const teamMiniCrest = team.miniCrest ?? undefined
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
                                         {teamMiniCrest && (
-                                            <GatsbyImage
+                                            <ResponsiveImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
                                                 className="mr-2 size-10"

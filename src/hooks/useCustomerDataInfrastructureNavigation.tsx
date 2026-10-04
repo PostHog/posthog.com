@@ -1,4 +1,4 @@
-import { navigate } from 'gatsby'
+import { navigate } from 'lib/navigation'
 
 export const customerDataInfrastructureNav = {
     name: 'PostHog context warehouse',

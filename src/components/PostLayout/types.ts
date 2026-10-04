@@ -1,5 +1,5 @@
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import React from 'react'
+import { ResponsiveImageData } from 'components/Image'
 
 export interface ITopic {
     name: string
@@ -8,7 +8,7 @@ export interface ITopic {
 }
 
 export interface IContributor {
-    image: IGatsbyImageData | undefined
+    image: ResponsiveImageData | undefined
     name: string
     url?: string
     state?: any

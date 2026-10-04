@@ -4,7 +4,6 @@ import { useApp } from '../../context/App'
 import { InstantSearch, useRefinementList } from 'react-instantsearch-hooks-web'
 import { useSearchBox, useHits } from 'react-instantsearch-hooks-web'
 import { Combobox } from '@headlessui/react'
-import { navigate } from 'gatsby'
 import { IconSparkles } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
@@ -12,6 +11,7 @@ import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
 import SpotlightSearch from 'components/SpotlightSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
+import { navigate } from 'lib/navigation'
 
 const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: string }) => {
     const { refine, items } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })

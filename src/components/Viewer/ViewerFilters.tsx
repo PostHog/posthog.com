@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Select } from '../RadixUI/Select'
-import { useLocation } from '@reach/router'
+import { useLocation } from 'lib/navigation'
+
 export interface FilterConfig {
     label: string
     value?: any
@@ -114,8 +115,8 @@ export default function ViewerFilters({
                         activeValue !== undefined
                             ? activeValue
                             : filter.initialValue !== null && filter.initialValue !== undefined
-                            ? filter.initialValue
-                            : undefined
+                              ? filter.initialValue
+                              : undefined
                     return (
                         <Select
                             key={`${Object.keys(filters).length}-${filter.label}`}

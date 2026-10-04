@@ -53,10 +53,7 @@ export const dayIndex = (length: number, date = new Date()): number => {
  * The pool is the `HOGS` registry, which the article infoboxes already import, so rotating
  * through it costs no extra JavaScript. Widening it to all 142 illustrations in
  * `@posthog/brand/hoggies` is not free: each component inlines its own SVG path data, on
- * the order of 240 KB of module source. The library also ships PNG URL exports, which would
- * be free, but Gatsby's webpack rules turn the referenced file into a JS module and the
- * package's own `new URL()` then resolves to that module rather than to the image, so
- * serving the whole library would need a webpack asset rule.
+ * the order of 240 KB of module source.
  *
  * The first render uses the date-derived index, so the server, a crawler and a reader with
  * no JavaScript all get a real illustration. The random pick happens in an effect after

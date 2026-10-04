@@ -1,7 +1,7 @@
 import OSTabs from 'components/OSTabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { navigate } from 'gatsby'
 import React from 'react'
+import { navigate } from 'lib/navigation'
 
 export default function Legal({ children, defaultTab }: { children: React.ReactNode; defaultTab: string }) {
     return (

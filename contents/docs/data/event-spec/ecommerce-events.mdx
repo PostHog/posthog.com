@@ -103,7 +103,7 @@ Fire this event when a visitor views a product list or category. The following p
 |-----------------------|-----------------|------------------------------------------------------------------|
 | list_id               | String          | Product list being viewed                                        |
 | category              | String          | Product category being viewed                                    |
-| products              | Array<Product\> | Products displayed in the list                                   |
+| products              | Array\<Product\> | Products displayed in the list                                   |
 | products.$.product_id | String          | Product id displayed on the list                                 |
 | products.$.sku        | String          | SKU (Stock Keeping Unit) of the product being viewed             |
 | products.$.category   | String          | Product category being viewed                                    |
@@ -149,10 +149,10 @@ Fire this event when a visitor filters a product list or category. The following
 | filters               | Array           | Product filters being used                                       |
 | filters.$.type        | String          | Id of the filter type being used                                 |
 | filters.$.value       | String          | Id of the selection that the customer chose                      |
-| sorts                 | Array<Sort\>    | Product sorting being used                                       |
+| sorts                 | Array\<Sort\>    | Product sorting being used                                       |
 | sorts.$.type          | String          | Id of the sort type being used                                   |
 | sorts.$.value         | String          | Id of the selection type being used (ascending, descending)      |
-| products              | Array<Product\> | Products displayed in the filtered list                          |
+| products              | Array\<Product\> | Products displayed in the filtered list                          |
 | products.$.product_id | String          | Product id displayed on the list                                 |
 | products.$.sku        | String          | SKU (Stock Keeping Unit) of the product being viewed          |
 | products.$.category   | String          | Product category being viewed                                    |

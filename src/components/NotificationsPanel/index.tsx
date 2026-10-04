@@ -4,11 +4,11 @@ import { useUser } from 'hooks/useUser'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
-import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import * as Portal from '@radix-ui/react-portal'
+import { navigate } from 'lib/navigation'
 
 dayjs.extend(relativeTime)
 dayjs.extend(isSameOrAfter)

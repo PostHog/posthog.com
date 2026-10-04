@@ -41,7 +41,7 @@ Actions appear for short matching queries. One-shot actions close the palette, w
 
 ### Direct routes
 
-When the query matches a site-local path, Spotlight puts a `Go to` row first. The regex requires a leading `/` and rejects protocol-relative URLs (`//`), whitespace, and backslashes. Query strings and fragments are allowed. The row opens the supplied path in a new window without checking that Gatsby created the route.
+When the query matches a site-local path, Spotlight puts a `Go to` row first. The regex requires a leading `/` and rejects protocol-relative URLs (`//`), whitespace, and backslashes. Query strings and fragments are allowed. The row opens the supplied path in a new window without checking that the route exists.
 
 ### Ask AI suggestion
 

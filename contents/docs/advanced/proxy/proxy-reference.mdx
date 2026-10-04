@@ -31,14 +31,14 @@ When using a proxy, set both `api_host` and `ui_host`:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: 'https://e.yourdomain.com',
   ui_host: 'https://eu.posthog.com'
@@ -85,14 +85,14 @@ Use a relative path to avoid cross-origin issues:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: '/ingest',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: '/ingest',
   ui_host: 'https://eu.posthog.com'

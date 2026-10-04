@@ -3,13 +3,11 @@ import '@fontsource/source-code-pro'
 import { CodeBlock, SingleCodeBlock } from 'components/CodeBlock'
 import { SEO } from 'components/seo'
 import 'core-js/features/array/at'
-import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'
 import * as OpenAPISampler from 'openapi-sampler'
 import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { MDXProvider } from '@mdx-js/react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { shortcodes } from '../mdxGlobalComponents'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
@@ -17,6 +15,8 @@ import { CallToAction } from 'components/CallToAction'
 import ReaderView from 'components/ReaderView'
 import { Heading } from 'components/Heading'
 import MCPCallout from 'components/Docs/MCPCallout'
+import { MDXRenderer } from 'components/MDXRenderer'
+import type { ApiEndpointPage } from '../lib/content/apiReference'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -438,12 +438,10 @@ project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
         project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${
-                additionalPathParams.length > 0
-                    ? additionalPathParams.map(
-                          (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
-                      )
-                    : ''
-            }
+            additionalPathParams.length > 0
+                ? additionalPathParams.map((param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`)
+                : ''
+        }
     ),
     headers={"Authorization": "Bearer {}".format(api_key)},${
         params.length > 0
@@ -567,45 +565,30 @@ const pathDescription = (item) => {
     }
 }
 
-interface ApiEndpointData {
-    data: {
-        name: string
-        nextURL?: string
-        previousURL?: string
-        items: string
-        components: string
-    }
-    allMdx: {
-        nodes?: Array<{
-            slug: string
-            body: string
-        }>
-    }
+export interface ApiEndpointProps {
+    endpoint: ApiEndpointPage
 }
 
-export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
-    const { allMdx } = data
-    const name = data.data.name
+export default function ApiEndpoint({ endpoint }: ApiEndpointProps): JSX.Element {
+    const { name, nextURL, previousURL, overview, operations } = endpoint
     const baseName = name.replace(/-\d+$/, '')
     const title = titleMap[baseName] || humanReadableName(baseName)
-    const nextURL = data.data.nextURL
-    const previousURL = data.data.previousURL
     const paths = {}
     const components = {
-        inlineCode: InlineCode,
+        code: InlineCode,
         pre: MdxCodeBlock,
         MultiLanguage: MdxCodeBlock,
         ...shortcodes,
     }
     // Filter PUT as it's basically the same as PATCH
-    const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
+    const items = JSON.parse(endpoint.items).filter((item) => item.httpVerb !== 'put')
     items.forEach((item) => {
         if (!paths[item.pathName]) {
             paths[item.pathName] = {}
         }
         paths[item.pathName][item.httpVerb] = item
     })
-    const objects = JSON.parse(data.data.components)
+    const objects = JSON.parse(endpoint.components)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
     const contentContainerRef = useRef<HTMLDivElement>(null)
@@ -620,10 +603,6 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
             setExampleLanguageState(getCookie('api_docs_example_language') || 'curl')
         }
     }, [])
-
-    // Find overview.mdx node for this API entity
-    // Note: name uses underscores (from OpenAPI), but file slugs use hyphens
-    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name.replace(/_/g, '-')}/overview`)
 
     const [hovered, setHovered] = useState(false)
 
@@ -641,11 +620,11 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                         </p>
                     </blockquote>
 
-                    {overviewNode?.body && (
+                    {overview && (
                         <div className="article-content mt-6">
                             <div className="text-primary">
                                 <MDXProvider components={components}>
-                                    <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                                    <MDXRenderer>{overview}</MDXRenderer>
                                 </MDXProvider>
                             </div>
                             <SectionDivider />
@@ -666,7 +645,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                     )}
 
                     {items.map((item, index) => {
-                        const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
+                        const notes = Object.hasOwn(operations, item.operationId) ? operations[item.operationId] : null
 
                         return (
                             <div className="mt-8" key={item.operationId}>
@@ -681,11 +660,11 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                                             {generateName(item)}
                                         </Heading>
                                         <MCPCallout operationId={item.operationId} />
-                                        {mdxNode?.body && (
+                                        {notes && (
                                             <div className="article-content">
                                                 <div className="text-primary">
                                                     <MDXProvider components={components}>
-                                                        <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                                        <MDXRenderer>{notes}</MDXRenderer>
                                                     </MDXProvider>
                                                 </div>
                                             </div>
@@ -771,29 +750,3 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
         </ScrollSpyProvider>
     )
 }
-
-export const query = graphql`
-    query ApiEndpoint($id: String!, $regex: String!) {
-        allMdx(filter: { fields: { slug: { regex: $regex } } }) {
-            nodes {
-                slug
-                body
-            }
-        }
-        data: apiEndpoint(id: { eq: $id }) {
-            id
-            internal {
-                content
-                description
-                ignoreType
-                mediaType
-            }
-            items
-            name
-            url
-            nextURL
-            previousURL
-            components
-        }
-    }
-`

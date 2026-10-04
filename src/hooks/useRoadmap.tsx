@@ -1,80 +1,9 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import teamRoadmapsJson from '@data/roadmap-team-roadmaps.json'
+import type { TeamRoadmaps } from '~/data-layer/queries/roadmap'
 
-interface GitHubPage {
-    title: string
-    html_url: string
-    number: string
-    closed_at: string
-    reactions: {
-        hooray: number
-        heart: number
-        eyes: number
-        plus1: number
-    }
-}
+export type Roadmap = TeamRoadmaps[number]['roadmaps'][number]
 
-interface Team {
-    name: string
-    roadmaps: Roadmap[]
-}
+const teams = teamRoadmapsJson as TeamRoadmaps
 
-export interface Roadmap {
-    squeakId: number
-    title: string
-    description: string
-    betaAvailable: boolean
-    complete: boolean
-    dateCompleted: string
-    image?: {
-        url: string
-    }
-    projectedCompletion: string
-    githubPages: GitHubPage[]
-}
-
-type RoadmapData = {
-    allSqueakTeam: {
-        nodes: Team[]
-    }
-}
-
-export const useRoadmap = (): Team[] => {
-    const data = useStaticQuery<RoadmapData>(query)
-
-    return data.allSqueakTeam.nodes
-}
-
-const query = graphql`
-    query RoadmapQuery {
-        allSqueakTeam {
-            nodes {
-                name
-                tagline
-                roadmaps {
-                    squeakId
-                    betaAvailable
-                    complete
-                    dateCompleted
-                    title
-                    description
-                    image {
-                        url
-                    }
-                    githubPages {
-                        title
-                        html_url
-                        number
-                        closed_at
-                        reactions {
-                            hooray
-                            heart
-                            eyes
-                            plus1
-                        }
-                    }
-                    projectedCompletion
-                }
-            }
-        }
-    }
-`
+/** Small teams with their in-progress roadmap items (projected, not complete). */
+export const useRoadmap = (): TeamRoadmaps => teams

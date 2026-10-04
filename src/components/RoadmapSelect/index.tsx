@@ -38,7 +38,7 @@ export default function RoadmapSelect({ teamID, onChange, value }: RoadmapOption
             },
             { encodeValuesOnly: true }
         )
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${query}`)
+        fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmaps?${query}`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setRoadmaps(

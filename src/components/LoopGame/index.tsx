@@ -2,7 +2,7 @@ import { render3d } from './render3d'
 import React, { useEffect, useRef, useState } from 'react'
 import OSButton from 'components/OSButton'
 import { Select } from 'components/RadixUI/Select'
-import maxImage from '../../images/max.png'
+import maxImage from '../../images/max.png?url'
 import {
     buildTrack,
     distance,
@@ -344,8 +344,8 @@ export default function LoopGame(): JSX.Element {
                     view === 'draw'
                         ? 'Trace the dashed rollercoaster track from the left start marker through each loop to the right finish marker'
                         : view === 'pov'
-                        ? 'Front-seat view of Max riding your rollercoaster'
-                        : '3D overview of Max riding your rollercoaster'
+                          ? 'Front-seat view of Max riding your rollercoaster'
+                          : '3D overview of Max riding your rollercoaster'
                 }
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}

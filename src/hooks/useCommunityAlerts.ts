@@ -17,7 +17,7 @@ import { useUser } from './useUser'
  * that are subscribed to topics but have no channel, which post nothing.
  */
 
-const API_HOST = process.env.GATSBY_SQUEAK_API_HOST
+const API_HOST = import.meta.env.PUBLIC_SQUEAK_API_HOST
 
 export interface AlertTeam {
     id: number

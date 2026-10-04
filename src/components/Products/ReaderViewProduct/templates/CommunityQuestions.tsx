@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import CommunityQuestionsList from './CommunityQuestionsList'
 import OSButton2 from 'components/OSButton/OSButton2'
@@ -10,14 +9,10 @@ import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
 import { pocketGuideUrl, volumeById } from '../../../../constants/pocketGuides'
+import topicQuestionCountsJson from '@data/roadmap-topic-question-counts.json'
+import type { TopicQuestionCounts } from '~/data-layer/queries/roadmap'
 
-type CommunityStatsNode = {
-    topicId: number | null
-    questions: number
-    resolved: number
-    replies: number
-    helpful: number
-}
+const topicQuestionCounts = topicQuestionCountsJson as TopicQuestionCounts
 
 const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
     const forumTopicId = (productData as any)?.forumTopicId
@@ -30,22 +25,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         sortBy: 'activity',
     })
 
-    const { allCommunityStats } = useStaticQuery(graphql`
-        query CommunityQuestionsStats {
-            allCommunityStats {
-                nodes {
-                    topicId
-                    questions
-                    resolved
-                    replies
-                    helpful
-                }
-            }
-        }
-    `)
-    const stats: CommunityStatsNode | undefined = allCommunityStats.nodes.find(
-        (node: CommunityStatsNode) => node.topicId === forumTopicId
-    )
+    const questionCount = topicQuestionCounts[forumTopicId] ?? 0
 
     const forumUrl = `/questions/topic/${slug}`
     const approxCount = (n: number) => {
@@ -96,9 +76,9 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 Search the community forums
                             </Link>
                             <p className="text-secondary text-base">
-                                {stats && stats.questions > 0 ? (
+                                {questionCount > 0 ? (
                                     <>
-                                        {approxCount(stats.questions)} discussions about {productData.name}, there's
+                                        {approxCount(questionCount)} discussions about {productData.name}, there's
                                     </>
                                 ) : (
                                     "There's "

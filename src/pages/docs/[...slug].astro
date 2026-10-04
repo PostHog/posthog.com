@@ -1,0 +1,35 @@
+---
+// Docs pages: contents/docs, plus the docs published from the posthog/posthog repo.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { apiEndpointPaths } from '../../lib/content/apiReference'
+import { type DocsEntry, docsPage } from '../../lib/content/docs'
+import { dataWarehouseSourcePaths } from '../../lib/content/integrations'
+import { sdkReferencePaths } from '../../lib/content/sdkReference'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    // On a clash, the page in contents/ wins over the one from the posthog/posthog repo.
+    const entries = new Map<string, DocsEntry>()
+    for (const entry of [...(await getCollection('posthogDocs')), ...(await getCollection('docs'))]) {
+        // A file without a title is a fragment that other pages import, not a page.
+        if (entry.data.title) entries.set(entry.id, entry)
+    }
+    // Generated pages own these URLs (src/pages/docs/{api,references,data-warehouse}).
+    const generated = new Set([...apiEndpointPaths(), ...sdkReferencePaths(), ...(await dataWarehouseSourcePaths())])
+    return [...entries.values()]
+        .filter((entry) => !isViewPath(entryPath('/docs', entry.id)) && !generated.has(entryPath('/docs', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id === 'index' ? undefined : entry.id }, props: { entry } }))
+}
+
+interface Props {
+    entry: DocsEntry
+}
+
+const page = docsPage(Astro.props.entry)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Handbook.tsx" props={{ page }} content={page.body} />
+</Site>

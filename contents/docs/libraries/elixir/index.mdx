@@ -39,7 +39,7 @@ import ElixirSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 For Phoenix or Plug apps, add `PostHog.Integrations.Plug` before your router to attach request metadata and PostHog tracing headers to events captured during the request.
 
-```elixir file=lib/my_app_web/endpoint.ex
+```elixir file="lib/my_app_web/endpoint.ex"
 plug PostHog.Integrations.Plug
 plug MyAppWeb.Router
 ```
@@ -80,7 +80,7 @@ Local evaluation is available in version 2.15.0 and later. Follow the [server-si
 
 Store the secure key in a server-side environment variable. Don't expose it to client-side applications:
 
-```elixir file=config/runtime.exs
+```elixir file="config/runtime.exs"
 config :posthog,
   api_host: "<ph_client_api_host>",
   api_key: "<ph_project_token>",
@@ -119,7 +119,7 @@ By default, PostHog starts its own supervision tree and attaches a logger handle
 
 In certain cases, you might want to run this supervision tree yourself. You can do this by disabling the default supervisor and adding PostHog.Supervisor to your application tree with its own configuration:
 
-```elixir file=config.exs
+```elixir file="config.exs"
 config :posthog, enable: false
 
 config :my_app, :posthog,
@@ -127,7 +127,7 @@ config :my_app, :posthog,
   api_key: "<ph_project_token>"
 ```
 
-```elixir file=application.ex
+```elixir file="application.ex"
 defmodule MyApp.Application do
   use Application
 
@@ -149,7 +149,7 @@ end
 
 In even more advanced cases, you might want to interact with more than one PostHog project. In this case, you can run multiple PostHog supervision trees, one of which can be the default one:
 
-```elixir file=config.exs
+```elixir file="config.exs"
 config :posthog,
   api_host: "<ph_client_api_host>",
   api_key: "<ph_project_token>"
@@ -160,7 +160,7 @@ config :my_app, :another_posthog,
   supervisor_name: AnotherPostHog
 ```
 
-```elixir file=application.ex
+```elixir file="application.ex"
 defmodule MyApp.Application do
   use Application
 

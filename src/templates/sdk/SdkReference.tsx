@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
 import SEO from '../../components/seo'
 import ReactMarkdown from 'react-markdown'
 import Accordion from '../../components/SdkReferences/Accordion'
 import Parameters from '../../components/SdkReferences/Parameters'
 import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
-import { useLocation } from '@reach/router'
-import { navigate } from 'gatsby'
 import { getLanguageFromSdkId, hasConcreteVersion, isLatestVersion } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
@@ -15,6 +12,7 @@ import ReaderView from 'components/ReaderView'
 import { Popover } from 'components/RadixUI/Popover'
 import { IconChevronDown } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useLocation, navigate } from 'lib/navigation'
 
 export interface Parameter {
     name: string
@@ -83,22 +81,16 @@ export interface SdkTypeData {
     example?: string
 }
 
-export interface PageContext {
+export interface SdkReferenceProps {
+    /** The reference row, without its `types` (the type pages render those). */
     fullReference: SdkReferenceData
+    /** Names of the types that have a page, for crosslinks. */
     types: string[]
-    // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
+    // Slug segment type cross-links resolve under, owned by src/lib/content/sdkReference.ts (latest →
     // referenceId, versioned → id). Passed in so the template never re-derives page routing.
     slugPrefix: string
-}
-
-export interface VersionsData {
-    allSdkReferences: {
-        nodes: Array<{
-            id: string
-            version: string
-            referenceId: string
-        }>
-    }
+    /** Every published version of this SDK for the version picker, `latest` first. */
+    versions: string[]
 }
 
 const padDescription = (description: string): string => {
@@ -147,32 +139,18 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
     return ordered
 }
 
-export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
-    const { fullReference, slugPrefix } = pageContext
+export default function SdkReference({ fullReference, slugPrefix, types, versions }: SdkReferenceProps) {
     const location = useLocation()
 
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.referenceId)
-    const validTypes = pageContext.types
+    const validTypes = types
     const isLatest = isLatestVersion(fullReference.version)
     // Versioned copies are duplicates of the unversioned page, which is the one worth indexing.
     const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
-    // Every sourced version, not just the ones that got pages. Minimal preview builds create the
-    // `latest` pages only (createSdkReferencePages in gatsby/createPages.ts), so picking any other
-    // version 404s in a preview. The full build emits every version.
-    const sdkVersions = data.allSdkReferences.nodes
-
     const currentReferenceId = fullReference.referenceId
-    // Sort versions by version string (descending)
-    const availableVersions = sdkVersions
-        .filter((version) => version.referenceId === currentReferenceId)
-        .sort((a, b) => {
-            if (a.version === 'latest') return -1
-            if (b.version === 'latest') return 1
-            return b.version.localeCompare(a.version, undefined, { numeric: true })
-        })
 
     // State for filtering
     const [currentFilter, setCurrentFilter] = useState('all')
@@ -309,13 +287,13 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                         onOpenChange={setVersionPopoverOpen}
                                     >
                                         <ScrollArea className="max-h-[60vh] !overflow-y-auto">
-                                            {availableVersions.map((version) => (
+                                            {versions.map((version) => (
                                                 <button
-                                                    key={version.version}
-                                                    onClick={() => handleVersionChange(version.version)}
+                                                    key={version}
+                                                    onClick={() => handleVersionChange(version)}
                                                     className="flex items-center gap-2 px-2 py-1 text-sm rounded hover:bg-accent transition-colors w-full"
                                                 >
-                                                    <span>{version.version}</span>
+                                                    <span>{version}</span>
                                                 </button>
                                             ))}
                                         </ScrollArea>
@@ -409,15 +387,3 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
         </ReaderView>
     )
 }
-
-export const query = graphql`
-    query SdkReferencesQuery {
-        allSdkReferences {
-            nodes {
-                id
-                version
-                referenceId
-            }
-        }
-    }
-`

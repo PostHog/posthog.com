@@ -38,7 +38,7 @@ Other useful forwarded props: `loop`, `rate`, `paused`, `composer`, `label`, `on
 ## Notes
 
 - **Play-when-in-view**: by default the player holds at frame 0 (via Typecaast's controlled `paused`) until it's scrolled fully into view, so an animation never plays out of sight. Uses `useInView` from `react-intersection-observer` with `triggerOnce` (once in view, it plays and won't re-pause on scroll-out). Disable with `playWhenInView={false}`.
-- **SSR**: Typecaast renders a correctly-sized box on the server and hydrates its visuals in, so no client-only guard is required. The package's `'use client'` banner is a directive webpack ignores under Gatsby (a harmless build warning).
+- **SSR**: Typecaast renders a correctly-sized box on the server and hydrates its visuals in, so no client-only guard is required. The package's `'use client'` banner has no effect in this Astro build, because React islands render without React Server Components.
 - **Many instances / performance**: skins are code-split per `config.meta.skin.id`, so multiple embeds don't each bundle the renderer. Off-screen players also stay paused thanks to play-when-in-view, so they don't burn animation frames before they're seen.
 - **`isolate`** defaults on because posthog.com pages carry heavy global styles. Pass `isolate={false}` only for an embed that needs to inherit page styles.
 

@@ -29,14 +29,14 @@ import {
     IconCursorClick,
 } from '@posthog/icons'
 import OSTable from 'components/OSTable'
-import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
-import StripeLogo from '../../images/stripe.svg'
-import Logo1984 from '../../images/1984.svg'
-import ODFLogo from '../../images/odf.svg'
+import YCombinatorLight from '../../images/customers/ycombinator-light.svg?url'
+import StripeLogo from '../../images/stripe.svg?url'
+import Logo1984 from '../../images/1984.svg?url'
+import ODFLogo from '../../images/odf.svg?url'
 import { Logo } from '@posthog/brand/logo'
 import { HedgehogHahaBizzniss, HedgehogTransformer } from '@posthog/brand/hoggies'
-import AxisLogo from '../../images/axis-logo.svg'
-import CategoryLogo from '../../images/category.svg'
+import AxisLogo from '../../images/axis-logo.svg?url'
+import CategoryLogo from '../../images/category.svg?url'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 

@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import dotenv from 'dotenv'
-import { createCareersOG, createOGImages, createOrUpdateStrapiPosts } from '../gatsby/postBuildTasks'
+import { createCareersOG, createOGImages, createOrUpdateStrapiPosts } from './post-build/tasks'
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.production') })
 dotenv.config({ path: path.resolve(process.cwd(), '.env') })

@@ -1,77 +1,30 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
 import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import TemplateCTAs from 'components/TemplateCTAs'
+import type { WorkflowTemplateProps } from '../lib/content/templates'
 
-export default function WorkflowTemplate({ data }) {
-    if (!data) return null
-
-    const { workflow, mdxTemplates, workflowTemplates } = data
-
-    if (!workflow) return null
-
+export default function WorkflowTemplate({ workflow, menu }: WorkflowTemplateProps) {
     const { name, description, image_url, created_by } = workflow
-
-    // Build sidebar menu from all templates
-    const dashboardTemplates = (mdxTemplates?.nodes || []).filter((t) =>
-        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'dashboard')
-    )
-    const surveyTemplates = (mdxTemplates?.nodes || []).filter((t) =>
-        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'survey')
-    )
-    const workflows = workflowTemplates?.nodes || []
-
-    const templatesMenu = [
-        ...(dashboardTemplates.length > 0
-            ? [
-                  {
-                      name: 'Dashboards',
-                      children: dashboardTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
-                          name: title,
-                          url: slug,
-                      })),
-                  },
-              ]
-            : []),
-        ...(surveyTemplates.length > 0
-            ? [
-                  {
-                      name: 'Surveys',
-                      children: surveyTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
-                          name: title,
-                          url: slug,
-                      })),
-                  },
-              ]
-            : []),
-        ...(workflows.length > 0
-            ? [
-                  {
-                      name: 'Workflows',
-                      children: workflows.map((w) => ({
-                          name: w.name,
-                          url: `/templates/workflow/${w.fields.slug}`,
-                      })),
-                  },
-              ]
-            : []),
-    ]
 
     const authorName = created_by ? [created_by.first_name, created_by.last_name].filter(Boolean).join(' ') : 'PostHog'
 
     return (
         <>
-            <SEO image={image_url} title={`${name} workflow template - PostHog`} description={description} />
+            <SEO
+                image={image_url ?? undefined}
+                title={`${name} workflow template - PostHog`}
+                description={description ?? undefined}
+            />
             <ReaderView
                 body={{
                     type: 'plain',
                 }}
                 title={name}
-                leftSidebar={<TreeMenu items={templatesMenu} />}
+                leftSidebar={<TreeMenu items={menu} />}
                 hideRightSidebar
                 hideTitle
                 showQuestions={false}
@@ -81,7 +34,7 @@ export default function WorkflowTemplate({ data }) {
                     {image_url && (
                         <div className="mb-4">
                             <CloudinaryImage
-                                src={image_url}
+                                src={image_url as `https://res.cloudinary.com/${string}`}
                                 alt={name}
                                 className="rounded w-full"
                                 imgClassName="w-full"
@@ -107,46 +60,3 @@ export default function WorkflowTemplate({ data }) {
         </>
     )
 }
-
-export const query = graphql`
-    query WorkflowTemplate($slug: String!) {
-        workflow: postHogWorkflowTemplate(fields: { slug: { eq: $slug } }) {
-            templateId
-            fields {
-                slug
-            }
-            name
-            description
-            image_url
-            created_by {
-                first_name
-                last_name
-            }
-        }
-        mdxTemplates: allMdx(
-            filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }
-            sort: { fields: [fields___slug], order: ASC }
-        ) {
-            nodes {
-                id
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    filters {
-                        type
-                    }
-                }
-            }
-        }
-        workflowTemplates: allPostHogWorkflowTemplate(sort: { fields: [name], order: ASC }) {
-            nodes {
-                fields {
-                    slug
-                }
-                name
-            }
-        }
-    }
-`

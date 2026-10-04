@@ -12,11 +12,11 @@ import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
 import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
-import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { OSSelect } from 'components/OSForm'
+import { navigate } from 'lib/navigation'
 
 type QuestionFormValues = {
     subject: string
@@ -322,7 +322,7 @@ export const QuestionForm = ({
             topic?.id ||
             other?.topicID ||
             (parentName &&
-                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+                (await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
                     .then((res) => res.json())
                     .then((topic) => topic?.data && topic?.data[0]?.id)))
 
@@ -346,7 +346,7 @@ export const QuestionForm = ({
             ]
         }
 
-        const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+        const { data: questionData } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

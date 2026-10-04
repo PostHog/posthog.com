@@ -37,8 +37,8 @@ export interface TypecaastPlayerProps extends Omit<TypecaastProps, 'config' | 't
  * `paused` to halt off-screen players when many are mounted — stays available.
  *
  * SSR-safe: Typecaast renders a correctly-sized box on the server and hydrates its visuals in,
- * so no client-only guard is needed (the package's `'use client'` banner is a benign,
- * webpack-ignored directive under Gatsby).
+ * so no client-only guard is needed (the package's `'use client'` banner is a benign directive
+ * that the bundler ignores).
  */
 export default function TypecaastPlayer({
     config,

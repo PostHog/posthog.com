@@ -24,7 +24,7 @@ Generate environment files for your project with `ng g environments`. Configure 
 
   Create a service by running `ng g service services/posthog`. The service should look like this:
 
-  ```ts file=posthog.service.ts
+  ```ts file="posthog.service.ts"
   // src/app/services/posthog.service.ts
   import { Injectable, NgZone } from "@angular/core";
   import posthog from "posthog-js";
@@ -52,7 +52,7 @@ Generate environment files for your project with `ng g environments`. Configure 
 
   Then, inject the service in your app's root component `app.component.ts`. This will make sure PostHog is initialized before any other component is rendered.
 
-  ```ts file=app.component.ts
+  ```ts file="app.component.ts"
   // src/app/app.component.ts
   import { Component } from "@angular/core";
   import { RouterOutlet } from "@angular/router";
@@ -77,7 +77,7 @@ Generate environment files for your project with `ng g environments`. Configure 
 
   In your `src/main.ts`, initialize PostHog using your project token and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
 
-  ```ts file=main.ts
+  ```ts file="main.ts"
   // src/main.ts
   import { bootstrapApplication } from '@angular/platform-browser';
   import { appConfig } from './app/app.config';

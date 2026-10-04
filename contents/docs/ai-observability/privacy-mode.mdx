@@ -44,7 +44,7 @@ It can also be set at the request level by setting the `privacy_mode` parameter 
 
 <MultiLanguage>
 
-```python file=OpenAI.py
+```python file="OpenAI.py"
 client.responses.create(
     model="gpt-4o-mini",
     input=[...],
@@ -52,7 +52,7 @@ client.responses.create(
 )
 ```
 
-```typescript file=OpenAI.ts
+```typescript file="OpenAI.ts"
 const completion = await openai.responses.create({
     model: "gpt-4o-mini",
     input: [...],
@@ -60,7 +60,7 @@ const completion = await openai.responses.create({
 });
 ```
 
-```python file=Anthropic
+```python file="Anthropic"
 response = client.messages.create(
     model="claude-3-opus-20240229",
     messages=[...],
@@ -68,7 +68,7 @@ response = client.messages.create(
 )
 ```
 
-```python file=Google
+```python file="Google"
 response = client.models.generate_content(
     model="gemini-2.5-flash",
     contents=[...],
@@ -76,7 +76,7 @@ response = client.models.generate_content(
 )
 ```
 
-```python file=LangChain
+```python file="LangChain"
 callback_handler = PosthogCallbackHandler(
     client,
     privacy_mode=True

@@ -10,8 +10,8 @@ import Slider from 'components/Slider'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import transformValues from 'components/Squeak/util/transformValues'
-import { navigate } from 'gatsby'
 import * as Yup from 'yup'
+import { navigate } from 'lib/navigation'
 
 const CategoryDropdown = ({ category, categories, onChange }) => {
     return (
@@ -110,7 +110,7 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                         },
                     },
                 })
-                const { data: post } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts/${id || ''}`, {
+                const { data: post } = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/posts/${id || ''}`, {
                     body: data,
                     method: id ? 'PUT' : 'POST',
                     headers: {

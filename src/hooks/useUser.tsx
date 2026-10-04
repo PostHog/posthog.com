@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect } from 'react'
+import { createStore, useStoreState } from 'lib/store'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import usePostHog from './usePostHog'
@@ -165,12 +166,23 @@ type UserProviderProps = {
     children: React.ReactNode
 }
 
+// The signed-in user is shared by every island (see src/lib/store.ts), so the chrome and the page agree
+// on who is signed in, and the user is fetched once per visit, not once per island.
+const userStore = createStore<{
+    isLoading: boolean
+    isValidating: boolean
+    user: User | null
+    jwt: string | null
+    notifications: any
+}>({ isLoading: false, isValidating: true, user: null, jwt: null, notifications: [] })
+let validationStarted = false
+
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isValidating, setIsValidating] = useState(true)
-    const [user, setUser] = useState<User | null>(null)
-    const [jwt, setJwt] = useState<string | null>(null)
-    const [notifications, setNotifications] = useState<any>([])
+    const [isLoading, setIsLoading] = useStoreState(userStore, 'isLoading')
+    const [isValidating, setIsValidating] = useStoreState(userStore, 'isValidating')
+    const [user, setUser] = useStoreState(userStore, 'user')
+    const [jwt, setJwt] = useStoreState(userStore, 'jwt')
+    const [notifications, setNotifications] = useStoreState(userStore, 'notifications')
     const { addToast } = useToast()
 
     const posthog = usePostHog()
@@ -186,6 +198,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     useEffect(() => {
+        if (validationStarted) return
+        validationStarted = true
         validateUser()
     }, [])
 
@@ -567,8 +581,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             bookmarks: true,
                             achievements: {
                                 // Only `achievement.id` is read (achieved-status check); the
-                                // rendered achievement icons/images come from a Gatsby static
-                                // query, so we don't populate achievement.image/icon here.
+                                // rendered achievement icons/images come from the build-time
+                                // data layer, so we don't populate achievement.image/icon here.
                                 populate: {
                                     achievement: {
                                         fields: ['id'],

@@ -3,12 +3,11 @@ import { BorderWrapper } from 'components/BorderWrapper'
 import { Caption } from 'components/Caption'
 import { FloatedImage } from 'components/FloatedImage'
 import { ImageBlock } from 'components/ImageBlock'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
 import { animateScroll as scroll } from 'react-scroll'
-import { ViewButton } from '../../templates/tutorials/Tutorial'
+import { ViewButton } from 'components/ViewButton'
 import { Video } from 'components/NotProductIcons'
 import { motion } from 'framer-motion'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
@@ -19,6 +18,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import Markdown from 'components/Squeak/components/Markdown'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { OSQuote } from 'components/OSQuote'
+import { MDXRenderer } from 'components/MDXRenderer'
 
 const A = (props) => <Link {...props} />
 
@@ -52,7 +52,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
         OSQuote,
         FloatedImage,
         a: A,
-        inlineCode: InlineCode,
+        code: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
         MultiLanguage: MdxCodeBlock,

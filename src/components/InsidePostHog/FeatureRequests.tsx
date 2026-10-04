@@ -1,8 +1,11 @@
 import { CallToAction } from 'components/CallToAction'
 import { VoteBox } from 'components/Roadmap'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import React from 'react'
+import githubReactionsJson from '@data/roadmap-github-reactions.json'
+import type { RoadmapGithubReactions } from '~/data-layer/queries/roadmap'
+
+const githubReactions = githubReactionsJson as RoadmapGithubReactions
 
 const Skeleton = () => {
     return new Array(3).fill(0).map((_, index) => {
@@ -11,21 +14,6 @@ const Skeleton = () => {
 }
 
 export default function FeatureRequests() {
-    const { staticRoadmaps } = useStaticQuery(graphql`
-        {
-            staticRoadmaps: allSqueakRoadmap {
-                nodes {
-                    githubPages {
-                        reactions {
-                            total_count
-                        }
-                    }
-                    squeakId
-                }
-            }
-        }
-    `)
-
     const { isLoading, ...other } = useRoadmaps({
         params: {
             filters: {
@@ -41,8 +29,7 @@ export default function FeatureRequests() {
 
     const roadmaps = other.roadmaps.map(({ id, attributes }) => {
         const likeCount = attributes?.likes?.data?.length || 0
-        const staticLikeCount =
-            staticRoadmaps.nodes.find((node) => node.squeakId === id)?.githubPages?.[0]?.reactions?.total_count || 0
+        const staticLikeCount = githubReactions[id] || 0
         return { id, attributes: { ...attributes, likeCount: likeCount + staticLikeCount } }
     })
 
@@ -58,9 +45,7 @@ export default function FeatureRequests() {
                         .slice(0, 3)
                         .map((roadmap) => {
                             const likeCount = roadmap?.attributes?.likes?.data?.length || 0
-                            const staticLikeCount =
-                                staticRoadmaps.nodes.find((node) => node.squeakId === roadmap.id)?.githubPages?.[0]
-                                    ?.reactions?.total_count || 0
+                            const staticLikeCount = githubReactions[roadmap.id] || 0
                             const totalLikes = likeCount + staticLikeCount
                             return (
                                 <li key={roadmap.squeakId} className="flex flex-wrap gap-1">

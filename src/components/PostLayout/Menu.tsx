@@ -1,6 +1,5 @@
 import { IMenu } from './types'
-import { useLocation } from '@reach/router'
-import { replacePath } from '../../../gatsby/utils'
+import { replacePath } from '../../data-layer/utils'
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import { Link as ScrollLink } from 'react-scroll'
@@ -9,6 +8,7 @@ import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons'
 import { usePost } from './hooks'
+import { useLocation } from 'lib/navigation'
 
 const Chevron = ({ open, className = '' }: { open: boolean; className?: string }) => {
     return (
@@ -112,7 +112,8 @@ export default function Menu({
     const { isMenuItemActive, isMenuItemOpen } = usePost()
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
-    const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
+    const menuType =
+        other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : (other.menuType ?? 'standard')
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${

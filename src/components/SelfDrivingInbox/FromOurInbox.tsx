@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import { IconCheck, IconChevronDown, IconPullRequest } from '@posthog/icons'
 
@@ -7,73 +6,19 @@ import Link from 'components/Link'
 import Markdown from 'components/Markdown'
 
 import ReportCard from './ReportCard'
-import { InboxExample, UNCATEGORIZED } from './types'
+import { InboxExample } from './types'
+import inboxExamplesJson from '@data/content-inbox-examples.json'
+import type { InboxExamples } from '~/data-layer/queries/content'
 
 /**
  * Every example is one frontmatter-only file under `from-our-inbox/_examples/`. The `_` prefix
  * keeps them out of the page and nav builders, the same way `_snippets` works.
  */
 export function useInboxExamples(): InboxExample[] {
-    const data = useStaticQuery(graphql`
-        query FromOurInboxQuery {
-            examples: allMdx(
-                filter: { fields: { slug: { regex: "/^/docs/self-driving/from-our-inbox/_examples//" } } }
-            ) {
-                nodes {
-                    frontmatter {
-                        category
-                        report {
-                            title
-                            source
-                            body
-                            suggestedAction
-                            affected
-                        }
-                        inboxExample {
-                            reportId
-                            publishedAt
-                            outcome
-                            pullRequest {
-                                url
-                                title
-                                mergedAt
-                            }
-                            resolution {
-                                label
-                                resolvedAt
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    return useMemo(
-        () =>
-            (data?.examples?.nodes || [])
-                .filter((node: any) => {
-                    const example = node.frontmatter?.inboxExample
-                    // An example must show its outcome: a merged pull request, or work that needed none.
-                    return node.frontmatter?.report?.title && (example?.pullRequest?.url || example?.resolution?.label)
-                })
-                .map(
-                    (node: any): InboxExample => ({
-                        ...node.frontmatter.inboxExample,
-                        category: node.frontmatter.category || UNCATEGORIZED,
-                        report: node.frontmatter.report,
-                    })
-                )
-                // Newest first, so the page reads as a feed. The id breaks ties between same-day entries.
-                .sort(
-                    (a: InboxExample, b: InboxExample) =>
-                        b.publishedAt.localeCompare(a.publishedAt) || a.reportId.localeCompare(b.reportId)
-                ),
-        [data]
-    )
+    return inboxExamplesJson as InboxExamples
 }
 
-// Gatsby returns these dates as UTC midnight. Keep only the calendar day, so a viewer west of UTC
+// These dates are at UTC midnight. Keep only the calendar day, so a viewer west of UTC
 // does not see the day before.
 const formatDate = (date?: string): string | null => (date ? dayjs(date.slice(0, 10)).format('MMM D, YYYY') : null)
 

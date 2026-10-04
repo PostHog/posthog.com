@@ -57,7 +57,7 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
                 { populate: ['parent', 'children'], sort: ['name:asc'] },
                 { encodeValuesOnly: true }
             )
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-folders?${query}`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-folders?${query}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },
@@ -77,7 +77,7 @@ export function MediaLibraryProvider({ children }: { children: React.ReactNode }
             const jwt = await getJwt()
             if (!jwt) return
 
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/media-tags`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/media-tags`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },

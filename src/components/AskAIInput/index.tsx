@@ -5,9 +5,9 @@ import { IconSparkles } from '@posthog/icons'
 import { useLayoutData } from 'components/Layout/hooks'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
-import { useLocation } from '@reach/router'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
+import { useLocation } from 'lib/navigation'
 
 interface AskAIInputProps {
     placeholder?: string

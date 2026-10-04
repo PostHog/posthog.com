@@ -1,4 +1,5 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import loreJson from '@data/content-hogpedia-lore.json'
+import type { HogpediaLore } from '~/data-layer/queries/content'
 import { HogpediaArticleSummary, onlyArticles } from './data'
 
 export const LORE_PAGE = '/handbook/company/lore'
@@ -55,17 +56,7 @@ const matchArticle = (text: string, articles: HogpediaArticleSummary[]): Hogpedi
  * of an emoji that has just been removed, so they no longer stand on their own.
  */
 export const useLoreFacts = (articles: HogpediaArticleSummary[]): LoreFact[] => {
-    const data = useStaticQuery(graphql`
-        query HogpediaLoreFacts {
-            lore: allMdx(filter: { fields: { slug: { regex: "//handbook/company/lore/?$/" } } }) {
-                nodes {
-                    rawBody
-                }
-            }
-        }
-    `)
-
-    const raw: string = data?.lore?.nodes?.[0]?.rawBody || ''
+    const raw: string = loreJson as HogpediaLore
 
     return raw
         .split('\n')

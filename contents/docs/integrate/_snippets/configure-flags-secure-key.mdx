@@ -102,7 +102,7 @@ let options = ClientOptionsBuilder::default()
 let client = posthog_rs::client(options).await;
 ```
 
-```elixir file=config/runtime.exs
+```elixir file="config/runtime.exs"
 config :posthog,
   api_host: "<ph_client_api_host>",
   api_key: "<ph_project_token>",

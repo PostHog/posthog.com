@@ -31,7 +31,7 @@ PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. 
 PostHog will send a `$screen` event when the `onAppear` action is executed and will infer a screen name based on the view's type. You can provide a custom name and event properties if needed.
 
-```swift file=HomeView.swift
+```swift file="HomeView.swift"
 // This will trigger a screen view event with $screen_name: "HomeViewContent"
 struct HomeView: View {
     var body: some View {

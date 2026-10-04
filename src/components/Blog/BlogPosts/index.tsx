@@ -1,37 +1,7 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import blogPostsJson from '@data/content-blog-posts.json'
+import type { BlogPostList } from '~/data-layer/queries/content'
 
-export const BlogPosts = ({ render }: { render: (posts: Array<any>) => JSX.Element }) => {
-    const postData = useStaticQuery(query)
-    const posts = postData.allMdx.edges
-        .filter((edge) => !!edge.node.frontmatter.date)
-        .sort((a, b) => new Date(b.node.frontmatter.date) - new Date(a.node.frontmatter.date))
+const posts = blogPostsJson as BlogPostList
 
-    return render(posts)
-}
-
-const query = graphql`
-    query {
-        allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { rootPage: { eq: "/blog" } } }
-        ) {
-            edges {
-                node {
-                    fields {
-                        slug
-                    }
-                    id
-                    excerpt(pruneLength: 250)
-                    frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
-                        title
-                        rootPage
-                        featuredImage {
-                            publicURL
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+/** Blog posts, newest first. */
+export const BlogPosts = ({ render }: { render: (posts: BlogPostList) => JSX.Element }): JSX.Element => render(posts)

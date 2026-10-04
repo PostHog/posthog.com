@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
-import { Link, navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import { Link, navigate } from 'lib/navigation'
 
 const AGENT_NOTE = `<!--
   For agents and crawlers: this is a 404 page. The "fatal exception" above is a
@@ -213,7 +213,7 @@ export default function BlueScreenOfDeath(): JSX.Element {
 
                         {/* Direct routes, for any reader that cannot drive the search box above —
                             which is every crawler and agent, because it needs JavaScript. Plain
-                            <a>, not <Link>: these are static files, not Gatsby routes, so client
+                            <a>, not <Link>: these are static files, not page routes, so client
                             side routing would send them to this same 404. */}
                         <div className="mt-4 space-y-1 text-xs break-all">
                             <div>Or mount an index directly:</div>

@@ -26,7 +26,7 @@ The PostHog Kotlin Multiplatform (KMP) SDK lets you capture analytics from share
 
 Add the dependency to your shared module's `commonMain` source set:
 
-```kotlin file=shared/build.gradle.kts
+```kotlin file="shared/build.gradle.kts"
 kotlin {
     sourceSets {
         commonMain.dependencies {
@@ -38,7 +38,7 @@ kotlin {
 
 If you use a [Gradle version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html), declare it there instead:
 
-```toml file=gradle/libs.versions.toml
+```toml file="gradle/libs.versions.toml"
 [versions]
 posthog-kmp = "<version>"
 
@@ -56,7 +56,7 @@ On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](http
 
 If your app supports iOS 13 or 14, set the minimum deployment target in the Gradle module that builds your iOS framework:
 
-```kotlin file=shared/build.gradle.kts
+```kotlin file="shared/build.gradle.kts"
 kotlin {
     swiftPMDependencies {
         iosMinimumDeploymentTarget.set("13.0")
@@ -174,7 +174,7 @@ fun main() = application {
 
 If you package your app with Compose Desktop, add `jdk.unsupported` and a ProGuard configuration file to the `compose.desktop.application` block in your app module's `build.gradle.kts`:
 
-```kotlin file=composeApp/build.gradle.kts
+```kotlin file="composeApp/build.gradle.kts"
 compose.desktop {
     application {
         buildTypes.release.proguard {
@@ -192,7 +192,7 @@ If you already configure `nativeDistributions.modules`, add `jdk.unsupported` to
 
 Create `compose-desktop.pro` next to the module's `build.gradle.kts`:
 
-```text file=composeApp/compose-desktop.pro
+```text file="composeApp/compose-desktop.pro"
 # PostHog uses Gson reflection for its queue and API payloads.
 -keepattributes Signature,*Annotation*
 -keep class com.posthog.** { *; }

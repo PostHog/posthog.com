@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import skillFilesJson from '@data/content-skill-files.json'
+import type { SkillFiles } from '~/data-layer/queries/content'
 
 import { normalizeUrl } from './bookModel'
 
@@ -16,33 +17,14 @@ export interface SkillFile {
  * product's report/inbox machinery so any guide can show its own skill file as a figure.
  */
 export function useSkillFiles(): Map<string, SkillFile> {
-    const data = useStaticQuery(graphql`
-        query PocketGuideSkillFilesQuery {
-            skills: allMdx(filter: { fields: { slug: { regex: "//SKILL$/" } } }) {
-                nodes {
-                    rawBody
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        name
-                        description
-                    }
-                }
-            }
-        }
-    `)
-
-    return useMemo(() => {
-        return new Map(
-            (data?.skills?.nodes || []).map((node: any) => [
-                normalizeUrl(node.fields.slug.replace(/\/SKILL$/, '')),
-                {
-                    name: node.frontmatter?.name,
-                    description: node.frontmatter?.description,
-                    raw: node.rawBody,
-                },
-            ])
-        )
-    }, [data])
+    return useMemo(
+        () =>
+            new Map(
+                (skillFilesJson as SkillFiles).map(({ slug, name, description, raw }) => [
+                    normalizeUrl(slug),
+                    { name, description, raw },
+                ])
+            ),
+        []
+    )
 }

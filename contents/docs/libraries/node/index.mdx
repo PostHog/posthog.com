@@ -279,7 +279,7 @@ posthog.withContext(
 
 If you use Express, add request-scoped PostHog context with the built-in middleware helpers. Register `setupExpressRequestContext` before your routes so events captured during a request automatically use the incoming session and distinct ID headers. Register `setupExpressErrorHandler` after your routes if you want to send Express errors to PostHog Error Tracking.
 
-```ts file=server.ts
+```ts file="server.ts"
 import express from 'express'
 import { PostHog, setupExpressRequestContext, setupExpressErrorHandler } from 'posthog-node'
 
@@ -339,7 +339,7 @@ Tracing records **spans** – timed units of work – so you can see where time 
 
 Tracing is off until you set the `traces` option. No OpenTelemetry dependency is required. For what you can do with spans once they arrive, see [Distributed tracing](/docs/distributed-tracing/start-here).
 
-```ts file=server.ts
+```ts file="server.ts"
 import { PostHog } from 'posthog-node'
 
 const posthog = new PostHog('<ph_project_token>', {
@@ -426,7 +426,7 @@ Both `withSpan` and `startSpan` take the same options:
 
 Spans use [W3C Trace Context](https://www.w3.org/TR/trace-context/), so a trace can span several services. Pass an inbound `traceparent` header as `parent` to continue a trace another service started, and send `span.traceparent()` onward when you call out.
 
-```ts file=server.ts
+```ts file="server.ts"
 app.post('/checkout', async (req, res) => {
   await posthog.withSpan('POST /checkout', { kind: 'server', parent: req.get('traceparent') }, async (span) => {
     const traceparent = span.traceparent()

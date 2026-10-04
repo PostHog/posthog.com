@@ -7,7 +7,7 @@ import productAnalyticsContent from './ProductAnalytics'
 import sessionReplayContent from './SessionReplay'
 import featureFlagsContent from './FeatureFlags'
 import abTestingContent from './ABTesting'
-import { Link } from 'gatsby'
+import { Link } from 'lib/navigation'
 
 const content = {
     'product os': productOSContent,

@@ -5,7 +5,7 @@ Main script to generate handbook audio files
 
 Usage:
     # Single file
-    python scripts/handbook-audio/generate.py contents/handbook/values.md
+    python scripts/handbook-audio/generate.py contents/handbook/values.mdx
     
     # All handbook files
     python scripts/handbook-audio/generate.py --all
@@ -14,7 +14,7 @@ Usage:
     python scripts/handbook-audio/generate.py --search "engineering"
     
     # Dry run (process markdown but don't generate audio)
-    python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+    python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.mdx
 """
 
 import sys
@@ -42,21 +42,21 @@ OUTPUT_DIR = REPO_ROOT / 'public' / 'handbook-audio'
 # This list is used by the --allowed-only mode for cron jobs
 ALLOWED_FILES = [
     # Core handbook pages (in order)
-    'why-does-posthog-exist.md',      # 1. Why does PostHog exist?
-    'story.md',                        # 2. How we got here
-    'how-we-get-users.md',             # 3. How we get users
-    'who-we-build-for.md',             # 4. Who we are building for
-    'making-users-happy.md',           # 5. How we make users happy
-    'how-we-make-money.md',            # 6. How we make money
-    'low-prices.md',                   # 7. Enduringly low prices
-    'which-products.md',               # 8. Deciding which products to build
-    'wide-company.md',                 # 9. A wide company with small teams
-    'strong-team.md',                  # 10. How we're building a world-class team
-    'values.md',                       # 11. What we value
-    'world-class-engineering.md',      # 12. Providing a world-class engineering environment
-    'finance.md',                      # 13. Not running out of money
-    'future.md',                       # 14. Where are we going?
-    'help.md',                         # 15. How you can help
+    'why-does-posthog-exist.mdx',      # 1. Why does PostHog exist?
+    'story.mdx',                        # 2. How we got here
+    'how-we-get-users.mdx',             # 3. How we get users
+    'who-we-build-for.mdx',             # 4. Who we are building for
+    'making-users-happy.mdx',           # 5. How we make users happy
+    'how-we-make-money.mdx',            # 6. How we make money
+    'low-prices.mdx',                   # 7. Enduringly low prices
+    'which-products.mdx',               # 8. Deciding which products to build
+    'wide-company.mdx',                 # 9. A wide company with small teams
+    'strong-team.mdx',                  # 10. How we're building a world-class team
+    'values.mdx',                       # 11. What we value
+    'world-class-engineering.mdx',      # 12. Providing a world-class engineering environment
+    'finance.mdx',                      # 13. Not running out of money
+    'future.mdx',                       # 14. Where are we going?
+    'help.mdx',                         # 15. How you can help
 ]
 
 

@@ -21,7 +21,7 @@ To start, run `pip install posthog` to install PostHog’s Python SDK.
 
 Then, configure PostHog in your app config so it's initialized when Django starts:
 
-```python file=your_app/apps.py
+```python file="your_app/apps.py"
 from django.apps import AppConfig
 import posthog
 
@@ -35,7 +35,7 @@ class YourAppConfig(AppConfig):
 
 Next, if you haven't done so already, add your `AppConfig` to `INSTALLED_APPS` in `settings.py`:
 
-```python file=settings.py
+```python file="settings.py"
 INSTALLED_APPS = [
     # ... other apps
     'your_app_name.apps.YourAppConfig',

@@ -20,7 +20,6 @@ import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
-import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../../constants'
@@ -30,6 +29,10 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
+import homePageJson from '@data/content-home-page.json'
+import type { EditorPage } from '~/data-layer/queries/content'
+
+const homePage = homePageJson as EditorPage
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -311,17 +314,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
 ]
 
-export default function HomeTest() {
-    const data = useStaticQuery(graphql`
-        query HomeTestMdx {
-            homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
-    const rawBody = data?.homepageMdx?.rawBody
-    const mdxBody = data?.homepageMdx?.mdxBody
+export default function HomeTest(): JSX.Element {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -342,8 +335,8 @@ export default function HomeTest() {
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
-                mdxBody={mdxBody}
+                body={homePage.rawBody}
+                mdxBody={homePage.body ?? undefined}
                 maxWidth={900}
                 cta={{
                     url: `https://${

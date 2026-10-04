@@ -64,14 +64,14 @@ Never manually capture `$exception` events using `posthog.capture('$exception', 
 
 <MultiLanguage>
 
-```javascript file=Web
+```javascript file="Web"
 posthog.captureException(error, {
   custom_property: "custom_value",
   custom_list: ["custom_value_1", "custom_value_2"],
 })
 ```
 
-```javascript file=Node.js
+```javascript file="Node.js"
 posthog.captureException(e, 'user_distinct_id', {
   custom_property: "custom_value",
   custom_list: ["custom_value_1", "custom_value_2"],
@@ -112,7 +112,7 @@ exception := posthog.NewDefaultException(
 client.Enqueue(exception)
 ```
 
-```csharp file=.NET
+```csharp file=".NET"
 posthog.CaptureException(
     exception,
     "user_distinct_id",
@@ -124,7 +124,7 @@ posthog.CaptureException(
 );
 ```
 
-```csharp file=Unity
+```csharp file="Unity"
 PostHog.CaptureException(
     exception,
     new Dictionary<string, object>
@@ -161,7 +161,7 @@ Use them for high-signal checkpoints like:
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 posthog.addExceptionStep('checkout_started', {
   cart_total: 12900,
   item_count: 3,
@@ -180,7 +180,7 @@ try {
 }
 ```
 
-```react-native file=React Native
+```react-native file="React Native"
 posthog.addExceptionStep('checkout_started', {
   cart_total: 12900,
   item_count: 3,
@@ -199,7 +199,7 @@ try {
 }
 ```
 
-```swift file=iOS
+```swift file="iOS"
 PostHogSDK.shared.addExceptionStep("checkout_started", properties: [
     "cart_total": 12900,
     "item_count": 3,
@@ -218,7 +218,7 @@ do {
 }
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 PostHog.addExceptionStep("checkout_started", mapOf(
     "cart_total" to 12900,
     "item_count" to 3,
@@ -237,7 +237,7 @@ try {
 }
 ```
 
-```dart file=Flutter
+```dart file="Flutter"
 await Posthog().addExceptionStep('checkout_started', properties: {
   'cart_total': 12900,
   'item_count': 3,
@@ -266,7 +266,7 @@ The buffer is byte-aware: when the budget is exceeded, the oldest steps are evic
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 posthog.init('<ph_project_token>', {
   api_host: '<ph_api_client_host>',
   defaults: '<ph_posthog_js_defaults>',
@@ -279,7 +279,7 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-```react-native file=React Native
+```react-native file="React Native"
 const posthog = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
   errorTracking: {
@@ -291,14 +291,14 @@ const posthog = new PostHog('<ph_project_token>', {
 })
 ```
 
-```swift file=iOS
+```swift file="iOS"
 let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.errorTrackingConfig.exceptionSteps.enabled = true
 config.errorTrackingConfig.exceptionSteps.maxBytes = 32768
 PostHogSDK.shared.setup(config)
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>").apply {
     errorTrackingConfig.exceptionSteps.enabled = true
     errorTrackingConfig.exceptionSteps.maxBytes = 32768
@@ -306,7 +306,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_cli
 PostHogAndroid.setup(this, config)
 ```
 
-```dart file=Flutter
+```dart file="Flutter"
 final config = PostHogConfig('<ph_project_token>');
 config.errorTrackingConfig.exceptionSteps.enabled = true;
 config.errorTrackingConfig.exceptionSteps.maxBytes = 32768;
@@ -357,7 +357,7 @@ Here are some examples of how to override exception properties:
 
 <MultiLanguage>
 
-```javascript file=Web
+```javascript file="Web"
 try {
   // ...
 } catch (error) {
@@ -369,7 +369,7 @@ try {
 }
 ```
 
-```javascript file=Node.js
+```javascript file="Node.js"
 try {
   // ...
 } catch (error) {

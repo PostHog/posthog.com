@@ -51,7 +51,7 @@ If you want to nudge the agent toward a specific style of context (use case, use
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, {
   context: {
     description: "Describe the user's underlying goal in one sentence, not the tool you're calling.",
@@ -59,7 +59,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp.types import MCPAnalyticsContextOptions, MCPAnalyticsOptions
 
 instrument(server, posthog, MCPAnalyticsOptions(
@@ -69,7 +69,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 ))
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(
   server, posthog,
   context: { description: "Describe the user's underlying goal in one sentence, not the tool you're calling." }
@@ -98,7 +98,7 @@ Use a synchronous callback when you can derive intent from the tool name and arg
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, {
   intentFallback: (request) => {
     const tool = request.params?.name
@@ -109,7 +109,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp.types import MCPAnalyticsOptions
 
 def intent_fallback(request, extra):

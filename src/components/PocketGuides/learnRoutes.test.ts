@@ -30,7 +30,7 @@ test('Product Analytics Pocket Guide roots redirect to the Introduction before t
     )
 })
 
-test('every client-only Learn chapter route is rewritten to its Gatsby page', () => {
+test('every client-only Learn chapter route is rewritten to its built page', () => {
     const rewrites = vercelConfig.rewrites as Array<{ source: string; destination: string }>
     const products = ['product-analytics', 'ai-observability', 'session-replay']
 

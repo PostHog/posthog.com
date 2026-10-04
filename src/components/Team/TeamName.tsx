@@ -1,8 +1,6 @@
 import React from 'react'
-import AutosizeInput from 'react-input-autosize'
+import AutosizeInput from 'components/AutosizeInput'
 import { normalizeSlug } from './utils'
-
-const AutosizeInputComponent = AutosizeInput as any
 
 export default function TeamName({
     teamName,
@@ -36,7 +34,7 @@ export default function TeamName({
                 <div>
                     <div className="font-bold flex items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                            <AutosizeInputComponent
+                            <AutosizeInput
                                 inputClassName="p-2 rounded-md bg-white dark:bg-accent-dark border border-input"
                                 placeholder="Team name"
                                 type="text"

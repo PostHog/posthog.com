@@ -1,0 +1,32 @@
+---
+// Generated docs pages for pipelines (/docs/cdp/<type>s/<slug>) and sources (/docs/cdp/sources/<slug>)
+// that have no hand-written docs page (src/lib/content/integrations.ts).
+import PageIsland from '../../../../islands/PageIsland.astro'
+import Site from '../../../../layouts/Site.astro'
+import { type IntegrationPage, integrationPages } from '../../../../lib/content/integrations'
+import { MINIMAL_BUILD } from '../../../../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return (await integrationPages())
+        .filter(({ path }) => path.startsWith('/docs/cdp/'))
+        .map((page) => {
+            const [kind, slug] = page.path.split('/').slice(3)
+            return { params: { kind, slug }, props: { page } }
+        })
+}
+
+interface Props {
+    page: IntegrationPage
+}
+
+const { page } = Astro.props
+---
+
+<Site>
+    {page.template === 'DataPipeline' ? (
+        <PageIsland module="/src/templates/DataPipeline.tsx" props={{ pipeline: page.pipeline }} />
+    ) : page.template === 'DataWarehouseSource' ? (
+        <PageIsland module="/src/templates/DataWarehouseSource.tsx" props={{ source: page.source }} />
+    ) : null}
+</Site>

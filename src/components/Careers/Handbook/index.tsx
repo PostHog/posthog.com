@@ -3,7 +3,6 @@ import React from 'react'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import chapters from '../../../navs/handbook.json'
-import { StaticImage } from 'gatsby-plugin-image'
 
 const CompanyHandbook: React.FC = () => {
     return (

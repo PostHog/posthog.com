@@ -21,7 +21,7 @@ No changes to commands - just use `--upload-s3` as before:
 
 ```bash
 # Single file (uploads all 3 files)
-uv run handbook-audio --upload-s3 contents/handbook/values.md
+uv run handbook-audio --upload-s3 contents/handbook/values.mdx
 
 # Directory (uploads all 3 files for each page)
 uv run handbook-audio --upload-s3 --dir engineering/ai
@@ -35,7 +35,7 @@ uv run handbook-audio --upload-s3 --all
 ### Dry run
 
 ```bash
-uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.md
+uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.mdx
 
 # Output:
 ☁️  [DRY RUN] Would upload to S3:
@@ -47,7 +47,7 @@ uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.md
 ### Actual upload
 
 ```bash
-uv run handbook-audio --upload-s3 contents/handbook/values.md
+uv run handbook-audio --upload-s3 contents/handbook/values.mdx
 
 # Output:
 ☁️  Uploading audio to S3: s3://your-bucket/handbook/values.mp3
@@ -151,7 +151,7 @@ upload_to_s3(slug, audio_data, text_file_path=path1, cost_file_path=path2, dry_r
 Test with dry run to verify files would be uploaded:
 
 ```bash
-uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.md
+uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.mdx
 
 # Shows all 3 files that would be uploaded without making actual API calls
 ```

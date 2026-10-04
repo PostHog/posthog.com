@@ -7,7 +7,11 @@ import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
 import { getAvailableQuantity, getCartVariables } from './utils'
-import { graphql, useStaticQuery } from 'gatsby'
+import continueSellingJson from '@data/products-merch-continue-selling.json'
+import type { MerchContinueSelling } from '~/data-layer/queries/products'
+
+// Variants that sell when out of stock: their inventory is not checked.
+const continueSellingVariants = continueSellingJson as MerchContinueSelling
 
 type CheckoutProps = {
     className?: string
@@ -45,19 +49,6 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     const [isCheckingOut, setIsCheckingOut] = React.useState(false)
     const [showAdjustments, setShowAdjustments] = React.useState(false)
     const discountCode = useCartStore((state) => state.discountCode)
-    const { allProducts } = useStaticQuery(graphql`
-        {
-            allProducts: allShopifyProduct {
-                nodes {
-                    variants {
-                        shopifyId
-                        inventoryPolicy
-                    }
-                }
-            }
-        }
-    `)
-
     const handleCheckout = useCallback(() => {
         setIsCheckingOut(true)
         setShowAdjustments(false)
@@ -85,14 +76,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 if (item.product.tags?.includes('digital')) {
                     continue
                 }
-                const continueSelling = allProducts.nodes.some((p: any) =>
-                    p.variants.some(
-                        (variant: any) =>
-                            variant.shopifyId === item.shopifyId && variant.inventoryPolicy.toLowerCase() === 'continue'
-                    )
-                )
-
-                if (continueSelling) {
+                if (continueSellingVariants.includes(item.shopifyId)) {
                     continue
                 }
 

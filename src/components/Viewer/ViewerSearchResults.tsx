@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from '@reach/router'
 import { useSearch } from 'components/Editor/SearchProvider'
 import { AlgoliaSearchResults } from 'components/Search/InlineSearch'
+import { useLocation } from 'lib/navigation'
 
 interface OnPageMatch {
     id: string

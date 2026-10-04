@@ -1,9 +1,10 @@
 import Byline from 'components/Blog/BlogAuthor/Byline'
-import { graphql, Link, useStaticQuery } from 'gatsby'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import React from 'react'
 import { AuthorsData } from 'types'
 import { CallToAction } from '../CallToAction'
+import { Link } from 'lib/navigation'
+import { ResponsiveImage, ResponsiveImageData } from 'components/Image'
+import { siteMetadata } from 'lib/head'
 
 export interface PostType {
     id: string
@@ -17,7 +18,7 @@ export interface PostType {
         featuredImage: {
             publicURL: string | null
             childImageSharp: {
-                gatsbyImageData: IGatsbyImageData
+                gatsbyImageData: ResponsiveImageData
             } | null
         } | null
     }
@@ -156,8 +157,7 @@ const PostCard = ({
     snippet?: boolean
     authorDetails?: AuthorsData
 }): JSX.Element => {
-    const { site } = useStaticQuery(query)
-    const { defaultImage } = site.siteMetadata
+    const defaultImage = siteMetadata.image
     const post = addDefaultImage(sourcePost, defaultImage)
     const staticImageSrc = post.frontmatter.featuredImage.publicURL || defaultImage
     const { gatsbyImageData } = post.frontmatter.featuredImage?.childImageSharp || {}
@@ -177,7 +177,7 @@ const PostCard = ({
                             <div className="w-full rounded mb-3 overflow-hidden flex items-center justify-center">
                                 <Link to={post.fields.slug} className="featured-post-img overflow-hidden">
                                     {gatsbyImageData ? (
-                                        <GatsbyImage
+                                        <ResponsiveImage
                                             className="w-full rounded-md"
                                             image={gatsbyImageData}
                                             alt={post.excerpt}
@@ -196,15 +196,5 @@ const PostCard = ({
         </div>
     )
 }
-
-const query = graphql`
-    query DefaultMetaImage {
-        site {
-            siteMetadata {
-                defaultImage: image
-            }
-        }
-    }
-`
 
 export default PostCard

@@ -2,9 +2,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
-import { StaticImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
 import { Help, Docs, Slack } from 'components/NotProductIcons'
+import { Link } from 'lib/navigation'
 
 export default function SlackPage(): JSX.Element {
     return (

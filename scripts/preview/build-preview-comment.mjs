@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..', '..')
-const publicDir = path.join(repoRoot, 'public')
+const publicDir = path.join(repoRoot, 'dist')
 
 const MARKER = '<!-- cloudflare-pages-preview -->'
 const PAGE_EXTENSIONS = new Set(['.md', '.mdx'])

@@ -53,8 +53,8 @@ Two things follow from that one line:
   carries name, description, and body, and deliberately no config**. A scout created from the
   encoded link gets the default schedule and none of the template's tags, so it never appears on
   the AI observability tab the guide just taught. The app's own copy carries both.
-- **The scout file is fetched from the monorepo at build time**, by
-  `gatsby/utils/fetchScoutSkills.ts` (same shape as `fetchMCPTools.ts`: raw from `refs/heads/master`,
+- **The scout file is fetched from the monorepo at build time**, by `writeScoutSkills()` in
+  `src/data-layer/artifacts.ts` (same shape as `writeMcpTools()`: raw from `refs/heads/master`,
   15s timeout, written to a gitignored `src/data/scout-skills.json`). The monorepo file at
   `products/ai_observability/backend/scouts/<name>.md` is the only copy – the app imports it too.
 
@@ -65,9 +65,11 @@ numeric thresholds that appeared nowhere in the app.
 If the fetch fails, `skills` is null, the guide's `scout` is undefined, and `ScoutFigure` renders
 nothing. The page still builds. Showing a possibly-stale scout would be worse than showing none.
 
-Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
-`gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the
-query in `index.tsx` here filters the same way.
+These guards keep sibling files from becoming pages, and they must agree if you rename anything:
+`isPocketGuidePage()` in `src/lib/content/templates.ts` skips entries ending `/SKILL`, the `PAGES`
+pattern in `src/content/schemas.ts` skips `_`-prefixed files and folders, and the
+`content-self-driving-guides` query in `src/data-layer/queries/content.ts` (imported by `index.tsx`
+here) skips `_`-prefixed segments the same way.
 
 ## Authoring a template's report
 
@@ -155,7 +157,7 @@ arrive, tick, or mark themselves unread.
 
 This is a deliberate line: an honest demo of a real artifact builds trust, a simulated live
 product does not. It also avoids the SSR hydration problems that relative timestamps cause
-elsewhere on the site (see `suppressHydrationWarning` in `src/pages/self-driving/index.tsx`).
+elsewhere on the site (see `suppressHydrationWarning` in `src/views/self-driving/index.tsx`).
 
 ## These files are agent context too
 
@@ -163,7 +165,7 @@ A scout template is read by two audiences from one source. Humans get the inbox 
 markdown mirror of the same page at `https://posthog.com/pocket-guides/<volume>/<slug>.md`.
 
 That mirror is produced by the site's existing pipeline, not a bespoke exporter:
-`generateRawMarkdownPages()` in `gatsby/rawMarkdownUtils.ts` converts the **built HTML** of every
+`generateRawMarkdownPages()` in `src/lib/seo/markdown.ts` converts the **built HTML** of every
 page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/pocket-guides`)
 with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/robots.txt` blocks
 `/*.md$` from search crawlers, so the mirror exists for agents specifically.
@@ -214,7 +216,7 @@ and does not propose it again.
 
 ## Rendering contract
 
-- **Static-first.** Everything renders from `useStaticQuery` at build time; with JavaScript
+- **Static-first.** Everything renders from build-time JSON (data-layer queries and `src/data/scout-skills.json`); with JavaScript
   disabled the guides are still fully readable. (Same contract as
   `components/LiveSelfDrivingLoop`.)
 - **Container queries, never media queries.** Every page on this site is a resizable window, so
@@ -236,7 +238,7 @@ and does not propose it again.
 | `FromOurInbox.tsx` | `useInboxExamples()` and the read-only inbox on `/docs/self-driving/from-our-inbox` |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate`, `InboxExample` |
 
-The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
-It's explicit rather than inferred because the field exists on only a handful of the ~30
-template MDX nodes, and Gatsby's inference on sparse nested objects breaks the build the moment
-someone adds a partial block.
+The `report` block is not declared in the `pocketGuide` zod schema in `src/content/schemas.ts`;
+the schema is a loose object, so the block passes through as written. The
+`content-self-driving-guides` query keeps only guides that have `report.title` and casts the block
+to `SelfDrivingReport` (`types.ts`). Nothing validates the rest of its shape at build time.

@@ -25,7 +25,7 @@ When an LLM operation fails or encounters an error, you can link the exception t
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body
   const traceId = generateTraceId() // Your trace ID generation logic
@@ -57,7 +57,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json
@@ -103,7 +103,7 @@ You can also track errors that occur during prompt validation, response processi
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 async function processLLMResponse(response, traceId) {
   try {
     // Validate response structure
@@ -128,7 +128,7 @@ async function processLLMResponse(response, traceId) {
 }
 ```
 
-```python file=Python
+```python file="Python"
 def process_llm_response(response, trace_id):
     try:
         # Validate response structure

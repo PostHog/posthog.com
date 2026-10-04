@@ -1,6 +1,5 @@
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
-import { navigate, graphql, useStaticQuery } from 'gatsby'
 import { useUserLocation } from '../../hooks/useUserLocation'
 import {
     computeOffsets,
@@ -16,6 +15,9 @@ import {
 import { buildMemberQuery, useCoordsByQuery, GeocodedArea, Coordinates } from './usePeopleGeo'
 import Toggle from 'components/Toggle'
 import { IconPineapple, IconPeople, IconDecisionTree } from '@posthog/icons'
+import { navigate } from 'lib/navigation'
+import teamMiniCrestsJson from '@data/people-team-mini-crests.json'
+import type { TeamMiniCrests } from '~/data-layer/queries/people'
 
 type BadgeType = 'none' | 'pineapple' | 'team'
 
@@ -117,22 +119,7 @@ type ProfileNode = {
     }
 }
 
-const TEAM_MINI_CREST_QUERY = graphql`
-    query TeamMiniCrestQuery {
-        allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
-            nodes {
-                name
-                miniCrest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+const teamMiniCrestMap = teamMiniCrestsJson as TeamMiniCrests
 
 export default function PeopleMap({
     members: membersProp,
@@ -160,17 +147,6 @@ export default function PeopleMap({
         })
     }, [])
 
-    // Fetch team mini crest data
-    const { allSqueakTeam } = useStaticQuery(TEAM_MINI_CREST_QUERY)
-    const teamMiniCrestMap = useMemo(() => {
-        return allSqueakTeam.nodes.reduce((acc: Record<string, string>, team: any) => {
-            if (team.miniCrest?.data?.attributes?.url) {
-                acc[team.name] = team.miniCrest.data.attributes.url
-            }
-            return acc
-        }, {})
-    }, [allSqueakTeam])
-
     useEffect(() => {
         setIsClient(true)
     }, [])
@@ -186,7 +162,7 @@ export default function PeopleMap({
     const badgeTypeRef = useRef<BadgeType>('none')
     const teamMiniCrestMapRef = useRef<Record<string, string>>({})
 
-    const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
+    const token = typeof window !== 'undefined' ? import.meta.env.PUBLIC_MAPBOX_TOKEN : undefined
     const styleUrl = 'mapbox://styles/mapbox/streets-v12'
 
     const members = useMemo(
@@ -238,22 +214,25 @@ export default function PeopleMap({
     useEffect(() => {
         const next: Record<string, Array<{ longitude: number; latitude: number }>> = {}
         // Build groups by resolved coordinates (rounded) so similar queries share jitter set
-        const groups = members.reduce((acc, m) => {
-            const q = buildMemberQuery(m)
-            if (!q) {
+        const groups = members.reduce(
+            (acc, m) => {
+                const q = buildMemberQuery(m)
+                if (!q) {
+                    return acc
+                }
+                const coords = coordsByQuery[q]
+                if (!coords) {
+                    return acc
+                }
+                const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+                if (!acc[key]) {
+                    acc[key] = { coords, profiles: [] as ProfileNode[] }
+                }
+                acc[key].profiles.push(m)
                 return acc
-            }
-            const coords = coordsByQuery[q]
-            if (!coords) {
-                return acc
-            }
-            const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
-            if (!acc[key]) {
-                acc[key] = { coords, profiles: [] as ProfileNode[] }
-            }
-            acc[key].profiles.push(m)
-            return acc
-        }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[] }>)
+            },
+            {} as Record<string, { coords: Coordinates; profiles: ProfileNode[] }>
+        )
         Object.entries(groups).forEach(([key, { coords, profiles }]) => {
             const offsets = computeOffsets(profiles.length, DEFAULT_SPREAD_RADIUS)
             next[key] = offsets.map(({ dx, dy }) => ({
@@ -333,22 +312,25 @@ export default function PeopleMap({
 
             // Show individual people markers when zoomed in
             // Group members by their geocode query so people in the same location are combined
-            const groups = membersRef.current.reduce((acc, m) => {
-                const q = buildMemberQuery(m)
-                if (!q) {
+            const groups = membersRef.current.reduce(
+                (acc, m) => {
+                    const q = buildMemberQuery(m)
+                    if (!q) {
+                        return acc
+                    }
+                    const coords = coordsByQueryRef.current[q]
+                    if (!coords) {
+                        return acc
+                    }
+                    const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
+                    if (!acc[key]) {
+                        acc[key] = { coords, profiles: [] as ProfileNode[], label: q, key }
+                    }
+                    acc[key].profiles.push(m)
                     return acc
-                }
-                const coords = coordsByQueryRef.current[q]
-                if (!coords) {
-                    return acc
-                }
-                const key = `${coords.longitude.toFixed(4)},${coords.latitude.toFixed(4)}`
-                if (!acc[key]) {
-                    acc[key] = { coords, profiles: [] as ProfileNode[], label: q, key }
-                }
-                acc[key].profiles.push(m)
-                return acc
-            }, {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string; key: string }>)
+                },
+                {} as Record<string, { coords: Coordinates; profiles: ProfileNode[]; label: string; key: string }>
+            )
 
             Object.values(groups).forEach(({ coords: { longitude, latitude }, profiles, label, key }) => {
                 const positions = jitteredPositionsByGroupRef.current[key] || []

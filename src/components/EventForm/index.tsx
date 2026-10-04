@@ -3,7 +3,6 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { OSInput, OSTextarea } from 'components/OSForm'
 import OSButton from 'components/OSButton'
-import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
@@ -16,9 +15,13 @@ import { toBlob, toPng } from 'html-to-image'
 import EventGraphic, { type EventGraphicFormat, type EventGraphicSpeaker } from 'components/EventGraphic'
 import { EVENT_GRAPHIC_STYLE_COUNT, eventGraphicStyleIndex } from 'constants/eventGraphicPalette'
 import { useToast } from '../../context/Toast'
-import { Event } from '../../pages/events'
+import { Event } from '../../views/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
 import SuggestionDropdown, { suggestionOptionId } from './SuggestionDropdown'
+import eventOptionsJson from '@data/people-event-options.json'
+import type { EventOptions } from '~/data-layer/queries/people'
+
+const eventOptions = eventOptionsJson as EventOptions
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -187,7 +190,7 @@ type CitySuggestion = {
 
 // Notion has no coordinates. Geocoding API rather than Search Box — no interactive session here.
 const geocodeLocation = async (query: string): Promise<{ lat: number; lng: number } | null> => {
-    const token = process.env.GATSBY_MAPBOX_TOKEN
+    const token = import.meta.env.PUBLIC_MAPBOX_TOKEN
     if (!token || !query.trim()) return null
     try {
         const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
@@ -309,46 +312,13 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const [landscapeTitleStep, setLandscapeTitleStep] = React.useState<number>(0)
     const graphicRef = React.useRef<HTMLDivElement>(null)
     const landscapeGraphicRef = React.useRef<HTMLDivElement>(null)
-    const data = useStaticQuery(graphql`
-        query {
-            allEvent {
-                format: group(field: attributes___format) {
-                    fieldValue
-                }
-                audience: group(field: attributes___audience) {
-                    fieldValue
-                }
-            }
-            allSqueakProfile(
-                sort: { fields: firstName }
-                filter: { firstName: { ne: "" }, avatar: {}, teams: { data: { elemMatch: { id: { ne: null } } } } }
-            ) {
-                nodes {
-                    squeakId
-                    firstName
-                    lastName
-                    companyRole
-                    color
-                    avatar {
-                        url
-                    }
-                }
-            }
-        }
-    `)
 
-    const format: SelectOption[] = data.allEvent.format
-        .map((f: { fieldValue: string }) => f.fieldValue)
-        .filter(Boolean)
-        .map((v: string) => ({ label: v, value: v }))
+    const format: SelectOption[] = eventOptions.formats.map((v) => ({ label: v, value: v }))
 
-    const audience: SelectOption[] = data.allEvent.audience
-        .map((a: { fieldValue: string }) => a.fieldValue)
-        .filter(Boolean)
-        .map((v: string) => ({ label: v, value: v }))
+    const audience: SelectOption[] = eventOptions.audiences.map((v) => ({ label: v, value: v }))
 
-    const speakers: SelectOption[] = data.allSqueakProfile.nodes
-        .map((speaker: { squeakId: string; firstName: string; lastName: string }) => ({
+    const speakers: SelectOption[] = eventOptions.speakers
+        .map((speaker) => ({
             value: speaker.squeakId,
             label: [speaker.firstName, speaker.lastName].filter(Boolean).join(' '),
         }))
@@ -475,7 +445,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
 
     const createEvent = async (eventPayload: Record<string, unknown>): Promise<any> => {
         try {
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/events`, {
                 method: 'POST',
                 body: JSON.stringify({ data: eventPayload }),
                 headers: {
@@ -501,7 +471,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
 
     const updateEvent = async (eventId: number, eventPayload: Record<string, unknown>): Promise<any> => {
         try {
-            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/events/${eventId}`, {
+            const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/events/${eventId}`, {
                 method: 'PUT',
                 body: JSON.stringify({ data: eventPayload }),
                 headers: {
@@ -574,8 +544,8 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                 bucket(a.date) !== bucket(b.date)
                     ? bucket(a.date) - bucket(b.date)
                     : bucket(a.date) === 1
-                    ? b.date.localeCompare(a.date)
-                    : a.date.localeCompare(b.date)
+                      ? b.date.localeCompare(a.date)
+                      : a.date.localeCompare(b.date)
             )
             .slice(0, 5)
             .map(({ suggestion }) => suggestion)
@@ -638,7 +608,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     // Debounced Mapbox suggest — only fires while the user is typing (cityQuery
     // is set in onChange, not when the field is populated programmatically)
     React.useEffect(() => {
-        const token = process.env.GATSBY_MAPBOX_TOKEN
+        const token = import.meta.env.PUBLIC_MAPBOX_TOKEN
         const query = cityQuery.trim()
         if (typeof window === 'undefined' || !token || query.length <= 3) {
             cityAbortRef.current?.abort()
@@ -686,7 +656,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         setCityHighlight(-1)
         setCityQuery('')
         formik.setFieldValue('locationLabel', [item.name, item.placeFormatted].filter(Boolean).join(', '))
-        const token = process.env.GATSBY_MAPBOX_TOKEN
+        const token = import.meta.env.PUBLIC_MAPBOX_TOKEN
         try {
             if (!token || !item.id) return
             const url = new URL(`https://api.mapbox.com/search/searchbox/v1/retrieve/${encodeURIComponent(item.id)}`)
@@ -768,15 +738,15 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const firstSpeakerProfile: EventGraphicSpeaker | undefined = React.useMemo(() => {
         const squeakId = formik.values.speakers[0]
         if (!squeakId) return undefined
-        const profile = data.allSqueakProfile.nodes.find((node: { squeakId: string }) => node.squeakId === squeakId)
+        const profile = eventOptions.speakers.find((node) => String(node.squeakId) === String(squeakId))
         if (!profile) return undefined
         return {
             name: [profile.firstName, profile.lastName].filter(Boolean).join(' '),
             color: profile.color || undefined,
-            avatarUrl: profile.avatar?.url || undefined,
+            avatarUrl: profile.avatar || undefined,
             companyRole: profile.companyRole || undefined,
         }
-    }, [formik.values.speakers, data.allSqueakProfile.nodes])
+    }, [formik.values.speakers])
 
     // Falls back to a stable hash so the same event always starts on the same style. Saved events use the
     // same seed as the site (`id-name`), so an unshuffled preview matches what the list and detail views show.

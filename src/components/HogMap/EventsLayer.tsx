@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { EventItem } from './types'
+import type { EventItem } from './types'
 
 export interface Coordinates {
     latitude: number
@@ -17,7 +17,7 @@ export const useEventsMapData = (isClient: boolean, token?: string) => {
         }
         let cancelled = false
         const fetchPage = async (page: number) => {
-            const host = process.env.GATSBY_SQUEAK_API_HOST
+            const host = import.meta.env.PUBLIC_SQUEAK_API_HOST
             if (!host) {
                 return null
             }

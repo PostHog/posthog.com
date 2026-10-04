@@ -6,7 +6,6 @@ import {
     ReactInstallation,
     AngularInstallation,
     SvelteInstallation,
-    NuxtInstallation,
     Nuxt36Installation,
     Nuxt37Installation,
     // Backend SDK installations

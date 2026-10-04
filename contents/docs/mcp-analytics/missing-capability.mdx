@@ -12,19 +12,19 @@ Turn on missing-capability reports to capture them. They're off by default. The 
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, {
   reportMissing: true,
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp.types import MCPAnalyticsOptions
 
 instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(server, posthog, report_missing: true)
 ```
 

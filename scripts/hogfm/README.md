@@ -39,7 +39,7 @@ Generate audio versions of handbook pages:
 
 ```bash
 # Single file
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 
 # All handbook files
 uv run handbook-audio --all
@@ -48,10 +48,10 @@ uv run handbook-audio --all
 uv run handbook-audio --search "engineering"
 
 # Dry run (test without API calls)
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 
 # Upload to S3
-uv run handbook-audio --upload-s3 contents/handbook/values.md
+uv run handbook-audio --upload-s3 contents/handbook/values.mdx
 ```
 
 See [handbook_audio/README.md](handbook_audio/README.md) for more details.

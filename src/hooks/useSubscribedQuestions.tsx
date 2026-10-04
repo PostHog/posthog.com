@@ -122,7 +122,7 @@ export const useSubscribedQuestions = () => {
             try {
                 setIsLoading(true)
                 const token = await getJwt()
-                const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
+                const data = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/users/me?${meQuery}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

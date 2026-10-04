@@ -2,8 +2,8 @@ import { useActions } from 'kea'
 import { scrollspyCaptureLogic } from 'logic/scrollspyCaptureLogic'
 import React from 'react'
 import { Link } from 'react-scroll'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { useLayoutData } from 'components/Layout/hooks'
+import { useBreakpoint } from 'hooks/useBreakpoint'
 
 export default function InternalSidebarLink({ url, name, depth, onClick, className = '', style = {} }) {
     const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key: 'scrollspy' }))

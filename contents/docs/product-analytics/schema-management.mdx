@@ -141,7 +141,7 @@ Once you've downloaded your schema, import and use the generated PostHog client:
 
 <MultiLanguage selector="tabs">
 
-```typescript file=TypeScript
+```typescript file="TypeScript"
 
 import posthog from './posthog-typed'
 
@@ -156,7 +156,7 @@ posthog.capture('button_clicked', {
 posthog.captureRaw('dynamic_event', { whatever: 'data' })
 ```
 
-```go file=Go
+```go file="Go"
 
 import (
     "github.com/posthog/posthog-go"
@@ -196,7 +196,7 @@ func captureEventWithFullCaptureControl(client posthog.Client) error {
 
 ```
 
-```python file=Python
+```python file="Python"
 
 import os
 

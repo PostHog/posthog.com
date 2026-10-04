@@ -141,7 +141,7 @@ Some fields can be either `STRING` or `JSON` type depending on whether the corre
 
 If the table doesn't already exist in the provided dataset, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the following query:
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{table_id}` (
     uuid STRING,
     event STRING,
@@ -186,7 +186,7 @@ The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and e
 
 If the table doesn't already exist in the provided dataset, the first batch export run will create it. This is generally the safest option, but you may also create it yourself by running the query:
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{table_id}` (
     team_id INT64,
     distinct_id STRING,
@@ -248,7 +248,7 @@ For the purposes of these examples, assume that these two batch exports have alr
 The following query counts unique persons that have triggered events.
 It uses `COALESCE` to fall back to `distinct_id` for events where the person has no profile in the persons export (for example, anonymous users when [person profile processing is disabled](/docs/data/anonymous-vs-identified-events)):
 
-```sql runInPostHog=false
+```sql runInPostHog={false}
 SELECT
   event,
   COUNT(DISTINCT COALESCE(persons.person_id, events.distinct_id)) AS unique_persons_count

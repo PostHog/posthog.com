@@ -1,0 +1,27 @@
+---
+// Post listings for the Strapi post categories: /posts, /<folder> (templates/PostListing.tsx), and
+// /<folder>/<tag> (templates/PostListing.tsx, or templates/Hub/Tag.tsx for the founder and product
+// engineer hubs). Post pages and views own their URLs; this route skips them.
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { postCategoryListings, type ListingRoute } from '../../lib/content/posts'
+import { MINIMAL_BUILD } from '../../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return (await postCategoryListings()).map((listing) => {
+        const [, folder, ...tag] = listing.path.split('/')
+        return { params: { folder, tag: tag.join('/') || undefined }, props: { listing } }
+    })
+}
+
+interface Props {
+    listing: ListingRoute
+}
+
+const { listing } = Astro.props
+---
+
+<Site>
+    <PageIsland module={listing.module} props={listing.props} />
+</Site>

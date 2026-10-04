@@ -1,0 +1,15 @@
+---
+// Job pages: one per Ashby job posting. The /careers listing is a view (src/views/careers.tsx).
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type JobProps, jobPages } from '../../lib/content/jobs'
+import { MINIMAL_BUILD } from '../../data-layer/env'
+
+export const getStaticPaths = () => (MINIMAL_BUILD() ? [] : jobPages())
+
+type Props = JobProps
+---
+
+<Site>
+    <PageIsland module="/src/templates/Job.tsx" props={Astro.props} />
+</Site>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { formatTeamName, slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
 import { TeamsSidebar } from 'components/Job/TeamsSidebar'
@@ -13,98 +11,13 @@ import Mark from 'mark.js'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useWindow } from '../../../context/Window'
 import { OSInput } from 'components/OSForm'
+import { ResponsiveImage, getImage } from 'components/Image'
+import jobListingsJson from '@data/people-job-listings.json'
+import jobTeamsJson from '@data/people-job-teams.json'
+import type { JobListings as JobListingsData, JobTeams } from '~/data-layer/queries/people'
 
-const query = graphql`
-    query JobListings {
-        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-            jobs: nodes {
-                fields {
-                    title
-                    slug
-                    html
-                    locations
-                }
-                parent {
-                    ... on AshbyJob {
-                        customFields {
-                            value
-                            title
-                        }
-                    }
-                }
-                externalLink
-                departmentName
-                info {
-                    descriptionHtml
-                }
-            }
-            departments: group(field: departmentName) {
-                title: fieldValue
-            }
-        }
-        allTeams: allSqueakTeam {
-            nodes {
-                id
-                name
-                slug
-                description
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                crestOptions {
-                    textColor
-                    textShadow
-                    fontSize
-                    frame
-                    frameColor
-                    plaque
-                    plaqueColor
-                    imageScale
-                    imageXOffset
-                    imageYOffset
-                }
-                leadProfiles {
-                    data {
-                        id
-                    }
-                }
-                profiles {
-                    data {
-                        id
-                        attributes {
-                            country
-                            firstName
-                            lastName
-                            companyRole
-                            location
-                            startDate
-                            pineappleOnPizza
-                            leadTeams {
-                                data {
-                                    attributes {
-                                        name
-                                    }
-                                }
-                            }
-                            avatar {
-                                data {
-                                    attributes {
-                                        url
-                                    }
-                                }
-                            }
-                            color
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+const originalJobs = jobListingsJson as JobListingsData
+const allTeams = jobTeamsJson as JobTeams
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -198,11 +111,6 @@ const getTeamLeadInfo = (team: any) => {
 }
 
 export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
-    const {
-        allAshbyJobPosting: { departments, jobs: originalJobs },
-        allTeams: { nodes: allTeams },
-    } = useStaticQuery(query)
-
     const { appWindow } = useWindow()
     const [queryString, setQueryString] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
@@ -220,7 +128,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         const groups: { [key: string]: any[] } = {}
 
         originalJobs.forEach((job: any) => {
-            const roleGroupingField = job.parent.customFields.find(
+            const roleGroupingField = job.customFields.find(
                 (field: { title: string }) => field.title === 'Role grouping'
             )
             const groupName = roleGroupingField?.value || 'Other'
@@ -255,14 +163,14 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
             const groupJobs = groups[groupName]
 
             // Move Product Engineer to the front of its group
-            const productEngineerIndex = groupJobs.findIndex((job) => job.fields.title === 'Product Engineer')
+            const productEngineerIndex = groupJobs.findIndex((job) => job.title === 'Product Engineer')
             if (productEngineerIndex !== -1) {
                 const [productEngineerJob] = groupJobs.splice(productEngineerIndex, 1)
                 groupJobs.unshift(productEngineerJob)
             }
 
             // Move Speculative application to the end of its group
-            const speculativeIndex = groupJobs.findIndex((job) => job.fields.title === 'Speculative application')
+            const speculativeIndex = groupJobs.findIndex((job) => job.title === 'Speculative application')
             if (speculativeIndex !== -1) {
                 const [speculativeJob] = groupJobs.splice(speculativeIndex, 1)
                 groupJobs.push(speculativeJob)
@@ -287,7 +195,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         const query = searchQuery.toLowerCase()
         return allJobs.filter((job: any) => {
             // Only search in job title
-            return job.fields.title.toLowerCase().includes(query)
+            return job.title.toLowerCase().includes(query)
         })
     }, [searchQuery, allJobs])
 
@@ -296,9 +204,9 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         const uniqueRoles = new Map()
 
         allJobs.forEach((job: any) => {
-            const jobTitle = job.fields.title
+            const jobTitle = job.title
             if (!uniqueRoles.has(jobTitle)) {
-                const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+                const teamsField = job.customFields.find((field: { title: string }) => field.title === 'Teams')
                 const teams = teamsField ? JSON.parse(teamsField.value) : []
                 // Count the number of teams hiring for this role (minimum 1)
                 uniqueRoles.set(jobTitle, Math.max(teams.length, 1))
@@ -316,7 +224,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const [selectedJob, setSelectedJob] = useState(allJobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
-    const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+    const teamsField = selectedJob.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField
         ? JSON.parse(teamsField.value).filter((teamName: string) =>
               allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
@@ -378,7 +286,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
 
     useEffect(() => {
         const parser = new DOMParser()
-        const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
+        const doc = parser.parseFromString(selectedJob.html, 'text/html')
 
         const theRole = doc.querySelector('details:has(h2[id="the-role"])')
         const whoWereLookingFor = doc.querySelector('details:has(h2[id="who-we\'re-looking-for"])')
@@ -409,7 +317,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         setProcessedHtml(content)
         setSelectedTeamName('')
 
-        const websiteDescField = selectedJob.parent.customFields.find(
+        const websiteDescField = selectedJob.customFields.find(
             (field: { title: string }) => field.title === 'Website description'
         )
         setWebsiteDescription(websiteDescField ? websiteDescField.value : '')
@@ -464,11 +372,11 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                         </label>
                         <select
                             className="block @2xl:hidden w-full p-2 bg-primary text-primary border border-primary rounded text-xl font-bold relative z-10 mb-2"
-                            value={selectedJob.fields.title}
+                            value={selectedJob.title}
                             onChange={(e) => {
                                 const selectedJobTitle = e.target.value
                                 const job = (searchQuery.trim() ? filteredJobs : allJobs).find(
-                                    (job: any) => job.fields.title === selectedJobTitle
+                                    (job: any) => job.title === selectedJobTitle
                                 )
                                 setSelectedJob(job)
                             }}
@@ -480,8 +388,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         label={`${filteredJobs.length} result${filteredJobs.length !== 1 ? 's' : ''}`}
                                     >
                                         {filteredJobs.map((job: any) => (
-                                            <option key={job.fields.title} value={job.fields.title}>
-                                                {job.fields.title}
+                                            <option key={job.title} value={job.title}>
+                                                {job.title}
                                             </option>
                                         ))}
                                     </optgroup>
@@ -495,8 +403,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 jobGroups.map((group) => (
                                     <optgroup key={group.name} label={group.name}>
                                         {group.jobs.map((job: any) => (
-                                            <option key={job.fields.title} value={job.fields.title}>
-                                                {job.fields.title}
+                                            <option key={job.title} value={job.title}>
+                                                {job.title}
                                             </option>
                                         ))}
                                     </optgroup>
@@ -535,32 +443,29 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                             <ul className="list-none p-0 space-y-px">
                                                 {filteredJobs.map((job: any) => {
                                                     return (
-                                                        <li key={job.fields.title} className="p-0">
+                                                        <li key={job.title} className="p-0">
                                                             <OSButton
                                                                 size="md"
                                                                 align="left"
                                                                 width="full"
                                                                 zoomHover="md"
-                                                                active={selectedJob.fields.title === job.fields.title}
+                                                                active={selectedJob.title === job.title}
                                                                 onClick={() => setSelectedJob(job)}
                                                             >
                                                                 <div className="flex flex-col w-full items-start">
                                                                     <span
                                                                         data-job-title
                                                                         className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
-                                                                            job.fields.title
-                                                                                ? ''
-                                                                                : ''
+                                                                            selectedJob.title === job.title ? '' : ''
                                                                         }`}
                                                                     >
-                                                                        {job.fields.title}
+                                                                        {job.title}
                                                                     </span>
-                                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                                    {!hideTeamsByJob.includes(job.title) && (
                                                                         <span className="text-[13px] text-secondary !font-normal">
                                                                             {(() => {
                                                                                 const teamsField =
-                                                                                    job.parent.customFields.find(
+                                                                                    job.customFields.find(
                                                                                         (field: { title: string }) =>
                                                                                             field.title === 'Teams'
                                                                                     )
@@ -596,17 +501,15 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                             <ul className="list-none p-0 space-y-px">
                                                 {group.jobs.map((job: any) => {
                                                     return (
-                                                        <li key={job.fields.title} className="p-0">
+                                                        <li key={job.title} className="p-0">
                                                             <OSButton
                                                                 size="md"
                                                                 align="left"
                                                                 width="full"
                                                                 zoomHover="md"
-                                                                active={selectedJob.fields.title === job.fields.title}
+                                                                active={selectedJob.title === job.title}
                                                                 className={` ${
-                                                                    selectedJob.fields.title === job.fields.title
-                                                                        ? ''
-                                                                        : ''
+                                                                    selectedJob.title === job.title ? '' : ''
                                                                 }`}
                                                                 onClick={() => setSelectedJob(job)}
                                                             >
@@ -614,19 +517,16 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                     <span
                                                                         data-job-title
                                                                         className={`font-semibold text-[15px] ${
-                                                                            selectedJob.fields.title ===
-                                                                            job.fields.title
-                                                                                ? ''
-                                                                                : ''
+                                                                            selectedJob.title === job.title ? '' : ''
                                                                         }`}
                                                                     >
-                                                                        {job.fields.title}
+                                                                        {job.title}
                                                                     </span>
-                                                                    {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                                    {!hideTeamsByJob.includes(job.title) && (
                                                                         <span className="text-[13px] text-secondary !font-normal">
                                                                             {(() => {
                                                                                 const teamsField =
-                                                                                    job.parent.customFields.find(
+                                                                                    job.customFields.find(
                                                                                         (field: { title: string }) =>
                                                                                             field.title === 'Teams'
                                                                                     )
@@ -656,7 +556,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
             </div>
             <div ref={rightColRef} className="flex-1 flex flex-col">
                 <div className="flex-1">
-                    <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.fields.title}</h2>
+                    <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.title}</h2>
 
                     <div className="grid grid-cols-1 @5xl:grid-cols-12 gap-8 items-start">
                         <div className="@5xl:col-span-7">
@@ -673,19 +573,19 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 <Detail
                                     title="Location"
                                     value={`Remote${
-                                        selectedJob.fields.locations?.length > 0
-                                            ? ` (${selectedJob.fields.locations.join(', ')})`
+                                        selectedJob.locations?.length > 0
+                                            ? ` (${selectedJob.locations.join(', ')})`
                                             : ''
                                     }`}
                                     icon={<Location />}
                                 />
-                                {selectedJob.parent.customFields.find(
+                                {selectedJob.customFields.find(
                                     (field: { title: string }) => field.title === 'Timezone(s)'
                                 )?.value && (
                                     <Detail
                                         title="Timezone(s)"
                                         value={
-                                            selectedJob.parent.customFields.find(
+                                            selectedJob.customFields.find(
                                                 (field: { title: string }) => field.title === 'Timezone(s)'
                                             ).value
                                         }
@@ -721,7 +621,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                 className="[&_details]:!bg-transparent [&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)]"
                                             />
                                         )}
-                                        {selectedJob.fields.title == 'Speculative application' && (
+                                        {selectedJob.title == 'Speculative application' && (
                                             <>
                                                 <p className="text-[15px]">
                                                     We take exceptional people when they come along - and we really mean
@@ -739,7 +639,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 )}
                                 <OSButton
                                     asLink
-                                    to={`${selectedJob.fields.slug}${queryString}`}
+                                    to={`${selectedJob.slug}${queryString}`}
                                     size="md"
                                     variant="primary"
                                     state={{ newWindow: true }}
@@ -754,8 +654,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                     {teams.length > 1
                                         ? 'About the small teams'
                                         : teams.length === 1
-                                        ? `About the ${currentTeamName} Team`
-                                        : 'About this team'}
+                                          ? `About the ${currentTeamName} Team`
+                                          : 'About this team'}
                                 </h3>
                                 <div data-scheme="secondary" className={` ${teams.length > 1 ? '-mt-1' : ''}`}>
                                     <TeamsSidebar

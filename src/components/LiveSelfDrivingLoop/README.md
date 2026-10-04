@@ -44,9 +44,11 @@ It takes no props.
 
 ## Data (build-time, no runtime calls)
 
-Reads the `SelfDrivingPullRequest` GraphQL nodes produced by `sourceSelfDrivingPRs()` in
-`gatsby/sourceNodes.ts` and features the **most recently opened** PR (sorted by `openedAt`), so the
-diagram tracks the latest real work each time the site builds.
+Reads the `SelfDrivingPullRequest` nodes produced by `selfDrivingPullRequestSource` in
+`src/data-layer/sources/github.ts`, through the `products-self-driving-prs` query in
+`src/data-layer/queries/products.ts` (`@data/products-self-driving-prs.json`). The query keeps the 8
+most recently **merged** PRs, newest first, and the component rotates which one it features on each
+page load, so the diagram tracks the latest real work each time the site builds.
 
 Only two stages weave in real per-PR data from GitHub:
 

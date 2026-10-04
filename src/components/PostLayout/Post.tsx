@@ -1,4 +1,3 @@
-import { useLocation } from '@reach/router'
 import React, { useEffect, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
@@ -8,13 +7,13 @@ import ShareLinks from './ShareLinks'
 import Survey from './Survey'
 import NextPost from './NextPost'
 import MobileNav from './MobileNav'
-import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SidebarAction from './SidebarAction'
 import { Edit, ExpandDocument, Issue } from 'components/Icons'
 import { useLayoutData } from 'components/Layout/hooks'
 import AskMax from 'components/AskMax'
 import { useUser } from 'hooks/useUser'
+import { useLocation } from 'lib/navigation'
 
 export default function Post({ children }: { children: React.ReactNode }) {
     const {

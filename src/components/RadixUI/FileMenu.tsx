@@ -3,8 +3,8 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
 import { IMenu } from 'components/PostLayout/types'
-import { Link, navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
+import { Link, navigate } from 'lib/navigation'
 
 // --- Data Structure ---
 

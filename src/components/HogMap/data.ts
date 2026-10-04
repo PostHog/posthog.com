@@ -26,7 +26,7 @@ export const getPlaces = async (): Promise<Record<string, unknown>[]> => {
             { encodeValuesOnly: true }
         )
 
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places?${placesQuery}`)
+        const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/places?${placesQuery}`)
 
         if (!response.ok) {
             throw new Error(`Failed to fetch places: ${response.statusText}`)
@@ -71,7 +71,7 @@ export const addPlace = async (
     jwt: string,
     payload: { name: string; address: string; type: string; latitude: number; longitude: number }
 ): Promise<Record<string, unknown>> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places`, {
+    const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/places`, {
         method: 'POST',
         body: JSON.stringify({ data: payload }),
         headers: {
@@ -89,7 +89,7 @@ export const addPlace = async (
 
 // Delete a place (moderators only)
 export const deletePlace = async (jwt: string, placeId: number): Promise<void> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/places/${placeId}`, {
+    const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/places/${placeId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${jwt}`,
@@ -138,7 +138,7 @@ export const getPlaceReviews = async (): Promise<Record<string, unknown>[]> => {
             { encodeValuesOnly: true }
         )
 
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews?${reviewsQuery}`)
+        const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/place-reviews?${reviewsQuery}`)
 
         if (!response.ok) {
             throw new Error(`Failed to fetch place reviews: ${response.statusText}`)
@@ -211,7 +211,7 @@ export const addPlaceReview = async (
     jwt: string,
     payload: Record<string, unknown>
 ): Promise<Record<string, unknown>> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews`, {
+    const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/place-reviews`, {
         method: 'POST',
         body: JSON.stringify({ data: payload }),
         headers: {
@@ -229,7 +229,7 @@ export const addPlaceReview = async (
 
 // Delete a place review (moderators only)
 export const deletePlaceReview = async (jwt: string, reviewId: number): Promise<void> => {
-    const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/place-reviews/${reviewId}`, {
+    const response = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/place-reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${jwt}`,

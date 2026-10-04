@@ -27,8 +27,8 @@ import Wallpapers, { getWallpaperGlow } from './Wallpapers'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
-import { navigate } from 'gatsby'
 import useDesktopBadges from '../../hooks/useDesktopBadges'
+import { navigate } from 'lib/navigation'
 
 interface Product {
     name: string

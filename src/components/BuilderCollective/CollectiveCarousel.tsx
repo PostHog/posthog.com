@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
-import { Link } from 'gatsby'
 import { cn } from '../../utils'
+import { Link } from 'lib/navigation'
 
 const AUTOPLAY_MS = 5000
 

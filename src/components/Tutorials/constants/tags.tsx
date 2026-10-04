@@ -1,32 +1,20 @@
 import { InlineCode } from 'components/InlineCode'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import tutorialTagsJson from '@data/content-tutorial-tags.json'
+import type { TutorialTagList } from '~/data-layer/queries/content'
 
-export const TutorialTags = () => {
-    const { data } = useStaticQuery(query)
+const tutorialTags = tutorialTagsJson as TutorialTagList
 
+export const TutorialTags = (): JSX.Element => {
     return (
         <ul className="list-none m-0 p-0 mt-1">
-            {data.tags?.map((item) => {
+            {tutorialTags.map((tag) => {
                 return (
-                    <li key={item.fieldValue}>
-                        <InlineCode>{item.fieldValue}</InlineCode>
+                    <li key={tag}>
+                        <InlineCode>{tag}</InlineCode>
                     </li>
                 )
             })}
         </ul>
     )
 }
-
-const query = graphql`
-    {
-        data: allMdx(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { fields: { slug: { regex: "/^/tutorials/" } }, frontmatter: { date: { ne: null } } }
-        ) {
-            tags: group(field: frontmatter___tags) {
-                fieldValue
-            }
-        }
-    }
-`

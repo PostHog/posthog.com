@@ -1,7 +1,7 @@
 import React from 'react'
 import InfoIcon from '../InfoIcon/Index'
-import CheckIcon from '../../images/check.svg'
-import XIcon from '../../images/x.svg'
+import CheckIcon from '../../images/check.svg?url'
+import XIcon from '../../images/x.svg?url'
 import Tooltip from 'components/Tooltip'
 
 // A tier is either available (true) / unavailable (false), or available with a

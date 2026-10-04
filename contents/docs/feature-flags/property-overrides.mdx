@@ -36,7 +36,7 @@ When you call `identify()` with person properties, those properties are automati
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 // Properties are automatically available for flag evaluation
 posthog.identify('user-123', {
     email: 'user@company.com',
@@ -58,7 +58,7 @@ posthog.identify('user-123', {
 const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
-```swift file=iOS
+```swift file="iOS"
 // Properties are automatically available for flag evaluation
 PostHogSDK.shared.identify("user-123", userProperties: [
     "email": "user@company.com",
@@ -69,7 +69,7 @@ PostHogSDK.shared.identify("user-123", userProperties: [
 let showFeature = PostHogSDK.shared.isFeatureEnabled("beta-feature")
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 // Properties are automatically available for flag evaluation
 PostHog.identify(
     "user-123",
@@ -105,7 +105,7 @@ final showFeature = await Posthog().isFeatureEnabled('beta-feature');
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 // The property is persisted on the person and cached for flag evaluation
 posthog.setPersonProperties({ is_beta_user: true })
 
@@ -121,7 +121,7 @@ posthog.setPersonProperties({ is_beta_user: true })
 const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
-```swift file=iOS
+```swift file="iOS"
 // The property is persisted on the person and cached for flag evaluation
 PostHogSDK.shared.setPersonProperties(userPropertiesToSet: ["is_beta_user": true])
 
@@ -129,7 +129,7 @@ PostHogSDK.shared.setPersonProperties(userPropertiesToSet: ["is_beta_user": true
 PostHogSDK.shared.reloadFeatureFlags()
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 // The property is persisted on the person and cached for flag evaluation
 PostHog.setPersonProperties(userPropertiesToSet = mapOf("is_beta_user" to true))
 
@@ -163,7 +163,7 @@ Similarly, when you call `group()` with group properties, those properties are c
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 posthog.group('company', 'company-123', {
     name: 'Acme Inc',
     plan: 'enterprise'
@@ -183,7 +183,7 @@ posthog.group('company', 'company-123', {
 const showFeature = posthog.isFeatureEnabled('enterprise-companies-feature')
 ```
 
-```swift file=iOS
+```swift file="iOS"
 PostHogSDK.shared.group(type: "company", key: "company-123", groupProperties: [
     "name": "Acme Inc",
     "plan": "enterprise"
@@ -193,7 +193,7 @@ PostHogSDK.shared.group(type: "company", key: "company-123", groupProperties: [
 let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-companies-feature")
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 PostHog.group(
     "company",
     "company-123",
@@ -318,7 +318,7 @@ Use `setPersonPropertiesForFlags()` to explicitly set properties for flag evalua
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
     is_beta_user: true,
@@ -340,7 +340,7 @@ posthog.setPersonPropertiesForFlags({
 const showFeature = posthog.isFeatureEnabled('beta-feature')
 ```
 
-```swift file=iOS
+```swift file="iOS"
 // Set properties for flag evaluation
 PostHogSDK.shared.setPersonPropertiesForFlags([
     "is_beta_user": true,
@@ -351,7 +351,7 @@ PostHogSDK.shared.setPersonPropertiesForFlags([
 let showFeature = PostHogSDK.shared.isFeatureEnabled("beta-feature")
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 // Set properties for flag evaluation
 PostHog.setPersonPropertiesForFlags(
     mapOf(
@@ -387,7 +387,7 @@ By default, calling `setPersonPropertiesForFlags()` triggers an automatic reload
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 // Set properties without reloading
 posthog.setPersonPropertiesForFlags({ is_beta_user: true }, false)
 posthog.setPersonPropertiesForFlags({ email: 'user@company.com' }, false)
@@ -405,7 +405,7 @@ posthog.setPersonPropertiesForFlags({ email: 'user@company.com' }, false)
 posthog.reloadFeatureFlags()
 ```
 
-```swift file=iOS
+```swift file="iOS"
 // Set properties without reloading
 PostHogSDK.shared.setPersonPropertiesForFlags(["is_beta_user": true], reloadFeatureFlags: false)
 PostHogSDK.shared.setPersonPropertiesForFlags(["email": "user@company.com"], reloadFeatureFlags: false)
@@ -414,7 +414,7 @@ PostHogSDK.shared.setPersonPropertiesForFlags(["email": "user@company.com"], rel
 PostHogSDK.shared.reloadFeatureFlags()
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 // Set properties without reloading
 PostHog.setPersonPropertiesForFlags(mapOf("is_beta_user" to true), reloadFeatureFlags = false)
 PostHog.setPersonPropertiesForFlags(mapOf("email" to "user@company.com"), reloadFeatureFlags = false)
@@ -440,7 +440,7 @@ To clear all manually set property overrides:
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 posthog.resetPersonPropertiesForFlags()
 ```
 
@@ -448,11 +448,11 @@ posthog.resetPersonPropertiesForFlags()
 posthog.resetPersonPropertiesForFlags()
 ```
 
-```swift file=iOS
+```swift file="iOS"
 PostHogSDK.shared.resetPersonPropertiesForFlags()
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 PostHog.resetPersonPropertiesForFlags()
 ```
 
@@ -470,7 +470,7 @@ You can also override group properties for flag evaluation:
 
 <MultiLanguage>
 
-```js file=Web
+```js file="Web"
 // Set group properties for flag evaluation
 posthog.setGroupPropertiesForFlags({
     company: {
@@ -499,7 +499,7 @@ posthog.setGroupPropertiesForFlags({
 posthog.resetGroupPropertiesForFlags()
 ```
 
-```swift file=iOS
+```swift file="iOS"
 // Set group properties for flag evaluation
 PostHogSDK.shared.setGroupPropertiesForFlags("company", properties: [
     "plan": "enterprise",
@@ -513,7 +513,7 @@ PostHogSDK.shared.resetGroupPropertiesForFlags("company")
 PostHogSDK.shared.resetGroupPropertiesForFlags()
 ```
 
-```kotlin file=Android
+```kotlin file="Android"
 // Set group properties for flag evaluation
 PostHog.setGroupPropertiesForFlags(
     "company",

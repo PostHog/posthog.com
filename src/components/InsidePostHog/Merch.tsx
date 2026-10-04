@@ -1,30 +1,8 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 
 export default function Merch() {
-    const data = useStaticQuery(graphql`
-        {
-            shopifyProduct {
-                featuredMedia {
-                    preview {
-                        image {
-                            width
-                            height
-                            originalSrc
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const gatsbyImageData =
-        data?.shopifyProduct?.featuredMedia?.preview?.image?.localFile?.childImageSharp?.gatsbyImageData
-
     return (
         <div>
             <div className="bg-white dark:bg-accent flex flex-col items-center p-4 border border-primary mt-4 mb-0 rounded">
@@ -40,7 +18,6 @@ export default function Merch() {
                         className="w-full"
                         width={500}
                     />
-                    {/* <GatsbyImage image={getImage(gatsbyImageData)} /> */}
                 </Link>
             </div>
         </div>

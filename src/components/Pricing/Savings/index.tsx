@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Structure } from '../../Structure'
 
-import checkIcon from '../../../images/check.svg'
+import checkIcon from '../../../images/check.svg?url'
 
 export const Savings = () => {
     return (

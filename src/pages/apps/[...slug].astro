@@ -1,0 +1,28 @@
+---
+// App pages: contents/apps. The /apps listing is a view (src/views/apps.js).
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type AppEntry, appPage } from '../../lib/content/apps'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+import { MINIMAL_BUILD } from '../../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    const entries = await getCollection('apps')
+    return entries
+        .filter((entry) => !isViewPath(entryPath('/apps', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id }, props: { entry, entries } }))
+}
+
+interface Props {
+    entry: AppEntry
+    entries: AppEntry[]
+}
+
+const app = appPage(Astro.props.entry, Astro.props.entries)
+---
+
+<Site>
+    <PageIsland module="/src/templates/App.jsx" props={app} content={app.body} />
+</Site>

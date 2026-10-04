@@ -79,7 +79,7 @@ The hook runs on each fully built payload right before it's sent, once per event
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, {
   beforeSend: (event) => {
     if (event.event === "$exception") return null // drop
@@ -90,7 +90,7 @@ instrument(server, posthog, {
 })
 ```
 
-```python file=Python
+```python file="Python"
 from posthog.mcp.types import MCPAnalyticsOptions
 
 def before_send(event):
@@ -103,7 +103,7 @@ def before_send(event):
 instrument(server, posthog, MCPAnalyticsOptions(before_send=before_send))
 ```
 
-```go file=Go
+```go file="Go"
 client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog.Config{
 	BeforeSend: func(msg posthog.Message) posthog.Message {
 		switch event := msg.(type) {
@@ -119,7 +119,7 @@ client, err := posthog.NewWithConfig(os.Getenv("POSTHOG_PROJECT_TOKEN"), posthog
 })
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(
   server, posthog,
   before_send: lambda do |event|
@@ -149,19 +149,19 @@ By default, each failed tool call also sends a `$exception` event to [Error Trac
 
 <MultiLanguage>
 
-```ts file=TypeScript
+```ts file="TypeScript"
 instrument(server, posthog, { enableExceptionAutocapture: false })
 ```
 
-```python file=Python
+```python file="Python"
 instrument(server, posthog, MCPAnalyticsOptions(enable_exception_autocapture=False))
 ```
 
-```go file=Go
+```go file="Go"
 posthogmcpsdk.Instrument(server, posthogmcp.New(client, posthogmcp.WithExceptionAutocapture(false)))
 ```
 
-```ruby file=Ruby
+```ruby file="Ruby"
 PostHog::MCP.instrument(server, posthog, enable_exception_autocapture: false)
 ```
 

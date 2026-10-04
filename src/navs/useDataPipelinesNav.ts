@@ -1,31 +1,15 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import pipelines from '@data/data-pipelines-nav.json'
 
-export default function useDataPipelinesNav({ type }: { type?: string }): { slug: string; name: string }[] {
-    const { allPostHogPipeline } = useStaticQuery(graphql`
-        query {
-            allPostHogPipeline(filter: { mdx: { id: { eq: null } } }) {
-                nodes {
-                    slug
-                    name
-                    type
-                    status
-                }
-            }
-        }
-    `)
+type Pipeline = { slug: string; name: string; type: string; status?: string }
 
-
-    return allPostHogPipeline.nodes
-        .filter((node: any) => (type ? node.type === type : true) && node.status !== 'coming_soon')
-        .sort((a: any, b: any) => a.name.localeCompare(b.name))
-        .map((node: any) => ({
+export function getDataPipelinesNav({ type }: { type?: string }): { url: string; name: string }[] {
+    return (pipelines as Pipeline[])
+        .filter((node) => (type ? node.type === type : true) && node.status !== 'coming_soon')
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((node) => ({
             url: `/docs/cdp/${type}s/${node.slug}`,
             name: node.name,
-            ...(node.status === 'coming_soon' && {
-                badge: {
-                    title: 'Coming soon',
-                    className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                },
-            }),
         }))
 }
+
+export default getDataPipelinesNav

@@ -1,7 +1,7 @@
 // The approved palette for the generated event graphic (v2), taken from the brand team's Figma file.
 //
 // These hues are deliberately scoped to the event graphic and are NOT the Tailwind palette — none of
-// them match `tailwind.config.js` (v2 blue is #0457FF, Tailwind's is #2F80FA). Until the brand team
+// them match `tailwind.config.cjs` (v2 blue is #0457FF, Tailwind's is #2F80FA). Until the brand team
 // confirms whether they supersede the site palette, keeping them here avoids changing anything else.
 //
 // Each entry is a vertical two-stop gradient plus the title color to use on a light (cream) background

@@ -21,7 +21,6 @@ import {
 import { useAppActions, useAppSettings } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
-import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
@@ -41,7 +40,6 @@ function TaskBarMenu() {
         openSignIn,
         openNewChat,
         setIsNotificationsPanelOpen,
-        setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
         updateTaskbarHeight,
@@ -88,10 +86,6 @@ function TaskBarMenu() {
         },
         [taskbarRef, updateTaskbarHeight]
     )
-
-    const handleActiveWindowsClick = () => {
-        setIsActiveWindowsPanelOpen(true)
-    }
 
     const handleSignInClick = () => {
         // Close the menu by blurring the active element
@@ -422,7 +416,6 @@ function TaskBarMenu() {
                     </div>
                 </div>
             </div>
-            <ActiveWindowsPanel />
         </>
     )
 }

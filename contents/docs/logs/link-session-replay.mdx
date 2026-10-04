@@ -36,7 +36,7 @@ In your frontend code, retrieve the current session ID and send it with your API
 
 <MultiLanguage>
 
-```js-web file=JavaScript
+```js-web file="JavaScript"
 import posthog from 'posthog-js'
 
 // Get the current session ID
@@ -78,7 +78,7 @@ Once you have the session ID, include it along with the user's identity using th
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 import { logs } from '@opentelemetry/api-logs'
 
 const logger = logs.getLogger('my-app')
@@ -103,7 +103,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 import logging
 
 logger = logging.getLogger(__name__)

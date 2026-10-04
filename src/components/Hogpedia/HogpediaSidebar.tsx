@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'components/Link'
-import { navigate } from 'gatsby'
 import HogpediaLogo from './HogpediaLogo'
 import { SearchBox } from './HogpediaSearch'
 import { useHogpediaArticles, pickRandomArticle } from './data'
+import { navigate } from 'lib/navigation'
 
 type PortletLink = { label: string; to?: string; external?: boolean; onClick?: (e: React.MouseEvent) => void }
 

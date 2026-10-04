@@ -15,7 +15,7 @@ interface Property {
 }
 
 interface TypeData {
-    /** Slug used in the page path — see `createPages.ts`. */
+    /** Slug used in the page path (src/lib/content/sdkReference.ts). */
     id: string
     name: string
     description: string
@@ -24,7 +24,7 @@ interface TypeData {
     path: string
 }
 
-interface PageContext {
+export interface SdkTypeProps {
     typeData: TypeData
     version: string
     /** Unversioned SDK id, e.g. `posthog-js`. */
@@ -34,9 +34,8 @@ interface PageContext {
     types: string[]
 }
 
-export default function SdkType({ pageContext }: { pageContext: PageContext }) {
+export default function SdkType({ typeData, version, referenceId, slugPrefix, types }: SdkTypeProps) {
     const { menu } = useApp()
-    const { typeData, version, referenceId, slugPrefix, types } = pageContext
 
     const sdkLanguage = getLanguageFromSdkId(referenceId)
     const isLatest = isLatestVersion(version)

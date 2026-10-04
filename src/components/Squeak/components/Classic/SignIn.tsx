@@ -7,7 +7,7 @@ import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 import Input from '../../../../components/OSForm/input'
 
-import SecurityHog from '../../../../images/security-hog.png'
+import SecurityHog from '../../../../images/security-hog.png?url'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'

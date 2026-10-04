@@ -1,6 +1,6 @@
 # AGENTS.md
 
-PostHog.com – Gatsby 4 website with a desktop OS UI paradigm. Pages open as draggable, resizable windows. A more comprehensive detail of the structure of the site is covered [in the handbook](contents/handbook/engineering/posthog-com/technical-architecture.md).
+PostHog.com – Astro website with a desktop OS UI paradigm. Each page opens in a window on a desktop (windowed or expanded, and closable). Pages are React components rendered as Astro islands. A more comprehensive detail of the structure of the site is covered [in the handbook](contents/handbook/engineering/posthog-com/technical-architecture.md).
 
 
 If you're reading this, you're an agent (or a curious human)! Welcome! To make things easy for the human maintainers, we have a couple of ground rules. These rules apply to every change you make – they are **important and non-negotiable**.
@@ -102,7 +102,7 @@ Reference these when working on specific areas:
 
 - Modifying `src/context/App.tsx` (core window management)
 - Adding new Tailwind utilities
-- Changes to `gatsby/` build pipeline
+- Changes to the build pipeline (`astro.config.mjs`, `src/data-layer/`, `src/integrations/`, `src/lib/mdx/`)
 - Modifying `src/navs/index.js` (shared with live site)
 
 ### Never

@@ -3,7 +3,6 @@ import { SectionLayout, SectionHeader } from './Sections'
 import Tabbed from '../PricingCalculator/Tabbed'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
 import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
 import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
 
@@ -74,102 +73,6 @@ interface CalculatorProps {
 }
 
 export const Calculator = ({ hideHeader = false, id = 'calculator' }: CalculatorProps): JSX.Element => {
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(graphql`
-        query {
-            allProductData {
-                nodes {
-                    products {
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        contact_support
-                        addons {
-                            contact_support
-                            description
-                            docs_url
-                            image_url
-                            icon_key
-                            inclusion_only
-                            name
-                            type
-                            unit
-                            plans {
-                                description
-                                docs_url
-                                image_url
-                                name
-                                plan_key
-                                product_key
-                                unit
-                                flat_rate
-                                unit_amount_usd
-                                features {
-                                    key
-                                    name
-                                    description
-                                    category
-                                    limit
-                                    note
-                                    entitlement_only
-                                    is_plan_default
-                                    unit
-                                }
-                                tiers {
-                                    current_amount_usd
-                                    current_usage
-                                    flat_amount_usd
-                                    unit_amount_usd
-                                    up_to
-                                }
-                            }
-                        }
-                        name
-                        type
-                        unit
-                        usage_key
-                        plans {
-                            description
-                            docs_url
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            free_allocation
-                            image_url
-                            included_if
-                            name
-                            plan_key
-                            product_key
-                            contact_support
-                            unit_amount_usd
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                            unit
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
     return (
         <SectionLayout id={id} className="not-prose mb-12">
             {!hideHeader && (

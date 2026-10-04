@@ -1,0 +1,25 @@
+---
+// Renders the page island. It loads the page component and the page's content modules on the
+// server first, so neither is wrapped in a Suspense boundary: the server HTML and the hydrated tree match,
+// and hydration cannot be interrupted (the client:page directive loads the same modules first).
+import Page from './Page'
+import { loadContentModule, loadPageModule } from './modules'
+
+interface Props {
+    /** Module path of the page component, e.g. "/src/templates/Handbook.tsx". */
+    module: string
+    /** Props for the page component. */
+    props?: object
+    /**
+     * The MDX modules the page renders, e.g. "/contents/docs/feature-flags/index.mdx". A page that
+     * renders several (an API reference with a note per operation) lists them all.
+     */
+    content?: string | string[]
+}
+
+const { module, props, content } = Astro.props
+const contentKeys = [content ?? []].flat()
+await Promise.all([loadPageModule(module), ...contentKeys.map((key) => loadContentModule(key))])
+---
+
+<Page client:page url={Astro.url.href} module={module} props={props} content={contentKeys} />

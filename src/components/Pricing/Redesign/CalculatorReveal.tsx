@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from '@reach/router'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { scrollToElement } from 'components/ScrollToElement'
 import usePostHog from 'hooks/usePostHog'
 import AgentEstimateLink from 'components/Pricing/AgentEstimateLink'
+import { useLocation } from 'lib/navigation'
 
 const PANEL_ID = 'calculator-panel'
 

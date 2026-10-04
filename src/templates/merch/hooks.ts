@@ -15,7 +15,8 @@ import type {
     VariantSelectedOption,
 } from './types'
 import { getAvailableQuantity } from './utils'
-import { useStaticQuery, graphql } from 'gatsby'
+import continueSellingJson from '@data/products-merch-continue-selling.json'
+import type { MerchContinueSelling } from '~/data-layer/queries/products'
 
 type getVariantOptionArgs = {
     name: string
@@ -115,19 +116,6 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
     const [productData, setProductData] = useState<StorefrontProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<unknown>()
-    const { allProducts } = useStaticQuery(graphql`
-        {
-            allProducts: allShopifyProduct {
-                nodes {
-                    variants {
-                        shopifyId
-                        inventoryPolicy
-                    }
-                }
-            }
-        }
-    `)
-
     useEffect(() => {
         const fetchProduct = async () => {
             const requestBody = {
@@ -178,7 +166,7 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
-                await assignQuantities(responseData.variants, allProducts.nodes)
+                assignQuantities(responseData.variants)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -203,14 +191,13 @@ function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProduc
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
 }
 
-async function assignQuantities(variants: StorefrontProductVariantNode[], allProducts: any): Promise<void> {
+// Variants that sell when out of stock (inventory policy "continue").
+const continueSellingVariants = continueSellingJson as MerchContinueSelling
+
+function assignQuantities(variants: StorefrontProductVariantNode[]): void {
     variants.map((v) => {
         if (!v.product.tags.includes('digital')) {
-            const continueSelling = allProducts.some((p: any) =>
-                p.variants.some(
-                    (variant: any) => variant.shopifyId === v.id && variant.inventoryPolicy.toLowerCase() === 'continue'
-                )
-            )
+            const continueSelling = continueSellingVariants.includes(v.id)
             v.quantityAvailable = continueSelling ? 100 : v.quantityAvailable
         }
     })

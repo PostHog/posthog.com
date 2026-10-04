@@ -29,7 +29,7 @@ export function useCategoryTags(folder: string): { tags: CategoryTag[]; loading:
             },
             { encodeValuesOnly: true }
         )
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-tags?${query}`)
+        fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/post-tags?${query}`)
             .then((response) => response.json())
             .then((data) => {
                 if (cancelled) return

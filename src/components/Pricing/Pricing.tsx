@@ -8,18 +8,18 @@ import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
-import CTA from 'components/Home/CTA.js'
+import CTA from 'components/Home/CTA'
 import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from 'hooks/useProducts'
-import { graphql, useStaticQuery } from 'gatsby'
-import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import Tabs from 'components/Tabs'
 import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
+import billingProductsJson from '@data/products-billing.json'
+import type { BillingProducts } from '~/data-layer/queries/products'
 
 interface PlanData {
     title: string
@@ -270,110 +270,8 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-export const allProductsData = graphql`
-    query {
-        allProductData {
-            nodes {
-                products {
-                    description
-                    docs_url
-                    image_url
-                    icon_key
-                    inclusion_only
-                    contact_support
-                    addons {
-                        contact_support
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        name
-                        type
-                        unit
-                        legacy_product
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        plans {
-                            description
-                            docs_url
-                            image_url
-                            name
-                            plan_key
-                            product_key
-                            unit
-                            flat_rate
-                            unit_amount_usd
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                    name
-                    type
-                    unit
-                    usage_key
-                    legacy_product
-                    plans {
-                        description
-                        docs_url
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        free_allocation
-                        image_url
-                        included_if
-                        name
-                        plan_key
-                        product_key
-                        contact_support
-                        unit_amount_usd
-                        tiers {
-                            current_amount_usd
-                            current_usage
-                            flat_amount_usd
-                            unit_amount_usd
-                            up_to
-                        }
-                        unit
-                    }
-                }
-            }
-        }
-    }
-`
+/** Every billing product with its plans and add-ons. */
+export const billingProducts = billingProductsJson as BillingProducts
 
 const PricingExperiment = ({
     groupsToShow,
@@ -383,15 +281,7 @@ const PricingExperiment = ({
     currentProduct?: string | null
 }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
-
-    const platformAndSupportProduct = billingProducts.find(
-        (product: BillingProductV2Type) => product.type === 'platform_and_support'
-    )
+    const platformAndSupportProduct = billingProducts.find((product) => product.type === 'platform_and_support')
     const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
@@ -401,7 +291,7 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            {/* This file is mostly just here for the graphql query until we refactor. */}
+            {/* This file is mostly just here for the shared billing data until we refactor. */}
         </>
     )
 }

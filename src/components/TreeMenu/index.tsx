@@ -2,11 +2,11 @@ import React, { useEffect, useState, useMemo, useRef } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { IconChevronRight, IconPlus, IconArrowUpRight } from '@posthog/icons'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLocation } from '@reach/router'
-import { replacePath } from '../../../gatsby/utils'
+import { replacePath } from '../../data-layer/utils'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import { useWindow } from '../../context/Window'
+import { useLocation } from 'lib/navigation'
 
 interface MenuItem {
     name: string

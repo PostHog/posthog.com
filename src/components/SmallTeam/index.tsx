@@ -1,8 +1,11 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
+import { ResponsiveImage } from 'components/Image'
+import smallTeamsJson from '@data/people-small-teams.json'
+import type { SmallTeams } from '~/data-layer/queries/people'
+
+const smallTeams = smallTeamsJson as SmallTeams
 
 export interface SmallTeamProps {
     slug: string
@@ -29,40 +32,15 @@ export default function SmallTeam({
     variant = 'pill',
     crestClassName = '',
 }: SmallTeamProps): JSX.Element | null {
-    const {
-        allSqueakTeam: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            allSqueakTeam {
-                nodes {
-                    id
-                    name
-                    tagline
-                    slug
-                    miniCrest {
-                        gatsbyImageData(width: 20, height: 20)
-                    }
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const team = nodes.find((node: any) => node.slug === slug)
+    const team = smallTeams.find((node) => node.slug === slug)
 
     if (!team) {
         // If team not found, just return the children or slug as text
         return children ? children : <span>{slug}</span>
     }
 
-    const miniCrestImage = getImage(team.miniCrest)
-    const fullCrestUrl = team.crest?.data?.attributes?.url
+    const miniCrestImage = team.miniCrest ?? undefined
+    const fullCrestUrl = team.crestUrl
 
     if (variant === 'crest') {
         return (
@@ -82,7 +60,7 @@ export default function SmallTeam({
                     />
                 ) : (
                     miniCrestImage && (
-                        <GatsbyImage
+                        <ResponsiveImage
                             image={miniCrestImage}
                             alt={`${team.name} mini crest`}
                             className="size-8 shrink-0"
@@ -111,7 +89,7 @@ export default function SmallTeam({
                         }`}
                     >
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
-                            <GatsbyImage
+                            <ResponsiveImage
                                 image={miniCrestImage}
                                 alt={`${team.name} mini crest`}
                                 className="size-5 shrink-0"
@@ -135,7 +113,7 @@ export default function SmallTeam({
                     }`}
                 >
                     {!noMiniCrest && miniCrestImage && (
-                        <GatsbyImage
+                        <ResponsiveImage
                             image={miniCrestImage}
                             alt={`${team.name} mini crest`}
                             className="size-5 shrink-0"

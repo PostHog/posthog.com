@@ -1,0 +1,17 @@
+---
+// Product engineer hub posts (contents/product-engineers), plus /product-engineers/all. Posts render templates/BlogPost.tsx.
+// The section index and its tag pages come from src/views or src/pages/[folder]/[...tag].astro.
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { postSectionPage, postSectionPaths, type PostSectionRoute } from '../../lib/content/posts'
+
+export async function getStaticPaths() {
+    return postSectionPaths('productEngineers')
+}
+
+const page = postSectionPage(Astro.props as PostSectionRoute)
+---
+
+<Site>
+    <PageIsland module={page.module} props={page.props} content={page.content} />
+</Site>

@@ -33,7 +33,7 @@ export const fetchTopicGroups = async () => {
             encodeValuesOnly: true,
         }
     )
-    const topicGroups = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topic-groups?${topicGroupsQuery}`)
+    const topicGroups = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/topic-groups?${topicGroupsQuery}`)
 
     if (!topicGroups.ok) {
         throw new Error('Failed to fetch topic groups')

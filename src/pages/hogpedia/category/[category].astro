@@ -1,0 +1,20 @@
+---
+// Hogpedia category pages: one per category that an article declares.
+import { getCollection } from 'astro:content'
+import PageIsland from '../../../islands/PageIsland.astro'
+import Site from '../../../layouts/Site.astro'
+import { type HogpediaCategoryProps, hogpediaCategories } from '../../../lib/content/hogpedia'
+
+export async function getStaticPaths() {
+    return hogpediaCategories(await getCollection('hogpedia')).map(({ slug, props }) => ({
+        params: { category: slug },
+        props,
+    }))
+}
+
+type Props = HogpediaCategoryProps
+---
+
+<Site>
+    <PageIsland module="/src/templates/HogpediaCategory.tsx" props={Astro.props} />
+</Site>

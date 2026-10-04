@@ -1,22 +1,16 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import CodeBlock from 'components/Home/CodeBlock'
+import htmlSnippetJson from '@data/content-html-snippet.json'
+import type { HtmlSnippet } from '~/data-layer/queries/content'
 
-export default function SnippetRenderer() {
-    const data = useStaticQuery(graphql`
-        {
-            mdx(slug: { eq: "docs/integrate/snippet" }) {
-                rawBody
-            }
-        }
-    `)
+const rawContent = htmlSnippetJson as HtmlSnippet
 
-    if (!data?.mdx?.rawBody) {
+export default function SnippetRenderer(): JSX.Element | null {
+    if (!rawContent) {
         return null
     }
 
     // Extract the code from the markdown (removing the ```html and ``` markers)
-    const rawContent = data.mdx.rawBody
     const codeMatch = rawContent.match(/```html\n([\s\S]*?)\n```/)
     const snippetCode = codeMatch ? codeMatch[1] : rawContent
 

@@ -106,7 +106,7 @@ AWS_REGION=your-aws-region
 
 ```bash
 # Generate and upload a single file
-uv run handbook-audio --upload-s3 contents/handbook/values.md
+uv run handbook-audio --upload-s3 contents/handbook/values.mdx
 ```
 
 ### Batch Upload
@@ -123,7 +123,7 @@ uv run handbook-audio --search "engineering" --upload-s3
 
 ```bash
 # Test S3 upload without actually uploading
-uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.md
+uv run handbook-audio --dry-run --upload-s3 contents/handbook/values.mdx
 ```
 
 ## Generated URLs
@@ -160,7 +160,7 @@ https://d123456789.cloudfront.net/handbook-audio/values.mp3
 ```python
 from s3_uploader import get_s3_url
 
-# For handbook page: contents/handbook/product/releasing-new-products-and-features.md
+# For handbook page: contents/handbook/product/releasing-new-products-and-features.mdx
 slug = "product/releasing-new-products-and-features"
 url = get_s3_url(slug)
 # Returns: https://posthog-handbook-audio.s3.us-east-1.amazonaws.com/handbook-audio/product/releasing-new-products-and-features.mp3

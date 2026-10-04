@@ -48,7 +48,7 @@ Create a file at `server/routes/yourpath/[...path].ts`:
 
 <MultiLanguage>
 
-```ts file=US
+```ts file="US"
 export default defineEventHandler(async (event) => {
   const path = event.context.params?.path || ''
   const url = getRequestURL(event)
@@ -106,7 +106,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-```ts file=EU
+```ts file="EU"
 export default defineEventHandler(async (event) => {
   const path = event.context.params?.path || ''
   const url = getRequestURL(event)
@@ -189,7 +189,7 @@ If you're using the `@posthog/nuxt` module, update your `nuxt.config.ts`:
 
 <MultiLanguage>
 
-```ts file=US
+```ts file="US"
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
@@ -203,7 +203,7 @@ export default defineNuxtConfig({
 })
 ```
 
-```ts file=EU
+```ts file="EU"
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
@@ -225,7 +225,7 @@ If you're using the `posthog-js` library directly with a plugin:
 
 <MultiLanguage>
 
-```ts file=US
+```ts file="US"
 // plugins/posthog.client.ts
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'
@@ -246,7 +246,7 @@ export default defineNuxtPlugin(() => {
 })
 ```
 
-```ts file=EU
+```ts file="EU"
 // plugins/posthog.client.ts
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'

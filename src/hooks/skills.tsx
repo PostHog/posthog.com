@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import agentSkillsJson from '@data/products-agent-skills.json'
+import type { AgentSkills } from '~/data-layer/queries/products'
 import useProduct from './useProduct'
 import { skillsData, IncomingSkill } from './skillsData'
 import {
@@ -224,24 +225,9 @@ export function useAllProductResources(): ResolvedResource[] {
     }, [allProducts])
 }
 
-const allAgentSkillsQuery = graphql`
-    query {
-        allAgentSkill {
-            nodes {
-                product
-                name
-                description
-                sourcePath
-                mcpTools
-            }
-        }
-    }
-`
-
 /** Canonical agent skills ingested from the monorepo at build time (may be empty). */
 export function useAgentSkills(): AgentSkill[] {
-    const data = useStaticQuery(allAgentSkillsQuery)
-    return useMemo(() => (data?.allAgentSkill?.nodes ?? []) as AgentSkill[], [data])
+    return agentSkillsJson as AgentSkills
 }
 
 /** Monorepo product folder → posthog.com product handle (for flow-tool enrichment) */

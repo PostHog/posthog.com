@@ -1,0 +1,25 @@
+---
+// The product engineer handbook (contents/product-engineer).
+import { getCollection } from 'astro:content'
+import PageIsland from '../../islands/PageIsland.astro'
+import Site from '../../layouts/Site.astro'
+import { type HandbookEntry, handbookPage, PRODUCT_ENGINEER_SECTION } from '../../lib/content/handbook'
+import { entryPath, isViewPath } from '../../lib/routes/views'
+
+export async function getStaticPaths() {
+    const entries = await getCollection('productEngineerHandbook', (entry) => !!entry.data.title)
+    return entries
+        .filter((entry) => !isViewPath(entryPath('/product-engineer', entry.id)))
+        .map((entry) => ({ params: { slug: entry.id === 'index' ? undefined : entry.id }, props: { entry } }))
+}
+
+interface Props {
+    entry: HandbookEntry
+}
+
+const page = handbookPage(Astro.props.entry, PRODUCT_ENGINEER_SECTION)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Handbook.tsx" props={{ page }} content={page.body} />
+</Site>

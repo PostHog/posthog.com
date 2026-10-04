@@ -67,6 +67,4 @@ const handler = async (req, res) => {
     }
 }
 
-// CommonJS (not `export default`) so the Gatsby dev middleware can require() this
-// file directly with plain Node; Vercel's runtime supports CJS handlers natively.
-module.exports = handler
+export default handler

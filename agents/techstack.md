@@ -5,19 +5,22 @@
 ```bash
 pnpm install                    # Install dependencies (NOT npm)
 pnpm start                      # Dev server at localhost:8001
-pnpm build                      # Production build
-pnpm clean                      # Clear Gatsby cache
-pnpm clean && mkdir .cache && pnpm i && pnpm start      # Full reset when things break
+pnpm build                      # Production build (to dist/)
+pnpm serve                      # Serve the production build
+pnpm clean                      # Clear the build output and the data layer cache
+pnpm clean && pnpm i && pnpm start      # Full reset when things break
 ```
 
-Requires 16GB RAM (`NODE_OPTIONS='--max_old_space_size=16384'`).
+Requires 16GB RAM (`NODE_OPTIONS='--max_old_space_size=16384'`, set by `pnpm build` and `pnpm start`).
 
 ## Testing
 
 ```bash
 pnpm test-redirects             # Test redirect configuration
 pnpm check-links-post-build     # Verify links after build
-pnpm format                     # Prettier for js/ts/tsx/json/css
+pnpm format                     # Prettier for astro/js/ts/tsx/json/css
+pnpm lint                       # ESLint
+pnpm typecheck                  # astro check (TypeScript)
 ```
 
 ## GitHub CLI
@@ -38,7 +41,18 @@ Use it to create and manage [stacked PRs](https://docs.github.com/en/pull-reques
 
 ```
 contents/                       # MDX content (blog, docs, handbook, tutorials)
+astro.config.mjs                # Astro config: integrations, aliases
 src/
+  content.config.ts             # Content collections (one per content type)
+  content/schemas.ts            # Typed frontmatter schemas
+  pages/                        # Astro routes (getStaticPaths per content type)
+  layouts/Site.astro            # Desktop shell: taskbar, desktop, page window
+  islands/                      # React islands (Chrome, Desktop, Page)
+  views/                        # Page components for fixed URLs (served by pages/[...page].astro)
+  templates/                    # Page components for content (blog post, docs, handbook, ...)
+  data-layer/                   # Build-time data: sources, cache, typed queries (@data/*)
+  integrations/seoOutputs.ts    # .md copies, llms.txt, llms-full.txt, sitemap, Algolia
+  lib/mdx/                      # MDX compiler setup
   components/                   # React components
     TaskBarMenu/menuData.tsx    # Global navigation menu (top bar)
   context/App.tsx               # Window management, settings, navigation
@@ -52,14 +66,10 @@ src/
       {competitor}.tsx          # Array of normalized products, platform, and pricing data
   navs/index.js                 # Source navigation menus used for most of the site (especially docs, handbook)
   styles/global.css             # Global styles with @apply
-gatsby/
-  createPages.ts                # Page generation
-  sourceNodes.ts                # Data sourcing (GitHub, Ashby jobs)
-  onCreateNode.ts               # Node processing
 api/                            # Vercel serverless functions
 ```
 
-Docs are also pulled from the [PostHog monorepo](https://github.com/PostHog/posthog) (`docs/published/` and `docs/onboarding/`) into `.cache/gatsby-source-git/` at build time via `gatsby-source-git`.
+Docs are also pulled from the [PostHog monorepo](https://github.com/PostHog/posthog) (`docs/published/` and `docs/onboarding/`) into `.cache/posthog-main-repo/` at build time (a sparse git clone, `src/data-layer/posthogRepo.ts`).
 
 ### Where docs content lives
 

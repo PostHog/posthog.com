@@ -11,11 +11,11 @@ import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield, getDisplayTitle, calculateAspectRatioDimensions } from './utils'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
 import SizeGuide from './SizeGuide'
 import Link from 'components/Link'
+import { ResponsiveImage, getImage } from 'components/Image'
 
 type ProductPanelProps = {
     className?: string
@@ -39,7 +39,7 @@ const Image = ({ alt, image }: { alt: string; image: any }) => {
         })
     }, [image])
 
-    return <GatsbyImage alt={alt} image={memoizedImage} />
+    return <ResponsiveImage alt={alt} image={memoizedImage} />
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {

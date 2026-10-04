@@ -2,7 +2,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
-import { StaticImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { child, container } from 'components/CallToAction'
@@ -30,10 +29,10 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
         placement === 'middle'
             ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4'
             : placement === 'blog-index'
-            ? 'border-0 pt-8'
-            : placement === 'community'
-            ? 'border-0'
-            : 'border-y !mt-6 !mb-0 !py-4'
+              ? 'border-0 pt-8'
+              : placement === 'community'
+                ? 'border-0'
+                : 'border-y !mt-6 !mb-0 !py-4'
 
     useEffect(() => {
         if (user?.email) {

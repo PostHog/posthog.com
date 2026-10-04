@@ -42,7 +42,7 @@ export default function useJobs(): {
     fetchMore: () => void
 } {
     const { data, size, setSize, isLoading, error } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/jobs?${query(offset)}`,
+        (offset) => `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/jobs?${query(offset)}`,
         async (url: string) => {
             return fetch(url).then((r) => r.json())
         },

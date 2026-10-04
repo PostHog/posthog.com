@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState } from 'react'
-import Toasts from 'components/Toast'
+// Toast notifications, shared by every island through a module-level store (see src/lib/store.ts).
+// The chrome island renders the toast list once (components/Toast).
+import React from 'react'
+import { createStore } from 'lib/store'
 
 export interface Toast {
     title?: string
@@ -16,41 +18,24 @@ export interface Toast {
     image?: React.ReactNode
 }
 
-interface ToastContext {
-    addToast: (toast: Toast) => number
-    toasts: Toast[]
-    removeToast: (createdAt: number) => void
+const toastStore = createStore<{ toasts: Toast[] }>({ toasts: [] })
+
+/** Shows a toast. Returns its id, which `removeToast` takes. */
+export const toast = (item: Toast): number => {
+    const createdAt = item.createdAt ?? Date.now()
+    toastStore.set((state) => ({ toasts: [...state.toasts, { ...item, createdAt }] }))
+    return createdAt
 }
 
-export const Context = createContext<ToastContext | undefined>(undefined)
-export const Provider = ({ children }: { children: React.ReactNode }): JSX.Element => {
-    const [toasts, setToasts] = useState<Toast[]>([])
-
-    const addToast = (toast: Toast) => {
-        const createdAt = toast.createdAt ?? Date.now()
-        setToasts((prevToasts) => [...prevToasts, { ...toast, createdAt }])
-        return createdAt
-    }
-
-    const removeToast = (createdAt: number) => {
-        setToasts((prevToasts) => prevToasts.filter((toast) => toast.createdAt !== createdAt))
-    }
-
-    return (
-        <Context.Provider value={{ addToast, toasts, removeToast }}>
-            {children}
-            <Toasts />
-        </Context.Provider>
-    )
+const removeToast = (createdAt: number) => {
+    toastStore.set((state) => ({ toasts: state.toasts.filter((item) => item.createdAt !== createdAt) }))
 }
+
 export const useToast = (): {
     toasts: Toast[]
     addToast: (toast: Toast) => number
     removeToast: (createdAt: number) => void
 } => {
-    const toast = useContext(Context)
-    if (!toast) {
-        throw new Error('useToast must be used within a ToastProvider')
-    }
-    return toast
+    const toasts = toastStore.use((state) => state.toasts)
+    return { toasts, addToast: toast, removeToast }
 }

@@ -116,7 +116,7 @@ export async function fetchAllCommunityProfiles(
     while (page < pageCount) {
         const query = buildQuery(filters, page, pageSize)
         const jwt = await getJwt()
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`, {
+        const res = await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles?${query}`, {
             headers: jwt ? { Authorization: `Bearer ${jwt}` } : undefined,
         })
         if (!res.ok) {
@@ -144,7 +144,7 @@ export function useCommunityProfiles({
     const [currentPage, setCurrentPage] = React.useState(0)
 
     const query = buildQuery(filters, currentPage, pageSize)
-    const key = enabled ? `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}` : null
+    const key = enabled ? `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles?${query}` : null
 
     const { data, isLoading, error, isValidating, mutate } = useSWR(
         key,

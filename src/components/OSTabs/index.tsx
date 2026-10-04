@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { useLocation } from '@reach/router'
 import { useWindow } from '../../context/Window'
+import { useLocation } from 'lib/navigation'
 
 interface TabItem {
     value: string
@@ -169,24 +169,20 @@ export default function OSTabs({
                     // on the homepage, tabs are vertical so we also want to skip it there too.
                     if (orientation === 'horizontal' && !extraTabRowContent) {
                         const orderedTabsWithoutContent = calculateTabRows(value)?.map((row) =>
-                            row.map(
-                                (tab): TabTriggerData => ({
-                                    value: tab.value,
-                                    label: tab.label,
-                                    triggerDataScheme: tab.triggerDataScheme,
-                                })
-                            )
+                            row.map((tab): TabTriggerData => ({
+                                value: tab.value,
+                                label: tab.label,
+                                triggerDataScheme: tab.triggerDataScheme,
+                            }))
                         )
                         onValueChange?.(value, orderedTabsWithoutContent || [])
                     } else {
                         const verticalTabsData: TabTriggerData[][] = [
-                            tabs.map(
-                                (tab): TabTriggerData => ({
-                                    value: tab.value,
-                                    label: tab.label,
-                                    triggerDataScheme: tab.triggerDataScheme,
-                                })
-                            ),
+                            tabs.map((tab): TabTriggerData => ({
+                                value: tab.value,
+                                label: tab.label,
+                                triggerDataScheme: tab.triggerDataScheme,
+                            })),
                         ]
                         onValueChange?.(value, verticalTabsData)
                     }

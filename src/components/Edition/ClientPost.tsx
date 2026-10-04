@@ -5,15 +5,14 @@ import SEO from 'components/seo'
 import dayjs from 'dayjs'
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useState } from 'react'
-import { navigate } from 'gatsby'
 import { PostsContext } from './Posts'
 import Title from './Title'
 import { useLayoutData } from 'components/Layout/hooks'
 import Upvote from './Upvote'
 import { Questions } from 'components/Squeak'
-import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
 import Link from 'components/Link'
+import { navigate, useLocation } from 'lib/navigation'
 
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (
@@ -84,7 +83,7 @@ export default function ClientPost({
         if (!confirmDelete) {
             setConfirmDelete(true)
         } else {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts/${id}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/posts/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${await getJwt()}`,

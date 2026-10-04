@@ -1,9 +1,9 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useMemo } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductMetafield, getDisplayTitle } from './utils'
 import { getShopifyImage } from './utils'
+import { ResponsiveImage } from 'components/Image'
 
 type ProductCardProps = {
     product: ShopifyProduct
@@ -54,7 +54,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     </div>
                 )}
                 <div className="relative aspect-square bg-white flex items-center">
-                    <GatsbyImage
+                    <ResponsiveImage
                         className="aspect-square overflow-hidden"
                         image={image}
                         alt={product.title}

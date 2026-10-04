@@ -1,12 +1,12 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import Tooltip from 'components/Tooltip'
-import { Link as GatsbyLink } from 'gatsby'
 import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
+import { Link as RouterLink } from 'lib/navigation'
 
 const POSTHOG_APP_HOSTNAMES = new Set(['app.posthog.com', 'us.posthog.com', 'eu.posthog.com'])
 
@@ -216,17 +216,16 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
+                        <RouterLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
-                        </GatsbyLink>
+                        </RouterLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
+                    <RouterLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
-                    </GatsbyLink>
+                    </RouterLink>
                 )
             ) : (
-                // eslint-disable-next-line react/jsx-no-target-blank -- externalLinkRel always sets noopener; the rule cannot read a computed rel
                 <a
                     rel={externalLinkRel(url)}
                     onClick={handleClick}
@@ -271,17 +270,16 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
+                        <RouterLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
-                        </GatsbyLink>
+                        </RouterLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
+                    <RouterLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
-                    </GatsbyLink>
+                    </RouterLink>
                 )
             ) : (
-                // eslint-disable-next-line react/jsx-no-target-blank -- externalLinkRel always sets noopener; the rule cannot read a computed rel
                 <a
                     rel={externalLinkRel(url)}
                     onClick={handleClick}

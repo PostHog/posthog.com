@@ -42,7 +42,7 @@ On your backend, read the header and include it in your LLM tracking:
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 app.post('/api/chat', async (req, res) => {
   const sessionId = req.headers['x-posthog-session-id']
 
@@ -59,7 +59,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 @app.route('/api/chat', methods=['POST'])
 def chat():
     session_id = request.headers.get('X-POSTHOG-SESSION-ID')
@@ -100,7 +100,7 @@ const response = await fetch('/api/chat', {
 
 <MultiLanguage>
 
-```javascript file=JavaScript
+```javascript file="JavaScript"
 // Backend
 app.post('/api/chat', async (req, res) => {
   const { message, sessionId } = req.body
@@ -118,7 +118,7 @@ app.post('/api/chat', async (req, res) => {
 })
 ```
 
-```python file=Python
+```python file="Python"
 # Backend
 @app.route('/api/chat', methods=['POST'])
 def chat():

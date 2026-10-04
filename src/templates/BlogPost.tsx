@@ -5,9 +5,6 @@ import Link from 'components/Link'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useMemo, useState } from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
@@ -20,7 +17,6 @@ import Title from 'components/Edition/Title'
 import Upvote from 'components/Edition/Upvote'
 import LikeButton from 'components/Edition/LikeButton'
 import { Questions } from 'components/Squeak'
-import { useLocation } from '@reach/router'
 import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
 import { CallToAction } from 'components/CallToAction'
@@ -39,6 +35,9 @@ import MenuBar from 'components/RadixUI/MenuBar'
 import slugify from 'slugify'
 import { getVideoClasses } from '../constants'
 import { WaitlistForm } from 'components/WaitlistForm'
+import { ResponsiveImage, getImage } from 'components/Image'
+import { useLocation } from 'lib/navigation'
+import type { BlogPostPage } from '../lib/content/posts'
 const A = (props) => <Link {...props} state={{ newWindow: true }} />
 
 export const Intro = ({
@@ -61,7 +60,7 @@ export const Intro = ({
 
             {featuredVideo && <iframe src={featuredVideo} className={getVideoClasses(fullWidthContent)} />}
             {!featuredVideo && featuredImage && (
-                <GatsbyImage className={`rounded-sm z-0 bg-accent rounded`} image={getImage(featuredImage)} />
+                <ResponsiveImage className={`rounded-sm z-0 bg-accent rounded`} image={getImage(featuredImage)} />
             )}
         </div>
     )
@@ -112,7 +111,7 @@ const ContributorsSmall = ({ contributors }) => {
                                                 src={image}
                                             />
                                         ) : gatsbyImage ? (
-                                            <GatsbyImage
+                                            <ResponsiveImage
                                                 image={gatsbyImage}
                                                 alt={name}
                                                 className="w-6 h-6 border border-primary rounded-full"
@@ -249,7 +248,7 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
                                     onClick: () => setTag(undefined),
                                     active: !tag,
                                 },
-                                ...activeMenu?.children?.map((child) => {
+                                ...(activeMenu?.children?.map((child) => {
                                     return {
                                         type: 'item',
                                         label: child.name,
@@ -258,7 +257,7 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
                                         },
                                         active: tag ? tag === child.tag || tag === child.name : false,
                                     }
-                                }),
+                                }) ?? []),
                             ],
                         },
                     ]}
@@ -282,23 +281,27 @@ const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
         </div>
     ) : null
 }
-export default function BlogPost({ data, pageContext, location, mobile = false }) {
-    const { postData } = data
-    const { body, excerpt, fields } = postData
+export interface BlogPostProps {
+    post: BlogPostPage
+    /** Tutorials set this. */
+    askMax?: boolean
+}
+
+export default function BlogPost({ post }: BlogPostProps) {
     const {
+        body,
+        excerpt,
+        slug,
         date,
         title,
         featuredImage,
         featuredImageCaption,
         featuredVideo,
-        featuredImageType,
         contributors,
         tags,
         seo,
-    } = postData?.frontmatter
-    const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
-    const filePath = postData?.parent?.relativePath
-    const category = postData?.parent?.category
+        tableOfContents,
+    } = post
     const components = {
         h1: (props) => Heading({ as: 'h1', ...props }),
         h2: (props) => Heading({ as: 'h2', ...props }),
@@ -306,7 +309,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         h4: (props) => Heading({ as: 'h4', ...props }),
         h5: (props) => Heading({ as: 'h5', ...props }),
         h6: (props) => Heading({ as: 'h6', ...props }),
-        inlineCode: InlineCode,
+        code: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
         MultiLanguage: MdxCodeBlock,
@@ -327,7 +330,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ...shortcodes,
     }
     const initialTag = undefined
-    const { tableOfContents, askMax } = pageContext
     const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
@@ -358,7 +360,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
 
     useEffect(() => {
         fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
+            `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/posts?${qs.stringify(
                 {
                     fields: ['id'],
                     filters: {
@@ -390,14 +392,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={`${import.meta.env.PUBLIC_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
                 imageType="absolute"
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
-                documentRkey={
-                    fields?.slug?.startsWith('/blog/')
-                        ? fields.slug.replace(/^\/blog\//, '').replace(/\/$/, '')
-                        : undefined
-                }
+                documentRkey={slug.startsWith('/blog/') ? slug.replace(/^\/blog\//, '').replace(/\/$/, '') : undefined}
             />
 
             <ReaderView
@@ -454,79 +452,3 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         </>
     )
 }
-
-export const SEOFragment = graphql`
-    fragment SEOFragment on FrontmatterSEO {
-        metaTitle
-        metaDescription
-    }
-`
-
-export const query = graphql`
-    query BlogPostLayout($id: String!) {
-        postData: mdx(id: { eq: $id }) {
-            id
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-                pageViews
-                commits {
-                    author {
-                        avatar_url
-                        html_url
-                        login
-                    }
-                    date
-                    message
-                    url
-                }
-            }
-            frontmatter {
-                date(formatString: "MMM DD, YYYY")
-                title
-                sidebar
-                showTitle
-                tags
-                category
-                hideAnchor
-                description
-                featuredImageType
-                featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
-                featuredImageCaption
-                contributors: authorData {
-                    id
-                    name
-                    profile_id
-                    role
-                    profile {
-                        firstName
-                        lastName
-                        companyRole
-                        avatar {
-                            url
-                        }
-                    }
-                }
-                seo {
-                    ...SEOFragment
-                }
-            }
-            parent {
-                ... on File {
-                    relativePath
-                    category
-                    fields {
-                        gitLogLatestDate(formatString: "MMM DD, YYYY")
-                    }
-                }
-            }
-        }
-    }
-`

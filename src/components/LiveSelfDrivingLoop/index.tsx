@@ -1,7 +1,8 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import { IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle, IconTrends } from '@posthog/icons'
+import selfDrivingPRsJson from '@data/products-self-driving-prs.json'
+import type { SelfDrivingPRs } from '~/data-layer/queries/products'
 
 /**
  * LiveSelfDrivingLoop
@@ -13,7 +14,7 @@ import { IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircl
  * it rejoins the loop on its own after a short idle.
  *
  * Data (build-time, no runtime calls): reads the `SelfDrivingPullRequest` GraphQL nodes produced
- * by sourceSelfDrivingPRs() in gatsby/sourceNodes.ts and features one recent *merged* PR. Merged-
+ * by the GitHub source (src/data-layer/sources/github.ts) and features one recent *merged* PR. Merged-
  * only is the vetting mechanism: a human already reviewed and merged each, so the public diagram
  * can't surface a half-baked draft. Which PR is featured rotates on each page load, so a refresh
  * gets a fresh one. Only the Pull request / You review / Measured stages have real per-PR data
@@ -62,6 +63,10 @@ type SelfDrivingPR = {
     openedAt: string | null
     mergedAt: string | null
 }
+
+// Recent MERGED PRs only (merged = human-reviewed = vetted), newest first. We rotate which one is
+// featured on each page load, so a refresh surfaces a fresh PR.
+const featured: SelfDrivingPR[] = selfDrivingPRsJson as SelfDrivingPRs
 
 type Beat = { text: React.ReactNode }
 
@@ -155,33 +160,6 @@ const StageBadge = ({ stage, done, active }: { stage: Stage; done: boolean; acti
 }
 
 const LiveSelfDrivingLoop = (): JSX.Element => {
-    const data = useStaticQuery(graphql`
-        query SelfDrivingLoopHero {
-            allSelfDrivingPullRequest {
-                nodes {
-                    prNumber
-                    summary
-                    type
-                    scope
-                    url
-                    state
-                    openedAt
-                    mergedAt
-                }
-            }
-        }
-    `)
-
-    // Recent MERGED PRs only (merged = human-reviewed = vetted). We rotate which one is featured
-    // on each page load, so a refresh surfaces a fresh PR.
-    const featured: SelfDrivingPR[] = React.useMemo(() => {
-        const nodes: SelfDrivingPR[] = data?.allSelfDrivingPullRequest?.nodes ?? []
-        return nodes
-            .filter((n) => n.state === 'merged')
-            .sort((a, b) => new Date(b.mergedAt || 0).getTime() - new Date(a.mergedAt || 0).getTime())
-            .slice(0, 8)
-    }, [data])
-
     const [featuredIndex, setFeaturedIndex] = React.useState(0)
     const [active, setActive] = React.useState(0)
     const [motionOK, setMotionOK] = React.useState(true)

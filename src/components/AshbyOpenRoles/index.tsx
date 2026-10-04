@@ -1,45 +1,30 @@
 import { RightArrow } from 'components/Icons/Icons'
 import Link from 'components/Link'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import jobsJson from '@data/people-jobs.json'
+import departmentsJson from '@data/people-job-departments.json'
+import type { JobDepartments, Jobs } from '~/data-layer/queries/people'
 
-interface OpenRoleType {
-    fields: {
-        title: string
-        slug: string
-    }
-    externalLink: string
-    departmentName: string
-}
+const jobs = jobsJson as Jobs
+const departments = departmentsJson as JobDepartments
 
-interface DepartmentType {
-    title: string
-}
-
-export default function AshbyOpenRoles() {
-    const {
-        allAshbyJobPosting: { departments, jobs },
-    } = useStaticQuery(query)
+export default function AshbyOpenRoles(): JSX.Element {
     // In order to show open roles, a valid Ashby API key
     // must be added as an environment variable ASHBY_API_KEY.
     // If no Ashby API key is found, this component shows nothing
     return (
         <ul className="list-none p-0 m-0">
-            {departments.map((department: DepartmentType) => {
-                const { title } = department
+            {departments.map((title) => {
                 return (
                     <li key={title}>
                         <h3>{title}</h3>
                         <ul className="list-none p-0 m-0 mt-4 mb-6 divide divide-y divide-primary">
                             {jobs
-                                .filter((job: OpenRoleType) => job.departmentName === title)
-                                .map((job: OpenRoleType) => {
-                                    const {
-                                        fields: { title, slug },
-                                        parent,
-                                    } = job
+                                .filter((job) => job.departmentName === title)
+                                .map((job) => {
+                                    const { title, slug, customFields } = job
                                     const teams = JSON.parse(
-                                        parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]'
+                                        customFields.find(({ title }) => title === 'Teams')?.value || '[]'
                                     )
                                     const [jobTitle] = title.split(' - ')
                                     return (
@@ -67,29 +52,3 @@ export default function AshbyOpenRoles() {
         </ul>
     )
 }
-
-const query = graphql`
-    query OpenRoles {
-        allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-            jobs: nodes {
-                fields {
-                    title
-                    slug
-                }
-                parent {
-                    ... on AshbyJob {
-                        customFields {
-                            value
-                            title
-                        }
-                    }
-                }
-                externalLink
-                departmentName
-            }
-            departments: group(field: departmentName) {
-                title: fieldValue
-            }
-        }
-    }
-`

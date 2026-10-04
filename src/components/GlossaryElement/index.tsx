@@ -1,4 +1,3 @@
-import { graphql, useStaticQuery } from 'gatsby'
 import reactStringReplace from 'react-string-replace'
 import React, { useState } from 'react'
 import pluralizeWord from 'pluralize'

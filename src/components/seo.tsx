@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
-import { Helmet } from 'react-helmet'
-import { useLocation } from '@reach/router'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useContext, useEffect } from 'react'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
-import { isMarkdownContentPath } from '../constants'
+import { ServerLocationContext, useLocation } from 'lib/navigation'
+import { collectHead, siteMetadata } from 'lib/head'
 
 interface SEOProps {
     title: string
@@ -22,14 +20,16 @@ interface SEOProps {
     documentRkey?: string
 }
 
-// PostHog's AT Protocol identity, used for Standard.site discovery links
-const STANDARD_SITE_DID = 'did:plc:go7eemqz4y5nhonj4kg5w2p6'
-
 export type LanguageAlternate = {
     hrefLang: string
     href: string
 }
 
+/**
+ * Describes the page's <head>. Renders nothing: on the server it records the tags for the Astro
+ * layout to write (see src/lib/head.ts). Astro's router swaps the head on navigation, so the client
+ * only updates the window title.
+ */
 export const SEO = ({
     title,
     description,
@@ -43,94 +43,45 @@ export const SEO = ({
     languageAlternates,
     structuredData,
     documentRkey,
-}: SEOProps): JSX.Element => {
+}: SEOProps): null => {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const { pathname } = useLocation()
-    const { site } = useStaticQuery(query)
+    const serverLocation = useContext(ServerLocationContext)
+    const { siteUrl } = siteMetadata
+    const resolvedTitle = title || siteMetadata.title
 
-    const { defaultTitle, titleTemplate, defaultDescription, siteUrl, defaultImage, twitterUsername } =
-        site.siteMetadata
-
-    const structuredDataItems = structuredData
-        ? Array.isArray(structuredData)
-            ? structuredData
-            : [structuredData]
-        : []
-
-    const seo = {
-        title: title || defaultTitle,
-        description: description || defaultDescription,
-        image:
-            imageType === 'absolute' || image?.startsWith('http')
-                ? image
-                : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
-        url: `${siteUrl}${pathname}`,
-        // Callers may pass a site-relative path; canonical links have to be absolute.
-        canonical: canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl,
+    if (typeof window === 'undefined' && serverLocation) {
+        const url = `${siteUrl}${pathname}`
+        collectHead(serverLocation.pathname, {
+            title: resolvedTitle,
+            description: description || siteMetadata.description,
+            image:
+                imageType === 'absolute' || image?.startsWith('http')
+                    ? image
+                    : `${import.meta.env.PUBLIC_DEPLOY_PRIME_URL || siteUrl}${image || siteMetadata.image}`,
+            url,
+            // Callers may pass a site-relative path; canonical links have to be absolute.
+            canonical: (canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl) || url,
+            article: !!article,
+            noindex: !!noindex,
+            lang,
+            languageAlternates: (languageAlternates || []).map(({ hrefLang, href }) => ({
+                hrefLang,
+                href: href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`,
+            })),
+            structuredData: structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [],
+            documentRkey,
+        })
     }
 
     useEffect(() => {
-        if (updateWindowTitle && seo.title && appWindow) {
-            setWindowTitle(appWindow, seo.title)
+        if (updateWindowTitle && resolvedTitle && appWindow) {
+            setWindowTitle(appWindow, resolvedTitle)
         }
-    }, [seo.title])
+    }, [resolvedTitle])
 
-    return (
-        <Helmet title={seo.title} titleTemplate={titleTemplate}>
-            {lang && <html lang={lang} />}
-            {noindex && <meta name="robots" content="noindex" />}
-            {seo.description && <meta name="description" content={seo.description} />}
-            {seo.image && <meta name="image" content={seo.image} />}
-            {<link rel="canonical" href={seo.canonical || seo.url} />}
-            {/* Standard.site publication discovery hint for the blog */}
-            {pathname?.startsWith('/blog') && (
-                <link
-                    rel="site.standard.publication"
-                    href={`at://${STANDARD_SITE_DID}/site.standard.publication/blog`}
-                />
-            )}
-            {/* Standard.site document record for this blog post */}
-            {documentRkey && (
-                <link
-                    rel="site.standard.document"
-                    href={`at://${STANDARD_SITE_DID}/site.standard.document/${documentRkey}`}
-                />
-            )}
-            {languageAlternates?.map(({ hrefLang, href }) => (
-                <link
-                    key={hrefLang}
-                    rel="alternate"
-                    hrefLang={hrefLang}
-                    href={href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`}
-                />
-            ))}
-            {/* Site-wide signpost so LLM crawlers on any page can discover the Markdown index. */}
-            <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
-            {isMarkdownContentPath(pathname) && (
-                <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
-            )}
-
-            {seo.url && <meta property="og:url" content={seo.url} />}
-            <meta property="og:type" content={article ? 'article' : 'website'} />
-            {seo.title && <meta property="og:title" content={seo.title} />}
-            {seo.description && <meta property="og:description" content={seo.description} />}
-            {seo.image && <meta property="og:image" content={seo.image} />}
-
-            <meta name="twitter:card" content="summary_large_image" />
-            {twitterUsername && <meta name="twitter:creator" content={twitterUsername} />}
-            {seo.title && <meta name="twitter:title" content={seo.title} />}
-            {seo.description && <meta name="twitter:description" content={seo.description} />}
-            {seo.image && <meta name="twitter:image" content={seo.image} />}
-            <meta name="twitter:site" content="@PostHog" />
-
-            {structuredDataItems.map((item, i) => (
-                <script key={`ld-${i}`} type="application/ld+json">
-                    {JSON.stringify(item)}
-                </script>
-            ))}
-        </Helmet>
-    )
+    return null
 }
 
 export default SEO
@@ -205,18 +156,3 @@ export const buildProductStructuredData = ({
     }
     return items
 }
-
-const query = graphql`
-    query SEO {
-        site {
-            siteMetadata {
-                defaultTitle: title
-                titleTemplate
-                defaultDescription: description
-                siteUrl: url
-                defaultImage: image
-                twitterUsername
-            }
-        }
-    }
-`

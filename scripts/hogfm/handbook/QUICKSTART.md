@@ -30,7 +30,7 @@ AWS_REGION=your-aws-region
 ### Single file - dry run
 
 ```bash
-uv run handbook-audio --dry-run contents/handbook/values.md
+uv run handbook-audio --dry-run contents/handbook/values.mdx
 ```
 
 **What it does:** Full pipeline (markdown → text → fake API call → fake save) without actually generating audio.
@@ -43,7 +43,7 @@ uv run handbook-audio --dry-run contents/handbook/values.md
 
 ```bash
 # Generate audio
-uv run handbook-audio contents/handbook/values.md
+uv run handbook-audio contents/handbook/values.mdx
 ```
 
 **What it does:** Full pipeline with real API call. Saves MP3 to `public/handbook-audio/values.mp3`.
@@ -90,12 +90,12 @@ uv run handbook-audio --all
 
 1. **Do a dry run:**
    ```bash
-   python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.md
+   python scripts/handbook-audio/generate.py --dry-run contents/handbook/values.mdx
    ```
 
 2. **Generate audio for that one file:**
    ```bash
-   uv run handbook-audio contents/handbook/values.md
+   uv run handbook-audio contents/handbook/values.mdx
    ```
 
 3. **Listen to the result:**
@@ -119,5 +119,5 @@ uv run handbook-audio --all
 
 - **Input:** `contents/handbook/**/*.md(x)`
 - **Output:** `public/handbook-audio/**/*.mp3`
-- **Structure is preserved:** `contents/handbook/engineering/operations/on-call.md` → `public/handbook-audio/engineering/operations/on-call.mp3`
+- **Structure is preserved:** `contents/handbook/engineering/operations/on-call.mdx` → `public/handbook-audio/engineering/operations/on-call.mp3`
 

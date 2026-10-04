@@ -1,5 +1,4 @@
 import PostLayout from 'components/PostLayout'
-import { graphql } from 'gatsby'
 import React from 'react'
 import { SEO } from 'components/seo'
 import Layout from 'components/Layout'
@@ -7,13 +6,13 @@ import { Posts } from 'components/Blog'
 import Pagination from 'components/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { communityMenu } from '../../navs'
+import type { PageInfo, PostCard } from '../../lib/content/posts'
 
-const Tutorials = ({
-    data: {
-        allPostsRecent: { edges: allPostsRecent },
-    },
-    pageContext: { numPages, currentPage, base },
-}) => {
+export interface TutorialsProps extends PageInfo {
+    posts: PostCard[]
+}
+
+const Tutorials = ({ numPages, currentPage, base, posts }: TutorialsProps) => {
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
             <SEO title={`All tutorials - PostHog`} />
@@ -32,10 +31,10 @@ const Tutorials = ({
                             Page {currentPage} of {numPages}
                         </p>
                     }
-                    posts={allPostsRecent.slice(0, 4)}
+                    posts={posts.slice(0, 4)}
                 />
                 <NewsletterForm />
-                <Posts posts={allPostsRecent.slice(4)} />
+                <Posts posts={posts.slice(4)} />
                 <Pagination currentPage={currentPage} numPages={numPages} base={base} />
             </PostLayout>
         </Layout>
@@ -43,20 +42,3 @@ const Tutorials = ({
 }
 
 export default Tutorials
-
-export const pageQuery = graphql`
-    query ($skip: Int!, $limit: Int!) {
-        allPostsRecent: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { ne: true }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-    }
-`

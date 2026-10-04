@@ -1,7 +1,5 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import { graphql } from 'gatsby'
-import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
@@ -32,8 +30,7 @@ import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
-import NewsletterForm from 'components/NewsletterForm'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { NewsletterForm } from 'components/NewsletterForm'
 import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
@@ -45,6 +42,10 @@ import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import NotFoundPage from 'components/NotFoundPage'
+import { useLocation } from 'lib/navigation'
+import { MDXRenderer } from 'components/MDXRenderer'
+import type { ReaderPage } from '../lib/content/readerPage'
+import type { DocsExtras } from '../lib/content/docs'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -333,25 +334,30 @@ export const SourceTablesFactory: (params: SourceTablesProps) => React.FC = ({ t
 
 const A = (props) => <Link {...props} />
 
-export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
+export interface HandbookProps {
+    /** A docs page also carries its data warehouse source and pipeline templates. */
+    page: ReaderPage & Partial<DocsExtras>
+}
+
+export default function Handbook({ page }: HandbookProps) {
     const {
         body,
-        frontmatter: {
-            title,
-            date,
-            tags,
-            contributors,
-            seo,
-            tableOfContents: frontmatterTableOfContents,
-            hideRightSidebar,
-            contentMaxWidthClass,
-            showByline,
-            featureFlag,
-            noindex,
-        },
-        fields: { slug, appConfig, templateConfigs, commits },
+        title,
+        byline,
+        seo,
+        tableOfContents,
+        hideRightSidebar,
+        contentMaxWidthClass,
+        featureFlag,
+        noindex,
+        slug,
+        templateConfigs = [],
+        commits,
         excerpt,
-    } = post
+        section,
+        source,
+        postHogSource = null,
+    } = page
 
     const sourceFields = postHogSource?.sourceFields ?? null
     const sourceTables = postHogSource?.tables ?? null
@@ -408,7 +414,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
 
     const components = {
         Team,
-        inlineCode: InlineCode,
+        code: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
         MultiLanguage: MdxCodeBlock,
@@ -421,7 +427,8 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         img: ZoomImage,
         a: A,
         TestimonialsTable,
-        AppParameters: AppParametersFactory({ config: appConfig }),
+        // Plugin configs came from each app's GitHub repo; those docs are gone, so this renders nothing.
+        AppParameters: AppParametersFactory({ config: null }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
         SourceParameters: SourceParametersFactory({ sourceFields }),
         SourceTables: SourceTablesFactory({ tables: sourceTables }),
@@ -452,11 +459,11 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             body={{
                 type: 'mdx',
                 content: body,
-                ...(showByline
+                ...(byline
                     ? {
-                          contributors,
-                          date,
-                          tags: tags?.map((tag) => ({
+                          contributors: byline.authors,
+                          date: byline.date,
+                          tags: byline.tags.map((tag) => ({
                               label: tag,
                               url:
                                   tag === 'Post mortems'
@@ -471,15 +478,15 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                 (showWarehouseWizardHint && <WarehouseWizardHint />) ||
                 (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
             }
-            tableOfContents={frontmatterTableOfContents || tableOfContents}
+            tableOfContents={tableOfContents}
             mdxComponents={components}
             commits={commits}
-            filePath={post.parent?.relativePath}
+            filePath={source.path}
             showSurvey
             showAskAI={showAskAI}
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
-            sourceInstanceName={post.parent?.sourceInstanceName}
+            sourceInstanceName={source.repo === 'posthog' ? 'posthog-main-repo' : undefined}
             menuTabs={productMenuTabs}
             productSelect={productSelect}
         />
@@ -488,10 +495,10 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     return (
         <>
             <SEO
-                title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
+                title={seo?.metaTitle || `${title} - ${section.name} - PostHog`}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                image={`${import.meta.env.PUBLIC_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
                 imageType="absolute"
                 // Flag-gated pages are always noindexed: the content ships in the static
                 // HTML, so we at least keep it out of search engines while in beta.
@@ -510,186 +517,3 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         </>
     )
 }
-
-export const query = graphql`
-    query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
-        postHogSource(mdx: { id: { eq: $id } }) {
-            sourceFields {
-                name
-                label
-                type
-                required
-                placeholder
-                caption
-            }
-            tables {
-                name
-                label
-                description
-                sync_methods
-                incremental_fields
-                primary_keys
-            }
-        }
-        glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
-            nodes {
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    featuredVideo
-                }
-                excerpt(pruneLength: 300)
-            }
-        }
-        nextPost: mdx(fields: { slug: { eq: $nextURL } }) {
-            excerpt(pruneLength: 500)
-            frontmatter {
-                title
-            }
-            fields {
-                slug
-            }
-        }
-        post: mdx(id: { eq: $id }) {
-            id
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-                commits {
-                    author {
-                        avatar_url
-                        html_url
-                        login
-                    }
-                    date
-                    message
-                    url
-                }
-                appConfig {
-                    key
-                    name
-                    required
-                    type
-                    hint
-                    description
-                }
-                contributors {
-                    url
-                    username
-                    teamData {
-                        name
-                    }
-                    avatar
-                    profile {
-                        squeakId
-                        firstName
-                        lastName
-                        companyRole
-                        avatar {
-                            url
-                        }
-                    }
-                }
-                templateConfigs {
-                    templateId
-                    inputs_schema {
-                        key
-                        type
-                        label
-                        required
-                        description
-                        default
-                    }
-                    name
-                    type
-                }
-            }
-            frontmatter {
-                showByline
-                featureFlag
-                noindex
-                tableOfContents {
-                    depth
-                    url
-                    value
-                }
-                title
-                date(formatString: "MMM DD, YYYY")
-                tags
-                contributors: authorData {
-                    id
-                    name
-                    profile_id
-                    role
-                    profile {
-                        firstName
-                        lastName
-                        companyRole
-                        avatar {
-                            url
-                        }
-                    }
-                }
-                description
-                showTitle
-                hideRightSidebar
-                contentMaxWidthClass
-                hideAnchor
-                hideLastUpdated
-                github
-                isArticle
-                showStepsToc
-                features {
-                    eventCapture
-                    userIdentification
-                    autoCapture
-                    sessionRecording
-                    featureFlags
-                    groupAnalytics
-                    surveys
-                    aiObservability
-                    errorTracking
-                }
-                availability {
-                    free
-                    selfServe
-                    teams
-                    enterprise
-                }
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE, width: 36)
-                    }
-                }
-                related {
-                    childMdx {
-                        fields {
-                            slug
-                        }
-                        frontmatter {
-                            title
-                        }
-                    }
-                }
-                featuredImage {
-                    publicURL
-                }
-                seo {
-                    ...SEOFragment
-                }
-            }
-            parent {
-                ... on File {
-                    sourceInstanceName
-                    relativePath
-                    fields {
-                        gitLogLatestDate(formatString: "MMM DD, YYYY")
-                    }
-                }
-            }
-        }
-    }
-`

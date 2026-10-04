@@ -5,21 +5,17 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql, useStaticQuery } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { shortcodes } from '../../mdxGlobalComponents'
+import { MDXRenderer } from 'components/MDXRenderer'
+import installSnippetJson from '@data/content-install-snippet.json'
+import type { InstallSnippet } from '~/data-layer/queries/content'
 
-function Install() {
-    const data = useStaticQuery(graphql`
-        {
-            mdx(slug: { eq: "docs/getting-started/_snippets/install" }) {
-                body
-            }
-        }
-    `)
+const installSnippet = installSnippetJson as InstallSnippet
+
+function Install(): JSX.Element {
     const components = {
-        inlineCode: InlineCode,
+        code: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,
         MultiLanguage: MdxCodeBlock,
@@ -36,7 +32,7 @@ function Install() {
     return (
         <div className="article-content">
             <MDXProvider components={components}>
-                <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                {installSnippet && <MDXRenderer>{installSnippet}</MDXRenderer>}
             </MDXProvider>
         </div>
     )

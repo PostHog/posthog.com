@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { StayCardContent } from '@posthog/twig-components/stay-card'
 import { filterStays, type Stay } from '@posthog/twig-components/catalog'
 import { staySettings, type StaySetting } from '@posthog/twig-components/filters'
-import cabin from '@posthog/twig-components/assets/cabin.jpg'
-import coast from '@posthog/twig-components/assets/coast.jpg'
-import city from '@posthog/twig-components/assets/city.jpg'
+import cabin from '@posthog/twig-components/assets/cabin.jpg?url'
+import coast from '@posthog/twig-components/assets/coast.jpg?url'
+import city from '@posthog/twig-components/assets/city.jpg?url'
 import '@posthog/twig-components/catalog.css'
 
 const photos: Record<Stay['setting'], string> = { Forest: cabin, Coast: coast, City: city }

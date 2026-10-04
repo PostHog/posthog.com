@@ -79,7 +79,7 @@ Once the provider is in place, PostHog automatically captures pageviews, session
 
 Use the `usePostHog` hook from `@posthog/react` in any component to capture custom events:
 
-```tsx file=src/routes/checkout.tsx
+```tsx file="src/routes/checkout.tsx"
 import { usePostHog } from '@posthog/react'
 
 function CheckoutButton({ orderId, total }: { orderId: string; total: number }) {
@@ -124,7 +124,7 @@ Call `posthog.reset()` on logout to clear the identified user.
 
 Create a server-side PostHog client using `posthog-node`. Use a singleton pattern so you reuse the same client across requests:
 
-```ts file=src/utils/posthog-server.ts
+```ts file="src/utils/posthog-server.ts"
 // src/utils/posthog-server.ts
 import { PostHog } from 'posthog-node'
 
@@ -149,7 +149,7 @@ export function getPostHogClient() {
 
 Use the server client in TanStack Start API routes to capture events server-side. Server-side capture is useful for tracking events that shouldn't be spoofable from the client, like purchases or authentication:
 
-```ts file=src/routes/api/checkout.ts
+```ts file="src/routes/api/checkout.ts"
 // src/routes/api/checkout.ts
 import { createFileRoute } from '@tanstack/react-router'
 import { json } from '@tanstack/react-start'

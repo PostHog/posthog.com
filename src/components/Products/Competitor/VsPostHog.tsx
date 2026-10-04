@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import { Logo } from '@posthog/brand/logo'
 
 export const VsPostHog = ({ children, className }) => {

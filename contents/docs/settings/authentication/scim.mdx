@@ -6,16 +6,9 @@ availability:
     free: none
     selfServe: none
     enterprise: full
-    features:
-        scim:
-            free: false
-            selfServe: false
-            boost: false
-            scale: false
-            enterprise: true
 ---
 
-<FeatureAvailability availability={_frontmatter.availability.features.scim} />
+<FeatureAvailability availability={{ free: false, selfServe: false, boost: false, scale: false, enterprise: true }} />
 
 System for Cross-domain Identity Management (SCIM) enables you to automatically provision and deprovision users in PostHog from your Identity Provider (IdP). This is helpful for organizations that need centralized user management, including automatically creating accounts, assigning roles, and disabling accounts when users leave the organization.
 
@@ -130,7 +123,7 @@ If you already have a SAML app in your IdP, and that app supports SCIM 2.0 provi
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_24_okta_scim_application_provisioning_unique_id_8830ffbd48.png"
     alt="Okta SCIM form with Unique Identifier completed"
     classes="rounded"
-   />
+    />
 
 11. Under **Supported provisioning actions** select the following options:
    - Push New Users

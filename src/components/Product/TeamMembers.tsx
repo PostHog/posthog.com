@@ -1,19 +1,22 @@
-import { TeamMember, teamQuery } from 'components/People'
-import { useStaticQuery } from 'gatsby'
+import { TeamMember, teamMembers as allTeamMembers } from 'components/People'
 import React from 'react'
 
-export default function TeamMembers({ teamName, setActiveProfile }) {
-    const { team } = useStaticQuery(teamQuery)
-
-    const teamMembers = team.teamMembers.filter((teamMember) =>
+export default function TeamMembers({
+    teamName,
+    setActiveProfile,
+}: {
+    teamName: string
+    setActiveProfile: (profile: unknown) => void
+}): JSX.Element {
+    const teamMembers = allTeamMembers.filter((teamMember) =>
         teamMember.teams.data.some(({ attributes: { name } }) => name === teamName)
     )
     const teamLength = teamMembers.length
 
     const pineapplePercentage =
-        teamLength &&
-        teamLength > 0 &&
-        Math.round((teamMembers.filter(({ pineappleOnPizza }) => pineappleOnPizza).length / teamLength) * 100)
+        teamLength > 0
+            ? Math.round((teamMembers.filter(({ pineappleOnPizza }) => pineappleOnPizza).length / teamLength) * 100)
+            : 0
 
     return (
         <>

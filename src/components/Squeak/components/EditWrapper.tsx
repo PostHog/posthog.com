@@ -68,7 +68,7 @@ export default function EditWrapper({
 
             try {
                 await fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/${
+                    `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/${
                         type === 'reply' ? 'replies' : 'questions'
                     }/${contentID}`,
                     {

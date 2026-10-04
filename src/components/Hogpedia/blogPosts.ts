@@ -1,4 +1,5 @@
-import { useStaticQuery, graphql } from 'gatsby'
+import recentPostsJson from '@data/content-hogpedia-recent-posts.json'
+import type { RecentBlogPosts } from '~/data-layer/queries/content'
 
 export type BlogPost = { slug: string; title: string; date: string }
 
@@ -8,36 +9,4 @@ export type BlogPost = { slug: string; title: string; date: string }
  * Comparison pages are excluded for the same reason `src/pages/blog.tsx` excludes them:
  * they are reference material rather than news.
  */
-export const useRecentBlogPosts = (): BlogPost[] => {
-    const data = useStaticQuery(graphql`
-        query HogpediaRecentBlogPosts {
-            allMdx(
-                filter: {
-                    isFuture: { eq: false }
-                    fields: { slug: { regex: "/^/blog/" } }
-                    frontmatter: { date: { ne: null }, tags: { nin: ["Comparisons"] } }
-                }
-                sort: { order: DESC, fields: [frontmatter___date] }
-                limit: 6
-            ) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        date(formatString: "D MMMM YYYY")
-                    }
-                }
-            }
-        }
-    `)
-
-    return (data.allMdx.nodes as { fields: { slug: string }; frontmatter: { title: string; date: string } }[]).map(
-        (node) => ({
-            slug: node.fields.slug,
-            title: node.frontmatter.title,
-            date: node.frontmatter.date,
-        })
-    )
-}
+export const useRecentBlogPosts = (): BlogPost[] => recentPostsJson as RecentBlogPosts

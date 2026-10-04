@@ -1,6 +1,5 @@
 import { kea } from 'kea'
 import { BillingProductV2Type, BillingV2PlanType } from 'types'
-
 import type { pricingLogicType } from './pricingLogicType'
 
 export const TEN_THOUSAND = 10000
@@ -30,7 +29,7 @@ export const pricingLogic = kea<pricingLogicType>({
             [] as BillingProductV2Type[],
             {
                 loadAvailableProducts: async () => {
-                    const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
+                    const url = `${import.meta.env.PUBLIC_BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
                     const headers = {
                         'Content-Type': 'application/json',
                     }

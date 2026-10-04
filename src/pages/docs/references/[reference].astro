@@ -1,0 +1,23 @@
+---
+// SDK reference pages: /docs/references/<sdk> (latest) and /docs/references/<sdk>-<version>
+// (src/lib/content/sdkReference.ts). /docs/references/version-unavailable is a view.
+import PageIsland from '../../../islands/PageIsland.astro'
+import Site from '../../../layouts/Site.astro'
+import { sdkReferencePages } from '../../../lib/content/sdkReference'
+import { isViewPath } from '../../../lib/routes/views'
+import type { SdkReferenceProps } from '../../../templates/sdk/SdkReference'
+
+export function getStaticPaths() {
+    return sdkReferencePages()
+        .filter(({ path }) => !isViewPath(path))
+        .map(({ path, props }) => ({ params: { reference: path.split('/').pop() }, props }))
+}
+
+type Props = SdkReferenceProps
+
+const props = Astro.props
+---
+
+<Site>
+    <PageIsland module="/src/templates/sdk/SdkReference.tsx" props={props} />
+</Site>

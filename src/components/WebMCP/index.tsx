@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import type { MutableRefObject } from 'react'
-import { navigate } from 'gatsby'
 import { useAppActions } from '../../context/App'
 import type { ChatParams } from '../../context/App'
 import { useAgentSkills } from 'hooks/skills'
@@ -10,6 +9,7 @@ import { getMarkdownUrl } from 'components/MarkdownActions'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import { MARKDOWN_CONTENT_PATHS, MCP_SERVER_URL, isMarkdownContentPath } from '../../constants'
 import { isSafeInternalPath } from 'lib/utils'
+import { navigate } from 'lib/navigation'
 
 /**
  * Registers WebMCP tools on every page so a browser agent (Gemini in Chrome, and others as they
@@ -76,9 +76,9 @@ const resolveSitePath = (input: unknown): URL | null => {
     try {
         const url = new URL(input.trim(), window.location.origin)
         // Origin match is not enough: `https://posthog.com//evil.com` and `/docs/..//evil.com`
-        // stay on this origin after parsing, but the pathname is `//evil.com`. Gatsby
-        // `navigate()` assigns `window.location` on a miss, which treats `//` as a
-        // protocol-relative URL. isSafeInternalPath is the site's existing guard for that.
+        // stay on this origin after parsing, but the pathname is `//evil.com`. `navigate()`
+        // resolves that as a protocol-relative URL on another origin and assigns it to
+        // `window.location`. isSafeInternalPath is the site's existing guard for that.
         if (url.origin !== window.location.origin || !isSafeInternalPath(url.pathname)) return null
         return url
     } catch {

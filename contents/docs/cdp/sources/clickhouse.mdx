@@ -161,6 +161,7 @@ is not supported for conversion into Arrow data format: While executing Arrow. (
 This is a non-retryable error — PostHog stops the sync instead of retrying indefinitely because the column type is fixed.
 
 **Solution:** [Deselect the offending column](#selecting-columns) in the schema's column settings, or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`), then resync.
+
 import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 
 <InboundIpAddresses />

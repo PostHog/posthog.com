@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { DocLinks } from 'components/Products/DocsLinks'
+import { Link } from 'lib/navigation'
 
 interface DocsSlideProps {
     productHandle: string

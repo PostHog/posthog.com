@@ -5,7 +5,7 @@ import useProduct from 'hooks/useProduct'
 import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
+import AutosizeInput from 'components/AutosizeInput'
 import { SectionComponentProps } from '../types'
 
 const formatCompactNumber = (n: number) =>

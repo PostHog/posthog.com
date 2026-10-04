@@ -50,7 +50,7 @@ Create a file at `app/routes/yourpath.$.tsx`:
 
 <MultiLanguage>
 
-```tsx file=US
+```tsx file="US"
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 
 const API_HOST = "us.i.posthog.com"
@@ -103,7 +103,7 @@ export const action: ActionFunction = async ({ request }) =>
   posthogProxy(request)
 ```
 
-```tsx file=EU
+```tsx file="EU"
 import type { ActionFunction, LoaderFunction } from "@remix-run/node"
 
 const API_HOST = "eu.i.posthog.com"
@@ -176,14 +176,14 @@ In your application code, update your PostHog initialization:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init('<ph_project_token>', {
   api_host: '/yourpath',
   ui_host: 'https://us.posthog.com'
 })
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init('<ph_project_token>', {
   api_host: '/yourpath',
   ui_host: 'https://eu.posthog.com'

@@ -17,7 +17,6 @@ import {
 } from 'components/OSIcons'
 import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
-import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
 
@@ -745,6 +744,7 @@ export function useMenuData(): MenuType[] {
 }
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
+import { navigate } from 'lib/navigation'
 
 type SparksJoyItem = {
     label: string

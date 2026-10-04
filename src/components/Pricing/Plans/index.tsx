@@ -1,4 +1,3 @@
-import { graphql, useStaticQuery } from 'gatsby'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import React, { useEffect, useState } from 'react'
 import { Check2, Close } from 'components/Icons'
@@ -12,6 +11,8 @@ import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { pluralizeUnit } from '../utils'
+import billingProductsJson from '@data/products-billing.json'
+import type { BillingProducts } from '~/data-layer/queries/products'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -103,14 +104,14 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 index === 0 && up_to
                                     ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(unit, up_to)}`
                                     : index === 0 && !up_to
-                                    ? `${hasFreeAllocation ? 'Unlimited' : 'All'} ${pluralizeUnit(unit, 2)}`
-                                    : !up_to
-                                    ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
-                                    : `${
-                                          formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(
-                                              / |k/
-                                          )[0]
-                                      }-${formatCompactNumber(up_to)}`
+                                      ? `${hasFreeAllocation ? 'Unlimited' : 'All'} ${pluralizeUnit(unit, 2)}`
+                                      : !up_to
+                                        ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
+                                        : `${
+                                              formatCompactNumber(
+                                                  plans[plans.length - 1].tiers[index - 1]?.up_to
+                                              ).split(/ |k/)[0]
+                                          }-${formatCompactNumber(up_to)}`
                             }
                         />
                         <div
@@ -293,95 +294,6 @@ export const CTA = ({
     )
 }
 
-const allProductsData = graphql`
-    query {
-        allProductData {
-            nodes {
-                products {
-                    description
-                    docs_url
-                    image_url
-                    inclusion_only
-                    contact_support
-                    addons {
-                        contact_support
-                        description
-                        docs_url
-                        image_url
-                        inclusion_only
-                        name
-                        type
-                        unit
-                        plans {
-                            description
-                            docs_url
-                            image_url
-                            name
-                            plan_key
-                            product_key
-                            unit
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                    name
-                    type
-                    unit
-                    usage_key
-                    plans {
-                        description
-                        docs_url
-                        features {
-                            key
-                            name
-                            description
-                            category
-                            limit
-                            note
-                            entitlement_only
-                            is_plan_default
-                            unit
-                        }
-                        free_allocation
-                        image_url
-                        included_if
-                        name
-                        plan_key
-                        product_key
-                        contact_support
-                        unit_amount_usd
-                        tiers {
-                            current_amount_usd
-                            current_usage
-                            flat_amount_usd
-                            unit_amount_usd
-                            up_to
-                        }
-                        unit
-                    }
-                }
-            }
-        }
-    }
-`
-
 const planNames = {
     'Product analytics + data stack': 'Product analytics',
 }
@@ -393,11 +305,7 @@ export default function Plans({
     groupsToShow?: string[]
     showTitle?: boolean
 }): JSX.Element {
-    const {
-        allProductData: {
-            nodes: [{ products }],
-        },
-    } = useStaticQuery(allProductsData)
+    const products = billingProductsJson as BillingProducts
 
     // Known shared pricing mappings - products that share pricing with other products
     const sharedPricingMap: { [key: string]: string } = {

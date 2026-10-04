@@ -49,7 +49,7 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
 
     useEffect(() => {
         getJwt().then((jwt) =>
-            fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users?${userQuery}`, {
+            fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/users?${userQuery}`, {
                 headers: { Authorization: `Bearer ${jwt}` },
             })
                 .then((res) => res.json())
@@ -131,7 +131,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
     const [loading, setLoading] = useState(true)
 
     const fetchTeamMembers = () => {
-        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
+        return fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeam(data?.[0] ?? [])
@@ -147,7 +147,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                 },
             },
         })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
             method: 'PUT',
             body,
             headers: {
@@ -167,7 +167,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                 },
             },
         })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
             method: 'PUT',
             body,
             headers: {
@@ -185,7 +185,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                 leadProfiles: { ...(remove ? { disconnect: [id] } : { connect: [id] }) },
             },
         })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+        await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
             method: 'PUT',
             body,
             headers: {

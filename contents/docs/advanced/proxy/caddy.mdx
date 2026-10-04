@@ -41,7 +41,7 @@ In your working directory, create a file named `Caddyfile`:
 
 <MultiLanguage>
 
-```caddy file=US
+```caddy file="US"
 e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
@@ -70,7 +70,7 @@ e.yourdomain.com {
 }
 ```
 
-```caddy file=EU
+```caddy file="EU"
 e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
@@ -131,14 +131,14 @@ In your application code, update your PostHog initialization to use your trackin
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init("<ph_project_token>", {
   api_host: "https://e.yourdomain.com",
   ui_host: "https://us.posthog.com",
 });
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init("<ph_project_token>", {
   api_host: "https://e.yourdomain.com",
   ui_host: "https://eu.posthog.com",
@@ -181,7 +181,7 @@ In your working directory, create a file named `Caddyfile`:
 
 <MultiLanguage>
 
-```caddy file=US
+```caddy file="US"
 :2015 {
   handle_path /yourpath-proxy/static* {
     rewrite * /static/{path}
@@ -217,7 +217,7 @@ In your working directory, create a file named `Caddyfile`:
 }
 ```
 
-```caddy file=EU
+```caddy file="EU"
 :2015 {
   handle_path /yourpath-proxy/static* {
     rewrite * /static/{path}
@@ -365,14 +365,14 @@ For production deployment, update your application code to use your proxy path:
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init("<ph_project_token>", {
   api_host: "https://yourdomain.com/yourpath-proxy",
   ui_host: "https://us.posthog.com",
 });
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init("<ph_project_token>", {
   api_host: "https://yourdomain.com/yourpath-proxy",
   ui_host: "https://eu.posthog.com",
@@ -413,7 +413,7 @@ On your server, create a file named `Caddyfile` in a directory like `/etc/caddy`
 
 <MultiLanguage>
 
-```caddy file=US
+```caddy file="US"
 e.yourdomain.com {
   header {
     Access-Control-Allow-Origin https://yourdomain.com
@@ -446,7 +446,7 @@ e.yourdomain.com {
 }
 ```
 
-```caddy file=EU
+```caddy file="EU"
 e.yourdomain.com {
   header {
     Access-Control-Allow-Origin https://yourdomain.com
@@ -515,14 +515,14 @@ In your application code, update your PostHog initialization to use your trackin
 
 <MultiLanguage>
 
-```js file=US
+```js file="US"
 posthog.init("<ph_project_token>", {
   api_host: "https://e.yourdomain.com",
   ui_host: "https://us.posthog.com",
 });
 ```
 
-```js file=EU
+```js file="EU"
 posthog.init("<ph_project_token>", {
   api_host: "https://e.yourdomain.com",
   ui_host: "https://eu.posthog.com",
@@ -584,7 +584,7 @@ Add explicit CORS headers to your Caddyfile:
 
 <MultiLanguage>
 
-```caddy file=US
+```caddy file="US"
 e.yourdomain.com {
   @options method OPTIONS
   handle @options {
@@ -627,7 +627,7 @@ e.yourdomain.com {
 }
 ```
 
-```caddy file=EU
+```caddy file="EU"
 e.yourdomain.com {
   @options method OPTIONS
   handle @options {

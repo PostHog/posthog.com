@@ -1,0 +1,22 @@
+---
+// Plain pages: the loose pages in the `pages` collection (src/lib/content/plain.ts), such as /faq.
+import PageIsland from '../islands/PageIsland.astro'
+import Site from '../layouts/Site.astro'
+import { type PlainEntry, plainEntries, plainPage } from '../lib/content/plain'
+import { MINIMAL_BUILD } from '../data-layer/env'
+
+export async function getStaticPaths() {
+    if (MINIMAL_BUILD()) return []
+    return (await plainEntries()).map((entry) => ({ params: { plain: entry.id }, props: { entry } }))
+}
+
+interface Props {
+    entry: PlainEntry
+}
+
+const page = plainPage(Astro.props.entry)
+---
+
+<Site>
+    <PageIsland module="/src/templates/Plain.tsx" props={{ page }} content={page.body} />
+</Site>

@@ -45,7 +45,7 @@ const Update = ({ body, questionID, fetchUpdates }) => {
             if (!profileID || !jwt) return
             setLoading(true)
             const transformedValues = await transformValues({ body, images: images ?? [] }, profileID, jwt)
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+            await fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/questions/${questionID}`, {
                 body: JSON.stringify({
                     data: {
                         body: transformedValues.body,
@@ -129,7 +129,7 @@ export function InProgress(
     )
 
     const { data, error, mutate } = useSWR<RoadmapSubscriptions>(
-        `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
+        `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/profiles/${user?.profile?.id}?${query}`,
         async (url: string) => {
             if (!user) return { data: { attributes: { roadmapSubscriptions: [] } } }
             return fetch(url).then((r) => r.json())
@@ -169,15 +169,18 @@ export function InProgress(
                 return
             }
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            const res = await fetch(
+                `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/subscribe`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
 
             if (res.ok) {
                 addToast({ message: `Subscribed to ${title}. We'll email you with updates!` })
@@ -187,7 +190,7 @@ export function InProgress(
                         attributes: {
                             roadmapSubscriptions: {
                                 data: [
-                                    ...roadmapData?.attributes?.roadmapSubscriptions?.data,
+                                    ...(roadmapData?.attributes?.roadmapSubscriptions?.data ?? []),
                                     {
                                         id: props.squeakId,
                                     },
@@ -237,15 +240,18 @@ export function InProgress(
                 return
             }
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            const res = await fetch(
+                `${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/roadmap/${props.squeakId}/unsubscribe`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
 
             if (res.ok) {
                 addToast({ message: `Unsubscribed from ${title}. You will no longer receive updates.` })
@@ -311,7 +317,7 @@ export function InProgress(
             }
         )
 
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${query}`)
+        fetch(`${import.meta.env.PUBLIC_SQUEAK_API_HOST}/api/team-updates?${query}`)
             .then((res) => res.json())
             .then(({ data: updates }) => {
                 setUpdates(updates)
@@ -403,7 +409,7 @@ export function InProgress(
                     {image && (
                         <div className="sm:flex-shrink-0">
                             <img src={image.url} className="shadow-md" alt="" />
-                            {/*<GatsbyImage className="shadow-md" image={getImage(thumbnail)} alt="" />*/}
+                            {/*<ResponsiveImage className="shadow-md" image={getImage(thumbnail)} alt="" />*/}
                         </div>
                     )}
                 </div>
@@ -459,8 +465,8 @@ export function InProgress(
                                     {subscribed
                                         ? 'Unsubscribe'
                                         : betaAvailable
-                                        ? 'Request early access'
-                                        : 'Get updates about this project'}
+                                          ? 'Request early access'
+                                          : 'Get updates about this project'}
                                     {!subscribed && !betaAvailable && (
                                         <Tooltip
                                             content="Get email notifications when the team shares updates about this project, releases a beta, or
