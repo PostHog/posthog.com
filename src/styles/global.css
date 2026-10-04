@@ -2842,7 +2842,9 @@ html[data-window='expanded'] div[data-app='AppWindow'][data-page] > .size-full.f
     @apply rounded-tr-none rounded-tl-none;
 }
 
-html[data-window='closed'] div[data-app='AppWindow'][data-page] {
+/* The whole window list, so a dialog route opened directly (a fixed-size page window and its backdrop)
+   closes too. */
+html[data-window='closed'] [data-app='WindowList'] {
     display: none;
 }
 

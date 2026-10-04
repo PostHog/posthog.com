@@ -5,6 +5,7 @@ import rehypeRaw from 'rehype-raw'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import rehypeMdxCodeProps from 'rehype-mdx-code-props'
+import { remarkHeadingIds } from './headings.mjs'
 
 const POSTHOG_REPO = '.cache/posthog-main-repo/'
 
@@ -23,7 +24,7 @@ export function mdxCompileOptions({ development = false, format = 'mdx' } = {}) 
         development,
         jsxImportSource: 'react',
         providerImportSource: '@mdx-js/react',
-        remarkPlugins: [remarkFrontmatter, remarkGfm],
+        remarkPlugins: [remarkFrontmatter, remarkGfm, remarkHeadingIds],
         rehypePlugins: [
             ...(format === 'md'
                 ? [

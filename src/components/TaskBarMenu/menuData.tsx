@@ -721,13 +721,11 @@ export function useMenuData(): MenuType[] {
                             variant="mono"
                             color="currentColor"
                             className="text-primary 2xs:hidden md:block size-8 md:size-6"
-                            width="auto"
                         />
                         <Logo
                             variant="mono"
                             color="currentColor"
                             className="text-primary hidden 2xs:flex md:hidden w-auto h-5"
-                            width="auto"
                         />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>

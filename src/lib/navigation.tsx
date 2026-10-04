@@ -4,7 +4,14 @@
 // persisted chrome mounted. A change to only the query string or hash of the current page uses the
 // History API directly, so the page island re-renders instead of remounting (tabs, filters, and
 // search params keep their state).
+//
+// A route with a fixed size in `appSettings` (display options, the contact form) opens as a dialog
+// over the current page instead of replacing it. The URL keeps the page and names the dialog
+// (`/pricing?dialog=talk-to-a-human`), so Back closes it and a shared link opens it again. The
+// desktop island renders the dialog (islands/Desktop.tsx). Visited directly, the route is a page.
 import React, { createContext, forwardRef, useContext, useSyncExternalStore } from 'react'
+import { appSettings } from '../context/appSettings'
+import { viewModuleFor } from './routes/views'
 
 export interface RouterLocation {
     pathname: string
@@ -102,6 +109,44 @@ function pushSamePage(url: URL, { state, replace }: NavigateOptions) {
     notify()
 }
 
+/** The query parameter that names the dialog open over the page. */
+export const DIALOG_PARAM = 'dialog'
+
+function isDialogRoute(url: URL): boolean {
+    return (
+        url.origin === window.location.origin &&
+        url.pathname !== mountedPathname &&
+        !!appSettings[url.pathname]?.size?.fixed &&
+        !!viewModuleFor(url.pathname)
+    )
+}
+
+/** The dialog route named in a location's query string, with its own query string. */
+export function dialogURL(location: Pick<RouterLocation, 'search' | 'origin'>): URL | null {
+    const value = new URLSearchParams(location.search).get(DIALOG_PARAM)
+    return value ? new URL(`/${value.replace(/^\/+/, '')}`, location.origin) : null
+}
+
+function openDialog(url: URL, { state, replace }: NavigateOptions) {
+    const next = new URL(window.location.href)
+    const hadDialog = next.searchParams.has(DIALOG_PARAM)
+    next.searchParams.set(DIALOG_PARAM, url.pathname.slice(1) + url.search)
+    // Opening a dialog over another one replaces it, so closing goes straight back to the page.
+    pushSamePage(next, { state: { ...state, dialog: true }, replace: replace || hadDialog })
+}
+
+/** Closes the dialog named in the URL: goes back to the entry that opened it, or drops the parameter. */
+export function closeDialog(): void {
+    const url = new URL(window.location.href)
+    if (!url.searchParams.has(DIALOG_PARAM)) return
+    if (history.state?.dialog) {
+        history.back()
+        return
+    }
+    url.searchParams.delete(DIALOG_PARAM)
+    pushSamePage(url, { replace: true })
+}
+
 export async function navigate(to: string | number, options: NavigateOptions = {}): Promise<void> {
     if (!isBrowser) return
     if (typeof to === 'number') {
@@ -111,6 +156,10 @@ export async function navigate(to: string | number, options: NavigateOptions = {
     const url = new URL(to, window.location.href)
     if (url.origin !== window.location.origin) {
         window.location.href = url.href
+        return
+    }
+    if (isDialogRoute(url)) {
+        openDialog(url, options)
         return
     }
     if (url.pathname === mountedPathname) {
@@ -153,8 +202,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         if (event.defaultPrevented || isModifiedClick(event) || (target && target !== '_self')) return
         const url = new URL(to, window.location.href)
         // Astro's router handles plain page changes itself. Take over only when the link carries
-        // history state or replaces, or stays on the current page.
-        if (state || replace || (url.origin === window.location.origin && url.pathname === mountedPathname)) {
+        // history state or replaces, stays on the current page, or opens a dialog.
+        if (
+            state ||
+            replace ||
+            (url.origin === window.location.origin && url.pathname === mountedPathname) ||
+            isDialogRoute(url)
+        ) {
             event.preventDefault()
             navigate(to, { state, replace })
         }

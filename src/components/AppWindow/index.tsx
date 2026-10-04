@@ -48,7 +48,8 @@ const PageModal = ({ children }: { children: React.ReactNode }) => {
 const Router = (props: any) => {
     const { appWindow } = useWindow()
     const { children, path } = props
-    const modal = appWindow?.modal?.type ?? appWindow?.appSettings?.modal?.type
+    // A fixed-size window is already a dialog, so its content is not wrapped in another one.
+    const modal = appWindow?.modal?.type ?? (appWindow?.fixedSize ? undefined : appWindow?.appSettings?.modal?.type)
 
     if (/^\/questions/.test(path)) {
         return <Inbox {...props} />
@@ -193,7 +194,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             hasDeveloperMode={hasDeveloperMode}
             setHasDeveloperMode={setHasDeveloperMode}
         >
-            {fixed && <div onClick={handleClose} className="fixed inset-0 z-50 bg-black/50 print:hidden" />}
+            {/* The page window's list (Site.astro) ignores pointer events, so a dialog turns them back on. */}
+            {fixed && (
+                <div
+                    onClick={handleClose}
+                    className="fixed inset-0 z-50 bg-black/50 pointer-events-auto print:hidden"
+                />
+            )}
             <div
                 data-app="AppWindow"
                 data-page={!fixed || undefined}
@@ -203,7 +210,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 className={`@container relative overflow-hidden !select-auto flex flex-col border-primary rounded-lg ${WINDOW_BG} ${
                     fixed
                         ? // The max height keeps auto-height dialogs inside the desktop area on short screens.
-                          '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] max-h-[calc(100%-1rem)] border shadow-md'
+                          '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] max-h-[calc(100%-1rem)] border shadow-md pointer-events-auto'
                         : 'pointer-events-auto'
                 }`}
                 style={

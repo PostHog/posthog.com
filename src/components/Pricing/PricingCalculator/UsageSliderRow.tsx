@@ -8,6 +8,7 @@ import {
     reverseNonLinearCurve,
 } from '../PricingSlider/Slider'
 import { formatCompact, parseCompact } from '../utils'
+import AutosizeInput from 'components/AutosizeInput'
 
 const snapToMark = (value: number, marks: number[]) => {
     const rounded = Math.round(value)
@@ -102,11 +103,11 @@ export default function UsageSliderRow({
                     )}
                 </div>
             </div>
-            <input
+            <AutosizeInput
                 type="text"
                 aria-label={label}
                 className={`${
-                    inputPrefix ? 'w-16' : 'w-14'
+                    inputPrefix ? 'min-w-16' : 'min-w-14'
                 } bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark ml-auto`}
                 value={displayValue}
                 onFocus={() => setDraft(`${inputPrefix ?? ''}${value}`)}

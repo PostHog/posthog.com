@@ -35,5 +35,8 @@ const viewPaths = new Set(viewRoutes.map((route) => route.path))
 /** True when a page component in src/views owns this URL, so a content route must not build it. */
 export const isViewPath = (path: string): boolean => viewPaths.has(path)
 
+/** The module of the page component in src/views that owns this URL. */
+export const viewModuleFor = (path: string): string | undefined => routes.get(path)?.module
+
 /** The URL of a collection entry under a section prefix: the `index` entry is the section root. */
 export const entryPath = (prefix: string, id: string): string => (id === 'index' ? prefix : `${prefix}/${id}`)

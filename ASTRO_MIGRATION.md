@@ -394,6 +394,25 @@ Checked on the production build (`astro preview`, headless Chrome, 1440×900 and
 - `pnpm test-redirects` (`jest scripts`) finds no tests, on master too: the only files it matched were in Gatsby's `.cache/gatsby-source-git`. Left as is.
 - Gatsby's `.cache` contents (1.8 GB, gitignored) are deleted. `.cache` now holds only `data-layer` and `posthog-main-repo`.
 
+### 33. Heading ids
+
+- Headings had no `id`. `gatsby-remark-autolink-headers` used to add them, and the port never replaced it. Every table of contents was broken (a click did nothing, and no entry was bold as the active section), `#section` links opened at the top of the page, and the copy-link icon beside headings did not show.
+- `remarkHeadingIds` (`src/lib/mdx/headings.mjs`, in `mdxCompileOptions`) sets each heading's `id`. It uses the same text and slugger as `extractHeadings`, which builds the table of contents, so the two always match. Inline JSX in a heading (a badge) is not part of the slug, and repeated headings get `-1`, `-2`. The ids on `/blog/best-open-source-analytics-tools` match production.
+- `rehype-slug` was installed for this but never used. It is removed: it slugs the badge text too, so it would not match the table of contents.
+- The taskbar logo passed `width="auto"` to its `<svg>`, which the browser rejects ("Expected length"). The prop is removed; the Tailwind classes already set the size. Production has the same error.
+- The `/pricing` calculator's volume inputs (`UsageSliderRow`) had a fixed width, so the raw number shown while editing (`800000`) was clipped. Production has the same bug. They use `AutosizeInput` now, with `min-w-14`/`min-w-16` in place of `w-14`/`w-16`: the same width at rest, wider while editing.
+
+### 34. Dialog routes
+
+- With one page window, a link to a dialog route (`/display-options`, `/talk-to-a-human`, `/demo`, and the other routes with a `fixed` size in `appSettings`) replaced the page. In Gatsby it opened a new window on top. The dialog was also unusable: the page window's list (`Site.astro`) has `pointer-events-none`, and the fixed-size frame and its backdrop did not turn pointer events back on, so clicks (the close button too) went to the desktop.
+- `lib/navigation`: `navigate()` and `Link` open a dialog route over the current page and put it in the URL: `/pricing?dialog=talk-to-a-human`. The route's own query string stays in the value (`?dialog=fm%3Fmixtape%3D12`). Back closes the dialog, Forward and a shared link open it again. Closing (close button, Escape, backdrop) goes back to the entry that opened the dialog, or drops the parameter. None of the about 120 links to these routes changed.
+- `islands/Desktop.tsx` (`RouteDialog`) opens the dialog that the URL names. It loads the route's view module (`viewModuleFor` in `lib/routes/views.ts`; dialog routes need no build-time data) and renders it with `addWindow`. It closes the dialog when the parameter goes away, including on a page change.
+- `appSettings` moved to `context/appSettings.ts` (re-exported from `context/App.tsx`), so `lib/navigation` can read it without importing the app state.
+- `AppWindow`: the fixed-size frame and its backdrop set `pointer-events-auto`. A fixed-size window is no longer wrapped in a second modal when its settings have `modal` (`/talk-to-a-human` showed an empty frame with the form squeezed into a narrow modal inside it). The pricing dialogs (`pricing-free-tier`, `pricing-event-types`, `pricing-all-rates`) have the same settings and render the same way now.
+- Visited directly, a dialog route is still a page: the dialog over the desktop. Closing it hides the whole window list (`html[data-window='closed'] [data-app='WindowList']`), so the dialog and its backdrop go away and the desktop shows.
+- Checked on `astro preview`: display options and "Talk to a human" over `/pricing` (clicks and typing inside work; close button, Escape, backdrop, Back, and Forward), a shared `?dialog=` link, a page change with a dialog open, and a direct visit to `/talk-to-a-human`.
+- Not covered: routes with `modal` but no fixed size (`/community/achievements`, `/community/reputation`) still open as pages, and `/fm/mixtapes/edit/:id` (dynamic) too.
+
 ## Open items for review
 
 - **Vercel env vars:** rename the `GATSBY_*` project env vars to `PUBLIC_*` (step 5 has the list) before deploying.
@@ -401,4 +420,5 @@ Checked on the production build (`astro preview`, headless Chrome, 1440×900 and
 - **Visible changes to look at:** `ImageSlider` (CSS scroll snap in place of react-slick), `AutosizeInput` (pricing calculators, endpoints playground, team name editor), the `docs/sql` screenshot and the `customers/mention-me` floated image that now show, and the `Screensaver` and `CommunityCTA` animations (DotLottiePlayer).
 - **Removed CI features:** the webpack bundle-size report and the cache warm-up workflow (step 18 area of the workflows changes). An equivalent for Vite's output is a follow-up.
 - **Not migrated by design:** Storybook 6 (removed with Gatsby).
+- **Follow-up: remove the window system.** The site keeps a slimmed window layer: the page window frame with windowed, expanded, and closed modes (`components/AppWindow`, `context/Window.tsx` used by 72 files, the window part of `context/App.tsx`, `data-window` CSS), and dialogs as `addWindow` windows (28 files). Ideally pages render straight into the layout and dialogs are plain modals (Radix Dialog, already in the repo) opened by a query parameter, as dialog routes are now (step 34). The taskbar and the desktop can stay.
 - **Follow-ups:** rename the `childImageSharp.gatsbyImageData` image data shape; the `addWindow` callers that still pass legacy `location`/`newWindow` props (step 18); the rules-of-hooks warnings; the existing hydration mismatches that production also has (step 28).
