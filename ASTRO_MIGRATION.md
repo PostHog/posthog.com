@@ -420,5 +420,74 @@ Checked on the production build (`astro preview`, headless Chrome, 1440×900 and
 - **Visible changes to look at:** `ImageSlider` (CSS scroll snap in place of react-slick), `AutosizeInput` (pricing calculators, endpoints playground, team name editor), the `docs/sql` screenshot and the `customers/mention-me` floated image that now show, and the `Screensaver` and `CommunityCTA` animations (DotLottiePlayer).
 - **Removed CI features:** the webpack bundle-size report and the cache warm-up workflow (step 18 area of the workflows changes). An equivalent for Vite's output is a follow-up.
 - **Not migrated by design:** Storybook 6 (removed with Gatsby).
+- **`api-endpoints` data source fails on every build** with "Vite module runner has been closed". The build falls back to the local cache. On a machine with no cache (a fresh CI or Vercel build) it falls back to fake data, so `/docs/api/*` would ship wrong while the build still passes (`src/data-layer/index.ts:67`). Fix it, and run the data layer in `strict` mode in CI.
+- **Build time, page weight, and static content:** see "Follow-up proposals" below.
 - **Follow-up: remove the window system.** The site keeps a slimmed window layer: the page window frame with windowed, expanded, and closed modes (`components/AppWindow`, `context/Window.tsx` used by 72 files, the window part of `context/App.tsx`, `data-window` CSS), and dialogs as `addWindow` windows (28 files). Ideally pages render straight into the layout and dialogs are plain modals (Radix Dialog, already in the repo) opened by a query parameter, as dialog routes are now (step 34). The taskbar and the desktop can stay.
 - **Follow-ups:** rename the `childImageSharp.gatsbyImageData` image data shape; the `addWindow` callers that still pass legacy `location`/`newWindow` props (step 18); the rules-of-hooks warnings; the existing hydration mismatches that production also has (step 28).
+
+## Follow-up proposals
+
+Measured on 2026-10-04, on a full build with a warm data cache. None of these changes is on this branch.
+
+### Build time and page weight
+
+| Phase | Time |
+|---|---|
+| Data layer (all sources cached) | 10 s |
+| Vite bundles (client and server) | 55 s |
+| Prerender 9,384 pages | 5 min 50 s |
+| SEO outputs (page `.md`, `llms*.txt`, OpenAPI, sitemap) | 1 min 45 s |
+
+| Routes | Pages | Share of prerender time | Time per page |
+|---|---|---|---|
+| `/docs/data-warehouse/sources/*` | 796 | 26% | 112 ms |
+| `/docs/cdp/sources/*` | 799 | 26% | 110 ms |
+| `/docs/references/*` (4,122 are `/types/` pages) | 4,169 | 22% | 18 ms |
+| All other pages | 3,620 | 26% | 20 to 35 ms |
+
+Proposals, by expected gain:
+
+1. **Sources pages render the full sources list on every page.** A sources page has 857 links and a 794 KB page island. A plain docs page has 88 links and a 73 KB island. The sidebar is the likely cause: 1,595 pages each render about 800 entries, so the work grows with the square of the number of sources. Render only the active group, or render the long list in the browser after load. This is about half of all prerender time (3 minutes) and about 1.8 GB of output.
+2. **The desktop island puts about 300 KB of inline SVG in every page.** `components/Desktop` renders the icon list twice (mobile and desktop), and each `GlassIcon` draws its glyph twice. On a docs page that is 305 of 435 KB of HTML. Across 9,469 pages it is about 2.8 GB of the 5.5 GB `dist/`. The desktop island persists between pages, so its HTML only matters on the first load. Render one icon list with container queries, or move the glyphs to one cached SVG sprite, or render the desktop island in the browser only (it has no content for search engines). Inlining helps small, page-specific assets, not this one.
+3. **SDK reference type pages are 44% of all pages.** 4,122 of the 4,169 `/docs/references/*` pages are `/types/` pages, each with a full shell. Render each type as a section of its parent reference page with anchors, or render them on demand with a CDN cache, or leave them out of preview builds.
+4. **Prerender runs one page at a time.** `astro.config.mjs` does not set `build.concurrency`, and Astro's default is 1. Try 4 to 8 and measure. The build already needs 16 GB of heap, so watch memory.
+5. **Page Markdown and `llms*.txt` take 87 s after the build.** Most pages do not change between builds. Cache each `.md` by a hash of its source, or split the work across worker threads.
+6. **CSS on every page is too large.** `Site.css` is 555 KB (1,277 container-query variant rules). A docs page also loads CSS from unrelated views (careers, Hogpedia, books, API endpoints): the page island imports every view with `import.meta.glob`, and Astro adds the CSS of every module a page can load. Import view CSS only where a view uses it, and check the Tailwind content globs and safelist.
+7. **Client JS ships data.** A docs page loads 9.2 MB of uncompressed JS in 166 files. Several chunks are 1 to 2 MB of bundled data (`Popover` 2 MB, `useProducts` 1.4 MB, `mcp-tools` 1.3 MB). They look like taskbar and search data, so they load on every page. Compute on the server and pass small props, or fetch the data when a menu opens.
+8. **Data layer.** Fix `api-endpoints` (see Open items). Keep `.cache/data-layer` in the Vercel build cache, so builds reuse the source data.
+
+### Static content with React islands
+
+Today each content page (docs, handbook, blog) is one React island, inside the window frame, which is React too. The whole tree hydrates, and every MDX file ships to the browser as a JS module: the client build has 4,509 JS files (74 MB). The `client:page` directive (step 22) exists only to stop this large island from blinking during hydration.
+
+Proposal: render the content as static HTML, and hydrate only the components that need JavaScript.
+
+**Most content is already static.** 2,827 of the 3,761 MDX files use components, 858 distinct ones. Of the 60 most used:
+
+- 23 are presentational (`CalloutBox`, `ProductScreenshot`, `Caption`, `SourceTables`, and others).
+- Most of the 24 that a script could not match to a source file are MDX snippets (`SourceParameters`, `SyncModes`) or icons. These are static too.
+- 13 have state or event handlers: `NewsletterForm` (501 uses), `Steps`, `Tab`, `CallToAction`, `ProductComparisonTable`, `OnboardingContentWrapper`, `QuestLog`, and others. Add `CodeBlock`, which is on most docs pages. In total, about 15 to 20 components need to be islands.
+
+Astro renders a React component with no `client:*` directive to HTML at build time and ships no JS for it. So the static components need no change.
+
+**What it takes:**
+
+1. Render MDX as Astro (`@astrojs/mdx`) in place of compiling it to React. The content does not change: each interactive component name maps to a thin `.astro` wrapper that hydrates the React component (`client:visible`).
+2. Rewrite the page templates as Astro layouts: mainly `ReaderView` (1,973 lines), `Handbook` (519), and `BlogPost` (454). The interactive parts become small islands: the table of contents, the sidebar tree, Copy page, search, and comments.
+3. Fix the components that break at island boundaries:
+   - The children of an island arrive as static HTML, not as React elements. Components that read their children (`Tabs`, `Steps` numbering) need a new structure.
+   - Islands do not share React context. The 72 files that use `useWindow`, and components such as `ProductComparisonTable`, must use the shared store (as `context/App.tsx` does) or props.
+4. Make the window frame Astro markup and CSS, with a small island for its buttons. This is most of "remove the window system" (Open items), so do the two together.
+5. Leave the app-like views in `src/views` (pricing, merch) as React islands.
+
+**Expected effect:**
+
+- **Simpler runtime.** The `client:page` directive, module preloading, `MainContentContext`, and the 3,800 MDX client chunks go away. Static content cannot cause a hydration mismatch. The cost is island discipline: props must be serializable, and there is no shared context.
+- **Visitors:** much less JS to load and hydrate on content pages, so better interactivity metrics (INP, TTI). The large taskbar and search chunks stay until proposal 7 fixes them.
+- **Build:** a smaller and faster client bundle, and a smaller `dist/`. Prerender time changes little, because the build still renders the same components to HTML. The large build-time gains are the proposals above (sidebar, desktop SVG, concurrency).
+
+**Plan.** This is a large change, but Astro lets static templates and React-island templates exist together, so it can go one collection at a time:
+
+1. Do the build-time proposals above first. They are small and independent.
+2. Pilot on blog posts. They are mostly static (`CalloutBox`, `ProductScreenshot`, `NewsletterForm`). Measure JS and hydration before and after on real pages.
+3. Then the handbook, then docs (the hardest: `CodeBlock`, tabs, and the onboarding content from posthog/posthog), and remove the window layer on the way.
