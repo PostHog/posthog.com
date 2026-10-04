@@ -85,6 +85,12 @@ If you are interested in this, first check with your nursery that they are part 
 #### Cyclescheme
 In the UK we offer [Cyclescheme](https://www.cyclescheme.co.uk/) to save money on new cycling gear. To get started, activate your Cyclescheme account via the [Workplace Extras registration form](https://app.workplaceextras.com/employee-register/9a1bc53).
 
+### Canada
+
+#### RRSP matching
+
+In Canada, we offer a group RRSP through Deel with [Wealthsimple](https://www.wealthsimple.com/), and PostHog matches your contributions. You'll get an email invite from Wealthsimple to set up your account. The group RRSP is a managed account, but you can transfer your balance to your own RRSP at any time by contacting Wealthsimple support. A direct transfer between RRSPs is not taxed.
+
 ### Other countries
 
 #### Pensions 
