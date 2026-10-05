@@ -38,6 +38,7 @@ If this is a new contract for an existing customer, you will need to add their e
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
 - Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
+- If the customer needs a bank letter (for example, to add PostHog as a vendor), open the customer in the billing admin panel and click "Generate bank transfer letter". Do not get the bank details from Stripe. If you use the billing admin, the downstream records link correctly.
 
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
