@@ -35,7 +35,7 @@ const SIGNATURE = 'I ♥ funnels. Please do not ask me about my bounce rate.'
 const Folder = ({ isNew = false, isLocked = false }: { isNew?: boolean; isLocked?: boolean }) => (
     <span
         aria-hidden="true"
-        className={`relative mx-auto block h-[18px] w-[22px] rounded-[2px] border border-[#7a6a2c] ${
+        className={`relative mx-auto mt-1 block h-[18px] w-[22px] rounded-[2px] border border-[#7a6a2c] ${
             isNew ? 'bg-[#ffa34f]' : 'bg-[#f2dc8c]'
         } before:absolute before:-top-[4px] before:left-[2px] before:h-[4px] before:w-[8px] before:rounded-t-[2px] before:border before:border-b-0 before:border-[#7a6a2c] before:bg-inherit`}
     >
@@ -51,13 +51,15 @@ const RowCell = ({
     children,
     className = '',
     row = 1,
+    valign = 'middle',
 }: {
     children: React.ReactNode
     className?: string
     row?: 1 | 2 | 3
+    valign?: 'top' | 'middle'
 }) => (
     <td
-        className={`border-b border-r border-white px-1.5 py-1 align-middle ${
+        className={`border-b border-r border-white px-1.5 py-1 ${valign === 'top' ? '!align-top' : '!align-middle'} ${
             row === 1 ? 'bg-[#efefef]' : row === 2 ? 'bg-[#dee3e7]' : 'bg-[#d1d7dc]'
         } ${className}`}
     >
@@ -516,6 +518,7 @@ export default function HogBB(): JSX.Element {
                                 <ForumLine label={`${forum.name} topics`}>
                                     <thead>
                                         <tr>
+                                            <HeadCell className="hidden w-8 @xl:table-cell">&nbsp;</HeadCell>
                                             <HeadCell className="text-left">
                                                 <span className="pl-1">Topics</span>
                                             </HeadCell>
@@ -526,23 +529,19 @@ export default function HogBB(): JSX.Element {
                                     <tbody>
                                         {forum.section.nodes.map((article, index) => (
                                             <tr key={article.fields.slug}>
+                                                <RowCell className="hidden w-8 text-center @xl:table-cell">
+                                                    <Folder isNew={index === 0} />
+                                                </RowCell>
                                                 <RowCell>
-                                                    <span className="flex items-center gap-2">
-                                                        <span className="w-[22px] shrink-0 pt-1">
-                                                            <Folder isNew={index === 0} />
-                                                        </span>
-                                                        <span>
-                                                            {index === 0 && <b className="text-[11px]">Sticky: </b>}
-                                                            <button
-                                                                onClick={() => setTopicSlug(article.fields.slug)}
-                                                                className="text-left text-[11px] font-bold text-[#006699] hover:text-[#dd6900] hover:underline"
-                                                            >
-                                                                {article.frontmatter.title}
-                                                            </button>
-                                                            <span className="block text-[10px] @xl:hidden">
-                                                                {authorName(article)} · {article.frontmatter.date}
-                                                            </span>
-                                                        </span>
+                                                    {index === 0 && <b className="text-[11px]">Sticky: </b>}
+                                                    <button
+                                                        onClick={() => setTopicSlug(article.fields.slug)}
+                                                        className="text-left text-[11px] font-bold text-[#006699] hover:text-[#dd6900] hover:underline"
+                                                    >
+                                                        {article.frontmatter.title}
+                                                    </button>
+                                                    <span className="block text-[10px] @xl:hidden">
+                                                        {authorName(article)} · {article.frontmatter.date}
                                                     </span>
                                                 </RowCell>
                                                 <RowCell
@@ -591,7 +590,7 @@ export default function HogBB(): JSX.Element {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <RowCell className="block align-top @xl:table-cell @xl:w-40">
+                                            <RowCell valign="top" className="block @xl:table-cell @xl:w-40">
                                                 {topic.frontmatter.authors?.length ? (
                                                     <div className="flex flex-wrap gap-4 @xl:flex-col">
                                                         {topic.frontmatter.authors.map((author) => (
@@ -613,7 +612,7 @@ export default function HogBB(): JSX.Element {
                                                     <span className="text-[11px] font-bold">Anonymous</span>
                                                 )}
                                             </RowCell>
-                                            <RowCell className="block align-top @xl:table-cell">
+                                            <RowCell valign="top" className="block @xl:table-cell">
                                                 <p className="m-0 border-b border-[#98aab1] pb-1 text-[10px]">
                                                     Posted: {topic.frontmatter.date}
                                                     &nbsp;&nbsp;&nbsp;Post subject: {topic.frontmatter.title}
