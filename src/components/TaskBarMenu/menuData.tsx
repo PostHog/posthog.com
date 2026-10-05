@@ -182,7 +182,7 @@ const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Explore Twig',
+        label: 'Playground',
         link: TWIG_URL,
         external: true,
         icon: <Icons.IconPlay className="size-4 text-orange" />,
@@ -201,6 +201,42 @@ const docsMenuItems: MenuItemType[] = [
     },
     { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
 ]
+
+const docsProductIconFallbacks = {
+    'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
+    'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
+    skills: { Icon: Icons.IconMagic, color: 'purple' },
+}
+
+const docsProductHandleOverrides = { 'posthog-ai': 'posthog_ai' }
+
+const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuItemType[] =>
+    items.map((item) => {
+        if (item.type !== 'submenu' || !['Analytics', 'More products'].includes(item.label)) return item
+
+        return {
+            ...item,
+            items: item.items?.map((child) => {
+                const slug = child.link?.replace(/^\/docs\//, '')
+                const product = allProducts.find(
+                    (product) =>
+                        product.handle ===
+                            docsProductHandleOverrides[slug as keyof typeof docsProductHandleOverrides] ||
+                        product.docsSlug === slug ||
+                        product.slug?.replace(/^docs\//, '') === slug
+                )
+                const fallback = docsProductIconFallbacks[slug as keyof typeof docsProductIconFallbacks]
+                const Icon = product?.Icon || fallback?.Icon
+
+                return Icon
+                    ? {
+                          ...child,
+                          icon: <Icon className={`size-4 text-${product?.color || fallback?.color || 'gray'}`} />,
+                      }
+                    : child
+            }),
+        }
+    })
 
 // Tools promoted to the top level of the Products menu, in display order.
 // Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
@@ -288,7 +324,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: docsMenuItems,
+            items: addDocsProductIcons(docsMenuItems, allProducts),
         },
         {
             trigger: 'Community',
