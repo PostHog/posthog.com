@@ -44,11 +44,15 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
    - **Details:**
      - mrr comes from the actual usage in that month (minus the credit-discount-percent on the customer)
 
-5. Customers with organizations in more than one region
-   - A customer can have one organization in the US cloud and one in the EU cloud, usually because their own customers need EU data residency. Data does not move between the regions, and the customer cannot query across them.
-   - Before you choose a configuration, confirm three things with the customer: why they need the second region, the usage split they expect, and if their finance team needs the spend for each organization. Some customers ask for a second region and then use only one organization.
-   - Get the organization ID for each region before contract setup. It is much easier to set the configuration up at the start than to change it later.
-   - There are two configurations. Agree on one with the customer before the order form goes out.
+5. Customers with more than one organization
+   - A customer can have more than one organization: one in the US cloud and one in the EU cloud (usually because their own customers need EU data residency), or several organizations that belong to one parent company. Data does not move between organizations, and the customer cannot query across them.
+   - The same two options apply when a parent company asks us to bill several existing accounts as one. To migrate existing paying accounts into one of these options, see [consolidating billing across organizations](/handbook/growth/revops/billing-consolidation).
+   - Before you choose an option, confirm these with the customer:
+     - Why they need more than one organization. Some customers ask for a second region and then use only one organization.
+     - The usage split they expect across the organizations.
+     - If their finance team needs the spend for each organization, or if one invoice is enough.
+   - Get the organization ID for each organization before contract setup. It is much easier to set the configuration up at the start than to change it later.
+   - There are two options. Agree on one with the customer before the order form goes out. The list below gives what each one costs the customer and when to choose it.
    - **Option A: one Stripe customer for each organization**
      - Each organization gets its own Stripe customer, subscription, invoices, and credit pool.
      - Write the credit split for each organization on the order form.
@@ -61,8 +65,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
      - Usage from all the organizations is added together and reported against the shared subscription.
      - The customer pays for each add-on one time. No override is necessary.
      - The customer cannot see a spend breakdown for each organization.
-     - All the organizations show the same combined usage and forecast numbers in the billing UI.
-     - Billing limits for each organization are not reliable. A limit applies to the combined pool, and the organization that reported last wins.
+     - Shared billing has limitations around usage displays, forecasting, and billing limits. Before recommending this setup, [review the limitations](https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations) (PostHog team only) and explain the relevant limitations to the customer.
      - Internally, MRR and invoices attach to the canonical organization, which is the organization with the lowest customer ID. The other organizations show no MRR in our own tools, which include flags, campaigns, and Vitally.
      - Use this option when the customer does not know the split, and their finance team does not need the spend for each organization.
 

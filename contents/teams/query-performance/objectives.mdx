@@ -1,44 +1,29 @@
-### Q3 2026 objectives
+## Q4 2026 objectives
 
-#### Improve AI query writing <TeamMember name="Andy Zhao" photo />
+### Objective 1: Proactively identify and improve suboptimal experiences for our customers <TeamMember name="Vasco de Krijger" photo />
 
-- Measure how performant and correct AI queries are
-- Improve the AI context when writing HogQL
+**Motivation:** Customers sometimes experience slow queries, timeouts and regressions before we notice them. We want to understand their experience, proactively identify optimizations and be able to demonstrate that our improvements help.
 
-#### Monitor query regressions across internal teams <TeamMember name="Andy Zhao" photo /> <TeamMember name="Vasco de Krijger" photo />
+**What we'll ship:**
 
-- Set up automation that monitors PRs into the PostHog repo, flagging any suboptimal queries
-- Set up automatic auto research
+1. A shared performance dashboard (starting with a subset of customers), giving us insights across different levels (complete experience -> product experience -> query experience), tied to our internal monitoring stack.
+2. Surfaced regressions/frustrating paths proactively raised with the team, grounded in tested hypothesis to avoid hallucinations with possible suggestions for fixes.
+3. A way to continuously help our customers get to their data in an efficient way (through app, API and MCP), for example by spotting slow (saved) queries and offering (data-backed) ways to make these faster.
 
-#### Improve the developer experience of query changes <TeamMember name="Sandy Spicer" photo />
+### Objective 2: Make query-performance experiments easy to run and trust <TeamMember name="Andy Zhao" photo />
 
-- PR gate on having an experiment log on the test cluster
-- Think about how we can be more confident in HogQL transformations
+**Motivation:** We can already experiment with query variants, but testing ClickHouse versions, sharding and physical data layouts requires more setup. A repeatable environment would let us explore larger improvements and build confidence before production changes.
 
-#### Protect against small customers using a significant % of our ClickHouse compute <TeamMember name="Mike Warren" photo /> <TeamMember name="Andy Zhao" photo />
+**What we'll ship:**
 
-- What should the limits be? Part of packages? <TeamMember name="Mike Warren" photo />
-- Rate limiting based on cost of queries rather than number of queries, scaled for bigger customers <TeamMember name="Andy Zhao" photo />
+1. A (documented) test environment with representative data distributions and a repeatable way to run experiments.
+2. Clear metrics / benchmark results at the end of a test to be able to compare across experiments.
 
-#### Make PostHog proactive for analytics users <TeamMember name="Vasco de Krijger" photo />
+### Objective 3: Safely bring the JSON Events Table into production <TeamMember name="Sandy Spicer" photo />
 
-- Help users to figure out what is relevant to them at a glance / help users to figure out what to best build next
-- Forecast alerts
-- Further enhance prompt subscriptions
-- Allow pre-prompted code agents / tasks to fire as a result of an alert trigger
-- Further build out the brainstormed ideas from the Product Analytics team regarding proactive scouts
+**Motivation:** The JSON Events Table offers substantial storage savings. We need to establish compatibility, resolve blocking differences and roll out supported workloads while preserving correctness and a good customer experience.
 
-#### Cross product integration <TeamMember name="Matt Pua" photo />
+**What we'll ship:**
 
-- Automatically create a dashboard with the relevant metrics about your feature when developing with PostHog Desktop (or sell this as a GH action, which uses the MCP under the hood with widgets?)
-- Increase number of widgets available to cover most product areas
-- Help increase number of products activated per org
-
-#### Signal + PHC integration: first class citizens | subs + alerts <TeamMember name="Matt Pua" photo />
-
-- Integrate alerts + subscription as signal sources
-
-#### Shared team objective: Support the ClickHouse team in their endeavors
-
-- Delete the legacy ClickHouse non-HogQL Endpoints, or redirect to HogQL <TeamMember name="Sandy Spicer" photo />
-- Help ship the JSON column <TeamMember name="Sandy Spicer" photo />
+1. A clear before vs after impact assessment of the migration.
+2. Workloads migrated to the new JSON Events Table.

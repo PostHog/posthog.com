@@ -1343,6 +1343,10 @@ export const handbookSidebar = [
                         name: 'Giving credits to customers',
                         url: '/handbook/growth/revops/credits',
                     },
+                    {
+                        name: 'Consolidating billing across organizations',
+                        url: '/handbook/growth/revops/billing-consolidation',
+                    },
                 ],
             },
         ],
@@ -6699,6 +6703,22 @@ export const docsMenu = {
                             name: 'Sources',
                         },
                     ],
+                },
+                {
+                    name: 'Destinations',
+                },
+                {
+                    name: 'Where rows are written',
+                    url: '/docs/data-warehouse/destinations',
+                    icon: 'IconServer',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Monitoring your syncs',
+                    url: '/docs/data-warehouse/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
                 },
                 {
                     name: 'Modeling',
