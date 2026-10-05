@@ -46,14 +46,21 @@ interface AudioGraph {
     sfx: Map<string, AudioBuffer>
 }
 
-// Chapters start at each level card; the title screen is chapter 0.
-export const CHAPTERS = [
-    { name: 'Title', start: 0 },
-    ...SCENES.filter((sc: { key: string }) => /^card\d$/.test(sc.key)).map((sc: { start: number }, i: number) => ({
-        name: `${i + 1} · ${LEVEL_NAMES[i]}`,
-        start: sc.start,
-    })),
+// Chapters start at each level card; the title screen is chapter 0. The poster is a frame that shows the chapter's scene.
+const CHAPTER_STARTS = [
+    0,
+    ...SCENES.filter((sc: { key: string }) => /^card\d$/.test(sc.key)).map((sc: { start: number }) => sc.start),
 ]
+export const CHAPTERS = CHAPTER_STARTS.map((start, i) => {
+    const end = CHAPTER_STARTS[i + 1] ?? FRAMES
+    return {
+        label: i === 0 ? 'Start' : `Level ${i}`,
+        name: i === 0 ? 'Press start' : LEVEL_NAMES[i - 1],
+        start,
+        end,
+        poster: start + Math.min(4 * FPS, Math.floor((end - start) / 2)),
+    }
+})
 
 export const chapterAt = (frame: number): (typeof CHAPTERS)[number] =>
     CHAPTERS.filter((c) => c.start <= frame).slice(-1)[0]

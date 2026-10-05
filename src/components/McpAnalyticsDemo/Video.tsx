@@ -1,15 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import usePostHog from 'hooks/usePostHog'
 import { IconFullScreen, IconVolumeFull, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import { renderFrame } from './engine'
 import PlayOverlay from './PlayOverlay'
+import ChapterCard from './ChapterCard'
 import { CHAPTERS, INITIAL_STATE, Player, SPEEDS, chapterAt, formatTime } from './player'
 import type { PlayerState, Speed } from './player'
 import { FPS, FRAMES } from './timeline'
 
 const SEEK_SECONDS = 5
+const VIDEO = {
+    video_source: 'canvas',
+    video_id: 'mcp-analytics-8-bit-tale',
+    video_title: 'MCP analytics: an 8-bit tale',
+}
 
 export default function Video({ className }: { className: string }): JSX.Element {
     const root = useRef<HTMLDivElement>(null)
@@ -28,6 +35,28 @@ export default function Video({ className }: { className: string }): JSX.Element
         player.current = p
         return () => p.destroy()
     }, [])
+
+    const posthog = usePostHog()
+    const played = useRef(false)
+    const chaptersReached = useRef(new Set<number>())
+    const chapterIndex = CHAPTERS.indexOf(chapterAt(frame))
+
+    useEffect(() => {
+        if (status === 'ended') posthog?.capture('Completed video', VIDEO)
+        if (status !== 'playing' || played.current) return
+        played.current = true
+        posthog?.capture('Played video', VIDEO)
+    }, [status])
+
+    useEffect(() => {
+        if (status !== 'playing' || chaptersReached.current.has(chapterIndex)) return
+        chaptersReached.current.add(chapterIndex)
+        posthog?.capture('Video chapter reached', {
+            ...VIDEO,
+            chapter_index: chapterIndex,
+            chapter_name: CHAPTERS[chapterIndex].name,
+        })
+    }, [status, chapterIndex])
 
     useEffect(() => {
         const sync = (): void => setFullscreen(document.fullscreenElement === root.current)
@@ -194,16 +223,15 @@ export default function Video({ className }: { className: string }): JSX.Element
                         )}
                     </div>
                 </div>
-                <div className="flex flex-wrap gap-1">
-                    {CHAPTERS.map((c) => (
-                        <OSButton
+                <div className="grid grid-cols-2 gap-2 @md:grid-cols-4 @2xl:grid-cols-7">
+                    {CHAPTERS.map((c, i) => (
+                        <ChapterCard
                             key={c.start}
-                            size="xs"
-                            active={chapterAt(frame) === c}
-                            onClick={() => player.current?.seek(c.start)}
-                        >
-                            {c.name} {formatTime(c.start)}
-                        </OSButton>
+                            chapter={c}
+                            active={i === chapterIndex}
+                            progress={Math.round(Math.max(0, Math.min(1, (frame - c.start) / (c.end - c.start))) * 100)}
+                            onSelect={(start) => player.current?.seek(start)}
+                        />
                     ))}
                 </div>
             </div>
