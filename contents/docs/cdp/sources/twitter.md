@@ -26,10 +26,10 @@ This connector reads organic account data. For ad spend and campaign performance
 You need an app in the [X developer portal](https://developer.x.com/en/portal/dashboard) with:
 
 - A **project** the app is attached to. A standalone app cannot call the v2 API.
-- An access level of **Basic** or higher. The free access level cannot read the endpoints this connector uses, so a free project fails at connection time.
+- **API credits** on the project. X bills reads per post, so a project with no credits cannot sync anything.
 - The app's **Bearer Token**, from the app's **Keys and tokens** tab.
 
-Higher access levels unlock more endpoints. If your plan does not cover an endpoint, X returns a permission error for that table, and PostHog shows the table as unavailable when you pick your schemas. You can leave those tables unselected and sync the rest.
+If your app's API access does not cover an endpoint, X returns a permission error for that table, and PostHog marks the table unavailable when you pick your schemas. You can leave those tables unselected and sync the rest.
 
 ## Adding a data source
 
@@ -48,7 +48,9 @@ The handle decides whose data is synced. To sync more than one account, add one 
 
 **Posts** and **Mentions** support incremental syncs on `created_at`, because X lets PostHog ask for posts after a given time. Every other table is a full refresh: X has no time filter on those endpoints, so an "incremental" sync would still read the whole list on every run.
 
-X counts every page PostHog reads against your rate limit, and its windows are 15 minutes wide. On a large account, prefer a daily sync over an hourly one, and only select the tables you query.
+Every post PostHog reads costs you credits, and X caps pay-per-usage projects at 3 million post reads per billing cycle. X charges a repeated read of the same resource once per UTC day, so a sync that runs more than once a day costs little more than one that runs daily.
+
+Reads also count against a rate limit whose windows are 15 minutes wide. On a large account, prefer a daily sync over an hourly one, and only select the tables you query.
 
 ## Configuration
 
