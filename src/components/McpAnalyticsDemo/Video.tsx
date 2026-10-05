@@ -223,17 +223,21 @@ export default function Video({ className }: { className: string }): JSX.Element
                         )}
                     </div>
                 </div>
-                <div className="grid grid-cols-2 gap-2 @md:grid-cols-4 @2xl:grid-cols-7">
-                    {CHAPTERS.map((c, i) => (
-                        <ChapterCard
-                            key={c.start}
-                            chapter={c}
-                            active={i === chapterIndex}
-                            progress={Math.round(Math.max(0, Math.min(1, (frame - c.start) / (c.end - c.start))) * 100)}
-                            onSelect={(start) => player.current?.seek(start)}
-                        />
-                    ))}
-                </div>
+                {!fullscreen && (
+                    <div className="grid grid-cols-2 gap-2 @md:grid-cols-4 @2xl:grid-cols-7">
+                        {CHAPTERS.map((c, i) => (
+                            <ChapterCard
+                                key={c.start}
+                                chapter={c}
+                                active={i === chapterIndex}
+                                progress={Math.round(
+                                    Math.max(0, Math.min(1, (frame - c.start) / (c.end - c.start))) * 100
+                                )}
+                                onSelect={(start) => player.current?.seek(start)}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )
