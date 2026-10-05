@@ -2,12 +2,12 @@
 
 ### Make revenue reporting trustworthy
 
-_Theme: Finish reconciliation so Finance and RevOps can use the new model for reporting and the finance close._
+_Theme: Finish reconciling discrepancies so we can use the new model for reporting and closing the books._
 
 **1. Finish the move to the new revenue model (proposed lead: <TeamMember name="Marce Coll" />)**
 
 -   Close out the remaining material discrepancies, fixing them or explicitly accepting them.
--   Get Finance sign-off on the model documentation and close process.
+-   Get Finance sign-off on the model.
 -   Work with Mine and Finance to move routine ARR/MRR and investor reporting onto the model, and get its data flowing into Campfire.
 
 ### Make billing the source of truth
@@ -17,9 +17,9 @@ _Theme: Own credits, products, prices, and subscription behavior so billing can 
 **2. Migrate all credits to the in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
 
 -   Seed credit pools from the new revenue model and reconcile them with customer balances. Fix or explicitly accept differences before cutover.
--   Move all credits onto live ledger billing, applying promotional credits through discounts and prepurchased credits through customer balance, with the correct tax treatment.
+-   Move all credits onto live ledger, applying promotional credits through discounts and prepurchased credits through customer balance, with the correct tax treatment.
 -   Rebuild refunds around ledger transactions and ship the operational tooling needed to manage live credits.
--   Integrate credit-ledger transactions into the new revenue model so credit usage and refunds are reflected correctly in revenue reporting.
+-   Integrate credit ledger transactions into the new revenue model so credit usage and refunds are reflected correctly in revenue reporting.
 
 **3. Make the new product catalog the source of truth for products and prices (lead: <TeamMember name="Roy Cohen" />)**
 
@@ -29,7 +29,7 @@ _Theme: Own credits, products, prices, and subscription behavior so billing can 
 
 **4. Run our own subscriptions in shadow mode for all Stripe subscriptions (lead: <TeamMember name="Daniel Snitkovskiy" />)**
 
--   Compare recurring billing, prorations, and invoice outcomes against Stripe for all subscriptions, and document how remaining mismatches will be handled.
+-   Compare recurring billing, prorations, and invoice outcomes against Stripe for all subscriptions.
 -   Define a migration plan, whether and how old and new subscriptions can coexist, and the cutover criteria.
 
 ### Make usage reporting and limiting accurate and near real time
@@ -38,16 +38,16 @@ _Theme: Help PostHog and customers understand usage and control spend, with accu
 
 **5. Make limiting correct and consistent (proposed lead: <TeamMember name="Marce Coll" />)**
 
--   Put money-domain limiting into production, including correct handling of products with add-ons.
+-   Put money-domain limiting into production.
 -   Keep limiting decisions in `billing`, with `posthog` consuming the resulting state through the new endpoint.
 
 Rollout needs v2 or equivalent usage data to avoid a latency regression. Alex's reporting work supplies and improves that foundation. Real-time enforcement via counters is a separate objective under objective 6.
 
 **6. Ship real-time usage reporting and limiting (lead: <TeamMember name="Alexander Mays" />)**
 
--   Real-time usage reporting: Put the new usage feed into production and move reporting consumers to it. This provides the usage-data foundation for rate limiting and Marce's money-domain limiting work.
--   Real-time limiting: Implement limit enforcement using Valkey counters and a new real-time usage service, and integrate it with the products that need it.
+-   Real-time usage reporting: Put the new usage feed into production and move reporting consumers to it. This also provides the usage-data foundation for Marce's money-domain limiting work.
 -   Migrate existing consumers and define how the old reporting path will be retired.
+-   Real-time limiting: Implement limit enforcement using Valkey counters and a new real-time usage service, and integrate it with the products that need it.
 -   Disambiguate caps, limits, allowances, and allocations.
 
 ### Control abuse and unpaid usage
@@ -61,7 +61,7 @@ _Theme: Prevent abuse across AI products, and automate restrictions and recovery
 
 **8. Automate collections enforcement and recovery (lead: <TeamMember name="Daniel Snitkovskiy" />)**
 
--   Ship the first collections automation to restrict access for unpaid invoices and restore it when payment status permits.
+-   Ship collections automation to restrict access for unpaid invoices and restore it when payment status permits.
 -   Make decisions and actions inspectable, with the debugging and recovery support needed to explain and recover failed actions.
 
 ### Make billing more reliable
