@@ -195,7 +195,7 @@ export default function Forum(props: any) {
                 return (
                     <Feed
                         title="All posts"
-                        description="Everything from every topic, newest activity first."
+                        description="Everything from every topic, newest posts first."
                         tags={tags}
                         showTopic
                         empty="No posts yet. Start the conversation!"

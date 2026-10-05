@@ -307,7 +307,7 @@ const feedFields = [
 // Active and Popular use scores that Strapi stores on each post: log10(1 + comments or upvotes) plus the time of the
 // last activity or of publishing, divided by a decay. Newer posts rank higher unless older ones have many more.
 const sorts: Record<ForumSort, string[]> = {
-    latest: ['activeAt:desc', 'id:desc'],
+    latest: ['publishedAt:desc', 'id:desc'],
     active: ['activeScore:desc', 'id:desc'],
     popular: ['popularScore:desc', 'id:desc'],
 }
