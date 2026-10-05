@@ -116,6 +116,20 @@ from posthog.mcp import PostHogMcpStatelessSessionMiddleware
 app.add_middleware(PostHogMcpStatelessSessionMiddleware)
 ```
 
+### Resolve tool arguments on fresh low-level servers
+
+A fresh low-level `Server` has not served `tools/list`. A strict tool can reject the `context`, `llm_model`, or `conversation_id` arguments that PostHog added.
+
+Use `resolve_original_tool` to return the original tool descriptor from your registry:
+
+```python
+instrument(server, posthog, MCPAnalyticsOptions(
+    resolve_original_tool=lambda tool_name: tools_by_name.get(tool_name),
+))
+```
+
+The SDK removes only PostHog-owned arguments. A listing served on the same server instance has priority over this callback.
+
 ## Configuration
 
 Pass options as `MCPAnalyticsOptions`:
@@ -143,6 +157,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
 | `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
+| `resolve_original_tool` | – | `(tool_name) -> tool`. Resolves argument ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message: str) -> None`. A stdio-safe sink for SDK warnings. |
 
 On raw low-level servers and standalone FastMCP, the SDK advertises the injected `context` and `llm_model` arguments as optional, not required. On standalone FastMCP with `mcp` 1.x, middleware that overrides tool listing or dispatch turns off `llm_model` injection. Model capture from client metadata still works.
