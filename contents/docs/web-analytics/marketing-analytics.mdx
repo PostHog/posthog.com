@@ -104,14 +104,14 @@ PostHog can automatically sync marketing data from supported advertising platfor
 
 | Platform      | Setup Guide                                    | Required Tables                               |
 | ------------- | ---------------------------------------------- | --------------------------------------------- |
-| Google Ads    | [Setup guide](/docs/cdp/sources/google-ads)    | `campaign` and `campaign_overview_stats`      |
-| LinkedIn Ads  | [Setup guide](/docs/cdp/sources/linkedin-ads)  | `campaign_groups` and `campaign_group_stats`  |
-| Meta Ads      | [Setup guide](/docs/cdp/sources/meta-ads)      | `campaigns` and `campaign_stats`              |
-| Pinterest Ads | [Setup guide](/docs/cdp/sources/pinterest-ads) | `campaigns` and `campaign_analytics`          |
-| TikTok Ads    | [Setup guide](/docs/cdp/sources/tiktok-ads)    | `campaigns` and `campaign_report`             |
-| Reddit Ads    | [Setup guide](/docs/cdp/sources/reddit-ads)    | `campaigns` and `campaign_report`             |
-| Bing Ads      | [Setup guide](/docs/cdp/sources/bing-ads)      | `campaigns` and `campaign_performance_report` |
-| Snapchat Ads  | [Setup guide](/docs/cdp/sources/snapchat-ads)  | `campaigns` and `campaign_stats_daily`        |
+| Google Ads    | [Setup guide](/docs/data-warehouse/sources/google-ads)    | `campaign` and `campaign_overview_stats`      |
+| LinkedIn Ads  | [Setup guide](/docs/data-warehouse/sources/linkedin-ads)  | `campaign_groups` and `campaign_group_stats`  |
+| Meta Ads      | [Setup guide](/docs/data-warehouse/sources/meta-ads)      | `campaigns` and `campaign_stats`              |
+| Pinterest Ads | [Setup guide](/docs/data-warehouse/sources/pinterest-ads) | `campaigns` and `campaign_analytics`          |
+| TikTok Ads    | [Setup guide](/docs/data-warehouse/sources/tiktok-ads)    | `campaigns` and `campaign_report`             |
+| Reddit Ads    | [Setup guide](/docs/data-warehouse/sources/reddit-ads)    | `campaigns` and `campaign_report`             |
+| Bing Ads      | [Setup guide](/docs/data-warehouse/sources/bing-ads)      | `campaigns` and `campaign_performance_report` |
+| Snapchat Ads  | [Setup guide](/docs/data-warehouse/sources/snapchat-ads)  | `campaigns` and `campaign_stats_daily`        |
 
 Each native source automatically handles data formatting and provides the required campaign and performance data. The configuration interface shows which tables are syncing and which still need to be enabled.
 
@@ -142,7 +142,7 @@ We strongly recommend using JSON format for better support and troubleshooting. 
 
 </CalloutBox>
 
-Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.
+Please refer to the [data pipeline docs](/docs/data-warehouse/sources) for more information on configuring external data sources.
 
 ### Conversion goals
 
@@ -239,9 +239,9 @@ This is particularly useful when:
 
 **Example configuration:**
 
-- [Google Ads](/docs/cdp/sources/google-ads) integration: Allowlist sources `google`, `google_ads`, `paid_search`
-- [LinkedIn Ads](/docs/cdp/sources/linkedin-ads) integration: Allowlist sources `linkedin`, `li`, `linkedin_paid`
-- [Meta Ads](/docs/cdp/sources/meta-ads) integration: Allowlist sources `facebook`, `instagram`, `meta`
+- [Google Ads](/docs/data-warehouse/sources/google-ads) integration: Allowlist sources `google`, `google_ads`, `paid_search`
+- [LinkedIn Ads](/docs/data-warehouse/sources/linkedin-ads) integration: Allowlist sources `linkedin`, `li`, `linkedin_paid`
+- [Meta Ads](/docs/data-warehouse/sources/meta-ads) integration: Allowlist sources `facebook`, `instagram`, `meta`
 
 ### Base currency
 

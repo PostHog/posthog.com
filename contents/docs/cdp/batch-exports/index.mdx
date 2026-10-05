@@ -10,6 +10,15 @@ availability:
 
 Batch exports give you a platform to schedule data exports to supported destinations. Batch exports are built on [Temporal](https://www.temporal.io/) to enable reliable data exports, ensuring your data reaches your destination.
 
+## Which do I want, batch exports or ETL destinations?
+
+Both write to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. They move different data.
+
+- **Batch exports** move the events, persons, and sessions PostHog captured.
+- **[ELT destinations](/docs/data-warehouse/destinations)** move rows PostHog imported from a source, like your Stripe charges or your own Postgres tables.
+
+If you want your product analytics events in Snowflake, that's a batch export. If you want your Stripe data in Snowflake, that's an ETL destination. Teams often run both.
+
 The key features offered by this platform are:
 
 - **Resiliency:** Retry capabilities (both automated and manual) when the destination is temporarily unavailable.

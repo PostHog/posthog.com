@@ -602,12 +602,12 @@
         },
         {
             "source": "/docs/cdp/sources/custom:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/custom-rest-source:ext?",
+            "destination": "/docs/data-warehouse/sources/custom-rest-source:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/data-warehouse/sources/customerio:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/customer-io:ext?",
+            "destination": "/docs/data-warehouse/sources/customer-io:ext?",
             "statusCode": 301
         },
         {
@@ -5506,11 +5506,11 @@
         },
         {
             "source": "/docs/data-warehouse/setup/azure-blob:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/azure-blob:ext?"
+            "destination": "/docs/data-warehouse/sources/azure-blob:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/azure-db:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/azure-db:ext?"
+            "destination": "/docs/data-warehouse/sources/azure-db:ext?"
         },
         {
             "source": "/docs/data-warehouse/sources/azure-db:ext(\\.md)?",
@@ -5518,7 +5518,7 @@
         },
         {
             "source": "/docs/cdp/sources/azure-db:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/microsoft-sql-server:ext?"
+            "destination": "/docs/data-warehouse/sources/microsoft-sql-server:ext?"
         },
         {
             "source": "/docs/data-warehouse/sources/temporal:ext(\\.md)?",
@@ -5526,19 +5526,19 @@
         },
         {
             "source": "/docs/cdp/sources/temporal:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/temporalio:ext?"
+            "destination": "/docs/data-warehouse/sources/temporalio:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/chargebee:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/chargebee:ext?"
+            "destination": "/docs/data-warehouse/sources/chargebee:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/gcs:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/gcs:ext?"
+            "destination": "/docs/data-warehouse/sources/gcs:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/hubspot:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/hubspot:ext?"
+            "destination": "/docs/data-warehouse/sources/hubspot:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/index:ext(\\.md)?",
@@ -5546,39 +5546,39 @@
         },
         {
             "source": "/docs/data-warehouse/setup/mysql:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/mysql:ext?"
+            "destination": "/docs/data-warehouse/sources/mysql:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/postgres:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/postgres:ext?"
+            "destination": "/docs/data-warehouse/sources/postgres:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/r2:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/r2:ext?"
+            "destination": "/docs/data-warehouse/sources/r2:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/s3:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/s3:ext?"
+            "destination": "/docs/data-warehouse/sources/s3:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/salesforce:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/salesforce:ext?"
+            "destination": "/docs/data-warehouse/sources/salesforce:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/snowflake:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/snowflake:ext?"
+            "destination": "/docs/data-warehouse/sources/snowflake:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/stripe:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/stripe:ext?"
+            "destination": "/docs/data-warehouse/sources/stripe:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/vitally:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/vitally:ext?"
+            "destination": "/docs/data-warehouse/sources/vitally:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/zendesk:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/zendesk:ext?"
+            "destination": "/docs/data-warehouse/sources/zendesk:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup:ext(\\.md)?",
@@ -5686,7 +5686,7 @@
         },
         {
             "source": "/cdp/hubspot-connector",
-            "destination": "/docs/cdp/sources/hubspot"
+            "destination": "/docs/data-warehouse/sources/hubspot"
         },
         {
             "source": "/cdp/intercom",
@@ -6564,6 +6564,10 @@
         {
             "source": "/docs/settings/id-jag:ext(\\.md)?",
             "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/docs/cdp/sources/:path*",
+            "destination": "/docs/data-warehouse/sources/:path*"
         }
     ]
 }
