@@ -89,7 +89,11 @@ interface ReaderViewProps {
         tags?: { label: string; url: string }[]
     }
     title?: string
+    /** Optional typography override for the rendered page title. */
+    titleClassName?: string
     header?: React.ReactNode
+    /** Compact navigation row above the reader on narrow layouts. */
+    mobileTopBar?: React.ReactNode
     hideTitle?: boolean
     belowTitle?: React.ReactNode
     tableOfContents?: any
@@ -425,7 +429,9 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
 export default function ReaderView({
     body = {} as ReaderViewProps['body'],
     title,
+    titleClassName,
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
@@ -463,7 +469,9 @@ export default function ReaderView({
             <ReaderViewContent
                 body={body}
                 title={title}
+                titleClassName={titleClassName}
                 header={header}
+                mobileTopBar={mobileTopBar}
                 hideTitle={hideTitle}
                 belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
@@ -1420,7 +1428,9 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: F
 function ReaderViewContent({
     body,
     title,
+    titleClassName = '',
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
@@ -1733,6 +1743,11 @@ function ReaderViewContent({
                             <IconSidebarClose className="size-5" />
                         </button>
                     )}
+                    {showMobileNav && mobileTopBar && (
+                        <div className="flex shrink-0 items-center border-b border-primary bg-primary px-1 py-1.5">
+                            {mobileTopBar}
+                        </div>
+                    )}
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
                             dataScheme="primary"
@@ -1796,7 +1811,7 @@ function ReaderViewContent({
                                     )}
                                     {title && !hideTitle && (
                                         <h1
-                                            className={`transition-all ${
+                                            className={`transition-all ${titleClassName} ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass

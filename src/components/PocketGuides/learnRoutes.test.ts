@@ -6,22 +6,22 @@ import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides.ts'
 
 const vercelConfig = JSON.parse(readFileSync(new URL('../../../vercel.json', import.meta.url), 'utf8'))
 
-test('Product Analytics is the next volume and is configured to count both orientation pages', () => {
+test('Product Analytics opens its story inside Learn and counts both orientation pages', () => {
     const volume = volumeById('product-analytics')
 
     assert.equal(volume?.volume, 5)
     assert.equal(volume?.countOrientationPages, true)
     assert.ok(volume)
-    assert.equal(pocketGuideUrl(volume), '/pocket-guides/product-analytics')
+    assert.equal(pocketGuideUrl(volume), '/docs/product-analytics/learn/introduction')
 })
 
-test('Product Analytics keeps the standalone reader separate from its learning hub', () => {
+test('legacy Product Analytics reader routes redirect into Learn', () => {
     const redirects = vercelConfig.redirects as Array<{ source: string; destination: string }>
-    const currentRoot = redirects.findIndex(({ source }) => source === '/pocket-guides/product-analytics')
-    const chapterSplat = redirects.findIndex(({ source }) => source === '/pocket-guides/product-analytics/:path*')
+    const currentRoot = redirects.find(({ source }) => source === '/pocket-guides/product-analytics')
+    const chapterSplat = redirects.find(({ source }) => source === '/pocket-guides/product-analytics/:path*')
 
-    assert.equal(currentRoot, -1, 'The book introduction must not redirect into Learn')
-    assert.equal(chapterSplat, -1, 'Book chapters must remain in the reader')
+    assert.equal(currentRoot?.destination, '/docs/product-analytics/learn/introduction')
+    assert.equal(chapterSplat?.destination, '/docs/product-analytics/learn/:path*')
     assert.equal(
         redirects.some(({ source }) => source.startsWith('/pocket-guides/posthog')),
         false,
