@@ -1,44 +1,17 @@
 ## Q4 2026
 
-### Fix what customers feel most
+This quarter we're grouping into three squads by the overall direction of the quarterly goal: humans working around AI, removing the points where customers get stuck, and solving problems once so we don't solve them again and again.
+
+### Human in the loop
 
 <details>
-<summary>Stop customers getting ignored: fewer SLA breaches, especially on escalations (<TeamMember name="Abigail Richardson" photo />)</summary>
+<summary>Understand the quality of support customers get from PostHog AI (<TeamMember name="Christiaan Hendriksen" photo /> and <TeamMember name="Luke Belton" photo />)</summary>
 
-- **Rationale:** Q3 SLA attainment dropped to 81.2%, and enterprise first response went from ~7 hours to 29 hours, and a number of escalated tickets have been left too long. Some of this will be due to the change from Zendesk - but we need to do better.
-- **What we'll ship:** Team notifications for upcoming SLA breaches, call out teams with the tickets that are breached by the longest, a way of pulling breached escalated tickets back into the support queue so that the team can follow up, and a way of flagging tickets where customers are checking in on the ticket with no reply.
-- **We'll know we're successful when:** SLA attainment for Q4 is better than SLA attainment for Q3, response times for top customers are improving, and the average length of breached tickets is decreasing. 
-
-</details>
-
-<details>
-<summary>Give logged-out users a better support experience (<TeamMember name="Eleftheria Trivyzaki" photo />)</summary>
-
-- **Rationale:** Customers who can't log in get a preview of our reply and a button that makes them log in, which doesn't help if logging in is the problem.
-- **What we'll ship:** A logged-out experience where customers can read and reply without logging in, likely by using cross-channel replies so a ticket raised in one channel can be answered from another (i.e. widget to email). 
-- **We'll know we're successful when:** Logged-out customers can get help end-to-end without logging in, and the feedback about it stops.
+- **Rationale:** PostHog AI is already acting as first-line support, but it's a black box. We don't know how much support it's doing, the quality of those customer interactions, or where they're getting stuck.
+- **What we'll ship:** A plan for what to capture (how many conversations are support questions, common topics, wrong or suboptimal recommendations, tickets caused by earlier AI advice, frustrated conversations, etc), run a time-boxed 2–3 week deep dive once the new PostHog AI harness is live, then use the findings to decide what ownership should look like.
+- **We'll know we're successful when:** We have a way of surfacing analysis and customer-related feedback from AI conversations, and gaps are reaching SMEs as skill and docs fixes.
 
 </details>
-
-<details>
-<summary>Make data deletion and retention tickets go away (<TeamMember name="Ben Lea" photo />)</summary>
-
-- **Rationale:** Deletion and retention are one of our biggest ticket sources, self-serve deletion doesn't work well.
-- **What we'll ship:** Ben will own the deletion and retention tickets. We will provide input into the owning team's self-serve deletion work, and make sure we have clear answers on the new retention model.
-- **We'll know we're successful when:** Deletion and retention tickets drop, and customers can delete their own data without us doing it for them.
-
-</details>
-
-<details>
-<summary>Spot data sync issues and tell customers before they write in (<TeamMember name="Kyle Swank" photo />)</summary>
-
-- **Rationale:** The warehouse sources team already spots sync issues and Tom's bot raises PRs for them, but nobody tells the affected customers.
-- **What we'll ship:** A way to pick up detected sync issues, find the affected customers, and either make it clearer in-app and/or raise proactive tickets on the customer's behalf.
-- **We'll know we're successful when:** We let customers know about sync issues before they contact us, and inbound sync tickets go down.
-
-</details>
-
-### Fight the AI slop
 
 <details>
 <summary>Deslop the Slop Before It Slops (<TeamMember name="Phillip Ramirez" photo />)</summary>
@@ -67,14 +40,41 @@
 
 </details>
 
-### Make self-serve support actually good
+### No dead ends
 
 <details>
-<summary>Let customers debug their own replays with PostHog AI (<TeamMember name="Christian Rafferty" photo />)</summary>
+<summary>Stop customers getting ignored: fewer SLA breaches, especially on escalations (<TeamMember name="Abigail Richardson" photo />)</summary>
 
-- **Rationale:** customers frequently ask why their replay looks incorrect. This involves us inspecting the customer's website or tracing through their JSON by hand, which could be automated.
-- **What we'll ship:** A "Debug this replay" button that opens PostHog AI with the replay's JSON attached, new skills to read the JSON effectively, and the diagnosis is saved back to the replay to help all users in the project. We'll do a flagged rollout starting with ourselves.
-- **We'll know we're successful when:** customers are using this functionality and Replay ticket numbers are reduced.
+- **Rationale:** Q3 SLA attainment dropped to 81.2%, enterprise first response went from ~7 hours to 29 hours, and a number of escalated tickets have been left too long. Some of this will be due to the change from Zendesk - but we need to do better.
+- **What we'll ship:** Team notifications for upcoming SLA breaches, call out teams with the tickets that are breached by the longest, a way of pulling breached escalated tickets back into the support queue so that the team can follow up, and a way of flagging tickets where customers are checking in on the ticket with no reply.
+- **We'll know we're successful when:** SLA attainment for Q4 is better than SLA attainment for Q3, response times for top customers are improving, and the average length of breached tickets is decreasing. 
+
+</details>
+
+<details>
+<summary>Give logged-out users a better support experience (<TeamMember name="Eleftheria Trivyzaki" photo />)</summary>
+
+- **Rationale:** Customers who can't log in get a preview of our reply and a button that makes them log in, which doesn't help if logging in is the problem.
+- **What we'll ship:** A logged-out experience where customers can read and reply without logging in, likely by using cross-channel replies so a ticket raised in one channel can be answered from another (i.e. widget to email). 
+- **We'll know we're successful when:** Logged-out customers can get help end-to-end without logging in, and the feedback about it stops.
+
+</details>
+
+<details>
+<summary>Make data deletion and retention tickets go away (<TeamMember name="Ben Lea" photo />)</summary>
+
+- **Rationale:** Deletion and retention are one of our biggest ticket sources, self-serve deletion doesn't work well.
+- **What we'll ship:** Ben will own the deletion and retention tickets. We will provide input into the owning team's self-serve deletion work, and make sure we have clear answers on the new retention model.
+- **We'll know we're successful when:** Deletion and retention tickets drop, and customers can delete their own data without us doing it for them.
+
+</details>
+
+<details>
+<summary>Improve incident handling for support and experience for Slack customers (<TeamMember name="Chris Shine" photo />)</summary>
+
+- **Rationale:** More efficient incident handling makes customers more happy.
+- **What we'll ship:** Better automatic identification and tagging for tickets related to an ongoing incident. An easy way to bulk assign incident tickets (or maybe auto-assign to the watcher), create a standard response draft for all tickets related to the incident, link out to the incident Slack channel, and look into syncing the support watcher with incident.io. Look into the use of Sherlock and HogDesk.
+- **We'll know we're successful when:** Incident tickets are tagged automatically and accurately, anyone can find and easily answer them from one place, and Slack customers understand when an outage would affect raising tickets.
 
 </details>
 
@@ -87,16 +87,25 @@
 
 </details>
 
-<details>
-<summary>Understand the quality of support customers get from PostHog AI (<TeamMember name="Christiaan Hendriksen" photo /> and <TeamMember name="Luke Belton" photo />)</summary>
+### Solve it once
 
-- **Rationale:** PostHog AI is already acting as first-line support, but it's a black box. We don't know how much support it's doing, the quality of those customer interactions, or where they're getting stuck.
-- **What we'll ship:** A plan for what to capture (how many conversations are support questions, common topics, wrong or suboptimal recommendations, tickets caused by earlier AI advice, frustrated conversations, etc), run a time-boxed 2–3 week deep dive once the new PostHog AI harness is live, then use the findings to decide what ownership should look like.
-- **We'll know we're successful when:** We have a way of surfacing analysis and customer-related feedback from AI conversations, and gaps are reaching SMEs as skill and docs fixes.
+<details>
+<summary>Spot data sync issues and tell customers before they write in (<TeamMember name="Kyle Swank" photo />)</summary>
+
+- **Rationale:** The warehouse sources team already spots sync issues and Tom's bot raises PRs for them, but nobody tells the affected customers.
+- **What we'll ship:** A way to pick up detected sync issues, find the affected customers, and either make it clearer in-app and/or raise proactive tickets on the customer's behalf.
+- **We'll know we're successful when:** We let customers know about sync issues before they contact us, and inbound sync tickets go down.
 
 </details>
 
-### Tooling to make support better and faster
+<details>
+<summary>Let customers debug their own replays with PostHog AI (<TeamMember name="Christian Rafferty" photo />)</summary>
+
+- **Rationale:** customers frequently ask why their replay looks incorrect. This involves us inspecting the customer's website or tracing through their JSON by hand, which could be automated.
+- **What we'll ship:** A "Debug this replay" button that opens PostHog AI with the replay's JSON attached, new skills to read the JSON effectively, and the diagnosis is saved back to the replay to help all users in the project. We'll do a flagged rollout starting with ourselves.
+- **We'll know we're successful when:** customers are using this functionality and Replay ticket numbers are reduced.
+
+</details>
 
 <details>
 <summary>Build a PostHog CLI for support (<TeamMember name="Xander Jones" photo />)</summary>
@@ -113,16 +122,6 @@
 - **Rationale:** Our agents learn things on every ticket, but they write to sandboxes that get wiped on restart, so knowledge never builds up and the same mistakes repeat across agents. Giving them more shared context means fewer iterations, and faster resolution, even if the investigation is continued by a different team member.
 - **What we'll ship:** A shared, persistent ticket memory. Notes would be stored alongside each ticket, corrections that every agent learns from, and personal preferences per engineer, as well as notes stored in a shared place for knowledge that can be applied to later tickets.
 - **We'll know we're successful when:** AI agents build on earlier investigations and corrections instead of repeating them, and the team spends less time iterating with agents on each ticket.
-
-</details>
-
-
-<details>
-<summary>Improve incident handling for support and experience for Slack customers (<TeamMember name="Chris Shine" photo />)</summary>
-
-- **Rationale:** More efficient incident handling makes customers more happy.
-- **What we'll ship:** Better automatic identification and tagging for tickets related to an ongoing incident. An easy way to bulk assign incident tickets (or maybe auto-assign to the watcher), create a standard response draft for all tickets related to the incident, link out to the incident Slack channel, and look into syncing the support watcher with incident.io. Look into the use of Sherlock and HogDesk.
-- **We'll know we're successful when:** Incident tickets are tagged automatically and accurately, anyone can find and easily answer them from one place, and Slack customers understand when an outage would affect raising tickets.
 
 </details>
 
