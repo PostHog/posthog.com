@@ -56,6 +56,17 @@ There are some exemptions to the sanctions including any service to any entity l
 
 > If a customer believes they've been incorrectly impacted by our response to these sanctions, or have further questions about them, ask them to contact [sales@posthog.com](mailto:sales@posthog.com) so we can investigate.
 
+#### Dealing with the above
+
+If you find a paying customer who we should not be doing business with according to the rules above, use the following process:
+
+1. First get in touch with all active users in the account via a group email to let them know that:
+  - As they are a Russian company, we can not do business with them and link this handbook page.
+  - You'll be cancelling their paid subscription today
+  - They will be given a few days grace to export any data, and then access to PostHog will be suspended
+2. In Stripe, cancel their subscription (don't collect any due fees) and also set `is_blocked_from_subscribing` to true in their customer metadata.  You can access their Stripe customer record via Customer Analytics.
+3. After 3 business days, suspend their access to PostHog using the Billing Admin.
+
 ## Checking whether we can do business with a customer
 
 If you work in Sales, CS & Onboarding, or Support and are not sure if we are able to work with a customer you are dealing with, ask in #legal and one of the team will be able to let you know either way. For the most part, these edge cases are to do with customers attempting to work around sanctions in their country, though other edge cases can also occur. 

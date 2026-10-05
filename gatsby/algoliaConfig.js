@@ -55,8 +55,7 @@ const PAGE_TYPE_RULES = [
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
     {
         type: 'blog',
-        pattern:
-            /^\/(?:(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)|ko\/newsletter(?:\/|$))/,
+        pattern: /^\/(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)/,
     },
     { type: 'tutorial', pattern: /^\/tutorials(?:\/|$)/ },
     { type: 'customers', pattern: /^\/customers(?:\/|$)/ },
@@ -78,6 +77,9 @@ const EXCLUDED_PAGE_PATTERNS = [
     /^\/(?:101|art-library|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
     /^\/(?:community\/profiles\/me|data-stack\/dw-installation-platforms|team-updates)(?:\/|$)/,
     /\/(?:edit|new|orders|subscriptions)\/?$/,
+    // Hogpedia is a parody encyclopedia. Its pages are crawlable and in the sitemap, but they
+    // must not compete with the real docs in the site's own search.
+    /^\/hogpedia(?:\/|$)/,
     /\/[^/]*-diagram(?:\/|$)/,
     /\.[a-z0-9]{2,5}(?:\/|$)/i,
 ]

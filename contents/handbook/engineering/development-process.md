@@ -44,7 +44,7 @@ Consider:
 -   If you can get from your hacky MVP to production-ready easily. It's OK to start with basic, but be mindful of making it harder to fully roll something out in future.
 -   If you know what you're doing or need someone from another team's expertise to get the right architecture or overall approach. We have lots of experienced people, get their help if you would benefit from it.
 
-If this is a big feature which will need an announcement, content, or other marketing support then it's _never_ too early for [the owner](/handbook/engineering/development-process#assign-an-owner) to let the Marketing team know. Drop a post in their Slack channel or tagging them on an issue.
+If this is a big feature which will need an announcement, content, or other marketing support then it's _never_ too early for [the owner](/handbook/engineering/development-process#assign-an-owner) to let the Developer Marketing team know. Drop a post in their Slack channel or tagging them on an issue.
 
 ### Break up goals
 
@@ -340,7 +340,7 @@ If a deployment appears stuck, reach out in `#support-infrastructure` or ping `@
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="marketing" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 

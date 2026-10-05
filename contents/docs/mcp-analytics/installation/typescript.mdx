@@ -1,0 +1,331 @@
+---
+title: TypeScript MCP Analytics installation
+platformLogo: nodejs
+platformLabel: TypeScript
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+<CalloutBox icon="IconFlask" title="Beta SDK" type="fyi">
+
+`@posthog/mcp` is in beta (pre-1.0). Minor `0.x` releases may contain breaking API changes until `v1`. Pin a version during the beta.
+
+</CalloutBox>
+
+`@posthog/mcp` instruments servers built on the official [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk). It supports both SDK majors:
+
+| Your imports | MCP SDK major | Protocol revisions it serves |
+| --- | --- | --- |
+| `@modelcontextprotocol/sdk` | v1 | `2025-11-25` and earlier |
+| `@modelcontextprotocol/core`, `/server`, `/client` | v2 | `2025-11-25` and `2026-07-28` |
+
+You need Node.js 20.20+ or 22.22+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
+
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instrument()` for you. To install by hand, follow the steps below.
+
+<Steps>
+
+<Step title="Install the packages" badge="required">
+
+```bash
+npm install @posthog/mcp posthog-node
+```
+
+`@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle.
+
+</Step>
+
+<Step title="Wrap your server" badge="required">
+
+Call `instrument(server, posthog)` once, before the server accepts requests. Pass the `McpServer` or the low-level `Server`. The SDK also instruments tools that you register later.
+
+<MultiLanguage>
+
+```ts file=SDK-v1
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+const analytics = instrument(server, posthog)
+
+server.tool("search_events", { /* ... */ }, async (args) => {
+  // your handler runs untouched
+})
+```
+
+```ts file=SDK-v2
+import { McpServer } from "@modelcontextprotocol/server"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+const analytics = instrument(server, posthog)
+
+server.registerTool("search_events", { /* ... */ }, async (args) => {
+  // your handler runs untouched
+})
+```
+
+</MultiLanguage>
+
+`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server logs a warning and returns early.
+
+</Step>
+
+<Step title="Send queued events on shutdown" badge="required">
+
+`posthog-node` sends events in batches. Call `posthog.shutdown()` when the process stops:
+
+```ts
+process.on("SIGTERM", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+```
+
+In serverless and edge functions, `SIGTERM` may not run. Call `await posthog.flush()` at the end of each invocation, or `ctx.waitUntil(posthog.flush())` where the platform supports it.
+
+</Step>
+
+<Step title="Check your first events" badge="required">
+
+Connect an agent to your server and call a tool. Then open the [activity feed](https://app.posthog.com/activity/explore) and filter for `event = $mcp_tool_call`. See [the event reference](/docs/mcp-analytics/events) for every property.
+
+</Step>
+
+</Steps>
+
+## Frameworks
+
+### Next.js and Vercel (`mcp-handler`)
+
+[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you an `McpServer` in its setup callback. Call `instrument()` there:
+
+```ts
+import { createMcpHandler } from "mcp-handler"
+import { PostHog, instrument } from "@posthog/mcp"
+
+// Create the client once at module scope, not per request.
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com",
+})
+
+const handler = createMcpHandler(
+  (server) => {
+    instrument(server, posthog)
+    server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
+  },
+  {},
+  { basePath: "/api" },
+)
+
+export { handler as GET, handler as POST }
+```
+
+`mcp-handler` creates a new server for each request and sends no `Mcp-Session-Id` header. Without another signal, each request gets its own `$session_id`. To group a client's calls:
+
+- Return a `distinctId` from [`identify`](/docs/mcp-analytics/identifying-users), such as the OAuth subject. This needs no client changes.
+- Keep [conversation IDs](/docs/mcp-analytics/conversation-id) on (the default). Calls group when the agent echoes the handle.
+
+Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
+
+### NestJS (`@rekog/mcp-nest`)
+
+[`@rekog/mcp-nest`](https://github.com/rekog-labs/MCP-Nest) creates the server through `McpModule.forRoot(...)`. Add `instrumentMutator` to its `serverMutator` hook:
+
+```ts
+import { Module } from "@nestjs/common"
+import { McpModule } from "@rekog/mcp-nest"
+import { PostHog, instrumentMutator } from "@posthog/mcp"
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com",
+})
+
+@Module({
+  imports: [
+    McpModule.forRoot({
+      name: "my-mcp-server",
+      version: "1.0.0",
+      serverMutator: instrumentMutator(posthog),
+    }),
+  ],
+})
+export class AppModule {}
+```
+
+`instrumentMutator(posthog)` calls `instrument()` and returns the server, not the analytics handle. It also captures tools that mcp-nest registers later. If you need the handle for [custom events](/docs/mcp-analytics/custom-events), call `instrument()` yourself:
+
+```ts
+serverMutator: (server) => {
+  const analytics = instrument(server, posthog)
+  return server
+}
+```
+
+## Read request headers on both SDK majors
+
+<CalloutBox icon="IconWarning" title="This fails silently" type="caution">
+
+MCP SDK v1 stores headers at `extra.requestInfo.headers`. v2 stores a WHATWG `Request` at `extra.http.req`. Reading the v1 location on v2 returns `undefined`, so `identify()` can return `null` and send anonymous events without an error.
+
+</CalloutBox>
+
+Use `getRequestHeaders(extra)` in `identify`, `intentFallback`, and `eventProperties`. It works on both majors and returns lowercase keys:
+
+```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
+instrument(server, posthog, {
+  identify: async (request, extra) => {
+    const token = getRequestHeaders(extra)?.["authorization"]
+    return token ? { distinctId: await resolveUserId(token) } : null
+  },
+})
+```
+
+## Stateless and multi-pod servers
+
+A stateless server creates a new instance for each request, often on a different pod. Without correlation, each request gets its own `$session_id`, and events after `initialize` lose the client name and version.
+
+On `2025-11-25` traffic, the SDK fixes this without a shared store or sticky routing. At `initialize`, it puts a token with the session ID and client metadata in the `Mcp-Session-Id` response header. Clients send the header back, so any pod reads the same values. The `2026-07-28` revision has no `initialize`, so use [conversation IDs](/docs/mcp-analytics/conversation-id) there.
+
+The SDK can only send the token in JSON mode. Set `enableJsonResponse: true` on a fresh transport per request:
+
+```ts
+new StreamableHTTPServerTransport({
+  sessionIdGenerator: undefined, // stateless
+  enableJsonResponse: true,      // lets the SDK set the session header
+})
+```
+
+With `@rekog/mcp-nest`, set `streamableHttp: { statelessMode: true, enableJsonResponse: true }` on the module. The legacy path in `createMcpHandler` can't send the token, so `$mcp_client_name` and `$mcp_client_version` are absent there.
+
+If you must stream (SSE), set the header yourself before the response headers go out:
+
+```ts
+import { MCP_SESSION_HEADER, encodeSessionId, newSessionId } from "@posthog/mcp"
+
+if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
+  res.setHeader(
+    MCP_SESSION_HEADER,
+    encodeSessionId({
+      sessionId: newSessionId(),
+      clientName: body.params?.clientInfo?.name,
+      clientVersion: body.params?.clientInfo?.version,
+    })
+  )
+}
+```
+
+## Configuration
+
+`instrument(server, posthog, options?)` takes these options:
+
+| Option | Default | What it does |
+| --- | --- | --- |
+| `context` | `true` | Add a `context` argument to capture [agent intent](/docs/mcp-analytics/intent). Pass `{ description }` to change its prompt. |
+| `intentFallback` | – | `(request, extra) => string \| null`. Supplies intent when the agent sends no `context`. |
+| `captureModel` | `true` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. |
+| `enableConversationId` | `true` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
+| `identify` | – | `(request, extra) => UserIdentity \| null`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
+| `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
+| `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
+| `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
+| `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
+| `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
+| `serverBuild` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
+| `shouldRecordInputKey` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
+| `resolveInputAliases` | – | `(toolName) => aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
+| `logger` | no-op | `(message) => void`. A stdio-safe sink for SDK warnings. |
+
+## Custom dispatchers
+
+`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes the same constructor arguments:
+
+```ts
+import { PostHogMCP, getMoreToolsResult } from "@posthog/mcp"
+
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
+  host: "https://us.i.posthog.com",
+})
+```
+
+Call the capture methods from your dispatcher. They build the same `$mcp_*` events as `instrument()`, with the same redaction and size limits:
+
+```ts
+// When you answer tools/list:
+const tools = posthog.prepareToolList(myTools, { reportMissing: true })
+
+// When you answer tools/call, before the tool runs:
+const prepared = posthog.prepareToolCall(name, request.params.arguments)
+if (prepared.isMissingCapability) {
+  posthog.captureMissingCapability({ context: prepared.intent, distinctId: user.id })
+  return getMoreToolsResult()
+}
+
+const start = Date.now()
+const result = await runTool(name, prepared.args)
+
+// Adds the conversation handle to the result, and returns the session to capture:
+const final = posthog.prepareToolResult(result, prepared)
+
+posthog.captureToolCall({
+  toolName: name,
+  intent: prepared.intent,
+  intentSource: prepared.intentSource,
+  llmModel: prepared.llmModel,
+  llmModelSource: prepared.llmModelSource,
+  parameters: prepared.args,
+  response: final.result,
+  durationMs: Date.now() - start,
+  isError: false,
+  sessionId: final.sessionId,
+  conversationId: final.conversationId,
+  distinctId: user.id,
+  protocolVersion: requestProtocolVersion,
+  groups: { organization: user.orgId },
+})
+
+return final.result
+
+// Only on a 2025-11-25 initialize handshake:
+posthog.captureInitialize({
+  clientName: "claude-code",
+  clientVersion: "1.2.3",
+  protocolVersion: "2025-11-25",
+  distinctId: user.id,
+})
+```
+
+These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
+
+Every capture method takes these fields:
+
+| Field | Becomes | Notes |
+| --- | --- | --- |
+| `distinctId` | `distinct_id` | Turns on person processing. Omit it for anonymous traffic. |
+| `sessionId` | `$session_id` | Omitted when you don't pass one. |
+| `protocolVersion` | `$mcp_protocol_version` | Pass the revision of each request. |
+| `clientUserAgent` | `$mcp_client_user_agent` | The raw `User-Agent` header on HTTP transports. |
+| `vendorClient` | `$mcp_vendor_client` | A vendor client header, such as `x-anthropic-client`. |
+| `groups` | `$groups` | `{ groupType: groupKey }`. |
+| `setProperties` | `$set` | Person properties, such as name or plan. |
+| `properties` | event properties | Extra properties, added as they are. |
+| `timestamp` | event time | Defaults to the time of the call. |
+
+The `instrument()` hooks (`identify`, `intentFallback`, `eventProperties`) don't run on this path. Pass identity on each call. `prepareToolCall` and `prepareToolResult` handle intent, model capture, and conversation IDs. On a stateless server, pass the original tool as the `originalTool` option of `prepareToolCall`, so a process that didn't serve `tools/list` still knows which arguments it added. On `2026-07-28`, don't send `$mcp_initialize`, because that revision has no handshake.
