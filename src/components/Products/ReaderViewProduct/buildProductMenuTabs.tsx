@@ -1,5 +1,13 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
+import {
+    IconBook,
+    IconCursorClick,
+    IconEye,
+    IconGraduationCap,
+    IconTerminal,
+    IconPiggyBank,
+    IconPresent,
+} from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
 import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
@@ -74,43 +82,39 @@ const DocsTreeMenu = ({
     )
 }
 
-/** One item per chapter, each its own page; `ProductNav` scrolls within one instead. */
+const LearnHubNav = ({ basePath, contentRef }: { basePath: string; contentRef?: React.RefObject<HTMLElement> }) => (
+    <ProductNav
+        basePath={basePath}
+        contentRef={contentRef}
+        items={[
+            { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+            { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
+            { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
+            { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
+        ]}
+    />
+)
+
+/** Standard guides link between chapter pages; hub guides scroll between anchored sections. */
 const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
     hasLanding,
-    interactiveLearningUrl,
+    hub,
+    contentRef,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
     hasLanding?: boolean
-    interactiveLearningUrl?: string
+    hub?: boolean
+    contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
 
-    if (hasLanding && interactiveLearningUrl) {
-        const storyPages = pages.map((page) => ({
-            name: page.shortTitle || page.title,
-            url: page.isFrontMatter ? `${basePath}/introduction` : learnChapterPath(basePath, page),
-        }))
-
-        return (
-            <TreeMenu
-                appearance="sidebar"
-                activeUrl={currentPath}
-                items={[
-                    {
-                        name: 'Learn through a story',
-                        url: `${basePath}/introduction`,
-                        children: storyPages,
-                    },
-                    { name: 'Learn by doing', url: interactiveLearningUrl },
-                    { name: 'Have your agent teach you', url: `${basePath}#agent-teacher` },
-                ]}
-            />
-        )
+    if (hub) {
+        return <LearnHubNav basePath={basePath} contentRef={contentRef} />
     }
 
     return (
@@ -160,8 +164,8 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
-              interactiveLearningUrl?: string
+              /** Shows a learning hub with Product-style anchor navigation. */
+              learnHub?: boolean
           }
         | null
         | undefined
@@ -216,10 +220,10 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        interactiveLearningUrl,
+        learnHub,
         docsSlug,
     } = productData
-    const hasLearnLanding = Boolean(interactiveLearningUrl)
+    const hasLearnLanding = Boolean(learnHub)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -300,7 +304,8 @@ export function buildProductMenuTabs({
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
                     hasLanding={hasLearnLanding}
-                    interactiveLearningUrl={interactiveLearningUrl}
+                    hub={learnHub}
+                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
             ),
         })
