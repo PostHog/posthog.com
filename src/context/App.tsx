@@ -1652,6 +1652,7 @@ const appSettings: AppSettings = {
     '/forum': { toolbar: true },
     '/forum/following': { toolbar: true },
     '/forum/drafts': { toolbar: true },
+    '/forum/alerts': { toolbar: true },
     '/forum/new': { toolbar: true },
     '/forum/t/:topic': { toolbar: true },
     '/forum/t/:topic/tags': { toolbar: true },

@@ -20,9 +20,10 @@ import TopicIcon from './TopicIcon'
 import TopicForm from './TopicForm'
 import DeleteTopicDialog from './DeleteTopicDialog'
 import TopicTags from './TopicTags'
+import ForumAlerts from './ForumAlerts'
 import ManageSubscriptions from './ManageSubscriptions'
 
-type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'tags' | 'post'
+type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'tags' | 'post' | 'alerts'
 
 // AppWindow's Router renders one Forum for every /forum path, so state such as open modals survives navigation.
 const getView = (props: any): View => {
@@ -33,6 +34,7 @@ const getView = (props: any): View => {
     if (path.endsWith('/forum/following')) return 'following'
     if (path.endsWith('/forum/new')) return 'new'
     if (path.endsWith('/forum/drafts')) return 'drafts'
+    if (path.endsWith('/forum/alerts')) return 'alerts'
     return 'home'
 }
 
@@ -167,6 +169,8 @@ export default function Forum(props: any) {
                 )
             case 'drafts':
                 return <Drafts />
+            case 'alerts':
+                return <ForumAlerts topics={topics} loading={topicsLoading} />
             case 'following':
                 return <FollowingFeed />
             case 'tags':
@@ -209,6 +213,8 @@ export default function Forum(props: any) {
             ? 'Following'
             : view === 'drafts'
             ? 'Drafts'
+            : view === 'alerts'
+            ? 'Slack alerts'
             : 'Forum'
 
     return (

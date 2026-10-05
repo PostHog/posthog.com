@@ -7,6 +7,7 @@ import {
     IconDrag,
     IconEllipsis,
     IconMap,
+    IconMegaphone,
     IconPencil,
     IconPlus,
     IconSort,
@@ -177,6 +178,11 @@ const Navigation = ({
                         Drafts
                     </NavItem>
                 )}
+                {isModerator && (
+                    <NavItem to="/forum/alerts" active={view === 'alerts'} icon={<IconMegaphone className="size-4" />}>
+                        Slack alerts
+                    </NavItem>
+                )}
             </ul>
             {/* pr-1 matches the topic rows, so this menu button lines up with theirs. */}
             <div className="flex items-center gap-1 pl-2 pr-1 pt-4 pb-1 text-sm text-muted">
@@ -343,12 +349,12 @@ export default function Sidebar({
     activeTopic?: ForumTopic
     loading?: boolean
 }) {
-    const { user } = useUser()
+    const { user, isModerator } = useUser()
     const newPost = () => navigate('/forum/new', { state: { topicId: activeTopic?.id } })
     const current =
         view === 'topic' && activeTopic
             ? `/forum/t/${activeTopic.attributes.slug}`
-            : view === 'following' || view === 'drafts'
+            : view === 'following' || view === 'drafts' || view === 'alerts'
             ? `/forum/${view}`
             : '/forum'
 
@@ -371,6 +377,7 @@ export default function Sidebar({
                                     { label: 'All posts', value: '/forum' },
                                     { label: 'Following', value: '/forum/following' },
                                     ...(user ? [{ label: 'Drafts', value: '/forum/drafts' }] : []),
+                                    ...(isModerator ? [{ label: 'Slack alerts', value: '/forum/alerts' }] : []),
                                 ],
                             },
                             {

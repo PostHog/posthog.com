@@ -312,6 +312,101 @@ const sorts: Record<ForumSort, string[]> = {
     popular: ['popularScore:desc', 'id:desc'],
 }
 
+export type AlertTeam = {
+    id: number
+    name: string
+    slug: string
+    slackChannel: string | null
+    topicIds: number[]
+    tagIds: number[]
+}
+
+type TeamSubscriptionField = 'forumTopicSubscriptions' | 'forumTagSubscriptions'
+
+type TeamAlertsData = StrapiRecord<{
+    name: string
+    slug: string
+    slackChannel: string | null
+    forumTopicSubscriptions?: { data: { id: number }[] }
+    forumTagSubscriptions?: { data: { id: number }[] }
+}>
+
+const alertTeamsQuery = qs.stringify(
+    {
+        fields: ['name', 'slug', 'slackChannel'],
+        sort: ['name:asc'],
+        populate: { forumTopicSubscriptions: { fields: ['id'] }, forumTagSubscriptions: { fields: ['id'] } },
+        pagination: { pageSize: 100 },
+    },
+    { encodeValuesOnly: true }
+)
+
+const toAlertTeam = ({ id, attributes }: TeamAlertsData): AlertTeam => ({
+    id,
+    name: attributes.name,
+    slug: attributes.slug,
+    slackChannel: attributes.slackChannel || null,
+    topicIds: attributes.forumTopicSubscriptions?.data.map((topic) => topic.id) ?? [],
+    tagIds: attributes.forumTagSubscriptions?.data.map((tag) => tag.id) ?? [],
+})
+
+const withSubscription = (
+    data: { data: TeamAlertsData[] } | undefined,
+    teamId: number,
+    field: TeamSubscriptionField,
+    targetId: number,
+    subscribed: boolean
+) =>
+    data && {
+        ...data,
+        data: data.data.map((team) => {
+            if (team.id !== teamId) return team
+            const current = team.attributes[field]?.data ?? []
+            const next = subscribed
+                ? [...current.filter((target) => target.id !== targetId), { id: targetId }]
+                : current.filter((target) => target.id !== targetId)
+            return { ...team, attributes: { ...team.attributes, [field]: { data: next } } }
+        }),
+    }
+
+export const useForumAlerts = () => {
+    const request = useForumRequest()
+    const { data, mutate, isLoading, error } = useSWR<{ data: TeamAlertsData[] }>(
+        `${API}/teams?${alertTeamsQuery}`,
+        async (url: string) => {
+            const res = await fetch(url)
+            if (!res.ok) throw new Error(`Teams request failed (${res.status})`)
+            return res.json()
+        }
+    )
+
+    const setSubscription = (teamId: number, field: TeamSubscriptionField, targetId: number, subscribed: boolean) =>
+        mutate(
+            async () => {
+                await request(`/teams/${teamId}`, {
+                    method: 'PUT',
+                    body: { data: { [field]: { [subscribed ? 'connect' : 'disconnect']: [targetId] } } },
+                })
+                return withSubscription(data, teamId, field, targetId, subscribed)
+            },
+            {
+                optimisticData: withSubscription(data, teamId, field, targetId, subscribed),
+                rollbackOnError: true,
+                revalidate: true,
+            }
+        )
+
+    return {
+        teams: (data?.data ?? []).map(toAlertTeam),
+        isLoading,
+        loadFailed: !!error,
+        setTopicSubscription: (teamId: number, topicId: number, subscribed: boolean) =>
+            setSubscription(teamId, 'forumTopicSubscriptions', topicId, subscribed),
+        setTagSubscription: (teamId: number, tagId: number, subscribed: boolean) =>
+            setSubscription(teamId, 'forumTagSubscriptions', tagId, subscribed),
+    }
+}
+
 export type FeedOptions = {
     sort: ForumSort
     topicId?: number
