@@ -37,11 +37,11 @@ Destinations reuse the same connections as [batch exports](/docs/cdp/batch-expor
 
 Both write to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. They move different data.
 
-- **ETL destinations** move rows PostHog imported from a source: your Stripe charges, your HubSpot contacts, your own Postgres tables.
+- **ELT destinations** move rows PostHog imported from a source: your Stripe charges, your HubSpot contacts, your own Postgres tables.
 - **[Batch exports](/docs/cdp/batch-exports)** move the events, persons, and sessions PostHog captured.
 
 If you want your Stripe data in Snowflake, that's a destination. If you want your product analytics events in Snowflake, that's a batch export. Teams often run both.
 
 ## Checking what lands
 
-The [ETL page](/docs/data-warehouse/monitoring) shows rows written per destination over the window you pick, so a destination that stopped receiving rows shows up as a flat line.
+The [ELT page](/docs/data-warehouse/monitoring) shows rows written per destination over the window you pick, so a destination that stopped receiving rows shows up as a flat line.
