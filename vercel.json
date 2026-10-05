@@ -6141,6 +6141,10 @@
             "destination": "/handbook/growth/sales/customer-industry-segments"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-led-calls",
+            "destination": "/handbook/growth/sales/reverse-demo-calls"
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/data-stack"
         },
