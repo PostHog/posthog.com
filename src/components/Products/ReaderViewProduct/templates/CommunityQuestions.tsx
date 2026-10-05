@@ -4,6 +4,7 @@ import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import CommunityQuestionsList from './CommunityQuestionsList'
 import OSButton2 from 'components/OSButton/OSButton2'
 import { useQuestions } from 'hooks/useQuestions'
+import { questionsTagFeedPath, questionsTagFilter } from 'components/Forum/questionTags'
 import { SectionComponentProps } from '../types'
 import { SectionHeading } from '../helpers'
 import Link from 'components/Link'
@@ -12,7 +13,7 @@ import SmallTeam from 'components/SmallTeam'
 import { pocketGuideUrl, volumeById } from '../../../../constants/pocketGuides'
 
 type CommunityStatsNode = {
-    topicId: number | null
+    forumTag: string | null
     questions: number
     resolved: number
     replies: number
@@ -20,12 +21,12 @@ type CommunityStatsNode = {
 }
 
 const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
-    const forumTopicId = (productData as any)?.forumTopicId
+    const forumTag: string | undefined = (productData as any)?.forumTag
     const slug = (productData as any)?.slug
-    if (!forumTopicId || !slug) return null
+    if (!forumTag || !slug) return null
 
     const { questions, isLoading } = useQuestions({
-        topicId: forumTopicId,
+        filters: questionsTagFilter(forumTag),
         limit: 3,
         sortBy: 'activity',
     })
@@ -34,7 +35,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         query CommunityQuestionsStats {
             allCommunityStats {
                 nodes {
-                    topicId
+                    forumTag
                     questions
                     resolved
                     replies
@@ -44,10 +45,10 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         }
     `)
     const stats: CommunityStatsNode | undefined = allCommunityStats.nodes.find(
-        (node: CommunityStatsNode) => node.topicId === forumTopicId
+        (node: CommunityStatsNode) => node.forumTag === forumTag
     )
 
-    const forumUrl = `/forum`
+    const forumUrl = questionsTagFeedPath(forumTag)
     const approxCount = (n: number) => {
         if (n >= 1000) return `With over ${(Math.floor(n / 1000) * 1000).toLocaleString()}`
         if (n >= 100) return `With over ${(Math.floor(n / 100) * 100).toLocaleString()}`

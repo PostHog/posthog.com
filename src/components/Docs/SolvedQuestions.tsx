@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { useQuestions } from 'hooks/useQuestions'
+import { questionsTagFeedPath, questionsTagFilter, questionsTagForLabel } from 'components/Forum/questionTags'
 import { IconCheckCircle, IconMessage } from '@posthog/icons'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -20,6 +21,7 @@ export default function SolvedQuestions({
     className = '',
     pinnedQuestions = [],
 }: SolvedQuestionsProps) {
+    const forumTag = questionsTagForLabel(topicLabel)
     const { questions: pinnedData, isLoading: isPinnedLoading } = useQuestions({
         limit: pinnedQuestions.length || 1,
         filters: {
@@ -39,13 +41,7 @@ export default function SolvedQuestions({
             subject: {
                 $ne: '',
             },
-            ...(topicLabel && {
-                topics: {
-                    label: {
-                        $eqi: topicLabel,
-                    },
-                },
-            }),
+            ...(forumTag && questionsTagFilter(forumTag)),
         },
     })
 
@@ -135,7 +131,7 @@ export default function SolvedQuestions({
             </ul>
             {topicLabel && (
                 <div className="mt-4">
-                    <Link to={`/forum`} className="text-sm font-medium">
+                    <Link to={questionsTagFeedPath(forumTag)} className="text-sm font-medium">
                         View all {topicLabel} questions →
                     </Link>
                 </div>
