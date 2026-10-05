@@ -229,13 +229,13 @@ export default function BookReader({
                             {shelf &&
                                 destinationControl(
                                     shelf.url,
-                                    'All pocket guides',
+                                    shelf.label,
                                     <IconHome className="size-4" aria-hidden="true" />
                                 )}
                             {learn &&
                                 destinationControl(
                                     learn.url,
-                                    'More Learn content',
+                                    learn.label,
                                     <IconGraduationCap className="size-4" aria-hidden="true" />
                                 )}
                         </div>
@@ -254,14 +254,14 @@ export default function BookReader({
                 {shelf &&
                     destinationControl(
                         shelf.url,
-                        'All pocket guides',
+                        shelf.label,
                         <IconHome className="size-4" aria-hidden="true" />,
                         true
                     )}
                 {learn &&
                     destinationControl(
                         learn.url,
-                        'More Learn content',
+                        learn.label,
                         <IconGraduationCap className="size-4" aria-hidden="true" />,
                         true
                     )}

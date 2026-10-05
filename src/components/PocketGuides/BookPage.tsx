@@ -70,7 +70,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
     const total = pageCount(pages)
     const isProductAnalytics = volumeIdFromUrl(url) === 'product-analytics'
     const shelf = isProductAnalytics ? { ...SHELF, label: 'All pocket guides' } : SHELF
-    const learn = isProductAnalytics ? { url: '/docs/product-analytics/learn', label: 'Learn' } : undefined
+    const learn = isProductAnalytics ? { url: '/docs/product-analytics/learn', label: 'More Learn content' } : undefined
 
     usePageTurnKeys(previous ? previous.url : shelf.url, next?.url)
 

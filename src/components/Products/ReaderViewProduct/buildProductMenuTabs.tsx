@@ -101,7 +101,6 @@ const LearnNav = ({
     basePath,
     currentPath,
     hasLanding,
-    interactiveLearningUrl,
     hub,
     contentRef,
 }: {
@@ -109,7 +108,6 @@ const LearnNav = ({
     basePath: string
     currentPath?: string
     hasLanding?: boolean
-    interactiveLearningUrl?: string
     hub?: boolean
     contentRef?: React.RefObject<HTMLElement>
 }) => {
@@ -117,29 +115,6 @@ const LearnNav = ({
 
     if (hub) {
         return <LearnHubNav basePath={basePath} contentRef={contentRef} />
-    }
-
-    if (hasLanding && interactiveLearningUrl) {
-        const storyPages = pages.map((page) => ({
-            name: page.shortTitle || page.title,
-            url: page.isFrontMatter ? `${basePath}/introduction` : learnChapterPath(basePath, page),
-        }))
-
-        return (
-            <TreeMenu
-                appearance="sidebar"
-                activeUrl={currentPath}
-                items={[
-                    {
-                        name: 'Learn through a story',
-                        url: `${basePath}/introduction`,
-                        children: storyPages,
-                    },
-                    { name: 'Learn by doing', url: interactiveLearningUrl },
-                    { name: 'Have your agent teach you', url: `${basePath}#agent-teacher` },
-                ]}
-            />
-        )
     }
 
     return (
@@ -189,8 +164,6 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
-              interactiveLearningUrl?: string
               /** Shows a learning hub with Product-style anchor navigation. */
               learnHub?: boolean
           }
@@ -247,11 +220,10 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        interactiveLearningUrl,
         learnHub,
         docsSlug,
     } = productData
-    const hasLearnLanding = Boolean(interactiveLearningUrl || learnHub)
+    const hasLearnLanding = Boolean(learnHub)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -332,7 +304,6 @@ export function buildProductMenuTabs({
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
                     hasLanding={hasLearnLanding}
-                    interactiveLearningUrl={interactiveLearningUrl}
                     hub={learnHub}
                     contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
