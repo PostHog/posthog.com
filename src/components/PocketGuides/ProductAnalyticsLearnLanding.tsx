@@ -35,7 +35,6 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 className="grid scroll-mt-20 items-center gap-4 @lg/reader-content:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] @2xl/reader-content:gap-8"
             >
                 <div>
-                    <p className="mb-3 mt-0 text-sm font-semibold text-secondary">PostHog Learn</p>
                     <h1 className="m-0 text-3xl font-bold @xl/reader-content:text-4xl">{productName}</h1>
                     <p className="mb-0 mt-5 text-lg leading-relaxed">
                         Learn what to track, what your data means, and how to answer questions about your product.
@@ -54,12 +53,12 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 id="agent-teacher"
                 className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
             >
-                <div className="mb-5 flex items-start gap-3">
-                    <IconTerminal className="mt-1 size-6 shrink-0 text-purple" />
-                    <h2 className="m-0 text-2xl font-bold">Have your agent teach you</h2>
-                </div>
                 <div className="grid items-start gap-6 @2xl/reader-content:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
                     <div>
+                        <div className="mb-5 flex items-start gap-3">
+                            <IconTerminal className="mt-1 size-6 shrink-0 text-purple" />
+                            <h2 className="m-0 text-2xl font-bold">Have your agent teach you</h2>
+                        </div>
                         <p className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
                             Learn with examples from your own product and data.
                         </p>
@@ -88,7 +87,7 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                             </OSButton>
                         </div>
                     </div>
-                    <div className="min-w-0 [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+                    <div className="min-w-0 [&_.code-block]:mt-0 [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
                         <SingleCodeBlock
                             language="text"
                             label={<></>}
