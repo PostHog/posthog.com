@@ -9,7 +9,9 @@ tags:
   - Inside PostHog
 ---
 
-> In June, p95 latency for experiment queries had climbed to 8 seconds, and 1.5% of queries failed because they timed out, ran out of memory, or scanned more data than our cluster allowed. By September, our p95 latency was under 4 seconds, with a failure rate of 0.2%, while query volume more than doubled. This post is about what we did to make this happen.
+> In February, the p95 latency of our experiment queries was 19 seconds, and the slowest 1% took over a minute and a half. Queries regularly died because they timed out, ran out of memory, or scanned more data than our cluster allowed. By September, p95 was down to 4 seconds and those failures were 14 times rarer, while monthly query volume more than tripled. This post is about what we did to make this happen.
+
+![Monthly experiment query volume tripled in 2026 while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91.4 to 13.5 seconds](../images/blog/experiment-queries/latency-volume.png)
 
 PostHog Experiments first shipped in December 2021 as a very minimal tool. Built on top of our Feature Flags, it was initially just a simple wrapper around our Product Analytics – a single funnel query with some statistical calculations on top.
 
@@ -17,7 +19,7 @@ Over time, it evolved into a mature experimentation product. Today, we support m
 
 As our product grew, our customers did too. From a handful of small customers, we've grown to serve [some of the fastest-growing startups in the world](/customers). Some of them send hundreds of millions of events per day, with individual metric queries scanning terabytes of data.
 
-By late spring this year, our system was choking on the load, and many of our largest customers were struggling to load their metrics. Fixing this was a large undertaking, and we attacked it from multiple angles.
+By early this year, our system was choking on the load, and many of our largest customers were struggling to load their metrics. Fixing this was a large undertaking, and we attacked it from multiple angles.
 
 ## 1. Build a precomputation system
 
@@ -67,6 +69,10 @@ The fix in this case was simple: make the insert synchronous, so the write only 
 We caught other issues too. Cached buckets were aligned to calendar days in UTC, so an experiment started mid-day pulled in events from before its start, and some users ended up misclassified. In another case, our cache-filling queries didn't apply the same settings as regular queries, so a filter involving missing property values silently dropped rows and left the cache nearly empty. These were less serious, but they were still correctness issues in edge cases.
 
 To solve this uncertainty for good, we built a comprehensive canary testing suite running on production data. Each night, a background job picks a random set of metrics and runs each of them in both modes: the direct-scan mode, which reads the entire time range, and the precomputed mode, which reads the cached data. Then we compare the results. If they diverge beyond a small tolerance, we get an alert. The canary also caught the issue of late-arriving events and helped us tune the cache invalidation times.
+
+The payoff of all this work is visible in how much data a query needs to touch:
+
+![Average data scanned per experiment query fell from 207 GB in February to 7.6 GB in September](../images/blog/experiment-queries/gb-per-query.png)
 
 ## 3. Optimize the SQL
 
