@@ -14,12 +14,19 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 import AlphaRelease from "../_snippets/alpha-release.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <AlphaRelease />
 
 The Twitter (X) connector syncs one X account's profile, posts, mentions, likes, followers, following, and owned lists into PostHog. Use it to join social reach and engagement to your product and revenue data, so you can see which posts bring in signups.
 
 This connector reads organic account data. For ad spend and campaign performance, use the Twitter Ads source instead.
+
+<CalloutBox icon="IconPiggyBank" title="X charges you for this data" type="info">
+
+X bills your own developer project for every post this source reads, at the rate X publishes on its [API pricing page](https://docs.x.com/x-api/getting-started/pricing). PostHog does not resell or mark up that access, and you buy the credits directly from X. A table you sync often, or an account with a large timeline or follower list, costs more. See [Sync modes](#sync-modes) before you pick a sync frequency.
+
+</CalloutBox>
 
 ## Prerequisites
 
@@ -64,7 +71,7 @@ Reads also count against a rate limit whose windows are 15 minutes wide. On a la
 
 **"X rejected the bearer token"**: the token was revoked or regenerated. Copy the current one from the app's **Keys and tokens** tab and reconnect the source.
 
-**"Your X API access level doesn't include this endpoint"**: the table needs a higher access level than your project has. Either raise the project's tier in the X developer portal, or turn off syncing for that table.
+**"Your X app's API access doesn't cover this endpoint"**: your app cannot read that table. Check the project's API access and credit balance in the X developer portal, or turn off syncing for that table.
 
 **"X has no account with the handle"**: check the handle for typos. A suspended or deleted account also reports as missing.
 
