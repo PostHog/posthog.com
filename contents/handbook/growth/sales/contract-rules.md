@@ -195,6 +195,10 @@ We will allocate all the credit purchased to the Stripe account when the contrac
 
 We will allocate the credit for that year to the Stripe account when the contract is signed, and then again when subsequent annual invoices are raised.
 
+In billing, we set up a multi-year contract paid yearly as consecutive 12-month contracts. The order form has a payment table that shows the payment and the credit for each year. Each year's credit has a 12-month expiry, so the Year 1 credit on a 2-year contract expires at the end of Year 1, not at the end of the full term. If the customer has unused credit at the end of a year, we let it roll over into the next year of the same contract.
+
+The dates for the subsequent invoices are in the `Contract Setup` Google calendar. Invoice processing runs on a weekly rotation. The credit captain for the week of the invoice date sends the invoice and allocates the credit for that year.
+
 If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
 
 The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.

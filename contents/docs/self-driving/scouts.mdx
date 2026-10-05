@@ -15,6 +15,8 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) and [reports](/docs/self-driving/reports) the rest of the loop can act on.
 
+See [task environment detection](/docs/tasks/agent-environment) for the variables available to code and agent instructions in a scout's cloud sandbox.
+
 ## How a scout works
 
 A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
@@ -228,5 +230,5 @@ Neither is the upgrade from the other and most projects run both. You turn them 
 Meet the scouts PostHog ships with, and steal ideas for your own.
 
 <CallToAction type="primary" to="/docs/self-driving/scout-examples">
-  Scout examples
+Scout examples
 </CallToAction>

@@ -1,0 +1,83 @@
+---
+title: Product analytics
+description: Product analytics is the measurement of how people use a software product, based on events recorded as they use it. PostHog Product Analytics provides trends, funnels, retention, and user paths over that event data.
+hogpedia:
+    categories: ['Products', 'Concepts']
+    aliases: ['Insights', 'Trends', 'Funnels', 'Retention']
+    infobox:
+        title: Product analytics
+        hog: HedgehogChartHog
+        rows:
+            - label: Type
+              value: Analytics tool
+            - label: Answers
+              value: How do people use the product?
+            - label: Built on
+              value: '[Event-based analytics](/hogpedia/event-based-analytics)'
+            - label: Query language
+              value: SQL (HogQL)
+            - label: Documentation
+              value: '[/docs/product-analytics](/docs/product-analytics)'
+    seeAlso:
+        - 'Event-based analytics|/hogpedia/event-based-analytics'
+        - 'Web analytics and product analytics|/hogpedia/event-based-analytics'
+        - 'Session replay|/hogpedia/session-replay'
+        - 'Experiments|/hogpedia/experiments'
+    references:
+        - id: 1
+          text: 'PostHog glossary, "Product analytics"'
+          url: /docs/glossary
+        - id: 2
+          text: 'PostHog documentation, Product analytics'
+          url: /docs/product-analytics
+        - id: 3
+          text: 'PostHog product analytics'
+          url: /product-analytics
+        - id: 4
+          text: 'PostHog documentation, SQL'
+          url: /docs/sql
+    external:
+        - title: 'PostHog Product Analytics'
+          url: /product-analytics
+        - title: 'Product analytics documentation'
+          url: /docs/product-analytics
+---
+
+**Product analytics** is the measurement of how people use a software product, based on [events](/hogpedia/event-based-analytics) recorded while they use it. PostHog's glossary defines it as analytics that track identified and anonymous users and how they interact with a product, and notes that product analytics tools usually offer more detailed analysis than web analytics tools because they can follow an identified user.<Ref id="1" />
+
+**Product Analytics** is also the name of the PostHog product that does this.<Ref id="3" />
+
+## What problem it solves
+
+A team that ships a feature cannot tell from the code whether the feature worked. Server logs show that a request happened; they do not show that a person finished what they came to do, or where they stopped.
+
+Product analytics answers four questions that a log cannot:
+
+- **How many?** How often does a thing happen, and is that number moving?
+- **Where do people stop?** At which step of a sequence do people drop out?
+- **Do they come back?** Does a person who did a thing once do it again?
+- **What did they do first?** What path did a person take to reach a point?
+
+## How it works in PostHog
+
+An event is a named record of a thing a person did, with properties attached, tied to a person. A PostHog SDK sends those events; autocapture can record clicks and pageviews without a developer naming each one first.<Ref id="2" />
+
+From that one event stream, PostHog builds four main insight types:
+
+- **Trends** count events over time, broken down by a property.
+- **Funnels** measure conversion through an ordered sequence of steps.
+- **Retention** measures whether people who did one thing return to do it again.
+- **User paths** show the routes people take between events.
+
+Anything the insight editor cannot express can be written as SQL against the same data, in a dialect PostHog calls HogQL.<Ref id="4" />
+
+## How it relates to other PostHog products
+
+Product analytics is the layer the other products read from and write to.
+
+- **[Session replay](/hogpedia/session-replay)** answers *why* a funnel step loses people. A funnel gives the number; a replay shows one person failing at that step.
+- **[Feature flags](/hogpedia/feature-flags)** record which variant each person saw, so an analytics query can be split by it.
+- **[Experiments](/hogpedia/experiments)** are built directly on funnel and trend insights: an experiment metric is an insight, measured per variant.
+- **Surveys** attach what a person said to what that person did.
+
+Web analytics, a separate PostHog product, reports on the same event stream but is organized around traffic, sources, and pages rather than around identified people.

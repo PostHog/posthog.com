@@ -173,13 +173,13 @@ export const logs = {
     freeAllocationText: 'First 10 GB free – every month!',
     addonSliders: [
         {
-            key: 'logs_retention_30d',
+            key: 'logs_retention_custom',
             label: 'Custom retention',
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
             // retained GB again at the add-on rate for each month of retention.
             countsTowardParentVolume: true,
-            // Months of retention input on /logs/pricing. The /pricing calculator still estimates one month.
-            multiplier: { unit: 'month', initial: 1 },
+            // Months of retention input on /logs/pricing, up to 86. The /pricing calculator still estimates one month.
+            multiplier: { unit: 'month', initial: 1, max: 86 },
             // Shown on /logs/pricing
             pricingDescription:
                 'Keep logs and traces longer than the 14-day default. Custom retention is billed per GB for each month you keep them, and you can set it per service or per source in your logs and traces settings.',
