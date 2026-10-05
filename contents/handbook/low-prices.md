@@ -28,4 +28,4 @@ Many of our products are traditionally sold to non-technical people. They need m
 
 ## Using open-source technology
 
-We’ve often benefited from being a second mover. One example is our use of open-source technologies such as ClickHouse. While many competitors had to build their own databases, we can use an existing system that is highly efficient for storing tens of billions of events and serving millions of analytics queries. We’d much rather benefit from that work than have to do it ourselves.
+We’ve often benefited from being a second mover. One example is our use of the latest open-source technologies such as ClickHouse. While many competitors had to build their own databases, we can use an existing system that is highly efficient for storing tens of billions of events and serving millions of analytics queries. We’d much rather benefit from that work than have to do it ourselves.
