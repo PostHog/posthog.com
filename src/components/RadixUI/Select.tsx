@@ -30,6 +30,7 @@ type SelectProps = {
     groups: SelectGroup[]
     dataScheme?: string
     className?: string
+    portalContainer?: HTMLElement | null
 }
 
 const Icon = ({
@@ -92,6 +93,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             groups,
             className,
             dataScheme,
+            portalContainer,
         },
         ref
     ) => {
@@ -164,7 +166,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             <IconChevronDown className="size-6" />
                         </RadixSelect.Icon>
                     </RadixSelect.Trigger>
-                    <RadixSelect.Portal>
+                    <RadixSelect.Portal container={portalContainer}>
                         <RadixSelect.Content
                             position={appContainer ? 'popper' : undefined}
                             collisionBoundary={appContainer}
