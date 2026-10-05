@@ -413,6 +413,22 @@ Checked on the production build (`astro preview`, headless Chrome, 1440×900 and
 - Checked on `astro preview`: display options and "Talk to a human" over `/pricing` (clicks and typing inside work; close button, Escape, backdrop, Back, and Forward), a shared `?dialog=` link, a page change with a dialog open, and a direct visit to `/talk-to-a-human`.
 - Not covered: routes with `modal` but no fixed size (`/community/achievements`, `/community/reputation`) still open as pages, and `/fm/mixtapes/edit/:id` (dynamic) too.
 
+### 35. Build concurrency
+
+`astro.config.mjs` sets `build.concurrency: 4`. Astro prerenders one page at a time by default. Measured on a laptop on AC power (36 GB RAM, 11 cores), one full build for each value:
+
+| Concurrency | Prerender | Whole build | Peak memory |
+|---|---|---|---|
+| 1 | 6m50s | 10m37s | 5.4 GB |
+| 4 | 5m47s | 8m56s | 8.1 GB |
+| 8 | 5m27s | 8m46s | 12.0 GB |
+| 16 | 5m32s | 8m27s | 13.0 GB |
+
+- 4 is about a minute faster than 1. Values above 4 are not faster: the differences (about 20 s) are inside the variation between runs, which was about a minute.
+- CPU time stays at about 610 s for every value. The page render runs on one core. Concurrency only overlaps the short waits for disk and module loading, so it cannot give more.
+- Peak memory grows with concurrency. 4 uses 8.1 GB. The build sets a 16 GB heap limit, so check the memory of the Vercel build machine before deploying.
+- A larger gain needs less work, not more parallel work: take pages out of the build (see "Hybrid rendering" in Follow-up proposals).
+
 ## Open items for review
 
 - **Vercel env vars:** rename the `GATSBY_*` project env vars to `PUBLIC_*` (step 5 has the list) before deploying.
@@ -450,7 +466,7 @@ Proposals, by expected gain:
 1. **Sources pages render the full sources list on every page.** A sources page has 857 links and a 794 KB page island. A plain docs page has 88 links and a 73 KB island. The sidebar is the likely cause: 1,595 pages each render about 800 entries, so the work grows with the square of the number of sources. Render only the active group, or render the long list in the browser after load. This is about half of all prerender time (3 minutes) and about 1.8 GB of output.
 2. **The desktop island puts about 300 KB of inline SVG in every page.** `components/Desktop` renders the icon list twice (mobile and desktop), and each `GlassIcon` draws its glyph twice. On a docs page that is 305 of 435 KB of HTML. Across 9,469 pages it is about 2.8 GB of the 5.5 GB `dist/`. The desktop island persists between pages, so its HTML only matters on the first load. Render one icon list with container queries, or move the glyphs to one cached SVG sprite, or render the desktop island in the browser only (it has no content for search engines). Inlining helps small, page-specific assets, not this one.
 3. **SDK reference type pages are 44% of all pages.** 4,122 of the 4,169 `/docs/references/*` pages are `/types/` pages, each with a full shell. Render each type as a section of its parent reference page with anchors, or render them on demand with a CDN cache, or leave them out of preview builds.
-4. **Prerender runs one page at a time.** `astro.config.mjs` does not set `build.concurrency`, and Astro's default is 1. Try 4 to 8 and measure. The build already needs 16 GB of heap, so watch memory.
+4. **Prerender concurrency (done, step 35).** `build.concurrency: 4` cut the build from 10m37s to 8m56s. 8 and 16 were no faster and used up to 13 GB. The render is single-threaded CPU work, so more parallel work does not help.
 5. **Page Markdown and `llms*.txt` take 87 s after the build.** Most pages do not change between builds. Cache each `.md` by a hash of its source, or split the work across worker threads.
 6. **CSS on every page is too large.** `Site.css` is 555 KB (1,277 container-query variant rules). A docs page also loads CSS from unrelated views (careers, Hogpedia, books, API endpoints): the page island imports every view with `import.meta.glob`, and Astro adds the CSS of every module a page can load. Import view CSS only where a view uses it, and check the Tailwind content globs and safelist.
 7. **Client JS ships data.** A docs page loads 9.2 MB of uncompressed JS in 166 files. Several chunks are 1 to 2 MB of bundled data (`Popover` 2 MB, `useProducts` 1.4 MB, `mcp-tools` 1.3 MB). They look like taskbar and search data, so they load on every page. Compute on the server and pass small props, or fetch the data when a menu opens.
@@ -491,3 +507,51 @@ Astro renders a React component with no `client:*` directive to HTML at build ti
 1. Do the build-time proposals above first. They are small and independent.
 2. Pilot on blog posts. They are mostly static (`CalloutBox`, `ProductScreenshot`, `NewsletterForm`). Measure JS and hydration before and after on real pages.
 3. Then the handbook, then docs (the hardest: `CodeBlock`, tabs, and the onboarding content from posthog/posthog), and remove the window layer on the way.
+
+### Hybrid rendering (static by default, long tail on demand)
+
+Most of the build renders pages that almost nobody opens. PostHog data for posthog.com, last 30 days:
+
+| Pages | Pages built | Pages with a view | Pageviews |
+|---|---|---|---|
+| SDK `/types/` pages | 4,122 | 386 | 1,236 |
+| Sources (warehouse and CDP) | 1,595 | about 1,600 | 11,328 |
+| All other pages | about 3,750 | 12,692 | 1,862,392 |
+
+These about 5,700 pages are 60% of the pages we build and most of the prerender time, but 0.67% of the traffic.
+
+**The proposal:** keep the site static, and render only these pages on the server when someone first opens one. Vercel then caches each page (ISR) until the next deploy.
+
+**How to do it:**
+
+1. Add the `@astrojs/vercel` adapter. Keep `output: 'static'`, so every route stays prerendered unless it opts out.
+2. In the three long-tail routes, remove `getStaticPaths` and set `export const prerender = false`:
+   - `src/pages/docs/references/[reference]/types/[type].astro`
+   - `src/pages/docs/data-warehouse/sources/[slug].astro`
+   - `src/pages/docs/cdp/[kind]/[slug].astro` (sources only. Keep the CDP destination pages prerendered.)
+3. Turn on ISR in the adapter (`isr: true`). The first request renders the page, and the CDN serves it after that. Each deploy starts with an empty cache.
+4. Bundle the data these routes read (`.cache/data-layer` JSON and the compiled MDX) into the function with the adapter's `includeFiles`. Then the pages do not call external APIs at request time.
+5. Keep the SEO and AEO outputs complete. Write the sitemap, `llms.txt`, `llms-full.txt`, and the page `.md` files for these routes from source data at build time. This needs no HTML render, so it stays fast. The `Accept: text/markdown` middleware keeps working, because the `.md` files stay static.
+6. Measure before rollout: the function size (the standard limit is 250 MB, or 5 GB with large functions), the response time on a cache miss, and the build time.
+
+**Cost**, at Vercel list prices ($0.60 per 1M invocations, $0.128 per CPU-hour, $0.0106 per GB-hour, $4 per 1M ISR writes, $0.40 per 1M ISR reads). CDN requests and bandwidth cost the same as today.
+
+| Setup | Server renders per month | Extra compute per month |
+|---|---|---|
+| Static (today) | 0 | $0 |
+| **Hybrid: long tail on demand, with ISR** | less than 50k | **less than $1** |
+| ISR for every page | about 1M to 2M (467 production deploys a month, and each one starts with an empty cache) | about $15 to $25 |
+| Server render for every request, no cache | about 10M (estimate: tracked pageviews plus bots, AI agents, and prefetches) | about $55 to $60 |
+
+**What we get:**
+
+- About 4 minutes less prerender time on every build. We run about 467 production builds and the previews for 684 PRs a month, so this is an estimated 10,000 or more build minutes per month. The cost depends on the build machine type ($0.007 to $0.105 per minute). Previews are also ready sooner.
+- A smaller deploy output.
+- The same adapter allows more later: pages that refresh their data on a timer (roadmap, jobs, changelog) without a deploy, and server islands for content that depends on the visitor.
+
+**What it costs us:**
+
+- The first visitor to a long-tail page after each deploy waits for a server render (a few hundred milliseconds, plus a cold start if the function is idle). Everyone after that gets the cached page.
+- A static page cannot fail at request time. A server-rendered page can. These routes need error monitoring.
+- ISR ignores query parameters. Our only page parameter (`?dialog=`) is read in the browser, so this is acceptable.
+- The site depends on the Vercel adapter. We already deploy on Vercel.

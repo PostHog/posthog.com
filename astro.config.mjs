@@ -59,7 +59,9 @@ export default defineConfig({
     site: 'https://posthog.com',
     trailingSlash: 'never',
     publicDir: './static',
-    build: { format: 'directory' },
+    // Pages prerendered in parallel (Astro's default is 1). 4 cut prerender time by about a minute;
+    // 8 and 16 were no faster and used more memory. See ASTRO_MIGRATION.md, step 35.
+    build: { format: 'directory', concurrency: 4 },
     prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
     devToolbar: { enabled: false },
     integrations: [
