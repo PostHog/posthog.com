@@ -2,10 +2,18 @@
 
 The digital book format for pocket guides – the docs-site sibling of the marketing team's field
 guide microsites. Educational register, not marketing: the structure does the teaching, and the
-whole thing uses PostHog fonts and tokens only.
+reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
 
-**Every page of a book is an MDX file.** Nothing in this folder contains prose – these components
-are layout and vocabulary, the words all live in `contents/pocket-guides/`.
+**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
+Components here supply layout, interactions, and short labels for the data they display.
+
+The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
+stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example events and chart, while
+`PostHogInspector.tsx` provides the shared frame and event or identity details.
+`SessionReplayInspector.tsx` provides the playback-synced event timeline used beside a replay.
+Reader clicks only change local example state – they do not send practice events to PostHog.
+`TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
+be reviewed on both sites.
 
 ```
 contents/pocket-guides/<volume>/
@@ -227,3 +235,23 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 **Adding a frontmatter field** needs a matching declaration in
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
+
+### Twig in Product Analytics
+
+The introduction uses a screenshot of Twig's homepage from `static/pocket-guides/posthog/`.
+The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
+`@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
+compact stay card, using local filter state and package photos. The examples place the labeled
+Twig view and Inspector side by side in wide containers and stack them in narrow containers.
+Reset clears captured events and restarts the automated visitor. The inspectors show event
+timestamps separately from custom properties. These examples do not send events to a PostHog
+project.
+
+The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView`, and
+`ProfileMenu` from the same package. PostHog.com owns the example identifiers, sessions, and
+person-linking state around those Twig views. The package does not call `identify`, `reset`, or
+capture events.
+
+Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
+and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
+review the Twig views on both sites at narrow and wide widths, in both themes.

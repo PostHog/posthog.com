@@ -229,6 +229,29 @@ App store and product reviews. The inbox identifies actionable feedback from use
 - AppFollow
 - Judge.me
 
+## Steer a source with guidance
+
+A source does not have to process everything the same way. You can give a source **guidance**: rules in plain language that tell the agent what matters to your team and what to skip. The agent reads the guidance when it decides which new records become signals.
+
+To add guidance, open the inbox **settings**, find the source, and click **Add guidance**. Write it like a note to a teammate. For example:
+
+```text
+- Skip issues with the `skip-self-driving` label. We scope and build those ourselves.
+- Always keep issues from members of our GitHub organization.
+- Ignore tickets about refunds. The finance team handles those.
+```
+
+For issue trackers, the agent also sees the metadata of each record, such as the labels and the author of a GitHub issue. This lets you use a label as a per-issue switch. For example, a developer who wants to build a large change themselves adds `skip-self-driving` to the issue, and PostHog does not research it or open a pull request for it. You can also do the opposite: "Only keep issues with the `self-driving` label."
+
+Some things to know:
+
+- Guidance applies from the next sync. Records that are already signals or reports do not change.
+- An AI model applies the guidance, so treat it as a strong filter, not a guarantee. If the check fails, PostHog keeps the record.
+- Not every source supports guidance yet. A source that supports it shows the **Add guidance** button on its card.
+- Agents can set guidance too. Through the [PostHog MCP](/docs/model-context-protocol), an agent can read the source with `inbox-source-configs-list` and change the `steering` key of its `config` with `inbox-source-configs-partial-update`. The update replaces `config` as a whole, so keep the other keys.
+
+To steer [scouts](/docs/self-driving/scouts) instead of sources, leave a [scout note](/docs/self-driving/scouts#steering-a-scout-with-a-note).
+
 ## What happens next
 
 Related signals don't each become their own task. As signals arrive, the inbox deduplicates them and groups related ones, so a signal from a support conversation, a matching error-tracking issue, and a session-replay pattern collapse into a single [report](/docs/self-driving/reports) rather than three. That way you deal with one customer-facing problem, not scattered noise.

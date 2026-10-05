@@ -110,6 +110,121 @@ OpenID Connect (OIDC) enables users to access multiple systems with a single set
 
 The next time you enter your email address during login, you will see an option to login using OIDC.
 
+### Example: OneLogin
+
+1. In OneLogin admin, go to **Applications** and select **Add App**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_applications_584d48a954.png"
+    alt="OneLogin admin UI showing applications"
+    classes="rounded"
+   />
+
+2. Search for "*OpenId Connect (OIDC)*". Select the option that appears with that exact name, and which shows "*OneLogin, Inc.*" as the author.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_application_catalog_2e640ddd3e.png"
+    alt="OneLogin admin UI showing application catalog"
+    classes="rounded"
+   />
+
+3. Name the configuration "*PostHog ODIC*", then select **Save**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_initial_oidc_configuration_77dd92a613.png"
+    alt="OneLogin admin UI showing initial OIDC configuration"
+    classes="rounded"
+   />
+
+4. Navigate to your PostHog organization's [authentication settings](https://app.posthog.com/settings/organization-authentication#setting=oidc-configuration), scroll down to **OIDC**, then select **Configure**.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_light_4a7b75e712.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_17_okta_oidc_step_4_dark_faea597d68.png"
+    alt="PostHog UI showing authentication configurations"
+    classes="rounded"
+   />
+
+5. In OneLogin navigate to the **Configuration** tab. Copy the "*Redirect URL*" from PostHog into the "*Redirect URI's*" field in OneLogin.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_configuration_tab_dddb5e5ed3.png"
+    alt="OneLogin admin UI showing OIDC configuration tab"
+    classes="rounded"
+   />
+
+6. In your OneLogin OIDC app, go to the **SSO** tab. Copy the **Client ID**, **Client Secret**, and **Issuer URL** from OneLogin into the configuration fields in PostHog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_oidc_sso_tab_9db8211807.png"
+    alt="OneLogin admin UI showing OIDC credentials"
+    classes="rounded"
+   />
+
+7. Select **Save configuration** in Posthog.
+   <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_oidc_configuration_light_5f5a2bd9af.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_onelogin_oidc_configuration_dark_af5fe0ac93.png"
+    alt="PostHog UI showing OIDC configuration"
+    classes="rounded"
+   />
+
+8. In OneLogin, choose which users to assign to the application.
+
+9. OneLogin [does not send the `email_verified` claim during the OIDC handshake](https://developers.onelogin.com/docs/openid-connect/guides/email-verified). Because PostHog requires this claim, we must configure the OneLogin app to send it.
+
+   a. In OneLogin go to **Users** → **Custom User Fields**. Select **New User Field**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_custom_user_fields_510da3e5b5.png"
+       alt="OneLogin admin UI showing Custom User Fields"
+       classes="rounded"
+      />
+
+   b. For the name enter "*Email verified*". For the short name enter "*email_verified*". Select **Save**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_user_field_0084364174.png"
+       alt="OneLogin admin UI showing new custom user field dialog"
+       classes="rounded"
+      />
+
+   c. Go to **Users** → **Mappings**. Select **New Mapping**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_user_mappings_26f171170f.png"
+       alt="OneLogin admin UI showing user mappings"
+       classes="rounded"
+      />
+
+   d. Name it "*Email verified*". Select whatever condition you would like, for example `Status = Active`. For the action, select "*Set Email verified*" and set the value to "*true*". Select **Save**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_user_mapping_45ed41d545.png"
+       alt="OneLogin admin UI showing new user mapping page"
+       classes="rounded"
+      />
+
+   e. Select **Reapply All Mappings**. If you see a confirmation dialog, select **Continue**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_user_mappings_26f171170f.png"
+       alt="OneLogin admin UI showing user mappings with a reapply mappings button"
+       classes="rounded"
+      />
+
+   f. Go to **Applications**. Select your OIDC application, then navigate to the **Parameters** tab. Click the **+** icon on the top right of the table.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_oidc_parameters_008b84dcc7.png"
+       alt="OneLogin admin UI showing OIDC parameters"
+       classes="rounded"
+      />
+
+   g. Name the field "*email_verified*". Select **Save**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_25_onelogin_new_oidc_parameter_pt_1_e4bc1b5881.png"
+       alt="OneLogin admin UI showing new OIDC parameter dialog"
+       classes="rounded"
+      />
+
+   h. For the value search for and select "*Email verified (Custom)*". Select **Save**.
+      <ProductScreenshot
+       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2026_09_26_onelogin_new_oidc_parameter_pt_2_14dc6dc5d4.png"
+       alt="OneLogin admin UI showing new OIDC parameter dialog"
+       classes="rounded"
+      />
+
+
+The next time you enter your email address during login, you will see an option to login using OIDC.
 
 ## Warnings
 

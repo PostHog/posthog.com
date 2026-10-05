@@ -59,35 +59,51 @@ Every time a user opens the app, we send a request in the background to fetch th
 
 This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
 
-To handle this, you can use the `didReceiveFeatureFlags` notification to wait for the feature flag request to finish:
+To handle this, you can use the `onFeatureFlags` callback to be notified when flags are loaded or change. It's available in version 3.89.0+:
 
 ```swift
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // register for `didReceiveFeatureFlags` notification before SDK initialization
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(receiveFeatureFlags),
-            name: PostHogSDK.didReceiveFeatureFlags,
-            object: nil
-        )
-
-        let POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
-        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let POSTHOG_HOST = "https://us.i.posthog.com"
-
-        let config = PostHogConfig(projectToken: POSTHOG_PROJECT_TOKEN, host: POSTHOG_HOST)
-
-        PostHogSDK.shared.setup(config)
-
-        return true
+let subscription = PostHogSDK.shared.onFeatureFlags { loaded in
+    if loaded.errorsLoading {
+        // Loading failed, so the flags are the last known values, which can be empty.
+        // Fall back to your default experience if you need fresh values.
+        return
     }
-
-    // The "receiveFeatureFlags" method will be called when the SDK receives the feature flags from the server.
-    @objc func receiveFeatureFlags() {
-        print("receiveFeatureFlags called")
+    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+        // do something
     }
 }
+
+// Later, to stop receiving updates
+subscription.unsubscribe()
+```
+
+The callback runs on the main thread. It's called when flags load – including from [bootstrap values](/docs/feature-flags/bootstrapping) – and again each time they're reloaded, for example after `reloadFeatureFlags()`, `reset()`, or an `identify()` or `group()` call that changes the distinct ID or group. A reload doesn't have to change any values, so treat each call as "flags may have changed". If flags have already loaded when you register, it's called shortly afterwards with the current values. You can register before calling `setup()`.
+
+#### Callback parameters
+
+The callback receives a `PostHogFeatureFlagsLoaded` object with the following properties:
+
+- `flags: [String]`: The keys of the enabled feature flags.
+
+- `variants: [String: Any]`: The values of the enabled feature flags, keyed by flag key. A value is `true` for an enabled boolean flag, or the variant key for a multivariate flag.
+
+- `errorsLoading: Bool`: `true` if the latest attempt to load feature flags failed, for example because the device is offline. The flags and variants then hold the last known values, which can be empty – for example, on a fresh install with no [bootstrap values](/docs/feature-flags/bootstrapping). In that case, `isFeatureEnabled` returns `false` because the flag is unknown, not because PostHog evaluated it as disabled.
+
+On versions earlier than 3.89.0, observe the `PostHogSDK.didReceiveFeatureFlags` notification instead. Register the observer before calling `setup()`:
+
+```swift
+let observer = NotificationCenter.default.addObserver(
+    forName: PostHogSDK.didReceiveFeatureFlags,
+    object: nil,
+    queue: .main
+) { _ in
+    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+        // do something
+    }
+}
+
+// Later, to stop receiving updates
+NotificationCenter.default.removeObserver(observer)
 ```
 
 Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` method. This allows you to execute logic immediately after the flags are reloaded:
