@@ -6705,6 +6705,22 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Destinations',
+                },
+                {
+                    name: 'Where rows are written',
+                    url: '/docs/data-warehouse/destinations',
+                    icon: 'IconServer',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Monitoring your syncs',
+                    url: '/docs/data-warehouse/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Modeling',
                 },
                 {
