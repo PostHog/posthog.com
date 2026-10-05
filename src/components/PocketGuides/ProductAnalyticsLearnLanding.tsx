@@ -6,6 +6,7 @@ import { IconBook, IconPlay, IconTerminal } from '@posthog/icons'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
 import { IconClaudeCode, LogomarkCodex } from 'components/OSIcons'
+import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
 import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
@@ -23,8 +24,8 @@ Don’t change the project unless I explicitly ask. If you can’t access the pr
 const codexPromptUrl = (prompt: string): string => `codex://new?prompt=${encodeURIComponent(prompt)}`
 const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${encodeURIComponent(prompt)}`
 
-/** A home for three learning experiences; the story uses the existing book reader. */
-export default function ProductAnalyticsLearnLanding({ productName, pocketGuideUrl }: LearnLandingProps): JSX.Element {
+/** A home for three learning experiences; the story continues in embedded Learn chapters. */
+export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: LearnLandingProps): JSX.Element {
     const volume = volumeById('product-analytics')
     const counts = usePocketGuideCounts()
 
@@ -35,7 +36,7 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                 className="grid scroll-mt-20 items-center gap-4 @lg/reader-content:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] @2xl/reader-content:gap-8"
             >
                 <div>
-                    <h1 className="m-0 text-3xl font-bold @xl/reader-content:text-4xl">{productName}</h1>
+                    <h1 className={`m-0 ${PRODUCT_SURFACE_H1}`}>{productName}</h1>
                     <p className="mb-0 mt-5 text-lg leading-relaxed">
                         Learn what to track, what your data means, and how to answer questions about your product.
                     </p>
@@ -119,7 +120,7 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                             Follow their journey from shipping features to discovering how people use them. See how they
                             decide what to track and use that data to answer questions about their product.
                         </p>
-                        <OSButton asLink to={pocketGuideUrl} variant="primary" size="md">
+                        <OSButton asLink to={storyUrl} variant="primary" size="md">
                             Start reading
                         </OSButton>
                     </div>
@@ -133,7 +134,7 @@ export default function ProductAnalyticsLearnLanding({ productName, pocketGuideU
                                 volume={volume}
                                 count={counts[volume.id] ?? 0}
                                 placement="product_docs"
-                                to={pocketGuideUrl}
+                                to={storyUrl}
                             />
                         </div>
                     )}
