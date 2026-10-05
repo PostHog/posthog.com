@@ -64,7 +64,7 @@ export default function SolvedQuestions({ topicLabel, limit = 5, className = '' 
                     return (
                         <li key={question.id}>
                             <Link
-                                to={`/questions/${question.attributes.permalink}`}
+                                to={`/forum/p/${question.attributes.permalink}`}
                                 className="group block no-underline"
                                 externalNoIcon
                             >
@@ -90,10 +90,7 @@ export default function SolvedQuestions({ topicLabel, limit = 5, className = '' 
             </ul>
             {topicLabel && (
                 <div className="mt-4">
-                    <Link
-                        to={`/questions/topic/${topicLabel.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="text-sm font-medium"
-                    >
+                    <Link to={`/forum`} className="text-sm font-medium">
                         View all {topicLabel} questions →
                     </Link>
                 </div>

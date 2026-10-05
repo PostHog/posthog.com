@@ -6,10 +6,7 @@
 export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
 
 // Strapi helper types
-export type StrapiResult<T> = StrapiData<T> &
-    StrapiMeta & {
-        pinnedQuestions?: StrapiRecord<QuestionData>[]
-    }
+export type StrapiResult<T> = StrapiData<T> & StrapiMeta
 
 export type StrapiMeta = {
     meta: {
@@ -47,7 +44,6 @@ export type QuestionData = {
     numReplies: number | null
     archived: boolean
     activeAt: string
-    pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
     edits?: any[]
     // Forum posts only. A question with a forumTopic is a forum post.
@@ -90,7 +86,9 @@ export type ForumSubscription = {
     id: number
     deliveryMode: 'none' | 'dailyDigest' | 'eachPost'
     forumTopic: (Pick<ForumTopicData, 'label' | 'slug'> & { id: number }) | null
-    forumTag: (Pick<ForumTagData, 'label' | 'slug'> & { id: number }) | null
+    forumTag:
+        | (Pick<ForumTagData, 'label' | 'slug'> & { id: number; topic?: { id: number; slug: string } | null })
+        | null
 }
 
 export type AvatarData = {
@@ -116,7 +114,6 @@ export type ProfileData = {
     gravatarURL: string | null
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
-    topicSubscriptions: StrapiData<TopicData[]>
     pronouns?: string | null
     country: string | null
     amaEnabled: boolean | null

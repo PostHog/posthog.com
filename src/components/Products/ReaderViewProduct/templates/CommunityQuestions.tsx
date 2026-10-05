@@ -47,7 +47,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         (node: CommunityStatsNode) => node.topicId === forumTopicId
     )
 
-    const forumUrl = `/questions/topic/${slug}`
+    const forumUrl = `/forum`
     const approxCount = (n: number) => {
         if (n >= 1000) return `With over ${(Math.floor(n / 1000) * 1000).toLocaleString()}`
         if (n >= 100) return `With over ${(Math.floor(n / 100) * 100).toLocaleString()}`

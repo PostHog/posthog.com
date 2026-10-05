@@ -113,7 +113,6 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
                 },
             },
             topics: true,
-            pinnedTopics: true,
             slugs: true,
         },
     }
@@ -227,7 +226,6 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
-    const pinnedQuestions = data?.[0]?.pinnedQuestions
 
     return {
         hasMore,
@@ -239,6 +237,5 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         isSwitching: isLoading && !!data,
         isLoadingMore: !isLoading && isValidating && size > (data?.length ?? 0),
         refresh: () => mutate(),
-        pinnedQuestions,
     }
 }

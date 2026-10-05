@@ -10,7 +10,6 @@ import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
-import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
@@ -41,6 +40,22 @@ export type ForumFormOptions = {
     }) => React.ReactNode
 }
 
+const DEFAULT_FORUM_TOPIC_SLUG = 'questions'
+
+const COMMENT_THREAD_SECTIONS = [
+    'blog',
+    'newsletter',
+    'founders',
+    'product-engineers',
+    'data-stack',
+    'posts',
+    'customers',
+    'spotlight',
+]
+
+const isCommentThreadPage = (pageSlug?: string) =>
+    COMMENT_THREAD_SECTIONS.includes(pageSlug?.split('/').filter(Boolean)[0] ?? '')
+
 interface Topic {
     id: number
     attributes: {
@@ -55,7 +70,6 @@ type QuestionFormMainProps = {
     loading: boolean
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
-    showTopicSelector?: boolean
     disclaimer?: boolean
     autoFocus?: boolean
     isInForum?: boolean
@@ -77,7 +91,6 @@ export const Select = ({
     label?: string
     className?: string
 }) => {
-    const [topicGroups, setTopicGroups] = useState([])
     const [options, setOptions] = useState([])
 
     const handleChange = (selectedValue: any) => {
@@ -85,32 +98,15 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => {
-            setTopicGroups(topicGroups)
-
-            // Flatten topic groups into options array with section headers
-            const flatOptions = topicGroups
-                .sort(
-                    (a, b) =>
-                        topicGroupsSorted.indexOf(a?.attributes?.label) -
-                        topicGroupsSorted.indexOf(b?.attributes?.label)
-                )
-                .flatMap(({ attributes: { label: groupLabel, topics } }) => {
-                    const header = {
-                        label: groupLabel,
-                        value: null,
-                        isHeader: true,
-                    }
-                    const options =
-                        topics?.data.map((topic) => ({
-                            label: topic.attributes.label,
-                            value: topic,
-                        })) || []
-                    return [header, ...options]
-                })
-
-            setOptions(flatOptions)
-        })
+        const topicsQuery = qs.stringify(
+            { fields: ['label', 'slug'], sort: ['label:asc'], pagination: { pageSize: 100 } },
+            { encodeValuesOnly: true }
+        )
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicsQuery}`)
+            .then((res) => res.json())
+            .then(({ data }) =>
+                setOptions((data ?? []).map((topic) => ({ label: topic.attributes.label, value: topic })))
+            )
     }, [])
 
     return (
@@ -137,7 +133,6 @@ function QuestionFormMain({
     subject = true,
     loading,
     initialValues,
-    showTopicSelector,
     disclaimer = true,
     formType,
     autoFocus = true,
@@ -172,9 +167,6 @@ function QuestionFormMain({
                     }
                     if (subject && !values.subject) {
                         errors.subject = 'Required'
-                    }
-                    if (showTopicSelector && !values.topic) {
-                        errors.topic = 'Required'
                     }
                     // 0 is "Choose for me", which the server resolves when the post is saved.
                     if (forum && values.forumTopic == null) {
@@ -222,7 +214,6 @@ function QuestionFormMain({
                                     </div>
                                 )}
 
-                                {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {forum?.fields({ values, setFieldValue })}
                                 {subject && (
                                     <>
@@ -325,7 +316,6 @@ type QuestionFormProps = {
     initialView?: string
     topicID?: number
     archived?: boolean
-    showTopicSelector?: boolean
     parentName?: string
     buttonText?: React.ReactNode | string
     subject?: boolean
@@ -343,8 +333,6 @@ export const QuestionForm = ({
     reply,
     onSubmit,
     archived,
-    showTopicSelector,
-    parentName,
     subject,
     disclaimer,
     autoFocus,
@@ -420,48 +408,37 @@ export const QuestionForm = ({
         return chosenForumTopic ? { ...questionData, chosenForumTopic } : questionData
     }
 
-    const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
-        const token = await getJwt()
-        const topicQuery = qs.stringify(
-            {
-                filters: {
-                    label: {
-                        $eq: parentName,
-                    },
-                },
-            },
-            {
-                encodeValuesOnly: true,
-            }
+    const suggestedForumTopicId = async (subject: string, body: string) => {
+        const suggestion = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/suggest-forum-topic`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${await getJwt()}` },
+            body: JSON.stringify({ subject, body }),
+        })
+            .then((res) => res.json())
+            .catch(() => null)
+        return (suggestion?.data?.id as number | undefined) ?? null
+    }
+
+    const defaultForumTopicId = async () => {
+        const query = qs.stringify(
+            { filters: { slug: { $eq: DEFAULT_FORUM_TOPIC_SLUG } }, fields: ['id'] },
+            { encodeValuesOnly: true }
         )
+        const topics = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/forum-topics?${query}`).then((res) =>
+            res.json()
+        )
+        return (topics?.data?.[0]?.id as number | undefined) ?? null
+    }
 
-        const topicID =
-            topic?.id ||
-            other?.topicID ||
-            (parentName &&
-                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-                    .then((res) => res.json())
-                    .then((topic) => topic?.data && topic?.data[0]?.id)))
-
-        const data = {
-            subject,
-            body,
-            resolved: false,
-            slugs: [] as { slug: string }[],
-            permalink: '',
-            topics: {
-                // 346 is uncategorized topic
-                connect: [topicID || 346],
-            },
-        }
-
-        if (slug) {
-            data.slugs = [
-                {
-                    slug,
-                },
-            ]
-        }
+    const createQuestion = async ({ subject, body }: QuestionFormValues) => {
+        const token = await getJwt()
+        const pageSlugs = slug ? [{ slug }] : []
+        const forumTopicId = isCommentThreadPage(slug)
+            ? null
+            : (await suggestedForumTopicId(subject, body)) ?? (await defaultForumTopicId())
+        const data = forumTopicId
+            ? { subject, body, permalink: '', forumTopic: forumTopicId, slugs: pageSlugs }
+            : { subject, body, resolved: false, permalink: '', slugs: pageSlugs }
 
         const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
@@ -479,7 +456,7 @@ export const QuestionForm = ({
         if (questionData?.id) {
             posthog?.capture('squeak question created', {
                 questionId: questionData.id,
-                topicId: topicID,
+                forumTopicId,
                 slug,
                 subject,
             })
@@ -573,7 +550,6 @@ export const QuestionForm = ({
                             initialValues={formValues}
                             loading={loading}
                             onSubmit={handleMessageSubmit}
-                            showTopicSelector={showTopicSelector}
                             formType={formType}
                             autoFocus={autoFocus}
                             isInForum={isInForum}

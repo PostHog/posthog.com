@@ -13,6 +13,7 @@ The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the f
 | `/forum/t/:topic` | One topic, pinned posts first | `src/pages/forum/t/[topic].tsx` |
 | `/forum/t/:topic/tags` | A topic's tags (staff) | `src/pages/forum/t/[topic]/tags.tsx` |
 | `/forum/p/:permalink` | One post and its comments | `src/pages/forum/p/[permalink].tsx` |
+| `/forum/alerts` | Slack alerts for each topic and tag (staff) | `src/pages/forum/alerts.tsx` |
 
 The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` renders one `<Forum />` for every `/forum` path, so the sidebar and any open modal survive navigation. `t/` and `p/` are client-only routes; `vercel.json` rewrites them to their page HTML. Post permalinks live under `p/`, so no permalink can collide with `new`, `following`, or `t`.
 
@@ -32,13 +33,15 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |
 | `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
 | `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |
+| `ForumAlerts.tsx` | Staff page that sets which teams get a Slack message for each topic and tag. Saves with `PUT /api/teams/:id` |
+| `LegacyQuestionsRedirect.tsx` | Sends old `/questions` paths to the forum inside the app. `vercel.json` has the same redirects for visitors who arrive from outside |
 | `ForumMenu.tsx`, `VoteBox.tsx`, `TopicIcon.tsx` | Small shared pieces |
 
 ## Reused code
 
 - **Replies:** `Replies`, `Reply`, and the reply `QuestionForm` read `CurrentQuestionContext`. `Thread` fills it from `useQuestion`, the same as `Question.tsx`. `Reply` uses `forumTopic.solutionsEnabled` to decide if a comment can be marked as the solution.
 - **Suggestions:** the Squeak editor (`RichText`) opens a menu as you type. `@` finds people and inserts an `@name/id` mention. In forum posts, `#` also finds topics, tags, and posts, and inserts a normal Markdown link: `/forum/t/:topic`, `/forum/t/:topic?tag=:tag`, or `/forum/p/:permalink`. The menus live in `Squeak/components/Suggestions.tsx`. The feed reads `?tag=` and turns that tag filter on.
-- **New posts:** the Squeak `QuestionForm` with its `forum` option. The form keeps its sign-in step, image uploads, and spam field, and sends only the fields that the forum create route accepts.
+- **New posts:** the Squeak `QuestionForm` with its `forum` option. On docs and other pages, the same form creates a forum post with "Choose for me" (or `#questions` if Jev cannot choose) and keeps the page slug. On blog-style pages (`/blog`, `/newsletter`, and others), it creates a comment that is not in the forum. The form keeps its sign-in step, image uploads, and spam field, and sends only the fields that the forum create route accepts.
 - **Feeds:** `useQuestions` with the `sort`, `fields`, and `populate` options. The forum's conditions go inside `$and`, so the archive `$or` that `useQuestions` adds stays in place.
 - **Search:** `AlgoliaSearchResults`, filtered to `type:question` and `isForum:true`. Hits open in the forum window at `/forum/p/:permalink`.
 
