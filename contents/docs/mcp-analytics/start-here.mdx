@@ -358,7 +358,7 @@ subtitle="Recommended"
 icon="IconWrench"
 >
 
-Turn on missing-capability reports to add the `get_more_tools` virtual tool. Agents call it to report requests your server cannot satisfy. The Go SDK doesn't support it yet:
+Turn on missing-capability reports to add the `get_more_tools` virtual tool. Agents call it to report requests your server cannot satisfy:
 
 <MultiLanguage>
 
@@ -372,6 +372,12 @@ instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
 
 ```ruby file=Ruby
 PostHog::MCP.instrument(server, posthog, report_missing: true)
+```
+
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithMissingCapabilityTool(""),
+)
 ```
 
 </MultiLanguage>
