@@ -268,7 +268,7 @@ messages:
                 label: 'Już od:'
                 old: 0 zł
                 new: Gratis
-                urgency: '><larger>Ostatnia sztuka w tej cenie!!</larger>'
+                urgency: '<larger>Ostatnia sztuka w tej cenie!!</larger>'
             button: Załóż konto
             urgency:
                 label: '<bold>Pospiesz się!</bold> Rejestracje <today>dziś</today>: {companies}. <br/>Kup teraz i zgarnij 0 zł rabatu na pierwsze zamówienie.'
