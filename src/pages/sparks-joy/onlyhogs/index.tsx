@@ -81,7 +81,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                 { label: 'PostHog home', to: '/', Icon: IconHome },
                                 { label: 'Latest news', to: '/changelog', Icon: IconBell },
                                 { label: 'Join PostHog', to: 'https://app.posthog.com/signup', Icon: IconPlusSquare },
-                                { label: 'Community questions', to: '/questions', Icon: IconMessage },
+                                { label: 'Community questions', to: '/forum', Icon: IconMessage },
                             ].map(({ label, to, Icon }) => (
                                 <Link
                                     key={label}
