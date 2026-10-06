@@ -52,6 +52,8 @@ export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }
     return (
         <figure
             ref={ref}
+            // Product names and the diagram are app UI in English, so they stay left-to-right on an RTL page.
+            dir="ltr"
             className="product-context-demo @container aspect-[1000/774] paper-desk not-prose relative w-full m-0 border border-primary rounded"
             data-running={running}
         >
@@ -118,7 +120,9 @@ export default function ProductContextDemo({ nodes: nodeConfig = DEFAULT_NODES }
                 ))}
 
                 <div className="context-hub absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[31%] px-[1.5cqw] py-[3cqw] rounded-md flex flex-col items-center gap-[1cqw] text-center bg-primary border border-primary">
-                    <strong className="text-[3.6cqw] leading-[1.2]">{t('section.2b.demo.agents')}</strong>
+                    <strong dir="auto" className="text-[3.6cqw] leading-[1.2]">
+                        {t('section.2b.demo.agents')}
+                    </strong>
                     <div className="context-clients flex items-center justify-center gap-[1.8cqw] mt-[1.4cqw] [&_svg]:block [&_svg]:size-[3.4cqw]">
                         {CLIENTS.map((client) => (
                             <Tooltip
