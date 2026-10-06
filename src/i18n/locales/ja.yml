@@ -5,7 +5,7 @@
 # .claude/skills/translate and src/i18n/README.md.
 #
 # - Tone is polite and trustworthy, with PostHog's light, irreverent touch where it fits. Keep the playful gags,
-#   but never use pejorative slang. Body copy uses です/ます: "98%の顧客は PostHog を無料で使っています。"
+#   but never use pejorative slang. Body copy uses です/ます: "97%の顧客は PostHog を無料で使っています。"
 #   Avoid stiff "forced translation" phrasing: pick the wording a Japanese product site would use, even if a
 #   gag gets milder ("お問い合わせ", not "人間と話す").
 #   Headings, buttons, toggles, and menu labels use a short noun or verb form: "料金を見る", "無料で始める", "従量課金制".
@@ -206,7 +206,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 料金のことで悩ませない。それが私たちの基本的な考え方です。
-                2: 有料プロダクトはすべて従量課金制で、毎月たっぷりの無料枠があります。実際、98%の顧客は PostHog を無料で使っています。
+                2: 有料プロダクトはすべて従量課金制で、毎月たっぷりの無料枠があります。実際、97%の顧客は PostHog を無料で使っています。
                 3: 大規模に使っても、最も安い選択肢と同じ水準を目指しています。PostHog は、迷わず選べる存在であるべきだからです。「料金はお問い合わせください」と言われることもありません。
                 4: 人気プロダクトの料金例をいくつかご紹介します：
             label:

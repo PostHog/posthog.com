@@ -198,7 +198,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 'La nostra filosofia è semplice: dei prezzi non ti devi preoccupare.'
-                2: Tutti i nostri prodotti a pagamento sono a consumo, con un free tier generoso ogni mese. Infatti il 98% dei nostri clienti usa PostHog gratis.
+                2: Tutti i nostri prodotti a pagamento sono a consumo, con un free tier generoso ogni mese. Infatti il 97% dei nostri clienti usa PostHog gratis.
                 3: Puntiamo a costare quanto l'opzione più economica su larga scala, perché scegliere PostHog dev'essere un gioco da ragazzi. E non dovrai mai «prendere il numerino» per parlare con un commerciale.
                 4: 'Ecco quanto costano alcuni dei prodotti più popolari:'
             label:
