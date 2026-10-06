@@ -646,7 +646,9 @@ Lists your monthly settlements.
       "settlement_id": "3f9a2c4e-8b1d-4e6f-a7c2-5d9e0b1f4a68",
       "period_start": "2026-09-01T00:00:00Z",
       "period_end": "2026-10-01T00:00:00Z",
-      "amount_cents": 125000,
+      "amount_cents": 100000,
+      "gross_amount_cents": 125000,
+      "credit_amount_cents": 25000,
       "currency": "USD",
       "status": "paid",
       "attempt_count": 1,
@@ -663,7 +665,9 @@ Lists your monthly settlements.
 | `settlement_id` | The settlement's ID |
 | `period_start` | Start of the month the settlement pays for |
 | `period_end` | End of the month the settlement pays for |
-| `amount_cents` | The settlement's total, in cents |
+| `amount_cents` | Amount charged to your payment method after adjustment credits, in cents |
+| `gross_amount_cents` | Total of the organization invoices covered by the settlement, before adjustment credits, in cents |
+| `credit_amount_cents` | Adjustment credits applied to this settlement, in cents |
 | `currency` | Three-letter currency code |
 | `status` | `pending`, `processing`, `paid`, or `failed`. A charge that PostHog holds, for example until you add a payment method, stays `pending`. |
 | `attempt_count` | How many times PostHog has tried the charge |
@@ -674,7 +678,7 @@ Lists your monthly settlements.
 
 `GET /api/agentic/provisioning/payer/settlements/{settlement_id}`
 
-Returns a settlement with the organization invoices it pays. The response has the fields of an entry in [list settlements](#list-settlements), plus `invoices`, a list of the invoices it pays. Each invoice has the fields of an entry in [list invoices](#list-invoices), plus `charged_cents`, what the settlement charged for that invoice. In these entries, `amount_cents`, `period_start`, and `period_end` are `null` until PostHog has recorded the invoice.
+Returns a settlement with the organization invoices it pays. The response has the fields of an entry in [list settlements](#list-settlements), plus `invoices`, a list of the invoices it pays. Each invoice has the fields of an entry in [list invoices](#list-invoices), plus `charged_cents`, the invoice amount covered by this settlement before adjustment credits. The invoice allocations add up to `gross_amount_cents`. Subtract `credit_amount_cents` to get the payment amount in the settlement's `amount_cents`. In these entries, `amount_cents`, `period_start`, and `period_end` are `null` until PostHog has recorded the invoice.
 
 ### Actions only on the partner billing page
 
