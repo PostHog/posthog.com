@@ -1,18 +1,100 @@
 import type { HedgehogActorFlagOption } from '@posthog/hedgehog-mode'
 
-// The flag for a language tag with a region, for each country that has a flag in hedgehog mode.
-const TAG_FLAGS: Record<string, HedgehogActorFlagOption> = {
-    'pt-br': 'brazil',
-    'de-de': 'germany',
-    'es-es': 'spain',
-    'es-mx': 'mexico',
-    'fr-fr': 'france',
-    'it-it': 'italy',
-    'ja-jp': 'japan',
-    'ko-kr': 'south-korea',
-    'pl-pl': 'poland',
-    'tr-tr': 'turkiye',
-    'zh-cn': 'china',
+// The flag for the region of a language tag (pt-PT, de-AT, es-419), for the countries where a translated
+// language is spoken. A region that is not here gets the globe. Taiwan, Hong Kong, Macau, and other regions
+// whose flag is political are left out on purpose. Regions shared by several languages (CH, BE) are listed once.
+const REGION_FLAGS: Record<string, HedgehogActorFlagOption> = {
+    // Portuguese
+    br: 'brazil',
+    pt: 'portugal',
+    ao: 'angola',
+    mz: 'mozambique',
+    cv: 'cabo-verde',
+    gw: 'guinea-bissau',
+    st: 'sao-tome-and-principe',
+    tl: 'timor-leste',
+    // Spanish
+    es: 'spain',
+    mx: 'mexico',
+    ar: 'argentina',
+    co: 'colombia',
+    cl: 'chile',
+    pe: 'peru',
+    ve: 'venezuela',
+    ec: 'ecuador',
+    gt: 'guatemala',
+    cu: 'cuba',
+    bo: 'bolivia',
+    do: 'dominican-republic',
+    hn: 'honduras',
+    py: 'paraguay',
+    sv: 'el-salvador',
+    ni: 'nicaragua',
+    cr: 'costa-rica',
+    pa: 'panama',
+    uy: 'uruguay',
+    pr: 'puerto-rico',
+    gq: 'equatorial-guinea',
+    us: 'united-states',
+    // French
+    fr: 'france',
+    be: 'belgium',
+    ca: 'canada',
+    lu: 'luxembourg',
+    mc: 'monaco',
+    sn: 'senegal',
+    ci: 'cote-divoire',
+    cm: 'cameroon',
+    ml: 'mali',
+    bf: 'burkina-faso',
+    ne: 'niger',
+    td: 'chad',
+    gn: 'guinea',
+    bj: 'benin',
+    tg: 'togo',
+    cd: 'dr-congo',
+    cg: 'congo',
+    ga: 'gabon',
+    mg: 'madagascar',
+    ht: 'haiti',
+    rw: 'rwanda',
+    bi: 'burundi',
+    dj: 'djibouti',
+    km: 'comoros',
+    // German
+    de: 'germany',
+    at: 'austria',
+    ch: 'switzerland',
+    li: 'liechtenstein',
+    // Italian
+    it: 'italy',
+    sm: 'san-marino',
+    va: 'vatican-city',
+    // Arabic
+    sa: 'saudi-arabia',
+    ae: 'united-arab-emirates',
+    eg: 'egypt',
+    ma: 'morocco',
+    dz: 'algeria',
+    tn: 'tunisia',
+    jo: 'jordan',
+    lb: 'lebanon',
+    kw: 'kuwait',
+    qa: 'qatar',
+    bh: 'bahrain',
+    om: 'oman',
+    iq: 'iraq',
+    ly: 'libya',
+    ye: 'yemen',
+    sd: 'sudan',
+    mr: 'mauritania',
+    so: 'somalia',
+    // Japanese, Korean, Polish, Turkish, and Chinese
+    jp: 'japan',
+    kr: 'south-korea',
+    pl: 'poland',
+    tr: 'turkiye',
+    cn: 'china',
 }
 
 // The flag for a language tag without a region, for a language that one country mostly speaks.
@@ -26,22 +108,30 @@ const LANGUAGE_FLAGS: Record<string, HedgehogActorFlagOption> = {
     tr: 'turkiye',
 }
 
+const parse = (tag: string) => {
+    const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
+    // The region is two letters or three digits, after an optional script: zh-Hans-CN, es-419.
+    return { language, region: subtags.find((subtag) => /^([a-z]{2}|\d{3})$/.test(subtag)) }
+}
+
 /**
  * The flag that the hedgehog holds on the page of a locale, or undefined when the visitor isn't on their
  * own page. `tag` is the visitor's `preferredTag()` from `navigator.languages`, the same tag that the
  * middleware redirects with. So an English browser on /ja gets no hedgehog, and neither does zh-TW on /zh.
- * The region of the tag gives the country: pt-BR gets Brazil, pt-PT gets the globe, zh-CN gets China. A
- * region without a flag (de-AT, es-AR, es-419) gets the globe. A tag without a region gets the flag of
- * the language.
+ *
+ * The country comes from the first tag in `languages` that has the language of the page and a region, even
+ * when `tag` has no region: ['pt', 'pt-PT'] on /pt gets Portugal. Only that first region counts, so
+ * ['zh-TW', 'zh-CN'] on /zh gets the globe, not China. Without any region, the flag of the language is used.
  */
-export function localeFlag(locale: string, tag: string | undefined): HedgehogActorFlagOption | undefined {
-    if (!tag) return
+export function localeFlag(
+    locale: string,
+    tag: string | undefined,
+    languages: readonly string[]
+): HedgehogActorFlagOption | undefined {
+    if (!tag || parse(tag).language !== locale) return
 
-    const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
-    if (language !== locale) return
-    // The region is two letters or three digits, after an optional script: zh-Hans-CN, es-419.
-    const region = subtags.find((subtag) => /^([a-z]{2}|\d{3})$/.test(subtag))
-    if (region) return TAG_FLAGS[`${language}-${region}`] ?? 'earth'
+    const region = languages.map(parse).find((parsed) => parsed.language === locale && parsed.region)?.region
+    if (region) return REGION_FLAGS[region] ?? 'earth'
 
-    return LANGUAGE_FLAGS[language] ?? 'earth'
+    return LANGUAGE_FLAGS[locale] ?? 'earth'
 }
