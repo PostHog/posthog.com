@@ -261,7 +261,7 @@ If a private key leaks, remove it from your JWKS, then call the registration end
 
 #### Switch back to a public client
 
-Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
+Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working, unless your app has [partner billing](/docs/integrate/partner-billing#requirements): then every provisioning request fails with a 401 until your app uses `private_key_jwt` again. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
 
 #### Sign a request in Python or Node.js
 
@@ -400,6 +400,8 @@ The token is only used to prove ownership of the partner app – it isn't sent o
 You can rotate or revoke a token at any time from the same settings page.
 Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
 
+[Partner billing](/docs/integrate/partner-billing), where your app pays for the organizations it creates, requires this link. The organization you link manages your bill, so keep its token in your metadata document.
+
 > **Note:** The legacy top-level `posthog_verification_token` field is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
 
 ### Declare OAuth scopes for your app (optional)
@@ -458,8 +460,11 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `code_challenge`                  | string | Yes      | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars)                      |
 | `code_challenge_method`           | string | Yes      | Must be `"S256"`                                                                         |
 | `scopes`                          | list   | No       | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
+| `terms_accepted_at`               | string | No       | When your user accepted [PostHog's terms of service](/terms), as an ISO 8601 time        |
 | `configuration.region`            | string | No       | `"US"` (default) or `"EU"`                                                               |
 | `configuration.organization_name` | string | No       | Organization name (defaults to `"Partner (email)"`)                                      |
+
+Send `terms_accepted_at` when your signup flow has your user accept PostHog's terms of service. A time without a UTC offset is read as UTC. A time more than 5 minutes in the future fails with `invalid_request`. PostHog records the time on the new organization as reported by your app, and only when the request creates a new account.
 
 **New user response** (HTTP 200):
 
