@@ -310,11 +310,11 @@ messages:
             install: Instalar PostHog
             sdks: SDKs y frameworks
             products: Productos
-            tools: Herramientas
             analytics: Analytics
-            more_tools: Más herramientas
+            more_products: Más productos
             application_metrics: Métricas de aplicación
             distributed_tracing: Tracing distribuido
+            apps: Apps
             context: Contexto
             reference: Referencia
             new_to_posthog: Primera vez con PostHog
@@ -325,7 +325,7 @@ messages:
             privacy: Privacidad y GDPR
             how_posthog_works: Cómo funciona PostHog
             glossary: Glosario
-            explore_twig: Explorar Twig
+            playground: Playground
             pocket_guides: Guías de bolsillo
             tutorials: Tutoriales
             templates: Plantillas
