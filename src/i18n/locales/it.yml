@@ -5,17 +5,20 @@
 # .claude/skills/translate and src/i18n/README.md.
 #
 # - Write like an Italian dev talks to another dev on Slack: casual, short, and funny. Use "tu", never "Lei"
-#   or "voi" for the reader: "Chiedi tutto a PostHog", not "Chieda" or "Chiedete". Use "noi" for PostHog.
+#   or "voi" for the reader: "Chiedilo a PostHog", not "Lo chieda" or "Chiedetelo". Use "noi" for PostHog.
 # - PostHog takes no article: "PostHog raccoglie", "con PostHog", "i clienti di PostHog", not "il PostHog"
 #   or "della PostHog". If an adjective needs a gender, it is masculine.
 # - Keep the English tech words that Italian devs really say, and do not force an Italian word nobody uses:
 #   bug, feature, pull request, deploy, signup, wizard, free tier, dashboard, tool, dead click, side project,
-#   handbook, cookie banner. English loanwords do not take a plural "-s": "i bug", "le pull request",
-#   "i dead click". "Pull request", "feature", and "issue" are feminine; "bug", "tool", and "wizard" are masculine.
-# - "Ship" is "shippare" in headlines and short claims ("Shippa con PostHog", "Shippiamo veloce"), and
-#   "andare in produzione" or "rilasciare" in longer prose. Say "AI", not "IA", and "l'MCP", not "il MCP".
-# - Localize the jokes. Replace a US reference with an Italian one that lands the same way: Kim K -> Chiara
-#   Ferragni, a Bond villain -> "un cattivo di Beautiful", Hillary Clinton -> Maria De Filippi, "hop on a
+#   handbook, cookie banner, exceptions. Most English loanwords take no plural "-s": "i bug", "le pull request",
+#   "i dead click". Some keep the English plural, because Italian devs say them that way: "le issues",
+#   "i webhooks". "Pull request", "feature", and "issue" are feminine; "bug", "tool", and "wizard" are masculine.
+# - Do not use "shippare". "Ship" is "creare e lanciare" or "lanciare" in headlines and short claims
+#   ("Crea & lancia con PostHog"), and "andare in produzione" or "rilasciare" in longer prose.
+#   Say "AI", not "IA", and "l'MCP", not "il MCP". "Agents" are "agenti AI" when it is not clear from context.
+# - "Context layer" stays in English: "il context layer", like "il context warehouse".
+# - Localize the jokes. Replace a US reference with an Italian one that lands the same way: Kim K -> Laura
+#   Pausini, a Bond villain -> "un cattivo di Beautiful", Hillary Clinton -> Maria De Filippi, "hop on a
 #   quick call" -> "prendere il numerino", your parents -> "la nonna", band names -> Sanremo, real words ->
 #   Scarabeo, pushy e-commerce -> televendite. Italian memes and slang are welcome ("e poi ciao", "fighi").
 # - Use Italian quotes «così», not "così". Do not use an em dash: use a colon, a comma, or a new sentence.
@@ -27,25 +30,25 @@
 name: Italiano
 messages:
     meta:
-        title: PostHog - il layer di contesto del tuo prodotto
+        title: PostHog - il context layer per il tuo prodotto
         description: PostHog diagnostica i problemi, sistema i bug e apre pull request in automatico, senza che tu debba chiedere niente.
 
     hero:
-        H1: Il <emphasis>layer di contesto</emphasis> del tuo prodotto
+        H1: Il <emphasis>context layer</emphasis> del tuo prodotto
         body:
-            1: PostHog raccoglie e archivia <highlight>analytics, errori, replay e dati di business</highlight>, così tu e i tuoi <underline>agenti</underline> potete interrogarli e passare all'azione.
-            2: Unisciti agli oltre 500.000 team che già shippano con PostHog.
+            1: PostHog raccoglie e archivia <highlight>analytics, errori, registrazioni delle sessioni e dati aziendali</highlight>, così tu e i tuoi <underline>agenti AI</underline> potete analizzarli e passare all'azione.
+            2: Unisciti agli oltre 500.000 team che già creano e lanciano con PostHog.
         cta:
             heading: Configura <logo/> <highlight>gratis</highlight>
             body:
                 1: Il 97% degli utenti non ci paga un euro
                 2: Niente carta di credito
-                3: Il wizard installa PostHog al posto tuo
+                3: Il setup wizard installa PostHog al posto tuo
             button:
                 1: Inizia
                 2:
-                    label: Installa con l'AI
-                    body: 'Team terminale? Niente browser:'
+                    label: Installa con AI
+                    body: 'Vivi nel terminale? Niente browser richiesto:'
 
     section:
         2:
@@ -53,8 +56,8 @@ messages:
                 pause: Metti in pausa il carosello
                 resume: Riprendi il carosello
         2a:
-            toggle: Chiedi tutto a PostHog
-            heading: Chiedi tutto a PostHog
+            toggle: Chiedilo a PostHog
+            heading: Chiedilo a PostHog
             body:
                 1: PostHog è l'unico posto dove raccogliere, archiviare e interrogare i dati del tuo prodotto e della tua azienda. Analytics, replay, errori e log, collegati al volo per rispondere a qualsiasi domanda.
                 2: Aggiungi dati di terze parti da <link>oltre {count} fonti</link> per avere il quadro completo.
@@ -63,10 +66,10 @@ messages:
                 more: e altri <count/>
                 caption: '{products} finiscono dritti nei tuoi agenti.'
                 label: Gli strumenti di PostHog
-                view_all: Vedi tutti i {count} strumenti
+                view_all: Vedi tutti gli strumenti ({count})
             demo:
-                label: Demo di PostHog AI
-                description: 'Demo illustrativa: PostHog AI indaga sul calo delle conversioni a pagamento usando il traffico di Google Ads, i funnel di PostHog, i pagamenti di Stripe e le modifiche su GitHub. Trova un campo obbligatorio in più nel checkout mobile e consiglia di testare un checkout più corto. Tutti i risultati sono dati di esempio.'
+                label: PostHog AI demo
+                description: 'Demo illustrativa: PostHog AI indaga sul calo delle conversioni a pagamento usando il traffico di Google Ads, i funnel di PostHog, i pagamenti di Stripe e le modifiche su GitHub. Trova un campo obbligatorio in più nel flow di checkout mobile e consiglia di testare un checkout più snello. Tutti i risultati sono dati di esempio.'
                 prompt: Perché i signup crescono ma le conversioni a pagamento calano?
                 reply:
                     1: Ricostruisco il percorso dal clic sull'annuncio fino al cliente pagante.
@@ -88,9 +91,9 @@ messages:
                         result: È stato aggiunto un campo obbligatorio
 
         2b:
-            toggle: Dai contesto agli agenti
-            heading: Dai contesto di prodotto ai tuoi agenti
-            body: Interroga i dati di prodotto dal tuo editor, senza saltare avanti e indietro dal browser. Fai di tutto, dalle analisi al volo al lancio di nuove feature, senza nessuna UI in più.
+            toggle: Fornisci contesto agli agenti
+            heading: Dai contesto sul prodotto ai tuoi agenti
+            body: Interroga i dati di prodotto dal tuo editor, senza saltare avanti e indietro dal browser. Fai di tutto, dalle analisi al volo al lancio di nuove feature, senza nessuna UI.
             cta:
                 label: Installa l'MCP di PostHog
                 alt: Oppure usa <link>PostHog Desktop</link>
@@ -98,27 +101,27 @@ messages:
                 agents: I tuoi agenti
 
         2c:
-            toggle: Shippa con PostHog
-            heading: Shippa con PostHog
+            toggle: Crea & lancia con PostHog
+            heading: Crea & lancia con PostHog
             body: La tua Inbox raggruppa le scoperte correlate in report già studiati, ordinati per priorità. Rivedi i miglioramenti e le pull request proposte, poi decidi tu cosa va in produzione.
             button: Inizia gratis
             signals:
                 heading: 'Il Self-driving pesca i segnali da:'
                 1:
-                    body: Eccezioni e stack trace raggruppati in issue
+                    body: Exceptions e stack trace raggruppati in issues
                 2:
-                    body: Dead click, uscite lampo, blocchi lunghi
+                    body: Dead click, uscite lampo, rallentamenti prolungati
                 3:
                     title: Supporto
                     body: Ticket e conversazioni con i tuoi utenti
                 4:
                     title: Tool esterni
-                    body: Issue di Zendesk, Linear e GitHub
+                    body: Issues di Zendesk, Linear e GitHub
             demo:
                 description: 'Inbox self-driving illustrativa. Quattro report di esempio arrivano uno alla volta, dal più recente: una richiesta di fattura da GitHub, uno scout sul tracking delle conversioni con una pull request in bozza, un problema al checkout emerso dai session replay e un errore di login ad alta priorità con una pull request pronta per la review.'
 
         3:
-            heading: Riprova sociale
+            heading: Chi ci ha scelto
             body: Sì, ci usano davvero. No, non è il solito dev a caso che ci ha provato 2 anni fa e poi ciao.
             button: Vedi i clienti
             shuffle: Mescola
@@ -155,7 +158,7 @@ messages:
                     col1: Valide a Scarabeo
                     col2: Non valide a Scarabeo
                 american:
-                    col1: Fondate in Ammerica
+                    col1: Fondate negli USA
                     col2: Fondate altrove
                 pokemon:
                     col1: Potrebbe essere un Pokémon
@@ -171,17 +174,17 @@ messages:
                     col2: Usano PostHog pure loro
 
         4:
-            heading: Tutti i tuoi dati <highlight>fanno squadra</highlight>
+            heading: Tutti i tuoi dati fanno <highlight>squadra</highlight>
             list:
-                heading: 'Di serie, il context warehouse <highlight>arriva</highlight> con:'
+                heading: 'Il context warehouse è disponibile con tutto questo già <highlight>integrato</highlight>:'
                 1: Un data warehouse <tooltip/>
                 2: Oltre 120 fonti/destinazioni
                 3: Editor SQL + BI + visualizzazione dati
                 4: Feed attività utenti (CDP-lite)
-                5: API, webhook
+                5: API, webhooks
             # Markdown. Keep the formatting.
             body:
-                1: Che tu stia analizzando l'uso dei clienti o guidando un'AI, dovresti lavorare con il contesto *completo*.
+                1: Che tu stia analizzando l'uso dei clienti o gestendo un AI agent, dovresti lavorare con il quadro *completo*.
                 2: 'Metti tutto nel context warehouse di PostHog, così tu, i tuoi agenti e le tue dashboard potete interrogarlo direttamente. Dentro ci sono:'
                 list:
                     1: Dati da oltre 120 fonti esterne, come Stripe, Postgres e HubSpot
@@ -195,7 +198,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 'La nostra filosofia è semplice: dei prezzi non ti devi preoccupare.'
-                2: Tutti i nostri prodotti a pagamento sono a consumo, con un free tier generoso ogni mese. Anzi, il 98% dei nostri clienti usa PostHog gratis.
+                2: Tutti i nostri prodotti a pagamento sono a consumo, con un free tier generoso ogni mese. Infatti il 98% dei nostri clienti usa PostHog gratis.
                 3: Puntiamo a costare quanto l'opzione più economica su larga scala, perché scegliere PostHog dev'essere un gioco da ragazzi. E non dovrai mai «prendere il numerino» per parlare con un commerciale.
                 4: 'Ecco quanto costano alcuni dei prodotti più popolari:'
             label:
@@ -224,8 +227,8 @@ messages:
             list:
                 # Markdown. Keep the links.
                 1: '**Trasparenza.** Puoi leggere il nostro [handbook](/handbook), il nostro [manuale di vendita](/handbook/growth/sales/overview) e perfino la nostra [strategia](/handbook/why-does-posthog-exist).'
-                2: '**Shippiamo veloce.** Guarda il nostro [changelog](/changelog).'
-                3: <bold>Supporto</bold> <emphasis>davvero</emphasis><bold> tecnico.</bold> Nel nostro <team>team di supporto</team> vengono tutti dall'ingegneria.
+                2: '**Dal codice al lancio in maniera veloce.** Guarda il nostro [changelog](/changelog).'
+                3: <bold>Supporto</bold> <emphasis>davvero</emphasis><bold> tecnico.</bold> Nel nostro <team>team di supporto</team> hanno tutti un background d'ingegneria.
             button: Scopri chi siamo
 
         7:
@@ -239,13 +242,13 @@ messages:
 
         8:
             heading: CTA spudorata
-            body: Se niente finora ti ha convinto a usare PostHog, magari ci riescono queste classiche tecniche da televendita.
+            body: Se niente finora ti ha convinto a usare PostHog, magari ci potrebbero riuscire queste classiche tecniche da televendita.
             box:
                 badge: Ecologico
                 subtitle: Download digitale*
             sticker:
                 1: Su G2 dicono che siamo forti
-                2: <small>Non</small> approvato<br/>da Chiara Ferragni
+                2: <small>Non</small> approvato<br/>da Laura Pausini
             cart:
                 label: 3 persone <small>(avrebbero)</small> aggiunto PostHog al carrello*
                 footnote: '*se questo fosse un carrello vero'
@@ -301,11 +304,11 @@ messages:
             install: Installa PostHog
             sdks: SDK e framework
             products: Prodotti
-            tools: Strumenti
             analytics: Analytics
-            more_tools: Altri strumenti
-            application_metrics: Metriche applicative
+            more_products: Altri prodotti
+            application_metrics: Metriche
             distributed_tracing: Tracing distribuito
+            apps: App
             context: Contesto
             reference: Riferimenti
             new_to_posthog: Nuovo su PostHog
@@ -316,7 +319,7 @@ messages:
             privacy: Privacy e GDPR
             how_posthog_works: Come funziona PostHog
             glossary: Glossario
-            explore_twig: Esplora Twig
+            playground: Playground
             pocket_guides: Guide tascabili
             tutorials: Tutorial
             templates: Template
