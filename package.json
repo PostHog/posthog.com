@@ -136,6 +136,7 @@
         "gatsby-source-filesystem": "^4.20.0",
         "gatsby-source-git": "^1.1.0",
         "gatsby-transformer-json": "^4.20.0",
+        "gemoji": "^8.1.0",
         "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",
         "glob": "^10.3.10",
