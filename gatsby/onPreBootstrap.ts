@@ -97,6 +97,8 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
         }
         return event
     },
+    // Captures $mcp_tool_call for each WebMCP tool call, see components/WebMCP.
+    capture_webmcp: true,
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
