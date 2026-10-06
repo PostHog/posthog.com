@@ -1,19 +1,14 @@
 ## Q3 2026 goals
 
-### 🕸️ Workload containment: cash in on Cilium
-> Cilium is rolled out. Finish the networking RFC.
+### 💸 FinOps attribution + infra efficiency
 
+### 🕸️ Workload containment: cash in on Cilium
 Based on RFC: https://github.com/PostHog/requests-for-comments-internal/pull/1172
 
 ### 🚪 Untangle DNS, ingress and LBs
-> Everything runs on one ingress, one LB and one control plane. Contour is down to two maintainers and our fork is painful to upgrade. DNS is undocumented and not fully in code. Split ingress into smaller, per-use-case chunks we can reason about, optimize and upgrade safely. This is also the prerequisite for ever splitting clusters.
-
-### 💸 FinOps attribution + infra efficiency
-> The vendor data is in PostHog, but we can't attribute cost to applications, shared infra or networking. Commitments on RDS, ElastiCache and EC2 are uncovered. Tag our own stuff first as the leading example, automate governance, and take the cheap wins on the bill.
 
 ## Smaller goals
 
 ### ☸️ Refresh the EKS module
-> The old EKS Terraform module holds us back from current EKS features. Import the running clusters into the new module so new clusters are easy to create.
 
 Full list and details of all goals: https://github.com/PostHog/posthog-cloud-infra/issues/10708
