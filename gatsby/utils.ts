@@ -47,5 +47,6 @@ export const getPublicID = (image: string) => {
 // An exception thrown by an extension-injected script reaches autocapture through window.onerror
 // with a single "global code" frame, so every page path fingerprints as a new issue. posthog.com
 // reads none of these globals. Match the injected global, because the message around it differs
-// per browser.
-export const EXTENSION_INJECTED_EXCEPTION = /window\.ethereum|__firefox__|sendExtensionMessage\(/
+// per browser. The Android in-app browser bridge throws from its beforeunload listener, so the stack
+// keeps the Gatsby navigation frame that started the unload and each call site fingerprints apart.
+export const EXTENSION_INJECTED_EXCEPTION = /window\.ethereum|__firefox__|sendExtensionMessage\(|Error invoking postMessage: Java exception was raised/

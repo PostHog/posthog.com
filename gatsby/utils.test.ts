@@ -61,6 +61,7 @@ describe('EXTENSION_INJECTED_EXCEPTION', () => {
             "undefined is not an object (evaluating 'window.__firefox__.reader')",
             "Can't find variable: __firefox__",
             'undefined is not an object (evaluating \'(yield this.sendExtensionMessage("getUrlAutofillTargetingRules")).result\')',
+            'Error invoking postMessage: Java exception was raised during method invocation',
         ]) {
             assert.ok(EXTENSION_INJECTED_EXCEPTION.test(message), message)
         }
@@ -72,6 +73,7 @@ describe('EXTENSION_INJECTED_EXCEPTION', () => {
             "Cannot read properties of null (reading 'style')",
             'page resources for /docs/privacy/browser-extension not found. Not rendering React',
             'Script error.',
+            "Failed to execute 'postMessage' on 'Window': Invalid target origin",
         ]) {
             assert.equal(EXTENSION_INJECTED_EXCEPTION.test(message), false, message)
         }
