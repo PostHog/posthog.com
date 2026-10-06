@@ -9,10 +9,10 @@ availability:
 sourceId: Checkly
 ---
 
-import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
-import SyncModes from "../\_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
@@ -42,7 +42,7 @@ Most Checkly tables use full refresh. `check_results` supports incremental sync 
 
 ## Check results
 
-The `check_results` table syncs individual check runs — including final results and retry attempts — for all currently listed checks. A few things to note:
+The `check_results` table syncs individual check runs – including final results and retry attempts – for all currently listed checks. A few things to note:
 
 - **30-day history** – Checkly retains results for up to 30 days, so each sync covers that window at most.
 - **Incremental sync** – when enabled, subsequent syncs fetch only results newer than the last watermark, reducing the amount of data transferred.
