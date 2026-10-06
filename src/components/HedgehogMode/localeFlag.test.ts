@@ -43,6 +43,7 @@ test('takes the country from any region where the language is spoken', () => {
     assert.equal(flag('it', ['it-CH']), 'switzerland')
     assert.equal(flag('fr', ['fr-CA']), 'canada')
     assert.equal(flag('fr', ['fr-MA']), 'morocco')
+    assert.equal(flag('tr', ['tr-XK']), 'kosovo')
 })
 
 test('takes the region from a later tag when the preferred tag has none', () => {
