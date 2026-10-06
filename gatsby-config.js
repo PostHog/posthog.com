@@ -73,6 +73,7 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',

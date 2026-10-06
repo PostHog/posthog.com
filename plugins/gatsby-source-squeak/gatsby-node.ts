@@ -12,6 +12,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
 ) => {
     const { apiHost } = pluginOptions
     const { createNode } = actions
+    const today = new Date().toISOString().slice(0, 10)
 
     // Fetch all profiles (active team members + any author with a profile_id)
     let page = 1
@@ -29,7 +30,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                                 },
                                 {
                                     startDate: {
-                                        $lte: new Date(),
+                                        $lte: today,
                                     },
                                 },
                             ],
@@ -181,7 +182,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                             },
                             {
                                 startDate: {
-                                    $lte: new Date(),
+                                    $lte: today,
                                 },
                             },
                         ],
@@ -198,7 +199,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                             },
                             {
                                 startDate: {
-                                    $lte: new Date(),
+                                    $lte: today,
                                 },
                             },
                         ],
