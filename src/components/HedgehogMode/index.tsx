@@ -72,7 +72,8 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
     const localeFlagRef = useRef(localeFlag)
     localeFlagRef.current = localeFlag
     useEffect(() => {
-        const flag = getLocaleFlag(locale, preferredTag(navigator.languages ?? [navigator.language]))
+        const languages = navigator.languages ?? [navigator.language]
+        const flag = getLocaleFlag(locale, preferredTag(languages), languages)
         const game = gameRef.current
         const hedgehog = game?.getPlayableHedgehog()
         // Leaving the page takes away the hedgehog that it turned on, so the hedgehog waves goodbye and

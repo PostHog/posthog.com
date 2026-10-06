@@ -5,7 +5,7 @@ import { preferredTag } from '../../i18n/preferredLocale.ts'
 import { localeFlag } from './localeFlag.ts'
 
 // What the component does with `navigator.languages`.
-const flag = (locale: string, languages: string[]) => localeFlag(locale, preferredTag(languages))
+const flag = (locale: string, languages: string[]) => localeFlag(locale, preferredTag(languages), languages)
 
 test('has no flag on an English page', () => {
     assert.equal(flag('en', ['pt-BR']), undefined)
@@ -25,7 +25,6 @@ test('has no flag when the browser does not pick the page', () => {
 
 test('skips languages without a translation, as the middleware does', () => {
     assert.equal(flag('de', ['nl-NL', 'de-DE']), 'germany')
-    assert.equal(flag('zh', ['zh-TW', 'zh-CN']), 'china')
 })
 
 test('takes the country from the region of the visitor', () => {
@@ -37,12 +36,35 @@ test('takes the country from the region of the visitor', () => {
     assert.equal(flag('it', ['it-IT']), 'italy')
 })
 
+test('takes the country from any region where the language is spoken', () => {
+    assert.equal(flag('pt', ['pt-PT']), 'portugal')
+    assert.equal(flag('es', ['es-AR']), 'argentina')
+    assert.equal(flag('de', ['de-AT']), 'austria')
+    assert.equal(flag('it', ['it-CH']), 'switzerland')
+    assert.equal(flag('fr', ['fr-CA']), 'canada')
+    assert.equal(flag('fr', ['fr-MA']), 'morocco')
+})
+
+test('takes the region from a later tag when the preferred tag has none', () => {
+    assert.equal(flag('pt', ['pt', 'pt-PT']), 'portugal')
+    assert.equal(flag('de', ['de', 'en-US', 'de-CH']), 'switzerland')
+    // Only tags in the language of the page count.
+    assert.equal(flag('pt', ['pt', 'es-MX']), 'earth')
+})
+
 test('gives the globe to a region without a flag', () => {
-    assert.equal(flag('pt', ['pt-PT']), 'earth')
-    assert.equal(flag('es', ['es-AR']), 'earth')
     assert.equal(flag('es', ['es-419']), 'earth')
-    assert.equal(flag('de', ['de-AT']), 'earth')
-    assert.equal(flag('it', ['it-CH']), 'earth')
+    assert.equal(flag('ko', ['ko-KP']), 'earth')
+})
+
+test('shows the flag of China only for mainland China', () => {
+    assert.equal(flag('zh', ['zh-CN']), 'china')
+    assert.equal(flag('zh', ['zh-Hans-CN']), 'china')
+    assert.equal(flag('zh', ['zh-SG']), 'earth')
+    assert.equal(flag('zh', ['zh-Hans-HK']), 'earth')
+    // The first Chinese region decides, so a visitor who ranks zh-TW first never gets China.
+    assert.equal(flag('zh', ['zh-TW', 'zh-CN']), 'earth')
+    assert.equal(flag('zh', ['zh', 'zh-HK']), 'earth')
 })
 
 test('uses the first tag that picks the page', () => {
