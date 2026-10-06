@@ -16,37 +16,41 @@
 # - Keep the English tech words that Korean devs say, in Hangul: 풀 리퀘스트, 버그, 쿼리, 퍼널, 컨텍스트, 에이전트,
 #   대시보드, 웹훅, 스택 트레이스, 데드 클릭. Keep acronyms in Latin letters (SDK, API, MCP, CTA). Keep product and
 #   brand names in English (Session Replay, Inbox, context warehouse). Do not coin a word nobody uses.
-# - Numbers: use 만 for large round numbers ("50만 개", "100만 건"), commas for the rest ("5,000개"), and a
-#   period for decimals. Real prices stay in US dollars with the sign first: "이벤트당 $0.00005". Joke amounts
-#   use won: "0원 할인".
+# - Numbers: use 만 for large round numbers ("50만개", "100만건"), commas for the rest ("5,000개"), and a
+#   period for decimals. Attach the counter to the number: "100만개", not "100만 개". Real prices stay in US
+#   dollars with the sign first: "이벤트당 $0.00005". Joke amounts use won, and zero is "빵원": "빵원 할인".
 # - Typography: no em dash. Use “ ” for quotes, no space before a parenthesis ("사용자 활동 피드(CDP-lite)"),
-#   and standard 띄어쓰기 ("100만 개", "사용할 수 있어요").
-# - Humor is gentle and understated. No slang, internet memes, or 반말. Localize a reference to one that a
-#   Korean reader knows: Kim K -> 유재석, a Bond villain -> 아침 드라마 악역, "hop on a quick call" -> "견적 상담",
-#   explaining to your parents -> explaining at 명절, a Rickroll -> a Rick Astley link.
+#   and standard 띄어쓰기 ("사용할 수 있어요", "써야 하는", "그 외").
+# - Humor is gentle and understated. Light, widely known slang is fine in jokes (유느님, 강추, 빵원), but no 반말
+#   or crude internet memes. Localize a reference to one that a Korean reader knows: Kim K -> 유느님 (유재석),
+#   a Bond villain -> 아침 드라마 악역, "hop on a quick call" -> "견적 상담", explaining to your parents ->
+#   explaining at 명절, a Rickroll -> "낚시 링크" (Korean readers do not know the Rick Astley meme).
+# - PostHog's own customers are 고객님 in prose: "고객님들의 98%", "첫 고객님!". Compound nouns and menu labels
+#   keep 고객 ("고객 사례", "고객 지원"), and so do the customers of the reader's product in the demos.
+# - Mark plural people with 들 when the English is plural: "팀들이".
 # - Keep it short. Particles add length, so cut pronouns and "~하는 것" constructions.
 name: 한국어
 messages:
     meta:
         title: PostHog - 제품의 컨텍스트 레이어
-        description: PostHog는 따로 요청하지 않아도 문제를 자동으로 진단하고, 버그를 고치고, 풀 리퀘스트까지 만들어요.
+        description: PostHog는 따로 요청하지 않아도 문제를 자동으로 진단하고, 버그를 고치고, 풀 리퀘스트까지 만들어 줘요.
 
     hero:
         H1: 제품의 <emphasis>컨텍스트 레이어</emphasis>
         body:
-            1: PostHog는 <highlight>분석 데이터, 오류, 리플레이, 비즈니스 데이터</highlight>를 모아서 저장해요. 여러분도, <underline>에이전트</underline>도 바로 쿼리하고 활용할 수 있어요.
-            2: 이미 50만 개가 넘는 팀이 PostHog로 제품을 만들고 있어요.
+            1: PostHog는 <highlight>분석 데이터, 오류, 리플레이, 비즈니스 데이터</highlight>를 모아서 저장해요. 여러분과 <underline>에이전트</underline>도 바로 쿼리하고 활용할 수 있어요.
+            2: 이미 50만개가 넘는 팀들이 PostHog로 제품을 만들고 있어요.
         cta:
             heading: <logo/> <highlight>무료로</highlight> 설정하기
             body:
-                1: 사용자 97%는 무료로 써요
+                1: 사용자의 97%는 무료로 써요
                 2: 신용카드 필요 없음
                 3: 설치 마법사가 PostHog를 대신 설치해 드려요
             button:
                 1: 시작하기
                 2:
                     label: AI로 설치
-                    body: '터미널이 더 편하세요? 브라우저 없이 바로:'
+                    body: '터미널이 더 편하세요? 브라우저 없이 바로 설치할 수 있어요:'
 
     section:
         2:
@@ -58,16 +62,16 @@ messages:
             heading: PostHog에 무엇이든 물어보기
             body:
                 1: PostHog 한곳에서 제품 데이터와 회사 데이터를 수집하고, 저장하고, 쿼리할 수 있어요. 분석, 리플레이, 오류, 로그를 그때그때 엮어서 어떤 질문에든 답해요.
-                2: <link>{count}개 이상의 소스</link>에서 외부 데이터를 가져와서 전체 그림을 더 정확하게 볼 수 있어요.
+                2: <link>{count}개 이상의 소스</link>에서 외부 데이터를 가져와서 전체적인 그림을 더 정확하게 볼 수 있어요.
             button: 무료로 시작하기
             products:
-                more: 외 <count/>개
+                more: 그 외 <count/>개
                 caption: '{products} 데이터가 에이전트로 흘러가요.'
                 label: PostHog 도구
                 view_all: 도구 {count}개 모두 보기
             demo:
                 label: PostHog AI 데모
-                description: '예시 데모: PostHog AI가 Google Ads 트래픽, PostHog 퍼널, Stripe 결제, GitHub 변경 사항을 살펴보며 유료 전환이 줄어든 원인을 조사해요. 모바일 결제 화면에 새로 생긴 필수 입력 항목을 찾아내고, 결제 과정을 더 짧게 줄여서 테스트해 보라고 권해요. 모든 결과는 샘플 데이터예요.'
+                description: '예시: PostHog AI가 Google Ads 트래픽, PostHog 퍼널, Stripe 결제, GitHub 변경 사항을 살펴보며 유료 전환이 줄어든 원인을 조사해요. 모바일 결제 화면에 새로 생긴 필수 입력 항목을 찾아내고, 결제 과정을 더 짧게 줄여서 테스트해 보라고 권해요. 모든 결과는 샘플 데이터예요.'
                 prompt: 가입은 느는데 유료 전환은 왜 줄고 있을까요?
                 reply:
                     1: 광고 클릭부터 결제 고객이 되기까지의 경로를 따라가 볼게요.
@@ -91,7 +95,7 @@ messages:
         2b:
             toggle: 에이전트에게 제품 컨텍스트 제공
             heading: 에이전트에게 제품 컨텍스트 제공
-            body: 브라우저로 넘어갈 필요 없이 에디터에서 바로 제품 데이터를 쿼리하세요. 일회성 분석부터 새 기능 출시까지, 새 UI 없이 전부 할 수 있어요.
+            body: 브라우저로 넘어갈 필요 없이 에디터에서 바로 제품 데이터를 쿼리하세요. 일회성 분석부터 새 기능 출시까지 새 UI 없이 전부 할 수 있어요.
             cta:
                 label: PostHog MCP 설치
                 alt: 또는 <link>PostHog Desktop</link> 사용하기
@@ -120,11 +124,11 @@ messages:
 
         3:
             heading: 사회적 증거
-            body: 네, 정말 쓰고 있어요. 2년 전에 한 번 써 보고 만 엔지니어 한 명 얘기가 아니에요.
+            body: 네, 정말 쓰고 있어요. 2년 전에 한 번 써 보고 만 엔지니어 한 명 이야기가 아니에요.
             button: 고객 보기
             shuffle: 회사 섞기
             logo:
-                first_customer: PostHog의 첫 고객!
+                first_customer: PostHog의 첫 고객님!
                 story: 고객 사례 읽기
             breakdown:
                 colorful:
@@ -195,37 +199,37 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 저희 철학은 간단해요. 요금 걱정은 하지 않으셔도 돼야 한다는 거예요.
-                2: 모든 유료 제품은 쓴 만큼만 내는 방식이고, 매달 넉넉한 무료 사용량이 있어요. 실제로 고객의 98%는 PostHog를 무료로 써요.
+                2: 모든 유료 제품은 쓴 만큼만 내는 방식이고, 매달 넉넉한 무료 사용량이 있어요. 실제로 고객님들의 98%는 PostHog를 무료로 써요.
                 3: 규모가 커져도 가장 저렴한 선택지와 같은 가격을 목표로 해요. PostHog는 고민할 필요 없는 선택이어야 하니까요. 가격을 알아보려고 “견적 상담”을 신청하실 일도 없어요.
                 4: '많이 쓰는 제품의 요금 예시예요:'
             label:
                 freetier: 무료 사용량
                 pricing: 요금
                 product: 제품
-                pricing_table: 요금(많이 쓸수록 저렴)
+                pricing_table: 요금(많이 쓸수록 저렴함)
             product:
                 1:
-                    freetier: 이벤트 월 100만 개
+                    freetier: 이벤트 월 100만개
                     pricing: 이벤트당 $0.00005
                 2:
                     freetier: 녹화 월 5,000개
                     pricing: 녹화당 $0.005
                 3:
-                    freetier: 요청 월 100만 건
+                    freetier: 요청 월 100만건
                     pricing: 요청당 $0.0001
                 4:
-                    freetier: 행 월 100만 개
+                    freetier: 행 월 100만개
                     pricing: 행당 $0.000015
             button: 요금 보기
 
         6:
-            heading: PostHog를 쓰는 이유
+            heading: PostHog를 써야 하는 이유
             body: 'PostHog는 여러모로 다른 회사들과 달라요:'
             list:
                 # Markdown. Keep the links.
                 1: '**투명성.** [회사 핸드북](/handbook), [영업 매뉴얼](/handbook/growth/sales/overview), [회사 전략](/handbook/why-does-posthog-exist)까지 누구나 읽을 수 있어요.'
                 2: '**빠른 출시.** [변경 로그](/changelog)를 확인해 보세요.'
-                3: <emphasis>진짜</emphasis><bold> 기술 지원.</bold> <team>지원팀</team>은 모두 엔지니어 출신이에요.
+                3: <emphasis>진짜</emphasis><bold> 기술 지원.</bold> <team>지원팀들</team>은 모두 엔지니어 출신이에요.
             button: PostHog 더 알아보기
 
         7:
@@ -245,11 +249,11 @@ messages:
                 subtitle: 디지털 다운로드*
             sticker:
                 1: G2 사용자들이 저희를 좋아해요
-                2: 유재석<br/>추천 <small>아님</small>
+                2: 유느님<br/>강추 <small>아님</small>
             cart:
-                label: 3명이 PostHog를 장바구니에 담았<small>(을 거예요)</small>*
+                label: 3명이 PostHog를 장바구니에 담았<small>을 거예요</small>*
                 footnote: '*진짜 장바구니였다면요'
-            footnote: '*PostHog는 웹 제품이라 CD로 설치할 수 없어요.<br/>한번은 <emphasis>정말로</emphasis> 몇몇 고객에게 플로피 디스크를 보냈는데, 안에는 릭 애스틀리 노래 링크만 들어 있었어요.'
+            footnote: '*PostHog는 웹 제품이라 CD로 설치할 수 없어요.<br/>한번은 <emphasis>정말로</emphasis> 몇몇 고객님께 플로피 디스크를 보냈었는데, 안에는 낚시 링크만 들어 있었어요.'
             cloud:
                 heading: 클라우드 선택
                 option:
@@ -257,13 +261,13 @@ messages:
                     2: 유럽(프랑크푸르트)
             price:
                 label: '시작 가격:'
-                old: 0원
+                old: 빵원
                 new: 무료
                 urgency: 이 가격에 ><larger>1개 남음!!</larger>
             button: 시작하기
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
-                label: '<bold>서두르세요:</bold> <today>오늘</today>만 {companies}개 기업이 가입했어요. <br/>지금 바로 첫 주문 0원 할인을 받으세요.'
+                label: '<bold>서두르세요:</bold> <today>오늘</today>만 {companies}개 기업이 가입했어요. <br/>지금 바로 첫 주문 빵원 할인을 받으세요.'
                 fallback: 수백
 
     cookie:
@@ -301,11 +305,11 @@ messages:
             install: PostHog 설치
             sdks: SDK와 프레임워크
             products: 제품
-            tools: 도구
             analytics: 분석
-            more_tools: 기타 도구
+            more_products: 더 많은 제품
             application_metrics: 애플리케이션 메트릭
             distributed_tracing: 분산 트레이싱
+            apps: 앱
             context: 컨텍스트
             reference: 레퍼런스
             new_to_posthog: PostHog 입문
@@ -316,7 +320,7 @@ messages:
             privacy: 개인정보 보호와 GDPR
             how_posthog_works: PostHog 작동 방식
             glossary: 용어집
-            explore_twig: Twig 살펴보기
+            playground: Playground
             pocket_guides: 포켓 가이드
             tutorials: 튜토리얼
             templates: 템플릿
@@ -331,7 +335,7 @@ messages:
             events: 행사
             students: 학생
             incubator: 인큐베이터
-            cool_tech_jobs: 멋진 테크 채용
+            cool_tech_jobs: 쿨한 기술직 채용
             places: 장소
         company:
             about: 소개
@@ -357,7 +361,7 @@ messages:
             subprocessors: 하위 처리자
             enterprise: 엔터프라이즈
         account:
-            go_to: 바로가기...
+            go_to: 바로가기
             posthog_app: PostHog 앱
             community: 커뮤니티
             forums: 포럼
@@ -372,7 +376,7 @@ messages:
         pricing: 요금
         docs: 문서
         demo: 데모
-        talk_to_a_human: 사람과 대화하기
+        talk_to_a_human: 고객센터와 대화하기
         about_us: 회사 소개
         changelog: 변경 로그
         company_handbook: 회사 핸드북
