@@ -33,14 +33,15 @@ There are different kinds of queries, but the kind this applies to best is a tim
 
 Here's how precomputation works. Suppose you start your experiment. It's day 1 and you load your first results. Instead of throwing away the data that query computed, we persist it in the database. Then on day 2, you ask for results for the entire time range (now 2 days). Instead of querying day 1 + day 2, we retrieve the stored data for day 1, query only day 2, and combine the two. This avoids double work: each query only scans the latest increment.
 
-In practice, this is more involved than the example above. Because in analytics we have events arriving late (perhaps from a mobile app that was offline for some time), we need to drop cached data after some time and re-query, to make sure our results are up to date. The refresh schedule backs off with age: the older the bucket, the less likely it is that late events will still arrive for it, so it can stay cached for longer. The table below shows roughly how we do it.
+![The direct query path compared with the precomputed path](/images/experiment-queries/direct-vs-precomputed.png)
 
-| Bucket               | Recomputed       |
-| -------------------- | ---------------- |
-| Today                | Every 15 minutes |
-| Yesterday            | Every hour       |
-| Two to four days old | Every 18 hours   |
-| Older                | Frozen           |
+<Caption>The direct path computes the whole time range on every refresh. The precomputed path reuses cached day buckets, scans only the newest increment, and combines everything at read time.</Caption>
+
+In practice, this is more involved than the example above. Because in analytics we have events arriving late (perhaps from a mobile app that was offline for some time), we need to drop cached data after some time and re-query, to make sure our results are up to date. The refresh schedule backs off with age: the older the bucket, the less likely it is that late events will still arrive for it, so it can stay cached for longer. Roughly, it works like this:
+
+![Cache refresh schedule by bucket age](/images/experiment-queries/bucket-lifecycle.png)
+
+<Caption>The older the bucket, the longer it can stay cached: late events get rarer with age, so refreshes back off until the bucket freezes.</Caption>
 
 There's a tradeoff here: events that arrive after their bucket is frozen are missing until the data expires and is rebuilt. For experiments this is acceptable. You aren't checking results every single minute; you let the experiment run for a couple of days or weeks and then conclude, so tiny inaccuracies are acceptable. With some production testing, we found a good balance between not doing too much work and keeping results accurate and consistent. We have production checks that monitor consistency here – more on that below.
 
