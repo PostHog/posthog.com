@@ -262,7 +262,7 @@ messages:
                 label: 'A partire da:'
                 old: 0 €
                 new: Gratis
-                urgency: '><larger>Ultimo pezzo a questo prezzo!!</larger>'
+                urgency: '<larger>Ultimo pezzo a questo prezzo!!</larger>'
             button: Inizia
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
