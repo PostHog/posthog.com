@@ -270,7 +270,7 @@ messages:
                 label: 特別価格：
                 old: 0円
                 new: 無料
-                urgency: '><larger>この価格で残り1点！！</larger>'
+                urgency: '<larger>この価格で残り1点！！</larger>'
             button: 今すぐ始める
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
