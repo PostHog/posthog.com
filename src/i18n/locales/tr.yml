@@ -302,11 +302,11 @@ messages:
             install: PostHog'u kur
             sdks: SDK'lar ve framework'ler
             products: Ürünler
-            tools: Araçlar
             analytics: Analitik
-            more_tools: Diğer araçlar
+            more_products: Diğer ürünler
             application_metrics: Uygulama metrikleri
             distributed_tracing: Distributed tracing
+            apps: Uygulamalar
             context: Bağlam
             reference: Referans
             new_to_posthog: PostHog'a yeni başlayanlar
@@ -317,7 +317,7 @@ messages:
             privacy: Gizlilik ve GDPR
             how_posthog_works: PostHog nasıl çalışır?
             glossary: Sözlük
-            explore_twig: Twig'i keşfet
+            playground: Playground
             pocket_guides: Cep rehberleri
             tutorials: Eğitimler
             templates: Şablonlar
