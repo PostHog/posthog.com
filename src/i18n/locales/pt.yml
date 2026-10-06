@@ -255,7 +255,7 @@ messages:
                 label: 'A partir de:'
                 old: R$ 0
                 new: Grátis
-                urgency: '><larger>Últimas unidades por esse preço!!</larger>'
+                urgency: '<larger>Últimas unidades por esse preço!!</larger>'
             button: Começar
             urgency:
                 label: '<bold>Corre que dá tempo:</bold> {companies} empresas se cadastraram <today>hoje</today>. <br/>Garanta já R$ 0 de desconto na sua primeira compra.'

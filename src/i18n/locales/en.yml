@@ -252,7 +252,7 @@ messages:
                 label: 'Starts at:'
                 old: $0
                 new: Free
-                urgency: '><larger>1 left at this price!!</larger>'
+                urgency: '<larger>1 left at this price!!</larger>'
             button: Get started
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
