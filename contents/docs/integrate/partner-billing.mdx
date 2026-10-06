@@ -3,21 +3,23 @@ title: Partner billing
 sidebarTitle: Partner billing
 ---
 
-Partner billing lets a [provisioning partner](/docs/integrate/provisioning) pay for the PostHog organizations it creates for its customers. You pay for all of them from one payment method, and PostHog reports usage, invoices, and charges to you through webhooks and an API.
+> **Availability:** Partner billing is in development. This page describes the planned workflow and API, including payment retries and customer takeover. It does not confirm that these features are available for your app. [Contact PostHog](https://app.posthog.com/#panel=support) before integrating.
+
+Partner billing is designed to let a [provisioning partner](/docs/integrate/provisioning) pay for the PostHog organizations it creates for its customers. You pay for all of them from one payment method, and PostHog reports usage, invoices, and charges to you through webhooks and an API.
 
 ## How partner billing works
 
 - Each of your customers gets their own PostHog organization, which your app creates with an [account request](/docs/integrate/provisioning#step-1-create-an-account).
 - Each organization is billed on PostHog's standard paid plan, the same as an organization that pays for itself. That includes each product's monthly free allowance, which every organization gets separately.
 - Each organization gets its own invoice every month. The invoice names you, with your billing name, address, and tax IDs.
-- After each month ends, PostHog charges your payment method once for all of that month's organization invoices.
+- After each month ends, PostHog charges your payment method once for that month's organization invoices. You receive a settlement record and the separate organization invoices, rather than a second consolidated invoice.
 - Your customers keep their own PostHog logins. Their billing page shows their usage and billing limits, but no prices, spend, or invoices, and tells them that you manage their billing. They contact you to change their plan, payment details, or limits.
 
 ## Requirements
 
 1. **Link your app to your own PostHog organization.** Add a [verification token](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional) to your metadata document. The linked organization manages your bill. Its admins set up billing in PostHog, and the [partner billing API](#partner-billing-api) works only while your app stays linked to it.
 2. **Sign requests with a key.** Your app must authenticate with [`private_key_jwt`](/docs/integrate/provisioning#sign-requests-with-a-key-optional). Whoever can act as your app can create organizations that you pay for. Anyone can send a public client's `client_id`, and a client secret is sent with every request, so PostHog accepts neither, and it checks this on every request. If your app stops using `private_key_jwt`, for example because you [switch back to a public client](/docs/integrate/provisioning#switch-back-to-a-public-client), every provisioning request fails with a 401, including requests with access tokens you already hold, until your app uses `private_key_jwt` again. The error message starts with `This client must authenticate with private_key_jwt`.
-3. **Ask PostHog to turn it on.** Partner billing isn't self-serve. [Contact PostHog](https://app.posthog.com/#panel=support) to turn it on for your app, which must already sign its requests. When PostHog turns it on, it fixes which organization manages your bill, and that can't change later. If your app is linked to a different organization afterwards, the partner billing API returns 403 `forbidden`.
+3. **Ask PostHog to turn it on.** Partner billing isn't self-serve. Once enabled, eligible organizations your app provisions use partner billing automatically. [Contact PostHog](https://app.posthog.com/#panel=support) to turn it on for your app, which must already sign its requests. When PostHog turns it on, it fixes which organization manages your bill, and that can't change later. If your app is linked to a different organization afterwards, the partner billing API returns 403 `forbidden`.
 
 ## Set up billing
 
@@ -28,6 +30,8 @@ Admins and owners of your linked organization set up billing on the [**Partner b
 3. Click **Generate signing secret** and copy the secret. PostHog shows it only once.
 4. Click **Send test event**. Check that your endpoint receives a `test` event and [verifies its signature](#verify-the-signature).
 5. Optionally, under **Spending**, set a **Spend alert**, a **Spend cap**, and **Default monthly limits per product**, then click **Save spending settings**. See [set spending limits](#set-spending-limits).
+
+Enabling partner billing does not validate your payment method. Paid subscriptions require billing to be enabled for your payer.
 
 Add your billing details before your app creates organizations. PostHog copies them onto each organization's invoices, and an invoice that was finalized before you added them keeps the organization's own name. Changes you make in the portal later reach your organizations' invoices within a day.
 
@@ -70,8 +74,10 @@ After a month ends, PostHog charges your payment method once for the total of th
 
 ### Failed charges
 
+Payment retries and restrictions for overdue settlements are planned. They must be enabled before you can use **Retry charge**. The intended policy is:
+
 - When a charge fails, the settlement's status is `failed`, and you get a `settlement.failed` event for each organization. Its `failure_reason` says why, for example `card_declined`. Nobody is there to approve the charge, so a payment that needs you to authenticate fails too. Each failed attempt sends new events with new IDs.
-- PostHog retries the charge. To retry sooner, update your payment details in the billing portal, then click **Retry charge** next to the settlement on the partner billing page.
+- PostHog retries on days 1, 3, and 7 after the first failure. A missed scheduled run makes one catch-up attempt. To retry sooner, update your payment details in the billing portal, then click **Retry charge** next to the settlement on the partner billing page.
 - When the retries run out, you're past due, and [`past_due`](#get-your-billing-status) is `true`. PostHog then blocks the organizations you pay for until you pay: it sets their billing limits to $0, so they stop collecting data beyond their free allowance.
 
 ## Receive billing events
@@ -406,7 +412,7 @@ curl -G https://us.posthog.com/api/agentic/provisioning/payer \
 | Field | Description |
 | --- | --- |
 | `name` | Name on your organizations' invoices |
-| `billing_enabled` | Whether PostHog bills you for your organizations |
+| `billing_enabled` | Whether PostHog has enabled billing for your payer. This does not confirm that your payment method is valid. |
 | `has_payment_method` | Whether you have a payment method on file |
 | `billing_details.address` | Billing address on your organizations' invoices, or `null`. `country` is a two-letter ISO code. |
 | `billing_details.tax_ids` | Tax IDs on your organizations' invoices, each with a `type`, such as `eu_vat`, and a `value` |
@@ -414,7 +420,7 @@ curl -G https://us.posthog.com/api/agentic/provisioning/payer \
 | `webhook.url` | Your webhook URL, or `null` |
 | `webhook.secret_created_at` | When your current signing secret was created, or `null`. The secret itself never appears here. |
 | `past_due` | Whether you owe a settlement that PostHog couldn't charge |
-| `spend.month_to_date_usd` | This month's spend across the organizations you pay for now, as a decimal string in US dollars, or `null` until PostHog has counted any of this month's spend |
+| `spend.month_to_date_usd` | This month's spend you are responsible for, including usage before an organization detached, as a decimal string in US dollars. `null` until PostHog has counted any of this month's spend. |
 | `spend.alert_usd` | Your spend alert, as a decimal string in US dollars, or `null` |
 | `spend.cap_usd` | Your spend cap, as a decimal string in US dollars, or `null` |
 | `spend.capped` | Whether your spend cap is stopping paid usage right now |
@@ -759,16 +765,20 @@ curl https://billing.posthog.com/api/pricing
 
 ## Set spending limits
 
-Billing limits work per organization and per product, in whole US dollars a month, the same as [billing limits](/docs/billing/limits-alerts) on any organization. When an organization reaches a product's limit, PostHog stops ingesting that product's data until the next billing period. Limits use the product keys from the [standard rates](#get-the-standard-rates), such as `product_analytics` or `session_replay`. Only metered products take a limit, not add-ons such as group analytics.
+Billing limits work per organization and per product, in whole US dollars a month, the same as [billing limits](/docs/billing/limits-alerts) on any organization. Limits use the product keys from the [standard rates](#get-the-standard-rates), such as `product_analytics` or `session_replay`. Only metered products take a limit, not add-ons such as group analytics.
+
+PostHog checks reported usage and updates enforcement asynchronously. Usage can continue between reaching a threshold and enforcement taking effect, so limits do not guarantee a maximum invoice. Set limits below the amount you are prepared to spend. Once enforcement takes effect, PostHog stops ingesting that product's data until the next billing period.
 
 - **Default limits.** Admins of your linked organization set **Default monthly limits per product** on the partner billing page. A default applies to every organization you pay for that has no limit of its own for that product, including organizations you already pay for, and those organizations follow it when you change it. Removing a default puts them back on their plan's starting limit for that product, which can be no limit.
 - **Limits for one organization.** Set an organization's own limits with [set limits for an organization](#set-limits-for-an-organization), or with **Edit limits** on the partner billing page. An organization's own limit replaces your default for that product, and `null` means no limit.
-- **Limits below the spend so far.** A limit below what an organization has already spent on a product this period takes effect from the next period. Until then, the product's limit stays at the spend so far, so further paid usage stops.
+- **Limits below the spend so far.** A limit below what an organization has already spent on a product this period takes effect from the next period. Until then, the product's limit stays at the reported spend so far, subject to the enforcement delay above.
 - **Your customers can't change them.** Members of the organization can see its limits and usage, but PostHog refuses their limit changes and tells them to contact you. Your limit changes don't email the organization's members. Its owners still get PostHog's billing limit alert emails.
 - **Spend alert.** Set `spend_alert_usd` on the partner billing page or with [update webhook and spend settings](#update-webhook-and-spend-settings). The first time in a month that your spend across the organizations you pay for reaches it, PostHog sends you a [`spend.alert`](#spendalert) event.
-- **Spend cap.** Set `spend_cap_usd` the same way. When your spend this month reaches it, PostHog stops further paid usage in every organization you pay for: it holds each product at what the organization has already spent on it this month. Usage within each product's free allowance goes on, and the organizations' members get no email about it. [`spend.capped`](#get-your-billing-status) is `true` while the cap holds, and PostHog sends no event for it. The cap lifts when you raise it above your spend or remove it, or when a new month starts.
+- **Spend cap.** Set `spend_cap_usd` the same way. When reported spend reaches it, PostHog sets each product's limit to its reported spend so far in every organization you pay for. Further paid usage stops once those limits reach enforcement. The cap is subject to reporting and enforcement delay, so your spend can exceed it. Usage within each product's free allowance goes on, and the organizations' members get no email about it. [`spend.capped`](#get-your-billing-status) is `true` while the cap holds, and PostHog sends no event for it. The cap lifts when you raise it above your spend or remove it, or when a new month starts.
 
 ## When a customer pays for itself
+
+Customer takeover is planned. It will be available only after PostHog can split financial responsibility at the recorded change time. The intended flow is:
 
 An owner of an organization you pay for can choose to pay for it themselves, with **Pay for this organization yourself** on the organization's billing page. When they confirm:
 
@@ -783,6 +793,6 @@ Your app keeps its access to the organization's projects.
 
 When an account request names an email that already has a PostHog account, the response is `requires_auth`, and the person approves your app on PostHog's consent screen. See [step 1: create an account](/docs/integrate/provisioning#step-1-create-an-account).
 
-With partner billing, the consent screen has no organization or project picker. PostHog puts your project in a new organization that the person owns and you pay for, named after your app and their email address. If they already belong to an organization that your app set up for them, PostHog uses that one instead. Their own organizations never pay for your usage.
+With partner billing, the consent screen has no organization or project picker. PostHog puts your project in a new organization that the person owns and you pay for, named after your app and their email address. If they already own an active organization that your app created and still pays for, PostHog uses that one instead. Their own organizations never pay for your usage.
 
 After they approve, PostHog redirects them to your `redirect_uris` with a `code`, the same as for any existing user.
