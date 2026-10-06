@@ -16,7 +16,7 @@ import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Braintrust connector syncs your LLM evaluation and observability data into the PostHog data warehouse, so you can analyze your AI projects, experiments, datasets, prompts, and functions alongside your product data.
+The Braintrust connector syncs your LLM evaluation and observability data into PostHog's Data Warehouse, so you can analyze your AI projects, experiments, datasets, prompts, and functions alongside your product data.
 
 ## Prerequisites
 
