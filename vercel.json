@@ -6477,8 +6477,24 @@
             "destination": "/context-warehouse"
         },
         {
+            "source": "/data-stack/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
             "source": "/data-stack/:path*",
             "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/context-warehouse/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse",
+            "destination": "/docs/data-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse/:path*",
+            "destination": "/docs/data-warehouse/warehouse/:path*"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
