@@ -260,7 +260,7 @@ messages:
                 label: 'Başlangıç fiyatı:'
                 old: 0 dolar
                 new: Bedava
-                urgency: '><larger>Zam gelmeden son 1 adet!!</larger>'
+                urgency: '<larger>Zam gelmeden son 1 adet!!</larger>'
             button: Hemen başla
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
