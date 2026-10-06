@@ -157,6 +157,7 @@ This is the default model for Databricks batch exports. The schema of the model 
 | distinct_id                   | `STRING`              | The `distinct_id` of the user who sent the event                                                                      |
 | team_id                       | `BIGINT`              | The `team_id` for the event                                                                                           |
 | timestamp                     | `TIMESTAMP`           | The timestamp associated with an event                                                                                |
+| created_at                    | `TIMESTAMP`           | When PostHog ingested the event                                                                                       |
 | databricks_ingested_timestamp | `TIMESTAMP`           | An additional metadata column, indicating when the event was ingested into Databricks                                 |
 
 ### Persons model
