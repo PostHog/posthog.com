@@ -8,34 +8,12 @@ Based on RFC: https://github.com/PostHog/requests-for-comments-internal/pull/117
 ### 🚪 Untangle DNS, ingress and LBs
 > Everything runs on one ingress, one LB and one control plane. Contour is down to two maintainers and our fork is painful to upgrade. DNS is undocumented and not fully in code. Split ingress into smaller, per-use-case chunks we can reason about, optimize and upgrade safely. This is also the prerequisite for ever splitting clusters.
 
-#### What we'll ship
-- a decided Contour successor. Envoy Gateway is the lead candidate: same Envoy base, covers our features incl. rate limiting, and we've run it before
-- capture on its own dedicated LB + ingress controller, as the first split
-- NLB in front of the ingress path (security, isolation, latency), with the IPAM pools bandaid retired
-- DNS documented and fully in IaC (Cloudflare), with a plan to retire old subdomains
-- validations for ingress changes exist before we cut over: tests, and a canary or blue-green path for ingress upgrades
-- an ingress SLO, so we know how the ingress is doing
-
 ### 💸 FinOps attribution + infra efficiency
 > The vendor data is in PostHog, but we can't attribute cost to applications, shared infra or networking. Commitments on RDS, ElastiCache and EC2 are uncovered. Tag our own stuff first as the leading example, automate governance, and take the cheap wins on the bill.
-
-#### What we'll ship
-- all Cloud Foundations resources and services are tagged and labelled, so our own cost reporting breaks down by service
-- nodes are tagged per node pool, so networking cost lands on the product that owns the pool
-- tagging governance is automated (skills, Greptile, stamphog on tagging PRs, etc.) and tagging coverage is tracked as an SLO (currently 16%)
-- FinOps event system for shared infra (Temporal, Celery, Dagster), so shared costs count toward product costs
-- eBPF-based network cost allocation evaluated, open-source first, with no vendor lock-in this quarter
-- commitments in place: RDS Savings Plans, ElastiCache RIs, EC2/EKS Savings Plans after node utilization is optimized. All count toward the future PPA - this might include moving RDS/ElastiCache instances to other instance families
-- EKS cost transparency: node utilization optimized and dead infra hunted
-- ECR optimized: region-bound pulls, which cuts EU→US NAT GW cost, move all ECRs off the root account with it
 
 ## Smaller goals
 
 ### ☸️ Refresh the EKS module
 > The old EKS Terraform module holds us back from current EKS features. Import the running clusters into the new module so new clusters are easy to create.
-
-#### What we'll ship
-- current clusters imported into the new EKS module, with the old module removed from state
-- EKS Pod Identity enabled
 
 Full list and details of all goals: https://github.com/PostHog/posthog-cloud-infra/issues/10708
