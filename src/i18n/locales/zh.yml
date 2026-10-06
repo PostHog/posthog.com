@@ -265,7 +265,7 @@ messages:
                 label: 起价：
                 old: ¥0
                 new: 免费
-                urgency: '><larger>该价格仅剩 1 件！！</larger>'
+                urgency: '<larger>该价格仅剩 1 件！！</larger>'
             button: 开始使用
             urgency:
                 label: <bold>抓紧时间！</bold><today>今天</today>注册的公司：{companies} 家<br/>立即下单，首单立减 0 元。
