@@ -188,7 +188,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: Our whole philosophy is that you shouldn't have to worry about pricing.
-                2: All our paid products are pay-per-use with generous monthly free tiers. In fact, 98% of our customers use PostHog for free.
+                2: All our paid products are pay-per-use with generous monthly free tiers. In fact, 97% of our customers use PostHog for free.
                 3: We aim to match the cheapest option at scale – PostHog should be a no-brainer. You never have to "jump on a quick call" with sales.
                 4: 'Here are some examples of how we charge for most popular products:'
             label:
