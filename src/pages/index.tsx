@@ -8,7 +8,7 @@ import { useTranslation } from 'i18n'
 export default function Home({
     pageContext,
 }: {
-    pageContext: { lang?: string; languageAlternates?: LanguageAlternate[] }
+    pageContext: { lang?: string; languageAlternates?: LanguageAlternate[]; ogImage?: string }
 }) {
     const { locale, t } = useTranslation()
 
@@ -18,7 +18,7 @@ export default function Home({
                 title={t('meta.title')}
                 updateWindowTitle={false}
                 description={t('meta.description')}
-                image="/images/og/default.png"
+                image={pageContext.ogImage || '/images/og/default.png'}
                 lang={pageContext.lang}
                 dir={getDirection(locale)}
                 languageAlternates={pageContext.languageAlternates}

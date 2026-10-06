@@ -5,6 +5,14 @@ import type { Actions, Page } from 'gatsby'
 import { flattenMessages, type Messages } from '../src/i18n/flatten'
 
 const LOCALES_DIR = path.resolve(__dirname, '../src/i18n/locales')
+const STATIC_DIR = path.resolve(__dirname, '../static')
+
+// The share image of a home page: a screenshot of that page, made by scripts/home-og-images.mjs.
+// A locale without one uses the site default.
+const ogImage = (code: string) => {
+    const image = `/images/og/home-${code}.jpg`
+    return fs.existsSync(path.join(STATIC_DIR, image)) ? image : '/images/og/default.png'
+}
 
 // `lang` is the BCP 47 tag for <html lang> and hreflang, when it differs from the code: pt.yml has `lang: pt-BR`.
 type Locale = { code: string; name: string; lang: string; messages: Messages }
@@ -46,7 +54,10 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
     ]
 
     deletePage(page)
-    createPage({ ...page, context: { ...page.context, locale: 'en', lang: 'en', languageAlternates } })
+    createPage({
+        ...page,
+        context: { ...page.context, locale: 'en', lang: 'en', languageAlternates, ogImage: ogImage('en') },
+    })
 
     translations.forEach(({ code, lang, messages }) => {
         Object.keys(messages)
@@ -56,7 +67,7 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
         createPage({
             ...page,
             path: `/${code}`,
-            context: { ...page.context, locale: code, lang, messages, languageAlternates },
+            context: { ...page.context, locale: code, lang, messages, languageAlternates, ogImage: ogImage(code) },
         })
     })
 }

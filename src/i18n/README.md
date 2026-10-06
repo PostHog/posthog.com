@@ -72,6 +72,7 @@ The build warns about a key in a translation file that `en.yml` does not have. I
 2. Replace the style rules in the comment at the top with the rules for the new language. Then translate the values. Keep the keys and the tags.
 3. Add the code to `TRANSLATED_LOCALES` in `preferredLocale.ts`. The Edge runtime cannot read YAML. `pnpm test:middleware` fails when the list and the files disagree.
 4. Restart `pnpm start`. The dev server reads the YAML files only when it starts.
+5. Take the share image of the new page: `node scripts/home-og-images.mjs http://localhost:8001 <code>`. It saves `static/images/og/home-<code>.jpg`, and the page uses it for `og:image`. A page without one uses the site default. Run the script with no codes to take every page again when the home page copy changes.
 
 The middleware matches the primary language subtag only, so `pt` matches `pt-BR` and `pt-PT`. It also sends locale-shaped paths such as `/pt-BR`, `/pt_br`, and `/PT` to `/pt` with a 301.
 
