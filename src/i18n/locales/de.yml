@@ -11,15 +11,19 @@
 # - PostHog the product takes no article: "PostHog erfasst", "PostHog installieren", "mit PostHog".
 #   The genitive "s" is fine, like "Googles": "PostHogs Context Warehouse". A compound with a hyphen
 #   also works: "PostHog-Kunde", "PostHog-Tools". Product names stay as they are: "PostHog AI", "PostHog MCP".
-# - Keep the English dev words that German devs say: Bugs, Pull Requests, Features, Deploy, Exceptions,
-#   Issues, Funnel, Checkout, Dashboard, Tools, Changelog. Capitalize them as nouns ("Dead Clicks").
+#   The Wizard is the name of the PostHog CLI tool, so it stays "Wizard", not "Setup-Assistent".
+# - Keep the English dev words that German devs say: Bugs, Pull-Requests, Features, Deploy, Exceptions,
+#   Issues, Funnel, Checkout, Dashboard, Tools, Changelog. Capitalize them as nouns. An English noun of
+#   two words takes a hyphen, as Duden spells it: "Pull-Requests", "Dead-Clicks".
 #   Use the German word when a normal one exists: Agenten (not Agents), Fehler, Kunden, Oberfläche,
-#   Registrierung (signup), Vorlagen, Handbuch, Setup-Assistent (not Wizard), "ausliefern" (not "shippen").
+#   Registrierung (signup), Vorlagen, Handbuch, "ausliefern" (not "shippen"). With "ausliefern", say
+#   what ships ("Code ausliefern"), or it reads like a delivery service.
+# - "billig" sounds cheap and tacky. For prices, use "günstig" or "preislich attraktiv".
 # - Buttons and menu items use the infinitive, and short: "Kostenlos loslegen", "Preise ansehen",
 #   "Erste Datenquelle verbinden". Not "Verbinde deine erste Datenquelle".
 # - Localize the jokes with German references, and keep them understated: Kim K -> Heidi Klum,
 #   a Bond villain -> "Tatort-Täter", parents -> "Oma hält es für den Enkeltrick", "hop on a quick call"
-#   -> the German sales Denglisch "kurz in einen Call springen", Hillary Clinton -> Uschi Glas.
+#   -> the German sales Denglisch "kurz in einen Call springen", Hillary Clinton -> Angela Merkel.
 #   Bureaucracy and Datenschutz jokes fit well ("dein Datenschutzbeauftragter").
 # - Typography: German quotes „so“, a space before % ("97 %"), and "…" for an ellipsis.
 #   Use an en dash with spaces ( – ) or a colon, never an em dash. After a colon, a full sentence
@@ -32,20 +36,20 @@
 name: Deutsch
 messages:
     meta:
-        title: PostHog – die Kontextebene für dein Produkt
-        description: PostHog findet Probleme automatisch, behebt Bugs und erstellt Pull Requests. Ganz ohne Prompt von dir.
+        title: PostHog – der Kontext-Layer für dein Produkt
+        description: PostHog findet Probleme automatisch, behebt Bugs und erstellt Pull-Requests. Ganz ohne Prompt von dir.
 
     hero:
-        H1: Die <emphasis>Kontextebene</emphasis> für dein Produkt
+        H1: Der <emphasis>Kontext-Layer</emphasis> für dein Produkt
         body:
-            1: PostHog erfasst und speichert deine <highlight>Analytics, Fehler, Replays und Geschäftsdaten</highlight>, damit du und deine <underline>Agenten</underline> sie abfragen und danach handeln könnt.
-            2: Über 500.000 Teams liefern schon mit PostHog aus. Deins fehlt noch.
+            1: PostHog erfasst und speichert deine <highlight>Analytics, Fehler, Replays und Unternehmensdaten</highlight>, damit du und deine <underline>Agenten</underline> sie abfragen und danach handeln könnt.
+            2: Über 500.000 Teams liefern schon Code mit PostHog aus. Deins fehlt noch.
         cta:
             heading: <logo/> <highlight>kostenlos</highlight> einrichten
             body:
                 1: 97 % unserer Nutzer zahlen 0 $
                 2: Keine Kreditkarte nötig
-                3: Der Setup-Assistent installiert PostHog für dich
+                3: Der Wizard installiert PostHog für dich
             button:
                 1: Loslegen
                 2:
@@ -62,7 +66,7 @@ messages:
             heading: Frag PostHog alles
             body:
                 1: PostHog ist der eine Ort, an dem du Produkt- und Firmendaten erfasst, speicherst und abfragst. Analytics, Replays, Fehler und Logs, direkt verknüpft, damit jede deiner Fragen eine Antwort bekommt.
-                2: Hol dir Daten aus <link>über {count} externen Quellen</link> dazu, für das ganze Bild.
+                2: Hol dir Daten aus <link>über {count} externen Quellen</link> dazu, für den ganzen Überblick.
             button: Kostenlos loslegen
             products:
                 more: und <count/> weitere
@@ -75,7 +79,7 @@ messages:
                 prompt: Warum gibt es mehr Registrierungen, aber weniger zahlende Kunden?
                 reply:
                     1: Ich verfolge den Weg vom Klick auf die Anzeige bis zum zahlenden Kunden.
-                    2: Der Einbruch beginnt schon vor der Zahlung.
+                    2: Die ersten Absprünge passieren bereits vor dem Bezahlvorgang.
                     3: Ein neues Pflichtfeld vergrault Kunden im mobilen Checkout.
                     4: Teste einen kürzeren mobilen Checkout.
                 step:
@@ -103,16 +107,16 @@ messages:
                 agents: Deine Agenten
 
         2c:
-            toggle: Mit PostHog ausliefern
-            heading: Mit PostHog ausliefern
-            body: Deine Inbox bündelt zusammengehörige Erkenntnisse zu recherchierten Berichten, sortiert nach Priorität. Prüf die vorgeschlagenen Verbesserungen und Pull Requests, dann entscheidest du, was live geht.
+            toggle: Code mit PostHog ausliefern
+            heading: Code mit PostHog ausliefern
+            body: Deine Inbox bündelt zusammengehörige Erkenntnisse zu recherchierten Berichten, sortiert nach Priorität. Prüf die vorgeschlagenen Verbesserungen und Pull-Requests, dann entscheidest du, was live geht.
             button: Kostenlos loslegen
             signals:
                 heading: 'Self-driving holt sich Signale aus:'
                 1:
                     body: Exceptions und Stack Traces, gruppiert zu Issues
                 2:
-                    body: Dead Clicks, schnelles Zurück, lange Hänger
+                    body: Dead-Clicks, schnelles Zurück, lange Hänger
                 3:
                     title: Support
                     body: Tickets und Gespräche mit deinen Nutzern
@@ -120,7 +124,7 @@ messages:
                     title: Externe Tools
                     body: Zendesk, Linear, GitHub Issues
             demo:
-                description: 'Beispielhafte Self-driving-Inbox. Vier Beispielberichte kommen nacheinander rein, der neueste zuerst: eine Anfrage zu Rechnungen aus GitHub, ein Scout für Conversion-Tracking mit einem Pull Request im Entwurf, ein Checkout-Problem aus Session Replay und ein Login-Fehler mit hoher Priorität samt Pull Request, der bereit zum Review ist.'
+                description: 'Beispielhafte Self-driving-Inbox. Vier Beispielberichte kommen nacheinander rein, der neueste zuerst: eine Anfrage zu Rechnungen aus GitHub, ein Scout für Conversion-Tracking mit einem Pull-Request im Entwurf, ein Checkout-Problem aus Session Replay und ein Login-Fehler mit hoher Priorität samt Pull-Request, der bereit zum Review ist.'
 
         3:
             heading: Social Proof
@@ -200,7 +204,7 @@ messages:
             body:
                 1: 'Unsere ganze Philosophie: Du sollst dir über Preise keinen Kopf machen müssen.'
                 2: Alle kostenpflichtigen Produkte rechnen wir nach Nutzung ab, mit großzügigen monatlichen Freikontingenten. Tatsächlich nutzen 98 % unserer Kunden PostHog kostenlos.
-                3: Wir wollen bei großen Mengen so günstig sein wie die billigste Option. PostHog soll die offensichtliche Wahl sein. Und für einen Preis musst du nie „kurz in einen Call springen“.
+                3: Wir wollen bei großen Mengen preislich so attraktiv sein wie die günstigste Alternative. PostHog soll die logische Wahl sein. Und für einen Preis musst du nie „kurz in einen Call springen“.
                 4: 'Ein paar Beispiele, wie wir unsere beliebtesten Produkte abrechnen:'
             label:
                 freetier: Freikontingent
@@ -276,7 +280,7 @@ messages:
             1: PostHog.com nutzt keine Cookies von Drittanbietern, nur ein einziges eigenes.
             2: Es gehen keine Daten an Dritte. (<tooltip>Ursula von der Leyen</tooltip> und dein Datenschutzbeauftragter wären so stolz.)
         tooltip:
-            label: Ursula von der Leyen ist Präsidentin der Europäischen Kommission. NICHT zu verwechseln mit Uschi Glas.
+            label: Ursula von der Leyen ist Präsidentin der Europäischen Kommission. NICHT zu verwechseln mit Angela Merkel.
             image:
                 alt: Ursula von der Leyen, Präsidentin der Europäischen Kommission
         close: Schließen
@@ -305,11 +309,11 @@ messages:
             install: PostHog installieren
             sdks: SDKs & Frameworks
             products: Produkte
-            tools: Tools
             analytics: Analytics
-            more_tools: Weitere Tools
+            more_products: Weitere Produkte
             application_metrics: Anwendungsmetriken
             distributed_tracing: Distributed Tracing
+            apps: Apps
             context: Kontext
             reference: Referenz
             new_to_posthog: Neu bei PostHog
@@ -320,7 +324,7 @@ messages:
             privacy: Datenschutz & DSGVO
             how_posthog_works: So funktioniert PostHog
             glossary: Glossar
-            explore_twig: Twig entdecken
+            playground: Playground
             pocket_guides: Kurzanleitungen
             tutorials: Tutorials
             templates: Vorlagen
