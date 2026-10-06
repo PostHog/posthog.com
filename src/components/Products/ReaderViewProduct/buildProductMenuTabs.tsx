@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import {
+    IconArrowLeft,
     IconBook,
     IconCursorClick,
     IconEye,
@@ -112,14 +113,29 @@ const LearnNav = ({
     contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
+    const normalizedCurrentPath = currentPath?.replace(/\/$/, '')
+    const normalizedBasePath = basePath.replace(/\/$/, '')
 
-    if (hub) {
+    if (hub && (!normalizedCurrentPath || normalizedCurrentPath === normalizedBasePath)) {
         return <LearnHubNav basePath={basePath} contentRef={contentRef} />
     }
 
     return (
         <nav>
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
+                {hasLanding ? (
+                    <li className="m-0 mb-2 border-b border-primary/20 p-0 pb-2">
+                        <Link
+                            to={basePath}
+                            className="block w-full rounded px-2 py-1 text-sm !text-primary !no-underline hover:bg-dark/10 focus-visible:outline-offset-[-2px] dark:hover:bg-light/10"
+                        >
+                            <span className="inline-flex items-center gap-1.5">
+                                <IconArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+                                <span data-sidebar-label>Back to Learn</span>
+                            </span>
+                        </Link>
+                    </li>
+                ) : null}
                 {pages.map((page) => {
                     const to =
                         page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
