@@ -8,37 +8,7 @@ import { SQUEAK_HOST } from 'lib/strapi'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
-
-const Input = ({
-    label,
-    type = 'text',
-    touched,
-    error,
-    ...props
-}: {
-    label: string
-    type?: string
-    touched: boolean
-    error?: string
-    [key: string]: any
-}) => {
-    return (
-        <div className="flex items-center space-x-2">
-            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                {label}
-            </label>
-            <div>
-                <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
-                    type={type}
-                    id={props.name}
-                    placeholder={label}
-                    {...props}
-                />
-            </div>
-        </div>
-    )
-}
+import Input from 'components/OSForm/input'
 
 const ForgotPasswordForm: React.FC = () => {
     const { setWindowTitle, openSignIn } = useApp()
@@ -138,6 +108,8 @@ const ForgotPasswordForm: React.FC = () => {
                                 <Input
                                     label="Email"
                                     type="email"
+                                    size="sm"
+                                    direction="row"
                                     touched={!!touched.email}
                                     error={errors.email}
                                     {...getFieldProps('email')}
