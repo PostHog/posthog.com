@@ -60,20 +60,23 @@ sequenceDiagram
 
 After a month ends, PostHog charges your payment method once for the total of that month's organization invoices. This charge is the settlement, and it pays every organization invoice in it.
 
-- PostHog checks every day at 03:00 UTC, and charges you once every organization's invoice for the month is final. The charge happens in the first days of the next month.
+- PostHog checks every day at 03:00 UTC, and charges you once every organization's invoice for the month is final. That's usually on the 1st.
+- The settlement pays what's left to pay on each organization's invoice.
 - When the charge succeeds, PostHog marks each organization's invoice as paid and sends you a `settlement.paid` event for each organization.
+- A payment that takes time to clear, such as a bank debit, stays `processing` until it succeeds or fails.
+- If you have no payment method on file, PostHog holds the charge instead of failing it. It charges you on the first daily check after you add one.
 - If nothing is due, PostHog records the settlement as paid without charging you.
 - Settlements are in US dollars.
 
 ### Failed charges
 
-- When a charge fails, the settlement's status is `failed`, and you get a `settlement.failed` event for each organization. Its `failure_reason` says why, for example `card_declined`, or `no_payment_method` when you have no payment method on file. Each failed attempt sends new events with new IDs.
+- When a charge fails, the settlement's status is `failed`, and you get a `settlement.failed` event for each organization. Its `failure_reason` says why, for example `card_declined`. Nobody is there to approve the charge, so a payment that needs you to authenticate fails too. Each failed attempt sends new events with new IDs.
 - PostHog retries the charge. To retry sooner, update your payment details in the billing portal, then click **Retry charge** next to the settlement on the partner billing page.
 - When the retries run out, you're past due, and [`past_due`](#get-your-billing-status) is `true`. PostHog then blocks the organizations you pay for until you pay: it sets their billing limits to $0, so they stop collecting data beyond their free allowance.
 
 ## Receive billing events
 
-PostHog sends billing events for the organizations you pay for to your webhook URL. Delivery follows the [Standard Webhooks](https://www.standardwebhooks.com/) spec, so you can verify events with the official `standardwebhooks` libraries.
+PostHog sends billing events about the organizations you pay for, and about your spend across them, to your webhook URL. Delivery follows the [Standard Webhooks](https://www.standardwebhooks.com/) spec, so you can verify events with the official `standardwebhooks` libraries.
 
 ### Webhook URL requirements
 
@@ -165,10 +168,10 @@ app.listen(3000);
 - Respond with any `2xx` status to accept an event. Any other status, a redirect, a timeout, or a network error fails the attempt. PostHog doesn't follow redirects.
 - PostHog waits up to 5 seconds to connect and up to 10 seconds for your response, so respond first and process the event afterwards.
 - PostHog tries each event up to 11 times. After the first failed attempt it waits 1 minute, and the wait doubles after each failure after that: 1, 2, 4, 8, 16, 32, 64, 128, 256, and 512 minutes. The last attempt comes about 17 hours after the first.
-- After 5 attempts in a row fail, PostHog sends at most one delivery to your URL every 10 minutes until one succeeds. An attempt that PostHog holds back counts as failed.
-- Delivery is at least once. Deduplicate on `webhook-id`, because a retry or a repeat of an event keeps its ID.
+- If your endpoint looks down, PostHog pauses. After 5 attempts in a row time out, can't connect, or get a `5xx`, `408`, or `429` response, PostHog sends at most one delivery to your URL every 10 minutes until one succeeds. An attempt that PostHog holds back counts as failed. Other `4xx` responses and redirects still fail the attempt, but they don't count toward a pause. Saving a new webhook URL or creating a new signing secret ends a pause.
+- Delivery is at least once. Deduplicate on `webhook-id`, because a retry or a repeat of an event keeps its ID. A `usage_report` with corrected numbers gets a new ID, as described in [`usage_report`](#usage_report).
 - Events can arrive in any order, and a retried event can arrive after a newer one.
-- PostHog sends one event per organization. For example, a settlement that pays the invoices of 40 organizations sends 40 `settlement.paid` events.
+- Every event except `spend.alert` and `test` is about one organization. For example, a settlement that pays the invoices of 40 organizations sends 40 `settlement.paid` events.
 
 Events that happen while you have no webhook URL or signing secret are never sent, and PostHog doesn't retry an event after its last attempt. Treat the API as the source of truth: [list invoices](#list-invoices) and [list settlements](#list-settlements) to catch up on anything you missed.
 
@@ -176,10 +179,11 @@ Events that happen while you have no webhook URL or signing secret are never sen
 
 | `event_type` | When PostHog sends it |
 | --- | --- |
-| `usage_report` | Once a day for each organization |
+| `usage_report` | Once a day for each organization, and again when its numbers are corrected |
 | `invoice.finalized` | When an organization's monthly invoice is finalized |
 | `settlement.paid` | When a charge succeeds, once for each organization invoice it pays |
 | `settlement.failed` | When a charge fails, once for each organization invoice it was for |
+| `spend.alert` | The first time in a month that your spend across all your organizations reaches your [spend alert](#set-spending-limits) |
 | `organization.detached` | When an organization's owner chooses to [pay for it themselves](#when-a-customer-pays-for-itself) |
 | `test` | When you send a test event |
 
@@ -187,16 +191,18 @@ Every event body has `event_id`, the same value as the `webhook-id` header, and 
 
 #### `usage_report`
 
-A daily snapshot of an organization's usage and spend so far this billing period. `amount_cents` is an estimate until the organization's invoice is finalized.
+A daily snapshot of an organization's usage so far in a billing period, and its price.
 
 | Field | Description |
 | --- | --- |
 | `organization_id` | The organization the report is for |
-| `period_start` | Start of the organization's current billing period |
-| `period_end` | End of the last day the report covers, at midnight UTC |
-| `amount_cents` | Spend so far this billing period, after discounts |
+| `period_start` | Start of the billing period the usage is invoiced in. That's the 1st of the month, or the moment the organization's billing started in its first month. |
+| `period_end` | End of that billing period. The `invoice.finalized` event for that period's invoice has the same `period_start` and `period_end`. |
+| `usage_through` | Midnight UTC at the end of the last day of usage in the report. The report covers usage before this time. |
+| `timestamp` | When PostHog measured and priced the usage. It stays the same when PostHog retries the delivery. |
+| `amount_cents` | Price of exactly the usage in `metrics`, after the organization's percentage discount. It leaves out flat fees, fixed-amount discounts, tax, and credits, so the invoice can differ. |
 | `currency` | Currency of `amount_cents` |
-| `metrics` | Billable usage so far this billing period, by usage key, such as `events` or `recordings`. The keys match `usage_key` in the [standard rates](#get-the-standard-rates). |
+| `metrics` | Billable usage so far in the billing period, after billing limits, by usage key, such as `events` or `recordings`. The keys match `usage_key` in the [standard rates](#get-the-standard-rates). |
 
 ```json
 {
@@ -204,7 +210,9 @@ A daily snapshot of an organization's usage and spend so far this billing period
   "event_type": "usage_report",
   "organization_id": "0192d7c4-5b6e-7000-8000-00000000c001",
   "period_start": "2026-10-01T00:00:00Z",
-  "period_end": "2026-10-05T00:00:00Z",
+  "period_end": "2026-11-01T00:00:00Z",
+  "usage_through": "2026-10-05T00:00:00Z",
+  "timestamp": "2026-10-05T04:00:00Z",
   "amount_cents": 18250,
   "currency": "USD",
   "metrics": {
@@ -215,16 +223,20 @@ A daily snapshot of an organization's usage and spend so far this billing period
 }
 ```
 
+A day's usage reaches PostHog after the day ends, so the last day of a month is invoiced with the next month. The report sent on the 1st has the new month's period, `usage_through` at midnight on the 1st, and only the previous day's usage. The last report sent in a period covers the same usage as that period's invoice.
+
+PostHog can report the same day's usage more than once, for example after an organization's limits change. A report with the same numbers keeps its event ID, so you drop it as a duplicate. A report with corrected numbers gets a new ID. Keep the report with the latest `usage_through`, and between reports with the same `usage_through`, the one with the latest `timestamp`. Don't order reports by the `webhook-timestamp` header, which is the time of each delivery attempt.
+
 #### `invoice.finalized`
 
-Sent when an organization's monthly invoice is final. The invoice stays open until the month's settlement pays it. PostHog doesn't send this event for the opening invoice an organization gets when PostHog starts billing it.
+Sent when an organization's monthly invoice is final, shortly after the month ends. The invoice stays open until the month's settlement pays it. PostHog doesn't send this event for the opening invoice an organization gets when PostHog starts billing it.
 
 | Field | Description |
 | --- | --- |
 | `organization_id` | The organization the invoice is for |
 | `period_start` | Start of the billing period the invoice covers |
 | `period_end` | End of the billing period the invoice covers |
-| `amount_cents` | Invoice total |
+| `amount_cents` | What you owe for the invoice: its total after discounts and tax, less any credit the organization has. It can be lower than the invoice total. |
 | `currency` | Currency of `amount_cents` |
 | `invoice.invoice_id` | The invoice's ID |
 | `invoice.status` | The invoice's status when it was finalized, usually `open` |
@@ -257,7 +269,7 @@ PostHog sends one of these for each organization invoice in a settlement, after 
 | `currency` | Currency of `amount_cents` |
 | `invoice.invoice_id` | The organization's invoice |
 | `invoice.status` | `paid` in `settlement.paid`, `open` in `settlement.failed` |
-| `failure_reason` | In `settlement.failed` only. Why the charge failed, for example `card_declined`, or `no_payment_method` when you have no payment method on file. |
+| `failure_reason` | In `settlement.failed` only. Why the charge failed, for example `card_declined` |
 
 ```json
 {
@@ -272,6 +284,28 @@ PostHog sends one of these for each organization invoice in a settlement, after 
     "status": "open"
   },
   "failure_reason": "card_declined"
+}
+```
+
+#### `spend.alert`
+
+Sent the first time in a calendar month that your spend across all the organizations you pay for reaches your spend alert. It names no organization. PostHog sends it at most once a month, even if you change your alert amount afterwards, and setting an alert below this month's spend sends it right away.
+
+| Field | Description |
+| --- | --- |
+| `period_start` | The 1st of the month, at midnight UTC |
+| `month_to_date_amount_cents` | Your spend this month across the organizations you pay for when the alert went out |
+| `alert_amount_cents` | Your spend alert |
+| `currency` | Currency of the amounts |
+
+```json
+{
+  "event_id": "evt_7e6d5c4b3a2f4e1d9c8b7a6f5e4d3c2b",
+  "event_type": "spend.alert",
+  "period_start": "2026-10-01T00:00:00Z",
+  "month_to_date_amount_cents": 200050,
+  "alert_amount_cents": 200000,
+  "currency": "USD"
 }
 ```
 
@@ -380,11 +414,11 @@ curl -G https://us.posthog.com/api/agentic/provisioning/payer \
 | `webhook.url` | Your webhook URL, or `null` |
 | `webhook.secret_created_at` | When your current signing secret was created, or `null`. The secret itself never appears here. |
 | `past_due` | Whether you owe a settlement that PostHog couldn't charge |
-| `spend.month_to_date_usd` | This month's spend across all your organizations, as a decimal string in US dollars |
+| `spend.month_to_date_usd` | This month's spend across the organizations you pay for now, as a decimal string in US dollars, or `null` until PostHog has counted any of this month's spend |
 | `spend.alert_usd` | Your spend alert, as a decimal string in US dollars, or `null` |
 | `spend.cap_usd` | Your spend cap, as a decimal string in US dollars, or `null` |
-| `spend.capped` | Whether this month's spend has reached your cap |
-| `default_limits_usd` | Monthly limit per product that each new organization gets, in whole US dollars |
+| `spend.capped` | Whether your spend cap is stopping paid usage right now |
+| `default_limits_usd` | Your default monthly limit per product, in whole US dollars. It applies to every organization you pay for that has no limit of its own for that product. |
 
 ### Update webhook and spend settings
 
@@ -411,10 +445,12 @@ JSON
 | Field | Type | Description |
 | --- | --- | --- |
 | `webhook_url` | string or null | Where PostHog sends your billing events. See [webhook URL requirements](#webhook-url-requirements). `null` removes it and stops events. |
-| `spend_alert_usd` | decimal string or null | Spend this month, across all your organizations, at which PostHog sends you a spend alert. Up to two decimal places. `null` turns the alert off. |
-| `spend_cap_usd` | decimal string or null | Spend this month, across all your organizations, at which PostHog caps further usage. Up to two decimal places. `null` removes the cap. |
+| `spend_alert_usd` | decimal string or null | Spend this month, across all your organizations, at which PostHog sends you a [`spend.alert`](#spendalert) event. Up to two decimal places. `null` turns the alert off. |
+| `spend_cap_usd` | decimal string or null | Spend this month, across all your organizations, at which PostHog stops further paid usage. Up to two decimal places. `null` removes the cap. |
 
 The response is your billing status, in the same shape as [get your billing status](#get-your-billing-status).
+
+This route doesn't change default limits. A request with `default_limits_usd` fails with 400 `invalid_request`. Admins of your linked organization change default limits on the [partner billing page](#set-up-billing).
 
 ### Create a signing secret
 
@@ -461,7 +497,7 @@ Sends a `test` event to your webhook URL and returns its ID, the same value as i
 
 `GET /api/agentic/provisioning/payer/organizations`
 
-Lists the organizations you pay for, including ones that now pay for themselves. Send the query parameters next to the assertion fields, as in [list invoices](#list-invoices).
+Lists every organization you've paid for, including ones that now pay for themselves, newest first. Each entry is one period of paying for an organization, so an organization you paid for twice appears twice. Send the query parameters next to the assertion fields, as in [list invoices](#list-invoices).
 
 **Query parameters:**
 
@@ -491,10 +527,10 @@ Lists the organizations you pay for, including ones that now pay for themselves.
 | --- | --- |
 | `count` | Total number of organizations |
 | `organization_id` | The organization's ID |
-| `name` | The organization's name |
+| `name` | The organization's name, or `null` once it pays for itself |
 | `linked_at` | When you started paying for the organization |
 | `detached_at` | When the organization started paying for itself, or `null` |
-| `custom_limits_usd` | The organization's monthly limit per product, in whole US dollars |
+| `custom_limits_usd` | The limits you set for this organization, in whole US dollars per product. `null` means no limit. A product that isn't listed follows your default limits. |
 
 ### Set limits for an organization
 
@@ -519,9 +555,9 @@ JSON
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `custom_limits_usd` | object | Maps a product key, such as `session_replay`, to a monthly limit in whole US dollars. `null` removes that product's limit. |
+| `custom_limits_usd` | object | Maps a product key, such as `session_replay`, to a monthly limit in whole US dollars. The limit replaces your default for that product. `null` means no limit, even if you have a default for that product. |
 
-The response is the organization, in the same shape as an entry in [list organizations](#list-organizations).
+The response is the organization, in the same shape as an entry in [list organizations](#list-organizations). An organization you don't pay for now returns 404 `not_found`. A product that isn't metered, or that the organization doesn't have, returns 400 `invalid_request`.
 
 ### List invoices
 
@@ -543,7 +579,7 @@ curl -G https://us.posthog.com/api/agentic/provisioning/payer/invoices \
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | `organization_id` | UUID | No | Only this organization's invoices |
-| `status` | string | No | Only invoices in this status, for example `open` or `paid` |
+| `status` | string | No | Only invoices in this status: `open`, `paid`, `uncollectible`, or `void` |
 | `limit` | integer | No | Number of results to return, from 1 to 100 |
 | `offset` | integer | No | Number of results to skip |
 
@@ -575,9 +611,9 @@ curl -G https://us.posthog.com/api/agentic/provisioning/payer/invoices \
 | `organization_id` | The organization the invoice is for |
 | `period_start` | Start of the billing period the invoice covers |
 | `period_end` | End of the billing period the invoice covers |
-| `amount_cents` | Invoice total, in cents |
+| `amount_cents` | What you owe for the invoice, after any credit the organization has, in cents |
 | `currency` | Three-letter currency code |
-| `status` | `draft`, `open`, `paid`, `uncollectible`, or `void` |
+| `status` | The invoice's status, such as `open` or `paid` |
 | `settlement_id` | The settlement that pays the invoice, or `null` |
 | `pdf_url` | URL of the invoice PDF, or `null` |
 
@@ -621,9 +657,9 @@ Lists your monthly settlements.
 | `settlement_id` | The settlement's ID |
 | `period_start` | Start of the month the settlement pays for |
 | `period_end` | End of the month the settlement pays for |
-| `amount_cents` | Total charged, in cents |
+| `amount_cents` | The settlement's total, in cents |
 | `currency` | Three-letter currency code |
-| `status` | `pending`, `processing`, `paid`, or `failed` |
+| `status` | `pending`, `processing`, `paid`, or `failed`. A charge that PostHog holds, for example until you add a payment method, stays `pending`. |
 | `attempt_count` | How many times PostHog has tried the charge |
 | `next_attempt_at` | When PostHog tries the charge again, or `null` |
 | `paid_at` | When the charge succeeded, or `null` |
@@ -632,7 +668,7 @@ Lists your monthly settlements.
 
 `GET /api/agentic/provisioning/payer/settlements/{settlement_id}`
 
-Returns a settlement with the organization invoices it pays. The response has the fields of an entry in [list settlements](#list-settlements), plus `invoices`, a list of invoices in the shape of [list invoices](#list-invoices).
+Returns a settlement with the organization invoices it pays. The response has the fields of an entry in [list settlements](#list-settlements), plus `invoices`, a list of the invoices it pays. Each invoice has the fields of an entry in [list invoices](#list-invoices), plus `charged_cents`, what the settlement charged for that invoice. In these entries, `amount_cents`, `period_start`, and `period_end` are `null` until PostHog has recorded the invoice.
 
 ### Actions only on the partner billing page
 
@@ -640,7 +676,7 @@ These actions aren't in the API. Admins of your linked organization use the [par
 
 - Open the billing portal to change your payment method, billing address, or tax IDs
 - Retry a failed charge
-- Set default limits for new organizations
+- Set default limits
 
 ### Errors
 
@@ -669,7 +705,7 @@ Errors use the same envelope as account requests:
 
 ### Rate limits
 
-Reads (`GET`) share one budget, and changes (`PATCH` and `POST`) share another. Your app signs its requests and is linked to an organization, so it's on the [10x tier](/docs/integrate/provisioning#your-tier): each budget allows a burst of 300 and refills at 1,200 per hour. Test events have their own budget, a burst of 5 that refills at 30 per hour, which doesn't scale with your tier. The [limits endpoint](/docs/integrate/provisioning#check-your-limits) reports them as `payer_reads`, `payer_writes`, and `payer_test_events`.
+Reads (`GET`) share one budget, and changes (`PATCH` and `POST`) share another. Your app signs its requests and is linked to an organization, so it's on the [10x tier](/docs/integrate/provisioning#your-tier): each budget allows a burst of 300 and refills at 1,200 per hour. Test events have their own budget, a burst of 5 that refills at 30 per hour, which doesn't scale with your tier. The [limits endpoint](/docs/integrate/provisioning#check-your-limits) reports them as `payer_reads`, `payer_writes`, and `payer_test_events`. A request that fails a check before PostHog starts on it, such as a malformed field, doesn't count against your budget. A request refused while PostHog makes the change, such as a webhook URL that resolves to a private address, still counts.
 
 ## Get the standard rates
 
@@ -723,19 +759,21 @@ curl https://billing.posthog.com/api/pricing
 
 ## Set spending limits
 
-Billing limits work per organization and per product, in whole US dollars a month, the same as [billing limits](/docs/billing/limits-alerts) on any organization. When an organization reaches a product's limit, PostHog stops ingesting that product's data until the next billing period. Limits use the product keys from the [standard rates](#get-the-standard-rates), such as `product_analytics` or `session_replay`.
+Billing limits work per organization and per product, in whole US dollars a month, the same as [billing limits](/docs/billing/limits-alerts) on any organization. When an organization reaches a product's limit, PostHog stops ingesting that product's data until the next billing period. Limits use the product keys from the [standard rates](#get-the-standard-rates), such as `product_analytics` or `session_replay`. Only metered products take a limit, not add-ons such as group analytics.
 
-- **Defaults for new organizations.** Admins of your linked organization set **Default monthly limits per product** on the partner billing page. Each organization gets these limits when PostHog starts billing it to you.
-- **Limits for one organization.** Change an organization's limits with [set limits for an organization](#set-limits-for-an-organization), or with **Edit limits** on the partner billing page.
-- **Your customers can't change them.** Members of the organization can see its limits and usage, but PostHog refuses their limit changes and tells them to contact you. The organization's owners still get PostHog's billing limit alert emails.
-- **A spend alert and cap across all organizations.** `spend_alert_usd` and `spend_cap_usd` apply to this month's total spend across every organization you pay for. When spend reaches the alert, PostHog sends you a spend alert. When it reaches the cap, PostHog caps further usage across all your organizations until you raise or remove the cap. Set them on the partner billing page or with [update webhook and spend settings](#update-webhook-and-spend-settings), and check `spend.capped` in [your billing status](#get-your-billing-status).
+- **Default limits.** Admins of your linked organization set **Default monthly limits per product** on the partner billing page. A default applies to every organization you pay for that has no limit of its own for that product, including organizations you already pay for, and those organizations follow it when you change it. Removing a default puts them back on their plan's starting limit for that product, which can be no limit.
+- **Limits for one organization.** Set an organization's own limits with [set limits for an organization](#set-limits-for-an-organization), or with **Edit limits** on the partner billing page. An organization's own limit replaces your default for that product, and `null` means no limit.
+- **Limits below the spend so far.** A limit below what an organization has already spent on a product this period takes effect from the next period. Until then, the product's limit stays at the spend so far, so further paid usage stops.
+- **Your customers can't change them.** Members of the organization can see its limits and usage, but PostHog refuses their limit changes and tells them to contact you. Your limit changes don't email the organization's members. Its owners still get PostHog's billing limit alert emails.
+- **Spend alert.** Set `spend_alert_usd` on the partner billing page or with [update webhook and spend settings](#update-webhook-and-spend-settings). The first time in a month that your spend across the organizations you pay for reaches it, PostHog sends you a [`spend.alert`](#spendalert) event.
+- **Spend cap.** Set `spend_cap_usd` the same way. When your spend this month reaches it, PostHog stops further paid usage in every organization you pay for: it holds each product at what the organization has already spent on it this month. Usage within each product's free allowance goes on, and the organizations' members get no email about it. [`spend.capped`](#get-your-billing-status) is `true` while the cap holds, and PostHog sends no event for it. The cap lifts when you raise it above your spend or remove it, or when a new month starts.
 
 ## When a customer pays for itself
 
 An owner of an organization you pay for can choose to pay for it themselves, with **Pay for this organization yourself** on the organization's billing page. When they confirm:
 
 - You stop paying for the organization from that moment. You pay for its usage up to `detached_at`, including its usage earlier that month, and the organization pays from then on.
-- You get an `organization.detached` event. In [list organizations](#list-organizations), the organization has `detached_at` set, and `organization_count` no longer includes it.
+- You get an `organization.detached` event. In [list organizations](#list-organizations), the organization has `detached_at` set and its `name` is `null`, and `organization_count` no longer includes it.
 - The organization needs its own payment method, like any other organization.
 - The change can't be undone.
 
