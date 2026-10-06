@@ -3,6 +3,9 @@ title: How we made experiment queries fast
 date: 2026-10-06
 author:
   - juraj-majerik
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/eq_edda1ae71a.png
+featuredImageType: full
 category: Engineering
 tags:
   - Engineering
