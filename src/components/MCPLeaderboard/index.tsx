@@ -21,7 +21,6 @@ import {
     clientMaker,
     delta,
     displayLabel,
-    formatDay,
     formatPct,
     getPeriods,
     groupedSeries,
@@ -135,12 +134,12 @@ function Header({
     metric: Metric
     setMetric: (metric: Metric) => void
 }) {
-    const week = modelWeeks[modelWeeks.length - 1]
-    const reported = knownShare(rows, 'model_vendor', week)
     return (
         <section id="overview" className="not-prose flex flex-col gap-6">
             <header>
-                <p className="text-sm font-semibold uppercase tracking-wide text-secondary m-0 mb-2">MCP leaderboard</p>
+                <p className="text-sm font-semibold uppercase tracking-wide text-secondary m-0 mb-2">
+                    PostHog's MCP Leaderboard
+                </p>
                 <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !m-0 tracking-tight">
                     Which AI is{' '}
                     <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
@@ -148,24 +147,25 @@ function Header({
                     </span>
                 </h1>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
-                    Agents call the{' '}
+                    Who's calling{' '}
                     <Link to="/mcp" className="font-semibold underline">
-                        PostHog MCP server
+                        PostHog's MCP server
                     </Link>{' '}
-                    millions of times a week. Each call says which client sent it, and most say which model is driving.
-                    This page counts them, and rebuilds every time posthog.com deploys.
+                    the most? We're keeping score in real time for our <s>internal</s> purposes and your viewing
+                    pleasure.
                 </p>
             </header>
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-lg font-bold m-0">Week of {formatDay(week)}, by model lab</h2>
+                <h2 className="text-lg font-bold m-0">This week</h2>
                 <MetricToggle metric={metric} onChange={setMetric} />
             </div>
             <Scoreboard rows={rows} weeks={modelWeeks} metric={metric} />
-            <p className="text-xs text-muted m-0 -mt-3">
-                {metric === 'calls_pct'
-                    ? `Share of tool calls that named a model. ${formatPct(reported, 0)} of calls did.`
-                    : "Share of weekly users who called with a model from that lab. People switch models, so this doesn't add up to 100%."}
-            </p>
+            {metric === 'users_pct' && (
+                <p className="text-xs text-muted m-0 -mt-3">
+                    Share of weekly users who called with a model from that lab. People switch models, so this doesn't
+                    add up to 100%.
+                </p>
+            )}
         </section>
     )
 }
@@ -218,39 +218,16 @@ function ModelRace({
     const models = weekShares(rows, 'model', week, metric, { dropUnknown: true, dropOther: true, limit: 15 }).map(
         (share) => ({ ...share, color: colorOf(share.label) })
     )
-    const vendors = weekShares(rows, 'model_vendor', week, 'calls_pct', { dropUnknown: true })
-    const share = (vendor: string) => formatPct(vendors.find((v) => v.label === vendor)?.value ?? 0, 0)
 
     return (
         <section id="models" className="not-prose">
-            <SectionHeading
-                lede={
-                    models[0]
-                        ? `${models[0].label} leads with ${formatPct(
-                              models[0].value,
-                              0
-                          )} of calls. By lab, Anthropic has ${share('Anthropic')} and OpenAI has ${share(
-                              'OpenAI'
-                          )}. Everyone else shares the rest.`
-                        : undefined
-                }
-            >
-                The model race
-            </SectionHeading>
+            <SectionHeading>May the best model win</SectionHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
-                <Card title="Daily share of tool calls, by model" className="@3xl/reader-content:col-span-3">
+                <Card title="Daily tool calls by model" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={days} series={series} theme={theme} height={420} stacked />
-                    <Note>
-                        Shades of one color are models from the same lab. Calls that didn't name a model are left out,
-                        so each day adds up to 100%. We started recording models on {formatDay(days[0])}.
-                    </Note>
                 </Card>
-                <Card title={`Top models, week of ${formatDay(week)}`} className="@3xl/reader-content:col-span-2">
+                <Card title="Top models this week" className="@3xl/reader-content:col-span-2">
                     <ShareBars items={models} />
-                    <Note>
-                        {metricLabel[metric]}. Agents report their own model, so a few report a family, like{' '}
-                        <InlineCode>claude</InlineCode>, instead of a version.
-                    </Note>
                 </Card>
             </div>
         </section>
@@ -274,36 +251,16 @@ function ClientRace({
     const clients = weekShares(rows, 'client', week, metric, { dropUnknown: true, dropOther: true, limit: 15 }).map(
         (share) => ({ ...share, color: clientColor(share.label, theme) })
     )
-    const callShares = weekShares(rows, 'client', week, 'calls_pct', { dropUnknown: true })
-    const leader = callShares.find((share) => share.label !== 'Other')
-    const anthropicApps = byMaker.get('Anthropic')?.slice(-1)[0]
 
     return (
         <section id="clients" className="not-prose">
-            <SectionHeading
-                lede={
-                    leader
-                        ? `${leader.label} sent ${formatPct(
-                              leader.value,
-                              0
-                          )} of calls last week. Anthropic's apps together sent ${formatPct(anthropicApps ?? null, 0)}.`
-                        : undefined
-                }
-            >
-                The client race
-            </SectionHeading>
+            <SectionHeading>AI players battle it out</SectionHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
-                <Card title="Weekly share of tool calls, by client maker" className="@3xl/reader-content:col-span-3">
+                <Card title="Weekly tool calls by AI company" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={weeks} series={series} theme={theme} height={420} stacked />
-                    <Note>
-                        Calls from clients we can't identify are left out. "Custom code" means an agent built straight
-                        on an MCP SDK or an HTTP library, like <InlineCode>python-httpx</InlineCode> or the Vercel AI
-                        SDK.
-                    </Note>
                 </Card>
-                <Card title={`Top clients, week of ${formatDay(week)}`} className="@3xl/reader-content:col-span-2">
+                <Card title="Top harnesses this week" className="@3xl/reader-content:col-span-2">
                     <ShareBars items={clients} />
-                    <Note>{metricLabel[metric]}.</Note>
                 </Card>
             </div>
         </section>
@@ -346,9 +303,7 @@ const BringYourOwnModel = memo(function BringYourOwnModel({
     const hasData = (client: string) => knownShare(rows, 'model_vendor_by_client', week, client) > 0
     return (
         <section id="byom" className="not-prose">
-            <SectionHeading lede="Claude Code runs Claude and Codex runs GPT, so the fairest test is a client where the user picks the model. Here is what they pick.">
-                Bring your own model
-            </SectionHeading>
+            <SectionHeading>Model mix and match</SectionHeading>
             <Card>
                 <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-8 gap-y-5 pb-5 mb-5 border-b border-primary">
                     {FIRST_PARTY_CLIENTS.filter(hasData).map((client) => (
@@ -360,7 +315,6 @@ const BringYourOwnModel = memo(function BringYourOwnModel({
                         <ClientModels key={client} rows={rows} client={client} week={week} theme={theme} />
                     ))}
                 </div>
-                <Note>Share of tool calls in the week of {formatDay(week)}, among calls that named a model.</Note>
             </Card>
         </section>
     )
@@ -369,27 +323,10 @@ const BringYourOwnModel = memo(function BringYourOwnModel({
 const Growth = memo(function Growth({ rows, weeks, theme }: { rows: LeaderboardRow[]; weeks: string[]; theme: Theme }) {
     const calls = totalSeries(rows, weeks, 'calls_index')
     const users = totalSeries(rows, weeks, 'users_index')
-    const lastCalls = (calls[calls.length - 1] ?? 100) / 100
-    const lastUsers = (users[users.length - 1] ?? 100) / 100
-    const since = formatDay(weeks[0])
     return (
         <section id="growth" className="not-prose">
-            <SectionHeading
-                lede={
-                    lastCalls > lastUsers
-                        ? `Tool calls are up ${lastCalls.toFixed(
-                              1
-                          )}x since the week of ${since}. Users are up ${lastUsers.toFixed(
-                              1
-                          )}x. Calls grow faster than users, so each user's agent does more every week.`
-                        : `Users are up ${lastUsers.toFixed(
-                              1
-                          )}x since the week of ${since}, and tool calls are up ${lastCalls.toFixed(1)}x.`
-                }
-            >
-                Growth
-            </SectionHeading>
-            <Card title={`Growth since the week of ${since} (1x is that week)`}>
+            <SectionHeading>How much our tool calls are X-ing</SectionHeading>
+            <Card title="Weekly tool call growth">
                 <LineChart
                     periods={weeks}
                     theme={theme}
@@ -399,31 +336,15 @@ const Growth = memo(function Growth({ rows, weeks, theme }: { rows: LeaderboardR
                         { label: 'Weekly users', color: PALETTE.blue, data: users },
                     ]}
                 />
-                <Note>
-                    Since August 17, 2026, every call says which surface sent it, so we can drop PostHog's own agents
-                    exactly. Before that date we drop them by their client header, which catches nearly all of them.
-                </Note>
             </Card>
         </section>
     )
 })
 
-const HOOD_FACETS: { facet: string; title: string; note: string }[] = [
-    {
-        facet: 'auth_method',
-        title: 'How agents sign in',
-        note: 'OAuth is the one-click connector flow. The rest paste a personal API key.',
-    },
-    {
-        facet: 'region',
-        title: 'Cloud region',
-        note: 'Which PostHog Cloud served the call.',
-    },
-    {
-        facet: 'model_source',
-        title: 'How we know the model',
-        note: 'Most agents name their model when asked. A few clients send it in their request metadata.',
-    },
+const HOOD_FACETS: { facet: string; title: string }[] = [
+    { facet: 'auth_method', title: 'How agents sign in' },
+    { facet: 'region', title: 'PostHog Cloud region' },
+    { facet: 'model_source', title: 'How we know the model' },
 ]
 
 const UnderTheHood = memo(function UnderTheHood({
@@ -440,33 +361,15 @@ const UnderTheHood = memo(function UnderTheHood({
     const protocolSeries = topSeries(groupedSeries(rows, 'protocol_version', weeks), 5, () => '')
         .sort((a, b) => (a.label === 'Other' ? 1 : b.label === 'Other' ? -1 : b.label.localeCompare(a.label)))
         .map((s, i) => ({ ...s, color: categoricalColor(s.label, i) }))
-    const newest = protocolSeries[0]
     return (
         <section id="protocol" className="not-prose">
-            <SectionHeading
-                lede={
-                    newest
-                        ? newest.data[0] < 1
-                            ? `The ${newest.label} spec revision went from nothing to ${formatPct(
-                                  newest.data[newest.data.length - 1],
-                                  0
-                              )} of calls since the week of ${formatDay(weeks[0])}. Clients ship spec updates fast.`
-                            : `The newest spec revision, ${newest.label}, carries ${formatPct(
-                                  newest.data[newest.data.length - 1],
-                                  0
-                              )} of calls.`
-                        : undefined
-                }
-            >
-                Under the hood
-            </SectionHeading>
+            <SectionHeading>The rise and fall of MCP spec versions</SectionHeading>
             <div className="flex flex-col gap-3">
                 <Card title="MCP spec version, weekly share of tool calls">
                     <LineChart periods={weeks} series={protocolSeries} theme={theme} height={260} stacked />
-                    <Note>Calls with an unknown version are left out.</Note>
                 </Card>
                 <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-3 gap-3">
-                    {HOOD_FACETS.map(({ facet, title, note }) => (
+                    {HOOD_FACETS.map(({ facet, title }) => (
                         <Card key={facet} title={title}>
                             <SplitBar
                                 items={weekShares(rows, facet, week, 'calls_pct').map((share, i) => ({
@@ -474,12 +377,10 @@ const UnderTheHood = memo(function UnderTheHood({
                                     label: displayLabel(facet, share.label),
                                     color: categoricalColor(share.label, i),
                                 }))}
-                                caption={note}
                             />
                         </Card>
                     ))}
                 </div>
-                <Note>Share of tool calls in the week of {formatDay(week)}.</Note>
             </div>
         </section>
     )
@@ -490,29 +391,15 @@ function WhatAgentsDo({ rows, week, metric }: { rows: LeaderboardRow[]; week: st
         weekShares(rows, facet, week, by, { dropOther: true, limit: LIST_LENGTH })
     const categories = named('tool_category', metric).map((share) => ({ ...share, color: PALETTE.blue }))
     const tools = named('tool', 'users_pct').map((share) => ({ ...share, color: PALETTE.yellow }))
-    const topTool = named('tool', 'calls_pct')[0]
     return (
         <section id="tools" className="not-prose">
-            <SectionHeading
-                lede={
-                    topTool
-                        ? `The server has hundreds of tools, and ${topTool.label} gets ${formatPct(
-                              topTool.value,
-                              0
-                          )} of calls on its own. Given the choice, agents write their own query.`
-                        : undefined
-                }
-            >
-                What agents do
-            </SectionHeading>
+            <SectionHeading>What agents are up to</SectionHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                 <Card title="Tool categories">
                     <ShareBars items={categories} />
-                    <Note>{metricLabel[metric]}.</Note>
                 </Card>
                 <Card title="Most popular tools">
                     <ShareBars items={tools} />
-                    <Note>Share of weekly users who called the tool at least once.</Note>
                 </Card>
             </div>
         </section>
@@ -525,19 +412,12 @@ const Intent = memo(function Intent({ rows, week }: { rows: LeaderboardRow[]; we
         .reduce((sum, share) => sum + share.value, 0)
     return (
         <section id="intent" className="not-prose">
-            <SectionHeading
-                lede={`${formatPct(
-                    withIntent,
-                    0
-                )} of tool calls come with a reason. A tool name says what ran. The reason says what the user wanted.`}
-            >
-                Agents say why
-            </SectionHeading>
+            <SectionHeading>Agents tell us 'why' {formatPct(withIntent, 0)} of times</SectionHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-2 gap-3">
-                <Card title="How it works">
+                <Card title="How intent works">
                     <ol className="m-0 p-0 list-none flex flex-col gap-2 text-sm text-secondary leading-relaxed">
                         <li>
-                            <strong className="text-primary">1.</strong> MCP analytics adds a{' '}
+                            <strong className="text-primary">1.</strong> PostHog's MCP analytics adds a{' '}
                             <InlineCode>context</InlineCode> argument to every tool's schema: "Why are you calling this
                             tool? Briefly describe the user's goal."
                         </li>
@@ -551,20 +431,14 @@ const Intent = memo(function Intent({ rows, week }: { rows: LeaderboardRow[]; we
                             jobs people bring to your server and which ones fail.
                         </li>
                     </ol>
-                    <Note>
-                        <Link to="/docs/mcp-analytics/intent" className="font-semibold underline">
-                            Read how intent capture works
-                        </Link>
-                    </Note>
                 </Card>
-                <Card title="What one looks like">
+                <Card title="What they look like">
                     <div className="rounded border border-primary bg-accent p-3 font-mono text-sm text-primary leading-relaxed">
                         <span className="text-muted">$mcp_intent: </span>"Comparing signup conversion before and after
                         Tuesday's pricing change"
                     </div>
                     <Note>
-                        An illustrative example. Intents describe real people's work, so we don't publish ours. If an
-                        agent skips the argument, the server can derive an intent from the tool and its arguments
+                        If an agent skips the argument, the server can derive an intent from the tool and its arguments
                         instead.
                     </Note>
                 </Card>
@@ -593,25 +467,11 @@ const Reliability = memo(function Reliability({
         ...share,
         color: categoricalColor(share.label, i),
     }))
-    const first = errorRate.find((rate) => rate !== null)
-    const last = errorRate[errorRate.length - 1]
     return (
         <section id="reliability" className="not-prose">
-            <SectionHeading
-                lede={
-                    last != null && first != null
-                        ? `${formatPct(last)} of calls failed last week${
-                              last < first
-                                  ? `, down from ${formatPct(first)} in the week of ${formatDay(weeks[0])}`
-                                  : ''
-                          }. ${errorTypes[0] ? `Most failures are "${errorTypes[0].label}" errors.` : ''}`
-                        : undefined
-                }
-            >
-                Reliability
-            </SectionHeading>
+            <SectionHeading>Reliability</SectionHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
-                <Card title="Error rate, all calls">
+                <Card title="Error rate">
                     <LineChart
                         periods={weeks}
                         theme={theme}
@@ -620,9 +480,9 @@ const Reliability = memo(function Reliability({
                         series={[{ label: 'Error rate', color: PALETTE.red, data: errorRate }]}
                     />
                     <h4 className="text-sm font-bold text-primary mt-4 mb-1.5">Why calls fail</h4>
-                    <SplitBar items={errorTypes} caption="Share of failed calls by error type, last week." />
+                    <SplitBar items={errorTypes} />
                 </Card>
-                <Card title="Latency, all calls">
+                <Card title="Latency">
                     <LineChart
                         periods={weeks}
                         theme={theme}
@@ -634,15 +494,12 @@ const Reliability = memo(function Reliability({
                         ]}
                     />
                 </Card>
-                <Card
-                    title={`Error rate by client, week of ${formatDay(week)}`}
-                    className="@2xl/reader-content:col-span-2"
-                >
+                <Card title="Error rate by client this week" className="@2xl/reader-content:col-span-2">
                     <ShareBars
                         items={clients}
                         detail={(item) => (item.p95 ? `p95 ${(item.p95 / 1000).toFixed(1)}s` : null)}
                     />
-                    <Note>The ten clients with the most calls.</Note>
+                    <Note>Top ten clients with the most calls.</Note>
                 </Card>
             </div>
         </section>
@@ -671,23 +528,10 @@ const STEPS: React.ReactNode[] = [
     <>When posthog.com builds, Gatsby calls both endpoints and bakes the results into this page.</>,
 ]
 
-const RULES: React.ReactNode[] = [
-    <>Customer calls only. PostHog's own agents, cloud tasks, Slack bot, and wizard are out.</>,
-    <>
-        Complete periods only. Single-tool clients wrap every call in <InlineCode>exec</InlineCode>, and we count the
-        inner call once.
-    </>,
-    <>Agents report their own model. Treat it as a strong hint, not proof.</>,
-    <>Client labels match the MCP analytics product, plus a few open-source agents it doesn't name yet.</>,
-    <>No raw counts leave PostHog. The endpoints return percentages, rates, and latency only.</>,
-]
-
 const HowItWorks = memo(function HowItWorks({ fetchedAt }: { fetchedAt: string | null }) {
     return (
         <section id="how-it-works" className="not-prose">
-            <SectionHeading lede="PostHog events, two PostHog endpoints, one static page.">
-                How this page works
-            </SectionHeading>
+            <SectionHeading>How this page works</SectionHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 @4xl/reader-content:grid-cols-4 gap-3">
                 {STEPS.map((step, i) => (
                     <Card key={i}>
@@ -698,17 +542,6 @@ const HowItWorks = memo(function HowItWorks({ fetchedAt }: { fetchedAt: string |
                     </Card>
                 ))}
             </div>
-            <h3 className="text-base font-bold text-primary mt-6 mb-2">What we count</h3>
-            <ul className="m-0 p-0 list-none flex flex-col gap-1 text-sm text-secondary leading-relaxed">
-                {RULES.map((rule, i) => (
-                    <li key={i} className="flex gap-2">
-                        <span aria-hidden className="text-muted">
-                            •
-                        </span>
-                        <span>{rule}</span>
-                    </li>
-                ))}
-            </ul>
             {fetchedAt && (
                 <p className="text-xs text-muted mt-4 mb-0">Data fetched {new Date(fetchedAt).toUTCString()}.</p>
             )}
@@ -719,9 +552,9 @@ const HowItWorks = memo(function HowItWorks({ fetchedAt }: { fetchedAt: string |
 // A house ad for MCP analytics: the product this page is built with.
 function MCPAnalyticsAd() {
     const features = [
-        'The clients and models your users bring',
-        'Intents, grouped into themes',
-        'Failing tools, with the error and the session',
+        'Clients and models your users bring',
+        'Intents, grouped into clusters',
+        'Failing tools, with errors and sessions',
         "Capabilities agents asked for that you don't have",
     ]
     return (
@@ -738,9 +571,8 @@ function MCPAnalyticsAd() {
                     Run an MCP server? Get this page for it.
                 </h2>
                 <p className="text-secondary leading-relaxed m-0 mb-4 max-w-prose">
-                    Everything above comes from MCP analytics running on our server. Install it on yours and you get the
-                    same breakdowns for your users, plus the parts we keep private: every session's tool calls and the
-                    intent behind each one.
+                    Everything here comes from PostHog's MCP analytics running on our server. Install it on yours and
+                    you get the same breakdowns for your users, plus the parts we keep private.
                 </p>
                 <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
                     {features.map((feature) => (
@@ -751,7 +583,7 @@ function MCPAnalyticsAd() {
                     ))}
                 </ul>
                 <p className="text-sm text-secondary m-0 mb-4">
-                    One command instruments a TypeScript or Python server:{' '}
+                    Run this in your MCP server's project:{' '}
                     <InlineCode>npx -y @posthog/wizard@latest mcp-analytics</InlineCode>
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -770,7 +602,7 @@ function MCPAnalyticsAd() {
 function CTA() {
     return (
         <section id="get-started" className="not-prose mb-20">
-            <SectionHeading lede="Connect your agent and next week's numbers include you.">
+            <SectionHeading lede="Connect your agent and next week's numbers will include you.">
                 Join the leaderboard
             </SectionHeading>
             <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
