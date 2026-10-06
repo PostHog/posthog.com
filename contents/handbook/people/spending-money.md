@@ -212,7 +212,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
 - AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
-  - [Claude](https://claude.ai) (including Claude Code): log in with SSO and you'll be added to our team plan. If SSO doesn't add you automatically, request access with Zluri in Slack or ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+  - [Claude](https://claude.ai) (including Claude Code): you need to be invited to our team plan – logging in with SSO doesn't add you automatically. Request an invite yourself with the `/accessrequest` command in Slack.
   - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
