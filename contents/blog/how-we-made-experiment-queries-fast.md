@@ -11,7 +11,9 @@ tags:
 
 > In February, the p95 latency of our experiment queries was 19 seconds, and the slowest 1% took over a minute and a half. Queries regularly died because they timed out, ran out of memory, or scanned more data than our cluster allowed. By September, p95 was down to 4 seconds and those failures were 14 times rarer, while monthly query volume more than tripled. This post is about what we did to make this happen.
 
-![Monthly experiment query volume tripled in 2026 while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91.4 to 13.5 seconds](/images/experiment-queries/latency-volume.png)
+![Monthly experiment query volume against p95 and p99 latency, February to September 2026](/images/experiment-queries/latency-volume.png)
+
+<Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The latency axis is square-root scaled.</Caption>
 
 PostHog Experiments first shipped in December 2021 as a very minimal tool. Built on top of our Feature Flags, it was initially just a simple wrapper around our Product Analytics – a single funnel query with some statistical calculations on top.
 
@@ -72,7 +74,9 @@ To solve this uncertainty for good, we built a comprehensive canary testing suit
 
 The payoff of all this work is visible in how much data a query needs to touch:
 
-![Average data scanned per experiment query fell from 207 GB in February to 7.6 GB in September](/images/experiment-queries/gb-per-query.png)
+![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
+
+<Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
 
 ## 3. Optimize the SQL
 
