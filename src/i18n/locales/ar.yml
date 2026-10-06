@@ -271,7 +271,7 @@ messages:
                 label: 'السعر يبدأ من:'
                 old: 0 دولار
                 new: مجانًا
-                urgency: '><larger>آخر قطعة بهذا السعر!!</larger>'
+                urgency: '<larger>آخر قطعة بهذا السعر!!</larger>'
             button: ابدأ الآن
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
