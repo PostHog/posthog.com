@@ -6489,8 +6489,8 @@
             "destination": "/context-warehouse/warehouse"
         },
         {
-            "source": "/docs/data-warehouse/managed-warehouse",
-            "destination": "/docs/data-warehouse/warehouse"
+            "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/warehouse:ext?"
         },
         {
             "source": "/docs/data-warehouse/managed-warehouse/:path*",
