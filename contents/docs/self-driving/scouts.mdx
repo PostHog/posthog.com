@@ -221,7 +221,7 @@ Built-in scouts don't do this. Their instructions are maintained by PostHog and 
 
 Scouts aren't the only thing that emits [signals](/docs/self-driving/signals). PostHog also has **signal sources**: built-in pipelines that watch one specific stream continuously, like error tracking, session replay, Zendesk, GitHub Issues, and Linear.
 
-The difference is how they look, and what you get for it. A signal source watches a single stream continuously and processes every qualifying item in it – deterministic and exhaustive, with no bar to clear. A scout runs on a schedule, explores more holistically, and decides what's worth surfacing – judgement and steerability, at the cost of being selective rather than exhaustive.
+The difference is how they look, and what you get for it. A signal source watches a single stream continuously. Out of the box, it processes every qualifying item in that stream – deterministic and exhaustive. Some sources, like Zendesk, GitHub Issues, and Linear, also accept [plain-language steering](/docs/self-driving/signals#steering-a-source) on their source card, which trades that exhaustive coverage for more focused intake. A scout runs on a schedule, explores more holistically, and decides what's worth surfacing – judgement and steerability, at the cost of being selective rather than exhaustive.
 
 Neither is the upgrade from the other and most projects run both. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with. For a side-by-side breakdown and when to reach for which, see [sources or scouts?](/docs/self-driving/signals#sources-or-scouts).
 
