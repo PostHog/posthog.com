@@ -43,6 +43,8 @@ The full `cli:` block schema (roles, `parentCommand`, the `default` leaf, naming
 
 Use the [wizard workbench](https://github.com/PostHog/wizard-workbench) for local, end-to-end development of the wizard. Its `phrocs` setup runs context mill, the MCP inspector, and the wizard build, with hot reload where supported. Local PostHog (port 8010) and the AI gateway (port 8080) run from the posthog repo with `hogli dev:apply product_analytics --include ai-gateway`, then `hogli up`. The [workbench README](https://github.com/PostHog/wizard-workbench#readme) covers setup.
 
+When you develop, pass two keys: a PostHog personal API key (`phx_`) for MCP access, and the gateway service key (`phs_`) from 1Password for model calls. The workbench reads them from `POSTHOG_PERSONAL_API_KEY` and `POSTHOG_GATEWAY_TOKEN`.
+
 The workbench is also responsible for CI and testing the wizard across a matrix of test applications.
 
 <ProductScreenshot
