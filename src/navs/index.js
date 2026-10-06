@@ -8182,6 +8182,15 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Broadcasts',
+                },
+                {
+                    name: 'Send a broadcast',
+                    url: '/docs/workflows/broadcasts',
+                    icon: 'IconSend',
+                    color: 'orange',
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -8209,10 +8218,6 @@ export const docsMenu = {
                         {
                             name: 'Create emails with PostHog AI',
                             url: '/docs/workflows/create-emails-ai',
-                        },
-                        {
-                            name: 'Send a broadcast',
-                            url: '/docs/workflows/broadcasts',
                         },
                         {
                             name: 'Run AI tasks from a workflow',
