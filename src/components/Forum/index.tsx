@@ -222,7 +222,7 @@ export default function Forum(props: any) {
         <MotionConfig reducedMotion="user">
             <ForumActionsContext.Provider value={actions}>
                 {view !== 'post' && view !== 'new' && <SEO title={title} />}
-                <div className="@container w-full h-full flex flex-col">
+                <div data-scheme="secondary" className="@container w-full h-full flex flex-col border-t border-primary">
                     <div className="flex flex-col @2xl:flex-row flex-grow min-h-0">
                         <Sidebar view={view} topics={topics} activeTopic={activeTopic} loading={topicsLoading} />
                         <main data-scheme="primary" className="flex-1 min-w-0 min-h-0 bg-primary text-primary">

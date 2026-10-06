@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconTriangleUp, IconTriangleUpFilled } from '@posthog/icons'
+import { IconChevronDown, IconTriangleUp, IconTriangleUpFilled } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../context/App'
 import { useForumPost } from './hooks'
@@ -10,10 +10,13 @@ export default function VoteBox({
     postId,
     numUpvotes = 0,
     hasUpvoted = false,
+    inline = false,
 }: {
     postId: number
     numUpvotes?: number
     hasUpvoted?: boolean
+    // A text button for the row under a post. The default is the tall box beside a post.
+    inline?: boolean
 }) {
     const { user } = useUser()
     const { openSignIn } = useApp()
@@ -44,6 +47,22 @@ export default function VoteBox({
 
     // An upvote rolls the number up and a removed vote rolls it down; the box pops a little on each click.
     const direction = vote.hasUpvoted ? 1 : -1
+
+    if (inline) {
+        return (
+            <button
+                onClick={handleClick}
+                aria-pressed={vote.hasUpvoted}
+                aria-label={vote.hasUpvoted ? 'Remove upvote' : 'Upvote'}
+                className={`inline-flex items-center gap-1 rounded px-1.5 py-1 text-sm hover:bg-accent ${
+                    vote.hasUpvoted ? 'text-red dark:text-yellow' : 'text-secondary'
+                }`}
+            >
+                <IconChevronDown className="size-4 rotate-180" />
+                <span className="tabular-nums">{vote.numUpvotes}</span>
+            </button>
+        )
+    }
 
     return (
         <motion.button

@@ -365,7 +365,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 >
                                     <div className="mr-2 relative ml-[-2px]">
                                         <Avatar
-                                            className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
+                                            className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
                                             image={getAvatarURL(profile?.data?.attributes)}
                                             color={profile?.data.attributes.color}
                                         />
@@ -400,7 +400,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full ${
+                                className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
@@ -477,7 +477,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                 </div>
             </div>
 
-            <div className={`border-l-0 ${isInForum ? 'pl-[calc(44px_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
+            <div className={`border-l-0 ${isInForum ? 'pl-[calc(2rem_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&

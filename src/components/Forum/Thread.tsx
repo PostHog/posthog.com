@@ -26,8 +26,10 @@ import ReportSpamButton from 'components/Squeak/components/ReportSpamButton'
 import SubscribeButton from 'components/Squeak/components/SubscribeButton'
 import QuestionSkeleton from 'components/Squeak/components/QuestionSkeleton'
 import OSButton from 'components/OSButton'
+import { IconLink } from 'components/OSIcons'
 import Link from 'components/Link'
 import Modal from 'components/RadixUI/Modal'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import DialogSelect from './DialogSelect'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
@@ -41,6 +43,35 @@ import { commentCount, TagPills } from './PostRow'
 import DeletePostDialog from './DeletePostDialog'
 
 type MaxRequest = { manual: boolean; withContext: boolean }
+type CommentOrder = 'oldest' | 'newest'
+
+const commentOrderOptions: { label: string; value: CommentOrder }[] = [
+    { label: 'Oldest', value: 'oldest' },
+    { label: 'Newest', value: 'newest' },
+]
+
+const CopyPostLink = ({ permalink }: { permalink: string }) => {
+    const [copied, setCopied] = useState(false)
+
+    return (
+        <OSButton
+            size="sm"
+            hover="background"
+            icon={copied ? <IconCheck /> : <IconLink />}
+            onClick={async () => {
+                try {
+                    await navigator.clipboard.writeText(`${window.location.origin}/forum/p/${permalink}`)
+                    setCopied(true)
+                    window.setTimeout(() => setCopied(false), 2000)
+                } catch {
+                    setCopied(false)
+                }
+            }}
+        >
+            {copied ? 'Copied' : 'Copy link'}
+        </OSButton>
+    )
+}
 
 const MoveDialog = ({
     open,
@@ -204,6 +235,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
     const [editing, setEditing] = useState(false)
     const [dialog, setDialog] = useState<'move' | 'tags' | 'delete' | null>(null)
     const [maxRequests, setMaxRequests] = useState<MaxRequest[]>([])
+    const [commentOrder, setCommentOrder] = useState<CommentOrder>('oldest')
     const {
         question,
         isLoading,
@@ -299,7 +331,17 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
     return (
         <CurrentQuestionContext.Provider
             value={{
-                question: { id: question.id, ...post },
+                question: {
+                    id: question.id,
+                    ...post,
+                    // The thread loads oldest first. Newest first flips that list for the replies below.
+                    replies: post.replies?.data
+                        ? {
+                              ...post.replies,
+                              data: commentOrder === 'newest' ? [...post.replies.data].reverse() : post.replies.data,
+                          }
+                        : post.replies,
+                },
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
@@ -322,9 +364,8 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                 {/* The post and its replies share one centered column, so a wide or expanded window does not
                     leave the thread on the left. */}
                 <div className="max-w-[54rem] mx-auto">
-                    <article className="px-4 @xl:px-6 py-5 flex gap-4">
-                        <VoteBox postId={question.id} numUpvotes={post.numUpvotes} hasUpvoted={post.hasUpvoted} />
-                        <div className="flex-1 min-w-0 max-w-3xl">
+                    <article className="px-4 @xl:px-6 py-5">
+                        <div className="min-w-0 max-w-3xl">
                             {post.archived && (
                                 <p className="m-0 mb-3 p-2 text-sm rounded border border-primary bg-accent">
                                     This post is archived. Only its author and moderators can see it.
@@ -332,7 +373,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                             )}
                             <h1 className="text-2xl font-bold text-primary leading-tight m-0">{post.subject}</h1>
                             <div className="flex items-center gap-2 mt-2 flex-wrap text-sm text-secondary">
-                                <Profile profile={post.profile?.data} />
+                                <Profile compact profile={post.profile?.data} />
                                 <LevelBadge points={post.profile?.data?.attributes?.reputation} />
                                 {/* A published draft dates from when it went live, not from when it was first saved. */}
                                 <Days
@@ -341,6 +382,29 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                     edits={post.edits}
                                 />
                                 <TagPills tags={post.forumTags} />
+                            </div>
+                            <div className="mt-4">
+                                <EditWrapper
+                                    data={question}
+                                    type="question"
+                                    onSubmit={() => mutate()}
+                                    onEditingChange={setEditing}
+                                    editing={editing}
+                                >
+                                    <Markdown className="question-content">{post.body}</Markdown>
+                                </EditWrapper>
+                            </div>
+                            <div className="flex items-center gap-1 mt-2 flex-wrap">
+                                <VoteBox
+                                    inline
+                                    postId={question.id}
+                                    numUpvotes={post.numUpvotes}
+                                    hasUpvoted={post.hasUpvoted}
+                                />
+                                {/* Reply emails: the thread subscription that Squeak questions use */}
+                                <SubscribeButton contentType="question" id={question.id} label="Subscribe" />
+                                <CopyPostLink permalink={permalink} />
+                                {!isAuthor && <ReportSpamButton type="question" id={question.id} label="Report" />}
                                 <div className="ml-auto flex items-center">
                                     {isForumModerator && (
                                         <ForumMenu
@@ -357,9 +421,6 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                             }
                                         />
                                     )}
-                                    {/* Reply emails: the thread subscription that Squeak questions use */}
-                                    <SubscribeButton contentType="question" id={question.id} />
-                                    {!isAuthor && <ReportSpamButton type="question" id={question.id} />}
                                     {(isAuthor || isModerator) && (
                                         <OSButton
                                             onClick={() => setDialog('delete')}
@@ -380,26 +441,24 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                     )}
                                 </div>
                             </div>
-                            <div className="mt-4">
-                                <EditWrapper
-                                    data={question}
-                                    type="question"
-                                    onSubmit={() => mutate()}
-                                    onEditingChange={setEditing}
-                                    editing={editing}
-                                >
-                                    <Markdown className="question-content">{post.body}</Markdown>
-                                </EditWrapper>
-                            </div>
                         </div>
                     </article>
 
                     <div className="px-4 @xl:px-6">
-                        <div className="flex items-center gap-2 border-t border-primary pt-3 pb-1 text-sm">
+                        <div className="flex items-center gap-2 border-t border-primary py-3 text-sm">
                             <strong>{commentCount(post.numReplies ?? 0)}</strong>
-                            <span className="text-muted">· oldest first</span>
+                            <div className="ml-auto w-48">
+                                <ToggleGroup
+                                    title="Comment order"
+                                    hideTitle
+                                    options={commentOrderOptions}
+                                    value={commentOrder}
+                                    onValueChange={(value) => setCommentOrder(value as CommentOrder)}
+                                    size="sm"
+                                />
+                            </div>
                             {locked && (
-                                <span className="ml-auto inline-flex items-center gap-1 text-muted">
+                                <span className="inline-flex items-center gap-1 text-muted">
                                     <IconLock className="size-3.5" /> Locked
                                 </span>
                             )}
