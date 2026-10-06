@@ -20,7 +20,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
         <span
             className={`${
                 hovered || visible ? 'opacity-100' : 'opacity-40'
-            } focus-within:opacity-100 inline-flex align-middle mr-2 @lg/reader-content:absolute @lg/reader-content:left-0 @lg/reader-content:top-2 @lg/reader-content:mr-0 @lg/reader-content:-translate-x-full pr-2 justify-center transition-opacity`}
+            } focus-within:opacity-100 inline-flex align-middle ml-2 @lg/reader-content:absolute @lg/reader-content:left-0 @lg/reader-content:top-2 @lg/reader-content:ml-0 @lg/reader-content:-translate-x-full pr-2 justify-center transition-opacity`}
         >
             <AnimatePresence>
                 {visible && (
@@ -102,8 +102,8 @@ export const Heading = ({
             className={`relative group scroll-mt-[108px] ${className}`}
             {...other}
         >
-            {!hideCopy && <CopyAnchor hovered={hovered} id={id} />}
             {children}
+            {!hideCopy && <CopyAnchor hovered={hovered} id={id} />}
         </Heading>
     )
 }
