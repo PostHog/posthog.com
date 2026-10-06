@@ -34,9 +34,13 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
     const languageAlternates = [
         { hrefLang: 'en', href: '/' },
         // A regional translation is also listed under its bare code, so pt.yml (lang: pt-BR) serves every
-        // Portuguese speaker in search, not only those in Brazil.
+        // Portuguese speaker in search, not only those in Brazil. Chinese is the exception: bare "zh" also
+        // covers Traditional Chinese, which /zh does not serve, so zh.yml (lang: zh-CN) is listed as zh-CN only.
         ...translations.flatMap(({ code, lang }) =>
-            (lang === code ? [code] : [code, lang]).map((hrefLang) => ({ hrefLang, href: `/${code}` }))
+            (lang === code ? [code] : code === 'zh' ? [lang] : [code, lang]).map((hrefLang) => ({
+                hrefLang,
+                href: `/${code}`,
+            }))
         ),
         { hrefLang: 'x-default', href: '/' },
     ]
