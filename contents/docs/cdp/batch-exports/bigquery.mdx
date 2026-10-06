@@ -121,21 +121,22 @@ This section describes the models that can be exported to BigQuery.
 
 This is the default model for BigQuery batch exports. The schema of the model as created in BigQuery is:
 
-| Field                 | Type               | Description                                                               |
-| --------------------- | ------------------ | ------------------------------------------------------------------------- |
-| uuid                  | `STRING`           | The unique ID of the event within PostHog                                 |
-| event                 | `STRING`           | The name of the event that was sent                                       |
-| properties            | `STRING` or `JSON` | All the properties sent along with an event                               |
-| elements              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
-| set                   | `STRING` or `JSON` | Deprecated. Person update payloads aren't retained on stored events       |
-| set_once              | `STRING` or `JSON` | Deprecated. Person update payloads aren't retained on stored events       |
-| person_properties     | `STRING` or `JSON` | All the person properties at the time the event was ingested              |
-| distinct_id           | `STRING`           | The `distinct_id` of the user who sent the event                          |
-| team_id               | `INT64`            | The `team_id` for the event                                               |
-| ip                    | `STRING`           | The IP address that was sent with the event                               |
-| site_url              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
-| timestamp             | `TIMESTAMP`        | The timestamp associated with an event                                    |
-| bq_ingested_timestamp | `TIMESTAMP`        | The timestamp when the event was sent to BigQuery                         |
+| Field                 | Type               | Description                                                                                                           |
+| --------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| uuid                  | `STRING`           | The unique ID of the event within PostHog                                                                             |
+| event                 | `STRING`           | The name of the event that was sent                                                                                   |
+| properties            | `STRING` or `JSON` | All the properties sent along with an event                                                                           |
+| elements              | `STRING`           | This field is present for backwards compatibility but has been deprecated                                             |
+| set                   | `STRING` or `JSON` | Deprecated. Person update payloads aren't retained on stored events                                                   |
+| set_once              | `STRING` or `JSON` | Deprecated. Person update payloads aren't retained on stored events                                                   |
+| person_properties     | `STRING` or `JSON` | All the person properties at the time the event was ingested. Later changes to the person do not update exported rows |
+| person_id             | `STRING`           | The ID of the person at the time the event was ingested. Later person merges do not update exported rows              |
+| distinct_id           | `STRING`           | The `distinct_id` of the user who sent the event                                                                      |
+| team_id               | `INT64`            | The `team_id` for the event                                                                                           |
+| ip                    | `STRING`           | The IP address that was sent with the event                                                                           |
+| site_url              | `STRING`           | This field is present for backwards compatibility but has been deprecated                                             |
+| timestamp             | `TIMESTAMP`        | The timestamp associated with an event                                                                                |
+| bq_ingested_timestamp | `TIMESTAMP`        | The timestamp when the event was sent to BigQuery                                                                     |
 
 Some fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
@@ -154,13 +155,15 @@ CREATE TABLE IF NOT EXISTS `{project_id}.{dataset_id}.{table_id}` (
     ip STRING,
     site_url STRING,
     timestamp TIMESTAMP,
+    person_properties JSON,
+    person_id STRING,
     bq_ingested_timestamp TIMESTAMP
 )
 PARTITION BY DATE(timestamp)
 OPTIONS(description = 'PostHog events table')
 ```
 
-> **Note:** If you unchecked the JSON columns option when creating the batch export, replace `JSON` with `STRING` for the `properties`, `set`, and `set_once` columns.
+> **Note:** If you unchecked the JSON columns option when creating the batch export, replace `JSON` with `STRING` for the `properties`, `set`, `set_once`, and `person_properties` columns.
 >
 > The `PARTITION BY DATE(timestamp)` clause matches what PostHog creates automatically; if you need a different partition column or want to configure clustering, adjust the query accordingly.
 

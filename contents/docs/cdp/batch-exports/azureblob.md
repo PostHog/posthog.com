@@ -35,7 +35,26 @@ If your Azure Storage account has firewall rules enabled, you'll need to add the
 
 Azure Blob Storage supports all the models mentioned in the [batch export models reference](/docs/cdp/batch-exports#models).
 
-You can view the schema for each model inside the batch export configuration in the UI.
+### Events model
+
+This is the default model for Azure Blob Storage batch exports. When exported in the Parquet file format, the schema is:
+
+| Field                         | Type        | Description                                                                                                                                                       |
+| ----------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| uuid                          | `STRING`    | The unique ID of the event within PostHog                                                                                                                         |
+| event                         | `STRING`    | The name of the event that was sent                                                                                                                               |
+| distinct_id                   | `STRING`    | The `distinct_id` of the user who sent the event                                                                                                                  |
+| team_id                       | `BIGINT`    | The `team_id` for the event                                                                                                                                       |
+| person_id                     | `STRING`    | The ID of the person at the time the event was ingested. Later person merges do not update exported rows                                                          |
+| properties                    | `STRING`    | All the properties sent along with the event, stored as a JSON-encoded string in Parquet                                                                          |
+| person_properties             | `STRING`    | All the person properties at the time the event was ingested. Later changes to the person do not update exported rows. Stored as a JSON-encoded string in Parquet |
+| timestamp                     | `TIMESTAMP` | When the event occurred, as reported by the client. Microsecond precision, UTC                                                                                    |
+| azure_blob_ingested_timestamp | `TIMESTAMP` | When PostHog read the event to export it. Microsecond precision, UTC                                                                                              |
+| \_inserted_at                 | `TIMESTAMP` | Internal field used by batch exports to track export progress. Included in files but safe to ignore                                                               |
+
+> **Note:** In **JSONLines** exports, the timestamp fields are ISO 8601 strings, and `properties` and `person_properties` are nested JSON objects rather than JSON-encoded strings.
+
+You can view the schema for the other models inside the batch export configuration in the UI.
 
 > **Note:** New fields may be added to these models over time. Therefore, it is recommended that any downstream processes are able to handle additional fields being added to the exported files.
 
