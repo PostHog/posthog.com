@@ -4,52 +4,60 @@
 # here when a review comment applies to more than one string. See the translate skill in
 # .claude/skills/translate and src/i18n/README.md.
 #
-# - Tone is sober, polite, and trustworthy. Body copy uses です/ます: "98%の顧客は PostHog を無料で使っています。"
+# - Tone is polite and trustworthy, with PostHog's light, irreverent touch where it fits. Keep the playful gags,
+#   but never use pejorative slang. Body copy uses です/ます: "98%の顧客は PostHog を無料で使っています。"
+#   Avoid stiff "forced translation" phrasing: pick the wording a Japanese product site would use, even if a
+#   gag gets milder ("お問い合わせ", not "人間と話す").
 #   Headings, buttons, toggles, and menu labels use a short noun or verb form: "料金を見る", "無料で始める", "従量課金制".
-#   Avoid "あなた" when the sentence works without it. Use "お使いの" or drop the subject: "お使いのエージェント".
+#   Avoid "あなた" when the sentence works without it. Use "お使いの", "チーム", or drop the subject: "お使いのデータウェアハウス".
 # - PostHog (the product and the company) takes particles directly: "PostHog は", "PostHog を開く", "PostHog について".
 #   Use "私たち" only when the English says "we" and the sentence needs a subject.
 # - Spacing: put a half-width space between Japanese and a Latin word, a Latin placeholder, or a Latin tag:
 #   "PostHog を", "AI でインストール", "{products} のデータ", "<logo/> を". Do NOT put a space between Japanese and a
-#   numeral or a numeric placeholder: "50万以上", "97%", "月100万イベント", "{count}以上のソース", "0円".
+#   numeral or a numeric placeholder: "50万以上", "97%", "100万イベント/月", "{count}以上のソース", "0円".
 #   Never put a space next to full-width punctuation or brackets: "Cookie バナー", "（CDP-lite）".
 # - Punctuation is full-width: 。、「」（）：？！. Use "…", not "...". Do not use an em dash. Keep "/" and "+" half-width
 #   in lists ("SQL エディター + BI + データ可視化").
-# - Tech words: use the katakana that Japanese devs say: プルリクエスト, バグ, クエリ, コンテキスト, エージェント, デッドクリック,
-#   ファネル. Use "機能", not "フィーチャー". Translate "ship" as "リリース", never "出荷". Use the long vowel mark for -er/-or
+# - Tech words: use the katakana that Japanese devs say: プルリクエスト, バグ, コンテキスト, AI エージェント, デッドクリック,
+#   ファネル. Always write "AI エージェント", never "エージェント" alone. Use "機能", not "フィーチャー". Translate "ship" as "リリース", never "出荷". Use the long vowel mark for -er/-or
 #   words: エディター, ジェネレーター, ユーザー. Choose "ログイン" over "サインイン".
+# - Analytics as data is "行動データ", and analyzing it is "分析" (not "アナリティクス"). A replay is "セッションリプレイ".
+#   Data is stored with "蓄積", not "保存" (which reads like saving a file). Prefer "アクセス" or "活用" over "クエリ" in prose.
+#   "Conversion" to paid is "有料転換率".
 # - Keep product and brand names in English, also inside a sentence: Session Replay, Experiments, Inbox, Self-driving,
 #   context warehouse, PostHog MCP, GitHub issue.
-# - Humor is gentle and understated. Keep each gag, but swap a US reference for a Japanese one with the same shape:
-#   Bond villain -> "特撮の悪の組織", Hillary Clinton -> "黒柳徹子さん", Kim K -> "芸能人非御用達", "jump on a quick call" ->
-#   「料金はお問い合わせください」, explaining to parents -> "お正月に親戚へ説明". No slang or memes.
+# - Humor is gentle and understated. Keep each gag. Swap a US reference for a Japanese one only when the swap keeps
+#   the joke: Bond villain -> "特撮の悪の組織", Kim K -> "芸能人非御用達", "jump on a quick call" ->
+#   「料金はお問い合わせください」, explaining to parents -> "お正月に親戚へ説明". When the joke depends on the person
+#   (Ursula von der Leyen looks like Hillary Clinton), keep the original reference: "ヒラリー・クリントンさん".
+#   No memes.
 # - No exclamation marks for excitement. The only exception is the pushy e-commerce parody in section 8, which
 #   copies Japanese TV shopping: "今ならなんと、初回ご注文が0円引き！", "この価格で残り1点！！".
-# - Real prices stay in US dollars with a period for decimals and a comma for thousands: "$0.00005/イベント", "月5,000".
+# - Real prices stay in US dollars with a period for decimals and a comma for thousands: "$0.00005/イベント", "5,000件/月".
 #   Joke amounts use yen: "0円".
 # - Keep it short. Cut words that the sentence does not need, especially in headings and taskbar labels.
 name: 日本語
 messages:
     meta:
         title: PostHog - プロダクトのコンテキストレイヤー
-        description: PostHog は、指示しなくても問題を自動で診断し、バグを修正し、プルリクエストまで作成します。
+        description: PostHog は、指示を待たずに問題の原因を突き止め、バグの修正からプルリクエストの作成まで自動で対応します。
 
     hero:
         H1: プロダクトの<emphasis>コンテキストレイヤー</emphasis>
         body:
-            1: PostHog は<highlight>アナリティクス、エラー、リプレイ、ビジネスデータ</highlight>を取り込んで保存します。そのデータを、あなたも<underline>エージェント</underline>もクエリして活用できます。
-            2: 50万以上のチームが、すでに PostHog を使って開発しています。
+            1: PostHog は<highlight>行動データ、エラー、セッションリプレイ、ビジネスデータ</highlight>を取り込み、チームも<underline>AI エージェント</underline>も活用しやすい形で蓄積します。
+            2: 50万以上のチームが PostHog を活用しています。
         cta:
-            heading: <logo/> を<highlight>無料で</highlight>セットアップ
+            heading: <logo/> を<highlight>無料で</highlight>使ってみる
             body:
-                1: ユーザーの97%は料金$0
+                1: 97%のユーザーが無料で利用
                 2: クレジットカード不要
                 3: セットアップウィザードが PostHog を自動でインストール
             button:
-                1: 始める
+                1: 無料で始める
                 2:
                     label: AI でインストール
-                    body: ターミナル派の方はこちら：
+                    body: ターミナルで始めたい方に：
 
     section:
         2:
@@ -60,23 +68,23 @@ messages:
             toggle: PostHog に何でも質問
             heading: PostHog に何でも質問
             body:
-                1: PostHog は、プロダクトと会社のデータを取り込み、保存し、クエリできるひとつの場所です。アナリティクス、リプレイ、エラー、ログをその場で結び付け、あらゆる疑問に答えます。
+                1: PostHog なら、行動データとビジネスデータの取り込みから蓄積・分析までを、ワンストップで実現できます。セッションリプレイ、エラー、ログも行動データとひとつに統合し、あらゆる疑問に答えます。
                 2: <link>{count}以上のソース</link>から外部のデータも取り込めば、全体像がさらに明確になります。
             button: 無料で始める
             products:
                 more: ほか<count/>個
-                caption: '{products} のデータが、エージェントに流れ込みます。'
+                caption: '{products} のデータを、AI エージェントに連携します。'
                 label: PostHog のツール
                 view_all: 全{count}個のツールを見る
             demo:
                 label: PostHog AI のデモ
-                description: デモの例：PostHog AI が、Google Ads のトラフィック、PostHog のファネル、Stripe の決済、GitHub の変更をもとに、有料コンバージョンの低下を調査します。モバイルのチェックアウトに必須項目が1つ増えていることを突き止め、チェックアウトを短くするテストを提案します。結果はすべてサンプルデータです。
-                prompt: 新規登録は増えているのに、有料コンバージョンが減っているのはなぜ？
+                description: デモの例：PostHog AI が、Google Ads のトラフィック、PostHog のファネル、Stripe の決済、GitHub の変更をもとに、有料転換率の低下を調査します。モバイルのチェックアウトに必須項目が1つ増えていることを突き止め、チェックアウトを短くするテストを提案します。結果はすべてサンプルデータです。
+                prompt: 新規登録は増えているのに、有料転換率が下がっているのはなぜ？
                 reply:
                     1: 広告のクリックから有料顧客になるまでの流れを追ってみます。
                     2: 低下は支払いより前の段階で始まっています。
                     3: モバイルのチェックアウトに追加された必須項目が原因で、顧客が離脱しています。
-                    4: モバイルのチェックアウトを短くして、テストすることをおすすめします。
+                    4: モバイルのチェックアウトを短くして、A/B テストで検証しましょう。
                 step:
                     1:
                         body: キャンペーンのトラフィックを比較
@@ -92,14 +100,14 @@ messages:
                         result: 必須項目が追加されていた
 
         2b:
-            toggle: エージェントにプロダクトのコンテキストを
-            heading: エージェントにプロダクトのコンテキストを
-            body: ブラウザに切り替えずに、エディターから直接プロダクトのデータをクエリできます。単発の分析から新機能のリリースまで、新しい UI は必要ありません。
+            toggle: AI エージェントにプロダクトのコンテキストを
+            heading: AI エージェントにプロダクトのコンテキストを
+            body: ブラウザに切り替えずに、エディターから直接行動データにアクセスできます。単発の分析から新機能のリリースまでをワンストップで実現。新しい UI は必要ありません。
             cta:
-                label: PostHog MCP をインストール
+                label: PostHog MCP サーバーをインストール
                 alt: または <link>PostHog Desktop</link> を使う
             demo:
-                agents: お使いのエージェント
+                agents: AI エージェント
 
         2c:
             toggle: PostHog でリリース
@@ -111,7 +119,7 @@ messages:
                 1:
                     body: issue ごとにまとめた例外とスタックトレース
                 2:
-                    body: デッドクリック、すぐに戻る操作、長いフリーズ
+                    body: デッドクリック、クイックバック、画面のフリーズ
                 3:
                     title: サポート
                     body: ユーザーからのチケットや問い合わせ
@@ -123,11 +131,11 @@ messages:
 
         3:
             heading: 導入実績
-            body: はい、本当に使われています。2年以上前にどこかのエンジニアが一度試しただけ、というわけではありません。
+            body: はい、実際に使っていただいています。いいえ、「2年以上前にどこかのエンジニアが一度試しただけ」ではありません。
             button: 導入企業を見る
             shuffle: シャッフル
             logo:
-                first_customer: PostHog 最初のお客様
+                first_customer: PostHog の最初の顧客
                 story: 導入事例を読む
             breakdown:
                 colorful:
@@ -158,40 +166,40 @@ messages:
                     col1: 辞書に載っている単語
                     col2: 辞書に載っていない単語
                 american:
-                    col1: アメリカ生まれ
-                    col2: アメリカ生まれではない
+                    col1: アメリカ発
+                    col2: アメリカ発ではない
                 pokemon:
                     col1: ポケモンにいそう
                     col2: 特撮の悪の組織にいそう
                 arr:
-                    col1: ARR で測る
-                    col2: GDP で測る
+                    col1: 規模を ARR で測る
+                    col2: 規模を GDP で測る
                 devTool:
-                    col1: 話題の開発者ツール
-                    col2: 話題だけど開発者ツールではない
+                    col1: 話題の開発ツール
+                    col2: 話題だけど開発ツールではない
                 usesPostHog:
                     col1: PostHog を使っている
                     col2: こちらも PostHog を使っている
 
         4:
-            heading: すべてのデータが<highlight>ひとつにつながる</highlight>
+            heading: すべてのデータが <highlight>PostHog でひとつに</highlight>
             list:
-                heading: context warehouse に<highlight>標準搭載</highlight>されているもの：
+                heading: context warehouse の<highlight>標準搭載</highlight>機能：
                 1: データウェアハウス <tooltip/>
-                2: 120以上のソース/デスティネーション
+                2: 120以上のデータソース/送信先
                 3: SQL エディター + BI + データ可視化
                 4: ユーザーアクティビティフィード（CDP-lite）
                 5: API、Webhook
             # Markdown. Keep the formatting.
             body:
-                1: 顧客の利用状況を分析するときも、AI に指示を出すときも、コンテキストを*すべて*把握しておくべきです。
-                2: PostHog の context warehouse にすべてを集約すれば、あなたもエージェントもダッシュボードも、そこから直接クエリできます。対象には次のものが含まれます：
+                1: 顧客の利用状況を分析するときも、AI に指示を出すときも、*すべて*のコンテキストがそろっていることが重要です。
+                2: PostHog の context warehouse にすべてを集約すれば、チームも AI エージェントもダッシュボードも、そのデータに直接アクセスできます。対象は次のとおりです：
                 list:
                     1: Stripe、Postgres、HubSpot など、120以上の外部ソースのデータ
-                    2: Session Replay や Experiments など、ほかのすべての PostHog ツールから得られるインサイト
-                3: エージェントがよい判断を下すために必要なデータは、すでにここにそろっています。「何が起きたのか教えて」を「次に直すべきはここ」に変える準備はできています。
-            tooltip: 独自のデータソースも接続できます。
-            button: 最初のデータソースを接続
+                    2: Session Replay や Experiments など、PostHog の各ツールから得られるインサイト
+                3: AI エージェントが的確な判断を下すために必要なデータは、すでにここにそろっています。「何が起きたのか教えて」を「次に直すべきはここ」に変える準備はできています。
+            tooltip: お使いのデータウェアハウスも接続できます。
+            button: まずはデータソースを接続
 
         5:
             heading: 従量課金制
@@ -208,31 +216,31 @@ messages:
                 pricing_table: 料金（利用量が増えるほど割安）
             product:
                 1:
-                    freetier: 月100万イベント
+                    freetier: 100万イベント/月
                     pricing: $0.00005/イベント
                 2:
-                    freetier: 月5,000レコーディング
-                    pricing: $0.005/レコーディング
+                    freetier: 5,000件/月
+                    pricing: $0.005/件
                 3:
-                    freetier: 月100万リクエスト
+                    freetier: 100万リクエスト/月
                     pricing: $0.0001/リクエスト
                 4:
-                    freetier: 月100万行
+                    freetier: 100万行/月
                     pricing: $0.000015/行
             button: 料金を見る
 
         6:
-            heading: PostHog を選ぶ理由
-            body: PostHog には、ほかの多くの会社と違う点がいくつもあります：
+            heading: PostHog が選ばれる理由
+            body: PostHog には、他社とは違う点がいくつもあります：
             list:
                 # Markdown. Keep the links.
-                1: '**透明性。** [会社のハンドブック](/handbook)、[営業マニュアル](/handbook/growth/sales/overview)、[会社の戦略](/handbook/why-does-posthog-exist)を、どなたでも読めます。'
+                1: '**透明性。** [ハンドブック](/handbook)、[営業マニュアル](/handbook/growth/sales/overview)、[会社の戦略](/handbook/why-does-posthog-exist)まで、すべて公開しています。'
                 2: '**リリースが速い。** [変更履歴](/changelog)をご覧ください。'
                 3: <emphasis>本当に</emphasis><bold>技術に強いサポート。</bold><team>サポートチーム</team>は全員エンジニア出身です。
-            button: PostHog について詳しく
+            button: PostHog を詳しく見る
 
         7:
-            heading: 寝る前の読みもの
+            heading: 寝る前の読書
             body: まだ読んでくださっている方へ。少しだけ興味を持っていただけそうなリンクを集めました：
             link:
                 2: 技術ドキュメント
@@ -250,9 +258,9 @@ messages:
                 1: G2 のみなさまから高評価
                 2: 芸能人<br/><small>非</small>御用達
             cart:
-                label: 3人が PostHog をカートに入れました<small>（仮）</small>*
+                label: 現在3人が PostHog をカートに入れています<small>（仮）</small>*
                 footnote: '*本物のカートだったら、の話です'
-            footnote: '*PostHog は Web プロダクトのため、CD ではインストールできません。<br/>一度だけ、顧客にフロッピーディスクを送ったことは<emphasis>あります</emphasis>。中身は Rickroll でした。'
+            footnote: '*PostHog は Web サービスのため、CD ではインストールできません。<br/>一度だけ、顧客にフロッピーディスクを送ったことは<emphasis>あります</emphasis>。中身はリックロールでした。'
             cloud:
                 heading: クラウドを選択
                 option:
@@ -273,9 +281,9 @@ messages:
         heading: 法律で義務づけられた Cookie バナー
         body:
             1: PostHog.com はサードパーティ Cookie を使わず、自社の Cookie を1つだけ使用しています。
-            2: 第三者にデータを送ることはありません。（<tooltip>ウルズラ・フォン・デア・ライエン</tooltip>も個人情報保護委員会も、きっと感心してくれるはずです。）
+            2: 第三者にデータを送ることはありません。（<tooltip>ウルズラ・フォン・デア・ライエン</tooltip>も、きっと誇りに思ってくれるはずです。）
         tooltip:
-            label: ウルズラ・フォン・デア・ライエンは欧州委員会の委員長です。黒柳徹子さんとは別人ですので、お間違えのないようご注意ください。
+            label: ウルズラ・フォン・デア・ライエンは欧州委員会の委員長です。ヒラリー・クリントンさんとは別人ですので、お間違えのないようご注意ください。
             image:
                 alt: 欧州委員会委員長のウルズラ・フォン・デア・ライエン
         close: 閉じる
@@ -291,7 +299,7 @@ messages:
             pricing: 料金
             docs: ドキュメント
             community: コミュニティ
-            company: 会社
+            company: 会社情報
             more: その他
             less: 閉じる
         logo:
@@ -304,11 +312,11 @@ messages:
             install: PostHog をインストール
             sdks: SDK とフレームワーク
             products: プロダクト
-            tools: ツール
-            analytics: アナリティクス
-            more_tools: その他のツール
+            analytics: 分析
+            more_products: その他のプロダクト
             application_metrics: アプリケーションメトリクス
             distributed_tracing: 分散トレーシング
+            apps: アプリ
             context: コンテキスト
             reference: リファレンス
             new_to_posthog: PostHog が初めての方
@@ -319,7 +327,7 @@ messages:
             privacy: プライバシーと GDPR
             how_posthog_works: PostHog の仕組み
             glossary: 用語集
-            explore_twig: Twig を見る
+            playground: Playground
             pocket_guides: ポケットガイド
             tutorials: チュートリアル
             templates: テンプレート
@@ -354,7 +362,7 @@ messages:
             display_options: 表示設定
             system_status: システムステータス
             terms: 利用規約
-            privacy: プライバシー
+            privacy: プライバシーポリシー
             dpa: DPA ジェネレーター（楽しい）
             baa: BAA ジェネレーター（それほど楽しくない）
             subprocessors: サブプロセッサー
@@ -375,10 +383,10 @@ messages:
         pricing: 料金
         docs: ドキュメント
         demo: デモ
-        talk_to_a_human: 人間と話す
-        about_us: 私たちについて
+        talk_to_a_human: お問い合わせ
+        about_us: 会社概要
         changelog: 変更履歴
-        company_handbook: 会社のハンドブック
+        company_handbook: ハンドブック
         store: ストア
         careers: 採用情報
         trash: ゴミ箱
