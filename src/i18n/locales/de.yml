@@ -23,7 +23,8 @@
 #   "Erste Datenquelle verbinden". Not "Verbinde deine erste Datenquelle".
 # - Localize the jokes with German references, and keep them understated: Kim K -> Heidi Klum,
 #   a Bond villain -> "Tatort-Täter", parents -> "Oma hält es für den Enkeltrick", "hop on a quick call"
-#   -> the German sales Denglisch "kurz in einen Call springen", Hillary Clinton -> Angela Merkel.
+#   -> the German sales Denglisch "kurz in einen Call springen". The cookie tooltip drops the "NOT to be confused
+#   with Hillary Clinton" joke: German readers know Ursula von der Leyen, so there is nobody to confuse her with.
 #   Bureaucracy and Datenschutz jokes fit well ("dein Datenschutzbeauftragter").
 # - Typography: German quotes „so“, a space before % ("97 %"), and "…" for an ellipsis.
 #   Use an en dash with spaces ( – ) or a colon, never an em dash. After a colon, a full sentence
@@ -280,7 +281,7 @@ messages:
             1: PostHog.com nutzt keine Cookies von Drittanbietern, nur ein einziges eigenes.
             2: Es gehen keine Daten an Dritte. (<tooltip>Ursula von der Leyen</tooltip> und dein Datenschutzbeauftragter wären so stolz.)
         tooltip:
-            label: Ursula von der Leyen ist Präsidentin der Europäischen Kommission. NICHT zu verwechseln mit Angela Merkel.
+            label: Ursula von der Leyen ist Präsidentin der Europäischen Kommission.
             image:
                 alt: Ursula von der Leyen, Präsidentin der Europäischen Kommission
         close: Schließen
