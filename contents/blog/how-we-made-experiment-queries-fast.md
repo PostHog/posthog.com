@@ -120,6 +120,10 @@ A lesson we learned here is that query performance is also about perception – 
 
 Here's what we do now: we show a banner with a clear overview of how many queries are pending, how many are executing, and which have already completed. This is much better, as the user now understands that this is not a simple query, but an orchestrated background job, potentially heavy (indicated by rows read), with some metrics waiting in a queue.
 
+![Experiment metrics loading, before and after: a spinner per metric compared with one progress banner](/images/experiment-queries/before-after-loop.gif)
+
+<Caption>Before, every metric showed its own spinner with no overall picture. Now one banner tracks the background job: progress, rows read, and a way to get notified when it finishes.</Caption>
+
 Some queries will still take a long time. This is unavoidable. Sometimes you cannot use precomputed data at all: if you add a completely new metric, or change the experiment in a way that affects the calculation, there is no cached data to reuse yet. A query for a large customer might simply take a long time, but it really matters how you present this background process to the user and what expectations it creates.
 
 ## How AI helps us run this
