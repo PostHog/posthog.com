@@ -10,7 +10,7 @@ availability:
 
 You can upload CSV, JSON, or Parquet files directly to the data warehouse without setting up your own S3 or GCS bucket. PostHog stores the file and reads it in place on every query — there's no sync pipeline or recurring import.
 
-This is ideal for one-off data like spreadsheet exports, lookup tables, or static datasets. For files larger than 50MB or data that updates regularly, [link an S3](/docs/cdp/sources/s3) or [GCS](/docs/cdp/sources/gcs) bucket instead.
+This is ideal for one-off data like spreadsheet exports, lookup tables, or static datasets. For files larger than 50MB or data that updates regularly, [link an S3](/docs/data-warehouse/sources/s3) or [GCS](/docs/data-warehouse/sources/gcs) bucket instead.
 
 ## Supported file formats
 
@@ -79,7 +79,7 @@ WHERE properties.email = 'user@example.com'
 
 ## Limitations
 
-- **50MB maximum file size.** For larger files, upload them to your own bucket and [link it as a source](/docs/cdp/sources/s3).
+- **50MB maximum file size.** For larger files, upload them to your own bucket and [link it as a source](/docs/data-warehouse/sources/s3).
 - **Static data.** Uploaded files are not synced or updated automatically. To update the data, delete the table and upload a new file.
 - **No recurring sync.** Unlike managed sources, there is no sync schedule — the file is read directly from storage on each query.
 
@@ -87,6 +87,6 @@ WHERE properties.email = 'user@example.com'
 
 - **Table creation failed — could not detect columns:** Check that your file is valid. For CSV files, ensure the first row contains column headers and columns don't have spaces in their names. For JSON, ensure the file contains valid JSON objects.
 
-- **File too large:** The upload limit is 50MB. For larger datasets, upload the file to [S3](/docs/cdp/sources/s3), [GCS](/docs/cdp/sources/gcs), or [Cloudflare R2](/docs/cdp/sources/r2) and link the bucket instead.
+- **File too large:** The upload limit is 50MB. For larger datasets, upload the file to [S3](/docs/data-warehouse/sources/s3), [GCS](/docs/data-warehouse/sources/gcs), or [Cloudflare R2](/docs/data-warehouse/sources/r2) and link the bucket instead.
 
 - **Uploaded file not found:** If you see this error when creating a table, the upload may have expired. Try uploading the file again.

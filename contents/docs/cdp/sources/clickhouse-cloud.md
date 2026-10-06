@@ -18,7 +18,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 The ClickHouse Cloud connector syncs your organization's data from the [ClickHouse Cloud API](https://clickhouse.com/docs/cloud/manage/api/swagger) – daily usage costs, service inventory, backups, members, API keys, and the audit log – into PostHog, so you can build cost, chargeback, and capacity dashboards alongside your product data.
 
-This connector reads from ClickHouse Cloud's management API. To sync data stored *inside* a ClickHouse database, use the [ClickHouse source](/docs/cdp/sources/clickhouse) instead.
+This connector reads from ClickHouse Cloud's management API. To sync data stored *inside* a ClickHouse database, use the [ClickHouse source](/docs/data-warehouse/sources/clickhouse) instead.
 
 ## Prerequisites
 

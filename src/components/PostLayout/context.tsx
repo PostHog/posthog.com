@@ -34,7 +34,7 @@ export const PostProvider: React.FC<ProviderProps> = ({
             'data-pipeline-destinations': useDataPipelinesNav({ type: 'destination' }),
             'data-pipeline-transformations': useDataPipelinesNav({ type: 'transformation' }),
             'data-pipeline-source-webhooks': useDataPipelinesNav({ type: 'source_webhook' }),
-            'data-pipeline-sources': useSourcesNav('/docs/cdp/sources'),
+            'data-pipeline-sources': useSourcesNav('/docs/data-warehouse/sources'),
             'data-warehouse-sources': useSourcesNav('/docs/data-warehouse/sources'),
         }),
         []

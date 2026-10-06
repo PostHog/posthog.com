@@ -2,7 +2,7 @@
 title: Customer Data Platform troubleshooting
 ---
 
-This page covers troubleshooting for CDP. For setup, see the [installation guides](/docs/cdp/sources).
+This page covers troubleshooting for CDP. For setup, see the [installation guides](/docs/data-warehouse/sources).
 
 ## My transformation or destination isn't working, what do I do?
 

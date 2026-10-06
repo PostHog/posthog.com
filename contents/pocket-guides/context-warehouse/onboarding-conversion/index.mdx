@@ -55,7 +55,7 @@ call right now instead, that's [Lead scoring](/pocket-guides/context-warehouse/l
 1. **Build the [funnel](/docs/product-analytics/funnels) natively.** Go to Product analytics >
    Funnels and add your onboarding steps in order. This part needs no join; PostHog does it out
    of the box.
-2. **Connect [Stripe](/docs/cdp/sources/stripe)** via
+2. **Connect [Stripe](/docs/data-warehouse/sources/stripe)** via
    [Data pipeline > Sources](/docs/data-warehouse/sources) to get first-payment dates.
 3. **Create a "paid" [cohort](/docs/data/cohorts).** Under Cohorts > New cohort, match users with
    a Stripe invoice `status = paid` (a warehouse condition), then use it as the funnel's

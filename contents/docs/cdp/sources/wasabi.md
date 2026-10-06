@@ -18,7 +18,7 @@ import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 The Wasabi connector syncs sub-account, usage, and billing data from the [Wasabi Account Control API (WACA)](https://docs.wasabi.com/apidocs/account-control-api) into PostHog – sub-accounts, daily storage and data-transfer utilizations (account-level and per-bucket), and sub-account invoices. Use it to track storage spend and usage per sub-account or bucket alongside your product and revenue data.
 
-This connector talks to the Account Control API for Wasabi Control Accounts (partners managing sub-accounts). It does not read objects from your Wasabi buckets – to import files stored in Wasabi, use the S3-compatible bucket options on our [S3 source](/docs/cdp/sources/s3) instead.
+This connector talks to the Account Control API for Wasabi Control Accounts (partners managing sub-accounts). It does not read objects from your Wasabi buckets – to import files stored in Wasabi, use the S3-compatible bucket options on our [S3 source](/docs/data-warehouse/sources/s3) instead.
 
 ## Prerequisites
 

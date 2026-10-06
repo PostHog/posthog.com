@@ -85,7 +85,7 @@ Download a fresh service account key from Google Cloud and re-upload the complet
 
 This means your service account lacks read permissions. Ensure it has at least the **BigQuery Data Viewer** role on the dataset you're syncing.
 
-For the full list of required permissions, see the [BigQuery source setup guide](/docs/cdp/sources/bigquery).
+For the full list of required permissions, see the [BigQuery source setup guide](/docs/data-warehouse/sources/bigquery).
 
 ## Why is my BigQuery source failing with 'Dataset not found'?
 
@@ -142,7 +142,7 @@ To fix this:
 
 1. Verify your token hasn't been revoked in the [Cloudflare dashboard](https://dash.cloudflare.com/profile/api-tokens).
 2. Check that the token has the required read permissions: **Account Settings**, **Zone**, and **DNS**.
-3. If the token was revoked or is missing permissions, create a new one following the [Cloudflare source setup guide](/docs/cdp/sources/cloudflare).
+3. If the token was revoked or is missing permissions, create a new one following the [Cloudflare source setup guide](/docs/data-warehouse/sources/cloudflare).
 4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources), update your Cloudflare source with the new token, and retry.
 
 ## Why is my Microsoft SQL Server sync failing with 'Invalid object name'?
@@ -178,7 +178,7 @@ This is a non-retryable error – PostHog stops the sync instead of retrying ind
 To fix this:
 
 1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your ClickHouse source.
-2. [Deselect the offending column](/docs/cdp/sources/clickhouse#selecting-columns) in the schema's column settings.
+2. [Deselect the offending column](/docs/data-warehouse/sources/clickhouse#selecting-columns) in the schema's column settings.
 3. Or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`).
 4. Re-run the sync.
 

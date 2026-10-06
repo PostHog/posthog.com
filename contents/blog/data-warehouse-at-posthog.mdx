@@ -30,7 +30,7 @@ import ManagedAccounts from './_snippets/managed-accounts.mdx'
 import StartupCohorts from './_snippets/startup-cohorts.mdx'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/query), and visualize it natively.
+PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/data-warehouse/sources/stripe), [Salesforce](/docs/data-warehouse/sources/salesforce), and [Hubspot](/docs/data-warehouse/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/query), and visualize it natively.
 
 We built it because the [modern data stack sucks](/blog/modern-data-stack-sucks). What starts as a handful of business critical tools devolves into dozens of tools, many specifically built to capture, clean, format, load, query, and visualize data.
 
@@ -75,9 +75,9 @@ We're also sharing the actual SQL queries we use to answer these questions as we
 ## Problem #1: Understanding growth and churn
 
 -   Sources:
-    -   [Postgres](/docs/cdp/sources/postgres) for billing data
+    -   [Postgres](/docs/data-warehouse/sources/postgres) for billing data
     -   [PostHog](/docs/new-to-posthog/understand-posthog) for usage and activation data
-    -   [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
+    -   [Salesforce](/docs/data-warehouse/sources/salesforce) for sales context (e.g. ICP scores)
 -   Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `events`, `salesforce.contact`, `postgres.posthog_team`, `postgres.posthog_organization`, `postgres_billing_usagereport`
 
 ![Growth and churn](https://res.cloudinary.com/dmukukwp6/image/upload/growth_churn_61b9f808a7.png)
@@ -92,7 +92,7 @@ One of the ways PMs give them this context is through monthly growth reviews, wh
 
 This analysis is only possible when you combine product and revenue data, so the data warehouse and SQL insights are their weapon of choice.
 
-Most companies would use our [Stripe source](/docs/cdp/sources/stripe) to import revenue data, but we don't. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog.
+Most companies would use our [Stripe source](/docs/data-warehouse/sources/stripe) to import revenue data, but we don't. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_39_25_2x_9cd97c333c.png"
@@ -171,8 +171,8 @@ Views enable them to build a query to get the data they want in the format they 
 ## Problem #2: Tracking revenue
 
 -   Sources:
-    -   [Postgres](/docs/cdp/sources/postgres) for billing data
-    -   [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
+    -   [Postgres](/docs/data-warehouse/sources/postgres) for billing data
+    -   [Salesforce](/docs/data-warehouse/sources/salesforce) for sales context (e.g. ICP scores)
 -   Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `postgres_billing_usagereport`, `salesforce_opportunity`
 
 ![Revenue](https://res.cloudinary.com/dmukukwp6/image/upload/revenue_c11fd894d5.png)
@@ -237,9 +237,9 @@ Our PostHog revenue dashboard now includes insights like the following (powered 
 ## Problem #3: Creating quarterly sales and customer success reports
 
 -   Sources:
-    -   [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
-    -   [Postgres](/docs/cdp/sources/postgres) for billing data
-    -   [Vitally](/docs/cdp/sources/vitally) for account ownership details
+    -   [Salesforce](/docs/data-warehouse/sources/salesforce) for sales context (e.g. ICP scores)
+    -   [Postgres](/docs/data-warehouse/sources/postgres) for billing data
+    -   [Vitally](/docs/data-warehouse/sources/vitally) for account ownership details
 -   Tables: `invoice_with_annual_plans_shifted`, `vitally_all_managed_accounts`, `salesforce_opportunity`, `salesforce_user`
 
 ![Sales and CS](https://res.cloudinary.com/dmukukwp6/image/upload/sales_9c2c3860b7.png)
@@ -317,7 +317,7 @@ This makes all of the insights much more reusable by being able to reuse them ac
 ## Problem #4: Creating support reports (SLA, first response time, and more)
 
 -   Sources:
-    -   [Zendesk](/docs/cdp/sources/zendesk) for ticket data
+    -   [Zendesk](/docs/data-warehouse/sources/zendesk) for ticket data
 -   Tables: `zendesk_ticket_events`, `zendesk_tickets`, `zendesk_ticket_metric_events`, `zendesk_groups`
 
 ![Support](https://res.cloudinary.com/dmukukwp6/image/upload/support_26663efc71.png)
@@ -401,8 +401,8 @@ Some examples of insights on the support dashboard include:
 ## Problem #5: Tracking startup and YC plan growth, costs, and ROI
 
 -   Sources:
-    -   [Stripe](/docs/cdp/sources/stripe) for startup plan customer data
-    -   [Postgres](/docs/cdp/sources/postgres) for billing data
+    -   [Stripe](/docs/data-warehouse/sources/stripe) for startup plan customer data
+    -   [Postgres](/docs/data-warehouse/sources/postgres) for billing data
 -   Tables: `stripe_customer`, `stripe_invoice`, `postgres_billing_usagereport`, `postgres_billing_customer`
 
 ![Startup and YC](https://res.cloudinary.com/dmukukwp6/image/upload/startup_yc_375b27d761.png)
@@ -463,7 +463,7 @@ This is all put together in a **Startup and YC Plan** dashboard with insights li
 
 Feeling inspired? Here's how you can get started:
 
-1. Start by [linking a source](/docs/cdp/sources) from a tool you already use.
+1. Start by [linking a source](/docs/data-warehouse/sources) from a tool you already use.
 2. Go to the [SQL editor](https://us.posthog.com/sql) and start by writing a basic query like `select * from events limit 10`.
 3. Layer more complexity, like filtering, [aggregating](/docs/data-warehouse/sql/useful-functions#aggregate-functions), and [joining](/docs/data-warehouse/join) data. Use [PostHog AI](/ai) to help you with this.
 4. Use our [SQL visualizations](/docs/data-warehouse/query#sql-visualizations) to see your data in a new way.
