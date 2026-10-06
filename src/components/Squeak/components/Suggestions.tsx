@@ -10,10 +10,10 @@ import TopicIcon from 'components/Forum/TopicIcon'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 
-// The editor's suggestion menus: `@` finds people, and `#` finds forum topics, tags, and posts. The editor owns the
-// text and the caret; a menu only lists matches and says what to insert.
+// The editor's suggestion menus: `@` finds people, `#` finds forum topics, tags, and posts, and `:` finds emoji. The
+// editor owns the text and the caret; a menu only lists matches and says what to insert.
 
-export type SuggestionTrigger = '@' | '#'
+export type SuggestionTrigger = '@' | '#' | ':'
 
 type Suggestion = { key: string; icon: React.ReactNode; label: string; detail?: string; insert: string }
 type Group = { label?: string; items: Suggestion[] }
@@ -63,6 +63,37 @@ const mentionToken = (profile) =>
 
 // Square brackets in a title would end the Markdown link text early, and a backslash would escape the closing one.
 const linkText = (text: string) => text.replace(/[\\[\]]/g, '\\$&')
+
+type Gemoji = { emoji: string; names: string[]; tags: string[] }
+
+const MAX_EMOJI_SUGGESTIONS = 8
+let emojiList: Gemoji[] | null = null
+let emojiListPromise: Promise<Gemoji[]> | null = null
+
+export const loadEmojiList = () => {
+    emojiListPromise ??= import('gemoji').then(({ gemoji }) => (emojiList = gemoji))
+    return emojiListPromise
+}
+
+export const emojiForShortcode = (shortcode: string) =>
+    emojiList?.find((entry) => entry.names.includes(shortcode.toLowerCase()))?.emoji ?? null
+
+const rankEmoji = (list: Gemoji[], query: string) => {
+    const q = query.toLowerCase()
+    const nameStarts: { emoji: string; shortcode: string }[] = []
+    const nameContains: { emoji: string; shortcode: string }[] = []
+    const tagStarts: { emoji: string; shortcode: string }[] = []
+    for (const entry of list) {
+        const prefixName = entry.names.find((name) => name.startsWith(q))
+        const innerName = entry.names.find((name) => name.includes(q))
+        if (prefixName) nameStarts.push({ emoji: entry.emoji, shortcode: prefixName })
+        else if (innerName) nameContains.push({ emoji: entry.emoji, shortcode: innerName })
+        else if (entry.tags.some((tag) => tag.startsWith(q)))
+            tagStarts.push({ emoji: entry.emoji, shortcode: entry.names[0] })
+    }
+    nameStarts.sort((a, b) => a.shortcode.length - b.shortcode.length)
+    return [...nameStarts, ...nameContains, ...tagStarts].slice(0, MAX_EMOJI_SUGGESTIONS)
+}
 
 const SuggestionList = forwardRef<SuggestionMenuHandle, MenuProps & { groups: Group[]; loading?: boolean }>(
     function SuggestionList({ groups, loading, position, onSelect, onClose }, ref) {
@@ -289,8 +320,25 @@ const ForumSuggestions = forwardRef<SuggestionMenuHandle, MenuProps>(function Fo
     )
 })
 
+const EmojiSuggestions = forwardRef<SuggestionMenuHandle, MenuProps>(function EmojiSuggestions(props, ref) {
+    const [list, setList] = useState(emojiList)
+    useEffect(() => {
+        if (!list) loadEmojiList().then(setList)
+    }, [])
+    const items: Suggestion[] = rankEmoji(list ?? [], props.query).map(({ emoji, shortcode }) => ({
+        key: `emoji-${shortcode}`,
+        icon: <span className="w-6 shrink-0 text-center text-lg leading-none">{emoji}</span>,
+        label: `:${shortcode}:`,
+        insert: emoji,
+    }))
+    return <SuggestionList ref={ref} {...props} groups={[{ items }]} loading={!list} />
+})
+
+const menus = { '@': PeopleSuggestions, '#': ForumSuggestions, ':': EmojiSuggestions }
+
 export const SuggestionMenu = forwardRef<SuggestionMenuHandle, MenuProps & { trigger: SuggestionTrigger }>(
     function SuggestionMenu({ trigger, ...props }, ref) {
-        return trigger === '@' ? <PeopleSuggestions ref={ref} {...props} /> : <ForumSuggestions ref={ref} {...props} />
+        const Menu = menus[trigger]
+        return <Menu ref={ref} {...props} />
     }
 )

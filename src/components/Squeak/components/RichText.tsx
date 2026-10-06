@@ -13,7 +13,23 @@ import { IconImage } from '@posthog/icons'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
 import getCaretCoordinates from 'textarea-caret'
-import { SuggestionMenu, SuggestionMenuHandle, SuggestionTrigger } from './Suggestions'
+import {
+    SuggestionMenu,
+    SuggestionMenuHandle,
+    SuggestionTrigger,
+    emojiForShortcode,
+    loadEmojiList,
+} from './Suggestions'
+
+const MENTION_OR_REFERENCE_WORD = /(^|[\s(])([@#])([\p{L}\p{N}_/-]{0,40})$/u
+const EMOJI_WORD = /(^|[\s(])(:)([a-z0-9_+-]{2,40})$/i
+const OPENING_COLON = /(^|[\s(]):$/
+const CLOSED_SHORTCODE = /(^|[\s(]):([a-z0-9_+-]+):$/i
+
+const isInCode = (textBeforeCaret: string) => {
+    const line = textBeforeCaret.slice(textBeforeCaret.lastIndexOf('\n') + 1).replace(/```/g, '')
+    return (textBeforeCaret.match(/```/g)?.length ?? 0) % 2 === 1 || (line.match(/`/g)?.length ?? 0) % 2 === 1
+}
 
 const buttons = [
     {
@@ -122,6 +138,7 @@ export default function RichText({
     const enabledTriggers = {
         '@': mentions || references || inForumPost,
         '#': references || inForumPost,
+        ':': true,
     }
 
     const onDrop = useCallback(
@@ -179,11 +196,9 @@ export default function RichText({
         const el = textarea.current
         if (!el || el.selectionStart !== el.selectionEnd) return setTrigger(null)
         const before = el.value.slice(0, el.selectionStart)
-        const match = before.match(/(^|[\s(])([@#])([\p{L}\p{N}_/-]{0,40})$/u)
+        const match = before.match(MENTION_OR_REFERENCE_WORD) ?? before.match(EMOJI_WORD)
         const char = match?.[2] as SuggestionTrigger | undefined
-        const line = before.slice(before.lastIndexOf('\n') + 1).replace(/```/g, '')
-        const inCode = (before.match(/```/g)?.length ?? 0) % 2 === 1 || (line.match(/`/g)?.length ?? 0) % 2 === 1
-        if (!match || !char || !enabledTriggers[char] || inCode) {
+        if (!match || !char || !enabledTriggers[char] || isInCode(before)) {
             // Out of the word, so the next trigger opens again, also at the same place.
             dismissedAt.current = null
             return setTrigger(null)
@@ -230,7 +245,21 @@ export default function RichText({
         textarea.current.setSelectionRange(caret, caret)
     }, [value])
 
+    const replaceClosedShortcode = (el: HTMLTextAreaElement) => {
+        const before = el.value.slice(0, el.selectionStart)
+        if (OPENING_COLON.test(before)) loadEmojiList()
+        const shortcode = before.match(CLOSED_SHORTCODE)
+        const emoji = shortcode && !isInCode(before) && emojiForShortcode(shortcode[2])
+        if (!emoji) return false
+        const start = el.selectionStart - shortcode[2].length - 2
+        setValue(el.value.slice(0, start) + emoji + el.value.slice(el.selectionStart))
+        pendingCaret.current = start + emoji.length
+        setTrigger(null)
+        return true
+    }
+
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (replaceClosedShortcode(e.target)) return
         setValue(e.target.value)
         findTrigger()
     }
