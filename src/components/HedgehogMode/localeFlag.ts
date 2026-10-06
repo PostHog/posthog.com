@@ -1,8 +1,8 @@
 import type { HedgehogActorFlagOption } from '@posthog/hedgehog-mode'
 
 // The flag for the region of a language tag (pt-PT, de-AT, es-419), for the countries where a translated
-// language is spoken. A region that is not here gets the globe. Taiwan, Hong Kong, Macau, and other regions
-// whose flag is political are left out on purpose. Regions shared by several languages (CH, BE) are listed once.
+// language is spoken. A region that is not here gets the globe. Taiwan, Hong Kong, and Macau are left out on
+// purpose, so Chinese only gets the flag of China. Regions shared by several languages (CH, BE) are listed once.
 const REGION_FLAGS: Record<string, HedgehogActorFlagOption> = {
     // Portuguese
     br: 'brazil',
@@ -89,11 +89,13 @@ const REGION_FLAGS: Record<string, HedgehogActorFlagOption> = {
     sd: 'sudan',
     mr: 'mauritania',
     so: 'somalia',
+    ps: 'palestine',
     // Japanese, Korean, Polish, Turkish, and Chinese
     jp: 'japan',
     kr: 'south-korea',
     pl: 'poland',
     tr: 'turkiye',
+    xk: 'kosovo',
     cn: 'china',
 }
 

@@ -43,6 +43,8 @@ test('takes the country from any region where the language is spoken', () => {
     assert.equal(flag('it', ['it-CH']), 'switzerland')
     assert.equal(flag('fr', ['fr-CA']), 'canada')
     assert.equal(flag('ar', ['ar-SA']), 'saudi-arabia')
+    assert.equal(flag('ar', ['ar-PS']), 'palestine')
+    assert.equal(flag('tr', ['tr-XK']), 'kosovo')
 })
 
 test('takes the region from a later tag when the preferred tag has none', () => {
@@ -55,7 +57,6 @@ test('takes the region from a later tag when the preferred tag has none', () => 
 test('gives the globe to a region without a flag', () => {
     assert.equal(flag('es', ['es-419']), 'earth')
     assert.equal(flag('ko', ['ko-KP']), 'earth')
-    assert.equal(flag('ar', ['ar-PS']), 'earth')
 })
 
 test('shows the flag of China only for mainland China', () => {
