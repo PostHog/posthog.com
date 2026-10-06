@@ -137,7 +137,7 @@ See: [How we review PRs](/handbook/engineering/how-we-review).
 
 In our CI pipeline, we use [Playwright](https://playwright.dev/) to load our Storybook stories and take snapshots. If any changes are detected, the updated snapshots are automatically committed to the PR. This helps you quickly verify whether you've introduced unexpected changes or if the UI has been altered in the intended way.
 
-Check the `test-runner.ts` file to see how this is configured. We use the `@storybook/test-runner` package; you can find more details in the [official Storybook documentation](https://storybook.js.org/docs/writing-tests/test-runner).
+Check the `test-runner.ts` file to see how this is configured. We use the `@storybook/test-runner` package; you can find more details in the [official Storybook documentation](https://storybook.js.org/docs/writing-tests/integrations/test-runner).
 
 #### Running Tests Locally
 

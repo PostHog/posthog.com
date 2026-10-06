@@ -17,7 +17,7 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
    1. Fill in the contact form on the [contact](/talk-to-a-human) page, which captures what they are interested in as well as metrics such as MAUs, event count etc.
    1. Email us directly at sales@
 1. We'll do some ICP scoring and either route them to self-serve or email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
-1. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/demos) if that's what they are there for.
+1. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/new-sales#general-demo-tips) if that's what they are there for.
 1. Ensure call notes go into HubSpot against the contact/company/deal so that they are shared amongst the wider team
 1. If they are ready to get started with PostHog, we should either:
    1. For lower volume customers we should send them a getting started templated email which providers pointers on how to get set up as well as where to get help if they get stuck.
