@@ -3,13 +3,24 @@
 Last quarter we kept every product alive but moved none of them to a new level. This quarter we focus on fewer bets, pair on shared surfaces, and take what we have to GA – live, priced, and out of beta. We build MCP-first – if an agent can't use it, it isn't done – but keep the UI for users who still need it.
 
 <details>
-<summary>Take AEO, SEO, and agent experience to GA – <TeamMember name="Jordan Mryyan" photo /> and <TeamMember name="Lucas Ricoy" photo /></summary>
+<summary>Take AEO and SEO to GA – <TeamMember name="Jordan Mryyan" photo /></summary>
 
 - Show the full crawled → cited → converted funnel per page and page group
-- Detect agent sessions by default in `posthog-js`, so every customer sees how AI browsers (ChatGPT, Claude) use their site – agent vs. human traffic with zero config
-- Get more agent data in: one-click log drains (Vercel, Cloudflare, Netlify) to capture non-JS AI crawlers
+- Get more crawler data in: one-click log drains (Vercel, Cloudflare, Netlify) to capture non-JS AI crawlers
 - Alert on crawl and citation spikes or cliffs, and on pages that agents read but that error or load slowly for them
-- Close the loop from gap to content: emit signals that turn into concrete fixes (FAQ, `llms.txt`, structured data, robots rules)
+- Self-driving: turn content gaps and crawl errors into concrete fixes (FAQ, `llms.txt`, structured data, robots rules)
+- Price it and ship it to everyone
+
+</details>
+
+<details>
+<summary>Take agent experience to GA – <TeamMember name="Lucas Ricoy" photo /></summary>
+
+AI browsers (ChatGPT, Claude) now use customers' websites on behalf of people. Customers need to see how that goes:
+
+- Detect agent sessions by default in `posthog-js`, so every customer gets agent vs. human traffic with zero config
+- Compare agents and humans on the same pages: paths, conversion, and where agents get stuck
+- Self-driving: flag flows that agents fail to complete (forms, sign-up, checkout) and suggest fixes
 - Price it and ship it to everyone
 
 </details>
