@@ -376,7 +376,7 @@ PostHog::MCP.instrument(server, posthog, report_missing: true)
 
 ```go file=Go
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
-	posthogmcpsdk.WithMissingCapabilityTool(""),
+	posthogmcpsdk.WithMissingCapabilityTool("get_more_tools"),
 )
 ```
 
