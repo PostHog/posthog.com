@@ -209,7 +209,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                             <div className="flex items-center !text-black dark:!text-white">
                                 <div className="mr-2 relative">
                                     <Avatar
-                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
+                                        className={` ${isInForum ? 'size-8' : 'w-[25px] h-[25px]'} rounded-full`}
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
@@ -227,7 +227,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                 </Tooltip>
                 <div
                     className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
-                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                        isInForum ? 'ml-[calc(2rem_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
                     }`}
                 >
                     {children}
@@ -317,7 +317,7 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     )
 }
 
-const AskMax = ({
+export const AskMax = ({
     question,
     refresh,
     manual = false,
@@ -332,6 +332,9 @@ const AskMax = ({
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
+    // The server refuses automatic replies in forum topics with AI replies off. That is not a failed search, so
+    // nothing shows.
+    const [refused, setRefused] = useState(false)
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -348,8 +351,13 @@ const AskMax = ({
                         manual,
                         withContext,
                     }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
+                })
+                if (response.status === 403) {
+                    setRefused(true)
+                    return
+                }
+                const data = await response.json()
+                setConfident(data.confident)
                 setLoading(false)
                 refresh()
             } catch (error) {
@@ -360,7 +368,7 @@ const AskMax = ({
         window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
-    return loading ? (
+    return refused ? null : loading ? (
         <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
@@ -520,6 +528,7 @@ export function Question(props: QuestionProps) {
                         }`}
                     >
                         <Profile
+                            compact={isInForum}
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />

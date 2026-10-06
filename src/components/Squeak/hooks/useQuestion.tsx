@@ -106,6 +106,11 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                 topics: true,
                 pinnedTopics: true,
                 slugs: true,
+                forumTopic: {
+                    fields: ['label', 'slug', 'icon', 'solutionsEnabled', 'aiRepliesEnabled'],
+                    populate: { allowedTags: { fields: ['label', 'slug'] } },
+                },
+                forumTags: { fields: ['label', 'slug'] },
             },
         },
         {
