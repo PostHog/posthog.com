@@ -263,7 +263,7 @@ messages:
                 label: '시작 가격:'
                 old: 빵원
                 new: 무료
-                urgency: 이 가격에 ><larger>1개 남음!!</larger>
+                urgency: 이 가격에 <larger>1개 남음!!</larger>
             button: 시작하기
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
