@@ -32,6 +32,8 @@ We don't maintain a fixed list of services; however we do track all our previous
 - Build reference implementations, examples, and internal tooling that make future engagements faster
 - Feed real customer learnings and problems back into the product via our [product engineering teams](/handbook/forward-deployed-engineering/working-with-product-engineering)
 
+You can also check out our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/">FDE Menu of Services</PrivateLink>, which covers the services FDE offers (though it's by no means an exhaustive list), how we've priced past engagements, and case studies from real customers.
+
 ## What an FDE isn't
 
 - **Support.** We have an amazing [Support](/handbook/support/support-team) team who provide deep technical insight and fix issues day to day, but they have to move fast from customer to customer. FDE work is higher-touch, tied to a specific customer outcome, and often involves hands-on engineering.

@@ -1304,6 +1304,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/org-definitions',
             },
             {
+                name: 'Revenue views',
+                url: '/handbook/growth/revops/revenue-views',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -1338,6 +1342,10 @@ export const handbookSidebar = [
                     {
                         name: 'Giving credits to customers',
                         url: '/handbook/growth/revops/credits',
+                    },
+                    {
+                        name: 'Consolidating billing across organizations',
+                        url: '/handbook/growth/revops/billing-consolidation',
                     },
                 ],
             },
@@ -1440,6 +1448,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
+                        name: 'Reverse demo calls',
+                        url: '/handbook/growth/sales/reverse-demo-calls',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                     },
@@ -1494,10 +1506,6 @@ export const handbookSidebar = [
                     {
                         name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
-                    },
-                    {
-                        name: 'Customer-led calls',
-                        url: '/handbook/cs-and-onboarding/customer-led-calls',
                     },
                     {
                         name: 'Unengaged customers',
@@ -6697,6 +6705,22 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Destinations',
+                },
+                {
+                    name: 'Where rows are written',
+                    url: '/docs/data-warehouse/destinations',
+                    icon: 'IconServer',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Monitoring your syncs',
+                    url: '/docs/data-warehouse/monitoring',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Modeling',
                 },
                 {
@@ -7574,18 +7598,34 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/mcp-analytics/installation',
+                        },
+                        {
+                            name: 'TypeScript',
+                            url: '/docs/mcp-analytics/installation/typescript',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/mcp-analytics/installation/python',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/mcp-analytics/installation/go',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/mcp-analytics/installation/ruby',
+                        },
+                    ],
                 },
                 {
                     name: 'MCP SDK v2',
                     url: '/docs/mcp-analytics/sdk-v2',
                     icon: 'IconCode',
                     color: 'purple',
-                },
-                {
-                    name: 'Custom servers',
-                    url: '/docs/mcp-analytics/custom-servers',
-                    icon: 'IconServer',
-                    color: 'teal',
                 },
                 {
                     name: 'Surfaces',
@@ -8585,6 +8625,12 @@ export const docsMenu = {
                     url: '/docs/distributed-tracing/basics',
                     icon: 'IconBook',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Link traces to AI Observability',
+                    url: '/docs/distributed-tracing/link-ai-observability',
+                    icon: 'IconLlmAnalytics',
+                    color: 'purple',
                 },
             ],
         },

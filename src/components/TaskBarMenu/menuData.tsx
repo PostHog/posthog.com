@@ -62,38 +62,6 @@ const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     { type: 'label', label: 'Products' },
     {
-        type: 'item',
-        label: 'PostHog Web',
-        link: '/docs/self-driving/web',
-        icon: <Icons.IconGlobe className="size-4 text-blue" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog Slack',
-        link: '/docs/slack',
-        icon: <Icons.IconAtSign className="size-4 text-purple" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog MCP',
-        link: '/docs/model-context-protocol',
-        icon: <Icons.IconPlug className="size-4 text-purple" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog CLI',
-        link: '/docs/cli',
-        icon: <Icons.IconTerminal className="size-4 text-seagreen" />,
-    },
-    { type: 'separator' },
-    { type: 'label', label: 'Tools' },
-    {
         type: 'submenu',
         label: 'Analytics',
         icon: <Icons.IconGraph className="size-4 text-blue" />,
@@ -125,7 +93,7 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'submenu',
-        label: 'More tools',
+        label: 'More products',
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
@@ -141,6 +109,38 @@ const docsMenuItems: MenuItemType[] = [
             { type: 'item', label: 'Surveys', link: '/docs/surveys' },
             { type: 'item', label: 'Workflows', link: '/docs/workflows' },
         ],
+    },
+    { type: 'separator' },
+    { type: 'label', label: 'Apps' },
+    {
+        type: 'item',
+        label: 'PostHog Web',
+        link: '/docs/self-driving/web',
+        icon: <Icons.IconGlobe className="size-4 text-blue" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog Desktop',
+        link: '/docs/posthog-desktop',
+        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog Slack',
+        link: '/docs/slack',
+        icon: <Icons.IconAtSign className="size-4 text-purple" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog MCP',
+        link: '/docs/model-context-protocol',
+        icon: <Icons.IconPlug className="size-4 text-purple" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog CLI',
+        link: '/docs/cli',
+        icon: <Icons.IconTerminal className="size-4 text-seagreen" />,
     },
     { type: 'separator' },
     { type: 'label', label: 'Context' },
@@ -182,7 +182,7 @@ const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Explore Twig',
+        label: 'Playground',
         link: TWIG_URL,
         external: true,
         icon: <Icons.IconPlay className="size-4 text-orange" />,
@@ -201,6 +201,42 @@ const docsMenuItems: MenuItemType[] = [
     },
     { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
 ]
+
+const docsProductIconFallbacks = {
+    'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
+    'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
+    skills: { Icon: Icons.IconMagic, color: 'purple' },
+}
+
+const docsProductHandleOverrides = { 'posthog-ai': 'posthog_ai' }
+
+const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuItemType[] =>
+    items.map((item) => {
+        if (item.type !== 'submenu' || !['Analytics', 'More products'].includes(item.label)) return item
+
+        return {
+            ...item,
+            items: item.items?.map((child) => {
+                const slug = child.link?.replace(/^\/docs\//, '')
+                const product = allProducts.find(
+                    (product) =>
+                        product.handle ===
+                            docsProductHandleOverrides[slug as keyof typeof docsProductHandleOverrides] ||
+                        product.docsSlug === slug ||
+                        product.slug?.replace(/^docs\//, '') === slug
+                )
+                const fallback = docsProductIconFallbacks[slug as keyof typeof docsProductIconFallbacks]
+                const Icon = product?.Icon || fallback?.Icon
+
+                return Icon
+                    ? {
+                          ...child,
+                          icon: <Icon className={`size-4 text-${product?.color || fallback?.color || 'gray'}`} />,
+                      }
+                    : child
+            }),
+        }
+    })
 
 // Tools promoted to the top level of the Products menu, in display order.
 // Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
@@ -288,7 +324,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: docsMenuItems,
+            items: addDocsProductIcons(docsMenuItems, allProducts),
         },
         {
             trigger: 'Community',
