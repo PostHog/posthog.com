@@ -67,7 +67,7 @@ Every scout runs on its own schedule, which you set per scout without touching i
 
 Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
 
-Interval scheduling drifts – a run that starts late pushes the next one later – so reach for cron when the timing itself matters: a [digest scout](/docs/self-driving/scout-examples) that should land before standup, or a scout that should look at a full day of data rather than a rolling window.
+An interval scout keeps a fixed slot in its cycle, so a run that starts late does not push the next runs later. But you do not choose that slot. Reach for cron when you need a specific wall-clock time: a [digest scout](/docs/self-driving/scout-examples) that should land before standup, a scout that runs on weekdays only, or a scout that should look at a full day of data rather than a rolling window.
 
 Since every run costs a share of your project's daily run budget, the schedule is also the main dial on what a scout costs. Most scouts close out without finding anything, so a tighter cadence mostly pays to re-confirm that nothing changed. Slow a chatty or expensive scout down before you turn it off.
 
