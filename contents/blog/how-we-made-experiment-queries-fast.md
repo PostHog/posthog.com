@@ -31,7 +31,7 @@ Our first step was to spin off a query performance team with the aim of improvin
 
 There are different kinds of queries, but the kind this applies to best is a timeseries query – a series of time buckets over some range of time, which is exactly what experiments use.
 
-Here's how precomputation works. Suppose you start your experiment. It's day 1 and you load your first results. Instead of throwing away the data that query computed, we persist it in the database. Then on day 2, you ask for results for the entire time range (now 2 days). Instead of querying day 1 + day 2, we retrieve the stored data for day 1, query only day 2, and combine the two. This avoids double work: each query only scans the latest increment.
+Here's how precomputation works. Suppose you start your experiment. It's day 1 and you load your first results. Instead of throwing away the data that query computed, we persist it in the database. Then on day 2, you ask for results for the entire time range (now 2 days). Instead of querying day 1 + day 2, we retrieve the stored data for day 1, query only day 2, and combine the two. This avoids double work: each query only scans the latest increment. Repeat this every day: by day 7, we read six cached buckets and scan only one.
 
 ![The direct query path compared with the precomputed path](/images/experiment-queries/direct-vs-precomputed.png)
 
@@ -41,7 +41,7 @@ In practice, this is more involved than the example above. Because in analytics 
 
 ![Cache refresh schedule by bucket age](/images/experiment-queries/bucket-lifecycle.png)
 
-<Caption>The older the bucket, the longer it can stay cached: late events get rarer with age, so refreshes back off until the bucket freezes.</Caption>
+<Caption>Refreshes back off with bucket age until the bucket freezes. A late event is picked up the next time its bucket is recomputed.</Caption>
 
 There's a tradeoff here: events that arrive after their bucket is frozen are missing until the data expires and is rebuilt. For experiments this is acceptable. You aren't checking results every single minute; you let the experiment run for a couple of days or weeks and then conclude, so tiny inaccuracies are acceptable. With some production testing, we found a good balance between not doing too much work and keeping results accurate and consistent. We have production checks that monitor consistency here – more on that below.
 
@@ -53,7 +53,7 @@ Experiments was the first product to use the precomputation library, and we test
 
 Integrating the library was itself a big task. We have four different metric types, each with different aggregations. Then there are optional breakdowns, and experiments that aggregate by users or by groups. This creates many possible combinations, and precomputation needs to work for each of them. We store everything in a single table, but that single table needs to support all the different data shapes.
 
-For each of the four metric types in the precomputation path, we had to write new queries. These queries differ from the default path, also called the "direct" path.
+For each of the four metric types in the precomputation path, we had to write new queries. These queries differ from the default "direct" path shown in the diagram above.
 
 The direct path does everything in a single query: it scans the events, filters them, and computes the final result. The precompute path splits this in two: a write query stores the matching events in the cache, and a read query aggregates them later.
 
@@ -73,12 +73,6 @@ We caught other issues too. Cached buckets were aligned to calendar days in UTC,
 
 To solve this uncertainty for good, we built a comprehensive canary testing suite running on production data. Each night, a background job picks a random set of metrics and runs each of them in both modes: the direct-scan mode, which reads the entire time range, and the precomputed mode, which reads the cached data. Then we compare the results. If they diverge beyond a small tolerance, we get an alert. The canary also caught the issue of late-arriving events and helped us tune the cache invalidation times.
 
-The payoff of all this work is visible in how much data a query needs to touch:
-
-![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
-
-<Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
-
 ## 3. Optimize the SQL
 
 <TeamMember name="Anders Asheim Hennum" photo />
@@ -96,6 +90,12 @@ We also found an expensive read that the metric calculation didn't need. Clickin
 For a long time, we used an event called `$feature_flag_called` to track experiment exposure. This event also records evaluations of flags unrelated to experiments, so most of that traffic wasn't useful to an experiment query. Reusing the event made sense when Experiments was small, but our large customers were now accumulating tens of millions of flag events a month. Every query had to find the relevant exposures among all that data.
 
 We added a dedicated event, `$experiment_exposure`, which records assignments to flag variants. We create it during ingestion from the flag events customers already send, so the change needed no SDK updates. These exposure events are roughly a tenth of the volume of flag events, giving experiment queries a much smaller set of data to read.
+
+Precomputation, leaner SQL, and the dedicated exposure event all push on the same number: how much data we read to answer a query.
+
+![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
+
+<Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
 
 ## 5. Move recalculation to Temporal
 
