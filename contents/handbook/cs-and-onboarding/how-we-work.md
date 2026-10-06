@@ -14,7 +14,7 @@ showTitle: true
 
 ### Customer Success Managers
 
-Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals. Don't assign yourself as the CSM on an account - assigning a CSM automatically adds the account to the segment. Allocation is up to Dana, Phil and Simon.
+Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the account relationship history in PostHog Customer Analytics to track this against goals. Don't assign yourself as the CSM on an account - allocation is up to the CSM Team Leads and Simon.
 
 ## Weekly Customer Success standup
 
@@ -32,8 +32,8 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 
 - Your OTE comprises an 80/20 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
-  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
-  - The Q3 2026 target is 110% quarterly NRR. This may change in future depending on how things go.
+  - For example, if you have 100% revenue retention and your target is 110% revenue retention, you get 0% of bonus. For 110% retention, it's 100% bonus, and for 120% retention, it's 200% bonus. This is on a linear sliding scale so if you hit 105% retention you get 50% bonus.
+  - The Q4 2026 target is 110% quarterly NRR. This may change in future depending on how things go.
   - To calculate retention we use the total usage over the past quarter and annualize this, then compare it to the quarter before that.
     - For monthly customers this is the total of their 3 invoices multiplied by 4
     - For annual customers, we look at the usage-based MRR and multiply by 4
@@ -42,12 +42,12 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
 - If an account is added to your book:
-  - If you inherit a new account that hasn't been managed by a PostHog human before, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
+  - If you inherit a new account that hasn't been managed by a PostHog human directly before you inherit them, you have a 3-month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than deliberately letting them wastefully spend money due to some poor implementation.  Work with your team lead to decide whether you are keeping them, and if not make sure that you are removed as the CSM before the 3-month grace window is up; otherwise, they will count towards your NRR attainment.
   - If you inherit an account from another CSM, AE, or AM, it will normally count toward your NRR in that quarter, even in the first 3 months.
-    - In exceptional circumstances we may need you to take on an account which we know isn't in a good state (ie. despite the previous owners best efforts we haven't been able to work with them).  We will note in writing on a case by case basis that any churn or downgrade in the first 3 months won't be counted against you.
+    - In exceptional circumstances we may need you to take on an account which we know isn't in a good state (ie. despite the previous owners best efforts we haven't been able to work with them).  We will note in writing on a case by case basis that any churn or downgrade in the first 3 months won't be counted against you and the same rule as uncovered accounts above will apply.  You'll need to get this approved by Simon (Ben B as backup) within the first month of taking them on - a public Slack thread or email is fine here.
 - How bonus is calculated:
   - In general, we compare annualized ARR over the past quarter with annualized ARR from the previous quarter.
-    - For Q3 2026 bonus: Q3 ARR vs Q2 ARR
+    - For Q4 2026 bonus: Q4 ARR vs Q3 ARR
   - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
   - If an account is removed from your book mid-quarter (we do this extremely rarely), it will not be included in bonus calculation.
   - If a customer churns during the quarter, their current ARR counts as $0 and they will be removed from your book the next quarter.
@@ -61,7 +61,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
  
 **Account allocation**
 - CSMs manage approximately $2.5M in ARR. Books are balanced by shape as well as total: a target number of accounts per ARR bucket, so a single large account doesn't dominate a book.
-- As of Q3 2026, a typical book is roughly 4 accounts at $20-30k, 12 at $30-60k, 5 at $60-100k, 5 at $100-250k, and 2 at $250k+. These numbers come from our [live capacity calculation](https://us.posthog.com/project/2/dashboard/1737835), and will shift as coverage grows and capacity modelling improves.
+- As of Q4 2026, a typical book is roughly 4 accounts at $20-30k, 12 at $30-60k, 5 at $60-100k, 5 at $100-250k, and 2 at $250k+. These numbers come from our [live capacity model]([https://us.posthog.com/project/2/dashboard/1737835](https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/019fa7db-83a8-7fbb-adcc-f0b9f3ee74ce)), and will shift as coverage grows and capacity modelling improves.
 - When rebalancing accounts (e.g., if accounts drop below the $20k threshold), we'll bring you up to the current quarter's target amount.
 
 ## Working with engineering teams
