@@ -1,6 +1,6 @@
 ---
 title: How we made experiment queries fast
-date: 2026-09-17
+date: 2026-10-07
 author:
   - juraj-majerik
 category: Engineering
