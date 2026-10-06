@@ -28,6 +28,7 @@ import SmallTeam from 'components/SmallTeam'
 import SurveySignup from 'components/SurveySignup'
 import { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAccessFeatures'
 import useRoadmapEarlyAccessFeatures from 'hooks/useRoadmapEarlyAccessFeatures'
+import useKnownEmail from 'hooks/useKnownEmail'
 import usePostHog from 'hooks/usePostHog'
 import { ROADMAP_STAGE_STYLES } from './roadmapStageStyles'
 
@@ -316,9 +317,18 @@ const PitchIdeaCard = ({ onClick }: { onClick: () => void }): JSX.Element => (
 
 const PitchIdeaPanel = (): JSX.Element => {
     const posthog = usePostHog()
+    const knownEmail = useKnownEmail()
     const [idea, setIdea] = useState('')
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+
+    // Prefill the address we already hold. The guard keeps a late read from replacing
+    // an address the visitor started to type.
+    useEffect(() => {
+        if (knownEmail && !email) {
+            setEmail(knownEmail)
+        }
+    }, [knownEmail])
 
     const submit = (event: React.FormEvent) => {
         event.preventDefault()

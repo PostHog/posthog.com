@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import { IconCheckCircle } from '@posthog/icons'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { useApp } from '../../context/App'
+import useKnownEmail from '../../hooks/useKnownEmail'
 import usePostHog from '../../hooks/usePostHog'
 import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 
@@ -61,6 +62,7 @@ export function SurveySignup({
 }: SurveySignupProps): JSX.Element {
     const posthog = usePostHog()
     const { setConfetti } = useApp()
+    const knownEmail = useKnownEmail()
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState('')
@@ -80,6 +82,14 @@ export function SurveySignup({
             // Ignore storage access errors (private mode, blocked storage)
         }
     }, [surveyId])
+
+    // Prefill the address we already hold. The guard keeps a late read from replacing
+    // an address the visitor started to type.
+    useEffect(() => {
+        if (knownEmail && !email) {
+            setEmail(knownEmail)
+        }
+    }, [knownEmail])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
