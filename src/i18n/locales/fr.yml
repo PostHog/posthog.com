@@ -14,6 +14,8 @@
 #   wizard, handbook, changelog, roadmap, templates, side projects, devtool, hype, "shipper" ("on shippe").
 #   Do not force an official term that nobody uses: not "demande de tirage", "assistant de configuration",
 #   "entonnoir", "témoin de connexion". Say "bandeau cookies", like the CNIL does.
+# - "Context layer" is "contexte produit" ("Votre contexte produit"). Never "couche", which also means
+#   diaper. Do not add "entreprise": PostHog is about the product, not company context.
 # - Typography: put a narrow no-break space (U+202F) before : ; ! ? and %, inside « guillemets », and as the
 #   thousands separator. Use U+202F everywhere, never a normal space and never U+00A0: "Pourquoi PostHog ?",
 #   "« sobres »", "97 %", "500 000". Use the typographic apostrophe (’), and the ellipsis character (…).
@@ -31,11 +33,11 @@
 name: Français
 messages:
     meta:
-        title: PostHog – la couche de contexte de votre produit
+        title: PostHog – votre contexte produit
         description: PostHog diagnostique les problèmes, corrige les bugs et génère des pull requests tout seul, sans que vous ayez à le lui demander.
 
     hero:
-        H1: La <emphasis>couche de contexte</emphasis> de votre produit
+        H1: Votre <emphasis>contexte</emphasis> produit
         body:
             1: PostHog ingère et stocke vos <highlight>analytics, erreurs, replays et données métier</highlight> pour que vous et vos <underline>agents</underline> puissiez les interroger et passer à l’action.
             2: Rejoignez plus de 500 000 équipes qui shippent déjà avec PostHog.
@@ -48,8 +50,8 @@ messages:
             button:
                 1: Commencer
                 2:
-                    label: Installer avec l’IA
-                    body: 'Plus à l’aise dans le terminal ? Zappez le navigateur :'
+                    label: Installer avec un agent
+                    body: 'Plus à l’aise dans un terminal ? Zappez le navigateur :'
 
     section:
         2:
@@ -92,8 +94,8 @@ messages:
                         result: Un champ obligatoire a été ajouté
 
         2b:
-            toggle: Du contexte produit pour vos agents
-            heading: Du contexte produit pour vos agents
+            toggle: Le contexte produit pour vos agents
+            heading: Le contexte produit pour vos agents
             body: Interrogez vos données produit depuis votre éditeur, sans jongler avec les onglets du navigateur. De l’analyse ponctuelle au lancement de nouvelles features, tout se fait sans nouvelle UI.
             cta:
                 label: Installer le MCP PostHog
@@ -104,7 +106,7 @@ messages:
         2c:
             toggle: Shippez avec PostHog
             heading: Shippez avec PostHog
-            body: Votre Inbox regroupe les constats liés dans des rapports fouillés, classés par priorité. Passez en revue les améliorations et les pull requests proposées, puis décidez de ce qui part en prod.
+            body: Votre Inbox regroupe les rapports sur les signaux de votre produit, classés par priorité. Passez en revue les améliorations et les pull requests proposées, puis décidez de ce qui part en prod.
             button: Commencer gratuitement
             signals:
                 heading: 'Self-driving puise ses signaux dans :'
@@ -304,11 +306,11 @@ messages:
             install: Installer PostHog
             sdks: SDK et frameworks
             products: Produits
-            tools: Outils
             analytics: Analytics
-            more_tools: Plus d’outils
+            more_products: Plus de produits
             application_metrics: Métriques applicatives
             distributed_tracing: Tracing distribué
+            apps: Apps
             context: Contexte
             reference: Référence
             new_to_posthog: Débuter avec PostHog
@@ -319,7 +321,7 @@ messages:
             privacy: Confidentialité et RGPD
             how_posthog_works: Comment marche PostHog
             glossary: Glossaire
-            explore_twig: Explorer Twig
+            playground: Playground
             pocket_guides: Guides de poche
             tutorials: Tutoriels
             templates: Templates
@@ -349,7 +351,7 @@ messages:
             side_projects: Side projects
             partnerships: Partenariats
         more:
-            sparks_joy: Ce qui nous met en joie
+            sparks_joy: Les trucs cool
             services: Services
             display_options: Options d’affichage
             system_status: État du système
