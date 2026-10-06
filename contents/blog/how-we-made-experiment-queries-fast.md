@@ -73,6 +73,12 @@ We caught other issues too. Cached buckets were aligned to calendar days in UTC,
 
 To solve this uncertainty for good, we built a comprehensive canary testing suite running on production data. Each night, a background job picks a random set of metrics and runs each of them in both modes: the direct-scan mode, which reads the entire time range, and the precomputed mode, which reads the cached data. Then we compare the results. If they diverge beyond a small tolerance, we get an alert. The canary also caught the issue of late-arriving events and helped us tune the cache invalidation times.
 
+The payoff of all this work is visible in how much data a query needs to touch:
+
+![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
+
+<Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
+
 ## 3. Optimize the SQL
 
 <TeamMember name="Anders Asheim Hennum" photo />
@@ -91,12 +97,6 @@ For a long time, we used an event called `$feature_flag_called` to track experim
 
 We added a dedicated event, `$experiment_exposure`, which records assignments to flag variants. We create it during ingestion from the flag events customers already send, so the change needed no SDK updates. These exposure events are roughly a tenth of the volume of flag events, giving experiment queries a much smaller set of data to read.
 
-Precomputation, leaner SQL, and the dedicated exposure event all push on the same number: how much data we read to answer a query.
-
-![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
-
-<Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
-
 ## 5. Move recalculation to Temporal
 
 <TeamMember name="Rodrigo Iloro" photo />
@@ -113,6 +113,14 @@ Here's what we do now: we show a banner with a clear overview of how many querie
 
 Some queries will still take a long time. This is unavoidable. Sometimes you cannot use precomputed data at all: if you add a completely new metric, or change the experiment in a way that affects the calculation, there is no cached data to reuse yet. A query for a large customer might simply take a long time, but it really matters how you present this background process to the user and what expectations it creates.
 
+## How AI helps us run this
+
+A system like this generates a constant stream of small questions. Why did this query slow down? Why did the canary flag this metric? Why is this team suddenly reading ten times more data than last week? The answers are almost always somewhere in Grafana or in the ClickHouse query log – but digging them out by hand is slow.
+
+So we connected AI agents to these tools. Now we describe the problem in a prompt and get an investigation back minutes later. When the nightly canary flags a divergence, an agent pulls the logs and reconstructs which experiment and metric went wrong, and how. When we planned the precomputation work, an agent mapped out every path a query can take through our system and how expensive each one is. We integrated the busiest paths first and the rarest ones last – some of them we still haven't needed to do.
+
+The agent doesn't fix anything for us. What it changes is the feedback loop: the time between "something looks off" and "we know why" went from hours to minutes. The charts in this post came out of one of these sessions.
+
 ## What we learned
 
 We avoided precomputation for a long time, and that was deliberate. We had worked on query performance before, but incrementally, mostly through SQL optimization.
@@ -121,4 +129,4 @@ As a small team competing against companies with hundreds of engineers, it was c
 
 Only when our customers started clearly struggling did we accept that we couldn't wait any longer. We also learned that an impressive integration test suite is not enough for a system like this. If something can break in production in ways your tests don't cover, it eventually will.
 
-The added complexity may seem daunting, but we're in a much more stable place now. AI helped us a lot here: generating throwaway scripts to diagnose an issue, producing reports about query performance, building custom tooling. Giving an AI agent access to Metabase and Grafana to diagnose things is a superpower. You can absolutely run a reliable, performant, and relatively complex system with a small team like ours.
+The added complexity may seem daunting, but we're in a much more stable place now. You can absolutely run a reliable, performant, and relatively complex system with a small team like ours.
