@@ -14,7 +14,7 @@ The Go SDK is in beta. It has the same defaults as the other SDKs, but captures 
 
 `posthogmcpsdk` instruments servers built on the official [Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) (`github.com/modelcontextprotocol/go-sdk`) v1.6.1 or later. Use go-sdk v1.8.0 or later in your own `go.mod` to serve protocol `2026-07-28` and `input_required` rounds. It ships in the [`posthog-go`](/docs/libraries/go) repository as its own module, so your app only depends on the MCP SDK if it uses this package.
 
-You need Go 1.25+, `posthogmcpsdk` v1.31.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
+You need Go 1.25+, `posthogmcpsdk` v1.33.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
@@ -138,6 +138,42 @@ To stop the `$exception` event for failed calls, pass `posthogmcp.WithExceptionA
 The adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that.
 
 The SDK learns each tool's schema from `tools/list` and refreshes it when the server sends `notifications/tools/list_changed`. A server with no connected session sends no notification, so the SDK trusts what it learned for 10 seconds and then lists the tools again on the next call. A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. Schemas built from `$ref`, `allOf`, `anyOf`, or `oneOf` get no added arguments. Schemas with a non-object type or non-object `properties` are skipped too. Output schemas with `maxProperties` or `propertyNames` get no `_mcp_instructions`.
+
+## Report missing capabilities
+
+Add `WithMissingCapabilityTool` to give agents a `get_more_tools` tool. An agent calls it when no tool fits its request. The `context` argument is the agent's report. The option is off by default.
+
+```go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithServerInfo("weather-server", "1.0.0"),
+	posthogmcpsdk.WithMissingCapabilityTool("get_more_tools"),
+)
+```
+
+- The SDK adds the tool to the last page of `tools/list`. If your server already registers a tool with that name, the SDK keeps yours.
+- A call to the tool sends `$mcp_missing_capability` with the agent's request as `$mcp_intent`. It does not send `$mcp_tool_call`. The SDK answers the call, so your handlers never see it.
+- Pass a different name to rename the tool. An empty name uses `get_more_tools`.
+- A server that registers no tools must still declare the tools capability. Without it, clients never list tools and never see `get_more_tools`:
+
+```go
+server := mcp.NewServer(&mcp.Implementation{Name: "weather-server", Version: "1.0.0"},
+	&mcp.ServerOptions{HasTools: true},
+)
+```
+
+To see what agents ask for, query the reports:
+
+```sql
+SELECT
+  properties.$mcp_intent AS request,
+  count() AS times_asked
+FROM events
+WHERE event = '$mcp_missing_capability'
+GROUP BY request
+ORDER BY times_asked DESC
+```
+
+See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability) for how to read the reports.
 
 ## Middleware order
 
