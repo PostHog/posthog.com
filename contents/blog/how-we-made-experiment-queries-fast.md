@@ -13,7 +13,7 @@ tags:
 
 ![Monthly experiment query volume against p95 and p99 latency, February to September 2026](/images/experiment-queries/latency-volume.png)
 
-<Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The latency axis is square-root scaled.</Caption>
+<Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The latency axis is square-root scaled. The spike in August was a production incident.</Caption>
 
 PostHog Experiments first shipped in December 2021 as a very minimal tool. Built on top of our Feature Flags, it was initially just a simple wrapper around our Product Analytics – a single funnel query with some statistical calculations on top.
 
