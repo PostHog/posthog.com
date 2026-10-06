@@ -264,7 +264,7 @@ messages:
                 label: 'À partir de :'
                 old: 0 €
                 new: Gratuit
-                urgency: '><larger>Plus qu’un seul à ce prix !!</larger>'
+                urgency: '<larger>Plus qu’un seul à ce prix !!</larger>'
             button: Commencer
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
