@@ -10,7 +10,7 @@ This means your knowledge directly powers our AI tools. When you write down what
 
 ## Why your contributions matter
 
-The <SmallTeam slug="wizard-and-docs" /> team has automated writing documentation from PR merges using Inkeep, which indexes our codebase and docs to create first-pass drafts. But there's knowledge that only comes from working directly with customers:
+The <SmallTeam slug="wizard-and-docs" /> team has automated writing documentation from PR merges using InKeep, which indexes our codebase and docs to create first-pass drafts. But there's knowledge that only comes from working directly with customers:
 
 - Common integration patterns and gotchas
 - Real-world use cases and configurations
