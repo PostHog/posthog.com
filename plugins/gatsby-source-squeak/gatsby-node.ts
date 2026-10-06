@@ -91,33 +91,47 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         page++
     }
 
-    // Fetch all topic groups
-    let query = qs.stringify({
-        populate: {
-            topics: {
-                fields: ['id'],
+    const FORUM_POST_TEXT_LIMIT = 2000
+    const plainText = (markdown?: string | null) =>
+        (markdown || '').replace(/\s+/g, ' ').trim().slice(0, FORUM_POST_TEXT_LIMIT)
+    let forumPostPage = 1
+    while (true) {
+        const forumPostQuery = qs.stringify(
+            {
+                filters: { forumTopic: { id: { $notNull: true } } },
+                fields: ['subject', 'body', 'permalink', 'resolved'],
+                populate: {
+                    forumTopic: { fields: ['slug', 'label'] },
+                    forumTags: { fields: ['slug'] },
+                    resolvedBy: { fields: ['body'] },
+                },
+                pagination: { page: forumPostPage, pageSize: 100 },
             },
-        },
-    })
-
-    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
-
-    topicGroups.data.forEach((topicGroup) => {
-        const { topics, ...rest } = topicGroup.attributes
-
-        const node = {
-            id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
-            internal: {
-                type: `SqueakTopicGroup`,
-                contentDigest: createContentDigest(topicGroup),
-            },
-            ...rest,
-            topics: topics.data.map((topic) => ({
-                id: createNodeId(`squeak-topic-${topic.id}`),
-            })),
+            { encodeValuesOnly: true }
+        )
+        const forumPosts = await fetch(`${apiHost}/api/questions?${forumPostQuery}`).then((res) => res.json())
+        for (const post of forumPosts.data ?? []) {
+            const { subject, body, permalink, resolved, forumTopic, forumTags, resolvedBy } = post.attributes
+            const forumPost = {
+                squeakId: post.id,
+                subject,
+                permalink,
+                resolved: !!resolved,
+                excerpt: plainText(body),
+                resolutionBody: plainText(resolvedBy?.data?.attributes?.body),
+                forumTopic: forumTopic?.data?.attributes?.slug ?? null,
+                forumTopicLabel: forumTopic?.data?.attributes?.label ?? null,
+                forumTags: (forumTags?.data ?? []).map((tag) => tag.attributes.slug),
+            }
+            createNode({
+                ...forumPost,
+                id: createNodeId(`squeak-forum-post-${post.id}`),
+                internal: { type: 'SqueakForumPost', contentDigest: createContentDigest(forumPost) },
+            })
         }
-        createNode(node)
-    })
+        if (!forumPosts.meta || forumPosts.meta.pagination.page >= forumPosts.meta.pagination.pageCount) break
+        forumPostPage++
+    }
 
     // Fetch all topics
     let topicQuery = qs.stringify(
@@ -467,12 +481,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             avatar: SqueakProfileAvatar
         }
 
-        type SqueakTopicGroup implements Node {
+        type SqueakForumPost implements Node {
             id: ID!
             squeakId: Int!
-            slug: String
-            label: String!
-            topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
+            subject: String
+            permalink: String!
+            resolved: Boolean
+            excerpt: String
+            resolutionBody: String
+            forumTopic: String
+            forumTopicLabel: String
+            forumTags: [String!]
         }
 
         type SqueakTopic implements Node {

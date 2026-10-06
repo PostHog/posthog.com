@@ -28,7 +28,7 @@ export const aiObservability = {
     billingType: 'llm_analytics',
     teamSlug: 'ai-observability',
     // Community topic is still labelled `llm-analytics` in the forum.
-    forumTopicId: 390,
+    forumTag: 'ai-observability',
     // Volume id in src/constants/pocketGuides.ts. Set it and the shared Questions section links
     // the product's pocket guide; products without a volume leave it out and show nothing.
     pocketGuideVolume: 'ai-observability',

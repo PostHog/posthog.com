@@ -2186,7 +2186,7 @@ export const communityMenu = {
             name: 'Questions',
             icon: 'IconMessage',
             color: 'seagreen',
-            url: '/questions',
+            url: '/forum',
         },
         {
             name: 'Guides',
@@ -5139,7 +5139,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/questions/topic/session-replay',
+                    url: '/forum/t/questions?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,

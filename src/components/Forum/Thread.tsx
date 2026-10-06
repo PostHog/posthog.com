@@ -276,10 +276,11 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
         )
     }
     if (!topic) {
+        const pagePath = post.slugs?.[0]?.slug
         return (
             <div className="p-8 text-center text-secondary">
-                <p className="font-semibold text-primary">This question is not a forum post.</p>
-                <Link to={`/questions/${permalink}`}>Open it in questions</Link>
+                <p className="font-semibold text-primary">This is a comment thread, not a forum post.</p>
+                <Link to={pagePath || '/forum'}>{pagePath ? 'Open the page it is on' : 'Back to all posts'}</Link>
             </div>
         )
     }

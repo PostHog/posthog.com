@@ -118,10 +118,6 @@
             "destination": "/next-steps/index.html"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
-        },
-        {
             "source": "/forum/t/:topic/tags",
             "destination": "/forum/t/[topic]/tags/index.html"
         },
@@ -1122,7 +1118,7 @@
         },
         {
             "source": "/questions/topics/:path*",
-            "destination": "/questions/topic/:path*"
+            "destination": "/forum"
         },
         {
             "source": "/docs/sdks/:path*",
@@ -3169,7 +3165,7 @@
         },
         {
             "source": "/questions/topic/session-recording",
-            "destination": "/questions/topic/session-replay"
+            "destination": "/forum"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -6357,7 +6353,7 @@
         },
         {
             "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
+            "destination": "/forum"
         },
         {
             "source": "/ai-observability/features",
@@ -6590,6 +6586,36 @@
         {
             "source": "/docs/settings/id-jag:ext(\\.md)?",
             "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/questions",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/subscriptions",
+            "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/:path*",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/:permalink",
+            "destination": "/forum/p/:permalink",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/alerts",
+            "destination": "/forum/alerts",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/dashboard",
+            "destination": "/forum/following",
+            "statusCode": 301
         }
     ]
 }

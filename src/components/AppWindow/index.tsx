@@ -24,7 +24,7 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
-import Inbox from 'components/Inbox'
+import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
 import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
@@ -64,8 +64,8 @@ const Router = (props) => {
     const { appWindow } = useWindow()
     const { children, path } = props
 
-    if (/^\/questions/.test(path)) {
-        return <Inbox {...props} />
+    if (/^\/questions(\/|$)/.test(path)) {
+        return <LegacyQuestionsRedirect path={path} />
     }
     if (/^\/forum(\/|$)/.test(path)) {
         return <Forum {...props} />
