@@ -128,6 +128,9 @@ export default function AskAnythingDemo() {
     return (
         <div
             ref={ref}
+            // The demo shows the PostHog app, which is in English, so it stays left-to-right on an RTL page.
+            // Translated text inside it uses dir="auto" to take the direction of its own language.
+            dir="ltr"
             className="ask-anything-demo @container aspect-[998/774] [background-color:color-mix(in_srgb,rgb(var(--bg))_60%,rgb(var(--accent)))] [&_svg]:size-[1em] [&_svg]:shrink-0 not-prose relative w-full overflow-hidden rounded border border-primary text-primary shadow-2xl"
             data-phase={finding ? 'finding' : conversation ? 'tools' : 'composer'}
             data-running={running}
@@ -153,7 +156,7 @@ export default function AskAnythingDemo() {
                     <span className="ai-demo-context border border-primary inline-flex items-center gap-[0.8cqw] whitespace-nowrap leading-none font-semibold text-secondary py-[0.8cqw] px-[1cqw] rounded-[1.1cqw] text-[2.5cqw]">
                         <IconAtSign /> Add context <IconChevronDown />
                     </span>
-                    <div className="ai-demo-prompt pt-[3.1cqw] px-[1.3cqw] pb-0 text-[3cqw] leading-[1.4]">
+                    <div dir="auto" className="ai-demo-prompt pt-[3.1cqw] px-[1.3cqw] pb-0 text-[3cqw] leading-[1.4]">
                         {typedQuestion || <span className="text-secondary">Describe the task in detail...</span>}
                         {typedQuestion && time < 4200 && (
                             <span className="ai-demo-caret inline-block h-[1em] ms-[0.15em] border-e border-current align-[-0.12em]" />
@@ -194,10 +197,15 @@ export default function AskAnythingDemo() {
                     <PostHogMark /> <strong>PostHog AI</strong>
                     <span>Sample data</span>
                 </div>
-                <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] me-0 mb-[2.4cqw] ms-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
+                <div
+                    dir="auto"
+                    className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] me-0 mb-[2.4cqw] ms-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]"
+                >
                     {question}
                 </div>
-                <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">{t('section.2a.demo.reply.1')}</p>
+                <p dir="auto" className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">
+                    {t('section.2a.demo.reply.1')}
+                </p>
                 <div className="ai-demo-tools grid gap-[0.8cqw]">
                     {TOOLS.map((tool) => {
                         const started = time >= tool.start
@@ -223,7 +231,7 @@ export default function AskAnythingDemo() {
                                 </span>
                                 <div className="ai-demo-tool-copy flex flex-col gap-[0.1cqw] [&_strong]:text-[2.4cqw] [&>span]:text-secondary [&>span]:text-[2.2cqw]">
                                     <strong>{tool.label}</strong>
-                                    <span>{t(done ? tool.result : tool.action)}</span>
+                                    <span dir="auto">{t(done ? tool.result : tool.action)}</span>
                                 </div>
                                 <span className="ai-demo-tool-status flex justify-center w-[3cqw] ms-auto">
                                     {done ? (
@@ -237,6 +245,7 @@ export default function AskAnythingDemo() {
                     })}
                 </div>
                 <div
+                    dir="auto"
                     className="ai-demo-finding bg-light dark:bg-dark border border-primary mt-[2.4cqw] py-[1.7cqw] px-[2cqw] rounded-[1.5cqw] [&>strong]:text-[2.8cqw] [&_p]:text-secondary [&_p]:text-[2.3cqw] [&_p]:mt-[0.7cqw] [&_p]:mx-0 [&_p]:mb-[1.1cqw] [&>span]:flex [&>span]:items-center [&>span]:gap-[0.8cqw] [&>span]:text-[2.4cqw] [&>span]:font-semibold"
                     data-visible={finding}
                 >

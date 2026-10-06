@@ -83,6 +83,8 @@ export default function InboxDemo() {
     return (
         <figure
             ref={ref}
+            // The Inbox is app UI in English, so it stays left-to-right on an RTL page.
+            dir="ltr"
             className="inbox-demo @container aspect-[1000/774] [--row-height:22cqw] [--row-step:24cqw] [--badge-height:4.6cqw] [&_.inbox-demo-scope]:!text-[2.1cqw] not-prose relative w-full m-0 overflow-hidden rounded border border-primary bg-accent/20 text-primary"
             data-active={active}
             data-running={running}

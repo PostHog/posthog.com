@@ -88,6 +88,8 @@ These render identically in English, so a physical class is invisible until some
 
 **The desktop canvas is exempt.** `components/Wrapper` pins `DesktopViewport` to `dir="ltr"`, because window positions are container-relative `{x, y}` coordinates rendered as framer-motion transforms, which ignore direction. Physical classes are correct inside that canvas, so `components/AppWindow` and `components/Desktop` are out of scope.
 
+**The home page demos are left-to-right.** The demos in `Home/HeroCarousel` show the PostHog app, which is in English, so their root has `dir="ltr"`. Otherwise an RTL page moves the "?" of "What can I help you with?" to the start. Each translated string inside a demo, such as the chat in `AskAnythingDemo`, has `dir="auto"`, so it takes the direction of its own language.
+
 Check any layout change with `?dir=rtl` on a page. It forces a direction and persists nothing.
 
 ## Detailed guides
