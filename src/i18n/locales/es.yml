@@ -269,7 +269,7 @@ messages:
                 label: 'Desde:'
                 old: US$0
                 new: Gratis
-                urgency: '><larger>¡¡Últimas unidades a este precio!!</larger>'
+                urgency: '<larger>¡¡Últimas unidades a este precio!!</larger>'
             button: Empezar
             urgency:
                 label: '<bold>¡Apúrate!</bold> {companies} empresas se registraron <today>hoy</today>. <br/>Pero espera, hay más: llévate US$0 de descuento en tu primera compra.'
