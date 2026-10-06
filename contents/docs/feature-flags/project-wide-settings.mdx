@@ -82,6 +82,6 @@ Rotation without downtime works by maintaining both primary and backup keys duri
 
 1. Create a [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) with the **Local feature flag evaluation** preset (the `feature_flag:read` scope).
 2. Replace the key in your SDK configuration. Both key types use the same `phs_` prefix and the same configuration option, so nothing else changes.
-3. Once all your deployments use the new key, invalidate the old key string: rotate the key in the Feature flags tab of your project settings, then delete the backup key. You can't remove the legacy key itself, but nothing needs the new primary that rotation creates. If you use Support, rotating also changes the secret that its identity verification, external API, and HS256 push notification tokens use, so update your backend first.
+3. Once all your deployments use the new key, invalidate the old key string: rotate the key in the Feature flags tab of your project settings, then delete the backup key. You can't remove the legacy key itself, and your SDKs don't need the new primary that rotation creates. If you use Support, its identity verification and external API use this key's secret: after you rotate, switch your backend to the new primary, and delete the backup only after that deploy is live.
 
 > **Note:** PostHog will also migrate existing legacy keys to project secret API keys server-side, with no change to the key string you send. You don't need to act, but migrating yourself gets you scoped, individually revocable keys sooner.
