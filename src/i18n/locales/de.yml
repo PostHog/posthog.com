@@ -268,7 +268,7 @@ messages:
                 label: 'Ab:'
                 old: 0,00 €
                 new: Gratis
-                urgency: '><larger>Nur noch 1 Stück zu diesem Preis!!</larger>'
+                urgency: '<larger>Nur noch 1 Stück zu diesem Preis!!</larger>'
             button: Loslegen
             urgency:
                 # {companies} is today's signup count, or `fallback` when it is not loaded yet.
