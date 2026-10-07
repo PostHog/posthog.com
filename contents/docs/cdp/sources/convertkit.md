@@ -9,12 +9,6 @@ availability:
 sourceId: ConvertKit
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Kit (formerly ConvertKit) connector syncs your email marketing data – subscribers, broadcasts, forms, sequences, tags, custom fields, purchases, and email templates – into PostHog.
 
 ## Adding a data source

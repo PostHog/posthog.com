@@ -9,12 +9,6 @@ availability:
 sourceId: Granola
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Granola connector pulls your meeting notes into the PostHog data warehouse. Only notes that already have a generated AI summary and transcript are returned by the API.
 
 ## Adding a data source

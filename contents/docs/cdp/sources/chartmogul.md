@@ -9,12 +9,6 @@ availability:
 sourceId: ChartMogul
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The ChartMogul connector syncs your subscription analytics data – customers, plans, plan groups, invoices, activities, and data sources – into PostHog.
 
 ## Adding a data source

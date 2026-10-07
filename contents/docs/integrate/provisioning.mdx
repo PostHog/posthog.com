@@ -88,7 +88,7 @@ Requirements:
 - **`com.posthog.provisioning`** must be `true` to use the provisioning API. Your `client_id` is a public URL, so a request that names it proves nothing about who sent it. Declaring the opt-in in the document, which only you can publish, is what grants your app provisioning access. It must be the JSON literal `true`, not the string `"true"`.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits).
+- **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). See [sign requests with a key](#sign-requests-with-a-key-optional).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 
@@ -146,9 +146,229 @@ Each check is reported separately, so a setup problem names its own cause instea
 
 Call this endpoint again whenever you want to re-check your setup. It re-fetches your document and re-reports every check. Registering again never reactivates an app PostHog has deactivated.
 
-You can also verify a signed assertion end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
+You can also verify a [signed assertion](#sign-requests-with-a-key-optional) end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
 
 Until your app is registered, the other endpoints return HTTP 401 with a message pointing back here.
+
+### Sign requests with a key (optional)
+
+With `private_key_jwt`, your app signs a short-lived JWT, called a client assertion, with a private key that only you hold. You send it on each request that identifies your app, and PostHog checks the signature against the public keys you publish at your `jwks_uri`. Nothing secret is shared with PostHog, and you rotate keys on your own schedule. Signing is required for [deep links](#requires-a-trusted-partner-record).
+
+#### Turn on key signing
+
+1. Generate a signing key and publish its public half as a JWKS at an HTTPS URL. See [publish your keys](#publish-your-keys).
+2. In your [metadata document](#host-a-cimd-metadata-document), set `token_endpoint_auth_method` to `"private_key_jwt"` and add `jwks_uri`. The `jwks_uri` must use HTTPS, include a path, have no query parameters or fragment, and resolve to a public address:
+
+   ```json
+   "token_endpoint_auth_method": "private_key_jwt",
+   "jwks_uri": "https://yourapp.com/.well-known/posthog-jwks.json"
+   ```
+
+3. Call the [registration endpoint](#register-your-app), on both `us.posthog.com` and `eu.posthog.com` if you use both regions. It re-reads your document and switches your app over in the same request. The response shows `"token_endpoint_auth_method": "private_key_jwt"`, and its `jwks` check lists the key IDs PostHog found at your `jwks_uri`. If that check fails, fix it right away: your app has already switched, so signed requests fail until PostHog can read your keys.
+4. Start signing the requests below.
+
+Once the switch applies, unsigned account requests and token calls fail with a 401. Before it applies, signed account requests fail. Without step 3, the switch waits until PostHog's cached copy of your document expires and a later account request triggers a background refresh. Token calls and `Bearer` requests never trigger one.
+
+#### Which requests to sign
+
+| Request | Assertion |
+| --- | --- |
+| `POST /api/agentic/provisioning/account_requests` | Required |
+| `POST /api/agentic/oauth/token`, for both code exchange and refresh | Required |
+| `POST /api/agentic/provisioning/limits` | Optional, instead of an access token |
+| `POST /api/agentic/provisioning/client_registration` | Optional, to check your setup |
+
+Endpoints that take your access token as a `Bearer` header, such as `/resources` and `/deep_links`, don't take an assertion.
+
+Send the assertion as two fields next to the request's other fields, as form fields at the token endpoint and `/limits`, and as JSON fields for account requests and registration:
+
+- `client_assertion_type` - always `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`
+- `client_assertion` - the signed JWT
+
+For account requests, add both fields to the body from [step 1](#step-1-create-an-account). `client_id` is optional except at the registration endpoint, because PostHog reads your client ID from the assertion's `sub`. If you send it, it must match. PostHog accepts each assertion once per region, so mint a new one for every request, including retries.
+
+#### Build the assertion
+
+The JWT header needs:
+
+- `alg` - one of `RS256`, `RS384`, `RS512`, `PS256`, `PS384`, `PS512`, `ES256`, `ES384`, or `ES512`, matching the key you sign with.
+- `kid` - the ID of the signing key in your JWKS. PostHog requires it whenever your JWKS holds more than one key, which it does during every rotation, so always send it.
+
+The claims:
+
+| Claim | Value |
+| --- | --- |
+| `iss` | Your `client_id`, exactly |
+| `sub` | Your `client_id`, exactly |
+| `aud` | `["https://us.posthog.com", "https://eu.posthog.com"]`, with no trailing slashes. PostHog can forward a request to the other region, and this value is valid in both. |
+| `iat` | When you created the assertion, in Unix seconds |
+| `exp` | When it expires, in Unix seconds, no more than 300 seconds after `iat` |
+| `jti` | A unique string, such as a random UUID |
+| `nbf` | Optional, checked if present |
+
+`iat` and `exp` must be JSON numbers, not strings. PostHog allows 30 seconds of clock skew, so an assertion is still accepted up to 30 seconds after `exp`, and `iat` or `nbf` can be up to 30 seconds in the future.
+
+#### Publish your keys
+
+Your `jwks_uri` serves a JSON Web Key Set (JWKS): a JSON object with a `keys` array of public keys.
+
+```json
+{
+  "keys": [
+    {
+      "kty": "EC",
+      "crv": "P-256",
+      "x": "<base64url x coordinate>",
+      "y": "<base64url y coordinate>",
+      "kid": "yourapp-example-key-1",
+      "alg": "ES256",
+      "use": "sig"
+    }
+  ]
+}
+```
+
+Requirements:
+
+- Use RSA keys, or EC keys on the P-256, P-384, or P-521 curve. Publish only public keys.
+- Give every key a unique `kid`.
+- Set `alg` on each key to the algorithm you sign with. PostHog verifies with the key's algorithm, not the one in the assertion header. Without `alg`, an RSA key only verifies `RS256`, and an EC key uses its curve's algorithm: `ES256` for P-256, `ES384` for P-384, and `ES512` for P-521.
+- Keep it to 10 keys or fewer, and under 16 KB.
+- Serve it with HTTP 200 and no redirects. PostHog fetches it with a short timeout and the user agent `PostHog-OAuth-JWKS/1.0`.
+
+To generate a key pair with [jose](https://github.com/panva/jose):
+
+```javascript
+import { exportJWK, exportPKCS8, generateKeyPair } from "jose";
+
+const { publicKey, privateKey } = await generateKeyPair("ES256", { extractable: true });
+const jwk = { ...(await exportJWK(publicKey)), kid: "yourapp-example-key-1", alg: "ES256", use: "sig" };
+
+console.log(JSON.stringify({ keys: [jwk] }, null, 2)); // publish at your jwks_uri
+console.log(await exportPKCS8(privateKey)); // store as a secret
+```
+
+PostHog caches your JWKS for 1 hour, whatever your `Cache-Control` header says, and re-fetches it early when an assertion names a `kid` it hasn't seen, at most once a minute. The registration endpoint re-fetches it right away, and if that fetch fails, the failure replaces the cached copy, so signed requests fail for the next minute.
+
+To rotate keys without downtime:
+
+1. Add the new key to your JWKS next to the old one, with a new `kid`.
+2. Optionally, call the registration endpoint and check that its `jwks` check lists both key IDs.
+3. Start signing with the new key.
+4. Once every assertion signed with the old key has expired, remove the old key.
+
+If a private key leaks, remove it from your JWKS, then call the registration endpoint in each region you use. Otherwise PostHog can keep accepting the removed key for up to an hour.
+
+#### Switch back to a public client
+
+Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
+
+#### Sign a request in Python or Node.js
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+# pip install "pyjwt[crypto]" requests
+import time
+import uuid
+
+import jwt
+import requests
+
+CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json"
+KEY_ID = "yourapp-example-key-1"
+AUDIENCE = ["https://us.posthog.com", "https://eu.posthog.com"]
+ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+
+def build_client_assertion(private_key_pem: str) -> str:
+    now = int(time.time())
+    claims = {
+        "iss": CLIENT_ID,
+        "sub": CLIENT_ID,
+        "aud": AUDIENCE,
+        "iat": now,
+        "exp": now + 60,
+        "jti": str(uuid.uuid4()),
+    }
+    return jwt.encode(claims, private_key_pem, algorithm="ES256", headers={"kid": KEY_ID})
+
+def refresh_tokens(private_key_pem: str, refresh_token: str) -> dict:
+    response = requests.post(
+        "https://us.posthog.com/api/agentic/oauth/token",
+        headers={"API-Version": "0.1d"},
+        data={
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_assertion_type": ASSERTION_TYPE,
+            "client_assertion": build_client_assertion(private_key_pem),
+        },
+    )
+    response.raise_for_status()
+    return response.json()
+```
+
+```javascript file=Node.js
+// npm install jose
+import crypto from "node:crypto";
+import { SignJWT, importPKCS8 } from "jose";
+
+const CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json";
+const KEY_ID = "yourapp-example-key-1";
+const AUDIENCE = ["https://us.posthog.com", "https://eu.posthog.com"];
+const ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
+
+const privateKey = await importPKCS8(process.env.POSTHOG_SIGNING_KEY, "ES256");
+
+function buildClientAssertion() {
+  return new SignJWT({})
+    .setProtectedHeader({ alg: "ES256", kid: KEY_ID })
+    .setIssuer(CLIENT_ID)
+    .setSubject(CLIENT_ID)
+    .setAudience(AUDIENCE)
+    .setIssuedAt()
+    .setExpirationTime("60s")
+    .setJti(crypto.randomUUID())
+    .sign(privateKey);
+}
+
+async function refreshTokens(refreshToken) {
+  const res = await fetch("https://us.posthog.com/api/agentic/oauth/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "API-Version": "0.1d",
+    },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+      client_assertion_type: ASSERTION_TYPE,
+      client_assertion: await buildClientAssertion(),
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Token refresh failed (${res.status}): ${await res.text()}`);
+  return res.json();
+}
+```
+
+</MultiLanguage>
+
+#### Troubleshoot assertion errors
+
+Account requests and `/limits` return a 401 `unauthorized`, and the token endpoint returns a 401 `invalid_client`. The message names the problem:
+
+| Message | What to check |
+| --- | --- |
+| `This client must authenticate` or `A client_assertion is required` | PostHog found no usable assertion. Send both fields, with `client_assertion_type` spelled exactly. |
+| `No provisioning client is registered for this client_id...` | PostHog found no registered app for your client ID in the region that handled the request. Without a `client_id` field, PostHog reads your client ID from the assertion's `sub`, so on an account request this message also means the assertion is missing, `client_assertion_type` is misspelled, `sub` is missing, or the value isn't a JWT. Send `client_id` to get a more specific message. |
+| `This client does not authenticate with a client assertion` | PostHog still sees a public client. Call the registration endpoint to apply your document change. |
+| `This client is not registered for private_key_jwt authentication` | You sent an assertion to the registration endpoint before your document declared `private_key_jwt`. |
+| `Client assertion is invalid` | The signature, `alg`, `iss`, `aud`, `exp`, `iat`, or `nbf` check failed, or a required claim is missing. PostHog doesn't say which, so check each against [build the assertion](#build-the-assertion). |
+| `Client assertion does not match this grant` | Token endpoint only. The `client_id` you sent, or the assertion's `sub`, isn't the app the code or refresh token was issued to. |
+| `Client assertion is signed by an unknown key` | The `kid` isn't in your JWKS. |
+| `Client assertion header is malformed` | The value you sent with `client_id` isn't a JWT. |
+| `Client keys could not be retrieved` | PostHog couldn't fetch or read your JWKS, now or in the last minute. Check the requirements in [publish your keys](#publish-your-keys). |
+| `JWKS could not be parsed: ...` | Your JWKS isn't a valid key set. PostHog returns this on the first failed fetch, then `Client keys could not be retrieved` for the next minute. |
 
 ### Link your partner app to a PostHog organization (optional)
 
@@ -184,45 +404,7 @@ Revocation clears the link on the next metadata refresh, so a leaked or stale to
 
 ### Declare OAuth scopes for your app (optional)
 
-You can declare which OAuth scopes your partner app needs by adding a `scopes` field inside the `com.posthog` namespace. This sets a scope ceiling – tokens issued to your app are limited to these scopes.
-
-```json
-{
-  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
-  "client_name": "Your App Name",
-  "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
-  "token_endpoint_auth_method": "none",
-  "grant_types": ["authorization_code"],
-  "response_types": ["code"],
-  "com.posthog": {
-    "provisioning": true,
-    "verification_token": "phvt_...",
-    "scopes": ["insight:read", "project:read", "person:read"]
-  }
-}
-```
-
-Only scopes a user can grant on the consent screen are accepted – see [available scopes](#available-scopes) for the full list. Any scope PostHog reserves for internal use, or doesn't recognize, is dropped. If every scope you declare is dropped (none are grantable), registration is rejected rather than falling back to an empty ceiling, so make sure at least one declared scope is on the available list.
-
-If `com.posthog.scopes` is omitted, your app can request any scope a user can grant. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
-
-CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
-
-#### Scopes a user can decline
-
-Everything in `scopes` is required, and the user sees it locked on the consent screen. If part of what you ask for is for a feature they may not want, put those scopes in `optional_scopes` instead. Those appear as declinable, and the user can approve the rest without them.
-
-```json
-"com.posthog": {
-  "provisioning": true,
-  "scopes": ["insight:read", "project:read"],
-  "optional_scopes": ["session_recording:read"]
-}
-```
-
-Your ceiling is both lists together, so a token can carry anything in either one, and never anything outside them. Check the scopes on the token you get back before using a feature that depends on a declinable scope, because the user may have said no to it.
-
-`optional_scopes` needs a non-empty `scopes` alongside it: an app offering extras has to declare the base they sit on top of. Both lists are filtered the same way, so an unrecognized or internal scope is dropped from either. Unlike `scopes`, an `optional_scopes` list that ends up empty is fine, and just means you offer no declinable extras.
+Provisioning apps use the same required and optional scope declarations as other CIMD clients. See [declare your OAuth scopes](/docs/api/oauth#declare-your-scopes) to set your app's scope ceiling and mark scopes that people can decline.
 
 ## API reference
 
@@ -587,6 +769,7 @@ Common error codes:
 | `forbidden` | 403 | Partner not authorized for this action |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
+| `invalid_client` | 401 | Client authentication failed (token endpoint). See [assertion errors](#troubleshoot-assertion-errors) |
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
 | `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
@@ -608,7 +791,7 @@ Budgets scale with how strongly your app identifies itself, on two axes:
 | `none` (public, PKCE) | 1x | 2x |
 | `private_key_jwt` | 5x | 10x |
 
-Both upgrades are self-serve and take effect on your next request: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. Nothing to wait for and nobody to ask.
+Both upgrades are self-serve: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. They apply the next time PostHog reads your metadata document, and you can make that happen right away by calling the [registration endpoint](#register-your-app). Nobody to ask.
 
 ### Budgets
 
@@ -617,10 +800,14 @@ At the 1x tier:
 | Endpoints | Burst | Refill |
 | --- | --- | --- |
 | Account requests | 5 | 10/hour |
+| Token exchange | 10 | 20/hour |
 | Project provisioning (`/resources`) | 10 | 30/hour |
-| Everything else (token exchange, token refresh, reads, credential rotation, deep links) | 30 | 120/hour |
+| Deep links | Blocked | Blocked |
+| Everything else (token refresh, reads, credential rotation) | 30 | 120/hour |
 
-So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+
+Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x. Polling a GitHub grant's repositories is the one budget that does not scale with tier: 30 burst and 120/hour per grant, because how fast a visitor's repo picker polls has nothing to do with how strongly your app identifies itself.
 
 Limits are per region: US and EU count separately.
 

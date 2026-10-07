@@ -99,6 +99,8 @@ Proactively check for common implementation issues, especially for newer account
 
 If a customer expresses interest in reducing their PostHog spend, view it as an opportunity to act in their interest, help them optimize, and stabilize the relationship. The fact that they're telling you is a signal of trust. Deepen that trust by helping them save money (which is a totally reasonable goal to support).
 
+Tag the account `cost optimizing` in PostHog Customer Analytics while you work on it – see [cost optimization](/handbook/cs-and-onboarding/cost-optimization) for what the tag is for and how we share these with the team.
+
 - **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
 - **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
 - **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/cs-and-onboarding/how-we-work#working-with-engineering-teams) so they can better assist you).
@@ -132,7 +134,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cs
 | Churn scenario | De-risking strategy |
 |----------------|---------------------|
 | **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. |
-| **Champion isn't the decision maker** | Identify and build relationships with actual decision makers. Your champion can help with introductions. |
+| **Your contact is a coach, not a champion** | Identify and build a relationship with a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who can make change happen. Your coach can help with introductions. |
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |

@@ -67,6 +67,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
 
 export type CustomerLogo =
     | React.ComponentType<{ className?: string }>
@@ -1016,6 +1017,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
             },
         },
+    },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
     },
     mintlify: {
         name: 'Mintlify',

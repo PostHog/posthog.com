@@ -118,7 +118,7 @@ const SlackPosts = () => {
                             <li key={id}>
                                 <Link
                                     className="text-primary hover:underline leading-tight flex items-center gap-1"
-                                    to={`/questions/topic/${slugify(topic.slug)}`}
+                                    to={`/forum`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
                                     {topic.slug === 'witw' ? (
@@ -134,7 +134,7 @@ const SlackPosts = () => {
                                     <h5 className="opacity-50 font-semibold text-sm m-0">{topic.label}</h5>
                                 </Link>
                                 <Link
-                                    to={`/questions/${permalink}`}
+                                    to={`/forum/p/${permalink}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
                                     <h4 className="mt-1 mb-2 font-medium hover:underline text-[15px] leading-tight ml-6">
