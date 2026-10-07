@@ -67,7 +67,7 @@ Ankit's team uses replays the same way, to spot where people get stuck or confus
 
 Both will ship the way everything else does at Runable: tested behind flags, watched in replays, and measured on dashboards. It's a setup that covers acquisition, product, retention, and costs, all without a data team. So what would happen if PostHog disappeared tomorrow?
 
-"It'll set me back by, like, a month," Eshaan says. "Everything is integrated with PostHog."
+"It would set me back by, like, a month," Eshaan says. "Everything is integrated with PostHog."
 
 <OSQuote
   customer="runable"
