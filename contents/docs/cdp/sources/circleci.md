@@ -9,7 +9,7 @@ availability:
 sourceId: CircleCI
 ---
 
-The CircleCI connector syncs your CI/CD pipeline data – pipelines, workflows, jobs, and projects – into PostHog.
+The CircleCI connector syncs your CI/CD pipeline data – pipelines, workflows, jobs, projects, deploy components, and users – into PostHog.
 
 ## Adding a data source
 
@@ -24,12 +24,15 @@ Once the syncs are complete, you can start using CircleCI data in PostHog.
 
 ## Available tables
 
-| Table       | Description                             | Sync method  |
-| ----------- | --------------------------------------- | ------------ |
-| `pipelines` | CI/CD pipelines in your organization    | Full refresh |
-| `workflows` | Workflows within pipelines              | Full refresh |
-| `jobs`      | Individual jobs within workflows        | Full refresh |
-| `projects`  | Projects associated with your pipelines | Full refresh |
+| Table                | Description                             | Sync method  |
+| -------------------- | --------------------------------------- | ------------ |
+| `pipelines`          | CI/CD pipelines in your organization    | Full refresh |
+| `workflows`          | Workflows within pipelines              | Full refresh |
+| `jobs`               | Individual jobs within workflows        | Full refresh |
+| `projects`           | Projects associated with your pipelines | Full refresh |
+| `users`              | Users in your organization              | Full refresh |
+| `components`         | Deploy components                       | Full refresh |
+| `component_versions` | Deployed versions of components         | Full refresh |
 
 **Full refresh** tables reload all data on each sync. CircleCI's API does not support incremental syncing.
 
