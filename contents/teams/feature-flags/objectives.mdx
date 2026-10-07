@@ -11,7 +11,7 @@ Targeting a flag at people based on what they did is one of our most-requested f
 - A processing pipeline that scales to every project
 - General availability, with a launch announcement and realtime cohorts shown where people build flags
 
-#### Plan for scale and reduce the cost of operating feature flags <TeamMember name="Phil Haack" photo />
+#### Plan for scale and reduce the cost of operating Feature Flags <TeamMember name="Phil Haack" photo />
 
 Our margins are small, and the cost of operating flags does not scale. We want to make sure that scaling 10x doesn't cost us 100x.
 
@@ -51,19 +51,19 @@ A flag only helps once code evaluates it. So flags should come to developers in 
 
 - Flag by default: when a developer builds a feature with an agent, the agent flags it without being asked. The agent creates the flag in the right project, adds the SDK check to the code, toggles the flag on and off locally to confirm the code works both ways, checks that the targeting rule matches the developer, and proposes a rollout. This ships as a PostHog skill that the wizard installs, and covers both MCP and PostHog AI. This is the most important item in this objective.
 - Flag on request (Ruby): when a developer asks an agent to flag a feature, the agent creates the flag, adds the SDK check to the code, confirms locally that the code works with the flag on and off, and proposes a rollout. This covers both MCP and PostHog AI.
-- Proactive flags (Patricio): other PostHog products, such as error tracking and data warehouse, suggest a flag when their signals show one would help. The suggestion reaches the developer through their agent or as a code change. One example of the shape, not a commitment: a GitHub agent that scans PRs for risky changes and opens a draft PR that puts the risky feature behind a flag.
+- Proactive flags (Patricio): other PostHog products, such as Error Tracking and Data Warehouse, suggest a flag when their signals show one would help. The suggestion reaches the developer through their agent or as a code change. One example of the shape, not a commitment: a GitHub agent that scans PRs for risky changes and opens a draft PR that puts the risky feature behind a flag.
 - UI simplification (Ruby, lower priority): trim the flags UI to what the core jobs need, so it doesn't distract the less technical users who now use PostHog.
 
 **We'll know we're successful when:** a larger share of new flags created by agents and from proactive suggestions get evaluated. We'll set a baseline this quarter, and add instrumentation if we can't measure it today. We'll also track a fixed set of "build feature X" prompts that never mention flags, and measure the share where the agent flags the feature.
 
-#### Make flag evaluation correct and consistent with cohorts and product analytics <TeamMember name="Phil Haack" photo />
+#### Make flag evaluation correct and consistent with cohorts and Product Analytics <TeamMember name="Phil Haack" photo />
 
-Some flag operators behave differently when we evaluate them locally, remotely, or in product analytics. For example, a cohort can evaluate one way in remote evaluation and another way when its definition is part of the flag definitions for local evaluation. This confuses customers, produces results that look wrong, and reduces trust. We want flags to be trustworthy.
+Some flag operators behave differently when we evaluate them locally, remotely, or in Product Analytics. For example, a cohort can evaluate one way in remote evaluation and another way when its definition is part of the flag definitions for local evaluation. This confuses customers, produces results that look wrong, and reduces trust. We want flags to be trustworthy.
 
 **What we'll ship:**
 
 - SDK specs for all operators
-- Flag evaluation that matches product analytics
+- Flag evaluation that matches Product Analytics
 - SDK local evaluation that matches remote flag evaluation
 
 ### Other Q4 work
@@ -79,10 +79,10 @@ We plan to do this work in Q4, but none of it is a quarterly objective.
 **Customers**
 
 - **Unanswered issues and PRs:** 25 issues labeled `team/feature-flags` have never had a reply from us. Reply to each one and triage open community PRs.
-- **Data warehouse targeting:** flags can already target data warehouse data through warehouse properties, but our flag docs mention it in a single bullet. Check for gaps, then add examples and a tutorial, such as targeting by Stripe plan tier.
+- **Data Warehouse targeting:** flags can already target Data Warehouse data through warehouse properties, but our flag docs mention it in a single bullet. Check for gaps, then add examples and a tutorial, such as targeting by Stripe plan tier.
 - **Status page metrics:** turn on the feature flag metrics on the status page.
 
 **Carry-over and exploration**
 
-- **Experiments support:** keep working with the Experiments team on the Q3 experiments work: boolean flag experiments, multiple experiments on a single flag, and a dedicated exposure event.
+- **Experiments support:** keep working with the Experiments team on the Q3 Improved Experiments objective: boolean flag experiments, multiple experiments on a single flag, and a dedicated exposure event.
 - **Fit into how teams ship:** explore Git as the source of truth for flag definitions, and promoting flags between projects ([#34877](https://github.com/PostHog/posthog/issues/34877)).
