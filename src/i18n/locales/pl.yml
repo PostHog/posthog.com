@@ -18,8 +18,8 @@
 #   Use an apostrophe when the English spelling ends in a letter you do not pronounce: "stack trace'y",
 #   "hardware'u". Keep "wizard", not "kreator". Use the normal Polish word when devs use it too: lejek,
 #   rejestracja, hurtownia danych, nagrania sesji, wnioski. Do not borrow an English word just because it
-#   appears in the source. To query data is "sprawdzać", not "odpytywać". Docs in the menus are "Dokumenty".
-#   Write "Cookies" with a capital C.
+#   appears in the source. To query data is "sprawdzać", not "odpytywać". Docs in the menus are
+#   "Dokumentacja", not "Dokumenty" (documents). Write "Cookies" with a capital C.
 # - Dev slang is welcome when it is clear: "odpal", "podepnij", "dowozimy", "leci na proda", "zwiechy", "sztos", "olej".
 # - Localize the jokes with Polish references that land the same way: Kim K -> Magda Gessler, a Bond villain ->
 #   "potwór z Wiedźmina", "hop on a quick call" -> "wskakiwać na szybkiego calla" (corpo-speak), an install
@@ -295,7 +295,7 @@ messages:
         menu:
             products: Produkty
             pricing: Cennik
-            docs: Dokumenty
+            docs: Dokumentacja
             community: Społeczność
             company: Firma
             more: Więcej
@@ -379,7 +379,7 @@ messages:
     desktop:
         home: Start
         pricing: Cennik
-        docs: Dokumenty
+        docs: Dokumentacja
         demo: Demo
         talk_to_a_human: Pogadaj z człowiekiem
         about_us: O nas
