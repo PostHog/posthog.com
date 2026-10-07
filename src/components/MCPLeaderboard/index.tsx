@@ -34,7 +34,7 @@ import {
     PALETTE,
     Series,
     Theme,
-    categoricalColor,
+    categoricalColors,
     clientColor,
     clientMaker,
     delta,
@@ -319,7 +319,9 @@ function ClientRace({
     theme: Theme
     metric: Metric
 }) {
-    const series = topSeries(byLab, 8, (label) => vendorColor(label, theme))
+    // A darker shade of each lab's color (same hue, lower OKLCH lightness), so the bands read as
+    // strongly as the model chart above, whose leading models start at the dark end of each lab's shades.
+    const series = topSeries(byLab, 8, (label) => vendorColor(label, theme, -0.08))
     const clients = weekShares(rows, 'client', week, metric, { dropUnknown: true, dropOther: true, limit: 15 }).map(
         (share) => ({ ...share, color: clientColor(share.label, theme) })
     )
@@ -359,9 +361,14 @@ const UnderTheHood = memo(function UnderTheHood({
     theme: Theme
 }) {
     // Newest spec first, so the newest version always gets the same color.
-    const protocolSeries = topSeries(groupedSeries(rows, 'protocol_version_daily', days), 5, () => '')
-        .sort((a, b) => (a.label === 'Other' ? 1 : b.label === 'Other' ? -1 : b.label.localeCompare(a.label)))
-        .map((s, i) => ({ ...s, color: categoricalColor(s.label, i) }))
+    const protocolOrdered = topSeries(groupedSeries(rows, 'protocol_version_daily', days), 5, () => '').sort((a, b) =>
+        a.label === 'Other' ? 1 : b.label === 'Other' ? -1 : b.label.localeCompare(a.label)
+    )
+    const protocolColors = categoricalColors(
+        protocolOrdered.map((s) => s.label),
+        theme
+    )
+    const protocolSeries = protocolOrdered.map((s) => ({ ...s, color: protocolColors.get(s.label) as string }))
     return (
         <section id="protocol" className="not-prose">
             <StickerHeading sticker={StickerTombstone}>The rise and fall of MCP spec versions</StickerHeading>
@@ -371,18 +378,28 @@ const UnderTheHood = memo(function UnderTheHood({
                 </Card>
                 <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                     {HOOD_FACETS.map(({ facet, title }) => {
-                        const items = weekShares(rows, facet, week, 'calls_pct').map((share, i) => ({
+                        const shares = weekShares(rows, facet, week, 'calls_pct').map((share) => ({
                             ...share,
                             label: displayLabel(facet, share.label),
-                            color: categoricalColor(share.label, i),
                         }))
-                        // Same labels and colors as the bar, and unknown labels stay, like in the bar.
-                        const colors = new Map(items.map((item) => [item.label, item.color]))
-                        const series = topSeries(
-                            groupedSeries(rows, `${facet}_daily`, days, (label) => displayLabel(facet, label), false),
-                            5,
-                            (label, i) => colors.get(label) ?? categoricalColor(label, i)
+                        // Unknown labels stay, like in the bar. One color map covers every label in the
+                        // bar and the chart, so a label has the same color in both.
+                        const byLabel = groupedSeries(
+                            rows,
+                            `${facet}_daily`,
+                            days,
+                            (label) => displayLabel(facet, label),
+                            false
                         )
+                        const colors = categoricalColors(
+                            [
+                                ...shares.map((share) => share.label),
+                                ...topSeries(byLabel, 5, () => '').map((s) => s.label),
+                            ],
+                            theme
+                        )
+                        const items = shares.map((share) => ({ ...share, color: colors.get(share.label) }))
+                        const series = topSeries(byLabel, 5, (label) => colors.get(label) as string)
                         return (
                             <Card key={facet} title={title}>
                                 <SplitBar items={items} />
@@ -516,10 +533,12 @@ const Reliability = memo(function Reliability({
     const clients = weekShares(rows, 'client', week, 'calls_pct', { dropUnknown: true, dropOther: true, limit: 10 })
         .map((share) => ({ ...share, value: share.errorRate ?? 0, color: clientColor(share.label, theme) }))
         .sort((a, b) => b.value - a.value)
-    const errorTypes = weekShares(rows, 'error_type', week, 'calls_pct').map((share, i) => ({
-        ...share,
-        color: categoricalColor(share.label, i),
-    }))
+    const errorShares = weekShares(rows, 'error_type', week, 'calls_pct')
+    const errorColors = categoricalColors(
+        errorShares.map((share) => share.label),
+        theme
+    )
+    const errorTypes = errorShares.map((share) => ({ ...share, color: errorColors.get(share.label) }))
     return (
         <section id="reliability" className="not-prose">
             <StickerHeading sticker={StickerCloudCross}>Reliability</StickerHeading>

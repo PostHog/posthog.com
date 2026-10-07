@@ -46,13 +46,28 @@ function chartOptions(
             legend: {
                 display: legend,
                 position: 'bottom',
-                labels: { color: colors.text, boxWidth: 10, boxHeight: 10, font: { size: 11 } },
+                labels: {
+                    color: colors.text,
+                    boxWidth: 10,
+                    boxHeight: 10,
+                    font: { size: 11 },
+                    // The series color, filled and outlined, so the box matches its band.
+                    generateLabels: (chart) =>
+                        Chart.defaults.plugins.legend.labels
+                            .generateLabels(chart)
+                            .map((label) => ({ ...label, strokeStyle: label.fillStyle })),
+                },
             },
             tooltip: {
                 // Series order (the legend order) on every hover, so a name never moves between periods.
                 itemSort: (a, b) => a.datasetIndex - b.datasetIndex,
                 callbacks: {
                     label: (item) => `${item.dataset.label}: ${formatY(item.parsed.y ?? 0)}`,
+                    // The series color, same as the legend.
+                    labelColor: (item) => ({
+                        borderColor: item.dataset.backgroundColor as string,
+                        backgroundColor: item.dataset.backgroundColor as string,
+                    }),
                 },
             },
         },
@@ -69,7 +84,8 @@ function chartOptions(
     }
 }
 
-// A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100.
+// A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100. Stacked
+// bands are opaque, so a band is exactly its legend color.
 export function LineChart({
     periods,
     series,
@@ -101,7 +117,7 @@ export function LineChart({
                           label: s.label,
                           data: s.data.slice(start).map((value, i) => (empty[start + i] ? null : value)),
                           borderColor: s.color,
-                          backgroundColor: `${s.color}CC`,
+                          backgroundColor: s.color,
                           borderWidth: 1,
                           pointRadius: 0,
                           fill: true,
