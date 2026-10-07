@@ -12,9 +12,6 @@ sourceId: Argocd
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Argo CD connector syncs your GitOps delivery data – applications, deployment history, projects, repositories, and clusters – into PostHog, so you can analyze deployment frequency, rollback rates, and other delivery metrics alongside your product data.
 

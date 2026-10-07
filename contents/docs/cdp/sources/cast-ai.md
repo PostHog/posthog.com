@@ -12,9 +12,6 @@ sourceId: CastAi
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The CAST AI connector syncs your Kubernetes cost and savings data from [CAST AI](https://cast.ai) into the PostHog data warehouse. This lets you analyze cluster costs, spot vs on-demand spend, and optimization savings alongside your product analytics.
 

@@ -12,9 +12,6 @@ sourceId: Langfuse
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Langfuse connector syncs your LLM observability data – traces, observations, evaluation scores, sessions, prompts, models, and datasets – into PostHog, so you can analyze your AI application's behavior, cost, and quality alongside your product data.
 It works with Langfuse Cloud (all regions) and self-hosted Langfuse instances.

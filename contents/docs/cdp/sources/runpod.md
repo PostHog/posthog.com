@@ -12,9 +12,6 @@ sourceId: RunPod
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The RunPod connector syncs your GPU cloud infrastructure – Pods, Serverless endpoints, templates, and network volumes – plus daily billing history into PostHog, so you can analyze compute spend alongside your product data.
 

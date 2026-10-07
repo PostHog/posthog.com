@@ -12,9 +12,6 @@ sourceId: DingConnect
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DingConnect connector syncs your DingConnect data into the PostHog Data warehouse, so you can analyze your top-up transactions and account balances alongside your product data.
 

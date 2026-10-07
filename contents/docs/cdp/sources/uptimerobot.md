@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Uptimerobot
-beta: true
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The UptimeRobot source syncs your uptime monitoring data – monitors, downtime event logs, response-time history, alert contacts, maintenance windows, and public status pages – into PostHog, so you can report on availability SLAs and downtime trends alongside your product data.
 
