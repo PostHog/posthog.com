@@ -43,8 +43,8 @@ messages:
     hero:
         H1: Der <emphasis>Kontext-Layer</emphasis> für dein Produkt
         body:
-            1: PostHog erfasst und speichert deine <highlight>Analytics, Fehler, Replays und Unternehmensdaten</highlight>, damit du und deine <underline>Agenten</underline> sie abfragen und danach handeln könnt.
-            2: Über 500.000 Teams liefern schon Code mit PostHog aus. Deins fehlt noch.
+            1: PostHog erfasst und speichert deine <highlight>Analytics, Fehler, Replays und Unternehmensdaten</highlight>, damit du und deine <underline>Agenten</underline> sie abfragen und direkt darauf reagieren könnt.
+            2: Über 500.000 Teams liefern schon Code mit PostHog aus. Zeit, dass deins dazukommt.
         cta:
             heading: <logo/> <highlight>kostenlos</highlight> einrichten
             body:
@@ -110,14 +110,14 @@ messages:
         2c:
             toggle: Code mit PostHog ausliefern
             heading: Code mit PostHog ausliefern
-            body: Deine Inbox bündelt zusammengehörige Erkenntnisse zu recherchierten Berichten, sortiert nach Priorität. Prüf die vorgeschlagenen Verbesserungen und Pull-Requests, dann entscheidest du, was live geht.
+            body: Deine Inbox fasst zusammengehörige Erkenntnisse in recherchierten Berichten zusammen, sortiert nach Priorität. Prüf die vorgeschlagenen Verbesserungen und Pull-Requests und entscheide, was live geht.
             button: Kostenlos loslegen
             signals:
                 heading: 'Self-driving holt sich Signale aus:'
                 1:
                     body: Exceptions und Stack Traces, gruppiert zu Issues
                 2:
-                    body: Dead-Clicks, schnelles Zurück, lange Hänger
+                    body: Dead-Clicks, schnelle Rücknavigation, lange Hänger
                 3:
                     title: Support
                     body: Tickets und Gespräche mit deinen Nutzern
@@ -182,7 +182,7 @@ messages:
         4:
             heading: Alle deine Daten <highlight>ziehen an einem Strang</highlight>
             list:
-                heading: 'Das Context Warehouse <highlight>bringt</highlight> ab Werk mit:'
+                heading: 'Das Context Warehouse <highlight>bringt alles mit</highlight>:'
                 1: Ein Data Warehouse <tooltip/>
                 2: Über 120 Quellen/Ziele
                 3: SQL-Editor + BI + Datenvisualisierung
@@ -205,7 +205,7 @@ messages:
             body:
                 1: 'Unsere ganze Philosophie: Du sollst dir über Preise keinen Kopf machen müssen.'
                 2: Alle kostenpflichtigen Produkte rechnen wir nach Nutzung ab, mit großzügigen monatlichen Freikontingenten. Tatsächlich nutzen 98 % unserer Kunden PostHog kostenlos.
-                3: Wir wollen bei großen Mengen preislich so attraktiv sein wie die günstigste Alternative. PostHog soll die logische Wahl sein. Und für einen Preis musst du nie „kurz in einen Call springen“.
+                3: Bei großen Mengen wollen wir preislich mit der günstigsten Alternative mithalten. PostHog soll die logische Wahl sein. Und für einen Preis musst du nie „kurz in einen Call springen“.
                 4: 'Ein paar Beispiele, wie wir unsere beliebtesten Produkte abrechnen:'
             label:
                 freetier: Freikontingent
@@ -229,12 +229,12 @@ messages:
 
         6:
             heading: Warum PostHog?
-            body: 'Wir ticken aus ein paar Gründen anders als die meisten Firmen:'
+            body: 'Wir machen ein paar Dinge anders als die meisten Firmen:'
             list:
                 # Markdown. Keep the links.
                 1: '**Transparenz.** Lies unser [Firmenhandbuch](/handbook), unser [Vertriebshandbuch](/handbook/growth/sales/overview) und sogar unsere [Firmenstrategie](/handbook/why-does-posthog-exist).'
                 2: '**Wir liefern schnell aus.** Schau ins [Changelog](/changelog).'
-                3: <emphasis>Echt</emphasis><bold> technischer Support.</bold> Unsere <team>Support-Leute</team> kommen alle aus der Entwicklung.
+                3: <emphasis>Technischer</emphasis> Support von <bold>Entwicklern.</bold> Unsere <team>Support-Leute</team> kommen alle aus der Softwareentwicklung.
             button: Mehr über uns
 
         7:
