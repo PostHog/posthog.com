@@ -58,10 +58,10 @@ export default function Trash(): JSX.Element {
                                 icon: 'video' as AppIconName,
                             },
                             {
-                                name: 'Uber for dogs',
+                                name: 'Uber_for_dogs_pitchdeck.ppt',
                                 slug: 'uber-for-dogs',
                                 url: 'https://x.com/james406',
-                                extension: 'key',
+                                extension: 'ppt',
                                 color: 'yellow',
                                 icon: 'presentation' as AppIconName,
                                 external: true,
