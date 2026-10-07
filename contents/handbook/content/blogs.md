@@ -61,7 +61,7 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 All blogs must be reviewed by someone on the Editorial Team before publishing.
 
 Before you submit, make sure you have:
-1. A **hero image** (grab a template from the [blog graphics Figma](https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&type=design&mode=design), or [request art](/handbook/brand/art-requests) for something custom), correct [frontmatter](/handbook/content/metadata), and a post that follows the [style guide](/handbook/content/posthog-style-guide). Check the deployment preview on your PR to see how it renders.
+1. A **hero image** (grab a template from the [blog graphics Figma](https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&type=design&mode=design), or [request art](/handbook/brand/art-requests) for something custom – request it as early as possible, even before the details are set), correct [frontmatter](/handbook/content/metadata), and a post that follows the [style guide](/handbook/content/posthog-style-guide). Check the deployment preview on your PR to see how it renders.
 2. An author entry in [`src/data/authors.json`](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json). The `handle` you add there is what goes in the `author` field of your frontmatter – see [metadata](/handbook/content/metadata) for the format.
 
 To submit, simply create **a pull request.** Add your `.md` file to [`/contents/blog`](https://github.com/PostHog/posthog.com/tree/master/contents/blog) in the [posthog.com repo](https://github.com/PostHog/posthog.com). It will automatically add the Editorial Team as reviewers.
