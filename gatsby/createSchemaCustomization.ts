@@ -405,9 +405,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       attributes: PostCategoryAttributes
     }
     type CommunityStats implements Node {
-      topicId: Int
-      topicSlug: String
-      topicLabel: String
+      forumTag: String
       questions: Int
       resolved: Int
       replies: Int

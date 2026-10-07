@@ -99,7 +99,6 @@ const meQuery = qs.stringify(
                                 },
                             },
                             topics: true,
-                            pinnedTopics: true,
                             slugs: true,
                         },
                     },

@@ -1614,6 +1614,15 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
+    // The forum's sidebar starts at the top of the window, so each forum route gets a title bar above it.
+    '/forum': { toolbar: true },
+    '/forum/following': { toolbar: true },
+    '/forum/drafts': { toolbar: true },
+    '/forum/alerts': { toolbar: true },
+    '/forum/new': { toolbar: true },
+    '/forum/t/:topic': { toolbar: true },
+    '/forum/t/:topic/tags': { toolbar: true },
+    '/forum/p/:permalink': { toolbar: true },
     '/ai': {
         toolbar: true,
     },

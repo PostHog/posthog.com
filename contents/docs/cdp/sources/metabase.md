@@ -12,9 +12,6 @@ sourceId: Metabase
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Metabase connector pulls your Metabase data into the PostHog Data warehouse, so you can analyze your Metabase content and metadata alongside your product data.
 

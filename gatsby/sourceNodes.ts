@@ -495,54 +495,48 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         }
 
-        const statsFor = async (topicId: number | null) => {
-            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
-            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+        const statsFor = async (forumTag: string | null) => {
+            const questionTagFilter = forumTag
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: 'questions' } } } }
+                : {}
+            const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
             const [questions, resolved, replies, helpful] = await Promise.all([
-                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', { ...notArchived, ...questionTagFilter }),
                 fetchTotal('questions', {
                     ...notArchived,
-                    ...questionTopicFilter,
+                    ...questionTagFilter,
                     resolved: { $eq: true },
                 }),
-                fetchTotal('replies', { ...replyTopicFilter }),
-                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+                fetchTotal('replies', { ...replyTagFilter }),
+                fetchTotal('replies', { ...replyTagFilter, helpful: { $eq: true } }),
             ])
 
             return { questions, resolved, replies, helpful }
         }
 
-        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        let forumTags: string[] = []
         try {
-            const topicsQuery = qs.stringify(
+            const tagsQuery = qs.stringify(
                 {
-                    fields: ['label', 'slug'],
-                    pagination: { pageSize: 200 },
+                    filters: { topic: { slug: { $eq: 'questions' } } },
+                    fields: ['slug'],
+                    pagination: { pageSize: 100 },
                 },
                 { encodeValuesOnly: true }
             )
-            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
-            topics = topicsRes?.data ?? []
+            const tagsRes = (await fetch(`${host}/api/forum-tags?${tagsQuery}`).then((r) => r.json())) as any
+            forumTags = (tagsRes?.data ?? []).map((tag: any) => tag.attributes?.slug).filter(Boolean)
         } catch (error) {
-            console.warn('Failed to fetch topics for community stats:', error)
+            console.warn('Failed to fetch forum tags for community stats:', error)
         }
 
-        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
-            { topicId: null, topicSlug: null, topicLabel: null },
-            ...topics.map((t) => ({
-                topicId: t.id,
-                topicSlug: t.attributes?.slug ?? null,
-                topicLabel: t.attributes?.label ?? null,
-            })),
-        ]
-
         await Promise.all(
-            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
-                const counts = await statsFor(topicId)
-                const data = { topicId, topicSlug, topicLabel, ...counts }
+            [null, ...forumTags].map(async (forumTag) => {
+                const counts = await statsFor(forumTag)
+                const data = { forumTag, ...counts }
                 createNode({
-                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    id: createNodeId(`community-stats-${forumTag ?? 'site'}`),
                     parent: null,
                     children: [],
                     internal: {

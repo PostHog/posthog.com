@@ -12,13 +12,22 @@ type UseQuestionsOptions = {
     topicId?: number
     limit?: number
     sortBy?: 'newest' | 'popular' | 'activity'
+    // These replace the defaults below when set. The forum feed uses them to request a lighter payload and its own sorts.
+    sort?: string[]
+    populate?: Record<string, unknown>
+    fields?: string[]
+    // 'preview' lists the caller's own drafts as well; the server hides everyone else's.
+    publicationState?: 'live' | 'preview'
     filters?: any
     revalidateOnFocus?: boolean
+    // Keeps the current results on screen while a changed query loads, so a list can fade and reorder instead of
+    // emptying.
+    keepPreviousData?: boolean
 }
 
 const query = (offset: number, options?: UseQuestionsOptions, isModerator?: boolean) => {
     const { slug, topicId, profileId, limit = 20, sortBy = 'newest', filters } = options || {}
-    const params = {
+    const params: Record<string, any> = {
         pagination: {
             start: offset * limit,
             limit,
@@ -104,7 +113,6 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
                 },
             },
             topics: true,
-            pinnedTopics: true,
             slugs: true,
         },
     }
@@ -120,6 +128,11 @@ const query = (offset: number, options?: UseQuestionsOptions, isModerator?: bool
             params.sort = 'activeAt:desc'
             break
     }
+
+    if (options?.sort) params.sort = options.sort
+    if (options?.populate) params.populate = options.populate
+    if (options?.fields) params.fields = options.fields
+    if (options?.publicationState) params.publicationState = options.publicationState
 
     if (slug) {
         params.filters = {
@@ -193,6 +206,7 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
         },
         {
             revalidateOnFocus: false,
+            keepPreviousData: options?.keepPreviousData,
         }
     )
 
@@ -212,14 +226,16 @@ export const useQuestions = (options?: UseQuestionsOptions) => {
 
     const total = data && data[0]?.meta?.pagination?.total
     const hasMore = total ? questions?.data.length < total : false
-    const pinnedQuestions = data?.[0]?.pinnedQuestions
 
     return {
         hasMore,
         questions,
         fetchMore: () => setSize(size + 1),
         isLoading: isLoading || isValidating,
+        // Finer states for lists that animate. isLoading above stays as it was for other callers.
+        isFirstLoad: isLoading && !data,
+        isSwitching: isLoading && !!data,
+        isLoadingMore: !isLoading && isValidating && size > (data?.length ?? 0),
         refresh: () => mutate(),
-        pinnedQuestions,
     }
 }
