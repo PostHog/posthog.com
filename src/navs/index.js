@@ -1344,6 +1344,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                     {
+                        name: 'Closed-won deal desk automation',
+                        url: '/handbook/growth/revops/closed-won-deal-desk',
+                    },
+                    {
                         name: 'Consolidating billing across organizations',
                         url: '/handbook/growth/revops/billing-consolidation',
                     },

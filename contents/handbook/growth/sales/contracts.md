@@ -122,7 +122,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
 6. Don't forget to link to an opportunity in Salesforce and mark the associated opportunity as Closed Won.
-7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
+7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc Order Form ID.
 8. Celebrate!
 
 ### Manual upload of signed order form
@@ -139,7 +139,7 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
     - Mark the status as completed.
     - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
 
-Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+Once the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works, and [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for the parts that now run on their own.
 
 ### Updating the billing email and address
 
