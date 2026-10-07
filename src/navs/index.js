@@ -1344,6 +1344,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                     {
+                        name: 'Closed-won deal desk automation',
+                        url: '/handbook/growth/revops/closed-won-deal-desk',
+                    },
+                    {
                         name: 'Consolidating billing across organizations',
                         url: '/handbook/growth/revops/billing-consolidation',
                     },
@@ -6891,10 +6895,6 @@ export const docsMenu = {
             color: 'purple',
             icon: 'IconListCheck',
             description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             children: [
                 {
                     name: 'Semantic layer',
@@ -6904,10 +6904,6 @@ export const docsMenu = {
                     url: '/docs/semantic-layer',
                     icon: 'IconHome',
                     color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Setup',
