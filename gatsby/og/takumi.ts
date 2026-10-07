@@ -36,7 +36,7 @@ export async function createTakumiRenderer(): Promise<Renderer> {
 // One renderer is shared, so Takumi cards render one at a time.
 export const ogRenderLimit = pLimit(1)
 
-// Matter is a variable font. Register the weights the blog card asks for.
+// Matter is a variable font. Register the weights the cards ask for.
 export async function registerMatterFont(renderer: Renderer, data: Buffer) {
     for (const weight of [400, 600, 700]) {
         await renderer.registerFont({

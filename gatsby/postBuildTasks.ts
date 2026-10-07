@@ -8,9 +8,9 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import { createBlogOgImages } from './og/blog'
+import { createDocsOgImages } from './og/docs'
 import { createJobOgImages } from './og/jobs'
 import { createTakumiRenderer, registerMatterFont } from './og/takumi'
 import { flattenMenu } from './utils'
@@ -94,9 +94,16 @@ export const createOGImages = async (data) => {
     const font = fontBuffer.toString('base64')
     const takumi = await createTakumiRenderer()
     await registerMatterFont(takumi, fontBuffer)
+    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
     await Promise.all([
         createBlogOgImages(takumi, data.blog.nodes, ogImagesDir),
         createJobOgImages(takumi, data.careers.nodes, ogImagesDir),
+        createDocsOgImages(
+            takumi,
+            [...data.docsHandbook.nodes, ...data.tutorials.nodes],
+            docsHandbookMenus,
+            ogImagesDir
+        ),
     ])
 
     const browserFetcher = chromium.puppeteer.createBrowserFetcher()
@@ -133,55 +140,6 @@ export const createOGImages = async (data) => {
     }
 
     const jobs = []
-
-    const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
-
-    // Docs and Handbook OG
-    for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
-        const { title } = post.frontmatter
-        const { timeToRead, excerpt, fields, parent } = post
-        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
-        const contributors = fields?.contributors.map((contributor) => {
-            const { avatar, username } = contributor
-            return {
-                username,
-                avatar,
-            }
-        })
-        let breadcrumbs = null
-        docsHandbookMenus.some((item) => {
-            if (item.url === fields.slug) {
-                breadcrumbs = item.breadcrumb
-                return true
-            }
-        })
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: docsHandbookTemplate({
-                        font,
-                        title,
-                        timeToRead,
-                        excerpt,
-                        lastUpdated,
-                        contributors,
-                        breadcrumbs: [
-                            {
-                                name: fields.slug.startsWith('/docs')
-                                    ? 'Docs'
-                                    : fields.slug.startsWith('/tutorials')
-                                    ? 'Tutorials'
-                                    : 'Handbook',
-                            },
-                            ...(breadcrumbs || []),
-                        ],
-                    }),
-                    slug: fields.slug,
-                })
-            )
-        )
-    }
 
     // Customers OG
     for (const post of data.customers.nodes) {
