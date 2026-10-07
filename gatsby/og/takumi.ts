@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { createRequire } from 'module'
+import pLimit from 'p-limit'
 import type { ReactElement } from 'react'
 import type { ImageSource, Renderer } from 'takumi-js/node'
 
@@ -30,6 +31,20 @@ export async function createTakumiRenderer(): Promise<Renderer> {
         })
     }
     return renderer
+}
+
+// One renderer is shared, so Takumi cards render one at a time.
+export const ogRenderLimit = pLimit(1)
+
+// Matter is a variable font. Register the weights the blog card asks for.
+export async function registerMatterFont(renderer: Renderer, data: Buffer) {
+    for (const weight of [400, 600, 700]) {
+        await renderer.registerFont({
+            name: 'MatterVF',
+            data,
+            weight,
+        })
+    }
 }
 
 const ROLE_FONT_SIZE = 72

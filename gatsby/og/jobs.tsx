@@ -2,10 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import { createRequire } from 'module'
 import React from 'react'
-import pLimit from 'p-limit'
 import type { ImageSource, Renderer } from 'takumi-js/node'
 import { JobOg } from '../../src/templates/OG/job'
-import { fitRoleFontSize, renderOgJpeg, writeOgJpeg } from './takumi'
+import { fitRoleFontSize, ogRenderLimit, renderOgJpeg, writeOgJpeg } from './takumi'
 import { sfBenchmark } from '../../src/components/CompensationCalculator/compensation_data/sf_benchmark'
 import { levelModifier } from '../../src/components/CompensationCalculator/compensation_data/level_modifier'
 import { stepModifier } from '../../src/components/CompensationCalculator/compensation_data/step_modifier'
@@ -13,7 +12,10 @@ import { locationFactor } from '../../src/components/CompensationCalculator/comp
 
 const require = createRequire(__filename)
 const imagesDir = path.resolve(__dirname, '../../src/templates/OG/images')
-const remoteHogPng = path.join(path.dirname(require.resolve('@posthog/brand/hoggies/png/remote-work')), 'remote-work.png')
+const remoteHogPng = path.join(
+    path.dirname(require.resolve('@posthog/brand/hoggies/png/remote-work')),
+    'remote-work.png'
+)
 
 const readImage = (src: string, name: string): ImageSource => ({
     src,
@@ -50,13 +52,10 @@ const salaryRange = (role?: string) => {
     return `${compactUsd(base * low)}–${compactUsd(base * high)}`
 }
 
-// One renderer is shared, so job cards render one at a time.
-const limit = pLimit(1)
-
 export async function createJobOgImages(renderer: Renderer, jobs: JobNode[], dir: string) {
     await Promise.all(
         jobs.map((job) =>
-            limit(async () => {
+            ogRenderLimit(async () => {
                 const timezone = job.parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
                 const salaryRole =
                     job.parent?.customFields?.find(({ title }) => title === 'Salary')?.value ||

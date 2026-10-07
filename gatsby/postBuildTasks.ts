@@ -8,11 +8,11 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import blogTemplate from '../src/templates/OG/blog.js'
 import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
+import { createBlogOgImages } from './og/blog'
 import { createJobOgImages } from './og/jobs'
-import { createTakumiRenderer } from './og/takumi'
+import { createTakumiRenderer, registerMatterFont } from './og/takumi'
 import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
@@ -93,6 +93,11 @@ export const createOGImages = async (data) => {
     const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
     const font = fontBuffer.toString('base64')
     const takumi = await createTakumiRenderer()
+    await registerMatterFont(takumi, fontBuffer)
+    await Promise.all([
+        createBlogOgImages(takumi, data.blog.nodes, ogImagesDir),
+        createJobOgImages(takumi, data.careers.nodes, ogImagesDir),
+    ])
 
     const browserFetcher = chromium.puppeteer.createBrowserFetcher()
     const revisionInfo = await browserFetcher.download('982053')
@@ -128,31 +133,6 @@ export const createOGImages = async (data) => {
     }
 
     const jobs = []
-
-    // Blog post OG
-    for (const post of data.blog.nodes) {
-        const { title, authorData, featuredImage } = post.frontmatter
-        const image = featuredImage?.publicURL
-        const author =
-            authorData &&
-            authorData.map((author) => {
-                const image =
-                    author.profile?.avatar?.url ||
-                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
-                return {
-                    ...author,
-                    image,
-                }
-            })[0]
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: blogTemplate({ title, authorData: author, image, font }),
-                    slug: post.fields.slug,
-                })
-            )
-        )
-    }
 
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
 
@@ -222,8 +202,6 @@ export const createOGImages = async (data) => {
             )
         )
     }
-
-    jobs.push(createJobOgImages(takumi, data.careers.nodes, ogImagesDir))
 
     await Promise.all(jobs)
 
