@@ -60,7 +60,7 @@ Mark `context` as required only if you remove it before your MCP framework valid
 
 Skip any tool that already has an argument named `context`, because that argument belongs to the tool. Also skip any tool whose root schema uses `$ref`, `oneOf`, `anyOf`, or `allOf`.
 
-When a call arrives, remove `context` from the arguments before the handler runs. If its value is a non-empty string, use it as `$mcp_intent`. See [Capturing agent intent](/docs/mcp-analytics/intent) for how PostHog uses it.
+When a call arrives, remove `context` from the arguments before the handler runs. If its value is a string that isn't blank or `"{}"`, use it as `$mcp_intent`. See [Capturing agent intent](/docs/mcp-analytics/intent) for how PostHog uses it.
 
 </Step>
 
@@ -70,17 +70,27 @@ Every event needs a non-empty `$session_id`. It groups the calls of one agent co
 
 | Your server | `$session_id` |
 | --- | --- |
-| HTTP with an `Mcp-Session-Id` header | `ses_` followed by a hash of the header value, such as the first 32 hex characters of its SHA-256. Use the same hash on every replica. |
-| stdio, or another connection that serves only one client | A `ses_<uuid>` generated when the connection opens. Generate a new one when a tool call arrives 30 minutes or more after the previous call ended, because one stdio process can serve many separate chats. |
-| Stateless HTTP with no session header | A fresh `ses_<uuid>` for each request. |
+| HTTP with a session ID that stays the same across a client's requests, such as the `Mcp-Session-Id` header or an SSE `sessionId` | `ses_` followed by a hash of that ID, such as the first 32 hex characters of its SHA-256. Use the same hash on every replica. |
+| stdio, WebSocket, or another connection that serves only one client | A `ses_<UUIDv7>` generated when the connection opens. Generate a new one when a tool call arrives 30 minutes or more after the previous call ended, because one stdio process can serve many separate chats. |
+| HTTP with no session ID, which includes every request on the `2026-07-28` revision | A fresh `ses_<UUIDv7>` for each request. Each call is then its own session. The SDKs use [conversation IDs](/docs/mcp-analytics/conversation-id) to group these calls. |
 
 Don't use credentials, cookies, or client IP addresses as the session. Different clients can share them.
+
+The SDKs derive session IDs with a different hash, so a session served partly by an SDK and partly by your own code splits in two.
 
 </Step>
 
 <Step title="Capture a $mcp_tool_call event" badge="required">
 
 Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Your PostHog SDK's capture call is already asynchronous.
+
+Capture only the final outcome of a call to a tool your server has. Don't capture a `$mcp_tool_call` for:
+
+- A call that names a tool your server doesn't have. Its name is whatever the agent sent, so it would add fake tools to your tool list.
+- A result with `resultType: "input_required"`. Capture the retry that completes the call instead.
+- A task handle (`resultType: "task"`). It isn't a completed call.
+
+This is the event, as PostHog stores it. If you use the [capture API](/docs/api/capture), wrap it in the request body that page describes, with your project token:
 
 ```json
 {
@@ -107,7 +117,7 @@ Measure each call with a monotonic clock. Capture one event after the handler re
 }
 ```
 
-Every `$mcp_tool_call` needs these properties. Without them, PostHog can't count, time, or order the call:
+Every `$mcp_tool_call` needs these properties:
 
 | Property | Value |
 | --- | --- |
@@ -116,22 +126,22 @@ Every `$mcp_tool_call` needs these properties. Without them, PostHog can't count
 | `$mcp_is_error` | A JSON boolean, never the string `"false"`. |
 | `$mcp_duration_ms` | A JSON number of milliseconds from the start of the request to the handler's result. |
 | `$session_id` | From the previous step. |
-| `$mcp_server_name` | Your server's name, the same on every event. PostHog uses it to tell your servers apart. |
+| `$mcp_server_name` | Your server's name, at most 256 characters, the same on every event. PostHog uses it to tell your servers apart. |
 | `timestamp` | When the request started, not when the event was sent. |
 
 Send these properties whenever you have the value:
 
 | Property | Value |
 | --- | --- |
-| `$mcp_intent`, `$mcp_intent_source` | The `context` value, at most 2,048 characters, with source `"context_parameter"`. Leave both out when the agent sent no context. |
+| `$mcp_intent`, `$mcp_intent_source` | The `context` value, [redacted](#redact-free-text) and cut to 2,048 characters, with source `"context_parameter"`. Leave both out when the agent sent no context. |
 | `$mcp_client_name`, `$mcp_client_version` | The client's `clientInfo` from the request's `_meta` (`io.modelcontextprotocol/clientInfo`), or else from the `initialize` handshake of the same session. |
-| `$mcp_protocol_version` | The MCP revision of the request, such as `"2025-11-25"`. |
+| `$mcp_protocol_version` | The MCP revision of the request, such as `"2025-11-25"`, from `_meta` (`io.modelcontextprotocol/protocolVersion`), the `MCP-Protocol-Version` header, or the `initialize` handshake. |
 | `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` headers on HTTP. PostHog uses them to tell clients apart, such as Claude Code from Claude.ai. |
 | `$mcp_server_version` | Your server's version. |
 | `$mcp_tool_description` | The tool's description, at most 2,048 characters. |
 | `$mcp_resource_name` | The tool's name, same as `$mcp_tool_name`. |
 
-The [event reference](/docs/mcp-analytics/events) lists every property, with types and limits.
+Cut names, versions, and header values to 256 characters. The [event reference](/docs/mcp-analytics/events) lists every property.
 
 The only nested JSON values are `$mcp_parameters` and `$mcp_response` (see [the payload step](#capture-arguments-and-results)). Keep every other property a string, number, or boolean.
 
@@ -152,12 +162,29 @@ A call fails when the handler throws, or when it returns a result with `isError:
 | Property | Value |
 | --- | --- |
 | `$mcp_is_error` | `true` |
-| `$mcp_error_type` | A low-cardinality label, never the message. Use the thrown error's type name, `"Error"` for an `isError` result, or one of `validation`, `permission`, `missing_context`, `timeout`, `rate_limited`, `api_4xx`, `api_5xx`, `cancelled`, or `internal`. |
-| `$mcp_error_message` | The error message, or the text of the `isError` result, at most 2,048 characters after the redaction in the next step. |
+| `$mcp_error_type` | A low-cardinality label, never the message. Use one of `validation`, `permission`, `missing_context`, `timeout`, `rate_limited`, `api_4xx`, `api_5xx`, `cancelled`, `input_required`, or `internal` when one fits. Otherwise use the thrown error's type name, or `"Error"` for an `isError` result. |
+| `$mcp_error_message` | The error message, or the text of the `isError` result, [redacted](#redact-free-text) and cut to 2,048 characters. |
+| `$mcp_error_status` | Optional. The upstream HTTP status code, as a number, when the failure came from an HTTP call. |
 
 Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or rethrow the tool's own failure unchanged.
 
-To see failures in [Error tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture, and pass the call's `$session_id` and `$mcp_tool_name`.
+To see failures in [Error tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture. Use the same `distinct_id` and `$process_person_profile` as the call event, redact the message, and add the call's `$session_id`, `$mcp_tool_name`, and `$exception_source: "mcp.tool_call"`.
+
+</Step>
+
+<Step title="Redact free text" badge="required">
+
+Agents and errors put credentials and personal data into text. Before you send `$mcp_intent`, `$mcp_error_message`, or an exception message, replace each of these with `[redacted]`:
+
+- The user and password in a URL (`https://user:password@host`).
+- URL query and fragment values whose name is a credential key (below) or a signature, such as `sig`, `signature`, or `X-Amz-Signature`.
+- The value after a credential key in `key=value`, `key: value`, or a JSON member such as `"password": "hunter2"`.
+- PostHog tokens: `ph`, a lowercase letter, `_`, then 20 or more of `A-Z`, `a-z`, `0-9`, `_`, or `-`.
+- Email addresses, phone numbers, IP addresses, card numbers, and US social security numbers.
+
+A credential key is one of these names, compared as a whole and ignoring case: `authorization`, `cookie`, `set-cookie`, `x-api-key`, `token`, `password`, `secret`, or `api key`, `api token`, `access token`, `refresh token`, `client secret`, or `private key` written with `_`, `-`, or no separator.
+
+Redact first, then cut the text to its limit.
 
 </Step>
 
@@ -165,13 +192,22 @@ To see failures in [Error tracking](/docs/error-tracking) too, capture the excep
 
 `$mcp_parameters` and `$mcp_response` let you see what agents sent and what your tool returned. For example, you can find calls that succeed but return an empty or wrong result. They can also contain credentials and personal data, so the SDKs [redact them](/docs/mcp-analytics/privacy) before sending. If you capture them, you need to redact them yourself, before you capture:
 
-- Send `$mcp_parameters` as `{"request": {"method": "tools/call", "params": {"name": "<tool>", "arguments": <arguments without context>}}}`, the same shape the SDKs send.
-- Replace with `"[redacted]"` the value of every key that matches, ignoring case: `authorization`, `cookie`, `set-cookie`, `x-api-key`, `token`, `password`, `secret`, or `api_key`, `api_token`, `access_token`, `refresh_token`, `client_secret`, or `private_key`, separated by `_`, `-`, or nothing.
-- Remove credentials from URLs (`user:password@`, and query fields such as `token` or `signature`).
-- Replace `image` and `audio` content blocks, and base64 strings of 10 KB or more, with a short text placeholder.
-- Cut strings to 32,768 characters, arrays and objects to 100 entries, and nesting to 10 levels. Keep the whole event under 100 KB. If it's still too large, remove `$mcp_response` first, then `$mcp_parameters`. Never remove a required property.
+- Send `$mcp_parameters` as `{"request": {"method": "tools/call", "params": {"name": "<tool>", "arguments": <arguments without context, or {}>}}}`, the same shape the SDKs send.
+- Send `$mcp_response` as the tool's result object, with its `content` blocks and any `structuredContent`.
+- Replace with `"[redacted]"` the value of every object key that is a [credential key](#redact-free-text).
+- Apply the [free-text redaction](#redact-free-text) to every string value. A text block often holds a JSON copy of `structuredContent`, so it can contain the same credentials.
+- Replace `image` and `audio` content blocks, `resource` blocks with a `blob`, and base64 strings of 10 KB or more with a short text placeholder.
+- Cut strings to 32,768 characters, arrays and objects to 100 entries, and nesting to 10 levels.
+
+Keep the whole event under 100 KB. If it's still too large, cut the strings in `$mcp_response` and then `$mcp_parameters` shorter, and remove the property only when that isn't enough. Never remove a required property or `$mcp_error_message`.
 
 Without a redaction pass, leave both properties out. All other features work without them.
+
+</Step>
+
+<Step title="Capture the handshake" badge="recommended">
+
+On revisions before `2026-07-28`, a client starts each session with an `initialize` request. Capture a `$mcp_initialize` event for it, with the same `distinct_id`, `$session_id`, and `$process_person_profile` as the session's tool calls, plus `$mcp_source`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, `$mcp_server_name`, and `$mcp_server_version`. The "MCP clients" and "MCP users and sessions" insights in the MCP Analytics dashboard template count these events.
 
 </Step>
 
@@ -188,6 +224,7 @@ Call a few tools through an MCP client, flush, then run this query in [SQL insig
 ```sql
 SELECT
     count() AS calls,
+    countIf(properties.$mcp_tool_name IS NULL OR properties.$mcp_tool_name = '') AS missing_tool_name,
     countIf(properties.$mcp_server_name IS NULL OR properties.$mcp_server_name = '') AS missing_server_name,
     countIf(properties.$session_id IS NULL OR properties.$session_id = '') AS missing_session_id,
     countIf(JSONType(properties, '$mcp_is_error') != 'Bool') AS bad_is_error,
@@ -214,7 +251,7 @@ The SDKs include more features than this page covers. If you need one of these, 
 - [Conversation IDs](/docs/mcp-analytics/conversation-id), which group the calls of a stateless HTTP client into one session.
 - The [missing capabilities](/docs/mcp-analytics/missing-capability) virtual tool, `get_more_tools`.
 - Model capture through the `llm_model` argument.
-- `$mcp_tools_list`, `$mcp_initialize`, `$mcp_unknown_tool`, and `$mcp_input_required` events.
-- Full redaction, including email addresses, phone numbers, card numbers, and credential-shaped strings anywhere in a payload.
+- `$mcp_tools_list`, `$mcp_unknown_tool`, and `$mcp_input_required` events.
+- Wider redaction, such as credential-shaped strings that no key or pattern above identifies.
 
 You can add any of these yourself. The [event reference](/docs/mcp-analytics/events) describes their events and properties.
