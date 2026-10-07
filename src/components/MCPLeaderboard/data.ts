@@ -148,6 +148,8 @@ const DISPLAY_LABELS: Record<string, Record<string, string>> = {
     auth_method: { oauth: 'OAuth', personal_api_key: 'Personal API key' },
     model_source: { self_reported: 'Agent said so', client_metadata: 'Client metadata' },
     client: { Other: 'Other agents' },
+    // Short enough to fit the narrowest bar list. The full name shows on hover.
+    tool_category: { 'Organization & project management': 'Project management' },
 }
 
 export const displayLabel = (facet: string, label: string): string => DISPLAY_LABELS[facet]?.[label] ?? label

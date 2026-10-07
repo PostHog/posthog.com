@@ -37,6 +37,9 @@ Both endpoints return one row per period, facet, group, and label:
 
 - `index.tsx`: page layout and sections
 - `data.ts`: selectors, lab and client-maker maps, and colors. Unknown labels are dropped and the remaining calls shares are renormalized to 100. Calls shares add up, so `groupedSeries` can safely sum clients into makers. `labShades` gives each lab's models shades of one color.
+- `BrandLogo.tsx`: marks for AI labs (Anthropic, OpenAI, xAI, Google, Cursor) and agent apps (opencode, Amp, OpenClaw, Linear), plus a laptop for custom code. The scoreboard and the model list show the lab, and the harness list shows the app, or its maker if the app has no mark. Paths are from Simple Icons (CC0), and xAI, Amp, and OpenClaw are from LobeHub icons (MIT).
+- `categories.ts`: the icon (a PostHog product's icon and color, or its own) and the docs page for each MCP tool category in `src/data/mcp-tools.json`. The "Tool categories" labels link to these pages. A new category shows no icon and no link until it is added here.
+- `CampfireHog.tsx`: an easter egg next to the install CTA. Each click wiggles the hog and escalates its complaint, then alternates between cowboy wisdom (`WISDOM`) and a link to a random fun page (`ESCAPES`). Keep the links pointing at pages that exist.
 - `charts.tsx`: `StackedShareChart` and `LineChart` (chart.js), plus `ShareBars` and `SplitBar` (plain HTML, so they follow the theme)
 
 ## Changing the queries

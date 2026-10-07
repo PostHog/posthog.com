@@ -1,5 +1,7 @@
 import React, { memo, useEffect, useMemo, useState } from 'react'
 import { IconArrowUpRight, IconCheck, IconPlug } from '@posthog/icons'
+import { Logo } from '@posthog/brand/logo'
+import { HedgehogHotPopcorn } from '@posthog/brand/hoggies'
 import { useAppActions, useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import SEO from 'components/seo'
@@ -8,8 +10,24 @@ import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import useProduct from 'hooks/useProduct'
 import { CARD_H3, InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import { LineChart, ShareBars, SplitBar } from './charts'
+import BrandLogo from './BrandLogo'
+import CampfireHog from './CampfireHog'
+import { CATEGORIES } from './categories'
+import {
+    StickerAi,
+    StickerBulb,
+    StickerCloudCross,
+    StickerCrown,
+    StickerMicroscope,
+    StickerRobot,
+    StickerTerminal,
+    StickerTombstone,
+} from 'components/Stickers/Stickers'
+import Stickers from 'components/Stickers/Index'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import {
     LeaderboardRow,
     Metric,
@@ -18,6 +36,7 @@ import {
     Theme,
     categoricalColor,
     clientColor,
+    clientMaker,
     delta,
     displayLabel,
     formatPct,
@@ -60,6 +79,24 @@ function Card({
     )
 }
 
+// A section heading with a sticker in front, like the sections on /desktop.
+function StickerHeading({
+    sticker: Sticker,
+    children,
+}: {
+    sticker: React.ComponentType<{ className?: string }>
+    children: React.ReactNode
+}) {
+    return (
+        <SectionHeading>
+            <span className="inline-flex items-center gap-2.5">
+                <Sticker className="size-8 shrink-0 -rotate-3" />
+                {children}
+            </span>
+        </SectionHeading>
+    )
+}
+
 function Note({ children }: { children: React.ReactNode }) {
     return <p className="text-xs text-muted leading-relaxed m-0 mt-3">{children}</p>
 }
@@ -80,8 +117,6 @@ function MetricToggle({ metric, onChange }: { metric: Metric; onChange: (metric:
         />
     )
 }
-
-const MEDALS = ['🥇', '🥈', '🥉']
 
 function Scoreboard({
     rows,
@@ -114,12 +149,13 @@ function Scoreboard({
             {cards.map((card, i) => (
                 <div
                     key={card.vendor}
-                    className="border border-primary rounded p-4 bg-primary"
+                    className="relative border border-primary rounded p-4 bg-primary"
                     style={{ borderTop: `4px solid ${vendorColor(card.vendor, 'light')}` }}
                 >
+                    {i === 0 && <StickerCrown className="absolute -top-6 -right-3 size-10 rotate-12" />}
                     <div className="flex items-baseline justify-between">
-                        <span className="text-sm font-semibold text-secondary">
-                            {MEDALS[i]} {card.vendor}
+                        <span className="flex items-center gap-1.5 text-sm font-semibold text-secondary">
+                            <BrandLogo name={card.vendor} className="size-4 text-primary" /> {card.vendor}
                         </span>
                         {card.change !== null && (
                             <span className="text-xs tabular-nums text-muted">
@@ -150,22 +186,44 @@ function Header({
     return (
         <section id="overview" className="not-prose flex flex-col gap-6">
             <header>
-                <p className="text-sm font-semibold uppercase tracking-wide text-secondary m-0 mb-2">
-                    PostHog's MCP Leaderboard
-                </p>
                 <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !m-0 tracking-tight">
-                    Which AI is{' '}
+                    {/* The color mark, and a single-color one in dark mode, like the home page's AI demo. */}
+                    <Logo
+                        layout="logomark"
+                        variant="gradient"
+                        className="inline-block h-[0.8em] w-auto mr-3 align-baseline dark:hidden"
+                    />
+                    <Logo
+                        layout="logomark"
+                        variant="mono"
+                        className="hidden h-[0.8em] w-auto mr-3 align-baseline dark:inline-block"
+                    />
+                    PostHog MCP{' '}
                     <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
-                        winning?
+                        Leaderboard
                     </span>
+                    <Stickers
+                        name="StickerTrophy"
+                        label="1"
+                        className="inline-block size-12 ml-2 align-middle rotate-6"
+                    />
                 </h1>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
                     Who's calling{' '}
                     <Link to="/mcp" className="font-semibold underline">
                         PostHog's MCP server
                     </Link>{' '}
-                    the most? We're keeping score in real time for our <s>internal</s> purposes and your viewing
-                    pleasure.
+                    the most? We're {/* Same hand-drawn highlight as the home page hero. */}
+                    <RoughAnnotation
+                        type="highlight"
+                        color="rgba(247, 165, 1, 0.15)"
+                        strokeWidth={1}
+                        padding={2}
+                        multiline
+                    >
+                        keeping score in real time
+                    </RoughAnnotation>{' '}
+                    for our <s>internal</s> purposes and your viewing pleasure.
                 </p>
             </header>
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -233,13 +291,13 @@ function ModelRace({
 
     return (
         <section id="models" className="not-prose">
-            <SectionHeading>May the best model win</SectionHeading>
+            <StickerHeading sticker={StickerAi}>May the best model win</StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
                 <Card title="Daily tool calls by model" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={days} series={series} theme={theme} height={420} stacked />
                 </Card>
                 <Card title="Top models this week" className="@3xl/reader-content:col-span-2">
-                    <ShareBars items={models} />
+                    <ShareBars items={models} icon={(item) => <BrandLogo name={modelVendor(item.label)} />} />
                 </Card>
             </div>
         </section>
@@ -268,13 +326,16 @@ function ClientRace({
 
     return (
         <section id="clients" className="not-prose">
-            <SectionHeading>AI players battle it out</SectionHeading>
+            <StickerHeading sticker={StickerRobot}>AI players battle it out</StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
                 <Card title="Weekly tool calls by AI lab" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={labWeeks} series={series} theme={theme} height={420} stacked />
                 </Card>
                 <Card title="Top harnesses this week" className="@3xl/reader-content:col-span-2">
-                    <ShareBars items={clients} />
+                    <ShareBars
+                        items={clients}
+                        icon={(item) => <BrandLogo name={item.label} fallback={clientMaker(item.label)} />}
+                    />
                 </Card>
             </div>
         </section>
@@ -303,7 +364,7 @@ const UnderTheHood = memo(function UnderTheHood({
         .map((s, i) => ({ ...s, color: categoricalColor(s.label, i) }))
     return (
         <section id="protocol" className="not-prose">
-            <SectionHeading>The rise and fall of MCP spec versions</SectionHeading>
+            <StickerHeading sticker={StickerTombstone}>The rise and fall of MCP spec versions</StickerHeading>
             <div className="flex flex-col gap-3">
                 <Card title="MCP spec version, daily share of tool calls">
                     <LineChart periods={days} series={protocolSeries} theme={theme} height={260} stacked />
@@ -349,12 +410,29 @@ function WhatAgentsDo({ rows, week, metric }: { rows: LeaderboardRow[]; week: st
         weekShares(rows, facet, week, by, { dropOther: true, limit: LIST_LENGTH })
     const categories = named('tool_category', metric).map((share) => ({ ...share, color: PALETTE.blue }))
     const tools = named('tool', 'users_pct').map((share) => ({ ...share, color: PALETTE.yellow }))
+    const products = useProduct() as {
+        handle: string
+        Icon?: React.ComponentType<{ className?: string }>
+        color?: string
+    }[]
+    // A category's icon is its product's icon and color, or its own icon and color.
+    const categoryIcon = (category: string) => {
+        const meta = CATEGORIES[category]
+        const product = meta?.product ? products.find((p) => p.handle === meta.product) : undefined
+        const Icon = product?.Icon ?? meta?.Icon
+        return Icon ? <Icon className={`size-4 text-${product?.color ?? meta?.color}`} /> : null
+    }
     return (
         <section id="tools" className="not-prose">
-            <SectionHeading>What agents are up to</SectionHeading>
+            <StickerHeading sticker={StickerTerminal}>What agents are up to</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                 <Card title="Tool categories">
-                    <ShareBars items={categories} />
+                    <ShareBars
+                        items={categories}
+                        icon={(item) => categoryIcon(item.label)}
+                        href={(item) => CATEGORIES[item.label]?.docs}
+                        labelOf={(item) => displayLabel('tool_category', item.label)}
+                    />
                 </Card>
                 <Card
                     title={
@@ -371,7 +449,7 @@ function WhatAgentsDo({ rows, week, metric }: { rows: LeaderboardRow[]; week: st
                         </span>
                     }
                 >
-                    <ShareBars items={tools} />
+                    <ShareBars items={tools} labelClassName="font-mono text-[0.92em]" />
                 </Card>
             </div>
         </section>
@@ -384,7 +462,9 @@ const Intent = memo(function Intent({ rows, week }: { rows: LeaderboardRow[]; we
         .reduce((sum, share) => sum + share.value, 0)
     return (
         <section id="intent" className="not-prose">
-            <SectionHeading>Agents tell us 'why' {formatPct(withIntent, 0)} of times</SectionHeading>
+            <StickerHeading sticker={StickerBulb}>
+                Agents tell us 'why' {formatPct(withIntent, 0)} of times
+            </StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-2 gap-3">
                 <Card title="How intent works">
                     <ol className="m-0 p-0 list-none flex flex-col gap-2 text-sm text-secondary leading-relaxed">
@@ -442,7 +522,7 @@ const Reliability = memo(function Reliability({
     }))
     return (
         <section id="reliability" className="not-prose">
-            <SectionHeading>Reliability</SectionHeading>
+            <StickerHeading sticker={StickerCloudCross}>Reliability</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                 <Card title="Error rate">
                     <LineChart
@@ -470,6 +550,7 @@ const Reliability = memo(function Reliability({
                 <Card title="Error rate by client this week" className="@2xl/reader-content:col-span-2">
                     <ShareBars
                         items={clients}
+                        icon={(item) => <BrandLogo name={item.label} fallback={clientMaker(item.label)} />}
                         detail={(item) => (item.p95 ? `p95 ${(item.p95 / 1000).toFixed(1)}s` : null)}
                     />
                     <Note>Top ten clients with the most calls.</Note>
@@ -504,7 +585,7 @@ const STEPS: React.ReactNode[] = [
 const HowItWorks = memo(function HowItWorks({ fetchedAt }: { fetchedAt: string | null }) {
     return (
         <section id="how-it-works" className="not-prose">
-            <SectionHeading>How this page works</SectionHeading>
+            <StickerHeading sticker={StickerMicroscope}>How this page works</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 @4xl/reader-content:grid-cols-4 gap-3">
                 {STEPS.map((step, i) => (
                     <Card key={i}>
@@ -532,48 +613,41 @@ function MCPAnalyticsAd() {
     ]
     return (
         <aside aria-label="MCP analytics" className="not-prose">
-            <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6">
-                <span className="absolute top-3 right-3 text-[11px] font-semibold uppercase tracking-wide text-muted border border-primary rounded px-1.5 py-px">
-                    Ad, sort of
+            <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6 @2xl/reader-content:grid @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @2xl/reader-content:gap-2">
+                <span className="block w-fit ml-auto mb-3 @2xl/reader-content:mb-0 @2xl/reader-content:absolute @2xl/reader-content:top-3 @2xl/reader-content:right-3 text-[11px] font-semibold uppercase tracking-wide text-muted border border-primary rounded px-1.5 py-px">
+                    Yeah, sorry, this is an ad
                 </span>
-                <div className="flex items-center gap-2 text-blue mb-2">
-                    <IconPlug className="size-6" />
-                    <span className="font-bold">MCP analytics</span>
+                <div className="min-w-0">
+                    <div className="flex items-center gap-2 text-blue mb-2">
+                        <IconPlug className="size-6" />
+                        <span className="font-bold">MCP analytics</span>
+                    </div>
+                    <h2 className="text-2xl font-bold text-primary m-0 mb-4">Run an MCP server? See your own stats</h2>
+                    <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
+                        {features.map((feature) => (
+                            <li key={feature} className="flex items-start gap-2">
+                                <IconCheck className="size-4 shrink-0 text-green mt-0.5" />
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-sm text-secondary m-0 mb-4">
+                        Run this in your MCP server's project:{' '}
+                        <InlineCode>npx -y @posthog/wizard@latest mcp-analytics</InlineCode>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <OSButton asLink to="/docs/mcp-analytics/start-here" variant="primary" size="md">
+                            Get started
+                        </OSButton>
+                        <OSButton asLink to="/docs/mcp-analytics" variant="secondary" size="md">
+                            Read the docs
+                        </OSButton>
+                    </div>
                 </div>
-                <h2 className="text-2xl font-bold text-primary m-0 mb-2 pr-20">
-                    Run an MCP server? See your own stats
-                </h2>
-                <p className="text-secondary leading-relaxed m-0 mb-4 max-w-prose">
-                    <Link
-                        to="/community/profiles/32207"
-                        state={{ newWindow: true }}
-                        className="font-semibold underline"
-                    >
-                        @rafa
-                    </Link>{' '}
-                    built this during a hackathon. We figured we might as well show you the real data. Add PostHog's MCP
-                    analytics to your server and see what your own calls look like.
-                </p>
-                <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
-                    {features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-2">
-                            <IconCheck className="size-4 shrink-0 text-green mt-0.5" />
-                            {feature}
-                        </li>
-                    ))}
-                </ul>
-                <p className="text-sm text-secondary m-0 mb-4">
-                    Run this in your MCP server's project:{' '}
-                    <InlineCode>npx -y @posthog/wizard@latest mcp-analytics</InlineCode>
-                </p>
-                <div className="flex flex-wrap gap-2">
-                    <OSButton asLink to="/docs/mcp-analytics/start-here" variant="primary" size="md">
-                        Get started
-                    </OSButton>
-                    <OSButton asLink to="/docs/mcp-analytics" variant="secondary" size="md">
-                        Read the docs
-                    </OSButton>
-                </div>
+                <HedgehogHotPopcorn
+                    title="A hedgehog eating popcorn, watching the leaderboard"
+                    className="hidden @2xl/reader-content:block justify-self-end self-center pt-8 w-44 @4xl/reader-content:w-52"
+                />
             </div>
         </aside>
     )
@@ -581,11 +655,26 @@ function MCPAnalyticsAd() {
 
 function CTA() {
     return (
-        <section id="get-started" className="not-prose mb-20">
-            <SectionHeading lede="Not a fan of our UI? Install the PostHog MCP.">
-                Let your agent use PostHog too
+        <section
+            id="get-started"
+            className="not-prose mt-9 mb-20 grid grid-cols-1 items-center gap-x-8 gap-y-4 @2xl/reader-content:gap-y-2 @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @5xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(0,24rem)_auto]"
+        >
+            {/* One column on small screens, without the hog. Two columns from @2xl: the heading over the
+                install box, and the hog beside both. Three columns from @5xl: heading, install box, hog. */}
+            <SectionHeading lede="Not a fan of our UI? Install the PostHog MCP." className="!mb-0 [&>p]:!mb-0">
+                Let{' '}
+                <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1">
+                    your agent
+                </span>{' '}
+                use PostHog too
             </SectionHeading>
-            <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
+            <MCPInstallCTA
+                className="max-w-md @5xl/reader-content:col-start-2 @5xl/reader-content:row-start-1"
+                showDesktopLink={false}
+            />
+            <div className="hidden @2xl/reader-content:block @2xl/reader-content:col-start-2 @2xl/reader-content:row-start-1 @2xl/reader-content:row-span-2 @5xl/reader-content:col-start-3 @5xl/reader-content:row-span-1">
+                <CampfireHog />
+            </div>
         </section>
     )
 }
