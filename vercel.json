@@ -61,11 +61,33 @@
             ]
         },
         {
+            "source": "/.well-known/oauth/:app/client-metadata.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://fast.wistia.net https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://fast.wistia.net https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",
@@ -96,8 +118,16 @@
             "destination": "/next-steps/index.html"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
+            "source": "/forum/t/:topic/tags",
+            "destination": "/forum/t/[topic]/tags/index.html"
+        },
+        {
+            "source": "/forum/t/:topic",
+            "destination": "/forum/t/[topic]/index.html"
+        },
+        {
+            "source": "/forum/p/:permalink",
+            "destination": "/forum/p/[permalink]/index.html"
         },
         {
             "source": "/careers/(.*)",
@@ -114,9 +144,56 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/ko/newsletter/:path*",
+            "destination": "/newsletter/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/ko",
+            "destination": "/",
+            "statusCode": 302
+        },
+        {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics",
+            "destination": "/docs/product-analytics/learn/introduction",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
         {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
@@ -597,6 +674,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301
@@ -659,6 +741,11 @@
         {
             "source": "/sitemap.xml",
             "destination": "/sitemap/sitemap-0.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
             "statusCode": 301
         },
         {
@@ -757,6 +844,14 @@
         {
             "source": "/teams/analytics-platform/:path*",
             "destination": "/teams/query-performance/:path*"
+        },
+        {
+            "source": "/teams/marketing",
+            "destination": "/teams/developer-marketing"
+        },
+        {
+            "source": "/teams/marketing/:path*",
+            "destination": "/teams/developer-marketing/:path*"
         },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
@@ -889,6 +984,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/api/product-tours/:path*",
             "destination": "/docs/api",
             "statusCode": 301
@@ -1008,7 +1118,7 @@
         },
         {
             "source": "/questions/topics/:path*",
-            "destination": "/questions/topic/:path*"
+            "destination": "/forum"
         },
         {
             "source": "/docs/sdks/:path*",
@@ -1865,6 +1975,10 @@
             "destination": "/docs/api/persons:ext?"
         },
         {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?"
+        },
+        {
             "source": "/handbook/engineering/k8s-overview",
             "destination": "/docs/self-host/architecture"
         },
@@ -2450,7 +2564,7 @@
         },
         {
             "source": "/handbook/people/team-structure/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/people/team-structure/people",
@@ -3051,7 +3165,7 @@
         },
         {
             "source": "/questions/topic/session-recording",
-            "destination": "/questions/topic/session-replay"
+            "destination": "/forum"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -5039,7 +5153,7 @@
         },
         {
             "source": "/handbook/small-teams/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/small-teams/exec",
@@ -5063,7 +5177,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/data-stack"
+            "destination": "/teams/managed-warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -5233,7 +5347,7 @@
         },
         {
             "source": "/teams/pipeline",
-            "destination": "/teams/cdp"
+            "destination": "/teams/workflows"
         },
         {
             "source": "/teams/feature-success",
@@ -5485,8 +5599,12 @@
             "destination": "/docs/cdp/sources/zendesk:ext?"
         },
         {
+            "source": "/docs/data-warehouse/setup:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/start-here:ext?"
+        },
+        {
             "source": "/docs/data-warehouse/setup/",
-            "destination": "/docs/data-warehouse/query/"
+            "destination": "/docs/data-warehouse/start-here"
         },
         {
             "source": "/handbook/growth/marketing/content",
@@ -5762,7 +5880,7 @@
         },
         {
             "source": "/teams/video",
-            "destination": "/teams/content"
+            "destination": "/teams/youtube"
         },
         {
             "source": "/customers/headshot-pro",
@@ -5970,15 +6088,23 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code/:path*",
-            "destination": "/teams/posthog-desktop/:path*"
+            "destination": "/teams/surfaces/:path*"
+        },
+        {
+            "source": "/teams/posthog-desktop",
+            "destination": "/teams/surfaces"
+        },
+        {
+            "source": "/teams/posthog-desktop/:path*",
+            "destination": "/teams/surfaces/:path*"
         },
         {
             "source": "/docs/max-ai:ext(\\.md)?",
@@ -6031,6 +6157,10 @@
         {
             "source": "/handbook/cs-and-onboarding/customer-industry-segments",
             "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/customer-led-calls",
+            "destination": "/handbook/growth/sales/reverse-demo-calls"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
@@ -6223,7 +6353,7 @@
         },
         {
             "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
+            "destination": "/forum"
         },
         {
             "source": "/ai-observability/features",
@@ -6400,6 +6530,46 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/cdp",
+            "destination": "/teams/workflows"
+        },
+        {
+            "source": "/teams/cdp/:path*",
+            "destination": "/teams/workflows/:path*"
+        },
+        {
+            "source": "/teams/content",
+            "destination": "/teams/marketing"
+        },
+        {
+            "source": "/teams/content/:path*",
+            "destination": "/teams/marketing/:path*"
+        },
+        {
+            "source": "/teams/data-stack",
+            "destination": "/teams/managed-warehouse"
+        },
+        {
+            "source": "/teams/data-stack/:path*",
+            "destination": "/teams/managed-warehouse/:path*"
+        },
+        {
+            "source": "/teams/signals/:path*",
+            "destination": "/teams/self-driving/:path*"
+        },
+        {
+            "source": "/teams/ops",
+            "destination": "/teams/people"
+        },
+        {
+            "source": "/teams/revenue-analytics",
+            "destination": "/teams"
+        },
+        {
+            "source": "/teams/actually-ai",
+            "destination": "/teams"
+        },
+        {
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
             "statusCode": 301
@@ -6416,6 +6586,36 @@
         {
             "source": "/docs/settings/id-jag:ext(\\.md)?",
             "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/questions",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/subscriptions",
+            "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/:path*",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/:permalink",
+            "destination": "/forum/p/:permalink",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/alerts",
+            "destination": "/forum/alerts",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/dashboard",
+            "destination": "/forum/following",
+            "statusCode": 301
         }
     ]
 }

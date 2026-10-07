@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
@@ -104,8 +104,12 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                     },
                 },
                 topics: true,
-                pinnedTopics: true,
                 slugs: true,
+                forumTopic: {
+                    fields: ['label', 'slug', 'icon', 'solutionsEnabled', 'aiRepliesEnabled'],
+                    populate: { allowedTags: { fields: ['label', 'slug'] } },
+                },
+                forumTags: { fields: ['label', 'slug'] },
             },
         },
         {
@@ -530,78 +534,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        if (questionData) {
-            const currentTopics = questionData.attributes.topics?.data || []
-            mutate(
-                {
-                    ...questionData,
-                    attributes: {
-                        ...questionData.attributes,
-                        topics: { data: [...currentTopics, topic] },
-                    },
-                },
-                false
-            )
-        }
-
-        try {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    data: {
-                        topics: {
-                            connect: [topic.id],
-                        },
-                    },
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${await getJwt()}`,
-                },
-            })
-            await mutate()
-        } catch {
-            await mutate()
-        }
-    }
-
-    const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        if (questionData) {
-            const currentTopics = questionData.attributes.topics?.data || []
-            mutate(
-                {
-                    ...questionData,
-                    attributes: {
-                        ...questionData.attributes,
-                        topics: { data: currentTopics.filter((t) => t.id !== topic.id) },
-                    },
-                },
-                false
-            )
-        }
-
-        try {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    data: {
-                        topics: {
-                            disconnect: [topic.id],
-                        },
-                    },
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${await getJwt()}`,
-                },
-            })
-            await mutate()
-        } catch {
-            await mutate()
-        }
-    }
-
     const archive = async (shouldArchive: boolean) => {
         if (questionData) {
             mutate(
@@ -628,26 +560,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const pinTopics = async (topicIDs: number[]) => {
-        if (!topicIDs) return
-        const body = JSON.stringify({
-            data: {
-                pinnedTopics: topicIDs,
-            },
-        })
-
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-            method: 'PUT',
-            body,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
-
-        mutate()
-    }
-
     return {
         question: questionData,
         reply,
@@ -658,10 +570,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         handleResolve,
         handleReplyDelete,
         voteReply,
-        addTopic,
-        removeTopic,
         archive,
-        pinTopics,
         mutate,
     }
 }

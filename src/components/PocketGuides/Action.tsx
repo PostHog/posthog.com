@@ -4,6 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import { SingleCodeBlock } from 'components/CodeBlock'
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
+import { InlineCommand } from 'components/PlatformInstall/InlineCommand'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import OSButton from 'components/OSButton'
 
@@ -103,12 +104,13 @@ export function Setup(): JSX.Element {
         posthog?.capture('pocket_guide_interaction', { kind: 'setup_command_copy', placement: 'front_matter' })
 
     return (
-        <CopyableCommand
-            className="my-[0.8em]"
-            command={wizard.displayCommand}
-            copyCommand={wizard.copyCommand}
-            onCopy={trackSetupCopy}
-        />
+        <div className="my-[0.8em]">
+            <InlineCommand
+                displayCommand={wizard.displayCommand}
+                copyCommand={wizard.copyCommand}
+                onCopy={trackSetupCopy}
+            />
+        </div>
     )
 }
 

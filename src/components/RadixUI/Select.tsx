@@ -30,6 +30,9 @@ type SelectProps = {
     groups: SelectGroup[]
     dataScheme?: string
     className?: string
+    // 'popper' opens the list below the trigger at the trigger's width, for example inside a dialog.
+    // Without it, the list covers the trigger (Radix's item-aligned mode).
+    position?: 'popper' | 'item-aligned'
 }
 
 const Icon = ({
@@ -92,6 +95,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             groups,
             className,
             dataScheme,
+            position,
         },
         ref
     ) => {
@@ -166,9 +170,14 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
                         <RadixSelect.Content
-                            position={appContainer ? 'popper' : undefined}
+                            position={position ?? (appContainer ? 'popper' : undefined)}
+                            sideOffset={position === 'popper' ? 4 : undefined}
                             collisionBoundary={appContainer}
-                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
+                            className={`overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50] ${
+                                position === 'popper'
+                                    ? 'w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)]'
+                                    : ''
+                            }`}
                             data-scheme={dataScheme}
                         >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">

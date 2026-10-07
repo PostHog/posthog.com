@@ -154,7 +154,7 @@ function TaskBarMenu() {
                       {
                           type: 'item' as const,
                           label: 'Forums',
-                          link: '/questions',
+                          link: '/forum',
                           icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
                       },
                       ...(user?.profile

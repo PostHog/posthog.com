@@ -15,4 +15,20 @@
 # Serverless API functions
 /api/ @PostHog/website
 
+# Pricing pages, calculators, and the copy and product data those calculators read.
+/src/components/Pricing/ @PostHog/website
+/src/components/PricingCTA/ @PostHog/website
+/src/components/PostHogDesktopPricing/ @PostHog/website
+/src/components/ReplayVision/Pricing*.tsx @PostHog/website
+/src/components/Products/ReaderViewProduct/templates/Pricing*.tsx @PostHog/website
+/src/components/Products/ReaderViewProduct/templates/BilledWithPricing.tsx @PostHog/website
+/src/components/Products/ReaderViewProduct/templates/Plans.tsx @PostHog/website
+/src/pages/pricing/ @PostHog/website
+/src/pages/**/pricing.tsx @PostHog/website
+/src/pages-content/pricing-data.js @PostHog/website
+/src/hooks/productData/ @PostHog/website
+/src/lib/posthogDesktopPricing.ts @PostHog/website
+/functions/api/posthog-desktop-pricing.ts @PostHog/website
+/contents/docs/**/*pricing* @PostHog/website
+
 /.github/CODEOWNERS @PostHog/website

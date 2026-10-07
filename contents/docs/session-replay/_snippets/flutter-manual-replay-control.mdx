@@ -7,6 +7,7 @@ You can manually control when to start and stop session recordings using the fol
 - `startSessionRecording({bool resumeCurrent = true})`
   - Set **resumeCurrent** to `true` to resume a previous session recording (default).
   - Set **resumeCurrent** to `false` to start a new session recording.
+  - To begin a completely fresh session, call stopSessionRecording() first, then startSessionRecording(resumeCurrent: false).
 - `stopSessionRecording()`
   - Stops/pauses the current session recording.
 - `isSessionReplayActive()`

@@ -60,6 +60,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         // },
         traces,
         {
+            ...getTool('metrics'),
+            Icon: IconTrends,
+            color: 'green',
+            colorSecondary: 'green',
+        },
+        {
             ...getTool('user_interviews'),
             Icon: IconThoughtBubble,
             color: 'purple',
@@ -2097,8 +2103,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             description: 'Access heatmaps while browsing your live site',
                         },
                         {
-                            title: 'No extra billing',
-                            description: 'Heatmap data is captured with regular events - no extra cost',
+                            title: 'Free to ingest',
+                            description:
+                                'Heatmap data is free. Free plan covers 3 pages you choose; pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar',
                         },
                     ],
                 },
@@ -2186,7 +2193,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             FullStory: false,
                             'Microsoft Clarity': true,
                             CrazyEgg: false,
-                            PostHog: true,
+                            PostHog: 'Limited',
                         },
                     },
                 ],
