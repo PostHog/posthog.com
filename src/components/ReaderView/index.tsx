@@ -995,7 +995,7 @@ const LeftSidebar = ({
     onMobileClose,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
-    const { hasMounted } = useReaderView()
+    const { hasMounted, isWidthMeasured } = useReaderView()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
@@ -1158,7 +1158,9 @@ const LeftSidebar = ({
             data-scheme="secondary"
             className={`relative flex-shrink-0 ${
                 transitionsEnabled && !mobile ? 'transition-[flex-basis] duration-300' : ''
-            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'}`}
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'} ${
+                isWidthMeasured ? '' : 'hidden @2xl/app-reader:block'
+            }`}
         >
             <div
                 ref={panelRef}
