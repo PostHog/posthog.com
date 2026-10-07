@@ -511,7 +511,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                                 </div>
                             )}
-                            <Markdown>{body}</Markdown>
+                            <Markdown className="reply-content">{body}</Markdown>
                             {!publishedAt && isForumModerator && (
                                 <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
                                     This reply is unpublished and only visible to moderators
