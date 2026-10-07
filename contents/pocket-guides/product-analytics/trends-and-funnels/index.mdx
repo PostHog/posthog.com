@@ -15,37 +15,37 @@ An <Term name="insight" /> turns events into an answer about product behavior. T
 
 ## Track filter use with a trend
 
-Twig's engineers first question is: **Did more people use Twig's stay filters this week than last week?** Twig already records a `stay_filter_selected` event for every selection and PostHog connects each of those events to a person.
+Twig's engineers' first question is: **Did more people use Twig's stay filters this week than last week?** Twig already records a `stay_filter_selected` event for every selection and PostHog connects each of those events to a person.
 
-To answer their question, they create a **Trends** insight for `stay_filter_selected` events, and measure **Unique users**, grouping the results weekly. They compare two selected weeks.
+To answer their question, they create a **Trends** insight for `stay_filter_selected` events, and measure **Unique users**, grouping the results weekly. They compare two selected weeks:
 
 <FilterUsersTrendFigure />
 
-The trend shows 5 people in week 1 and 8 people in week 2. Those 8 people generated 19 events total, but users with multiple filter selections count as one unique user. Their answer? **More people used filters in week 2.**
+The trend shows 5 people in week 1 and 8 people in week 2. Those 8 people generated 19 events total, but users with multiple filter selections count as one unique user. Their answer? More people used filters in week 2.
 
 Over time, Twig's engineers can watch this trend to understand if filters are a common way to find stays. If use keeps growing, they may prioritize improving the filter experience. If it falls, they can investigate what changed and decide what to prioritize instead.
 
-To judge that pattern, they also need to compare filter users with all site visitors – and this trend alone can't tell them how many people finish a book after starting one.
+To judge that pattern, they also need to compare filter users with all site visitors.
 
 ## Measure booking completion with a funnel
 
-Twig's ultimate goal is for users to book a stay. A count of `booking_completed` events would show completions, but not how many people started booking and never completed. A **Funnels** insight connects the dots between `booking_started` and `booking_completed`.
+Twig's ultimate goal is for users to book a stay. A count of `booking_completed` events would show completions, but not how many people started booking and never completed. A **Funnel** insight connects the dots between `booking_started` and `booking_completed`.
 
-Twig records `booking_started` when it sends a booking request and `booking_completed` when the booking is confired. The engineers use these as the funnel's two steps. PostHog connects events from the same account and checks that completion follows the start.
+Twig records `booking_started` when it sends a booking request and `booking_completed` when the booking is confirmed. The engineers use these as the funnel's two steps. PostHog connects events from the same account and checks that completion follows the start.
 
-Edgar's booking is confirmed, so his event trail has both steps. But another visitor starts a booking, but the request fails – their trail stops at `booking_started`:
+When Edgar booked his stay (`user_812`), his booking is confirmed, so his event trail has both funnel steps. But another visitor starts a booking, and the request fails – their trail stops at `booking_started`:
 
 <BookingStepsFigure />
 
-To measure this across Twig, the engineers set a  **14-day conversion window**. PostHog counts a person on the second step when `booking_completed` follows their `booking_started` event within 14 days. The engineers use a past period so everyone has had that time to finish.
+To measure this across Twig, the engineers set a  **14-day conversion window**. PostHog counts a person as converted when `booking_completed` follows their `booking_started` event within 14 days.
 
-During that period, 10 people started a booking and 6 completed one within 14 days. This means **60% of booking starters completed a booking**, and the other four did not reach the second step in time.
+During that period, 10 people started a booking and 6 completed one within 14 days. This means **60% of visitors who started a booking, completed a booking** – the other four did not reach the second step in time.
 
 <BookingFunnelFigure />
 
 That 60% gives the engineers a baseline for Twig's main goal: turning booking starts into confirmed stays. It points them toward the people who did not finish and gives them a way to see whether future changes help more people complete a booking.
 
-The funnel counts people, not individual booking attempts. If someone starts twice and completes the second attempt, they appear on both steps. To find out what happened to a particular attempt, the engineers can follow its `request_id`.
+The funnel counts people, not individual booking attempts. If someone starts twice and completes on the second attempt, they appear on both steps. To find out what happened to a particular attempt, the engineers can follow its `request_id`.
 
 ## Investigate a booking drop-off
 
