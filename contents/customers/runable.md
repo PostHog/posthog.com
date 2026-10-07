@@ -44,13 +44,6 @@ He didn't build them by hand. First, he connected 13 sources to Runable's [Conte
 
 The result is the whole [funnel](/docs/product-analytics/funnels) in one place: impression → page view → sign-up → first prompt → first artifact → free credit limit → paid, broken down by source, country, and device. PostHog also sends his conversion events straight to Google Ads and Meta, so he no longer needs Google Tag Manager.
 
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_light_61b3bab3b6.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_dark_5f2002f750.png"
-  classes="rounded"
-  alt="Example of a PostHog dashboard"
-/>
-
 <OSQuote
   customer="runable"
   author="eshaan_pawan"
