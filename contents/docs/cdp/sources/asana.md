@@ -9,12 +9,6 @@ availability:
 sourceId: Asana
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Asana connector pulls your Asana data — workspaces, users, projects, tasks, and more — into the PostHog data warehouse.
 
 ## Adding a data source

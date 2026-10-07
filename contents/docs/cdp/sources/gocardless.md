@@ -9,12 +9,6 @@ availability:
 sourceId: GoCardless
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The GoCardless connector syncs your bank debit payments data into PostHog, including customers, mandates, payments, subscriptions, payouts, refunds, and events.
 
 ## Linking GoCardless

@@ -12,9 +12,6 @@ sourceId: Codescene
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The CodeScene connector syncs your engineering analytics data – projects, per-file Code Health metrics, and architectural components – into PostHog, so you can correlate code quality with product usage.
 

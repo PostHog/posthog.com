@@ -12,9 +12,6 @@ sourceId: Customerly
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Customerly connector syncs your customer support and marketing data – users, leads, tags, and knowledge base content – into the PostHog Data Warehouse, so you can analyze your contacts and help center alongside your product data.
 

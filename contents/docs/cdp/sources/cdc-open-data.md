@@ -12,9 +12,6 @@ sourceId: CdcOpenData
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The CDC Open Data (data.cdc.gov) connector syncs your analytics data into the PostHog data warehouse, so you can analyze it alongside your product data.
 

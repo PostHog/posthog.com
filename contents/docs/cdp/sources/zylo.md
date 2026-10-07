@@ -12,12 +12,6 @@ sourceId: Zylo
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
-
-This source is currently in alpha. It hasn't been tested against a live Zylo account yet, so you may encounter unexpected issues. Please report any problems you find.
-
-</CalloutBox>
-
 The Zylo connector syncs your SaaS spend and license management data into PostHog, including applications, licenses, users, contracts, payments, and more. Use it to analyze software spend alongside your product data.
 
 ## Prerequisites

@@ -12,9 +12,6 @@ sourceId: Chameleon
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Chameleon connector syncs your in-product onboarding and adoption data, such as tours and Microsurvey responses, into the PostHog Data warehouse, so you can analyze it alongside your product data.
 

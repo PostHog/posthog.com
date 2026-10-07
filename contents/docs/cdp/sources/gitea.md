@@ -13,12 +13,6 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Alpha source" type="action">
-
-The Gitea source is currently in **alpha**. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Gitea connector syncs repository data from your self-hosted Gitea (or Forgejo) instance – issues, pull requests, commits, releases, labels, and milestones – into PostHog, so you can analyze engineering activity alongside your product data.
 
 ## Prerequisites

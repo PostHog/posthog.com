@@ -12,9 +12,6 @@ sourceId: ImpactPartner
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The impact.com Partner connector syncs the data your partner (publisher) account sees on [impact.com](https://impact.com): the brand programs you've joined, the conversions credited to you, and the invoices for your earnings. If your account is a brand (advertiser) account, use the [impact.com source](/docs/cdp/sources/impact) instead.
 
