@@ -9,14 +9,14 @@ availability:
 sourceId: Knock
 ---
 
-import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
-import SyncModes from "../\_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Knock connector syncs your notification data – messages, users, tenants, objects, schedules, workflow recipient runs, message events, and message delivery logs – into PostHog, so you can analyze notification delivery and engagement alongside your product data.
+The Knock connector syncs your notification data – messages, users, tenants, objects, schedules, workflow recipient runs, message events, and delivery attempts – into PostHog, so you can analyze notification delivery and engagement alongside your product data.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ The `objects` table syncs object recipients from the collections you specify in 
 
 The `schedules` table fetches schedules per user and syncs as a full refresh. It is **off by default** because it sends one request per user – enable it in the sync settings if you need schedule data.
 
-The `message_events` and `message_delivery_logs` tables capture what happens to each message after it was sent. `message_events` includes state changes like sent, delivered, read, and link clicked. `message_delivery_logs` includes the provider request and response for each delivery attempt. Both tables use the parent `messages` listing with a lookback window (three days for events, one day for delivery logs) to pick up events that land after a message is created. These tables are **off by default** because they send one request per message – enable them in the sync settings if you need this data.
+The `message_events` and `message_delivery_logs` tables capture what happens to each message after it was sent. `message_events` includes state changes like sent, delivered, read, and link clicked. `message_delivery_logs` includes the provider request and response for each delivery attempt. Both tables use the parent `messages` listing with a backfill window (three days for events, one day for delivery attempts) to pick up events that land after a message is created. These tables are **off by default** because they send one request per message – enable them in the sync settings if you need this data.
 
 Knock also excludes messages outside your account's retention window from its API, so the `messages` table only backfills as far as your Knock retention allows.
 
