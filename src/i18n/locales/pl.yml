@@ -257,7 +257,7 @@ messages:
                 1: Na G2 mówią, że jesteśmy super
                 2: <small>Bez</small> rekomendacji<br/>Magdy Gessler
             cart:
-                label: 3 osoby dodały<small>(by)</small> PostHoga do koszyka*
+                label: 3 osoby <small>(by)</small> dodały PostHoga do koszyka*
                 footnote: '*gdyby to był prawdziwy koszyk'
             footnote: '*PostHog to produkt webowy, nie znajdziesz go na płycie z CD-Action.<br/>Raz <emphasis>serio</emphasis> wysłaliśmy klientowi dyskietkę, ale był na niej Rickroll.'
             cloud:
