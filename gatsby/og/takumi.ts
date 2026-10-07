@@ -33,8 +33,9 @@ export async function createTakumiRenderer(): Promise<Renderer> {
     return renderer
 }
 
-// One renderer is shared, so Takumi cards render one at a time.
-export const ogRenderLimit = pLimit(1)
+export const ogRenderLimit = pLimit(8)
+
+const imageFetchCache = new Map()
 
 // Matter is a variable font. Register the weights the cards ask for.
 export async function registerMatterFont(renderer: Renderer, data: Buffer) {
@@ -79,7 +80,10 @@ export async function renderOgJpeg(renderer: Renderer, element: ReactElement, im
         height: OG_HEIGHT,
         format: 'jpeg',
         quality: 100,
-        images,
+        images: {
+            sources: images,
+            fetchCache: imageFetchCache,
+        },
     })
     return Buffer.from(bytes)
 }
