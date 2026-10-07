@@ -46,7 +46,9 @@ Self-driving pull requests open as drafts by default. In the self-driving settin
 
 ## Stacked pull requests
 
-Research can split a large change into dependent layers. PostHog creates a child report and pull request for each layer. A layer starts after its dependency has a pull request. Its pull request uses the dependency branch as its base until that dependency merges, so you can review and merge the layers in order.
+Research can split a large change into dependent layers. PostHog creates a child report and pull request for each layer. A layer starts after its dependency has a pull request. PostHog sets the base of the layer's pull request when the layer starts. If the dependency pull request is open, the base is the dependency branch. If the dependency already merged, the base is the repository's base branch.
+
+Review and merge the layers in order. PostHog does not change the base after a dependency merges. After you merge a layer, delete its branch so that GitHub changes the base of the next pull request automatically. If you keep the branch, change the base of the next pull request yourself before you merge it.
 
 ## Reviewing and merging
 
