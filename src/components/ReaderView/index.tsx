@@ -1554,8 +1554,9 @@ function ReaderViewContent({
                     // on a <Steps> page is the step container, not the viewport.
                     const targetRect = targetElement.getBoundingClientRect()
                     const scrollRect = scrollElement.getBoundingClientRect()
+                    const scrollMarginTop = parseFloat(getComputedStyle(targetElement).scrollMarginTop) || 0
                     scrollElement.scrollTo({
-                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop - scrollMarginTop),
                         behavior: 'smooth',
                     })
                     return
