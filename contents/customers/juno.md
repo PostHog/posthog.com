@@ -2,7 +2,7 @@
 title: How Juno uses PostHog self-driving PRs to make health tracking less tiring
 customer: Juno
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_juno_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/JUNO_e1aea331b6.png
 date: 2026-09-23
 seo:
   metaTitle: How Juno uses PostHog self-driving PRs to make health tracking less tiring
@@ -17,11 +17,11 @@ Marshall built the app himself, but a side-effect of the rapid success and growi
 
 "Someone would report a bug, we'd pull the context from Mixpanel if we could and the AI would test whether it could replicate the bug, fix it, and push a PR with a simulator recording I could watch," he says. "Then I'd review the code and press merge. It worked, but was cumbersome and Mixpanel didn't reliably have all of the data the agents needed."
 
-Because agents didn't always have the right context to identify and fix issues, Marshall began looking for a tool which could collect more information — and so soon [switched from Mixpanel to PostHog](/docs/migrate/mixpanel).
+Because agents didn't always have the right context to identify and fix issues, Marshall began looking for a tool which could collect more information – and so soon [switched from Mixpanel to PostHog](/docs/migrate/mixpanel).
 
-After installing PostHog with [the wizard](/wizard) he had one platform to monitor analytics, track errors, and observe behaviour — as well as PostHog's [self-driving features](/self-driving) to turn that data and context into PRs.
+After installing PostHog with [the wizard](/wizard) he had one platform to monitor analytics, track errors, and observe behaviour – as well as PostHog's [self-driving features](/self-driving) to turn that data and context into PRs.
 
-"I'd basically done part of what PostHog was doing," he says. "But it's so much nicer to have a system that's actually meant for it and integrated with all of the context seamlessly. Our merge rate for self-driving PRs is roughly 90% now that we use PostHog for self-driving."
+"PostHog already did what we were trying to build, so we didn't need to build our own version," he says. "It's so much nicer to have a system that's actually meant for it and integrated with all of the context seamlessly. Our merge rate for self-driving PRs is roughly 90% now that we use PostHog for self-driving."
 
 <OSQuote
   customer="juno"
@@ -37,11 +37,11 @@ This approach is great for user privacy, but makes debugging harder for humans b
 
 "If someone's being vague about their problem and hasn't shared logs, we can prompt PostHog on what it could be based on their analytics, error reports, and previous bugs," Marshall says. "Realistically, if one user reports something, another 100 users have it too."
 
-A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to see [rage clicks](/docs/product-analytics/autocapture) and know something is wrong, and it can piece the rest together from [Error Tracking](/error-tracking) and [Product Analytics](/product-analytics). That's enough context to open a PR even when the bug report is thin — which is important because in a health app even small bugs can have a big impact.
+A [PostHog scout](/blog/what-is-a-scout) doesn't need to read a user's data to see [rage clicks](/docs/product-analytics/autocapture) and know something is wrong, and it can piece the rest together from [Error Tracking](/error-tracking) and [Product Analytics](/product-analytics). That's enough context to open a PR even when the bug report is thin – which is important because in a health app even small bugs can have a big impact.
 
 "If something goes wrong in our medication log, for example, people might miss their medications or get dosages wrong," Marshall says. "If they're not entering the right thing, or they're not getting notifications? Those are the things we need to find straight away and squash as soon as they happen."
 
-PostHog helped Juno identify friction when people returned to log medication they had already taken. Someone catching up on ten medications had to tick them off individually. Juno added "Log all" to record the scheduled group in one action — less repetitive work for people already dealing with fatigue.
+PostHog helped Juno identify friction when people returned to log medication they had already taken. Someone catching up on ten medications had to tick them off individually. Juno added "Log all" to record the scheduled group in one action – less repetitive work for people already dealing with fatigue.
 
 ![The Log all control in Juno's medication log](/images/customers/juno/juno-medication-log-all.png)
 
