@@ -39,7 +39,7 @@ Everything happens in the alert's thread in #closed-won. Replies must be thread 
 
 The triage logic lives in PostHog. Anything that writes to the table or to Stripe lives in Zapier.
 
-### PostHog (project 2)
+### PostHog
 
 | Piece | What it does | Status |
 | --- | --- | --- |
