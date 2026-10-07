@@ -9,12 +9,6 @@ availability:
 sourceId: Pipedrive
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Pipedrive connector syncs your CRM data – deals, persons, organizations, products, pipelines, stages, activities, notes, leads, users, and field metadata – into PostHog.
 
 ## Adding a data source

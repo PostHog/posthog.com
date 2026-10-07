@@ -12,9 +12,9 @@ sourceId: AppleSearchAds
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
+import BetaRelease from "../\_snippets/beta-release.mdx"
 
-<AlphaRelease />
+<BetaRelease />
 
 The Apple Ads connector syncs your campaigns, ad groups, keywords, and daily performance reporting into PostHog, so you can analyze ad spend next to your product data. Apple Ads was called Apple Search Ads until Apple renamed it, and it now covers ads on both the App Store and Apple Maps.
 
