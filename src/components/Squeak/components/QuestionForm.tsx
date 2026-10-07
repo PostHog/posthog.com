@@ -230,6 +230,13 @@ function QuestionFormMain({
                                             showLabel={false}
                                             value={values.subject}
                                             onChange={(e) => setFieldValue('subject', e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if (e.key !== 'Tab' || e.shiftKey) return
+                                                const body = e.currentTarget.form?.elements.namedItem('body')
+                                                if (!(body instanceof HTMLTextAreaElement)) return
+                                                e.preventDefault()
+                                                body.focus()
+                                            }}
                                         />
                                     </>
                                 )}
