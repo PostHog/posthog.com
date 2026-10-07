@@ -168,6 +168,18 @@ Each conversion emits a billable `$workflows_conversion` event. This counts towa
 
 </CalloutBox>
 
+### Email sending rate limit
+
+If a workflow has an email step, you can limit how fast it sends email. Click the trigger step, select **Limit sending rate**, and set a maximum number of emails per minute or per hour. Sending a large volume too quickly can hurt deliverability, so the limit spreads sends out over time.
+
+The limit applies to the whole workflow. It counts the emails the workflow sends to all recipients together. It doesn't limit how many emails one person gets.
+
+When the workflow reaches the limit, the next emails wait in a queue and send as soon as the limit allows. The limit doesn't drop emails. The workflow's **Logs** tab shows a message for each email that waits.
+
+To control how often one person goes through an event-triggered workflow, use the **Frequency** setting on the trigger step. For example, **Once per calendar day** lets each person enter the workflow at most once a day.
+
+This limit is separate from your project's [sending allowance](/docs/workflows/sending-reputation), which caps email across all of your workflows.
+
 ## Dispatches
 
 Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:

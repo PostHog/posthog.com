@@ -9,12 +9,6 @@ availability:
 sourceId: Iterable
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Iterable API key to pull your Iterable data into the PostHog data warehouse.
 
 ## Adding a data source
