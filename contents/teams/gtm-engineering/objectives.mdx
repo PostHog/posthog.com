@@ -1,22 +1,48 @@
-### Q3 2026 Objectives
+### Q4 2026 objectives
 
-### **Lead Gateway** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Commercial universe dataset** - (Driver: <TeamMember name="Abhischek Thottakara" />)
 
-Build a single source for lead tasks that get routed to Sales Teams to consistently enrich and score product led signals in order to improve qualification and win rates.
+Build one materialized table of all our customers, active and churned, so that lead triggers use the same complete account context.
 
 **What we'll ship:**
 
-* REST Webhook endpoint to receive product led / inbound signals
-* Set of temporal workflows to enrich the person and company consistently and persist the task in Salesforce
-* Scoring engine to rank Account potential and propensity for the lead
-* Migrate all existing lead triggers from Zapier, Default and Vitally into a set of SQL based trigger definitions
-* Implement CRON based revival of leads based on growth signals updated scores
+* `org_universe` table that joins billing (invoices, usage momentum, credits, and startup plan eligibility), account ownership and segments, Salesforce and third-party enrichment, and PostHog usage (events and enabled features)
+* Daily CRON in lead-gateway that queries `org_universe` and creates lead tasks
+* TAM lead triggers that fire only for TAM-owned accounts
+* Migrate existing lead triggers to query `org_universe` instead of separate HogQL queries
+
+### **Trusted lead score** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Make lead scores meaningful, so that GTM Humans trust them and get fewer noisy tasks.
+
+**What we'll ship:**
+
+* Backtest Q3 lead scores against qualification and revenue outcomes
+* Skip tasks that GTM Humans consistently disqualify, and weight scores by task outcomes
+* Account potential score v0: estimate ACV from the median ACV of accounts with similar usage and firmographics
+* Improve the account potential score by backtesting predicted ACV against 30, 60, and 90-day growth
 
 ### **posthog-salesforce** - (Driver: <TeamMember name="Abhischek Thottakara" />)
 
-Deploy [posthog-salesforce](https://github.com/posthog/posthog-salesforce) and make it the source of truth for task routing, account and opportunity management to improve data quality and enablement for GTM Humans to propose changes.
+Finish the [posthog-salesforce](https://github.com/posthog/posthog-salesforce) deployment.
 
 **What we'll ship:**
 
-* Deploy posthog-salesforce to production
-* Lock down Salesforce to avoid manual changes to production
+* Auto-deploy to Salesforce on merge to main
+
+### **Customer analytics migration** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Finish the move of account ownership to customer analytics.
+
+**What we'll ship:**
+
+* Enrich Salesforce with billing data, such as the last invoice and the current billing period
+
+### **Stretch: Closed-won automation** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Automate invoice generation from closed-won deals.
+
+**What we'll ship:**
+
+* Invoice issuance
+* Credit setup
