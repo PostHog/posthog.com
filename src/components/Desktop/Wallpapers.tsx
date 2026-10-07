@@ -179,7 +179,7 @@ export const getWallpaperGlow = (wallpaper: string): WallpaperGlow =>
 
 export default function Wallpapers(): JSX.Element {
     return (
-        <div className="fixed inset-0 -z-10 select-none overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 select-none overflow-hidden pointer-events-none">
             {SCENES.map(({ key, Scene, visible }) => (
                 <div key={key} className={`hidden ${visible} absolute inset-0`}>
                     <Scene />

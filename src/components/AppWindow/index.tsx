@@ -676,7 +676,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 {item.appSettings?.size?.fixed && (
                     <div
                         onClick={handleClose}
-                        className={`fixed inset-0 z-50 bg-black/50 print:hidden ${
+                        className={`fixed inset-0 z-50 bg-black/50 pointer-events-auto print:hidden ${
                             closing ? 'animate-overlay-fade-out' : !skipsOpenAnimation ? 'animate-overlay-fade-in' : ''
                         }`}
                     />
@@ -706,7 +706,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     data-snapped={item.snapped || undefined}
                     data-focused={focusedWindow === item || undefined}
                     data-scheme="tertiary"
-                    className={`@container relative overflow-hidden ${
+                    className={`@container relative overflow-hidden pointer-events-auto ${
                         item.appSettings?.size?.fixed
                             ? closing
                                 ? 'animate-window-slide-up'
