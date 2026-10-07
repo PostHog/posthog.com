@@ -44,6 +44,13 @@ which doesn't gate anything on these app flags.
 | `onSuccess`        | `(email: string) => void`  | —                        | Fires after a successful submit — e.g. to capture an extra analytics event. |
 | `className`        | `string`                   | `''`                     | |
 
+## Prefilled email
+
+The email field starts with the address `useKnownEmail` holds for the visitor: their
+community account email, or the `email` / `squeakEmail` person property their browser
+already sent. The visitor can replace it, and a late read never overwrites an address
+they started to type. A visitor we know nothing about still gets an empty field.
+
 ## No login, but a person profile is created
 
 There's no login — the email is captured as the survey response. Submitting does, however,
