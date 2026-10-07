@@ -195,7 +195,7 @@ export default function Forum(props: any) {
             default:
                 return (
                     <>
-                        <GettingStarted topics={topics} />
+                        <GettingStarted />
                         <Feed
                             title="All posts"
                             description="Everything from every topic, newest posts first."

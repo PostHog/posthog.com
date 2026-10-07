@@ -5,7 +5,7 @@ import { navigate } from 'gatsby'
 import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
-import { ForumTopic, useForumProgress } from './hooks'
+import { useForumProgress, useForumTopics } from './hooks'
 
 type Task = {
     key: 'introduced' | 'replied' | 'shared' | 'subscribed'
@@ -47,11 +47,11 @@ const tasks: Task[] = [
 
 // A checklist for signed-in members at the top of All posts. A task disappears when the member does it, and the
 // checklist disappears when all tasks are done.
-export default function GettingStarted({ topics }: { topics: ForumTopic[] }) {
+export default function GettingStarted() {
     const { user } = useUser()
     const posthog = usePostHog()
     const { progress, isLoading } = useForumProgress()
-    const getTopic = (slug: string) => topics.find((topic) => topic.attributes.slug === slug)
+    const { getTopic } = useForumTopics()
     const remaining = progress ? tasks.filter((task) => !progress[task.key] && getTopic(task.topic)) : []
 
     const open = (task: Task) => {
