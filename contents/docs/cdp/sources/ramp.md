@@ -9,12 +9,6 @@ availability:
 sourceId: Ramp
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Ramp source is currently in alpha. It has been tested against Ramp's developer API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Ramp connector syncs your corporate spend data into PostHog, including transactions, reimbursements, users, cards, and departments.
 
 ## Adding a data source

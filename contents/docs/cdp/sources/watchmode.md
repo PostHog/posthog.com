@@ -12,9 +12,6 @@ sourceId: Watchmode
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Watchmode connector syncs streaming availability metadata into the PostHog Data warehouse: the movie and TV title catalog, recent and upcoming streaming releases, and the reference lists of streaming services, regions, networks, and genres. Useful for joining your product data against what's available to watch and where.
 

@@ -9,12 +9,6 @@ availability:
 sourceId: Harness
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Harness connector syncs your CI/CD pipeline data – pipelines, executions, services, and environments – into the PostHog data warehouse, so you can analyze your deployment activity alongside your product data.
 
 ## Prerequisites

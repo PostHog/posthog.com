@@ -12,9 +12,6 @@ sourceId: Dub
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Dub connector syncs your link attribution data from [Dub](https://dub.co) into PostHog: short links, click, lead, and sale events, customers, tags, domains, folders, and your partner program's partners, commissions, and payouts.
 This lets you join link and affiliate performance with the rest of your product analytics.

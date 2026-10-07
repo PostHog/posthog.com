@@ -12,9 +12,6 @@ sourceId: Instagram
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Instagram connector syncs an Instagram professional account into PostHog: the profile, its posts, stories and comments, and the insights Meta reports for the account and for each post. You can then analyze social activity alongside your product data.
 

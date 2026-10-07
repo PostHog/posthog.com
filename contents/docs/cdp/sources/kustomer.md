@@ -9,12 +9,6 @@ availability:
 sourceId: Kustomer
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Kustomer credentials to pull your customer service data – customers, conversations, users, teams, tags, and brands – into the PostHog data warehouse.
 
 ## Adding a data source

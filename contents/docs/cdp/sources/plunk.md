@@ -12,9 +12,6 @@ sourceId: Plunk
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Sync your Plunk contacts, campaigns, templates, and segments into the PostHog data warehouse, so you can join email engagement with product analytics, for example to compare campaign performance against activation or retention.
 

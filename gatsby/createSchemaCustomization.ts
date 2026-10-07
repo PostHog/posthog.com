@@ -539,6 +539,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       icon_url: String
       docsUrl: String
       unreleased: Boolean
+      releaseStatus: String
       beta: Boolean
       featured: Boolean
       caption: String

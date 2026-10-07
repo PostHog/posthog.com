@@ -9,12 +9,6 @@ availability:
 sourceId: Slash
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Slash connector syncs your corporate banking data – accounts, transactions, cards, invoices, invoice series, expense reports, and contacts – into PostHog.
 
 <CalloutBox icon="IconInfo" title="Slash API access" type="info">
