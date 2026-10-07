@@ -23,11 +23,12 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | --- | --- |
 | `index.tsx` | The app: picks the view from the URL, lays out the sidebar and main pane, and owns the modal state |
 | `context.tsx` | `useForumActions()`: opens the topic form, delete dialog, and subscriptions dialog |
-| `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumFeed`, `useForumPost` |
+| `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumProgress`, `useForumFeed`, `useForumPost` |
 | `Sidebar.tsx` | New post, search, nav, topic list with staff menus, and the off-ramps. Collapses to a top bar below `@2xl` |
 | `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the tag filter, infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
 | `Thread.tsx` | One post: vote box, body, author edits, the Moderate menu, and the shared Squeak replies |
 | `Composer.tsx` | The new post form, which also saves, edits, and publishes drafts. Authors choose only a topic; the server chooses tags when a post goes live |
+| `GettingStarted.tsx` | The checklist at the top of All posts for signed-in members. `useForumProgress` checks each task, and a done task disappears |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
 | `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag. On All posts it groups the tags by topic |
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |

@@ -15,6 +15,7 @@ import Feed, { FeedPageSkeleton } from './Feed'
 import Thread from './Thread'
 import Composer from './Composer'
 import Drafts from './Drafts'
+import GettingStarted from './GettingStarted'
 import TopicSubscribeButton from './TopicSubscribeButton'
 import TopicIcon from './TopicIcon'
 import TopicForm from './TopicForm'
@@ -193,13 +194,16 @@ export default function Forum(props: any) {
                 )
             default:
                 return (
-                    <Feed
-                        title="All posts"
-                        description="Everything from every topic, newest posts first."
-                        tags={tags}
-                        showTopic
-                        empty="No posts yet. Start the conversation!"
-                    />
+                    <>
+                        <GettingStarted topics={topics} />
+                        <Feed
+                            title="All posts"
+                            description="Everything from every topic, newest posts first."
+                            tags={tags}
+                            showTopic
+                            empty="No posts yet. Start the conversation!"
+                        />
+                    </>
                 )
         }
     }
