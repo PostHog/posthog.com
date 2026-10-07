@@ -4,34 +4,31 @@ sidebar: Docs
 showTitle: true
 ---
 
-import BetaCallout from './_snippets/beta-callout'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 The whole semantic layer is queryable with [SQL](/docs/data-warehouse/query) through `system.information_schema` – from the SQL editor in PostHog or the `execute-sql` MCP tool. This is also how agents discover metrics: there's no "list metrics" tool by design, just these tables.
-
-<BetaCallout />
 
 ## system.information_schema.metrics
 
 One row per metric in your project:
 
-| Column | Type | What it is |
-|--------|------|------------|
-| `id` | String | The metric's id. |
-| `name` | String | Identifier, e.g. `mrr`, unique among live metrics. Not permanent – a metric can be renamed, and deleting one frees its name for reuse. |
-| `display_name` | Nullable string | Human-friendly label. |
-| `description` | String | What the metric means – the text agents match questions against. |
-| `unit` | Nullable string | e.g. `usd`, `percent`. |
-| `status` | String | `proposed` or `approved`. |
-| `is_drifted` | Boolean | Whether the definition has drifted from its source insight. Computed at read time. |
-| `definition` | Nullable string | The machine-readable definition, or null for a stub. |
-| `definition_kind` | Nullable string | `HogQLQuery`, `TrendsQuery`, `MarkdownDefinition`, ... |
-| `owner` | Nullable string | Email of the accountable human. |
-| `confidence` | Nullable float | AI author's confidence, 0-1, when AI-authored. |
-| `reasoning` | Nullable string | AI author's reasoning, as review context. |
-| `source_insight_short_id` | Nullable string | The insight the metric was created from, if any. |
-| `last_run_at` | Nullable string | When the metric last ran. |
-| `created_at` | String | When the metric was created. |
+| Column                    | Type            | What it is                                                                                                                             |
+| ------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                      | String          | The metric's id.                                                                                                                       |
+| `name`                    | String          | Identifier, e.g. `mrr`, unique among live metrics. Not permanent – a metric can be renamed, and deleting one frees its name for reuse. |
+| `display_name`            | Nullable string | Human-friendly label.                                                                                                                  |
+| `description`             | String          | What the metric means – the text agents match questions against.                                                                       |
+| `unit`                    | Nullable string | e.g. `usd`, `percent`.                                                                                                                 |
+| `status`                  | String          | `proposed` or `approved`.                                                                                                              |
+| `is_drifted`              | Boolean         | Whether the definition has drifted from its source insight. Computed at read time.                                                     |
+| `definition`              | Nullable string | The machine-readable definition, or null for a stub.                                                                                   |
+| `definition_kind`         | Nullable string | `HogQLQuery`, `TrendsQuery`, `MarkdownDefinition`, ...                                                                                 |
+| `owner`                   | Nullable string | Email of the accountable human.                                                                                                        |
+| `confidence`              | Nullable float  | AI author's confidence, 0-1, when AI-authored.                                                                                         |
+| `reasoning`               | Nullable string | AI author's reasoning, as review context.                                                                                              |
+| `source_insight_short_id` | Nullable string | The insight the metric was created from, if any.                                                                                       |
+| `last_run_at`             | Nullable string | When the metric last ran.                                                                                                              |
+| `created_at`              | String          | When the metric was created.                                                                                                           |
 
 Metrics whose definitions reference tables you don't have access to are hidden from your results.
 

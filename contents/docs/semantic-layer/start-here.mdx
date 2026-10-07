@@ -4,13 +4,10 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import BetaCallout from './_snippets/beta-callout'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import PlatformInstall from 'components/PlatformInstall'
+import { CalloutBox } from "components/Docs/CalloutBox";
+import PlatformInstall from "components/PlatformInstall";
 
 In this guide you'll take a metric that only exists in people's heads – MRR – and turn it into a governed definition every AI session agrees on. The whole thing is one agent conversation: the agent proposes, you approve, and from then on every client that asks about MRR gets the same number.
-
-<BetaCallout />
 
 ## Prerequisites
 
@@ -42,7 +39,7 @@ The metric now exists, but it has no authority yet. Every AI-created object in t
 
 <CalloutBox icon="IconInfo" title="Names are references" type="fyi">
 
-A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique among your project's live metrics. You *can* rename or delete a metric later, but that frees the name and breaks anything that stored it – saved queries, API calls, links – so pick a name worth keeping. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and can change freely.
+A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique among your project's live metrics. You _can_ rename or delete a metric later, but that frees the name and breaks anything that stored it – saved queries, API calls, links – so pick a name worth keeping. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and can change freely.
 
 </CalloutBox>
 
