@@ -163,7 +163,7 @@ export function BookingStepsFigure(): JSX.Element {
     useEffect(() => {
         if (!inView || manual) return
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            setStep(9)
+            setStep(4)
             return
         }
 
@@ -225,8 +225,12 @@ export function BookingStepsFigure(): JSX.Element {
                                 <button
                                     type="button"
                                     onClick={() => {
+                                        setStep((current) => {
+                                            if (current === 4) return 9
+                                            if (current === 9) return 4
+                                            return current >= 5 ? 9 : 4
+                                        })
                                         setManual(true)
-                                        setStep(failed ? 9 : 4)
                                     }}
                                     className="vac-button vac-primary w-full"
                                 >
