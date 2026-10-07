@@ -31,7 +31,7 @@ Everything happens in the alert's thread in #closed-won. Replies must be thread 
 | Reply `approve <opportunity id> draft` | Specialist or rule-based deal that RevOps has already sorted out by hand | Triage skips the classification, credit balance, prepurchase credit, and backdating checks. Zap B fills the row and creates the draft invoice. Not for quarterly payment plans or AWS Marketplace deals. |
 | React `:moneybag:` on the alert | After the invoice is sent | Credits are applied, or the Zap replies why not. |
 
-**Who can react `:moneybag:`:** Mine, Erika, and Abhishek. The list is hardcoded in the Zap, because Zapier's Slack app cannot read the `@revops-folks` group. Add new people in the Zap's first code step.
+**Who can react `:moneybag:`:** Mine, Erika, and Abhischek. The list is hardcoded in the Zap. Add new people in the Zap's first code step.
 
 **Deal owners get tagged** when triage needs an answer from them: the right org, a coverage gap, a missing Salesforce field, or a Contract Link that is not a PandaDoc document link. Their Slack IDs live in the skill's `deal-owners.md` file.
 
