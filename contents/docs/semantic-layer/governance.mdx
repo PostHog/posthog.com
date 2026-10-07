@@ -4,11 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import BetaCallout from './_snippets/beta-callout'
-
 The semantic layer's whole design reduces to one sentence: **AI generates, a human owns.** This page explains how that principle is enforced – lifecycles, typed confirmations, API scopes, and provenance – and how to run it day to day.
-
-<BetaCallout />
 
 ## AI generates, a human owns
 
@@ -21,11 +17,11 @@ The result: your agents build the catalog for you during normal work, and nothin
 
 ## Lifecycle across the catalog
 
-| Primitive | Lands as | Human promotes to | Demoted or terminal |
-|-----------|----------|-------------------|---------------------|
-| [Metric](/docs/semantic-layer/metrics) | `proposed` | `approved` | Editing the definition, name, description, or unit – or drifting from the source insight – resets it toward `proposed`; deleting frees the name (activity-logged, no undo in the product) |
-| [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications) | `proposed` | `certified` or `deprecated` | Revoking deletes the mark (activity-logged) |
-| [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed |
+| Primitive                                                                                    | Lands as   | Human promotes to                | Demoted or terminal                                                                                                                                                                       |
+| -------------------------------------------------------------------------------------------- | ---------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Metric](/docs/semantic-layer/metrics)                                                       | `proposed` | `approved`                       | Editing the definition, name, description, or unit – or drifting from the source insight – resets it toward `proposed`; deleting frees the name (activity-logged, no undo in the product) |
+| [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications)  | `proposed` | `certified` or `deprecated`      | Revoking deletes the mark (activity-logged)                                                                                                                                               |
+| [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed                                                                                                                                                 |
 
 ## Typed confirmations
 
@@ -43,10 +39,10 @@ The point is simple: an agent can't autocomplete your signature. However agentic
 
 Two scopes split proposing from promoting:
 
-| Scope | Grants |
-|-------|--------|
-| `data_catalog` | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
-| `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships |
+| Scope                   | Grants                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `data_catalog`          | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
+| `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships               |
 
 Practical setup: the API key you hand your MCP server or CI agent gets `data_catalog` only – it can build and use the catalog but never bless anything. Your own key carries both scopes, so approvals happen through you. (`data-catalog-metric-run` also needs `query:read`, and `data-catalog-relationship-accept-prepare` / `-execute` needs `warehouse_view:write` to create the join. `data-catalog-metrics-refresh-from-insight-create` needs `insight:read` to re-read the source insight.)
 
