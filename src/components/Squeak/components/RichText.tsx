@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext, useMemo } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext } from 'react'
 import MarkdownLogo from './MarkdownLogo'
 import { useDropzone } from 'react-dropzone'
 import Spinner from 'components/Spinner'
@@ -8,14 +8,28 @@ import { Edit } from 'components/Icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
-import Avatar from './Avatar'
-import { AnimatePresence, motion } from 'framer-motion'
-import { IconFeatures, IconImage } from '@posthog/icons'
-import { Logo } from '@posthog/brand/logo'
+import { AnimatePresence } from 'framer-motion'
+import { IconImage } from '@posthog/icons'
 import OSTextarea from 'components/OSForm/textarea'
 import OSButton from 'components/OSButton'
 import getCaretCoordinates from 'textarea-caret'
-import { useCommunityProfiles } from 'hooks/useCommunityProfiles'
+import {
+    SuggestionMenu,
+    SuggestionMenuHandle,
+    SuggestionTrigger,
+    emojiForShortcode,
+    loadEmojiList,
+} from './Suggestions'
+
+const MENTION_OR_REFERENCE_WORD = /(^|[\s(])([@#])([\p{L}\p{N}_/-]{0,40})$/u
+const EMOJI_WORD = /(^|[\s(])(:)([a-z0-9_+-]{2,40})$/i
+const OPENING_COLON = /(^|[\s(]):$/
+const CLOSED_SHORTCODE = /(^|[\s(]):([a-z0-9_+-]+):$/i
+
+const isInCode = (textBeforeCaret: string) => {
+    const line = textBeforeCaret.slice(textBeforeCaret.lastIndexOf('\n') + 1).replace(/```/g, '')
+    return (textBeforeCaret.match(/```/g)?.length ?? 0) % 2 === 1 || (line.match(/`/g)?.length ?? 0) % 2 === 1
+}
 
 const buttons = [
     {
@@ -87,160 +101,6 @@ const buttons = [
     },
 ]
 
-const compactName = (...parts: (string | null | undefined)[]) => parts.filter(Boolean).join('').toLowerCase()
-
-const nameMatchesQuery = (first: string | null | undefined, last: string | null | undefined, query: string) => {
-    if (!query) {
-        return true
-    }
-    const q = query.toLowerCase()
-    return (
-        (first || '').toLowerCase().startsWith(q) ||
-        (last || '').toLowerCase().startsWith(q) ||
-        compactName(first, last).startsWith(q)
-    )
-}
-
-const isModProfile = (profile) => profile.attributes?.isTeamMember || !!profile.attributes?.startDate
-
-const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
-    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
-    const name = [firstName, lastName].filter(Boolean).join(' ')
-    const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-    const isMod = isModProfile(profile)
-
-    return (
-        <li className="border-b border-input p-1 last:border-b-0">
-            <OSButton
-                onClick={() => onSelect?.(profile, selectionStart)}
-                type="button"
-                variant="default"
-                width="full"
-                align="left"
-                className={`!px-3 !py-1 !justify-start ${focused === index ? 'bg-accent' : ''}`}
-                active={focused === index}
-            >
-                <div className="flex space-x-2 items-center w-full">
-                    <div className="relative size-6 shrink-0 rounded-full">
-                        <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
-                        {isMod && (
-                            <span className="absolute -right-1 -bottom-1 size-3.5 flex items-center justify-center rounded-full bg-primary border border-primary">
-                                <Logo layout="logomark" className="w-2.5" />
-                            </span>
-                        )}
-                    </div>
-                    <div>
-                        {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
-                        <div className="flex space-x-1 items-center">
-                            <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
-                            {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
-                        </div>
-                    </div>
-                </div>
-            </OSButton>
-        </li>
-    )
-}
-
-const MentionProfiles = ({ onSelect, body, position, ...other }) => {
-    const currentQuestion = useContext(CurrentQuestionContext) ?? {}
-    const replies = currentQuestion?.question?.replies
-    const selectionStart = useMemo(() => other.selectionStart, [])
-    const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
-    const threadProfiles = [
-        currentQuestion?.question?.profile?.data,
-        ...(replies?.data || []).map((reply) => reply?.attributes?.profile?.data),
-    ].filter((profile, index, self) => {
-        if (!profile?.id || !profile.attributes) {
-            return false
-        }
-        return (
-            self.findIndex((p) => p?.id === profile.id) === index &&
-            nameMatchesQuery(profile.attributes.firstName, profile.attributes.lastName, search)
-        )
-    })
-    const { profiles: searchProfiles } = useCommunityProfiles({
-        filters: { search, compactName: true, sort: 'firstName:asc' },
-        pageSize: 15,
-        enabled: search.length > 0,
-    })
-    const threadIds = new Set(threadProfiles.map((profile) => profile.id))
-    const mentionProfiles = [
-        ...threadProfiles,
-        ...searchProfiles
-            .filter(
-                (profile) =>
-                    !threadIds.has(profile.id) &&
-                    (profile.firstName || profile.lastName) &&
-                    nameMatchesQuery(profile.firstName, profile.lastName, search)
-            )
-            .map((profile) => ({
-                id: profile.id,
-                attributes: {
-                    firstName: profile.firstName,
-                    lastName: profile.lastName,
-                    avatar: { data: { attributes: { url: profile.avatarUrl } } },
-                    isTeamMember: profile.isTeamMember,
-                },
-            })),
-    ].sort((a, b) => Number(isModProfile(b)) - Number(isModProfile(a)))
-    const listRef = useRef<HTMLUListElement>(null)
-    const [focused, setFocused] = useState(0)
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowDown') {
-                e.preventDefault()
-                setFocused((prev) => (prev + 1) % mentionProfiles.length)
-            }
-            if (e.key === 'ArrowUp') {
-                e.preventDefault()
-                setFocused((prev) => (prev - 1 + mentionProfiles.length) % mentionProfiles.length)
-            }
-            if (e.key === 'Tab' || e.key === 'Enter') {
-                e.preventDefault()
-                onSelect?.(mentionProfiles[focused], selectionStart)
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown)
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [focused, search])
-
-    if (mentionProfiles.length === 0) {
-        return null
-    }
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0, transition: { type: 'tween', duration: 0.1 } }}
-            exit={{ opacity: 0, y: 4 }}
-            className="w-[200px] absolute z-50"
-            style={position}
-        >
-            <ul
-                ref={listRef}
-                className="m-0 p-0 list-none border border-input bg-light dark:bg-dark max-h-60 rounded-md overflow-auto"
-            >
-                {mentionProfiles.map((profile, index) => (
-                    <MentionProfile
-                        focused={focused}
-                        index={index}
-                        onSelect={onSelect}
-                        profile={profile}
-                        selectionStart={selectionStart}
-                        key={profile.id}
-                    />
-                ))}
-            </ul>
-        </motion.div>
-    )
-}
-
 export default function RichText({
     initialValue = '',
     setFieldValue,
@@ -251,6 +111,7 @@ export default function RichText({
     preview = true,
     label = '',
     mentions = false,
+    references = false,
     bodyKey = 'body',
     className = '',
     cta = React.ReactNode,
@@ -260,10 +121,25 @@ export default function RichText({
     const [cursor, setCursor] = useState<number | null>(null)
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
-    const [showMentionProfiles, setShowMentionProfiles] = useState(false)
-    const [mentionPos, setMentionPos] = useState<{ top: number; left: number } | null>(null)
-    const mentionProfilesRef = useRef<HTMLDivElement>(null)
-    const mentionContainerRef = useRef<HTMLDivElement>(null)
+    // The `@` or `#` word that the caret is in, while its suggestion menu is open.
+    const [trigger, setTrigger] = useState<{
+        char: SuggestionTrigger
+        start: number
+        query: string
+        position: { top: number; left: number } | null
+    } | null>(null)
+    // Escape closes the menu for that one word only.
+    const dismissedAt = useRef<number | null>(null)
+    const pendingCaret = useRef<number | null>(null)
+    const menuRef = useRef<SuggestionMenuHandle>(null)
+    const suggestionContainerRef = useRef<HTMLDivElement>(null)
+    // Forum posts get people and forum suggestions in every form, including edits.
+    const inForumPost = !!useContext(CurrentQuestionContext)?.question?.forumTopic?.data
+    const enabledTriggers = {
+        '@': mentions || references || inForumPost,
+        '#': references || inForumPost,
+        ':': true,
+    }
 
     const onDrop = useCallback(
         async (acceptedFiles) => {
@@ -314,8 +190,78 @@ export default function RichText({
         setCursor(cursor)
     }
 
+    // Opens a menu when the caret is at the end of a word that starts with an enabled trigger. The trigger must start
+    // the text or follow a space or "(", and it does not count inside code.
+    const findTrigger = () => {
+        const el = textarea.current
+        if (!el || el.selectionStart !== el.selectionEnd) return setTrigger(null)
+        const before = el.value.slice(0, el.selectionStart)
+        const match = before.match(MENTION_OR_REFERENCE_WORD) ?? before.match(EMOJI_WORD)
+        const char = match?.[2] as SuggestionTrigger | undefined
+        if (!match || !char || !enabledTriggers[char] || isInCode(before)) {
+            // Out of the word, so the next trigger opens again, also at the same place.
+            dismissedAt.current = null
+            return setTrigger(null)
+        }
+        const start = el.selectionStart - match[3].length - 1
+        if (dismissedAt.current === start) return setTrigger(null)
+        dismissedAt.current = null
+        const container = suggestionContainerRef.current
+        let position: { top: number; left: number } | null = null
+        if (container) {
+            const caret = getCaretCoordinates(el, start)
+            const elRect = el.getBoundingClientRect()
+            const containerRect = container.getBoundingClientRect()
+            position = {
+                top: caret.top + caret.height + elRect.top - containerRect.top - el.scrollTop,
+                // The menu is 16rem wide; keep it inside the editor in a narrow window.
+                left: Math.max(0, Math.min(caret.left + elRect.left - containerRect.left, container.clientWidth - 256)),
+            }
+        }
+        setTrigger({ char, start, query: match[3], position })
+    }
+
+    const closeSuggestions = () => {
+        if (trigger) dismissedAt.current = trigger.start
+        setTrigger(null)
+    }
+
+    // Replaces the trigger word with the chosen suggestion and a space, and puts the caret after them.
+    const handleSuggestionSelect = (insert: string) => {
+        const el = textarea.current
+        if (!el || !trigger) return
+        const text = `${insert} `
+        const end = el.selectionStart
+        setValue((prevValue) => prevValue.slice(0, trigger.start) + text + prevValue.slice(end))
+        pendingCaret.current = trigger.start + text.length
+        setTrigger(null)
+    }
+
+    useEffect(() => {
+        const caret = pendingCaret.current
+        if (caret === null || !textarea.current) return
+        pendingCaret.current = null
+        textarea.current.focus()
+        textarea.current.setSelectionRange(caret, caret)
+    }, [value])
+
+    const replaceClosedShortcode = (el: HTMLTextAreaElement) => {
+        const before = el.value.slice(0, el.selectionStart)
+        if (OPENING_COLON.test(before)) loadEmojiList()
+        const shortcode = before.match(CLOSED_SHORTCODE)
+        const emoji = shortcode && !isInCode(before) && emojiForShortcode(shortcode[2])
+        if (!emoji) return false
+        const start = el.selectionStart - shortcode[2].length - 2
+        setValue(el.value.slice(0, start) + emoji + el.value.slice(el.selectionStart))
+        pendingCaret.current = start + emoji.length
+        setTrigger(null)
+        return true
+    }
+
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (replaceClosedShortcode(e.target)) return
         setValue(e.target.value)
+        findTrigger()
     }
 
     const replaceSelectionWithLink = (url: string) => {
@@ -358,59 +304,20 @@ export default function RichText({
     }, [value])
 
     const handleKeyDown = (e) => {
+        // An open menu takes the arrows, Enter, Tab, and Escape first.
+        if (trigger && menuRef.current?.handleKey(e)) {
+            e.preventDefault()
+            e.stopPropagation()
+            return
+        }
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && onSubmit) {
             onSubmit()
         }
-        if (e.key === '@' && e.shiftKey) {
-            const el = textarea.current
-            const container = mentionContainerRef.current
-            if (el && container) {
-                const caret = getCaretCoordinates(el, el.selectionStart)
-                const elRect = el.getBoundingClientRect()
-                const containerRect = container.getBoundingClientRect()
-                setMentionPos({
-                    top: caret.top + caret.height + elRect.top - containerRect.top,
-                    left: caret.left + elRect.left - containerRect.left,
-                })
-            }
-            setShowMentionProfiles(true)
-        }
-    }
-
-    const handleContainerClick = (e) => {
-        if (!e.target.contains(mentionProfilesRef.current)) {
-            setShowMentionProfiles(false)
-        }
-    }
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' || e.key === ' ') {
-                setShowMentionProfiles(false)
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown)
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [])
-
-    const handleProfileSelect = (profile, selectionStart) => {
-        const { selectionEnd } = getTextSelection()
-        const mention =
-            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-                ? `@max `
-                : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
-        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
-        setShowMentionProfiles(false)
-        textarea.current?.focus()
     }
 
     return (
         <div className="relative" {...getRootProps()}>
-            <div onClick={handleContainerClick}>
+            <div>
                 <input className="hidden" {...getInputProps()} />
                 <div
                     data-scheme="secondary"
@@ -464,7 +371,6 @@ export default function RichText({
                                         tooltip="Edit"
                                         onClick={() => setShowPreview(false)}
                                         active={!showPreview}
-                                        type="button"
                                     />
                                 </li>
                                 <li>
@@ -497,7 +403,6 @@ export default function RichText({
                                         onClick={() => setShowPreview(true)}
                                         active={showPreview}
                                         iconClassName="size-5 justify-center items-center flex"
-                                        type="button"
                                     />
                                 </li>
                             </>
@@ -518,21 +423,20 @@ export default function RichText({
                         </Markdown>
                     </div>
                 ) : (
-                    <div ref={mentionContainerRef} className="relative border border-primary border-t-0 rounded-b">
-                        {mentions && (
-                            <AnimatePresence>
-                                {showMentionProfiles && (
-                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
-                                        <MentionProfiles
-                                            body={value}
-                                            selectionStart={textarea.current?.selectionStart}
-                                            position={mentionPos}
-                                            onSelect={handleProfileSelect}
-                                        />
-                                    </div>
-                                )}
-                            </AnimatePresence>
-                        )}
+                    <div ref={suggestionContainerRef} className="relative border border-primary border-t-0 rounded-b">
+                        <AnimatePresence>
+                            {trigger && (
+                                <SuggestionMenu
+                                    key={`${trigger.char}-${trigger.start}`}
+                                    ref={menuRef}
+                                    trigger={trigger.char}
+                                    query={trigger.query}
+                                    position={trigger.position}
+                                    onSelect={handleSuggestionSelect}
+                                    onClose={closeSuggestions}
+                                />
+                            )}
+                        </AnimatePresence>
                         {label && !!value && (
                             <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
                         )}
@@ -541,7 +445,12 @@ export default function RichText({
                             disabled={imageLoading}
                             autoFocus={autoFocus}
                             className={`w-full [field-sizing:content] border-none rounded-b min-h-40 markdown prose dark:prose-invert prose-sm max-w-full text-primary [&_a]:font-semibold max-h-[500px] break-words [overflow-wrap:anywhere] ${className}`}
-                            onBlur={(e) => e.preventDefault()}
+                            onBlur={() => setTrigger(null)}
+                            onClick={findTrigger}
+                            onKeyUp={(e) => {
+                                // The caret can move without a change, for example with the arrows or Home.
+                                if (!['ArrowUp', 'ArrowDown', 'Enter', 'Tab', 'Escape'].includes(e.key)) findTrigger()
+                            }}
                             name="body"
                             value={value}
                             onChange={handleChange}

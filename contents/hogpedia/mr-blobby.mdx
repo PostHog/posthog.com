@@ -1,0 +1,65 @@
+---
+title: Mr Blobby
+description: Mr Blobby was PostHog's internal codename for a migration of session recording ingestion to S3 blob storage. It was named after a British children's television character of the 1990s, on the grounds that the project was nightmarishly hard.
+hogpedia:
+    categories: ['Hog lore', 'History']
+    aliases: ['Blob storage migration']
+    notices: ['lore']
+    infobox:
+        title: Mr Blobby
+        hog: HedgehogPanic
+        caption: PostHog names projects after the feeling of working on them.
+        rows:
+            - label: Type
+              value: Project codename
+            - label: Subject
+              value: Session recording ingestion
+            - label: Target
+              value: S3 blob storage
+            - label: Named after
+              value: A 1990s British television character
+            - label: Stated reason
+              value: The project was nightmarishly hard
+            - label: Source
+              value: '[/handbook/company/lore](/handbook/company/lore)'
+    seeAlso:
+        - 'Session replay|/hogpedia/session-replay'
+        - 'Hire movers|/hogpedia/hire-movers'
+        - 'Do more weird|/hogpedia/do-more-weird'
+        - 'Category: Hog lore|/hogpedia/category/hog-lore'
+    references:
+        - id: 1
+          text: 'PostHog handbook, "PostHog Lore and inside jokes"'
+          url: /handbook/company/lore
+        - id: 2
+          text: 'PostHog documentation, Session replay'
+          url: /docs/session-replay
+    external:
+        - title: 'PostHog lore, in the handbook'
+          url: /handbook/company/lore
+---
+
+**Mr Blobby** was the internal codename for a PostHog engineering project that changed how the company ingests [session recording](/hogpedia/session-replay) data, moving it to S3 blob storage.<Ref id="1" />
+
+## Etymology
+
+The name refers to a character from British children's television of the 1990s. The handbook describes that character as "creepy", and gives the reason for the choice directly: the project was "nightmarishly hard, which is why this character was fitting".<Ref id="1" />
+
+The naming therefore encodes the engineering experience rather than the technical objective. The word *blob* in "blob storage" is the connecting pun, and the handbook does not claim the pun was incidental.
+
+## Background
+
+A session recording is not a video file. The browser reports the changes to the page structure, and the player reconstructs the page from them.<Ref id="2" /> This keeps each recording small, and it means the ingestion path handles a continuous stream of small, ordered fragments rather than a single upload.
+
+Changing where that stream is written is therefore not a configuration change. The data has to keep arriving in order, from every session in progress, while the destination changes underneath it. This is the class of problem the codename was selected to describe.
+
+## Outcome
+
+The migration was completed. Session replay remains a PostHog product, and the recordings continue to arrive.<Ref id="2" />
+
+## Legacy
+
+Mr Blobby is recorded in the handbook's lore page, alongside the company's custom Slack emoji and its other anecdotes.<Ref id="1" />
+
+It belongs to a wider PostHog naming practice. The same page notes a fondness for absurd version numbers, such as the next-generation interface codenamed "PostHog 3000", and for GitHub issues titled "Nail [feature name]".<Ref id="1" /> Mr Blobby differs from these in that the name is not aspirational. It is a warning.
+

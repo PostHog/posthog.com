@@ -9,12 +9,6 @@ availability:
 sourceId: Datadog
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your Datadog account to sync logs, events, monitors, dashboards, and more into the PostHog data warehouse.
 
 ## Adding a data source

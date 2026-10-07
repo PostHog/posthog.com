@@ -75,14 +75,14 @@ importers:
         specifier: 0.8.0
         version: 0.8.0(react@18.3.1)
       '@posthog/hedgehog-mode':
-        specifier: ^0.0.56
-        version: 0.0.56(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.0.60
+        version: 0.0.60(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/icons':
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/twig-components':
-        specifier: 0.1.2
-        version: 0.1.2(react@18.3.1)
+        specifier: 0.1.3
+        version: 0.1.3(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -260,6 +260,9 @@ importers:
       gatsby-transformer-json:
         specifier: ^4.20.0
         version: 4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))
+      gemoji:
+        specifier: ^8.1.0
+        version: 8.1.0
       git-url-parse:
         specifier: ^11.6.0
         version: 11.6.0
@@ -3616,8 +3619,8 @@ packages:
       react:
         optional: true
 
-  '@posthog/hedgehog-mode@0.0.56':
-    resolution: {integrity: sha512-I6PjNTR4BfVMXbgO3XQOPTirclJx8hHaR58j6ebB9ZXJohHVkS3eFUmLmJuc+q4baKs9ZU1kGn0K76pYhOUHFg==}
+  '@posthog/hedgehog-mode@0.0.60':
+    resolution: {integrity: sha512-NPxA6Rg2u3jY36d9i8QUbggauaBuJ8rhd0c74sWnDgla7cjh8ZcjGCtTEjHtVWundHU7JII43+iNrSD1bUvQ+w==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
@@ -3629,8 +3632,8 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/twig-components@0.1.2':
-    resolution: {integrity: sha512-ZPYyLlYVzEALmof/AWTJZSTforxJfJR9oxNvaJmPg/x/SrVjgVhh5oGm1eJBFnfbnZmP3cjtwBKhpuTYk5+KeA==}
+  '@posthog/twig-components@0.1.3':
+    resolution: {integrity: sha512-k3yRoTjL5kyPbblPCY+2lIGYV/dHYpa9qSsWeDp1YWRgMC/tTZ0ysbS6SZZtoEaL9oZtHs95M192r4uNatsyrw==}
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
 
@@ -6072,10 +6075,9 @@ packages:
     engines: {node: '>=10.0.0'}
     deprecated: this version has critical issues, please update to the latest version
 
-  '@xmldom/xmldom@0.8.13':
-    resolution: {integrity: sha512-KRYzxepc14G/CEpEGc3Yn+JKaAeT63smlDr+vjB8jRfgTBBI9wRj/nkQEO+ucV8p8I9bfKLWp37uHgFrbntPvw==}
+  '@xmldom/xmldom@0.8.15':
+    resolution: {integrity: sha512-/5NV/vDALVFDXgLmfsy9TRCBlKwO2LNBFzpzvb9iIj+jR+eSc6DLYYvVOdivT/jm7MtU6TebYuRmzEOI7w40UA==}
     engines: {node: '>=10.0.0'}
-    deprecated: this version has critical issues, please update to the latest version
 
   '@xstate/fsm@1.6.5':
     resolution: {integrity: sha512-b5o1I6aLNeYlU/3CPlj/Z91ybk1gUsKT+5NAJI+2W4UjvS5KLG28K9v5UvNoFVjHV8PajVZ00RH3vnjyQO7ZAw==}
@@ -9998,6 +10000,9 @@ packages:
     engines: {node: '>=10'}
     deprecated: This package is no longer supported.
 
+  gemoji@8.1.0:
+    resolution: {integrity: sha512-HA4Gx59dw2+tn+UAa7XEV4ufUKI4fH1KgcbenVA9YKSj1QJTT0xh5Mwv5HMFNN3l2OtUe3ZIfuRwSyZS5pLIWw==}
+
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -13567,8 +13572,8 @@ packages:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
     engines: {node: '>= 6'}
 
-  pixi.js@8.19.0:
-    resolution: {integrity: sha512-pq1O6emA/GFjjeF+8d3Pb5t7knD8FsnfWGqQcRjYjsqFZ7QdzG1XgjLDUu0DFJRbafjV5+g8iNLFBx0b9649lg==}
+  pixi.js@8.20.1:
+    resolution: {integrity: sha512-akLVBMLvQbaEViqsmVraK0Njer1q4Q4lm4iNKuzvBiFrV8q+6/+HluJN3sWIwO663IBeQtUUS/CaXFJZs6ffXQ==}
 
   pkg-dir@3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
@@ -17187,8 +17192,8 @@ packages:
   webpack-sources@1.4.3:
     resolution: {integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==}
 
-  webpack-sources@3.3.3:
-    resolution: {integrity: sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==}
+  webpack-sources@3.6.0:
+    resolution: {integrity: sha512-EIMmPVvNI0CYXyRPp34F2Qk7W37/BZVZIofS6LAUnrNjCVahS+hO4mxwFJDjQjODTGZDtVzLYoN2+1dYkhk9qA==}
     engines: {node: '>=10.13.0'}
 
   webpack-stats-plugin@1.1.3:
@@ -21561,11 +21566,11 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@posthog/hedgehog-mode@0.0.56(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@posthog/hedgehog-mode@0.0.60(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       gsap: 3.13.0
       matter-js: 0.20.0
-      pixi.js: 8.19.0
+      pixi.js: 8.20.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-shadow: 20.6.0(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -21578,7 +21583,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/twig-components@0.1.2(react@18.3.1)':
+  '@posthog/twig-components@0.1.3(react@18.3.1)':
     dependencies:
       '@rrweb/record': 2.1.6
       '@rrweb/replay': 2.1.6
@@ -24973,7 +24978,7 @@ snapshots:
 
   '@xmldom/xmldom@0.8.11': {}
 
-  '@xmldom/xmldom@0.8.13': {}
+  '@xmldom/xmldom@0.8.15': {}
 
   '@xstate/fsm@1.6.5': {}
 
@@ -31193,6 +31198,8 @@ snapshots:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
 
+  gemoji@8.1.0: {}
+
   gensync@1.0.0-beta.2: {}
 
   geojson-vt@4.0.2: {}
@@ -35947,12 +35954,12 @@ snapshots:
 
   pirates@4.0.7: {}
 
-  pixi.js@8.19.0:
+  pixi.js@8.20.1:
     dependencies:
       '@pixi/colord': 2.9.6
       '@types/earcut': 3.0.0
       '@webgpu/types': 0.1.72
-      '@xmldom/xmldom': 0.8.13
+      '@xmldom/xmldom': 0.8.15
       earcut: 3.0.2
       eventemitter3: 5.0.1
       gifuct-js: 2.1.2
@@ -40408,7 +40415,7 @@ snapshots:
       source-list-map: 2.0.1
       source-map: 0.6.1
 
-  webpack-sources@3.3.3: {}
+  webpack-sources@3.6.0: {}
 
   webpack-stats-plugin@1.1.3: {}
 
@@ -40480,7 +40487,7 @@ snapshots:
       tapable: 2.2.3
       terser-webpack-plugin: 5.3.14(webpack@5.101.3)
       watchpack: 2.4.4
-      webpack-sources: 3.3.3
+      webpack-sources: 3.6.0
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
