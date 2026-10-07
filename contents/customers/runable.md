@@ -2,15 +2,15 @@
 title: How Runable builds an agent for small business owners and tracks everything in PostHog
 customer: Runable
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/LEGIT_2b37bf6d2f.png
-date: 2026-09-23
+    https://res.cloudinary.com/dmukukwp6/image/upload/RUNABLE_fb1f9c5d33.png
+date: 2026-10-07
 ---
 
 [Runable](https://runable.com) is an AI platform that turns natural language prompts into apps, websites, pitch decks, ad campaigns, and more. The company recently closed a $21M Series A – momentum that’s reflected in their product data sent to PostHog: event volume surged from 317k in August 2025 to **40M** in August 2026.
 
 Most of Runable's users are small business owners who want to leverage AI without setting up agents or API keys. "Almost 80% of the world still doesn’t use agents," says Eshaan Pawan, Head of Growth. "Because it's hard."
 
-When Runable started in mid-2025, no one knew what a general-purpose agent should look like. "Last year, it was still pretty new to anyone outside the AI sphere" says Ankit Kumar, an SDE at Runable. With no playbook to copy, the team had to learn from how people actually used it.
+When Runable started in mid-2025, no one knew what a general-purpose agent should look like. "Last year, it was still pretty new to anyone outside the AI sphere," says Ankit Kumar, an SDE at Runable. With no playbook to copy, the team had to learn from how people actually used it.
 
 Their first step was setting up [Product Analytics](/product-analytics) and [Session Replay](/session-replay), to see where people got stuck in the product. [Error Tracking](/error-tracking) and [Logs](/logs) followed for debugging, then [Feature Flags](/feature-flags) to safely roll out new features.
 
@@ -24,7 +24,7 @@ For Ankit, LLM traces in [AI Observability](/ai-observability) were the big win.
 
 ## Testing big changes with small rollouts
 
-In February, Runable tried a pricing page that built a custom plan around each user's use case instead of offering four or five fixed ones. It went out behind a feature flag to 10–20% of users, and the data showed it hurt conversion.
+In February, Runable tried a pricing page that built a custom plan around each user's use case instead of offering four or five fixed ones. It went out behind a feature flag to 10 to 20% of users, and the data showed it hurt conversion.
 
 "We noticed that users found the UI a bit confusing," Ankit says. About six weeks in, they scrapped it. "That decision was totally dependent on feature flags and event tracking in PostHog." Since only a slice of users ever saw it, there was no announcement to walk back and no flood of complaints – just a flag to turn off.
 
@@ -36,7 +36,7 @@ The growth team uses flags too, for dynamic pricing and credits. An agent sets t
 
 ## A refreshing use of dashboards
 
-At his last company, Eshaan worked with 40–50 people whose whole job was tying acquisition data to retention and product analytics. At Runable, he does the same work with a team of two. "Ankit set up the product metrics and I set up the acquisition metrics," he says. "And that's it. That's our team." He puts that down to having one source of truth: "It has really helped us cut down the number of people required."
+At his last company, Eshaan worked with 40 to 50 people whose whole job was tying acquisition data to retention and product analytics. At Runable, he does the same work with a team of two. "Ankit set up the product metrics and I set up the acquisition metrics," he says. "And that's it. That's our team." He puts that down to having one source of truth: "It has really helped us cut down the number of people required."
 
 Eshaan is a power user of both AI and UI. He might actually be the heaviest [dashboard](/docs/product-analytics/dashboards) user we've met, with over 500 insight tiles and about 100 he checks four or five times a day. "I'm the guy who's just refreshing all the dashboards every hour," he says. "I'm using it like people use Databricks plus Tableau."
 
@@ -57,9 +57,9 @@ The result is the whole [funnel](/docs/product-analytics/funnels) in one place: 
   quote={0}
  />
 
-The rest of Runable's team also uses both the Web UI and agents. 71 people have used PostHog in the last six months (about 30 of them daily), some clicking through insights and some asking an agent to pull the numbers. In the last month alone, their agents made 7,562 [tool calls](/docs/model-context-protocol/tools) from Claude Code, Codex, and Runable itself. Two thirds were SQL, the rest mostly logs and error tracking: ranking issues by how many users they hit, and pulling exception payloads to find the failing method.
+The rest of Runable's team also uses both the Web UI and agents. 71 people have used PostHog in the last six months (about 30 of them daily), some clicking through insights and some asking an agent to pull the numbers. In the last month alone, their agents made 7,562 [tool calls](/docs/model-context-protocol/tools) from Claude Code, Codex, and Runable itself. Two thirds were SQL, the rest mostly Logs and Error Tracking: ranking issues by how many users they hit, and pulling exception payloads to find the failing method.
 
-## Session replay monthly marathon
+## Session Replay monthly marathon
 
 When the numbers can't explain something, Eshaan watches user behavior directly in Session Replay. Once or twice a month, he blocks off a day to binge [recordings](/docs/session-replay/how-to-watch-recordings). "You're just obsessed with the problem," he says. "If you're not able to get it through data, you have to go and look at the session and see what's wrong."
 
