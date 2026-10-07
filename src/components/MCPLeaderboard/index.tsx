@@ -1,5 +1,7 @@
 import React, { memo, useEffect, useMemo, useState } from 'react'
-import { IconCheck, IconPlug } from '@posthog/icons'
+import { IconArrowUpRight, IconCheck, IconPlug } from '@posthog/icons'
+import { Logo } from '@posthog/brand/logo'
+import { HedgehogHotPopcorn } from '@posthog/brand/hoggies'
 import { useAppActions, useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import SEO from 'components/seo'
@@ -8,15 +10,31 @@ import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import useProduct from 'hooks/useProduct'
 import { CARD_H3, InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import { LineChart, ShareBars, SplitBar } from './charts'
+import BrandLogo from './BrandLogo'
+import CampfireHog from './CampfireHog'
+import { CATEGORIES } from './categories'
+import {
+    StickerAi,
+    StickerBulb,
+    StickerCloudCross,
+    StickerCrown,
+    StickerMicroscope,
+    StickerRobot,
+    StickerTerminal,
+    StickerTombstone,
+} from 'components/Stickers/Stickers'
+import Stickers from 'components/Stickers/Index'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import {
     LeaderboardRow,
     Metric,
     PALETTE,
     Series,
     Theme,
-    categoricalColor,
+    categoricalColors,
     clientColor,
     clientMaker,
     delta,
@@ -24,7 +42,6 @@ import {
     formatPct,
     getPeriods,
     groupedSeries,
-    knownShare,
     labShades,
     modelVendor,
     rankByAverage,
@@ -37,6 +54,8 @@ import {
 const VENDORS = ['Anthropic', 'OpenAI', 'xAI', 'Google', 'Open weights', 'Cursor', 'Other']
 const TOP_MODELS = 10
 const LIST_LENGTH = 12
+// Every chart covers at most this many days, so they all share one window.
+const MAX_DAYS = 60
 
 const metricLabel: Record<Metric, string> = {
     calls_pct: 'Tool calls',
@@ -57,6 +76,24 @@ function Card({
             {title && <h3 className={`${CARD_H3} mb-3`}>{title}</h3>}
             {children}
         </div>
+    )
+}
+
+// A section heading with a sticker in front, like the sections on /desktop.
+function StickerHeading({
+    sticker: Sticker,
+    children,
+}: {
+    sticker: React.ComponentType<{ className?: string }>
+    children: React.ReactNode
+}) {
+    return (
+        <SectionHeading>
+            <span className="inline-flex items-center gap-2.5">
+                <Sticker className="size-8 shrink-0 -rotate-3" />
+                {children}
+            </span>
+        </SectionHeading>
     )
 }
 
@@ -81,18 +118,30 @@ function MetricToggle({ metric, onChange }: { metric: Metric; onChange: (metric:
     )
 }
 
-const MEDALS = ['🥇', '🥈', '🥉']
-
-function Scoreboard({ rows, weeks, metric }: { rows: LeaderboardRow[]; weeks: string[]; metric: Metric }) {
-    const week = weeks[weeks.length - 1]
-    const series = groupedSeries(rows, 'model_vendor', weeks)
-    const shares = weekShares(rows, 'model_vendor', week, metric, { dropUnknown: true })
+function Scoreboard({
+    rows,
+    week,
+    byLab,
+    metric,
+}: {
+    rows: LeaderboardRow[]
+    week: string
+    byLab: Map<string, number[]>
+    metric: Metric
+}) {
+    const users = weekShares(rows, 'model_vendor', week, 'users_pct', { dropUnknown: true })
     const cards = VENDORS.filter((vendor) => vendor !== 'Other')
-        .map((vendor) => ({
-            vendor,
-            value: shares.find((share) => share.label === vendor)?.value ?? 0,
-            change: metric === 'calls_pct' ? delta(series.get(vendor) ?? []) : null,
-        }))
+        .map((vendor) => {
+            const calls = byLab.get(vendor) ?? []
+            return {
+                vendor,
+                value:
+                    metric === 'calls_pct'
+                        ? calls[calls.length - 1] ?? 0
+                        : users.find((share) => share.label === vendor)?.value ?? 0,
+                change: metric === 'calls_pct' ? delta(calls) : null,
+            }
+        })
         .sort((a, b) => b.value - a.value)
         .slice(0, 3)
     return (
@@ -100,12 +149,13 @@ function Scoreboard({ rows, weeks, metric }: { rows: LeaderboardRow[]; weeks: st
             {cards.map((card, i) => (
                 <div
                     key={card.vendor}
-                    className="border border-primary rounded p-4 bg-primary"
+                    className="relative border border-primary rounded p-4 bg-primary"
                     style={{ borderTop: `4px solid ${vendorColor(card.vendor, 'light')}` }}
                 >
+                    {i === 0 && <StickerCrown className="absolute -top-6 -right-3 size-10 rotate-12" />}
                     <div className="flex items-baseline justify-between">
-                        <span className="text-sm font-semibold text-secondary">
-                            {MEDALS[i]} {card.vendor}
+                        <span className="flex items-center gap-1.5 text-sm font-semibold text-secondary">
+                            <BrandLogo name={card.vendor} className="size-4 text-primary" /> {card.vendor}
                         </span>
                         {card.change !== null && (
                             <span className="text-xs tabular-nums text-muted">
@@ -122,47 +172,70 @@ function Scoreboard({ rows, weeks, metric }: { rows: LeaderboardRow[]; weeks: st
 
 function Header({
     rows,
-    modelWeeks,
+    labWeeks,
+    byLab,
     metric,
     setMetric,
 }: {
     rows: LeaderboardRow[]
-    modelWeeks: string[]
+    labWeeks: string[]
+    byLab: Map<string, number[]>
     metric: Metric
     setMetric: (metric: Metric) => void
 }) {
     return (
         <section id="overview" className="not-prose flex flex-col gap-6">
             <header>
-                <p className="text-sm font-semibold uppercase tracking-wide text-secondary m-0 mb-2">
-                    PostHog's MCP Leaderboard
-                </p>
                 <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !m-0 tracking-tight">
-                    Which AI is{' '}
+                    {/* The color mark, and a single-color one in dark mode, like the home page's AI demo. */}
+                    <Logo
+                        layout="logomark"
+                        variant="gradient"
+                        className="inline-block h-[0.8em] w-auto mr-3 align-baseline dark:hidden"
+                    />
+                    <Logo
+                        layout="logomark"
+                        variant="mono"
+                        className="hidden h-[0.8em] w-auto mr-3 align-baseline dark:inline-block"
+                    />
+                    PostHog MCP{' '}
                     <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
-                        winning?
+                        Leaderboard
                     </span>
+                    <Stickers
+                        name="StickerTrophy"
+                        label="1"
+                        className="inline-block size-12 ml-2 align-middle rotate-6"
+                    />
                 </h1>
                 <p className="text-lg text-secondary leading-relaxed mt-4 mb-0 max-w-prose">
                     Who's calling{' '}
                     <Link to="/mcp" className="font-semibold underline">
                         PostHog's MCP server
                     </Link>{' '}
-                    the most? We're keeping score in real time for our <s>internal</s> purposes and your viewing
-                    pleasure.
+                    the most? We're {/* Same hand-drawn highlight as the home page hero. */}
+                    <RoughAnnotation
+                        type="highlight"
+                        color="rgba(247, 165, 1, 0.15)"
+                        strokeWidth={1}
+                        padding={2}
+                        multiline
+                    >
+                        keeping score in real time
+                    </RoughAnnotation>{' '}
+                    for our <s>internal</s> purposes and your viewing pleasure.
                 </p>
             </header>
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-lg font-bold m-0">This week</h2>
+                <h2 className="text-lg font-bold m-0">This week*</h2>
                 <MetricToggle metric={metric} onChange={setMetric} />
             </div>
-            <Scoreboard rows={rows} weeks={modelWeeks} metric={metric} />
-            {metric === 'users_pct' && (
-                <p className="text-xs text-muted m-0 -mt-3">
-                    Share of weekly users who called with a model from that lab. People switch models, so this doesn't
-                    add up to 100%.
-                </p>
-            )}
+            <Scoreboard rows={rows} week={labWeeks[labWeeks.length - 1]} byLab={byLab} metric={metric} />
+            <p className="text-xs text-muted m-0 -mt-3">
+                {metric === 'users_pct' &&
+                    "Share of weekly users who called with a model from that lab. People switch models, so this doesn't add up to 100%. "}
+                * Agents self-report their model, except Codex, which sends it in its request metadata.
+            </p>
         </section>
     )
 }
@@ -218,13 +291,13 @@ function ModelRace({
 
     return (
         <section id="models" className="not-prose">
-            <SectionHeading>May the best model win</SectionHeading>
+            <StickerHeading sticker={StickerAi}>May the best model win</StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
                 <Card title="Daily tool calls by model" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={days} series={series} theme={theme} height={420} stacked />
                 </Card>
                 <Card title="Top models this week" className="@3xl/reader-content:col-span-2">
-                    <ShareBars items={models} />
+                    <ShareBars items={models} icon={(item) => <BrandLogo name={modelVendor(item.label)} />} />
                 </Card>
             </div>
         </section>
@@ -233,31 +306,38 @@ function ModelRace({
 
 function ClientRace({
     rows,
-    weeks,
+    labWeeks,
+    byLab,
+    week,
     theme,
     metric,
 }: {
     rows: LeaderboardRow[]
-    weeks: string[]
+    labWeeks: string[]
+    byLab: Map<string, number[]>
+    week: string
     theme: Theme
     metric: Metric
 }) {
-    const week = weeks[weeks.length - 1]
-    const byMaker = groupedSeries(rows, 'client', weeks, clientMaker)
-    const series = topSeries(byMaker, 8, (label) => vendorColor(label, theme))
+    // A darker shade of each lab's color (same hue, lower OKLCH lightness), so the bands read as
+    // strongly as the model chart above, whose leading models start at the dark end of each lab's shades.
+    const series = topSeries(byLab, 8, (label) => vendorColor(label, theme, -0.08))
     const clients = weekShares(rows, 'client', week, metric, { dropUnknown: true, dropOther: true, limit: 15 }).map(
         (share) => ({ ...share, color: clientColor(share.label, theme) })
     )
 
     return (
         <section id="clients" className="not-prose">
-            <SectionHeading>AI players battle it out</SectionHeading>
+            <StickerHeading sticker={StickerRobot}>AI players battle it out</StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
                 <Card title="Weekly tool calls by AI lab" className="@3xl/reader-content:col-span-3">
-                    <LineChart periods={weeks} series={series} theme={theme} height={420} stacked />
+                    <LineChart periods={labWeeks} series={series} theme={theme} height={420} stacked />
                 </Card>
                 <Card title="Top harnesses this week" className="@3xl/reader-content:col-span-2">
-                    <ShareBars items={clients} />
+                    <ShareBars
+                        items={clients}
+                        icon={(item) => <BrandLogo name={item.label} fallback={clientMaker(item.label)} />}
+                    />
                 </Card>
             </div>
         </section>
@@ -266,43 +346,76 @@ function ClientRace({
 
 const HOOD_FACETS: { facet: string; title: string }[] = [
     { facet: 'auth_method', title: 'How agents sign in' },
-    { facet: 'region', title: 'PostHog Cloud region' },
     { facet: 'model_source', title: 'How we know the model' },
 ]
 
 const UnderTheHood = memo(function UnderTheHood({
     rows,
-    weeks,
+    week,
+    days,
     theme,
 }: {
     rows: LeaderboardRow[]
-    weeks: string[]
+    week: string
+    days: string[]
     theme: Theme
 }) {
-    const week = weeks[weeks.length - 1]
     // Newest spec first, so the newest version always gets the same color.
-    const protocolSeries = topSeries(groupedSeries(rows, 'protocol_version', weeks), 5, () => '')
-        .sort((a, b) => (a.label === 'Other' ? 1 : b.label === 'Other' ? -1 : b.label.localeCompare(a.label)))
-        .map((s, i) => ({ ...s, color: categoricalColor(s.label, i) }))
+    const protocolOrdered = topSeries(groupedSeries(rows, 'protocol_version_daily', days), 5, () => '').sort((a, b) =>
+        a.label === 'Other' ? 1 : b.label === 'Other' ? -1 : b.label.localeCompare(a.label)
+    )
+    const protocolColors = categoricalColors(
+        protocolOrdered.map((s) => s.label),
+        theme
+    )
+    const protocolSeries = protocolOrdered.map((s) => ({ ...s, color: protocolColors.get(s.label) as string }))
     return (
         <section id="protocol" className="not-prose">
-            <SectionHeading>The rise and fall of MCP spec versions</SectionHeading>
+            <StickerHeading sticker={StickerTombstone}>The rise and fall of MCP spec versions</StickerHeading>
             <div className="flex flex-col gap-3">
-                <Card title="MCP spec version, weekly share of tool calls">
-                    <LineChart periods={weeks} series={protocolSeries} theme={theme} height={260} stacked />
+                <Card title="MCP spec version, daily share of tool calls">
+                    <LineChart periods={days} series={protocolSeries} theme={theme} height={260} stacked />
                 </Card>
-                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-3 gap-3">
-                    {HOOD_FACETS.map(({ facet, title }) => (
-                        <Card key={facet} title={title}>
-                            <SplitBar
-                                items={weekShares(rows, facet, week, 'calls_pct').map((share, i) => ({
-                                    ...share,
-                                    label: displayLabel(facet, share.label),
-                                    color: categoricalColor(share.label, i),
-                                }))}
-                            />
-                        </Card>
-                    ))}
+                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
+                    {HOOD_FACETS.map(({ facet, title }) => {
+                        const shares = weekShares(rows, facet, week, 'calls_pct').map((share) => ({
+                            ...share,
+                            label: displayLabel(facet, share.label),
+                        }))
+                        // Unknown labels stay, like in the bar. One color map covers every label in the
+                        // bar and the chart, so a label has the same color in both.
+                        const byLabel = groupedSeries(
+                            rows,
+                            `${facet}_daily`,
+                            days,
+                            (label) => displayLabel(facet, label),
+                            false
+                        )
+                        const colors = categoricalColors(
+                            [
+                                ...shares.map((share) => share.label),
+                                ...topSeries(byLabel, 5, () => '').map((s) => s.label),
+                            ],
+                            theme
+                        )
+                        const items = shares.map((share) => ({ ...share, color: colors.get(share.label) }))
+                        const series = topSeries(byLabel, 5, (label) => colors.get(label) as string)
+                        return (
+                            <Card key={facet} title={title}>
+                                <SplitBar items={items} />
+                                <div className="mt-3">
+                                    <LineChart
+                                        periods={days}
+                                        series={series}
+                                        theme={theme}
+                                        height={140}
+                                        stacked
+                                        legend={false}
+                                    />
+                                </div>
+                            </Card>
+                        )
+                    })}
                 </div>
             </div>
         </section>
@@ -314,15 +427,46 @@ function WhatAgentsDo({ rows, week, metric }: { rows: LeaderboardRow[]; week: st
         weekShares(rows, facet, week, by, { dropOther: true, limit: LIST_LENGTH })
     const categories = named('tool_category', metric).map((share) => ({ ...share, color: PALETTE.blue }))
     const tools = named('tool', 'users_pct').map((share) => ({ ...share, color: PALETTE.yellow }))
+    const products = useProduct() as {
+        handle: string
+        Icon?: React.ComponentType<{ className?: string }>
+        color?: string
+    }[]
+    // A category's icon is its product's icon and color, or its own icon and color.
+    const categoryIcon = (category: string) => {
+        const meta = CATEGORIES[category]
+        const product = meta?.product ? products.find((p) => p.handle === meta.product) : undefined
+        const Icon = product?.Icon ?? meta?.Icon
+        return Icon ? <Icon className={`size-4 text-${product?.color ?? meta?.color}`} /> : null
+    }
     return (
         <section id="tools" className="not-prose">
-            <SectionHeading>What agents are up to</SectionHeading>
+            <StickerHeading sticker={StickerTerminal}>What agents are up to</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                 <Card title="Tool categories">
-                    <ShareBars items={categories} />
+                    <ShareBars
+                        items={categories}
+                        icon={(item) => categoryIcon(item.label)}
+                        href={(item) => CATEGORIES[item.label]?.docs}
+                        labelOf={(item) => displayLabel('tool_category', item.label)}
+                    />
                 </Card>
-                <Card title="Most popular tools">
-                    <ShareBars items={tools} />
+                <Card
+                    title={
+                        <span className="flex items-center justify-between gap-2">
+                            Most popular tools
+                            <Link
+                                to="/docs/model-context-protocol/tools"
+                                state={{ newWindow: true }}
+                                aria-label="All PostHog MCP tools"
+                                className="text-secondary hover:text-primary"
+                            >
+                                <IconArrowUpRight className="size-4" />
+                            </Link>
+                        </span>
+                    }
+                >
+                    <ShareBars items={tools} labelClassName="font-mono text-[0.92em]" />
                 </Card>
             </div>
         </section>
@@ -335,7 +479,9 @@ const Intent = memo(function Intent({ rows, week }: { rows: LeaderboardRow[]; we
         .reduce((sum, share) => sum + share.value, 0)
     return (
         <section id="intent" className="not-prose">
-            <SectionHeading>Agents tell us 'why' {formatPct(withIntent, 0)} of times</SectionHeading>
+            <StickerHeading sticker={StickerBulb}>
+                Agents tell us 'why' {formatPct(withIntent, 0)} of times
+            </StickerHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-2 gap-3">
                 <Card title="How intent works">
                     <ol className="m-0 p-0 list-none flex flex-col gap-2 text-sm text-secondary leading-relaxed">
@@ -372,31 +518,34 @@ const Intent = memo(function Intent({ rows, week }: { rows: LeaderboardRow[]; we
 
 const Reliability = memo(function Reliability({
     rows,
-    weeks,
+    week,
+    days,
     theme,
 }: {
     rows: LeaderboardRow[]
-    weeks: string[]
+    week: string
+    days: string[]
     theme: Theme
 }) {
-    const week = weeks[weeks.length - 1]
-    const errorRate = totalSeries(rows, weeks, 'error_rate_pct')
-    const p95 = totalSeries(rows, weeks, 'p95_ms')
-    const p50 = totalSeries(rows, weeks, 'p50_ms')
+    const errorRate = totalSeries(rows, days, 'error_rate_pct')
+    const p95 = totalSeries(rows, days, 'p95_ms')
+    const p50 = totalSeries(rows, days, 'p50_ms')
     const clients = weekShares(rows, 'client', week, 'calls_pct', { dropUnknown: true, dropOther: true, limit: 10 })
         .map((share) => ({ ...share, value: share.errorRate ?? 0, color: clientColor(share.label, theme) }))
         .sort((a, b) => b.value - a.value)
-    const errorTypes = weekShares(rows, 'error_type', week, 'calls_pct').map((share, i) => ({
-        ...share,
-        color: categoricalColor(share.label, i),
-    }))
+    const errorShares = weekShares(rows, 'error_type', week, 'calls_pct')
+    const errorColors = categoricalColors(
+        errorShares.map((share) => share.label),
+        theme
+    )
+    const errorTypes = errorShares.map((share) => ({ ...share, color: errorColors.get(share.label) }))
     return (
         <section id="reliability" className="not-prose">
-            <SectionHeading>Reliability</SectionHeading>
+            <StickerHeading sticker={StickerCloudCross}>Reliability</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
                 <Card title="Error rate">
                     <LineChart
-                        periods={weeks}
+                        periods={days}
                         theme={theme}
                         height={220}
                         format="rate"
@@ -407,7 +556,7 @@ const Reliability = memo(function Reliability({
                 </Card>
                 <Card title="Latency">
                     <LineChart
-                        periods={weeks}
+                        periods={days}
                         theme={theme}
                         height={300}
                         format="seconds"
@@ -420,6 +569,7 @@ const Reliability = memo(function Reliability({
                 <Card title="Error rate by client this week" className="@2xl/reader-content:col-span-2">
                     <ShareBars
                         items={clients}
+                        icon={(item) => <BrandLogo name={item.label} fallback={clientMaker(item.label)} />}
                         detail={(item) => (item.p95 ? `p95 ${(item.p95 / 1000).toFixed(1)}s` : null)}
                     />
                     <Note>Top ten clients with the most calls.</Note>
@@ -454,7 +604,7 @@ const STEPS: React.ReactNode[] = [
 const HowItWorks = memo(function HowItWorks({ fetchedAt }: { fetchedAt: string | null }) {
     return (
         <section id="how-it-works" className="not-prose">
-            <SectionHeading>How this page works</SectionHeading>
+            <StickerHeading sticker={StickerMicroscope}>How this page works</StickerHeading>
             <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 @4xl/reader-content:grid-cols-4 gap-3">
                 {STEPS.map((step, i) => (
                     <Card key={i}>
@@ -482,48 +632,41 @@ function MCPAnalyticsAd() {
     ]
     return (
         <aside aria-label="MCP analytics" className="not-prose">
-            <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6">
-                <span className="absolute top-3 right-3 text-[11px] font-semibold uppercase tracking-wide text-muted border border-primary rounded px-1.5 py-px">
-                    Ad, sort of
+            <div className="relative border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6 @2xl/reader-content:grid @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @2xl/reader-content:gap-2">
+                <span className="block w-fit ml-auto mb-3 @2xl/reader-content:mb-0 @2xl/reader-content:absolute @2xl/reader-content:top-3 @2xl/reader-content:right-3 text-[11px] font-semibold uppercase tracking-wide text-muted border border-primary rounded px-1.5 py-px">
+                    Yeah, sorry, this is an ad
                 </span>
-                <div className="flex items-center gap-2 text-blue mb-2">
-                    <IconPlug className="size-6" />
-                    <span className="font-bold">MCP analytics</span>
+                <div className="min-w-0">
+                    <div className="flex items-center gap-2 text-blue mb-2">
+                        <IconPlug className="size-6" />
+                        <span className="font-bold">MCP analytics</span>
+                    </div>
+                    <h2 className="text-2xl font-bold text-primary m-0 mb-4">Run an MCP server? See your own stats</h2>
+                    <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
+                        {features.map((feature) => (
+                            <li key={feature} className="flex items-start gap-2">
+                                <IconCheck className="size-4 shrink-0 text-green mt-0.5" />
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-sm text-secondary m-0 mb-4">
+                        Run this in your MCP server's project:{' '}
+                        <InlineCode>npx -y @posthog/wizard@latest mcp-analytics</InlineCode>
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        <OSButton asLink to="/docs/mcp-analytics/start-here" variant="primary" size="md">
+                            Get started
+                        </OSButton>
+                        <OSButton asLink to="/docs/mcp-analytics" variant="secondary" size="md">
+                            Read the docs
+                        </OSButton>
+                    </div>
                 </div>
-                <h2 className="text-2xl font-bold text-primary m-0 mb-2 pr-20">
-                    Run an MCP server? See your own stats
-                </h2>
-                <p className="text-secondary leading-relaxed m-0 mb-4 max-w-prose">
-                    <Link
-                        to="/community/profiles/32207"
-                        state={{ newWindow: true }}
-                        className="font-semibold underline"
-                    >
-                        @rafa
-                    </Link>{' '}
-                    built this during a hackathon. We figured we might as well show you the real data. Add PostHog's MCP
-                    analytics to your server and see what your own calls look like.
-                </p>
-                <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
-                    {features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-2">
-                            <IconCheck className="size-4 shrink-0 text-green mt-0.5" />
-                            {feature}
-                        </li>
-                    ))}
-                </ul>
-                <p className="text-sm text-secondary m-0 mb-4">
-                    Run this in your MCP server's project:{' '}
-                    <InlineCode>npx -y @posthog/wizard@latest mcp-analytics</InlineCode>
-                </p>
-                <div className="flex flex-wrap gap-2">
-                    <OSButton asLink to="/docs/mcp-analytics/start-here" variant="primary" size="md">
-                        Get started
-                    </OSButton>
-                    <OSButton asLink to="/docs/mcp-analytics" variant="secondary" size="md">
-                        Read the docs
-                    </OSButton>
-                </div>
+                <HedgehogHotPopcorn
+                    title="A hedgehog eating popcorn, watching the leaderboard"
+                    className="hidden @2xl/reader-content:block justify-self-end self-center pt-8 w-44 @4xl/reader-content:w-52"
+                />
             </div>
         </aside>
     )
@@ -531,11 +674,26 @@ function MCPAnalyticsAd() {
 
 function CTA() {
     return (
-        <section id="get-started" className="not-prose mb-20">
-            <SectionHeading lede="Not a fan of our UI? Install the PostHog MCP.">
-                Let your agent use PostHog too
+        <section
+            id="get-started"
+            className="not-prose mt-9 mb-20 grid grid-cols-1 items-center gap-x-8 gap-y-4 @2xl/reader-content:gap-y-2 @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @5xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(0,24rem)_auto]"
+        >
+            {/* One column on small screens, without the hog. Two columns from @2xl: the heading over the
+                install box, and the hog beside both. Three columns from @5xl: heading, install box, hog. */}
+            <SectionHeading lede="Not a fan of our UI? Install the PostHog MCP." className="!mb-0 [&>p]:!mb-0">
+                Let{' '}
+                <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1">
+                    your agent
+                </span>{' '}
+                use PostHog too
             </SectionHeading>
-            <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
+            <MCPInstallCTA
+                className="max-w-md @5xl/reader-content:col-start-2 @5xl/reader-content:row-start-1"
+                showDesktopLink={false}
+            />
+            <div className="hidden @2xl/reader-content:block @2xl/reader-content:col-start-2 @2xl/reader-content:row-start-1 @2xl/reader-content:row-span-2 @5xl/reader-content:col-start-3 @5xl/reader-content:row-span-1">
+                <CampfireHog />
+            </div>
         </section>
     )
 }
@@ -571,12 +729,18 @@ export default function MCPLeaderboard({
     }, [])
 
     const weeks = useMemo(() => getPeriods(rows, 'total'), [rows])
-    // Models were first recorded on September 9, 2026, so the model charts start there.
-    const modelWeeks = useMemo(() => weeks.filter((week) => knownShare(rows, 'model_vendor', week) > 0), [rows, weeks])
-    const days = useMemo(
-        () => getPeriods(rows, 'model_daily').filter((day) => knownShare(rows, 'model_daily', day) > 0),
-        [rows]
-    )
+    // Every chart covers the last MAX_DAYS days, so they all share one window. Models were first
+    // recorded on September 9, 2026, so the model charts have a gap before that day.
+    const days = useMemo(() => getPeriods(rows, 'total_daily').slice(-MAX_DAYS), [rows])
+    // The weeks that overlap that window, for the weekly lab chart.
+    const labWeeks = useMemo(() => {
+        if (days.length === 0) return []
+        const cutoff = new Date(Date.parse(days[0]) - 6 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+        return weeks.filter((week) => week >= cutoff)
+    }, [weeks, days])
+    // Calls share per model lab and week. The scoreboard and the weekly lab chart both read this, so
+    // they always show the same numbers.
+    const byLab = useMemo(() => groupedSeries(rows, 'model_vendor', labWeeks), [rows, labWeeks])
     const latest = weeks[weeks.length - 1]
 
     return (
@@ -596,19 +760,32 @@ export default function MCPLeaderboard({
                 showQuestions={false}
             >
                 <div className="flex flex-col gap-12 max-w-5xl mx-auto w-full">
-                    {weeks.length === 0 || modelWeeks.length === 0 || days.length === 0 ? (
+                    {weeks.length === 0 || labWeeks.length === 0 || days.length === 0 ? (
                         <Unavailable />
                     ) : (
                         <>
-                            <Header rows={rows} modelWeeks={modelWeeks} metric={metric} setMetric={setMetric} />
+                            <Header
+                                rows={rows}
+                                labWeeks={labWeeks}
+                                byLab={byLab}
+                                metric={metric}
+                                setMetric={setMetric}
+                            />
                             <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
                                 <ModelRace rows={rows} days={days} week={latest} theme={theme} metric={metric} />
-                                <ClientRace rows={rows} weeks={weeks} theme={theme} metric={metric} />
-                                <UnderTheHood rows={rows} weeks={weeks} theme={theme} />
+                                <ClientRace
+                                    rows={rows}
+                                    labWeeks={labWeeks}
+                                    byLab={byLab}
+                                    week={latest}
+                                    theme={theme}
+                                    metric={metric}
+                                />
+                                <UnderTheHood rows={rows} week={latest} days={days} theme={theme} />
                                 <WhatAgentsDo rows={rows} week={latest} metric={metric} />
                                 <Intent rows={rows} week={latest} />
                                 <MCPAnalyticsAd />
-                                <Reliability rows={rows} weeks={weeks} theme={theme} />
+                                <Reliability rows={rows} week={latest} days={days} theme={theme} />
                                 <HowItWorks fetchedAt={fetchedAt} />
                             </div>
                         </>

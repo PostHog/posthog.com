@@ -183,12 +183,9 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 (And it costs less than a Star Wars LEGO set)
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-2 mb-12 px-4">
-                <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
-                    <>Buy a kit now</>
-                </CallToAction>
-                <CallToAction href="https://github.com/PostHog/DeskHog" type="secondary" externalNoIcon>
+                <CallToAction href="https://github.com/PostHog/DeskHog" type="primary" externalNoIcon>
                     <>
-                        3D print it
+                        3D print your own
                         <IconExternal className="size-4 inline-block ml-1" />
                     </>
                 </CallToAction>
@@ -262,9 +259,7 @@ const DeskHogCTA = () => {
                             <span className="uppercase font-semibold text-xs text-white">DIY-friendly</span>
                         </span>
                         <p className="text-4xl font-bold m-0 md:mt-2">DeskHog Kit</p>
-                        <p className="opacity-50 m-0 mb-4 text-sm">
-                            Act now and get a palm-sized slice of developer joy.
-                        </p>
+                        <p className="opacity-50 m-0 mb-4 text-sm">A palm-sized slice of developer joy.</p>
                     </div>
                     <ul className="p-0 m-0 space-y-2 text-left">
                         <li className="list-none">
@@ -273,7 +268,7 @@ const DeskHogCTA = () => {
                                 <span className="font-bold text-red text-xl uppercase">$35</span>
                                 <br className="md:hidden" />
                                 <span className="text-xs opacity-50">
-                                    <span className="text-sm">Limited stock remaining</span>
+                                    <span className="text-sm">Out of stock</span>
                                 </span>
                             </div>
                         </li>
@@ -281,14 +276,14 @@ const DeskHogCTA = () => {
 
                     <div className="py-6">
                         <CallToAction
-                            href="https://posthog.com/merch"
+                            href="https://github.com/PostHog/DeskHog"
                             type="primary"
                             size="absurd"
                             width="64"
                             className="animate-grow-sm"
                             externalNoIcon
                         >
-                            Get your DeskHog
+                            3D print your own
                         </CallToAction>
                     </div>
 
@@ -297,11 +292,10 @@ const DeskHogCTA = () => {
                             <IconHandwave className="opacity-75" />
                         </span>
                         <p className="text-left text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
-                            <strong>Supplies are limited, but more are on the way.</strong>{' '}
-                            <br className="hidden md:block" />
-                            Don't want to wait? You can{' '}
+                            <strong>The kit is out of stock.</strong> <br className="hidden md:block" />
+                            You can still{' '}
                             <a href="https://github.com/PostHog/DeskHog" target="_blank" rel="noopener noreferrer">
-                                3D print it
+                                3D print your own
                             </a>
                             !
                         </p>
