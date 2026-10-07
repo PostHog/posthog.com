@@ -28,7 +28,12 @@ const Y_FORMATS = {
     seconds: (value: number) => `${(value / 1000).toFixed(1)}s`,
 }
 
-function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boolean): ChartOptions<'line'> {
+function chartOptions(
+    theme: Theme,
+    format: keyof typeof Y_FORMATS,
+    stacked: boolean,
+    legend: boolean
+): ChartOptions<'line'> {
     const colors = axisColors(theme)
     const formatY = Y_FORMATS[format]
     return {
@@ -38,11 +43,13 @@ function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boo
         interaction: { mode: 'index', intersect: false },
         plugins: {
             legend: {
+                display: legend,
                 position: 'bottom',
                 labels: { color: colors.text, boxWidth: 10, boxHeight: 10, font: { size: 11 } },
             },
             tooltip: {
-                itemSort: (a, b) => (b.parsed.y ?? 0) - (a.parsed.y ?? 0),
+                // Series order (the legend order) on every hover, so a name never moves between periods.
+                itemSort: (a, b) => a.datasetIndex - b.datasetIndex,
                 callbacks: {
                     label: (item) => `${item.dataset.label}: ${formatY(item.parsed.y ?? 0)}`,
                 },
@@ -69,6 +76,7 @@ export function LineChart({
     format = 'share',
     stacked = false,
     height = 260,
+    legend = true,
 }: {
     periods: string[]
     series: Series[]
@@ -76,16 +84,21 @@ export function LineChart({
     format?: keyof typeof Y_FORMATS
     stacked?: boolean
     height?: number
+    legend?: boolean
 }): JSX.Element {
-    const options = useMemo(() => chartOptions(theme, format, stacked), [theme, format, stacked])
-    const data = useMemo(
-        () => ({
-            labels: periods.map(formatDay),
+    const options = useMemo(() => chartOptions(theme, format, stacked, legend), [theme, format, stacked, legend])
+    const data = useMemo(() => {
+        // In a stacked share chart, a period where every series is zero has no data. The chart starts at
+        // the first period with data, and a later empty period shows as a gap instead of 0%.
+        const empty = periods.map((_, i) => stacked && series.every((s) => !s.data[i]))
+        const start = Math.max(0, empty.indexOf(false))
+        return {
+            labels: periods.slice(start).map(formatDay),
             datasets: series.map((s) =>
                 stacked
                     ? {
                           label: s.label,
-                          data: s.data,
+                          data: s.data.slice(start).map((value, i) => (empty[start + i] ? null : value)),
                           borderColor: s.color,
                           backgroundColor: `${s.color}CC`,
                           borderWidth: 1,
@@ -95,7 +108,7 @@ export function LineChart({
                       }
                     : {
                           label: s.label,
-                          data: s.data,
+                          data: s.data.slice(start),
                           borderColor: s.color,
                           backgroundColor: s.color,
                           borderWidth: 2,
@@ -103,9 +116,8 @@ export function LineChart({
                           tension: 0.25,
                       }
             ),
-        }),
-        [periods, series, stacked]
-    )
+        }
+    }, [periods, series, stacked])
     return (
         <div style={{ height }}>
             <Line options={options} data={data} />

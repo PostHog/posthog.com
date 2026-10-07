@@ -146,7 +146,6 @@ const CLIENT_MAKER: Record<string, string> = {
 // Display names for raw labels. Labels without an entry show as they come from the endpoint.
 const DISPLAY_LABELS: Record<string, Record<string, string>> = {
     auth_method: { oauth: 'OAuth', personal_api_key: 'Personal API key' },
-    region: { us: 'US', eu: 'EU' },
     model_source: { self_reported: 'Agent said so', client_metadata: 'Client metadata' },
     client: { Other: 'Other agents' },
 }
@@ -227,32 +226,28 @@ export const weekShares = (
         .slice(0, limit)
 }
 
-// One value of the `total` facet for each week, for the growth and reliability charts.
+// One value of the `total_daily` facet for each day, for the reliability charts.
 export const totalSeries = (
     rows: LeaderboardRow[],
-    weeks: string[],
-    key: 'calls_index' | 'users_index' | 'error_rate_pct' | 'p50_ms' | 'p95_ms'
+    days: string[],
+    key: 'error_rate_pct' | 'p50_ms' | 'p95_ms'
 ): (number | null)[] => {
-    const byWeek = new Map(facetRows(rows, 'total').map((row) => [row.week, row[key]]))
-    return weeks.map((week) => byWeek.get(week) ?? null)
+    const byDay = new Map(facetRows(rows, 'total_daily').map((row) => [row.week, row[key]]))
+    return days.map((day) => byDay.get(day) ?? null)
 }
-
-// Share of a facet that is known, so a chart can say "62% of calls reported a model".
-export const knownShare = (rows: LeaderboardRow[], facet: string, week: string, grp = ''): number =>
-    facetRows(rows, facet, grp)
-        .filter((row) => row.week === week && !UNKNOWN_LABELS.has(row.label))
-        .reduce((sum, row) => sum + (row.calls_pct ?? 0), 0)
 
 // Calls share per group and period, summed over the labels that `groupOf` maps into each group.
 // Calls shares add up within a period, so grouping (for example clients into makers) is exact.
+// With `dropUnknown` (the default), unknown labels are removed and each period renormalizes to 100.
 export const groupedSeries = (
     rows: LeaderboardRow[],
     facet: string,
     periods: string[],
-    groupOf: (label: string) => string = (label) => label
+    groupOf: (label: string) => string = (label) => label,
+    dropUnknown = true
 ): Map<string, number[]> => {
     const byGroup = new Map<string, number[]>()
-    const known = facetRows(rows, facet).filter((row) => !UNKNOWN_LABELS.has(row.label))
+    const known = facetRows(rows, facet).filter((row) => !dropUnknown || !UNKNOWN_LABELS.has(row.label))
     periods.forEach((period, i) => {
         const periodRows = known.filter((row) => row.week === period)
         const total = periodRows.reduce((sum, row) => sum + (row.calls_pct ?? 0), 0)
