@@ -544,6 +544,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Field guide to wild users',
+                    link: '/field-guide',
+                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
+                },
+                {
+                    type: 'item',
                     label: 'Things that spark joy',
                     link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
