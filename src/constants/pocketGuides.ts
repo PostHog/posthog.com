@@ -39,6 +39,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'blue',
         volume: 5,
         docsProduct: 'product-analytics',
+        learnPath: '/docs/product-analytics/learn/introduction',
         countOrientationPages: true,
     },
     {

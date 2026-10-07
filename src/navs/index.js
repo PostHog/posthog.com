@@ -1448,6 +1448,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
+                        name: 'Reverse demo calls',
+                        url: '/handbook/growth/sales/reverse-demo-calls',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                     },
@@ -1502,10 +1506,6 @@ export const handbookSidebar = [
                     {
                         name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
-                    },
-                    {
-                        name: 'Customer-led calls',
-                        url: '/handbook/cs-and-onboarding/customer-led-calls',
                     },
                     {
                         name: 'Unengaged customers',
@@ -2186,7 +2186,7 @@ export const communityMenu = {
             name: 'Questions',
             icon: 'IconMessage',
             color: 'seagreen',
-            url: '/questions',
+            url: '/forum',
         },
         {
             name: 'Guides',
@@ -5139,7 +5139,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/questions/topic/session-replay',
+                    url: '/forum/t/questions?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,
@@ -8182,6 +8182,15 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Broadcasts',
+                },
+                {
+                    name: 'Send a broadcast',
+                    url: '/docs/workflows/broadcasts',
+                    icon: 'IconSend',
+                    color: 'orange',
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -8209,10 +8218,6 @@ export const docsMenu = {
                         {
                             name: 'Create emails with PostHog AI',
                             url: '/docs/workflows/create-emails-ai',
-                        },
-                        {
-                            name: 'Send a broadcast',
-                            url: '/docs/workflows/broadcasts',
                         },
                         {
                             name: 'Run AI tasks from a workflow',

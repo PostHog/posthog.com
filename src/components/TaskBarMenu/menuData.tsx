@@ -356,7 +356,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item' as const,
                     label: 'Forums',
-                    link: '/questions',
+                    link: '/forum',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
                 { type: 'separator' },

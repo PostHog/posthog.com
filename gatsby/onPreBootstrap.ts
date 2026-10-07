@@ -2,10 +2,13 @@ import { GatsbyNode } from 'gatsby'
 
 import path from 'path'
 import fs from 'fs'
+import { execFile } from 'child_process'
+import { promisify } from 'util'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
+import { cacheFetchResponsesInDevelopment } from './devFetchCache'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -49,9 +52,38 @@ function invalidateGitCacheIfBranchChanged(): void {
     fs.writeFileSync(BRANCH_MANIFEST_FILE, JSON.stringify({ branch: currentBranch }))
 }
 
-export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+const execFileAsync = promisify(execFile)
+
+async function sparseCloneGitSource(store): Promise<void> {
+    const { name, remote, branch, patterns } = store
+        .getState()
+        .flattenedPlugins.find((plugin) => plugin.name === 'gatsby-source-git').pluginOptions
+    const cloneDir = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, name)
+    if (fs.existsSync(cloneDir)) return
+
+    try {
+        await execFileAsync('git', [
+            'clone',
+            '--depth=1',
+            `--branch=${branch}`,
+            '--filter=blob:none',
+            '--no-checkout',
+            remote,
+            cloneDir,
+        ])
+        await execFileAsync('git', ['-C', cloneDir, 'sparse-checkout', 'set', '--no-cone', ...patterns])
+        await execFileAsync('git', ['-C', cloneDir, 'checkout', branch])
+    } catch (error) {
+        console.warn('Sparse clone of gatsby-source-git failed, falling back to a full clone:', error)
+        fs.rmSync(cloneDir, { recursive: true, force: true })
+    }
+}
+
+export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+    cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
+    await sparseCloneGitSource(store)
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
