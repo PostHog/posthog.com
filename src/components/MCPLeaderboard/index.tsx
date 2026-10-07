@@ -35,9 +35,6 @@ import {
 } from './data'
 
 const VENDORS = ['Anthropic', 'OpenAI', 'xAI', 'Google', 'Open weights', 'Cursor', 'Other']
-const MODEL_AGNOSTIC_CLIENTS = ['Cursor', 'opencode', 'Other']
-// First-party apps that ship with their maker's model, shown small for contrast.
-const FIRST_PARTY_CLIENTS = ['Claude Code', 'OpenAI Codex']
 const TOP_MODELS = 10
 const LIST_LENGTH = 12
 
@@ -267,80 +264,6 @@ function ClientRace({
     )
 }
 
-function ClientModels({
-    rows,
-    client,
-    week,
-    theme,
-}: {
-    rows: LeaderboardRow[]
-    client: string
-    week: string
-    theme: Theme
-}) {
-    const shares = weekShares(rows, 'model_vendor_by_client', week, 'calls_pct', {
-        grp: client,
-        dropUnknown: true,
-    }).map((share) => ({ ...share, color: vendorColor(share.label, theme) }))
-    const reported = knownShare(rows, 'model_vendor_by_client', week, client)
-    return (
-        <div>
-            <h3 className="text-sm font-bold text-primary m-0 mb-1.5">{displayLabel('client', client)}</h3>
-            <SplitBar items={shares} caption={`${formatPct(reported, 0)} of this client's calls named a model.`} />
-        </div>
-    )
-}
-
-const BringYourOwnModel = memo(function BringYourOwnModel({
-    rows,
-    week,
-    theme,
-}: {
-    rows: LeaderboardRow[]
-    week: string
-    theme: Theme
-}) {
-    const hasData = (client: string) => knownShare(rows, 'model_vendor_by_client', week, client) > 0
-    return (
-        <section id="byom" className="not-prose">
-            <SectionHeading>Model mix and match</SectionHeading>
-            <Card>
-                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-8 gap-y-5 pb-5 mb-5 border-b border-primary">
-                    {FIRST_PARTY_CLIENTS.filter(hasData).map((client) => (
-                        <ClientModels key={client} rows={rows} client={client} week={week} theme={theme} />
-                    ))}
-                </div>
-                <div className="flex flex-col gap-5">
-                    {MODEL_AGNOSTIC_CLIENTS.filter(hasData).map((client) => (
-                        <ClientModels key={client} rows={rows} client={client} week={week} theme={theme} />
-                    ))}
-                </div>
-            </Card>
-        </section>
-    )
-})
-
-const Growth = memo(function Growth({ rows, weeks, theme }: { rows: LeaderboardRow[]; weeks: string[]; theme: Theme }) {
-    const calls = totalSeries(rows, weeks, 'calls_index')
-    const users = totalSeries(rows, weeks, 'users_index')
-    return (
-        <section id="growth" className="not-prose">
-            <SectionHeading>How much our tool calls are X-ing</SectionHeading>
-            <Card title="Weekly tool call growth">
-                <LineChart
-                    periods={weeks}
-                    theme={theme}
-                    format="multiple"
-                    series={[
-                        { label: 'Tool calls', color: PALETTE.red, data: calls },
-                        { label: 'Weekly users', color: PALETTE.blue, data: users },
-                    ]}
-                />
-            </Card>
-        </section>
-    )
-})
-
 const HOOD_FACETS: { facet: string; title: string }[] = [
     { facet: 'auth_method', title: 'How agents sign in' },
     { facet: 'region', title: 'PostHog Cloud region' },
@@ -568,11 +491,18 @@ function MCPAnalyticsAd() {
                     <span className="font-bold">MCP analytics</span>
                 </div>
                 <h2 className="text-2xl font-bold text-primary m-0 mb-2 pr-20">
-                    Run an MCP server? Get this page for it.
+                    Run an MCP server? See your own stats
                 </h2>
                 <p className="text-secondary leading-relaxed m-0 mb-4 max-w-prose">
-                    Everything here comes from PostHog's MCP analytics running on our server. Install it on yours and
-                    you get the same breakdowns for your users, plus the parts we keep private.
+                    <Link
+                        to="/community/profiles/32207"
+                        state={{ newWindow: true }}
+                        className="font-semibold underline"
+                    >
+                        @rafa
+                    </Link>{' '}
+                    built this during a hackathon. We figured we might as well show you the real data. Add PostHog's MCP
+                    analytics to your server and see what your own calls look like.
                 </p>
                 <ul className="list-none m-0 p-0 mb-5 grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-primary">
                     {features.map((feature) => (
@@ -602,8 +532,8 @@ function MCPAnalyticsAd() {
 function CTA() {
     return (
         <section id="get-started" className="not-prose mb-20">
-            <SectionHeading lede="Connect your agent and next week's numbers will include you.">
-                Join the leaderboard
+            <SectionHeading lede="Not a fan of our UI? Install the PostHog MCP.">
+                Let your agent use PostHog too
             </SectionHeading>
             <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
         </section>
@@ -674,8 +604,6 @@ export default function MCPLeaderboard({
                             <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
                                 <ModelRace rows={rows} days={days} week={latest} theme={theme} metric={metric} />
                                 <ClientRace rows={rows} weeks={weeks} theme={theme} metric={metric} />
-                                <BringYourOwnModel rows={rows} week={latest} theme={theme} />
-                                <Growth rows={rows} weeks={weeks} theme={theme} />
                                 <UnderTheHood rows={rows} weeks={weeks} theme={theme} />
                                 <WhatAgentsDo rows={rows} week={latest} metric={metric} />
                                 <Intent rows={rows} week={latest} />
