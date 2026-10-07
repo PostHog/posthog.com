@@ -29,6 +29,7 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
+import JunoLogo from '../components/CustomerLogos/JunoLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -65,6 +66,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
 
 export type CustomerLogo =
     | React.ComponentType<{ className?: string }>
@@ -975,6 +977,29 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    juno: {
+        name: 'Juno',
+        toolsUsed: ['error_tracking', 'product_analytics'],
+        industries: ['Healthcare', 'AI'],
+        users: ['Engineering', 'Product'],
+        notes: 'AI health assistant for chronic illness',
+        featured: false,
+        logo: JunoLogo,
+        height: 10,
+        quotes: {
+            marshall_gould: {
+                name: 'Marshall Gould',
+                role: 'CEO',
+                image: {
+                    thumb: '/images/customers/marshall-gould.jpeg',
+                },
+                products: {
+                    self_driving:
+                        "It's incredible that these agents can run autonomously to identify these things. You wake up in the morning and there are PRs waiting for you. All you have to do is review and merge.",
+                },
+            },
+        },
+    },
     'mention-me': {
         name: 'Mention Me',
         toolsUsed: [
@@ -1014,6 +1039,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
             },
         },
+    },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
     },
     mintlify: {
         name: 'Mintlify',

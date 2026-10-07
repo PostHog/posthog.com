@@ -9,12 +9,6 @@ availability:
 sourceId: Mailgun
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Mailgun connector syncs your transactional and bulk email data into PostHog, including events, bounces, complaints, unsubscribes, templates, and more.
 
 ## Adding a data source

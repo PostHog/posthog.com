@@ -242,8 +242,8 @@ const featureTabs: TabbedCarouselTab[] = [
                 <h2 className="mt-0 mb-2 text-2xl font-bold">Push insights to where you already work</h2>
                 <p className="text-secondary text-sm">
                     Pipe product insights into channels on a schedule, or fire a custom Slack message every time a
-                    PostHog event matches your filter. Paste a PostHog link in any thread and it unfurls into a rich
-                    preview that respects your project's access permissions.
+                    PostHog event matches your filter. Paste an insight or dashboard link in a channel with the bot and
+                    it unfurls into a rich preview that respects your project's access permissions.
                 </p>
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
@@ -462,25 +462,25 @@ const compareRows: CompareRow[] = [
         label: 'Best for',
         ai: 'Exploring data, writing SQL with words instead of, you know, SQL. Building dashboards and configuring features without leaving the tab.',
         slack: 'Drop-and-go work from wherever you already are. Small fixes, content tweaks, and data questions in-thread.',
-        code: 'Focused engineering work. Parallel agents, deep refactors, and signal-driven PRs from the inbox.',
+        code: 'Focused engineering work. Parallel agents, deep refactors, and fixes from Self-driving reports.',
     },
     {
         label: 'Permissions',
-        ai: 'Reads and writes inside your PostHog project – insights, dashboards, flags, experiments, surveys, HogQL. Never touches your source code or the open web.',
-        slack: 'Everything PostHog AI can do, plus drafts code changes as PRs on the repos you connect.',
-        code: 'Everything the Slack app can do, plus reads your local repos and pulls in context from Linear, GitHub Issues, and Zendesk.',
+        ai: 'Reads and writes inside your PostHog project – insights, dashboards, flags, experiments, surveys, HogQL. For code changes, it hands off to a coding agent that opens a draft PR.',
+        slack: 'Everything PostHog AI can do, plus the coding work happens in the thread, with PRs under your own GitHub account.',
+        code: 'Everything the Slack app can do, plus works in your local repos and uses any MCP server you add – issue trackers, design tools, internal APIs.',
     },
     {
         label: 'Where it runs',
-        ai: "None – it's a panel in PostHog Web.",
+        ai: 'PostHog Cloud. Coding tasks run in a PostHog-managed cloud sandbox.',
         slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },
     {
         label: 'Models',
-        ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
+        ai: "Auto-picked from Anthropic, OpenAI, and Google (we tune so you don't have to).",
         slack: 'Defaults to Claude Opus 5. Ask for another model right in your message ("use fable for this"), or set a personal default in the App Home tab.',
-        code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
+        code: 'You pick the harness (Pi, Claude Code, or Codex), the model, and the reasoning effort per task.',
     },
 ]
 
@@ -543,16 +543,16 @@ const faqItems = [
         trigger: 'What about projects with multiple repos?',
         content: (
             <p>
-                Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
-                channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
+                Add routing rules with <code>/posthog rules add</code> so requests that match a description go straight
+                to the right repo. When no rule matches, the bot opens a picker in-thread. See the{' '}
                 <Link
                     to="/docs/slack/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
-                    PostHog Desktop Slack docs
+                    Slack app commands
                 </Link>{' '}
-                for the full command list.
+                for the full list.
             </p>
         ),
     },
@@ -577,7 +577,7 @@ const faqItems = [
         trigger: 'How are PRs generated with the Slack app credited?',
         content: (
             <p>
-                Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
+                Branches get a <code>posthog/</code> prefix, and each commit includes a{' '}
                 <code>Generated-By: PostHog Desktop</code> line plus a <code>Task-Id</code> so you can trace it back.
                 Each turn runs under the identity of the person who sent it, so work is authored under your name via
                 your{' '}
@@ -608,8 +608,7 @@ const faqItems = [
         content: (
             <p>
                 Yes. Attach images, PDFs, and text files to your message and the agent reads them as part of the
-                request. The limit is five files
-                per message, 10 MB each.
+                request. The limit is five files per message, 10 MB each.
             </p>
         ),
     },

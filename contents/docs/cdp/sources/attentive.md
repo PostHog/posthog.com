@@ -9,12 +9,6 @@ availability:
 sourceId: Attentive
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your Attentive account using a private app API key. Attentive's public API is write-oriented with no bulk read endpoints, so all tables are populated from webhook events as they happen. History before the connection date is not backfilled.
 
 ## Adding a data source

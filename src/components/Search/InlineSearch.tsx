@@ -106,12 +106,18 @@ export const InlineSearch = ({
     )
 }
 
+const defaultHitUrl = (hit: any) => hit.fields?.slug || `/${hit.slug}`
+
 export const AlgoliaSearchResults = ({
     currentPath,
     facetFilters,
+    getHitUrl = defaultHitUrl,
+    newWindow = true,
 }: {
     currentPath?: string
     facetFilters?: string | string[] | string[][]
+    getHitUrl?: (hit: any) => string
+    newWindow?: boolean
 }) => {
     const { searchQuery } = useSearch()
     const [hits, setHits] = useState<any[]>([])
@@ -174,13 +180,13 @@ export const AlgoliaSearchResults = ({
                     {hits.map((hit: any) => (
                         <li key={hit.objectID}>
                             <Link
-                                to={hit.fields?.slug || `/${hit.slug}`}
-                                state={{ newWindow: true }}
+                                to={getHitUrl(hit)}
+                                state={newWindow ? { newWindow: true } : undefined}
                                 className="block px-2 py-1.5 rounded hover:bg-accent transition-colors group"
                             >
                                 <span className="block text-[13px] font-medium text-primary truncate">{hit.title}</span>
                                 <span className="block text-[11px] text-muted truncate">
-                                    posthog.com{hit.fields?.slug || `/${hit.slug}`}
+                                    posthog.com{getHitUrl(hit)}
                                 </span>
                             </Link>
                         </li>
