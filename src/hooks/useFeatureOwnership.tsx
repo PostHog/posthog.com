@@ -312,7 +312,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        owner: ['data-modeling'],
+        owner: ['data-tools'],
         label: 'feature/notebooks',
     },
     oauth: {

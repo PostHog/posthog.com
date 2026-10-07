@@ -72,6 +72,7 @@ However, there are some properties of the model that apply to all destinations:
 
 - This model is **immutable** with all fields set once the event is ingested.
 - Each event is **uniquely** identified by a UUID that can be used for de-duplication.
+- The `person_id` and `person_properties` fields show the person at the time the event was ingested. PostHog never updates exported rows, regardless of later changes to the person. To get the latest person for an event, export the [persons model](#persons-model) and join it on `distinct_id`.
 
 ### Persons model
 
