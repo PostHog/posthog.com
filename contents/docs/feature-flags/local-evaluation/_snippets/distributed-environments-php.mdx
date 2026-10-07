@@ -52,7 +52,7 @@ When the SDK fetches flag definitions from the API, it passes a JSON-compatible 
 | `onFlagDefinitionsReceived(data)` | Store definitions after a successful API fetch. | void |
 | `shutdown()` | Release locks, close connections, and clean up resources. | void |
 
-> **Note:** Provider methods may throw errors. The SDK catches and logs provider errors: failed `shouldFetchFlagDefinitions()` calls fall back to fetching from PostHog when a feature flags secure API key is configured, failed cache reads fall back to the API when no definitions are loaded and a feature flags secure API key is configured, and failed writes or shutdowns do not stop flag evaluation.
+> **Note:** Provider methods may throw errors. The SDK catches and logs provider errors: failed `shouldFetchFlagDefinitions()` calls fall back to fetching from PostHog when a secret API key is configured, failed cache reads fall back to the API when no definitions are loaded and a secret API key is configured, and failed writes or shutdowns do not stop flag evaluation.
 
 ## Using your cache provider
 
@@ -67,7 +67,7 @@ PostHog::init(
         'host' => '<ph_client_api_host>',
         'flag_definition_cache_provider' => $cache,
     ],
-    personalAPIKey: 'your feature flags secure API key'
+    personalAPIKey: 'your secret API key'
 );
 ```
 

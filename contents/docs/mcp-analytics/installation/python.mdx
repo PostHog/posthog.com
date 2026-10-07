@@ -1,0 +1,241 @@
+---
+title: Python MCP Analytics installation
+platformLogo: python
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+<CalloutBox icon="IconFlask" title="Beta SDK" type="fyi">
+
+Python MCP Analytics is in beta, so its API may change. Pin your `posthog` version during the beta.
+
+</CalloutBox>
+
+MCP Analytics for Python ships inside the [`posthog`](/docs/libraries/python) package as `posthog.mcp`. It instruments:
+
+- `FastMCP` and the low-level `Server` from the official [`mcp`](https://github.com/modelcontextprotocol/python-sdk) package, 1.x (`mcp>=1.26`)
+- `MCPServer`, FastMCP's new name on `mcp` 2.x, and the 2.x low-level `Server`
+- [jlowin's standalone FastMCP](https://github.com/jlowin/fastmcp) (the `fastmcp` package)
+
+The SDK handles both the `2025-11-25` and `2026-07-28` protocol revisions. You need Python 3.10+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no server object? See [Custom dispatchers](#custom-dispatchers).
+
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instrument()` for you. To install by hand, follow the steps below.
+
+<Steps>
+
+<Step title="Install the package" badge="required">
+
+```bash
+pip install posthog
+```
+
+`instrument()` needs `mcp` or `fastmcp` at runtime. You already have one, because you built your server with it.
+
+</Step>
+
+<Step title="Wrap your server" badge="required">
+
+Call `instrument(server, posthog)` once, before the server accepts requests:
+
+```python
+import os
+from posthog import Posthog
+from posthog.mcp import instrument
+from mcp.server.fastmcp import FastMCP  # on mcp 2.x: from mcp.server.mcpserver import MCPServer
+
+posthog = Posthog(
+    os.environ["POSTHOG_PROJECT_TOKEN"],
+    host="https://us.i.posthog.com",  # or https://eu.i.posthog.com
+)
+server = FastMCP("my-server")
+
+# register your tools as usual...
+
+analytics = instrument(server, posthog)
+```
+
+`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server reuses the first one.
+
+</Step>
+
+<Step title="Send queued events on shutdown" badge="required">
+
+`instrument()` captures events in the background, and the `posthog` client sends them in batches. When the process stops, wait for pending captures, then stop the client:
+
+```python
+await analytics.flush()  # wait for in-flight captures
+posthog.shutdown()       # send queued events and stop the client
+```
+
+See the [complete example](https://github.com/PostHog/posthog-python/blob/main/examples/mcp_analytics_demo.py).
+
+</Step>
+
+<Step title="Check your first events" badge="required">
+
+Connect an agent to your server and call a tool. Then open the [activity feed](https://app.posthog.com/activity/explore) and filter for `event = $mcp_tool_call`. See [the event reference](/docs/mcp-analytics/events) for every property.
+
+</Step>
+
+</Steps>
+
+## Read request headers
+
+The two `mcp` majors pass request context in different shapes. Use `get_request_headers(extra)` in `identify`, `intent_fallback`, and `event_properties`. It returns a dictionary with lowercase keys on HTTP transports, returns `None` on stdio, and never raises:
+
+```python
+from posthog.mcp import get_request_headers
+
+def identify(request, extra):
+    headers = get_request_headers(extra) or {}
+    return resolve_user(headers.get("authorization"))
+```
+
+## Stateless and multi-pod servers
+
+A stateless server creates a new instance for each request, often on a different pod. Without correlation, each request gets its own `$session_id`, and events after `initialize` lose the client name and version.
+
+On `2025-11-25` traffic, the SDK fixes this without a shared store or sticky routing. At `initialize`, it puts a token with the session ID and client metadata in the `Mcp-Session-Id` response header. Clients send the header back, so any pod reads the same values. This works with JSON and SSE responses. The `2026-07-28` revision has no `initialize`, so use [conversation IDs](/docs/mcp-analytics/conversation-id) there.
+
+On `FastMCP` and jlowin's `fastmcp`, `instrument()` wraps `streamable_http_app()` and `sse_app()`, which `run()` also uses. Set the server to stateless mode:
+
+```python
+server = FastMCP("my-server", stateless_http=True)
+instrument(server, posthog)
+server.run(transport="streamable-http")
+```
+
+When you build the ASGI app yourself, such as for a low-level `Server` or a [custom dispatcher](#custom-dispatchers), add the middleware once:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+```
+
+## Configuration
+
+Pass options as `MCPAnalyticsOptions`:
+
+```python
+from posthog.mcp import instrument
+from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
+
+instrument(server, posthog, MCPAnalyticsOptions(
+    report_missing=True,
+    identify=lambda request, extra: UserIdentity(distinct_id="user_123"),
+))
+```
+
+| Option | Default | What it does |
+| --- | --- | --- |
+| `context` | `True` | Add a `context` argument to capture [agent intent](/docs/mcp-analytics/intent). Pass `MCPAnalyticsContextOptions(description=...)` to change its prompt. |
+| `intent_fallback` | – | `(request, extra) -> str \| None`. Supplies intent when the agent sends no `context`. |
+| `capture_model` | `True` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. |
+| `enable_conversation_id` | `True` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
+| `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
+| `report_missing` | `False` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
+| `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
+| `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
+| `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
+| `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
+| `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
+| `logger` | no-op | `(message: str) -> None`. A stdio-safe sink for SDK warnings. |
+
+On raw low-level servers and standalone FastMCP, the SDK advertises the injected `context` and `llm_model` arguments as optional, not required. On standalone FastMCP with `mcp` 1.x, middleware that overrides tool listing or dispatch turns off `llm_model` injection. Model capture from client metadata still works.
+
+## Custom dispatchers
+
+`instrument()` needs an MCP server object. A dispatcher that implements the protocol itself has none. Use `PostHogMCP` instead. It's a subclass of the `posthog` client and takes the same keyword arguments:
+
+```python
+import os
+import time
+from posthog.mcp import PostHogMCP, get_more_tools_result
+
+posthog = PostHogMCP(os.environ["POSTHOG_PROJECT_TOKEN"], host="https://us.i.posthog.com")
+
+# When you answer tools/list:
+tools = posthog.prepare_tool_list(my_tools, report_missing=True)
+
+def handle_tools_call(request, name, arguments):
+    common = dict(
+        distinct_id=user_id,
+        client_user_agent=request.headers.get("user-agent"),
+        vendor_client=request.headers.get("x-anthropic-client"),
+        groups={"organization": org_id},
+    )
+
+    # Before the tool runs: reads intent and the model, and removes the SDK's arguments.
+    prepared = posthog.prepare_tool_call(name, arguments)
+    if prepared.is_missing_capability:
+        posthog.capture_missing_capability(context=prepared.intent, **common)
+        return get_more_tools_result()
+
+    start = time.monotonic()
+    try:
+        result = run_tool(name, prepared.args)
+    except Exception as exc:
+        posthog.capture_tool_call(
+            name,
+            parameters=prepared.args,
+            duration_ms=(time.monotonic() - start) * 1000,
+            is_error=True,
+            error=exc,  # sets $mcp_error_message and $mcp_error_type, and emits $exception
+            **common,
+        )
+        raise
+
+    # Adds the conversation handle to the result, and returns the session to capture.
+    final = posthog.prepare_tool_result(result, prepared)
+    posthog.capture_tool_call(
+        name,
+        intent=prepared.intent,
+        intent_source=prepared.intent_source,
+        llm_model=prepared.llm_model,
+        llm_model_source=prepared.llm_model_source,
+        parameters=prepared.args,
+        response=final.result,
+        duration_ms=(time.monotonic() - start) * 1000,
+        session_id=final.session_id,
+        conversation_id=final.conversation_id,
+        **common,
+    )
+    return final.result
+```
+
+Capture the handshake and the tool listing the same way. Only send `capture_initialize` for a `2025-11-25` handshake, because `2026-07-28` has none:
+
+```python
+posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **common)
+posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
+```
+
+`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, and `mcp_exception_autocapture`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
+
+The two transport headers in `common` matter. `clientInfo.name` reports `claude-code` for the CLI, Agent SDK, VS Code extension, and desktop app. `client_user_agent` tells those builds apart, and `vendor_client` separates Anthropic's products, such as Claude.ai and Claude Design. `instrument()` reads both headers for you. Leave them unset on stdio.
+
+### Recover the session on a stateless dispatcher
+
+Add `PostHogMcpStatelessSessionMiddleware` to your ASGI app, then read the session it recovered:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+
+sess = get_mcp_session(request)  # None until the client sends the token back
+posthog.capture_tool_call(
+    name,
+    session_id=sess.session_id if sess else None,
+    properties={
+        "$mcp_client_name": sess.client_name if sess else None,
+        "$mcp_client_version": sess.client_version if sess else None,
+    },
+)
+```
+
+The token is unsigned and holds only values the client sent at `initialize`. Use `$session_id` and `$mcp_client_*` as analytics labels, not for authentication.

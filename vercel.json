@@ -118,8 +118,16 @@
             "destination": "/next-steps/index.html"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
+            "source": "/forum/t/:topic/tags",
+            "destination": "/forum/t/[topic]/tags/index.html"
+        },
+        {
+            "source": "/forum/t/:topic",
+            "destination": "/forum/t/[topic]/index.html"
+        },
+        {
+            "source": "/forum/p/:permalink",
+            "destination": "/forum/p/[permalink]/index.html"
         },
         {
             "source": "/careers/(.*)",
@@ -160,6 +168,11 @@
             "source": "/ko",
             "destination": "/",
             "statusCode": 302
+        },
+        {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
         },
         {
             "source": "/pocket-guides/product-analytics",
@@ -661,6 +674,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301
@@ -1100,7 +1118,7 @@
         },
         {
             "source": "/questions/topics/:path*",
-            "destination": "/questions/topic/:path*"
+            "destination": "/forum"
         },
         {
             "source": "/docs/sdks/:path*",
@@ -3147,7 +3165,7 @@
         },
         {
             "source": "/questions/topic/session-recording",
-            "destination": "/questions/topic/session-replay"
+            "destination": "/forum"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -5581,8 +5599,12 @@
             "destination": "/docs/cdp/sources/zendesk:ext?"
         },
         {
+            "source": "/docs/data-warehouse/setup:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/start-here:ext?"
+        },
+        {
             "source": "/docs/data-warehouse/setup/",
-            "destination": "/docs/data-warehouse/query/"
+            "destination": "/docs/data-warehouse/start-here"
         },
         {
             "source": "/handbook/growth/marketing/content",
@@ -6137,6 +6159,10 @@
             "destination": "/handbook/growth/sales/customer-industry-segments"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-led-calls",
+            "destination": "/handbook/growth/sales/reverse-demo-calls"
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/data-stack"
         },
@@ -6327,7 +6353,7 @@
         },
         {
             "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
+            "destination": "/forum"
         },
         {
             "source": "/ai-observability/features",
@@ -6560,6 +6586,36 @@
         {
             "source": "/docs/settings/id-jag:ext(\\.md)?",
             "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/questions",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/subscriptions",
+            "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/:path*",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/:permalink",
+            "destination": "/forum/p/:permalink",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/alerts",
+            "destination": "/forum/alerts",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/dashboard",
+            "destination": "/forum/following",
+            "statusCode": 301
         }
     ]
 }

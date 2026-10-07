@@ -27,7 +27,7 @@ export const surveys = {
     type: 'surveys',
     slug: 'surveys',
     teamSlug: 'surveys',
-    forumTopicId: 347,
+    forumTag: 'surveys',
     color: 'salmon',
     colorSecondary: 'red',
     shortDescription: 'Ask users anything with no-code surveys',
