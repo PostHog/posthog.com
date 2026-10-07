@@ -1,8 +1,8 @@
 ### Q4 2026 objectives
 
-### **Commercial universe dataset** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Commercial universe dataset** – (Driver: <TeamMember name="Abhischek Thottakara" />)
 
-Build one materialized table of all our customers, active and churned, so that lead triggers use the same complete account context.
+Build one materialized table of all active and churned customers, so that lead triggers use the same complete account context.
 
 **What we'll ship:**
 
@@ -11,34 +11,34 @@ Build one materialized table of all our customers, active and churned, so that l
 * TAM lead triggers that fire only for TAM-owned accounts
 * Migrate existing lead triggers to query `org_universe` instead of separate HogQL queries
 
-### **Trusted lead score** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Trusted lead score** – (Driver: <TeamMember name="Abhischek Thottakara" />)
 
 Make lead scores meaningful, so that GTM Humans trust them and get fewer noisy tasks.
 
 **What we'll ship:**
 
-* Backtest Q3 lead scores against qualification and revenue outcomes
+* Compare Q3 lead scores with qualification and revenue outcomes
 * Skip tasks that GTM Humans consistently disqualify, and weight scores by task outcomes
-* Account potential score v0: estimate ACV from the median ACV of accounts with similar usage and firmographics
-* Improve the account potential score by backtesting predicted ACV against 30, 60, and 90-day growth
+* Account potential score v0: estimate ACV from the median ACV of accounts with similar usage and company data
+* Improve the account potential score: compare predicted ACV with 30, 60, and 90-day growth
 
-### **posthog-salesforce** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Salesforce auto-deploy** – (Driver: <TeamMember name="Abhischek Thottakara" />)
 
-Finish the [posthog-salesforce](https://github.com/posthog/posthog-salesforce) deployment.
+Finish the [`posthog-salesforce`](https://github.com/posthog/posthog-salesforce) deployment.
 
 **What we'll ship:**
 
 * Auto-deploy to Salesforce on merge to main
 
-### **Customer analytics migration** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Customer Analytics migration** – (Driver: <TeamMember name="Abhischek Thottakara" />)
 
-Finish the move of account ownership to customer analytics.
+Finish the move of account ownership to Customer Analytics.
 
 **What we'll ship:**
 
 * Enrich Salesforce with billing data, such as the last invoice and the current billing period
 
-### **Stretch: Closed-won automation** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+### **Stretch: Closed-won automation** – (Driver: <TeamMember name="Abhischek Thottakara" />)
 
 Automate invoice generation from closed-won deals.
 
