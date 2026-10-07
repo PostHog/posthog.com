@@ -21,11 +21,15 @@ Partner billing is designed to let a [provisioning partner](/docs/integrate/prov
 2. **Sign requests with a key.** Your app must authenticate with [`private_key_jwt`](/docs/integrate/provisioning#sign-requests-with-a-key-optional). Whoever can act as your app can create organizations that you pay for. Anyone can send a public client's `client_id`, and a client secret is sent with every request, so PostHog accepts neither, and it checks this on every request. If your app stops using `private_key_jwt`, for example because you [switch back to a public client](/docs/integrate/provisioning#switch-back-to-a-public-client), every provisioning request fails with a 401, including requests with access tokens you already hold, until your app uses `private_key_jwt` again. The error message starts with `This client must authenticate with private_key_jwt`.
 3. **Ask PostHog to turn it on.** Partner billing isn't self-serve. Once enabled, eligible organizations your app provisions use partner billing automatically. [Contact PostHog](https://app.posthog.com/#panel=support) to turn it on for your app, which must already sign its requests. When PostHog turns it on, it fixes which organization manages your bill, and that can't change later. If your app is linked to a different organization afterwards, the partner billing API returns 403 `forbidden`.
 
+PostHog verifies your linked organization's billing account before enabling partner billing. Support must resolve a missing or ambiguous billing account first.
+
 ## Set up billing
 
 Admins and owners of your linked organization set up billing on the [**Partner billing**](https://app.posthog.com/settings/organization-partner-billing) page in **Organization settings**. The page appears once PostHog has turned on partner billing for your app. If your organization manages billing for more than one app, choose one under **Partner application**.
 
-1. Click **Set up payment**. PostHog opens a billing portal where you add your payment method, billing name, email, address, and tax IDs, then returns you to the page.
+Partner billing reuses your linked organization's payment method and billing profile. You can use an existing card. Updating the shared payment method, billing address, or tax IDs also changes them for your organization's own billing. Your organization's own usage is billed separately from the organizations you pay for.
+
+1. Click **Update payment details**, or **Set up payment** if no payment method is saved. PostHog opens a billing portal where you review or add your payment method, billing name, email, address, and tax IDs, then returns you to the page.
 2. Under **Webhooks**, enter your **Webhook URL** and click **Save**. The URL must meet the [webhook URL requirements](#webhook-url-requirements).
 3. Click **Generate signing secret** and copy the secret. PostHog shows it only once.
 4. Click **Send test event**. Check that your endpoint receives a `test` event and [verifies its signature](#verify-the-signature).
