@@ -257,6 +257,22 @@ The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView
 person-linking state around those Twig views. The package does not call `identify`, `reset`, or
 capture events.
 
+The Trends and funnels chapter uses `ProductAnalyticsTrendsFunnelsExhibits.tsx` for three small
+figures. `FilterUsersTrendFigure` reduces Week 2's 19 filter events to eight people beside a
+compact Trends view based on the PostHog insight controls. Edgar's original Forest event, with
+its filter, identity, and session fields, is available as a drill-down. The weekly chart compares
+five and eight unique users; the guide explains why Edgar's three selections count as one person
+in the second week.
+These panels remain side by side; narrow windows scroll sideways within the figure.
+`BookingStepsFigure` reuses
+Twig's `StayCardContent` and shared primary button styling. It automatically shows a confirmed
+request followed by a failed one, with event arrivals in the Inspector. The booking response is
+simulated locally; it never submits a booking or captures events. `BookingFunnelFigure` pairs the
+10-to-six person funnel result with a shared Inspector that opens one of the four drop-offs and
+matches its `booking_started` event to a failed simulated response by `request_id`. These are guide-owned teaching fixtures, not
+new Twig instrumentation or a live PostHog query. The failed fixture uses `user_409` and
+`req-204`; Edgar's confirmed fixture uses `user_812` and `req-203`.
+
 Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
 and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
 review the Twig views on both sites at narrow and wide widths, in both themes.

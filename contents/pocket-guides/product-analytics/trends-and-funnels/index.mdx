@@ -1,0 +1,85 @@
+---
+title: Trends and funnels
+shortTitle: Trends and funnels
+subtitle: Count the people using a feature, then see who finishes a booking.
+pocketGuideOrder: 3
+---
+
+<RightPage>
+
+# Trends and funnels
+
+Edgar visited Twig, a vacation-rental site, and selected **Forest** and **Coast**. He returned the next day and selected **City**. Later, he signed in, saved a stay, and selected **Book stay**. In Twig's simulated booking flow, his request received a confirmation. The engineers can connect those events to his visits and account.
+
+Edgar's story shows what he did. But Edgar is one person, and Twig's engineers want to know whether other visitors use the filters and finish bookings too.
+
+An insight turns events into an answer about product behavior. The engineers use two kinds of insight: a <Term name="trend" /> to see how use changes over time, and a <Term name="funnel" /> to see how many people finish a sequence of steps.
+
+## Count people using events
+
+Twig records `stay_filter_selected` events each time someone chooses a destination filter. Its `destination_type` property records which filter a visitor chose. A trend counting all selections shows **Coast** was selected three times, but those clicks might have come from one person or several.
+
+Edgar made three filter selections across two visits. When he signed in, Twig identified him to PostHog, linking his earlier anonymous events and later account activity to one person.
+
+To ask **how many people use the filters**, the engineers keep `stay_filter_selected` but change the trend from **Total count** to **Unique users**. They choose two completed weeks and group the results by week. Each person counts once per week, no matter how many times they select a filter. If someone returns in another week, they count once in that week too.
+
+In Twig's example data, Week 2 contains 19 filter selections, including Edgar's three. Five people used filters in Week 1. The engineers compare people, not clicks:
+
+<FilterUsersTrendFigure />
+
+The 19 Week 2 events came from **eight people**; Edgar's three selections count as one. That's up from five people in Week 1. Select **Inspect an event** to see one of Edgar's original records: it still has `distinct_id: anon_7f3` and its original session ID. Identifying Edgar later linked that activity to his person profile; it did not rewrite the event.
+
+They remove the `destination_type` breakdown for this question. If they kept it, Edgar would appear once under **Forest**, once under **Coast**, and once under **City**. Adding those destination counts would count him more than once.
+
+The trend still leaves a question open. More people used the filters, but Twig might also have had more visitors overall. And a filter selection does not tell the engineers whether someone went on to book. They need a different insight to follow a sequence of actions.
+
+## Choose the booking steps
+
+Edgar's confirmed booking gives them that sequence. The engineers ask: **Of the people who start a booking, how many complete one?**
+
+In this simulated example, Twig records `booking_started` when it sends a valid booking request. It records `booking_completed` after a confirmed response. A request that fails produces a start event but no completion event. The browser and server use the same account ID, so PostHog connects both events to the same person.
+
+The engineers build a funnel insight with two steps:
+
+1. `booking_started`
+2. `booking_completed`
+
+The steps are **sequential**: completion must happen after the start, though other events can happen between them. Edgar reaches both steps. In another simulated booking, the visitor reaches only the first.
+
+Watch two simulated bookings run automatically. Edgar's confirmed request sends `booking_started` and then `booking_completed`. The next visitor's request fails: after `booking_started`, the Inspector stays at one event. No `booking_completed` arrives.
+
+<BookingStepsFigure />
+
+Edgar also saved a stay, but saving is optional. Including `stay_saved` would exclude people who book without saving first, so the engineers leave it out of this funnel.
+
+## Read the result
+
+The engineers set a **conversion window** of 14 days – the time someone has to reach the second step after the first. They use a past period so everyone in the chart has had the full 14 days to finish.
+
+In Twig's example data, 10 people started a booking during that period. Six completed one within the window. The funnel shows that six of 10 people reached both steps, or 60%. The other four did not reach the completion step in time.
+
+This is a count of people, not requests. If someone makes two attempts and completes the second, the funnel counts that person on both steps. It does not tell the engineers whether the first request succeeded. Twig's booking events include a `request_id` – an ID for one attempt – when the team needs to inspect a particular request.
+
+The result also does not say that all four people encountered an error. They might have left after starting, seen a failed response, or finished after the 14-day window. The funnel shows **where** their recorded activity stopped, not **why**.
+
+## Investigate the drop-off
+
+The four people who reached `booking_started` but not `booking_completed` within 14 days give the engineers a place to investigate. Select **Inspect one** in the funnel to see one person's event trail. The `request_id` connects that person's booking start to Twig's simulated response.
+
+<BookingFunnelFigure />
+
+The response failed, and no `booking_completed` event followed. That explains this request, not the other three people's drop-offs.
+
+If a Session Replay recording is available, it can show what the visitor saw after selecting **Book stay**. The response tells the engineers that the request failed; the replay cannot explain the server's reason on its own.
+
+The engineers compare the remaining people's events with their booking responses and any available replays. They decide to investigate failed responses first, then check where visitors who left stopped. Once they understand the cause and make a change, they can compare the same funnel again.
+
+The trail now runs in both directions. PostHog connects Edgar's events across visits. The trend counts him once among the people using filters that week. The funnel counts him among the people who started and completed a booking, then points the engineers toward visits worth investigating.
+
+<LessonFooter nextLabel="Explore insights" nextHref="/docs/product-analytics/insights">
+
+<a href="/docs/product-analytics/trends/overview">Trends</a> · <a href="/docs/product-analytics/trends/aggregations">Counting events and people</a> · <a href="/docs/product-analytics/funnels">Funnels</a>
+
+</LessonFooter>
+
+</RightPage>

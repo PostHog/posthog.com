@@ -217,10 +217,25 @@ function EventTree({ value }: { value: string }): JSX.Element {
     )
 }
 
-export function InspectorStatus({ children }: { children: React.ReactNode }): JSX.Element {
+export function InspectorStatus({
+    children,
+    tone = 'neutral',
+}: {
+    children: React.ReactNode
+    tone?: 'neutral' | 'error'
+}): JSX.Element {
+    const error = tone === 'error'
+
     return (
-        <div className="flex items-start gap-2 bg-[#faf8f3] px-3 py-2 text-xs leading-relaxed text-[#5f5a52]">
-            <span aria-hidden="true" className="mt-[5px] size-1.5 shrink-0 rounded-full bg-orange" />
+        <div
+            className={`flex items-start gap-2 px-3 py-2 text-xs leading-relaxed ${
+                error ? 'bg-[#fff1ef] text-[#8f3328]' : 'bg-[#faf8f3] text-[#5f5a52]'
+            }`}
+        >
+            <span
+                aria-hidden="true"
+                className={`mt-[5px] size-1.5 shrink-0 rounded-full ${error ? 'bg-[#a93228]' : 'bg-orange'}`}
+            />
             <span>{children}</span>
         </div>
     )
