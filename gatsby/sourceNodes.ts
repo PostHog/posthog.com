@@ -886,7 +886,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const sourceG2Reviews = async () => {
         if (!process.env.G2_API_KEY) return
-        await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        try {
+            await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        } catch (err) {
+            console.warn('Failed to source G2 reviews:', err)
+        }
     }
 
     const sourceCloudinaryImages = async () => {
