@@ -10,6 +10,8 @@ This page covers troubleshooting for materialized views. For setup, see [creatin
 
 The **Materialization** panel on a view lists every run with its status, how many rows it wrote, and the error if it failed. Almost every problem below is diagnosed from that list, so check it first.
 
+You can also spot problems from the SQL editor sidebar. A materialized view whose last run failed shows a red X icon before its name. If the view is suspended (scheduled runs paused after five failures in a row), it shows a yellow pause icon instead. Hover the icon to see the error.
+
 A run is one of:
 
 - **Completed.** The run finished and the stored table is up to date as of that run.
@@ -77,7 +79,7 @@ Two different things produce this.
 
 **The query isn't eligible.** The panel says the view is always refreshed in full and names a reason. See [which queries can be incremental](/docs/data-warehouse/views/materialize#which-queries-can-be-incremental) for the full list and what to use instead.
 
-**The query changed.** Editing a view's SQL, incremental column, or unique key makes the stored rows unsafe to build on, so the next run rebuilds everything. This is expected and one-off. If a view rebuilds in full on *every* run, check whether something is rewriting the query between runs.
+**The query changed.** Editing a view's SQL, incremental column, or unique key makes the stored rows unsafe to build on, so the next run rebuilds everything. This is expected and one-off. If a view rebuilds in full on _every_ run, check whether something is rewriting the query between runs.
 
 ## Incremental is on but runs aren't any faster
 
