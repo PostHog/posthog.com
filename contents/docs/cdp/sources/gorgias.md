@@ -9,12 +9,6 @@ availability:
 sourceId: Gorgias
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Gorgias credentials to pull your helpdesk data – tickets, messages, customers, users, and more – into the PostHog data warehouse.
 
 ## Adding a data source
