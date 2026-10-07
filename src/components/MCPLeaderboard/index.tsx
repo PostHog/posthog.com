@@ -256,7 +256,7 @@ function ClientRace({
         <section id="clients" className="not-prose">
             <SectionHeading>AI players battle it out</SectionHeading>
             <div className="grid grid-cols-1 @3xl/reader-content:grid-cols-5 gap-3">
-                <Card title="Weekly tool calls by AI company" className="@3xl/reader-content:col-span-3">
+                <Card title="Weekly tool calls by AI lab" className="@3xl/reader-content:col-span-3">
                     <LineChart periods={weeks} series={series} theme={theme} height={420} stacked />
                 </Card>
                 <Card title="Top harnesses this week" className="@3xl/reader-content:col-span-2">
