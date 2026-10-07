@@ -32,6 +32,8 @@ The agent pushes the branch to your remote and opens a pull request:
 
 ## Use your own coding agent
 
+Before you start, make sure that your agent can use the [PostHog MCP server](/docs/model-context-protocol). The prompt contains a link to the report, not the report itself. Your agent uses the MCP server to read the report and its work log, claim the report, and attach its pull request.
+
 On a report that can be implemented, open the arrow next to **Implement**. Choose **Copy prompt for your agent** to copy the task and report link.
 
 Open the agent menu beside that control to send the prompt to PostHog Desktop, Claude Code CLI, Claude Desktop, Claude Code in VS Code, Claude Code on the web, Cursor, or Codex.
