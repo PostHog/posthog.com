@@ -280,7 +280,18 @@ const Form = ({
                         'Your resume is a little too impressive to upload. Please reduce the file size and try again.'
                     )
                 }
-                throw new ApplicationError(`http_${res.status}`, 'Failed to submit application. Please try again.')
+                const { ashbyStatus } = await res.json().catch(() => ({}))
+                const ashbyRejectedSubmission = ashbyStatus >= 400 && ashbyStatus < 500
+                if (ashbyRejectedSubmission) {
+                    throw new ApplicationError(
+                        `ashby_${ashbyStatus}`,
+                        'We could not submit this application. Please reach out to careers@posthog.com for help.'
+                    )
+                }
+                throw new ApplicationError(
+                    ashbyStatus ? `ashby_${ashbyStatus}` : `http_${res.status}`,
+                    'Failed to submit application. Please try again.'
+                )
             }
 
             const submission: AshbySubmissionResponse = await res.json()
