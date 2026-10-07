@@ -4,30 +4,27 @@ sidebar: Docs
 showTitle: true
 ---
 
-import BetaCallout from './_snippets/beta-callout'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 A metric is a named, governed answer to a business question: one definition, one owner, one source of truth. Instead of every AI session (and every teammate) deriving "MRR" or "activation rate" from scratch, you define it once in the semantic layer and everything downstream runs the same definition.
 
 For saved HogQL metrics, [add data quality checks](/docs/data-warehouse/data-quality/metrics) to test the rows that the metric returns.
 
-<BetaCallout />
-
 ## Anatomy of a metric
 
-| Field | What it is |
-|-------|------------|
-| `name` | Identifier-safe handle (`mrr`, `weekly_active_teams`), unique among your project's live metrics. [Renaming or deleting](#renaming-and-deleting) a metric frees its name, and references to the old name stop resolving. |
-| `display_name` | Human-friendly label. Change it freely – unlike `name`, nothing references it and editing it never resets approval. |
-| `description` | What the metric means and how to interpret it. This is load-bearing text – agents read it to decide whether the metric answers a question. |
-| `unit` | Unit of the result, e.g. `usd`, `percent`, `cents`. |
-| `owner` | The human accountable for the metric. |
-| `definition` | The machine-readable query, or markdown calculation steps. Omit it for a name-and-description-only stub. |
-| `definition_kind` | Query kind of the definition (`HogQLQuery`, `TrendsQuery`, ...), or null for a stub. |
-| `status` | Lifecycle state: `proposed` or `approved`. |
-| `is_drifted` | Whether the definition has drifted from its source insight. Computed at read time, never stored. |
-| `source_insight_short_id` | Set when the metric was created from an insight – the insight's query is snapshotted server-side. Mutually exclusive with `definition`. |
-| `created_source`, `ai_model`, `confidence`, `reasoning` | Provenance: whether a human (`user`) or an agent (`ai_generated`) authored it, and if an agent did, which model, how confident it was, and why. |
+| Field                                                   | What it is                                                                                                                                                                                                              |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                  | Identifier-safe handle (`mrr`, `weekly_active_teams`), unique among your project's live metrics. [Renaming or deleting](#renaming-and-deleting) a metric frees its name, and references to the old name stop resolving. |
+| `display_name`                                          | Human-friendly label. Change it freely – unlike `name`, nothing references it and editing it never resets approval.                                                                                                     |
+| `description`                                           | What the metric means and how to interpret it. This is load-bearing text – agents read it to decide whether the metric answers a question.                                                                              |
+| `unit`                                                  | Unit of the result, e.g. `usd`, `percent`, `cents`.                                                                                                                                                                     |
+| `owner`                                                 | The human accountable for the metric.                                                                                                                                                                                   |
+| `definition`                                            | The machine-readable query, or markdown calculation steps. Omit it for a name-and-description-only stub.                                                                                                                |
+| `definition_kind`                                       | Query kind of the definition (`HogQLQuery`, `TrendsQuery`, ...), or null for a stub.                                                                                                                                    |
+| `status`                                                | Lifecycle state: `proposed` or `approved`.                                                                                                                                                                              |
+| `is_drifted`                                            | Whether the definition has drifted from its source insight. Computed at read time, never stored.                                                                                                                        |
+| `source_insight_short_id`                               | Set when the metric was created from an insight – the insight's query is snapshotted server-side. Mutually exclusive with `definition`.                                                                                 |
+| `created_source`, `ai_model`, `confidence`, `reasoning` | Provenance: whether a human (`user`) or an agent (`ai_generated`) authored it, and if an agent did, which model, how confident it was, and why.                                                                         |
 
 <CalloutBox icon="IconInfo" title="Names are references" type="fyi">
 
@@ -98,16 +95,16 @@ A result is canonical only when `status = 'approved'` and `is_drifted = false`. 
 
 Agents run metrics with the [`data-catalog-metric-run`](/docs/semantic-layer/mcp-tools#metric-tools) MCP tool. Every run returns a normalized envelope:
 
-| Field | What it is |
-|-------|------------|
-| `status` | Lifecycle state of the metric that produced the results. |
-| `is_drifted` | Whether the definition has drifted. Check this and `status` before trusting the result. |
-| `unit` | Unit of the result. |
-| `kind` | Query kind that was executed. |
-| `results` | The query results, for an executable metric. Null for a markdown metric. |
-| `compiled_query` | The compiled HogQL, when available. |
-| `posthog_url` | Deep link to open the exact query in PostHog – the audit trail for any number an agent hands you. |
-| `instructions` | For a markdown metric, the calculation steps to follow. Null for an executable metric. |
+| Field            | What it is                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| `status`         | Lifecycle state of the metric that produced the results.                                          |
+| `is_drifted`     | Whether the definition has drifted. Check this and `status` before trusting the result.           |
+| `unit`           | Unit of the result.                                                                               |
+| `kind`           | Query kind that was executed.                                                                     |
+| `results`        | The query results, for an executable metric. Null for a markdown metric.                          |
+| `compiled_query` | The compiled HogQL, when available.                                                               |
+| `posthog_url`    | Deep link to open the exact query in PostHog – the audit trail for any number an agent hands you. |
+| `instructions`   | For a markdown metric, the calculation steps to follow. Null for an executable metric.            |
 
 Runs accept optional overrides: `date_from` (e.g. `-7d`), `date_to`, and `interval` reshape the query window without touching the definition. Overrides are rejected for `HogQLQuery` metrics, whose window is fixed in the SQL. A `refresh` parameter controls caching with the same semantics as insights (`blocking`, `async`, `force_blocking`, and friends) – by default a fresh cache hit is served and stale results are recalculated.
 
