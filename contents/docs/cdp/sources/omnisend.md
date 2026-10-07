@@ -15,7 +15,7 @@ This source is currently in **alpha**. The interface and available tables may ch
 
 </CalloutBox>
 
-The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, carts, orders, products, and categories – into PostHog.
+The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, products, and categories – into PostHog. Sources on Omnisend API `v3` can also sync carts and orders.
 
 ## Adding a data source
 
@@ -29,16 +29,18 @@ Once the syncs are complete, you can start using Omnisend data in PostHog.
 
 ## Available tables
 
-| Table        | Description                       | Sync method  |
-| ------------ | --------------------------------- | ------------ |
-| `contacts`   | Contacts in your Omnisend account | Full refresh |
-| `campaigns`  | Email and SMS campaigns           | Full refresh |
-| `carts`      | Abandoned cart data               | Full refresh |
-| `orders`     | Order data                        | Full refresh |
-| `products`   | Product catalog data              | Full refresh |
-| `categories` | Product categories                | Full refresh |
+| Table        | Description                         | Sync method  |
+| ------------ | ----------------------------------- | ------------ |
+| `contacts`   | Contacts in your Omnisend account   | Full refresh |
+| `campaigns`  | Email and SMS campaigns             | Full refresh |
+| `carts`      | Abandoned cart data (API `v3` only) | Full refresh |
+| `orders`     | Order data (API `v3` only)          | Full refresh |
+| `products`   | Product catalog data                | Full refresh |
+| `categories` | Product categories                  | Full refresh |
 
 All tables use **full refresh**, which reloads all data on each sync.
+
+New sources use Omnisend API version `2026-03-15`. This version does not supply the `carts` and `orders` tables. Only sources that use API version `v3` can sync these two tables.
 
 ## Configuration
 
