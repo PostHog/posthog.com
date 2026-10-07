@@ -74,7 +74,7 @@ We plan to do this work in Q4, but none of it is a quarterly objective.
 
 - **Persons service:** explore what it would take for flag evaluation to rely on the Persons service instead of isolating further, and give the Persons team feedback. We'll decide by mid-November whether to switch. If we switch, the migration becomes a Q1 objective.
 - **Rust writer for HyperCache:** finish moving `flags.json` writes to the Rust writer ([#96828](https://github.com/PostHog/posthog/issues/96828)). Edit and refresh already use it, but the verifier doesn't. Then delete the Python writer for `flags.json`, and after that the other HyperCache Python writers, one cache at a time.
-- **One bad filter breaks `/flags`:** fix [#98879](https://github.com/PostHog/posthog/issues/98879), where one unparseable property filter in one flag makes `/flags` return HTTP 500 for the whole team.
+- **One bad filter breaks `/flags`:** fix [#98879](https://github.com/PostHog/posthog/issues/98879), where one unparsable property filter in one flag makes `/flags` return HTTP 500 for the whole team.
 
 **Customers**
 
