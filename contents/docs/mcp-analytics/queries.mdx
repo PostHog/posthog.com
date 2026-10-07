@@ -73,7 +73,7 @@ ORDER BY calls DESC
 
 ## Active sessions per client
 
-[Conversation IDs](/docs/mcp-analytics/conversation-id) are on by default, but clients must echo the handle to group calls across requests. Clients that ignore it can inflate the session count.
+[Conversation IDs](/docs/mcp-analytics/conversation-id) are on by default, but clients must echo the handle to group calls across requests. Clients that ignore it can inflate the session count. The Go SDK sends no `$mcp_initialize`, so only its tool calls count.
 
 ```sql
 SELECT
@@ -88,7 +88,7 @@ ORDER BY sessions DESC
 
 ## Advertised tools that never get called
 
-This query finds tools in `tools/list` responses that agents never called.
+This query finds tools in `tools/list` responses that agents never called. The Go SDK sends no `$mcp_tools_list`, so this query returns nothing for Go servers.
 
 ```sql
 WITH listed AS (

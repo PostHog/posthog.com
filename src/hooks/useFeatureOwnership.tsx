@@ -61,17 +61,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-playground': {
         feature: 'AI playground',
-        owner: ['ai-gateway'],
+        owner: ['agent-infrastructure'],
         label: false,
     },
     'ai-plugin': {
         feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: false,
     },
     alerts: {
@@ -84,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -120,13 +115,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
-                symbolication/upload pipeline and symbol/sourcemap upload internals.
-            </>
-        ),
+        owner: ['error-tracking', 'context-and-mcp'],
+        notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -179,6 +169,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Data management',
         owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
+    },
+    'data-modeling': {
+        feature: 'Data models',
+        owner: ['data-modeling'],
+        notes: 'Views, materialized views, orchestration, and lineage.',
+        label: 'feature/data-modeling',
+    },
+    'data-quality': {
+        feature: 'Data quality checks',
+        owner: ['data-modeling'],
+        label: false,
     },
     'data-table': {
         feature: 'Data table',
@@ -254,7 +255,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -283,7 +284,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     loops: {
         feature: 'Loops',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: false,
     },
     'managed-migrations': {
@@ -368,27 +369,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     platform: {
         feature: 'Platform (US + EU)',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: 'feature/platform',
     },
     'PostHog.com': {
         feature: 'PostHog.com',
         owner: ['website'],
         label: false,
+        notes: (
+            <>
+                Website owns conversion from PostHog.com visits to the signup page. Growth can make suggestions and
+                requests here, and those get more weight than requests from other teams.
+            </>
+        ),
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['surfaces'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
         feature: 'PostHog Desktop',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
@@ -466,6 +468,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         label: ['feature/libraries', 'feature/mobile'],
     },
+    scouts: {
+        feature: 'Scouts',
+        owner: ['self-driving'],
+        label: false,
+    },
     search: {
         feature: 'Search',
         owner: ['platform-ux'],
@@ -478,7 +485,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'self-hosting': {
         feature: 'Self-hosting',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: false,
     },
     'sentry-integration': {
@@ -510,16 +517,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Signup',
         owner: ['growth'],
         label: 'feature/signup',
+        notes: (
+            <>
+                Growth owns everything from the moment someone lands on the signup page, plus every path to signup from
+                any surface other than PostHog.com (for example partner integrations and agents). Website owns
+                conversion from PostHog.com visits to the signup page.
+            </>
+        ),
+    },
+    'skills-store': {
+        feature: 'Skills store',
+        owner: ['context-and-mcp'],
+        label: false,
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Vojta Bartoš" /> is the point owner.
-            </>
-        ),
+        owner: ['surfaces'],
         label: 'feature/slack-app',
+    },
+    'semantic-layer': {
+        feature: 'Semantic layer and data catalog',
+        owner: ['data-modeling'],
+        label: false,
     },
     settings: {
         feature: 'Settings structure (personal & project)',

@@ -104,7 +104,7 @@ export default function DataPipeline({
                             <h3>What if my question isn't answered above?</h3>
                             <p>
                                 We love answering questions. Ask us anything via{' '}
-                                <a href="/questions">our community forum</a>.
+                                <a href="/forum">our community forum</a>.
                             </p>
                             <p className="text-sm opacity-70 pt-4">
                                 Parts of this page are sourced from{' '}

@@ -48,14 +48,15 @@ import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
+import { shouldNavigateMenuTab } from './tabNavigation'
 
 dayjs.extend(relativeTime)
 
 /**
  * A swappable menu tab for the LeftSidebar. When `menuTabs` is provided to
  * ReaderView, a ToggleGroup is rendered above the menu and clicking a tab
- * swaps which `menu` is shown. Tab state is local to the sidebar — switching
- * tabs never navigates; only clicking a link inside a `menu` does.
+ * swaps which `menu` is shown. Tabs with an `href` navigate when inactive;
+ * `navigateOnActiveClick` also lets the active tab return to its root page.
  */
 export interface MenuTab {
     label: React.ReactNode
@@ -72,6 +73,8 @@ export interface MenuTab {
     icon?: React.ReactNode
     /** If set, clicking this tab navigates to the given path instead of only switching local state. */
     href?: string
+    /** When true, clicking the already-active tab returns to its `href`. */
+    navigateOnActiveClick?: boolean
 }
 
 interface ReaderViewProps {
@@ -86,7 +89,11 @@ interface ReaderViewProps {
         tags?: { label: string; url: string }[]
     }
     title?: string
+    /** Optional typography override for the rendered page title. */
+    titleClassName?: string
     header?: React.ReactNode
+    /** Compact navigation row above the reader on narrow layouts. */
+    mobileTopBar?: React.ReactNode
     hideTitle?: boolean
     belowTitle?: React.ReactNode
     tableOfContents?: any
@@ -422,7 +429,9 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
 export default function ReaderView({
     body = {} as ReaderViewProps['body'],
     title,
+    titleClassName,
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
@@ -460,7 +469,9 @@ export default function ReaderView({
             <ReaderViewContent
                 body={body}
                 title={title}
+                titleClassName={titleClassName}
                 header={header}
+                mobileTopBar={mobileTopBar}
                 hideTitle={hideTitle}
                 belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
@@ -1007,6 +1018,13 @@ const LeftSidebar = ({
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
 
+    // An in-window navigation keeps this component mounted while the tab set changes: a page
+    // with no tabs, then a product docs page with three. The old value then matches no tab and
+    // the sidebar shows nothing, so follow the new page and select its default tab.
+    useEffect(() => {
+        setActiveTab(initialTab)
+    }, [currentPath, initialTab])
+
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
     // pinned the inner panel collapses to 48px and only expands as an overlay
@@ -1035,6 +1053,23 @@ const LeftSidebar = ({
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
+
+    // The mobile drawer and desktop rail are two different layout modes. If
+    // their width/transform transitions run while crossing the breakpoint,
+    // the article is repeatedly squeezed through its own container-query
+    // breakpoints. Suppress transitions for one frame during that handoff;
+    // hover and pin animations remain unchanged within desktop mode.
+    const previousMobile = useRef(mobile)
+    const mobileChanged = previousMobile.current !== mobile
+    const [suppressResponsiveTransition, setSuppressResponsiveTransition] = useState(false)
+    useLayoutEffect(() => {
+        if (previousMobile.current === mobile) return
+        previousMobile.current = mobile
+        setSuppressResponsiveTransition(true)
+        const frame = requestAnimationFrame(() => setSuppressResponsiveTransition(false))
+        return () => cancelAnimationFrame(frame)
+    }, [mobile])
+    const transitionsEnabled = hasMounted && !mobileChanged && !suppressResponsiveTransition
 
     // `displayExpanded` mirrors `expanded` instantly when growing, but only
     // flips to false AFTER the panel's shrink transition finishes (driven by
@@ -1121,9 +1156,9 @@ const LeftSidebar = ({
     return (
         <aside
             data-scheme="secondary"
-            className={`relative flex-shrink-0 ${hasMounted && !mobile ? 'transition-[flex-basis] duration-300' : ''} ${
-                mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'
-            }`}
+            className={`relative flex-shrink-0 ${
+                transitionsEnabled && !mobile ? 'transition-[flex-basis] duration-300' : ''
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'}`}
         >
             <div
                 ref={panelRef}
@@ -1138,7 +1173,7 @@ const LeftSidebar = ({
                 style={{
                     width: mobile ? 250 : expanded ? 250 : 48,
                     transform: mobile && !mobileOpen ? 'translateX(-110%)' : undefined,
-                    transition: hasMounted
+                    transition: transitionsEnabled
                         ? mobile
                             ? 'transform 300ms cubic-bezier(0.32, 0.72, 0, 1)'
                             : SIDEBAR_CSS_TRANSITION
@@ -1183,7 +1218,7 @@ const LeftSidebar = ({
                             <div
                                 style={{
                                     width: expanded ? 234 : 32,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 className={`mx-2 pb-2 flex-shrink-0 [&_button>svg:last-child]:transition-opacity [&_button>svg:last-child]:duration-200 [&_button>span>span>span:nth-child(2)]:transition-opacity [&_button>span>span>span:nth-child(2)]:duration-200 ${
                                     expanded
@@ -1211,7 +1246,7 @@ const LeftSidebar = ({
                                 <div
                                     style={{
                                         width: expanded ? 234 : 32,
-                                        transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                        transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                     }}
                                     className={`overflow-hidden [&_input]:transition-colors [&_input]:duration-200 ${
                                         expanded ? '' : '[&_input]:!bg-transparent [&_input]:!border-transparent'
@@ -1239,7 +1274,7 @@ const LeftSidebar = ({
                             <div
                                 style={{
                                     width: tabsWidthTarget,
-                                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                                    transition: transitionsEnabled ? SIDEBAR_CSS_TRANSITION : 'none',
                                 }}
                                 onTransitionEnd={(e) => {
                                     if (e.propertyName === 'width' && e.target === e.currentTarget) {
@@ -1270,7 +1305,16 @@ const LeftSidebar = ({
                                                 from_tab: activeTab,
                                                 tab_count: menuTabs!.length,
                                             })
-                                            if (t.href && t.value !== activeTab) {
+                                            if (
+                                                t.href &&
+                                                shouldNavigateMenuTab({
+                                                    href: t.href,
+                                                    tabValue: t.value,
+                                                    activeTab,
+                                                    navigateOnActiveClick: t.navigateOnActiveClick,
+                                                    currentPath,
+                                                })
+                                            ) {
                                                 navigate(t.href)
                                             } else {
                                                 setActiveTab(t.value)
@@ -1384,7 +1428,9 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: F
 function ReaderViewContent({
     body,
     title,
+    titleClassName = '',
     header,
+    mobileTopBar,
     hideTitle = false,
     belowTitle,
     tableOfContents,
@@ -1416,7 +1462,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact } = useApp()
+    const { compact, focusedWindow } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1428,8 +1474,32 @@ function ReaderViewContent({
     // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
     const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
 
-    const { isNavVisible, isTocVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav, toggleToc } =
-        useReaderView()
+    const {
+        isNavVisible,
+        isTocVisible,
+        isNarrow,
+        fullWidthContent,
+        backgroundImage,
+        toggleNav,
+        toggleToc,
+        setContainerWidth,
+    } = useReaderView()
+    const readerViewRef = useRef<HTMLDivElement>(null)
+
+    // The outer browser can resize an expanded app window without updating the
+    // stored app-window dimensions. Observe the reader itself so the mobile
+    // drawer reliably changes back into the desktop sidebar when space returns.
+    useLayoutEffect(() => {
+        const reader = readerViewRef.current
+        if (!reader || typeof ResizeObserver === 'undefined') return
+
+        const updateWidth = () => setContainerWidth(reader.getBoundingClientRect().width)
+        updateWidth()
+        const observer = new ResizeObserver(updateWidth)
+        observer.observe(reader)
+
+        return () => observer.disconnect()
+    }, [setContainerWidth])
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
     const renderLeftSidebar = !compact && !hideLeftSidebar
@@ -1604,6 +1674,7 @@ function ReaderViewContent({
     return (
         <SearchProvider>
             <div
+                ref={readerViewRef}
                 data-scheme="secondary"
                 data-app="ReaderView"
                 className={`@container/app-reader relative w-full h-full flex min-h-0 max-w-full ${className}`}
@@ -1672,9 +1743,15 @@ function ReaderViewContent({
                             <IconSidebarClose className="size-5" />
                         </button>
                     )}
+                    {showMobileNav && mobileTopBar && (
+                        <div className="flex shrink-0 items-center border-b border-primary bg-primary px-1 py-1.5">
+                            {mobileTopBar}
+                        </div>
+                    )}
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
                             dataScheme="primary"
+                            isScrollRoot={focusedWindow === appWindow}
                             className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
                         >
                             <article
@@ -1734,7 +1811,7 @@ function ReaderViewContent({
                                     )}
                                     {title && !hideTitle && (
                                         <h1
-                                            className={`transition-all ${
+                                            className={`transition-all ${titleClassName} ${
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass

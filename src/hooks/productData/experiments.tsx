@@ -29,7 +29,7 @@ export const experiments = {
     billingType: 'feature_flags',
     slug: 'experiments',
     teamSlug: 'experiments',
-    forumTopicId: 350,
+    forumTag: 'experiments',
     color: 'purple',
     colorSecondary: 'lilac',
     wizardSupport: 'In development',

@@ -80,7 +80,7 @@ On that last one: PostHog makes _your_ product self-driving. Keep the customer's
 | ✅ Do                                                         | ❌ Don't                                                      |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | "PostHog stores your data in your own cloud."                | "With PostHog, you can leverage our advanced data sovereignty capabilities." |
-| "There's no separate pricing for each tool. Pay for usage across all of them." | "Our holistic pricing model enables teams to seamlessly utilize all of our integrated products." |
+| "There's no separate pricing for each product. Pay for usage across all of them." | "Our holistic pricing model enables teams to seamlessly utilize all of our integrated products." |
 | "We wrote this ourselves because existing solutions weren't good enough." | "Drawing on our extensive expertise, we've developed a best-in-class solution." |
 
 ### Error messages

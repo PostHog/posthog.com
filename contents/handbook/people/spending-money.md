@@ -25,6 +25,7 @@ If not, think again.
 - All company expenses (offsites, software/tool subscriptions, merch, etc.) will have common company-wide budgets.
 - You'll be assigned a single `User Limit` of $5,000 per month in Brex from which you can spend money on individual subscriptions, coworking/collaboration, equipment (except laptops and Mac Studio Monitors - ping `#team-people-and-ops` for these), training, etc. If you need an increase in the limit, request it on Brex.
   - The $5,000 is a ceiling, not a target or an allowance to use up – only spend what you can justify as being in PostHog's best interest.
+  - For a large one-off expense over $1,000, give your team lead a heads-up before you commit. It's a big cost and a quick check keeps it defensible.
 
 ### Transparency & accountability
 - All expenses are visible company-wide
@@ -210,7 +211,9 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
-- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
+- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
+  - [Claude](https://claude.ai) (including Claude Code): you need to be invited to our team plan – logging in with SSO doesn't add you automatically. Request an invite yourself with the `/accessrequest` command in Slack.
+  - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
 - If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
@@ -219,6 +222,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
   - It may be worth occasionally upgrading to Premium Economy if you're travelling a lot for work and the cost is not unreasonably high, particularly if you're working the next day
+- When booking flights over $1,000, choose the option to have the refund back to your Brex instead of travel credits.
 - Consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it, using your Brex; this saves you time, particularly when traveling to the US.
 - When traveling internationally, use your Brex to expense a reasonable eSIM. PostHog does not cover roaming charges for your phone.
 - When using your Brex internationally, use the local currency since Brex generally offers a better exchange rate.
@@ -228,7 +232,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 - We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
-- When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
+- When visiting customers (or potential customers), look for opportunities to connect with them over a meal. Be moderate with what you spend, and try to keep it appropriate to the size and expectations of the customer. A reasonable dinner is what we're after, not an open bar or a wild night out. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine. 
   - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
 
 #### Hub travel budget

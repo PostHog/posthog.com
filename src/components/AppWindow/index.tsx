@@ -24,7 +24,8 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
-import Inbox from 'components/Inbox'
+import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
+import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
@@ -63,8 +64,11 @@ const Router = (props) => {
     const { appWindow } = useWindow()
     const { children, path } = props
 
-    if (/^\/questions/.test(path)) {
-        return <Inbox {...props} />
+    if (/^\/questions(\/|$)/.test(path)) {
+        return <LegacyQuestionsRedirect path={path} />
+    }
+    if (/^\/forum(\/|$)/.test(path)) {
+        return <Forum {...props} />
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
@@ -813,7 +817,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     <div
                         ref={contentRef}
                         data-app="AppWindowContent"
-                        className={`size-full flex-grow ${
+                        // With a toolbar above it, the content must be able to shrink below its content's minimum
+                        // height, or it overflows the bottom of the window by the toolbar's height.
+                        className={`size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
                             chrome
                                 ? `${
                                       // A modal's auto height makes percentage heights inside it resolve to
@@ -821,7 +827,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                       // the content here instead of clipping whatever doesn't fit.
                                       item.appSettings?.size?.fixed
                                           ? 'overflow-x-hidden overflow-y-auto'
-                                          : 'overflow-clip'
+                                          : 'overflow-clip min-h-0'
                                   } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'

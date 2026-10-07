@@ -208,7 +208,7 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 
 ### Further reading
 
-- **[In-depth guide to measuring product-market fit](/blog/measure-product-market-fit):** The 7 ways to measure product-market fit, explained. 
+- **[In-depth guide to measuring product-market fit](/founders/measure-product-market-fit):** The 7 ways to measure product-market fit, explained. 
 
 - **[The most useful B2B product metrics for SaaS companies](/blog/b2b-saas-product-metrics):** Need help choosing the right metrics for your product? This guide looks specifically at product metrics and which ones are worth measuring.
 

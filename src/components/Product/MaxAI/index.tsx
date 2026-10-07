@@ -901,7 +901,7 @@ export const ProductMax = () => {
 
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog AI? <br className="md:hidden" />
-                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                            <Link to={`/forum`}>Ask the community</Link> or{' '}
                             <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>

@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
+import { volumeById } from '../constants/pocketGuides'
 
-/** Numbered guides per volume. Front matter and `isPrimer` orientation pages don't count. */
+/** Numbered guides per volume, with an explicit opt-in for orientation-only volumes. */
 export default function usePocketGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
@@ -22,16 +23,18 @@ export default function usePocketGuideCounts(): Record<string, number> {
     const counts: Record<string, number> = {}
     for (const node of data?.guides?.nodes || []) {
         const [, , volume, guide] = node.fields.slug.split('/')
-        // Skip the volume's own index, sibling SKILL.md files, and `_`-prefixed starters.
-        if (!volume || !guide || guide.startsWith('_') || !node.frontmatter?.title) {
+        // Skip sibling SKILL.md files, `_`-prefixed starters, and untitled drafts.
+        if (!volume || guide?.startsWith('_') || !node.frontmatter?.title) {
             continue
         }
-        // Numbered, past the front matter, and not a primer – primers can sit anywhere in the order.
-        if (
-            typeof node.frontmatter.pocketGuideOrder === 'number' &&
-            node.frontmatter.pocketGuideOrder > 0 &&
-            !node.frontmatter.isPrimer
-        ) {
+
+        const order = node.frontmatter.pocketGuideOrder
+        const includeOrientationPages = volumeById(volume)?.countOrientationPages
+        const shouldCount = includeOrientationPages
+            ? typeof order === 'number' && order >= 0
+            : Boolean(guide && typeof order === 'number' && order > 0 && !node.frontmatter.isPrimer)
+
+        if (shouldCount) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

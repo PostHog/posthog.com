@@ -4,10 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import { EntryProvider, bookMdxComponents } from './bookComponents'
-import { FONT_SIZES, learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
-
-/** `BookReader`'s starting size, from the book's own scale so they cannot drift. */
-const BOOK_BASE_FONT_SIZE = FONT_SIZES[0]
+import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 
 interface LearnBodyNode {
     body: string
@@ -66,8 +63,8 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
     }
 
     return (
-        // `not-prose`: the book styles its own. `!p-0`: the docs column already pads.
-        <div className="not-prose @container [&>div]:!p-0" style={{ fontSize: BOOK_BASE_FONT_SIZE }}>
+        // ReaderView supplies the docs prose styles and padding for this surface.
+        <div className="@container [&>div]:!p-0">
             <EntryProvider value={{ entry, pages, basePath }}>
                 <MDXProvider components={bookMdxComponents}>
                     <MDXRenderer>{body}</MDXRenderer>

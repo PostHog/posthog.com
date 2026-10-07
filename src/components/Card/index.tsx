@@ -5,13 +5,20 @@ export default function Card({
     children,
     url,
     className = '',
+    hoverEffect = true,
 }: {
     children: JSX.Element[]
-    url: string
+    url?: string
     className?: string
+    hoverEffect?: boolean
 }): JSX.Element {
+    const hoverClasses = hoverEffect ? 'hover:shadow-xl hover:translate-y-[-2px]' : ''
+    const classes = `group bg-white rounded-[10px] overflow-hidden ${hoverClasses} ${className}`
+    if (!url) {
+        return <div className={classes}>{children}</div>
+    }
+
     const internal = /^\/(?!\/)/.test(url)
-    const classes = `group bg-white rounded-[10px] overflow-hidden hover:shadow-xl hover:translate-y-[-2px] ${className}`
     return internal ? (
         <Link to={url} className={classes}>
             {children}

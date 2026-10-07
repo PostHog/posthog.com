@@ -5,6 +5,44 @@ export const posthog = {
         icon: '/images/logo.svg',
     },
     products: {
+        traces: {
+            available: true,
+            beta: false,
+            tracing: {
+                features: {
+                    distributed_trace_waterfall: true,
+                    service_dependency_map: false,
+                    code_level_profiling: false,
+                    sampling_controls: 'Via OTel SDK',
+                    retention_controls: true,
+                },
+            },
+            standards_and_setup: {
+                features: {
+                    native_open_telemetry_ingest: true,
+                    no_proprietary_sdk_required: true,
+                    instrumentation: 'OpenTelemetry',
+                },
+            },
+            one_platform: {
+                features: {
+                    signals_alongside_traces: true,
+                },
+            },
+            ai_and_self_driving: {
+                features: {
+                    ai_opens_code_fix_pr: true,
+                    fix_and_open_pr_from_slack: true,
+                },
+            },
+            pricing: {
+                features: {
+                    pricing_model: 'Usage-based, no per-host fee',
+                    free_tier: true,
+                    open_source: true,
+                },
+            },
+        },
         replay_vision: {
             available: true,
             features: {
@@ -41,7 +79,7 @@ export const posthog = {
             available: true,
             features: {
                 clickmaps: true,
-                dead_taps: false,
+                dead_taps: true,
                 heatmaps: true,
                 scrollmaps: true,
                 movement_maps: true,
@@ -73,8 +111,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    // Beta since July 2026 (/blog/traces-beta).
-                    distributed_tracing: 'Beta',
+                    distributed_tracing: true,
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -93,7 +130,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
-                ai_summaries: 'Beta',
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -101,7 +138,7 @@ export const posthog = {
                 event_timeline: true,
                 export_to_json: true,
                 filter_by_user_or_event: true,
-                highlights: 'Beta',
+                highlights: true,
                 identity_detection: true,
                 iframe_recording: true,
                 minimum_duration: true,
@@ -124,8 +161,8 @@ export const posthog = {
             export: {
                 features: {
                     export_to_json: true,
-                    export_to_video: 'Beta',
-                    retention_policy: 'Up to 3 months',
+                    export_to_video: true,
+                    retention_policy: 'Up to 5 years',
                 },
             },
             platform_support: {
@@ -191,8 +228,7 @@ export const posthog = {
                 features: {
                     // OTLP metrics ingest + the posthog.metrics SDK API (/docs/metrics).
                     metrics: 'Alpha',
-                    // Beta since July 2026 (/blog/traces-beta).
-                    traces: 'Beta',
+                    traces: true,
                     infra_monitoring: false,
                     alerting: true,
                     synthetic_monitoring: false,

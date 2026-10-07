@@ -212,10 +212,12 @@ const SidebarLink = ({
     return (
         <Link
             to={menuItem.url || ''}
-            external={httpExternal}
+            externalNoIcon={httpExternal}
             // Arrow (`external`-flagged) internal links open in a new PostHog OS window.
             state={arrow && !httpExternal ? { newWindow: true } : undefined}
-            onClick={() => onClick(menuItem)}
+            onClick={() => {
+                if (!httpExternal) onClick(menuItem)
+            }}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             // Hover stays lighter than the selected state so the current page remains dominant.
@@ -228,7 +230,7 @@ const SidebarLink = ({
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
             <MarqueeLabel hovering={hovering}>{menuItem.name}</MarqueeLabel>
-            {arrow && !httpExternal && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
+            {arrow && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
         </Link>
     )
 }
@@ -298,10 +300,9 @@ function SidebarCollapsibleItem({
         if (childActive) setOpen(true)
     }, [childActive])
 
-    // When open, the nested submenu becomes an elevated white card (per wireframe).
     return (
-        <div className={open ? 'rounded bg-white dark:bg-dark p-px shadow-lg' : ''}>
-            <div className="flex items-center gap-px">
+        <div className={open ? 'mb-1' : ''}>
+            <div className={`flex items-center gap-px ${open ? 'rounded bg-accent/50' : ''}`}>
                 <Link
                     to={item.url || ''}
                     onClick={() => onClick(item)}
@@ -346,7 +347,7 @@ function SidebarCollapsibleItem({
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                     >
-                        <div className="flex flex-col gap-px pt-px">
+                        <div className="ml-2 mt-px flex flex-col gap-px border-l border-primary/30 pl-1">
                             {renderSidebarItems(item.children || [], activeItem, onClick, index + 1)}
                         </div>
                     </motion.div>
@@ -432,14 +433,14 @@ export function TreeMenu(props: TreeMenuProps) {
         setActiveItem(item)
     }
 
-    const items = useMemo(() => props.items, [])
+    const items = props.items
     const sections = useMemo(() => buildSections(items || []), [items])
 
     useEffect(() => {
         if (watchPath) {
             setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path, activeUrl])
+    }, [items, watchPath, activeUrl, appWindow?.path, pathname])
 
     if (!items?.length) {
         return <p className="text-sm">No posts available</p>
@@ -562,14 +563,24 @@ function CollapsibleSection({
         if (containsActive) setOpen(true)
     }, [containsActive])
 
-    // When open, the whole section becomes an elevated white card (per wireframe).
+    // Sidebar groups use a highlighted heading and an inset guide line rather
+    // than enclosing a potentially long branch in a card. The elevated
+    // treatment remains for the default OS-style TreeMenu elsewhere.
+    const openSectionClassName = open
+        ? appearance === 'sidebar'
+            ? 'mb-1'
+            : 'rounded bg-white dark:bg-dark p-px shadow-lg'
+        : ''
+
     return (
-        <div className={open ? 'rounded bg-white dark:bg-dark p-px shadow-lg' : ''}>
+        <div className={openSectionClassName}>
             <button
                 type="button"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
-                className="group flex w-full items-center justify-between gap-2 px-2 py-1 text-left text-secondary/50 hover:text-secondary transition-colors hover:transition-none"
+                className={`group flex w-full items-center justify-between gap-2 px-2 py-1 text-left text-secondary/50 hover:text-secondary transition-colors hover:transition-none ${
+                    open && appearance === 'sidebar' ? 'rounded bg-accent/50' : ''
+                }`}
             >
                 <span data-sidebar-label className="text-sm truncate">
                     {section.heading}
@@ -594,7 +605,11 @@ function CollapsibleSection({
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                     >
-                        <div className="flex flex-col gap-px pb-px">
+                        <div
+                            className={`flex flex-col gap-px pb-px ${
+                                appearance === 'sidebar' ? 'ml-2 mt-px border-l border-primary/30 pl-1' : ''
+                            }`}
+                        >
                             {appearance === 'sidebar'
                                 ? renderSidebarItems(section.items, activeItem, onClick)
                                 : renderSectionItems(section.items, activeItem, onClick)}

@@ -22,7 +22,6 @@ import {
     IconAsterisk,
     IconAI,
     IconTestTube,
-    IconTarget,
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
@@ -60,6 +59,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     slug: 'product-analytics',
         // },
         traces,
+        {
+            ...getTool('metrics'),
+            Icon: IconTrends,
+            color: 'green',
+            colorSecondary: 'green',
+        },
         {
             ...getTool('user_interviews'),
             Icon: IconThoughtBubble,
@@ -106,18 +111,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
-        },
-        // A UI-only product card that shares AI Observability's page, not a canonical tool with its own root page.
-        {
-            name: 'AI Evals',
-            Icon: IconTarget,
-            description: 'Run LLM-as-a-judge evaluations to catch regressions.',
-            handle: 'llm_evals',
-            color: 'blue',
-            colorSecondary: 'blue',
-            category: 'ai',
-            slug: 'ai-observability',
-            status: 'beta',
         },
         // A feature of Experiments used in product UI, not a canonical tool with its own root page.
         {
@@ -643,6 +636,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconMagicWand,
             color: 'purple',
             colorSecondary: 'lilac',
+            seo: {
+                title: 'Business intelligence - PostHog',
+                description:
+                    'Query your data warehouse with SQL, visualize external data sources, and build dashboards that combine product and business data.',
+            },
             overview: {
                 title: 'Business intelligence for data-driven teams',
                 description:
@@ -2105,8 +2103,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             description: 'Access heatmaps while browsing your live site',
                         },
                         {
-                            title: 'No extra billing',
-                            description: 'Heatmap data is captured with regular events - no extra cost',
+                            title: 'Free to ingest',
+                            description:
+                                'Heatmap data is free. Free plan covers 3 pages you choose; pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar',
                         },
                     ],
                 },
@@ -2194,7 +2193,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                             FullStory: false,
                             'Microsoft Clarity': true,
                             CrazyEgg: false,
-                            PostHog: true,
+                            PostHog: 'Limited',
                         },
                     },
                 ],

@@ -52,7 +52,7 @@ export default function FeaturedPost({
                     <Tape className="absolute -left-5 -top-3 z-10 w-16 -rotate-[28deg] @2xl:w-20" />
                     <Tape className="absolute -right-5 -top-3 z-10 w-16 rotate-[24deg] @2xl:w-20" />
                     <div className="overflow-hidden rounded-sm border border-primary bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)]">
-                        <PostImage post={post} className="w-full" imgClassName="block h-auto w-full" width={1000} />
+                        <PostImage post={post} className="w-full" imgClassName="block h-auto w-full" />
                     </div>
                 </div>
                 <div className="min-w-0 max-w-xl flex-1">

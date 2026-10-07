@@ -256,7 +256,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     } = reply
 
     const {
-        question: { resolvedBy, id: questionID, profile: questionProfile, resolved, topics },
+        question: { resolvedBy, id: questionID, profile: questionProfile, resolved, topics, forumTopic, locked },
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
@@ -273,10 +273,16 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
-    const resolvable =
-        !resolved &&
-        (isAuthor || isForumModerator) &&
-        topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
+    // A forum topic turns solutions on or off. Other questions keep the # topic rule.
+    const solutionsAllowed = forumTopic?.data
+        ? forumTopic.data.attributes.solutionsEnabled
+        : topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
+    const resolvable = !resolved && (isAuthor || isForumModerator) && solutionsAllowed
+    // Moderators can change a solution anywhere, except in a forum topic with solutions off. A locked forum post
+    // refuses edits from everyone else. The server enforces both.
+    const showMarkSolution = forumTopic?.data
+        ? solutionsAllowed && (isForumModerator || (resolvable && !locked))
+        : isForumModerator || resolvable
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -359,7 +365,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 >
                                     <div className="mr-2 relative ml-[-2px]">
                                         <Avatar
-                                            className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
+                                            className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
                                             image={getAvatarURL(profile?.data?.attributes)}
                                             color={profile?.data.attributes.color}
                                         />
@@ -394,7 +400,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full ${
+                                className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
@@ -471,7 +477,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                 </div>
             </div>
 
-            <div className={`border-l-0 ${isInForum ? 'pl-[calc(44px_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
+            <div className={`border-l-0 ${isInForum ? 'pl-[calc(2rem_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&
@@ -525,7 +531,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
 
                         <div className="space-y-1 mt-2">
-                            {(isForumModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
+                            {showMarkSolution && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
                                     onClick={async () => {
                                         setResolving(true)

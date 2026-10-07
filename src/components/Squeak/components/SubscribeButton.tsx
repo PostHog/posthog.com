@@ -11,18 +11,28 @@ export const Button = ({
     className,
     subscribed,
     handleSubscribe,
+    label,
 }: {
     className?: string
     subscribed: boolean | null
     handleSubscribe: () => Promise<void>
+    label?: string
 }) => (
     <OSButton
         onClick={handleSubscribe}
-        className={subscribed ? 'animate-wiggle origin-top !border-green !bg-green !text-white' : ''}
-        hover="border"
+        className={
+            subscribed
+                ? label
+                    ? '!border-green !bg-green !text-white'
+                    : 'animate-wiggle origin-top !border-green !bg-green !text-white'
+                : ''
+        }
+        hover={label ? 'background' : 'border'}
         icon={<IconBell />}
-        size="md"
-    />
+        size={label ? 'sm' : 'md'}
+    >
+        {label && subscribed ? 'Subscribed' : label}
+    </OSButton>
 )
 
 export default function SubscribeButton({
@@ -30,11 +40,13 @@ export default function SubscribeButton({
     id,
     className = '',
     show = true,
+    label,
 }: {
     contentType: 'topic' | 'question'
     id: number | string
     className?: string
     show?: boolean
+    label?: string
 }) {
     if (!id || !contentType) return null
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -79,24 +91,28 @@ export default function SubscribeButton({
                 <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
             </SideModal>
 
-            <Tooltip
-                trigger={
-                    <span className="relative">
-                        <Button
-                            subscribed={subscribed}
-                            handleSubscribe={handleSubscribe}
-                            className={`${className} p-0 relative font-bold`}
-                        />
-                    </span>
-                }
-                delay={0}
-            >
-                <div style={{ maxWidth: 320 }}>
-                    {user
-                        ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
-                        : 'Sign in to subscribe'}
-                </div>
-            </Tooltip>
+            {label ? (
+                <Button subscribed={subscribed} handleSubscribe={handleSubscribe} className={className} label={label} />
+            ) : (
+                <Tooltip
+                    trigger={
+                        <span className="relative">
+                            <Button
+                                subscribed={subscribed}
+                                handleSubscribe={handleSubscribe}
+                                className={`${className} p-0 relative font-bold`}
+                            />
+                        </span>
+                    }
+                    delay={0}
+                >
+                    <div style={{ maxWidth: 320 }}>
+                        {user
+                            ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
+                            : 'Sign in to subscribe'}
+                    </div>
+                </Tooltip>
+            )}
         </>
     ) : null
 }

@@ -6,15 +6,10 @@ export default function Home() {
     return (
         <>
             <SEO
-                title="PostHog – We make your product self-driving"
+                title="PostHog - your product’s context layer"
                 updateWindowTitle={false}
                 description="PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it."
                 image="/images/og/default.png"
-                languageAlternates={[
-                    { hrefLang: 'en', href: '/' },
-                    { hrefLang: 'ko', href: '/ko' },
-                    { hrefLang: 'x-default', href: '/' },
-                ]}
                 structuredData={buildProductStructuredData({
                     name: 'PostHog',
                     description:

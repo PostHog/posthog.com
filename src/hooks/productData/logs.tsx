@@ -37,7 +37,7 @@ export const logs = {
     includeAddonRates: true,
     // From contents/docs/logs/pricing.mdx
     pricingDescription:
-        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
+        'Logs and Tracing are billed together, by the number of GB ingested across both. The price per GB changes based on your usage. Retention is 14 days by default; set custom retention per service or per source at $0.05/GB per month retained.',
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
@@ -173,17 +173,17 @@ export const logs = {
     freeAllocationText: 'First 10 GB free – every month!',
     addonSliders: [
         {
-            key: 'logs_retention_30d',
+            key: 'logs_retention_custom',
             label: 'Custom retention',
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
             // retained GB again at the add-on rate for each month of retention.
             countsTowardParentVolume: true,
-            // Months of retention input on /logs/pricing. The /pricing calculator still estimates one month.
-            multiplier: { unit: 'month', initial: 1 },
+            // Months of retention input on /logs/pricing, up to 86. The /pricing calculator still estimates one month.
+            multiplier: { unit: 'month', initial: 1, max: 86 },
             // Shown on /logs/pricing
             pricingDescription:
-                'Keep logs longer than the 14-day default. Custom retention is billed per GB for each month you keep your logs, and you can set it per service or per source in your logs and traces settings.',
-            note: 'Billed per month of retention. These GB also count toward logs ingestion above – this price is the added cost for each month you keep them.',
+                'Keep logs and traces longer than the 14-day default. Custom retention is billed per GB for each month you keep them, and you can set it per service or per source in your logs and traces settings.',
+            note: 'Billed per month of retention. These GB also count toward ingestion above – this price is the added cost for each month you keep them.',
             sliderConfig: {
                 marks: [0, 10, 100, 1000, 5000],
                 min: 0,
