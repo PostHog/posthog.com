@@ -11,13 +11,6 @@ availability:
 Batch exports can be used to export data to a Databricks Delta table.
 
 import PersonsModelNote from '../_snippets/persons-model-note.mdx'
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Databricks destination is in beta" type="action">
-
-The Databricks destination is currently in `beta`. This means the configuration and features are subject to change.
-
-</CalloutBox>
 
 ## Requirements
 
@@ -154,16 +147,18 @@ This section describes the models that can be exported to Databricks.
 
 This is the default model for Databricks batch exports. The schema of the model as created in Databricks is:
 
-| Field                         | Type                  | Description                                                                         |
-| ----------------------------- | --------------------- | ----------------------------------------------------------------------------------- |
-| uuid                          | `STRING`              | The unique ID of the event within PostHog                                           |
-| event                         | `STRING`              | The name of the event that was sent                                                 |
-| properties                    | `VARIANT` or `STRING` | All the properties sent along with an event                                         |
-| person_properties             | `VARIANT` or `STRING` | All the person properties at the time the event was ingested                        |
-| distinct_id                   | `STRING`              | The `distinct_id` of the user who sent the event                                    |
-| team_id                       | `BIGINT`              | The `team_id` for the event                                                         |
-| timestamp                     | `TIMESTAMP`           | The timestamp associated with an event                                              |
-| databricks_ingested_timestamp | `TIMESTAMP`           | An additional metadata column, indicating when the event was ingested into Databricks |
+| Field                         | Type                  | Description                                                                                                             |
+| ----------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| uuid                          | `STRING`              | The unique ID of the event within PostHog                                                                               |
+| event                         | `STRING`              | The name of the event that was sent                                                                                     |
+| properties                    | `VARIANT` or `STRING` | All the properties sent along with an event                                                                             |
+| person_properties             | `VARIANT` or `STRING` | All the person properties at the time the event was ingested. Later changes to the person do not update exported rows   |
+| person_id                     | `STRING`              | The ID of the person at the time the event was ingested. Rows are never updated regardless of underlying person changes |
+| distinct_id                   | `STRING`              | The `distinct_id` of the user who sent the event                                                                        |
+| team_id                       | `BIGINT`              | The `team_id` for the event                                                                                             |
+| timestamp                     | `TIMESTAMP`           | The timestamp associated with an event                                                                                  |
+| created_at                    | `TIMESTAMP`           | When PostHog ingested the event                                                                                         |
+| databricks_ingested_timestamp | `TIMESTAMP`           | An additional metadata column, indicating when the event was ingested into Databricks                                   |
 
 ### Persons model
 

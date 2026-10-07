@@ -9,12 +9,6 @@ availability:
 sourceId: Confluence
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Confluence connector pulls your Atlassian Confluence Cloud content — spaces, pages, blog posts, attachments, and more — into the PostHog data warehouse. Only Confluence Cloud sites (`your-domain.atlassian.net`) are supported.
 
 ## Adding a data source

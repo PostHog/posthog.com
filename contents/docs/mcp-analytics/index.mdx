@@ -6,7 +6,6 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { IconPlug, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
-import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
@@ -14,12 +13,6 @@ import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 MCP Analytics shows how AI agents use your MCP tools. It records tool calls, agent intent, reported models, failures, and requests for missing capabilities. It supports PostHog's hosted MCP server and servers that use the [MCP Analytics SDKs](/docs/mcp-analytics/installation).
 
 Each tool invocation creates a `$mcp_tool_call` event in your standard events table. Use these events in MCP Analytics, [Product Analytics](/docs/product-analytics), or [SQL](/docs/data-warehouse/sql). [Self-driving](/docs/self-driving) uses them to find problems and create reports. It can open a pull request for a server you own.
-
-<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
-
-The in-app MCP Analytics views are in beta. The `@posthog/mcp` SDK is published as a `0.x` release, so event names, properties, and tracing behavior may change before `1.0`. Pin a version and don't depend on it for production reporting yet.
-
-</CalloutBox>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/start-here">Get started</OSButton>
 
@@ -69,7 +62,7 @@ The canonical <code>$mcp_tool_call</code> event: tool name, client, latency, err
 
 <SurfaceCard icon="IconList" color="blue" title="Lifecycle and discovery" url="/docs/mcp-analytics/events" cta="See all events">
 
-Legacy initialize handshakes, <code>tools/list</code>, and per-request protocol versions power client and spec adoption breakdowns.
+Legacy initialize handshakes, <code>tools/list</code>, and per-request protocol versions power client and spec adoption breakdowns. The Go SDK sends neither <code>$mcp_initialize</code> nor <code>$mcp_tools_list</code>.
 
 </SurfaceCard>
 

@@ -12,9 +12,9 @@ sourceId: OpenRouter
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
+import BetaRelease from "../\_snippets/beta-release.mdx"
 
-<AlphaRelease />
+<BetaRelease />
 
 The OpenRouter connector syncs your LLM gateway data – usage rollups, API keys, credits, organization members, workspaces, and the models and providers catalogs – into the PostHog Data warehouse, so you can analyze your LLM spend and usage alongside your product data.
 

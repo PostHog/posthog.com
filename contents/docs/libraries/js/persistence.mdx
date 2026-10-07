@@ -29,6 +29,18 @@ const handleCookieConsent = (consent) => {
 };
 ```
 
+## Analytics storage and consent storage
+
+Analytics state and consent decisions use separate storage settings:
+
+- `persistence` - Where PostHog stores analytics state, such as identity and session information. The default is `localStorage+cookie`.
+- `opt_out_capturing_persistence_type` - Where PostHog stores consent decisions. The default is `localStorage`, which is specific to each origin.
+- `cookieWinsOnConflict` - Whether shared analytics cookie values win conflicts with that origin's `localStorage` values. It does not share consent decisions.
+
+Both `localStorage` and PostHog cookies are first-party storage. Their scopes differ: `localStorage` belongs to one origin, while cookies can be shared across sibling subdomains.
+
+A shared analytics identity does not mean consent is shared. Neither `persistence: "cookie"` nor `cookieWinsOnConflict: true` changes the consent storage backend. To share one consent decision across subdomains, configure `opt_out_capturing_persistence_type: "cookie"` on each. See [share consent across subdomains](/docs/privacy/data-collection#share-consent-across-subdomains) for an example and guidance on separate consent decisions.
+
 ## Synchronize identity and sessions across subdomains
 
 With `localStorage+cookie`, `localStorage` belongs to one origin. When `cross_subdomain_cookie` is enabled, the first-party PostHog cookie is shared by sibling subdomains. This can cause a conflict when both stores contain the same key. For example:
