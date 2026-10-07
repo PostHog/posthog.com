@@ -1,0 +1,220 @@
+---
+title: Other languages MCP Analytics installation
+platformLabel: Other languages
+platformIconName: IconCode
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+MCP Analytics has SDKs for [TypeScript](/docs/mcp-analytics/installation/typescript), [Python](/docs/mcp-analytics/installation/python), [Go](/docs/mcp-analytics/installation/go), and [Ruby](/docs/mcp-analytics/installation/ruby). If your MCP server uses another language, such as Java, Kotlin, C#, Rust, PHP, Elixir, or Swift, you can still use MCP Analytics. The SDKs send ordinary PostHog events. Send events with the same shape and PostHog shows your server in MCP Analytics.
+
+This page describes the event your server sends for each tool call.
+
+<CalloutBox icon="IconInfo" title="For coding agents" type="fyi">
+
+You can follow this page to instrument an MCP server. First check the server's language. For TypeScript, Python, Go, or Ruby, use that language's installation page instead, because the SDK handles redaction and sessions for you. For any other language, complete every step marked `required` and run the check in the last step. This page also has a Markdown version at [`/docs/mcp-analytics/installation/other-languages.md`](/docs/mcp-analytics/installation/other-languages.md).
+
+</CalloutBox>
+
+## How it works
+
+The MCP Analytics dashboards read `$mcp_tool_call` events where `$mcp_source` is `"posthog_mcp_analytics"`. They don't check which library sent the event. To instrument a tool call in your server:
+
+1. Add a `context` argument to each tool. Agents use it to explain why they called the tool.
+2. Remove `context` from the arguments before the tool handler runs.
+3. After the handler returns or throws, capture one `$mcp_tool_call` event.
+
+<Steps>
+
+<Step title="Install a PostHog SDK" badge="required">
+
+Install and configure the [PostHog SDK for your language](/docs/libraries) with your [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). If your language has no SDK, send events with the [capture API](/docs/api/capture).
+
+Create one client when the server starts and reuse it.
+
+</Step>
+
+<Step title="Add the context argument to your tools" badge="recommended">
+
+In your `tools/list` response, add a `context` string to each tool's input schema. The agent fills it with the reason for the call. PostHog groups these reasons into the intent clusters on the dashboard.
+
+```json
+{
+  "name": "search_docs",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query": { "type": "string" },
+      "context": {
+        "type": "string",
+        "description": "Why are you calling this tool? Describe the goal in general terms, and refer to people by role (\"a customer\") rather than by name. Leave out personal and identifying information."
+      }
+    },
+    "required": ["query", "context"]
+  }
+}
+```
+
+Mark `context` as required only if you remove it before your MCP framework validates arguments. Agents fill required arguments more reliably than optional ones. If your framework validates first, make `context` optional so calls without it don't fail.
+
+Skip any tool that already has an argument named `context`, because that argument belongs to the tool. Also skip any tool whose root schema uses `$ref`, `oneOf`, `anyOf`, or `allOf`.
+
+When a call arrives, remove `context` from the arguments before the handler runs. If its value is a non-empty string, use it as `$mcp_intent`. See [Capturing agent intent](/docs/mcp-analytics/intent) for how PostHog uses it.
+
+</Step>
+
+<Step title="Resolve a session ID" badge="required">
+
+Every event needs a non-empty `$session_id`. It groups the calls of one agent conversation, so it must never group calls from different clients. Pick the first case that fits your server:
+
+| Your server | `$session_id` |
+| --- | --- |
+| HTTP with an `Mcp-Session-Id` header | `ses_` followed by a hash of the header value, such as the first 32 hex characters of its SHA-256. Use the same hash on every replica. |
+| stdio, or another connection that serves only one client | A `ses_<uuid>` generated when the connection opens. Generate a new one when a tool call arrives 30 minutes or more after the previous call ended, because one stdio process can serve many separate chats. |
+| Stateless HTTP with no session header | A fresh `ses_<uuid>` for each request. |
+
+Don't use credentials, cookies, or client IP addresses as the session. Different clients can share them.
+
+</Step>
+
+<Step title="Capture a $mcp_tool_call event" badge="required">
+
+Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Your PostHog SDK's capture call is already asynchronous.
+
+```json
+{
+  "event": "$mcp_tool_call",
+  "distinct_id": "ses_9f2c4e0b7d1a4c3e8b6f5a2d1c0e9b8a",
+  "timestamp": "2026-10-07T14:03:11.204Z",
+  "properties": {
+    "$mcp_source": "posthog_mcp_analytics",
+    "$session_id": "ses_9f2c4e0b7d1a4c3e8b6f5a2d1c0e9b8a",
+    "$mcp_server_name": "acme-docs",
+    "$mcp_server_version": "1.4.0",
+    "$mcp_tool_name": "search_docs",
+    "$mcp_resource_name": "search_docs",
+    "$mcp_tool_description": "Search the Acme documentation",
+    "$mcp_is_error": false,
+    "$mcp_duration_ms": 182,
+    "$mcp_intent": "Find how to rotate an API key for a customer",
+    "$mcp_intent_source": "context_parameter",
+    "$mcp_client_name": "claude-code",
+    "$mcp_client_version": "2.1.0",
+    "$mcp_protocol_version": "2025-11-25",
+    "$process_person_profile": false
+  }
+}
+```
+
+Every `$mcp_tool_call` needs these properties. Without them, PostHog can't count, time, or order the call:
+
+| Property | Value |
+| --- | --- |
+| `$mcp_source` | Always the string `"posthog_mcp_analytics"`. MCP Analytics ignores events without it. |
+| `$mcp_tool_name` | The tool's name, at most 256 characters. |
+| `$mcp_is_error` | A JSON boolean, never the string `"false"`. |
+| `$mcp_duration_ms` | A JSON number of milliseconds from the start of the request to the handler's result. |
+| `$session_id` | From the previous step. |
+| `$mcp_server_name` | Your server's name, the same on every event. PostHog uses it to tell your servers apart. |
+| `timestamp` | When the request started, not when the event was sent. |
+
+Send these properties whenever you have the value:
+
+| Property | Value |
+| --- | --- |
+| `$mcp_intent`, `$mcp_intent_source` | The `context` value, at most 2,048 characters, with source `"context_parameter"`. Leave both out when the agent sent no context. |
+| `$mcp_client_name`, `$mcp_client_version` | The client's `clientInfo` from the request's `_meta` (`io.modelcontextprotocol/clientInfo`), or else from the `initialize` handshake of the same session. |
+| `$mcp_protocol_version` | The MCP revision of the request, such as `"2025-11-25"`. |
+| `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` headers on HTTP. PostHog uses them to tell clients apart, such as Claude Code from Claude.ai. |
+| `$mcp_server_version` | Your server's version. |
+| `$mcp_tool_description` | The tool's description, at most 2,048 characters. |
+| `$mcp_resource_name` | The tool's name, same as `$mcp_tool_name`. |
+
+The [event reference](/docs/mcp-analytics/events) lists every property, with types and limits.
+
+The only nested JSON values are `$mcp_parameters` and `$mcp_response` (see [the payload step](#capture-arguments-and-results)). Keep every other property a string, number, or boolean.
+
+</Step>
+
+<Step title="Identify the user" badge="optional">
+
+If your server knows who is calling, such as from an OAuth token, set `distinct_id` to that user's ID. Send person properties as `$set` and groups as `$groups`, as described in [Identifying users](/docs/mcp-analytics/identifying-users).
+
+Otherwise, set `distinct_id` to the `$session_id` and set `$process_person_profile` to `false`. That way, anonymous calls don't create person profiles.
+
+</Step>
+
+<Step title="Record failures" badge="required">
+
+A call fails when the handler throws, or when it returns a result with `isError: true`. For a failed call, set:
+
+| Property | Value |
+| --- | --- |
+| `$mcp_is_error` | `true` |
+| `$mcp_error_type` | A low-cardinality label, never the message. Use the thrown error's type name, `"Error"` for an `isError` result, or one of `validation`, `permission`, `missing_context`, `timeout`, `rate_limited`, `api_4xx`, `api_5xx`, `cancelled`, or `internal`. |
+| `$mcp_error_message` | The error message, or the text of the `isError` result, at most 2,048 characters after the redaction in the next step. |
+
+Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or rethrow the tool's own failure unchanged.
+
+To see failures in [Error tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture, and pass the call's `$session_id` and `$mcp_tool_name`.
+
+</Step>
+
+<Step title="Capture arguments and results" badge="optional">
+
+`$mcp_parameters` and `$mcp_response` let you see what agents sent and what your tool returned. For example, you can find calls that succeed but return an empty or wrong result. They can also contain credentials and personal data, so the SDKs [redact them](/docs/mcp-analytics/privacy) before sending. If you capture them, you need to redact them yourself, before you capture:
+
+- Send `$mcp_parameters` as `{"request": {"method": "tools/call", "params": {"name": "<tool>", "arguments": <arguments without context>}}}`, the same shape the SDKs send.
+- Replace with `"[redacted]"` the value of every key that matches, ignoring case: `authorization`, `cookie`, `set-cookie`, `x-api-key`, `token`, `password`, `secret`, or `api_key`, `api_token`, `access_token`, `refresh_token`, `client_secret`, or `private_key`, separated by `_`, `-`, or nothing.
+- Remove credentials from URLs (`user:password@`, and query fields such as `token` or `signature`).
+- Replace `image` and `audio` content blocks, and base64 strings of 10 KB or more, with a short text placeholder.
+- Cut strings to 32,768 characters, arrays and objects to 100 entries, and nesting to 10 levels. Keep the whole event under 100 KB. If it's still too large, remove `$mcp_response` first, then `$mcp_parameters`. Never remove a required property.
+
+Without a redaction pass, leave both properties out. All other features work without them.
+
+</Step>
+
+<Step title="Flush on shutdown" badge="required">
+
+PostHog SDKs batch events. Flush the client when the server shuts down. On serverless and edge platforms, flush at the end of each request without delaying the response, for example with the platform's `waitUntil`.
+
+</Step>
+
+<Step title="Check your events" badge="required">
+
+Call a few tools through an MCP client, flush, then run this query in [SQL insights](https://app.posthog.com/sql):
+
+```sql
+SELECT
+    count() AS calls,
+    countIf(properties.$mcp_server_name IS NULL OR properties.$mcp_server_name = '') AS missing_server_name,
+    countIf(properties.$session_id IS NULL OR properties.$session_id = '') AS missing_session_id,
+    countIf(JSONType(properties, '$mcp_is_error') != 'Bool') AS bad_is_error,
+    countIf(JSONType(properties, '$mcp_duration_ms') NOT IN ('Int64', 'UInt64', 'Double')) AS bad_duration,
+    countIf(properties.$mcp_intent IS NOT NULL) AS with_intent
+FROM events
+WHERE event = '$mcp_tool_call'
+    AND properties.$mcp_source = 'posthog_mcp_analytics'
+    AND timestamp > now() - INTERVAL 1 HOUR
+```
+
+`calls` should match the number of calls you made, and every `missing_` and `bad_` column should be `0`. `with_intent` counts the calls whose agent sent `context`. If it's `0`, check that `context` appears in your `tools/list` response.
+
+Then open the [MCP Analytics dashboard](https://app.posthog.com/mcp-analytics/dashboard). Your tools should appear there.
+
+</Step>
+
+</Steps>
+
+## What the SDKs do that this page doesn't
+
+The SDKs include more features than this page covers. If you need one of these, it's worth checking whether your language has an SDK yet:
+
+- [Conversation IDs](/docs/mcp-analytics/conversation-id), which group the calls of a stateless HTTP client into one session.
+- The [missing capabilities](/docs/mcp-analytics/missing-capability) virtual tool, `get_more_tools`.
+- Model capture through the `llm_model` argument.
+- `$mcp_tools_list`, `$mcp_initialize`, `$mcp_unknown_tool`, and `$mcp_input_required` events.
+- Full redaction, including email addresses, phone numbers, card numbers, and credential-shaped strings anywhere in a payload.
+
+You can add any of these yourself. The [event reference](/docs/mcp-analytics/events) describes their events and properties.
