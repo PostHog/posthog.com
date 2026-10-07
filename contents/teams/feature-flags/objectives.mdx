@@ -1,56 +1,88 @@
-### Q3 2026 Objectives
+### Q4 2026 objectives
 
-#### Real-time cohorts  — <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Launch realtime cohorts and make behavioral targeting the reason to choose PostHog flags <TeamMember name="Matheus Batista" photo />
 
-This is our most-requested feature. Dynamic cohorts today are computed on a delay, which makes them useless for real-time targeting decisions like "user did X in the last 5 minutes." If we can make cohort membership evaluate in real-time at the point of flag evaluation, we collapse a whole category of custom targeting logic people currently build themselves.
-
-**What we'll ship:**
-
-- Real-time cohorts starting with person properties
-- Behavioral data as a follow-up
-- Migration path from existing dynamic cohorts
-
-#### AI Native — <TeamMember name="James Gill" photo />
-
-Feature flags will feature heavily in self-driving products. We want first-time founders as well as experienced engineers to be able to use our product.
+Targeting a flag at people based on what they did is one of our most-requested features. Realtime cohorts let a flag target a cohort such as "completed `checkout_started` in the last 14 days", and people move in and out of the cohort a minute or two after their events arrive. Realtime cohorts are in early beta behind a waitlist today. The Workflows team is building on them too, with realtime cohorts as audiences and branch conditions.
 
 **What we'll ship:**
 
-- Signal (stale flags, proactive flags)
-- A complete MCP
-- Skills
+- Packaging, with pricing shown in the product and published in the docs
+- Self-serve access in place of the waitlist, with no manual setup on our side
+- A processing pipeline that scales to every project
+- General availability, with a launch announcement and realtime cohorts shown where people build flags
 
-#### Dedicated Persons Store — <TeamMember name="Matheus Batista" photo />
+#### Plan for scale and reduce the cost of operating feature flags <TeamMember name="Phil Haack" photo />
 
-In order to make pre-computed flags a reality (as well as to improve reliability and isolation of our service), we need a dedicated persons store.
-
-**What we'll ship:**
-
-- A streaming dedicated persons store
-
-#### Improved Customer Visibility — <TeamMember name="Patricio Tarantino" photo />
-
-Customers don't have visibility into how their users are using flags, billing, what SDKs are making requests, how many `$feature_flag_called` events they raise.
+Our margins are small, and the cost of operating flags does not scale. We want to make sure that scaling 10x doesn't cost us 100x.
 
 **What we'll ship:**
 
-- A breakdown of `/flags` requests by SDK and other parameters.
-- Public latency metrics
+- `$feature_flag_called` events written to their own `$flag_evaluations` table
+- The ability to query `$flag_evaluations`
+- Tighter provisioning of the resources that serve flags
 
-#### Standardize on Infrastructure — <TeamMember name="Matheus Batista" photo />
+#### Realtime flag definitions <TeamMember name="Ruby Childs" photo /> <TeamMember name="Gustavo Henrique Strassburger" photo />
 
-We are a special snowflake, but not that special. We should adopt company standards for infrastructure and ops and port any custom work over.
-
-**What we'll ship:**
-
-- Golden charts
-
-### Improved Experiments — <TeamMember name="Phil Haack" photo />
-
-Support the Experiments team's goals to make experiments built on flags more flexible and useful.
+Customers want an alternative to polling for flag definitions. To deliver it, we need to restructure our pricing and find out what it costs us to run.
 
 **What we'll ship:**
 
-- Boolean flag experiments
-- Multiple experiments on a single flag
-- Dedicated exposure event
+- Pricing for realtime flag definitions
+- Possibly the feature itself, if the pricing work supports it
+
+#### "Auto" rollback and rollout <TeamMember name="Gustavo Henrique Strassburger" photo />
+
+After a flag ships, users watch their own metrics to decide whether to roll it back or widen the rollout. We can watch those metrics for them. Rollback and rollout read the same metrics for a flag and differ only in the direction they recommend. This automates work for users and adds a layer of protection to every release.
+
+**What we'll ship:**
+
+- An RFC that scopes the MVP and splits it into phases that each deliver value
+- Phase 1: detect when a flag should roll back or widen its rollout, and notify the user
+
+**We'll know we're successful when:** users accept our suggestions, and no accepted suggestion leads to a rollback or a guardrail breach. Before customers see suggestions, a dry run must test at least 10 rollouts across 3 product areas, with at least 90% of recommendations correct and useful, and none unsafe.
+
+#### Make flags the default way developers ship end-to-end <TeamMember name="Patricio Tarantino" photo /> <TeamMember name="Ruby Childs" photo />
+
+Developers build features in code, usually by talking to an agent, and rarely open the flags UI. Flags only enter that flow when the developer already knows to ask, and agents don't suggest them on their own. When a developer does ask, the agent creates the flag and stops. It doesn't wire the flag into the code, test it locally, or plan the rollout. MCP flag creation is booming, but many of those flags are never evaluated.
+
+A flag only helps once code evaluates it. So flags should come to developers in the tools where they already build, together with the code change that uses them.
+
+**What we'll ship** (candidates, to be refined):
+
+- Flag by default: when a developer builds a feature with an agent, the agent flags it without being asked. The agent creates the flag in the right project, adds the SDK check to the code, toggles the flag on and off locally to confirm the code works both ways, checks that the targeting rule matches the developer, and proposes a rollout. This ships as a PostHog skill that the wizard installs, and covers both MCP and PostHog AI. This is the most important item in this objective.
+- Flag on request (Ruby): when a developer asks an agent to flag a feature, the agent creates the flag, adds the SDK check to the code, confirms locally that the code works with the flag on and off, and proposes a rollout. This covers both MCP and PostHog AI.
+- Proactive flags (Patricio): other PostHog products, such as error tracking and data warehouse, suggest a flag when their signals show one would help. The suggestion reaches the developer through their agent or as a code change. One example of the shape, not a commitment: a GitHub agent that scans PRs for risky changes and opens a draft PR that puts the risky feature behind a flag.
+- UI simplification (Ruby, lower priority): trim the flags UI to what the core jobs need, so it doesn't distract the less technical users who now use PostHog.
+
+**We'll know we're successful when:** a larger share of new flags created by agents and from proactive suggestions get evaluated. We'll set a baseline this quarter, and add instrumentation if we can't measure it today. We'll also track a fixed set of "build feature X" prompts that never mention flags, and measure the share where the agent flags the feature.
+
+#### Make flag evaluation correct and consistent with cohorts and product analytics <TeamMember name="Phil Haack" photo />
+
+Some flag operators behave differently when we evaluate them locally, remotely, or in product analytics. For example, a cohort can evaluate one way in remote evaluation and another way when its definition is part of the flag definitions for local evaluation. This confuses customers, produces results that look wrong, and reduces trust. We want flags to be trustworthy.
+
+**What we'll ship:**
+
+- SDK specs for all operators
+- Flag evaluation that matches product analytics
+- SDK local evaluation that matches remote flag evaluation
+
+### Other Q4 work
+
+We plan to do this work in Q4, but none of it is a quarterly objective.
+
+**Platform**
+
+- **Persons service:** explore what it would take for flag evaluation to rely on the Persons service instead of isolating further, and give the Persons team feedback. We'll decide by mid-November whether to switch. If we switch, the migration becomes a Q1 objective.
+- **Rust writer for HyperCache:** finish moving `flags.json` writes to the Rust writer ([#96828](https://github.com/PostHog/posthog/issues/96828)). Edit and refresh already use it, but the verifier doesn't. Then delete the Python writer for `flags.json`, and after that the other HyperCache Python writers, one cache at a time.
+- **One bad filter breaks `/flags`:** fix [#98879](https://github.com/PostHog/posthog/issues/98879), where one unparseable property filter in one flag makes `/flags` return HTTP 500 for the whole team.
+
+**Customers**
+
+- **Unanswered issues and PRs:** 25 issues labeled `team/feature-flags` have never had a reply from us. Reply to each one and triage open community PRs.
+- **Data warehouse targeting:** flags can already target data warehouse data through warehouse properties, but our flag docs mention it in a single bullet. Check for gaps, then add examples and a tutorial, such as targeting by Stripe plan tier.
+- **Status page metrics:** turn on the feature flag metrics on the status page.
+
+**Carry-over and exploration**
+
+- **Experiments support:** keep working with the Experiments team on the Q3 experiments work: boolean flag experiments, multiple experiments on a single flag, and a dedicated exposure event.
+- **Fit into how teams ship:** explore Git as the source of truth for flag definitions, and promoting flags between projects ([#34877](https://github.com/PostHog/posthog/issues/34877)).
