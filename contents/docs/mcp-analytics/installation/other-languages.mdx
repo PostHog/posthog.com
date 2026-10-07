@@ -166,9 +166,9 @@ A call fails when the handler throws, or when it returns a result with `isError:
 | `$mcp_error_message` | The error message, or the text of the `isError` result, [redacted](#redact-free-text) and cut to 2,048 characters. |
 | `$mcp_error_status` | Optional. The upstream HTTP status code, as a number, when the failure came from an HTTP call. |
 
-Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or rethrow the tool's own failure unchanged.
+Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or throw the tool's own failure unchanged.
 
-To see failures in [Error tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture. Use the same `distinct_id` and `$process_person_profile` as the call event, redact the message, and add the call's `$session_id`, `$mcp_tool_name`, and `$exception_source: "mcp.tool_call"`.
+To see failures in [Error Tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture. Use the same `distinct_id` and `$process_person_profile` as the call event, redact the message, and add the call's `$session_id`, `$mcp_tool_name`, and `$exception_source: "mcp.tool_call"`.
 
 </Step>
 
@@ -176,7 +176,7 @@ To see failures in [Error tracking](/docs/error-tracking) too, capture the excep
 
 Agents and errors put credentials and personal data into text. Before you send `$mcp_intent`, `$mcp_error_message`, or an exception message, replace each of these with `[redacted]`:
 
-- The user and password in a URL (`https://user:password@host`).
+- The username and password in a URL (`https://user:password@host`).
 - URL query and fragment values whose name is a credential key (below) or a signature, such as `sig`, `signature`, or `X-Amz-Signature`.
 - The value after a credential key in `key=value`, `key: value`, or a JSON member such as `"password": "hunter2"`.
 - PostHog tokens: `ph`, a lowercase letter, `_`, then 20 or more of `A-Z`, `a-z`, `0-9`, `_`, or `-`.
