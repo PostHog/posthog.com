@@ -8,15 +8,14 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import customerTemplate from '../src/templates/OG/customer.js'
 import { createBlogOgImages } from './og/blog'
+import { createCustomerOgImages } from './og/customers'
 import { createDocsOgImages } from './og/docs'
 import { createJobOgImages } from './og/jobs'
 import { createTakumiRenderer, registerMatterFont } from './og/takumi'
 import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
-const ogLimit = pLimit(20)
 const ogImagesDir = path.resolve(__dirname, '../og-images')
 
 export const createCareersOG = async () => {
@@ -91,7 +90,6 @@ export const createOGImages = async (data) => {
     })
 
     const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
-    const font = fontBuffer.toString('base64')
     const takumi = await createTakumiRenderer()
     await registerMatterFont(takumi, fontBuffer)
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
@@ -104,78 +102,8 @@ export const createOGImages = async (data) => {
             docsHandbookMenus,
             ogImagesDir
         ),
+        createCustomerOgImages(takumi, data.customers.nodes, ogImagesDir),
     ])
-
-    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
-    const revisionInfo = await browserFetcher.download('982053')
-
-    const browser = await chromium.puppeteer.launch({
-        args: await chromium.args,
-        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
-        headless: true,
-    })
-    async function createOG({ html, slug }) {
-        const page = await browser.newPage()
-        try {
-            await page.setViewport({
-                width: 1200,
-                height: 630,
-            })
-            await page.setContent(html, {
-                waitUntil: ['domcontentloaded', 'networkidle0'],
-            })
-
-            await page.evaluateHandle('document.fonts.ready')
-
-            const imagePath = `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`
-            await page.screenshot({
-                type: 'jpeg',
-                path: imagePath,
-                quality: 100,
-            })
-            console.log(`Created OG image: ${path.basename(imagePath)}`)
-        } finally {
-            await page.close()
-        }
-    }
-
-    const jobs = []
-
-    // Customers OG
-    for (const post of data.customers.nodes) {
-        const { frontmatter } = post
-        const featuredImage = frontmatter.featuredImage?.publicURL
-        const logo = frontmatter.logo?.publicURL
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: customerTemplate({
-                        title: frontmatter.title,
-                        featuredImage,
-                        logo,
-                        font,
-                    }),
-                    slug: post.fields.slug,
-                })
-            )
-        )
-    }
-
-    await Promise.all(jobs)
-
-    // Tutorials OG
-    // for (const post of data.tutorials.nodes) {
-    //     const { featuredImage } = post.frontmatter
-    //     const image = fs.readFileSync(featuredImage.absolutePath, {
-    //         encoding: 'base64',
-    //     })
-    //     await createOG({
-    //         html: tutorialTemplate({ image }),
-    //         slug: post.fields.slug,
-    //     })
-    // }
-
-    await browser.close()
 }
 
 export const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
