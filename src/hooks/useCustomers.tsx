@@ -66,6 +66,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
 
 export type CustomerLogo =
     | React.ComponentType<{ className?: string }>
@@ -97,6 +98,7 @@ export interface Customer {
             quotes?: string[]
         }
     >
+    yc?: string
     featured: boolean
     hasCaseStudy: boolean // Now always populated dynamically
 }
@@ -124,6 +126,8 @@ interface BaseCustomer {
             quotes?: string[]
         }
     >
+    // YC batch, eg 'W20'. Only set when verified on ycombinator.com/companies
+    yc?: string
     featured: boolean
 }
 
@@ -234,6 +238,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     assemblyai: {
         name: 'AssemblyAI',
+        yc: 'S17',
         toolsUsed: ['experiments', 'product_analytics'],
         industries: ['API Platform'],
         users: ['Leadership', 'Marketing', 'Engineering'],
@@ -304,6 +309,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
+        yc: 'W22',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'ai_observability'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Marketing'],
@@ -591,6 +597,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
+        yc: 'S21',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -753,6 +760,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         ],
         industries: ['AI'],
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        notes: 'Open source AI coding platform',
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
@@ -805,6 +813,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     greptile: {
         name: 'Greptile',
+        yc: 'W24',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -901,6 +910,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
+        yc: 'W24',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
@@ -928,12 +938,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
-        featured: true,
+        featured: false,
         logo: JaxxonLogo,
         height: 12,
     },
     juicebox: {
         name: 'Juicebox',
+        yc: 'S22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1029,8 +1040,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
+    },
     mintlify: {
         name: 'Mintlify',
+        yc: 'W22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1182,6 +1203,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
+        yc: 'W21',
         toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
@@ -1205,6 +1227,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     posthog: {
         name: 'PostHog',
+        yc: 'W20',
         toolsUsed: [
             'web_analytics',
             'product_analytics',
@@ -1324,6 +1347,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
+        yc: 'W20',
         toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
@@ -1427,6 +1451,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     resend: {
         name: 'Resend',
+        yc: 'W23',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1519,6 +1544,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
+        yc: 'S20',
         toolsUsed: [
             'product_analytics',
             'feature_flags',
@@ -1609,7 +1635,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Most popular country with a King',

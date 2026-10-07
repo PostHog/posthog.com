@@ -96,14 +96,7 @@ Starting an experiment without deciding how long it should last can cause you to
 
 Alternatively, if you don't have enough statistical power (i.e., not enough users to obtain a significant result), you'll potentially waste weeks waiting for results. This is especially common in [group-targeted experiments](/blog/running-group-targeted-ab-tests).
 
-For these reasons, PostHog includes a recommended running time calculator in the experiment setup flow. This calculates the minimum sample size required to run your experiment and the duration you should run your experiment for.
-
-<ProductVideo
-  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/experiment_light_7070cd279b.mp4"
-  videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/experiment0dark_61a5bcbb63.mp4"
-  alt="How to use the A/B test duration calculator"
-  classes="rounded"
-/>
+For these reasons, PostHog includes a recommended [running time calculator](/docs/experiments/sample-size-running-time), available from the running time indicator on the experiment page. This calculates the minimum sample size required to run your experiment and the duration you should run your experiment for.
 
 Alternatively, if you enable [sequential testing](/docs/experiments/statistics-frequentist#sequential-testing-beta), PostHog produces always-valid p-values that stay bounded by alpha no matter how often you check results. This lets you monitor an experiment continuously without inflating false positives. You should still plan your expected sample size upfront so you have enough statistical power to detect the effect you care about.
 

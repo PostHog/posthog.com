@@ -23,8 +23,7 @@ export const endpoints = {
     // Beta in product/docs; no billing product yet (free during beta).
     status: 'beta',
     teamSlug: 'data-modeling',
-    // Squeak topic: /questions/topic/endpoints (squeakId from page-data).
-    forumTopicId: 393,
+    forumTag: 'endpoints',
     color: 'teal',
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',

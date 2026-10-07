@@ -518,7 +518,30 @@ To set up error tracking in your project, see the [error tracking docs](/docs/er
 
 ### Native crash autocapture
 
-The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+JavaScript autocapture only covers exceptions thrown in your JS/TS code. To capture crashes in native code – a native module, the React Native runtime, or a C/C++ library – install the optional `@posthog/react-native-plugin` package and enable one or both of these options. What each option covers depends on the platform:
+
+| Option | iOS | Android |
+| --- | --- | --- |
+| `nativeCrashes` | Every native crash: uncaught Objective-C exceptions, Mach exceptions, and signals such as `SIGSEGV` and `SIGABRT`, including crashes in C/C++ code | Java/Kotlin crashes only |
+| `androidNdkCrashes` | Ignored | C/C++ (NDK) crashes, on Android 12 (API 31) or later. Requires `posthog-react-native` 4.78.0 and `@posthog/react-native-plugin` 2.12.0 or later |
+
+To capture every native crash on both platforms, enable both:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  errorTracking: {
+    autocapture: {
+      nativeCrashes: true,
+      androidNdkCrashes: true,
+    },
+  },
+})
+```
+
+Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+An Android NDK crash kills the process immediately, so PostHog captures it on the next app launch from the records the OS kept. Properties such as `$app_version` and the identity describe that launch, not the crash. The first launch after you enable `androidNdkCrashes` also captures NDK crashes the OS still holds from before.
 
 Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 
