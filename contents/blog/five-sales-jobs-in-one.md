@@ -1,6 +1,6 @@
 ---
 title: "Five sales jobs in one"
-date: 2026-10-06
+date: 2026-10-08
 author:
   - leonhard-prinz
 category: General
