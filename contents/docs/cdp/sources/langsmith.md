@@ -9,14 +9,14 @@ availability:
 sourceId: LangSmith
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-Sync your LangSmith LLM observability data – traces and runs, tracing projects, datasets, examples, feedback, and annotation queues – into the PostHog data warehouse, so you can join LLM behavior and cost with your product analytics.
+Sync your LangSmith LLM observability data – traces and runs, tracing projects, datasets, examples, feedback, annotation queues, conversation threads, workspaces, and annotation queue runs – into the PostHog data warehouse, so you can join LLM behavior and cost with your product analytics.
 
 ## Prerequisites
 
