@@ -146,4 +146,4 @@ Once you're happy, open the PR on `posthog.com` and tag the Editorial team for r
 
 ### 7. Distribute
 
-Flag to Liam for social distribution (make his life easier by linking the Art Request and giving any necessary context).
+Flag to the Editorial team for social distribution (make their life easier by linking the Art Request and giving any necessary context).
