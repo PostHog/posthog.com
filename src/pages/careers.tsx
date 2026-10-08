@@ -1,4 +1,3 @@
-import { graphql, useStaticQuery } from 'gatsby'
 import React, { useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
 import { Transparency } from '../components/Careers/Transparency'
@@ -42,9 +41,6 @@ const careersTableOfContents = [
 
 const IndexPage = () => {
     const ref = useRef<HTMLDivElement>(null)
-    const data = useStaticQuery(query)
-    const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
-    const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
     const [showTableOfContents, setShowTableOfContents] = useState(false)
 
     return (
@@ -52,9 +48,7 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers-og.jpeg${
-                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
-                }`}
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/careers_large_ed7c38b67b.jpg"
                 imageType="absolute"
             />
             <Editor
@@ -167,16 +161,5 @@ const IndexPage = () => {
         </>
     )
 }
-
-const query = graphql`
-    query CareersQuery {
-        allAshbyJobPosting(sort: { fields: publishedDate, order: DESC }) {
-            nodes {
-                publishedDate
-                title
-            }
-        }
-    }
-`
 
 export default IndexPage

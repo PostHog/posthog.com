@@ -1,4 +1,3 @@
-import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
 import nodeFetch from 'node-fetch'
@@ -17,57 +16,6 @@ import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
 const ogImagesDir = path.resolve(__dirname, '../og-images')
-
-export const createCareersOG = async () => {
-    if (!fs.existsSync(ogImagesDir)) fs.mkdirSync(ogImagesDir, { recursive: true })
-
-    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
-    const revisionInfo = await browserFetcher.download('982053')
-
-    const browser = await chromium.puppeteer.launch({
-        args: await chromium.args,
-        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
-        headless: true,
-        defaultViewport: {
-            width: 1200,
-            height: 630,
-        },
-    })
-    const page = await browser.newPage()
-    await page.setViewport({
-        width: 1200,
-        height: 630,
-    })
-
-    const url = 'https://posthog.com/careers-og/'
-    console.log(`Creating OG image for: ${url}`)
-
-    await page.goto(url, {
-        waitUntil: ['domcontentloaded', 'networkidle0'],
-    })
-
-    await page.waitForTimeout(1000)
-
-    await page.addStyleTag({
-        content: `
-            body {
-                width: 1200px;
-                height: 630px;
-            }
-            .ToastRoot {
-                display: none;
-            }
-            `,
-    })
-
-    await page.screenshot({
-        type: 'jpeg',
-        path: `${ogImagesDir}/careers-og.jpeg`,
-        quality: 100,
-    })
-
-    await browser.close()
-}
 
 export const createOGImages = async (data) => {
     if (!fs.existsSync(ogImagesDir)) fs.mkdirSync(ogImagesDir, { recursive: true })
