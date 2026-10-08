@@ -24,9 +24,13 @@ We also have a growing library of **[PostHog skills](https://github.com/PostHog/
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
-## Quote a standard migration yourself
+## Self-serve and price a standard migration
 
-If a customer is moving to PostHog from Amplitude, Mixpanel, or another analytics tool, TAEs can price a standard FDE-assisted migration without waiting on us. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations">Managed Migrations quote builder</PrivateLink>: tick the options the customer's sizing answers call for, then download a customer-safe proposal PDF. Every milestone has a fixed price. If the migration doesn't fit the standard package, bring it to [#team-fde](https://posthog.slack.com/archives/C0ADE38DEFN) instead.
+If a customer is moving to PostHog from another product analytics tool, TAEs / TAMs can price a standard FDE-assisted migration without waiting on us.
+
+You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations">Managed Migrations quote builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+
+If the migration doesn't fit the standard package, bring it to #team-fde instead.
 
 ## If the customer still needs hands-on help
 
