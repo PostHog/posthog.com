@@ -713,7 +713,7 @@ The full, always-current list of grantable scopes is published in the `scopes_su
 curl https://us.posthog.com/.well-known/oauth-authorization-server | jq '.scopes_supported'
 ```
 
-Use `eu.posthog.com` for the EU region. These mirror the scopes available for [personal API keys](/docs/api/personal-api-keys); any scope PostHog reserves for internal use is not grantable. Common choices for a provisioning integration include `query:read`, `endpoint:read` and `endpoint:write` (read analytics back through [endpoints](/docs/endpoints)), `insight:read`, `person:read`, `project:read`, `project:write`, `session_recording:read`, and `sharing_configuration:write`.
+Use `eu.posthog.com` for the EU region. The list holds only the scopes an OAuth client can request, so it leaves out some scopes that [personal API keys](/docs/api/personal-api-keys) accept. Common choices for a provisioning integration include `query:read`, `endpoint:read` and `endpoint:write` (read analytics back through [endpoints](/docs/endpoints)), `insight:read`, `person:read`, `project:read`, `project:write`, `session_recording:read`, and `sharing_configuration:write`.
 
 ## What the user gets
 
