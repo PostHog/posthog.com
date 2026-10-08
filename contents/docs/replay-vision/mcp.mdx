@@ -51,7 +51,7 @@ Scans run asynchronously. Poll `vision-scanners-observations-list` until each ob
 - `vision-scanners-backfills-estimate` – count the sessions a backfill over a past window would scan, and the most it could cost.
 - `vision-scanners-backfills-create` – run a scanner over recordings from a past window of up to 365 days. It takes the estimate's credit total as a ceiling, and is rejected if the window now costs more.
 - `vision-scanners-backfills-list` and `vision-scanners-backfills-get` – check progress.
-- `vision-scanners-backfills-cancel` – stop a backfill. Scans already started finish and are billed, and a cancelled backfill can't be resumed.
+- `vision-scanners-backfills-cancel` – stop a backfill. Scans already started finish and are billed, and a canceled backfill can't be resumed.
 - `vision-scanners-backfills-resume` – resume a backfill that paused when the quota ran out.
 
 ### Reading observations

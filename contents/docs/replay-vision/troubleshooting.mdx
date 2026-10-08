@@ -30,8 +30,8 @@ If the status doesn't explain it, check, in order:
 
 1. **Are the filters too narrow?** Try removing filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
 2. **Is the session coverage too strict?** **High activity recordings only** skips most recordings. Try a broader setting.
-3. **Is your project recording sessions at all?** Replay Vision only sees sessions [session replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
-4. **Is your organization over a usage limit?** If Product analytics or Session replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
+3. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
+4. **Is your organization over a usage limit?** If Product Analytics or Session Replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
 5. **Is AI data processing turned on?** Scanners don't scan anything while it's off for your organization. An organization admin can turn it on in organization settings.
 6. **Are the recordings too short?** The background sweep skips recordings shorter than 15 seconds, with fewer than 10 seconds of activity, or with more than an hour of activity. If your filters only match recordings like these, nothing gets queued.
 7. **Are all the matched sessions ineligible?** The scanner may be producing ineligible observations but no successful ones. See [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
@@ -66,7 +66,7 @@ Ineligibles don't cost you credits, but a high ineligible rate usually means som
 | **Nothing to play back** | The recording has no screen data. If you expect visuals, its screen data may still be ingesting: retry the scan later. |
 | **Too short**, **Too inactive**, **Too long** | The recording is outside the 15-second minimum duration, 10-second minimum activity, or one-hour maximum activity. The background sweep already skips these, so they come from on-demand scans. |
 | **Too large** | The recording is too large to render as a video. No retry changes this. |
-| **No events** | The session has no analytics events. If nearly every recent scan is **No events**, check whether your organization is over its Product analytics limit – see [usage limits stop scanning](#usage-limits-stop-scanning). |
+| **No events** | The session has no analytics events. If nearly every recent scan is **No events**, check whether your organization is over its Product Analytics limit – see [usage limits stop scanning](#usage-limits-stop-scanning). |
 | **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran. An organization admin can turn it on in organization settings, then retry the scan. |
 
 The Observations tab is the source of truth: filter it by **Ineligible** status and hover a row's tag to see the reason.
@@ -78,7 +78,7 @@ Replay Vision runs entirely downstream of ingestion: scanners can only scan reco
 - **No new recordings**: background sweeps find no matching sessions and produce nothing at all.
 - **Recordings but no events**: sessions arrive without event data and every scan is marked ineligible with **No events**.
 
-Billing limits are one cause (see [usage limits stop scanning](#usage-limits-stop-scanning) below), but the same symptom appears whenever capture itself stops: session replay is disabled in project settings or in the SDK config, replay capture conditions (sampling, minimum duration) filter out every session, or the snippet/SDK stopped loading after a deploy. Work through the [session replay troubleshooting guide](/docs/session-replay/troubleshooting) to get recordings flowing again.
+Billing limits are one cause (see [usage limits stop scanning](#usage-limits-stop-scanning) below), but the same symptom appears whenever capture itself stops: Session Replay is disabled in project settings or in the SDK config, replay capture conditions (sampling, minimum duration) filter out every session, or the snippet/SDK stopped loading after a deploy. Work through the [Session Replay troubleshooting guide](/docs/session-replay/troubleshooting) to get recordings flowing again.
 
 Vision resumes automatically once new sessions arrive. Sessions that were never captured can't be scanned retroactively, so gaps in ingestion are permanent gaps in observations.
 
@@ -86,8 +86,8 @@ Vision resumes automatically once new sessions arrive. Sessions that were never 
 
 Replay Vision depends on two other products' data, so their billing limits affect it even when your Vision quota is fine:
 
-- **Over the Product analytics limit**: new events are dropped at ingestion. Sessions still get recorded, but they arrive with no event data, so every scan of them is marked ineligible with **No events**. A sudden wall of **No events** ineligibles is the classic symptom.
-- **Over the Session replay limit**: new recordings aren't captured at all, so scanners find nothing new to scan and go quiet.
+- **Over the Product Analytics limit**: new events are dropped at ingestion. Sessions still get recorded, but they arrive with no event data, so every scan of them is marked ineligible with **No events**. A sudden wall of **No events** ineligibles is the classic symptom.
+- **Over the Session Replay limit**: new recordings aren't captured at all, so scanners find nothing new to scan and go quiet.
 
 When either limit is exceeded, a banner appears on the Replay Vision pages linking to your billing settings. Raising the limit (or waiting for the billing period to reset) resumes scanning automatically – no scanner changes needed.
 
