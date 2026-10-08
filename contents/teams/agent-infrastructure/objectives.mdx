@@ -1,3 +1,53 @@
 ### Q4 2026 objectives
 
-We formed in September 2026. We're setting our Q4 2026 objectives now and will publish them here.
+#### Objective 1: Reduce the complexity of building AI products <TeamMember name="Charles Vien" photo />
+
+**Motivation:** We should be the core that powers every agentic product at PostHog, but some teams have built their own in-house systems instead of using ours. Two gateways are still in production, and product-specific logic in tasks has caused most of our regressions and makes every new integration slow.
+
+**Key results:**
+
+- Move Desktop fully onto the new gateway and switch off the legacy one, so there is one gateway in production <TeamMember name="Brandon Leung" photo />
+- Ship one task interface any team can build on, with a written contract for what a task is, what state it's in and who can access it <TeamMember name="Charles Vien" photo />
+- Ship a smart router with provider policy per product or team, using the same mechanism as failover, so we can route for margin and HIPAA <TeamMember name="Brandon Leung" photo />
+
+#### Objective 2: Every AI unit of work is costed and attributed <TeamMember name="Brandon Leung" photo />
+
+**Motivation:** Product teams' top ask is accurate task costs and spending controls. Today the gateway ledger and Django credits are separate systems, and we only find abuse after the bill arrives.
+
+**Key results:**
+
+- Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits and live budgets <TeamMember name="Alessandro Pogliaghi" photo />
+- Agree a default billing model for the whole runtime that connects the gateway ledger to Django credits, written up as a pricing review RFC <TeamMember name="Ben White" photo />
+
+#### Objective 3: Safe model and sandbox access <TeamMember name="Alessandro Pogliaghi" photo />
+
+**Motivation:** Security has been neglected, and we aren't talking enough about abuse, data exfiltration and prompt injection.
+
+**Key results:**
+
+- Ship security at the compute and inference layers: an egress proxy for deterministic rules, and trace investigation for the fuzzy cases <TeamMember name="Alessandro Pogliaghi" photo />
+- Investigate running the harness outside the sandbox, and decide whether it's worth the move <TeamMember name="Jonathan Mieloo" photo />
+- Harden and simplify the agent runtime package, deciding which harnesses product teams need and whether we keep investing in the Pi harness <TeamMember name="Jonathan Mieloo" photo />
+
+### Stretch
+
+#### Internal evals <TeamMember name="Charles Vien" photo />
+
+**Motivation:** Teams have no shared way to tell whether a model or agent change made things better or cheaper.
+
+**Key results:**
+
+- Give teams a shared way to test models and agent changes against real use cases, measuring quality and cost per successful task and catching regressions before they ship <TeamMember name="Charles Vien" photo />
+
+### Ongoing work
+
+These aren't objectives, but we're committing to them this quarter:
+
+- Make our services self-serve and more than one person deep.
+- Document the gateway, tasks and sandbox interfaces.
+- Rewrite our runbooks and get the on-call rotation in good shape.
+- Add code owners for the tasks product folder and the agent package.
+
+### Not doing
+
+- Building product-specific features into the gateway or tasks. Teams build those on top of our primitives.
