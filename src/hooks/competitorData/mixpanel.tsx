@@ -195,7 +195,7 @@ export const mixpanel = {
             },
         },
         feature_flags: {
-            available: 'Enterprise add-on',
+            available: true,
             features: {
                 boolean_flags: true,
                 early_access_management: false,
@@ -234,9 +234,9 @@ export const mixpanel = {
             },
         },
         experiments: {
-            available: 'Enterprise add-on',
+            available: true,
             pricing: {
-                free_tier: false,
+                free_tier: '1k experiment users/mo',
             },
             features: {
                 count_value_metrics: true,
