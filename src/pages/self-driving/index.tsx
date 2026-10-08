@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
+import { OSQuote } from 'components/OSQuote'
 import WistiaEmbed from 'components/WistiaEmbed'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
@@ -975,6 +976,17 @@ export default function SelfDrivingPage({
                                 <SelfDrivingTicker prs={selfDrivingPRs} />
                             </div>
                         )}
+
+                        <div className="not-prose my-8">
+                            <OSQuote customer="juno" author="marshall_gould" product="self_driving" />
+                            <Link
+                                to="/customers/juno"
+                                state={{ newWindow: true }}
+                                className="text-sm font-semibold text-red dark:text-yellow"
+                            >
+                                Read how Juno merges about 90% of its self-driving PRs →
+                            </Link>
+                        </div>
 
                         {/* See how it works */}
                         <h3 id="see-how-it-works" className={sectionHeadingClassName}>
