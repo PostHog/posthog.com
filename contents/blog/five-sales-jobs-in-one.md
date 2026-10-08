@@ -6,8 +6,7 @@ author:
 category: General
 tags:
   - Inside PostHog
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/sales_at_posthog_cf59b8cdce.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/sales_at_posthog_cf59b8cdce.png
 featuredImageType: full
 seo:
   metaTitle: "What working in sales at PostHog is actually like"
