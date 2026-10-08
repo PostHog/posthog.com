@@ -2,35 +2,16 @@
 
 #### Goal 1: Finish and evaluate the Replay encoder
 
-*Description*: Finish the current encoder training run and learn what the model does well and badly before we scale it.
-
-*What we will ship*:
-- **Finish training** – complete the current run (30/40 epochs)
-- **Benchmarks** – compare the encoder against SOTA
-- **Visualizations** – PCA and RCDM
-- **Probes** – MLP probes on the embeddings
-- **Weights analysis** – SwiGLU activations, dead paths, and the attention softmax distribution
-- **Kernels**
-- **Labeling suite evals** – evaluate with the labels from the data labeling suite
-- **Checkpoint evals** – evaluate at different checkpoints
-- **Anisotropy** – check if the embeddings sit in a narrow cone, and test centering as a fix
-- **Multi-head ablation**
+- Finish the current training run
+- Evaluate it: SOTA benchmarks, probes, visualizations, weights analysis, anisotropy, and ablations
 
 #### Goal 2: Train the v3 encoder
 
-*Description*: Apply what we learn in Goal 1 and train the next encoder on the cluster in approximately 2 weeks, then evaluate it in 1 week.
-
-*What we will ship*:
-- **Train on v3 data** – train on the cluster with the findings from Goal 1 applied
-- **Higher-resolution cooldown** – train the cooldown at a higher resolution
-- **10k labels** – 10k training QA pairs and 1k validation QA pairs
-- **Evaluate the v3 encoder** – the self-supervised loss is very different from the supervised loss, so we must compare them carefully
+- Train on v3 data with the findings from Goal 1
+- Scale labels to 10k
 
 #### Goal 3: Scale the data for the end-to-end agent
 
-*Description*: Make the training data large enough to train the end-to-end agent.
-
-*What we will ship*:
-- **50k text renderer samples** – generate them with the session replay text renderer
-- **LLM pipeline** – build the pipeline that makes QA labels from the samples
-- **Path to 100k labels** – scale the labels from the text renderer to 100k
+- Generate 50k text renderer samples
+- Build the LLM labeling pipeline
+- Get to 100k labels
