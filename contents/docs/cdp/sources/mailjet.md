@@ -9,12 +9,6 @@ availability:
 sourceId: Mailjet
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Mailjet API key and secret key to pull your Mailjet data into the PostHog data warehouse.
 
 ## Adding a data source

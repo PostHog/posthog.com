@@ -18,9 +18,11 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
+For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
+
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
@@ -29,7 +31,7 @@ Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#rout
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 

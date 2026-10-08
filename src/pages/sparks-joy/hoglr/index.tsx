@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { HedgehogChef, HedgehogReading, HedgehogSailorHog, HedgehogSurfer } from '@posthog/brand/hoggies'
+import { HedgehogChef, HedgehogReading, HedgehogSailor, HedgehogSurfer } from '@posthog/brand/hoggies'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 import {
@@ -101,7 +101,7 @@ const radarHoggies = [
     { name: 'Hoggie radar', src: '/images/sparks-joy/hoglr/hoggie-radar.webp' },
     { name: 'Chef Hoggie', Icon: HedgehogChef },
     { name: 'Reading Hoggie', Icon: HedgehogReading },
-    { name: 'Sailor Hoggie', Icon: HedgehogSailorHog },
+    { name: 'Sailor Hoggie', Icon: HedgehogSailor },
     { name: 'Surfer Hoggie', Icon: HedgehogSurfer },
 ]
 
