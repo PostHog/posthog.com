@@ -489,10 +489,10 @@ const customerRow = (customer: CustomerType) => ({
     ],
 })
 
-const sortCustomers = (customers: CustomerType[]) => {
+const sortCustomers = (customers: CustomerType[], order: string[]) => {
     return [...customers].sort((a, b) => {
-        const aIndex = CUSTOMER_ORDER.indexOf(a.slug)
-        const bIndex = CUSTOMER_ORDER.indexOf(b.slug)
+        const aIndex = order.indexOf(a.slug)
+        const bIndex = order.indexOf(b.slug)
         const aOrder = aIndex === -1 ? Infinity : aIndex
         const bOrder = bIndex === -1 ? Infinity : bIndex
         return aOrder - bOrder
@@ -508,19 +508,11 @@ const columns = [
 
 export default function Customers(): JSX.Element {
     const { customers: allCustomers } = useCustomers()
-    const customers = sortCustomers(Object.values(allCustomers))
-    const tableCustomers = customers.filter(hasStory)
-    const noStoryYet = customers.filter((customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug))
-    const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
-    const [role, setRole] = useState(ROLES[0].label)
-    const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
-
     const { stories } = useStaticQuery(graphql`
         query {
             stories: allMdx(
                 filter: { fields: { slug: { regex: "/^/customers/" } } }
                 sort: { order: DESC, fields: [frontmatter___date] }
-                limit: 1
             ) {
                 nodes {
                     fields {
@@ -535,6 +527,14 @@ export default function Customers(): JSX.Element {
         }
     `)
     const [latestStory]: Story[] = stories.nodes
+    // Customers without a fixed position follow, newest case study first
+    const order = [...CUSTOMER_ORDER, ...stories.nodes.map((story: Story) => story.fields.slug.split('/').pop() || '')]
+    const customers = sortCustomers(Object.values(allCustomers), order)
+    const tableCustomers = customers.filter(hasStory)
+    const noStoryYet = customers.filter((customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug))
+    const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
+    const [role, setRole] = useState(ROLES[0].label)
+    const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
 
     const heroPeople = HERO_QUOTES.flatMap((source) => resolveQuote(allCustomers, source) ?? [])
     // Every role renders at once so the tallest one sets the height of the section
@@ -647,7 +647,7 @@ export default function Customers(): JSX.Element {
                             ]}
                             dataToFilter={tableCustomers}
                             onFilterChange={(filtered) => {
-                                setFilteredCustomers(sortCustomers(filtered))
+                                setFilteredCustomers(sortCustomers(filtered, order))
                                 setRowsShown(TABLE_ROWS_STEP)
                             }}
                         />
