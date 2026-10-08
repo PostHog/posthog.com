@@ -48,8 +48,7 @@ const IndexPage = () => {
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world. Adventurers needed."
-                image="https://res.cloudinary.com/dmukukwp6/image/upload/careers_large_ed7c38b67b.jpg"
-                imageType="absolute"
+                image="/images/og/careers.jpg"
             />
             <Editor
                 type="careers"
