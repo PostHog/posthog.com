@@ -47,7 +47,7 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 
 ### Approval workflow
 
-1. **User attempts a gated action** – For example, enabling a feature flag or changing a rollout percentage
+1. **User attempts a gated action** – For example, enabling a feature flag or changing its release conditions
 2. **Change request created** – PostHog captures the intended change and notifies approvers via email and in-app notification
 3. **Reviewers evaluate** – Approvers can approve or reject the request
 4. **Change applied or rejected** – When quorum is reached, the change is automatically applied. If the request is rejected, the requester is notified and the change is discarded
@@ -68,6 +68,20 @@ Approvals currently support gating the following actions:
 | Feature flags | Enable, disable, change rollout percentage, change release conditions |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
+
+### Release condition changes
+
+An **Update feature flag** policy requires approval when someone changes a flag's rollout percentage or its release conditions. These count as release condition changes:
+
+- Adding, removing, or editing a property filter in a condition set
+- Adding, removing, or reordering condition sets
+- Setting or changing a condition set's variant override
+- Changing **Match by**, for example from users to a group type or to devices
+- Turning **Stop evaluation at first matching condition set** on or off
+
+Renaming or describing a condition set doesn't need approval. Saving a flag without changing its conditions doesn't create a change request.
+
+Release condition changes need approval only on flags that no other product manages. A flag that an experiment, survey, product tour, or early access feature created needs approval for rollout percentage changes only, because those products update its conditions themselves.
 
 ## Approval policies
 
@@ -98,7 +112,7 @@ Each approval policy includes:
 
 Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
 
-> **Note**: For **Update feature flag** policies, select the **Release conditions** field to require approval when someone adds, removes, or edits a flag's release conditions. Release conditions are only gated by a policy that selects them.
+> **Note**: Conditions on an **Update feature flag** policy apply to the rollout percentage. A policy with a rollout percentage condition doesn't require approval for [release condition changes](#release-condition-changes). To require approval for those too, leave the conditions empty.
 
 | Condition type    | Description                                                     | Example                                       |
 | ----------------- | --------------------------------------------------------------- | --------------------------------------------- |
@@ -186,7 +200,9 @@ Change requests are continuously validated to ensure they can still be applied. 
 
 #### Feature flag version tracking
 
-Feature flags have an internal version number that increments whenever the flag is modified. When you create a change request for a feature flag, the current version is recorded as part of the request.
+Feature flags have an internal version number that increments whenever the flag is modified. When you create a change request for a feature flag, the version you loaded is recorded as part of the request.
+
+If someone changed the flag after you opened it, a change request from your save is stale from the start. This stops an approved request from undoing their change.
 
 If anyone modifies the feature flag while a change request is pending—whether through bypass permissions, the API, or another approved change request—the flag's version increments. This makes the pending change request **inapplicable**: the approval workflow can still complete (approvers can still approve), but PostHog cannot apply the requested change because it was created against an older version of the flag with different properties.
 
@@ -258,7 +274,22 @@ Now all feature flag changes will create change requests that must be approved.
 5. Add approvers
 6. Save the policy
 
-Small rollout adjustments (20% or less) proceed immediately. Larger increases require approval.
+Small rollout adjustments (20% or less) proceed immediately. Larger increases require approval. Release condition changes don't require approval under this policy, because its condition only covers the rollout percentage.
+
+### Requiring approval for targeting changes
+
+**Scenario**: You target a flag at specific customers, for example with a group key filter, and you want a review before anyone changes who gets it.
+
+**Setup**:
+
+1. Go to **Settings** → **Project** → **Approvals**
+2. Click **New policy**
+3. Select **Update feature flag**
+4. Leave conditions empty
+5. Add approvers
+6. Save the policy
+
+Edits to the flag's release conditions, such as adding a customer to the group key filter, now create change requests. Rollout percentage changes also need approval under this policy.
 
 ### Dual approval for compliance
 
