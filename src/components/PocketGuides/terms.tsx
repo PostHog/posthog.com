@@ -17,6 +17,11 @@ export interface TermDefinition {
 }
 
 export const TERMS = {
+    insight: {
+        title: 'Insight',
+        description: 'An analysis of events and user behavior, such as a trend or funnel.',
+        slug: '/docs/product-analytics/insights',
+    },
     trend: {
         title: 'Trend',
         description:

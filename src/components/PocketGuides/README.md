@@ -257,6 +257,24 @@ The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView
 person-linking state around those Twig views. The package does not call `identify`, `reset`, or
 capture events.
 
+The Trends and funnels chapter uses `ProductAnalyticsTrendsFunnelsExhibits.tsx` for three small
+figures. `FilterUsersTrendFigure` reduces Week 2's 19 filter events to eight people beside a
+compact Trends view based on the PostHog insight controls. Edgar's original Forest event, with
+its filter, identity, and session fields, is available as a drill-down. The compact time plot compares
+five and eight unique users; Edgar's repeated selections still count as one person
+in the second week. The drill-down has a caption and keeps its back control inside the Inspector header.
+These panels remain side by side; narrow windows show a sideways-scroll cue and snap to each panel.
+`BookingStepsFigure` reuses
+Twig's `StayCardContent` and shared primary button styling. Once the figure is mostly visible, it waits
+three seconds and plays a confirmed request followed by a clearly labeled, separate failed request.
+The sequence plays once, with event arrivals in the Inspector. Selecting Book stay pauses
+autoplay and switches between the two outcomes; reduced motion starts on the confirmed outcome.
+The booking response is simulated locally; it never submits a booking or captures events. `BookingFunnelFigure` pairs the
+10-to-six person funnel result with a shared Inspector that opens one of the four drop-offs and
+matches its `booking_started` event to a failed simulated response by `request_id`. These are guide-owned teaching fixtures, not
+new Twig instrumentation or a live PostHog query. The failed fixture uses `user_409` and
+`req-204`; Edgar's confirmed fixture uses `user_812` and `req-203`.
+
 Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
 and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
 review the Twig views on both sites at narrow and wide widths, in both themes.

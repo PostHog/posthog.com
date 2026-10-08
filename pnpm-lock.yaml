@@ -75,8 +75,8 @@ importers:
         specifier: 0.13.0
         version: 0.13.0(react@18.3.1)
       '@posthog/hedgehog-mode':
-        specifier: ^0.0.62
-        version: 0.0.62(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.0.63
+        version: 0.0.63(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/icons':
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3619,8 +3619,8 @@ packages:
       react:
         optional: true
 
-  '@posthog/hedgehog-mode@0.0.62':
-    resolution: {integrity: sha512-68rNNcx/Sb8f27k+dCvDTDDGe+nHrNmEvL1M4Shfw0LVVKImfckqlqNuGcBow4hB4VGYjWZMMzQkKtoaVNOPQw==}
+  '@posthog/hedgehog-mode@0.0.63':
+    resolution: {integrity: sha512-e323bc717Xk0IA8w2IFv5+q/xki7Z2rcNA0SAEAXp/uXBnYv8kq0s7f6JvTIvTDdoZRHzH5Z18Ao9WYT0ZE4Dg==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
@@ -21548,7 +21548,7 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@posthog/hedgehog-mode@0.0.62(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@posthog/hedgehog-mode@0.0.63(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       gsap: 3.13.0
       matter-js: 0.20.0

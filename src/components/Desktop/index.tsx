@@ -337,13 +337,13 @@ function Desktop() {
                 <div
                     data-scheme="primary"
                     data-app="Desktop"
-                    className="fixed inset-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
                     <Wallpapers wallpaper={siteSettings.wallpaper} reduceMotion={siteSettings.performanceBoost} />
 
-                    <nav className="px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
+                    <nav className="relative px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
                         <ul className={mobileIconListClassName}>
                             {[...leftApps, ...rightApps].map((app) => (
                                 <DesktopIcon key={app.label} app={app} />

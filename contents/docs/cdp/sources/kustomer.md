@@ -15,7 +15,7 @@ This source is currently in **alpha**. The interface and available tables may ch
 
 </CalloutBox>
 
-Enter your Kustomer credentials to pull your customer service data – customers, conversations, users, teams, tags, and brands – into the PostHog data warehouse.
+Enter your Kustomer credentials to pull your customer service data – customers, conversations, companies, users, teams, tags, brands, sub-statuses, and satisfaction forms – into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -34,14 +34,17 @@ Once the syncs are complete, you can start using Kustomer data in PostHog.
 
 ## Available tables
 
-| Table           | Description             | Sync method  |
-| --------------- | ----------------------- | ------------ |
-| `customers`     | Customers               | Full refresh |
-| `conversations` | Conversations           | Full refresh |
-| `users`         | Helpdesk users (agents) | Full refresh |
-| `teams`         | Teams                   | Full refresh |
-| `tags`          | Tags                    | Full refresh |
-| `brands`        | Brands                  | Full refresh |
+| Table                | Description                                             | Sync method  |
+| -------------------- | ------------------------------------------------------- | ------------ |
+| `customers`          | Customers                                               | Full refresh |
+| `conversations`      | Conversations                                           | Full refresh |
+| `companies`          | Companies (business accounts) that customers belong to  | Full refresh |
+| `users`              | Helpdesk users (agents)                                 | Full refresh |
+| `teams`              | Teams                                                   | Full refresh |
+| `tags`               | Tags                                                    | Full refresh |
+| `brands`             | Brands                                                  | Full refresh |
+| `sub_statuses`       | Conversation sub-statuses (finer-grained status states) | Full refresh |
+| `satisfaction_forms` | CSAT survey form definitions                            | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
