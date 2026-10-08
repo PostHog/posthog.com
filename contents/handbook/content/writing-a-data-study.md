@@ -6,7 +6,7 @@ showTitle: true
 
 A data study is a short, opinionated article built on our own first-party data. 
 
-We've shipped two so far: [Nobody watches their session replays](/blog/nobody-watches-session-replays) and [How AI agents behave](/blog/how-ai-agents-behave). 
+We've shipped two so far: [Nobody watches their session replays](/blog/nobody-watches-session-replays) and [How AI agents behave](/blog/how-ai-agents-behave), as well as [a blog post recounting the experience](/blog/turning-data-into-content). 
 
 This page covers why they're worth doing and how to make one.
 
