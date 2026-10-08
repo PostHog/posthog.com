@@ -22,10 +22,6 @@ const exampleStay = stays[0]
 
 export function FilterUsersTrendFigure(): JSX.Element {
     const [showEvent, setShowEvent] = useState(false)
-    const weeks = [
-        { week: 1, people: 5 },
-        { week: 2, people: 8 },
-    ] as const
     const edgarFilterEvent = JSON.stringify({
         event: 'stay_filter_selected',
         timestamp: '2026-09-25T14:10:12.000Z',
@@ -39,24 +35,36 @@ export function FilterUsersTrendFigure(): JSX.Element {
     })
 
     return (
-        <Exhibit stacked>
+        <Exhibit
+            stacked
+            caption="Select “Inspect an event” to see one of Edgar’s selections behind the Week 2 count."
+            header={
+                <p className="!mb-1 !mt-0 text-right font-rounded text-xs text-secondary md:hidden">
+                    Scroll sideways ↔
+                </p>
+            }
+        >
             <div
                 role="region"
                 aria-label="Week 2 event count and Trends panels; scroll sideways on narrow screens"
                 tabIndex={0}
-                className="overflow-x-auto"
+                className="min-w-0 snap-x snap-proximity overflow-x-auto"
             >
-                <div className="grid min-w-[30rem] grid-cols-2 items-stretch gap-2 @md:gap-4">
+                <div className="grid min-w-[34rem] grid-cols-2 items-stretch gap-2 @md:gap-4 @lg:min-h-[27rem] @2xl:min-h-[24rem]">
                     {showEvent ? (
-                        <div className="min-w-0">
-                            <button
-                                type="button"
-                                onClick={() => setShowEvent(false)}
-                                className="mb-1 font-rounded text-xs font-semibold text-[#292724] underline"
+                        <div className="min-w-0 snap-start">
+                            <PostHogInspector
+                                className={`${COMPACT_INSPECTOR_CLASSES} h-full`}
+                                headerAction={
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowEvent(false)}
+                                        className="text-xs font-semibold underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange"
+                                    >
+                                        ← Week 2 count
+                                    </button>
+                                }
                             >
-                                ← Week 2 count
-                            </button>
-                            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                                 <InspectorCode label="Event payload" value={edgarFilterEvent} meta="evt-201" />
                                 <InspectorStatus>One of the 19 filter selections counted in Week 2.</InspectorStatus>
                             </PostHogInspector>
@@ -64,7 +72,7 @@ export function FilterUsersTrendFigure(): JSX.Element {
                     ) : (
                         <section
                             aria-label="Week 2 filter events counted as people"
-                            className="flex min-w-0 flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                            className="flex min-w-0 snap-start flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
                         >
                             <div className="border-b border-[#d3d0c8] bg-[#f6f3ed] px-2 py-1.5 text-xs font-semibold @md:px-3">
                                 Week 2
@@ -93,7 +101,7 @@ export function FilterUsersTrendFigure(): JSX.Element {
                     )}
                     <section
                         aria-label="Simplified PostHog Trends insight for Twig destination filters"
-                        className="min-w-0 overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                        className="flex min-w-0 snap-start flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
                     >
                         <div className="border-b border-[#d3d0c8] bg-[#f6f3ed] px-2 py-1.5 text-xs font-semibold @md:px-3">
                             Trends
@@ -102,31 +110,36 @@ export function FilterUsersTrendFigure(): JSX.Element {
                             <span className="break-all font-code text-[#292724]">stay_filter_selected</span>
                             <p className="!my-0 text-[#716c63]">Unique users · weekly</p>
                         </div>
-                        <div className="space-y-2 p-2 @md:p-3">
-                            <div
+                        <div className="flex flex-1 items-center justify-center p-2 @md:p-3">
+                            <svg
                                 role="img"
                                 aria-label="Unique users by week: Week 1, 5 people; Week 2, 8 people"
-                                className="space-y-2 text-xs"
+                                className="w-full max-w-[16rem]"
+                                viewBox="0 0 240 160"
                             >
-                                {weeks.map(({ week, people }) => (
-                                    <div
-                                        key={week}
-                                        className="grid grid-cols-[2.75rem_minmax(0,1fr)_1rem] items-center gap-1.5"
-                                    >
-                                        <span>Week {week}</span>
-                                        <span className="h-4 rounded-sm bg-[#e9e7e1]" aria-hidden="true">
-                                            <span
-                                                className="block h-full rounded-sm"
-                                                style={{
-                                                    width: `${(people / 8) * 100}%`,
-                                                    backgroundColor: colors.blue.core,
-                                                }}
-                                            />
-                                        </span>
-                                        <strong className="text-right">{people}</strong>
-                                    </div>
-                                ))}
-                            </div>
+                                <line x1="28" y1="120" x2="222" y2="120" stroke="#d3d0c8" strokeWidth="1" />
+                                <path
+                                    d="M 55 70 L 185 40"
+                                    fill="none"
+                                    stroke={colors.blue.core}
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                />
+                                <circle cx="55" cy="70" r="5" fill={colors.blue.core} />
+                                <circle cx="185" cy="40" r="5" fill={colors.blue.core} />
+                                <text x="55" y="57" textAnchor="middle" fill="#292724" fontSize="15" fontWeight="700">
+                                    5
+                                </text>
+                                <text x="185" y="27" textAnchor="middle" fill="#292724" fontSize="15" fontWeight="700">
+                                    8
+                                </text>
+                                <text x="55" y="145" textAnchor="middle" fill="#292724" fontSize="12">
+                                    Week 1
+                                </text>
+                                <text x="185" y="145" textAnchor="middle" fill="#292724" fontSize="12">
+                                    Week 2
+                                </text>
+                            </svg>
                         </div>
                     </section>
                 </div>
@@ -155,7 +168,18 @@ export function BookingStepsFigure(): JSX.Element {
             return
         }
 
-        const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.1 })
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry?.isIntersecting) return
+                const viewportHeight = entry.rootBounds?.height ?? window.innerHeight
+                const visibleShare = Math.min(0.9, (viewportHeight * 0.9) / entry.boundingClientRect.height)
+                if (entry.intersectionRatio >= visibleShare) {
+                    setInView(true)
+                    observer.disconnect()
+                }
+            },
+            { threshold: Array.from({ length: 21 }, (_, index) => index / 20) }
+        )
         observer.observe(rootRef.current)
         return () => observer.disconnect()
     }, [])
@@ -167,21 +191,9 @@ export function BookingStepsFigure(): JSX.Element {
             return
         }
 
-        const times = [1200, 2700, 3100, 4900, 10200, 11400, 12900, 13300, 15100]
-        let timeouts: number[] = []
-        const play = () => {
-            timeouts.forEach((timeout) => window.clearTimeout(timeout))
-            timeouts = []
-            setStep(0)
-            times.forEach((time, index) => timeouts.push(window.setTimeout(() => setStep(index + 1), time)))
-        }
-
-        play()
-        const interval = window.setInterval(play, 22000)
-        return () => {
-            window.clearInterval(interval)
-            timeouts.forEach((timeout) => window.clearTimeout(timeout))
-        }
+        const times = [3000, 4800, 5300, 7600, 12700, 14700, 16600, 17200, 20000]
+        const timeouts = times.map((time, index) => window.setTimeout(() => setStep(index + 1), time))
+        return () => timeouts.forEach((timeout) => window.clearTimeout(timeout))
     }, [inView, manual, resetKey])
 
     return (
@@ -192,18 +204,19 @@ export function BookingStepsFigure(): JSX.Element {
                 setManual(false)
                 setResetKey((key) => key + 1)
             }}
+            header={<div className="mb-2 font-rounded text-xs text-secondary md:hidden">Scroll sideways ↔</div>}
         >
             <div
                 ref={rootRef}
                 role="region"
                 aria-label="Twig booking and Inspector; scroll sideways on narrow screens"
                 tabIndex={0}
-                className="overflow-x-auto"
+                className="min-w-0 snap-x snap-proximity overflow-x-auto"
             >
                 <div className="grid min-w-[38rem] grid-cols-2 items-start gap-2 @md:gap-4">
                     <section
                         aria-label="Twig booking example"
-                        className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
+                        className="twig-browser min-w-0 snap-start overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
                     >
                         <div className="flex items-center justify-between gap-2 border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">
                             <span>Twig</span>
@@ -269,7 +282,7 @@ export function BookingStepsFigure(): JSX.Element {
                             </div>
                         </div>
                     </section>
-                    <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+                    <PostHogInspector className={`${COMPACT_INSPECTOR_CLASSES} snap-start`}>
                         {started ? (
                             <>
                                 <InspectorDetails
@@ -308,7 +321,9 @@ export function BookingStepsFigure(): JSX.Element {
                             </>
                         ) : (
                             <InspectorStatus>
-                                Watch Twig select Book stay. Events will appear here as the request runs.
+                                {failed
+                                    ? 'New visitor, new request. Watch for their booking_started event.'
+                                    : 'Watch Twig select Book stay. Events will appear here as the request runs.'}
                             </InspectorStatus>
                         )}
                     </PostHogInspector>
@@ -323,17 +338,24 @@ export function BookingFunnelFigure(): JSX.Element {
     const failed = bookingExamples.failed
 
     return (
-        <Exhibit stacked>
+        <Exhibit
+            stacked
+            header={
+                <p className="!mb-1 !mt-0 text-right font-rounded text-xs text-secondary md:hidden">
+                    Scroll sideways ↔
+                </p>
+            }
+        >
             <div
                 role="region"
                 aria-label="Booking funnel and Inspector; scroll sideways on narrow screens"
                 tabIndex={0}
-                className="overflow-x-auto"
+                className="min-w-0 snap-x snap-proximity overflow-x-auto"
             >
                 <div className="grid min-w-[38rem] grid-cols-2 items-start gap-2 @md:gap-4">
                     <section
                         aria-label="Simplified PostHog Funnels insight for bookings"
-                        className="min-w-0 overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                        className="min-w-0 snap-start overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
                     >
                         <div className="flex items-center justify-between gap-2 border-b border-[#d3d0c8] bg-[#f6f3ed] px-3 py-2 text-sm font-semibold">
                             <span>Funnels</span>
@@ -370,7 +392,7 @@ export function BookingFunnelFigure(): JSX.Element {
                             <span className="shrink-0 font-semibold underline">Inspect one →</span>
                         </button>
                     </section>
-                    <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+                    <PostHogInspector className={`${COMPACT_INSPECTOR_CLASSES} snap-start`}>
                         {showPerson ? (
                             <>
                                 <InspectorDetails

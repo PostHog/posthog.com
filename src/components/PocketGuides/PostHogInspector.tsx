@@ -9,17 +9,22 @@ export const COMPACT_INSPECTOR_CLASSES =
 export default function PostHogInspector({
     children,
     className = '',
+    headerAction,
 }: {
     children: React.ReactNode
     className?: string
+    headerAction?: React.ReactNode
 }): JSX.Element {
     return (
         <section
             aria-label="Inspector"
             className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm [&_details]:!m-0 [&_details]:!rounded-none [&_details]:!border-0 [&_details]:!bg-transparent [&_details]:!pb-0 ${className}`}
         >
-            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}>
-                Inspector
+            <div
+                className={`flex items-center justify-between gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}
+            >
+                <span>Inspector</span>
+                {headerAction}
             </div>
             <div aria-live="polite" className="min-w-0 text-sm">
                 {children}
