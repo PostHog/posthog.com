@@ -78,6 +78,8 @@ As the account owner you will be assigned a risk indicator in Vitally, as well a
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
+> If the billing contact left the company, or the invoice goes to the wrong person, [update the billing details in billing admin](/handbook/growth/sales/contracts#updating-the-billing-email-and-address).
+
 > Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
 
 > If a credit-based customer asks to pay a late invoice by credit card instead, say no. Tell them to pay by bank transfer, and send the invoice PDF again. The [payment method rules](/handbook/growth/sales/contract-rules#payment-method) do not change because the invoice is late.
