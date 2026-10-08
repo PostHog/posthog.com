@@ -119,7 +119,7 @@ const frameContents = [
     {
         title: 'Built big things with small teams',
         content:
-            'Our <a href="/data-warehouse">Data warehouse</a> was built by a team of two. Same with <a href="/session-replay">Session replay</a>. And we shipped a <a href="/web-analytics">Google Analytics replacement</a> with a team of one.',
+            'Our <a href="/context-warehouse">Data warehouse</a> was built by a team of two. Same with <a href="/session-replay">Session replay</a>. And we shipped a <a href="/web-analytics">Google Analytics replacement</a> with a team of one.',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_94bfcaeaab.png"
