@@ -14,6 +14,8 @@ MCP Analytics shows how AI agents use your MCP tools. It records tool calls, age
 
 Each tool invocation creates a `$mcp_tool_call` event in your standard events table. Use these events in MCP Analytics, [Product Analytics](/docs/product-analytics), or [SQL](/docs/data-warehouse/sql). [Self-driving](/docs/self-driving) uses them to find problems and create reports. It can open a pull request for a server you own.
 
+We run MCP Analytics on PostHog's own MCP server. The public [MCP leaderboard](/mcp/leaderboard) is built from those `$mcp_tool_call` events, so it's a good preview of what you get for yours.
+
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/start-here">Get started</OSButton>
 
 ## Where you can use it

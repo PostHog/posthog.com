@@ -33,6 +33,8 @@ If you regularly hit these limits, consider pulling data through [batch exports]
 
 Anything that speaks MCP works. We've tested and documented setup for Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, and Zed. The [PostHog Wizard](https://github.com/PostHog/wizard) can install the server into most of these in one command.
 
+Curious which clients and models agents actually use with the server? The [MCP leaderboard](/mcp/leaderboard) shows their share of tool calls, error rates, and latency.
+
 ### Do I need to create an API key?
 
 No, OAuth is the recommended path and works out of the box with the wizard. If your client doesn't support OAuth, you can use a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the `MCP Server` preset – see the [API key authentication](#using-an-api-key-instead-of-oauth) section below.
@@ -315,4 +317,5 @@ The MCP server acts as a proxy to your PostHog instance. It does not store your 
 
 - [Use cases](/docs/model-context-protocol/use-cases) – example prompts and multi-step recipes
 - [MCP tools reference](/docs/model-context-protocol/tools) – every MCP tool the server exposes
+- [MCP leaderboard](/mcp/leaderboard) – the models, clients, and tools agents use most with this server
 - [Overview](/docs/model-context-protocol) – back to the MCP overview and install instructions
