@@ -1,6 +1,6 @@
 ---
 title: "We built our own cloud agents runtime. Here's what we learned"
-date: 2026-10-07
+date: 2026-10-08
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -46,9 +46,9 @@ First, it creates a task and a run through our API. The API hands that run to a 
 
 It relays what the agent does back out, forwarding anything you prompt back in, refreshing the credentials inside the box before they expire, and swapping the box for a fresh one if the provider is about to reclaim it.
 
-When the agent stops, the workflow snapshots the machine, opens or updates the PR, babysits CI for a while, and finally, tears the machine down.
+When the agent stops, the workflow works out when it's safe to shut down – whether it needs to babysit CI, wait on other conditions, and so on. Once it's safe, it snapshots the machine and tears it down.
 
-The agent and its tools live in the box. The run (its state, its queue of messages, its credentials) lives in the workflow outside it. So the box is disposable: we shut it down, swap it out, or restore it from a snapshot, and the run carries on.
+Nothing that matters lives only in the sandbox. The run sits in Postgres, the conversation in the run log, and the working tree in a snapshot, and tokens are minted fresh each time. If a sandbox disappears, the worker builds another, restores the tree, replays the log, and the run carries on.
 
 The runtime didn't start out shared. Every time we plugged in a new agent product, it needed the same basic pieces as the last one, and showed us what was still missing.
 
@@ -66,9 +66,9 @@ First, a reply has to reach a run that may be busy. When you prompt the agent in
 
 Second, a reply has to reach a run whose virtual machine might no longer exist. A Slack app run that doesn’t get prompted for some time shuts its sandbox down. If you follow up later, the workflow boots a fresh sandbox from the last snapshot, with the conversation and the working tree intact, and delivers the message there.
 
-Third, nothing can be delivered twice. We support retry mechanisms across Slack and internal failures. Slack retries webhooks, and Temporal retries activities, so both directions carry an ID. The same goes for the events you watch as the agent works: each one is numbered, so a late viewer catches up without gaps and without repeats.
+Third, a reply must not reach the agent twice, and it may not reach it in general. Slack re-sends a webhook it thinks failed, and we drop those re-sends rather than process them. Each message carries an id, and the run ignores an id it has already accepted. Events you watch arrive in order, and a viewer who reconnects late is rebuilt from the saved log, which can show some events again.
 
-## 3. A run has to be cheap and safe
+## 3. A run has to be safe
 
 Our [self-driving features](/blog/self-driving-product) introduced another challenge for the agent runtime: it upped the volume but cut out the middleman (humans). The [signals pipeline](/docs/self-driving/signals), for example, groups [errors](/error-tracking), [session replays](/session-replay), support tickets, and GitHub activity into [reports](/docs/self-driving/reports). For each report it picks a repository, researches the problem in a sandbox, and if the report is actionable (and clears the team's priority threshold), the agent starts an implementation run on its own.
 
@@ -82,7 +82,6 @@ So you need a deterministic block underneath it, at the machine level, that says
 
 ## 4. A run has to be a real machine
 
-So we take those decisions away from the agent and bake them into the machine. Every project gets its own sandbox. What the project needs to run (dependencies, build tools, test setup) goes into a custom image, built once, so no run [wastes tokens](/blog/optimizing-agent-cost) rediscovering it. Where the agent is allowed to reach goes into a network allowlist, enforced by the sandbox provider, so no prompt can talk it into going anywhere else.
 
 Somewhere in the middle of these learnings, the sandbox stopped being a container. The original sandbox was using gVisor (from Google) as application kernel for our containers, in which Docker cannot run. Stacks like ours need Docker.
 
