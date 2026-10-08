@@ -41,7 +41,7 @@ The [technical interview](/handbook/people/hiring-process#2-technical-interview-
 
 Sometimes when you get part of the way into a technical interview it becomes clear that the person is not a fit. Because rejecting candidates needs to be done in a specific way, please continue the interview as usual and do not reject on the call. It's okay to end the interview a bit early - interviews often don't take the entire time, and it's okay to give this caveat ahead of every technical interview.
 
-You should use <PrivateLink url="[https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md]">the technical exercise guide</PrivateLink> when evaluating candidates at this stage.
+You should use <PrivateLink url="https://github.com/Posthog-Interviews/superday-interview-test/blob/main/technical-exercise/rubric.md">the technical exercise guide</PrivateLink> when evaluating candidates at this stage.
 
 > You may be shadowed by another PostHog team member – a shadow is someone who listens in, but doesn't participate. This is something we do regularly among technical interviewers, as a way of improving the hiring process. During high season, we may ask some of you to record these interviews for training purposes to help us onboard and train new interviewers faster. The candidate will, of course, have the chance to opt out by either letting their recruiter know in advance or letting you know at the start of the interview - you should always ask the candidate for their permission before recording and this will never affect the outcome of the interview - there are many reasons why someone may opt out from being recorded. 
 

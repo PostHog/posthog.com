@@ -33,7 +33,7 @@ The final disadvantage is that it's harder to predict how fast we'll grow compar
 
 ## The metrics we track and how to read our financials
 
-The financial numbers we publish each month/quarter lives in the [internal Finance Updates dashboard]([url](https://us.posthog.com/project/2/dashboard/1631977)).
+The financial numbers we publish each month/quarter lives in the [internal Finance Updates dashboard](https://us.posthog.com/project/2/dashboard/1631977).
 
 We group them into **monthly financials** (the basics — what we made, what we spent) and **quarterly SaaS metrics** (the efficiency lens to determine if we're growing well).
 
