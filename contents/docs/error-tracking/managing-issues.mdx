@@ -2,11 +2,11 @@
 title: Manage and resolve issues
 ---
 
-Error tracking gives you multiple ways to help you manage issues and work towards resolution. 
+Error tracking gives you multiple ways to help you manage issues and work towards resolution.
 
 ## Update issue status
 
-You can update the status of an issue from the issue page under **Status** or issue list. 
+You can update the status of an issue from the issue page under **Status** or issue list.
 
 All issues are marked **Active** by default. You can update the status to reflect the current state of the issue:
 
@@ -27,7 +27,7 @@ A common workflow is to look for all issues that are **Active** assigned to you 
 
 ## View stack traces and event properties
 
-Each issue contains detailed information about the exceptions that triggered it. 
+Each issue contains detailed information about the exceptions that triggered it.
 
 Click the **Stacktrace** tab to see exactly where the error occurred. [Stack traces](/docs/error-tracking/stack-traces) help you pinpoint the line of code and the sequence of function calls leading up to the exception.
 
@@ -47,11 +47,12 @@ Under the **Properties** tab, you can view additional metadata about the excepti
   classes="rounded"
 />
 
-## Watch session replays 
+## Watch session replays
 
-Error tracking works with [session replays](/docs/session-replay) to help you understand the context of an issue. This is useful for reproducing and debugging issues. 
+Error tracking works with [session replays](/docs/session-replay) to help you understand the context of an issue. This is useful for reproducing and debugging issues.
 
 You can view a session replay for an exception by:
+
 - Selecting an exception in the exception list and clicking the **Session** tab at the top of the page.
 - Clicking the **View recording** button besides each exception.
 
@@ -65,7 +66,6 @@ You can view a session replay for an exception by:
 ## Discover errors from logs
 
 Error tracking issues can also be discovered from the [Logs](https://app.posthog.com/logs) viewer. When [logs are linked to sessions](/docs/logs/link-session-replay), related errors can be viewed in the **Related errors** tab of any log entry. This is useful for investigating backend issues where both logs and errors were captured during the same session.
-
 
 ## Bulk actions
 
@@ -81,3 +81,9 @@ Select multiple issues using the checkboxes in the issue list to perform bulk ac
 ## Assign issues to teammates
 
 Issues can be [assigned to a teammate](/docs/error-tracking/assigning-issues) from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.
+
+## Start a workflow from an issue
+
+You can create a [workflow](/docs/workflows) directly from any error tracking issue to automate responses when the issue occurs. Click **Start a workflow on this issue** in the issue side panel to open the workflow builder with the trigger pre-configured to the `$exception` event filtered to that specific issue.
+
+The workflow is not saved until you complete the setup and click **Create as draft**. From there, you can add steps like sending Slack notifications, calling webhooks, or updating person properties. See the [workflow builder docs](/docs/workflows/workflow-builder) to learn more about available steps.
