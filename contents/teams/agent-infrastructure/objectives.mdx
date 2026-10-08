@@ -2,7 +2,7 @@
 
 #### Objective 1: Reduce the complexity of building AI products <TeamMember name="Charles Vien" photo />
 
-**Motivation:** We should be the core that powers every agentic product at PostHog, but some teams have built their own systems instead of using ours. Two gateways are still in production and product-specific logic in our task models makes every new integration slow.
+**Motivation:** We should be the core that powers every agentic product at PostHog, but some teams have built their own systems instead of using ours. Two gateways are still in production and product-specific logic in tasks makes every new integration slow.
 
 **Key results:**
 
@@ -12,7 +12,7 @@
 
 #### Objective 2: Every AI unit of work is costed and attributed <TeamMember name="Brandon Leung" photo />
 
-**Motivation:** Product teams' top ask is accurate task costs and spending controls. Today the gateway ledger and Django credits are separate systems and we only find abuse after the bill arrives.
+**Motivation:** Product teams top ask is accurate task costs and spending controls. Today the gateway ledger and Django credits are separate systems and we only find abuse after the bill arrives.
 
 **Key results:**
 
@@ -26,8 +26,7 @@
 **Key results:**
 
 - Ship security at the compute and inference layers: an egress proxy for deterministic rules and trace investigation for the fuzzy cases <TeamMember name="Alessandro Pogliaghi" photo />
-- Investigate running the harness outside the sandbox and decide whether it's worth the move <TeamMember name="Jonathan Mieloo" photo />
-- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps and spend-velocity alerts <TeamMember name="Alessandro Pogliaghi" photo />
+- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps and spend-velocity alerts <TeamMember name="Brandon Leung" photo />
 
 #### Objective 4: A reliable agent runtime teams can build on <TeamMember name="Jonathan Mieloo" photo />
 
@@ -39,6 +38,7 @@
 - Give people and agents a dependable local setup and an easy way to debug sandboxes and the task runtime <TeamMember name="Jonathan Mieloo" photo />
 - Move the self-driving pipeline off gVisor onto VMs and cut agent server boot time with a warm-pool control plane <TeamMember name="Alessandro Pogliaghi" photo />
 - Track task and sandbox success rate and boot time on a dashboard, so we can show they're getting faster and more reliable <TeamMember name="Jonathan Mieloo" photo />
+- Investigate running the harness outside the sandbox and decide whether it's worth the move <TeamMember name="Jonathan Mieloo" photo />
 
 ### Stretch
 
