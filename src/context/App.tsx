@@ -1437,6 +1437,42 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // Add/edit an artifact from /museum. Not a route — opened via addWindow.
+    'museum-artifact-form': {
+        size: {
+            min: {
+                width: 720,
+                height: 400,
+            },
+            max: {
+                width: 720,
+                height: 900,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    // Curate an exhibit from /museum. Not a route — opened via addWindow.
+    'museum-exhibit-form': {
+        size: {
+            min: {
+                width: 720,
+                height: 400,
+            },
+            max: {
+                width: 720,
+                height: 900,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     'application-success': {
         size: {
             min: {
