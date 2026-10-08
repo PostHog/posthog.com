@@ -218,7 +218,8 @@ function TaskBarMenu() {
                                 {
                                     type: 'item' as const,
                                     label: 'Art library',
-                                    link: '/art-library',
+                                    link: 'https://brand.posthog.com',
+                                    external: true,
                                     icon: <IconPencil className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                                 {

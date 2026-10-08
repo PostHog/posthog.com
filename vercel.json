@@ -769,6 +769,11 @@
             "statusCode": 301
         },
         {
+            "source": "/art-library",
+            "destination": "https://brand.posthog.com",
+            "statusCode": 301
+        },
+        {
             "source": "/security",
             "destination": "/handbook/company/security",
             "statusCode": 301

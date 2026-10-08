@@ -126,7 +126,7 @@ Max is our hedgehog mascot. He's a core part of the PostHog visual identity. He'
 - Use competitor hedgehog styles or derivative designs.
 - Use our artwork on a personal website or for anything that isn't PostHog-related. While our code is open source, our brand assets are property of PostHog. (The exception is for assets explicitly intended for community use like desktop or mobile background images.)
 
-**Artwork library:** Team members can find all hedgehogs under the Account menu -> Art library.
+**Artwork library:** Team members can find all hedgehogs at [brand.posthog.com](https://brand.posthog.com) (Account menu -> Art library).
 
 ### Illustration style (general)
 
