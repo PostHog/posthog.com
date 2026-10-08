@@ -65,6 +65,8 @@ Thanks to the Salesforce MCP, I have not logged into the Salesforce UI in over a
 
 The same goes for the numbers side of the job. I recently built a quota calculator that takes Stripe billing, Salesforce opportunities, PostHog's own customer analytics and so on and turns it into a per rep scenario plan of comp now and comp in the future. Built it in a day, and it has helped scenario plan much more time efficiently.
 
+![quota calc](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Screenshot_2026_10_05_at_22_27_21_c17c486875.png)
+
 Thanks to PostHog Desktop, building out my demo environment is easier than ever before -> generic demo data and even specific customer requests can be built in minutes because I can explain the situation, it builds out the solution and demo data, tests it in PostHog and in the browser, iterates, and then gives me the finished demo. Days of my solution consulting time have been spent on demo prep – now I can come with a super personalized demo in a fraction of the time.
 
 Another large part of the high-end part of sales was strategic messaging. Understanding WHY the customers are doing what they are doing. And then formulating HOW we can help them - all packaged in a meaningful and creative way. This was something reserved to only the biggest customers, and we had entire teams dedicated to only the creative part. Almost like working in a bespoke ad agency.
