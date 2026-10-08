@@ -1,5 +1,5 @@
 ---
-title: "Five sales jobs in one"
+title: "What working in sales at PostHog is actually like"
 date: 2026-10-08
 author:
   - leonhard-prinz
