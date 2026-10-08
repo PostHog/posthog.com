@@ -28,7 +28,7 @@ For the smaller questions that come up along the way, **PostHog AI** and the **P
 
 If a customer is moving to PostHog from another product analytics tool, TAEs / TAMs can price a standard FDE-assisted migration without waiting on us.
 
-You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations">Managed Migrations quote builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations quote builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
 If the migration doesn't fit the standard package, bring it to #team-fde instead.
 
