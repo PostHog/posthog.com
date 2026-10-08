@@ -39,6 +39,7 @@ interface ScrollAreaProps {
     fullWidth?: boolean
     /** Marks this viewport as the page's scroll root, so posthog-js measures scroll depth against it. */
     isScrollRoot?: boolean
+    overlay?: React.ReactNode
     viewportClasses?: string
     /** Ref to the scrolling viewport node — e.g. to persist/restore scroll position. */
     viewportRef?: React.Ref<HTMLDivElement>
@@ -53,6 +54,7 @@ const ScrollArea = ({
     style,
     fullWidth = false,
     isScrollRoot = false,
+    overlay,
     viewportClasses = '',
     viewportRef,
 }: ScrollAreaProps) => {
@@ -150,6 +152,7 @@ const ScrollArea = ({
                 </div>
             )}
             {fadeX && <HorizontalScrollFades showStart={showStart} showEnd={showEnd} />}
+            {overlay}
         </RadixScrollArea.Root>
     )
 }
