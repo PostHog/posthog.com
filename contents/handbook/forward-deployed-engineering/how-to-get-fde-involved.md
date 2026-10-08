@@ -18,7 +18,7 @@ Before anything else, point the customer at the **PostHog wizard audit**:
 npx @posthog/wizard audit all
 ```
 
-It runs the same checks our FDE team would do by hand. It's read-only, takes a few minutes, and produces a report (a markdown file plus a shareable PostHog notebook) that names exactly what's wrong and what to fix first. Plenty of teams find their own engineers can take it from there.
+It runs the same checks our FDE team would do by hand. It's read-only, takes a few minutes, and produces a report (a Markdown file plus a shareable PostHog notebook) that names exactly what's wrong and what to fix first. Plenty of teams find their own engineers can take it from there.
 
 We also have a growing library of **[PostHog skills](https://github.com/PostHog/skills)** you can point an agent at to do a lot of this yourself. They cover far more than audits: migrations, config cleanup, spotting what's misconfigured, and plenty else. Most work directly against a customer's instance through the MCP tools, so you don't always need their codebase to dig in. To run them against the customer's own data, do it on their behalf by [impersonating their account](/handbook/company/security#impersonating-users).
 
@@ -28,13 +28,13 @@ For the smaller questions that come up along the way, **PostHog AI** and the **P
 
 If a customer is moving to PostHog from another product analytics tool, TAEs / TAMs can price a standard FDE-assisted migration without waiting on us.
 
-You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations">Managed Migrations quote builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
 If the migration doesn't fit the standard package, bring it to #team-fde instead.
 
 ## If the customer still needs hands-on help
 
-Before you route anything to us, gather the context we need to get started - it saves you a round-trip. If you find yourself blocked on answering any of the below, just bring it to us and we'll figure it out:
+Before you route anything to us, gather the context we need to get started – it saves you a round-trip. If you find yourself blocked on answering any of the below, just bring it to us and we'll figure it out:
 
 1. **Start with the gap or pain point.** What problem does the customer have today, and what's the business and operational context around it? It also helps to know the dynamic between the business side and their engineers.
    - **If it's to implement a new use case, share your discovery.** Tell us which [use cases](/handbook/growth/use-case-selling/use-case-selling) are in play now, how they could lead into others later, and one layer deeper on each: if they say they want Growth & Marketing, what do they actually mean, and why? The discovery questions in the library cover where the customer is today, what happens if they don't solve it, and what outcomes they want. Agreeing on a set number of use cases up front also helps us keep the scope of the technical work contained.
