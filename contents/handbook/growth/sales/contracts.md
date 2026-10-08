@@ -58,7 +58,7 @@ The legacy pricing calculator is available <PrivateLink url="https://docs.google
 
 QuoteHog can draft a renewal quote for you once a renewal opportunity in Salesforce closes within 90 days. A daily job picks up the opportunity, builds a quote from the customer's last billing cycle of Stripe usage, and sends the opportunity owner a Slack message with the link. Treat it as a starting point and review it against the usage trends above before you share it with the customer.
 
-The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. Disconnecting Salesforce turns it off again.
+The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>. Disconnecting Salesforce turns it off again.
 
 ## Order form
 
