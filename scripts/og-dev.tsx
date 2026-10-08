@@ -9,11 +9,13 @@ import { createTakumiRenderer, fitRoleFontSize, renderOgJpeg } from '../gatsby/o
 
 const require = createRequire(__filename)
 const port = Number(process.env.OG_DEV_PORT || 4180)
-const jobModule = path.resolve(__dirname, '../src/templates/OG/job.tsx')
+const ogDir = path.resolve(__dirname, '../src/templates/OG')
+const jobModule = path.join(ogDir, 'job.tsx')
+const watchedModules = [jobModule, path.join(ogDir, 'window.tsx')]
 
 const loadJobOg = () => {
     for (const key of Object.keys(require.cache)) {
-        if (key.includes(`${path.sep}templates${path.sep}OG${path.sep}job`)) delete require.cache[key]
+        if (key.includes(`${path.sep}templates${path.sep}OG${path.sep}`)) delete require.cache[key]
     }
     return require(jobModule).JobOg
 }
@@ -70,7 +72,7 @@ const main = async () => {
         try {
             if (url.pathname === '/mtime') {
                 res.writeHead(200, { 'content-type': 'text/plain', 'cache-control': 'no-store' })
-                res.end(String(fs.statSync(jobModule).mtimeMs))
+                res.end(String(Math.max(...watchedModules.map((file) => fs.statSync(file).mtimeMs))))
                 return
             }
             if (url.pathname === '/preview.jpeg') {
