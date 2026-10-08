@@ -21,7 +21,7 @@ Our margins are small, and the cost of operating flags does not scale. We want t
 - The ability to query `$flag_evaluations`
 - Tighter provisioning of the resources that serve flags
 
-#### Realtime flag definitions <TeamMember name="Ruby Childs" photo /> <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Realtime flag definitions <TeamMember name="Gustavo Henrique Strassburger" photo />
 
 Customers want an alternative to polling for flag definitions. To deliver it, we need to restructure our pricing and find out what it costs us to run.
 
@@ -41,7 +41,7 @@ After a flag ships, users watch their own metrics to decide whether to roll it b
 
 **We'll know we're successful when:** users accept our suggestions, and no accepted suggestion later needs to be reversed or causes a guardrail breach. Before customers see suggestions, a dry run must test at least 10 rollouts across 3 product areas, with at least 90% of recommendations correct and useful, and none unsafe.
 
-#### Make flags the default way developers ship end-to-end <TeamMember name="Patricio Tarantino" photo /> <TeamMember name="Ruby Childs" photo />
+#### Make flags the default way developers ship end-to-end <TeamMember name="Patricio Tarantino" photo />
 
 Developers build features in code, usually by talking to an agent, and rarely open the flags UI. Flags only enter that flow when the developer already knows to ask, and agents don't suggest them on their own. When a developer does ask, the agent creates the flag and stops. It doesn't wire the flag into the code, test it locally, or plan the rollout. MCP flag creation is booming, but many of those flags are never evaluated.
 
