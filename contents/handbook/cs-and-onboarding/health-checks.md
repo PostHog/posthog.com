@@ -88,6 +88,27 @@ GROUP BY lib
 ORDER BY groupidentify_event_count DESC
 ```
 
+### Server-side flag checks with throwaway IDs
+
+Server SDKs send a `$feature_flag_called` event the first time each user sees a flag, and deduplicate the rest per user in memory. A backend that checks flags with a new distinct ID on every request, like a random UUID for a background job or an anonymous API call, gets nothing from that deduplication. Every check sends an event, and each new ID can create a person profile too.
+
+It's easy to miss because flags aren't billed on `$feature_flag_called` events, so it doesn't show up on the flags bill. It shows up as event volume instead. To spot it, look for a server library sending lots of `$feature_flag_called` events across a huge number of distinct IDs, with only a few events per ID (about one for each flag a request checks):
+
+```
+SELECT properties.$lib AS lib,
+  count() AS flag_called_events,
+  uniq(distinct_id) AS distinct_ids,
+  round(count() / uniq(distinct_id), 1) AS events_per_id
+FROM events
+WHERE event = '$feature_flag_called'
+  AND timestamp >= now() - INTERVAL 30 DAY
+  AND timestamp < now()
+GROUP BY lib
+ORDER BY flag_called_events DESC
+```
+
+If a server library like `posthog-node` or `posthog-python` is near the top with a huge number of IDs and only a few events each, suggest a stable distinct ID for those checks, or turning the events off where they aren't needed (in Node, pass `sendFeatureFlagEvents: false`). Keep them on for flags behind an experiment, since experiments count exposures from `$feature_flag_called`.
+
 ### Calling posthog.reset() before identifying the user
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
