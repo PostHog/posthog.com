@@ -70,7 +70,11 @@ export default function FilterMenu({
             }
         >
             <div className="flex flex-col text-sm">
-                <div className="flex items-center gap-2 px-3 py-2 border-b border-primary hover:bg-accent">
+                <div
+                    className={`flex items-center gap-2 px-3 py-2 hover:bg-accent ${
+                        tags.length > 0 ? 'border-b border-primary' : ''
+                    }`}
+                >
                     <Checkbox
                         id="forum-unanswered"
                         checked={unanswered}
@@ -147,20 +151,22 @@ export default function FilterMenu({
                         </ul>
                     </>
                 )}
-                <div className="flex items-center border-t border-primary px-3 py-2 text-xs text-secondary">
-                    {tags.length > 0 && 'Shows posts with any selected tag'}
-                    {count > 0 && (
-                        <button
-                            onClick={() => {
-                                onChange([])
-                                onUnansweredChange(false)
-                            }}
-                            className="ml-auto underline"
-                        >
-                            Clear
-                        </button>
-                    )}
-                </div>
+                {(tags.length > 0 || count > 0) && (
+                    <div className="flex items-center border-t border-primary px-3 py-2 text-xs text-secondary">
+                        {tags.length > 0 && 'Shows posts with any selected tag'}
+                        {count > 0 && (
+                            <button
+                                onClick={() => {
+                                    onChange([])
+                                    onUnansweredChange(false)
+                                }}
+                                className="ml-auto underline"
+                            >
+                                Clear
+                            </button>
+                        )}
+                    </div>
+                )}
             </div>
         </Popover>
     )

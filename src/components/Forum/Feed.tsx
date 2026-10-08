@@ -58,14 +58,6 @@ const ProgressBar = () => (
     </div>
 )
 
-// What to say when a filter, not the feed itself, is why there is nothing to show.
-const emptyMessage = (hasTags: boolean, unanswered: boolean) => {
-    if (hasTags && unanswered) return 'No posts without replies have the selected tags.'
-    if (unanswered) return 'Every post has a reply.'
-    if (hasTags) return 'No posts have the selected tags.'
-    return null
-}
-
 type FeedProps = {
     title: React.ReactNode
     description?: string | null
@@ -184,7 +176,8 @@ export default function Feed({
                     animate={{ opacity: 1 }}
                     className="px-6 py-12 text-center text-secondary text-sm"
                 >
-                    {emptyMessage(tagIds.length > 0, unanswered) ?? empty}
+                    {/* A filter, not the feed itself, is usually why there is nothing to show. */}
+                    {tagIds.length > 0 || unanswered ? 'Nothing here. Loosen a filter and try again.' : empty}
                 </motion.div>
             )}
         </div>
