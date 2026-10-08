@@ -1,5 +1,5 @@
 ---
-title: "How one runtime manages cloud agents for four PostHog products"
+title: "We built our own cloud agents runtime. Here's what we learned"
 date: 2026-09-24
 rootPage: /blog
 sidebar: Blog
@@ -66,7 +66,7 @@ Third, nothing can be delivered twice. We support retrial mechanisms across Slac
 
 ### 3. A run has to be cheap and safe
 
-Our [self-driving features](/blog/self-driving-product) introduced yet a new challenge for the agent runtime: it upped the volume but cut out the middleman (humans). The [signals pipeline](/docs/self-driving/signals), for example, groups [errors](/error-tracking), [session replays](/session-replay), support tickets, and GitHub activity into [reports](/docs/self-driving/reports). For each report it picks a repository, researches the problem in a sandbox, and if the report is actionable (and clears the team's priority threshold), the agent starts an implementation run on its own.
+Our [self-driving features](/blog/self-driving-product) introduced another challenge for the agent runtime: it upped the volume but cut out the middleman (humans). The [signals pipeline](/docs/self-driving/signals), for example, groups [errors](/error-tracking), [session replays](/session-replay), support tickets, and GitHub activity into [reports](/docs/self-driving/reports). For each report it picks a repository, researches the problem in a sandbox, and if the report is actionable (and clears the team's priority threshold), the agent starts an implementation run on its own.
 
 Across all connected projects, that's thousands of runs a day, each spending its opening minutes rediscovering what the project is – things like which package manager, which Python version, and which services need to be up before the tests mean anything.
 
@@ -129,7 +129,14 @@ Once the image exists it shows up in the picker. Set it as your default and spaw
 
 ## Everyone is converging on the same shape
 
-We’re not the first to build this. [Cursor](https://cursor.com/blog/cloud-agent-development-environments) shipped Dockerfile-based environments with build secrets, layer caching, and per-environment egress allowlists in May. [Codex](https://developers.openai.com/codex/cloud/internet-access) has one universal base image, setup scripts, a container cache, and internet off by default. [Claude Code's cloud environments](https://code.claude.com/docs/en/cloud-environments) do four network levels, a setup script, and a snapshot reused between sessions. [Vercel](https://vercel.com/blog/security-boundaries-in-agentic-architectures) sells the layer underneath all of it: Firecracker microVMs, a firewall, custom images from its own registry. Four companies (and plenty more) arriving at the same shape within a year is usually a sign the abstraction is right.
+We’re not the first to build this. 
+
+- [Cursor](https://cursor.com/blog/cloud-agent-development-environments) shipped Dockerfile-based environments with build secrets, layer caching, and per-environment egress allowlists in May. 
+- [Codex](https://developers.openai.com/codex/cloud/internet-access) has one universal base image, setup scripts, a container cache, and internet off by default. 
+- [Claude Code's cloud environments](https://code.claude.com/docs/en/cloud-environments) do four network levels, a setup script, and a snapshot reused between sessions. 
+- [Vercel](https://vercel.com/blog/security-boundaries-in-agentic-architectures) sells the layer underneath all of it: Firecracker microVMs, a firewall, custom images from its own registry. 
+
+Four companies (and plenty more) arriving at the same shape within a year is usually a sign the abstraction is right.
 
 Where we differ is what the machine is *for*. Everyone else is building a place to run a coding agent. We're building a place to run agents that already have your product as context (errors, replays, [flags](/feature-flags), [experiments](/experiments), [logs](/logs), the [context warehouse](/context-warehouse)) and that can open a PR off the back of it while you're asleep. The image is what makes that loop cheap enough to leave running.
 
