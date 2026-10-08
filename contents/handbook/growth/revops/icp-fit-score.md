@@ -16,7 +16,7 @@ The score is stamped on the **organization** in our internal PostHog project as 
 |---|---|
 | `icp_fit_status` | `scored` / `disqualified` / `insufficient_data` / `not_found`. Check this first: a score is only current when the status is `scored` or `disqualified` |
 | `icp_fit_score` | 0–100. Never read a missing score as 0 |
-| `icp_fit_version` | The formula version the score was computed under (e.g. `v0.5`) |
+| `icp_fit_version` | The scoring version the score was computed under (e.g. `v0.7`). Editing the formula on the AI enrichment page does not change it |
 
 An organization with no `icp_fit_status` at all was never evaluated. Personal-email signups are not enriched, so they never get one; that is different from `not_found`.
 
@@ -24,7 +24,9 @@ Not to be confused with the legacy `icp_score` property: that is the old Clay-er
 
 ## How it works
 
-Each signup's company is looked up in [Harmonic](https://harmonic.ai) by the domain of the work email, and the profile is scored in three steps. This page describes the intent and shape of `v0.5`. The exact rules, thresholds, and Harmonic fields live in [`fit_score.py`](https://github.com/PostHog/posthog/blob/master/products/growth/backend/enrichment/fit_score.py), and every score carries the version that produced it.
+Each signup's company is looked up in [Harmonic](https://harmonic.ai) by the domain of the work email, and the profile is scored in three steps. This page describes the intent and shape of `v0.7`. The exact rules, thresholds, and Harmonic fields live in a Hog formula. The formula reads four inputs: `company` (the Harmonic company data), `signup` (role, email domain, and the setup wizard's AI SDK detection), `enrichments` (saved LLM label results), and `lists` (the curated tag and investor lists).
+
+Staff edit the formula on the **ICP scoring** tab of the AI enrichment page ([US](https://us.posthog.com/ai-enrichment), [EU](https://eu.posthog.com/ai-enrichment)). Each region keeps its own formula versions, so an edit in one region does not change the other. The editor previews a draft against up to 10 previously enriched companies. The preview uses saved data only and writes no scores. Staff save a draft as a new inactive version, then activate it.
 
 ### 1. Hard disqualifiers: score 0, with a reason code
 
@@ -41,9 +43,11 @@ A profile that matched but has no headcount, no funding, no tags, and no web tra
 |---|---|---|
 | **Traction** | 35 | Monthly web traffic level (up to 15) plus 90-day traffic growth (up to 20). Growth only counts above a minimum traffic base, because small-base percentages are noise |
 | **Capital** | 30 | Total funding tier (up to 20; a raise Harmonic knows exists but not the amount gets the base tier), plus 10 for a quality investor: a fund on our curated list, any YC batch, or AI Grant. Capped at 30 |
-| **AI-pilled** | 15 | Any of: an AI tag, AI language in the company description, or a `.ai` signup domain |
+| **AI-pilled** | 15 | Any one of three sources, which don't add together: Harmonic shows AI (an AI tag, AI language in the company description, or a `.ai` signup domain), the setup wizard detected an AI SDK in the codebase, or a positive LLM `ai_pilled` label (new in `v0.7`) |
 | **Headcount growth** | 10 | 180-day headcount change, by percentage or by net hires |
 | **Software relevance** | 10 | Engineering headcount present (10), else software-product tags or software language in the description (7) |
+
+The LLM `ai_pilled` label looks for a team that uses AI tools to build software, and accepts an available, owned AI product as a proxy. Either one qualifies. A batch labeler produces the labels. A company without a label is scored on the Harmonic and wizard sources only.
 
 ### Metadata flags (don't affect the score)
 
