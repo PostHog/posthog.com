@@ -137,7 +137,7 @@ Hotjar
 HubSpot
 Hugging Face
 Hyperengage
-InKeep
+Inkeep
 Inleads
 [Ii]nsider
 Instana
@@ -483,3 +483,17 @@ Altinity
 [Ll]ookahead(s)?
 [Ll]ookaround(s)?
 [Ll]ookbehind(s)?
+
+# Hogpedia, and the proper nouns its articles cite from the handbook and the press kit
+Hogpedia
+MonoBook
+Hogpatch
+Blobby
+Mykonos
+Combinator
+Formus
+Andra
+Collison
+Coxon
+Duong
+Greenhill

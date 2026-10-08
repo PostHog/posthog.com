@@ -1,0 +1,61 @@
+---
+title: Classifying rows with AI
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+The `jev()` and `decide()` SQL functions use a small AI model to answer a question about each row of a query. You can use them to tag support messages, sort feedback into categories, or flag events that match a description, without writing the rules yourself.
+
+Pass the text to evaluate and a question. By default, the function returns the probability (from 0 to 1) that the answer is yes:
+
+```sql
+SELECT
+    properties.$message AS message,
+    jev(toString(properties.$message), 'Is this person asking for a refund?') AS refund_probability
+FROM events
+WHERE event = 'support message sent'
+LIMIT 100
+```
+
+To pick one label from a list, pass `choice`. The result has the chosen label, the probability of each label, and a confidence score:
+
+```sql
+SELECT result.choice AS topic, count() AS feedback
+FROM (
+    SELECT jev(
+        toString(properties.$message),
+        'What is this feedback about?',
+        choice := ['pricing', 'bugs', 'feature request', 'other']
+    ) AS result
+    FROM events
+    WHERE event = 'feedback submitted'
+    LIMIT 200
+)
+GROUP BY topic
+ORDER BY feedback DESC
+```
+
+`decide()` works the same way and also takes a `model` argument, either `'jeeves'` (the default, and what `jev()` uses) or `'jevk5'`. For example, `decide(message, 'Is this spam?', model := 'jevk5')`.
+
+## Where your data goes
+
+PostHog builds and hosts both models. They run on PostHog's own servers in the same region as your project, so your data is not sent to a third-party AI provider such as OpenAI or Anthropic. If your project is in the EU, the evaluation also stays in the EU.
+
+Jeeves, the default model, is open source. Its code, training data and benchmark results are in the [PostHog/jeeves](https://github.com/PostHog/jeeves) repository.
+
+## Limits
+
+- Use the function as a named column in a `SELECT`. To filter or sort on its result, wrap it in a subquery and filter in the outer query.
+- Each query has two limits, and the error tells you the current value of whichever one you hit:
+    - **Rows:** the number of rows a `SELECT` can send to an AI function. Add a `LIMIT` to stay under it.
+    - **Evaluations:** the total across the whole query. Each AI column on each row counts as one, so two AI columns over 500 rows use 1,000 evaluations. A `SELECT` without a `LIMIT` reserves the full row limit for each AI column, so add a `LIMIT` when you use more than one.
+- Each input can be up to 8 KiB of text. Convert other types with `toString()`. Empty (`NULL`) inputs are skipped.
+- Identical inputs with the same question are only evaluated once per query.
+
+## Pricing
+
+Each evaluation uses [PostHog AI](/docs/posthog-ai) credits and appears under PostHog AI on your billing page. If your organization runs out of credits, the query stops with an error that says so.

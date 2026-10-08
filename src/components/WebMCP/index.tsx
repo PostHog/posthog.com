@@ -319,25 +319,14 @@ function buildTools(deps: MutableRefObject<ToolDeps>): WebMCPTool[] {
     ]
 }
 
-/** Wraps a tool so every call is a PostHog event, and a thrown error becomes an error result. */
-function withTelemetry(tool: WebMCPTool): WebMCPTool {
+/** Wraps a tool so a thrown error becomes an error result. */
+function withErrorResult(tool: WebMCPTool): WebMCPTool {
     return {
         ...tool,
         execute: async (input, options) => {
-            const started = performance.now()
-            const capture = (success: boolean) =>
-                window.posthog?.capture('webmcp tool called', {
-                    tool: tool.name,
-                    success,
-                    duration_ms: Math.round(performance.now() - started),
-                })
-
             try {
-                const result = await tool.execute(input, options)
-                capture(!result.isError)
-                return result
+                return await tool.execute(input, options)
             } catch (error) {
-                capture(false)
                 return textResult(
                     `${tool.name} failed: ${error instanceof Error ? error.message : String(error)}`,
                     true
@@ -362,7 +351,7 @@ export default function WebMCP(): null {
 
         // Aborting the signal unregisters the tools, per spec, so unmounting cleans up.
         const controller = new AbortController()
-        const tools = buildTools(deps).map(withTelemetry)
+        const tools = buildTools(deps).map(withErrorResult)
         Promise.all(tools.map((tool) => modelContext.registerTool(tool, { signal: controller.signal })))
             .then(() => window.posthog?.capture('webmcp tools registered', { tools: tools.map((tool) => tool.name) }))
             .catch((error) => console.warn('WebMCP: could not register tools', error))

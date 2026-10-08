@@ -62,16 +62,28 @@ preview deploy or production.
 | Event | When | Properties |
 | --- | --- | --- |
 | `webmcp tools registered` | Once per page load, after all tools register | `tools`: list of tool names |
-| `webmcp tool called` | Every call | `tool`, `success`, `duration_ms` |
+| `$mcp_tool_call` | Every call, captured by posthog-js | See below |
 
-Inputs are not captured. The two events answer the only question that matters for now: does any agent call
-these tools, and which ones.
+posthog-js captures `$mcp_tool_call` because the init config in `gatsby/onPreBootstrap.ts`
+sets `capture_webmcp: true`. The event uses the [MCP analytics](/docs/mcp-analytics) contract, with
+`$mcp_interface: webmcp`. It links to the current person, session, and replay. This component does not capture
+tool calls itself.
+
+The SDK adds two required string fields to each tool schema that the agent sees: `context`, the reason for the call,
+and `llm_model`, the model that the agent reports. It captures them as `$mcp_intent` and `$mcp_llm_model`, and
+removes them before the tool runs. Do not give a tool its own `context` or `llm_model` input. The SDK does not add a
+field that the schema already declares.
+
+posthog-js only captures calls to tools registered after it initializes. It loads async, and the component does not
+wait for it. If the component mounts first, the calls on that page load are not captured.
+
+Older calls use the custom properties `$mcp_transport`, `$mcp_client_name`, and `$mcp_input_keys`, or the event
+`webmcp tool called`.
 
 ## Notes
 
 - Tools register once and read live page state through a ref, so `ask_max` always opens the chat for the
   current page and `read_skill` sees the skills from the static query.
 - Aborting the registration signal unregisters the tools, per spec. The component does this on unmount.
-- Korean pages use `KoreanWrapper`, which does not mount this component. The tools cover the English site.
 - The pages under `/pocket-guides` are also readable through `read_page`. The self-driving guides render a
   scout's `SKILL.md` in the page, so an agent can read a scout definition either way.

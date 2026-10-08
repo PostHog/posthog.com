@@ -5,7 +5,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import { Logo } from '@posthog/brand/logo'
 
-import { PocketGuideVolume } from '../../constants/pocketGuides'
+import { PocketGuideVolume, pocketGuideUrl } from '../../constants/pocketGuides'
 
 import { volumeArt } from './volumeArt'
 
@@ -15,6 +15,8 @@ interface CoverProps {
     count: number
     /** Which surface this cover sits on. Required so every open is attributable. */
     placement: 'shelf' | 'self_driving_page' | 'product_docs'
+    /** Override the volume entry route when linking directly into its reader. */
+    to?: string
 }
 
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
@@ -88,7 +90,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
     )
 }
 
-export default function Cover({ volume, count, placement }: CoverProps): JSX.Element {
+export default function Cover({ volume, count, placement, to }: CoverProps): JSX.Element {
     const posthog = usePostHog()
 
     // Unwritten volumes aren't links – there's nothing behind them yet.
@@ -105,7 +107,7 @@ export default function Cover({ volume, count, placement }: CoverProps): JSX.Ele
 
     return (
         <Link
-            to={`/pocket-guides/${volume.id}`}
+            to={to ?? pocketGuideUrl(volume)}
             state={{ newWindow: true }}
             onClick={trackCoverClick}
             // Perspective lives on the link so the hover tilt reads as picking the book up.

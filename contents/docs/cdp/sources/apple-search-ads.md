@@ -12,19 +12,36 @@ sourceId: AppleSearchAds
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
+import BetaRelease from "../\_snippets/beta-release.mdx"
 
-<AlphaRelease />
+<BetaRelease />
 
 The Apple Ads connector syncs your campaigns, ad groups, keywords, and daily performance reporting into PostHog, so you can analyze ad spend next to your product data. Apple Ads was called Apple Search Ads until Apple renamed it, and it now covers ads on both the App Store and Apple Maps.
 
 PostHog reads version 1.0 of the [Apple Ads Platform API](https://developer.apple.com/documentation/apple-ads-platform-api).
 
+There are two ways to connect:
+
+- **Sign in with Apple** (default) – click a button, authorize PostHog in Apple's UI, and you're connected. The ad account list fills automatically.
+- **API key pair** – generate your own EC P-256 key pair and register it with Apple. Use this if your source is pinned to Campaign Management API version 5, which the OAuth flow does not support.
+
+Both methods require an Apple Ads user with an API role. An account admin grants one in [Apple Ads](https://ads.apple.com) under **Account Settings** > **User Management**.
+
 ## Prerequisites
 
-Neither PostHog nor Apple generates an API key for you. You generate a key pair yourself, an account administrator uploads the public half to Apple, and Apple then shows you the identifiers to paste into PostHog. Work through the four steps below before you link the source.
+### Sign in with Apple
 
-### 1. Create an API user
+The only prerequisite is an Apple Ads user with an API role:
+
+1. An account administrator signs in to [Apple Ads](https://ads.apple.com), goes to **Account Settings** > **User Management**, and gives the connecting user either **API Account Read Only** or **API Account Manager**.
+2. In PostHog, choose **Sign in with Apple** as the authentication type and click the button. Authorize PostHog in Apple's UI.
+3. Apple sends you back to PostHog. Pick your ad account from the list that appears.
+
+### API key pair
+
+Use this method if your source is pinned to Campaign Management API version 5, or if you prefer to run your own API client.
+
+#### 1. Create an API user
 
 An Apple Ads account administrator signs in to [Apple Ads](https://ads.apple.com), goes to **Account Settings** > **User Management**, and invites or edits a user with one of these roles:
 
@@ -33,7 +50,7 @@ An Apple Ads account administrator signs in to [Apple Ads](https://ads.apple.com
 
 Apple revokes API access if the user later moves to a non-API role, which makes syncs start to fail. Use a user whose role you don't expect to change.
 
-### 2. Generate a key pair
+#### 2. Generate a key pair
 
 The API user generates an EC P-256 key pair. OpenSSL is already installed on macOS and Linux:
 
@@ -44,7 +61,7 @@ openssl ec -in private-key.pem -pubout -out public-key.pem
 
 Keep `private-key.pem` secret. If it leaks, generate a new pair and upload the new public key to Apple.
 
-### 3. Upload the public key
+#### 3. Upload the public key
 
 The API user signs in to Apple Ads, goes to **Account Settings** > **API**, pastes the contents of `public-key.pem` into the **Public Key** field, and clicks **Save**.
 
@@ -56,11 +73,13 @@ teamId   SEARCHADS.hgw3ef3p-0w7a-8a2n-77c8-scv83f25a7
 keyId    a273d0d3-4d9e-458c-a173-0db8619ca7d7
 ```
 
-### 4. Find your ad account ID
+#### 4. Find your ad account ID
 
 The Platform API scopes every request to one ad account, so PostHog needs your ad account ID. This is **not** your organization ID, because one organization can hold several ad accounts.
 
-Apple only serves this value from the API. Follow [Apple's OAuth guide](https://developer.apple.com/documentation/apple-ads-platform-api/implementing-oauth-for-the-apple-ads-platform-api) to sign a client secret with `private-key.pem` and exchange it for an access token, then call the [Get User ACL](https://developer.apple.com/documentation/apple-ads-platform-api/get-user-acls) endpoint:
+The quickest path is to let PostHog look it up. In the connect form, leave **Ad account ID** blank and connect. PostHog stops and shows the ad account IDs your credentials can read. Enter one of the IDs in **Ad account ID** and connect again.
+
+If you would rather look it up yourself, call the [Get User ACL](https://developer.apple.com/documentation/apple-ads-platform-api/get-user-acls) endpoint:
 
 ```bash
 curl -H "Authorization: Bearer $ACCESS_TOKEN" https://api.ads.apple.com/v1/acls
@@ -80,7 +99,7 @@ The `campaigns`, `ad_groups`, `keywords`, and `acls` tables use full refresh, be
 
 The three reporting tables sync incrementally by `date`. Each run re-reads a trailing window of recent days, because Apple restates recent reporting as attribution settles. Rows are merged away by primary key, so restatements replace earlier values instead of duplicating them.
 
-Apple serves daily reporting for the **last 90 days only**. PostHog starts a couple of days inside that boundary, because Apple applies it in the ad account's own reporting time zone. If you set a report start date older than the window, PostHog starts from the oldest day Apple still serves rather than failing the sync. To build a longer history, connect the source and let it sync regularly — PostHog keeps the rows it has already imported after they age out of Apple's window.
+Apple serves daily reporting for the **last 90 days only**. PostHog starts a couple of days inside that boundary, because Apple applies it in the ad account's own reporting time zone. If you set a report start date older than the window, PostHog starts from the oldest day Apple still serves rather than failing the sync. To build a longer history, connect the source and let it sync regularly – PostHog keeps the rows it has already imported after they age out of Apple's window.
 
 ## Configuration
 
@@ -92,7 +111,8 @@ Apple serves daily reporting for the **last 90 days only**. PostHog starts a cou
 
 ## Troubleshooting
 
-- **401 errors** mean Apple rejected the access token. Check that the API client still exists under **Account Settings** > **API**, and that the private key in PostHog matches the public key uploaded there.
+- **"Signing in with Apple only works with the Apple Ads Platform API"** means the source is pinned to Campaign Management API version 5, which the OAuth flow does not support. Switch the authentication type to **API key pair**, or move the source off Campaign Management API 5.
+- **401 errors** mean Apple rejected the access token. For key pair sources, check that the API client still exists under **Account Settings** > **API**, and that the private key in PostHog matches the public key uploaded there. For OAuth sources, try reconnecting through **Sign in with Apple**.
 - **403 errors** mean the API user can reach Apple but not this ad account. Check the user's role and the ad account ID.
 - **404 errors** mean Apple can't find the ad account. Re-read the ID from `adAccount.id` rather than using your organization ID.
 - **"The private key isn't a valid unencrypted EC (P-256) PEM"** means the key was pasted in the wrong format. Paste the whole contents of `private-key.pem`, including the `-----BEGIN EC PRIVATE KEY-----` and `-----END EC PRIVATE KEY-----` lines, and make sure the key isn't passphrase-protected.

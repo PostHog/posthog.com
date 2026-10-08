@@ -25,7 +25,7 @@ Head to the [**Slack integration page**](https://app.posthog.com/integrations/sl
   alt="The Slack integration section in project settings, with the Add to Slack button"
 />
 
-To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. When it joins a channel it posts a short greeting with example prompts. When new teammates join your Slack workspace, they get a welcome DM from the bot introducing itself and what it can do. You can also skip channels entirely and [DM the bot directly](/docs/slack#dm-the-bot).
+To talk to the bot in a channel, @-mention it – Slack will prompt you to invite it – or invite it explicitly with `/invite @PostHog`. When it joins a channel, the bot posts a short greeting with example prompts by default. Slack workspace admins can use the App Home tab or `/posthog welcome channel|private|off` to post it publicly, show it only to the person who added the app, or turn it off. When new teammates join your Slack workspace, they get a welcome DM from the bot introducing itself and what it can do. You can also skip channels entirely and [DM the bot directly](/docs/slack#dm-the-bot).
 
 The first time the bot sees a mention, it matches your Slack email to your PostHog account, so make sure you're signed in to the same org on both sides.
 
