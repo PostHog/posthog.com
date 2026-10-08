@@ -7,23 +7,24 @@ type WindowOgProps = {
 
 const navItems = ['Products', 'Pricing', 'Docs', 'Community', 'Company']
 
-// Light tertiary scheme, the same values AppWindow resolves from data-scheme="tertiary".
-const textPrimary = '#23251D'
-const textSecondary = '#4D4F46'
+// Sampled from the reference card, not the site theme.
+const textPrimary = '#111629'
+const textSecondary = '#343C3B'
+const navText = '#10140A'
+const control = '#85856B'
 const border = '#9EA096'
-const frost = 'rgba(229, 231, 224, 0.75)'
-// Primary OSButton: orange face, button border, button shadow.
-const buttonFace = '#EB9D2A'
-const buttonBorder = '#B17816'
-const buttonShadow = '#CD8407'
+const frost = 'rgba(229, 228, 215, 0.75)'
+const buttonFace = '#FFA81C'
+const buttonBorder = '#D48204'
+const buttonShadow = '#C07F0B'
 
 const WindowControls = () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 20, opacity: 0.4 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
         <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
-            <rect x="1.5" y="1.5" width="15" height="15" rx="2" stroke={textPrimary} strokeWidth="2.4" />
+            <rect x="1.5" y="1.5" width="15" height="15" rx="2" stroke={control} strokeWidth="2.4" />
         </svg>
         <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
-            <path d="M3 3L15 15M15 3L3 15" stroke={textPrimary} strokeWidth="2.4" strokeLinecap="round" />
+            <path d="M3 3L15 15M15 3L3 15" stroke={control} strokeWidth="2.4" strokeLinecap="round" />
         </svg>
     </div>
 )
@@ -68,8 +69,7 @@ export const WindowOg = ({ title, children }: WindowOgProps) => (
                     gap: 26,
                     fontSize: 20,
                     fontWeight: 600,
-                    color: textPrimary,
-                    opacity: 0.7,
+                    color: navText,
                 }}
             >
                 {navItems.map((item) => (
