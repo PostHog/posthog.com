@@ -41,7 +41,7 @@ This changes a few things:
 
 1. **Every lead is warm**, so you are not cold calling people competing with robots and other spam for their attention.
 
-2. **You know their usage before you decide to invest your time**, so you can focus your time on the companies and people who are "doing" and not just building slide decks of change.
+2. **You know their usage before you decide to invest your time**, so you can focus your time on the companies and people who are "doing" and not just building slide decks.
 
 3. **They might already have a business case**, since they usually start with their most critical challenges, so you have something meaningful to start with for every interaction.
 
@@ -69,7 +69,7 @@ The same goes for the numbers side of the job. I recently built a quota calculat
 
 Thanks to PostHog Desktop, building out my demo environment is easier than ever before -> generic demo data and even specific customer requests can be built in minutes because I can explain the situation, it builds out the solution and demo data, tests it in PostHog and in the browser, iterates, and then gives me the finished demo. Days of my solution consulting time have been spent on demo prep – now I can come with a super personalized demo in a fraction of the time.
 
-Another large part of the high-end part of sales was strategic messaging. Understanding WHY the customers are doing what they are doing. And then formulating HOW we can help them - all packaged in a meaningful and creative way. This was something reserved to only the biggest customers, and we had entire teams dedicated to only the creative part. Almost like working in a bespoke ad agency.
+Another large part of the high-end part of sales was strategic messaging. Understanding _why_ the customers are doing what they are doing and And then formulating _how_ we can help them – all packaged in a meaningful and creative way. This was something reserved for only the biggest customers, and we had entire teams dedicated to only the creative part. Almost like working in a bespoke ad agency.
 
 AI has again accelerated this work significantly. Researching accounts with deep research, identifying three key drivers, and even dreaming up creative ways to bring across the messages (digital Pokémon cards, a dinner booking game...) has become easier and faster than ever. The core sales work remains the same, but the execution just accelerated by 70%.
 
@@ -95,7 +95,7 @@ So when I say it is five jobs in one, this is how that can work.
 
 **With the services glasses on**, I not only advise on the ideal setup but can literally help them through MCP prompts, or fix their implementation with PRs against their code directly. And I can measure the impact of my deployment consulting by the actual usage numbers going up.
 
-**And as a value manager**, I can pull testimonials together with a strategic messaging, bespoke demo to PROVE the value of that new functionality firsthand. PostHog does not do typical case studies of "they saved 50% of time - we measured it" but since we are able to track ACTUAL usage and impact, the stories are easier to collect than in the past.
+**And as a value manager**, I can pull testimonials together with strategic messaging and a bespoke demo to PROVE the value of that new functionality firsthand. PostHog does not do typical case studies of "they saved 50% of time - we measured it" but since we are able to track ACTUAL usage and impact, the stories are easier to collect than in the past.
 
 It took me a while to figure out a good balance here. I have automated a lot of my sales work with AI, but not the human part. Sitting down with a customer for dinner, or a call where someone tells you what is actually going on in their company, that is still me and I think it should stay that way. The prep, the notes, the Salesforce updates, the demo data, that is where the AI does the work. I think I have figured it out now, ask me again in a year.
 
