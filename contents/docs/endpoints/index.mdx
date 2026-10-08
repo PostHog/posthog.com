@@ -5,9 +5,8 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconBrackets, IconMagic, IconCode, IconGraph, IconHogQL, IconDatabase, IconServer, IconBolt, IconNotebook, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconBrackets, IconMagic, IconCode, IconGraph, IconHogQL, IconDatabase, IconBolt } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Endpoints turn a saved insight or SQL query into a named, callable API route. You write the query once in PostHog, give it a name, and your app fetches the results over HTTP – no query strings to assemble in client code, and no query logic scattered across your services.
 
@@ -104,18 +103,3 @@ An endpoint doesn't store data of its own. It serves whatever its query returns,
   </div>
 
 </div>
-
-## How Endpoints works with Self-driving
-
-Endpoint runs are a signal source for [Self-driving](/docs/self-driving). When an execution fails, or a breakdown returns an "Other" bucket because it hit the breakdown limit, Endpoints raises a signal carrying the query, the version, and the error, so whatever picks it up can reason about the cause instead of guessing.
-
-<CustomSelfDrivingLoop
-  stages={[
-    { label: 'Endpoint runs', icon: IconServer, color: '#F54E00', description: 'Every execution, with its query, version, and timing' },
-    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Failed runs and breakdown limits raised as signals' },
-    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Deduplicated and grouped with related signals from other sources' },
-    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Read the report and choose what to do about it' },
-  ]}
-/>
-
-There's no endpoints-specific scout, so these signals fill the inbox rather than trigger an automatic fix. You read the report in the [Self-driving inbox](/docs/self-driving/inbox) or in [PostHog Desktop](/docs/posthog-desktop), and decide from there – an endpoint failure never opens a pull request on its own. See the [Self-driving docs](/docs/self-driving) for the full picture.
