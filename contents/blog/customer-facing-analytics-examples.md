@@ -99,4 +99,6 @@ Inspired to build customer-facing analytics yourself? We’re biased but we thin
 3. **Drop it wherever you need the number to show up.** Your product, a customer-facing dashboard, your landing page, or an internal Slack bot — anywhere that accepts a URL or an API call.
 4. **Let it update itself.** The number stays live. If you tweak the underlying insight in PostHog, the Endpoint updates too. No rebuilds, no stale screenshots, no Monday-morning "can someone refresh this for me" messages.
 
+We do this ourselves. Our public [MCP leaderboard](/mcp/leaderboard) ranks the AI models, clients, and tools that agents use with the PostHog MCP server. It runs on two endpoints, and the site fetches them when it builds. See [public stats pages](/docs/endpoints/best-practices#public-stats-pages) for how it works.
+
 Take the data you already trust in PostHog, ship it to the place your users actually look, and let the tool do the heavy lifting for you. [Give it a try](/docs/endpoints/start-here), or you can check out [our docs](/docs/endpoints) to learn more.
