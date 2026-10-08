@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import { createRequire } from 'module'
 import React from 'react'
 import type { ImageSource, Renderer } from 'takumi-js/node'
 import { JobOg } from '../../src/templates/OG/job'
@@ -10,12 +9,7 @@ import { levelModifier } from '../../src/components/CompensationCalculator/compe
 import { stepModifier } from '../../src/components/CompensationCalculator/compensation_data/step_modifier'
 import { locationFactor } from '../../src/components/CompensationCalculator/compensation_data/location_factor'
 
-const require = createRequire(__filename)
 const imagesDir = path.resolve(__dirname, '../../src/templates/OG/images')
-const remoteHogPng = path.join(
-    path.dirname(require.resolve('@posthog/brand/hoggies/png/remote-work')),
-    'remote-work.png'
-)
 
 const readImage = (src: string, name: string): ImageSource => ({
     src,
@@ -25,7 +19,7 @@ const readImage = (src: string, name: string): ImageSource => ({
 export const jobImages: ImageSource[] = [
     readImage('wordmark', 'posthog-wordmark.svg'),
     readImage('grass', 'grass.jpg'),
-    { src: 'remote-hog', data: fs.readFileSync(remoteHogPng) },
+    readImage('laptop-hog', 'laptop-hog.png'),
 ]
 
 type JobNode = {

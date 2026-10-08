@@ -48,28 +48,48 @@ export async function registerMatterFont(renderer: Renderer, data: Buffer) {
     }
 }
 
-const ROLE_FONT_SIZE = 72
-const ROLE_MAX_WIDTH = 730
+const ROLE_FONT_SIZE = 120
+// Keep in sync with the title width and line height in src/templates/OG/job.tsx.
+const ROLE_COLUMN_WIDTH = 720
+const ROLE_LINE_HEIGHT = 0.94
+const ROLE_MAX_LINES = 2
 
-// Shrink a long title so it stays on one line at the same width as a short one.
+// Largest size that wraps to at most two lines in the title column.
 export async function fitRoleFontSize(renderer: Renderer, role: string): Promise<number> {
     const { fromJsx } = createRequire(require.resolve('takumi-js'))('@takumi-rs/helpers/jsx')
-    const { node } = await fromJsx({
-        type: 'div',
-        props: {
-            style: {
-                display: 'flex',
-                fontFamily: 'RoundHog',
-                fontSize: ROLE_FONT_SIZE,
-                fontWeight: 800,
-                whiteSpace: 'nowrap',
+    const lineCount = async (fontSize: number) => {
+        const { node } = await fromJsx({
+            type: 'div',
+            props: {
+                style: {
+                    display: 'flex',
+                    width: ROLE_COLUMN_WIDTH,
+                    fontFamily: 'RoundHog',
+                    fontSize,
+                    fontWeight: 800,
+                    lineHeight: `${Math.round(fontSize * ROLE_LINE_HEIGHT)}px`,
+                },
+                children: role,
             },
-            children: role,
-        },
-    })
-    const measured = await renderer.measure(node)
-    if (measured.width <= ROLE_MAX_WIDTH) return ROLE_FONT_SIZE
-    return Math.floor((ROLE_FONT_SIZE * ROLE_MAX_WIDTH) / measured.width)
+        })
+        const measured = await renderer.measure(node)
+        const lineHeight = Math.round(fontSize * ROLE_LINE_HEIGHT)
+        return Math.round(measured.height / lineHeight)
+    }
+
+    let low = 48
+    let high = ROLE_FONT_SIZE
+    let best = low
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2)
+        if ((await lineCount(mid)) <= ROLE_MAX_LINES) {
+            best = mid
+            low = mid + 1
+        } else {
+            high = mid - 1
+        }
+    }
+    return best
 }
 
 export async function renderOgJpeg(renderer: Renderer, element: ReactElement, images?: ImageSource[]): Promise<Buffer> {
