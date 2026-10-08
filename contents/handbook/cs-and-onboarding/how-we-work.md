@@ -113,11 +113,12 @@ During extended periods away from work (generally more than two weeks) it's impo
 
 The expectation is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but not attend routine meetings (eg. monthly check-ins) or pro-active work. For standing meetings in your absence customers should be notified that the meeting is cancelled but any questions can be asked through normal channels.
 
-For longer periods away, Dana may look to reassign some or all of your accounts.
+For longer periods away, your team lead may look to reassign some or all of your accounts.
 
 ## Tools we use
-**Gmail**
-We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details.
+
+**Gmail:**
+We use Gmail for email. Pick whichever client works best for you – some of the team prefer [Superhuman](https://superhuman.com/) or [Spark](https://sparkmailapp.com/), and others stick with the default Gmail web interface. To set up your email signature, copy the signature from someone else on the team (like Simon) and fill in your own details.
 
 **Calendly:**
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
