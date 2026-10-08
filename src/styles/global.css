@@ -3034,10 +3034,11 @@ article.reader-view-content-container:has(.quest-sidebar) {
     @apply rounded-tl-none rounded-tr-none rounded-bl-none;
 }
 
-/* Per-page windowed width overrides (desktop only; mobile stays full-screen above). */
+/* Per-page windowed width overrides (desktop only; mobile stays full-screen above).
+   data-page='home' is / and each translated copy of it (/pt, /de, ...). */
 @media (min-width: 768px) {
     #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]),
+        div[data-app='AppWindow'][data-windowed][data-page='home']:not([data-fixed-size]),
     #app-container:not([data-window-expanded])
         div[data-app='AppWindow'][data-windowed][data-path='/pricing']:not([data-fixed-size]) {
         max-width: 1200px;
