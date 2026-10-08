@@ -15,7 +15,16 @@ const DontClickButton = ({ alertMessage, children, ...props }) => (
         {children}
     </button>
 )
-export const Tweet = ({ children, className = '', alertMessage }) => {
+export const Tweet = ({
+    children,
+    className = '',
+    alertMessage,
+    name = 'James Hawkins',
+    handle = 'james406',
+    avatar = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png',
+    avatarAlt = 'James ("Veg"/"JC") Hawkins',
+    url = 'https://x.com/james406',
+}) => {
     return (
         <div
             className={`not-prose tw-tweet max-w-xl bg-white dark:bg-dark border border-primary rounded-md p-4 mb-8 relative ${className}`}
@@ -23,26 +32,22 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
             <div className="flex items-center space-x-3">
                 <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-light dark:bg-dark">
                     <Link
-                        href="https://x.com/james406"
+                        href={url}
                         externalNoIcon
                         className="bg-accent rounded-full overflow-hidden block aspect-square m-px"
                     >
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                            alt='James ("Veg"/"JC") Hawkins'
-                            className="size-12"
-                        />
+                        <CloudinaryImage src={avatar} alt={avatarAlt} className="size-12" imgClassName="size-12" />
                     </Link>
                 </div>
                 <div>
-                    <div className="text-base @xl:text-lg font-semibold leading-tight">James Hawkins</div>
+                    <div className="text-base @xl:text-lg font-semibold leading-tight">{name}</div>
                     <div className="text-gray-500 text-sm">
                         <Link
-                            href="https://x.com/james406"
+                            href={url}
                             externalNoIcon
                             className="text-secondary hover:text-red dark:hover:text-yellow"
                         >
-                            @james406
+                            @{handle}
                         </Link>
                     </div>
                 </div>
