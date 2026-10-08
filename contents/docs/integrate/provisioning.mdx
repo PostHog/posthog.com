@@ -767,6 +767,7 @@ Common error codes:
 | `unauthorized` | 401 | Authentication failed |
 | `registration_failed` | 400 | [Registration](#register-your-app) did not complete. The `checks` array in the same response says which step failed |
 | `forbidden` | 403 | Partner not authorized for this action |
+| `access_blocked` | 403 | PostHog blocked this account. `account_requests` returns it instead of creating the account, and Bearer endpoints such as `/resources` and `/deep_links` return it for an existing account. The message tells the user to contact PostHog support |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_client` | 401 | Client authentication failed (token endpoint). See [assertion errors](#troubleshoot-assertion-errors) |
