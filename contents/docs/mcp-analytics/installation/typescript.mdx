@@ -236,7 +236,7 @@ if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
 
 A fresh low-level `Server` has not served `tools/list`, so it does not know which `context` and `llm_model` arguments the SDK added. A strict input schema can reject these arguments before the tool runs.
 
-Use `resolveOriginalTool` to return each tool's input schema from your registry:
+Use `resolveOriginalTool` to return each tool's original input schema from your registry. The callback must return the schema from before PostHog adds its arguments:
 
 ```ts
 instrument(server, posthog, {
@@ -268,7 +268,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `serverBuild` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
 | `shouldRecordInputKey` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
 | `resolveInputAliases` | – | `(toolName) => aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
-| `resolveOriginalTool` | – | `(toolName) => tool`. Resolves input ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
+| `resolveOriginalTool` | – | `(toolName) => { inputSchema } \| undefined`. Resolves input ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message) => void`. A stdio-safe sink for SDK warnings. |
 
 ## Custom dispatchers
