@@ -5,6 +5,7 @@ import { Fieldset } from 'components/OSFieldset'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
+import CreditTile from './CreditTile'
 import RewardCard from './RewardCard'
 import TransactionTitle from './TransactionTitle'
 import type { Reward, Wallet } from './types'
@@ -96,13 +97,19 @@ export default function Points({ wallet: walletProp, readOnly = false, firstName
             </div>
 
             {!readOnly && (
-                <Fieldset legend="Redeem points">
-                    <div className="grid @md:grid-cols-2 @2xl:grid-cols-4 gap-3 pt-2">
-                        {rewards.map((reward) => (
-                            <RewardCard key={reward.handle} reward={reward} total={total} />
-                        ))}
-                    </div>
-                </Fieldset>
+                <>
+                    <CreditTile />
+                    {rewards.length > 0 && (
+                        <section>
+                            <h3 className="text-base font-bold m-0 mb-3">Redeem for merch</h3>
+                            <div className="grid @md:grid-cols-2 @2xl:grid-cols-4 gap-3">
+                                {rewards.map((reward) => (
+                                    <RewardCard key={reward.handle} reward={reward} total={total} />
+                                ))}
+                            </div>
+                        </section>
+                    )}
+                </>
             )}
 
             {transactions.length <= 0 && readOnly && (

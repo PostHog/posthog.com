@@ -7,8 +7,8 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
 
 Tabs with an `href` navigate when they are not already active. The active tab keeps its menu open
-unless `navigateOnActiveClick` is enabled. Products with `interactiveLearningUrl` enable that flag
-for Learn, so clicking the active Learn tab from a guide chapter returns to the product's choice page.
+unless `navigateOnActiveClick` is enabled. Products with `learnHub` enable that flag
+for Learn, so clicking the active Learn tab returns to the product's learning hub.
 Menu items then navigate within or between surfaces as their component defines.
 
 ---

@@ -189,7 +189,7 @@ export const replayVision = {
     // Built by the same team as Session Replay, so changelog / questions pull
     // from the same sources.
     teamSlug: 'replay',
-    forumTopicId: 377,
+    forumTag: 'session-replay',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     wizardSupport: true,

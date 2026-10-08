@@ -27,3 +27,13 @@
 
 1. A clear before vs after impact assessment of the migration.
 2. Workloads migrated to the new JSON Events Table.
+
+### Objective 4: Turn HogQL into an extensible optimizing compiler <TeamMember name="George Munyoro" squeakId={40825} photo />
+
+**Motivation:** HogQL understands the meaning of queries across PostHog. We want to use that knowledge to automatically improve how those queries execute. A composable optimization pipeline will let engineers build on each other's work, adding independently verified passes that make queries faster and reduce compute costs.
+
+**What we'll ship:**
+
+1. A composable pass manager with explicit requirements for each pass, automatic handling of invalidated analyses, and verification between passes. Migrate existing transformations while preserving their behavior.
+2. A documented workflow for writing optimization passes, with reference implementations, independent tests, and tools to inspect changes and compare correctness and performance.
+3. Useful optimization passes built and shipped through this framework, with measured performance benefits and result-equivalence checks. Validate the contribution workflow with a pass written by another engineer.

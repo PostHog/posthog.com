@@ -9,12 +9,6 @@ availability:
 sourceId: Taboola
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Taboola connector syncs your advertising data from the Taboola Backstage API into PostHog, including campaigns, campaign items, conversion rules, and performance reports.
 
 ## Adding a data source

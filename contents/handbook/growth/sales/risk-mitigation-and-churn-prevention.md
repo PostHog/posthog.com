@@ -134,7 +134,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cs
 | Churn scenario | De-risking strategy |
 |----------------|---------------------|
 | **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. |
-| **Champion isn't the decision maker** | Identify and build relationships with actual decision makers. Your champion can help with introductions. |
+| **Your contact is a coach, not a champion** | Identify and build a relationship with a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who can make change happen. Your coach can help with introductions. |
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |

@@ -43,4 +43,6 @@ This dashboard is a great starting point for understanding your LLM usage and pe
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
 
+For a real example, read how [Runable](/customers/runable) uses this dashboard to track cost, latency, and errors for its agent, then builds a dashboard for each failure mode to decide what to fix first.
+
 To dive into specific generation events, click on the [generations](https://app.posthog.com/ai-observability/generations), [traces](https://app.posthog.com/ai-observability/traces), or [sentiment](https://app.posthog.com/ai-observability/sentiment) tabs to explore your LLM data.
