@@ -6,6 +6,9 @@ author:
 category: General
 tags:
   - Inside PostHog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/sales_at_posthog_cf59b8cdce.png
+featuredImageType: full
 seo:
   metaTitle: "What working in sales at PostHog is actually like"
   metaDescription: "What a decade of enterprise sales looks like after a year of product-led sales, usage-based pricing, AI for the operational work, and shipping product PRs from the sales team."
