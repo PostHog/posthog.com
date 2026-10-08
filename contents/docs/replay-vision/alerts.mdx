@@ -9,8 +9,8 @@ An **alert** watches a scanner's [observations](/docs/replay-vision/observations
 If you want a written summary of what a scanner has been finding rather than a notification about a single condition, use a [scout](/docs/replay-vision/scouts) instead.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alerts_tab_86e5256ac2.png"
-  alt="The Alerts tab on a scanner, listing three alerts with their conditions, states, and last check"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_alerts_tab_8c9d439254.png"
+  alt="The Alerts tab on a scanner, listing alerts with their condition, state, and last check"
   classes="rounded"
 />
 
@@ -22,7 +22,7 @@ If you want a written summary of what a scanner has been finding rather than a n
 
 Pick the type in the first step:
 
-- **Every matching observation** notifies you about each observation that matches your condition, within about a minute. Matches that arrive together are bundled into one message, so a burst sends one notification instead of many.
+- **Every matching observation** notifies you about each observation that matches your condition, within about a minute. Matches that arrive together are bundled into one message, so a burst sends one notification instead of many. The message lists up to 10 matches, each with its verdict, score, tags, or title and a line of the scanner's own reasoning or summary, so you can see what happened without opening the recording.
 - **Metric threshold** measures your matching observations over a rolling window and notifies you when the number crosses a limit you set. PostHog checks it about once an hour.
 
 ## Which observations count
@@ -32,7 +32,7 @@ An alert first picks out the observations it cares about. The fields depend on t
 | Scanner type | What you can filter on |
 | --- | --- |
 | **Monitor** | Verdict: `Yes`, `No`, or `Inconclusive`. |
-| **Classifier** | Tags. An observation matches if it carries any of them. |
+| **Classifier** | Tags. An observation matches if it carries any of them. The picker suggests the scanner's configured tags first, then freeform tags it has applied in past observations, and you can also type a tag it hasn't used yet. |
 | **Scorer** | A minimum score, a maximum score, or both. |
 | **Summarizer** | Nothing to filter on, so an alert covers every observation. |
 
@@ -49,8 +49,8 @@ For a **metric threshold** alert, you set:
 An alert notifies you once when it starts firing, and again when it resolves, so a persistent problem doesn't message you every hour.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alert_step2_trigger_c665ef99c1.png"
-  alt="The Set trigger step of the new alert form, with the observation filter, measure, threshold, and window"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_alert_trigger_7c2f07fee8.png"
+  alt="The Set trigger step of the new alert form, set up as a metric threshold"
   classes="rounded"
 />
 
@@ -70,10 +70,12 @@ The **Notify** step is where destinations go, and you can add more later by edit
 - **Webhook** – an HTTPS URL of yours.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/alert_step3_notify_2bfec915c8.png"
-  alt="The Notify step of the new alert form, adding a webhook destination"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_alert_notify_9e9bdac17f.png"
+  alt="The Notify step of the new alert form, with a webhook destination"
   classes="rounded"
 />
+
+Every notification starts with the scanner's question, so a reader knows what was asked before they read the result.
 
 Notifications are also recorded on the alert itself. Open an alert to see its evaluation history, so nothing is lost if a channel is misconfigured.
 
@@ -107,6 +109,7 @@ A firing payload looks like this:
     "alert_name": "Checkout dead ends",
     "scanner_id": "0192f3a4-...",
     "scanner_name": "Dead-end pages",
+    "scanner_question": "Did the user reach a page with no way forward?",
     "metric": "count",
     "metric_value": "31",
     "threshold": "20",
@@ -118,7 +121,7 @@ A firing payload looks like this:
 }
 ```
 
-A `replay_vision_alert.match` payload carries `matched_count` and `observation_ids` in place of the metric fields.
+A `replay_vision_alert.match` payload carries `matched_count`, `observation_ids`, and `summary` in place of the metric fields. `summary` is plain text with one line per match, in the same form as the Slack message.
 
 ## Alert states
 
@@ -137,6 +140,8 @@ The **Alerts** tab shows where each alert stands:
 Use **Reset** on an errored or broken alert to clear its state and run a fresh check shortly after.
 
 Alerts don't spend [credits](/docs/replay-vision/quota-and-limits). They read observations the scanner has already produced.
+
+Creating, editing, and deleting an alert needs edit access to the scanner. Each change is recorded in your project's [activity log](/docs/settings/activity-logs), alongside changes to the scanner itself.
 
 ## Alerts vs. insight alerts
 

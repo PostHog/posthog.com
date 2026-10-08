@@ -5198,6 +5198,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'What to watch',
+                    url: '/docs/replay-vision/what-to-watch',
+                    icon: 'IconEye',
+                    color: 'yellow',
+                },
+                {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
@@ -5216,7 +5222,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Calibration',
+                    name: 'Improving with ratings',
                     url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
