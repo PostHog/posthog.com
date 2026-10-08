@@ -8,6 +8,7 @@ import { promisify } from 'util'
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
+import { BOOTSTRAP_DISTINCT_ID_COOKIE } from '../src/i18n/cookie'
 import { cacheFetchResponsesInDevelopment } from './devFetchCache'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
@@ -109,6 +110,18 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     scroll_root_selector: ['[data-scroll-root]', 'html'],
     persistence: 'localStorage+cookie',
     cookie_persisted_properties: ['prod_interest'],
+    // middleware.ts picks the distinct ID of a first-time visitor it buckets into the home page experiment.
+    bootstrap: (function () {
+        var match = document.cookie.match(/(?:^|;\\s*)${BOOTSTRAP_DISTINCT_ID_COOKIE}=([^;]+)/)
+        if (!match) return {}
+        document.cookie = '${BOOTSTRAP_DISTINCT_ID_COOKIE}=; path=/; max-age=0'
+        // The middleware reads only the cookie. A visitor whose cookie is gone but whose localStorage still has an
+        // ID keeps that ID, because a bootstrap ID replaces it, even for a signed-in user.
+        try {
+            if (JSON.parse(localStorage.getItem('ph_${process.env.GATSBY_POSTHOG_API_KEY}_posthog') || '{}').distinct_id) return {}
+        } catch (e) {}
+        return { distinctID: match[1] }
+    })(),
     uuid_version:'v7',
     session_recording: {
         maskAllInputs: false,
