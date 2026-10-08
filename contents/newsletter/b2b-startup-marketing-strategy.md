@@ -33,7 +33,7 @@ How nooby? Well, here’s our team and their marketing “credentials”:
 
 So, yeah. Here’s what we’ve learned about marketing for startups, specifically for a B2B startup for developers. Let us know where we’re wrong!
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Prioritize what you care about ✅
 
@@ -68,7 +68,7 @@ High quality articles perform better in the long run, especially SEO ones. Treat
 
 Being really good at Twitter/X, LinkedIn, or writing blog posts for HackerNews is worthwhile, but the engagement you get is transient and often subject to the whims of opaque algorithms.
 
-It’s one of the key reasons we launched this newsletter. With the slight exception of Gmail’s “helpful” sorting features, no one other than you decides whether you see our latest issue. And we can be confident the time we invest building *Product for Engineers* won’t be blown to bits by factors outside our control.
+It’s one of the key reasons we launched this newsletter. With the slight exception of Gmail’s “helpful” sorting features, no one other than you decides whether you see our latest issue. And we can be confident the time we invest growing *build mode* won’t be blown to bits by factors outside our control.
 
 Other options include:
 
@@ -77,7 +77,7 @@ Other options include:
 - A community on your website (we’re building it)
 - A podcast (good ones take way more effort than you think)
 
-Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
+Why do this? FWIW, a single *build mode* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
 ## 4. Make your website genuinely different 🙃
 This means:

@@ -198,6 +198,33 @@ This version tracking prevents race conditions where concurrent changes could le
 
 > **Tip**: Coordinate with your team before modifying resources that have pending change requests. Check for pending requests in the resource's detail page or the approvals settings before making direct changes.
 
+## Managing approvals with MCP
+
+If you use the [PostHog MCP server](/docs/model-context-protocol) with an AI coding assistant like Claude Code, Cursor, or VS Code Copilot, you can list, review, approve, and reject change requests directly from your editor.
+
+### Viewing pending requests
+
+Ask your agent to show change requests awaiting your action:
+
+- "What change requests are waiting for my approval?"
+- "Show me pending approval requests"
+
+The agent checks whether each request needs your decision by looking at three fields: `state` is `pending`, `can_approve` is `true`, and `user_decision` is `null` (meaning you're an eligible approver who hasn't voted yet).
+
+### Approving or rejecting a request
+
+To review and act on a specific request:
+
+- "Show me the details of change request #42"
+- "Approve change request #42"
+- "Reject change request #15 because the rollout percentage is too aggressive"
+
+Both approve and reject require you to type `confirm` in the chat before the action is executed. This two-step confirmation prevents accidental votes. Rejections also require a reason, which is recorded and shown to the requester.
+
+If the approval vote reaches the policy's required quorum, the underlying change is applied immediately.
+
+> **Note:** The MCP approval tools require the approvals entitlement and `approvals:write` scope. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of change-request tools.
+
 ## Common use cases
 
 ### Requiring approval for production feature flag changes

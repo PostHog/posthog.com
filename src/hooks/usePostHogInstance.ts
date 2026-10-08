@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
  * (i.e. the `ph_current_instance` cookie is set), or undefined if not.
  *
  * This is the same cookie check used by the main nav to show
- * "Dashboard" vs "Get started free".
+ * "Open PostHog" vs "Get started free".
  */
 export default function usePostHogInstance(): string | undefined {
     const [instance, setInstance] = useState<string>()

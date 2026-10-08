@@ -12,34 +12,41 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-| Product             | PM     | PMM    | Blitzscale |
-| ------------------- | ------ | ------ | ---------- |
-| *Context warehouse* | Anna   | Lizzie | Raquel     |
-| *PostHog Desktop*   | Annika | Cleo   | James H    |
-| *PostHog Slack*     | Annika | Cleo   | James H    |
-| *PostHog Web*       | Annika | Sara   | James H    |
-| *PostHog Research*  | n/a    | Joe    | James H    |
-| *PostHog MCP*       | n/a    | Joe    | James      |
-| *AI Gateway*        | Marco  | n/a    | Ben W      |
-| *Agents*            | n/a    | Danilo | Ben W      |
+We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. 
+
+Here's how PMMs are currently assigned.
+
+- <TeamMember name="Joe Black" /> owns Lifecycle marketing, Self-driving, Conversations
+- <TeamMember name="Sara Miteva" /> owns Session Replay, Replay Vision, Logs (APM), Error Tracking
+- <TeamMember name="Cleo Lant" /> owns PostHog MCP, PostHog Slack, PostHog AI
+- <TeamMember name="Lizzie Epton" /> owns Warehouse Sources, ETL, Semantic Layer
+- <TeamMember name="Juliana Meyer" /> owns Product Analytics, MCP Analytics, AI Observability
+
+**Cross-functional areas**
+
+These are some other areas that PMMs own outside of specific products. 
+
+- **Incident comms** – distributed, ask in `#team-developer-marketing` if you need help
+- **Lifecycle (i.e. email) & aligning with eng** – Joe
+- **Startups & partnerships** – Joe
 
 <details>
-<summary>I need a product marketer, but my team hasn't been assigned one</summary>
+<summary>I need a developer marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
+Flag it in #team-developer-marketing or tag @product_marketers in Slack. For things that require customer comms, like incidents or pricing changes, we'll always help. For other things, like feature announcements, we'll help if we have capacity but will prioritize the products we've assigned above.
 </details>
 
 
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-You should speak to <SmallTeam slug="irl-events" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
+You should speak to <SmallTeam slug="builder-relations" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
 </details>
 
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
+Speak to <SmallTeam slug="developer-marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>
@@ -59,7 +66,7 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 <details>
 <summary>Someone wants to partner with us</summary>
 
-Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="marketing" /> know. 
+Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="developer-marketing" /> know. 
 </details>
 
 <details>
@@ -67,7 +74,7 @@ Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug
 
 If it's an [influencer](/handbook/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
-If it's an event, speak to <SmallTeam slug="irl-events" />.
+If it's an event, speak to <SmallTeam slug="builder-relations" />.
 </details>
 
 <details>
@@ -83,19 +90,19 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer is interested in doing a case study with us</summary>
 
-Speak to <TeamMember name="Joe Martin" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
+Post in the #team-developer-marketing channel.
 </details>
 
 <details>
 <summary>A customer has an issue with merch</summary>
 
-Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
+Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" /> own the storefront.
 </details>
 
 <details>
 <summary>I have a question / problem / suggestion for the website</summary>
 
-The website is owned by <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
+The website is owned by <TeamMember name="Eli Kinsey" /> and <TeamMember name="Ian Matson" />. Generally, the best place to ask is the `#posthogdotcom` Slack channel.
 
 For larger pieces of work — a new product page, a significant copy overhaul — read [Working with the website team](/handbook/marketing/working-with-website) for the process to follow.
 </details>
@@ -115,7 +122,7 @@ Read [art and branding requests](/handbook/brand/art-requests) first!
 <details>
 <summary>I need a font, logo, etc.</summary>
 
-See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
+See [Logos, brand, hedgehogs](/handbook/brand/assets)
 </details>
 
 <details>

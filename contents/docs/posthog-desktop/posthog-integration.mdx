@@ -1,0 +1,45 @@
+---
+title: PostHog integration for PostHog Desktop
+---
+
+PostHog Desktop brings your PostHog context into the agent in real time, including product data, Feature Flags, Experiments, and errors. If you don't use PostHog, PostHog Desktop still works as a general-purpose coding agent. The integration adds context but isn't a hard dependency.
+
+## Built-in PostHog skills
+
+PostHog Desktop gives the agent guided processes for common PostHog work. Ask it to:
+
+- Add Product Analytics, Feature Flags, Error Tracking, Logs, or AI Observability to an application
+- Create an Experiment, choose metrics, monitor the results, and ship the winner
+- Explore LLM traces or query product data with HogQL
+- Connect a warehouse source, fix a failed sync, or check data quality
+
+These [skills](/docs/posthog-desktop/skills) load automatically and update without an app release. You can inspect them in the Skills view before the agent uses them.
+
+## Built-in PostHog MCP
+
+PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box. Once you sign in, the agent can query your project for insights, dashboards, Feature Flags, Experiments, and errors. This is useful for prompts like "did my last deploy regress conversion?" or "build me a dashboard for the new checkout flow".
+
+You don't need to install or configure the MCP server separately. It's authenticated with the same session you use to sign in.
+
+Connect other MCP servers for your issue tracker, error tracker, or internal APIs. See [MCP servers](/docs/posthog-desktop/mcp-servers).
+
+## Live product context
+
+When you open a file or review a diff, PostHog Desktop adds live product context beside the relevant code. You can see whether an event is active, how many people use it, whether a flag is stale, and how an Experiment is progressing before you change anything.
+
+The agent sees the same context. That means you can ask it to remove a stale flag, change an event, or investigate a regression with an understanding of the real product impact, not only the code in front of it.
+
+Live product context supports JavaScript, TypeScript, JSX, TSX, Python, Go, and Ruby. In those languages, PostHog Desktop recognizes event capture, Feature Flag checks and variants, and SDK setup.
+
+Code detection happens on your machine. PostHog Desktop fetches only the matching product metadata from the project you selected.
+
+## Switching projects
+
+PostHog Desktop is signed in to your PostHog organization out of the box. To change which project the integration points at, use the project switcher in the bottom-left corner of the app and pick a different project from the list.
+
+The selected project is the one used by:
+
+- The PostHog [MCP server](/docs/model-context-protocol) when the agent queries insights, dashboards, Feature Flags, Experiments, and errors
+- Live code context when it fetches flag and event metadata
+- [Cloud tasks](/docs/posthog-desktop/cloud-runs) launched from your machine
+- [Canvases](/docs/posthog-desktop/canvases) when they read insights or capture events

@@ -1,42 +1,26 @@
 ---
-title: Brand foundations
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
 
-If you work at PostHog, you are a brand ambassador. This brandbook outlines how to extend our brand to your personal responsibilities at PostHog.
-
-## What is brand?
-
-PostHog's brand is **the total sum of how people experience us** – from a first visit to posthog.com to an onboarding email, from how quickly we ship a bug fix someone complained about on X to billboards, merch, event collateral, ads, and more.
-
-Every person who encounters PostHog forms an opinion. Brand is the accumulated weight of all those opinions.
+PostHog's brand is the total sum of how people experience us – from a first visit to posthog.com to an onboarding email, from how quickly we ship a bug fix someone complained about on X, to billboards, merch, event collateral, ads, and more.
 
 This matters for two reasons:
 
-1. **Brand is a growth driver.** It's one of the four main reasons PostHog gets recommended. People who trust a brand talk about it. Developers who find us authentic fight for us in comment sections.
+1. **Brand is a growth driver.** It's one of the main reasons PostHog gets recommended. People who trust a brand talk about it. Developers who find us authentic fight for us in comment sections.
 
 2. **Trust is slow to build and fast to lose.** A generic headline, a forced joke, a bad sticker, a robotic support reply – each of these chips away at the trust we've earned.
 
-## Our mindset
-
-Everything flows from two ideas:
-
-**"Yes and…"**
-We expand ideas instead of shutting them down. When someone proposes something, the instinct is to find what's interesting about it and build on it – not critique it to death. This shapes how we design, how we write, and how we talk to each other.
-
-**"We can do this better ourselves."**
-The best things get made by people who genuinely care about what they're making. When we ship something, it should feel like *someone made this on purpose* – not like it was generated, templated, or outsourced.
-
 ## Taste
 
-Taste is the most important design principle PostHog has. "Polish" is surface-level – smooth gradients, perfect shadows, trendy layouts – the visual equivalent of buzzwords. "Taste" is deeper: making decisions that reflect a real point of view, caring about whether something is *right* and not just *done*, going the extra mile even if only one person notices.
+Taste is the most important principle PostHog has. "Polish" is surface-level – smooth gradients, perfect shadows, trendy layouts – the visual equivalent of buzzwords. "Taste" is deeper: making decisions that reflect a real point of view, caring about whether something is *right* and not just *done*, going the extra mile even if only one person notices.
 
-A design with taste looks like *someone made this on purpose,* especially in a world where more people are shipping AI slop.
+Something made with taste looks like *someone made this on purpose,* especially in a world where more people are shipping AI slop.
 
 What taste looks like in practice:
 
-- **Caring about details.** Typography, spacing, alignment, whitespace – these are felt even when not consciously noticed.
+- **Caring about details.** Typography, spacing, alignment, whitespace – or the exact wording of an error message – these are felt even when not consciously noticed.
 - **Intentionality.** Every element has a reason to be there.
 - **Going the extra mile.** Especially for things most people won't notice (you'd be surprised how many actually do).
 - **Enjoying the work.** When you enjoy making something, it shows.
@@ -59,21 +43,21 @@ PostHog should feel:
 
 ## Who we're talking to
 
-Our primary audience is **product engineers** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
+Our primary audience is **AI-pilled software teams**. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
 
-This shapes everything. Developers...
+We should assume our audience either has to do technical work or wants to, regardless of whether they can code. Most of them are engineers, and for the rest, we're the bridge, giving everyone direct access to data and the power to ship.
 
-- distrust marketing by default. They've been burned by overpromising before.
-- prefer specificity over benefits language. "It does X" beats "It empowers you to unlock X."
-- can tell within seconds if something is authentic or corporate. They view source code for fun.
-- react well to honesty, including honesty about limitations and tradeoffs.
-- respond to wit, but are allergic to forced humor.
+This shapes everything. Engineers...
 
-The right model: **you're talking to a smart, skeptical friend who happens to be a product builder.** Not an enterprise buyer. Not an executive. A person.
+- Distrust marketing by default. They've been burned by overpromising before.
+- Prefer specificity over benefits language. "It does X" beats "It empowers you to unlock X."
+- Can tell within seconds if something is authentic or corporate. They view source code for fun.
+- React well to honesty, including honesty about limitations and tradeoffs.
+- Respond to wit, but are allergic to forced humor.
 
 For the full picture, see [who we build for](/handbook/who-we-build-for).
 
-## The Hacker News test
+### The Hacker News test
 
 Before you ship anything – copy, design, a campaign, a policy – ask: *how would this be received on Hacker News?*
 
@@ -81,36 +65,62 @@ Hacker News is intensely logical and skeptical. They'll call out corporate spin,
 
 ## How we describe PostHog
 
-Nothing has changed about our overall positioning: **PostHog makes _your_ product self-driving.** This is the frame everyone at PostHog should use, across the product, website, marketing, content, and support. Product marketers can find the granular vocabulary rules and the per-tool playbooks in [Positioning and selling](/handbook/marketing/positioning).
+> **PostHog is the context layer for your product.** PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query it and make changes.
 
-### Self-driving is the story
+<img width="660" height="520" alt="Screenshot 2026-10-01 at 21 10 21" src="https://github.com/user-attachments/assets/dc69c89b-b655-44e6-b7ee-3e3780b5c736" />
 
-Self-driving is the narrative everything sits under. PostHog makes your product development self-driving – a better version of you, with your product and all its context in one place. It isn't a product or a tool you can point at. It's what PostHog is and enables. Don't write "PostHog is a self-driving product" or "the self-driving app" – keep the customer's product as the subject.
+This is the frame everyone at PostHog should use, everywhere.
 
-Because it's a capability, not a product, always write it lowercase and hyphenated: it's not "Self-Driving" or "self driving", it's "self-driving".
+Our products help customers do one of four things, which build on each other:
+
+1. **Get data in.** PostHog ingests and stores your data, which can come directly from our own products or 3rd party sources.
+2. **Query the data with your agent.** Ask PostHog AI or use the PostHog MCP to run queries.
+3. **Give the data to your agent to act on.** We make the same data available via PostHog MCP so our users' agents can find issues and propose or take action.
+4. **Let PostHog self-drive.** Use PostHog to ship changes, measure their effect, and repeat.
+
+Start with the step that matches the customer's needs. Self-driving is an aspirational state, but the component parts are composable. If a customer wants to take Reports and pass them to their own agents to act on, that is totally fine. Our job is to give engineers a suite of tools they can pick and choose from. 
 
 ### The standard description
 
-Use this whenever you need a standard description of PostHog:
+Use this whenever you need a longer standard description of PostHog, e.g. for a newsletter or press. We also embed this in all our blog posts.
 
 <AboutPostHog />
 
-### The four layers
+Product Analytics, Session Replay, Logs etc. are **products.** The surfaces that you interact with PostHog, like Web, Slack, MCP are **apps.**
 
-Everything we offer is one of four things. Use these words exactly:
+Developer marketers can find the granular vocabulary rules and the per-product playbooks in [Positioning and selling](/handbook/marketing/positioning).
 
-- **Products** – the surfaces a customer adopts; how you access self-driving. Today that's **Web** (app.posthog.com, where Inbox and PostHog AI live), **Slack**, **MCP**, and **Code** (PostHog Code; becomes **Desktop** in future, once it has non-coding use cases). **Mobile** is coming. The **context warehouse** is a product from a marketing perspective (its own PM/PMM, pricing, and so on), but on posthog.com we present it as the platform everything is built on, *not* as another item in this list.
-- **Tools** – the functional capabilities accessed through the products: product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on (as granular as annotations or comments). We used to call these "apps."
-- **Context** – the data that feeds the self-driving loop: events, recordings, errors, and logs from PostHog, plus other business data (Slack, code, Notion, support tickets, and so on). This is the fuel.
-- **Context warehouse** – the data warehouse plus the full context-ingestion pipeline (modelling, data pipelines, batch exports, and so on). Don't say "**PostHog Data Stack**" – the warehouse, modelling, pipelines, and exports are all part of the broader context warehouse, and "Data Stack" isn't something we talk about externally.
+## What we want people to know
 
-In one line: self-driving is the story, products are how you access it, tools are the supporting capabilities, context is the fuel, and the context warehouse is the platform where context lives.
+Beyond literally communicating what PostHog is and what it does, we want to [equip developers to build successful products](/handbook/why-does-posthog-exist). We do this by communicating the following:
+
+- There is a lot of hard-earned knowledge in the startup and product space that builders don't know yet because it's not written for them. We've also learned a lot from building PostHog and from our customers. We want to share all this with them.
+- We provide all the tools developers need to build successful products. All of them are powerful, but require expertise to use effectively. Some don't even know these tools exist. We help build this expertise by providing world-class docs, tutorials, and technical content.
+- Anyone can build successful products. Developers don't need product managers or data analysts to tell them what to build. Formerly "non-technical" people don't need developers to write code for them. With the right tools and knowledge, anyone is capable of making product decisions themselves.
+- Talking to users, shipping what they want fast, debugging and fixing issues, measuring impact, and iterating is the core loop of building successful products.
+- PostHog aims to do "the right thing" for our users. We're self-serve with usage-based pricing. We don't have loss leaders and are in it for the long haul. We don't do sleazy marketing or sales tactics. We're open source and transparent. We don't want to be another boring B2B SaaS company, even if that is "optimal for the creation of shareholder value."
+
+## Why people pick PostHog
+
+- We help engineers build better products, faster.
+- PostHog already has all the data about how people use your product and how your product performs, like usage analytics, error tracking, session replays, logs, traces, and more. This lets you discover and understand issues and their context, but also feeds your self-driving loop.
+- We have all the products and context in one. This means less time spent patching separate services together and paying for them all separately. When builders (and their agents) need a new capability, they can just use PostHog.
+- Our team is technical and speaks the language of developers. Our engineers talk with customers to figure out what to build. Our support team are all former engineers and get into the nitty-gritty of issues. Our sales and CS teams are very technical too. They focus more on your use cases and implementation than steak dinners.
+- We want engineers to self-serve. They can sign up and use all of the features of PostHog for free.
+
+> See [Why buy PostHog](/handbook/growth/sales/why-buy-posthog) and [How we make users happy](/handbook/making-users-happy).
 
 ## What we are not
 
+PostHog could be a lot of things, and we have a lot of terms for the same things. This creates cognitive load and confusion, and we'd rather our audience use their energy elsewhere.
+
 A few things to avoid when describing PostHog:
 
-- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a platform that makes your product self-driving, with tools — product analytics, session replay, feature flags, and more — that help people build successful products.
+- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a platform that makes your product self-driving, with products — product analytics, session replay, feature flags, and more — that help people build successful products.
 - **Not a single product.** We're a platform that makes _your_ product self-driving — you (and your AI agents) ship improvements from your product's own context.
 - **Not a "product improvement platform."** This is vague and buzzwordy.
 - **Not enterprise-first.** We build for people who self-serve. We get in early and grow with our customers. We don't go out of our way to build niche features just to chase a large contract. Don't let copy, design, or tone drift toward enterprise-speak.
+- **Not a "dev tool platform."** This makes it seem like we are just dev tools to use.
+- **Not a collection, group, set, bunch or any other collective noun** of products or apps. We are not "product and data tools" as this isn't developer-focused enough. Product and data should refer to our customer's products and data.
+- **Not a "product analytics product."** The doubled word reads badly – say "product analytics" on its own whenever possible.
+- **Not "a self-driving product."** We help customers make their product self-driving. 

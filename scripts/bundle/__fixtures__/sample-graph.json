@@ -1,15 +1,16 @@
 {
     "entrypoints": {
-        "app": { "roots": ["a"] },
-        "polyfill": { "roots": ["p"] }
+        "app": { "roots": ["a"], "eager": ["a", "b", "c", "d"] },
+        "polyfill": { "roots": ["p"], "eager": ["p"] }
     },
     "modules": {
-        "a": { "name": "./.cache/production-app.js", "size": 100, "static": ["b", "c"], "dynamic": ["e"] },
+        "a": { "name": "./.cache/production-app.js", "size": 100, "static": ["b", "c", "g"], "dynamic": ["e"] },
         "b": { "name": "./src/components/Shell.tsx", "size": 200, "static": ["d"], "dynamic": [] },
         "c": { "name": "./src/components/Header.tsx", "size": 50, "static": [], "dynamic": [] },
         "d": { "name": "../node_modules/heavy/index.js", "size": 1000, "static": [], "dynamic": [] },
         "e": { "name": "./src/templates/lazy-page.tsx", "size": 5000, "static": ["f"], "dynamic": [] },
         "f": { "name": "../node_modules/monaco-editor/editor.js", "size": 9000, "static": [], "dynamic": [] },
+        "g": { "name": "../node_modules/tree-shaken-barrel/index.js", "size": 7000, "static": [], "dynamic": [] },
         "p": { "name": "./.cache/polyfill.js", "size": 30, "static": [], "dynamic": [] }
     }
 }

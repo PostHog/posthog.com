@@ -1,0 +1,34 @@
+---
+title: Workflows API
+sidebar: Docs
+showTitle: true
+---
+
+Workflows are stored as **hog flows**, and every one of them is available over the PostHog [REST API](/docs/api). Use it when you want workflows under version control, generated from your own system, or created as part of a deploy.
+
+## Before you start
+
+1. **Set up Workflows** – Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/workflows/installation) if you want event-based triggers.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What you can do here
+
+- **Manage workflows.** `/api/projects/:project_id/hog_flows/` lists, creates, reads, updates, and deletes workflows, including their trigger, graph of actions, and enabled state.
+- **Reuse templates.** `/api/projects/:project_id/hog_flow_templates/` covers the workflow templates in your project.
+- **Honor unsubscribes and resubscribes.** `/api/projects/:project_id/messaging_preferences/` manages the [opt-out list](/docs/workflows/opt-outs): list a category's opt-outs, add them one at a time or in bulk, remove one when a recipient opts back in, and export the list as CSV. Full details in the [messaging preferences API reference](/docs/api/messaging-preferences).
+- **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/workflows/opt-outs#the-suppression-list). Full details in the [messaging suppressions API reference](/docs/api/messaging-suppressions).
+- **Check blast radius before you publish.** The API can report how many people a workflow's audience filters would match, so you don't accidentally message everyone.
+- **Inspect runs.** Batch job status endpoints report on workflows triggered against a batch audience.
+- **Cancel runs.** `/api/projects/:project_id/hog_flows/:id/invocations/cancel` cancels a workflow's in-flight runs, by ID or all at once. `/api/projects/:project_id/hog_flows/:id/batch_jobs/:batch_job_id/cancel` stops a batch run: enrollment halts and its in-flight runs are canceled. Both are asynchronous and report when another pass is needed.
+
+A workflow's graph is validated on write. If a trigger, action, or template reference is invalid, the API rejects it with a message naming the offending action rather than saving a broken workflow.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) scoped to the project you're writing to, and send it as a bearer token. Workflows, opt-outs, and suppressions all use the `hog_flow` scope: grant the key `hog_flow:read` for reads and `hog_flow:write` for writes. Treat the key like a password – it can create and enable workflows that send real messages, so keep it in a secret store, never in client-side code.
+
+## Related
+
+- [PostHog API overview](/docs/api) – authentication, rate limits, and pagination
+- [Use Workflows over PostHog MCP](/docs/workflows/surfaces/mcp) – the same operations from an AI tool
+- [Workflow builder](/docs/workflows/workflow-builder) – what the graph you're writing actually means

@@ -37,7 +37,7 @@ This article explores the different types of North Star metrics using examples f
 ## What is a North Star metric?
 In its simplest form, a North Star is a metric which provides a singular focus for a company or product's growth and success. Every department should understand it and how they influence it – either directly or indirectly. It's something you should monitor regularly - perhaps by [adding it to a PostHog dashboard](/docs/user-guides/dashboards), for example. 
 
-North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you. North Star metrics are also a way to [measure product-market fit](/blog/measure-product-market-fit).
+North Star metrics can and should change over time. What makes sense for an early-stage start-up won't be the same for an established business, so it's a metric that should be interrogated frequently to ensure it's still the right one for you. North Star metrics are also a way to [measure product-market fit](/founders/measure-product-market-fit).
 
 ### Examples of good North Star metrics
 
@@ -113,7 +113,7 @@ We feel retaining users is the first step on the path to profitability and a met
 
 ## How to track your North Star metric
 
-Needless to say, a developer platform like PostHog is essential for tracking any North Star metric. Tools like Google Analytics simply don't offer the [depth of insight needed](/customers/mention-me), which also rules out popular privacy-first alternatives like [Plausible](/blog/posthog-vs-plausible), [Fathom](/blog/best-fathom-alternatives), and Umami.
+Needless to say, a developer platform like PostHog is essential for tracking any North Star metric. Tools like Google Analytics simply don't offer the [depth of insight needed](/customers/mention-me), which also rules out popular privacy-first alternatives like [Plausible](/compare/posthog-vs-plausible), [Fathom](/compare/best-fathom-alternatives), and Umami.
 
 **If you're already using PostHog**, we recommend creating a dashboard featuring your chosen North Star metric (plus other [key product metrics](/blog/b2b-saas-product-metrics)) and adding it to your PostHog project homepage. This ensures you and your team can keep an eye on progress each time you login. Better still, you can have regular updates on any insight or dashboard delivered to a Slack group on any schedule you choose – subscriptions are accessible via the '...' menu. Read our [product manual](/using-posthog) for guidance on the different types of insights you can create.
 
@@ -121,7 +121,7 @@ Needless to say, a developer platform like PostHog is essential for tracking any
 
 ## Further reading
 
-- [How to achieve B2B product market fit](/blog/product-market-fit-game): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): How to approach finding market fit for a B2B product
 
 - [Introduction to SaaS product metrics](/blog/b2b-saas-product-metrics): A guide to common B2B product metrics and how to measure them
 

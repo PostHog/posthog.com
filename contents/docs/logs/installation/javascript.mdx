@@ -1,5 +1,5 @@
 ---
-title: JavaScript web logs installation
+title: JavaScript web Logs installation
 platformLogo: javascript
 showStepsToc: true
 ---
@@ -112,6 +112,32 @@ posthog.init('<ph_project_token>', {
 > 3. Prefer `posthog.logger` for anything you actually care about – it's structured, queryable, and doesn't pull in unrelated output.
 
 `posthog.logger` and `captureConsoleLogs` are independent and can be enabled together. The logger path emits OTLP records directly; the autocapture path scrapes console strings.
+
+### Two ways to turn it on
+
+Console autocapture is enabled by either of two independent switches:
+
+- `logs.captureConsoleLogs: true` in `posthog.init()`, as above.
+- **Capture console logs** under Logs in [project settings](https://app.posthog.com/settings/project), which reaches the SDK through remote config.
+
+Either one turns it on, and neither switches the other off. If you enabled it in `init()`, turning the project setting off does not stop capture – remove the option from your code instead.
+
+### Early console calls
+
+The `console` wrappers that forward records to PostHog live in a script the SDK loads lazily, so calls made during page startup would otherwise be missed. This matters most for framework output that only ever appears early, like React hydration warnings.
+
+From posthog-js **1.422.0**, the SDK records `console.*` calls into a small in-memory buffer while that script loads, then backfills them once it is ready. Each buffered record keeps the timestamp and person it had at the moment of the call, so backfilled entries appear in order rather than bunched at load time.
+
+How much of startup is covered depends on how you enabled capture:
+
+- **`captureConsoleLogs` in `init()`** – covered from `posthog.init()` onwards, on every page load.
+- **Project setting only** – covered from `posthog.init()` on repeat visits, but on a visitor's very first page load capture starts when remote config responds, so calls before that are missed.
+
+Set the `init()` option if you need the full startup window covered on the first load too.
+
+The buffer holds up to `logs.maxBufferSize` records (100 by default), keeping the earliest ones, and is discarded without sending if capture turns out to be disabled, the user opts out, or you call `posthog.reset()`.
+
+Arguments are buffered by reference. If you log an object and then mutate it before the script finishes loading, the backfilled record shows the mutated value.
 
 </Step>
 

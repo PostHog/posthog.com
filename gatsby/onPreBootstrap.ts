@@ -2,9 +2,13 @@ import { GatsbyNode } from 'gatsby'
 
 import path from 'path'
 import fs from 'fs'
+import { execFile } from 'child_process'
+import { promisify } from 'util'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
+import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
+import { cacheFetchResponsesInDevelopment } from './devFetchCache'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -48,9 +52,38 @@ function invalidateGitCacheIfBranchChanged(): void {
     fs.writeFileSync(BRANCH_MANIFEST_FILE, JSON.stringify({ branch: currentBranch }))
 }
 
-export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+const execFileAsync = promisify(execFile)
+
+async function sparseCloneGitSource(store): Promise<void> {
+    const { name, remote, branch, patterns } = store
+        .getState()
+        .flattenedPlugins.find((plugin) => plugin.name === 'gatsby-source-git').pluginOptions
+    const cloneDir = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, name)
+    if (fs.existsSync(cloneDir)) return
+
+    try {
+        await execFileAsync('git', [
+            'clone',
+            '--depth=1',
+            `--branch=${branch}`,
+            '--filter=blob:none',
+            '--no-checkout',
+            remote,
+            cloneDir,
+        ])
+        await execFileAsync('git', ['-C', cloneDir, 'sparse-checkout', 'set', '--no-cone', ...patterns])
+        await execFileAsync('git', ['-C', cloneDir, 'checkout', branch])
+    } catch (error) {
+        console.warn('Sparse clone of gatsby-source-git failed, falling back to a full clone:', error)
+        fs.rmSync(cloneDir, { recursive: true, force: true })
+    }
+}
+
+export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+    cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
+    await sparseCloneGitSource(store)
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
@@ -63,12 +96,17 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) =>
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
             : ''
-        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
     ${assetHostConfig}capture_pageview: false,
     capture_pageleave: true,
+    // A windowed page scrolls inside its app window, not the document, so the default
+    // document scroll root reports "100% scrolled" for everyone. ScrollArea marks the
+    // viewport with data-scroll-root while that viewport is what scrolls, and 'html'
+    // keeps the default behavior for a page that scrolls the document instead.
+    scroll_root_selector: ['[data-scroll-root]', 'html'],
     persistence: 'localStorage+cookie',
     cookie_persisted_properties: ['prod_interest'],
     uuid_version:'v7',
@@ -81,6 +119,17 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Drop exceptions coming from local dev servers so developers' local
+    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
+    // don't pollute production error tracking. Real users are never on localhost.
+    before_send: function (event) {
+        var hostname = window.location.hostname
+        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+            return null
+        }
+        return event
+    },
+    capture_webmcp: true,
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
@@ -109,6 +158,10 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     // Fetch and process MCP tool definitions
     const mcpToolsData = await fetchAndProcessMCPTools()
     writeMCPToolsToFile(mcpToolsData)
+
+    // Fetch the scout SKILL.md files the pocket guides render. The monorepo owns them, so a guide
+    // and the app's create-scout modal can never disagree about what a scout does.
+    writeScoutSkillsToFile(await fetchScoutSkills())
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {

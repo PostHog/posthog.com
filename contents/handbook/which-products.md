@@ -9,25 +9,26 @@ Shipping them in the right order is key to a fast return on investment from ever
 
 ## How we pick new products
 
-Until products are built and launched, it's hard to predict which ones will do well. Because of this, we want to be working on a mix of new products at any given time. Some we're very sure will do well, others might be more of a bet with a potentially big outcome. This guidance is therefore less prescriptive that it could otherwise be.
+Until products are built and launched, it's hard to predict which ones will do well. Because of this, we want to be working on a mix of new products at any given time. Some we're very sure will do well, others might be more of a bet with a potentially big outcome.
 
-Products we know will work well if we ship them:
-- Products engineers use at all company stages
-  - Think error tracking or feature flags. The [persona doesn't change](/handbook/who-we-build-for#our-current-persona) as the company gets bigger.
-  - Especially true if it works for a 2 person startup, because that means we get in first
-- Products that are in extremely fast growing markets
-  - Think AI Observability, MCP 
-- Products that are very easy to integrate for our existing customers. 
-  - For example, users can enable the product in PostHog without needing to make a code change, or products that built on top of data that people are already collecting in PostHog
-- Products that _you_ are excited to build. 
-  - People pursuing their interests get more done, go much further, and execute to a better standard.
-- Products that our customers are asking for
+Products should fit these criteria before we build them:
 
-Products we're less excited about building:
-- Products where the ICP quickly changes to someone outside the product team, especially teams far removed from engineering
-  - For example, a CRM. We'd be more excited about building a customer support tool, as support often is a task that involves engineering.
-- Products that lean into 2020 style products, not 2030 style products
-  - Think lots of UX for humans to use
+- They add more data (for example, more events) or different types of data (for example, errors or logs), or use the data we already have
+- They have an initial ICP of [someone on the product team](https://posthog.com/handbook/who-we-build-for#our-current-persona)
+  - Ideally, the ICP does not change quickly to someone far removed from the product team
+- They already have $1bn competitors on the market, or are in extremely fast-growing markets
+  - For example, AI Observability did not have a $1bn competitor when we started it, but the market was growing very quickly
+- Someone is very excited about building this product internally
+  - People pursuing their interests get more done, go much further, and execute to a better standard
+  - Additionally, each product must have a Blitzscale sponsor
+- The product has a future in 2030, i.e. it's not something 2020-style
+
+### Are there any exceptions?
+
+We build lots of cool things at hackathons and when inspiration strikes. Not all of those should become paid-for products, but it's nice to let them see the light of day, especially if it can make a customer happy. 
+
+We encourage you to build things that can be turned into open-source software and offered in that way. This is a great option for dev tools, tangential projects, and cool little things you just want to hack away at. 
+
 
 ## How new products get built
 
@@ -39,23 +40,7 @@ The best products are often ones that not everyone thinks is a good idea before 
 
 For a complete walkthrough of the product lifecycle, see [releasing new products and features](/handbook/product/releasing-new-products-and-features).
 
-## Next products on deck
-
-From our [roadmap](/roadmap), here's what we're currently working on:
-
-- Endpoints - `#team-data-modeling`
-- Logs - `#project-logs`
-- Product autonomy - `#team-array`
-- Customer Analytics `#team-web-analytics`
-- Workflows `#team-workflows`
-
-And these are the products we think we'll focus on next:
-- 100x the toolbar - likely `#team-array`
-- Metrics
-- APM
-- BI over any database (not just those synced to our data warehouse)
-- Support -> PRs
-- AI answers and docs
+See our [roadmap](/roadmap) for what we're currently working on. 
 
 ## How to pick which feature within an existing product to build
 

@@ -1,9 +1,7 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import Link from 'components/Link'
@@ -15,19 +13,6 @@ interface MediaProps {
 }
 
 export default function Media({ data }: MediaProps) {
-    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/media',
-        content: (
-            <div className="max-w-3xl mx-auto pb-12">
-                <MDXProvider
-                    components={{ a: (props) => <Link {...props} state={{ newWindow: true }} />, ...shortcodes }}
-                >
-                    <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                </MDXProvider>
-            </div>
-        ),
-    })
-
     return (
         <>
             <SEO
@@ -42,19 +27,14 @@ export default function Media({ data }: MediaProps) {
                     title: 'Media & press',
                     description: 'Media resources and press information',
                 }}
-                hasTabs
             >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/media"
-                    onValueChange={handleTabChange}
-                    padding
-                    tabContainerClassName={tabContainerClassName}
-                    tabContentClassName="px-4 @xl:px-8"
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+                <div className="max-w-3xl mx-auto pb-12 px-4 @xl:px-8">
+                    <MDXProvider
+                        components={{ a: (props) => <Link {...props} state={{ newWindow: true }} />, ...shortcodes }}
+                    >
+                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                    </MDXProvider>
+                </div>
             </Editor>
         </>
     )

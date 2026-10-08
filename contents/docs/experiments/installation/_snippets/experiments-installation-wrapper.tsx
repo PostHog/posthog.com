@@ -15,6 +15,7 @@ import {
     IOSInstallation,
     AndroidInstallation,
     FlutterInstallation,
+    KMPInstallation,
     ReactNativeInstallation,
     // Backend SDK installations
     NodeJSInstallation,
@@ -24,6 +25,7 @@ import {
     GoInstallation,
     DjangoInstallation,
     LaravelInstallation,
+    RubyOnRailsInstallation,
     // No-code installations
     WebflowInstallation,
     FramerInstallation,
@@ -125,6 +127,12 @@ export const ExperimentsFlutterInstallationWrapper = () => (
     </OnboardingContentWrapper>
 )
 
+export const ExperimentsKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <KMPInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
 export const ExperimentsReactNativeInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <ReactNativeInstallation modifySteps={addNextStepsStep} />
@@ -171,6 +179,12 @@ export const ExperimentsDjangoInstallationWrapper = () => (
 export const ExperimentsLaravelInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <LaravelInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const ExperimentsRubyOnRailsInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <RubyOnRailsInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

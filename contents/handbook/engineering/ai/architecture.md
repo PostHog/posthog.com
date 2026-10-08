@@ -16,7 +16,7 @@ graph TB
         PostHogAIUI[PostHog AI<br/>In-app Agent]
         DeepResearch[Deep Research]
         SessionSum[Session Summaries]
-        PostHogCode[PostHog Code<br/>Desktop App]
+        PostHogCode[PostHog Desktop]
         Wizard[Wizard<br/>CLI Tool]
         ClaudeCode[Claude Code /<br/>Other AI Tools]
     end
@@ -54,9 +54,9 @@ graph TB
 
 1. **The agent uses dynamic modes**: The single-loop agent architecture uses dynamically loadable modes that expose PostHog capabilities.
 
-2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client. PostHog AI, PostHog Code, Session Summaries, Wizard, and third-party tools like Claude Code all consume the same MCP server.
+2. **MCP provides universal access**: The MCP server makes agent features accessible to any MCP-compatible client. PostHog AI, PostHog Desktop, Session Summaries, Wizard, and third-party tools like Claude Code all consume the same MCP server.
 
-3. **Task generation feeds PostHog Code**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that PostHog Code can execute.
+3. **Task generation feeds PostHog Desktop**: Signals from PostHog data, PostHog AI conversations, and Deep Research investigations are processed into structured tasks that PostHog Desktop can execute.
 
 4. **Shared features**: Every surface consumes the same agent features through the MCP, ensuring consistency across the platform.
 
@@ -172,11 +172,11 @@ The problem we needed to solve: PostHog AI and the MCP server were developed by 
 
 The solution is an abstraction layer. Agent modes expose both high-level LLM tools (like "create a funnel with these parameters") and low-level API endpoint tools (like "call POST /api/projects/{id}/insights"). Both PostHog AI and the MCP have access to the same features, just through different interfaces.
 
-## How PostHog Code and Wizard fit in
+## How PostHog Desktop and Wizard fit in
 
-Both PostHog Code and the Wizard currently consume the MCP. This integration gives them access to all the agent modes we're building. If Claude Code (which PostHog Code uses for code generation) ever becomes a bottleneck, we could swap in PostHog's own single-loop agent since they share the same mental model. We'd need to copy over Claude Code's terminal and file system tools (bash, grep, etc.) and add them as core tools.
+Both PostHog Desktop and the Wizard currently consume the MCP. This integration gives them access to all the agent modes we're building. If Claude Code (which PostHog Desktop uses for code generation) ever becomes a bottleneck, we could swap in PostHog's own single-loop agent since they share the same mental model. We'd need to copy over Claude Code's terminal and file system tools (bash, grep, etc.) and add them as core tools.
 
-We could also tag modes for specific interfaces. For example, a `CodingMode(tags=["posthog-code"])` would only be exposed to the PostHog Code agent, not to PostHog AI, because it's specific to code generation workflows.
+We could also tag modes for specific interfaces. For example, a `CodingMode(tags=["posthog-code"])` would only be exposed to the PostHog Desktop agent, not to PostHog AI, because it's specific to code generation workflows.
 
 ## Glossary
 

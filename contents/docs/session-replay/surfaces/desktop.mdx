@@ -1,0 +1,56 @@
+---
+title: Review session findings in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you read the [Self-driving](/docs/self-driving) reports that session replay produces. Your recordings don't just sit in a list – a scout reads them for the moments users get stuck, clusters those moments into a report with the replays that prove it, and routes it to a human reviewer.
+
+Unlike [error tracking](/docs/error-tracking), this scout stops at the report. It doesn't open a draft pull request – see [why](#why-there-is-no-pull-request) below.
+
+## Before you start
+
+1. **Set up Session Replay** – [install and enable recording](/docs/session-replay/installation) so there are sessions to watch.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
+## How a session problem becomes a report
+
+The scout watches two things: whether you're still recording, and where recorded users hit a wall.
+
+- **Capture cliffs** – recording volume falling away while site traffic holds, usually an SDK change, a blocked recorder script, or a sampling or quota change. These are urgent because recordings can't be captured retroactively, so every silent day is gone for good.
+- **Confusion** – the user clearly couldn't work out what to do next
+- **Abandonment** – they gave up partway through a flow
+- **Failures** – an action didn't do what the user expected
+- **Blocking and non-blocking exceptions** – errors that stopped them, and errors they worked around
+
+Individual bad sessions aren't very actionable, so these get clustered across sessions. What makes a cluster worth your time is concentration: friction spread thinly across a product is just baseline, while friction piling up on one page or element, measured against that surface's own history, is a real finding. Each report names the surface, quantifies the step against its baseline, dates when it started, and links a few example recordings you can watch.
+
+A surface the inbox already covers gets the new window appended to the existing report rather than filed again, so a cliff that stays unrecovered or a cluster that keeps spiking stays one item.
+
+Because this analysis is done by AI, it only runs once your organization has approved AI data processing. Until then the session replay signal source stays off. See [signal sources](/docs/self-driving/inbox/sources) for how to turn it on.
+
+## Why there is no pull request
+
+A replay shows you the symptom, not the cause. A rage-click cluster on one button could be a slow request, a mislabeled control, a disabled state that gives no feedback, or a genuine bug – the recordings prove people are struggling there, but working out which of those it is takes a human. And a capture cliff is almost always a configuration or deployment problem, not a defect a coding agent could patch.
+
+So the scout files each finding as an investigation with the evidence attached and a reviewer assigned, and stops there. You can still hand a report to an agent once you've decided what the fix should be. Other signal sources, like [error tracking](/docs/error-tracking), do open pull requests on their own.
+
+## What you can do here
+
+- **Read the report** – the pattern, how many users and sessions hit it, when it started, and the replays that prove it.
+- **Watch the evidence** – each report links example recordings, so you can see the problem rather than infer it from a number.
+- **Ask questions** – start a research task against the report to dig further before deciding to act.
+- **See the history** – a cliff or cluster that persists is one report with each window appended, so you can tell whether it's getting worse or recovering.
+- **Decide what happens next** – fix the capture config, redesign the step, hand it to an agent, or mark it as expected. Nothing happens until you decide.
+
+## Related
+
+- Watch the underlying sessions in the [web app](/docs/session-replay/surfaces/web-app).
+- Pull sessions into your editor over [MCP](/docs/session-replay/surfaces/mcp).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

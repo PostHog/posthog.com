@@ -29,7 +29,25 @@ The session and distinct ID headers are sanitized before use. Empty values are i
 
 All events captured during the request (including exceptions) include these properties and are associated with the extracted session and distinct ID.
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers.
+### Login and signup views
+
+The middleware reads `request.user` once, before your view runs. On a login or signup request the visitor is still anonymous at that point, so the request's context has no distinct ID. Calling `login()` inside the view doesn't change that. Everything captured during that request stays anonymous, including the login event itself.
+
+Identify the context from inside the request once you know who the user is. Django's auth signals are the natural place:
+
+```python
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
+from posthog import identify_context
+
+@receiver(user_logged_in)
+def identify_posthog_user(sender, request, user, **kwargs):
+    identify_context(str(user.pk))
+```
+
+Every capture later in that request is then attributed to the user who just logged in. Requests made after login don't need this. The middleware sees the authenticated user from the start.
+
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers.
 
 ### Exception capture
 

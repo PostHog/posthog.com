@@ -1,0 +1,61 @@
+---
+title: Setting up the managed warehouse
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+
+Setup requires beta access. Not in yet? [Join the waitlist](/context-warehouse/managed-warehouse) and we'll be in touch.
+
+</CalloutBox>
+
+Setting up the warehouse takes a few minutes: you pick a name, PostHog provisions the infrastructure, and then historical data starts loading. Everything happens in the **Data ops** section of the app, which appears in your navigation once your organization has beta access.
+
+## Before you start
+
+- You need to be an **organization admin** to provision, deprovision, or manage credentials. Other members can see status but can't change anything.
+- One warehouse serves your whole organization. Each project you onboard gets its own schema inside it.
+
+## Provision the warehouse
+
+1. Go to [Data ops](https://app.posthog.com/data-ops) and open the **Settings** tab.
+2. Choose a **warehouse name** – lowercase letters, numbers, and hyphens. This becomes the subdomain you connect to: pick `my-warehouse` and your host is `my-warehouse.dw.us.postwh.com` (or `.dw.eu.postwh.com` on EU Cloud). PostHog checks availability as you type.
+3. Choose a **schema name** for the current project – lowercase letters, numbers, and underscores. This names your project's schema and its tables, so a schema name of `prod` gives you `events_prod` and `persons_prod`. Choose carefully: the schema name can't be changed later.
+4. Click **Provision warehouse**, and **save the password it returns**. It's shown exactly once. If you lose it, an admin can use **Reset password** in the same Settings tab to generate a new one (which invalidates the old one immediately).
+
+Provisioning runs in the background and should take less than 5 minutes. The Settings tab shows the state as it moves through provisioning to ready, and once ready it displays your full connection details.
+
+## Watch your data arrive
+
+Once the warehouse is ready, the **Overview** tab shows warehouse data readiness: how the historical backfill is going and whether recent imports have reached the warehouse.
+
+- **Events** and **Persons** cards track the one-time historical backfill and ongoing updates. Events backfill month by month, so you'll see partitions complete progressively; persons load as a single export.
+- **Imported source tables** lists every source currently syncing into the warehouse, with two timestamps that matter: **Last source import** (when PostHog last finished importing from the source) and **Applied to warehouse** (when that data actually landed in your warehouse). Click a row to see per-table detail.
+
+Each dataset shows one of these statuses:
+
+| Status | Meaning |
+|---|---|
+| Waiting | Queued up, work hasn't started yet |
+| Backfilling | Historical data is being copied in |
+| Up to date | Loaded, and new data is applied as it arrives |
+| Sync paused | Sync is off for this table; data already in the warehouse is unaffected |
+| Needs attention | Something failed and needs a retry or a fresh copy |
+| Not configured | This dataset isn't enabled for the warehouse |
+
+You don't need to wait for backfills to finish before connecting – data that's already landed is queryable immediately.
+
+## Add sources
+
+Anything you connect as a [source](/docs/cdp/sources) syncs into the warehouse automatically alongside its regular imports – there's no separate warehouse configuration per source. Manage sources as usual in [Data pipelines > Sources](https://app.posthog.com/data-management/sources).
+
+## Add more projects
+
+To bring another project into the same warehouse, an organization admin opens [Data ops](https://app.posthog.com/data-ops) while in that project, picks a schema name for it in the **Settings** tab, and clicks **Enable this project**. Each project's data stays in its own schema, and like at provisioning, the schema name is permanent.
+
+## Turning it off
+
+Admins can deprovision the warehouse from the Settings tab. This deletes the managed warehouse for your organization and every project in it – including any tables you created in it yourself – and it can't be undone. Your PostHog data and your source connections live outside the warehouse and are unaffected.

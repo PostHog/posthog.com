@@ -9,12 +9,6 @@ availability:
 sourceId: Granola
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Granola connector pulls your meeting notes into the PostHog data warehouse. Only notes that already have a generated AI summary and transcript are returned by the API.
 
 ## Adding a data source
@@ -29,10 +23,11 @@ Once the syncs are complete, you can start using Granola data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `notes` | Meeting notes with a generated AI summary and transcript | Incremental |
-| `folders` | Folders used to organize notes | Full refresh |
+| Table         | Description                                                                                | Sync method  |
+| ------------- | ------------------------------------------------------------------------------------------ | ------------ |
+| `notes`       | Meeting notes with a generated AI summary and transcript                                   | Incremental  |
+| `folders`     | Folders used to organize notes                                                             | Full refresh |
+| `transcripts` | Transcript segments for meeting notes, with speaker, text, and timestamps for each segment | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

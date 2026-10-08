@@ -4,9 +4,10 @@ If you've set the [`personProfiles` config](/docs/libraries/js/config) to `IDENT
 - [`alias()`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user)
 - [`group()`](/docs/product-analytics/group-analytics)
 - [`setPersonProperties()`](/docs/product-analytics/person-properties)
-- [`setPersonPropertiesForFlags()`](/docs/libraries/js/features#overriding-server-properties)
-- [`setGroupPropertiesForFlags()`](/docs/libraries/js/features#overriding-server-properties)
+- [`setGroupPropertiesForFlags()`](/docs/libraries/js/usage#overriding-server-properties)
 
 When you call any of these functions, it creates a [person profile](/docs/data/persons) for the user. Once this profile is created, all subsequent events for this user will be captured as identified events.
+
+[`setPersonPropertiesForFlags()`](/docs/feature-flags/property-overrides#manual-overrides-with-setpersonpropertiesforflags) is the exception. It doesn't create a person profile, so you can use it to target feature flags on person properties while the user is still anonymous.
 
 Alternatively, you can set `personProfiles` to `ALWAYS` to capture identified events by default.

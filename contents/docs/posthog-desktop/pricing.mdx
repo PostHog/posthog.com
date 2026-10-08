@@ -1,0 +1,43 @@
+---
+title: PostHog Desktop pricing
+---
+
+import { PostHogDesktopPricing } from 'components/PostHogDesktopPricing'
+
+PostHog Desktop uses **AI credits** rather than a fixed subscription. Every organization receives **$20 of usage each month**.
+
+Your cost depends on the model, the tokens it uses, and how many times the agent needs to iterate. Short, focused requests generally cost less than work across many files or a long conversation.
+
+## Model prices
+
+Prices below are per 1 million tokens. Rates can change when model providers update their prices.
+
+<PostHogDesktopPricing />
+
+Choose a model before starting a task. PostHog Desktop shows cost information as you work, so you can use a lower-cost model for straightforward tasks and a more capable model when the work needs it.
+
+## Track and control spending
+
+Open **Plan & usage** in PostHog Desktop to see spend by day and model and set an organization billing limit. You can also review total monthly consumption in the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_over_time_light_d6c7d839e6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_over_time_dark_7483f921bc.png"
+    alt="PostHog Desktop spend over time, broken down by day"
+    classes="rounded"
+/>
+
+<Caption>Track PostHog Desktop spend over time</Caption>
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_by_model_light_4b7f1ed6ad.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_by_model_dark_d3d95f7976.png"
+    alt="PostHog Desktop spend broken down by model"
+    classes="rounded"
+/>
+
+<Caption>See which models are driving your spend</Caption>
+
+The Plan & usage view updates in real time. Organization billing pages can take up to 24 hours to update.
+
+A billing limit prevents additional use after your organization reaches the amount you choose. Raise the limit to continue sending messages. Automated billing emails notify you as usage reaches key thresholds.

@@ -1,8 +1,12 @@
+// Host for client-side Squeak/Strapi calls (auth + the authenticated session).
+// Override via GATSBY_SQUEAK_AUTH_HOST — e.g. a local Strapi instance — for testing;
+// defaults to the normal API host so prod and other devs are unaffected. Note:
+// build-time sourcing (gatsby-source-squeak) uses GATSBY_SQUEAK_API_HOST directly and
+// is intentionally NOT affected by this, so it stays on the full-data cloud backend.
+export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
+
 // Strapi helper types
-export type StrapiResult<T> = StrapiData<T> &
-    StrapiMeta & {
-        pinnedQuestions?: StrapiRecord<QuestionData>[]
-    }
+export type StrapiResult<T> = StrapiData<T> & StrapiMeta
 
 export type StrapiMeta = {
     meta: {
@@ -40,11 +44,51 @@ export type QuestionData = {
     numReplies: number | null
     archived: boolean
     activeAt: string
-    pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
-    escalated: boolean
-    zendeskTicketID: number
-    autoLinkedToZendesk: boolean
+    edits?: any[]
+    // Forum posts only. A question with a forumTopic is a forum post.
+    forumTopic?: { data: StrapiRecord<ForumTopicData> | null }
+    forumTags?: StrapiData<ForumTagData[]>
+    participants?: StrapiData<ProfileData[]>
+    lastReplyAt?: string | null
+    lastReplyBy?: { data: StrapiRecord<ProfileData> | null }
+    pinnedToTopic?: boolean
+    locked?: boolean
+    numUpvotes?: number
+    hasUpvoted?: boolean
+}
+
+export type ForumTopicData = {
+    label: string
+    slug: string
+    description: string | null
+    icon: string | null
+    sortOrder: number
+    solutionsEnabled: boolean
+    aiRepliesEnabled: boolean
+    // Tags belong to exactly one topic.
+    tags?: StrapiData<ForumTagData[]>
+}
+
+export type ForumTagData = {
+    label: string
+    slug: string
+    sortOrder: number
+    // Helps Jev decide when the tag fits a post.
+    description?: string | null
+    topic?: { data: StrapiRecord<Pick<ForumTopicData, 'label' | 'slug'>> | null }
+    // Present when a query asks for the post count.
+    questions?: { data: { attributes: { count: number } } }
+}
+
+// /api/forum-subscriptions returns flat records, not the usual { id, attributes } shape.
+export type ForumSubscription = {
+    id: number
+    deliveryMode: 'none' | 'dailyDigest' | 'eachPost'
+    forumTopic: (Pick<ForumTopicData, 'label' | 'slug'> & { id: number }) | null
+    forumTag:
+        | (Pick<ForumTagData, 'label' | 'slug'> & { id: number; topic?: { id: number; slug: string } | null })
+        | null
 }
 
 export type AvatarData = {
@@ -57,6 +101,7 @@ export type ProfileData = {
     biography: string | null
     company: string | null
     companyRole: string | null
+    discord: string | null
     github: string | null
     linkedin: string | null
     location: string | null
@@ -69,7 +114,6 @@ export type ProfileData = {
     gravatarURL: string | null
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
-    topicSubscriptions: StrapiData<TopicData[]>
     pronouns?: string | null
     country: string | null
     amaEnabled: boolean | null
@@ -92,9 +136,43 @@ export type ProfileData = {
     reputation?: number
 }
 
+export interface TransactionMetadata {
+    description?: string
+    redemption?: {
+        title?: string
+        code?: string
+    }
+    achievement?: {
+        iconURL?: string
+        title?: string
+    }
+    reply?: {
+        title?: string
+    }
+    question?: { id: number; subject: string; permalink: string }
+    capped?: boolean
+}
+
+export type Transaction = {
+    id: number
+    amount: number
+    date: string
+    type: 'gift' | 'achievement' | 'redemption' | 'reply' | 'question'
+    metadata?: TransactionMetadata
+}
+
+export type Wallet = {
+    id?: number
+    balance: number
+    transactions?: Transaction[]
+}
+
 export type UserData = {
     email: string
     distinctId: string | null
+    // Only present when explicitly populated, which Strapi gates to the moderator role
+    wallet?: Wallet | null
+    creditRedemptionEnabled?: boolean
 }
 
 export type ProfileQuestionsData = {

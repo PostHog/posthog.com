@@ -6,20 +6,31 @@ import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 /** Spotlight slugs for “Supports Next.js, React, Python, …” (labels come from taxonomy). */
 const TEASER_SLUGS = ['nextjs', 'react', 'python'] as const
 
+export type WizardTeaserRow = ReturnType<typeof getWizardFrameworkRows>[number]
+
 /**
  * Helper line + tooltip listing every wizard-supported framework (from installation taxonomy).
+ * Products whose wizard integrates something other than app frameworks (e.g. AI Observability's
+ * LLM providers) can pass their own `rows`; the first three become the spotlight labels.
  */
-export default function WizardFrameworksTeaser({ className }: { className?: string }): JSX.Element {
-    const rows = useMemo(() => getWizardFrameworkRows(), [])
+export default function WizardFrameworksTeaser({
+    className,
+    rows: rowsOverride,
+}: {
+    className?: string
+    rows?: WizardTeaserRow[]
+}): JSX.Element {
+    const rows = useMemo(() => rowsOverride ?? getWizardFrameworkRows(), [rowsOverride])
 
     const teaserLabels = useMemo(() => {
+        if (rowsOverride) return rowsOverride.slice(0, 3).map((r) => r.label)
         const labels: string[] = []
         for (const slug of TEASER_SLUGS) {
             const row = rows.find((r) => r.slug === slug)
             if (row) labels.push(row.label)
         }
         return labels
-    }, [rows])
+    }, [rows, rowsOverride])
 
     const moreCount = Math.max(0, rows.length - teaserLabels.length)
 

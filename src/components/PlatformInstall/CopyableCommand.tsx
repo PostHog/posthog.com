@@ -11,6 +11,8 @@ export type CopyableCommandProps = {
     className?: string
     /** Apply the wizard gradient text effect to the command */
     animate?: boolean
+    /** Fired after the command reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 }
 
 export function CopyableCommand({
@@ -18,6 +20,7 @@ export function CopyableCommand({
     copyCommand,
     className = '',
     animate = false,
+    onCopy,
 }: CopyableCommandProps): JSX.Element {
     const { addToast } = useToast()
     const confettiZIndex = useCopyConfettiZIndex()
@@ -28,6 +31,7 @@ export function CopyableCommand({
         navigator.clipboard.writeText(copyCommand ?? command)
         setCopied(true)
         fireCopyConfetti(copyButtonRef.current, confettiZIndex)
+        onCopy?.()
         window.setTimeout(() => setCopied(false), 1500)
         addToast({
             description: (
@@ -45,7 +49,7 @@ export function CopyableCommand({
     return (
         <div
             className={cn(
-                'group flex items-start gap-2 bg-primary border border-primary rounded px-2 py-1.5',
+                'group flex items-start gap-2 bg-accent/30 border border-primary rounded-md px-2 py-1.5',
                 className
             )}
         >

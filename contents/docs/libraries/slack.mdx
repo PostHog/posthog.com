@@ -3,6 +3,7 @@ title: Slack
 platformLogo: slack
 ---
 
+import Tab from 'components/Tab'
 import AddSlackToWorkspace from '../workflows/_snippets/add-posthog-to-slack-workspace.mdx'
 import AddSlackToChannel from '../workflows/_snippets/add-posthog-to-slack-channel.mdx'
 
@@ -24,13 +25,79 @@ The PostHog app for Slack provides three key capabilities:
 
 ## Installing the PostHog Slack app
 
+You can connect a Slack workspace from the PostHog web app or from PostHog Desktop. Both use the same workspace connection, so a workspace connected in one shows up in the other. Pick where you're connecting from:
+
+<Tab.Group tabs={['Web', 'Desktop']}>
+
+<Tab.List>
+
+<Tab>Web</Tab>
+<Tab>Desktop</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
+
 ### 1. Adding the PostHog Slack app to your workspace
 
 <AddSlackToWorkspace/>
 
+You can also start from **Settings** → **Integrations** → **Slack integration** and click **Add to Slack**.
+
 ### 2. Adding the PostHog Slack app to specific channels
 
 <AddSlackToChannel/>
+
+### Inbox notifications
+
+Self-driving reports can post to Slack too. In the [inbox](/docs/self-driving/inbox), open the **Agents** tab:
+
+- **Notify the whole team** posts every actionable report to one channel. PostHog must be in the channel, so invite it with `/invite @PostHog`.
+- **Notify me directly** pings you in a channel of your choice when you're a suggested reviewer, with a minimum priority so low-priority reports stay quiet.
+
+### Disconnect
+
+On the **Slack integration** card in **Settings** → **Integrations**, click **Disconnect** next to the workspace. Subscriptions and destinations that use the workspace stop posting until someone reconnects it.
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Connect a workspace
+
+1. Open **Settings** → **Slack** in PostHog Desktop.
+2. Under **Workspace connection**, click **Connect Slack workspace**. Your browser opens Slack's permission screen. Click **Allow**.
+3. Back in PostHog Desktop, the workspace shows as connected. Use **Connect another workspace** to add more.
+
+<!-- TODO(screenshot): Settings → Slack in PostHog Desktop with a connected workspace -->
+
+<AddSlackToChannel/>
+
+### Inbox notifications
+
+Once a workspace is connected, the **Inbox notifications** section appears:
+
+- **Default notification channel** is the team channel every actionable report is posted to, with the suggested reviewers @mentioned. Project admins set it. PostHog must be in the channel, so invite it with `/invite @PostHog`.
+- **Notify me directly** pings you in a channel of your choice when you're a suggested reviewer, instead of the team's default channel.
+- **Minimum priority** only pings you for reports at or above that priority.
+
+<!-- TODO(screenshot): the Inbox notifications section in PostHog Desktop -->
+
+This is the same configuration as the inbox in the web app, so a change in one place applies everywhere.
+
+### Comment notifications
+
+Under **Comment notifications**, click **Link** next to **Slack account** to link your Slack identity. Then turn on **Slack DMs for comments** to get a direct message when someone mentions you, replies to your comment, or comments on something you own.
+
+### Disconnect
+
+Click **Disconnect** on the workspace row. Reports and notifications from this project stop posting to Slack until someone reconnects it. **Advanced settings in PostHog** at the bottom of the page opens the same integration in the web app.
+
+</Tab.Panel>
+
+</Tab.Panels>
+
+</Tab.Group>
 
 <!--
 ## Using PostHog AI in Slack
@@ -56,6 +123,8 @@ To set up a subscription:
 3. Click "Add subscription" and select **Slack** as the destination
 4. Choose the Slack channel where you want to receive updates
 5. Set your desired frequency (daily, weekly, monthly, etc.)
+
+<!-- TODO(screenshot): the subscription modal with Slack selected as the destination -->
 
 For more details, see our [subscriptions documentation](/docs/product-analytics/subscriptions).
 
@@ -88,8 +157,9 @@ When you paste a PostHog insight or dashboard URL in any Slack channel where the
 - The type (e.g., "Trends insight", "Funnel insight", "Dashboard")
 - The description, if available
 
-Link unfurling respects PostHog access permissions. Only team members with at least viewer access to the insight or dashboard will see the unfurled preview.
+<!-- TODO(screenshot): an unfurled insight link in Slack -->
 
+Link unfurling respects PostHog access permissions. Only team members with at least viewer access to the insight or dashboard will see the unfurled preview.
 
 ## What can you do with this integration?
 
@@ -97,6 +167,7 @@ The PostHog Slack integration helps teams stay informed and make data-driven dec
 
 - **Stay updated on key metrics** – Receive regular reports on user behavior, feature adoption, and conversion rates
 <!-- - **Get instant insights** – Ask PostHog AI questions and get answers without switching context -->
+
 - **React quickly to events** – Be notified immediately when important user actions or errors occur
 - **Share insights with your team** – Make product data accessible to everyone in relevant channels
 - **Preview links automatically** – Share PostHog URLs and see rich previews with titles and descriptions without leaving Slack

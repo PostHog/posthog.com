@@ -1,74 +1,74 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
-This quarter, we want to buy back time early, then spend that time on the billing work most tied to company goals.
+### Make revenue reporting trustworthy
 
-Alongside that, we will actively work on longer-term changes that will make future work easier. The goals here are clear, even if the exact path needs discovery as we go.
+_Theme: Finish reconciling discrepancies so we can use the new model for reporting and closing the books._
 
-### Tier 1: Remove the biggest time sinks early
+**1. Finish the move to the new revenue model (lead: <TeamMember name="Marce Coll" />)**
 
-_Theme: Fix the recurring interruptions that keep pulling us away from the most important work._
+-   Close out the remaining material discrepancies, fixing them or explicitly accepting them.
+-   Get Finance sign-off on the model.
+-   Work with Mine and Finance to move routine ARR/MRR and investor reporting onto the model, and get its data flowing into Campfire.
 
-1. **Remove the biggest billing time sinks (lead: <TeamMember name="Pawel Cebula" />)**
-    - <u>In the first sprint, everyone</u> identifies the biggest recurring billing time sinks, then looks for low-hanging fruit, and implements those with best ROI.
-    - Examples:
-        - Give PostHog AI enough context to answer common invoice, revenue, subscription, and pricing questions, so more people can self-serve (e.g. skills, semantic layer in DW).
-        - Ship a pricing launch/change skill so product teams can self-serve more of the repeated pricing work.
+### Make billing the source of truth
 
-2. **Make usage reporting and limiting less painful (lead: <TeamMember name="Marce Coll" />)**
-    - Finish usage reports v2, migrate consumers to it, increase reporting frequency toward ~30 minutes, and deprecate v1.
-    - Unify limiting logic, which is currently split across `posthog` and multiple paths in `billing`.
-    - Use the new event sourcing state machines so quota limiting can query `billing` for limiting state, with the logic living in one place.
-    - Make usage reporting and limiting introspectable over time instead of fishing through multiple systems when numbers look wrong or customers hit limits unexpectedly.
-    - Incorporate the money domain changes needed to support this cleanly.
+_Theme: Own credits, products, prices, and subscription behavior so billing can support PostHog's needs with fewer constraints from external providers._
 
-### Tier 2: Work directly tied to company goals
+**2. Migrate all credits to the in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
 
-_Theme: Finish the revenue model, migrate credits to the in-house ledger, and keep product launches and pricing changes moving._
+-   Seed credit pools from the new revenue model and reconcile them with customer balances. Fix or explicitly accept differences before cutover.
+-   Move all credits onto live ledger, applying promotional credits through discounts and prepurchased credits through customer balance, with the correct tax treatment.
+-   Rebuild refunds around ledger transactions and ship the operational tooling needed to manage live credits.
+-   Integrate credit ledger transactions into the new revenue model so credit usage and refunds are reflected correctly in revenue reporting.
 
-3. **Finish moving to the new revenue model (eng lead: <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
-    - Close out the remaining material discrepancies: fix them or explicitly accept them.
-    - Rebuild internal ARR/MRR dashboards on the new model and run them next to the old ones until we trust them.
-    - Migrate investor reporting to the new model.
-    - Get Finance sign-off on the model docs and close process.
-    - Make routine ARR/MRR questions self-serve for Finance, RevOps, leadership, and product teams.
-    - Get revenue model data flowing into Campfire.
+**3. Make the new product catalog the source of truth for products and prices (lead: <TeamMember name="Roy Cohen" />)**
 
-4. **Migrate credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
-    - Seed credit pools from the new revenue model.
-    - Replay 1-2 months of historical ledger activity against production actuals and run the shadow ledger.
-    - Fix or explicitly accept discrepancies before migration.
-    - Migrate from Stripe customer balance to the ledger.
+-   Build a catalog with at least parity with today's product and pricing setup, with requirements checked with the teams that need it.
+-   Sync the catalog to Stripe and integrate it wherever `billing` currently uses the old catalog.
+-   Run existing pricing configurations through it in production without changing customers' billing unexpectedly. Integration with existing subscriptions can ship before the new subscription engine is ready.
 
-5. **Ship expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
-    - **AI**
-        - AI Gateway
-        - Replay vision
-        - PostHog Code v2
-        - Slack agent: potential split from PostHog AI
-        - Inbox: potential iterations on the outcome-based model
-    - **Data stack**
-        - Data warehouse and endpoints: storage and compute
-    - **Everything else**
-        - Platform add-ons:
-            - Grow plan
-            - Enterprise plan: size-based pricing
-        - Logs: 30 and 90 day retention
-        - Batch exports: higher frequency exports
-        - Workflows: reduced email free tier, push, SMS, and unlimited workflows
-        - Group analytics: pricing based on events with groups instead of identified events
+**4. Run our own subscriptions in shadow mode for all Stripe subscriptions (lead: <TeamMember name="Daniel Snitkovskiy" />)**
 
-### Tier 3: Make future work easier
+-   Compare recurring billing, prorations, and invoice outcomes against Stripe for all subscriptions.
+-   Define a migration plan, whether and how old and new subscriptions can coexist, and the cutover criteria.
 
-_Theme: Continue making billing the source of truth, and make it less scary to change. The goals here are clear, but the path will need more discovery along the way._
+### Make usage reporting and limiting accurate and near real time
 
-6. **Make billing the source of truth, starting with the product catalog (lead: <TeamMember name="Roy Cohen" />)**
-    - Build an in-house product and price catalog.
-    - Model multi-usage plans without addon-based workarounds.
-    - Design for things we frequently get asked for, e.g. team/project-level limits.
-    - Figure out how to evolve subscriptions after we bring products and prices in-house.
+_Theme: Help PostHog and customers understand usage and control spend, with accurate reporting and limits that take effect in real time._
 
-7. **Make billing safer to change (lead: <TeamMember name="Roy Cohen" />, Antithesis kickoff: <TeamMember name="Marce Coll" />)**
-    - Increase test coverage around high-risk billing flows.
-    - Continue adopting stronger testing patterns, e.g. property-based testing.
-    - Run the Antithesis proof of concept and decide whether/how it should become part of the normal billing development workflow.
-    - Continue migrating async tasks from Celery to Temporal.
+**5. Make limiting correct and consistent (lead: <TeamMember name="Marce Coll" />)**
+
+-   Put money-domain limiting into production.
+-   Keep limiting decisions in `billing`, with `posthog` consuming the resulting state through the new endpoint.
+
+Rollout needs v2 or equivalent usage data to avoid a latency regression. Alex's reporting work supplies and improves that foundation. Real-time enforcement via counters is a separate objective under objective 6.
+
+**6. Ship real-time usage reporting and limiting (lead: <TeamMember name="Alexander Mays" />)**
+
+-   Real-time usage reporting: Put the new usage feed into production and move reporting consumers to it. This also provides the usage-data foundation for Marce's money-domain limiting work.
+-   Migrate existing consumers and define how the old reporting path will be retired.
+-   Real-time limiting: Implement limit enforcement using Valkey counters and a new real-time usage service, and integrate it with the products that need it.
+-   Disambiguate caps, limits, allowances, and allocations.
+
+### Control abuse and unpaid usage
+
+_Theme: Prevent abuse across AI products, and automate restrictions and recovery for unpaid invoices._
+
+**7. Enable credit reservations for AI workloads (lead: <TeamMember name="Alexander Mays" />)**
+
+-   Reserve eligible credit before AI work starts so concurrent jobs cannot spend the same reserved credit while usage counters catch up.
+-   Settle against actual usage and return unused or expired reservations to the available balance.
+
+**8. Automate collections enforcement and recovery (lead: <TeamMember name="Daniel Snitkovskiy" />)**
+
+-   Ship collections automation to restrict access for unpaid invoices and restore it when payment status permits.
+-   Make decisions and actions inspectable, with the debugging and recovery support needed to explain and recover failed actions.
+
+### Make billing more reliable
+
+_Theme: Prevent, detect, and act on failures._
+
+**9. Detect and investigate billing failures before customers report them (lead: <TeamMember name="Roy Cohen" />)**
+
+-   Add tracing across billing
+-   Add actionable alerts for critical failures

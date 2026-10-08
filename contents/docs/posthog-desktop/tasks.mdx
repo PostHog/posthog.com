@@ -1,0 +1,60 @@
+---
+title: PostHog Desktop tasks
+---
+
+A **task** is the unit of work in PostHog Desktop. Every time you ask the agent to fix a bug, add a feature, or investigate something, you're creating a task. Each task is tied to a specific repository and persists across restarts, handoffs between your computer and the cloud, and handoffs between people.
+
+## Task modes
+
+Tasks run in one of three places. The mode determines _where_ the agent works and _how_ changes are isolated from the rest of your work.
+
+| Mode | Where it runs | Isolation | Best for |
+|------|---------------|-----------|----------|
+| [Local](/docs/posthog-desktop/git-github-integration) | Your computer, current branch | None | Quick, small changes |
+| [Worktree](/docs/posthog-desktop/worktrees) | Your computer, dedicated branch + working directory | Per-folder isolation | Longer work, parallel tasks on the same repo |
+| [Cloud](/docs/posthog-desktop/cloud-runs) | PostHog-managed workspace | Fully isolated from your computer | Long-running tasks |
+
+Local tasks change your current branch directly. Worktrees and cloud runs isolate changes from it. To run several tasks in one grid, use [Command Center](/docs/posthog-desktop/command-center).
+
+## Autonomy modes
+
+Separate from _where_ a task runs, each task has an autonomy mode that controls _how much_ the agent does on its own before checking in with you. Switch modes from the selector in the chat window, even partway through a task.
+
+The modes depend on the [harness](/docs/posthog-desktop/use-any-model-and-harness) the task uses.
+
+Claude Code:
+
+| Mode | What the agent does |
+|---|---|
+| **Plan Mode** | Plans without executing tools, so you approve the approach before any change |
+| **Default** | Makes changes, but prompts before dangerous operations |
+| **Accept Edits** | Accepts file edits automatically |
+| **Auto Mode** | Accepts file edits and shell commands automatically |
+| **Bypass Permissions** | Accepts every permission request. Requires the [Harness setting](/docs/posthog-desktop/settings#harness) |
+
+Codex:
+
+| Mode | What the agent does |
+|---|---|
+| **Plan** | Inspects and proposes, and makes no changes |
+| **Read only** | Inspects files but cannot modify them |
+| **Auto** | Edits the workspace, and asks before risky operations |
+| **Full access** | Approves every operation. Requires the [Harness setting](/docs/posthog-desktop/settings#harness) |
+
+Claude Code tasks start in Plan Mode and Codex tasks start in Auto. Change the default in [settings](/docs/posthog-desktop/settings), or set it to reuse the last mode.
+
+### Plan mode
+
+In Plan mode the agent explores the problem and asks clarifying questions before writing any code. It surfaces options you can pick from, and if none of them fit you can type your own answer in the field. Once you approve the plan, it moves on to making the changes. It's the safest way to start anything non-trivial, since you align on the approach before the agent touches your code.
+
+## Queue and steer follow-ups
+
+You don't have to wait for the agent to finish before sending your next message. A toggle in the chat window controls what happens when you send a follow-up while the agent is still working:
+
+- **Queue** adds your message to the back of the line. The agent finishes what it's doing, then works through your queued follow-ups in order.
+- **Steer** interrupts the agent at its next turn and redirects it right away, instead of waiting for the whole task to finish.
+
+## Next steps
+
+- Learn how [environments](/docs/posthog-desktop/environments) prepare a task before the agent starts.
+- Learn how [cloud runs](/docs/posthog-desktop/cloud-runs) keep a task going without your computer.

@@ -38,6 +38,20 @@ Customer Success Managers (CSMs) own a book of business of around 30 customers w
 - Take the lead in driving churn risk team calls, ensuring that we stick to planning and next steps rather than storytelling.
 - Ensure that CSMs are on top of any credit renewals well before they expire.
 
+#### Populating a new CSM's book
+
+When looking at accounts to include in a new CSM's book, the following priority order applies:
+
+1. Any customer paying $100k+ a year with no dedicated human (TAM or otherwise)
+2. Accounts tagged as `csm handover needed` or `csm overlay needed` in PostHog Customer Analytics
+3. Other accounts not covered by a PostHog human in descending ARR order
+
+For accounts in bucket 2 we have region tags which are <PrivateLink url="posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb">automatically</PrivateLink> applied to the account when the handover or overlay tags are added to the customer (runs once a day).  The regions are covered as follows:
+
+- **EU Team**: Europe, Africa, Asia
+- **NA Team**: North America, South America, Oceania
+- If an account is flagged as multi region or there is no explicit tag review these and make a decision.
+
 ### Onboarding
 
 The Onboarding team operates at scale, supporting hundreds of customers whose MRR falls below the TAM/CSM threshold. As a result, the number of customers in the program, as well as the ARR represented, can fluctuate from month to month. The team is currently focused on customers whose first bill is forecasted at $500+ MRR. Its north star metric is maintaining 90% logo retention through customers’ first three months.

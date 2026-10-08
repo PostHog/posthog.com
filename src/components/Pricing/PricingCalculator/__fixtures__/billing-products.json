@@ -1,0 +1,79 @@
+{
+    "_comment": "Representative pricing data from billing. This covers the calculator's three pricing shapes: Product analytics and its metered add-ons, a normal metered product, and flat-price platform add-ons. Update it by hand with the expectations in calculatorLogic.test.ts when prices change.",
+    "products": [
+        {
+            "type": "product_analytics",
+            "plans": [
+                {
+                    "tiers": [
+                        { "up_to": 1000000, "unit_amount_usd": "0" },
+                        { "up_to": 2000000, "unit_amount_usd": "0.00005" },
+                        { "up_to": 15000000, "unit_amount_usd": "0.0000343" },
+                        { "up_to": 50000000, "unit_amount_usd": "0.0000295" },
+                        { "up_to": 100000000, "unit_amount_usd": "0.0000218" },
+                        { "up_to": 250000000, "unit_amount_usd": "0.000015" },
+                        { "up_to": null, "unit_amount_usd": "0.000009" }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "enhanced_persons",
+                    "plans": [
+                        {
+                            "tiers": [
+                                { "up_to": 1000000, "unit_amount_usd": "0" },
+                                { "up_to": 2000000, "unit_amount_usd": "0.000198" },
+                                { "up_to": 15000000, "unit_amount_usd": "0.0000697" },
+                                { "up_to": 50000000, "unit_amount_usd": "0.000036" },
+                                { "up_to": 100000000, "unit_amount_usd": "0.0000146" },
+                                { "up_to": 250000000, "unit_amount_usd": "0.0000037" },
+                                { "up_to": null, "unit_amount_usd": "0.000001" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "group_analytics",
+                    "plans": [
+                        {
+                            "tiers": [
+                                { "up_to": 1000000, "unit_amount_usd": "0" },
+                                { "up_to": 2000000, "unit_amount_usd": "0.000071" },
+                                { "up_to": 15000000, "unit_amount_usd": "0.00003" },
+                                { "up_to": 50000000, "unit_amount_usd": "0.0000189" },
+                                { "up_to": 100000000, "unit_amount_usd": "0.0000105" },
+                                { "up_to": 250000000, "unit_amount_usd": "0.000004" },
+                                { "up_to": null, "unit_amount_usd": "0.0000029" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "session_replay",
+            "plans": [
+                {
+                    "tiers": [
+                        { "up_to": 5000, "unit_amount_usd": "0" },
+                        { "up_to": 15000, "unit_amount_usd": "0.005" },
+                        { "up_to": 50000, "unit_amount_usd": "0.0035" },
+                        { "up_to": 150000, "unit_amount_usd": "0.002" },
+                        { "up_to": 500000, "unit_amount_usd": "0.0017" },
+                        { "up_to": null, "unit_amount_usd": "0.0015" }
+                    ]
+                }
+            ],
+            "addons": [{ "type": "mobile_replay", "plans": [] }]
+        },
+        {
+            "type": "platform_and_support",
+            "plans": [],
+            "addons": [
+                { "type": "boost", "plans": [{ "unit_amount_usd": "250.00" }] },
+                { "type": "teams", "plans": [{ "unit_amount_usd": "450.00" }] }
+            ]
+        }
+    ]
+}

@@ -2,80 +2,130 @@
 title: Identifying users
 ---
 
-By default, every MCP event is attributed to the connection's session id (`ses_…`). That gives you per-session analytics, but you can't yet say "Alice from Acme is calling this tool 200 times a day" — because the SDK doesn't know who Alice is.
+By default, the SDK attributes MCP events to a generated session ID (`ses_…`). On `2025-11-25`, this normally follows the protocol session. On `2026-07-28`, [conversation IDs](/docs/mcp-analytics/conversation-id) are on by default. Calls share a session only when the agent echoes the handle. The SDK does not know the person behind the session.
 
-The `identify` option lets you teach it.
+Use `identify` to associate calls with a person.
 
 ## How attribution works
 
 For each event, the SDK picks `distinct_id` in this order:
 
-1. The id returned by your `identify(request, extra)` callback (if it returned a `UserIdentity`).
+1. The distinct ID returned by your `identify` callback, if it returned an identity.
 2. The MCP session id (`ses_…`).
 3. The literal string `"anonymous"`.
 
-That means events emitted before `identify` returns a user are session-scoped; once it returns a user, subsequent events attribute to that user and PostHog's standard identity merge takes over for prior anonymous activity.
+Before `identify` returns a user, events use the session ID. Later events use the user ID. See [Identity merges](#identity-merges) for how PostHog associates earlier anonymous events.
 
-## Anonymous sessions don't mint person profiles
+<a id="anonymous-sessions-dont-mint-person-profiles" />
+
+## Anonymous sessions and person profiles
 
 Events for sessions with **no** resolved identity are sent with `$process_person_profile: false`. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
 
-## Wiring `identify`
+<a id="wiring-identify" />
 
-`identify` is an async callback that returns either a `UserIdentity` or `null`. The SDK calls it on each request and caches the result per session, so a stable identity isn't re-resolved on every tool call.
+## Configure `identify`
 
-```ts
-import { instrument } from "@posthog/mcp"
+`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. Except in Go, the SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request. Go has no cache, so the resolver runs once for each captured event.
+
+<MultiLanguage>
+
+```ts file=TypeScript
+import { instrument, getRequestHeaders } from "@posthog/mcp"
 
 instrument(server, posthog, {
   identify: async (request, extra) => {
-    const token = extra?.requestInfo?.headers?.authorization
+    const token = getRequestHeaders(extra)?.["authorization"]
     if (!token) return null
-
     const user = await resolveUserFromToken(token)
     if (!user) return null
-
     return {
-      distinctId: user.id,              // becomes distinct_id
-      properties: {                     // written to $set
-        name: user.name,
-        email: user.email,
-        plan: user.plan,
-        signupDate: user.signupDate,
-      },
-      groups: {                         // becomes $groups on every event
-        organization: user.orgId,
-      },
+      distinctId: user.id,                       // becomes distinct_id
+      properties: { name: user.name, plan: user.plan }, // written to $set
+      groups: { organization: user.orgId },      // becomes $groups on every event
     }
   },
 })
 ```
 
-This is the same shape as posthog-node's [`identify({ distinctId, properties })`](/docs/libraries/node) — just returned from a per-request callback instead of called imperatively. The fields map to PostHog as follows:
+```python file=Python
+from posthog.mcp import instrument, get_request_headers
+from posthog.mcp.types import MCPAnalyticsOptions, UserIdentity
 
-- `distinctId` → the event's `distinct_id`.
-- `properties` → written verbatim to `$set` (so to set a person's name or email, put them here, e.g. `properties: { name, email }`).
-- `groups` (optional `Record<string, string>` of groupType → groupKey) is stamped onto **every** event as `$groups`. You never hand-write `$groups` yourself.
+async def identify(request, extra):
+    token = (get_request_headers(extra) or {}).get("authorization")
+    user = await resolve_user_from_token(token) if token else None
+    if user is None:
+        return None
+    return UserIdentity(
+        distinct_id=user.id,
+        properties={"name": user.name, "plan": user.plan},
+        groups={"organization": user.org_id},
+    )
 
-When this returns a non-null identity, the SDK:
+instrument(server, posthog, MCPAnalyticsOptions(identify=identify))
+```
 
-1. Switches the event's `distinct_id` to `distinctId` for that session.
-2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with `$set` populated from `properties`.
-3. Stamps `$groups` onto subsequent events from the returned `groups` map.
-4. Caches the identity in a small per-server LRU keyed by session id, so unchanged identities are silently deduped.
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithIdentity(func(ctx context.Context, req *mcp.CallToolRequest) (posthogmcpsdk.Identity, error) {
+		if req.Extra == nil || req.Extra.TokenInfo == nil {
+			return posthogmcpsdk.Identity{}, nil
+		}
+		user, err := lookupUser(ctx, req.Extra.TokenInfo.UserID)
+		if err != nil {
+			return posthogmcpsdk.Identity{}, err
+		}
+		return posthogmcpsdk.Identity{
+			DistinctID:    user.ID,
+			SetProperties: posthog.NewProperties().Set("plan", user.Plan),
+			Groups:        posthog.NewGroups().Set("organization", user.OrgID),
+		}, nil
+	}),
+)
+```
+
+```ruby file=Ruby
+PostHog::MCP.instrument(
+  server, posthog,
+  identify: lambda do |_request, extra|
+    user = resolve_user(extra["headers"]["authorization"])
+    user && { distinct_id: user.id, properties: { plan: user.plan }, groups: { organization: user.org_id } }
+  end
+)
+```
+
+</MultiLanguage>
+
+In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`. In Go, go-sdk gives you `req.Extra.Header` and `req.Extra.TokenInfo`.
+
+An identity has three fields, named in each language's style:
+
+- The distinct ID becomes the event's `distinct_id`.
+- Person properties are written to `$set`, such as name, email, or plan. `$set` updates the person profile but isn't kept on the stored event, so query these as [person properties](/docs/product-analytics/person-properties).
+- Groups, a map of group type to group key, are added to every event as `$groups`.
+
+When the callback returns an identity, the SDK:
+
+1. Uses the distinct ID as the event's `distinct_id` for that session.
+2. Emits a `$identify` event the first time it sees the identity, or when the identity changes for that session. The Go SDK doesn't emit `$identify`.
+3. Adds `$groups` to later events.
+4. Caches the identity per session, so an unchanged identity doesn't send another `$identify`. The Go SDK has no cache.
 
 ## Identity merges
 
-A single MCP session typically emits a handful of events before any auth handshake completes — for example, `$mcp_initialize` may fire before you've resolved the user. Those early events go out anonymous, attributed to the session id.
+An MCP session can emit events before authentication completes. For example, `$mcp_initialize` may occur before you identify the user. These events use the session ID.
 
-When `identify` eventually returns a user, the SDK emits `$identify` with `$anon_distinct_id` set to the prior session id. PostHog's identity-merging logic then attributes the anonymous events to the identified user. From that point on, events for that session go out under `distinctId` directly.
+When the SDK emits `$identify`, it sets `$anon_distinct_id` to the prior session ID so PostHog can merge the anonymous events. Later events use the distinct ID. The Go SDK sends no `$identify`, so it never merges anonymous events. Events with no resolved identity stay on the `ses_` distinct ID, without a person profile.
 
-This is the same merge model the [Node SDK](/docs/libraries/node) uses — if you've configured Person profile mode or have other strong opinions on identity in your PostHog project, the same rules apply.
+For stateless servers that recover a session from a token, the SDK suppresses the first `$identify` after `initialize` to avoid duplicates across instances. If identity only becomes available later, those earlier anonymous events may remain unmerged. Resolve identity during `initialize` when possible.
+
+PostHog's other server SDKs use the same identity merge model. Your project's person profile settings also apply.
 
 ## When *not* to call identify
 
 - **Internal tools without per-user auth.** If your MCP server doesn't authenticate end users (e.g. a single-tenant internal server behind a VPN), leave `identify` unset. Session-scoped attribution is fine.
-- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify — those events stay session-scoped.
+- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify – those events stay session-scoped.
 
 ## Querying by identified user
 

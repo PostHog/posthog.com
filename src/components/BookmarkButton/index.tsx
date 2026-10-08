@@ -17,7 +17,7 @@ export default function BookmarkButton({ bookmark }: { bookmark: Bookmark }) {
     const { appWindow } = useWindow()
 
     const isBookmarked = useMemo(
-        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === appWindow?.path),
+        () => user?.profile?.bookmarks?.some((b) => b.url === appWindow?.path),
         [user, appWindow?.path]
     )
 

@@ -1,11 +1,11 @@
-import usePostHog from './usePostHog'
+import { useActiveFeatureFlags } from './useActiveFeatureFlags'
 
 type Cloud = 'eu' | 'us'
 
 export default function useCloud(): Cloud | null {
-    const posthog = usePostHog()
-    const isEU = posthog?.isFeatureEnabled?.('direct-to-eu-cloud')
-    const isUS = posthog?.isFeatureEnabled?.('direct-to-us-cloud')
+    const activeFlags = useActiveFeatureFlags()
+    const isEU = activeFlags?.includes('direct-to-eu-cloud')
+    const isUS = activeFlags?.includes('direct-to-us-cloud')
     const cloud = isEU ? 'eu' : isUS ? 'us' : null
     return cloud
 }

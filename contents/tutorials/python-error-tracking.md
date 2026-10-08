@@ -142,4 +142,4 @@ Beyond the basic [activity tab view](/docs/activity), PostHog has a dedicated [e
   classes="rounded"
 />
 
-You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/product-analytics/sql).
+You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/data-warehouse/sql).

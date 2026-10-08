@@ -60,7 +60,7 @@ The <SmallTeam slug="wizard-and-docs" /> has created a guide on [how to write pr
 
 Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and edit docs in the [contents/docs directory of posthog.com](https://github.com/PostHog/posthog.com/tree/master/contents/docs). It uses file-based routing, so the folder and file structure is the same as the URL path. You can learn more about [developing the website here](/handbook/engineering/posthog-com/developing-the-website).
 
-Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Product OS](/docs) section.
+Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Platform](/docs) section.
 
 > **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">`#team-wizard-and-docs`</PrivateLink>.
 

@@ -14,7 +14,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
 
             <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-4 @2xl:gap-6 max-w-4xl mx-auto w-full">
                 <Link
-                    to="/data-stack"
+                    to="/context-warehouse"
                     state={{ newWindow: true }}
                     className="border border-primary rounded p-6 bg-primary hover:bg-accent transition-colors flex flex-col group"
                 >

@@ -79,12 +79,12 @@ export const quantum_metric = {
         },
         error_tracking: {
             available: true,
-             },
-            monitoring: {
-                features: {
-                    performance_monitoring: true,
-                },
-        }
+        },
+        monitoring: {
+            features: {
+                performance_monitoring: true,
+            },
+        },
     },
     platform: {
         deployment: {

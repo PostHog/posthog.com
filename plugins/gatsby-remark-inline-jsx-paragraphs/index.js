@@ -56,7 +56,13 @@ const wrapWithParagraph = (value) => {
 
 const isTopLevelNode = (parent) => !parent || parent.type === 'root'
 
-module.exports = ({ markdownAST }) => {
+module.exports = ({ markdownAST, markdownNode }) => {
+    // Pocket guides lay themselves out: wrapping their block JSX (figures, lists) in <p>
+    // produces invalid nesting like <p><figure> and breaks hydration.
+    if (markdownNode?.fileAbsolutePath?.includes('/contents/pocket-guides/')) {
+        return markdownAST
+    }
+
     visit(markdownAST, (node, _index, parent) => {
         if (!node || typeof node.value !== 'string') {
             return

@@ -11,3 +11,26 @@ You can manually control when to start and stop session recordings using the fol
   - Stops/pauses the current session recording.
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings). Manual starts still respect project ingestion controls, including sampling and event triggers.
+
+#### Record or ignore specific screens
+
+You can combine these methods with your navigation to record only certain screens, or to pause recording on sensitive ones. For example, using a `UINavigationControllerDelegate`, stop recording when a sensitive screen appears and resume otherwise:
+
+```swift
+let ignoredScreens: Set<String> = ["PaymentViewController", "SettingsViewController"]
+
+func navigationController(
+    _ navigationController: UINavigationController,
+    didShow viewController: UIViewController,
+    animated: Bool
+) {
+    let screenName = String(describing: type(of: viewController))
+    if ignoredScreens.contains(screenName) {
+        PostHogSDK.shared.stopSessionRecording()
+    } else {
+        PostHogSDK.shared.startSessionRecording()
+    }
+}
+```
+
+Invert the check (`startSessionRecording` only for screens in an allowlist, `stopSessionRecording` otherwise) if you'd rather record just a specific set of screens.

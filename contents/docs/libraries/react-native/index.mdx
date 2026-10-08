@@ -28,6 +28,68 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 
 <ReactNativeInstall />
 
+### Choose an iOS dependency path for the native plugin
+
+The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
+
+| Path | Requirements | What it resolves |
+| --- | --- | --- |
+| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
+| CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
+| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
+
+This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
+
+#### CocoaPods
+
+Use the standard React Native CocoaPods flow:
+
+```bash
+cd ios
+pod install
+```
+
+The plugin podspec adds `posthog-ios` as a CocoaPods dependency. You do not need to add `posthog-ios` separately.
+
+#### CocoaPods with `posthog-ios` through Swift Package Manager
+
+Add the following property to `ios/Podfile.properties.json`:
+
+```json
+{
+  "posthog.useSpm": "true"
+}
+```
+
+Add dynamic frameworks to your `ios/Podfile`:
+
+```ruby
+use_frameworks! :linkage => :dynamic
+```
+
+Then install the pods:
+
+```bash
+cd ios
+pod install
+```
+
+This setting changes only how the plugin resolves `posthog-ios`. The plugin and other React Native dependencies still use CocoaPods.
+
+#### Full Swift Package Manager
+
+This path uses React Native's experimental CocoaPods-free iOS integration. Every native dependency in your app must support React Native's full Swift Package Manager integration. Use CocoaPods or the hybrid path if a dependency does not support it.
+
+Install your JavaScript dependencies first. Make a clean commit or a backup of your iOS project before the conversion. Then run this command from the `ios` directory:
+
+```bash
+npx react-native spm add --deintegrate --yes
+```
+
+The `--deintegrate` option removes the complete CocoaPods integration from the iOS project. React Native then finds the plugin's `ios/Package.swift` manifest. Swift Package Manager resolves the plugin and `posthog-ios`. Do not run `pod install` for this path.
+
+PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
+
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
@@ -49,7 +111,7 @@ You can further customize how PostHog works through its configuration on initial
 | `defaultOptIn`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                       | If set to false, the SDK will not track until the `optIn()` function is called.                                                                                                                                                                                                                            |
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                               | Whether to track that `getFeatureFlag` was called (used by experiments).                                                                                                                                                                                                                                   |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                | Whether to load feature flags when initialized or not.                                                                                                                                                                                                                                                     |
-| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                             | An object containing the `distinctId`, `isIdentifiedId`, `featureFlags`, and `featureFlagPayloads` keys. `distinctId` is a string, and `featureFlags` and `featureFlagPayloads` are objects of key-value pairs. Used to ensure data is available as soon as the SDK loads.                                 |
+| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                             | Seeds identity (`distinctId`, `isIdentifiedId`) and feature flag state (`featureFlags`, `featureFlagPayloads`) during initialization. See [SDK bootstrapping](/docs/libraries/bootstrapping).                                                                                                           |
 | `disableRemoteFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                         | When `true`, the SDK never fetches or evaluates feature flags from PostHog, and `identify()`, `group()`, and `reset()` stop triggering `/flags` requests. Supply flag values yourself via `bootstrap` (at startup) and `updateFlags()` (at runtime). Available in version 4.49.0+.                          |
 | `fetchRetryCount`<br/><br/>**Type:** Number<br/>**Default:** `3`                                        | How many times HTTP requests will be retried.                                                                                                                                                                                                                                                              | 
 | `fetchRetryDelay`<br/><br/>**Type:** Number<br/>**Default:** `3000`                                     | The delay between HTTP request retries.                                                                                                                                                                                                                                                                    |
@@ -67,6 +129,9 @@ You can further customize how PostHog works through its configuration on initial
 | `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.21.0+. The legacy parameter `evaluationEnvironments` (version 4.10.0+) is also supported for backward compatibility. |
 | `addTracingHeaders`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`                 | Hostnames for which PostHog should add tracing headers to outgoing `fetch` requests. Matching requests include `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID`, which lets backend events, errors, and LLM traces link back to frontend sessions and replays. Use hostnames only, without the protocol or path. |
 | `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
+| `capturePushNotificationSubscriptions`<br/><br/>**Type:** Boolean<br/>**Default:** `true`           | Whether to automatically register this device's push token so [Workflows](/docs/workflows) can target it. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                            |
+| `capturePushNotificationOpened`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Whether to automatically capture `$push_notification_opened` when the user taps a push notification. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                                 |
+| `pushIdentityProvider`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                     | Supplies a signed identity-verification token for push subscription requests. Only needed when your push channel requires identity verification. See [identity verification](#identity-verification). Available in version 4.62.0+.                                                                        |
 
 ### Tracing headers
 
@@ -132,6 +197,92 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 <View ph-no-capture>Sensitive view here</View>
 ```
 
+### Capturing screen views
+
+With `captureScreens: true` (the default in `PostHogProvider`), PostHog captures a `$screen` event automatically when the user navigates, provided you're using `@react-navigation/native` (v6 or lower) or `react-native-navigation`.
+
+To manually send a screen capture event, use the `screen` method:
+
+```react-native
+posthog.screen('Dashboard', { fromIcon: 'bottom' })
+```
+
+> **React Navigation v7 users:** automatic screen tracking may throw errors if PostHog is initialized outside a screen context. For v7, disable automatic screen capture (`captureScreens: false`) and call `posthog.screen()` manually inside each screen component.
+
+#### Filtering autocaptured screens
+
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<FilterScreenEvents />
+
+`before_send` is a client option, so pass it via the provider's `options` prop (or to `new PostHog(...)` if you create the client yourself):
+
+```react-native
+const IGNORED_SCREENS = new Set(['Splash', 'Debug'])
+
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    autocapture={{ captureScreens: true }}
+    options={{
+        host: '<ph_client_api_host>',
+        before_send: (event) => {
+            if (event?.event === '$screen') {
+                const screenName = event.properties?.['$screen_name']
+                return IGNORED_SCREENS.has(screenName) ? null : event
+            }
+            return event
+        },
+    }}
+>
+    {/* app */}
+</PostHogProvider>
+```
+
+Swap the check for an allowlist (`return TRACKED_SCREENS.has(screenName) ? event : null`) if you'd rather capture only a specific set of screens.
+
+## Common `before_send` patterns
+
+`before_send` accepts a single function or an array of functions that run in order, so you can compose several small hooks. Filtering screens is one use – here are a few others.
+
+**Drop a specific event.** Stop an internal or debug event from ever being sent:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.event === 'debug_only_event') {
+            return null // never send this event
+        }
+        return event
+    },
+})
+```
+
+**Log events instead of sending them.** Handy while debugging what would be captured:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        console.log('[PostHog] would send', event?.event, event?.properties)
+        return null // drop everything
+    },
+})
+```
+
+**Redact sensitive properties.** Strip a value before it leaves the device:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.properties?.email) {
+            event.properties.email = '***'
+        }
+        return event
+    },
+})
+```
+
+For more examples, see the [JavaScript Web SDK docs](/docs/libraries/js/usage#amending-or-sampling-events).
+
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -157,7 +308,7 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 posthog.alias('distinct_id')
 ```
 
-We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Setting person properties
 
@@ -287,13 +438,34 @@ import ReactNativeFeatureFlagsCode from "../../integrate/feature-flags-code/_sni
 
 <ReactNativeFeatureFlagsCode />
 
-### Bootstrapping Flags
+### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
 <BootstrappingIntro />
 
-For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
+Pass `bootstrap` in the initialization options to seed identity and flag values:
+
+```react-native
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    options={{
+        host: '<ph_client_api_host>',
+        bootstrap: {
+            distinctId: 'distinct_id_of_your_user',
+            isIdentifiedId: true,
+            featureFlags: {
+                'flag-1': true,
+                'variant-flag': 'control',
+            },
+        },
+    }}
+>
+    <MyComponent />
+</PostHogProvider>
+```
+
+See [bootstrapping Feature Flags](/docs/feature-flags/bootstrapping) for server-side evaluation and flag lifecycle, and [SDK bootstrapping](/docs/libraries/bootstrapping) for cross-SDK identity behavior.
 
 ### Supplying flags from your own backend
 
@@ -346,7 +518,30 @@ To set up error tracking in your project, see the [error tracking docs](/docs/er
 
 ### Native crash autocapture
 
-The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+JavaScript autocapture only covers exceptions thrown in your JS/TS code. To capture crashes in native code – a native module, the React Native runtime, or a C/C++ library – install the optional `@posthog/react-native-plugin` package and enable one or both of these options. What each option covers depends on the platform:
+
+| Option | iOS | Android |
+| --- | --- | --- |
+| `nativeCrashes` | Every native crash: uncaught Objective-C exceptions, Mach exceptions, and signals such as `SIGSEGV` and `SIGABRT`, including crashes in C/C++ code | Java/Kotlin crashes only |
+| `androidNdkCrashes` | Ignored | C/C++ (NDK) crashes, on Android 12 (API 31) or later. Requires `posthog-react-native` 4.78.0 and `@posthog/react-native-plugin` 2.12.0 or later |
+
+To capture every native crash on both platforms, enable both:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  errorTracking: {
+    autocapture: {
+      nativeCrashes: true,
+      androidNdkCrashes: true,
+    },
+  },
+})
+```
+
+Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+An Android NDK crash kills the process immediately, so PostHog captures it on the next app launch from the records the OS kept. Properties such as `$app_version` and the identity describe that launch, not the crash. The first launch after you enable `androidNdkCrashes` also captures NDK crashes the OS still holds from before.
 
 Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 
@@ -441,6 +636,10 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 To set up surveys, follow the [additional installation instructions for React Native](/docs/surveys/installation/react-native). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
 > Note: URL and CSS selector targeting are not supported in React Native. Surveys that rely on these conditions will not appear.
+
+## Push notifications
+
+The React Native SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 ## Debug mode 
 

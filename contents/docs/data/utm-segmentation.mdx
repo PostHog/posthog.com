@@ -30,7 +30,12 @@ PostHog automatically captures any UTM parameters that are present when a user v
 
 <CalloutBox icon="IconInfo" title="Setting person properties" type="fyi">
 
-Person properties are set when person profiles are created or updated via events like `$set` or `$identify`. By default, only identified users have person profiles. See our [person properties documentation](/docs/product-analytics/person-properties#how-to-set-person-properties) and [anonymous vs identified events documentation](/docs/data/anonymous-vs-identified-events) for more details.
+Person properties are set when person profiles are created or updated via events like `$set` or `$identify`. By default, only identified users have person profiles, and this affects the two kinds of campaign person properties differently:
+
+- **Initial** (first-touch) properties like `$initial_utm_source` are backfilled when the user is identified. The SDK stores first-touch values in a cookie and attaches them to later events, so they survive the transition from anonymous to identified.
+- **Latest** properties like `utm_source` are not backfilled. They only reflect campaign parameters seen on events captured while the user has a person profile, in the same browser tab and on the same domain. If a user lands from a campaign anonymously and identifies later, the campaign parameters from that landing won't appear as latest person properties.
+
+If you need latest-touch attribution for users who arrive anonymously, set the values yourself with [`setPersonProperties()`](/docs/product-analytics/person-properties#how-to-set-person-properties) when you identify the user, or use [`person_profiles: 'always'`](/docs/data/anonymous-vs-identified-events) (note that identified events cost more than anonymous ones). See our [person properties documentation](/docs/product-analytics/person-properties#how-to-set-person-properties) and [anonymous vs identified events documentation](/docs/data/anonymous-vs-identified-events) for more details.
 
 </CalloutBox>
 

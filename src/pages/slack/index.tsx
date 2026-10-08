@@ -3,18 +3,18 @@ import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { TreeMenu } from 'components/TreeMenu'
-import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import {
     IconBell,
     IconBolt,
     IconCalendar,
-    IconChat,
+    IconCheck,
     IconCode,
     IconCoffee,
     IconCursorClick,
@@ -33,6 +33,7 @@ import {
 } from '@posthog/icons'
 
 const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
+const SLACK_MARKETPLACE_URL = 'https://slack.com/marketplace/A03M3FN0RSQ-posthog'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -54,8 +55,6 @@ type IconGroup = {
     title: string
     items: IconItem[]
 }
-
-const LeftSidebarContent = () => <TreeMenu items={productOSNav.children} />
 
 const IconChipRow = ({ items }: { items: IconItem[] }) => (
     <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
@@ -188,8 +187,12 @@ const featureTabs: TabbedCarouselTab[] = [
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
                         <strong>Bigger task?</strong>{' '}
-                        <Link to="/code" state={{ newWindow: true }} className="font-semibold text-primary underline">
-                            PostHog Code
+                        <Link
+                            to="/desktop"
+                            state={{ newWindow: true }}
+                            className="font-semibold text-primary underline"
+                        >
+                            PostHog Desktop
                         </Link>{' '}
                         runs parallel agents across repos, and longer-running tasks from a desktop app – the same agent,
                         more room to work.
@@ -239,8 +242,8 @@ const featureTabs: TabbedCarouselTab[] = [
                 <h2 className="mt-0 mb-2 text-2xl font-bold">Push insights to where you already work</h2>
                 <p className="text-secondary text-sm">
                     Pipe product insights into channels on a schedule, or fire a custom Slack message every time a
-                    PostHog event matches your filter. Paste a PostHog link in any thread and it unfurls into a rich
-                    preview that respects your project's access permissions.
+                    PostHog event matches your filter. Paste an insight or dashboard link in a channel with the bot and
+                    it unfurls into a rich preview that respects your project's access permissions.
                 </p>
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
@@ -306,7 +309,7 @@ const introCards: IntroCardProps[] = [
         icon: IconCode,
         iconColor: 'text-brown dark:text-brown-dark',
         bulletClass: 'bg-brown dark:bg-brown-dark',
-        href: '/code',
+        href: '/desktop',
         title: 'Coding',
         badge: 'Sandboxed',
         description: (
@@ -459,49 +462,49 @@ const compareRows: CompareRow[] = [
         label: 'Best for',
         ai: 'Exploring data, writing SQL with words instead of, you know, SQL. Building dashboards and configuring features without leaving the tab.',
         slack: 'Drop-and-go work from wherever you already are. Small fixes, content tweaks, and data questions in-thread.',
-        code: 'Focused engineering work. Parallel agents, deep refactors, and signal-driven PRs from the inbox.',
+        code: 'Focused engineering work. Parallel agents, deep refactors, and fixes from Self-driving reports.',
     },
     {
         label: 'Permissions',
-        ai: 'Reads and writes inside your PostHog project – insights, dashboards, flags, experiments, surveys, HogQL. Never touches your source code or the open web.',
-        slack: 'Everything PostHog AI can do, plus drafts code changes as PRs on the repos you connect.',
-        code: 'Everything the Slack app can do, plus reads your local repos and pulls in context from Linear, GitHub Issues, and Zendesk.',
+        ai: 'Reads and writes inside your PostHog project – insights, dashboards, flags, experiments, surveys, HogQL. For code changes, it hands off to a coding agent that opens a draft PR.',
+        slack: 'Everything PostHog AI can do, plus the coding work happens in the thread, with PRs under your own GitHub account.',
+        code: 'Everything the Slack app can do, plus works in your local repos and uses any MCP server you add – issue trackers, design tools, internal APIs.',
     },
     {
         label: 'Where it runs',
-        ai: "None – it's a panel in PostHog Cloud.",
+        ai: 'PostHog Cloud. Coding tasks run in a PostHog-managed cloud sandbox.',
         slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },
     {
         label: 'Models',
-        ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
-        slack: 'Auto-picked from OpenAI and Anthropic.',
-        code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
+        ai: "Auto-picked from Anthropic, OpenAI, and Google (we tune so you don't have to).",
+        slack: 'Defaults to Claude Opus 5. Ask for another model right in your message ("use fable for this"), or set a personal default in the App Home tab.',
+        code: 'You pick the harness (Pi, Claude Code, or Codex), the model, and the reasoning effort per task.',
     },
 ]
 
 const compareLinks: { label: string; url: string }[] = [
     { label: 'PostHog AI', url: '/ai' },
-    { label: 'PostHog Slack app', url: '#try' },
-    { label: 'PostHog Code', url: '/code' },
+    { label: 'PostHog Slack app', url: '/docs/slack' },
+    { label: 'PostHog Desktop', url: '/desktop' },
 ]
 
 const faqItems = [
     {
-        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
+        trigger: 'Do I need PostHog Desktop to use the PostHog Slack app?',
         content: (
             <p>
-                No. The Slack app isn't gated on a{' '}
+                No. The Slack app isn't gated behind{' '}
                 <Link
-                    to="/code"
+                    to="/desktop"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
-                    PostHog Code
+                    PostHog Desktop
                 </Link>{' '}
-                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
-                you'd rather work from a thread than a desktop app.
+                usage. They share the same coding agent under the hood – the Slack app is just the front door if you'd
+                rather work from a thread than a desktop app.
             </p>
         ),
     },
@@ -540,16 +543,16 @@ const faqItems = [
         trigger: 'What about projects with multiple repos?',
         content: (
             <p>
-                Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
-                channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
+                Add routing rules with <code>/posthog rules add</code> so requests that match a description go straight
+                to the right repo. When no rule matches, the bot opens a picker in-thread. See the{' '}
                 <Link
                     to="/docs/slack/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
-                    PostHog Code Slack docs
+                    Slack app commands
                 </Link>{' '}
-                for the full command list.
+                for the full list.
             </p>
         ),
     },
@@ -563,9 +566,9 @@ const faqItems = [
                     context, or answer a question the agent asked.
                 </p>
                 <p>
-                    Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub
-                    integration is the one wired up – so a teammate's follow-up edits land under the original
-                    requester's name. If you want the PR credited to you, start your own task.
+                    It's properly multiplayer: the bot switches to the GitHub and PostHog identity of whoever sent each
+                    message, so a teammate's follow-up runs under their own integration rather than the person who
+                    started the thread. Commits and PRs land under the name of the person who actually asked for them.
                 </p>
             </>
         ),
@@ -574,9 +577,10 @@ const faqItems = [
         trigger: 'How are PRs generated with the Slack app credited?',
         content: (
             <p>
-                Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
-                <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. PRs
-                are authored under your name via your{' '}
+                Branches get a <code>posthog/</code> prefix, and each commit includes a{' '}
+                <code>Generated-By: PostHog Desktop</code> line plus a <code>Task-Id</code> so you can trace it back.
+                Each turn runs under the identity of the person who sent it, so work is authored under your name via
+                your{' '}
                 <Link
                     to="https://app.posthog.com/settings/user-personal-integrations"
                     external
@@ -592,8 +596,30 @@ const faqItems = [
         trigger: 'Does the PostHog Slack app work in DMs?',
         content: (
             <p>
-                No. But if you want to @PostHog for quick tasks (or embarrassing questions) without spamming your team,
-                you can add it to a private channel with just you and the bot.
+                Yes. Everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups,
+                and attachments. To bring the bot into a DM with one or more colleagues, start a new conversation with
+                @PostHog and one or more of your peers (the agent can't be added to existing DMs). To DM the bot
+                privately, you can do so in the Chat tab of the app.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can the bot read screenshots and files?',
+        content: (
+            <p>
+                Yes. Attach images, PDFs, and text files to your message and the agent reads them as part of the
+                request. The limit is five files per message, 10 MB each.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Do I have to tag the bot on every message?',
+        content: (
+            <p>
+                Only to start. Once a task is running in a thread, the bot can pick up untagged replies too. In the App
+                Home tab, you can choose how it handles them: "leave them alone" (the default), "ask them first", or
+                "pick them up automatically". The setting of the person who started the thread applies to every reply in
+                it.
             </p>
         ),
     },
@@ -605,7 +631,7 @@ const faqItems = [
                 resolve user profiles to match Slack accounts to PostHog accounts. It does not read messages from
                 channels it isn't in. See the full list on the PostHog app's{' '}
                 <Link
-                    to="https://slack.com/marketplace/A03M3FN0RSQ-posthog"
+                    to={SLACK_MARKETPLACE_URL}
                     external
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
@@ -638,7 +664,8 @@ const faqItems = [
                         is rougher than it should be.
                     </li>
                     <li>
-                        No screenshot input yet – the bot reads text only. Paste descriptions instead of images for now.
+                        Attachments are capped at five per message, 10 MB each – images, PDFs, and plain-text files
+                        only.
                     </li>
                     <li>
                         Prompt construction and review-bot trust heuristics are being actively iterated. Behavior may
@@ -650,34 +677,72 @@ const faqItems = [
     },
 ]
 
-const fighterOptions: { icon: IconComponent; iconColor: string; label: React.ReactNode; copy: React.ReactNode }[] = [
-    {
-        icon: IconSparkles,
-        iconColor: 'text-blue',
-        label: (
-            <Link to="/ai" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog AI
-            </Link>
-        ),
-        copy: "When you're already in the app looking at data – ask it to write the SQL, build the dashboard, or make sense of what you're seeing.",
-    },
-    {
-        icon: IconChat,
-        iconColor: 'text-sky-blue',
-        label: 'PostHog Slack app',
-        copy: "For all the drive-by stuff you'd normally Slack a teammate about (typos, cross-repo checks, quick fixes).",
-    },
-    {
-        icon: IconCoffee,
-        iconColor: 'text-brown dark:text-brown-dark',
-        label: (
-            <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Code
-            </Link>
-        ),
-        copy: 'For real engineering work – signals from the inbox, parallel agents, anything where you care about the diff before it ships.',
-    },
+const heroBullets = [
+    'Ask questions about your product data',
+    'Turn a message into a draft PR',
+    'Attach images, PDFs, and text files',
+    'Ship from your phone with the Slack mobile app',
 ]
+
+const HeroSection = () => (
+    <section className="not-prose w-full tracking-[-0.0125em]">
+        {/* Cross out the first @, then highlight the second – "not this, this".
+            show is set explicitly because the scroll trigger's -15% rootMargin never
+            fires for a heading this close to the top of the pane. */}
+        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
+            Don't{' '}
+            <RoughAnnotation type="strike-through" color="#F54E00" strokeWidth={2} delay={300} show>
+                @ <em>me</em>
+            </RoughAnnotation>
+            ,{' '}
+            <RoughAnnotation
+                type="highlight"
+                color="rgba(48, 164, 108, 0.2)"
+                strokeWidth={1}
+                padding={2}
+                delay={1100}
+                show
+            >
+                @PostHog
+            </RoughAnnotation>
+        </h1>
+
+        <div className="flex flex-col items-start gap-6 @4xl/reader-content:flex-row @4xl/reader-content:gap-8">
+            <div className="@4xl/reader-content:flex-[0_0_280px]">
+                <p className="mt-0 mb-4">
+                    All the PostHog you already use, plus a coding agent that lives in your Slack. Ask about your
+                    product data, debug issues, and generate PRs without leaving the thread.
+                </p>
+                <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
+                    {heroBullets.map((item) => (
+                        <li key={item} className="relative pl-5">
+                            <IconCheck className="absolute left-0 top-1 size-4 text-green" />
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+                <div className="flex flex-wrap items-center gap-3">
+                    <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
+                        Connect Slack
+                    </CallToAction>
+                    <span className="text-sm text-secondary">
+                        Not using PostHog?{' '}
+                        <Link to="https://app.posthog.com/signup" external>
+                            Sign up
+                        </Link>
+                    </span>
+                </div>
+            </div>
+
+            {/* Capped to roughly the width the video gets inside /desktop's max-w-4xl column */}
+            <div className="w-full min-w-0 max-w-[540px] @4xl/reader-content:flex-1">
+                <div className="overflow-hidden rounded-md shadow-xl">
+                    <WistiaEmbed mediaId="ifyltgbxid" />
+                </div>
+            </div>
+        </div>
+    </section>
+)
 
 export default function SlackAppPage(): JSX.Element {
     return (
@@ -693,25 +758,11 @@ export default function SlackAppPage(): JSX.Element {
                     slug: 'slack-app',
                 })}
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
-                <div className="max-w-2xl mx-auto">
-                    <div className="text-center mb-4">
-                        <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
-                            Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
-                        </h1>
-                        <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
-                            PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
-                            without leaving the thread.
-                        </p>
-                    </div>
-
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
-                        alt="@PostHog updating docs from a Slack thread"
-                        className="w-full !block m-0"
-                        imgClassName="w-full !block"
-                    />
-                    <hr className="border-t border-primary m-0 mb-6" />
+            <ReaderView hideLeftSidebar showQuestions={false} title="posthog-slack-app.md" hideTitle={true}>
+                {/* Centered column, same as /desktop – the reader renders this page full-width otherwise */}
+                <div className="max-w-4xl mx-auto">
+                    <HeroSection />
+                    <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
                     <h3>
                         One hog, <Highlight>two jobs</Highlight>
@@ -720,18 +771,7 @@ export default function SlackAppPage(): JSX.Element {
                         The PostHog Slack app is a single agent that reads your product data and writes your code. Ask
                         "why did EU signups drop?", then have it open the PR that fixes it (without leaving Slack).
                     </p>
-                    <div className="not-prose flex flex-wrap items-center gap-3 mb-6">
-                        <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
-                            Connect Slack
-                        </CallToAction>
-                        <span className="text-sm text-secondary">
-                            Not using PostHog?{' '}
-                            <Link to="https://app.posthog.com/signup" external>
-                                Sign up
-                            </Link>
-                        </span>
-                    </div>
-                    <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6">
+                    <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6 mt-6">
                         {introCards.map((card) => (
                             <IntroCard key={card.title} {...card} />
                         ))}
@@ -748,12 +788,15 @@ export default function SlackAppPage(): JSX.Element {
                     />
                     <p>You don't need to know any of this to use it. But here's what happens after you hit send:</p>
                     <ol>
-                        <li>The agent scans the thread for relevant content (text only, for now).</li>
+                        <li>
+                            The agent scans the thread for relevant content – including attached images, PDFs, and text
+                            files.
+                        </li>
                         <li>It plans the work, edits files, and runs checks inside a sandboxed environment.</li>
                         <li>It opens a draft PR with a detailed description, and links it back into the thread.</li>
                         <li>
                             It iterates on follow-up messages from anyone in the thread, so teammates can steer the run
-                            together.
+                            together – each turn runs under the sender's own GitHub and PostHog identity.
                         </li>
                         <li>
                             It watches CI, reruns failed jobs that look environmental, and doesn't touch workflow files.
@@ -792,43 +835,21 @@ export default function SlackAppPage(): JSX.Element {
                     <h3>
                         Choose your <Highlight>fighter</Highlight>
                     </h3>
-                    <p>Same agent, three front doors.</p>
-                    <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-6 items-center my-6">
-                        <div className="space-y-4">
-                            {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
-                                <div key={index}>
-                                    <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
-                                        <Icon className={`size-5 shrink-0 ${iconColor}`} />
-                                        {label}
-                                    </p>
-                                    <p className="m-0 mt-1 text-base">{copy}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/choose_your_fighter_e62bd78032.png"
-                            alt="Choose your fighter"
-                            className="hidden @lg/reader-content:block"
-                            imgClassName="w-full"
-                        />
-                    </div>
-                    <p className="text-sm text-secondary">
-                        Building your own?{' '}
-                        <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
-                            PostHog MCP
-                        </Link>{' '}
-                        wires the same product context into the editor or agent of your choice.
-                    </p>
                     <div className="not-prose my-6">
                         <OSTable
                             size="sm"
+                            width="full"
                             rowAlignment="top"
                             className="text-sm"
                             columns={[
                                 { name: '', align: 'left', width: 'minmax(80px,110px)' },
                                 ...compareLinks.map(({ label, url }) => ({
                                     name: (
-                                        <Link to={url} state={{ newWindow: true }} className="font-bold text-primary">
+                                        <Link
+                                            to={url}
+                                            state={{ newWindow: true }}
+                                            className="font-bold text-red dark:text-yellow hover:underline"
+                                        >
                                             {label}
                                         </Link>
                                     ),
@@ -847,13 +868,6 @@ export default function SlackAppPage(): JSX.Element {
                             }))}
                         />
                     </div>
-                    <p className="text-sm text-secondary">
-                        Steering an agent from Slack is one way work gets done.{' '}
-                        <Link to="/self-driving" state={{ newWindow: true }}>
-                            Self-driving
-                        </Link>{' '}
-                        is the bigger loop around it.
-                    </p>
                     <div
                         id="try"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"
@@ -880,6 +894,13 @@ export default function SlackAppPage(): JSX.Element {
                                         </Link>
                                     </span>
                                 </div>
+                                <p className="text-sm text-secondary mt-3 mb-0">
+                                    Read our{' '}
+                                    <Link to="/privacy" className="font-bold">
+                                        privacy policy
+                                    </Link>{' '}
+                                    to see how the PostHog Slack app collects, manages, and stores your data.
+                                </p>
                             </div>
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_chat_2_e5993b2331.png"

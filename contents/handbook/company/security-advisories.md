@@ -48,6 +48,74 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ## Past advisories
 
+<details id="PSA-2026-00002">
+  <summary>August 21, 2026 / PSA-2026-00002 <AdvisoryAnchor id="PSA-2026-00002" /></summary>
+
+  <p><strong>Date:</strong> August 21, 2026<br />
+  <strong>Advisory:</strong> PSA-2026-00002<br />
+  <strong>Severity:</strong> High<br />
+  <strong>Status:</strong> Fixed</p>
+
+  <p><strong>6 customers were affected and we contacted them directly. If you run a self-hosted <code>nginx</code> (or <code>nginx</code>-family) reverse proxy in front of PostHog, update its configuration as described under Resolution.</strong></p>
+
+  <p>A security researcher found that some customer-hosted reverse proxies were sending PostHog traffic to IP addresses that PostHog no longer used. As some proxies didn't verify the upstream server TLS certificate, whoever hosted an HTTPs server on released IP addresses could read the traffic. The researcher was able to hold a few of those IPs, recorded the traffic that arrived, and reported it to us. We identified 6 affected customers from the recorded data and contacted them. To prevent such cases, we hardened our load balancers with a fixed IP address range, and we updated our reverse proxy documentation to have more secure configurations.</p>
+
+  <h4>Description</h4>
+  <p>Some customers send events to PostHog through a reverse proxy that runs on their own domain. A common setup is an <code>nginx</code> (or <code>nginx</code>-family) server with a <code>proxy_pass</code> directive that points to <code>us.i.posthog.com</code> or <code>eu.i.posthog.com</code>.</p>
+  <p>Events ingestion hosts (<code>us.i.posthog.com</code> and <code>eu.i.posthog.com</code>) resolve to AWS Application Load Balancers (ALBs), which use public IPv4 addresses from a pool that AWS shares between all its customers. As ALB nodes rotate over time, AWS returns its IP address to the shared pool, and another AWS customer can receive it (using an EC2 for example).</p>
+  <p>Two default behaviors of <code>nginx</code> turned this normal rotation into a security problem:</p>
+  <ol>
+    <li>When <code>proxy_pass</code> contains a hostname, <code>nginx</code> resolves that hostname once, at startup and it keeps using the same IP address until it restarts or reloads. A proxy that ran for a long time could send traffic to an IP address that PostHog had released.</li>
+    <li><code>nginx</code> does not verify the upstream TLS certificate by default (<code>proxy_ssl_verify off</code>).</li>
+  </ol>
+  <p>An attacker can launch EC2 instances in the same AWS region until they receive a former ALB address, serve HTTPS on port 443 with a self-signed certificate, and log every request that arrives. If stale proxies keep sending events to that server, the attacker can read the traffic.</p>
+  <p>The researcher did this a few times between July 11 and August 4, 2026, with released EU ALBs addresses, for about one hour each time. They forwarded each request to PostHog and returned our real response, so neither the customer nor PostHog saw anything unusual.</p>
+
+
+  <h4>Affected users</h4>
+  <ul>
+    <li>We identified <strong>6 affected customers</strong> from the traffic the researcher recorded and shared with us. All 6 are on <strong>EU Cloud</strong>. We contacted them directly.</li>
+    <li>Only customers who run a self-hosted reverse proxy that both caches DNS and does not verify the upstream TLS certificate are exposed. This is the default for <code>nginx</code>, ingress-nginx, and tools built on them, including our Railway template.</li>
+    <li>Customers who send traffic to PostHog directly from our SDKs are not affected. Browsers and our SDKs re-resolve DNS and verify TLS certificates.</li>
+    <li>Customers using our <a href="/docs/advanced/proxy#set-up-managed-reverse-proxy">managed reverse proxy</a> were not affected by this.</li>
+  </ul>
+
+  <h4>Resolution</h4>
+  <ul>
+    <li>We moved the load balancers behind event ingestion hosts to a fixed IP address pool. Addresses we release return to our pool, not to the shared AWS pool, so no other AWS customer can receive them. This removes the attack vector for every proxy, including ones that are never updated.</li>
+    <li><strong>Your proxy will stop working if it cached an old address.</strong> As load balancer addresses have changed, a proxy that resolved our hostname at startup will get connection errors until you reload or restart it. This is the safe failure mode. Reload or restart your proxy if you see errors, and apply the configuration below so that it does not happen again.</li>
+    <li>We updated our <a href="/docs/advanced/proxy/nginx">nginx</a> and <a href="/docs/advanced/proxy/kubernetes-ingress-controller">Kubernetes</a> reverse proxy guides and our <a href="/docs/advanced/proxy/railway">Railway</a> template. The new default configuration verifies the upstream TLS certificate and re-resolves our hostname on a short schedule.</li>
+    <li><strong>If you run an <code>nginx</code>-family reverse proxy, update it now.</strong> At minimum:
+      <ul>
+        <li>Enable upstream certificate verification (<code>proxy_ssl_verify on</code>, <code>proxy_ssl_server_name on</code>, and a <code>proxy_ssl_trusted_certificate</code>).</li>
+        <li>Use a <code>resolver</code> with a short <code>valid</code> time, and put the upstream hostname in a variable so <code>nginx</code> re-resolves it instead of caching it at startup.</li>
+      </ul>
+      See the updated guides for a complete configuration.
+    </li>
+  </ul>
+
+  <h4>What we learned</h4>
+  <ul>
+    <li>Configuration snippets that we provide customers must have secure defaults, and we should better understand security aspects that are involved - along with reviewing them regularly. This research had put multiple pieces together, but we should have figured that out before someone pointed it out to us.</li>
+    <li>We should avoid using AWS shared IP pool for highly-important workloads such as event ingestion. TLS verification will prevent most attack vectors on released IPs, but we should have accounted for traffic that would not verify it.</li>
+    <li>The report waited too long in bug bounty triage before it reached our team. We'll improve this.</li>
+  </ul>
+
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>First capture by the researcher, and report submitted to our bug bounty program:</strong> July 11, 2026</li>
+    <li><strong>Further captures by the researcher:</strong> July 17, July 22 and August 4, 2026</li>
+    <li><strong>Report forwarded to PostHog:</strong> August 18, 2026</li>
+    <li><strong>Root cause confirmed and fix agreed:</strong> August 18, 2026</li>
+    <li><strong>Reverse proxy documentation published:</strong> August 18, 2026</li>
+    <li><strong>EU load balancers moved to a PostHog-owned IP pool:</strong> August 19, 2026</li>
+    <li><strong>US load balancers moved to a PostHog-owned IP pool:</strong> August 20, 2026</li>
+    <li><strong>Affected customers contacted:</strong> August 20, 2026</li>
+    <li><strong>Disclosed:</strong> August 21, 2026</li>
+  </ul>
+
+</details>
+
 <details id="PSA-2026-00001">
   <summary>June 2, 2026 / PSA-2026-00001 <AdvisoryAnchor id="PSA-2026-00001" /></summary>
 

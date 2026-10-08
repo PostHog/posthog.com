@@ -1,8 +1,7 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, createContext, useEffect, useContext, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
-import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
@@ -12,34 +11,16 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import {
-    IconArchive,
-    IconPencil,
-    IconPin,
-    IconSparkles,
-    IconTrash,
-    IconUndo,
-    IconExpand,
-    IconShieldLock,
-} from '@posthog/icons'
+import usePostHog from 'hooks/usePostHog'
+import { IconArchive, IconPencil, IconSparkles, IconTrash, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
-import { Check2, Close } from 'components/Icons'
-import Modal from 'components/Modal'
-import Checkbox from 'components/Checkbox'
-import { CallToAction } from 'components/CallToAction'
 import { navigate } from 'gatsby'
-import Logomark from 'components/Home/images/Logomark'
+import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import ZendeskTicket from 'components/ZendeskTicket'
-import { TopicSelector } from './TopicSelector'
-import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
 
@@ -55,181 +36,10 @@ type QuestionProps = {
     onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
     subscribeButton?: boolean
     isInForum?: boolean
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
+    refreshList?: () => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
-
-const TopicSelect = (props: {
-    selectedTopics: StrapiData<TopicData[]>
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
-}) => {
-    const { pinTopics } = useContext(CurrentQuestionContext)
-    const [topicGroups, setTopicGroups] = useState([])
-    const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
-    const { addToast } = useToast()
-
-    const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
-        setSelectedTopics(topics)
-        await pinTopics(topics.map((topic) => topic.id))
-        props.onPinTopics?.(topics)
-        const topicsAdded = topics.length - selectedTopics.length
-        const action = topicsAdded > 0 ? 'pinned' : 'unpinned'
-        addToast({
-            title: `Topic ${action}`,
-            description: `The topic has been ${action} successfully.`,
-        })
-    }
-
-    useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => {
-            setTopicGroups(topicGroups)
-            const selectedTopics: StrapiRecord<TopicData>[] = []
-            topicGroups.forEach(({ attributes: { topics } }) => {
-                topics.data.forEach((topic) => {
-                    if (props.selectedTopics.data.some((selectedTopic) => selectedTopic.id === topic.id)) {
-                        selectedTopics.push(topic)
-                    }
-                })
-            })
-            setSelectedTopics(selectedTopics)
-        })
-    }, [])
-
-    return (
-        <div className="relative [&>*]:inline-flex [&>*]:items-center">
-            <Listbox value={selectedTopics} onChange={handleChange} multiple>
-                <Listbox.Button as={React.Fragment}>
-                    <OSButton
-                        hover="border"
-                        icon={<IconPin />}
-                        tooltip={
-                            <>
-                                <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" /> Pin
-                                thread
-                            </>
-                        }
-                        size="md"
-                    >
-                        <IconExpand className="size-4 inline-block" />
-                    </OSButton>
-                </Listbox.Button>
-                {topicGroups?.length > 0 && (
-                    <Listbox.Options
-                        data-scheme="primary"
-                        className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
-                    >
-                        <div className="relative w-full">
-                            <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
-                                {topicGroups
-                                    .sort(
-                                        (a, b) =>
-                                            topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                            topicGroupsSorted.indexOf(b?.attributes?.label)
-                                    )
-                                    .map(({ attributes: { label, topics } }) => {
-                                        return (
-                                            <div key={label}>
-                                                <div className="py-1 px-2 text-[13px] border-b border-primary whitespace-nowrap text-secondary">
-                                                    {label}
-                                                </div>
-                                                {topics?.data.map((topic) => {
-                                                    const active = selectedTopics.some(
-                                                        (selectedTopic) => selectedTopic.id === topic.id
-                                                    )
-                                                    return (
-                                                        <Listbox.Option key={topic.id} value={topic}>
-                                                            <div
-                                                                data-scheme="primary"
-                                                                className={`${
-                                                                    active ? 'font-semibold' : ''
-                                                                } prose-invert py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 text-primary hover:bg-accent bg-primary`}
-                                                            >
-                                                                <span className="flex-shrink-0 w-3">
-                                                                    {active && <Check2 />}
-                                                                </span>
-
-                                                                <span>{topic.attributes.label}</span>
-                                                            </div>
-                                                        </Listbox.Option>
-                                                    )
-                                                })}
-                                            </div>
-                                        )
-                                    })}
-                            </ScrollArea>
-                        </div>
-                    </Listbox.Options>
-                )}
-            </Listbox>
-        </div>
-    )
-}
-
-const EscalateButton = ({ escalate, escalated }) => {
-    const [modalOpen, setModalOpen] = useState(false)
-    const [showResponse, setShowResponse] = useState(false)
-    const [response, setResponse] = useState(
-        "Howdy! We've escalated your question to our support desk. An engineer will be in touch soon."
-    )
-
-    const handleConfirm = () => {
-        escalate(showResponse && response)
-        setModalOpen(false)
-    }
-
-    return (
-        <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="border-input border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent max-w-lg w-full rounded-md">
-                    <button onClick={() => setModalOpen(false)} className="absolute top-3 right-3">
-                        <Close className="w-4 h-4" />
-                    </button>
-
-                    <div className="p-4 pb-0">
-                        <h3 className="mb-2 mt-0">Escalate thread</h3>
-                        <p className="text-base mt-2 mb-4">
-                            Please confirm that you'd like to escalate this thread to Zendesk
-                        </p>
-                        <Checkbox
-                            className="!text-base"
-                            value="Notify subscribers"
-                            checked={showResponse}
-                            onChange={(e) => setShowResponse(e.target.checked)}
-                        />
-                        {showResponse && (
-                            <>
-                                <p className="text-sm p-2 mt-4 mb-3 border border-primary dark:border-primary text-center rounded-md bg-light dark:bg-dark font-semibold">
-                                    Response will come from Max, the support hog
-                                </p>
-                                <div className="flex space-x-2 items-start mb-6">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
-                                        width={40}
-                                        height={40}
-                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-input"
-                                    />
-                                    <textarea
-                                        rows={5}
-                                        placeholder="Message from Max"
-                                        className="w-full p-2 rounded-md border border-input text-black bg-white"
-                                        value={response}
-                                        onChange={(e) => setResponse(e.target.value)}
-                                    />
-                                </div>
-                            </>
-                        )}
-                    </div>
-                    <div className="p-4 mt-4 border-t border-input flex justify-end">
-                        <CallToAction onClick={handleConfirm} size="sm" type="outline">
-                            {showResponse ? 'Escalate and notify' : 'Escalate'}
-                        </CallToAction>
-                    </div>
-                </div>
-            </Modal>
-        </>
-    )
-}
 
 const DeleteButton = ({ questionID }: { questionID: number }) => {
     const { getJwt } = useUser()
@@ -243,7 +53,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
                 },
                 body: JSON.stringify({ data: { publishedAt: null } }),
             })
-            await navigate('/questions')
+            await navigate('/forum')
         }
     }
     return (
@@ -277,11 +87,11 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                             <div className="flex items-center !text-black dark:!text-white">
                                 <div className="mr-2 relative">
                                     <Avatar
-                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
+                                        className={` ${isInForum ? 'size-8' : 'w-[25px] h-[25px]'} rounded-full`}
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                        <Logomark className="w-[16px]" />
+                                        <Logo layout="logomark" className="w-[16px]" />
                                     </span>
                                 </div>
                                 <strong>PostHog AI</strong>
@@ -295,7 +105,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                 </Tooltip>
                 <div
                     className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
-                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                        isInForum ? 'ml-[calc(2rem_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
                     }`}
                 >
                     {children}
@@ -385,7 +195,7 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     )
 }
 
-const AskMax = ({
+export const AskMax = ({
     question,
     refresh,
     manual = false,
@@ -400,6 +210,9 @@ const AskMax = ({
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
+    // The server refuses automatic replies in forum topics with AI replies off. That is not a failed search, so
+    // nothing shows.
+    const [refused, setRefused] = useState(false)
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -416,8 +229,13 @@ const AskMax = ({
                         manual,
                         withContext,
                     }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
+                })
+                if (response.status === 403) {
+                    setRefused(true)
+                    return
+                }
+                const data = await response.json()
+                setConfident(data.confident)
                 setLoading(false)
                 refresh()
             } catch (error) {
@@ -428,7 +246,7 @@ const AskMax = ({
         window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
-    return loading ? (
+    return refused ? null : loading ? (
         <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
@@ -442,11 +260,14 @@ const AskMax = ({
 }
 
 export function Question(props: QuestionProps) {
-    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, onPinTopics, ...other } = props
+    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, refreshList } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator } = useUser()
+    const { user, notifications, setNotifications, isModerator, isForumModerator } = useUser()
     const { appWindow } = useWindow()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
+    const [escalateState, setEscalateState] = useState<'idle' | 'sent'>('idle')
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
@@ -477,11 +298,8 @@ export function Question(props: QuestionProps) {
         handleReplyDelete,
         voteReply,
         archive,
-        pinTopics,
-        escalate,
         mutate,
-        removeTopic,
-    } = useQuestion(id, { data: question })
+    } = useQuestion(id, { data: question, onResolve: refreshList })
 
     useEffect(() => {
         if (questionData) {
@@ -507,11 +325,38 @@ export function Question(props: QuestionProps) {
         }
     }
 
+    const handleEscalateToSupport = () => {
+        if (escalateState === 'sent' || !posthog) return
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
+        posthog.capture('community question escalated', {
+            questionId: questionData.id,
+            subject: questionData.attributes.subject,
+            body: questionData.attributes.body,
+            url: `https://posthog.com/forum/p/${questionData.attributes.permalink}`,
+            permalink: questionData.attributes.permalink,
+            authorName,
+            topics: questionData.attributes.topics?.data?.map((topic) => topic.attributes.label),
+            escalatedBy: [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ') || null,
+            escalatedByEmail: user?.email,
+        })
+        setEscalateState('sent')
+        addToast({
+            title: 'Escalated',
+            description: 'Moderators have been notified.',
+            duration: 3000,
+        })
+    }
+
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
-    const escalated = questionData?.attributes.escalated
     const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
     const publishedAt = questionData?.attributes?.publishedAt
+    const isBuilderLounge = questionData.attributes.topics?.data?.some((topic) =>
+        topic.attributes.label?.startsWith('#')
+    )
 
     return (
         <CurrentQuestionContext.Provider
@@ -521,7 +366,6 @@ export function Question(props: QuestionProps) {
                 handleResolve,
                 handleReplyDelete,
                 voteReply,
-                pinTopics,
                 mutate,
             }}
         >
@@ -550,6 +394,7 @@ export function Question(props: QuestionProps) {
                         }`}
                     >
                         <Profile
+                            compact={isInForum}
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
@@ -560,15 +405,8 @@ export function Question(props: QuestionProps) {
                             edits={questionData.attributes.edits}
                         />
                         <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
-                            {user?.role?.type === 'moderator' && showActions && (
+                            {isForumModerator && showActions && (
                                 <>
-                                    {!archived && (
-                                        <TopicSelect
-                                            onPinTopics={onPinTopics}
-                                            selectedTopics={questionData.attributes.pinnedTopics}
-                                        />
-                                    )}
-                                    <EscalateButton escalate={escalate} escalated={escalated} />
                                     {!archived ? (
                                         <OSButton
                                             onClick={() => archive(!archived)}
@@ -594,13 +432,20 @@ export function Question(props: QuestionProps) {
                                             }
                                         />
                                     )}
-                                    <DeleteButton questionID={questionData.id} />
-                                    <AskMaxButton
-                                        onClick={() =>
-                                            setMaxQuestions([...maxQuestions, { manual: true, withContext: true }])
-                                        }
-                                        askedMax={questionData?.attributes.askedMax}
-                                    />
+                                    {isModerator && (
+                                        <>
+                                            <DeleteButton questionID={questionData.id} />
+                                            <AskMaxButton
+                                                onClick={() =>
+                                                    setMaxQuestions([
+                                                        ...maxQuestions,
+                                                        { manual: true, withContext: true },
+                                                    ])
+                                                }
+                                                askedMax={questionData?.attributes.askedMax}
+                                            />
+                                        </>
+                                    )}
                                 </>
                             )}
                             {!isQuestionAuthor && <ReportSpamButton type="question" id={questionData.id} />}
@@ -627,7 +472,7 @@ export function Question(props: QuestionProps) {
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
-                                        to={`/questions/${questionData.attributes.permalink}`}
+                                        to={`/forum/p/${questionData.attributes.permalink}`}
                                         className="!no-underline hover:!underline font-semibold"
                                     >
                                         {questionData.attributes.subject}
@@ -659,6 +504,7 @@ export function Question(props: QuestionProps) {
                         </div>
                         <Replies expanded={expanded} setExpanded={setExpanded} isInForum={isInForum} />
                         {maxQuestions.map((question, index) => {
+                            if (!question.manual && isBuilderLounge) return null
                             return (
                                 <AskMax
                                     key={`ask-max-${index}`}
@@ -689,89 +535,74 @@ export function Question(props: QuestionProps) {
                             isInForum={isInForum}
                         />
                     </div>
-                    {isModerator && isInForum && (
+                    {isForumModerator && isInForum && (
                         <div className="p-4 pb-0">
                             <div className="bg-accent rounded-md p-6 text-primary border border-border">
                                 <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
                                     Moderator tools
                                 </h4>
-                                <div className="grid grid-cols-2">
-                                    <div>
-                                        <Link
-                                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
-                                            className="text-yellow font-bold"
-                                        >
-                                            {questionData?.attributes?.profile?.data?.attributes?.firstName
-                                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
-                                                : 'Anonymous'}
-                                        </Link>
-                                        <input
-                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
-                                            type="text"
-                                            value={
-                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
-                                                    ?.attributes?.email
-                                            }
-                                            readOnly
-                                            onFocus={(e) => e.target.select()}
-                                        />
-                                    </div>
-                                    <div className="w-full relative">
-                                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                {isModerator && (
+                                    <div className="grid grid-cols-2">
+                                        <div>
                                             <Link
-                                                className="font-bold"
-                                                to={questionData.attributes.permalink}
-                                                externalNoIcon
+                                                to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                                                className="text-yellow font-bold"
                                             >
-                                                View in PostHog
+                                                {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                                    ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                                    : 'Anonymous'}
                                             </Link>
-                                            <Link
-                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
-                                                externalNoIcon
-                                                className="font-bold"
-                                            >
-                                                View in Strapi
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div
-                                    className={`grid gap-x-4 mt-4 border-t divide-x divide-border border-border ${
-                                        questionData.attributes.zendeskTicketID ? 'grid-cols-2' : ''
-                                    }`}
-                                >
-                                    <ZendeskTicket question={questionData} questionID={questionData.id} />
-                                    <div className={`pt-4 ${questionData.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
-                                                Forum topics
-                                            </h4>
-                                            <TopicSelector
-                                                questionId={questionData.id}
-                                                permalink={questionData.attributes.permalink}
+                                            <input
+                                                className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                                                type="text"
+                                                value={
+                                                    questionData?.attributes?.profile?.data?.attributes?.user?.data
+                                                        ?.attributes?.email
+                                                }
+                                                readOnly
+                                                onFocus={(e) => e.target.select()}
                                             />
                                         </div>
-                                        <ul className="flex items-center list-none p-0 flex-wrap">
-                                            {questionData.attributes?.topics?.data.map((topic) => (
-                                                <li
-                                                    key={topic.id}
-                                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
+                                        <div className="w-full relative">
+                                            <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                                                <Link
+                                                    className="font-bold"
+                                                    to={questionData.attributes.permalink}
+                                                    externalNoIcon
                                                 >
-                                                    <Link
-                                                        to={`/questions/topic/${topic.attributes.slug}`}
-                                                        className="text-yellow text-sm"
-                                                    >
-                                                        {topic.attributes.label}
-                                                    </Link>
-
-                                                    <button onClick={() => removeTopic(topic)}>
-                                                        <XIcon className="h-4 w-4 text-primary" />
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
+                                                    View in PostHog
+                                                </Link>
+                                                <Link
+                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                    externalNoIcon
+                                                    className="font-bold"
+                                                >
+                                                    View in Strapi
+                                                </Link>
+                                                <OSButton
+                                                    variant="secondary"
+                                                    size="sm"
+                                                    onClick={handleEscalateToSupport}
+                                                    disabled={escalateState === 'sent'}
+                                                >
+                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                                                </OSButton>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
+                                {!isModerator && (
+                                    <div className="mb-4">
+                                        <OSButton
+                                            variant="secondary"
+                                            size="sm"
+                                            onClick={handleEscalateToSupport}
+                                            disabled={escalateState === 'sent'}
+                                        >
+                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                                        </OSButton>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

@@ -14,6 +14,8 @@ import qs from 'qs'
 import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
+import EventGraphic, { type EventGraphicProps, type EventGraphicSpeaker } from 'components/EventGraphic'
+import { eventGraphicStyleIndex } from 'constants/eventGraphicPalette'
 import MobileDrawer from 'components/MobileDrawer'
 import { useApp } from '../context/App'
 
@@ -33,11 +35,12 @@ export type Event = {
     format?: string[]
     audience?: string[]
     speakers?: string[]
+    speakerProfiles?: EventGraphicSpeaker[]
     speakerTopic?: string
-    partners?: Array<{ name: string; url?: string }>
+    partners?: Array<{ name: string; url?: string; logoUrl?: string }>
     attendees?: number
     vibeScore?: number
-    photos?: { id: number; url: string }[]
+    photos?: { id: number; url: string; name?: string }[]
     video?: string
     presentation?: string
     link?: string
@@ -54,23 +57,54 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
         photos: photosData,
     } = strapiEvent.attributes
 
-    const photos = photosData?.data?.map((photo: any) => ({ id: photo.id, url: photo.attributes?.url }))
+    const photos = photosData?.data?.map((photo: any) => ({
+        id: photo.id,
+        url: photo.attributes?.url,
+        // The generated graphic is saved as a regular photo — the form uses the file name to find it again
+        name: photo.attributes?.name,
+    }))
     const speakers = speakersData?.data?.map((s: any) =>
         [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' ')
     )
-    const partners = partnersData?.map((p: any) => ({ name: p.name, url: p.url || undefined }))
+    const speakerProfiles = speakersData?.data?.map((s: any) => ({
+        name: [s.attributes?.firstName, s.attributes?.lastName].filter(Boolean).join(' '),
+        color: s.attributes?.color || undefined,
+        avatarUrl: s.attributes?.avatar?.data?.attributes?.url || undefined,
+        companyRole: s.attributes?.companyRole || undefined,
+    }))
+    const partners = partnersData?.map((p: any) => ({
+        name: p.name,
+        url: p.url || undefined,
+        // Optional — partners without an uploaded logo fall back to their name set in Squeak
+        logoUrl: p.logo?.data?.attributes?.url || p.logo?.url || undefined,
+    }))
 
     return {
         ...strapiEvent.attributes,
         private: isPrivate === true,
         speakers,
+        speakerProfiles,
         partners,
         photos,
         id: strapiEvent.id,
     }
 }
 
-const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
+// The generated graphic stands in as the event's photo wherever none has been uploaded
+const eventGraphicProps = (event: Event): EventGraphicProps => ({
+    title: event.name,
+    date: event.date,
+    startTime: event.startTime,
+    venue: event.location?.venue?.name,
+    location: event.location?.label,
+    online: event.online,
+    speaker: event.speakerProfiles?.[0],
+    partners: event.partners,
+    // Keyed to the event so the list card and the detail panel always agree
+    styleIndex: eventGraphicStyleIndex(`${event.id}-${event.name}`),
+})
+
+export const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [events, setEvents] = useState<Event[]>([])
@@ -88,8 +122,12 @@ const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent:
                             populate: ['venue'],
                         },
                         photos: true,
-                        speakers: true,
-                        partners: true,
+                        speakers: {
+                            populate: ['avatar'],
+                        },
+                        partners: {
+                            populate: ['logo'],
+                        },
                     },
                 },
                 { encodeValuesOnly: true }
@@ -207,7 +245,6 @@ type EventsContentProps = {
 }
 
 export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: EventsContentProps) => {
-    const { websiteMode } = useApp()
     const { isModerator } = useUser()
     const { events: eventsData, refreshEvents, deleteEvent } = useEvents()
     const [activeTab, setActiveTab] = useState<'past' | 'upcoming'>('upcoming')
@@ -322,19 +359,15 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
             template="generic"
             slug="events"
             title="Cool tech events"
+            headerBarOptions={['showBack', 'showForward']}
             fullScreen
             viewportClasses="[&>div>div]:h-full"
             showAddressBar={false}
         >
-            <div
-                data-scheme="primary"
-                className={`flex flex-col @xl:flex-row text-primary ${websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'}`}
-            >
+            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
                 <aside
                     data-scheme="secondary"
-                    className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
-                        websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
-                    }`}
+                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col h-full"
                 >
                     <div className="border-b border-primary px-4 pt-4 pb-4">
                         <ToggleGroup
@@ -384,17 +417,20 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                     `}
                                     >
                                         <div className="w-full">
-                                            {event.photos && event.photos.length > 0 && (
-                                                <div className="float-right ml-2 max-w-20">
-                                                    {event.photos[0] && (
-                                                        <img
-                                                            src={event.photos[0].url}
-                                                            alt={`Event photo`}
-                                                            className="w-20 max-h-20 object-cover rounded"
-                                                        />
-                                                    )}
-                                                </div>
-                                            )}
+                                            <div className="float-right ml-2 max-w-20">
+                                                {event.photos && event.photos.length > 0 ? (
+                                                    <img
+                                                        src={event.photos[0].url}
+                                                        alt={`Event photo`}
+                                                        className="w-20 max-h-20 object-cover rounded"
+                                                    />
+                                                ) : (
+                                                    <EventGraphic
+                                                        {...eventGraphicProps(event)}
+                                                        className="w-20 rounded"
+                                                    />
+                                                )}
+                                            </div>
                                             <div className="text-secondary text-[13px]">
                                                 {new Date(event.date).toLocaleDateString('en-US', {
                                                     month: 'short',
@@ -592,7 +628,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                                 </div>
                                             )}
 
-                                            {selectedEvent.photos && selectedEvent.photos.length > 0 && (
+                                            {selectedEvent.photos && selectedEvent.photos.length > 0 ? (
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Photos</div>
                                                     <div className="grid grid-cols-2 gap-2">
@@ -606,6 +642,13 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                                             </ZoomImage>
                                                         ))}
                                                     </div>
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <EventGraphic
+                                                        {...eventGraphicProps(selectedEvent)}
+                                                        className="rounded border border-primary"
+                                                    />
                                                 </div>
                                             )}
 

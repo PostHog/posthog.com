@@ -1,0 +1,94 @@
+/** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
+
+/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+
+export interface PocketGuideVolume {
+    /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
+    id: string
+    title: string
+    /** One line on the shelf. What the volume gets you, not what's in it. */
+    description: string
+    /** Project color token, bare – callers build text-/border-/bg- from it. */
+    token: PocketGuideToken
+    /** Printed on the cover. Order on the shelf follows it. */
+    volume: number
+    /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
+    docsProduct?: string
+    /** Route where Pocket Guide touchpoints should open this volume. */
+    learnPath?: string
+    /** Count the front matter and primer while this volume consists of those two learning pages. */
+    countOrientationPages?: boolean
+    /** A hand-written src/pages file owns this route, so don't generate one. */
+    hasStaticPage?: boolean
+    /** Announced but unwritten – renders as a cover with a sash and no link. */
+    comingSoon?: boolean
+}
+
+/**
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
+ */
+export const FIRST_GUIDE_BOOK_ORDER = 2
+
+export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
+    {
+        id: 'product-analytics',
+        title: 'Product Analytics',
+        description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
+        token: 'blue',
+        volume: 5,
+        docsProduct: 'product-analytics',
+        learnPath: '/docs/product-analytics/learn/introduction',
+        countOrientationPages: true,
+    },
+    {
+        id: 'self-driving',
+        title: 'Self-driving',
+        description: 'Scouts that watch your product and open a pull request when something breaks.',
+        token: 'orange',
+        volume: 1,
+        docsProduct: 'self-driving',
+        hasStaticPage: true,
+    },
+    {
+        id: 'ai-observability',
+        title: 'AI Observability',
+        description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
+        token: 'purple',
+        volume: 2,
+        docsProduct: 'ai-observability',
+        learnPath: '/docs/ai-observability/learn',
+    },
+    {
+        id: 'context-warehouse',
+        title: 'Context Warehouse',
+        description:
+            'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
+        token: 'blue',
+        volume: 3,
+    },
+    {
+        id: 'session-replay',
+        title: 'Session Replay',
+        description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
+        token: 'yellow',
+        volume: 4,
+        docsProduct: 'session-replay',
+        learnPath: '/docs/session-replay/learn',
+    },
+]
+
+/** The volume that teaches a product, if one does. Drives `GuidesForProduct` on tool docs pages. */
+export function volumeForProduct(docsProduct: string): PocketGuideVolume | undefined {
+    return POCKET_GUIDE_VOLUMES.find((v) => v.docsProduct === docsProduct && !v.comingSoon)
+}
+
+export function volumeById(id: string): PocketGuideVolume | undefined {
+    return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
+}
+
+/** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
+export function pocketGuideUrl(volume: PocketGuideVolume): string {
+    return volume.learnPath ?? `/pocket-guides/${volume.id}`
+}

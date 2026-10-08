@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 tags:
-  - Growth engineering
+  - Growth
   - Product engineers
   - Experiments
 crosspost:

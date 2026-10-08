@@ -38,9 +38,9 @@ Additional reports will be added based on user feedback we receive via our [in-a
 
 <CalloutBox icon="IconWarning" title="Don't confuse Account Number with Account ID" type="caution">
 
-Microsoft Advertising shows both an **Account Number** and an **Account ID** in the UI:
+Microsoft Advertising shows two different identifiers:
 
-- **Account Number** - An eight-character alphanumeric value (e.g., `A1B2C3D4`). This is NOT what you need.
+- **Account Number** - An alphanumeric, 8-character value (e.g., `AB12CD34`). This is displayed prominently in the UI but is **not** what PostHog needs.
 - **Account ID** - A numeric-only value (e.g., `123456789`). This is what PostHog requires.
 
 Make sure you enter the numeric **Account ID**, not the alphanumeric **Account Number**.
@@ -52,17 +52,6 @@ Make sure you enter the numeric **Account ID**, not the alphanumeric **Account N
     classes="rounded"
     alt="Bing Ads account ID"
 />
-
-<CalloutBox icon="IconWarning" title="Don't confuse Account Number with Account ID" type="caution">
-
-Microsoft Advertising has two different identifiers:
-
-- **Account Number** - An alphanumeric, 8-character value (e.g., `AB12CD34`). This is displayed prominently in the UI but is **not** what PostHog needs.
-- **Account ID** - A numeric-only value (e.g., `123456789`). This is required for the API and is what you should enter in PostHog.
-
-You can find your **Account ID** in Microsoft Advertising under **Settings** > **Account Settings**. Make sure you use the numeric **Account ID**, not the alphanumeric **Account Number**.
-
-</CalloutBox>
 
 ## Configuring PostHog
 
@@ -82,3 +71,11 @@ Connect PostHog to your Bing Ads account using a Microsoft account. The Microsof
 ## Supported tables
 
 <SourceTables />
+
+## Troubleshooting
+
+### Can't connect if you sign in with Google
+
+PostHog authenticates through the Microsoft Advertising API, which only accepts a Microsoft account. If you sign in to Microsoft Advertising with a **Google account**, the connection can't complete. This is a Microsoft limitation, not specific to PostHog.
+
+To fix it, sign in with a Microsoft account that has administrator or standard access to your Bing Ads account, then link the source again.

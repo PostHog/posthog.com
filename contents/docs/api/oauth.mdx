@@ -105,7 +105,60 @@ The scopes available through OAuth are listed in the `scopes_supported` field of
 
 Start with [CIMD](#client-id-metadata-document-cimd). For most integrations, hosting a metadata document on a domain you control is all you need to go live, and your app's name and logo appear on the authorization screen. There's no registration step to wait on.
 
-Verification is optional and isn't required to go live. If you'd like your app marked as a verified integration, which removes the **unverified application** notice shown on the authorization screen, email [team-growth@posthog.com](mailto:team-growth@posthog.com).
+Verification is optional and isn't required to go live. It removes the **unverified application** notice shown on the authorization screen.
+
+### What verification means
+
+A verified badge means PostHog has confirmed the identity of the developer behind the app and reviewed the app's name, logo, and requested scopes for fit. It is an identity check in the style of publisher verification. It is not a security audit of your application and it is not an endorsement by PostHog.
+
+### What we check
+
+We aim to approve requests on arrival, so make sure the following are true before you contact us:
+
+- Your client metadata document is served from your production domain over HTTPS, not a tunnel (for example `trycloudflare.com`) or a preview deployment URL.
+- Your `redirect_uris` all use HTTPS and live on that same production domain.
+- You have a public product page a reviewer can look at.
+- Your requested scopes are limited to what your product actually needs. Declaring a [scope ceiling](#declare-your-scopes) makes this explicit.
+
+### Requesting verification
+
+Open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic, and include:
+
+- Your app name.
+- Your client metadata URL (your `client_id`).
+- A link to your product.
+- Which PostHog organization is yours (recommended, see below).
+
+Verification is granted per region. If your integration supports both `us.posthog.com` and `eu.posthog.com`, say so in your request so we can verify your app in both regions.
+
+PostHog may remove verification if an app's scopes, branding, or behavior change materially, and you can re-request it at any time.
+
+### Link your app to a PostHog organization
+
+We recommend adding a CIMD verification token to your metadata document. Create it in **Organization settings → CIMD verification tokens** and add it under the `com.posthog` namespace as `com.posthog.verification_token`. Linking your app to a PostHog organization raises your provisioning rate limits and surfaces the integration to that organization's admins. It is recommended but not required, and it doesn't affect the unverified notice on the authorization screen. See [Link your partner app to a PostHog organization](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional) for the full walkthrough.
+
+### Declare your scopes
+
+Declare the OAuth scopes your app needs in the `com.posthog` namespace of your metadata document:
+
+```json
+{
+  "com.posthog": {
+    "scopes": ["insight:read", "project:read"],
+    "optional_scopes": ["session_recording:read"]
+  }
+}
+```
+
+Every scope in `scopes` is required. People who authorize your app see these scopes locked on the consent screen. Put scopes for features they can decline in `optional_scopes`. They can then authorize your app without those features.
+
+Both lists form the scope ceiling, which is the maximum set of scopes a token for your app can carry. Each scope still requires user consent. Check the scopes in the token response before using a feature that needs an optional scope.
+
+`optional_scopes` requires a non-empty `scopes` list. PostHog drops scopes that people can't grant to CIMD clients. If PostHog drops every entry in `scopes`, it rejects the metadata document. An `optional_scopes` list that becomes empty remains valid.
+
+When PostHog first reads your metadata document, omitting `scopes` lets your app request any scope people can grant. During a metadata refresh, omitting either field keeps its stored value. Publish `"optional_scopes": []` to remove all optional scopes.
+
+Manage CIMD app scopes through the metadata document. You can't edit them in the PostHog admin UI. See [supported scopes](#supported-scopes) for the scopes your app can request.
 
 Have a question while integrating? [Reach out to us](/talk-to-a-human).
 

@@ -34,7 +34,7 @@ In their project(s), check the data management tab:
 - Do custom events have meaningful [properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event)?
 - If they identify persons or groups, are the profile properties meaningful?
 
-Also worth running through the [basic account review](/handbook/cs-and-onboarding/foundation-check) checklist.
+Also worth running through the [basic implementation review](/handbook/cs-and-onboarding/foundation-check).
 
 ## 2. Reach out
 
@@ -47,6 +47,7 @@ If you're inheriting an existing contact:
 - Review the [Sales → CSM Handover](/handbook/growth/sales/account-allocation#handing-over-customers) process.
 - Get introduced in the existing Slack/Teams channel or via email.
 - Coordinate with the previous owner for continuity.
+- Set your own [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship) rating on the account. Start at 2 — do not keep the rating the previous owner gave it.
 
 ### Cold (no established contact)
 
@@ -162,8 +163,8 @@ Prioritize potential churn risks, low engagement, and accounts where something i
 A lot of valuable context lives in past conversations:
 
 - **BuildBetter** — recordings of customer success, sales, and onboarding calls. Use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history, or use direct search / AI chat.
-- **Pylon** — Slack channel history. The <PrivateLink url="https://app.usepylon.com/accounts">account</PrivateLink> page is linked to Salesforce accounts that have a Slack channel. Filter by Owner (mapped to the account owner in Salesforce) to view all Slack/Teams interactions for your accounts.
-- **Vitally** — Zendesk and email conversations under <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">Active Conversations</PrivateLink>. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
+- **[SupportHog](/handbook/growth/sales/slack-channels)** — Slack channel history. Our own tool links [shared Slack (and MS Teams) channels](/handbook/growth/sales/slack-channels) to Salesforce accounts so you can view Slack/Teams interactions for your accounts.
+- **[PostHog Support](https://us.posthog.com/project/2/support/tickets)** — filter tickets on your own `ae_*` or `csm_*` [tag](/handbook/support/posthog-support#customer-and-account-tags) to see every ticket raised for the accounts you own. You can also open a person's profile in PostHog to see any support tickets they've raised. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
 
 ### Product usage analysis
 

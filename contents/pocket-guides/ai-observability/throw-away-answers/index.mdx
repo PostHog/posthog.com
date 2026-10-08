@@ -1,0 +1,92 @@
+---
+title: Measure whether users keep the answer
+shortTitle: Discarded answers
+subtitle: The model answered. Whether anyone used the answer is a different number entirely.
+pocketGuideOrder: 5
+pocketGuideCta:
+  kind: prompt
+  label: Build this with PostHog AI
+  note: Opens PostHog AI with the prompt ready. Rename the events to match your own.
+  prompt: >-
+    Build me an AI outcome funnel in PostHog. Step 1 is the $ai_generation event, step 2 is my
+    ai_suggestion_shown event, step 3 is my ai_suggestion_accepted event, all joined on the
+    $ai_trace_id property. Break the conversion down by $ai_model and by the ai_product property,
+    and add a second insight showing the rate of ai_suggestion_regenerated per trace over time.
+    Then tell me which model has the best acceptance rate once volume is accounted for. If my
+    project doesn't have these events yet, build the full funnel anyway and tell me
+    how to instrument AI observability using the wizard or manual install.
+---
+
+<LeftPage>
+
+<LeakFigure
+    n={1}
+    caption="Every answer arrived and monitoring looked normal, but two in five got thrown away."
+    markerAt={0.44}
+    markerLabel="new model"
+    starts={[0.86, 0.88, 0.85, 0.87, 0.86, 0.88, 0.85, 0.87, 0.86, 0.87]}
+    finishes={[0.72, 0.74, 0.71, 0.73, 0.52, 0.48, 0.5, 0.47, 0.49, 0.48]}
+    leakLabel="~2,100 answers a day shown and discarded – no error, no complaint"
+    startsLabel="Answers shown"
+    finishesLabel="Answers accepted · 84% → 55%"
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Measure whether users keep the answer
+
+You can have an AI feature that's fast, cheap, stays on-topic, and passes its evals – but users still regenerate outputs consistently. Every regeneration is a user telling you the first answer wasn't good enough.
+
+Typical monitoring won't show why because the call succeeded and the cost was normal, nothing errored.
+
+When you monitor for this scenario, <SeeFig n={1} /> is what that looks like.
+
+## How PostHog connects the two
+
+The signal already exists in your product as a "regenerate" click or a copy button, but they probably aren't attached to the LLM call that produced the answer.
+
+Every LLM event carries a `$ai_trace_id`. Put that same ID on your own events as a <Term name="custom property" />, and each product event joins back to the <Term name="generation" /> behind it, along with its model, prompt version, and cost.
+
+## Which events to send
+
+There are four moments that follow a generation worth tracking:
+
+| Event | Fires when | What it tells you |
+| --- | --- | --- |
+| Shown | The answer reaches the user | Your denominator – not every generation gets seen |
+| Accepted | The user copies, sends, applies, or keeps it | The answer did its job |
+| Regenerated | The user asks for another one | Rejection, counted |
+| Edited | The user changes it before using it | Close, but not right |
+
+If you already have events for these moments, use them. If not, create new ones. The names of the events don't matter, just be sure to add the `$ai_trace_id` custom property to each one.
+
+## What the numbers tell you
+
+With those events flowing, you can start answering valuable questions:
+
+- **Is this surface working?** Look at accepted ÷ shown, per feature. A rate that's fine on one surface and poor on another might signal a product problem, not necessarily a model one.
+- **Which model wins on your work?** Split acceptance by `$ai_model`. Benchmarks tell you which model wins on someone else's test set – this tells you which one wins on your users'. Ship the change behind a <Term name="feature flag" /> and read acceptance for each variant.
+- **Wrong, or just unwanted?** Read acceptance next to the eval pass rate from [Score your AI's answers with evals](/pocket-guides/ai-observability/quality-output). A high pass rate with low acceptance means the answers are correct and nobody wants them which is a different fix entirely.
+
+Thumbs up and down interactions through <Term name="user feedback" /> adds an explicit rating on top, currently in beta. Acceptance costs nothing extra and doesn't ask the user to stop and rate anything.
+
+## Build it with PostHog AI
+
+This prompt builds three things against your own data:
+- The funnel from generation to shown to accepted, joined on `$ai_trace_id`
+- That funnel broken down by model and feature
+- And a trend for how often people regenerate.
+
+Rename the events to match yours before you send it:
+
+<Action />
+
+<SeeAlso>
+
+See also: [Custom properties](/docs/ai-observability/custom-properties) · [Collecting user feedback](/docs/ai-observability/collect-user-feedback) · [Funnels](/docs/product-analytics/funnels)
+
+</SeeAlso>
+
+</RightPage>

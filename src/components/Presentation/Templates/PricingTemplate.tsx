@@ -1,7 +1,6 @@
 import React from 'react'
 import ParseHtml from '../Utilities/parseHtml'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Logo from 'components/Logo'
 import FreeTier from 'components/Pricing/Test/FreeTier'
 import { Accordion } from 'components/Pricing/Test/PricingAccordion'
 import { useState } from 'react'

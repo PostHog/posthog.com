@@ -302,7 +302,7 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/session-replay/session-summaries-ai"
+                                    to="/docs/session-replay/find-replays-ai"
                                     state={{ newWindow: true }}
                                 >
                                     Explore AI features
@@ -367,7 +367,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             <p>
                                 Or describe what you want (like{' '}
                                 <em>"users who rage clicked after seeing variant B yesterday"</em>) and{' '}
-                                <Link to="/docs/session-replay/search-replays-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/session-replay/surfaces/mcp" state={{ newWindow: true }}>
                                     PostHog MCP
                                 </Link>{' '}
                                 returns the matching collection in your editor.
@@ -416,7 +416,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 Using Product Analytics and PostHog MCP, you can{' '}
-                                <Link to="/docs/product-analytics/build-insights-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/product-analytics/surfaces/mcp" state={{ newWindow: true }}>
                                     build funnels, retention charts, and user paths
                                 </Link>{' '}
                                 from your editor. Then drop straight into a playlist of session replays for the users
@@ -436,7 +436,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 With Feature Flags, use the MCP to{' '}
-                                <Link to="/docs/feature-flags/create-flags-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/feature-flags/surfaces/mcp" state={{ newWindow: true }}>
                                     flip flags, target rollouts, and filter replays by variant
                                 </Link>{' '}
                                 from Claude Code or Cursor. Roll out fixes to affected users without a full deploy.
@@ -456,7 +456,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 Error Tracking + PostHog MCP means your agent can{' '}
-                                <Link to="/docs/error-tracking/debug-errors-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/error-tracking/surfaces/mcp" state={{ newWindow: true }}>
                                     pull the stack trace and session replay together
                                 </Link>
                                 , then write the fix. No reproduction needed, no tab switching.

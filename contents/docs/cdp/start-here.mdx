@@ -1,0 +1,35 @@
+---
+title: Start here
+sidebar: Docs
+showTitle: true
+---
+
+Data pipelines has three moving parts, and you rarely need all of them at once. Start with the one that matches the problem you have, then add the others as you go.
+
+## 1. Decide what you're building
+
+**Getting data out of PostHog** is the most common starting point. If you want events delivered as they happen – to Slack, a webhook, a CRM, an ad platform – use a [realtime destination](/docs/cdp/destinations). If you want reliable, scheduled delivery of large volumes into a warehouse, use a [batch export](/docs/cdp/batch-exports) instead.
+
+**Getting data into PostHog** means linking a [source](/docs/cdp/sources). PostHog syncs from hundreds of tools, and you can also push data in yourself with an [incoming webhook](/docs/cdp/sources/incoming-webhooks). Once a source is linked, you can join it to your event and person data in the [data warehouse](/docs/data-warehouse).
+
+**Changing events before they're stored** is a [transformation](/docs/cdp/transformations). Transformations run during ingestion, so they can add properties, rewrite them, or [drop events](/docs/cdp/transformations/drop-events) entirely.
+
+## 2. Create it from a template
+
+In the [PostHog web app](/docs/cdp/surfaces/web-app), open the pipeline section for what you're building and pick a template. Most templates only need credentials and a filter for which events should trigger them. Every template is a [Hog function](/docs/hog) underneath, so you can open the code and edit it if the defaults don't fit.
+
+If nothing matches, describe what you want and let [PostHog AI write the function](/docs/cdp/hog-functions-ai).
+
+## 3. Test before you enable it
+
+Every function has a test-invoke step that runs it against a real recent event and shows you the request it would send, without delivering anything. Use it to confirm your filters match and your payload looks right.
+
+## 4. Enable it and watch the logs
+
+Turn the function on, then check its logs and metrics for the first few minutes. Successes, failures, and filtered-out events are all counted separately, so you can tell "nothing matched" apart from "the destination rejected it." If something looks wrong, see [troubleshooting](/docs/cdp/troubleshooting).
+
+## Next steps
+
+- Configure and monitor everything in the [web app](/docs/cdp/surfaces/web-app).
+- Manage the same functions from your editor over [MCP](/docs/cdp/surfaces/mcp).
+- Keep pipelines in your own config with the [API](/docs/cdp/surfaces/api).

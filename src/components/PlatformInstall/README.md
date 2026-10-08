@@ -31,7 +31,7 @@ const mySchema: InstallSchema = {
 
 ## Layout
 
-1. Header row — `title` (left) + `Learn more` link (right, opens `learnMoreHref` in a new window).
+1. Header row — `title` with an optional `titleInfoAction` or `titleTooltip` (left) + optional `secondaryAction` (right).
 2. Always-visible `defaultCommand` snippet with copy-to-clipboard + toast.
 3. Icon row split with `justify-between`: `editors` group on the left, `platforms` group on the right. Each icon is a button wrapped in `<ZoomHover size="sm">` and a Radix tooltip showing the platform label.
 4. Clicking an icon selects it and reveals an expanded section. Clicking the same icon again closes the section. Selected platforms reveal their label inline with a quick width/opacity transition.
@@ -67,7 +67,9 @@ type Platform = PlatformOption & {
 
 type InstallSchema = {
     title: string
-    learnMoreHref: string
+    titleInfoAction?: { label: string; to: string; state?: Record<string, unknown> }
+    titleTooltip?: React.ReactNode
+    secondaryAction?: { label: string; to: string; state?: Record<string, unknown>; icon?: React.ReactNode }
     defaultCommand: string
     platforms: Platform[]
 }
@@ -96,3 +98,32 @@ A small letter-tile placeholder stands in for Cursor, VS Code, Windsurf, Zed, Lo
 
 - The button style is intentionally local while we evaluate it. If we promote it to a shared primitive, lift `IconButton.tsx` into `components/` and update consumers.
 - All container queries / Tailwind tokens follow project conventions (no stock Tailwind colors, no media queries).
+
+
+## Direct platform links
+
+Pass `linkOnly` with the card variant to render platform logos as direct links instead of instruction buttons. Tooltips and accessible names identify each platform without visible labels. `linkOnly` defaults to `false`, preserving the existing expandable installer. Inline mode is unchanged.
+
+Each `Platform` can specify an `href` for this mode. Internal paths open in a site window; external URLs use the normal external-link behavior. Entries without an `href` are omitted, and an empty link list has no footer. In link-only mode, no instruction panel is rendered.
+
+```tsx
+<PlatformInstall
+    linkOnly
+    schema={{
+        ...mcpInstallSchema,
+        supports: undefined,
+        secondaryAction: { label: 'Docs', to: '/docs/model-context-protocol' },
+        platforms: mcpInstallSchema.platforms.filter(({ id }) => ['claude', 'codex', 'cursor'].includes(id)),
+    }}
+/>
+```
+
+The homepage's second slide supplies a compact schema with Claude and ChatGPT connector links plus Cursor, VS Code, and Codex setup links. It keeps the shared display/copy command and places the PostHog Desktop link outside the installer.
+
+### Hide the secondary header link
+
+Pass `hideSecondaryAction` to hide the card header’s secondary link, such as “Docs” or “Learn more,” without changing the schema. It defaults to `false` and does not affect inline mode. The homepage’s product context slide enables it.
+
+```tsx
+<PlatformInstall schema={mcpInstallSchema} linkOnly hideSecondaryAction />
+```

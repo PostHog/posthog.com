@@ -53,13 +53,23 @@ The simple Segment destination only supports tracking of pageviews, custom event
          for (
            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
              u.people = u.people || [],
-             u.toString = function (t) {
-               var e = "posthog";
-               return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
-             },
-             u.people.toString = function () {
-               return u.toString(1) + ".people (stub)";
-             },
+             Object.defineProperty(u, "toString", {
+               configurable: !0,
+               enumerable: !0,
+               writable: !0,
+               value: function (t) {
+                 var e = "posthog";
+                 return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
+               },
+             }),
+             Object.defineProperty(u.people, "toString", {
+               configurable: !0,
+               enumerable: !0,
+               writable: !0,
+               value: function () {
+                 return u.toString(1) + ".people (stub)";
+               },
+             }),
              o =
                "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(
                  " ",
@@ -93,6 +103,34 @@ The simple Segment destination only supports tracking of pageviews, custom event
      });
    });
    ```
+
+#### Filter PostHog properties sent to Segment
+
+> **Note:** This option requires `posthog-js` v1.429.0 or later.
+
+The integration adds PostHog-generated properties to Segment events before Segment sends them to all destinations. To control these properties, replace `segment: window.analytics` in the initialization above with:
+
+```js
+segment: {
+  analytics: window.analytics,
+  filterProperties: (properties) => {
+    for (const key of Object.keys(properties)) {
+      if (key.startsWith("$sdk_debug_")) {
+        delete properties[key];
+      }
+    }
+    return properties;
+  },
+},
+```
+
+This example removes PostHog's `$sdk_debug_*` properties from Segment enrichment. Without `filterProperties`, the integration adds PostHog properties as usual.
+
+`filterProperties` accepts a function or an array of functions that run in order. The first filter receives a fresh shallow copy of PostHog-generated properties, excluding keys already present in the original Segment event. Each later filter receives the previous filter's returned properties. Original Segment properties take precedence over any properties returned by the filters.
+
+Return the properties to add, or `null` to skip all PostHog enrichment for that event. If a filter returns `null` or throws, the remaining filters don't run and the original Segment event continues unchanged. This doesn't drop the event.
+
+Filtering only affects Segment enrichment, not events captured directly by the PostHog SDK. The top-level [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook doesn't run for Segment enrichment.
 
 ## Sending events to PostHog
 

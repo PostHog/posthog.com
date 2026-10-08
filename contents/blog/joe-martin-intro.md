@@ -1,6 +1,6 @@
 ---
 date: 2021-08-06
-title: Introducing Joe Martin - Our first Product Marketer
+title: Introducing Joe Black - Our first Product Marketer
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,7 +13,7 @@ featuredImageType: full
 category: Inside PostHog
 ---
 
-Before joining PostHog, <TeamMember name="Joe Martin" photo /> had never owned a Mac.
+Before joining PostHog, <TeamMember name="Joe Black" photo /> had never owned a Mac.
 
 The former tech and games journalist previously did everything on PC, but joining PostHog’s [Apple-dominated](https://posthog.com/handbook/people/spending-money#laptop) culture came with a few… necessary adjustments.
 
@@ -29,7 +29,7 @@ Talk about range.
 
 Product marketing sits at the intersection of marketing, customer advocacy, and product development. It involves two main activities: 
 * Putting together value propositions and messaging frameworks to inform go-to-market plans, and 
-* Thinking about the positioning of the brand within the broader market.
+* Thinking about the [positioning](/blog/repositioning-posthog) of the brand within the broader market.
 
 As a collaborative and supportive function, product marketing can involve putting together specific pieces of sales enablement collateral, documentation, case studies and other marketing collateral, and understanding a business’ users as well.
 

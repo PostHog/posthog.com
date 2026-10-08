@@ -121,48 +121,24 @@ posthog.CaptureException(
 );
 ```
 
-<CalloutBox icon="IconInfo" title="Automatic capture" type="fyi">
-
-Automatic exception capture is not available in the .NET SDK yet. Wrap the code paths you want to monitor and call `CaptureException` from your exception handlers.
-
-</CalloutBox>
+For ASP.NET Core, you can opt into automatic capture for unhandled request exceptions in the next step. Other .NET apps continue to use `CaptureException` manually.
 
 </Step>
 
 <Step title="Capture ASP.NET Core request exceptions" badge="recommended">
 
-For ASP.NET Core apps, add middleware to capture unhandled request exceptions and then rethrow them so your existing error handling still runs:
+ASP.NET Core automatic capture is available in `PostHog.AspNetCore` version 2.7.0 and later. Add the PostHog request context middleware after building the app, and enable exception capture:
 
 ```csharp
-using Microsoft.Extensions.DependencyInjection;
-using PostHog;
+var app = builder.Build();
 
-app.Use(async (context, next) =>
+app.UsePostHogRequestContext(options =>
 {
-    try
-    {
-        await next();
-    }
-    catch (Exception exception)
-    {
-        var posthog = context.RequestServices.GetRequiredService<IPostHogClient>();
-        var distinctId = context.User.Identity?.Name ?? context.TraceIdentifier;
-
-        posthog.CaptureException(
-            exception,
-            distinctId,
-            new Dictionary<string, object>
-            {
-                ["$current_url"] = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
-                ["$request_method"] = context.Request.Method,
-                ["$pathname"] = context.Request.Path.ToString(),
-            }
-        );
-
-        throw;
-    }
+    options.CaptureExceptions = true;
 });
 ```
+
+Place it before the request handlers whose unhandled exceptions you want to capture. If you use exception-handling middleware, register it first so it can handle the exception after PostHog throws it again. The PostHog middleware captures the exception with the active request context and adds the HTTP response status.
 
 </Step>
 

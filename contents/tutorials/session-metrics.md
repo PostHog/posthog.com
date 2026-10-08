@@ -10,7 +10,6 @@ date: 2024-11-26
 featuredVideo: 'https://www.youtube-nocookie.com/embed/CVu6ObmOR8Q'
 tags:
   - trends
-  - sessions
   - product analytics
 ---
 

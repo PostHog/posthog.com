@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
 crosspost:
   - Blog
   - Newsletter
@@ -21,7 +21,7 @@ Despite his wild ambitions to colonize Mars and revolutionize the automotive ind
 
 **This week’s theme is:** Learning from Elon
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Be in the details, not the day-to-day
 Elon attends very detailed design review sessions for the major projects he cares about – e.g. sessions to design a robot’s hands. But he also has 30+ direct reports, way too many to be across the day-to-day of everything.
@@ -120,7 +120,7 @@ Many VCs will tell you to hire like crazy when you have [product-market fit](/fo
 
 - **[The state of SaaS pricing](https://www.growthunhinged.com/p/the-state-of-usage-based-pricing) – Kyle Poyar:** A comprehensive look at the current state of pricing for SaaS products, trends around usage-based pricing, and a potential new model for SaaS pricing.
 
-- **[How we built our onboarding email flow (with actual performance data)](/blog/how-we-built-email-onboarding) – Joe Martin**: ”Marketers believe onboarding emails are a powerful. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.”
+- **[How we built our onboarding email flow (with actual performance data)](/blog/how-we-built-email-onboarding) – Joe Black**: ”Marketers believe onboarding emails are a powerful. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.”
 
 - **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch:** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
 

@@ -13,6 +13,8 @@ features:
   errorTracking: true
 ---
 
+import TracingHeaders from '../../_snippets/tracing-headers.mdx'
+
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
@@ -50,6 +52,12 @@ import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.m
 
 <IdentifyFrontendCallout />
 
+### Linking client and server events
+
+Next.js apps usually capture on both sides. To keep them on the same person, use the same distinct ID in both, and let the browser tell your server which one that is.
+
+<TracingHeaders />
+
 <DetailSetUpReverseProxy />
 
 <DetailGroupProductsInOneProject />
@@ -69,7 +77,7 @@ See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 - [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
 
-You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+You can also read [the full `posthog-js` documentation](/docs/libraries/js/usage) for all the usable functions.
 
 ## Server-side analytics
 

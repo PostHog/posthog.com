@@ -1,0 +1,54 @@
+---
+title: MCP SDK v2
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+The `2026-07-28` MCP revision removes the `initialize` handshake and protocol sessions. The TypeScript SDK serves it on MCP SDK v2, and the Go SDK on go-sdk v1.8.0 or later. The Python and Ruby SDKs serve it too. This page covers what that revision changes for your analytics.
+
+To set up a server on either revision, see the installation page for [TypeScript](/docs/mcp-analytics/installation/typescript), [Python](/docs/mcp-analytics/installation/python), [Go](/docs/mcp-analytics/installation/go), or [Ruby](/docs/mcp-analytics/installation/ruby).
+
+## Sessions on `2026-07-28`
+
+That revision removed the `initialize` handshake and the `Mcp-Session-Id` header, so the [stateless session token](/docs/mcp-analytics/installation/typescript#stateless-and-multi-pod-servers) doesn't apply. Use a conversation handle to correlate requests:
+
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – enabled by default. The SDK injects a `conversation_id` parameter and returns a handle in eligible tool results. Calls share a `$session_id` when the agent echoes that handle. Clients that ignore it can still produce a separate session per request.
+- **[`identify`](/docs/mcp-analytics/identifying-users)** – attributes calls to a person via `distinct_id`. Use it for user-level grouping. It does not provide a `$session_id`.
+
+The protocol revision belongs to each request. A v2 server also serves `2025-11-25` traffic, which most clients still negotiate.
+
+<CalloutBox icon="IconInfo" title="Missing client name on 2025-11-25 traffic?" type="fyi">
+
+On `2025-11-25`, the client sends its name and version only at `initialize`. For servers that create an instance per request, the SDK uses a session token. The transport must write response headers after the handler runs to send this token.
+
+`@rekog/mcp-nest` supports this with `enableJsonResponse: true`. The legacy path in `createMcpHandler` does not. On that path, expect `$mcp_client_name` and `$mcp_client_version` to be absent. `$mcp_protocol_version` remains available.
+
+</CalloutBox>
+
+## Capture model identity on both revisions
+
+Every SDK captures model identity on `2025-11-25` and `2026-07-28`. Recognized client metadata takes priority over the agent's self-reported `llm_model` argument. `$mcp_llm_model_source` records `"client_metadata"` or `"self_reported"`.
+
+Both sources are unverified. See [model capture](/docs/mcp-analytics/events#model-capture) for how the SDK reads it.
+
+## MCP Apps
+
+`@posthog/mcp` preserves MCP App tool metadata, `ui://` resources, structured tool output, result metadata, HTML, and content security policy metadata on both supported revisions. On the tested high-level `McpServer` path, injected `context` and `llm_model` arguments don't reach the App handler.
+
+The SDK captures App tool calls with intent, self-reported model, and protocol version. Resource listing and read requests emit `$mcp_resources_list` and `$mcp_resource_read` on both server paths. Resource payloads pass through unchanged. The SDK never captures a resource read body.
+
+## Not instrumented yet
+
+These gaps apply to the TypeScript and Python SDKs alike. For Go, see the note after the table.
+
+| `2026-07-28` feature | What you get today |
+| --- | --- |
+| **Tasks** (`io.modelcontextprotocol/tasks`) | A tool returning a task handle records an instant success, so task-based tools look fast and always-succeeding. |
+| **Multi round-trip** (`resultType: "input_required"`) | Each round counts as its own `$mcp_tool_call`, inflating call counts and durations. |
+| `server/discover` | Not captured – no session-start event on this revision. |
+| `Mcp-Method` / `Mcp-Name` headers | Not read. |
+| `clientCapabilities` in `_meta` | Not captured. `clientInfo` and protocol version are. |
+
+The Go SDK handles multi round-trip differently. It sends each `input_required` round as `$mcp_input_required`, and the retry that completes the call is the `$mcp_tool_call`. A round never carries a conversation handle. Rounds need go-sdk v1.8.0 or later, and the adapter needs v1.6.1 or later. The Go SDK doesn't handle tasks.
+
+Task-based tools and multi-round-trip tools can produce misleading counts and durations. Check these limitations before using their dashboard metrics.

@@ -430,7 +430,7 @@ export default function MixtapeEditor({ id, onSubmit }: MixtapeEditorProps): JSX
         )
     }
 
-    const shareUrl = isEditMode && typeof window !== 'undefined' ? `/fm?mixtape=${id}` : ''
+    const shareUrl = isEditMode ? `/fm?mixtape=${id}` : ''
 
     return (
         <ScrollArea>

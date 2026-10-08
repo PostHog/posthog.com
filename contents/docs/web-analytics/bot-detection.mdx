@@ -2,11 +2,11 @@
 title: Bot and traffic detection
 ---
 
-PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
+PostHog classifies traffic by user agent and source IP address so you can tell humans apart from bots, crawlers, and automation directly in your queries. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
 
 <CalloutBox icon="IconInfo" title="New feature" type="fyi">
 
-This is a brand new feature, and we're actively working on improving it – expanding the list of detected bots and refining classification over time. Function names and behavior may still change. If you have feedback or a bot we should detect, leave a comment on this page or open a pull request against the [bot definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+This is a brand new feature, and we're actively working on improving it – expanding the list of detected bots and refining classification over time. Function names and behavior may still change. If you have feedback or a bot we should detect, leave a comment on this page or open a pull request against the [bot definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py) or [bot IP definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_ip_definitions.py).
 
 </CalloutBox>
 
@@ -24,18 +24,20 @@ Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, 
 
 ```json
 {
-    "api_key": "<ph_project_token>",
-    "event": "$http_log",
-    "distinct_id": "server-log",
-    "properties": {
-        "$raw_user_agent": "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)",
-        "$current_url": "https://yoursite.com/blog/hello-world",
-        "$pathname": "/blog/hello-world",
-        "status_code": 200,
-        "method": "GET"
-    }
+  "api_key": "<ph_project_token>",
+  "event": "$http_log",
+  "distinct_id": "server-log",
+  "properties": {
+    "$raw_user_agent": "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)",
+    "$current_url": "https://yoursite.com/blog/hello-world",
+    "$pathname": "/blog/hello-world",
+    "status_code": 200,
+    "method": "GET"
+  }
 }
 ```
+
+For the full payload reference and copy-paste implementations (Cloudflare Worker, server middleware), see [sending HTTP log events](/docs/web-analytics/sending-http-logs).
 
 Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
 
@@ -50,16 +52,16 @@ How you set these depends on how you ingest. With the [capture API](/docs/api/ca
 
 ## Classification functions
 
-Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent for you.
+Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent`, which the JavaScript SDK, server-side capture, and `$http_log` events all set. Some SDKs send `$user_agent` instead, so the examples below pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip passing it, use the [virtual properties](#virtual-properties) below, which read `$raw_user_agent` for you.
 
-| Function | Returns | Example |
-| --- | --- | --- |
-| `isLikelyBot(user_agent)` | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot. | `true` |
-| `getTrafficType(user_agent)` | One of `AI Agent`, `Bot`, `Automation`, or `Regular`. | `Bot` |
+| Function                         | Returns                                                                                                                                                                                      | Example          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `isLikelyBot(user_agent)`        | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot.                                                                        | `true`           |
+| `getTrafficType(user_agent)`     | One of `AI Agent`, `Bot`, `Automation`, or `Regular`.                                                                                                                                        | `Bot`            |
 | `getTrafficCategory(user_agent)` | A subcategory such as `ai_crawler`, `ai_search`, `search_crawler`, `seo_crawler`, `social_crawler`, `monitoring`, `http_client`, or `headless_browser`. Returns `regular` for human traffic. | `search_crawler` |
-| `getBotType(user_agent)` | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering. | `search_crawler` |
-| `getBotName(user_agent)` | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic. | `Googlebot` |
-| `getBotOperator(user_agent)` | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic. | `Google` |
+| `getBotType(user_agent)`         | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering.                                                                           | `search_crawler` |
+| `getBotName(user_agent)`         | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic.                                                                                                          | `Googlebot`      |
+| `getBotOperator(user_agent)`     | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic.                                                                                 | `Google`         |
 
 `isLikelyBot` is named "likely" because detection is based on user agent heuristics – it can't confirm with certainty that a request is automated.
 
@@ -67,29 +69,29 @@ Each function takes a user agent string and returns its classification. PostHog 
 
 `getTrafficType` sorts every request into one of four traffic types:
 
-| Traffic type | Description | Examples |
-| --- | --- | --- |
-| `Regular` | Normal human visitors | Chrome, Safari, Firefox |
-| `AI Agent` | AI crawlers, search bots, and assistants | GPTBot, ClaudeBot, PerplexityBot |
-| `Bot` | Traditional crawlers and monitoring | Googlebot, Bingbot, AhrefsBot |
-| `Automation` | HTTP clients, headless browsers, and requests with no user agent | curl, Puppeteer, HeadlessChrome |
+| Traffic type | Description                                                      | Examples                         |
+| ------------ | ---------------------------------------------------------------- | -------------------------------- |
+| `Regular`    | Normal human visitors                                            | Chrome, Safari, Firefox          |
+| `AI Agent`   | AI crawlers, search bots, and assistants                         | GPTBot, ClaudeBot, PerplexityBot |
+| `Bot`        | Traditional crawlers and monitoring                              | Googlebot, Bingbot, AhrefsBot    |
+| `Automation` | HTTP clients, headless browsers, and requests with no user agent | curl, Puppeteer, HeadlessChrome  |
 
 ## Bot categories
 
 `getTrafficCategory` and `getBotType` return a finer-grained category within each traffic type:
 
-| Category | Traffic type | Description | Examples |
-| --- | --- | --- | --- |
-| `ai_crawler` | AI Agent | Training data collection | GPTBot, ClaudeBot, Google-Extended |
-| `ai_search` | AI Agent | AI-powered search results | OAI-SearchBot, Claude-SearchBot, Applebot |
-| `ai_assistant` | AI Agent | Real-time user-facing AI | ChatGPT-User, Claude-User, Perplexity-User |
-| `search_crawler` | Bot | Traditional search engines | Googlebot, Bingbot, Baidu |
-| `seo_crawler` | Bot | SEO analysis tools | AhrefsBot, SemrushBot, Majestic |
-| `social_crawler` | Bot | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack |
-| `monitoring` | Bot | Uptime and health monitoring | Pingdom, UptimeRobot, Datadog |
-| `http_client` | Automation | HTTP client libraries | curl, Wget, Python requests, axios |
-| `headless_browser` | Automation | Automated browsers | HeadlessChrome, Puppeteer, Playwright |
-| `no_user_agent` | Automation | Empty or missing user agent | – |
+| Category           | Traffic type | Description                   | Examples                                   |
+| ------------------ | ------------ | ----------------------------- | ------------------------------------------ |
+| `ai_crawler`       | AI Agent     | Training data collection      | GPTBot, ClaudeBot, Google-Extended         |
+| `ai_search`        | AI Agent     | AI-powered search results     | OAI-SearchBot, Claude-SearchBot, Applebot  |
+| `ai_assistant`     | AI Agent     | Real-time user-facing AI      | ChatGPT-User, Claude-User, Perplexity-User |
+| `search_crawler`   | Bot          | Traditional search engines    | Googlebot, Bingbot, Baidu                  |
+| `seo_crawler`      | Bot          | SEO analysis tools            | AhrefsBot, SemrushBot, Majestic            |
+| `social_crawler`   | Bot          | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack         |
+| `monitoring`       | Bot          | Uptime and health monitoring  | Pingdom, UptimeRobot, Datadog              |
+| `http_client`      | Automation   | HTTP client libraries         | curl, Wget, Python requests, axios         |
+| `headless_browser` | Automation   | Automated browsers            | HeadlessChrome, Puppeteer, Playwright      |
+| `no_user_agent`    | Automation   | Empty or missing user agent   | –                                          |
 
 ## Example queries
 
@@ -130,15 +132,17 @@ ORDER BY hits DESC
 
 ## Virtual properties
 
-For convenience, PostHog exposes the classification as virtual event properties. They read the user agent for you (falling back from `$raw_user_agent` to `$user_agent`), so you don't have to pass it in. They're available wherever you select event properties, including breakdowns:
+For convenience, PostHog exposes the classification as virtual event properties. They read `$raw_user_agent` for you, so you don't have to pass it in. Events that only carry `$user_agent` are classified as having no user agent. They're available wherever you select event properties, including breakdowns:
 
-| Property | Equivalent to |
-| --- | --- |
-| `$virt_is_bot` | `isLikelyBot(...)` |
-| `$virt_traffic_type` | `getTrafficType(...)` |
-| `$virt_traffic_category` | `getTrafficCategory(...)` |
-| `$virt_bot_name` | `getBotName(...)` |
-| `$virt_bot_operator` | `getBotOperator(...)` |
+| Property                 | Name in the UI     | Equivalent to             |
+| ------------------------ | ------------------ | ------------------------- |
+| `$virt_is_bot`           | Is bot             | `isLikelyBot(...)`        |
+| `$virt_traffic_type`     | Traffic type       | `getTrafficType(...)`     |
+| `$virt_traffic_category` | Traffic category   | `getTrafficCategory(...)` |
+| `$virt_bot_name`         | Bot name           | `getBotName(...)`         |
+| `$virt_bot_operator`     | Bot operator       | `getBotOperator(...)`     |
+
+The **Property** column is the name you use in SQL. The **Name in the UI** column is what you search for in the property picker when building an insight, dashboard, or breakdown.
 
 For example, to break down traffic without writing out the function:
 
@@ -154,23 +158,128 @@ ORDER BY events DESC
 
 ## Use in Product Analytics
 
-You don't need to write SQL to break traffic down. As long as your events carry a user agent – `$raw_user_agent` (set by server-side SDKs and `$http_log` events) or `$user_agent` (set by the JavaScript SDK) – the virtual properties work as breakdowns and filters in any [Product Analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
+You don't need to write SQL to break traffic down. As long as your events carry `$raw_user_agent` – set by the JavaScript SDK, server-side SDKs, and `$http_log` events – the virtual properties work as breakdowns and filters in any [Product Analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
 
 For example:
 
-- **Exclude bots from an insight** – add a filter where `$virt_is_bot` equals `false`.
-- **Break down traffic by type** – set the breakdown to `$virt_traffic_type` to split a trend into Regular, AI Agent, Bot, and Automation.
-- **See which crawlers hit a page** – filter to `$virt_is_bot` is `true` and break down by `$virt_bot_name`.
+- **Exclude bots from an insight** – add a filter where **Is bot** equals `false`.
+- **Break down traffic by type** – set the breakdown to **Traffic type** to split a trend into Regular, AI Agent, Bot, and Automation.
+- **See which crawlers hit a page** – filter to **Is bot** is `true` and break down by **Bot name**.
 
 Because the classification reads the raw user agent, this works for any event that carries one – including server-side and `$http_log` traffic – using the standard insight builder.
 
 ## How classification works
 
-Classification matches the user agent against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+Classification uses two signals:
+
+- **User agent patterns** – the user agent is matched against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+
+- **IP address ranges** – the source IP is checked against operator-published crawler IP ranges. Some crawlers – like ChatGPT-User browsing or Bing preview fetches – send real browser user agents with no bot token, so the source IP is the only reliable signal. PostHog currently checks ranges published by Google, OpenAI, Microsoft (Bing), Apple, Perplexity, and Ahrefs. The [IP definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_ip_definitions.py) are also open source.
+
+If either signal matches, the request is classified as bot traffic. You can also add your own rules on top of both lists – see [custom bot rules](#custom-bot-rules).
+
+## Custom bot rules
+
+The built-in lists only cover bots that PostHog knows about. If a bot matters to you but isn't detected – an internal load test, a partner integration, a niche crawler, or a scraper that sends a normal browser user agent – add a custom bot rule in your [project settings](https://app.posthog.com/settings/environment-customization#custom-bot-definitions).
+
+A custom rule counts as a bot everywhere **Is bot** is available, including insights, Web Analytics, and SQL. It updates all the [virtual properties](#virtual-properties), not only `$virt_is_bot`, and applies at query time, so it also classifies events you've already captured.
+
+The [classification functions](#classification-functions) only see the arguments you pass them, so they apply rules on the user agent but skip rules on other properties – use the virtual properties to get every rule.
+
+### Add a rule
+
+<Steps>
+
+<Step title="Open the custom bots settings">
+
+Go to **Settings** > **Customization** > **Custom bots**, or open them [directly](https://app.posthog.com/settings/environment-customization#custom-bot-definitions).
+
+</Step>
+
+<Step title="Name the bot and pick a category">
+
+Click **Add bot**, then enter a name, like `Acme scraper`, and pick a category. The name becomes the **Bot name** and **Bot operator** for matching events. The category sets the **Traffic category** and the **Traffic type**:
+
+| Category | Traffic type |
+| --- | --- |
+| Custom (default), Search crawler, SEO crawler, Social crawler, Monitoring | `Bot` |
+| AI crawler, AI search, AI assistant | `AI Agent` |
+| HTTP client, Headless browser | `Automation` |
+
+</Step>
+
+<Step title="Add conditions">
+
+Each condition matches one event property. Click **Add condition** to combine several, then choose whether **all** or **any** of them need to match.
+
+</Step>
+
+<Step title="Save">
+
+Click **Save**. PostHog checks every pattern when you save and tells you if one can't be used.
+
+</Step>
+
+</Steps>
+
+You can also manage rules without the web app. Ask an AI agent to list, create, or delete them over the [PostHog MCP](/docs/web-analytics/surfaces/mcp), or call the [web analytics API](/docs/web-analytics/surfaces/api) from your own scripts.
+
+### Properties and matchers
+
+A condition can match on any of these event properties:
+
+| Property in the rule | Event property |
+| --- | --- |
+| Raw user agent | `$raw_user_agent` |
+| IP address | `$ip` |
+| Library | `$lib` |
+| Host | `$host` |
+| Path name | `$pathname` |
+| Current URL | `$current_url` |
+| Browser | `$browser` |
+| OS | `$os` |
+| Browser language | `$browser_language` |
+| Screen width | `$screen_width` |
+| Screen height | `$screen_height` |
+| Country code | `$geoip_country_code` |
+| Referrer | `$referrer` |
+| Referring domain | `$referring_domain` |
+
+Each condition uses one of these matchers:
+
+- **contains** – the property contains the text anywhere. Case-insensitive.
+- **equals** – the property is exactly the text. Case-sensitive.
+- **matches regex** – the property matches a regular expression. Case-sensitive unless the pattern starts with `(?i)`.
+- **is in range** – the IP address is inside a CIDR range, like `192.0.2.0/24`. Only available for **IP address**.
+
+Regular expressions run in ClickHouse, which supports less than most regex engines. Lookaheads, lookbehinds, backreferences, and atomic groups aren't supported, and PostHog rejects a rule that uses them when you save it.
+
+### Which rule wins
+
+Your rules are checked before PostHog's built-in lists, in the order they're listed, and the first matching rule decides the classification. Drag rules in the editor to reorder them. Because your rules come first, you can also rename or recategorize a bot PostHog already detects. For example, if your own synthetic checks run in headless Chrome, a rule that matches `HeadlessChrome` with the category **Monitoring** makes those events count as `Bot` traffic instead of `Automation`.
+
+### Examples
+
+- **An internal load test** – **IP address** **is in range** `198.51.100.0/24`, in the **HTTP client** category.
+- **A scraper that names itself** – **Raw user agent** **contains** `AcmeBot`.
+- **A scraper that pretends to be a browser** – a combination no real visitor sends: **Screen width** **equals** `800` *and* **Screen height** **equals** `600` *and* **OS** **equals** `Linux`.
+- **A partner integration** – **Library** **equals** `posthog-python` *and* **Path name** **matches regex** `^/api/`.
+
+### Limits
+
+- Up to 50 rules per project
+- Up to 10 conditions per rule, and 100 conditions across all rules
+- Patterns up to 200 characters, and bot names up to 100 characters
+
+<CalloutBox icon="IconInfo" title="Custom rules tag events, they don't drop them" type="fyi">
+
+A custom rule only changes how events are classified, so you can still include or break down that traffic whenever you want. To stop bot events from being stored at all, use the **Filter Bot Events** [transformation](/docs/cdp/transformations), which accepts its own custom user agent patterns and IP ranges.
+
+</CalloutBox>
 
 ## Limitations
 
-Detection relies entirely on the user agent string, so two cases are worth keeping in mind:
+Detection is best-effort, so a few cases are worth keeping in mind:
 
 - **No user agent** – requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
-- **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. User agent detection is a best-effort heuristic, not a guarantee, which is why the boolean function is named `isLikelyBot`.
+- **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. IP-based detection catches known crawlers that use real browser user agents (such as ChatGPT-User and Bing preview fetches), but only covers operators that publish their crawler IP ranges. Bots from unpublished IP ranges with spoofed user agents can still evade detection, which is why the boolean function is named `isLikelyBot`. If you can identify one by its IP range or by a combination of properties, add a [custom bot rule](#custom-bot-rules).

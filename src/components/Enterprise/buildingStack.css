@@ -1,0 +1,74 @@
+.enterprise-building-scene {
+    --building-column: 27%;
+}
+
+.building-stack {
+    container: enterprise-building / size;
+    --floor-width: 94cqw;
+    --stack-start: 0px;
+    --stack-end: 100cqh;
+    --hog-height: calc(45cqw * 127 / 117);
+}
+
+.building-stack[data-building-stack='middle'] {
+    --stack-start: -20px;
+}
+
+.building-stack[data-building-stack='bottom'] {
+    --stack-start: -32px;
+    --stack-end: calc(100cqh + 20px - var(--hog-height) * 0.78);
+}
+
+.building-layout {
+    position: absolute;
+    inset: 0;
+    /* Spread the remaining space across the diamonds; never stretch the SVGs. */
+    --join-space: calc(
+        (var(--stack-end) - var(--stack-start) - var(--natural-height) * var(--floor-width)) / var(--joins)
+    );
+}
+
+.building-floor {
+    display: none;
+    position: absolute;
+    max-width: none;
+    width: var(--floor-width);
+    height: calc(var(--floor-width) * var(--art-ratio));
+    left: calc(50cqw + (var(--offset) - var(--base-x)) * var(--floor-width));
+    top: calc(
+        var(--stack-start) + (var(--rise-before) - var(--lift)) * var(--floor-width) + var(--index) * var(--join-space)
+    );
+    z-index: calc(10 + var(--index));
+}
+
+.building-floor[data-floor-index='base'] {
+    display: block;
+    --index: var(--joins);
+    --rise-before: var(--base-rise);
+}
+
+.building-hog {
+    position: absolute;
+    width: 45cqw;
+    height: var(--hog-height);
+    top: calc(100cqh + 20px - var(--hog-height));
+    left: calc(50cqw + var(--base-offset) * var(--floor-width) - 22.5cqw);
+}
+
+.building-shadow-column {
+    container-type: inline-size;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--building-column);
+    height: 100%;
+}
+
+.building-shadow {
+    position: absolute;
+    top: 0;
+    left: calc(50cqw + (var(--base-offset) - var(--base-x)) * 94cqw);
+    width: 94cqw;
+    height: 18.8cqw;
+    filter: blur(2.35cqw);
+}

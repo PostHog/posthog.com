@@ -1,0 +1,181 @@
+---
+title: SIEM integration
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  scale: full
+  enterprise: full
+---
+
+You can forward PostHog [activity logs](/docs/settings/activity-logs) into a security information and event management (SIEM) system to keep an audit trail alongside the rest of your security data, alert on changes, and satisfy compliance requirements.
+
+PostHog exposes activity logs as a paginated API that your SIEM polls on a schedule, so you configure the integration in your SIEM rather than in PostHog.
+
+There are two ways to configure a SIEM integration:
+- **Recommended setup:** Use the API
+- Use the [Splunk add-on](#splunk)
+
+## Before you start
+
+You need:
+
+- A personal API key with the `activity_log:read` scope. See [API authentication](/docs/api).
+- Organization admin or owner access, if you want activity across every project rather than one.
+
+## Recommended setup
+
+### 1. Choose an endpoint
+
+| Endpoint | Use it for |
+| --- | --- |
+| `GET /api/projects/@current/advanced_activity_logs/` | Activity in a single project |
+| `GET /api/organizations/<organization_id>/advanced_activity_logs/` | Activity across every project in the organization. Restricted to admins and owners |
+
+Most SIEM integrations use the organization endpoint, so one input covers the whole account.
+
+### 2. Poll oldest first and keep the cursor
+
+Set `ordering=created_at` to return the oldest entry first, and `follow=true` to keep the `next` link valid after the last entry.
+
+```
+GET /api/organizations/<organization_id>/advanced_activity_logs/?ordering=created_at&follow=true&page_size=200
+```
+
+Save the `next` link from each response and request it on the following poll. It returns only entries recorded since the previous request, so your SIEM never re-indexes the same entry.
+
+With `follow=true`, stop when `results` is empty rather than when `next` is null. The link stays valid so you can keep polling it.
+
+Without `follow=true`, the `next` link becomes null once you reach the newest entry, and you have no position to resume from.
+
+### 3. Request OCSF
+
+Set `schema=ocsf` to receive events in [Open Cybersecurity Schema Framework](https://schema.ocsf.io/) 1.5.0 instead of PostHog's own format. Most SIEM platforms parse OCSF without a custom parser.
+
+Activity maps to three OCSF classes:
+
+| Class | `class_uid` | Covers |
+| --- | --- | --- |
+| Entity Management | `3004` | Changes to insights, dashboards, feature flags, and other resources |
+| Authentication | `3002` | Logins and logouts |
+| Account Change | `3001` | SCIM provisioning changes |
+
+Activity types without a direct OCSF equivalent use `activity_id: 99` and carry the original PostHog activity name in `activity_name`, so nothing is dropped.
+
+### 4. Decide whether to include values
+
+By default, an event records which fields changed but not their values:
+
+```json
+{
+  "class_uid": 3004,
+  "activity_id": 3,
+  "severity_id": 1,
+  "time": 1785932169290,
+  "time_dt": "2026-08-06T12:16:09.290628+00:00",
+  "metadata": { "uid": "00000000-0000-0000-0000-000000000000", "version": "1.5.0" },
+  "entity": { "type": "FeatureFlag", "uid": "1234", "name": "beta-checkout" },
+  "actor": { "user": { "email_addr": "person@example.com" }, "app_name": "posthog-python" },
+  "src_endpoint": { "ip": "203.0.113.4" },
+  "unmapped": { "changed_fields": ["filters"] }
+}
+```
+
+This answers who changed what and when, which is what an audit trail needs.
+
+`time` is epoch milliseconds, as OCSF specifies. `metadata.uid` is the activity log entry's ID and is stable across replays, so you can deduplicate on it.
+
+Set `include_values=true` to also receive the previous and new values, mapped to the OCSF `entity` and `entity_result` attributes. Values can contain the content of the changed object, such as the body of a notebook or the targeting rules on a feature flag. Including them makes responses larger and sends that content to your SIEM, where it counts toward your ingest volume.
+
+### 5. Bound the first run
+
+Your first poll returns your full retained history, which can be large. To start from a specific point, add `start_date` with an ISO 8601 timestamp:
+
+```
+&start_date=2026-01-01T00:00:00Z
+```
+
+You can only backfill as far as your [retention period](/docs/settings/activity-logs#retention-periods) allows.
+
+## Splunk
+
+Install the [PostHog Splunk add-on](https://github.com/PostHog/splunk-add-on). Splunk polls PostHog on a schedule you set, so there is nothing to run or host yourself. The add-on works on both Splunk Cloud Platform and Splunk Enterprise.
+
+### 1. Install the add-on
+
+On **Splunk Cloud Platform**, go to **Apps** > **Find More Apps**, search for PostHog, and install. Splunk asks for your Splunk.com login to complete the install, which is a separate account from the one you use to sign in to Splunk Cloud. No restart is needed.
+
+On **Splunk Enterprise**, install from Splunkbase, or build it from source and copy the result into `$SPLUNK_HOME/etc/apps/`.
+
+### 2. Add your PostHog account
+
+Open the add-on from the Splunk apps menu, go to **Configuration**, and click **Add**.
+
+| Field | Value |
+| --- | --- |
+| Name | A name for the account, so you can pick it when you add an input |
+| PostHog host | `https://us.posthog.com`, `https://eu.posthog.com`, or your self-hosted address |
+| Personal API key | A key with the `activity_log:read` scope |
+
+The key is held in Splunk's encrypted credential store. One account can serve several inputs.
+
+Changing an account's host requires entering the key again, so a key does not travel to a new host on its own.
+
+If you self-host PostHog, enter your own address. It has to be https, because the key is sent as a bearer token on every request. If PostHog sits behind a reverse proxy, the proxy has to preserve the `Host` header: PostHog builds the paging links in its responses from the host it sees, and if those point at an internal address the add-on will not follow them.
+
+### 3. Add an input
+
+Go to **Inputs** and click **Create New Input**.
+
+| Field | Value |
+| --- | --- |
+| Name | A name for this input |
+| Account | The account you just added |
+| Organization ID | Find it in PostHog under **Settings** > **Organization** |
+| Interval | How often to poll, in seconds. 300 is a reasonable start |
+| Index | The index to write to. Note which one you pick, you need it to search |
+| Include changed values | Leave off unless you need before and after values |
+| Start date | Optional ISO-8601 lower bound for the first run |
+
+Save. Splunk polls on your interval and resumes from where it stopped, so entries are not collected twice.
+
+### 4. Confirm events are arriving
+
+Search the index you chose when you added the input:
+
+```
+index=<your index> sourcetype="posthog:activity_log"
+```
+
+To check the OCSF fields parsed correctly:
+
+```
+index=<your index> sourcetype="posthog:activity_log" | stats count by class_uid, activity_id
+```
+
+Events are timestamped with when the activity happened in PostHog, not when Splunk indexed them, so a `timechart` reflects real history.
+
+Set the time range to **All time** for this first check. Splunk's default range covers the last 24 hours, and your history is older than that, so a narrower range shows only a fraction of what was collected and looks like a partial sync.
+
+### Troubleshooting
+
+The add-on writes its own log, which you can search in Splunk with `index=_internal source=*ta_posthog_activity_logs*`. Raise the detail level on the add-on's **Configuration** > **Logging** tab.
+
+| Problem | Cause |
+| --- | --- |
+| `401` from PostHog | The personal API key is wrong or was revoked |
+| `403` from PostHog | The key does not have the `activity_log:read` scope |
+| Runs but indexes nothing | The input is up to date. Make a change in PostHog and wait for the next poll |
+
+To re-read history from the beginning, add a new input with a different name. The collection position is stored per input name and is not removed when you delete an input, so an input recreated under the same name resumes where the old one stopped and collects nothing.
+
+### Building your own input
+
+Splunk Cloud does not let you create scripted inputs, and the roles available to customers do not include the capability to add one. Polling from Splunk Cloud requires an add-on, which is why the one above exists. On Splunk Enterprise you can write a scripted input against the API described earlier on this page if you would rather not use the add-on.
+
+## Other SIEM platforms
+
+The approach is the same for any platform that can poll an HTTP endpoint on a schedule: request OCSF, order oldest first, follow the cursor, and store it between runs. Deduplicate on `metadata.uid`, which carries the PostHog activity log ID and is stable across replays.
+
+If you are integrating with a platform not covered here, [open a support ticket](https://us.posthog.com/#panel=support:support) and we can add steps for it.

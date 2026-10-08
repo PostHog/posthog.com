@@ -235,7 +235,7 @@ We only sent 1 cold message and got asked for a bunch of detail then ignored. It
 
 How did we get introductions? We always made an effort to be buddies with other founders - whether through helping people out, becoming friends with users or politely asking for advice from other founders that we look up to. If people believe in what you're working on, they will be happy to introduce you to others. The better your idea, the closer your relationships and the more traction you have, the more success you'll have here.
 
-Investors must miss out on so many deals because of this, yet it's a weird form of social proof that I guess must work even if it means missing false positives. I imagine this is quite socially harmful - if you're network is weaker and further from the most decisive VCs, you will have a harder time raising money for your company.
+Investors must miss out on so many deals because of this, yet it's a weird form of social proof that I guess must work even if it means missing false positives. I imagine this is quite socially harmful - if your network is weaker and further from the most decisive VCs, you will have a harder time raising money for your company.
 
 It strikes me that [YC's application form process](/blog/before-yc) doesn't work that way at all - we did no hustle to get in.
 

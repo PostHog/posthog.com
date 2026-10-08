@@ -8,40 +8,9 @@ import Wizard from 'components/Wizard'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
-
-const Input = ({
-    label,
-    type = 'text',
-    touched,
-    error,
-    ...props
-}: {
-    label: string
-    type?: string
-    touched: boolean
-    error?: string
-    [key: string]: any
-}) => {
-    return (
-        <div>
-            <div className="flex items-center space-x-2">
-                <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                    {label}
-                </label>
-                <div>
-                    <input
-                        className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
-                        type={type}
-                        id={props.name}
-                        placeholder={label}
-                        {...props}
-                    />
-                </div>
-            </div>
-            {touched && error && <p className="text-red text-xs m-0 mt-1 ml-[98px]">{error}</p>}
-        </div>
-    )
-}
+import Input from 'components/OSForm/input'
+import PostHogButton from './PostHogButton'
+import { isPostHogEmail } from 'lib/employee'
 
 const errorMessages: Record<string, string> = {
     'Email or Username are already taken': 'An account with this email already exists',
@@ -71,8 +40,8 @@ const RegisterForm: React.FC = () => {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
-            } else if (values.email.toLowerCase().endsWith('@posthog.com')) {
-                errors.email = 'Your employee account is created automatically. Reset your password to log in.'
+            } else if (isPostHogEmail(values.email)) {
+                errors.email = 'Your employee account is created automatically. Sign in with PostHog instead.'
             }
             if (!values.password) {
                 errors.password = 'Required'
@@ -127,16 +96,24 @@ const RegisterForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
                         <h3 className="text-base font-semibold leading-tight mb-4">Create your PostHog.com account</h3>
+                        <PostHogButton label="Sign up with PostHog" className="mb-2" />
+                        <div className="flex items-center gap-2 text-xs text-muted my-2">
+                            <span className="flex-1 border-t border-border" />
+                            or
+                            <span className="flex-1 border-t border-border" />
+                        </div>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="First name"
                                 type="text"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.firstName}
                                 error={errors.firstName}
                                 {...getFieldProps('firstName')}
@@ -144,6 +121,8 @@ const RegisterForm: React.FC = () => {
                             <Input
                                 label="Last name"
                                 type="text"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.lastName}
                                 error={errors.lastName}
                                 {...getFieldProps('lastName')}
@@ -151,6 +130,8 @@ const RegisterForm: React.FC = () => {
                             <Input
                                 label="Email"
                                 type="email"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.email}
                                 error={errors.email}
                                 {...getFieldProps('email')}
@@ -158,6 +139,8 @@ const RegisterForm: React.FC = () => {
                             <Input
                                 label="Password"
                                 type="password"
+                                size="sm"
+                                direction="row"
                                 touched={!!touched.password}
                                 error={errors.password}
                                 {...getFieldProps('password')}

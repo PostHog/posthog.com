@@ -4,7 +4,6 @@ import Link from 'components/Link'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
 
 export default function Home(): JSX.Element {
     return (

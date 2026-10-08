@@ -102,7 +102,11 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
 3. Make sure the manager is sharing all of this feedback with their team to help them improve.
 
+The keeper test is only sent for team members who have passed their [probation period](/handbook/people/compensation#probation-period). New starters are covered by the [30, 60, and 80-day check-ins](/handbook/people/onboarding#306090-day-check-ins) instead, so if you do not get a keeper test form for someone who joined recently, that is expected.
+
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
+
+Feedback also flows the other way. Direct reports are periodically asked to give feedback on their manager through an automated form, rating them against what we expect managers to focus on and explaining why. This keeps the bar for managers high too, and gives them honest signal on how they're doing.
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
@@ -142,6 +146,25 @@ As such, management roles are paid on the same pay scale as other ICs. Becoming 
 Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
 
 Additionally, managers who are excelling with their teams may have limited interaction with their own manager. This is because, as discussed [above](#part-time-managers), management is intentionally spread thin. If you feel like your manager is mostly ignoring you, this isn't necessarily a bad thing and usually means you and your team are doing a fine job!
+
+## What to expect from your Blitzscale team member if they are your manager
+
+The Blitzscale team's mission is to enable all other PostHog small teams to be successful. If you report into a Blitzscale team member here is what you can expect from them:- 
+
+- They will make sure you know what our mission is and how you and your team contribute to that
+- They will make sure you know what our strategy is and how you and your team contribute to that
+- They will share context with you from outside of your team
+- they will be responsible for balancing people and work amongst their teams - this also involves hiring and firing decisions, although they will rely on you to gather insights into these areas
+- They will reinforce good cultural behaviour & our values
+- They will help you prioritize when time or resources are limited aka unblock you 
+- They will re-orient you in the right direction if needed
+
+Here is a list of things you should not expect from them
+- micromanaging
+- lots of 1-1s
+- a detailed plan of how to do your job or be a manager
+- regularly work through problems live.... it's "you're the driver" not "blitzscale team member is the driver" it's not as catchy 
+
 
 ## Recommended reading
 

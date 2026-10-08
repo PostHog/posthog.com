@@ -52,6 +52,12 @@ If you can pull feature flag data from another tool programmatically, you can us
   classes="rounded"
 />
 
+<CalloutBox icon="IconInfo" title="Feature flag limits" type="fyi">
+
+Each team can have a maximum of 2,000 non-deleted feature flags. Individual flag filters are limited to 512KB. These limits are enforced when creating new flags. If you hit a limit, delete unused flags or simplify your filter conditions. See [troubleshooting](/docs/feature-flags/troubleshooting#why-cant-i-create-a-new-feature-flag) for more details.
+
+</CalloutBox>
+
 ## Step 2. Add feature flag key and description (required)
 
 This is the _unique_ key you use in your code to evaluate the feature flag. Some examples of feature flag keys are `new-landing-page`, `betaFeature`, or `bigger_callout_button`.
@@ -128,6 +134,10 @@ Rollout percentages support decimal values with up to two decimal places of prec
 
 - If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
 
+- If the property you want to target lives in another system, like a plan tier in Stripe or a lifecycle stage in Salesforce, sync that table into the [data warehouse](/docs/data-warehouse) and map it onto person or group properties with [warehouse properties](/docs/data-warehouse/warehouse-properties). Flags can then target it like any other property. A [join](/docs/data-warehouse/join) does not work here, because flags evaluate against stored properties rather than at query time.
+
+> **Tip:** To target your team by email domain, use the `ends with` operator (like `email ends with @posthog.com`) rather than `contains`, which also matches lookalike domains like `posthog.computer.com`. See [property filter operators](/docs/data/property-filters#string-operators) for the full list.
+
 When you target a person property of `distinct_id equals`, the value field searches persons by name, email, or distinct_id, so you don't need to paste a raw ID. A person with multiple distinct_ids – for example an anonymous device ID plus an identified email – appears as a separate option per ID, so you can pick the specific one the SDK captures under. The stored filter value is still the literal distinct_id, so flag evaluation is unchanged.
 
 <ProductScreenshot
@@ -139,11 +149,34 @@ When you target a person property of `distinct_id equals`, the value field searc
 
 #### Stop evaluation at first matching condition set
 
-By default, PostHog evaluates all condition sets and returns a match if any condition passes. This means a user who is excluded by one condition's rollout percentage can still match a later condition.
+This setting is off by default, and leaving it off means your flag evaluates exactly as it always has. Turning it on only changes what happens when a user matches a condition set's property filters but falls outside that set's rollout percentage:
 
-Enable **Stop evaluation at first matching condition set** to change this behavior. When enabled, conditions are evaluated in order – the first matching condition set determines the result and later conditions are skipped. If a user matches a condition's property filters but falls outside the rollout percentage, evaluation stops immediately and the flag returns `false`.
+- **Off (default):** the user falls through to the next condition set. A pass on any condition set is a pass.
+- **On:** evaluation stops there and the flag returns `false`. Later condition sets are never evaluated.
 
-This is useful when you want more deterministic flag behavior – for example, ensuring that a user who matches a targeted condition but is excluded by its rollout doesn't "fall through" to a broader catch-all condition below.
+Condition sets are evaluated top to bottom, in the order they appear in the UI.
+
+##### Example
+
+Say a flag has three condition sets, and your test user matches the property filters on all three:
+
+| # | Condition set | Rollout |
+| --- | --- | --- |
+| 1 | `email` contains `@example.com` | 25% |
+| 2 | `plan` equals `enterprise` | 25% |
+| 3 | Everyone | 100% |
+
+**Off (default):** the user is evaluated against set 1, where there's a 25% chance they fall inside the rollout. If they're in the 75% that don't, they move on to set 2, then to set 3 – where they match the 100% rollout and the flag returns `true`.
+
+**On:** the user is evaluated against set 1. If they're in the 75% outside its rollout, the flag returns `false` immediately and sets 2 and 3 are never evaluated.
+
+Use this when you want a user who is excluded by a targeted condition's rollout to stay excluded, rather than falling through to a broader catch-all condition below.
+
+##### Things to keep in mind
+
+- **The rollout percentage has to be what excluded them.** This is the only check that triggers an early exit. Anything else that fails – a property filter, a cohort, a [flag dependency](/docs/feature-flags/dependencies), or a missing group key – just means that condition set didn't match, and evaluation continues to the next one as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
+- **Order your condition sets narrowest first.** A broad catch-all set near the top will short-circuit the more specific sets below it. A set rolled out to 100% never triggers an early exit, since nobody falls outside its rollout.
+- **Rollout buckets are shared across condition sets.** For sets that target the same entity, a user's bucket comes from the flag key and their identifier, not the condition set – so falling through to a set with an equal or smaller rollout percentage can never succeed, only a larger one can.
 
 <CalloutBox icon="IconInfo" title="Local evaluation support varies by SDK" type="fyi">
 
@@ -163,7 +196,7 @@ To use semver targeting:
 
 This is especially useful for mobile apps where you want to roll out features to users on specific version ranges, like enabling a feature for everyone on version `>= 2.0.0` or targeting a bug fix at versions `< 1.5.0`.
 
-> **Note:** Semver operators work on any string property, but they are most useful with version-formatted values. The property value should follow semver conventions (e.g., `1.2.3`) for accurate comparisons. Mobile SDKs automatically include `$app_version` – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
+> **Note:** Semver operators work on any string property, but they are most useful with version-formatted values. Common mobile version formats are supported during server-side (remote) flag evaluation: two-component versions like `3.10` are automatically normalized to `3.10.0`, and zero-padded versions like `3.08` are normalized to `3.8.0`. Pre-release and build suffixes (e.g., `-alpha.1`, `+build.7`) are preserved in the value, though build metadata doesn't affect matching. Mobile SDKs automatically include `$app_version` – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
 
 #### Advanced release conditions
 
@@ -190,12 +223,6 @@ These are some _optional_ toggles for feature flag behavior. This section descri
 > Default: `Enabled`
 
 This determines whether your flag is enabled on creation. Disabled flags return `undefined` or `null` when evaluated. You can always re-enable or disable the flag later.
-
-### Create usage dashboard (optional)
-
-> Default: `Enabled`
-
-Automatically track how often this flag is called and what values are returned. Creates a dashboard with call volume trends and variant distribution insights.
 
 ### Persisting Feature Flags across authentication steps (optional)
 
@@ -299,6 +326,7 @@ Flags without evaluation contexts continue to evaluate for all requests (default
 - Supported SDKs must send the `evaluation_contexts` request parameter with matching contexts for the flag to evaluate (the legacy `evaluation_environments` request parameter is supported by some SDK versions)
 - Flags with no evaluation contexts will evaluate for all requests (default behavior)
 - At least one evaluation context must match for the flag to be included in the evaluation
+- Evaluation contexts and and evaluation runtime do not affect local evaluation behavior
 
 </CalloutBox>
 

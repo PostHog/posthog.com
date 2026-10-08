@@ -51,7 +51,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
     }
 
     return (
-        <div data-scheme="primary" className="border border-primary p-4 bg-primary rounded-md">
+        <div data-scheme="primary" className="border border-primary p-4 bg-primary rounded-md text-primary">
             {submitted ? (
                 <p className="m-0 text-sm">Thanks! We'll email you when it's back in stock.</p>
             ) : (

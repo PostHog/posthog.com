@@ -74,7 +74,7 @@ This is when you start working with your customers. Reach out, take the first ca
 - You're already reaching out to our customer base.
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
-- Evaluate implementations as you go - is the customer set up well, are they getting value? The [foundation check](https://posthog.com/handbook/cs-and-onboarding/foundation-check) and [health check](https://posthog.com/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
+- Evaluate implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](https://posthog.com/handbook/cs-and-onboarding/foundation-check) and [health check](https://posthog.com/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 - Keep working on your product knowledge. You can find a couple of [exercises here](https://posthog.com/handbook/onboarding/onboarding-team#how-to-deepen-your-knowledge).
 
@@ -134,7 +134,7 @@ Our customers are always central to our work. There’s time and space to work o
 Everything at PostHog changes really fast. That's how to keep up as a start:
 
 - Follow #tell-posthog-anything and #demo-posthog-anything daily for general announcements.
-- Follow #cs-sales-support channel daily - it's crucial for all folks in customer-facing roles.
+- Follow #group-cs-sales-support channel daily - it's crucial for all folks in customer-facing roles.
 - Stay on top of the #incidents channel to know what’s going on and be able to inform customers.
 - From time to time, it’s worth taking a look at #sales, #customer-success, #team-new-business-sales, #team-product-led-sales to get inspired by new ideas that other customer-facing folks implement, and what’s going on in general 
 - #changelog channel to stay up to date with newly released products and features.

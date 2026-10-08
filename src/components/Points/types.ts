@@ -11,14 +11,6 @@ export interface Reward {
 
 export type RewardCardState = 'idle' | 'confirming' | 'loading' | 'success' | 'error'
 
-export interface TransactionMetadata {
-    description?: string
-    redemption?: {
-        title?: string
-        code?: string
-    }
-    achievement?: {
-        iconURL?: string
-        title?: string
-    }
-}
+// Canonical definitions live in lib/strapi so it can type UserData.wallet without
+// importing from components/. Re-exported here for existing importers.
+export type { TransactionMetadata, Transaction, Wallet } from 'lib/strapi'

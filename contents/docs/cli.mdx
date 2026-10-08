@@ -4,29 +4,41 @@ sidebar: Docs
 showTitle: true
 ---
 
+import PlatformInstall, { cliInstallSchema } from "components/PlatformInstall"
+import CLIDownload from "./error-tracking/_snippets/cli/download.mdx"
+
 The PostHog CLI lets you use PostHog from your terminal, your coding agents, local scripts, and CI/CD pipelines.
 
-- **API**: Use `posthog-cli api` to access PostHog's API and MCP tool catalog from shell-friendly commands
-- **Querying data**: Run SQL queries against data in PostHog
-- **Source maps**: Inject and upload source maps for PostHog error tracking
+- **API**: Use `posthog-cli api` to access PostHog's API and MCP tool catalog from shell-friendly commands, including running SQL queries against your data
+- **Source maps**: [Inject and upload source maps](/docs/error-tracking/upload-source-maps/cli) for PostHog error tracking
 - **Schema management**: Download and check schema definitions for product analytics workflows
 - **Tasks:** List, create, update, and delete PostHog tasks
 
+The CLI is open source. You can find the code in the [`cli` directory of the PostHog repo](https://github.com/PostHog/posthog/tree/master/cli).
+
 ## Installation
 
-Install the PostHog CLI with our wizard by running this command:
+Install the PostHog CLI with our wizard:
+
+<PlatformInstall schema={cliInstallSchema} />
+
+If you'd rather not use our wizard, you can install the CLI with npm, the install script, Homebrew, or Cargo.
+
+<CLIDownload />
+
+> **Using Claude Code, Codex, or another coding agent?**: You should follow our [CLI setup for agents](#setup-for-agents) instructions.
+
+### Updating
+
+To update the CLI, run:
 
 ```bash
-npx -y @posthog/wizard@latest cli add
+posthog-cli update
 ```
 
-If you'd rather not use our wizard, you can install the CLI by running:
+If you installed with the install script, this updates the CLI in place. If you installed with npm, Homebrew, or Cargo, it prints the command your package manager uses to update instead. For example, Homebrew users run `brew upgrade posthog-cli`.
 
-```bash
-npm install -g @posthog/cli@latest
-```
-
-Note: if you are installing the CLI for use with a coding agent, you should follow our [setup for agents](#setup-for-agents) instructions.
+`posthog-cli update` is available from version 0.18.7. On an older version, reinstall the CLI with the same method you used to install it.
 
 ### Authentication
 
@@ -62,6 +74,19 @@ For broad agent workflows, create a [personal API key](https://app.posthog.com/s
 | `posthog-cli exp` | Run experimental commands |
 | `posthog-cli help` | Print CLI help or help for a subcommand |
 
+## Global options
+
+These options apply to any command and go before the subcommand (for example, `posthog-cli --dry-run hermes upload ...`).
+
+| Option | Description |
+| --- | --- |
+| `--host <HOST>` | PostHog host to connect to. Defaults to `https://us.posthog.com`. |
+| `--no-fail` | Disable non-zero exit codes on errors. Use with caution. |
+| `--skip-ssl-verification` | Skip SSL certificate verification when talking to the PostHog API. Use only with self-signed certificates. |
+| `--rate-limit <RATE_LIMIT>` | Set the number of requests per minute for the PostHog API client. Also settable via `POSTHOG_CLIENT_RATE_LIMIT`. |
+| `--dotenv-file <PATH>` | Load PostHog credentials from a dotenv-style file when not present in the process environment. |
+| `--dry-run` | Skip artifact processing and upload (sourcemap, dSYM, hermes, proguard) without contacting PostHog or requiring credentials. Intended for CI gates, not release builds. Also settable via `POSTHOG_CLI_DRY_RUN`. |
+
 ## Using the CLI with a coding agent
 
 PostHog supports both CLI and [MCP](/docs/model-context-protocol) interfaces for agent workflows. You usually only need one, and which one you choose depends on how you want the agent to interact with PostHog.
@@ -80,7 +105,9 @@ MCP is also preferred when you want a native tool-calling experience, you need t
 
 Agents don't automatically know that a CLI tool exists or is available, so we need to tell them. The PostHog wizard installation path inserts agent instructions into the instructions file your agent reads, such as `AGENTS.md` or `CLAUDE.md`.
 
-`npx -y @posthog/wizard@latest cli add`
+```bash
+npx -y @posthog/wizard@latest cli add
+```
 
 If you wish to install the CLI directly, you should add a snippet in your agent's instructions or tell it directly to use the `posthog-cli` for PostHog tasks. You can manually install the snippet with `posthog-cli api agents-md install [--path AGENTS.md]`.
 
@@ -122,7 +149,7 @@ If the snippet is installed but the agent still ignores the CLI, check that the 
 
 ### The `api` command is unavailable
 
-Install the latest version of the CLI, then rerun the command:
+Your CLI version is too old to include `api` or `posthog-cli update`. Reinstall the latest version with the method you used to [install it](#installation), then rerun the command. For example, with npm:
 
 ```bash
 npm install -g @posthog/cli@latest
@@ -131,10 +158,10 @@ posthog-cli api --agent-help
 
 ### The tool list looks outdated
 
-The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command:
+The tool catalog is bundled with the CLI, so an old binary serves an old catalog. [Update the CLI](#updating) and rerun the command:
 
 ```bash
-npm install -g @posthog/cli@latest
+posthog-cli update
 ```
 
 If a tool you used before is gone, names change as the PostHog API evolves — use `search` to find the current name:

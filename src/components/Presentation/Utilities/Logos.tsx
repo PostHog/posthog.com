@@ -1,4 +1,4 @@
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { IconHeartFilled } from '@posthog/icons'
 import React from 'react'
 
@@ -16,9 +16,11 @@ export default function Logos({
     return (
         <div className="flex items-center gap-4">
             <Logo
-                noText
-                fill={color === 'text-white' ? 'white' : ''}
+                layout="logomark"
+                variant={color === 'text-white' ? 'mono' : 'gradient'}
+                color={color === 'text-white' ? 'white' : undefined}
                 className={`${size === 'sm' ? 'size-12' : 'size-20'}`}
+                width="auto"
             />
             {companyLogo && (
                 <>

@@ -1,0 +1,48 @@
+### Q4 2026 objectives
+
+### **Commercial universe dataset** – (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Build one materialized table of all active and churned customers, so that lead triggers use the same,  complete account context.
+
+**What we'll ship:**
+
+* `org_universe` table that joins billing (invoices, usage momentum, credits, and startup plan eligibility), account ownership and segments, Salesforce and third-party enrichment, and PostHog usage (events and enabled features)
+* Daily CRON in lead-gateway that queries `org_universe` and creates lead tasks
+* TAM lead triggers that fire only for TAM-owned accounts
+* Migrate existing lead triggers to query `org_universe` instead of separate HogQL queries
+
+### **Trusted lead score** – (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Make lead scores meaningful, so that GTM Humans trust them and get fewer noisy tasks.
+
+**What we'll ship:**
+
+* Compare Q3 lead scores with qualification and revenue outcomes
+* Skip tasks that GTM Humans consistently disqualify, and weight scores by task outcomes
+* Account potential score v0: estimate ACV from the median ACV of accounts with similar usage and company data
+* Improve the account potential score: compare predicted ACV with 30, 60, and 90-day growth
+
+### **Salesforce auto-deploy** – (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Finish the [`posthog-salesforce`](https://github.com/posthog/posthog-salesforce) deployment.
+
+**What we'll ship:**
+
+* Auto-deploy to Salesforce on merge to main
+
+### **Customer Analytics migration** – (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Finish the move of account ownership to Customer Analytics.
+
+**What we'll ship:**
+
+* Enrich Salesforce with billing data, such as the last invoice and the current billing period
+
+### **Stretch: Closed-won automation** – (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Automate invoice generation from closed-won deals.
+
+**What we'll ship:**
+
+* Invoice issuance
+* Credit setup

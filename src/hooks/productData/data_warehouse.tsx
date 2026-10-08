@@ -1,22 +1,18 @@
 import React from 'react'
 import { IconDatabase } from '@posthog/icons'
 import Link from 'components/Link'
+import { getTool } from '../../data/tools'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
 export const dataWarehouse = {
-    parentIcon: 'dataWarehouse',
+    ...getTool('data_warehouse'),
     Icon: IconDatabase,
-    name: 'Managed warehouse', // Query & visualize data
-    handle: 'data_warehouse',
     type: 'data_warehouse',
-    slug: 'data-stack/managed-warehouse',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'data',
-    status: 'beta',
     seo: {
-        title: 'Managed DuckDB warehouse - PostHog',
+        title: 'Managed Warehouse - PostHog',
         description:
             'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },
@@ -46,7 +42,7 @@ export const dataWarehouse = {
         classes: 'absolute bottom-0 right-0 max-w-[140px]',
     },
     slider: {
-        marks: [1000000, 10000000, 100000000, 1000000000],
+        marks: [1000000, 100000000, 1000000000],
         min: 1000000,
         max: 1000000000,
     },
@@ -57,7 +53,7 @@ export const dataWarehouse = {
             key: 'data_warehouse_historical',
             label: 'Data warehouse historical syncs',
             sliderConfig: {
-                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,
                 max: 10000000000,
             },

@@ -210,7 +210,7 @@ Ideally all the structure you’ve built up to this point prevents failure, but 
 
 First, you need to know when something goes wrong, so [implement monitoring](/docs/ai-observability/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
 
-> Monitoring production traces is essential. We even built a [monitoring tool](/llm-analytics) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
+> Monitoring production traces is essential. We even built a [monitoring tool](/ai-observability) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
 >
 > It’s hard to review 100 conversations. It’s impossible to review 1,000 conversations per day. Those conversations are real-world user questions and struggles, and provide all the insights you need to build the agent.
 
@@ -238,7 +238,7 @@ The solution? Add suggestions for how they can use your AI-powered features, nud
 
 Beyond issues with humanity and hallucination, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting.
 
-For real pros, you can also set up [AI Observability](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
+For real pros, you can also set up [AI Observability](/ai-observability), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
 
 ## Improving your feature
 
@@ -252,7 +252,7 @@ Building AI-powered features shouldn’t be the responsibility of some “AI guy
 
 There are a few ways you can encourage this:
 
--   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/llm-analytics). This helps developers focus on unique and value-added AI functionality.
+-   **Build primitives and make your AI functionality composable**, so teams don’t need to re-invent prompts, streaming, consent, evals, and [analytics](/ai-observability). This helps developers focus on unique and value-added AI functionality.
 
 -   **Have a consistent UX pattern across your app.** For us, that’s [Max](/max). This prevents death by a thousand AI widgets.
 
@@ -272,7 +272,7 @@ As the founder of Superhuman, Rahul Vohra, noted in [Lenny’s Newsletter](https
 
 Some ways to improve this:
 
--   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [AI Observability](/llm-analytics) to test this.
+-   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [AI Observability](/ai-observability) to test this.
 
 -   **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 

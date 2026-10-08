@@ -4,95 +4,143 @@ title: Running scanners
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
-There are two ways a scanner produces observations: automatically in the background as new recordings come in, or on-demand against recordings you pick. Both paths produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered.
+There are three ways a scanner produces observations: automatically in the background as new recordings come in, on demand against recordings you pick, or as a backfill over a past date range. All three produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered. The scanner's **Observations** tab shows which one triggered each scan: **Schedule**, **On demand**, **Retry**, or **Backfill**.
 
 ## Automatically on matching sessions
 
-Once a scanner is **enabled**, PostHog runs a background sweep every few minutes. The sweep:
+Once a scanner is **enabled**, PostHog runs a background sweep for it every five minutes. The sweep:
 
-1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed.
-2. Applies the sampling rate to that batch (so a 10% rate means roughly one in ten matching sessions get queued).
-3. Queues an observation per session for the model to process.
-4. Records the result – success, failure, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
+1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed. A recording becomes a candidate about 35 minutes after its session's last activity, so the session has ended before it's scanned.
+2. Skips recordings that can't be scanned: shorter than 15 seconds, fewer than 10 seconds of activity, or more than an hour of activity.
+3. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-filtering-by-quality) setting to drop low-activity recordings (**All recordings** keeps everything).
+4. Applies the sampling rate to what's left, so a 10% rate means roughly one in ten remaining recordings get queued.
+5. Queues an observation per recording for the model to process.
+6. Records the result – succeeded, failed, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
 
-Each `(scanner, session)` pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
+Each scanner and recording pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_observations_tab_2513e7ee3e.png"
-  alt="A scanner's observations list showing succeeded, running, pending, failed, and ineligible rows, triggered by both schedule and on demand"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_scanner_observations_tab_b0349b7a9c.png"
+  alt="A scanner's Observations tab: thumbnails, New tags, status, result, reasoning, and trigger for each observation"
   classes="rounded"
 />
 
-### When does the next sweep run?
+### When does the first sweep run?
 
-Sweeps run continuously – once a scanner is enabled, observations start accumulating within a few minutes. New results land on the scanner's Observations tab as they complete.
+Within a few minutes of enabling the scanner. On its very first sweep, a new scanner also scans up to three matching recordings from the last 24 hours, so you have results to look at without waiting for new sessions. After that, new results land on the Observations tab as they complete.
+
+A scanner whose filters make its sweeps very expensive to query sweeps less often, down to once an hour. It still catches up on every matching recording.
 
 ### What happens when I change filters?
 
-Changing a scanner's filters affects which **new** sessions match going forward. Old recordings aren't re-evaluated against the new filters. If you broaden the filters and want to backfill, trigger on-demand observations against the recordings you care about – the bulk [**Scan these recordings**](#from-the-recordings-list) action is the fastest way – or wait for new matches to come in.
+Changing a scanner's filters affects which **new** recordings match going forward. Old recordings aren't re-evaluated against the new filters. To scan earlier recordings that now match, run a [backfill](#backfill-a-date-range).
 
 ### What happens when I disable the scanner?
 
-Disabling stops the background sweep. Existing in-flight observations finish; no new ones get queued. On-demand triggers continue to work.
+Disabling stops the background sweep. Scans already in flight finish, and no new ones get queued. On-demand scans still work.
 
-## On-demand on recordings you pick
+Re-enabling restarts the sweep from the moment you turn it back on. Recordings from while the scanner was disabled aren't scanned or charged. Run a [backfill](#backfill-a-date-range) if you want them.
+
+## On demand on recordings you pick
+
+### From the scanner's Run tab
+
+Every scanner has a **Run** tab with three panels:
+
+- **Scan a single recording** – paste a session ID or a recording link and click **Scan recording**.
+- **Batch scan recordings** – filter your recordings inline and scan them one at a time with **Scan recording**, or select several and click **Scan N selected**. The button shows what the batch will cost. The filters start from the scanner's own filters, so the list opens scoped to the recordings it already watches. Recordings the scanner has already observed show their status and a **View observation** button instead, so you can't scan them twice. Recordings too short, too inactive, or too long to scan show **Skipped**: hover it to see why.
+- **Backfill a date range** – see [backfill a date range](#backfill-a-date-range).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_run_tab_bb010c81f4.png"
+  alt="A scanner's Run tab, with options to scan a single recording, scan a batch, or backfill a date range"
+  classes="rounded"
+/>
 
 ### From the replay player
 
-Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), then use the **Scan this recording** action. Pick the scanner you want to run, and PostHog queues a single observation against that session.
+Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), go to the **Observations** tab in the player sidebar, and use **Scan this recording**. Pick the scanner you want to run, and PostHog queues a single observation against that recording.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/player_scan_action_0e39437f9a.png"
-  alt="The replay player with the Scan this recording action open and a scanner picker listing available scanners"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_tab_93b1c58fc9.png"
+  alt="The replay player with the Observations sidebar open: the Scan this recording action, a chapter timeline, and the recording's observations"
   classes="rounded"
 />
 
-On-demand triggers:
-
-- Work even when the scanner is disabled (only the background sweep respects the toggle).
-- Skip the sampling rate – every on-demand trigger produces an observation if the session is eligible.
-- Are attributed to the user who triggered them, so you can tell apart "human spot-check" observations from "background sweep" observations.
+Below the player, **Summarize this recording** writes a summary of the recording you're watching. If your project has exactly one summarizer scanner, it uses that one, otherwise a built-in prompt. Use the menu next to the button to pick a different summarizer, and PostHog remembers your choice. A summary from the built-in prompt isn't saved as a scanner, so there is nothing to open or edit.
 
 ### From the recordings list
 
-To scan a batch in one go, select recordings in the [recordings list](/docs/session-replay/how-to-watch-recordings) and choose **Scan these recordings**, then pick a scanner. Each selected session is queued as its own observation. Sessions the scanner has already observed are skipped automatically, so re-scanning a selection is safe.
-
-This is also the fastest way to backfill after broadening a scanner's filters.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bulk_scan_recordings_e2422df8d8.png"
-  alt="The recordings list with three recordings selected and the Scan these recordings action open, showing the scanner picker"
-  classes="rounded"
-/>
+To scan a batch in one go, select recordings in the [recordings list](/docs/session-replay/how-to-watch-recordings) and choose **Scan these recordings**, then pick a scanner. Each selected recording is queued as its own observation. Recordings the scanner has already observed are skipped, so re-scanning a selection is safe.
 
 ### Via MCP
 
-You can also trigger an on-demand observation from your editor using the `vision-scanners-scan-session` MCP tool. See [Replay Vision MCP](/docs/replay-vision/mcp) for the full set of tools and example prompts.
+You can also scan from your editor with the `vision-scanners-scan-session` and `vision-scanners-scan-sessions` MCP tools. See [Replay Vision MCP](/docs/replay-vision/mcp) for the full set of tools and example prompts.
+
+### How on-demand scans differ
+
+On-demand scans:
+
+- Work even when the scanner is disabled. Only the background sweep follows the toggle.
+- Skip the filters, session coverage, and sampling rate. Every recording you pick is scanned if it's eligible.
+- Jump ahead of background and backfill work, so results arrive sooner.
+- Are attributed to the user who triggered them, so you can tell a person's spot-check apart from the background sweep.
+
+When a batch can't start every scan, PostHog tells you why: too many scans are already running, your organization's credits for the billing period are used up, or the scanner reached its own credit limit. Wait for running scans to finish, or see [quota and limits](/docs/replay-vision/quota-and-limits).
+
+## Backfill a date range
+
+A backfill scans every recording in a past date range that matches the scanner's filters, including recordings from before you created the scanner. Use it after creating a scanner, after broadening its filters, or to cover time it was disabled.
+
+On the scanner's **Run** tab, open **Backfill a date range**, pick a range (presets run from the last 3 hours to the last 90 days, or pick custom dates up to a year long), and check the **Estimated cost** before clicking **Start backfill**. A backfill:
+
+- Applies the scanner's filters, session coverage, and sampling rate, like the background sweep.
+- Skips recordings the scanner already observed, so you're never charged twice for one.
+- Freezes the scanner's settings when it starts. Editing the scanner later doesn't change a backfill that's already running.
+- Scans the most recent recordings first.
+- Runs alongside the background sweep without starving it.
+
+The estimate is an upper bound: recordings that turn out to be ineligible cost nothing. One scanner can run one backfill at a time.
+
+**Backfill history** lists every backfill with its progress, spend, and status. **View observations** opens the Observations tab filtered to that backfill, and **Cancel** stops one: scans already started finish, and nothing new starts.
+
+A backfill pauses when it can't spend:
+
+- **Paused (quota)** – your organization's monthly credits ran out. Click **Resume** once credits are available.
+- **Waiting on the scanner's credit limit** – the scanner reached its own limit. It resumes when the limit resets at the start of the next billing period.
+- **Waiting on the scanner to be enabled** – the scanner is disabled. It resumes when you enable it again.
+
+## Retrying a scan
+
+Failed scans show **Retry scan** on the observation page, in the Observations tab, and in the player. A retry deletes the failed observation and scans the same recording again with the scanner's current settings. Some failures are unlikely to change on a retry, and the button's tooltip says so. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure means.
+
+Ineligible observations offer a retry only when the outcome can change: when screen data may still have been ingesting (**Nothing to play back**), or when AI data processing was off and has since been turned on (**AI analysis not allowed**).
+
+A recording a scanner has already scanned successfully can't be scanned again by the same scanner. To get a fresh answer after changing the prompt, scan new recordings, or duplicate the scanner and scan the recording with the copy.
+
+## What counts against your credits
+
+Only succeeded observations cost credits, at the price of the scanner's model when the scan ran. Scans in flight reserve their credits until they finish. Failed and ineligible observations cost nothing, and a retry costs credits only if it succeeds. See [quota and limits](/docs/replay-vision/quota-and-limits) for budgets and per-scanner limits.
 
 ## Ineligible sessions
 
-Some sessions can't be analyzed – there's no recording data, the recording is too short to draw conclusions from, or the user did nothing the model can see. Rather than fail noisily, these come back marked **ineligible**.
+Some recordings can't be analyzed – there's no recording data, nothing to play back, or no events. Rather than fail noisily, these come back marked **ineligible**, with the reason in the status tooltip and on the observation page.
 
-The taxonomy:
-
-| Ineligible reason | What it means |
+| Reason | What it means |
 | --- | --- |
-| `no_recording` | The session referenced doesn't have replay data in storage |
-| `too_short` | The recording is below the minimum duration we'll scan |
-| `too_inactive` | The recording is long enough but the user was idle for almost all of it |
-| `too_long` | The recording is above the maximum duration we'll scan |
-| `no_events` | The recording has no analytics events at all |
+| **No recording** | No recording was found for the session. It may have expired or never been captured. |
+| **Nothing to play back** | The recording has no screen data to play back. Screen data may still be ingesting. |
+| **Too short** | The recording is shorter than 15 seconds. |
+| **Too inactive** | The recording has fewer than 10 seconds of activity. |
+| **Too long** | The recording has more than an hour of activity. |
+| **Too large** | The recording is too large to render as a video. |
+| **No events** | The session has no analytics events. |
+| **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran. |
 
 Ineligible observations:
 
-- Show up on the scanner's Observations tab with the reason, so you can audit why a session was skipped.
-- **Do not count against your [quota](/docs/replay-vision/quota-and-limits).**
-- Are not emitted as `$recording_observed` events – querying observations only ever returns succeeded ones.
+- Show up on the scanner's Observations tab with the reason, so you can audit why a recording was skipped.
+- **Don't count against your [quota](/docs/replay-vision/quota-and-limits).**
+- Aren't emitted as `$recording_observed` events. Querying observations only ever returns succeeded ones.
 
-If you're seeing a lot of ineligibles for one scanner, that's usually a signal to narrow the filters – e.g. exclude sessions below a duration threshold, or require at least one event. See [troubleshooting](/docs/replay-vision/troubleshooting) for more.
+If you see a lot of ineligibles for one scanner, see [troubleshooting](/docs/replay-vision/troubleshooting#im-getting-a-lot-of-ineligible-observations).

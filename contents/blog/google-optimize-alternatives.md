@@ -35,17 +35,17 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
+[PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/compare/ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
 
 PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other person properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
+PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/libraries/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
 
 ### How much does PostHog cost?
 
-PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 million events and 5,000 session recordings for free every month. You can calculate your price upfront using [PostHog's pricing calculator](/pricing) and set **billing limits** to avoid surprise bills.
+PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 million events, 5,000 web and 2,500 mobile session recordings for free every month. You can calculate your price upfront using [PostHog's pricing calculator](/pricing) and set **billing limits** to avoid surprise bills.
 
 ### Companies that use PostHog
 
@@ -88,13 +88,13 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[GrowthBook](/blog/posthog-vs-growthbook) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
+[GrowthBook](/compare/posthog-vs-growthbook) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
 
 It offers a basic visual editor so non-technical users can create experiments without writing code. GrowthBook's 'Guardrail' feature monitors for unintended second order effects of your change which you're not actively testing for.
 
 ### How much does GrowthBook cost?
 
-[GrowthBook](/blog/best-growthbook-alternatives) offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
+[GrowthBook](/compare/best-growthbook-alternatives) offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
 
 ### Companies that use GrowthBook
 
@@ -132,7 +132,7 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
-[VWO](/blog/best-vwo-alternatives) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
+[VWO](/compare/best-vwo-alternatives) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
 
 ### How much does VWO cost?
 
@@ -153,7 +153,7 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 - **Unlimited experiments:** <span className="text-red text-lg">✖</span>
 - **Best for:** Engineering and product teams
 
-[LaunchDarkly](/blog/best-launchdarkly-alternatives) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
+[LaunchDarkly](/compare/best-launchdarkly-alternatives) is a leading platform for feature management (feature flags) that also enables experimentation. Like all the products in this list, it supports A/B and multivariate testing. In contrast to Unbounce, however, LaunchDarkly is designed for product and engineering teams, so it lacks marketing-friendly features like a visual editor. 
 
 LaunchDarkly is a good option if you require a fully-featured feature flagging tool in addition to experimentation features, and it's particularly popular among enterprises with complex feature control needs.
 

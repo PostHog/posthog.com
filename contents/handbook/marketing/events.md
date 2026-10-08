@@ -92,7 +92,7 @@ Our brand is a reflection of us and [how we’re experienced by others](/blog/br
 
 **Words:** Naming products is hard. Same goes for naming events and writing their descriptions. As a prerequisite, read our primer on [writing for developers](/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And then again ask yourself, "would I attend this?" 
 
-**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
+**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/brand/assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
 
 ### Event recaps
 
@@ -102,7 +102,7 @@ PostHog team members who attended or presented at an event can share their feedb
 
 ## Sponsoring external events
 
-We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Speaking at events
 
@@ -113,7 +113,7 @@ For first-time yappers, reference the [speaker's guide](/handbook/marketing/spea
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Event submission form
 

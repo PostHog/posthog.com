@@ -1,0 +1,33 @@
+---
+title: Surveys in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where surveys are built, targeted, launched, and read. You write the questions, decide who sees them and when, watch responses arrive in real time, and every answer carries the respondent's [session replay](/docs/session-replay), events, and person properties.
+
+Open **Surveys** in [PostHog](https://app.posthog.com/surveys) to see every survey in your project with its status, response count, and schedule. Start from a template – NPS, product-market fit, churn, or open feedback – or write your own from scratch, and preview it before anyone sees it.
+
+## Before you start
+
+1. **Set up Surveys** – [install a PostHog SDK](/docs/surveys/installation) so they can be shown to users.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Create a survey](/docs/surveys/creating-surveys)** – pick a type (popover, widget, hosted form, or headless API), write your questions, style the appearance, and launch it.
+- **Choose how it's delivered** – a popover inside your product, an always-available feedback widget, or a hosted form with a shareable public URL for email, social, or a QR code.
+- **Target the right people** – limit a survey by URL, event trigger, device type, person properties, cohort, or a linked [feature flag](/docs/feature-flags), and set a wait period so you don't interrupt the same user twice.
+- **[Branch on answers](/docs/surveys/conditional-questions)** – send detractors and promoters down different question paths so nobody answers something irrelevant.
+- **[Read the results](/docs/surveys/viewing-results)** – the results tab, a dashboard widget, or your own insights and SQL, each response linked to its replay.
+- **[Send responses onward](/docs/surveys/destinations)** – post each answer to Slack, Discord, Microsoft Teams, or a webhook as it arrives.
+- **Run it on a schedule** – launch once or set a recurring schedule with a response limit, and stop it when you have enough.
+- **[Create surveys with PostHog AI](/docs/surveys/create-surveys-ai)** – describe the survey you want in plain language and PostHog AI writes the questions, targeting, and display conditions. It's an interaction mode inside the web app, not a separate surface.
+- **[Summarize responses with PostHog AI](/docs/surveys/summarize-responses-ai)** – pull themes, sentiment, and segment comparisons out of hundreds of open-text answers without reading them one by one.
+
+## Related
+
+- Get set up end to end in [Get started with Surveys](/docs/surveys/start-here).
+- Create and launch surveys from your editor over [MCP](/docs/surveys/surfaces/mcp).
+- Manage surveys programmatically with the [API](/docs/surveys/surfaces/api).
+- Review the Self-driving reports built from your responses in [PostHog Desktop](/docs/surveys/surfaces/desktop).

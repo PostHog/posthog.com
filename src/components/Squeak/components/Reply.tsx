@@ -7,7 +7,7 @@ import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
-import Logomark from 'components/Home/images/Logomark'
+import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import {
     IconArchive,
@@ -21,6 +21,7 @@ import {
     IconThumbsUp,
     IconThumbsUpFilled,
     IconTrash,
+    IconUndo,
 } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
@@ -93,7 +94,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
 const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
-    const { handleResolve } = useContext(CurrentQuestionContext)
+    const { handleResolve, mutateList } = useContext(CurrentQuestionContext)
     const [helpful, setHelpful] = useState<boolean | null>(null)
 
     const handleHelpful = async (helpful: boolean, feedback: string) => {
@@ -255,7 +256,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     } = reply
 
     const {
-        question: { resolvedBy, id: questionID, profile: questionProfile, resolved, topics },
+        question: { resolvedBy, id: questionID, profile: questionProfile, resolved, topics, forumTopic, locked },
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
@@ -268,15 +269,20 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
     const { addToast, removeToast } = useToast()
-    const { user } = useUser()
-    const isModerator = user?.role?.type === 'moderator'
+    const { user, isModerator, isForumModerator } = useUser()
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
-    const resolvable =
-        !resolved &&
-        (isAuthor || isModerator) &&
-        topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
+    // A forum topic turns solutions on or off. Other questions keep the # topic rule.
+    const solutionsAllowed = forumTopic?.data
+        ? forumTopic.data.attributes.solutionsEnabled
+        : topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
+    const resolvable = !resolved && (isAuthor || isForumModerator) && solutionsAllowed
+    // Moderators can change a solution anywhere, except in a forum topic with solutions off. A locked forum post
+    // refuses edits from everyone else. The server enforces both.
+    const showMarkSolution = forumTopic?.data
+        ? solutionsAllowed && (isForumModerator || (resolvable && !locked))
+        : isForumModerator || resolvable
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -359,13 +365,13 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 >
                                     <div className="mr-2 relative ml-[-2px]">
                                         <Avatar
-                                            className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full`}
-                                            image={getAvatarURL(profile?.data?.attributes)}
+                                            className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
+                                            image={getAvatarURL(profile?.data)}
                                             color={profile?.data.attributes.color}
                                         />
                                         {isTeamMember && (
                                             <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
-                                                <Logomark className="w-[16px]" />
+                                                <Logo layout="logomark" className="w-[16px]" />
                                             </span>
                                         )}
                                     </div>
@@ -394,15 +400,15 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`${isInForum ? 'size-[40px]' : 'size-[25px]'} rounded-full ${
+                                className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
-                                image={getAvatarURL(profile?.data?.attributes)}
+                                image={getAvatarURL(profile?.data)}
                                 color={profile?.data.attributes.color}
                             />
                             {isTeamMember && (
                                 <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                    <Logomark className="w-[16px]" />
+                                    <Logo layout="logomark" className="w-[16px]" />
                                 </span>
                             )}
                         </div>
@@ -420,7 +426,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
                             Solution
                         </span>
-                        {(isAuthor || isModerator) && (
+                        {(isAuthor || isForumModerator) && (
                             <button
                                 onClick={() => handleResolve(false, null)}
                                 className="text-sm font-semibold text-red dark:text-yellow"
@@ -431,7 +437,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     </>
                 )}
                 <div className="!ml-auto flex items-center space-x-1">
-                    {isModerator && (
+                    {isForumModerator && (
                         <OSButton
                             size="sm"
                             tooltip={
@@ -441,7 +447,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 </>
                             }
                             onClick={() => handlePublishReply(!!publishedAt, id)}
-                            icon={<IconArchive />}
+                            icon={publishedAt ? <IconArchive /> : <IconUndo />}
                         />
                     )}
                     {isModerator && (
@@ -471,7 +477,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                 </div>
             </div>
 
-            <div className={`border-l-0 ${isInForum ? 'pl-[calc(44px_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
+            <div className={`border-l-0 ${isInForum ? 'pl-[calc(2rem_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&
@@ -505,8 +511,8 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                                 </div>
                             )}
-                            <Markdown>{body}</Markdown>
-                            {!publishedAt && isModerator && (
+                            <Markdown className="reply-content">{body}</Markdown>
+                            {!publishedAt && isForumModerator && (
                                 <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
                                     This reply is unpublished and only visible to moderators
                                 </p>
@@ -525,7 +531,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
 
                         <div className="space-y-1 mt-2">
-                            {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
+                            {showMarkSolution && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
                                     onClick={async () => {
                                         setResolving(true)

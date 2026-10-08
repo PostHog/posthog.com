@@ -1,6 +1,6 @@
 import Breadcrumbs from 'components/Breadcrumbs'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import React from 'react'
 
 export default function Layout({ children, crumbs = [] }) {
@@ -9,8 +9,14 @@ export default function Layout({ children, crumbs = [] }) {
             <main>{children}</main>
             <footer className="px-4 mt-16 md:mt-32 pb-8">
                 <div className="flex items-center justify-between py-3 border-t border-b border-dashed border-primary">
-                    <Logo fill="primary" noText className="opacity-20" />
-                    <Link to="/questions" className="opacity-50 font-semibold text-black hover:text-black">
+                    <Logo
+                        variant="mono"
+                        color="currentColor"
+                        layout="logomark"
+                        className="text-primary opacity-20"
+                        width="auto"
+                    />
+                    <Link to="/forum" className="opacity-50 font-semibold text-black hover:text-black">
                         Questions?
                     </Link>
                 </div>

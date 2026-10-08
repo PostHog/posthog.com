@@ -1,11 +1,4 @@
-import CalloutBox from 'components/Docs/CalloutBox'
 import {ProductScreenshot} from 'components/ProductScreenshot'
-
-<CalloutBox icon="IconFlask" title="Prompt experiments are in beta" type="action">
-
-Prompt experiments are currently in beta. If you'd like early access, email [juraj@posthog.com](mailto:juraj@posthog.com).
-
-</CalloutBox>
 
 Prompt experiments let you A/B test two or more versions of the same prompt. PostHog splits your users between the versions, captures cost and latency for every generation, and shows which version wins.
 
@@ -75,9 +68,13 @@ posthog = Posthog(
 distinct_id = "<your-user-id>"
 flag_key = "<your-flag-key>"
 
-# send_feature_flag_events=True emits the $feature_flag_called exposure event the
-# experiment metric joins against. Without it the results page stays blank.
-payload = posthog.get_feature_flag_payload(flag_key, distinct_id, send_feature_flag_events=True)
+# get_flag() emits the $feature_flag_called exposure event the experiment
+# metric joins against. Without it the results page stays blank.
+flags = posthog.evaluate_flags(distinct_id, flag_keys=[flag_key])
+if not flags.get_flag(flag_key):
+    raise RuntimeError(f"Flag {flag_key} returned no variant")
+
+payload = flags.get_flag_payload(flag_key)
 if not payload:
     raise RuntimeError(f"No payload set for flag {flag_key}")
 if isinstance(payload, str):

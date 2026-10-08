@@ -74,6 +74,29 @@ The complete Onboarding Journey looks as follows:
 
 The last two stages of the Onboarding Journey are automated with Vitally playbooks. Second outreach prompts users to surface unanswered questions and book a session with us, and the Graduation email is a nice way to conclude the journey and point out other avenues where users can get help. It's also where we ask for feedback about our Onboarding. 
 
+#### Email link tracking
+
+Every link in the automated onboarding emails carries UTM parameters, so we can measure what customers actually click and report on notebooks created and prompts clicked rather than calls booked. The scheme is `utm_source=vitally`, `utm_medium=email`, `utm_campaign=onb_e1` through `onb_e4` (one value per email in the sequence), and `utm_content` naming the individual link:
+
+| Email | Tracked links (`utm_content`) |
+| -------- | -------- |
+| E1 - first outreach (cost + implementation) | `audit_prompt`, `billing`, `wizard_docs`, `calendly` |
+| E2 - second outreach (adoption) | `audit_prompt`, `calendly` |
+| E3 - last chance | `ai_assistant`, `prompts`, `calendly` |
+
+Where the numbers live:
+
+- The main view is the **Onboarding email link tracking** dashboard (<PrivateLink url="https://us.posthog.com/project/2/dashboard/1946614">link</PrivateLink>): per-email sections, per-link breakdowns, and all-time totals.
+- App links (the audit prompts, PostHog AI) sit behind a login: a logged-out click bounces to the sign-in page and its UTM properties are lost. The executive **Onboarding email link clicks (E1-E4)** insight (<PrivateLink url="https://us.posthog.com/project/2/insights/TKyFrkIR">link</PrivateLink>) therefore matches the campaign tag inside the page URL, which survives the redirect in double-encoded form, so every click counts whether or not the customer was logged in. A separate insight on the dashboard isolates the login-wall bounces.
+- Calendly clicks never reach PostHog. Calendly stores the UTMs on each booking instead, so filter the Calendly Meetings page by `utm_campaign` to attribute booked calls to emails.
+- The YouTube link in E3 is deliberately untracked (YouTube ignores UTM parameters, and we cannot read its analytics).
+
+The live templates and their sending playbooks (the templates are the canonical copies of the audit prompts and the full tracked URLs; we avoid pasting the tracked URLs here so stray clicks from this page do not pollute the data):
+
+- E1: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/dcf5f62b-463d-47b2-81df-ea522c240463">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/427384ad-f753-40fd-9473-c705d9911cbb">playbook</PrivateLink>
+- E2: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/4d8b1690-1a1e-4de2-a71e-3c08839df8aa">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/34522df1-065a-449b-9fc3-16a97c7921cf">playbook</PrivateLink>
+- E3: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/5e2637d8-29e9-4700-b227-33e1fe282f62">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/c8e8cd60-2af3-4f8b-945a-7eafae4148eb">playbook</PrivateLink>
+
 #### Account analysis for outreach and meetings
 
 -   Take a look at the [Metabase primer](https://posthog.com/handbook/onboarding/metabase-account-analysis) and follow the tips included there.

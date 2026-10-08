@@ -165,7 +165,7 @@ export const container = (type = 'primary', size = 'lg', width = 'auto') => cntl
     ${containerSizes[size as keyof typeof containerSizes]}
     w-${width}
     text-primary
-    inline-block
+    block
     border-button
     text-center
     group

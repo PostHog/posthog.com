@@ -12,7 +12,7 @@ featuredImage: >-
 category: Engineering
 tags:
   - Engineering
-  - AI Observability
+  - AI observability
 ---
 
 Software testing used to be relatively straightforward.
@@ -163,4 +163,4 @@ First, you observe real behavior with tracing. Then you turn the failures you se
 
 That matters because you are never going to cover every possible input. You cannot. The goal is not perfect coverage. The goal is to make sure every bad interaction teaches your system something permanent. Manual review finds the issue. An eval makes it repeatable. CI and production monitoring stop it from quietly coming back.
 
-If you are just getting started, you do not need a huge eval platform on day one. Start with tracing, one small dataset built from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-Judge evaluator for a subjective criterion, and a regular trace review ritual. That is enough to move from testing your agent by vibes to operating a real quality system.
+If you are just getting started, you do not need a huge eval platform on day one. Start with tracing, one small dataset built from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-Judge evaluator [for a subjective criterion](/newsletter/agent-autonomy#level-1-human-in-the-loop), and a regular trace review ritual. That is enough to move from testing your agent by vibes to operating a real quality system.

@@ -24,30 +24,18 @@ Additional reports will be added based on user feedback we receive via our [in-a
 ## Requirements
 
 - A Snapchat Ads account with permission to access data from accounts you want to sync.
-- Your ad account ID from the [Snapchat Ads Manager](https://ads.snapchat.com/) > **Ad Accounts** > The ad account ID will be visible next to the account name.
-- **Note:** You can also find it in the dashboard URL, e.g. `https://ads.snapchat.com/{ID_IS_HERE}/manage`.
 
-<ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_02_10_at_6_44_43_PM_c83b961fc0.png"
-    classes="rounded"
-    alt="Snapchat Ads account menu"
-/>
-
-<ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_02_10_at_6_45_03_PM_4eced5e6a8.png"
-    classes="rounded"
-    alt="Snapchat Ads account ID"
-/>
+> **Tip:** If you need to find your ad account ID manually, go to [Snapchat Ads Manager](https://ads.snapchat.com/) > **Ad Accounts**. The ID is visible next to the account name, or in the dashboard URL: `https://ads.snapchat.com/{ID_IS_HERE}/manage`.
 
 ## Configuring PostHog
 
-Connect PostHog to your Snapchat Ads account using a Snapchat account. The Snapchat account must have permission to access the ad account data you want to sync.
+Connect PostHog to your Snapchat Ads account using a Snapchat account. The Snapchat account must have permission to access data.
 
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/pipeline/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find Snapchat Ads in the sources list and click **Link**.
-4. Enter the **Ad Account ID** of the Snapchat Ads account you want to sync.
-5. Select an existing Snapchat Ads account, or create a new integration.
+4. Connect your Snapchat account by selecting an existing integration or creating a new one.
+5. Select your ad account from the dropdown. Accounts are grouped by organization and display their status (e.g. Active, Pending). Pending accounts typically haven't finished setup and may not have data to sync yet.
 6. (Optional) Add a prefix for the table name.
 
 ## Configuration

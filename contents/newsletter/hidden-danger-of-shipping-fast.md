@@ -131,7 +131,7 @@ Define a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-
 2. **Strategic upgrades:** Meaningful product improvements (not redefinitions) that don't require the full machinery of a major campaign. For example, [PostHog Logs launch](/blog/logs-ga).
 3. **Steady improvements:** Standard product development that doesn't require coordination beyond the product team. For example, AI Observability adding [time to first token](/changelog?id=2558).
 
-This is where brand helps. Things like [humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), narrative, and deliberate [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0) work because they lower the cost of paying attention. [Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) that own trust with your ICP is another way to extend mindshare beyond your brand channels.
+This is where brand helps. Things like [humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), narrative, and deliberate [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0) work because they lower the cost of paying attention. Partnering with influencers that own trust with your ICP is another way to extend mindshare beyond your brand channels.
 
 > **What this looks like:** Notion ships constantly, but markets selectively. Many features land with almost no fanfare, while a small number (AI, databases, templates) get sustained narrative investment over months.
 
@@ -201,7 +201,7 @@ What works better is publishing things that are useful even without your product
 
 Even better, teach the domain you operate in – not just how your product works. Figma, for example, teaches people how to be [better designers](https://www.figma.com/blog/insights/), not just how to use Figma.
 
-Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps).
+Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try [vibe coding](/compare/best-analytics-stack-for-vibe-coded-apps).
 
 > **What this looks like:** HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision – and by then, brand equity was already baked in.
 

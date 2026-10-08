@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
-import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
@@ -12,11 +12,19 @@ import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import Fuse from 'fuse.js'
-import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
 import { IconMapPin, IconList } from '@posthog/icons'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
+import { OSInput } from 'components/OSForm'
+import {
+    useGeocodedArea,
+    useCoordsByQuery,
+    buildMemberQuery,
+    isWithinBbox,
+    findEmployeeByName,
+} from 'components/HogMap/usePeopleGeo'
+import PeopleMapSearch from 'components/HogMap/PeopleMapSearch'
 
 export const TeamMember = (props: any) => {
     const {
@@ -249,10 +257,9 @@ export const TeamMember = (props: any) => {
                                         {/* Show first team's crest */}
                                         {teamData[0] && teamCrestMap?.[teamData[0].attributes.name] && (
                                             <CloudinaryImage
-                                                width={160}
                                                 src={teamCrestMap[teamData[0].attributes.name]}
                                                 alt={`${teamData[0].attributes.name} Team`}
-                                                imgClassName="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                                imgClassName="absolute -right-1 bottom-0 size-[20cqw] @[12rem]:size-[30cqw] object-contain transition-all"
                                             />
                                         )}
                                     </div>
@@ -280,128 +287,236 @@ export const TeamMember = (props: any) => {
     )
 }
 
-interface PeopleProps {
-    searchTerm?: string
-    filteredMembers?: any[] | null
-}
-
-export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
-    const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+export default function People({ initialView = 'list' }: { initialView?: 'list' | 'map' }) {
+    // View follows the route: /people is the list, /people/map is the map
+    const activeTab = initialView
+    const [searchQuery, setSearchQuery] = useState('')
+    const [filterBaseMembers, setFilterBaseMembers] = useState<any[] | null>(null)
+    const [isInitialized, setIsInitialized] = useState(false)
+    const [focusNonce, setFocusNonce] = useState(0)
 
     const {
         team: { teamMembers },
         allTeams,
     } = useStaticQuery(teamQuery)
-    const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
-    // Use filteredMembers from props if provided
-    const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
+    const token = typeof window !== 'undefined' ? process.env.GATSBY_MAPBOX_TOKEN : undefined
+    const isClient = typeof window !== 'undefined'
+
+    // The map uses dashed terms (#Lorena-Viana, #toronto); the list uses URI encoding.
+    const decodeHash = useCallback(
+        (raw: string): string => {
+            if (!raw) return ''
+            let v = raw
+            try {
+                v = decodeURIComponent(raw)
+            } catch {
+                v = raw
+            }
+            return initialView === 'map' ? v.replace(/-/g, ' ').trim() : v
+        },
+        [initialView]
+    )
+
+    const encodeHash = useCallback(
+        (term: string): string => {
+            const t = term.trim()
+            if (!t) return ''
+            return initialView === 'map' ? t.replace(/\s+/g, '-') : encodeURIComponent(t)
+        },
+        [initialView]
+    )
+
+    // Read the hash on mount and follow browser back/forward changes
+    useEffect(() => {
+        const applyHash = () => {
+            const hash = window.location.hash
+            const decoded = hash && hash.length > 1 ? decodeHash(hash.slice(1)) : ''
+            setSearchQuery((prev) => (prev === decoded ? prev : decoded))
+        }
+        applyHash()
+        setIsInitialized(true)
+        window.addEventListener('hashchange', applyHash)
+        return () => window.removeEventListener('hashchange', applyHash)
+    }, [decodeHash])
+
+    // Mirror the search query back into the URL hash
+    useEffect(() => {
+        if (!isInitialized) return
+        const current = window.location.hash ? decodeHash(window.location.hash.slice(1)) : ''
+        if (current === searchQuery) return
+        const encoded = encodeHash(searchQuery)
+        const newUrl = encoded ? `#${encoded}` : window.location.pathname + window.location.search
+        window.history.replaceState(null, '', newUrl)
+    }, [searchQuery, isInitialized, decodeHash, encodeHash])
+
+    const handleViewChange = (value: string) => {
+        // Clear the search term when switching views
+        setSearchQuery('')
+        const path = value === 'map' ? '/people/map' : '/people'
+        navigate(path)
+    }
 
     const teamSize = teamMembers.length - 1
 
-    // Create a map of team names to crest data for quick lookup
     const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
         acc[team.name] = team.crest?.data?.attributes?.url
         return acc
     }, {})
 
-    const fuse = useMemo(() => {
-        return new Fuse(baseMembers, {
-            keys: [
-                {
-                    name: 'fullName',
-                    getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
+    const availableFilters = useMemo(
+        () => [
+            {
+                label: 'Pineapple on pizza',
+                operator: 'is',
+                options: [
+                    { label: 'All', value: 'all' },
+                    { label: 'True', value: 'true' },
+                    { label: 'False', value: 'false' },
+                    { label: 'Undecided', value: 'undecided' },
+                ],
+                filter: (person: any, value: string) => {
+                    if (value === 'all') return true
+                    if (value === 'true') return person.pineappleOnPizza
+                    if (value === 'false') return person.pineappleOnPizza === false
+                    if (value === 'undecided') {
+                        return person.pineappleOnPizza === null || person.pineappleOnPizza === undefined
+                    }
+                    return true
                 },
-                'teams.data.attributes.name',
-                'companyRole',
-                'location',
-                'country',
-            ],
-            threshold: 0.3,
-        })
-    }, [baseMembers])
-
-    const debouncedSearch = useCallback(
-        debounce((query: string) => {
-            if (!query.trim()) {
-                setFilteredTeamMembers(baseMembers)
-                return
-            }
-
-            const results = fuse.search(query)
-            const filtered = results.map((result) => result.item)
-            setFilteredTeamMembers(filtered)
-        }, 300),
-        [fuse, baseMembers]
+            },
+        ],
+        []
     )
 
-    // Effect to handle search term changes from prop
-    useEffect(() => {
-        if (searchTerm !== undefined) {
-            debouncedSearch(searchTerm)
-        }
-    }, [searchTerm, debouncedSearch])
+    // Respects the ViewerFilters layer (e.g. pineapple) before search
+    const baseMembers = filterBaseMembers ?? teamMembers
 
-    // Effect to handle filtered members changes
-    useEffect(() => {
-        if (filteredMembers !== null && filteredMembers !== undefined) {
-            // If we have filtered members from props, apply search on those
-            if (searchTerm && searchTerm.trim()) {
-                const fuse = new Fuse(filteredMembers, {
-                    keys: [
-                        {
-                            name: 'fullName',
-                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
-                        },
-                        'teams.data.attributes.name',
-                        'companyRole',
-                        'location',
-                        'country',
-                    ],
-                    threshold: 0.3,
-                })
-                const results = fuse.search(searchTerm)
-                const filtered = results.map((result) => result.item)
-                setFilteredTeamMembers(filtered)
-            } else {
-                setFilteredTeamMembers(filteredMembers)
-            }
-        }
-    }, [filteredMembers, searchTerm])
+    // On the map, a name match focuses that person's location; otherwise fly to the place.
+    const mapMatchedEmployee = useMemo(
+        () => (activeTab === 'map' ? findEmployeeByName(baseMembers, searchQuery) : null),
+        [activeTab, baseMembers, searchQuery]
+    )
 
-    // handleSearch removed since we use prop-based search
+    const geoQuery =
+        activeTab === 'map' && mapMatchedEmployee ? buildMemberQuery(mapMatchedEmployee as any) || '' : searchQuery
+    const geoArea = useGeocodedArea(geoQuery, token)
+
+    // Only geocode members during a geo search, to avoid Mapbox calls on the list view
+    const memberCoords = useCoordsByQuery(isClient, token, geoArea ? baseMembers : [])
+    const hasMemberCoords = Object.keys(memberCoords).length > 0
+
+    const listMembers = useMemo(() => {
+        const query = searchQuery.trim().toLowerCase()
+        if (!query) return baseMembers
+
+        const textMatches = baseMembers.filter((person: any) => {
+            const haystack = [
+                person.firstName,
+                person.lastName,
+                person.companyRole,
+                person.location,
+                person.country,
+                person.biography,
+            ]
+                .filter(Boolean)
+                .join(' ')
+                .toLowerCase()
+            return haystack.includes(query)
+        })
+
+        if (!geoArea) return textMatches
+
+        const geoMatches = baseMembers.filter((person: any) => {
+            const q = buildMemberQuery(person)
+            if (!q) return false
+            const coords = memberCoords[q]
+            if (!coords) return false
+            return isWithinBbox(coords, geoArea.bbox)
+        })
+
+        const seen = new Set<any>()
+        return [...textMatches, ...geoMatches].filter((person: any) => {
+            if (seen.has(person.squeakId)) return false
+            seen.add(person.squeakId)
+            return true
+        })
+    }, [baseMembers, searchQuery, geoArea, memberCoords])
+
+    const handleFilterChange = (filteredData: any[]) => {
+        setFilterBaseMembers(filteredData)
+    }
 
     return (
-        <div data-scheme="primary" className="@container bg-primary h-full">
+        <div data-scheme="primary" className="@container h-full pt-12 pb-4 @xl:pb-8 px-4 @xl:px-8 pr-14">
             <SEO title="Team - PostHog" />
-            <div className="flex items-center justify-between">
-                <h1>People</h1>
-                <ToggleGroup
-                    title=""
-                    hideTitle
-                    options={[
-                        {
-                            label: (
-                                <>
-                                    <IconList className="size-4 mr-1" />
-                                    List
-                                </>
-                            ),
-                            value: 'list',
-                        },
-                        {
-                            label: (
-                                <>
-                                    <IconMapPin className="size-4 mr-1" />
-                                    Map
-                                </>
-                            ),
-                            value: 'map',
-                        },
-                    ]}
-                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                    value={activeTab}
-                />
+            <div className="flex flex-wrap items-center gap-2 justify-between">
+                <h1 className="m-0">People</h1>
+                <div className="flex flex-wrap items-center gap-2">
+                    {activeTab === 'map' ? (
+                        <PeopleMapSearch
+                            members={baseMembers}
+                            token={token}
+                            value={searchQuery}
+                            placeholder="Search people or places…"
+                            className="min-w-[12rem]"
+                            onSelectEmployee={(m) => {
+                                setSearchQuery([m.firstName, m.lastName].filter(Boolean).join(' '))
+                                setFocusNonce((n) => n + 1)
+                            }}
+                            onSelectLocation={(label) => {
+                                setSearchQuery(label)
+                                setFocusNonce((n) => n + 1)
+                            }}
+                            onClear={() => setSearchQuery('')}
+                        />
+                    ) : (
+                        <OSInput
+                            label="Search people"
+                            showLabel={false}
+                            placeholder="Search anything..."
+                            value={searchQuery}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                            onClear={() => setSearchQuery('')}
+                            showClearButton
+                            size="sm"
+                            width="fit"
+                            name="people-search"
+                            className="min-w-[12rem] !h-[34px] !box-border !px-2 !py-0 !text-sm !leading-none"
+                        />
+                    )}
+                    <ViewerFilters
+                        availableFilters={availableFilters}
+                        dataToFilter={teamMembers}
+                        onFilterChange={handleFilterChange}
+                    />
+                    <ToggleGroup
+                        title=""
+                        hideTitle
+                        options={[
+                            {
+                                label: (
+                                    <>
+                                        <IconList className="size-4 mr-1" />
+                                        List
+                                    </>
+                                ),
+                                value: 'list',
+                            },
+                            {
+                                label: (
+                                    <>
+                                        <IconMapPin className="size-4 mr-1" />
+                                        Map
+                                    </>
+                                ),
+                                value: 'map',
+                            },
+                        ]}
+                        onValueChange={handleViewChange}
+                        value={activeTab}
+                    />
+                </div>
             </div>
             <ScrollArea className="h-full">
                 {activeTab === 'list' && (
@@ -435,7 +550,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                             </p>
                         </div>
                         <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @[84rem]:grid-cols-6 @[104rem]:grid-cols-7 @[112rem]:grid-cols-8 @[120rem]:grid-cols-9 gap-4 @md:gap-x-6 gap-y-12">
-                            {filteredTeamMembers.map((teamMember: any) => {
+                            {listMembers.map((teamMember: any) => {
                                 // Calculate if this person is a team lead of any team
                                 const isTeamLead = teamMember.leadTeams?.data?.length > 0
 
@@ -453,7 +568,12 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                 )}
                 {activeTab === 'map' && (
                     <div className="h-[70vh] min-h-[480px] mt-2">
-                        <PeopleMap members={filteredTeamMembers} />
+                        <PeopleMap
+                            members={baseMembers}
+                            focusArea={geoArea}
+                            focusNonce={focusNonce}
+                            coordsByQuery={hasMemberCoords ? memberCoords : undefined}
+                        />
                     </div>
                 )}
             </ScrollArea>

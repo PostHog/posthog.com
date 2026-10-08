@@ -55,7 +55,7 @@ Text(
 
 ### Precedence and propagation
 
-Both mask and unmask controls apply to all children of the view or composable they are set on. The unmask option (`ph-no-mask` / `postHogUnmask()`) always takes precedence over the mask option (`ph-no-capture` / `postHogMask()`).
+Both mask and unmask controls apply to all children of the view or composable they are set on. The unmask option (`ph-no-mask` / `postHogUnmask()`) always takes precedence over the mask option (`ph-no-capture` / `postHogMask()`). This applies to the whole subtree: a child marked `ph-no-capture` inside an unmasked view is **not** masked, and neither are views that PostHog would otherwise mask automatically. Only unmask a subtree you know contains no sensitive data.
 
 Both `postHogMask()` and `postHogUnmask()` accept an `isEnabled` parameter. When set to `false`, the modifier has no effect (as if it was never applied), allowing dynamic control via global settings or remote config:
 

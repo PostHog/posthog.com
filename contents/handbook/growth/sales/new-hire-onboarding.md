@@ -99,20 +99,21 @@ By the end of month 3:
 
 ### Day 1
 
-- Meet with [Landon](/community/profiles/33186) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
+- Meet with [Landon](/community/profiles/33186) or [Tyler](/community/profiles/34069) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](/handbook/growth/sales/sales-and-cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
-  - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Simon will add your GitHub handle to the template.
+  - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics.  Landon or Tyler will add your GitHub handle to the template.
 
 ### Rest of week 1
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
+ - Learn and practice a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
- - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - Meet with [Simon](/community/profiles/28895), CSM Lead
+ - Meet with [Alex](community/profiles/33387), TAE Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
    - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
@@ -122,12 +123,12 @@ By the end of month 3:
 
 ### Week 2
 
-- During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set.
+- During your first week, Landon or Tyler will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set.
 - Shadow more live calls and listen to more Buildbetter recordings.
 - Towards the end of the week, schedule a demo and feedback session with Landon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
-- We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
+- We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practice and fail.
 
 ### In-person onboarding
 
@@ -200,6 +201,7 @@ Your first three months of commission are paid at 100% fixed OTE. This will be c
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
+- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
 
 ### Are there any influential folks in our space I should read/listen to?
 

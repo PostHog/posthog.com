@@ -10,105 +10,68 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Alerts are supported on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights.
+Alerts are supported on [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
+
+Free tier organizations can create up to 5 alerts total. [Paid plans](/pricing) have no limit.
+
+## Use cases
+
+Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
+
+- **Monitor traffic spikes** – Get notified when pageviews or unique visitors exceed normal levels. Useful for catching viral content, measuring marketing campaign impact, or detecting unexpected load.
+
+- **Track errors and 404s** – Alert when error rates or 404 page visits spike above a baseline, indicating broken links, failed deployments, or degraded user experience.
+
+- **Detect missing critical events** – Alert when expected events like transactional emails, payment processing, or critical workflows drop below a threshold or stop entirely. Set a **has value** alert with a **less than** bound of 1 to catch these.
+
+- **Monitor conversion rate changes** – Track when signup, purchase, or other conversion rates shift significantly. Use a [formula-based trend](/docs/product-analytics/trends/formulas) with a **increases by** or **decreases by** alert and a percentage threshold.
+
+- **Watch for shifts in traffic sources** – Use a trend with a [breakdown](/docs/product-analytics/trends/breakdowns) on referral source, then set an alert to detect when any source increases or decreases by a set amount. See [alerts on breakdowns](#alerts-on-breakdowns) for details.
 
 ## How to create an alert
 
-<ProductVideo
-  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_light_3687dafb8a.mp4"
-  videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/alerts_video_3685c5b1e1.mp4"
-  alt="How to create an alert video"
-  classes="rounded"
-/>
-
-1. Alerts are based off of [insights](/docs/product-analytics/insights). You can pick any existing trend insight or create a new one.
-2. Click **Actions** in the sidebar and select **Alerts**. This shows you all the alerts for this insight.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_26_AM_ccce74247b.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_03_13_at_9_50_34_AM_ee7c2e9444.png"
-  alt="Alert button in actions bar"
-  classes="rounded"
-/>
-
-3. Click the **New alert** button.
-
-   <ProductScreenshot
-     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_button_30d3dde83c.png"
-     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_dark_19591ee179.png"
-     alt="new alert button"
-     classes="rounded"
-   />
-
+1. Open or create a saved [trend](/docs/product-analytics/trends/overview), [funnel](/docs/product-analytics/funnels), or [SQL insight](/docs/sql).
+2. On the insight, click **Monitor** and select **Alerts**. This shows the alerts for that insight.
+3. Click **New alert**.
 4. Set a name for the alert.
+5. For a trend, select the series to monitor. A series is one of the events or values in the insight. For example, an insight can have `A - $pageview` (total pageviews) and `B - signed_up` (signups). Select `A` to check pageviews or `B` to check signups. For a funnel or SQL insight, [select the conversion step](#alerts-on-funnels) or [result to check](#alerts-on-sql-insights).
+6. Select **Threshold** or **Anomaly detection**. For a threshold alert, choose a condition:
+   - **has value** compares the value with a fixed bound.
+   - **increases by** or **decreases by** compares the value with a prior period.
+7. For a threshold alert, set at least one bound: **more than**, **less than**, or both. For example, set **more than** to 5,000 to check when pageviews exceed 5,000.
+8. For **increases by** or **decreases by**, you can set a percentage threshold. PostHog compares the percentage change with your bound. For anomaly detection, [choose a detector and simulate it](#anomaly-detection).
+9. Select how often PostHog checks the alert:
+   - **Real time** requires a Scale or Enterprise plan. It checks about every two minutes. See [real-time alerts](#real-time-alerts).
+   - **Every 15 minutes** requires a Boost plan or higher.
+   - **Hourly** lets you set the minute of the hour for each check.
+   - **Daily** checks once a day.
+   - **Weekly** checks once a week.
+   - **Monthly** checks once a month.
 
-5. Select a 'series' you want to alert on. These are the different events/values you're plotting in the insight.
-   For example, an insight might have multiple series like `A - $pageview` (total count of page views for a URL) and `B - signed_up` (count of users who signed up on the page).
-   You can select either `A` or `B`, which will determine if the alert gets checked against the value for `A` (total page views) or `B` (signups).
+   The form shows the next planned evaluation.
+10. Select the users to notify. Subscribed users get in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs in the alert form. See [notifications](#notifications).
+11. Click **Create alert**. Open **Monitor** > **Alerts** on the insight to review or edit its alerts. Open **Alerts** from the sidebar to manage alerts across insights.
 
-   <ProductScreenshot
-     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/series_picker_aa01668862.png"
-     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_options_dark_7adf700d24.png"
-     alt="series picker"
-     classes="rounded"
-   />
+## Create alerts with AI
 
-6. Select the alert type:
-   - **has value** - checks the series against a specific value.
-   - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
+The [MCP server](/docs/model-context-protocol) is the most complete way to create and manage alerts with natural language. It works from your AI coding agent and supports trends, funnels, and SQL (HogQL) insights, for both threshold and anomaly detection alerts.
 
-   <ProductScreenshot
-     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
-     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/new_alert_type_dark_b3620b34da.png"
-     alt="alert type picker"
-     classes="rounded"
-   />
+**Example prompts:**
 
-7. Set at least one threshold bound. Enter a value in the **more than** field, the **less than** field, or both. For example, set 5000 in the "more than" field to check when pageviews exceed 5k.
+- "Create an alert when daily signups exceed 1000"
+- "Alert me if the checkout funnel conversion rate drops below 20%"
+- "Notify our team in Slack when error rate increases by more than 25% week over week"
+- "Create a SQL alert if this query's result drops below 10000"
+- "Set up an anomaly detection alert on our signups trend using Z-score"
+- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
+- "Simulate a MAD detector on my revenue insight for the last 30 days"
+- "List all my alerts and their current state"
+- "Update my pageview alert threshold to 5000"
+- "Delete the old conversion alert"
 
-8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
+### PostHog AI
 
-   <ProductScreenshot
-     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/percentage_threshold_1940ead9e6.png"
-     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_relative_threshold_dark_02aa4741c3.png"
-     alt="percentage threshold"
-     classes="rounded"
-   />
-
-9. Select how often you want the alert to be checked. Options range from **real time** — for time-sensitive metrics where you want to be notified as soon as a threshold is breached — through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
-
-   Real-time alerts are best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
-
-10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs directly in the alert form.
-
-    <ProductScreenshot
-      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
-      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alert_people_dark_0ccd7611bd.png"
-      alt="filled alert"
-      classes="rounded"
-    />
-
-11. Click **Create alert**, and you're done!
-    <ProductScreenshot
-      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/insight_alerts_5k_daef47ade1.png"
-      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/created_alert_dark_1710da74dc.png"
-      alt="insight alerts"
-      classes="rounded"
-    />
-
-You can now view all the alerts set on the insight.
-To view all the alerts set, click [Product analytics](https://app.posthog.com/insights) in the sidebar and then click the **Alerts** tab.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_d92386e45a.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/all_alerts_dark_80be487707.png"
-  alt="all alerts"
-  classes="rounded"
-/>
-
-## Create alerts with PostHog AI
-
-You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overview) with natural language commands. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
+You can also create and manage alerts using [PostHog AI](/docs/posthog-ai) with natural language commands, without leaving the app. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
 
 **Example commands:**
 
@@ -117,25 +80,6 @@ You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overvi
 - "Notify me if revenue drops more than 20% week over week"
 - "Change my alert threshold to 200"
 - "Disable the signups alert"
-
-PostHog AI can create alerts on existing insights or generate new trend insights and set up alerts on them automatically. To update existing alerts, PostHog AI finds the alert by name and applies your changes.
-
-<CalloutBox icon="IconInfo" title="Note" type="fyi">
-
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights. Other insight types like funnels and retention don't support alerts.
-
-</CalloutBox>
-
-### Manage alerts via MCP
-
-The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, create, update, and delete alerts directly from your AI coding agent. This is useful for integrating alert management into your development workflow.
-
-**Example prompts:**
-
-- "Create an alert when daily signups exceed 1000"
-- "List all my alerts and their current state"
-- "Update my pageview alert threshold to 5000"
-- "Delete the old conversion alert"
 
 ## Relative alerts
 
@@ -156,15 +100,48 @@ This will then also enable you to set a percentage threshold.
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
+## Real-time alerts
+
+To create a real-time alert, follow the standard [alert creation steps](#how-to-create-an-alert) and select **Real time** as the check frequency.
+
+- Evaluates approximately every two minutes, rather than continuously. Notifications follow successful checks, not individual events.
+- Best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
+- Requires a **Scale or Enterprise plan**. This is separate from the every-15-minutes interval, which only needs a Boost, Scale, or Enterprise add-on.
+- Has its own limit on how many real-time alerts you can have enabled at once, separate from your overall alert limit. If you hit it, disable an existing real-time alert or switch it to a less frequent interval to free up a slot.
+  - Scale: 10 real-time alerts
+  - Enterprise: 20 real-time alerts
+
+## Alerts on funnels
+
+You can create alerts on [funnel insights](/docs/product-analytics/funnels) to monitor conversion rates. Funnel alerts track the overall conversion rate percentage and notify you when it crosses your defined thresholds.
+
+Funnel alerts work with:
+
+- **Steps view** – the standard funnel visualization showing conversion between steps
+- **Trends view** – funnel results displayed as a trend over time
+
+Funnel alerts are **not supported** for:
+
+- **Time-to-convert view** – measures duration rather than conversion rate
+- **Flow view** (sankey) – visualizes user paths without a single conversion rate metric
+
+When creating a funnel alert, the threshold values represent the conversion rate percentage. For example, setting a "less than 10" threshold triggers when the funnel's conversion rate drops below 10%.
+
+In the steps view, select the conversion step to monitor. This view supports fixed thresholds, not relative changes or anomaly detection. In the trends view, the alert monitors the overall conversion rate over time and supports relative changes, but not anomaly detection.
+
+## Alerts on SQL insights
+
+Save a [SQL (HogQL) insight](/docs/sql) before you create an alert. If the query returns multiple columns, select a numeric **value column** to check. You can also select a **label column** to name the checked row in notifications and check history.
+
+- **The last row** checks the last result row. Use it when the query sorts from oldest to newest.
+- **The first row** checks the first result row. Use it when the query sorts from newest to oldest.
+- **Any row** checks each result row and fires when any value crosses the threshold. Use it when each row represents a separate item. This mode supports fixed thresholds only; it does not support relative conditions or anomaly detection.
+
+Preview the query result and selected value before you save the alert.
+
 ## Anomaly detection
 
-<CalloutBox icon="IconFlask" title="Feature preview" type="action">
-
-Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://app.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
-
-</CalloutBox>
-
-Instead of setting a fixed threshold, anomaly detection uses statistical algorithms to automatically learn what "normal" looks like for your data and alert you when something unusual happens. This is useful when:
+Instead of setting a fixed threshold, anomaly detection uses detectors to identify unusual changes in your data. This is useful when:
 
 - You don't know what threshold to set (e.g., your traffic varies by time of day)
 - You want to detect subtle changes that a fixed threshold would miss
@@ -172,18 +149,18 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Creating an anomaly detection alert
 
-1. Open an existing [trend insight](/docs/product-analytics/trends) or [SQL insight](/docs/sql), or create a new one.
+1. Open a saved [trend insight](/docs/product-analytics/trends/overview) or [SQL insight](/docs/sql), or create and save one.
    - For SQL insights, use **last row** or **first row** evaluation mode. Anomaly detection isn't supported with **any row** evaluation because those rows represent individual entities, not a time series.
-2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
-3. Under alert type, select **Anomaly detection** instead of a threshold condition.
+2. On the insight, click **Monitor**, select **Alerts**, then click **New alert**.
+3. Select **Anomaly detection** instead of **Threshold**.
 4. Choose a **detector** (see [available detectors](#available-detectors) below).
-5. Configure the **sensitivity** and **window size** for your detector.
+5. Configure the available options for your detector, such as sensitivity and window size.
 6. Use the **Simulate** section to preview how the detector performs on historical data before saving.
 7. Set your notification preferences and click **Create alert**.
 
 ### Available detectors
 
-PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score** or **MAD** are good starting points.
+PostHog offers statistical detectors, machine learning detectors, and an ensemble that combines detectors. For most use cases, **Z-score** or **MAD** are good starting points. The **AI judgment** detector is available separately for accounts with access to it.
 
 #### Statistical detectors
 
@@ -192,6 +169,7 @@ PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score*
 | **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
 | **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
 | **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
+| **Threshold**                       | Known fixed bounds   | Flags values outside a static bound you set, rather than one learned from historical data.                                                |
 
 #### Machine learning detectors
 
@@ -215,13 +193,19 @@ The **Ensemble** detector combines two or more of the above detectors with AND/O
 - **AND**: Only fires when _all_ sub-detectors agree a point is anomalous. Reduces false positives.
 - **OR**: Fires when _any_ sub-detector flags an anomaly. Catches more anomalies but may be noisier.
 
+#### AI judgment
+
+The **AI judgment** detector sends recent insight values and a chart to an AI model. You can add instructions to describe unusual behavior. The model returns a verdict and its confidence in that verdict; the confidence is not a calibrated anomaly probability.
+
+This detector appears only when it is enabled for your account and your organization permits AI data processing. It cannot run with a real-time interval, monitor a breakdown, or join an ensemble. Each check uses a model call. Use [simulation](#simulating-a-detector) to assess its results before you save the alert.
+
 ### Configuration
 
-All detectors share these core parameters:
+Statistical and machine learning detectors use these core parameters:
 
 | Parameter                   | Description                                                                  | Default                         |
 | --------------------------- | ---------------------------------------------------------------------------- | ------------------------------- |
-| **Sensitivity** (threshold) | Anomaly probability cutoff between 0 and 1. Higher values mean fewer alerts. | 0.9                             |
+| **Sensitivity** (threshold) | Anomaly score cutoff between 0 and 1. Higher values mean fewer alerts.       | 0.9                             |
 | **Window**                  | Number of historical data points used for training.                          | Depends on interval (see below) |
 
 Default window sizes based on your alert's check interval:
@@ -254,21 +238,13 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
-### Create anomaly detection alerts with PostHog AI
-
-You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/overview) or the [MCP server](/docs/model-context-protocol). Example prompts:
-
-- "Create an anomaly detection alert on my pageviews insight using Z-score"
-- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
-- "Simulate a MAD detector on my revenue insight for the last 30 days"
-
 ### Tips
 
-- **Start with Z-score or MAD** — they work well for most time series data and are easy to understand.
-- **Use the simulator** — always simulate before saving to see how the detector performs on your data.
-- **Set sensitivity to 0.95 for noisy metrics** — the default of 0.9 may produce too many alerts for high-variance data.
-- **Use ensemble AND to reduce false positives** — combining two detectors with AND logic means both must agree, which cuts down on noise.
-- **Differencing matters** — if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
+- **Start with Z-score or MAD** – they work well for most time series data and are straightforward to interpret.
+- **Use the simulator** – always simulate before saving to see how the detector performs on your data.
+- **Set sensitivity to 0.95 for noisy metrics** – the default of 0.9 may produce too many alerts for high-variance data.
+- **Use ensemble AND to reduce false positives** – combining two detectors with AND logic means both must agree, which cuts down on noise.
+- **Differencing matters** – if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
 
 ## Notifications
 
@@ -297,18 +273,17 @@ When creating or editing an alert, you can add notification destinations inline:
 
 7. Click **Create alert** or **Save** to apply your changes.
 
-You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
+You can add multiple notification destinations to a single alert, up to five. Each destination appears in the list with its status.
 
 ## Advanced options
 
-You can configure alerts to skip checking on weekends.
-This is useful for daily alerts which would normally trigger on weekends.
+You can skip weekend checks for real-time, 15-minute, hourly, and daily alerts. Weekly and monthly alerts do not support this option.
 
 ### Quiet hours
 
 Quiet hours let you define time windows when an alert won't be checked. This is useful for suppressing notifications during off-hours, such as nights or weekends.
 
-To enable quiet hours, check the **Quiet hours** checkbox in the alert form and configure one or more blocked time windows:
+To enable quiet hours, select **Quiet hours** in the alert form and configure one or more blocked time windows:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/quiet_hours_light_e34901f0d8.png"
@@ -321,15 +296,13 @@ To enable quiet hours, check the **Quiet hours** checkbox in the alert form and 
 - Times are based on your project's timezone
 - Each window must span at least 30 minutes
 - You can add up to five time windows per alert
-- If a scheduled check falls during quiet hours, it runs when the window ends
+- If a scheduled check falls during quiet hours, the next check runs after the window ends
 
-A preset for overnight hours (10 PM–7 AM) is available for quick setup.
+A preset for overnight hours (10 PM – 7 AM) is available for quick setup.
 
 ### Check ongoing period
 
-Alerts also enable you to check the current/ongoing period.
-When enabled, this checks the insight value for the ongoing period (current week/month) that hasn't yet completed.
-Use this if you want to be alerted right away when the insight value rises/increases above threshold
+For supported trend and funnel alerts, **Check ongoing period** evaluates the current period before it ends. Use it when you need a check before the current week or month completes. The default checks the last completed period.
 
 ## Alerts on breakdowns
 
@@ -357,7 +330,7 @@ Common reasons an alert may be auto-disabled:
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 
-Disabled alerts don't re-enable themselves. After fixing the configuration issue, go to the **Alerts** tab on the insight and manually re-enable the alert.
+Disabled alerts don't re-enable themselves. After fixing the configuration issue, open the saved insight, click **Monitor** > **Alerts**, and manually re-enable the alert.
 
 </CalloutBox>
 

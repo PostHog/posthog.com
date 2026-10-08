@@ -1,6 +1,23 @@
 import React from 'react'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Test from '../components/Home/Test'
 
 export default function Home() {
-    return <Test />
+    return (
+        <>
+            <SEO
+                title="PostHog - your product’s context layer"
+                updateWindowTitle={false}
+                description="PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it."
+                image="/images/og/default.png"
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog',
+                    description:
+                        'PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.',
+                    slug: '',
+                })}
+            />
+            <Test />
+        </>
+    )
 }

@@ -57,6 +57,19 @@ const frameContents = [
         ),
         imagePosition: 'top',
     },
+
+    {
+        title: 'Taught people how to actually use post-its',
+        content:
+            "A company will not find success unless they are in the top 1 percentile of using post-its. You can learn how to do that <a href='https://posthog.com/academy' target='_blank'>too</a>.",
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/postblock_76a0980525"
+                alt="Taught people how to actually use post-its"
+            />
+        ),
+        imagePosition: 'top',
+    },
     {
         title: 'Patrick Collison tweeted about us',
         content: `When the co-founder of Stripe <a href="https://x.com/patrickc/status/1728009393118032343" target="_blank" rel="noreferrer">tweets</a> about you unsolicitedly, it's a big deal.`,
@@ -82,12 +95,12 @@ const frameContents = [
         imagePosition: 'bottom',
     },
     {
-        title: '20k+ GitHub stars',
+        title: '35k+ GitHub stars',
         content: `<p>We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)</p><p>Won't you <a href="https://github.com/PostHog/posthog" target="_blank" rel="noreferrer">be our next star?</a></p>`,
         image: (
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/github_stars_7e1b503d8b.png"
-                alt="20k+ GitHub stars"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/star_history_2026817_15ab39d902.png"
+                alt="35k+ GitHub stars"
             />
         ),
         imagePosition: 'bottom',

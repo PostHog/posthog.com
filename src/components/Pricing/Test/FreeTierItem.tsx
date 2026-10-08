@@ -38,7 +38,7 @@ const FreeTierItem = ({
                 )}
             </strong>
             <div
-                className={`text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'} ${
+                className={`text-center text-balance leading-none ${description ? 'opacity-75' : 'text-secondary'} ${
                     size === 'normal' && 'text-sm'
                 } ${size === 'large' && 'text-lg mt-1'}`}
             >

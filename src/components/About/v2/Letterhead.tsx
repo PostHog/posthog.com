@@ -1,20 +1,27 @@
 import React from 'react'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
-import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { useApp } from '../../../context/App'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export const Letterhead = () => {
-    const { siteSettings } = useApp()
-
     return (
         <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
             <div>
-                <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+                <img
+                    className="inline-block w-auto h-auto max-w-full dark:hidden"
+                    src="/brand/posthog-logo.svg"
+                    alt="PostHog"
+                />
+                <img
+                    className="hidden w-auto h-auto max-w-full dark:inline-block"
+                    src="/brand/posthog-logo-white.svg"
+                    alt="PostHog"
+                />
             </div>
-            <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-muted pt-2">From the desk of</div>
+            <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-secondary pt-2">
+                From the desk of
+            </div>
             <aside className="flex gap-2 items-center">
                 <div>
                     <Link
@@ -29,7 +36,9 @@ export const Letterhead = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-0 leading-none">
-                    <div className="hidden @sm:flex uppercase text-xs tracking-wider text-center text-muted pb-0.5">From the desk of</div>
+                    <div className="hidden @sm:flex uppercase text-xs tracking-wider text-center text-secondary pb-0.5">
+                        From the desk of
+                    </div>
                     <strong>James Hawkins</strong>
                     <span className="text-secondary text-sm">Co-founder</span>
                     <div>

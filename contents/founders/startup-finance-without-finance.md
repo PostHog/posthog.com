@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Finance & ops
-  - Being a founder
+  - Ops & finance
 crosspost:
   - Blog
 ---
@@ -22,7 +21,7 @@ Who knows, maybe you'll actually _look forward_ to digging into your finances on
 
 ## Who is this for?
 
-Startups with 5 to 100 employees who are early stage or have reached [product-market fit](/blog/how-to-product-market-fit). 
+Startups with 5 to 100 employees who are early stage or have reached [product-market fit](/founders/product-market-fit-game). 
 
 If you are fewer than five people, I'd suggest just doing the accounting bit (so you don't go to jail) and stop there so you can focus on building your product. 
 

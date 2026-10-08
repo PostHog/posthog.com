@@ -73,9 +73,7 @@ interface Product {
 export default function ProductTabs({ productHandles, className, selectedStage }: ProductTabsProps) {
     const { appWindow } = useWindow()
     const allProducts = useProduct()
-    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>(
-        typeof window !== 'undefined' && (appWindow?.size?.width || 0) >= 576 ? 'vertical' : 'horizontal'
-    )
+    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
 

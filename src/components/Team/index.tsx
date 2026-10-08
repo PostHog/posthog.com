@@ -787,7 +787,7 @@ export default function Team({
 
             {objectives && (
                 <>
-                    <h2>Goals</h2>
+                    <h2 id="goals">Goals</h2>
                     <div className="article-content team-page-content">
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
                             {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - team objectives from CMS, not user input */}

@@ -5,7 +5,9 @@ export const brevo = {
             available: true,
             features: {
                 visual_builder: true,
-                ai_assistant: false,
+                // Aura: generate automations from a natural-language description
+                // https://help.brevo.com/hc/en-us/articles/34804478408850
+                ai_assistant: true,
                 campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,

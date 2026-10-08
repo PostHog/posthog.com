@@ -1,17 +1,31 @@
-The JavaScript web SDK uses burst protection to limit the number of autocaptured exceptions that can be captured in a period. This prevents an excessive amount of exceptions being captured from any one client, typically because they're being thrown in an infinite loop.
+The JavaScript web and Node SDKs use burst protection to limit the number of autocaptured exceptions that can be captured in a period. This prevents an excessive amount of exceptions being captured from any one client, typically because they're being thrown in an infinite loop.
 
-By default, we capture 10 exceptions (bucket size) of the same type within a 10 second period before the rate limiter kicks in, after which, we capture 1 exception (refill rate) every 10 seconds.
+By default, we capture 10 exceptions (bucket size) of the same type within a 10 second period before the rate limiter kicks in, after which, we capture 1 exception (refill rate) every 10 seconds. Burst protection is scoped per exception type, so each distinct type gets its own bucket.
 
 Often not needed, but you can change the bucket size and refill rate as part of your configuration:
 
-```js
+<MultiLanguage>
+
+```js file=Web
 import posthog from 'posthog-js'
 
 posthog.init('<ph_project_token>', {
-    api_host: '<ph_client_api_host>', 
+    api_host: '<ph_client_api_host>',
     error_tracking: {
-        __exceptionRateLimiterRefillRate: 1
-        __exceptionRateLimiterBucketSize: 10
+        exceptionRateLimiterRefillRate: 1,
+        exceptionRateLimiterBucketSize: 10,
     }
 })
 ```
+
+```javascript file=Node.js
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    exceptionRateLimiterRefillRate: 1,
+    exceptionRateLimiterBucketSize: 10,
+})
+```
+
+</MultiLanguage>

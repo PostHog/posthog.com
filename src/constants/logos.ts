@@ -35,6 +35,7 @@ export const LOGOS = {
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
     dedalus: 'https://res.cloudinary.com/dmukukwp6/image/upload/dedalus_labs_logo_e03bb97137.svg',
     deepseek: 'https://res.cloudinary.com/dmukukwp6/image/upload/deepseek_df02608124.svg',
+    discord: 'https://cdn.simpleicons.org/discord/5865F2',
     django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
     docusaurus:
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/docusaurus.svg',
@@ -66,6 +67,7 @@ export const LOGOS = {
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
     javascript: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg',
     klaviyo: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+    kmp: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
     langgraph: 'https://res.cloudinary.com/dmukukwp6/image/upload/langgraph_e5fee77551.svg',
     linear: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',

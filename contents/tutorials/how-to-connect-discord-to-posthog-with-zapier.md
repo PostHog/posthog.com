@@ -8,10 +8,8 @@ author:
   - joe-martin
 tags:
   - apps
-  - zapier
-  - toolbar
-  - subscriptions
   - cdp
+  - toolbar
 ---
 
 - *Level:* Easy 🦔

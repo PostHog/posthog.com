@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), [Rust](/docs/libraries/rust), and [Elixir](/docs/libraries/elixir) SDKs. It requires a [secret API key](#step-1-get-a-secret-api-key), which must **not** be used in the frontend or exposed to users.
 
 > **Note:** In edge/lambda environments and stateless PHP applications, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
@@ -54,15 +54,21 @@ sequenceDiagram
 
 Notice that PostHog is not involved at evaluation time. The tradeoff: **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
 
-Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic request to fetch flag definitions (counted as 10 flag requests each). For high-traffic services, this can significantly reduce your flag usage costs.
+Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic poll for flag definitions (counted as 10 flag requests when the definitions changed, and 1 when they didn't). For high-traffic services, this can significantly reduce your flag usage costs.
+
+Each flag definition includes a `version` number that the SDK uses to detect changes. PostHog increments this version whenever you modify the flag itself. It also increments the version when any [cohort](/docs/data/cohorts) referenced by the flag — directly or through nested cohorts — has its conditions changed. This ensures your SDK cache stays in sync even when the flag's effective definition changes through a cohort update rather than a direct flag edit.
 
 There are 3 steps to enable local evaluation:
 
+<a id="step-1-find-your-feature-flags-secure-api-key" />
+
 ## Step 1: Get a secret API key
 
-import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-flags-secure-key.mdx";
+import ObtainSecretAPIKey from "../../integrate/_snippets/obtain-secret-api-key.mdx";
 
-<ObtainFeatureFlagsSecureAPIKey />
+<ObtainSecretAPIKey />
+
+<a id="step-2-initialize-posthog-with-your-feature-flags-secure-api-key" />
 
 ## Step 2: Initialize PostHog with your secret API key
 
@@ -70,13 +76,15 @@ When you initialize PostHog with your secret API key, PostHog will use the key t
 
 By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency by specifying a different value in the polling interval argument.
 
-> **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 flags` requests.
+> **Note:** For billing purposes, we count a request that returns the feature flag definitions as being equivalent to `10 flags` requests.
 >
 > This is because one of these requests can compute feature flags for hundreds or thousands of users. It ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!).
+>
+> Most polls don't return the definitions. The SDK sends the ETag of the definitions it already holds, and when nothing changed PostHog replies `304 Not Modified` with an empty body. That poll is charged as 1 flag request. See [reducing local evaluation costs](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) for the SDK versions that send ETags.
 
-import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-secure-key.mdx";
+import ConfigureSecretAPIKey from "../../integrate/_snippets/configure-secret-api-key.mdx";
 
-<ConfigureFlagsSecureKey />
+<ConfigureSecretAPIKey />
 
 ## Step 3: Evaluate your feature flag
 
@@ -280,6 +288,27 @@ let flags = client.evaluate_flags(
 let flag = flags.get_flag("flag-key");
 ```
 
+```elixir
+{:ok, flags} =
+  PostHog.FeatureFlags.evaluate_flags(%{
+    distinct_id: "distinct_id_of_the_user",
+    # Include any person properties, groups, or group properties required to evaluate the flag
+    person_properties: %{property_name: "value"},
+    groups: %{
+      your_group_type: "your_group_id",
+      another_group_type: "another_group_id"
+    },
+    group_properties: %{
+      your_group_type: %{group_property_name: "value"},
+      another_group_type: %{group_property_name: "another value"}
+    },
+    # Optional. Defaults to false. Set to true to prevent remote fallback.
+    only_evaluate_locally: false
+  })
+
+flag_value = PostHog.FeatureFlags.Evaluations.get_flag(flags, "flag-key")
+```
+
 </MultiLanguage>
 
 ## Reloading flags
@@ -318,6 +347,12 @@ posthog.reloadFeatureFlags()
 // Manual reload is not currently supported.
 ```
 
+```elixir
+# The Elixir SDK automatically reloads flags in the background at the interval
+# specified by feature_flags_poll_interval_ms (default: 30_000).
+# Manual reload is not currently supported.
+```
+
 </MultiLanguage>
 
 ## Restriction on local evaluation
@@ -330,7 +365,7 @@ Local evaluation is not possible for flags that:
 2. Are linked to an [early access feature](/docs/feature-flags/early-access-feature-management)
 3. Depend on [static cohorts](/docs/data/cohorts#static-cohorts)
 4. Use the `is_not_set` property operator, since local evaluation can only check properties you provide — it can't determine whether a property is absent on a person.
-5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. Local evaluation currently always evaluates all condition groups, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For now, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
+5. Have ["Stop evaluation at first matching condition set"](/docs/feature-flags/creating-feature-flags#stop-evaluation-at-first-matching-condition-set) (early exit) enabled. This restriction does not apply to v2.15.0 and above of our [Elixir](/docs/libraries/elixir) SDK, which honors early exit during local evaluation. Other SDKs currently evaluate all condition groups locally, even when this setting is enabled. This is a temporary limitation while support is rolled out across SDKs. For those SDKs, the setting only takes effect when flags are evaluated through the `/flags` endpoint.
 
 ### Dynamic cohort restrictions
 
@@ -344,4 +379,4 @@ However, there are a few constraints, and cohorts cannot be evaluated locally if
 2. They have non-person properties.
 3. There's more than one cohort in the feature flag definition.
 4. The cohort in the feature flag is in the same group as another condition.
-5. The cohort has nested AND-OR filters. Only simple cohorts that have a top level OR group, and inner level ANDs will be evaluated locally.
+5. The cohort has nested AND-OR filters. In affected SDKs, only simple cohorts that have a top level OR group, and inner level ANDs can be evaluated locally. This restriction does not apply to v2.15.0 and above of our [Elixir](/docs/libraries/elixir) SDK, which supports nested AND/OR groups and negation during local evaluation.

@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 
 export const VsPostHog = ({ children, className }) => {
     return (
@@ -17,7 +17,7 @@ export const VsPostHog = ({ children, className }) => {
             </div>
             <div className="flex-1 mb-auto">
                 <h4 className="leading-tight flex items-end gap-2">
-                    <span>Reasons to choose</span> <Logo className="w-32" />
+                    <span>Reasons to choose</span> <Logo className="w-32" width="auto" />
                 </h4>
                 {children}
             </div>

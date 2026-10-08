@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI Observability
+  - ai observability
 ---
 
 

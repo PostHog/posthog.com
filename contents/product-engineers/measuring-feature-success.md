@@ -9,7 +9,6 @@ featuredImageType: full
 category: Inside PostHog
 tags:
   - Feature flags
-  - Feature management
   - Product engineers
   - Product
 crosspost:

@@ -17,6 +17,8 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { OSInput, OSTextarea } from 'components/OSForm'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
+import { PROFILE_COLORS } from 'constants/profileColors'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -230,20 +232,7 @@ const formSections = [
                         <>
                             <label className="font-bold">Pick your favorite color</label>
                             <ul className="list-none m-0 p-0 mt-2 flex space-x-1">
-                                {[
-                                    'lime-green',
-                                    'blue',
-                                    'orange',
-                                    'teal',
-                                    'purple',
-                                    'seagreen',
-                                    'salmon',
-                                    'yellow',
-                                    'red',
-                                    'green',
-                                    'lilac',
-                                    'sky-blue',
-                                ].map((color) => {
+                                {PROFILE_COLORS.map((color) => {
                                     const active = values.color === color
                                     return (
                                         <li key={color} onClick={() => setFieldValue('color', color)}>
@@ -358,18 +347,29 @@ const formSections = [
             },
             github: {
                 label: 'GitHub',
-                placeholder: 'https://github.com',
+                placeholder: 'https://github.com/{username}',
                 type: 'url',
             },
             linkedin: {
                 label: 'LinkedIn',
-                placeholder: 'https://linkedin.com',
+                placeholder: 'https://linkedin.com/in/{username}',
                 type: 'url',
             },
             twitter: {
                 label: 'X',
-                placeholder: 'https://x.com',
+                placeholder: 'https://x.com/{username}',
                 type: 'url',
+            },
+            discord: {
+                label: 'Discord',
+                placeholder: 'https://discord.com/users/{id}',
+                type: 'url',
+                tooltip: (
+                    <p className="max-w-72 text-sm m-0 leading-normal">
+                        To get your ID, enable <strong>Developer Mode</strong> in Discord's advanced settings, then
+                        right-click your name and choose <strong>Copy User ID</strong>.
+                    </p>
+                ),
             },
         },
     },
@@ -470,6 +470,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
+    discord: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
     avatar: Yup.mixed()
         .nullable()
@@ -610,6 +611,7 @@ function EditProfile({ profile, mutate }) {
                                                             error={error}
                                                             direction="column"
                                                             size="md"
+                                                            tooltip={field.tooltip}
                                                         />
                                                     )}
                                                     {error && (
@@ -628,6 +630,9 @@ function EditProfile({ profile, mutate }) {
                             Update
                         </CallToAction>
                     </form>
+                    <div className="mt-8 pt-6 border-t border-border">
+                        <ConnectedAccounts />
+                    </div>
                 </section>
             </div>
         </ScrollArea>

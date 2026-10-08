@@ -1,0 +1,41 @@
+---
+title: Product analytics API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API to run analytics queries and manage saved insights from your own systems – a nightly report, an internal admin tool, or a customer-facing dashboard you build yourself.
+
+There are two things worth knowing about. The **query endpoint** runs any analytics query and hands back results, and the **insights endpoints** create, read, update, and delete the insights people see in the web app.
+
+## Before you start
+
+1. **Set up Product Analytics** – [install a PostHog SDK](/docs/product-analytics/installation) so events are captured.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## Run a query
+
+`POST /api/projects/:project_id/query/` takes a query node – trends, funnels, retention, paths, stickiness, lifecycle, or raw [SQL](/docs/data-warehouse/sql) – and returns the results. This is the same endpoint the web app uses, so anything you can build as an insight you can run over the API.
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": {"kind": "HogQLQuery", "query": "select event, count() from events group by event order by count() desc limit 10"}}' \
+  https://us.posthog.com/api/projects/:project_id/query/
+```
+
+See the [query API reference](/docs/api/query) for the full request and response shape.
+
+## Manage insights
+
+`/api/projects/:project_id/insights/` lists, creates, updates, and deletes saved insights, and can run the query behind one to get fresh results. Use it to keep insights in sync with something else you own, or to create insights programmatically as part of onboarding a new customer or team.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) passed as a bearer token, scoped to the smallest set of permissions the job needs. Reading insights needs `insight:read`; creating or updating them needs `insight:write`.
+
+## Related
+
+- Build the same insights by hand in the [web app](/docs/product-analytics/surfaces/web-app).
+- Ask for them conversationally over [MCP](/docs/product-analytics/surfaces/mcp).
+- See the full [PostHog API reference](/docs/api).

@@ -9,6 +9,14 @@ PostHog is now available on AWS Marketplace for SaaS products. The way we've cho
 
 AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team members set the price as a lump sum credit purchase for **annual pre-payment only**. Down the road, if we change our listing to public on the marketplace, we could set up usage-based billing through AWS (but that's future state).
 
+## Default to Stripe
+
+**Stripe is our default billing method. Only use AWS Marketplace when the customer specifically asks for it.**
+
+Stripe charges a flat fee per bank transfer regardless of deal size, and the cash lands with us straight away. AWS Marketplace takes a percentage cut on new contracts and disburses on its own schedule, so we get paid less and later, with more admin along the way.
+
+That said, we don't want to block customers from buying the way that's easiest for them. If procuring through their existing AWS spend is what unblocks the deal, use AWS Marketplace — it's available, we're just not promoting it. Don't offer it unprompted.
+
 ## Why this matters
 
 1. **Our ICP lives in AWS** - Product engineers already have AWS access and budget. Adding PostHog to their AWS bill just makes sense since we're part of their product infrastructure stack
@@ -20,7 +28,7 @@ AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team 
 
 For now, we're keeping it simple:
 - **Annual contracts only** (upfront payment)
-- **Minimum $100k deal size** (this is flexible, but let's start here)
+- **No minimum deal size beyond our usual [sales-assist threshold](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)** – there's no extra overhead in selling this way, so if a customer wants to procure via AWS Marketplace, go ahead
 
 ## Using Clazar for private offers
 
@@ -49,6 +57,8 @@ Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage th
    - Set as **upfront payment** (non-FPS offer)
    - Enter the negotiated price
    - Currency: USD (can do EUR, GBP, JPY if needed)
+   - **Payment terms** - Set these to match the order form (usually **Net 30**). Do not keep the default "Customer's AWS default", because it uses the buyer's standard AWS terms, which can be Net 60.
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 6. **Choose EULA type:**
    - Use **Standard Contract for AWS Marketplace** unless legal says otherwise
    - If custom EULA needed, upload the PDF (max 5 docs)
@@ -70,10 +80,12 @@ If you need more control or Salesforce isn't cooperating:
    - Contract duration
    - Start date (first service day if net new, day of renewal otherwise)
    - Offer type: Choose "Contract" with upfront payment
+   - **Payment terms** - Set these to match the order form (usually **Net 30**). Do not keep the default "Customer's AWS default", because it uses the buyer's standard AWS terms, which can be Net 60.
 6. **Set dimensions and pricing:**
    - Add your product dimensions
    - Set prices for each dimension
    - For annual deals, configure as single upfront payment
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 7. **Legal terms:**
    - Select EULA type (Standard Contract or Custom)
    - Upload any additional documents if needed
@@ -102,12 +114,17 @@ If you need more control or Salesforce isn't cooperating:
 - Create an Agreement-Based Offer (ABO) for modifications
 - Customer accepts ABO, which cancels the previous agreement
 
+**Payment terms are wrong (for example, Net 60 instead of Net 30):**
+- The offer used the buyer's default AWS payment terms
+- You can't change payment terms after the buyer accepts the offer – create a new private offer with the correct terms
+
 **Payment not showing up:**
 - AWS disbursements take time (check the disbursement schedule)
 - Verify the offer was actually accepted in AWS
 
 ### Pro tips
 - **Double-check AWS Account IDs** - This is where most mistakes happen
+- **Always set payment terms on the offer** - If you don't, AWS uses the buyer's default terms
 - **Set realistic expiration dates** - 30 days is standard, but adjust based on deal timeline
 - **Keep offers simple** - Complex payment schedules = more room for error
 - **Document everything in Salesforce** - Let Clazar sync do the heavy lifting

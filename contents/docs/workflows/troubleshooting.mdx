@@ -4,13 +4,13 @@ title: Workflows troubleshooting
 
 This page covers troubleshooting for Workflows. For setup, see the [installation guide](/docs/workflows/configure-channels).
 
-## Have a question? Ask PostHog AI
+## No address in the email step's `From` dropdown?
 
-<AskAIInput placeholder="Type your question and hit enter..." />
+An email step can only send from a sender that exists in the project. Add one on the workflows [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. If the domain is already verified for another sender, you do not need to add the DNS records again. See [configure a channel](/docs/workflows/configure-channels).
 
 ## Emails not sending?
 
-Check that your domain is verified and you’ve added the DNS records correctly.
+Check that your domain is verified and you've added the DNS records correctly.
 
 ## Spam folder issues?
 
@@ -21,6 +21,23 @@ Ensure SPF/DKIM are valid, and consider setting up DMARC.
 When an email bounces, is rejected, or receives a complaint, the failure details are logged as entries on the individual workflow invocation. Bounce entries include the bounce type (permanent or transient) and the SMTP diagnostic message. Complaint entries include the feedback type (e.g., "abuse"). Rejections and rendering failures include the specific error details from SES.
 
 To find affected invocations, go to the workflow's **Metrics** tab and click a metric tile like **Bounced** or **Blocked**. This navigates to the **Invocations** tab with a log filter applied, showing all invocations that experienced that failure type within the selected timeframe.
+
+## Need to stop runs that are already in flight?
+
+Cancel them from the workflow's **Invocations** tab. Each in-flight run has a **Cancel** button, and **Cancel in-flight runs** stops all of them at once. A batch run has a **Stop** button that also halts audience enrollment. Canceling doesn't undo steps that already ran or recall sent messages.
+
+Disabling a workflow doesn't cancel in-flight runs: parked runs stay parked, and each one is canceled only when it next wakes while the workflow is still disabled. See [stopping runs](/docs/workflows/editing-live-workflows#stopping-runs) for the full behavior.
+
+## Batch run marked as failed?
+
+The **Invocations** tab shows a batch run's status but not the reason it failed. A run marked **failed** with no runs listed under it never enrolled anyone: resolving the audience failed before the first person was added, so there are no per-person runs or logs to inspect.
+
+The most common cause is the audience query timing out. Resolving who a batch targets runs a query over your persons, and a slow query is retried a few times and then the run is marked failed. If this keeps happening:
+
+- Narrow the audience filters. Broad or complex property and cohort filters make the audience query slower.
+- On self-hosted deployments, raise the audience query's time budget by setting the `CDP_HOG_FLOW_BATCH_AUDIENCE_FETCH_TIMEOUT_MS` environment variable on the plugin server (the Node.js worker that runs workflows). The value is in milliseconds and defaults to `30000`. On PostHog Cloud this budget is managed for you.
+
+If the run still fails after narrowing the audience, [contact support](/docs/support) with the workflow and the time of the run so we can check the failure reason for you.
 
 ## Variables not populating?
 
@@ -65,8 +82,8 @@ Total variable size after updating '[key names]' exceeds 5KB limit. Use result_p
 
 When this error occurs, the workflow's error handling setting determines what happens next:
 
-- `on_error: abort` - The workflow exits immediately
-- `on_error: continue` - The workflow skips to the next step
+- `on_error: abort` – The workflow exits immediately
+- `on_error: continue` – The workflow skips to the next step
 
 ## Solved community questions
 

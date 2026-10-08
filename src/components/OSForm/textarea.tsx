@@ -15,6 +15,7 @@ interface TextareaProps {
     required?: boolean
     rows?: number
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
+    labelClassName?: string
     [key: string]: any
 }
 
@@ -35,6 +36,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             rows = 4,
             dataScheme,
             className = '',
+            labelClassName = '',
             ...props
         },
         ref
@@ -66,7 +68,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             >
                 {showLabel && (
                     <div className={`${direction === 'column' ? 'w-full' : labelWidth || 'w-[90px]'} pt-2`}>
-                        <label htmlFor={textareaId} className={`font-medium ${labelSizeClasses[size]}`}>
+                        <label
+                            htmlFor={textareaId}
+                            className={`font-medium ${labelSizeClasses[size]} ${labelClassName}`}
+                        >
                             <span>
                                 {label}
                                 {required && <span className="text-red dark:text-yellow ml-0.5">*</span>}

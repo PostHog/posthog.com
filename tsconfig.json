@@ -26,5 +26,7 @@
         "lib": ["dom", "es2019.array"]
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules/**/*", "staticfiles/**/*", "frontend/dist/**/*"]
+    // *.test.ts files are run directly by `node --test`, which needs explicit .ts import
+    // extensions and node: builtins – neither of which this config is set up for
+    "exclude": ["node_modules/**/*", "staticfiles/**/*", "frontend/dist/**/*", "src/**/*.test.ts"]
 }

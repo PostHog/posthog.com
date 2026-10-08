@@ -16,6 +16,7 @@ import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import FireworksAILogo from '../components/CustomerLogos/FireworksAILogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
@@ -28,7 +29,7 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
+import JunoLogo from '../components/CustomerLogos/JunoLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -37,16 +38,18 @@ import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
-import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
+import RailwayLogo from '../components/CustomerLogos/RailwayLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
+import RunableLogo from '../images/customers/runable-light.svg'
+import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -65,6 +68,14 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
+
+export type CustomerLogo =
+    | React.ComponentType<{ className?: string }>
+    | {
+          light: string
+          dark: string
+      }
 
 export interface Customer {
     slug: string
@@ -74,19 +85,14 @@ export interface Customer {
     industries?: string[]
     users?: string[]
     notes?: React.ReactNode
-    logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    logo?: CustomerLogo
     height?: number
     quotes?: Record<
         string,
         {
             name: string
             role: string
-            image: {
+            image?: {
                 thumb: string
                 url?: string
             }
@@ -94,6 +100,7 @@ export interface Customer {
             quotes?: string[]
         }
     >
+    yc?: string
     featured: boolean
     hasCaseStudy: boolean // Now always populated dynamically
 }
@@ -104,12 +111,7 @@ interface BaseCustomer {
     industries?: string[]
     users?: string[]
     notes?: React.ReactNode
-    logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    logo?: CustomerLogo
     legacyLogo?: string // Temporary until SVG component created
     legacyLogoDark?: string // Temporary until SVG component created
     height?: number
@@ -118,7 +120,7 @@ interface BaseCustomer {
         {
             name: string
             role: string
-            image: {
+            image?: {
                 thumb: string
                 url?: string
             }
@@ -126,6 +128,8 @@ interface BaseCustomer {
             quotes?: string[]
         }
     >
+    // YC batch, eg 'W20'. Only set when verified on ycombinator.com/companies
+    yc?: string
     featured: boolean
 }
 
@@ -134,7 +138,7 @@ interface BaseCustomer {
 const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     '4dayweek': {
         name: '4DayWeek',
-        toolsUsed: ['experiments', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'experiments'],
         industries: ['Recruitment'],
         users: ['Marketing', 'Leadership', 'Founders'],
         notes: 'Job board',
@@ -144,10 +148,31 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo.png',
         legacyLogoDark:
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/4dayweek/4dayweek-logo-dark.png',
+        quotes: {
+            phil_mcparlane: {
+                name: 'Phil McParlane',
+                role: 'Founder',
+                image: {
+                    thumb: '/images/customers/4dayweek_phil.jpg',
+                },
+                quotes: [
+                    "I started testing, then I started tracking events and building dashboards too. I realized PostHog is something I've been looking for for a while — somewhere I can have all the tools and analytics I need all in one place.",
+                ],
+            },
+        },
     },
     '11x': {
         name: '11x',
-        toolsUsed: ['experiments', 'product_analytics', 'ai_observability', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
@@ -155,6 +180,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // logo: 11xLogo, // TODO: Create SVG component
         legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/11x_logo_light_8c7d326edb.png',
         legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/11x_logo_dark_0934407584.png',
+        quotes: {
+            keith_fearon: {
+                name: 'Keith Fearon',
+                role: 'Head of Growth',
+                image: {
+                    thumb: '/images/customers/keith.jpg',
+                },
+                quotes: [
+                    "I've introduced PostHog to so many parts of our workflow and it's become known as the ten-in-one product thing that helps us get so much done. It really does have it all.",
+                ],
+            },
+        },
     },
     adauris: {
         name: 'Adauris',
@@ -168,11 +205,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo.png',
         legacyLogoDark:
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png',
+        quotes: {
+            varun_sharma: {
+                name: 'Varun Sharma',
+                role: 'Co-founder & CTO',
+                image: {
+                    thumb: '/images/customers/varun.jpg',
+                },
+                quotes: [
+                    'I saw some engineers raving about PostHog and decided to check it out. I gave it a go, integrated it in a few minutes, and the team has just loved it ever since.',
+                ],
+            },
+        },
     },
     airbus: {
         name: 'Airbus',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'logs',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
@@ -181,6 +240,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     assemblyai: {
         name: 'AssemblyAI',
+        yc: 'S17',
         toolsUsed: ['experiments', 'product_analytics'],
         industries: ['API Platform'],
         users: ['Leadership', 'Marketing', 'Engineering'],
@@ -188,17 +248,34 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: AssemblyAILogo,
         featured: false,
         height: 10,
+        quotes: {
+            alberto_santos: {
+                name: 'Alberto Santos',
+                role: 'Web & Brand Lead',
+                image: {
+                    thumb: '/images/customers/alberto.jpg',
+                },
+                products: {
+                    product_analytics:
+                        "Finally having a full view of what users do has helped us so much. It's helped us improve conversion, improve our support, and optimize the user journey through the platform.",
+                },
+                quotes: [
+                    'PostHog helps us debug support issues, because we push errors to PostHog as events. It may not be exactly what PostHog was intended for, but it is really useful and shows how adaptable PostHog is.',
+                ],
+            },
+        },
     },
     arena: {
         name: 'Arena',
         toolsUsed: [
-            'web_analytics',
             'product_analytics',
-            'marketing_analytics',
+            'web_analytics',
             'feature_flags',
             'experiments',
-            'error_tracking',
             'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
             'posthog_ai',
         ],
         industries: ['LLMs'],
@@ -234,27 +311,75 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
-        toolsUsed: ['experiments', 'product_analytics'],
+        yc: 'W22',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'ai_observability'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Marketing'],
         notes: 'Collaborative DevOps',
         logo: BrainboardLogo,
         featured: false,
         height: 14,
+        quotes: {
+            stephane_boghossian: {
+                name: 'Stephane Boghossian',
+                role: 'Growth Architect',
+                image: {
+                    thumb: '/images/customers/stephane.jpg',
+                },
+                quotes: [
+                    "PostHog is the only tool that allows me to actually make changes and measure if they work or not. Other tools have nice graphs and such, but you can't do actionable things with them. You can with PostHog.",
+                ],
+            },
+        },
     },
     carvertical: {
         name: 'carVertical',
-        toolsUsed: ['feature_flags', 'product_analytics'],
-        industries: ['Recruitment'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
+        industries: ['Automotive'],
         users: ['Growth', 'Engineering', 'Product'],
         notes: 'Vehicle history reports',
         logo: CarVerticalLogo,
         featured: false,
         height: 10,
+        quotes: {
+            aleksandras_nelkinas: {
+                name: 'Aleksandras Nelkinas',
+                role: 'Head of Product Engineering',
+                image: {
+                    thumb: '/images/customers/aleks.png',
+                },
+                products: {
+                    feature_flags:
+                        "Feature flags immediately bought a lot of value. What's really elegant is how flags interlink with product analytics too. We can see exactly how users react, when needed!",
+                },
+            },
+        },
     },
     clerk: {
         name: 'Clerk',
-        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics', 'cdp', 'data_warehouse', 'posthog_ai'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         // users: ['Product', 'Engineering'],
         notes: 'Identity and access management',
@@ -264,7 +389,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     cloudpeek: {
         name: 'CloudPeek',
-        toolsUsed: ['logs', 'error_tracking', 'ai_observability'],
+        toolsUsed: ['product_analytics', 'error_tracking', 'logs', 'ai_observability', 'workflows_emails'],
         industries: ['Cybersecurity'],
         users: ['Engineering'],
         notes: 'Agentic AI platform for cybersecurity',
@@ -290,19 +415,51 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    conductor: {
+        name: 'Conductor',
+        toolsUsed: ['product_analytics', 'feature_flags', 'cdp'],
+        industries: ['Devtool'],
+        notes: 'Cloud coding agents',
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_dark_b51da32b43.svg',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_light_9d1162725f.svg',
+        },
+        featured: true,
+        height: 6,
+    },
     contra: {
         name: 'Contra',
-        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'cdp'],
         industries: ['SaaS'],
         users: ['Product', 'Engineering'],
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
         featured: false,
         height: 8,
+        quotes: {
+            allison_nulty: {
+                name: 'Allison Nulty',
+                role: 'Head of Product',
+                image: {
+                    thumb: '/images/customers/allison.jpg',
+                },
+                quotes: [
+                    'A huge competitive advantage has been the ability to talk directly with PostHog engineers over Slack. We share feedback, ask questions, and make requests and always see a quick response time and thoughtful suggestions.',
+                ],
+            },
+        },
     },
     convex: {
         name: 'Convex',
-        toolsUsed: [],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         users: [],
         notes: 'Backend web app platform',
@@ -312,7 +469,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     creatify: {
         name: 'Creatify',
-        toolsUsed: ['web_analytics', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI video editor',
@@ -322,10 +489,23 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         },
         height: 12,
         featured: false,
+        quotes: {
+            xin_zhou: {
+                name: 'Xin Zhou',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/creatify-xin.png',
+                },
+                products: {
+                    web_analytics:
+                        "I don't think I could ever go back to GA4 now that we've adopted PostHog. Web analytics gives us all the metrics we really care about. It is so much easier to use than GA4.",
+                },
+            },
+        },
     },
     croissant: {
         name: 'Croissant',
-        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'surveys', 'workflows_emails'],
         industries: ['SaaS'],
         users: ['Growth', 'Product', 'Marketing'],
         notes: 'Workspace finder',
@@ -351,7 +531,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     counterpress: {
         name: 'CounterPress',
-        toolsUsed: ['endpoints', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'error_tracking', 'endpoints'],
         industries: ['SaaS', 'Publishing'],
         users: ['Engineering', 'Product'],
         notes: 'Publishing platform for sports journalism',
@@ -380,27 +560,77 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'surveys'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Marketing', 'Growth', 'Engineering'],
         notes: 'AI voice generator',
         logo: ElevenLabsLogo,
         height: 8,
         featured: true,
+        quotes: {
+            sam_sklar: {
+                name: 'Sam Sklar',
+                role: 'Growth',
+                image: {
+                    thumb: '/images/customers/elevenlabs-sam.jpg',
+                },
+                products: {
+                    feature_flags:
+                        "During testing we monitor weekly retention especially. We've got a mobile app in TestFlight at the moment and we're tracking how it retains the users we invite to it. We want to make sure it's not a leaky bucket before we invite all our web users to try it out.",
+                },
+                quotes: [
+                    "For a business like ours where we have so many different types of users, PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it's quite overwhelming to try and understand what's working and what's not.",
+                ],
+            },
+        },
     },
     exa: {
         name: 'Exa',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        yc: 'S21',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI', 'Search'],
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
         logo: ExaLogo,
         height: 9,
         featured: true,
+        quotes: {
+            liam_hinzman: {
+                name: 'Liam Hinzman',
+                role: 'Engineer',
+                products: {
+                    posthog_ai:
+                        "The best thing for me is PostHog AI. It's really nice to have it help with SQL queries when you're like 80-90% of the way there and it can finish them for you. If I get something wrong with one of my SQL operations, PostHog AI can just fix it up for me.",
+                },
+            },
+        },
     },
     fastr: {
         name: 'Fastr',
-        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'feature_flags', 'endpoints'],
         industries: ['E-commerce, MarTech'],
         users: ['Product', 'Marketing'],
         notes: 'A conversion rate optimization platform',
@@ -425,6 +655,23 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    fireworksai: {
+        name: 'Fireworks AI',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
+        industries: ['AI'],
+        notes: 'AI inference platform',
+        logo: FireworksAILogo,
+        height: 7,
+        featured: true,
+    },
     gankster: {
         name: 'Gankster',
         toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
@@ -434,6 +681,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         logo: GanksterLogo,
         height: 10,
+        quotes: {
+            dan_rosenhain: {
+                name: 'Dan Rosenhain',
+                role: 'Co-founder',
+                quotes: [
+                    "We've made these sort of discoveries multiple times thanks to having all our data in PostHog — and this is why we're always so data driven. When you're making changes that drive a 5% improvement, you only need a few wins before things really start to snowball.",
+                ],
+            },
+        },
     },
     'great-expectations': {
         name: 'Great Expectations',
@@ -445,19 +701,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // logo: GreatExpectationsLogo, // TODO: Create SVG component
         legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png',
         legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png',
+        quotes: {
+            erica_howard: {
+                name: 'Erica Howard',
+                role: 'Marketing Project Manager',
+                image: {
+                    thumb: '/images/customers/erica.jpg',
+                },
+                products: {
+                    product_analytics:
+                        'I had always wanted a tool like PostHog that let me really follow user journeys and things like that. Other tools, like Google Analytics, just let you look at overall visitors. PostHog goes so much further!',
+                },
+            },
+        },
     },
     grantable: {
         name: 'Grantable',
         toolsUsed: [
-            'workflows_emails',
-            'feature_flags',
-            'session_replay',
-            'experiments',
             'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
             'surveys',
             'error_tracking',
             'ai_observability',
             'data_warehouse',
+            'workflows_emails',
         ],
         industries: ['SaaS'],
         users: ['Data', 'Product', 'Marketing'],
@@ -481,9 +750,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     kilocode: {
         name: 'KiloCode',
-        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        notes: 'Open source AI coding platform',
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
@@ -507,9 +786,45 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    'legit-media': {
+        name: 'Legit Media',
+        toolsUsed: ['endpoints', 'product_analytics', 'session_replay', 'feature_flags'],
+        industries: ['News and Media'],
+        users: ['Engineering', 'Marketing'],
+        notes: 'Network of news websites across Africa',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+        },
+        height: 8,
+        quotes: {
+            andrey_tovstonog: {
+                name: 'Andrey Tovstonog',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/andrey_headshot_b9a99442ec.png',
+                },
+                quotes: [
+                    "About 1 out of 7 requests was successful. Before switching to Endpoints, during the last few weeks we weren't able to get any reports at all — the API was constantly responding that it was too busy and couldn't process our requests.",
+                    'The requests started to be processed much faster, and the response stability improved significantly.',
+                    'Previously, marketers had to manually gather all this information from different PostHog dashboards. After automation, everything is now consolidated and available in a single place, and they spend their time analyzing the results instead of searching for the right data.',
+                ],
+            },
+        },
+    },
     greptile: {
         name: 'Greptile',
-        // toolsUsed: ['product_analytics'],
+        yc: 'W24',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         // users: ['Engineering', 'Product'],
         notes: 'AI code reviewer',
@@ -529,10 +844,22 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo.png',
         legacyLogoDark:
             'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo-dark.png',
+        quotes: {
+            alex_turnbull: {
+                name: 'Alex Turnbull',
+                role: 'Founder',
+                image: {
+                    thumb: '/images/customers/alex.jpg',
+                },
+                quotes: [
+                    'Our developers loved PostHog the more they got into it. They could see that it was super flexible, and they saw the value in the data stack. All of us are super happy with it!',
+                ],
+            },
+        },
     },
     hasura: {
         name: 'Hasura',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Devtool'],
         users: ['Engineering', 'User Experience', 'Marketing'],
         notes: 'Open source GraphQL engine',
@@ -542,18 +869,41 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     headshotpro: {
         name: 'HeadshotPro',
-        toolsUsed: ['data_warehouse', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse'],
         industries: ['AI'],
         users: ['Growth', 'Engineering', 'Product'],
         notes: 'AI photo generator',
         logo: HeadshotProLogo,
         featured: false,
         height: 10,
+        quotes: {
+            danny_postma: {
+                name: 'Danny Postma',
+                role: 'Founder',
+                products: {
+                    data_warehouse:
+                        'Honestly, my advice to new users would be: pull in everything you can. Avoid the clutter and the platform switching. Get it all into PostHog and it makes it so much easier to work with.',
+                },
+                quotes: [
+                    'Once we had the data in PostHog, we realized it was actually a very profitable channel for us and we quickly started it back up. Now, we make sure to put everything in PostHog.',
+                ],
+            },
+        },
     },
     heygen: {
         name: 'Heygen',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'AI video generator',
         logo: HeygenLogo,
@@ -562,80 +912,180 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
-        toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
+        yc: 'W24',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
         featured: false,
         logo: HostAILogo,
         height: 12,
-    },
-    lovable: {
-        name: 'Lovable',
-        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
-        industries: ['Devtool'],
-        users: ['Engineering'],
-        notes: 'AI app & website builder',
-        featured: true,
-        logo: LovableLogo,
-        height: 8,
         quotes: {
-            viktor_eriksson: {
-                name: 'Viktor Eriksson',
-                role: 'Software Engineer',
+            punn_kam: {
+                name: 'Punn Kam',
+                role: 'Co-founder',
                 image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
+                    thumb: '/images/customers/punn-kam.jpeg',
                 },
-                quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
-                ],
+                products: {
+                    ai_observability:
+                        "PostHog and LangFuse enable us to spot early signs of dissatisfaction with our app. So far, we've been able to reach out to 10 customers and prevent them from churning because of this.",
+                },
             },
         },
     },
     jaxxon: {
         name: 'Jaxxon',
-        // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'error_tracking'],
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
-        featured: true,
+        featured: false,
         logo: JaxxonLogo,
         height: 12,
     },
     juicebox: {
         name: 'Juicebox',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'ai_observability'],
+        yc: 'S22',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
         featured: false,
         logo: JuiceboxLogo,
         height: 10,
+        quotes: {
+            david_paffenholz: {
+                name: 'David Paffenholz',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: '/images/customers/david-paffenholz.jpeg',
+                },
+                products: {
+                    ai_observability:
+                        'Speed is crucial to our user experience. We now have the ability to see which specific prompt has biggest impact on latency.',
+                },
+            },
+        },
+    },
+    juno: {
+        name: 'Juno',
+        toolsUsed: ['error_tracking', 'product_analytics'],
+        industries: ['Healthcare', 'AI'],
+        users: ['Engineering', 'Product'],
+        notes: 'AI health assistant for chronic illness',
+        featured: false,
+        logo: JunoLogo,
+        height: 10,
+        quotes: {
+            marshall_gould: {
+                name: 'Marshall Gould',
+                role: 'CEO',
+                image: {
+                    thumb: '/images/customers/marshall-gould.jpeg',
+                },
+                products: {
+                    self_driving:
+                        "It's incredible that these agents can run autonomously to identify these things. You wake up in the morning and there are PRs waiting for you. All you have to do is review and merge.",
+                },
+            },
+        },
     },
     'mention-me': {
         name: 'Mention Me',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'ai_observability',
+        ],
         industries: ['Marketing platform'],
         users: ['Product', 'Engineering', 'User Experience'],
         notes: 'Marketing referral campaigns',
         logo: MentionMeLogo,
         featured: false,
         height: 10,
+        quotes: {
+            joe_saunderson: {
+                name: 'Joe Saunderson',
+                role: 'Software Engineer',
+                image: {
+                    thumb: '/images/customers/joe.png',
+                },
+                quotes: [
+                    'We looked at Amplitude, Mixpanel and Pendo and not only were they far too expensive but it was also very unclear how they worked in terms of data privacy.',
+                ],
+            },
+            anca_filip: {
+                name: 'Anca Filip',
+                role: 'Head of Product',
+                image: {
+                    thumb: '/images/customers/anca.png',
+                },
+                products: {
+                    product_analytics:
+                        "PostHog has helped us improve our product and get a much better understanding of our users than we've ever been able to before.",
+                },
+            },
+        },
+    },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
     },
     mintlify: {
         name: 'Mintlify',
-        toolsUsed: ['session_replay', 'api'],
+        yc: 'W22',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS', 'Devtool'],
         users: ['Leadership', 'Engineering', 'Product'],
         notes: 'Product and technical docs',
         logo: MintlifyLogo,
         featured: false,
         height: 10,
+        quotes: {
+            han_wang: {
+                name: 'Han Wang',
+                role: 'Founder & CEO',
+                image: {
+                    thumb: '/images/customers/han.png',
+                },
+                quotes: [
+                    "You can quote me on this: PostHog is awesome. It's a great tool. I've used a bunch of different analytics platforms in the past and PostHog stands out for its developer friendliness and user experience. I really, really love it.",
+                ],
+            },
+        },
     },
     mistralai: {
         name: 'Mistral AI',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: ['product_analytics', 'feature_flags'],
         // users: [], // TODO: Add users
         notes: 'Open source LLMs',
         logo: MistralAILogo,
@@ -644,8 +1094,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     nationaldesignstudio: {
         name: 'National Design Studio',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: ['product_analytics', 'error_tracking'],
         // users: [], // TODO: Add users
         notes: 'Design studio of the US Government',
         logo: NationalDesignStudioLogo,
@@ -654,13 +1103,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     netdata: {
         name: 'Netdata',
-        toolsUsed: ['session_replay', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'cdp', 'data_warehouse'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering'],
         notes: 'Open source monitoring',
         logo: NetdataLogo,
         height: 8,
         featured: false,
+        quotes: {
+            andy_maguire: {
+                name: 'Andy Maguire',
+                role: 'Analytics & Machine Learning Lead',
+                image: {
+                    thumb: '/images/customers/andrewmaguire.jpeg',
+                },
+                products: {
+                    product_analytics:
+                        "I just trust that, when PostHog does something, it will do it the right way because it's not just open source code, it's all developed in the open too. You'd never get that modern thinking with the likes of Mixpanel, or other more 'Old School' platforms.",
+                },
+            },
+        },
     },
     octomind: {
         name: 'Octomind',
@@ -672,20 +1134,42 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // logo: OctomindLogo, // TODO: Create SVG component
         legacyLogo: 'https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png',
         legacyLogoDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_673e0ed777.png',
+        quotes: {
+            maria_zahorcova: {
+                name: 'Maria Zahorcova',
+                role: 'Chief Marketing Officer',
+                image: {
+                    thumb: '/images/customers/maria_octomind.jpg',
+                },
+                products: {
+                    web_analytics:
+                        'PostHog helped us understand our users and that we have a lot more global impact than we thought. We have a lot more users in the US than we expected, for example. This is something every marketer needs to understand: who are your users and where are they coming from?',
+                },
+            },
+        },
     },
     opensauced: {
         name: 'OpenSauced',
-        toolsUsed: ['product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags'],
         industries: ['SaaS', 'Devtool'],
         users: ['Leadership', 'Investors', 'Founders', 'Marketing', 'Design', 'Engineering'],
         notes: 'Open source contribution tracker',
         logo: OpenSaucedLogo,
         featured: false,
         height: 10,
+        quotes: {
+            brian_douglas: {
+                name: 'Brian Douglas',
+                role: 'Founder & CEO',
+                quotes: [
+                    "I actually added PostHog to OpenSauced even before we started raising money. That ended up being one of the best things I'd ever done too, because I could track the weekly active users in some of the default insights. It helped me validate the idea even before we started raising and building the team.",
+                ],
+            },
+        },
     },
     paper: {
         name: 'Paper',
-        toolsUsed: ['session_replay'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'error_tracking', 'data_warehouse'],
         industries: ['SaaS'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Design tool',
@@ -702,19 +1186,50 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: PhantomLogo,
         featured: false,
         height: 10,
+        quotes: {
+            francesco_agosti: {
+                name: 'Francesco Agosti',
+                role: 'CTO & Co-founder',
+                image: {
+                    thumb: '/images/customers/francesco.jpg',
+                },
+                products: {
+                    feature_flags:
+                        "Feature flags are really, really critical for us and you don't see them as a feature in other analytics tools. They are very valuable though, because you can often use feature flag data to make other product decisions.",
+                },
+                quotes: [
+                    'I liked how PostHog was open-source and how it just worked out of the box from the get-go. It lets you use your own database and it was really easy to deploy and get going.',
+                ],
+            },
+        },
     },
     pry: {
         name: 'Pry',
-        toolsUsed: ['product_analytics', 'funnels', 'session_replay', 'heatmaps'],
+        yc: 'W21',
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Financial planning for SMBs, acquired by Brex',
         logo: PryLogo,
         height: 8,
         featured: false,
+        quotes: {
+            andy_su: {
+                name: 'Andy Su',
+                role: 'Founder and CEO',
+                image: {
+                    thumb: '/images/customers/andy.jpeg',
+                },
+                products: {
+                    product_analytics:
+                        "For us, PostHog isn't just about making decisions. A lot of our product and marketing ideas come from looking at the analytics too. There are things you don't even think of until you see the data.",
+                },
+            },
+        },
     },
     posthog: {
         name: 'PostHog',
+        yc: 'W20',
         toolsUsed: [
             'web_analytics',
             'product_analytics',
@@ -728,13 +1243,25 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'posthog_ai',
         ],
         notes: <>Would it be clever or lame if we included our own company here?</>,
-        logo: PostHogLogo,
+        logo: {
+            light: '/brand/posthog-logo.svg',
+            dark: '/brand/posthog-logo-white.svg',
+        },
         height: 10,
         featured: true,
     },
     purplewave: {
         name: 'Purple Wave',
-        toolsUsed: ['surveys'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['E-commerce'],
         users: ['Product'],
         notes: 'Heavy duty equipment marketplace',
@@ -757,7 +1284,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     qred: {
         name: 'Qred',
-        toolsUsed: ['feature_flags', 'session_replay', 'experiments', 'product_analytics', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['Fintech'],
         users: ['Engineering', 'Product', 'Marketing'],
         notes: 'Business loans and financial services',
@@ -787,7 +1323,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'session_replay',
             'surveys',
             'ai_observability',
-            'warehouse_sources',
+            'data_warehouse',
         ],
         industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
         users: ['Engineering'],
@@ -813,7 +1349,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
-        toolsUsed: [], // TODO: Add toolsUsed
+        yc: 'W20',
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'The MacOS Spotlight that Apple should have built',
@@ -823,7 +1360,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     rayfit: {
         name: 'RayFit',
-        toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         industries: ['Fitness'],
         users: ['Product', 'Engineering'],
         notes: 'AI personal training app',
@@ -847,27 +1384,131 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 6,
     },
+    railway: {
+        name: 'Railway',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
+        industries: ['Devtool'],
+        notes: 'Cloud infrastructure platform',
+        logo: RailwayLogo,
+        featured: true,
+        height: 8,
+    },
+    runable: {
+        name: 'Runable',
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'logs',
+            'ai_observability',
+            'data_warehouse',
+            'cdp',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Growth'],
+        notes: 'AI agent platform for small business owners',
+        featured: false,
+        logo: {
+            light: RunableLogo,
+            dark: RunableLogoDark,
+        },
+        height: 8,
+        quotes: {
+            ankit_kumar: {
+                // This is the author handle used in OSQuote
+                name: 'Ankit Kumar',
+                role: 'Software Development Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ankit_caa4201fc2.png',
+                },
+                quotes: [
+                    'All decisions are driven by PostHog metrics. It gives us the direction when something is failing or impacts a specific event that really helps us a lot.',
+                ],
+            },
+            eshaan_pawan: {
+                name: 'Eshaan Pawan',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Eshaan_dfad398910.png',
+                },
+                quotes: [
+                    "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
+                    'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
+    },
     rebtel: {
         name: 'Rebtel',
-        toolsUsed: ['product_analytics', 'experiments'],
-        notes: 'Telecom',
+        toolsUsed: ['product_analytics', 'web_analytics', 'feature_flags', 'experiments', 'cdp', 'data_warehouse'],
+        industries: ['Telecom'],
+        users: ['Data'],
+        notes: 'International calling and messaging',
         logo: RebtelLogo,
         featured: false,
         height: 10,
+        quotes: {
+            chandan_singh: {
+                name: 'Chandan Singh',
+                role: 'Head of Data',
+                quotes: [
+                    "Unlike other tools, PostHog's product offered us a way to get immediate value now and a clear roadmap to increase our adoption later.",
+                    "Using PostHog lets us stay flexible. We didn't want a months-long migration project. We wanted to integrate quickly and run experiments now, while also having room to grow later without having to start the whole process again.",
+                ],
+            },
+        },
     },
     researchgate: {
         name: 'ResearchGate',
-        toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+        ],
         industries: ['Science', 'Social network'],
         users: ['Growth', 'Engineering', 'Product', 'Marketing'],
         notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+        quotes: {
+            paul_mccloud: {
+                name: 'Paul McCloud',
+                role: 'Head of Product Engineering',
+                image: {
+                    thumb: '/images/customers/paul_mccloud.jpg',
+                },
+                quotes: [
+                    "Something I didn't get at the start was the clip at which PostHog adds new products. What you don't really understand until you've experienced it is that, because all these tools are built on the same fundamental architecture, the value of PostHog becomes exponential as new tools get connected!",
+                ],
+            },
+        },
     },
     resend: {
         name: 'Resend',
-        // toolsUsed: ['product_analytics', 'experiments'],
+        yc: 'W23',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         notes: 'Email delivery service',
         logo: ResendLogo,
         featured: true,
@@ -875,7 +1516,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     significa: {
         name: 'Significa',
-        toolsUsed: ['web_analytics', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay'],
         industries: ['Agency'],
         users: ['Marketing'],
         notes: 'Digital agency',
@@ -899,17 +1540,37 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     speakeasy: {
         name: 'Speakeasy',
-        toolsUsed: ['feature_flags', 'product_analytics', 'dashboards'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Developer Relations'],
         notes: 'API generator',
         logo: SpeakeasyLogo,
         featured: false,
         height: 6,
+        quotes: {
+            nolan_sullivan: {
+                name: 'Nolan Sullivan',
+                role: 'Founding Developer Relations Lead',
+                image: {
+                    thumb: '/images/customers/speakeasy-nolan.jpg',
+                },
+                quotes: [
+                    'I love that PostHog is an all-in-one tool, with all the features of LaunchDarkly and all those other enterprise platforms. It is just so nice not having to go into multiple UIs to make changes and manage things.',
+                ],
+            },
+        },
     },
     squadsventures: {
         name: 'SquadS Ventures',
-        toolsUsed: ['product_analytics', 'session_replay', 'error_tracking'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'surveys', 'error_tracking'],
         notes: 'Venture funding for LatAm startups',
         logo: SquadSVenturesLogo,
         featured: false,
@@ -931,17 +1592,44 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
-        toolsUsed: ['posthog_ai', 'experiments', 'product_analytics'],
+        yc: 'S20',
+        toolsUsed: [
+            'product_analytics',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['Devtool'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Postgres in the cloud',
         logo: SupabaseLogo,
         featured: true,
         height: 10,
+        quotes: {
+            aleksi_immonen: {
+                name: 'Aleksi Immonen',
+                role: 'Growth Marketer',
+                image: {
+                    thumb: '/images/customers/aleksi.jpg',
+                },
+                products: {
+                    posthog_ai:
+                        'I like PostHog AI as a helper because it knows PostHog terminology, as well as the data model, and schemas. It can fix my mistakes, help me join the right tables, and more. It makes everything a lot easier and faster.',
+                },
+                quotes: [
+                    "I think PostHog is just super. It's great for data collection, A/B testing, and web analytics. Plus, I also just really love James' meme game.",
+                    'So, yeah, PostHog has literally helped us get 10X more weekly new users than we did a year ago.',
+                ],
+            },
+        },
     },
     suped: {
         name: 'Suped',
-        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'data_warehouse', 'workflows_emails'],
         industries: ['SaaS'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Email authentication and deliverability platform',
@@ -967,8 +1655,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     startengine: {
         name: 'StartEngine',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'ai_observability',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
@@ -977,7 +1673,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     trust: {
         name: 'Trust',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'feature_flags'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Crypto wallet',
@@ -987,7 +1683,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Most popular country with a King',
@@ -997,28 +1693,72 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     vendasta: {
         name: 'Vendasta',
-        toolsUsed: ['experiments', 'cdp'],
+        toolsUsed: ['product_analytics', 'experiments', 'cdp'],
         industries: ['SaaS'],
         users: ['Product', 'Engineering'],
         notes: 'Channel partner platform',
         logo: VendastaLogo,
         featured: false,
         height: 10,
+        quotes: {
+            taric_santos: {
+                name: 'Taric Santos de Andrade',
+                role: 'Product Manager',
+                image: {
+                    thumb: '/images/customers/taric.jpg',
+                },
+                quotes: [
+                    'I use PostHog on a daily basis. My team has four engineers, as well as designers, and we need to collaborate closely across areas of the product we own, such as our onboarding flow.',
+                ],
+            },
+        },
     },
     webshare: {
         name: 'Webshare',
-        toolsUsed: ['experiments', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['Devtool'],
         users: ['Marketing', 'Leadership', 'Customer Success'],
         notes: 'Proxy server',
         logo: WebshareLogo,
         featured: false,
         height: 10,
+        quotes: {
+            utku_zihnioglu: {
+                name: 'Utku Zihnioglu',
+                role: 'Founder & CEO',
+                image: {
+                    thumb: '/images/customers/utku.jpg',
+                },
+                products: {
+                    experiments:
+                        'We saw PostHog, and saw that it does everything that we needed, and had all these syncing capabilities too. We just knew right away that it was the right tool for us. We started using all of its capabilities.',
+                },
+                quotes: [
+                    "That's why PostHog is our favorite tool; it's the single source of truth for us. We knew exactly what we wanted to do when we were coming from Mixpanel and Hotjar. We wanted to move away from all these separate tools, and put everything in one place. PostHog absolutely nails it.",
+                ],
+            },
+        },
     },
     wisprflow: {
         name: 'WisprFlow',
-        //toolsUsed: [''],
-        //industries: ['Devtool'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: ['Marketing', 'Leadership', 'Customer Success'],
         notes: 'AI voice dictation',
         logo: WisprFlowLogo,
@@ -1027,27 +1767,56 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wittyworks: {
         name: 'Witty Works',
-        toolsUsed: ['dashboards'],
+        toolsUsed: ['product_analytics'],
         industries: ['SaaS', 'Browser extension'],
         users: ['Marketing', 'Engineering'],
         notes: 'AI writing assistant',
         logo: WittyWorksLogo,
         featured: false,
         height: 10,
+        quotes: {
+            lukas_smith: {
+                name: 'Lukas Smith',
+                role: 'CTO & Co-founder',
+                image: {
+                    thumb: '/images/customers/lukas-witty.jpeg',
+                },
+                quotes: [
+                    "I have a long history in open source. I found the community very responsive and open to both feedback and even to code changes. That gave me assurance that, if PostHog can't do something, there's a realistic path to building it myself.",
+                    "The app system is sort of like an insurance policy. We don't know everything we'll need in the future, but if we need Feature X then apps give us a path to getting it even if it isn't part of PostHog.",
+                ],
+            },
+        },
     },
     ycombinator: {
         name: 'Y Combinator',
-        toolsUsed: ['experiments', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments'],
         industries: ['SaaS', 'Education'],
         users: ['Leadership', 'Engineering', 'Product'],
         notes: "World's premier startup accelerator",
         logo: YCombinatorLogo,
         height: 10,
         featured: true,
+        quotes: {
+            cat_li: {
+                name: 'Cat Li',
+                role: 'Product & Engineering Lead',
+                image: {
+                    thumb: '/images/customers/cat.jpeg',
+                },
+                products: {
+                    experiments:
+                        "PostHog's experimentation suite is really great. We recently used it to improve our matching algorithm by running an experiment which hides profiles that have been stale for 3, 6, 9 or 12 weeks. We found that users in the 6-week group sent 40% more messages than the control group - a huge improvement for us!",
+                },
+                quotes: [
+                    "One thing I love about PostHog is that we have a shared Slack channel, for support and feedback. We can chat directly to the engineers building PostHog and they're always really responsive.",
+                ],
+            },
+        },
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['ai_observability', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'ai_observability'],
         industries: ['Recruitment'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',

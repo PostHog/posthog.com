@@ -1,0 +1,31 @@
+---
+title: AI Observability in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where you actually read your AI product's traces. Open **AI Observability** in [PostHog](https://app.posthog.com) and you land on a dashboard of cost, latency, token usage, and error rate, with tabs for traces, sessions, users, tools, and errors alongside it.
+
+From there you can open any trace to see the full conversation – every [generation](/docs/ai-observability/generations) and [span](/docs/ai-observability/spans) in order, with inputs, outputs, model, tokens, and cost on each one. Traces carry the person who triggered them, so you can jump straight to their [session replay](/docs/ai-observability/link-session-replay) or any [exception](/docs/ai-observability/link-error-tracking) the request threw.
+
+## Before you start
+
+1. **Set up AI Observability** – [install a PostHog LLM SDK or provider integration](/docs/ai-observability/installation) so traces are captured.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Analyze LLM performance](/docs/ai-observability/dashboard)** – track cost, latency, tokens, and error rate across models, features, and users.
+- **[Read traces and sessions](/docs/ai-observability/traces)** – follow a single request end to end, or a whole multi-visit [session](/docs/ai-observability/sessions).
+- **[Test prompts in the playground](/docs/ai-observability/playground)** – rerun a prompt against a different model or wording without redeploying.
+- **[Cluster similar traces](/docs/ai-observability/clusters)** – group conversations by what users were actually trying to do, so failure patterns stand out.
+- **[Check sentiment](/docs/ai-observability/sentiment)** – see which conversations left users frustrated, classified automatically.
+- **[Summarize a trace](/docs/ai-observability/summarization)** – get a written summary and flow diagram of a long agent run instead of reading every message.
+- **[Analyze traces with PostHog AI](/docs/ai-observability/analyze-traces-ai)** – ask PostHog AI, right here in the web app, about spend, latency, and errors across your trace data, and have it write [custom parsers](/docs/ai-observability/custom-parser) for trace formats it doesn't recognize. It's an interaction mode inside the web app, not a separate surface.
+
+## Related
+
+- Start with the [data model](/docs/ai-observability/basics) if traces, spans, and generations are new to you.
+- Query the same data from your editor over [MCP](/docs/ai-observability/surfaces/mcp).
+- Drive the same things from your own code with the [API](/docs/ai-observability/surfaces/api).
+- Score your traces automatically with [evaluations](/docs/ai-evals).

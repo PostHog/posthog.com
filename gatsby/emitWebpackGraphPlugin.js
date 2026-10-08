@@ -88,7 +88,25 @@ class EmitWebpackGraphPlugin {
                     roots.push(moduleIndex)
                 }
             }
-            entrypoints[name] = { roots }
+            // The modules webpack actually placed into this entrypoint's INITIAL
+            // (synchronously loaded) chunks — the post-tree-shaking shipped set. A module
+            // whose used exports were all eliminated is never assigned to a chunk, so it
+            // does not appear here even though it is still statically reachable in the
+            // module graph. Measuring this set instead of walking the static import graph
+            // is what makes the eager-size check tree-shake-aware: a re-export barrel only
+            // costs the sub-modules that survive into the output, not everything it names.
+            // Async chunks live in child chunk groups (from import() blocks), not in
+            // `entrypoint.chunks`, so they are correctly excluded from the eager set.
+            const eager = new Set()
+            for (const initialChunk of entrypoint.chunks) {
+                for (const module of chunkGraph.getChunkModulesIterable(initialChunk)) {
+                    const moduleIndex = indexOf.get(module)
+                    if (moduleIndex !== undefined) {
+                        eager.add(moduleIndex)
+                    }
+                }
+            }
+            entrypoints[name] = { roots, eager: [...eager] }
         }
 
         fs.mkdirSync(path.dirname(this.outputPath), { recursive: true })

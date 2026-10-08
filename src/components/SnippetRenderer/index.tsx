@@ -21,7 +21,7 @@ export default function SnippetRenderer() {
     const snippetCode = codeMatch ? codeMatch[1] : rawContent
 
     return (
-        <div className="max-w-4xl mx-auto overflow-x-auto overflow-y-hidden">
+        <div className="max-w-4xl overflow-x-auto overflow-y-hidden">
             <CodeBlock code={snippetCode} language="html" hideNumbers={false} lineNumberStart={1} tooltips={[]} />
         </div>
     )

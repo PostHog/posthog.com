@@ -8,17 +8,11 @@ Welcome to PostHog!
 
 Giving a new joiner a great onboarding experience is super important to us. We want new joiners to feel they’ve made the right decision to join us, and that they are excited and committed to what we’re doing as a company.
 
-> Want to introduce a new joiner to the People team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
-
 Our [team](/people) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
 
-## Onboarding checklist
+## Onboarding email
 
-This is maintained as <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md">an issue template in GitHub</PrivateLink>. The People team will create a new onboarding issue for each new joiner.
-
-### Onboarding email
-
-We send an introductory email to all new hires to welcome them to the team and ease them in the some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email.
+We send an introductory email to all new hires to welcome them to the team and ease them into some of the essential actions we need them to take. Once they've completed their items and signed their contracts, People & Ops will get them onboarded into their initial accesses and onboarding channel.
 
 > Once you've joined PostHog, we will **not** use email for communicating with each other. For example, James or Tim will never ask you to do something critical over email only – they'll always confirm it over Slack, and so will everyone else. Be extremely cautious of direct emails from James, Tim, or other people of PostHog.
 
@@ -28,16 +22,27 @@ The onboarding email is sent by the People team directly. We want to strike a ba
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
+## Onboarding checklist
+
+Once your accounts are set up, you'll get a welcome message in your onboarding channel with a link to the [Ops Platform](https://ops.posthog.dev/welcome) to get started. Everything you need to do, including the role-specific tasks your team adds, is tracked there in one place. When you first log in, you'll land on a welcome page with a short set of preboarding tasks, and your full checklist lives on your employee profile.
+
 ## Onboarding buddy
 
-Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
+Every new joiner at PostHog has an onboarding buddy, usually the team lead. If the team lead can't take it on (timing, leave, etc.), they'll arrange for another team member to be the buddy instead. Whoever it is, please make sure you don't have any leave booked in the week before and the two weeks after the new starter joins.
+
+If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. They can help with questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it's nice to have a dedicated person to help.
+
+Each new joiner will have a dedicated Slack channel just for onboarding, named `#onboarding-[who]-[team]-[month]-[year]-[where]`. The team lead and the People & Ops team are automatically in there. Other team members who will be involved in the onboarding can choose to join or be added to the channel as well.
+
+It's the best place to ask questions during your onboarding and first few days. Once you've signed your contract, we'll get you set up with everything you need to hit the ground running: your PostHog Google account and email, Slack, GitHub, a company card, access to the ops platform, and the tools specific to your role.
+
+Your GitHub invitation may arrive separately from your Google and Slack invitations.
+Ask People & Ops in your onboarding channel when to expect GitHub access.
 
 ### Guidance for onboarding buddies
 
--   Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure that you don't have any leave booked in the week before and the two weeks after the new starter joins_
--   We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen.
-    > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
--   Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
+-   Say hi to your new joiner in their onboarding channel and decide together where and when the in-person onboarding will happen. Request a budget through the Slack offsite app `/offsite`! For the budget and travel, see [In-person onboarding](/handbook/people/onboarding#in-person-onboarding).
+-   Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#your-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding checklist.
     -   Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
 -   You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so.
 -   As onboarding buddy, you are responsible for making sure the onboarding is fun and effective, so you should make sure there's a clear plan for work _and_ social time. Great in-person onboarding is crucial for getting someone started at PostHog.
@@ -47,24 +52,19 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. With very few exceptions (visa issues or excessive travel time), in-person onboarding should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](/handbook/company/offsites#hedge-house) in London. Both are set up for it, remove most of the planning friction, and you'll always be in the same space as other PostHog teams — which is way more fun, and means you'll meet more people. Regardless of location, everyone should have their own bedroom.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. With very few exceptions (visa issues or excessive travel time), in-person onboarding should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](/handbook/company/offsites#hedge-house) in London. Both are set up for it, remove most of the planning friction, and you'll always be in the same space as other PostHog teams — which is way more fun, and means you'll meet more people. Regardless of location, everyone should have their own bedroom.
 
-In these cases, the process is:
-
--   Preemptively create the new team member a Google account
--   Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
--   Have the new team member book travel as usual
+To stay at the Hedge House London, book a bedroom through the @HedgeHouse London app via Slack; booking a room automatically reserves you a desk for the week. Message Kendal with any questions.
 
 While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite, which is $2,000 per person. Some considerations to reduce the cost:
 
 -   Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
 -   Consider doing more casual social activities that are less expensive: dinners, drinks etc
--   You can request budget for the team lead +1 more team member as an onboarding budget, any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
-    -   Create a Slack channel for the onboarding (`#onboarding-[who]-[team]-[month]-[year]-[where]`) add everyone who’s going 
+-   You can request budget for the team lead +1 more team member as an onboarding budget using the Slack command `/offsite`. Any other team members joining can use their working together budget (be mindful that onboardings are distracting so the more team members you have join, the less productive the team will be that week, you also have offsites for the team to all get together).
 -   The new team member already has their own onboarding budget to book their flights and accommodation, so do not include them in the budget.
 -   See if there are any other onboardings at the same time you could pair up with
 
-Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). Request a budget in Brex in USD for any onboardings you are doing. There will of course be some exceptions to this, please just include the reasoning in your brex budget request, and ensure to list who the budget request is for.
+Aim to keep things sensible and cheap. As always, use your best judgement when [spending money](/handbook/people/spending-money). There will of course be some exceptions to this, please just include the reasoning in your Brex budget request, and ensure to list who the budget request is for.
 
 > You should by default avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) as they serve different purposes. The focus of onboarding is generally on making the new team member successful, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time. However, it may occasionally make sense to combine the two - just use your judgement.
 
@@ -83,7 +83,7 @@ Your first week can definitely be a bit overwhelming at any new company, so here
 - You will get all your equipment set up and get access to all the accounts you need
 - You will receive your new hire kit (which includes [No Rules Rules](https://www.penguin.co.uk/books/439530/no-rules-rules-by-meyer-reed-hastings-and-erin/9780753560969) which we encourage everyone to read as it gives you a great insight into how we work as a company)
 - You should try and set up a few calls with a range of people to introduce yourself
-- You should try and speak to some actual users of your product. Your manager or PM will help you set these up, and this can be a great source of things to work on in your first week.
+- You should try and speak to some actual users of your product. Your team lead or PM will help you set these up, and this can be a great source of things to work on in your first week.
 - You should dive straight in, fix a typo in the handbook, ship a tiny bug fix, anything to get you going! 
 
 > **If your laptop is delayed:** In rare cases your PostHog-issued laptop may not arrive until several days after your start date. If that happens, you can begin non-sensitive onboarding tasks (reading the handbook, intro calls, etc.) on your personal laptop in the meantime. Treat a personal laptop as less trusted:
@@ -130,6 +130,7 @@ We use a number of different tools to organise our work and communicate at PostH
 
 ### Everyone
 
+-   PostHog ops platform (ops.posthog.dev) - onboarding, employee profiles and people ops
 -   Google Suite - Gmail, Google Apps such as Docs, Sheets, Slides
 -   GitHub - most comms and product work
 -   Slack - we have an internal workspace and a users Slack as well
@@ -153,7 +154,7 @@ We use a number of different tools to organise our work and communicate at PostH
 ### Ops, People & CS
 
 -   Salesforce - customer CRM
--   Zendesk - our support platform
+-   PostHog Support - our support platform
 -   Mosaic - financial modelling
 -   Carta - cap table management
 -   Fondo - US accounting
@@ -202,14 +203,14 @@ In this call the support engineer will be able to answer any questions, as well 
 
 -   [ ] [What the role of a support hero is](/handbook/support/customer-support#support-is-done-by-actual-engineers) and how they can expect to receive tickets/escalations
 -   [ ] [An overview of where tickets come from](/handbook/support/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
--   [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
--   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
--   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
+-   [ ] [How tickets get created from Slack threads](/handbook/support/posthog-support#how-do-tickets-get-created) and how to [transfer tickets to other teams](/handbook/support/posthog-support#transferring-a-ticket-to-another-team)
+-   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/support/posthog-support#prioritizing-tickets)
+-   [ ] [How and when to mark tickets as 'On hold' or 'Pending'](/handbook/support/posthog-support#ticket-statuses)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
--   [ ] How to avoid duplication of effort in Zendesk
--   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
--   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
+-   [ ] How to deal with [bug reports and feature requests](/handbook/support/customer-support#how-do-i-handle-a-bug-report-or-feature-request), and how to [merch customers](/handbook/company/merch-store#merch-giveaways)
+-   [ ] How to avoid duplication of effort by [assigning tickets when you start work](/handbook/support/posthog-support#working-on-a-ticket)
+-   [ ] [Where your tickets live](/handbook/support/posthog-support#where-do-the-tickets-live)
+-   [ ] When to use [private notes](/handbook/support/posthog-support#private-notes), and raising internal questions about a ticket in Slack
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 
@@ -250,42 +251,91 @@ Below are a list of Slack channels you may find helpful:
 ### Work-related channels
 
 -   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
--   `#brand-mentions`
--   `#do-more-weird`
--   `#newsletters`
--   `#team-blitzscale`
--   `#dev`
--   `#general`
--   `#alerts`
--   `#industry-news`
--   `#changelog` - keep up with all the cool things we're shipping across the team
+-   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F) - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
+-   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) - company-wide announcements about our people, products, policies, and projects
+-   [#at-posthog-anything](https://posthog.slack.com/archives/C07TQR0V16U) - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
+-   [#general](https://posthog.slack.com/archives/CSPHFDZH8) - see new starters, work anniversaries, birthdays and all-hands recordings
+-   [#changelog](https://posthog.slack.com/archives/C099B0YCULT) - keep up with all the cool things we're shipping across the team
+-   `#today-i-learned` - where we share what we learn
+-   `#demo-posthog-anything` - show the team something you built, or see what others are building
+-   `#phishing-attempts` - report suspicious emails, texts, and messages here
+-   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
+-   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
+-   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
+-   [#industry-news](https://posthog.slack.com/archives/C01NWR6F58F)
+-   [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4)
+
+### Engineering channels
+
+If you are an engineer, join these in addition to the work-related channels above:
+
+-   [#dev](https://posthog.slack.com/archives/C0113360FFV) - general engineering discussion
+-   `#dev-ai` - how we use AI tools and coding agents in our own work
+-   `#dev-stamp-exchange` - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
+-   `#github-rfcs` - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
+-   `#flakey-tests` - reports of tests that fail intermittently in CI
+-   `#incidents` - incident declarations and post-mortem summaries. Set this channel to notify you about every message
+-   [#alerts](https://posthog.slack.com/archives/C0185UNBSJZ) - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
+-   `#support-infrastructure` - deployment problems, infrastructure questions, and requests for cloud access
+-   `#aws-access` - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
+-   `#papercuts` - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
+
+Every small team also has a `#team-[team-name]` channel and a `#support-[team-name]` channel, named after the team on the [teams page](/teams). Join the channels for your own team, then add the teams you work with most.
 
 ### Social channels
 
 We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
 
--   `#food`
--   `#kids`
--   `#no-context-posthog`
--   `#random`
--   `#whereintheworld`
--   `#devel-random`
--   `#books-and-films`
--   `#climbing`
--   `#coffee-snobs`
--   `#dad-jokes`
--   `#fitness`
--   `#hoglife`
--   `#rockets`
--   `#stonks`
--   `#cycling`
--   `#listening-to`
--   `#design-inspiration`
+#### Daily chit-chat
+
+-   [#casual-ask-posthog-anything](https://posthog.slack.com/archives/C0B5F648MDE)
+-   [#design-inspiration](https://posthog.slack.com/archives/C01KEAGD601)
+-   [#devel-random](https://posthog.slack.com/archives/C02EJABQ39R)
+-   [#hoglife](https://posthog.slack.com/archives/C033D5NTA22)
+-   [#memespo](https://posthog.slack.com/archives/C0AD19VV7MH)
+-   [#no-context-posthog](https://posthog.slack.com/archives/C0790T52ZHT)
+-   [#random](https://posthog.slack.com/archives/CT2BU33N1)
+-   [#whereintheworld](https://posthog.slack.com/archives/C01D3U32PUN)
+
+#### Hobbies and interests
+
+-   [#aviation](https://posthog.slack.com/archives/C076ZQFM42U)
+-   [#books-and-films](https://posthog.slack.com/archives/C01HEH7FXRN)
+-   [#cars-and-driving](https://posthog.slack.com/archives/C068GE7G8BB)
+-   [#climbing](https://posthog.slack.com/archives/C08QQ4HGV8R)
+-   [#coffee-snobs](https://posthog.slack.com/archives/C0732DWLUA0)
+-   [#cycling](https://posthog.slack.com/archives/C01P1NBUZDY)
+-   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
+-   [#food](https://posthog.slack.com/archives/C02EYG134RW)
+-   [#fitness](https://posthog.slack.com/archives/C03PH4UTD9V)
+-   [#gaming](https://posthog.slack.com/archives/C01HBHP6BRA)
+-   [#golf](https://posthog.slack.com/archives/C09LN9LAR3M)
+-   [#homelab](https://posthog.slack.com/archives/C03PJA57E3V)
+-   [#kids](https://posthog.slack.com/archives/C076X3C284D)
+-   [#listening-to](https://posthog.slack.com/archives/C01EJ20SK42)
+-   `#merch`
+-   [#pets](https://posthog.slack.com/archives/C02G88X9R2R)
+-   [#rockets](https://posthog.slack.com/archives/C01LREJ3NPL)
+-   [#running](https://posthog.slack.com/archives/C08HBBYT9DW)
+-   `#shitposters-unite`
+-   `#skiing`
+-   [#stonks](https://posthog.slack.com/archives/C01L9FZBRPD)
+-   [#wedding-planners](https://posthog.slack.com/archives/C082AS81RD0)
 
 ### Location specific channels
 
--   `#london`
--   `#germany`
--   `#sf-bay-area`
-    etc.
+Join wherever you're based, plus anywhere you travel often - posting in these channels is the easiest way to find teammates for a coffee, a coworking day, or dinner while you're in town.
+
+-   **Austria:** [#vienna](https://posthog.slack.com/archives/C09GE5B5AQ2)
+-   **Canada:** [#canada](https://posthog.slack.com/archives/C09GRQL9FUN)
+-   **France:** [#france](https://posthog.slack.com/archives/C04DDUWSH29)
+-   **Germany:** [#germany](https://posthog.slack.com/archives/C06GGF6AAHG)
+-   **Hungary:** [#budapest](https://posthog.slack.com/archives/C09K36PQY73)
+-   **Ireland:** [#ireland](https://posthog.slack.com/archives/C09LM32PB25)
+-   **Latin America:** [#latam](https://posthog.slack.com/archives/C085FD96WAK)
+-   **Netherlands:** [#amsterdam](https://posthog.slack.com/archives/C096RNZF75H)
+-   **Portugal:** [#lisbon](https://posthog.slack.com/archives/C097A897XP1)
+-   **Spain:** [#spain](https://posthog.slack.com/archives/C090ADXGJGH), [#barcelona](https://posthog.slack.com/archives/C09E9Q37YCA)
+-   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5), [#uk-north](https://posthog.slack.com/archives/C0BSCKLMY12)
+-   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF),  [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG)

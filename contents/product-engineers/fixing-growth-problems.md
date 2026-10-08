@@ -9,7 +9,6 @@ featuredImageType: full
 tags:
   - Product engineers
   - Founders
-  - Growth engineering
   - Growth
 crosspost:
   - Founders

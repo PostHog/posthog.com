@@ -34,9 +34,9 @@ The connected data is stale or incomplete until the sync succeeds again. The mos
 
 ## This check is not auto-fixed
 
-> Unlike the other checks, external data sync failures are **surfaced as alerts but do not open an automatic fix**. Fixing them usually requires re-entering credentials, which can't be done over the API – so this is the one check [PostHog Code](/docs/posthog-code) intentionally leaves to you.
+> Unlike the other checks, external data sync failures are **surfaced as alerts but do not open an automatic fix**. Fixing them usually requires re-entering credentials, which can't be done over the API – so this is the one check [PostHog Desktop](/docs/posthog-desktop) intentionally leaves to you.
 
-That said, if you investigate it through PostHog Code, the agent can still diagnose the failure for you – listing and inspecting the source, reading the actual sync error, and applying config-only fixes (like resyncing or updating a schema mapping) where credentials aren't the problem. It will surface the exact error and ask you to reconnect the source when credentials are involved.
+That said, if you investigate it through PostHog Desktop, the agent can still diagnose the failure for you – listing and inspecting the source, reading the actual sync error, and applying config-only fixes (like resyncing or updating a schema mapping) where credentials aren't the problem. It will surface the exact error and ask you to reconnect the source when credentials are involved.
 
 ## Related
 

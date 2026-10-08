@@ -24,17 +24,18 @@ Additional reports will be added based on user feedback we receive via our [in-a
 ## Requirements
 
 - A Pinterest Ads account with permission to access data from the accounts you want to sync.
-- Your Ad Account ID from [Pinterest Business](https://business.pinterest.com/) > Ads > select your account > the ID is in the URL or account settings.
+
+> **Tip:** If you need to find your Ad Account ID manually, go to [Pinterest Business](https://business.pinterest.com/) > Ads > select your account. The ID is in the URL or account settings.
 
 ## Configuring PostHog
 
-Connect PostHog to your Pinterest Ads account. The Pinterest account must have permission to access the ad account data.
+Connect PostHog to your Pinterest Ads account using a Pinterest account. The Pinterest account must have permission to access the ad account data.
 
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find Pinterest Ads in the sources list and click **Link**.
-4. Enter the **Ad Account ID** of the Pinterest Ads account you want to sync.
-5. Select an existing Pinterest Ads account, or create a new integration.
+4. Connect your Pinterest account by selecting an existing integration or creating a new one.
+5. Select the **Ad Account** you want to sync from the dropdown. Each account displays your permission level (Owner, Campaign Manager, etc.).
 6. (Optional) Add a prefix for the table name.
 
 ## Configuration

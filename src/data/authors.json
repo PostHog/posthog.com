@@ -32,7 +32,7 @@
     },
     {
         "handle": "joe-martin",
-        "name": "Joe Martin",
+        "name": "Joe Black",
         "role": "Product Marketer",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/joemartinwords",
@@ -685,11 +685,11 @@
     },
     {
         "handle": "rohit-rajpal",
-        "name": "Rohit Rajpal ",
+        "name": "Rohit Rajpal",
         "role": "Freelance Technical Writer",
         "link_type": "github",
-        "link_url": "https://github.com/ioannisj",
-        "profile_id": 31730
+        "link_url": "https://github.com/rajpalrohit04",
+        "profile_id": 46025
     },
     {
         "handle": "nyior-clement",
@@ -700,11 +700,115 @@
         "profile_id": 46202
     },
     {
+        "handle": "temitope-oyedele",
+        "name": "Temitope Oyedele",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/temitope-oyedele-57b772163/",
+        "profile_id": 46527
+    },
+    {
         "handle": "tanaaz-khan",
         "name": "Tanaaz Khan",
         "role": "Freelance Technical Writer",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/tanaaz-khan/",
         "profile_id": 46489
+    },
+    {
+        "handle": "chosen-vincent",
+        "name": "Chosen Vincent",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/chosenvincent1/",
+        "profile_id": 46591
+    },
+    {
+        "handle": "oyedele-tioluwani",
+        "name": "Oyedele Tioluwani",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/oyedele-tioluwani-ba5a65247/",
+        "profile_id": 46686
+    },
+    {
+        "handle": "daniel-efe",
+        "name": "Daniel Efe",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/daniel-efe-405497253/",
+        "profile_id": 46907
+    },
+    {
+        "handle": "rohan-taneja",
+        "name": "Rohan Taneja",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/rohnx/",
+        "profile_id": 46998
+    },
+    {
+        "handle": "avdhoot-fulsundar",
+        "name": "Avdhoot Fulsundar",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/avdhoot-fulsundar/",
+        "profile_id": 47036
+    },
+    {
+        "handle": "thiago-rocha-salvatore",
+        "name": "Thiago Rocha Salvatore",
+        "role": "Product Engineer",
+        "profile_id": 45980
+    },
+    {
+        "handle": "jake-sciotto",
+        "name": "Jake Sciotto",
+        "role": "Customer Success Manager",
+        "profile_id": 43452
+    },
+    {
+        "handle": "will-wearing",
+        "name": "Will Wearing",
+        "role": "Technical Account Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/willwearing",
+        "profile_id": 41941
+    },
+    {
+        "handle": "georgis",
+        "name": "Georgis Andonis",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/georgis-andonis/",
+        "profile_id": 35171
+    },
+    {
+        "handle": "daniel-zaltsman",
+        "name": "Daniel Zaltsman",
+        "role": "Builder relations team lead",
+        "profile_id": 34023
+    },
+    {
+        "handle": "cory-slater",
+        "name": "Cory Slater",
+        "role": "Product Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/fivestarspicy",
+        "profile_id": 34160
+    },
+    {
+        "handle": "ella-cullen",
+        "name": "Ella Cullen",
+        "role": "Technical Customer Success Manager",
+        "profile_id": 45795
+    },
+    {
+        "handle": "alessandro-pogliaghi",
+        "name": "Alessandro Pogliaghi",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/tatoalo",
+        "profile_id": 34600
     }
 ]

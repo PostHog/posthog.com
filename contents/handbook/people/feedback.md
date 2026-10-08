@@ -12,6 +12,17 @@ This includes giving feedback [to each other](/handbook/values#youre-the-driver)
 
 'Open and honest' doesn't mean 'being an asshole' – we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
 
+### Keeper tests are not a substitute for direct feedback
+
+[Keeper tests](/handbook/company/management#the-keeper-test) are not designed to replace direct feedback, and the responses are not made visible to the person being assessed in the ops platform. We've always wanted people to give direct feedback to each other, across teams and in all directions – keeper tests do not replace the art and process of giving continual, direct, and 360 feedback.
+
+The keeper test forms exist for a few specific reasons:
+
+- To surface feedback to the relevant Blitzscale team member so they can help where necessary.
+- To keep a record of feedback given, in case the person moves team or the team lead changes.
+
+We also want people to fill these forms out totally unfiltered, rather than through the lens of "will this person see this feedback". If you have feedback for someone, give it to them directly – don't rely on the keeper test to do it for you.
+
 ## Full team feedback sessions
 
 We run full team 360-degree feedback session as part of every offsite. Some teams will do them during their own small team offsite, while others choose to do them as part of the whole company offsite. The session gives everyone the opportunity to give and receive feedback to everyone else. If your team works closely with another or is very small, you may combine with another team (but keep attendees to <8 if you can).

@@ -160,7 +160,7 @@ You can look at our Web vitals capturing code in [web-vitals/index.ts](https://g
 
 ### Sampling `$web_vitals` events
 
-If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js/features#amending-or-sampling-events) for `$web_vitals` events.
+If you're concerned about the cost of `$web_vitals` events, you can enable [sampling](/docs/libraries/js/usage#amending-or-sampling-events) for `$web_vitals` events.
 This will reduce the amount of events you send at the cost of some accuracy.
 
 We offer a pre-built function to sample by event name.
@@ -170,7 +170,7 @@ You can also roll your own function if you prefer a tighter control over the sam
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+import { sampleByEvent } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
     // Capture only half of web vitals events

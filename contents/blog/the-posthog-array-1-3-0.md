@@ -16,7 +16,7 @@ tags:
 
 Another shiny new integration - PostHog now plays nicely with Android!
 
-Like what you see and self-hosting? [Update](/docs/runbook/upgrading-posthog) your instance.
+Like what you see and self-hosting? [Update](/docs/self-host) your instance.
 
 ## Release notes
 

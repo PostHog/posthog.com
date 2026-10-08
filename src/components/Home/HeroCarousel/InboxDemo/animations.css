@@ -1,0 +1,56 @@
+.inbox-demo-empty {
+    animation: inbox-empty 1.2s ease-out both;
+}
+.inbox-demo-item {
+    transform: translateY(calc(var(--slot) * var(--row-step)));
+    animation: inbox-arrival 6.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.inbox-demo[data-running='false'] * {
+    animation-play-state: paused;
+}
+.inbox-demo[data-active='false'] .inbox-demo-item,
+.inbox-demo[data-active='false'] .inbox-demo-empty {
+    animation-name: none;
+}
+@keyframes inbox-empty {
+    0%,
+    66.67% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+/* Every arrival shares this timeline. Later reports stop at their own final slot. */
+@keyframes inbox-arrival {
+    0% {
+        opacity: 0;
+        transform: translateY(-2cqw);
+    }
+    6.25%,
+    25% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    31.25%,
+    50% {
+        opacity: 1;
+        transform: translateY(calc(min(1, var(--slot)) * var(--row-step)));
+    }
+    56.25%,
+    75% {
+        opacity: 1;
+        transform: translateY(calc(min(2, var(--slot)) * var(--row-step)));
+    }
+    81.25%,
+    100% {
+        opacity: 1;
+        transform: translateY(calc(var(--slot) * var(--row-step)));
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .inbox-demo-item,
+    .inbox-demo-empty {
+        animation: none;
+    }
+}

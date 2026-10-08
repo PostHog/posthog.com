@@ -27,7 +27,7 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
     const presentationContext = useContext(PresentationModeContext)
-    const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
+    const [isMobile, setIsMobile] = useState<boolean>(false)
     const [isPortraitMode, setIsPortraitMode] = useState<boolean>(false)
     const slideRef = useRef<HTMLDivElement>(null)
     const [hasScrolledToHash, setHasScrolledToHash] = useState<boolean>(false)
@@ -66,10 +66,7 @@ const SlideThumb = ({ slide, index, isActive, slideId, onClick }: SlideThumbProp
             // We need to check the actual container width, not just the app window
             if (!presentationContext.isPresenting) {
                 // For edit mode, we check the app window width (which represents the container)
-                const containerWidth =
-                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                        ? window.innerWidth
-                        : appWindow?.size?.width
+                const containerWidth = appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
                 setIsPortraitMode(containerWidth ? containerWidth < 896 : false)
@@ -169,10 +166,7 @@ export default function SlideThumbnails({ slides, activeSlideIndex, slideId, onC
 
             // Case 2: Edit mode - check if container is below @2xl (672px)
             if (!presentationContext.isPresenting) {
-                const containerWidth =
-                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                        ? window.innerWidth
-                        : appWindow?.size?.width
+                const containerWidth = appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
                 setIsPortraitMode(containerWidth ? containerWidth < 672 : false)

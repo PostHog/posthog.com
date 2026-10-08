@@ -6,8 +6,8 @@ author:
 showTitle: true
 sidebar: Docs
 tags:
-  - AI
-  - DeskHog
+  - ai
+  - deskhog
 ---
 
 > Unfortunately, since writing this the process for integrating Cursor and PlatformIO has changed and users can no longer directly install PlatformIO within Cursor. We're leaving this guide live for those who want to attempt the workaround of installing PlatformIO in VSCode and importing the plugin to Cursor - but our recommended route is to [use Claude Code instead](/tutorials/deskhog-claude-tutorial). It's just better. 

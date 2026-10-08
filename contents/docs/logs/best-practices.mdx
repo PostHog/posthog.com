@@ -350,6 +350,8 @@ Match rules by service name, severity, or any log attribute. Rules run top to bo
 
 Because drop rules apply before storage, they're the fastest way to cut volume without shipping a code change. Pair them with the client-side practices above: sample at the source where you can, and use drop rules to catch the noise you can't.
 
+If you still want the trend from the lines you drop, add a [log-based metric](/docs/logs/metrics) first. Metric rules are evaluated before drop rules, so the count survives even though the logs don't.
+
 ## Add trace and session context
 
 Isolated logs are hard to correlate. Adding trace IDs and session IDs connects individual log events to the broader request journey.

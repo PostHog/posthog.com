@@ -22,7 +22,7 @@ We’ve interviewed 1,400 people in over three years, we hired 62 of them, and w
 
 **This week’s theme is:** Hiring bar raisers
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Define your culture before you start hiring
 
@@ -78,7 +78,7 @@ A majority of “soft yes” responses is normally indicative of some deeper une
 
 This is true from day one, but becomes more critical as you grow and use recruiters to manage sourcing and screening candidates.
 
-As Charles Cook, our head of ops and a veteran of multiple startups, [explains](/blog/early-stage-startup-hiring-strategy#myth-recruiters-are-responsible-for-hiring):
+As Charles Cook, our head of ops and a veteran of multiple startups, [explains](/founders/early-stage-startup-hiring-strategy#myth-recruiters-are-responsible-for-hiring):
 
 > “Managers are responsible for the output of their teams. Output can be increased by hiring more people. Therefore managers are responsible for hiring.
 >
@@ -90,7 +90,7 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 
 ## 6. Good people are always in demand
 
-There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](/blog/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
+There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](/founders/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
 
 > “The best people are always in demand and will have lined up five interviews within 24 hours of posting on LinkedIn. Often (but not always) the 'cuts' that are being made are in non-core product areas, or in more manager-y type roles that are unlikely to be relevant to your early-stage startup.”
 

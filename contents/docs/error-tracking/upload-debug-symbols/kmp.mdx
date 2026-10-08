@@ -1,0 +1,113 @@
+---
+title: Upload debug symbols for Kotlin Multiplatform
+platformLogo: kmp
+showStepsToc: true
+---
+
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+
+Kotlin Multiplatform apps produce different debug symbols for each target. Configure uploads for every target where you ship minified or native code.
+
+<Steps>
+
+<Step title="Download the PostHog CLI" badge="required">
+
+<CLIDownload />
+
+</Step>
+
+<Step title="Authenticate the PostHog CLI" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Upload Android mappings">
+
+If your Android release uses ProGuard or R8, apply the PostHog Android Gradle plugin to the Android application module. The plugin injects a mapping ID into the app and uploads the matching mapping file during the Gradle build.
+
+```kotlin file=androidApp/build.gradle.kts
+plugins {
+    id("com.android.application")
+    id("com.posthog.android") version "<version>"
+}
+```
+
+Follow the [Android mappings guide](/docs/error-tracking/upload-mappings/android) for authentication options and the complete Gradle configuration.
+
+</Step>
+
+<Step title="Upload iOS dSYMs">
+
+The iOS app's dSYM files let PostHog resolve Kotlin and Swift frames. In the Xcode app target:
+
+1. Open **Build Settings** and set **Debug Information Format** to **DWARF with dSYM File** for Release builds.
+2. Set **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) to **No**.
+3. Add a **Run Script** build phase after the build phases that generate the app and dSYMs.
+4. Add this script:
+
+```bash
+if [[ "${CONFIGURATION:-}" != "Release" ]]; then
+    exit 0
+fi
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:${HOME}/.posthog:${PATH}"
+POSTHOG_CLI_PATH="${POSTHOG_CLI_PATH:-$(command -v posthog-cli)}"
+if [[ -z "${POSTHOG_CLI_PATH}" ]]; then
+    echo "posthog-cli was not found"
+    exit 1
+fi
+
+"${POSTHOG_CLI_PATH}" dsym upload \
+    --directory "${DWARF_DSYM_FOLDER_PATH}" \
+    --main-dsym "${DWARF_DSYM_FILE_NAME}" \
+    --release-name "${PRODUCT_BUNDLE_IDENTIFIER}" \
+    --release-version "${MARKETING_VERSION}" \
+    --build "${CURRENT_PROJECT_VERSION}"
+```
+
+5. Add this path to the build phase's **Input Files**:
+
+```text
+$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(EXECUTABLE_NAME)
+```
+
+If your production configuration has another name, update the `CONFIGURATION` check. Add `--include-source` to the upload command if you want source code context in stack traces. See the [iOS dSYM guide](/docs/error-tracking/upload-source-maps/ios) for troubleshooting and test-crash instructions.
+
+</Step>
+
+<Step title="Upload web source maps">
+
+For Kotlin/JS, run your production browser distribution task and locate the generated JavaScript bundle and source map. Inject PostHog metadata, upload the source map, and deploy the injected assets:
+
+```bash
+DIST_DIR="<path-to-production-assets>"
+RELEASE_NAME="<application-id>"
+RELEASE_VERSION="<release-version>"
+
+posthog-cli sourcemap inject \
+    --directory "${DIST_DIR}" \
+    --release-name "${RELEASE_NAME}" \
+    --release-version "${RELEASE_VERSION}"
+
+posthog-cli sourcemap upload \
+    --directory "${DIST_DIR}" \
+    --release-name "${RELEASE_NAME}" \
+    --release-version "${RELEASE_VERSION}"
+```
+
+The deployed JavaScript files must be the files modified by `sourcemap inject`. If your web target uses another output format, follow the [web source map guide](/docs/error-tracking/upload-source-maps/web) for the generated assets.
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="debug symbols" />
+
+</Steps>
+
+<CalloutBox icon="IconInfo" title="JVM desktop builds" type="fyi">
+
+Compose Desktop's default release configuration keeps readable class names, source file names, and line numbers, so it does not need a mapping upload. The PostHog Kotlin Multiplatform SDK cannot restore readable stack traces for JVM desktop builds that use custom obfuscation because those builds do not include the map ID required to match an exception with its mapping file.
+
+</CalloutBox>

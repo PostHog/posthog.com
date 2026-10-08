@@ -20,7 +20,15 @@ All of our permanent merch items are reordered via Micromerch. To do this you ne
 2. Approve the estimate that will be sent from Micromerch
 3. Pay the invoice via Brex once it comes in (usually in 1-2 days after estimate approval)
 
-It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However, if you happen to see anything looking amiss, just let Kendal know ahead of time!
+
+## Big orders
+
+If you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
+
+Before sending a large merch order to another country, check with Kendal and Micromerch to confirm that we have an importer of record in the destination country.
+
+If you send merch to a hotel, use the hotel only for the address. Always name a specific person as the recipient, with their own contact details. Never name the hotel or use its contact details. If the hotel is the recipient, customs contacts the hotel, and the hotel usually will not act as the importer or claim the package. The shipment then stays at customs.
 
 ## Adding new items
 
@@ -37,7 +45,23 @@ Shipping is also done through Micromerch (in partnership with Shiphero) - they c
 
 ### Customers
 
-Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
+The quickest way is to ask JokerHog in Slack – tag `@.JokerHog` in any channel and ask it for a merch code (e.g. "can you make me a merch code for $50 for a contributor?"). It creates the discount code in Shopify and replies with the code, so you don't need to log in yourself.
+
+If you'd rather do it manually, create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
+
+To log into Shopify using 1Password:
+
+1. Sign in with the email from 1Password
+2. Log in with the saved passkey when the pop-up appears — this is the preferred way to log in
+3. You're logged in!
+
+If you aren't prompted for the passkey, use the password and authentication code instead:
+
+1. Click "Log in using a different method"
+2. Click "Continue with password"
+3. Use the password from 1Password and click "Log in"
+4. On the "Use your passkey" screen, click "Use the authentication app" — you can then use 1Password to enter the authentication code
+5. You're logged in!
 
 When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $30, $50, or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". 
 
@@ -45,7 +69,7 @@ When creating the discount, select "amount off products" then choose if it is a 
 
 For feedback or general rewards we typically give users $30, which is enough for a t-shirt. For code contributions we tend to do $50, which is enough for a bigger selection of things. We don't put expiration dates on the codes, typically.
 
-If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help. Merch codes can also be generated directly from within Zendesk.
+If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
 
 If you want to send physical merch to a customer instead of a merch code, this can be done in Shopify by creating an order, selecting the chosen merch and applying a discount for the whole price of the item (don't forget to do this step otherwise it'll try and charge the customer!)
 
@@ -55,7 +79,7 @@ If you want more, <PrivateLink url="https://wiki.posthog.com/reference/merch"> h
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
-Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor. We will send the details of any free merch you have claimed to payroll once a year (usually in December) and any tax due will be deducted from that payroll (please note this is jurisdiction dependent, and also depends on your employment type at PostHog).
 
 For select exclusive or higher-value items, a cost-price discount code will be shared at the time of launch in lieu of the complimentary allowance, this will always be clearly communicated in advance. 
 

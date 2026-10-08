@@ -9,12 +9,6 @@ availability:
 sourceId: Airtable
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Airtable connector pulls your Airtable data — bases, tables, and records — into the PostHog data warehouse.
 
 ## Adding a data source

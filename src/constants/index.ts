@@ -1,15 +1,45 @@
-// Paths that have raw markdown available for copying/downloading
-export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook'] as const
-export const isMarkdownContentPath = (path: string) =>
-    MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
+// Paths that have raw markdown available for copying/downloading. `/pocket-guides` is here so a
+// scout's SKILL.md is fetchable as agent context – see components/SelfDrivingInbox/README.md.
+// `/pricing` covers `/pricing/agent-estimates`; `/pricing.md` itself is built from billing data
+// by `generatePricingMd`, not scraped, because no MDX node has the slug `/pricing`.
+export const MARKDOWN_CONTENT_PATHS = [
+    '/docs',
+    '/handbook',
+    '/blog',
+    '/newsletter',
+    '/changelog',
+    '/pocket-guides',
+    '/pricing',
+] as const
 
-// Default avatar fallback (Max the hedgehog)
+// Section index pages have no scraped `.md`. generateRawMarkdownPages only sees nodes
+// matching `/^/(docs|handbook|...)/` (onPostBuild.ts) — note the trailing slash, which
+// requires a segment after the section name — so `/docs` and friends are never processed.
+// `/changelog` and `/pricing` are the exceptions: generateChangelogMd and generatePricingMd
+// write those two by hand.
+const SECTION_ROOTS_WITH_MARKDOWN: readonly string[] = ['/changelog', '/pricing']
+
+export const isMarkdownContentPath = (path: string): boolean => {
+    const normalized = path.replace(/\/$/, '')
+    return MARKDOWN_CONTENT_PATHS.some((p) =>
+        normalized === p ? SECTION_ROOTS_WITH_MARKDOWN.includes(p) : normalized.startsWith(`${p}/`)
+    )
+}
+
+// Hosted PostHog MCP server (streamable HTTP). Shared by the install UI and the WebMCP tools.
+export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
+
+// Twig is PostHog's interactive learning environment. Keep every website touchpoint on this
+// shared URL so a future destination change cannot leave one entry point behind.
+export const TWIG_URL = 'https://twig.com'
+
+// Default avatar fallback (DrakeHog, flipped horizontally)
 export const AVATAR_FALLBACK_URL =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/547324034_92465cc7_daa9_413a_9c77_e72dc38f1c9f_d77ba7e4c2.png'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/a_hflip,f_png/drake_yah_a4a2087404.svg'
 
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
-export const CUSTOMER_COUNT = 190254
+export const CUSTOMER_COUNT = 500000
 
 // screensaver
 export const INACTIVITY_TIMEOUTS = {
@@ -21,8 +51,6 @@ export const explorerGridColumns =
     'grid-cols-2 @xs:grid-cols-3 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-6 @3xl:grid-cols-7 @4xl:grid-cols-8 @5xl:grid-cols-9 @6xl:grid-cols-10 @7xl:grid-cols-11'
 
 export const TABLE_CLASSES = 'min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12'
-
-export const WEBSITE_MODE_CLASSES = 'max-w-7xl mx-auto px-4 @xl:px-8'
 
 export const getVideoClasses = (fullWidthContent: boolean) =>
     `aspect-video rounded-sm mx-auto transition-all ${fullWidthContent ? 'w-full' : 'max-w-4xl'}`

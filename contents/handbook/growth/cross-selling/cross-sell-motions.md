@@ -42,7 +42,7 @@ Successful expansion strengthens customer relationships and increases account st
 - Churn rate by specific products i.e. are there products that once adopted lead to a noticeably lower (or higher) churn rate.
 - Customer feedback on expanded products
 - Percentage of revenue from a customer spread across products
-  - Is all the revenue for a customer coming from person profiles or is is spread between recordings, events, feature flags, and exceptions
+  - Is all the revenue for a customer coming from person profiles or is spread between recordings, events, feature flags, and exceptions
 
 > Since we have different folks at different stages of ramp and onboarding, instead of making these metrics flat or percentage based, we are looking for an increase quarter over quarter.
 
@@ -84,13 +84,6 @@ Why Now? All good opportunities have this and are timeline driven.
 - Usage declining for 4+ weeks
 - Key champion leaves company
 - Data Engineer takes over ownership of PostHog
-
-**Optimal timeline if a customer is on an annual contract:**
-
-- **Months 1-2**: Pure adoption focus, no cross-sell
-- **Months 3-6**: Prime cross-sell window
-- **Months 7-9**: Reinforce value of expanded stack if adopted
-- **Months 10-12**: Focus on "Why stay with PostHog" rather than expansion/cross-sell (it's too late)
 
 ## Hypothetical approach
 

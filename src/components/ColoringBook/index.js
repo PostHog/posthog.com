@@ -6,7 +6,6 @@ import * as Icons from '@posthog/icons'
 import Link from 'components/Link'
 import { IconBold, IconLink } from 'components/OSIcons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
 import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
@@ -15,9 +14,14 @@ import { useWindow } from '../../context/Window'
 import { useLocation } from '@reach/router'
 import Editor from 'components/Editor'
 
+const PDF_URL = 'https://res.cloudinary.com/dmukukwp6/image/upload/coloring_book_a34bc42c76.pdf'
+const PDF_PAGES = 25
+const pageImage = (page) =>
+    `https://res.cloudinary.com/dmukukwp6/image/upload/pg_${page},w_1200,q_auto,f_auto/coloring_book_a34bc42c76.jpg`
+
 export default function ColoringBook() {
     const posthog = usePostHog()
-    const { closeWindow } = useApp()
+    const { closeWindow, isMobile } = useApp()
     const { appWindow } = useWindow()
 
     return (
@@ -67,13 +71,32 @@ export default function ColoringBook() {
                 `}
             </style>
             <Editor title="Coloring book" type="pdf" hideTitle>
-                <iframe
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/coloring_book_a34bc42c76.pdf"
-                    width="100%"
-                    height="800px"
-                    style={{ border: 'none' }}
-                    title="Coloring Book PDF"
-                />
+                {isMobile ? (
+                    // Mobile browsers only render the first page of a PDF in an iframe and don't let you
+                    // scroll it, so serve the pages as images instead (with the PDF still downloadable).
+                    <div className="flex flex-col gap-4">
+                        {Array.from({ length: PDF_PAGES }, (_, index) => (
+                            <img
+                                key={index}
+                                src={pageImage(index + 1)}
+                                alt={`Coloring book page ${index + 1} of ${PDF_PAGES}`}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                className="w-full h-auto"
+                            />
+                        ))}
+                        <CallToAction to={PDF_URL} externalNoIcon width="full">
+                            Download PDF
+                        </CallToAction>
+                    </div>
+                ) : (
+                    <iframe
+                        src={PDF_URL}
+                        width="100%"
+                        height="800px"
+                        style={{ border: 'none' }}
+                        title="Coloring Book PDF"
+                    />
+                )}
             </Editor>
         </>
     )

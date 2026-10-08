@@ -5,6 +5,7 @@ import { SEO } from 'components/seo'
 import { motion } from 'framer-motion'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
+import { Logo } from '@posthog/brand/logo'
 
 const PostHugPage = () => {
     const [active, setActive] = useState(false)
@@ -38,10 +39,10 @@ const PostHugPage = () => {
                 <div className="max-w-2xl mx-auto py-8 px-4 md:px-8 z-10">
                     <h1 className="text-4xl text-center">
                         You were probably looking for
-                        <a href="/">
+                        <a href="/" aria-label="PostHog home">
                             <div className="text-center my-8">
-                                <img src="/brand/posthog-logo.svg" className="dark:hidden w-full" />
-                                <img src="/brand/posthog-logo-white.svg" className="hidden dark:block w-full" />
+                                <Logo className="dark:hidden w-full" />
+                                <Logo variant="mono" color="white" className="hidden dark:block w-full" />
                             </div>
                         </a>
                     </h1>

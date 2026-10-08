@@ -18,9 +18,11 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
+For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
+
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
@@ -29,7 +31,7 @@ Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#rout
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
@@ -37,11 +39,12 @@ If this is a new contract for an existing customer, you will need to add their e
 - Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
-- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
+- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
 > For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
@@ -75,7 +78,9 @@ As the account owner you will be assigned a risk indicator in Vitally, as well a
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
-> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
+
+> If a credit-based customer asks to pay a late invoice by credit card instead, say no. Tell them to pay by bank transfer, and send the invoice PDF again. The [payment method rules](/handbook/growth/sales/contract-rules#payment-method) do not change because the invoice is late.
 
 #### Step 2 - 1 day before suspending user access
 
@@ -103,7 +108,21 @@ At this point they will be notified about this automatically via the billing ser
 
 #### Repeated failed payments
 
-After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+A customer has *repeated* failed payments when payments have failed across three or more consecutive billing periods, or when a second late payment occurs within six months of a previous one that reached Step 3 (suspended access).
+
+At this point, catching up on the overdue balance isn't enough. We need payment predictability before restoring access, otherwise we're back here next month.
+
+**Step 1: collect the overdue balance.** Access stays suspended until the outstanding invoice is paid. Send the payment link and the invoice PDF from the Stripe invoice page.
+
+**Step 2: require a contract pre-commitment before restoring access.** Move the customer off pay-as-you-go onto a contract with payment upfront. The account's sales contact can size the commitment with the customer to base it on their trailing usage and what's realistic for them.
+
+Make it explicit in your outreach that if we can't agree a pre-commitment, the account will be downgraded to the Free tier and subject to that tier's usage limits.
+
+**Step 3: set a drop dead date.** Once the overdue invoice is paid, give the customer a specific calendar date roughly 4 weeks out to get the contract signed or move to Free. Put the date in writing. If it passes with no commitment, downgrade.
+
+> Restoring access before the contract is signed is a judgement call for the account owner, but set and communicate the drop-dead date at the same time.
+
+RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
@@ -201,6 +220,10 @@ Employees can get access to paid features (like Boost) on personal or side proje
 1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
 
 2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
+
+Side projects on a long trial meet the same [spend caps](/handbook/growth/sales/trials) as a prospect on Replay Vision, Desktop, PostHog AI, and Inbox. They reach them quickly. To lift them, add the organization to the `billing-trial-expanded-free-allocation` feature flag in PostHog. It is an organization group flag, so target it on `organization.$group_key` with the organization ID. That gives the side project ten times each product's free allocation instead of twice it.
+
+The flag only changes what a trial lends where the customer set no limit. If the side project has a spend limit of its own, that limit still governs, so clear it first.
 
 ### Updating subscriptions
 

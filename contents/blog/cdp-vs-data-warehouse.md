@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/cdp_vs_dw_06a0b878d6.png
 featuredImageType: full
 tags:
- - data warehouse
- - data pipelines
+ - Data warehouse
+ - Data pipelines
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -185,7 +185,7 @@ Another way CDPs are useful later is reverse ETL. This means getting data *out* 
 
 At huge scale, use cases fragment significantly. Each function will likely have their own set of specialized requirements that a data warehouse (if adopted) will likely play a large role in, but that’s beyond the scope of this post.
 
-If you’re at the point of evaluating different tools, our guide to [the best CDPs for developers](/blog/best-customer-data-platforms-for-developers) breaks down the top options and tradeoffs.
+If you’re at the point of evaluating different tools, our guide to [the best CDPs for developers](/compare/best-customer-data-platforms-for-developers) breaks down the top options and tradeoffs.
 
 ## PostHog is both a CDP and data warehouse
 

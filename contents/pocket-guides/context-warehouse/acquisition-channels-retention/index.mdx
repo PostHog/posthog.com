@@ -1,0 +1,73 @@
+---
+title: Which channels bring customers who stick?
+shortTitle: Channels & retention
+subtitle: Rank first-touch channels by retained Stripe revenue and CAC payback, using Google/Meta ad spend.
+pocketGuideOrder: 7
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="Example data: channels ranked by the revenue of the customers who stuck around."
+>
+
+| Channel        | Customers | Retained revenue | CAC   |
+| --------------- | ---------- | ------------------ | ------ |
+| Organic search  | 340        | $112,000             | $38     |
+| Content / SEO   | 210        | $84,600              | $52     |
+| Paid social     | 480        | $71,200              | $146    |
+
+</ExampleFigure>
+
+</LeftPage>
+
+<RightPage>
+
+# Which channels bring customers who stick?
+
+The cheapest channel for signups is rarely the best channel for revenue. This Skill ranks
+first-touch acquisition channels by retained Stripe revenue and CAC payback, using ad spend from
+Google or Meta, so you can allocate budget where you attract customers who last, rather than customers who convert once.
+
+## Example data and how to read it
+
+The Skill looks for patterns like <SeeFig n={1} />: paid social brought in the most customers,
+but organic search and content brought in more *retained* revenue at a fraction of the CAC, the
+real signal for where budget belongs.
+
+## Get an agent to do the work
+
+Copy the Skill below and add it to your agent. The agent attributes each person to a channel from first-touch UTM properties, pulls revenue and
+a retention proxy from Stripe, and spend by campaign from Google or Meta Ads. It builds this in
+pieces (validating each part before combining) because retention windows and CAC method are 
+modeling choices. It states which choices it made rather than presenting one number as
+definitive, and offers to refine them with you.
+
+This is about acquisition source and marketing spend. For in-product feature revenue instead,
+that's [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue); for a
+specific rollout's revenue impact, that's
+[Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact).
+
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe), and [Google Ads](/docs/cdp/sources/google-ads) or
+   [Meta Ads](/docs/cdp/sources/meta-ads)**, via
+   [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Build a [Trends](/docs/product-analytics/trends/overview) insight of signups broken down by
+   [`$initial_utm_source`](/docs/data/utm-segmentation)**: native to PostHog, no join needed for
+   this part.
+3. **Pull revenue and spend per channel separately** from Stripe's and your ad platform's own
+   reports, then match them up using the [SQL editor](/docs/data-warehouse/sql) or PostHog AI.
+
+<SeeAlso>
+
+See also: [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue) ·
+[Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact)
+
+</SeeAlso>
+
+</RightPage>

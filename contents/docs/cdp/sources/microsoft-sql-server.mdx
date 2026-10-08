@@ -36,6 +36,28 @@ The data warehouse then starts syncing your Azure SQL Server data. You can see d
 
 <SourceParameters />
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Azure SQL Server source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
 <CalloutBox icon="IconWarning" title="Decimal precision limits" type="caution">
 
 Numeric, decimal, and money columns with values exceeding a precision of 76 or scale of 32 can't be synced. If a sync fails with this error, you have three options:
@@ -51,6 +73,20 @@ Numeric, decimal, and money columns with values exceeding a precision of 76 or s
 If your sync fails with "Invalid object name," the database couldn't find a table or view you're syncing. Common causes include dropped or renamed objects, views referencing missing tables, or cross-database permission issues. Check that all synced objects exist and that the connection user has SELECT permissions on them and their dependencies.
 
 </CalloutBox>
+
+## Troubleshooting
+
+### Firewall blocking PostHog
+
+This error occurs when your SQL Server's firewall blocks connections from PostHog's IP addresses. Azure SQL error 40615 shows a message containing "is not allowed to access the server."
+
+To fix this:
+
+1. Add PostHog's IP addresses to your server's firewall rules. On Azure SQL, do this through the Azure portal under **Networking** > **Firewall rules**, or by running `sp_set_firewall_rule`.
+2. Wait a few minutes for the new rules to take effect.
+3. Re-enable the sync in PostHog.
+
+See the [Inbound IP addresses](#inbound-ip-addresses) section below for the IP addresses to allowlist.
 
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 

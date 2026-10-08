@@ -13,7 +13,6 @@ import jamesQuote7 from './Audio/quote-7.mp3'
 import jamesQuote8 from './Audio/quote-8.mp3'
 import jamesQuote9 from './Audio/quote-9.mp3'
 import jamesQuote10 from './Audio/quote-10.mp3'
-import Logo from 'components/Logo'
 import { Tweet } from 'components/Tweet'
 import CloudinaryImage from 'components/CloudinaryImage'
 

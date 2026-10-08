@@ -1,6 +1,6 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 
 interface ComparisonItem {
     title: string
@@ -63,7 +63,13 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
 
                 <div className="">
                     <h3 className="text-2xl font-bold text-primary mb-4">
-                        Reasons to choose <Logo noText fill="primary" className="h-12 inline-block -mt-5 mx-1 -mb-2" />{' '}
+                        Reasons to choose{' '}
+                        <Logo
+                            layout="logomark"
+                            variant="mono"
+                            color="currentColor"
+                            className="text-primary h-6 w-auto inline-block -mt-3 mx-1 -mb-2"
+                        />{' '}
                         PostHog
                     </h3>
                     <ul className="p-0 mb-2 list-none">

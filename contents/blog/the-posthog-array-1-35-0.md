@@ -29,7 +29,7 @@ We've also recently launched a new newsletter, which we send once every two week
 
 ## PostHog 1.35.0 release notes
 
-> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/runbook/upgrading-posthog).
+> Wondering how to upgrade a self-hosted instance? Check out our [upgrade guide](/docs/self-host).
 
 **Release highlights:**
 - [Activity log](#new-activity-log)

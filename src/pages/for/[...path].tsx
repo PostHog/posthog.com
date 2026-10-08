@@ -23,8 +23,6 @@ import BookingTemplate from 'components/Presentation/Templates/BookingTemplate'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import Logos from 'components/Presentation/Utilities/Logos'
 import ProgressBar from 'components/ProgressBar'
-import { useApp } from '../../context/App'
-
 const Loading = () => {
     const lottieRef = useRef(null)
     return (
@@ -98,7 +96,6 @@ const CustomPresentationPage = () => {
     const [companyData, setCompanyData] = useState<CompanyData>({})
     const [isLoading, setIsLoading] = useState(true)
     const [salesRep, setSalesRep] = useState<SalesRep | null>(null)
-    const { websiteMode } = useApp()
 
     // Parse the URL path
     // URL patterns:
@@ -427,9 +424,7 @@ const CustomPresentationPage = () => {
             >
                 <div
                     data-scheme="primary"
-                    className={`${
-                        websiteMode ? '' : 'bg-accent px-2 @md:px-4'
-                    } grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4`}
+                    className="bg-accent px-2 @md:px-4 grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4"
                 >
                     {slides.map((slide, index) => (
                         <div
