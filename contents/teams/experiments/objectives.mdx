@@ -9,12 +9,14 @@ Continue the rollout of the new config format (v2).
 
 #### Health layer <TeamMember name="Marcel Poelker" photo />
 Experiments can be complex to configure, especially since since we serve a wide audience from humans to agents with varying degree of familiarity. Understanding issues an experiment has in one central layer is the foundation needed to proactively fix issues, and feeding good inputs into the creation workflow.
+- Health layer: Consolidate all health rules into a single layer of deterministic checks. This allows the skill to become a thin judgment layer on top. Include the findings in the API and MCP responses that people and agents already use. <TeamMember name="Marcel Poelker" showOnlyFirstName />
+- Health engine: Run the health layer automatically after each scheduled recalculation, using LLM judgment where deterministic rules are insufficient. Store the findings and send signals to the self-driving inbox whenever a finding is new or worsens. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### MCP as the primary surface <TeamMember name="Ruby Childs" photo />
 Treat MCP as the main way people use experiments:
-- Interview customers who use experiments through agents. Learn why they still come to the UI. (Ruby)
-- Roast the MCP experience: run through it ourselves and fix what is broken or awkward. (Ruby)
-- Build MCP apps that show experiment results, config, and summaries in a rich way inside the agent. (Rodrigo)
+- Interview customers who use experiments through agents. Learn why they still come to the UI. <TeamMember name="Ruby Childs" showOnlyFirstName />
+- Roast the MCP experience: run through it ourselves and fix what is broken or awkward. <TeamMember name="Ruby Childs" showOnlyFirstName />
+- Build MCP apps that show experiment results, config, and summaries in a rich way inside the agent. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### Replay vision in experiment results <TeamMember name="Marcel Poelker" photo />
 Replay vision can watch the recordings from an experiment and describe how users behaved. Show what the AI sees per variant in the experiment UI, so users can compare behavior between variants, not just the numbers.
@@ -27,8 +29,8 @@ Let customers run experiments on data in their own warehouse.
 - Use AI to help the user write the metric query.
 
 #### Optimize compute costs <TeamMember name="Rodrigo Iloro" photo />
-- Stop recomputing results daily for every experiment. (Juraj)
-- Add a cooldown period before manual refreshes. (Rodrigo)
+- Stop recomputing results daily for every experiment. <TeamMember name="Juraj Majerik" showOnlyFirstName />
+- Add a cooldown period before manual refreshes. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### Prompts <TeamMember name="Juraj Majerik" photo />
 - Keep adding the most requested features. Make sure power users have a great experience.
