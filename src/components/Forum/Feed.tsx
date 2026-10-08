@@ -58,6 +58,14 @@ const ProgressBar = () => (
     </div>
 )
 
+// What to say when a filter, not the feed itself, is why there is nothing to show.
+const emptyMessage = (hasTags: boolean, unanswered: boolean) => {
+    if (hasTags && unanswered) return 'No posts without replies have the selected tags.'
+    if (unanswered) return 'Every post has a reply.'
+    if (hasTags) return 'No posts have the selected tags.'
+    return null
+}
+
 type FeedProps = {
     title: React.ReactNode
     description?: string | null
@@ -82,6 +90,7 @@ export default function Feed({
 }: FeedProps) {
     const [sort, setSort] = useState<ForumSort>('latest')
     const [tagIds, setTagIds] = useState<number[]>([])
+    const [unanswered, setUnanswered] = useState(false)
     // A `?tag=` link, such as a `#topic/tag` reference in a post, opens the feed filtered to that tag.
     const { appWindow } = useWindow()
     const tagSlug = new URLSearchParams(appWindow?.location?.search || '').get('tag')
@@ -93,6 +102,7 @@ export default function Feed({
         sort,
         topicId,
         tagIds,
+        unanswered,
         following,
     })
     const [lastPostRef, inView] = useInView({ threshold: 0.1 })
@@ -132,8 +142,15 @@ export default function Feed({
                             size="sm"
                         />
                     </div>
-                    {tags && tags.length > 0 && (
-                        <FilterMenu tags={tags} selected={tagIds} onChange={setTagIds} scope={tagScope} />
+                    {tags && (
+                        <FilterMenu
+                            tags={tags}
+                            selected={tagIds}
+                            onChange={setTagIds}
+                            unanswered={unanswered}
+                            onUnansweredChange={setUnanswered}
+                            scope={tagScope}
+                        />
                     )}
                 </div>
             </header>
@@ -167,7 +184,7 @@ export default function Feed({
                     animate={{ opacity: 1 }}
                     className="px-6 py-12 text-center text-secondary text-sm"
                 >
-                    {tagIds.length > 0 ? 'No posts have the selected tags.' : empty}
+                    {emptyMessage(tagIds.length > 0, unanswered) ?? empty}
                 </motion.div>
             )}
         </div>
