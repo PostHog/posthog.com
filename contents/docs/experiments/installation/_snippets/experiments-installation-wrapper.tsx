@@ -25,6 +25,7 @@ import {
     GoInstallation,
     DjangoInstallation,
     LaravelInstallation,
+    RubyOnRailsInstallation,
     // No-code installations
     WebflowInstallation,
     FramerInstallation,
@@ -178,6 +179,12 @@ export const ExperimentsDjangoInstallationWrapper = () => (
 export const ExperimentsLaravelInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <LaravelInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const ExperimentsRubyOnRailsInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <RubyOnRailsInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

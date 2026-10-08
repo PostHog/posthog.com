@@ -14,7 +14,7 @@ The Go SDK is in beta. It has the same defaults as the other SDKs, but captures 
 
 `posthogmcpsdk` instruments servers built on the official [Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) (`github.com/modelcontextprotocol/go-sdk`) v1.6.1 or later. Use go-sdk v1.8.0 or later in your own `go.mod` to serve protocol `2026-07-28` and `input_required` rounds. It ships in the [`posthog-go`](/docs/libraries/go) repository as its own module, so your app only depends on the MCP SDK if it uses this package.
 
-You need Go 1.25+, `posthogmcpsdk` v1.31.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
+You need Go 1.25+, `posthogmcpsdk` v1.33.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
@@ -128,6 +128,7 @@ A valid conversation handle also takes priority over the transport session, so a
 | `WithConversationID(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When it mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. For plain object output schemas, it also mirrors the handle into `_mcp_instructions` in `structuredContent`. |
 | `WithIdentity(resolver)` | – | Maps a call to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `WithProperties(resolver)` | – | Adds properties to each `$mcp_tool_call` and its `$exception`. The resolver also receives the result and the handler's error. |
+| `WithMissingCapabilityTool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability). Agents call it to report a capability your server lacks. The call sends `$mcp_missing_capability`, not `$mcp_tool_call`. An empty name uses `get_more_tools`. |
 | `WithCaptureParameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
 | `WithCaptureResponses(bool)` | `true` | Captures the tool result as `$mcp_response`. A failed call's error text is captured either way. |
 | `WithErrorHandler(handler)` | no-op | Receives instrumentation errors. Its errors and panics never change the MCP response. |
@@ -137,6 +138,42 @@ To stop the `$exception` event for failed calls, pass `posthogmcp.WithExceptionA
 The adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that.
 
 The SDK learns each tool's schema from `tools/list` and refreshes it when the server sends `notifications/tools/list_changed`. A server with no connected session sends no notification, so the SDK trusts what it learned for 10 seconds and then lists the tools again on the next call. A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. Schemas built from `$ref`, `allOf`, `anyOf`, or `oneOf` get no added arguments. Schemas with a non-object type or non-object `properties` are skipped too. Output schemas with `maxProperties` or `propertyNames` get no `_mcp_instructions`.
+
+## Report missing capabilities
+
+Add `WithMissingCapabilityTool` to give agents a `get_more_tools` tool. An agent calls it when no tool fits its request. The `context` argument is the agent's report. The option is off by default.
+
+```go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithServerInfo("weather-server", "1.0.0"),
+	posthogmcpsdk.WithMissingCapabilityTool("get_more_tools"),
+)
+```
+
+- The SDK adds the tool to the last page of `tools/list`. If your server already registers a tool with that name, the SDK keeps yours.
+- A call to the tool sends `$mcp_missing_capability` with the agent's request as `$mcp_intent`. It does not send `$mcp_tool_call`. The SDK answers the call, so your handlers never see it.
+- Pass a different name to rename the tool. An empty name uses `get_more_tools`.
+- A server that registers no tools must still declare the tools capability. Without it, clients never list tools and never see `get_more_tools`:
+
+```go
+server := mcp.NewServer(&mcp.Implementation{Name: "weather-server", Version: "1.0.0"},
+	&mcp.ServerOptions{HasTools: true},
+)
+```
+
+To see what agents ask for, query the reports:
+
+```sql
+SELECT
+  properties.$mcp_intent AS request,
+  count() AS times_asked
+FROM events
+WHERE event = '$mcp_missing_capability'
+GROUP BY request
+ORDER BY times_asked DESC
+```
+
+See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability) for how to read the reports.
 
 ## Middleware order
 
@@ -196,7 +233,7 @@ err = analytics.CaptureInputRequired(ctx, posthogmcp.InputRequired{
 
 ## Events
 
-The Go SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_unknown_tool`, and `$mcp_input_required`. `WithIdentity` applies to all of them. `WithProperties` applies to `$mcp_tool_call` and its `$exception`.
+The Go SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`. `WithIdentity` applies to all of them. `WithProperties` applies to `$mcp_tool_call` and its `$exception`.
 
 ### Calls that are not tool calls
 
@@ -204,6 +241,7 @@ These `tools/call` requests don't fire `$mcp_tool_call`:
 
 - **Unknown tool.** A call that names a tool the server hasn't registered sends `$mcp_unknown_tool`. It carries the requested name, redacted, and a conversation ID only if the agent sent a valid handle. The SDK never mints a handle for it. A blank name sends nothing.
 - **`input_required` round.** On `2026-07-28`, a tool can end a round by asking the client for input. The SDK sends `$mcp_input_required` with the round's duration and `$mcp_input_request_methods`, the method of each request, at most 100. It never captures the requests or the answers. The retry that completes the call sends the `$mcp_tool_call`.
+- **Missing-capability report.** When the agent calls the `get_more_tools` virtual tool, the SDK answers the call itself and sends `$mcp_missing_capability`. The agent's report is `$mcp_intent`. The tool name is `$mcp_resource_name`. The event never carries `$mcp_parameters`. Your handlers never see the call.
 
 A client on an older revision never sees a round. go-sdk answers the requests itself and runs the handler once more. If the handler asks again, the call is a failed `$mcp_tool_call` with `$mcp_error_type` set to `input_required`.
 
@@ -218,7 +256,6 @@ A client on an older revision never sees a round. go-sdk answers the requests it
 The Go SDK doesn't yet have:
 
 - An intent fallback callback. With `WithContextParameter(false)`, the SDK captures no intent
-- A [missing capability](/docs/mcp-analytics/missing-capability) tool
 - `$mcp_tools_list`, `$mcp_initialize`, resource, and prompt events
 - Task handling
 - Client name and version on legacy `2025-11-25` stateless servers. The protocol version is still present

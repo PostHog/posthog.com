@@ -9,18 +9,23 @@ availability:
 sourceId: Jumpcloud
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The JumpCloud connector syncs users, systems, user groups, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+[JumpCloud](https://jumpcloud.com) is a cloud directory platform for identity, access, and device management. Linking it as a source syncs your users, devices, groups, SSO applications, device policies and their results, alerts, identity risk events, System Insights device data, and Directory Insights activity events into the PostHog data warehouse, so you can join identity and security data with your product data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+To connect JumpCloud, you need:
+
+- A JumpCloud administrator account with API access.
+- Your admin API key, found in the JumpCloud Admin Portal under your account menu (click your initials in the top-right corner, then **My API Key**).
+- A Directory Insights subscription if you want to sync the `events` table. How far back events are available depends on your Directory Insights retention (up to 90 days).
+- System Insights enabled for your devices if you want to sync the `system_insights_*` tables.
 
 ## Adding a data source
 
@@ -41,7 +46,11 @@ You'll be asked for:
 
 <SyncModes />
 
-All JumpCloud tables are full refresh. Each sync replaces the contents of the table.
+The `events` table (Directory Insights) supports **incremental** sync: each run only fetches events newer than the last synced event timestamp. All other tables sync as a **full refresh** — each sync replaces the contents of the table.
+
+The association tables (`user_group_members`, `system_group_members`, `application_users`, `application_user_groups`, and `system_users`) request JumpCloud once per parent group, application, or system, so a large directory takes longer to sync.
+
+The `policies`, `policy_results`, `policy_statuses`, `alerts`, `alert_occurrences`, `identity_risk_events`, and `system_insights_*` tables also sync as a full refresh. `policy_statuses` holds the latest result of each policy on each device, and `alert_occurrences` holds each time an alert fired. Both request JumpCloud once per policy or alert. The `system_insights_*` tables hold device inventory and security posture (installed apps and programs, patches, disk encryption, browser extensions, OS versions, and more). Join them to `systems` on `system_id`.
 
 ## Configuration
 

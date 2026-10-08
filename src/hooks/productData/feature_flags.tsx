@@ -25,7 +25,7 @@ export const featureFlags = {
     type: 'feature_flags',
     teamSlug: 'feature-flags',
     pocketGuideVolume: 'feature-flags',
-    forumTopicId: 360,
+    forumTag: 'feature-flags',
     color: 'seagreen',
     colorSecondary: 'seagreen',
     wizardSupport: 'In development',

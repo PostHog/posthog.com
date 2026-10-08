@@ -2,17 +2,17 @@ import React, { forwardRef } from 'react'
 import dayjs from 'dayjs'
 import { Logo } from '@posthog/brand/logo'
 import {
-    HedgehogBallHog,
+    HedgehogBall,
     HedgehogBeaker,
-    HedgehogCardHog,
+    HedgehogCard,
     HedgehogChef,
     HedgehogConstruction,
     HedgehogHogpatch,
     HedgehogIpad,
     HedgehogMountie,
-    HedgehogRoboHog,
-    HedgehogSailorHog,
-    HedgehogSpeakerHog,
+    HedgehogRobot,
+    HedgehogSailor,
+    HedgehogSpeaker,
 } from '@posthog/brand/hoggies'
 import {
     EVENT_GRAPHIC_CREAM_FROM,
@@ -70,16 +70,16 @@ export type EventGraphicProps = {
  * the names come from `@posthog/brand`, which is generated from the Hoggies brand file.
  */
 const FALLBACK_HOGS = [
-    HedgehogRoboHog,
+    HedgehogRobot,
     HedgehogMountie,
-    HedgehogSailorHog,
+    HedgehogSailor,
     HedgehogChef,
     HedgehogConstruction,
-    HedgehogCardHog,
+    HedgehogCard,
     HedgehogIpad,
-    HedgehogSpeakerHog,
+    HedgehogSpeaker,
     HedgehogHogpatch,
-    HedgehogBallHog,
+    HedgehogBall,
     HedgehogBeaker,
 ]
 

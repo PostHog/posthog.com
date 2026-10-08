@@ -111,7 +111,7 @@ SQL metrics are defined over a [saved view](/docs/data-warehouse/views). Create 
 
 ## What's next for semantic layering in PostHog
 
-The PostHog semantic layer is in beta right now, you can work with it through [MCP tools](/docs/semantic-layer/mcp-tools), PostHog's UI, and [SQL](/docs/semantic-layer/query).
+The PostHog semantic layer is now generally available. You can work with it through [MCP tools](/docs/semantic-layer/mcp-tools), PostHog's UI, and [SQL](/docs/semantic-layer/query).
 
 We're measuring success around this by checking:
 
@@ -121,4 +121,4 @@ We're measuring success around this by checking:
 
 As more of what [we build becomes agent-driven](/newsletter/2030-shaped-software), reliable data is the difference between an AI you can trust and one you can't.
 
-The semantic layer is in beta. Get started with [these instructions](/docs/semantic-layer/start-here), or setup the [PostHog MCP](/mcp) and ask your agent to recommend a new semantic layer catalog.
+The semantic layer is generally available. Get started with [these instructions](/docs/semantic-layer/start-here), or setup the [PostHog MCP](/mcp) and ask your agent to recommend a new semantic layer catalog.

@@ -40,7 +40,7 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
 import useProduct from 'hooks/useProduct'
-import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import { buildProductMenuTabs, PRODUCT_SURFACE_H1, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -467,6 +467,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                     : null),
             }}
             title={title}
+            titleClassName={isProductDocsPage ? PRODUCT_SURFACE_H1 : undefined}
             belowTitle={
                 (showWarehouseWizardHint && <WarehouseWizardHint />) ||
                 (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
