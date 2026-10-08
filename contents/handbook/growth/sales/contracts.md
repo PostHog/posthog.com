@@ -54,6 +54,12 @@ You can create quotes with multiple options: e.g. one based on current usage, on
 
 The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
 
+### Automatic renewal quotes
+
+QuoteHog can draft a renewal quote for you once a renewal opportunity in Salesforce closes within 90 days. A daily job picks up the opportunity, builds a quote from the customer's last billing cycle of Stripe usage, and sends the opportunity owner a Slack message with the link. Treat it as a starting point and review it against the usage trends above before you share it with the customer.
+
+The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. Disconnecting Salesforce turns it off again.
+
 ## Order form
 
 An order form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both PostHog and the customer. They are either governed by our standard terms or a custom MSA (see below).
