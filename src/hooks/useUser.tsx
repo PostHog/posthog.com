@@ -176,13 +176,23 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const posthog = usePostHog()
 
     const validateUser = async () => {
-        const jwt = localStorage.getItem('jwt')
-        if (jwt && (await fetchUser(jwt))) {
-            setJwt(jwt)
-        } else {
-            clearUser()
+        try {
+            const jwt = localStorage.getItem('jwt')
+            if (jwt && (await fetchUser(jwt))) {
+                setJwt(jwt)
+            } else {
+                clearUser()
+            }
+        } catch (error) {
+            console.error(error)
+            addToast({
+                error: true,
+                title: 'Could not load your account',
+                description: 'Your login is saved. Check your connection and refresh to try again.',
+            })
+        } finally {
+            setIsValidating(false)
         }
-        setIsValidating(false)
     }
 
     useEffect(() => {
@@ -606,7 +616,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             posthog?.capture('community', {
                 error: 'failed to fetch user',
             })
-            return null
+            if (meRes.status === 401 || meRes.status === 403) return null
+            throw new Error(`Could not load your account (HTTP ${meRes.status}).`)
         }
 
         const meData: User = await meRes.json()
@@ -625,13 +636,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             }).catch((error) => console.error(error))
         }
 
-        const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((res) => res.json())
-
-        setNotifications(notifications || [])
+        try {
+            const notifications = await fetch(`${SQUEAK_HOST}/api/profile/notifications`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            if (notifications.ok) setNotifications((await notifications.json()) || [])
+        } catch (error) {
+            console.error(error)
+        }
 
         // We don't want any error thrown here to bubble up to the caller.
         try {

@@ -54,6 +54,8 @@ import { IconDiscord, IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
 import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
+import LaptopMode from 'components/LaptopMode'
+import ShareLaptop from 'components/LaptopMode/ShareLaptop'
 
 dayjs.extend(relativeTime)
 
@@ -1222,12 +1224,19 @@ const ValidationSchema = Yup.object().shape({
     location: Yup.string().nullable(),
 })
 
-export default function ProfilePage({ params }: PageProps) {
+export default function ProfilePage({ params, location }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
     const { addToast } = useToast()
     const { user, getJwt } = useUser()
     const [isEditing, setIsEditing] = useState(false)
+    const [laptopProfileId, setLaptopProfileId] = useState<number | null>(null)
+    const isLaptopMode = laptopProfileId === id
+    const { appWindow } = useWindow()
+    const search = appWindow?.location?.search ?? location?.search ?? ''
+    useEffect(() => {
+        setLaptopProfileId(new URLSearchParams(search).get('laptop') === '1' ? id : null)
+    }, [id, search])
     const [giftPopoverOpen, setGiftPopoverOpen] = useState(false)
     const [giftAmount, setGiftAmount] = useState<number>()
     const [giftNote, setGiftNote] = useState('')
@@ -1657,8 +1666,12 @@ export default function ProfilePage({ params }: PageProps) {
         <div data-scheme="secondary" className="pt-4 h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
 
+            <div className={isLaptopMode ? 'flex-1 min-h-0' : 'hidden'}>
+                <LaptopMode key={id} profileId={id} active={isLaptopMode} />
+            </div>
+
             <ScrollArea
-                className="min-h-0 h-full"
+                className={`min-h-0 h-full ${isLaptopMode ? 'hidden' : ''}`}
                 style={
                     values.backgroundImage
                         ? {
@@ -1814,6 +1827,7 @@ export default function ProfilePage({ params }: PageProps) {
             <div className="border-primary sticky border-t bottom-0">
                 <HeaderBar
                     showCustomLeft={
+                        !isLaptopMode &&
                         (isCurrentUser || isModerator) && (
                             <div className="flex gap-2">
                                 {isEditing ? (
@@ -1847,6 +1861,17 @@ export default function ProfilePage({ params }: PageProps) {
                     }
                     rightActionButtons={
                         <>
+                            {isLaptopMode && <ShareLaptop profileId={id} />}
+                            <OSButton
+                                size="md"
+                                variant="secondary"
+                                active={isLaptopMode}
+                                aria-pressed={isLaptopMode}
+                                disabled={isEditing}
+                                onClick={() => setLaptopProfileId(isLaptopMode ? null : id)}
+                            >
+                                {isLaptopMode ? 'Back to profile' : 'Laptop mode'}
+                            </OSButton>
                             {isModerator && (
                                 <div className="flex gap-px">
                                     <Popover

@@ -154,6 +154,7 @@ const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>)
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
+    const squeakSourceHost = process.env.SQUEAK_SOURCE_HOST || process.env.GATSBY_SQUEAK_API_HOST
 
     // Canonical MCP tool definitions from the PostHog monorepo, rendered on docs pages
     // (e.g. /docs/ai-observability/surfaces/mcp). The schema file is kept in sync with the
@@ -369,7 +370,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 encodeValuesOnly: true,
             }
         )
-        const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
+        const roadmapsURL = `${squeakSourceHost}/api/roadmaps?${roadmapQuery}`
         const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
         roadmaps.forEach((roadmap) => {
             const {
@@ -448,9 +449,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 encodeValuesOnly: true,
             }
         )
-        const { data: postCategories, meta } = await fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/post-categories?${query}`
-        ).then((res) => res.json())
+        const { data: postCategories, meta } = await fetch(`${squeakSourceHost}/api/post-categories?${query}`).then(
+            (res) => res.json()
+        )
 
         postCategories?.forEach(({ id, ...other }) => {
             const node = {
@@ -467,7 +468,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const sourceCommunityStats = async () => {
-        const host = process.env.GATSBY_SQUEAK_API_HOST
+        const host = squeakSourceHost
         if (!host) {
             console.warn('GATSBY_SQUEAK_API_HOST not set. Skipping community stats.')
             return
@@ -1115,7 +1116,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 },
                 { encodeValuesOnly: true }
             )
-            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
+            const url = `${squeakSourceHost}/api/sdk-references?${referenceQuery}`
             const { data } = await fetch(url).then((res) => res.json())
             return (data ?? []) as Array<{ attributes?: { data?: Record<string, unknown> } }>
         }
@@ -1170,7 +1171,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             },
             { encodeValuesOnly: true }
         )
-        const eventsUrl = `${process.env.GATSBY_SQUEAK_API_HOST}/api/events?${eventsQuery}`
+        const eventsUrl = `${squeakSourceHost}/api/events?${eventsQuery}`
         const { data: events, meta } = await fetch(eventsUrl).then((res) => res.json())
         events.forEach((event) => {
             const node = {
@@ -1192,9 +1193,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             populate: ['icon', 'achievement_group.achievements.icon'],
             publicationState: 'preview',
         })
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
-            res.json()
-        )
+        const { data } = await fetch(`${squeakSourceHost}/api/achievements?${query}`).then((res) => res.json())
         data.forEach((achievement) => {
             const node = {
                 id: createNodeId(`achievement-${achievement.id}`),
@@ -1214,9 +1213,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             populate: ['achievements.icon', 'icon'],
             publicationState: 'preview',
         })
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
-            (res) => res.json()
-        )
+        const { data } = await fetch(`${squeakSourceHost}/api/achievement-groups?${query}`).then((res) => res.json())
         data.forEach((achievement) => {
             const node = {
                 id: createNodeId(`achievement-group-${achievement.id}`),
@@ -1232,9 +1229,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     const fetchRewards = async () => {
-        const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/points/rewards`).then((res) =>
-            res.json()
-        )
+        const { data } = await fetch(`${squeakSourceHost}/api/points/rewards`).then((res) => res.json())
         data.forEach((reward) => {
             const node = {
                 id: createNodeId(`reward-${reward.handle}`),

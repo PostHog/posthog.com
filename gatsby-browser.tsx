@@ -9,7 +9,17 @@ import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import KoreanWrapper from './src/components/Korean/KoreanWrapper'
 import { Provider } from './src/context/App'
+import { withNgrokBypass } from './src/lib/ngrokFetch'
 initKea(false)
+
+export const onClientEntry = () => {
+    if (process.env.NODE_ENV === 'development') {
+        window.fetch = withNgrokBypass(window.fetch.bind(window), [
+            process.env.GATSBY_SQUEAK_API_HOST,
+            process.env.GATSBY_SQUEAK_AUTH_HOST,
+        ])
+    }
+}
 
 const isKoreanPath = (pathname?: string) => pathname === '/ko' || pathname?.startsWith('/ko/')
 

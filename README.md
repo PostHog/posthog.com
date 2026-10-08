@@ -75,6 +75,12 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ## Advanced setup
 
+### Local Squeak with a public tunnel
+
+Use `SQUEAK_SOURCE_HOST=http://127.0.0.1:1337` in `.env.development` when Squeak runs locally and the website is accessed through ngrok or another device. Gatsby's data sourcing, sitemap requests, and laptop image renderer use this server-only address. Keep `GATSBY_SQUEAK_API_HOST` set to the public Squeak URL for browser requests. Without `SQUEAK_SOURCE_HOST`, the existing public-host configuration is used.
+
+Restart Gatsby after changing these values. If startup reports missing Roadmap, Achievement, or Reward GraphQL fields, check the first `sourceNodes` error: a failed Squeak request can leave Gatsby without the data it needs to infer those types. After restoring the connection, stop Gatsby and run `pnpm clean` before starting it again.
+
 ### Debugging errors on start
 1. Pull the latest changes from `master`
 2. Run `pnpm clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`

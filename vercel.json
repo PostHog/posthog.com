@@ -5,6 +5,11 @@
             "*": false
         }
     },
+    "functions": {
+        "api/laptop-share.js": {
+            "includeFiles": "static/{images/*_mode_laptop.png,stickers/laptop/*.svg}"
+        }
+    },
     "headers": [
         {
             "source": "/docs/:path*",
@@ -97,6 +102,10 @@
         }
     ],
     "rewrites": [
+        {
+            "source": "/community/laptops/:profileId",
+            "destination": "/api/laptop-share?profileId=:profileId"
+        },
         {
             "source": "/docs/references/:slug(.*-\\d.*).md",
             "destination": "/docs/references/version-unavailable.md"

@@ -10,6 +10,8 @@ require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
 
+const squeakSourceHost = process.env.SQUEAK_SOURCE_HOST || process.env.GATSBY_SQUEAK_API_HOST
+
 const getQuestionPages = async (base) => {
     const limit = pLimit(3)
 
@@ -25,7 +27,7 @@ const getQuestionPages = async (base) => {
 
         for (let attempt = 1; attempt <= 3; attempt++) {
             try {
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+                const response = await fetch(`${squeakSourceHost}/api/questions?${questionQuery}`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}, Text: ${await response.text()}`)
@@ -59,7 +61,7 @@ const getQuestionPages = async (base) => {
 
 module.exports = {
     developMiddleware: (app) => {
-        ;['luma-events', 'notion-events', 'posthog-desktop-pricing'].forEach((route) => {
+        ;['luma-events', 'notion-events', 'posthog-desktop-pricing', 'laptop-share'].forEach((route) => {
             app.use(`/api/${route}`, async (req, res) => {
                 try {
                     await require(`./api/${route}`)(req, res)
@@ -68,6 +70,10 @@ module.exports = {
                     res.status(500).json({ error: `Failed to fetch ${route}` })
                 }
             })
+        })
+        app.get('/community/laptops/:id', (req, res) => {
+            req.query.profileId = req.params.id
+            return require('./api/laptop-share')(req, res)
         })
     },
     flags: {
@@ -94,7 +100,7 @@ module.exports = {
         {
             resolve: `gatsby-source-squeak`,
             options: {
-                apiHost: process.env.GATSBY_SQUEAK_API_HOST,
+                apiHost: squeakSourceHost,
             },
         },
         {
