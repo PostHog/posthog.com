@@ -34,10 +34,12 @@ An agent investigates every report. It digs into your codebase and your PostHog 
 
 What happens next depends on whether the report is actionable:
 
-- If the report is **actionable**, an agent opens a **pull request** for it. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
+- If the report is **actionable**, an agent can open a **pull request** for it automatically. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
 - Otherwise, the report is **surfaced in your inbox for input**, for example when it needs business context or a choice between valid approaches.
 
-Every actionable report gets a pull request, so the work that reaches you already has a proposed change attached. Since [pricing](/docs/self-driving/pricing) is per pull request, that's also what you're billed for.
+When **PR generation** is on, actionable reports get a pull request, so the work that reaches you already has a proposed change attached. Since [pricing](/docs/self-driving/pricing) is per pull request, that's also what you're billed for.
+
+A team can turn off PR generation in its self-driving settings. When it's off, reports still arrive in your inbox and notify your team, but no pull request opens automatically.
 
 ## Review and ship
 
