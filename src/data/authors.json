@@ -357,7 +357,7 @@
     },
     {
         "handle": "tomas-farias",
-        "name": "Tomás Farías Santana",
+        "name": "Tom\u00e1s Far\u00edas Santana",
         "role": "Software Engineer"
     },
     {
@@ -802,5 +802,13 @@
         "name": "Ella Cullen",
         "role": "Technical Customer Success Manager",
         "profile_id": 45795
+    },
+    {
+        "handle": "juraj-majerik",
+        "name": "Juraj Majerik",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/jurajmajerik",
+        "profile_id": 29792
     }
 ]
