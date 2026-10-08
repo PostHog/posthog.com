@@ -22,7 +22,7 @@ To get a shared Slack channel going, follow these steps:
 1. Create a new Slack channel - the expected syntax for the name is `posthog-[customername]`.
 2. When determining the `[customername]`, make sure to make it searchable (avoid acronyms, if possible).
 3. Obviously, invite the relevant customer folks! Be sure that you're inviting them to the *channel* you've created and not our Slack workspace. 
-4. Invite certain leaders who want to help monitor the channel, including: Tim, Ben, Abigail, Simon, your team lead and anyone else internal who may be connected to the customer. PostHog folks will sometimes join the channel if they're interested in the customer or the use-case
+4. Invite Abigail and your direct lead, plus anyone else internal who may be connected to the customer. You can optionally invite additional leadership who want to help monitor the channel, such as Simon, Ben or Tim. PostHog folks will sometimes join the channel if they're interested in the customer or the use-case
 5. Invite SupportHog to ensure those from PostHog and the customer can create support tickets from Slack threads - use a slash command in Slack to invite it: `/invite @SupportHog`. Once it's in the channel, a ticket can be raised by reacting to any message with the :ticket: emoji or by mentioning `@SupportHog` in a thread.
 6. Set your preferences to "Get notifications for all messages" in the channel -- this will ensure you don't miss a message and allow for speedy support. 
 7. Ensure that the Slack channel name is recorded on the relevant Salesforce Account record in the `Slack Channel` field.
