@@ -981,7 +981,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     juno: {
         name: 'Juno',
-        toolsUsed: ['error_tracking', 'product_analytics', 'self_driving'],
+        toolsUsed: ['error_tracking', 'product_analytics', 'inbox'],
         industries: ['Healthcare', 'AI'],
         users: ['Engineering', 'Product'],
         notes: 'AI health assistant for chronic illness',
@@ -1873,11 +1873,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
 }
 
-// Tools that customers use but that are not in useProducts
-const NON_PRODUCT_TOOLS: Record<string, string> = {
-    self_driving: 'Self-driving',
-}
-
 export const useCustomers = () => {
     const { products } = useProducts()
 
@@ -1900,7 +1895,7 @@ export const useCustomers = () => {
     )
 
     const getProductTitleByHandle = (handle: string) => {
-        return products.find((product) => product.handle === handle)?.name ?? NON_PRODUCT_TOOLS[handle]
+        return products.find((product) => product.handle === handle)?.name
     }
 
     // Transform customer data with product titles and case study info
