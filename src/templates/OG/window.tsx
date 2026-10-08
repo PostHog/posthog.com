@@ -154,7 +154,7 @@ export const WindowOg = ({ title, children }: WindowOgProps) => (
             </div>
             <div
                 style={{
-                    padding: '36px 28px 40px',
+                    padding: '52px 48px 56px',
                     display: 'flex',
                     flexGrow: 1,
                     position: 'relative',

@@ -19,7 +19,7 @@ export const JobOg = ({ role, roleFontSize = 120, timezone, salary }: JobOgProps
 
     return (
         <WindowOg title="Careers">
-            <img src="laptop-hog" width={340} height={340} style={{ position: 'absolute', right: 8, bottom: 28 }} />
+            <img src="laptop-hog" width={340} height={340} style={{ position: 'absolute', right: 24, bottom: 40 }} />
             <div style={{ display: 'flex', flexDirection: 'column', width: 780 }}>
                 <div
                     style={{
