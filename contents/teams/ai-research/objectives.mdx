@@ -1,17 +1,19 @@
 ### Q4 2026 objectives
 
-#### Goal 1: Finish and evaluate the Replay encoder
-
-- Finish the current training run
-- Evaluate it: SOTA benchmarks, probes, visualizations, weights analysis, anisotropy, and ablations
-
-#### Goal 2: Train the v3 encoder
-
-- Train on v3 data with the findings from Goal 1
+- Finish training encoder (30/40 epochs)
+- Evaluate
+  - Benchmarks vs SOTA
+  - Visualizations (PCA, RCDM)
+  - Probes (MLP)
+  - Weights analysis (SwiGLU activations, dead paths, attn softmax dist)
+  - Kernels
+  - Eval using labeling suite labels
+  - Eval at various checkpoints
+  - Check anisotropy
+  - Multi-head ablation
+- Train with findings applied on v3 data on cluster
 - Scale labels to 10k
-
-#### Goal 3: Scale the data for the end-to-end agent
-
-- Generate 50k text renderer samples
-- Build the LLM labeling pipeline
-- Get to 100k labels
+- Train with higher res cooldown
+- Evaluate
+- Generate 50k text-renderer samples
+- LLM pipeline
