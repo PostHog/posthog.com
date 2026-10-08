@@ -4,8 +4,8 @@ date: 2026-09-30
 author:
   - natalia-amorim
 category: General
-featuredimage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_1_8d39770423.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_1_8d39770423.png
 tags:
   - Studies
 seo:
@@ -19,7 +19,7 @@ We're not describing a particularly mature ecosystem, but rather one that's bein
 
 And so, like any responsible naturalists, we began observing it (by which we mean digging through our data to see what these agents are up to).
 
-In the 90 days up to to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1]
+In the 90 days up to to September 16, agents made **63 million tool calls** to [PostHog's MCP](/mcp), coming from **130,000 people**.[^1] (For the latest numbers, check our live [MCP leaderboard](/mcp/leaderboard).)
 
 ![Weekly tool calls](https://res.cloudinary.com/dmukukwp6/image/upload/the_median_replay_9877eefcf3.png)
 
@@ -136,6 +136,8 @@ So we launched a new analytics tool to help monitor MCP traffic. [It was born fr
 It's called [MCP analytics](/docs/mcp-analytics) (currently in beta!) and it shows you who's calling, what they're calling, what's erroring and what isn't, how many calls each agent is making, what did they want that you don't have, and more. 
 
 You can also step through any agent session tool call by tool call – the agent equivalent of a session replay – if you want to watch a robot think.
+
+Want to see it at work? Our [MCP leaderboard](/mcp/leaderboard) is MCP analytics running on our own server. It's built from the same data as this post, served through [Endpoints](/docs/endpoints).
 
 ![MCP analytics](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_08_19_T19_14_15_496_Z_68955839bb.png)
 

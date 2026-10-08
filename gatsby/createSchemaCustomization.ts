@@ -122,6 +122,52 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       note: String
       requires: FrontmatterPocketGuideCtaRequires
     }
+    type FrontmatterHogpediaInfoboxRow {
+      label: String
+      value: String
+    }
+    type FrontmatterHogpediaInfobox {
+      title: String
+      # A component name exported by @posthog/brand/hoggies, e.g. "HedgehogChartHog".
+      hog: String
+      caption: String
+      rows: [FrontmatterHogpediaInfoboxRow]
+    }
+    type FrontmatterHogpediaReference {
+      id: String
+      text: String
+      url: String
+    }
+    type FrontmatterHogpediaLink {
+      title: String
+      url: String
+    }
+    type FrontmatterHogpediaTalkPost {
+      author: String
+      date: String
+      indent: Int
+      body: String
+    }
+    # Namespaced under one key for the same reason as pocketGuideCta: this Frontmatter type
+    # covers every MDX file on the site, so a bare "infobox" or "references" key would be one
+    # blog post away from a shape conflict. Declared rather than inferred so the template
+    # query still compiles when a key happens to be absent from every article.
+    type FrontmatterHogpedia {
+      tagline: String
+      aliases: [String]
+      categories: [String]
+      notices: [String]
+      # "Label|/hogpedia/slug" pairs. Kept as strings so an article's frontmatter stays short.
+      seeAlso: [String]
+      infobox: FrontmatterHogpediaInfobox
+      references: [FrontmatterHogpediaReference]
+      external: [FrontmatterHogpediaLink]
+      talk: [FrontmatterHogpediaTalkPost]
+      # The article a talk page discusses, e.g. "/hogpedia/max-the-hedgehog".
+      talkFor: String
+      featured: Boolean
+      didYouKnow: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
@@ -155,14 +201,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # that template in the app instead of encoding this guide's SKILL.md into the link.
       appTemplate: String
       seo: FrontmatterSEO
+      hogpedia: FrontmatterHogpedia
       # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
       # are declared here rather than left to inference – see components/SelfDrivingInbox.
       name: String
       allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
-      lang: String
-      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
@@ -360,9 +405,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       attributes: PostCategoryAttributes
     }
     type CommunityStats implements Node {
-      topicId: Int
-      topicSlug: String
-      topicLabel: String
+      forumTag: String
       questions: Int
       resolved: Int
       replies: Int
@@ -708,6 +751,23 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         product: String
         unique_users: Int
         unique_orgs: Int
+    }
+    type McpLeaderboardRow {
+        week: String!
+        facet: String!
+        grp: String
+        label: String!
+        calls_pct: Float
+        users_pct: Float
+        error_rate_pct: Float
+        p50_ms: Float
+        p95_ms: Float
+        calls_index: Float
+        users_index: Float
+    }
+    type McpLeaderboard implements Node @dontInfer {
+        rows: [McpLeaderboardRow!]!
+        fetchedAt: Date @dateformat
     }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
     # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.

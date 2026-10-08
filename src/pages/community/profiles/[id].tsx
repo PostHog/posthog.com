@@ -11,7 +11,6 @@ import { ProfileData, StrapiRecord } from 'lib/strapi'
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import useTopicsNav from '../../../navs/useTopicsNav'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import PostsTable from 'components/Edition/PostsTable'
 import { sortOptions } from 'components/Edition/Posts'
@@ -509,7 +508,17 @@ const RoleField = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator, isEditingRole }) => {
+const Details = ({
+    profile,
+    isEditing,
+    setFieldValue,
+    values,
+    errors,
+    isTeamMember,
+    isModerator,
+    isEditingRole,
+    canEditCredit,
+}) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
     const email = profile?.user?.data?.attributes?.email
 
@@ -522,6 +531,45 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
             {isModerator && (
                 <RoleField roleId={values.userRole} isEditing={isEditingRole} setFieldValue={setFieldValue} />
             )}
+            {isModerator &&
+                (canEditCredit ? (
+                    <div>
+                        <label className="text-[15px] mb-1 inline-flex items-center gap-1 font-semibold">
+                            PostHog credit
+                            <Tooltip
+                                delay={0}
+                                className="inline-flex items-center text-secondary"
+                                trigger={<IconShieldLock className="size-4" />}
+                            >
+                                Only visible to moderators
+                            </Tooltip>
+                        </label>
+                        <ToggleGroup
+                            title="PostHog credit"
+                            hideTitle
+                            options={[
+                                { label: 'On', value: 'on' },
+                                { label: 'Off', value: 'off' },
+                            ]}
+                            value={values.creditRedemptionEnabled ? 'on' : 'off'}
+                            onValueChange={(value) => setFieldValue('creditRedemptionEnabled', value === 'on')}
+                        />
+                    </div>
+                ) : (
+                    <p className="flex justify-between m-0 gap-2 items-center">
+                        <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                            PostHog credit
+                            <Tooltip
+                                delay={0}
+                                className="inline-flex items-center text-secondary"
+                                trigger={<IconShieldLock className="size-4" />}
+                            >
+                                Only visible to moderators
+                            </Tooltip>
+                        </span>
+                        <span>{values.creditRedemptionEnabled ? 'On' : 'Off'}</span>
+                    </p>
+                ))}
             {isModerator && email && (
                 <p className="flex justify-between m-0 gap-2 items-center">
                     <span className="font-semibold inline-flex items-center gap-1 leading-none">
@@ -1238,6 +1286,7 @@ export default function ProfilePage({ params }: PageProps) {
     const isModerator = user?.role?.type === 'moderator'
     const canFullyEdit = isCurrentUser || (isModerator && user?.webmaster)
     const canEditRole = isModerator && !isCurrentUser
+    const canEditCredit = isEditing && isModerator
     const isEditingProfile = isEditing && canFullyEdit
     const isEditingRole = isEditing && canEditRole
 
@@ -1437,7 +1486,7 @@ export default function ProfilePage({ params }: PageProps) {
             linkedin: profile?.linkedin,
             github: profile?.github,
             discord: profile?.discord,
-            avatar: getAvatarURL(profile),
+            avatar: getAvatarURL(data),
             firstName: profile?.firstName,
             lastName: profile?.lastName,
             location: profile?.location,
@@ -1454,8 +1503,9 @@ export default function ProfilePage({ params }: PageProps) {
             amaEnabled: profile?.amaEnabled,
             tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
             userRole: getUserRoleId(profile),
+            creditRedemptionEnabled: Boolean(profile?.user?.data?.attributes?.creditRedemptionEnabled),
         },
-        onSubmit: async ({ avatar, images, userRole, ...values }) => {
+        onSubmit: async ({ avatar, images, userRole, creditRedemptionEnabled, ...values }) => {
             try {
                 posthog?.capture('squeak profile update start', {
                     profileId: id,
@@ -1464,11 +1514,14 @@ export default function ProfilePage({ params }: PageProps) {
 
                 const currentRole = getUserRoleId(profile)
                 const roleChanged = canEditRole && userRole && userRole !== currentRole
-                if (roleChanged) {
+                const creditChanged =
+                    canEditCredit &&
+                    creditRedemptionEnabled !== Boolean(profile?.user?.data?.attributes?.creditRedemptionEnabled)
+                if (roleChanged || creditChanged) {
                     const jwt = await getJwt()
                     const userId = profile?.user?.data?.id
                     if (!userId) {
-                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        addToast({ description: 'Failed to update user', error: true, duration: 3000 })
                         return
                     }
                     const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${userId}`, {
@@ -1477,10 +1530,13 @@ export default function ProfilePage({ params }: PageProps) {
                             'Content-Type': 'application/json',
                             Authorization: `Bearer ${jwt}`,
                         },
-                        body: JSON.stringify({ role: userRole }),
+                        body: JSON.stringify({
+                            ...(roleChanged ? { role: userRole } : {}),
+                            ...(creditChanged ? { creditRedemptionEnabled } : {}),
+                        }),
                     })
                     if (!response.ok) {
-                        addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+                        addToast({ description: 'Failed to update user', error: true, duration: 3000 })
                         return
                     }
                     await mutate()
@@ -1488,7 +1544,11 @@ export default function ProfilePage({ params }: PageProps) {
                         description: (
                             <>
                                 <IconCheck className="text-green size-4 inline-block mr-1" />
-                                Role saved successfully
+                                {roleChanged && creditChanged
+                                    ? 'Role and PostHog credit saved'
+                                    : roleChanged
+                                    ? 'Role saved successfully'
+                                    : 'PostHog credit saved'}
                             </>
                         ),
                         duration: 3000,
@@ -1698,6 +1758,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         isTeamMember={isTeamMember}
                                         isModerator={isModerator}
                                         isEditingRole={isEditingRole}
+                                        canEditCredit={canEditCredit}
                                     />
                                 </Block>
                             )}

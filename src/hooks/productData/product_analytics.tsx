@@ -26,8 +26,10 @@ export const productAnalytics = {
     type: 'product_analytics',
     categoryName: 'Analytics',
     teamSlug: 'product-analytics',
-    forumTopicId: 349,
+    forumTag: 'product-analytics',
     pocketGuideVolume: 'product-analytics',
+    // Product Analytics has a learning hub, separate from the story reader.
+    learnHub: true,
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,

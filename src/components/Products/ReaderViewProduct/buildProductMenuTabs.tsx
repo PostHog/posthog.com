@@ -1,5 +1,14 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
+import {
+    IconArrowLeft,
+    IconBook,
+    IconCursorClick,
+    IconEye,
+    IconGraduationCap,
+    IconTerminal,
+    IconPiggyBank,
+    IconPresent,
+} from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
 import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
@@ -74,22 +83,62 @@ const DocsTreeMenu = ({
     )
 }
 
-/** One item per chapter, each its own page; `ProductNav` scrolls within one instead. */
+const LearnHubNav = ({ basePath, contentRef }: { basePath: string; contentRef?: React.RefObject<HTMLElement> }) => (
+    <ProductNav
+        basePath={basePath}
+        contentRef={contentRef}
+        items={[
+            { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+            { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
+            { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
+            { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
+        ]}
+    />
+)
+
+/** Standard guides link between chapter pages; hub guides scroll between anchored sections. */
 const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
+    hasLanding,
+    hub,
+    contentRef,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
+    hasLanding?: boolean
+    hub?: boolean
+    contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
+    const normalizedCurrentPath = currentPath?.replace(/\/$/, '')
+    const normalizedBasePath = basePath.replace(/\/$/, '')
+
+    if (hub && (!normalizedCurrentPath || normalizedCurrentPath === normalizedBasePath)) {
+        return <LearnHubNav basePath={basePath} contentRef={contentRef} />
+    }
+
     return (
         <nav>
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
+                {hasLanding ? (
+                    <li className="m-0 mb-2 border-b border-primary/20 p-0 pb-2">
+                        <Link
+                            to={basePath}
+                            className="block w-full rounded px-2 py-1 text-sm !text-primary !no-underline hover:bg-dark/10 focus-visible:outline-offset-[-2px] dark:hover:bg-light/10"
+                        >
+                            <span className="inline-flex items-center gap-1.5">
+                                <IconArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+                                <span data-sidebar-label>Back to Learn</span>
+                            </span>
+                        </Link>
+                    </li>
+                ) : null}
                 {pages.map((page) => {
-                    const to = learnChapterPath(basePath, page)
+                    const to =
+                        page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
                     const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
                     return (
                         <li key={page.url} className="m-0 p-0">
@@ -131,6 +180,8 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
+              /** Shows a learning hub with Product-style anchor navigation. */
+              learnHub?: boolean
           }
         | null
         | undefined
@@ -185,8 +236,10 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
+        learnHub,
         docsSlug,
     } = productData
+    const hasLearnLanding = Boolean(learnHub)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -260,11 +313,15 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
+            navigateOnActiveClick: hasLearnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
+                    hasLanding={hasLearnLanding}
+                    hub={learnHub}
+                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
             ),
         })

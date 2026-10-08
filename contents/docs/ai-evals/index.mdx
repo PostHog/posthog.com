@@ -25,6 +25,20 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 | **Output**   | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score |
 | **Setup**    | Write a prompt                                               | Write Hog code                                             | Pick the type – no prompt or code required             |
 
+## Choosing what to evaluate
+
+LLM-as-a-judge and code-based evaluations have an **Evaluate** setting that picks what one run grades:
+
+- **Each generation** grades every matching generation on its own, right after it's ingested.
+- **Whole trace** grades all the events in a [trace](/docs/ai-observability/traces) together, after the trace settles.
+- **Whole session** grades every trace in a [session](/docs/ai-observability/sessions) together, after the session settles.
+
+Property filters still match individual generations. A trace or session is evaluated when any of its generations match, and the sampling rate applies to the whole trace or session.
+
+**Whole session** only runs on generations that carry the `$ai_session_id` property. If your events don't include it, a session evaluation has nothing to grade and never produces results. See [how to set a session ID](/docs/ai-observability/sessions#how-to-set-a-session-id), or pick **Whole trace** or **Each generation** instead.
+
+Sentiment evaluations always grade each generation.
+
 ## LLM-as-a-judge evaluations
 
 ### How they work
@@ -362,6 +376,8 @@ Expand a row to see the range, the conditions it used, and how much it started, 
 An enabled evaluation covers its own traffic within minutes, so a range it has been running over has nothing left to grade, and the count reads zero. This is expected, not an error. To grade that range again, turn on **Include generations that already have a result**.
 
 The most recent few minutes are also held back, because an evaluation waits for a generation to settle before grading it.
+
+A **Whole session** evaluation also reads zero when your generations don't carry `$ai_session_id`, because there are no sessions to grade. Including results that already exist doesn't change that count. See [Choosing what to evaluate](#choosing-what-to-evaluate).
 
 ### Backfill pricing
 

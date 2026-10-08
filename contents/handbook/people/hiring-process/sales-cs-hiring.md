@@ -113,8 +113,8 @@ You'll also have access to a dedicated Slack channel with the team throughout th
 
 ##### How to prepare for the day
 
-*   Read the [CS section of the handbook](/handbook/cs-and-onboarding/customer-success) thoroughly. You will be expected to have opinions!
-*   Install and get familiar with PostHog - you'll be expected to have a good understanding of PostHog going into SuperDay.
+*   Read the [CS section of the handbook](/handbook/cs-and-onboarding/customer-success) thoroughly.
+*   Install and get familiar with PostHog - you'll be expected to have a good understanding of PostHog going into SuperDay, so we recommend creating and playing with some test data.
 
 ##### During the day
 

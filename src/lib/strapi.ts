@@ -6,10 +6,7 @@
 export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
 
 // Strapi helper types
-export type StrapiResult<T> = StrapiData<T> &
-    StrapiMeta & {
-        pinnedQuestions?: StrapiRecord<QuestionData>[]
-    }
+export type StrapiResult<T> = StrapiData<T> & StrapiMeta
 
 export type StrapiMeta = {
     meta: {
@@ -47,8 +44,51 @@ export type QuestionData = {
     numReplies: number | null
     archived: boolean
     activeAt: string
-    pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
+    edits?: any[]
+    // Forum posts only. A question with a forumTopic is a forum post.
+    forumTopic?: { data: StrapiRecord<ForumTopicData> | null }
+    forumTags?: StrapiData<ForumTagData[]>
+    participants?: StrapiData<ProfileData[]>
+    lastReplyAt?: string | null
+    lastReplyBy?: { data: StrapiRecord<ProfileData> | null }
+    pinnedToTopic?: boolean
+    locked?: boolean
+    numUpvotes?: number
+    hasUpvoted?: boolean
+}
+
+export type ForumTopicData = {
+    label: string
+    slug: string
+    description: string | null
+    icon: string | null
+    sortOrder: number
+    solutionsEnabled: boolean
+    aiRepliesEnabled: boolean
+    // Tags belong to exactly one topic.
+    tags?: StrapiData<ForumTagData[]>
+}
+
+export type ForumTagData = {
+    label: string
+    slug: string
+    sortOrder: number
+    // Helps Jev decide when the tag fits a post.
+    description?: string | null
+    topic?: { data: StrapiRecord<Pick<ForumTopicData, 'label' | 'slug'>> | null }
+    // Present when a query asks for the post count.
+    questions?: { data: { attributes: { count: number } } }
+}
+
+// /api/forum-subscriptions returns flat records, not the usual { id, attributes } shape.
+export type ForumSubscription = {
+    id: number
+    deliveryMode: 'none' | 'dailyDigest' | 'eachPost'
+    forumTopic: (Pick<ForumTopicData, 'label' | 'slug'> & { id: number }) | null
+    forumTag:
+        | (Pick<ForumTagData, 'label' | 'slug'> & { id: number; topic?: { id: number; slug: string } | null })
+        | null
 }
 
 export type AvatarData = {
@@ -74,7 +114,6 @@ export type ProfileData = {
     gravatarURL: string | null
     questionSubscriptions: StrapiData<QuestionData[]>
     user?: StrapiData<UserData>
-    topicSubscriptions: StrapiData<TopicData[]>
     pronouns?: string | null
     country: string | null
     amaEnabled: boolean | null
@@ -133,6 +172,7 @@ export type UserData = {
     distinctId: string | null
     // Only present when explicitly populated, which Strapi gates to the moderator role
     wallet?: Wallet | null
+    creditRedemptionEnabled?: boolean
 }
 
 export type ProfileQuestionsData = {
