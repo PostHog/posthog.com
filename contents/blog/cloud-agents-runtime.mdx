@@ -60,9 +60,9 @@ The [PostHog Slack app](/blog/slack-app-beta) presented a whole new challenge be
 
 First, a reply has to reach a run that may be busy. When you prompt the agent in a Slack thread, we look up which run the thread belongs to and send the message to that run's Temporal workflow. The workflow keeps a queue of follow-ups in arrival order and hands them to the agent one at a time, each after the previous turn finishes. If you want to redirect the agent mid-turn, that's a separate kind of message that joins the turn in progress instead of waiting behind it. Whether the agent can accept it depends on the agent runtime: if it can't, the message drops back into the ordinary queue.
 
-Second, a reply has to reach a run whose virtual machine might no longer exist. A Slack app run that doesn’t get prompted for an hour shuts its sandbox down. If you follow up later, the workflow boots a fresh sandbox from the last snapshot, with the conversation and the working tree intact, and delivers the message there.
+Second, a reply has to reach a run whose virtual machine might no longer exist. A Slack app run that doesn’t get prompted for some time shuts its sandbox down. If you follow up later, the workflow boots a fresh sandbox from the last snapshot, with the conversation and the working tree intact, and delivers the message there.
 
-Third, nothing can be delivered twice. Slack retries webhooks, and Temporal retries activities, so both directions carry an ID. The same goes for the events you watch as the agent works: each one is numbered, so a late viewer catches up without gaps and without repeats.
+Third, nothing can be delivered twice. We support retrial mechanisms across Slack and internal failures. Slack retries webhooks, and Temporal retries activities, so both directions carry an ID. The same goes for the events you watch as the agent works: each one is numbered, so a late viewer catches up without gaps and without repeats.
 
 ### 3. A run has to be cheap and safe
 
@@ -80,9 +80,9 @@ So you need a deterministic block underneath it, at the machine level, that says
 
 So we take those decisions away from the agent and bake them into the machine. Every project gets its own sandbox. What the project needs to run (dependencies, build tools, test setup) goes into a custom image, built once, so no run wastes tokens rediscovering it. Where the agent is allowed to reach goes into a network allowlist, enforced by the sandbox provider, so no prompt can talk it into going anywhere else.
 
-Somewhere in the middle of these learnings, the sandbox stopped being a container. The original sandbox was gVisor, a kernel-sandboxed container that can't run Docker inside it, and stacks like ours (and our interviewee's) need Docker. So the runtime moved to VM (Virtual Machine) sandboxes on [Modal](https://modal.com/), with a real Linux kernel and a Docker daemon started on demand.
+Somewhere in the middle of these learnings, the sandbox stopped being a container. The original sandbox was using gVisor (from Google) as application kernel for our containers, in which Docker cannot run. Stacks like ours (and our interviewee's) need Docker, so the runtime moved to having a VM (Virtual Machine) underneath. All of this runs on [Modal](https://modal.com/), with a real Linux kernel and a Docker daemon present.
 
-The network allowlist is enforced in Modal's network layer on every run: up to 100 domains, wildcards only as the leftmost label, no raw IPs. A VM also made warming possible, which boots a sandbox and opens an agent session while you're still typing your first message. This enables the first token to arrive at model speed instead of cold-boot speed (which is very nice for end-users!).
+The network allowlist is enforced in Modal's network layer on every run: up to 100 domains, wildcards only as the leftmost label, no raw IPs. We also rolled out our warming pool, which lets us boot VMs and open agent session while you're still typing your first message. This enables the first token to arrive at model speed instead of cold-boot speed (which is very nice for end-users!).
 
 By this point, multiple PostHog products were reaching into the runtime, each in its own way. We replaced that with a contract: create a task, warm a run, send a message, resume a finished run.
 
