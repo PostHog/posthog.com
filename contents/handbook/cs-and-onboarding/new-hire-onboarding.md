@@ -25,7 +25,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 
 **Focus on:**
 
-- Setting up the day-to-day tools you'll be using - Vitally, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
+- Setting up the day-to-day tools you'll be using - <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
@@ -55,9 +55,9 @@ In-person onboarding typically happens this week (3-4 days led by your team lead
 - Walking through your book of business with your team lead - prioritisation, where to start, who to reach out to first.
 - Digging into individual customers - what they're using, where they are in the lifecycle, any open issues, recent conversations.
 - Demo practice and feedback.
-- Seeing how the systems we use (Vitally, PostHog data, PostHog Support) come together day-to-day.
+- Seeing how the systems we use (Customer analytics, PostHog data, PostHog Support) come together day-to-day.
 - A no-stupid-questions session - bring everything you've been wondering about from Week 1.
-- First look at signals - what Vitally tags and alerts are, how the team uses them. You won't be confidently responding to them yet, but that comes over the rest of the month.
+- First look at signals - what the Customer analytics tags (like `churn risk`) and the renewal alerts in #sales-alerts are, how the team uses them. You won't be confidently responding to them yet, but that comes over the rest of the month.
 
 ## Weeks 3–4 – start working with your customers
 
@@ -69,7 +69,7 @@ This is when you start working with your customers. Reach out, take the first ca
 - Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) for how tickets flow.
 - Evaluating implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
 - Refining your demo with each conversation.
-- Starting to respond to Vitally signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it.
+- Starting to respond to signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it.
 
 **Ship your first handbook PR.** Somewhere along the way you'll find a gap or mistake in the handbook, or want to add a new page entirely. Write it up and open a PR. The point isn't the PR itself, it's that the handbook only stays useful if everyone adds to it. Not knowing something isn't a failing, but leaving it undocumented for the next person is.
 
@@ -92,7 +92,7 @@ This is the bar for end of month 1.
 - Evaluating customer implementations and seeing where to improve them
 - Understanding how pricing works and the levers you have for cost optimization
 
-**You're working with Vitally signals.** You know what the signals are and have a sense of how to prioritise and work through them.
+**You're working with signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
 **You're sharing with the team.** You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
 
@@ -114,7 +114,7 @@ This is the bar for end of month 1.
 
 PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn. This section is how to figure out which products to focus on, how to get hands-on, and what to do when you hit something you don't know.
 
-**Find out the products your customers are using.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay initially if none of your customers use it, so use your book to guide what to prioritise first.
+**Find out the products your customers are using.** Once you have your book of business, open each account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink> and check its usage tab. There's no point going deep on session replay initially if none of your customers use it, so use your book to guide what to prioritise first.
 
 **Start with the foundations, then focus on what your book uses.** Events, persons, and product analytics are useful regardless of who your customers are. Session replay, feature flags, and experiments are the next priority - they're PostHog's most mature products and have the most overlap with everything else. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities. Implementation, billing, and MCP are worth learning alongside all of the above.
 
@@ -216,6 +216,7 @@ Below is a per-product reading list to work through - the reference you come bac
 
 ## Alerting setup (for team leads)
 
-We have certain automations in Vitally that your team lead needs to add you to. Please ask your team lead to add you.
+Your team lead assigns you as the CSM on your accounts in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>. The alerts follow that assignment, so there is no separate automation to join:
 
-- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/170c8d04-db4c-4036-997c-8967946a1fd8">Vitally name trait playbook</PrivateLink>: create a new branch that matches assigned CSM to new team member. In this branch, add action to update account trait `CSM name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
+- Support tickets from your accounts get your `csm_` [tag](/handbook/support/posthog-support#customer-and-account-tags) automatically, so support knows who to reach out to.
+- The renewal workflow pings you in #sales-alerts 3 months before a contract ends. Join that channel.
