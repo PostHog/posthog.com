@@ -152,6 +152,11 @@
     ],
     "redirects": [
         {
+            "source": "/careers-og",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
             "statusCode": 301
