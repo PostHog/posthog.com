@@ -10,7 +10,7 @@ sourceId: Neon
 beta: true
 ---
 
-The Neon connector can link your Neon database tables to PostHog. Neon is serverless Postgres, so this connector uses the same underlying integration as the [Postgres source](/docs/cdp/sources/postgres).
+The Neon connector can link your Neon database tables to PostHog. Neon is serverless Postgres, so this connector uses the same underlying integration as the [Postgres source](/docs/data-warehouse/sources/postgres).
 
 To link Neon:
 
@@ -40,7 +40,7 @@ PostHog then starts syncing your Neon data. You can see details and progress in 
 
 ## CDC sync
 
-Because Neon uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for details. CDC sync is currently in **alpha**.
+Because Neon uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/data-warehouse/sources/postgres#sync-methods) for details. CDC sync is currently in **alpha**.
 
 To use CDC with Neon:
 
@@ -61,7 +61,7 @@ You can also change column selection after setup:
 2. Click **Configure** next to any schema.
 3. Under **Columns**, select which columns to sync.
 
-See the [Postgres source documentation](/docs/cdp/sources/postgres#selecting-columns) for details on resync behavior when adding columns.
+See the [Postgres source documentation](/docs/data-warehouse/sources/postgres#selecting-columns) for details on resync behavior when adding columns.
 
 > **Permissions** The Neon source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role in Neon rather than using the default `neondb_owner` role.
 

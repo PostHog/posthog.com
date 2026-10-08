@@ -1,5 +1,5 @@
 ---
-title: Link a source
+title: Link a source (ETL)
 sidebar: Docs
 showTitle: true
 availability:
@@ -41,10 +41,10 @@ The data warehouse can link to data in your object storage system. To do this, y
 
 1. Create a bucket in your object storage system like S3, GCS, or Cloudflare R2
 2. Set up an access key and secret
-3. Add data to the bucket (potentially using a tool like Airbyte, Fivetran, Stitch, or others)
+3. Add data to the bucket. Check [the source list](/docs/data-warehouse/sources) first, since PostHog can usually sync the source directly.
 4. Link the table in PostHog
 
-See an example in our [S3 setup docs](/docs/cdp/sources/s3).
+See an example in our [S3 setup docs](/docs/data-warehouse/sources/s3).
 
 ## Sync methods
 
@@ -118,13 +118,13 @@ Requirements:
 - Table must have a primary key
 - Only regular tables and materialized views (not views, foreign tables, or partitioned parents)
 
-xmin does not capture deletes. If you need delete tracking, use CDC instead. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for more details.
+xmin does not capture deletes. If you need delete tracking, use CDC instead. See the [Postgres source documentation](/docs/data-warehouse/sources/postgres#sync-methods) for more details.
 
 ## Filtering rows
 
 SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) and ClickHouse support row filters. Row filters let you control which rows sync from a source table by specifying conditions like `created_at > '2024-01-01'`. This reduces sync time and storage costs by syncing only the data you need.
 
-Filters are applied as a `WHERE` clause on the source query, so only matching rows are fetched and synced. Row filters are not available for tables using [CDC sync](/docs/cdp/sources/postgres#how-posthog-cdc-works).
+Filters are applied as a `WHERE` clause on the source query, so only matching rows are fetched and synced. Row filters are not available for tables using [CDC sync](/docs/data-warehouse/sources/postgres#how-posthog-cdc-works).
 
 > **Note:** Row filters are only available for SQL sources and ClickHouse. API sources (Stripe, HubSpot, Zendesk, Paddle, etc.) do not support row filtering.
 

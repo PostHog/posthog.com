@@ -70,7 +70,7 @@ export const dataPipelines = {
         },
         {
             name: 'Link sources',
-            url: '/docs/cdp/sources',
+            url: '/docs/data-warehouse/sources',
             icon: 'IconBook',
             color: 'blue',
             featured: true,
@@ -78,11 +78,11 @@ export const dataPipelines = {
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/sources/',
+                    url: '/docs/data-warehouse/sources/',
                 },
                 {
                     name: 'Incoming webhooks',
-                    url: '/docs/cdp/sources/incoming-webhooks',
+                    url: '/docs/data-warehouse/sources/incoming-webhooks',
                 },
                 {
                     name: 'Sources',
