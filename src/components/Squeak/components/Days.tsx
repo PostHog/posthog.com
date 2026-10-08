@@ -60,7 +60,7 @@ export const Days = ({ created, edits, profile }: { created: string | undefined;
                         return (
                             <Edit
                                 key={edit.id}
-                                image={getAvatarURL(edit.by.data.attributes)}
+                                image={getAvatarURL(edit.by.data)}
                                 color={color}
                                 name={name}
                                 date={edit.date}
@@ -70,7 +70,7 @@ export const Days = ({ created, edits, profile }: { created: string | undefined;
                         )
                     })}
                     <Edit
-                        image={getAvatarURL(profile.attributes)}
+                        image={getAvatarURL(profile)}
                         color={profile.attributes.color}
                         name={[profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')}
                         date={created}

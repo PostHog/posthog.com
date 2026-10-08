@@ -24,7 +24,7 @@ export const Profile = ({ className, profile, compact = false }: ProfileProps) =
             >
                 <Avatar
                     className={compact ? 'size-8' : 'w-[40px]'}
-                    image={getAvatarURL(profile?.attributes)}
+                    image={getAvatarURL(profile)}
                     color={profile.attributes.color}
                 />
             </div>

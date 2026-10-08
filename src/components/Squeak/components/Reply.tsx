@@ -366,7 +366,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     <div className="mr-2 relative ml-[-2px]">
                                         <Avatar
                                             className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
-                                            image={getAvatarURL(profile?.data?.attributes)}
+                                            image={getAvatarURL(profile?.data)}
                                             color={profile?.data.attributes.color}
                                         />
                                         {isTeamMember && (
@@ -403,7 +403,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
-                                image={getAvatarURL(profile?.data?.attributes)}
+                                image={getAvatarURL(profile?.data)}
                                 color={profile?.data.attributes.color}
                             />
                             {isTeamMember && (
