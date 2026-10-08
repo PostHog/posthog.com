@@ -38,7 +38,7 @@ Both feed signals into the same pipeline. A single problem usually shows up as s
 
 Neither is the upgrade from the other, and most projects run both. They make a real trade against each other, and knowing which way it runs is what tells you where to point each one.
 
-**A signal source is deterministic and exhaustive.** Turn on error tracking as a source and every qualifying signal in that stream gets processed, continuously, as it happens. Nothing is skipped because an agent weighed it and decided it wasn't interesting. You can reason about coverage: the behavior is the same today and next month, and there's no bar for something to clear.
+**A signal source is deterministic and exhaustive.** Turn on error tracking as a source and every qualifying signal in that stream gets processed, continuously, as it happens. Nothing is skipped because an agent weighed it and decided it wasn't interesting. You can reason about coverage: the behavior is the same today and next month, and there's no bar for something to clear. The exception is a source you [steer](#steering-a-source) to filter its records.
 
 **A scout trades some of that determinism for judgement.** It runs on a schedule rather than continuously, explores rather than following a fixed stream, and decides what clears the bar you set – so it can weigh, rank, cluster, and stay quiet on a quiet day, but it isn't exhaustive by design and it's making a call each run.
 
@@ -49,11 +49,17 @@ Neither is the upgrade from the other, and most projects run both. They make a r
 | **Behavior** | Predictable and repeatable | Uses judgement each run; ranks, clusters, and weighs |
 | **Scope** | One stream, deeply | Across surfaces, or any slice you point it at |
 | **Setup** | Toggle it on | Authored – you describe what's worth your attention |
-| **Tuning** | Configuration | Steerable in plain English, and it learns between runs |
+| **Tuning** | Configuration, plus plain-language steering on some sources | Steerable in plain English, and it learns between runs |
 
 So: reach for a **source** when the stream is well-defined and missing an item would be unacceptable. Reach for a **scout** when everything in the stream is technically "something" and you need judgement applied, when the interesting thing spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define.
 
 They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its deterministic coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned. An issue tracker splits cleanly this way. The GitHub Issues or Linear source catches each new issue as it arrives. A scout re-reads the open backlog and finds the issues whose state changed after someone filed them.
+
+### Steering a source
+
+Sources that read human-written records, like support tickets and issue trackers, check each record before they emit it, and drop the ones that aren't actionable. You can steer that check with plain-language rules on the source card: say what matters to your team, what to skip, and what's out of scope. You also choose a posture – include everything except what your rules exclude, or include only what clearly matches your rules.
+
+Steering applies from the next sync and doesn't remove anything already in your inbox. A steered source is still continuous and deterministic about what it reads, but it's no longer exhaustive about what it emits, so keep your rules as narrow as the noise you want to cut.
 
 ## From signals to reports
 
