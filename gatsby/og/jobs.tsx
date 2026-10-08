@@ -24,6 +24,7 @@ const readImage = (src: string, name: string): ImageSource => ({
 
 export const jobImages: ImageSource[] = [
     readImage('wordmark', 'posthog-wordmark.svg'),
+    readImage('grass', 'grass.jpg'),
     { src: 'remote-hog', data: fs.readFileSync(remoteHogPng) },
 ]
 

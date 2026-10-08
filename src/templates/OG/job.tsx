@@ -9,13 +9,22 @@ type JobOgProps = {
 
 const navItems = ['Products', 'Pricing', 'Docs', 'Community', 'Company']
 
+// Light tertiary scheme, the same values AppWindow resolves from data-scheme="tertiary".
+const textPrimary = '#23251D'
+const textSecondary = '#4D4F46'
+const border = '#9EA096'
+const frost = 'rgba(229, 231, 224, 0.75)'
+const buttonFace = '#F7A501'
+const buttonBorder = '#B17816'
+const buttonShadow = '#CD8407'
+
 const WindowControls = () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 18, opacity: 0.4 }}>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <rect x="1.5" y="1.5" width="15" height="15" rx="2" stroke="#939390" strokeWidth="1.6" />
+            <rect x="1.5" y="1.5" width="15" height="15" rx="2" stroke={textPrimary} strokeWidth="1.6" />
         </svg>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M4 4L14 14M14 4L4 14" stroke="#939390" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M4 4L14 14M14 4L4 14" stroke={textPrimary} strokeWidth="1.6" strokeLinecap="round" />
         </svg>
     </div>
 )
@@ -25,17 +34,25 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
         style={{
             width: 1200,
             height: 630,
-            backgroundImage: 'linear-gradient(to bottom right, #ced8b3, #a1b97d)',
-            color: '#111',
+            position: 'relative',
+            color: textPrimary,
             fontFamily: 'RoundHog, sans-serif',
             display: 'flex',
             flexDirection: 'column',
         }}
     >
+        <img
+            src="grass"
+            width={1200}
+            height={630}
+            style={{ position: 'absolute', top: 0, left: 0, objectFit: 'cover' }}
+        />
         <div
             style={{
+                position: 'relative',
                 height: 64,
-                backgroundColor: '#eceee3',
+                backgroundColor: frost,
+                backdropFilter: 'blur(64px)',
                 display: 'flex',
                 alignItems: 'center',
                 padding: '0 28px',
@@ -50,7 +67,8 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                     gap: 26,
                     fontSize: 20,
                     fontWeight: 600,
-                    color: '#3c3d38',
+                    color: textPrimary,
+                    opacity: 0.7,
                 }}
             >
                 {navItems.map((item) => (
@@ -60,11 +78,13 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
         </div>
         <div
             style={{
+                position: 'relative',
                 margin: '48px 100px 56px',
                 flexGrow: 1,
-                backgroundColor: '#eeefe9',
+                backgroundColor: frost,
+                backdropFilter: 'blur(64px)',
                 borderRadius: 16,
-                border: '1px solid #d8d9d2',
+                border: `1px solid ${border}`,
                 boxShadow: '0 18px 40px rgba(0, 0, 0, 0.12)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -78,7 +98,7 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '0 22px',
-                    borderBottom: '1px solid #e0e1da',
+                    borderBottom: `1px solid ${border}`,
                     fontSize: 25,
                     fontWeight: 600,
                 }}
@@ -95,12 +115,7 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                     position: 'relative',
                 }}
             >
-                <img
-                    src="remote-hog"
-                    width={308}
-                    height={308}
-                    style={{ position: 'absolute', right: 28, bottom: 0 }}
-                />
+                <img src="remote-hog" width={308} height={308} style={{ position: 'absolute', right: 28, bottom: 0 }} />
                 <div
                     style={{
                         fontSize: roleFontSize,
@@ -111,7 +126,7 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                 >
                     {role}
                 </div>
-                <div style={{ marginTop: 12, fontSize: 32, fontWeight: 500, color: '#6a6b65' }}>
+                <div style={{ marginTop: 12, fontSize: 32, fontWeight: 500, color: textSecondary }}>
                     Remote{timezone ? ` · ${timezone}` : ''}
                 </div>
                 {salary ? (
@@ -121,7 +136,7 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                             fontSize: 46,
                             fontWeight: 800,
                             lineHeight: '54px',
-                            textShadow: '0.8px 0 #111, -0.8px 0 #111',
+                            textShadow: `0.8px 0 ${textPrimary}, -0.8px 0 ${textPrimary}`,
                         }}
                     >
                         {salary} + equity
@@ -130,21 +145,21 @@ export const JobOg = ({ role, roleFontSize = 72, timezone, salary }: JobOgProps)
                 <div style={{ position: 'relative', alignSelf: 'flex-start', marginTop: 'auto' }}>
                     <div
                         style={{
-                            backgroundColor: '#CD8407',
+                            backgroundColor: buttonShadow,
                             borderRadius: 8,
                             paddingBottom: 7,
                         }}
                     >
                         <div
                             style={{
-                                backgroundColor: '#F7A501',
+                                backgroundColor: buttonFace,
                                 color: '#000',
                                 fontSize: 26,
                                 fontWeight: 800,
                                 lineHeight: '32px',
                                 padding: '14px 28px',
                                 borderRadius: 8,
-                                border: '2px solid #B17816',
+                                border: `2px solid ${buttonBorder}`,
                             }}
                         >
                             Apply now
