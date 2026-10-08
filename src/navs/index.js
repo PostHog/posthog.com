@@ -5643,6 +5643,10 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/ruby',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/experiments/installation/ruby-on-rails',
+                        },
+                        {
                             name: 'Rust',
                             url: '/docs/experiments/installation/rust',
                         },
