@@ -35,7 +35,7 @@ The quoting interface is intuitive and, of course, uses the same pricing we disp
 
 Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
 
-QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
 
