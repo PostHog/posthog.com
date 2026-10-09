@@ -74,6 +74,24 @@ The confirmation dialog gives you two choices: **Send and save** commits all cha
 
 Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
+## Delete a ticket
+
+To permanently remove a ticket, open it and click **Delete ticket**. A confirmation dialog appears before anything happens.
+
+When you confirm:
+
+- The ticket and its messages are hidden from your team and the customer immediately.
+- The ticket is excluded from SQL queries on `system.support_tickets` right away.
+- A daily job permanently deletes the ticket after 14 days, removing messages, attachments, delivery records, signal embeddings, and the ticket's analytics events.
+- The ticket number is retired. New tickets always receive a higher number.
+- Messages already delivered to Slack, Teams, email, or GitHub stay in those systems. The confirmation dialog says so.
+- Any outbound reply still queued at the time of deletion is canceled.
+
+**Permissions:**
+
+- With the [access control](/docs/settings/access-control) add-on enabled, only a ticket **manager** or an **organization admin** can delete.
+- Without it, anyone who can edit tickets can delete.
+
 ## Track SLAs
 
 An SLA deadline is derived state, not a status. You set it through [workflow automation](/docs/support/workflows), and the ticket then reports as on track, at risk, or breached. You can filter and sort the inbox by SLA state.
