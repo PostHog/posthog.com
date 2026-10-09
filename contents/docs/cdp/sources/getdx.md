@@ -12,9 +12,6 @@ sourceId: Getdx
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DX ([getdx.com](https://getdx.com)) connector syncs developer experience data into PostHog: survey snapshots, teams, users, audit events, and DX Fabric scorecards. DX is a developer experience platform that measures engineering team health through surveys and analytics.
 

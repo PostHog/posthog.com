@@ -23,7 +23,6 @@ For token setup details, see Sentry's [Authentication docs](https://docs.sentry.
 
 Once the syncs are complete, you can start using Sentry data in PostHog.
 
-
 To link Sentry:
 
 1. Go to the [Data pipeline sources page](https://app.posthog.com/data-management/sources) in PostHog.

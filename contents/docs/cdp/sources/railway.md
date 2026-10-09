@@ -12,9 +12,6 @@ sourceId: Railway
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import BetaRelease from "../_snippets/beta-release.mdx"
-
-<BetaRelease />
 
 The Railway connector syncs your [Railway](https://railway.com/) projects, services, environments, deployments, project members, and volumes into PostHog. This is useful for analyzing deployment activity and failure rates alongside your product data.
 

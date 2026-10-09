@@ -12,12 +12,6 @@ sourceId: CiscoMeraki
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Cisco Meraki connector syncs network infrastructure data – networks, devices, device inventory, uplink statuses, and assurance alerts – into PostHog, so you can analyze network health alongside your product data.
 
 Each connection imports one Meraki organization. All tables use full refresh sync.

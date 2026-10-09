@@ -12,9 +12,6 @@ sourceId: Omni
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Omni Analytics connector syncs your [Omni](https://omni.co/) workspace data into PostHog, so you can analyze your BI documents, folders, connections, schedules, users, and user groups alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: Ruddr
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Ruddr connector syncs your professional services data – clients, projects, tasks, members, and time entries – into PostHog, so you can analyze work and team activity alongside your product data.
 

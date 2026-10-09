@@ -9,12 +9,9 @@ availability:
 sourceId: Jumpcloud
 ---
 
-import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
-import SyncModes from "../\_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
 [JumpCloud](https://jumpcloud.com) is a cloud directory platform for identity, access, and device management. Linking it as a source syncs your users, devices, groups, SSO applications, device policies and their results, alerts, identity risk events, System Insights device data, and Directory Insights activity events into the PostHog data warehouse, so you can join identity and security data with your product data.
 

@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: LemonSqueezy
-beta: true
 ---
 
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Lemon Squeezy connector syncs your merchant-of-record data – stores, orders, subscriptions, customers, license keys, discounts, and more – into PostHog, so you can analyze revenue alongside your product data.
 

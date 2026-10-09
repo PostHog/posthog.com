@@ -25,7 +25,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
                         <h3 className="text-xl font-bold text-primary mb-0">Use our integrated data warehouse</h3>
                     </div>
                     <p className="text-[15px] text-secondary flex-1 mb-3">
-                        Tired of maintaining ETL pipelines? Keep data in our managed warehouse and use it across a
+                        Tired of maintaining ETL pipelines? Keep data in our warehouse and use it across a
                         variety of PostHog tools. Queries run on our compute, and you can send data externally if
                         needed.
                     </p>
