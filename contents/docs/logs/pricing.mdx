@@ -6,7 +6,7 @@ showTitle: true
 
 Logs comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
 
-No credit card is required to get started. You can also set billing limits to avoid any surprise charges.
+No credit card is required to get started. You can set a billing limit on Logs to avoid surprise ingestion charges. It doesn't cap custom retention (see below).
 
 Logs is billed by the number of GB ingested. The price per GB changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
 
@@ -16,9 +16,15 @@ import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 ## Retention
 
-Retention is 14 days by default. To keep logs for longer, set a custom retention period. Custom retention costs $0.05/GB ingested for each month you keep your logs, so one month costs the same as the previous 30-day retention add-on. For example, 3 months of retention costs $0.15/GB ingested. Custom retention applies to newly ingested logs.
+Retention is 14 days by default. To keep logs for longer, set a custom retention period. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. One month costs the same as the previous 30-day retention add-on, and 3 months of retention costs $0.15/GB ingested. You also pay the usual ingestion price for these logs.
+
+Custom retention applies to newly ingested logs, so shortening retention doesn't lower the charge for logs you already keep.
 
 You can set retention per service or per source in your [logs](https://app.posthog.com/settings/environment-logs) and traces settings. This gives you fine-grained control: keep critical services for longer, and keep noisy ones at the 14-day default.
+
+### Billing limits
+
+Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention can't have a limit of its own. See [billing limits and alerts](/docs/billing/limits-alerts#products-without-a-billing-limit) for more.
 
 ## Reduce your costs
 

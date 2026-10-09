@@ -194,7 +194,7 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 </strong>
                             </SidebarListItem>
                             <SidebarListItem>
-                                You can set billing limits per product so you never get a surprise bill
+                                You can set billing limits on most products so you never get a surprise bill
                             </SidebarListItem>
                             <SidebarListItem>
                                 We also offer{' '}

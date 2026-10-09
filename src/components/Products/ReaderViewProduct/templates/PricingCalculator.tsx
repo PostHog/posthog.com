@@ -4,6 +4,12 @@ import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
 import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import {
+    AddonMultiplier,
+    calculateAddonPrice,
+    getParentMeteredVolume,
+} from 'components/Pricing/PricingCalculator/calculatorLogic'
+import { pluralizeUnit } from 'components/Pricing/utils'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 import { SectionComponentProps } from '../types'
@@ -40,7 +46,11 @@ const ProductRateBlock = ({
     initialVolume,
     unit,
     multiplier,
+    freeAllocation,
+    meteredVolume = 0,
+    meteredLabel,
     onCostChange,
+    onVolumeChange,
 }: {
     name: string
     description?: string
@@ -49,34 +59,44 @@ const ProductRateBlock = ({
     initialVolume: number
     unit: string
     // Adds a second input that multiplies the cost, e.g. months of retention
-    multiplier?: { unit: string; initial: number; max?: number }
+    multiplier?: AddonMultiplier
+    freeAllocation?: number
+    // Add-on volume that bills through these tiers too, e.g. GB with custom retention bill as ingestion
+    meteredVolume?: number
+    meteredLabel?: string
     onCostChange: (cost: number) => void
+    onVolumeChange?: (volume: number) => void
 }) => {
     const [volume, setVolume] = useState(initialVolume)
     const [multiplierValue, setMultiplierValue] = useState(multiplier?.initial ?? 1)
     const dp = useMemo(() => getMaxDecimalPlaces(billingTiers), [billingTiers])
+    const billedVolume = volume + meteredVolume
 
     const { total: cost, costByTier } = useMemo(
         () =>
             billingTiers
-                ? calculatePrice(volume, billingTiers)
+                ? calculatePrice(billedVolume, billingTiers)
                 : { total: 0, costByTier: [] as { eventsInThisTier: number; tierCost: number }[] },
-        [volume, billingTiers]
+        [billedVolume, billingTiers]
     )
 
     const hasFractionalSubtotal = costByTier?.some((t) => t.tierCost % 1 !== 0) ?? false
-    // calculatePrice rounds its total, so multiply the unrounded tier costs
+    // The tier table shows one month; the total covers every month kept, priced as on /pricing
     const totalCost = multiplier
-        ? Math.round(costByTier.reduce((sum, tier) => sum + tier.tierCost, 0) * multiplierValue)
+        ? calculateAddonPrice(billingTiers, { volume, months: multiplierValue }, multiplier).total
         : cost
 
     useEffect(() => {
         onCostChange(totalCost)
     }, [totalCost])
 
+    useEffect(() => {
+        onVolumeChange?.(volume)
+    }, [volume])
+
     const getActiveTierIndex = () => {
         for (let i = 0; i < billingTiers.length; i++) {
-            if (billingTiers[i].up_to === null || volume <= billingTiers[i].up_to) return i
+            if (billingTiers[i].up_to === null || billedVolume <= billingTiers[i].up_to) return i
         }
         return billingTiers.length - 1
     }
@@ -125,7 +145,8 @@ const ProductRateBlock = ({
                             const isLast = !tier.up_to
 
                             let label = ''
-                            if (i === 0) label = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
+                            if (i === 0 && isLast) label = `All ${pluralizeUnit(unit, 2)}`
+                            else if (i === 0) label = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
                             else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
                             else label = `${formatCompactNumber(prev?.up_to)}-${formatCompactNumber(tier.up_to)}`
 
@@ -172,7 +193,10 @@ const ProductRateBlock = ({
                                         ) : (
                                             <>
                                                 <strong>{formatPrice(tier.unit_amount_usd)}</strong>
-                                                <span className="opacity-70">/{unit}</span>
+                                                <span className="opacity-70">
+                                                    /{unit}
+                                                    {multiplier ? ` per ${multiplier.unit}` : ''}
+                                                </span>
                                             </>
                                         )}
                                     </span>
@@ -242,9 +266,23 @@ const ProductRateBlock = ({
                             onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
                             value={inverseCurve(volume)}
                         />
-                        <p className="text-sm text-green font-semibold mt-8 mb-0">
-                            First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
-                        </p>
+                        {(meteredVolume > 0 || !!freeAllocation) && (
+                            <div className="mt-8 space-y-1">
+                                {meteredVolume > 0 && (
+                                    <p className="text-sm text-primary/60 m-0">
+                                        Billed on {billedVolume.toLocaleString()} {pluralizeUnit(unit, billedVolume)},
+                                        including {meteredVolume.toLocaleString()} {pluralizeUnit(unit, meteredVolume)}{' '}
+                                        with {meteredLabel}.
+                                    </p>
+                                )}
+                                {!!freeAllocation && (
+                                    <p className="text-sm text-green font-semibold m-0">
+                                        First {freeAllocation.toLocaleString()} {pluralizeUnit(unit, freeAllocation)}{' '}
+                                        free –&nbsp;<em>every month!</em>
+                                    </p>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -270,6 +308,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
 
     const [mainCost, setMainCost] = useState(0)
     const [addonCosts, setAddonCosts] = useState<number[]>([])
+    const [addonVolumes, setAddonVolumes] = useState<Record<string, { volume: number }>>({})
 
     if (!billing?.plans?.length || !activeProduct) return null
 
@@ -285,6 +324,13 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
     })
 
     const totalCost = mainCost + addonCosts.reduce((sum: number, c: number) => sum + c, 0)
+
+    // GB with custom retention bill as ingestion too, the same as on the /pricing calculator
+    const meteredVolume = getParentMeteredVolume(addonSliders, addonVolumes)
+    const meteredLabel = addonSliders
+        .filter((addon: any) => addon.countsTowardParentVolume)
+        .map((addon: any) => addon.label.toLowerCase())
+        .join(', ')
 
     const handleAddonCostChange = (index: number) => (cost: number) => {
         setAddonCosts((prev) => {
@@ -322,6 +368,9 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                     }
                     initialVolume={activeProduct.volume || freePlan?.free_allocation || 0}
                     unit={unit}
+                    freeAllocation={freePlan?.free_allocation}
+                    meteredVolume={meteredVolume}
+                    meteredLabel={meteredLabel}
                     onCostChange={setMainCost}
                 />
             )}
@@ -333,13 +382,25 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                     <div key={addon.key} className="mt-8">
                         <ProductRateBlock
                             name={addon.label}
-                            description={addon.pricingDescription}
+                            description={
+                                // Billing sets `no_billing_limit` when billing limits stop capping the add-on
+                                [
+                                    addon.pricingDescription,
+                                    addon.billingData?.no_billing_limit === true && addon.noBillingLimitNote,
+                                ]
+                                    .filter(Boolean)
+                                    .join(' ') || undefined
+                            }
                             billingTiers={addon.tiers}
                             sliderConfig={addon.sliderConfig}
                             initialVolume={addon.volume || addon.sliderConfig?.min || 0}
                             unit={addon.unit || unit}
                             multiplier={addon.multiplier}
+                            freeAllocation={addon.freeAllocation ?? addon.sliderConfig?.min}
                             onCostChange={handleAddonCostChange(i)}
+                            onVolumeChange={(volume) =>
+                                setAddonVolumes((prev) => ({ ...prev, [addon.key]: { volume } }))
+                            }
                         />
                     </div>
                 ))}

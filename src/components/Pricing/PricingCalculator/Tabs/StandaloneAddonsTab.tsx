@@ -3,6 +3,7 @@ import { IconInfo, IconX } from '@posthog/icons'
 import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
 import { afterFirstFree, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
+import { calculateAddonPrice, getAddonInputs, getAddonMonths, getParentMeteredVolume } from '../calculatorLogic'
 import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
 import Tooltip from 'components/Tooltip'
 
@@ -53,14 +54,10 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     const [mainCostByTier, setMainCostByTier] = useState([])
     const [triggerEventsModalOpen, setTriggerEventsModalOpen] = useState(false)
 
-    const [addonData, setAddonData] = useState(
-        () =>
-            activeProduct.addonSliders?.map((addon) => ({
-                volume: activeProduct.addons?.[addon.key]?.volume ?? addon.volume ?? addon.sliderConfig?.min ?? 0,
-                cost: 0,
-                costByTier: [],
-            })) || []
-    )
+    const [addonData, setAddonData] = useState(() => {
+        const inputs = getAddonInputs(activeProduct.addonSliders || [], activeProduct.addons)
+        return activeProduct.addonSliders?.map((addon) => ({ ...inputs[addon.key], cost: 0, costByTier: [] })) || []
+    })
 
     const mainBillingTiers = useMemo(
         () => activeProduct?.billingData.plans.find((plan) => plan.tiers)?.tiers,
@@ -82,11 +79,11 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     const totalCost = mainCost + addonData.reduce((sum, addon) => sum + addon.cost, 0)
 
-    // Add-ons like logs 30-day retention meter their volume through the main product's tiers too
+    // Add-ons like Logs custom retention meter their volume through the main product's tiers too
     // (the add-on price is only the premium), so the main product is billed on the combined volume.
-    const parentMeteredAddonVolume = addonBillingData.reduce(
-        (sum, addon, index) => (addon.countsTowardParentVolume ? sum + (addonData[index]?.volume || 0) : sum),
-        0
+    const parentMeteredAddonVolume = getParentMeteredVolume(
+        addonBillingData,
+        Object.fromEntries(addonBillingData.map((addon, index) => [addon.key, addonData[index]]))
     )
     const billedMainVolume = mainVolume + parentMeteredAddonVolume
 
@@ -98,20 +95,19 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
         }
     }, [billedMainVolume, mainBillingTiers])
 
+    // Retention-style add-ons bill each GB again for every month you keep it (`multiplier`)
+    const priceAddon = (index, input) => {
+        const addon = addonBillingData[index]
+        if (!addon?.billingTiers || !(input.volume > 0)) return { ...input, cost: 0, costByTier: [] }
+        const { total, costByTier } = calculateAddonPrice(addon.billingTiers, input, addon.multiplier)
+        return { ...input, cost: total, costByTier }
+    }
+
     useEffect(() => {
-        setAddonData((prev) =>
-            prev.map((addon, index) => {
-                const addonBilling = addonBillingData[index]
-                if (addonBilling?.billingTiers && addon.volume > 0) {
-                    const { total, costByTier } = calculatePrice(addon.volume, addonBilling.billingTiers)
-                    return { ...addon, cost: total, costByTier }
-                }
-                return { ...addon, cost: 0, costByTier: [] }
-            })
-        )
+        setAddonData((prev) => prev.map((addon, index) => priceAddon(index, addon)))
     }, [addonBillingData])
 
-    const addonVolumes = addonData.map((addon) => addon.volume).join(',')
+    const addonVolumes = addonData.map((addon) => `${addon.volume}x${addon.months ?? 1}`).join(',')
     useEffect(() => {
         if (mainBillingTiers) {
             const { costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
@@ -119,7 +115,13 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 cost: totalCost,
                 volume: mainVolume,
                 addons: Object.fromEntries(
-                    addonBillingData.map((addon, index) => [addon.key, { volume: addonData[index].volume }])
+                    addonBillingData.map((addon, index) => [
+                        addon.key,
+                        {
+                            volume: addonData[index].volume,
+                            ...(addon.multiplier && { months: addonData[index].months }),
+                        },
+                    ])
                 ),
                 costByTier,
             })
@@ -135,9 +137,16 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     }
 
     const handleAddonVolumeChange = (index) => (volume) => {
-        const tiers = addonBillingData[index]?.billingTiers
-        const cost = tiers && volume > 0 ? calculatePrice(volume, tiers).total : 0
-        setAddonData((prev) => prev.map((addon, i) => (i === index ? { ...addon, volume, cost } : addon)))
+        setAddonData((prev) => prev.map((addon, i) => (i === index ? priceAddon(index, { ...addon, volume }) : addon)))
+    }
+
+    const handleAddonMonthsChange = (index) => (months) => {
+        const multiplier = addonBillingData[index]?.multiplier
+        setAddonData((prev) =>
+            prev.map((addon, i) =>
+                i === index ? priceAddon(index, { ...addon, months: getAddonMonths(multiplier, months) }) : addon
+            )
+        )
     }
 
     const mainUnitLabel = pluralizeUnit(activeProduct.billingData.unit, 2)
@@ -184,36 +193,57 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     const price = firstPaidUnitAmount(addon.billingTiers)
                     const free = addon.freeAllocation ?? addon.sliderConfig.min
                     const unit = addon.unit || activeProduct.billingData.unit
-                    const info = addon.note || addon.pricingDescription
+                    // Billing sets `no_billing_limit` when billing limits stop capping the add-on
+                    const info = [
+                        addon.note || addon.pricingDescription,
+                        addon.billingData?.no_billing_limit === true && addon.noBillingLimitNote,
+                    ]
+                        .filter(Boolean)
+                        .join(' ')
+                    const { multiplier } = addon
                     return (
-                        <UsageSliderRow
-                            key={addon.key}
-                            label={addon.label}
-                            labelAccessory={
-                                info ? (
-                                    <Tooltip content={info} tooltipClassName="max-w-[250px]" placement="top">
-                                        <span className="relative inline-block">
-                                            <IconInfo className="size-4 opacity-70 inline-block" />
-                                        </span>
-                                    </Tooltip>
-                                ) : null
-                            }
-                            subtitle={
-                                price
-                                    ? `$${price} each${
-                                          free
-                                              ? afterFirstFree(free, unit, addon.label)
-                                              : unitWhenNotInLabel(unit, addon.label)
-                                      }`
-                                    : undefined
-                            }
-                            value={addonData[index]?.volume || 0}
-                            onChange={handleAddonVolumeChange(index)}
-                            marks={addon.sliderConfig.marks}
-                            min={0}
-                            max={addon.sliderConfig.max}
-                            scaleMin={addon.sliderConfig.scaleMin}
-                        />
+                        <React.Fragment key={addon.key}>
+                            <UsageSliderRow
+                                label={addon.label}
+                                labelAccessory={
+                                    info ? (
+                                        <Tooltip content={info} tooltipClassName="max-w-[250px]" placement="top">
+                                            <span className="relative inline-block">
+                                                <IconInfo className="size-4 opacity-70 inline-block" />
+                                            </span>
+                                        </Tooltip>
+                                    ) : null
+                                }
+                                subtitle={
+                                    price
+                                        ? multiplier
+                                            ? `$${price} per ${unit} for each ${multiplier.unit} kept`
+                                            : `$${price} each${
+                                                  free
+                                                      ? afterFirstFree(free, unit, addon.label)
+                                                      : unitWhenNotInLabel(unit, addon.label)
+                                              }`
+                                        : undefined
+                                }
+                                value={addonData[index]?.volume || 0}
+                                onChange={handleAddonVolumeChange(index)}
+                                marks={addon.sliderConfig.marks}
+                                min={0}
+                                max={addon.sliderConfig.max}
+                                scaleMin={addon.sliderConfig.scaleMin}
+                            />
+                            {multiplier && (
+                                <UsageSliderRow
+                                    label={`${multiplier.unit}s kept`}
+                                    subtitle={`Up to ${multiplier.max} ${multiplier.unit}s`}
+                                    value={addonData[index]?.months ?? multiplier.initial}
+                                    onChange={handleAddonMonthsChange(index)}
+                                    marks={multiplier.marks}
+                                    min={1}
+                                    max={multiplier.max}
+                                />
+                            )}
+                        </React.Fragment>
                     )
                 })}
             </div>
@@ -282,12 +312,24 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                         <p className="opacity-70 m-0 text-sm mb-2">
                                             <strong>{addonData[index].volume.toLocaleString()}</strong>{' '}
                                             {pluralizeUnit(addon.unit, addonData[index].volume)}
+                                            {addon.multiplier && (
+                                                <>
+                                                    {' '}
+                                                    kept for <strong>{addonData[index].months}</strong>{' '}
+                                                    {pluralizeUnit(addon.multiplier.unit, addonData[index].months)}
+                                                </>
+                                            )}
                                         </p>
                                         <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                             <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
                                                 <PricingTiers
                                                     plans={[{ tiers: addonData[index].costByTier }]}
-                                                    unit={addon.unit}
+                                                    // Retention tiers apply to GB-months: GB kept × months kept
+                                                    unit={
+                                                        addon.multiplier
+                                                            ? `${addon.unit}-${addon.multiplier.unit}`
+                                                            : addon.unit
+                                                    }
                                                     type={addon.key}
                                                     showSubtotal
                                                 />

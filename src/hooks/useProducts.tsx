@@ -1,6 +1,7 @@
 import React from 'react'
 // import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { withCompanionAddons } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'
 
@@ -57,12 +58,13 @@ export default function useProducts() {
     const baseProducts = useMemo(
         () =>
             initialProducts.map((product) => {
-                const billingData =
+                const ownBillingData =
                     product.billingData ||
                     billingProducts.find(
                         (billingProduct: any) =>
                             billingProduct.type === ((product as any).billingType || product.handle)
                     )
+                const billingData = ownBillingData && withCompanionAddons(ownBillingData, billingProducts)
                 const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
                 const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
                 const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
@@ -136,6 +138,7 @@ const allProductsData = graphql`
                         type
                         unit
                         legacy_product
+                        no_billing_limit
                         features {
                             key
                             name
@@ -183,6 +186,8 @@ const allProductsData = graphql`
                     unit
                     usage_key
                     legacy_product
+                    companion_of
+                    no_billing_limit
                     plans {
                         description
                         docs_url
