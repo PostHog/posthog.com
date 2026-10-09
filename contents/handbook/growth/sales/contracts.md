@@ -143,7 +143,7 @@ Once the signed form in PandaDoc is marked as complete and the Salesforce opport
 
 ### Updating the billing email and address
 
-You do not need the RevOps or billing team to change a customer's billing email or billing address in Stripe. You can do it yourself in billing admin.
+You do not need the RevOps or billing team to change a customer's business name, billing email, or billing address in Stripe. You can do it yourself in billing admin. Do this when the customer's billing contact leaves the company, or when invoices go to the wrong person. Do not try to edit the customer in the Stripe dashboard. Most people do not have permission to do this.
 
 1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">billing admin</PrivateLink> and find the **Billing details** panel on their profile.
 2. Click **Edit billing details**.
@@ -152,6 +152,8 @@ You do not need the RevOps or billing team to change a customer's billing email 
     - **Billing email** - the address that receives invoices and billing notifications.
     - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
 4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
+
+An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in #team-billing for an updated invoice PDF.
 
 > Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
 
