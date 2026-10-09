@@ -165,7 +165,7 @@ function DpaGenerator() {
                 data-scheme="primary"
                 className="grid @3xl:grid-cols-5 2xl:grid-cols-4 relative @3xl:border-b border-primary text-primary items-start mt-12 @3xl:mt-0 @3xl:top-20 gap-4"
             >
-                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden @3xl:sticky @3xl:top-0">
+                <div className="@container @3xl:col-span-2 2xl:col-span-1 px-4 lg:px-8 @3xl:pt-4 @3xl:pb-8 print:hidden">
                     <h2 className="mb-1 text-xl">Want a countersigned DPA?</h2>
                     <p className="text-sm">
                         Head to{' '}
