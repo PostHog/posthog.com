@@ -146,6 +146,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     slug
                     frontmatter {
                         template
+                        isInFrame
                     }
                     parent {
                         ... on File {
@@ -668,6 +669,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: PlainTemplate,
             context: {
                 id: node.id,
+                isInFrame: node.frontmatter?.isInFrame || false,
             },
         })
     })
