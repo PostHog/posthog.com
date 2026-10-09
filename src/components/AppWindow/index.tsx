@@ -45,9 +45,11 @@ const snapThreshold = -50
 
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
-    const [trigger] = useState(() =>
-        typeof document !== 'undefined' && document.activeElement instanceof HTMLElement ? document.activeElement : null
-    )
+    const [trigger] = useState(() => {
+        if (typeof document === 'undefined') return null
+        const element = document.activeElement
+        return element instanceof HTMLElement && element.matches(':focus-visible') ? element : null
+    })
     const { appWindow } = useWindow()
     const { closeWindow } = useApp()
 
