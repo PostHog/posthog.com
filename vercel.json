@@ -898,14 +898,6 @@
             "destination": "/teams/customer-success-na-north/:path*"
         },
         {
-            "source": "/teams/customer-success-na-1",
-            "destination": "/teams/customer-success-na-north"
-        },
-        {
-            "source": "/teams/customer-success-na-1/:path*",
-            "destination": "/teams/customer-success-na-north/:path*"
-        },
-        {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
             "destination": "/docs/skills:ext?",
             "statusCode": 301
