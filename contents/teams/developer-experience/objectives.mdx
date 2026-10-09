@@ -1,39 +1,39 @@
 ## Q4 2026 objectives
 
-**North star (kept from Q3): make shipping 10,000 PRs a month easy.** Q3 made CI faster and cheaper, made the merge queue load-bearing, and shipped StampHog v2. In Q4 the bottleneck is getting work reviewed and merged, and keeping a fast-growing codebase manageable.
+We're keeping the Q3 goal: shipping 10,000 PRs a month should be easy. In Q3, CI got faster and cheaper, the merge queue stopped master from breaking every day, and StampHog v2 shipped. Now the slow part is getting PRs reviewed and merged, and keeping a fast-growing codebase manageable.
 
 ### CI optimization (<TeamMember name="Georges-Antoine Assi" photo />, everyone contributes)
 
-Most of the repo-wide levers are pulled. Next is moving the p90, not just the p50: team- and author-specific fixes where CI got worse, all required checks on Depot CI, and more dynamic CI.
+The big repo-wide wins are done. Next is the slow end (p90): teams and authors whose CI got worse, moving all required checks to Depot CI, and running only the CI a PR needs.
 
 ### Merge queue stability (<TeamMember name="Georges-Antoine Assi" photo />)
 
-Less CI rework from flaky tests. Own lanes for teams doing isolated work.
+Fewer CI reruns caused by flaky tests, and separate queue lanes for teams whose work doesn't touch anyone else's.
 
 ### Product foundation system (<TeamMember name="Julian Bez" photo />)
 
-Build your product in the standard shape and you get the fast lane: scoped CI, its own queue lane, StampHog approval with less human review. One golden path that bundles product isolation, MCP, code generation, ingress/egress, and guardrails.
+A product built in the standard shape gets scoped CI, its own queue lane, and StampHog approval with less human review. The standard shape covers product isolation, MCP, code generation, ingress/egress, and guardrails.
 
 ### StampHog + ReviewHog (<TeamMember name="Julian Bez" photo />)
 
-ReviewHog provides the PR review experience across the repo, replacing paid review bots. StampHog stays a separate service and gets stricter about what it approves. To explore: cheaper local reviews on developer subscriptions.
+ReviewHog becomes the PR reviewer for the repo and replaces the paid review bots. StampHog stays separate and gets stricter about what it approves. We also want to try cheaper reviews that run locally on developers' own subscriptions.
 
 ### Test growth (<TeamMember name="Raúl Negrón-Otero" photo />)
 
-Tests grow faster than anything else in the repo. Measure which tests earn their keep, starting with the teams that own the most, and stop adding tests that add no coverage.
+Tests grow faster than anything else in the repo. We'll measure which tests are actually useful, starting with the teams that own the most, and stop adding tests that don't add coverage.
 
 ### DevEx simplicity (<TeamMember name="Raúl Negrón-Otero" photo />, <TeamMember name="Julian Bez" photo />)
 
-Fewer tools and fewer bots on PRs, so developers' attention goes to the PR itself. Smaller, readable CI workflows that other engineers can safely extend.
+Fewer tools and fewer bots commenting on PRs. CI workflows split into smaller pieces that other engineers can read and change safely.
 
 ### AgentEx (<TeamMember name="Georges-Antoine Assi" photo />)
 
-You don't think about it, your agent does it. Skills, tools, and visibility so agents handle reviews, queue ejections, and flakes on their own.
+Agents should deal with reviews, queue ejections, and flaky tests without someone telling them to. That needs the right skills and tools, and agents that can see what's going on.
 
 ### Code quality and PR experience (<TeamMember name="Julian Bez" photo />)
 
-How agents keep code quality up locally and on PRs, and a light helper that tells people why a PR is stuck, without taking over from their own agent.
+How agents keep code quality up, locally and on PRs. Also a small helper that tells people why their PR is stuck, without taking over from their own agent.
 
-**How we'll hear from teams:** team-specific numbers (merge times, flakes) posted in each team's channel, with a poll or a 15-minute slot to talk.
+To hear from teams, we'll post team-specific numbers (merge times, flakes) in each team's channel, with a poll or a 15-minute slot to talk.
 
-**Not this quarter:** in-house flaky test quarantining (Trunk keeps it, revisit in Q1), and new local dev environment work.
+Not this quarter: building our own flaky test quarantining (Trunk keeps doing it, and we'll look again in Q1), and new local dev environment work.
