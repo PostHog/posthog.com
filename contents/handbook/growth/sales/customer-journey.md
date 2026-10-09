@@ -77,7 +77,7 @@ Notes:
 
 ## Ownership rules
 
-**CSM is the base layer, unconditionally.** Every account above $20k ARR has a CSM from day one post-sale. The CSM never leaves. Steady state is not a handoff event, it just means the TAM/TAE overlay has been removed.
+**CSM is the base layer, unconditionally.** Every account above $20k in usage-based ARR, or on an Enterprise plan, has a CSM from day one post-sale. The CSM never leaves. Steady state is not a handoff event, it just means the TAM/TAE overlay has been removed.
 
 **TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
