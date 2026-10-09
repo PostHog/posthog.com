@@ -118,8 +118,16 @@
             "destination": "/next-steps/index.html"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
+            "source": "/forum/t/:topic/tags",
+            "destination": "/forum/t/[topic]/tags/index.html"
+        },
+        {
+            "source": "/forum/t/:topic",
+            "destination": "/forum/t/[topic]/index.html"
+        },
+        {
+            "source": "/forum/p/:permalink",
+            "destination": "/forum/p/[permalink]/index.html"
         },
         {
             "source": "/careers/(.*)",
@@ -558,6 +566,11 @@
         {
             "source": "/docs/data/activity-log:ext(\\.md)?",
             "destination": "/docs/settings/activity-logs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/team-collaboration:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?",
             "statusCode": 301
         },
         {
@@ -1015,6 +1028,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/use-case-selling",
+            "destination": "/handbook/growth/use-case-selling/use-case-selling",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/revops/icp-scoring",
             "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
@@ -1110,7 +1128,7 @@
         },
         {
             "source": "/questions/topics/:path*",
-            "destination": "/questions/topic/:path*"
+            "destination": "/forum"
         },
         {
             "source": "/docs/sdks/:path*",
@@ -2996,7 +3014,7 @@
         },
         {
             "source": "/manual/team-collaboration",
-            "destination": "/docs/data/team-collaboration"
+            "destination": "/docs/settings/organizations"
         },
         {
             "source": "/manual/utm-segmentation",
@@ -3157,7 +3175,7 @@
         },
         {
             "source": "/questions/topic/session-recording",
-            "destination": "/questions/topic/session-replay"
+            "destination": "/forum"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -6345,7 +6363,7 @@
         },
         {
             "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
+            "destination": "/forum"
         },
         {
             "source": "/ai-observability/features",
@@ -6594,6 +6612,36 @@
         {
             "source": "/docs/settings/id-jag:ext(\\.md)?",
             "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/questions",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/subscriptions",
+            "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/:path*",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/:permalink",
+            "destination": "/forum/p/:permalink",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/alerts",
+            "destination": "/forum/alerts",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/dashboard",
+            "destination": "/forum/following",
+            "statusCode": 301
         }
     ]
 }

@@ -58,6 +58,15 @@ export default function Trash(): JSX.Element {
                                 icon: 'video' as AppIconName,
                             },
                             {
+                                name: 'Uber_for_dogs_pitchdeck.ppt',
+                                slug: 'uber-for-dogs',
+                                url: 'https://x.com/james406',
+                                extension: 'ppt',
+                                color: 'yellow',
+                                icon: 'presentation' as AppIconName,
+                                external: true,
+                            },
+                            {
                                 name: 'Long Term Contract Template.docx',
                                 slug: 'long-term-contract-template',
                                 url: '/long-term-contract-template', // placeholder link
@@ -145,6 +154,7 @@ export default function Trash(): JSX.Element {
                                                                 <AppLink
                                                                     label={item.name}
                                                                     url={item.url}
+                                                                    external={item.external}
                                                                     Icon={<AppIcon name={item.icon} />}
                                                                     className={`size-12 [&_.bg-front]:fill-${item.color} [&_.bg-rear]:fill-${item.color}`}
                                                                 ></AppLink>

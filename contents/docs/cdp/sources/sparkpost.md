@@ -12,9 +12,6 @@ sourceId: SparkPost
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The SparkPost connector syncs your email data into the PostHog Data warehouse, including message events, suppression lists, recipient lists, templates, sending domains, subaccounts, and webhooks, so you can analyze your email program alongside your product data.
 

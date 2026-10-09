@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Partnerize
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Partnerize connector syncs your partnership and affiliate marketing data – campaigns, conversions, clicks, and reference catalogs – into PostHog, so you can join partner-driven revenue with your product analytics.
 

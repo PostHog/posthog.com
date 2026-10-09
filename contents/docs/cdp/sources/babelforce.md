@@ -12,9 +12,6 @@ sourceId: Babelforce
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The babelforce connector syncs your contact center data – call reporting, agents, agent groups, queues, service numbers, recordings, SMS messages, and conversations – into PostHog.
 

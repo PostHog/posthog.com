@@ -12,9 +12,6 @@ sourceId: Airbrake
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Airbrake connector syncs your error monitoring data – projects, error groups, error occurrences (notices), and deploys – into PostHog, so you can track error rates by project and environment over time and correlate error spikes with deploys.
 

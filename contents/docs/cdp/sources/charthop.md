@@ -12,9 +12,6 @@ sourceId: ChartHop
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The ChartHop connector syncs your people analytics data – people, jobs, org groups, compensation and org changes, and time off – into PostHog, so you can analyze headcount, org structure, and workforce changes alongside your product data.
 

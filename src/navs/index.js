@@ -25,7 +25,7 @@ export const dataPipelines = {
             featured: true,
         },
         {
-            name: 'Surfaces',
+            name: 'Where to use',
         },
         {
             name: 'PostHog Web',
@@ -1344,6 +1344,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/revops/credits',
                     },
                     {
+                        name: 'Closed-won deal desk automation',
+                        url: '/handbook/growth/revops/closed-won-deal-desk',
+                    },
+                    {
                         name: 'Consolidating billing across organizations',
                         url: '/handbook/growth/revops/billing-consolidation',
                     },
@@ -2186,7 +2190,7 @@ export const communityMenu = {
             name: 'Questions',
             icon: 'IconMessage',
             color: 'seagreen',
-            url: '/questions',
+            url: '/forum',
         },
         {
             name: 'Guides',
@@ -4376,7 +4380,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -4708,7 +4712,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -4989,7 +4993,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -5139,7 +5143,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/questions/topic/session-replay',
+                    url: '/forum/t/questions?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,
@@ -5194,6 +5198,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'What to watch',
+                    url: '/docs/replay-vision/what-to-watch',
+                    icon: 'IconEye',
+                    color: 'yellow',
+                },
+                {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
@@ -5212,7 +5222,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Calibration',
+                    name: 'Improving with ratings',
                     url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
@@ -5302,7 +5312,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -5639,6 +5649,10 @@ export const docsMenu = {
                             url: '/docs/experiments/installation/ruby',
                         },
                         {
+                            name: 'Rails',
+                            url: '/docs/experiments/installation/ruby-on-rails',
+                        },
+                        {
                             name: 'Rust',
                             url: '/docs/experiments/installation/rust',
                         },
@@ -5681,7 +5695,7 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -6130,7 +6144,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -6369,7 +6383,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -6512,7 +6526,7 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -6625,7 +6639,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -6891,10 +6905,6 @@ export const docsMenu = {
             color: 'purple',
             icon: 'IconListCheck',
             description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             children: [
                 {
                     name: 'Semantic layer',
@@ -6904,10 +6914,6 @@ export const docsMenu = {
                     url: '/docs/semantic-layer',
                     icon: 'IconHome',
                     color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Setup',
@@ -7254,7 +7260,7 @@ export const docsMenu = {
                     },
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -7628,7 +7634,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -8021,7 +8027,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -8182,7 +8188,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -8211,10 +8217,6 @@ export const docsMenu = {
                             url: '/docs/workflows/create-emails-ai',
                         },
                         {
-                            name: 'Send a broadcast',
-                            url: '/docs/workflows/broadcasts',
-                        },
-                        {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
@@ -8231,6 +8233,15 @@ export const docsMenu = {
                     url: '/docs/workflows/surfaces/api',
                     icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Broadcasts',
+                },
+                {
+                    name: 'Send a broadcast',
+                    url: '/docs/workflows/broadcasts',
+                    icon: 'IconSend',
+                    color: 'orange',
                 },
                 {
                     name: 'Channels',
@@ -8388,7 +8399,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',
@@ -8689,7 +8700,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Where to use',
                 },
                 {
                     name: 'PostHog Web',

@@ -9,12 +9,6 @@ availability:
 sourceId: Deel
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Deel connector automatically pulls your Deel workforce and payroll data into the PostHog data warehouse.
 
 ## Adding a data source
@@ -35,12 +29,16 @@ Use an **organization API token** rather than a personal API token. Personal tok
 
 ## Available tables
 
-| Table                 | Description                     | Sync method  |
-| --------------------- | ------------------------------- | ------------ |
-| `people`              | Employee and contractor records | Full refresh |
-| `contracts`           | Contract details for workers    | Full refresh |
-| `invoices`            | Invoice records                 | Full refresh |
-| `invoice_adjustments` | Adjustments made to invoices    | Full refresh |
+| Table                   | Description                      | Sync method  |
+| ----------------------- | -------------------------------- | ------------ |
+| `people`                | Employee and contractor records  | Full refresh |
+| `contracts`             | Contract details for workers     | Full refresh |
+| `invoices`              | Invoice records                  | Full refresh |
+| `invoice_adjustments`   | Adjustments made to invoices     | Full refresh |
+| `it_seats`              | IT seat assignments for workers  | Full refresh |
+| `it_clearance_requests` | Device clearance request records | Full refresh |
+| `time_off_policies`     | Time-off policy configurations   | Full refresh |
+| `equity_awards`         | Equity award records             | Full refresh |
 
 **Full refresh** tables sync all records on each run. Deel's API doesn't expose updated-since filters for these resources.
 
@@ -48,12 +46,16 @@ Use an **organization API token** rather than a personal API token. Personal tok
 
 Deel API tokens are scoped per dataset. Your token needs the read permission for each table you want to sync. If a scope is missing, that specific table fails with a permissions error while other tables continue to sync normally.
 
-| Table                 | Required scope             |
-| --------------------- | -------------------------- |
-| `people`              | `people:read`              |
-| `contracts`           | `contracts:read`           |
-| `invoices`            | `invoices:read`            |
-| `invoice_adjustments` | `invoice_adjustments:read` |
+| Table                   | Required scope             |
+| ----------------------- | -------------------------- |
+| `people`                | `people:read`              |
+| `contracts`             | `contracts:read`           |
+| `invoices`              | `invoices:read`            |
+| `invoice_adjustments`   | `invoice_adjustments:read` |
+| `it_seats`              | `it-seats:read`            |
+| `it_clearance_requests` | `it-service-requests:read` |
+| `time_off_policies`     | `time-off:read`            |
+| `equity_awards`         | `equities:read`            |
 
 ## Configuration
 

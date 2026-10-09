@@ -6,16 +6,12 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: Razorpay
 ---
 
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Razorpay connector syncs your payments data – payments, orders, refunds, settlements, subscriptions, and more – into PostHog, so you can analyze revenue and payment activity alongside your product data.
 

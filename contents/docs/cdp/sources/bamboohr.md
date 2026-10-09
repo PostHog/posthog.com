@@ -9,12 +9,6 @@ availability:
 sourceId: BambooHR
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The BambooHR connector syncs your HR data – employees, time off requests and types, and account metadata – into PostHog.
 
 ## Adding a data source

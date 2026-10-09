@@ -12,9 +12,6 @@ sourceId: Snyk
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Snyk connector pulls your organizations, projects, targets, and vulnerability issues into the PostHog Data warehouse, so you can track your security backlog, severity mix, and remediation trends alongside your product data.
 

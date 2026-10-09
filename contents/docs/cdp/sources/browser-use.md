@@ -12,9 +12,6 @@ sourceId: BrowserUse
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 [Browser Use](https://browser-use.com) Cloud runs hosted AI browser-automation agents. This connector syncs your agent sessions, browser sessions, profiles, workspaces, and per-session agent messages into the PostHog Data warehouse, so you can analyze agent runs, step counts, token usage, and costs alongside the rest of your data.
 

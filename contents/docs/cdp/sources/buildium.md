@@ -12,9 +12,6 @@ sourceId: Buildium
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Buildium (RealPage) connector syncs your property management data – rental properties, units, leases, tenants, owners, vendors, bills, general ledger accounts, work orders, and applicants – into PostHog, so you can analyze your property operations alongside your product data.
 
