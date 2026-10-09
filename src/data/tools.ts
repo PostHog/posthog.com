@@ -36,9 +36,9 @@ export const tools = [
     },
     {
         handle: 'data_warehouse',
-        name: 'Managed warehouse',
+        name: 'Warehouse',
         searchDescription: 'Query product and third-party data together in a managed warehouse.',
-        slug: 'context-warehouse/managed-warehouse',
+        slug: 'context-warehouse/warehouse',
         category: 'data',
         status: 'beta',
         aliases: ['Data warehouse', 'PostHog warehouse'],

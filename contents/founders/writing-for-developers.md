@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/writing-for-developers/writing-for-developers.png
 featuredImageType: full
 tags:
-  - Marketing
   - Founders
+  - Brand and marketing
 crosspost:
   - Blog
 ---

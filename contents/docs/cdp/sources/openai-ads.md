@@ -12,9 +12,6 @@ sourceId: OpenAIAds
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import BetaRelease from "../_snippets/beta-release.mdx"
-
-<BetaRelease />
 
 The OpenAI Ads connector syncs your ChatGPT advertising data – campaigns, ad groups, ads, and daily performance insights – into the PostHog Data Warehouse, so you can analyze ad spend and delivery alongside your product data.
 

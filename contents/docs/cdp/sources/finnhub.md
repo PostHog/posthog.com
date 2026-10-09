@@ -12,9 +12,6 @@ sourceId: Finnhub
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Finnhub connector pulls market and company financial data into the PostHog Data warehouse, so you can analyze financial metrics alongside your product data.
 

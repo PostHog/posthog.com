@@ -12,9 +12,6 @@ sourceId: Paystack
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Paystack connector syncs your payments and billing data into PostHog, so you can analyze your transactions and revenue alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: OpenAI
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import BetaRelease from "../_snippets/beta-release.mdx"
-
-<BetaRelease />
 
 The OpenAI connector syncs your organization's API usage, spend, and admin data into the PostHog Data Warehouse, so you can analyze your AI usage and costs per project, model, user, and API key alongside your product data.
 

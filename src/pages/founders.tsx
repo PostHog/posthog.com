@@ -11,10 +11,11 @@ const REDESIGN_FLAG = 'founders-hub-redesign'
 
 const intro = (
     <>
-        <p>We've curated the best advice to build a successful company.</p>
+        <p>The story of building PostHog, told from the inside by the people who built it.</p>
         <p>
-            Some are lessons we've heard from fellow founders, others are from first-hand experience building PostHog to
-            product-market fit and beyond.
+            Start with the CEO diaries: how we got into YC, pivoted, and launched on Hacker News. The rest covers what
+            we learned along the way about raising money, finding product-market fit, pricing, hiring, and running the
+            company.
         </p>
     </>
 )

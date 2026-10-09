@@ -6,6 +6,11 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: Engineering
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Building the team
 ---
 
 PostHog ships every two weeks, unless it makes more sense not to.

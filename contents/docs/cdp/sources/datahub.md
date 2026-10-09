@@ -12,9 +12,6 @@ sourceId: Datahub
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DataHub connector syncs your metadata catalog – datasets, dashboards, charts, pipelines, owners, domains, glossary, and tags – into the PostHog Data warehouse, so you can build governance reports and lineage-coverage analytics alongside your product data. Lineage edges ride along on the entities themselves: datasets carry their upstream lineage and data jobs carry their input/output edges.
 

@@ -8,9 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Sales & CS
-  - Growth
-  - Revenue
+  - Sales and pricing
 crosspost:
   - Blog
 ---

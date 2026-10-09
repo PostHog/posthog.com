@@ -12,9 +12,6 @@ sourceId: Ably
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Ably connector syncs your app's aggregated usage statistics — message volumes, connection counts, channel activity, and API request metrics — into PostHog, so you can analyze your realtime infrastructure alongside your product data.
 

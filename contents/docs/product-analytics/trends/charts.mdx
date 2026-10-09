@@ -44,7 +44,7 @@ export const areaLight =
 export const areaDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png";
 
-There are ten charts and visualization options in trends. They're split into two categories:
+There are fifteen charts and visualization options in trends. They're split into two categories:
 
 - **Time series**, which show you how tracked events and data points fluctuate over a time period.
 - **Total value**, which show the total number of tracked events or data points in any given time period.
@@ -79,16 +79,20 @@ This is useful for understanding how quickly an event or data point is growing, 
 
 ### Bar chart
 
+Displays the value of a series over time as vertical bars placed side-by-side. Unlike the stacked bar chart, each series or breakdown appears as a separate bar next to others at each time interval, making it easier to compare individual values.
+
+### Stacked bar chart
+
 <ProductScreenshot
   imageLight={timeBarchartLight}
   imageDark={timeBarchartDark}
   classes="rounded"
-  alt="Time bar chart"
+  alt="Stacked time bar chart"
 />
 
-The **time series** bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#line-chart-linear), but in a slightly different visual manner.
+The **time series** stacked bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#line-chart-linear), but in a slightly different visual manner.
 
-Additional series or breakdowns you add to a bar chart will appear stacked, so you can see how much each property or series contributes to the total number.
+Additional series or breakdowns you add will appear stacked on top of each other, so you can see how much each property or series contributes to the total number.
 
 ### Area chart
 
@@ -121,6 +125,10 @@ When enabled, whiskers are clipped using the standard 1.5× IQR (interquartile r
 - **Upper whisker** – extends to the largest value within Q3 + 1.5 × IQR
 
 This option is enabled by default. Disable it to show the full data range including outliers.
+
+### Slope graph
+
+The slope graph shows the change from the start to the end of your selected date range. Each series appears as a line connecting its starting value to its ending value, making it easy to see the direction and magnitude of change over the period. This is useful for comparing how different metrics or breakdown values changed relative to each other.
 
 ## Total value
 
@@ -187,6 +195,16 @@ You can customize the pie chart appearance in the display settings:
 - **Slice content** – Choose what to display on each slice: **labels** (default), **values**, or **none**.
 - **Value format** – When showing values on slices, display them as **absolute** amounts or as **percentages** of the total.
 - **Show total** – Toggle the aggregation total displayed below the chart (on by default).
+
+### Donut
+
+The donut chart is similar to a pie chart but displays values as a ring with a hollow center. It shows the relative distribution of values of different series or breakdowns over the entire date range. The hollow center can make it easier to compare segment sizes and provides space for displaying additional information.
+
+### Proportion bar
+
+The proportion bar displays the relative distribution of values as a single horizontal bar divided into segments. Each segment represents the proportion of a series or breakdown value relative to the total. This compact visualization is useful when you want to see how parts contribute to a whole without taking up as much vertical space as a pie or donut chart.
+
+> **Note:** This chart type doesn't support comparing to a previous period.
 
 ### World map
 

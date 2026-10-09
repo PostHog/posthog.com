@@ -739,6 +739,11 @@
             "statusCode": 301
         },
         {
+            "source": "/open-positions",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -883,6 +888,14 @@
         {
             "source": "/teams/customer-success/:path*",
             "destination": "/teams/customer-success-eu/:path*"
+        },
+        {
+            "source": "/teams/customer-success-na",
+            "destination": "/teams/customer-success-na-north"
+        },
+        {
+            "source": "/teams/customer-success-na/:path*",
+            "destination": "/teams/customer-success-na-north/:path*"
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
@@ -4122,6 +4135,14 @@
             "destination": "/founders/ceo-diary-4"
         },
         {
+            "source": "/blog/ceo-diary-1",
+            "destination": "/founders/ceo-diary-1"
+        },
+        {
+            "source": "/founders/what-recruiters-see",
+            "destination": "/blog/what-recruiters-see"
+        },
+        {
             "source": "/docs/billing:ext(\\.md)?",
             "destination": "/docs/billing/estimating-usage-costs:ext?"
         },
@@ -6495,8 +6516,24 @@
             "destination": "/context-warehouse"
         },
         {
+            "source": "/data-stack/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
             "source": "/data-stack/:path*",
             "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/context-warehouse/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/warehouse:ext?"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse/:path*",
+            "destination": "/docs/data-warehouse/warehouse/:path*"
         },
         {
             "source": "/customer-data-infrastructure/:path*",

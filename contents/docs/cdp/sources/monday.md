@@ -9,12 +9,6 @@ availability:
 sourceId: Monday
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Monday.com connector pulls your monday.com data – boards, items, users, and workspaces – into the PostHog data warehouse.
 
 ## Adding a data source

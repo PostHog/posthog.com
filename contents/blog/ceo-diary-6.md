@@ -11,6 +11,11 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Being CEO
 ---
 
 We take pride in investing as much as possible in our ability to ship cool projects and not in hiring a gazillion managers. As a result, we only have an exec team of 5 (AKA <SmallTeam slug="blitzscale" />), with roughly 150 people working here. And that includes Tim and me as half of this team. Everyone else is doing a ton of individual contributor work.

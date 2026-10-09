@@ -11,10 +11,8 @@ featuredImageType: full
 author:
   - james-hawkins
 tags:
-- CEO diaries
-- Culture
-- Marketing
-- Growth
+- Founders
+- Brand and marketing
 crosspost:
 - Blog
 - Newsletter
