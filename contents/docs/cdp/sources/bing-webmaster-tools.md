@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Bing Webmaster Tools connector syncs your site's organic search performance on Bing into PostHog: top search queries, top pages, daily rank and traffic, and Bingbot crawl statistics. It covers the same ground for Bing that the [Google Search Console source](/docs/cdp/sources/google-search-console) covers for Google search.
+The Bing Webmaster Tools connector syncs your site's organic search performance on Bing into PostHog: top search queries, top pages, daily rank and traffic, and Bingbot crawl statistics. It covers the same ground for Bing that the [Google Search Console source](/docs/data-warehouse/sources/google-search-console) covers for Google search.
 
 ## Prerequisites
 

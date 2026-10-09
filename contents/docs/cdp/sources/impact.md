@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The impact.com connector syncs your brand (advertiser) account's partnership data from [impact.com](https://impact.com): your campaigns, the partners promoting them, the conversions they drive, and partner payout invoices. If your account is a partner (publisher) account, use the [impact.com Partner source](/docs/cdp/sources/impact-partner) instead.
+The impact.com connector syncs your brand (advertiser) account's partnership data from [impact.com](https://impact.com): your campaigns, the partners promoting them, the conversions they drive, and partner payout invoices. If your account is a partner (publisher) account, use the [impact.com Partner source](/docs/data-warehouse/sources/impact-partner) instead.
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ The `Actions` table supports incremental sync on `EventDate`, and `MediaPartners
 
 ## Troubleshooting
 
-- **Invalid credentials when connecting**: check that the Account SID and Auth Token belong to a brand (advertiser) account. Partner and agency accounts use different APIs, so a partner token won't validate here. For partner accounts, use the [impact.com Partner source](/docs/cdp/sources/impact-partner).
+- **Invalid credentials when connecting**: check that the Account SID and Auth Token belong to a brand (advertiser) account. Partner and agency accounts use different APIs, so a partner token won't validate here. For partner accounts, use the [impact.com Partner source](/docs/data-warehouse/sources/impact-partner).
 - **Missing older actions**: the impact.com API only returns actions from the last 3 years, so the initial backfill stops there.
 
 <TroubleshootingLink />

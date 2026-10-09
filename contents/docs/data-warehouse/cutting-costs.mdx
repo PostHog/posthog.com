@@ -8,7 +8,7 @@ showTitle: true
 
 Full table syncs are the most expensive way to sync data into the data warehouse, but aren't always necessary.
 
-Both [incremental](/docs/cdp/sources#incremental) and [append only syncs](/docs/cdp/sources#append-only) reduce the number of rows synced as both account for existing data.
+Both [incremental](/docs/data-warehouse/sources#incremental) and [append only syncs](/docs/data-warehouse/sources#append-only) reduce the number of rows synced as both account for existing data.
 
 When using these sync modes, make sure the replication key field isn't nullable. Rows where the replication key is null are skipped during sync, which can lead to incomplete data.
 

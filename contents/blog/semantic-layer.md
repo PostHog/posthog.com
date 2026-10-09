@@ -56,7 +56,7 @@ If you're a small company with a handful of tables you interact with regularly, 
 
 ## Where this lives: The context warehouse
 
-The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your [Stripe data](/docs/cdp/sources/stripe), and data models. The semantic layer makes sure agents know what your data means and can interpret it correctly.
+The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your [Stripe data](/docs/data-warehouse/sources/stripe), and data models. The semantic layer makes sure agents know what your data means and can interpret it correctly.
 
 A catalog actually stores the semantic layer. What integrates it so fully is that it is **just SQL.** Every definition shows up as ordinary tables. Metrics are a table. There's no bespoke "catalog API" for an agent to learn; if it can run `execute-sql`, it already knows how to read the entire semantic layer. Discovery is a query, not an integration.
 

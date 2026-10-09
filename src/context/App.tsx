@@ -1756,7 +1756,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
+    const cdpSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
     const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
 
     const dynamicMenus = useMemo(
