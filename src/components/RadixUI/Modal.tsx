@@ -11,6 +11,7 @@ interface ModalProps {
     children: React.ReactNode
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    onCloseAutoFocus?: (event: Event) => void
     className?: string
     contentClassName?: string
     showCloseButton?: boolean
@@ -23,6 +24,7 @@ const Modal = ({
     children,
     open,
     onOpenChange,
+    onCloseAutoFocus,
     className = '',
     contentClassName = '',
     showCloseButton = true,
@@ -42,6 +44,7 @@ const Modal = ({
             <RadixDialog.Portal>
                 <RadixDialog.Overlay className="bg-black/50 data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut fixed inset-0 z-50" />
                 <RadixDialog.Content
+                    onCloseAutoFocus={onCloseAutoFocus}
                     style={maxWidth ? { width: maxWidth, maxWidth: '95vw' } : undefined}
                     className={`data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded bg-primary text-primary z-50 ${contentClassName}`}
                 >

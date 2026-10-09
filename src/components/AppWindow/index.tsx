@@ -45,6 +45,9 @@ const snapThreshold = -50
 
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
+    const [trigger] = useState(() =>
+        typeof document !== 'undefined' && document.activeElement instanceof HTMLElement ? document.activeElement : null
+    )
     const { appWindow } = useWindow()
     const { closeWindow } = useApp()
 
@@ -55,7 +58,16 @@ const PageModal = ({ children }: { children: React.ReactNode }) => {
     }, [open])
 
     return (
-        <Modal open={open} onOpenChange={setOpen}>
+        <Modal
+            open={open}
+            onOpenChange={setOpen}
+            onCloseAutoFocus={(event) => {
+                if (trigger?.isConnected) {
+                    event.preventDefault()
+                    trigger.focus()
+                }
+            }}
+        >
             {children}
         </Modal>
     )
