@@ -66,6 +66,8 @@ Tickets are tagged automatically to tell us who the customer is, what plan they'
 - **`goodwill_enterprise`** — there's a sales/CS person assigned to the account, so we treat them as enterprise.
 - **`unknown_slack_default_enterprise`** — applied when we know a ticket came from a Slack channel but we can't identify the organization associated with the individual's account. This usually happens when the email isn't present in someone's Slack account, or the email in their Slack account doesn't match the email they use for PostHog. We default these tickets to `plan_enterprise`.
 - **`unknown_msteams_default_enterprise`** — the same as above, but for MS Teams. These are also defaulted to `plan_enterprise`.
+- **`unknown_login_default`** — applied to widget tickets from someone we can't identify (no matching organization or plan) who submitted from a `/login` or `/signup` page, usually a logged-out user. We don't default these to a plan. They get a default SLA so they aren't left without one before falling back to a `#alerts-support` alert.
+- **`unknown_billing_default`** — applied to email tickets sent to `billing@posthog.com` from someone we can't identify (no matching organization or plan). We don't default these to a plan. They get a default SLA matching our pay-as-you-go (`plan_paid`) customers, again before falling back to a `#alerts-support` alert.
 - **`ae_*`** and **`csm_*`** — applied if the account can be identified in customer analytics and has an AE and/or CSM assigned to it.
 
 ### Categorization tags
