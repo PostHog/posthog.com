@@ -27,6 +27,7 @@ A report is enriched and ranked:
 - **Priority** – how urgent it is, so the most important work rises to the top.
 - **State** – whether it's **actionable**, so an agent can open a pull request, or **needs input** before anything can be worked on.
 - **Charts** – where a finding is about something that moved, the report can carry the chart that shows it, so you can see the shape of the problem without rebuilding the query yourself.
+- **Suggestions for stronger evidence** – When a PostHog product that your project does not use could have given a report better evidence, the report can suggest that you set up that product. The suggestion tells you what the product could have shown and links to its setup. Reports only suggest products that are not already in use.
 
 A report also accumulates a history as work happens on it: the commits and pull requests opened against it, the code the investigating agent referenced, CI status and review comments on its PR, related reports, and any notes people left while triaging. You're reading the whole trail, not just the original finding.
 
@@ -38,7 +39,11 @@ Some reports arrive with suggested questions above the question box. The [scout]
 
 ## Where reports go
 
-Reports land in your [inbox](/docs/self-driving/inbox), ranked by priority. An agent investigates each one. Actionable reports get a pull request to review and merge – the rest wait in your inbox for your input.
+Reports land in your [inbox](/docs/self-driving/inbox), ranked by priority. An agent investigates each one. When [PR generation](/docs/self-driving/setup) is on, actionable reports can get a pull request to review and merge. Other reports, and all reports when PR generation is off, wait in your inbox for your review or input.
+
+## External agents can claim report work
+
+A teammate, an internal task, or an external agent that uses the Inbox MCP tools can claim an actionable report. A claim records who works on the report, so other agents do not do the same work. An agent can release its claim when it stops. It can also attach the pull request that it opened, so the report shows the current state of the implementation.
 
 ## When a report is done
 
