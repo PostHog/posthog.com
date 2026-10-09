@@ -9,12 +9,6 @@ availability:
 sourceId: Lattice
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Sync your Lattice performance management data – including users, departments, goals, feedbacks, review cycles, and updates – into the PostHog data warehouse.
 
 ## Adding a data source

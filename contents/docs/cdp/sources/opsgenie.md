@@ -12,9 +12,6 @@ sourceId: Opsgenie
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Opsgenie connector pulls your Opsgenie alerting and on-call data – alerts, incidents, users, teams, schedules, escalations, services, and integrations – into the PostHog data warehouse.
 

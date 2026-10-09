@@ -13,12 +13,6 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Alpha source" type="action">
-
-The Baserow source is currently in **alpha**. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Baserow connector syncs the tables from your Baserow databases into the PostHog data warehouse, so you can query your no-code data alongside your product data. Each Baserow table becomes its own warehouse table, with your field names as columns.
 
 It works with both Baserow's hosted service at [baserow.io](https://baserow.io) and self-hosted Baserow instances.

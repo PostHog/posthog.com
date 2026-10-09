@@ -11,9 +11,6 @@ sourceId: ConfigCat
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The ConfigCat connector syncs your feature-flag account structure into the PostHog data warehouse, including your organizations and products.
 

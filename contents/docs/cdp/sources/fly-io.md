@@ -9,12 +9,6 @@ availability:
 sourceId: FlyIo
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Fly.io connector syncs your infrastructure inventory – apps, machines, and volumes – into PostHog. Query your Fly.io fleet alongside product data for auditing, capacity planning, and correlating infrastructure state with user behavior.
 
 ## Adding a data source

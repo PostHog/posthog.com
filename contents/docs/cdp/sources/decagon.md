@@ -12,9 +12,6 @@ sourceId: Decagon
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Decagon connector syncs your [Decagon](https://decagon.ai/) AI agent data into the PostHog Data warehouse. It covers the conversations between your users and your agents – every message, customer satisfaction (CSAT) rating, tag, and piece of metadata – plus the Agent Assist actions your human agents take, the knowledge base articles the AI answers with and how often each one is used, your tag taxonomy, admin logs, team members, and Watchtower QA jobs. Use it to analyze support quality alongside your product data.
 

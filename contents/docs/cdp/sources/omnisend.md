@@ -9,12 +9,6 @@ availability:
 sourceId: Omnisend
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, carts, orders, products, and categories – into PostHog.
 
 ## Adding a data source

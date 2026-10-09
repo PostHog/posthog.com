@@ -11,8 +11,6 @@ sourceId: Ortto
 
 The Ortto connector syncs your marketing data into PostHog, including people, accounts, audiences, tags, and custom field definitions.
 
-> **Note:** This source is currently in **alpha**. Behavior may change as it matures.
-
 ## Adding a data source
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the **Sources** tab in PostHog.
