@@ -39,7 +39,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Monthly customers: the total of their 3 invoices in the quarter × 4.
   - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
 - Usage is measured before discounts and excludes tax.
-- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
+- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
 - If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
 - Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
 
