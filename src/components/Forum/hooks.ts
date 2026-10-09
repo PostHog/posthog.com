@@ -411,15 +411,19 @@ export type FeedOptions = {
     sort: ForumSort
     topicId?: number
     tagIds?: number[]
+    // Unanswered: posts that nobody has replied to.
+    unanswered?: boolean
     // Following: posts in any subscribed topic or with any subscribed tag.
     following?: { topicIds: number[]; tagIds: number[] }
 }
 
-export const useForumFeed = ({ sort, topicId, tagIds = [], following }: FeedOptions) => {
+export const useForumFeed = ({ sort, topicId, tagIds = [], unanswered, following }: FeedOptions) => {
     const conditions = useMemo(() => {
         const all: any[] = [{ forumTopic: { id: { $notNull: true } } }]
         if (topicId) all.push({ forumTopic: { id: { $eq: topicId } } })
         if (tagIds.length) all.push({ forumTags: { id: { $in: tagIds } } })
+        // Strapi stores the reply count on each post, so this needs no join.
+        if (unanswered) all.push({ numReplies: { $eq: 0 } })
         if (following) {
             all.push({
                 $or: [
@@ -429,7 +433,7 @@ export const useForumFeed = ({ sort, topicId, tagIds = [], following }: FeedOpti
             })
         }
         return all
-    }, [topicId, tagIds.join(','), following?.topicIds.join(','), following?.tagIds.join(',')])
+    }, [topicId, tagIds.join(','), unanswered, following?.topicIds.join(','), following?.tagIds.join(',')])
 
     return useQuestions({
         limit: 20,
