@@ -9,12 +9,6 @@ availability:
 sourceId: Outbrain
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Outbrain source is currently in **alpha**. It connects to the Outbrain Amplify API, which requires account-manager approval before API calls are accepted. If your requests are rejected, contact your Outbrain account manager to enable Amplify API access.
-
-</CalloutBox>
-
 The Outbrain connector syncs your Outbrain Amplify advertising data into PostHog, including marketers, campaigns, budgets, promoted links, and performance reports.
 
 ## Requirements

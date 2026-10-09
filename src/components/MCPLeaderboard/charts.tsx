@@ -11,6 +11,7 @@ import {
     Tooltip,
     ChartOptions,
 } from 'chart.js'
+import Link from 'components/Link'
 import { Series, Share, Theme, formatDay, formatPct } from './data'
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
@@ -28,7 +29,12 @@ const Y_FORMATS = {
     seconds: (value: number) => `${(value / 1000).toFixed(1)}s`,
 }
 
-function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boolean): ChartOptions<'line'> {
+function chartOptions(
+    theme: Theme,
+    format: keyof typeof Y_FORMATS,
+    stacked: boolean,
+    legend: boolean
+): ChartOptions<'line'> {
     const colors = axisColors(theme)
     const formatY = Y_FORMATS[format]
     return {
@@ -38,13 +44,30 @@ function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boo
         interaction: { mode: 'index', intersect: false },
         plugins: {
             legend: {
+                display: legend,
                 position: 'bottom',
-                labels: { color: colors.text, boxWidth: 10, boxHeight: 10, font: { size: 11 } },
+                labels: {
+                    color: colors.text,
+                    boxWidth: 10,
+                    boxHeight: 10,
+                    font: { size: 11 },
+                    // The series color, filled and outlined, so the box matches its band.
+                    generateLabels: (chart) =>
+                        Chart.defaults.plugins.legend.labels
+                            .generateLabels(chart)
+                            .map((label) => ({ ...label, strokeStyle: label.fillStyle })),
+                },
             },
             tooltip: {
-                itemSort: (a, b) => (b.parsed.y ?? 0) - (a.parsed.y ?? 0),
+                // Series order (the legend order) on every hover, so a name never moves between periods.
+                itemSort: (a, b) => a.datasetIndex - b.datasetIndex,
                 callbacks: {
                     label: (item) => `${item.dataset.label}: ${formatY(item.parsed.y ?? 0)}`,
+                    // The series color, same as the legend.
+                    labelColor: (item) => ({
+                        borderColor: item.dataset.backgroundColor as string,
+                        backgroundColor: item.dataset.backgroundColor as string,
+                    }),
                 },
             },
         },
@@ -61,7 +84,8 @@ function chartOptions(theme: Theme, format: keyof typeof Y_FORMATS, stacked: boo
     }
 }
 
-// A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100.
+// A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100. Stacked
+// bands are opaque, so a band is exactly its legend color.
 export function LineChart({
     periods,
     series,
@@ -69,6 +93,7 @@ export function LineChart({
     format = 'share',
     stacked = false,
     height = 260,
+    legend = true,
 }: {
     periods: string[]
     series: Series[]
@@ -76,18 +101,23 @@ export function LineChart({
     format?: keyof typeof Y_FORMATS
     stacked?: boolean
     height?: number
+    legend?: boolean
 }): JSX.Element {
-    const options = useMemo(() => chartOptions(theme, format, stacked), [theme, format, stacked])
-    const data = useMemo(
-        () => ({
-            labels: periods.map(formatDay),
+    const options = useMemo(() => chartOptions(theme, format, stacked, legend), [theme, format, stacked, legend])
+    const data = useMemo(() => {
+        // In a stacked share chart, a period where every series is zero has no data. The chart starts at
+        // the first period with data, and a later empty period shows as a gap instead of 0%.
+        const empty = periods.map((_, i) => stacked && series.every((s) => !s.data[i]))
+        const start = Math.max(0, empty.indexOf(false))
+        return {
+            labels: periods.slice(start).map(formatDay),
             datasets: series.map((s) =>
                 stacked
                     ? {
                           label: s.label,
-                          data: s.data,
+                          data: s.data.slice(start).map((value, i) => (empty[start + i] ? null : value)),
                           borderColor: s.color,
-                          backgroundColor: `${s.color}CC`,
+                          backgroundColor: s.color,
                           borderWidth: 1,
                           pointRadius: 0,
                           fill: true,
@@ -95,7 +125,7 @@ export function LineChart({
                       }
                     : {
                           label: s.label,
-                          data: s.data,
+                          data: s.data.slice(start),
                           borderColor: s.color,
                           backgroundColor: s.color,
                           borderWidth: 2,
@@ -103,9 +133,8 @@ export function LineChart({
                           tension: 0.25,
                       }
             ),
-        }),
-        [periods, series, stacked]
-    )
+        }
+    }, [periods, series, stacked])
     return (
         <div style={{ height }}>
             <Line options={options} data={data} />
@@ -117,17 +146,38 @@ export function LineChart({
 export function ShareBars({
     items,
     detail,
+    icon,
+    href,
+    labelOf = (item) => item.label,
+    labelClassName = '',
 }: {
     items: Share[]
     detail?: (item: Share) => React.ReactNode
+    icon?: (item: Share) => React.ReactNode
+    // Makes a row's label a link, for example to the docs for a tool category.
+    href?: (item: Share) => string | undefined
+    // The text shown for a row, when it differs from `item.label`, which stays the hover title.
+    labelOf?: (item: Share) => string
+    labelClassName?: string
 }): JSX.Element {
     const max = Math.max(...items.map((item) => item.value), 0.0001)
     return (
         <ul className="list-none m-0 p-0 flex flex-col gap-1.5">
             {items.map((item) => (
                 <li key={item.label} className="grid grid-cols-[minmax(0,10rem)_1fr_auto] items-center gap-2 text-sm">
-                    <span className="truncate text-primary" title={item.label}>
-                        {item.label}
+                    <span className="flex items-center gap-1.5 min-w-0 text-primary" title={item.label}>
+                        {icon && <span className="size-4 shrink-0 flex items-center justify-center">{icon(item)}</span>}
+                        {href?.(item) ? (
+                            <Link
+                                to={href(item) as string}
+                                state={{ newWindow: true }}
+                                className={`truncate text-primary underline decoration-dotted underline-offset-2 hover:decoration-solid ${labelClassName}`}
+                            >
+                                {labelOf(item)}
+                            </Link>
+                        ) : (
+                            <span className={`truncate ${labelClassName}`}>{labelOf(item)}</span>
+                        )}
                     </span>
                     <span className="h-3 rounded-sm bg-accent overflow-hidden">
                         <span

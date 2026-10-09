@@ -94,6 +94,8 @@ export const TAXONOMY: InstallCategory[] = [
                 wizardLogoKey: 'tanstack',
             },
             {
+                // No `/docs/libraries/tanstack-router` page yet — the install grid hides
+                // items without a docs page, so this stays wizard-only until one exists.
                 slug: 'tanstack-router',
                 name: 'TanStack Router',
                 librarySlug: 'tanstack-router',
