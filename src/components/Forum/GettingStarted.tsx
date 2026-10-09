@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconChevronRight } from '@posthog/icons'
+import { IconCheck, IconChevronRight, IconX } from '@posthog/icons'
+import { HedgehogHeart } from '@posthog/brand/hoggies'
 import { navigate } from 'gatsby'
-import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
+import { fireConfettiInCanvas } from 'components/PlatformInstall/confetti'
 import { useForumProgress, useForumTopics } from './hooks'
 
 type Task = {
@@ -45,16 +46,36 @@ const tasks: Task[] = [
     },
 ]
 
-// A checklist for signed-in members at the top of All posts. A task disappears when the member does it, and the
-// checklist disappears when all tasks are done.
-export default function GettingStarted() {
+const DISMISSED_KEY = 'forum-getting-started-dismissed'
+const GREETED_KEY = 'forum-getting-started-greeted'
+const HOG_ARRIVAL_MS = 700
+const CONFETTI_VELOCITY_SCALE = 1.8
+const BUBBLE_SHADOW = 'shadow-[0_16px_48px_-8px_rgba(0,0,0,0.35),0_4px_12px_-4px_rgba(0,0,0,0.2)]'
+
+const messageMotion = (delay: number) => ({
+    initial: { opacity: 0, y: 8 },
+    animate: { opacity: 1, y: 0, transition: { delay } },
+})
+
+export default function GettingStarted({ visible }: { visible: boolean }) {
     const { user } = useUser()
     const posthog = usePostHog()
-    const { progress, isLoading } = useForumProgress()
+    const [dismissed, setDismissed] = useState<boolean>()
+    const { progress, isLoading } = useForumProgress(dismissed === false)
     const { getTopic } = useForumTopics()
-    const remaining = progress ? tasks.filter((task) => !progress[task.key] && getTopic(task.topic)) : []
+    const [celebrating, setCelebrating] = useState(false)
+    const [chatOpen, setChatOpen] = useState(true)
+    const hogRef = useRef<HTMLButtonElement>(null)
+    const confettiCanvasRef = useRef<HTMLCanvasElement>(null)
 
-    const open = (task: Task) => {
+    useEffect(() => {
+        setDismissed(localStorage.getItem(DISMISSED_KEY) === '1')
+    }, [])
+
+    const available = tasks.filter((task) => getTopic(task.topic))
+    const doneCount = available.filter((task) => progress?.[task.key]).length
+
+    const start = (task: Task) => {
         const topic = getTopic(task.topic)
         if (!topic) return
         posthog?.capture('forum getting started task clicked', { task: task.key })
@@ -62,42 +83,140 @@ export default function GettingStarted() {
         else navigate(`/forum/t/${topic.attributes.slug}`)
     }
 
-    if (!user || isLoading || remaining.length === 0) return null
+    const dismissForever = () => {
+        localStorage.setItem(DISMISSED_KEY, '1')
+        posthog?.capture('forum getting started dismissed', { done: doneCount })
+        setDismissed(true)
+    }
+
+    const shown = visible && !!user && !isLoading && !!progress && dismissed === false && doneCount < available.length
+
+    useEffect(() => {
+        if (!shown || localStorage.getItem(GREETED_KEY) === '1') return
+        localStorage.setItem(GREETED_KEY, '1')
+        setCelebrating(true)
+    }, [shown])
+
+    useEffect(() => {
+        if (!celebrating) return
+        const timer = setTimeout(
+            () =>
+                fireConfettiInCanvas(hogRef.current, confettiCanvasRef.current, CONFETTI_VELOCITY_SCALE).then(() =>
+                    setCelebrating(false)
+                ),
+            HOG_ARRIVAL_MS
+        )
+        return () => clearTimeout(timer)
+    }, [celebrating])
+
+    if (!shown) return null
 
     return (
-        <section className="mx-4 @xl:mx-5 mt-4 border border-primary rounded-md bg-accent">
-            <header className="px-2 pt-3 pb-2">
-                <h2 className="text-base font-bold text-primary m-0">Get started in the forum</h2>
-                <p className="text-sm text-secondary m-0">
-                    {tasks.length - remaining.length} of {tasks.length} done
-                </p>
-            </header>
-            <ul className="list-none m-0 p-0">
-                <AnimatePresence initial={false}>
-                    {remaining.map((task) => (
-                        <motion.li
-                            key={task.key}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="border-t border-primary overflow-hidden"
+        <>
+            {celebrating && (
+                <canvas ref={confettiCanvasRef} className="absolute inset-0 size-full z-10 pointer-events-none" />
+            )}
+            <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-end pointer-events-none">
+                <AnimatePresence>
+                    {chatOpen && (
+                        <motion.div
+                            key="chat"
+                            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 16, scale: 0.96 }}
+                            style={{ transformOrigin: 'bottom right' }}
+                            className="pointer-events-auto w-[calc(100%-1.5rem)] max-w-80 mr-3 @xl:mr-5 flex flex-col items-end gap-1.5 text-sm"
                         >
-                            <OSButton
-                                width="full"
-                                align="left"
-                                size="md"
-                                icon={<IconChevronRight />}
-                                iconPosition="right"
-                                onClick={() => open(task)}
-                                className="!rounded-none"
+                            <motion.div
+                                {...messageMotion(0.2)}
+                                className={`flex items-center gap-2 bg-primary border border-input rounded-lg rounded-br-sm ${BUBBLE_SHADOW} pl-3 pr-1.5 py-1.5`}
                             >
-                                <span className="flex-1 min-w-0 text-left">
-                                    <span className="block font-semibold text-primary">{task.title}</span>
-                                    <span className="block text-sm text-secondary font-normal">{task.description}</span>
-                                </span>
-                            </OSButton>
-                        </motion.li>
-                    ))}
+                                <p className="m-0 font-semibold text-primary">
+                                    Welcome to the forum, {user.profile?.firstName}!
+                                </p>
+                                <button
+                                    type="button"
+                                    onClick={() => setChatOpen(false)}
+                                    aria-label="Hide for now"
+                                    className="shrink-0 p-0.5 rounded text-muted hover:text-primary hover:bg-accent"
+                                >
+                                    <IconX className="size-4" />
+                                </button>
+                            </motion.div>
+                            <motion.div
+                                {...messageMotion(0.6)}
+                                className={`w-full bg-primary border border-input rounded-lg rounded-br-sm ${BUBBLE_SHADOW} overflow-hidden`}
+                            >
+                                <p className="m-0 px-3 py-2 text-primary">
+                                    Here are a few things you can do to get going ({doneCount} of {available.length}{' '}
+                                    done):
+                                </p>
+                                <ul className="list-none m-0 p-0">
+                                    {available.map((task) => {
+                                        const done = progress[task.key]
+                                        return (
+                                            <li key={task.key} className="border-t border-primary">
+                                                <button
+                                                    type="button"
+                                                    disabled={done}
+                                                    onClick={() => start(task)}
+                                                    className="w-full flex items-center gap-2 px-3 py-2 text-left enabled:hover:bg-accent disabled:cursor-default"
+                                                >
+                                                    <span
+                                                        className={`shrink-0 size-5 rounded-full border flex items-center justify-center ${
+                                                            done ? 'bg-green border-green text-white' : 'border-primary'
+                                                        }`}
+                                                    >
+                                                        {done && <IconCheck className="size-3.5" />}
+                                                    </span>
+                                                    <span className="flex-1 min-w-0">
+                                                        <span
+                                                            className={`block font-semibold ${
+                                                                done ? 'text-muted line-through' : 'text-primary'
+                                                            }`}
+                                                        >
+                                                            {task.title}
+                                                        </span>
+                                                        {!done && (
+                                                            <span className="block text-xs text-secondary">
+                                                                {task.description}
+                                                            </span>
+                                                        )}
+                                                    </span>
+                                                    {!done && (
+                                                        <IconChevronRight className="shrink-0 size-4 text-muted" />
+                                                    )}
+                                                </button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                                <button
+                                    type="button"
+                                    onClick={dismissForever}
+                                    className="w-full border-t border-primary px-3 py-1.5 text-left text-xs text-secondary hover:text-primary hover:bg-accent"
+                                >
+                                    Skip ahead, don't show again
+                                </button>
+                            </motion.div>
+                        </motion.div>
+                    )}
                 </AnimatePresence>
-            </ul>
-        </section>
+                <motion.button
+                    ref={hogRef}
+                    type="button"
+                    onClick={() => setChatOpen(!chatOpen)}
+                    aria-label={chatOpen ? 'Hide getting started' : 'Show getting started'}
+                    aria-expanded={chatOpen}
+                    initial={{ y: '100%' }}
+                    animate={{ y: chatOpen ? '15%' : '55%' }}
+                    whileHover={{ y: chatOpen ? '10%' : '40%' }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                    className="pointer-events-auto -mt-3 mr-1 @xl:mr-3 w-28 @xl:w-36"
+                >
+                    <HedgehogHeart title="" className="w-full h-auto" />
+                </motion.button>
+            </div>
+        </>
     )
 }

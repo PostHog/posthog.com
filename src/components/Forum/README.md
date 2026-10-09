@@ -28,7 +28,7 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the tag filter, infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
 | `Thread.tsx` | One post: vote box, body, author edits, the Moderate menu, and the shared Squeak replies |
 | `Composer.tsx` | The new post form, which also saves, edits, and publishes drafts. Authors choose only a topic; the server chooses tags when a post goes live |
-| `GettingStarted.tsx` | The checklist at the top of All posts for signed-in members. `useForumProgress` checks each task, and a done task disappears |
+| `GettingStarted.tsx` | A hedgehog that peeks up from the bottom right of the feed views for signed-in members, with a chat of first steps and a confetti burst on the first visit. `index.tsx` loads it with `React.lazy`, so its SVG stays out of the shared bundle. `useForumProgress` checks each task. "Don't show again" stores `forum-getting-started-dismissed` in localStorage |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
 | `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag. On All posts it groups the tags by topic |
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |

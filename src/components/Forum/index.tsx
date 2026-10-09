@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { lazy, Suspense, useMemo, useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { IconGear, IconPencil, IconPlus } from '@posthog/icons'
 import { navigate } from 'gatsby'
@@ -15,7 +15,6 @@ import Feed, { FeedPageSkeleton } from './Feed'
 import Thread from './Thread'
 import Composer from './Composer'
 import Drafts from './Drafts'
-import GettingStarted from './GettingStarted'
 import TopicSubscribeButton from './TopicSubscribeButton'
 import TopicIcon from './TopicIcon'
 import TopicForm from './TopicForm'
@@ -23,6 +22,8 @@ import DeleteTopicDialog from './DeleteTopicDialog'
 import TopicTags from './TopicTags'
 import ForumAlerts from './ForumAlerts'
 import ManageSubscriptions from './ManageSubscriptions'
+
+const GettingStarted = typeof window !== 'undefined' ? lazy(() => import('./GettingStarted')) : () => null
 
 type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'tags' | 'post' | 'alerts'
 
@@ -134,6 +135,7 @@ const FollowingFeed = () => {
 
 export default function Forum(props: any) {
     const view = getView(props)
+    const { user } = useUser()
     const { appWindow } = useWindow()
     const { topics, getTopic, isLoading: topicsLoading } = useForumTopics()
     const { tags } = useForumTags()
@@ -194,16 +196,13 @@ export default function Forum(props: any) {
                 )
             default:
                 return (
-                    <>
-                        <GettingStarted />
-                        <Feed
-                            title="All posts"
-                            description="Everything from every topic, newest posts first."
-                            tags={tags}
-                            showTopic
-                            empty="No posts yet. Start the conversation!"
-                        />
-                    </>
+                    <Feed
+                        title="All posts"
+                        description="Everything from every topic, newest posts first."
+                        tags={tags}
+                        showTopic
+                        empty="No posts yet. Start the conversation!"
+                    />
                 )
         }
     }
@@ -229,8 +228,16 @@ export default function Forum(props: any) {
                 <div data-scheme="secondary" className="@container w-full h-full flex flex-col border-t border-primary">
                     <div className="flex flex-col @2xl:flex-row flex-grow min-h-0">
                         <Sidebar view={view} topics={topics} activeTopic={activeTopic} loading={topicsLoading} />
-                        <main data-scheme="primary" className="flex-1 min-w-0 min-h-0 bg-primary text-primary">
+                        <main
+                            data-scheme="primary"
+                            className="relative overflow-hidden flex-1 min-w-0 min-h-0 bg-primary text-primary"
+                        >
                             <ScrollArea className="h-full">{content()}</ScrollArea>
+                            {user && (
+                                <Suspense fallback={null}>
+                                    <GettingStarted visible={view !== 'post' && view !== 'new'} />
+                                </Suspense>
+                            )}
                         </main>
                     </div>
                 </div>
