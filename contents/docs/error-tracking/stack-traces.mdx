@@ -44,7 +44,7 @@ Learn more about [releases](/docs/error-tracking/releases/) in error tracking.
 
 ## Source linking
 
-When viewing stack traces in PostHog, you can click directly through to the relevant code in your GitHub or GitLab repository. Each stack frame includes a **View commit** button (displayed using a GitHub or GitLab icon) that links to the exact file and line where the error occurred.
+Each stack frame can link to the matching file and line in your GitHub or GitLab repository. Open the frame menu and select **Open in GitHub** or **Open in GitLab**.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_11_20_at_14_37_09_2x_2ff2e56430.png"
@@ -53,7 +53,9 @@ When viewing stack traces in PostHog, you can click directly through to the rele
     classes="rounded"
 />
 
-Source linking requires a [GitHub or GitLab integration](/docs/error-tracking/integrations) and a [release](/docs/error-tracking/releases) with repository information. Once set up, PostHog automatically adds source links to your stack traces.
+PostHog matches the paths in your uploaded source map against the repository tree at the release commit, which tells packages apart in a monorepo where the same relative path exists more than once. The repository and commit come from the [release](/docs/error-tracking/releases) of the exception event, and the link opens the file at that commit. An event without a release, or with a release that has no repository information, gets no source links.
+
+Private repositories need the [GitHub or GitLab integration](/docs/error-tracking/integrations).
 
 ## Troubleshooting symbol sets
 
