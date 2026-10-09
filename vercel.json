@@ -4135,6 +4135,14 @@
             "destination": "/founders/ceo-diary-4"
         },
         {
+            "source": "/blog/ceo-diary-1",
+            "destination": "/founders/ceo-diary-1"
+        },
+        {
+            "source": "/founders/what-recruiters-see",
+            "destination": "/blog/what-recruiters-see"
+        },
+        {
             "source": "/docs/billing:ext(\\.md)?",
             "destination": "/docs/billing/estimating-usage-costs:ext?"
         },

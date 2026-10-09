@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Growth
+  - Lessons from others
 crosspost:
   - Blog
 ---

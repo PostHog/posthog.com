@@ -78,7 +78,7 @@ This doesn’t mean you should randomly spam people on LinkedIn for an intro (th
 
 People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
-**Further reading: [What recruiters actually see when you apply](/founders/what-recruiters-see)**
+**Further reading: [What recruiters actually see when you apply](/blog/what-recruiters-see)**
 
 <NewsletterForm />
 
