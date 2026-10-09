@@ -810,5 +810,11 @@
         "link_type": "github",
         "link_url": "https://github.com/tatoalo",
         "profile_id": 34600
+    },
+    {
+        "handle": "raul-negron-otero",
+        "name": "Raúl Negrón-Otero",
+        "role": "DevEx Engineer",
+        "profile_id": 43265
     }
 ]
