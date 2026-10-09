@@ -12,9 +12,6 @@ sourceId: BlandAI
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Bland AI connector syncs your AI phone call data – calls, per-call transcripts, and conversational pathways – into the PostHog Data warehouse, so you can analyze your voice agents' performance alongside your product data.
 

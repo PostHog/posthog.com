@@ -1,42 +1,71 @@
-### Q3 2026 objectives
+### Q4 2026 objectives
 
-1. MCP/Wizard improvements and Slack bot
-   - How it's displayed across harnesses and agents
-   - Make product analytics easier and more useful to access from Claude Code, Slack, etc.
-   - AI knows when to use a runner rather than one-shotting SQL every time
+This quarter, our goals are split. We don't have enough certainty to predict a whole three months of direction. We could carry on as the money-engine. Improving charts, visualisations, and feature parity. But we want to take a moment and learn more about how people's behaviour is changing. We want to take a moment to look up and around and orient ourselves better.
 
-2. Improvements and features for core product analytics
-   - Prioritized list in GitHub
-   - Papercuts
-   - Tech debt
+We will focus on what we'll explore rather than what we'll ship. For a long time, our challenge was building everything customers asked for. Now it's building the right things. We think what our team needs most is to step back and understand our users' broader goals and pain points, so we can refocus on what matters most.
 
-### What we’ll ship
+For each area below, we'll interview users, dig into our metrics, and share findings with the team at our offsite. Meanwhile, we'll keep shipping based on what we learn and maintaining the features we own.
 
-#### <TeamMember name="Sam Pennington" />
+**Focus areas:**
+1. Large customer needs: What are our large customers struggling with? Where are the limits getting pushed?
+2. Startup needs: What needs are we missing with small organizations and startups trying to build and scale their business?
+3. User retention: Why are individual users stopping using PostHog?
+4. MCP-first users: Where are we not meeting the needs of MCP-first or MCP-only users?
+5. Market trends: Where is the market heading, and how will our customers work differently in the next 1-3 years?
+6. Generative AI: Why do people use generative AI instead of dashboards, and what would get dashboard users to switch?
 
-- Make creating insights and dashboards via MCP faster and better quality (#1)
-- Make charts great everywhere
-  - Make charts work in Slack (#1)
-  - ASCII charts for Claude Code and similar (#1)
-  - Roll out better-styled charts across all PostHog products (#2)
-- More options and flexibility with date queries (#2)
-  - Add quarterly and yearly intervals
-  - Add a "last X days" option
-  - Allow day-of-week filtering (replacing the existing weekend-filter post-processing)
+### What we’ll explore
 
-#### <TeamMember name="Thomas Obermüller" />
+#### Large customer needs: <TeamMember name="Mike Warren" />
 
-- Dogfood MCP analytics so working with insights and dashboards doesn't feel sluggish (#1)
-  - Improve tool discovery
-  - Add missing capabilities and purpose-built tools
-- Dashboard filter overrides and chart color enhancements (#2)
-  - Override interval on dashboards
-  - Override test account filter on dashboards
-  - Exclude insights from dashboard filters
-  - Allow overriding chart colors (and maybe sort order, etc.) on a dashboard
-- Paths V2 (#2)
-  - Reuse funnel semantics (and maybe the funnel UDF) so zooming into a path produces the same results as a funnel
-  - Row and column layout instead of limiting by total number of paths
-  - Use the cleaned-up visualization
-  - Address open feature requests for paths where possible (path cleaning, etc.)
-- Remove legacy filters and legacy insights, and move code to the "product analytics" product (#2)
+- **Who we'll speak to:** Large customer users; our sales team
+- **Questions to explore:**
+  - Why are larger, managed accounts churning?
+  - Why are we losing competitive deals?
+  - Why aren't large orgs switching to PostHog?
+
+#### Startup needs: <TeamMember name="Matt Pua" />
+
+- **Who we'll speak to:** Small orgs that churned early; small orgs that signed up but didn't finish setup or invite teammates
+- **Questions to explore:**
+  - Why do early-stage orgs churn?
+  - Why don't teams invite their teammates?
+  - Where do orgs get stuck during setup?
+  - What are people saying about PostHog on Reddit, G2, X, etc.?
+  - What does marketing see as the reasons we win or lose?
+  -  Are smaller/younger orgs more AI-pilled, more MCP first, less likely to use web? How is web use changing?
+  
+
+#### User retention: <TeamMember name="Daniel Parker" />
+
+- **Who we'll speak to:** Users invited to an org who stopped using PostHog after setup (in both existing and new orgs); people new to PostHog (spilt by new to analytics vs used to a different analytics solution),
+- **Questions to explore:**
+  - Why do new orgs stop using PostHog after setup?
+  - Why do existing org users stop using PostHog?
+  - What trips up someone seeing PostHog with fresh eyes? (Existing and new orgs)
+
+#### MCP-first users: <TeamMember name="Sam Pennington" />
+
+- **Who we'll speak to** (across Codex, Claude, Slack, etc.): Hybrid users (MCP + Web); MCP-only users; users who stopped using our MCP
+- **Questions to explore:**
+  - Does the experience differ across harnesses?
+  - What challenges are they running into?
+  - How well do they understand PostHog?
+  - What leads users to stop using our MCP?
+  - (How much/do they) navigate between MCP and web?
+
+#### Market trends: <TeamMember name="Thomas Obermüller" />
+
+- **Who we'll speak to:** PostHog's CSM team; champions at companies across industries; AI-native startups not using PostHog
+- **Questions to explore:**
+  - Where is the overall market landscape heading? How will our customers be working differently in the next 1-3 years?
+  - Are there any other technologies (outside of AI) that may disrupt our industry?
+  - What are competitors doing that we are not?
+  - What are new startups in our space doing that we are not?
+
+#### Generative AI: <TeamMember name="Thomas Obermüller" />
+
+- **Who we'll speak to:** People using generative AI (canvases, for us); people using dashboards but not canvases
+- **Questions to explore:**
+  - Why are they using generative AI vs. dashboards? What do they like / not like?
+  - For people using dashboards but not canvases, why not? What would get them to switch?

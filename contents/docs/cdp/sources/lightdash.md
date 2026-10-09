@@ -7,14 +7,10 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Lightdash
-beta: true
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Lightdash connector syncs your BI and analytics data – projects, spaces, dashboards, charts, metrics catalog entries, and organization users – into PostHog's data warehouse. This lets you join Lightdash metadata with the rest of your PostHog data in queries and insights.
 

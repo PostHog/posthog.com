@@ -9,12 +9,9 @@ availability:
 sourceId: Imperva
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Imperva (Thales) Cloud Application Security connector syncs your web application security data into the PostHog Data warehouse, including site inventory, visitor traffic, hit statistics, and bandwidth metrics – so you can analyze security traffic patterns alongside your product data.
 

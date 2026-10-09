@@ -1,0 +1,75 @@
+---
+title: What to watch
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+**What to watch** is the first tab on the Replay Vision home. It reads the [observations](/docs/replay-vision/observations) every scanner produced over a date range and picks the ones most worth a look, so you can start with a short list of clips instead of a table per scanner.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_what_to_watch_feed_c265597cf4.png"
+  alt="The What to watch feed: clip cards with thumbnails, New tags, headlines, the scanner's question and result, and the reason each clip is there"
+  classes="rounded"
+/>
+
+## What each card shows
+
+Each card is one observation:
+
+- **Thumbnail** – a frame from the recording, with the key moment's timestamp on it. The key moment is where the scan's answer rests most.
+- **Headline** – the summary's title for summarizers, or the first sentence of the reasoning for other scanner types.
+- **Person and time** – who was recorded, with a link to their person profile, and when the scan ran.
+- **Question and result** – the scanner's prompt condensed into one question, with the verdict, score, or categories it gave. Hover the question to see the scanner's name.
+- **Reason** – one line on why the observation made the feed.
+
+Cards for observations you haven't opened yet are marked **New**. This is tracked per user, and opening the observation's page clears it.
+
+## Watching a clip
+
+Click the thumbnail to watch the recording in a player without leaving the feed. It starts 3 seconds before the key moment, so you see what led up to it. Recordings without a key moment start from the beginning.
+
+Click anywhere else on the card to open the [observation page](/docs/replay-vision/observations#the-observation-page) with the player at the same moment. Going back returns you to the feed.
+
+## Why a clip is in the feed
+
+Every card says why it's there. When the scan wrote its own sentence about what makes the session worth watching, the card shows that sentence. Otherwise it gives one of these reasons:
+
+| Reason                                    | What it means                                                                                     |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| The scanner raised signals                | The session fed findings into [Signals](/docs/self-driving/inbox/sources). The card names the issue type (bug, crash, design flaw, or UX friction) and the findings' headlines |
+| A rare answer                             | A monitor gave an answer that's unusual for it in this window                                     |
+| The scanner answered yes                  | A monitor hit, when the window is too thin to know which answer is unusual                        |
+| Far from the recent average               | A scorer's score is far from its average over the window                                          |
+| An uncommon tag                           | A classifier picked a category it rarely uses lately                                              |
+| Reads unlike the scanner's other sessions | A summary that differs from the scanner's other summaries in the window                           |
+| Worth watching                            | The scan judged the session worth watching, whatever its answer was                               |
+| Signs of friction                         | The scan describes errors, retries, or dead ends                                                  |
+| New since you last looked                 | Nothing stood out, and you haven't opened it yet                                                  |
+| The newest from this scanner              | Nothing stood out, and it's among the most recent                                                 |
+
+The last two only pad out a feed that has few findings. If every card is one of them, the feed says that nothing stood out in this window and shows the newest clips.
+
+## Filtering the feed
+
+The controls above the feed narrow what it picks from:
+
+- **Search clips** – matches the scan's own words (title, summary, reasoning, and the worth-watching sentence) and the scanner's name. It searches the whole window, not only the clips that would have shown without it. For searching by meaning, use the **Search** tab, see [searching observations](/docs/replay-vision/observations#searching-observations).
+- **Scanners** – follow only the scanners you pick.
+- **Tags** – follow scanners with the tags you pick, handy when you have many scanners for one area.
+- **Type** – one [scanner type](/docs/replay-vision/scanner-types).
+- **Date range** – the last 7 days by default, up to the last 90 days.
+
+**Clear filters** resets them. The URL keeps your filters, so you can share a filtered feed.
+
+Switch between the list and a grid of thumbnails with the toggle next to the filters. Your choice is remembered.
+
+## When the feed is empty
+
+An empty feed tells you why, and what to do about it:
+
+- **No scanners yet** – the tab explains the feed with example cards and offers **Create your first scanner**.
+- **Your Replay Vision credits are used up for this period** – scans are skipped until the period resets or you raise the limit. See [quota and limits](/docs/replay-vision/quota-and-limits).
+- **None of your scanners are running** – every scanner is turned off. Turn one on and its clips appear after the next matching recording.
+- **Every running scanner has reached its own credit limit** – they stop scanning until the period resets. Raise a scanner's limit to start it again. Sessions they skipped aren't scanned later.
+- **No clips match these filters in this window** – loosen your filters or click **Clear filters**.
+- **Nothing stood out in this window** – try a longer date range.

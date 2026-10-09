@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Deepsource
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DeepSource connector pulls your static analysis and code health data into the PostHog data warehouse: repositories, analysis runs, open issues and their occurrences, dependency vulnerabilities, code quality metrics, and compliance reports. This lets you trend code quality across repositories over time and join it with the rest of your data.
 

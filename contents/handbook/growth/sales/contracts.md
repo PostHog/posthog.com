@@ -79,7 +79,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - **Client Address Information** - Needs to be their legal correspondence address (check with your customer contact)
     - **Client.Company** - The legal company name
     - **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
-    - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, add up their total and discount as normal, and then add a note about the free credits in this format: "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date." For example, if a customer is signing a standard $20k annual contract to get the 20% discount, the total will be $25k, 20% discount of $5k, total cost to the customer would be $20k. In the notes, you would write: "An additional credit in the amount of USD $4,166.67 (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
+    - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, set the total and discount as normal for the credits they buy, and set the start date 2 months in the future (see **Contract.EffectiveDate** below). The free credits are not part of the order form, so don't add a startup credit note to Special Terms. When the customer signs, add the free credits yourself as a [one-time credit in billing admin](/handbook/growth/revops/credits). You don't need to wait for billing. For example, if a customer buys $25k of credit at a 20% discount (a cost of $20k), they get $4,166.67 of free credit (1/6 of $25k). See [how to structure free credits](/handbook/growth/sales/contract-rules#how-to-structure-free-credits-in-special-terms) for the less common option, where a fixed amount of free credit is part of the 12 month term.
     - **Contract buyout credits** - If the customer is [buying out a competitor contract](/handbook/growth/sales/contract-rules#contract-buyouts), add the buyout credit to the Special Terms in this format: "Customer will receive a one-time and additional PostHog Cloud Credit of $XX,YYY (the "Contract Buyout Credit") to be applied against monthly usage expiring on the Credit Allocation Date." Any buyout is subject to team lead approval before it goes on an order form.
     - **Contract.EffectiveDate**
 
@@ -93,7 +93,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
             - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
             - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it. If the order form won't be signed before that period's invoice is issued, don't hold the backdated start date. Move the start date to the beginning of the next billing period instead, and tell the customer the new credits apply from then. See [contract timing rules](#contract-timing-rules) below, and [timing your renewals with billing](/handbook/cs-and-onboarding/renewals#timing-your-renewals-with-billing) for how to avoid getting into this position.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
-        - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
+        - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract. The one-time free credits you add in billing admin cover the invoices before this date.
         - **Campaigns and beta plans** - Do not apply the startup rule above. These customers are already paying us — their plan makes usage cheaper, not free — so future-dating the term would leave them on undiscounted list pricing until it starts. Set the start date normally and size the credits for the point at which their plan expires instead. See [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
@@ -122,7 +122,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
 6. Don't forget to link to an opportunity in Salesforce and mark the associated opportunity as Closed Won.
-7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
+7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc Order Form ID.
 8. Celebrate!
 
 ### Manual upload of signed order form
@@ -139,11 +139,11 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
     - Mark the status as completed.
     - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
 
-Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+Once the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works, and [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for the parts that now run on their own.
 
 ### Updating the billing email and address
 
-You do not need the RevOps or billing team to change a customer's billing email or billing address in Stripe. You can do it yourself in billing admin.
+You do not need the RevOps or billing team to change a customer's business name, billing email, or billing address in Stripe. You can do it yourself in billing admin. Do this when the customer's billing contact leaves the company, or when invoices go to the wrong person. Do not try to edit the customer in the Stripe dashboard. Most people do not have permission to do this.
 
 1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">billing admin</PrivateLink> and find the **Billing details** panel on their profile.
 2. Click **Edit billing details**.
@@ -152,6 +152,8 @@ You do not need the RevOps or billing team to change a customer's billing email 
     - **Billing email** - the address that receives invoices and billing notifications.
     - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
 4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
+
+An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in #team-billing for an updated invoice PDF.
 
 > Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
 

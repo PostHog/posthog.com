@@ -60,7 +60,7 @@ Metrics are stored in a columnar time series table and exposed to SQL as `postho
 
 ## What the alpha means here
 
-While metrics is in open alpha, ingestion details and limits may still change, and retention policy is not final. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
+While metrics is in open alpha, ingestion details and limits may still change, and metrics data is kept for 30 days. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
 
 ## Next steps
 

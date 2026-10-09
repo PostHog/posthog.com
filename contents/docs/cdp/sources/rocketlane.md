@@ -12,9 +12,6 @@ sourceId: Rocketlane
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Rocketlane connector pulls your customer onboarding and professional services data — projects, tasks, time entries, users, and custom fields — into the PostHog data warehouse, so you can analyze it alongside your product data.
 

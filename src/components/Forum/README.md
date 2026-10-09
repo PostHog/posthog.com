@@ -25,12 +25,12 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | `context.tsx` | `useForumActions()`: opens the topic form, delete dialog, and subscriptions dialog |
 | `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumProgress`, `useForumFeed`, `useForumPost` |
 | `Sidebar.tsx` | New post, search, nav, topic list with staff menus, and the off-ramps. Collapses to a top bar below `@2xl` |
-| `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the tag filter, infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
+| `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the filters (no replies yet, and tags), infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
 | `Thread.tsx` | One post: vote box, body, author edits, the Moderate menu, and the shared Squeak replies |
 | `Composer.tsx` | The new post form, which also saves, edits, and publishes drafts. Authors choose only a topic; the server chooses tags when a post goes live |
 | `GettingStarted.tsx` | A hedgehog that peeks up from the bottom right of the feed views for signed-in members, with a chat of first steps and a confetti burst on the first visit. `index.tsx` loads it with `React.lazy`, so its SVG stays out of the shared bundle. `useForumProgress` checks each task. "Don't show again" stores `forum-getting-started-dismissed` in localStorage |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
-| `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag. On All posts it groups the tags by topic |
+| `FilterMenu.tsx` | The feed filters: a "No replies yet" checkbox (`numReplies: 0`), then the tags, with a subscribe bell for each tag. On All posts it groups the tags by topic |
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |
 | `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
 | `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |

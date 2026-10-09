@@ -9,12 +9,6 @@ availability:
 sourceId: Copper
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Sync your Copper CRM data – people, companies, leads, opportunities, projects, tasks, and reference data – into the PostHog data warehouse.
 
 ## Adding a data source

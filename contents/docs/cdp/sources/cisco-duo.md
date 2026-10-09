@@ -12,9 +12,6 @@ sourceId: CiscoDuo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Cisco Duo connector syncs your Duo Admin API data into the PostHog Data warehouse: authentication, administrator, telephony, and activity logs, plus users, groups, phones, admins, and integrations. This lets you analyze MFA success and failure rates, enrollment coverage, and unusual access patterns alongside your product data.
 

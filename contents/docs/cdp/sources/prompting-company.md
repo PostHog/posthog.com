@@ -12,9 +12,6 @@ sourceId: PromptingCompany
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Prompting Company connector syncs AI visibility and share of voice analytics data into the PostHog data warehouse, so you can analyze LLM mentions and visibility alongside your product data.
 

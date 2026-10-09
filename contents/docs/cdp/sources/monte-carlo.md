@@ -12,9 +12,6 @@ sourceId: MonteCarlo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Connect your [Monte Carlo](https://www.montecarlodata.com/) account to pull your data observability history – alerts, monitors, observed tables, users, and warehouse connections – into the PostHog Data Warehouse. This is useful for building data quality scorecards and correlating data incidents with downstream product impact.
 

@@ -9,12 +9,6 @@ availability:
 sourceId: Komodor
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your Komodor account to sync Kubernetes services, jobs, clusters, and monitors into the PostHog data warehouse.
 
 ## Adding a data source

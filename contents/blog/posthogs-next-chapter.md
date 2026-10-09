@@ -11,6 +11,10 @@ featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_
 featuredImageType: full
 tags: 
  - CEO diaries
+ - Founders
+ - Big decisions
+crosspost:
+  - Founders
 ---
 
 Building PostHog has been living the dream. We got into YC. We pivoted a bunch. We found product-market fit, onboarded hundreds of thousands of customers, and revenue grew fast.
@@ -59,7 +63,7 @@ Results and feedback dramatically improved. We kept iterating and users started 
 
 After a while, we realized PostHog AI had become the best way to use our product in most cases, and we made it the default UX for new users. We also shipped an MCP, so users could query PostHog from their code editors. It's way more popular than we anticipated.
 
-The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineering/ai-wizard). It was very basic to start with, but the potential was obvious. Our docs team (we call them Context Engineers now) took over development and the progress has been remarkable. Our wizard can now set up a PostHog project from scratch, defining and implementing events and creating dashboards, 100% autonomously. It's kind of magical.
+The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineering/ai-wizard). It was very basic to start with, but the potential was obvious. Our docs team (we call them [Context Engineers](/blog/wtf-is-context-engineering#what-does-a-day-in-the-life-of-a-context-engineer-look-like) now) took over development and the progress has been remarkable. Our wizard can now set up a PostHog project from scratch, defining and implementing events and creating dashboards, 100% autonomously. It's kind of magical.
 
 ## What we're working on now
 

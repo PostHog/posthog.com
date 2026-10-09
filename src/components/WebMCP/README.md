@@ -62,25 +62,23 @@ preview deploy or production.
 | Event | When | Properties |
 | --- | --- | --- |
 | `webmcp tools registered` | Once per page load, after all tools register | `tools`: list of tool names |
-| `$mcp_tool_call` | Every call | Agent intent, tool name, description, declared input key names, error state, duration, server hostname, and WebMCP transport metadata |
+| `$mcp_tool_call` | Every call, captured by posthog-js | See below |
 
-`$mcp_tool_call` uses the [MCP analytics](/docs/mcp-analytics) event contract, so the calls show in MCP analytics
-next to the calls to the hosted MCP server. `$mcp_source` must be `posthog_mcp_analytics`, or MCP analytics does not
-read the event. `$mcp_transport` separates these calls from the calls to the server. Older calls use the event
-`webmcp tool called`, with the properties `tool`, `success`, and `duration_ms`.
+posthog-js captures `$mcp_tool_call` because the init config in `gatsby/onPreBootstrap.ts`
+sets `capture_webmcp: true`. The event uses the [MCP analytics](/docs/mcp-analytics) contract, with
+`$mcp_interface: webmcp`. It links to the current person, session, and replay. This component does not capture
+tool calls itself.
 
-The telemetry wrapper adds a required `context` string to each tool schema. The calling agent uses it to describe
-the user's goal. The wrapper captures it as `$mcp_intent` with `$mcp_intent_source: context_parameter`. It removes
-the field before the tool runs.
+The SDK adds two required string fields to each tool schema that the agent sees: `context`, the reason for the call,
+and `llm_model`, the model that the agent reports. It captures them as `$mcp_intent` and `$mcp_llm_model`, and
+removes them before the tool runs. Do not give a tool its own `context` or `llm_model` input. The SDK does not add a
+field that the schema already declares.
 
-`$mcp_resource_name` and `$mcp_tool_name` both contain the tool name, as required by the SDK contract.
-`$mcp_tool_description` contains the registered description. `$mcp_input_keys` contains only names that appear in
-the registered input schema. It never contains input values. A thrown error adds `$mcp_error_type`, but not its
-message. PostHog JS adds the current `$session_id`, so the call links to the browser session and its replay.
+posthog-js only captures calls to tools registered after it initializes. It loads async, and the component does not
+wait for it. If the component mounts first, the calls on that page load are not captured.
 
-The agent-provided `context` is the only captured input value. Other inputs, results, and error messages are not
-captured. The WebMCP callback does not expose the calling agent, model, protocol version, or conversation ID.
-`$mcp_client_name: webmcp` identifies the integration surface, not the agent.
+Older calls use the custom properties `$mcp_transport`, `$mcp_client_name`, and `$mcp_input_keys`, or the event
+`webmcp tool called`.
 
 ## Notes
 

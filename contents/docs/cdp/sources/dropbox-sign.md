@@ -12,9 +12,6 @@ sourceId: DropboxSign
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Dropbox Sign connector syncs your Dropbox Sign e-signature data into PostHog, so you can analyze your signature requests and documents alongside your product data.
 

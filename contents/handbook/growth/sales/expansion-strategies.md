@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [Expansion and Retention page](/handbook/growth/sales/expansion-and-retention) lays out the REREE priority order for managing your book: retain, expand (cross-sell), retain (commit), expand (new teams), expand (same team). The [cross-sell motions](/handbook/growth/cross-selling/cross-sell-motions) page tells you *what* to sell. The [use-case-selling playbooks](/handbook/growth/use-case-selling) tell you *how to frame it*. This page covers the layer underneath: **how you structurally grow an account.**
+The [Expansion and Retention page](/handbook/growth/sales/expansion-and-retention) lays out the REREE priority order for managing your book: retain, expand (cross-sell), retain (commit), expand (new teams), expand (same team). The [cross-sell motions](/handbook/growth/cross-selling/cross-sell-motions) page tells you *what* to sell. The [use-case-selling playbooks](/handbook/growth/use-case-selling/use-case-selling) tell you *how to frame it*. This page covers the layer underneath: **how you structurally grow an account.**
 
 Not every account grows the same way. A 30-person startup with one engineering team is a completely different expansion motion than a 500-person company with four business units. You need to pick the right approach for the account you're working with, and sometimes run multiple strategies in parallel.
 
@@ -31,7 +31,7 @@ The team already uses Product Analytics. You help them adopt Session Replay, the
 
 ### How to execute
 
-1. Review their current product adoption against the [use-case-selling framework](/handbook/growth/use-case-selling). Identify which use case they're closest to completing and what product fills the next gap.
+1. Review their current product adoption against the [use-case-selling framework](/handbook/growth/use-case-selling/use-case-selling). Identify which use case they're closest to completing and what product fills the next gap.
 2. Tie the recommendation to something they've already told you. "You mentioned spending time reproducing bugs from user reports — Session Replay shows you exactly what happened" is better than "you should try Session Replay."
 3. Offer a trial incentive if needed. 2-3 months of credited usage for a new product removes the risk for them. See [trial/evaluation incentives](/handbook/growth/cross-selling/cross-sell-motions#trialevaluation-incentives).
 4. Follow up with hands-on help. Don't just suggest the product — help them set it up, build their first dashboard or workflow, and show value in week one. A [product training session](/handbook/growth/sales/customer-training) can accelerate adoption if the team is large enough to justify it.
@@ -96,7 +96,7 @@ Engineering Team A uses PostHog for product analytics. You get introduced to Eng
 1. **Map the org.** During discovery with your existing contacts, ask: "How many products or apps does your company maintain?" and "Which teams have their own engineering org?" Each product/app is a potential new workload. Your [account plan](/handbook/growth/sales/account-planning) should explicitly document known workloads and which teams own them.
 2. **Get a warm introduction.** Cold outreach to a new team inside an existing account almost never works. Ask your champion to introduce you, or use in-person visits (people feel obligated to introduce you to others when you're physically there).
 3. **Treat the new team like a new customer.** They have different needs, different stakeholders, different technical contexts. Don't assume that what worked for Team A will work for Team B. Run fresh discovery and consider offering a [training session](/handbook/growth/sales/customer-training) to get the new team up to speed.
-4. **Start with the use case that fits, not the product the other team uses.** Team A might use Product Analytics heavily, but Team B might need Error Tracking first. Let the [use-case-selling framework](/handbook/growth/use-case-selling) guide the conversation.
+4. **Start with the use case that fits, not the product the other team uses.** Team A might use Product Analytics heavily, but Team B might need Error Tracking first. Let the [use-case-selling framework](/handbook/growth/use-case-selling/use-case-selling) guide the conversation.
 
 ### Signals that it's working
 

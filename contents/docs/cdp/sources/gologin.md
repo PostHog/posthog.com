@@ -12,9 +12,6 @@ sourceId: GoLogin
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The GoLogin connector syncs your browser profile management data into the PostHog data warehouse, so you can analyze your GoLogin profiles, workspaces, and proxy devices alongside your product data.
 

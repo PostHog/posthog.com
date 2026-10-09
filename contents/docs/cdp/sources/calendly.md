@@ -9,12 +9,6 @@ availability:
 sourceId: Calendly
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Calendly connector syncs your scheduling data – event types, scheduled events, groups, organization memberships, and routing forms – into PostHog.
 
 ## Adding a data source
