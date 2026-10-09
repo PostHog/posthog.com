@@ -70,6 +70,7 @@ export default function SmallTeam({
             srcSet={miniCrestFallback.srcSet}
             sizes={miniCrestFallback.sizes}
             alt={`${team.name} mini crest`}
+            loading="lazy"
             className="size-5 shrink-0"
         />
     )
