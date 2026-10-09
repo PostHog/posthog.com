@@ -250,8 +250,12 @@ export const CodeBlock = ({
             )
     }
 
-    const copyToClipboard = (code: string): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+    const copyToClipboard = async (code: string): Promise<void> => {
+        try {
+            await navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+        } catch {
+            return
+        }
         onCopy?.()
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)

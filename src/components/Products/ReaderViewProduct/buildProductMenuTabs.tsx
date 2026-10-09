@@ -11,8 +11,9 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import Link from 'components/Link'
-import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
 import usePlatformList from 'hooks/docs/usePlatformList'
+import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
@@ -83,18 +84,32 @@ const DocsTreeMenu = ({
     )
 }
 
-const LearnHubNav = ({ basePath, contentRef }: { basePath: string; contentRef?: React.RefObject<HTMLElement> }) => (
-    <ProductNav
-        basePath={basePath}
-        contentRef={contentRef}
-        items={[
-            { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-            { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
-            { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
-            { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
-        ]}
-    />
-)
+const LearnHubNav = ({
+    basePath,
+    contentRef,
+    volumeId,
+}: {
+    basePath: string
+    contentRef?: React.RefObject<HTMLElement>
+    volumeId: string
+}) => {
+    const posthog = usePostHog()
+    return (
+        <ProductNav
+            basePath={basePath}
+            contentRef={contentRef}
+            onItemClick={(section) =>
+                posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
+            }
+            items={[
+                { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+                { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
+                { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
+                { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
+            ]}
+        />
+    )
+}
 
 /** Standard guides link between chapter pages; hub guides scroll between anchored sections. */
 const LearnNav = ({
@@ -113,11 +128,12 @@ const LearnNav = ({
     contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
+    const posthog = usePostHog()
     const normalizedCurrentPath = currentPath?.replace(/\/$/, '')
     const normalizedBasePath = basePath.replace(/\/$/, '')
 
     if (hub && (!normalizedCurrentPath || normalizedCurrentPath === normalizedBasePath)) {
-        return <LearnHubNav basePath={basePath} contentRef={contentRef} />
+        return <LearnHubNav basePath={basePath} contentRef={contentRef} volumeId={volumeId} />
     }
 
     return (
@@ -127,6 +143,13 @@ const LearnNav = ({
                     <li className="m-0 mb-2 border-b border-primary/20 p-0 pb-2">
                         <Link
                             to={basePath}
+                            onClick={() =>
+                                posthog?.capture('learn_section_selected', {
+                                    volume: volumeId,
+                                    section: 'overview',
+                                    placement: 'sidebar',
+                                })
+                            }
                             className="block w-full rounded px-2 py-1 text-sm !text-primary !no-underline hover:bg-dark/10 focus-visible:outline-offset-[-2px] dark:hover:bg-light/10"
                         >
                             <span className="inline-flex items-center gap-1.5">
@@ -144,6 +167,13 @@ const LearnNav = ({
                         <li key={page.url} className="m-0 p-0">
                             <Link
                                 to={to}
+                                onClick={() =>
+                                    posthog?.capture('learn_chapter_selected', {
+                                        volume: volumeId,
+                                        chapter: page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
+                                        placement: 'sidebar',
+                                    })
+                                }
                                 className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                                     active
                                         ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
