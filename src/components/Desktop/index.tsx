@@ -185,7 +185,11 @@ function Desktop() {
             box.style.transitionProperty = 'none'
             box.style.opacity = '1'
             drag = { x: event.clientX, y: event.clientY, pointerId: event.pointerId, target }
-            target.setPointerCapture(event.pointerId)
+            try {
+                target.setPointerCapture(event.pointerId)
+            } catch {
+                stopDrag()
+            }
         }
         const moveDrag = (event: PointerEvent) => {
             if (!drag || event.pointerId !== drag.pointerId) return
