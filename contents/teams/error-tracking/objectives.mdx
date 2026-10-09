@@ -1,47 +1,20 @@
 ### Q4 2026 objectives
 
-#### Objective 1: Agent experience – Make agents first-class users (Owner: <TeamMember name="Aleksander Błaszkiewicz" />)
+#### Objective 1: Increase signal, reduce noise (Owner: <TeamMember name="Hugues Pouillot" />)
 
-**Motivation:** Agents need a reliable way to set up Error Tracking, investigate issues, and retrieve the context required to diagnose them.
-
-**What we'll ship:**
-
-- Analyze production usage and improve the Wizard, MCP tools, and skills – <TeamMember name="Aleksander Błaszkiewicz" />
-- Build a dashboard for agent usage across the Wizard, MCP tools, and skills – <TeamMember name="Aleksander Błaszkiewicz" />
-- Highlight events with related Session Replay, traces, logs, and AI Observability context – <TeamMember name="Aleksander Błaszkiewicz" />
-- Add agent hints that surface diagnostic issues in tool calls – <TeamMember name="Aleksander Błaszkiewicz" />
-
-#### Objective 2: Grouping – Group once, correctly (Owner: <TeamMember name="Hugues Pouillot" />)
-
-**Motivation:** Better grouping improves the signal-to-noise ratio. Each exception should join the correct issue without creating duplicate or overly broad groups.
+**Motivation:** Customers should see one issue for each underlying problem and receive alerts only when aggregated activity requires attention.
 
 **What we'll ship:**
 
 - Improve fingerprinting by using source context – <TeamMember name="Hugues Pouillot" />
 - Migrate the legacy fingerprinting algorithm to the new fingerprinting system – <TeamMember name="Hugues Pouillot" />
 - Add a post-embedding grouping step – <TeamMember name="Hugues Pouillot" />
-
-#### Objective 3: Make bills predictable (Owner: <TeamMember name="Cory Slater" />)
-
-**Motivation:** Customers should not receive unexpectedly high bills after exception-volume spikes.
-
-**What we'll ship:**
-
-- Complete the design for automatic rate limiting – <TeamMember name="Cory Slater" />
-- Define subscription pricing with the APM team – <TeamMember name="Cory Slater" />
-
-#### Objective 4: Alerting (Owner: <TeamMember name="Hugues Pouillot" />)
-
-**Motivation:** Error Tracking should proactively surface meaningful changes without creating noisy, event-by-event notifications. Aggregation-based alerts make changes easier to detect and act on.
-
-**What we'll ship:**
-
-- Build a subscription model for alerting and post-ingestion processing – <TeamMember name="Hugues Pouillot" />
+- Build an alert subscription model for post-ingestion processing – <TeamMember name="Hugues Pouillot" />
 - Build pull-based alerting on PostHog Alerts – <TeamMember name="Hugues Pouillot" />
 
-#### Objective 5: Issue enrichment (Owner: <TeamMember name="James Gill" />)
+#### Objective 2: Automate issue triage (Owner: <TeamMember name="James Gill" />)
 
-**Motivation:** Customers and agents need enough context to prioritize issues and investigate them.
+**Motivation:** Customers and agents should know which issues matter, who owns them, and what happened without completing manual triage.
 
 **What we'll ship:**
 
@@ -50,21 +23,33 @@
 - Generate issue summaries – <TeamMember name="James Gill" />
 - Evaluate tags for organizing and prioritizing issues – <TeamMember name="James Gill" />
 
-#### Objective 6: Enterprise readiness (Owner: <TeamMember name="Hugues Pouillot" />)
+#### Objective 3: Make Error Tracking first-class for agents (Owner: <TeamMember name="Aleksander Błaszkiewicz" />)
+
+**Motivation:** Agents need a reliable way to set up Error Tracking and retrieve product, runtime, release, and source-code context when they investigate issues.
+
+**What we'll ship:**
+
+- Build a dashboard for agent usage across the Wizard, MCP tools, and skills – <TeamMember name="Aleksander Błaszkiewicz" />
+- Highlight events with related Session Replay, traces, logs, and AI Observability context – <TeamMember name="Aleksander Błaszkiewicz" />
+- Add agent hints that surface diagnostic issues in tool calls – <TeamMember name="Aleksander Błaszkiewicz" />
+- Include release data on all PostHog events – <TeamMember name="Aleksander Błaszkiewicz" />
+- Index code repositories for background analysis – <TeamMember name="Aleksander Błaszkiewicz" />
+- Add a "Pending release" issue status that resolves issues for older releases and reopens them only when they occur in a new release – <TeamMember name="Aleksander Błaszkiewicz" />
+
+#### Objective 4: Keep Error Tracking bills predictable (Owner: <TeamMember name="Cory Slater" />)
+
+**Motivation:** Customers should not receive unexpectedly high bills after exception-volume spikes.
+
+**What we'll ship:**
+
+- Complete the design for automatic rate limiting – <TeamMember name="Cory Slater" />
+- Define subscription pricing with the APM team – <TeamMember name="Cory Slater" />
+
+#### Objective 5: Fit enterprise workflows (Owner: <TeamMember name="Hugues Pouillot" />)
 
 **Motivation:** Large customers need stronger integrations, repeatable configuration, and a clearer path from an Error Tracking issue to their existing engineering workflows.
 
 **What we'll ship:**
 
-- Improve integrations with Linear, Jira, GitHub, GitLab, incident.io, and PagerDuty – <TeamMember name="Hugues Pouillot" />
+- Improve integrations with Linear, Jira, GitHub, and GitLab – <TeamMember name="Hugues Pouillot" />
 - Add configuration as code – <TeamMember name="Hugues Pouillot" />
-
-#### Objective 7: Release context (Owner: <TeamMember name="Aleksander Błaszkiewicz" />)
-
-**Motivation:** Connecting runtime data to releases and source code enables customers and agents to understand when an issue started and investigate it proactively.
-
-**What we'll ship:**
-
-- Include release data on all PostHog events – <TeamMember name="Aleksander Błaszkiewicz" />
-- Index code repositories for background analysis – <TeamMember name="Aleksander Błaszkiewicz" />
-- Add a "Pending release" issue status that resolves issues for older releases and reopens them only when they occur in a new release – <TeamMember name="Aleksander Błaszkiewicz" />
