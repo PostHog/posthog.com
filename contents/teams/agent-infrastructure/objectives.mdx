@@ -7,8 +7,8 @@
 **Key results:**
 
 - Move all products fully onto the new gateway and switch off the legacy one, so there is one gateway in production <TeamMember name="Brandon Leung" photo />
-- Ship one task interface any team can build on, with a well defined contract for what a task is, what state it's in and who can access it <TeamMember name="Charles Vien" photo />
-- Ship a smart router with provider policy per product or team <TeamMember name="Brandon Leung" photo />
+- Ship one task interface any team can build on, with a well defined contract for what a task is, what state it's in, and who can access it <TeamMember name="Charles Vien" photo />
+- Ship a configurable router with provider policy per product or team <TeamMember name="Brandon Leung" photo />
 
 #### Objective 2: Every AI unit of work is costed and attributed <TeamMember name="Brandon Leung" photo />
 
@@ -16,18 +16,18 @@
 
 **Key results:**
 
-- Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits and live budgets <TeamMember name="Brandon Leung" photo />
+- Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits, and live budgets <TeamMember name="Brandon Leung" photo />
 - Agree a default billing model for the whole runtime that connects the gateway ledger to Django credits, written up as a pricing review RFC <TeamMember name="Ben White" photo />
 
 #### Objective 3: Safe model and sandbox access <TeamMember name="Alessandro Pogliaghi" photo />
 
-**Motivation:** Security has been neglected and we aren't talking enough about abuse, data exfiltration and prompt injection.
+**Motivation:** Security has been neglected and we aren't talking enough about abuse, data exfiltration, and prompt injection.
 
 **Key results:**
 
 - Ship security at the compute and inference layers: an egress proxy for deterministic rules and trace investigation for the fuzzy cases <TeamMember name="Alessandro Pogliaghi" photo />
 - Move the self-driving pipeline off gVisor onto VMs and cut agent server boot time with a warm-pool control plane <TeamMember name="Alessandro Pogliaghi" photo />
-- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps and spend-velocity alerts <TeamMember name="Brandon Leung" photo />
+- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps, and spend-velocity alerts <TeamMember name="Brandon Leung" photo />
 
 #### Objective 4: A reliable agent runtime teams can build on <TeamMember name="Jonathan Mieloo" photo />
 
@@ -55,7 +55,7 @@
 These aren't objectives, but we're committing to them this quarter:
 
 - Make our services self-serve and more than one person deep.
-- Document the gateway, tasks and sandbox interfaces.
+- Document the gateway, tasks, and sandbox interfaces.
 - Rewrite our runbooks and get the on-call rotation in good shape.
 - Add code owners for the tasks product folder and the agent package.
 
