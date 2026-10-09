@@ -530,7 +530,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }, [item.key])
 
     useEffect(() => {
-        if (!item.appSettings?.closeOnEscape || focusedWindow !== item || closing) return
+        if (!item.appSettings?.modal?.type || focusedWindow !== item || closing) return
 
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key !== 'Escape' || event.defaultPrevented) return
