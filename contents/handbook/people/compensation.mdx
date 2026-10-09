@@ -129,6 +129,9 @@ Refreshes stack on top of each other. Each one vests over four years on its own 
 ```mermaid
 ---
 displayMode: compact
+config:
+  gantt:
+    leftPadding: 140
 ---
 gantt
     title Example - joining in January 2027
@@ -136,24 +139,24 @@ gantt
     axisFormat %Y
     tickInterval 1year
     todayMarker off
-    section New hire
-    Cliff : done, 2027-01-01, 2028-01-01
-    Vesting - 100% : active, 2028-01-01, 2031-01-01
-    section 1st refresh
-    Cliff : done, 2028-01-01, 2029-01-01
-    Vesting - 18-25% : 2029-01-01, 2032-01-01
-    section 2nd refresh
-    Cliff : done, 2029-01-01, 2030-01-01
-    Vesting - 18-25% : 2030-01-01, 2033-01-01
-    section 3rd refresh
-    Cliff : done, 2030-01-01, 2031-01-01
-    Vesting - 18-25% : 2031-01-01, 2034-01-01
-    section 4th refresh
-    Cliff : done, 2031-01-01, 2032-01-01
-    Vesting - 18-25% : 2032-01-01, 2035-01-01
-    section 5th refresh
-    Cliff : done, 2032-01-01, 2033-01-01
-    Vesting - 18-25% : 2033-01-01, 2036-01-01
+    section New hire grant - 100%
+    Cliff : active, 2027-01-01, 2028-01-01
+    Vesting : 2028-01-01, 2031-01-01
+    section 1st refresh - 18-25%
+    Cliff : active, 2028-01-01, 2029-01-01
+    Vesting : 2029-01-01, 2032-01-01
+    section 2nd refresh - 18-25%
+    Cliff : active, 2029-01-01, 2030-01-01
+    Vesting : 2030-01-01, 2033-01-01
+    section 3rd refresh - 18-25%
+    Cliff : active, 2030-01-01, 2031-01-01
+    Vesting : 2031-01-01, 2034-01-01
+    section 4th refresh - 18-25%
+    Cliff : active, 2031-01-01, 2032-01-01
+    Vesting : 2032-01-01, 2035-01-01
+    section 5th refresh - 18-25%
+    Cliff : active, 2032-01-01, 2033-01-01
+    Vesting : 2033-01-01, 2036-01-01
 ```
 
 By the time your new hire grant has fully vested, four refreshes are vesting in parallel. From then on you're still vesting roughly 18-25% of a new grant's value every year, as each new refresh replaces the one that just finished.
