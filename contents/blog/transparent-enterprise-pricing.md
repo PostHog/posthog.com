@@ -11,6 +11,11 @@ featuredImageType: full
 author:
   - simon-fisher
 category: Inside PostHog
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Sales and pricing
 ---
 
 > "I wonder how much this SaaS product costs to..."

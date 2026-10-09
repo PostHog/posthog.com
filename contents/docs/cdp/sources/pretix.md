@@ -12,9 +12,6 @@ sourceId: Pretix
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The pretix connector syncs your event ticketing data – events, orders, invoices, customers, gift cards, products, vouchers, check-in lists, and more – into the PostHog data warehouse. Use it to combine ticket sales and attendee data with your product analytics.
 

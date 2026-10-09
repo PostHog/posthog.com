@@ -9,12 +9,6 @@ availability:
 sourceId: Greenhouse
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Greenhouse Harvest credentials to automatically pull your Greenhouse recruiting data into the PostHog data warehouse. New sources use Harvest v3 with OAuth authentication by default.
 
 ## Adding a data source

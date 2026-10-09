@@ -12,9 +12,6 @@ sourceId: StackOverflowForTeams
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Stack Overflow for Teams connector syncs your internal Q&A knowledge base into the PostHog Data warehouse – questions, answers, articles, tags, users, and collections. This is for [Stack Overflow for Teams](https://stackoverflowteams.com/) (the private, enterprise knowledge base by Prosus/Stack Exchange), not the public Stack Overflow website.
 

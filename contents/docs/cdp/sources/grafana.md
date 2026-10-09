@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Grafana
-beta: true
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Grafana connector syncs your Grafana instance's metadata – dashboards, folders, teams, users, data sources, service accounts, alert rules, and annotations – into the PostHog Data warehouse, so you can query your observability setup alongside the rest of your data.
 

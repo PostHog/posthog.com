@@ -12,9 +12,6 @@ sourceId: Dynatrace
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Connect your Dynatrace environment to sync problems, events, entity inventory (hosts, services, applications, process groups), audit logs, vulnerabilities, metric metadata, and SLOs into the PostHog data warehouse. This is useful for reporting on incident history, availability, and infrastructure alongside your product data.
 

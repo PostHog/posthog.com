@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product
-  - Product-market fit
+  - Finding product-market fit
 crosspost:
   - Blog
 seo: {

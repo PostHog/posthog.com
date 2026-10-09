@@ -19,6 +19,10 @@ Every type also returns:
 
 - A **confidence** score representing how sure the model is about the result – shown as a percentage in the app, stored as a value from 0.0 to 1.0 on the event.
 - **Reasoning** that explains the result in plain language and may include **citations** – timestamps that link directly to the relevant moment in the recording's timeline. (Summarizers are the exception: the summary itself plays this role, so there's no separate reasoning field.)
+- A **key moment** – the single point in the recording the answer rests on. Opening the observation from the **What to watch** feed starts the recording there.
+- A **notability** judgment – a score from 0.0 to 1.0 for how much your team would gain from watching the session, with one sentence naming the moment that makes it worth a look. The model judges this on the session's own merits, separately from the scanner's question, and **What to watch** uses it to pick sessions.
+
+On the `$recording_observed` event these land as `scanner_output_confidence`, `scanner_output_key_moment_ms`, `scanner_output_notability`, and `scanner_output_notability_reason`. Observations scanned before key moments and notability existed don't have them.
 
 The reasoning and citations are the most powerful debugging tool you have for tuning a scanner. If the model is making bad calls, the reasoning shows you why.
 
@@ -34,7 +38,7 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 **Type-specific config**
 
-- **Allow inconclusive** – whether the model can return `inconclusive` when it genuinely can't tell from the recording. Off by default; turn it on if you'd rather have an explicit "don't know" than push the model into a forced yes/no.
+- **Allow inconclusive verdicts** – whether the model can return `inconclusive` when it genuinely can't tell from the recording. Off by default; turn it on if you'd rather have an explicit "don't know" than push the model into a forced yes/no. It matters most when many matching sessions never reach the flow your question is about.
 
 **When to use it**
 
@@ -48,21 +52,23 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 **On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
+PostHog reads your prompt to judge whether a yes is good or bad news (a completed onboarding is good, a payment error is bad) and colors verdicts to match.
+
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observation_detail_monitor_77a2192684.png"
-  alt="An observation detail page for a monitor scanner: verdict, confidence, and model reasoning with citation links"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_observation_detail_monitor_ec8866d719.png"
+  alt="An observation page for a monitor scanner: the question, a Yes verdict with confidence, reasoning with timestamp citations, and the rating control, next to the player"
   classes="rounded"
 />
 
 ### Impact and cohorts
 
-Monitors track how many sessions and users matched the verdict-yes condition over a trailing window (default 30 days). The scanner's **Overview** tab shows these impact counts alongside the verdict mix, and you can save the affected users as a static [cohort](/docs/data/cohorts) with one click.
+The scanner's **Overview** tab shows the **Verdict mix** for the selected date range (the last 14 days by default). Each verdict row has a **Save as cohort** button that saves the users behind that verdict as a static [cohort](/docs/data/cohorts). The cohort covers as many days as the selected range, counted back from today, up to 90 days.
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
 ## Classifier
 
-A classifier assigns one or more **tags** from a vocabulary you define. You can also allow the model to invent new tags if your vocabulary is incomplete.
+A classifier assigns one or more **tags** from a vocabulary you define. The app calls these tags **categories**. You can also allow the model to invent new tags if your vocabulary is incomplete.
 
 **Output**
 
@@ -72,9 +78,9 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 **Type-specific config**
 
-- **Tag vocabulary** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below). The editor can also **suggest tags with PostHog AI** based on your prompt, your product, and what's been seen in recordings.
-- **Allow multiple tags** – whether the model can pick more than one per session.
-- **Allow freeform tags** – whether the model can invent new tags outside the vocabulary.
+- **Categories** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below). Include an escape tag such as `unclear`, because a classifier has to pick something and will otherwise force a weak fit. Once you've written a prompt, **Suggest categories with PostHog AI** proposes tags, each marked with where it came from: seen in recordings, from your product, or from the goal.
+- **Allow multiple categories per session** – whether the model can pick more than one per session. Otherwise it picks exactly one.
+- **Allow freeform categories** – whether the model can invent new tags outside the vocabulary.
 
 **When to use it**
 
@@ -94,14 +100,14 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 **On `$recording_observed`** – `scanner_output_tags` is the array of vocabulary tags. Freeform tags, when allowed, land separately in `scanner_output_tags_freeform`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_classifier_result_5582b81446.png"
-  alt="An observation detail page for a classifier scanner: the assigned tag, the tag vocabulary, and the model's reasoning"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_observation_detail_classifier_1e43179f67.png"
+  alt="An observation page for a classifier scanner: the assigned categories with confidence and the reasoning with timestamp citations"
   classes="rounded"
 />
 
 ### Impact and cohorts
 
-Classifiers track impact per tag: how many sessions and users were assigned each tag in the trailing window. Each tag panel on the scanner's **Overview** tab has a button to save that tag's affected users as a static [cohort](/docs/data/cohorts).
+The scanner's **Overview** tab ranks the top configured categories and, when freeform categories are allowed, the top freeform ones, for the selected date range (the last 14 days by default). Each category has a **Save as cohort** button that saves the users tagged with it as a static [cohort](/docs/data/cohorts), covering as many days as the selected range, counted back from today, up to 90 days.
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
@@ -118,7 +124,7 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 **Type-specific config**
 
 - **Scale** – minimum and maximum values. Any numbers will do (decimals included) as long as the minimum is lower, though whole numbers are easier to reason about when you're reading scores later.
-- **Scale label** – optional short description of what the scale represents (e.g. "0 = no friction, 10 = severe friction").
+- **Score label** – optional one-word name for what the scale measures (e.g. "frustration"). Describe what the low and high ends look like in the prompt instead.
 
 **When to use it**
 
@@ -132,32 +138,31 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 
 **On `$recording_observed`** – `scanner_output_score` is the numeric score. Histograms and percentiles over this field tend to be the most useful insights.
 
+As with monitors, PostHog reads your prompt to judge whether a high score is good or bad news and colors scores to match.
+
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_scorer_result_b1064f56fb.png"
-  alt="An observation detail page for a scorer scanner: the numeric score on its scale and the model's reasoning with citations"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_observation_detail_scorer_aa07361a24.png"
+  alt="An observation page for a scorer scanner: a score of 5 out of 5 with confidence and the reasoning with timestamp citations"
   classes="rounded"
 />
 
-> **Note:** Impact tracking for scorers is not yet available in the UI. The API supports querying affected sessions by score threshold via `min_score` and `max_score` parameters.
+The scanner's **Overview** tab shows the **Score distribution** for the selected date range, with the minimum, median, average, and maximum score. There's no cohort button for scorers in the app yet. The API can count affected sessions and create a cohort by score threshold with the `min_score` and `max_score` parameters.
 
 ## Summarizer
 
-A summarizer produces a short prose summary of what happened in the session, plus a title. Think of it as a TL;DR you can drop into a dashboard or feed to another tool.
+A summarizer produces a prose summary of what happened in the session, plus a title and a breakdown of the session into chapters. Think of it as a TL;DR you can drop into a dashboard or feed to another tool.
 
 **Output**
 
 - `title` – one-line summary
-- `summary` – longer narrative summary, with inline citations
-- `intent` – one sentence on what the user set out to do
-- `outcome` – one sentence on how the session ended
-- `friction_points` – named blockers or frustrations the user hit (empty if none)
-- `keywords` – distinctive lowercase terms describing the session, for free-text search
+- `summary` – narrative summary, with inline citations
+- `chapters` – the session split into parts, each with a short heading, its time span, and a frame that shows it. The observation and the replay player show these as a breakdown of the session.
 - `confidence` – how sure the model is
 
 **Type-specific config**
 
 - **Additional context** – the core summarizer prompt is built in, so instead of a full prompt you add product context or steering – for example, what the ideal user flow looks like.
-- **Summary length** – short (1-2 sentences), medium (1 paragraph), or long (3-5 paragraphs).
+- **Summary length** – short (1-2 sentences), medium (4-6 sentences, the default), or long (3-5 paragraphs).
 
 **When to use it**
 
@@ -169,11 +174,11 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 > _Our product is a B2B file-sharing app. The happy path is signing up, creating a workspace, then uploading a first file. Call out where sessions deviate from that flow, and name the exact page where any error appears._
 
-**On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary; the facets land as `scanner_output_intent`, `scanner_output_outcome`, `scanner_output_friction_points`, and `scanner_output_keywords`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
+**On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary. The chapters themselves stay on the observation; the event carries only their number, as `scanner_output_chapter_count`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_summarizer_result_3692446010.png"
-  alt="An observation detail page for a summarizer scanner: the generated title and prose summary with inline citations"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_observation_detail_summarizer_75e3298481.png"
+  alt="An observation page for a summarizer scanner on its Timeline tab: chapters with thumbnails and durations"
   classes="rounded"
 />
 
@@ -192,6 +197,6 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 
 ## Confidence and citations
 
-Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee. For actual ground truth, rate results on the scanner's [calibration tab](/docs/replay-vision/calibration) – your team's ratings measure accuracy per configuration version and power AI configuration recommendations.
+Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee. For actual ground truth, rate observations with a thumbs up or down. The scanner learns from your team's ratings and notes, and applies what it learned on later scans. See [improving scanners with ratings](/docs/replay-vision/calibration).
 
 Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding _why_ a model returned what it did.

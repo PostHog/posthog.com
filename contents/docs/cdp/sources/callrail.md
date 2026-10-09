@@ -12,9 +12,6 @@ sourceId: CallRail
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The CallRail connector syncs your call-tracking data into the PostHog Data warehouse, so you can analyze your calls and attribution alongside your product data.
 

@@ -9,12 +9,6 @@ availability:
 sourceId: Logicmonitor
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your LogicMonitor account to sync alerts, devices, collectors, scheduled downtimes, and more into the PostHog data warehouse.
 
 ## Prerequisites

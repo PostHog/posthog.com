@@ -9,12 +9,6 @@ availability:
 sourceId: CheckoutCom
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Checkout.com connector syncs your payments, payment actions, customers, instruments, and disputes into the PostHog data warehouse. It also syncs your financial reporting data, where each report type your account generates becomes its own table.
 
 ## Adding a data source

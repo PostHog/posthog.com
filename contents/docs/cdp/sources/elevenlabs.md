@@ -9,12 +9,9 @@ availability:
 sourceId: ElevenLabs
 ---
 
-import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
-import SyncModes from "../\_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
 The ElevenLabs connector syncs your AI audio data into the PostHog Data warehouse: speech generation history, conversational AI conversations, agents, triage tickets, voices, and models. Use it to analyze generation volume, character costs, and agent call outcomes alongside your product data.
 

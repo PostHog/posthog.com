@@ -12,9 +12,6 @@ sourceId: Northflank
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Northflank connector syncs your deployment infrastructure metadata into the PostHog Data warehouse. [Northflank](https://northflank.com/) is a developer platform for deploying containers, jobs, and managed databases. Once linked, you can join your Northflank projects, services, jobs, addons, and volumes against your product data.
 
