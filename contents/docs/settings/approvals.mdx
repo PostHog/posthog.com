@@ -47,7 +47,7 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 
 ### Approval workflow
 
-1. **User attempts a gated action** – For example, enabling a feature flag or changing a rollout percentage
+1. **User attempts a gated action** – For example, enabling a feature flag, changing a rollout percentage, or modifying release conditions
 2. **Change request created** – PostHog captures the intended change and notifies approvers via email and in-app notification
 3. **Reviewers evaluate** – Approvers can approve or reject the request
 4. **Change applied or rejected** – When quorum is reached, the change is automatically applied. If the request is rejected, the requester is notified and the change is discarded
@@ -63,9 +63,9 @@ Once enough approvers approve the request and reach the required quorum, PostHog
 
 Approvals currently support gating the following actions:
 
-| Resource      | Gateable actions                           |
-| ------------- | ------------------------------------------ |
-| Feature flags | Enable, disable, change rollout percentage |
+| Resource      | Gateable actions                                                 |
+| ------------- | ---------------------------------------------------------------- |
+| Feature flags | Enable, disable, change rollout percentage or release conditions |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
 
@@ -96,7 +96,7 @@ Each approval policy includes:
 
 ### Conditions
 
-Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval. For feature flag update policies, this means both rollout percentage and release condition changes are gated.
 
 | Condition type    | Description                                                     | Example                                       |
 | ----------------- | --------------------------------------------------------------- | --------------------------------------------- |
@@ -107,6 +107,20 @@ Conditions let you require approval only when certain criteria are met. If no co
 Conditions support these operators: `>`, `<`, `>=`, `<=`, `==`, `!=`
 
 > **Note**: The `change_amount` condition only compares values that exist in both the before and after states. If you add a new release condition group to a feature flag, `change_amount` won't trigger because there's no previous value to compare against. Use `any_change` or `before_after` if you want to gate newly added groups.
+
+### Release conditions
+
+For feature flag update policies, **release conditions** refers to the settings that determine who gets the flag:
+
+- Property filters in condition sets (added, removed, or changed key/operator/value)
+- Condition sets added, removed, or reordered
+- Variant overrides
+- "Match by" settings (group type or device bucketing)
+- Early exit
+
+A policy with no conditions gates both rollout percentage and release condition changes. A policy with a `rollout_percentage` condition (such as `any_change`, `before_after`, or `change_amount`) only gates rollout changes — release condition edits proceed without approval.
+
+> **Note:** Release condition gating only applies to **standalone feature flags**. Flags managed by an experiment, survey, product tour, or early access feature are excluded — those products have their own approval workflows.
 
 ### Approvers
 
@@ -257,6 +271,8 @@ Now all feature flag changes will create change requests that must be approved.
 6. Save the policy
 
 Small rollout adjustments (20% or less) proceed immediately. Larger increases require approval.
+
+> **Note:** With this configuration, release condition changes (like adding or removing property filters) do not require approval because the policy has a `rollout_percentage` condition. To gate both rollout and release condition changes, remove the condition or create a separate policy with no conditions.
 
 ### Dual approval for compliance
 
