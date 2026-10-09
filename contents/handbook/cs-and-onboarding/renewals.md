@@ -19,7 +19,7 @@ For mechanics, see [Contract rules](/handbook/growth/sales/contract-rules) and [
 - **Other customers:** 3 months before the credit expiry date.
   - At the 3-month mark, the renewal workflow pings you in #sales-alerts.
 
-If you've turned on [automatic renewal quotes](/handbook/growth/sales/contracts#automatic-renewal-quotes) in QuoteHog, a draft quote will also arrive in Slack once the renewal opportunity enters the 90-day window.
+If you've turned on [automatic renewal quotes](/handbook/growth/sales/contracts#automatic-renewal-quotes) in QuoteHog, you will also get a notification in #sales-alerts when your quote draft in QuoteHog is ready for your review.
 
 Customers who fit into either of the above buckets will also appear on the <PrivateLink url="https://us.posthog.com/project/2/insights/OXGSYc9k">CSM Managed — credits expiring in next 3 months</PrivateLink> insight.
 
