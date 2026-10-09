@@ -64,7 +64,7 @@ class FlagDefinitionCacheData(TypedDict):
 
 ## Using your cache provider
 
-Pass your cache provider when initializing PostHog:
+Pass your cache provider and a server-side [project secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) when initializing PostHog. `secret_key` requires `posthog` 7.22.1+. Older versions use `personal_api_key`, which remains a deprecated alias in newer versions.
 
 ```python
 from posthog import Posthog
@@ -72,8 +72,8 @@ from posthog import Posthog
 cache = YourCacheProvider()
 
 posthog = Posthog(
-    '<ph_project_token>',
-    personal_api_key='<ph_personal_api_key>',
+    "<ph_project_token>",
+    secret_key="your project secret API key",
     flag_definition_cache_provider=cache,
 )
 ```

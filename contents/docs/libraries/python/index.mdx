@@ -490,13 +490,15 @@ An invalid value falls back to its default with a warning. The exception is `bef
 
 Spans are exported on a background interval, even with `sync_mode` on. Both `flush()` and `shutdown()` export spans that have already ended. A span still open at `flush()` is exported once it ends; a span still open at `shutdown()` is discarded with a warning, so end your spans before shutting down – a `with` block does this for you. `shutdown()` gives queued spans up to 30 seconds to send.
 
-In a serverless handler, call `flush()` before returning. Events and spans are flushed concurrently, so it costs one round trip, not two.
+If your serverless handler reuses a client across invocations, call `flush()` before returning. It flushes events and ended spans concurrently without stopping the client. Reserve `shutdown()` for a disposable client or process exit.
 
 ```python
 def handler(event, context):
-    with posthog.start_span("handler"):
-        do_work()
-    posthog.flush()
+    try:
+        with posthog.start_span("handler"):
+            do_work()
+    finally:
+        posthog.flush()
 ```
 
 A script that exits without calling `shutdown()` still gets a brief best-effort flush at exit, but don't rely on it for spans you need.
@@ -635,12 +637,13 @@ import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
 ### Synchronous `Posthog`
 
-By default, the synchronous `Posthog` client buffers events before sending them to the capture endpoint. This can lead to lost events if the platform terminates the Python process before the buffer is fully flushed. To avoid this, you can either:
+By default, the synchronous `Posthog` client buffers events before sending them to the capture endpoint. A serverless platform can freeze or terminate the runtime before background delivery finishes.
 
-- Call `posthog.shutdown()` before the process ends. This blocking call attempts to deliver queued events and cleans up the client.
-- Enable `sync_mode` when initializing the client so each `posthog.capture()` call attempts delivery before it returns.
+- For a client shared across invocations, call `posthog.flush()` before the handler returns, including when application code throws. This blocking call attempts to deliver queued events without stopping the client. Its `timeout_seconds` argument defaults to `10` seconds.
+- For a disposable client or process exit, call `posthog.shutdown()` after its final work. It attempts to deliver queued events and cleans up the client. Don't reuse the client afterward. Unlike Node's `shutdown()`, Python's `shutdown()` takes no timeout argument.
+- Alternatively, enable `sync_mode` when initializing the client so each `posthog.capture()` call attempts delivery before it returns.
 
-If you use [distributed tracing](#distributed-tracing), `sync_mode` doesn't apply to spans. Call `posthog.flush()` before the handler returns – see [Shutdown and short-lived processes](#shutdown-and-short-lived-processes).
+These calls do not guarantee that PostHog received every event. If you use [distributed tracing](#distributed-tracing), `sync_mode` doesn't apply to spans. For a shared client, call `posthog.flush()` before the handler returns – see [Shutdown and short-lived processes](#shutdown-and-short-lived-processes).
 
 ### Asyncio `AsyncPosthog`
 
