@@ -786,6 +786,7 @@ const appSettings: AppSettings = {
         },
     },
     '/talk-to-a-human': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 500,
@@ -1095,6 +1096,7 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
+        closeOnEscape: true,
         toolbar: true,
         size: {
             min: {
