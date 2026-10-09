@@ -35,7 +35,7 @@ The quoting interface is intuitive and, of course, uses the same pricing we disp
 
 Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
 
-QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
 
@@ -53,6 +53,12 @@ When building a quote for an annual plan conversion or renewal, consider:
 You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
 The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
+
+### Automatic renewal quotes
+
+QuoteHog can draft a renewal quote for you once a renewal opportunity in Salesforce will close within 90 days. A daily job picks up the opportunity, builds a quote from the customer's last billing cycle of Stripe usage, and sends the opportunity owner a Slack message in #sales-alerts with the link. Treat it as a starting point and tweak it according to the usage trends above before you share it with the customer.
+
+The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>.
 
 ## Order form
 
