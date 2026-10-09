@@ -17,7 +17,7 @@ import {
 import { QuestionForm, useQuestion } from 'components/Squeak'
 import { AskMax, CurrentQuestionContext } from 'components/Squeak/components/Question'
 import { Replies } from 'components/Squeak/components/Replies'
-import { Profile } from 'components/Squeak/components/Profile'
+import { BlockedBadge, isProfileBlocked, Profile } from 'components/Squeak/components/Profile'
 import Days from 'components/Squeak/components/Days'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
 import Markdown from 'components/Squeak/components/Markdown'
@@ -372,9 +372,17 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                     This post is archived. Only its author and moderators can see it.
                                 </p>
                             )}
+                            {!post.publishedAt && (
+                                <p className="m-0 mb-3 p-2 text-sm rounded border border-primary bg-accent">
+                                    {isProfileBlocked(post.profile?.data)
+                                        ? 'This post is unpublished because its author is blocked. Only moderators can see it.'
+                                        : 'This post is unpublished. Only its author and moderators can see it.'}
+                                </p>
+                            )}
                             <h1 className="text-2xl font-bold text-primary leading-tight m-0">{post.subject}</h1>
                             <div className="flex items-center gap-2 mt-2 flex-wrap text-sm text-secondary">
                                 <Profile compact profile={post.profile?.data} />
+                                <BlockedBadge profile={post.profile?.data} />
                                 <LevelBadge points={post.profile?.data?.attributes?.reputation} />
                                 {/* A published draft dates from when it went live, not from when it was first saved. */}
                                 <Days

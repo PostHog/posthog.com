@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product-market fit
-  - Product
+  - CEO diaries
 crosspost:
   - Blog
 ---

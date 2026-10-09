@@ -739,6 +739,11 @@
             "statusCode": 301
         },
         {
+            "source": "/open-positions",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -883,6 +888,14 @@
         {
             "source": "/teams/customer-success/:path*",
             "destination": "/teams/customer-success-eu/:path*"
+        },
+        {
+            "source": "/teams/customer-success-na",
+            "destination": "/teams/customer-success-na-north"
+        },
+        {
+            "source": "/teams/customer-success-na/:path*",
+            "destination": "/teams/customer-success-na-north/:path*"
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
@@ -4120,6 +4133,14 @@
         {
             "source": "/blog/ceo-diary-4",
             "destination": "/founders/ceo-diary-4"
+        },
+        {
+            "source": "/blog/ceo-diary-1",
+            "destination": "/founders/ceo-diary-1"
+        },
+        {
+            "source": "/founders/what-recruiters-see",
+            "destination": "/blog/what-recruiters-see"
         },
         {
             "source": "/docs/billing:ext(\\.md)?",

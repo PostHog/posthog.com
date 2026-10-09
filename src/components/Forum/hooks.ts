@@ -277,6 +277,38 @@ export const useForumSubscriptions = () => {
     }
 }
 
+// True when the collection has at least one record that matches the filters.
+const hasAny = (collection: 'questions' | 'replies', filters: Record<string, unknown>) =>
+    fetch(
+        `${API}/${collection}?${qs.stringify(
+            { filters, fields: ['id'], pagination: { pageSize: 1 } },
+            { encodeValuesOnly: true }
+        )}`
+    )
+        .then((res) => res.json())
+        .then((res) => res.meta.pagination.total > 0)
+
+// The first steps that the signed-in user has done, for the getting started checklist. Only published posts count.
+export const useForumProgress = (enabled = true) => {
+    const { user } = useUser()
+    const profileId = user?.profile?.id
+    const { subscriptions, isLoading: subscriptionsLoading } = useForumSubscriptions()
+    const { data, isLoading } = useSWR(enabled && profileId ? ['forum-progress', profileId] : null, async () => {
+        const profile = { id: { $eq: profileId } }
+        const [introduced, replied, shared] = await Promise.all([
+            hasAny('questions', { profile, forumTopic: { slug: { $eq: 'introductions' } } }),
+            hasAny('replies', { profile, question: { forumTopic: { id: { $notNull: true } } } }),
+            hasAny('questions', { profile, forumTopic: { slug: { $eq: 'shipped-and-learned' } } }),
+        ])
+        return { introduced, replied, shared }
+    })
+
+    return {
+        isLoading: isLoading || subscriptionsLoading,
+        progress: data && { ...data, subscribed: subscriptions.some((sub) => sub.forumTopic) },
+    }
+}
+
 const profileFields = {
     fields: ['firstName', 'lastName', 'color', 'gravatarURL'],
     populate: { avatar: { fields: ['url'] } },
@@ -411,15 +443,19 @@ export type FeedOptions = {
     sort: ForumSort
     topicId?: number
     tagIds?: number[]
+    // Unanswered: posts that nobody has replied to.
+    unanswered?: boolean
     // Following: posts in any subscribed topic or with any subscribed tag.
     following?: { topicIds: number[]; tagIds: number[] }
 }
 
-export const useForumFeed = ({ sort, topicId, tagIds = [], following }: FeedOptions) => {
+export const useForumFeed = ({ sort, topicId, tagIds = [], unanswered, following }: FeedOptions) => {
     const conditions = useMemo(() => {
         const all: any[] = [{ forumTopic: { id: { $notNull: true } } }]
         if (topicId) all.push({ forumTopic: { id: { $eq: topicId } } })
         if (tagIds.length) all.push({ forumTags: { id: { $in: tagIds } } })
+        // Strapi stores the reply count on each post, so this needs no join.
+        if (unanswered) all.push({ numReplies: { $eq: 0 } })
         if (following) {
             all.push({
                 $or: [
@@ -429,7 +465,7 @@ export const useForumFeed = ({ sort, topicId, tagIds = [], following }: FeedOpti
             })
         }
         return all
-    }, [topicId, tagIds.join(','), following?.topicIds.join(','), following?.tagIds.join(',')])
+    }, [topicId, tagIds.join(','), unanswered, following?.topicIds.join(','), following?.tagIds.join(',')])
 
     return useQuestions({
         limit: 20,
