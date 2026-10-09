@@ -9,12 +9,6 @@ availability:
 sourceId: ServiceNow
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The ServiceNow connector syncs your ITSM data into the PostHog data warehouse, including incidents, problems, change requests, users, configuration items, and more.
 
 ## Available tables

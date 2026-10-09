@@ -10,37 +10,7 @@ import { SQUEAK_HOST } from 'lib/strapi'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
-
-const Input = ({
-    label,
-    type = 'text',
-    touched,
-    error,
-    ...props
-}: {
-    label: string
-    type?: string
-    touched: boolean
-    error?: string
-    [key: string]: any
-}) => {
-    return (
-        <div className="flex items-center space-x-2">
-            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                {label}
-            </label>
-            <div>
-                <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
-                    type={type}
-                    id={props.name}
-                    placeholder={label}
-                    {...props}
-                />
-            </div>
-        </div>
-    )
-}
+import Input from 'components/OSForm/input'
 
 const ResetPasswordForm: React.FC = () => {
     const { login } = useUser()
@@ -160,6 +130,8 @@ const ResetPasswordForm: React.FC = () => {
                                 <Input
                                     label="New password"
                                     type="password"
+                                    size="sm"
+                                    direction="row"
                                     touched={!!touched.password}
                                     error={errors.password}
                                     {...getFieldProps('password')}
@@ -167,6 +139,8 @@ const ResetPasswordForm: React.FC = () => {
                                 <Input
                                     label="Confirm password"
                                     type="password"
+                                    size="sm"
+                                    direction="row"
                                     touched={!!touched.confirmPassword}
                                     error={errors.confirmPassword}
                                     {...getFieldProps('confirmPassword')}

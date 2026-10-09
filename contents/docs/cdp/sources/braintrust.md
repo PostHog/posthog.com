@@ -12,9 +12,6 @@ sourceId: Braintrust
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Braintrust connector syncs your LLM evaluation and observability data into PostHog's Data Warehouse, so you can analyze your AI projects, experiments, datasets, prompts, and functions alongside your product data.
 

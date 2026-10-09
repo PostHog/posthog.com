@@ -34,7 +34,7 @@ const CANONICAL_ROUTES = {
     '/teams': ['Small teams', 'Our teams'],
     '/customers': ['Customer stories', 'Case studies'],
     '/templates': ['Dashboard templates', 'PostHog templates'],
-    '/questions': ['Community questions', 'Community answers', 'Features', 'Deployment', 'Data'],
+    '/forum': ['Community forum', 'Community questions', 'Community answers', 'Features', 'Deployment', 'Data'],
     '/products': ['Tools', 'PostHog products', 'All PostHog tools'],
     '/demo': ['PostHog demo', 'Watch a demo'],
     '/talk-to-a-human': ['Contact sales', 'Sales demo'],
@@ -276,6 +276,36 @@ const createTeamRecord = ({ id, name, slug, tagline, description, profiles }) =>
     }
 }
 
+const createForumPostRecord = ({
+    id,
+    subject,
+    permalink,
+    excerpt,
+    resolutionBody,
+    resolved,
+    forumTopic,
+    forumTopicLabel,
+    forumTags,
+}) => {
+    const path = `/forum/p/${permalink}`
+    return {
+        id,
+        title: subject,
+        type: 'question',
+        slug: path.slice(1),
+        fields: { slug: path },
+        path_ranking: PATH_RANKING.community,
+        headings: [],
+        rawBody: [excerpt, resolutionBody].filter(Boolean).join(' '),
+        excerpt,
+        resolved,
+        isForum: true,
+        forumTopic,
+        forumTopicLabel,
+        forumTags,
+    }
+}
+
 const retrieveSearchPages = {
     query: `
         {
@@ -320,6 +350,19 @@ const retrieveSearchPages = {
               searchTitle
               slug
               status
+            }
+          }
+          forumPosts: allSqueakForumPost {
+            nodes {
+              id
+              subject
+              permalink
+              excerpt
+              resolutionBody
+              resolved
+              forumTopic
+              forumTopicLabel
+              forumTags
             }
           }
           teams: allSqueakTeam(
@@ -381,6 +424,11 @@ const retrieveSearchPages = {
 
         data.teams.nodes.forEach((team) => {
             const record = createTeamRecord(team)
+            records.set(record.fields.slug, record)
+        })
+
+        data.forumPosts.nodes.forEach((forumPost) => {
+            const record = createForumPostRecord(forumPost)
             records.set(record.fields.slug, record)
         })
 

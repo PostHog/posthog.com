@@ -12,9 +12,6 @@ sourceId: Heroku
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Heroku connector syncs your apps, releases, builds, dynos, add-ons, and other Heroku platform data into PostHog, so you can analyze your deploy history, dyno formations, and add-on spend alongside your product data.
 

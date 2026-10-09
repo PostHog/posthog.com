@@ -12,9 +12,6 @@ sourceId: NewRelic
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The New Relic connector syncs your observability data – APM transactions, transaction errors, page views, logs, distributed tracing spans, monitored entities, and alert configuration – into PostHog, so you can query it alongside your product analytics.
 

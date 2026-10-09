@@ -295,7 +295,7 @@ export default function HogBB(): JSX.Element {
                                     <Link to="/people">Memberlist</Link>
                                     <Link to="/teams">Usergroups</Link>
                                     <Link to="https://app.posthog.com/signup">Register</Link>
-                                    <Link to="/community/dashboard">Profile</Link>
+                                    <Link to="/forum/following">Profile</Link>
                                     <Link to="https://app.posthog.com/login">Log in</Link>
                                 </nav>
                             </div>
@@ -417,7 +417,7 @@ export default function HogBB(): JSX.Element {
                                                 <Folder />
                                             </RowCell>
                                             <RowCell>
-                                                <Link to="/questions" className="text-[12px] font-bold">
+                                                <Link to="/forum" className="text-[12px] font-bold">
                                                     Questions and help
                                                 </Link>
                                                 <p className="m-0 text-[11px]">
@@ -513,7 +513,7 @@ export default function HogBB(): JSX.Element {
                                 </h2>
                                 <div className="mb-1 flex flex-wrap items-end justify-between gap-2">
                                     {breadcrumb}
-                                    <Button to="/questions">new topic</Button>
+                                    <Button to="/forum">new topic</Button>
                                 </div>
                                 <ForumLine label={`${forum.name} topics`}>
                                     <thead>
@@ -577,8 +577,8 @@ export default function HogBB(): JSX.Element {
                                 <div className="mb-1 flex flex-wrap items-end justify-between gap-2">
                                     {breadcrumb}
                                     <span className="flex gap-1">
-                                        <Button to="/questions">new topic</Button>
-                                        <Button to="/questions">post reply</Button>
+                                        <Button to="/forum">new topic</Button>
+                                        <Button to="/forum">post reply</Button>
                                     </span>
                                 </div>
                                 <ForumLine label={topic.frontmatter.title}>

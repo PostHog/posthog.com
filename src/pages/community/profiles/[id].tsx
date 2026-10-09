@@ -11,7 +11,6 @@ import { ProfileData, StrapiRecord } from 'lib/strapi'
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import useTopicsNav from '../../../navs/useTopicsNav'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import PostsTable from 'components/Edition/PostsTable'
 import { sortOptions } from 'components/Edition/Posts'
@@ -1487,7 +1486,7 @@ export default function ProfilePage({ params }: PageProps) {
             linkedin: profile?.linkedin,
             github: profile?.github,
             discord: profile?.discord,
-            avatar: getAvatarURL(profile),
+            avatar: getAvatarURL(data),
             firstName: profile?.firstName,
             lastName: profile?.lastName,
             location: profile?.location,

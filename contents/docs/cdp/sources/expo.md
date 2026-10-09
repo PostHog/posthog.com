@@ -12,9 +12,6 @@ sourceId: Expo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Expo connector syncs EAS builds and store submissions for one project into the PostHog data warehouse, so you can track build duration, queue time, and failure reasons alongside your product data.
 

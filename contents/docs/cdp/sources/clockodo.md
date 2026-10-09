@@ -12,9 +12,6 @@ sourceId: Clockodo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Clockodo connector syncs your Clockodo time-tracking data into PostHog, so you can analyze time and project data alongside your product data.
 

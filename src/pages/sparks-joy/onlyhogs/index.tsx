@@ -1,5 +1,5 @@
 import React from 'react'
-import { HedgehogChartHog, HedgehogPearlNecklace, HedgehogRose } from '@posthog/brand/hoggies'
+import { HedgehogChart, HedgehogPearlNecklace, HedgehogRose } from '@posthog/brand/hoggies'
 import {
     IconBell,
     IconHome,
@@ -30,7 +30,7 @@ const creatorPosts = [
         description: 'Every step is on show. Look as long as you like.',
         to: '/funnels',
         cta: 'See my funnel',
-        image: <HedgehogChartHog title="PostHog shows you the full funnel" className="size-full p-4" />,
+        image: <HedgehogChart title="PostHog shows you the full funnel" className="size-full p-4" />,
     },
     {
         id: 'feet-pics',
@@ -81,7 +81,7 @@ export default function OnlyHogs({ data }: { data: { posts: { nodes: PostSummary
                                 { label: 'PostHog home', to: '/', Icon: IconHome },
                                 { label: 'Latest news', to: '/changelog', Icon: IconBell },
                                 { label: 'Join PostHog', to: 'https://app.posthog.com/signup', Icon: IconPlusSquare },
-                                { label: 'Community questions', to: '/questions', Icon: IconMessage },
+                                { label: 'Community questions', to: '/forum', Icon: IconMessage },
                             ].map(({ label, to, Icon }) => (
                                 <Link
                                     key={label}

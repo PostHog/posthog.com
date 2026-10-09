@@ -17,7 +17,7 @@ export const BedtimeReadingSection = () => (
         <Markdown>{`- [demo.mov](/demo)
 - [Technical docs](/docs)
 - [API](/docs/api)
-- [Ask a question](/questions)
+- [Ask a question](/forum)
 - [Small teams at PostHog](/teams)`}</Markdown>
     </div>
 )
