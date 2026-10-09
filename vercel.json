@@ -890,6 +890,14 @@
             "destination": "/teams/customer-success-eu/:path*"
         },
         {
+            "source": "/teams/customer-success-na",
+            "destination": "/teams/customer-success-na-1"
+        },
+        {
+            "source": "/teams/customer-success-na/:path*",
+            "destination": "/teams/customer-success-na-1/:path*"
+        },
+        {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
             "destination": "/docs/skills:ext?",
             "statusCode": 301
