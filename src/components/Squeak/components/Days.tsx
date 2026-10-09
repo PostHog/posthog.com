@@ -16,13 +16,17 @@ const Edit = ({ image, color, name, date, profileID, text }) => {
             <span className="flex items-center space-x-1 text-sm">
                 <Avatar image={image} color={color} className="size-6" />
                 <span>
-                    <Link
-                        to={`/community/profiles/${profileID}`}
-                        className="font-semibold hover:underline"
-                        state={{ newWindow: true }}
-                    >
-                        {name}
-                    </Link>{' '}
+                    {profileID ? (
+                        <Link
+                            to={`/community/profiles/${profileID}`}
+                            className="font-semibold hover:underline"
+                            state={{ newWindow: true }}
+                        >
+                            {name}
+                        </Link>
+                    ) : (
+                        <span className="font-semibold">{name}</span>
+                    )}{' '}
                     <span className="text-secondary">{text}</span> <span>{dayjs(date).fromNow()}</span>
                 </span>
             </span>
@@ -52,29 +56,33 @@ export const Days = ({ created, edits, profile }: { created: string | undefined;
             {hasEdits ? (
                 <ul className="m-0 p-0 list-none">
                     {edits.map((edit) => {
-                        const {
-                            id: profileID,
-                            attributes: { firstName, lastName, color },
-                        } = edit.by.data
-                        const name = [firstName, lastName].filter(Boolean).join(' ')
+                        // A deleted profile leaves edit.by.data null. Destructuring it threw, and
+                        // because this tooltip is built while Days renders rather than on hover,
+                        // the whole thread failed to render instead of just this row.
+                        const author = edit.by?.data
+                        const { firstName, lastName, color } = author?.attributes ?? {}
+                        const name = [firstName, lastName].filter(Boolean).join(' ') || 'Deleted user'
                         return (
                             <Edit
                                 key={edit.id}
-                                image={getAvatarURL(edit.by.data)}
+                                image={getAvatarURL(author)}
                                 color={color}
                                 name={name}
                                 date={edit.date}
-                                profileID={profileID}
+                                profileID={author?.id}
                                 text="edited"
                             />
                         )
                     })}
                     <Edit
                         image={getAvatarURL(profile)}
-                        color={profile.attributes.color}
-                        name={[profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')}
+                        color={profile?.attributes?.color}
+                        name={
+                            [profile?.attributes?.firstName, profile?.attributes?.lastName].filter(Boolean).join(' ') ||
+                            'Deleted user'
+                        }
                         date={created}
-                        profileID={profile.id}
+                        profileID={profile?.id}
                         text="posted"
                     />
                 </ul>
