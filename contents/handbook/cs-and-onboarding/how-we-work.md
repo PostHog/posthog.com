@@ -29,7 +29,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - **Who is paid on what:**
   - CSMs are paid on the NRR of their own book.
   - CSM Team Leads are paid on the combined NRR of their team's books.
-  - The Head of CS is paid on the combined NRR of all CSM books.
+  - The overall CS Lead is paid on the combined NRR of all CSM books.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog. If you exceed your target during that time, you get the higher amount.
 - Bonuses are paid at the end of January, April, July and October. We wait to see which invoices are paid in the first two weeks of the next quarter, then send you a breakdown of your result.
 
@@ -69,13 +69,13 @@ An account counts toward your NRR for a quarter if **all** of these are true:
 
 #### Grace period: accounts nobody has looked after
 
-- If you take on an account that wasn't in another PostHog person's book before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
+- If you take on an account that wasn't actively managed by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
 - We do this so you can help customers right-size their spend, rather than leaving them to waste money on a poor implementation.
 - From the next quarter onwards the account counts as normal. If it has churned or fallen below $20k ARR by then, work with your Team Lead to get it removed before the grace quarter ends.
 
 #### Taking over an account from someone else
 
-- If you inherit an account from another CSM, a TAE, a TAM or an Onboarding Specialist who was actively working it, it counts toward your NRR from the quarter you take it on (subject to the one-month rule above).
+- If you inherit an account from another CSM, a TAE or a TAM who was actively working it within the previous 90 days, it counts toward your NRR from the quarter you take it on (subject to the one-month rule above).
 
 #### Exception: accounts at risk of churn
 
@@ -90,7 +90,7 @@ These never count toward CSM NRR:
 - Accounts in the YC program, including accounts that have received YC credits.
 - Accounts that churned or were recorded as churned in a previous quarter.
 - Accounts in a grace period, or approved as an at-risk exception, for the quarter they apply to.
-- Manual exclusions approved by Simon or Ben B. These are recorded in the NRR exclusions sheet so there's a record of every one.
+- Manual exclusions approved by Simon or Ben B. These are recorded in the [NRR exclusions sheet](https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975) so there's a record of every one.
 
 ## Working with engineering teams
 
