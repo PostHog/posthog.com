@@ -4805,6 +4805,13 @@ export const docsMenu = {
                     name: 'Channels and campaigns',
                 },
                 {
+                    name: 'Marketing attribution',
+                    url: '/docs/web-analytics/marketing-attribution',
+                    icon: 'IconFunnels',
+                    color: 'green',
+                    featured: true,
+                },
+                {
                     name: 'Channel type',
                     url: '/docs/data/channel-type',
                     icon: 'IconMegaphone',
