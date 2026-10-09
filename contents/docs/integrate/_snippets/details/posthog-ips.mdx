@@ -1,15 +1,17 @@
 import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
 <details>
-  <summary>Add IPs to Firewall/WAF allowlists (recommended)</summary>
+  <summary>Unblock PostHog in your firewall or WAF (recommended)</summary>
 
-  For certain features like [heatmaps](/docs/toolbar/heatmaps), your Web Application Firewall (WAF) may be blocking PostHog's requests to your site. Add these IP addresses to your WAF allowlist or rules to let PostHog access your site.
+  Your Web Application Firewall (WAF) can block the requests that PostHog makes to your site.
+
+  For [heatmaps](/docs/toolbar/heatmaps), use the screenshot cookie. PostHog renders heatmap screenshots on a shared browser fleet with many rotating addresses, so an IP allowlist does not work for them. Instead, your project sends a secret `__ph_heatmap_render` cookie that your bot protection rule can match. See [bot protection and firewalls](/docs/toolbar/heatmaps#bot-protection-and-firewalls).
+
+  For other PostHog services, add these IP addresses to your WAF allowlist or rules:
 
   <PostHogIPsInline />
 
   These are public, stable IPs used by PostHog services.
-
-  PostHog captures heatmap screenshots using [Browserless](https://www.browserless.io), which has its own IP addresses. Browserless [publishes the current list here](https://docs.browserless.io/baas/troubleshooting/whitelisting-ips).
 
   An allowlist does not help when your app has a private address. For apps on an internal network, see [internal and intranet applications](/docs/session-replay/troubleshooting#internal-and-intranet-applications).
 
