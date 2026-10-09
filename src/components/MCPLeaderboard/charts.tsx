@@ -1,87 +1,44 @@
-import React, { useMemo } from 'react'
-import { Line } from 'react-chartjs-2'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
-    Chart,
-    CategoryScale,
-    Filler,
-    Legend,
-    LinearScale,
-    LineElement,
-    PointElement,
-    Tooltip,
-    ChartOptions,
-} from 'chart.js'
+    BarChart,
+    BarChartConfig,
+    ChartTheme,
+    DEFAULT_CHART_COLORS,
+    DefaultTooltip,
+    Series as ChartSeries,
+    TimeSeriesLineChart,
+    TimeSeriesLineChartConfig,
+    TooltipContext,
+} from '@posthog/quill-charts'
 import Link from 'components/Link'
-import { Series, Share, Theme, formatDay, formatPct } from './data'
+import { Series, Share, Theme, formatPct } from './data'
 
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
+// Every series has its own color, so `colors` is only the library's fallback.
+const CHART_THEMES: Record<Theme, ChartTheme> = {
+    light: {
+        colors: [...DEFAULT_CHART_COLORS],
+        axisColor: 'rgba(35, 37, 29, 0.7)',
+        gridColor: 'rgba(35, 37, 29, 0.1)',
+    },
+    dark: {
+        colors: [...DEFAULT_CHART_COLORS],
+        axisColor: 'rgba(238, 239, 233, 0.7)',
+        gridColor: 'rgba(238, 239, 233, 0.12)',
+    },
+}
 
-const axisColors = (theme: Theme) =>
-    theme === 'dark'
-        ? { text: 'rgba(238, 239, 233, 0.7)', grid: 'rgba(238, 239, 233, 0.12)' }
-        : { text: 'rgba(35, 37, 29, 0.7)', grid: 'rgba(35, 37, 29, 0.1)' }
-
-// Y-axis formats by name, so a chart's options only change when its theme or format does.
 const Y_FORMATS = {
     share: (value: number) => `${Math.round(value)}%`,
     rate: (value: number) => `${value.toFixed(1)}%`,
-    multiple: (value: number) => `${(value / 100).toFixed(1)}x`,
     seconds: (value: number) => `${(value / 1000).toFixed(1)}s`,
 }
 
-function chartOptions(
-    theme: Theme,
-    format: keyof typeof Y_FORMATS,
-    stacked: boolean,
-    legend: boolean
-): ChartOptions<'line'> {
-    const colors = axisColors(theme)
-    const formatY = Y_FORMATS[format]
-    return {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-            legend: {
-                display: legend,
-                position: 'bottom',
-                labels: {
-                    color: colors.text,
-                    boxWidth: 10,
-                    boxHeight: 10,
-                    font: { size: 11 },
-                    // The series color, filled and outlined, so the box matches its band.
-                    generateLabels: (chart) =>
-                        Chart.defaults.plugins.legend.labels
-                            .generateLabels(chart)
-                            .map((label) => ({ ...label, strokeStyle: label.fillStyle })),
-                },
-            },
-            tooltip: {
-                // Series order (the legend order) on every hover, so a name never moves between periods.
-                itemSort: (a, b) => a.datasetIndex - b.datasetIndex,
-                callbacks: {
-                    label: (item) => `${item.dataset.label}: ${formatY(item.parsed.y ?? 0)}`,
-                    // The series color, same as the legend.
-                    labelColor: (item) => ({
-                        borderColor: item.dataset.backgroundColor as string,
-                        backgroundColor: item.dataset.backgroundColor as string,
-                    }),
-                },
-            },
-        },
-        scales: {
-            x: { ticks: { color: colors.text, font: { size: 11 } }, grid: { display: false } },
-            y: {
-                beginAtZero: true,
-                stacked,
-                max: stacked ? 100 : undefined,
-                ticks: { color: colors.text, font: { size: 11 }, callback: (value) => formatY(Number(value)) },
-                grid: { color: colors.grid },
-            },
-        },
-    }
+// ponytail: quill-charts 0.3.0-beta.30 reads `document` while it renders, which breaks the Gatsby build, so the
+// charts render in the browser only. Remove this when a published version guards that read.
+const useIsClient = (): boolean => {
+    const [isClient, setIsClient] = useState(false)
+    useEffect(() => setIsClient(true), [])
+    return isClient
 }
 
 // A line chart, or with `stacked` a 100% stacked area where each period's series add up to 100. Stacked
@@ -103,41 +60,43 @@ export function LineChart({
     height?: number
     legend?: boolean
 }): JSX.Element {
-    const options = useMemo(() => chartOptions(theme, format, stacked, legend), [theme, format, stacked, legend])
-    const data = useMemo(() => {
+    const isClient = useIsClient()
+    const config = useMemo((): TimeSeriesLineChartConfig => {
+        const formatY = Y_FORMATS[format]
+        return {
+            xAxis: { timezone: 'UTC' },
+            // A percent stack labels its own 0-100% axis.
+            yAxis: stacked ? undefined : { tickFormatter: formatY },
+            percentStackView: stacked,
+            showGrid: true,
+            legend: { show: legend },
+            // A percent stack gives tooltip values as 0-1 fractions.
+            tooltip: { valueFormatter: stacked ? (value: number) => formatPct(value * 100) : formatY },
+        }
+    }, [format, stacked, legend])
+    const { labels, chartSeries } = useMemo(() => {
         // In a stacked share chart, a period where every series is zero has no data. The chart starts at
         // the first period with data, and a later empty period shows as a gap instead of 0%.
         const empty = periods.map((_, i) => stacked && series.every((s) => !s.data[i]))
         const start = Math.max(0, empty.indexOf(false))
         return {
-            labels: periods.slice(start).map(formatDay),
-            datasets: series.map((s) =>
-                stacked
-                    ? {
-                          label: s.label,
-                          data: s.data.slice(start).map((value, i) => (empty[start + i] ? null : value)),
-                          borderColor: s.color,
-                          backgroundColor: s.color,
-                          borderWidth: 1,
-                          pointRadius: 0,
-                          fill: true,
-                          stack: 'share',
-                      }
-                    : {
-                          label: s.label,
-                          data: s.data.slice(start),
-                          borderColor: s.color,
-                          backgroundColor: s.color,
-                          borderWidth: 2,
-                          pointRadius: 2,
-                          tension: 0.25,
-                      }
+            labels: periods.slice(start),
+            chartSeries: series.map(
+                (s): ChartSeries => ({
+                    key: s.label,
+                    label: s.label,
+                    color: s.color,
+                    data: s.data.slice(start).map((value, i) => (value === null || empty[start + i] ? NaN : value)),
+                    fill: stacked ? { opacity: 1 } : undefined,
+                })
             ),
         }
     }, [periods, series, stacked])
     return (
-        <div style={{ height }}>
-            <Line options={options} data={data} />
+        <div className="flex flex-col" style={{ height }}>
+            {isClient && (
+                <TimeSeriesLineChart labels={labels} series={chartSeries} theme={CHART_THEMES[theme]} config={config} />
+            )}
         </div>
     )
 }
@@ -198,20 +157,56 @@ export function ShareBars({
     )
 }
 
+// One 100% bar, set up like quill's `ProportionBar`, which the published package does not have yet.
+const SPLIT_BAR_CONFIG: BarChartConfig = {
+    barLayout: 'percent',
+    axisOrientation: 'horizontal',
+    hideXAxis: true,
+    hideYAxis: true,
+    showGrid: false,
+    showAxisLines: false,
+    showTickMarks: false,
+    showCrosshair: false,
+    margins: { top: 0, right: 0, bottom: 0, left: 0 },
+    barCornerRadius: 2,
+    bars: { bandPadding: 0, minBandSize: 0, roundStackEnds: true },
+}
+const SPLIT_BAR_LABELS = ['share']
+
+// Only the hovered segment. A percent layout gives each value as a 0-1 fraction.
+const splitBarTooltip = (ctx: TooltipContext): React.ReactNode => {
+    const hovered = ctx.seriesData.filter((entry) => entry.series.key === ctx.hoveredSeriesKey)
+    return hovered.length ? (
+        <DefaultTooltip
+            {...ctx}
+            seriesData={hovered}
+            showHeader={false}
+            valueFormatter={(value) => formatPct(value * 100)}
+        />
+    ) : null
+}
+
 // One 100% bar split into segments, with an inline legend.
-export function SplitBar({ items, caption }: { items: Share[]; caption?: React.ReactNode }): JSX.Element {
+export function SplitBar({ items, theme }: { items: Share[]; theme: Theme }): JSX.Element {
+    const isClient = useIsClient()
     const visible = items.filter((item) => item.value >= 0.05)
     return (
         <div>
-            <div className="flex h-4 w-full overflow-hidden rounded-sm bg-accent">
-                {visible.map((item) => (
-                    <span
-                        key={item.label}
-                        title={`${item.label}: ${formatPct(item.value)}`}
-                        className="h-full"
-                        style={{ width: `${item.value}%`, backgroundColor: item.color }}
+            <div className="relative flex flex-col h-4">
+                {isClient && (
+                    <BarChart
+                        labels={SPLIT_BAR_LABELS}
+                        series={visible.map((item) => ({
+                            key: item.label,
+                            label: item.label,
+                            color: item.color,
+                            data: [item.value],
+                        }))}
+                        theme={CHART_THEMES[theme]}
+                        config={SPLIT_BAR_CONFIG}
+                        tooltip={splitBarTooltip}
                     />
-                ))}
+                )}
             </div>
             <ul className="list-none m-0 p-0 mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-secondary">
                 {visible.map((item) => (
@@ -221,7 +216,6 @@ export function SplitBar({ items, caption }: { items: Share[]; caption?: React.R
                     </li>
                 ))}
             </ul>
-            {caption && <p className="text-xs text-muted m-0 mt-1">{caption}</p>}
         </div>
     )
 }
