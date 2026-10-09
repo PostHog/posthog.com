@@ -303,7 +303,8 @@ function VisitorWelcome({ visible }: { visible: boolean }) {
     )
 }
 
-export default function GettingStarted({ visible }: { visible: boolean }): JSX.Element {
-    const { user } = useUser()
-    return user ? <MemberChecklist visible={visible} /> : <VisitorWelcome visible={visible} />
+export default function GettingStarted({ visible }: { visible: boolean }): JSX.Element | null {
+    const { user, isValidating } = useUser()
+    if (user) return <MemberChecklist visible={visible} />
+    return isValidating ? null : <VisitorWelcome visible={visible} />
 }
