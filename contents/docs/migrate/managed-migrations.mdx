@@ -49,12 +49,19 @@ Each direct import job supports a maximum date range of one year. To migrate dat
 
 ### Credentials
 
-Each source type requires different credentials:
+Each source type requires different credentials.
 
-| Source        | Required credentials   | Where to find them                                                                                                                                         |
-| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Mixpanel**  | Project secret         | **Project settings** > **Access keys** in Mixpanel. See [Mixpanel's docs](https://docs.mixpanel.com/docs/orgs-and-projects/managing-projects#access-keys). |
-| **Amplitude** | API key and Secret key | Both are required for Amplitude's Export API, which uses Basic auth.                                                                                       |
+#### Mixpanel
+
+Mixpanel supports two authentication methods. Select one using the **Authentication** toggle when setting up a Mixpanel import.
+
+- **Service account** – Requires a service account username, secret, and your Mixpanel project ID. Create a service account under **Organization settings** > **Service accounts** in Mixpanel and give it access to the project you're importing. Find your project ID under **Project settings** > **Project Details**. See [Mixpanel's service account docs](https://docs.mixpanel.com/reference/service-accounts).
+
+- **Project secret** – Requires the project secret only. Find it under **Project settings** > **Access keys** in Mixpanel. See [Mixpanel's docs](https://docs.mixpanel.com/docs/orgs-and-projects/managing-projects#access-keys). Newer Mixpanel projects may not have a project secret – use a service account instead.
+
+#### Amplitude
+
+Amplitude requires an API key and secret key. Both are needed for Amplitude's Export API, which uses Basic auth.
 
 When setting up an Amplitude direct import, you can configure the following options:
 

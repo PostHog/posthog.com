@@ -12,9 +12,6 @@ sourceId: Docusign
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DocuSign connector syncs your e-signature data — envelopes, recipients, documents, templates, users, and folders — into the PostHog data warehouse. This lets you analyze contract and sales cycle activity alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: ActiveCampaign
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The ActiveCampaign connector syncs your CRM and marketing data – contacts, accounts, deals, campaigns, lists, automations, and more – into PostHog.
 

@@ -238,11 +238,11 @@ pages declare.
 
 ### Twig in Product Analytics
 
-The Product Analytics Learn hub previews three paths: an agent prompt, the story reader, and
-the external Twig demo. Its sidebar uses section anchors; chapters belong to the standalone
-Pocket Guide reader, not the hub. The story introduction leads directly into the engineers'
-first question. Bookshelf covers open the Product Analytics reader directly. Its shelf navigation
-returns to All pocket guides, while a separate Learn link opens the learning hub.
+The Product Analytics Learn hub previews three paths: an agent prompt, the embedded story, and
+the external Twig demo. Its landing page remains a choice page; story chapters render on child
+routes under `/docs/product-analytics/learn`, with the Learn tab active and the shared product
+sidebar providing chapter navigation. Legacy standalone Pocket Guide URLs redirect to those Learn
+routes, and bookshelf covers open the embedded introduction directly.
 
 The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
@@ -256,6 +256,24 @@ The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView
 `ProfileMenu` from the same package. PostHog.com owns the example identifiers, sessions, and
 person-linking state around those Twig views. The package does not call `identify`, `reset`, or
 capture events.
+
+The Trends and funnels chapter uses `ProductAnalyticsTrendsFunnelsExhibits.tsx` for three small
+figures. `FilterUsersTrendFigure` reduces Week 2's 19 filter events to eight people beside a
+compact Trends view based on the PostHog insight controls. Edgar's original Forest event, with
+its filter, identity, and session fields, is available as a drill-down. The compact time plot compares
+five and eight unique users; Edgar's repeated selections still count as one person
+in the second week. The drill-down has a caption and keeps its back control inside the Inspector header.
+These panels remain side by side; narrow windows show a sideways-scroll cue and snap to each panel.
+`BookingStepsFigure` reuses
+Twig's `StayCardContent` and shared primary button styling. Once the figure is mostly visible, it waits
+three seconds and plays a confirmed request followed by a clearly labeled, separate failed request.
+The sequence plays once, with event arrivals in the Inspector. Selecting Book stay pauses
+autoplay and switches between the two outcomes; reduced motion starts on the confirmed outcome.
+The booking response is simulated locally; it never submits a booking or captures events. `BookingFunnelFigure` pairs the
+10-to-six person funnel result with a shared Inspector that opens one of the four drop-offs and
+matches its `booking_started` event to a failed simulated response by `request_id`. These are guide-owned teaching fixtures, not
+new Twig instrumentation or a live PostHog query. The failed fixture uses `user_409` and
+`req-204`; Edgar's confirmed fixture uses `user_812` and `req-203`.
 
 Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
 and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,

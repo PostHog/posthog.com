@@ -12,9 +12,6 @@ sourceId: Gitguardian
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The [GitGuardian](https://www.gitguardian.com) connector syncs your secret incidents, their occurrences, monitored sources, honeytokens, members, and teams into PostHog, so you can track exposure volume, remediation time, and per-repository risk alongside your other engineering data.
 

@@ -20,6 +20,7 @@ import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
+import Stickers from 'components/Stickers/Index'
 
 interface DocsMenuItem {
     name: string
@@ -356,7 +357,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item' as const,
                     label: 'Forums',
-                    link: '/questions',
+                    link: '/forum',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
                 { type: 'separator' },
@@ -538,9 +539,9 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'DeskHog',
-                    link: '/deskhog',
-                    icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
                 {
                     type: 'item',
@@ -829,6 +830,12 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
     ],
     notGames: [
         {
+            label: 'DeskHog',
+            link: '/deskhog',
+            iconName: null,
+            customIcon: <Icons.IconDeskHog className="text-seagreen" />,
+        },
+        {
             label: 'PostHog FM',
             link: '/fm',
             iconName: null,
@@ -930,7 +937,7 @@ export function useMenuSelectOptions() {
             items: [
                 { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
                 { value: 'merch', label: 'Merch' },
-                { value: 'deskhog', label: 'DeskHog' },
+                { value: 'mcp/leaderboard', label: 'MCP leaderboard' },
                 {
                     value: 'trash',
                     label: 'Trash',

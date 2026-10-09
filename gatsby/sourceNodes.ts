@@ -294,6 +294,67 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // MCP usage shares for /mcp/leaderboard. The endpoints return percentages only, never raw counts,
+    // because everything sourced here ships in public page data.
+    const sourceMCPLeaderboard = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+        }
+        const fetchEndpoint = async (name: string) => {
+            const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
+            // OFFSET is not allowed with a personal API key, so fetch every row in one request.
+            const res = await fetch(`${endpointUrl}/run`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ limit: 50000 }),
+            })
+            if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
+            const body: any = await res.json()
+            if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
+            const columns: string[] = body.columns || []
+            const rows = (body.results || [])
+                .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
+                .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
+            return rows
+        }
+
+        // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
+        // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
+        const historyFacets = new Set(['total', 'model_vendor'])
+
+        try {
+            const results = await Promise.all(
+                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
+            )
+            const rows = results.flat()
+            const latestWeek = rows
+                .filter((row: any) => row.facet === 'total')
+                .reduce((latest: string, row: any) => (row.week > latest ? row.week : latest), '')
+            const data = {
+                rows: rows.filter(
+                    (row: any) =>
+                        historyFacets.has(row.facet) || row.facet.endsWith('_daily') || row.week === latestWeek
+                ),
+                fetchedAt: new Date().toISOString(),
+            }
+            createNode({
+                id: createNodeId('mcp-leaderboard'),
+                parent: null,
+                children: [],
+                internal: {
+                    type: 'McpLeaderboard',
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            })
+        } catch (err) {
+            console.error('Error fetching the MCP leaderboard endpoints:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -495,54 +556,48 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         }
 
-        const statsFor = async (topicId: number | null) => {
-            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
-            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+        const statsFor = async (forumTag: string | null) => {
+            const questionTagFilter = forumTag
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: 'questions' } } } }
+                : {}
+            const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
             const [questions, resolved, replies, helpful] = await Promise.all([
-                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', { ...notArchived, ...questionTagFilter }),
                 fetchTotal('questions', {
                     ...notArchived,
-                    ...questionTopicFilter,
+                    ...questionTagFilter,
                     resolved: { $eq: true },
                 }),
-                fetchTotal('replies', { ...replyTopicFilter }),
-                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+                fetchTotal('replies', { ...replyTagFilter }),
+                fetchTotal('replies', { ...replyTagFilter, helpful: { $eq: true } }),
             ])
 
             return { questions, resolved, replies, helpful }
         }
 
-        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        let forumTags: string[] = []
         try {
-            const topicsQuery = qs.stringify(
+            const tagsQuery = qs.stringify(
                 {
-                    fields: ['label', 'slug'],
-                    pagination: { pageSize: 200 },
+                    filters: { topic: { slug: { $eq: 'questions' } } },
+                    fields: ['slug'],
+                    pagination: { pageSize: 100 },
                 },
                 { encodeValuesOnly: true }
             )
-            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
-            topics = topicsRes?.data ?? []
+            const tagsRes = (await fetch(`${host}/api/forum-tags?${tagsQuery}`).then((r) => r.json())) as any
+            forumTags = (tagsRes?.data ?? []).map((tag: any) => tag.attributes?.slug).filter(Boolean)
         } catch (error) {
-            console.warn('Failed to fetch topics for community stats:', error)
+            console.warn('Failed to fetch forum tags for community stats:', error)
         }
 
-        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
-            { topicId: null, topicSlug: null, topicLabel: null },
-            ...topics.map((t) => ({
-                topicId: t.id,
-                topicSlug: t.attributes?.slug ?? null,
-                topicLabel: t.attributes?.label ?? null,
-            })),
-        ]
-
         await Promise.all(
-            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
-                const counts = await statsFor(topicId)
-                const data = { topicId, topicSlug, topicLabel, ...counts }
+            [null, ...forumTags].map(async (forumTag) => {
+                const counts = await statsFor(forumTag)
+                const data = { forumTag, ...counts }
                 createNode({
-                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    id: createNodeId(`community-stats-${forumTag ?? 'site'}`),
                     parent: null,
                     children: [],
                     internal: {
@@ -892,7 +947,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const sourceG2Reviews = async () => {
         if (!process.env.G2_API_KEY) return
-        await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        try {
+            await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        } catch (err) {
+            console.warn('Failed to source G2 reviews:', err)
+        }
     }
 
     const sourceCloudinaryImages = async () => {
@@ -1284,7 +1343,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,
-                    beta: config.betaSource || false,
+                    releaseStatus: config.releaseStatus || null,
+                    beta: config.betaSource || config.releaseStatus === 'beta' || false,
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],
@@ -1505,6 +1565,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceChangelogVideos(),
         sourcePostCategories(),
         sourceCommunityStats(),
+        sourceMCPLeaderboard(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),

@@ -24,7 +24,8 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
-import Inbox from 'components/Inbox'
+import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
+import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
@@ -35,7 +36,8 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
-import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
+import FrostedBackdrop from 'components/FrostedBackdrop'
+import { MOTION_LAYER, WINDOW_BG, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
 
 import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
@@ -63,8 +65,11 @@ const Router = (props) => {
     const { appWindow } = useWindow()
     const { children, path } = props
 
-    if (/^\/questions/.test(path)) {
-        return <Inbox {...props} />
+    if (/^\/questions(\/|$)/.test(path)) {
+        return <LegacyQuestionsRedirect path={path} />
+    }
+    if (/^\/forum(\/|$)/.test(path)) {
+        return <Forum {...props} />
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
@@ -151,6 +156,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         menu: appMenu,
         taskbarRef,
         closeWindow,
+        isMobile,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -672,7 +678,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 {item.appSettings?.size?.fixed && (
                     <div
                         onClick={handleClose}
-                        className={`fixed inset-0 z-50 bg-black/50 print:hidden ${
+                        className={`fixed inset-0 z-50 bg-black/50 pointer-events-auto print:hidden ${
                             closing ? 'animate-overlay-fade-out' : !skipsOpenAnimation ? 'animate-overlay-fade-in' : ''
                         }`}
                     />
@@ -701,8 +707,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     data-windowed={item.windowed || undefined}
                     data-snapped={item.snapped || undefined}
                     data-focused={focusedWindow === item || undefined}
-                    data-scheme="tertiary"
-                    className={`@container relative overflow-hidden ${
+                    data-scheme={WINDOW_SCHEME}
+                    className={`@container relative overflow-hidden pointer-events-auto ${
                         item.appSettings?.size?.fixed
                             ? closing
                                 ? 'animate-window-slide-up'
@@ -723,7 +729,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
+                    } !select-auto flex flex-col border-primary ${isMobile ? '' : WINDOW_BG} ${
                         isCompositorActive ? MOTION_LAYER : ''
                     } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
                         item.expanded ? 'shadow-none' : 'shadow-md'
@@ -747,7 +753,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    <div className={`print:hidden ${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                    {isMobile && <FrostedBackdrop tintClassName={WINDOW_TINT} />}
+                    <div
+                        className={`relative print:hidden ${
+                            hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
+                        }`}
+                    >
                         {hasToolbar && (
                             <>
                                 {!hideTitle && (
@@ -813,7 +824,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     <div
                         ref={contentRef}
                         data-app="AppWindowContent"
-                        className={`size-full flex-grow ${
+                        // With a toolbar above it, the content must be able to shrink below its content's minimum
+                        // height, or it overflows the bottom of the window by the toolbar's height.
+                        className={`relative isolate size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
                             chrome
                                 ? `${
                                       // A modal's auto height makes percentage heights inside it resolve to

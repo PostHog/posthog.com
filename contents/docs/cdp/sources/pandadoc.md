@@ -9,12 +9,6 @@ availability:
 sourceId: PandaDoc
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The PandaDoc connector syncs your PandaDoc data – documents, templates, forms, contacts, and more – into the PostHog data warehouse.
 
 ## Adding a data source

@@ -17,7 +17,7 @@ For mechanics, see [Contract rules](/handbook/growth/sales/contract-rules) and [
 - **Customers on track to use up all their credits early:** 3 months before they are due to run out of credits.
   -  The credit bot will ping you in Slack if a customer is set to run out of credits before their renewal date, but you should also keep on top of their credit burn proactively as their CSM. 
 - **Other customers:** 3 months before the credit expiry date.
-  - At the 3-month mark, the customer moves into the `Upcoming renewal` segment, a Vitally task is assigned to you, and Slack pings you.
+  - At the 3-month mark, the renewal workflow pings you in #sales-alerts.
 
 Customers who fit into either of the above buckets will also appear on the <PrivateLink url="https://us.posthog.com/project/2/insights/OXGSYc9k">CSM Managed — credits expiring in next 3 months</PrivateLink> insight.
 
@@ -48,7 +48,7 @@ Check the order form dates against <PrivateLink url="https://billing.posthog.com
 2. Add a comment on the opportunity that records both dates, the confirmed date, and the reason they differ. The next person on the account must not have to repeat the investigation.
 3. Update the renewal opportunity dates to the confirmed dates, including the close date and the contract start date.
 
-Do this as soon as you find the mismatch. The renewal dates drive the `Upcoming renewal` segment, the Vitally task, and the Slack pings, so a stale date makes the renewal start late.
+Do this as soon as you find the mismatch. The renewal dates drive the ping in #sales-alerts, so a stale date makes the renewal start late.
 
 ## Unique renewal cases
 

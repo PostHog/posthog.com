@@ -103,7 +103,7 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - Engineers at PostHog [talk to customers](/handbook/making-users-happy#engineers-talk-to-users-and-provide-support). It's much better to bring engineers onto calls to speak to large customer to talk to them directly than just do the call yourself and copy and paste notes back and forth. This is especially useful if a) the team was already considering building the feature at some point, b) it's an interesting new use case, or c) the customer is really unhappy for valid reasons and could churn.
 - Provide as much internal context as you can. If a customer sends a one-liner in Slack, don't just copy and paste into a product team's channel - find out as much as you reasonably can first, ask clarifying questions up front etc. Otherwise the relevant team will just ask you to do this anyway.
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
-- For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those in Vitally.
+- For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those on the Feature requests tab in Customer analytics.
 
 **Inviting a product engineer into a customer conversation**
 
@@ -141,11 +141,12 @@ During extended periods away from work (generally more than two weeks) it's impo
 
 The expectation is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but not attend routine meetings (eg. monthly check-ins) or pro-active work. For standing meetings in your absence customers should be notified that the meeting is cancelled but any questions can be asked through normal channels.
 
-For longer periods away, Dana may look to reassign some or all of your accounts.
+For longer periods away, your team lead may look to reassign some or all of your accounts.
 
 ## Tools we use
-**Gmail**
-We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details.
+
+**Gmail:**
+We use Gmail for email. Pick whichever client works best for you – some of the team prefer [Superhuman](https://superhuman.com/) or [Spark](https://sparkmailapp.com/), and others stick with the default Gmail web interface. To set up your email signature, copy the signature from someone else on the team (like Simon) and fill in your own details.
 
 **Calendly:**
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.

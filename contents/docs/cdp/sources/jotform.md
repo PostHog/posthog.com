@@ -9,14 +9,11 @@ availability:
 sourceId: Jotform
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<AlphaRelease />
-
-The Jotform connector syncs your forms and submissions into PostHog, so you can analyze your form responses alongside your product data.
+The Jotform connector syncs your forms, submissions, questions, reports, account usage, activity history, and labels into PostHog, so you can analyze your form data alongside your product data.
 
 ## Prerequisites
 

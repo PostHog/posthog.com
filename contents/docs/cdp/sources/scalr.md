@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Scalr connector syncs your Terraform and OpenTofu infrastructure data – environments, workspaces, and runs – into PostHog, so you can analyze infrastructure-as-code activity alongside your product data.
 
-> **Note:** This source is in **alpha**. If you run into issues, please [let us know](https://app.posthog.com/home#supportModal).
-
 ## Prerequisites
 
 You need a [Scalr](https://www.scalr.com/) account with API access. Create a service account token in Scalr with read access to environments, workspaces, and runs.

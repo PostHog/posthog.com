@@ -12,9 +12,6 @@ sourceId: GainsightCs
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Gainsight CS connector syncs your customer success data into the PostHog Data warehouse: companies, people, relationships, timeline activities, CTAs, and success plans. You can then join account health and CSM activity to how those accounts actually use your product.
 

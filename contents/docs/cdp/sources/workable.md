@@ -12,9 +12,6 @@ sourceId: Workable
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Workable connector syncs your recruiting data into the PostHog Data warehouse, so you can analyze your jobs and candidates alongside your product data.
 
