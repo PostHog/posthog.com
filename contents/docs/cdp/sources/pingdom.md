@@ -11,12 +11,6 @@ sourceId: Pingdom
 
 The Pingdom connector syncs your uptime monitoring data into PostHog, including checks, probes, maintenance windows, and alerts.
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in alpha. Endpoint behavior was verified against Pingdom's public API 3.1 documentation but hasn't been tested against every edge case in production. If you run into issues, please let us know.
-
-</CalloutBox>
-
 ## Creating a Pingdom API token
 
 Pingdom uses Bearer token authentication. A read-only token is sufficient for syncing data into PostHog.

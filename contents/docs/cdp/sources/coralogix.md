@@ -12,9 +12,6 @@ sourceId: Coralogix
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Coralogix connector syncs your logs and trace spans into the PostHog Data warehouse via the DataPrime query API, so you can analyze reliability, errors, and telemetry alongside your product data.
 

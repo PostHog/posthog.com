@@ -12,9 +12,6 @@ sourceId: StreamElements
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The StreamElements connector syncs your channel's tips, activity feed events, loyalty points leaderboards, store items and redemptions, chatbot commands and timers, and channel details into the PostHog Data warehouse, so you can analyze your stream's community and revenue alongside your product data.
 

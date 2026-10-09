@@ -20,7 +20,7 @@ Every PostHog account starts because someone had a problem (or they love hedgeho
  
 Your first job is to figure out what that use case is. Not what products they're paying for (that's a billing question), but what problem they're trying to solve (that's a relationship question). Start by seeing who the users are by their role/title and then how they're specifically using PostHog. The fastest path is generally just talking to the customer directly.
  
-The [use-case selling framework](/handbook/growth/use-case-selling) gives you the language for all of this. There are seven use cases documented:
+The [use-case selling framework](/handbook/growth/use-case-selling/use-case-selling) gives you the language for all of this. There are seven use cases documented:
  
 - [Product Intelligence](/handbook/growth/use-case-selling/product-intelligence)
 - [Release Engineering](/handbook/growth/use-case-selling/release-engineering)
@@ -150,7 +150,7 @@ Identify the primary use case. Run an implementation health check. Fix billing w
  
 ### Depth phase
  
-Expand within the primary use case. Add 1-2 products along the natural expansion path defined in the relevant [use-case playbook](/handbook/growth/use-case-selling). Get 5+ active users in PostHog from the first team. Identify potential champions on adjacent teams.
+Expand within the primary use case. Add 1-2 products along the natural expansion path defined in the relevant [use-case playbook](/handbook/growth/use-case-selling/use-case-selling). Get 5+ active users in PostHog from the first team. Identify potential champions on adjacent teams.
  
 ### Breadth phase
  

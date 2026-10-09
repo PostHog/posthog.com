@@ -12,9 +12,6 @@ sourceId: Speedcurve
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The SpeedCurve connector syncs your synthetic monitoring data into the PostHog data warehouse: sites, monitored URLs, test results, deployments, notes, and performance budgets. This lets you correlate web performance with product usage and ship speed.
 

@@ -12,9 +12,6 @@ sourceId: Breezometer
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The BreezoMeter connector syncs air-quality and pollen data for the locations you track into PostHog, so you can analyze environmental data alongside your product data. BreezoMeter is now part of Google Maps Platform, and this source uses its Air Quality API and Pollen API.
 

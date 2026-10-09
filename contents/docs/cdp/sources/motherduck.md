@@ -12,9 +12,6 @@ sourceId: Motherduck
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The MotherDuck connector links your MotherDuck tables to PostHog, so you can query your DuckDB data alongside your product data.
 

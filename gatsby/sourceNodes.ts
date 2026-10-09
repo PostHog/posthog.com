@@ -321,9 +321,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             return rows
         }
 
-        // The page charts these facets over time. It shows every other facet for the latest week only,
-        // so older weeks of those facets would only add weight to the page data.
-        const historyFacets = new Set(['total', 'client', 'model_vendor', 'protocol_version'])
+        // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
+        // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
+        const historyFacets = new Set(['total', 'model_vendor'])
 
         try {
             const results = await Promise.all(
@@ -1343,7 +1343,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,
-                    beta: config.betaSource || false,
+                    releaseStatus: config.releaseStatus || null,
+                    beta: config.betaSource || config.releaseStatus === 'beta' || false,
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],

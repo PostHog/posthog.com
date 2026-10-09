@@ -12,9 +12,6 @@ sourceId: Descope
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Descope connector syncs your identity and access management data – users, audit trail events, tenants, roles, and access keys – into the PostHog data warehouse, so you can analyze authentication patterns, user management, and security events alongside your product data.
 

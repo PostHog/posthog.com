@@ -9,12 +9,6 @@ availability:
 sourceId: Dovetail
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Dovetail connector can link projects, data, docs, highlights, tags, contacts, users, and doc comments from your [Dovetail](https://dovetail.com/) user research repository to PostHog.
 
 To link Dovetail:

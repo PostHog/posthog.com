@@ -1,5 +1,5 @@
 import React from 'react'
-import { HedgehogCursorHog, HedgehogEinstein } from '@posthog/brand/hoggies'
+import { HedgehogCursor, HedgehogEinstein } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 import '@posthog/twig-components/lab.css'
 import { IconBook, IconPlay, IconTerminal } from '@posthog/icons'
@@ -189,7 +189,7 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                                 </div>
                             </div>
                         </div>
-                        <HedgehogCursorHog
+                        <HedgehogCursor
                             className="pointer-events-none absolute bottom-0 right-0 h-auto w-36 [&_path[d='M0_0h1000v1000H0z']]:hidden @2xl/reader-content:w-40"
                             aria-hidden="true"
                         />

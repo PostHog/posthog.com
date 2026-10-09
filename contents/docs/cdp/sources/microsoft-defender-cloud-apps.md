@@ -9,12 +9,6 @@ availability:
 sourceId: MicrosoftDefenderCloudApps
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Microsoft Defender for Cloud Apps connector syncs security alerts, file metadata, and entity data into PostHog's data warehouse. It pulls data from the [Defender for Cloud Apps REST API v1](https://learn.microsoft.com/en-us/defender-cloud-apps/api-introduction) using a portal API token.
 
 ## Adding a data source

@@ -12,9 +12,6 @@ sourceId: Leexi
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Leexi connector pulls your Leexi conversation intelligence data — calls with transcripts and AI summaries, call notes, meeting events, users, and teams — into the PostHog data warehouse.
 

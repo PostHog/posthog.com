@@ -12,9 +12,6 @@ sourceId: Linode
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Sync your Linode (Akamai Connected Cloud) account data — infrastructure inventory, billing history, and audit events — into the PostHog data warehouse to join it with your product data.
 

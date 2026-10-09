@@ -12,9 +12,6 @@ sourceId: Bettermode
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Bettermode (formerly Tribe) connector syncs your community data into the PostHog Data Warehouse, so you can join community activity (members, spaces, posts, replies, and moderation items) with your product, CRM, and support data.
 

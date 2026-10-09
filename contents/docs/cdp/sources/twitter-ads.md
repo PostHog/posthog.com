@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: TwitterAds
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The X Ads connector syncs one X ad account's campaigns, line items, promoted posts and daily performance stats into PostHog. Use it to put ad spend next to the signups and revenue it produced, instead of reading the two in separate tools.
 

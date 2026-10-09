@@ -12,9 +12,6 @@ sourceId: Statuscake
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The StatusCake connector syncs your uptime, SSL, pagespeed, and heartbeat monitoring data into PostHog – including raw check results, up/down periods, and alerts – so you can compute availability SLAs and track performance regressions alongside your product data.
 

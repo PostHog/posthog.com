@@ -3,9 +3,9 @@ title: Projects
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
+  free: partial
+  selfServe: partial
+  enterprise: full
 ---
 
 A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
@@ -19,6 +19,7 @@ To switch between projects, navigate to project settings, or create new projects
 ## How to organize projects
 
 For most companies, we recommend creating **three projects**:
+
 1. Local Development - when you're running the app on your own device
 2. Staging - when you're running your app on a staging server
 3. Production - for all your production data (e.g. your live website/app)
@@ -28,6 +29,22 @@ This way you can test out analytics in development and staging environments, whi
 We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
 
 You can still query data for your app or marketing website separately if needed. A way to do this is [filtering](/docs/product-analytics/trends/filters) by the `host` property, for example setting `host` to `posthog.com`. Alternatively, you could set [super properties](/docs/libraries/js/usage#super-properties) and then filter by them.
+
+### Grouping projects
+
+If your organization has many projects across different products or services, you can assign each project to a group. Grouped projects appear together in the project switcher, making it easier to find the right environment.
+
+For example, you might create groups like "Marketing site" and "Main app", then assign the dev, staging, and production projects for each product to its group. Ungrouped projects appear under **Other projects** in the switcher.
+
+To set a project's group:
+
+1. Go to [**Settings**](https://app.posthog.com/settings/project#display-name) > **Project** > **Customization** > **Project details**
+2. Under **Tags**, enter a name in the **Project group** field
+3. Click **Save**
+
+You can select an existing group or type a new name. Each project can belong to only one group. Group names are case-insensitive and display in title case (e.g., "production apps" displays as "Production Apps").
+
+Only organization admins and owners can change project groups.
 
 ### Project settings inheritance
 
@@ -48,6 +65,7 @@ IP data capture can be configured at both the organization and project levels:
 Individual projects can override organization defaults to meet specific privacy requirements.
 
 It's best to use separate projects for:
+
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products
 - Internal websites and services

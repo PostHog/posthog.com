@@ -12,9 +12,6 @@ sourceId: AhaIdeas
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Aha! Ideas connector syncs your ideas portal data — ideas, votes, comments, submitters, organizations, themes, and portals — from [Aha!](https://www.aha.io/) into PostHog's data warehouse. Once synced, you can query and join this data alongside your product analytics, revenue data, and other warehouse sources.
 
