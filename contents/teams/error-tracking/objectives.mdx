@@ -1,49 +1,70 @@
-### Q3 2026 Objectives
+### Q4 2026 objectives
 
-### **Onboarding** - Setup & configuration - (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
-Error Tracking is only useful when it is configured correctly. We want the Wizard to become the guided setup path that makes onboarding simpler, faster, and harder to get wrong.
-**What we'll ship:**
-* Wizard-guided symbolset uploads for native SDKs
-* Wizard-guided symbolset uploads for mobile SDKs
-* Wizard-guided alerting setup
-* Wizard-guided assignment rules setup
-* Common suppression rules
-* Wizard-guided Error Tracking setup across supported platforms
+#### Objective 1: Agent experience – Make agents first-class users (Owner: <TeamMember name="Aleksander Błaszkiewicz" />)
 
-### **Native alerting** - Stateful notifications - (Driver: <TeamMember name="Catalin Irimie" />)
-Alerting should reflect the full issue lifecycle, not just fire-and-forget notifications. We want alerts that can update users as issues are created, spike, get analyzed, are fixed, or are resolved.
-**What we'll ship:**
-* Thread-like notifications when possible (Slack, Discord)
-* Natural language alert setup
-* Email notifications
+**Motivation:** Agents need a reliable way to set up Error Tracking, investigate issues, and retrieve the context required to diagnose them.
 
-### **Release management** - Codebase context - (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
-Error Tracking should connect runtime exceptions back to the code that caused them. We want to make it easier to find the original source file, understand when an error was introduced, and assign issues to the right code owners.
 **What we'll ship:**
-* Stable JavaScript chunk IDs to avoid unnecessary reuploads
-* Unified release, app name, and app version properties
-* Better GitHub integration to link stack frames to source code
-* Pull request and author attribution for newly introduced errors
-* Stretch: Source code context for stack frames from GitHub / GitLab
 
-### **Issue enrichment** - PostHog context - (Driver: <TeamMember name="Hugues Pouillot" />)
-Error Tracking is most powerful when it includes context from the rest of PostHog. We want to bring more product, user, log, and AI context into each issue so users and agents can debug faster.
-**What we'll ship:**
-* Signal reports attached to issues
-* Add error tracking measures on Experiments
-* Logs context on issues
-* AI Observability context on issues
+- Analyze production usage and improve the Wizard, MCP tools, and skills – <TeamMember name="Aleksander Błaszkiewicz" />
+- Build a dashboard for agent usage across the Wizard, MCP tools, and skills – <TeamMember name="Aleksander Błaszkiewicz" />
+- Highlight events with related Session Replay, traces, logs, and AI Observability context – <TeamMember name="Aleksander Błaszkiewicz" />
+- Add agent hints that surface diagnostic issues in tool calls – <TeamMember name="Aleksander Błaszkiewicz" />
 
-### **User interface** - Issue details & filtering - (Driver: <TeamMember name="Hugues Pouillot" />)
-The issue list and issue details pages should make triage and debugging easier. We want a clearer, more flexible interface that works well across screen sizes.
-**What we'll ship:**
-* A more extensible issue details layout that supports reports, tasks, and mobile views
-* Improved issue list filtering
+#### Objective 2: Grouping – Group once, correctly (Owner: <TeamMember name="Hugues Pouillot" />)
 
-### **SDK feature parity** - Cross-SDK consistency - (Driver: <TeamMember name="Catalin Irimie" />)
-Error Tracking capabilities should be consistent across SDKs. We want users to get reliable behavior for rate limiting, suppression rules, exception steps, source context, and remote config no matter which supported SDK they use.
+**Motivation:** Better grouping improves the signal-to-noise ratio. Each exception should join the correct issue without creating duplicate or overly broad groups.
+
 **What we'll ship:**
-* Error Tracking support for the Java SDK
-* Normalized frame and exception ordering
-* Source context for native SDKs
-* Stretch: Standardized rate limiting
+
+- Improve fingerprinting by using source context – <TeamMember name="Hugues Pouillot" />
+- Migrate the legacy fingerprinting algorithm to the new fingerprinting system – <TeamMember name="Hugues Pouillot" />
+- Add a post-embedding grouping step – <TeamMember name="Hugues Pouillot" />
+
+#### Objective 3: Make bills predictable (Owner: <TeamMember name="Cory Slater" />)
+
+**Motivation:** Customers should not receive unexpectedly high bills after exception-volume spikes.
+
+**What we'll ship:**
+
+- Complete the design for automatic rate limiting – <TeamMember name="Cory Slater" />
+- Define subscription pricing with the APM team – <TeamMember name="Cory Slater" />
+
+#### Objective 4: Alerting (Owner: <TeamMember name="Hugues Pouillot" />)
+
+**Motivation:** Error Tracking should proactively surface meaningful changes without creating noisy, event-by-event notifications. Aggregation-based alerts make changes easier to detect and act on.
+
+**What we'll ship:**
+
+- Build a subscription model for alerting and post-ingestion processing – <TeamMember name="Hugues Pouillot" />
+- Build pull-based alerting on PostHog Alerts – <TeamMember name="Hugues Pouillot" />
+
+#### Objective 5: Issue enrichment (Owner: <TeamMember name="James Gill" />)
+
+**Motivation:** Customers and agents need enough context to prioritize issues and investigate them.
+
+**What we'll ship:**
+
+- Add automatic issue assignment – <TeamMember name="James Gill" />
+- Order issues by severity – <TeamMember name="James Gill" />
+- Generate issue summaries – <TeamMember name="James Gill" />
+- Evaluate tags for organizing and prioritizing issues – <TeamMember name="James Gill" />
+
+#### Objective 6: Enterprise readiness (Owner: <TeamMember name="Hugues Pouillot" />)
+
+**Motivation:** Large customers need stronger integrations, repeatable configuration, and a clearer path from an Error Tracking issue to their existing engineering workflows.
+
+**What we'll ship:**
+
+- Improve integrations with Linear, Jira, GitHub, GitLab, incident.io, and PagerDuty – <TeamMember name="Hugues Pouillot" />
+- Add configuration as code – <TeamMember name="Hugues Pouillot" />
+
+#### Objective 7: Release context (Owner: <TeamMember name="Aleksander Błaszkiewicz" />)
+
+**Motivation:** Connecting runtime data to releases and source code enables customers and agents to understand when an issue started and investigate it proactively.
+
+**What we'll ship:**
+
+- Include release data on all PostHog events – <TeamMember name="Aleksander Błaszkiewicz" />
+- Index code repositories for background analysis – <TeamMember name="Aleksander Błaszkiewicz" />
+- Add a "Pending release" issue status that resolves issues for older releases and reopens them only when they occur in a new release – <TeamMember name="Aleksander Błaszkiewicz" />
