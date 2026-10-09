@@ -135,7 +135,6 @@ const FollowingFeed = () => {
 
 export default function Forum(props: any) {
     const view = getView(props)
-    const { user } = useUser()
     const { appWindow } = useWindow()
     const { topics, getTopic, isLoading: topicsLoading } = useForumTopics()
     const { tags } = useForumTags()
@@ -233,11 +232,9 @@ export default function Forum(props: any) {
                             className="relative overflow-hidden flex-1 min-w-0 min-h-0 bg-primary text-primary"
                         >
                             <ScrollArea className="h-full">{content()}</ScrollArea>
-                            {user && (
-                                <Suspense fallback={null}>
-                                    <GettingStarted visible={view !== 'post' && view !== 'new'} />
-                                </Suspense>
-                            )}
+                            <Suspense fallback={null}>
+                                <GettingStarted visible={view !== 'post' && view !== 'new'} />
+                            </Suspense>
                         </main>
                     </div>
                 </div>
