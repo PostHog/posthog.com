@@ -3,6 +3,7 @@ import { IconBrowser, IconCode, IconExpand, IconList, IconPlaylist, IconRecord, 
 import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
+import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
@@ -176,6 +177,15 @@ export const topFeatures: CarouselSlide[] = [
                         <IconExpand className="size-5 inline-block" aria-label="Expand" /> icon
                     </span>{' '}
                     view the associated metadata.
+                </p>
+                <p>
+                    The timeline shows{' '}
+                    <Link state={{ newWindow: true }} to="/product-analytics" className="font-bold underline">
+                        product analytics
+                    </Link>{' '}
+                    events. Session replay does not capture events on its own, so you must also capture events with
+                    autocapture or with custom events. These events count toward your product analytics usage, and we
+                    bill them with that product.
                 </p>
             </>
         ),
