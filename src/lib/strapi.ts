@@ -170,6 +170,7 @@ export type Wallet = {
 export type UserData = {
     email: string
     distinctId: string | null
+    blocked?: boolean
     // Only present when explicitly populated, which Strapi gates to the moderator role
     wallet?: Wallet | null
     creditRedemptionEnabled?: boolean
