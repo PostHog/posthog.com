@@ -69,7 +69,7 @@ An account counts toward your NRR for a quarter if **all** of these are true:
 
 #### Grace period: accounts nobody has looked after
 
-- If you take on an account that wasn't actively managed by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
+- If you take on an account that wasn't actively managed (ie. engaged proactively with the customer) by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
 - We do this so you can help customers right-size their spend, rather than leaving them to waste money on a poor implementation.
 - From the next quarter onwards the account counts as normal. If it has churned or fallen below $20k ARR by then, work with your Team Lead to get it removed before the grace quarter ends.
 
