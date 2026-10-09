@@ -9,12 +9,6 @@ availability:
 sourceId: Coupa
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha source" type="action">
-
-The Coupa source is currently in **alpha**. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Coupa connector syncs spend management data from your Coupa instance into PostHog, including invoices, purchase orders, requisitions, suppliers, contracts, expense reports, users, and approvals.
 
 ## Prerequisites

@@ -12,9 +12,6 @@ sourceId: TrustPilot
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Trustpilot connector syncs your reviews data from [Trustpilot](https://www.trustpilot.com/) into PostHog's data warehouse: your business profile with its TrustScore, service reviews, and product reviews. Once synced, you can query and join this data alongside your product analytics and other warehouse sources.
 

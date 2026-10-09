@@ -12,9 +12,6 @@ sourceId: PartnerStack
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The PartnerStack connector syncs your partner program data – partnerships, customers, deals, and leads – into the PostHog Data warehouse, so you can analyze your partner ecosystem alongside your product data.
 

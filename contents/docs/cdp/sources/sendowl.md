@@ -9,12 +9,6 @@ availability:
 sourceId: Sendowl
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your [SendOwl](https://www.sendowl.com) account to sync products, orders, subscriptions, and discount codes into the PostHog data warehouse. SendOwl is an e-commerce platform for selling digital products like ebooks, courses, and software.
 
 ## Adding a data source

@@ -955,7 +955,7 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {body && (
                     <>
-                        <h2>Handbook</h2>
+                        {slug !== 'demand-gen' && <h2>Handbook</h2>}
                         <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

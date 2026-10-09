@@ -12,9 +12,6 @@ sourceId: Apitally
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Apitally connector syncs your API monitoring and analytics data — apps, consumers, endpoints, traffic metrics, and request logs — into the PostHog Data warehouse, so you can analyze API performance alongside your product data.
 

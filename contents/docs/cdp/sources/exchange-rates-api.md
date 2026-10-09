@@ -12,9 +12,6 @@ sourceId: ExchangeRatesApi
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Exchange Rates API connector syncs foreign-exchange reference rates into PostHog, so you can analyze currency data alongside your product data.
 

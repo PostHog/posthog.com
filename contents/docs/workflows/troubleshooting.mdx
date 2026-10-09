@@ -66,6 +66,16 @@ Use single quotes around string arguments in filters:
 {{ person.properties.first_name | default: 'there' }}
 ```
 
+## `expected "|" before filter` error?
+
+Liquid can't read a property whose name starts with `$`, such as `$email`, with dot notation. `{{ person.properties.$email }}` fails with `expected "|" before filter`, and the step doesn't send.
+
+Use brackets and single quotes instead:
+
+```liquid
+{{ person.properties['$email'] }}
+```
+
 ## Variable size limit exceeded?
 
 Workflows have a 5KB limit for storing output variables. If your total variable size exceeds this limit, you'll see an error like:

@@ -12,9 +12,6 @@ sourceId: SplunkObservabilityCloud
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Splunk Observability Cloud connector syncs your monitoring data – detectors, alert events, incidents, dashboards, charts, teams, and metric metadata – into PostHog, so you can keep alert history beyond the platform's retention and join it with your product data.
 

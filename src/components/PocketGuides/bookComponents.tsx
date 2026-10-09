@@ -11,6 +11,11 @@ import {
     SessionGroupingFigure,
     SessionReplayLinkFigure,
 } from './ProductAnalyticsIdentityExhibits'
+import {
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+} from './ProductAnalyticsTrendsFunnelsExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -62,6 +67,9 @@ export const bookMdxComponents = {
     IdentifySavedStayFigure,
     ResetIdentityFigure,
     SessionReplayLinkFigure,
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,

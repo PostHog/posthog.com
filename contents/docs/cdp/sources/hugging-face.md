@@ -9,9 +9,6 @@ sourceId: HuggingFace
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Hugging Face connector syncs the repositories owned by a Hub namespace – models, datasets, and Spaces – into PostHog, so you can analyze your Hub activity alongside your product data.
 

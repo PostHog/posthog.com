@@ -12,9 +12,6 @@ sourceId: TwelveLabs
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Sync your [Twelve Labs](https://www.twelvelabs.io) video understanding library into PostHog. This connector imports your indexes, the videos in each index, the video indexing tasks that track the upload and indexing lifecycle, and the transcriptions of your video and audio assets, so you can analyze library growth, indexing throughput, indexing failures, and spoken content alongside the rest of your data.
 

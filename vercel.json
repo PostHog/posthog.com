@@ -739,6 +739,11 @@
             "statusCode": 301
         },
         {
+            "source": "/open-positions",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -1025,6 +1030,11 @@
         {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/use-case-selling",
+            "destination": "/handbook/growth/use-case-selling/use-case-selling",
             "statusCode": 301
         },
         {
@@ -6490,8 +6500,24 @@
             "destination": "/context-warehouse"
         },
         {
+            "source": "/data-stack/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
             "source": "/data-stack/:path*",
             "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/context-warehouse/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/warehouse:ext?"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse/:path*",
+            "destination": "/docs/data-warehouse/warehouse/:path*"
         },
         {
             "source": "/customer-data-infrastructure/:path*",

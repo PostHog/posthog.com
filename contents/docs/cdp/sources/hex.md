@@ -12,9 +12,6 @@ sourceId: Hex
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Hex connector syncs your Hex workspace data into the PostHog Data warehouse, so you can analyze your projects, scheduled notebook runs, users, groups, and collections alongside your product data. It's especially useful for monitoring the reliability, duration, and error rates of scheduled Hex project runs.
 

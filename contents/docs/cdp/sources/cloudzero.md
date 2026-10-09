@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Note:** This source is in **alpha**. It's fully functional but has not yet been tested against a wide range of CloudZero accounts.
-
 The CloudZero connector syncs your cloud cost intelligence data – costs and dimensions – into PostHog, so you can analyze cloud spend alongside your product data.
 
 ## Prerequisites

@@ -74,7 +74,7 @@ The context warehouse = your events and your business data, together and queryab
 |------|---------|
 | Sources | Autocapture + SDKs |
 | Ingestion | Warehouse Sources |
-| Storage | Managed Warehouse |
+| Storage | Warehouse |
 | Modeling | Data modeling + SQL editor |
 | Orchestration | Scheduled syncs & materialization |
 | Analysis & BI | Notebooks, Insights & dashboards |

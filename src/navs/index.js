@@ -5198,6 +5198,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'What to watch',
+                    url: '/docs/replay-vision/what-to-watch',
+                    icon: 'IconEye',
+                    color: 'yellow',
+                },
+                {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
@@ -5216,7 +5222,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Calibration',
+                    name: 'Improving with ratings',
                     url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
@@ -5641,6 +5647,10 @@ export const docsMenu = {
                         {
                             name: 'Ruby',
                             url: '/docs/experiments/installation/ruby',
+                        },
+                        {
+                            name: 'Rails',
+                            url: '/docs/experiments/installation/ruby-on-rails',
                         },
                         {
                             name: 'Rust',
@@ -6815,33 +6825,33 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Managed warehouse',
+                    name: 'Warehouse',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/data-warehouse/managed-warehouse',
+                    url: '/docs/data-warehouse/warehouse',
                     icon: 'IconDatabase',
                     color: 'purple',
                 },
                 {
                     name: 'Set up your warehouse',
-                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    url: '/docs/data-warehouse/warehouse/setup',
                     icon: 'IconListCheck',
                     color: 'blue',
                 },
                 {
                     name: 'Connect and query',
-                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    url: '/docs/data-warehouse/warehouse/connect',
                     icon: 'IconTerminal',
                     color: 'seagreen',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/data-warehouse/managed-warehouse/connect',
+                            url: '/docs/data-warehouse/warehouse/connect',
                         },
                         {
                             name: 'Performance',
-                            url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
+                            url: '/docs/data-warehouse/warehouse/performance-tuning',
                         },
                     ],
                 },
