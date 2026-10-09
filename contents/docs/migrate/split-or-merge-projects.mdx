@@ -1,0 +1,58 @@
+---
+title: Move or split event data between projects
+sidebar: Docs
+showTitle: true
+---
+
+import MigrationWarning from "./_snippets/migration-warning.mdx"
+
+<MigrationWarning />
+
+If you're consolidating several projects into one, or splitting one project into several (for example, separating events from different websites that were originally sent to the same project), you can move a subset of historical event data between projects on the same PostHog instance using a [PostHog HTTP batch export](/docs/cdp/batch-exports).
+
+This works whether you're moving *all* the events from one project to another, or just a filtered subset (for example, only events where `$host` matches a particular website).
+
+## Requirements
+
+1. A source project with the event data you want to move.
+2. A destination project to move that data into. This can be an existing project or a [new one you create](https://us.posthog.com/organization/settings) for this purpose.
+3. The destination project's token, found in [project settings](https://us.posthog.com/settings/project).
+
+## Approach
+
+1. [Set up a PostHog HTTP batch export](#set-up-the-batch-export) on the source project, with an optional filter to select only the events you want to move.
+2. [Run a backfill](#backfill-historical-data) to migrate historical data.
+3. [Switch tracking](#switch-tracking-after-the-migration) for the events that now belong in the destination project.
+
+## Set up the batch export
+
+1. In the source project, go to **Data pipelines > Destinations** and create a new **HTTP** batch export.
+2. Set **PostHog region** to match your destination project (US or EU).
+3. Set **Destination project token** to the destination project's token.
+4. Optionally, add a filter to only export a subset of events. For example, filter on the event property `$host` to move only events from a specific website into its own project.
+5. Save the batch export.
+
+Events sent through this destination are automatically flagged with `historical_migration: true`, so they keep their original timestamps in the destination project instead of arriving as new events, and they aren't charged as new ingestion volume.
+
+## Backfill historical data
+
+After creating the batch export, run a backfill to migrate existing events:
+
+1. Open the batch export you just created.
+2. Click **Backfill** and choose a start date covering the data you want to move.
+3. Monitor the backfill runs until they complete.
+
+Once the backfill catches up, the batch export continues running on its configured schedule, so any new events matching your filter keep flowing to the destination project until you disable it.
+
+## Switch tracking after the migration
+
+Once you're satisfied the historical data has moved correctly:
+
+1. If you're splitting a project by source (for example, by website), update the tracking snippet or SDK configuration for that source to send new events directly to the destination project's token, instead of relying on the batch export.
+2. Disable or delete the batch export once you no longer need it, or once tracking has fully cut over.
+
+## Limitations
+
+- **This does not deduplicate events.** If the same event already exists in the destination project (for example, because you ran a backfill twice, or tracking wasn't fully cut over before the backfill ran), you'll end up with duplicates. Test your filters on a small time range first.
+- **Person merge conflicts.** If the same `distinct_id` already exists in the destination project with different property values or a different identity graph, importing events for that `distinct_id` can merge or overwrite person data unexpectedly. This is most likely to affect identified users who show up in both projects (for example, a logged-in user who visited multiple of the websites you're consolidating). Review your identify calls and `distinct_id` scheme in both projects before migrating.
+- **This isn't a general "merge projects" feature.** It moves event data (and the resulting persons) into another project's dataset. It doesn't copy other project-level configuration like dashboards, insights, actions, cohorts, or feature flags. See the [self-hosted to Cloud metadata migration tool](/docs/migrate/migrate-to-cloud#migrate-your-metadata) if you need to bring that over too.
