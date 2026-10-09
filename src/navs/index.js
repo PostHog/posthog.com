@@ -5501,6 +5501,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Flag calls table',
+                    url: '/docs/feature-flags/flag-calls-table',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
                     name: 'More tutorials',
                     url: '/docs/feature-flags/tutorials',
                     icon: 'IconGraduationCap',

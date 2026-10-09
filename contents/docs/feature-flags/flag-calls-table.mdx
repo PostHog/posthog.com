@@ -1,0 +1,60 @@
+---
+title: Flag calls are moving to their own table
+sidebar: Docs
+showTitle: true
+---
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+When your app evaluates a [feature flag](/docs/feature-flags), PostHog records a `$feature_flag_called` event. This page calls these events flag calls. Over the coming months, we're moving flag calls out of the events table and into a new table, `flag_evaluations`.
+
+<CalloutBox icon="IconInfo" title="You don't need to do anything yet" type="info">
+
+We'll email you a list and a date before anything stops working.
+
+</CalloutBox>
+
+## Why we're moving them
+
+The events table keeps flag calls forever. A table built for them keeps 90 days, so storing them costs far less.
+
+This doesn't change your bill, because [flag calls aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill).
+
+## What stays the same
+
+- Flags evaluate and target users the same way. Your SDK code doesn't change.
+- A flag's **Usage** tab, the [activity tab](/docs/activity), and the event list in [Session Replay](/docs/session-replay) keep showing flag calls. They read the new table.
+- [Destinations](/docs/cdp/destinations) and [workflows](/docs/workflows) triggered by `$feature_flag_called` keep receiving flag calls.
+
+## What changes
+
+At [stage 2](#how-the-move-works), PostHog stops writing new flag calls to the events table. Anything that reads `$feature_flag_called` from the events table stops counting new flag calls, and shows no error:
+
+- [Insights](/docs/product-analytics/insights), dashboards, and [alerts](/docs/alerts) built on "Feature flag called"
+- [Actions](/docs/data/actions) with a step on `$feature_flag_called`
+- [Cohorts](/docs/data/cohorts) with a criterion on `$feature_flag_called`
+- Running [experiments](/docs/experiments) started before September 1, 2026, which count [exposures](/docs/experiments/exposures) with `$feature_flag_called`
+- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read the event from the events table
+- [Batch exports](/docs/cdp/batch-exports) of the events table, which stop including flag calls
+
+A few other things change too:
+
+- The new table keeps the last 90 days of flag calls, so the **Usage** tab and insights that read it show at most 90 days. This move doesn't delete flag calls already in your events table, and you can still query them with SQL.
+- From stage 2, [paths](/docs/product-analytics/paths) don't show new flag calls.
+- Insights that read the new table can't filter by person properties or cohorts, or break down by person properties.
+
+## How the move works
+
+Each organization moves in two stages.
+
+**Stage 1.** Your organization starts reading flag calls from the new table. When you add "Feature flag called" to an insight, the series reads the new table. PostHog still writes flag calls to both tables, so nothing you've built stops working. From this stage, you can't create new actions or cohorts on `$feature_flag_called`. The actions and cohorts you already have keep working until stage 2.
+
+Right after your organization reaches stage 1, we email each team a list of what we found that reads flag calls from the events table. The list covers insights, actions, cohorts, experiments, batch exports, and API queries. The email also gives the date your organization moves to stage 2. Most of these items also show a banner in PostHog that explains what to change.
+
+**Stage 2.** PostHog stops writing flag calls to the events table. Anything you haven't changed stops counting new flag calls.
+
+## What you can do now
+
+- Don't build new actions or cohorts on `$feature_flag_called`. They can't read the new table, so they stop matching at stage 2.
+- If you write SQL, the SQL editor now warns you when a query reads `$feature_flag_called` from the events table.
+
+Questions? [Contact support](/support).
