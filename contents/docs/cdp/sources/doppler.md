@@ -12,9 +12,6 @@ sourceId: Doppler
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Doppler connector syncs your secrets management metadata into the PostHog Data warehouse: projects, environments, configs, workplace members, and the activity log of config and access changes. This is useful for audit, change tracking, and compliance reporting. Secret values are never synced.
 

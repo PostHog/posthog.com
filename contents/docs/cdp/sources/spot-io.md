@@ -12,9 +12,6 @@ sourceId: SpotIo
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Spot by Flexera (Spotinst) connector syncs your cloud cost optimization data into PostHog – Elastigroups, Ocean Kubernetes clusters, stateful nodes, and per-instance cost/savings breakdowns. Use it to join FinOps data with your product analytics, build cost dashboards, or correlate infrastructure spend with revenue and usage.
 

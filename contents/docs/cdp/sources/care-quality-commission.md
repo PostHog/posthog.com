@@ -12,9 +12,6 @@ sourceId: CareQualityCommission
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Care Quality Commission connector syncs UK health and social care provider and location data into PostHog, so you can analyze it alongside your product data.
 

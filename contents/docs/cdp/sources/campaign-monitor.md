@@ -9,12 +9,6 @@ availability:
 sourceId: CampaignMonitor
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Campaign Monitor (CreateSend) connector syncs your email marketing data – clients, campaigns, lists, segments, templates, suppression lists, subscriber states, and campaign performance reports – into PostHog.
 
 ## Adding a data source

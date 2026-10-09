@@ -9,12 +9,6 @@ availability:
 sourceId: Wufoo
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Wufoo connector syncs your form data – forms, reports, and users – into PostHog, letting you analyze form activity alongside your product data.
 
 ## Adding a data source

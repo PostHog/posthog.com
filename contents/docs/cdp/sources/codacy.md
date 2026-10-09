@@ -12,9 +12,6 @@ sourceId: Codacy
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Codacy connector syncs your code quality data – organizations, repositories, per-file analysis, issues, pull requests, and commits – into PostHog, so you can track quality grades, issue counts, complexity, duplication, and coverage trends across your repositories.
 
