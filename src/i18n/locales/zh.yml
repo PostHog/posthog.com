@@ -1,0 +1,386 @@
+# Simplified Chinese (mainland China). Keys match en.yml. A key that is not here shows the English text.
+#
+# Style rules for this locale. Follow them when you add or change a translation, and add a rule
+# here when a review comment applies to more than one string. See the translate skill in
+# .claude/skills/translate and src/i18n/README.md.
+#
+# - Tone is natural and professional, not stiff: write like a dev talks to a dev. Use short sentences that get
+#   to the point. Leaning formal is fine, but no business clichés (打造, 赋能, 慷慨) and few bookish connectors
+#   (并, 据此, 事实上, 力求). Understated humor. No internet slang or memes (no "yyds", "绝绝子", "打工人").
+#   Address the reader as 你, never 您: "你的 Agent", "帮你装好 PostHog".
+# - PostHog is a name. It takes no measure word and no particle before it: "PostHog 能自动诊断问题",
+#   "用 PostHog 发布", "PostHog 的第一位客户".
+# - Put a half-width space between Chinese and Latin letters or digits: "PostHog 能", "50 万+ 团队",
+#   "97% 的用户", "SQL 编辑器". No space next to full-width punctuation: "（CDP-lite）", "Zendesk、Linear".
+# - Use full-width punctuation: ，。：；！？（）, 、 for lists, and “ ” for quotes (not 「」). Never use
+#   the —— dash or an em dash. Rephrase with ，or ：instead: "自动修复 bug，全程无需你写提示词".
+# - Keep the English words Chinese devs use: bug, pull request, issue, SDK, API, MCP, webhook, Cookie,
+#   logo, CTA, scout. Use the standard Chinese term where it is the norm: 漏斗, 回放,
+#   数据仓库, 仪表盘, 自托管, 更新日志. Product and feature names stay in English: Session Replay, Inbox,
+#   Self-driving, context warehouse.
+# - Keep "Agent" in English, like bug and pull request: "你的 Agent", "让 Agent 了解你的产品". Chinese devs say
+#   Agent or AI Agent. 智能体 is the formal term from vendor docs, and it reads stiff on a dev page.
+#   "PR" is fine after the first "pull request".
+# - Numbers: use 万 for round large numbers ("50 万+ 团队", "每月 100 万个事件") and a comma for the
+#   rest ("5,000 次录制"). Real prices stay in US dollars, with $ before the number: "$0.00005/事件".
+#   Joke amounts use RMB: "¥0", "首单立减 0 元".
+# - Localize the jokes with references that mainland readers of any age know, and keep them light and
+#   non-political: Kim K -> 雷军代言, a Bond villain -> 金庸小说反派, "hop on a quick call" with sales ->
+#   "加个销售微信", explaining your job to parents -> 过年跟亲戚讲, Hillary Clinton -> 默克尔.
+# - Use the standard Chinese UI wording and keep labels short: "换一批", "免费开始", "回收站", "收起".
+# - In Markdown, put full-width punctuation outside the ** markers: "**公开透明**。你可以", not
+#   "**公开透明。**你可以". CommonMark does not close the bold when ** sits between 。 and a character.
+name: 简体中文
+lang: zh-CN
+messages:
+    meta:
+        title: PostHog - 你产品的上下文层
+        description: PostHog 自动诊断问题、修复 bug、生成 pull request，全程无需你写一句提示词。
+
+    hero:
+        H1: 你产品的<emphasis>上下文层</emphasis>
+        body:
+            1: PostHog 采集并存储你的<highlight>分析、报错、回放和业务数据</highlight>，你和你的 <underline>Agent</underline> 可以随时查询、采取行动。
+            2: 50 万+ 团队已经在用 PostHog 做产品。
+        cta:
+            heading: <highlight>免费</highlight>安装<logo/>
+            body:
+                1: 97% 的用户从没付过一分钱
+                2: 无需信用卡
+                3: 安装向导自动帮你装好 PostHog
+            button:
+                1: 开始使用
+                2:
+                    label: 用 AI 安装
+                    body: 更习惯终端？无需浏览器：
+
+    section:
+        2:
+            carousel:
+                pause: 暂停轮播
+                resume: 继续轮播
+        2a:
+            toggle: 问 PostHog 任何问题
+            heading: 问 PostHog 任何问题
+            body:
+                1: 产品和公司数据的采集、存储、查询，都在 PostHog 里完成。分析、回放、报错、日志互相关联，随时回答你的问题。
+                2: 接入 <link>{count}+ 个第三方数据源</link>，看得更全。
+            button: 免费开始
+            products:
+                more: 还有 <count/> 个
+                caption: '{products} 的数据都会流入你的 Agent。'
+                label: PostHog 工具
+                view_all: 查看全部 {count} 个工具
+            demo:
+                label: PostHog AI 演示
+                description: 演示说明：PostHog AI 结合 Google Ads 流量、PostHog 漏斗、Stripe 支付和 GitHub 变更，排查付费转化下降的原因。它发现移动端结账页多了一个必填字段，建议测试更短的结账流程。所有结果均为示例数据。
+                prompt: 为什么注册用户数在涨，付费转化率却在跌？
+                reply:
+                    1: 我来梳理从广告点击到付费客户的完整路径。
+                    2: 下降在付款之前就开始了。
+                    3: 移动端结账中新增的一个必填字段导致了用户流失。
+                    4: 建议测试更短的移动端结账流程。
+                step:
+                    1:
+                        body: 对比各广告活动的流量
+                        result: 访客更多，人群没变
+                    2:
+                        body: 分析注册 → 付款漏斗
+                        result: 移动端结账环节流失
+                    3:
+                        body: 检查付款和被拒交易
+                        result: 被拒交易没有增加
+                    4:
+                        body: 查看最近的结账改动
+                        result: 新增了一个必填字段
+
+        2b:
+            toggle: 让 Agent 了解你的产品
+            heading: 让 Agent 了解你的产品
+            body: 在编辑器里直接查询产品数据，不用来回切换浏览器。从临时分析到发布新功能都能在这里完成，也不需要再学一套新界面。
+            cta:
+                label: 安装 PostHog MCP
+                alt: 或者使用 <link>PostHog Desktop</link>
+            demo:
+                agents: 你的 Agent
+
+        2c:
+            toggle: 用 PostHog 发布
+            heading: 用 PostHog 发布
+            body: Inbox 会把相关发现整理成带调研的报告，按优先级排序。你审阅改进建议和 pull request，决定哪些上线。
+            button: 免费开始
+            signals:
+                heading: Self-driving 的信号来源：
+                1:
+                    body: 自动归并为 issue 的异常和堆栈
+                2:
+                    body: 点了没反应、快速返回、长时间卡顿
+                3:
+                    title: 客户支持
+                    body: 来自用户的工单和对话
+                4:
+                    title: 外部工具
+                    body: Zendesk、Linear 和 GitHub 的 issue
+            demo:
+                description: Self-driving Inbox 示例。四份示例报告从新到旧依次到达：GitHub 来的发票请求、带 PR 草稿的转化追踪 scout、Session Replay 发现的结账问题、一条已有待审 PR 的高优先级登录报错。
+
+        3:
+            heading: 客户背书
+            body: 没错，他们是真的在用。不是那种某个工程师两年前随手试了一下，之后就再没打开过的情况。
+            button: 查看客户
+            shuffle: 换一批
+            logo:
+                first_customer: PostHog 的第一位客户！
+                story: 查看客户故事
+            breakdown:
+                colorful:
+                    col1: 多彩的 logo
+                    col2: “高大上”的 logo
+                hardware:
+                    col1: 硬件公司
+                    col2: 不做硬件的公司
+                planes:
+                    col1: 造飞机
+                    col2: 暂时不造飞机
+                caseStudy:
+                    col1: 有 PostHog 客户案例的公司
+                    col2: 该写客户案例的公司
+                easyToYell:
+                    col1: 一口气就能喊出来
+                    col2: 得换口气才喊得完
+                goodBandName:
+                    col1: 适合当乐队名
+                    col2: 听起来像某种药
+                explainable:
+                    col1: 过年跟亲戚讲得清楚
+                    col2: 过年跟亲戚怎么也讲不清楚
+                shortNames:
+                    col1: 不超过 7 个字母
+                    col2: 很容易拼错
+                realWords:
+                    col1: 词典里查得到
+                    col2: 词典里查不到
+                american:
+                    col1: 美国公司
+                    col2: 不是美国公司
+                pokemon:
+                    col1: 像宝可梦的名字
+                    col2: 像金庸小说里的反派
+                arr:
+                    col1: 用 ARR 衡量
+                    col2: 用 GDP 衡量
+                devTool:
+                    col1: 热门开发者工具
+                    col2: 很热门，但不是开发者工具
+                usesPostHog:
+                    col1: PostHog 用户
+                    col2: 也是 PostHog 用户
+
+        4:
+            heading: 你的所有数据，<highlight>彼此打通</highlight>
+            list:
+                heading: context warehouse 开箱<highlight>自带</highlight>：
+                1: 数据仓库 <tooltip/>
+                2: 120+ 个数据源/目标
+                3: SQL 编辑器 + BI + 数据可视化
+                4: 用户活动流（CDP-lite）
+                5: API、webhook
+            # Markdown. Keep the formatting.
+            body:
+                1: 无论你在分析客户使用情况，还是在指挥 AI，都需要*完整*的上下文。
+                2: 把所有数据汇总到 PostHog 的 context warehouse，你、你的 Agent 和仪表盘都能直接查询。其中包括：
+                list:
+                    1: 来自 Stripe、Postgres、HubSpot 等 120+ 个外部数据源的数据
+                    2: 来自其他所有 PostHog 工具（如 Session Replay 和 Experiments）的洞察
+                3: Agent 做决策需要的数据都在这里。把“告诉我发生了什么”变成“接下来该修这个”。
+            tooltip: 也可以连接你自己的仓库！
+            button: 连接第一个数据源
+
+        5:
+            heading: 按用量计费
+            # Markdown. Keep the formatting.
+            body:
+                1: 我们的理念很简单：你不该为价格操心。
+                2: 所有付费产品按用量计费，每月都有充足的免费额度。98% 的客户在免费使用 PostHog。
+                3: 用量再大，价格也对标最便宜的方案，选 PostHog 不用纠结。想知道价格，也不用先“加个销售微信”。
+                4: 以下是几款热门产品的计费示例：
+            label:
+                freetier: 免费额度
+                pricing: 价格
+                product: 产品
+                pricing_table: 价格（用量越大越便宜）
+            product:
+                1:
+                    freetier: 每月 100 万个事件
+                    pricing: $0.00005/事件
+                2:
+                    freetier: 每月 5,000 次录制
+                    pricing: $0.005/录制
+                3:
+                    freetier: 每月 100 万次请求
+                    pricing: $0.0001/请求
+                4:
+                    freetier: 每月 100 万行
+                    pricing: $0.000015/行
+            button: 查看定价
+
+        6:
+            heading: 为什么选 PostHog？
+            body: 我们和大多数公司不太一样，原因有好几个：
+            list:
+                # Markdown. Keep the links.
+                1: '**公开透明**。你可以随时翻看我们的[公司手册](/handbook)、[销售手册](/handbook/growth/sales/overview)，甚至[公司战略](/handbook/why-does-posthog-exist)。'
+                2: '**我们迭代得很快**。看看[更新日志](/changelog)就知道了。'
+                3: <bold>真正</bold><emphasis>懂技术</emphasis><bold>的支持。</bold>我们的<team>支持团队</team>全员工程师出身。
+            button: 了解我们
+
+        7:
+            heading: 睡前读物
+            body: 还在看？这里有几个链接，你或许会有那么一点兴趣：
+            link:
+                2: 技术文档
+                3: API
+                4: 提个问题
+                5: PostHog 的小团队
+
+        8:
+            heading: 硬广时间
+            body: 如果前面的内容还没打动你，希望这些经典营销套路能行。
+            box:
+                badge: 环保
+                subtitle: 数字版下载*
+            sticker:
+                1: G2 上的用户都说好
+                2: <small>非</small><br/>雷军代言
+            cart:
+                label: 3 人<small>（本来会）</small>把 PostHog 加入购物车*
+                footnote: '*如果这是真的购物车'
+            footnote: '*PostHog 是网页产品，没法用光盘安装。<br/>不过我们<emphasis>确实</emphasis>给一些客户寄过软盘，里面是个 Rickroll 恶作剧。'
+            cloud:
+                heading: 选择你的云端
+                option:
+                    1: 美国（弗吉尼亚）
+                    2: 欧盟（法兰克福）
+            price:
+                label: 起价：
+                old: ¥0
+                new: 免费
+                urgency: '<larger>该价格仅剩 1 件！！</larger>'
+            button: 开始使用
+            urgency:
+                label: <bold>抓紧时间！</bold><today>今天</today>注册的公司：{companies} 家<br/>立即下单，首单立减 0 元。
+                fallback: 多到数不清
+
+    cookie:
+        heading: 法律要求的 Cookie 弹窗
+        body:
+            1: PostHog.com 不使用第三方 Cookie，只用一个自有 Cookie。
+            2: 我们不会把任何数据发给第三方。（<tooltip>冯德莱恩</tooltip>知道了一定很欣慰。）
+        tooltip:
+            label: 冯德莱恩是欧盟委员会主席，千万别和默克尔搞混。
+            image:
+                alt: 欧盟委员会主席冯德莱恩
+        close: 关闭
+
+    # view_in_english stays in English on purpose.
+    taskbar:
+        get_started: 免费开始
+        open_posthog: 打开 PostHog
+        search: 搜索
+        ask_max: 问 Max
+        menu:
+            products: 产品
+            pricing: 定价
+            docs: 文档
+            community: 社区
+            company: 公司
+            more: 更多
+            less: 收起
+        logo:
+            home: 首页
+            about: 关于 PostHog
+            display_options: 显示选项
+        docs:
+            overview: 概览
+            get_started: 快速上手
+            install: 安装 PostHog
+            sdks: SDK 与框架
+            products: 产品
+            analytics: 分析
+            more_products: 更多产品
+            application_metrics: 应用指标
+            distributed_tracing: 分布式追踪
+            apps: 应用
+            context: 上下文
+            reference: 参考
+            new_to_posthog: 初次使用 PostHog
+            ai_engineering: AI 工程
+            toolbar: 工具栏与功能
+            self_host: 自托管与部署
+            billing: 账单
+            privacy: 隐私与 GDPR
+            how_posthog_works: PostHog 工作原理
+            glossary: 术语表
+            playground: Playground
+            pocket_guides: 速查指南
+            tutorials: 教程
+            templates: 模板
+        community:
+            newsletter: Newsletter
+            blog: 博客
+            founders_hub: 创始人中心
+            compare: 对比
+            forums: 论坛
+            startups: 初创公司
+            merch_store: 周边商店
+            events: 活动
+            students: 学生
+            incubator: 孵化器
+            cool_tech_jobs: 有意思的技术岗位
+            places: 地点
+        company:
+            about: 关于
+            customers: 客户
+            handbook: 手册
+            roadmap: 路线图
+            changelog: 更新日志
+            media: 媒体
+            people: 成员
+            small_teams: 小团队
+            careers: 招聘
+            side_projects: 业余项目
+            partnerships: 合作伙伴
+        more:
+            sparks_joy: 让人怦然心动的东西
+            services: 服务
+            display_options: 显示选项
+            system_status: 系统状态
+            terms: 条款
+            privacy: 隐私
+            dpa: DPA 生成器（很好玩！）
+            baa: BAA 生成器（没那么好玩）
+            subprocessors: 子处理方
+            enterprise: 企业版
+        account:
+            go_to: 前往…
+            posthog_app: PostHog 应用
+            community: 社区
+            forums: 论坛
+            notifications: 通知
+            my_profile: 个人资料
+            bookmarks: 收藏
+            sign_in: 登录社区
+            logout: 退出社区
+
+    desktop:
+        home: 首页
+        pricing: 定价
+        docs: 文档
+        demo: 演示
+        talk_to_a_human: 找真人聊聊
+        about_us: 关于我们
+        changelog: 更新日志
+        company_handbook: 公司手册
+        store: 商店
+        careers: 招聘
+        trash: 回收站
