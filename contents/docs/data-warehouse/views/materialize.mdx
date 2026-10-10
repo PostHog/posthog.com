@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 Views can be materialized and stored in the PostHog data warehouse. This means that the view is precomputed, which can significantly improve query performance. This is useful for expensive and frequently used queries like KPI dashboards or [embedded analytics](/tutorials/embedded-analytics) queries.
 
@@ -19,10 +19,10 @@ There are two ways to materialize a view:
 2. **After creation:** For an existing view, go to the [SQL editor](https://app.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
-imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
-alt="Materialize view"
-classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
+  alt="Materialize view"
+  classes="rounded"
 />
 
 Once materialized, you can query the view like any other table.
@@ -34,10 +34,10 @@ After you create a view, you can also schedule it to be updated at a specific in
 For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well.
 
 <ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"
-imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_28_2x_3b0febbf29.png"
-alt="Materialize view"
-classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_28_2x_3b0febbf29.png"
+  alt="Materialize view"
+  classes="rounded"
 />
 
 ### Views that depend on other views
@@ -62,17 +62,17 @@ Incremental materialization is currently in beta. Contact support if you don't s
 
 You can turn it on when you save a view, or later on an existing one.
 
-1. Open the view in the [SQL editor](https://us.posthog.com/sql).
+1. Open the view in the [SQL editor](https://app.posthog.com/sql).
 2. Select the **Materialization** tab below the query.
 3. Under **Refresh mode**, select **Incremental**.
 4. Fill in the settings below, then click **Save refresh mode**.
 
 The same settings appear in the **Save as view** dialog when you check **Materialize this view**.
 
-| Setting | What to pick |
-|---|---|
-| **Incremental column** | The column that tracks which rows are new. Its value grows as rows arrive, like a timestamp or a sequential ID. Each run reads rows at or after the highest value of the last run. |
-| **Unique key** | The columns that together identify a row, like a primary key. PostHog updates matching rows in place. Include every column the query groups by. |
+| Setting                 | What to pick                                                                                                                                                                                    |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Incremental column**  | The column that tracks which rows are new. Its value grows as rows arrive, like a timestamp or a sequential ID. Each run reads rows at or after the highest value of the last run.              |
+| **Unique key**          | The columns that together identify a row, like a primary key. PostHog updates matching rows in place. Include every column the query groups by.                                                 |
 | **Re-read recent data** | How far back before the last high point to read again. This picks up rows that arrive late. Choose no lookback, 1 hour, 1 day, or 7 days. It applies only to a date or time incremental column. |
 
 PostHog offers only the columns that can do each job. A string or a UUID column cannot be an incremental column, because neither has a reliable order. Both can be part of a unique key.
@@ -128,6 +128,8 @@ The editor also shows warnings that do not block the save:
 ## Watching runs
 
 The **Materialization** panel lists every run of the view with its status, row count, and any error. Use it to confirm a view is refreshing on schedule and to read the error when one isn't.
+
+You can also spot problems at a glance in the [SQL editor](https://app.posthog.com/sql) sidebar. A red X icon appears before a view whose last run failed, and a yellow pause icon appears when scheduled runs have been suspended after repeated failures. Hover the icon to see the error.
 
 To test new data before PostHog publishes it, [block materialization on failing data quality checks](/docs/data-warehouse/data-quality/block-materialization).
 
