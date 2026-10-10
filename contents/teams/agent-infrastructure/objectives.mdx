@@ -4,41 +4,41 @@
 
 **Motivation:** We should be the core that powers every agentic product at PostHog, but some teams have built their own systems instead of using ours. Two gateways are still in production and product-specific logic in tasks makes every new integration slow.
 
-**Key results:**
+**What we'll ship:**
 
-- Move all products fully onto the new gateway, sunset the legacy one, and remove custom provider keys, so all model traffic goes through one gateway <TeamMember name="Brandon Leung" photo />
-- Ship one task interface any team can build on, with a well defined contract for what a task is, what state it's in, and who can access it <TeamMember name="Charles Vien" photo />
-- Ship a configurable router with provider policy per product or team <TeamMember name="Brandon Leung" photo />
+- Move all products fully onto the new gateway, sunset the legacy one, and remove custom provider keys, so all model traffic goes through one gateway
+- Ship one task interface any team can build on, with a well defined contract for what a task is, what state it's in, and who can access it
+- Ship a configurable router with provider policy per product or team
 
 #### Objective 2: Every AI unit of work is costed and attributed <TeamMember name="Brandon Leung" photo />
 
 **Motivation:** Product teams top ask is accurate task costs and spending controls. Today the gateway ledger and Django credits are separate systems and we only find abuse after the bill arrives.
 
-**Key results:**
+**What we'll ship:**
 
-- Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits, and live budgets <TeamMember name="Brandon Leung" photo />
+- Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits, and live budgets
 - Agree on a default billing model for the whole runtime that connects the gateway ledger to Django credits, written up as a pricing review RFC <TeamMember name="Ben White" photo />
 
 #### Objective 3: Safe model and sandbox access <TeamMember name="Alessandro Pogliaghi" photo />
 
 **Motivation:** Security has been neglected and we aren't talking enough about abuse, data exfiltration, and prompt injection.
 
-**Key results:**
+**What we'll ship:**
 
-- Ship security at the compute and inference layers: an egress proxy for deterministic rules and trace investigation for the fuzzy cases <TeamMember name="Alessandro Pogliaghi" photo />
-- Move the self-driving pipeline off gVisor onto VMs and cut agent server boot time with a warm-pool control plane <TeamMember name="Alessandro Pogliaghi" photo />
-- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps, and spend-velocity alerts <TeamMember name="Brandon Leung" photo />
+- Ship security at the compute and inference layers: an egress proxy for deterministic rules and trace investigation for the fuzzy cases
+- Move the self-driving pipeline off gVisor onto VMs and cut agent server boot time with a warm-pool control plane
+- Catch abuse before the bill arrives, with fraud checks at signup, per-user caps, and spend-velocity alerts
 
 #### Objective 4: A reliable agent runtime teams can build on <TeamMember name="Jonathan Mieloo" photo />
 
 **Motivation:** People see sandboxes and tasks as slow and unreliable and building on or debugging them is painful.
 
-**Key results:**
+**What we'll ship:**
 
-- Harden and simplify the agent runtime package, deciding which harnesses product teams need and whether we keep investing in the Pi harness <TeamMember name="Jonathan Mieloo" photo />
-- Give people and agents a dependable local setup and an easy way to debug sandboxes and the task runtime <TeamMember name="Jonathan Mieloo" photo />
-- Track task and sandbox success rate and boot time on a dashboard, so we can show they're getting faster and more reliable <TeamMember name="Jonathan Mieloo" photo />
-- Investigate running the harness outside the sandbox and decide whether it's worth the move <TeamMember name="Jonathan Mieloo" photo />
+- Harden and simplify the agent runtime package, deciding which harnesses product teams need and whether we keep investing in the Pi harness
+- Give people and agents a dependable local setup and an easy way to debug sandboxes and the task runtime
+- Track task and sandbox success rate and boot time on a dashboard, so we can show they're getting faster and more reliable
+- Investigate running the harness outside the sandbox and decide whether it's worth the move
 
 ### Stretch
 
@@ -46,9 +46,9 @@
 
 **Motivation:** Teams have no shared way to tell whether a model or agent change made things better or cheaper.
 
-**Key results:**
+**What we'll ship:**
 
-- Give teams a shared way to test models and agent changes against real use cases, measuring quality and cost per successful task and catching regressions before they ship <TeamMember name="Charles Vien" photo /> <TeamMember name="Brandon Leung" photo />
+- Give teams a shared way to test models and agent changes against real use cases, measuring quality and cost per successful task and catching regressions before they ship
 
 ### Ongoing work
 
