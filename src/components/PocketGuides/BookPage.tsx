@@ -38,8 +38,10 @@ function MdxBody({
 }): JSX.Element {
     return (
         <EntryProvider value={{ entry, pages }}>
+            {/* The docs h1 is a fixed rem size, so Aa would grow the body past it. At 2em it is the
+            docs 30px at the default size and scales with the rest of the page. */}
             <div
-                className={`${getProseClasses('sm')} font-medium`}
+                className={`${getProseClasses('sm')} font-medium prose-h1:text-[2em]`}
                 style={fontSize === FONT_SIZES[0] ? undefined : { fontSize }}
             >
                 <MDXProvider components={bookMdxComponents}>
