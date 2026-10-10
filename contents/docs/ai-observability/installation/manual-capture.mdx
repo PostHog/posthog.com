@@ -15,6 +15,11 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'tracing-proxied-inference-paths',
+        value: 'Tracing proxied inference paths',
+        depth: 1,
+    },
+    {
         url: 'verify-traces-and-generations',
         value: 'Verify traces and generations',
         depth: 1,
@@ -35,14 +40,14 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 
 import { ManualInstallation } from 'onboarding/ai-observability/manual.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
-import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+import { addManualCaptureSteps } from './_snippets/manual-capture-steps.tsx'
 import GenerationEvent from '../_snippets/generation-event.mdx'
 import TraceEvent from '../_snippets/trace-event.mdx'
 import SpanEvent from '../_snippets/span-event.mdx'
 import EmbeddingEvent from '../_snippets/embedding-event.mdx'
 
 <OnboardingContentWrapper snippets={{ GenerationEvent, TraceEvent, SpanEvent, EmbeddingEvent }}>
-    <ManualInstallation modifySteps={addNextStepsStep} />
+    <ManualInstallation modifySteps={addManualCaptureSteps} />
 </OnboardingContentWrapper>
 
 ## Large events
