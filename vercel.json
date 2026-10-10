@@ -6106,6 +6106,10 @@
             "destination": "/pricing#philosophy"
         },
         {
+            "source": "/pricing/calculator",
+            "destination": "/pricing?calculator"
+        },
+        {
             "source": "/handbook/brand/brand-and-vibes",
             "destination": "/handbook/brand/overview"
         },
