@@ -13,6 +13,31 @@ import CloudinaryImage from 'components/CloudinaryImage'
  * Scene ↔ scene is an instant swap.
  */
 
+/**
+ * FrostedBackdrop renders nine copies of this component and blurs them together
+ * by 64 px (`blur-3xl`). At that radius none of the wallpaper's own detail is
+ * visible, so the blurred copies do not need the full-size image.
+ *
+ * Serving them a small one matters twice. The backdrop mounts after hydration
+ * (`isMobile` is false on the server and on the first client render), so a
+ * full-size image lands late and the browser counts it as the largest
+ * contentful paint - which is what moved mobile LCP from ~2.4 s to ~3.5 s after
+ * #20932. And nine decoded full-size bitmaps become nine small ones, which
+ * serves the memory ceiling this component exists to respect.
+ */
+export type WallpaperQuality = 'full' | 'blurred'
+export const WallpaperQualityContext = React.createContext<WallpaperQuality>('full')
+
+const BLURRED_COPY_WIDTH_PX = 160
+
+/** Cloudinary delivery transform, applied only to the blurred copies. */
+const wallpaperSrc = (url: string, quality: WallpaperQuality): string =>
+    quality === 'blurred' ? url.replace('/image/upload/', `/image/upload/w_${BLURRED_COPY_WIDTH_PX},q_40,f_auto/`) : url
+
+interface SceneProps {
+    quality: WallpaperQuality
+}
+
 const FADE_OPACITY = 'transition-opacity duration-700 ease-in-out'
 const FADE_COLORS = 'transition-colors duration-700 ease-in-out'
 
@@ -58,12 +83,15 @@ const StartupMonopoly = () => (
     </>
 )
 
-const OfficeParty = () => (
+const OfficeParty = ({ quality }: SceneProps) => (
     <>
         <div
             className="absolute inset-0 opacity-100"
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png',
+                    quality
+                )}')`,
                 backgroundSize: '200px 198px',
                 backgroundRepeat: 'repeat',
             }}
@@ -71,7 +99,10 @@ const OfficeParty = () => (
         <div
             className={`absolute inset-0 opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png',
+                    quality
+                )}')`,
                 backgroundSize: '200px 198px',
                 backgroundRepeat: 'repeat',
             }}
@@ -87,15 +118,17 @@ const OfficeParty = () => (
     </>
 )
 
-const KeyboardGarden = () => (
+const KeyboardGarden = ({ quality }: SceneProps) => (
     <>
         <div className="absolute inset-0 bg-gradient-to-b from-[#FDEECD] to-[#FFFEF4]" />
 
         <div
             className={`absolute inset-0 sm:hidden opacity-100 dark:opacity-0 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_light_95ed14e5a3.jpg')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_light_95ed14e5a3.jpg',
+                    quality
+                )}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
@@ -104,8 +137,10 @@ const KeyboardGarden = () => (
         <div
             className={`absolute inset-0 sm:hidden opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_dark_8a84515f2d.jpg')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_dark_8a84515f2d.jpg',
+                    quality
+                )}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
@@ -114,8 +149,10 @@ const KeyboardGarden = () => (
         <div
             className={`absolute inset-0 hidden sm:block opacity-100 dark:opacity-0 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_light_07316896be.jpg')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_light_07316896be.jpg',
+                    quality
+                )}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
@@ -124,7 +161,10 @@ const KeyboardGarden = () => (
         <div
             className={`absolute inset-0 hidden sm:block opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_dark_9a32796f77.jpg')",
+                backgroundImage: `url('${wallpaperSrc(
+                    'https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_dark_9a32796f77.jpg',
+                    quality
+                )}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
@@ -153,7 +193,7 @@ const KeyboardGarden = () => (
 )
 
 // Visibility classes written out in full so Tailwind's JIT scanner can see them.
-const SCENES: { key: string; Scene: React.FC; visible: string }[] = [
+const SCENES: { key: string; Scene: React.FC<SceneProps>; visible: string }[] = [
     { key: 'hogzilla', Scene: Hogzilla, visible: 'wallpaper-hogzilla:block' },
     { key: 'startup-monopoly', Scene: StartupMonopoly, visible: 'wallpaper-startup-monopoly:block' },
     { key: 'office-party', Scene: OfficeParty, visible: 'wallpaper-office-party:block' },
@@ -178,11 +218,12 @@ export const getWallpaperGlow = (wallpaper: string): WallpaperGlow =>
     WALLPAPER_GLOW[wallpaper] ?? DEFAULT_WALLPAPER_GLOW
 
 export default function Wallpapers(): JSX.Element {
+    const quality = React.useContext(WallpaperQualityContext)
     return (
         <div className="absolute inset-0 isolate select-none overflow-hidden pointer-events-none">
             {SCENES.map(({ key, Scene, visible }) => (
                 <div key={key} className={`hidden ${visible} absolute inset-0`}>
-                    <Scene />
+                    <Scene quality={quality} />
                 </div>
             ))}
         </div>

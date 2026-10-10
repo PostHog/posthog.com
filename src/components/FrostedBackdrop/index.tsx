@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import Wallpapers from 'components/Desktop/Wallpapers'
+import Wallpapers, { WallpaperQualityContext } from 'components/Desktop/Wallpapers'
 
 const BLUR_RADIUS_PX = 64
 const EDGE_PADDING_PX = BLUR_RADIUS_PX * 3
@@ -68,11 +68,13 @@ export default function FrostedBackdrop({ className = 'inset-0', dataScheme, tin
                     height: `calc(100dvh + ${EDGE_PADDING_PX * 2}px)`,
                 }}
             >
-                {MIRROR_OFFSETS.flatMap((column) =>
-                    MIRROR_OFFSETS.map((row) => (
-                        <MirroredWallpaperTile key={`${column}:${row}`} column={column} row={row} />
-                    ))
-                )}
+                <WallpaperQualityContext.Provider value="blurred">
+                    {MIRROR_OFFSETS.flatMap((column) =>
+                        MIRROR_OFFSETS.map((row) => (
+                            <MirroredWallpaperTile key={`${column}:${row}`} column={column} row={row} />
+                        ))
+                    )}
+                </WallpaperQualityContext.Provider>
             </div>
             <div className={`absolute inset-0 ${tintClassName}`} />
         </div>
