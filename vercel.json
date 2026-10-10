@@ -160,6 +160,15 @@
     ],
     "redirects": [
         {
+            "source": "/field-guide/foreword",
+            "destination": "/field-guide#about",
+            "statusCode": 301
+        },
+        {
+            "source": "/field-guide/closing-note",
+            "destination": "/field-guide"
+        },
+        {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
             "statusCode": 301
