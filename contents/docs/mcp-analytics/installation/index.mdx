@@ -20,6 +20,43 @@ Choose your server's language:
 
 Each page has a Markdown version for coding agents. Add `.md` to the URL, such as [`/docs/mcp-analytics/installation/python.md`](/docs/mcp-analytics/installation/python.md).
 
+## Capture WebMCP tool calls
+
+If your web app registers tools through [WebMCP](https://webmachinelearning.github.io/webmcp/), `posthog-js` version 1.438.0 or later can capture each call for MCP Analytics.
+
+Enable capture when you initialize PostHog:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    api_host: "https://us.i.posthog.com",
+    capture_webmcp: true,
+})
+```
+
+The SDK captures one `$mcp_tool_call` event when a tool call finishes or fails. The event includes the tool name, description, site hostname, duration, and error status. It also includes the current distinct ID and browser session. If Session Replay is active, the session ID connects the call to its replay.
+
+The SDK does not capture your application's tool arguments, tool results, or detailed errors. Your normal consent, opt-out, `before_send`, batching, and delivery settings still apply.
+
+By default, the SDK adds two required fields to compatible tool schemas:
+
+- `context` contains the agent's reason for the call. Before capture, the SDK redacts credentials and sensitive URL values. It also redacts emails, IP addresses, payment cards, US Social Security numbers, and phone numbers.
+- `llm_model` contains the model identifier that the agent reports.
+
+The SDK limits `context` to 2,048 characters and `llm_model` to 256 characters. It omits blank values and an `unknown` model.
+
+The SDK removes these fields before it calls your tool. It does not replace fields that your application defines. You can disable either field:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    capture_webmcp: {
+        intent: true,
+        model: false,
+    },
+})
+```
+
+Set `capture_webmcp` before your app registers its tools. The SDK only instruments tools that register after PostHog initializes. If you change the metadata settings, register the tools again.
+
 ## What each SDK captures
 
 Every SDK sends the core events, `$mcp_tool_call` for each tool call and `$exception` for each failed call, so your insights and dashboards work across languages. The SDKs differ in which other events and features they implement:
