@@ -1,0 +1,382 @@
+# Turkish. Keys match en.yml. A key that is not here shows the English text.
+#
+# Style rules for this locale. Follow them when you add or change a translation, and add a rule
+# here when a review comment applies to more than one string. See the translate skill in
+# .claude/skills/translate and src/i18n/README.md.
+#
+# - Write like a Turkish dev talks to another dev: casual, short, and funny. Use "sen", never "siz":
+#   "PostHog'u kur", "karar sen ver", not "kurunuz" or "karar verebilirsiniz". Use "biz" for PostHog.
+# - Suffixes on a Latin name or an English word go after an apostrophe, and follow the vowel harmony of
+#   how the word is SAID, not how it is spelled. PostHog ends in "o": PostHog'u, PostHog'a, PostHog'un,
+#   PostHog'da, PostHog'la. Also Max'a (not Max'e), Inbox'un, GitHub'dan, MCP'si, %97'si, 9'u.
+# - Keep the English tech words Turkish devs say: bug, feature, pull request, deploy, signup, checkout,
+#   funnel, agent, replay, dashboard, changelog, stack trace, dead click, exception, issue, Docs.
+#   Suffix them by sound: bug'lar, feature'lar, agent'lar, replay'ler, pull request'ler, checkout'ta,
+#   funnel'ını, issue'lar. Use Turkish where devs do: hata, destek, ekip, bağlam, loglar, and
+#   "canlıya almak" for "ship" ("PostHog'la canlıya al").
+# - Do not put a suffix right after a tag or a {placeholder}, because the value is not known or is an
+#   image. Rephrase instead: "<logo/> kurulumu bedava", "{count}+ kaynaktan".
+# - Localize the jokes with Turkish references that land the same way: Kim K -> Acun, a Bond villain ->
+#   "Yeşilçam kötüsü", "hop on a quick call" -> "müşteri temsilcisine bağlanmak için 9'u tuşla",
+#   Hillary Clinton -> Tansu Çiller, GDPR pride -> KVKK, "1 left at this price" -> "Zam gelmeden son 1 adet",
+#   parents who do not get tech -> "Annen 'kripto mu o?' der".
+# - Numbers use a dot for thousands and a comma for decimals: 500.000, 0,00005 $. The percent sign goes
+#   first: %98. Real prices stay in US dollars, with the symbol after the number ("0,005 $/kayıt").
+#   Joke amounts use Turkish lira: "0 TL indirim".
+# - No Oxford comma in Turkish: "analitik, hatalar ve loglar". No em dash: use a comma, a colon, or a
+#   new sentence. Mind the dotted and dotless i when you capitalize (İ/i, I/ı).
+# - Keep headings, toggles, buttons, and menu labels short. Cut words the sentence does not need.
+name: Türkçe
+messages:
+    meta:
+        title: PostHog - ürününün bağlam katmanı
+        description: PostHog sorunları kendi kendine teşhis eder, bug'ları düzeltir ve pull request açar. Üstelik senin yönlendirmene gerek kalmadan.
+
+    hero:
+        H1: Ürününün <emphasis>bağlam katmanı</emphasis>
+        body:
+            1: PostHog <highlight>analitik verilerini, hatalarını, oturum kayıtlarını ve iş verilerini</highlight> toplar ve saklar. Böylece hem sen hem de <underline>agent'ların</underline> bunları sorgulayıp harekete geçebilirsiniz.
+            2: PostHog'la ürün çıkaran 500.000'den fazla ekibe sen de katıl.
+        cta:
+            heading: <logo/> kurulumu <highlight>bedava</highlight>
+            body:
+                1: "Kullanıcıların %97'si bize 5 kuruş ödemiyor"
+                2: Kredi kartı gerekmez
+                3: Kurulum sihirbazı PostHog'u senin yerine kurar
+            button:
+                1: Hemen başla
+                2:
+                    label: AI ile kur
+                    body: 'Terminalci misin? Tarayıcıyı boş ver:'
+
+    section:
+        2:
+            carousel:
+                pause: Karuseli durdur
+                resume: Karuseli devam ettir
+        2a:
+            toggle: PostHog'a ne istersen sor
+            heading: PostHog'a ne istersen sor
+            body:
+                1: PostHog, ürün ve şirket verilerini toplayıp saklayacağın ve sorgulayacağın tek yer. Analitik, oturum kayiıları, hatalar ve loglar anında birleşip aklına gelen her soruyu cevaplıyor.
+                2: Tabloyu tamamlamak için <link>{count}+ kaynaktan</link> üçüncü taraf verisi çek.
+            button: Ücretsiz başla
+            products:
+                more: ve <count/> tane daha
+                caption: "{products} agent'larını besliyor."
+                label: PostHog araçları
+                view_all: '{count} aracın hepsini gör'
+            demo:
+                label: PostHog AI demosu
+                description: "Örnek demo: PostHog AI, Google Ads trafiğini, PostHog huni analizlerini, Stripe ödemelerini ve GitHub değişikliklerini kullanarak ücretli dönüşümlerdeki düşüşü inceliyor. Mobil checkout'ta fazladan eklenmiş zorunlu bir alan buluyor ve daha kısa bir checkout'u test etmeyi öneriyor. Tüm bulgular örnek veridir."
+                prompt: Signup'lar artıyor ama ücretli dönüşümler neden düşüyor?
+                reply:
+                    1: Reklam tıklamasından ödeme yapan müşteriye kadar tüm yolu takip edeceğim.
+                    2: Düşüş ödemeden önce başlıyor.
+                    3: Yeni eklenen zorunlu bir alan, mobil checkout'ta müşteri kaçırıyor.
+                    4: Daha kısa bir mobil checkout'u test et.
+                step:
+                    1:
+                        body: Kampanya trafiğini karşılaştır
+                        result: Daha çok ziyaretçi, aynı kitle
+                    2:
+                        body: Signup → ödeme yolunu analiz et
+                        result: Kopuş mobil checkout'ta
+                    3:
+                        body: Ödemeleri ve reddedilenleri kontrol et
+                        result: Reddedilen ödemelerde değişiklik yok
+                    4:
+                        body: Checkout'taki son değişiklikleri incele
+                        result: Zorunlu bir alan eklenmiş
+
+        2b:
+            toggle: Agent'larına ürün bağlamı ver
+            heading: Agent'larına ürün bağlamı ver
+            body: Tarayıcıya geçip durmak yerine ürün verilerini doğrudan editöründen sorgula. Tek seferlik analizlerden yeni feature çıkarmaya kadar her şeyi yap. Yeni bir arayüze gerek yok.
+            cta:
+                label: PostHog MCP'sini kur
+                alt: Ya da <link>PostHog Desktop</link> kullan
+            demo:
+                agents: Agent'ların
+
+        2c:
+            toggle: PostHog'la canlıya al
+            heading: PostHog'la canlıya al
+            body: PostHog ilgili bulguları araştırılmış raporlarda toplar ve önceliğe göre sıralar. Önerilen iyileştirmeleri ve pull request'leri incele, neyin canlıya çıkacağına sen karar ver.
+            button: Ücretsiz başla
+            signals:
+                heading: 'Otonom sinyalleri şuralardan çeker:'
+                1:
+                    body: Issue olarak gruplanmış exception'lar ve stack trace'ler
+                2:
+                    body: Dead click'ler, hemen geri dönenler, uzun donmalar
+                3:
+                    title: Destek
+                    body: Kullanıcılarından gelen talepler ve konuşmalar
+                4:
+                    title: Dış araçlar
+                    body: Zendesk, Linear, GitHub issue'ları
+            demo:
+                description: "Örnek otonom inbox. Dört örnek rapor, en yenisi en üstte olacak şekilde tek tek geliyor: GitHub'dan bir fatura talebi, taslak pull request'i olan bir dönüşüm takibi scout'u, session replay'den bir checkout sorunu ve incelemeye hazır pull request'iyle yüksek öncelikli bir giriş hatası."
+
+        3:
+            heading: Müşteri Yorumları
+            body: Evet, bizi gerçekten kullanıyorlar. Hayır, 2 yıl önce bizi bir kere deneyip bırakan rastgele bir mühendisten bahsetmiyoruz.
+            button: Müşterileri gör
+            shuffle: Karıştır
+            logo:
+                first_customer: İlk PostHog müşterisi!
+                story: Müşteri hikâyesini oku
+            breakdown:
+                colorful:
+                    col1: Renkli logolar
+                    col2: '"Şık" logolar'
+                hardware:
+                    col1: Donanım şirketleri
+                    col2: Donanımla işi yok
+                planes:
+                    col1: Uçak yapıyor
+                    col2: Uçak yapmıyor (şimdilik)
+                caseStudy:
+                    col1: PostHog case study'si olanlar
+                    col2: Case study yapması gerekenler
+                easyToYell:
+                    col1: Tribünden bağırılabilir
+                    col2: Nefes kontrolü ister
+                goodBandName:
+                    col1: İyi grup adı olur
+                    col2: İlaç adı gibi duruyor
+                explainable:
+                    col1: Annene anlatabilirsin
+                    col2: Annen "kripto mu o?" der
+                shortNames:
+                    col1: En fazla 7 harfli isimler
+                    col2: Yanlış yazmaya çok müsait
+                realWords:
+                    col1: Gerçek kelimeler
+                    col2: Uydurma kelimeler
+                american:
+                    col1: Amerika'da kuruldu
+                    col2: Hâlâ green card bekliyor
+                pokemon:
+                    col1: Pokémon olabilir
+                    col2: Yeşilçam kötüsü olabilir
+                arr:
+                    col1: ARR ile ölçülür
+                    col2: Millî gelirle ölçülür
+                devTool:
+                    col1: Trend devtool
+                    col2: Trend ama devtool değil
+                usesPostHog:
+                    col1: PostHog kullanıyor
+                    col2: Bunlar da PostHog kullanıyor
+
+        4:
+            heading: Tüm verilerin <highlight>aynı takımda</highlight>
+            list:
+                heading: 'Context warehouse kutudan şunlarla <highlight>çıkıyor</highlight>:'
+                1: Bir data warehouse <tooltip/>
+                2: 120+ kaynak/hedef
+                3: SQL editörü + BI + veri görselleştirme
+                4: Kullanıcı aktivite akışı (CDP-lite)
+                5: API, webhook'lar
+            # Markdown. Keep the formatting.
+            body:
+                1: İster müşteri kullanımını analiz et ister yapay zekâya iş yaptır, *tam* bağlamla çalışmalısın.
+                2: "Her şeyi PostHog'un context warehouse'unda birleştir. Böylece sen de, agent'ların da, dashboard'un da her şeyi doğrudan sorgulayabilir. Buna şunlar da dahil:"
+                list:
+                    1: Stripe, Postgres ve HubSpot gibi 120+ harici kaynaktan veriler
+                    2: Session Replays ve Experiments gibi diğer tüm PostHog araçlarından içgörüler
+                3: Agent'larının iyi karar vermesi için gereken veriler zaten burada. "Ne oldu, anlat" sorusunu "sırada bunu düzelt" cevabına çevirmeye hazır mısın?
+            tooltip: Kendi kaynağını da bağlayabilirsin!
+            button: İlk veri kaynağını bağla
+
+        5:
+            heading: Kullandıkça öde
+            # Markdown. Keep the formatting.
+            body:
+                1: 'Felsefemiz basit: fiyatı dert etmek zorunda kalmamalısın.'
+                2: Tüm ücretli ürünlerimiz kullandıkça öde modelinde ve her ay cömert ücretsiz kotalarla geliyor. Hatta müşterilerimizin %98'i PostHog'u bedavaya kullanıyor.
+                3: Ölçek büyüdükçe en ucuz seçenekle aynı fiyatı hedefliyoruz. PostHog'u seçmek için düşünmeye bile gerek olmamalı. Fiyatı öğrenmek için asla "müşteri temsilcisine bağlanmak için 9'u tuşlaman" gerekmez.
+                4: 'En popüler ürünlerimizi nasıl ücretlendirdiğimize birkaç örnek:'
+            label:
+                freetier: Ücretsiz kota
+                pricing: Fiyat
+                product: Ürün
+                pricing_table: Fiyat (hacim arttıkça düşer)
+            product:
+                1:
+                    freetier: Ayda 1 milyon event
+                    pricing: 0,00005 $/event
+                2:
+                    freetier: Ayda 5.000 kayıt
+                    pricing: 0,005 $/kayıt
+                3:
+                    freetier: Ayda 1 milyon istek
+                    pricing: 0,0001 $/istek
+                4:
+                    freetier: Ayda 1 milyon satır
+                    pricing: 0,000015 $/satır
+            button: Fiyatlara göz at
+
+        6:
+            heading: Neden PostHog?
+            body: 'Çoğu şirketten bir sürü açıdan farklıyız:'
+            list:
+                # Markdown. Keep the links.
+                1: '**Şeffaflık.** [Şirket el kitabımızı](/handbook), [satış kılavuzumuzu](/handbook/growth/sales/overview) ve hatta [şirket stratejimizi](/handbook/why-does-posthog-exist) okuyabilirsin.'
+                2: "**Hızlı canlıya alırız.** [Changelog'umuza](/changelog) bir bak."
+                3: <emphasis>Gerçekten</emphasis><bold> teknik destek.</bold> <team>Destek ekibimizin</team> hepsi mühendis kökenli.
+            button: Bizi daha yakından tanı
+
+        7:
+            heading: Yatmadan önce okumalık
+            body: 'Hâlâ burada mısın? İlgini çeker diye birkaç link bıraktık:'
+            link:
+                2: Teknik dokümanlar
+                3: API
+                4: Soru sor
+                5: PostHog'daki küçük takımlar
+
+        8:
+            heading: Utanmaz CTA
+            body: Buraya kadar hiçbir şey seni PostHog'a ikna etmediyse, belki bu klasik teleshop taktikleri eder.
+            box:
+                badge: Çevre dostu
+                subtitle: Dijital indirme*
+            sticker:
+                1: G2'dekiler bize bayılıyor
+                2: Acun onaylı<br/><small>değildir</small>
+            cart:
+                label: 3 kişi PostHog'u sepetine ekledi <small>(eklerdi)</small>*
+                footnote: '*tabii gerçek bir sepet olsaydı'
+            footnote: "*PostHog bir web ürünü, CD'den kurulmaz.<br/>Gerçi bir keresinde bazı müşterilere <emphasis>gerçekten</emphasis> disket yolladık, ama içinden Rickroll çıktı."
+            cloud:
+                heading: Bulutunu seç
+                option:
+                    1: ABD (Virginia)
+                    2: AB (Frankfurt)
+            price:
+                label: 'Başlangıç fiyatı:'
+                old: 0 dolar
+                new: Bedava
+                urgency: '<larger>Zam gelmeden son 1 adet!!</larger>'
+            button: Hemen başla
+            urgency:
+                # {companies} is today's signup count, or `fallback` when it is not loaded yet.
+                label: '<bold>Acele et:</bold> <today>Bugün</today> {companies} şirket kaydoldu. <br/>Fırsatı kaçırma, ilk siparişinde indirimi kap.'
+                fallback: bir sürü
+
+    cookie:
+        heading: Kanunen zorunlu çerez uyarısı
+        body:
+            1: PostHog.com üçüncü taraf çerez kullanmaz, sadece kendi tek çerezini kullanır.
+            2: Hiçbir veri üçüncü taraflara gitmez. (<tooltip>Ursula von der Leyen</tooltip> da KVKK da gurur duyardı.)
+        tooltip:
+            label: Ursula von der Leyen, Avrupa Komisyonu Başkanı. Sakın Tansu Çiller'le KARIŞTIRMA.
+            image:
+                alt: Avrupa Komisyonu Başkanı Ursula von der Leyen
+        close: Kapat
+
+    # view_in_english stays in English on purpose.
+    taskbar:
+        get_started: Ücretsiz başla
+        open_posthog: PostHog'u aç
+        search: Ara
+        ask_max: Max'a sor
+        menu:
+            products: Ürünler
+            pricing: Fiyatlar
+            docs: Docs
+            community: Topluluk
+            company: Şirket
+            more: Daha fazla
+            less: Daha az
+        logo:
+            home: Ana sayfa
+            about: PostHog hakkında
+            display_options: Görünüm ayarları
+        docs:
+            overview: Genel bakış
+            get_started: Başlarken
+            install: PostHog'u kur
+            sdks: SDK'lar ve framework'ler
+            products: Ürünler
+            analytics: Analitik
+            more_products: Diğer ürünler
+            application_metrics: Uygulama metrikleri
+            distributed_tracing: Distributed tracing
+            apps: Uygulamalar
+            context: Bağlam
+            reference: Referans
+            new_to_posthog: PostHog'a yeni başlayanlar
+            ai_engineering: AI mühendisliği
+            toolbar: Toolbar ve özellikler
+            self_host: Self-host ve deploy
+            billing: Faturalandırma
+            privacy: Gizlilik ve GDPR
+            how_posthog_works: PostHog nasıl çalışır?
+            glossary: Sözlük
+            playground: Playground
+            pocket_guides: Cep rehberleri
+            tutorials: Eğitimler
+            templates: Şablonlar
+        community:
+            newsletter: Bülten
+            blog: Blog
+            founders_hub: Founder köşesi
+            compare: Karşılaştır
+            forums: Forumlar
+            startups: Startup'lar
+            merch_store: Merch mağazası
+            events: Etkinlikler
+            students: Öğrenciler
+            incubator: Kuluçka merkezi
+            cool_tech_jobs: Havalı teknoloji işleri
+            places: Mekânlar
+        company:
+            about: Hakkında
+            customers: Müşteriler
+            handbook: El kitabı
+            roadmap: Yol haritası
+            changelog: Changelog
+            media: Medya
+            people: Ekip
+            small_teams: Küçük takımlar
+            careers: Kariyer
+            side_projects: Yan projeler
+            partnerships: İş ortaklıkları
+        more:
+            sparks_joy: İçimizi ısıtanlar
+            services: Hizmetler
+            display_options: Görünüm ayarları
+            system_status: Sistem durumu
+            terms: Koşullar
+            privacy: Gizlilik
+            dpa: DPA oluşturucu (eğlenceli!)
+            baa: BAA oluşturucu (o kadar değil)
+            subprocessors: Alt işleyiciler
+            enterprise: Kurumsal
+        account:
+            go_to: Şuraya git...
+            posthog_app: PostHog uygulaması
+            community: Topluluk
+            forums: Forumlar
+            notifications: Bildirimler
+            my_profile: Profilim
+            bookmarks: Kaydedilenler
+            sign_in: Topluluğa giriş yap
+            logout: Topluluktan çıkış yap
+
+    desktop:
+        home: Ana sayfa
+        pricing: Fiyatlar
+        docs: Docs
+        demo: Demo
+        talk_to_a_human: Bir insanla konuş
+        about_us: Hakkımızda
+        changelog: Changelog
+        company_handbook: Şirket el kitabı
+        store: Mağaza
+        careers: Kariyer
+        trash: Çöp kutusu
