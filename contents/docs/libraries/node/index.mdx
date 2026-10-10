@@ -39,9 +39,10 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 | `flushInterval`               | After how many ms we should flush the queue                                                                           | `5000`                     |
 | `maxBatchSize`                | Maximum number of queued events sent in one batch. Cannot be lower than `flushAt`                                     | `100`                      |
 | `maxQueueSize`                | Maximum number of events held in the queue. When the queue is full, the oldest events are dropped                     | `10000`                    |
-| `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally. Note: Providing this will trigger periodic calls to the feature flags service, even if you're not using feature flags. | `null`                     |
+| `secretKey`                   | A server-side [secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) for local evaluation and remote config. Use a project secret API key with the `feature_flag:read` scope. Available in version 5.40.0+. Providing it starts polling for flag definitions unless `enableLocalEvaluation` is `false`, even if you don't evaluate flags. | `null`                     |
+| `personalApiKey`              | Deprecated alias for `secretKey`. Use this option in versions before 5.40.0. The option name does not change the key's permissions. | `null`                     |
 | `featureFlagsPollingInterval` | How often, in milliseconds, feature flag definitions are fetched for local evaluation. Minimum `100`                  | `30000`                    |
-| `enableLocalEvaluation`       | When `false`, the SDK does not poll for feature flag definitions, even if `personalApiKey` is set                     | `true`                     |
+| `enableLocalEvaluation`       | When `false`, the SDK does not poll for feature flag definitions, even if `secretKey` or its legacy alias `personalApiKey` is set                     | `true`                     |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `fetchRetryCount`             | Number of times the SDK retries a failed request                                                                      | `3`                        |
 | `fetchRetryDelay`             | Delay in milliseconds between request retries                                                                         | `3000`                     |
@@ -51,8 +52,7 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 | `isServer`                    | Controls the `$is_server` event property. Keep the default for server-side events. Set to `false` when using `posthog-node` from a client-like runtime, CLI, or desktop app so device OS attribution is handled normally. | `true`                     |
 | `evaluationContexts`          | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 5.23.0+. The legacy parameter `evaluationEnvironments` (version 5.10.0+) is also supported for backward compatibility. | `undefined`                |
 
-> **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
-
+> **Note:** In AWS Lambda or a similar serverless environment, await `client.flush()` before returning if you reuse the client across invocations. Call `shutdown()` only when you finish using that client or before your program exits. See [serverless environments](#short-lived-processes-like-serverless-environments) for an example.
 
 ## Capturing events
 
@@ -514,12 +514,15 @@ The length bound reaches inside a value, including strings nested in arrays and 
 
 Both `flush()` and `shutdown()` export spans that have already ended. A span still open at `flush()` is exported once it ends; a span still open at `shutdown()` is discarded, so end your spans before shutting down – `withSpan` does this for you.
 
-In a serverless handler, call `flush()`: the container is reused across invocations, so `shutdown()` would throw away the connection pool and the flag cache. Events and spans are flushed concurrently, so it costs one round trip, not two.
+If your serverless handler reuses a client across invocations, await `flush()` before returning. It flushes events and ended spans concurrently without stopping flag polling or cleaning up cache-provider resources. Reserve `shutdown()` for a disposable client or program exit.
 
 ```ts
 export const handler = async () => {
-  await posthog.withSpan('handler', () => doWork())
-  await posthog.flush()
+  try {
+    await posthog.withSpan("handler", () => doWork())
+  } finally {
+    await posthog.flush()
+  }
 }
 ```
 
@@ -546,7 +549,7 @@ import NodeFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 <NodeFeatureFlagsCode />
 
-> **Note:** For remote config flags, see the [remote config documentation](/docs/feature-flags/remote-config). Remote config requires the [secret API key](/docs/feature-flags/remote-config#step-1-get-a-secret-api-key) passed as the `personalApiKey` option.
+> **Note:** For remote config flags, see the [remote config documentation](/docs/feature-flags/remote-config). Remote config requires the [secret API key](/docs/feature-flags/remote-config#step-1-get-a-secret-api-key) passed as the `secretKey` option in version 5.40.0+, or `personalApiKey` in older versions.
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
@@ -665,12 +668,13 @@ client.capture({
 
 ## Shutdown
 
-You should call `shutdown` on your program's exit to exit cleanly:
+Await `shutdown()` when you finish using a disposable client or before your program exits. It stops flag polling, cleans up cache-provider resources, and attempts to flush remaining events. Don't call it after each request if you intend to reuse the client – use `flush()` instead.
 
 ```node
-// Stop pending pollers and flush any remaining events
 await client.shutdown()
 ```
+
+The optional shutdown timeout is in milliseconds and defaults to `30000` (30 seconds). Completion does not guarantee that PostHog received every event.
 
 ## Debug mode
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
@@ -696,34 +700,40 @@ client.on("error", (err) => {
 
 ## Short-lived processes like serverless environments
 
-The Node SDK is designed to queue and batch requests in the background to optimize API calls and network time. As serverless environments like AWS Lambda or [Vercel Functions](/docs/libraries/vercel) are short-lived, we provide a few options to ensure all events are captured.
+The Node SDK queues and batches events in the background. AWS Lambda or [Vercel Functions](/docs/libraries/vercel) can freeze the runtime after a handler returns, before background requests finish.
 
-First, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts down).
-
-Second, we recommend setting `flushAt` to `1` and `flushInterval` to `0` to ensure the events are sent immediately. These set the queue to flush immediately, both in terms of events and time.
-
-Third, we provide a method `shutdown()` which can be awaited to ensure all queued events are sent to the API. For example:
+Keep a shared client outside the handler to reuse it across invocations in the same runtime. Await `flush()` before returning, including when application code throws:
 
 ```node
-export const handler() {
-  client.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'thing_happened'
-  })
+import { PostHog } from "posthog-node"
 
-  client.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'other_thing_happened'
-  })
+const client = new PostHog("<ph_project_token>", {
+  host: "<ph_client_api_host>",
+  flushInterval: 0,
+})
 
-  // So far 2 events are queued but not sent
+export const handler = async () => {
+  try {
+    client.capture({
+      distinctId: "distinct_id_of_the_user",
+      event: "thing_happened",
+    })
 
-  // Calling shutdown, flushed the queue but batched into 1 API call for maximum efficiency
-  await client.shutdown()
+    client.capture({
+      distinctId: "distinct_id_of_the_user",
+      event: "other_thing_happened",
+    })
+  } finally {
+    await client.flush()
+  }
 }
 ```
 
-This is also useful for shutting down a standard Node.js app.
+`flushInterval: 0` disables timer-driven flushing. Setting `flushAt: 1` starts a background flush after each queued event, but neither setting waits for delivery. You still need to await `flush()` before returning.
+
+To wait for one event's delivery attempt instead of queuing it, use `await client.captureImmediate({ distinctId: "distinct_id_of_the_user", event: "thing_happened" })`.
+
+If you create a disposable client for one invocation, await `shutdown()` after its final work instead of `flush()`. Don't reuse that client afterward. Use awaited `shutdown()` for program exit, too. Flush and shutdown can fail or time out – neither guarantees ingestion.
 
 ## AI Observability
 

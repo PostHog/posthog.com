@@ -49,15 +49,15 @@ interface FlagDefinitionCacheData {
 
 ## Using your cache provider
 
-Pass your cache provider when initializing PostHog:
+Pass your cache provider and a server-side [project secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) when initializing PostHog. `secretKey` requires `posthog-node` 5.40.0+. Older versions use `personalApiKey`, which remains a deprecated alias in newer versions.
 
 ```typescript
-import { PostHog } from 'posthog-node'
+import { PostHog } from "posthog-node"
 
 const cache = new YourCacheProvider()
 
-const posthog = new PostHog('<ph_project_token>', {
-  personalApiKey: '<ph_personal_api_key>',
+const posthog = new PostHog("<ph_project_token>", {
+  secretKey: "your project secret API key",
   enableLocalEvaluation: true,
   flagDefinitionCacheProvider: cache,
 })
