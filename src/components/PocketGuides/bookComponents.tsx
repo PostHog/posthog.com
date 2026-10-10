@@ -33,12 +33,14 @@ import {
     LoopFigure,
     PersonsModalFigure,
     RedirectLoopFigure,
+    ReleaseConditionsFigure,
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
     TriggerGroupFigure,
+    VariantsFigure,
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
@@ -86,6 +88,8 @@ export const bookMdxComponents = {
     PersonsModalFigure,
     ScreenshotFigure,
     TriggerGroupFigure,
+    ReleaseConditionsFigure,
+    VariantsFigure,
     RedirectLoopFigure,
     LoopFigure,
     Watches,

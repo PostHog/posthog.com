@@ -1,0 +1,90 @@
+---
+title: Cleaning up
+shortTitle: Cleaning up
+subtitle: A temporary flag at 100% has done its job. Remove it from your code, then from PostHog.
+pocketGuideOrder: 7
+section: Maintain
+pocketGuideCta:
+  kind: link
+  label: Open the flag debt scout
+  href: /pocket-guides/self-driving/flag-debt
+  note: A scout that checks your flags every day and reports the ones ready to remove.
+---
+
+<LeftPage>
+
+<LedgerFigure
+    n={1}
+    caption="The rollout state tells you which code path to keep."
+    rows={[
+        {
+            flag: 'new-checkout',
+            rollout: '100%',
+            age: '4 mo',
+            evaluations: '~29,000',
+            inCode: '3 files',
+            verdict: 'remove',
+        },
+        {
+            flag: 'beta-nav',
+            rollout: '0%',
+            age: '5 mo',
+            evaluations: '~1,200',
+            inCode: '1 file',
+            verdict: 'remove',
+        },
+        {
+            flag: 'pro-exports',
+            rollout: '40%',
+            age: '2 mo',
+            evaluations: '~6,500',
+            inCode: '2 files',
+            verdict: 'question',
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Cleaning up
+
+Flags come in two kinds. Release flags and experiment flags are temporary: they exist to get a change out safely or to measure it, and once that's done they're debt. Operational flags are permanent on purpose: a kill switch for an expensive feature under load, a disaster recovery switch, or an entitlement that decides which plan gets a feature. Cleanup is for the first kind.
+
+A temporary flag you leave behind is a code path nobody tests anymore, and it can cost money too. The web SDK evaluates every active flag available to the browser on load, so a request can bill for a flag your code stopped checking months ago.
+
+## Let the rollout state decide
+
+For a temporary flag, the rollout state tells you which code path to keep <SeeFig n={1} />:
+
+| Rollout state | Keep | Then |
+| --- | --- | --- |
+| 100% | The enabled path | Remove the checks, deploy, confirm nothing still checks it, and delete the flag |
+| 0% | The fallback | Remove the new code and the checks, deploy, confirm nothing still checks it, and delete the flag |
+| Anywhere in between | Nothing yet | Ask the owner whether the rollout stalled or is still running |
+| Permanent | The flag | Tag it `keep`, `ops`, or `kill-switch`, so cleanup skips it |
+
+PostHog calls a flag stale when nothing has checked it in 30 days, or when it has sat at 100% for 30 days with no property filters. A flag you turned off on purpose isn't stale. A kill switch sits at 100% for months by design, so it can look stale, which is what the tag is for.
+
+## Remove the code first, then the flag
+
+Remove the checks from your code, deploy, and only then delete the flag. For a flag at 100%, the deploy keeps the enabled path, so nobody loses the feature. In the other order, every leftover check loses its answer and falls back to your default, and the feature vanishes for everyone.
+
+Before you delete, confirm nothing still checks the flag. A deleted flag returns `false` or `undefined`, so an old mobile app version or a tab left open flips to the off path. The `$feature_flag_called` events stopping is a signal, not proof: servers that evaluate locally, bootstrapped flags, and clients with flag-event capture turned off don't send the event. Search your code for the key, and wait for old app versions to age out.
+
+## Make cleanup a process
+
+Most flag debt comes from flags nobody owns. When you create a flag, give it an owner, a name that says what it's for, and a note on whether it's temporary or permanent. The owner of a temporary flag also owns its removal.
+
+Then let a process do the remembering. A <Term name="scout">scout</Term> can check your flags every day and report the ones that are done. When the cleanup is an obvious code change, it marks the report actionable, and a coding agent opens a draft pull request for you to review. It leaves alone any flag whose key it can't find in your code, and any flag tagged `keep`, `ops`, or `kill-switch`, so nothing disappears that it can't trace.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags) · [Flag debt](/pocket-guides/self-driving/flag-debt) · [How GitHub and GitLab ship behind flags](/product-engineers/github-gitlab-feature-flags)
+
+</SeeAlso>
+
+</RightPage>
