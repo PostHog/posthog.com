@@ -81,9 +81,55 @@ Try these with your MCP-enabled agent:
 
 ## Customize chart display
 
-When creating or updating SQL-backed insights, you can configure per-series display settings and number formatting on each Y-axis column.
+When creating or updating SQL-backed insights, you can configure the chart type, chart-level settings, per-series display, and number formatting.
 
-**Per-series display** – set on each Y-axis column under `settings.display`:
+### SQL display types
+
+Set `display` on the `DataVisualizationNode` to choose a chart type:
+
+| Display type            | Description                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| `ActionsTable`          | Data table (default when `display` is omitted).                                               |
+| `BoldNumber`            | Big-number display for single-value results.                                                  |
+| `Metric`                | KPI/scorecard — big number with a change pill and sparkline. Uses one numeric column per row. |
+| `ActionsLineGraph`      | Line chart. Requires at least two columns including one numeric.                              |
+| `ActionsBar`            | Vertical bar chart with one bar per X-axis value.                                             |
+| `ActionsBarValue`       | Horizontal bar chart ranking categories by a single value. Good for "top N" lists.            |
+| `ActionsPie`            | Pie chart for categorical proportions. Requires one label and one numeric column.             |
+| `ActionsDonut`          | Donut (ring) chart with the total in the center. Same columns as `ActionsPie`.                |
+| `ActionsStackedBar`     | Stacked bar chart broken down by a series column.                                             |
+| `ActionsAreaGraph`      | Area chart. Requires at least two columns including one numeric.                              |
+| `TwoDimensionalHeatmap` | 2D heatmap. Requires an X column, a Y column, and a numeric value column.                     |
+| `ScatterPlot`           | Scatter plot. Requires at least two numeric columns.                                          |
+| `BoxPlot`               | Box plot for distribution summaries from pre-aggregated SQL rows.                             |
+
+### Chart-level settings
+
+Set these on `chartSettings`:
+
+| Setting              | Values                           | Description                                                                              |
+| -------------------- | -------------------------------- | ---------------------------------------------------------------------------------------- |
+| `showValuesOnSeries` | `true`, `false`                  | Show values on each data point in the chart.                                             |
+| `legendPosition`     | `top`, `bottom`, `left`, `right` | Position of the chart legend. Defaults to `right` for pie/donut, `top` for other charts. |
+
+**Pie/Donut settings** — set under `chartSettings.pie`:
+
+| Setting        | Values                     | Description                                                                                                 |
+| -------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `sliceContent` | `labels`, `values`, `none` | What to render on each slice. Defaults to `values`.                                                         |
+| `valueDisplay` | `absolute`, `percentage`   | Whether slice values show as absolute amounts or percentages. Only applies when `sliceContent` is `values`. |
+| `showTotal`    | `true`, `false`            | Show the aggregated total in the center. Defaults to on only when slices show values.                       |
+
+**Metric settings** — set under `chartSettings.metric`:
+
+| Setting      | Values                       | Description                                                                                                      |
+| ------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `summary`    | `total`, `average`, `latest` | Which summary the big number shows: sum over period, mean of points, or most recent value. Defaults to `latest`. |
+| `showChange` | `true`, `false`              | Show the change pill next to the big number.                                                                     |
+
+### Per-series display
+
+Set on each Y-axis column under `settings.display`:
 
 | Setting         | Values                        | Description                                                                                         |
 | --------------- | ----------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -93,7 +139,9 @@ When creating or updating SQL-backed insights, you can configure per-series disp
 | `label`         | string                        | Custom label shown in the legend and tooltips instead of the column name.                           |
 | `color`         | hex string (e.g. `#1d4aff`)   | Custom color for the series.                                                                        |
 
-**Number formatting** – set on each Y-axis column under `settings.formatting`:
+### Number formatting
+
+Set on each Y-axis column under `settings.formatting`:
 
 | Setting         | Values                               | Description                                                                                |
 | --------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
@@ -102,16 +150,22 @@ When creating or updating SQL-backed insights, you can configure per-series disp
 | `suffix`        | string                               | Text appended to values (e.g. `%` or `ms`).                                                |
 | `decimalPlaces` | number                               | Number of decimal places to display.                                                       |
 
-**Chart-level settings** – set on the `DataVisualization` node:
+### Retention chart display
 
-| Setting              | Values          | Description                                  |
-| -------------------- | --------------- | -------------------------------------------- |
-| `showValuesOnSeries` | `true`, `false` | Show values on each data point in the chart. |
+When creating or querying retention insights, set `retentionFilter.display` to control the chart type:
+
+| Display type       | Description                                    |
+| ------------------ | ---------------------------------------------- |
+| `ActionsLineGraph` | Line chart showing retention curves (default). |
+| `ActionsBar`       | Bar chart showing retention by period.         |
 
 Example prompts:
 
 - `Create a SQL chart of daily revenue with values formatted as dollars and a trend line.`
 - `Update insight 123 to show the conversion rate series as a line and the volume series as bars.`
+- `Create a SQL insight showing revenue as a Metric card with total summary.`
+- `Show the top 10 countries by user count as a horizontal bar chart.`
+- `Create a retention chart using bars instead of lines.`
 
 ## Install the MCP server
 
