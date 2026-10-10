@@ -2,8 +2,9 @@ import assert from 'node:assert/strict'
 import { readdirSync } from 'node:fs'
 import { test } from 'node:test'
 
-import middleware, { EXPERIMENT_FLAG, TRANSLATED_LOCALES } from './middleware.ts'
+import middleware, { EXPERIMENT_FLAG } from './middleware.ts'
 import { BOOTSTRAP_DISTINCT_ID_COOKIE, SKIP_TRANSLATION_COOKIE } from './src/i18n/cookie.ts'
+import { TRANSLATED_LOCALES } from './src/i18n/preferredLocale.ts'
 
 process.env.GATSBY_POSTHOG_API_KEY = 'phc_test'
 

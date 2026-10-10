@@ -1,4 +1,5 @@
 import { BOOTSTRAP_DISTINCT_ID_COOKIE, SKIP_TRANSLATION_COOKIE } from './src/i18n/cookie.ts'
+import { preferredTag, translatedLocale } from './src/i18n/preferredLocale.ts'
 
 /**
  * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
@@ -37,29 +38,12 @@ export const config = {
 /**
  * The home page also runs through here, to send visitors to a translated copy of it. The same two
  * costs apply: every request to `/` takes this hop, not only the ones that get redirected.
- *
- * The Edge runtime cannot read the YAML in src/i18n/locales, so the codes are listed here too.
- * middleware.test.ts fails when this list and the YAML files disagree.
  */
-export const TRANSLATED_LOCALES = ['pt', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'tr', 'zh']
 
 /** A language subtag, then an optional region or script subtag: /pt-BR, /pt_br, /PT, /zh-Hant, /es-419. */
 const LOCALE_PATH_REGEX = /^\/([a-z]{2})(?:[-_][a-z0-9]{2,4})?$/i
 
 const SKIP_TRANSLATION_COOKIE_REGEX = new RegExp(`(?:^|;\\s*)${SKIP_TRANSLATION_COOKIE}=`)
-
-const TRADITIONAL_CHINESE = ['hant', 'tw', 'hk', 'mo']
-
-/**
- * The page for a language tag, or undefined when there is none. /zh is Simplified Chinese, so a
- * Traditional Chinese tag (zh-TW, zh-HK, zh-MO, zh-Hant) gets English rather than the wrong script.
- */
-function translatedLocale(tag: string): string | undefined {
-    const [language, ...subtags] = tag.toLowerCase().split(/[-_]/)
-    const traditionalChinese =
-        language === 'zh' && !subtags.includes('hans') && subtags.some((subtag) => TRADITIONAL_CHINESE.includes(subtag))
-    return TRANSLATED_LOCALES.includes(language) && !traditionalChinese ? language : undefined
-}
 
 /** The translated locale the visitor ranks highest, or undefined when English ranks higher or none match. */
 export function preferredLocale(acceptLanguage: string): string | undefined {
@@ -68,16 +52,13 @@ export function preferredLocale(acceptLanguage: string): string | undefined {
         .map((entry) => {
             const [tag, ...params] = entry.trim().split(';')
             const q = params.map((param) => param.trim()).find((param) => param.startsWith('q='))
-            return { tag, language: tag.split('-')[0].toLowerCase(), q: q ? Number(q.slice(2)) : 1 }
+            return { tag, q: q ? Number(q.slice(2)) : 1 }
         })
         .filter(({ q }) => q > 0)
         .sort((a, b) => b.q - a.q)
 
-    for (const { tag, language } of ranked) {
-        if (language === 'en') return
-        const locale = translatedLocale(tag)
-        if (locale) return locale
-    }
+    const tag = preferredTag(ranked.map(({ tag }) => tag))
+    return tag && translatedLocale(tag)
 }
 
 /** Sends a locale-shaped path to the translated page for its language: /pt-BR -> /pt. */
