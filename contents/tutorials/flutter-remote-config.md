@@ -97,7 +97,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <!-- ... other configuration ... -->
-        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
+        <meta-data android:name="com.posthog.posthog.PROJECT_TOKEN" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" />
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
@@ -105,11 +105,11 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 </manifest>
 ```
 
-You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+You'll also need to update the minimum Android SDK version to `23` in `android/app/build.gradle`:
 
 ```
 defaultConfig {
-    minSdkVersion 21
+    minSdkVersion 23
     // rest of your config
 }
 ```
@@ -124,7 +124,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 <plist version="1.0">
 <dict>
 <!-- rest of your configuration -->
-  <key>com.posthog.posthog.API_KEY</key>
+  <key>com.posthog.posthog.PROJECT_TOKEN</key>
   <string><ph_project_token></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_client_api_host></string>  <!--  <https://us.i.posthog.com> or <https://eu.i.posthog.com> -->
@@ -136,10 +136,10 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 </plist>
 ```
 
-Then set the minimum platform version to iOS 13.0 in your iOS Podfile:
+Then set the minimum platform version to iOS 15.0 in your iOS Podfile:
 
 ```yaml
-platform :ios, '13.0'
+platform :ios, '15.0'
 
 # ... rest of your config
 ```
