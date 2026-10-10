@@ -40,7 +40,7 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 | `maxBatchSize`                | Maximum number of queued events sent in one batch. Cannot be lower than `flushAt`                                     | `100`                      |
 | `maxQueueSize`                | Maximum number of events held in the queue. When the queue is full, the oldest events are dropped                     | `10000`                    |
 | `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally. Note: Providing this will trigger periodic calls to the feature flags service, even if you're not using feature flags. | `null`                     |
-| `featureFlagsPollingInterval` | How often, in milliseconds, feature flag definitions are fetched for local evaluation. Minimum `100`                  | `30000`                    |
+| `featureFlagsPollingInterval` | How often, in milliseconds, feature flag definitions are fetched for local evaluation. Set to `null` to disable automatic polling; call `reloadFeatureFlags()` to refresh manually. Minimum `100` for numeric values. | `30000`                    |
 | `enableLocalEvaluation`       | When `false`, the SDK does not poll for feature flag definitions, even if `personalApiKey` is set                     | `true`                     |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `fetchRetryCount`             | Number of times the SDK retries a failed request                                                                      | `3`                        |
