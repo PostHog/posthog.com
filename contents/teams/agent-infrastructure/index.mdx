@@ -12,17 +12,19 @@ We build the foundation that powers all of PostHog's LLM and agent applications.
 
 - **AI gateway**: the single endpoint PostHog's AI features use to call LLM providers, with shared auth and cost attribution
 - **Tasks and sessions**: the infrastructure that runs agents in cloud sandboxes
+- **AI metering and billing**: cost tracking and spend limits for every LLM call and agent run, so we book revenue and catch abuse early
 - **Agent package**: the shared agent runtime that other teams build their agents on
 - **Hog harness**: our custom agent harness, built on Pi. It captures product intent and passes it to the model, which leads to better generations. It ships as the [Pi option in PostHog Desktop](/docs/posthog-desktop/use-any-model-and-harness)
 
 ## Working with other teams
 
-If a PostHog product uses an LLM or an agent, it probably runs on something we own.
+If a PostHog product uses an LLM or an agent, it probably runs on something we own. We also meter and bill for that usage.
 
 Come to us if you:
 
 - Are calling an LLM from inside PostHog and want to go through the gateway
 - Are building an agent that needs a sandbox or a cloud session
+- Want AI usage metered, billed, or capped, or think someone is abusing it
 - Hit a bug or a limit in the tasks infrastructure or the agent package
 
 ## Slack channel
