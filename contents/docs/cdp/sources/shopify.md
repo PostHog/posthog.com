@@ -64,6 +64,25 @@ Some fields in the orders table require additional scopes:
 
 > **Note:** If your token doesn't have these additional scopes, the orders sync still succeeds — those fields are simply omitted from the synced data. You don't need to grant extra permissions for data you don't need.
 
+## Filtering by creation date
+
+Some Shopify tables support row filtering on the `created_at` column. This lets you limit syncs to recent data instead of reading your store's entire history, which is useful for large stores where a first sync can take a long time.
+
+To add a filter, go to the [sources tab](https://app.posthog.com/data-management/sources), click your Shopify source, and click **Configure** next to a table. Under **Row filters**, add a filter on `created_at` with one of the supported operators: `>`, `>=`, `<`, or `<=`.
+
+The following tables support `created_at` filtering:
+
+- Orders
+- Products
+- Abandoned checkouts
+- Articles
+- Discount codes
+- Customers
+
+Collections, blogs, and catalogs do not support row filtering because Shopify's API has no creation-time search field for these resources.
+
+> **Note:** Row filters apply to future syncs only. Widening a filter on a table that has already synced incrementally does not fetch older rows — trigger a full resync to pull them in.
+
 ## Supported tables
 
 <SourceTables />
