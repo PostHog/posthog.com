@@ -200,7 +200,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 'Notre philosophie : vous ne devriez pas avoir à vous soucier du prix.'
-                2: Tous nos produits payants sont facturés à l’usage, avec une offre gratuite généreuse chaque mois. D’ailleurs, 98 % de nos clients utilisent PostHog gratuitement.
+                2: Tous nos produits payants sont facturés à l’usage, avec une offre gratuite généreuse chaque mois. D’ailleurs, 97 % de nos clients utilisent PostHog gratuitement.
                 3: 'On vise le prix le plus bas à grande échelle : PostHog doit être une évidence. Et vous n’aurez jamais à « caler un petit call » avec un commercial.'
                 4: 'Quelques exemples de tarifs pour nos produits les plus populaires :'
             label:

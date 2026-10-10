@@ -25,7 +25,7 @@
 #   or crude internet memes. Localize a reference to one that a Korean reader knows: Kim K -> 유느님 (유재석),
 #   a Bond villain -> 아침 드라마 악역, "hop on a quick call" -> "견적 상담", explaining to your parents ->
 #   explaining at 명절, a Rickroll -> "낚시 링크" (Korean readers do not know the Rick Astley meme).
-# - PostHog's own customers are 고객님 in prose: "고객님들의 98%", "첫 고객님!". Compound nouns and menu labels
+# - PostHog's own customers are 고객님 in prose: "고객님들의 97%", "첫 고객님!". Compound nouns and menu labels
 #   keep 고객 ("고객 사례", "고객 지원"), and so do the customers of the reader's product in the demos.
 # - Mark plural people with 들 when the English is plural: "팀들이".
 # - Keep it short. Particles add length, so cut pronouns and "~하는 것" constructions.
@@ -199,7 +199,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 저희 철학은 간단해요. 요금 걱정은 하지 않으셔도 돼야 한다는 거예요.
-                2: 모든 유료 제품은 쓴 만큼만 내는 방식이고, 매달 넉넉한 무료 사용량이 있어요. 실제로 고객님들의 98%는 PostHog를 무료로 써요.
+                2: 모든 유료 제품은 쓴 만큼만 내는 방식이고, 매달 넉넉한 무료 사용량이 있어요. 실제로 고객님들의 97%는 PostHog를 무료로 써요.
                 3: 규모가 커져도 가장 저렴한 선택지와 같은 가격을 목표로 해요. PostHog는 고민할 필요 없는 선택이어야 하니까요. 가격을 알아보려고 “견적 상담”을 신청하실 일도 없어요.
                 4: '많이 쓰는 제품의 요금 예시예요:'
             label:

@@ -205,7 +205,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 'Nuestra filosofía es simple: no deberías tener que preocuparte por los precios.'
-                2: Todos nuestros productos se cobran por uso, con un plan gratuito mensual muy generoso. De hecho, el 98% de nuestros clientes usa PostHog gratis.
+                2: Todos nuestros productos se cobran por uso, con un plan gratuito mensual muy generoso. De hecho, el 97% de nuestros clientes usa PostHog gratis.
                 3: 'Queremos igualar la opción más barata a escala: elegir PostHog tiene que ser obvio. Nunca vas a tener que "agendar una llamadita" con ventas para saber cuánto cuesta.'
                 4: 'Algunos ejemplos de cómo cobramos nuestros productos más populares:'
             label:

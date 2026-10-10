@@ -21,7 +21,8 @@
 #   Hillary Clinton -> Tansu Çiller, GDPR pride -> KVKK, "1 left at this price" -> "Zam gelmeden son 1 adet",
 #   parents who do not get tech -> "Annen 'kripto mu o?' der".
 # - Numbers use a dot for thousands and a comma for decimals: 500.000, 0,00005 $. The percent sign goes
-#   first: %98. Real prices stay in US dollars, with the symbol after the number ("0,005 $/kayıt").
+#   first, and the suffix follows how the number is read: %97'si (doksan yedi), %98'i. Real prices stay in
+#   US dollars, with the symbol after the number ("0,005 $/kayıt").
 #   Joke amounts use Turkish lira: "0 TL indirim".
 # - No Oxford comma in Turkish: "analitik, hatalar ve loglar". No em dash: use a comma, a colon, or a
 #   new sentence. Mind the dotted and dotless i when you capitalize (İ/i, I/ı).
@@ -196,7 +197,7 @@ messages:
             # Markdown. Keep the formatting.
             body:
                 1: 'Felsefemiz basit: fiyatı dert etmek zorunda kalmamalısın.'
-                2: Tüm ücretli ürünlerimiz kullandıkça öde modelinde ve her ay cömert ücretsiz kotalarla geliyor. Hatta müşterilerimizin %98'i PostHog'u bedavaya kullanıyor.
+                2: Tüm ücretli ürünlerimiz kullandıkça öde modelinde ve her ay cömert ücretsiz kotalarla geliyor. Hatta müşterilerimizin %97'si PostHog'u bedavaya kullanıyor.
                 3: Ölçek büyüdükçe en ucuz seçenekle aynı fiyatı hedefliyoruz. PostHog'u seçmek için düşünmeye bile gerek olmamalı. Fiyatı öğrenmek için asla "müşteri temsilcisine bağlanmak için 9'u tuşlaman" gerekmez.
                 4: 'En popüler ürünlerimizi nasıl ücretlendirdiğimize birkaç örnek:'
             label:
