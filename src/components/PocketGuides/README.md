@@ -244,6 +244,19 @@ routes under `/docs/product-analytics/learn`, with the Learn tab active and the 
 sidebar providing chapter navigation. Legacy standalone Pocket Guide URLs redirect to those Learn
 routes, and bookshelf covers open the embedded introduction directly.
 
+Learn tracking in the website PostHog project records `learn_section_selected` for hub sidebar
+sections, `learn_chapter_selected` for chapter links, and `learn_resource_selected` for the
+agent/story/Twig choices. The agent prompt copy button records `learn_prompt_copied`.
+`learn_chapter_engaged` fires once per chapter visit after ten seconds with the tab visible and
+the reader reaching the chapter's end; it is an engagement signal, not proof of comprehension.
+These events include the volume and a short resource, section, or chapter key, without prompt text.
+Agent and Twig selections measure the choice to open a resource, not successful use inside it.
+The Twig link passes the website visitor ID and current session, when available, in a URL fragment. Twig removes the
+fragment before starting its own analytics, then sends that visitor's Twig learning events to the
+website project under the same ID. Twig's own project continues to receive its usual events.
+Existing `$pageview`, `reader_tab_click`, and `pocket_guide_interaction` events cover entry and
+in-chapter actions.
+
 The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
 compact stay card, using local filter state and package photos. The examples place the labeled

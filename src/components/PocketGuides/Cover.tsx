@@ -17,6 +17,8 @@ interface CoverProps {
     placement: 'shelf' | 'self_driving_page' | 'product_docs'
     /** Override the volume entry route when linking directly into its reader. */
     to?: string
+    /** Optional extra tracking for a cover used as a Learn resource choice. */
+    onOpen?: () => void
 }
 
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
@@ -90,7 +92,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
     )
 }
 
-export default function Cover({ volume, count, placement, to }: CoverProps): JSX.Element {
+export default function Cover({ volume, count, placement, to, onOpen }: CoverProps): JSX.Element {
     const posthog = usePostHog()
 
     // Unwritten volumes aren't links – there's nothing behind them yet.
@@ -98,12 +100,14 @@ export default function Cover({ volume, count, placement, to }: CoverProps): JSX
         return <CoverBody volume={volume} count={count} />
     }
 
-    const trackCoverClick = () =>
+    const trackCoverClick = () => {
         posthog?.capture('pocket_guide_interaction', {
             kind: 'cover_click',
             volume: volume.id,
             placement,
         })
+        onOpen?.()
+    }
 
     return (
         <Link
