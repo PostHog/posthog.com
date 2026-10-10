@@ -124,23 +124,39 @@ Check out our [share options FAQs](/handbook/people/share-options#frequently-ask
 
 Every employee will be eligible for equity refreshes each year you are working at PostHog. These grants are between 18%-25% of the value of a new grant for your current role. The percentage is based on your performance and can vary year by year. 
 
-Refreshes stack on top of each other. Each one vests over four years on its own schedule, so after a few years you'll have several grants vesting at the same time. Here's what that looks like for someone joining in January 2027:
+Refreshes stack on top of each other. Each one vests over four years on its own schedule, so after a few years you'll have several grants vesting at the same time. Each grant, including your new hire grant, starts with a 1-year cliff. Nothing vests during the cliff. At the end of the cliff, 25% of the grant vests, and the rest vests monthly over the next three years. Here's what that looks like for someone joining in January 2027:
 
 ```mermaid
+---
+displayMode: compact
+config:
+  gantt:
+    leftPadding: 140
+---
 gantt
     title Example - joining in January 2027
     dateFormat YYYY-MM-DD
     axisFormat %Y
     tickInterval 1year
     todayMarker off
-    section Joining
-    New hire grant - 100% of a new grant : active, 2027-01-01, 2031-01-01
-    section Refreshes
-    1st refresh - 18-25% : 2028-01-01, 2032-01-01
-    2nd refresh - 18-25% : 2029-01-01, 2033-01-01
-    3rd refresh - 18-25% : 2030-01-01, 2034-01-01
-    4th refresh - 18-25% : 2031-01-01, 2035-01-01
-    5th refresh - 18-25% : 2032-01-01, 2036-01-01
+    section New hire grant - 100%
+    Cliff : active, 2027-01-01, 2028-01-01
+    Vesting : 2028-01-01, 2031-01-01
+    section 1st refresh - 18-25%
+    Cliff : active, 2028-01-01, 2029-01-01
+    Vesting : 2029-01-01, 2032-01-01
+    section 2nd refresh - 18-25%
+    Cliff : active, 2029-01-01, 2030-01-01
+    Vesting : 2030-01-01, 2033-01-01
+    section 3rd refresh - 18-25%
+    Cliff : active, 2030-01-01, 2031-01-01
+    Vesting : 2031-01-01, 2034-01-01
+    section 4th refresh - 18-25%
+    Cliff : active, 2031-01-01, 2032-01-01
+    Vesting : 2032-01-01, 2035-01-01
+    section 5th refresh - 18-25%
+    Cliff : active, 2032-01-01, 2033-01-01
+    Vesting : 2033-01-01, 2036-01-01
 ```
 
 By the time your new hire grant has fully vested, four refreshes are vesting in parallel. From then on you're still vesting roughly 18-25% of a new grant's value every year, as each new refresh replaces the one that just finished.
