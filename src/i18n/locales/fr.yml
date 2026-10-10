@@ -1,0 +1,386 @@
+# French. Keys match en.yml. A key that is not here shows the English text.
+#
+# Style rules for this locale. Follow them when you add or change a translation, and add a rule
+# here when a review comment applies to more than one string. See the translate skill in
+# .claude/skills/translate and src/i18n/README.md.
+#
+# - Write like a French startup talks to devs: witty, a little ironic, never slapstick. Keep "vous" for the
+#   reader, but use "on" for PostHog the team, not "nous": "On shippe vite", "On ne fait pas comme tout le monde".
+#   Casual words are fine where a dev would say them: "votre boîte", "bossent", "zappez", "médoc".
+# - PostHog takes no article and agrees in the masculine: "PostHog ingère", "Installer PostHog",
+#   "Premier client de PostHog !". Write "l’IA", not "l’AI", except in the product name "PostHog AI".
+# - Keep the English tech words that French devs really say: bugs, features, pull requests (feminine:
+#   "les pull requests proposées"), replays, funnels, checkout, dashboards, logs, issues, dead clicks, freeze,
+#   wizard, handbook, changelog, roadmap, templates, side projects, devtool, hype, "shipper" ("on shippe").
+#   Do not force an official term that nobody uses: not "demande de tirage", "assistant de configuration",
+#   "entonnoir", "témoin de connexion". Say "bandeau cookies", like the CNIL does.
+# - "Context layer" is "contexte produit" ("Votre contexte produit"). Never "couche", which also means
+#   diaper. Do not add "entreprise": PostHog is about the product, not company context.
+# - Typography: put a narrow no-break space (U+202F) before : ; ! ? and %, inside « guillemets », and as the
+#   thousands separator. Use U+202F everywhere, never a normal space and never U+00A0: "Pourquoi PostHog ?",
+#   "« sobres »", "97 %", "500 000". Use the typographic apostrophe (’), and the ellipsis character (…).
+# - No em dash. Use a colon or a comma instead: "Notre philosophie : …". No Oxford comma: "A, B et C".
+#   After a colon, start in lowercase: "Faites vite : moult entreprises…".
+# - Numbers use a decimal comma and the currency after the amount: "0,00005 $/événement". Real prices stay
+#   in US dollars, because PostHog bills in USD. Joke amounts use euros: "0 € de remise".
+# - Localize the jokes with French references that land the same way: Kim K -> Nabilla, a Bond villain ->
+#   "un méchant d’OSS 117", Hillary Clinton -> Évelyne Dhéliat, "jump on a quick call" -> "caler un petit call",
+#   "parents" -> "tonton au repas de famille", "not real words" -> "refusés au Scrabble", pharmaceuticals ->
+#   "médoc remboursé par la Sécu", the CD install -> "CD Wanadoo". Airbus and Mistral AI are French, so
+#   "cocorico" works for the non-US column.
+# - Cut words the sentence does not need. French runs about 20% longer than English, and the layout was
+#   made for English. Keep toggles, buttons, and menu labels short.
+name: Français
+messages:
+    meta:
+        title: PostHog – votre contexte produit
+        description: PostHog diagnostique les problèmes, corrige les bugs et génère des pull requests tout seul, sans que vous ayez à le lui demander.
+
+    hero:
+        H1: Votre <emphasis>contexte</emphasis> produit
+        body:
+            1: PostHog ingère et stocke vos <highlight>analytics, erreurs, replays et données métier</highlight> pour que vous et vos <underline>agents</underline> puissiez les interroger et passer à l’action.
+            2: Rejoignez plus de 500 000 équipes qui shippent déjà avec PostHog.
+        cta:
+            heading: Installez <logo/> <highlight>gratuitement</highlight>
+            body:
+                1: 97 % des utilisateurs nous paient 0 $
+                2: Sans carte bancaire
+                3: Notre wizard installe PostHog à votre place
+            button:
+                1: Commencer
+                2:
+                    label: Installer avec un agent
+                    body: 'Plus à l’aise dans un terminal ? Zappez le navigateur :'
+
+    section:
+        2:
+            carousel:
+                pause: Mettre le carrousel en pause
+                resume: Relancer le carrousel
+        2a:
+            toggle: Demandez tout à PostHog
+            heading: Demandez tout à PostHog
+            body:
+                1: PostHog, c’est l’endroit unique où ingérer, stocker et interroger les données de votre produit et de votre boîte. Analytics, replays, erreurs et logs, reliés à la volée pour répondre à toutes vos questions.
+                2: Ajoutez des données tierces depuis <link>plus de {count} sources</link> pour avoir la vue d’ensemble.
+            button: Commencer gratuitement
+            products:
+                more: et <count/> autres
+                caption: '{products} alimentent vos agents.'
+                label: Outils PostHog
+                view_all: Voir les {count} outils
+            demo:
+                label: Démo de PostHog AI
+                description: 'Démo illustrative : PostHog AI enquête sur la baisse des conversions payantes à partir du trafic Google Ads, des funnels PostHog, des paiements Stripe et des changements sur GitHub. Il repère un champ obligatoire en trop dans le checkout mobile et recommande de tester un checkout plus court. Toutes les données sont fictives.'
+                prompt: Pourquoi les inscriptions augmentent alors que les conversions payantes baissent ?
+                reply:
+                    1: Je remonte le parcours, du clic sur la pub jusqu’au client qui paie.
+                    2: La chute commence avant le paiement.
+                    3: Un nouveau champ obligatoire fait fuir les clients au checkout mobile.
+                    4: Testez un checkout mobile plus court.
+                step:
+                    1:
+                        body: Comparer le trafic des campagnes
+                        result: Plus de visiteurs, même audience
+                    2:
+                        body: Analyser le funnel inscription → paiement
+                        result: Abandons au checkout mobile
+                    3:
+                        body: Vérifier les paiements et les refus
+                        result: Les refus de paiement n’ont pas bougé
+                    4:
+                        body: Passer en revue les derniers changements du checkout
+                        result: Un champ obligatoire a été ajouté
+
+        2b:
+            toggle: Le contexte produit pour vos agents
+            heading: Le contexte produit pour vos agents
+            body: Interrogez vos données produit depuis votre éditeur, sans jongler avec les onglets du navigateur. De l’analyse ponctuelle au lancement de nouvelles features, tout se fait sans nouvelle UI.
+            cta:
+                label: Installer le MCP PostHog
+                alt: Ou utilisez <link>PostHog Desktop</link>
+            demo:
+                agents: Vos agents
+
+        2c:
+            toggle: Shippez avec PostHog
+            heading: Shippez avec PostHog
+            body: Votre Inbox regroupe les rapports sur les signaux de votre produit, classés par priorité. Passez en revue les améliorations et les pull requests proposées, puis décidez de ce qui part en prod.
+            button: Commencer gratuitement
+            signals:
+                heading: 'Self-driving puise ses signaux dans :'
+                1:
+                    body: Exceptions et stack traces regroupées en issues
+                2:
+                    body: Dead clicks, retours éclair, gros freezes
+                3:
+                    title: Support
+                    body: Tickets et conversations de vos utilisateurs
+                4:
+                    title: Outils externes
+                    body: Issues Zendesk, Linear et GitHub
+            demo:
+                description: 'Inbox self-driving illustrative. Quatre rapports fictifs arrivent un par un, du plus récent au plus ancien : une demande de facture venue de GitHub, un scout de suivi des conversions avec une pull request en brouillon, un problème de checkout repéré dans les session replays et une erreur de connexion prioritaire avec une pull request prête à relire.'
+
+        3:
+            heading: Preuve sociale
+            body: Oui, ils nous utilisent vraiment. Non, ce n’est pas un dev qui passait par là et nous a testés il y a plus de 2 ans.
+            button: Voir les clients
+            shuffle: Mélanger
+            logo:
+                first_customer: Premier client de PostHog !
+                story: Lire le témoignage
+            breakdown:
+                colorful:
+                    col1: Logos colorés
+                    col2: Logos « sobres »
+                hardware:
+                    col1: Font du hardware
+                    col2: Ne font pas de hardware
+                planes:
+                    col1: Construit des avions
+                    col2: Ne construit pas d’avions (pour l’instant)
+                caseStudy:
+                    col1: Ont une étude de cas PostHog
+                    col2: Devraient en faire une (on dit ça, on dit rien)
+                easyToYell:
+                    col1: Noms faciles à crier
+                    col2: Noms qui demandent du coffre
+                goodBandName:
+                    col1: Bons noms de groupe
+                    col2: On dirait un médoc remboursé par la Sécu
+                explainable:
+                    col1: Explicables au repas de famille
+                    col2: Pour tonton, c’est « un truc sur Internet »
+                shortNames:
+                    col1: Noms de 7 lettres ou moins
+                    col2: Noms qu’on écrit mal à tous les coups
+                realWords:
+                    col1: Vrais mots
+                    col2: Refusés au Scrabble
+                american:
+                    col1: Fondées aux US
+                    col2: Pas fondées aux US (cocorico)
+                pokemon:
+                    col1: Pourrait être un Pokémon
+                    col2: Pourrait être un méchant d’OSS 117
+                arr:
+                    col1: Mesurée en ARR
+                    col2: Mesurée en PIB
+                devTool:
+                    col1: Devtool hype
+                    col2: Hype, mais pas devtool
+                usesPostHog:
+                    col1: Utilise PostHog
+                    col2: Utilise aussi PostHog
+
+        4:
+            heading: Toutes vos données, <highlight>qui bossent ensemble</highlight>
+            list:
+                heading: 'Inclus d’office, le context warehouse est <highlight>livré</highlight> avec :'
+                1: Un data warehouse <tooltip/>
+                2: Plus de 120 sources/destinations
+                3: Éditeur SQL + BI + dataviz
+                4: Flux d’activité utilisateur (CDP-lite)
+                5: API, webhooks
+            # Markdown. Keep the formatting.
+            body:
+                1: Que vous analysiez l’usage de vos clients ou que vous pilotiez une IA, vous devriez avoir *tout* le contexte.
+                2: 'Rassemblez tout dans le context warehouse de PostHog pour que vous, vos agents et vos dashboards puissiez l’interroger directement. Ça comprend :'
+                list:
+                    1: Les données de plus de 120 sources externes comme Stripe, Postgres et HubSpot
+                    2: Les insights de tous les autres outils PostHog, comme Session Replay et Experiments
+                3: Les données dont vos agents ont besoin pour prendre les bonnes décisions sont déjà là. De quoi passer de « dis-moi ce qui s’est passé » à « voilà ce qu’il faut corriger maintenant ».
+            tooltip: Vous pouvez aussi connecter le vôtre !
+            button: Connecter votre première source de données
+
+        5:
+            heading: Tarification à l’usage
+            # Markdown. Keep the formatting.
+            body:
+                1: 'Notre philosophie : vous ne devriez pas avoir à vous soucier du prix.'
+                2: Tous nos produits payants sont facturés à l’usage, avec une offre gratuite généreuse chaque mois. D’ailleurs, 98 % de nos clients utilisent PostHog gratuitement.
+                3: 'On vise le prix le plus bas à grande échelle : PostHog doit être une évidence. Et vous n’aurez jamais à « caler un petit call » avec un commercial.'
+                4: 'Quelques exemples de tarifs pour nos produits les plus populaires :'
+            label:
+                freetier: Offre gratuite
+                pricing: Tarif
+                product: Produit
+                pricing_table: Tarif (dégressif selon le volume)
+            product:
+                1:
+                    freetier: 1 million d’événements/mois
+                    pricing: 0,00005 $/événement
+                2:
+                    freetier: 5 000 enregistrements/mois
+                    pricing: 0,005 $/enregistrement
+                3:
+                    freetier: 1 million de requêtes/mois
+                    pricing: 0,0001 $/requête
+                4:
+                    freetier: 1 million de lignes/mois
+                    pricing: 0,000015 $/ligne
+            button: Voir les tarifs
+
+        6:
+            heading: Pourquoi PostHog ?
+            body: 'On ne fait pas comme tout le monde, et pour plein de raisons :'
+            list:
+                # Markdown. Keep the links.
+                1: '**Transparence.** Vous pouvez lire notre [handbook](/handbook), notre [manuel de vente](/handbook/growth/sales/overview) et même notre [stratégie](/handbook/why-does-posthog-exist).'
+                2: '**On shippe vite.** Preuve à l’appui : notre [changelog](/changelog).'
+                3: <bold>Un support</bold> <emphasis>vraiment</emphasis><bold> technique.</bold> Toute notre <team>équipe support</team> vient de l’ingénierie.
+            button: En savoir plus sur nous
+
+        7:
+            heading: Lectures de chevet
+            body: 'Encore là ? Voici quelques liens qui pourraient vaguement vous intéresser :'
+            link:
+                2: Documentation technique
+                3: API
+                4: Poser une question
+                5: Les petites équipes de PostHog
+
+        8:
+            heading: CTA sans vergogne
+            body: Si rien ne vous a encore convaincu d’adopter PostHog, ces bonnes vieilles ficelles marketing devraient faire l’affaire.
+            box:
+                badge: Écolo
+                subtitle: Téléchargement numérique*
+            sticker:
+                1: Sur G2, les gens nous trouvent géniaux
+                2: <small>Pas</small> validé<br/>par Nabilla
+            cart:
+                label: 3 personnes <small>(auraient)</small> ajouté PostHog à leur panier*
+                footnote: '*si c’était un vrai panier'
+            footnote: '*PostHog est un produit web et ne s’installe pas par CD (même pas celui de Wanadoo).<br/>On a <emphasis>vraiment</emphasis> envoyé une disquette à des clients une fois, mais c’était un Rickroll.'
+            cloud:
+                heading: Choisissez votre cloud
+                option:
+                    1: US (Virginie)
+                    2: UE (Francfort)
+            price:
+                label: 'À partir de :'
+                old: 0 €
+                new: Gratuit
+                urgency: '<larger>Plus qu’un seul à ce prix !!</larger>'
+            button: Commencer
+            urgency:
+                # {companies} is today's signup count, or `fallback` when it is not loaded yet.
+                label: '<bold>Faites vite :</bold> {companies} entreprises se sont inscrites <today>aujourd’hui</today>. <br/>Foncez et profitez de 0 € de remise sur votre première commande.'
+                fallback: moult
+
+    cookie:
+        heading: Bandeau cookies imposé par la loi
+        body:
+            1: PostHog.com n’utilise aucun cookie tiers, juste un seul cookie maison.
+            2: Aucune donnée n’est envoyée à des tiers. (<tooltip>Ursula von der Leyen</tooltip> et la CNIL seraient si fières.)
+        tooltip:
+            label: Ursula von der Leyen est la présidente de la Commission européenne. À NE PAS confondre avec Évelyne Dhéliat (elle, c’est la météo).
+            image:
+                alt: Ursula von der Leyen, présidente de la Commission européenne
+        close: Fermer
+
+    # view_in_english stays in English on purpose.
+    taskbar:
+        get_started: Commencer gratuitement
+        open_posthog: Ouvrir PostHog
+        search: Rechercher
+        ask_max: Demander à Max
+        menu:
+            products: Produits
+            pricing: Tarifs
+            docs: Docs
+            community: Communauté
+            company: Entreprise
+            more: Plus
+            less: Moins
+        logo:
+            home: Accueil
+            about: À propos de PostHog
+            display_options: Options d’affichage
+        docs:
+            overview: Vue d’ensemble
+            get_started: Premiers pas
+            install: Installer PostHog
+            sdks: SDK et frameworks
+            products: Produits
+            analytics: Analytics
+            more_products: Plus de produits
+            application_metrics: Métriques applicatives
+            distributed_tracing: Tracing distribué
+            apps: Apps
+            context: Contexte
+            reference: Référence
+            new_to_posthog: Débuter avec PostHog
+            ai_engineering: Ingénierie IA
+            toolbar: Toolbar et features
+            self_host: Self-host et déploiement
+            billing: Facturation
+            privacy: Confidentialité et RGPD
+            how_posthog_works: Comment marche PostHog
+            glossary: Glossaire
+            playground: Playground
+            pocket_guides: Guides de poche
+            tutorials: Tutoriels
+            templates: Templates
+        community:
+            newsletter: Newsletter
+            blog: Blog
+            founders_hub: Espace founders
+            compare: Comparer
+            forums: Forums
+            startups: Startups
+            merch_store: Boutique de goodies
+            events: Événements
+            students: Étudiants
+            incubator: Incubateur
+            cool_tech_jobs: Jobs tech sympas
+            places: Lieux
+        company:
+            about: À propos
+            customers: Clients
+            handbook: Handbook
+            roadmap: Roadmap
+            changelog: Changelog
+            media: Médias
+            people: L’équipe
+            small_teams: Petites équipes
+            careers: On recrute
+            side_projects: Side projects
+            partnerships: Partenariats
+        more:
+            sparks_joy: Les trucs cool
+            services: Services
+            display_options: Options d’affichage
+            system_status: État du système
+            terms: Conditions
+            privacy: Confidentialité
+            dpa: Générateur de DPA (c’est fun !)
+            baa: Générateur de BAA (moins fun)
+            subprocessors: Sous-traitants
+            enterprise: Enterprise
+        account:
+            go_to: Aller à…
+            posthog_app: App PostHog
+            community: Communauté
+            forums: Forums
+            notifications: Notifications
+            my_profile: Mon profil
+            bookmarks: Favoris
+            sign_in: Se connecter à la communauté
+            logout: Se déconnecter de la communauté
+
+    desktop:
+        home: Accueil
+        pricing: Tarifs
+        docs: Docs
+        demo: Démo
+        talk_to_a_human: Parler à un humain
+        about_us: À propos
+        changelog: Changelog
+        company_handbook: Handbook
+        store: Boutique
+        careers: On recrute
+        trash: Corbeille
