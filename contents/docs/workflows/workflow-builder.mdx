@@ -13,15 +13,15 @@ Workflows are a collection of steps that automate a process or deliver messages 
 
 Workflows are composed of the following components:
 
-| Component                             | Description                                                                                                                                    |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, manually, or on a schedule. |
-| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                       |
-| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                            |
-| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                  |
-| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                |
-| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                     |
-| [AI tasks](/docs/workflows/ai-tasks)  | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                              |
+| Component                             | Description                                                                                                                                                     |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, a Slack message, manually, or on a schedule. |
+| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                        |
+| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                             |
+| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
+| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
+| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                      |
+| [AI tasks](/docs/workflows/ai-tasks)  | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
 
 ## Draft and enabled workflows
 
@@ -54,6 +54,7 @@ Every workflow starts with a trigger. Triggers define what kicks off the workflo
 | Schedule trigger       | Run the workflow once or on a recurring schedule, without a person or event               |
 | Batch trigger          | Run the workflow for each person matching an audience, optionally on a recurring schedule |
 | Tracking pixel trigger | Start the workflow when a 1x1 tracking pixel is loaded (e.g. in an email)                 |
+| Slack trigger          | Start the workflow when a message is posted in a connected Slack channel                  |
 
 ### Event triggers
 
@@ -166,6 +167,25 @@ Configure the schedule with the same schedule picker used for [batch trigger sch
 | Ends      | Never, on a specific date, or after a set number of occurrences                                                                       |
 
 To run a workflow once without repetition, configure a schedule and turn off the repeating option.
+
+### Slack triggers
+
+Slack triggers start a workflow when someone posts a message in a connected Slack channel. Use them to automate responses, route messages, or kick off actions based on Slack activity.
+
+To use Slack triggers, connect a [Slack integration](/docs/workflows/configure-channels#slack) to your project. The PostHog Slack bot must be invited to the channels you want to monitor.
+
+When you select **Slack message posted** as the trigger type, configure the following:
+
+| Setting                       | Description                                                                                     |
+| ----------------------------- | ----------------------------------------------------------------------------------------------- |
+| Channels                      | One or more Slack channels to monitor for messages                                              |
+| Who can start a run           | Filter by message author: anyone, people only, apps only, specific people, or specific apps     |
+| Ignore replies inside threads | When enabled, only top-level messages trigger the workflow (thread replies are ignored)         |
+| Additional filters            | Filter on message properties like `text`, `subtype`, `channel_type`, or `is_ext_shared_channel` |
+
+Slack-triggered workflows have no associated person, so person-dependent steps (like setting person properties) are unavailable.
+
+Messages posted by PostHog never start a run, so a workflow can reply in Slack without triggering itself.
 
 ### Conversion goals
 
