@@ -981,7 +981,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     juno: {
         name: 'Juno',
-        toolsUsed: ['error_tracking', 'product_analytics'],
+        toolsUsed: ['error_tracking', 'product_analytics', 'inbox'],
         industries: ['Healthcare', 'AI'],
         users: ['Engineering', 'Product'],
         notes: 'AI health assistant for chronic illness',
