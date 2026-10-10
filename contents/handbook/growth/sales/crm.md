@@ -72,6 +72,8 @@ When a new task is created, we first check whether the associated account alread
 - If the account has an owner, task is automatically assigned to that person.
 - If the account is unowned, account and task are assigned to a salesperson via round robin within their territory.
 
+A round robin assignment makes you a temporary owner only. It does not count toward your quota. See [account ownership in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics).
+
 This ensures we avoid double assignments and maintain clear ownership.
 
 Territories
