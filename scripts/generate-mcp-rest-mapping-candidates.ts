@@ -1,7 +1,3 @@
-#!/usr/bin/env node
-
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 /*
  * One-shot helper to suggest entries for src/data/mcp-rest-mapping.json.
  *
@@ -13,20 +9,19 @@
  * file. The script never writes to the mapping file directly.
  *
  * Usage:
- *   node scripts/generate-mcp-rest-mapping-candidates.js
- *   node scripts/generate-mcp-rest-mapping-candidates.js --merge   # writes merged file
+ *   npx --yes tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts
+ *   npx --yes tsx@4.20.6 scripts/generate-mcp-rest-mapping-candidates.ts --merge   # writes merged file
  */
 
-const fs = require('fs')
-const path = require('path')
-const https = require('https')
+import fs from 'fs'
+import path from 'path'
+import https from 'https'
+import { fetchMCPToolDefinitions } from '../gatsby/utils/fetchMCPTools'
 
 const SPEC_URL = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
-const TOOLS_URL =
-    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions-all.json'
 const MAPPING_FILE = path.resolve(__dirname, '../src/data/mcp-rest-mapping.json')
 
-function get(url, headers = {}) {
+function get(url: string, headers: Record<string, string> = {}): Promise<string> {
     return new Promise((resolve, reject) => {
         https
             .get(url, { headers }, (res) => {
@@ -42,22 +37,24 @@ function get(url, headers = {}) {
     })
 }
 
-async function main() {
-    const [specBody, toolsBody] = await Promise.all([get(SPEC_URL, { Accept: 'application/json' }), get(TOOLS_URL)])
+async function main(): Promise<void> {
+    const [specBody, tools] = await Promise.all([
+        get(SPEC_URL, { Accept: 'application/json' }),
+        fetchMCPToolDefinitions(),
+    ])
 
-    let spec
+    let spec: any
     try {
         spec = JSON.parse(specBody)
     } catch {
         console.error('Failed to parse OpenAPI spec as JSON. Try setting POSTHOG_OPEN_API_SPEC_URL to a JSON variant.')
         process.exit(1)
     }
-    const tools = JSON.parse(toolsBody)
     const toolNames = new Set(Object.keys(tools))
 
-    const operationIds = []
+    const operationIds: string[] = []
     for (const methods of Object.values(spec.paths || {})) {
-        for (const op of Object.values(methods)) {
+        for (const op of Object.values(methods as Record<string, any>)) {
             if (op && typeof op === 'object' && op.operationId) {
                 operationIds.push(op.operationId)
             }
@@ -66,7 +63,7 @@ async function main() {
 
     const existing = fs.existsSync(MAPPING_FILE) ? JSON.parse(fs.readFileSync(MAPPING_FILE, 'utf8')) : {}
 
-    const candidates = {}
+    const candidates: Record<string, string[]> = {}
     for (const opId of operationIds) {
         const candidate = opId.replace(/_/g, '-')
         if (toolNames.has(candidate) && !existing[opId]) {
