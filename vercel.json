@@ -774,6 +774,11 @@
             "statusCode": 301
         },
         {
+            "source": "/feed.xml",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/status",
             "destination": "https://status.posthog.com",
             "statusCode": 301
