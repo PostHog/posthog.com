@@ -35,6 +35,8 @@ If it helps, log in as the customer. Clicking a link from their PostHog instance
 
 Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-tips), and search Slack, PostHog Support, and GitHub for similar issues. If you've just joined, spend 30 mins to an hour investigating yourself before asking for help — onboarding is when you learn the products best. Use common sense based on urgency.
 
+For privacy, GDPR, or right-to-be-forgotten questions, see [advising customers on GDPR and PII](/handbook/cs-and-onboarding/advising-customers-on-gdpr) for our posture and the product facts behind it.
+
 Keep the customer in the loop while you investigate — progress, blockers, next steps.
 
 ### Using the MCP server while impersonating

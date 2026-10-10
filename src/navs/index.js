@@ -1576,6 +1576,10 @@ export const handbookSidebar = [
                         name: 'New starter onboarding',
                         url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
                     },
+                    {
+                        name: 'Advising customers on GDPR and PII',
+                        url: '/handbook/cs-and-onboarding/advising-customers-on-gdpr',
+                    },
                 ],
             },
             {
