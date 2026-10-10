@@ -10,6 +10,7 @@ import { stepModifier } from '../../src/components/CompensationCalculator/compen
 import { locationFactor } from '../../src/components/CompensationCalculator/compensation_data/location_factor'
 
 const imagesDir = path.resolve(__dirname, '../../src/templates/OG/images')
+const brandDir = path.resolve(__dirname, '../../static/brand')
 
 const readImage = (src: string, name: string): ImageSource => ({
     src,
@@ -17,9 +18,9 @@ const readImage = (src: string, name: string): ImageSource => ({
 })
 
 export const jobImages: ImageSource[] = [
-    readImage('wordmark', 'posthog-wordmark.svg'),
     readImage('grass', 'grass.jpg'),
     readImage('laptop-hog', 'laptop-hog.png'),
+    { src: 'logo', data: fs.readFileSync(path.join(brandDir, 'posthog-logo.svg')) },
 ]
 
 type JobNode = {

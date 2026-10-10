@@ -18,7 +18,7 @@ export const JobOg = ({ role, roleFontSize = 120, timezone, salary }: JobOgProps
     ].filter((fact): fact is { label: string; value: string } => fact !== null)
 
     return (
-        <WindowOg title="Careers">
+        <WindowOg>
             <img src="laptop-hog" width={340} height={340} style={{ position: 'absolute', right: 24, bottom: 40 }} />
             <div style={{ display: 'flex', flexDirection: 'column', width: 780 }}>
                 <div

@@ -1,22 +1,14 @@
 import React from 'react'
 
 type WindowOgProps = {
-    title: string
     children: React.ReactNode
 }
 
-const navItems = ['Products', 'Pricing', 'Docs', 'Community', 'Company']
-
 // Sampled from the reference card, not the site theme.
 const textPrimary = '#111629'
-const textSecondary = '#343C3B'
-const navText = '#10140A'
 const control = '#85856B'
 const border = '#9EA096'
 const frost = 'rgba(229, 228, 215, 0.75)'
-const buttonFace = '#FFA81C'
-const buttonBorder = '#D48204'
-const buttonShadow = '#C07F0B'
 
 const WindowControls = () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -29,9 +21,9 @@ const WindowControls = () => (
     </div>
 )
 
-// Desktop frame shared by Open Graph cards: grass, nav, and a frosted window.
-// Pass the window title and the body. The body fills the area under the title bar.
-export const WindowOg = ({ title, children }: WindowOgProps) => (
+// Desktop frame shared by Open Graph cards: grass and a frosted window.
+// The body fills the area under the title bar.
+export const WindowOg = ({ children }: WindowOgProps) => (
     <div
         style={{
             width: 1200,
@@ -49,61 +41,6 @@ export const WindowOg = ({ title, children }: WindowOgProps) => (
             height={630}
             style={{ position: 'absolute', top: 0, left: 0, objectFit: 'cover' }}
         />
-        <div
-            style={{
-                position: 'relative',
-                height: 64,
-                backgroundColor: frost,
-                backdropFilter: 'blur(64px)',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 28px',
-                gap: 32,
-            }}
-        >
-            <img src="wordmark" width={160} height={28} />
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 26,
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: navText,
-                }}
-            >
-                {navItems.map((item) => (
-                    <span key={item}>{item}</span>
-                ))}
-            </div>
-            <div style={{ marginLeft: 'auto' }}>
-                <div
-                    style={{
-                        backgroundColor: buttonShadow,
-                        borderRadius: 10,
-                        paddingBottom: 4,
-                    }}
-                >
-                    <div
-                        style={{
-                            backgroundColor: buttonFace,
-                            color: '#000000',
-                            borderTop: `1px solid ${buttonBorder}`,
-                            borderLeft: `1px solid ${buttonBorder}`,
-                            borderRight: `1px solid ${buttonBorder}`,
-                            borderBottom: `2px solid ${buttonBorder}`,
-                            borderRadius: 8,
-                            fontSize: 20,
-                            fontWeight: 700,
-                            lineHeight: '24px',
-                            padding: '8px 16px',
-                        }}
-                    >
-                        Get started - free
-                    </div>
-                </div>
-            </div>
-        </div>
         <div
             style={{
                 position: 'relative',
@@ -131,25 +68,7 @@ export const WindowOg = ({ title, children }: WindowOgProps) => (
                     fontWeight: 600,
                 }}
             >
-                <span
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 4,
-                        color: textSecondary,
-                        fontWeight: 600,
-                    }}
-                >
-                    {title}
-                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                        <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M7.47 9.47a.75.75 0 0 1 1.06 0L12 12.94l3.47-3.47a.75.75 0 1 1 1.06 1.06l-3.646 3.647a1.25 1.25 0 0 1-1.768 0L7.47 10.53a.75.75 0 0 1 0-1.06Z"
-                            fill={textSecondary}
-                        />
-                    </svg>
-                </span>
+                <img src="logo" width={183} height={32} />
                 <WindowControls />
             </div>
             <div
