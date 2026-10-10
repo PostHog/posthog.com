@@ -11,7 +11,7 @@ const border = '#9EA096'
 const frost = 'rgba(229, 228, 215, 0.75)'
 
 const WindowControls = () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 25 }}>
         <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
             <rect x="1.5" y="1.5" width="15" height="15" rx="2" stroke={control} strokeWidth="2.4" />
         </svg>
@@ -44,7 +44,7 @@ export const WindowOg = ({ children }: WindowOgProps) => (
         <div
             style={{
                 position: 'relative',
-                margin: '18px 24px 20px',
+                margin: '36px 46px',
                 flexGrow: 1,
                 backgroundColor: frost,
                 backdropFilter: 'blur(64px)',
@@ -56,19 +56,10 @@ export const WindowOg = ({ children }: WindowOgProps) => (
                 overflow: 'hidden',
             }}
         >
-            <div
-                style={{
-                    height: 68,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0 26px',
-                    borderBottom: `1px solid ${border}`,
-                    fontSize: 32,
-                    fontWeight: 600,
-                }}
-            >
-                <img src="logo" width={183} height={32} />
+            <div style={{ padding: '40px 48px 0' }}>
+                <img src="logo" width={228} height={40} />
+            </div>
+            <div style={{ position: 'absolute', top: 28, right: 32 }}>
                 <WindowControls />
             </div>
             <div
