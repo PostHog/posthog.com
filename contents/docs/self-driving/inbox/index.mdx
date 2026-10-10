@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -22,7 +22,7 @@ It's the human side of the [self-improving loop](/docs/self-driving/self-improvi
 - **Reports** – grouped [signals](/docs/self-driving/signals) framed as one problem, with the evidence behind them.
 - **Pull requests** – the changes an agent opens for actionable reports.
 
-Reports appear in one list that you filter by state and reviewer scope. Filter by `For you`, `Entire project`, or a teammate. Then choose the states to show, such as `Needs decision`, `Review and merge`, `Resolved`, or `Dismissed`. Reports are ordered by priority by default. To change the order, use the sort control and choose a different order, such as `Last updated first`, `Newest first`, or `Oldest first`.
+Reports appear in one list that you filter by state and reviewer scope. Filter by `For you`, `Entire project`, or a teammate. Then choose the states to show, such as `Needs decision`, `Review and merge`, `Resolved`, `Dismissed`, or `Held back`. Reports are ordered by priority by default. To change the order, use the sort control and choose a different order, such as `Last updated first`, `Newest first`, or `Oldest first`.
 
 ## What you do here
 
@@ -35,7 +35,7 @@ From the inbox you:
 
 Nothing ships without you. The inbox is where you stay in control of what self-driving does.
 
-A resolved report stays resolved. If the same problem returns later, self-driving files a new report. It does not reopen the old one. Dismissed reports stay available in the `Dismissed` view, so you can review them or restore one.
+A resolved report stays resolved. If the same problem returns later, self-driving files a new report. It does not reopen the old one. Dismissed reports stay available in the `Dismissed` view, so you can review them or restore one. Reports that a safety or actionability check held back appear in the `Held back` view, separate from reports you dismissed yourself. Each held-back card shows why it was held back, such as "Held back by safety check" or "Judged not actionable".
 
 Triage is also how you teach the loop. When you dismiss or snooze a report and say why, that note is [forwarded to the scout that filed it](/docs/self-driving/scouts#your-inbox-feedback-steers-scouts-too), so later runs read it before deciding what to surface. Explaining a bad report is the cheapest way to stop getting it.
 
