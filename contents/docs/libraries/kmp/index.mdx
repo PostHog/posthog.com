@@ -86,7 +86,7 @@ import com.posthog.kmp.PostHogContext
 
 PostHog.setup(
     config = PostHogConfig(
-        apiKey = "<ph_project_token>",
+        projectToken = "<ph_project_token>",
         host = "<ph_client_api_host>",
     ),
     context = PostHogContext(), // platform-specific, see below
@@ -111,7 +111,7 @@ class MyApplication : Application() {
         super.onCreate()
 
         PostHog.setup(
-            config = PostHogConfig(apiKey = "<ph_project_token>"),
+            config = PostHogConfig(projectToken = "<ph_project_token>"),
             context = PostHogContext(this),
         )
     }
@@ -133,7 +133,7 @@ On iOS, use the no-argument `PostHogContext()`:
 fun MainViewController() = ComposeUIViewController {
     LaunchedEffect(Unit) {
         PostHog.setup(
-            config = PostHogConfig(apiKey = "<ph_project_token>"),
+            config = PostHogConfig(projectToken = "<ph_project_token>"),
             context = PostHogContext(),
         )
     }
@@ -149,7 +149,7 @@ On the web, use the no-argument `PostHogContext()`:
 // main.kt
 fun main() {
     PostHog.setup(
-        config = PostHogConfig(apiKey = "<ph_project_token>"),
+        config = PostHogConfig(projectToken = "<ph_project_token>"),
         context = PostHogContext(),
     )
 }
@@ -163,7 +163,7 @@ On the JVM – for example, a Compose Multiplatform desktop app – use the no-a
 // main.kt
 fun main() = application {
     PostHog.setup(
-        config = PostHogConfig(apiKey = "<ph_project_token>"),
+        config = PostHogConfig(projectToken = "<ph_project_token>"),
         context = PostHogContext(),
     )
     Window(onCloseRequest = ::exitApplication) { App() }
@@ -268,7 +268,7 @@ import com.posthog.kmp.PostHogConfig
 import com.posthog.kmp.PostHogContext
 
 val config = PostHogConfig(
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     beforeSend = listOf(
         PostHogBeforeSend { event ->
             event.copy(properties = event.properties - "email")
@@ -498,7 +498,7 @@ Then, pass an `ErrorTrackingConfig` when you initialize PostHog:
 import com.posthog.kmp.ErrorTrackingConfig
 
 val config = PostHogConfig(
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     errorTracking = ErrorTrackingConfig(
         autoCapture = true,
         inAppIncludes = listOf("com.example"),
@@ -532,7 +532,7 @@ import com.posthog.kmp.SessionRecordingConfig
 
 PostHog.setup(
     config = PostHogConfig(
-        apiKey = "<ph_project_token>",
+        projectToken = "<ph_project_token>",
         sessionRecording = SessionRecordingConfig(
             enabled = true,
             maskAllTextInputs = true, // mask sensitive text (default)
@@ -563,7 +563,7 @@ Opt users out by default by setting `optOut` to `true` in your config:
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(apiKey = "<ph_project_token>", optOut = true),
+    config = PostHogConfig(projectToken = "<ph_project_token>", optOut = true),
     context = PostHogContext(),
 )
 ```
@@ -633,7 +633,7 @@ If you're not seeing the events, feature flags, or session replay behavior you e
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(apiKey = "<ph_project_token>", debug = true),
+    config = PostHogConfig(projectToken = "<ph_project_token>", debug = true),
     context = PostHogContext(),
 )
 
@@ -647,7 +647,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `apiKey` | `String` | **Required** | Your PostHog project token. |
+| `projectToken` | `String` | **Required** | Your PostHog project token. |
 | `host` | `String` | `HOST_US` | PostHog instance URL. Use `PostHogConfig.HOST_US` (`https://us.i.posthog.com`) or `PostHogConfig.HOST_EU` (`https://eu.i.posthog.com`). |
 | `debug` | `Boolean` | `false` | Enables verbose SDK logging. |
 | `captureApplicationLifecycleEvents` | `Boolean` | `true` | Captures app open/close lifecycle events (mobile). |
