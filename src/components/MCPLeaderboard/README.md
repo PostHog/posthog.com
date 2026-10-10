@@ -40,7 +40,7 @@ Both endpoints return one row per period, facet, group, and label:
 - `BrandLogo.tsx`: marks for AI labs (Anthropic, OpenAI, xAI, Google, Cursor) and agent apps (opencode, Amp, OpenClaw, Linear), plus a laptop for custom code. The scoreboard and the model list show the lab, and the harness list shows the app, or its maker if the app has no mark. Paths are from Simple Icons (CC0), and xAI, Amp, and OpenClaw are from LobeHub icons (MIT).
 - `categories.ts`: the icon (a PostHog product's icon and color, or its own) and the docs page for each MCP tool category in `src/data/mcp-tools.json`. The "Tool categories" labels link to these pages. A new category shows no icon and no link until it is added here.
 - `CampfireHog.tsx`: an easter egg next to the install CTA. Each click wiggles the hog and escalates its complaint, then gives a link to a random fun page (`ESCAPES`) on most clicks and cowboy wisdom (`WISDOM`) on the rest. Keep the links pointing at pages that exist.
-- `charts.tsx`: `StackedShareChart` and `LineChart` (chart.js), plus `ShareBars` and `SplitBar` (plain HTML, so they follow the theme)
+- `charts.tsx`: `LineChart` (a `TimeSeriesLineChart` from `@posthog/quill-charts`, stacked or not) and `SplitBar` (a quill `BarChart` in a 100% layout, with an inline legend), plus `ShareBars` (plain HTML, so each row can show a logo and a link)
 
 ## Changing the queries
 

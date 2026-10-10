@@ -37,7 +37,7 @@ export interface Share {
 // Labels that mean "we don't know", which the charts drop before they renormalize.
 const UNKNOWN_LABELS = new Set(['Unknown', 'unknown', 'Unidentified', 'Not reported', 'None', 'Unspecified'])
 
-// Hex values of the Tailwind tokens named in the comments. Chart.js paints a canvas, so it needs
+// Hex values of the Tailwind tokens named in the comments. The charts paint a canvas, so they need
 // the values, not the classes. These are for single-series charts and bars. Labs and categories use
 // the OKLCH palettes below.
 export const PALETTE = {
@@ -50,7 +50,7 @@ export const PALETTE = {
 
 // OKLCH is a perceptual color space: equal steps in lightness, chroma, or hue look equally different,
 // which HSL does not give (a yellow and a blue with the same HSL lightness look very different). The
-// lab and category colors are built in OKLCH and converted to hex for Chart.js.
+// lab and category colors are built in OKLCH and converted to hex for the charts.
 const toSrgb = (x: number): number => (x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055)
 
 const oklchToLinearRgb = (l: number, c: number, h: number): [number, number, number] => {
@@ -345,9 +345,6 @@ export const topSeries = (
 // Percentage-point change between the last two periods.
 export const delta = (values: number[]): number | null =>
     values.length >= 2 ? values[values.length - 1] - values[values.length - 2] : null
-
-export const formatDay = (day: string): string =>
-    new Date(`${day}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
 
 export const formatPct = (value: number | null | undefined, digits = 1): string =>
     value === null || value === undefined ? '–' : `${value < 0.1 && value > 0 ? '<0.1' : value.toFixed(digits)}%`

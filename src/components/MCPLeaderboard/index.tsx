@@ -402,7 +402,7 @@ const UnderTheHood = memo(function UnderTheHood({
                         const series = topSeries(byLabel, 5, (label) => colors.get(label) as string)
                         return (
                             <Card key={facet} title={title}>
-                                <SplitBar items={items} />
+                                <SplitBar items={items} theme={theme} />
                                 <div className="mt-3">
                                     <LineChart
                                         periods={days}
@@ -552,7 +552,7 @@ const Reliability = memo(function Reliability({
                         series={[{ label: 'Error rate', color: PALETTE.red, data: errorRate }]}
                     />
                     <h4 className="text-sm font-bold text-primary mt-4 mb-1.5">Why calls fail</h4>
-                    <SplitBar items={errorTypes} />
+                    <SplitBar items={errorTypes} theme={theme} />
                 </Card>
                 <Card title="Latency">
                     <LineChart
