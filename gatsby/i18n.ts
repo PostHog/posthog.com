@@ -46,7 +46,10 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
     ]
 
     deletePage(page)
-    createPage({ ...page, context: { ...page.context, locale: 'en', lang: 'en', languageAlternates } })
+    createPage({
+        ...page,
+        context: { ...page.context, pageType: 'home', locale: 'en', lang: 'en', languageAlternates },
+    })
 
     translations.forEach(({ code, lang, messages }) => {
         Object.keys(messages)
@@ -56,7 +59,7 @@ export function createLocalizedHomePages(page: Page, { createPage, deletePage }:
         createPage({
             ...page,
             path: `/${code}`,
-            context: { ...page.context, locale: code, lang, messages, languageAlternates },
+            context: { ...page.context, pageType: 'home', locale: code, lang, messages, languageAlternates },
         })
     })
 }

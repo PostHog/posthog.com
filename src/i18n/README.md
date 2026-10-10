@@ -8,7 +8,7 @@ Translations for the home page. There is one YAML file per locale in `locales/`.
 |---|---|---|
 | Strings | `locales/en.yml` | The English text for every key. This is the source of truth. |
 | Translations | `locales/<code>.yml` | The same keys in another language. A key that is not in the file shows the English text. |
-| Pages | `gatsby/i18n.ts` | Reads the YAML files. Creates `/` with `locale: 'en'`, and `/<code>` with `locale` and `messages` in its page context. |
+| Pages | `gatsby/i18n.ts` | Reads the YAML files. Creates `/` with `locale: 'en'`, and `/<code>` with `locale` and `messages` in its page context. Both get `pageType: 'home'`, which `AppWindow` puts on the window as `data-page`, so CSS for the home window also applies to `/<code>`. |
 | Lookup | `index.tsx` | `I18nProvider` reads a page's context. `useTranslation()` gives `t()` and `rich()`. |
 | Routing | `middleware.ts` | Sends a visitor from `/` to `/<code>` when their `Accept-Language` ranks that locale above English. |
 | Matching | `preferredLocale.ts` | Picks the page for a visitor's languages. The middleware uses it for the redirect. The hedgehog uses it to decide if a visitor is on their own page. |
