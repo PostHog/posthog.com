@@ -85,3 +85,7 @@ Home page A/B tests run on English only for now. A translated page must show the
 ## Opt out
 
 On a translated page, the taskbar shows "View in English". It sets the `ph_skip_translation` cookie and opens `/`. While the cookie is set, the middleware always serves English at `/`. A visitor can still open `/<code>` directly.
+
+## English-only notice
+
+When a reader goes from a translated page to a page that only exists in English, a toast says so in the language they came from. `useEnglishOnlyNotice()` in `Wrapper` reads the text while the translated page is still open, because the English page cannot. The keys are `toast.english_only.*`. The toast shows once per browser (`ph_english_only_notice_seen` in `localStorage`), and not when the reader goes to `/`.

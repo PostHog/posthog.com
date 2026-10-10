@@ -374,3 +374,10 @@ messages:
         store: Store
         careers: Careers
         trash: Trash
+
+    # Shown once, in the language of the translated page, when a reader leaves it for a page that
+    # only exists in English. The reader never sees the English text.
+    toast:
+        english_only:
+            title: You're leaving the translated pages
+            description: The rest of PostHog.com is in English for now.

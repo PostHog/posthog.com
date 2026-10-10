@@ -8,6 +8,7 @@ import { SearchOverlay } from 'components/SearchUI'
 import { ChatOverlay } from 'hooks/useChat'
 import AppContainer from 'components/AppContainer'
 import WebMCP from 'components/WebMCP'
+import { useEnglishOnlyNotice } from '../../i18n/useEnglishOnlyNotice'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -27,6 +28,7 @@ const WindowList = React.memo(function WindowList() {
 export default function Wrapper() {
     const { constraintsRef } = useAppActions()
     const { compact } = useAppSettings()
+    useEnglishOnlyNotice()
 
     return (
         <AppContainer className="relative h-dvh flex flex-col p-2">

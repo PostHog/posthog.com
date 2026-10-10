@@ -388,3 +388,8 @@ messages:
         store: Tienda
         careers: Empleos
         trash: Papelera
+
+    toast:
+        english_only:
+            title: Estás saliendo de las páginas traducidas
+            description: Por ahora, el resto del sitio está en inglés.
