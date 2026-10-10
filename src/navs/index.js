@@ -7625,6 +7625,10 @@ export const docsMenu = {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
+                        {
+                            name: 'Other languages',
+                            url: '/docs/mcp-analytics/installation/other-languages',
+                        },
                     ],
                 },
                 {
