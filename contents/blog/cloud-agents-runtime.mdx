@@ -89,11 +89,11 @@ A user we interviewed recently had nearly given up on cloud agents because their
 
 We hit the same wall, so the runtime moved to having a VM (Virtual Machine) underneath. All of this runs on [Modal](https://modal.com/), with a real Linux kernel and a Docker daemon present.
 
-The network allowlist is enforced in Modal's network layer on every run: up to 100 domains, wildcards only as the leftmost label, no raw IPs. We also rolled out our warming pool, which lets us boot VMs and open an agent session while you're still typing your first message. This enables the first token to arrive at model speed instead of cold-boot speed (which is very nice for end-users!).
+If a project has a network allowlist, it's enforced in Modal's network layer on every run: up to 100 domains, wildcards only as the leftmost label, no raw IPs. We also rolled out our warming pool, which lets us boot VMs and open an agent session while you're still typing your first message. This enables the first token to arrive at model speed instead of cold-boot speed (which is very nice for end-users!).
 
 By this point, multiple PostHog products were reaching into the runtime, each in its own way. We replaced that with a contract: create a task, warm a run, send a message, resume a finished run.
 
-The new version of PostHog AI (which can ship code) plugged into it almost immediately. A conversation in the [PostHog AI Web chat](/docs/posthog-ai/surfaces/web-app) can open a sandbox, route follow-ups onto the live run through the same queue the Slack app uses, or, once the run has ended, resume into a fresh sandbox restored from its snapshot with the conversation and working tree intact.
+The new version of PostHog AI (which can ship code) plugged into it almost immediately. A conversation in the [PostHog AI Web chat](/docs/posthog-ai/surfaces/web-app) can open a sandbox, route follow-ups onto the live run through the same queue every client uses, or, once the run has ended, resume into a fresh sandbox. The conversation replays from the run log, and the working tree comes back from a snapshot (if there is one).
 
 ## 5. A build has to treat its own input as untrusted
 
