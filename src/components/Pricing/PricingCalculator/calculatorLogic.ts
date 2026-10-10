@@ -21,6 +21,8 @@ export interface BillingAddon {
     type: string
     inclusion_only?: boolean | null
     plans: BillingPlan[]
+    // True when billing limits don't cap it, like Logs custom retention once it is a companion product
+    no_billing_limit?: boolean | null
     [key: string]: any
 }
 
@@ -28,7 +30,34 @@ export interface BillingProduct {
     type: string
     addons?: BillingAddon[] | null
     plans: BillingPlan[]
+    companion_of?: string | null
+    no_billing_limit?: boolean | null
     [key: string]: any
+}
+
+/** A second input that multiplies an add-on's volume, like the months Logs custom retention keeps each GB. */
+export interface AddonMultiplier {
+    unit: string
+    initial: number
+    max?: number
+    marks?: number[]
+}
+
+/** An add-on slider from our product data (`addonSliders`). */
+export interface AddonSlider {
+    key: string
+    volume?: number
+    sliderConfig?: { min?: number }
+    // The add-on's volume also bills through the parent product's tiers
+    countsTowardParentVolume?: boolean
+    multiplier?: AddonMultiplier | null
+    [key: string]: any
+}
+
+/** What the calculator keeps for each add-on slider, in state and in the URL. */
+export interface AddonInput {
+    volume: number
+    months?: number
 }
 
 /** A product as the calculator sees it – our own product data joined to its billing product. */
@@ -80,6 +109,71 @@ export const calculatePrice = (
 
     return { total: Math.round(finalCost), costByTier }
 }
+
+/**
+ * Billing can list a product billed with another (`companion_of`) at the top level instead of in
+ * the parent's add-ons. Fold those companions into the add-ons so both shapes read the same way.
+ */
+export const withCompanionAddons = <T extends BillingProduct>(product: T, products: BillingProduct[]): T => {
+    const addons = product.addons || []
+    const companions = products.filter(
+        (other) =>
+            !!other.companion_of &&
+            other.companion_of === product.type &&
+            !addons.some((addon) => addon.type === other.type)
+    )
+    return companions.length > 0 ? { ...product, addons: [...addons, ...companions] } : product
+}
+
+/** The tiers of one of a product's add-ons, companions included once `withCompanionAddons` has run. */
+export const getAddonTiers = (
+    product: { addons?: BillingAddon[] | null } | null | undefined,
+    type: string
+): BillingTier[] | null | undefined =>
+    product?.addons?.find((addon) => addon.type === type)?.plans.find((plan) => plan.tiers)?.tiers
+
+/** Months an add-on bills for, kept within what it allows. An add-on without a multiplier bills once. */
+export const getAddonMonths = (multiplier?: AddonMultiplier | null, months?: number | null): number => {
+    if (!multiplier) return 1
+    const value = typeof months === 'number' && Number.isFinite(months) ? Math.round(months) : multiplier.initial
+    return Math.min(Math.max(value, 1), multiplier.max ?? Infinity)
+}
+
+/** The add-on inputs to start from: saved ones if there are any, else the add-on defaults. */
+export const getAddonInputs = (
+    addonSliders: AddonSlider[],
+    saved: Record<string, Partial<AddonInput> | undefined> = {}
+): Record<string, AddonInput> =>
+    Object.fromEntries(
+        addonSliders.map((addon) => [
+            addon.key,
+            {
+                volume: saved[addon.key]?.volume ?? addon.volume ?? addon.sliderConfig?.min ?? 0,
+                ...(addon.multiplier && { months: getAddonMonths(addon.multiplier, saved[addon.key]?.months) }),
+            },
+        ])
+    )
+
+/**
+ * Price an add-on slider. Logs custom retention bills in GB-months: each GB you keep costs the
+ * add-on rate again for every month you keep it, on top of the ingestion it also bills as.
+ */
+export const calculateAddonPrice = (
+    tiers: BillingTier[] | null | undefined,
+    input?: Partial<AddonInput>,
+    multiplier?: AddonMultiplier | null
+): ReturnType<typeof calculatePrice> =>
+    calculatePrice((input?.volume ?? 0) * getAddonMonths(multiplier, input?.months), tiers)
+
+/** The add-on volume that also bills through the parent product's tiers, like retained logs as ingestion. */
+export const getParentMeteredVolume = (
+    addonSliders: AddonSlider[],
+    inputs: Record<string, Partial<AddonInput> | undefined>
+): number =>
+    addonSliders.reduce(
+        (sum, addon) => (addon.countsTowardParentVolume ? sum + (inputs[addon.key]?.volume ?? 0) : sum),
+        0
+    )
 
 /**
  * Build the calculator's add-on state from the products it shows.

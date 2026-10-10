@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
+import useProducts from 'hooks/useProducts'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
 
@@ -49,6 +50,19 @@ const plans = {
         },
     ],
 }
+
+// Billing sets `no_billing_limit` on Logs custom retention once the Logs billing limit stops capping it,
+// which turns the notes below on by themselves
+const RetentionLimitNote = ({ children, otherwise = null }) => {
+    const { products } = useProducts()
+    const noBillingLimit = products
+        .find((product) => product.handle === 'logs')
+        ?.billingData?.addons?.some(
+            (addon) => addon.type === 'logs_retention_custom' && addon.no_billing_limit === true
+        )
+    return noBillingLimit ? children : otherwise
+}
+
 const faqs = [
     {
         q: 'How do I know how much PostHog will cost?',
@@ -64,8 +78,9 @@ const faqs = [
         q: 'Do I pay anything for stored data (events, exceptions, replays, logs, etc.)?',
         a: (
             <p>
-                No, for all of our products you only pay for what you capture, ingest, or sync in a given month (i.e.
-                you only pay when each event is first received). There are no additional storage costs or fees.
+                Not for most products. You pay for what you capture, ingest, or sync in a given month, and storing it
+                costs nothing extra. The exception is Logs custom retention: if you keep logs or traces longer than the
+                14-day default, each GB costs $0.05 for every month you keep it.
             </p>
         ),
     },
@@ -83,8 +98,14 @@ const faqs = [
                     Enterprise add-on can increase retention to 5 years.
                 </p>
                 <p>
-                    Logs are retained for 14 days by default. You can set custom retention per service or per source at
-                    $0.05/GB per month retained.
+                    Logs are retained for 14 days by default. You can set custom retention per service or per source.
+                    Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every
+                    month you keep it, until it expires.
+                    <RetentionLimitNote>
+                        {' '}
+                        Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention
+                        can't have a limit of its own.
+                    </RetentionLimitNote>
                 </p>
             </>
         ),
@@ -168,7 +189,8 @@ const faqs = [
         a: (
             <p>
                 Yes. Every month, your usage is reset and you get another 1M events, 5K session replays, and more to
-                use. Unused free tier limits do not rollover.
+                use. Unused free tier limits do not rollover. Logs custom retention has no free tier. It bills for the
+                data you keep, not this month's usage.
             </p>
         ),
     },
@@ -176,9 +198,15 @@ const faqs = [
         q: 'Can I set a billing limit?',
         a: (
             <p>
-                Yes, you can set a billing limit for each of PostHog's products separately in your organization's{' '}
-                <Link to="https://app.posthog.com/organization/billing">billing settings</Link>. Check out our doc on{' '}
-                <Link to="/docs/billing/estimating-usage-costs">billing limits and alerts</Link> for more information.
+                Yes, you can set a billing limit for <RetentionLimitNote otherwise="each">most</RetentionLimitNote> of
+                PostHog's products separately in your organization's{' '}
+                <Link to="https://app.posthog.com/organization/billing">billing settings</Link>.
+                <RetentionLimitNote>
+                    {' '}
+                    Logs custom retention can't have a limit, and your Logs limit doesn't cap it.
+                </RetentionLimitNote>{' '}
+                Check out our doc on <Link to="/docs/billing/limits-alerts">billing limits and alerts</Link> for more
+                information.
             </p>
         ),
     },
@@ -189,6 +217,10 @@ const faqs = [
                 If you've set a billing limit and your usage hits it, any additional events are permanently dropped and
                 feature flags will return a default quota limited response. PostHog will never charge you more than what
                 you've set as your billing limit.
+                <RetentionLimitNote>
+                    {' '}
+                    The exception is Logs custom retention, which your Logs limit doesn't cap.
+                </RetentionLimitNote>
             </p>
         ),
     },
@@ -198,7 +230,8 @@ const faqs = [
             <p>
                 Usage is calculated on a per-product level. Events for product and web analytics, recordings for session
                 replay, requests for feature flags and experiments, exceptions for error tracking, responses for
-                surveys, synced rows for data warehouse, messages for workflows, and GB ingested for logs.
+                surveys, synced rows for data warehouse, messages for workflows, GB ingested for logs, and GB-months
+                kept for Logs custom retention.
             </p>
         ),
     },
@@ -218,8 +251,9 @@ const faqs = [
         a: (
             <p>
                 Yes, you can cancel your plan by setting a billing limit at any time and we'll only charge for what you
-                use. If you have an <Link to="/side-project-insurance">accidental spike</Link>, talk to us and we'll
-                help you sort it out.
+                use.
+                <RetentionLimitNote> Billing limits don't cap Logs custom retention.</RetentionLimitNote> If you have an{' '}
+                <Link to="/side-project-insurance">accidental spike</Link>, talk to us and we'll help you sort it out.
             </p>
         ),
     },

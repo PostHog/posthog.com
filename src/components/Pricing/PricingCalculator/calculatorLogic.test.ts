@@ -11,8 +11,19 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, test } from 'node:test'
 
-import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic.ts'
-import type { BillingProduct, CalculatorAddon } from './calculatorLogic.ts'
+import {
+    buildProductAddons,
+    calculateAddonPrice,
+    calculatePrice,
+    getAddonInputs,
+    getAddonMonths,
+    getAddonsCostForProduct,
+    getAddonTiers as getBillingAddonTiers,
+    getCalculatorTotal,
+    getParentMeteredVolume,
+    withCompanionAddons,
+} from './calculatorLogic.ts'
+import type { AddonSlider, BillingAddon, BillingProduct, CalculatorAddon } from './calculatorLogic.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -100,6 +111,139 @@ describe('Product analytics', () => {
             productAnalyticsEstimate({ anonymousEvents: 1_000_000, identifiedEvents: 1_000_000, groupAnalytics: true }),
             50
         )
+    })
+})
+
+// Logs custom retention moves from a Logs add-on to a top-level companion product.
+const retention: BillingAddon = {
+    type: 'logs_retention_custom',
+    inclusion_only: true,
+    plans: [{ tiers: [{ up_to: null, unit_amount_usd: '0.05' }] }],
+}
+const retention30d: BillingAddon = { ...retention, type: 'logs_retention_30d' }
+const logsPlans = [
+    {
+        tiers: [
+            { up_to: 10, unit_amount_usd: '0' },
+            { up_to: 300, unit_amount_usd: '0.25' },
+            { up_to: null, unit_amount_usd: '0.15' },
+        ],
+    },
+]
+const addonShape: BillingProduct[] = [
+    { type: 'logs', plans: logsPlans, companion_of: null, addons: [retention30d, retention] },
+]
+const companionShape: BillingProduct[] = [
+    { type: 'logs', plans: logsPlans, companion_of: null, addons: [retention30d] },
+    { ...retention, companion_of: 'logs', no_billing_limit: true, addons: [] },
+]
+
+describe('withCompanionAddons', () => {
+    const retentionCost = (products: BillingProduct[], volume: number) => {
+        const logs = withCompanionAddons(products[0], products)
+        const addon = logs.addons?.find((addon) => addon.type === 'logs_retention_custom')
+        return calculatePrice(volume, addon?.plans.find((plan) => plan.tiers)?.tiers).total
+    }
+
+    test('leaves a product without companions unchanged', () => {
+        assert.equal(withCompanionAddons(addonShape[0], addonShape), addonShape[0])
+        assert.equal(withCompanionAddons(getProduct('session_replay'), products), getProduct('session_replay'))
+    })
+
+    test('lists a companion product with its parent add-ons', () => {
+        const logs = withCompanionAddons(companionShape[0], companionShape)
+        assert.deepEqual(
+            logs.addons?.map((addon) => addon.type),
+            ['logs_retention_30d', 'logs_retention_custom']
+        )
+    })
+
+    test('prices a companion the same as the add-on it replaces', () => {
+        assert.equal(retentionCost(addonShape, 100), 5)
+        assert.equal(retentionCost(companionShape, 100), 5)
+    })
+
+    test('lists a product once when billing returns it as both an add-on and a companion', () => {
+        const logs = withCompanionAddons(addonShape[0], [...addonShape, companionShape[1]])
+        assert.deepEqual(
+            logs.addons?.map((addon) => addon.type),
+            ['logs_retention_30d', 'logs_retention_custom']
+        )
+    })
+})
+
+describe('Logs custom retention', () => {
+    // As in src/hooks/productData/logs.tsx
+    const retentionSlider: AddonSlider = {
+        key: 'logs_retention_custom',
+        countsTowardParentVolume: true,
+        multiplier: { unit: 'month', initial: 1, max: 86 },
+        volume: 0,
+    }
+
+    /** What both calculators bill for Logs: ingestion on every GB, plus retention on the GB kept. */
+    const logsEstimate = (products: BillingProduct[], volume: number, retained: number, months?: number) => {
+        const logs = withCompanionAddons(products[0], products)
+        const inputs = { logs_retention_custom: { volume: retained, months } }
+        const ingestion = calculatePrice(volume + getParentMeteredVolume([retentionSlider], inputs), logsPlans[0].tiers)
+        const retentionTiers = getBillingAddonTiers(logs, 'logs_retention_custom')
+        const kept = calculateAddonPrice(retentionTiers, inputs.logs_retention_custom, retentionSlider.multiplier)
+        return { ingestion: ingestion.total, retention: kept.total }
+    }
+
+    test('bills 100 GB kept for 12 months as 1,200 GB-months in both shapes', () => {
+        assert.deepEqual(logsEstimate(addonShape, 0, 100, 12), { ingestion: 23, retention: 60 })
+        assert.deepEqual(logsEstimate(companionShape, 0, 100, 12), { ingestion: 23, retention: 60 })
+    })
+
+    test('bills retained GB as ingestion too', () => {
+        // 10 GB at 14-day retention plus 100 GB kept longer: 110 GB ingested, 10 of them free
+        assert.equal(logsEstimate(companionShape, 10, 100, 1).ingestion, 25)
+        assert.equal(logsEstimate(companionShape, 110, 0).ingestion, 25)
+    })
+
+    test('bills one month when months are left out, as an old calculator URL does', () => {
+        assert.equal(logsEstimate(companionShape, 0, 100).retention, 5)
+    })
+
+    test('keeps months between 1 and 86', () => {
+        const { multiplier } = retentionSlider
+        assert.equal(getAddonMonths(multiplier, 0), 1)
+        assert.equal(getAddonMonths(multiplier, 12.4), 12)
+        assert.equal(getAddonMonths(multiplier, 1000), 86)
+        assert.equal(getAddonMonths(multiplier, undefined), 1)
+        assert.equal(getAddonMonths(undefined, 12), 1)
+        assert.equal(logsEstimate(companionShape, 0, 100, 1000).retention, 430)
+    })
+
+    test('saves months with the add-on inputs and restores them', () => {
+        assert.deepEqual(getAddonInputs([retentionSlider]), { logs_retention_custom: { volume: 0, months: 1 } })
+        const saved = getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100, months: 12 } })
+        assert.deepEqual(saved, { logs_retention_custom: { volume: 100, months: 12 } })
+        assert.deepEqual(getAddonInputs([retentionSlider], JSON.parse(JSON.stringify(saved))), saved)
+        // A URL from before the months input, and one with months out of range
+        assert.deepEqual(getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100 } }), {
+            logs_retention_custom: { volume: 100, months: 1 },
+        })
+        assert.deepEqual(getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100, months: 0 } }), {
+            logs_retention_custom: { volume: 100, months: 1 },
+        })
+    })
+
+    test('leaves add-ons without months as they were', () => {
+        const groupAnalytics: AddonSlider = { key: 'group_analytics', volume: 2_000_000 }
+        assert.deepEqual(getAddonInputs([groupAnalytics]), { group_analytics: { volume: 2_000_000 } })
+        const tiers = getAddonTiers('product_analytics', 'group_analytics')
+        assert.equal(calculateAddonPrice(tiers, { volume: 2_000_000, months: 12 }).total, 71)
+        assert.equal(getParentMeteredVolume([groupAnalytics], { group_analytics: { volume: 2_000_000 } }), 0)
+    })
+
+    test('reads the billing limit flag only from the companion shape', () => {
+        const flag = (products: BillingProduct[]) =>
+            withCompanionAddons(products[0], products).addons?.find((addon) => addon.type === 'logs_retention_custom')
+                ?.no_billing_limit === true
+        assert.equal(flag(addonShape), false)
+        assert.equal(flag(companionShape), true)
     })
 })
 

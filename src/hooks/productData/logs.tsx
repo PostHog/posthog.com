@@ -171,6 +171,12 @@ export const logs = {
     },
     volume: 10,
     freeAllocationText: 'First 10 GB free – every month!',
+    // Replaces the billing limit point on /logs/pricing and /tracing/pricing once billing reports
+    // `no_billing_limit` for custom retention
+    noBillingLimitDetail: {
+        headline: 'Set a billing limit on ingestion.',
+        body: "Custom retention isn't capped by it.",
+    },
     addonSliders: [
         {
             key: 'logs_retention_custom',
@@ -178,12 +184,16 @@ export const logs = {
             // Billing meters all ingested GB (any retention) on the base logs product, then bills
             // retained GB again at the add-on rate for each month of retention.
             countsTowardParentVolume: true,
-            // Months of retention input on /logs/pricing, up to 86. The /pricing calculator still estimates one month.
-            multiplier: { unit: 'month', initial: 1, max: 86 },
+            // Months of retention input on both calculators, up to 86
+            multiplier: { unit: 'month', initial: 1, max: 86, marks: [1, 12, 36, 86] },
             // Shown on /logs/pricing
             pricingDescription:
-                'Keep logs and traces longer than the 14-day default. Custom retention is billed per GB for each month you keep them, and you can set it per service or per source in your logs and traces settings.',
-            note: 'Billed per month of retention. These GB also count toward ingestion above – this price is the added cost for each month you keep them.',
+                "Keep logs and traces longer than the 14-day default. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. These GB also count toward ingestion above. Set it per service or per source in your logs and traces settings.",
+            // Shown on /pricing
+            note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. These GB also count toward ingestion above.",
+            // Added to both once billing reports `no_billing_limit` for custom retention
+            noBillingLimitNote:
+                "Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention can't have a limit of its own.",
             sliderConfig: {
                 marks: [0, 10, 100, 1000, 5000],
                 min: 0,

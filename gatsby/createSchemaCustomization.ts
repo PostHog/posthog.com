@@ -638,9 +638,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type ProductDataProductsAddons {
       legacy_product: Boolean
+      no_billing_limit: Boolean
     }
     type ProductDataProducts {
       legacy_product: Boolean
+      companion_of: String
+      no_billing_limit: Boolean
     }
     type ProductDataProductsAddonsFeatures {
         category: String
