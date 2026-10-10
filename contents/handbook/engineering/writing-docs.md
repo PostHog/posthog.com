@@ -24,7 +24,7 @@ The <SmallTeam slug="wizard-and-docs" /> can help you, but they can't write docs
 - Creating context services that power agents like the AI wizard
 - Working on large scale docs projects
 
-If you want their input, hit them up in `#team-wizard-and-docs` or tag `@team-wizard-and-docs` in GitHub. 
+If you want their input, hit them up in `#team-wizard-and-docs` or tag `@PostHog/team-wizard-docs` in GitHub. 
 
 They've also created a comprehensive self-serve guide on [how to write product docs](/handbook/wizard-and-docs/writing-product-docs) for you to use.
 
