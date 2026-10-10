@@ -31,6 +31,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
+import { useTranslation } from 'i18n'
+import { skipTranslation } from 'i18n/cookie'
 
 const NAV_MENU_CLASS =
     '[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex [&_a:not(:first-child)]:hidden md:[&_a:not(:first-child)]:flex'
@@ -47,6 +49,7 @@ function TaskBarMenu() {
         updateTaskbarHeight,
     } = useAppActions()
     const { posthogInstance } = useAppSettings()
+    const { locale, t } = useTranslation()
     const [isAnimating, setIsAnimating] = useState(false)
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -136,24 +139,24 @@ function TaskBarMenu() {
                 ? [
                       {
                           type: 'item' as const,
-                          label: 'Go to...',
+                          label: t('taskbar.account.go_to'),
                           disabled: true,
                       },
                       {
                           type: 'item' as const,
-                          label: 'PostHog app',
+                          label: t('taskbar.account.posthog_app'),
                           link: 'https://app.posthog.com',
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
                       },
                       {
                           type: 'item' as const,
-                          label: 'Community',
+                          label: t('taskbar.account.community'),
                           disabled: true,
                       },
                       {
                           type: 'item' as const,
-                          label: 'Forums',
+                          label: t('taskbar.account.forums'),
                           link: '/forum',
                           icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
                       },
@@ -161,7 +164,7 @@ function TaskBarMenu() {
                           ? [
                                 {
                                     type: 'item' as const,
-                                    label: `Notifications${
+                                    label: `${t('taskbar.account.notifications')}${
                                         notifications?.length > 0 ? ` (${notifications.length})` : ''
                                     }`,
                                     onClick: () => setIsNotificationsPanelOpen(true),
@@ -171,13 +174,13 @@ function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
-                                    label: 'My profile',
+                                    label: t('taskbar.account.my_profile'),
                                     link: `/community/profiles/${user?.profile.id}`,
                                     icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                                 {
                                     type: 'item' as const,
-                                    label: 'Bookmarks',
+                                    label: t('taskbar.account.bookmarks'),
                                     link: '/bookmarks',
                                     icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
@@ -265,7 +268,7 @@ function TaskBarMenu() {
                       },
                       {
                           type: 'item' as const,
-                          label: 'Community logout',
+                          label: t('taskbar.account.logout'),
                           onClick: () => logout(),
                           icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
                       },
@@ -273,12 +276,12 @@ function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Go to...',
+                          label: t('taskbar.account.go_to'),
                           disabled: true,
                       },
                       {
                           type: 'item' as const,
-                          label: 'PostHog app',
+                          label: t('taskbar.account.posthog_app'),
                           link: 'https://app.posthog.com',
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
@@ -288,12 +291,12 @@ function TaskBarMenu() {
                       },
                       {
                           type: 'item' as const,
-                          label: 'Community',
+                          label: t('taskbar.account.community'),
                           disabled: true,
                       },
                       {
                           type: 'item' as const,
-                          label: 'Sign in to the community',
+                          label: t('taskbar.account.sign_in'),
                           onClick: handleSignInClick,
                       },
                   ],
@@ -371,6 +374,12 @@ function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
+                            {/* Only on a translated page. The cookie stops the middleware from sending the visitor back. */}
+                            {locale !== 'en' && (
+                                <OSButton asLink to="/" onClick={skipTranslation} size="md" className="mr-1">
+                                    <span lang="en">{t('taskbar.view_in_english')}</span>
+                                </OSButton>
+                            )}
                             <div className="relative mr-1">
                                 <OSButton
                                     variant="primary"
@@ -383,7 +392,7 @@ function TaskBarMenu() {
                                     }
                                     className=""
                                 >
-                                    {posthogInstance ? 'Open PostHog' : 'Get started – free'}
+                                    {posthogInstance ? t('taskbar.open_posthog') : t('taskbar.get_started')}
                                 </OSButton>
                             </div>
                             <Tooltip
@@ -394,7 +403,7 @@ function TaskBarMenu() {
                                 }
                             >
                                 <div className="flex flex-col items-center gap-1">
-                                    <p className="text-sm mb-0">Search</p>
+                                    <p className="text-sm mb-0">{t('taskbar.search')}</p>
                                     <KeyboardShortcut text="/" size="sm" />
                                 </div>
                             </Tooltip>
@@ -410,7 +419,7 @@ function TaskBarMenu() {
                                 }
                             >
                                 <div className="flex flex-col items-center gap-1">
-                                    <p className="text-sm mb-0">Ask Max</p>
+                                    <p className="text-sm mb-0">{t('taskbar.ask_max')}</p>
                                     <div className="flex items-center gap-1">
                                         <KeyboardShortcut text="Shift" size="sm" />
                                         <KeyboardShortcut text="?" size="sm" />

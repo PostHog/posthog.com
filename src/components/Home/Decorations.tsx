@@ -3,6 +3,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { HedgehogSailor } from '@posthog/brand/hoggies'
+import { useTranslation } from 'i18n'
 
 export const Image = ({ src, className = '', alt = '' }: { src: string; className?: string; alt?: string }) => (
     <CloudinaryImage src={src} alt={alt} className={className} />
@@ -44,15 +45,19 @@ export const ImageReading2 = () => (
     />
 )
 
-export const TooltipDW = () => (
-    <Tooltip
-        trigger={
-            <span>
-                <IconInfo className="size-4 inline-block relative -top-px" />
-            </span>
-        }
-        delay={0}
-    >
-        <p className="text-sm mb-0">You can also connect your own!</p>
-    </Tooltip>
-)
+export const TooltipDW = () => {
+    const { t } = useTranslation()
+
+    return (
+        <Tooltip
+            trigger={
+                <span>
+                    <IconInfo className="size-4 inline-block relative -top-px" />
+                </span>
+            }
+            delay={0}
+        >
+            <p className="text-sm mb-0">{t('section.4.tooltip')}</p>
+        </Tooltip>
+    )
+}

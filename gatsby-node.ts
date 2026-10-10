@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { GatsbyNode } from 'gatsby'
+import { createLocalizedHomePages } from './gatsby/i18n'
 const axios = require('axios')
 
 export { createPages } from './gatsby/createPages'
@@ -15,6 +16,11 @@ export { onPreBootstrap } from './gatsby/onPreBootstrap'
 // called after every page is created.
 export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }) => {
     const { createPage, deletePage } = actions
+
+    // The home page, plus one copy per translation in src/i18n/locales
+    if (page.path === '/' && !page.context?.locale) {
+        createLocalizedHomePages(page, actions)
+    }
 
     // Add build time to credits page using environment variable
     if (page.path === '/credits/') {
@@ -106,6 +112,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                 constants: path.resolve(__dirname, 'src', 'constants'),
                 logic: path.resolve(__dirname, 'src', 'logic'),
                 hooks: path.resolve(__dirname, 'src', 'hooks'),
+                i18n: path.resolve(__dirname, 'src', 'i18n'),
                 // Mapping
                 docs: path.resolve(__dirname, '.cache', 'gatsby-source-git', 'posthog-main-repo', 'docs'),
                 onboarding: path.resolve(
