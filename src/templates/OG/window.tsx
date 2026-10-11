@@ -47,6 +47,8 @@ export const WindowOg = ({ children, outside }: WindowOgProps) => (
                 position: 'relative',
                 margin: '36px 46px',
                 flexGrow: 1,
+                flexShrink: 1,
+                minHeight: 0,
                 backgroundColor: frost,
                 backdropFilter: 'blur(64px)',
                 borderRadius: 16,
@@ -68,6 +70,8 @@ export const WindowOg = ({ children, outside }: WindowOgProps) => (
                     padding: '52px 48px 56px',
                     display: 'flex',
                     flexGrow: 1,
+                    flexShrink: 1,
+                    minHeight: 0,
                     position: 'relative',
                 }}
             >

@@ -54,35 +54,45 @@ const ROLE_COLUMN_WIDTH = 720
 const ROLE_LINE_HEIGHT = 0.94
 const ROLE_MAX_LINES = 2
 
-// Largest size that wraps to at most two lines in the title column.
-export async function fitRoleFontSize(renderer: Renderer, role: string): Promise<number> {
+type TitleFit = {
+    max: number
+    min?: number
+    width: number
+    lineHeight: number
+    maxLines: number
+}
+
+// Largest font size in [min, max] that wraps to at most maxLines.
+// Words do not scale evenly, so this measures real wraps instead of dividing the width.
+// Returns null when even `min` does not fit.
+export async function fitTitleFontSize(renderer: Renderer, text: string, fit: TitleFit): Promise<number | null> {
     const { fromJsx } = createRequire(require.resolve('takumi-js'))('@takumi-rs/helpers/jsx')
-    const lineCount = async (fontSize: number) => {
+    const min = fit.min ?? 48
+    const lines = async (fontSize: number) => {
         const { node } = await fromJsx({
             type: 'div',
             props: {
                 style: {
                     display: 'flex',
-                    width: ROLE_COLUMN_WIDTH,
+                    width: fit.width,
                     fontFamily: 'RoundHog',
                     fontSize,
                     fontWeight: 800,
-                    lineHeight: `${Math.round(fontSize * ROLE_LINE_HEIGHT)}px`,
+                    lineHeight: `${Math.round(fontSize * fit.lineHeight)}px`,
                 },
-                children: role,
+                children: text,
             },
         })
         const measured = await renderer.measure(node)
-        const lineHeight = Math.round(fontSize * ROLE_LINE_HEIGHT)
-        return Math.round(measured.height / lineHeight)
+        return Math.round(measured.height / Math.round(fontSize * fit.lineHeight))
     }
 
-    let low = 48
-    let high = ROLE_FONT_SIZE
-    let best = low
+    let low = min
+    let high = fit.max
+    let best: number | null = null
     while (low <= high) {
         const mid = Math.floor((low + high) / 2)
-        if ((await lineCount(mid)) <= ROLE_MAX_LINES) {
+        if ((await lines(mid)) <= fit.maxLines) {
             best = mid
             low = mid + 1
         } else {
@@ -90,6 +100,17 @@ export async function fitRoleFontSize(renderer: Renderer, role: string): Promise
         }
     }
     return best
+}
+
+export async function fitRoleFontSize(renderer: Renderer, role: string) {
+    return (
+        (await fitTitleFontSize(renderer, role, {
+            max: ROLE_FONT_SIZE,
+            width: ROLE_COLUMN_WIDTH,
+            lineHeight: ROLE_LINE_HEIGHT,
+            maxLines: ROLE_MAX_LINES,
+        })) ?? 48
+    )
 }
 
 export async function renderOgJpeg(renderer: Renderer, element: ReactElement, images?: ImageSource[]): Promise<Buffer> {
