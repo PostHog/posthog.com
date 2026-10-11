@@ -13,6 +13,7 @@ type DocsOgProps = {
     excerpt: string
     lastUpdated: string
     contributors: DocsContributor[]
+    hog?: string
 }
 
 // Still used by the customer card.
@@ -100,7 +101,15 @@ const ContributorMark = ({ contributor, index }: { contributor: DocsContributor;
 
 const columnWidth = 640
 
-export const DocsOg = ({ title, titleFontSize = 92, timeToRead, excerpt, lastUpdated, contributors }: DocsOgProps) => {
+export const DocsOg = ({
+    title,
+    titleFontSize = 92,
+    timeToRead,
+    excerpt,
+    lastUpdated,
+    contributors,
+    hog = 'wizard-hog',
+}: DocsOgProps) => {
     const shown = contributors.slice(0, shownContributors)
     const others = contributors.length - shown.length
 
@@ -186,7 +195,12 @@ export const DocsOg = ({ title, titleFontSize = 92, timeToRead, excerpt, lastUpd
                     ) : null}
                 </div>
             </div>
-            <img src="wizard-hog" width={368} height={368} style={{ position: 'absolute', right: 12, bottom: 12 }} />
+            <img
+                src={hog}
+                width={368}
+                height={368}
+                style={{ position: 'absolute', right: 12, bottom: 12, objectFit: 'contain' }}
+            />
         </WindowOg>
     )
 }
