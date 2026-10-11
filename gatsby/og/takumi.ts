@@ -48,7 +48,7 @@ export async function registerMatterFont(renderer: Renderer, data: Buffer) {
     }
 }
 
-const ROLE_FONT_SIZE = 120
+const ROLE_FONT_SIZE = 108
 // Keep in sync with the title width and line height in src/templates/OG/job.tsx.
 const ROLE_COLUMN_WIDTH = 720
 const ROLE_LINE_HEIGHT = 0.94

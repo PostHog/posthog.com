@@ -10,7 +10,7 @@ type JobOgProps = {
 
 const textSecondary = '#4D4F46'
 
-export const JobOg = ({ role, roleFontSize = 120, timezone, salary }: JobOgProps) => {
+export const JobOg = ({ role, roleFontSize = 108, timezone, salary }: JobOgProps) => {
     const facts = [
         { label: 'Location', value: 'Remote' },
         timezone ? { label: 'Timezone(s)', value: timezone } : null,
@@ -24,6 +24,7 @@ export const JobOg = ({ role, roleFontSize = 120, timezone, salary }: JobOgProps
                 <div
                     style={{
                         width: 720,
+                        marginTop: 12,
                         fontSize: roleFontSize,
                         fontWeight: 800,
                         lineHeight: `${Math.round(roleFontSize * 0.94)}px`,
@@ -36,7 +37,7 @@ export const JobOg = ({ role, roleFontSize = 120, timezone, salary }: JobOgProps
                         <div key={fact.label} style={{ display: 'flex', flexDirection: 'column' }}>
                             <div
                                 style={{
-                                    fontSize: 22,
+                                    fontSize: 26,
                                     fontWeight: 600,
                                     color: textSecondary,
                                     whiteSpace: 'nowrap',

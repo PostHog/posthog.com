@@ -2,6 +2,7 @@ import React from 'react'
 
 type WindowOgProps = {
     children: React.ReactNode
+    outside?: React.ReactNode
 }
 
 // Sampled from the reference card, not the site theme.
@@ -23,7 +24,7 @@ const WindowControls = () => (
 
 // Desktop frame shared by Open Graph cards: grass and a frosted window.
 // The body fills the area under the title bar.
-export const WindowOg = ({ children }: WindowOgProps) => (
+export const WindowOg = ({ children, outside }: WindowOgProps) => (
     <div
         style={{
             width: 1200,
@@ -57,7 +58,7 @@ export const WindowOg = ({ children }: WindowOgProps) => (
             }}
         >
             <div style={{ padding: '40px 48px 0' }}>
-                <img src="logo" width={228} height={40} />
+                <img src="logo" width={272} height={48} />
             </div>
             <div style={{ position: 'absolute', top: 28, right: 32 }}>
                 <WindowControls />
@@ -73,5 +74,6 @@ export const WindowOg = ({ children }: WindowOgProps) => (
                 {children}
             </div>
         </div>
+        {outside}
     </div>
 )
