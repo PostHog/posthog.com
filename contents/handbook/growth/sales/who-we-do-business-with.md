@@ -31,6 +31,7 @@ If you need to check if a particular company appears on a US sanctions list, you
 - Sudan
 - South Sudan
 - Somalia
+- Syria
 - Ukraine
 - Venezuela
 - Yemen
@@ -41,7 +42,6 @@ US sanctions mean that we are not allowed to offer services [at all](https://www
 - Cuba
 - Iran
 - North Korea
-- Syria
 
 ### Update for June 2024 US sanctions against Russia 
 In June 2024, the US Treasury's Office of Foreign Asset Control issued [updated sanctions against Russia](https://ofac.treasury.gov/sanctions-programs-and-country-information) which prohibit the sale or supply of services to individuals or organizations in Russia. The sanctions take effect on September 10, 2024 and continue indefinitely.
