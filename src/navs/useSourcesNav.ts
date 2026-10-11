@@ -1,6 +1,18 @@
 import { useStaticQuery, graphql } from 'gatsby'
 import { SELF_HOSTED_SOURCES } from '../constants/sources'
 
+function docsSourceSlug(node: {
+    slug: string
+    mdx?: { fields?: { slug?: string | null } | null } | null
+}): string {
+    const mdxSlug = node.mdx?.fields?.slug
+    if (!mdxSlug) {
+        return node.slug
+    }
+    const match = mdxSlug.match(/\/docs\/(?:cdp|data-warehouse)\/sources\/([^/]+)\/?$/)
+    return match?.[1] ?? node.slug
+}
+
 export default function useSourcesNav(basePath = '/docs/data-warehouse/sources'): { url?: string; name: string }[] {
     const { allPostHogSource } = useStaticQuery(graphql`
         query SourcesNav {
@@ -9,13 +21,18 @@ export default function useSourcesNav(basePath = '/docs/data-warehouse/sources')
                     slug
                     name
                     beta
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                 }
             }
         }
     `)
 
     const managed = allPostHogSource.nodes.map((node: any) => ({
-        url: `${basePath}/${node.slug}`,
+        url: `${basePath}/${docsSourceSlug(node)}`,
         name: node.name,
         ...(node.beta && {
             badge: {

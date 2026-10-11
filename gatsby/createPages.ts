@@ -1103,21 +1103,39 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Sources WITH hand-written docs: create data-warehouse page from the MDX content
-    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
+    // Sources WITH hand-written docs: create data-warehouse pages from the MDX content
+    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/).
+    // Prefer the MDX path segment for nav (#21031); keep the API slug as an alias when it differs.
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
         if (node.mdx?.id) {
-            createPage({
-                path: `/docs/data-warehouse/sources/${node.slug}`,
-                component: HandbookTemplate,
-                context: {
-                    id: node.mdx.id,
-                    links: [],
-                    nextURL: '',
-                    searchFilter: 'Docs',
-                    breadcrumbBase: { name: 'Docs', url: '/docs' },
-                },
+            const mdxSegment =
+                node.mdx.fields?.slug?.replace(/^\/docs\/cdp\/sources\//, '').replace(/\/$/, '') || node.slug
+            const dwPaths = new Set([
+                `/docs/data-warehouse/sources/${mdxSegment}`,
+                `/docs/data-warehouse/sources/${node.slug}`,
+            ])
+            const handbookContext = {
+                id: node.mdx.id,
+                links: [],
+                nextURL: '',
+                searchFilter: 'Docs',
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+            }
+            dwPaths.forEach((path) => {
+                createPage({
+                    path,
+                    component: HandbookTemplate,
+                    context: handbookContext,
+                })
             })
+            // CDP aliases at the API slug so older/sidebar-generated links still resolve.
+            if (mdxSegment !== node.slug) {
+                createPage({
+                    path: `/docs/cdp/sources/${node.slug}`,
+                    component: HandbookTemplate,
+                    context: handbookContext,
+                })
+            }
         }
     })
 
