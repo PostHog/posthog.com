@@ -39,8 +39,7 @@ export default function FrostedBackdrop({ className = 'inset-0', dataScheme, tin
 
         const alignToViewport = () => {
             const { left, top } = frame.getBoundingClientRect()
-            blurredWallpaper.style.left = `${-left - EDGE_PADDING_PX}px`
-            blurredWallpaper.style.top = `${-top - EDGE_PADDING_PX}px`
+            blurredWallpaper.style.transform = `translate(${-left}px, ${-top}px)`
         }
 
         alignToViewport()

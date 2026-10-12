@@ -45,8 +45,8 @@ To fade content into the glass (in place of a `mask-image` fade over a scroll ar
 ## How it works
 
 - Nine copies of `<Wallpapers />` are arranged in a 3×3 grid, mirrored at the edges, and blurred together with `blur-3xl` (64 px, the same radius as `backdrop-blur-3xl`). The mirrored edges give the same edge result as a live backdrop blur, which repeats edge pixels and does not fade to transparent.
-- A layout effect aligns the blurred copy to the viewport. It runs again on resize, and at the end of any animation or transition.
-- The server has no layout, so the server HTML puts the copy at a default position (`-EDGE_PADDING_PX`). Until hydration, the copy is offset by the position of the surface on the screen (for example 8 × 49 px for a mobile window). At hydration, the layout effect aligns it. Under the blur and the tint, this shift is small.
+- A layout effect aligns the blurred copy to the viewport with a `transform: translate()`. It runs again on resize, and at the end of any animation or transition. Do not align with `left` and `top`: Chrome counts a change of layout position as a layout shift (CLS), but it does not count a change of `transform`.
+- The server has no layout, so the server HTML puts the copy at a default position (`-EDGE_PADDING_PX`) with no transform. Until hydration, the copy is offset by the position of the surface on the screen (for example 8 × 49 px for a mobile window). At hydration, the layout effect aligns it. Under the blur and the tint, this shift is small.
 - When reduce transparency is on, the blurred copy is hidden and the tint is opaque.
 - The copies use 32 px wide wallpaper images. The live wallpaper keeps the full-size images. See [Image size](#image-size).
 
