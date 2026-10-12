@@ -9,9 +9,9 @@ availability:
 sourceId: LogzIO
 ---
 
-import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
-import SyncModes from "../\_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
 The Logz.io connector syncs search logs, alerts, security events, audit trail, users, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
