@@ -20,6 +20,26 @@ Each account in Customer Analytics has these properties:
 | `Health score updated` | When the score was last calculated. A date older than about one day means the score is stale. |
 | `MCP users (weekly)` | The average number of people who used the PostHog MCP each week in the last 3 weeks. |
 | `MCP share (%)` | The share of the account's active people who use the MCP. |
+| `Health dashboard` | A link to the Account health dashboard, filtered to this account. |
+
+### Account health dashboard
+
+The [Account health dashboard](https://us.posthog.com/project/2/dashboard/2201038) is the overview and deep dive for one account. To open it:
+
+1. Open the account in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts).
+2. Click the `Health dashboard` link in the account's properties.
+
+The link sets the `organization_id` variable for you. You can also open the dashboard directly and type an organization ID into the variable at the top. Only paying or trialing accounts have a score, so only those accounts have a link.
+
+The dashboard shows:
+
+- **Health summary:** the score, its two parts, and its percentile against all scored accounts.
+- **Engagement by product:** the score, weight, and contribution of each product, with a status that tells you what to do. *Went silent* means talk to them this week. *Not used* means a cross-sell opportunity.
+- **Stickiness inputs:** pipelines, Replay Vision scanners, scouts, evals, and MCP use.
+- **Weekly active people by product:** the 12-week trend behind the engagement score.
+- **Weekly MCP use:** people who use the MCP each week, compared with calls from agents.
+
+### The `account_health_scores` view
 
 The full breakdown per product is in the `account_health_scores` view in the PostHog Data Warehouse. You can also add it from the column selector in Customer Analytics.
 
