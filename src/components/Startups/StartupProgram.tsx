@@ -34,7 +34,7 @@ import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogHahaBizzniss, HedgehogTransformer } from '@posthog/brand/hoggies'
+import { HedgehogDaddAILeft, HedgehogHahaBizzniss } from '@posthog/brand/hoggies'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
 
@@ -546,8 +546,8 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </div>
 
                             <div className="w-full flex justify-center self-center @2xl/reader-content:w-auto @2xl/reader-content:flex-[0_0_240px] @4xl/reader-content:flex-[0_0_300px]">
-                                <HedgehogTransformer
-                                    title="A hedgehog mid-transformation into a robot, like your product about to become self-driving"
+                                <HedgehogDaddAILeft
+                                    title="A hedgehog lounging in heart-shaped sunglasses and a gold P chain"
                                     className="w-full max-w-[280px] @2xl/reader-content:max-w-none"
                                 />
                             </div>
