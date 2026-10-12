@@ -40,7 +40,7 @@ You can also fetch the budget programmatically – the `vision-quota-get` [MCP t
 
 ## Per-scanner limits
 
-The organization budget is shared, so one broad scanner can spend the whole month's credits and leave nothing for the others. To prevent this, give a scanner its own limit: the maximum credits it can spend per billing period. Turn on **Credit limit** in the scanner editor, or set the `credit_limit` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. The editor suggests a starting value from the scanner's estimated monthly spend, and warns you when the limit is below that estimate or too low to pay for a single scan. For example, hold one scanner to 10,000 credits per month ($100) and another to 5,000 ($50).
+The organization budget is shared, so one broad scanner can spend the whole month's credits and leave nothing for the others. To prevent this, give a scanner its own limit: the maximum credits it can spend per billing period. Turn on **Scanner limit** in the scanner editor, or set the `credit_limit` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. In the editor, you can enter the limit in **Credits** or in **Observations**. The editor converts an observation count to credits at the selected model's price, and the scanner stores the limit in credits. The **Observations** option is not available when the model's price is unknown. The MCP `credit_limit` field always takes credits. The editor suggests a starting value from the scanner's estimated monthly spend, and warns you when the limit is below that estimate or too low to pay for a single scan. For example, hold one scanner to 10,000 credits per month ($100) and another to 5,000 ($50).
 
 Scanners have no limit by default (`credit_limit` is null), and the minimum limit is 1 credit.
 
@@ -104,7 +104,7 @@ The scanner editor shows an **estimated cost** for the scanner you're configurin
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_f9f280e291.png"
-  alt="The Budget step of the scanner editor: session coverage, sampling rate, credit limit, and the estimated monthly cost"
+  alt="The Budget step of the scanner editor: session coverage, sampling rate, scanner limit, and the estimated monthly cost"
   classes="rounded"
 />
 

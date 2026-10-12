@@ -84,7 +84,7 @@ Whichever way you start, the scanner editor has four steps. A budget-based draft
 - **Details** – a name, a description, and tags. All three are optional, and the scanning model doesn't see the description or tags.
 - **Configure** – the scanner type, the model, the prompt, the type's own options, and the [self-driving](#handing-off-to-responder-agents) toggle.
 - **Recordings** – the [recording filters](#filters-scoping-the-scanner).
-- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), [session coverage](#session-coverage-filtering-by-activity), an optional [credit limit](#credit-limit-capping-one-scanner), and the estimated cost.
+- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), [session coverage](#session-coverage-filtering-by-activity), an optional [scanner limit](#scanner-limit-capping-one-scanner), and the estimated cost.
 
 Editing a saved scanner uses the same steps. The type can't be changed after the scanner is created.
 
@@ -230,9 +230,9 @@ If the estimate looks too high, you have four knobs:
 - Lower the sampling rate.
 - Pick a cheaper model.
 
-## Credit limit: capping one scanner
+## Scanner limit: capping one scanner
 
-Turn on **Credit limit** on the **Budget** step to cap what this scanner can spend in a billing period, on top of your organization's limit. When the scanner reaches its limit, it stops scanning until the next billing period. It stays enabled, but the sessions it skipped aren't scanned later, even if you raise the limit. The editor warns you when the limit is below the scanner's estimated monthly cost, or too low to pay for a single scan.
+Turn on **Scanner limit** on the **Budget** step to cap what this scanner can spend in a billing period, on top of your organization's limit. Enter the limit in **Credits**, or select **Observations** to enter a number of observations. The editor converts an observation count to credits at the selected model's price. When the scanner reaches its limit, it stops scanning until the next billing period. It stays enabled, but the sessions it skipped aren't scanned later, even if you raise the limit. The editor warns you when the limit is below the scanner's estimated monthly cost, or too low to pay for a single scan.
 
 ## Enabling and disabling
 
