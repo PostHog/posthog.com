@@ -26,7 +26,6 @@ const fadeColor = '211, 215, 190'
 const contributorColors = ['#2F80FA', '#F54E00', '#9B5DE5']
 
 const shownContributors = 3
-const fadeBands = 28
 const fadeHeight = 120
 
 const initials = (username: string) => {
@@ -36,21 +35,16 @@ const initials = (username: string) => {
 }
 
 const ExcerptFade = () => (
-    <div style={{ position: 'absolute', left: 0, bottom: 0, width: '100%', height: fadeHeight }}>
-        {Array.from({ length: fadeBands }, (_, index) => (
-            <div
-                key={index}
-                style={{
-                    position: 'absolute',
-                    left: 0,
-                    bottom: ((fadeBands - 1 - index) * fadeHeight) / fadeBands,
-                    width: '100%',
-                    height: fadeHeight / fadeBands + 1,
-                    backgroundColor: `rgba(${fadeColor}, ${index / (fadeBands - 1)})`,
-                }}
-            />
-        ))}
-    </div>
+    <div
+        style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: '100%',
+            height: fadeHeight,
+            backgroundImage: `linear-gradient(to bottom, rgba(${fadeColor}, 0), rgba(${fadeColor}, 1))`,
+        }}
+    />
 )
 
 const markSize = 42
