@@ -220,7 +220,7 @@ Two accounts at 6.5 overall can be completely different problems - always read t
  
 #### Why 61.5 / 38.5
  
- If we take into account customer relationship (not included here, still very much a work in progress for Customer Anayticds), the full health model weights product engagement at 0.40 and stickiness at 0.25, with the remaining 0.35 going to relationship. This view only covers the two product axes, so those weights are renormalised to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`. We will likely keep these and pull relationship into an overall score later down the line.
+ If we take into account customer relationship (not included here, still very much a work in progress for Customer Anaytics), the full health model weights product engagement at 0.40 and stickiness at 0.25, with the remaining 0.35 going to relationship. This view only covers the two product axes, so those weights are renormalised to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`. We will likely keep these and pull relationship into an overall score later down the line.
 
 ### How stickiness is measured
  
