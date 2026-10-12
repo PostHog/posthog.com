@@ -159,7 +159,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     },
 ]
 
-// The four things a self-driving product does for you, straight from the pitch.
+// The four things the context layer does for you, straight from the pitch.
 const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: string; copy: React.ReactNode }[] = [
     {
         Icon: IconStack,
@@ -468,12 +468,12 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
         <>
             <SEO
                 title="PostHog for Startups | $50K in credits for early-stage teams"
-                description="Get over $50,000 in PostHog credits for analytics, session replay, feature flags, and more, while you build a self-driving product. Plus merch and partner perks. Apply in 2 minutes."
+                description="Get over $50,000 in PostHog credits for your product's context layer – analytics, session replay, feature flags, and more. Plus merch and partner perks. Apply in 2 minutes."
                 image="/images/og/default.png"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog for Startups',
                     description:
-                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams building self-driving products.',
+                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams.',
                     slug: 'startups',
                     faq: faqStructuredData,
                 })}
@@ -502,7 +502,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         {/* show is set explicitly because the scroll trigger's -15% rootMargin never
                             fires for a heading this close to the top of the pane. */}
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-                            {creditValue} in credits while you build a{' '}
+                            {creditValue} in credits for your product's{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -511,7 +511,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                 delay={300}
                                 show
                             >
-                                self-driving product
+                                context layer
                             </RoughAnnotation>
                         </h1>
 
@@ -519,9 +519,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         <div className="flex flex-col items-start gap-6 @2xl/reader-content:flex-row @2xl/reader-content:gap-8">
                             <div className="min-w-0 @2xl/reader-content:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
-                                    PostHog finds what's worth fixing, writes the code, and opens the pull request. You
-                                    get credits for the whole platform – plus swag and partner perks perfect for anyone
-                                    building AI products.
+                                    PostHog ingests and stores your analytics, errors, replays, and business data so you
+                                    and your agents can query and act on it. You get credits for the whole platform –
+                                    plus swag and partner perks perfect for anyone building AI products.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {heroBullets.map((item) => (
@@ -575,12 +575,13 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </div>
 
                     <h3>
-                        Build a <Highlight>self-driving product</Highlight> with PostHog
+                        PostHog is <Highlight>your product's context layer</Highlight>
                     </h3>
                     <p>
                         Building products used to mean manually writing code, running analysis, diagnosing bugs, and
-                        rolling out changes across a bloated stack of tools. PostHog is the only platform that does it
-                        all for you autonomously while still keeping everything at your fingertips.
+                        rolling out changes across a bloated stack of tools. PostHog keeps all of that context in one
+                        platform and gives your agents what they need to diagnose problems, uncover opportunities, and
+                        ship fixes.
                     </p>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-8 gap-y-6 my-6">
                         {selfDrivingCapabilities.map(({ Icon, color, title, copy }) => (
@@ -857,7 +858,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     >
                         <div className="grid @lg/reader-content:grid-cols-[1fr_220px] gap-6 items-center">
                             <div>
-                                <h3 className="mt-0 mb-2 text-2xl font-bold">Ready to build a self-driving product?</h3>
+                                <h3 className="mt-0 mb-2 text-2xl font-bold">
+                                    Ready to give your product a context layer?
+                                </h3>
                                 <p className="mt-0 mb-4">
                                     Get {creditValue} in PostHog credits, exclusive merch, and partner perks worth
                                     $12,000+. Applying takes 2 minutes.
