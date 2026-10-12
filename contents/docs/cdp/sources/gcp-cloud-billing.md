@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The GCP Cloud Billing connector syncs your Google Cloud Platform billing data into the PostHog data warehouse, including billing accounts, projects, subaccounts, services, SKUs, and budgets.
 
-> **Note:** This source is currently in **alpha**.
-
 ## Prerequisites
 
 - A [Google Cloud service account](https://cloud.google.com/iam/docs/service-account-overview) with billing permissions

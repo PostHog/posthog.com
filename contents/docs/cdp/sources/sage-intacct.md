@@ -14,12 +14,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Sage Intacct connector syncs your financial and accounting data – customers, vendors, invoices, bills, GL accounts, and journal entries – into PostHog, so you can analyze your finance data alongside your product data.
 
-<CalloutBox icon="IconWarning" title="Alpha feature" type="caution">
-
-The Sage Intacct source is in alpha. If you encounter any issues, please report them in [PostHog's GitHub repository](https://github.com/PostHog/posthog/issues).
-
-</CalloutBox>
-
 ## Prerequisites
 
 You need:
