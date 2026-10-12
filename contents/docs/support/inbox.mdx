@@ -74,6 +74,18 @@ The confirmation dialog gives you two choices: **Send and save** commits all cha
 
 Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
+## Delete a ticket
+
+Delete a ticket when it holds information that shouldn't stay in PostHog, such as sensitive details a customer shared by mistake. Open the ticket, click **Delete ticket** at the bottom of the sidebar, and confirm.
+
+- The ticket and its messages disappear for your team and the customer right away.
+- PostHog permanently deletes the ticket 14 days later, along with its messages, attachments, and analytics events.
+- Messages already sent to Slack, Teams, email, or GitHub stay in those tools.
+
+You can't delete a single message. To remove a message, delete the whole ticket.
+
+If your organization uses [access control](/docs/settings/access-control), only ticket managers and organization admins can delete tickets. Otherwise, anyone who can edit tickets can delete them.
+
 ## Track SLAs
 
 An SLA deadline is derived state, not a status. You set it through [workflow automation](/docs/support/workflows), and the ticket then reports as on track, at risk, or breached. You can filter and sort the inbox by SLA state.

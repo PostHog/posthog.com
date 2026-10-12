@@ -9,12 +9,6 @@ availability:
 sourceId: Optimizely
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Optimizely connector syncs your experimentation configuration data – projects, experiments, audiences, events, pages, and campaigns – into PostHog.
 
 ## Adding a data source

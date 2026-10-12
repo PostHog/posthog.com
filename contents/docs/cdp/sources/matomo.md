@@ -9,12 +9,6 @@ availability:
 sourceId: Matomo
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your Matomo instance to pull web analytics data into the PostHog data warehouse. Works with both Matomo Cloud and self-hosted instances.
 
 ## Adding a data source

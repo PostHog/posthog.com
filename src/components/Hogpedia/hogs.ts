@@ -1,7 +1,7 @@
 import {
     HedgehogBeaker,
     HedgehogBusinessEvolution,
-    HedgehogChartHog,
+    HedgehogChart,
     HedgehogCodeBubble,
     HedgehogCodingGroup,
     HedgehogExperiment,
@@ -10,12 +10,12 @@ import {
     HedgehogMoney,
     HedgehogOrganized,
     HedgehogPanic,
-    HedgehogPartyHog,
-    HedgehogQuickCall,
+    HedgehogParty,
+    HedgehogPhoneCall,
     HedgehogReading,
     HedgehogReadingIsMagic,
     HedgehogRemoteWork,
-    HedgehogRoboHog,
+    HedgehogRobot,
 } from '@posthog/brand/hoggies'
 
 /**
@@ -34,7 +34,7 @@ import {
 export const HOGS: Record<string, React.ComponentType<any>> = {
     HedgehogBeaker,
     HedgehogBusinessEvolution,
-    HedgehogChartHog,
+    HedgehogChart,
     HedgehogCodeBubble,
     HedgehogCodingGroup,
     HedgehogExperiment,
@@ -43,10 +43,10 @@ export const HOGS: Record<string, React.ComponentType<any>> = {
     HedgehogMoney,
     HedgehogOrganized,
     HedgehogPanic,
-    HedgehogPartyHog,
-    HedgehogQuickCall,
+    HedgehogParty,
+    HedgehogPhoneCall,
     HedgehogReading,
     HedgehogReadingIsMagic,
     HedgehogRemoteWork,
-    HedgehogRoboHog,
+    HedgehogRobot,
 }

@@ -12,9 +12,6 @@ sourceId: Paperform
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Paperform connector syncs your forms, fields, submissions, partial submissions, products, coupons, and spaces into the PostHog Data warehouse, so you can analyze form performance and respondent answers alongside your product data.
 

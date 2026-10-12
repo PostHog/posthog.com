@@ -12,9 +12,6 @@ sourceId: ElectricityMaps
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Electricity Maps connector syncs hourly carbon intensity and power breakdown data for the grid zones you choose into PostHog, so you can analyze the carbon footprint of your infrastructure alongside your product data.
 

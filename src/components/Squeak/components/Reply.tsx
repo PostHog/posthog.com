@@ -4,6 +4,7 @@ import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
+import { BlockedBadge } from './Profile'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
@@ -366,7 +367,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     <div className="mr-2 relative ml-[-2px]">
                                         <Avatar
                                             className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
-                                            image={getAvatarURL(profile?.data?.attributes)}
+                                            image={getAvatarURL(profile?.data)}
                                             color={profile?.data.attributes.color}
                                         />
                                         {isTeamMember && (
@@ -403,7 +404,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
-                                image={getAvatarURL(profile?.data?.attributes)}
+                                image={getAvatarURL(profile?.data)}
                                 color={profile?.data.attributes.color}
                             />
                             {isTeamMember && (
@@ -416,6 +417,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                     </Link>
                 )}
+                <BlockedBadge profile={profile?.data} />
                 {!isMax && <LevelBadge points={profile?.data?.attributes?.reputation} />}
                 {badgeText && (
                     <span className="border border-primary dark: text-xs py-0.5 px-1 rounded-sm">{badgeText}</span>
@@ -511,7 +513,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                                 </div>
                             )}
-                            <Markdown>{body}</Markdown>
+                            <Markdown className="reply-content">{body}</Markdown>
                             {!publishedAt && isForumModerator && (
                                 <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
                                     This reply is unpublished and only visible to moderators

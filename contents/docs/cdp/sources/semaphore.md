@@ -12,9 +12,6 @@ sourceId: Semaphore
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Semaphore (Semaphore CI) connector syncs workflows, pipelines, and deployment targets into the PostHog data warehouse, so you can analyze your CI/CD data alongside your product data.
 

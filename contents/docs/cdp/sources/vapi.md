@@ -9,12 +9,6 @@ availability:
 sourceId: Vapi
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Vapi connector syncs your AI voice agent data into PostHog, including call transcripts, analysis, cost breakdowns, assistants, phone numbers, and more. Use it to join your Vapi call data with product analytics to understand how voice interactions impact user behavior.
 
 ## Adding a data source

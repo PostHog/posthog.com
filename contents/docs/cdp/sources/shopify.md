@@ -51,7 +51,11 @@ You can see details and progress in the data pipelines [sources tab](https://app
 
 ## Scope requirements
 
-The `read_orders` scope is sufficient to sync core order data. However, some fields in the orders table require additional scopes:
+The `read_orders` scope lets you sync core order data for orders created within the last 60 days.
+
+To sync older orders, your Shopify app also needs `read_all_orders` alongside `read_orders`. You must [request approval from Shopify](https://shopify.dev/docs/api/usage/access-scopes#orders-permissions) before adding `read_all_orders`.
+
+Some fields in the orders table require additional scopes:
 
 | Field               | Required scope (any one)                                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------ |

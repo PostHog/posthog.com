@@ -9,12 +9,6 @@ availability:
 sourceId: Drip
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Drip API token and account ID to pull your Drip email marketing data – subscribers, campaigns, broadcasts, workflows, forms, and goals – into the PostHog data warehouse.
 
 ## Adding a data source

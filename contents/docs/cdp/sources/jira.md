@@ -9,12 +9,6 @@ availability:
 sourceId: Jira
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Atlassian Jira credentials to pull your Jira data into the PostHog data warehouse. The token authenticates as your Atlassian account, so the data we can sync is limited to the projects and issues that account can see.
 
 ## Adding a data source

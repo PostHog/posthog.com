@@ -11,12 +11,6 @@ sourceId: Gladly
 
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Gladly connector pulls your customer service data into the PostHog data warehouse: customers, conversation items, agents, and topics, plus conversations and the lifecycle events behind them.
 
 ## Adding a data source

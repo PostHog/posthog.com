@@ -12,9 +12,6 @@ sourceId: Appsignal
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The AppSignal connector syncs the monitoring data of one AppSignal app into the PostHog Data Warehouse: incidents, error and performance samples, deploy markers and deploy stats, log lines, metrics, distributed traces, and per-action performance aggregates. You can then join application health to how people use your product, and see the release or the slow action that a drop in usage follows.
 

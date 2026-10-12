@@ -12,9 +12,6 @@ sourceId: Wix
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Wix connector syncs orders, products, contacts, members, and blog posts from one Wix site into the PostHog data warehouse, so you can analyze them alongside your product data.
 

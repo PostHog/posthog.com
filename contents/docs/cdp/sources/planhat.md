@@ -12,9 +12,6 @@ sourceId: Planhat
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Planhat connector syncs your customer success data – companies, end users, users, licenses, assets, and NPS responses – into the PostHog Data warehouse, so you can analyze your customer success metrics alongside your product data.
 
