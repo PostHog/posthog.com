@@ -143,7 +143,9 @@ Why some weights are set this way:
 - **SQL counts as Product Analytics** because agents do analytics through SQL.
 - **PostHog Desktop is not measured yet.**
 
-> The rest of this page goes into the inner workings and reasoning behind the score. Team members need not read further unless they are really interested. It's more for reference, to capture why we compute things the way we do.
+## Inner workings
+
+> This section is a detailed drill into the mechanics of the score. You don't need it to use the score day to day. It records how we compute the score and why.
 
 ### How engagement is calculated
 
