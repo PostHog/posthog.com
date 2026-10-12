@@ -12,9 +12,6 @@ sourceId: AzureApplicationInsights
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Azure Application Insights connector syncs your application telemetry – requests, dependencies, exceptions, and availability results – into the PostHog data warehouse. This enables you to analyze your application monitoring data alongside your product analytics.
 

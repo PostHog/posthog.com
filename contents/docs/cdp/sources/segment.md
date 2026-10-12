@@ -12,9 +12,6 @@ sourceId: Segment
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Segment connector pulls your Twilio Segment workspace configuration, admin, and metadata into the PostHog Data warehouse via the Segment Public API. It does not connect to the event or Profile data plane.
 

@@ -37,7 +37,8 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
-import { PANEL_BG } from '../../constants/frostedSurfaces'
+import { PANEL_BG, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
+import FrostedBackdrop from 'components/FrostedBackdrop'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -207,6 +208,24 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
         backgroundSize: 'cover',
     },
 ]
+
+const SCROLL_EDGE_FADE_MASK =
+    '[mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]'
+
+const FrostedScrollEdges = () => (
+    <>
+        <FrostedBackdrop
+            className="inset-x-0 top-0 h-8 [mask-image:linear-gradient(to_bottom,black,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
+            tintClassName={WINDOW_TINT}
+            dataScheme={WINDOW_SCHEME}
+        />
+        <FrostedBackdrop
+            className="inset-x-0 bottom-0 h-8 [mask-image:linear-gradient(to_top,black,transparent)] [-webkit-mask-image:linear-gradient(to_top,black,transparent)]"
+            tintClassName={WINDOW_TINT}
+            dataScheme={WINDOW_SCHEME}
+        />
+    </>
+)
 
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
@@ -995,7 +1014,7 @@ const LeftSidebar = ({
     onMobileClose,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
-    const { hasMounted } = useReaderView()
+    const { hasMounted, isWidthMeasured } = useReaderView()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
@@ -1158,7 +1177,9 @@ const LeftSidebar = ({
             data-scheme="secondary"
             className={`relative flex-shrink-0 ${
                 transitionsEnabled && !mobile ? 'transition-[flex-basis] duration-300' : ''
-            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'}`}
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'} ${
+                isWidthMeasured ? '' : 'hidden @2xl/app-reader:block'
+            }`}
         >
             <div
                 ref={panelRef}
@@ -1462,7 +1483,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact, focusedWindow } = useApp()
+    const { compact, focusedWindow, isMobile } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1554,8 +1575,9 @@ function ReaderViewContent({
                     // on a <Steps> page is the step container, not the viewport.
                     const targetRect = targetElement.getBoundingClientRect()
                     const scrollRect = scrollElement.getBoundingClientRect()
+                    const scrollMarginTop = parseFloat(getComputedStyle(targetElement).scrollMarginTop) || 0
                     scrollElement.scrollTo({
-                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop - scrollMarginTop),
                         behavior: 'smooth',
                     })
                     return
@@ -1752,7 +1774,8 @@ function ReaderViewContent({
                         <ScrollArea
                             dataScheme="primary"
                             isScrollRoot={focusedWindow === appWindow}
-                            className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
+                            className={`flex-1 min-w-0 min-h-0 relative ${isMobile ? '' : SCROLL_EDGE_FADE_MASK}`}
+                            overlay={isMobile && <FrostedScrollEdges />}
                         >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(

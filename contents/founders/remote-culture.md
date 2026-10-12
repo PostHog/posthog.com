@@ -7,8 +7,7 @@ showTitle: true
 hideAnchor: true
 tags:
   - Founders
-  - Culture
-  - People
+  - Building the team
 crosspost:
   - Blog
 ---

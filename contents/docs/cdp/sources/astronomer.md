@@ -12,9 +12,6 @@ sourceId: Astronomer
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Astronomer connector syncs platform inventory and deploy history from [Astronomer (Astro)](https://www.astronomer.io/) into the PostHog data warehouse: deployments, deploys, workspaces, and clusters.
 This lets you join your Airflow infrastructure data with the rest of your product analytics.

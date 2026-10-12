@@ -12,9 +12,6 @@ sourceId: Fleetio
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Fleetio connector syncs your Fleetio fleet management data into PostHog, so you can analyze your vehicles, maintenance, and fleet operations alongside your product data.
 

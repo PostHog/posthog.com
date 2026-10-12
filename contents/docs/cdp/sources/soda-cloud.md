@@ -12,9 +12,6 @@ sourceId: SodaCloud
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Soda Cloud connector syncs your data quality monitoring data – datasets, checks, and incidents – into PostHog, so you can analyze data quality trends alongside your product data.
 

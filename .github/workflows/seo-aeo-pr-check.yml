@@ -1,0 +1,52 @@
+name: SEO/AEO PR check
+
+# Flags PR changes that can hurt how Google and AI agents find, index, or cite posthog.com pages:
+# pages deleted or moved without a redirect, noindex, robots.txt rules, canonical and head-tag
+# changes, sitemap and llms.txt changes, redirect chains, removed titles, and second H1s.
+# When it finds something, it posts one comment (updated in place on later pushes) and requests a
+# review from the SEO owner. It stays silent on PRs with no findings.
+#
+# `pull_request_target` gives a write token for fork and bot PRs. Safe: the checkout is the base
+# branch (never PR code), and the script reads the PR diff through the API as data only.
+# nosemgrep: github-actions-pull-request-target
+on:
+    pull_request_target:
+        types: [opened, reopened, ready_for_review, synchronize]
+    workflow_dispatch:
+        inputs:
+            pr_numbers:
+                description: 'Comma-separated PR numbers to check'
+                required: true
+                type: string
+
+permissions:
+    contents: read
+    pull-requests: write
+    issues: write
+
+concurrency:
+    group: seo-aeo-pr-check-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    check:
+        if: ${{ github.event_name == 'workflow_dispatch' || !github.event.pull_request.draft }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - name: Checkout the check script from the base branch
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  sparse-checkout: scripts/seo-aeo-pr-check
+                  persist-credentials: false
+
+            - name: Check the PR diff
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+              env:
+                  SEO_REVIEWER: natalia-amorim
+                  SEO_BACKUP_NOTE: If Natalia is out, ask Ian or Andy to review instead.
+                  PR_NUMBERS: ${{ inputs.pr_numbers }}
+              with:
+                  script: |
+                      const { run } = require('./scripts/seo-aeo-pr-check/check.js')
+                      await run({ github, context, core })

@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Culture
-  - Ops & finance
+  - Building the team
 crosspost:
   - Blog
 ---

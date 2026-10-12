@@ -75,7 +75,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
                     setSectionData(id, {
                         id,
                         isIntersecting: entry.isIntersecting,
-                        distance: entry.boundingClientRect.top - (entry.rootBounds?.top ?? 0),
+                        distance: (entry.boundingClientRect?.top ?? 0) - (entry.rootBounds?.top ?? 0),
                     })
                 })
             },

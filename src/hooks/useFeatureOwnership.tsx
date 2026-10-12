@@ -195,7 +195,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Managed warehouse',
+        feature: 'Warehouse',
         owner: ['managed-warehouse'],
         label: 'feature/data-warehouse',
     },
@@ -605,6 +605,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'usage-reports': {
         feature: 'Usage reports',
         owner: ['billing', 'platform-features'],
+        label: false,
+    },
+    'warehouse-properties': {
+        feature: 'Warehouse properties',
+        owner: ['data-modeling'],
+        notes: 'Syncs tables and materialized views to person or group properties.',
         label: false,
     },
     variables: {

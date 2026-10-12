@@ -12,9 +12,6 @@ sourceId: Cohere
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Cohere connector syncs your LLM platform assets – datasets, connectors, models, fine-tuned models, and embed jobs – into the PostHog Data warehouse, so you can analyze your AI infrastructure alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: Finnworlds
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Finnworlds connector pulls financial market data into the PostHog Data warehouse, so you can analyze fundamentals, prices, dividends, ratings, and more alongside your product data.
 

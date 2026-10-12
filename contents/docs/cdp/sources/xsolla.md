@@ -9,12 +9,6 @@ availability:
 sourceId: Xsolla
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Xsolla connector syncs your payment and subscription data into PostHog, including transactions, subscriptions, payouts, reports, promotions, projects, and per-project subscription details.
 
 ## Prerequisites

@@ -7,7 +7,6 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Slack
-beta: true
 ---
 
 The Slack connector syncs channels, users, and messages from your Slack workspace into PostHog's data warehouse.

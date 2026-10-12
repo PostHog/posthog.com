@@ -168,12 +168,12 @@ const techFeatures: { Icon: IconComponent; color: string; title: string; descrip
     },
 ]
 
-export default function ManagedWarehouse(): JSX.Element {
+export default function Warehouse(): JSX.Element {
     return (
         <>
             <SEO
-                title="Managed Warehouse - Context Warehouse"
-                description="All your data, ready in PostHog's Managed Warehouse"
+                title="Warehouse - Context Warehouse"
+                description="All your data, ready in PostHog's Warehouse"
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
                 imageType="absolute"
             />
@@ -196,7 +196,7 @@ export default function ManagedWarehouse(): JSX.Element {
                     picture.
                 </p>
                 <p>
-                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's
+                    The Warehouse is your <strong>context layer</strong> for AI-driven product development. It's
                     a lot more than just storage - it's what all of your PostHog tools run on. This means you're not
                     left wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's
                     the revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR
@@ -275,7 +275,7 @@ export default function ManagedWarehouse(): JSX.Element {
                         <div>
                             <h2 className="!mt-0 mb-2 text-2xl font-bold">You found it before it's finished. Nice.</h2>
                             <p className="mt-0 mb-4 text-secondary">
-                                The Managed Warehouse is in beta. Join the waitlist and we'll let you in as soon as it's
+                                The Warehouse is in beta. Join the waitlist and we'll let you in as soon as it's
                                 ready. No big bang migration, no infrastructure to provision, just your data in one
                                 place.
                             </p>

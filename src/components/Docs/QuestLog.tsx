@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
+import SpeechBubble from 'components/SpeechBubble'
 import * as Icons from '@posthog/icons'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -499,22 +500,14 @@ export const QuestLog: React.FC<{
                                             zIndex: 60, // Higher than your sticky nav
                                         }}
                                     >
-                                        {/* Speech Bubble Container */}
-                                        <div className="relative rounded-lg shadow-sm bg-primary border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
-                                            {/* Speech Text */}
-                                            <div className="text-xs font-medium text-primary text-center">
+                                        <SpeechBubble
+                                            tail={selectedQuest === questItems.length - 1 ? 'right' : 'left'}
+                                            className="px-1 py-1 min-w-[120px] max-w-[175px]"
+                                        >
+                                            <div className="text-xs font-medium text-center">
                                                 <span className="inline-block">{speechText}</span>
                                             </div>
-
-                                            {/* Speech Bubble Tail */}
-                                            <div
-                                                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 border-solid border-primary bg-primary rotate-45 ${
-                                                    selectedQuest === questItems.length - 1
-                                                        ? 'border-r border-t left-full -translate-x-1/2'
-                                                        : 'border-l border-b right-full translate-x-1/2'
-                                                }`}
-                                            ></div>
-                                        </div>
+                                        </SpeechBubble>
                                     </div>
                                 </div>
                             </div>

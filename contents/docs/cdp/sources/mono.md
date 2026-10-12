@@ -9,12 +9,6 @@ availability:
 sourceId: Mono
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Mono source is currently in alpha. It has been tested against Mono's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Mono connector syncs your open banking data into PostHog, including customers, linked bank accounts, and transactions.
 
 [Mono](https://mono.co) is an African open banking platform that lets businesses access financial data from their customers' bank accounts.
