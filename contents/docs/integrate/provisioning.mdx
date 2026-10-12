@@ -124,9 +124,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
     "can_provision_resources": true
   },
   "capabilities": {
-    "account_requests": true,
-    "github_grants": false,
-    "wizard_runs": false
+    "account_requests": true
   },
   "checks": [
     { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
@@ -134,13 +132,13 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
     {
       "name": "jwks",
       "ok": true,
-      "detail": "No jwks_uri, so this client authenticates with PKCE only and cannot use the GitHub grant endpoints"
+      "detail": "No jwks_uri, so this client authenticates with PKCE only"
     }
   ]
 }
 ```
 
-`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call, including the ones PostHog has to enable for you.
+`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call.
 
 Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check.
 
@@ -808,7 +806,7 @@ At the 1x tier:
 
 So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
 
-Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x. Polling a GitHub grant's repositories is the one budget that does not scale with tier: 30 burst and 120/hour per grant, because how fast a visitor's repo picker polls has nothing to do with how strongly your app identifies itself.
+Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x.
 
 Limits are per region: US and EU count separately.
 

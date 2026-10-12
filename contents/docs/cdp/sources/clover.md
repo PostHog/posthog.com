@@ -11,7 +11,7 @@ sourceId: Clover
 
 The Clover connector syncs your [Clover (Fiserv)](https://www.clover.com/) point-of-sale and payment data into PostHog, including orders, payments, customers, inventory items, employees, and more.
 
-> **Note:** This source is currently in **Alpha**. It uses full refresh syncing only and has not yet been verified against a live Clover account.
+> **Note:** This source uses full refresh syncing only and has not yet been verified against a live Clover account.
 
 ## Prerequisites
 

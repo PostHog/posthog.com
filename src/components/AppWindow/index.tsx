@@ -37,7 +37,7 @@ import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
 import FrostedBackdrop from 'components/FrostedBackdrop'
-import { MOTION_LAYER, WINDOW_BG, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
+import { MOTION_LAYER, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
 
 import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
@@ -156,7 +156,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         menu: appMenu,
         taskbarRef,
         closeWindow,
-        isMobile,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -729,11 +728,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${isMobile ? '' : WINDOW_BG} ${
-                        isCompositorActive ? MOTION_LAYER : ''
-                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
-                        item.expanded ? 'shadow-none' : 'shadow-md'
-                    } ${
+                    } !select-auto flex flex-col border-primary ${isCompositorActive ? MOTION_LAYER : ''} rounded-lg ${
+                        item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
+                    } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'
@@ -753,7 +750,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    {isMobile && <FrostedBackdrop tintClassName={WINDOW_TINT} />}
+                    <FrostedBackdrop tintClassName={WINDOW_TINT} />
                     <div
                         className={`relative print:hidden ${
                             hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
