@@ -246,7 +246,7 @@ Two sources feed each product axis: UI events, and MCP tool calls attributed by 
 | Session Replay | 2 | `recording viewed` | `Session replays`, `Replay vision` | — |
 | Error Tracking | 2 | `error_tracking_issue_viewed` | `Error tracking`, `Error tracking alerts` | — |
 | Logs | 2 | `logs query executed` | `Logs` | — |
-| LLM Analytics | 2 | `llm analytics usage` | `AI observability` | `query-llm-trace`, `query-llm-traces-list` |
+| AIO | 2 | `llm analytics usage` | `AI observability` | `query-llm-trace`, `query-llm-traces-list` |
 | Experiments | 2 | `experiment viewed` | `Experiments` | — |
 | Web Analytics | 2 | *(none — MCP only)* | `Web analytics` | `query-web-stats`, `query-web-overview`, plus six `heatmaps-` tools |
 | PostHog AI | 1 | `max conversation turn completed` | — | — |
