@@ -1,9 +1,11 @@
-import React, { useLayoutEffect, useRef } from 'react'
-import Wallpapers from 'components/Desktop/Wallpapers'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
+import Wallpapers, { BlurredWallpaperContext } from 'components/Desktop/Wallpapers'
 
 const BLUR_RADIUS_PX = 64
 const EDGE_PADDING_PX = BLUR_RADIUS_PX * 3
 const MIRROR_OFFSETS = [-1, 0, 1]
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 interface FrostedBackdropProps {
     className?: string
@@ -20,7 +22,9 @@ const MirroredWallpaperTile = ({ column, row }: { column: number; row: number })
             transform: `scale(${column ? -1 : 1}, ${row ? -1 : 1})`,
         }}
     >
-        <Wallpapers />
+        <BlurredWallpaperContext.Provider value>
+            <Wallpapers />
+        </BlurredWallpaperContext.Provider>
     </div>
 )
 
@@ -28,7 +32,7 @@ export default function FrostedBackdrop({ className = 'inset-0', dataScheme, tin
     const frameRef = useRef<HTMLDivElement>(null)
     const blurredWallpaperRef = useRef<HTMLDivElement>(null)
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         const frame = frameRef.current
         const blurredWallpaper = blurredWallpaperRef.current
         if (!frame || !blurredWallpaper) return
@@ -64,6 +68,8 @@ export default function FrostedBackdrop({ className = 'inset-0', dataScheme, tin
                 ref={blurredWallpaperRef}
                 className="absolute overflow-hidden blur-3xl reduce-transparency:hidden"
                 style={{
+                    left: -EDGE_PADDING_PX,
+                    top: -EDGE_PADDING_PX,
                     width: `calc(100vw + ${EDGE_PADDING_PX * 2}px)`,
                     height: `calc(100dvh + ${EDGE_PADDING_PX * 2}px)`,
                 }}
