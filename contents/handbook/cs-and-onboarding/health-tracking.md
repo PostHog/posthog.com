@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We track customer health in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts). Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours.
+We track customer health in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts). Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 > We can't yet see historic trends of customer health, because the score is a materialized view that is rebuilt each day.
 
@@ -88,6 +88,31 @@ Two accounts at 6.5 overall can be completely different problems. Always read th
 ### Why 61.5 / 38.5
 
 The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score`. This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
+
+## CSM relationship
+
+The health score above is computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
+
+It records the relationship *you personally* have with the account. It does not measure how the account is doing from a usage/spend/metrics standpoint. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading in a product-led book, "assigned to you" and "known to you" are different things. 
+
+| Rating | What it means |
+|--------|---------------|
+| 1 - No relationship | The account is yours on paper only. It is fully self-serve, and you have no two-way contact with anyone there. |
+| 2 - Introduced | Warmly introduced from another team member but no direct trust yet OR limited response to engagement attempts but no real relationship built |
+| 3 - Reactive | They contact you when they need something, and there is no contact between times. |
+| 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
+| 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
+
+To set the rating, add the **CSM relationship** column to your account view, then click the cell.
+
+### How to use it
+
+- Only the CSM on the account sets the rating. Do not rate an account for somebody else.
+- Change it when the relationship changes. There is no review schedule.
+- On handover, rate your own relationship. Start again at 2 instead of keeping the rating the previous CSM gave. If you keep their rating, the field tells you about the history of the book and not about the relationship the account has today.
+- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts might need more focus from the CSM team and beyond.
+
+Each label starts with a digit, so the scale sorts in the accounts table and totals in HogQL and PostHog AI. Use `toInt32OrNull(substring(value, 1, 1))` to get the number.
 
 ## How stickiness is measured
 
