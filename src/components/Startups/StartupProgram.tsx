@@ -17,7 +17,6 @@ import {
     IconStack,
     IconCompass,
     IconPullRequest,
-    IconArrowRight,
     IconGraph,
     IconPieChart,
     IconToggle,
@@ -502,7 +501,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         {/* show is set explicitly because the scroll trigger's -15% rootMargin never
                             fires for a heading this close to the top of the pane. */}
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-                            {creditValue} in credits for your product's{' '}
+                            {creditValue} in PostHog credit to{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -511,7 +510,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                 delay={300}
                                 show
                             >
-                                context layer
+                                build better products
                             </RoughAnnotation>
                         </h1>
 
@@ -595,17 +594,6 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </div>
                         ))}
                     </div>
-                    <p>
-                        <Link
-                            to="/self-driving"
-                            state={{ newWindow: true }}
-                            className="inline-flex items-center gap-1.5 font-semibold text-red dark:text-yellow"
-                        >
-                            See how self-driving works
-                            <IconArrowRight className="size-4" />
-                        </Link>
-                    </p>
-
                     <h3>
                         How far does <Highlight>{creditValue}</Highlight> go?
                     </h3>
@@ -859,9 +847,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     >
                         <div className="grid @lg/reader-content:grid-cols-[1fr_220px] gap-6 items-center">
                             <div>
-                                <h3 className="mt-0 mb-2 text-2xl font-bold">
-                                    Ready to give your product a context layer?
-                                </h3>
+                                <h3 className="mt-0 mb-2 text-2xl font-bold">Ready to build better products?</h3>
                                 <p className="mt-0 mb-4">
                                     Get {creditValue} in PostHog credits, exclusive merch, and partner perks worth
                                     $12,000+. Applying takes 2 minutes.
