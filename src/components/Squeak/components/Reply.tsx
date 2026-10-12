@@ -4,6 +4,7 @@ import Days from './Days'
 import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
+import { BlockedBadge } from './Profile'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
@@ -416,6 +417,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                     </Link>
                 )}
+                <BlockedBadge profile={profile?.data} />
                 {!isMax && <LevelBadge points={profile?.data?.attributes?.reputation} />}
                 {badgeText && (
                     <span className="border border-primary dark: text-xs py-0.5 px-1 rounded-sm">{badgeText}</span>

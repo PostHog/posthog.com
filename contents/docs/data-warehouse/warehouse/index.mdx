@@ -1,24 +1,24 @@
 ---
-title: Managed warehouse
+title: Warehouse
 sidebar: Docs
 showTitle: true
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+<CalloutBox icon="IconFlask" title="The warehouse is in beta" type="action">
 
-Not yet available to everyone – [join the waitlist](/context-warehouse/managed-warehouse) and we'll let you in as soon as it's ready.
+Not yet available to everyone – [join the waitlist](/context-warehouse/warehouse) and we'll let you in as soon as it's ready.
 
 </CalloutBox>
 
-The managed warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/cdp/sources) land in it continuously, and you query it like any Postgres database – from `psql`, from BI tools like Metabase or Grafana, from your own code, or from PostHog itself.
+The warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/cdp/sources) land in it continuously, and you query it like any Postgres database – from `psql`, from BI tools like Metabase or Grafana, from your own code, or from PostHog itself.
 
 It's the difference between "PostHog can query my data" and "PostHog **is** my data warehouse": you get a real database endpoint with its own hostname and credentials, holding your product data and business data side by side.
 
 ## How it works
 
-Under the hood, the managed warehouse is built on [DuckDB](https://duckdb.org/), with data stored in the open [DuckLake](https://ducklake.select/) lakehouse format on durable object storage. You don't need to know any of that to use it, but it explains the shape of the product:
+Under the hood, the warehouse is built on [DuckDB](https://duckdb.org/), with data stored in the open [DuckLake](https://ducklake.select/) lakehouse format on durable object storage. You don't need to know any of that to use it, but it explains the shape of the product:
 
 1. **Provisioning** – When you set up the warehouse, PostHog creates a dedicated database for your organization with its own hostname, like `my-warehouse.dw.us.postwh.com`. Compute is isolated per organization: your queries run on workers spun up for you, not on a shared cluster.
 2. **Getting data in** – PostHog backfills your historical events and persons, then keeps the warehouse up to date as new data arrives. [Sources](/docs/cdp/sources) you've connected (Stripe, Postgres, Salesforce, HubSpot, and so on) sync into the warehouse on the same schedule as their regular imports.
@@ -35,7 +35,7 @@ A closer look at the pieces PostHog manages for you:
 
 ## How this fits into PostHog
 
-The managed warehouse doesn't replace ClickHouse or any other part of PostHog. Insights, product analytics, and every other PostHog feature keep running on PostHog's existing query engine, unchanged, and your events keep flowing in exactly as before.
+The warehouse doesn't replace ClickHouse or any other part of PostHog. Insights, product analytics, and every other PostHog feature keep running on PostHog's existing query engine, unchanged, and your events keep flowing in exactly as before.
 
 The warehouse is an addition: a dedicated database that receives the same data, where you can run isolated workloads with the benefits of DuckDB and DuckLake built in and managed for you. Point BI dashboards, notebooks, and scheduled jobs at it, build your own tables in it, and none of it competes with the queries powering your PostHog project.
 
@@ -55,6 +55,6 @@ The exact layout is still settling during the beta, so the reliable way to see w
 
 ## Where to go next
 
-- **Getting access?** [Join the waitlist](/context-warehouse/managed-warehouse).
-- **Access enabled?** Walk through [setting up the managed warehouse](/docs/data-warehouse/managed-warehouse/setup).
-- **Warehouse ready?** [Connect and query it](/docs/data-warehouse/managed-warehouse/connect) with your favorite tools.
+- **Getting access?** [Join the waitlist](/context-warehouse/warehouse).
+- **Access enabled?** Walk through [setting up the warehouse](/docs/data-warehouse/warehouse/setup).
+- **Warehouse ready?** [Connect and query it](/docs/data-warehouse/warehouse/connect) with your favorite tools.
