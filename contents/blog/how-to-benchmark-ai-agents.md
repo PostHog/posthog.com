@@ -150,7 +150,7 @@ You can isolate state in multiple ways, including three approaches we tested.
 
 The simplest approach is to run trials one after another and clear local agent memory between runs. You run a trial, record the output, reset the agent's scratchpad or immediate context, and start the next run.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Sequential runs
 
@@ -166,7 +166,7 @@ Instead, I'll show the cases where it doesn't.
 
 Back to scouts, here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Run B12 retrieving shared memory saved by Run B4
 
@@ -174,7 +174,7 @@ As you could've guessed, the results of such runs are highly questionable becaus
 
 It could work the other way around too. For example, an agent could decide not to cheat and honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped the task entirely.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Run B2 skipping an anomaly due to prior-run context
 
@@ -192,7 +192,7 @@ To get clean benchmarks, every trial needs complete isolation across everything 
 
 DB state isn't the only leak. If your agent has tools to query ClickHouse, PostHog, logs, and so on, an earlier benchmark run leaves traces in those sources. A subsequent run can find those error spikes or query histories and use them as clues. True isolation means isolating telemetry and log scopes too.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Isolation illustration
 
@@ -200,7 +200,7 @@ Though there's also a real risk of over-isolating. If the benchmarking agent doe
 
 Here's an example of one of the first dry runs we tested. It differs from the previous two traces – it wasn't cheating, just literal instruction-following.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Dry-run execution altering intermediate report behavior
 
@@ -220,7 +220,7 @@ We went through three stages to get this working.
 
 Agents do tool calls when running. We track and store those traces – what the agent asked and what it got back. For example, what query it ran with `execute_query(sql)` and what slice of the DB was in the output.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > MCP mock
 
@@ -232,7 +232,7 @@ It's not a big surprise, but it would still be cool if it worked out of the box.
 
 The logical next step. Instead of building the mocked data over a single run, we ran ~50 runs, checked every trajectory the agent picked, and mocked those instead.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > Trajectory MCP mock
 
@@ -256,13 +256,13 @@ The second problem is less obvious: even if you skew the data, agents are still 
 
 For example, when preparing data for agent feedback, we can clearly sync tables with actual responses and tables with the scouts those responses were left about. But the moment you get a proper model, it will look inside, see that there aren't many users on this local instance, and get suspicious.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > September 30 trace hitting a dead end due to missing team roster and metadata
 
 On the other hand, you can, as always, overprepare and make it as realistic as possible on the MCP tools side, while the rest of the data in the local instance doesn't match the scale. Then the agent gets even more suspicious and starts thinking the data is synthetic.
 
-> **Screenshot placeholder**
+> **Illustration placeholder**
 >
 > September 23 trace where agent flags data-slice extraction artifacts as suspicious data
 
