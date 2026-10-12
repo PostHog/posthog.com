@@ -1,33 +1,24 @@
-### Q3 2026 Objectives
+### Q4 2026 Objectives
 
-- **Become a 2030 Workflows Product** (Champion: Harley)
-  - Motivation: Agents are far better at building context and making modifications than users.
+- **Be our own customer** (Champion: Harley)
+  - Motivation: We use Workflows for much of our own messaging, but there are still gaps. Closing them makes the product better for everyone.
   - What we'll ship:
-    - Fully AI native & agentic workflow product
-      - Chat interface for rapid iteration
-      - Move to read-only UI for workflows / email templates / messaging
-    - Removal of hefty existing UI if new experience & user testing is superior
-    - Revisions
-    - Reshape APIs to be agentic-friendly for rapid turnaround
-- **Fit into self-driving products** (Champion: Dan)
-  - Motivation: A single person can drive 1000 workflows.
+    - Move the rest of PostHog's messaging onto Workflows
+    - Rebuild the remaining campaigns by hand first
+    - Bring over everything else with the importer
+- **Grow Workflows** (Champions: Mike & Michael)
+  - Motivation: The product is in a solid state. Now we want more teams to start using it and to get value from it quickly.
   - What we'll ship:
-    - Get our data right so 'self-driving' can first suggest changes
-    - Integrate with 'self-driving' to propose the change (using revisions and APIs)
-    - Test revisions of actions against each other for improvements (still human in the loop)
-    - Self-driving applying the outcomes of the A/B tests
-- **Reliability & Trust** (Champion: Myke)
-  - Motivation: Customers trust us fully with their workflows.
+    - Onboarding flow for Workflows (UI and MCP)
+    - Workflows suggested from your own product data when you start
+    - Deeper integration with the rest of PostHog
+    - Route existing marketing and messaging destinations into Workflows
+    - Behavioural cohorts
+    - Importers so teams can bring their existing campaigns
+    - Hands-on help for teams moving to Workflows
+- **Self-driving v1 in GA** (Champion: Daniel)
+  - Motivation: Customers get good suggestions to improve each campaign and their whole set of campaigns. This is the first step towards messaging that runs itself.
   - What we'll ship:
-    - Harden our systems to never drop data
-    - Finalise the re-run system so we can replay failed invocations
-    - Full visibility into every messaging channel
-- **Nail Messaging** (Champions: Dan & Myke)
-  - Motivation: Feature parity on table-stakes features with our competitors.
-  - What we'll ship:
-    - Behavioural cohorts (no backfilling)
-    - Push notifications
-    - A/B testing
-    - Email events
-    - Messaging metrics
-    - Email with multiple links / more detailed metrics
+    - Suggest changes to a single workflow or broadcast based on customer data
+    - Suggest changes across workflows and broadcasts based on customer data, e.g. make sure the same cohort doesn't get messages from several campaigns at once
+    - Suggest new workflows and broadcasts based on customer data
