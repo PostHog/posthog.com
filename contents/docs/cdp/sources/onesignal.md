@@ -15,7 +15,7 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The OneSignal connector pulls your push notification, email, and SMS message data along with audience segments into the PostHog data warehouse.
 
-> **Note:** This source is in **alpha**. OneSignal retains API messages for 30 days, so the first sync backfills at most the last 30 days of message history.
+> **Note:** OneSignal retains API messages for 30 days, so the first sync backfills at most the last 30 days of message history.
 
 ## Prerequisites
 
