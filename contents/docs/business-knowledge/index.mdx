@@ -1,5 +1,5 @@
 ---
-title: Business knowledge
+title: Business Knowledge
 sidebar: Docs
 showTitle: true
 contentMaxWidthClass: max-w-5xl
@@ -11,7 +11,7 @@ import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 <PrivateBeta />
 
-Business knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business knowledge MCP tools all read the same sources.
+Business Knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business Knowledge MCP tools all read the same sources.
 
 <OSButton variant="primary" asLink to="/docs/business-knowledge/start">Get started</OSButton>
 
@@ -22,7 +22,7 @@ Add sources in PostHog. PostHog AI, Support, and MCP then read those same source
 <SurfaceCards columns={2}>
 
 <SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/business-knowledge/start" cta="Add a source">
-Ask a question in the Playground to see what this project already knows, and what's missing.
+Add a text source, a public page, or a file, then ask in the Playground what's covered and what's missing.
 </SurfaceCard>
 
 <SurfaceCard icon="IconSparkles" color="purple" title="PostHog AI" url="/docs/posthog-ai" cta="Ask PostHog AI">
@@ -58,11 +58,4 @@ Search sources, read the surrounding text, and add or update a source. The tools
 - A human resolved the same support question last week. With [Learn from support](/docs/business-knowledge/learn-from-support) on, that answer can be reused.
 - The handbook lives in GitHub. Select that repository and an agent can find the file by name, then read it.
 
-## Before answers can use a source
-
-Two checks have to pass.
-
-1. Approve **AI data processing** for the organization. Organization owners and admins do this under organization settings, in **AI service providers**. Until that's on, PostHog doesn't send source text to a model, so documents stay unchecked and search leaves them out. The Playground also refuses a question until this is on.
-2. Wait for the content check on each document. Search leaves a document out until that check marks it safe, and leaves out a document marked unsafe. See [Content checks](/docs/business-knowledge/start#content-checks).
-
-Keyword search works after the content check. Semantic search is built in the background and can take up to an hour after that. The source status shows **indexing** during that window.
+Answers stay empty until two checks pass. See [Before answers can use a source](/docs/business-knowledge/requirements).

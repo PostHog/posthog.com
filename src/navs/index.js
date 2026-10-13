@@ -6494,14 +6494,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Business knowledge',
+            name: 'Business Knowledge',
             url: '/docs/business-knowledge',
             icon: 'IconBook',
             color: 'purple',
             description: 'Facts PostHog AI, Support, and MCP use when they answer questions about your business',
             children: [
                 {
-                    name: 'Business knowledge',
+                    name: 'Business Knowledge',
                 },
                 {
                     name: 'Overview',
@@ -6518,6 +6518,12 @@ export const docsMenu = {
                     icon: 'IconRocket',
                     featured: true,
                     color: 'purple',
+                },
+                {
+                    name: 'Before answers',
+                    url: '/docs/business-knowledge/requirements',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                 },
                 {
                     name: 'Where to use',

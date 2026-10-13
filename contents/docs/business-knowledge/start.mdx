@@ -1,21 +1,66 @@
 ---
-title: Get started with Business knowledge
+title: Get started with Business Knowledge
 sidebar: Docs
 showTitle: true
+hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
 import PrivateBeta from './_snippets/private-beta.mdx'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
 
 <PrivateBeta />
 
-Business knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business knowledge MCP tools all read the same sources.
+<QuestLog firstSpeechBubble="Add what PostHog should know." lastSpeechBubble="Now see what's missing.">
 
-Open **Business knowledge** and choose **Add source**. You can also start from an empty project with **Add your first source**.
+<QuestLogItem title="Add a source" subtitle="Text, a page, or a file" icon="IconUpload">
 
-The list shows how many sources are ready and how many chunks are indexed. Search by name or URL, filter by type, or filter **Human** and **Learned**.
+Open [**Business Knowledge**](https://app.posthog.com/business-knowledge) and choose **Add source**. You can also start from an empty project with **Add your first source**.
 
-Sources belong to the project you add them in. [Learn from support](/docs/business-knowledge/learn-from-support) stores its setting and its learned sources on the parent project. [GitHub repositories](/docs/business-knowledge/github) stay on the environment you configure.
+Paste a policy, add a public URL, or upload a file. The list shows how many sources are ready and how many chunks are indexed.
+
+Sources belong to the project you add them in. [Learn from support](/docs/business-knowledge/learn-from-support) stores its setting and its learned sources on the parent project. [GitHub repositories](/docs/business-knowledge/github) stay on the environment where you connect them.
+
+<OSButton variant="primary" asLink to="#text">Add a source</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Turn on learning" subtitle="Optional" icon="IconToggle">
+
+Let PostHog add reusable answers from resolved Support tickets. Learning is off until you turn it on, and Support has to be on in that environment first.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/learn-from-support">Enable learning</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Choose what every reply includes" subtitle="Tone and policies" icon="IconNotebook">
+
+Turn on **Always include in replies** for guidance that should be in every answer: tone, policies, and company direction. PostHog still runs the content check.
+
+<OSButton variant="primary" asLink to="#always-include-in-replies">Set a source to always include</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="See what's covered and what's missing" subtitle="Playground" icon="IconSparkles">
+
+Ask a question a customer or teammate would ask. If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/playground">Open the Playground</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Use the same sources in answers" subtitle="PostHog AI, Support, and MCP" icon="IconMagic">
+
+PostHog AI searches these sources when a question is about your product, policies, or team. Support reads them when it drafts a reply. MCP clients can search and update them with the `business_knowledge:read` or `business_knowledge:write` scope.
+
+Answers stay empty until [two checks](/docs/business-knowledge/requirements) pass.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge">Where you can use it</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
 
 ## Text
 
@@ -109,13 +154,3 @@ Delete removes the source and its chunks. PostHog records the change in the acti
 | PDF pages | 2,000 |
 | CSV rows kept | 10,000 |
 | Always-included text | 20,000 characters combined |
-
-## Playground
-
-The **Playground** tab shows what Business knowledge holds right now, and what's missing. Ask a question and see whether a source answers it.
-
-[Playground](/docs/business-knowledge/playground)
-
-## Learn from support
-
-You can also let PostHog add reusable answers from resolved support tickets. See [Learn from support](/docs/business-knowledge/learn-from-support).

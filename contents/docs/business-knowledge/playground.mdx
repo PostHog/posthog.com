@@ -1,5 +1,5 @@
 ---
-title: Playground
+title: Business Knowledge playground
 sidebar: Docs
 showTitle: true
 ---
@@ -8,11 +8,11 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-The Playground shows what Business knowledge holds right now, and what's missing. Ask a question a customer or teammate would ask. The answer uses only the sources in this project.
+The Playground shows what Business Knowledge holds right now, and what's missing. Ask a question a customer or teammate would ask. The answer uses only the sources in this project.
 
-If the answer cites a source, that fact is already in Business knowledge. If it can't find the fact, add a source and ask again.
+If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
 
-Open **Business knowledge** and choose the **Playground** tab.
+Open [**Business Knowledge**](https://app.posthog.com/business-knowledge/playground) and choose the **Playground** tab.
 
 Your chats are visible to you. They're grouped by when they were last used: today, yesterday, the last 7 days, the last 30 days, and older.
 
@@ -20,11 +20,11 @@ Your chats are visible to you. They're grouped by when they were last used: toda
 
 Type a question and submit it. The placeholder is **Ask anything about your business using this project's business knowledge**.
 
-The Playground needs AI data processing approved for the organization. If it's off, the request is refused with: `Enable AI data processing before asking another question.`
+The Playground needs [AI data processing](/docs/business-knowledge/requirements) approved for the organization. If it's off, the request is refused with: `Enable AI data processing before asking another question.`
 
 ## What the answer is allowed to read
 
-The answer is limited to this project's business knowledge.
+The answer is limited to this project's Business Knowledge.
 
 - It searches your sources.
 - It can read more of a document around a matching passage.
@@ -35,3 +35,14 @@ The thread shows each of those steps: **Searched business knowledge**, **Read do
 Text marked as learned from support is team practice from a resolved ticket, not a page you uploaded.
 
 A source with **Always include in replies** is included even when it doesn't match the question, after the same content check as search.
+
+## When an answer is wrong
+
+The Playground doesn't change a source. Use the thread to see which step produced the answer, then fix that source and ask again.
+
+1. Open the source the answer used.
+2. Edit a text source, refresh a URL source, or delete a file source and upload it again. See [Edit or delete a source](/docs/business-knowledge/start#edit-or-delete-a-source).
+3. For a learned answer, edit or delete that learned source. See [Learn from support](/docs/business-knowledge/learn-from-support).
+4. Ask the question again.
+
+A source with **Always include in replies** is in every answer. Turn it off, or edit it, when that text is what made the answer wrong.
