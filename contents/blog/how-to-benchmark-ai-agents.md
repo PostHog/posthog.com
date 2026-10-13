@@ -218,9 +218,9 @@ If it's a blocker for your agent, the next best thing is an isolated environment
 
 ## 3. How to benchmark offline
 
-You can run hundreds of agents against the current state of the DB pretty reliably. However, if you want to replicate the exact same check a day or a week later, you would need to run a new benchmark as the DB state changes.
+You can run hundreds of agents against the production database pretty reliably. However, because the data changes between runs, you can't compare runs, since it raises the question: "did the score improve because of our change or because the data is different?"
 
-Instead, you could decide to create offline evals – ones you can re-run as much as you want with comparable results.
+Instead, you could decide to create offline evals – ones that will give you a fixed starting point. You can re-run them as much as you want with comparable results.
 
 I use the word "offline" loosely here, since you still need to call AI endpoints and so on. The main point is that the state is frozen and you can reset it at any time.
 
