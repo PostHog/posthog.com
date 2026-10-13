@@ -193,6 +193,23 @@ To fix this:
 1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
 2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
 
+## Why is my Google Analytics sync failing with quota errors?
+
+If your Google Analytics sync never finishes or keeps retrying silently, the GA4 property's Data API token quota is likely exhausted. This is most common during the first sync of a large property, especially with custom reports that include many dimensions.
+
+The first sync reads 730 days of history by default. For high-traffic properties, this can use up the entire API quota before the backfill completes. PostHog retries automatically when the quota refills, but large backfills can exhaust it repeatedly.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your Google Analytics source.
+2. Set **Days of history to sync initially** to a lower value like `90` or `365`. This reduces the amount of data the first sync needs to fetch.
+3. If you're using custom reports, remove high-cardinality dimensions to reduce the volume of data per report.
+4. Re-run the sync.
+
+Blank or zero values keep the 730-day default, so existing sources aren't affected.
+
+For more details on configuring Google Analytics sources, see the [Google Analytics source setup guide](/docs/cdp/sources/google-analytics).
+
 ## Why is my Google Sheets sync failing with "collapse to the same column name"?
 
 This error occurs when two column headers in your Google Sheet look different but normalize to the same column name. PostHog ignores case, spaces, and punctuation when converting headers to column names — so headers like `Task ID` and `task_id` both become `task_id`.
