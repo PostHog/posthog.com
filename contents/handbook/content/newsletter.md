@@ -82,18 +82,18 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 ## Publishing details
 
-- Having a good post preview (hero) image is important. Build mode hero images use an origami/paper style. To create one:
+Having a good post preview (hero) image is important. Build mode hero images use an origami/paper style. To create one:
 
-  1. Find an image of an object that fits the post.
-  2. Give it to Gemini with this prompt:
+1. Find an image of an object that fits the post.
+2. Give it to Gemini with this prompt:
 
-     > Reimagine this object as if it was made out of origami/flat lay paper, keep the background completely blank/white and try to keep to the original image as possible.
+   > Reimagine this object as if it was made out of origami/flat lay paper, keep the background completely blank/white and try to keep to the original image as possible.
 
-  3. If the result looks grey or drab, ask Gemini to change the colors.
-  4. Import it into Figma and use the AI remove background action to remove the white background.
+3. If the result looks grey or drab, ask Gemini to change the colors.
+4. Import it into Figma and use the AI remove background action to remove the white background.
 
-  If you get stuck, [open an art request](/handbook/brand/art-requests) to have Lottie make one for you (give her at least 1 week to do so). The image needs to be 1200x630 px for the `posthog.com` OG image and 1456x1048 px for the Substack preview image.
+If you get stuck, [open an art request](/handbook/brand/art-requests) to have Lottie make one for you (give her at least 1 week to do so). The image needs to be 1200x630 px for the `posthog.com` OG image and 1456x1048 px for the Substack preview image.
 
-- We publish the newsletter on Substack and then add it to `posthog.com/newsletter` via GitHub. 
+We publish the newsletter on Substack and then add it to `posthog.com/newsletter` via GitHub.
 
-- Make sure links in the newsletter point to `posthog.com` and include UTMs like `?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=enter_name_here`.
+Make sure links in the newsletter point to `posthog.com` and include UTMs like `?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=enter_name_here`.
