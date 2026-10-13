@@ -9,9 +9,9 @@ availability:
 sourceId: Adyen
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Adyen connector syncs account holders, balance accounts, companies, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -27,9 +27,10 @@ Connect your Adyen account to sync payments data.
 
 Create an API credential in your Adyen Customer Area under **Developers > API credentials**, then paste its API key below. Which tables you can sync depends on what that credential can reach:
 
-- **Transactions, transfers, account holders and balance accounts** need an Adyen for Platforms or Adyen Issuing integration. Add your balance platform ID too.
+- **Transactions, transfers, account holders, balance accounts and payment instruments** need an Adyen for Platforms or Adyen Issuing integration. Add your balance platform ID too.
+- **Legal entities** also need the balance platform ID, plus a Legal Entity Management API role on the credential.
 - **Settlement detail reports** need a merchant account and the **Merchant Report Download** role. Adyen only creates these files once you turn on the settlement details report in your Customer Area.
-- **Companies and merchant accounts** come from the Management API and need an account read role.
+- **Companies, merchant accounts and stores** come from the Management API and need an account read role.
 
 Pick the environment that matches where you created the API key - a test key won't work against live.
 
