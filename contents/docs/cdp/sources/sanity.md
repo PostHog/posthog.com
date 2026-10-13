@@ -13,12 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Sanity source is in alpha" type="action">
-
-The Sanity source is currently in **alpha**. We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
-
-</CalloutBox>
-
 The Sanity connector imports content documents and asset metadata from a [Sanity](https://www.sanity.io) dataset into the PostHog data warehouse. Sanity is a headless CMS that stores structured content as typed documents. This connector creates one table per document type in your schema, plus tables for image and file asset metadata.
 
 Drafts and release versions are included in every sync.
