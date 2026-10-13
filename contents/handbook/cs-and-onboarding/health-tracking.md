@@ -188,6 +188,13 @@ The `Relationship score` property is a score from 0 to 100 that we calculate eac
 
 Only accounts that are CSM, AM, or AE managed and have an owner get a score.
 
+Each account in Customer Analytics has these properties:
+
+| Property | What it tells you |
+| --- | --- |
+| `Relationship band` | The band of the score (see below). Read this first. It shows `Unknown` when the account has no signal. |
+| `Relationship score` | The score, 0–100. |
+
 ### Signals
 
 | Signal | Weight | What counts |
@@ -236,7 +243,7 @@ The full breakdown is in the `csm_relationship_scores` view in the PostHog Data 
 
 - **Contact is not sentiment.** A customer who sends angry messages every day gets a high score. Read the messages before you decide that a relationship is healthy.
 - **Few signals make a weak score.** An account with only one signal can move a lot from one contact. Check the number of signals on the dashboard.
-- **Old values stay.** The property sync never clears a value. If an account loses all its signals, the property keeps its last score. The dashboard shows the current band.
+- **Old scores stay.** The property sync never clears a value. If an account loses all its signals, `Relationship score` keeps its last number, but `Relationship band` changes to `Unknown`.
 
 ## CSM relationship
 
