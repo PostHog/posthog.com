@@ -212,7 +212,9 @@ Here's an example of one of the first dry runs we tested. It differs from the pr
 > 
 > Dry-run execution altering intermediate report behavior
 
-The moment it understands it's a dry run, it changes how it executes the intermediate steps, and judging becomes harder. This moves us to offline benchmarks, because agents that know they're running in a benchmark environment behave even stranger.
+Because the dry run agent doesn't have all the tools that the actual run would use (creating new reports, editing data, and so on), it leaves us with the blind spots that we can't test. For the case of scouts, it's acceptable, as we evaluate retrieving the data way more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
+
+If it's a blocker for your agent, the next best thing is to create offline benchmarks. Though, it comes with a couple of surprises.
 
 ## 3. How to benchmark offline
 
