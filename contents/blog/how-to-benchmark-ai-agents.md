@@ -100,8 +100,6 @@ A great example is scouts. If you don't know them yet, [scouts](/docs/self-drivi
 
 To evaluate them, we built a rubric generator. You pick the agent you care about, add some context, and let it generate evaluation criteria.
 
-![Trial start screen](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_09_44_0a21ad656f.png)
-
 Every scout should produce a report covering what it found, how actionable the findings are, and what to do next. To measure this baseline, we stick to a mostly static set of rubrics shared across all scouts.
 
 To make the ranking more meaningful, we also generate rubrics tailored to that specific scout:
@@ -121,6 +119,8 @@ Once those rubrics are in place, we can reliably track success rates across a go
 - Old model vs New model ("Is the new model released work better than the old one?")
 - Thinking effort ("Do I actually need it at xhigh, if medium does it just fine with 30% fewer tokens?")
 - Prompt changes ("Let's create 5 skills and track which one works the best for the task")
+
+![Trial start screen](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_09_44_0a21ad656f.png)
 
 The result is a report with a close-to-clear answer. It's obviously not fully deterministic, but it's way better than just "vibes."
 
