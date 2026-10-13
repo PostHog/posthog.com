@@ -317,3 +317,22 @@ Approvals integrate with PostHog's notification system to keep everyone informed
 - **Requesters** receive notifications when their request is approved, applied, rejected, or expires
 
 Notifications are delivered via email and in-app. In-app notifications appear in the notification popover and link directly to the approval detail page.
+
+### Email notification settings
+
+Members can control which approval emails they receive through two settings in their account notification preferences:
+
+| Setting                    | Controls                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| **Approval requests**      | Emails sent to approvers when a change request needs their review                         |
+| **Change request updates** | Emails sent to requesters when their request is approved, rejected, expires, or goes live |
+
+Both settings are enabled by default. Changes apply to approval emails from all of a member's organizations.
+
+To configure these settings, go to [**Settings** > **Account** > **Notifications**](https://app.posthog.com/settings/user-notifications).
+
+> **Note:** Organization admins can override these settings per-member through [member notification settings](/docs/settings/organizations#member-notification-settings). When an admin sets an override, the member cannot change that setting until the override is removed.
+
+### In-app notifications
+
+In-app notifications are not affected by email notification settings. Members can control in-app approval notifications separately through the in-app notification settings.
