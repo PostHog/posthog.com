@@ -77,7 +77,7 @@ The request body accepts:
 | `data_interval_start`, `data_interval_end` | ISO 8601 datetimes bounding the export. Required for `events`, `persons`, and `sessions`. For `hogql`, required only for the [placeholders](#sql-queries) that the query uses. The range must be at most one week, and neither bound can be in the future. |
 | `include`, `exclude` | Optional lists of event names to include or exclude. Only supported for the `events` model. |
 | `hogql_query` | The SQL query to export. Required for (and only supported by) the `hogql` model. |
-| `hogql_modifiers` | Optional. Settings for how the `hogql` query runs. Set `{"convertToProjectTimezone": true}` to export timestamps in the project timezone, or `false` for UTC. Only supported for the `hogql` model. |
+| `hogql_modifiers` | Optional. Settings for how the `hogql` query runs. Set `{"convertToProjectTimezone": true}` to export timestamps in the project timezone, or `{"convertToProjectTimezone": false}` for UTC. Only supported for the `hogql` model. |
 | `file.format` | `Parquet` (default) or `JSONLines`. |
 | `file.compression` | Optional. `zstd`, `lz4`, `snappy`, `gzip`, or `brotli` for `Parquet`. Only `gzip` and `brotli` for `JSONLines`. |
 | `file.max_size_mb` | Optional. Splits the output into multiple files of at most this size, instead of one potentially large file. |
@@ -115,7 +115,7 @@ A few things to know about SQL query exports:
 - **Every column needs a name.** Each column in the `SELECT` clause must be a plain field or have an alias, like `count() AS event_count`.
 - **Only interval placeholders.** The query can use the `{data_interval_start}` and `{data_interval_end}` placeholders. For each placeholder that the query uses, pass a value in the field with the same name. Other placeholders, like `{filters}`, are not supported.
 - **The time interval only fills placeholders.** `data_interval_start` and `data_interval_end` do not add filters to the query. A query without placeholders runs unchanged, as of the time the export starts.
-- **Timestamps are in UTC by default.** This also applies to date functions in the query. If your project sets the `convertToProjectTimezone` modifier, exports use that setting instead. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `false` for UTC.
+- **Timestamps are in UTC by default.** This also applies to date functions in the query. If your project sets the `convertToProjectTimezone` modifier, exports use that setting instead. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `{"convertToProjectTimezone": false}` for UTC.
 - **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. We're adding columns with the time of ingestion to the `events` table and other tables soon, so you'll be able to filter on that instead. Until then, if completeness matters, leave a margin behind the present or re-run the export later.
 
 ### Bound your queries

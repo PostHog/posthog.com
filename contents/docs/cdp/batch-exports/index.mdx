@@ -49,11 +49,7 @@ import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
 
-<CalloutBox icon="IconInfo" type="fyi" title="You can't change a batch export's model">
-
-After you save a batch export, its model is fixed. To export a different model, create a new batch export.
-
-</CalloutBox>
+> **Note:** You can't change the model of a batch export after you save it. To export a different model, create a new batch export.
 
 > **Note:** New fields may be added to these models over time.
 >
@@ -168,7 +164,7 @@ Pricing for SQL query exports hasn't been decided yet, but they're free while th
 
 #### API and MCP
 
-You can also create these exports with the [API](/docs/api/batch-exports). Set `model` to `hogql` and pass the query in `hogql_query`. Timestamps default to UTC, unless your project sets the `convertToProjectTimezone` modifier. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `false` for UTC.
+You can also create these exports with the [API](/docs/api/batch-exports). Set `model` to `hogql` and pass the query in `hogql_query`. Timestamps default to UTC, unless your project sets the `convertToProjectTimezone` modifier. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `{"convertToProjectTimezone": false}` for UTC.
 
 AI agents can also create them through the [PostHog MCP](/docs/cdp/surfaces/mcp).
 
