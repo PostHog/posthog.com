@@ -178,8 +178,9 @@ export default function TraceExplorerCallout({
                     </div>
                     <h3 className="tec-heading">Become a trace explorer</h3>
                     <p className="tec-body">
-                        Send OpenTelemetry traces from Claude Managed Agents, Messages API and Claude SDKs to PostHog.
-                        Add PostHog as a destination in the Claude Console to follow every model call, tool and token.
+                        Send OpenTelemetry traces from Claude to PostHog with no extra code. Add PostHog as a
+                        destination in the Claude Console and run evals on live traces and ship fixes that actually make
+                        a difference.
                     </p>
                     <div>
                         <span className="tec-pill">
@@ -313,8 +314,8 @@ const CSS = `
   --tec-bg:#F7EBD0; --tec-border:#E5E7E0; --tec-heading:#23251D; --tec-body:#4D4F46; --tec-muted:#65675E;
   --tec-pill-bg:rgba(235,157,42,.22); --tec-pill-border:rgba(205,132,7,.45); --tec-pill-icon:#9A5B04;
   --tec-hint-bg:#FDFDF8; --tec-hint-border:#BFC1B7;
-  position:relative; display:flex; align-items:center; gap:24px; box-sizing:border-box;
-  padding:44px; background:var(--tec-bg); border:1px solid var(--tec-border); border-radius:8px;
+  position:relative; display:flex; align-items:center; gap:20px; box-sizing:border-box;
+  padding:28px 32px; background:var(--tec-bg); border:1px solid var(--tec-border); border-radius:8px;
   color:var(--tec-heading);
 }
 .dark .tec-root{
@@ -322,20 +323,20 @@ const CSS = `
   --tec-pill-bg:rgba(235,157,42,.18); --tec-pill-border:rgba(235,157,42,.45); --tec-pill-icon:#F7A501;
   --tec-hint-bg:#23251D; --tec-hint-border:#4D4F46;
 }
-.tec-text{flex:1 1 auto; min-width:0; max-width:620px; display:flex; flex-direction:column; gap:12px}
-.tec-eyebrow{display:flex; align-items:center; flex-wrap:wrap; gap:10px; font-size:17px; font-weight:600; color:var(--tec-muted)}
-.tec-brand{display:inline-flex; align-items:center; gap:10px; white-space:nowrap}
+.tec-text{flex:1 1 auto; min-width:0; max-width:560px; display:flex; flex-direction:column; gap:8px}
+.tec-eyebrow{display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:14px; font-weight:600; color:var(--tec-muted)}
+.tec-brand{display:inline-flex; align-items:center; gap:8px; white-space:nowrap}
 .tec-logo{display:inline-flex; align-items:center}
-.tec-logo img,.tec-logo svg{display:block; height:20px; width:auto}
+.tec-logo img,.tec-logo svg{display:block; height:16px; width:auto}
 .tec-plus{color:#9EA096; font-weight:500}
-.tec-heading{margin:0; font-size:30px; line-height:1.2; font-weight:800; color:var(--tec-heading)}
-.tec-body{margin:0; font-size:17px; line-height:1.55; color:var(--tec-body)}
-.tec-pill{margin-top:8px; display:inline-flex; align-items:center; gap:8px; padding:7px 14px 7px 10px; border-radius:999px;
-  background:var(--tec-pill-bg); border:1px solid var(--tec-pill-border); font-size:15px; font-weight:700; color:var(--tec-heading)}
-.tec-pill svg{width:20px; height:20px; color:var(--tec-pill-icon); flex:none}
+.tec-heading{margin:0; font-size:22px; line-height:1.25; font-weight:800; color:var(--tec-heading)}
+.tec-body{margin:0; font-size:15px; line-height:1.5; color:var(--tec-body)}
+.tec-pill{margin-top:4px; display:inline-flex; align-items:center; gap:6px; padding:5px 12px 5px 8px; border-radius:999px;
+  background:var(--tec-pill-bg); border:1px solid var(--tec-pill-border); font-size:13px; font-weight:700; color:var(--tec-heading)}
+.tec-pill svg{width:16px; height:16px; color:var(--tec-pill-icon); flex:none}
 
-.tec-hog-col{flex:none; width:220px; display:flex; flex-direction:column; align-items:center; margin:-24px 0 -20px}
-.tec-hog{position:relative; width:220px; height:220px}
+.tec-hog-col{flex:none; width:160px; display:flex; flex-direction:column; align-items:center; margin:-16px 0 -12px}
+.tec-hog{position:relative; width:160px; height:160px}
 .tec-hog img{display:block; width:100%; height:100%}
 .tec-nudge{animation:tec-nudge 520ms cubic-bezier(.3,1.6,.5,1)}
 @keyframes tec-nudge{0%{transform:none}35%{transform:translateY(-8px) rotate(1.5deg)}100%{transform:none}}
@@ -345,9 +346,9 @@ const CSS = `
 .tec-map-hit:hover{transform:scale(1.04)}
 .tec-map-hit:disabled{cursor:default}
 .tec-map-hit:focus-visible{outline:3px solid #2F80FA; outline-offset:4px}
-.tec-hint{display:inline-flex; align-items:center; gap:8px; margin-top:-6px; padding:6px 12px 6px 10px; border-radius:999px;
+.tec-hint{display:inline-flex; align-items:center; gap:8px; margin-top:-6px; padding:5px 10px 5px 8px; border-radius:999px;
   background:var(--tec-hint-bg); border:1.5px solid var(--tec-hint-border); box-shadow:0 2px 0 var(--tec-hint-border);
-  font-size:13px; font-weight:600; color:var(--tec-heading); white-space:nowrap; animation:tec-float 2.4s ease-in-out infinite;
+  font-size:12px; font-weight:600; color:var(--tec-heading); white-space:nowrap; animation:tec-float 2.4s ease-in-out infinite;
   transition:opacity 200ms ease}
 .tec-hint.tec-hidden{opacity:0}
 .tec-hint-dot{position:relative; width:8px; height:8px; border-radius:50%; background:#EB9D2A}
@@ -356,8 +357,8 @@ const CSS = `
 @keyframes tec-ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.8);opacity:0}}
 
 /* Pop-up. Desktop: floats left of the hedgehog, overlapping the text and spilling below the callout. */
-.tec-shell{position:absolute; z-index:30; top:34px; right:max(16px, min(276px, calc(100% - 556px)));
-  width:min(540px, calc(100% - 32px)); height:410px; transform-origin:50% 50%;
+.tec-shell{position:absolute; z-index:30; top:24px; right:max(16px, min(212px, calc(100% - 476px)));
+  width:min(460px, calc(100% - 32px)); height:340px; transform-origin:50% 50%;
   --tec-tx:0px; --tec-ty:0px; --tec-sx:.2; --tec-sy:.3}
 .tec-paper{position:absolute; inset:0; box-sizing:border-box; overflow:hidden; border:2px solid #E6CFA3; border-radius:16px;
   background:#FFF3DA; box-shadow:0 22px 44px -18px rgba(50,6,1,.38); transform-origin:50% 50%; color:#111}
@@ -391,7 +392,7 @@ const CSS = `
 .tec-open .tec-trail{opacity:1}
 .tec-closing .tec-trail{animation:tec-fade-out 160ms ease both}
 
-.tec-content{position:relative; height:100%; box-sizing:border-box; padding:18px 20px 24px 26px; display:flex; flex-direction:column; opacity:0}
+.tec-content{position:relative; height:100%; box-sizing:border-box; padding:14px 16px 18px 20px; display:flex; flex-direction:column; opacity:0}
 .tec-opening .tec-content{animation:tec-content-in 380ms 440ms cubic-bezier(.2,.8,.2,1) both}
 .tec-open .tec-content{opacity:1}
 .tec-closing .tec-content{animation:tec-fade-out 160ms ease both}
@@ -400,36 +401,36 @@ const CSS = `
 @keyframes tec-fade-out{from{opacity:1}to{opacity:0}}
 
 .tec-top{display:flex; align-items:center; justify-content:space-between; gap:12px}
-.tec-live{display:inline-flex; align-items:center; gap:8px; padding:5px 11px 5px 9px; border-radius:999px;
-  background:rgba(71,200,97,.12); border:1px solid rgba(53,177,78,.35); font-size:13px; font-weight:700; color:#1F5A2B}
+.tec-live{display:inline-flex; align-items:center; gap:8px; padding:4px 10px 4px 8px; border-radius:999px;
+  background:rgba(71,200,97,.12); border:1px solid rgba(53,177,78,.35); font-size:12px; font-weight:700; color:#1F5A2B}
 .tec-live-dot{position:relative; width:9px; height:9px; border-radius:50%; background:#47C861; animation:tec-glow 1.8s ease-in-out infinite}
 .tec-live-dot::after{content:""; position:absolute; inset:0; border-radius:50%; background:#47C861; animation:tec-ring 1.8s ease-out infinite}
 @keyframes tec-glow{0%,100%{box-shadow:0 0 6px 1px rgba(71,200,97,.45)}50%{box-shadow:0 0 12px 4px rgba(71,200,97,.75)}}
-.tec-close{width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; padding:0; border:0;
+.tec-close{width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; padding:0; border:0;
   border-radius:8px; background:transparent; color:#65675E; cursor:pointer; transition:background 150ms ease,color 150ms ease}
-.tec-close svg{width:22px; height:22px}
+.tec-close svg{width:18px; height:18px}
 .tec-close:hover{background:rgba(50,6,1,.07); color:#111}
 .tec-close:focus-visible{outline:2px solid #2F80FA; outline-offset:2px}
-.tec-title{margin:8px 0 0; font-size:25px; line-height:1.2; font-weight:800; letter-spacing:-.01em; color:#111}
+.tec-title{margin:6px 0 0; font-size:20px; line-height:1.2; font-weight:800; letter-spacing:-.01em; color:#111}
 
-.tec-card{margin-top:16px; height:200px; box-sizing:border-box; padding:4px 16px; background:#FDFDF8; border:1px solid #E5E7E0;
+.tec-card{margin-top:12px; height:168px; box-sizing:border-box; padding:2px 14px; background:#FDFDF8; border:1px solid #E5E7E0;
   border-radius:10px; box-shadow:0 1px 0 rgba(50,6,1,.04)}
 .tec-row{max-height:0; opacity:0; overflow:hidden; transform:translateY(-8px);
   transition:max-height 420ms cubic-bezier(.2,.8,.2,1),opacity 300ms 120ms ease,transform 420ms cubic-bezier(.2,.8,.2,1)}
 .tec-row.tec-in{max-height:72px; opacity:1; transform:none}
-.tec-row-inner{display:grid; grid-template-columns:minmax(0,1fr) 120px 40px; align-items:center; column-gap:14px; padding:12px 0;
+.tec-row-inner{display:grid; grid-template-columns:minmax(0,1fr) 100px 36px; align-items:center; column-gap:12px; padding:9px 0;
   border-bottom:1px solid #EEEFE9}
 .tec-last .tec-row-inner{border-bottom:0}
 .tec-row-text{min-width:0; display:flex; flex-direction:column; gap:3px}
-.tec-prompt{font-size:14px; font-weight:700; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.tec-meta{font-size:13px; color:#65675E; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.tec-bar{height:10px; border-radius:999px; background:#E5E7E0; overflow:hidden}
+.tec-prompt{font-size:13px; font-weight:700; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.tec-meta{font-size:12px; color:#65675E; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.tec-bar{height:8px; border-radius:999px; background:#E5E7E0; overflow:hidden}
 .tec-fill{height:100%; width:0; border-radius:999px; background:#EB9D2A; transition-property:width;
   transition-timing-function:cubic-bezier(.3,.7,.3,1); transition-delay:260ms}
 .tec-r-hog.tec-in .tec-fill{width:84%; transition-duration:1260ms}
 .tec-r-sql.tec-in .tec-fill{width:68%; transition-duration:1020ms}
 .tec-r-ticket.tec-in .tec-fill{width:42%; transition-duration:630ms}
-.tec-lat{font-size:14px; color:#4D4F46; text-align:right; font-variant-numeric:tabular-nums; opacity:0; transition:opacity 240ms ease}
+.tec-lat{font-size:13px; color:#4D4F46; text-align:right; font-variant-numeric:tabular-nums; opacity:0; transition:opacity 240ms ease}
 .tec-r-hog.tec-in .tec-lat{opacity:1; transition-delay:1500ms}
 .tec-r-sql.tec-in .tec-lat{opacity:1; transition-delay:1260ms}
 .tec-r-ticket.tec-in .tec-lat{opacity:1; transition-delay:880ms}
@@ -437,8 +438,8 @@ const CSS = `
 /* posthog.com primary button look (OSButton variant="primary"). */
 .tec-actions{margin-top:auto; display:flex}
 .tec-btn{display:inline-block; padding:0; border:0; border-radius:6px; background:#CD8407; cursor:pointer; text-decoration:none}
-.tec-btn-face{display:inline-flex; align-items:center; height:40px; padding:0 18px; box-sizing:border-box; background:#EB9D2A;
-  border:1.5px solid #B17816; border-radius:6px; font-size:15px; font-weight:700; color:#111; transform:translateY(-2px);
+.tec-btn-face{display:inline-flex; align-items:center; height:34px; padding:0 14px; box-sizing:border-box; background:#EB9D2A;
+  border:1.5px solid #B17816; border-radius:6px; font-size:14px; font-weight:700; color:#111; transform:translateY(-2px);
   transition:transform 120ms ease}
 .tec-btn:hover .tec-btn-face{transform:translateY(-4px)}
 .tec-btn:active .tec-btn-face{transform:none}
@@ -451,14 +452,14 @@ const CSS = `
 
 /* Narrow: stack, hedgehog under the copy, pop-up spans the callout. */
 @container (max-width: 639px){
-  .tec-root{flex-direction:column; align-items:stretch; padding:28px 24px}
+  .tec-root{flex-direction:column; align-items:stretch; padding:20px}
   .tec-hog-col{align-self:center; margin:0}
-  .tec-heading{font-size:26px}
-  .tec-shell{left:12px; right:12px; width:auto; top:12px; height:500px}
-  .tec-title{font-size:21px}
-  .tec-card{height:272px; padding:4px 14px}
+  .tec-heading{font-size:20px}
+  .tec-shell{left:12px; right:12px; width:auto; top:10px; height:440px}
+  .tec-title{font-size:18px}
+  .tec-card{height:236px; padding:4px 14px}
   .tec-row.tec-in{max-height:90px}
-  .tec-row-inner{grid-template-columns:minmax(0,1fr) 36px; column-gap:10px; row-gap:8px}
+  .tec-row-inner{grid-template-columns:minmax(0,1fr) 32px; column-gap:10px; row-gap:8px}
   .tec-row-text{grid-column:1 / -1}
 }
 
