@@ -1,6 +1,6 @@
 ### Q4 2026 objectives
 
-#### Objective 1: Reduce the complexity of building AI products <TeamMember name="Charles Vien" photo />
+#### Objective 1: Reduce the complexity of building AI products (Driver: <TeamMember name="Charles Vien" photo />)
 
 **Motivation:** We should be the core that powers every agentic product at PostHog, but some teams have built their own systems instead of using ours. Two gateways are still in production and product-specific logic in tasks makes every new integration slow.
 
@@ -10,7 +10,7 @@
 - Ship one task interface any team can build on, with a well defined contract for what a task is, what state it's in, and who can access it (<TeamMember name="Charles Vien" />)
 - Ship a configurable router with provider policy per product or team (<TeamMember name="Brandon Leung" />)
 
-#### Objective 2: Every AI unit of work is costed and attributed <TeamMember name="Brandon Leung" photo />
+#### Objective 2: Every AI unit of work is costed and attributed (Driver: <TeamMember name="Brandon Leung" photo />)
 
 **Motivation:** Product teams top ask is accurate task costs and spending controls. Today the gateway ledger and Django credits are separate systems and we only find abuse after the bill arrives.
 
@@ -19,7 +19,7 @@
 - Know and cap what every run and generation costs: exact LLM and compute cost per run, caps at mint, product-level rate limits, and live budgets (<TeamMember name="Brandon Leung" />)
 - Agree on a default billing model for the whole runtime that connects the gateway ledger to Django credits, written up as a pricing review RFC (<TeamMember name="Ben White" />)
 
-#### Objective 3: Safe model and sandbox access <TeamMember name="Alessandro Pogliaghi" photo />
+#### Objective 3: Safe model and sandbox access (Driver: <TeamMember name="Alessandro Pogliaghi" photo />)
 
 **Motivation:** Security has been neglected and we aren't talking enough about abuse, data exfiltration, and prompt injection.
 
@@ -29,7 +29,7 @@
 - Move the self-driving pipeline off gVisor onto VMs and cut agent server boot time with a warm-pool control plane (<TeamMember name="Alessandro Pogliaghi" />)
 - Catch abuse before the bill arrives, with fraud checks at signup, per-user caps, and spend-velocity alerts (<TeamMember name="Brandon Leung" />)
 
-#### Objective 4: A reliable agent runtime teams can build on <TeamMember name="Jonathan Mieloo" photo />
+#### Objective 4: A reliable agent runtime teams can build on (Driver: <TeamMember name="Jonathan Mieloo" photo />)
 
 **Motivation:** People see sandboxes and tasks as slow and unreliable and building on or debugging them is painful.
 
@@ -42,7 +42,7 @@
 
 ### Stretch
 
-#### Internal evals <TeamMember name="Charles Vien" photo /> <TeamMember name="Brandon Leung" photo />
+#### Internal evals (Drivers: <TeamMember name="Charles Vien" photo /> <TeamMember name="Brandon Leung" photo />)
 
 **Motivation:** Teams have no shared way to tell whether a model or agent change made things better or cheaper.
 
