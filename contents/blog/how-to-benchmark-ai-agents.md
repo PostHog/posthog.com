@@ -156,9 +156,7 @@ You can isolate state in multiple ways, including three approaches we tested.
 
 The simplest approach is to run trials one after another and clear local agent memory between runs. You run a trial, record the output, reset the agent's scratchpad or immediate context, and start the next run.
 
-> **Illustration placeholder**
-> 
-> Sequential runs
+![Run a trial, save its results, reset its state, and repeat with the next configuration.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/04_sequential_runs_v2_59fbbb27b8.png)
 
 It doesn't mean you need to run one agent at a time – the chain could include hundreds of agents running in sequence or in parallel, if they are all part of the same task. It's also what we used for initial ReviewHog benchmarks against a single frozen PR.
 
@@ -172,9 +170,7 @@ Though, as the B4/B12 example above showed, the results of such runs are highly 
 
 Funnily enough, if the agent decides not to cheat, the shared state could cause grading to fail anyway. For example, an agent could decide to honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely.
 
-> **Illustration placeholder**
-> 
-> Run B2 skipping an anomaly due to prior-run context
+![Scout trace showing run B2 skipping a candidate because an earlier run had already covered it.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/05_trace_b2_prior_run_4c6e841386.png)
 
 In this case, a clever model would get a surprisingly low grade for not finding a basic issue. Or you would need to prepare your judges for similar cases, which would affect the benchmarking results anyway.
 
@@ -190,17 +186,13 @@ To get clean benchmarks, every trial needs complete isolation across everything 
 
 DB state isn't the only leak. If your agent has tools to query ClickHouse, PostHog, logs, and so on, an earlier benchmark run leaves traces in those sources. A subsequent run can find those error spikes or query histories and use them as clues. True isolation means isolating telemetry and log scopes too.
 
-> **Illustration placeholder**
-> 
-> Isolation illustration
+![Isolate each trial's memory, outputs, and telemetry so agents cannot read other benchmark runs.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_isolate_everything_v4_a4b4878c87.png)
 
 Though there's also a real risk of over-isolating. If the benchmarking agent doesn't have as many tools as the real agent, it can get confused and skew the results.
 
 Here's an example of one of the first dry runs we tested. It differs from the previous two traces – it wasn't cheating, just literal instruction-following.
 
-> **Illustration placeholder**
-> 
-> Dry-run execution altering intermediate report behavior
+![Scout trace showing the agent retaining findings in memory but skipping inbox reports because dry-run reports would be discarded.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/07_trace_dry_run_8d886e28ed.png)
 
 Because the dry-run agent doesn't execute all the steps an actual run would (creating new reports, editing data, and so on), it leaves blind spots we can't test. For scouts, it's acceptable, since we evaluate retrieving data far more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
 
