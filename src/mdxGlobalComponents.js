@@ -7,7 +7,6 @@ import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
-import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -83,7 +82,6 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
-    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
