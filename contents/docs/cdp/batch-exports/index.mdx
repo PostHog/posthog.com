@@ -49,7 +49,11 @@ import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
 
-You can't change the model of a batch export after you save it. To export a different model, create a new batch export.
+<CalloutBox icon="IconWarning" type="caution" title="You can't change a batch export's model">
+
+After you save a batch export, its model is fixed. To export a different model, create a new batch export.
+
+</CalloutBox>
 
 > **Note:** New fields may be added to these models over time.
 >
@@ -106,15 +110,15 @@ A [session](/docs/data/sessions) in PostHog represents a series of events that m
 
 If you want to link events with sessions, you'll need to ensure you're capturing the `$session_id` in your events. This is done automatically by our JavaScript Web library and mobile SDKs. For server-side SDKs, refer to our [docs](/docs/data/sessions#server-sdks-and-sessions).
 
-### Custom SQL query model
+### SQL query model
 
 <CalloutBox icon="IconInfo" type="fyi" title="This model is in closed beta">
 
-The custom SQL query model is enabled per organization. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
+The SQL query model is enabled per organization. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
 
 </CalloutBox>
 
-The custom SQL query model exports the results of a [SQL](/docs/sql) query that you write, so you aren't limited to the fixed schemas of the other models. Filter, join, and aggregate whatever you need, and export only the columns you want.
+The SQL query model exports the results of a [SQL](/docs/sql) query that you write, so you aren't limited to the fixed schemas of the other models. Filter, join, and aggregate whatever you need, and export only the columns you want.
 
 To use it, select **Custom SQL query** as the model in the **Data** section of the batch export form, then write your query in the editor below it. The editor has the same autocomplete, error checking, and results preview as the [SQL editor](/docs/sql).
 
@@ -158,9 +162,9 @@ A timezone that you set in the query itself, like `toTimeZone(timestamp, 'UTC')`
 - **One statement only.** The query must be a single `SELECT` statement. The only placeholders supported are `{data_interval_start}` and `{data_interval_end}`.
 - **Rows are appended.** Each run appends the query's results to the destination and never updates rows from earlier runs. If your query can return the same row in more than one run, de-duplicate the rows in your destination. Other export modes, like merging rows into existing ones, are coming soon.
 - **Queries run with the access of the user who last saved the export.** If that user loses access to the project, runs fail until someone with access saves the export again.
-- **Queries have resource limits.** Custom queries run under stricter limits on execution time, memory usage, and data read than the other models. A run that exceeds a limit fails and isn't retried. Bound your query with a `WHERE` clause, like the placeholders above, to stay within the limits.
+- **Queries have resource limits.** SQL queries run under stricter limits on execution time, memory usage, and data read than the other models. A run that exceeds a limit fails and isn't retried. Bound your query with a `WHERE` clause, like the placeholders above, to stay within the limits.
 
-Pricing for custom SQL query exports hasn't been decided yet, but they're free while the model is in closed beta.
+Pricing for SQL query exports hasn't been decided yet, but they're free while the model is in closed beta.
 
 #### API and MCP
 
