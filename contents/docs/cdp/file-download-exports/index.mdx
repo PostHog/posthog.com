@@ -74,9 +74,10 @@ The request body accepts:
 | Field | Description |
 | --- | --- |
 | `model` | One of `events`, `persons`, `sessions`, or `hogql` (currently in closed beta). |
-| `data_interval_start`, `data_interval_end` | ISO 8601 datetimes bounding the export. Required for `events`, `persons`, and `sessions`. The range must be at most one week, and the end cannot be in the future. Not supported for `hogql`. |
+| `data_interval_start`, `data_interval_end` | ISO 8601 datetimes bounding the export. Required for `events`, `persons`, and `sessions`. For `hogql`, required only for the [placeholders](#sql-queries) that the query uses. The range must be at most one week, and neither bound can be in the future. |
 | `include`, `exclude` | Optional lists of event names to include or exclude. Only supported for the `events` model. |
 | `hogql_query` | The SQL query to export. Required for (and only supported by) the `hogql` model. |
+| `hogql_modifiers` | Optional. Settings for how the `hogql` query runs. Set `{"convertToProjectTimezone": true}` to export timestamps in the project timezone instead of UTC. Only supported for the `hogql` model. |
 | `file.format` | `Parquet` (default) or `JSONLines`. |
 | `file.compression` | Optional. `zstd`, `lz4`, `snappy`, `gzip`, or `brotli` for `Parquet`. Only `gzip` and `brotli` for `JSONLines`. |
 | `file.max_size_mb` | Optional. Splits the output into multiple files of at most this size, instead of one potentially large file. |
@@ -87,11 +88,13 @@ Each project can have up to 20 file download exports running at the same time. R
 
 <CalloutBox icon="IconInfo" type="fyi" title="This model is in closed beta">
 
-SQL query exports are enabled per team. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
+SQL query exports are enabled per organization. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
 
 </CalloutBox>
 
-The `hogql` model exports the results of any [SQL](/docs/sql) query, so you aren't limited to the standard models – filter, join, and aggregate whatever you need:
+The `hogql` model exports the results of any [SQL](/docs/sql) query, so you aren't limited to the standard models – filter, join, and aggregate whatever you need. To export a query on a schedule instead, use the [custom SQL query model](/docs/cdp/batch-exports#custom-sql-query-model) of batch exports.
+
+For example, to export the URL of every event from a single day:
 
 ```bash
 curl -X POST \
@@ -100,7 +103,9 @@ curl -X POST \
   <ph_app_host>/api/projects/:project_id/file_download_batch_exports/ \
   -d '{
         "model": "hogql",
-        "hogql_query": "SELECT event, timestamp, properties.$current_url AS url FROM events WHERE timestamp > now() - INTERVAL 1 HOUR",
+        "hogql_query": "SELECT event, timestamp, properties.$current_url AS url FROM events WHERE timestamp >= {data_interval_start} AND timestamp < {data_interval_end}",
+        "data_interval_start": "2026-08-18T00:00:00Z",
+        "data_interval_end": "2026-08-19T00:00:00Z",
         "file": {
           "format": "Parquet"
         }
@@ -110,15 +115,16 @@ curl -X POST \
 A few things to know about SQL query exports:
 
 - **Every column needs a name.** Each column in the `SELECT` clause must be a plain field or have an alias, like `count() AS event_count`.
-- **No placeholders.** Placeholder syntax like `{filters}` is not supported yet, so write the query out in full.
-- **No time interval.** The query runs as of the time the export starts, so `data_interval_start` and `data_interval_end` are not accepted. Bound the data in the query itself instead.
-- **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. (The standard `events` model reads from an internal table built to avoid this, which SQL queries do not have access to currently.) If completeness matters, leave a margin behind the present or re-run the export later.
+- **Only interval placeholders.** The query can use the `{data_interval_start}` and `{data_interval_end}` placeholders. For each placeholder that the query uses, pass a value in the field with the same name. Other placeholders, like `{filters}`, are not supported.
+- **The time interval only fills placeholders.** `data_interval_start` and `data_interval_end` do not add filters to the query. A query without placeholders runs unchanged, as of the time the export starts.
+- **Timestamps are in UTC by default.** This also applies to date functions in the query. To use the project timezone, set `hogql_modifiers` to `{"convertToProjectTimezone": true}`.
+- **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. (The standard `events` model reads from an internal table built to avoid this, which SQL queries do not have access to currently.) We're adding columns with the time of ingestion to the `events` table and other tables soon, so you'll be able to filter on that instead. Until then, if completeness matters, leave a margin behind the present or re-run the export later.
 
 ### Bound your queries
 
 Since user-supplied queries are more unpredictable in nature, they run under stricter resource limits than the standard models. They are subject to limits on execution time, memory usage, and the volume of data read. A query that exceeds any of them fails with an error.
 
-Always narrow your query with a `WHERE` clause. This keeps you inside the resource limits, and it keeps you from being billed for more rows than you expected. For example, when you query the `events` table, bound the `timestamp` column:
+Always narrow your query with a `WHERE` clause. This keeps you inside the resource limits, and it keeps the export to the rows you expect. For example, when you query the `events` table, bound the `timestamp` column:
 
 ```sql
 SELECT event, timestamp, properties.$current_url AS url
@@ -189,3 +195,5 @@ A canceled run cannot be resumed. Start a new export instead.
 ## Billing
 
 File download exports are billed the same way as batch exports: based on the number of rows exported. See [our pricing page](/pricing) for details.
+
+Pricing for SQL query exports hasn't been decided yet, but they're free while the `hogql` model is in closed beta.
