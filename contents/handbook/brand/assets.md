@@ -7,7 +7,7 @@ hideAnchor: false
 
 <CalloutBox icon="IconInfo" title="brand.posthog.com is the source of truth" type="fyi">
 
-All approved brand assets — logos, colors, fonts, hedgehogs, and crests — live at [brand.posthog.com](https://brand.posthog.com). Download them there, or import them from the [`@posthog/brand`](https://github.com/PostHog/brand) package. This page covers usage rules and guidance. Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
+All approved brand assets — logos, colors, fonts, hedgehogs, and crests — live at [brand.posthog.com](https://brand.posthog.com). Download them there, or import them from the [`@posthog/brand`](https://github.com/PostHog/brand) package. This page covers usage rules and guidance. Please don't use AI art. We're quite particular about our illustrations and AI just doesn't get it right.
 
 </CalloutBox>
 
