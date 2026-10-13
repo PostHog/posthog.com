@@ -1,22 +1,23 @@
 ---
-title: "Do you even bench? How to benchmark your agents at scale against real data"
-date: 2026-10-12
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
-author:
-    - alex-lebedev
-category: Engineering
-tags:
-    - Inside PostHog
-    - Engineering
-    - AI
-    - AI observability
-seo:
-    metaTitle: "How to benchmark AI agents at scale against real data"
-    metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
----
+
+title: "Do you even bench? How to benchmark your agents at scale against real data"  
+date: 2026-10-12  
+rootPage: /blog  
+sidebar: Blog  
+showTitle: true  
+hideAnchor: true  
+author:  
+\- alex-lebedev  
+category: Engineering  
+tags:  
+\- Inside PostHog  
+\- Engineering  
+\- AI  
+\- AI observability  
+seo:  
+metaTitle: "How to benchmark AI agents at scale against real data"  
+metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most of the time*, but it's way too much money to let them run unattended.
 
@@ -27,7 +28,7 @@ What doesn't make it easier is that agents cheat. They search for leaked context
 In this post, I'll explain how we benchmark our agents, what we learned, and where we messed up (so you don't need to), with links to real PRs. I'll focus on agents for data research and code review, since we do a lot of that as part of [self-driving](/self-driving) and 2.4 million+ agentic runs we spawned.
 
 > **Illustration placeholder**
->
+> 
 > Plan of the article
 
 ---
@@ -47,7 +48,7 @@ We have our own code review agent, called ReviewHog, that covers a significant p
 The best solution we came up with initially was surprisingly effective and mostly simple.
 
 > **Illustration placeholder**
->
+> 
 > The deck illustration for the simple manual-check approach
 
 The recipe:
@@ -60,7 +61,7 @@ The recipe:
 
 Meaning, if there are 13 issues worth checking (structure, performance, security, etc.), we can measure the models on a 0/13 scale and time/money spent. Here's an [example](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-08-model-glm53-flash) of us testing GLM 5.3 Flash.
 
-It worked well (and still does), but it has an expected limitation: even on a large PR, the scope is limited and doesn't show the whole picture.
+It worked well (and still does), but it has an expected limitation: even on a large PR, the scope is limited and doesn't show the whole picture - it's a single PR for a single-ish change in a single repo.
 
 ### Harder: Golden set
 
@@ -71,7 +72,7 @@ Let's stick with the code review for a moment longer. First, we need more PRs. S
 And that's exactly what we did.
 
 > **Illustration placeholder**
->
+> 
 > The deck illustration for the harder incident-golden-set approach
 
 We collected a golden set of PostHog incidents built from incident discussions and code. Each incident in the set includes:
@@ -85,12 +86,18 @@ This means we can review 33 PRs of different sizes, from different repos, and ge
 Here is what the numbers looked like:
 
 > **Illustration placeholder**
->
+> 
 > Table with golden set experiment results
 
 We got pretty good results with ReviewHog, with this combination showing the best result: `GPT Sol 5.6` (at the time) at `xhigh` for bug search and `Claude Opus 5` (at the time) at `xhigh` for bug validation (here are the [experiment results](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-09-incident-golden-set)), both using `pi`.
 
 > It's also a good example of "don't confirm model results with the model of the same family", as having both stages with OpenAI or Anthropic led to miserable results.
+
+The downsides of the method are clear, but acceptable:
+
+- For 33 incidents, you need to resurrect 66 PRs total: the PR that caused each incident and the PR that fixed it. This creates noise and triggers false alarms from GitHub bots.
+- We don't re-add the bugs to the codebase, but keep them as isolated PRs, so you need to properly lock the branch for the agent.
+- With open-source repos like ours, an agent with web access can still look up the public repo, merged PRs, and cheat (more on that in a minute).
 
 That said (and you probably thought this too), the code review tasks are deterministic enough and easier to grade. The next problem we hit was how to grade abstract agents – ones that can, technically, do anything.
 
@@ -103,7 +110,7 @@ A great example is scouts. If you don't know them yet, [scouts](/docs/self-drivi
 To evaluate them, we built a rubric generator. You pick the agent you care about, add some context, and let it generate evaluation criteria.
 
 > **Illustration placeholder**
->
+> 
 > Scout generator screen
 
 Every scout should produce a report covering what it found, how actionable the findings are, and what to do next. To measure this baseline, we stick to a mostly static set of rubrics shared across all scouts.
@@ -117,10 +124,12 @@ To make the ranking more meaningful, we also generate rubrics tailored to that s
 Based on that, we add agent-specific rubrics. In our case, for a scout analyzing the stability of the [Session Replay](/session-replay) player, we don't just check formatting. We grade whether it spotted actual playback failure symptoms, whether it queried data correctly, and whether the bug it flagged actually affected real users.
 
 > **Illustration placeholder**
->
+> 
 > Replay player reliability rubrics
 
-Now that we have a defined list of rubrics to track against, we can reliably track success rate through any number of changes. The v1 we work right now allows us to test against:
+With code review, we had it easy-ish since rubrics were mostly "did you find the bugs you were supposed to find?". Open-ended agents need better rubrics to track behavior, check for required tool calls, and verify task completion.
+
+Once those rubrics are in place, we can reliably track success rates across a good number of changes. The v1 allows us to test against:
 
 - Old model vs New model ("Is the new model released work better than the old one?")
 - Thinking effort ("Do I actually need it at xhigh, if medium does it just fine with 30% fewer tokens?")
@@ -131,7 +140,7 @@ The result is a report with a close-to-clear answer. It's obviously not fully de
 Here's the report I ran while writing this part of the post to check "what is better, Sol vs Opus," and it looks like, for this specific task, we are sticking with Sol. Opus would do a better job on plenty of tasks, but to know that, you need something measurable to rely on.
 
 > **Illustration placeholder**
->
+> 
 > Report results
 
 > If you want to see how our rubric generator and ranking work under the hood, check out our [code](https://github.com/PostHog/posthog/tree/master/products/signals/backend/scout_harness).
@@ -151,7 +160,7 @@ You can isolate state in multiple ways, including three approaches we tested.
 The simplest approach is to run trials one after another and clear local agent memory between runs. You run a trial, record the output, reset the agent's scratchpad or immediate context, and start the next run.
 
 > **Illustration placeholder**
->
+> 
 > Sequential runs
 
 It doesn't mean you need to run one agent at a time – the chain could include hundreds of agents running in sequence or in parallel, if they are all part of the same task. It's also what we used for initial ReviewHog benchmarks against a single frozen PR.
@@ -167,7 +176,7 @@ Instead, I'll show the cases where it doesn't.
 Back to scouts, here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
 
 > **Illustration placeholder**
->
+> 
 > Run B12 retrieving shared memory saved by Run B4
 
 As you could've guessed, the results of such runs are highly questionable because the grading gets contaminated. A fast model like Luna could overperform by copying Opus's homework.
@@ -175,7 +184,7 @@ As you could've guessed, the results of such runs are highly questionable becaus
 It could work the other way around too. For example, an agent could decide not to cheat and honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped the task entirely.
 
 > **Illustration placeholder**
->
+> 
 > Run B2 skipping an anomaly due to prior-run context
 
 In this case, a clever model would get a surprisingly low grade for not finding a basic issue. Or you would need to prepare your judges for similar cases, which would affect the benchmarking results anyway.
@@ -193,7 +202,7 @@ To get clean benchmarks, every trial needs complete isolation across everything 
 DB state isn't the only leak. If your agent has tools to query ClickHouse, PostHog, logs, and so on, an earlier benchmark run leaves traces in those sources. A subsequent run can find those error spikes or query histories and use them as clues. True isolation means isolating telemetry and log scopes too.
 
 > **Illustration placeholder**
->
+> 
 > Isolation illustration
 
 Though there's also a real risk of over-isolating. If the benchmarking agent doesn't have as many tools as the real agent, it can get confused and skew the results.
@@ -201,7 +210,7 @@ Though there's also a real risk of over-isolating. If the benchmarking agent doe
 Here's an example of one of the first dry runs we tested. It differs from the previous two traces – it wasn't cheating, just literal instruction-following.
 
 > **Illustration placeholder**
->
+> 
 > Dry-run execution altering intermediate report behavior
 
 The moment it understands it's a dry run, it changes how it executes the intermediate steps, and judging becomes harder. This moves us to offline benchmarks, because agents that know they're running in a benchmark environment behave even stranger.
@@ -221,7 +230,7 @@ We went through three stages to get this working.
 Agents do tool calls when running. We track and store those traces – what the agent asked and what it got back. For example, what query it ran with `execute_query(sql)` and what slice of the DB was in the output.
 
 > **Illustration placeholder**
->
+> 
 > MCP mock
 
 It sounds pretty straightforward and worked on basic tech demos (returning static JSON to SQL queries), but it failed miserably on any meaningful production-like work because agents aren't deterministic. Meaning, the query from run 1 doesn't guarantee that run 2 will run the same one.
@@ -230,10 +239,10 @@ It's not a big surprise, but it would still be cool if it worked out of the box.
 
 ### Harder: Trajectory-based mocked MCP replies
 
-The logical next step. Instead of building the mocked data over a single run, we ran ~50 runs, checked every trajectory the agent picked, and mocked those instead.
+The logical next step. Instead of building the mocked data over a single run, we ran \~50 runs, checked every trajectory the agent picked, and mocked those instead.
 
 > **Illustration placeholder**
->
+> 
 > Trajectory MCP mock
 
 It has potential, and to make it even more stable, I would suggest adding synthetic (or real) data a bit before and/or after every query (so a 24h query still returns true data if the call is skewed a bit).
@@ -247,7 +256,7 @@ The solution that actually worked was spinning up an isolated PostHog sandbox se
 On the surface, the idea is simple: query a couple of DB tables (Postgres, ClickHouse), store them as Parquet files in S3, and then restore them in the VM with a local PostHog instance to make it look like the real deal. The bonus: data never leaves PostHog infra.
 
 > **Illustration placeholder**
->
+> 
 > Offline sandbox setup showing real data slice, timestamp shifter, and isolated evaluation window
 
 The first problem is obvious: "24h" now and "24h" in two weeks are way different "24h". Meaning, every time we inject data, we need to skew it toward the current timeline.
@@ -257,13 +266,13 @@ The second problem is less obvious: even if you skew the data, agents are still 
 For example, when preparing data for agent feedback, we can clearly sync tables with actual responses and tables with the scouts those responses were left about. But the moment you get a proper model, it will look inside, see that there aren't many users on this local instance, and get suspicious.
 
 > **Illustration placeholder**
->
+> 
 > September 30 trace hitting a dead end due to missing team roster and metadata
 
 On the other hand, you can, as always, overprepare and make it as realistic as possible on the MCP tools side, while the rest of the data in the local instance doesn't match the scale. Then the agent gets even more suspicious and starts thinking the data is synthetic.
 
 > **Illustration placeholder**
->
+> 
 > September 23 trace where agent flags data-slice extraction artifacts as suspicious data
 
 Needless to say, both cases will negatively affect your grading, since they cover behavior you don't want to test. And, sadly, there's no silver bullet – you just need to run and tweak it until you don't catch any "agent is suspicious" traces anymore.
