@@ -60,6 +60,18 @@ In addition to person properties, PostHog provides these system merge tags for e
 
 Use the one-click unsubscribe URL to improve email deliverability and comply with email regulations like CAN-SPAM. Most modern email clients display a prominent unsubscribe button when they detect proper one-click unsubscribe headers.
 
+### Workflow variables
+
+In addition to person properties and email-specific merge tags, workflow steps have access to variables that reference the workflow itself:
+
+| Variable            | Description                       |
+| ------------------- | --------------------------------- |
+| `{{ source.name }}` | The workflow's name               |
+| `{{ source.id }}`   | The workflow's unique ID          |
+| `{{ source.url }}`  | A link to the workflow in PostHog |
+
+These are useful for including workflow metadata in messages or tracking events. For example, you might include `{{ source.name }}` in a Slack notification to identify which workflow sent the message.
+
 ## Email templates
 
 When you click on `new template` you will see a page like this:
