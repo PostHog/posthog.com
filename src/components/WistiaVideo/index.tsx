@@ -30,6 +30,12 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         const containerRef = useRef<HTMLDivElement>(null)
         const playerRef = useRef<any>(null)
         const endHandlerRef = useRef<(() => void) | null>(null)
+        const playbackRef = useRef<{
+            videoId: string
+            autoPlay: boolean
+            time: number
+            isPlaying: boolean
+        } | null>(null)
         const [isVisible, setIsVisible] = useState(false)
 
         useImperativeHandle(ref, () => ({
@@ -63,6 +69,9 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         }, [])
 
         useEffect(() => {
+            if (playbackRef.current?.videoId !== videoId || playbackRef.current?.autoPlay !== autoPlay) {
+                playbackRef.current = null
+            }
             if (typeof window === 'undefined' || !containerRef.current || !isVisible) return
 
             const container = containerRef.current
@@ -84,6 +93,14 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                 }
                 endHandlerRef.current = null
                 const video = playerRef.current || (embedDiv && window.Wistia?.api(embedDiv))
+                if (playerRef.current && video.state() !== 'beforeplay') {
+                    playbackRef.current = {
+                        videoId,
+                        autoPlay,
+                        time: video.time(),
+                        isPlaying: video.state() === 'playing',
+                    }
+                }
                 video?.remove()
                 playerRef.current = null
 
@@ -124,8 +141,12 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                         }
                         video.bind('end', endHandlerRef.current)
 
-                        if (autoPlay) {
+                        const playback = playbackRef.current
+                        if (playback) video.time(playback.time)
+                        if (playback?.isPlaying ?? autoPlay) {
                             video.play()
+                        } else {
+                            video.pause()
                         }
                     } else {
                         // Video not ready yet, check again
