@@ -2,17 +2,17 @@ name: Commit signatures
 
 on:
     pull_request_target:
-        types: [opened, reopened, synchronize, ready_for_review]
+        types: [opened, reopened, synchronize, ready_for_review, edited]
 
 permissions:
     contents: read
 
-concurrency:
-    group: commit-signatures-${{ github.event.pull_request.number }}
-    cancel-in-progress: true
-
 jobs:
     check:
+        if: github.event.action != 'edited' || github.event.changes.base != null
+        concurrency:
+            group: commit-signatures-${{ github.event.pull_request.number }}
+            cancel-in-progress: true
         runs-on: ubuntu-latest
         timeout-minutes: 5
         permissions:

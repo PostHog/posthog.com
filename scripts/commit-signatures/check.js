@@ -122,7 +122,7 @@ async function run({ github, context, core }) {
             (comment) => comment.user?.login === "github-actions[bot]" && comment.body?.startsWith(COMMENT_MARKER)
         )
         const { data: current } = await github.rest.pulls.get({ owner, repo, pull_number })
-        if (current.state !== "open" || current.head.sha !== pr.head.sha) {
+        if (current.state !== "open" || current.head.sha !== pr.head.sha || current.base.ref !== pr.base.ref) {
             core.info("The PR changed during the check. Skipping outdated results.")
             return
         }
