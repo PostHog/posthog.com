@@ -25,7 +25,7 @@ To create a new holdout:
 
 The holdout should be large enough to be statistically significant, but small enough as to not significantly reduce the pool of users available for experiments. We recommend between 1% and 10%.
 
-Once created, you can assign a holdout to a draft experiment in the **Manage distribution** section of the **Variants** tab. The holdout becomes locked once any experiment using it is launched and you will be unable to modify it. This is to prevent data inconsistencies that could affect results.
+Once created, you can assign a holdout to a draft experiment in the **Manage distribution** section of the **Variants** tab. Once the experiment is launched, its holdout assignment is locked and can't be changed. The holdout group itself stays editable, and changing its percentage updates the feature flag of every experiment that uses it, including running ones. Avoid editing a holdout while experiments that use it are running, since that changes who is excluded mid-experiment.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/distribution_modal_light_448c0b7b16.png"
@@ -48,7 +48,7 @@ When a user is assigned to a holdout group, the feature flags associated with ex
 
 Users in a holdout receive a variant value of `holdout-{holdout_id}`, where `holdout_id` is the internal database ID of the holdout group. For example, if your holdout has ID 727, users in that holdout receive the variant `holdout-727`.
 
-You can find the holdout ID in the URL when viewing the holdout in PostHog (e.g., `/experiments/holdouts/727`).
+To find the holdout ID, break down an insight by the experiment's feature flag and look for the `holdout-` value, or list your holdouts via the [API](/docs/experiments/surfaces/api).
 
 ### Detecting holdout users in code
 

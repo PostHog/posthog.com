@@ -1,6 +1,21 @@
 import { ProductVideo } from '../ProductVideo'
 
 import Term from './terms'
+import LessonFooter from './LessonFooter'
+import TwigFilterFigure from './TwigFilterFigure'
+import TwigEventFigure from './TwigEventFigure'
+import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
+import {
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionGroupingFigure,
+    SessionReplayLinkFigure,
+} from './ProductAnalyticsIdentityExhibits'
+import {
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+} from './ProductAnalyticsTrendsFunnelsExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -43,6 +58,19 @@ export const bookMdxComponents = {
     Eyebrow,
     Frontispiece,
     Fig,
+    TwigFilterFigure,
+    TwigEventFigure,
+    AutocaptureFigure,
+    FilterPropertiesFigure,
+    DestinationChartFigure,
+    SessionGroupingFigure,
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionReplayLinkFigure,
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+    LessonFooter,
     ReportFigure,
     AnatomyFigure,
     DetailFigure,

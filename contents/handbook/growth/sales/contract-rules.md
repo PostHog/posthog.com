@@ -142,9 +142,9 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
    - receive ~2 months of additional usage for free, applied before the contract start date.
 4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only. By default, use [structure 2](#how-to-structure-free-credits-in-special-terms) below: set the contract start date 2 months later, and when the customer signs, add the free credits as a [one-time credit in billing admin](/handbook/growth/revops/credits) to cover the 2 invoices before the contract start date. You don't need to call these credits out in the contract, and they are not tied to the contract invoice, so the opportunity owner can add them without waiting for billing.
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
+Only use structure 1 (a fixed amount of free credit inside the 12 month term) if there is a specific reason to. In that case, don't future-date the contract, and state the amount and the expiry clearly in Special Terms: "An additional credit in the amount of XXXXX (offered to Customer in exchange for rolling off the Startup plan), to be applied to Customer's account on the Effective Date and to expire on the same date as the PostHog Cloud Credit purchased under this Order Form." Don't use both structures on the same deal.
 
 #### How to structure free credits in special terms
 
@@ -195,6 +195,10 @@ We will allocate all the credit purchased to the Stripe account when the contrac
 
 We will allocate the credit for that year to the Stripe account when the contract is signed, and then again when subsequent annual invoices are raised.
 
+In billing, we set up a multi-year contract paid yearly as consecutive 12-month contracts. The order form has a payment table that shows the payment and the credit for each year. Each year's credit has a 12-month expiry, so the Year 1 credit on a 2-year contract expires at the end of Year 1, not at the end of the full term. If the customer has unused credit at the end of a year, we let it roll over into the next year of the same contract.
+
+The dates for the subsequent invoices are in the `Contract Setup` Google calendar. Invoice processing runs on a weekly rotation. The credit captain for the week of the invoice date sends the invoice and allocates the credit for that year.
+
 If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
 
 The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
@@ -214,20 +218,28 @@ More details on how exactly the uptime SLA works can be found in our [terms](/te
 
 ## Payment method
 
-For customers paying monthly, we only accept credit card payments, which will be taken automatically via Stripe at the end of their monthly billing period.
+How a customer pays depends on how they buy PostHog:
 
-For customers purchasing credits upfront, we only take bank transfers because:
+| How they buy | Payment method | When they pay |
+|---|---|---|
+| Monthly, self-serve (pay-as-you-go) | Credit card only | Automatically via Stripe at the end of each monthly billing period |
+| Credits upfront via an order form | Bank transfer only | Net 30 from the contract start date, unless the order form says otherwise |
+
+We do not accept credit card payments for credits bought via an order form. There are no exceptions, whatever the invoice amount. This is because:
 
 - For large payment amounts, the fees we incur are higher for credit card payments.
 - Our Sales Ops automations are set up to handle bank transfer payments.
+- Passing card fees on to the customer (a surcharge, a card fee line item, or fewer credits) adds manual work, and has legal, tax, and revenue recognition complexity that we don't want.
 
-You should confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer. If they are absolutely unable to accommodate bank transfer we can accept credit card payments under the following conditions:
+Most vendors that sell prepaid contracts have the same rule, so this should not surprise the customer's finance team. What this means in practice:
 
-- We have a card on file which we can immediately charge for the full invoice amount.
-- They pay immediately on signature, not on the contract start date (i.e. no Net 30).
-- The order form says so. The default order form template keeps our standard Net 30 bank transfer terms, so you must change them on the document you generate from it (never on the template itself) to `Payment Terms: Net 1 from Signature Date` and `Payment Method: Bank Transfer or Credit Card`. If the order form still says Net 30, the customer can hold us to Net 30, whatever we agreed in conversation.
+- **The customer's AP can only pay by card.** They can't buy credits upfront via an order form. They can stay on (or move to) a monthly self-serve plan and pay by card, but they don't get the discounts that come with an order form.
+- **The customer wants to pay by card to pay faster.** The answer is still bank transfer. Send the invoice PDF from Stripe, which has our bank details on it.
+- **The invoice is already late and the customer asks to pay by card.** We don't take card payments to settle a late invoice. Follow the [late payments process](/handbook/growth/sales/billing#failedlate-payments) – suspending access gets payment faster than changing the payment method.
 
-If your customer must pay via credit card, you absolutely _need_ to let RevOps team know ahead of the order form being signed as there is a lot of manual work needed up front to make this work.
+Confirm ahead of the customer signing the order form that they are happy and set up to pay by bank transfer. Make this clear in your sales conversations, not only on the order form. If they can't pay by bank transfer, find out before they sign, not when the invoice is due.
+
+Do not change the payment terms or the payment method on the order form to allow credit card.
 
 > We absolutely do not allow payment by check. This is made clear on order forms. 
 

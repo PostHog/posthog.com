@@ -1045,6 +1045,13 @@ fieldset {
 }
 
 /* applies to question and reply content */
+.question-content,
+.reply-content {
+    img {
+        @apply max-h-[28rem];
+    }
+}
+
 .question-content {
     a {
         @apply font-semibold underline;

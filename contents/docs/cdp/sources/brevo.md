@@ -9,12 +9,6 @@ availability:
 sourceId: Brevo
 ---
 
-<CalloutBox icon="IconFlask" title="Beta release" type="action">
-
-This source is currently in **beta**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Brevo connector syncs your Brevo (formerly Sendinblue) marketing data – contacts, lists, folders, segments, email and SMS campaigns, templates, and senders – into PostHog.
 
 ## Adding a data source

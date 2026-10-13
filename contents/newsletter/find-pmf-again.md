@@ -26,7 +26,7 @@ It came from a simple reality no company can escape: the [product-market fit gam
 
 I’ve had the job of marketing our in-house disruption through every shape it’s taken. It started as [PostHog Code](/blog/self-driving-product), an agentic coding tool and product editor. Then the most valuable thing that grew inside it, [self-driving](/self-driving), got de-bundled and shipped into PostHog Web.
 
-The container it left behind became [PostHog Desktop](/desktop): a different product shape entirely, built around multiplayer spaces, generative UI artifacts, and the thesis that shared business context is key to a product that [builds itself.](/blog/what-if-your-product-built-itself)
+The container it left behind became [PostHog Desktop](/desktop): a different product shape entirely, built around [multiplayer spaces](/newsletter/multiplayer-ai), generative UI artifacts, and the thesis that shared business context is key to a product that [builds itself.](/blog/what-if-your-product-built-itself)
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_light_160e744e82.png"

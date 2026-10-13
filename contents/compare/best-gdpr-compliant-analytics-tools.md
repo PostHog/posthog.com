@@ -83,7 +83,7 @@ PostHog is especially helpful for engineers and product teams that want to under
 
 Smaller projects can self-host PostHog Open Source using Docker Compose, but [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany, is **the best option for most users**.
 
-While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a JavaScript object in `memory` that only lasts the duration of the pageview.
+While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). With cookieless server hash mode enabled, PostHog measures visitors using a privacy-preserving hash generated on its servers. The hash changes daily, and PostHog does not store a distinct ID in the visitor's browser.
 
 #### How much does PostHog cost?
 

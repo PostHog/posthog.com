@@ -10,7 +10,6 @@ import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
-import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
@@ -23,7 +22,39 @@ type QuestionFormValues = {
     body: string
     images: { fakeImagePath: string; file: File; objectURL: string }[]
     topic?: Topic
+    forumTopic?: number
+    draft?: boolean
 }
+
+// A forum post picks a forum topic instead of a legacy topic. The Forum app renders that field. The server
+// chooses a post's tags when it goes live.
+export type ForumFormOptions = {
+    initialValues: { forumTopic?: number; subject?: string; body?: string }
+    // Shows "Save draft" next to the post button.
+    allowDraft?: boolean
+    // Editing this draft: saving updates it, and posting publishes it.
+    draftId?: number
+    fields: (props: {
+        values: QuestionFormValues
+        setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
+    }) => React.ReactNode
+}
+
+const DEFAULT_FORUM_TOPIC_SLUG = 'questions'
+
+const COMMENT_THREAD_SECTIONS = [
+    'blog',
+    'newsletter',
+    'founders',
+    'product-engineers',
+    'data-stack',
+    'posts',
+    'customers',
+    'spotlight',
+]
+
+const isCommentThreadPage = (pageSlug?: string) =>
+    COMMENT_THREAD_SECTIONS.includes(pageSlug?.split('/').filter(Boolean)[0] ?? '')
 
 interface Topic {
     id: number
@@ -39,10 +70,14 @@ type QuestionFormMainProps = {
     loading: boolean
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
-    showTopicSelector?: boolean
     disclaimer?: boolean
     autoFocus?: boolean
     isInForum?: boolean
+    forum?: ForumFormOptions
+    // A forum save that failed, shown next to the buttons.
+    error?: string
+    // What a forum save is doing now, shown on the button while it runs.
+    loadingLabel?: string
 }
 
 export const Select = ({
@@ -56,7 +91,6 @@ export const Select = ({
     label?: string
     className?: string
 }) => {
-    const [topicGroups, setTopicGroups] = useState([])
     const [options, setOptions] = useState([])
 
     const handleChange = (selectedValue: any) => {
@@ -64,32 +98,15 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => {
-            setTopicGroups(topicGroups)
-
-            // Flatten topic groups into options array with section headers
-            const flatOptions = topicGroups
-                .sort(
-                    (a, b) =>
-                        topicGroupsSorted.indexOf(a?.attributes?.label) -
-                        topicGroupsSorted.indexOf(b?.attributes?.label)
-                )
-                .flatMap(({ attributes: { label: groupLabel, topics } }) => {
-                    const header = {
-                        label: groupLabel,
-                        value: null,
-                        isHeader: true,
-                    }
-                    const options =
-                        topics?.data.map((topic) => ({
-                            label: topic.attributes.label,
-                            value: topic,
-                        })) || []
-                    return [header, ...options]
-                })
-
-            setOptions(flatOptions)
-        })
+        const topicsQuery = qs.stringify(
+            { fields: ['label', 'slug'], sort: ['label:asc'], pagination: { pageSize: 100 } },
+            { encodeValuesOnly: true }
+        )
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicsQuery}`)
+            .then((res) => res.json())
+            .then(({ data }) =>
+                setOptions((data ?? []).map((topic) => ({ label: topic.attributes.label, value: topic })))
+            )
     }, [])
 
     return (
@@ -116,15 +133,19 @@ function QuestionFormMain({
     subject = true,
     loading,
     initialValues,
-    showTopicSelector,
     disclaimer = true,
     formType,
     autoFocus = true,
     isInForum = false,
+    forum,
+    error,
+    loadingLabel,
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
     const { status } = useAppStatus()
+    // Which forum button submitted the form. A ref, so the click and the submit agree.
+    const saveAsDraft = useRef(false)
 
     return (
         <div className={`flex-1 mb-1`}>
@@ -136,6 +157,7 @@ function QuestionFormMain({
                     images: [],
                     topic: undefined,
                     url: undefined,
+                    ...forum?.initialValues,
                     ...initialValues,
                 }}
                 validate={(values) => {
@@ -146,8 +168,9 @@ function QuestionFormMain({
                     if (subject && !values.subject) {
                         errors.subject = 'Required'
                     }
-                    if (showTopicSelector && !values.topic) {
-                        errors.topic = 'Required'
+                    // 0 is "Choose for me", which the server resolves when the post is saved.
+                    if (forum && values.forumTopic == null) {
+                        errors.forumTopic = 'Required'
                     }
                     return errors
                 }}
@@ -156,21 +179,24 @@ function QuestionFormMain({
                         posthog?.capture('community honeypot rejection')
                         return navigate('/')
                     }
-                    onSubmit(values, user)
+                    onSubmit(forum ? { ...values, draft: saveAsDraft.current } : values, user)
                 }}
             >
                 {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
-                            <div className="w-[40px] h-[40px] float-left rounded-full overflow-hidden">
-                                <Avatar
-                                    className="w-[40px] aspect-fill"
-                                    image={getAvatarURL(user?.profile)}
-                                    color={user?.profile?.color}
-                                />
-                            </div>
+                            {/* The forum composer is a full page, so it skips the avatar beside the fields. */}
+                            {!forum && (
+                                <div className="w-[40px] h-[40px] float-left rounded-full overflow-hidden">
+                                    <Avatar
+                                        className="w-[36px]"
+                                        image={getAvatarURL(user?.profile)}
+                                        color={user?.profile?.color}
+                                    />
+                                </div>
+                            )}
 
-                            <div data-scheme="primary" className="pl-[55px] space-y-2">
+                            <div data-scheme="primary" className={`${forum ? '' : 'pl-[55px]'} space-y-2`}>
                                 {status && status !== 'operational' && (
                                     <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
                                         <h5 className="m-0">Heads up!</h5>
@@ -188,7 +214,7 @@ function QuestionFormMain({
                                     </div>
                                 )}
 
-                                {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
+                                {forum?.fields({ values, setFieldValue })}
                                 {subject && (
                                     <>
                                         <Input
@@ -204,6 +230,13 @@ function QuestionFormMain({
                                             showLabel={false}
                                             value={values.subject}
                                             onChange={(e) => setFieldValue('subject', e.target.value)}
+                                            onKeyDown={(e) => {
+                                                if (e.key !== 'Tab' || e.shiftKey) return
+                                                const body = e.currentTarget.form?.elements.namedItem('body')
+                                                if (!(body instanceof HTMLTextAreaElement)) return
+                                                e.preventDefault()
+                                                body.focus()
+                                            }}
                                         />
                                     </>
                                 )}
@@ -211,16 +244,43 @@ function QuestionFormMain({
                                     onSubmit={submitForm}
                                     autoFocus={!subject}
                                     setFieldValue={setFieldValue}
-                                    initialValue={initialValues?.body}
+                                    initialValue={initialValues?.body ?? forum?.initialValues?.body}
                                     values={values}
                                     mentions={formType === 'reply'}
+                                    // Forum posts also suggest topics, tags, and posts after `#`.
+                                    references={!!forum}
                                     loading={loading}
                                     isValid={isValid}
                                     user={user}
                                     cta={() => (
-                                        <OSButton disabled={loading || !isValid} type="submit" variant="primary">
-                                            {loading ? 'Posting...' : user ? 'Post' : 'Login & post'}
-                                        </OSButton>
+                                        <div className="flex items-center gap-2">
+                                            {forum?.allowDraft && (
+                                                <OSButton
+                                                    disabled={loading || !isValid}
+                                                    type="submit"
+                                                    onClick={() => (saveAsDraft.current = true)}
+                                                >
+                                                    Save draft
+                                                </OSButton>
+                                            )}
+                                            <OSButton
+                                                disabled={loading || !isValid}
+                                                type="submit"
+                                                variant="primary"
+                                                onClick={() => (saveAsDraft.current = false)}
+                                            >
+                                                {loading
+                                                    ? loadingLabel || 'Posting...'
+                                                    : !user
+                                                    ? 'Login & post'
+                                                    : forum?.draftId
+                                                    ? 'Publish'
+                                                    : 'Post'}
+                                            </OSButton>
+                                            {error && (
+                                                <span className="text-sm text-red dark:text-yellow">{error}</span>
+                                            )}
+                                        </div>
                                     )}
                                 />
                                 <Field
@@ -259,17 +319,17 @@ type QuestionFormProps = {
     formType?: 'question' | 'reply'
     questionId?: number
     reply?: (body: string) => Promise<void>
-    onSubmit?: (values: any, formType: string) => void
+    onSubmit?: (values: any, formType: string, data?: any) => void
     initialView?: string
     topicID?: number
     archived?: boolean
-    showTopicSelector?: boolean
     parentName?: string
     buttonText?: React.ReactNode | string
     subject?: boolean
     disclaimer?: boolean
     autoFocus?: boolean
     isInForum?: boolean
+    forum?: ForumFormOptions
 }
 
 export const QuestionForm = ({
@@ -280,12 +340,11 @@ export const QuestionForm = ({
     reply,
     onSubmit,
     archived,
-    showTopicSelector,
-    parentName,
     subject,
     disclaimer,
     autoFocus,
     isInForum = false,
+    forum,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -293,6 +352,8 @@ export const QuestionForm = ({
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+    const [loadingLabel, setLoadingLabel] = useState('')
     const containerRef = useRef<HTMLDivElement>(null)
 
     const buttonText =
@@ -303,48 +364,88 @@ export const QuestionForm = ({
             <span className="squeak-reply-label">Reply</span>
         ))
 
-    const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
-        const token = await getJwt()
-        const topicQuery = qs.stringify(
-            {
-                filters: {
-                    label: {
-                        $eq: parentName,
-                    },
-                },
+    // The forum routes accept only these fields. A new post sends the empty permalink that the server replaces; a
+    // draft is created with publishedAt null and published by setting publishedAt.
+    // forumTopic 0 is "Choose for me": Jev picks the topic from the subject and body before the save.
+    const chooseForumTopic = async (subject: string, body: string) => {
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/suggest-forum-topic`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${await getJwt()}` },
+            body: JSON.stringify({ subject, body }),
+        })
+            .then((res) => res.json())
+            .catch(() => null)
+        if (!res?.data?.id) throw new Error('We could not choose a topic for this post. Please choose one.')
+        return res.data as { id: number; slug: string; label: string }
+    }
+
+    const saveForumPost = async ({ subject, body, forumTopic, draft }: QuestionFormValues) => {
+        const draftId = forum?.draftId
+        if (!forumTopic) setLoadingLabel('Choosing a topic…')
+        const chosenForumTopic = forumTopic ? null : await chooseForumTopic(subject, body)
+        setLoadingLabel(draft ? 'Saving…' : 'Posting…')
+        const topicId = chosenForumTopic?.id ?? forumTopic
+        const fields = { subject, body, forumTopic: topicId }
+        const data = draftId
+            ? { ...fields, ...(draft ? {} : { publishedAt: new Date().toISOString() }) }
+            : { ...fields, permalink: '', ...(draft ? { publishedAt: null } : {}) }
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions${draftId ? `/${draftId}` : ''}`, {
+            method: draftId ? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
             },
-            {
-                encodeValuesOnly: true,
-            }
+            body: JSON.stringify({ data }),
+        }).then((res) => res.json())
+        const questionData = res?.data
+        if (!questionData?.id) {
+            // Strapi's rate limit answers with a top-level message and no error object.
+            throw new Error(res?.error?.message || res?.message || 'The post could not be saved. Please try again.')
+        }
+
+        if (!draft) {
+            posthog?.capture('squeak question created', {
+                questionId: questionData.id,
+                forumTopicId: topicId,
+                subject,
+            })
+        }
+
+        // The composer says which topic Jev chose.
+        return chosenForumTopic ? { ...questionData, chosenForumTopic } : questionData
+    }
+
+    const suggestedForumTopicId = async (subject: string, body: string) => {
+        const suggestion = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/suggest-forum-topic`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${await getJwt()}` },
+            body: JSON.stringify({ subject, body }),
+        })
+            .then((res) => res.json())
+            .catch(() => null)
+        return (suggestion?.data?.id as number | undefined) ?? null
+    }
+
+    const defaultForumTopicId = async () => {
+        const query = qs.stringify(
+            { filters: { slug: { $eq: DEFAULT_FORUM_TOPIC_SLUG } }, fields: ['id'] },
+            { encodeValuesOnly: true }
         )
+        const topics = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/forum-topics?${query}`).then((res) =>
+            res.json()
+        )
+        return (topics?.data?.[0]?.id as number | undefined) ?? null
+    }
 
-        const topicID =
-            topic?.id ||
-            other?.topicID ||
-            (parentName &&
-                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-                    .then((res) => res.json())
-                    .then((topic) => topic?.data && topic?.data[0]?.id)))
-
-        const data = {
-            subject,
-            body,
-            resolved: false,
-            slugs: [] as { slug: string }[],
-            permalink: '',
-            topics: {
-                // 346 is uncategorized topic
-                connect: [topicID || 346],
-            },
-        }
-
-        if (slug) {
-            data.slugs = [
-                {
-                    slug,
-                },
-            ]
-        }
+    const createQuestion = async ({ subject, body }: QuestionFormValues) => {
+        const token = await getJwt()
+        const pageSlugs = slug ? [{ slug }] : []
+        const forumTopicId = isCommentThreadPage(slug)
+            ? null
+            : (await suggestedForumTopicId(subject, body)) ?? (await defaultForumTopicId())
+        const data = forumTopicId
+            ? { subject, body, permalink: '', forumTopic: forumTopicId, slugs: pageSlugs }
+            : { subject, body, resolved: false, permalink: '', slugs: pageSlugs }
 
         const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
@@ -362,7 +463,7 @@ export const QuestionForm = ({
         if (questionData?.id) {
             posthog?.capture('squeak question created', {
                 questionId: questionData.id,
-                topicId: topicID,
+                forumTopicId,
                 slug,
                 subject,
             })
@@ -411,12 +512,20 @@ export const QuestionForm = ({
         const transformedValues = await transformValues(values, user)
 
         if (formType === 'question') {
-            createQuestion(transformedValues).then((data) => {
-                setLoading(false)
-                setView(null)
-                setFormValues(null)
-                onSubmit?.(transformedValues, formType, data)
-            })
+            const create = forum ? saveForumPost : createQuestion
+            setError('')
+            create(transformedValues)
+                .then((data) => {
+                    setLoading(false)
+                    setView(null)
+                    setFormValues(null)
+                    onSubmit?.(transformedValues, formType, data)
+                })
+                .catch((err) => {
+                    // Keep the form and what was typed, and say what went wrong.
+                    setLoading(false)
+                    setError((err as Error).message)
+                })
         } else if (formType === 'reply' && questionId && reply) {
             setLoading(false)
             setView(null)
@@ -448,10 +557,12 @@ export const QuestionForm = ({
                             initialValues={formValues}
                             loading={loading}
                             onSubmit={handleMessageSubmit}
-                            showTopicSelector={showTopicSelector}
                             formType={formType}
                             autoFocus={autoFocus}
                             isInForum={isInForum}
+                            forum={forum}
+                            error={error}
+                            loadingLabel={loadingLabel}
                         />
                     ),
                     auth: (

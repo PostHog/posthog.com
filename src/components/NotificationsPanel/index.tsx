@@ -90,7 +90,7 @@ const Question = ({ subject, activeAt, permalink, replies, date, onItemClick, on
             title={subject}
             excerpt="Question"
             date={activeAt}
-            url={`/questions/${permalink}`}
+            url={`/forum/p/${permalink}`}
             count={`${numberOfNewReplies} new repl${numberOfNewReplies === 1 ? 'y' : 'ies'}`}
             onDismiss={onDismiss}
             onItemClick={onItemClick}

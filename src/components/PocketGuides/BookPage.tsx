@@ -3,6 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import Explorer from 'components/Explorer'
+import { getProseClasses } from '../../constants'
 
 import { EnableScoutBar } from 'components/SelfDrivingInbox/EnableScout'
 
@@ -24,12 +25,27 @@ import {
 } from './bookModel'
 
 /** The page body: the reader's wrapper interleaves each figure after the block citing it. */
-function MdxBody({ body, entry, pages }: { body: string; entry: BookPageEntry; pages: BookPageEntry[] }): JSX.Element {
+function MdxBody({
+    body,
+    entry,
+    pages,
+    fontSize,
+}: {
+    body: string
+    entry: BookPageEntry
+    pages: BookPageEntry[]
+    fontSize: number
+}): JSX.Element {
     return (
         <EntryProvider value={{ entry, pages }}>
-            <MDXProvider components={bookMdxComponents}>
-                <MDXRenderer>{body}</MDXRenderer>
-            </MDXProvider>
+            <div
+                className={`${getProseClasses('sm')} font-medium`}
+                style={fontSize === FONT_SIZES[0] ? undefined : { fontSize }}
+            >
+                <MDXProvider components={bookMdxComponents}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </div>
         </EntryProvider>
     )
 }
@@ -52,16 +68,17 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
     const previous = pages[index - 1]
     const next = pages[index + 1]
     const total = pageCount(pages)
+    const isProductAnalytics = volumeIdFromUrl(url) === 'product-analytics'
+    const shelf = isProductAnalytics ? { ...SHELF, label: 'All pocket guides' } : SHELF
+    const learn = isProductAnalytics ? { url: '/docs/product-analytics/learn', label: 'More Learn content' } : undefined
 
-    usePageTurnKeys(previous ? previous.url : SHELF.url, next?.url)
+    usePageTurnKeys(previous ? previous.url : shelf.url, next?.url)
 
     if (!entry) {
         return null
     }
 
-    const prevTurn = previous
-        ? { url: previous.url, label: turnLabel(previous) }
-        : { url: SHELF.url, label: SHELF.label }
+    const prevTurn = previous ? { url: previous.url, label: turnLabel(previous) } : shelf
     const nextTurn = next ? { url: next.url, label: turnLabel(next) } : undefined
 
     return (
@@ -81,12 +98,13 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             // The window itself is the page – no desk. The viewport selector re-pins the height fullScreen drops.
             className="[&_.app-scroll-viewport>div>div]:h-full"
         >
-            <div className="not-prose @container h-full min-h-0">
+            <div className="@container h-full min-h-0">
                 <BookReader
                     prev={prevTurn}
                     next={nextTurn}
                     tabs={bookTabs(pages, url)}
-                    shelf={SHELF}
+                    shelf={shelf}
+                    learn={learn}
                     position={{ page: entry.page, total }}
                     fontSize={fontSize}
                     onFontSize={stepFontSize}
@@ -101,7 +119,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                         ) : undefined
                     }
                 >
-                    <MdxBody body={body} entry={entry} pages={pages} />
+                    <MdxBody body={body} entry={entry} pages={pages} fontSize={fontSize} />
                 </BookReader>
             </div>
         </Explorer>

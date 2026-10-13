@@ -4,15 +4,16 @@ import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import CommunityQuestionsList from './CommunityQuestionsList'
 import OSButton2 from 'components/OSButton/OSButton2'
 import { useQuestions } from 'hooks/useQuestions'
+import { questionsTagFeedPath, questionsTagFilter } from 'components/Forum/questionTags'
 import { SectionComponentProps } from '../types'
 import { SectionHeading } from '../helpers'
 import Link from 'components/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
-import { volumeById } from '../../../../constants/pocketGuides'
+import { pocketGuideUrl, volumeById } from '../../../../constants/pocketGuides'
 
 type CommunityStatsNode = {
-    topicId: number | null
+    forumTag: string | null
     questions: number
     resolved: number
     replies: number
@@ -20,12 +21,12 @@ type CommunityStatsNode = {
 }
 
 const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
-    const forumTopicId = (productData as any)?.forumTopicId
+    const forumTag: string | undefined = (productData as any)?.forumTag
     const slug = (productData as any)?.slug
-    if (!forumTopicId || !slug) return null
+    if (!forumTag || !slug) return null
 
     const { questions, isLoading } = useQuestions({
-        topicId: forumTopicId,
+        filters: questionsTagFilter(forumTag),
         limit: 3,
         sortBy: 'activity',
     })
@@ -34,7 +35,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         query CommunityQuestionsStats {
             allCommunityStats {
                 nodes {
-                    topicId
+                    forumTag
                     questions
                     resolved
                     replies
@@ -44,10 +45,10 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
         }
     `)
     const stats: CommunityStatsNode | undefined = allCommunityStats.nodes.find(
-        (node: CommunityStatsNode) => node.topicId === forumTopicId
+        (node: CommunityStatsNode) => node.forumTag === forumTag
     )
 
-    const forumUrl = `/questions/topic/${slug}`
+    const forumUrl = questionsTagFeedPath(forumTag)
     const approxCount = (n: number) => {
         if (n >= 1000) return `With over ${(Math.floor(n / 1000) * 1000).toLocaleString()}`
         if (n >= 100) return `With over ${(Math.floor(n / 100) * 100).toLocaleString()}`
@@ -78,16 +79,16 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 Check the docs
                             </Link>
                             <p className="text-secondary text-base">
-                                We have an entire <SmallTeam slug="docs-wizard" /> dedicated to docs gardening.
+                                We have an entire <SmallTeam slug="wizard-and-docs" /> dedicated to docs gardening.
                             </p>
                         </li>
                         {pocketGuide && (
                             <li className="list-decimal">
-                                <Link to={`/pocket-guides/${pocketGuide.id}`} className="underline font-bold">
+                                <Link to={pocketGuideUrl(pocketGuide)} className="underline font-bold">
                                     Read the pocket guide
                                 </Link>
                                 <p className="text-secondary text-base">
-                                    PostHog use cases, in your pocket. Each chapter ends with a quick start.
+                                    Follow a guided story that introduces {productData.name} one concept at a time.
                                 </p>
                             </li>
                         )}

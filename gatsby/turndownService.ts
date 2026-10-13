@@ -1,9 +1,14 @@
 import TurndownService from 'turndown'
 import { JSDOM } from 'jsdom'
 
+// One shared document for every page. A new JSDOM per page leaks through the
+// selector engine's cache (about 18 MB per page across thousands of pages).
+let sharedDom: JSDOM | null = null
+
 export const preprocessHtmlForTabs = (html: string): string => {
-    const dom = new JSDOM(html)
-    const doc = dom.window.document
+    sharedDom ??= new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>')
+    const doc = sharedDom.window.document
+    doc.documentElement.innerHTML = html
 
     const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
     tabContainers.forEach((container) => {
@@ -47,7 +52,7 @@ export const preprocessHtmlForTabs = (html: string): string => {
     })
 
     doc.querySelectorAll(
-        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet'
+        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
     ).forEach((control) => control.remove())
 
     // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
@@ -57,11 +62,7 @@ export const preprocessHtmlForTabs = (html: string): string => {
         }
     })
 
-    const result = doc.documentElement.outerHTML
-    // Release JSDOM resources promptly — this runs once per page across
-    // thousands of pages, and unclosed windows pile up on the build heap
-    dom.window.close()
-    return result
+    return doc.documentElement.outerHTML
 }
 
 export const extractTitleFromHtml = (html: string): string => {

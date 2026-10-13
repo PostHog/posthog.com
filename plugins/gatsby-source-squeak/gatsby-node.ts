@@ -1,6 +1,7 @@
 import { GatsbyNode } from 'gatsby'
 
 import qs from 'qs'
+import pLimit from 'p-limit'
 import authors from '../../src/data/authors.json'
 
 const authorProfileIds = authors.filter((a) => a.profile_id).map((a) => a.profile_id)
@@ -11,6 +12,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
 ) => {
     const { apiHost } = pluginOptions
     const { createNode } = actions
+    const today = new Date().toISOString().slice(0, 10)
 
     // Fetch all profiles (active team members + any author with a profile_id)
     let page = 1
@@ -28,7 +30,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                                 },
                                 {
                                     startDate: {
-                                        $lte: new Date(),
+                                        $lte: today,
                                     },
                                 },
                             ],
@@ -90,33 +92,47 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         page++
     }
 
-    // Fetch all topic groups
-    let query = qs.stringify({
-        populate: {
-            topics: {
-                fields: ['id'],
+    const FORUM_POST_TEXT_LIMIT = 2000
+    const plainText = (markdown?: string | null) =>
+        (markdown || '').replace(/\s+/g, ' ').trim().slice(0, FORUM_POST_TEXT_LIMIT)
+    let forumPostPage = 1
+    while (true) {
+        const forumPostQuery = qs.stringify(
+            {
+                filters: { forumTopic: { id: { $notNull: true } } },
+                fields: ['subject', 'body', 'permalink', 'resolved'],
+                populate: {
+                    forumTopic: { fields: ['slug', 'label'] },
+                    forumTags: { fields: ['slug'] },
+                    resolvedBy: { fields: ['body'] },
+                },
+                pagination: { page: forumPostPage, pageSize: 100 },
             },
-        },
-    })
-
-    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
-
-    topicGroups.data.forEach((topicGroup) => {
-        const { topics, ...rest } = topicGroup.attributes
-
-        const node = {
-            id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
-            internal: {
-                type: `SqueakTopicGroup`,
-                contentDigest: createContentDigest(topicGroup),
-            },
-            ...rest,
-            topics: topics.data.map((topic) => ({
-                id: createNodeId(`squeak-topic-${topic.id}`),
-            })),
+            { encodeValuesOnly: true }
+        )
+        const forumPosts = await fetch(`${apiHost}/api/questions?${forumPostQuery}`).then((res) => res.json())
+        for (const post of forumPosts.data ?? []) {
+            const { subject, body, permalink, resolved, forumTopic, forumTags, resolvedBy } = post.attributes
+            const forumPost = {
+                squeakId: post.id,
+                subject,
+                permalink,
+                resolved: !!resolved,
+                excerpt: plainText(body),
+                resolutionBody: plainText(resolvedBy?.data?.attributes?.body),
+                forumTopic: forumTopic?.data?.attributes?.slug ?? null,
+                forumTopicLabel: forumTopic?.data?.attributes?.label ?? null,
+                forumTags: (forumTags?.data ?? []).map((tag) => tag.attributes.slug),
+            }
+            createNode({
+                ...forumPost,
+                id: createNodeId(`squeak-forum-post-${post.id}`),
+                internal: { type: 'SqueakForumPost', contentDigest: createContentDigest(forumPost) },
+            })
         }
-        createNode(node)
-    })
+        if (!forumPosts.meta || forumPosts.meta.pagination.page >= forumPosts.meta.pagination.pageCount) break
+        forumPostPage++
+    }
 
     // Fetch all topics
     let topicQuery = qs.stringify(
@@ -166,7 +182,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                             },
                             {
                                 startDate: {
-                                    $lte: new Date(),
+                                    $lte: today,
                                 },
                             },
                         ],
@@ -183,7 +199,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                             },
                             {
                                 startDate: {
-                                    $lte: new Date(),
+                                    $lte: today,
                                 },
                             },
                         ],
@@ -257,7 +273,101 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         createNode(node)
     }
 
+    // Roadmap vote counts come from GitHub issues. Fetch them with batched GraphQL queries: one
+    // REST call per issue was ~950 calls per build, most of the token's hourly limit, and one
+    // dropped connection put null in the non-nullable githubPages and failed the build.
+    const isGitHubUrl = (url: string) => new URL(url).hostname === 'github.com'
+    const fetchGitHubPages = async (urls: string[]) => {
+        const byRepo = new Map<string, { url: string; number: string }[]>()
+        for (const url of new Set(urls)) {
+            const [owner, repo, , segment] = url.split('/').slice(3)
+            // Some URLs carry a #comment anchor or a comma-joined list; REST read the leading number
+            const number = segment?.match(/^\d+/)?.[0]
+            if (!number) continue
+            byRepo.set(`${owner}/${repo}`, [...(byRepo.get(`${owner}/${repo}`) || []), { url, number }])
+        }
+
+        const chunks = [...byRepo].flatMap(([repo, issues]) =>
+            Array.from({ length: Math.ceil(issues.length / 50) }, (_, i) => ({
+                repo,
+                issues: issues.slice(i * 50, i * 50 + 50),
+            }))
+        )
+        const fields = 'title url number closedAt reactionGroups { content reactors { totalCount } }'
+        const pages = new Map<string, Record<string, any>>()
+        const limit = pLimit(4)
+
+        await Promise.all(
+            chunks.map(({ repo, issues }) =>
+                limit(async () => {
+                    const [owner, name] = repo.split('/')
+                    const selections = issues
+                        .map(
+                            ({ number }, i) =>
+                                `i${i}: issueOrPullRequest(number: ${number}) { ... on Issue { ${fields} } ... on PullRequest { ${fields} } }`
+                        )
+                        .join('\n')
+                    const query = `query { repository(owner: ${JSON.stringify(owner)}, name: ${JSON.stringify(
+                        name
+                    )}) { ${selections} } }`
+
+                    for (let attempt = 1; ; attempt++) {
+                        try {
+                            const response = await fetch('https://api.github.com/graphql', {
+                                method: 'POST',
+                                headers: {
+                                    Authorization: `Bearer ${process.env.GITHUB_API_KEY}`,
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ query }),
+                            })
+                            if (!response.ok) throw new Error(`GitHub GraphQL responded ${response.status}`)
+                            // Issues that no longer exist come back as null with a NOT_FOUND error
+                            const { data } = await response.json()
+                            if (!data) throw new Error('GitHub GraphQL returned no data')
+
+                            issues.forEach(({ url }, i) => {
+                                const issue = data.repository?.[`i${i}`]
+                                if (!issue) return
+                                const count = (content: string) =>
+                                    issue.reactionGroups.find((group) => group.content === content)?.reactors
+                                        .totalCount || 0
+                                pages.set(url, {
+                                    title: issue.title,
+                                    html_url: issue.url,
+                                    number: issue.number,
+                                    closed_at: issue.closedAt,
+                                    reactions: {
+                                        total_count: issue.reactionGroups.reduce(
+                                            (sum, group) => sum + group.reactors.totalCount,
+                                            0
+                                        ),
+                                        plus1: count('THUMBS_UP'),
+                                        minus1: count('THUMBS_DOWN'),
+                                        hooray: count('HOORAY'),
+                                        heart: count('HEART'),
+                                        eyes: count('EYES'),
+                                    },
+                                })
+                            })
+                            return
+                        } catch (error) {
+                            if (attempt >= 3) {
+                                console.warn(`Failed to fetch GitHub issues for ${repo}: ${error.message}`)
+                                return
+                            }
+                            await new Promise((resolve) => setTimeout(resolve, Math.random() * 1000 * 2 ** attempt))
+                        }
+                    }
+                })
+            )
+        )
+
+        return pages
+    }
+
     // Fetch all roadmaps
+    const roadmaps = []
     const fetchRoadmaps = async (page = 1) => {
         let roadmapQuery = qs.stringify({
             pagination: {
@@ -276,75 +386,59 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
         })
 
-        const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
+        const response = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
+        roadmaps.push(...response.data)
 
-        for (const roadmap of roadmaps.data) {
-            const { teams, githubUrls, image, ...rest } = roadmap.attributes
-
-            const cloudinaryMedia = {
-                ...image,
-                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                publicId: image?.data?.attributes?.provider_metadata?.public_id,
-                originalHeight: image?.data?.attributes?.height,
-                originalWidth: image?.data?.attributes?.width,
-                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
-            }
-
-            const node = {
-                squeakId: roadmap.id,
-                internal: {
-                    type: `SqueakRoadmap`,
-                    contentDigest: createContentDigest(roadmap.attributes),
-                },
-                ...rest,
-                media: cloudinaryMedia,
-                ...(image.data && {
-                    id: createNodeId(`squeak-image-${image.data.id}`),
-                    url: image.data.attributes.url,
-                }),
-                teams: roadmap.attributes.teams.data.map((team) => ({
-                    id: createNodeId(`squeak-team-${team.id}`),
-                })),
-                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
-            }
-
-            if (githubUrls?.length > 0 && process.env.GITHUB_API_KEY && process.env.GATSBY_MINIMAL !== 'true') {
-                node.githubPages = await Promise.all(
-                    githubUrls
-                        .filter((url) => new URL(url).hostname === 'github.com')
-                        .map((url) => {
-                            const [owner, repo, type, issueNum] = url.split('/').slice(3)
-                            const ghURL = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNum}`
-
-                            return fetch(ghURL, {
-                                headers: {
-                                    Authorization: `token ${process.env.GITHUB_API_KEY}`,
-                                },
-                            })
-                                .then((res) => res.json())
-                                .then((data) => {
-                                    if (data.reactions) {
-                                        data.reactions.plus1 = data.reactions['+1']
-                                        data.reactions.minus1 = data.reactions['-1']
-                                    }
-
-                                    return data
-                                })
-                                .catch((err) => console.log(err))
-                        })
-                )
-            } else {
-                node.githubPages = []
-            }
-
-            createNode(node)
-        }
-        if (roadmaps.meta.pagination.page < roadmaps.meta.pagination.pageCount) {
+        if (response.meta.pagination.page < response.meta.pagination.pageCount) {
             await fetchRoadmaps(page + 1)
         }
     }
 
     await fetchRoadmaps()
+
+    const githubPages =
+        process.env.GITHUB_API_KEY && process.env.GATSBY_MINIMAL !== 'true'
+            ? await fetchGitHubPages(
+                  roadmaps.flatMap((roadmap) => (roadmap.attributes.githubUrls || []).filter(isGitHubUrl))
+              )
+            : null
+
+    for (const roadmap of roadmaps) {
+        const { teams, githubUrls, image, ...rest } = roadmap.attributes
+
+        const cloudinaryMedia = {
+            ...image,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: image?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: image?.data?.attributes?.height,
+            originalWidth: image?.data?.attributes?.width,
+            originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
+        const node = {
+            squeakId: roadmap.id,
+            internal: {
+                type: `SqueakRoadmap`,
+                contentDigest: createContentDigest(roadmap.attributes),
+            },
+            ...rest,
+            media: cloudinaryMedia,
+            ...(image.data && {
+                id: createNodeId(`squeak-image-${image.data.id}`),
+                url: image.data.attributes.url,
+            }),
+            teams: roadmap.attributes.teams.data.map((team) => ({
+                id: createNodeId(`squeak-team-${team.id}`),
+            })),
+            id: createNodeId(`squeak-roadmap-${roadmap.id}`),
+            // A missing or failed issue keeps an empty slot, as a 404 did before
+            githubPages: githubPages
+                ? (githubUrls || []).filter(isGitHubUrl).map((url) => githubPages.get(url) || {})
+                : [],
+        }
+
+        createNode(node)
+    }
 }
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions }) => {
@@ -388,12 +482,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             avatar: SqueakProfileAvatar
         }
 
-        type SqueakTopicGroup implements Node {
+        type SqueakForumPost implements Node {
             id: ID!
             squeakId: Int!
-            slug: String
-            label: String!
-            topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
+            subject: String
+            permalink: String!
+            resolved: Boolean
+            excerpt: String
+            resolutionBody: String
+            forumTopic: String
+            forumTopicLabel: String
+            forumTags: [String!]
         }
 
         type SqueakTopic implements Node {

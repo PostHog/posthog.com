@@ -48,7 +48,7 @@ A reference index to the per-product pages. Each follows the same shape – uniq
 - [**Experiments**](/handbook/marketing/positioning/experiments) – A/B testing wired to the same data as everything else
 - [**Data pipelines**](/handbook/marketing/positioning/data-pipelines) – CDP, reverse-ETL, and transformations bundled – typically 5–10x cheaper than Segment
 - [**Endpoints**](/handbook/marketing/positioning/endpoints) – Turn any saved insight or SQL query into a stable, authenticated HTTP endpoint
-- [**LLM analytics**](/handbook/marketing/positioning/llm-analytics) – Knowing why your LLM-powered feature is bleeding money or shipping nonsense
+- [**AI Observability**](/handbook/marketing/positioning/llm-analytics) – Knowing why your LLM-powered feature is bleeding money or shipping nonsense
 - [**PostHog AI**](/handbook/marketing/positioning/posthog-ai) – A query interface that already knows your schema (and your users)
 - [**PostHog Desktop**](/handbook/marketing/positioning/desktop) – The product editor: where you, your team, and a fleet of agents build together
 

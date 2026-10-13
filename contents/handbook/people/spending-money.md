@@ -211,7 +211,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
 - AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
-  - [Claude](https://claude.ai) (including Claude Code): log in with SSO and you'll be added to our team plan. If SSO doesn't add you automatically, request access with Zluri in Slack or ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+  - [Claude](https://claude.ai) (including Claude Code): you need to be invited to our team plan – logging in with SSO doesn't add you automatically. Request an invite yourself with the `/accessrequest` command in Slack.
   - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
@@ -221,6 +221,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
   - It may be worth occasionally upgrading to Premium Economy if you're travelling a lot for work and the cost is not unreasonably high, particularly if you're working the next day
+- When booking flights over $1,000, choose the option to have the refund back to your Brex instead of travel credits.
 - Consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it, using your Brex; this saves you time, particularly when traveling to the US.
 - When traveling internationally, use your Brex to expense a reasonable eSIM. PostHog does not cover roaming charges for your phone.
 - When using your Brex internationally, use the local currency since Brex generally offers a better exchange rate.

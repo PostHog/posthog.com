@@ -145,12 +145,14 @@ export const FutureTeamMember = ({ href }: { href: string }): JSX.Element => (
 
 export default function TeamMember({
     name,
+    squeakId: id,
     photo,
     className,
     showOnlyFirstName = false,
     children,
 }: {
     name: string
+    squeakId?: number
     photo?: boolean
     className?: string
     showOnlyFirstName?: boolean
@@ -182,8 +184,8 @@ export default function TeamMember({
     `)
 
     const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+        ({ firstName, lastName, squeakId }: { firstName: string; lastName: string; squeakId: number }) =>
+            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase() && (!id || squeakId === id)
     )
 
     return person ? (

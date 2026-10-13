@@ -68,42 +68,11 @@ When the customer starts planning their instrumentation rollout unprompted and i
 
 ## The reverse demo
 
-A [reverse demo](https://www.clay.com/blog/reverse-demo) (a term Clay recently popularized) flips the usual script: instead of you driving a polished demo environment, the customer drives their own data. It's a faster path to the aha moment because the value shows up in their product, not a sandbox account.
+The fastest path to the aha moment is a reverse demo, where the customer drives their own data instead of watching you drive a demo environment. The format, the prep, and both self-driving versions live on the [reverse demo calls](/handbook/growth/sales/reverse-demo-calls#reverse-demos-for-self-driving) page.
 
-The catch for us is that a reverse demo only works once there's enough clean data in PostHog for the agent to act on. Clay can have someone build a lead list on the first call before they're even a customer; we can't conjure signals out of an empty project. That makes the reverse demo a great fit for existing customers who already have the data flowing (a natural play for TAMs), and a tougher one for prospects who haven't connected anything yet (TAEs will usually need to get data flowing first, see the pre-call prep below). 
-
-### Pre-call prep
-
-The whole demo depends on there being real signals to work from, so set that up before the call:
-
-- Ask them to turn on error tracking and session replays for a window of time ahead of the call, so the agent has fresh, real signals to act on by the time you meet.
-- Have them get PostHog Desktop downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
-- Frame the cost honestly: offer to credit any usage on errors and replays during the demo window, since you need them on to show it at its best, and they can turn them back off after. If it wows them, they'll want to keep them on anyway, and that's the flywheel starting.
-
-### Demo flow
-
-Let them drive the whole way. You narrate, they click.
-
-1. Have them open the PostHog Desktop inbox.
-2. Walk them through what they're seeing in the reports and PRs tabs, using their own data.
-3. Have them pick a report to inspect and kick off a PR from it themselves.
-4. Explain the self-driving part: they can set it up to handle bugfix and maintenance PRs automatically, while humans still drive product decisions and new features. (This is the same line as "robots do maintenance, humans do creative work" below, made concrete.)
-
-Using their data for this makes it click and get to the "aha!" moment much more quickly.
-
-### The scout-based reverse demo (no data prep or pre-ingest needed)
-
-The source-led version above needs data to accumulate first. The scout-led version doesn't, which makes it the better opener for an account with historical data but nothing switched on yet.
-
-1. In PostHog Desktop, open the scouts page and pick the **"Make a scout"** suggestion. It scans their actual project and proposes custom scouts grounded in their real data – which is itself the moment, because the suggestions are specific to them.
-2. Let them pick the one that makes them go "huh, yeah, I'd want to know that."
-3. [Run it on demand](/docs/self-driving/scouts#running-a-scout-on-demand) right there on the call – no waiting for a schedule, and a scout that's still disabled can be run this way.
-4. Read what it filed together. If it's good, turn it on. If it's noisy, that's a demo too: show them the [dry run](/docs/self-driving/scouts#dry-runs) and [scout notes](/docs/self-driving/scouts#steering-a-scout-with-a-note), because "I can tell it that's known noise, in English" is often what closes it.
-
-The thing to make land here is the memory. A scout reads back what earlier runs learned so it dedupes against itself and gets smarter. 
-
-
-For ideas that work across verticals, and the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) behind them, send them to [scout examples](/docs/self-driving/scout-examples). For a deep dive with two real scouts traced end to end and a walkthrough video, [What is a scout?](/blog/what-is-a-scout) are good references.
+- [Pre-call prep](/handbook/growth/sales/reverse-demo-calls#pre-call-prep) covers what to switch on ahead of the call so there are real signals to work from.
+- [Demo flow](/handbook/growth/sales/reverse-demo-calls#demo-flow) is the source-led version, from the inbox to a PR they kick off themselves.
+- [The scout-based reverse demo](/handbook/growth/sales/reverse-demo-calls#the-scout-based-reverse-demo) needs no data prep, so it is the better opener for an account with historical data but nothing switched on yet.
 
 ## How AI observability can fit in
 
@@ -133,7 +102,7 @@ For the five minutes before a call.
 - **The chain:** something watches (source or scout) → signals → grouped into a report → inbox researches it → agent opens a PR → human merges.
 - **The trade-offs between Signals and Scouts:** sources give determinism and guaranteed coverage, scouts give judgement and steerability. 
 - **Lead with sources** when there's significant volume to triage. **Lead with scouts** when everything is technically "something" and they need a filter.
-- **Best demo move:** toggle a source and watch the queue fill, or make a scout on their data and run it on demand, live.
+- **Best demo move:** toggle a source and watch the queue fill, or make a scout on their data and run it on demand, live. Run it as a [reverse demo](/handbook/growth/sales/reverse-demo-calls#reverse-demos-for-self-driving).
 - **On an AI account:** eval + [evaluation report](/docs/ai-evals#evaluation-reports) ships today, anomaly detection + agent investigation is alpha. Both need [AIO events](/docs/ai-observability/start-here) flowing first.
 - **Never promise:** auto-merge, total coverage from a scout, or a PR from every report.
 - **Links to share:** [What is a scout?](/blog/what-is-a-scout), [scout examples](/docs/self-driving/scout-examples), [self-driving docs](/docs/self-driving).

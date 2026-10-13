@@ -3,7 +3,7 @@ name: modeling-warehouse-foundations
 description: >
   Shared foundations for building reusable data models in PostHog, on either of two stacks: PostHog-native
   data-warehouse views / materialized views (HogQL, via the view-* MCP tools), or an external dbt project
-  (sources.yml + staging/marts + schema tests) run against your own or PostHog's managed warehouse. Read
+  (sources.yml + staging/marts + schema tests) run against your own or PostHog's warehouse. Read
   before authoring any specific business model — covers the PostHog-vs-dbt decision, the view-create →
   view-materialize → sync_frequency workflow and the HogQL column-aliasing rule, the dbt project skeleton and
   the honest "no native dbt integration" picture, warehouse joins and star-schema dimensions, currency
@@ -83,7 +83,7 @@ for headline numbers, propose it to the semantic layer so other models discover 
 | File                                                                       | Read when                                                                                                     |
 | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | [`references/posthog-views.md`](references/posthog-views.md)               | Creating/materializing a PostHog view; the `view-*` tools, aliasing rule, `sync_frequency`, nesting, cleanup. |
-| [`references/dbt-project.md`](references/dbt-project.md)                   | Building the dbt version; project layout, where dbt runs, the managed-warehouse note, when dbt beats a view.  |
+| [`references/dbt-project.md`](references/dbt-project.md)                   | Building the dbt version; project layout, where dbt runs, the PostHog warehouse note, when dbt beats a view.  |
 | [`references/dbt-skeleton/`](references/dbt-skeleton/)                     | Copy-paste starting files: `dbt_project.yml`, `sources.yml`, a staging model, a mart, `schema.yml`.           |
 | [`references/joins-and-dimensions.md`](references/joins-and-dimensions.md) | Joining warehouse tables, star-schema dimensions, person joins, `convertCurrency()`.                          |
 | [`references/governance.md`](references/governance.md)                     | The semantic-layer check before deriving, and registering a model after building.                             |

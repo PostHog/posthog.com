@@ -49,7 +49,7 @@ const ProductRateBlock = ({
     initialVolume: number
     unit: string
     // Adds a second input that multiplies the cost, e.g. months of retention
-    multiplier?: { unit: string; initial: number }
+    multiplier?: { unit: string; initial: number; max?: number }
     onCostChange: (cost: number) => void
 }) => {
     const [volume, setVolume] = useState(initialVolume)
@@ -212,6 +212,11 @@ const ProductRateBlock = ({
                                             value={multiplierValue}
                                             decimalScale={0}
                                             allowNegative={false}
+                                            isAllowed={({ floatValue }) =>
+                                                !multiplier.max ||
+                                                floatValue === undefined ||
+                                                floatValue <= multiplier.max
+                                            }
                                             onValueChange={({ floatValue }) => {
                                                 if (floatValue !== undefined)
                                                     setMultiplierValue(Math.max(1, floatValue))

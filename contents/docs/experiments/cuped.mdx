@@ -6,6 +6,15 @@ CUPED (Controlled-experiment Using Pre-Experiment Data) is an optional variance 
 
 It doesn't change randomization, who is included, or which post-exposure events count. The stats engine adjusts the metric values before estimating the treatment effect, so the analysis can be more precise.
 
+## Supported metrics
+
+CUPED applies to:
+
+- **Mean metrics**, except metrics with an outcome threshold and metrics based on session properties
+- **Funnel metrics** with ordered steps and no data warehouse steps
+
+Other metrics are analyzed without adjustment even when CUPED is enabled. This includes ratio and retention metrics, unordered funnels, and funnels with data warehouse steps.
+
 ## Configure CUPED
 
 Set a project-level default, then override it on individual Experiments when needed.
@@ -46,4 +55,4 @@ If there isn't useful pre-exposure data, enabling CUPED usually has little or no
 
 CUPED scans data from the experiment period and the pre-exposure window. This means it has a performance cost compared to analyzing the same metric without CUPED.
 
-Large tests or long look-back windows can take longer to analyze. Use the look-back window setting to control how much pre-exposure data PostHog scans.
+Large tests or long look-back windows can take longer to analyze. Use the look-back window setting to control how much pre-exposure data PostHog scans. The look-back window defaults to 14 days and can be set between 1 and 30 days.

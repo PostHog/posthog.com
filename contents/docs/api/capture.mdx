@@ -92,7 +92,7 @@ sendPosthogEvent()
 
 ### Anonymous event capture
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`.
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`. Use a random distinct ID that isn't linked to a person profile, such as a UUID, and reuse it for the rest of the visit or session. If the ID already belongs to a person, the event is still linked to that person and counts as an identified event. Anonymous events are stored without person properties and don't link to [groups](/docs/product-analytics/group-analytics), so group analytics doesn't count them.
 
 <MultiLanguage>
 

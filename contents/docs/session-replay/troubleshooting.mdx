@@ -204,7 +204,7 @@ Product analytics, feature flags, surveys, and error tracking all work. Each SDK
 Two replay features are different because PostHog fetches assets from your app:
 
 - **Replay assets that PostHog cannot inline.** PostHog captures most assets [inline](#ensure-your-website-permits-posthog-cors), but it loads the rest from your web server during playback. A viewer on your private network sees these assets. A viewer outside the network does not, because the browser cannot reach your server.
-- **Server-side heatmap screenshots.** To render a [heatmap](/docs/toolbar/heatmaps) over a screenshot, PostHog fetches the page from its own servers. This fails for a private address, because PostHog cannot reach it. Adding [PostHog's outbound IPs](/docs/toolbar/heatmaps#viewing-heatmaps-in-posthog-beta) to your firewall does not help when the address is private.
+- **Server-side heatmap screenshots.** To render a [heatmap](/docs/toolbar/heatmaps) over a screenshot, PostHog fetches the page from its own servers. This fails for a private address, because PostHog cannot reach it. Adding [PostHog's outbound IPs](/docs/toolbar/heatmaps#viewing-heatmaps-in-posthog) to your firewall does not help when the address is private.
 
 When PostHog cannot render a heatmap screenshot, it [falls back to session recordings](/docs/toolbar/heatmaps#screenshot-or-iframe-heatmap-fails-to-load) that visited the same page. This shows heatmap data over a recording snapshot, so heatmaps still work for internal apps.
 

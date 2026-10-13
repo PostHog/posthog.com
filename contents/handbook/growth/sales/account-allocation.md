@@ -78,6 +78,8 @@ There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, w
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
+To flag an account, add the `tam overlay needed` tag to it in Customer Analytics. TAM team leads check accounts with this tag and assign them to a TAM. Before you tag an account, use the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential) to check that there is a real expansion opportunity. Add a Customer Analytics note that tells the TAM what you saw.
+
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
 We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.
@@ -130,7 +132,7 @@ A TAM is added on top of CSM coverage where an opportunity qualifies. At the sta
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics. When the TAM is assigned, remove the `tam overlay needed` tag.
 
 To request CSM coverage, add:
 
@@ -145,7 +147,7 @@ Every $20k+ account should have a CSM. At the start of each quarter, CSM team le
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
 3. **CSM books outside the current target** to identify which accounts should be rebalanced
 
-For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics and removes the `csm overlay needed` or `csm handover needed` tag.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 

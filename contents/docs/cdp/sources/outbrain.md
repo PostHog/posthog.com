@@ -9,9 +9,9 @@ availability:
 sourceId: Outbrain
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+<CalloutBox icon="IconInfo" title="Before you start" type="action">
 
-The Outbrain source is currently in **alpha**. It connects to the Outbrain Amplify API, which requires account-manager approval before API calls are accepted. If your requests are rejected, contact your Outbrain account manager to enable Amplify API access.
+The Outbrain Amplify API needs account-manager approval before it accepts API calls. If your requests are rejected, contact your Outbrain account manager to enable Amplify API access.
 
 </CalloutBox>
 

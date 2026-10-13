@@ -12,7 +12,8 @@ import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxo
  *
  * Tiles resolve their URL by preferring a product-specific install guide at
  * `/docs/{productSlug}/installation/{slug}` (looked up from MDX at build time),
- * falling back to the generic `/docs/libraries/{librarySlug}`.
+ * falling back to the generic `/docs/libraries/{librarySlug}`. Items with
+ * neither page (wizard-only stacks) are not shown, so no tile links to a 404.
  */
 
 interface InstallFrameworkGridProps {
@@ -34,6 +35,8 @@ type LibraryNode = {
         icon?: { publicURL?: string } | null
     }
 }
+
+type ResolvedItem = InstallItem & { url: string }
 
 const sortByName = (a: InstallItem, b: InstallItem) => a.name.localeCompare(b.name)
 
@@ -97,26 +100,31 @@ const InstallFrameworkGrid = ({
         return set
     }, [data])
 
-    const resolveUrl = (item: InstallItem): string => {
+    const resolveUrl = (item: InstallItem): string | null => {
         if (productSlug) {
             const candidate = `/docs/${productSlug}/installation/${item.slug}`
             if (productInstallUrls.has(candidate)) return candidate
         }
-        return `/docs/libraries/${item.librarySlug}`
+        return libraryMeta.has(item.librarySlug) ? `/docs/libraries/${item.librarySlug}` : null
     }
 
     const visibleCategories = useMemo(
-        () => (categories ? TAXONOMY.filter((c) => categories.includes(c.id)) : TAXONOMY),
-        [categories]
+        () =>
+            (categories ? TAXONOMY.filter((c) => categories.includes(c.id)) : TAXONOMY).map((category) => ({
+                ...category,
+                items: category.items
+                    .map((item) => ({ ...item, url: resolveUrl(item) }))
+                    .filter((item): item is ResolvedItem => item.url !== null),
+            })),
+        [categories, libraryMeta, productInstallUrls, productSlug]
     )
 
-    const renderTile = (item: InstallItem, keyPrefix: string) => {
-        const url = resolveUrl(item)
+    const renderTile = (item: ResolvedItem, keyPrefix: string) => {
         const meta = libraryMeta.get(item.librarySlug)
         return (
             <li key={`${keyPrefix}-${item.slug}`} className="m-0 list-none break-inside-avoid">
                 <Link
-                    to={url}
+                    to={item.url}
                     className="group flex items-center gap-2 py-1.5 px-1 rounded hover:bg-accent text-primary no-underline"
                 >
                     {meta?.logo ? (

@@ -19,6 +19,8 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
+import { TWIG_URL } from '../../constants'
+import Stickers from 'components/Stickers/Index'
 
 interface DocsMenuItem {
     name: string
@@ -36,7 +38,7 @@ const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof ty
 }
 
 // Static Docs menu. Edit this list directly when a docs section moves or a new one is added.
-export const docsMenuItems: MenuItemType[] = [
+const docsMenuItems: MenuItemType[] = [
     { type: 'item', label: 'Overview', link: '/docs', icon: <Icons.IconHome className="size-4 text-purple" /> },
     { type: 'separator' },
     { type: 'label', label: 'Get started' },
@@ -60,38 +62,6 @@ export const docsMenuItems: MenuItemType[] = [
     },
     { type: 'separator' },
     { type: 'label', label: 'Products' },
-    {
-        type: 'item',
-        label: 'PostHog Web',
-        link: '/docs/self-driving/web',
-        icon: <Icons.IconGlobe className="size-4 text-blue" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog Slack',
-        link: '/docs/slack',
-        icon: <Icons.IconAtSign className="size-4 text-purple" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog MCP',
-        link: '/docs/model-context-protocol',
-        icon: <Icons.IconPlug className="size-4 text-purple" />,
-    },
-    {
-        type: 'item',
-        label: 'PostHog CLI',
-        link: '/docs/cli',
-        icon: <Icons.IconTerminal className="size-4 text-seagreen" />,
-    },
-    { type: 'separator' },
-    { type: 'label', label: 'Tools' },
     {
         type: 'submenu',
         label: 'Analytics',
@@ -124,7 +94,7 @@ export const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'submenu',
-        label: 'More tools',
+        label: 'More products',
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
@@ -140,6 +110,38 @@ export const docsMenuItems: MenuItemType[] = [
             { type: 'item', label: 'Surveys', link: '/docs/surveys' },
             { type: 'item', label: 'Workflows', link: '/docs/workflows' },
         ],
+    },
+    { type: 'separator' },
+    { type: 'label', label: 'Apps' },
+    {
+        type: 'item',
+        label: 'PostHog Web',
+        link: '/docs/self-driving/web',
+        icon: <Icons.IconGlobe className="size-4 text-blue" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog Desktop',
+        link: '/docs/posthog-desktop',
+        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog Slack',
+        link: '/docs/slack',
+        icon: <Icons.IconAtSign className="size-4 text-purple" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog MCP',
+        link: '/docs/model-context-protocol',
+        icon: <Icons.IconPlug className="size-4 text-purple" />,
+    },
+    {
+        type: 'item',
+        label: 'PostHog CLI',
+        link: '/docs/cli',
+        icon: <Icons.IconTerminal className="size-4 text-seagreen" />,
     },
     { type: 'separator' },
     { type: 'label', label: 'Context' },
@@ -181,18 +183,61 @@ export const docsMenuItems: MenuItemType[] = [
     { type: 'separator' },
     {
         type: 'item',
-        label: 'Tutorials',
-        link: '/tutorials',
-        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+        label: 'Playground',
+        link: TWIG_URL,
+        external: true,
+        icon: <Icons.IconPlay className="size-4 text-orange" />,
     },
     {
         type: 'item',
         label: 'Pocket guides',
         link: '/pocket-guides',
-        icon: <Icons.IconCompass className="size-4 text-orange" />,
+        icon: <Icons.IconCompass className="size-4 text-blue" />,
     },
-    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-purple" /> },
+    {
+        type: 'item',
+        label: 'Tutorials',
+        link: '/tutorials',
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
+    },
+    { type: 'item', label: 'Templates', link: '/templates', icon: <Icons.IconMagic className="size-4 text-green" /> },
 ]
+
+const docsProductIconFallbacks = {
+    'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
+    'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
+    skills: { Icon: Icons.IconMagic, color: 'purple' },
+}
+
+const docsProductHandleOverrides = { 'posthog-ai': 'posthog_ai' }
+
+const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuItemType[] =>
+    items.map((item) => {
+        if (item.type !== 'submenu' || !['Analytics', 'More products'].includes(item.label)) return item
+
+        return {
+            ...item,
+            items: item.items?.map((child) => {
+                const slug = child.link?.replace(/^\/docs\//, '')
+                const product = allProducts.find(
+                    (product) =>
+                        product.handle ===
+                            docsProductHandleOverrides[slug as keyof typeof docsProductHandleOverrides] ||
+                        product.docsSlug === slug ||
+                        product.slug?.replace(/^docs\//, '') === slug
+                )
+                const fallback = docsProductIconFallbacks[slug as keyof typeof docsProductIconFallbacks]
+                const Icon = product?.Icon || fallback?.Icon
+
+                return Icon
+                    ? {
+                          ...child,
+                          icon: <Icon className={`size-4 text-${product?.color || fallback?.color || 'gray'}`} />,
+                      }
+                    : child
+            }),
+        }
+    })
 
 // Tools promoted to the top level of the Products menu, in display order.
 // Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
@@ -280,7 +325,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: docsMenuItems,
+            items: addDocsProductIcons(docsMenuItems, allProducts),
         },
         {
             trigger: 'Community',
@@ -312,7 +357,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item' as const,
                     label: 'Forums',
-                    link: '/questions',
+                    link: '/forum',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
                 { type: 'separator' },
@@ -494,9 +539,9 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'DeskHog',
-                    link: '/deskhog',
-                    icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
                 {
                     type: 'item',
@@ -785,6 +830,12 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
     ],
     notGames: [
         {
+            label: 'DeskHog',
+            link: '/deskhog',
+            iconName: null,
+            customIcon: <Icons.IconDeskHog className="text-seagreen" />,
+        },
+        {
             label: 'PostHog FM',
             link: '/fm',
             iconName: null,
@@ -886,7 +937,7 @@ export function useMenuSelectOptions() {
             items: [
                 { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
                 { value: 'merch', label: 'Merch' },
-                { value: 'deskhog', label: 'DeskHog' },
+                { value: 'mcp/leaderboard', label: 'MCP leaderboard' },
                 {
                     value: 'trash',
                     label: 'Trash',

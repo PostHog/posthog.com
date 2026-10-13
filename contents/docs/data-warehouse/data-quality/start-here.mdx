@@ -1,0 +1,65 @@
+---
+title: Get started with data quality
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Data quality is in alpha" type="action">
+
+Data quality isn't available to every project. [Contact support](https://app.posthog.com/home#supportModal) to request access or share feedback.
+
+</CalloutBox>
+
+This guide creates an error-severity **Not null** check on `orders.customer_id`, runs it, and investigates the result. You need editor access to the table.
+
+## Open the check editor
+
+You can start from the project-wide page or from the table, view, or metric you want to check:
+
+- **Project-wide** – Open **Data Warehouse**, select the **Data quality** tab, and click **New check**. Select any connected table, saved view, SQL metric, or PostHog table from the **Table, view, or metric** field.
+- **Warehouse or source table** – Open the source in **Data Warehouse**, select the table, open its **Data quality** tab, and click **New check**. A connected source table becomes a warehouse table after its first sync, so both names lead to the same check surface.
+- **Saved view** – Open the view or model, select **Data quality**, and click **New check**.
+- **Metric** – Open a metric in the Data Catalog, select **Tests**, and click **New check**. Metrics with a saved HogQL definition support Custom SQL checks.
+- **PostHog table** – Open the project-wide **Data quality** page, click **New check**, and select `events`, `persons`, or `groups`. The picker labels these tables **PostHog**.
+
+The table, view, or metric is already selected when you open its check editor.
+
+## Configure the check
+
+1. Set **Check type** to **Not null**.
+2. Set **Column** to `customer_id`.
+3. Set **Name** to `orders_customer_id_not_null`. The name is optional, but it makes the check easier to identify later.
+4. Add a **Description** that explains what a failure means, such as `Every order must belong to a customer`.
+5. Set **Severity** to **Error** because a null customer ID makes downstream customer joins incomplete.
+6. Click **Save check**.
+
+For checks on `events`, `persons`, or `groups`, you can also set **Only check recent rows**. An empty value scans the whole table. `events` uses `timestamp`; `persons` and `groups` use `created_at`, which records when PostHog first saw the row.
+
+See [data quality check types](/docs/data-warehouse/data-quality/check-types) for the information each check type needs.
+
+## Run the check
+
+After saving, click **Run now** in the confirmation message. You can also open the check's actions menu and select **Run now**.
+
+Use **Run all checks** to run every enabled check on the current table, view, or metric. On the project-wide page, **Run all checks** runs every enabled check that you can access.
+
+The run finishes with one of these results:
+
+- **Passed** – The check found no failing rows.
+- **Failed** – The assertion ran and found bad data.
+- **Errored** – PostHog couldn't compile or execute the query.
+- **Skipped** – PostHog couldn't run the check, for example because its table, view, or metric no longer exists.
+
+## Investigate the first result
+
+Expand the check to see its recent runs, failure count, duration, and error details.
+
+If the check failed, open its actions menu and select **Open failing rows in SQL editor**. PostHog opens the diagnostic query from the latest run. Running it queries the current data, so the rows can differ from the original failure count if the data changed after the check ran.
+
+If the check errored, read the error before changing the assertion. Common causes include a renamed column, an unreadable referenced table, or a query timeout. For large PostHog tables, add a lookback window or add a time filter to a Custom SQL check.
+
+## Create checks with MCP
+
+Agents can create, run, and manage checks through the PostHog MCP server. See the [data quality MCP and SQL reference](/docs/data-warehouse/data-quality/mcp) for automation details.

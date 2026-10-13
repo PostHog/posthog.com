@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, run `/org-change` in Slack and select the relevant change type – it'll create a tracked issue in company-internal with the right checklist.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, search Slack for **Org Change** and select the workflow. Choose the relevant change type to create a tracked issue in company-internal with the right checklist.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -67,7 +67,7 @@ Setting up support processes is a team lead responsibility, but if you need any 
 
 Team leads are responsible for creating a `#support-<team-name>` Slack channel and making sure their team is [set up for support](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support), so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up support hero notifications.
 
-To kick off any org change, run `/org-change` in Slack.
+To kick off any org change, search Slack for **Org Change** and select the workflow.
 
 ### Launching new products and features
 
@@ -141,7 +141,7 @@ We have a defined [process for proposing changes to teams](/handbook/company/tea
 Once a decision is made, the following happens:
 
 -   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] The team lead runs `/org-change` in Slack to kick off the tracking issue. Ops will be notified and picks up execution from there.
+-   [ ] The team lead searches Slack for **Org Change** and selects the workflow to create the tracking issue. Ops will be notified and picks up execution from there.
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
 The small teams template contains a list of tasks for the Ops team and the team lead. 

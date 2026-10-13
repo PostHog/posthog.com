@@ -82,6 +82,8 @@ Vulnerabilities in code your team owns are also yours to fix, and the support he
 
 Findings come from the AI pentesting services we use, currently Veria Labs and Parameter. They are triaged automatically, and the true positives go to the product team that owns the code. Your team's findings are collected in <PrivateLink url="https://security.posthog.dev">SecurityHog</PrivateLink>, and your team also gets a weekly post in its Slack channel that lists them.
 
+The support hero is the default owner, but each team decides how to split the work. For example, a team with a lot of findings can share them across more people. Set the Assignee field on each finding in SecurityHog so the team can see who works on it.
+
 Work through the findings for your team during your rotation. If you cannot finish one, hand it over to the next support hero. If you are not sure how serious a finding is, or how to fix it, ask in `#team-security`.
 
 ### Responding to external PRs

@@ -10,7 +10,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import { IconTrending, IconWarning, IconTarget, IconDatabase } from '@posthog/icons'
-import { HedgehogChartHog, HedgehogDocBrown } from '@posthog/brand/hoggies'
+import { HedgehogChart, HedgehogDocBrown } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -318,7 +318,7 @@ function UseCases(): JSX.Element {
                         <div className="grid items-start gap-6 @lg/reader-content:grid-cols-[1fr_280px]">
                             <div>
                                 <div className="prose">
-                                    <h1 className="!m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                    <h1 className="!m-0 text-3xl text-primary font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                                         <Highlight>Data questions</Highlight> worth asking
                                     </h1>
                                     <p className="!mb-0 !mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
@@ -335,7 +335,7 @@ function UseCases(): JSX.Element {
                                 </div>
                             </div>
                             <div className="hidden justify-center @lg/reader-content:flex">
-                                <HedgehogChartHog size={280} className="w-full max-w-[280px]" />
+                                <HedgehogChart size={280} className="w-full max-w-[280px]" />
                             </div>
                         </div>
                     </div>

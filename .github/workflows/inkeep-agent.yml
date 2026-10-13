@@ -30,7 +30,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Trigger Inkeep Agent
-              uses: inkeep/inkeep-agents-action@fbbc92842bd025f044cb7e4d827882fd85914f26
+              uses: inkeep/inkeep-agents-action@473ae53070cd39b9c5db0b0de4f44ca5248a6ade
               with:
                   trigger-url: ${{ secrets.INKEEP_TRIGGER_URL }}
                   # Filters out PRs that dont match the given regex. Update regex as desired or remove entirely

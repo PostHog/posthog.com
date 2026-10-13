@@ -36,7 +36,7 @@ There's no wrong answer here – the right pick comes down to what you care abou
 
 ### What's the best APM tool for developers overall?
 
-For most developers and product teams, it's **[PostHog](/)**. It covers all three OpenTelemetry signals: [distributed traces](/docs/distributed-tracing) (beta), [logs](/docs/logs), and [application metrics](/docs/metrics) (alpha), plus [error tracking](/error-tracking) all in one project on a single data model. 
+For most developers and product teams, it's **[PostHog](/)**. It covers all three OpenTelemetry signals: [distributed traces](/docs/distributed-tracing), [logs](/docs/logs), and [application metrics](/docs/metrics) (alpha), plus [error tracking](/error-tracking) all in one project on a single data model. 
 
 You get trace waterfalls and latency breakdowns, with span filtering by service, status, and duration; full-text search and [pattern mining](/docs/logs/patterns) that collapses millions of log lines into templates; and percentiles and rate/increase on metrics. Threshold [alerts](/docs/logs/alerts) fire on logs, and threshold or anomaly alerts on [insights](/docs/alerts). 
 
@@ -46,7 +46,7 @@ PostHog also enables you to build a [self-driving product](/self-driving), where
 
 | | |
 | --- | --- |
-| **Signals** | Distributed traces (beta), logs, and application metrics (private alpha), plus error tracking and Core Web Vitals |
+| **Signals** | Distributed traces, logs, and application metrics (private alpha), plus error tracking and Core Web Vitals |
 | **Instrumentation** | OTLP endpoints for traces, logs, and metrics; `posthog-node` can create spans with no OpenTelemetry SDK (server-side only; spans carry the person and session) |
 | **Deployment** | PostHog Cloud |
 | **Pricing** | Usage-based per product with free tiers; [PostHog Logs](/logs) includes a 10 GB/month free tier |
@@ -179,7 +179,7 @@ PostHog also enables companies to build a **self-driving product** that acts on 
 <details>
 <summary>Can PostHog replace a full APM suite?</summary>
 
-Increasingly, yes. PostHog now covers all three OpenTelemetry signals – traces (beta), logs, and metrics (private alpha) – plus error tracking and Core Web Vitals, and ties them to tools such as [session replay](/docs/session-replay) and [product analytics](/docs/product-analytics). 
+Increasingly, yes. PostHog now covers all three OpenTelemetry signals – traces, logs, and metrics (private alpha) – plus error tracking and Core Web Vitals, and ties them to tools such as [session replay](/docs/session-replay) and [product analytics](/docs/product-analytics). 
 
 For a mature, integration-heavy infrastructure-monitoring suite with automated infra root-cause across complex microservices, **Datadog**, **New Relic**, or **Dynatrace** still go further.
 

@@ -45,6 +45,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { DottedConnection } from 'components/Code/DottedConnection'
+import { Receipt } from 'components/Code/Receipt'
 import {
     StickerTombstone,
     StickerMayor,
@@ -618,76 +619,21 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 // rendered as a $0.00 grocery receipt punchline.
 // ─────────────────────────────────────────────
 
-// Deliberate skeuomorphic object: fixed paper/ink colors (like KeyBadge) so the
-// receipt reads as a physical receipt in both light and dark mode.
-const RECEIPT_PAPER = '#f7f4ee'
-
-// A torn/zigzag paper edge. Flush along the top, sawtooth teeth pointing down.
-// preserveAspectRatio="none" stretches a fixed tooth count across the receipt width.
-function TornEdge({ className = '' }: { className?: string }) {
-    const width = 200
-    const height = 12
-    const teeth = 20
-    const step = width / teeth
-    let d = `M0 0 H${width}`
-    for (let i = 0; i <= teeth; i++) {
-        const x = (width - i * step).toFixed(1)
-        const y = i % 2 === 0 ? height : 0
-        d += ` L${x} ${y}`
-    }
-    d += ' Z'
-    return (
-        <svg
-            className={className}
-            viewBox={`0 0 ${width} ${height}`}
-            preserveAspectRatio="none"
-            aria-hidden
-            focusable="false"
-        >
-            <path d={d} fill={RECEIPT_PAPER} />
-        </svg>
-    )
-}
-
-function ReceiptRow({ label, price = '$0.00' }: { label: string; price?: string }) {
-    return (
-        <div className="flex items-baseline justify-between gap-4">
-            <span>{label}</span>
-            <span>{price}</span>
-        </div>
-    )
-}
-
 function AgentMartReceipt() {
     return (
-        <div className="mx-auto w-full max-w-xs rotate-1">
-            <div
-                className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
-                style={{ backgroundColor: RECEIPT_PAPER }}
-            >
-                <p className="m-0 text-center font-bold tracking-widest">TABLE STAKES 2026</p>
-                <p className="m-0 mb-4 text-center text-xs italic text-[#8a8272]">(yep, PostHog has that)</p>
-
-                <div className="space-y-1">
-                    <ReceiptRow label="parallel agents" />
-                    <ReceiptRow label="multi model" />
-                    <ReceiptRow label="MCP servers" />
-                    <ReceiptRow label="code diffs" />
-                    <ReceiptRow label="cloud sandboxes" />
-                    <ReceiptRow label="AI sparkles" />
-                </div>
-
-                <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
-
-                <div className="flex items-baseline justify-between gap-4 font-bold">
-                    <span>TOTAL</span>
-                    <span>$0.00</span>
-                </div>
-
-                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thanks for shopping at agent mart</p>
-            </div>
-            <TornEdge className="w-full h-3" />
-        </div>
+        <Receipt
+            title="TABLE STAKES 2026"
+            subtitle="(yep, PostHog has that)"
+            rows={[
+                { label: 'parallel agents' },
+                { label: 'multi model' },
+                { label: 'MCP servers' },
+                { label: 'code diffs' },
+                { label: 'cloud sandboxes' },
+                { label: 'AI sparkles' },
+            ]}
+            footer="thanks for shopping at agent mart"
+        />
     )
 }
 

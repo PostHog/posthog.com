@@ -34,6 +34,18 @@ This is a rough articulation of the phases a paid and "sales-sized" customer mov
 
 An account in any postsales phase can be at risk. At risk does not change the phase or reassign the account. When both a TAM and a CSM are on the account, they co-own the churn save. Otherwise the current owner runs it. Going at risk is not a reason to add a TAM.
 
+### Champions and coaches
+
+The difference between a champion and a coach is one thing. Can they make change happen inside their org, or not.
+
+A **champion** has the authority to influence or make decisions that affect PostHog. That can be as small as getting engineering time for an instrumentation change, or as large as getting a contract approved, blocking a churn, or deciding that a team adopts PostHog or a specific product. Whether they are a user, a manager, or an executive, the test is the same. When they say something should happen, it happens. A champion is not always the person who signs. When the decision sits with someone else, they have the standing to move that person.
+
+A **coach** likes PostHog, talks to you, makes introductions, and tells you what is going on inside the org, but is not in a position to make any of those changes themselves. They can tell you that a code change is needed, who owns the renewal, or that a team is looking at a competitor. They may even be a power user, but ultimately they do not have the influence or authority to control whether a team adopts a product or to sway key decisions.
+
+Enthusiasm is not the dividing line. A coach can love PostHog more than anyone else in the building and still not be a champion.
+
+This matters most when an account is expanding quickly or at risk of churn. In both cases you need to know that the person you are talking to can actually move the needle, not just relay the message. You need a champion for anything that requires the customer to act, so if an account only has coaches, the next step is always to use them to reach someone with authority, and build that person into a champion. And when you record a contact, record which one they are, with what they can and cannot decide, so the next person on the account knows who can actually move things.
+
 ## Coverage map
 
 Who covers the account at each phase. Phases run top to bottom in the order a customer moves through them; roles run across.

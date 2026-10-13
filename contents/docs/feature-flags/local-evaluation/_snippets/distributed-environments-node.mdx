@@ -31,7 +31,7 @@ When the SDK fetches flag definitions from the API, it passes a `FlagDefinitionC
 ```typescript
 interface FlagDefinitionCacheData {
   flags: PostHogFeatureFlag[]               // Feature flag definitions
-  groupTypeMapping: Record<string, string>  // Group type index to name mapping
+  group_type_mapping: Record<string, string>  // Group type index to name mapping
   cohorts: Record<string, PropertyGroup>    // Cohort definitions for local evaluation
 }
 ```

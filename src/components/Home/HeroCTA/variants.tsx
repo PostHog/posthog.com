@@ -78,7 +78,7 @@ const ClickableCommand = ({
 }) => {
     const fieldRef = useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
-    const { displayCommand, copyCommand } = buildWizardCommand({ subcommand: 'self-driving' })
+    const { displayCommand, copyCommand } = buildWizardCommand({ fullCommand: 'npx -y @posthog/wizard@latest' })
 
     const copyFromAnywhere = (event: React.MouseEvent) => {
         // Every copy passes through the button – either clicked directly, or via the forwarded click
@@ -132,7 +132,6 @@ const VariantControl = () => {
     return (
         <PlatformInstall
             schema={wizardInstallSchema}
-            selfDriving
             onCopy={() => posthog?.capture(COPY_EVENT)}
             onSecondaryAction={() => posthog?.capture(WEB_SIGNUP_EVENT)}
         />

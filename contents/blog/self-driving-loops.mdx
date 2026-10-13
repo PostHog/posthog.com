@@ -49,7 +49,7 @@ That feedback becomes a single event stream, `mcp feedback submitted`. Instead o
 - When something's above a confidence bar, it authors a report into the inbox. 
 - A PostHog task can then pick that report up and open the PR, or escalate to the right team for human input.
 
-What makes this a loop is that the the scout **checks back on things that it thinks got fixed**. It does this by keeping notes in its scratchpad about what was reported, what shipped, and validates that the fix held before considering a theme closed.
+What makes this a loop is that the scout **checks back on things that it thinks got fixed**. It does this by keeping notes in its scratchpad about what was reported, what shipped, and validates that the fix held before considering a theme closed.
 
 And it works _fast_. For example, on August 28th at 11:28 UTC, an agent working in a customer's project filed `missing_tool` feedback with `task_completed=false`. It wanted to define catalog events before any had been ingested. The MCP had `event-definition-update` but no create, so its workaround was firing one anonymous seed capture per event and then calling update. Ugly.
 

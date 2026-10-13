@@ -59,7 +59,7 @@ Once made, they should share their decision in #tell-posthog-anything and the re
 
 ### 4. Execute the change
 
-Once the decision is shared, the team lead kicks off execution by running `/org-change` in Slack and selecting the relevant change type. This creates a tracked issue with the right checklist, assigned to those involved.
+Once the decision is shared, the team lead searches Slack for **Org Change**, selects the workflow, and chooses the relevant change type. This creates a tracked issue with the right checklist, assigned to those involved.
 
 ## FAQ
 

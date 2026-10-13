@@ -43,6 +43,7 @@ import OSButton from './components/OSButton'
 import { OSQuote } from './components/OSQuote'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import PricingCalculator from './components/Pricing/PricingCalculator/Embedded'
 import { PrivateLink } from './components/PrivateLink'
 import { ProductOS } from './components/Product/ProductOS'
 import { Competitor } from './components/Products/Competitor'
@@ -111,6 +112,7 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    PricingCalculator,
     OSQuote,
     OSButton,
     Link,

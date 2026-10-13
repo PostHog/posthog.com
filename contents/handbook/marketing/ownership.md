@@ -12,32 +12,28 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. Ongoing marketing for a tool beyond its initial launch is covered by the individual PMM in the context of their product – e.g. Joe covers how you can create Experiments using the PostHog MCP.
+We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. 
 
-| Product             | PM     | PMM    | Blitzscale |
-| ------------------- | ------ | ------ | ---------- |
-| *Context warehouse* | Anna   | Lizzie | Raquel     |
-| *PostHog Desktop*   | Annika | Cleo   | Raquel    |
-| *PostHog Slack*     | Annika | Cleo → new hire | Raquel    |
-| *PostHog Web*       | Annika | Sara   | Raquel    |
-| *PostHog Research*  | n/a    | Joe    | James H    |
-| *PostHog MCP*       | n/a    | Joe    | Raquel      |
-| *PostHog CLI*       | Unassigned | Unassigned | Raquel |
+Here's how PMMs are currently assigned.
+
+- <TeamMember name="Joe Black" /> owns Lifecycle marketing, Self-driving, Conversations
+- <TeamMember name="Sara Miteva" /> owns Session Replay, Replay Vision, Logs (APM), Error Tracking
+- <TeamMember name="Cleo Lant" /> owns PostHog MCP, PostHog Slack, PostHog AI
+- <TeamMember name="Lizzie Epton" /> owns Warehouse Sources, ETL, Semantic Layer
+- <TeamMember name="Juliana Meyer" /> owns Product Analytics, MCP Analytics, AI Observability
 
 **Cross-functional areas**
 
 These are some other areas that PMMs own outside of specific products. 
 
-- **Research** – Joe
-- **Incident comms** – distributed, ask in `#team-marketing` if you need help
+- **Incident comms** – distributed, ask in `#team-developer-marketing` if you need help
 - **Lifecycle (i.e. email) & aligning with eng** – Joe
-- **Initial small launches for new tools** – Joe
 - **Startups & partnerships** – Joe
 
 <details>
-<summary>I need a product marketer, but my team hasn't been assigned one</summary>
+<summary>I need a developer marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Black" photo />. 
+Flag it in #team-developer-marketing or tag @product_marketers in Slack. For things that require customer comms, like incidents or pricing changes, we'll always help. For other things, like feature announcements, we'll help if we have capacity but will prioritize the products we've assigned above.
 </details>
 
 
@@ -50,7 +46,7 @@ You should speak to <SmallTeam slug="builder-relations" />, our resident party p
 <details>
 <summary>I want to launch my product out of beta</summary>
 
-Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
+Speak to <SmallTeam slug="developer-marketing" /> and read about [product launches](/handbook/marketing/product-announcements).
 </details>
 
 <details>
@@ -70,7 +66,7 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 <details>
 <summary>Someone wants to partner with us</summary>
 
-Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="marketing" /> know. 
+Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug="developer-marketing" /> know. 
 </details>
 
 <details>
@@ -94,7 +90,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer is interested in doing a case study with us</summary>
 
-Speak to <TeamMember name="Joe Black" />, <TeamMember name="Cleo Lant" />, or <TeamMember name="Sara Miteva" />.
+Post in the #team-developer-marketing channel.
 </details>
 
 <details>

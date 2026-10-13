@@ -28,7 +28,15 @@ You don't need to configure MCP servers for inbox sources manually. Once your re
 
 ## PostHog sources
 
-These sources are available when the matching PostHog product has data in your project.
+These sources use data from the matching PostHog products in your project.
+Enable the corresponding source or scout to receive findings in your inbox.
+
+Feature flags, web analytics, surveys, data warehouse, and data pipelines use [scouts](/docs/self-driving/scouts).
+Enable the corresponding scout and keep **Write signals to the inbox** on.
+A paused scout or a scout in [dry run](/docs/self-driving/scouts#dry-runs) does not write findings to the inbox.
+
+Endpoints sends signals directly when an execution fails or a breakdown exceeds its limit.
+These signals require an enabled Endpoints source configuration.
 
 <List
   className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
@@ -80,6 +88,48 @@ These sources are available when the matching PostHog product has data in your p
       url: "/docs/product-analytics",
       icon: "IconGraph",
       description: "Investigated anomalies from your insights.",
+      lineClamp: 2,
+    },
+    {
+      label: "Feature flags",
+      url: "/docs/feature-flags",
+      icon: "IconToggle",
+      description: "Evaluation cliffs, ghost flags, distribution shifts, and flag debt.",
+      lineClamp: 2,
+    },
+    {
+      label: "Web analytics",
+      url: "/docs/web-analytics",
+      icon: "IconPieChart",
+      description: "Channels, entry paths, and referrers that diverge from their own baseline.",
+      lineClamp: 2,
+    },
+    {
+      label: "Surveys",
+      url: "/docs/surveys",
+      icon: "IconMessage",
+      description: "Score regressions, abandonment spikes, and recurring themes in open-text answers.",
+      lineClamp: 2,
+    },
+    {
+      label: "Data warehouse",
+      url: "/docs/data-warehouse",
+      icon: "IconDatabase",
+      description: "Failed source connections, stale or stuck syncs, and materialized views that stop refreshing.",
+      lineClamp: 2,
+    },
+    {
+      label: "Data pipelines",
+      url: "/docs/cdp",
+      icon: "IconPlug",
+      description: "Destinations, transformations, batch exports, and flows where delivery stops matching the config.",
+      lineClamp: 2,
+    },
+    {
+      label: "Endpoints",
+      url: "/docs/endpoints",
+      icon: "IconBrackets",
+      description: "Runs that fail, and breakdowns that hit their limit.",
       lineClamp: 2,
     },
     {
@@ -178,6 +228,29 @@ App store and product reviews. The inbox identifies actionable feedback from use
 - Appfigures
 - AppFollow
 - Judge.me
+
+## Steer a source with guidance
+
+A source does not have to process everything the same way. You can give a source **guidance**: rules in plain language that tell the agent what matters to your team and what to skip. The agent reads the guidance when it decides which new records become signals.
+
+To add guidance, open the inbox **settings**, find the source, and click **Add guidance**. Write it like a note to a teammate. For example:
+
+```text
+- Skip issues with the `skip-self-driving` label. We scope and build those ourselves.
+- Always keep issues from members of our GitHub organization.
+- Ignore tickets about refunds. The finance team handles those.
+```
+
+For issue trackers, the agent also sees the metadata of each record, such as the labels and the author of a GitHub issue. This lets you use a label as a per-issue switch. For example, a developer who wants to build a large change themselves adds `skip-self-driving` to the issue, and PostHog does not research it or open a pull request for it. You can also do the opposite: "Only keep issues with the `self-driving` label."
+
+Some things to know:
+
+- Guidance applies from the next sync. Records that are already signals or reports do not change.
+- An AI model applies the guidance, so treat it as a strong filter, not a guarantee. If the check fails, PostHog keeps the record.
+- Not every source supports guidance yet. A source that supports it shows the **Add guidance** button on its card.
+- Agents can set guidance too. Through the [PostHog MCP](/docs/model-context-protocol), an agent can read the source with `inbox-source-configs-list` and change the `steering` key of its `config` with `inbox-source-configs-partial-update`. The update replaces `config` as a whole, so keep the other keys.
+
+To steer [scouts](/docs/self-driving/scouts) instead of sources, leave a [scout note](/docs/self-driving/scouts#steering-a-scout-with-a-note).
 
 ## What happens next
 

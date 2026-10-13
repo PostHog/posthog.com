@@ -9,12 +9,6 @@ availability:
 sourceId: Aircall
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Aircall connector syncs your call center data – calls, contacts, users, teams, numbers, and tags – into PostHog.
 
 ## Adding a data source
@@ -29,14 +23,14 @@ Once the syncs are complete, you can start using Aircall data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `calls` | Phone calls handled in Aircall | Incremental |
-| `contacts` | Contacts in your Aircall account | Incremental |
-| `users` | Agents and other users in your account | Full refresh |
-| `teams` | Teams of agents | Full refresh |
-| `numbers` | Phone numbers configured in Aircall | Full refresh |
-| `tags` | Tags used to label calls | Full refresh |
+| Table      | Description                            | Sync method  |
+| ---------- | -------------------------------------- | ------------ |
+| `calls`    | Phone calls handled in Aircall         | Incremental  |
+| `contacts` | Contacts in your Aircall account       | Incremental  |
+| `users`    | Agents and other users in your account | Full refresh |
+| `teams`    | Teams of agents                        | Full refresh |
+| `numbers`  | Phone numbers configured in Aircall    | Full refresh |
+| `tags`     | Tags used to label calls               | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

@@ -8,16 +8,9 @@ availability:
     enterprise: full
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
 import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
 With batch exports, data can be exported to Azure Blob Storage.
-
-<CalloutBox icon="IconFlask" title="Azure Blob Storage destination is in beta" type="action">
-
-The Azure Blob Storage destination is currently in `beta`. This means the configuration and features are subject to change.
-
-</CalloutBox>
 
 ## Setting up Azure Blob Storage access
 

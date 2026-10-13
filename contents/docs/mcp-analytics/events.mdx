@@ -10,17 +10,19 @@ This page is the wire-level contract for the MCP Analytics SDKs. TypeScript-only
 
 | Event name                | When it fires                                                                     | Notable extras                                                                                                                                                                                                       |
 | ------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$mcp_tool_call`          | Every `tools/call` request                                                        | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors), optionally `$mcp_intent`/`$mcp_intent_source` and `$mcp_llm_model`/`$mcp_llm_model_source` |
+| `$mcp_tool_call`          | Every `tools/call` request. In Go, a call to an unregistered tool and an `input_required` round fire the events below instead | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors), optionally `$mcp_intent`/`$mcp_intent_source` and `$mcp_llm_model`/`$mcp_llm_model_source` |
+| `$mcp_unknown_tool`       | A `tools/call` names a tool the server hasn't registered. Go SDK only.            | `$mcp_tool_name` (the requested name, redacted), and `$mcp_conversation_id` only if the agent sent a valid handle |
+| `$mcp_input_required`     | A tool ends a `2026-07-28` round by asking the client for input. Go SDK only.     | `$mcp_tool_name`, `$mcp_duration_ms`, and `$mcp_input_request_methods` (string[] of the request methods, at most 100, never their contents) |
 | `$mcp_tools_list`         | Every `tools/list` response                                                       | `$mcp_listed_tool_names` (string[] of advertised tool names), `$mcp_response` (the response envelope as sent, including `nextCursor` and the 2026-07-28 `ttlMs`/`cacheScope` directives)                             |
 | `$mcp_resources_list`     | Every `resources/list` and `resources/templates/list` request                     | `$mcp_response` (the listing as sent: names, URIs, URI templates, MIME types, `nextCursor`), `$mcp_duration_ms`, `$mcp_is_error`. `$mcp_parameters.request.method` tells the two listings apart.                          |
 | `$mcp_resource_read`      | Every `resources/read` request                                                    | `$mcp_resource_name` (the URI, with credentials redacted), `$mcp_parameters`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors). The resource body is never captured.                |
 | `$mcp_initialize`         | Every `2025-11-25` client/server handshake                                        | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version`, `$mcp_protocol_version`                                                                                                        |
 | _(your event name)_       | A call to `analytics.capture({ event, properties })`                              | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events).                                        |
-| `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked (`reportMissing: true`)              | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability).                                                                                     |
+| `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked                                      | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability).                                                                                     |
 | `$identify`               | `identify()` returns a new identity for a session                                 | `$set` populated from the identity's `properties`                                                                                                                                                                    |
 | `$exception`              | Sibling event whenever a tool call or resource request errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event                                                                                                                              |
 
-Both SDKs capture resource events. The event enum reserves `$mcp_prompts_list` and `$mcp_prompt_get`, but the wrappers do not emit these events yet. Prompt payloads pass through unchanged.
+The TypeScript, Python, and Ruby SDKs capture resource events. The Go SDK doesn't yet. The Go SDK sends neither `$mcp_tools_list` nor `$mcp_initialize`. Only the Ruby SDK emits `$mcp_prompts_list` and `$mcp_prompt_get`. Prompt payloads pass through unchanged.
 
 ## Core properties
 
@@ -28,27 +30,27 @@ Present on most `mcp_*` events.
 
 | Wire key                 | Type                                | Source                                                                                                                                                                                                |
 | ------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). See [session resolution](#session-resolution) below. |
-| `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects.                                                                                                 |
+| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). Go also emits `ses_<UUIDv7>` for a session it generates. See [session resolution](#session-resolution) below. |
+| `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects. The Go SDK's `$mcp_unknown_tool`, `$mcp_input_required`, and `$mcp_missing_capability` events don't carry it.                                                                                                 |
 | `$mcp_resource_name`     | string                              | Tool or prompt name, or on resource events the resource URI with its credentials redacted (see [Privacy](/docs/mcp-analytics/privacy))                                                                                                                                                                        |
-| `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`                                                                                                                                            |
+| `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`. The Go SDK also sets it on `$mcp_unknown_tool` and `$mcp_input_required`                                                                                                                                            |
 | `$mcp_tool_description`  | string                              | The tool's `description` at the moment of the call. Cached from `tools/list` and (for `McpServer`) seeded from `_registeredTools`. Only on `$mcp_tool_call` and the paired `$exception` event.        |
 | `$mcp_tool_category`     | string                              | Your own grouping label for the tool, when you set one. Only on `$mcp_tool_call` and the paired `$exception` event.                                                                                    |
 | `$mcp_listed_tool_names` | string[]                            | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called.             |
 | `$mcp_duration_ms`       | number (ms)                         | Wall-clock duration of the tool call or resource request                                                                                                                                                                  |
 | `$mcp_is_error`          | boolean                             | True if the handler threw or returned `isError: true`                                                                                                                                                    |
-| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. Override it with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Use it to group failures without joining `$exception` events. |
+| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. In Go, the default is the package-qualified Go type, such as `fs.PathError`. Typed `mcp.AddTool` errors keep their type, plain errors give `Error`, and the Go adapter has no override. Override it with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Use it to group failures without joining `$exception` events. |
 | `$mcp_error_message`     | string                              | The failed call's error message, truncated and passed through the same redaction as `$mcp_parameters` and `$mcp_response`. Only set when `$mcp_is_error` is true.          |
-| `$mcp_server_name`       | string                              | `server._serverInfo.name`                                                                                                                                                                             |
-| `$mcp_server_version`    | string                              | `server._serverInfo.version`                                                                                                                                                                          |
-| `$mcp_client_name`       | string                              | The calling client as it reports itself. Resolved per request, field by field, through the MCP SDK v2 request envelope, then `params._meta`, then the server's own `getClientVersion()`.                |
+| `$mcp_server_name`       | string                              | `server._serverInfo.name`. Go sets it only from `WithServerInfo`.                                                                                                                                     |
+| `$mcp_server_version`    | string                              | `server._serverInfo.version`. Go sets it only from `WithServerInfo`.                                                                                                                                  |
+| `$mcp_client_name`       | string                              | The calling client as it reports itself. Resolved per request, field by field, through the MCP SDK v2 request envelope, then `params._meta`, then the server's own `getClientVersion()`. On a `2025-11-25` stateless server, they're absent only when the transport can't return or replay the session token, such as on the legacy `createMcpHandler` path. Go reads only the session's `initialize` params. On `2026-07-28`, go-sdk v1.8.0 fills them from the request `_meta`. On a `2025-11-25` stateless Go server, they're absent. |
 | `$mcp_client_version`    | string                              | Same resolution as `$mcp_client_name`.                                                                                                                                                                |
-| `$mcp_client_user_agent` | string | The client's raw `User-Agent`. It can distinguish clients that share a `clientInfo.name`, such as Claude Code CLI and Agent SDK. Available only on HTTP transports. |
-| `$mcp_vendor_client`     | string                              | The calling client's vendor client header, captured raw. HTTP transports only. PostHog resolves this and the user agent into friendly product labels at query time, so labels keep improving without an SDK upgrade. |
+| `$mcp_client_user_agent` | string | The client's raw `User-Agent`. It can distinguish clients that share a `clientInfo.name`, such as Claude Code CLI and Agent SDK. Available only on HTTP transports. Go reads only `User-Agent`, redacts credential shapes, and caps it at 256 bytes. |
+| `$mcp_vendor_client`     | string                              | The calling client's vendor client header, captured raw. HTTP transports only. Go reads only `X-Anthropic-Client`, redacts credential shapes, and caps it at 256 bytes. PostHog resolves this and the user agent into friendly product labels at query time, so labels keep improving without an SDK upgrade. |
 | `$mcp_protocol_version` | string | The request's MCP revision, such as `2025-11-25`. Resolution order: v2 request envelope, `params._meta`, `MCP-Protocol-Version` header, then server accessors. On `2026-07-28`, each request declares its revision, so one session can contain multiple revisions. Use it to compare adoption, errors, and latency by revision. |
 | `$mcp_intent`            | string                              | From the `context` argument the agent passed, or from your `intentFallback` callback. See [Capturing agent intent](/docs/mcp-analytics/intent).                                                       |
 | `$mcp_intent_source`     | `"context_parameter" \| "inferred"` | Tells you which path produced the intent. Absent when no intent was captured.                                                                                                                         |
-| `$mcp_llm_model` | string | The model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default in both SDKs. Missing, blank, and `unknown` values are omitted. Both sources are unverified. |
+| `$mcp_llm_model` | string | The model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default. Missing, blank, and `unknown` values are omitted. Both sources are unverified. |
 | `$mcp_llm_model_source` | `"client_metadata" \| "self_reported"` | How the model identifier was obtained. Recognized client metadata takes priority over self-report. |
 | `$mcp_parameters` | object | Sanitized request arguments. SDK-owned analytics arguments are removed before dispatch. Arguments declared by the application remain application data. See [Privacy & redaction](/docs/mcp-analytics/privacy). |
 | `$mcp_response`          | object                              | Sanitized tool result, or the listing on `$mcp_tools_list` and `$mcp_resources_list`. Never a resource body.                                                                                                                                                                                 |
@@ -61,6 +63,8 @@ The SDK checks these sources in order and uses the first match:
 1. An accepted agent-provided `conversation_id`, when [conversation IDs](/docs/mcp-analytics/conversation-id) are enabled.
 2. A session ID carried by the request on `2025-11-25`.
 3. The server instance's session ID, which rotates after 30 minutes of inactivity.
+
+In Go, source 3 applies only to sessionless one-client connections (stdio and in-memory). A stateless HTTP request with neither a handle nor a session header gets a new ID per request.
 
 `2026-07-28` has no protocol sessions, so only sources 1 and 3 apply. Conversation handles support correlation across reconnects, restarts, and server instances. The SDK derives the session ID deterministically, without a salt. Separate pods therefore derive the same session ID from the same handle.
 
@@ -76,7 +80,15 @@ Requests through a vendor's gateway identify the gateway, not necessarily the or
 
 A call without these properties is unattributed. An unrecognized client appears as "Other".
 
-If you see mostly "Other", check whether these properties contain values. On HTTP transports, the SDK captures headers automatically. [Custom dispatchers](/docs/mcp-analytics/custom-servers#attributing-the-caller) must pass them explicitly. Stdio and in-memory transports have no headers, so only the client name is available.
+If you see mostly "Other", check whether these properties contain values. On HTTP transports, the SDK captures headers automatically. Custom dispatchers must pass them explicitly, as in the [Python example](/docs/mcp-analytics/installation/python#custom-dispatchers). In Go, set `ClientUserAgent` and `VendorClient` on `ToolCall`. Stdio and in-memory transports have no headers, so only the client name is available.
+
+## Model capture
+
+MCP has no standard field for the calling model. The SDK reads recognized client metadata first, then the agent's self-reported `llm_model` argument, which the SDK adds to compatible tool schemas. Events include `$mcp_llm_model` and `$mcp_llm_model_source` (`"client_metadata"` or `"self_reported"`).
+
+The recognized metadata field is Codex's `params._meta["x-codex-turn-metadata"].model`. The Go SDK reads `io.modelcontextprotocol/aiInvocation` first, then `x-codex-turn-metadata`. Other clients can pass the `llm_model` argument. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted, and reasoning effort isn't captured.
+
+Both sources are unverified client input. Use them to compare tool quality, latency, and errors by model, not for billing or security decisions. To turn model capture off, see the configuration on your [language's installation page](/docs/mcp-analytics/installation).
 
 ## Exception properties
 
@@ -88,6 +100,8 @@ Present on `$exception` events emitted alongside any failed tool call. The SDK r
 | `$exception_level` | Severity, always `"error"`.                                                                                                                                                                                                               |
 
 Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_*` (including `$mcp_client_user_agent` and `$mcp_vendor_client`), `$mcp_protocol_version`, and the model properties when captured.
+
+In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace, and no user agent, vendor client, or model properties.
 
 <CalloutBox icon="IconInfo" title="Symbolicating minified MCP servers" type="fyi">
 
@@ -104,6 +118,8 @@ Set on `$identify` events when `identify()` returns a user.
 | (any) | Keys of the identity's `properties` are written to `$set` (e.g. return `properties: { name, email }` to set a person's name and email) |
 
 The SDK sends `$set` to update the person profile. PostHog does not retain `$set` on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
+
+In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`, not on a `$identify` event. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
 
 ## Groups (`$groups`)
 

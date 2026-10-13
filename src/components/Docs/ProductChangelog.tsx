@@ -36,6 +36,7 @@ const productConfigMap: Record<string, ProductConfig> = {
     'posthog ai': { topic: 'PostHog AI', teams: ['posthog ai'] },
     endpoints: { topic: 'endpoints' },
     logs: { topic: 'logs', teams: ['apm'] },
+    metrics: { topic: 'metrics', teams: ['apm'] },
     'customer analytics': { teams: ['customer analytics'] },
 }
 
