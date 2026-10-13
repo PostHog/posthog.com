@@ -1146,6 +1146,10 @@
             "destination": "/teams/self-driving"
         },
         {
+            "source": "/teams/agents",
+            "destination": "/teams/self-driving"
+        },
+        {
             "source": "/tutorials/nps-survey",
             "destination": "/templates/nps-survey"
         },
