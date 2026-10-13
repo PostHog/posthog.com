@@ -8,29 +8,33 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-GitHub repositories let Business Knowledge read repositories you select as context when it answers a question. It searches file names and the README, then reads a file. It doesn't index the code, and it doesn't search inside file contents.
+Connect GitHub repositories so answers can use files that live there, such as a handbook or docs written in Markdown. Business Knowledge doesn't index the code. It searches file names and README text, and then reads the file it picks.
 
-Connect a repository in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). The setting is shown when GitHub repositories are enabled for your project.
+GitHub repositories have their own beta flag. If you don't see **GitHub repositories** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings), they aren't enabled for your project yet.
 
-The list belongs to the environment where you save it. An environment is a separate data space in a project, such as production or development. Each environment keeps its own repository list.
-
-## How repositories are referenced
-
-Document search runs first. If that search returns nothing, Business Knowledge searches the file names and README text of the repositories you saved.
-
-It matches file names and identifiers, not a full sentence. Each result includes the GitHub description. When that description says the repository holds a handbook or docs, Business Knowledge searches that repository for those words, then reads the file.
-
-The read returns the file text and a permalink. The Playground shows this as **Searched repositories** and **Read file**.
-
-## Connect
+## Connect a repository
 
 1. [Install the PostHog GitHub App](https://app.posthog.com/settings/project-integrations) if it isn't installed yet.
 2. Open [**Business Knowledge** settings](https://app.posthog.com/business-knowledge/settings).
 3. Under **GitHub repositories**, connect the installation.
-4. Add repositories and choose **Save repositories**.
+4. Add up to 100 repositories and choose **Save repositories**.
 
-You can select up to 100 repositories.
+The list belongs to the environment where you save it. An environment is a separate data space in a project, such as production or development, and each one keeps its own repository list.
+
+## How repositories are referenced
+
+Answers search your other sources first. Only when that search finds nothing do they search your repositories.
+
+Repository search matches file names and README text, not the text inside files. Each result includes the repository's GitHub description, which helps the agent pick the right repository. When it finds a likely file, it reads the file and links to it.
+
+In the [Playground](/docs/business-knowledge/playground), these steps show as **Searched repositories** and **Read file**.
+
+## Help answers find the right file
+
+- Give each repository a GitHub description that says what it holds, such as "Company handbook".
+- Name files after what they cover. `refund-policy.md` is easy to find, `notes-3.md` isn't.
+- Keep the README up to date with a map of where things are.
 
 ## Disconnect
 
-**Disconnect** stops Business Knowledge from reading those repositories. The GitHub App stays installed.
+Choose **Disconnect** to stop Business Knowledge from reading those repositories. The GitHub App stays installed.

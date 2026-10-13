@@ -1,0 +1,121 @@
+---
+title: Add and manage sources
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+A source is anything Business Knowledge reads to answer questions: pasted text, a web page or site, or an uploaded file. PostHog splits each source into chunks of about 1,200 characters, and search returns the chunks that match a question.
+
+To add one, open [**Business Knowledge**](https://app.posthog.com/business-knowledge) and choose **Add source**.
+
+The sources list shows how many sources are ready and how many chunks are indexed. You can search it by name or URL, filter by type, or filter by **Human** or **Learned** to separate the sources you added from the ones PostHog [learned from support](/docs/business-knowledge/learn-from-support).
+
+## Where sources live
+
+| Item | Where it lives |
+| --- | --- |
+| Sources you add, learned sources, and Playground chats | The project. Every environment in the project can use them. |
+| The Learn from support setting | The project |
+| GitHub repositories | Each environment. A child environment doesn't inherit its parent's list. |
+
+## Add text
+
+Paste a policy, an FAQ, or any other text, and give the source a name. Text can be up to 1 MB, so split a longer document into more than one source.
+
+When the text changes, edit the source. Saving replaces the old chunks, but an agent that already read the old text keeps it for the rest of that conversation.
+
+## Add a URL
+
+Paste a public `http` or `https` URL and choose how PostHog reads it:
+
+- **Single page** fetches that one page.
+- **Sitemap.xml** reads the sitemap at that URL, or at `/sitemap.xml` on the same site, and indexes each page it lists.
+- **Same-origin crawl** follows links from that page to other pages on the same site, and stays under the page's path. Start at the site root to cover the whole site.
+
+PostHog can't read a private or internal address. If it can't reach the URL, it shows `URL is not reachable from this environment.`
+
+The crawler follows `robots.txt` and identifies itself as `PostHog-BusinessKnowledge`. If your site blocks crawlers, allow this user agent.
+
+### Limit what a crawl reads
+
+- **Max pages** defaults to 200, and can be up to 5,000.
+- **Max depth** sets how many links a same-origin crawl follows from the first page. It defaults to 2, and can be up to 5.
+- **Skip paths** leaves out matching pages. Put one pattern per line, or separate patterns with commas. `*` matches any text, so `/docs/private/*` skips everything under `/docs/private/`.
+- **Include globs**, under **Advanced: override include scope**, set which paths the crawl covers. Leave them empty to cover only the path of the URL you entered. For example, `/docs/support` covers `/docs/support/*` but not `/docs/support-center`.
+
+PostHog skips any page larger than 10 MB.
+
+## Upload a file
+
+Upload a PDF, DOCX, Markdown, CSV, or plain text file of up to 50 MB. PDFs can have up to 2,000 pages, and PostHog keeps only the first 10,000 rows of a CSV.
+
+PostHog keeps the text from the file, not the file itself. To change the content, delete the source and upload the new file.
+
+## Refresh a URL source on a schedule
+
+A URL source can refresh every hour, every 6 hours, every day, or every week. With **Manual only**, PostHog fetches the source when you add it, and again only when you choose **Refresh**.
+
+Changing the interval doesn't fetch the source immediately. Changing the URL or the crawl settings does.
+
+If a refresh fails, the source keeps its previous text and the row shows **refresh failed**. Answers continue to use the previous text.
+
+Text and file sources don't refresh, because PostHog has no place to fetch them from.
+
+## Include a source in every reply
+
+Turn on **Always include in replies** for guidance that every answer must follow, such as your tone of voice or a company policy. PostHog includes the source even when it doesn't match the question. The source still has to pass the content check.
+
+These sources can add up to 20,000 characters to a reply in total. PostHog leaves out anything past that limit.
+
+## Check a source's status
+
+| Status | Meaning |
+| --- | --- |
+| **pending** | Waiting to start. PostHog processes one source per project at a time. |
+| **processing** | PostHog is fetching or crawling the source. |
+| **indexing** | Keyword search works. Semantic search is still building, which can take up to an hour. |
+| **ready** | Keyword and semantic search both work. |
+| **error** | The source failed. Open it to see why. |
+| **disabled** | A newer learned answer replaced this learned source. PostHog keeps it, but answers don't use it. |
+
+A source can also show **unsafe content** next to its name. See [How content checks work](#how-content-checks-work).
+
+## How content checks work
+
+PostHog checks every document before answers can use it, and search leaves out a document until its check passes. The check needs [AI data processing approved](/docs/business-knowledge/requirements) for the organization, so until then, search returns nothing from your sources.
+
+On a URL source, **Indexed pages** shows each page as **safe**, **unsafe**, or **pending**. Search uses only safe pages. An unsafe page stays in the list, and the source shows **unsafe content**.
+
+## Edit or delete a source
+
+Open a source to change it:
+
+| Source type | What you can change |
+| --- | --- |
+| Text | The name and the text |
+| URL | The name, URL, crawl settings, refresh schedule, and **Always include in replies**. Choose **Refresh** to fetch it now. |
+| File | The name and **Always include in replies**. To replace the file, delete the source and upload it again. |
+| Learned | Edit or delete it. See [Learn from support](/docs/business-knowledge/learn-from-support). |
+
+Deleting a source removes it and its chunks. PostHog records the deletion in the activity log.
+
+## Limits
+
+| Limit | Value |
+| --- | --- |
+| Sources you add | 500 per project |
+| Learned sources | 10,000 per project |
+| Chunks | 250,000 per project |
+| Pasted text | 1 MB |
+| Uploaded file | 50 MB |
+| One fetched page | 10 MB |
+| Pages in one URL source | 5,000 (default 200) |
+| Same-origin crawl depth | 5 (default 2) |
+| PDF pages | 2,000 |
+| CSV rows kept | 10,000 |
+| Text from **Always include in replies** sources | 20,000 characters in total |
