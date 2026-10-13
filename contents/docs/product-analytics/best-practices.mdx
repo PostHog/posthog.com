@@ -168,7 +168,7 @@ The filter to add depends on the traffic you want to exclude:
 - **Team members who log in** - Add the [person property](/docs/product-analytics/person-properties) `email` with **doesn't end with** `@yourcompany.com`. This only matches people you [identify](/docs/product-analytics/identify), because [anonymous visitors](/docs/data/anonymous-vs-identified-events) have no email.
 - **Local, staging, and preview sites** - Add the [event property](/docs/data/events#event-properties) **Host** with **doesn't contain**, and enter a value such as `localhost` or `staging.yourapp.com`. Host includes the port, such as `localhost:3000`.
 - **An office or VPN** - Add the event property **IP address** with **doesn't equal**, and enter the IP address. This needs an IP address that doesn't change, and it doesn't work if your project [discards client IP data](/docs/privacy/data-collection#ip-data-capture).
-- **Your own browser** - Mark the browser as internal from your code, as described below. This also works for anonymous visits, such as when you browse your own website.
+- **Your own browser** - Exclude it with a method call, as described below. This also works for anonymous visits, such as when you browse your own website.
 
 ### Exclude your own browser
 
