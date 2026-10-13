@@ -141,9 +141,9 @@ autoresearch              v551, 17 bundled files
 └── sign_and_push.sh
 ```
 
-*One skill, 551 versions, 17 bundled files, and five months of a product taking shape.*
+*The skill at the height of the stack: 551 versions, 17 bundled files, and five months of a product taking shape.*
 
-The skill started on April 27 as a design spec. Today it's on version 551 with 17 bundled files:
+The skill started on April 27 as a design spec. At the height of the stack, it had 17 bundled files:
 
 - `design.md` is the spec, including the trust boundaries, the open questions, the things we ruled out, and a decision log. The first rule in the skill body is to check that log before reopening anything, because settled questions stay settled.
 - `TODO.md` is the backlog, split into items that fold into the current stack, items that wait until it lands, and items blocked on a call from me. PRs and review replies cite them by id.
@@ -153,6 +153,8 @@ The skill started on April 27 as a design spec. Today it's on version 551 with 1
 - Plus `architecture.md` with the system diagrams, a `HANDOVER.md` that every session overwrites, a changelog, and a handful of scripts for slicing and replaying layers of the stack.
 
 When a teammate or an agent picks up a layer of that stack, they don't need me. They load the skill, read the handover and the backlog, and start. When a reviewer asks "why did you do it this way?", the answer is in the decision log with a date. When I come back to it after two weeks on something else, the skill knows more about where I left off than I do.
+
+The stack has since landed, and I've shipped autoresearch internally for dogfooding. Now the thing is built, I've refactored the skill into a more typical project tracker, like `self-driving-work` above. The stack-era files are gone from the latest version, but they're still in the version history if anyone needs them.
 
 I've tried to run projects this size out of a GitHub issue, a Notion doc, and a very long Slack thread. None of them survived contact with five months and several hundred agent sessions. This did.
 
@@ -261,7 +263,7 @@ Yes, I have skills that maintain skills. I did warn you.
 
 This one surprised me. `andy-hogs-2026q4` is my draft of Hopes, Obstructions, Growth, and Sneak attacks for our quarterly planning.
 
-And `andy-blogs` is the skill that tracked this post. It has one file per post, with the argument, the sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, and this post is about skills). It's on version 8. This paragraph is in its changelog.
+And `andy-blogs` is the skill that tracked this post. It has one file per post, with the argument, the sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, and this post is about skills). It's on version 10. This paragraph is in its changelog.
 
 Neither of these is a set of instructions. They're documents I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
 
