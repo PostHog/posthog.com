@@ -280,11 +280,11 @@ export default function CountriesWeHireIn({
             if (restriction) {
                 const icon = restriction.reason === 'contractors' ? '' : xIcon
                 const marginStyle = restriction.reason === 'contractors' ? '' : 'margin-left: 28px;'
-                return `${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
+                return `<div class="not-prose" style="color: #000;">${icon}<strong>${name}</strong><br/><span style="${marginStyle}">${
                     restriction.reasonLabel ?? reasonLabels[restriction.reason]
-                }</span>`
+                }</span></div>`
             }
-            return `${checkIcon} We hire from ${name}!`
+            return `<div class="not-prose" style="color: #000;">${checkIcon} We hire from ${name}!</div>`
         })
 
         polygonSeries.mapPolygons.template.states.create('hover', {
