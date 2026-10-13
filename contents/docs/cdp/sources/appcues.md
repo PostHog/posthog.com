@@ -11,8 +11,6 @@ sourceId: Appcues
 
 The Appcues connector syncs your experience settings, segments, and tags from [Appcues](https://www.appcues.com) into the PostHog [data warehouse](/docs/data-warehouse). Appcues is a user onboarding and product adoption platform.
 
-> **Note:** This source is currently in **Alpha**. If you encounter any issues, please report them.
-
 ## Prerequisites
 
 You need an Appcues account with API credentials. To create them:
