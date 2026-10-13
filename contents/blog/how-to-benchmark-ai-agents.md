@@ -148,7 +148,13 @@ Next, after we figure out what is good, we need to make it work and stay objecti
 
 The surprisingly nasty problem you notice when you want to benchmark multiple models against real data is that they learn about each other pretty fast and try to piggyback. This can come from [LLM traces](/docs/ai-observability/traces), DB queries, or any other logs the agentic run generates.
 
-For results to reflect the model's quality, make sure state isn't leaking. With multi-step agents that simulate human-agent conversation, state leaks into places normal test runners don't even check.
+Here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
+
+> **Illustration placeholder**
+>
+> Run B12 retrieving shared memory saved by Run B4
+
+For results to reflect the model's quality, we need to make sure state isn't leaking. With multi-step agents that simulate human-agent conversation, state leaks into places normal test runners don't even check.
 
 You can isolate state in multiple ways, including three approaches we tested.
 
@@ -168,17 +174,9 @@ The downsides are clear: you need to clean up the DB and logs after each run, an
 
 If your agent doesn't generate meaningful artifacts beyond the output, you can probably say you don't care and run multiple variants at the same time anyway. Unironically, I bet plenty of cases could work, and it speeds up the benchmark a lot.
 
-Instead, I'll show the cases where it doesn't.
+Though, as the B4/B12 example above showed, the results of such runs are highly questionable because the grading gets contaminated. A fast model like Luna could overperform by copying Opus's homework.
 
-Back to scouts, here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
-
-> **Illustration placeholder**
-> 
-> Run B12 retrieving shared memory saved by Run B4
-
-As you could've guessed, the results of such runs are highly questionable because the grading gets contaminated. A fast model like Luna could overperform by copying Opus's homework.
-
-If the agent decides not to cheat, the shared state could cause grading to fail anyway. For example, an agent could decide to honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely.
+Funnily enough, if the agent decides not to cheat, the shared state could cause grading to fail anyway. For example, an agent could decide to honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely.
 
 > **Illustration placeholder**
 > 
