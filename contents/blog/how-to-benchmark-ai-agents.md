@@ -26,10 +26,6 @@ What doesn't make it easier is that agents cheat. They search for leaked context
 
 In this post, I'll explain how we benchmark our agents, what we learned, and where we messed up (so you don't need to), with links to real PRs. I'll focus on agents for data research and code review, since we do a lot of that as part of [self-driving](/self-driving) and 2.4 million+ agentic runs we spawned.
 
-> **Illustration placeholder**
-> 
-> Plan of the article
-
 ---
 
 ## 1. How to define criteria
