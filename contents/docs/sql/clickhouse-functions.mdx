@@ -162,6 +162,8 @@ SELECT lower(hex(SHA1('abc')))
 
 `SHA1` accepts one argument and returns `NULL` for a `NULL` input. It hashes UTF-8 bytes without normalizing Unicode.
 
+In JSON query responses, binary values that cannot be decoded as UTF-8 are encoded as Base64. This does not change the bytes used inside SQL expressions. Use `lower(hex(SHA1(value)))` when you need a consistent hexadecimal result.
+
 To calculate the hash used for feature flag percentage bucketing, take the first 60 digest bits and divide by `2^60 - 1`:
 
 ```sql
