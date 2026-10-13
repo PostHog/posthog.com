@@ -52,6 +52,8 @@ For accounts in bucket 2 we have region tags which are <PrivateLink url="posthog
 - **NA Team**: North America, South America, Oceania
 - If an account is flagged as multi region or there is no explicit tag review these and make a decision.
 
+When you assign a CSM to one of these accounts, remove the `csm handover needed` or `csm overlay needed` tag so the account leaves the queue.
+
 ### Onboarding
 
 The Onboarding team operates at scale, supporting hundreds of customers whose MRR falls below the TAM/CSM threshold. As a result, the number of customers in the program, as well as the ARR represented, can fluctuate from month to month. The team is currently focused on customers whose first bill is forecasted at $500+ MRR. Its north star metric is maintaining 90% logo retention through customers’ first three months.

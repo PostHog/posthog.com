@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We track customer health in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts). Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
+We track customer health in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently accounts with an assigned owner contacted us, see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 > We can't yet see historic trends of customer health, because the score is a materialized view that is rebuilt each day.
 
@@ -24,9 +24,9 @@ Each account in Customer Analytics has these properties:
 
 ### Account health dashboard
 
-The [Account health dashboard](https://us.posthog.com/project/2/dashboard/2201038) is the overview and deep dive for one account. To open it:
+The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> is the overview and deep dive for one account. To open it:
 
-1. Open the account in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts).
+1. Open the account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>.
 2. Click the `Health dashboard` link in the account's properties.
 
 The link sets the `organization_id` variable for you. You can also open the dashboard directly and type an organization ID into the variable at the top. Only paying or trialing accounts have a score, so only those accounts have a link.
@@ -38,6 +38,7 @@ The dashboard shows:
 - **Stickiness inputs:** pipelines, Replay Vision scanners, scouts, evals, and MCP use.
 - **Weekly active people by product:** the 12-week trend behind the engagement score.
 - **Weekly MCP use:** people who use the MCP each week, compared with calls from agents.
+- **Relationship score:** the [automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only accounts with an assigned CSM, TAM, or AE have this data.
 
 ### The `account_health_scores` view
 
@@ -87,7 +88,7 @@ Two accounts at 6.5 overall can be completely different problems. Always read th
 
 ### Why 61.5 / 38.5
 
-The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score`. This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
+The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score` (see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score)). This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
 
 ## How stickiness is measured
 
@@ -181,9 +182,72 @@ An account showing `e_session_replay = 0` deserves a conversation this week. One
 
 Engagement compares current activity to the account's own historical median, but real usage is noisy: holidays, sprint cycles, one person on leave. An account only needs to hold **85% of its own baseline** to score a full 10. Below that, the score falls off proportionally. This stops the score flapping on ordinary week-to-week variance.
 
+## Automated relationship score
+
+The `Relationship score` property is a score from 0 to 100 that we calculate each day. It measures how recently the customer contacted us. It does not measure how happy the customer is: a high score means that somebody talks to us, not that the conversation goes well.
+
+Every account with an assigned CSM, TAM, or account executive (AE) in Customer Analytics gets a score. If an account has more than one, the owner is the CSM, then the TAM, then the AE.
+
+Each account in Customer Analytics has these properties:
+
+| Property | What it tells you |
+| --- | --- |
+| `Relationship band` | The band of the score (see below). Read this first. It shows `Unknown` when the account has no signal. |
+| `Relationship score` | The score, 0–100. |
+
+### Signals
+
+| Signal | Weight | What counts |
+| --- | --- | --- |
+| Slack | 30 | Inbound messages in the customer's shared Slack channel, and support tickets that come from Slack. Messages from bots are not counted. |
+| Support tickets | 25 | Support tickets from the customer that do not come from Slack. |
+| Meetings | 25 | Gong calls linked to the account, and confirmed past meetings on the account in Customer Analytics. |
+| Email | 25 | Inbound email from the customer, captured from Gmail in Customer Analytics. Email from PostHog addresses and no-reply addresses is not counted. |
+
+Each customer contact counts in one signal only. For example, a Slack message counts under Slack, and not again under support tickets.
+
+### How the score is calculated
+
+Each signal gets a sub-score from 0 to 100:
+
+```
+sub_score = min(max(100 − days since last contact + volume bonus − penalty, 0), 100)
+```
+
+- **Volume bonus:** +5 points for each contact in the last 90 days, up to +20. Slack gets no volume bonus, because we cannot count all Slack messages.
+- **Penalty:** the support tickets sub-score loses 15 points for each high-priority ticket from the last 90 days that is still open.
+- **Ticket dates:** a ticket counts from the customer's last message if we have not read it yet. Otherwise it counts from when the customer opened the ticket.
+
+The relationship score is the weighted average of the signals that the account has. A missing signal does not lower the score. For example, an account with no Gong calls and no calendar meetings gets a score from the other three signals.
+
+| Band | Score |
+| --- | --- |
+| Strong | 80 and above |
+| Healthy | 60 to 79 |
+| Cooling | 40 to 59 |
+| Cold | 20 to 39 |
+| Dormant | Below 20 |
+| Unknown | No signal |
+
+### Where to see the data
+
+The **Relationship score** section of the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> shows:
+
+- **Relationship summary:** the score, the band, the number of signals, and the owner.
+- **Relationship signals:** for each signal, the last contact, the days since, the contacts in the last 90 days, the sub-score, and its contribution. The contributions add up to the score.
+- **Weekly inbound emails and meetings:** the last 12 weeks. Slack and support tickets are not in this chart, because the score uses only their last contact date.
+
+The full breakdown is in the `csm_relationship_scores` view in the PostHog Data Warehouse.
+
+### Limits
+
+- **Contact is not sentiment.** A customer who sends angry messages every day gets a high score. Read the messages before you decide that a relationship is healthy.
+- **Few signals make a weak score.** An account with only one signal can move a lot from one contact. Check the number of signals on the dashboard.
+- **Old scores stay.** The property sync never clears a value. If an account loses all its signals, `Relationship score` keeps its last number, but `Relationship band` changes to `Unknown`.
+
 ## CSM relationship
 
-The health score above is computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
+The health score and the relationship score above are computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
 
 It records the relationship *you personally* have with the account. It does not measure how the account is doing from a usage/spend/metrics standpoint. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading in a product-led book, "assigned to you" and "known to you" are different things. 
 
