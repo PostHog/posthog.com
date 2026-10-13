@@ -132,7 +132,7 @@ A TAM is added on top of CSM coverage where an opportunity qualifies. At the sta
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics. When the TAM is assigned, remove the `tam overlay needed` tag.
 
 To request CSM coverage, add:
 
@@ -147,7 +147,7 @@ Every $20k+ account should have a CSM. At the start of each quarter, CSM team le
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
 3. **CSM books outside the current target** to identify which accounts should be rebalanced
 
-For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics and removes the `csm overlay needed` or `csm handover needed` tag.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
