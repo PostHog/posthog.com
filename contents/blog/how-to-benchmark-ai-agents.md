@@ -1,23 +1,22 @@
 ---
-
-title: "Do you even bench? How to benchmark your agents at scale against real data"  
-date: 2026-10-12  
-rootPage: /blog  
-sidebar: Blog  
-showTitle: true  
-hideAnchor: true  
-author:  
-\- alex-lebedev  
-category: Engineering  
-tags:  
-\- Inside PostHog  
-\- Engineering  
-\- AI  
-\- AI observability  
-seo:  
-metaTitle: "How to benchmark AI agents at scale against real data"  
-metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
-----------------------------------------------------------------------------------------------------------------------------------------------------
+title: "Do you even bench? How to benchmark your agents at scale against real data"
+date: 2026-10-12
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - alex-lebedev
+category: Engineering
+tags:
+    - Inside PostHog
+    - Engineering
+    - AI
+    - AI observability
+seo:
+    metaTitle: "How to benchmark AI agents at scale against real data"
+    metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
+---
 
 We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most of the time*, but it's way too much money to let them run unattended.
 
