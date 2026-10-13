@@ -22,6 +22,8 @@ We spend 2 trillion+ LLM tokens per month, with the lion's share going to runnin
 
 New models keep popping off like mushrooms, and popular LLM benchmarks don't give us nearly enough info. We can "vibe" how well model X or Y will perform in our stack, but it often leads to worse results, as our tasks are pretty specific.
 
+> A benchmark is a repeatable set of tasks to score how models or skills perform. For example, we can use several models to code review the same PR and check how many known bugs they catch, how long they take, and what they cost. That helps us decide whether a new model or skill is actually an improvement.
+
 What doesn't make it easier is that agents cheat. They search for leaked context, memory, and DB query logs – to do as little work as possible. Can't blame them, but it makes creating your own benchmarks harder than you would expect.
 
 In this post, I'll explain how we benchmark our agents, what we learned, and where we messed up (so you don't need to), with links to real PRs. I'll focus on agents for data research and code review, since we do a lot of that as part of [self-driving](/self-driving) and 2.4 million+ agentic runs we spawned.
