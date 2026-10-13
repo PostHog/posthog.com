@@ -90,8 +90,11 @@ const postQuery = (permalink: string) =>
         { encodeValuesOnly: true }
     )
 
+const isRetryableStatus = (status: number) => status === 429 || status >= 500
+
 const fetchJson = async (url: string) => {
     const res = await fetch(url)
+    if (isRetryableStatus(res.status)) throw new Error(`Request failed (${res.status})`)
     return res.ok ? res.json() : null
 }
 
@@ -119,15 +122,16 @@ const parseReference = (href: string): Reference | null => {
         return null
     }
     if (!SITE_HOSTNAMES.includes(url.hostname)) return null
+    const queryAndHash = `${url.search}${url.hash}`
 
     const profileId = url.pathname.match(PROFILE_PATH)?.[1]
-    if (profileId) return { type: 'profile', profileId: Number(profileId), path: url.pathname }
+    if (profileId) return { type: 'profile', profileId: Number(profileId), path: `${url.pathname}${queryAndHash}` }
 
     const forumPath = url.pathname.startsWith('/questions/')
         ? forumPathForLegacyQuestionsPath(url.pathname)
         : url.pathname
     const permalink = forumPath.match(POST_PATH)?.[1]
-    return permalink ? { type: 'post', permalink, path: `${forumPath}${url.hash}` } : null
+    return permalink ? { type: 'post', permalink, path: `${forumPath}${queryAndHash}` } : null
 }
 
 const textOf = (children: React.ReactNode) =>
