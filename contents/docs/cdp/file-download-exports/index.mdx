@@ -116,7 +116,7 @@ A few things to know about SQL query exports:
 - **Only interval placeholders.** The query can use the `{data_interval_start}` and `{data_interval_end}` placeholders. For each placeholder that the query uses, pass a value in the field with the same name. Other placeholders, like `{filters}`, are not supported.
 - **The time interval only fills placeholders.** `data_interval_start` and `data_interval_end` do not add filters to the query. A query without placeholders runs unchanged, as of the time the export starts.
 - **Timestamps are in UTC by default.** This also applies to date functions in the query. To use the project timezone, set `hogql_modifiers` to `{"convertToProjectTimezone": true}`.
-- **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. (The standard `events` model reads from an internal table built to avoid this, which SQL queries do not have access to currently.) We're adding columns with the time of ingestion to the `events` table and other tables soon, so you'll be able to filter on that instead. Until then, if completeness matters, leave a margin behind the present or re-run the export later.
+- **Late-arriving events can be missed.** Events can reach PostHog well after their `timestamp`, so a query bounded by `timestamp` may miss events that had not arrived when the export ran. We're adding columns with the time of ingestion to the `events` table and other tables soon, so you'll be able to filter on that instead. Until then, if completeness matters, leave a margin behind the present or re-run the export later.
 
 ### Bound your queries
 
