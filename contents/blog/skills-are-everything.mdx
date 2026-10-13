@@ -96,7 +96,7 @@ The loop looks like this. I start a session on any surface (local Claude Code, a
 
 The agent uses my local `/phs` [bridge skill](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut), loads the remote skill, reads `HANDOVER.md`, scans the backlog index, and knows where we left off. We do the work in the repo and the product, not in the skill. At the end of the session, the agent logs any new issue or idea, records any PR that opened or merged, adds one changelog line, and overwrites its handover section.
 
-Note: in PostHog AI or Slack using @PostHog (you need this now!) - i just say `lets check in on /self-driving-work` as all your skills from the skills store are linked into the sandobx you are running on already.
+Note: in PostHog AI or Slack using @PostHog (you need this now!) - i just say `lets check in on /self-driving-work` as all your skills from the skills store are linked into the sandbox you are running on already.
 
 This is the lowest friction and most chill way I have ever found to deliver complex features over long horizons. The skill is the memory, and it's memory I get my agents to intentionally control and maintain. I don't rely on a model's hidden memory feature that I can't read. I can open the skill in PostHog and see exactly what my agents think is true. Every now and then as things get messy i just tell the agent to clean up or better yet it knows itself to follow certain protocols like trim the changelog after 30 days etc (all skill edits are version tracked anyway so its all recoverable if i really need it).
 
@@ -170,7 +170,7 @@ Another favourite example is `self-driving-alerts`. It's the single store for al
 
 The alerts live in PostHog. The context about the alerts lives in the skill so a human or agent can easily get at it while a scout can also proactivly maintain it.
 
-Yet another cool thing here is that each skill is version tracked and we have optional decsription stirng on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
+Yet another cool thing here is that each skill is version tracked and we have optional decsription string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
 TODO: get version history and diff screen shots from this one - http://us.posthog.com/project/2/skills/self-driving-alerts or some other ones
 
