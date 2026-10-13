@@ -74,12 +74,12 @@ An assistant connected to the [PostHog MCP server](/docs/model-context-protocol)
 
 | Tool                                     | Purpose                                                     |
 | ---------------------------------------- | ----------------------------------------------------------- |
-| `inbox-steering-get`                     | Read the research, implementation, and scout instructions.  |
-| `inbox-steering-update`                  | Replace the instructions for one or more roles.             |
+| `inbox-steering-instructions-get`        | Read the research, implementation, and scout instructions.  |
+| `inbox-steering-instructions-update`     | Replace the instructions for one or more roles.             |
 | `tasks-config-list`                      | Read shared project instructions from `agent_instructions`. |
 | `tasks-config-agent-instructions-create` | Replace shared project instructions.                        |
 
-Read the current instructions before changing them. To update only research instructions, pass this input to `inbox-steering-update`:
+Read the current instructions before changing them. To update only research instructions, pass this input to `inbox-steering-instructions-update`:
 
 ```json
 {
