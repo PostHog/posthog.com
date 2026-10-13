@@ -78,9 +78,7 @@ This means we can review 33 PRs of different sizes, from different repos, and ge
 
 Here is what the numbers looked like:
 
-> **Illustration placeholder**
-> 
-> Table with golden set experiment results
+![Table of ReviewHog evaluation results on the incident golden set.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/13_golden_set_results_v6_6ad1a1f411.png)
 
 We got pretty good results with ReviewHog, with this combination showing the best result: `GPT Sol 5.6` (at the time) at `xhigh` for bug search and `Claude Opus 5` (at the time) at `xhigh` for bug validation (here are the [experiment results](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-09-incident-golden-set)), both using `pi`.
 
@@ -102,9 +100,7 @@ A great example is scouts. If you don't know them yet, [scouts](/docs/self-drivi
 
 To evaluate them, we built a rubric generator. You pick the agent you care about, add some context, and let it generate evaluation criteria.
 
-> **Illustration placeholder**
-> 
-> Scout generator screen
+![Trial start screen](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_09_44_0a21ad656f.png)
 
 Every scout should produce a report covering what it found, how actionable the findings are, and what to do next. To measure this baseline, we stick to a mostly static set of rubrics shared across all scouts.
 
@@ -116,9 +112,7 @@ To make the ranking more meaningful, we also generate rubrics tailored to that s
 
 Based on that, we add agent-specific rubrics. In our case, for a scout analyzing the stability of the [Session Replay](/session-replay) player, we don't just check formatting. We grade whether it spotted actual playback failure symptoms, whether it queried data correctly, and whether the bug it flagged actually affected real users.
 
-> **Illustration placeholder**
-> 
-> Replay player reliability rubrics
+![Replay player reliability rubrics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_08_47_bd2ae1b7e7.png)
 
 With code review, we had it easy-ish since rubrics were mostly "did you find the bugs you were supposed to find?". Open-ended agents need better rubrics to track behavior, check for required tool calls, and verify task completion.
 
@@ -130,11 +124,10 @@ Once those rubrics are in place, we can reliably track success rates across a go
 
 The result is a report with a close-to-clear answer. It's obviously not fully deterministic, but it's way better than just "vibes."
 
-Here's the report I ran while writing this part of the post to check "what is better, Sol vs Opus," and it looks like, for this specific task, we are sticking with Sol. Opus would do a better job on plenty of tasks, but to know that, you need something measurable to rely on.
+Here's the report I ran while writing this part of the post to check "what is better, Sol vs Luna," and it looks like, for this specific task, we are sticking with Sol. Luna would do a better job on plenty of tasks, but to know that, you need something measurable to rely on.
 
-> **Illustration placeholder**
-> 
-> Report results
+![Scout benchmark report comparing evaluation results across model configurations.](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_10_13_at_11_05_06_7f7a15b1aa.png)
+![Scout benchmark report comparing rubrics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_06_17_4a49c51a12.png)
 
 > If you want to see how our rubric generator and ranking work under the hood, check out our [code](https://github.com/PostHog/posthog/tree/master/products/signals/backend/scout_harness).
 
@@ -216,9 +209,7 @@ We went through three stages to get this working.
 
 Agents do tool calls when running. We track and store those traces – what the agent asked and what it got back. For example, what query it ran with `execute_query(sql)` and what slice of the DB was in the output.
 
-> **Illustration placeholder**
-> 
-> MCP mock
+![An agent calls a mocked MCP tool, which returns a saved response instead of querying a live service.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_mcp_mock_ace037214f.png)
 
 It sounds pretty straightforward and worked on basic tech demos (returning static JSON to SQL queries), but it failed miserably on any meaningful production-like work because agents aren't deterministic. Meaning, the query from run 1 doesn't guarantee that run 2 will run the same one.
 
@@ -227,10 +218,6 @@ It's not a big surprise, but it would still be cool if it worked out of the box.
 ### Harder: Trajectory-based mocked MCP replies
 
 The logical next step. Instead of building the mocked data over a single run, we ran \~50 runs, checked every trajectory the agent picked, and mocked those instead.
-
-> **Illustration placeholder**
-> 
-> Trajectory MCP mock
 
 It has potential, and to make it even more stable, I would suggest adding synthetic (or real) data a bit before and/or after every query (so a 24h query still returns true data if the call is skewed a bit).
 
@@ -242,9 +229,7 @@ The solution that actually worked was spinning up an isolated PostHog sandbox se
 
 On the surface, the idea is simple: query a couple of DB tables (Postgres, ClickHouse), store them as Parquet files in S3, and then restore them in the VM with a local PostHog instance to make it look like the real deal. The bonus: data never leaves PostHog infra.
 
-> **Illustration placeholder**
-> 
-> Offline sandbox setup showing real data slice, timestamp shifter, and isolated evaluation window
+![Restore a real data slice into an isolated PostHog environment, shifting timestamps together so each benchmark can query the prepared data.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/10_restored_data_slice_v8_ba0f337e6e.png)
 
 The first problem is obvious: "24h" now and "24h" in two weeks are way different "24h". Meaning, every time we inject data, we need to skew it toward the current timeline.
 
@@ -252,15 +237,11 @@ The second problem is less obvious: even if you skew the data, agents are still 
 
 For example, when preparing data for agent feedback, we can clearly sync tables with actual responses and tables with the scouts those responses were left about. But the moment you get a proper model, it will look inside, see that there aren't many users on this local instance, and get suspicious.
 
-> **Illustration placeholder**
-> 
-> September 30 trace hitting a dead end due to missing team roster and metadata
+![September 30 scout trace showing a missing team roster and the decision to leave reviewers unassigned.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/11_trace_sept30_roster_5787996325.png)
 
 On the other hand, you can, as always, overprepare and make it as realistic as possible on the MCP tools side, while the rest of the data in the local instance doesn't match the scale. Then the agent gets even more suspicious and starts thinking the data is synthetic.
 
-> **Illustration placeholder**
-> 
-> September 23 trace where agent flags data-slice extraction artifacts as suspicious data
+![September 23 scout trace showing the agent questioning whether the data is synthetic.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/12_trace_sept23_synthetic_ecd98649d3.png)
 
 To TLDR it, if the agent starts treating the investigation as a test, it could:
 
