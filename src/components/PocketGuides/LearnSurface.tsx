@@ -2,10 +2,13 @@ import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { useAppWindows } from 'context/App'
+import { useWindow } from 'context/Window'
 import usePostHog from 'hooks/usePostHog'
 
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
+import { isReaderWindowActive } from './learnTracking'
 
 interface LearnBodyNode {
     body: string
@@ -49,6 +52,13 @@ interface LearnSurfaceProps {
 function ChapterEngagement({ volume, chapter }: { volume: string; chapter: string }): JSX.Element {
     const endRef = React.useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
+    const { windows } = useAppWindows()
+    const { appWindow } = useWindow()
+    const readerIsActive = isReaderWindowActive(windows, appWindow?.key)
+    const readerIsActiveRef = React.useRef(readerIsActive)
+    React.useEffect(() => {
+        readerIsActiveRef.current = readerIsActive
+    }, [readerIsActive])
 
     React.useEffect(() => {
         const end = endRef.current
@@ -58,7 +68,15 @@ function ChapterEngagement({ volume, chapter }: { volume: string; chapter: strin
         let reachedEnd = false
         let captured = false
         const captureIfEngaged = () => {
-            if (captured || !posthog || visibleSeconds < 10 || !reachedEnd) return
+            if (
+                captured ||
+                !posthog ||
+                document.visibilityState !== 'visible' ||
+                !readerIsActiveRef.current ||
+                visibleSeconds < 10 ||
+                !reachedEnd
+            )
+                return
             posthog.capture('learn_chapter_engaged', {
                 volume,
                 chapter,
@@ -81,7 +99,7 @@ function ChapterEngagement({ volume, chapter }: { volume: string; chapter: strin
         observer.observe(end)
 
         const timer = window.setInterval(() => {
-            if (document.visibilityState === 'visible') visibleSeconds += 1
+            if (document.visibilityState === 'visible' && readerIsActiveRef.current) visibleSeconds += 1
             captureIfEngaged()
             if (captured) window.clearInterval(timer)
         }, 1000)

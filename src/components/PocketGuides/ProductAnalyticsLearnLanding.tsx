@@ -12,6 +12,7 @@ import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import usePostHog from '../../hooks/usePostHog'
 import Cover from './Cover'
+import { twigLearnUrl } from './learnTracking'
 import type { LearnLandingProps } from './LearnPage'
 
 const AGENT_TEACHING_PROMPT = `Teach me PostHog Product Analytics using my own product and PostHog project.
@@ -24,16 +25,6 @@ Don’t change the project unless I explicitly ask. If you can’t access the pr
 
 const codexPromptUrl = (prompt: string): string => `codex://new?prompt=${encodeURIComponent(prompt)}`
 const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${encodeURIComponent(prompt)}`
-
-const twigLearnUrl = (posthog: ReturnType<typeof usePostHog>): string => {
-    const distinctId = posthog?.get_distinct_id?.()
-    if (!distinctId) return TWIG_URL
-
-    const params = new URLSearchParams({ learn_source: 'product-analytics', distinct_id: distinctId })
-    const sessionId = posthog?.get_session_id?.()
-    if (sessionId) params.set('session_id', sessionId)
-    return `${TWIG_URL}#${params.toString()}`
-}
 
 /** A home for three learning experiences; the story continues in embedded Learn chapters. */
 export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: LearnLandingProps): JSX.Element {
@@ -199,12 +190,12 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             variant="primary"
                             size="md"
                             onClick={(event) => {
-                                // The website project needs a profile to join this anonymous visitor across domains.
-                                posthog?.createPersonProfile?.()
                                 selectResource('twig', 'explore_twig')
-                                const destination = twigLearnUrl(posthog)
+                                const destination = twigLearnUrl(posthog, TWIG_URL)
                                 if (destination === TWIG_URL) return
 
+                                // The website project needs a profile to join this anonymous visitor across domains.
+                                posthog?.createPersonProfile?.()
                                 // Keep the copyable link free of this visitor's ID.
                                 event.preventDefault()
                                 window.open(destination, '_blank', 'noopener,noreferrer')

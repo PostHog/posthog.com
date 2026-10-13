@@ -247,13 +247,18 @@ routes, and bookshelf covers open the embedded introduction directly.
 Learn tracking in the website PostHog project records `learn_section_selected` for hub sidebar
 sections, `learn_chapter_selected` for chapter links, and `learn_resource_selected` for the
 agent/story/Twig choices. The agent prompt copy button records `learn_prompt_copied`.
-`learn_chapter_engaged` fires once per chapter visit after ten seconds with the tab visible and
-the reader reaching the chapter's end; it is an engagement signal, not proof of comprehension.
+`learn_chapter_engaged` fires once per chapter visit after ten seconds with the tab visible, the
+reader window active, and the reader reaching the chapter's end; it is an engagement signal,
+not proof of comprehension.
 These events include the volume and a short resource, section, or chapter key, without prompt text.
 Agent and Twig selections measure the choice to open a resource, not successful use inside it.
-The copyable Twig link is the plain Twig URL. Clicking or pressing Enter on Explore Twig passes the website visitor ID and current session, when available, in a URL fragment. Copying the link or opening it from a context menu reaches Twig without the handoff. Twig removes the
-fragment before starting its own analytics, then sends that visitor's Twig learning events to the
-website project under the same ID. Twig's own project continues to receive its usual events.
+The copyable Twig link is the plain Twig URL. Clicking or pressing Enter on Explore Twig
+passes the website visitor ID and current session, when available, in a URL fragment.
+Visitors who opted out of analytics get the plain Twig URL without an identity handoff.
+Copying the link or opening it from a context menu reaches Twig without the handoff. Twig
+removes the fragment before starting its own analytics, then sends that visitor's Twig learning
+events to the website project under the same ID. Twig's own project continues to receive its
+usual events.
 Existing `$pageview`, `reader_tab_click`, and `pocket_guide_interaction` events cover entry and
 in-chapter actions.
 
