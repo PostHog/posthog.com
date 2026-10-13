@@ -181,19 +181,6 @@ Both methods only affect the browser that calls them. Other visitors aren't affe
 
 If you load PostHog with the [HTML snippet](/docs/web-analytics/installation/html-snippet), you can call the method from your browser's developer console on your site. If you install posthog-js with npm or another package manager, `posthog` isn't available in the console, so call the method from your app's code.
 
-### Exclude local development
-
-posthog-js marks visits to `localhost` and `127.0.0.1` as internal when you set `defaults` to `'2026-01-30'` or later. This uses the same `$internal_or_test_user` property as `setInternalOrTestUser()`. To mark other hostnames, set `internal_or_test_user_hostname` to a string or a regular expression:
-
-```js
-posthog.init('<ph_project_token>', {
-    api_host: '<ph_client_api_host>',
-    internal_or_test_user_hostname: /^(localhost|127\.0\.0\.1|staging\.yourapp\.com)$/,
-})
-```
-
-To capture nothing in development, only call `posthog.init()` in your production build.
-
 For a step-by-step walkthrough, see [how to filter out internal users](/tutorials/filter-internal-users). For all the filter settings, see [internal and test users](/docs/data/test-accounts).
 
 ## 10. Use the same project for your website and app
