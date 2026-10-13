@@ -5,7 +5,11 @@ showTitle: true
 hideAnchor: false
 ---
 
-> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
+<CalloutBox icon="IconInfo" title="brand.posthog.com is the source of truth" type="fyi">
+
+All approved brand assets — logos, colors, fonts, hedgehogs, and crests — live at [brand.posthog.com](https://brand.posthog.com). Download them there, or import them from the [`@posthog/brand`](https://github.com/PostHog/brand) package. This page covers usage rules and guidance. Please don't use AI art. We're quite particular about our illustrations and AI just doesn't get it right.
+
+</CalloutBox>
 
 ## Logo and brand usage for third-parties
 
@@ -34,11 +38,9 @@ Avoid pairing the logomark with the "PostHog" wordmark in regular text that isn'
 
 ## Logo
 
-If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
+Download every version of the logo from [brand.posthog.com/logo](https://brand.posthog.com/logo) — landscape, stacked, logomark, and wordmark, in gradient, print (4-color/CMYK), and mono treatments, plus padded square and circle-safe exports for avatars. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
 
-Each logo below is rendered live from our [`@posthog/brand`](https://github.com/PostHog/brand) library — the single source of truth for the mark — so it always matches the current logo. Click any format to download it (logos are transparent; the previews sit on a solid background color). If you're building a PostHog UI, import the parametric `<Logo>` component from `@posthog/brand` directly rather than downloading a file. A flat 4-color/CMYK (`print`) variant is also available from the library for print vendors.
-
-<BrandLogos />
+If you're building a PostHog UI, import the parametric `<Logo>` component from the [`@posthog/brand`](https://github.com/PostHog/brand) library rather than downloading a file.
 
 ### When to use each logo
 
@@ -52,9 +54,9 @@ Each logo below is rendered live from our [`@posthog/brand`](https://github.com/
 
 _Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the light logo instead).
 
-The padded PNGs help when uploading to a third-party service with no control over margin around the logo, and the @2x versions are for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display) — include them when a service accepts both.
+The padded square and circle-safe exports help when uploading to a third-party service that crops to a square or circle and gives no control over the margin around the logo — G2, X, LinkedIn, or Reddit profiles, for example.
 
-> **Using an older version?** These logos come straight from the [`@posthog/brand`](https://github.com/PostHog/brand) library, so this page always reflects the current mark. If you have an older PostHog logo saved locally (e.g. a square font or sharp-edged logomark), please replace it with the current version from this page.
+> **Using an older version?** The logos on [brand.posthog.com](https://brand.posthog.com/logo) come straight from the [`@posthog/brand`](https://github.com/PostHog/brand) library, so they always reflect the current mark. If you have an older PostHog logo saved locally (e.g. a square font or sharp-edged logomark), please replace it with the current version.
 
 ### Squeak
 
@@ -149,8 +151,12 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 ## Hedgehog library
 
-Approved hedgehogs are on [brand.posthog.com](https://brand.posthog.com), with the other brand assets. Download them from there before you request a new hog.
+All our currently approved hedgehogs are on [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies). Anyone — team member or not — can browse the library and download any hog as SVG or PNG, without Figma access and without relying on the design team.
+
+Team members can fall back to [the Figma brand book](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1) to export a hog at a custom size, or to grab one that hasn't synced to the library yet:
+
+1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
+2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar.
+3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
 If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests).
-
-> Non-team members can find some of the most-used hogs to download on [our press page](/media).
