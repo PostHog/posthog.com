@@ -1,5 +1,3 @@
-const STATUS_CONTEXT = "Commit signatures"
-const COMMENT_MARKER = "<!-- commit-signatures -->"
 const MAX_PR_COMMITS = 250
 const MAX_LISTED_COMMITS = 20
 const SIGNING_GUIDE = "https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits"
@@ -12,7 +10,7 @@ function signatureResult(commits, expectedCount) {
         return {
             state: "error",
             description: "Could not check the complete commit list",
-            body: `${COMMENT_MARKER}\n## Commit signature check incomplete\n\nGitHub's PR commits API returns at most ${MAX_PR_COMMITS} commits. This check could not read the complete commit list. A maintainer must investigate before review.`,
+            body: `## Commit signature check incomplete\n\nGitHub's PR commits API returns at most ${MAX_PR_COMMITS} commits. This check could not read the complete commit list. A maintainer must investigate before review.`,
         }
     }
 
@@ -21,7 +19,7 @@ function signatureResult(commits, expectedCount) {
         return {
             state: "success",
             description: "GitHub verified every commit signature",
-            body: `${COMMENT_MARKER}\n## Commit signatures resolved\n\nGitHub verified every commit signature in this PR. No further action is needed.`,
+            body: "## Commit signatures verified\n\nGitHub verified every commit signature in this PR. No further action is needed.",
         }
     }
 
@@ -52,7 +50,6 @@ function signatureResult(commits, expectedCount) {
             ? "GitHub signature verification is temporarily unavailable"
             : `${unverified.length} commit signature(s) need attention`,
         body: [
-            COMMENT_MARKER,
             "## Commit signatures need attention",
             "",
             "PostHog requires commits with signatures that GitHub can verify. This PR cannot merge until the requirement is met.",
@@ -78,7 +75,7 @@ function signatureResult(commits, expectedCount) {
             "",
             "Enabling signing does not sign existing commits. A Signed-off-by line is not a cryptographic signature.",
             "",
-            "This comment updates after each push. The check includes draft PRs and does not need approval to run fork workflows.",
+            "This check runs after each push and base-branch change, including draft PRs. Fork PRs require workflow approval from a maintainer.",
         ].join("\n"),
     }
 }
@@ -87,66 +84,27 @@ async function run({ github, context, core }) {
     const { owner, repo } = context.repo
     const pull_number = context.payload.pull_request.number
     const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number })
-    if (pr.state !== "open") {
+    const eventPr = context.payload.pull_request
+    if (pr.state !== "open" || pr.head.sha !== eventPr.head.sha || pr.base.ref !== eventPr.base.ref) {
+        core.info("The PR changed before the check started. Skipping outdated results.")
         return
     }
 
-    const statusParameters = {
+    const commits = await github.paginate(github.rest.pulls.listCommits, {
         owner,
         repo,
-        sha: pr.head.sha,
-        context: STATUS_CONTEXT,
-        target_url: `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
-    }
-    await github.rest.repos.createCommitStatus({
-        ...statusParameters,
-        state: "pending",
-        description: "Checking commit signatures through GitHub",
+        pull_number,
+        per_page: 100,
     })
-
-    try {
-        const commits = await github.paginate(github.rest.pulls.listCommits, {
-            owner,
-            repo,
-            pull_number,
-            per_page: 100,
-        })
-        const result = signatureResult(commits, pr.commits)
-        const comments = await github.paginate(github.rest.issues.listComments, {
-            owner,
-            repo,
-            issue_number: pull_number,
-            per_page: 100,
-        })
-        const existing = comments.find(
-            (comment) => comment.user?.login === "github-actions[bot]" && comment.body?.startsWith(COMMENT_MARKER)
-        )
-        const { data: current } = await github.rest.pulls.get({ owner, repo, pull_number })
-        if (current.state !== "open" || current.head.sha !== pr.head.sha || current.base.ref !== pr.base.ref) {
-            core.info("The PR changed during the check. Skipping outdated results.")
-            return
-        }
-
-        await github.rest.repos.createCommitStatus({
-            ...statusParameters,
-            state: result.state,
-            description: result.description,
-        })
-        if (existing && existing.body !== result.body) {
-            await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body: result.body })
-        } else if (!existing && result.state !== "success") {
-            await github.rest.issues.createComment({ owner, repo, issue_number: pull_number, body: result.body })
-        }
-        if (result.state !== "success") {
-            core.setFailed(result.description)
-        }
-    } catch (error) {
-        await github.rest.repos.createCommitStatus({
-            ...statusParameters,
-            state: "error",
-            description: "Could not complete the signature check. See workflow logs.",
-        })
-        throw error
+    const result = signatureResult(commits, pr.commits)
+    const { data: current } = await github.rest.pulls.get({ owner, repo, pull_number })
+    if (current.state !== "open" || current.head.sha !== pr.head.sha || current.base.ref !== pr.base.ref) {
+        core.info("The PR changed during the check. Skipping outdated results.")
+        return
+    }
+    await core.summary.addRaw(result.body).write()
+    if (result.state !== "success") {
+        core.setFailed(result.description)
     }
 }
 

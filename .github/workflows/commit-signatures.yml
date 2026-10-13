@@ -1,30 +1,26 @@
 name: Commit signatures
 
 on:
-    pull_request_target:
+    pull_request:
         types: [opened, reopened, synchronize, ready_for_review, edited]
 
 permissions:
     contents: read
+    pull-requests: read
 
 jobs:
     check:
+        name: Commit signatures
         if: github.event.action != 'edited' || github.event.changes.base != null
         concurrency:
             group: commit-signatures-${{ github.event.pull_request.number }}
             cancel-in-progress: true
         runs-on: ubuntu-latest
         timeout-minutes: 5
-        permissions:
-            contents: read
-            pull-requests: read
-            issues: write
-            statuses: write
         steps:
-            - name: Read the trusted check script
+            - name: Read the check script
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
               with:
-                  ref: ${{ github.workflow_sha }}
                   sparse-checkout: scripts/commit-signatures
                   persist-credentials: false
 

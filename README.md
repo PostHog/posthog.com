@@ -132,7 +132,9 @@ git config --local commit.gpgsign true
 
 Check that GitHub shows **Verified** on each commit. A `Signed-off-by` line (`git commit -s`) does not meet this requirement. Cryptographic signing uses `git commit -S`.
 
-The **Commit signatures** check runs when you open a PR, after each push, and when you change the base branch, including draft PRs. It comments when a signature needs attention and updates that comment when the problem is resolved. Enabling signing only affects future commits. You must also sign any existing unsigned commits.
+Enabling signing only affects future commits. You must also sign any existing unsigned commits.
+
+The **Commit signatures** check runs when you open a PR, after each push, and when you change the base branch, including draft PRs. Fork PR workflows require approval from a maintainer. The check reports affected commits and repair instructions in the workflow summary. It does not post PR comments.
 
 ### Ways to contribute
 
