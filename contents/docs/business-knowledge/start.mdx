@@ -1,0 +1,121 @@
+---
+title: Get started with Business knowledge
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+Business knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business knowledge MCP tools all read the same sources.
+
+Open **Business knowledge** and choose **Add source**. You can also start from an empty project with **Add your first source**.
+
+The list shows how many sources are ready and how many chunks are indexed. Search by name or URL, filter by type, or filter **Human** and **Learned**.
+
+Sources belong to the project you add them in. [Learn from support](/docs/business-knowledge/learn-from-support) stores its setting and its learned sources on the parent project. [GitHub repositories](/docs/business-knowledge/github) stay on the environment you configure.
+
+## Text
+
+Paste a policy, an FAQ, or any other text, and give the source a name. Edit the source when the text changes.
+
+Text is capped at 1 MB. Split a longer document into more than one source.
+
+Saving rewrites the chunks for that source. An agent that already has the old text in its conversation keeps it until that conversation is refreshed.
+
+## URL
+
+Paste a public `http` or `https` URL and choose how PostHog should read it. PostHog rejects a URL it can't reach, including a private or internal address, with `URL is not reachable from this environment.`
+
+- **Single page** fetches that page.
+- **Sitemap.xml** reads the sitemap at that URL, or `/sitemap.xml` on the same site, and indexes each listed page.
+- **Same-origin crawl** indexes that page and other pages on the same site, staying under the page's path. A URL at the site root covers the whole site. Skip paths you don't want. Depth and max pages bound the crawl. The crawl follows `robots.txt`. The crawler identifies itself as `PostHog-BusinessKnowledge`.
+
+**Skip paths** are URL path patterns, matched with `fnmatch`. Put one pattern per line, or separate them with commas. `/docs/private/*` skips that section.
+
+**Max pages** defaults to 200. The cap is 5,000. **Max depth** applies to a same-origin crawl. It defaults to 2 and can't be higher than 5.
+
+**Include globs**, under **Advanced: override include scope**, replace the path PostHog derived from the entry URL. Leave them empty to keep that path.
+
+PostHog doesn't index a page body larger than 10 MB. A failed refresh keeps the previous text, and the row shows **refresh failed**. The old chunks still answer questions.
+
+## File
+
+Upload a PDF, DOCX, Markdown, CSV, or plain text file. The cap is 50 MB. PostHog rejects a PDF with more than 2,000 pages. PostHog truncates a CSV at 10,000 rows.
+
+PostHog stores the text it reads from the file. It doesn't keep the original file. To change a file, delete the source and upload it again. You can still rename the source and change **Always include in replies**.
+
+## Auto-refresh
+
+A URL source can refresh on a schedule: every hour, every 6 hours, every day, or every week. **Manual only** means PostHog fetches the source when you add it, and again when you refresh that row yourself.
+
+Changing the auto-refresh interval doesn't fetch the source immediately. Changing the URL or the crawl settings does.
+
+Text and file sources don't refresh on a schedule.
+
+## Always include in replies
+
+Turn this on for guidance that should be in every reply: tone, policies, and company direction. PostHog still runs the content check. PostHog includes the source even when the question doesn't match it.
+
+The text injected from these sources is capped at 20,000 characters combined. PostHog leaves out content past that cap.
+
+## Source status
+
+| Status | Meaning |
+| --- | --- |
+| Pending | Waiting to start |
+| Processing | Fetching or indexing |
+| Indexing | The content check has passed and keyword search works. Semantic search is still building. This can take up to an hour. |
+| Ready | Keyword and semantic search are both available |
+| Error | The source failed. Open it to read the reason. |
+| Disabled | A learned source that a newer learned answer replaced. PostHog keeps it and doesn't use it in replies. |
+| Unsafe content | At least one page was flagged and search leaves it out |
+
+If the organization hasn't approved AI data processing, a ready source can still show that semantic search is off. Search leaves out documents that haven't passed the content check, for both keyword and semantic search.
+
+## Content checks
+
+PostHog checks each document before using it in an answer. Search leaves out a document marked unsafe. Search also leaves a document out until that check finishes. The check doesn't run until the organization has approved AI data processing.
+
+On a URL source, **Indexed pages** lists each page as **safe**, **unsafe**, or **pending**. Pending means search skips that page until the check finishes. Unsafe means the page stays listed and search excludes it.
+
+The source shows **unsafe content** when it has at least one flagged page.
+
+## Edit or delete a source
+
+Open a row to change it.
+
+- A text source: edit the name and the content.
+- A URL source: edit the name, URL, crawl settings, auto-refresh, and **Always include in replies**. Use **Refresh** to fetch it now.
+- A file source: edit the name and **Always include in replies**. Replace the file by deleting the source and uploading again.
+- A learned source: edit or delete it. See [Learn from support](/docs/business-knowledge/learn-from-support).
+
+Delete removes the source and its chunks. PostHog records the change in the activity log.
+
+## Limits
+
+| Limit | Value |
+| --- | --- |
+| Sources you add | 500 per project |
+| Learned sources | 10,000 per project |
+| Chunks | 250,000 per project |
+| Pasted text | 1 MB |
+| Uploaded file | 50 MB |
+| One fetched page | 10 MB |
+| Pages in one URL source | 5,000 (default 200) |
+| Same-origin depth | 5 (default 2) |
+| PDF pages | 2,000 |
+| CSV rows kept | 10,000 |
+| Always-included text | 20,000 characters combined |
+
+## Playground
+
+The **Playground** tab shows what Business knowledge holds right now, and what's missing. Ask a question and see whether a source answers it.
+
+[Playground](/docs/business-knowledge/playground)
+
+## Learn from support
+
+You can also let PostHog add reusable answers from resolved support tickets. See [Learn from support](/docs/business-knowledge/learn-from-support).

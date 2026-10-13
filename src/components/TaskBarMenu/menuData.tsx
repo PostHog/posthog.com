@@ -98,6 +98,7 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
+            { type: 'item', label: 'Business knowledge', link: '/docs/business-knowledge' },
             { type: 'item', label: 'Distributed tracing', link: '/docs/distributed-tracing' },
             { type: 'item', label: 'Endpoints', link: '/docs/endpoints' },
             { type: 'item', label: 'Experiments', link: '/docs/experiments' },

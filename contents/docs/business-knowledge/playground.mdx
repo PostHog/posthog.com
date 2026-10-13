@@ -1,0 +1,37 @@
+---
+title: Playground
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+The Playground shows what Business knowledge holds right now, and what's missing. Ask a question a customer or teammate would ask. The answer uses only the sources in this project.
+
+If the answer cites a source, that fact is already in Business knowledge. If it can't find the fact, add a source and ask again.
+
+Open **Business knowledge** and choose the **Playground** tab.
+
+Your chats are visible to you. They're grouped by when they were last used: today, yesterday, the last 7 days, the last 30 days, and older.
+
+## Ask a question
+
+Type a question and submit it. The placeholder is **Ask anything about your business using this project's business knowledge**.
+
+The Playground needs AI data processing approved for the organization. If it's off, the request is refused with: `Enable AI data processing before asking another question.`
+
+## What the answer is allowed to read
+
+The answer is limited to this project's business knowledge.
+
+- It searches your sources.
+- It can read more of a document around a matching passage.
+- If [GitHub repositories](/docs/business-knowledge/github) are selected and the document search returns nothing, it can search file names and README text in those repositories, then read one file.
+
+The thread shows each of those steps: **Searched business knowledge**, **Read document context**, **Searched repositories**, and **Read file**.
+
+Text marked as learned from support is team practice from a resolved ticket, not a page you uploaded.
+
+A source with **Always include in replies** is included even when it doesn't match the question, after the same content check as search.

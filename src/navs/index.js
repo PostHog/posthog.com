@@ -6494,6 +6494,55 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Business knowledge',
+            url: '/docs/business-knowledge',
+            icon: 'IconBook',
+            color: 'purple',
+            description: 'Facts PostHog AI, Support, and MCP use when they answer questions about your business',
+            children: [
+                {
+                    name: 'Business knowledge',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/business-knowledge',
+                    icon: 'IconHome',
+                    color: 'purple',
+                },
+                {
+                    name: 'Setup',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/business-knowledge/start',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'purple',
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'GitHub repositories',
+                    url: '/docs/business-knowledge/github',
+                    icon: 'IconGithub',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Learn from support',
+                    url: '/docs/business-knowledge/learn-from-support',
+                    icon: 'IconSupport',
+                    color: 'teal',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/business-knowledge/playground',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'Support',
             url: '/docs/support',
             icon: 'IconSupport',

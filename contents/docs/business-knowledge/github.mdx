@@ -1,0 +1,36 @@
+---
+title: GitHub repositories
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+GitHub repositories let Business knowledge read repositories you select when it answers a question. It searches file names and the README, then reads a file. It doesn't index the code, and it doesn't search inside file contents.
+
+The setting is on the **Settings** tab of Business knowledge, and under project settings in **Business knowledge**. It's shown when GitHub repositories are enabled for your project.
+
+The list belongs to the environment you configure. A child environment doesn't inherit the parent project's repositories.
+
+## How a question uses a repository
+
+Document search runs first. If that search returns nothing, repository search runs on the file names and README text of the repositories you saved.
+
+Pass file names or identifiers, not a full sentence. Each repository result includes the GitHub description. When that description says the repository holds a handbook or docs, search that repository for those words, then read the file.
+
+The read returns the file text and a permalink. The Playground shows this as **Searched repositories** and **Read file**.
+
+## Connect
+
+1. [Install the PostHog GitHub App](https://app.posthog.com/settings/project-integrations) if it isn't installed yet.
+2. Open **Business knowledge** and choose **Settings**.
+3. Under **GitHub repositories**, connect the installation.
+4. Add repositories and choose **Save repositories**.
+
+You can select up to 100 repositories.
+
+## Disconnect
+
+**Disconnect** stops Business knowledge from reading those repositories. The GitHub App stays installed.
