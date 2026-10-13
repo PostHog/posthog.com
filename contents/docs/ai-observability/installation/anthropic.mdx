@@ -20,6 +20,7 @@ import Tab from 'components/Tab'
 import NotableGenerationProperties from '../_snippets/notable-generation-properties.mdx'
 import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 import { ClaudePlatformBanner, ProjectToken, addClaudePlatformNextSteps } from './_snippets/claude-platform.tsx'
+import TouristInfoCallout from 'components/TouristInfoCallout'
 
 <Tab.Group tabs={['Claude Platform', 'Claude SDK']}>
 <Tab.List>
@@ -47,3 +48,5 @@ import { ClaudePlatformBanner, ProjectToken, addClaudePlatformNextSteps } from '
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+<TouristInfoCallout className="mt-8" />
