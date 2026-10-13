@@ -7,18 +7,13 @@ showStepsToc: true
 
 <!--
 This page imports shared onboarding content from the main PostHog repo.
-Sources: anthropic.tsx, claude-agent-sdk.tsx, claude-platform.tsx, and claude-code.tsx in
+Sources: anthropic.tsx and claude-platform.tsx in
 https://github.com/PostHog/posthog/tree/master/docs/onboarding/ai-observability
 See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs/onboarding-docs
 -->
 
 import { AnthropicInstallation } from 'onboarding/ai-observability/anthropic.tsx'
-import { ClaudeAgentSDKInstallation } from 'onboarding/ai-observability/claude-agent-sdk.tsx'
-import { ClaudeCodeInstallation } from 'onboarding/ai-observability/claude-code.tsx'
-import {
-    ClaudePlatformApiInstallation,
-    ClaudePlatformSdkInstallation,
-} from 'onboarding/ai-observability/claude-platform.tsx'
+import { ClaudePlatformInstallation } from 'onboarding/ai-observability/claude-platform.tsx'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tab from 'components/Tab'
@@ -26,40 +21,19 @@ import NotableGenerationProperties from '../_snippets/notable-generation-propert
 import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 import { ClaudePlatformBanner, ProjectToken, addClaudePlatformNextSteps } from './_snippets/claude-platform.tsx'
 
-<Tab.Group tabs={['Claude Platform', 'Claude SDK', 'Agent SDK', 'Claude Code']}>
+<Tab.Group tabs={['Claude Platform', 'Claude SDK']}>
 <Tab.List>
 <Tab>Claude Platform <span className="ml-1 rounded-sm border border-orange px-1 py-px align-middle text-[10px] font-bold uppercase text-orange">Beta</span></Tab>
 <Tab>Claude SDK</Tab>
-<Tab>Agent SDK</Tab>
-<Tab>Claude Code</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
 
 <ClaudePlatformBanner />
 
-<Tab.Group>
-<Tab.List>
-<Tab>API tracing (no code)</Tab>
-<Tab>SDK tracing</Tab>
-</Tab.List>
-<Tab.Panels>
-<Tab.Panel>
-
 <OnboardingContentWrapper snippets={{ ProjectToken }}>
-    <ClaudePlatformApiInstallation modifySteps={addClaudePlatformNextSteps} />
+    <ClaudePlatformInstallation modifySteps={addClaudePlatformNextSteps} />
 </OnboardingContentWrapper>
-
-</Tab.Panel>
-<Tab.Panel>
-
-<OnboardingContentWrapper snippets={{ ProjectToken }}>
-    <ClaudePlatformSdkInstallation modifySteps={addClaudePlatformNextSteps} />
-</OnboardingContentWrapper>
-
-</Tab.Panel>
-</Tab.Panels>
-</Tab.Group>
 
 </Tab.Panel>
 <Tab.Panel>
@@ -68,22 +42,6 @@ import { ClaudePlatformBanner, ProjectToken, addClaudePlatformNextSteps } from '
 
 <OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
     <AnthropicInstallation modifySteps={addNextStepsStep} />
-</OnboardingContentWrapper>
-
-</Tab.Panel>
-<Tab.Panel>
-
-<AIObservabilityWizardHint className="mb-8" />
-
-<OnboardingContentWrapper snippets={{ NotableGenerationProperties }}>
-    <ClaudeAgentSDKInstallation modifySteps={addNextStepsStep} />
-</OnboardingContentWrapper>
-
-</Tab.Panel>
-<Tab.Panel>
-
-<OnboardingContentWrapper>
-    <ClaudeCodeInstallation modifySteps={addNextStepsStep} />
 </OnboardingContentWrapper>
 
 </Tab.Panel>

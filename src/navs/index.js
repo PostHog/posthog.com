@@ -7100,6 +7100,11 @@ export const docsMenu = {
                             icon: 'IconAnthropic',
                         },
                         {
+                            name: 'Claude Agent SDK',
+                            url: '/docs/ai-observability/installation/claude-agent-sdk',
+                            icon: 'IconAnthropic',
+                        },
+                        {
                             name: 'Google',
                             url: '/docs/ai-observability/installation/google',
                             icon: 'IconGemini',
@@ -7293,6 +7298,11 @@ export const docsMenu = {
                             name: 'Pi Coding Agent',
                             url: '/docs/ai-observability/installation/pi',
                             icon: 'IconCode',
+                        },
+                        {
+                            name: 'Claude Code',
+                            url: '/docs/ai-observability/installation/claude-code',
+                            icon: 'IconClaudeCode',
                         },
                         {
                             name: 'OpenTelemetry',

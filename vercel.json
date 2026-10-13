@@ -689,16 +689,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/ai-observability/installation/claude-agent-sdk",
-            "destination": "/docs/ai-observability/installation/anthropic?tab=Agent+SDK",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/ai-observability/installation/claude-code",
-            "destination": "/docs/ai-observability/installation/anthropic?tab=Claude+Code",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/ai-observability/installation/vercel-ai-gateway:ext(\\.md)?",
             "destination": "/docs/ai-observability/installation/vercel-ai:ext?",
             "statusCode": 301

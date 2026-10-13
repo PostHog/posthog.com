@@ -28,22 +28,24 @@ const readCookie = (name: string): string | null => getCookie(name)?.replace(/^"
 
 // The app sets these cookies on .posthog.com for logged-in users, so the docs can show the
 // visitor's own project token and region.
-const useCurrentProject = (): { token: string | null; name: string | null; region: string } => {
-    const [project, setProject] = React.useState<{
-        token: string | null
-        name: string | null
-        region: string
-    }>({
-        token: null,
-        name: null,
-        region: 'US',
-    })
+type CurrentProject = { token: string | null; name: string | null; region: 'US' | 'EU' | null }
+
+const readRegion = (): CurrentProject['region'] => {
+    const instance = readCookie('ph_current_instance')
+    if (!instance) {
+        return null
+    }
+    return instance.includes('eu.') ? 'EU' : 'US'
+}
+
+const useCurrentProject = (): CurrentProject => {
+    const [project, setProject] = React.useState<CurrentProject>({ token: null, name: null, region: null })
 
     React.useEffect(() => {
         setProject({
             token: readCookie('ph_current_project_token'),
             name: readCookie('ph_current_project_name'),
-            region: readCookie('ph_current_instance')?.includes('eu.') ? 'EU' : 'US',
+            region: readRegion(),
         })
     }, [])
 
@@ -80,7 +82,19 @@ export const ProjectToken = (): JSX.Element => {
     return (
         <div className="not-prose rounded border border-primary bg-primary p-3 text-sm text-left mb-2">
             <p className="!m-0 !mb-2 opacity-75">
-                Your project token for <strong>{name}</strong>. In Claude, pick the <strong>{region}</strong> region.
+                {name ? (
+                    <>
+                        Your project token for <strong>{name}</strong>.
+                    </>
+                ) : (
+                    'Your project token.'
+                )}
+                {region && (
+                    <>
+                        {' '}
+                        In Claude, pick the <strong>{region}</strong> region.
+                    </>
+                )}
             </p>
             <div className="flex items-center gap-2">
                 <code className="flex-1 min-w-0 truncate rounded border border-primary bg-accent px-2 py-1 font-mono text-xs">
