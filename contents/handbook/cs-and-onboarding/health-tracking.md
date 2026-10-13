@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We track customer health in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts). Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently managed accounts contacted us, see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
+We track customer health in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently accounts with an assigned owner contacted us, see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
 > We can't yet see historic trends of customer health, because the score is a materialized view that is rebuilt each day.
 
@@ -24,9 +24,9 @@ Each account in Customer Analytics has these properties:
 
 ### Account health dashboard
 
-The [Account health dashboard](https://us.posthog.com/project/2/dashboard/2201038) is the overview and deep dive for one account. To open it:
+The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> is the overview and deep dive for one account. To open it:
 
-1. Open the account in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts).
+1. Open the account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>.
 2. Click the `Health dashboard` link in the account's properties.
 
 The link sets the `organization_id` variable for you. You can also open the dashboard directly and type an organization ID into the variable at the top. Only paying or trialing accounts have a score, so only those accounts have a link.
@@ -38,7 +38,7 @@ The dashboard shows:
 - **Stickiness inputs:** pipelines, Replay Vision scanners, scouts, evals, and MCP use.
 - **Weekly active people by product:** the 12-week trend behind the engagement score.
 - **Weekly MCP use:** people who use the MCP each week, compared with calls from agents.
-- **Relationship score:** the [automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only managed accounts have this data.
+- **Relationship score:** the [automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only accounts with an assigned CSM, TAM, or AE have this data.
 
 ### The `account_health_scores` view
 
@@ -186,7 +186,7 @@ Engagement compares current activity to the account's own historical median, but
 
 The `Relationship score` property is a score from 0 to 100 that we calculate each day. It measures how recently the customer contacted us. It does not measure how happy the customer is: a high score means that somebody talks to us, not that the conversation goes well.
 
-Only accounts that are CSM, AM, or AE managed and have an owner get a score.
+Every account with an assigned CSM, TAM, or account executive (AE) in Customer Analytics gets a score. If an account has more than one, the owner is the CSM, then the TAM, then the AE.
 
 Each account in Customer Analytics has these properties:
 
@@ -215,7 +215,7 @@ sub_score = min(max(100 − days since last contact + volume bonus − penalty, 
 ```
 
 - **Volume bonus:** +5 points for each contact in the last 90 days, up to +20. Slack gets no volume bonus, because we cannot count all Slack messages.
-- **Penalty:** the support tickets sub-score goes down while a high-priority ticket is still open.
+- **Penalty:** the support tickets sub-score loses 15 points for each high-priority ticket from the last 90 days that is still open.
 - **Ticket dates:** a ticket counts from the customer's last message if we have not read it yet. Otherwise it counts from when the customer opened the ticket.
 
 The relationship score is the weighted average of the signals that the account has. A missing signal does not lower the score. For example, an account with no Gong calls and no calendar meetings gets a score from the other three signals.
@@ -231,7 +231,7 @@ The relationship score is the weighted average of the signals that the account h
 
 ### Where to see the data
 
-The **Relationship score** section of the [Account health dashboard](https://us.posthog.com/project/2/dashboard/2201038) shows:
+The **Relationship score** section of the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> shows:
 
 - **Relationship summary:** the score, the band, the number of signals, and the owner.
 - **Relationship signals:** for each signal, the last contact, the days since, the contacts in the last 90 days, the sub-score, and its contribution. The contributions add up to the score.
