@@ -122,6 +122,22 @@ To develop a dynamic open graph image:
 
 ## Contributing
 
+### Sign your commits
+
+PostHog requires commits with signatures that GitHub can verify, including commits from forks. Set up [commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) before your first commit. After you configure your signing key, enable signing for this repository:
+
+```bash
+git config --local commit.gpgsign true
+```
+
+Check that GitHub shows **Verified** on each commit. A `Signed-off-by` line (`git commit -s`) does not meet this requirement. Cryptographic signing uses `git commit -S`.
+
+Enabling signing only affects future commits. You must also sign any existing unsigned commits.
+
+The **Commit signatures** check runs when you open a PR, after each push, and after PR edits, including base-branch changes and draft PRs. Fork PR workflows require approval from a maintainer. The check reports affected commits and repair instructions in the workflow summary. It does not post PR comments. GitHub's organization rule enforces the signature requirement independently of this workflow.
+
+### Ways to contribute
+
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 
 - Ask a [question in our community](https://posthog.com/questions)
