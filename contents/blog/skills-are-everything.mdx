@@ -21,7 +21,7 @@ seo:
 
 When agent skills first came out, I thought they were silly. We are just casting magic spells now are we? Is that where we are?
 
-But over time I bought into the whole "context engineering" thing (as much as i fought the hype initially) and started to use them more, and now I'm convinced they will change your life!
+But over time I bought into the whole "context engineering" thing (as much as I fought the hype initially) and started to use them more, and now I'm convinced they will change your life!
 
 Here is a blog about all the reasons and ways I use and love skills and how they have changed my life. I hope it changes yours too.
 
@@ -92,13 +92,13 @@ self-driving-work         v433, 126 bundled files
 
 *The file tree of a project-tracker skill after two months of agents maintaining it.*
 
-The loop looks like this. I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog Desktop, Codex) and say "lets check on on /phs self-driving work". 
+The loop looks like this. I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog Desktop, Codex) and say "let's check on /phs self-driving work". 
 
 The agent uses my local `/phs` [bridge skill](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut), loads the remote skill, reads `HANDOVER.md`, scans the backlog index, and knows where we left off. We do the work in the repo and the product, not in the skill. At the end of the session, the agent logs any new issue or idea, records any PR that opened or merged, adds one changelog line, and overwrites its handover section.
 
-Note: in PostHog AI or Slack using @PostHog (you need this now!) - i just say `lets check in on /self-driving-work` as all your skills from the skills store are linked into the sandbox you are running on already.
+Note: in PostHog AI or Slack using @PostHog (you need this now!) - I just say `lets check in on /self-driving-work` as all your skills from the skills store are linked into the sandbox you are running on already.
 
-This is the lowest friction and most chill way I have ever found to deliver complex features over long horizons. The skill is the memory, and it's memory I get my agents to intentionally control and maintain. I don't rely on a model's hidden memory feature that I can't read. I can open the skill in PostHog and see exactly what my agents think is true. Every now and then as things get messy i just tell the agent to clean up or better yet it knows itself to follow certain protocols like trim the changelog after 30 days etc (all skill edits are version tracked anyway so its all recoverable if i really need it).
+This is the lowest friction and most chill way I have ever found to deliver complex features over long horizons. The skill is the memory, and it's memory I get my agents to intentionally control and maintain. I don't rely on a model's hidden memory feature that I can't read. I can open the skill in PostHog and see exactly what my agents think is true. Every now and then as things get messy I just tell the agent to clean up or better yet it knows itself to follow certain protocols like trim the changelog after 14 days etc (all skill edits are version tracked anyway so it's all recoverable if I really need it).
 
 I liked the pattern enough that I turned it into a template. [`project-template`](https://github.com/PostHog/community-skills/tree/main/skills/project-template) is in the [community skills store](/docs/skills/community). Install it once per area of work, bind the project name and the changelog window, and you have a living hub that any agent on your team can read and write.
 
@@ -170,9 +170,9 @@ The same pattern covers the rest of what my team owns. `self-driving-dashboards`
 
 Another favourite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When an alert fires and I ask an agent to look into it, the agent loads this skill first, so it knows the alert's baseline, its history of false positives, and what fixed it last time before it touches a query. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it. A scout, `signals-scout-self-driving-alerts`, sweeps the fleet and flags alerts whose metric has gone dead or whose threshold no longer fits. 
 
-The alerts live in PostHog. The context about the alerts lives in the skill so a human or agent can easily get at it while a scout can also proactivly maintain it.
+The alerts live in PostHog. The context about the alerts lives in the skill so a human or agent can easily get at it while a scout can also proactively maintain it.
 
-Yet another cool thing here is that each skill is version tracked and we have optional decsription string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
+Yet another cool thing here is that each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
 <div className="w-fit mx-auto">
     <ProductScreenshot
