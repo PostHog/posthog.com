@@ -21,7 +21,7 @@ seo:
 
 When agent skills first came out, I thought they were silly. We are just casting magic spells now are we? Is that where we are?
 
-But over time I bought into the whole "context engineering" thing (as much as i fought they hype) and started to use them more, and now I'm convinced they will change your life!
+But over time I bought into the whole "context engineering" thing (as much as i fought the hype initially) and started to use them more, and now I'm convinced they will change your life!
 
 Here is a blog about all the reasons and ways I use and love skills and how they have changed my life. I hope it changes yours too.
 
@@ -172,7 +172,23 @@ The alerts live in PostHog. The context about the alerts lives in the skill so a
 
 Yet another cool thing here is that each skill is version tracked and we have optional decsription string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
-TODO: get version history and diff screen shots from this one - http://us.posthog.com/project/2/skills/self-driving-alerts or some other ones
+<div className="w-fit mx-auto">
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_version_history_6b161f26e5.png"
+        classes="rounded max-w-xs"
+        alt="The version history panel for the self-driving-alerts skill in PostHog. It shows 73 versions. Each version has a short description of what changed, a timestamp, and the person who published it. The latest version was published by a teammate."
+    />
+</div>
+
+*Every version of `self-driving-alerts` has a one-line description of what changed and who changed it. The latest one isn't mine.*
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_version_diff_9a0c37decf.png"
+    classes="rounded"
+    alt="A side-by-side diff of the self-driving-alerts skill body in PostHog, comparing version 61 with version 73. The alert counts on the signals line are highlighted where they changed: 112 to 113 alerts, 110 to 111 active, and 93 to 94 hourly."
+/>
+
+*Compare any two versions of a skill body. Here, v61 against v73: the alert counts go up as new alerts get added.*
 
 I used to keep this kind of thing in my head, a Notion page nobody read, or a README that went stale the week after I wrote it. Now it's in a place both my agents and my teammates can read, and something is checking it every hour.
 
@@ -245,7 +261,7 @@ Yes, I have skills that maintain skills. I did warn you.
 
 This one surprised me. `andy-hogs-2026q4` is my draft of Hopes, Obstructions, Growth, and Sneak attacks for our quarterly planning.
 
-And `andy-blogs` is the skill that tracked this post. It has one file per post, with the argument, the sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, and this post is about skills). It's on version 7. This paragraph is in its changelog.
+And `andy-blogs` is the skill that tracked this post. It has one file per post, with the argument, the sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, and this post is about skills). It's on version 8. This paragraph is in its changelog.
 
 Neither of these is a set of instructions. They're documents I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
 
