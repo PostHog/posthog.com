@@ -146,9 +146,7 @@ The surprisingly nasty problem you notice when you want to benchmark multiple mo
 
 Here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
 
-> **Illustration placeholder**
->
-> Run B12 retrieving shared memory saved by Run B4
+![Scout trace showing run B12 reusing a conclusion saved to shared memory by run B4.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/03_trace_b12_shared_memory_96ce3843c2.png)
 
 For results to reflect the model's quality, we need to make sure state isn't leaking. With multi-step agents that simulate human-agent conversation, state leaks into places normal test runners don't even check.
 
