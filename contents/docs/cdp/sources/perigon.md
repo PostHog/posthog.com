@@ -12,9 +12,6 @@ sourceId: Perigon
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Perigon connector syncs news articles, story clusters, journalists, media sources, people, companies, and topics from the [Perigon](https://www.perigon.io/) news intelligence API, so you can analyze news coverage and media data alongside your product data.
 

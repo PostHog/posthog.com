@@ -11,6 +11,11 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Inside PostHog
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Big decisions
 ---
 
 We're hiring [Site Reliability Engineers](https://apply.workable.com/posthog/j/071DD5C05A/) (SREs). I'm biased of course, but I think it's worth explaining why we think PostHog is the most exciting place to be an SRE right now. 

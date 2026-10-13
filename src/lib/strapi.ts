@@ -155,7 +155,7 @@ export interface TransactionMetadata {
 
 export type Transaction = {
     id: number
-    amount: number
+    amount: number | null
     date: string
     type: 'gift' | 'achievement' | 'redemption' | 'reply' | 'question'
     metadata?: TransactionMetadata
@@ -170,6 +170,7 @@ export type Wallet = {
 export type UserData = {
     email: string
     distinctId: string | null
+    blocked?: boolean
     // Only present when explicitly populated, which Strapi gates to the moderator role
     wallet?: Wallet | null
     creditRedemptionEnabled?: boolean

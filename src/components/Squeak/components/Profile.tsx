@@ -10,6 +10,16 @@ type ProfileProps = {
     compact?: boolean
 }
 
+export const isProfileBlocked = (profile?: StrapiRecord<ProfileData>) =>
+    Boolean(profile?.attributes?.user?.data?.attributes?.blocked)
+
+export const BlockedBadge = ({ profile }: { profile?: StrapiRecord<ProfileData> }) =>
+    isProfileBlocked(profile) ? (
+        <span className="rounded-sm border border-red dark:border-yellow px-1 text-xs font-semibold leading-5 uppercase text-red dark:text-yellow whitespace-nowrap">
+            Blocked
+        </span>
+    ) : null
+
 export const Profile = ({ className, profile, compact = false }: ProfileProps) => {
     return profile?.attributes ? (
         <Link

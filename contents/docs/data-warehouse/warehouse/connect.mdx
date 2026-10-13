@@ -1,18 +1,18 @@
 ---
-title: Connecting to the managed warehouse
+title: Connecting to the warehouse
 sidebar: Docs
 showTitle: true
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+<CalloutBox icon="IconFlask" title="The warehouse is in beta" type="action">
 
-Need access first? [Join the waitlist](/context-warehouse/managed-warehouse), then [set up your warehouse](/docs/data-warehouse/managed-warehouse/setup).
+Need access first? [Join the waitlist](/context-warehouse/warehouse), then [set up your warehouse](/docs/data-warehouse/warehouse/setup).
 
 </CalloutBox>
 
-The managed warehouse speaks the PostgreSQL wire protocol, so you connect with the same clients, drivers, and BI tools you'd point at any Postgres database. No PostHog-specific SDK involved.
+The warehouse speaks the PostgreSQL wire protocol, so you connect with the same clients, drivers, and BI tools you'd point at any Postgres database. No PostHog-specific SDK involved.
 
 ## Connection details
 
@@ -72,4 +72,4 @@ A few things a Postgres veteran will notice are absent: server-side functions an
 
 You don't need an external client to use the warehouse. Once provisioned, it's available in PostHog's [SQL editor](/docs/data-warehouse/query) alongside your other sources, and PostHog's AI features can use it as context. External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, or ad-hoc `psql` sessions.
 
-For larger or latency-sensitive workloads, [tune the worker's CPU, memory, and idle lifetime](/docs/data-warehouse/managed-warehouse/performance-tuning).
+For larger or latency-sensitive workloads, [tune the worker's CPU, memory, and idle lifetime](/docs/data-warehouse/warehouse/performance-tuning).

@@ -12,9 +12,7 @@ showTitle: true
 
 ## Book of business
 
-### Customer Success Managers
-
-Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We track this against goals with the CSM assignment and the `csm managed` tag in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>. Don't assign yourself as the CSM on an account, and don't add the tag yourself. Allocation is up to Dana, Phil and Simon.
+Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the account relationship history in PostHog Customer Analytics to track this against goals. Don't assign yourself as the CSM on an account - allocation is up to the CSM Team Leads and Simon.
 
 ## Weekly Customer Success standup
 
@@ -22,47 +20,77 @@ In addition to the weekly sprint planning meeting on a Monday, we do an account 
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
-## How contractual bonus works - Technical CSMs
+### How CSM bonus works
 
-CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback.
+- Your OTE is split 80/20 between base salary and bonus.
+- Bonus is paid on quarterly net revenue retention (NRR) above 100%, on a linear scale, and is _uncapped_.
+  - The Q4 2026 target is 110% NRR. 100% NRR = 0% bonus, 105% = 50%, 110% = 100%, 120% = 200%, and so on.
+  - The target may change in future quarters depending on how things go.
+- **Who is paid on what:**
+  - CSMs are paid on the NRR of their own book.
+  - CSM Team Leads are paid on the combined NRR of their team's books.
+  - The overall CS Lead is paid on the combined NRR of all CSM books.
+- Your bonus is guaranteed at 100% for your first 3 months at PostHog. If you exceed your target during that time, you get the higher amount.
+- Bonuses are paid at the end of January, April, July and October. We wait to see which invoices are paid in the first two weeks of the next quarter, then send you a breakdown of your result.
 
-> This plan will _also_ almost certainly change as we scale up the size and complexity of our success machine! As above, we will always ensure folks are treated fairly when we make changes.
+### How NRR is calculated
 
-**Variables**
+- We compare each account's annualized usage this quarter with the previous quarter (e.g. Q4 2026 vs Q3 2026).
+  - Monthly customers: the total of their 3 invoices in the quarter × 4.
+  - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
+- Usage is measured before discounts and excludes tax.
+- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
+- If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
+- Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
 
-- Your OTE comprises an 80/20 split between base and contractual bonus.
-- Bonus is paid based on revenue retention above 100%, and is _uncapped_.
-  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
-  - The Q3 2026 target is 110% quarterly NRR. This may change in future depending on how things go.
-  - To calculate retention we use the total usage over the past quarter and annualize this, then compare it to the quarter before that.
-    - For monthly customers this is the total of their 3 invoices multiplied by 4
-    - For annual customers, we look at the usage-based MRR and multiply by 4
-    - An account starts counting toward NRR once it has 3 paid invoices in the previous quarter (a $0 month doesn't count).
-- Bonuses are paid out quarterly, and in any case after an invoice is paid
-  - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
-- Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
-- If an account is added to your book:
-  - If you inherit a new account that hasn't been managed by a PostHog human before, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
-  - If you inherit an account from another CSM, AE, or AM, it will normally count toward your NRR in that quarter, even in the first 3 months.
-    - In exceptional circumstances we may need you to take on an account which we know isn't in a good state (ie. despite the previous owners best efforts we haven't been able to work with them).  We will note in writing on a case by case basis that any churn or downgrade in the first 3 months won't be counted against you.
-- How bonus is calculated:
-  - In general, we compare annualized ARR over the past quarter with annualized ARR from the previous quarter.
-    - For Q3 2026 bonus: Q3 ARR vs Q2 ARR
-  - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
-  - If an account is removed from your book mid-quarter (we do this extremely rarely), it will not be included in bonus calculation.
-  - If a customer churns during the quarter, their current ARR counts as $0 and they will be removed from your book the next quarter.
-  - If a customer drops below the $20k threshold with no likelihood of growing, we don't adjust their ARR - it counts as-is, and they will be removed from your book the next quarter.
-  - If we have to give a customer a big refund, we'll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
-  - If we give a customer additional credits (goodwill, bug/incident compensation - not the credits they pre-purchase with a contract), the NRR treatment depends on why we gave them:
-    - Unintended usage spikes - a misconfiguration, SDK bug, or runaway loop inflates usage: we credit the customer and exclude the excess usage from NRR. Nobody's NRR should go up because of an accident. There are [eligibility criteria for credits](/handbook/growth/sales/refunds#eligibility-criteria) - check them before promising one.
-    - Goodwill credits - a bug hurt a paying customer's experience but their usage was real: the credit compensates them, and the usage counts as normal.
-    - Startup / YC credits - usage covered by these doesn't count toward NRR. If a customer isn't paying us real money, we don't count it. In practice the 3-paid-invoices rule above handles this.
-    - Comped usage on contract buy-outs / early renewals (e.g. comping 2 months of usage to move a customer onto a new contract early) - no blanket rule here, so flag it to your team lead and we'll handle it case by case.
- 
-**Account allocation**
-- CSMs manage approximately $2.5M in ARR. Books are balanced by shape as well as total: a target number of accounts per ARR bucket, so a single large account doesn't dominate a book.
-- As of Q3 2026, a typical book is roughly 4 accounts at $20-30k, 12 at $30-60k, 5 at $60-100k, 5 at $100-250k, and 2 at $250k+. These numbers come from a live capacity calculation, and will shift as coverage grows and capacity modelling improves.
-- When rebalancing accounts (e.g., if accounts drop below the $20k threshold), we'll bring you up to the current quarter's target amount.
+### Which accounts count toward your NRR
+
+Your book is the set of accounts where you're the CSM in [PostHog Customer Analytics]([link](https://us.posthog.com/project/2/customer_analytics/accounts)). We use the account relationship history there, so changes can be made at any time and we can still see who held what, and when.
+
+An account counts toward your NRR for a quarter if **all** of these are true:
+
+1. You're the assigned CSM on the second-to-last day of the quarter.
+2. You've held it for at least one month of that quarter.
+3. It isn't in a grace period or an approved exception (see below).
+4. It isn't excluded (see "Excluded accounts" below).
+
+#### Adding accounts
+
+- Allocation is decided by the CSM Team Leads and Simon. Don't assign yourself as the CSM on an account.
+- **Accounts added in the last month of a quarter don't count for that quarter.** They start counting from the next quarter. This means we can get a CSM on an account as soon as it needs one, without penalizing them for a quarter they barely worked.
+
+#### Removing accounts
+
+- **You can drop an account until the end of the first month of the quarter.** Use the first month to review your book. If an account is in the wrong region, still being worked by a TAE, below $20k, or otherwise doesn't belong with you, raise it with your Team Lead. An account dropped in this window doesn't count toward your NRR for that quarter.
+- **After the first month, you keep the account for the rest of the quarter.** It counts toward your NRR unless:
+  - it moves to the YC/Startup program (it's then removed and excluded automatically), or
+  - Simon (or Ben B as backup) approves the removal in a public Slack thread. Approved removals are excluded from that quarter. 
+- Team Leads check every book at the start of each quarter and remove accounts that have churned or are below $20k ARR. If one is missed and you're still assigned at quarter end, raise it and it will be excluded, not counted against you.
+
+#### Grace period: accounts nobody has looked after
+
+- If you take on an account that wasn't actively managed (ie. engaged proactively with the customer) by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
+- We do this so you can help customers right-size their spend, rather than leaving them to waste money on a poor implementation.
+- From the next quarter onwards the account counts as normal. If it has churned or fallen below $20k ARR by then, work with your Team Lead to get it removed before the grace quarter ends.
+
+#### Taking over an account from someone else
+
+- If you inherit an account from another CSM, a TAE or a TAM who was actively working it within the previous 90 days, it counts toward your NRR from the quarter you take it on (subject to the one-month rule above).
+
+#### Exception: accounts at risk of churn
+
+- Sometimes we'll ask you to take on an account we already know is at risk, because it has churn signals and nobody has been able to engage with them. We don't want to penalize you for trying.
+- If Simon (or Ben B as backup) approves it in a public Slack thread **within the first month of you taking the account**, any churn or contraction in that quarter won't count against you. This works the same way as the grace period above.
+- By the end of that quarter, the account either leaves your book or becomes a normal book account and counts from the next quarter.
+
+#### Excluded accounts
+
+These never count toward CSM NRR:
+
+- Accounts in the YC program, including accounts that have received YC credits.
+- Accounts that churned or were recorded as churned in a previous quarter.
+- Accounts in a grace period, or approved as an at-risk exception, for the quarter they apply to.
+- Manual exclusions approved by Simon or Ben B. These are recorded in the [NRR exclusions sheet](https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975) so there's a record of every one.
 
 ## Working with engineering teams
 

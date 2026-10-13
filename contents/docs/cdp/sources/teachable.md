@@ -12,9 +12,6 @@ sourceId: Teachable
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Teachable connector syncs your online school's data – users, courses, course enrollments, sales transactions, and pricing plans – into PostHog, so you can combine course sales and student progress with the rest of your analytics data.
 

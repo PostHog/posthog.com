@@ -12,9 +12,6 @@ sourceId: Chargedesk
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The ChargeDesk connector syncs your billing and payments data into PostHog, so you can analyze charges, customers, and subscriptions alongside your product data.
 

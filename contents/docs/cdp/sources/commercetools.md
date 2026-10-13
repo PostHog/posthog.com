@@ -9,12 +9,6 @@ availability:
 sourceId: Commercetools
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The commercetools source is currently in alpha. It has been tested against the commercetools API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The commercetools connector syncs your commerce data into PostHog, including orders, customers, payments, carts, product projections, categories, discount codes, and inventory.
 
 ## Adding a data source

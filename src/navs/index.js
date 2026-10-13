@@ -6762,8 +6762,8 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'red',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     children: [
                         {
@@ -6825,33 +6825,33 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Managed warehouse',
+                    name: 'Warehouse',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/data-warehouse/managed-warehouse',
+                    url: '/docs/data-warehouse/warehouse',
                     icon: 'IconDatabase',
                     color: 'purple',
                 },
                 {
                     name: 'Set up your warehouse',
-                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    url: '/docs/data-warehouse/warehouse/setup',
                     icon: 'IconListCheck',
                     color: 'blue',
                 },
                 {
                     name: 'Connect and query',
-                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    url: '/docs/data-warehouse/warehouse/connect',
                     icon: 'IconTerminal',
                     color: 'seagreen',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/data-warehouse/managed-warehouse/connect',
+                            url: '/docs/data-warehouse/warehouse/connect',
                         },
                         {
                             name: 'Performance',
-                            url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
+                            url: '/docs/data-warehouse/warehouse/performance-tuning',
                         },
                     ],
                 },

@@ -48,7 +48,7 @@ This means anyone that currently has a TAM with open opportunities for cross sel
 
 Who are your most PostHog-pilled customers in the area? They should be at this dinner! Arguably the most important cohort at the cohort dinner are people who use PostHog regularly, love it, and are happy to talk other peoples' ears off about all the different things they do with it.
 
-You should also make sure to bring a number of PostHog people so that they can spread through the room and be part of small groups throughout the night. Everyone at PostHog is an awesome dinner guest (it's basically baked into our interview process), but try to think of the audience that will be at the dinner. Got someone coming who is evaluating our Managed Warehouse? Bring an engineer who is working on it!
+You should also make sure to bring a number of PostHog people so that they can spread through the room and be part of small groups throughout the night. Everyone at PostHog is an awesome dinner guest (it's basically baked into our interview process), but try to think of the audience that will be at the dinner. Got someone coming who is evaluating our Warehouse? Bring an engineer who is working on it!
 
 ## How?
 

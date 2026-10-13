@@ -11,9 +11,9 @@ sourceId: WeightsAndBiases
 
 The Weights & Biases connector syncs your ML experiment tracking data into PostHog, including projects, runs, sweeps, reports, and artifact versions across every project in your entity.
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+<CalloutBox icon="IconInfo" title="What this source syncs" type="fyi">
 
-The Weights & Biases source is currently in alpha. Per-step run metric history isn't synced – runs include their final summary metrics instead.
+Per-step run metric history is not synced. Runs include their final summary metrics instead.
 
 </CalloutBox>
 

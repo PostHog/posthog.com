@@ -9,12 +9,6 @@ availability:
 sourceId: HiBob
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change. If you encounter any issues, please [report them on GitHub](https://github.com/PostHog/posthog/issues/new?labels=bug&template=bug_report.md).
-
-</CalloutBox>
-
 The HiBob connector syncs your Bob HR data into the PostHog data warehouse. Enter your HiBob Service User credentials to automatically pull employee and task data into PostHog.
 
 ## Prerequisites

@@ -12,9 +12,6 @@ sourceId: Asknicely
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The AskNicely connector syncs your survey response history – NPS, CSAT, and 5-star scores, comments, and contact details – into PostHog, so you can join satisfaction data with product usage and revenue data.
 

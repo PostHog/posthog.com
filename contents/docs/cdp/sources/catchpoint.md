@@ -12,9 +12,6 @@ sourceId: Catchpoint
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Catchpoint Systems connector syncs your synthetic monitoring configuration data – tests, nodes, products, folders, and divisions – into PostHog, so you can analyze your monitoring setup alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: Scrunch
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Scrunch connector syncs AI brand monitoring data into the PostHog Data warehouse, so you can analyze how your brand appears in AI-generated responses alongside your product data.
 
