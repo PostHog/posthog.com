@@ -212,9 +212,9 @@ Here's an example of one of the first dry runs we tested. It differs from the pr
 > 
 > Dry-run execution altering intermediate report behavior
 
-Because the dry run agent doesn't have all the tools that the actual run would use (creating new reports, editing data, and so on), it leaves us with the blind spots that we can't test. For the case of scouts, it's acceptable, as we evaluate retrieving the data way more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
+Because the dry run agent doesn't execute all the steps that an actual run would (creating new reports, editing data, and so on), it leaves us with the blind spots that we can't test. For the case of scouts, it's acceptable, as we evaluate retrieving the data way more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
 
-If it's a blocker for your agent, the next best thing is to create offline benchmarks. Though, it comes with a couple of surprises.
+If it's a blocker for your agent, the next best thing is an isolated environment where it can complete the workflow with a full set of tools. Freezing the data in that environment also makes the benchmark repeatable. Though, it comes with a couple of surprises.
 
 ## 3. How to benchmark offline
 
