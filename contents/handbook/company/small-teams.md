@@ -211,15 +211,6 @@ If more mature product areas cannot cope with the workload, small teams will cla
 ### How does hiring in the small team work?
 
 The small team is responsible for creating roles for those that they need.
-### Aren't most small teams way too small?
-
-In general, no – it's surprisingly great how much just 2-6 people can get done.
-
-If more mature product areas cannot cope with the workload, small teams will clarify where we need to hire too. In fact, it'll make sure we keep the scrappy fun side of working here as we get bigger. A team doesn't _have_ to be six people.
-
-### How does hiring in the small team work?
-
-The small team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
