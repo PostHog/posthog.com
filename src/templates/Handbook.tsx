@@ -368,12 +368,13 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname.startsWith('/docs/data-warehouse/sources/')
 
     // Same nudge for AI observability SDK installation pages. The coding-agent integrations
-    // (Claude Code, OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so
-    // running the wizard in a project doesn't set them up. The installation index has its own
-    // AI wizard section in the MDX.
+    // (OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so running the
+    // wizard in a project doesn't set them up. Anthropic renders the hint inside its SDK tabs
+    // only, because its Claude Platform and Claude Code tabs have no project code to set up.
+    // The installation index has its own AI wizard section in the MDX.
     const showAIObservabilityWizardHint =
         pathname.startsWith('/docs/ai-observability/installation/') &&
-        !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+        !['anthropic', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
     const releaseCallout = hasReleaseCallout(sourceReleaseStatus) ? (
         <SourceReleaseCallout releaseStatus={sourceReleaseStatus} />

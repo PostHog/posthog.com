@@ -27,7 +27,6 @@ const PLATFORM_ORDER = [
     '/docs/ai-observability/installation/crewai',
     '/docs/ai-observability/installation/pydantic-ai',
     '/docs/ai-observability/installation/openai-agents',
-    '/docs/ai-observability/installation/claude-agent-sdk',
     '/docs/ai-observability/installation/aws-bedrock',
     '/docs/ai-observability/installation/deepseek',
 ]
