@@ -65,7 +65,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-red',
     },
     {
-        name: 'Data sources',
+        name: 'Sources',
         allocation: '1M rows + FREE historical',
         note: (
             <>

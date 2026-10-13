@@ -198,7 +198,7 @@ const faqs = [
             <p>
                 Usage is calculated on a per-product level. Events for product and web analytics, recordings for session
                 replay, requests for feature flags and experiments, exceptions for error tracking, responses for
-                surveys, synced rows for data sources, messages for workflows, and GB ingested for logs.
+                surveys, synced rows for sources, messages for workflows, and GB ingested for logs.
             </p>
         ),
     },
