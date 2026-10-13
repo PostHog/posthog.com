@@ -187,7 +187,11 @@ function QuestionFormMain({
                         <Form className="mb-0">
                             {/* The forum composer is a full page, so it skips the avatar beside the fields. */}
                             {!forum && (
-                                <div className="w-[40px] h-[40px] float-left rounded-full overflow-hidden">
+                                <div
+                                    className={`w-[40px] h-[40px] float-left rounded-full overflow-hidden ${
+                                        isInForum ? 'hidden @sm:block' : ''
+                                    }`}
+                                >
                                     <Avatar
                                         className="w-[36px]"
                                         image={getAvatarURL(user?.profile)}
@@ -196,7 +200,10 @@ function QuestionFormMain({
                                 </div>
                             )}
 
-                            <div data-scheme="primary" className={`${forum ? '' : 'pl-[55px]'} space-y-2`}>
+                            <div
+                                data-scheme="primary"
+                                className={`${forum ? '' : isInForum ? '@sm:pl-[55px]' : 'pl-[55px]'} space-y-2`}
+                            >
                                 {status && status !== 'operational' && (
                                     <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
                                         <h5 className="m-0">Heads up!</h5>
@@ -241,6 +248,7 @@ function QuestionFormMain({
                                     </>
                                 )}
                                 <RichText
+                                    className={isInForum ? 'transform-gpu' : ''}
                                     onSubmit={submitForm}
                                     autoFocus={!subject}
                                     setFieldValue={setFieldValue}
@@ -547,7 +555,7 @@ export const QuestionForm = ({
     }, [slug])
 
     return (
-        <div>
+        <div className={isInForum ? '@container' : ''}>
             {view ? (
                 {
                     'question-form': (
@@ -576,8 +584,12 @@ export const QuestionForm = ({
                     approval: <Approval handleConfirm={() => setView(null)} />,
                 }[view]
             ) : (
-                <div className="flex flex-1 space-x-2">
-                    <div className="rounded-full overflow-hidden aspect-square w-[40px] shrink-0">
+                <div className="flex flex-1 gap-2">
+                    <div
+                        className={`rounded-full overflow-hidden aspect-square w-[40px] shrink-0 ${
+                            isInForum ? 'hidden @sm:block' : ''
+                        }`}
+                    >
                         <Avatar
                             className="w-full rounded-full"
                             image={getAvatarURL(user?.profile)}
