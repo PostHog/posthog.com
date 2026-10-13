@@ -193,17 +193,21 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                         </p>
                         <OSButton
                             asLink
-                            to={twigLearnUrl(posthog)}
+                            to={TWIG_URL}
                             external
                             hideExternalIcon
                             variant="primary"
                             size="md"
                             onClick={(event) => {
+                                // The website project needs a profile to join this anonymous visitor across domains.
                                 posthog?.createPersonProfile?.()
                                 selectResource('twig', 'explore_twig')
-                                if (event.currentTarget instanceof HTMLAnchorElement) {
-                                    event.currentTarget.href = twigLearnUrl(posthog)
-                                }
+                                const destination = twigLearnUrl(posthog)
+                                if (destination === TWIG_URL) return
+
+                                // Keep the copyable link free of this visitor's ID.
+                                event.preventDefault()
+                                window.open(destination, '_blank', 'noopener,noreferrer')
                             }}
                         >
                             Explore Twig

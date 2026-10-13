@@ -251,7 +251,7 @@ agent/story/Twig choices. The agent prompt copy button records `learn_prompt_cop
 the reader reaching the chapter's end; it is an engagement signal, not proof of comprehension.
 These events include the volume and a short resource, section, or chapter key, without prompt text.
 Agent and Twig selections measure the choice to open a resource, not successful use inside it.
-The Twig link passes the website visitor ID and current session, when available, in a URL fragment. Twig removes the
+The copyable Twig link is the plain Twig URL. Clicking or pressing Enter on Explore Twig passes the website visitor ID and current session, when available, in a URL fragment. Copying the link or opening it from a context menu reaches Twig without the handoff. Twig removes the
 fragment before starting its own analytics, then sends that visitor's Twig learning events to the
 website project under the same ID. Twig's own project continues to receive its usual events.
 Existing `$pageview`, `reader_tab_click`, and `pocket_guide_interaction` events cover entry and
