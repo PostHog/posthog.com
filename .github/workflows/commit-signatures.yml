@@ -11,7 +11,6 @@ permissions:
 jobs:
     check:
         name: Commit signatures
-        if: github.event.action != 'edited' || github.event.changes.base != null
         concurrency:
             group: commit-signatures-${{ github.event.pull_request.number }}
             cancel-in-progress: true
