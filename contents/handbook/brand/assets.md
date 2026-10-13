@@ -149,13 +149,7 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
-
-Here's how:
-
-1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
-2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar.
-3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
+Approved hedgehogs are on [brand.posthog.com](https://brand.posthog.com), with the other brand assets. Download them from there before you request a new hog.
 
 If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests).
 
