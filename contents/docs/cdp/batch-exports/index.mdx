@@ -164,7 +164,7 @@ Pricing for custom SQL query exports hasn't been decided yet, but they're free w
 
 #### API and MCP
 
-You can also create these exports with the [API](/docs/api/batch-exports). Set `model` to `hogql` and pass the query in `hogql_query`. Timestamps default to UTC. To use the project timezone instead, set `hogql_modifiers` to `{"convertToProjectTimezone": true}`.
+You can also create these exports with the [API](/docs/api/batch-exports). Set `model` to `hogql` and pass the query in `hogql_query`. Timestamps default to UTC, unless your project sets the `convertToProjectTimezone` modifier. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `false` for UTC.
 
 AI agents can also create them through the [PostHog MCP](/docs/cdp/surfaces/mcp).
 
