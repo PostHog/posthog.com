@@ -24,6 +24,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
+import ContextMachineSection from './ContextMachine'
 import mcpToolsData from '../../data/mcp-tools.json'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
@@ -719,6 +720,7 @@ export default function MCPPage(): JSX.Element {
                         <WhatIsMCP />
                         <MCPUseCases />
                         <WhyMCP />
+                        <ContextMachineSection />
                         <MCPInstallation />
                         <MCPResources />
                     </div>
