@@ -6762,8 +6762,8 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'red',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     children: [
                         {
