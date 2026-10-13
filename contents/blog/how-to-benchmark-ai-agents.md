@@ -212,7 +212,7 @@ Here's an example of one of the first dry runs we tested. It differs from the pr
 > 
 > Dry-run execution altering intermediate report behavior
 
-Because the dry run agent doesn't execute all the steps that an actual run would (creating new reports, editing data, and so on), it leaves us with the blind spots that we can't test. For the case of scouts, it's acceptable, as we evaluate retrieving the data way more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
+Because the dry-run agent doesn't execute all the steps an actual run would (creating new reports, editing data, and so on), it leaves blind spots we can't test. For scouts, it's acceptable, since we evaluate retrieving data far more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
 
 If it's a blocker for your agent, the next best thing is an isolated environment where it can complete the workflow with a full set of tools. Freezing the data in that environment also makes the benchmark repeatable. Though, it comes with a couple of surprises.
 
@@ -276,7 +276,13 @@ On the other hand, you can, as always, overprepare and make it as realistic as p
 > 
 > September 23 trace where agent flags data-slice extraction artifacts as suspicious data
 
-Needless to say, both cases will negatively affect your grading, since they cover behavior you don't want to test. And, sadly, there's no silver bullet – you just need to run and tweak it until you don't catch any "agent is suspicious" traces anymore.
+To TLDR it, if the agent starts treating the investigation as a test, it could:
+
+- Stop at a good-enough explanation instead of running extra queries to verify it.
+- Spend part of its budget investigating gaps or inconsistencies in the restored data instead of the actual task.
+- Return more speculative findings it would normally leave out.
+
+Needless to say, all such cases can negatively affect your grading, since they cover behavior you don't want to test. And, sadly, there's no silver bullet – you just need to run and tweak it until you don't catch any "agent is suspicious" traces anymore.
 
 ---
 
