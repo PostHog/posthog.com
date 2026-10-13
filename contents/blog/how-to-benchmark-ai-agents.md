@@ -218,60 +218,15 @@ If it's a blocker for your agent, the next best thing is an isolated environment
 
 ## 3. How to benchmark offline
 
-You can run hundreds of agents against the production database pretty reliably. However, because the data changes between runs, you can't compare runs, since it raises the question: "did the score improve because of our change or because the data is different?" It also leaves blind spots, as we mentioned above.
+You can run hundreds of agents against the production database pretty reliably. It comes with the downsides I mentioned in the previous block, because the data changes between runs. You can't compare runs, since it raises the question: "did the score improve because of our change or because the data is different?"
 
-We can avoid it by moving from "production environment that changes all the time" to "production environment with the same starting state", e.g. frozen environments. Meaning, we need to replicate (or simulate) our app, inject real (or real enough) data inside of it and make the agent believe that it's a real thing.
+We can avoid it by moving from "production environment that changes all the time" to "production environment with the same starting state", e.g. frozen environments. Meaning, we need to replicate (or simulate) our app, inject real (or real enough) data into it, and make the agent believe it's a real thing. Why bother:
 
-Because frozen environments have a fixed starting point, you can reset them after every run, solving problems with data leaks. It also means that the agent is actually allowed to change the state, write, create, delete, you name it, as we test the task end to end, leaving fewer blind spots. As a bonus, because data stays fixed, the benchmark you did for model X a month or two ago is still comparable to the benchmark for model Y you did today.
+- Because frozen environments have a fixed starting point, you can reset them after every run, solving problems with data leaks. In our case, we run a copy of PostHog inside VMs, delete the VM after each benchmark, and spawn a new one.
+- It also means that the agent is actually allowed to change the state, write, create, delete, you name it, as we test the task end to end, leaving fewer blind spots.
+- As a bonus, because data stays fixed, the benchmark you did for model X a month or two ago is still comparable to the benchmark for model Y you did today.
 
 I use the word "offline" loosely here, since you still need to call AI endpoints and so on. The main point is that the state is frozen and you can reset it at any time.
-
-<!-- Draft alternatives for the two paragraphs above (editorial comment r4251937981).
-Each option replaces both paragraphs, from "Instead, you could decide" through "reset it at any time".
-
-Option 1 - Define frozen state directly (recommended)
-
-Offline evals give each run the same starting data. We save the inputs ahead of time and reuse them instead of letting each agent read whatever happens to be in production. That's what I mean by "frozen state": the data the task depends on stays fixed across comparisons.
-
-The agent can still make different decisions or queries, and we still call model APIs. Its tools need to work against that saved setup, whether that means returning prepared answers or querying an isolated copy of the data.
-
-Option 2 - Start with a scout example
-
-Say we're testing whether a scout can find an error spike. We want every model to investigate the same spike, with the same events and comparison period available. If we let each run query production, tomorrow's model could get a different problem from today's.
-
-For an offline eval, we save the relevant data and use it for each comparison. "Frozen" refers to those inputs, not the agent's output: it can still investigate differently, and it still calls model APIs. We need a way for its tools to access the saved case instead of live production data.
-
-Option 3 - Explain why the same prompt isn't enough
-
-Giving every agent the same prompt doesn't give it the same test. Most of its inputs come from tools: the same SQL query can return different rows next week. To repeat the test, we need to preserve the data those tools read, too.
-
-That's the job of an offline eval. We prepare a fixed set of data for the task and reuse it when comparing models or prompts. We still call AI endpoints; "offline" means the test doesn't depend on the changing production database.
-
-Option 4 - Explain it through a failure we want to reproduce
-
-Offline evals let us keep testing a case after production has moved on. If a scout misses a problem today, we can save the relevant data and check whether a new model or prompt finds it next week. We don't have to wait for the same problem to happen again.
-
-That saved data is the "frozen state". Each run gets access to the same case through its tools, so we can compare how it investigates and what it finds. The model calls still happen online; it's the test data we're keeping fixed.
-
-Option 5 - Distinguish the starting state from the agent's work
-
-For offline evals, we freeze the starting conditions, not everything the agent does. It can still make queries, write a report, or update its private memory. If it changes anything during the test, we reset those changes before the next run so each variant starts with the same inputs.
-
-We still call AI endpoints. The difference is that the benchmark runs against a saved setup instead of whichever data happens to be in production. The next question is how much of that setup we need to recreate.
-
-Option 6 - Keep it short
-
-Instead, we can save the data for a task and reuse it for every comparison. That's what "frozen state" means here: each agent starts with the same information available, even if the production database has changed since we saved it.
-
-I call these evals "offline" because they don't depend on live production data. The models still run through their APIs, and they can still take different routes through the task. We just need their tools to work against our saved inputs.
-
-Option 7 - Connect it to the frozen PR example
-
-It's the same idea as the frozen PR we used for ReviewHog. Every reviewer sees the same code, so we can compare what it catches. For a scout, we need to preserve the data it investigates: the events, records, and context relevant to the task.
-
-That's what we're calling an offline eval. The model still runs through its API, but its tools work against saved data or prepared responses instead of live production data. The practical challenge is giving it enough of that saved world to complete the task.
-
--->
 
 We went through three stages to get this working.
 
