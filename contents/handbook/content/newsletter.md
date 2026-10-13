@@ -94,7 +94,7 @@ Having a good post preview (hero) image is important. Build mode hero images use
 
 You can find more examples in the <PrivateLink url="https://www.figma.com/design/3wxLXDQ87KfHoEl1lBx4OW/Newsletter-Graphics?node-id=2664-319&t=f5TtWiGDYB8q51GY-4">Newsletter Graphics Figma file</PrivateLink>. If you get stuck, [open an art request](/handbook/brand/art-requests) to have the <SmallTeam slug="graphics" /> make one for you (give them at least 1 week to do so).
 
-The image needs to be 1200x630 px for the `posthog.com` OG image, 1456x1048 px for the Substack preview image, 995x398 px for X, and 1441x810 px for LinkedIn.
+The image needs to be 1920x1080 px for the `posthog.com` blog image, 1200x630 px for the Substack preview image, 995x398 px for X, and 1441x810 px for LinkedIn.
 
 We publish the newsletter on Substack and then add it to `posthog.com/newsletter` via GitHub.
 
