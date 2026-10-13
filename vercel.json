@@ -4824,6 +4824,11 @@
             "destination": "/handbook/community"
         },
         {
+            "source": "/art-library",
+            "destination": "https://brand.posthog.com",
+            "statusCode": 301
+        },
+        {
             "source": "/logo",
             "destination": "/handbook/brand/assets"
         },
