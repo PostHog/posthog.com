@@ -44,9 +44,7 @@ We have our own code review agent, called ReviewHog, that covers a significant p
 
 The best solution we came up with initially was surprisingly effective and mostly simple.
 
-> **Illustration placeholder**
-> 
-> The deck illustration for the simple manual-check approach
+![Review the same frozen PR, collect a list of bugs, change one setting, and compare findings, time, and cost.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/01_manual_check_603fcae577.png)
 
 The recipe:
 
@@ -68,9 +66,7 @@ Let's stick with the code review for a moment longer. First, we need more PRs. S
 
 And that's exactly what we did.
 
-> **Illustration placeholder**
-> 
-> The deck illustration for the harder incident-golden-set approach
+![Build a golden set from real incidents, recreate the PRs that introduced the bugs, and evaluate whether reviewers identify their causes.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/02_golden_set_b744f1abbe.png)
 
 We collected a golden set of PostHog incidents built from incident discussions and code. Each incident in the set includes:
 
