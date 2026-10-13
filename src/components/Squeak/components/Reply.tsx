@@ -354,7 +354,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
 
     return profile?.data ? (
         <div className={`transition-opacity duration-300 ${pendingDelete ? 'opacity-30 pointer-events-none' : ''}`}>
-            <div className={`pb-1 flex items-center space-x-2 ${isInForum ? 'pr-8' : ''}`}>
+            <div className={`pb-1 flex flex-wrap items-center gap-x-2 gap-y-1 ${isInForum ? '@xl:pr-8' : ''}`}>
                 {isMax ? (
                     <Tooltip
                         trigger={
@@ -364,7 +364,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                     className="flex items-center !text-black dark:!text-white"
                                     to={`/community/profiles/${profile.data.id}`}
                                 >
-                                    <div className="mr-2 relative ml-[-2px]">
+                                    <div className="mr-2 relative ml-[-2px] shrink-0">
                                         <Avatar
                                             className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full`}
                                             image={getAvatarURL(profile?.data)}
@@ -399,7 +399,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         className="flex items-center !text-black dark:!text-white"
                         to={`/community/profiles/${profile.data.id}`}
                     >
-                        <div className="mr-2 relative ml-[-2px]">
+                        <div className="mr-2 relative ml-[-2px] shrink-0">
                             <Avatar
                                 className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
@@ -438,7 +438,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
                     </>
                 )}
-                <div className="!ml-auto flex items-center space-x-1">
+                <div className="ml-auto flex items-center space-x-1">
                     {isForumModerator && (
                         <OSButton
                             size="sm"
@@ -479,7 +479,11 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                 </div>
             </div>
 
-            <div className={`border-l-0 ${isInForum ? 'pl-[calc(2rem_+_.5rem)] pr-8 -mt-2' : 'ml-[33px]'} pl-0 pb-1`}>
+            <div
+                className={`border-l-0 ${
+                    isInForum ? 'mt-1 @xl:pl-[calc(2rem_+_.5rem)] @xl:pr-8 @xl:-mt-2' : 'ml-[33px]'
+                } pl-0 pb-1`}
+            >
                 {isMax &&
                     helpful === null &&
                     (isModerator || isAuthor) &&
