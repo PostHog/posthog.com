@@ -17,9 +17,10 @@ import { IconClaudeCode } from 'components/OSIcons/Icons'
 import { StepDefinition } from 'onboarding/steps'
 import { Logo } from '@posthog/brand/logo'
 import { getCookie } from 'lib/utils'
+import TraceExplorerCallout from './trace-explorer-callout'
 
 const SUPER_MAX = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/max.png'
-const DETECTIVE_HOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png'
+const EXPLORER_HOG = '/images/docs/ai-observability/explorer-hedgehog.png'
 const PROJECT_TOKEN_URL = 'https://app.posthog.com/settings/project#variables'
 
 const LOGIN_URL = 'https://app.posthog.com/login'
@@ -324,47 +325,15 @@ export const ClaudePlatformBanner = (): JSX.Element => {
     }, [])
 
     return (
-        <div className="relative overflow-hidden rounded not-prose border border-secondary mb-8">
+        <div className="not-prose mb-8">
             <MaxDropIn onAccept={scrollToSetup} />
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
-                className="dark:hidden absolute inset-0 -bottom-12"
-                imgClassName="h-full w-full object-cover"
+            <TraceExplorerCallout
+                hedgehogSrc={EXPLORER_HOG}
+                claudeLogo={<IconClaudeCode />}
+                posthogLogo={<Logo layout="logomark" width="auto" />}
+                setUpHref="#copy-your-project-token"
+                className="!my-0"
             />
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
-                className="hidden dark:block absolute inset-0 -bottom-12"
-                imgClassName="h-full w-full object-cover"
-            />
-            <div className="relative px-5 @lg:px-8 py-5">
-                <div className="flex flex-col-reverse @lg:flex-row items-center justify-between gap-4">
-                    <div className="flex-1 text-center @lg:text-left max-w-lg">
-                        <div className="flex items-center justify-center @lg:justify-start gap-2 text-sm font-semibold">
-                            <IconClaudeCode className="size-4" />
-                            <span className="opacity-75">Claude Platform</span>
-                            <span className="opacity-50">+</span>
-                            <Logo layout="logomark" width="auto" className="h-3.5 w-auto" />
-                            <span className="opacity-75">PostHog</span>
-                        </div>
-                        <p className="text-xl font-bold !mt-1 !mb-0">See every Claude call in PostHog</p>
-                        <p className="!mt-1 !mb-0 text-sm opacity-75">
-                            The Claude Platform exports{' '}
-                            <a href="https://opentelemetry.io/docs/concepts/signals/traces/" className="underline">
-                                OpenTelemetry traces
-                            </a>{' '}
-                            of your Messages API calls and Managed Agents sessions straight to PostHog. You get cost,
-                            latency, and every conversation, with no code changes.
-                        </p>
-                    </div>
-                    <div className="shrink-0">
-                        <img
-                            src={DETECTIVE_HOG}
-                            alt="A hedgehog detective with a magnifying glass"
-                            className="w-28 @lg:w-32"
-                        />
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }
