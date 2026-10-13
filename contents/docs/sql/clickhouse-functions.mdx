@@ -153,31 +153,33 @@ If the function's name includes a leading underscore, then it's not safe and sim
 
 ### SHA1
 
-`SHA1(value)` returns the 20-byte binary SHA-1 digest of a string. Use `hex` to display the digest as hexadecimal text:
+`SHA1(value)` returns the SHA-1 digest of a string as 40 uppercase hexadecimal characters:
 
 ```sql
-SELECT lower(hex(SHA1('abc')))
--- a9993e364706816aba3e25717850c26c9cd0d89d
+SELECT SHA1('abc')
+-- A9993E364706816ABA3E25717850C26C9CD0D89D
 ```
 
 `SHA1` accepts one argument and returns `NULL` for a `NULL` input. It hashes UTF-8 bytes without normalizing Unicode.
 
-In JSON query responses, binary values that cannot be decoded as UTF-8 are encoded as Base64. This does not change the bytes used inside SQL expressions. Use `lower(hex(SHA1(value)))` when you need a consistent hexadecimal result.
+Use `lower(SHA1(value))` for lowercase hexadecimal text. The result is hexadecimal text in query API responses and cached results too.
 
 To calculate the hash used for feature flag percentage bucketing, take the first 60 digest bits and divide by `2^60 - 1`:
 
 ```sql
 SELECT
     bitShiftRight(
-        reinterpretAsUInt64(reverse(substring(
-            SHA1(concat('beta-search.', 'user-17', '')), 1, 8
-        ))),
+        reinterpretAsUInt64(reverse(unhex(substring(
+            SHA1(concat('beta-search.', 'user-17', '')), 1, 16
+        )))),
         4
     ) / 1152921504606846975 AS bucket
 -- 0.009101217133290002
 ```
 
-The input is the flag's bucketing prefix, resolved identifier, and salt, concatenated without extra separators. The prefix is the flag key followed by a dot for version 1 flags, or the seed followed by a dot for version 2 flags. Use an empty salt for percentage rollouts and `variant` for variant assignment. The `/` operator performs floating-point division, matching the flag evaluator's rounding. Avoid `toFloat` here: its safe cast can return `NULL` for large integers.
+The input is the flag's bucketing prefix, resolved identifier, and salt, concatenated without extra separators. The prefix is the flag key followed by a dot for version 1 flags, or the seed followed by a dot for version 2 flags. Use an empty salt for percentage rollouts and `variant` for variant assignment.
+
+The example decodes the first 16 hexadecimal characters into eight bytes, then keeps the first 60 bits. The `/` operator performs floating-point division, matching the flag evaluator's rounding. Avoid `toFloat` here: its safe cast can return `NULL` for large integers.
 
 This calculates only the hash. It does not resolve identifiers, apply their truncation or empty-identifier rules, evaluate release conditions, or apply overrides. Use the feature flag SDKs or API to evaluate a flag.
 
