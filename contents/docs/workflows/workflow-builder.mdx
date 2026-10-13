@@ -13,15 +13,16 @@ Workflows are a collection of steps that automate a process or deliver messages 
 
 Workflows are composed of the following components:
 
-| Component                             | Description                                                                                                                                                     |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, a Slack message, manually, or on a schedule. |
-| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                        |
-| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                             |
-| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
-| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
-| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                      |
-| [AI tasks](/docs/workflows/ai-tasks)  | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
+| Component                                 | Description                                                                                                                                                     |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                     | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, a Slack message, manually, or on a schedule. |
+| [Dispatches](#dispatches)                 | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                        |
+| [Delays](#delays)                         | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                             |
+| [Audience splits](#audience-splits)       | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
+| [PostHog actions](#posthog-actions)       | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
+| [Output variables](#output-variables)     | Store data from step results in workflow variables for use in later steps.                                                                                      |
+| [Workflow variables](#workflow-variables) | Reference the workflow's own name and ID inside any step.                                                                                                       |
+| [AI tasks](/docs/workflows/ai-tasks)      | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
 
 ## Draft and enabled workflows
 
@@ -369,3 +370,27 @@ Result paths let you extract specific data from a step's response. Use dot notat
 | `body.results[0].id` | A property from the first array item   |
 
 Leave the result path blank to store the entire step result.
+
+## Workflow variables
+
+Workflow steps have access to system-provided variables that reference the workflow itself. Use these in any step that supports [Liquid templating](/docs/workflows/message-templates#liquid-and-merge-tags).
+
+| Variable            | Description                       | Example                                                    |
+| ------------------- | --------------------------------- | ---------------------------------------------------------- |
+| `{{ source.name }}` | The workflow's name               | `Onboarding`                                               |
+| `{{ source.id }}`   | The workflow's unique ID          | `01a06ab7-...`                                             |
+| `{{ source.url }}`  | A link to the workflow in PostHog | `https://app.posthog.com/project/1/workflows/01a06ab7-...` |
+
+These variables are useful for tracking and debugging. For example, use a **Capture Event** action to record a `workflow_complete` event with the workflow name and ID as properties:
+
+```json
+{
+  "event": "workflow_complete",
+  "properties": {
+    "workflow_name": "{{ source.name }}",
+    "workflow_id": "{{ source.id }}"
+  }
+}
+```
+
+If the workflow doesn't have a name, `{{ source.name }}` falls back to `Hog flow: <id>`.
