@@ -180,7 +180,7 @@ Back to scouts, here's an example of a data-anomalies scout being benchmarked. R
 
 As you could've guessed, the results of such runs are highly questionable because the grading gets contaminated. A fast model like Luna could overperform by copying Opus's homework.
 
-It could work the other way around too. For example, an agent could decide not to cheat and honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped the task entirely.
+If the agent decides not to cheat, the shared state could cause grading to fail anyway. For example, an agent could decide to honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely.
 
 > **Illustration placeholder**
 > 
