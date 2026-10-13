@@ -156,16 +156,45 @@ Design your analytics with this in mind. Use event timestamps for time-based ana
 
 ## 9. Filter out internal users
 
-Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
+PostHog counts visits from you and your team the same as visits from everyone else, until you tell it who is internal. In a product with few users, this traffic can inflate your metrics.
 
-There are a few ways to do this:
-- Filter out events from users with internal emails.
-- Add a property on your events `is_employee` or `is_test_user` and filter events where these are `true`.
-- Exclude internal IPs from your analytics tracking.
-- Filter events by domain host e.g., exclude `localhost:3000`, `staging.yourapp.com`.
-- Turn off tracking in development using a `localhost`, `dev`, or config check.
+To filter out internal traffic:
 
-See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
+1. In your project settings, go to [**Filter out internal and test users**](https://app.posthog.com/settings/project-customization#internal-user-filtering) and add a filter for your internal traffic. A filter describes the traffic to keep, so use a negative operator such as **doesn't equal** or **doesn't contain**.
+2. Turn the filter on where you view your data. Each insight has a **Filter out internal and test users** toggle, and [Web Analytics](/docs/web-analytics) has a **Filter test accounts** switch at the top.
+
+The filter to add depends on the traffic you want to exclude:
+
+- **Team members who log in** - Add the [person property](/docs/product-analytics/person-properties) `email` with **doesn't end with** `@yourcompany.com`. This only matches people you [identify](/docs/product-analytics/identify), because [anonymous visitors](/docs/data/anonymous-vs-identified-events) have no email.
+- **Local, staging, and preview sites** - Add the [event property](/docs/data/events#event-properties) **Host** with **doesn't contain**, and enter a value such as `localhost` or `staging.yourapp.com`. Host includes the port, such as `localhost:3000`.
+- **An office or VPN** - Add the event property **IP address** with **doesn't equal**, and enter the IP address. This needs an IP address that doesn't change, and it doesn't work if your project [discards client IP data](/docs/privacy/data-collection#ip-data-capture).
+- **Your own browser** - Mark the browser as internal from your code, as described below. This also works for anonymous visits, such as when you browse your own website.
+
+### Exclude your own browser
+
+Call one of these methods in the browser that you want to exclude:
+
+- `posthog.setInternalOrTestUser()` - PostHog continues to capture your activity, and sets the `$internal_or_test_user` person property on you. New projects include an **Internal / Test users** [cohort](/docs/data/cohorts) for this property, and a filter that excludes it. If your project doesn't have them, create a cohort of people where `$internal_or_test_user` equals `true`, and add a filter with **user not in** that cohort.
+- `posthog.opt_out_capturing()` - PostHog stops capturing anything from this browser, including session replays. See [opting in and out](/docs/privacy/data-collection#opting-in-and-out).
+
+Both methods only affect the browser that calls them. Other visitors aren't affected. Call the method again if you clear your cookies and site data, or if you use a different browser, device, or domain.
+
+If you load PostHog with the [HTML snippet](/docs/web-analytics/installation/html-snippet), you can call the method from your browser's developer console on your site. If you install posthog-js with npm or another package manager, `posthog` isn't available in the console, so call the method from your app's code.
+
+### Exclude local development
+
+posthog-js marks visits to `localhost` and `127.0.0.1` as internal when you set `defaults` to `'2026-01-30'` or later. This uses the same `$internal_or_test_user` property as `setInternalOrTestUser()`. To mark other hostnames, set `internal_or_test_user_hostname` to a string or a regular expression:
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    internal_or_test_user_hostname: /^(localhost|127\.0\.0\.1|staging\.yourapp\.com)$/,
+})
+```
+
+To capture nothing in development, only call `posthog.init()` in your production build.
+
+For a step-by-step walkthrough, see [how to filter out internal users](/tutorials/filter-internal-users). For all the filter settings, see [internal and test users](/docs/data/test-accounts).
 
 ## 10. Use the same project for your website and app
 
