@@ -284,7 +284,7 @@ To TLDR it, if the agent starts treating the investigation as a test, it could:
 
 - Stop at a good-enough explanation instead of running extra queries to verify it.
 - Spend part of its budget investigating gaps or inconsistencies in the restored data instead of the actual task.
-- Return more speculative findings it would normally leave out.
+- Return more speculative findings that it would normally leave out.
 
 Needless to say, all such cases can negatively affect your grading, since they cover behavior you don't want to test. And, sadly, there's no silver bullet – you just need to run and tweak it until you don't catch any "agent is suspicious" traces anymore.
 
