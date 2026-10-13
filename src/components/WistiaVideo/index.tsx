@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 
 declare global {
     interface Window {
@@ -30,6 +30,7 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         const containerRef = useRef<HTMLDivElement>(null)
         const playerRef = useRef<any>(null)
         const endHandlerRef = useRef<(() => void) | null>(null)
+        const [isVisible, setIsVisible] = useState(false)
 
         useImperativeHandle(ref, () => ({
             play: () => playerRef.current?.play(),
@@ -47,11 +48,32 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         onEndRef.current = onEnd
 
         useEffect(() => {
-            if (typeof window === 'undefined' || !containerRef.current) return
+            const container = containerRef.current
+            if (!container) return
 
+            const updateVisibility = () => {
+                const { width, height } = container.getBoundingClientRect()
+                setIsVisible(width > 0 && height > 0)
+            }
+            const observer = new ResizeObserver(updateVisibility)
+            observer.observe(container)
+            updateVisibility()
+
+            return () => observer.disconnect()
+        }, [])
+
+        useEffect(() => {
+            if (typeof window === 'undefined' || !containerRef.current || !isVisible) return
+
+            const container = containerRef.current
             let isMounted = true
+            let embedDiv: HTMLDivElement | undefined
+            let pollTimer: ReturnType<typeof setTimeout>
+            let endTimer: ReturnType<typeof setTimeout>
 
             const cleanup = () => {
+                clearTimeout(pollTimer)
+                clearTimeout(endTimer)
                 // Unbind the end handler if it exists
                 if (playerRef.current && endHandlerRef.current) {
                     try {
@@ -61,19 +83,17 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                     }
                 }
                 endHandlerRef.current = null
+                const video = playerRef.current || (embedDiv && window.Wistia?.api(embedDiv))
+                video?.remove()
                 playerRef.current = null
 
-                // Clear the container
-                if (containerRef.current) {
-                    containerRef.current.innerHTML = ''
-                }
+                container.innerHTML = ''
             }
 
             const initializePlayer = () => {
                 if (!isMounted || !containerRef.current) return
 
-                // Create a fresh embed div
-                const embedDiv = document.createElement('div')
+                embedDiv = document.createElement('div')
                 embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true ${
                     hideInitialControls ? 'controlsVisibleOnLoad=false playButtonVisible=false' : ''
                 } ${hideAudioControls ? 'volumeControl=false' : ''}`
@@ -95,9 +115,12 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
 
                         // Create the end handler
                         endHandlerRef.current = () => {
-                            if (isMounted) {
-                                onEndRef.current?.()
-                            }
+                            queueMicrotask(() => {
+                                if (!isMounted) return
+                                endTimer = setTimeout(() => {
+                                    if (isMounted) onEndRef.current?.()
+                                }, 0)
+                            })
                         }
                         video.bind('end', endHandlerRef.current)
 
@@ -106,12 +129,12 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                         }
                     } else {
                         // Video not ready yet, check again
-                        setTimeout(checkForVideo, 100)
+                        pollTimer = setTimeout(checkForVideo, 100)
                     }
                 }
 
                 // Start checking for the video
-                setTimeout(checkForVideo, 100)
+                pollTimer = setTimeout(checkForVideo, 100)
             }
 
             // Clean up before initializing
@@ -135,7 +158,7 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                 isMounted = false
                 cleanup()
             }
-        }, [videoId, autoPlay])
+        }, [videoId, autoPlay, isVisible])
 
         return <div ref={containerRef} className={`aspect-square ${className}`} />
     }
