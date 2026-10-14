@@ -114,6 +114,7 @@ type RoadmapNode = {
     }
     githubUrls?: any
     githubPRMetadata?: any
+    tags?: string[] | null
 }
 
 type ChangelogVideo = {
@@ -897,6 +898,7 @@ export default function Changelog({
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
+    const [codedFilter, setCodedFilter] = useState('all')
     // Two-pass render: SSR (and the first client render) show the static, crawlable list;
     // the virtualized cards UI takes over after mount. Both passes agree, so hydration is safe.
     const [mounted, setMounted] = useState(false)
@@ -904,7 +906,10 @@ export default function Changelog({
     useEffect(() => {
         setMounted(true)
     }, [])
-    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
+    const hideEmpty = useMemo(
+        () => teamFilter !== 'all' || categoryFilter !== 'all' || codedFilter !== 'all',
+        [teamFilter, categoryFilter, codedFilter]
+    )
     const playlistVideos = data.allChangelogVideo?.nodes || []
 
     const handleAddFeature = () => {
@@ -937,8 +942,12 @@ export default function Changelog({
             )
         }
 
+        if (codedFilter !== 'all') {
+            filtered = filtered.filter((roadmap: RoadmapNode) => roadmap.tags?.includes(codedFilter))
+        }
+
         return filtered
-    }, [teamFilter, categoryFilter, data.allRoadmap.nodes])
+    }, [teamFilter, categoryFilter, codedFilter, data.allRoadmap.nodes])
 
     const roadmapsGrouped = useMemo(() => {
         const grouped: {
@@ -1012,8 +1021,10 @@ export default function Changelog({
             const urlObj = new URL(href)
             const team = urlObj.searchParams.get('team')
             const category = urlObj.searchParams.get('category')
+            const coded = urlObj.searchParams.get('coded')
             if (team) setTeamFilter(team)
             if (category) setCategoryFilter(category)
+            if (coded) setCodedFilter(coded)
         }
     }, [href])
 
@@ -1096,6 +1107,8 @@ export default function Changelog({
                                 teamFilterValue={teamFilter}
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
+                                onCodedChange={(value) => filterNavigate('coded', value)}
+                                codedFilterValue={codedFilter}
                             />
                             <div className="flex items-center gap-2">
                                 <p className="text-sm text-secondary m-0">

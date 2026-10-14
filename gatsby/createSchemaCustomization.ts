@@ -427,6 +427,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       year: Int
       githubUrls: [String]
       githubPRMetadata: GitHubPRMetadata
+      tags: [String]
     }
     type GitHubPRMetadata {
       url: String

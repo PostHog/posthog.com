@@ -72,6 +72,7 @@ export const query = graphql`
                     }
                 }
                 githubUrls
+                tags
                 githubPRMetadata {
                     number
                     html_url
