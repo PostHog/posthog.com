@@ -162,6 +162,8 @@ SELECT sha1('abc')
 
 `sha1` accepts one argument and returns `NULL` for a `NULL` input. It hashes UTF-8 bytes without normalizing Unicode.
 
+For direct PostgreSQL queries, `sha1` requires the `pgcrypto` extension. After installing or moving the extension, refresh the source's schemas in PostHog.
+
 ## Dates and times
 
 - `toDate`
