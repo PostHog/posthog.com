@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { colors } from '@posthog/brand/colors'
 
 type Segment = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'
 
@@ -44,17 +45,18 @@ function Digit({ value }: { value: string }): JSX.Element {
     )
 }
 
-function TickerGroup({ value, label }: { value: string; label: string }): JSX.Element {
+function DigitRun({ value }: { value: string }): JSX.Element {
     return (
-        <div className="flex flex-col items-center gap-1">
-            <div className="flex h-7 gap-0.5 -skew-x-6 drop-shadow-[0_0_4px_theme(colors.green-2)] @md:h-10 @xl:h-12">
-                {value.split('').map((char, i) => (
-                    <Digit key={i} value={char} />
-                ))}
-            </div>
-            <span className="text-[8px] font-bold leading-none tracking-widest text-green-2/70 @md:text-[10px]">
-                {label}
-            </span>
+        <div
+            className="flex gap-0.5 -skew-x-6"
+            style={{
+                height: 'clamp(68px, 25.5cqw, 84px)',
+                filter: `drop-shadow(0 0 4px ${colors.green.core})`,
+            }}
+        >
+            {value.split('').map((char, i) => (
+                <Digit key={i} value={char} />
+            ))}
         </div>
     )
 }
@@ -62,25 +64,14 @@ function TickerGroup({ value, label }: { value: string; label: string }): JSX.El
 function Rivet({ className }: { className: string }): JSX.Element {
     return (
         <span
-            className={`absolute size-1.5 rounded-full border border-light-9 bg-light-5 @md:size-2 ${className}`}
+            className={`absolute size-2.5 rounded-full border border-black/50 bg-light-5 shadow-[inset_1px_1px_0_white,1px_1px_0_rgba(0,0,0,0.35)] ${className}`}
             aria-hidden="true"
         />
     )
 }
 
-function TickerColon(): JSX.Element {
-    return (
-        <div
-            className="flex h-7 flex-col justify-center gap-1.5 @md:h-10 @md:gap-2.5 @xl:h-12 @xl:gap-3"
-            aria-hidden="true"
-        >
-            <span className="size-1 rounded-full bg-green-2 @md:size-1.5" />
-            <span className="size-1 rounded-full bg-green-2 @md:size-1.5" />
-        </div>
-    )
-}
-
 const pad = (value: number, length = 2) => String(value).padStart(length, '0')
+const constructionStripe = `repeating-linear-gradient(65deg, black 0 12px, ${colors.yellow.core} 12px 24px)`
 
 export default function FactorySign({ since }: { since: string }): JSX.Element {
     const [now, setNow] = useState<number | null>(null)
@@ -93,44 +84,54 @@ export default function FactorySign({ since }: { since: string }): JSX.Element {
 
     const elapsed = now === null ? null : Math.max(0, Math.floor((now - new Date(since).getTime()) / 1000))
     const days = elapsed === null ? null : Math.floor(elapsed / 86400)
-    const hours = elapsed === null ? null : Math.floor((elapsed % 86400) / 3600)
-    const minutes = elapsed === null ? null : Math.floor((elapsed % 3600) / 60)
-    const seconds = elapsed === null ? null : elapsed % 60
-
     return (
-        <div className="@container w-full max-w-xl">
-            <div className="relative overflow-hidden rounded border-2 border-black font-black uppercase leading-none text-black shadow-xl">
-                <div className="h-3 bg-[repeating-linear-gradient(-45deg,theme(colors.black)_0_8px,theme(colors.yellow)_8px_16px)] @md:h-4" />
-                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 bg-red px-3 py-3 text-white @md:px-5">
-                    <span className="text-xl tracking-tight @md:text-3xl @xl:text-4xl">It has been</span>
+        <div className="@container size-full">
+            <div
+                className="relative grid h-full overflow-hidden border-2 border-black bg-white font-rounded font-extrabold uppercase leading-none text-black shadow-sm"
+                style={{ gridTemplateRows: '9% 44% 22% 25%' }}
+            >
+                <div style={{ backgroundImage: constructionStripe }} />
+                <div
+                    className="flex min-h-0 flex-col justify-evenly px-4 text-white"
+                    style={{ backgroundColor: colors.tangerine.core }}
+                >
+                    <div className="whitespace-nowrap text-[clamp(30px,12cqw,40px)] leading-none tracking-[-0.05em]">
+                        It has been
+                    </div>
                     <div
                         role="timer"
-                        className="flex items-start gap-1 rounded-sm border-2 border-light-12 bg-black px-2 pb-1.5 pt-2 text-green-2 shadow-[inset_0_2px_6px_theme(colors.black)] @md:gap-1.5 @md:px-3"
+                        aria-label={
+                            days === null ? 'Days since a human-coded PR' : `${days} days since a human-coded PR`
+                        }
+                        className="flex items-end gap-2"
                     >
-                        <TickerGroup value={days === null ? '---' : pad(days, 3)} label="Days" />
-                        <TickerColon />
-                        <TickerGroup value={hours === null ? '--' : pad(hours)} label="Hrs" />
-                        <TickerColon />
-                        <TickerGroup value={minutes === null ? '--' : pad(minutes)} label="Min" />
-                        <TickerColon />
-                        <TickerGroup value={seconds === null ? '--' : pad(seconds)} label="Sec" />
-                        {elapsed !== null && (
-                            <span className="sr-only">
-                                {days} days, {hours} hours, {minutes} minutes and {seconds} seconds
-                            </span>
-                        )}
+                        <div
+                            className="flex min-w-0 flex-1 items-center justify-center rounded-sm border-2 border-light-12 bg-black px-1 py-1.5 shadow-[inset_0_2px_6px_theme(colors.black)]"
+                            style={{ color: colors.green.core }}
+                        >
+                            <DigitRun value={days === null ? '---' : pad(days, 3)} />
+                        </div>
+                        <span className="pb-1 text-[clamp(35px,14cqw,48px)] tracking-[-0.05em]">Days</span>
                     </div>
                 </div>
-                <p className="m-0 bg-white px-3 py-2.5 text-center text-2xl tracking-tight @md:text-4xl @xl:text-5xl">
-                    Since a hand-crafted feature
+                <p
+                    className="m-0 flex min-h-0 flex-col justify-center px-4 text-left text-[clamp(24px,9cqw,34px)] tracking-[-0.05em]"
+                    style={{ lineHeight: 1.12 }}
+                >
+                    <span>Since a</span>
+                    <span className="whitespace-nowrap">human-coded PR</span>
                 </p>
-                <Rivet className="left-1.5 top-5 @md:top-6" />
-                <Rivet className="right-1.5 top-5 @md:top-6" />
-                <Rivet className="bottom-1.5 left-1.5" />
-                <Rivet className="bottom-1.5 right-1.5" />
-                <p className="m-0 bg-yellow px-3 py-2 text-center text-sm tracking-tight @md:text-lg @xl:text-xl">
-                    shipped in the PostHog software factory
-                </p>
+                <div
+                    className="flex min-h-0 flex-col justify-center px-6 text-left text-[clamp(20px,7cqw,26px)] tracking-[-0.05em]"
+                    style={{ backgroundColor: colors.yellow.core, lineHeight: 1.12 }}
+                >
+                    <span className="whitespace-nowrap">Shipped in the PostHog</span>
+                    <span>software factory</span>
+                </div>
+                <Rivet className="left-2 top-2" />
+                <Rivet className="right-2 top-2" />
+                <Rivet className="bottom-2 left-2" />
+                <Rivet className="bottom-2 right-2" />
             </div>
         </div>
     )
