@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import DataStackSection from 'components/Home/Sections/DataStackSection'
 import PricingSection from 'components/Home/Sections/PricingSection'
 import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
 import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
@@ -29,6 +28,7 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
+import { ActStep, IngestStep, QueryStep, SelfDriveStep } from 'components/Home/DataStory'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -172,7 +172,10 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <DataStackSection />
+                <IngestStep />
+                <QueryStep />
+                <ActStep />
+                <SelfDriveStep />
                 <PricingSection />
                 <WhyPostHogSection />
                 <BedtimeReadingSection />
