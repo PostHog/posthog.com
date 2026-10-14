@@ -13,3 +13,9 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 import { ErrorTrackingPythonInstallationWrapper } from './_snippets/et-installation-wrapper.tsx'
 
 <ErrorTrackingPythonInstallationWrapper /> 
+
+## Django and Django REST Framework
+
+For Django, add `PosthogContextMiddleware` to capture unhandled view exceptions and include request context with your error events. If you use Django REST Framework (DRF), also configure PostHog's DRF exception handler because DRF converts many exceptions into responses before Django middleware can observe them.
+
+See the [Django REST Framework exception capture guide](/docs/libraries/django#capture-django-rest-framework-exceptions) for setup instructions.
