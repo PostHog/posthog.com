@@ -225,22 +225,22 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 ## Where does PostHog store flag calls?
 
-When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. PostHog stores flag calls in a table built for them, `flag_evaluations`, instead of the events table. This table keeps the last 90 days of flag calls.
+When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the events table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls.
 
-Flag calls [aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill), so where PostHog stores them doesn't change your bill.
+Flag calls [aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill), so the move doesn't change your bill.
 
-<CalloutBox icon="IconInfo" title="We're moving flag calls to this table" type="info">
+<CalloutBox icon="IconInfo" title="You don't need to do anything yet" type="info">
 
-You don't need to do anything yet. We'll email you before anything changes.
+We'll email you before anything changes.
 
 </CalloutBox>
 
 ### What you can do now
 
-- Don't build new [actions](/docs/data/actions) or [cohorts](/docs/data/cohorts) on `$feature_flag_called`. They can't read the `flag_evaluations` table.
+- Don't build new [actions](/docs/data/actions) or [cohorts](/docs/data/cohorts) on `$feature_flag_called`. They can't read the `flag_evaluations` table, so after the move they stop matching new flag calls.
 - If you write [SQL](/docs/sql), the SQL editor warns you when a query reads `$feature_flag_called` from the events table.
 
-### What shows flag calls
+### What shows flag calls after the move
 
 - A flag's [**Usage** tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used)
 - The [activity tab](/docs/activity)
@@ -248,9 +248,9 @@ You don't need to do anything yet. We'll email you before anything changes.
 - "Feature flag called" series in [insights](/docs/product-analytics/insights)
 - [Destinations](/docs/cdp/destinations) and [Workflows](/docs/workflows) triggered by `$feature_flag_called`
 
-Insights on flag calls show at most 90 days. They can't filter by person properties or cohorts, or break down by person properties.
+After the move, insights on flag calls show at most 90 days. They can't filter by person properties or cohorts, or break down by person properties.
 
-### What doesn't show flag calls
+### What stops showing new flag calls after the move
 
 - [Actions](/docs/data/actions) with a step on `$feature_flag_called`
 - [Cohorts](/docs/data/cohorts) with a criterion on `$feature_flag_called`
