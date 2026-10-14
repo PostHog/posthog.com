@@ -9,7 +9,7 @@ Use steering instructions to tell Self-driving agents what matters to your proje
 
 ## Add instructions for an agent role
 
-1. Open **Self-driving > Settings** in the project you want to configure.
+1. Open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings) in the project you want to configure.
 2. Find **Steering**, below **Autonomy**.
 3. Choose **Research**, **Implementation**, or **Scouts**.
 4. Write your instructions in plain text or Markdown, then select **Save**.
@@ -26,17 +26,17 @@ Switching tabs keeps unsaved drafts while the editor stays open. Save each role 
 
 ## Share instructions across agents
 
-Select the **project instructions** link in the Steering section to open **Settings > Agent instructions > Project instructions**. Put guidance that applies across roles there, such as your product's terminology, repository ownership, or coding conventions.
+Select the **project instructions** link in the Steering section to open [**Settings > Agent instructions > Project instructions**](https://app.posthog.com/settings/environment-task-agent-instructions#task-agent-project-instructions). Put guidance that applies across roles there, such as your product's terminology, repository ownership, or coding conventions.
 
 All Self-driving agents receive project instructions, including research, implementation, scouts, and the agents that support them. Other eligible PostHog cloud tasks also use these shared instructions.
 
 A role's steering instructions supplement the project instructions. You don't need a special tag such as `<self-driving-research>`: selecting the **Research** tab assigns the instructions to research agents.
 
-Autonomous Self-driving runs don't use your personal **My instructions** setting.
+Autonomous Self-driving runs don't use your personal [**My instructions**](https://app.posthog.com/settings/environment-task-agent-instructions#task-agent-my-instructions) setting.
 
 ### Instructions for one scout
 
-The **Scouts** tab applies to every scout in the project. Each scout also keeps its own brief. Edit an [individual scout](/docs/self-driving/scouts) when the guidance should apply only to that scout.
+The **Scouts** tab applies to every scout in the project. Each scout also keeps its own brief. Edit an [individual scout](/docs/self-driving/scouts) in [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) when the guidance should apply only to that scout.
 
 ## Write useful instructions
 
@@ -70,23 +70,4 @@ To remove a role's instructions, clear its field and select **Save**. Agents in 
 
 ## Manage instructions through MCP
 
-An assistant connected to the [PostHog MCP server](/docs/model-context-protocol) can read and update these settings for your current project.
-
-| Tool                                     | Purpose                                                     |
-| ---------------------------------------- | ----------------------------------------------------------- |
-| `inbox-steering-instructions-get`        | Read the research, implementation, and scout instructions.  |
-| `inbox-steering-instructions-update`     | Replace the instructions for one or more roles.             |
-| `tasks-config-list`                      | Read shared project instructions from `agent_instructions`. |
-| `tasks-config-agent-instructions-create` | Replace shared project instructions.                        |
-
-Read the current instructions before changing them. To update only research instructions, pass this input to `inbox-steering-instructions-update`:
-
-```json
-{
-    "research_instructions": "Check whether the behavior is intentional before recommending a fix."
-}
-```
-
-The other fields are `implementation_instructions` and `scout_instructions`. Omitted fields keep their saved values. Each supplied field replaces that role's full text; an empty string clears it.
-
-Reading requires `task:read`. Updating requires `task:write` and project admin access. Agents running in PostHog sandboxes can read these settings but cannot rewrite them.
+An assistant connected to the [PostHog MCP server](/docs/model-context-protocol) can read and update steering instructions and shared project instructions for your current project.
