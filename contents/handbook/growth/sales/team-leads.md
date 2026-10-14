@@ -52,7 +52,7 @@ For accounts in bucket 2 we have region tags which are <PrivateLink url="posthog
 - **NA Team**: North America, South America, Oceania
 - If an account is flagged as multi region or there is no explicit tag review these and make a decision.
 
-When you assign a CSM to one of these accounts, remove the `csm handover needed` or `csm overlay needed` tag so the account leaves the queue.
+When you assign a CSM to one of these accounts, a <PrivateLink url="https://us.posthog.com/project/2/workflows/01a00fc0-0f90-0000-6aa7-b78a941c08cb/workflow">workflow removes the tags automatically</PrivateLink>, so the account leaves the queue.
 
 ### Onboarding
 

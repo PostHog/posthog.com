@@ -9,6 +9,7 @@ export const dataWarehouse = {
     ...getTool('data_warehouse'),
     Icon: IconDatabase,
     type: 'data_warehouse',
+    categoryName: 'Sources',
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
@@ -51,7 +52,7 @@ export const dataWarehouse = {
     addonSliders: [
         {
             key: 'data_warehouse_historical',
-            label: 'Data warehouse historical syncs',
+            label: 'Historical syncs',
             sliderConfig: {
                 marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,
