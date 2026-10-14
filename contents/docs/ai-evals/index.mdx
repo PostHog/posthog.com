@@ -49,7 +49,7 @@ LLM-as-a-judge and code-based evaluations have an **Output type** setting. You p
 
 ### Numeric scores
 
-You can set a **Minimum** and **Maximum** score. A score outside these bounds is skipped, not graded. **Step** tells an LLM judge which increment to use, but PostHog doesn't round the score.
+You can set a **Minimum** and **Maximum** score. A score outside these bounds is skipped, not graded. **Step** sets the score increment. PostHog asks an LLM judge to use it, but stores the score exactly as returned, so a judge can still return a value like `3.7` when the step is 1.
 
 To get pass rates and reports, turn on **Set a passing rule** and choose **At least (≥)** or **At most (≤)** a threshold. Without a passing rule, you still get the scores, but no pass rates or reports. If you change the rule later, PostHog applies the new rule to past results too.
 
@@ -62,7 +62,15 @@ Add the categories the evaluation can return. Each category has a key, which Pos
 - **One category** returns exactly one category.
 - **Multiple categories** returns any number of categories, including none.
 
-To get pass rates and reports, choose **Passing categories**. A result passes when it returns at least one category and every category it returns is a passing category. A result with no categories fails. With **Multiple categories**, you can leave the passing categories empty. Then only a result with no categories passes. If you change the passing categories later, PostHog applies them to past results too.
+To get pass rates and reports, choose **Passing categories**. A result passes only when all of its categories are passing categories. For example, if `resolved` is the only passing category:
+
+- `resolved` passes.
+- `resolved` and `escalated` fails, because `escalated` isn't a passing category.
+- A result with no categories fails.
+
+With **Multiple categories**, you can also leave **Passing categories** empty. Then a result passes only when it has no categories. Use this when every category is a problem, like `hallucination` or `wrong_tool`, so a good result has none.
+
+If you change the passing categories later, PostHog applies them to past results too.
 
 ## LLM-as-a-judge evaluations
 
