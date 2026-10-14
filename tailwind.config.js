@@ -1,5 +1,11 @@
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './contents/**/*.{js,jsx,ts,tsx,mdx}', './safelist.txt'],
+    content: [
+        './src/**/*.{js,jsx,ts,tsx}',
+        './contents/**/*.{js,jsx,ts,tsx,mdx}',
+        './safelist.txt',
+        // Classes for the chart legends and tooltips
+        './node_modules/@posthog/quill-charts/dist/**/*.js',
+    ],
     options: {
         safelist: [
             // use safelist.txt
