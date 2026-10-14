@@ -20,6 +20,7 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
+import FactorySign from 'components/Changelog/FactorySign'
 import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
@@ -115,6 +116,7 @@ type RoadmapNode = {
     githubUrls?: any
     githubPRMetadata?: any
     tags?: string[] | null
+    publishedAt?: string
 }
 
 type ChangelogVideo = {
@@ -898,7 +900,6 @@ export default function Changelog({
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
-    const [codedFilter, setCodedFilter] = useState('all')
     // Two-pass render: SSR (and the first client render) show the static, crawlable list;
     // the virtualized cards UI takes over after mount. Both passes agree, so hydration is safe.
     const [mounted, setMounted] = useState(false)
@@ -906,10 +907,7 @@ export default function Changelog({
     useEffect(() => {
         setMounted(true)
     }, [])
-    const hideEmpty = useMemo(
-        () => teamFilter !== 'all' || categoryFilter !== 'all' || codedFilter !== 'all',
-        [teamFilter, categoryFilter, codedFilter]
-    )
+    const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
     const playlistVideos = data.allChangelogVideo?.nodes || []
 
     const handleAddFeature = () => {
@@ -927,6 +925,18 @@ export default function Changelog({
         setWindowPercentageFromLeft(percentageFromLeft)
     }
 
+    // The sign counts from the most recent hand-crafted entry. Before one ships, it
+    // counts from the first tagged entry. Untagged data hides the sign.
+    const handCraftedSince = useMemo(() => {
+        const timestamp = (roadmap: RoadmapNode) => new Date(roadmap.publishedAt || roadmap.date).getTime()
+        const tagged = data.allRoadmap.nodes.filter((roadmap: RoadmapNode) => roadmap.tags?.length)
+        if (tagged.length === 0) return null
+        const handCrafted = tagged.filter((roadmap: RoadmapNode) => roadmap.tags?.includes('artisanally-coded'))
+        const since =
+            handCrafted.length > 0 ? Math.max(...handCrafted.map(timestamp)) : Math.min(...tagged.map(timestamp))
+        return new Date(since).toISOString()
+    }, [data.allRoadmap.nodes])
+
     const filteredData = useMemo(() => {
         let filtered = data.allRoadmap.nodes
 
@@ -942,12 +952,8 @@ export default function Changelog({
             )
         }
 
-        if (codedFilter !== 'all') {
-            filtered = filtered.filter((roadmap: RoadmapNode) => roadmap.tags?.includes(codedFilter))
-        }
-
         return filtered
-    }, [teamFilter, categoryFilter, codedFilter, data.allRoadmap.nodes])
+    }, [teamFilter, categoryFilter, data.allRoadmap.nodes])
 
     const roadmapsGrouped = useMemo(() => {
         const grouped: {
@@ -1021,10 +1027,8 @@ export default function Changelog({
             const urlObj = new URL(href)
             const team = urlObj.searchParams.get('team')
             const category = urlObj.searchParams.get('category')
-            const coded = urlObj.searchParams.get('coded')
             if (team) setTeamFilter(team)
             if (category) setCategoryFilter(category)
-            if (coded) setCodedFilter(coded)
         }
     }, [href])
 
@@ -1101,14 +1105,17 @@ export default function Changelog({
                     className="bg-primary text-primary relative h-full flex border-t border-primary"
                 >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
+                        {handCraftedSince && (
+                            <div className="flex-shrink-0 px-4 pt-4">
+                                <FactorySign since={handCraftedSince} />
+                            </div>
+                        )}
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2 flex-wrap gap-2">
                             <Filters
                                 onTeamChange={(value) => filterNavigate('team', value)}
                                 teamFilterValue={teamFilter}
                                 onCategoryChange={(value) => filterNavigate('category', value)}
                                 categoryFilterValue={categoryFilter}
-                                onCodedChange={(value) => filterNavigate('coded', value)}
-                                codedFilterValue={codedFilter}
                             />
                             <div className="flex items-center gap-2">
                                 <p className="text-sm text-secondary m-0">
