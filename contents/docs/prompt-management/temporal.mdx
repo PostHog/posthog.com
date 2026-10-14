@@ -49,11 +49,11 @@ import { PostHog } from 'posthog-node'
 import { Prompts } from '@posthog/ai'
 import { OpenAI } from '@posthog/ai/openai'
 
-const posthog = new PostHog('<your_project_api_key>', {
+export const posthog = new PostHog('<your_project_api_key>', {
   host: 'https://us.posthog.com',
   personalApiKey: '<your_personal_api_key>',
 })
-const prompts = new Prompts({ posthog })
+export const prompts = new Prompts({ posthog })
 const openai = new OpenAI({ apiKey: '<your_openai_api_key>', posthog })
 ```
 
@@ -63,16 +63,22 @@ const openai = new OpenAI({ apiKey: '<your_openai_api_key>', posthog })
 
 The SDK fetches a prompt the first time an activity asks for it, and again when its cache entry expires. Load every prompt in one request before the worker starts polling, so the first activities do not each wait on the network. Fetch at a label, such as `production`, so a label move reaches the worker on the next cache cycle without a deploy.
 
+`get_all()` and `getAll()` raise when the request fails. Log that and start the worker anyway. The activities then fetch on first use and fall back to their `fallback` text if the API is still down.
+
 <MultiLanguage>
 
 ```python
 # worker.py
+import logging
 from temporalio.client import Client
 from temporalio.worker import Worker
 from activities import draft_reply, prompts
 
 async def main():
-    prompts.get_all(label='production')
+    try:
+        prompts.get_all(label='production')
+    except Exception:
+        logging.exception('Prompt cache warm-up failed, activities will fetch on first use')
 
     client = await Client.connect('localhost:7233')
     worker = Worker(client, task_queue='support', workflows=[...], activities=[draft_reply])
@@ -85,7 +91,11 @@ import { Worker } from '@temporalio/worker'
 import * as activities from './activities'
 
 async function run() {
-  await activities.prompts.getAll({ label: 'production' })
+  try {
+    await activities.prompts.getAll({ label: 'production' })
+  } catch (error) {
+    console.error('Prompt cache warm-up failed, activities will fetch on first use', error)
+  }
 
   const worker = await Worker.create({
     taskQueue: 'support',
