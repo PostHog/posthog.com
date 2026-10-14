@@ -3,7 +3,7 @@ title: Python
 sidebarTitle: Python
 sidebar: Docs
 showTitle: true
-github: 'https://github.com/PostHog/posthog-python'
+github: "https://github.com/PostHog/posthog-python"
 platformLogo: python
 features:
   eventCapture: true
@@ -16,7 +16,7 @@ features:
   tracing: true
 ---
 
-import PythonSdkVersionNote from '../../_snippets/python-sdk-version-note.mdx'
+import PythonSdkVersionNote from "../../_snippets/python-sdk-version-note.mdx";
 
 The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
 
@@ -24,7 +24,7 @@ The Python SDK makes it easy to capture events, evaluate feature flags, track er
 
 ## Installation
 
-import PythonInstall from '../../integrate/_snippets/install-python.mdx'
+import PythonInstall from "../../integrate/_snippets/install-python.mdx";
 
 <PythonInstall />
 
@@ -113,13 +113,13 @@ See [Remote config](/docs/feature-flags/remote-config) for setup and security de
 
 ## Identifying users
 
-import IdentifyBackendCalloutPython from '../../_snippets/identify-backend-callout-python.mdx'
+import IdentifyBackendCalloutPython from "../../_snippets/identify-backend-callout-python.mdx";
 
 <IdentifyBackendCalloutPython />
 
 ## Capturing events
 
-import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-python.mdx'
+import PythonSendEvents from "../../integrate/send-events/_snippets/send-events-python.mdx";
 
 <PythonSendEvents />
 
@@ -172,7 +172,7 @@ We strongly recommend reading our docs on [alias](/docs/product-analytics/identi
 
 ## Contexts
 
-import Contexts from './_snippets/contexts.mdx'
+import Contexts from "./_snippets/contexts.mdx";
 
 <Contexts />
 
@@ -203,17 +203,17 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 The examples in this section use the synchronous `Posthog` client. For `AsyncPosthog`, use the [awaited feature flag example](#evaluate-feature-flags). The returned snapshot uses the same accessors.
 
-import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx";
 
 <FeatureFlagsLibsIntro />
 
-import PythonFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx'
+import PythonFeatureFlagsCode from "../../integrate/feature-flags-code/_snippets/feature-flags-code-python.mdx";
 
 <PythonFeatureFlagsCode />
 
 ### Local evaluation
 
-import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx";
 
 <LocalEvaluationIntro />
 
@@ -354,28 +354,28 @@ with posthog.start_span("GET /users/:id", kind="server") as span:
         span.set_status("error", "user not found")
 ```
 
-| Method | Description |
-|---|---|
-| `set_attribute(key, value)` | Set a single attribute |
-| `set_attributes(attributes)` | Merge several attributes at once |
-| `add_event(name, attributes=None, timestamp=None)` | Record a timestamped event within the span |
-| `set_status(code, message=None)` | Set the outcome: `"ok"` or `"error"`. `"ok"` is final – an exception raised later in the `with` block doesn't override it |
-| `record_exception(exception)` | Attach an exception event carrying the type, message, and – for a raised exception – stack trace, and set status to `error`. Use it for exceptions you catch and handle |
-| `update_name(name)` | Replace the span name, e.g. once a route template resolves |
-| `traceparent()` | This span's W3C `traceparent` header value, or `None` |
-| `tracestate()` | This span's W3C `tracestate` value, or `None` when it has none |
-| `end(end_time=None)` | End the span and queue it for export. A `with` block does this for you |
+| Method                                             | Description                                                                                                                                                             |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `set_attribute(key, value)`                        | Set a single attribute                                                                                                                                                  |
+| `set_attributes(attributes)`                       | Merge several attributes at once                                                                                                                                        |
+| `add_event(name, attributes=None, timestamp=None)` | Record a timestamped event within the span                                                                                                                              |
+| `set_status(code, message=None)`                   | Set the outcome: `"ok"` or `"error"`. `"ok"` is final – an exception raised later in the `with` block doesn't override it                                               |
+| `record_exception(exception)`                      | Attach an exception event carrying the type, message, and – for a raised exception – stack trace, and set status to `error`. Use it for exceptions you catch and handle |
+| `update_name(name)`                                | Replace the span name, e.g. once a route template resolves                                                                                                              |
+| `traceparent()`                                    | This span's W3C `traceparent` header value, or `None`                                                                                                                   |
+| `tracestate()`                                     | This span's W3C `tracestate` value, or `None` when it has none                                                                                                          |
+| `end(end_time=None)`                               | End the span and queue it for export. A `with` block does this for you                                                                                                  |
 
 Every method except `traceparent()`, `tracestate()`, and `end()` returns the span, so calls chain. Calls after `end()` are ignored.
 
 `start_span` takes these keyword arguments:
 
-| Argument | Description |
-|---|---|
-| `kind` | What the work is: `"internal"` (default), `"server"` for an inbound request, `"client"` for an outbound call, `"producer"` or `"consumer"` for queue work |
-| `attributes` | Attributes to set at span start |
-| `parent` | A span, or an inbound W3C `traceparent` string to continue a trace another service started. Defaults to the active span |
-| `tracestate` | The W3C `tracestate` accompanying a `traceparent` string. Ignored when `parent` is a span, which inherits its parent's |
+| Argument     | Description                                                                                                                                                                                                |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kind`       | What the work is: `"internal"` (default), `"server"` for an inbound request, `"client"` for an outbound call, `"producer"` or `"consumer"` for queue work                                                  |
+| `attributes` | Attributes to set at span start                                                                                                                                                                            |
+| `parent`     | A span, or an inbound W3C `traceparent` string to continue a trace another service started. Defaults to the active span                                                                                    |
+| `tracestate` | The W3C `tracestate` accompanying a `traceparent` string. Ignored when `parent` is a span, which inherits its parent's                                                                                     |
 | `start_time` | Backdate the span's start, as a `datetime` or seconds since the epoch. The server clamps a start more than 24 hours old to receive time; with `debug` on, the SDK prints a debug message when you pass one |
 
 ### Tracing across services
@@ -468,21 +468,21 @@ The length bound reaches inside a value, including strings nested in lists and d
 
 ### Configuration
 
-| Option | Default | Description |
-|---|---|---|
-| `service_name` | – | Name of the service producing spans. Set this |
-| `service_version` | – | Version of the service |
-| `environment` | – | Deployment environment, e.g. `production` |
-| `resource_attributes` | – | Extra OTLP resource attributes. Takes precedence over the fields above |
-| `flush_interval` | `5` | Seconds between exports of queued spans |
-| `max_export_batch_size` | `512` | Maximum spans per request |
-| `max_queue_size` | `2048` | Maximum spans held in memory. Spans beyond this are dropped |
-| `max_live_spans` | `10000` | Maximum spans open at once. At the limit `start_span` returns a span that isn't recorded |
-| `max_span_age` | `3600` | Once `max_live_spans` is reached, spans open longer than this many seconds are treated as leaked and never exported |
-| `before_span_send` | – | Edit or drop each finished span before export. Return `None` to drop it |
-| `max_attributes_per_span` | `128` | Maximum attributes you set on one span |
-| `max_events_per_span` | `128` | Maximum events on one span |
-| `max_attribute_value_length` | `8192` | Maximum characters in a string attribute value |
+| Option                       | Default | Description                                                                                                         |
+| ---------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------- |
+| `service_name`               | –       | Name of the service producing spans. Set this                                                                       |
+| `service_version`            | –       | Version of the service                                                                                              |
+| `environment`                | –       | Deployment environment, e.g. `production`                                                                           |
+| `resource_attributes`        | –       | Extra OTLP resource attributes. Takes precedence over the fields above                                              |
+| `flush_interval`             | `5`     | Seconds between exports of queued spans                                                                             |
+| `max_export_batch_size`      | `512`   | Maximum spans per request                                                                                           |
+| `max_queue_size`             | `2048`  | Maximum spans held in memory. Spans beyond this are dropped                                                         |
+| `max_live_spans`             | `10000` | Maximum spans open at once. At the limit `start_span` returns a span that isn't recorded                            |
+| `max_span_age`               | `3600`  | Once `max_live_spans` is reached, spans open longer than this many seconds are treated as leaked and never exported |
+| `before_span_send`           | –       | Edit or drop each finished span before export. Return `None` to drop it                                             |
+| `max_attributes_per_span`    | `128`   | Maximum attributes you set on one span                                                                              |
+| `max_events_per_span`        | `128`   | Maximum events on one span                                                                                          |
+| `max_attribute_value_length` | `8192`  | Maximum characters in a string attribute value                                                                      |
 
 An invalid value falls back to its default with a warning. The exception is `before_span_send`: an entry that isn't callable turns tracing off.
 
@@ -522,6 +522,10 @@ The list of properties that this overrides:
 5. `$geoip_continent_code`
 6. `$geoip_postal_code`
 7. `$geoip_time_zone`
+8. `$geoip_subdivision_1_code`
+9. `$geoip_subdivision_1_name`
+10. `$geoip_subdivision_2_code`
+11. `$geoip_subdivision_2_name`
 
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
@@ -627,7 +631,7 @@ If your callback raises an exception, the SDK logs the error and continues with 
 
 You can use the Python or Node SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
 
-import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
+import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx";
 
 <SDKMigration />
 
