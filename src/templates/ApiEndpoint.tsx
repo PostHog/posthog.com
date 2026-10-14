@@ -219,7 +219,9 @@ function Params({ params, objects, object, depth = 0 }) {
                             <div className="">
                                 <div>
                                     <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                        {param.schema.type}
+                                        {Array.isArray(param.schema.type)
+                                            ? param.schema.type.join(' | ')
+                                            : param.schema.type}
                                     </span>
                                 </div>
                                 {param.schema.default !== undefined && param.schema.default !== null && (
@@ -397,7 +399,8 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
                 name,
                 schema.items?.$ref === '#/components/schemas/FilterEvent'
                     ? [{ id: '$pageview' }]
-                    : schema.example || schema.type,
+                    : schema.example ||
+                      (Array.isArray(schema.type) ? schema.type.find((type) => type !== 'null') : schema.type),
             ]
         })
     }
@@ -630,7 +633,7 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
                 <div ref={contentContainerRef} className="p-4">
                     <SEO title={`${title} API Reference - PostHog`} />
 
-                    <h2 className="!mt-0">{title}</h2>
+                    <h1 className="!mt-0">{title}</h1>
                     <blockquote className="p-6 mb-4 rounded bg-accent">
                         <p>
                             For instructions on how to authenticate to use this endpoint, see{' '}

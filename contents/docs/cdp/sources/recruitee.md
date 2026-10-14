@@ -12,9 +12,6 @@ sourceId: Recruitee
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Recruitee connector syncs your applicant tracking system (ATS) data – candidates, offers, departments, and placements – into PostHog, so you can analyze your recruiting funnel alongside your product data.
 

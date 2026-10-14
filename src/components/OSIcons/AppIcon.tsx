@@ -295,6 +295,7 @@ export interface AppItem {
     orientation?: 'row' | 'column'
     source?: string
     external?: boolean
+    badge?: React.ReactNode
 }
 
 export const AppLink = ({
@@ -312,6 +313,7 @@ export const AppLink = ({
     orientation = 'column',
     source,
     external,
+    badge,
 }: AppItem) => {
     const posthog = usePostHog()
     const { posthogInstance } = useAppSettings()
@@ -413,10 +415,13 @@ export const AppLink = ({
 
     const content = (
         <>
-            <span className="relative">
+            {/* inline-flex only when badged: an inline wrapper anchors the absolutely
+                positioned badge to the text line box instead of the icon's own box. */}
+            <span className={`relative ${badge ? 'inline-flex' : ''}`}>
                 {renderIcon()}
                 {renderChildIcon()}
                 {children}
+                {badge}
             </span>
             <figcaption
                 className={`text-[13px] font-medium leading-tight ${

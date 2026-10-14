@@ -1,21 +1,21 @@
 import React from 'react'
 import {
-    IconGraph,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconGraph,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
-import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
+import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
@@ -24,8 +24,12 @@ export const productAnalytics = {
     ...getTool('product_analytics'),
     Icon: IconGraph,
     type: 'product_analytics',
+    categoryName: 'Analytics',
     teamSlug: 'product-analytics',
-    forumTopicId: 349,
+    forumTag: 'product-analytics',
+    pocketGuideVolume: 'product-analytics',
+    // Product Analytics has a learning hub, separate from the story reader.
+    learnHub: true,
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
@@ -46,7 +50,11 @@ export const productAnalytics = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -110,8 +118,6 @@ export const productAnalytics = {
     ],
     overview: {
         title: 'Product analytics with autocapture',
-        description:
-            'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
@@ -170,14 +176,15 @@ export const productAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-        alt: 'A hedgehog presenting some shocking findings',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png',
+        alt: 'A hedgehog wearing a chart apron',
+        footerClasses: 'max-w-[220px]',
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-            alt: 'A hedgehog presenting some shocking findings',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png',
+            alt: 'A hedgehog presenting a chart on stage',
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
@@ -186,14 +193,13 @@ export const productAnalytics = {
     },
     slider: {
         // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
-        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        marks: [MILLION, TEN_MILLION, MAX_PRODUCT_ANALYTICS],
         min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
     volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
     useCases: {
-        intro: 'Product Analytics is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -346,17 +352,17 @@ export const productAnalytics = {
             {
                 name: 'Heap',
                 key: 'heap',
-                link: '/blog/posthog-vs-heap',
+                link: '/compare/posthog-vs-heap',
             },
             {
                 name: 'Pendo',
                 key: 'pendo',
-                link: '/blog/posthog-vs-pendo',
+                link: '/compare/posthog-vs-pendo',
             },
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
@@ -384,8 +390,8 @@ export const productAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
-        imageAlt: 'PostHog AI and product analytics',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png',
+        imageAlt: 'A hedgehog presenting some shocking findings',
         intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
         mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [

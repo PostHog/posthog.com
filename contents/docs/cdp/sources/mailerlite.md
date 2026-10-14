@@ -9,12 +9,6 @@ availability:
 sourceId: MailerLite
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The MailerLite connector pulls your MailerLite email marketing data into the PostHog data warehouse.
 
 ## Adding a data source

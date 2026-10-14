@@ -2,8 +2,7 @@ import React from 'react'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import PlatformInstall from 'components/PlatformInstall'
-
-const MCP_URL = 'https://mcp.posthog.com/mcp'
+import { MCP_SERVER_URL as MCP_URL } from '../../constants'
 
 const vscodeConfig = encodeURIComponent(JSON.stringify({ type: 'http', url: MCP_URL }))
 const cursorConfig = btoa(JSON.stringify({ url: MCP_URL }))

@@ -16,16 +16,18 @@ import LocalEvalDistributedEnvPythonContent from "./_snippets/distributed-enviro
 import LocalEvalDistributedEnvPhpContent from "./_snippets/distributed-environments-php.mdx"
 import LocalEvalDistributedEnvRubyContent from "./_snippets/distributed-environments-ruby.mdx"
 import LocalEvalDistributedEnvJvmContent from "./_snippets/distributed-environments-jvm.mdx"
+import LocalEvalDistributedEnvElixirContent from "./_snippets/distributed-environments-elixir.mdx"
 
 <LocalEvalDistributedEnvIntro />
 
-<Tab.Group tabs={['Node.js', 'Python', 'PHP', 'Ruby', 'JVM (Java)']}>
+<Tab.Group tabs={['Node.js', 'Python', 'PHP', 'Ruby', 'JVM (Java)', 'Elixir']}>
     <Tab.List>
         <Tab>Node.js</Tab>
         <Tab>Python</Tab>
         <Tab>PHP</Tab>
         <Tab>Ruby</Tab>
         <Tab>JVM (Java)</Tab>
+        <Tab>Elixir</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -42,6 +44,9 @@ import LocalEvalDistributedEnvJvmContent from "./_snippets/distributed-environme
         </Tab.Panel>
         <Tab.Panel>
             <LocalEvalDistributedEnvJvmContent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LocalEvalDistributedEnvElixirContent />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

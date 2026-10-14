@@ -1,19 +1,19 @@
 import React from 'react'
 import {
-    IconWarning,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+    IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
 import { applications, topFeatures } from './error_tracking/slides'
@@ -24,7 +24,7 @@ export const errorTracking = {
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
-    forumTopicId: 389,
+    forumTag: 'error-tracking',
     color: 'orange',
     colorSecondary: 'red',
     wizardSupport: true,
@@ -45,7 +45,11 @@ export const errorTracking = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -109,8 +113,6 @@ export const errorTracking = {
     ],
     overview: {
         title: 'Track errors and resolve issues',
-        description:
-            'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix. Built to natively work with product analytics, session replay, and feature flags.',
         eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it.",
         textColor: 'text-black', // tw
     },
@@ -148,8 +150,9 @@ export const errorTracking = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
-        alt: 'Just another hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/police_hog_eb78977120.png',
+        alt: 'A hedgehog police officer on the case',
+        footerClasses: 'max-w-[200px]',
         classes: 'absolute bottom-0 right-0 max-w-[250px]',
     },
     hogs: {
@@ -182,7 +185,6 @@ export const errorTracking = {
         },
     },
     useCases: {
-        intro: 'Error Tracking is used across teams depending on your role.',
         rows: [
             [
                 'Product & Growth Engineers',
@@ -312,7 +314,7 @@ export const errorTracking = {
             {
                 name: 'LogRocket',
                 key: 'logrocket',
-                link: '/blog/posthog-vs-logrocket',
+                link: '/compare/posthog-vs-logrocket',
             },
             {
                 name: 'PostHog',
@@ -351,8 +353,8 @@ export const errorTracking = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
-        imageAlt: 'PostHog AI and error tracking',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_9514_d562b785cc.png',
+        imageAlt: 'A hedgehog inspecting a stack trace with a magnifying glass',
         description: 'investigate the exception and ship the fix',
         intro: 'Ask PostHog AI to find issues, inspect stack traces, and help ship the fix.',
         mcpFeatures: ['error_tracking'],

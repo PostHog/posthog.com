@@ -12,9 +12,6 @@ sourceId: Frill
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Frill connector syncs your Frill ideas, votes, comments, followers, and announcements into PostHog, so you can prioritize your roadmap against actual product usage.
 

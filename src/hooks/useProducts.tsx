@@ -16,11 +16,13 @@ import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
 import { aiObservability } from './productData/ai_observability'
+import { aiEvals } from './productData/ai_evals'
 import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
+import { posthogDesktop } from './productData/posthog_desktop'
 import { replayVision } from './productData/replay_vision'
 
 const initialProducts = [
@@ -36,9 +38,11 @@ const initialProducts = [
     experiments,
     posthog_ai,
     aiObservability,
+    aiEvals,
     logs,
     workflows,
     inbox,
+    posthogDesktop,
     endpoints,
     replayVision,
 ]

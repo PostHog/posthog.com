@@ -73,6 +73,7 @@ At a high level, the Comms Lead is responsible for *how* we talk about the incid
     -   Keep messages in plain English, impact-first, and avoid status-speak. Use existing [communication templates for incidents](/handbook/growth/sales/communications-templates-incidents) as a reference.
     -   By default, communicate through email rather than in social posts. Social posts can exacerbate an issue.
     -   Direct users to the status page or post-mortem (if available) as the source of truth. 
+    -   For major and critical incidents, [include the affected organization name in the email](#including-the-organization-name-in-incident-emails).
      > **When do we need to notify users immediately?** For security incidents, like the [download of malicious packages](/blog/nov-24-shai-hulud-attack-post-mortem), in case the incident lead has identified that users can take action to reduce their risk, we should notify users immediately with clear steps how to act on their side. Product downtime that doesn't involve security breaches/attacks should be addressed after the incident is closed and we have the context needed to inform users.
 
 -   **Support the post-mortem process.**
@@ -84,6 +85,18 @@ At a high level, the Comms Lead is responsible for *how* we talk about the incid
     Most comms can be handled quickly, but in the event of a long-running issue you should develop a plan to handover or continue monitoring the incident status.
 
 These steps are a starting point, not a script. In practice, the Comms Lead's job is to keep communication **accurate, calm, and useful** --- and to reduce noise, not add to it.
+
+Including the organization name in incident emails
+--------------------------------------------------
+
+Plenty of people work across several PostHog organizations. Bulk emails should say which organization was affected, so users can easily check their billing settings, etc. It's worth doing for major and critical incidents — for anything smaller, use your judgement. There's no automatic way to do this, so it takes some manual setup. 
+
+1.  Export the list of affected users as a CSV, with an extra column for the affected organization name.
+2.  If a user is affected under more than one organization, concatenate the names into a single field ("Org 1 and Org 2") rather than sending them one email per org.
+3.  Upload the CSV to Customer.io, mapping that column to a new attribute with a unique name. See Customer.io's guidance on [mapping attributes](https://docs.customer.io/messaging/profiles/uploading-profiles/#map-attributes).
+4.  Pull the attribute into the email with Liquid, and set a generic fallback that shouldn't ever appear.
+
+Validating the export is the slow part of this, so leave time for it. Once you're all set, test and check the previews in Customer.io for a user or two to make sure the org names are correctly shown to their owners.
 
 What does the Comms Lead not do?
 ----------------------------

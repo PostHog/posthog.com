@@ -16,7 +16,7 @@ Sometimes, this means certain information should **never** make it to PostHog se
 
 ## Redacting information with the Web SDK
 
-You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
+You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](/docs/libraries/js/usage#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
 
 For example, you can create a `beforeSend.js` file and define your redaction logic there like this:
 

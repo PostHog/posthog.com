@@ -6,7 +6,7 @@ An **environment** is how you tell PostHog Desktop how to set up a repo so the a
 
 | Type | Used by | What it controls |
 |---|---|---|
-| Local environment | [Worktree tasks](/docs/posthog-desktop/tasks#worktree) | A setup script that runs when a worktree is created |
+| Local environment | [Worktree tasks](/docs/posthog-desktop/worktrees) | A setup script that runs when a worktree is created |
 | Cloud environment | [Cloud runs](/docs/posthog-desktop/cloud-runs) | Network access rules and the secrets and environment variables the cloud workspace gets |
 
 Local mode tasks don't use environments. They run on your computer in the repo as it already exists, so nothing needs to be prepared.
@@ -28,6 +28,8 @@ You can manage your worktree environments in PostHog Desktop in the **Settings**
 ## Cloud environments
 
 A cloud environment controls how a [cloud run](/docs/posthog-desktop/cloud-runs) is configured: what network it can reach, and what secrets and environment variables get injected into the workspace.
+
+Tasks using a cloud environment consume credits for their model usage and cloud compute. See [pricing](/docs/posthog-desktop/pricing) for current rates.
 
 Network access can be configured with three different levels:
 

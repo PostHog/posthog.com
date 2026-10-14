@@ -16,6 +16,7 @@ import {
     IOSInstallation,
     AndroidInstallation,
     FlutterInstallation,
+    KMPInstallation,
     ReactNativeInstallation,
     // No-code installations
     GoogleTagManagerInstallation,
@@ -132,6 +133,12 @@ export const WAAndroidInstallationWrapper = () => (
 export const WAFlutterInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={MOBILE_SNIPPETS}>
         <FlutterInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const WAKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={MOBILE_SNIPPETS}>
+        <KMPInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

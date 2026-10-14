@@ -4,6 +4,8 @@ import { useUser } from 'hooks/useUser'
 import Input from 'components/OSForm/input'
 import Wizard from 'components/Wizard'
 import { IconSpinner } from '@posthog/icons'
+import { useApp } from '../../../../context/App'
+import { useWindow } from '../../../../context/Window'
 
 interface PostHogDisambiguationProps {
     pendingToken: string
@@ -17,6 +19,8 @@ interface PostHogDisambiguationProps {
 // to an account we skip straight to the link form.
 const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingToken, emailInUse, onSuccess }) => {
     const { createWithProvider, linkExisting } = useUser()
+    const { openForgotPassword, openSignIn, closeWindow } = useApp()
+    const { appWindow } = useWindow()
     const [mode, setMode] = useState<'choose' | 'link'>(emailInUse ? 'link' : 'choose')
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
@@ -74,15 +78,19 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
                         >
                             I already have an account
                         </button>
-                    ) : !emailInUse ? (
+                    ) : (
                         <button
                             type="button"
                             className="text-sm text-red dark:text-yellow font-semibold"
-                            onClick={() => setMode('choose')}
+                            onClick={() => {
+                                if (!emailInUse) return setMode('choose')
+                                if (appWindow) closeWindow(appWindow)
+                                openSignIn()
+                            }}
                         >
-                            Back
+                            {emailInUse ? 'Back to sign-in options' : 'Back'}
                         </button>
-                    ) : undefined
+                    )
                 }
                 rightNavigation={
                     mode === 'choose' ? (
@@ -136,6 +144,16 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
                                     />
                                     <button type="submit" className="hidden" />
                                 </form>
+                                <p className="text-sm mt-3 mb-0">
+                                    Forgot your password, or never set one?{' '}
+                                    <button
+                                        type="button"
+                                        className="text-red dark:text-yellow font-semibold"
+                                        onClick={openForgotPassword}
+                                    >
+                                        Reset it
+                                    </button>
+                                </p>
                             </>
                         )}
                         {error && <p className="text-red dark:text-yellow text-sm font-bold mt-2 mb-0">{error}</p>}

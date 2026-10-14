@@ -6,6 +6,7 @@ const PATH_RANKING = {
     canonical: 0,
     content: 1,
     generic: 10,
+    community: 15,
 }
 
 // Hand-curated canonical routes. Listing a path here has three effects: it gets top ranking
@@ -16,6 +17,7 @@ const CANONICAL_ROUTES = {
     '/docs': ['Documentation', 'PostHog docs', 'Get started', 'Important links'],
     '/handbook': ['Company', 'How we work', 'People', 'Engineering', 'Design', 'Sales & marketing'],
     '/blog': ['PostHog blog', 'Inside PostHog', 'Product updates', 'Guides', 'Startups', 'Open source', 'CEO diaries'],
+    '/compare': ['Compare tools', 'PostHog vs', 'Alternatives'],
     '/pricing': [
         'Cost',
         'PostHog pricing',
@@ -32,7 +34,7 @@ const CANONICAL_ROUTES = {
     '/teams': ['Small teams', 'Our teams'],
     '/customers': ['Customer stories', 'Case studies'],
     '/templates': ['Dashboard templates', 'PostHog templates'],
-    '/questions': ['Community questions', 'Community answers', 'Features', 'Deployment', 'Data'],
+    '/forum': ['Community forum', 'Community questions', 'Community answers', 'Features', 'Deployment', 'Data'],
     '/products': ['Tools', 'PostHog products', 'All PostHog tools'],
     '/demo': ['PostHog demo', 'Watch a demo'],
     '/talk-to-a-human': ['Contact sales', 'Sales demo'],
@@ -53,8 +55,7 @@ const PAGE_TYPE_RULES = [
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
     {
         type: 'blog',
-        pattern:
-            /^\/(?:(?:blog|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)|ko\/newsletter(?:\/|$))/,
+        pattern: /^\/(?:blog|compare|spotlight|library|features|founders|newsletter|product-engineers)(?:\/|$)/,
     },
     { type: 'tutorial', pattern: /^\/tutorials(?:\/|$)/ },
     { type: 'customers', pattern: /^\/customers(?:\/|$)/ },
@@ -73,9 +74,12 @@ const PAGE_TYPE_RULES = [
 const EXCLUDED_PAGE_PATTERNS = [
     /^\/(?:404|dev-404-page|offline-plugin-app-shell-fallback)(?:\/|$)/,
     /^\/(?:code|connect|posts|r)(?:\/|$)/,
-    /^\/(?:101|art-library|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
+    /^\/(?:101|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
     /^\/(?:community\/profiles\/me|data-stack\/dw-installation-platforms|team-updates)(?:\/|$)/,
     /\/(?:edit|new|orders|subscriptions)\/?$/,
+    // Hogpedia is a parody encyclopedia. Its pages are crawlable and in the sitemap, but they
+    // must not compete with the real docs in the site's own search.
+    /^\/hogpedia(?:\/|$)/,
     /\/[^/]*-diagram(?:\/|$)/,
     /\.[a-z0-9]{2,5}(?:\/|$)/i,
 ]
@@ -217,17 +221,24 @@ const createPageRecord = (page, content, toolPaths) => {
     const searchTerms = searchTermsForPath(path, exactTool, { includePathSegments: !content })
     const slugger = new Slugger()
     const isCanonical = isCanonicalPath(path, exactTool)
+    const type = typeForPath(path, exactTool, toolPaths)
 
     return {
         id: content?.id || page.id,
         title,
-        type: typeForPath(path, exactTool, toolPaths),
+        type,
         slug: path === '/' ? '' : path.slice(1),
         fields: {
             ...content?.fields,
             slug: path,
         },
-        path_ranking: isCanonical ? PATH_RANKING.canonical : content ? PATH_RANKING.content : PATH_RANKING.generic,
+        path_ranking: isCanonical
+            ? PATH_RANKING.canonical
+            : type === 'community'
+            ? PATH_RANKING.community
+            : content
+            ? PATH_RANKING.content
+            : PATH_RANKING.generic,
         ...(isCanonical ? { canonicalTerms: canonicalTermsForPath(path, title, exactTool) } : {}),
         headings: [
             ...searchTerms.map((value) => ({ value, depth: 2 })),
@@ -262,6 +273,36 @@ const createTeamRecord = ({ id, name, slug, tagline, description, profiles }) =>
         headings: [],
         rawBody: [tagline, description, ...memberNames].filter(Boolean).join(' '),
         excerpt: description || tagline || '',
+    }
+}
+
+const createForumPostRecord = ({
+    id,
+    subject,
+    permalink,
+    excerpt,
+    resolutionBody,
+    resolved,
+    forumTopic,
+    forumTopicLabel,
+    forumTags,
+}) => {
+    const path = `/forum/p/${permalink}`
+    return {
+        id,
+        title: subject,
+        type: 'question',
+        slug: path.slice(1),
+        fields: { slug: path },
+        path_ranking: PATH_RANKING.community,
+        headings: [],
+        rawBody: [excerpt, resolutionBody].filter(Boolean).join(' '),
+        excerpt,
+        resolved,
+        isForum: true,
+        forumTopic,
+        forumTopicLabel,
+        forumTags,
     }
 }
 
@@ -309,6 +350,19 @@ const retrieveSearchPages = {
               searchTitle
               slug
               status
+            }
+          }
+          forumPosts: allSqueakForumPost {
+            nodes {
+              id
+              subject
+              permalink
+              excerpt
+              resolutionBody
+              resolved
+              forumTopic
+              forumTopicLabel
+              forumTags
             }
           }
           teams: allSqueakTeam(
@@ -370,6 +424,11 @@ const retrieveSearchPages = {
 
         data.teams.nodes.forEach((team) => {
             const record = createTeamRecord(team)
+            records.set(record.fields.slug, record)
+        })
+
+        data.forumPosts.nodes.forEach((forumPost) => {
+            const record = createForumPostRecord(forumPost)
             records.set(record.fields.slug, record)
         })
 

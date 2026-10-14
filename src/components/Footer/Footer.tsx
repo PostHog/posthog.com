@@ -61,7 +61,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'PostHog vs...',
-                url: '/blog/tags/comparisons',
+                url: '/compare',
             },
             {
                 title: 'For startups',
@@ -159,15 +159,19 @@ const linklist: IProps[] = [
     },
     {
         title: 'Community',
-        url: '/questions',
+        url: '/forum',
         items: [
             {
                 title: 'Questions?',
-                url: '/questions',
+                url: '/forum',
             },
             {
                 title: 'Guides',
                 url: '/tutorials',
+            },
+            {
+                title: 'Pocket guides',
+                url: '/pocket-guides',
             },
             {
                 title: 'Integrations',
@@ -267,7 +271,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelogå',
+                url: '/changelog',
             },
             {
                 title: 'People',
@@ -299,7 +303,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Support',
-                url: '/questions',
+                url: '/forum',
             },
             {
                 title: 'Careers',

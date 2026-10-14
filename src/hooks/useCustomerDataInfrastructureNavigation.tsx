@@ -12,15 +12,23 @@ export const customerDataInfrastructureNav = {
             url: '/context-warehouse',
         },
         {
+            name: 'Start here',
+            url: '/context-warehouse/use-cases',
+        },
+        {
             name: 'Is PostHog warehouse native?',
             url: '/context-warehouse/warehouse-native',
+        },
+        {
+            name: 'The context gap report',
+            url: '/the-context-gap-report',
         },
         {
             name: 'Data tools',
         },
         {
-            name: 'Managed DuckDB warehouse',
-            url: '/context-warehouse/managed-warehouse',
+            name: 'Warehouse',
+            url: '/context-warehouse/warehouse',
         },
         {
             name: 'PostHog AI',

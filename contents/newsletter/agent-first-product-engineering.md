@@ -93,7 +93,7 @@ ORDER BY week
 
 In the early days of AI, developers had to front-load *everything* into agents to compensate for smaller context windows and less capable models.
 
-But as the technology keeps improving, there's a new trend that removes as much context as possible and trusts the model to figure out the rest.
+But as the technology keeps improving, there's a new trend that [removes as much context as possible](/blog/wtf-is-context-engineering#2-the-models-just-kept-getting-better) and trusts the model to figure out the rest.
 
 That works for general-purpose agents since they're designed to be flexible. Anthropic can't predict everything that everyone is [using Claude for](/newsletter/ai-coding-mistakes).
 
@@ -119,7 +119,7 @@ Everything else gets pulled later. We let the agent figure out when.
 
 ## 4. Writing skills is a human skill
 
-Skills help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
+[Skills](/newsletter/writing-agent-skills) help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
 
 ![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent1_b1e92e5899.png)
 

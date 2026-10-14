@@ -21,3 +21,7 @@ Upload a CSV, JSON, or Parquet file directly to PostHog, or link files in your o
 <SelfHostedSources />
 
 For detailed setup instructions, IP allowlisting, custom sources, and sync configuration, see the [data pipeline source docs](/docs/cdp/sources).
+
+## Where synced rows are written
+
+A source writes to PostHog's own warehouse by default. You can also point it at your own Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, or Azure Blob, and PostHog writes there on the same schedule it syncs. See [destinations](/docs/data-warehouse/destinations).

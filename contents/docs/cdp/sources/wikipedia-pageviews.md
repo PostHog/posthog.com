@@ -12,9 +12,6 @@ sourceId: WikipediaPageviews
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Wikipedia Pageviews connector syncs pageview statistics for any Wikimedia project (Wikipedia, Wiktionary, Wikimedia Commons, and more) from the public [Wikimedia Analytics API](https://doc.wikimedia.org/generated-data-platform/aqs/analytics-api/). It imports project-wide daily totals, daily counts for specific articles, and each day's most-viewed articles.
 

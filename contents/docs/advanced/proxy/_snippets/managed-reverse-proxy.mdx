@@ -179,6 +179,12 @@ That said, the managed reverse proxy is designed so that **no request content is
 
 Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
 
+### Does the managed reverse proxy forward my cookies to PostHog?
+
+No. The managed reverse proxy removes the `Cookie` header from every request before it forwards the request to PostHog. PostHog doesn't need your cookies, because ingestion authenticates with the project token in the request body.
+
+Your proxy runs on a subdomain of your site, so the browser can send it cookies you set on the parent domain (for example, `.myapp.com`). To keep a cookie away from the proxy entirely, set it without a `Domain` attribute or use the `__Host-` prefix.
+
 ### Is the managed reverse proxy HIPAA-compliant?
 
 No. The managed reverse proxy is not HIPAA-compliant and should not be used to process Protected Health Information (PHI). Any Business Associate Agreement (BAA) you have with PostHog does not apply to this feature.

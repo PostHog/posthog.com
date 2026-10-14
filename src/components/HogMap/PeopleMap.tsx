@@ -13,6 +13,7 @@ import {
     isStyleReady,
     DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
+import { buildMemberQuery, useCoordsByQuery, GeocodedArea, Coordinates } from './usePeopleGeo'
 import Toggle from 'components/Toggle'
 import { IconPineapple, IconPeople, IconDecisionTree } from '@posthog/icons'
 
@@ -94,7 +95,6 @@ const PopupHtml = ({
     `
 }
 
-type Coordinates = { latitude: number; longitude: number }
 type ProfileNode = {
     id?: string
     squeakId?: string
@@ -134,79 +134,18 @@ const TEAM_MINI_CREST_QUERY = graphql`
     }
 `
 
-const buildMemberQuery = (m: ProfileNode): string | null => {
-    const location = m.location && m.location.trim()
-    const country = m.country && m.country.trim()
-    const parts: string[] = []
-    if (location) {
-        parts.push(location)
-    }
-    if (country) {
-        parts.push(country)
-    }
-    const q = parts.join(', ')
-    return q || null
-}
-
-const useCoordsByQuery = (isClient: boolean, token: string | undefined, members: ProfileNode[]) => {
-    const [coordsByQuery, setCoordsByQuery] = useState<Record<string, Coordinates>>({})
-    const queries = useMemo(() => {
-        const set = new Set<string>()
-        members.forEach((m) => {
-            const q = buildMemberQuery(m)
-            if (q) {
-                set.add(q)
-            }
-        })
-        return Array.from(set)
-    }, [members])
-    useEffect(() => {
-        if (!isClient || !token) {
-            return
-        }
-        const toFetch = queries.filter((q) => !coordsByQuery[q])
-        if (toFetch.length === 0) {
-            return
-        }
-        let cancelled = false
-        const fetchAll = async () => {
-            const results: Record<string, Coordinates> = {}
-            await Promise.all(
-                toFetch.map(async (q) => {
-                    try {
-                        const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
-                        url.searchParams.set('q', q)
-                        url.searchParams.set('types', 'place,region,country')
-                        url.searchParams.set('access_token', token)
-                        const resp = await fetch(url.toString())
-                        const json = await resp.json()
-                        const feature = json?.features?.[0]
-                        const coords = feature?.geometry?.coordinates
-                        if (Array.isArray(coords) && coords.length >= 2) {
-                            results[q] = { longitude: coords[0], latitude: coords[1] }
-                        } else {
-                            // Fallback to London if geocoding fails
-                            results[q] = { longitude: -0.1276, latitude: 51.5074 }
-                        }
-                    } catch {
-                        // On failure, fallback to London
-                        results[q] = { longitude: -0.1276, latitude: 51.5074 }
-                    }
-                })
-            )
-            if (!cancelled && Object.keys(results).length > 0) {
-                setCoordsByQuery((prev) => ({ ...prev, ...results }))
-            }
-        }
-        fetchAll()
-        return () => {
-            cancelled = true
-        }
-    }, [isClient, token, queries, coordsByQuery])
-    return coordsByQuery
-}
-
-export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
+export default function PeopleMap({
+    members: membersProp,
+    coordsByQuery: coordsByQueryProp,
+    focusArea,
+    focusNonce,
+}: {
+    members?: any[]
+    coordsByQuery?: Record<string, Coordinates>
+    focusArea?: GeocodedArea | null
+    // Bump to re-fly to focusArea even when the area is unchanged (e.g. re-selecting after panning)
+    focusNonce?: number
+}): JSX.Element {
     const [isClient, setIsClient] = useState(false)
     const [mapboxReady, setMapboxReady] = useState(false)
     const [showClusters, setShowClusters] = useState(true)
@@ -255,7 +194,9 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
         [membersProp]
     )
 
-    const coordsByQuery = useCoordsByQuery(isClient, token, members)
+    // Reuse parent-supplied coords (skip internal fetch); otherwise geocode locally.
+    const internalCoords = useCoordsByQuery(isClient, token, coordsByQueryProp ? [] : members)
+    const coordsByQuery = coordsByQueryProp ?? internalCoords
 
     useEffect(() => {
         membersRef.current = members
@@ -547,6 +488,30 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
             }
         }
     }, [coordsByQuery, members])
+
+    // Fly/zoom the map to a searched area (keeps all markers in place)
+    useEffect(() => {
+        const map = mapRef.current
+        if (!map || !focusArea) {
+            return
+        }
+        const flyTo = () => {
+            try {
+                if (focusArea.bbox) {
+                    map.fitBounds(focusArea.bbox, { padding: 60, maxZoom: 6, duration: 1200 })
+                } else if (focusArea.center) {
+                    map.easeTo({ center: focusArea.center, zoom: Math.max(5, map.getZoom()), duration: 1200 })
+                }
+            } catch {
+                console.error('Error focusing map on area')
+            }
+        }
+        if (isStyleReady(map)) {
+            flyTo()
+        } else {
+            map.once('load', flyTo)
+        }
+    }, [focusArea, mapboxReady, focusNonce])
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">

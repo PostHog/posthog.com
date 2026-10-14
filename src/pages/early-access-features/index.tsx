@@ -252,7 +252,7 @@ export default function EarlyAccessFeatures() {
                             asLink
                             variant="secondary"
                             size="md"
-                            to="/tutorials/early-access"
+                            to="/tutorials/public-beta-program"
                             state={{ newWindow: true }}
                             width="full"
                         >

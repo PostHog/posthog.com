@@ -12,6 +12,10 @@ export const productDescriptions = {
         name: 'Session replay',
         description: 'Watch real users use your product, diagnose bugs',
     },
+    replay_vision: {
+        name: 'Replay Vision',
+        description: 'Point AI scanners at your recordings to classify, score, and summarize them',
+    },
     feature_flags: {
         name: 'Feature flags',
         description: 'Roll out features safely, toggle features for cohorts or individuals',

@@ -12,9 +12,6 @@ sourceId: Appdynamics
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Splunk AppDynamics (Cisco) connector syncs your APM data into the PostHog Data warehouse, including applications, business transactions, tiers, nodes, health rule violations, and metric time series. This lets you join application performance signals with your product data for SLA and SLO reporting.
 

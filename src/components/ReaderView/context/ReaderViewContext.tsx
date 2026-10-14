@@ -7,6 +7,8 @@ interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
     isNarrow: boolean
+    isWidthMeasured: boolean
+    setContainerWidth: (width: number | null) => void
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
     backgroundImage: string | null
@@ -21,12 +23,17 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 const SIDEBAR_PINNED_KEY = 'reader-sidebar-pinned'
+const NARROW_READER_BREAKPOINT = 672 // 42rem; matches @2xl/app-reader
+// Declaring here as a variable lets it survive re-renders - navigating between pages will not reset it.
+let persistedPinnedMemory: boolean | null = null
 
 const readPersistedPinned = (): boolean | null => {
     if (typeof window === 'undefined') return null
+    if (persistedPinnedMemory !== null) return persistedPinnedMemory
     const raw = localStorage.getItem(SIDEBAR_PINNED_KEY)
-    if (raw === 'true') return true
-    if (raw === 'false') return false
+    if (raw === 'true') persistedPinnedMemory = true
+    if (raw === 'false') persistedPinnedMemory = false
+    if (persistedPinnedMemory !== null) return persistedPinnedMemory
     return null
 }
 
@@ -38,15 +45,26 @@ export function ReaderViewProvider({
     defaultNavVisible?: boolean
 }) {
     const { appWindow } = useWindow()
+    // The reader only needs to know which side of the responsive breakpoint it
+    // is on. Storing every measured pixel would re-render the whole reader for
+    // every ResizeObserver tick while someone drags the window edge.
+    const [measuredNarrow, setMeasuredNarrow] = useState<boolean | null>(null)
+    const setContainerWidth = useCallback((width: number | null) => {
+        setMeasuredNarrow(width === null ? null : width < NARROW_READER_BREAKPOINT)
+    }, [])
+    const appWindowWidth = appWindow?.size?.width
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
-    const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
+    const isWideEnoughForSidebar =
+        measuredNarrow !== null ? !measuredNarrow : !!appWindowWidth && appWindowWidth >= NARROW_READER_BREAKPOINT
     // Below the @2xl threshold the inline sidebar rail eats too much of the
     // reading column, so on mobile we hide it entirely and swap in a floating
     // control cluster + off-canvas drawer. Only treat as narrow once the width
     // is actually known so SSR/first paint defaults to the desktop layout.
-    const isNarrow = !!appWindow?.size?.width && appWindow.size.width < 672
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? true)
-    const [navUserToggled, setNavUserToggled] = useState(false)
+    const isNarrow =
+        measuredNarrow !== null ? measuredNarrow : !!appWindowWidth && appWindowWidth < NARROW_READER_BREAKPOINT
+    const isWidthMeasured = measuredNarrow !== null
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? persistedPinnedMemory ?? true)
+    const [navUserToggled, setNavUserToggled] = useState(persistedPinnedMemory !== null)
     // @6xl breakpoint is 72rem = 1152px
     const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
     const [isTocVisible, setIsTocVisible] = useState(true)
@@ -54,6 +72,7 @@ export function ReaderViewProvider({
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
     const [hasMounted, setHasMounted] = useState(false)
+    const [persistedStateLoaded, setPersistedStateLoaded] = useState(persistedPinnedMemory !== null)
 
     // Hydrate persisted state after mount
     useEffect(() => {
@@ -64,12 +83,14 @@ export function ReaderViewProvider({
         }
         const savedBackground = localStorage.getItem('background-image')
         if (savedBackground) setBackgroundImage(savedBackground)
+        setPersistedStateLoaded(true)
     }, [])
 
     const toggleNav = useCallback(() => {
         setNavUserToggled(true)
         setIsNavVisible((prev) => {
             const next = !prev
+            persistedPinnedMemory = next
             if (typeof window !== 'undefined') {
                 localStorage.setItem(SIDEBAR_PINNED_KEY, String(next))
             }
@@ -121,13 +142,14 @@ export function ReaderViewProvider({
 
     // Monitor container size and update Nav visibility
     useEffect(() => {
+        if (!persistedStateLoaded) return
         if (!appWindow?.size?.width) return
 
         // Only update Nav visibility if user hasn't manually toggled it
         if (!navUserToggled) {
             setIsNavVisible(!!isWideEnoughForSidebar)
         }
-    }, [isWideEnoughForSidebar, navUserToggled])
+    }, [isWideEnoughForSidebar, navUserToggled, persistedStateLoaded])
 
     // Enable transitions after the initial render has painted.
     useEffect(() => {
@@ -140,6 +162,8 @@ export function ReaderViewProvider({
         isNavVisible,
         isTocVisible,
         isNarrow,
+        isWidthMeasured,
+        setContainerWidth,
         fullWidthContent,
         setFullWidthContent,
         backgroundImage,

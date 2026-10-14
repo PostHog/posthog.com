@@ -70,6 +70,9 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies and auth headers before forwarding to PostHog
+  headers.delete("cookie")
+  headers.delete("authorization")
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {
@@ -120,6 +123,9 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies and auth headers before forwarding to PostHog
+  headers.delete("cookie")
+  headers.delete("authorization")
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {

@@ -9,12 +9,6 @@ availability:
 sourceId: Secoda
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Secoda connector pulls your data catalog metadata — tables, columns, collections, users, groups, and tags — into the PostHog data warehouse.
 
 ## Adding a data source

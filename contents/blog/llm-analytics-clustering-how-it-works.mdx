@@ -78,7 +78,7 @@ Here's what it looks like in the PostHog UI:
     classes="rounded"
 />
 
-You can see the full text representation for this trace in <a href="https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181" target="_blank" rel="noopener noreferrer">this gist</a> — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing). Point being, if its easier for me as a human to grok what's going on, the LLM should be able to do a decent job of summarizing it with less risk of getting side tracked by all the other gnarly metadata and structure in the raw JSON.
+You can see the full text representation for this trace in <a href="https://gist.github.com/andrewm4894/4bd7706e1c0d7c700d8acc44719cd181" target="_blank" rel="noopener noreferrer">this gist</a> — it's a real example from one of my side projects (a daily factoids chatbot that got into a surprisingly deep conversation about mantis shrimp vision and digital signal processing). Point being, if it's easier for me as a human to grok what's going on, the LLM should be able to do a decent job of summarizing it with less risk of getting side tracked by all the other gnarly metadata and structure in the raw JSON.
 
 The line numbering (`L001:`, `L002:`) is important – it gives the downstream summarization LLM a way to reference specific parts of the trace, which makes the structured output much more useful.
 
@@ -317,7 +317,7 @@ Each job runs automatically during the next scheduled cycle, and the run selecto
 
 ## Try it now
 
-If you're already using [AI Observability](/llm-analytics) in PostHog, clustering runs automatically – no configuration needed. Want more control? Set up [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs) to define exactly what gets clustered. If you're not using AI Observability yet, you can [get started in minutes](/docs/ai-observability/start-here) with SDKs for [OpenAI](/docs/ai-observability/installation/openai), [Anthropic](/docs/ai-observability/installation/anthropic), [LangChain](/docs/ai-observability/installation/langchain), [Vercel AI](/docs/ai-observability/installation/vercel-ai), and [many more](/docs/ai-observability/installation).
+If you're already using [AI Observability](/ai-observability) in PostHog, clustering runs automatically – no configuration needed. Want more control? Set up [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs) to define exactly what gets clustered. If you're not using AI Observability yet, you can [get started in minutes](/docs/ai-observability/start-here) with SDKs for [OpenAI](/docs/ai-observability/installation/openai), [Anthropic](/docs/ai-observability/installation/anthropic), [LangChain](/docs/ai-observability/installation/langchain), [Vercel AI](/docs/ai-observability/installation/vercel-ai), and [many more](/docs/ai-observability/installation).
 
 <p>
 	<CallToAction to="https://app.posthog.com/ai-observability/clusters">

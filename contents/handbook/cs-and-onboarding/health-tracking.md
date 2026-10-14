@@ -4,173 +4,268 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We use Vitally as a customer success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts. It integrates with our other systems such as PostHog, PostHog Support, and Salesforce to give you a complete view of what's going on with your customers.
+We track customer health in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently accounts with an assigned owner contacted us, see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
 
-## Health scoring
+> We can't yet see historic trends of customer health, because the score is a materialized view that is rebuilt each day.
 
-### Overview
+> We purposefully don't include data volume increases or decreases in this score. Spike alerts capture these, and they need a different response from a health score trend (immediate action).
 
-Health scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall <PrivateLink url="https://posthog.vitally-eu.io/settings/health/accounts">health score</PrivateLink> out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs <PrivateLink url="https://docs.vitally.io/account-health-scores-and-metrics/health-scores">here</PrivateLink>.
+## Where to find it
 
-Health score metrics are divided into two categories: Customer Engagement (25%) and Product Engagement (75%).
+Each account in Customer Analytics has these properties:
 
-[**Customer engagement**](/handbook/cs-and-onboarding/health-tracking#customer-engagement)
+| Property | What it tells you |
+| --- | --- |
+| `Health score` | Product health, 0–10. Refreshed daily. |
+| `Health score updated` | When the score was last calculated. A date older than about one day means the score is stale. |
+| `MCP users (weekly)` | The average number of people who used the PostHog MCP each week in the last 3 weeks. |
+| `MCP share (%)` | The share of the account's active people who use the MCP. |
+| `Health dashboard` | A link to the Account health dashboard, filtered to this account. |
 
-| Score Name                | Measuring                                        | Weighting    | 
-|---------------------------|--------------------------------------------------|--------------|
-| User engagement           | Are they using PostHog regularly?                | 15%          | 
-| Product experience        | Are there negative experiences with the product? | 5%           | 
-| Company engagement        | Are they engaging with PostHog humans?           | 5%           | 
+### Account health dashboard
 
-[**Product engagement**](/handbook/cs-and-onboarding/health-tracking#product-engagement)
+The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> is the overview and deep dive for one account. To open it:
 
-| Score Name                  | Measuring                                                                            | Weighting    | 
-|-----------------------------|--------------------------------------------------------------------------------------|--------------|
-| Product Analytics           | Event volume and users analyzing insights                                            | 33%          | 
-| Session replay              | Replay volume and users analyzing replays                                            | 20%          | 
-| Feature flags & Experiments | Flag requests, users creating feature flags, users creating or viewing experiments | 17%          | 
-| Surveys & Data warehouse    | Users creating and viewing surveys, volume of rows synced                            | 5%           | 
+1. Open the account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>.
+2. Click the `Health dashboard` link in the account's properties.
 
-### Customer engagement
+The link sets the `organization_id` variable for you. You can also open the dashboard directly and type an organization ID into the variable at the top. Only paying or trialing accounts have a score, so only those accounts have a link.
 
-Non-product metrics, looking holistically at: Are customers using PostHog? Do they have friction when using PostHog? Are they engaging with PostHog humans?
+The dashboard shows:
 
-#### User engagement
+- **Health summary:** the score, its two parts, and its percentile against all scored accounts.
+- **Engagement by product:** the score, weight, and contribution of each product, with a status that tells you what to do. *Went silent* means talk to them this week. *Not used* means a cross-sell opportunity.
+- **Stickiness inputs:** pipelines, Replay Vision scanners, scouts, evals, and MCP use.
+- **Weekly active people by product:** the 12-week trend behind the engagement score.
+- **Weekly MCP use:** people who use the MCP each week, compared with calls from agents.
+- **Relationship score:** the [automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only accounts with an assigned CSM, TAM, or AE have this data.
 
-This tracks whether users are logging in to PostHog. It can tell us if customers are getting value from PostHog (regardless of the products they're using). Customers that have a low active user percentage, or only have 1-3 users engaging with PostHog are at risk of churn.
+### The `account_health_scores` view
 
-| Measure                                       |  Poor   | Concerning | Healthy |
-|-----------------------------------------------|---------|------------|---------|
-| Last seen in product                          | >5 days | 1-5 days   | ≤ 1 day |
-| Active user percentage                        | <20%    | 20-40%     | ≥40%    |
-| Percentage decrease in active user percentage | >20%    | 5-20%      | ≤5%     |
-| Users engaging with features                  | <3      | 3-10       | ≥10     |
+The full breakdown per product is in the `account_health_scores` view in the PostHog Data Warehouse. You can also add it from the column selector in Customer Analytics.
 
-#### Product experience
+The view has three main numbers per account, all out of 10:
 
-This looks at the experience of using PostHog. 
+| Column | What it tells you |
+| --- | --- |
+| `engagement_health` | Are the people who use PostHog at this account still using it? Trend-based, measured against the account's own history. |
+| `stickiness` | How embedded is PostHog in their stack? Absolute, not trend-based. |
+| `health_score` | The headline blend: `0.615 × engagement_health + 0.385 × stickiness`. |
 
-Creating a lot of tickets can mean users are not satisfied with PostHog, haven’t implemented PostHog correctly or aren’t using the product correctly (opportunity to offer training)! Similarly, visiting docs can mean users are trying to do something and could need help.
+The view also has a per-product breakdown (`e_*`) and each product's share of the engagement score (`contrib_*`). It runs entirely on PostHog-native data: events, the billing usage report, and our own revenue tables.
 
-We also look at query failure rate. Failed queries are common (users can cancel a query, there can be SQL syntax errors, etc.), however, a high failure rate means users aren't getting the data they need from PostHog. You should [help investigate and provide recommendations](https://www.loom.com/share/dcd1da54963d46d79478425be0f22239?sid=3e85c8a0-3781-41f3-ab2a-2404991deafb).
+## Who gets scored
 
-| Measure                                       | Poor | Concerning | Healthy |
-|-----------------------------------------------|------|------------|---------|
-| Tickets created in last 30 days               | >10  | 5-10       | ≤5      |
-| Urgent tickets that remain unresolved         | >2   | 0-2        | 0       |
-| Docs visited in last 7 days                   | >100 | 20-100     | ≤20     |
-| Query failure rate in last 7 days             | >13% | 5-13%      | ≤5%     |
+An account gets a score if one of these is true:
 
-#### Company engagement
+- **Paying:** the account has MRR above $0 in one of the last 3 billing months. This includes annual contracts.
+- **Trialing:** the account has an active trial and is not deactivated.
 
-This looks at a customer's engagement with PostHog as a company. Most of PostHog's customers are happily self served so this is weighted very little in the overall healthscore. 
+The `score_status` column tells you how to read the score:
 
-| Measure                     | Poor     | Concerning | Healthy  |
-|-----------------------------|----------|------------|----------|
-| Most recent meeting         | >90 days | 30-90 days | ≤30 days |
-| Most recent ticket          | >90 days | 30-90 days | ≤30 days |
-| Total product count         | <3       | 3-6        | >6       |
+- `scored`: the account has enough history to score.
+- `no_engagement_baseline`: the account has paid for 4 months or more, but we cannot measure any usage. The engagement part of the score is 0.
+- `too_new`: the account has paid for less than 4 months. It has no score yet.
 
-### Product engagement
+## The rule: people compared to agents
 
-Across PostHog's products, we look at 2 factors – data volume & user engagement.
+- **Engagement** measures what *people* do: views, queries, and changes in the app or through the MCP.
+- **Stickiness** measures what *runs for the customer without a person*: pipelines, scanners, scouts, and evals.
 
-**Data volume**
+Calls from agent tokens (scouts, research, and sandbox runs) do not count as engagement. They count in stickiness through the scouts and scanners that the customer set up.
 
-This tracks _percentage decrease_ in data volume over the last 30 days. We use <PrivateLink url="https://posthog.vitally-eu.io/settings/successMetrics/accounts">success metrics</PrivateLink> to track billable usage over the last 30 days and compare it with the previous 30 days on a rolling basis. The percentages you see in the tables below are the _decrease_ between the previous and current period.
+## Why the score is built this way
 
-**User engagement**
+### Why two axes instead of one
 
-Data volume is a lagging indicator, by the time it drops, customers may have already decided to churn. We combine data volume with product-specific user engagement, measuring the percentage of _active users_ interacting with product features over the last 14 days.
+Engagement and stickiness fail in different directions, and a single number hides that.
 
-> There are products we don't include in the health score. Vitally has a limit of max 20 health metrics so we are excluding other products for now as the overall ARR from them are still very low compared to the others.
+**Engagement is a trend, measured against the account itself.** A five-person startup with 3 weekly active users is not less healthy than a 500-person enterprise with 30. It's the *trend* that matters. A small account holding steady scores well, and a large account that's halved scores badly, which is the right way round for a CSM triaging a book.
 
-#### Product analytics
+**Stickiness is an absolute measure of how hard PostHog is to remove.** An account can have flat engagement and still be extremely safe, because they have destinations piping data out, warehouse syncs, and scouts running. Ripping that out is a major undertaking. Conversely, an account can be highly engaged and still easy to churn if all they do is look at dashboards.
 
-| Measure                                        | Poor | Concerning | Healthy |
-|------------------------------------------------|------|------------|---------|
-| Event count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users analyzing insights                | <20% | 20-40%     | ≥40%    |
+Two accounts at 6.5 overall can be completely different problems. Always read the two components, not just the headline.
 
-> Product analytics usage include: analyzing insights or dashboards, creating or saving insights, creating or updating dashboards
+### Why 61.5 / 38.5
 
-#### Session replay
+The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score` (see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score)). This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
 
-| Measure                                         | Poor | Concerning | Healthy |
-|-------------------------------------------------|------|------------|---------|
-| Replay count last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users watching replays                   | <20% | 20-40%     | ≥40%    |
+## How stickiness is measured
 
-#### Feature flags & experiments
+Stickiness has two equal halves:
 
-| Measure                                            | Poor | Concerning | Healthy |
-|----------------------------------------------------|------|------------|---------|
-| Decide requests last 30 days (percentage decrease) | >20% | 5-20%      | <= 5%   |
-| Active users creating feature flags last 30 days*  | <5%  | 5-20%      | ≥20%    |
-| Active users using experiments**                   | <5%  | 5-20%      | ≥20%    |
+```
+stickiness = 10 × (0.5 × breadth + 0.5 × depth)
 
-> Feature flag usage includes: creating or updating feature flags. We look at this over 30 days instead of the usual 14 as feature flags provide value over a longer time frame.
-> Experiments usage includes: creating experiments, viewing experiments, and launching experiments.
+breadth = min(engaged product weight / 19, 1)
 
-#### Surveys & data warehouse
+depth = min(( pipelines × pipeline_retention
+            + 3 × [mcp_users > 0] × (1 + min(mcp_users / 10, 1))
+            + 2 × [scanners  > 0] × (1 + min(scanners / 5, 1))
+            + 2 × [scouts    > 0] × (1 + min(scouts / 5, 1))
+            + 1 × [evals     > 0] × (1 + min(evals / 5, 1)) ) / 24, 1)
 
-| Measure                                            | Poor     | Concerning | Healthy |
-|----------------------------------------------------|----------|------------|---------|
-| Active users viewing surveys                       | <5%      | 5-20%      | ≥20%    |
-| Rows synced last 30 days (percentage decrease)     | >20%     | 5-20%      | <= 5%   |
+pipelines = 3 × [destinations > 0]    × (1 + min(destinations / 5, 1))
+          + 2 × [warehouse syncs > 0] × (1 + min(syncs / 10, 1))
+          + 2 × [transformations > 1] × (1 + min((transformations − 1) / 5, 1))
+          + 1 × [batch exports > 0]   × (1 + min(exports / 3, 1))
+```
 
+- **Breadth** is the summed weight (see below) of every product the account has a measurable baseline for. 19 is the maximum. For example, an account that uses Product Analytics (3) and Session Replay (2) has a breadth of 5 / 19.
+- **The first transformation does not count.** Almost every project has one transformation by default.
+- **`pipeline_retention`** compares the active pipelines now with about 9 weeks ago. If a customer turns off pipelines, the pipeline credit falls. Customers turning these things off is an early indication of churn.
+- **`mcp_users`** counts people who call the MCP with their own token. When the MCP is part of a team's workflow, PostHog is harder to remove.
 
-## Account indicators
+The view also shows the inputs as columns: `active_destinations`, `active_transformations`, `active_batch_exports`, `active_warehouse_syncs`, `pipeline_retention`, `active_scanners`, `active_scouts`, and `active_evals`.
 
-Health scores are useful for tracking the long-term trends in an account, but occasionally there are more immediate point-in-time events that we should react to.  These are tracked as indicators in Vitally and fall into one of two categories
+## How we measure engagement for each product
 
- - Risk indicators - show up red against the account name and indicate potential churn
- - Opportunity indicators - show up green against the account name and indicate a potential opportunity for growth
+Two sources feed each product: UI events, and MCP tool calls attributed by category.
 
-### Risk indicators
+| Product | Weight | UI signal | MCP `$mcp_tool_category` |
+| --- | --- | --- | --- |
+| Product Analytics | 3 | `insight viewed`, `viewed dashboard` | `Product analytics`, `Dashboards`, `Insights & analytics`, `Query wrappers`, `SQL`, `Data schema`, `Data catalog` |
+| Session Replay | 2 | `recording viewed` | `Session replays` |
+| Feature Flags | 2 | `feature flag created`, `feature flag updated`, `toolbar feature flag overridden` | `Feature flags` |
+| Web Analytics | 2 | `$pageview` on the Web Analytics page | `Web analytics`, plus the `query-web-stats`, `query-web-overview`, and `heatmaps-*` tools |
+| Error Tracking | 2 | `error_tracking_issue_viewed` | `Error tracking`, `Error tracking alerts` |
+| AI Observability | 2 | `llm analytics usage` | `AI observability`, plus the `query-llm-trace` and `query-llm-traces-list` tools |
+| Experiments | 1 | `experiment viewed` | `Experiments` |
+| PostHog AI | 1 | `max conversation turn completed`, `task_created` from PostHog AI | – |
+| Surveys | 1 | `survey viewed` | `Surveys` |
+| Logs | 1 | `logs query executed` | `Logs` |
+| Inbox | 1 | `Inbox viewed`, `Inbox report opened`, `Inbox report action`, `Scout fleet viewed`, `Scout config changed` | `Signals` |
+| Replay Vision | 1 | scanner viewed or created, observation viewed, watch feed viewed | `Replay vision` |
 
-These are automatically applied via Vitally playbooks (see the Risk category <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks">here</PrivateLink>):
+Why some weights are set this way:
 
-#### Forecasted MRR decrease
+- **Experiments has weight 1** because Experiments are billed as part of Feature Flags.
+- **AI Observability and Error Tracking have weight 2** because they are new and growing products.
+- **SQL counts as Product Analytics** because agents do analytics through SQL.
+- **PostHog Desktop is not measured yet.**
 
-Applied if the Forecasted MRR Change is less than -10%, indicating a drop in MRR.  We should look into the account to understand whether it is just a reduction in usage, or they are trending towards churn.
+## Inner workings
 
-#### Increased billing page visits
+> This section is a detailed drill into the mechanics of the score. You don't need it to use the score day to day. It records how we compute the score and why.
 
-Applied if there have been more than 1 visits to the billing page in the previous 7 days.  Can be a good indicator that the customer needs help understanding or reducing their bill.
+### How engagement is calculated
 
-#### Query failure rate > 10%
+For each account and each in-scope product, over an 84-day lookback:
 
-Applied if the Query failure rate over the last 7 days (Success metric) is greater than 10%.  Use Vitally to see which user was impacted and see if you can help optimize their queries or flag to our team for investigation.
+1. **Count weekly active users.** Distinct persons who fired that product's qualifying event, bucketed by week. UI events and MCP calls both count.
+2. **Current level:** mean WAU over the last 21 days.
+3. **Baseline:** median WAU over weeks older than 28 days. Median rather than mean, so a single spike week doesn't inflate the bar the account has to clear.
+   - The gap between 21 and 28 days is a deliberate one-week buffer, keeping the comparison period cleanly separated from the current one.
+   - **Silent weeks are skipped, not counted as zero.** Only weeks with at least one active user exist as rows, so both the mean and the median are computed over *active* weeks only. An account active in 1 of the last 3 weeks with 1 user scores a current level of 1.0, not 0.33. This is systematically generous to intermittent usage. It's worth knowing when a score looks better than the account feels.
+4. **Score the product:**
+   ```
+   e_p = NULL                              if no baseline (never meaningfully active)
+   e_p = 0                                 if there is a baseline but zero current activity
+   e_p = min(current / baseline / 0.85, 1) otherwise
+   ```
 
-#### Sudden decrease in event volume
+5. **Blend across products**, weighted:
+   ```
+   engagement_health = Σ(weight × e_p) / Σ(weight)     over products where e_p is not NULL
+   ```
 
-Applied if the Event count last 7 days (Success metric) decreases more than 20% versus the previous 7 days.  Indicates that they may have turned event tracking off.
+`contrib_*` splits that blend back out per product. They sum to `engagement_health`, so you can see at a glance which product is dragging a score down.
 
-#### No insights analyzed past week
+#### Reading `e_*`: NULL and 0 mean very different things
 
-Applied if `insight analyzed` was last seen greater than 7 days ago.  Indicates that they may have stopped using PostHog to track analytics data.
+- **`NULL`:** the account has no usable baseline for that product. They've never really used it. This is a **cross-sell opportunity**, not a problem.
+- **`0`:** the account *was* active and has gone completely silent. This is a **cliff**, and it's the single most actionable signal in the view.
 
-#### Payment failed
+An account showing `e_session_replay = 0` deserves a conversation this week. One showing `NULL` deserves a demo at some point.
 
-Applied if there is a failed payment on their Stripe account.  We should reach out to get this resolved ASAP.
+#### Why the 0.85 grace band
 
-#### Startup credit will run out this billing cycle
+Engagement compares current activity to the account's own historical median, but real usage is noisy: holidays, sprint cycles, one person on leave. An account only needs to hold **85% of its own baseline** to score a full 10. Below that, the score falls off proportionally. This stops the score flapping on ordinary week-to-week variance.
 
-Applied if they are currently in the Startup plan segment but also have Forecasted MRR, meaning that they are on track to make a payment this month.
+## Automated relationship score
 
-#### Organization owner recently removed
+The `Relationship score` property is a score from 0 to 100 that we calculate each day. It measures how recently the customer contacted us. It does not measure how happy the customer is: a high score means that somebody talks to us, not that the conversation goes well.
 
-Applied if the Owner role has been removed from a user in the last 14 days.  May be a sign that you've lost a champion.
+Every account with an assigned CSM, TAM, or account executive (AE) in Customer Analytics gets a score. If an account has more than one, the owner is the CSM, then the TAM, then the AE.
 
-### Opportunity indicators
+Each account in Customer Analytics has these properties:
 
-These are automatically applied via Vitally playbooks (see the Opportunity category <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks">here</PrivateLink>):
+| Property | What it tells you |
+| --- | --- |
+| `Relationship band` | The band of the score (see below). Read this first. It shows `Unknown` when the account has no signal. |
+| `Relationship score` | The score, 0–100. |
 
-#### Forecasted MRR growth
+### Signals
 
-Applied if the Forecasted MRR Change is more than 10%, indicating an increase in MRR.  We should look into the account to understand whether it is likely to be deliberate or an accidental spike.
+| Signal | Weight | What counts |
+| --- | --- | --- |
+| Slack | 30 | Inbound messages in the customer's shared Slack channel, and support tickets that come from Slack. Messages from bots are not counted. |
+| Support tickets | 25 | Support tickets from the customer that do not come from Slack. |
+| Meetings | 25 | Gong calls linked to the account, and confirmed past meetings on the account in Customer Analytics. |
+| Email | 25 | Inbound email from the customer, captured from Gmail in Customer Analytics. Email from PostHog addresses and no-reply addresses is not counted. |
 
-#### Organization owner recently added
+Each customer contact counts in one signal only. For example, a Slack message counts under Slack, and not again under support tickets.
 
-Applied if the Owner role has been added to a user in the last 14 days. This is a good opportunity to reach out to a potential champion if you've not met them before. 
+### How the score is calculated
+
+Each signal gets a sub-score from 0 to 100:
+
+```
+sub_score = min(max(100 − days since last contact + volume bonus − penalty, 0), 100)
+```
+
+- **Volume bonus:** +5 points for each contact in the last 90 days, up to +20. Slack gets no volume bonus, because we cannot count all Slack messages.
+- **Penalty:** the support tickets sub-score loses 15 points for each high-priority ticket from the last 90 days that is still open.
+- **Ticket dates:** a ticket counts from the customer's last message if we have not read it yet. Otherwise it counts from when the customer opened the ticket.
+
+The relationship score is the weighted average of the signals that the account has. A missing signal does not lower the score. For example, an account with no Gong calls and no calendar meetings gets a score from the other three signals.
+
+| Band | Score |
+| --- | --- |
+| Strong | 80 and above |
+| Healthy | 60 to 79 |
+| Cooling | 40 to 59 |
+| Cold | 20 to 39 |
+| Dormant | Below 20 |
+| Unknown | No signal |
+
+### Where to see the data
+
+The **Relationship score** section of the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> shows:
+
+- **Relationship summary:** the score, the band, the number of signals, and the owner.
+- **Relationship signals:** for each signal, the last contact, the days since, the contacts in the last 90 days, the sub-score, and its contribution. The contributions add up to the score.
+- **Weekly inbound emails and meetings:** the last 12 weeks. Slack and support tickets are not in this chart, because the score uses only their last contact date.
+
+The full breakdown is in the `csm_relationship_scores` view in the PostHog Data Warehouse.
+
+### Limits
+
+- **Contact is not sentiment.** A customer who sends angry messages every day gets a high score. Read the messages before you decide that a relationship is healthy.
+- **Few signals make a weak score.** An account with only one signal can move a lot from one contact. Check the number of signals on the dashboard.
+- **Old scores stay.** The property sync never clears a value. If an account loses all its signals, `Relationship score` keeps its last number, but `Relationship band` changes to `Unknown`.
+
+## CSM relationship
+
+The health score and the relationship score above are computed for you. CSM relationship is a rating you set by hand on your own accounts, in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
+
+It records the relationship *you personally* have with the account. It does not measure how the account is doing from a usage/spend/metrics standpoint. A large, healthy, fully self-serve account can sit at the bottom of the scale, and that is a correct reading in a product-led book, "assigned to you" and "known to you" are different things. 
+
+| Rating | What it means |
+|--------|---------------|
+| 1 - No relationship | The account is yours on paper only. It is fully self-serve, and you have no two-way contact with anyone there. |
+| 2 - Introduced | Warmly introduced from another team member but no direct trust yet OR limited response to engagement attempts but no real relationship built |
+| 3 - Reactive | They contact you when they need something, and there is no contact between times. |
+| 4 - Working relationship | You have regular two-way contact with a named person who replies to you and takes meetings. |
+| 5 - Trusted advisor | You are multi-threaded in the account. They bring you problems early and include you in their plans. |
+
+To set the rating, add the **CSM relationship** column to your account view, then click the cell.
+
+### How to use it
+
+- Only the CSM on the account sets the rating. Do not rate an account for somebody else.
+- Change it when the relationship changes. There is no review schedule.
+- On handover, rate your own relationship. Start again at 2 instead of keeping the rating the previous CSM gave. If you keep their rating, the field tells you about the history of the book and not about the relationship the account has today.
+- Be honest. A book of all fives is less useful than an accurate one, and a one is not a failure — it tells us which accounts might need more focus from the CSM team and beyond.
+
+Each label starts with a digit, so the scale sorts in the accounts table and totals in HogQL and PostHog AI. Use `toInt32OrNull(substring(value, 1, 1))` to get the number.

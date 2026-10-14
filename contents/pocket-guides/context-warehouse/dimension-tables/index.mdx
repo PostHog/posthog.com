@@ -1,0 +1,59 @@
+---
+title: Dimension tables
+shortTitle: Dimensions
+subtitle: Star-schema dimensions (country, timezone, currency, date, plan) built once and reused.
+pocketGuideOrder: 15
+section: Long-term modeling
+---
+
+<LeftPage>
+
+<SkillFigure n={1} caption="The skill itself, the file an agent follows to build a dimension table." />
+
+</LeftPage>
+
+<RightPage>
+
+# Dimension tables
+
+Facts (events, charges, revenue items) are long, keyed, and additive. Dimensions are short, one
+row per entity, descriptive: `dim_country`, `dim_plan`, `dim_date`. This skill builds them once so
+every other model in this guide reuses them instead of re-deriving a lookup.
+
+## Three moves
+
+1. **Source it**: upload a lookup as a CSV, sync it from a system of record, or derive it from
+   events.
+2. **Shape it**: an aliased `SELECT`, one row per entity, dedupe hard. Materialize on a **slow**
+   schedule, since dimensions change rarely but are read constantly.
+3. **Attach it**: a saved join or person join, so its columns read as native fields in any query,
+   filter, or breakdown.
+
+## Currency is already a managed dimension
+
+PostHog ships exchange rates behind `convertCurrency(from, to, amount, timestamp?)`. Only build a
+currency dimension yourself in dbt, which has no equivalent.
+
+## Rules before you model
+
+- **One row per entity, unique key**: a duplicate key silently fans out every fact it joins.
+- **Alias to clean, stable names**: these become the join surface everything else depends on.
+- **Register and certify** load-bearing dimensions, so other models discover them instead of
+  building a rival copy.
+
+## The skill itself
+
+<SeeFig n={1} /> covers sourcing, shaping, and attaching a dimension, with HogQL recipes and
+conformed dbt `dim_*` models tested for uniqueness.
+
+Copy it into your own agent, or find it in the
+[PostHog monorepo](https://github.com/PostHog/posthog/blob/master/products/data_modeling/skills/modeling-dimension-tables/SKILL.md).
+
+<SeeAlso>
+
+See also: [Revenue metrics](/pocket-guides/context-warehouse/revenue-metrics) ·
+[Warehouse foundations](/pocket-guides/context-warehouse/warehouse-foundations)
+
+</SeeAlso>
+
+</RightPage>

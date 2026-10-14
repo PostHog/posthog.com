@@ -1,30 +1,31 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { IconCheck } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
-import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
-import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
+import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
+import PricingEstimator, { estimateReplayVisionPricing, BillingTier } from './PricingEstimator'
 
 /*
- * Pricing for Replay Vision. It's billed in usage-based **credits** (1 credit =
- * $0.01) and isn't wired into the billing API, so these sections render the
- * pricing story directly – mirroring the session-replay Plans/Calculator
- * layouts – instead of using the billing-driven shared templates.
+ * Pricing for Replay Vision, billed in usage-based **credits** (1 credit = $0.01).
+ * These sections render the pricing story directly – mirroring the session-replay
+ * Plans/Calculator layouts – rather than using the billing-driven shared templates,
+ * because the launch framing (struck-through 500 → 2,500 free credits) isn't
+ * expressible from billing data. The interactive estimator itself is shared with
+ * the /pricing calculator's Replay Vision tab – see PricingEstimator.tsx.
  */
 
+// These must track the billing API's replay_vision tiers (currently 2,500 free credits, then
+// $0.01/credit – billing encodes the launch boost too). The /pricing tab reads billing tiers
+// directly and self-updates at the next build; this page hardcodes them to keep the
+// struck-through 500 → 2,500 framing, so when the boost ends it needs a manual edit here.
 const CREDIT_PRICE = 0.01 // USD per credit
 const FREE_CREDITS = 2500 // per org, per month – 5x the standard tier for a limited time at launch
 const STANDARD_FREE_CREDITS = 500 // the regular free tier, kept visible (struck through) next to the boosted one
 
-// Observation cost by model, in credits. Names are abstracted from the internal
-// model list for the public page.
-const MODELS: { key: string; label: string; creditsPerObservation: number }[] = [
-    { key: 'standard', label: 'Standard', creditsPerObservation: 5 },
-    { key: 'premium', label: 'Premium', creditsPerObservation: 15 },
-    { key: 'lightweight', label: 'Lightweight', creditsPerObservation: 3 },
+const LAUNCH_CREDIT_TIERS: BillingTier[] = [
+    { up_to: FREE_CREDITS, unit_amount_usd: '0' },
+    { up_to: null, unit_amount_usd: CREDIT_PRICE.toFixed(2) },
 ]
 
 const pricingDetails: { headline: React.ReactNode; body: React.ReactNode }[] = [
@@ -195,55 +196,11 @@ export const PricingPlans = ({ id }: SectionComponentProps) => (
 // ---------------------------------------------------------------------------
 // Calculator
 // ---------------------------------------------------------------------------
-// Slider + tiers are all expressed in the SAME unit (observations), and the
-// slider min is the free allocation — exactly how session replay's calculator
-// works. The selected model reshapes the per-observation tiers derived from the
-// credit model (free credits ÷ credits-per-observation, price = credits × $0.01).
-const MAX_OBSERVATIONS = 50000
-
-const formatCompactNumber = (n: number) =>
-    Intl.NumberFormat('en', { notation: 'compact', compactDisplay: n < 999999 ? 'short' : 'long' })
-        .format(n)
-        .toLowerCase()
-
 export const PricingCredits = ({ id }: SectionComponentProps) => {
     const [modelKey, setModelKey] = useState('standard')
     const [observations, setObservations] = useState(500)
 
-    const model = MODELS.find((m) => m.key === modelKey) ?? MODELS[0]
-
-    // Derive observation-denominated tiers for the selected model.
-    const freeObservations = Math.round(FREE_CREDITS / model.creditsPerObservation)
-    const pricePerObservation = model.creditsPerObservation * CREDIT_PRICE
-    const tiers = useMemo(
-        () => [
-            { up_to: freeObservations, unit_amount_usd: '0' },
-            { up_to: null, unit_amount_usd: pricePerObservation.toFixed(2) },
-        ],
-        [freeObservations, pricePerObservation]
-    )
-
-    // Marks always start at the free allocation and stay positive (LogSlider
-    // applies Math.log to min/max/marks, so 0 would break it).
-    const marks = useMemo(
-        () =>
-            Array.from(new Set([freeObservations, 10000, 25000, MAX_OBSERVATIONS]))
-                .filter((m) => m >= freeObservations && m <= MAX_OBSERVATIONS)
-                .sort((a, b) => a - b),
-        [freeObservations]
-    )
-
-    // Keep the volume within the (model-dependent) slider range.
-    const volume = Math.min(Math.max(observations, freeObservations), MAX_OBSERVATIONS)
-    const { total: cost, costByTier } = useMemo(() => calculatePrice(volume, tiers), [volume, tiers])
-
-    const dp = 2
-    const formatPrice = (str: string) => {
-        const n = parseFloat(str)
-        return n === 0 ? 'Free' : `$${n.toFixed(dp)}`
-    }
-
-    const activeTierIndex = volume <= freeObservations ? 0 : 1
+    const cost = estimateReplayVisionPricing({ observations, modelKey, creditTiers: LAUNCH_CREDIT_TIERS })?.cost ?? 0
 
     return (
         <section id={id} className="scroll-mt-40 not-prose @container">
@@ -253,126 +210,13 @@ export const PricingCredits = ({ id }: SectionComponentProps) => {
                 its AI model. Pick a model and drag the slider to estimate your monthly cost.
             </p>
 
-            {/* Model selector */}
-            <div className="mb-8">
-                <p className="text-sm font-semibold text-primary/70 mb-2">Model</p>
-                <div className="grid grid-cols-2 @xl:grid-cols-4 gap-2">
-                    {MODELS.map((m) => (
-                        <button
-                            key={m.key}
-                            type="button"
-                            onClick={() => setModelKey(m.key)}
-                            className={`text-left rounded-md border px-3 py-2 cursor-pointer transition-colors ${
-                                m.key === modelKey
-                                    ? 'border-primary bg-accent'
-                                    : 'border-primary/30 hover:border-primary'
-                            }`}
-                        >
-                            <span className="block text-sm font-semibold text-primary">{m.label}</span>
-                            <span className="block text-xs text-primary/60">
-                                {m.creditsPerObservation} {m.creditsPerObservation === 1 ? 'credit' : 'credits'} · $
-                                {(m.creditsPerObservation * CREDIT_PRICE).toFixed(2)}/obs
-                            </span>
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Tier breakdown */}
-            <div className="space-y-px">
-                <div className="hidden @md:grid grid-cols-12 items-center px-4 py-2 bg-black/10 dark:bg-white/10 rounded-md font-bold gap-2">
-                    <span className="col-span-4 text-sm text-black dark:text-white">Allocation</span>
-                    <span className="col-span-3 text-sm text-black dark:text-white">Unit price</span>
-                    <span className="col-span-3 text-sm text-right text-black dark:text-white">Your selection</span>
-                    <span className="col-span-2 text-sm text-right text-black dark:text-white">Subtotal</span>
-                </div>
-
-                {tiers.map((tier, i) => {
-                    const isFree = parseFloat(tier.unit_amount_usd) === 0
-                    const isActive = i === activeTierIndex
-                    const label =
-                        i === 0
-                            ? `First ${formatCompactNumber(freeObservations)} observations/mo`
-                            : `${formatCompactNumber(freeObservations)}+`
-                    const tierEvents = costByTier?.[i]?.eventsInThisTier ?? 0
-                    const tierCost = costByTier?.[i]?.tierCost ?? 0
-
-                    return (
-                        <div
-                            key={i}
-                            className={`grid grid-cols-2 @md:grid-cols-12 items-center gap-x-2 gap-y-1 px-4 py-1.5 rounded-md ${
-                                isActive ? 'bg-yellow/30' : 'transition-colors'
-                            }`}
-                        >
-                            <span
-                                className={`order-1 col-span-1 @md:col-span-4 text-sm ${
-                                    isActive ? 'font-bold text-primary' : 'text-primary/70'
-                                }`}
-                            >
-                                {label}
-                            </span>
-                            <span
-                                className={`order-2 @md:order-3 col-span-1 @md:col-span-3 text-sm text-right font-code tabular-nums ${
-                                    isActive ? 'text-primary' : 'text-primary/70'
-                                }`}
-                            >
-                                {tierEvents.toLocaleString()}
-                            </span>
-                            <span
-                                className={`order-3 @md:order-2 col-span-1 @md:col-span-3 text-sm tabular-nums ${
-                                    isFree ? 'text-green' : isActive ? 'text-primary' : 'text-primary/70'
-                                }`}
-                            >
-                                {isFree ? (
-                                    <strong>Free</strong>
-                                ) : (
-                                    <>
-                                        <strong>{formatPrice(tier.unit_amount_usd)}</strong>
-                                        <span className="opacity-70">/observation</span>
-                                    </>
-                                )}
-                            </span>
-                            <span
-                                className={`order-4 col-span-1 @md:col-span-2 text-sm text-right font-bold tabular-nums ${
-                                    isActive ? 'text-primary' : 'text-primary/70'
-                                }`}
-                            >
-                                {formatUSD(tierCost)}
-                            </span>
-                        </div>
-                    )
-                })}
-            </div>
-
-            {/* Slider + input */}
-            <div className="pl-4 pr-1 mt-6">
-                <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-1.5">
-                        <NumericFormat
-                            inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                            value={volume}
-                            thousandSeparator=","
-                            onValueChange={({ floatValue }) => {
-                                if (floatValue !== undefined) setObservations(Math.round(floatValue))
-                            }}
-                            customInput={AutosizeInput}
-                        />
-                        <span className="text-sm text-primary/60">observations/mo</span>
-                    </div>
-                    <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
-                </div>
-                <LogSlider
-                    stepsInRange={100}
-                    marks={marks}
-                    min={freeObservations}
-                    max={MAX_OBSERVATIONS}
-                    onChange={(value: number) => setObservations(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(volume)}
-                />
-                <p className="text-sm text-green font-semibold mt-8 mb-0">
-                    First {freeObservations.toLocaleString()} observations free –&nbsp;<em>every month!</em>
-                </p>
-            </div>
+            <PricingEstimator
+                creditTiers={LAUNCH_CREDIT_TIERS}
+                modelKey={modelKey}
+                observations={observations}
+                onModelKeyChange={setModelKey}
+                onObservationsChange={setObservations}
+            />
 
             {/* Total */}
             <div className="mt-6 border-t-2 border-dark dark:border-white">

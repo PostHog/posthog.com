@@ -30,7 +30,6 @@ Your webhook URL will look like this:
 https://webhooks.us.posthog.com/public/webhooks/<UUID>
 ```
 
-
 ### Payload size limits
 
 Incoming webhook requests have a maximum payload size of 500KB. Requests exceeding this limit receive a `413` status code with the message "Request entity too large".
@@ -38,7 +37,6 @@ Incoming webhook requests have a maximum payload size of 500KB. Requests exceedi
 ## Transforming the webhook payload
 
 We recommend starting from the default [HTTP incoming webhook template](/docs/hog#hog-by-example-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
-
 
 ### The request object
 
@@ -76,7 +74,6 @@ print(request.ip)
 // Outputs: '127.0.0.1'
 ```
 
-
 ### Capturing a PostHog event
 
 If using the default template, you simply need to customize the inputs so that the required values `event` and `distinct_id` are set as well as the optional `properties` object.
@@ -94,7 +91,6 @@ postHogCapture({
 ## (Advanced) HTTP requests and background processing
 
 Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`, but, in this case, the request is queued to a background task, a 201 Created response is returned, and the event is ingested asynchronously.
-
 
 ## Troubleshooting
 

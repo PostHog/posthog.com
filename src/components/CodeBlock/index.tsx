@@ -35,6 +35,8 @@ type CodeBlockProps = {
     showAskAI?: boolean
     focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 
     onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
@@ -50,6 +52,8 @@ type SingleCodeBlockProps = {
     showAskAI?: boolean
     language: string
     children: string
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 }
 
 type MdxCodeBlock = {
@@ -187,6 +191,7 @@ export const CodeBlock = ({
     onChange,
     lineNumberStart = 1,
     tooltips,
+    onCopy,
 }: CodeBlockProps): JSX.Element | null => {
     if (languages.length < 0 || !currentLanguage) {
         return null
@@ -247,6 +252,7 @@ export const CodeBlock = ({
 
     const copyToClipboard = (code: string): void => {
         navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+        onCopy?.()
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
     }

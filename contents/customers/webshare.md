@@ -12,9 +12,9 @@ Originally founded in 2018 by Utku Zihnioglu, Webshare has grown explosively. It
 
 “We have all our funnels nailed down, but we’re constantly running experiments on top of them,” says Utku, Webshare’s founder and CEO. “We’re really passionate about testing new ideas to get customers the best product we can.”
 
-In the early days, the team used a mix of tools to facilitate this customer-centric approach – [Mixpanel](/blog/best-mixpanel-alternatives) for analytics, [Hotjar](/blog/best-hotjar-alternatives) for session replays, plus a handful of internal tools to fill the gaps left by these platforms. 
+In the early days, the team used a mix of tools to facilitate this customer-centric approach – [Mixpanel](/compare/best-mixpanel-alternatives) for analytics, [Hotjar](/compare/best-hotjar-alternatives) for session replays, plus a handful of internal tools to fill the gaps left by these platforms. 
 
-“We had to build our own tools for feature flags, because Mixpanel doesn’t do that,” says Utku. “We were using [FullStory](/blog/best-fullstory-alternatives) too... but we started looking for a replacement in 2021 because those tools just weren’t working for us anymore.”
+“We had to build our own tools for feature flags, because Mixpanel doesn’t do that,” says Utku. “We were using [FullStory](/compare/best-fullstory-alternatives) too... but we started looking for a replacement in 2021 because those tools just weren’t working for us anymore.”
 
 “That’s when we found PostHog, and realized it does everything we needed all at once, including feature flags!”
 
@@ -47,7 +47,7 @@ However, Webshare doesn’t just use PostHog to run experiments and track produc
 
 “Every email, every Intercom message – basically every time we interact with a customer on any platform – that all goes into PostHog,” says Utku. “We track all of our KPIs there, as well as product usage, conversion rates, marketing campaigns, and so on.” 
 
-The team does, reluctantly, maintain a [Google Analytics](/blog/ga4-alternatives) account alongside PostHog, but it’s used only for tracking advertising performance. All other data can, and is, sent to PostHog so the team can track it there. 
+The team does, reluctantly, maintain a [Google Analytics](/compare/ga4-alternatives) account alongside PostHog, but it’s used only for tracking advertising performance. All other data can, and is, sent to PostHog so the team can track it there. 
 
 “That’s why PostHog is our favorite tool; it’s the single source of truth for us. We knew exactly what we wanted to do when we were coming from Mixpanel and Hotjar. We wanted to move away from all these separate tools, and put everything in one place. PostHog absolutely nails it.”
 

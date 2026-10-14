@@ -130,7 +130,7 @@ Here are some of the most common and useful ones:
 
 - Grouping or binning events based on properties using `if()`, `multiIf()` like `multiIf(properties.$device_type == 'Desktop', 'Desktop', properties.$os == 'iOS', 'iOS', 'Non-iOS')`.
 
-- Accessing nested properties such as `properties.$set.$geoip_city_name`.
+- Accessing nested properties such as `properties.cart.total`, or person properties such as `person.properties.$geoip_city_name`.
 
 - Filtering for events that happened in the last X minutes, hours, or days with `dateDiff()`, `now()`, and `interval` like `dateDiff('minute', timestamp, now()) < 30`.
 

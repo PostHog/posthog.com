@@ -20,6 +20,8 @@ export type CommunityProfile = {
 export type CommunityProfilesFilters = {
     minReputation?: number | null
     search?: string
+    /** Match "elikinsey" to firstName + lastName without a space */
+    compactName?: boolean
     teamMember?: 'any' | 'yes' | 'no'
     sort?: string
 }
@@ -40,7 +42,7 @@ function mapProfile(profile: any): CommunityProfile {
     }
 }
 
-function buildFilters({ minReputation, search, teamMember }: CommunityProfilesFilters) {
+function buildFilters({ minReputation, search, teamMember, compactName }: CommunityProfilesFilters) {
     const and: Record<string, any>[] = []
 
     if (minReputation != null && minReputation > 0) {
@@ -49,13 +51,25 @@ function buildFilters({ minReputation, search, teamMember }: CommunityProfilesFi
 
     const trimmedSearch = search?.trim()
     if (trimmedSearch) {
-        and.push({
-            $or: [
-                { firstName: { $containsi: trimmedSearch } },
-                { lastName: { $containsi: trimmedSearch } },
-                { user: { email: { $containsi: trimmedSearch } } },
-            ],
-        })
+        if (compactName) {
+            const q = trimmedSearch.toLowerCase()
+            const options = [{ firstName: { $startsWithi: q } }, { lastName: { $startsWithi: q } }]
+            if (q.length > 3) {
+                for (let i = 2; i < q.length; i++) {
+                    options.push({
+                        $and: [
+                            { firstName: { $startsWithi: q.slice(0, i) } },
+                            { lastName: { $startsWithi: q.slice(i) } },
+                        ],
+                    })
+                }
+            }
+            and.push({ $or: options })
+        } else {
+            and.push({
+                $or: [{ firstName: { $containsi: trimmedSearch } }, { lastName: { $containsi: trimmedSearch } }],
+            })
+        }
     }
 
     if (teamMember === 'yes') {
@@ -153,7 +167,7 @@ export function useCommunityProfiles({
 
     useEffect(() => {
         setCurrentPage(0)
-    }, [filters.minReputation, filters.search, filters.teamMember, filters.sort, pageSize])
+    }, [filters.minReputation, filters.search, filters.compactName, filters.teamMember, filters.sort, pageSize])
 
     const goToPage = React.useCallback(
         (page: number) => {

@@ -23,7 +23,15 @@ export default function PostHogRedirect(): JSX.Element {
     const { addToast } = useToast()
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [pending, setPending] = useState<{ pendingToken: string; emailInUse: boolean } | null>(null)
+    const [slow, setSlow] = useState(false)
     const hasRun = useRef(false)
+
+    // Tell the user the spinner is still working once the resolve call runs long,
+    // so a slow sign-in does not read as a hang.
+    useEffect(() => {
+        const timer = setTimeout(() => setSlow(true), 8000)
+        return () => clearTimeout(timer)
+    }, [])
 
     const handleSuccess = () => {
         addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
@@ -136,7 +144,9 @@ export default function PostHogRedirect(): JSX.Element {
                     <div className="bg-accent px-6 py-5 flex-1">
                         <div data-scheme="primary" className="flex items-center gap-2">
                             <IconSpinner className="size-5 animate-spin flex-shrink-0" />
-                            <p className="text-sm m-0">Signing you in&hellip;</p>
+                            <p className="text-sm m-0">
+                                {slow ? 'Still signing you in. This is taking longer than usual.' : 'Signing you in…'}
+                            </p>
                         </div>
                     </div>
                 </Wizard>

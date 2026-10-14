@@ -9,12 +9,6 @@ availability:
 sourceId: Guru
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available schemas may change.
-
-</CalloutBox>
-
 The Guru connector can link cards, collections, groups, and members from your [Guru](https://www.getguru.com/) knowledge base to PostHog.
 
 To link Guru:

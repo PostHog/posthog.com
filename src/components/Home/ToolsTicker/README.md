@@ -2,7 +2,7 @@
 
 A one-line, infinitely rolling marquee of PostHog products: a static label ("Built-in tools for your agents:") followed by a horizontally scrolling strip of product icons + names, each linking to its product page.
 
-Currently rendered in the homepage hero (`src/components/Home/Test/index.tsx`), directly under the tabbed `HeroCarousel`.
+Currently rendered in the homepage hero (`src/components/Home/Test/index.tsx`), directly above the tabbed `HeroCarousel`.
 
 ## Usage
 
@@ -42,3 +42,10 @@ Handles that don't resolve to a product with a `name` and `slug` are silently sk
 - Icon colors use the dynamic `text-${product.color}` pattern – all colors used by the default handles are in `safelist.txt`. If you add a handle with a new color, confirm it's safelisted.
 - Layout uses container queries only (`@sm:`); the label stacks above the strip in narrow containers.
 - SSR-safe: data comes from `useProduct()` (Gatsby static query); no browser globals.
+
+
+## Compact product list
+
+`useToolsProducts()` exports the same resolved product list for other homepage sections. Product Analytics, Session Replay, and Error Tracking are the first three entries in the predefined order. It applies this order and slug overrides, so product names, icons, destinations, and counts stay consistent.
+
+`ToolsTickerStrip` accepts `compact` for the first carousel slide. Wrap this variant in `@container/tools`. It uses three rows, reserving the last cell for an underlined link to `/products`. At container widths of 26rem, 35rem, and 44rem, the grid adds a column and reveals three more products. A CSS counter subtracts each displayed product from the full list to calculate “and x more.” Hidden products use `display: none`, which also removes their links from keyboard navigation. Long labels truncate within their column and retain their full name in the title.

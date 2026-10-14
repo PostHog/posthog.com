@@ -7,13 +7,13 @@ import { getTool } from '../../data/tools'
 
 export const dataWarehouse = {
     ...getTool('data_warehouse'),
-    parentIcon: 'dataWarehouse',
     Icon: IconDatabase,
     type: 'data_warehouse',
+    categoryName: 'Sources',
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
-        title: 'Managed DuckDB warehouse - PostHog',
+        title: 'Warehouse - PostHog',
         description:
             'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },
@@ -43,7 +43,7 @@ export const dataWarehouse = {
         classes: 'absolute bottom-0 right-0 max-w-[140px]',
     },
     slider: {
-        marks: [1000000, 10000000, 100000000, 1000000000],
+        marks: [1000000, 100000000, 1000000000],
         min: 1000000,
         max: 1000000000,
     },
@@ -52,9 +52,9 @@ export const dataWarehouse = {
     addonSliders: [
         {
             key: 'data_warehouse_historical',
-            label: 'Data warehouse historical syncs',
+            label: 'Historical syncs',
             sliderConfig: {
-                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,
                 max: 10000000000,
             },

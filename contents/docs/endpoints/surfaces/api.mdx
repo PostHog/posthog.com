@@ -34,7 +34,7 @@ curl -X POST \
 
 ## Authentication
 
-Requests use either a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys), both scoped to `endpoint:read`. Project secret keys are the right choice for backend services since they aren't tied to a user account.
+Requests use either a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys), both scoped to `endpoint:read`. Project secret keys are the right choice for backend services since they aren't tied to a user account, but they're in beta and rolling out gradually – if they aren't available in your organization yet, use a personal API key.
 
 Never ship either key in client-side code. For [customer-facing analytics](/docs/endpoints/customer-facing-analytics), proxy the request through your own backend and pass the customer identifier as a variable.
 

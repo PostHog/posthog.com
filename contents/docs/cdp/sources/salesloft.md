@@ -9,12 +9,6 @@ availability:
 sourceId: SalesLoft
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Salesloft connector pulls your Salesloft sales engagement data – accounts, people, cadences, activities, and more – into the PostHog data warehouse.
 
 ## Adding a data source

@@ -14,7 +14,7 @@ hideAnchor: false
 - Export PostHog data to existing warehouses (Snowflake, BigQuery, Redshift) so it's part of the company's data stack
 - Feed enriched data to downstream tools: BI platforms, ad platforms, CRMs, marketing tools
  
-**Naming note:** the current positioning for this whole area is the **context warehouse** — the managed warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
+**Naming note:** the current positioning for this whole area is the **context warehouse** — the warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
 
 This is the "stickiness" use case. Once PostHog is part of a company's data infrastructure, receiving data from Stripe, HubSpot, and databases AND feeding data out to their BI layer, it becomes very hard to rip out. This also makes their product data more valuable as it is enriched with additional business context. Data infrastructure customers also tend to have the highest retention rates.
  
@@ -26,7 +26,7 @@ However, this is also the hardest use case to sell into. Data teams are skeptica
 - **[Data Pipelines / Batch Exports](/docs/cdp) (core)** — Send PostHog data out to external destinations. [Batch exports](/docs/cdp/batch-exports) to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, Azure Blob. [Realtime destinations](/docs/cdp/destinations) to Slack, HubSpot, Salesforce, ad platforms, and more. [Transformations](/docs/cdp/transformations) to clean, enrich, or filter data before it lands.
 - **[Product Analytics](/docs/product-analytics)** — The query engine for unified data. Once external data is in the Data Warehouse, Product Analytics becomes the interface for querying across all of it. HogQL gives SQL access to everything. Dashboards combine product events with business metrics.
 - **[Endpoints](/docs/endpoints) (*beta*)** — Turn any saved insight or SQL query into a stable, authenticated, cached HTTP endpoint. This is the answer to "we need this data inside our own product / internal tool / customer-facing dashboard" — previously a custom backend job. Optionally materialize for latency. ([Positioning](/handbook/marketing/positioning/endpoints))
-- **[Semantic layer](/docs/semantic-layer) (*alpha*)** — Define metrics and dimensions once so every query, dashboard, and agent uses the same definition. The governance answer for data teams who've been burned by six versions of "active user."
+- **[Semantic layer](/docs/semantic-layer) (*beta*)** — Define metrics and dimensions once so every query, dashboard, and agent uses the same definition. The governance answer for data teams who've been burned by six versions of "active user."
 - **[self-driving](/docs/self-driving)** — Scouts watch the data infrastructure itself: failing warehouse syncs, broken materialized views, data pipeline errors, ingestion warnings. Pipeline breakage is exactly the kind of unglamorous maintenance that sits in a data team's backlog for weeks. External sources also connect *through* the warehouse, so a data team that's wired up their sources has also wired up the inbox.
  
 ## Adoption path and expansion path
@@ -196,7 +196,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 - [ ] Verify batch export is running reliably with expected data freshness
 - [ ] Configure at least one [Realtime Destination](/docs/cdp/destinations) if they need event data in downstream tools (Slack alerts, CRM sync, ad platform conversions)
 - [ ] Build a "Unified Analytics" dashboard combining product events with business data
-- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/product-analytics/sql))
+- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/data-warehouse/sql))
 - [ ] Identify additional data sources to connect (CRM, other databases, ad platforms)
  
 ## Cross-sell pathways from this use case

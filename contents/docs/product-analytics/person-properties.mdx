@@ -102,19 +102,22 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 ## Syncing person properties from the data warehouse
 
-You can create person properties that automatically sync from [data warehouse](/docs/data-warehouse) tables. This is configured in the [customer analytics configuration](https://app.posthog.com/customer_analytics/configuration) under **Custom properties**.
+If the data you want already lives in Stripe, Salesforce, HubSpot, or your own database, you don't need to send it from your app. Sync the table into the [data warehouse](/docs/data-warehouse), then map its columns onto person properties.
 
-To set up a warehouse-synced person property:
+To set one up:
 
-1. Click **New property** and select **Person** as the target type.
-2. Choose a synced warehouse table as the data source.
-3. Set the **distinct ID column** – the column whose values match your PostHog person distinct IDs.
-4. Add one or more **column mappings** to map warehouse columns to person property names.
-5. Click **Save**.
+1. Go to **Data** > **Warehouse properties**.
+2. Click **Add person property**.
+3. Choose a synced warehouse table as the data source.
+4. Set the **distinct ID column** – the column whose values match your PostHog person distinct IDs.
+5. Add one or more **column mappings** to map warehouse columns to person property names.
+6. Click **Save**.
 
-Once created, the warehouse table binding and column mappings are fixed. You can still change the distinct ID column and toggle syncing on or off, but to change the table or mappings you need to delete and recreate the property.
+The mapped properties then stay up to date on every sync of that table. Properties synced this way show a **Warehouse** provenance tag in property lists, and work like any other person property in [feature flags](/docs/feature-flags), [cohorts](/docs/data/cohorts), [insights](/docs/product-analytics/insights), and filters.
 
-Properties synced from the warehouse show a **Warehouse** provenance tag in property lists. They work like any other person property – you can use them in [feature flags](/docs/feature-flags), [cohorts](/docs/data/cohorts), [insights](/docs/product-analytics/insights), and filters.
+A sync only updates a person who already exists in PostHog. It never creates one.
+
+See [warehouse properties](/docs/data-warehouse/warehouse-properties) for how syncing works, how to read the run history, what a backfill does, and how to do the same for [group properties](/docs/product-analytics/group-analytics).
 
 ## `last_seen_at` field
 

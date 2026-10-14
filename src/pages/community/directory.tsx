@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import debounce from 'lodash/debounce'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
@@ -14,6 +15,7 @@ import ReaderView from 'components/ReaderView'
 import OSButton from 'components/OSButton'
 import { useApp } from '../../context/App'
 import { Select } from 'components/RadixUI/Select'
+import { OSInput } from 'components/OSForm'
 import Tooltip from 'components/RadixUI/Tooltip'
 import dayjs from 'dayjs'
 
@@ -112,12 +114,22 @@ function downloadProfilesCSV(profiles: Awaited<ReturnType<typeof fetchAllCommuni
 
 export default function CommunityDirectory(): JSX.Element {
     const { user, isModerator, isValidating: userValidating, getJwt } = useUser()
+    // searchInput updates on every keystroke; search (the API filter) follows after a debounce
+    const [searchInput, setSearchInput] = useState('')
     const [search, setSearch] = useState('')
     const [minReputation, setMinReputation] = useState<number | null>(10)
     const [teamMember, setTeamMember] = useState<'any' | 'yes' | 'no'>('no')
     const [sortField, setSortField] = useState<SortField>('reputation')
     const [sortDir, setSortDir] = useState<SortDir>('desc')
     const [exporting, setExporting] = useState(false)
+
+    const debouncedSetSearch = useMemo(() => debounce(setSearch, 300), [])
+
+    useEffect(() => {
+        debouncedSetSearch(searchInput)
+    }, [searchInput, debouncedSetSearch])
+
+    useEffect(() => () => debouncedSetSearch.cancel(), [debouncedSetSearch])
 
     const handleSort = useCallback(
         (field: SortField) => {
@@ -231,7 +243,7 @@ export default function CommunityDirectory(): JSX.Element {
                     title: 'Community directory',
                     description: 'Browse community profiles by reputation',
                 }}
-                onSearchChange={setSearch}
+                onSearchChange={setSearchInput}
             >
                 {error ? (
                     <p className="text-red">Failed to load profiles. Try refreshing.</p>
@@ -247,6 +259,22 @@ export default function CommunityDirectory(): JSX.Element {
                                 {isValidating ? ' · updating…' : ''}
                             </p>
                             <div className="flex flex-wrap items-center gap-2">
+                                <OSInput
+                                    type="text"
+                                    label="Search profiles"
+                                    showLabel={false}
+                                    placeholder="Search name or email…"
+                                    value={searchInput}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        setSearchInput(e.target.value)
+                                    }
+                                    onClear={() => setSearchInput('')}
+                                    showClearButton
+                                    size="sm"
+                                    width="full"
+                                    name="profile-search"
+                                    containerClassName="w-56"
+                                />
                                 <Select
                                     prefix="Min reputation"
                                     value={minReputation == null ? 'any' : String(minReputation)}

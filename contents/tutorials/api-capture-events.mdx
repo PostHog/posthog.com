@@ -305,7 +305,7 @@ fetch(url, {
 
 ## Identifying and aliasing users
 
-You can also `POST` `$identify` events to add more details about those users. The API has no concept of state so the user information is not added as properties unless you send it in a request. It is not automatically created or included in the request like it is in the [JavaScript](/docs/integrate/client/js) library.
+You can also `POST` `$identify` events to add more details about those users. The API has no concept of state so the user information is not added as properties unless you send it in a request. It is not automatically created or included in the request like it is in the [JavaScript](/docs/libraries/js) library.
 
 You still send identify events to the `/i/v0/e/` endpoint. Use `$set` to set the person properties you want.
 

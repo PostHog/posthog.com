@@ -99,6 +99,12 @@ We very rarely receive messages from people wishing to make a legal claim agains
 
 Support =/= community - we consider them to be separate things.
 
+### Community questions and Discord
+
+Community is not support, but it is one of our best sources of product feedback. [Community questions](/questions) and Discord show what users ask and say about each product area, in real time.
+
+Questions are routed to team Slack channels by topic, so each team can see the posts about its own products. Support heroes are welcome to [read their team's community posts](/handbook/engineering/support-hero#community-questions-and-discord) when they have time, but it is not a requirement. PostHog AI and other community members answer most questions.
+
 ### Tutorials
 
 We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
@@ -116,7 +122,7 @@ Issues related to billing are handled exclusively by our billing engineers. Bill
 
 We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via PostHog Support.
 
-We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Martin" photo /> so he can take over. 
+We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Black" photo /> so he can take over. 
 
 ### Users asking for their data to be deleted
 
@@ -124,13 +130,13 @@ Most of the time users can self-serve deletion requests and should be encouraged
 
 If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that of an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through PostHog Support.) Only then should you delete any data on their behalf. 
 
-If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Martin" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
+If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Black" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
 
 #### Targeted deletion requests
 
 Occasionally users will mistakenly share sensitive data which should not have been shared via event/person properties.  As such they wish to be more targeted in their deletion by removing only certain properties or events instead of an entire project.  
 
-> Before taking any deletion action, they should ensure that they are no longer sending the sensitive data to us either by [redacting information client-side](https://posthog.com/docs/libraries/js/features#redacting-information-in-events) or setting up a [CDP transformation](https://posthog.com/docs/cdp/transformations/property-filter-plugin).  If they don't do this first they will continue to send us the sensitive data even after deletion is actioned.
+> Before taking any deletion action, they should ensure that they are no longer sending the sensitive data to us either by [redacting information client-side](/docs/libraries/js/usage#redacting-information-in-events) or setting up a [CDP transformation](https://posthog.com/docs/cdp/transformations/property-filter-plugin).  If they don't do this first they will continue to send us the sensitive data even after deletion is actioned.
 
 Due to the nature of how our infrastructure works, events and properties cannot be amended once they are stored in Clickhouse.  As such, the only way to remove sensitive data is to delete the person profile associated with the events where the sensitive data has been captured.  This can be achieved [in the app or via the API](https://posthog.com/docs/data/persons#deleting-person-data).  As per our [deletion docs](https://posthog.com/docs/privacy/data-deletion#asynchronous-data-deletion), the person profile will be removed immediately but the events will take some time (days or even weeks) to be removed.
 
@@ -159,7 +165,7 @@ Locate the user's profile in admin and send them a 2FA reset link. The link expi
 
 #### How do I handle a bug report or feature request?
 
-For feature requests from low priority users, [give them this link](https://github.com/PostHog/posthog/issues/new/choose) and suggest they open a feature request.
+For feature requests from low priority users, [give them this link](/roadmap) and suggest they open a feature request on our public roadmap.
 
 For bug reports from normal and high priority users (assuming you've confirmed it's a bug, and that there's not already an open bug report):
 

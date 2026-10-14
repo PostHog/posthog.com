@@ -10,6 +10,8 @@ in a less than optimal way.  This could result in people spending more than they
 need to, or having inaccurate reporting data available to them.  Ultimately if 
 left unchecked these things will lead to avoidable churn.
 
+> When a health check turns up something that lowers a customer's bill, tag the account `cost optimizing` in PostHog Customer Analytics and share it with the team. [Cost optimization](/handbook/cs-and-onboarding/cost-optimization) covers how we handle these.
+
 ## Are they paying for things they don't need?
 
 ### Group analytics
@@ -90,7 +92,7 @@ ORDER BY groupidentify_event_count DESC
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
 
-We have guidance on when to call `posthog.reset()` in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
+We have guidance on when to call `posthog.reset()` in the [JavaScript Web SDK usage guide](/docs/libraries/js/usage#resetting-a-user).
 
 ### Reverse Proxies 
 
@@ -125,7 +127,7 @@ It is important that hitting the flags endpoint does not block an application fr
 ### Server side local evaluation
 Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
-As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key) than other flag requests.
+As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-secret-api-key) than other flag requests.
 
 ## Do they have a custom implementation that's causing issues?
 

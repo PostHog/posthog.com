@@ -34,6 +34,17 @@ const normalizeName = (name: string): string =>
         .replace(/\s+/g, ' ')
         .trim()
 
+/**
+ * Normalized candidates for matching a role assignee to a small team. PostHog roles are
+ * conventionally named "Team X" while Squeak team names are just "X", so try the name
+ * with a leading "team " (or trailing " team") stripped as well as verbatim.
+ */
+const roleNameCandidates = (name: string): string[] => {
+    const normalized = normalizeName(name)
+    const stripped = normalized.replace(/^team /, '').replace(/ team$/, '')
+    return stripped && stripped !== normalized ? [normalized, stripped] : [normalized]
+}
+
 interface SqueakTeamOwnershipNode {
     slug: string
     name: string
@@ -105,8 +116,14 @@ export function useRoadmapEarlyAccessFeatures({
                 return undefined
             }
             if (assignee.type === 'role') {
-                const asSlug = slugify(assignee.name)
-                return teamSlugByTeamName[normalizeName(assignee.name)] || (teamSlugs.has(asSlug) ? asSlug : undefined)
+                for (const candidate of roleNameCandidates(assignee.name)) {
+                    const asSlug = slugify(candidate)
+                    const match = teamSlugByTeamName[candidate] || (teamSlugs.has(asSlug) ? asSlug : undefined)
+                    if (match) {
+                        return match
+                    }
+                }
+                return undefined
             }
             return teamSlugByPerson[normalizeName(assignee.name)]
         },

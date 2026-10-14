@@ -21,7 +21,7 @@ seo:
 
 When the creators of both OpenClaw and Claude Code speak, people listen. And last week [Peter Steinberger](https://x.com/steipete/status/2063697162748260627) and Boris Cherny were [both talking about](https://www.youtube.com/watch?v=PfWVVI9ALd8&t=1s) the same concept: loops.
 
-Their argument? You shouldn't be prompting agents to write code, but building loops that prompt themselves to write code, so agents can complete long running tasks and you can use multiple agents at once to go further, faster.
+Their argument? You shouldn't be prompting agents to write code, but [building loops that prompt themselves to write code](/newsletter/software-factories#what-is-a-software-factory), so agents can complete long running tasks and you can use multiple agents at once to go further, faster.
 
 ## What's needed to engineer a loop?
 

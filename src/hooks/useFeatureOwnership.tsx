@@ -27,16 +27,27 @@ const slugify = (text: string): string => {
 const FEATURE_DATA: Record<string, BaseFeature> = {
     actions: {
         feature: 'Actions',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     'activity-log': {
         feature: 'Activity log',
         owner: ['platform-features'],
+        label: 'feature/activity-logs',
     },
     'activity-view': {
         feature: 'Activity view',
         owner: ['product-analytics'],
         label: 'feature/events',
+    },
+    'agent-proxy': {
+        feature: 'Agent proxy',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-proxy',
+    },
+    'agent-runtime': {
+        feature: 'Agent runtime',
+        owner: ['agent-infrastructure'],
+        label: 'feature/agent-runtime',
     },
     'agentic-provisioning': {
         feature: 'Agentic provisioning',
@@ -45,17 +56,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-gateway': {
         feature: 'AI gateway',
-        owner: ['ai-gateway'],
-        label: false,
+        owner: ['agent-infrastructure'],
+        label: 'feature/ai-gateway',
     },
     'ai-playground': {
         feature: 'AI playground',
-        owner: ['ai-gateway'],
+        owner: ['agent-infrastructure'],
+        label: false,
+    },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['context-and-mcp'],
         label: false,
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     annotations: {
         feature: 'Annotations',
@@ -63,7 +79,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -74,6 +90,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     authentication: {
         feature: 'Authentication',
         owner: ['platform-features'],
+        label: 'feature/auth',
     },
     autocapture: {
         feature: 'Autocapture',
@@ -94,17 +111,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
-                symbolication/upload pipeline and symbol/sourcemap upload internals.
-            </>
-        ),
+        owner: ['error-tracking', 'context-and-mcp'],
+        notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -123,7 +135,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     comments: {
         feature: 'Comments/Discussions',
-        owner: ['platform-features'],
+        owner: ['conversations'],
         label: 'feature/comments',
     },
     'csp-tracking': {
@@ -142,11 +154,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     dashboards: {
         feature: 'Dashboards',
-        owner: ['product-analytics', 'analytics-platform'],
+        owner: ['product-analytics'],
     },
     'dashboard-templates': {
         feature: 'Dashboard templates',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
@@ -155,8 +167,19 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-management': {
         feature: 'Data management',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
+    },
+    'data-modeling': {
+        feature: 'Data models',
+        owner: ['data-modeling'],
+        notes: 'Views, materialized views, orchestration, and lineage.',
+        label: 'feature/data-modeling',
+    },
+    'data-quality': {
+        feature: 'Data quality checks',
+        owner: ['data-modeling'],
+        label: false,
     },
     'data-table': {
         feature: 'Data table',
@@ -172,8 +195,9 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Managed warehouse',
+        feature: 'Warehouse',
         owner: ['managed-warehouse'],
+        label: 'feature/data-warehouse',
     },
     'embedding-worker': {
         feature: 'Embedding worker',
@@ -224,9 +248,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Heatmaps',
         owner: ['web-analytics'],
     },
+    'hog-harness': {
+        feature: 'Hog harness',
+        owner: ['agent-infrastructure'],
+        label: 'feature/hog-harness',
+    },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -255,7 +284,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     loops: {
         feature: 'Loops',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: false,
     },
     'managed-migrations': {
@@ -273,22 +302,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: 'feature/mcp',
     },
     'mcp-store': {
         feature: 'MCP store',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Chris Volzer" /> is the point owner.
-            </>
-        ),
+        owner: ['context-and-mcp'],
         label: false,
     },
     notebooks: {
@@ -350,27 +369,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     platform: {
         feature: 'Platform (US + EU)',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: 'feature/platform',
     },
     'PostHog.com': {
         feature: 'PostHog.com',
         owner: ['website'],
         label: false,
+        notes: (
+            <>
+                Website owns conversion from PostHog.com visits to the signup page. Growth can make suggestions and
+                requests here, and those get more weight than requests from other teams.
+            </>
+        ),
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Georgiy Tarasov" /> is the point owner.
-            </>
-        ),
+        owner: ['surfaces'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
         feature: 'PostHog Desktop',
-        owner: ['posthog-desktop'],
+        owner: ['surfaces'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
@@ -400,7 +420,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
         label: 'feature/insights',
     },
     'quota-limiting': {
@@ -448,6 +468,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         ),
         label: ['feature/libraries', 'feature/mobile'],
     },
+    scouts: {
+        feature: 'Scouts',
+        owner: ['self-driving'],
+        label: false,
+    },
     search: {
         feature: 'Search',
         owner: ['platform-ux'],
@@ -460,7 +485,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'self-hosting': {
         feature: 'Self-hosting',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: false,
     },
     'sentry-integration': {
@@ -492,16 +517,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Signup',
         owner: ['growth'],
         label: 'feature/signup',
+        notes: (
+            <>
+                Growth owns everything from the moment someone lands on the signup page, plus every path to signup from
+                any surface other than PostHog.com (for example partner integrations and agents). Website owns
+                conversion from PostHog.com visits to the signup page.
+            </>
+        ),
+    },
+    'skills-store': {
+        feature: 'Skills store',
+        owner: ['context-and-mcp'],
+        label: false,
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['self-driving'],
-        notes: (
-            <>
-                <TeamMember name="Vojta Bartoš" /> is the point owner.
-            </>
-        ),
+        owner: ['surfaces'],
         label: 'feature/slack-app',
+    },
+    'semantic-layer': {
+        feature: 'Semantic layer and data catalog',
+        owner: ['data-modeling'],
+        label: false,
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -533,7 +570,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     subscriptions: {
         feature: 'Subscriptions',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
     },
     support: {
         feature: 'Support',
@@ -541,15 +578,20 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     surveys: {
         feature: 'Surveys',
-        owner: ['surveys'],
+        owner: ['conversations'],
     },
     'table-exports': {
         feature: 'Table exports',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
+    },
+    tasks: {
+        feature: 'Tasks',
+        owner: ['agent-infrastructure'],
+        label: 'feature/tasks',
     },
     terraform: {
         feature: 'Terraform integration',
-        owner: ['analytics-platform'],
+        owner: ['product-analytics'],
         label: 'feature/terraform',
     },
     'taxonomic-filters': {
@@ -563,6 +605,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'usage-reports': {
         feature: 'Usage reports',
         owner: ['billing', 'platform-features'],
+        label: false,
+    },
+    'warehouse-properties': {
+        feature: 'Warehouse properties',
+        owner: ['data-modeling'],
+        notes: 'Syncs tables and materialized views to person or group properties.',
         label: false,
     },
     variables: {

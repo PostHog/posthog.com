@@ -24,7 +24,7 @@ One thing worth naming from the sales and CS side: **an FDE ask usually surfaces
 FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
 
 - **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). Currently FDEs don't do pre-sales work.
-- **Post-sale:** implementation, migration, and expansion work for existing customers. This is where the FDE engagements live, and where the work is most likely to compound.
+- **Post-sale:** implementation, migration, and expansion work for existing customers.
 
 ## Handoffs
 

@@ -1,8 +1,7 @@
 import React from 'react'
+import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 import {
     IconEye,
-    IconWarning,
-    IconSparkles,
     IconPeople,
     IconCursorClick,
     IconList,
@@ -17,8 +16,7 @@ import {
     IconPieChart,
     IconGraph,
 } from '@posthog/icons'
-import OldWaySection from 'components/ReplayVision/OldWaySection'
-import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
+import type { CTALinkKey } from 'components/CTAs'
 import HowToUseSection from 'components/ReplayVision/HowToUseSection'
 import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
 import WorksWithSection from 'components/ReplayVision/WorksWithSection'
@@ -153,6 +151,34 @@ const featureComparisonRows = [
     feature('ai_pricing', 'AI pricing model', 'How the AI analysis is billed.'),
 ]
 
+// Platforms the `replay-vision` wizard accepts. It aborts on anything Session
+// Replay cannot record – pure backend targets and KMP – so the install CTAs
+// must not offer them. Mirrors REPLAY_VISION_SUPPORTED in PostHog/wizard.
+const WIZARD_PLATFORM_SLUGS = new Set([
+    'web',
+    'react',
+    'nextjs',
+    'nuxt',
+    'vue',
+    'angular',
+    'astro',
+    'svelte',
+    'react-router',
+    'tanstack-start',
+    'tanstack-router',
+    'django',
+    'flask',
+    'fastapi',
+    'rails',
+    'laravel',
+    'react-native',
+    'android',
+    'ios',
+    'flutter',
+])
+
+const wizardSupports = getWizardFrameworkRows().filter((row) => WIZARD_PLATFORM_SLUGS.has(row.slug))
+
 export const replayVision = {
     Icon: IconEye,
     name: 'Replay Vision',
@@ -163,9 +189,19 @@ export const replayVision = {
     // Built by the same team as Session Replay, so changelog / questions pull
     // from the same sources.
     teamSlug: 'replay',
-    forumTopicId: 377,
+    forumTag: 'session-replay',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
+    wizardSupport: true,
+    // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
+    // started install CTAs – the bare wizard installs the SDK without creating
+    // any scanners.
+    wizardCommand: 'replay-vision',
+    wizardSupports,
+    // Secondary links under the hero buttons. This page gets a fourth link,
+    // Discord, to see how much of the row it takes before we decide whether it
+    // replaces one of the other three.
+    ctaLinks: ['mcp', 'demo', 'talk-to-a-human', 'discord'] as CTALinkKey[],
     category: 'product_engineering',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {
@@ -179,18 +215,16 @@ export const replayVision = {
      * so the slug doubles as the lookup key when no explicit `template` is set.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'old-way',
-            name: 'The old way',
-            component: OldWaySection,
-            icon: <IconWarning className="size-4" />,
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
         },
         {
-            slug: 'posthog-way',
-            name: 'The PostHog way',
-            component: PostHogWaySection,
-            icon: <IconSparkles className="size-4" />,
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            icon: <IconInfo className="size-4" />,
         },
         { slug: 'use-cases', name: 'Who is it for?', icon: <IconPeople className="size-4" /> },
         {
@@ -219,14 +253,20 @@ export const replayVision = {
         },
         { slug: 'changelog', name: 'Changelog', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', icon: <IconMessage className="size-4" /> },
-        { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
+        {
+            slug: 'installation',
+            name: 'Install',
+            icon: <IconCode className="size-4" />,
+        },
         { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/replay-vision/pricing`). These
      * use Replay Vision's own credit-denominated components rather than the shared
-     * calculator template; `slider`, `volume`, and `customPricingContent` below
-     * serve the shared `/pricing` calculator instead.
+     * calculator template. On the shared `/pricing` calculator the tab UI comes from
+     * `productTabs.replay_vision` in `Pricing/PricingCalculator/Tabbed.tsx`, which
+     * shares the same estimator (`ReplayVision/PricingEstimator.tsx`); `slider` and
+     * `volume` below seed that calculator's shared state.
      */
     pricingMenu: [
         {
@@ -253,8 +293,7 @@ export const replayVision = {
     ],
     overview: {
         title: 'Your product, watching itself',
-        description:
-            'Replay Vision reads through a filtered set of recordings, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
+        eli5: 'Replay Vision watches your session recordings for you. Describe what to look for once, and a scanner reads every matching session, video and events, and turns what it sees into structured observations you can query, chart, and alert on.',
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -264,7 +303,6 @@ export const replayVision = {
         },
     },
     useCases: {
-        intro: 'Replay Vision is used across teams depending on your role.',
         rows: [
             ['Product Engineers', "Scan sessions in bulk for the failure you can't reproduce locally"],
             ['PMs & Designers', 'Score friction and spot dead ends across a release without watching a replay'],
@@ -272,6 +310,12 @@ export const replayVision = {
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            alt: 'A hedgehog directing a session replay',
+        },
     },
     // Same install surface as Session Replay – pulls from the same source.
     installation: sessionReplay.installation,
@@ -296,7 +340,7 @@ export const replayVision = {
             ],
         },
         companies: [
-            { name: 'FullStory', key: 'fullstory', link: '/blog/posthog-vs-fullstory' },
+            { name: 'FullStory', key: 'fullstory', link: '/compare/posthog-vs-fullstory' },
             { name: 'Contentsquare', key: 'contentsquare' },
             { name: 'Datadog', key: 'datadog' },
             { name: 'Mixpanel', key: 'mixpanel', link: '/blog/posthog-vs-mixpanel' },
@@ -306,36 +350,14 @@ export const replayVision = {
         // Feature pages don't render platform sections; our rows are already scoped.
         excluded_sections: ['platform'],
     },
+    // Values in credits. `volume` seeds the shared /pricing calculator state (the tab
+    // itself renders via `productTabs.replay_vision` in Tabbed.tsx); `slider` is only the
+    // fallback the generic tab block needs if that registration ever goes away. min doubles
+    // as the "first N credits free" copy, so it tracks the free allocation.
     slider: {
-        // Values in credits. min doubles as the "first N credits free" copy, so it tracks the free allocation.
         marks: [2500, 10000, 50000, 100000],
         min: 2500,
         max: 100000,
     },
     volume: 2500,
-    customPricingContent: (
-        <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
-            <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
-            <p>
-                You pay per observation. One observation is one session recording watched by one scanner, so the credits
-                you use depend on how many sessions your scanners pick up.
-            </p>
-            <ul>
-                <li>
-                    <strong className="text-primary">An observation costs 2, 5, or 15 credits</strong> depending on
-                    which model the scanner runs. You choose the model per scanner and see its price next to each
-                    option.
-                </li>
-                <li>
-                    <strong className="text-primary">1 credit is $0.01</strong>, so 100 credits cost $1. The first{' '}
-                    <s>500</s> 2,500 credits each month are free (5x the free tier for a limited time), which covers 500
-                    sessions on the default model.
-                </li>
-            </ul>
-            <p>
-                Before you turn a scanner on, PostHog estimates how many sessions it will match each month and what that
-                costs. Set a billing limit if you want a hard cap on spend.
-            </p>
-        </div>
-    ),
 }

@@ -1,20 +1,20 @@
 import React from 'react'
 import { getTool } from '../../data/tools'
 import {
-    IconFlask,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconFlask,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
     IconToggle,
 } from '@posthog/icons'
 import { features } from './experiments/features'
@@ -23,13 +23,13 @@ import { applications, topFeatures } from './experiments/slides'
 export const experiments = {
     ...getTool('experiments'),
     Icon: IconFlask,
-    type: 'feature_flags',
+    type: 'experiments',
     sharesFreeTier: 'feature_flags',
     // Billed as feature flag requests – Plans/calculator resolve against this billing product.
     billingType: 'feature_flags',
     slug: 'experiments',
     teamSlug: 'experiments',
-    forumTopicId: 350,
+    forumTag: 'experiments',
     color: 'purple',
     colorSecondary: 'lilac',
     wizardSupport: 'In development',
@@ -61,7 +61,11 @@ export const experiments = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -127,8 +131,6 @@ export const experiments = {
     ],
     overview: {
         title: 'Test changes with statistical significance',
-        description:
-            'Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change actually worked. Built to natively work with product analytics, session replay, feature flags, and surveys.',
         eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
@@ -155,8 +157,9 @@ export const experiments = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
-        alt: 'Hedgehog experimenting',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/celebration.png',
+        alt: 'Hedgehogs celebrating a shipped experiment',
+        footerClasses: 'max-w-[420px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     hogs: {
@@ -198,7 +201,6 @@ export const experiments = {
         },
     },
     useCases: {
-        intro: 'Experiments is used across teams depending on your role.',
         rows: [
             [
                 'Product Engineers',
@@ -329,7 +331,7 @@ export const experiments = {
             {
                 name: 'Optimizely',
                 key: 'optimizely',
-                link: '/blog/posthog-vs-optimizely',
+                link: '/compare/posthog-vs-optimizely',
             },
             {
                 name: 'Amplitude',
@@ -339,7 +341,7 @@ export const experiments = {
             // {
             //     name: 'Pendo',
             //     key: 'pendo',
-            //     link: '/blog/posthog-vs-pendo',
+            //     link: '/compare/posthog-vs-pendo',
             // },
             {
                 name: 'VWO',
@@ -348,7 +350,7 @@ export const experiments = {
             {
                 name: 'Statsig',
                 key: 'statsig',
-                link: '/blog/posthog-vs-statsig',
+                link: '/compare/posthog-vs-statsig',
             },
             {
                 name: 'PostHog',
@@ -388,7 +390,7 @@ export const experiments = {
         'comparison-summary':
             "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform with both Bayesian and frequentist engines. Because results live in one platform, agents can read them directly and act on what actually worked – it's the evaluation that makes your product self-driving. We also support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
         'feature-comparison':
-            "This comparison highlights our unique strengths. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
+            "This comparison highlights our strengths. Group-level experiments are critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
         docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact.",
         'pairs-with':
             "PostHog Experiments truly shine when combined with our other products. Start with an experiment on a new feature, then use product analytics to dive deeper than your primary metric—maybe conversion increased but time-to-convert also increased. Watch session recordings of users in each variant to see exactly how they interact differently. If the experiment wins, roll it out gradually using the same feature flag. This integrated workflow means you're not jumping between tools or trying to match user IDs across systems. It's one platform where everything connects.",
@@ -397,7 +399,8 @@ export const experiments = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Experiments directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.',
     },
     ai: {
-        // Distinct from hogs.mobileHog (test-tube hog on Eli5) – flask mascot from the PostHog AI page.
+        // Flask mascot from the PostHog AI page – deliberately different art from
+        // `hogs.mobileHog` (header) and `hogs.default` (use cases).
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
         imageAlt: 'PostHog AI and experiments',
         description: 'set up experiments, read the results, and ship the winner',
@@ -449,7 +452,7 @@ export const experiments = {
                 title: 'Timeseries',
                 tool: 'experiment-timeseries-results',
                 prompts: [
-                    'Show daily results for this experiment — is the lift a novelty effect?',
+                    'Show daily results for this experiment – is the lift a novelty effect?',
                     'Plot the experiment over time, not just the summary',
                 ],
             },
@@ -470,7 +473,7 @@ export const experiments = {
                 title: 'Duplicate',
                 tool: 'experiment-duplicate',
                 prompts: [
-                    'That pricing test won — clone it for the mobile flow and launch',
+                    'That pricing test won – clone it for the mobile flow and launch',
                     'Duplicate this experiment onto the signup page',
                 ],
             },

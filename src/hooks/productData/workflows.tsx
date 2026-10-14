@@ -1,19 +1,19 @@
 import React from 'react'
 import {
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
     IconDecisionTree,
     IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
     IconInfo,
-    IconCursorClick,
+    IconList,
     IconMagic,
-    IconChat,
-    IconCode,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
 import { applications, topFeatures } from './workflows/slides'
@@ -25,13 +25,13 @@ export const workflows = {
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
-    forumTopicId: 392, // /questions/topic/workflows squeakId
+    forumTag: 'workflows',
     color: 'teal',
     colorSecondary: 'green-2',
     includeAddonRates: true,
-    // Matches billing API / pricing page (Emails + Destinations free tiers + first paid tiers).
+    // Matches billing API / pricing page (Emails + push and other destinations free tiers + first paid tiers).
     pricingDescription:
-        'First 10,000 emails and 10,000 destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
+        'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
         title: 'Workflows – Automate workflows with product data',
         description:
@@ -45,7 +45,11 @@ export const workflows = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -109,8 +113,6 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
-        description:
-            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
@@ -118,12 +120,6 @@ export const workflows = {
                     Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
                     your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
                     triggers, delays, audience splits, message sends, and PostHog actions.
-                </p>
-                <p>
-                    Because workflows run on the same events and person properties you already send to PostHog, you can
-                    act on real product behavior instead of a separate marketing dataset. Any real-time destination in
-                    PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and
-                    automation.
                 </p>
             </>
         ),
@@ -169,7 +165,6 @@ export const workflows = {
     },
     // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
     useCases: {
-        intro: 'Workflows is used across teams depending on your role.',
         rows: [
             [
                 'Product Leads / Technical PMs',
@@ -315,8 +310,8 @@ export const workflows = {
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
-        imageAlt: 'A hedgehog automating workflows',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
+        imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
         // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
@@ -363,7 +358,7 @@ export const workflows = {
         ],
     },
     slider: {
-        marks: [10000, 50000, 100000, 1000000, 10000000],
+        marks: [10000, 1000000, 10000000],
         min: 10000,
         max: 10000000,
     },
@@ -371,9 +366,9 @@ export const workflows = {
     addonSliders: [
         {
             key: 'workflows_destinations',
-            label: 'Destinations',
+            label: 'Push and other destinations',
             sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
+                marks: [10000, 1000000, 10000000],
                 min: 10000,
                 max: 10000000,
             },
@@ -382,19 +377,20 @@ export const workflows = {
         },
     ],
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-        alt: 'the automator hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png',
+        alt: 'A hedgehog wiring up a workflow',
+        footerClasses: 'max-w-[360px]',
         classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-            alt: 'the automator hedgehog',
-        },
-        // Same art as ai.image – used as the Eli5 float-right hog.
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
             alt: 'A hedgehog automating workflows',
+        },
+        // Perches on the bottom-right of the Overview screenshot.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
+            alt: 'the automator hedgehog',
         },
     },
     videos: {

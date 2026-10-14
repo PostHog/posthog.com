@@ -1,6 +1,7 @@
 import React from 'react'
 import {
     IconBell,
+    IconBolt,
     IconDashboard,
     IconGear,
     IconGlobe,
@@ -24,8 +25,7 @@ export const features = {
     dashboard: {
         title: 'Dashboard',
         headline: 'Dashboard',
-        description:
-            "Get a comprehensive overview of where your LLM budget goes, who's using AI features, and how they perform.",
+        description: "See where your LLM budget goes, who's using AI features, and how they perform.",
         icon: <IconDashboard />,
         color: 'purple',
         images: [
@@ -44,8 +44,22 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
-                alt: 'AI Observability generations',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_2_77391c6768.png',
+                alt: 'A list of LLM generations with person, sentiment, model, and latency',
+            },
+        ],
+        features: [
+            {
+                title: 'Full conversation context',
+                description: 'The exact input and output of every call, including multi-turn history',
+            },
+            {
+                title: 'Tokens and cost',
+                description: 'Token counts per call, with cost calculated automatically from model pricing',
+            },
+            {
+                title: 'Tool calls',
+                description: 'Which tools the model called and what they returned',
             },
         ],
     },
@@ -64,38 +78,40 @@ export const features = {
         ],
     },
     trace_monitoring: {
-        title: 'Traces',
-        headline: 'Traces',
-        description: 'See an interaction timeline including all generation and span events.',
+        title: 'Tracing',
+        headline: 'Trace every conversation end to end',
+        description:
+            'Debug entire conversations, not just individual calls. Every trace is a timeline of its generations and spans, with the person, total cost, and total latency attached.',
         icon: <IconListTreeConnected />,
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                alt: 'LLM trace',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_detail_2_e0a6a23865.png',
+                alt: 'An LLM trace with its timeline, tree, and generation detail',
             },
         ],
+        // Merged tracing + generations flow – the two were separate top features
+        // saying the same thing.
         features: [
             {
                 icon: <IconListTreeConnected />,
-                title: 'Multi-turn conversation history',
-                description: 'Track prompts, completions, and token counts for every interaction',
+                title: 'Trace timeline',
+                description: 'A waterfall of every span and generation, with latency and cost at each step',
             },
             {
-                icon: <IconUser />,
-                title: 'User attribution',
-                description: 'Trace AI interactions to specific users and organizations',
+                icon: <IconSparkles />,
+                title: 'Full conversation context',
+                description: 'The exact input and output of every call, including multi-turn history and tool calls',
+            },
+            {
+                icon: <IconTag />,
+                title: 'Tokens and cost',
+                description: 'Token counts per call, with cost calculated automatically from model pricing',
             },
             {
                 icon: <IconRewindPlay />,
                 title: 'Integrated session recordings',
-                description: "Observe any changes to your UI based on the LLM's response",
-            },
-            {
-                icon: <IconTag />,
-                title: 'Metadata tracking',
-                description: 'Add custom properties like conversation ID, session, or feature',
+                description: 'Jump from a trace to the session recording and watch what the response did in your UI',
             },
             {
                 icon: <IconShield />,
@@ -112,9 +128,8 @@ export const features = {
         color: 'purple',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_dark_d1efde15fd.png',
-                alt: 'LLM cost analysis',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_costs_70f4cf9fdd.png',
+                alt: 'Total LLM cost and cost by model insights',
             },
         ],
         features: [
@@ -126,17 +141,47 @@ export const features = {
             {
                 icon: <IconTarget />,
                 title: 'Cost per user',
-                description: 'See which users or organizations are driving your LLM costs',
+                description: 'See which users or organizations drive spend, with full person profiles behind each',
             },
             {
                 icon: <IconSparkles />,
-                title: 'Feature-level costs',
-                description: 'Understand the economics of each AI-powered feature',
+                title: 'Cost by custom tags',
+                description: 'Break down spending by feature, environment, or any metadata you attach',
             },
             {
                 icon: <IconPiggyBank />,
                 title: 'ROI analysis',
                 description: 'Connect AI costs to revenue data and user engagement metrics',
+            },
+        ],
+    },
+    // Copy grounded in /docs/ai-observability/clusters.
+    clusters: {
+        title: 'Clusters',
+        headline: 'Discover patterns without reading every conversation',
+        description:
+            'Clusters group similar traces automatically and give each group a name, so you can see what users ask your AI to do – and where it struggles – at a glance.',
+        icon: <IconSparkles />,
+        color: 'purple',
+        images: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_5_18_24_PM_76f6c708fa.png',
+                alt: 'The clusters map with AI-named groups of traces and per-cluster metrics',
+            },
+        ],
+        features: [
+            {
+                title: 'AI-written summaries',
+                description: 'Each cluster gets a generated title and description of what its traces share',
+            },
+            {
+                title: 'Metrics per cluster',
+                description:
+                    'Average cost, latency, tokens, and error rate per group – expensive or failing patterns stand out',
+            },
+            {
+                title: 'Outliers flagged',
+                description: 'Traces that fit no cluster are surfaced as unusual behavior',
             },
         ],
     },
@@ -148,16 +193,15 @@ export const features = {
         color: 'lilac',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                alt: 'LLM performance monitoring',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/performance_cf8ee79962.png',
+                alt: 'Generation latency by model and error rate insights',
             },
         ],
         features: [
             {
                 icon: <IconDashboard />,
                 title: 'Latency tracking',
-                description: 'optimize response times and identify performance bottlenecks',
+                description: 'Track response times and find the slow prompts, models, and workflow steps',
             },
             {
                 icon: <IconWarning />,
@@ -171,8 +215,9 @@ export const features = {
             },
             {
                 icon: <IconBell />,
-                title: 'Real-time alerts',
-                description: 'Get notified of latency spikes or error rate increases',
+                title: 'Anomaly alerts',
+                description:
+                    'Detectors learn what normal looks like and notify you when cost, latency, or errors spike',
             },
             {
                 icon: <IconGlobe />,
@@ -190,22 +235,46 @@ export const features = {
         color: 'red',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
-                alt: 'AI Observability users',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_2_9211062ba1.png',
+                alt: 'The AI observability users list with per-user generations, cost, and latency',
+            },
+        ],
+        features: [
+            {
+                title: 'Per-user roll-ups',
+                description: 'Generations, traces, cost, and latency for every person',
+            },
+            {
+                title: 'Full person profiles',
+                description: 'Jump from an expensive user to their events, sessions, and replays',
             },
         ],
     },
     errors: {
-        title: 'Errors',
-        headline: 'Errors',
+        title: 'Error analysis',
+        headline: 'Error analysis',
         description:
             'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata – the context agents use to fix what broke.',
         icon: <IconWarning />,
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
-                alt: 'AI Observability errors',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_4_26_05_PM_13782e124a.png',
+                alt: 'The AI observability errors view with failed generations and exception rates',
+            },
+        ],
+        features: [
+            {
+                title: 'Failed generations',
+                description: 'Every failed call listed with its prompt, parameters, and provider error',
+            },
+            {
+                title: 'Error tracking integration',
+                description: 'LLM exceptions become issues you can triage, assign, and resolve',
+            },
+            {
+                title: 'Error rate alerts',
+                description: 'Anomaly detection fires when failures spike above your normal',
             },
         ],
     },
@@ -241,13 +310,27 @@ export const features = {
         title: 'Evaluations',
         headline: 'Evaluations',
         description:
-            'Catch regressions before users do. Run evals for hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria.',
+            'Score live traces as they happen across hallucinations, sentiment, relevance, or custom criteria. Catch regressions before users do.',
         icon: <IconLlmPromptEvaluation />,
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                alt: 'AI Observability evaluations',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_3_0bd750f334.png',
+                alt: 'Online evals overview with pass rate and configured evaluations',
+            },
+        ],
+        features: [
+            {
+                title: 'LLM-as-a-judge',
+                description: 'An LLM scores each trace against a prompt you define',
+            },
+            {
+                title: 'Code-based (Hog)',
+                description: 'Deterministic checks written in code',
+            },
+            {
+                title: 'Sentiment analysis',
+                description: 'Classifies user sentiment as positive, neutral, or negative',
             },
         ],
     },
@@ -320,13 +403,47 @@ export const features = {
             },
         ],
     },
+    // Copy verified against the Self-driving docs (/docs/self-driving) and the
+    // start-here quest log.
+    self_driving: {
+        title: 'Self-driving',
+        headline: 'From LLM data to pull request',
+        description:
+            'Agents watch your LLM data, investigate issues, and file reports in your inbox – where one click turns it into a pull request.',
+        icon: <IconBolt />,
+        color: 'green',
+        images: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_3_832275c1ac.png',
+                alt: 'Scout templates in the AI observability Self-driving tab',
+            },
+        ],
+        features: [
+            {
+                title: 'Eval reports',
+                description:
+                    'An agent reviews each batch of evaluation results and summarizes what it found, with example generations as evidence',
+            },
+            {
+                title: 'Anomaly investigations',
+                description:
+                    'When an anomaly alert fires on cost, latency, or errors, an agent digs into the underlying traces and finds the root cause of the anomaly',
+            },
+            {
+                title: 'Scouts',
+                description:
+                    'Scheduled agents that watch for anything you describe in plain English. Plus we have templates to get you started!',
+            },
+        ],
+    },
     native_integrations: {
         title: 'Native integrations',
-        headline: 'Simple SDKs for popular LLM providers',
+        headline: 'Instrument any LLM stack',
         description:
-            'Instrument any LLM. Use PostHog-maintained wrappers for popular providers, or manual capture for everything else.',
+            'PostHog-maintained wrappers for the major providers, 40+ documented integrations across gateways and agent frameworks, and manual capture for anything we missed.',
         // The provider grid itself lives in `slides.tsx` – it needs the logo imports.
-        footnote: 'Using another LLM observability tool? Analyze that data alongside product usage in PostHog.',
+        footnote:
+            'Already using another LLM observability tool? Send the same events to PostHog and see them next to retention, funnels, and replays – context that tool cannot show you.',
     },
     mcp: {
         title: 'MCP',
@@ -349,8 +466,9 @@ export const features = {
                 description: 'Evaluate cost, latency, and token usage across models to pick the right one per feature.',
             },
             {
-                title: 'Find expensive traces',
-                description: 'Drill into individual calls to identify optimization opportunities.',
+                title: 'Turn failure modes into evals',
+                description:
+                    'Let your agent explore traces, spot recurring failure modes, and create evaluations that catch them.',
             },
         ],
         children: <MCPInstall />,

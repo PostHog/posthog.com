@@ -84,6 +84,7 @@ export const query = graphql`
                         id
                         attributes {
                             url
+                            name
                         }
                     }
                 }

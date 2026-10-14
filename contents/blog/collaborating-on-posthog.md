@@ -52,7 +52,7 @@ We find there are two general profiles for PostHog users:
 1. People who are naturally curious and whose job leads them to discover insights all the time and across multiple dimensions.
 2. People who use PostHog to answer specific questions as they arise. 
 
-For people who create insights, we've introduced one-click saving and automatic insight naming. This means people who create lots of insights don't have spend time documenting their work, while their colleagues can easily understand what they're looking at.
+For people who create insights, we've introduced one-click saving and automatic insight naming. This means people who create lots of insights don't have to spend time documenting their work, while their colleagues can easily understand what they're looking at.
 
 ![Screenshot of automatic insight naming](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_3.png)
 

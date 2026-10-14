@@ -302,7 +302,7 @@ export default function SessionReplayLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/session-replay/session-summaries-ai"
+                                    to="/docs/session-replay/find-replays-ai"
                                     state={{ newWindow: true }}
                                 >
                                     Explore AI features

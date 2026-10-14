@@ -37,6 +37,9 @@ interface ScrollAreaProps {
     fadeX?: boolean
     style?: React.CSSProperties
     fullWidth?: boolean
+    /** Marks this viewport as the page's scroll root, so posthog-js measures scroll depth against it. */
+    isScrollRoot?: boolean
+    overlay?: React.ReactNode
     viewportClasses?: string
     /** Ref to the scrolling viewport node — e.g. to persist/restore scroll position. */
     viewportRef?: React.Ref<HTMLDivElement>
@@ -50,6 +53,8 @@ const ScrollArea = ({
     fadeX = false,
     style,
     fullWidth = false,
+    isScrollRoot = false,
+    overlay,
     viewportClasses = '',
     viewportRef,
 }: ScrollAreaProps) => {
@@ -65,11 +70,14 @@ const ScrollArea = ({
         }
     }, [scrollbars])
 
+    const scrollRootRef = React.useRef<HTMLDivElement | null>(null)
+
     // The horizontal fade needs its own ref on the viewport while still
     // honouring any `viewportRef` the caller passed.
     const setViewportRef = React.useCallback(
         (node: HTMLDivElement | null) => {
             fadeRef.current = node
+            scrollRootRef.current = node
             if (typeof viewportRef === 'function') {
                 viewportRef(node)
             } else if (viewportRef) {
@@ -79,6 +87,28 @@ const ScrollArea = ({
         },
         [viewportRef]
     )
+
+    // posthog-js measures scroll depth against the first element matching its
+    // `scroll_root_selector` and does no scrollability check of its own. A page renders
+    // either windowed (this viewport scrolls) or full page (the document scrolls), so only
+    // claim the marker while this viewport is the element that actually scrolls. Callers pass
+    // `isScrollRoot` only for the focused window, since the SDK picks the first match in the DOM.
+    React.useEffect(() => {
+        const node = scrollRootRef.current
+        if (!node) return
+
+        const sync = () =>
+            node.toggleAttribute('data-scroll-root', isScrollRoot && node.scrollHeight > node.clientHeight)
+
+        sync()
+        if (!isScrollRoot) return
+        const observer = new ResizeObserver(sync)
+        observer.observe(node)
+        if (node.firstElementChild) {
+            observer.observe(node.firstElementChild)
+        }
+        return () => observer.disconnect()
+    }, [isScrollRoot])
 
     return (
         <RadixScrollArea.Root
@@ -94,13 +124,16 @@ const ScrollArea = ({
         >
             <RadixScrollArea.Viewport
                 ref={setViewportRef}
+                tabIndex={-1}
                 // Radix derives the viewport's overflow from Root state that only flips to
                 // `scroll` in the Scrollbar's effect, so server-rendered markup ships
                 // `overflow: hidden` and nothing scrolls until hydration. Both scrollbars below
                 // are unconditional, so both axes always end up `scroll` anyway — setting them
                 // here (Radix spreads `style` last) makes that true in the SSR'd HTML too.
                 style={{ overflowX: 'scroll', overflowY: 'scroll' }}
-                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+                className={`app-scroll-viewport size-full outline-none ${viewportClasses} ${
+                    fadeHeight ? `pb-${fadeHeight}` : ''
+                }`}
             >
                 {fullWidth ? <div>{children}</div> : children}
             </RadixScrollArea.Viewport>
@@ -119,6 +152,7 @@ const ScrollArea = ({
                 </div>
             )}
             {fadeX && <HorizontalScrollFades showStart={showStart} showEnd={showEnd} />}
+            {overlay}
         </RadixScrollArea.Root>
     )
 }

@@ -66,6 +66,8 @@ export const SEO = ({
                 ? image
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
+        // Callers may pass a site-relative path; canonical links have to be absolute.
+        canonical: canonicalUrl?.startsWith('/') ? `${siteUrl}${canonicalUrl}` : canonicalUrl,
     }
 
     useEffect(() => {
@@ -80,7 +82,7 @@ export const SEO = ({
             {noindex && <meta name="robots" content="noindex" />}
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
-            {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {<link rel="canonical" href={seo.canonical || seo.url} />}
             {/* Standard.site publication discovery hint for the blog */}
             {pathname?.startsWith('/blog') && (
                 <link
@@ -103,12 +105,14 @@ export const SEO = ({
                     href={href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`}
                 />
             ))}
+            {/* Site-wide signpost so LLM crawlers on any page can discover the Markdown index. */}
+            <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
             {isMarkdownContentPath(pathname) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}
 
             {seo.url && <meta property="og:url" content={seo.url} />}
-            {article ? <meta property="og:type" content="article" /> : null}
+            <meta property="og:type" content={article ? 'article' : 'website'} />
             {seo.title && <meta property="og:title" content={seo.title} />}
             {seo.description && <meta property="og:description" content={seo.description} />}
             {seo.image && <meta property="og:image" content={seo.image} />}
@@ -130,6 +134,27 @@ export const SEO = ({
 }
 
 export default SEO
+
+/**
+ * PostHog as a schema.org Organization. Shared so the homepage and every product page
+ * describe the same entity rather than drifting copies of it.
+ */
+const POSTHOG_ORGANIZATION = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PostHog',
+    url: 'https://posthog.com',
+    logo: 'https://posthog.com/brand/posthog-logo-stacked.png',
+    sameAs: ['https://twitter.com/PostHog', 'https://github.com/PostHog', 'https://www.linkedin.com/company/posthog'],
+    address: {
+        '@type': 'PostalAddress',
+        streetAddress: '2261 Market Street #4008',
+        addressLocality: 'San Francisco',
+        addressRegion: 'CA',
+        postalCode: '94114',
+        addressCountry: 'US',
+    },
+}
 
 /**
  * Build schema.org JSON-LD for a product/app page: a SoftwareApplication, the PostHog
@@ -166,18 +191,7 @@ export const buildProductStructuredData = ({
             },
             publisher: { '@type': 'Organization', name: 'PostHog', url: 'https://posthog.com' },
         },
-        {
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'PostHog',
-            url: 'https://posthog.com',
-            logo: 'https://posthog.com/images/og/default.png',
-            sameAs: [
-                'https://twitter.com/PostHog',
-                'https://github.com/PostHog',
-                'https://www.linkedin.com/company/posthog',
-            ],
-        },
+        POSTHOG_ORGANIZATION,
     ]
     const faqEntities = (faq || [])
         .filter((q) => q && q.question && q.answer)

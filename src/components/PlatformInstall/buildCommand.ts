@@ -11,15 +11,31 @@
  * Inline wizard command. The display is always the clean `npx @posthog/wizard …`; the copy always
  * pins `-y` (auto-confirms the npx prompt) and `@latest` (freshness). There is intentionally no flag
  * to toggle `@latest` — it is always copied, never displayed. The subcommand is appended last, to both.
+ *
+ * `fullCommand` is the escape hatch for call sites that need to state the whole command themselves
+ * (an author writing raw MDX, a non-wizard command). It is shown and copied verbatim — no `-y`, no
+ * `@latest`, no subcommand — because the point is that what you typed is what ships. `copyOverride`
+ * lets those call sites still copy something different from what they display.
  */
-export function buildWizardCommand({ subcommand }: { subcommand?: string }): {
+export function buildWizardCommand({
+    subcommand,
+    fullCommand,
+    copyOverride,
+}: {
+    subcommand?: string
+    fullCommand?: string
+    copyOverride?: string
+}): {
     displayCommand: string
     copyCommand: string
 } {
+    if (fullCommand) {
+        return { displayCommand: fullCommand, copyCommand: copyOverride || fullCommand }
+    }
     const tail = subcommand ? ` ${subcommand}` : ''
     return {
         displayCommand: `npx @posthog/wizard${tail}`,
-        copyCommand: `npx -y @posthog/wizard@latest${tail}`,
+        copyCommand: copyOverride || `npx -y @posthog/wizard@latest${tail}`,
     }
 }
 

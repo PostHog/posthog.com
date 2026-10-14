@@ -1,0 +1,45 @@
+name: Strapi sync
+
+on:
+    workflow_dispatch:
+    deployment_status:
+
+concurrency:
+    group: strapi-sync
+    cancel-in-progress: false
+
+permissions:
+    contents: read
+
+jobs:
+    strapi-sync:
+        name: Sync posts to Strapi
+        if: |
+            github.event_name == 'workflow_dispatch' ||
+            (github.event.deployment_status.state == 'success' &&
+             (github.event.deployment.environment == 'Production' ||
+              github.event.deployment.environment == 'production'))
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Sync posts to Strapi
+              env:
+                  STRAPI_API_HOST: ${{ secrets.STRAPI_API_HOST }}
+                  STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
+              run: pnpm strapi-sync

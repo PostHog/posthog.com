@@ -27,7 +27,7 @@ The code is [on GitHub](https://github.com/Brooker-Fam/hogfarm) and there's a [l
 
 ## Registering your OAuth client
 
-To register my OAuth client, I added a small JSON file. The first time I called the API, PostHog fetched the file and registered my OAuth app. It's called a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd), or CIMD.
+To register my OAuth client, I added a small JSON file to my site and pointed PostHog at it. It's called a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd), or CIMD, and the URL it's served from is my `client_id`.
 
 It looks like this:
 
@@ -40,12 +40,25 @@ It looks like this:
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
+    "provisioning": true,
     "scopes": ["endpoint:read", "endpoint:write", "query:read", "session_recording:read", "sharing_configuration:write", "project:write"]
   }
 }
 ```
 
-The `client_id` has to be the exact URL the file is served from, or it won't register. The `com.posthog.scopes` list is a ceiling: tokens can never go above it, whatever an individual request asks for. These scopes are everything the dashboard needs later: reading the analytics back and embedding a session recording. More on both below.
+The `client_id` has to be the exact URL the file is served from, or it won't register. `com.posthog.provisioning` is the opt-in for the provisioning API: a `client_id` is a public URL, so PostHog only hands provisioning access to a client whose own document asks for it. The `com.posthog.scopes` list is a ceiling: tokens can never go above it, whatever an individual request asks for. These scopes are everything the dashboard needs later: reading the analytics back and embedding a session recording. More on both below.
+
+With the file live, one call registers it:
+
+```ts
+await fetch(`${HOST}/api/agentic/provisioning/client_registration`, {
+  method: "POST",
+  headers: { "API-Version": "0.1d", "Content-Type": "application/json" },
+  body: JSON.stringify({ client_id: clientId }),
+})
+```
+
+The response reports each check it ran on its own: whether the document could be fetched and validated, whether provisioning is on, and which keys my JWKS serves if I published one. Nothing else works until this succeeds, so it's the first thing to re-run when something further down looks wrong.
 
 Because HogFarm holds no secret (`token_endpoint_auth_method` is `"none"`), I use PKCE to prove the token exchange. I generate a random verifier and send only its SHA-256 hash with the first call. The verifier gets replayed at token exchange.
 
@@ -79,7 +92,7 @@ There are a few cases to handle for this response:
 
 - **A new email** comes back as `{ type: "oauth", oauth: { code } }`. The account gets created and linked quietly, I get a code on the spot, and the farmer gets a welcome email to set their password.
 - **An email that's already a PostHog user** comes back as `{ type: "requires_auth", requires_auth: { url } }`. They have to consent in the browser first, so I send them to `url` and PostHog redirects back to my `redirect_uri` with a code.
-- **The very first call from a new CIMD client** comes back as a `202` with `{ type: "registering" }`. PostHog fetches the metadata document in the background, so I wait the `retry_after` seconds and call again. This happens once per deployment, and it caught me off guard the first time (see below).
+- **A `client_id` that hasn't been registered** comes back as a `401` naming the registration endpoint, which is the reminder to run the call above after shipping a new metadata URL.
 
 ## Getting the farmer's project key
 
@@ -207,7 +220,7 @@ I drop that URL in an iframe and the farmer watches real visitors move through t
 
 These are the things that weren't obvious until I hit them:
 
-- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and the first call just failed. PostHog couldn't fetch the metadata document through the SSO gate. If registration never finishes, open the `.well-known` URL in an incognito window and make sure it loads.
+- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and registration failed: PostHog couldn't fetch the metadata document through the SSO gate. If it fails, open the `.well-known` URL in an incognito window and make sure it loads.
 - **Don't reach for `historical_migration` to seed backdated events.** I seed a week of demo pageviews so a new farm's dashboard isn't empty on day one, and my first instinct was the `historical_migration` flag since the timestamps are in the past. That flag routes the batch to a throttled ingestion pipeline that can take many minutes to become queryable, so the dashboard sat empty right after provisioning, the opposite of what I wanted. The regular capture pipeline takes backdated timestamps fine (it stores the event timestamp, not arrival time) and they show up in seconds. For a week-old seed, skip the flag.
 
 ## Give the gift of PostHog to your users

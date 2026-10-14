@@ -11,6 +11,10 @@ featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_
 featuredImageType: full
 tags: 
  - CEO diaries
+ - Founders
+ - Big decisions
+crosspost:
+  - Founders
 ---
 
 Building PostHog has been living the dream. We got into YC. We pivoted a bunch. We found product-market fit, onboarded hundreds of thousands of customers, and revenue grew fast.
@@ -51,7 +55,7 @@ It relied on agents answering questions in one shot, so it frequently made mista
 
 FOMO got the better of me and I pushed this in our marketing too early. It felt good enough to be sort of useful, and I felt the pressure of new companies generating gazillions in revenue seemingly overnight – many of them were PostHog customers!
 
-It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's AI Observability](/llm-analytics)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
+It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's AI Observability](/ai-observability)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
 
 The breakthrough was moving to a single query loop architecture, so the agent could iterate and make sense of all the atomic endpoints from our products. Now, if a graph was empty, the agent would question this and try to figure out if a different event or property was better.
 
@@ -59,7 +63,7 @@ Results and feedback dramatically improved. We kept iterating and users started 
 
 After a while, we realized PostHog AI had become the best way to use our product in most cases, and we made it the default UX for new users. We also shipped an MCP, so users could query PostHog from their code editors. It's way more popular than we anticipated.
 
-The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineering/ai-wizard). It was very basic to start with, but the potential was obvious. Our docs team (we call them Context Engineers now) took over development and the progress has been remarkable. Our wizard can now set up a PostHog project from scratch, defining and implementing events and creating dashboards, 100% autonomously. It's kind of magical.
+The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineering/ai-wizard). It was very basic to start with, but the potential was obvious. Our docs team (we call them [Context Engineers](/blog/wtf-is-context-engineering#what-does-a-day-in-the-life-of-a-context-engineer-look-like) now) took over development and the progress has been remarkable. Our wizard can now set up a PostHog project from scratch, defining and implementing events and creating dashboards, 100% autonomously. It's kind of magical.
 
 ## What we're working on now
 
@@ -89,7 +93,7 @@ Our [long-running agents](/newsletter/2030-shaped-software#be-everywhere) will l
 
 This is the common thread connecting all this work. The PostHog of the future isn't read-only analytics. We want to solve the low-level tasks in building software, the less creative but important work, so you can spend more time on high impact work.
 
-We want [PostHog to code in response to problems we find](/desktop), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
+We want [PostHog to code in response to problems we find](/docs/self-driving), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
 
 These are big bets and our UX will be in flux as a result for a while. I'm sorry if the changes here are aggravating, but your feedback, the data, and our subjective experience suggest a little short-term pain will be worth it.
 

@@ -36,9 +36,9 @@ export const tools = [
     },
     {
         handle: 'data_warehouse',
-        name: 'Managed warehouse',
+        name: 'Warehouse',
         searchDescription: 'Query product and third-party data together in a managed warehouse.',
-        slug: 'context-warehouse/managed-warehouse',
+        slug: 'context-warehouse/warehouse',
         category: 'data',
         status: 'beta',
         aliases: ['Data warehouse', 'PostHog warehouse'],
@@ -89,6 +89,14 @@ export const tools = [
         aliases: ['Logging'],
     },
     {
+        handle: 'metrics',
+        name: 'Application metrics',
+        description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+        slug: 'docs/metrics',
+        category: 'product_engineering',
+        status: 'alpha',
+    },
+    {
         handle: 'mcp_analytics',
         name: 'MCP Analytics',
         description: 'See how agents actually use your MCP server',
@@ -129,11 +137,10 @@ export const tools = [
     },
     {
         handle: 'traces',
-        name: 'Traces',
+        name: 'Tracing',
         description: 'Distributed tracing that goes straight to the line that broke',
-        slug: 'traces',
+        slug: 'tracing',
         category: 'product_engineering',
-        status: 'beta',
     },
     {
         handle: 'web_analytics',

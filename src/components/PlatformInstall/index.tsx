@@ -131,6 +131,10 @@ function PlatformOptionContent({ option }: { option: PlatformOption }): JSX.Elem
 export interface PlatformInstallProps {
     schema?: InstallSchema
     className?: string
+    /** Card only: render platform destinations as links, without expandable instructions. */
+    linkOnly?: boolean
+    /** Card only: hide the secondary header link, such as Docs or Learn more. */
+    hideSecondaryAction?: boolean
     /**
      * `card` (default) = the full/compact schema-driven card. `inline` = the bare inline command
      * button (the consolidated home of the old `WizardCommand`). Inline ignores the schema and
@@ -141,6 +145,13 @@ export interface PlatformInstallProps {
     selfDriving?: boolean
     /** Escape hatch to append any other subcommand to the command (display + copy). */
     command?: string
+    /**
+     * Inline only: state the entire command yourself instead of having it built. Shown and copied
+     * verbatim, so `-y`/`@latest` are not added and `command`/`selfDriving` are ignored.
+     */
+    fullCommand?: string
+    /** Clipboard override, if it should differ from what's displayed. */
+    copyCommand?: string
     /** Inline only: hide the "Learn more" tab and fully round the button. */
     slim?: boolean
     /** Inline only: bordered button style. */
@@ -156,9 +167,13 @@ export interface PlatformInstallProps {
 export default function PlatformInstall({
     schema = mcpInstallSchema,
     className = '',
+    linkOnly = false,
+    hideSecondaryAction = false,
     variant = 'card',
     selfDriving = false,
     command,
+    fullCommand,
+    copyCommand: copyCommandOverride,
     slim = false,
     bordered = false,
     secondaryTo,
@@ -192,7 +207,7 @@ export default function PlatformInstall({
     // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
     // from flags via the shared builder so display/copy semantics can never drift from the card.
     if (variant === 'inline') {
-        const inline = buildWizardCommand({ subcommand })
+        const inline = buildWizardCommand({ subcommand, fullCommand, copyOverride: copyCommandOverride })
         return (
             <InlineCommand
                 displayCommand={inline.displayCommand}
@@ -250,7 +265,7 @@ export default function PlatformInstall({
                             </Tooltip>
                         ) : null}
                     </div>
-                    {schema.secondaryAction ? (
+                    {!hideSecondaryAction && schema.secondaryAction ? (
                         <Link
                             to={schema.secondaryAction.to}
                             state={schema.secondaryAction.state}
@@ -270,7 +285,40 @@ export default function PlatformInstall({
 
             {/* Install-methods row + expandable panel. Hidden when the schema has no
                platforms (e.g. the homepage wizard flow). Restore by re-adding platforms. */}
-            {schema.platforms.length > 0 ? (
+            {linkOnly ? (
+                schema.platforms.some((platform) => platform.href) ? (
+                    <div className="flex flex-wrap items-center gap-1 border-t border-primary px-3 py-2">
+                        {schema.platforms
+                            .filter((platform): platform is Platform & { href: string } => Boolean(platform.href))
+                            .map((platform) => (
+                                <Tooltip
+                                    key={platform.id}
+                                    className="inline-flex"
+                                    delay={150}
+                                    trigger={
+                                        <Link
+                                            to={platform.href}
+                                            state={{ newWindow: true }}
+                                            externalNoIcon
+                                            aria-label={platform.label}
+                                            wrapperClassName="flex"
+                                            className="inline-flex size-7 items-center justify-center rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        >
+                                            <span
+                                                aria-hidden="true"
+                                                className="inline-flex size-4 items-center justify-center"
+                                            >
+                                                {platform.icon}
+                                            </span>
+                                        </Link>
+                                    }
+                                >
+                                    {platform.label}
+                                </Tooltip>
+                            ))}
+                    </div>
+                ) : null
+            ) : schema.platforms.length > 0 ? (
                 <>
                     <div
                         className={`flex items-center justify-between gap-2 bg-accent border-t border-primary px-3 py-2 ${

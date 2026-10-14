@@ -7,7 +7,6 @@ import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
-import { product_type_to_max_events } from '../pricingLogic'
 import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
@@ -64,12 +63,7 @@ export const InclusionOnlyRow = ({ plans }) => (
     </Row>
 )
 
-const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
-
 export const PricingTiers = ({ plans, unit, compact = false, type, test = false, showSubtotal = false }) => {
-    const posthog = usePostHog()
-    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
-
     // Safety check: ensure plans exists and has content
     if (!plans || plans.length === 0) {
         console.warn('PricingTiers: No plans provided or plans is empty')
@@ -80,20 +74,6 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
     const hasFreeAllocation = freeAllocation !== null && freeAllocation !== undefined
 
     const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
-
-    useEffect(() => {
-        posthog?.onFeatureFlags(() => {
-            if (posthog.getFeatureFlag(ENTERPRISE_PRICING_TABLE) === 'test') {
-                set_enterprise_flag_enabled(true)
-                // Filter out tiers above the max number of units we want to display
-                set_tiers(
-                    plans[plans.length - 1]?.tiers?.filter(({ up_to }) => up_to <= product_type_to_max_events[type])
-                )
-            } else {
-                set_enterprise_flag_enabled(false)
-            }
-        })
-    }, [posthog])
 
     useEffect(() => {
         set_tiers(plans[plans.length - 1]?.tiers)
@@ -196,15 +176,6 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                     )
                                 }
                             />
-                            {!up_to && enterprise_flag_enabled && (
-                                <Link to="/talk-to-a-human">
-                                    <Label
-                                        className="ml-2 !font-bold"
-                                        text="Volume discounts available"
-                                        style="orangeNoBg"
-                                    />
-                                </Link>
-                            )}
                         </div>
                         {showSubtotal && (
                             <>

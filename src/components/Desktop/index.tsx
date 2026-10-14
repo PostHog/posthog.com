@@ -28,6 +28,7 @@ import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
+import useDesktopBadges from '../../hooks/useDesktopBadges'
 
 interface Product {
     name: string
@@ -151,7 +152,77 @@ function Desktop() {
     })
     const [navVisible, setNavVisible] = useState(false)
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const dragBoxRef = useRef<HTMLDivElement>(null)
     const { addToast } = useToast()
+
+    useEffect(() => {
+        const box = dragBoxRef.current
+        if (!box) return
+        let drag: { x: number; y: number; pointerId: number; target: Element } | null = null
+
+        const stopDrag = () => {
+            const previous = drag
+            drag = null
+            box.style.transitionProperty = 'opacity'
+            box.style.opacity = '0'
+            if (previous?.target.hasPointerCapture(previous.pointerId)) {
+                previous.target.releasePointerCapture(previous.pointerId)
+            }
+        }
+        const startDrag = (event: PointerEvent) => {
+            if (event.pointerType !== 'mouse' || event.button !== 0 || !event.isPrimary) return
+            const target = event.target
+            if (!(target instanceof Element)) return
+            // Empty space can belong to the window layer or the desktop icon lists.
+            const isBackground = target.matches(
+                '[data-app="WindowList"], [data-app="DesktopViewport"], [data-app="Desktop"]'
+            )
+            const isIconList = target.matches('ul') && target.closest('[data-app="Desktop"]')
+            if (!isBackground && !isIconList) return
+
+            event.preventDefault()
+            box.style.display = 'none'
+            box.style.transitionProperty = 'none'
+            box.style.opacity = '1'
+            drag = { x: event.clientX, y: event.clientY, pointerId: event.pointerId, target }
+            try {
+                target.setPointerCapture(event.pointerId)
+            } catch {
+                stopDrag()
+            }
+        }
+        const moveDrag = (event: PointerEvent) => {
+            if (!drag || event.pointerId !== drag.pointerId) return
+            if (!(event.buttons & 1)) return stopDrag()
+            // Update only the decorative box, without re-rendering the desktop on each move.
+            Object.assign(box.style, {
+                display: 'block',
+                left: `${Math.min(drag.x, event.clientX)}px`,
+                top: `${Math.min(drag.y, event.clientY)}px`,
+                width: `${Math.abs(event.clientX - drag.x)}px`,
+                height: `${Math.abs(event.clientY - drag.y)}px`,
+            })
+        }
+        const endDrag = (event: PointerEvent) => {
+            if (event.pointerId === drag?.pointerId) stopDrag()
+        }
+
+        document.addEventListener('pointerdown', startDrag)
+        document.addEventListener('pointermove', moveDrag)
+        document.addEventListener('pointerup', endDrag)
+        document.addEventListener('pointercancel', endDrag)
+        document.addEventListener('lostpointercapture', endDrag)
+        window.addEventListener('blur', stopDrag)
+        return () => {
+            document.removeEventListener('pointerdown', startDrag)
+            document.removeEventListener('pointermove', moveDrag)
+            document.removeEventListener('pointerup', endDrag)
+            document.removeEventListener('pointercancel', endDrag)
+            document.removeEventListener('lostpointercapture', endDrag)
+            window.removeEventListener('blur', stopDrag)
+            stopDrag()
+        }
+    }, [])
 
     useEffect(() => {
         return () => {
@@ -189,8 +260,14 @@ function Desktop() {
                   }
                 : app
         )
-    const leftApps = applyGlow(productLinks)
-    const rightApps = applyGlow(apps)
+    // Notification badges come from app state (see useDesktopBadges), so they are
+    // merged in here rather than baked into the static `apps` array above.
+    const badges = useDesktopBadges()
+    const applyBadges = (items: AppItem[]) =>
+        items.map((app) => (app.url && badges[app.url] ? { ...app, badge: badges[app.url] } : app))
+
+    const leftApps = applyBadges(applyGlow(productLinks))
+    const rightApps = applyBadges(applyGlow(apps))
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.
@@ -259,27 +336,18 @@ function Desktop() {
                         ),
                         shortcut: [','],
                     },
-                    {
-                        type: 'item',
-                        children: (
-                            <Link to="/kbd" state={{ newWindow: true }}>
-                                Keyboard shortcuts
-                            </Link>
-                        ),
-                        shortcut: ['.'],
-                    },
                 ]}
             >
                 <div
                     data-scheme="primary"
                     data-app="Desktop"
-                    className="fixed inset-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
                     <Wallpapers wallpaper={siteSettings.wallpaper} reduceMotion={siteSettings.performanceBoost} />
 
-                    <nav className="px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
+                    <nav className="relative px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
                         <ul className={mobileIconListClassName}>
                             {[...leftApps, ...rightApps].map((app) => (
                                 <DesktopIcon key={app.label} app={app} />
@@ -301,6 +369,12 @@ function Desktop() {
                             </ul>
                         </div>
                     </nav>
+                    <div
+                        ref={dragBoxRef}
+                        data-desktop-drag-box
+                        aria-hidden="true"
+                        className="fixed hidden pointer-events-none rounded-md border border-blue bg-blue/10 duration-200 ease-out motion-reduce:duration-0"
+                    />
                 </div>
                 {!compact && (
                     <Screensaver

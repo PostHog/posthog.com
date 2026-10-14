@@ -18,7 +18,11 @@ export default function HogPatch(): JSX.Element {
                 headerBarOptions={[]}
                 fullScreen
             >
-                <iframe src="https://candidate-rpg.vercel.app/game" className="w-full h-full border-0" />
+                <iframe
+                    src="https://candidate-rpg.vercel.app/game"
+                    className="w-full h-full border-0"
+                    allow="autoplay; fullscreen"
+                />
             </Explorer>
         </>
     )

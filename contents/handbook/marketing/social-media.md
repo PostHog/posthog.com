@@ -10,7 +10,9 @@ showTitle: true
 
 <TeamMember name="Liam Graham" /> owns and runs PostHog's main social media accounts. If you need something posted from an official account, want a reply sent from one, or have a question about our presence on a platform, he's your point of contact.
 
-When we promote a launch on social, <TeamMember name="Liam Graham" /> needs a handful of things to turn it into great posts. 
+If you have a more general question about how we post to social media, your answer is likely found in the handbook's [social media content section](/handbook/content/social-media).
+
+When we promote a launch on social, he needs a handful of things to turn it into great posts.
 
 
 ## What to share
@@ -31,7 +33,7 @@ That's the whole ask. If something doesn't apply (for example, there's no blog p
 You should aim to give as much notice as you can, but ideally at least a week. You can share the checklist in either of two places:
 
 - A widely broadcast Slack message you're already sending out about the launch.
-- Post in either the #team-marketing or #team-editorial Slack channels
+- Post in either the `#team-marketing` or `#team-editorial` Slack channels
 In both cases, tagging <TeamMember name="Liam Graham" />.
 
 We want to make sure we're being transparent with this, so you should avoid sending this information by DM.

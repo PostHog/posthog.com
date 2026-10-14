@@ -17,6 +17,8 @@ The key features offered by this platform are:
 
 Batch exports are designed to power any complimentary analytics use cases outside of PostHog.
 
+> Want a one-off export you can download as files, instead of scheduled delivery to a destination? Use a [file download export](/docs/cdp/file-download-exports).
+
 ## Destinations
 
 Every batch export exports data to a destination using the configuration parameters provided when creating a batch export. The following destinations are currently supported:
@@ -35,8 +37,9 @@ You can test the configurations of each destination by clicking the **Start test
 
 This test can detect and diagnose configuration issues, like invalid credentials or missing permissions, before running the batch export.
 
-Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or create an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in new destinations.
+Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or open a request on [our roadmap](/roadmap) to voice your interest in new destinations.
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
@@ -45,6 +48,8 @@ import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 ## Models
 
 Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
+
+> **Note:** You can't change the model of a batch export after you save it. To export a different model, create a new batch export.
 
 > **Note:** New fields may be added to these models over time.
 >
@@ -70,6 +75,7 @@ However, there are some properties of the model that apply to all destinations:
 
 - This model is **immutable** with all fields set once the event is ingested.
 - Each event is **uniquely** identified by a UUID that can be used for de-duplication.
+- The `person_id` and `person_properties` fields show the person at the time the event was ingested. PostHog never updates exported rows, regardless of later changes to the person. To get the latest person for an event, export the [persons model](#persons-model) and join it on `distinct_id`.
 
 ### Persons model
 
@@ -99,6 +105,68 @@ More information, including any additional necessary permissions, schema informa
 A [session](/docs/data/sessions) in PostHog represents a series of events that make up a single use of your product or visit to your website. Each session is uniquely identified by its `session_id`.
 
 If you want to link events with sessions, you'll need to ensure you're capturing the `$session_id` in your events. This is done automatically by our JavaScript Web library and mobile SDKs. For server-side SDKs, refer to our [docs](/docs/data/sessions#server-sdks-and-sessions).
+
+### SQL query model
+
+<CalloutBox icon="IconInfo" type="fyi" title="This model is in closed beta">
+
+The SQL query model is enabled per organization. To get access, message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue). We're actively looking for feedback on this feature, and we'd love to hear about the use cases and queries you want to run.
+
+</CalloutBox>
+
+The SQL query model exports the results of a [SQL](/docs/sql) query that you write, so you aren't limited to the fixed schemas of the other models. Filter, join, and aggregate whatever you need, and export only the columns you want.
+
+To use it, select **Custom SQL query** as the model in the **Data** section of the batch export form, then write your query in the editor below it. The editor has the same autocomplete, error checking, and results preview as the [SQL editor](/docs/sql).
+
+#### Filter each run with placeholders
+
+Each [batch run](#batch-runs) covers an interval of time. To export only the data in that interval, filter your query with the `{data_interval_start}` and `{data_interval_end}` placeholders. Each run replaces them with the start and end of its interval.
+
+For example, this query exports only the events in each run's interval:
+
+```sql runInPostHog=false
+SELECT
+    uuid,
+    event,
+    timestamp,
+    distinct_id,
+    properties,
+    properties.$current_url AS current_url
+FROM events
+WHERE timestamp >= {data_interval_start}
+    AND timestamp < {data_interval_end}
+```
+
+When you run the query in the editor, the placeholders cover the last complete interval of the export's schedule, so the preview shows what a run would export.
+
+If your query uses neither placeholder, every run exports all of the query's results, not only new data.
+
+> **Note:** The placeholders filter on the column you choose, like `timestamp`, not on when PostHog received the data. This is different from the [events model](#events-model), which uses the time of ingestion. Therefore, an event that arrives after the run for its interval has started is not exported. We're adding columns with the time of ingestion to the `events` table and other tables soon, so you'll be able to filter on that instead.
+
+#### Query timezone
+
+The **Query timezone** setting controls the timezone of timestamps in the export and of date functions in the query. You can choose:
+
+- **UTC:** The default for new exports.
+- **Project timezone:** The timezone in your project settings. If you change the project timezone, the export uses the new timezone from its next run.
+
+A timezone that you set in the query itself, like `toTimeZone(timestamp, 'UTC')`, takes precedence.
+
+#### Requirements and limitations
+
+- **Every column needs a name.** Each column in the `SELECT` clause must be a plain field or have an alias, like `count() AS event_count`.
+- **One statement only.** The query must be a single `SELECT` statement. The only placeholders supported are `{data_interval_start}` and `{data_interval_end}`.
+- **Rows are appended.** Each run appends the query's results to the destination and never updates rows from earlier runs. If your query can return the same row in more than one run, de-duplicate the rows in your destination. Other export modes, like merging rows into existing ones, are coming soon.
+- **Queries run with the access of the user who last saved the export.** If that user loses access to the project, runs fail until someone with access saves the export again.
+- **Queries have resource limits.** SQL queries run under stricter limits on execution time, memory usage, and data read than the other models. A run that exceeds a limit fails and isn't retried. Bound your query with a `WHERE` clause, like the placeholders above, to stay within the limits.
+
+Pricing for SQL query exports hasn't been decided yet, but they're free while the model is in closed beta.
+
+#### API and MCP
+
+You can also create these exports with the [API](/docs/api/batch-exports). Set `model` to `hogql` and pass the query in `hogql_query`. Timestamps default to UTC, unless your project sets the `convertToProjectTimezone` modifier. To choose the timezone for one export, set `hogql_modifiers` to `{"convertToProjectTimezone": true}` for the project timezone, or `{"convertToProjectTimezone": false}` for UTC.
+
+AI agents can also create them through the [PostHog MCP](/docs/cdp/surfaces/mcp).
 
 ## Batch runs
 

@@ -25,11 +25,11 @@ We do this by:
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
-Our latest goals can be found on the <SmallTeam slug="content" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
+Our latest goals can be found on the <SmallTeam slug="marketing" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
 
 ## Who is our audience?
 
-It should be the same as [who we are building for](/handbook/who-we-are-building-for). Specifically:
+It should be the same as [who we are building for](/handbook/who-we-build-for). Specifically:
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products.
 
@@ -43,7 +43,7 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
-2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
+2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/compare), guides on the [best alternatives to popular tools](/compare/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
 3. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
 

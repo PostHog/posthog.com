@@ -421,7 +421,7 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
 }
 
 // Customer constants and breakdowns
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
+const COL1 = ['ycombinator', 'airbus', 'trust', 'startengine', 'researchgate', 'exa', 'heygen']
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
@@ -442,17 +442,17 @@ const companyBreakdowns = {
 }
 
 const companyAttributes = {
-    colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
+    colorful: ['ycombinator', 'trust', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
-    caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
+    caseStudy: ['ycombinator', 'elevenlabs', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
     easyToYell: ['airbus', 'trust', 'raycast', 'exa', 'heygen', 'posthog'],
-    goodBandName: ['elevenlabs', 'lovable', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
-    explainable: ['ycombinator', 'airbus', 'lovable', 'startengine', 'researchgate', 'exa'],
-    shortNames: ['airbus', 'trust', 'lovable', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
-    realWords: ['airbus', 'trust', 'lovable', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
+    goodBandName: ['elevenlabs', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
+    explainable: ['ycombinator', 'airbus', 'startengine', 'researchgate', 'exa'],
+    shortNames: ['airbus', 'trust', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
+    realWords: ['airbus', 'trust', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
     american: ['ycombinator', 'trust', 'supabase', 'hasura', 'startengine', 'researchgate', 'exa', 'heygen', 'posthog'],
-    pokemon: ['lovable', 'supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
+    pokemon: ['supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
 }
 
 const Customers = () => {
@@ -842,7 +842,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 // Main Component
 // ============================================
 
-export default function Home2() {
+export default function Home2({ headingTag: Heading = 'h1' }: { headingTag?: 'h1' | 'h2' }) {
     const { siteSettings } = useApp()
     const videoRef = useRef<WistiaVideoRef>(null)
     const tvScreenRef = useRef<HTMLDivElement>(null)
@@ -979,7 +979,7 @@ export default function Home2() {
                 {/* Video Hero Section */}
                 <div className="flex flex-col @2xl:flex-row gap-8">
                     <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8 @2xl:pt-16">
-                        <h1 className="text-4xl font-bold mb-4">The AI platform for engineers</h1>
+                        <Heading className="text-4xl font-bold mb-4">The AI platform for engineers</Heading>
                         <p className="text-xl mb-8 mt-0">
                             Debug products. Ship features faster. <br />
                             With all user and product data in one stack.

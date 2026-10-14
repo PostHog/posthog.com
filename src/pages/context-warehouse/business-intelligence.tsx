@@ -5,7 +5,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import FeatureTable from './FeatureTable'
+import FeatureTable from 'components/ContextWarehouse/FeatureTable'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -81,7 +81,7 @@ export default function BusinessIntelligence(): JSX.Element {
                         <Link to="https://hex.tech/" external>
                             Hex
                         </Link>{' '}
-                        directly to your PostHog DuckDB warehouse.
+                        directly to your PostHog Trino warehouse.
                     </p>
                 </div>
 

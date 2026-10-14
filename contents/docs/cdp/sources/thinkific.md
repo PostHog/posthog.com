@@ -12,9 +12,6 @@ sourceId: Thinkific
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Thinkific connector syncs your course, enrollment, and order data into PostHog, so you can analyze your online learning business alongside your product data.
 

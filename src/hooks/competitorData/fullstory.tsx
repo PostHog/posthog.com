@@ -3,7 +3,7 @@ export const fullstory = {
     key: 'fullstory',
     assets: {
         icon: '/images/competitors/fullstory.svg',
-        comparisonArticle: '/blog/posthog-vs-fullstory',
+        comparisonArticle: '/compare/posthog-vs-fullstory',
     },
     products: {
         replay_vision: {

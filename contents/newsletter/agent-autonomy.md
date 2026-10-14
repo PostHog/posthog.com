@@ -118,7 +118,7 @@ We’re going all-in at PostHog on making [self-driving](/docs/self-driving) mod
 
 - **Train domain-specific models.** Much of the next wave of tooling will be about improving verification tasks that are difficult for LLMs today. One obvious path is purpose-trained models that know what “good” looks like in a specific domain, which is why we’re [training our own AI models](/blog/training-ai-models) at PostHog.
 
-- **Build expert-level context banks.** A lack of agent autonomy is often just due to a context deficit. We learned firsthand from [engineering our context layer](/newsletter/context-engineering) for the PostHog Wizard that closing this gap with structured and fresh knowledge is one of the highest-leverage things you can build for reliable agents.
+- **Build expert-level context banks.** A lack of agent autonomy is often just due to [a context deficit](/newsletter/software-factories#what-software-factories-are-missing). We learned firsthand from [engineering our context layer](/newsletter/context-engineering) for the PostHog Wizard that closing this gap with structured and fresh knowledge is one of the highest-leverage things you can build for reliable agents.
 
 - **Design clear signals for scouts.** The bottleneck for long-running agents is going to be whether they know when there’s work worth doing, and how to distinguish valid [signals](/docs/self-driving/signals) from random noise.
 

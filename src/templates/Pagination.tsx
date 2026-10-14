@@ -21,6 +21,7 @@ const Pagination = ({
             <SEO title={`All ${title} posts - PostHog`} />
 
             <PostLayout article={false} title={title} hideSidebar hideSurvey menu={menu}>
+                <h1 className="sr-only">{title}</h1>
                 <Posts
                     title="All posts"
                     action={

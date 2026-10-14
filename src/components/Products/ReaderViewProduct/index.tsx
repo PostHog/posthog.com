@@ -11,7 +11,7 @@ import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTab
 import ProductSwitcher from './ProductSwitcher'
 import { templateRegistry } from './templates'
 
-export { default as buildProductMenuTabs } from './buildProductMenuTabs'
+export { default as buildProductMenuTabs, surfaceBasePath } from './buildProductMenuTabs'
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'
@@ -20,7 +20,7 @@ export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { ProductNavItem, SectionComponentProps } from './types'
 export type { MenuTab } from 'components/ReaderView'
-export { LabeledList, FilterTag, InlineCode } from './helpers'
+export { LabeledList, FilterTag, InlineCode, PRODUCT_SURFACE_H1 } from './helpers'
 
 interface ProductReaderViewProps {
     productHandle: string
@@ -108,7 +108,7 @@ export default function ProductReaderView({
             <SEO
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
-                image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                image={seoOverrides?.image || productData?.seo?.image || `/images/og/default.png`}
             />
             <ReaderView
                 title={productData?.name}

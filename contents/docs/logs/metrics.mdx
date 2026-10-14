@@ -1,0 +1,104 @@
+---
+title: Log-based metrics
+---
+
+> **Note:** Log-based metrics write into [application metrics](/docs/metrics), which is in alpha. Details may change before general availability.
+
+A log-based metric turns your logs into a metric time series at ingestion. You write a rule that counts the log lines matching a filter — or aggregates a numeric attribute on those lines — and PostHog emits the result into [Metrics](/docs/metrics), where you can chart it, alert on it, and query it.
+
+Rules run **before** [drop rules](/docs/logs/best-practices#drop-and-rate-limit-logs-in-posthog), so you can stop storing a noisy log stream and keep its trend.
+
+## When to use them
+
+- **Keep the signal, drop the volume.** Count health checks, retries, or cache misses, then drop the lines themselves.
+- **Chart something you already log.** Aggregate a numeric attribute like `duration_ms`, `batch.size`, or `bytes_written` without adding a metrics SDK.
+- **Cover a service that can't send metrics.** A third-party or legacy service that only emits logs still gets a metric.
+- **Watch a trend for longer than you keep logs.** Metrics outlive the log retention window.
+
+## Create a log-based metric
+
+There are two entry points:
+
+- **From settings.** Go to [**Settings** > **Environment** > **Logs** > **Log-based metrics**](https://app.posthog.com/settings/environment-logs#logs-metric-rules) and click **New metric**.
+- **From a log line.** In the logs viewer, hover a row and click **Create log-based metric**. The filters are prefilled with that line's service and severity.
+
+| Field | What it does |
+| --- | --- |
+| **Name** | The label shown in the rules list. |
+| **Metric name** | How the metric appears in Metrics, for example `log.api_errors`. It must start with a letter and contain only letters, digits, dots, underscores, and dashes. It is unique per project and **can't be changed after you save** — create a new rule to emit under a different name. |
+| **Value attribute** | Optional. A numeric log attribute to aggregate, for example `attributes.duration_ms`. Leave it empty to count matching lines. It sets the metric type, so it **can't be changed after you save**. |
+| **Filters** | Which log lines feed the metric. Match on service, severity, or any log attribute. Leave it empty to match every log. |
+| **Group by** | Optional dimension keys. Each distinct combination of values becomes its own series. |
+| **Enabled** | Whether ingestion evaluates the rule. Rules are created disabled, so you can review one before it emits. |
+
+The form shows a sparkline of the volume your filter matches over the last hour or day, so you can check a filter before you enable the rule.
+
+## Count metrics and value metrics
+
+Leaving **Value attribute** empty gives you a **counter** of matching log lines. Counters only go up, so chart them as a rate or an increase per bucket.
+
+Setting **Value attribute** gives you a **distribution**: PostHog records the count and the sum of that attribute, so you get a total and an average (sum ÷ count). Percentile buckets aren't recorded yet, so p95 and p99 aren't available on log-based metrics — send a [histogram](/docs/metrics/basics) directly if you need percentiles.
+
+The value must parse as a number. Lines where the attribute is missing or non-numeric are skipped for that rule. If the value is inside a JSON log body, turn on [**JSON parse logs**](https://app.posthog.com/settings/environment-logs#logs-json-parse) so the fields become attributes.
+
+## Group by and cardinality
+
+You can group by up to 5 keys:
+
+- `service_name`, `severity_text`, or `event_name`
+- any attribute prefixed with `attributes.` or `resource_attributes.`
+
+The prefix is removed from the label name, so `attributes.route` becomes a `route` label. `service_name` becomes the metric's service, the same place every other metric producer puts it.
+
+Keep the set of values bounded. Grouping by a user ID, request ID, or URL with IDs in it creates a series per value and the data becomes unusable. Ingestion protects itself here: it keeps at most **1,000 distinct label combinations per rule per batch**, and matching records above that limit aren't counted. Label values longer than 256 characters are truncated.
+
+## Where the metric appears
+
+The metric shows up in [Metrics](/docs/metrics) under the name you gave it, with a tag marking it as generated from logs. The tag links back to the logs the rule matches and to the rule in settings.
+
+From there it behaves like any other metric: put it on a dashboard, alert on it, or query it in SQL. When a matching log line carries a trace ID, the data point also carries an exemplar, so you can go from a spike to the trace behind it.
+
+## Where rules run in ingestion
+
+Log-based metric rules are evaluated during log ingestion, in this order:
+
+1. PII scrubbing and JSON parsing
+2. **Log-based metric rules**
+3. Drop rules and rate-limit rules
+4. Retention rules
+5. Storage
+
+What follows from that order:
+
+- **Dropped logs still count.** A line that a drop rule removes is already tallied, so dropping it doesn't create a gap in the metric.
+- **Only new logs count.** Rules aren't retroactive, and there's no backfill. A log line with a timestamp more than 20 minutes old never feeds a metric, so replaying old logs can't distort the current data point.
+- **Points land on 10-second buckets.**
+- **Emission is best-effort.** If the export of an aggregation window fails, that window is dropped rather than retried indefinitely — log ingestion is never blocked or delayed by metric emission.
+- **Logs dropped before ingestion never reach the rules.** If your project is over its logs quota, or a message is rate limited at the platform level, there's nothing to tally.
+
+Rules are defined per project and shared by all of its environments.
+
+## Limits
+
+| Limit | Value |
+| --- | --- |
+| Enabled rules per project | 10 |
+| Group-by keys per rule | 5 |
+| Label combinations per rule per batch | 1,000 |
+| Label value length | 256 characters |
+| Maximum age of a log line | 20 minutes |
+| Aggregation bucket | 10 seconds |
+
+## Manage rules with the API
+
+Rules are also available over the [Logs API](/docs/logs/surfaces/api) at `/api/projects/:project_id/logs/metric_rules/`, which supports list, retrieve, create, update, and delete. This is the way to keep rules in version control alongside the rest of your configuration.
+
+## Troubleshooting
+
+**The metric has no data points.** Check that the rule is enabled, and that its filter matches recent logs — the sparkline in the rule form and a [log search](/docs/logs/search) with the same filter both tell you. Also check the timestamps your service sends: lines older than 20 minutes are ignored.
+
+**A value metric stays at zero.** The attribute is probably missing or non-numeric on the matching lines. Open a matching log line and confirm the attribute exists as a number, and turn on JSON parsing if the field is inside the log body.
+
+**Series are missing.** Either the group-by attribute isn't set on those lines (the label comes out empty), or the rule is over the 1,000 label combination limit. Reduce the group-by keys, or filter more narrowly.
+
+**I need to change the metric name or value attribute.** Both are fixed after creation, because changing either would start a new series and orphan the old one. Create a new rule, and delete the old one once the new metric looks right.

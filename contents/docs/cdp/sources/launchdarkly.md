@@ -9,12 +9,6 @@ availability:
 sourceId: LaunchDarkly
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your LaunchDarkly access token to pull your projects, environments, feature flags, metrics, members, and audit log into the PostHog data warehouse.
 
 ## Adding a data source
