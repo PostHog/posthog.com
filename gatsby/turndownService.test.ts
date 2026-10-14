@@ -104,7 +104,7 @@ test('exports agent sections, code labels, and region metadata without page cont
     assert.ok(markdown.includes('`https://webhooks.eu.posthog.com` instead of `https://webhooks.us.posthog.com`'))
     assert.ok(
         markdown.includes(
-            '## On this page\n\n- [Install (recommended)](#install)\n- [Configure](#configure)\n- [Connect](#connect)'
+            '## On this page\n\n- [Install (recommended)](#install-recommended)\n- [Configure](#configure)\n- [Connect](#connect)'
         )
     )
     assert.ok(markdown.includes('```bash\nnpm install posthog-js\n```'))

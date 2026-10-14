@@ -455,10 +455,24 @@ function removeClientOnlyToggles(document: Document) {
     })
 }
 
+function headingSlug(headingText: string) {
+    return headingText
+        .toLowerCase()
+        .replace(/[^\p{L}\p{M}\p{N}\p{Pc} -]/gu, '')
+        .replace(/ /g, '-')
+}
+
+// Markdown renderers make heading anchors from the heading text (GitHub slugger), not from the HTML ids.
 function collectSectionAnchors(document: Document) {
-    return Array.from(document.querySelectorAll('h2[id]'))
-        .map((heading) => ({ id: heading.id, text: (heading.textContent ?? '').trim() }))
-        .filter((section) => section.text && !PAGE_FEEDBACK_HEADINGS.has(section.text))
+    const headingCountsBySlug = new Map<string, number>()
+    return Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).flatMap((heading) => {
+        const text = (heading.textContent ?? '').trim()
+        const baseSlug = headingSlug(text)
+        const earlierHeadingCount = headingCountsBySlug.get(baseSlug) ?? 0
+        headingCountsBySlug.set(baseSlug, earlierHeadingCount + 1)
+        if (heading.tagName !== 'H2' || !text || PAGE_FEEDBACK_HEADINGS.has(text)) return []
+        return [{ id: earlierHeadingCount === 0 ? baseSlug : `${baseSlug}-${earlierHeadingCount}`, text }]
+    })
 }
 
 function rewriteProseLines(markdown: string, rewriteLine: (line: string) => string) {
@@ -496,7 +510,7 @@ const US_TO_EU_HOST_SWAPS = [
 ]
 
 function mentionsHost(markdown: string, host: string) {
-    return new RegExp(`(?<![\\w.-])${host.replace(/\./g, '\\.')}(?![\\w-])`).test(markdown)
+    return new RegExp(`(?<![\\w.-])${host.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`).test(markdown)
 }
 
 function findUsOnlyHostSwaps(markdown: string) {
