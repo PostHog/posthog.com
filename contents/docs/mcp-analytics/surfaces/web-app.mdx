@@ -37,7 +37,14 @@ The sessions view lists MCP sessions in chronological order. Open a session to r
 
 Per-tool stats: call volume, error rate, latency, and the failure modes behind them. Select a tool to inspect its failed calls and error details.
 
-Select **Create fix task** to start a coding agent for a failing tool. Choose the repository where the agent works. The agent opens a pull request. This uses the same process as a [Self-driving](/docs/self-driving) report for a server you own.
+You can **Create fix task** to start a coding agent for a failing tool. 
+
+1. In the _Tool quality_ tab, pick a tool from the "All tools" table.
+2. Click _Full report_.
+3. On the _Failures_ table, click on any row. 
+4. On the modal window, you'll see most recent errored calls. Click **Create fix task** or copy details to hand to your coding agent.
+
+When creating a fix task, you can choose the repository where the agent works. The agent opens a pull request. This uses the same process as a [Self-driving](/docs/self-driving) report for a server you own.
 
 The button requires a connected GitHub integration. See [PostHog Desktop](/docs/mcp-analytics/surfaces/desktop) for the full process.
 
