@@ -69,12 +69,12 @@ The AI platform has three main layers:
 ### 1. User-facing products
 
 These are the AI features users interact with directly:
-- **[PostHog AI](/handbook/engineering/ai/products#posthog-ai)**: In-app conversational agent for interacting with PostHog
-- **[Deep research](/handbook/engineering/ai/products#deep-research)**: Automated investigative research for complex, open-ended problems
-- **[Session summaries](/handbook/engineering/ai/products#session-summaries)**: Batch analysis of session recordings to find patterns
-- **[PostHog Desktop](/handbook/engineering/ai/products#posthog-desktop)**: Agent development environment that gives each task its own isolated workspace
-- **[Wizard](/handbook/engineering/ai/products#wizard)**: CLI tool for automated PostHog installation and setup
-- **[MCP Server](/handbook/engineering/ai/products#mcp)**: Protocol integration for third-party AI tools like Claude Code
+- **[PostHog AI](/handbook/engineering/ai/products#posthog-ai-beta)**: In-app conversational agent for interacting with PostHog
+- **[Deep research](/handbook/engineering/ai/products#deep-research-under-development)**: Automated investigative research for complex, open-ended problems
+- **[Session summaries](/handbook/engineering/ai/products#session-summaries-alpha)**: Batch analysis of session recordings to find patterns
+- **[PostHog Desktop](/handbook/engineering/ai/products#posthog-desktop-under-development)**: Agent development environment that gives each task its own isolated workspace
+- **[Wizard](/handbook/engineering/ai/products#wizard-ai-powered-onboarding-general-availability)**: CLI tool for automated PostHog installation and setup
+- **[MCP Server](/handbook/engineering/ai/products#mcp-posthog-for-third-party-tools-general-availability)**: Protocol integration for third-party AI tools like Claude Code
 
 ### 2. Core infrastructure
 
@@ -101,7 +101,7 @@ Your primary interface for working with PostHog. Instead of clicking through for
 **Best for**: Quick answers, creating resources, learning PostHog, iterative exploration
 **Status**: Beta | **Pricing**: Paid with free tier
 
-[Learn more →](/handbook/engineering/ai/products#posthog-ai)
+[Learn more →](/handbook/engineering/ai/products#posthog-ai-beta)
 
 ### Deep research [Beta]
 When you need to investigate complex, open-ended problems, Deep research digs deep. It systematically explores your data — session recordings, analytics, error logs — and produces comprehensive research reports that would take a human analyst hours to create.
@@ -109,7 +109,7 @@ When you need to investigate complex, open-ended problems, Deep research digs de
 **Best for**: Understanding why metrics changed, investigating user behavior patterns, root cause analysis
 **Status**: Under development | **Pricing**: Paid with free tier
 
-[Learn more →](/handbook/engineering/ai/products#deep-research)
+[Learn more →](/handbook/engineering/ai/products#deep-research-under-development)
 
 ### Session summaries [Alpha]
 Analyze hundreds of session recordings in minutes instead of hours. Session summaries finds patterns, clusters similar issues, and shows you what's actually happening across your user sessions — not just what you caught in the first few recordings you watched.
@@ -117,7 +117,7 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 **Best for**: Understanding UX issues, debugging problems affecting multiple users, finding edge cases
 **Status**: Alpha | **Pricing**: Paid with free tier
 
-[Learn more →](/handbook/engineering/ai/products#session-summaries)
+[Learn more →](/handbook/engineering/ai/products#session-summaries-alpha)
 
 ### PostHog Desktop [Beta]
 An agent development environment that solves the messy workflow problem of engineering with coding agents. Each task gets its own isolated workspace where an agent works — you can guide the agent, review changes, and switch between workspaces, with everything related to a task in one place instead of across your terminal, editor, and GitHub.
@@ -125,7 +125,7 @@ An agent development environment that solves the messy workflow problem of engin
 **Best for**: Product engineers who work on multiple tasks simultaneously and already use agents heavily
 **Status**: Beta | **Pricing**: Usage-based (AI credits, no markup) with free tier
 
-[Learn more →](/handbook/engineering/ai/products#posthog-desktop)
+[Learn more →](/handbook/engineering/ai/products#posthog-desktop-under-development)
 
 ### Wizard [General availability]
 Get PostHog set up in minutes instead of hours. The Wizard detects your tech stack, generates integration code, verifies the installation, and gets you collecting data with minimal manual work.
@@ -133,7 +133,7 @@ Get PostHog set up in minutes instead of hours. The Wizard detects your tech sta
 **Best for**: New PostHog users, setting up new projects, quick integration
 **Status**: General availability | **Pricing**: Free
 
-[Learn more →](/handbook/engineering/ai/products#wizard)
+[Learn more →](/handbook/engineering/ai/products#wizard-ai-powered-onboarding-general-availability)
 
 ### MCP server [General availability]
 Bring PostHog into your development environment. The MCP server makes PostHog AI's features available to Claude Code, VS Code, and other MCP-compatible tools, so you never have to leave your editor to check analytics or create insights.
@@ -141,7 +141,7 @@ Bring PostHog into your development environment. The MCP server makes PostHog AI
 **Best for**: Engineers who prefer editor-based workflows, combining PostHog with other data sources
 **Status**: General availability | **Pricing**: Free
 
-[Learn more →](/handbook/engineering/ai/products#mcp)
+[Learn more →](/handbook/engineering/ai/products#mcp-posthog-for-third-party-tools-general-availability)
 
 ## Key concepts
 For a list of key concepts definitions, see the [Glossary](/handbook/engineering/ai/architecture#glossary).
@@ -150,7 +150,7 @@ For a list of key concepts definitions, see the [Glossary](/handbook/engineering
 
 ### For users
 - **Want to try PostHog AI?** Open the chat interface in PostHog and start asking questions. See [user documentation](/docs/posthog-ai).
-- **Prefer working in your editor or coding agent?** Set up the [MCP server](/handbook/engineering/ai/products#mcp) in Claude Code or VS Code.
+- **Prefer working in your editor or coding agent?** Set up the [MCP server](/handbook/engineering/ai/products#mcp-posthog-for-third-party-tools-general-availability) in Claude Code or VS Code.
 - **Need deep investigation?** Toggle to Deep research feature in PostHog AI.
 
 ### For engineers building AI features

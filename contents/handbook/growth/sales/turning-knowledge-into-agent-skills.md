@@ -40,7 +40,7 @@ The [context mill](/handbook/wizard-and-docs/context-mill) transforms handbook c
 - **Explain the "why"**: Context about when to use something helps the AI apply it correctly
 - **Use clear structure**: Headers, bullet points, and numbered steps work better than walls of text
 
-For example, the [Logs skill](https://github.com/PostHog/context-mill/blob/main/transformation-config/skills/logs/description.md) is just a root prompt with some [reference material](https://github.com/PostHog/context-mill/blob/main/transformation-config/skills/logs/config.yaml) – it's that simple.
+For example, the [Logs skill](https://github.com/PostHog/context-mill/blob/main/context/skills/logs/description.md) is just a root prompt with some [reference material](https://github.com/PostHog/context-mill/blob/main/context/skills/logs/config.yaml) – it's that simple.
 
 ### 3. Think about automation
 
@@ -68,7 +68,7 @@ npx -y @posthog/wizard@latest
 
 Here's what it does automatically:
 
-- Instruments multiple products like Product Analytics, Web Analytics, Session Replay, Error Tracking, and [others]((/docs/ai-engineering/ai-wizard))
+- Instruments multiple products like Product Analytics, Web Analytics, Session Replay, Error Tracking, and [others](/docs/ai-engineering/ai-wizard)
 - Installs the right SDKs for their stack
 - Scans their codebase to understand their product
 - Creates 10-15 custom events based on product flows it identifies

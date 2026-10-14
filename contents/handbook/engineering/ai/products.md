@@ -379,7 +379,7 @@ The Wizard is a CLI tool that runs locally in your development environment. Here
 
 5. **Next steps**: It suggests what to do next — track your first custom event, set up a dashboard, or explore session recordings.
 
-The entire experience uses Clack.cc for a polished CLI interface with clear prompts, progress indicators, and helpful error messages.
+The entire experience uses a terminal UI built on [Ink](https://github.com/vadimdemedes/ink) with clear prompts, progress indicators, and helpful error messages.
 
 ### Current capabilities
 
