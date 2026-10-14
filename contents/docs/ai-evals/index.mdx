@@ -4,7 +4,7 @@ title: Evaluations
 
 Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations). PostHog supports three types of evaluations:
 
-- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories, with reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
+- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories. Chat judges also provide written reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
 - **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result, a numeric score, or categories. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
 - **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
 
@@ -13,7 +13,7 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 - **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
 - **Detect problematic content** – Catch hallucinations, toxicity, or jailbreak attempts before they reach users.
 - **Track quality trends** – See pass rates across models, prompts, or user segments over time.
-- **Debug with reasoning** – Each evaluation provides an explanation for its decision, so you can see why a generation failed.
+- **Debug with reasoning** – Chat judges provide written reasoning, and Hog evaluations can include reasoning through `print()`. Typed decision judges return results without written reasoning.
 
 ## Choosing an evaluation type
 
@@ -22,7 +22,7 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 | **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations           |
 | **Cost**     | LLM API call per evaluation                                  | Free                                                       | Free                                                   |
 | **Speed**    | Seconds                                                      | Milliseconds                                               | Milliseconds                                           |
-| **Output**   | Pass/fail, numeric score, or categories with reasoning       | Pass/fail, numeric score, or categories with reasoning     | Positive, neutral, or negative with a confidence score |
+| **Output**   | Pass/fail, numeric score, or categories; written reasoning for chat judges | Pass/fail, numeric score, or categories; optional reasoning from `print()` | Positive, neutral, or negative with a confidence score |
 | **Setup**    | Write a prompt                                               | Write Hog code                                             | Pick the type – no prompt or code required             |
 
 ## Choosing what to evaluate
@@ -49,7 +49,7 @@ LLM-as-a-judge and code-based evaluations have an **Output type** setting. You p
 
 ### Numeric scores
 
-You can set a **Minimum** and **Maximum** score. A score outside these bounds is skipped, not graded. **Step** sets the score increment. PostHog asks an LLM judge to use it, but stores the score exactly as returned, so a judge can still return a value like `3.7` when the step is 1.
+You can set a **Minimum** and **Maximum** score. A score outside these bounds is skipped, not graded. **Step** suggests the score increment. PostHog asks an LLM judge to use it, but stores the score exactly as returned, so a judge can still return a value like `3.7` when the step is 1.
 
 To get pass rates and reports, turn on **Set a passing rule** and choose **At least (≥)** or **At most (≤)** a threshold. Without a passing rule, you still get the scores, but no pass rates or reports. If you change the rule later, PostHog applies the new rule to past results too.
 
@@ -72,11 +72,19 @@ With **Multiple categories**, you can also leave **Passing categories** empty. T
 
 If you change the passing categories later, PostHog applies them to past results too.
 
+### Not applicable results
+
+Turn on **Allow N/A responses** for a boolean, numeric, or categorical evaluation when its criteria don't apply to every generation. Both LLM judges and Hog evaluations support N/A. N/A results are excluded from pass/fail grading and pass rates.
+
+For LLM judges, describe when the criteria don't apply in your prompt. For Hog evaluations, return `null` to mark a result as N/A when **Allow N/A responses** is enabled.
+
+With **Multiple categories**, an empty list (`[]`) is a valid, applicable result that means no categories match. Its passing rule still determines whether it passes. It is different from `null`, which marks the result as N/A when enabled.
+
 ## LLM-as-a-judge evaluations
 
 ### How they work
 
-When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](#choosing-an-output-type) plus reasoning, which is stored and linked to the original generation.
+When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](#choosing-an-output-type), which is stored and linked to the original generation. Chat judges also return written reasoning. Typed decision judges don't return written reasoning.
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
@@ -195,7 +203,7 @@ Code-based evaluations run [Hog](/docs/hog) code you write against each generati
 2. On save, PostHog compiles your code to bytecode.
 3. When a generation is sampled, the code runs against it in PostHog's HogVM.
 4. Your code returns a result that matches the evaluation's [output type](#choosing-an-output-type). Use `print()` to add reasoning.
-5. If `allows_na` is enabled, returning `null` marks the result as N/A (not applicable).
+5. If **Allow N/A responses** is enabled, returning `null` marks the result as N/A (not applicable).
 
 Code-based evaluations share the same sampling rate and property filter options as LLM judge evaluations.
 
@@ -222,7 +230,7 @@ Your Hog code has access to these variables:
 6. Configure:
    - **Name**: A descriptive name for the evaluation
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
-   - **Allows N/A**: Whether your code can return `null` to skip inapplicable generations
+   - **Allow N/A responses**: Whether your code can return `null` to skip inapplicable generations
    - **Property filters** (optional): Narrow which generations to evaluate
 7. Enable the evaluation and click **Save**
 
@@ -286,7 +294,7 @@ print('Cost within budget: $' + toString(cost))
 return true
 ```
 
-**Return N/A for non-applicable generations** (requires `allows_na` enabled):
+**Return N/A for non-applicable generations** (requires **Allow N/A responses** enabled):
 
 ```hog
 let model := ifNull(properties.$ai_model, '')
@@ -372,7 +380,7 @@ This enables teams to manage evaluations programmatically from agent workflows w
 
 ## Viewing results
 
-The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual results and the reasoning from the evaluation.
+The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual results and any reasoning from the evaluation.
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
 
