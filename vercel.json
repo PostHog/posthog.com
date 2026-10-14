@@ -744,6 +744,26 @@
             "statusCode": 301
         },
         {
+            "source": "/news",
+            "destination": "/blog",
+            "statusCode": 301
+        },
+        {
+            "source": "/press",
+            "destination": "/media",
+            "statusCode": 301
+        },
+        {
+            "source": "/trust",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy-policy",
+            "destination": "/privacy",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
