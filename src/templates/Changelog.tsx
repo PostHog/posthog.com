@@ -22,7 +22,7 @@ import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
 import FactorySign from 'components/Changelog/FactorySign'
 import HumanCodedStarburst from 'components/Changelog/HumanCodedStarburst'
-import { getCodingStyle } from 'components/Changelog/codingStyle'
+import { isHumanCoded } from 'components/Changelog/isHumanCoded'
 import { colors } from '@posthog/brand/colors'
 import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -178,19 +178,17 @@ const Roadmap = ({
     roadmap,
     onClose,
     initialActiveRoadmap,
-    previewHumanCodedId,
 }: {
     roadmap: RoadmapNode
     onClose: () => void
     initialActiveRoadmap: RoadmapNode | null
-    previewHumanCodedId: string | null
 }) => {
     const { appWindow } = useWindow()
     const { isModerator, getJwt } = useUser()
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const docsPath = getChangelogDocsPath(roadmap)
-    const codingStyle = previewHumanCodedId === String(roadmap.id) ? 'human' : getCodingStyle(roadmap.tags)
+    const humanCoded = isHumanCoded(roadmap.tags)
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
 
@@ -241,10 +239,10 @@ const Roadmap = ({
     return (
         <motion.div
             className={`flex-shrink-0 max-w-full relative overflow-hidden shadow-2xl ${
-                codingStyle === 'human' ? 'human-coded-panel' : 'border-l border-primary bg-white dark:bg-dark'
+                humanCoded ? 'human-coded-panel' : 'border-l border-primary bg-white dark:bg-dark'
             }`}
             style={
-                codingStyle === 'human'
+                humanCoded
                     ? ({
                           '--human-coded-foil-light': humanCodedFoilGradient,
                           '--human-coded-foil-dark': humanCodedFoilGradientDark,
@@ -266,24 +264,20 @@ const Roadmap = ({
             >
                 <div
                     className={`@container relative flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary ${
-                        codingStyle === 'human' ? 'human-coded-panel-header' : ''
+                        humanCoded ? 'human-coded-panel-header' : ''
                     }`}
                 >
                     <div className="min-w-0 flex-1">
-                        <h4
-                            className={`m-0 text-lg leading-tight ${
-                                codingStyle === 'human' ? 'human-coded-panel-title' : ''
-                            }`}
-                        >
+                        <h4 className={`m-0 text-lg leading-tight ${humanCoded ? 'human-coded-panel-title' : ''}`}>
                             {roadmap.title}
                         </h4>
                         <div className="mt-1">
-                            <p className={`m-0 text-sm ${codingStyle === 'human' ? 'opacity-70' : 'opacity-50'}`}>
+                            <p className={`m-0 text-sm ${humanCoded ? 'opacity-70' : 'opacity-50'}`}>
                                 {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
                             </p>
                         </div>
                     </div>
-                    {codingStyle === 'human' && (
+                    {humanCoded && (
                         <div className="human-coded-panel-starburst pointer-events-none absolute right-14 top-1">
                             <HumanCodedStarburst />
                         </div>
@@ -312,7 +306,7 @@ const Roadmap = ({
                         <OSButton size="md" icon={<IconX />} onClick={handleClose} />
                     </aside>
                 </div>
-                <div className={`flex-1 min-h-0 ${codingStyle === 'human' ? 'human-coded-panel-body' : ''}`}>
+                <div className={`flex-1 min-h-0 ${humanCoded ? 'human-coded-panel-body' : ''}`}>
                     <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
                         {roadmap.media?.gatsbyImageData && (
                             <div className="mt-4 px-4 not-prose">
@@ -406,9 +400,10 @@ const Roadmap = ({
                 {roadmap.githubPRMetadata && (
                     <div
                         className={`px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm border-t border-primary ${
-                            codingStyle === 'human' ? 'human-coded-panel-footer' : 'bg-primary'
+                            humanCoded ? 'human-coded-panel-footer' : 'bg-primary'
                         }`}
                     >
+                        {/* Coding origin affects the card styling, not the six PR stats. */}
                         <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
@@ -416,7 +411,7 @@ const Roadmap = ({
                 {roadmap.cta?.url && (
                     <div
                         className={`mt-auto py-2 px-4 border-t border-primary ${
-                            codingStyle === 'human' ? 'human-coded-panel-footer' : ''
+                            humanCoded ? 'human-coded-panel-footer' : ''
                         }`}
                     >
                         <OSButton
@@ -541,7 +536,6 @@ interface RoadmapCardsProps {
     initialActiveRoadmap: RoadmapNode | null
     videos: ChangelogVideo[]
     humanCodedSince: string | null
-    previewHumanCodedId: string | null
 }
 
 const ChangelogVideo = ({ videoId, title }: { videoId: string; title: string }) => {
@@ -568,7 +562,6 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
     humanCodedSince,
-    previewHumanCodedId,
 }: RoadmapCardsProps) => {
     const { addWindow } = useApp()
     const width = 340
@@ -687,11 +680,7 @@ const RoadmapCards = ({
             const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
             if (viewport) scrollSignBehindRoadmap(viewport)
         }
-        const previewQuery =
-            process.env.NODE_ENV === 'development' && previewHumanCodedId
-                ? `&previewHumanCoded=${encodeURIComponent(previewHumanCodedId)}`
-                : ''
-        navigate(`?id=${roadmap.id}${previewQuery}`)
+        navigate(`?id=${roadmap.id}`)
         onRoadmapClick(roadmap)
     }
 
@@ -917,9 +906,7 @@ const RoadmapCards = ({
                                             ) : (
                                                 weekData.roadmaps.map((roadmap) => {
                                                     const active = activeRoadmap?.id === roadmap.id
-                                                    const humanCoded =
-                                                        previewHumanCodedId === String(roadmap.id) ||
-                                                        getCodingStyle(roadmap.tags) === 'human'
+                                                    const humanCoded = isHumanCoded(roadmap.tags)
                                                     const teamName = roadmap.teams?.data?.[0]?.attributes?.name
                                                     const crestUrl =
                                                         roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
@@ -1028,12 +1015,6 @@ export default function Changelog({
     const [activeRoadmap, setActiveRoadmap] = useState<RoadmapNode | null>(initialActiveRoadmap)
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
-    const [previewHumanCodedId, setPreviewHumanCodedId] = useState<string | null>(null)
-    useEffect(() => {
-        if (process.env.NODE_ENV !== 'development' || !href) return
-        const previewId = new URL(href).searchParams.get('previewHumanCoded')
-        if (previewId) setPreviewHumanCodedId(previewId)
-    }, [href])
     const [categoryFilter, setCategoryFilter] = useState('all')
     // Two-pass render: SSR (and the first client render) show the static, crawlable list;
     // the virtualized cards UI takes over after mount. Both passes agree, so hydration is safe.
@@ -1063,9 +1044,7 @@ export default function Changelog({
     // The sign counts from the most recent human-coded entry.
     const humanCodedSince = useMemo(() => {
         const timestamp = (roadmap: RoadmapNode) => new Date(roadmap.publishedAt || roadmap.date).getTime()
-        const humanCoded = data.allRoadmap.nodes.filter(
-            (roadmap: RoadmapNode) => getCodingStyle(roadmap.tags) === 'human'
-        )
+        const humanCoded = data.allRoadmap.nodes.filter((roadmap: RoadmapNode) => isHumanCoded(roadmap.tags))
         if (humanCoded.length === 0) return humanCodedBaseline
         const since = Math.max(...humanCoded.map(timestamp))
         return new Date(since).toISOString()
@@ -1211,11 +1190,7 @@ export default function Changelog({
 
     const handleRoadmapClose = () => {
         setActiveRoadmap(null)
-        navigate(
-            process.env.NODE_ENV === 'development' && previewHumanCodedId
-                ? `?previewHumanCoded=${encodeURIComponent(previewHumanCodedId)}`
-                : ''
-        )
+        navigate('')
     }
 
     const handleRoadmapClick = (roadmap: RoadmapNode) => {
@@ -1302,7 +1277,6 @@ export default function Changelog({
                                     initialActiveRoadmap={initialActiveRoadmap}
                                     videos={playlistVideos}
                                     humanCodedSince={humanCodedSince}
-                                    previewHumanCodedId={previewHumanCodedId}
                                 />
                             )}
                         </div>
@@ -1335,7 +1309,6 @@ export default function Changelog({
                                 roadmap={activeRoadmap}
                                 onClose={handleRoadmapClose}
                                 initialActiveRoadmap={initialActiveRoadmap}
-                                previewHumanCodedId={previewHumanCodedId}
                             />
                         )}
                     </AnimatePresence>
