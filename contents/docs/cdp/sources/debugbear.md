@@ -12,9 +12,6 @@ sourceId: Debugbear
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The DebugBear connector syncs your website performance monitoring data – projects and synthetic Lighthouse / Core Web Vitals test results – into the PostHog Data Warehouse. This lets you analyze web performance metrics alongside your product data, join performance scores with user behavior, and track Core Web Vitals trends over time.
 

@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Cody
-beta: true
 ---
 
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Cody connector syncs your team's Sourcegraph Analytics data into the PostHog Data warehouse: per-user usage reports for Cody and Code Search (chats, completions, acceptance rates, searches, code navigation) plus credit consumption. Use it to analyze AI coding assistant adoption and seat utilization alongside your product data.
 

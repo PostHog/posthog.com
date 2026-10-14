@@ -12,9 +12,6 @@ sourceId: LlamaCloud
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The LlamaCloud connector syncs your document-processing data from [LlamaCloud](https://cloud.llamaindex.ai) (LlamaIndex's hosted platform) – parse, extract, classify, split, and spreadsheet jobs, batches, pipelines, projects, files, and usage metrics with credit consumption – into PostHog, so you can analyze your document pipelines and AI costs alongside your product data.
 

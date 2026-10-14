@@ -8,7 +8,7 @@
         "unordered(excerpt)"
     ],
     "customRanking": ["asc(path_ranking)", "desc(fields.pageViews)"],
-    "attributesForFaceting": ["type"],
+    "attributesForFaceting": ["type", "isForum", "forumTopic", "forumTags"],
     "unretrievableAttributes": ["fields.pageViews", "headings", "rawBody"],
     "minProximity": 2,
     "removeWordsIfNoResults": "lastWords"

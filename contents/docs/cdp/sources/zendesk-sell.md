@@ -12,9 +12,6 @@ sourceId: ZendeskSell
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Zendesk Sell connector syncs your Sell (formerly Base CRM) data into the PostHog Data warehouse, so you can analyze your sales pipeline alongside your product data.
 

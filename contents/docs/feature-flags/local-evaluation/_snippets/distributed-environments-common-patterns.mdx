@@ -34,3 +34,5 @@ This separates the concerns entirely. One process writes, all others read.
 A complete working example written in TypeScript is available in the [posthog-js repository](https://github.com/PostHog/posthog-js/tree/main/examples/example-cloudflare-kv-cache). It uses the split read/write pattern described above. The worker's scheduled job writes flag definitions to KV, and request handlers read from it.
 
 This pattern is ideal for high-traffic edge applications where flag evaluation must be extremely fast and you can tolerate flag updates being slightly delayed.
+
+If you use local evaluation inside a Durable Object, a shared cache does not remove the SDK's polling timer. See [Durable Objects and local evaluation](/docs/libraries/cloudflare-workers#durable-objects-and-local-evaluation) to disable automatic polling and choose when to refresh the client's in-memory definitions.

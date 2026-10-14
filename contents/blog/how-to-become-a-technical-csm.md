@@ -3,7 +3,7 @@ title: "I became a technical CSM with ZERO training. You can too."
 date: 2026-09-29
 author:
   - ella-cullen
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/technical_csm_7fa0b9be5c.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/How_to_become_a_technical_CSM_fef91d63d1.png
 featuredImageType: full
 tags:
   - Inside PostHog
@@ -62,4 +62,4 @@ If you are a master in a particular area, that will absolutely help. Your fellow
 
 Your job is to understand how the pieces fit together and be an expert on how they can get the most value from your platform (which, yes, if you're lucky and you work somewhere with high trust, can also mean [shipping bug fixes and features to production](/product-engineers/testing-in-production)).
 
-If the above sounds like you – curious, stubborn about working things out, and excited about technical concepts – technical customer success might suit you. Oh and [PostHog is hiring for this exact role right now](/careers/technical-customer-success-manager). Wow, what a crazy coincidence.
+If the above sounds like you – curious, stubborn about working things out, and excited about technical concepts – technical customer success might suit you. Oh and PostHog is hiring for this exact role right now in both [NA](/careers/technical-customer-success-manager-americas) and [EU](/careers/technical-customer-success-manager-emea). Wow, what a crazy coincidence.

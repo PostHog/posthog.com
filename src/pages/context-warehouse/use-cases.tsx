@@ -10,7 +10,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import { IconTrending, IconWarning, IconTarget, IconDatabase } from '@posthog/icons'
-import { HedgehogChartHog, HedgehogDocBrown } from '@posthog/brand/hoggies'
+import { HedgehogChart, HedgehogDocBrown } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -335,7 +335,7 @@ function UseCases(): JSX.Element {
                                 </div>
                             </div>
                             <div className="hidden justify-center @lg/reader-content:flex">
-                                <HedgehogChartHog size={280} className="w-full max-w-[280px]" />
+                                <HedgehogChart size={280} className="w-full max-w-[280px]" />
                             </div>
                         </div>
                     </div>

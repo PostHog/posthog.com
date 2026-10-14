@@ -2,8 +2,8 @@
 title: "Customizing destinations"
 showTitle: true
 ---
-Although we recommend using one of our pre-built destinations, you can also customize them and build your own. 
 
+Although we recommend using one of our pre-built destinations, you can also customize them and build your own.
 
 ## Customizing payload
 
@@ -112,6 +112,7 @@ Below is the structure of the global variables available whenever templating a d
         url: string  // A URL to view it in PostHog
     }
     source?: {
+        id: string   // The unique ID of the hog function
         name: string // The name of the source (typically the destination name)
         url: string  // A URL to view it in PostHog
     }
@@ -126,16 +127,17 @@ For example, to add a "Replay" button to your Slack message, you can add this bl
 
 ```json
 {
-    "url": "{project.url}/replay/{event.properties.$session_id}?t={event.timestamp}",
-    "text": {
-        "text": "Replay",
-        "type": "plain_text"
-    },
-    "type": "button"
+  "url": "{project.url}/replay/{event.properties.$session_id}?t={event.timestamp}",
+  "text": {
+    "text": "Replay",
+    "type": "plain_text"
+  },
+  "type": "button"
 }
 ```
 
 This creates a button in your Slack message that links directly to the session recording at the exact timestamp when the event occurred. The URL is constructed using:
+
 - `{project.url}` - The base URL of your PostHog instance
 - `{event.properties.$session_id}` - The session ID from the event
 - `{event.timestamp}` - The timestamp when the event occurred
@@ -144,7 +146,7 @@ For this to work the event must have the `session_id` as property on the event a
 
 ## Modifying destinations with Hog
 
-For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure. 
+For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure.
 
 You can, however, modify any destination by clicking `show source code`. From here you can modify the inputs – for example marking an input as secret so that it is encrypted as rest – or changing the implementation of the destination itself.
 

@@ -25,7 +25,7 @@ export const workflows = {
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
-    forumTopicId: 392, // /questions/topic/workflows squeakId
+    forumTag: 'workflows',
     color: 'teal',
     colorSecondary: 'green-2',
     includeAddonRates: true,

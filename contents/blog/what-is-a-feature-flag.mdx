@@ -165,7 +165,7 @@ When you're staring at a product change and wondering which tool to use, run thr
 
 PostHog is transparent about where its feature management capabilities have gaps, and it's worth knowing before you commit:
 
-- **Not real-time.** Flag changes and config updates require a page or app refresh to take effect. PostHog SDKs [handle polling automatically](/docs/feature-flags/local-evaluation), but changes won't be instant.
+- **Not instant.** Flag and config changes take effect when the SDK fetches updated values. JavaScript [refreshes them periodically](/docs/libraries/js/config), and you can call `posthog.reloadFeatureFlags()` without reloading the page. Server-side [local evaluation](/docs/feature-flags/local-evaluation) follows its configured polling interval.
 - **No mutex groups.** If you run many overlapping experiments at scale, PostHog can't isolate them from each other yet. Variance reduction is covered – you can turn on [CUPED](/docs/experiments/cuped) for the whole project, or for a single experiment.
 - **Dynamic cohort targeting limitations.** You can't target flags to cohorts with dynamic attributes (like "users who did X in the last 7 days"), only static, which can be limiting for behavioral targeting use cases.
 

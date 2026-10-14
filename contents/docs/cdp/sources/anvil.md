@@ -12,9 +12,6 @@ sourceId: Anvil
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Anvil connector syncs organizations, casts, welds, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 

@@ -9,12 +9,6 @@ availability:
 sourceId: Brex
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Brex connector syncs your spend data – card and cash transactions, expenses, users, departments, locations, vendors, and budgets – into PostHog.
 
 ## Adding a data source

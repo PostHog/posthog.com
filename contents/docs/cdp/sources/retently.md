@@ -12,9 +12,6 @@ sourceId: Retently
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Retently connector syncs your customer feedback data – survey responses, customers, companies, campaigns, templates, sent surveys, and campaign reports – into the PostHog Data warehouse, so you can analyze NPS, CSAT, and CES results alongside your product data.
 

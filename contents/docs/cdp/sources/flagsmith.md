@@ -12,9 +12,6 @@ sourceId: Flagsmith
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Sync your Flagsmith projects, environments, feature flags, flag states, segments, organization members, and audit log into the PostHog data warehouse, so you can correlate rollouts with product metrics and track who changed what, when.
 

@@ -1,0 +1,70 @@
+---
+title: Error tracking
+description: Error tracking collects the exceptions a running application throws, groups the duplicates into issues, and attaches the context needed to diagnose them. PostHog Error Tracking links each issue to the session replay and the events from the same session.
+hogpedia:
+    categories: ['Products']
+    aliases: ['Errors', 'Exceptions', 'Exception tracking']
+    infobox:
+        title: Error tracking
+        hog: HedgehogPanic
+        rows:
+            - label: Type
+              value: Diagnostic tool
+            - label: Answers
+              value: What is broken, and for whom?
+            - label: Groups by
+              value: Issue
+            - label: Documentation
+              value: '[/docs/error-tracking](/docs/error-tracking)'
+    seeAlso:
+        - 'Session replay|/hogpedia/session-replay'
+        - 'Product analytics|/hogpedia/product-analytics'
+        - 'Product engineering|/hogpedia/product-engineering'
+    references:
+        - id: 1
+          text: 'PostHog documentation, Error tracking'
+          url: /docs/error-tracking
+        - id: 2
+          text: 'PostHog Error Tracking'
+          url: /error-tracking
+    external:
+        - title: 'PostHog Error Tracking'
+          url: /error-tracking
+        - title: 'Error tracking documentation'
+          url: /docs/error-tracking
+---
+
+**Error tracking** collects the exceptions that a running application throws, groups duplicates of the same fault into a single *issue*, and records the context needed to diagnose each one. **Error Tracking** is also the name of the PostHog product that does this.<Ref id="2" />
+
+## What problem it solves
+
+An application in production fails in ways its developers did not anticipate, on devices and in states they do not have. The failures reach a log file, where a single fault appears thousands of times and a rare fault is buried under a common one.
+
+Error tracking solves three specific parts of this:
+
+- **Volume.** Thousands of occurrences of one fault become one issue with a count.
+- **Priority.** An issue that affects many people, or has just started, can be separated from one that has been rare for a year.
+- **Context.** A stack trace alone rarely explains a fault. What the person was doing beforehand usually does.
+
+## How it works in PostHog
+
+An exception is captured as an event, in the same stream as everything else.<Ref id="1" /> PostHog then groups the occurrences into an issue, and each issue carries:
+
+- The stack trace, resolved back to the original source where source maps have been uploaded.
+- The count over time, so a new or growing issue is visible.
+- The people affected, and their properties.
+- The [session replay](/hogpedia/session-replay) of the session that threw it.
+- The events that preceded it in that session.
+
+The last two are the part that is specific to PostHog. Because errors and recordings are the same data, an engineer can watch the person hit the fault, rather than reconstruct the sequence from a trace.
+
+Issues can be assigned, resolved, and suppressed, and an alert can be raised when an issue is created, reopened, or starts to spike.<Ref id="1" />
+
+## How it relates to other PostHog products
+
+| Product | Relationship |
+| --- | --- |
+| [Session replay](/hogpedia/session-replay) | Each issue links to the recording of a session that produced it. |
+| [Product analytics](/hogpedia/product-analytics) | Exceptions are events, so they can be counted, broken down, and put in a funnel. |
+| [Feature flags](/hogpedia/feature-flags) | An issue can be traced to a variant, which identifies a release as the cause. |
+| Logs | Application logs sit beside the exceptions, in the same place. |

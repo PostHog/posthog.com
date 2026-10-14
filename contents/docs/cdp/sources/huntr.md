@@ -11,12 +11,6 @@ sourceId: Huntr
 
 The Huntr connector syncs your recruiting and job search tracking data into PostHog, including members, advisors, candidates, jobs, job posts, employers, activities, and actions.
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in alpha. Endpoint behavior was verified against Huntr's public Organization API documentation but hasn't been tested against every edge case in production. If you run into issues, please let us know.
-
-</CalloutBox>
-
 ## Creating a Huntr access token
 
 Huntr uses Bearer token authentication with an organization access token. The token grants read access to your organization's data.

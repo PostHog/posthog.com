@@ -162,7 +162,7 @@ PostHog partners with GitHub to automatically detect exposed API keys in public 
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
 - **Project secret API keys** (`phs_`): The key is automatically rolled and project admins and owners are notified via email.
-- **Team secret tokens** (legacy, also `phs_`): Project admins and owners are notified via email so they can rotate the token.
+- **Feature flags secure API keys** (legacy, also `phs_`): Project admins and owners are notified via email. To revoke a leaked key, rotate it and then delete the backup key, since the backup stays active.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
