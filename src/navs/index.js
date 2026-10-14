@@ -6520,7 +6520,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Requirements',
+                    name: 'Before answers',
                     url: '/docs/business-knowledge/requirements',
                     icon: 'IconListCheck',
                     color: 'orange',
@@ -6532,13 +6532,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Playground',
-                    url: '/docs/business-knowledge/playground',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                },
-                {
-                    name: 'More sources',
+                    name: 'Where to use',
                 },
                 {
                     name: 'GitHub repositories',
@@ -6551,6 +6545,12 @@ export const docsMenu = {
                     url: '/docs/business-knowledge/learn-from-support',
                     icon: 'IconSupport',
                     color: 'teal',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/business-knowledge/playground',
+                    icon: 'IconSparkles',
+                    color: 'purple',
                 },
             ],
         },

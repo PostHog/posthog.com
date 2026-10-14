@@ -8,16 +8,17 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-When Learn from support is on, PostHog turns the replies your team writes on resolved support tickets into learned sources. The next time someone asks the same question, answers can reuse what your team already said.
+Learn from support is a Business Knowledge setting. When it's on, PostHog learns reusable answers from resolved support tickets.
+
+The setting is off by default. Turn it on in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). The settings title there is **Self-learning**.
 
 ## Enable learning
 
-Learning is off by default, and it needs two things first:
+Learning reads resolved [Support](/docs/support/start-here) tickets, so [turn Support on](https://app.posthog.com/support/settings) in the same environment before you enable learning.
 
-- [Support](/docs/support/start-here) [turned on](https://app.posthog.com/support/settings) in the same environment, because learning reads resolved Support tickets. While Support is off, the switch stays disabled.
-- [AI data processing](/docs/business-knowledge/requirements) approved for the organization, because a model analyzes each reply.
+If Support is off, the switch stays disabled and links to Support settings. You can still turn learning off if it was already on.
 
-Then turn on **Learn from support** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). In project settings, the same switch is named **Self-learning**.
+Learning also needs [AI data processing](/docs/business-knowledge/requirements) approved for the organization. If it's off, PostHog doesn't analyze resolved tickets.
 
 ## How learning runs
 
@@ -28,32 +29,25 @@ stateDiagram-v2
     Off --> Waiting: Learning turned on
     Waiting --> Checking: Ticket resolved
     Checking --> Learned: Reply is reusable
-    Checking --> Skipped: Not reusable, sensitive, or already known
-    Learned --> Disabled: A newer learned answer contradicts it
+    Checking --> Skipped: Reply is skipped
+    Learned --> Disabled: A later reply contradicts it
     Learned --> [*]
     Skipped --> [*]
     Disabled --> [*]
 ```
 
-Every five minutes, PostHog looks for resolved tickets. It waits until at least five minutes have passed since a ticket's last update or last public reply from a person, and it reads tickets from every environment where Support is on.
+PostHog checks for resolved tickets every five minutes. It waits at least five minutes after the ticket is last updated or receives a public reply from a person. It reads those replies from each environment where Support is on.
 
-A public reply from a person is the only text PostHog learns from. It skips private notes, customer messages, deleted replies, and AI replies, so an internal note or an AI draft never becomes a source.
+A public reply from a person is the only text PostHog learns from. Private notes, customer messages, deleted replies, and AI replies are skipped, so an internal note or an AI draft never becomes a source.
 
-PostHog checks each reply for reusable information, personal data, secrets, and overlap with what Business Knowledge already holds. Each accepted answer becomes a learned source, named after its topic. You can open, edit, or delete a learned source like any other source. If PostHog analyzes the same ticket again, it doesn't change a source that already exists.
+PostHog checks each reply for reusable information, personal data, secrets, and overlap with existing Business Knowledge. It adds accepted answers as their own learned sources, named after the topic. You can open, edit, or delete a learned source. PostHog doesn't change a source that already exists when it analyzes the same ticket again.
 
-## When a new answer contradicts an old one
+If a later reply contradicts an earlier learned source, PostHog keeps the newer answer and disables the older learned source so it stops being used in replies. PostHog keeps the older source and its content, and records the change in the activity log. PostHog only replaces a learned source that holds one document, so a crawled site with many pages stays as it is. PostHog never disables a source you wrote this way. It keeps that source and skips the newer answer.
 
-- **The old answer is a learned source:** PostHog keeps the newer answer and disables the old source. The old source keeps its content, shows **disabled**, and answers stop using it. The activity log records the change.
-- **The old answer is a source that a person added:** PostHog keeps that source and discards the new answer. Only a person changes a source that a person wrote.
+A project can have up to 10,000 learned sources. After that, PostHog doesn't add new answers until you delete some.
 
-PostHog only disables a learned source that holds one document, because disabling a larger source would also hide its other documents. When the old source holds more than one document, PostHog discards the new answer.
-
-## Find learned sources
-
-On the sources list, filter by **Learned**. Each learned source links to the ticket it came from. In the Playground, answers mark this text as learned from support.
-
-A project can have up to 10,000 learned sources, and they don't count toward the 500 sources you can add yourself. At 10,000, PostHog stops adding answers until you delete some.
+Learned sources don't count toward the 500 sources you add yourself. On the sources list, filter **Learned** to see them. A learned row links to the ticket it came from. In the Playground, that text is labeled as learned from support.
 
 ## Turn learning off
 
-Turn off **Learn from support** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings) to stop new learning. Learned sources stay until you delete them.
+Turn off Learn from support in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings) to stop new analysis. Sources already learned stay in Business Knowledge until you delete them. Open a learned source and delete it to remove that answer.

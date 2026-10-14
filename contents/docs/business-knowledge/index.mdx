@@ -11,49 +11,51 @@ import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 <PrivateBeta />
 
-Business Knowledge is what PostHog knows about your company: your policies, your pricing, your docs, and the answers your team already gave. PostHog AI, Support, and your own agents read the same sources, so a fact you add once is available everywhere.
-
-Answers stay empty until [two requirements](/docs/business-knowledge/requirements) are met, so start there.
+Business Knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business Knowledge MCP tools all read the same sources.
 
 <OSButton variant="primary" asLink to="/docs/business-knowledge/start">Get started</OSButton>
 
-## Questions it answers
+## Where you can use it
 
-- A customer asks about your refund rules. Support drafts the reply from the refund policy you pasted.
-- A teammate asks PostHog AI which plan includes a limit. PostHog AI answers from your pricing page.
-- Every reply must use the same tone. Turn on **Always include in replies** for your tone guide.
-- Your docs site changes. A URL source that refreshes every day picks up the new pages.
-- Your team answered the same support question last week. With [Learn from support](/docs/business-knowledge/learn-from-support) on, Support can reuse that answer.
-- Your handbook lives in GitHub. [Connect that repository](/docs/business-knowledge/github), and answers can find the right file by name and read it.
-
-## Where answers use it
+Add sources in PostHog. PostHog AI, Support, and MCP then read those same sources.
 
 <SurfaceCards columns={2}>
 
-<SurfaceCard icon="IconLaptop" color="blue" title="Playground" url="/docs/business-knowledge/playground" cta="Try the Playground">
-Ask a question to see what this project already knows, and what's missing.
+<SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/business-knowledge/start" cta="Add a source">
+Add a text source, a public page, or a file, then ask in the Playground what's covered and what's missing.
 </SurfaceCard>
 
 <SurfaceCard icon="IconSparkles" color="purple" title="PostHog AI" url="/docs/posthog-ai" cta="Ask PostHog AI">
-PostHog AI searches your sources when a question is about your product, policies, or team.
+PostHog AI searches these sources when a question is about your product, policies, or team.
 </SurfaceCard>
 
 <SurfaceCard icon="IconSupport" color="teal" title="Support" url="/docs/business-knowledge/learn-from-support" cta="Learn from support">
-Support searches your sources when it drafts a reply.
+Support reads the same sources when it drafts a reply.
 </SurfaceCard>
 
 <SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/model-context-protocol/tools" cta="MCP tools reference">
-Your own agent can search sources, read the text around a match, and add or update sources. The tools need the `business_knowledge:read` or `business_knowledge:write` scope.
+Search sources, read the surrounding text, and add or update a source. The tools need the `business_knowledge:read` or `business_knowledge:write` scope.
 </SurfaceCard>
 
 </SurfaceCards>
 
-## Types of sources
+## Where knowledge comes from
 
 | Source | What you add | Guide |
 | --- | --- | --- |
-| Text | A policy, an FAQ, or any other text you paste | [Add text](/docs/business-knowledge/sources#add-text) |
-| URL | A public page, a sitemap, or a crawl of one site | [Add a URL](/docs/business-knowledge/sources#add-a-url) |
-| File | A PDF, DOCX, Markdown, CSV, or plain text file | [Upload a file](/docs/business-knowledge/sources#upload-a-file) |
+| Text | A policy, an FAQ, or any other text you paste | [Text](/docs/business-knowledge/sources#text) |
+| URL | A public page, a sitemap, or a crawl of one site | [URL](/docs/business-knowledge/sources#url) |
+| File | A PDF, DOCX, Markdown, CSV, or plain text file | [File](/docs/business-knowledge/sources#file) |
 | Learned | Reusable answers from resolved support tickets | [Learn from support](/docs/business-knowledge/learn-from-support) |
-| GitHub | Repositories you select. Answers search file names and READMEs, and then read a file. The code isn't indexed. | [GitHub repositories](/docs/business-knowledge/github) |
+| GitHub | Selected repositories. File names and the README are searched, then a file is read. The code isn't indexed. | [GitHub repositories](/docs/business-knowledge/github) |
+
+## Use cases
+
+- A customer asks for your refund rules. The reply comes from the refund policy you pasted or from the page you indexed.
+- Someone asks PostHog AI which plan includes a limit. The answer comes from your pricing page.
+- Every reply should follow the same tone. Turn on **Always include in replies** for that source.
+- Your docs site changes. A URL source on a daily refresh picks up the new pages.
+- A human resolved the same support question last week. With [Learn from support](/docs/business-knowledge/learn-from-support) on, that answer can be reused.
+- The handbook lives in GitHub. Select that repository and an agent can find the file by name, then read it.
+
+Answers stay empty until two checks pass. See [Before answers can use a source](/docs/business-knowledge/requirements).

@@ -8,34 +8,41 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-Use the Playground to see what Business Knowledge knows right now, and what's missing. Ask a question that a customer or teammate would ask. The answer uses only this project's sources, so a missing or wrong answer tells you which source to add or fix.
+The Playground shows what Business Knowledge holds right now, and what's missing. Ask a question a customer or teammate would ask. The answer uses only the sources in this project.
 
-Open the [Playground](https://app.posthog.com/business-knowledge/playground). It needs [AI data processing](/docs/business-knowledge/requirements) approved for the organization. Until it's approved, PostHog refuses each question with `Enable AI data processing before asking another question.`
+If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
 
-Only you can see your chats. The list groups them by when you last used them.
+Open [**Business Knowledge**](https://app.posthog.com/business-knowledge/playground) and choose the **Playground** tab.
 
-## What the answer can read
+Your chats are visible to you. They're grouped by when they were last used: today, yesterday, the last 7 days, the last 30 days, and older.
 
-The answer uses only this project's Business Knowledge. The thread shows each step it takes:
+## Ask a question
 
-| Step | What it does |
-| --- | --- |
-| **Searched business knowledge** | Searches your sources |
-| **Read document context** | Reads more of a document around a match |
-| **Searched repositories** | Searches file names and README text in your [GitHub repositories](/docs/business-knowledge/github). This step runs only when the search of your sources finds nothing. |
-| **Read file** | Reads one file from a repository |
+Type a question and submit it. The placeholder is **Ask anything about your business using this project's business knowledge**.
 
-Text marked as learned from support comes from a reply your team wrote on a resolved ticket, not from a source you added.
+The Playground needs [AI data processing](/docs/business-knowledge/requirements) approved for the organization. If it's off, the request is refused with: `Enable AI data processing before asking another question.`
 
-Sources with **Always include in replies** turned on are part of every answer, even when they don't match the question.
+## What the answer is allowed to read
 
-## Fix a wrong answer
+The answer is limited to this project's Business Knowledge.
 
-The Playground can't change a source. To fix an answer, use the thread to find the source it came from, fix that source, and ask again:
+- It searches your sources.
+- It can read more of a document around a matching passage.
+- If [GitHub repositories](/docs/business-knowledge/github) are selected and the document search returns nothing, it can search file names and README text in those repositories, then read one file.
+
+The thread shows each of those steps: **Searched business knowledge**, **Read document context**, **Searched repositories**, and **Read file**.
+
+Text marked as learned from support is team practice from a resolved ticket, not a page you uploaded.
+
+A source with **Always include in replies** is included even when it doesn't match the question, after the same content check as search.
+
+## When an answer is wrong
+
+The Playground doesn't change a source. Use the thread to see which step produced the answer, then fix that source and ask again.
 
 1. Open the source the answer used.
-2. Edit a text source, refresh a URL source, or delete a file source and upload the new file. See [Edit or delete a source](/docs/business-knowledge/sources#edit-or-delete-a-source).
+2. Edit a text source, refresh a URL source, or delete a file source and upload it again. See [Edit or delete a source](/docs/business-knowledge/sources#edit-or-delete-a-source).
 3. For a learned answer, edit or delete that learned source. See [Learn from support](/docs/business-knowledge/learn-from-support).
 4. Ask the question again.
 
-If no source holds the fact, [add a source](/docs/business-knowledge/sources) that does. If an **Always include in replies** source caused the wrong answer, edit it or turn that option off.
+A source with **Always include in replies** is in every answer. Turn it off, or edit it, when that text is what made the answer wrong.

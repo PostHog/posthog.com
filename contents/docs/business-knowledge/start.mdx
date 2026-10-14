@@ -14,27 +14,21 @@ import OSButton from 'components/OSButton'
 
 <QuestLog firstSpeechBubble="Add what PostHog should know." lastSpeechBubble="Now see what's missing.">
 
-<QuestLogItem title="Approve AI data processing" subtitle="Organization admins" icon="IconLock">
-
-An organization owner or admin must approve **AI data processing** in organization settings, under **AI service providers**. Until it's approved, PostHog can't check your sources, so answers can't use them and the Playground refuses questions.
-
-<OSButton variant="primary" asLink to="/docs/business-knowledge/requirements">Check the requirements</OSButton>
-
-</QuestLogItem>
-
 <QuestLogItem title="Add a source" subtitle="Text, a page, or a file" icon="IconUpload">
 
-Open [**Business Knowledge**](https://app.posthog.com/business-knowledge) and choose **Add source**. Paste a policy, add a public URL such as your docs or pricing page, or upload a file.
+Open [**Business Knowledge**](https://app.posthog.com/business-knowledge) and choose **Add source**. You can also start from an empty project with **Add your first source**.
 
-PostHog checks the content of each new source before answers can use it. Keyword search works as soon as the check passes. Semantic search takes up to an hour more, and the source shows **indexing** until it's done.
+Paste a policy, add a public URL, or upload a file. The list shows how many sources are ready and how many chunks are indexed.
 
-<OSButton variant="primary" asLink to="/docs/business-knowledge/sources">Add a source</OSButton>
+Sources belong to the project you add them in. [Learn from support](/docs/business-knowledge/learn-from-support) stores its setting and its learned sources on the parent project. [GitHub repositories](/docs/business-knowledge/github) stay on the environment where you connect them.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/sources#text">Add a source</OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem title="Turn on learning" subtitle="Optional" icon="IconToggle">
 
-Let PostHog turn your team's replies on resolved Support tickets into reusable answers. Learning is off until you turn it on, and Support has to be on in that environment first.
+Let PostHog add reusable answers from resolved Support tickets. Learning is off until you turn it on, and Support has to be on in that environment first.
 
 <OSButton variant="primary" asLink to="/docs/business-knowledge/learn-from-support">Enable learning</OSButton>
 
@@ -42,23 +36,25 @@ Let PostHog turn your team's replies on resolved Support tickets into reusable a
 
 <QuestLogItem title="Choose what every reply includes" subtitle="Tone and policies" icon="IconNotebook">
 
-Turn on **Always include in replies** for guidance that every answer must follow, such as your tone of voice or a company policy.
+Turn on **Always include in replies** for guidance that should be in every answer: tone, policies, and company direction. PostHog still runs the content check.
 
-<OSButton variant="primary" asLink to="/docs/business-knowledge/sources#include-a-source-in-every-reply">Always include a source</OSButton>
+<OSButton variant="primary" asLink to="/docs/business-knowledge/sources#always-include-in-replies">Set a source to always include</OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem title="See what's covered and what's missing" subtitle="Playground" icon="IconSparkles">
 
-Ask a question that a customer or teammate would ask, and that your new source answers. If the answer cites your source, the setup works. If it doesn't, add a source that holds the fact and ask again.
+Ask a question a customer or teammate would ask. If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
 
 <OSButton variant="primary" asLink to="/docs/business-knowledge/playground">Open the Playground</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem title="Use the same sources everywhere" subtitle="PostHog AI, Support, and MCP" icon="IconMagic">
+<QuestLogItem title="Use the same sources in answers" subtitle="PostHog AI, Support, and MCP" icon="IconMagic">
 
-PostHog AI searches your sources when a question is about your product, policies, or team. Support searches them when it drafts a reply. Your own agent can search and update them through MCP, with the `business_knowledge:read` or `business_knowledge:write` scope.
+PostHog AI searches these sources when a question is about your product, policies, or team. Support reads them when it drafts a reply. MCP clients can search and update them with the `business_knowledge:read` or `business_knowledge:write` scope.
+
+Answers stay empty until [two checks](/docs/business-knowledge/requirements) pass.
 
 <OSButton variant="primary" asLink to="/docs/business-knowledge">Where you can use it</OSButton>
 
