@@ -53,6 +53,8 @@ const updateDescriptors = [
 
 const humanCodedFoilGradient = `linear-gradient(125deg, ${colors.tangerine.core}, ${colors.yellow.core}, ${colors.green.core}, ${colors.tangerine.core})`
 const humanCodedFoilGradientDark = `linear-gradient(125deg, ${colors.violet.core}, ${colors.blue.core}, ${colors.green.core}, ${colors.blue.core}, ${colors.violet.core})`
+// Provisional last human-coded changelog entry: "Capture Android native crashes" (September 1, 2026).
+const humanCodedBaseline = '2026-09-01T12:57:37.996Z'
 
 type RoadmapNode = {
     id: number | string
@@ -1066,8 +1068,7 @@ export default function Changelog({
         const humanCoded = data.allRoadmap.nodes.filter(
             (roadmap: RoadmapNode) => getCodingStyle(roadmap.tags) === 'human'
         )
-        // Local design preview until published changelog entries have coding tags.
-        if (humanCoded.length === 0) return process.env.NODE_ENV === 'development' ? '2026-10-08T09:12:00.000Z' : null
+        if (humanCoded.length === 0) return humanCodedBaseline
         const since = Math.max(...humanCoded.map(timestamp))
         return new Date(since).toISOString()
     }, [data.allRoadmap.nodes])

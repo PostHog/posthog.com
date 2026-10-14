@@ -22,8 +22,8 @@ import FactorySign from 'components/Changelog/FactorySign'
 
 - The changelog bot tags each published entry with `ai-coded` or `human-coded`.
 - `since` is the `publishedAt` of the most recent `human-coded` entry.
-- The sign stays hidden in production until the first `human-coded` entry ships.
-- If no entry is tagged, the page does not show the sign.
+- Until an entry is tagged `human-coded`, the sign counts from the September 1, 2026 publication of [Capture Android native crashes](https://posthog.com/changelog?id=2975). Its three linked PRs ([Android capture](https://github.com/PostHog/posthog-android/pull/659), [symbol upload](https://github.com/PostHog/posthog-android/pull/660), and [Flutter config](https://github.com/PostHog/posthog-flutter/pull/539)) have human-named code commits with no agent author credit found. This is the best-supported starting date, not proof that no AI was used.
+- Once a `human-coded` entry appears in the website data, its publish date replaces the estimate automatically.
 
 ## Notes
 
