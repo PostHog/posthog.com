@@ -3,10 +3,11 @@ title: Scanner types
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 The scanner type determines the shape of the structured output the model returns. It's chosen when you create a scanner and **can't be changed afterwards** – to switch types, create a new scanner.
 
-There are four types:
+There are five types:
 
 | Type                          | What it produces                              | Use it for                                     |
 | ----------------------------- | --------------------------------------------- | ---------------------------------------------- |
@@ -14,6 +15,7 @@ There are four types:
 | [**Classifier**](#classifier) | One or more tags from a vocabulary you define | Bucketing sessions along a dimension           |
 | [**Scorer**](#scorer)         | A numeric score on a scale you define         | Rating sessions on a dimension                 |
 | [**Summarizer**](#summarizer) | A title and prose summary                     | Generating a short narrative of what happened  |
+| [**Experiment**](#experiment) | A summary, with the session's variant         | Comparing what users do in each variant        |
 
 Every type also returns:
 
@@ -184,6 +186,63 @@ A summarizer produces a prose summary of what happened in the session, plus a ti
 
 > **Note:** Summarizers don't support impact tracking or cohort creation since they produce narrative summaries rather than categorical findings.
 
+## Experiment
+
+<CalloutBox icon="IconFlask" title="Experiment scanners are in beta" type="action">
+
+Experiment scanners are in beta and available to some organizations. To ask for access, [contact us](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
+</CalloutBox>
+
+An experiment scanner watches the sessions of people exposed to one [experiment](/docs/experiments) and summarizes each session. It shows the summaries for each variant side by side, so you can see what users do differently in each variant.
+
+An experiment scanner is a summarizer with experiment context. PostHog gives the model the experiment's name, its hypothesis, and the forms the changed part of your product can take. The model is not told which variant the user is in, so it describes only what the recording shows. PostHog adds the variant to each observation from the exposure data.
+
+This also helps you find a broken flag check. If summaries of control sessions describe the new design, check how your code reads the feature flag.
+
+**Ways to create one**
+
+- In the new experiment form, on the analytics step, turn on **Compare what users do in each variant**. The scanner turns on when you launch the experiment.
+- On a running experiment's **Recordings** tab, select **Set up experiment scanner**.
+- In Replay Vision, create a scanner and select the **Experiment** type.
+
+**Output**
+
+The same as a [summarizer](#summarizer): `title`, `summary`, `chapters`, and `confidence`. Each observation also has the session's variant.
+
+**Type-specific config**
+
+- **Experiment** – the running experiment to watch. You can't change it after you create the scanner.
+- **Variants** – the variants to watch. Leave it empty to watch every variant.
+- **Sample variants evenly** – on by default, so each variant gets enough sessions, even with an uneven split. Turn it off to sample in proportion to traffic.
+- **Additional context** and **Summary length** – the same as for a summarizer.
+
+**Which sessions it watches**
+
+It watches the same people as the experiment's **Recordings** tab, from their first exposure until the experiment ends. Filters you add yourself still apply on top. It doesn't scan:
+
+- Experiments that aggregate by [groups](/docs/product-analytics/group-analytics). Their exposures belong to groups, not people, so PostHog can't match them to recordings.
+- Sessions of [anonymous users](/docs/data/anonymous-vs-identified-events) who have no person profile.
+- Sessions that end before the person's first exposure, or after the experiment ends.
+
+When the experiment ends, the scanner finishes the sessions up to the end date and then stops. When you pause, archive, or delete the experiment, the scanner stops.
+
+**Variants tab**
+
+The scanner's **Variants** tab shows each variant's observations and people, and its latest observations. To filter observations by variant, use the variant filter on the observations list.
+
+To compare the variants, add a **Variant analysis** [scout](/docs/replay-vision/scouts) from the **Variants** tab. Each day, it reads the new summaries, counts the behaviors that recur in each variant, and marks each difference as a trend or as statistically significant. It doesn't read the experiment's results.
+
+**When to use it**
+
+- See what users do in each variant, and where they get stuck.
+- Find a variant that shows the wrong design.
+- Explain a result that the experiment's metrics already show.
+
+An experiment scanner can't confirm a small change in a metric, because it reads a sample of sessions. Use the experiment's [results](/docs/experiments/analyzing-results) for that.
+
+**On `$recording_observed`** – the same fields as a summarizer, plus `experiment_variant`.
+
 ## Picking a type
 
 Some heuristics:
@@ -192,6 +251,7 @@ Some heuristics:
 - **A small fixed set of buckets?** Classifier.
 - **A magnitude or "how much"?** Scorer.
 - **Don't know what you're looking for yet, but want to skim?** Summarizer.
+- **What users do in each variant of an A/B test?** Experiment.
 
 If you find yourself encoding a number range as classifier tags ("low / medium / high"), use a scorer instead and bucket downstream in SQL.
 
