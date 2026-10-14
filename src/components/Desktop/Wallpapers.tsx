@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
 
 /**
  * Wallpapers
@@ -21,8 +20,10 @@ export const BlurredWallpaperContext = createContext(false)
 const BLURRED_IMAGE_WIDTH_PX = 32
 const CLOUDINARY_UPLOAD_PATH = '/image/upload/'
 
-const toBlurredImageUrl = (url: string): string =>
-    url.replace(CLOUDINARY_UPLOAD_PATH, `${CLOUDINARY_UPLOAD_PATH}w_${BLURRED_IMAGE_WIDTH_PX},q_auto,f_auto/`)
+const toResizedImageUrl = (url: string, widthPx: number): string =>
+    url.replace(CLOUDINARY_UPLOAD_PATH, `${CLOUDINARY_UPLOAD_PATH}w_${widthPx},q_auto,f_auto/`)
+
+const toBlurredImageUrl = (url: string): string => toResizedImageUrl(url, BLURRED_IMAGE_WIDTH_PX)
 
 interface SceneBackgroundProps {
     url: `https://res.cloudinary.com/${string}`
@@ -50,25 +51,11 @@ interface SceneImageProps {
 
 const SceneImage = ({ src, width, height, className = '', imgClassName = '' }: SceneImageProps) => {
     const isBlurred = useContext(BlurredWallpaperContext)
-    if (!isBlurred) {
-        return (
-            <CloudinaryImage
-                loading="lazy"
-                src={src}
-                alt=""
-                width={width}
-                height={height}
-                className={className}
-                imgClassName={imgClassName}
-                draggable={false}
-            />
-        )
-    }
     return (
         <div className={`inline-block ${className}`}>
             <img
                 loading="lazy"
-                src={toBlurredImageUrl(src)}
+                src={isBlurred ? toBlurredImageUrl(src) : toResizedImageUrl(src, width)}
                 alt=""
                 width={width}
                 height={height}
@@ -110,7 +97,7 @@ const StartupMonopoly = () => (
         <SceneImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_monopoly_dark_26c85ccad8.jpg"
             width={1582}
-            height={782}
+            height={780}
             className={`absolute right-0 top-0 w-[1483.5px] h-[731.5px] max-w-full opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
         />
     </>
