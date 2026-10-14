@@ -127,6 +127,8 @@ request_duration = meter.create_histogram("http.request.duration", unit="ms")
 request_duration.record(42.5, {"route": "/api/checkout", "status": "200"})
 ```
 
+To collect CPU and memory automatically, follow the [Python process metrics guide](/docs/metrics/installation/python#collect-process-cpu-and-memory). It uses psutil and OpenTelemetry observable gauges; the exporter setup above doesn't collect resource usage by itself.
+
 #### Node.js
 
 ```bash
