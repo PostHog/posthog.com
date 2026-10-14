@@ -242,7 +242,12 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     <p className="my-4 font-bold border-t border-primary pt-4">Here's how your estimate breaks down:</p>
                     <div className="space-y-8">
                         <div>
-                            <h4 className="text-lg m-0">{activeProduct.productVariantName || activeProduct.name}</h4>
+                            {/* Only Sources takes categoryName here: for Data pipelines it's the group name. */}
+                            <h4 className="text-lg m-0">
+                                {activeProduct.productVariantName ||
+                                    (activeProduct.type === 'data_warehouse' && activeProduct.categoryName) ||
+                                    activeProduct.name}
+                            </h4>
                             <p className="opacity-70 m-0 text-sm mb-2">
                                 <strong>{billedMainVolume.toLocaleString()}</strong>{' '}
                                 {pluralizeUnit(activeProduct.billingData.unit, billedMainVolume)}

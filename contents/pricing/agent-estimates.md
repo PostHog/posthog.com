@@ -51,7 +51,7 @@ Ask two things, together, and nothing else yet.
    - Sentry
 
    These are suggestions, not a closed list. Any analytics, session replay, feature flag, error tracking, survey, or logging tool they pay for counts, so always leave room for a free-text answer. If their opening prompt did name a tool, do not re-ask it – confirm it and ask what else sits alongside it.
-2. **Which capabilities do you actually want on PostHog?** List the PostHog products by name – product analytics, session replay, feature flags and experiments, error tracking, surveys, data warehouse, and so on. Estimate only what they select. Do not max out the catalog.
+2. **Which capabilities do you actually want on PostHog?** List the PostHog products by name – product analytics, session replay, feature flags and experiments, error tracking, surveys, sources, and so on. Estimate only what they select. Do not max out the catalog.
 
 Everything else you might want to know – how to see their usage, their logged-in share, their current spend – waits until Step 3, because the answers to those depend on what access you get.
 
@@ -83,7 +83,7 @@ Depending on the products in scope, you are looking for:
 | Feature flags & experiments | Flag evaluations/requests per month. If the tool reports only MAU or contexts, get that plus requests-per-user if known. |
 | Error tracking | Error events (exceptions) per month. |
 | Surveys | Survey responses per month. |
-| Data warehouse | Rows synced per month from external sources. |
+| Sources | Rows synced per month from external sources. |
 | Logs | GB of logs ingested per month. |
 | AI/LLM observability | LLM events (generations/traces) per month. |
 
