@@ -81,6 +81,14 @@ export const dataPipelines = {
                     url: '/docs/data-pipelines/sources/',
                 },
                 {
+                    name: 'PostHog as a source',
+                    url: '/docs/data-pipelines/sources/posthog',
+                },
+                {
+                    name: 'Upload a file',
+                    url: '/docs/data-pipelines/sources/file-upload',
+                },
+                {
                     name: 'Incoming webhooks',
                     url: '/docs/data-pipelines/sources/incoming-webhooks',
                 },
@@ -6708,44 +6716,14 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Sources',
+                    name: 'Data pipelines',
                 },
                 {
-                    name: 'Link sources',
-                    url: '/docs/data-warehouse/sources',
+                    name: 'Connect your data',
+                    url: '/docs/data-pipelines',
                     icon: 'IconPlug',
                     color: 'blue',
                     featured: true,
-                    dynamicChildren: 'data-warehouse-sources',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/data-warehouse/sources/',
-                        },
-                        {
-                            name: 'PostHog as a source',
-                            url: '/docs/data-warehouse/sources/posthog',
-                        },
-                        {
-                            name: 'Sources',
-                        },
-                    ],
-                },
-                {
-                    name: 'Destinations',
-                },
-                {
-                    name: 'Where rows are written',
-                    url: '/docs/data-pipelines/destinations/elt-destinations',
-                    icon: 'IconServer',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Monitoring your syncs',
-                    url: '/docs/data-pipelines/destinations/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
                 },
                 {
                     name: 'Modeling',

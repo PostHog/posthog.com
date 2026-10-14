@@ -42,7 +42,7 @@ The most important thing to understand about it is what it doesn't do. It doesn'
 It fixes is three kinds of knowledge that only exists as tribal memory:
 
 * **What our metrics are:** MRR isn't just "revenue", it's a specific calculation over a specific source.
-* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-warehouse/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid, e.g. they have been deprecated. 
+* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-pipelines/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid, e.g. they have been deprecated. 
 * **How the data joins together:** The Stripe customer ID maps to an organization property, but only after it's reformatted, and nothing tells you that except the analyst who figured it out last time.
 
 If you're a small company with a handful of tables you interact with regularly, you probably know where everything is. But, as you grow, you add more data sources and models, the meaning of those tables stop being obvious, least of all to an AI agent seeing your schema for the first time.

@@ -5573,7 +5573,7 @@
         },
         {
             "source": "/docs/data-warehouse/sources/azure-db:ext(\\.md)?",
-            "destination": "/docs/data-warehouse/sources/microsoft-sql-server:ext?"
+            "destination": "/docs/data-pipelines/sources/microsoft-sql-server:ext?"
         },
         {
             "source": "/docs/cdp/sources/azure-db:ext(\\.md)?",
@@ -5581,7 +5581,7 @@
         },
         {
             "source": "/docs/data-warehouse/sources/temporal:ext(\\.md)?",
-            "destination": "/docs/data-warehouse/sources/temporalio:ext?"
+            "destination": "/docs/data-pipelines/sources/temporalio:ext?"
         },
         {
             "source": "/docs/cdp/sources/temporal:ext(\\.md)?",
@@ -6682,6 +6682,16 @@
         {
             "source": "/docs/data-warehouse/monitoring:ext(\\.md)?",
             "destination": "/docs/data-pipelines/destinations/monitoring:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/sources:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/sources:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/sources/:path*",
+            "destination": "/docs/data-pipelines/sources/:path*",
             "statusCode": 301
         },
         {
