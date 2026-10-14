@@ -10,6 +10,7 @@ import type {
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
+import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -156,32 +157,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const { createNode } = actions
 
     // Canonical MCP tool definitions from the PostHog monorepo, rendered on docs pages
-    // (e.g. /docs/ai-observability/surfaces/mcp). The schema file is kept in sync with the
-    // MCP source by a CI drift check. Failure degrades to an empty list, never a broken build.
+    // (e.g. /docs/ai-observability/surfaces/mcp). Failure degrades to an empty list, never a broken build.
     try {
-        const posthogBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
-        const mcpToolsRes = await fetch(
-            `https://raw.githubusercontent.com/PostHog/posthog/${posthogBranch}/services/mcp/schema/tool-definitions-all.json`
-        )
-        if (mcpToolsRes.ok) {
-            const mcpTools: Record<string, any> = await mcpToolsRes.json()
-            Object.entries(mcpTools).forEach(([name, tool]) => {
-                createNode({
-                    id: createNodeId(`mcp-tool-${name}`),
-                    name,
-                    title: tool?.title || name,
-                    summary: tool?.summary || '',
-                    category: tool?.category || '',
-                    feature: tool?.feature || '',
-                    internal: {
-                        type: 'McpTool',
-                        contentDigest: createContentDigest({ name, ...tool }),
-                    },
-                })
+        const mcpTools = await fetchMCPToolDefinitions(process.env.GATSBY_POSTHOG_BRANCH || 'master')
+        Object.entries(mcpTools).forEach(([name, tool]) => {
+            createNode({
+                id: createNodeId(`mcp-tool-${name}`),
+                name,
+                title: tool?.title || name,
+                summary: tool?.summary || '',
+                category: tool?.category || '',
+                feature: tool?.feature || '',
+                internal: {
+                    type: 'McpTool',
+                    contentDigest: createContentDigest({ name, ...tool }),
+                },
             })
-        } else {
-            console.warn(`Failed to fetch MCP tool definitions: HTTP ${mcpToolsRes.status}`)
-        }
+        })
     } catch (err) {
         console.warn('Failed to source MCP tool definitions:', err)
     }

@@ -2700,6 +2700,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/context',
                 },
                 {
+                    name: 'Steering',
+                    url: '/docs/self-driving/steering',
+                },
+                {
                     name: 'Scouts',
                     url: '/docs/self-driving/scouts',
                     children: [
@@ -6823,8 +6827,8 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'red',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     children: [
                         {
@@ -7598,6 +7602,10 @@ export const docsMenu = {
                         {
                             name: 'A/B testing prompts',
                             url: '/docs/prompt-management/prompt-experiments',
+                        },
+                        {
+                            name: 'Temporal workflows',
+                            url: '/docs/prompt-management/temporal',
                         },
                     ],
                 },
