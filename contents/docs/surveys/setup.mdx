@@ -47,6 +47,7 @@ posthog.capture("survey sent", {
     $survey_id: survey.id, // required
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,
+    $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
     [`$survey_response_${survey.questions[0].id}`]: surveyResponse,
     $survey_name: survey.name // optional
 })
