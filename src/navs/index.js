@@ -2118,6 +2118,16 @@ export const handbookSidebar = [
             },
         ],
     },
+    {
+        name: 'Gradiated',
+        url: '/handbook/gradiated',
+        children: [
+            {
+                name: 'About Gradiated',
+                url: '/handbook/gradiated',
+            },
+        ],
+    },
 ]
 
 export const productEngineerHandbookSidebar = [
