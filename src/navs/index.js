@@ -2700,6 +2700,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/context',
                 },
                 {
+                    name: 'Steering',
+                    url: '/docs/self-driving/steering',
+                },
+                {
                     name: 'Scouts',
                     url: '/docs/self-driving/scouts',
                     children: [
