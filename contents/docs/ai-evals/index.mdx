@@ -62,7 +62,7 @@ Add the categories the evaluation can return. Each category has a key, which Pos
 - **One category** returns exactly one category.
 - **Multiple categories** returns any number of categories, including none.
 
-To get pass rates and reports, choose **Passing categories**. A result passes when every category it returns is a passing category. With **Multiple categories**, you can leave the passing categories empty, and then only a result with no categories passes. If you change the passing categories later, PostHog applies them to past results too.
+To get pass rates and reports, choose **Passing categories**. A result passes when it returns at least one category and every category it returns is a passing category. A result with no categories fails. With **Multiple categories**, you can leave the passing categories empty. Then only a result with no categories passes. If you change the passing categories later, PostHog applies them to past results too.
 
 ## LLM-as-a-judge evaluations
 
