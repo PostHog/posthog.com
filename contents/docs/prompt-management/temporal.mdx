@@ -1,0 +1,216 @@
+---
+title: Using prompts in Temporal workflows
+sidebar: Docs
+showTitle: true
+availability:
+free: none
+selfServe: full
+enterprise: full
+---
+
+Temporal splits your code into workflows, which must be deterministic, and activities, which can do anything. A prompt fetch is a network call that can return a different version each time, so it belongs in an activity. This page covers that and the other things a long-running worker needs: one client per process, a warm cache, a record of which version each activity used, and a clean shutdown.
+
+## Fetch prompts in activities, not workflows
+
+Fetch the prompt inside the activity that uses it. Do not import the PostHog SDK from a workflow file:
+
+- In Python, the Temporal sandbox blocks threads, sockets, and `urllib` inside workflow code, and the SDK uses all three when it loads.
+- In TypeScript, workflow code runs in an isolated V8 context without Node APIs, so a workflow file that imports `@posthog/ai` fails to bundle.
+
+If a workflow file needs a type from the SDK, put the import inside `with workflow.unsafe.imports_passed_through():` (Python) or use a type-only import (TypeScript).
+
+## Create one client per worker
+
+A worker process runs for days. Create the PostHog client and the `Prompts` client once, at module level in your activities file, and reuse them from every activity. Each `Prompts` instance has its own cache, so a client created inside the activity starts cold on every run.
+
+<MultiLanguage>
+
+```python
+# activities.py
+import asyncio
+from temporalio import activity
+from posthog import Posthog
+from posthog.ai import Prompts
+from posthog.ai.openai import AsyncOpenAI
+
+posthog = Posthog(
+    '<your_project_api_key>',
+    host='https://us.posthog.com',
+    secret_key='<your_personal_api_key>'
+)
+prompts = Prompts(posthog)
+openai = AsyncOpenAI(posthog_client=posthog, api_key='<your_openai_api_key>')
+```
+
+```typescript
+// activities.ts
+import { Context } from '@temporalio/activity'
+import { PostHog } from 'posthog-node'
+import { Prompts } from '@posthog/ai'
+import { OpenAI } from '@posthog/ai/openai'
+
+const posthog = new PostHog('<your_project_api_key>', {
+  host: 'https://us.posthog.com',
+  personalApiKey: '<your_personal_api_key>',
+})
+const prompts = new Prompts({ posthog })
+const openai = new OpenAI({ apiKey: '<your_openai_api_key>', posthog })
+```
+
+</MultiLanguage>
+
+## Warm the cache when the worker starts
+
+The SDK fetches a prompt the first time an activity asks for it, and again when its cache entry expires. Load every prompt in one request before the worker starts polling, so the first activities do not each wait on the network. Fetch at a label, such as `production`, so a label move reaches the worker on the next cache cycle without a deploy.
+
+<MultiLanguage>
+
+```python
+# worker.py
+from temporalio.client import Client
+from temporalio.worker import Worker
+from activities import draft_reply, prompts
+
+async def main():
+    prompts.get_all(label='production')
+
+    client = await Client.connect('localhost:7233')
+    worker = Worker(client, task_queue='support', workflows=[...], activities=[draft_reply])
+    await worker.run()
+```
+
+```typescript
+// worker.ts
+import { Worker } from '@temporalio/worker'
+import * as activities from './activities'
+
+async function run() {
+  await activities.prompts.getAll({ label: 'production' })
+
+  const worker = await Worker.create({
+    taskQueue: 'support',
+    workflowsPath: require.resolve('./workflows'),
+    activities,
+  })
+  await worker.run()
+}
+```
+
+</MultiLanguage>
+
+Inside the activity, call `get()` with a `fallback`. When the cache entry has expired and the network is down, the SDK serves the cached value. With no cached value, it serves the fallback. Concurrent activities that ask for the same prompt share one request.
+
+## Record which version each activity used
+
+An activity can run more than once. Temporal retries it on failure, and a retry can fetch a newer version if a label moved in between. The activity's return value is the only record that survives in workflow history, so return the prompt name and version from the activity and stamp them on the generation event. Pass `with_metadata=True` in Python to get them.
+
+<MultiLanguage>
+
+```python
+# activities.py
+@activity.defn
+async def draft_reply(ticket_text: str) -> dict:
+    # The Python client is synchronous. Run it in a thread so it does not block
+    # the other activities on this worker.
+    result = await asyncio.to_thread(
+        prompts.get,
+        'support-system-prompt',
+        with_metadata=True,
+        label='production',
+        fallback='You are a helpful support agent.',
+    )
+    info = activity.info()
+
+    response = await openai.chat.completions.create(
+        model='gpt-5',
+        messages=[
+            {'role': 'system', 'content': result.prompt},
+            {'role': 'user', 'content': ticket_text},
+        ],
+        posthog_properties={
+            '$ai_prompt_name': result.name,
+            '$ai_prompt_version': result.version,
+            'temporal_workflow_id': info.workflow_id,
+            'temporal_attempt': info.attempt,
+        },
+    )
+
+    return {
+        'reply': response.choices[0].message.content,
+        'prompt_name': result.name,
+        'prompt_version': result.version,
+        'prompt_source': result.source,
+    }
+```
+
+```typescript
+// activities.ts
+interface DraftReply {
+  reply: string | null
+  promptName?: string
+  promptVersion?: number
+  promptSource: string
+}
+
+export async function draftReply(ticketText: string): Promise<DraftReply> {
+  const result = await prompts.get('support-system-prompt', {
+    label: 'production',
+    fallback: 'You are a helpful support agent.',
+  })
+  const info = Context.current().info
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-5',
+    messages: [
+      { role: 'system', content: result.prompt },
+      { role: 'user', content: ticketText },
+    ],
+    posthogProperties: {
+      $ai_prompt_name: result.name,
+      $ai_prompt_version: result.version,
+      temporal_workflow_id: info.workflowExecution.workflowId,
+      temporal_attempt: info.attempt,
+    },
+  })
+
+  return {
+    reply: response.choices[0].message.content,
+    promptName: result.name,
+    promptVersion: result.version,
+    promptSource: result.source,
+  }
+}
+```
+
+</MultiLanguage>
+
+`result.source` tells you where the prompt came from: `api`, `cache`, `stale_cache`, or `code_fallback`. On a fallback, `name` and `version` are empty. Decide in the activity whether that is acceptable or whether to fail the activity and let Temporal retry it.
+
+When every activity in one workflow run must use the same version, read the version from the first activity's result in the workflow and pass it to the later activities, which fetch with `version=` instead of a label.
+
+## Set timeouts above the fetch timeout
+
+Each SDK fetch gives up after 10 seconds. Give the activity a `start_to_close_timeout` (Python) or `startToCloseTimeout` (TypeScript) longer than that, so a slow prompt fetch surfaces as a fallback instead of an activity timeout.
+
+## Shut down the client with the worker
+
+Generation events are sent in the background. Call `posthog.shutdown()` when the worker stops, so events queued by the last activities are sent before the process exits.
+
+<MultiLanguage>
+
+```python
+try:
+    await worker.run()
+finally:
+    posthog.shutdown()
+```
+
+```typescript
+try {
+  await worker.run()
+} finally {
+  await posthog.shutdown()
+}
+```
+
+</MultiLanguage>
