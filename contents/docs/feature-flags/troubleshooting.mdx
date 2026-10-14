@@ -225,7 +225,7 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 ## Where does PostHog store flag calls?
 
-When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the events table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls.
+When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the `events` table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls.
 
 Flag calls [aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill), so the move doesn't change your bill.
 
@@ -238,7 +238,7 @@ We'll email you before anything changes.
 ### What you can do now
 
 - Don't build new [actions](/docs/data/actions) or [cohorts](/docs/data/cohorts) on `$feature_flag_called`. They can't read the `flag_evaluations` table, so after the move they stop matching new flag calls.
-- If you write [SQL](/docs/sql), the SQL editor warns you when a query reads `$feature_flag_called` from the events table.
+- If you write [SQL](/docs/sql), the SQL editor warns you when a query reads `$feature_flag_called` from the `events` table.
 
 ### What shows flag calls after the move
 
@@ -254,8 +254,8 @@ After the move, insights on flag calls show at most 90 days. They can't filter b
 
 - [Actions](/docs/data/actions) with a step on `$feature_flag_called`
 - [Cohorts](/docs/data/cohorts) with a criterion on `$feature_flag_called`
-- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read `$feature_flag_called` from the events table
-- [Batch exports](/docs/cdp/batch-exports) of the events table
+- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read `$feature_flag_called` from the `events` table
+- [Batch exports](/docs/cdp/batch-exports) of the `events` table
 - [Paths](/docs/product-analytics/paths)
 
 ## Server-side SDK gotchas
