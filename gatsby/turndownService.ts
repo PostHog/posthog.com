@@ -5,10 +5,11 @@ import { JSDOM } from 'jsdom'
 // selector engine's cache (about 18 MB per page across thousands of pages).
 let sharedDom: JSDOM | null = null
 
-export const preprocessHtmlForTabs = (html: string): string => {
+export const preprocessHtmlForTabs = (html: string, transformDocument?: (document: Document) => void): string => {
     sharedDom ??= new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>')
     const doc = sharedDom.window.document
     doc.documentElement.innerHTML = html
+    transformDocument?.(doc)
 
     const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
     tabContainers.forEach((container) => {
@@ -400,4 +401,230 @@ export const postProcessMarkdown = (markdown: string, title: string): string => 
     }
 
     return result.trim()
+}
+
+const SITE_ORIGIN = 'https://posthog.com'
+const PAGE_FEEDBACK_HEADINGS = new Set(['Still have questions?', 'Was this page useful?', 'Community questions'])
+const CODE_LABEL_LANGUAGES: Record<string, string> = {
+    terminal: 'bash',
+    shell: 'bash',
+    html: 'html',
+    typescript: 'typescript',
+}
+const SHELL_COMMANDS = new Set([
+    'npx',
+    'npm',
+    'pnpm',
+    'yarn',
+    'bun',
+    'pip',
+    'pip3',
+    'uv',
+    'brew',
+    'curl',
+    'wget',
+    'docker',
+    'git',
+    'export',
+    'cargo',
+    'gem',
+    'bundle',
+    'composer',
+    'dotnet',
+    'flutter',
+    'go',
+])
+const MIN_TABLE_OF_CONTENTS_SECTIONS = 3
+
+function removePageFeedback(document: Document) {
+    document.querySelectorAll('h3').forEach((heading) => {
+        if (!PAGE_FEEDBACK_HEADINGS.has((heading.textContent ?? '').trim())) return
+        heading.parentElement?.remove()
+    })
+}
+
+function inlineRecommendedBadges(document: Document) {
+    const badges = Array.from(document.querySelectorAll('h2 span, h3 span, h4 span')).filter(
+        (span) => span.children.length === 0 && (span.textContent ?? '').trim() === 'Recommended'
+    )
+    badges.forEach((badge) => badge.replaceWith(document.createTextNode('(recommended)')))
+}
+
+function removeTabCountBadges(document: Document) {
+    const countBadges = Array.from(document.querySelectorAll('[role="tab"] span')).filter((span) =>
+        /^\d+$/.test((span.textContent ?? '').trim())
+    )
+    countBadges.forEach((badge) => badge.remove())
+}
+
+function moveCodeLabelsIntoFences(document: Document) {
+    document.querySelectorAll('div.code-block').forEach((codeBlock) => {
+        const header = codeBlock.querySelector(':scope > div.bg-accent')
+        if (!header || header.querySelector('[role="tablist"]')) return
+        const labelLanguage = CODE_LABEL_LANGUAGES[header.firstElementChild?.textContent?.trim().toLowerCase() ?? '']
+        if (!labelLanguage) return
+        const preformatted = codeBlock.querySelector('pre')
+        const codeElement = preformatted?.querySelector('code') ?? preformatted
+        const hasLanguage = /language-\w+/.test(codeElement?.getAttribute('class') ?? '')
+        if (codeElement && !hasLanguage) {
+            codeElement.classList.add(`language-${labelLanguage}`)
+        }
+        header.remove()
+    })
+}
+
+function convertCollapsiblesToSections(document: Document) {
+    const collapsibles = Array.from(document.querySelectorAll('details'))
+    collapsibles.forEach((collapsible) => {
+        const summary = collapsible.querySelector(':scope > summary')
+        if (summary) {
+            const summaryHeading = document.createElement('p')
+            const summaryText = document.createElement('strong')
+            summaryText.textContent = (summary.textContent ?? '').trim()
+            summaryHeading.append(summaryText)
+            summary.replaceWith(summaryHeading)
+        }
+        collapsible.replaceWith(...collapsible.childNodes)
+    })
+}
+
+function flattenBlockLinks(document: Document) {
+    const blockLinks = Array.from(document.querySelectorAll('a[href]')).filter(
+        (link) =>
+            !(link.getAttribute('href') ?? '').startsWith('#quest-item-') &&
+            link.querySelector('h1, h2, h3, h4, h5, h6, p, div')
+    )
+    blockLinks.forEach((link) => {
+        const blockTexts = Array.from(link.querySelectorAll('h1, h2, h3, h4, h5, h6, p'))
+            .map((block) => (block.textContent ?? '').trim())
+            .filter(Boolean)
+        const flatLink = document.createElement('a')
+        flatLink.setAttribute('href', link.getAttribute('href') ?? '')
+        flatLink.textContent = blockTexts.length > 0 ? blockTexts.join(': ') : (link.textContent ?? '').trim()
+        const linkParagraph = document.createElement('p')
+        linkParagraph.append(flatLink)
+        link.replaceWith(linkParagraph)
+    })
+}
+
+function removeClientOnlyToggles(document: Document) {
+    document.querySelectorAll('[role="group"], [role="radiogroup"]').forEach((group) => {
+        if (!group.querySelector('[role="radio"]')) return
+        group.remove()
+    })
+}
+
+function tagUntaggedShellBlocks(document: Document) {
+    document.querySelectorAll('pre').forEach((preformatted) => {
+        const codeElement = preformatted.querySelector('code') ?? preformatted
+        const classNames = `${preformatted.getAttribute('class') ?? ''} ${codeElement.getAttribute('class') ?? ''}`
+        if (/language-\w+/.test(classNames)) return
+        const firstWord = (codeElement.textContent ?? '').trim().split(/\s+/)[0]
+        if (!SHELL_COMMANDS.has(firstWord)) return
+        codeElement.classList.add('language-bash')
+    })
+}
+
+function collectSectionAnchors(document: Document) {
+    return Array.from(document.querySelectorAll('h2[id]'))
+        .map((heading) => ({ id: heading.id, text: (heading.textContent ?? '').trim() }))
+        .filter((section) => section.text && !PAGE_FEEDBACK_HEADINGS.has(section.text))
+}
+
+function rewriteProseLines(markdown: string, rewriteLine: (line: string) => string) {
+    let isInsideFence = false
+    return markdown
+        .split('\n')
+        .map((line) => {
+            if (/^\s*(```|~~~)/.test(line)) {
+                isInsideFence = !isInsideFence
+                return line
+            }
+            if (isInsideFence) return line
+            return rewriteLine(line)
+        })
+        .join('\n')
+}
+
+function unescapeLiteralCodeSpans(line: string) {
+    return line.replace(
+        /\\`([^`\n]+?)\\`/g,
+        (_, escapedCode: string) => `\`${escapedCode.replace(/\\([\\`*_{}[\]()#+\-.!>~])/g, '$1')}\``
+    )
+}
+
+function absolutizeRootRelativeLinks(line: string) {
+    return line.replace(/\]\(\/(?!\/)/g, `](${SITE_ORIGIN}/`)
+}
+
+const US_TO_EU_HOST_SWAPS = [
+    { usHost: 'us.i.posthog.com', euHost: 'eu.i.posthog.com', role: 'ingestion host' },
+    { usHost: 'us.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
+    { usHost: 'app.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
+]
+
+function findUsOnlyHostSwaps(markdown: string) {
+    return US_TO_EU_HOST_SWAPS.filter(({ usHost, euHost }) => markdown.includes(usHost) && !markdown.includes(euHost))
+}
+
+function buildRegionNote(hostSwaps: typeof US_TO_EU_HOST_SWAPS) {
+    const usHostsByEuHost = new Map<string, { role: string; usHosts: string[] }>()
+    hostSwaps.forEach(({ usHost, euHost, role }) => {
+        const swap = usHostsByEuHost.get(euHost) ?? { role, usHosts: [] }
+        swap.usHosts.push(`\`https://${usHost}\``)
+        usHostsByEuHost.set(euHost, swap)
+    })
+    const swapPhrases = Array.from(usHostsByEuHost, ([euHost, { role, usHosts }]) => {
+        return `use \`https://${euHost}\` instead of ${usHosts.join(' or ')} (${role})`
+    })
+    return `> **Cloud region:** This page uses US Cloud hosts. For an EU Cloud project, ${swapPhrases.join(', and ')}.`
+}
+
+function buildPageHeader({
+    docsPath,
+    sectionAnchors,
+    usOnlyHostSwaps,
+}: {
+    docsPath: string
+    sectionAnchors: ReturnType<typeof collectSectionAnchors>
+    usOnlyHostSwaps: typeof US_TO_EU_HOST_SWAPS
+}) {
+    const headerBlocks = [`Canonical URL: ${SITE_ORIGIN}${docsPath}`]
+    if (usOnlyHostSwaps.length > 0) headerBlocks.push(buildRegionNote(usOnlyHostSwaps))
+    if (sectionAnchors.length >= MIN_TABLE_OF_CONTENTS_SECTIONS) {
+        const tableOfContents = sectionAnchors.map((section) => `- [${section.text}](#${section.id})`)
+        headerBlocks.push(['## On this page', '', ...tableOfContents].join('\n'))
+    }
+    return headerBlocks.join('\n\n')
+}
+
+function insertAfterTitle(markdown: string, block: string) {
+    const titleEnd = markdown.indexOf('\n')
+    if (titleEnd === -1) return `${markdown}\n\n${block}`
+    return `${markdown.slice(0, titleEnd)}\n\n${block}\n\n${markdown.slice(titleEnd).trimStart()}`
+}
+
+export const convertHtmlToAgentMarkdown = (html: string, title: string, docsPath: string): string => {
+    let sectionAnchors: ReturnType<typeof collectSectionAnchors> = []
+    const preprocessedContent = preprocessHtmlForTabs(extractMainContent(html), (document) => {
+        removePageFeedback(document)
+        inlineRecommendedBadges(document)
+        removeTabCountBadges(document)
+        moveCodeLabelsIntoFences(document)
+        convertCollapsiblesToSections(document)
+        flattenBlockLinks(document)
+        removeClientOnlyToggles(document)
+        tagUntaggedShellBlocks(document)
+        sectionAnchors = collectSectionAnchors(document)
+    })
+    const bodyMarkdown = rewriteProseLines(
+        postProcessMarkdown(createTurndownService(title).turndown(preprocessedContent), title),
+        (line) => absolutizeRootRelativeLinks(unescapeLiteralCodeSpans(line))
+    )
+    const header = buildPageHeader({
+        docsPath,
+        sectionAnchors,
+        usOnlyHostSwaps: findUsOnlyHostSwaps(bodyMarkdown),
+    })
+    return `${insertAfterTitle(bodyMarkdown, header)}\n`
 }
