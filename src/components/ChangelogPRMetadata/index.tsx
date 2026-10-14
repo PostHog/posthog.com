@@ -1,16 +1,6 @@
 import React, { useRef } from 'react'
-import {
-    IconGitBranch,
-    IconCommit,
-    IconCode,
-    IconPeople,
-    IconDocument,
-    IconComment,
-    IconPerson,
-    IconAI,
-} from '@posthog/icons'
+import { IconGitBranch, IconCommit, IconCode, IconPeople, IconDocument, IconComment } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import type { CodingStyle } from 'components/Changelog/codingStyle'
 
 export type GitHubPRMetadata = {
     html_url: string
@@ -41,11 +31,9 @@ export type GitHubPRMetadata = {
 export const ChangelogPRMetadata = ({
     githubPRMetadata,
     truncated = false,
-    codingStyle,
 }: {
     githubPRMetadata: GitHubPRMetadata
     truncated?: boolean
-    codingStyle?: CodingStyle | null
 }) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null)
 
@@ -70,13 +58,13 @@ export const ChangelogPRMetadata = ({
 
     return (
         <>
-            <div className={`flex flex-row items-center ${codingStyle ? 'col-span-2' : ''}`}>
+            <div className="flex flex-row items-center">
                 <IconGitBranch className="w-4 h-4 opacity-50 mr-1" />
                 <a href={githubPRMetadata.html_url} target="_blank" rel="noopener noreferrer" className="opacity-50">
                     #{githubPRMetadata.number}
                 </a>
             </div>
-            <div className={`flex flex-row items-center overflow-hidden ${codingStyle ? 'col-span-2' : ''}`}>
+            <div className="flex flex-row items-center overflow-hidden">
                 <IconPeople className="w-4 h-4 opacity-50 shrink-0 mr-1" />
                 <div
                     ref={scrollContainerRef}
@@ -124,7 +112,7 @@ export const ChangelogPRMetadata = ({
                         ))}
                 </div>
             </div>
-            <div className={`flex flex-row items-center ${codingStyle ? 'col-span-2' : ''}`}>
+            <div className="flex flex-row items-center">
                 <IconCode className="w-4 h-4 opacity-50 shrink-0 mr-1" />
                 <div className="flex flex-row gap-x-1">
                     <span className="text-green font-semibold">
@@ -170,21 +158,6 @@ export const ChangelogPRMetadata = ({
                             {(githubPRMetadata.comments ?? 0) + (githubPRMetadata.review_comments ?? 0)}
                         </a>
                     </div>
-                    {codingStyle && (
-                        <div
-                            className="col-start-5 col-span-2 flex flex-row items-center whitespace-nowrap"
-                            aria-label={`Code: ${codingStyle}-coded`}
-                        >
-                            {codingStyle === 'human' ? (
-                                <IconPerson className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                            ) : (
-                                <IconAI className="w-4 h-4 opacity-50 shrink-0 mr-1" />
-                            )}
-                            <span className="font-semibold opacity-50">
-                                {codingStyle === 'human' ? 'Human-coded' : 'Agent-coded'}
-                            </span>
-                        </div>
-                    )}
                 </>
             )}
         </>

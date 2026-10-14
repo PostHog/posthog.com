@@ -74,20 +74,28 @@ const pad = (value: number, length = 2) => String(value).padStart(length, '0')
 const constructionStripe = `repeating-linear-gradient(65deg, black 0 12px, ${colors.yellow.core} 12px 24px)`
 
 export default function FactorySign({ since }: { since: string }): JSX.Element {
-    const [now, setNow] = useState<number | null>(null)
+    const [days, setDays] = useState<number | null>(null)
 
     useEffect(() => {
-        setNow(Date.now())
-        const interval = setInterval(() => setNow(Date.now()), 1000)
-        return () => clearInterval(interval)
-    }, [])
+        const sinceTime = new Date(since).getTime()
+        const dayInMilliseconds = 86_400_000
+        let timeout: ReturnType<typeof setTimeout>
 
-    const elapsed = now === null ? null : Math.max(0, Math.floor((now - new Date(since).getTime()) / 1000))
-    const days = elapsed === null ? null : Math.floor(elapsed / 86400)
+        const updateDays = () => {
+            const currentDays = Math.max(0, Math.floor((Date.now() - sinceTime) / dayInMilliseconds))
+            setDays(currentDays)
+            const nextDay = sinceTime + (currentDays + 1) * dayInMilliseconds
+            timeout = setTimeout(updateDays, Math.max(1, nextDay - Date.now()))
+        }
+
+        updateDays()
+        return () => clearTimeout(timeout)
+    }, [since])
+
     return (
-        <div className="@container size-full">
+        <div className="@container size-full overflow-y-auto">
             <div
-                className="relative grid h-full overflow-hidden border-2 border-black bg-white font-rounded font-extrabold uppercase leading-none text-black shadow-sm"
+                className="relative grid h-full min-h-[400px] overflow-hidden border-2 border-black bg-white font-rounded font-extrabold uppercase leading-none text-black shadow-sm"
                 style={{ gridTemplateRows: '9% 44% 22% 25%' }}
             >
                 <div style={{ backgroundImage: constructionStripe }} />

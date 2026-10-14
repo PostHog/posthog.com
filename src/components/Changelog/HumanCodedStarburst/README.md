@@ -1,4 +1,4 @@
-# HumanCodedStarburst
+# Human-coded starburst
 
 Yellow "A human coded this" starburst for changelog entries tagged `human-coded`. It reuses the site's `Bang` shape and `animate-grow` pulse from the homepage call to action. The shape receives `colors.yellow.core` from `@posthog/brand/colors` instead of the older hard-coded yellow used by the homepage.
 

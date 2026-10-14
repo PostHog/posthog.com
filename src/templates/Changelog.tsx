@@ -405,13 +405,11 @@ const Roadmap = ({
 
                 {roadmap.githubPRMetadata && (
                     <div
-                        className={`px-4 pb-4 pt-4.5 grid ${
-                            codingStyle ? 'grid-cols-6' : 'grid-cols-3'
-                        } gap-x-3 gap-y-2 text-sm border-t border-primary ${
+                        className={`px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm border-t border-primary ${
                             codingStyle === 'human' ? 'human-coded-panel-footer' : 'bg-primary'
                         }`}
                     >
-                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} codingStyle={codingStyle} />
+                        <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
 
@@ -709,7 +707,7 @@ const RoadmapCards = ({
         if (!activeRoadmap || !humanCodedSince || !hasMeasuredContainer) return
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (viewport) scrollSignBehindRoadmap(viewport)
-    }, [activeRoadmap?.id, humanCodedSince, hasMeasuredContainer, signWidth])
+    }, [activeRoadmap?.id, humanCodedSince, hasMeasuredContainer, signWidth, containerWidth])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
