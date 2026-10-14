@@ -146,23 +146,21 @@ If the function's name includes a leading underscore, then it's not safe and sim
 - `parseDateTime`
 - `parseDateTimeBestEffort`
 - `cityHash64`
-- `SHA1`
+- `sha1`
 - `UUIDv7ToDateTime`
 - `toNullableString`
 - `toUUIDOrDefault`
 
-### SHA1
+### sha1
 
-`SHA1(value)` returns the SHA-1 digest of a string as 40 uppercase hexadecimal characters:
+`sha1(value)` returns the SHA-1 digest of a string as 40 lowercase hexadecimal characters:
 
 ```sql
-SELECT SHA1('abc')
--- A9993E364706816ABA3E25717850C26C9CD0D89D
+SELECT sha1('abc')
+-- a9993e364706816aba3e25717850c26c9cd0d89d
 ```
 
-`SHA1` accepts one argument and returns `NULL` for a `NULL` input. It hashes UTF-8 bytes without normalizing Unicode.
-
-Use `lower(SHA1(value))` for lowercase hexadecimal text.
+`sha1` accepts one argument and returns `NULL` for a `NULL` input. It hashes UTF-8 bytes without normalizing Unicode.
 
 ## Dates and times
 
