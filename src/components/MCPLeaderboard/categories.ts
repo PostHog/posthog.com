@@ -56,6 +56,7 @@ export const CATEGORIES: Record<
     Autoresearch: { Icon: IconBrain, color: 'purple', docs: '/docs/model-context-protocol/tools' },
     Billing: { Icon: IconPiggyBank, color: 'green', docs: '/docs/billing/estimating-usage-costs' },
     'Billing alerts': { Icon: IconBell, color: 'green', docs: '/docs/billing/limits-alerts' },
+    'Business knowledge': { Icon: IconBook, color: 'purple', docs: '/docs/business-knowledge' },
     Context: { Icon: IconBook, color: 'salmon', docs: '/docs/self-driving/context' },
     Canvas: { Icon: IconGraph, color: 'purple', docs: '/docs/posthog-desktop/canvases' },
     Cohorts: { Icon: IconPeople, color: 'blue', docs: '/docs/data/cohorts' },
