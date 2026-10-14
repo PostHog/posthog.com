@@ -1,0 +1,78 @@
+---
+title: Dashboards and decisions
+shortTitle: Dashboards and decisions
+subtitle: Bring your insights together and decide what to investigate next.
+pocketGuideOrder: 5
+---
+
+<RightPage>
+
+# Dashboards and decisions
+
+Twig's engineers have looked at filter use, booking completion, and repeat bookings. Each insight answers a question. Now they need a way to review those answers together and decide where to spend their time.
+
+A dashboard collects saved insights in one place. It doesn't explain the results or choose a solution. That work still belongs to the engineers.
+
+## Collect the questions that matter
+
+The engineers choose **Dashboards → New Dashboard → Blank Dashboard** and name it **Exploring and booking stays**. They open each saved insight and use **Add to dashboard** to bring it into the same view:
+
+-   **How many people use the filters each week?** The trend counts unique people who generate `stay_filter_selected`, not their total number of clicks.
+-   **How many people finish a booking?** The funnel measures `booking_started` followed by `booking_completed` within 14 days.
+-   **Do guests book another stay?** The retention insight follows people from their first recorded `booking_completed` into later monthly intervals and counts another completed booking.
+
+The engineers reuse the saved insights rather than build copies. If they need to inspect a result, they can open the insight behind it.
+
+More filter users doesn't necessarily mean more bookings. A completed booking doesn't tell them whether guests will book another stay months later. The dashboard keeps these questions together without treating them as the same measure of success.
+
+## Keep the meaning beside the number
+
+The engineers give each insight a question-led name and a short description of its events, who it counts, and its time settings. A teammate shouldn't need to remember how the chart was built to understand it.
+
+They leave the dashboard's date range at its default, **No date range override**, so each insight keeps its own dates. If they change that setting later, they check each tile's settings. A shared date range still wouldn't make the trend's weekly buckets, the funnel's 14-day conversion window, and retention's monthly return intervals mean the same thing.
+
+Before reading a change as a decline, the engineers check each insight's filters and dates. They allow the full 14 days for booking starts to convert and compare only completed retention months from guests who have reached that interval.
+
+They also keep the number of people behind a percentage visible. In the earlier retention example, 50% meant two of four guests who saved a stay. In the booking funnel, 60% meant six of ten starters. These are separate illustrative groups, not two views of the same ten people.
+
+## Choose the next investigation
+
+The booking funnel gives the engineers a more concrete starting point. In the earlier simulated example, 10 people started a booking and six completed one within 14 days. One inspected request failed, but that doesn't explain all four people's drop-offs.
+
+They already used a `request_id` to connect one person's `booking_started` event to a failed response. An available replay can show what the visitor saw, but not establish the server's reason for failing.
+
+They add a short text card beside the funnel: **Known:** one linked booking request failed; three people's drop-offs remain unexplained. **Next:** check those booking trails for a similar failure and inspect the server-side evidence for the failed request. They haven't yet established a cause or shipped a fix.
+
+The distinction matters. The dashboard shows where to look. The request evidence helps explain one case. The engineers need that explanation before choosing a change.
+
+## Decide how to measure a change
+
+If the investigation leads to a booking-flow change, the engineers will revisit the same funnel afterward. They keep its event definitions, order, filters, and 14-day conversion window consistent so they don't mistake a different measurement for an improvement.
+
+They compare completed observation periods and look at both the conversion rate and the number of people. They also check individual requests: a person who succeeds on a second attempt still counts as converted, even though their first attempt failed.
+
+If the later completion rate is higher, they can say a higher share of starters completed the measured sequence. They can't conclude that their change caused the increase from that comparison alone. Different visitors, seasonal demand, or another product change could also affect it.
+
+When they need to test whether a particular change causes an improvement, they can use an experiment. For now, they have a defined problem to investigate and a consistent way to monitor what happens next.
+
+## Apply the process to your product
+
+The engineers started with a filter click. Giving it an event name and properties made the action measurable. Connecting events to visits and people made the counts meaningful. A trend showed filter use, a funnel measured booking completion, and retention followed repeat bookings.
+
+The result isn't a dashboard with every possible chart. It's a team that knows what to investigate next and what evidence would help it make a decision.
+
+Try the same process with one question about your product:
+
+1. Name the behavior you want to understand and the decision it could inform.
+2. Check that your events and identities represent that behavior correctly.
+3. Choose a trend, funnel, or retention insight, and define who and when it counts.
+4. Inspect the evidence behind the result before choosing an action.
+5. Decide what you'll measure afterward and what the result still won't prove.
+
+You don't need to use every analytics feature to start improving a product. You need a question, data you can trust, and a next action supported by what you found.
+
+## Further reading
+
+[Dashboards](/docs/product-analytics/dashboards) · [Creating insights](/docs/product-analytics/insights) · [Experiments](/docs/experiments)
+
+</RightPage>
