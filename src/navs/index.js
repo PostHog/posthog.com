@@ -7538,6 +7538,10 @@ export const docsMenu = {
                             name: 'A/B testing prompts',
                             url: '/docs/prompt-management/prompt-experiments',
                         },
+                        {
+                            name: 'Temporal workflows',
+                            url: '/docs/prompt-management/temporal',
+                        },
                     ],
                 },
                 {
