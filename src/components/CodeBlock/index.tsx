@@ -334,7 +334,10 @@ export const CodeBlock = ({
                             </Tab.List>
                         </Tab.Group>
                     ) : showLabel ? (
-                        <div className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50">
+                        <div
+                            className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50"
+                            data-md-export={currentLanguage.file || label ? undefined : 'skip'}
+                        >
                             {currentLanguage.file ? (
                                 <div className="flex items-center space-x-1.5">
                                     <svg

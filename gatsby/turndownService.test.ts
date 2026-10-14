@@ -76,11 +76,11 @@ test('preserves blank lines and indentation in highlighted code', () => {
 test('exports agent sections, code labels, and region metadata without page controls', () => {
     const html = `<main><h1>Agent docs</h1>
         <h2 id="install">Install <span>Recommended</span></h2>
-        <div class="code-block"><div class="bg-accent"><span>Terminal</span></div>
-        <pre><code>npm install posthog-js</code></pre></div>
-        <div class="code-block"><div class="bg-accent"><span>HTML</span></div>
+        <div class="code-block"><div class="bg-accent"><div data-md-export="skip"><span>Terminal</span></div></div>
+        <pre><code class="language-bash">npm install posthog-js</code></pre></div>
+        <div class="code-block"><div class="bg-accent"><div><span>vite.config.ts</span></div></div>
         <pre><code class="language-typescript">const client = posthog</code></pre></div>
-        <pre><code>curl https://us.i.posthog.com</code></pre>
+        <pre><code>curl https://us.i.posthog.com https://webhooks.us.posthog.com</code></pre>
         <h2 id="configure">Configure</h2>
         <div class="my-4"><ul><li><button role="tab">Cloud<span>2</span></button></li></ul>
         <div role="tabpanel"><p>Cloud instructions</p></div></div>
@@ -101,21 +101,21 @@ test('exports agent sections, code labels, and region metadata without page cont
     assert.ok(markdown.startsWith('# Agent docs\n\nCanonical URL: https://posthog.com/docs/agent-test'))
     assert.ok(markdown.includes('> **Cloud region:**'))
     assert.ok(markdown.includes('`https://eu.i.posthog.com`'))
+    assert.ok(markdown.includes('`https://webhooks.eu.posthog.com` instead of `https://webhooks.us.posthog.com`'))
     assert.ok(
         markdown.includes(
             '## On this page\n\n- [Install (recommended)](#install)\n- [Configure](#configure)\n- [Connect](#connect)'
         )
     )
     assert.ok(markdown.includes('```bash\nnpm install posthog-js\n```'))
-    assert.ok(markdown.includes('```bash\ncurl https://us.i.posthog.com\n```'))
-    assert.ok(markdown.includes('```typescript\nconst client = posthog\n```'))
+    assert.ok(markdown.includes('vite.config.ts\n\n```typescript\nconst client = posthog\n```'))
     assert.ok(markdown.includes('## Cloud\n\nCloud instructions'))
     assert.ok(markdown.includes('### TypeScript\n\n```typescript'))
     assert.ok(markdown.includes('**Compatibility**\n\nUse a supported server.'))
     assert.ok(markdown.includes('[SDKs: Choose a library](https://posthog.com/docs/libraries.md)'))
     assert.doesNotMatch(
         markdown,
-        /Terminal|HTML|Cloud2|TypeScript1|Selected mode|Other mode|Another mode|Still have questions|Was this page useful|Community questions|Ask the community|Rate this page|Comments/
+        /Terminal|Cloud2|TypeScript1|Selected mode|Other mode|Another mode|Still have questions|Was this page useful|Community questions|Ask the community|Rate this page|Comments/
     )
 })
 
@@ -126,7 +126,7 @@ test('rewrites agent prose while preserving fenced examples and omitting unneces
         <a href="//example.com">external</a>, and <a href="#links">this section</a>.</p>
         <p>https://us.i.posthog.com and https://eu.i.posthog.com;
         https://us.posthog.com, https://app.posthog.com, and https://eu.posthog.com</p>
-        <pre><code>${code}</code></pre>`
+        <pre><code class="language-bash">${code}</code></pre>`
     const markdown = convertHtmlToAgentMarkdown(html, 'Agent docs', '/docs/agent-test')
     assert.ok(markdown.includes('Use `instrument()` with [privacy](https://posthog.com/docs/example.md#privacy)'))
     assert.ok(markdown.includes('[external](//example.com)'))

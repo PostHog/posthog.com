@@ -405,35 +405,6 @@ export const postProcessMarkdown = (markdown: string, title: string): string => 
 
 const SITE_ORIGIN = 'https://posthog.com'
 const PAGE_FEEDBACK_HEADINGS = new Set(['Still have questions?', 'Was this page useful?', 'Community questions'])
-const CODE_LABEL_LANGUAGES: Record<string, string> = {
-    terminal: 'bash',
-    shell: 'bash',
-    html: 'html',
-    typescript: 'typescript',
-}
-const SHELL_COMMANDS = new Set([
-    'npx',
-    'npm',
-    'pnpm',
-    'yarn',
-    'bun',
-    'pip',
-    'pip3',
-    'uv',
-    'brew',
-    'curl',
-    'wget',
-    'docker',
-    'git',
-    'export',
-    'cargo',
-    'gem',
-    'bundle',
-    'composer',
-    'dotnet',
-    'flutter',
-    'go',
-])
 const MIN_TABLE_OF_CONTENTS_SECTIONS = 3
 
 function removePageFeedback(document: Document) {
@@ -455,22 +426,6 @@ function removeTabCountBadges(document: Document) {
         /^\d+$/.test((span.textContent ?? '').trim())
     )
     countBadges.forEach((badge) => badge.remove())
-}
-
-function moveCodeLabelsIntoFences(document: Document) {
-    document.querySelectorAll('div.code-block').forEach((codeBlock) => {
-        const header = codeBlock.querySelector(':scope > div.bg-accent')
-        if (!header || header.querySelector('[role="tablist"]')) return
-        const labelLanguage = CODE_LABEL_LANGUAGES[header.firstElementChild?.textContent?.trim().toLowerCase() ?? '']
-        if (!labelLanguage) return
-        const preformatted = codeBlock.querySelector('pre')
-        const codeElement = preformatted?.querySelector('code') ?? preformatted
-        const hasLanguage = /language-\w+/.test(codeElement?.getAttribute('class') ?? '')
-        if (codeElement && !hasLanguage) {
-            codeElement.classList.add(`language-${labelLanguage}`)
-        }
-        header.remove()
-    })
 }
 
 function convertCollapsiblesToSections(document: Document) {
@@ -514,17 +469,6 @@ function removeClientOnlyToggles(document: Document) {
     })
 }
 
-function tagUntaggedShellBlocks(document: Document) {
-    document.querySelectorAll('pre').forEach((preformatted) => {
-        const codeElement = preformatted.querySelector('code') ?? preformatted
-        const classNames = `${preformatted.getAttribute('class') ?? ''} ${codeElement.getAttribute('class') ?? ''}`
-        if (/language-\w+/.test(classNames)) return
-        const firstWord = (codeElement.textContent ?? '').trim().split(/\s+/)[0]
-        if (!SHELL_COMMANDS.has(firstWord)) return
-        codeElement.classList.add('language-bash')
-    })
-}
-
 function collectSectionAnchors(document: Document) {
     return Array.from(document.querySelectorAll('h2[id]'))
         .map((heading) => ({ id: heading.id, text: (heading.textContent ?? '').trim() }))
@@ -559,12 +503,20 @@ function absolutizeRootRelativeLinks(line: string) {
 
 const US_TO_EU_HOST_SWAPS = [
     { usHost: 'us.i.posthog.com', euHost: 'eu.i.posthog.com', role: 'ingestion host' },
+    { usHost: 'us-assets.i.posthog.com', euHost: 'eu-assets.i.posthog.com', role: 'assets host' },
+    { usHost: 'webhooks.us.posthog.com', euHost: 'webhooks.eu.posthog.com', role: 'webhooks host' },
     { usHost: 'us.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
     { usHost: 'app.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
 ]
 
+function mentionsHost(markdown: string, host: string) {
+    return new RegExp(`(?<![\\w.-])${host.replace(/\./g, '\\.')}(?![\\w-])`).test(markdown)
+}
+
 function findUsOnlyHostSwaps(markdown: string) {
-    return US_TO_EU_HOST_SWAPS.filter(({ usHost, euHost }) => markdown.includes(usHost) && !markdown.includes(euHost))
+    return US_TO_EU_HOST_SWAPS.filter(
+        ({ usHost, euHost }) => mentionsHost(markdown, usHost) && !mentionsHost(markdown, euHost)
+    )
 }
 
 function buildRegionNote(hostSwaps: typeof US_TO_EU_HOST_SWAPS) {
@@ -610,11 +562,9 @@ export const convertHtmlToAgentMarkdown = (html: string, title: string, docsPath
         removePageFeedback(document)
         inlineRecommendedBadges(document)
         removeTabCountBadges(document)
-        moveCodeLabelsIntoFences(document)
         convertCollapsiblesToSections(document)
         flattenBlockLinks(document)
         removeClientOnlyToggles(document)
-        tagUntaggedShellBlocks(document)
         sectionAnchors = collectSectionAnchors(document)
     })
     const bodyMarkdown = rewriteProseLines(
