@@ -40,7 +40,7 @@ POST it to `<ph_client_api_host>/i/v0/e/`, or wrap multiple events in the [batch
 | `$host`                    | Recommended | The request host. Derive it from the URL if your log line doesn't carry it separately.                                                              |
 | `$pathname`                | Recommended | The request path without the query string.                                                                                                           |
 | `$process_person_profile`  | Recommended | Set to `false` so log traffic doesn't create a [person profile](/docs/data/anonymous-vs-identified-events) per distinct ID. See below.              |
-| `$ip`                      | Recommended | The client IP. Enables [GeoIP enrichment](/docs/cdp/transformations/geoip) and IP-based bot classification.                                          |
+| `$ip`                      | Recommended | The client IP. Enables [GeoIP enrichment](/docs/data-pipelines/transformations/geoip) and IP-based bot classification.                                          |
 | `$referrer`                | Optional    | The `Referer` header.                                                                                                                                |
 | `method`                   | Optional    | The HTTP method.                                                                                                                                     |
 | `status_code`              | Optional    | The response status code.                                                                                                                            |

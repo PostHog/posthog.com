@@ -620,17 +620,17 @@
         },
         {
             "source": "/docs/cdp/apps:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?",
+            "destination": "/docs/data-pipelines/destinations:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/cdp/sources/custom:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/custom-rest-source:ext?",
+            "destination": "/docs/data-pipelines/sources/custom-rest-source:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/data-warehouse/sources/customerio:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/customer-io:ext?",
+            "destination": "/docs/data-pipelines/sources/customer-io:ext?",
             "statusCode": 301
         },
         {
@@ -815,7 +815,7 @@
         },
         {
             "source": "/webhooks",
-            "destination": "/docs/cdp/destinations/webhook"
+            "destination": "/docs/data-pipelines/destinations/webhook"
         },
         {
             "source": "/why",
@@ -1263,11 +1263,11 @@
         },
         {
             "source": "/docs/integrations/message-formatting:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/libraries/message-formatting:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/libraries/microsoft-teams:ext(\\.md)?",
@@ -1275,23 +1275,23 @@
         },
         {
             "source": "/docs/integrate/webhooks/message-formatting:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/webhooks/message-formatting:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/integrate/webhooks/microsoft-teams:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/integrate/webhooks/discord:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/integrate/webhooks/slack:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/slack:ext?"
+            "destination": "/docs/data-pipelines/destinations/slack:ext?"
         },
         {
             "source": "/docs/integrations/microsoft-teams:ext(\\.md)?",
@@ -2341,7 +2341,7 @@
         },
         {
             "source": "/apps/unduplicator/docs",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/apps/url-normalizer/docs",
@@ -3230,7 +3230,7 @@
         },
         {
             "source": "/docs/integrate/webhooks:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/roadmap/changelog",
@@ -3258,7 +3258,7 @@
         },
         {
             "source": "/docs/integrate/webhooks:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/apps/advanced-geoip",
@@ -3394,7 +3394,7 @@
         },
         {
             "source": "/apps/patterns-connector",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/apps/postgres-export",
@@ -3514,23 +3514,23 @@
         },
         {
             "source": "/docs/apps/replicator:ext(\\.md)?",
-            "destination": "/docs/cdp/replicator:ext?"
+            "destination": "/docs/data-pipelines/replicator:ext?"
         },
         {
             "source": "/docs/apps/advanced-geoip:ext(\\.md)?",
-            "destination": "/docs/cdp/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
         },
         {
             "source": "/docs/cdp/advanced-geoip:ext(\\.md)?",
-            "destination": "/docs/cdp/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
         },
         {
             "source": "/docs/apps/airbyte-export:ext(\\.md)?",
-            "destination": "/docs/cdp/airbyte-export:ext?"
+            "destination": "/docs/data-pipelines/airbyte-export:ext?"
         },
         {
             "source": "/docs/apps/amazon-kinesis:ext(\\.md)?",
-            "destination": "/docs/cdp/amazon-kinesis:ext?"
+            "destination": "/docs/data-pipelines/amazon-kinesis:ext?"
         },
         {
             "source": "/docs/apps/automatic-cohort-creator:ext(\\.md)?",
@@ -3538,55 +3538,55 @@
         },
         {
             "source": "/docs/apps/avo-inspector:ext(\\.md)?",
-            "destination": "/docs/cdp/avo-inspector:ext?"
+            "destination": "/docs/data-pipelines/avo-inspector:ext?"
         },
         {
             "source": "/docs/apps/bigquery-export:ext(\\.md)?",
-            "destination": "/docs/cdp/bigquery-export:ext?"
+            "destination": "/docs/data-pipelines/bigquery-export:ext?"
         },
         {
             "source": "/docs/apps/bitbucket-release-tracker:ext(\\.md)?",
-            "destination": "/docs/cdp/bitbucket-release-tracker:ext?"
+            "destination": "/docs/data-pipelines/bitbucket-release-tracker:ext?"
         },
         {
             "source": "/docs/apps/currency-normalization:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/customer-io:ext(\\.md)?",
-            "destination": "/docs/cdp/customer-io:ext?"
+            "destination": "/docs/data-pipelines/customer-io:ext?"
         },
         {
             "source": "/docs/apps/databricks",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/downsampling:ext(\\.md)?",
-            "destination": "/docs/cdp/downsampling:ext?"
+            "destination": "/docs/data-pipelines/downsampling:ext?"
         },
         {
             "source": "/docs/apps/email-scoring",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/engage-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/engage-connector:ext?"
+            "destination": "/docs/data-pipelines/engage-connector:ext?"
         },
         {
             "source": "/docs/apps/event-sequence-timer:ext(\\.md)?",
-            "destination": "/docs/cdp/event-sequence-timer:ext?"
+            "destination": "/docs/data-pipelines/event-sequence-timer:ext?"
         },
         {
             "source": "/docs/apps/filter-out:ext(\\.md)?",
-            "destination": "/docs/cdp/filter-out:ext?"
+            "destination": "/docs/data-pipelines/filter-out:ext?"
         },
         {
             "source": "/docs/apps/first-time-event-tracker:ext(\\.md)?",
-            "destination": "/docs/cdp/first-time-event-tracker:ext?"
+            "destination": "/docs/data-pipelines/first-time-event-tracker:ext?"
         },
         {
             "source": "/docs/apps/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
         },
         {
             "source": "/docs/apps/github-release-tracker",
@@ -3598,119 +3598,119 @@
         },
         {
             "source": "/docs/apps/gitlab-release-tracker",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/google-cloud-export:ext(\\.md)?",
-            "destination": "/docs/cdp/google-cloud-export:ext?"
+            "destination": "/docs/data-pipelines/google-cloud-export:ext?"
         },
         {
             "source": "/docs/apps/google-pub-sub-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/google-pub-sub-connector:ext?"
+            "destination": "/docs/data-pipelines/google-pub-sub-connector:ext?"
         },
         {
             "source": "/docs/apps/heartbeat",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/hubspot-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/hubspot-connector:ext?"
+            "destination": "/docs/data-pipelines/hubspot-connector:ext?"
         },
         {
             "source": "/docs/apps/ingestion-alert",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/intercom:ext(\\.md)?",
-            "destination": "/docs/cdp/intercom:ext?"
+            "destination": "/docs/data-pipelines/intercom:ext?"
         },
         {
             "source": "/docs/apps/laudspeaker-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/laudspeaker-connector:ext?"
+            "destination": "/docs/data-pipelines/laudspeaker-connector:ext?"
         },
         {
             "source": "/docs/apps/memphis-exporter:ext(\\.md)?",
-            "destination": "/docs/cdp/memphis-exporter:ext?"
+            "destination": "/docs/data-pipelines/memphis-exporter:ext?"
         },
         {
             "source": "/docs/apps/n8n:ext(\\.md)?",
-            "destination": "/docs/cdp/n8n:ext?"
+            "destination": "/docs/data-pipelines/n8n:ext?"
         },
         {
             "source": "/docs/apps/orbit",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/outfunnel-exporter:ext(\\.md)?",
-            "destination": "/docs/cdp/outfunnel-exporter:ext?"
+            "destination": "/docs/data-pipelines/outfunnel-exporter:ext?"
         },
         {
             "source": "/docs/apps/pace-integration:ext(\\.md)?",
-            "destination": "/docs/cdp/pace-integration:ext?"
+            "destination": "/docs/data-pipelines/pace-integration:ext?"
         },
         {
             "source": "/docs/apps/pagerduty-connector:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/patterns-connector",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/postgres-export:ext(\\.md)?",
-            "destination": "/docs/cdp/postgres-export:ext?"
+            "destination": "/docs/data-pipelines/postgres-export:ext?"
         },
         {
             "source": "/docs/apps/property-filter:ext(\\.md)?",
-            "destination": "/docs/cdp/property-filter:ext?"
+            "destination": "/docs/data-pipelines/property-filter:ext?"
         },
         {
             "source": "/docs/apps/property-flattener",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/redshift-export:ext(\\.md)?",
-            "destination": "/docs/cdp/redshift-export:ext?"
+            "destination": "/docs/data-pipelines/redshift-export:ext?"
         },
         {
             "source": "/docs/apps/replicator:ext(\\.md)?",
-            "destination": "/docs/cdp/replicator:ext?"
+            "destination": "/docs/data-pipelines/replicator:ext?"
         },
         {
             "source": "/docs/apps/route-censor:ext(\\.md)?",
-            "destination": "/docs/cdp/route-censor:ext?"
+            "destination": "/docs/data-pipelines/route-censor:ext?"
         },
         {
             "source": "/docs/apps/rudderstack-export:ext(\\.md)?",
-            "destination": "/docs/cdp/rudderstack-export:ext?"
+            "destination": "/docs/data-pipelines/rudderstack-export:ext?"
         },
         {
             "source": "/docs/apps/rudderstack-import:ext(\\.md)?",
-            "destination": "/docs/cdp/rudderstack-import:ext?"
+            "destination": "/docs/data-pipelines/rudderstack-import:ext?"
         },
         {
             "source": "/docs/apps/s3-export:ext(\\.md)?",
-            "destination": "/docs/cdp/s3-export:ext?"
+            "destination": "/docs/data-pipelines/s3-export:ext?"
         },
         {
             "source": "/docs/apps/salesforce-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/salesforce-connector:ext?"
+            "destination": "/docs/data-pipelines/salesforce-connector:ext?"
         },
         {
             "source": "/docs/apps/schema-enforcer:ext(\\.md)?",
-            "destination": "/docs/cdp/schema-enforcer:ext?"
+            "destination": "/docs/data-pipelines/schema-enforcer:ext?"
         },
         {
             "source": "/docs/apps/segment:ext(\\.md)?",
-            "destination": "/docs/cdp/segment:ext?"
+            "destination": "/docs/data-pipelines/segment:ext?"
         },
         {
             "source": "/docs/apps/semver-flattener:ext(\\.md)?",
-            "destination": "/docs/cdp/semver-flattener:ext?"
+            "destination": "/docs/data-pipelines/semver-flattener:ext?"
         },
         {
             "source": "/docs/apps/sendgrid-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/sendgrid-connector:ext?"
+            "destination": "/docs/data-pipelines/sendgrid-connector:ext?"
         },
         {
             "source": "/docs/apps/sentry-connector:ext(\\.md)?",
@@ -3718,51 +3718,51 @@
         },
         {
             "source": "/docs/apps/shopify:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/snowflake-export:ext(\\.md)?",
-            "destination": "/docs/cdp/snowflake-export:ext?"
+            "destination": "/docs/data-pipelines/snowflake-export:ext?"
         },
         {
             "source": "/docs/apps/stripe-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/stripe-connector:ext?"
+            "destination": "/docs/data-pipelines/stripe-connector:ext?"
         },
         {
             "source": "/docs/apps/taxonomy-standardizer:ext(\\.md)?",
-            "destination": "/docs/cdp/taxonomy-standardizer:ext?"
+            "destination": "/docs/data-pipelines/taxonomy-standardizer:ext?"
         },
         {
             "source": "/docs/apps/timestamp-parser:ext(\\.md)?",
-            "destination": "/docs/cdp/timestamp-parser:ext?"
+            "destination": "/docs/data-pipelines/timestamp-parser:ext?"
         },
         {
             "source": "/docs/apps/twitter-followers:ext(\\.md)?",
-            "destination": "/docs/cdp/twitter-followers:ext?"
+            "destination": "/docs/data-pipelines/twitter-followers:ext?"
         },
         {
             "source": "/docs/apps/unduplicator",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/docs/apps/url-normalizer:ext(\\.md)?",
-            "destination": "/docs/cdp/url-normalizer:ext?"
+            "destination": "/docs/data-pipelines/url-normalizer:ext?"
         },
         {
             "source": "/docs/apps/url-query:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
+            "destination": "/docs/data-pipelines/transformations/posthog-app-url-parameters-to-event-properties:ext?"
         },
         {
             "source": "/docs/apps/user-agent-populator:ext(\\.md)?",
-            "destination": "/docs/cdp/user-agent-populator:ext?"
+            "destination": "/docs/data-pipelines/user-agent-populator:ext?"
         },
         {
             "source": "/docs/apps/variance-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/variance-connector:ext?"
+            "destination": "/docs/data-pipelines/variance-connector:ext?"
         },
         {
             "source": "/docs/apps/zapier-connector",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/questions/aliasing-device-i-ds-to-user-i-ds",
@@ -3786,7 +3786,7 @@
         },
         {
             "source": "/docs/apps/zendesk-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/zendesk-connector:ext?"
+            "destination": "/docs/data-pipelines/zendesk-connector:ext?"
         },
         {
             "source": "/docs/data/autocapture:ext(\\.md)?",
@@ -3806,11 +3806,11 @@
         },
         {
             "source": "/docs/cdp/zapier-connector:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/cdp/amazon-kinesis:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/cdp/github-release-tracker",
@@ -3822,11 +3822,11 @@
         },
         {
             "source": "/docs/cdp/twitter-followers:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/cdp/gitlab-release-tracker:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
@@ -3834,7 +3834,7 @@
         },
         {
             "source": "/docs/cdp/bitbucket-release-tracker:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/handbook/company/strategy",
@@ -3902,7 +3902,7 @@
         },
         {
             "source": "/tutorials/how-to-connect-patterns-and-posthog",
-            "destination": "/docs/cdp/"
+            "destination": "/docs/data-pipelines/"
         },
         {
             "source": "/tutorials/monitor-aws-bedrock-calls",
@@ -3930,7 +3930,7 @@
         },
         {
             "source": "/docs/cdp/shopify:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/james",
@@ -4102,15 +4102,15 @@
         },
         {
             "source": "/docs/batch-exports:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports:ext?"
+            "destination": "/docs/data-pipelines/batch-exports:ext?"
         },
         {
             "source": "/docs/batch-exports/s3:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/s3:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/s3:ext?"
         },
         {
             "source": "/docs/batch-exports/snowflake:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/snowflake:ext?"
         },
         {
             "source": "/blog/startup-golioth",
@@ -4186,15 +4186,15 @@
         },
         {
             "source": "/docs/batch-exports:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports:ext?"
+            "destination": "/docs/data-pipelines/batch-exports:ext?"
         },
         {
             "source": "/docs/batch-exports/s3:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/s3:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/s3:ext?"
         },
         {
             "source": "/docs/batch-exports/snowflake:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/snowflake:ext?"
         },
         {
             "source": "/blog/startup-golioth",
@@ -4478,11 +4478,11 @@
         },
         {
             "source": "/docs/cdp/unduplicator:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/cdp/unduplicator",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/handbook/strategy/overview",
@@ -4542,7 +4542,7 @@
         },
         {
             "source": "/docs/migrate/export-events",
-            "destination": "/docs/cdp/common-questions#why-cant-i-use-the-ui-or-events-api-to-export-data"
+            "destination": "/docs/data-pipelines/common-questions#why-cant-i-use-the-ui-or-events-api-to-export-data"
         },
         {
             "source": "/tutorials/mixpanel-to-posthog",
@@ -4966,35 +4966,35 @@
         },
         {
             "source": "/docs/cdp/first-time-event-tracker:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/cdp/first-time-event-tracker",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/docs/cdp/bigquery-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/bigquery:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/bigquery:ext?"
         },
         {
             "source": "/docs/cdp/postgres-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/postgres:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/postgres:ext?"
         },
         {
             "source": "/docs/cdp/s3-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/s3:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/s3:ext?"
         },
         {
             "source": "/docs/cdp/snowflake-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/snowflake:ext?"
         },
         {
             "source": "/docs/cdp/redshift-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports/redshift:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/redshift:ext?"
         },
         {
             "source": "/cdp/redshift-export",
-            "destination": "/docs/cdp/batch-exports/redshift"
+            "destination": "/docs/data-pipelines/batch-exports/redshift"
         },
         {
             "source": "/cdp/replicator",
@@ -5026,15 +5026,15 @@
         },
         {
             "source": "/cdp/zendesk-connector",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/docs/libraries/zendesk:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/cdp/snowflake-export",
-            "destination": "/docs/cdp/batch-exports/snowflake"
+            "destination": "/docs/data-pipelines/batch-exports/snowflake"
         },
         {
             "source": "/cdp/sentry-connector",
@@ -5050,31 +5050,31 @@
         },
         {
             "source": "/cdp/s3-export",
-            "destination": "/docs/cdp/batch-exports/s3"
+            "destination": "/docs/data-pipelines/batch-exports/s3"
         },
         {
             "source": "/cdp/route-censor",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/cdp/postgres-export",
-            "destination": "/docs/cdp/batch-exports/postgres"
+            "destination": "/docs/data-pipelines/batch-exports/postgres"
         },
         {
             "source": "/cdp/outfunnel-exporter",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/cdp/memphis-exporter",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/cdp/google-pub-sub-connector",
-            "destination": "/docs/cdp/batch-exports"
+            "destination": "/docs/data-pipelines/batch-exports"
         },
         {
             "source": "/cdp/google-cloud-export",
-            "destination": "/docs/cdp/batch-exports"
+            "destination": "/docs/data-pipelines/batch-exports"
         },
         {
             "source": "/cdp/event-sequence-timer",
@@ -5082,7 +5082,7 @@
         },
         {
             "source": "/cdp/bigquery-export",
-            "destination": "/docs/cdp/batch-exports/bigquery"
+            "destination": "/docs/data-pipelines/batch-exports/bigquery"
         },
         {
             "source": "/cdp/rudderstack-import",
@@ -5090,67 +5090,67 @@
         },
         {
             "source": "/cdp/airbyte-export",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/cdp/patterns-connector",
-            "destination": "/docs/cdp"
+            "destination": "/docs/data-pipelines"
         },
         {
             "source": "/docs/apps/build/types",
-            "destination": "/docs/cdp/build#types"
+            "destination": "/docs/data-pipelines/build#types"
         },
         {
             "source": "/docs/apps/build/tutorial:ext(\\.md)?",
-            "destination": "/docs/cdp/build/tutorial:ext?"
+            "destination": "/docs/data-pipelines/build/tutorial:ext?"
         },
         {
             "source": "/docs/apps/build/testing",
-            "destination": "/docs/cdp/build/reference#writing-tests"
+            "destination": "/docs/data-pipelines/build/reference#writing-tests"
         },
         {
             "source": "/docs/cdp/build/testing",
-            "destination": "/docs/cdp/build/reference#writing-tests"
+            "destination": "/docs/data-pipelines/build/reference#writing-tests"
         },
         {
             "source": "/docs/apps/build/reference:ext(\\.md)?",
-            "destination": "/docs/cdp/build/reference:ext?"
+            "destination": "/docs/data-pipelines/build/reference:ext?"
         },
         {
             "source": "/docs/apps/build:ext(\\.md)?",
-            "destination": "/docs/cdp/build:ext?"
+            "destination": "/docs/data-pipelines/build:ext?"
         },
         {
             "source": "/docs/cdp/build/api:ext(\\.md)?",
-            "destination": "/docs/cdp/build:ext?"
+            "destination": "/docs/data-pipelines/build:ext?"
         },
         {
             "source": "/docs/cdp/build/jobs:ext(\\.md)?",
-            "destination": "/docs/cdp/build:ext?"
+            "destination": "/docs/data-pipelines/build:ext?"
         },
         {
             "source": "/docs/cdp/enabling:ext(\\.md)?",
-            "destination": "/docs/cdp/build:ext?"
+            "destination": "/docs/data-pipelines/build:ext?"
         },
         {
             "source": "/docs/cdp/build/types",
-            "destination": "/docs/cdp/build#types"
+            "destination": "/docs/data-pipelines/build#types"
         },
         {
             "source": "/docs/apps:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build/reference:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build/tutorial:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/blog/learnings-from-elon",
@@ -5254,7 +5254,7 @@
         },
         {
             "source": "/tutorials/laudspeaker-posthog",
-            "destination": "/docs/cdp/laudspeaker-connector"
+            "destination": "/docs/data-pipelines/laudspeaker-connector"
         },
         {
             "source": "/tutorials/react-popups",
@@ -5396,75 +5396,75 @@
         },
         {
             "source": "/docs/cdp/airbyte-export:ext(\\.md)?",
-            "destination": "/docs/cdp/batch-exports:ext?"
+            "destination": "/docs/data-pipelines/batch-exports:ext?"
         },
         {
             "source": "/docs/cdp/avo-inspector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/avo:ext?"
+            "destination": "/docs/data-pipelines/destinations/avo:ext?"
         },
         {
             "source": "/docs/cdp/customer-io:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/customerio:ext?"
+            "destination": "/docs/data-pipelines/destinations/customerio:ext?"
         },
         {
             "source": "/docs/cdp/engage-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/engage:ext?"
+            "destination": "/docs/data-pipelines/destinations/engage:ext?"
         },
         {
             "source": "/docs/cdp/google-pub-sub-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/google-pubsub:ext?"
+            "destination": "/docs/data-pipelines/destinations/google-pubsub:ext?"
         },
         {
             "source": "/docs/cdp/google-cloud-export:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/google-cloud-storage:ext?"
+            "destination": "/docs/data-pipelines/destinations/google-cloud-storage:ext?"
         },
         {
             "source": "/docs/cdp/hubspot-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/hubspot:ext?"
+            "destination": "/docs/data-pipelines/destinations/hubspot:ext?"
         },
         {
             "source": "/docs/cdp/intercom:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/intercom:ext?"
+            "destination": "/docs/data-pipelines/destinations/intercom:ext?"
         },
         {
             "source": "/docs/cdp/laudspeaker-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/laudspeaker:ext?"
+            "destination": "/docs/data-pipelines/destinations/laudspeaker:ext?"
         },
         {
             "source": "/docs/cdp/rudderstack-export:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/rudderstack:ext?"
+            "destination": "/docs/data-pipelines/destinations/rudderstack:ext?"
         },
         {
             "source": "/docs/cdp/salesforce-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/salesforce:ext?"
+            "destination": "/docs/data-pipelines/destinations/salesforce:ext?"
         },
         {
             "source": "/docs/cdp/sendgrid-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/sendgrid:ext?"
+            "destination": "/docs/data-pipelines/destinations/sendgrid:ext?"
         },
         {
             "source": "/docs/cdp/variance-connector:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/pace-integration:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/memphis-exporter:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/outfunnel-exporter:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/route-censor:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/cdp/semver-flattener:ext(\\.md)?",
-            "destination": "/docs/cdp:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/experiments/experiment-significance:ext(\\.md)?",
@@ -5480,19 +5480,19 @@
         },
         {
             "source": "/docs/webhooks:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/webhooks/slack:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/slack:ext?"
+            "destination": "/docs/data-pipelines/destinations/slack:ext?"
         },
         {
             "source": "/docs/webhooks/microsoft-teams:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/docs/webhooks/discord:ext(\\.md)?",
-            "destination": "/docs/cdp/destinations/webhook:ext?"
+            "destination": "/docs/data-pipelines/destinations/webhook:ext?"
         },
         {
             "source": "/teams/website-docs",
@@ -5565,11 +5565,11 @@
         },
         {
             "source": "/docs/data-warehouse/setup/azure-blob:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/azure-blob:ext?"
+            "destination": "/docs/data-pipelines/sources/azure-blob:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/azure-db:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/azure-db:ext?"
+            "destination": "/docs/data-pipelines/sources/azure-db:ext?"
         },
         {
             "source": "/docs/data-warehouse/sources/azure-db:ext(\\.md)?",
@@ -5577,7 +5577,7 @@
         },
         {
             "source": "/docs/cdp/sources/azure-db:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/microsoft-sql-server:ext?"
+            "destination": "/docs/data-pipelines/sources/microsoft-sql-server:ext?"
         },
         {
             "source": "/docs/data-warehouse/sources/temporal:ext(\\.md)?",
@@ -5585,59 +5585,59 @@
         },
         {
             "source": "/docs/cdp/sources/temporal:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/temporalio:ext?"
+            "destination": "/docs/data-pipelines/sources/temporalio:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/chargebee:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/chargebee:ext?"
+            "destination": "/docs/data-pipelines/sources/chargebee:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/gcs:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/gcs:ext?"
+            "destination": "/docs/data-pipelines/sources/gcs:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/hubspot:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/hubspot:ext?"
+            "destination": "/docs/data-pipelines/sources/hubspot:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/index:ext(\\.md)?",
-            "destination": "/docs/cdp/sources:ext?"
+            "destination": "/docs/data-pipelines/sources:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/mysql:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/mysql:ext?"
+            "destination": "/docs/data-pipelines/sources/mysql:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/postgres:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/postgres:ext?"
+            "destination": "/docs/data-pipelines/sources/postgres:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/r2:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/r2:ext?"
+            "destination": "/docs/data-pipelines/sources/r2:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/s3:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/s3:ext?"
+            "destination": "/docs/data-pipelines/sources/s3:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/salesforce:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/salesforce:ext?"
+            "destination": "/docs/data-pipelines/sources/salesforce:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/snowflake:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/snowflake:ext?"
+            "destination": "/docs/data-pipelines/sources/snowflake:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/stripe:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/stripe:ext?"
+            "destination": "/docs/data-pipelines/sources/stripe:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/vitally:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/vitally:ext?"
+            "destination": "/docs/data-pipelines/sources/vitally:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/zendesk:ext(\\.md)?",
-            "destination": "/docs/cdp/sources/zendesk:ext?"
+            "destination": "/docs/data-pipelines/sources/zendesk:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup:ext(\\.md)?",
@@ -5721,75 +5721,75 @@
         },
         {
             "source": "/cdp/avo-inspector",
-            "destination": "/docs/cdp/destinations/avo"
+            "destination": "/docs/data-pipelines/destinations/avo"
         },
         {
             "source": "/cdp/customer-io",
-            "destination": "/docs/cdp/destinations/customerio"
+            "destination": "/docs/data-pipelines/destinations/customerio"
         },
         {
             "source": "/cdp/downsampling",
-            "destination": "/docs/cdp/downsampling"
+            "destination": "/docs/data-pipelines/downsampling"
         },
         {
             "source": "/cdp/engage-connector",
-            "destination": "/docs/cdp/destinations/engage"
+            "destination": "/docs/data-pipelines/destinations/engage"
         },
         {
             "source": "/cdp/filter-out",
-            "destination": "/docs/cdp/filter-out"
+            "destination": "/docs/data-pipelines/filter-out"
         },
         {
             "source": "/cdp/geoip-enrichment",
-            "destination": "/docs/cdp/geoip-enrichment"
+            "destination": "/docs/data-pipelines/geoip-enrichment"
         },
         {
             "source": "/cdp/hubspot-connector",
-            "destination": "/docs/cdp/sources/hubspot"
+            "destination": "/docs/data-pipelines/sources/hubspot"
         },
         {
             "source": "/cdp/intercom",
-            "destination": "/docs/cdp/destinations/intercom"
+            "destination": "/docs/data-pipelines/destinations/intercom"
         },
         {
             "source": "/cdp/property-filter",
-            "destination": "/docs/cdp/property-filter"
+            "destination": "/docs/data-pipelines/property-filter"
         },
         {
             "source": "/cdp/rudderstack-export",
-            "destination": "/docs/cdp/destinations/rudderstack"
+            "destination": "/docs/data-pipelines/destinations/rudderstack"
         },
         {
             "source": "/cdp/salesforce-connector",
-            "destination": "/docs/cdp/destinations/salesforce"
+            "destination": "/docs/data-pipelines/destinations/salesforce"
         },
         {
             "source": "/cdp/schema-enforcer",
-            "destination": "/docs/cdp/schema-enforcer"
+            "destination": "/docs/data-pipelines/schema-enforcer"
         },
         {
             "source": "/cdp/sendgrid-connector",
-            "destination": "/docs/cdp/destinations/sendgrid"
+            "destination": "/docs/data-pipelines/destinations/sendgrid"
         },
         {
             "source": "/cdp/taxonomy-standardizer",
-            "destination": "/docs/cdp/taxonomy-standardizer"
+            "destination": "/docs/data-pipelines/taxonomy-standardizer"
         },
         {
             "source": "/cdp/timestamp-parser",
-            "destination": "/docs/cdp/timestamp-parser"
+            "destination": "/docs/data-pipelines/timestamp-parser"
         },
         {
             "source": "/cdp/url-normalizer",
-            "destination": "/docs/cdp/url-normalizer"
+            "destination": "/docs/data-pipelines/url-normalizer"
         },
         {
             "source": "/cdp/url-query",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+            "destination": "/docs/data-pipelines/transformations/posthog-app-url-parameters-to-event-properties"
         },
         {
             "source": "/cdp/user-agent-populator",
-            "destination": "/docs/cdp/user-agent-populator"
+            "destination": "/docs/data-pipelines/user-agent-populator"
         },
         {
             "source": "/handbook/growth/marketing/components",
@@ -5817,39 +5817,39 @@
         },
         {
             "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+            "destination": "/docs/data-pipelines/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/transformations/posthog-plugin-geoip:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/template-geoip:ext?"
+            "destination": "/docs/data-pipelines/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/timestamp-parser-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/timestamp-parser-plugin:ext?"
         },
         {
             "source": "/docs/cdp/url-normalizer:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-url-normalizer-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/posthog-url-normalizer-plugin:ext?"
         },
         {
             "source": "/docs/cdp/user-agent-populator:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/user-agent-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/user-agent-plugin:ext?"
         },
         {
             "source": "/docs/cdp/property-filter:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/property-filter-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/property-filter-plugin:ext?"
         },
         {
             "source": "/docs/cdp/taxonomy-standardizer:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/taxonomy-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/taxonomy-plugin:ext?"
         },
         {
             "source": "/docs/cdp/downsampling:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/downsampling-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/downsampling-plugin:ext?"
         },
         {
             "source": "/docs/cdp/filter-out:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-filter-out-plugin:ext?"
+            "destination": "/docs/data-pipelines/transformations/posthog-filter-out-plugin:ext?"
         },
         {
             "source": "/docs/web-analytics/revenue-tracking:ext(\\.md)?",
@@ -5989,7 +5989,7 @@
         },
         {
             "source": "/docs/cdp/url-query:ext(\\.md)?",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
+            "destination": "/docs/data-pipelines/transformations/posthog-app-url-parameters-to-event-properties:ext?"
         },
         {
             "source": "/teams/cs-onboarding",
@@ -6237,7 +6237,7 @@
         },
         {
             "source": "/docs/cdp/common-questions:ext(\\.md)?",
-            "destination": "/docs/cdp/troubleshooting:ext?"
+            "destination": "/docs/data-pipelines/troubleshooting:ext?"
         },
         {
             "source": "/docs/data-warehouse/common-questions:ext(\\.md)?",
@@ -6365,7 +6365,7 @@
         },
         {
             "source": "/webhooks",
-            "destination": "/docs/cdp/destinations/webhook",
+            "destination": "/docs/data-pipelines/destinations/webhook",
             "statusCode": 301
         },
         {
@@ -6672,6 +6672,16 @@
         {
             "source": "/community/dashboard",
             "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/cdp:ext(\\.md)?",
+            "destination": "/docs/data-pipelines:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/cdp/:path*",
+            "destination": "/docs/data-pipelines/:path*",
             "statusCode": 301
         }
     ]
