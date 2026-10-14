@@ -9,6 +9,9 @@ export const preprocessHtmlForTabs = (html: string, transformDocument?: (documen
     sharedDom ??= new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>')
     const doc = sharedDom.window.document
     doc.documentElement.innerHTML = html
+    doc.querySelectorAll(
+        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
+    ).forEach((control) => control.remove())
     transformDocument?.(doc)
 
     const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
@@ -51,10 +54,6 @@ export const preprocessHtmlForTabs = (html: string, transformDocument?: (documen
             })
         }
     })
-
-    doc.querySelectorAll(
-        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
-    ).forEach((control) => control.remove())
 
     // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
     doc.querySelectorAll('img[class~="dark:hidden"] + img[class~="dark:block"]').forEach((image) => {
@@ -343,19 +342,6 @@ export const createTurndownService = (title: string) => {
         },
     })
 
-    turndownService.addRule('formatFeedbackSections', {
-        filter: (node) => {
-            if (node.nodeName === 'H3') {
-                const text = node.textContent?.trim() || ''
-                return text === 'Community questions' || text === 'Was this page useful?'
-            }
-            return false
-        },
-        replacement: (content) => {
-            return `\n\n### ${content.trim()}\n\n`
-        },
-    })
-
     return turndownService
 }
 
@@ -415,16 +401,16 @@ function removePageFeedback(document: Document) {
 }
 
 function inlineRecommendedBadges(document: Document) {
-    const badges = Array.from(document.querySelectorAll('h2 span, h3 span, h4 span')).filter(
-        (span) => span.children.length === 0 && (span.textContent ?? '').trim() === 'Recommended'
-    )
+    const badges = Array.from(document.querySelectorAll('h2, h3, h4'))
+        .flatMap((heading) => Array.from(heading.querySelectorAll('span')))
+        .filter((span) => span.children.length === 0 && (span.textContent ?? '').trim() === 'Recommended')
     badges.forEach((badge) => badge.replaceWith(document.createTextNode('(recommended)')))
 }
 
 function removeTabCountBadges(document: Document) {
-    const countBadges = Array.from(document.querySelectorAll('[role="tab"] span')).filter((span) =>
-        /^\d+$/.test((span.textContent ?? '').trim())
-    )
+    const countBadges = Array.from(document.querySelectorAll('[role="tab"]'))
+        .flatMap((tab) => Array.from(tab.querySelectorAll('span')))
+        .filter((span) => /^\d+$/.test((span.textContent ?? '').trim()))
     countBadges.forEach((badge) => badge.remove())
 }
 

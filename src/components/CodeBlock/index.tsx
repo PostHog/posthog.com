@@ -404,7 +404,10 @@ export const CodeBlock = ({
                             return (
                                 <>
                                     {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
-                                        <div className="relative flex items-center justify-center px-1">
+                                        <div
+                                            className="relative flex items-center justify-center px-1"
+                                            data-md-export="skip"
+                                        >
                                             <a
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}
                                                 target="_blank"
