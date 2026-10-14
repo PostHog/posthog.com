@@ -200,26 +200,32 @@ When every activity in one workflow run must use the same version, read the vers
 
 ## Set timeouts above the fetch timeout
 
-Each SDK fetch gives up after 10 seconds. Give the activity a `start_to_close_timeout` (Python) or `startToCloseTimeout` (TypeScript) longer than that, so a slow prompt fetch surfaces as a fallback instead of an activity timeout.
+A prompt fetch can take up to 10 seconds in TypeScript, and up to 30 seconds in Python, where the HTTP transport retries twice with a 10 second limit per attempt. Set the activity's `start_to_close_timeout` (Python) or `startToCloseTimeout` (TypeScript) above that, plus the time the LLM call needs, so a slow fetch ends in a fallback instead of an activity timeout and a retry.
 
 ## Shut down the client with the worker
 
-Generation events are sent in the background. Call `posthog.shutdown()` when the worker stops, so events queued by the last activities are sent before the process exits.
+Generation events are sent in the background. Call `shutdown()` on the shared PostHog client when the worker stops, so events queued by the last activities are sent before the process exits.
 
 <MultiLanguage>
 
 ```python
-try:
-    await worker.run()
-finally:
-    posthog.shutdown()
+# worker.py
+from activities import draft_reply, posthog, prompts
+
+# ...
+
+    try:
+        await worker.run()
+    finally:
+        posthog.shutdown()
 ```
 
 ```typescript
+// worker.ts
 try {
   await worker.run()
 } finally {
-  await posthog.shutdown()
+  await activities.posthog.shutdown()
 }
 ```
 
