@@ -23,8 +23,7 @@ export const endpoints = {
     // Beta in product/docs; no billing product yet (free during beta).
     status: 'beta',
     teamSlug: 'data-modeling',
-    // Squeak topic: /questions/topic/endpoints (squeakId from page-data).
-    forumTopicId: 393,
+    forumTag: 'endpoints',
     color: 'teal',
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',
@@ -239,7 +238,7 @@ export const endpoints = {
                 'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'context-warehouse/managed-warehouse',
+            slug: 'context-warehouse/warehouse',
             description:
                 "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
             className: '!size-6',

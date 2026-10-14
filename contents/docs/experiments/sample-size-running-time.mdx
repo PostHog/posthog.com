@@ -47,7 +47,7 @@ Automatic mode uses real data from your running experiment to calculate estimate
 - **Current exposures**: How many users have entered the experiment so far
 - **Daily exposure rate**: Calculated from your actual traffic since the experiment started
 
-This mode requires at least **1 day** of runtime and **100 exposures** before estimates appear. Until then, you'll see "Pending" in the running time indicator.
+This mode requires at least **1 day** of runtime and **100 exposures** before estimates appear. Until then, you'll see "Duration pending" in the running time indicator.
 
 <CalloutBox icon="IconInfo" title="Automatic mode requires real data">
 
@@ -115,9 +115,9 @@ The calculator outputs the following results:
 - **Estimated running time**: Days to reach the sample size at your current (or expected) exposure rate
 - **Progress**: How close you are to the target (automatic mode only)
 
-When you've collected enough data, the indicator shows "Complete" with a checkmark, meaning you have sufficient statistical power to detect the effect size you specified.
+When you've collected enough data, the indicator shows "Target reached", meaning you have sufficient statistical power to detect the effect size you specified.
 
-> **Note**: "Complete" means you have enough data for your specified MDE. You should still check if your results are statistically significant before making decisions. Having enough sample size doesn't guarantee you'll see a significant result – it means if there is a real effect of that size, you're likely to detect it.
+> **Note**: "Target reached" means you have enough data for your specified MDE. You should still check if your results are statistically significant before making decisions. Having enough sample size doesn't guarantee you'll see a significant result – it means if there is a real effect of that size, you're likely to detect it.
 
 <details>
 <summary>How the sample size formula works</summary>

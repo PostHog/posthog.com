@@ -9,12 +9,6 @@ availability:
 sourceId: Elasticsearch
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Elasticsearch connector syncs index data from your Elasticsearch cluster into the PostHog data warehouse. Each non-system index in your cluster becomes a separate table you can query alongside your PostHog data.
 
 ## Available tables

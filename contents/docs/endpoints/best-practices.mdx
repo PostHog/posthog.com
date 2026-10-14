@@ -19,6 +19,18 @@ For queries you run frequently, endpoints provide a stable, optimized way to pro
 
 **Example**: Create an endpoint for "Top 10 events this week" that your team or AI agent can call regularly.
 
+### Public stats pages
+
+Endpoints work well for public pages built from your own product data, like leaderboards, usage reports, or "state of" pages. The query and its aggregation rules live in PostHog, and your site only fetches the results.
+
+**Example**: The [MCP leaderboard](/mcp/leaderboard) on posthog.com runs on two SQL endpoints over `$mcp_tool_call` events: one groups by week and one by day. Each refreshes daily. When the site builds, it [calls both endpoints](https://github.com/PostHog/posthog.com/blob/master/gatsby/sourceNodes.ts) once and bakes the results into the page, so visitors never wait on a query.
+
+<CalloutBox icon="IconWarning" type="caution" title="Treat the endpoint output as public">
+
+Anything the endpoint returns ends up in your page data, even columns you don't render. Aggregate in the query itself: return shares and rates instead of raw counts, and fold small groups into an "Other" bucket.
+
+</CalloutBox>
+
 ## Performance tips
 
 ### Use materialization

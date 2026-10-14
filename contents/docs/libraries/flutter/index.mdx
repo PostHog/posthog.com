@@ -30,6 +30,43 @@ import FlutterInstall from '../../integrate/_snippets/install-flutter.mdx'
 
 <FlutterInstall />
 
+### Reproducible Android builds and Shorebird
+
+The Flutter SDK uses the native PostHog Android SDK, which depends on the PostHog core library. The Flutter package permits a range of Android SDK versions, so Gradle can select a newer native version even when your `posthog_flutter` version hasn't changed. Your `pubspec.lock` doesn't lock these Gradle dependencies.
+
+This matters for [Shorebird](https://docs.shorebird.dev/code-push/troubleshooting/) patches, which can't update native Android code. To keep PostHog's native dependencies consistent between a release and its patches, pin both native libraries before creating the release:
+
+1. Inspect the versions selected for your release build. From your app's `android` directory, run:
+
+   ```bash
+   ./gradlew :app:dependencyInsight --dependency com.posthog --configuration releaseRuntimeClasspath
+   ```
+
+   If you use product flavors, replace `releaseRuntimeClasspath` with your release variant's configuration, such as `productionReleaseRuntimeClasspath`. Record the selected versions of `com.posthog:posthog-android` and `com.posthog:posthog`; their version numbers differ.
+
+2. Add strict constraints to your app's `android/app/build.gradle.kts`. Replace the placeholders with the versions selected together in the previous step:
+
+   ```kotlin
+   dependencies {
+       constraints {
+           implementation("com.posthog:posthog-android") {
+               version { strictly("<android-sdk-version>") }
+           }
+           implementation("com.posthog:posthog") {
+               version { strictly("<core-version>") }
+           }
+       }
+   }
+   ```
+
+   For a Groovy `build.gradle`, use the same dependency declarations with `version { strictly "<version>" }` inside each constraint. A plain version declaration can still be upgraded during Gradle conflict resolution; [strict constraints](https://docs.gradle.org/current/userguide/dependency_versions.html#sec:rich-version-constraints) enforce the selected versions.
+
+3. Run the dependency report again, build your app, and verify that events arrive in PostHog. Commit the constraints and `pubspec.lock`, and use the same versions for the release and its patches.
+
+For an existing Shorebird release, use the native versions recorded for that release, not versions resolved by a fresh build today. Pinning PostHog alone doesn't freeze other plugins or your build tools. For broader dependency control, see [Gradle dependency locking](https://docs.gradle.org/current/userguide/dependency_locking.html).
+
+Pins also prevent automatic native bug fixes. When upgrading PostHog, review the pins, select compatible native versions together, and test event capture before shipping a new app-store release. Don't upgrade native dependencies in a Dart-only patch or force an old version below the Flutter package's required minimum.
+
 ## Capturing events
 
 import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events-flutter.mdx'

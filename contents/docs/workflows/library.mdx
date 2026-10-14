@@ -47,6 +47,8 @@ This ensures your message displays correctly even when a property is missing.
 
 </CalloutBox>
 
+For a property whose name starts with `$`, such as `$email`, use brackets and single quotes: `{{ person.properties['$email'] }}`. Dot notation like `{{ person.properties.$email }}` doesn't work with these properties.
+
 ### Email merge tags
 
 In addition to person properties, PostHog provides these system merge tags for email templates:

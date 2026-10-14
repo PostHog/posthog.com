@@ -9,12 +9,6 @@ availability:
 sourceId: CircleCI
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The CircleCI connector syncs your CI/CD pipeline data – pipelines, workflows, jobs, and projects – into PostHog.
 
 ## Adding a data source

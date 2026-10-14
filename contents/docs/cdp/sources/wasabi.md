@@ -12,9 +12,6 @@ sourceId: Wasabi
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Wasabi connector syncs sub-account, usage, and billing data from the [Wasabi Account Control API (WACA)](https://docs.wasabi.com/apidocs/account-control-api) into PostHog – sub-accounts, daily storage and data-transfer utilizations (account-level and per-bucket), and sub-account invoices. Use it to track storage spend and usage per sub-account or bucket alongside your product and revenue data.
 

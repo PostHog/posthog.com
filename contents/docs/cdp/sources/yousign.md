@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: YouSign
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Yousign connector syncs your eSignature data – signature requests, signers, documents, contacts, users, workspaces, and labels – into PostHog, so you can analyze signing funnels and completion rates alongside your product data.
 

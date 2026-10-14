@@ -9,12 +9,6 @@ availability:
 sourceId: GitLab
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Sync issues, merge requests, commits, pipelines, and more from a GitLab project into PostHog.
 
 ## Adding a data source

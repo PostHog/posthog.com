@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/rebrand-postmortem.png
 featuredImageType: full
 tags:
-  - Marketing
   - Founders
+  - Brand and marketing
 crosspost:
   - Blog
 ---

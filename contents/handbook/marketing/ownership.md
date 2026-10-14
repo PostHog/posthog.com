@@ -16,11 +16,11 @@ We only add a dedicated product marketer when it becomes painful not to have one
 
 Here's how PMMs are currently assigned.
 
-<TeamMember name="Joe Black" />: Lifecycle marketing, Self-driving, Conversations
-<TeamMember name="Sara Miteva" />: Session Replay, Replay Vision, Logs (APM), Error Tracking
-<TeamMember name="Cleo Lant" />: PostHog MCP, PostHog Slack, PostHog AI
-<TeamMember name="Lizzie Epton" />: Warehouse Sources, ETL, Semantic Layer
-<TeamMember name="Juliana Meyer" />: Product Analytics, MCP Analytics, AI Observability
+- <TeamMember name="Joe Black" /> owns Lifecycle marketing, Self-driving, Conversations
+- <TeamMember name="Sara Miteva" /> owns Session Replay, Replay Vision, Logs (APM), Error Tracking
+- <TeamMember name="Cleo Lant" /> owns PostHog MCP, PostHog Slack, PostHog AI
+- <TeamMember name="Lizzie Epton" /> owns Warehouse Sources, ETL, Semantic Layer
+- <TeamMember name="Juliana Meyer" /> owns Product Analytics, MCP Analytics, AI Observability
 
 **Cross-functional areas**
 
@@ -33,7 +33,7 @@ These are some other areas that PMMs own outside of specific products.
 <details>
 <summary>I need a developer marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Black" photo />. 
+Flag it in #team-developer-marketing or tag @product_marketers in Slack. For things that require customer comms, like incidents or pricing changes, we'll always help. For other things, like feature announcements, we'll help if we have capacity but will prioritize the products we've assigned above.
 </details>
 
 

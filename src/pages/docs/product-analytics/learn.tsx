@@ -8,7 +8,7 @@ export default function ProductAnalyticsLearn(): JSX.Element {
         <LearnPage
             productHandle="product_analytics"
             title="Learn Product Analytics – PostHog"
-            description="Follow engineers as they discover and learn about the wonderful world of user activity."
+            description="Follow Twig's product team as they decide what to track and how to use it."
             landing={ProductAnalyticsLearnLanding}
         />
     )

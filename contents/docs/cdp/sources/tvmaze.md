@@ -12,9 +12,6 @@ sourceId: TVMaze
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The TVmaze connector syncs the [TVmaze](https://www.tvmaze.com/) TV show catalog – shows, people (cast and crew), and their last-updated timestamps – into PostHog.
 

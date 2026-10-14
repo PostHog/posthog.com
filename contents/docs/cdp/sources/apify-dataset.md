@@ -12,9 +12,6 @@ sourceId: ApifyDataset
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Apify Dataset connector syncs the rows of an Apify dataset into PostHog, so you can analyze the output of your Apify Actors and web scrapers alongside your product data.
 

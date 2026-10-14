@@ -8,9 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product
-  - Sales & CS
-  - Marketing
+  - Finding product-market fit
 crosspost:
   - Blog
 ---

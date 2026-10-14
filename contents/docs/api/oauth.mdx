@@ -139,7 +139,26 @@ We recommend adding a CIMD verification token to your metadata document. Create 
 
 ### Declare your scopes
 
-We also recommend declaring the OAuth scopes your app needs under `com.posthog.scopes` in your metadata document. This sets a scope ceiling, the maximum set of scopes any token for your app can carry, so a reviewer can see exactly what your app asks for. See [Declare OAuth scopes for your app](/docs/integrate/provisioning#declare-oauth-scopes-for-your-app-optional) for details.
+Declare the OAuth scopes your app needs in the `com.posthog` namespace of your metadata document:
+
+```json
+{
+  "com.posthog": {
+    "scopes": ["insight:read", "project:read"],
+    "optional_scopes": ["session_recording:read"]
+  }
+}
+```
+
+Every scope in `scopes` is required. People who authorize your app see these scopes locked on the consent screen. Put scopes for features they can decline in `optional_scopes`. They can then authorize your app without those features.
+
+Both lists form the scope ceiling, which is the maximum set of scopes a token for your app can carry. Each scope still requires user consent. Check the scopes in the token response before using a feature that needs an optional scope.
+
+`optional_scopes` requires a non-empty `scopes` list. PostHog drops scopes that people can't grant to CIMD clients. If PostHog drops every entry in `scopes`, it rejects the metadata document. An `optional_scopes` list that becomes empty remains valid.
+
+When PostHog first reads your metadata document, omitting `scopes` lets your app request any scope people can grant. During a metadata refresh, omitting either field keeps its stored value. Publish `"optional_scopes": []` to remove all optional scopes.
+
+Manage CIMD app scopes through the metadata document. You can't edit them in the PostHog admin UI. See [supported scopes](#supported-scopes) for the scopes your app can request.
 
 Have a question while integrating? [Reach out to us](/talk-to-a-human).
 

@@ -12,9 +12,6 @@ sourceId: NebiusAI
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Nebius AI connector syncs metadata from your Nebius AI Studio (Token Factory) account into the PostHog data warehouse: available models, uploaded files, batch inference jobs, and fine-tuning jobs. Use it to join your inference and fine-tuning activity against product and revenue data.
 

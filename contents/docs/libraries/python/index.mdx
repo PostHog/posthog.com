@@ -103,7 +103,7 @@ The snapshot provides synchronous `is_enabled()`, `get_flag()`, and `get_flag_pa
 
 ### Fetch remote config
 
-Initialize the client with a server-side [feature flags secure API key](/docs/feature-flags/remote-config#step-1-find-your-feature-flags-secure-api-key) as `secret_key`, then await the remote config request:
+Initialize the client with a server-side [secret API key](/docs/feature-flags/remote-config#step-1-get-a-secret-api-key) as `secret_key`, then await the remote config request:
 
 ```python
 config = await posthog.get_remote_config_payload("landing-page-config")

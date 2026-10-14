@@ -357,7 +357,7 @@ const growthRows: { label: string; cells: [string, string, string] }[] = [
     },
     {
         label: 'Storage',
-        cells: ['Data stored by PostHog', 'Managed Warehouse, basic queries', 'Managed Warehouse, advanced modeling'],
+        cells: ['Data stored by PostHog', 'Warehouse, basic queries', 'Warehouse, advanced modeling'],
     },
     {
         label: 'Data out',

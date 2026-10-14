@@ -9,12 +9,6 @@ availability:
 sourceId: ShipStation
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The ShipStation source is currently in **alpha**. The core sync logic is stable, but the connector hasn't been battle-tested at scale yet. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The ShipStation connector syncs your order, shipment, fulfillment, product, customer, store, and warehouse data into PostHog.
 
 ## Adding a data source

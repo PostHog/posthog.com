@@ -152,14 +152,14 @@ export function ChatProvider({
                 if (chatBubbleActions) {
                     const el = document.createElement('p')
                     el.classList.add('community-suggestion')
-                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a id="inkeep-community-question-link" target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
+                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a id="inkeep-community-question-link" target="_blank" style="text-decoration: underline;" href="/forum"><strong>posting a community question</strong></a> and humans may respond!`
                     chatBubbleActions.insertAdjacentElement('afterend', el)
                     const communityQuestionLink = shadowRoot.querySelector('#inkeep-community-question-link')
                     if (communityQuestionLink) {
                         communityQuestionLink.addEventListener('click', (e: Event) => {
                             e.preventDefault()
                             e.stopPropagation()
-                            navigate('/questions', { state: { newWindow: true } })
+                            navigate('/forum', { state: { newWindow: true } })
                         })
                     }
                 }

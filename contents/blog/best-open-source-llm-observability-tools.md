@@ -35,7 +35,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 ## 1. PostHog
 
 - License: MIT
-- GitHub stars: 32.1k as of March 2026
+- GitHub stars: 40.2k as of October 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 [PostHog](/) is an all-in-one developer platform that combines [LLM observability](/ai-observability) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
@@ -68,12 +68,12 @@ Use the [setup wizard](/wizard) to get started in minutes – no sales call or e
 ## 2. Langfuse
 
 - License: MIT
-- GitHub stars: 23.3k as of March 2026
+- GitHub stars: 35.4k as of October 2026
 - [Langfuse on GitHub](https://github.com/langfuse/langfuse)
 
 [Langfuse](/docs/ai-observability/integrations/langfuse-posthog) (recently acquired by ClickHouse) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
-Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k units per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/month for 100k units, with every additional 100k units being $8.
+Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k units per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/month for 100k units. Additional usage starts at $8 per 100k units and decreases with volume, down to $6 per 100k units above 50M units.
 
 
 ![Langfuse dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_6db7c2d9e7.png)
@@ -89,7 +89,7 @@ Langfuse is also the most fully-featured LLM observability tool. Its pricing pag
 ## 3. Opik
 
 - License: Apache 2.0
-- GitHub stars: 18.3k as of March 2026
+- GitHub stars: 22.4k as of October 2026
 - [Opik on GitHub](https://github.com/comet-ml/opik)
 
 Opik is an open source platform for evaluating, testing, and monitoring LLM apps. It provides tracing, annotations, a prompt and model playground, evaluation, and more. It’s built by Comet, an end-to-end model evaluation platform for developers.
@@ -105,7 +105,7 @@ Thanks to Opik’s integration with Comet, it’s the only tool on this list tha
 ## 4. OpenLLMetry
 
 - License: Apache 2.0
-- GitHub stars: 6.9k as of March 2026
+- GitHub stars: 7.5k as of October 2026
 - [OpenLLMetry on GitHub](https://github.com/traceloop/openllmetry)
 
 OpenLLMetry is an open-source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using its SDK to capture data. 
@@ -125,7 +125,7 @@ It integrates with the broader OpenTelemetry ecosystem, meaning it can instrumen
 ## 5. Phoenix
 
 - License: Elastic License 2.0
-- GitHub stars: 8.9k as of March 2026
+- GitHub stars: 11.7k as of October 2026
 - [Phoenix on GitHub](https://github.com/Arize-ai/phoenix)
 
 Phoenix is an open source AI observability platform. It provides tracing, evaluation, experiments, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. It’s built by Arize AI, a unified AI observability and evaluation platform. 
@@ -143,7 +143,7 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 ## 6. Helicone
 
 - License: Apache 2.0
-- GitHub stars: 5.3k as of March 2026
+- GitHub stars: 6.2k as of October 2026
 - [Helicone on GitHub](https://github.com/Helicone/helicone)
 
 [Helicone](/docs/ai-observability/integrations/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 

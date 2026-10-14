@@ -9,12 +9,6 @@ availability:
 sourceId: Bugherd
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The BugHerd connector syncs your bug tracking and QA data – organization details, projects, tasks, and users – into the PostHog data warehouse.
 
 ## Adding a data source

@@ -12,9 +12,6 @@ sourceId: AssemblyAI
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The AssemblyAI connector syncs your speech-to-text transcripts into the PostHog Data warehouse, so you can analyze your transcription data alongside your product data. AssemblyAI retains only the last 90 days of transcripts, so only those are available to sync.
 

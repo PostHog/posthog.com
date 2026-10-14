@@ -12,9 +12,6 @@ sourceId: Wordpress
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The WordPress connector syncs posts, pages, comments, media, categories, tags, and users from a self-hosted WordPress site into the PostHog Data warehouse via the core REST API (`/wp-json/wp/v2`).
 

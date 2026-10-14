@@ -67,15 +67,15 @@ Hacker News is intensely logical and skeptical. They'll call out corporate spin,
 
 > **PostHog is the context layer for your product.** PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query it and make changes.
 
-<img width="705" height="508" alt="Screenshot 2026-09-30 at 15 03 55" src="https://github.com/user-attachments/assets/5f03e72d-6a58-4bee-8c85-c1c5c5e8b735" />
+<img width="660" height="520" alt="Screenshot 2026-10-01 at 21 10 21" src="https://github.com/user-attachments/assets/dc69c89b-b655-44e6-b7ee-3e3780b5c736" />
 
 This is the frame everyone at PostHog should use, everywhere.
 
 Our products help customers do one of four things, which build on each other:
 
 1. **Get data in.** PostHog ingests and stores your data, which can come directly from our own products or 3rd party sources.
-2. **Query the data yourself.** Using PostHog AI or our Web UI, you can manually run queries. 
-3. **Give the data to your agent to act on.** Agents are the primary interface for our users, so we make the same data available via PostHog MCP so agents can find issues and propose or take action.
+2. **Query the data with your agent.** Ask PostHog AI or use the PostHog MCP to run queries.
+3. **Give the data to your agent to act on.** We make the same data available via PostHog MCP so our users' agents can find issues and propose or take action.
 4. **Let PostHog self-drive.** Use PostHog to ship changes, measure their effect, and repeat.
 
 Start with the step that matches the customer's needs. Self-driving is an aspirational state, but the component parts are composable. If a customer wants to take Reports and pass them to their own agents to act on, that is totally fine. Our job is to give engineers a suite of tools they can pick and choose from. 
