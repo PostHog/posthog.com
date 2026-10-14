@@ -28,6 +28,12 @@ export const TERMS = {
             'An insight that shows how often an event happens over time, with an optional breakdown by a property.',
         slug: '/docs/product-analytics/insights',
     },
+    'retention insight': {
+        title: 'Retention insight',
+        description:
+            'Shows how many users return during later periods. You choose a start event and a return event, which can be the same or different.',
+        slug: '/docs/product-analytics/retention',
+    },
     'product analytics': {
         title: 'Product Analytics',
         description:
@@ -289,7 +295,7 @@ export const TERMS = {
     cohort: {
         title: 'Cohort',
         description:
-            'Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.',
+            'A group of users with something in common. Retention groups people by when they did the start event; saved cohorts are reusable lists you can use to filter insights.',
         slug: '/docs/data/cohorts',
     },
     'self-driving': {

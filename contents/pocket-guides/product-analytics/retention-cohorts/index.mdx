@@ -1,0 +1,81 @@
+---
+title: Retention and cohorts
+shortTitle: Retention and cohorts
+subtitle: See whether guests book another stay, then compare groups to find patterns.
+pocketGuideOrder: 4
+---
+
+<RightPage>
+
+# Retention and cohorts
+
+Twig's engineers have followed a visitor from a filter selection to a confirmed booking. Their trend shows how many people use filters, and their funnel shows that 6 of 10 people who started booking finished within 14 days. Neither insight tells them whether those guests ever book again.
+
+They now want to follow people after their first booking and see when they book another stay.
+
+## Define a repeat booking
+
+The earlier chapters connected Edgar's activity to an account and showed a confirmed booking. A later visit to browse or filter stays would bring Edgar back to the site, but it would not be another booking.
+
+A <Term name="retention insight" /> measures how many people perform a starting action, then perform a return action in a later period. The actions can differ. To measure repeat booking, Twig's engineers use `booking_completed` for both. That event is sent only when Twig confirms a booking.
+
+Only another completed booking in a later period counts as a return in this insight. If Edgar books again with the same identified account, PostHog can connect the new event to the earlier one across visits and devices.
+
+Guests may book trips months apart, so the engineers look at monthly periods. They want to see **when** another booking happens, not assume guests should book every month.
+
+## Follow first-time guests over time
+
+In a new retention insight, the engineers select `booking_completed` as both the start and return event, then count **Unique users**. They choose **First ever occurrence** so PostHog checks all recorded activity, not just the insight's date range, to find each person's first completed booking.
+
+They use monthly intervals and **On** for the returning time criteria, so each month shows who booked again in that specific month. They use **Period 0** as the percentage reference, so each month's percentage is compared with the original group.
+
+The funnel's 10 people started booking. This retention example starts with a different group: 10 people whose first recorded booking was completed in January 2025. PostHog puts them in the January <Term name="cohort" /> because they share the month of their first booking. These are selected months from that cohort's retention row – the full insight also shows the months between them.
+
+| Month | Guests who book | Retention |
+| ----- | --------------- | --------- |
+| 0     | 10              | 100%      |
+| 6     | 2               | 20%       |
+| 12    | 3               | 30%       |
+
+**Month 0** is January 2025. It is 100% because all 10 people made their first booking then, not because they returned. In **Month 6** (July), two book again, so retention for that month is 2 out of 10, or 20%. In **Month 12** (the following January), three of the original 10 book again, so retention is 30%.
+
+Month 12 does not show everyone who booked again **by** then. It shows only those who booked in that month. It also isn't three out of the two who booked in Month 6: someone can skip months and book later. Each person counts once per month, even if they complete several bookings that month.
+
+Identity still matters. If a later booking isn't connected to the same account, PostHog could count it as a different person. A second booking in Month 0 also doesn't appear as a return in a later month.
+
+The engineers compare only completed months. A month still in progress can gain more repeat guests, and a Month 12 comparison needs a cohort old enough to have reached Month 12.
+
+## Compare people who saved a stay
+
+Earlier, Edgar saved a stay before signing in. Once PostHog connected that activity to the account, the engineers could see the `stay_saved` event alongside the booking. They wonder whether guests who saved a stay before their first booking are more likely to book again.
+
+For this small example, all 10 guests who booked for the first time have signed in, so PostHog has person profiles for them. Saved cohorts need those profiles; anonymous events alone aren't enough.
+
+For this ten-person example, the engineers inspect each person's events, then add their profiles to two **static cohorts**: four people who saved a stay before their first booking, and six who didn't. A static cohort is a fixed list, so someone who saves a stay later doesn't move between groups.
+
+These saved cohorts differ from the January group that the retention insight creates automatically. The engineers use each saved cohort to filter the same retention insight, keeping both events and the monthly intervals the same.
+
+In Month 12, the groups look like this:
+
+| Group        | Guests | Book again | Retention |
+| ------------ | ------ | ---------- | --------- |
+| Saved a stay | 4      | 2          | 50%       |
+| Didn't save  | 6      | 1          | 17%       |
+
+Together, two savers and one non-saver make up the three people who book again in Month 12. The percentages help compare groups of different sizes, while the counts show how little data this example has.
+
+## Separate a pattern from an explanation
+
+More savers booked again in this example. That doesn't prove saving a stay caused another booking. Someone who travels often might be more likely to do both.
+
+The engineers inspect those people's event trails and any available replays to understand how saved stays fit into their first booking. With only 10 people in the example, they need more evidence before changing the experience.
+
+The trend shows how many people use the filters. The funnel shows how many finish a booking. Retention shows when guests return to book again. Next, the engineers put these insights on a dashboard so the team can follow the whole journey and decide what to investigate.
+
+<LessonFooter nextLabel="Bring the insights together">
+
+<a href="/docs/product-analytics/retention">Retention</a> · <a href="/docs/data/cohorts">Cohorts</a>
+
+</LessonFooter>
+
+</RightPage>

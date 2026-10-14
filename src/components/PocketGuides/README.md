@@ -15,6 +15,13 @@ Reader clicks only change local example state – they do not send practice even
 `TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
 be reviewed on both sites.
 
+`ProductAnalyticsRetentionExhibits.tsx` supplies two static figures for the retention chapter.
+`RepeatBookingFigure` uses Twig catalog stays and photos with two matching `booking_completed`
+rows for one fictional person. The booked trip dates and event dates are separate.
+`BookingRetentionFigure` shows three selected months from a separate,
+simulated 10-person cohort. Neither figure records events or makes bookings. Both are registered
+in `bookComponents.tsx` for use in MDX.
+
 ```
 contents/pocket-guides/<volume>/
 ├── index.mdx              pocketGuideOrder: 0 – the front matter (title page + contents)

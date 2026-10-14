@@ -16,6 +16,7 @@ import {
     BookingStepsFigure,
     BookingFunnelFigure,
 } from './ProductAnalyticsTrendsFunnelsExhibits'
+import { BookingRetentionFigure, RepeatBookingFigure } from './ProductAnalyticsRetentionExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -70,6 +71,8 @@ export const bookMdxComponents = {
     FilterUsersTrendFigure,
     BookingStepsFigure,
     BookingFunnelFigure,
+    RepeatBookingFigure,
+    BookingRetentionFigure,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
