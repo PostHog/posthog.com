@@ -154,7 +154,7 @@ const docsMenuItems: MenuItemType[] = [
     {
         type: 'item',
         label: 'Data pipelines',
-        link: '/docs/cdp',
+        link: '/docs/data-pipelines',
         icon: <Icons.IconPlug className="size-4 text-sky-blue" />,
     },
     {

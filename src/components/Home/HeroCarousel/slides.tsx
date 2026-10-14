@@ -26,11 +26,11 @@ const pickedSourceSlugs = [
 ]
 
 const batchExportItems = [
-    { label: 'BigQuery', url: '/docs/cdp/batch-exports/bigquery', logoKey: 'bigquery' },
-    { label: 'Snowflake', url: '/docs/cdp/batch-exports/snowflake', logoKey: 'snowflake' },
-    { label: 'Amazon S3', url: '/docs/cdp/batch-exports/s3', logoKey: 's3' },
-    { label: 'PostgreSQL', url: '/docs/cdp/batch-exports/postgres', logoKey: 'postgres' },
-    { label: 'Redshift', url: '/docs/cdp/batch-exports/redshift', logoKey: 'redshift' },
+    { label: 'BigQuery', url: '/docs/data-pipelines/batch-exports/bigquery', logoKey: 'bigquery' },
+    { label: 'Snowflake', url: '/docs/data-pipelines/batch-exports/snowflake', logoKey: 'snowflake' },
+    { label: 'Amazon S3', url: '/docs/data-pipelines/batch-exports/s3', logoKey: 's3' },
+    { label: 'PostgreSQL', url: '/docs/data-pipelines/batch-exports/postgres', logoKey: 'postgres' },
+    { label: 'Redshift', url: '/docs/data-pipelines/batch-exports/redshift', logoKey: 'redshift' },
 ]
 
 const pickedDestinationSlugs = ['zapier', 'hubspot', 'salesforce', 'intercom', 'customerio', 'zendesk', 'webhook']
@@ -89,7 +89,7 @@ export const OnePlaceSlide = () => {
     const managedPlatforms = useSourcePlatforms()
     const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
         label: s.name,
-        url: `/docs/data-warehouse/sources/${s.slug}`,
+        url: `/docs/data-pipelines/sources/${s.slug}`,
         image: getLogo(s.logo),
     }))
     const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
@@ -125,7 +125,7 @@ export const OnePlaceSlide = () => {
         .filter(Boolean)
         .map((n: any) => ({
             label: n.name,
-            url: n.mdx?.fields?.slug || `/docs/cdp/destinations/${n.slug}`,
+            url: n.mdx?.fields?.slug || `/docs/data-pipelines/destinations/${n.slug}`,
             image: getIconUrl(n.icon_url),
         }))
 
@@ -179,7 +179,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/docs/data-warehouse/sources"
+                            to="/docs/data-pipelines/sources"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >

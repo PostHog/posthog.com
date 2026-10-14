@@ -68,7 +68,7 @@ Non-technical people can learn how to use the powerful tools once exclusive to e
 
 - Automate and optimize go-to-market with tools like Clay, Pocus, Vitally, and Lemlist.
 
-- Build and configure workflows with [PostHog](/docs/workflows), [Make](/docs/cdp/destinations/make), and [n8n](/docs/libraries/n8n).
+- Build and configure workflows with [PostHog](/docs/workflows), [Make](/docs/data-pipelines/destinations/make), and [n8n](/docs/libraries/n8n).
 
 
 ![LLM help me](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_9_4c302baa4d.jpg)

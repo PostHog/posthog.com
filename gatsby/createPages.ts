@@ -517,31 +517,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     slug
                 }
             }
-            postHogSourcesWithDocs: allPostHogSource(filter: { mdx: { id: { ne: null } }, unreleased: { ne: true } }) {
-                nodes {
-                    id
-                    slug
-                    mdx {
-                        id
-                        fields {
-                            slug
-                        }
-                    }
-                }
-            }
-            selfHostedSources: allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/docs/cdp/sources/(s3|azure-blob|r2|gcs)$/" } }
-                    frontmatter: { title: { ne: "" } }
-                }
-            ) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                }
-            }
             ${SDK_REFERENCE_QUERY_FIELDS}
         }
     `)) as GatsbyContentResponse
@@ -1083,58 +1058,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.postHogPipelines.nodes.forEach((node) => {
         createPage({
-            path: `/docs/cdp/${node.type}s/${node.slug}`,
+            path: `/docs/data-pipelines/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
         })
     })
 
-    // Sources WITHOUT hand-written docs: create API-generated pages at both paths
+    // Sources WITHOUT hand-written docs: create API-generated pages
+    // (sources with hand-written docs are created by Gatsby's MDX processing from contents/docs/data-pipelines/sources/)
     result.data.postHogSources.nodes.forEach((node) => {
         createPage({
-            path: `/docs/data-warehouse/sources/${node.slug}`,
+            path: `/docs/data-pipelines/sources/${node.slug}`,
             component: DataWarehouseSource,
             context: { id: node.id, ignoreWrapper: true },
-        })
-        createPage({
-            path: `/docs/cdp/sources/${node.slug}`,
-            component: DataWarehouseSource,
-            context: { id: node.id, ignoreWrapper: true },
-        })
-    })
-
-    // Sources WITH hand-written docs: create data-warehouse page from the MDX content
-    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
-    result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        if (node.mdx?.id) {
-            createPage({
-                path: `/docs/data-warehouse/sources/${node.slug}`,
-                component: HandbookTemplate,
-                context: {
-                    id: node.mdx.id,
-                    links: [],
-                    nextURL: '',
-                    searchFilter: 'Docs',
-                    breadcrumbBase: { name: 'Docs', url: '/docs' },
-                },
-            })
-        }
-    })
-
-    // Self-hosted sources: not in the API, but have MDX files at cdp/sources/
-    // Create data-warehouse alias pages for them
-    result.data.selfHostedSources.nodes.forEach((node) => {
-        const slug = node.fields.slug.replace('/docs/cdp/sources/', '')
-        createPage({
-            path: `/docs/data-warehouse/sources/${slug}`,
-            component: HandbookTemplate,
-            context: {
-                id: node.id,
-                links: [],
-                nextURL: '',
-                searchFilter: 'Docs',
-                breadcrumbBase: { name: 'Docs', url: '/docs' },
-            },
         })
     })
 
