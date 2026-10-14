@@ -1,6 +1,6 @@
 ---
-title: "Do you even bench? How to benchmark your agents at scale against real data"
-date: 2026-10-12
+title: "Do you even benchmark? Evaluating agents at scale against real data"
+date: 2026-10-14
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -18,122 +18,132 @@ seo:
     metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
 ---
 
-We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most of the time*, but it's way too much money to let them run unattended.
+We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most* of the time, but we spend way too much money on them to trust their output based on vibes alone.
 
-New models keep popping off like mushrooms, and popular LLM benchmarks don't give us nearly enough info. We can "vibe" how well model X or Y will perform in our stack, but it often leads to worse results, as our tasks are pretty specific.
+That's why we use benchmarks: repeatable, standardized sets of tasks that are scored to evaluate how a model or skill's performance. 
 
-> A benchmark is a repeatable set of tasks to score how models or skills perform. For example, we can use several models to code-review the same PR and check how many known bugs they catch, how long they take, and what they cost. That helps us decide whether a new model or skill is actually an improvement.
+You have may have heard of the term before. Labs like Anthropic and OpenAI use benchmarks to measure and compare new models on release, like the popular [SWE-bench](https://www.swebench.com/). But this is just one category of benchmarks designed for evaluating LLMs on generalized tasks.
 
-What doesn't make it easier is that agents cheat. They search for leaked context, memory, and DB query logs – to do as little work as possible. Can't blame them, but it makes creating your own benchmarks harder than you would expect.
+At PostHog, as a consumer of these LLMs, we want to know how well model X or Y will perform in *our* specific stack. To do so, we might run multiple models to perform code-reviews on the same PR in the PostHog repo and check how many known bugs they catch, how long they take, and what they cost. This helps us decide whether one model is actually an improvement over another.
 
-In this post, I'll explain how we benchmark our agents, what we learned, and where we messed up (so you don't need to), with links to real PRs. I'll focus on agents for data research and code review, since we do a lot of that as part of [self-driving](/self-driving) and 2.4 million+ agentic runs we spawned.
+In reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
+
+In this post, I'll explain how we benchmark our agents at PostHog, what we learned, and where we messed up (so you don't have to), with links to real PRs. Most of our examples focus on evaluating agents on data research and code review tasks since that makes up a majority of our [self-driving](/self-driving) product and the 2.4 million+ agentic runs we spawned to build it.
 
 ---
 
-## 1. How to define criteria
+## Step 1. Create the answer key
 
-Defining what is "good" is the hardest part, in my opinion. If you ask an [LLM judge](/docs/ai-evals) whether an agent's output is "helpful", you'll get polite, useless praise. Especially if the same model generated it.
+If a benchmark is like a standardized test, the first thing you need to do is create the answer key so you can grade your agents' results. 
 
-To build benchmarks that actually mean something, criteria have to evolve from simple sanity checks to something measurable. Ideally, based on the real data.
+This is the hardest part, in my opinion. For a benchmark to actually be useful, the criteria for what's "good" or not needs to match the complexity they will encounter on the job. Simple yes/no sanity checks won't cut it since agentic tasks are typically more complicated than that. 
 
-### Simple: Finite list of correct answers
+But you also can't just ask an [LLM judge](/docs/ai-evals) to grade another agent's output for you; agents will alwayas give you polite praise if you ask it whether something was helpful. (This is especially true if you're asking the same model that generated it.)
 
-The first approach is to take a task with a clear answer (or multiple) and check which combinations of model + effort + harness reach those answers, and which ones fail.
+Here are the three approaches we tried in increasing order of difficulty and complexity.
 
-We have our own code review agent, called ReviewHog, that covers a significant part of PostHog PRs. It needs to stay up to date for the best results, so we needed a base benchmark to check against when we change models or prompts.
+### Option A – Easy: A list of potential bugs from one PR
 
-The best solution we came up with initially was surprisingly effective and mostly simple.
+The first approach is to take a task with clear answers and check which agents succeed, versus which ones fail. Each agent had three variables: the model, effort level, and harness.
+
+We did this to evaluate our internal code review agent, called ReviewHog, that covers a significant part of PostHog PRs. ReviewHog needs to stay up to date for the best results, so we needed a base benchmark to check against when we change models or prompts.
+
+The best solution we came up with initially was surprisingly effective and simple:
+
+1. First, we took one large PR.
+2. Then, we made a "frozen copy" of it.
+3. Humans reviewed the frozen PR manually.
+4. We then asked several review agents to review it.
+5. This produced a pretty exhaustive list of potential bugs from every possible angle.
 
 ![Review the same frozen PR, collect a list of bugs, change one setting, and compare findings, time, and cost.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/01_manual_check_603fcae577.png)
 
-The recipe:
+So if there were 13 issues worth checking for (structure, performance, security, etc.), we could measure the models on a 0/13 scale, plus compare how much time and money each one cost. Here's an [example report](https://github.com/PostHog/posthog/blob/master/products/review_hog/eval/experiments/2026-08-model-glm53-flash/FINAL_REPORT.md) of us testing ReviewHog this way with GLM 5.3 Flash.
 
-- We took one large PR
-- Made a frozen copy
-- Reviewed it manually
-- Had several other review agents review it.
-- Got a list of potential bugs from every possible angle.
+It worked (and still works) well, but it has an obvious limitation: the answer key is based on one single PR for one single change in one single repo. No matter how large that PR is, this approach would never be able to cover all the other types of bugs that could happen in all of our repos.
 
-Meaning, if there are 13 issues worth checking (structure, performance, security, etc.), we can measure the models on a 0/13 scale and by time/money spent. Here's an [example](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-08-model-glm53-flash) of us testing GLM 5.3 Flash.
+### Option B – Medium: A larger, golden set from multiple PRs
 
-It worked well (and still does), but it has an expected limitation: even on a large PR, the scope is limited and doesn't show the whole picture - it's a single PR for a single-ish change in a single repo.
+The second approach we used for benchmarking ReviewHog involved the same method, but across a larger percentage of real cases and with more varied examples.
 
-### Harder: Golden set
+Getting more PRs was easy; our team produces X per day.
 
-The second approach was to use the same method across more varied examples, covering a larger percentage of real cases.
+But then we had an idea. What if instead of looking for synthetic bugs, we created an answer key by searching for *real* bugs that actually happened? It would be even better if those bugs caused real messes, like proper incidents.
 
-Let's stick with the code review for a moment longer. First, we need more PRs. Second, what if, instead of synthetic-ish bug cases, we tested searching for bugs that 100% happened? Ideally, if they also caused a mess, like a proper incident.
-
-And that's exactly what we did.
+So that's exactly what we did.
 
 ![Build a golden set from real incidents, recreate the PRs that introduced the bugs, and evaluate whether reviewers identify their causes.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/02_golden_set_b744f1abbe.png)
 
-We collected a golden set of PostHog incidents built from incident discussions and code. Each incident in the set includes:
+We looked through old PostHog tickets to create a golden set of 33 actual incidents. Each one includes:
 
 - The PR that caused the incident
 - The description of the problem
 - The PR that was used as a fix for the incident
 
-This means we can review 33 PRs of different sizes, from different repos, and get a clear boolean metric: did the reviewer find the bug that caused the incident?
+This meant we could review 33 PRs of different sizes, from different repos, and get a verifiable boolean metric: did ReviewHog find the bug that caused the incident?
 
-Here is what the numbers looked like:
+ReviewHog was able to find and validate the bug for 62% of the PRs.
 
 ![Table of ReviewHog evaluation results on the incident golden set.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/13_golden_set_results_v6_6ad1a1f411.png)
 
-We got pretty good results with ReviewHog, with this combination showing the best result: `GPT Sol 5.6` (at the time) at `xhigh` for bug search and `Claude Opus 5` (at the time) at `xhigh` for bug validation (here are the [experiment results](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-09-incident-golden-set)), both using `pi`.
+These were pretty good results. The best combination we got at the time was with `GPT Sol 5.6` at `xhigh` for bug search, and `Claude Opus 5` at `xhigh` for bug validation, both using `pi` as the harness. You can check out our repo for the full [experiment results](https://github.com/PostHog/posthog/tree/master/products/review_hog/eval/experiments/2026-09-incident-golden-set).
 
-> It's also a good example of "don't confirm model results with the model of the same family", as having both stages with OpenAI or Anthropic led to miserable results.
+> A big takeaway from this is to always use different model families for detection and validation. We got miserable results when we used either OpenAI or Anthropic models for both stages.
 
-The downsides of the method are clear, but acceptable:
+And, on another note, remember that these benchmarks are specific to *our* use cases. Just because this combination of model, harness, and effort worked well for ReviewHog doesn't mean it will be the optimal choice for another codebase or task.
 
-- For 33 incidents, you need to resurrect 66 PRs total: the PR that caused each incident and the PR that fixed it. This creates noise and triggers false alarms from GitHub bots.
-- We don't re-add the bugs to the codebase, but keep them as isolated PRs, so you need to properly lock the branch for the agent.
-- With open-source repos like ours, an agent with web access can still look up the public repo, merged PRs, and cheat (more on that in a minute).
+Overall, the downsides of this "larger golden set" method were clear, but still acceptable:
 
-That said (and you probably thought this too), the code review tasks are deterministic enough and easier to grade. The next problem we hit was how to grade abstract agents – ones that can, technically, do anything.
+- For 33 incidents, we needed to resurrect 66 PRs total: the PR that caused each incident and the PR that fixed it. This created lots of noise and triggered false alarms from our GitHub bots.
+- We didn't re-add the bugs to the codebase. That would be bad. Instead, we kept them as isolated PRs by properly locking the branch for the agent.
+- With open-source repos like ours, an agent with web access can still look up the public repo, merged PRs, and cheat. (More on this later.)
 
-### Hardest: Targeted rubrics
+That said – and you probably thought about this, too – this only works  because code review tasks are fairly deterministic and easy to grade. The next problem we hit was how to grade agents for more abstract and subjective tasks.
 
-The obvious answer is rubrics. But with open-ended tasks, generic rubrics like "Rate accuracy from 1 to 5" fall apart immediately. They mostly measure how confident and fluent the model sounds, not whether it did useful work.
+### Option C – Hard: Targeted, contextual rubrics
 
-A great example is scouts. If you don't know them yet, [scouts](/docs/self-driving/scouts) are custom agents we use for self-driving to research anything from [Product Analytics](/product-analytics) anomalies to mentions of your brand in social media. As open-ended as it gets.
+Benchmarking gets a lot more complicated when you're trying to evaluate agents that can technically do *anything*.
 
-To evaluate them, we built a rubric generator. You pick the agent you care about, add some context, and let it generate evaluation criteria.
+A great example is scouts. If you don't know them yet, [scouts](/docs/self-driving/scouts) are custom agents we built that let you research *anything*. That could range from your [Product Analytics](/product-analytics) anomalies in PostHog, to mentions of your brand in social media, to recurring themes in your internal Slack. These tasks are as open-ended as it gets.
 
-Every scout should produce a report covering what it found, how actionable the findings are, and what to do next. To measure this baseline, we stick to a mostly static set of rubrics shared across all scouts.
+Much like how an A-B-C-D format answer key makes sense for grading multi-select quizzes but not for grading an essay, we needed to come up with a different way to evaluate scouts on open-ended tasks.
 
-To make the ranking more meaningful, we also generate rubrics tailored to that specific scout:
+The obvious answer was rubrics – scoring and evaluation guides that describe the ideal answer, rather than containing the answer itself. But feneric rubrics like "Rate accuracy from 1 to 5" fall apart immediately when evaluating agents. They do a great job of measuring how confident and fluent the model sounds, not whether it did useful work.
 
-- What area it covers (a specific product feature, external data source, etc.)
+Our solution was to build a rubric *generator* that creates guidelines based on the agent's context. We do this in two steps for scouts.
+
+First, all scouts follow the same procedures, even if they work across wildly different domains. So we have one set of static rubrics shared across all scouts that checks whether the scout produced a report covering what it found, how actionable the findings are, and what to do next. 
+
+We then also generate rubrics tailored to that specific scout based on context that was been provided to the scout so far such as:
+
+- What area it covers (a specific product feature in PostHog, external data sources like Instagram, etc.)
 - What skills and instructions it needs to follow
 - What it did in previous runs, what tools it used, and what reports it generated
 
-Based on that, we add agent-specific rubrics. In our case, for a scout analyzing the stability of the [Session Replay](/session-replay) player, we don't just check formatting. We grade whether it spotted actual playback failure symptoms, queried data correctly, and whether the bug it flagged actually affected real users.
+For example, to benchmark a scout analyzing the stability of the [Session Replay](/session-replay) player, we don't just check its report formatting. We also grade whether it spotted actual playback failure symptoms, queried data correctly, and whether the bug it flagged actually affected real users – criteria specific to Session Replay.
 
 ![Replay player reliability rubrics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_08_47_bd2ae1b7e7.png)
 
-With code review, we had it easy-ish since rubrics were mostly "did you find the bugs you were supposed to find?". Open-ended agents need better rubrics to track behavior, check for required tool calls, and verify task completion.
+With these rubrics in place, we could reliably track scout success rates across a different agent configurations. The v1 of this tailored rubric system allowed us to test against:
 
-Once those rubrics are in place, we can reliably track success rates across a good number of changes. The v1 allows us to test against:
-
-- Old model vs New model ("Is the new model released work better than the old one?")
-- Thinking effort ("Do I actually need it at xhigh, if medium does it just fine with 30% fewer tokens?")
-- Prompt changes ("Let's create 5 skills and track which one works the best for the task")
+- **Models.** Do scouts work better with the new model, or the old one?
+- **Thinking effort.** Do scouts actually need to think at xhigh levels, if medium does it just fine with 30% fewer tokens?
+- **Prompt changes.** If we create 5 different versions of the skill, which version works best for each task? 
 
 ![Trial start screen](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_09_44_0a21ad656f.png)
 
-The result is a report with a close-to-clear answer. It's obviously not fully deterministic, but it's way better than just "vibes."
+The result is a report with a close-to-clear answer. It's not 100% deterministic, but it's way better than just "vibes" and booleans.
 
-Here's the report I ran while writing this part of the post to check "what is better, Sol vs Luna," and it looks like, for this specific task, we are sticking with Sol. Luna would do a better job on plenty of tasks, but to know that, you need something measurable to rely on.
+Here's an example of a report I ran while writing this blog to check whether Sol or Luna performs better for one of our scouts. The results suggest we should stick with Sol for this one; Luna could do a better job on plenty of other tasks, but to know that, you need something measurable to rely on.
 
 ![Scout benchmark report comparing evaluation results across model configurations.](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_10_13_at_11_05_06_7f7a15b1aa.png)
 ![Scout benchmark report comparing rubrics](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_06_17_4a49c51a12.png)
 
-> If you want to see how our rubric generator and ranking work under the hood, check out our [code](https://github.com/PostHog/posthog/tree/master/products/signals/backend/scout_harness).
+If you want to see how our rubric generator and ranking work under the hood, check out our [code](https://github.com/PostHog/posthog/tree/master/products/signals/backend/scout_harness).
 
-Next, after we figure out what is good, we need to make it work and stay objective at scale.
+So all of those three approaches were just the first step of developing an answer key or grading system for the agents. After defining what's "good", we need to make these tests work and stay objective at scale.
 
-## 2. How to isolate runs
+## Step 2. Isolate benchmark runs
 
 The surprisingly nasty problem you notice when you benchmark multiple models against real data is that they learn about each other quickly and try to piggyback. This can come from [LLM traces](/docs/ai-observability/traces), DB queries, or any other logs the agentic run generates.
 
