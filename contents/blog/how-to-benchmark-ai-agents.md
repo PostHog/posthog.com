@@ -32,7 +32,7 @@ In this post, I'll explain how we benchmark our agents at PostHog, what we learn
 
 ---
 
-## Step 1. Create the answer key
+## Step 1. Define the answer key
 
 If a benchmark is like a standardized test, the first thing you need to do is create the answer key so you can grade your agents' results. 
 
@@ -145,43 +145,51 @@ So all of those three approaches were just the first step of developing an answe
 
 ## Step 2. Isolate benchmark runs
 
-The surprisingly nasty problem you notice when you benchmark multiple models against real data is that they learn about each other quickly and try to piggyback. This can come from [LLM traces](/docs/ai-observability/traces), DB queries, or any other logs the agentic run generates.
+The surprisingly nasty problem we learned is that when you benchmark multiple models against real data, they'll quickly do everything they can to learn about and piggyback off of each other. They might source answers from [LLM traces](/docs/ai-observability/traces), DB queries, or any other logs the agentic run generates.
 
-Here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself.
+Here's an example of a data-anomalies scout being benchmarked. Run B4 investigated an anomaly and saved a memory at 15:18:08. When Run B12 ran later in the same workspace, it picked up that memory at 15:18:54 and used it instead of doing the work itself:
 
 ![Scout trace showing run B12 reusing a conclusion saved to shared memory by run B4.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/03_trace_b12_shared_memory_96ce3843c2.png)
 
-For results to reflect the model's quality, we need to make sure state isn't leaking. With multi-step agents that simulate human-agent conversation, state leaks into places normal test runners don't even check.
+This defeats the purpose of benchmarking since the results aren't reflecting the actual agent's performance. 
 
-You can isolate state in multiple ways, including three approaches we tested.
+With multi-step agents that simulate human-agent conversation, state leaks into places that normal test runners don't even check. This next section is about the three approaches we tried to isolate runs to preserve benchmark integrity.
 
-### Simple: Sequential runs with state cleanup
+### Option A – Easy: Parallel runs with no shared state
 
-The simplest approach is to run trials one after another and clear the agent's local memory between runs. You run a trial, record the output, reset the agent's scratchpad or immediate context, and start the next run.
+This approach is only valid if your agents don't generate meaningful artifacts (like traces, memory files, and logs) beyond the output that gets graded. Potential examples include simple classifiers or summarizers. 
 
-![Run a trial, save its results, reset its state, and repeat with the next configuration.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/04_sequential_runs_v2_59fbbb27b8.png)
+In these cases, you could run multiple variants at the same time; no shared state means no contaminiation.
 
-It doesn't mean you need to run one agent at a time – the chain could include hundreds of agents running in sequence or in parallel, if they are all part of the same task. It's also what we used for initial ReviewHog benchmarks against a single frozen PR.
+In reality, these conditions are rare. Most agentic systems that are complex enough to need benchmarks will have many potential places for leaks, such as through observability tools or error logs.
 
-The downsides are clear: you need to clean up the DB and logs after each run, and it's obviously slow, so testing different combinations of agents/efforts/skills will take a while.
+So let's go back back to the B4 and B12 example above to explain the failure modes. 
 
-### Harder: Parallel runs with shared state
+Failure mode #1 is when cheating makes an agent appear better than it actually is. An agent using a faster but lighter model like Luna could easily just read and copy notes from an agent running on Opus.
 
-If your agent doesn't generate meaningful artifacts beyond the output, you can probably say you don't care and run multiple variants at the same time anyway. Unironically, I bet plenty of cases could work, and it speeds up the benchmark a lot.
-
-Though, as the B4/B12 example above showed, the results of such runs are highly questionable because the grading gets contaminated. A fast model like Luna could overperform by copying Opus's homework.
-
-Funnily enough, if the agent decides not to cheat, the shared state could cause grading to fail anyway. For example, an agent could decide to honestly skip the results the other agent already found. During a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely.
+Failure mode #2 is less obvious and can make a model seem worse than it actually is. Even if an agent doesn't actively try to cheat, shared state could still cause problems anyway. For example, an agent could decide to honestly skip a task because it sees that another agent already completed it. One time, during a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely:
 
 ![Scout trace showing run B2 skipping a candidate because an earlier run had already covered it.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/05_trace_b2_prior_run_4c6e841386.png)
 
 In this case, a clever model would get a surprisingly low grade for not finding a basic issue. Or you would need to prepare your judges for similar cases, which would affect the benchmarking results anyway.
 
-Meaning, the next obvious step is to make runs of different agents invisible to each other.
+So, unless the agents you're evaluating don't produce any artifacts, you need a way to make each run invisible to the others.
 
-### Hardest: Isolate everything
+### Option B – Medium: Sequential runs with state cleanup
 
-To get clean benchmarks, every trial needs complete isolation across everything the agent can touch:
+A simple approach to isolate the runs is by keeping them bounded by time. In other words, run a trial, record the output, reset the agent's context, and then start the next run:
+
+![Run a trial, save its results, reset its state, and repeat with the next configuration.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/04_sequential_runs_v2_59fbbb27b8.png)
+
+That doesn't mean you can only run one agent – the chain could include hundreds of agents running in sequence or in parallel if they are all part of the same task. This is what we did for the initial ReviewHog benchmarks against a single frozen PR (Step 1, Option A).
+
+The downsides of this are clear: you need to clean up the DB and logs after each run, and it's obviously slow, so testing different combinations of agents/efforts/skills takes a long time.
+
+### Option C – Hard: Parallel runs with limited access
+
+Most of us don't have unlimited time and patience, but need to evaluate agents that produce artifacts that can leak state.
+
+The good news is that there is a way to get clean benchmarks. The bad news is that it's not simple – every trial needs complete isolation across *everything* the agent can touch:
 
 - Identical starting context across all runs
 - Private writable state (scratchpads, memory, vector stores, and DBs)
@@ -191,61 +199,63 @@ DB state isn't the only leak. If your agent has tools to query ClickHouse, PostH
 
 ![Isolate each trial's memory, outputs, and telemetry so agents cannot read other benchmark runs.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_isolate_everything_v4_a4b4878c87.png)
 
-Though there's also a real risk of over-isolating. If the benchmarking agent doesn't have as many tools as the real agent, it can get confused and skew the results.
+There's also a risk of *over*-isolating. If the benchmarking agent doesn't have as many tools as the real agent, it can get confused and skew the results unrealistically.
 
-Here's an example of one of the first dry runs we tested. It differs from the previous two traces – it wasn't cheating, just literal instruction-following.
+Here's an example of one of the first dry-runs we tested. It differs from the previous two traces; it wasn't cheating, just following instructions a bit too literally and promised not to write any inbox reports:
 
 ![Scout trace showing the agent retaining findings in memory but skipping inbox reports because dry-run reports would be discarded.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/07_trace_dry_run_8d886e28ed.png)
 
-Because the dry-run agent doesn't execute all the steps an actual run would (creating new reports, editing data, and so on), it leaves blind spots we can't test. For scouts, it's acceptable, since we evaluate retrieving data far more often than storing it. Same goes for coding/review agents, as they usually work with their own copy of the branch/PR/repo, so that run isn't that "dry", if I may.
+Because the dry-run agent doesn't execute all the steps an actual run would (creating new reports, editing data, and so on), it left blind spots we couldn't test. This was acceptable for scouts since we care more about how they retrieve information than how they store it. The same goes for coding/review agents since they usually work with a copy of the PR in "real" runs anyway, too.
 
-If it's a blocker for your agent, the next best thing is an isolated environment where it can complete the workflow with a full set of tools. Freezing the data in that environment also makes the benchmark repeatable. Though it comes with a couple of surprises.
+If these types of blind spots are a blocker for your agent, the next best option is to create truly isolated environments where agents can access all tools – but this requires freezing state, too.
 
-## 3. How to benchmark offline
+## Step 3. Freeze the environment
 
-You can run hundreds of agents against the production database pretty reliably. It comes with the downsides I mentioned in the previous block, because the data changes between runs. You can't compare runs, since it raises the question: "did the score improve because of our change or because the data is different?"
+You can *technically* run hundreds of isolated agents with full tool access against the production database pretty reliably. But this will also interfere with the benchmark because it means state and data is not controlled between runs. You can't compare between them equally since it raises the question: "did this agent's score improve because of the variables we're testing, or because something in the data changed?"
 
-We can avoid it by moving from a "production environment that changes all the time" to a "production environment with the same starting state", e.g., frozen environments. Meaning, we need to replicate (or simulate) our app, inject real (or real-enough) data, and make the agent believe it's a real thing. Why bother:
+We solved this by moving benchmarks from a "production environment that changes all the time" to a "production environment with the same starting state", i.e., frozen environments. To do this, we had to replicate or simulate our app, inject real (or real-enough) data, and make the agent believe it's a real thing. We call these offline benchmarks.
 
-- Because frozen environments have a fixed starting point, you can reset them after every run, solving problems with data leaks. In our case, we run a copy of PostHog inside VMs, delete the VM after each benchmark, and spawn a new one.
-- It also means that the agent is actually allowed to change the state, write, create, delete, you name it, as we test the task end to end, leaving fewer blind spots.
-- As a bonus, because the data stays fixed, the benchmark you did for model X a month or two ago is still comparable to the benchmark for model Y you did today.
+That's a lot. So why bother?
 
-I use the word "offline" loosely here, since you still need to call AI endpoints and so on. The main point is that the state is frozen and you can reset it at any time.
+- Since frozen environments have a fixed starting point, you can easily reset them after every run, solving problems with data leaks. In our case, we run a copy of PostHog inside VMs, delete the VM after each benchmark, and spawn a new one.
+- It also means that the agent is actually allowed to change the state, write, create, delete, etc. as we test the task end to end, leaving fewer blind spots.
+- As a bonus, because the data stays fixed, the benchmark you did for model X a month or two ago will still be comparable to the benchmark for model Y you did today.
+
+I'm using the word "offline" loosely here since the agents will still need connectivity to call AI endpoints and such. The point is that state is frozen, and can be reset at any time.
 
 We went through three stages to get this working.
 
-### Simple: Mocked MCP replies
+### Option A – Mocked MCP replies
 
-Agents do tool calls when running. We track and store those traces – what the agent asked and what it got back. For example, what query it ran with `execute_query(sql)` and what slice of the DB it returned.
+The first thing we tried was to track and store traces from the tool calls agents made during their run, including things like what the agent asked and what it got back. For example, what query it ran with `execute_query(sql)` and what slice of the DB it returned:
 
 ![An agent calls a mocked MCP tool, which returns a saved response instead of querying a live service.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_mcp_mock_ace037214f.png)
 
-It sounds pretty straightforward and worked on basic tech demos (returning static JSON to SQL queries), but it failed miserably on any meaningful production-like work because agents aren't deterministic. Meaning, the query from run 1 doesn't guarantee that run 2 will run the same one.
+This sounds straightforward and worked well for basic tech demos like returning static JSON to SQL queries, but failed miserably on any meaningful production-like work. This is because agents aren't deterministic; the query from Run 1 doesn't guarantee that Run 2 will run the same one.
 
-It's not a big surprise, but it would still be cool if it worked out of the box. Still, the case isn't that desperate, and we tried a couple of tweaks.
+It's not a big surprise, but it would still be cool if it worked out-of-the-box. Still, the case isn't that desperate, and we tried a couple of tweaks.
 
-### Harder: Trajectory-based mocked MCP replies
+### Option B – Trajectory-based mocked MCP replies
 
-The logical next step. Instead of building the mocked data over a single run, we ran \~50 runs, checked every trajectory the agent picked, and mocked those instead.
+The logical next step was to build mock database on \~50 runs instead of just a single run. We checked every trajectory the agent picked, and then mocked those instead.
 
-It has potential, and to make it even more stable, I would suggest adding synthetic (or real) data a bit before and/or after every query (so a 24h query still returns true data if the call is skewed a bit).
+This seemed promising for a while. To make it even more stable, I'd suggest adding synthetic (or real) data a bit before and/or after every query (so a 24h query still returns true data if the call is skewed a bit).
 
-On PostHog's side, though, as we mostly focus on benchmarking internal tasks, we decided to go with a hybrid approach. Meaning, it was simpler, but at the same time harder, to use real data.
+However, at PostHog, we mostly focus on benchmarking internal tasks, so we decided to go with a hybrid approach. This made it both simpler yet harder to use real data.
 
-### Hardest: Restored real-data slices
+### Option C – Restored real-data slices
 
-The solution that actually worked was spinning up an isolated PostHog sandbox seeded with a restored, real-world data slice.
+The solution that actually worked for us was to spin up an isolated PostHog sandbox seeded with a restored, real-world data slice.
 
-On the surface, the idea is simple: query a couple of DB tables (Postgres, ClickHouse), store them as Parquet files in S3, and then restore them in the VM with a local PostHog instance to make it look like the real deal. The bonus: data never leaves PostHog infra.
+On the surface, the idea was simple: query a couple of DB tables (Postgres, ClickHouse), store them as Parquet files in S3, and then restore them in the VM with a local PostHog instance to make it look like the real deal. The bonus: data never leaves PostHog infra.
 
 ![Restore a real data slice into an isolated PostHog environment, shifting timestamps together so each benchmark can query the prepared data.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/10_restored_data_slice_v8_ba0f337e6e.png)
 
-The first problem is obvious: "24h" now and "24h" in two weeks are way different "24h". Meaning, every time we inject data, we need to skew it toward the current timeline.
+The first problem was obvious: "24h" now and "24h" in two weeks are way different "24h". So every time we injected data, we had to correct it to the frozen timeline.
 
-The second problem is less obvious: even if you skew the data, agents are still non-deterministic. That means testing a new model can make it look into tables and data sources you don't expect it to check.
+The second problem was less obvious: even if you correct the data, agents are still non-deterministic. That means testing a new model can make it look into tables and data sources you don't expect it to check.
 
-For example, when preparing data for agent feedback, we can clearly sync tables with actual responses and tables with the scouts those responses were left about. But the moment you get a proper model, it will look inside, see that there aren't many users on this local instance, and get suspicious.
+For example, when preparing data for agent feedback, we would clearly sync tables with actual responses and tables with the scouts those responses were left about. But the moment you get a proper model, it will look inside, see that there aren't many users on this local instance, and get suspicious.
 
 ![September 30 scout trace showing a missing team roster and the decision to leave reviewers unassigned.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/11_trace_sept30_roster_5787996325.png)
 
@@ -253,18 +263,16 @@ On the other hand, you can, as always, overprepare and make it as realistic as p
 
 ![September 23 scout trace showing the agent questioning whether the data is synthetic.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/12_trace_sept23_synthetic_ecd98649d3.png)
 
-To TLDR it, if the agent starts treating the investigation as a test, it could:
+Basically, once the agent starts treating the investigation as a test, it starts behaving in strange ways like:
 
-- Stop at a good-enough explanation instead of running extra queries to verify it.
-- Spend part of its budget investigating gaps or inconsistencies in the restored data instead of the actual task.
-- Return more speculative findings that it would normally leave out.
+- Stopping at a good-enough explanation instead of running extra queries to verify it.
+- Spending part of its budget investigating gaps or inconsistencies in the restored data instead of the actual task.
+- Returning more speculative findings that it would normally leave out.
 
-Needless to say, all such cases can negatively affect your grading, since they cover behavior you don't want to test. And, sadly, there's no silver bullet – you need to run and tweak it until you don't catch any "agent is suspicious" traces anymore.
+Any of those behaviors can negatively affect your benchmark's integrity, since they're not realistic. And, sadly, there's no silver bullet – you just have to run and tweak it over and over again until you stop seeing "the agent suspects something" traces anymore.
 
----
+## Vibes are cheap, don't skip benching
 
-## Vibes are cheap, bench
+If you take anything away from this, it's that agents will happily exploit whatever mess you leave behind and cheat. If you want to go with vibes to evaluate models, harnesses, and effort levels, that's okay; vibes can still get you pretty far in many cases.
 
-If you take anything away from this, it's that agents will happily exploit whatever mess you leave behind and cheat. If you want to go with vibes instead – it's ok, as they can get you pretty far, don't get me wrong.
-
-However, with enough effort, building benchmarks is properly doable. You would need to watch for unexpected parameters and iterate a lot. In the end, you'll have a solid system to move faster, especially if you don't repeat the mistakes we made.
+Building quality benchmarks is properly doable. You just need to watch for unexpected parameters, iterate a lot, and pay attention to traces. In the end, you'll have a solid system that will let you move faster in the long run – especially if you don't repeat the mistakes we made.
