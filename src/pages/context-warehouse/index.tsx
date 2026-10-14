@@ -447,7 +447,7 @@ const faqItems = [
         content: (
             <p>
                 Syncing data from sources is free for your first 1M rows/month then from $0.000015/row (historical syncs
-                are always free). Data pipelines are free for 10K events then from $0.0005/event, batch exports free for
+                are always free). Destinations are free for 10K events then from $0.0005/event, batch exports free for
                 1M rows then from $0.000015/row, and PostHog AI gives 500 free credits then $0.01/credit. See a full
                 breakdown at{' '}
                 <Link to="/pricing" state={{ newWindow: true }}>

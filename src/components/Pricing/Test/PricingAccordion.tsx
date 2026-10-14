@@ -170,9 +170,8 @@ const AccordionItem = ({
                             <div className="space-y-6">
                                 {/* Main product pricing */}
                                 <div>
-                                    {/* Only Sources takes categoryName here: for Data pipelines it's the group name. */}
                                     <h5 className="text-sm font-semibold mb-3">
-                                        {productVariantName || (type === 'data_warehouse' && categoryName) || name}
+                                        {productVariantName || categoryName || name}
                                     </h5>
                                     <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
                                 </div>
