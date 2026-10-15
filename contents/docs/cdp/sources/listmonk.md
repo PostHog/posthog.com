@@ -33,7 +33,7 @@ Enter your instance URL, for example `https://listmonk.example.com`, the API use
 
 <SyncModes />
 
-`subscribers` supports incremental sync on `updated_at`. The other tables sync with a full refresh.
+`subscribers` supports incremental sync on `updated_at`. It also picks up subscribers whose list subscriptions changed, such as an opt-in confirmation or an unsubscribe. A subscriber removed from a list leaves nothing to detect, so that change appears only after a full refresh. The other tables sync with a full refresh.
 
 ## Configuration
 
