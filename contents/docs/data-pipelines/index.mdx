@@ -8,11 +8,11 @@ contentMaxWidthClass: max-w-5xl
 import { IconLaptop, IconPlug, IconBrackets, IconDatabase, IconLive, IconWrench } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-Data pipelines is how you move data in and out of PostHog. It works with both your PostHog data – events, persons, sessions, and groups – and data from external tools like Stripe, HubSpot, or your own Postgres database.
+Data pipelines is how you move data from one place to another. You can move data independently without it touching any other PostHog tools, or in and out of PostHog. It works with both your PostHog data – events, persons, sessions, and groups – and data from external tools like Stripe, HubSpot, or your own Postgres database.
 
 It's made up of three parts:
 
-- **[Sources](/docs/data-pipelines/sources)** sync data from external tools and databases into PostHog, so you can query it alongside your product data.
+- **[Sources](/docs/data-pipelines/sources)** move data from anywhere to anywhere, including syncing data from external tools and databases into PostHog, so you can query it alongside your product data.
 - **[Transformations](/docs/data-pipelines/transformations)** add, edit, or drop event properties as events are ingested.
 - **[Destinations](/docs/data-pipelines/destinations)** send data out of PostHog – events to tools like Slack or HubSpot in realtime, [batch exports](/docs/data-pipelines/batch-exports) of your PostHog data to a warehouse, or synced source data written to [your own database](/docs/data-pipelines/destinations/elt-destinations).
 
