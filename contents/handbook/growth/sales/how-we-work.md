@@ -17,7 +17,7 @@ We have three types of roles:
 
 Each TAM is assigned 15 existing customer accounts representing $1.5M to $2M. See [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance) for the full composition targets. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
-We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the `AM Managed` tag in Customer Analytics to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations. TAMs should not add this tag themselves (that's up to team leadership). To own an account, you must also be assigned as the Technical Account Executive in Customer Analytics. An automated assignment only makes you a temporary owner. See [account ownership in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics).
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
@@ -55,7 +55,7 @@ The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is
 - The Commission rate is 10% flat and uncapped on annual agreements. The commission rate is 5% on monthly contracts
 	- There is also an additional 6.7% incentive on growth in annual renewals
 	- There is no additional incentive on monthly payments
- - An account counts toward your quota only from the date it is added to your book (when the `AM Managed` segment is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
+ - An account counts toward your quota only from the date it is added to your book (when you are assigned as the TAM in Customer Analytics and the `AM Managed` tag is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
 **Examples**
 Ator, the TAM, has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500, totaling $6,800. The quota realized and paid out to Ator on this account is 5% of the total for that quarter: $340.
@@ -87,11 +87,11 @@ Deals a previous owner signed (including ones with a future-dated start that lan
 
 ### TAM book of business rules
 
-1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you and your team lead.
-2. All accounts in the `AM Managed` segment need an account plan in Vitally, which is updated and reviewed with your manager regularly.
-3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
+1. Only accounts that you [own in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics) will be counted towards your quota. You must be assigned as the TAM, and the account must have the `AM Managed` tag. Team leadersihp adds the tag manually when applicable.
+2. All accounts with the `AM Managed` tag need an account plan, which is updated and reviewed with your manager regularly.
+3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` tag to be added until you're happy that there is growth potential there.
 4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
-5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
+5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep the `AM Managed` tag on them for quota calculation purposes and then remove them after the quarterly calculations are complete.
 6. Nominally, you should have around 15 accounts/around $1.5m to $2m ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so be prepared to rebalance with your team lead. (see [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance)). 
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
 8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
