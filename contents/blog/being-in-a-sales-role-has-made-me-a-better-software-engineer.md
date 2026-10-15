@@ -90,4 +90,6 @@ Eventually, building software becomes talking to users and understanding their n
 
 And this comes in a few flavors. At a previous company I started as an engineer, was talking to enough customers that I ended up helping them and found myself as a Customer Engineer, and then leading a team of Customer Success Engineers. Eventually I was shuffled to a Forward Deployed engineer and then a Sales Engineer. All engineers with different titles.
 
-Oh also, if you sell more, they pay you more. And, if you like the sound of that, you should consider applying to one of our Technical Customer Success roles. We’re hiring in [Europe](/careers/technical-customer-success-manager-emea) and [North America](https://posthog.com/careers/technical-customer-success-manager-americas).
+Oh also, if you sell more, they pay you more.
+
+If you like the sound of any of this, you should consider applying to one of our Technical Customer Success roles. We’re hiring in [Europe](/careers/technical-customer-success-manager-emea) and [North America](https://posthog.com/careers/technical-customer-success-manager-americas).
