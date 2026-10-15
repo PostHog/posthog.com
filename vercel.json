@@ -754,6 +754,61 @@
             "statusCode": 301
         },
         {
+            "source": "/join-us",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/company/careers",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/work-with-us",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/join",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/career",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/about/careers",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/en/careers",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/opportunities",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/hiring",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/our-team",
+            "destination": "/people",
+            "statusCode": 301
+        },
+        {
+            "source": "/leadership",
+            "destination": "/people",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
