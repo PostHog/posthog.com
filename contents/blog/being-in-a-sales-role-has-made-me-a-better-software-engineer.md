@@ -7,6 +7,8 @@ showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/engineers_in_sales_5ebaa1804f.png
 featuredImageType: full
 category: Inside PostHog
 tags:
