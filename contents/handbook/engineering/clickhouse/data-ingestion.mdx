@@ -62,7 +62,7 @@ It is important to send correctly formatted messages to the topic you're selecti
 ClickHouse assumes messages in the topic are formatted correctly. If not, this may stall the consumer depending on the value
 of `kafka_skip_broken_messages`, breaking ingestion.
 
-> Beyond just skipping broken messages, it's also possible to set up a dead letter queue system for these in ClickHouse. You can read more about doing so in [this Altinity blog post](https://kb.altinity.com/altinity-kb-integrations/altinity-kb-kafka/error-handling/).
+> Beyond just skipping broken messages, it's also possible to set up a dead letter queue system for these in ClickHouse. You can read more about doing so in [this Altinity blog post](https://kb.altinity.com/altinity-kb-integrations/altinity-kb-kafka/04-operations-troubleshooting/error-handling/).
 
 ## Materialized views
 
