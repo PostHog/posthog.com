@@ -1,10 +1,36 @@
 import React from 'react'
+import { cn } from '../../../utils'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import FeedbackPopup from './FeedbackPopup'
+import FormPointer from './FormPointer'
+import IngestStep from './Ingest/IngestStep'
+import Link from 'components/Link'
+import useSourcePlatforms from 'hooks/useSourcePlatforms'
+
+const SOURCE_COUNT_ROUNDING = 100
+
+const SourceCountLink = (): JSX.Element => {
+    const sourceCount = useSourcePlatforms().length
+    return (
+        <Link to="/docs/cdp/sources" state={{ newWindow: true }} className="underline underline-offset-2">
+            {Math.round(sourceCount / SOURCE_COUNT_ROUNDING) * SOURCE_COUNT_ROUNDING}+ other tools
+        </Link>
+    )
+}
+
+const Emphasis = ({ className, children }: { className: string; children: React.ReactNode }): JSX.Element => (
+    <span className={cn('rounded-md px-1 @xl:whitespace-nowrap', className)}>{children}</span>
+)
 
 const STEPS = [
     {
         title: 'Get the data in',
-        description:
-            'PostHog collects events, replays, errors, surveys, and logs from your product, and aggregates revenue, CRM, and support data from Stripe, HubSpot, Zendesk, and 900+ other tools.',
+        description: (
+            <>
+                PostHog collects events, replays, errors, surveys, and logs from your product, and aggregates revenue,
+                CRM, and support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
+            </>
+        ),
     },
     {
         title: 'Query the data with your agent',
@@ -24,22 +50,44 @@ const STEPS = [
 ]
 
 export const ProblemSection = (): JSX.Element => (
-    <section>
-        <h2>Knowing what users want is now the hardest part of building software</h2>
-        <p>Most users never tell you. Don't believe us? Tell us one thing PostHog should fix.</p>
+    <section className="grid gap-8 items-start @2xl:grid-cols-2">
+        <div>
+            <h2>
+                Knowing <Emphasis className="bg-purple/10 dark:bg-purple/20 text-purple">what users want</Emphasis> is
+                now the{' '}
+                <RoughAnnotation type="underline" strokeWidth={2} delay={400} multiline>
+                    hardest part of building software
+                </RoughAnnotation>
+            </h2>
+            <p>Most users never tell you. Don't believe us? Go ahead and fill out this feedback form.</p>
+            <FormPointer />
+        </div>
+        <div className="@2xl:mt-28">
+            <FeedbackPopup />
+        </div>
     </section>
 )
 
 export const StepsSection = (): JSX.Element => (
     <section>
-        <h2>How to build a usage-informed product with PostHog</h2>
-        {STEPS.map(({ title, description }, index) => (
-            <div key={title}>
-                <h3>
-                    {index + 1}. {title}
-                </h3>
-                <p>{description}</p>
-            </div>
-        ))}
+        <h2>
+            How to build a{' '}
+            <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">
+                usage-informed product
+            </Emphasis>{' '}
+            with PostHog
+        </h2>
+        {STEPS.map(({ title, description }, index) =>
+            index === 0 ? (
+                <IngestStep key={title} title={title} description={description} />
+            ) : (
+                <div key={title}>
+                    <h3>
+                        {index + 1}. {title}
+                    </h3>
+                    <p>{description}</p>
+                </div>
+            )
+        )}
     </section>
 )
