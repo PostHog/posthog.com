@@ -195,7 +195,7 @@ A small team may also realize they no longer need someone, or that they could re
 
 1. **Talk to your [Blitzscale team](/teams/blitzscale) member first.** Any move is at their discretion. They have the overview of which teams need help and where you'd be a good fit, and they make sure moves fit our hiring plans. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations.
 2. **Check [the proposed hires section](https://ops.posthog.dev/proposed-hires) in the ops platform** to see which teams currently have openings. You can also move to a team without an open role if Blitzscale thinks it makes sense.
-3. **Your old seat goes on the proposed hires board** so we can fill it with an internal or external hire. You usually need to be replaced in your current team before you can move.
+3. **Your old seat goes on the proposed hires board** so we can fill it with an internal or external hire. You need to be replaced in your current team before you can move. This is at discretion of Blitzscale.
 
 #### Moves because of a conflict
 
