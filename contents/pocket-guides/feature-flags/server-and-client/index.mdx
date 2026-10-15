@@ -48,7 +48,7 @@ Properties need the same care. If a condition filters on `plan`, the server pass
 
 If the server already knows the answer, send it with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render and never flashes the old version. The web, React Native, iOS, Android, and Flutter SDKs all support it.
 
-Two catches. Bootstrapping seeds only flags that are on, so a flag your server evaluated as off never arrives: the browser reads it as `undefined`, not `false`, and your default in code decides what renders. And the first full `/flags` response replaces everything you bootstrapped.
+Two catches. Bootstrap every flag the page checks, including the ones your server evaluated as off: the web SDK keeps a bootstrapped `false`, but a flag you leave out reads as `undefined` until `/flags` responds, and your default in code decides what renders. And the first full `/flags` response replaces everything you bootstrapped.
 
 <SeeAlso>
 

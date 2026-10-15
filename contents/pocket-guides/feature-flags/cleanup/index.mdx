@@ -60,9 +60,9 @@ For a temporary flag, the rollout state tells you which code path to keep <SeeFi
 
 | Rollout state | Keep | Then |
 | --- | --- | --- |
-| 100% | The enabled path | Remove the checks, deploy, confirm nothing still checks it, and delete the flag |
+| 100%, with no property filters | The enabled path | Remove the checks, deploy, confirm nothing still checks it, and delete the flag |
 | 0% | The fallback | Remove the new code and the checks, deploy, confirm nothing still checks it, and delete the flag |
-| Anywhere in between | Nothing yet | Ask the owner whether the rollout stalled or is still running |
+| Below 100%, or 100% of a filtered group such as a beta cohort | Nothing yet | Ask the owner whether the rollout stalled, is still running, or is meant to stay targeted. A flag that stays targeted is permanent |
 | Permanent | The flag | Tag it `keep`, `ops`, or `kill-switch`, so cleanup skips it |
 
 PostHog calls a flag stale when nothing has checked it in 30 days, or when it has sat at 100% for 30 days with no property filters. A flag you turned off on purpose isn't stale. A kill switch sits at 100% for months by design, so it can look stale, which is what the tag is for.
@@ -71,7 +71,7 @@ PostHog calls a flag stale when nothing has checked it in 30 days, or when it ha
 
 Remove the checks from your code, deploy, and only then delete the flag. For a flag at 100%, the deploy keeps the enabled path, so nobody loses the feature. In the other order, every leftover check loses its answer and falls back to your default, and the feature vanishes for everyone.
 
-Before you delete, confirm nothing still checks the flag. A deleted flag returns `false` or `undefined`, so an old mobile app version or a tab left open flips to the off path. The `$feature_flag_called` events stopping is a signal, not proof: servers that evaluate locally, bootstrapped flags, and clients with flag-event capture turned off don't send the event. Search your code for the key, and wait for old app versions to age out.
+Before you delete, confirm nothing still checks the flag. A deleted flag returns `false` or `undefined`, so an old mobile app version or a tab left open flips to the off path. The `$feature_flag_called` events stopping is a signal, not proof: SDKs send the event for locally evaluated and bootstrapped flags too, but not for checks with event capture turned off, such as `send_event: false` in the browser or `sendFeatureFlagEvents: false` in Node, and not for a Node `getFeatureFlagPayload()` call. Search your code for the key, and wait for old app versions to age out.
 
 ## Make cleanup a process
 
