@@ -28,7 +28,7 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-import { ActStep, IngestStep, QueryStep, SelfDriveStep } from 'components/Home/DataStory'
+import { ProblemSection, StepsSection } from 'components/Home/DataStory'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -172,10 +172,8 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <IngestStep />
-                <QueryStep />
-                <ActStep />
-                <SelfDriveStep />
+                <ProblemSection />
+                <StepsSection />
                 <PricingSection />
                 <WhyPostHogSection />
                 <BedtimeReadingSection />

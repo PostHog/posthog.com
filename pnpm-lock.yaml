@@ -335,9 +335,6 @@ importers:
       markdown-to-jsx:
         specifier: ^7.4.0
         version: 7.7.13(react@18.3.1)
-      matter-js:
-        specifier: ^0.20.0
-        version: 0.20.0
       md5:
         specifier: ^2.3.0
         version: 2.3.0
@@ -630,9 +627,6 @@ importers:
       '@types/mark.js':
         specifier: ^8.11.12
         version: 8.11.12
-      '@types/matter-js':
-        specifier: ^0.20.2
-        version: 0.20.2
       '@types/mdx-js__react':
         specifier: ^1.5.5
         version: 1.5.8
@@ -5734,9 +5728,6 @@ packages:
 
   '@types/mark.js@8.11.12':
     resolution: {integrity: sha512-244ZnaIBpz4c6xutliAnYVZp6xJlmC569jZqnR3ElO1Y01ooYASSVQEqpd2x0A2UfrgVMs5V9/9tUAdZaDMytQ==}
-
-  '@types/matter-js@0.20.2':
-    resolution: {integrity: sha512-3PPKy3QxvZ89h9+wdBV2488I1JLVs7DEpIkPvgO8JC1mUdiVSO37ZIvVctOTD7hIq8OAL2gJ3ugGSuUip6DhCw==}
 
   '@types/mdast@3.0.15':
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
@@ -24500,8 +24491,6 @@ snapshots:
   '@types/mark.js@8.11.12':
     dependencies:
       '@types/jquery': 3.5.33
-
-  '@types/matter-js@0.20.2': {}
 
   '@types/mdast@3.0.15':
     dependencies:
