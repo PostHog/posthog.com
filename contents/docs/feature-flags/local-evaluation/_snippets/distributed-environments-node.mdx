@@ -57,7 +57,7 @@ import { PostHog } from "posthog-node"
 const cache = new YourCacheProvider()
 
 const posthog = new PostHog("<ph_project_token>", {
-  secretKey: "your project secret API key",
+  secretKey: "<ph_personal_api_key>", // or your project secret API key
   enableLocalEvaluation: true,
   flagDefinitionCacheProvider: cache,
 })
