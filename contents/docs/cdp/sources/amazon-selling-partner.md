@@ -46,8 +46,8 @@ PostHog checks the credentials when you link the source by listing your marketpl
 <SyncModes />
 
 - `orders` and `order_items` sync incrementally on `lastUpdatedTime`, so each run picks up new orders and orders that changed.
-- `transactions` syncs incrementally on `postedDate`. Amazon can post a financial event up to 48 hours late, so each incremental run reads the last three days again.
-- `inventory_summaries` syncs incrementally on `lastUpdatedTime`, and reads only the SKUs whose quantities changed. Amazon does not report changes to inbound quantities this way, so run a full refresh when you need current inbound numbers.
+- `transactions` syncs incrementally on `postedDate`. Amazon can post a financial event up to 48 hours late, so each incremental run reads the last three days again. Amazon releases deferred transactions without changing their `postedDate`, so each run also reads the transactions released in the last 60 days.
+- `inventory_summaries` is a full refresh, so every sync replaces it with the current stock of each SKU.
 
 Amazon keeps order data for two years, except in Japan, Australia, and Singapore. A first sync reads as far back as Amazon allows.
 
