@@ -1,6 +1,6 @@
 ---
-title: Being in a sales role has made me a better software engineer
-date: 2026-10-13
+title: More engineers should consider working in sales
+date: 2026-10-15
 author:
   - ryan-mccrary
 showTitle: true
@@ -13,7 +13,7 @@ tags:
   - Inside PostHog
 ---
 
-Professionally, there are really two questions I get asked constantly
+Professionally, there are really two questions I get asked constantly:
 
 - How did you become a software engineer with no formal training?
 
@@ -25,7 +25,7 @@ The second is the one that is usually asked with much more curiosity (sometimes 
 
 ## Software engineering is fun
 
-Software engineering is mentally stimulating. Finding a problem, solving it with code, and then seeing people use it, is truly thrilling. Building something from nothing, so satisfying. Chasing down an elusive bug and solving it, can't beat it. Finding a performance issue and unlocking resources from thin air, am I an actual wizard?
+Software engineering is mentally stimulating. Finding a problem, solving it with code, and then seeing people use it, is truly thrilling. Building something from nothing? So satisfying. Chasing down an elusive bug and solving it?  Can't beat it. Finding a performance issue and unlocking resources from thin air? Am I an actual wizard?
 
 And don't get me started on giant whiteboards, architectural decisions and bike shedding things that don't really matter. Who wouldn't want to be a software engineer?
 
@@ -33,7 +33,7 @@ Apparently me.
 
 Selling software, specifically selling to engineers, means you get to do this all day, every day. If your company lets you. Selling to technical users often means you get to be a part of their process.
 
-Working in a customer-facing role with engineering teams means that you get to see a variety of engineering teams, processes, architectures, and business models every day. A day in the life of technical software sales is truly different every day. I'm not working on the same code base, product or even company. In a given day, I could very easily end up
+Working in a customer-facing role with engineering teams means that you get to see a variety of engineering teams, processes, architectures, and business models every day. A day in the life of technical software sales is truly different every day. I'm not working on the same code base, product or even company. In a given day, I could very easily end up:
 
 - Debugging a customer issue from pairing on their code base and how our product interacts with it
 
@@ -55,11 +55,13 @@ Be the change you wish to see in the world, or something -Gandhi -Michael Scott
 
 Inevitably, being a software engineer means you have to buy some type of tooling or other software, with money. A lot of dev tools are PLG, so you can signup, use it for free for a while, eventually enter a credit card and pay for what you use. Others, well, you often find yourself needing to "Contact Sales". This is the worst.
 
-Usually this means filling out some details in a form, waiting for someone to reach out to you and ask you similar questions, before getting on a call with someone who can sell you the product, but can't always help with your actual needs/requirements/limitations. If you've been through this process, you've likely encountered "let me check with my team and get back to you" more than once. Both the buying process, and getting technical answers are painful.
+Usually this means filling out some details in a form, waiting for someone to reach out to you and ask you similar questions, before getting on a call with someone who can sell you the product, but can't always help with your actual needs, requirements, and limitations. 
 
-Having an engineering context means I can help not only with what exists today (what the user can actually buy), but I can also help with what is possible. Feature requests, but right from the user. Not filtered through someone who talked to the user.
+If you've been through this process, you've likely encountered "let me check with my team and get back to you" more than once. Both the buying process, and getting technical answers are painful.
 
-By understanding my own product well, I can often bucket feature requests for users on the spot. Most of the time, feature requests fall into one of the following buckets
+Having an engineering context means I can help not only with what exists today (what the user can actually buy), but also what is possible. Feature requests, but right from the user. Not filtered through someone who talked to the user.
+
+By understanding my own product well, I can often bucket feature requests for users on the spot. Most of the time, feature requests fall into one of the following buckets:
 
 - A small bug or feature with a small blast radius that is doable now, typically without needing to be planned and roadmapped
 
@@ -75,7 +77,7 @@ Being technically competent changes how engineers end users perceive me, but als
 
 ## Selling software is a new challenge
 
-Building software is a challenge. A problem to be solved. At the end of the day, so is sales, just in a different way. At PostHog many of our team are former founders and I think most would say they will be founders again. As someone who fits that mold, learning sales is a thrilling, different challenge. Well outside of my comfort zone in some ways.
+Building software is a challenge. A problem to be solved. At the end of the day, so is sales, just in a different way. At PostHog, many of our team are former founders and I think most would say they will be founders again. As someone who fits that mold, learning sales is a thrilling, different challenge. Well outside of my comfort zone in some ways.
 
 "Learn to build. Learn to sell. If you can do both, you will be unstoppable." -Naval Ravikant
 
@@ -85,4 +87,4 @@ Eventually, building software becomes talking to users and understanding their n
 
 And this comes in a few flavors. At a previous company I started as an engineer, was talking to enough customers that I ended up helping them and found myself as a Customer Engineer, and then leading a team of Customer Success Engineers. Eventually I was shuffled to a Forward Deployed engineer and then a Sales Engineer. All engineers with different titles.
 
-Oh also, if you sell more, they pay you more.
+Oh also, if you sell more, they pay you more. And, if you like the sound of that, you should consider applying to one of our Technical Customer Success roles. We’re hiring in [Europe](/careers/technical-customer-success-manager-emea) and [North America](https://posthog.com/careers/technical-customer-success-manager-americas).
