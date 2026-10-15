@@ -315,20 +315,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
         // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
+        // The model and client lists also compare with the week before, so they keep that week too.
         const historyFacets = new Set(['total', 'model_vendor'])
+        const previousWeekFacets = new Set(['model', 'client'])
 
         try {
             const results = await Promise.all(
                 ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
             )
             const rows = results.flat()
-            const latestWeek = rows
-                .filter((row: any) => row.facet === 'total')
-                .reduce((latest: string, row: any) => (row.week > latest ? row.week : latest), '')
+            const weeks = Array.from(
+                new Set(rows.filter((row: any) => row.facet === 'total').map((row: any) => row.week as string))
+            ).sort()
+            const [previousWeek, latestWeek] = weeks.slice(-2)
             const data = {
                 rows: rows.filter(
                     (row: any) =>
-                        historyFacets.has(row.facet) || row.facet.endsWith('_daily') || row.week === latestWeek
+                        historyFacets.has(row.facet) ||
+                        row.facet.endsWith('_daily') ||
+                        row.week === latestWeek ||
+                        (previousWeekFacets.has(row.facet) && row.week === previousWeek)
                 ),
                 fetchedAt: new Date().toISOString(),
             }
