@@ -140,10 +140,13 @@ type TeamPageProps = {
     params: {
         slug: string
     }
+    pageContext: {
+        slug?: string
+    }
 }
 
 export default function TeamPage(props: TeamPageProps) {
-    const slug = props?.params?.slug || (props?.params as any)?.['*']
+    const slug = props?.params?.slug || (props?.params as any)?.['*'] || props?.pageContext?.slug
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
