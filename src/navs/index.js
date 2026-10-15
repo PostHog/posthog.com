@@ -7704,6 +7704,10 @@ export const docsMenu = {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
+                        {
+                            name: 'WebMCP',
+                            url: '/docs/mcp-analytics/installation/webmcp',
+                        },
                     ],
                 },
                 {
