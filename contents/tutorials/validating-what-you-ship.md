@@ -83,7 +83,7 @@ If you need help capturing the necessary events, try our [complete guide to even
 
 | Metric | What to watch | Warning threshold | Resources |
 |--------|---------------|-------------------|-----------|
-| Support volume | Tickets tagged "onboarding" | >10% increase | [See Zendesk data in PostHog](/docs/data-warehouse/sources/zendesk) |
+| Support volume | Tickets tagged "onboarding" | >10% increase | [See Zendesk data in PostHog](/docs/data-pipelines/sources/zendesk) |
 | Error rate | Errors in onboarding flow | Any increase | [Set up error tracking](/docs/error-tracking/start-here) |
 | Performance | Load time of onboarding pages | >200ms increase | [Web vitals dashboard](/docs/web-analytics/web-vitals) |
 

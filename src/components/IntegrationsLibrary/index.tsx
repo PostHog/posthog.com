@@ -16,7 +16,7 @@ const Title = ({ pipeline }: { pipeline: any }) => {
         (pipeline.status !== 'coming_soon' &&
             pipeline.type === 'source' &&
             pipeline.slug &&
-            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+            `/docs/data-pipelines/sources/${pipeline.slug}`) ||
         (pipeline.status !== 'coming_soon' &&
             pipeline.type &&
             pipeline.slug &&

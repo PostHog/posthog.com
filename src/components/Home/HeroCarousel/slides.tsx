@@ -89,7 +89,7 @@ export const OnePlaceSlide = () => {
     const managedPlatforms = useSourcePlatforms()
     const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
         label: s.name,
-        url: `/docs/data-warehouse/sources/${s.slug}`,
+        url: `/docs/data-pipelines/sources/${s.slug}`,
         image: getLogo(s.logo),
     }))
     const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
@@ -179,7 +179,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/docs/data-warehouse/sources"
+                            to="/docs/data-pipelines/sources"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
