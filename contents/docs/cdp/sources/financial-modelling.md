@@ -12,9 +12,6 @@ sourceId: FinancialModelling
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Financial Modeling Prep connector syncs market and company financial data – company profiles, financial statements, and historical prices – into PostHog, so you can analyze financial data alongside your product data.
 

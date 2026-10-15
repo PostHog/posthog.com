@@ -117,12 +117,12 @@
         "details": ["https://trust.wiz.io", "https://www.wiz.io/legal/sub-processor-list"]
     },
     {
-        "name": "PlanetScale, Inc.",
+        "name": "Modal Labs, Inc.",
         "type": "cloud",
-        "contact": "535 Mission St, 14th Floor<br />San Francisco, CA 94105<br />USA,<br />security@planetscale.com",
+        "contact": "Modal Labs, Inc. 584 Broadway Rm 1001<br />New York, NY 10012<br />USA,<br />security@modal.com",
         "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement",
-        "reason": "Operations and performance monitoring of Databases hosted on Amazon Web Services",
+        "reason": "Serverless compute infrastructure for isolated code execution",
         "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div>",
         "regions": ["USA", "Germany"],
         "dataTypes": {
@@ -133,17 +133,17 @@
             "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
         },
         "categories": "Customer's end users",
-        "details": ["https://trust.planetscale.com/", "https://trust.planetscale.com/subprocessors"]
+        "details": ["https://trust.modal.com/", "https://trust.modal.com/subprocessors"]
     },
     {
         "name": "Modal Labs, Inc.",
-        "type": "cloud",
+        "type": "ai",
         "contact": "Modal Labs, Inc. 584 Broadway Rm 1001<br />New York, NY 10012<br />USA,<br />security@modal.com",
         "subject": "Personal data of users of the Controller's web product(s)",
-        "duration": "Duration of the agreement",
-        "reason": "Serverless compute infrastructure for isolated code execution",
-        "location": "<div>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</div>",
-        "regions": ["USA", "Germany"],
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
         "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -177,6 +177,19 @@
         ]
     },
     {
+        "name": "Baseten Labs, Inc.",
+        "type": "ai",
+        "contact": null,
+        "subject": null,
+        "duration": null,
+        "reason": "Service Provider for AI Features",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
+        "dataTypes": null,
+        "categories": null,
+        "details": ["https://trust.baseten.co/", "https://trust.baseten.co/subprocessors"]
+    },
+    {
         "name": "Cloudflare, Inc.",
         "type": "ai",
         "contact": "101 Townsend St<br />San Francisco, CA 94107<br />USA,<br />privacyquestions@cloudflare.com",
@@ -197,5 +210,37 @@
             "https://www.cloudflare.com/trust-hub/",
             "https://www.cloudflare.com/gdpr/subprocessors/cloudflare-services/"
         ]
+    },
+    {
+        "name": "Fireworks.ai, Inc.",
+        "type": "ai",
+        "contact": "900 Concar Drive, Floor 5<br />San Mateo, CA 94402, USA<br />privacy@fireworks.ai",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "<div>USA</div>",
+        "regions": ["USA"],
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": ["https://trust.fireworks.ai/", "https://trust.fireworks.ai/subprocessors"]
+    },
+    {
+        "name": "Runpod, Inc.",
+        "type": "ai",
+        "contact": null,
+        "subject": null,
+        "duration": null,
+        "reason": "Service Provider for AI Features",
+        "location": "<div>USA, Czech Republic, France, Netherlands, Romania, Sweden, Iceland</div>",
+        "regions": ["USA", "Czech Republic", "France", "Netherlands", "Romania", "Sweden", "Iceland"],
+        "dataTypes": null,
+        "categories": null,
+        "details": ["https://trust.runpod.io/"]
     }
 ]

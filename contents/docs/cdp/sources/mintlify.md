@@ -9,10 +9,7 @@ availability:
 sourceId: Mintlify
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 Sync your Mintlify documentation analytics into the PostHog data warehouse, including AI assistant conversations, user feedback, search queries, page views, and visitor metrics. Join docs engagement data with product analytics to understand how documentation drives adoption and activation.
 

@@ -81,8 +81,18 @@ function BlogHeader({
     )
 }
 
-export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary[] } } }): JSX.Element {
-    const posts = data.posts.nodes.filter((post) => post.frontmatter?.title)
+type BlogIndexPost = PostSummary & {
+    frontmatter: PostSummary['frontmatter'] & { date: string }
+}
+
+export default function BlogPage({
+    data,
+}: {
+    data: { posts: { nodes: BlogIndexPost[] }; crossposts: { nodes: BlogIndexPost[] } }
+}): JSX.Element {
+    const posts = [...data.posts.nodes, ...data.crossposts.nodes]
+        .filter((post) => post.frontmatter?.title)
+        .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date))
     const featured = posts[0]
 
     return (
@@ -122,7 +132,7 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
 }
 
 export const query = graphql`
-    {
+    query BlogPage {
         posts: allMdx(
             filter: {
                 isFuture: { eq: false }
@@ -132,31 +142,48 @@ export const query = graphql`
             sort: { order: DESC, fields: [frontmatter___date] }
         ) {
             nodes {
-                id
-                fields {
-                    slug
-                    pageViews
-                    wordCount
+                ...BlogIndexPost
+            }
+        }
+        crossposts: allMdx(
+            filter: {
+                isFuture: { eq: false }
+                fields: { slug: { regex: "/^/newsletter/" } }
+                frontmatter: { date: { ne: null }, crosspost: { in: ["Blog"] } }
+            }
+            sort: { order: DESC, fields: [frontmatter___date] }
+        ) {
+            nodes {
+                ...BlogIndexPost
+            }
+        }
+    }
+
+    fragment BlogIndexPost on Mdx {
+        id
+        fields {
+            slug
+            pageViews
+            wordCount
+        }
+        excerpt(pruneLength: 200)
+        frontmatter {
+            title
+            date
+            shortDate: date(formatString: "MMM D")
+            fullDate: date(formatString: "MMM D, YYYY")
+            tags
+            seo {
+                metaDescription
+            }
+            featuredImage {
+                publicURL
+                childImageSharp {
+                    gatsbyImageData(width: 1600)
                 }
-                excerpt(pruneLength: 200)
-                frontmatter {
-                    title
-                    shortDate: date(formatString: "MMM D")
-                    fullDate: date(formatString: "MMM D, YYYY")
-                    tags
-                    seo {
-                        metaDescription
-                    }
-                    featuredImage {
-                        publicURL
-                        childImageSharp {
-                            gatsbyImageData(width: 1600)
-                        }
-                    }
-                    authors: authorData {
-                        name
-                    }
-                }
+            }
+            authors: authorData {
+                name
             }
         }
     }

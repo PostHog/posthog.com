@@ -50,6 +50,46 @@ Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/
 
 ---
 
+## Account ownership in Customer Analytics
+
+Customer Analytics is the source of truth for account ownership. Billing and Salesforce get owner changes from Customer Analytics. The sync goes in one direction only: Customer Analytics to billing to Salesforce. A change shows in Salesforce in 5-10 minutes.
+
+### Assigned is not the same as owned
+
+**You are considered assigned to the account in Customer Analytics when you are assigned to the correct field (account executive, csm, etc)  and relevant tags are applied to the account.** 
+
+Only accounts assigned to you count toward quota and commission.
+
+### Automated assignments are temporary
+
+The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
+
+A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics and remove any relevant tags.
+
+Do not change the owner in Salesforce. For an account that Customer Analytics controls, Customer Analytics writes over the Salesforce owner. An account without a PostHog organization is not in Customer Analytics, so you can manage it in Salesforce. If the account gets a PostHog organization later, the Salesforce owner becomes the owner in Customer Analytics.
+
+### Technical Account Managers
+
+- Team Leads will assign you as the TAM on the account in Customer Analytics and add the 'AM Managed' tag. 
+- The account must have the `AM Managed` tag to count toward your quota. Do not add or tag yourself. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
+
+### Technical Account Executives
+
+- Your TAE assignment comes from Salesforce automatically. The `AE Managed` tag does not.
+- Add the `AE Managed` tag in Customer Analytics yourself, with approval from your team lead. Without it, the account does not count toward your quota.
+
+### Ownership history
+
+The `system.account_relationships` table keeps the history of all account relationships. Each row is one person in one role on one account:
+
+- `started_at` is the date the relationship started.
+- `ended_at` is the date the relationship stopped. It is empty while the relationship is active.
+- `definition_id` joins to `system.account_relationship_definitions` for the role name. `account_id` joins to `system.accounts`.
+
+Use this table to find who owned an account at a given date.
+
+---
+
 ## TAM book balance
 
 TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
@@ -82,7 +122,7 @@ To flag an account, add the `tam overlay needed` tag to it in Customer Analytics
 
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.
+We track coverage in Customer Analytics with the CSM account relationship for the base layer and the `AM Managed` tag for the TAM overlay. An account can have both.
 
 ---
 
@@ -132,7 +172,7 @@ A TAM is added on top of CSM coverage where an opportunity qualifies. At the sta
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics. When the TAM is assigned, remove the `tam overlay needed` tag.
 
 To request CSM coverage, add:
 
@@ -147,7 +187,7 @@ Every $20k+ account should have a CSM. At the start of each quarter, CSM team le
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
 3. **CSM books outside the current target** to identify which accounts should be rebalanced
 
-For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics. Once the CSM is assigned, a <PrivateLink url="https://us.posthog.com/project/2/workflows/01a00fc0-0f90-0000-6aa7-b78a941c08cb/workflow">workflow removes the tags automatically</PrivateLink>.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 

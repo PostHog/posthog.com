@@ -1,5 +1,4 @@
-import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import React, { createContext, useContext } from 'react'
 
 /**
  * Wallpapers
@@ -16,6 +15,58 @@ import CloudinaryImage from 'components/CloudinaryImage'
 const FADE_OPACITY = 'transition-opacity duration-700 ease-in-out'
 const FADE_COLORS = 'transition-colors duration-700 ease-in-out'
 
+export const BlurredWallpaperContext = createContext(false)
+
+const BLURRED_IMAGE_WIDTH_PX = 32
+const CLOUDINARY_UPLOAD_PATH = '/image/upload/'
+
+const toResizedImageUrl = (url: string, widthPx: number): string =>
+    url.replace(CLOUDINARY_UPLOAD_PATH, `${CLOUDINARY_UPLOAD_PATH}w_${widthPx},q_auto,f_auto/`)
+
+const toBlurredImageUrl = (url: string): string => toResizedImageUrl(url, BLURRED_IMAGE_WIDTH_PX)
+
+interface SceneBackgroundProps {
+    url: `https://res.cloudinary.com/${string}`
+    className: string
+    style: React.CSSProperties
+}
+
+const SceneBackground = ({ url, className, style }: SceneBackgroundProps) => {
+    const isBlurred = useContext(BlurredWallpaperContext)
+    return (
+        <div
+            className={className}
+            style={{ ...style, backgroundImage: `url('${isBlurred ? toBlurredImageUrl(url) : url}')` }}
+        />
+    )
+}
+
+interface SceneImageProps {
+    src: `https://res.cloudinary.com/${string}`
+    width: number
+    height: number
+    className?: string
+    imgClassName?: string
+}
+
+const SceneImage = ({ src, width, height, className = '', imgClassName = '' }: SceneImageProps) => {
+    const isBlurred = useContext(BlurredWallpaperContext)
+    return (
+        <div className={`inline-block ${className}`}>
+            <img
+                loading="lazy"
+                src={isBlurred ? toBlurredImageUrl(src) : toResizedImageUrl(src, width)}
+                alt=""
+                width={width}
+                height={height}
+                draggable={false}
+                className={imgClassName}
+                style={{ aspectRatio: `${width} / ${height}` }}
+            />
+        </div>
+    )
+}
+
 const Hogzilla = () => (
     <>
         <div
@@ -24,10 +75,8 @@ const Hogzilla = () => (
         <div
             className={`absolute inset-0 bg-[linear-gradient(180deg,#141E40_0%,#46368B_100%)] opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
         />
-        <CloudinaryImage
-            loading="lazy"
+        <SceneImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hogzilla_359a450fb3.png"
-            alt=""
             width={1780}
             height={868}
             className="absolute inset-0 flex items-end justify-end"
@@ -39,20 +88,16 @@ const Hogzilla = () => (
 const StartupMonopoly = () => (
     <>
         <div className={`absolute inset-0 bg-[#E7E0DA] dark:bg-[#686E88] ${FADE_COLORS}`} />
-        <CloudinaryImage
-            loading="lazy"
+        <SceneImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_monopoly_light_6614a8a5d5.jpg"
-            alt=""
             width={2967}
             height={1463}
             className={`absolute right-0 top-0 w-[1483.5px] h-[731.5px] max-w-full opacity-100 dark:opacity-0 ${FADE_OPACITY}`}
         />
-        <CloudinaryImage
-            loading="lazy"
+        <SceneImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_monopoly_dark_26c85ccad8.jpg"
-            alt=""
             width={1582}
-            height={782}
+            height={780}
             className={`absolute right-0 top-0 w-[1483.5px] h-[731.5px] max-w-full opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
         />
     </>
@@ -60,26 +105,24 @@ const StartupMonopoly = () => (
 
 const OfficeParty = () => (
     <>
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png"
             className="absolute inset-0 opacity-100"
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
                 backgroundSize: '200px 198px',
                 backgroundRepeat: 'repeat',
             }}
         />
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png"
             className={`absolute inset-0 opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
                 backgroundSize: '200px 198px',
                 backgroundRepeat: 'repeat',
             }}
         />
-        <CloudinaryImage
-            loading="lazy"
+        <SceneImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
-            alt=""
             width={997}
             height={858}
             className="absolute bottom-24 left-24 md:bottom-12 md:left-36 w-[498.5px] h-[429px]"
@@ -91,40 +134,37 @@ const KeyboardGarden = () => (
     <>
         <div className="absolute inset-0 bg-gradient-to-b from-[#FDEECD] to-[#FFFEF4]" />
 
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_light_95ed14e5a3.jpg"
             className={`absolute inset-0 sm:hidden opacity-100 dark:opacity-0 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_light_95ed14e5a3.jpg')",
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
             }}
         />
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_dark_8a84515f2d.jpg"
             className={`absolute inset-0 sm:hidden opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_mobile_bg_dark_8a84515f2d.jpg')",
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
             }}
         />
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_light_07316896be.jpg"
             className={`absolute inset-0 hidden sm:block opacity-100 dark:opacity-0 ${FADE_OPACITY}`}
             style={{
-                backgroundImage:
-                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_light_07316896be.jpg')",
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
             }}
         />
-        <div
+        <SceneBackground
+            url="https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_dark_9a32796f77.jpg"
             className={`absolute inset-0 hidden sm:block opacity-0 dark:opacity-100 ${FADE_OPACITY}`}
             style={{
-                backgroundImage: "url('https://res.cloudinary.com/dmukukwp6/image/upload/9000_bg_dark_9a32796f77.jpg')",
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right bottom',
@@ -132,21 +172,17 @@ const KeyboardGarden = () => (
         />
 
         <div className="absolute grid bottom-24 md:bottom-0 -right-4 xs:right-8 md:right-0">
-            <CloudinaryImage
-                loading="lazy"
+            <SceneImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_light_42c729131e.png"
                 width={1555}
                 height={1262}
                 className={`col-start-1 row-start-1 opacity-100 dark:opacity-0 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
-                draggable={false}
             />
-            <CloudinaryImage
-                loading="lazy"
+            <SceneImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_dark_b36706e924.png"
                 width={1555}
                 height={1262}
                 className={`col-start-1 row-start-1 opacity-0 dark:opacity-100 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
-                draggable={false}
             />
         </div>
     </>

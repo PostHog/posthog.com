@@ -11,9 +11,9 @@ sourceId: Cloudflare
 
 The Cloudflare connector syncs your Cloudflare configuration, security, and usage data into PostHog.
 
-<CalloutBox icon="IconFlask" title="Beta release" type="action">
+<CalloutBox icon="IconInfo" title="What this source syncs" type="fyi">
 
-The Cloudflare source is currently in **beta**. It syncs configuration data from Cloudflare's v4 REST API. High-volume analytics data from Cloudflare's GraphQL API is not yet supported.
+This source syncs configuration data from Cloudflare's v4 REST API. High-volume analytics data from Cloudflare's GraphQL API is not supported yet.
 
 </CalloutBox>
 

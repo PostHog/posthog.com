@@ -8,6 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
+  - Being CEO
 crosspost:
   - Blog
 ---

@@ -12,9 +12,6 @@ sourceId: Fulcrum
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Fulcrum connector syncs your [Fulcrum (Spatial Networks)](https://www.fulcrumapp.com) field-data-collection data – records, forms, choice lists, media metadata, and more – into PostHog, so you can analyze your inspections and geospatial field data alongside your product data.
 

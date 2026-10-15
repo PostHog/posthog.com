@@ -9,12 +9,6 @@ availability:
 sourceId: Census
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Census source is currently in alpha. It has been tested against Census's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Census (Fivetran) connector syncs your reverse-ETL workspace metadata into PostHog, including syncs, sync runs, sources, and destinations.
 
 ## Adding a data source

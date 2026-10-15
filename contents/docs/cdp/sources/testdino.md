@@ -11,8 +11,6 @@ sourceId: TestDino
 
 The TestDino connector syncs test runs, manual test suites, and manual test cases from your TestDino project into PostHog.
 
-> **Note:** This source is currently in **alpha**.
-
 ## Prerequisites
 
 You need a TestDino account with a personal access token and a project ID. The token must have access to the project you want to sync.

@@ -9,13 +9,7 @@ availability:
 sourceId: Monday
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
-The Monday.com connector pulls your monday.com data – boards, items, users, and workspaces – into the PostHog data warehouse.
+The Monday.com connector pulls your monday.com data – boards, items, users, workspaces, folders, and more – into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -29,18 +23,22 @@ Once the syncs are complete, you can start using monday.com data in PostHog.
 
 ## Available tables
 
-| Table        | Description                                                      | Sync method  |
-| ------------ | ---------------------------------------------------------------- | ------------ |
-| `boards`     | Boards accessible to your token                                  | Full refresh |
-| `items`      | Items across all boards (includes `_board_id` for board linkage) | Full refresh |
-| `users`      | Users in your monday.com account                                 | Full refresh |
-| `workspaces` | Workspaces your token can access                                 | Full refresh |
+| Table                 | Description                                                                                                            | Sync method  |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `boards`              | Boards accessible to your token (includes `board_folder_id` for folder linkage)                                        | Full refresh |
+| `board_activity_logs` | Board change history (status changes, moves, assignments)                                                              | Incremental  |
+| `board_columns`       | Column definitions (id, title, type, settings) for each board. Use this to resolve column IDs in `items.column_values` | Full refresh |
+| `board_groups`        | Groups within boards, including groups with no items                                                                   | Full refresh |
+| `folders`             | Folders that organize boards within workspaces                                                                         | Full refresh |
+| `items`               | Items across all boards (includes `_board_id` for board linkage)                                                       | Full refresh |
+| `users`               | Users in your monday.com account                                                                                       | Full refresh |
+| `workspaces`          | Workspaces your token can access                                                                                       | Full refresh |
 
-**Full refresh** tables reload all data on each sync.
+**Full refresh** tables reload all data on each sync. **Incremental** tables only sync new data since the last sync.
 
 ## Sync limitations
 
-All monday.com tables are full refresh only. monday.com's GraphQL API doesn't expose timestamp-based filtering for list queries, so each sync reloads the full collection.
+Most monday.com tables are full refresh only because monday.com's GraphQL API doesn't expose timestamp-based filtering for most list queries. The `board_activity_logs` table supports incremental sync using the `created_at` timestamp.
 
 ## Configuration
 

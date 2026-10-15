@@ -23,13 +23,14 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | --- | --- |
 | `index.tsx` | The app: picks the view from the URL, lays out the sidebar and main pane, and owns the modal state |
 | `context.tsx` | `useForumActions()`: opens the topic form, delete dialog, and subscriptions dialog |
-| `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumFeed`, `useForumPost` |
+| `hooks.ts` | Data: `useForumTopics`, `useForumTags`, `useForumSubscriptions`, `useForumProgress`, `useForumFeed`, `useForumPost` |
 | `Sidebar.tsx` | New post, search, nav, topic list with staff menus, and the off-ramps. Collapses to a top bar below `@2xl` |
-| `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the tag filter, infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
+| `Feed.tsx`, `PostRow.tsx` | A post list with sorts (Latest, Active, Popular), the filters (no replies yet, and tags), infinite scroll, and empty states. Active and Popular sort by scores that Strapi stores on each post |
 | `Thread.tsx` | One post: vote box, body, author edits, the Moderate menu, and the shared Squeak replies |
 | `Composer.tsx` | The new post form, which also saves, edits, and publishes drafts. Authors choose only a topic; the server chooses tags when a post goes live |
+| `GettingStarted.tsx` | A hedgehog that peeks up from the bottom right of the feed views. A signed-out visitor gets a welcome with Join and Sign in. A member gets a chat of first steps, checked by `useForumProgress`, and a confetti burst on the first visit. Each has its own "don't show again" key in localStorage (`forum-welcome-dismissed`, `forum-getting-started-dismissed`). `index.tsx` loads it with `React.lazy`, so its SVG stays out of the shared bundle |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
-| `FilterMenu.tsx` | Tag filter with a subscribe bell for each tag. On All posts it groups the tags by topic |
+| `FilterMenu.tsx` | The feed filters: a "No replies yet" checkbox (`numReplies: 0`), then the tags, with a subscribe bell for each tag. On All posts it groups the tags by topic |
 | `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where moderators can choose "Every post" |
 | `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
 | `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |
@@ -44,6 +45,7 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 - **New posts:** the Squeak `QuestionForm` with its `forum` option. On docs and other pages, the same form creates a forum post with "Choose for me" (or `#questions` if Jev cannot choose) and keeps the page slug. On blog-style pages (`/blog`, `/newsletter`, and others), it creates a comment that is not in the forum. The form keeps its sign-in step, image uploads, and spam field, and sends only the fields that the forum create route accepts.
 - **Feeds:** `useQuestions` with the `sort`, `fields`, and `populate` options. The forum's conditions go inside `$and`, so the archive `$or` that `useQuestions` adds stays in place.
 - **Search:** `AlgoliaSearchResults`, filtered to `type:question` and `isForum:true`. Hits open in the forum window at `/forum/p/:permalink`.
+- **References:** `Squeak/components/References.tsx` renders every link in a post or comment body. A mention (`@name/id`, `@max`) or a bare profile URL becomes a chip with the photo and first name. The chip loads the profile when it comes into view. Other profile links, and links to `/forum/p/:permalink` or an old `/questions/:permalink`, get a hover card (`RadixUI/HoverCard`) that loads its data when it opens. The author names in post and comment headers show the same profile card. Links to `posthog.com` posts and profiles open inside the site.
 
 ## Roles
 
