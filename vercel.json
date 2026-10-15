@@ -4088,6 +4088,11 @@
             "destination": "/docs/surveys/implementing-custom-surveys:ext?"
         },
         {
+            "source": "/docs/surveys/pricing:ext(\\.md)?",
+            "destination": "/surveys/pricing",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",
             "destination": "/docs/error-tracking/managing-issues:ext?"
         },
