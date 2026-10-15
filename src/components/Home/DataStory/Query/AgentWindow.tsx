@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconCheck, IconPlus, IconSpinner } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import { cn } from '../../../../utils'
-import { IOS_SPRING } from '../Ingest/session'
+import { IOS_SPRING, SourceKey } from '../Ingest/session'
 import { InlineCode, QUESTION, SourceIcon, TraceState, spinnerGlyph, traceAt } from './trace'
 
 export type AgentTheme = 'claude' | 'codex' | 'desktop'
@@ -17,13 +17,13 @@ export const AGENT_THEMES: { key: AgentTheme; label: string }[] = [
 const WINDOW_HEIGHT = 'h-[26rem]'
 const CLAUDE_CLAY = '#D97757'
 
-const LINE_ENTER = {
+export const LINE_ENTER = {
     initial: { opacity: 0, y: 4 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
 }
 
-const PostHogMark = ({ className }: { className?: string }) => (
+export const PostHogMark = ({ className }: { className?: string }) => (
     <span className={cn('inline-flex [&_svg]:!h-full [&_svg]:!w-auto', className)}>
         <Logo layout="logomark" variant="gradient" className="block dark:hidden" />
         <Logo layout="logomark" variant="mono" className="hidden dark:block" />
@@ -45,7 +45,7 @@ const Caret = ({ elapsed, className }: { elapsed: number; className?: string }) 
     />
 )
 
-const ScrollToLatest = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+export const ScrollToLatest = ({ children, className }: { children: React.ReactNode; className?: string }) => (
     <div
         className={cn(
             'flex min-h-0 flex-1 flex-col justify-end overflow-hidden [mask-image:linear-gradient(transparent,black_1.5rem)]',
@@ -200,11 +200,87 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
     </TerminalFrame>
 )
 
-const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) => (
+export interface ToolRow {
+    id: string
+    source: SourceKey
+    label: string
+    result: string
+    done: boolean
+}
+
+export const DesktopToolRows = ({ rows }: { rows: ToolRow[] }) => (
+    <motion.div {...LINE_ENTER} className="mb-2 overflow-hidden rounded-md border border-primary">
+        <AnimatePresence initial={false}>
+            {rows.map(({ id, source, label, result, done }) => (
+                <motion.div
+                    key={id}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    transition={IOS_SPRING}
+                    className="border-b border-primary last:border-b-0"
+                >
+                    <div className="flex items-center gap-2 px-2.5 py-1.5">
+                        <SourceIcon source={source} className="size-3.5 shrink-0" />
+                        <span className="shrink-0 font-semibold">{label}</span>
+                        <span className="min-w-0 flex-1 truncate text-xs text-secondary">{done && result}</span>
+                        {done ? (
+                            <IconCheck className="size-3.5 shrink-0 text-green" />
+                        ) : (
+                            <IconSpinner className="size-3.5 shrink-0 animate-spin text-secondary" />
+                        )}
+                    </div>
+                </motion.div>
+            ))}
+        </AnimatePresence>
+    </motion.div>
+)
+
+export const DesktopComposer = ({
+    status,
+    sendActive,
+    children,
+}: {
+    status?: React.ReactNode
+    sendActive: boolean
+    children: React.ReactNode
+}) => (
+    <div className="shrink-0 p-3 pt-1">
+        <div className="flex h-[1.4em] items-center gap-1.5 text-xs text-secondary">
+            {status && (
+                <>
+                    <PostHogMark className="h-2.5 animate-pulse" />
+                    {status}
+                </>
+            )}
+        </div>
+        <div className="flex items-end gap-2 rounded-md border border-primary bg-white px-2.5 py-2 dark:bg-dark">
+            <span className="min-w-0 flex-1">{children}</span>
+            <span
+                className={cn(
+                    'flex size-6 shrink-0 items-center justify-center rounded-md text-sm font-bold transition-colors',
+                    sendActive ? 'bg-[#F54E00] text-white' : 'bg-accent text-muted'
+                )}
+            >
+                ↑
+            </span>
+        </div>
+    </div>
+)
+
+export const DesktopShell = ({
+    chats,
+    className,
+    children,
+}: {
+    chats: string[]
+    className?: string
+    children: React.ReactNode
+}) => (
     <div
         className={cn(
             'flex flex-col overflow-hidden rounded-lg border border-primary bg-primary text-[13px] leading-snug text-primary shadow-xl',
-            WINDOW_HEIGHT
+            WINDOW_HEIGHT,
+            className
         )}
     >
         <div className="relative flex shrink-0 items-center gap-2 border-b border-primary bg-accent px-3 py-2">
@@ -219,7 +295,7 @@ const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) 
                 <span className="mb-1 flex items-center gap-1 rounded px-1.5 py-1 font-semibold text-secondary">
                     <IconPlus className="size-3.5" /> New chat
                 </span>
-                {['Acme churn risk', 'Signup funnel', 'Checkout errors'].map((chat, index) => (
+                {chats.map((chat, index) => (
                     <span
                         key={chat}
                         className={cn(
@@ -231,77 +307,44 @@ const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) 
                     </span>
                 ))}
             </div>
-            <div className="flex min-w-0 flex-1 flex-col">
-                <ScrollToLatest className="px-3 pt-3">
-                    {state.submitted && (
-                        <motion.p
-                            {...LINE_ENTER}
-                            className="m-0 mb-3 ml-auto max-w-[85%] rounded-lg rounded-br-sm bg-accent px-2.5 py-1.5"
-                        >
-                            {QUESTION}
-                        </motion.p>
-                    )}
-                    {state.calls.length > 0 && (
-                        <motion.div {...LINE_ENTER} className="mb-2 overflow-hidden rounded-md border border-primary">
-                            <AnimatePresence initial={false}>
-                                {state.calls.map(({ call, done }) => (
-                                    <motion.div
-                                        key={call.id}
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        transition={IOS_SPRING}
-                                        className="border-b border-primary last:border-b-0"
-                                    >
-                                        <div className="flex items-center gap-2 px-2.5 py-1.5">
-                                            <SourceIcon source={call.source} className="size-3.5 shrink-0" />
-                                            <span className="shrink-0 font-semibold">{call.label}</span>
-                                            <span className="min-w-0 flex-1 truncate text-xs text-secondary">
-                                                {done && call.result}
-                                            </span>
-                                            {done ? (
-                                                <IconCheck className="size-3.5 shrink-0 text-green" />
-                                            ) : (
-                                                <IconSpinner className="size-3.5 shrink-0 animate-spin text-secondary" />
-                                            )}
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
-                        </motion.div>
-                    )}
-                    {state.answer && (
-                        <p className="m-0 mb-2">
-                            <InlineCode text={state.answer} codeClassName="rounded bg-accent !px-1" />
-                        </p>
-                    )}
-                </ScrollToLatest>
-                <div className="shrink-0 p-3 pt-1">
-                    <div className="flex h-[1.4em] items-center gap-1.5 text-xs text-secondary">
-                        {state.working && (
-                            <>
-                                <PostHogMark className="h-2.5 animate-pulse" />
-                                Thinking…
-                            </>
-                        )}
-                    </div>
-                    <div className="flex items-end gap-2 rounded-md border border-primary bg-white px-2.5 py-2 dark:bg-dark">
-                        <span className="min-w-0 flex-1">
-                            {state.typed || <span className="text-muted">Ask PostHog anything…</span>}
-                            {state.typed && <Caret elapsed={elapsed} className="w-px bg-current" />}
-                        </span>
-                        <span
-                            className={cn(
-                                'flex size-6 shrink-0 items-center justify-center rounded-md text-sm font-bold transition-colors',
-                                state.typed ? 'bg-[#F54E00] text-white' : 'bg-accent text-muted'
-                            )}
-                        >
-                            ↑
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <div className="flex min-w-0 flex-1 flex-col">{children}</div>
         </div>
     </div>
+)
+
+const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) => (
+    <DesktopShell chats={['Acme churn risk', 'Signup funnel', 'Checkout errors']}>
+        <ScrollToLatest className="px-3 pt-3">
+            {state.submitted && (
+                <motion.p
+                    {...LINE_ENTER}
+                    className="m-0 mb-3 ml-auto max-w-[85%] rounded-lg rounded-br-sm bg-accent px-2.5 py-1.5"
+                >
+                    {QUESTION}
+                </motion.p>
+            )}
+            {state.calls.length > 0 && (
+                <DesktopToolRows
+                    rows={state.calls.map(({ call, done }) => ({
+                        id: call.id,
+                        source: call.source,
+                        label: call.label,
+                        result: call.result,
+                        done,
+                    }))}
+                />
+            )}
+            {state.answer && (
+                <p className="m-0 mb-2">
+                    <InlineCode text={state.answer} codeClassName="rounded bg-accent !px-1" />
+                </p>
+            )}
+        </ScrollToLatest>
+        <DesktopComposer status={state.working && 'Thinking…'} sendActive={!!state.typed}>
+            {state.typed || <span className="text-muted">Ask PostHog anything…</span>}
+            {state.typed && <Caret elapsed={elapsed} className="w-px bg-current" />}
+        </DesktopComposer>
+    </DesktopShell>
 )
 
 const THEME_COMPONENTS: Record<AgentTheme, React.ComponentType<{ state: TraceState; elapsed: number }>> = {

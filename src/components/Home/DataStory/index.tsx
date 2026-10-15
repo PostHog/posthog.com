@@ -5,6 +5,7 @@ import FeedbackPopup from './FeedbackPopup'
 import FormPointer from './FormPointer'
 import IngestStep from './Ingest/IngestStep'
 import QueryStep from './Query/QueryStep'
+import ActStep from './Act/ActStep'
 import Link from 'components/Link'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 
@@ -83,6 +84,8 @@ export const StepsSection = (): JSX.Element => (
                 <IngestStep key={title} title={title} description={description} />
             ) : index === 1 ? (
                 <QueryStep key={title} index={index} title={title} description={description} />
+            ) : index === 2 ? (
+                <ActStep key={title} index={index} title={title} description={description} />
             ) : (
                 <div key={title}>
                     <h3>

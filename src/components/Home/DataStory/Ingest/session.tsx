@@ -110,10 +110,12 @@ export const SESSION_EVENTS: SessionEvent[] = [
 
 export const isProductEvent = (event: SessionEvent): boolean => isProductKey(event.source)
 
-export const eventColor = (event: SessionEvent): string =>
-    isProductKey(event.source)
-        ? PRODUCTS[event.source].color
-        : EXTERNAL_SOURCES.find(({ key }) => key === event.source)?.color ?? 'currentColor'
+export const sourceColor = (source: SourceKey): string =>
+    isProductKey(source)
+        ? PRODUCTS[source].color
+        : EXTERNAL_SOURCES.find(({ key }) => key === source)?.color ?? 'currentColor'
+
+export const eventColor = (event: SessionEvent): string => sourceColor(event.source)
 
 export const visibleEvents = (elapsed: number): SessionEvent[] => SESSION_EVENTS.filter(({ at }) => at <= elapsed)
 
