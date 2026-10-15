@@ -37,6 +37,8 @@ There are separate limits for different kinds of resources.
 
 - For [feature flag local evaluation](/docs/feature-flags/local-evaluation) (which is enabled in SDKs when you input a personal API key), the rate limit is `600/minute`.
 
+- For [prompt](/docs/prompt-management) fetches made with a personal API key (reading a prompt by name or listing prompts, as the SDKs do), the rate limit is `600/minute`. This limit is separate from the general API limits, so polling clients do not use up the budget for other endpoints.
+
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
 - For the `/invites` and `/invites/bulk` endpoints, you can send `50` invites per hour and `200` per day, with up to 20 invites per bulk request. This also applies to invites sent from the PostHog UI.
