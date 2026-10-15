@@ -124,6 +124,72 @@ The receiving TAM qualifies the opportunity using the [growth potential framewor
 
 We track coverage in Customer Analytics with the CSM account relationship for the base layer and the `AM Managed` tag for the TAM overlay. An account can have both.
 
+### When to request an overlay
+
+Good retention work naturally creates room for expansion, and CSMs should keep working it. A TAM overlay is for when there's enough expansion at once that working it would pull the CSM away from retention. The TAM takes on that selling, so the CSM stays focused on retention and we don't miss the chance to significantly grow the account.
+
+Request a TAM overlay when:
+- **3 or more products are teed up as qualified expansion opportunities**, each a meaningful expansion rather than a small add-on, and your retention work on the account only leaves room to drive one of them. It's your call: if scoped extra help on expansion is in the customer's interest, request a TAM to push it over the finish line.
+
+**What counts as a qualified expansion opportunity?**
+If all of the below are true:
+- **There's a real use case and someone who'd own it.**
+- **The customer is interested.** The CSM has already pitched it, you know what they use today and why. If they've said no, respect it and bring it up again only when it comes up naturally.
+- **If the expansion opportunity has stalled, it's because of a person on the customer's team, not the product.**  If no one on the customer's team owns the decision to turn off an existing competitive tool, that's a good problem for a TAM to jump in. If they need a feature we don't have, that's a PR or workaround for the CSM. 
+
+**When not to request an overlay**
+- A single cross-sell that comes up naturally, or a customer who already wants to adopt one product after you pitch it.
+- A large, risky, or very active account with no expansion opportunity. If the account needs more hands to de-risk, bring in another CSM, an FDE, or exec support instead.
+- A customer who doesn't reply to the CSM. A TAM just gives them another person to ignore. Work out why they've gone quiet first.
+- Churn risk. De-risking an account is CSM work. See [churn saves](#churn-saves).
+- The account is being right-sized (tagged `cost optimizing`). [Pause expansion work](/handbook/growth/sales/risk-mitigation-and-churn-prevention#implementation-health) until they're at their target monthly spend.
+- You've identified other teams that could adopt PostHog, the customer uses a competitor for something we do, or they've just raised a funding round, acquired a company or gone on a hiring push. These are signals to do more discovery first. 
+
+A [competitive renewal](#competitive-renewal) is a separate call the CSM makes and doesn't need these criteria. However, it's a narrower engagement where the TAM is there to help win the renewal, not to work several expansion opportunities over the long term.
+
+#### Before you tag the account
+
+Do what you can first. Then have an answer for: **what would a TAM take on that I can't?** Show what you've done and where you've hit the limit of what you can take on alongside your retention work.
+
+If all of the above checks out, then add the `tam overlay needed` tag in Customer Analytics and add a note with the context the TAM needs to qualify the opportunity.
+
+TAM team leads review tagged accounts at the start of each quarter. The assigned TAM then qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential), and either joins or documents in Customer Analytics why not.
+
+Here's what your note in Customer Analytics could look like. This isn't a hard requirement - use it as a concrete way to sense check your request. 
+
+```
+Account: [account]
+
+Why a TAM:
+[ ] 3+ meaningful products teed up as expansion (listed below)
+
+Products teed up (one line each):
+- [product] — use case — who'd own it
+
+If known:
+Estimated new ARR per product, and how you got the number
+Pain: what problem this solves for them
+Economic buyer: who controls the budget
+Champion: who's pushing for it internally
+Competition: what they use today, incl. doing nothing
+
+What I've tried: pitches, calls, links
+
+Each product is qualified (check all):
+[ ] Real use case and someone who'd own it
+[ ] Customer is interested: pitched, current tool known, no explicit rejection from the customer
+[ ] If stalled, the stall is on a person, not a missing feature
+Next step: what the TAM should do first
+```
+
+#### Capacity
+
+There's no fixed number of TAMs or overlay accounts per CSM. The work comes in bursts and varies by account: number of active users, how often they engage with us, and ARR all shape the load.
+
+A qualified request can sit CSM-only until a TAM has room, and TAM team leads decide that at allocation. Keep working the opportunities in the meantime.
+
+When the TAM joins, it might be useful to tell the customer what they're there for (for example, "joining to help explore error tracking with your platform team"), so it reads as an addition with a clear purpose, not a salesy fishing trip. See [kicking off the overlay](/handbook/growth/sales/csm-tam-overlay-coverage#kicking-off-the-overlay) for guidance on kicking off an overlay.
+
 ---
 
 ## Removing a TAM from an account
