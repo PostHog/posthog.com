@@ -21,8 +21,8 @@ const DEFAULT_HOG = 'wizard-hog'
 // The product page character for each docs section. These are the same illustrations
 // the product pages use, shipped as square PNGs in @posthog/brand.
 const productHogs: { prefix: string; src: string; file: string }[] = [
-    { prefix: '/docs/product-analytics', src: 'hog-product-analytics', file: 'chart-hog.png' },
-    { prefix: '/docs/web-analytics', src: 'hog-web-analytics', file: 'cursor-hog.png' },
+    { prefix: '/docs/product-analytics', src: 'hog-product-analytics', file: 'chart.png' },
+    { prefix: '/docs/web-analytics', src: 'hog-web-analytics', file: 'cursor.png' },
     { prefix: '/docs/session-replay', src: 'hog-session-replay', file: 'director.png' },
     { prefix: '/docs/replay-vision', src: 'hog-replay-vision', file: 'director.png' },
     { prefix: '/docs/feature-flags', src: 'hog-feature-flags', file: 'traffic-controller.png' },
