@@ -569,6 +569,8 @@ const RoadmapCards = ({
     const showSignAtEnd = Boolean(humanCodedSince && containerWidth >= 700)
     const hasMeasuredContainer = containerWidth > 0
     const containerRef = useRef<HTMLDivElement>(null)
+    const shouldTuckSignRef = useRef(false)
+    const initialScrollDoneRef = useRef(false)
 
     const getWeekOfMonth = (date: string) => {
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
@@ -675,11 +677,16 @@ const RoadmapCards = ({
         viewport.scrollTo({ left: Math.max(0, viewport.scrollWidth - changelogWidth) })
     }
 
+    const isNearSign = (viewport: HTMLElement) => {
+        const changelogWidth = viewport.closest('[data-changelog-window]')?.clientWidth ?? viewport.clientWidth
+        return viewport.scrollWidth - viewport.scrollLeft - changelogWidth <= width + 15
+    }
+
     const handleRoadmapClick = (roadmap: RoadmapNode) => {
-        if (humanCodedSince) {
-            const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-            if (viewport) scrollSignBehindRoadmap(viewport)
-        }
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        initialScrollDoneRef.current = true
+        shouldTuckSignRef.current = Boolean(showSignAtEnd && viewport && isNearSign(viewport))
+        if (viewport && shouldTuckSignRef.current) scrollSignBehindRoadmap(viewport)
         navigate(`?id=${roadmap.id}`)
         onRoadmapClick(roadmap)
     }
@@ -693,10 +700,12 @@ const RoadmapCards = ({
     }, [signWidth])
 
     useLayoutEffect(() => {
-        if (!activeRoadmap || !humanCodedSince || !hasMeasuredContainer) return
+        if (!activeRoadmap || !shouldTuckSignRef.current || !hasMeasuredContainer) return
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
-        if (viewport) scrollSignBehindRoadmap(viewport)
-    }, [activeRoadmap?.id, humanCodedSince, hasMeasuredContainer, signWidth, containerWidth])
+        if (!viewport) return
+        if (isNearSign(viewport)) scrollSignBehindRoadmap(viewport)
+        else shouldTuckSignRef.current = false
+    }, [activeRoadmap?.id, hasMeasuredContainer, signWidth, containerWidth])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -729,9 +738,9 @@ const RoadmapCards = ({
         }
     }, [])
 
-    // Scroll to latest week with roadmaps on mount
+    // Position the timeline once, using the linked entry when there is one.
     useEffect(() => {
-        if (!hasMeasuredContainer) return
+        if (!hasMeasuredContainer || initialScrollDoneRef.current) return
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
@@ -752,26 +761,26 @@ const RoadmapCards = ({
 
         let frame = 0
         const handleInitialScroll = () => {
+            if (initialScrollDoneRef.current) return
             if (virtualizer.getVirtualItems().length === 0) {
                 frame = requestAnimationFrame(handleInitialScroll)
-                return
-            }
-            if (activeRoadmap && humanCodedSince) {
-                scrollSignBehindRoadmap(viewport)
                 return
             }
             if (initialActiveRoadmap) {
                 const index = weeks.findIndex((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
                 if (index >= 0) {
                     scrollToIndex(index)
+                    initialScrollDoneRef.current = true
                     return
                 }
             }
             if (showSignAtEnd) {
                 viewport.scrollTo({ left: viewport.scrollWidth - viewport.clientWidth })
+                initialScrollDoneRef.current = true
                 return
             }
             scrollToLastWeek()
+            initialScrollDoneRef.current = true
         }
 
         const timer = setTimeout(handleInitialScroll, 100)
@@ -779,7 +788,7 @@ const RoadmapCards = ({
             clearTimeout(timer)
             cancelAnimationFrame(frame)
         }
-    }, [weeks, showSignAtEnd, hasMeasuredContainer, activeRoadmap?.id, humanCodedSince])
+    }, [weeks, showSignAtEnd, hasMeasuredContainer, initialActiveRoadmap])
 
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
@@ -1006,6 +1015,7 @@ export default function Changelog({
         if (!id) return null
         return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
     })
+    const initialRoadmapForScroll = useRef(initialActiveRoadmap)
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
@@ -1274,7 +1284,7 @@ export default function Changelog({
                                     containerWidth={containerWidth}
                                     activeRoadmap={activeRoadmap}
                                     hideEmpty={hideEmpty}
-                                    initialActiveRoadmap={initialActiveRoadmap}
+                                    initialActiveRoadmap={initialRoadmapForScroll.current}
                                     videos={playlistVideos}
                                     humanCodedSince={humanCodedSince}
                                 />
