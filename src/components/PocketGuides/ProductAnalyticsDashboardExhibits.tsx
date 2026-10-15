@@ -60,7 +60,7 @@ function DashboardBuilder({
                             }
                             className={`rounded border px-3 py-2 font-rounded text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a94b] ${
                                 has(id)
-                                    ? 'border-[#f7a94b] bg-[#fff0dd] text-[#292724]'
+                                    ? 'border-[#f7a94b] bg-[#fff0dc] text-[#292724]'
                                     : 'border-[#d3d0c8] bg-[#fffdfa] text-[#292724] hover:border-[#f7a94b]'
                             }`}
                         >

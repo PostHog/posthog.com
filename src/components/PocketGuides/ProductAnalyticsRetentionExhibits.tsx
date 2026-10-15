@@ -193,10 +193,10 @@ export function BookingRetentionFigure(): JSX.Element {
                                 <Tabs.Trigger
                                     key={month}
                                     value={String(month)}
-                                    className="group min-w-0 bg-[#fffdfa] p-2 text-center outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e29b35]"
+                                    className="group min-w-0 bg-[#fffdfa] p-2 text-center outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-orange"
                                 >
                                     <span className="block text-xs text-[#716c63]">Month {month}</span>
-                                    <span className="mt-2 block rounded bg-[#f6f3ed] px-1 py-2 group-data-[state=active]:bg-[#fff0dc] group-data-[state=active]:ring-1 group-data-[state=active]:ring-inset group-data-[state=active]:ring-[#e29b35]">
+                                    <span className="mt-2 block rounded bg-[#f6f3ed] px-1 py-2 group-data-[state=active]:bg-[#fff0dc] group-data-[state=active]:ring-1 group-data-[state=active]:ring-inset group-data-[state=active]:ring-orange">
                                         <strong className="block text-base leading-5">{retention}</strong>
                                         <span className="text-xs">{returningGuests[month].length} guests</span>
                                     </span>
@@ -573,7 +573,7 @@ export function SavedCohortRetentionFigure(): JSX.Element {
                                     key={id}
                                     value={id}
                                     aria-label={name}
-                                    className="border-b-2 border-transparent px-3 py-2 text-left text-xs font-semibold outline-none data-[state=active]:border-orange data-[state=active]:bg-[#faf8f3] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e29b35]"
+                                    className="border-b-2 border-transparent px-3 py-2 text-left text-xs font-semibold outline-none data-[state=active]:border-orange data-[state=active]:bg-[#faf8f3] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-orange"
                                 >
                                     {label}
                                 </Tabs.Trigger>
