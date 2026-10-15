@@ -16,12 +16,13 @@ tags:
 Professionally, there are really two questions I get asked constantly:
 
 - How did you become a software engineer with no formal training?
-
 - Why did you decide to move from engineering into GTM (technical cs and sales)?
 
-The first question is obviously mostly asked by folks trying to learn or break their way into a software career. This is a little more straightforward and there are countless people who have made a successful career transition into software engineering by being self taught. That's a story for another day.
+The first is straightforward. Countless engineers have themselves and transitioned into engineering successfully. It's a well-traveled path. The second? Less so.
 
-The second is the one that is usually asked with much more curiosity (sometimes bordering on horror) - both from engineers, and GTM folks. Why would someone who enjoys software engineering ever want to move to a customer facing (non-engineering) role?
+Why, people ask, would someone who enjoys software engineering ever want to move to a customer facing (non-engineering) role? Normally, followed by "are you ok?" and various expressions of horror, bewilderment, and disbelief.
+
+Let me deal with that one.
 
 ## Software engineering is fun
 
@@ -29,7 +30,7 @@ Software engineering is mentally stimulating. Finding a problem, solving it with
 
 And don't get me started on giant whiteboards, architectural decisions and bike shedding things that don't really matter. Who wouldn't want to be a software engineer?
 
-Apparently me.
+Apparently, me. But you can scratch that itch while working in sales.
 
 Selling software, specifically selling to engineers, means you get to do this all day, every day. If your company lets you. Selling to technical users often means you get to be a part of their process.
 
@@ -51,7 +52,9 @@ It's still software engineering at its core, but every interaction is truly uniq
 
 ## Buying software is not fun
 
-Be the change you wish to see in the world, or something -Gandhi -Michael Scott
+> "Be the change you wish to see in the world, or something." - Gandhi / Michael Scott (disputed)
+
+Better yet, as an engineer working in sales, you help make something engineers hate doing joyful.
 
 Inevitably, being a software engineer means you have to buy some type of tooling or other software, with money. A lot of dev tools are PLG, so you can signup, use it for free for a while, eventually enter a credit card and pay for what you use. Others, well, you often find yourself needing to "Contact Sales". This is the worst.
 
@@ -77,9 +80,9 @@ Being technically competent changes how engineers end users perceive me, but als
 
 ## Selling software is a new challenge
 
-Building software is a challenge. A problem to be solved. At the end of the day, so is sales, just in a different way. At PostHog, many of our team are former founders and I think most would say they will be founders again. As someone who fits that mold, learning sales is a thrilling, different challenge. Well outside of my comfort zone in some ways.
+> "Learn to build. Learn to sell. If you can do both, you will be unstoppable." – Naval Ravikant
 
-"Learn to build. Learn to sell. If you can do both, you will be unstoppable." -Naval Ravikant
+Building software is a challenge. A problem to be solved. At the end of the day, so is sales, just in a different way. At PostHog, many of our team are former founders and I think most would say they will be founders again. As someone who fits that mold, learning sales is a thrilling, different challenge. Well outside of my comfort zone in some ways.
 
 Learning to sell (or work directly with customers in general) is not only a new skill, but also an extension of engineering skills. It's problem solving all the way down. Whether you're building software, or helping other software products/team succeed.
 
