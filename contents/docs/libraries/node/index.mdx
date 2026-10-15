@@ -516,19 +516,32 @@ Both `flush()` and `shutdown()` export spans that have already ended. A span sti
 
 If your serverless handler reuses a client across invocations, await `flush()` before returning. It flushes events and ended spans concurrently without stopping flag polling or cleaning up cache-provider resources. Reserve `shutdown()` for a disposable client or program exit. Catch and log flush failures so telemetry errors don't fail the invocation or replace an application error.
 
+For AWS Lambda, bound the wait to `context.getRemainingTimeInMillis()` with a 100 ms safety margin:
+
 ```ts
-export const handler = async () => {
+export const handler = async (_event, context) => {
   try {
     await posthog.withSpan("handler", () => doWork())
   } finally {
+    let flushTimeout: ReturnType<typeof setTimeout> | undefined
     try {
-      await posthog.flush()
+      const remainingMs = Math.max(0, context.getRemainingTimeInMillis() - 100)
+      await Promise.race([
+        posthog.flush(),
+        new Promise((_, reject) => {
+          flushTimeout = setTimeout(() => reject(new Error("PostHog flush timed out")), remainingMs)
+        }),
+      ])
     } catch (err) {
       console.error("PostHog flush failed", err)
+    } finally {
+      clearTimeout(flushTimeout)
     }
   }
 }
 ```
+
+This timeout limits the wait, not the delivery attempt. See [serverless environments](#short-lived-processes-like-serverless-environments) for timeout behavior and other platforms.
 
 <CalloutBox icon="IconInfo" title="Edge runtimes">
 
@@ -706,7 +719,9 @@ client.on("error", (err) => {
 
 The Node SDK queues and batches events in the background. AWS Lambda or [Vercel Functions](/docs/libraries/vercel) can freeze the runtime after a handler returns, before background requests finish.
 
-Keep a shared client outside the handler to reuse it across invocations in the same runtime. Await `flush()` before returning, including when application code throws. Catch and log flush failures so telemetry errors don't fail the invocation or replace an application error:
+Keep a shared client outside the handler to reuse it across invocations in the same runtime. Await `flush()` before returning, including when application code throws. Catch and log flush failures so telemetry errors don't fail the invocation or replace an application error.
+
+An explicit `flush()` has no overall timeout. This AWS Lambda example uses `context.getRemainingTimeInMillis()` and reserves 100 ms for returning from the handler:
 
 ```node
 import { PostHog } from "posthog-node"
@@ -716,7 +731,7 @@ const client = new PostHog("<ph_project_token>", {
   flushInterval: 0,
 })
 
-export const handler = async () => {
+export const handler = async (_event, context) => {
   try {
     client.capture({
       distinctId: "distinct_id_of_the_user",
@@ -728,14 +743,25 @@ export const handler = async () => {
       event: "other_thing_happened",
     })
   } finally {
+    let flushTimeout
     try {
-      await client.flush()
+      const remainingMs = Math.max(0, context.getRemainingTimeInMillis() - 100)
+      await Promise.race([
+        client.flush(),
+        new Promise((_, reject) => {
+          flushTimeout = setTimeout(() => reject(new Error("PostHog flush timed out")), remainingMs)
+        }),
+      ])
     } catch (err) {
       console.error("PostHog flush failed", err)
+    } finally {
+      clearTimeout(flushTimeout)
     }
   }
 }
 ```
+
+The timeout only limits the wait. It does not cancel the in-flight flush, which can continue if the runtime remains active. The platform can freeze or terminate the runtime before delivery completes. On other platforms, calculate the timeout from the request deadline.
 
 `flushInterval: 0` disables timer-driven flushing. Setting `flushAt: 1` starts a background flush after each queued event, but neither setting waits for delivery. You still need to await `flush()` before returning.
 
