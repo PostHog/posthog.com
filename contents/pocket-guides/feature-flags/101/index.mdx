@@ -55,11 +55,11 @@ In the browser, flags load asynchronously, and until they arrive `getFeatureFlag
 const showNewCheckout = posthog.getFeatureFlag(NEW_CHECKOUT_FLAG) ?? false
 ```
 
-You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, which [the next page](/pocket-guides/feature-flags/server-and-client) covers.
+You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, which [the next page](/docs/feature-flags/learn/server-and-client) covers.
 
 ## Flag checks record exposure
 
-When the SDK checks a flag, it captures a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got, and the SDK drops repeats. That event is how PostHog knows who saw what: Experiments counts exposures from it, and it's one signal for telling a flag nobody checks anymore from one that's still in use, as [cleanup](/pocket-guides/feature-flags/cleanup) explains.
+When the SDK checks a flag, it captures a `$feature_flag_called` <Term name="event">event</Term> with the flag key and the value the person got, and the SDK drops repeats. That event is how PostHog knows who saw what: Experiments counts exposures from it, and it's one signal for telling a flag nobody checks anymore from one that's still in use, as [cleanup](/docs/feature-flags/learn/cleanup) explains.
 
 <SeeAlso>
 

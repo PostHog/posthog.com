@@ -84,6 +84,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'orange',
         volume: 6,
         docsProduct: 'feature-flags',
+        learnPath: '/docs/feature-flags/learn',
     },
 ]
 
