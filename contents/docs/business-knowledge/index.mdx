@@ -5,15 +5,17 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
-import OSButton from 'components/OSButton'
-import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
+import PrivateBeta from "./_snippets/private-beta.mdx";
+import OSButton from "components/OSButton";
+import { SurfaceCards, SurfaceCard } from "components/Docs/SurfaceCards";
 
 <PrivateBeta />
 
 Business Knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business Knowledge MCP tools all read the same sources.
 
-<OSButton variant="primary" asLink to="/docs/business-knowledge/start">Get started</OSButton>
+<OSButton variant="primary" asLink to="/docs/business-knowledge/start">
+  Get started
+</OSButton>
 
 ## Where you can use it
 
@@ -21,33 +23,60 @@ Add sources in PostHog. PostHog AI, Support, and MCP then read those same source
 
 <SurfaceCards columns={2}>
 
-<SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/business-knowledge/start" cta="Add a source">
-Add a text source, a public page, or a file, then ask in the Playground what's covered and what's missing.
+<SurfaceCard
+  icon="IconLaptop"
+  color="blue"
+  title="PostHog Web"
+  url="/docs/business-knowledge/start"
+  cta="Add a source"
+>
+  Add a text source, a public page, or a file, then ask in the Playground what's covered and what's
+  missing.
 </SurfaceCard>
 
-<SurfaceCard icon="IconSparkles" color="purple" title="PostHog AI" url="/docs/posthog-ai" cta="Ask PostHog AI">
-PostHog AI searches these sources when a question is about your product, policies, or team.
+<SurfaceCard
+  icon="IconSparkles"
+  color="purple"
+  title="PostHog AI"
+  url="/docs/posthog-ai"
+  cta="Ask PostHog AI"
+>
+  PostHog AI searches these sources when a question is about your product, policies, or team.
 </SurfaceCard>
 
-<SurfaceCard icon="IconSupport" color="teal" title="Support" url="/docs/business-knowledge/learn-from-support" cta="Learn from support">
-Support reads the same sources when it drafts a reply.
+<SurfaceCard
+  icon="IconSupport"
+  color="teal"
+  title="Support"
+  url="/docs/business-knowledge/learn-from-support"
+  cta="Learn from support"
+>
+  Support reads the same sources when it drafts a reply.
 </SurfaceCard>
 
-<SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/model-context-protocol/tools" cta="MCP tools reference">
-Search sources, read the surrounding text, and add or update a source. The tools need the `business_knowledge:read` or `business_knowledge:write` scope.
+<SurfaceCard
+  icon="IconMagic"
+  color="purple"
+  title="MCP"
+  url="/docs/model-context-protocol/tools"
+  cta="MCP tools reference"
+>
+  Search sources, read the surrounding text, and add or update a source. The tools need the
+  `business_knowledge:read` or `business_knowledge:write` scope.
 </SurfaceCard>
 
 </SurfaceCards>
 
 ## Where knowledge comes from
 
-| Source | What you add | Guide |
-| --- | --- | --- |
-| Text | A policy, an FAQ, or any other text you paste | [Text](/docs/business-knowledge/sources#text) |
-| URL | A public page, a sitemap, or a crawl of one site | [URL](/docs/business-knowledge/sources#url) |
-| File | A PDF, DOCX, Markdown, CSV, or plain text file | [File](/docs/business-knowledge/sources#file) |
-| Learned | Reusable answers from resolved support tickets | [Learn from support](/docs/business-knowledge/learn-from-support) |
-| GitHub | Selected repositories. File names and the README are searched, then a file is read. The code isn't indexed. | [GitHub repositories](/docs/business-knowledge/github) |
+| Source  | What you add                                                                                                | Guide                                                             |
+| ------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Text    | A policy, an FAQ, or any other text you paste                                                               | [Text](/docs/business-knowledge/sources#text)                     |
+| URL     | A public page, a sitemap, or a crawl of one site                                                            | [URL](/docs/business-knowledge/sources#url)                       |
+| File    | A PDF, DOCX, Markdown, CSV, or plain text file                                                              | [File](/docs/business-knowledge/sources#file)                     |
+| Learned | Reusable answers from resolved support tickets                                                              | [Learn from support](/docs/business-knowledge/learn-from-support) |
+| GitHub  | Selected repositories. File names and the README are searched, then a file is read. The code isn't indexed. | [GitHub repositories](/docs/business-knowledge/github)            |
+| Library | A named group of sources and repositories. Scopes search to only that group.                                | [Libraries](/docs/business-knowledge/sources#libraries)           |
 
 ## Use cases
 
