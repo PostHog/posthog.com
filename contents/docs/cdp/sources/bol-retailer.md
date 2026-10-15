@@ -34,9 +34,9 @@ This source needs client credentials for the Retailer API:
 
 <SyncModes />
 
+- `orders` supports incremental sync on `latestChangedDateTime`, the newest change across the order's items. Use incremental sync to keep orders older than three months: bol's API only lists the last three months, so a full refresh replaces the table with that window.
 - `offers` supports incremental sync on `lastModifiedDateTime`.
-- The other tables use full refresh.
-- bol's API lists orders and shipments from the last three months only. Each sync replaces those tables with that window.
+- The other tables use full refresh. `shipments` covers the last three months.
 - `invoices` covers the last two years. `inventory` covers stock in bol's warehouses (fulfilment by bol), not stock you ship yourself.
 
 ## Configuration
