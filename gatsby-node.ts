@@ -1,23 +1,9 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { GatsbyNode } from 'gatsby'
-import { createPages as createContentPages } from './gatsby/createPages'
 const axios = require('axios')
 
-export const createPages: GatsbyNode['createPages'] = async (api, options) => {
-    await createContentPages(api, options)
-
-    for (const team of api.getNodesByType('SqueakTeam')) {
-        if (!team.slug || team.name === 'Hedgehogs') continue
-
-        api.actions.createPage({
-            path: `/teams/${team.slug}`,
-            component: path.resolve('src/pages/teams/[slug].tsx'),
-            context: { slug: team.slug },
-        })
-    }
-}
-
+export { createPages } from './gatsby/createPages'
 export { onCreateNode, onPreInit } from './gatsby/onCreateNode'
 export { createSchemaCustomization } from './gatsby/createSchemaCustomization'
 export { sourceNodes } from './gatsby/sourceNodes'
@@ -72,7 +58,9 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/next-steps/*'
         createPage(page)
     }
-    if (page.path.replace(/\/$/, '') === '/teams/[slug]') {
+    // Only the [slug] page needs the wildcard. A static page under /teams (/teams/new, /teams/team-ben)
+    // that also claims '/teams/*' loses the tie to [slug] at runtime, and the browser shows that team as missing.
+    if (page.path.match(/^\/teams\//) && page.component.match(/teams[\\/]\[slug\]\.tsx$/)) {
         page.matchPath = '/teams/*'
         createPage(page)
     }
