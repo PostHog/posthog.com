@@ -43,9 +43,9 @@ PostHog lists every container in the database. Pick the ones you want to sync.
 
 <SyncModes />
 
-Every container supports incremental sync on `_ts`, the system property Cosmos DB updates each time a document is written. Each incremental run reads the documents written since the last run.
+Every container supports incremental sync on `_ts`, the system property Cosmos DB updates each time a document is written. Each incremental run reads the documents written since the last run. Documents written in the five minutes before a sync starts are read by the next sync.
 
-Rows are keyed on the document `id` together with `_partition_key`, a column PostHog adds with the document's partition key value. Cosmos DB only guarantees that `id` is unique within one logical partition, so the pair keeps rows from different partitions apart.
+Rows are keyed on the document `id` together with `_partition_key`, a column PostHog adds with the document's partition key value. Cosmos DB only guarantees that `id` is unique within one logical partition, so the pair keeps rows from different partitions apart. `_partition_key` holds the value as JSON, so a string key appears in quotes, and it's empty when a document has no partition key value.
 
 Deleted documents stay in PostHog after an incremental sync, because Cosmos DB does not report deletes through the query API. Run a full refresh to remove them.
 
