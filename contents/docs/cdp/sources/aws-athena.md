@@ -31,7 +31,7 @@ You need:
   - `athena:GetQueryResults`
   - `athena:StopQueryExecution`
 
-  The IAM user or role also needs read access to the S3 data behind the tables, and write access to the query result location.
+  The IAM user or role also needs read access to the S3 data behind the tables, and read and write access to the query result location.
 
 Each sync runs one Athena query per table. Athena bills you for the data each query scans.
 
@@ -77,7 +77,7 @@ PostHog lists the tables in the Glue database. Partition key columns are include
 }
 ```
 
-3. Grant the same user read access to the S3 data behind the tables you want to sync, and write access to the query result location.
+3. Grant the same user read access to the S3 data behind the tables you want to sync, and read and write access to the query result location.
 4. Create an access key for the user under **Security credentials** > **Access keys**.
 5. Copy the **Access key ID** and **Secret access key**. You need both when you link the source in PostHog.
 
@@ -114,7 +114,7 @@ Columns of type `array`, `map`, or `struct` are stored as JSON.
 - **AWS rejected the access key**: check that the access key ID and secret access key are correct, and that the key is still active in IAM.
 - **AWS rejected the request signature**: re-enter the secret access key.
 - **The AWS session token has expired**: reconnect with fresh credentials.
-- **These AWS credentials cannot read the catalog or run queries**: grant the permissions listed in [Prerequisites](#prerequisites), plus read access to the tables' S3 data and write access to the query result location.
+- **These AWS credentials cannot read the catalog or run queries**: grant the permissions listed in [Prerequisites](#prerequisites), plus read access to the tables' S3 data and read and write access to the query result location.
 - **The Glue database does not exist in this region**: check the database name and the region.
 - **The Athena workgroup does not exist in this region**: check the workgroup name.
 - **This Athena workgroup is disabled**: enable it in Athena, or use another workgroup.
