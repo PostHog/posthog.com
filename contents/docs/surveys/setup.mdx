@@ -37,7 +37,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 })
 ```
 
-> **Note:** A `survey sent` event you capture yourself does not mark the survey as seen in the browser. After the user responds or dismisses it, call `posthog.surveys.markSurveyAsSeen(survey.id, { iteration: survey.current_iteration })`. This needs `posthog-js` 1.396.6 or later.
+> **Note:** When you capture `survey sent` or `survey dismissed` with `posthog-js`, the SDK marks the survey as seen so it doesn't show again. Include `$survey_iteration: survey.current_iteration` in each event. See [mark a survey as seen](/docs/surveys/implementing-custom-surveys#mark-a-survey-as-seen) if you capture these events another way.
 > **Note:** If you're using a URL or selector targeting option, you'll need to poll with `posthog.getActiveMatchingSurveys()` to get the most updated survey results.
 
 3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's ID, a response for each question, and any properties you'd want. See [capture survey responses](/docs/surveys/implementing-custom-surveys#capture-survey-responses) for the full list of properties.
@@ -45,6 +45,7 @@ posthog.getActiveMatchingSurveys((surveys) => {
 ```js-web
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration,
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,
     $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),

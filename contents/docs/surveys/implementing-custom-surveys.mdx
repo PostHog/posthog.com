@@ -367,11 +367,11 @@ export default function Feedback() {
     const responseKey = `$survey_response_${survey.questions[0].id}`; // $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11
     posthog.capture("survey sent", {
       $survey_id: survey.id,
+      $survey_iteration: survey.current_iteration,
       $survey_submission_id: crypto.randomUUID(),
       $survey_completed: true,
       [responseKey]: feedback
     })
-    posthog.surveys.markSurveyAsSeen(survey.id, { iteration: survey.current_iteration })
   }
 
   return (
@@ -397,7 +397,9 @@ export default function Feedback() {
 
 ### Mark a survey as seen
 
-A `survey sent` event you capture yourself does not tell the browser that the user has seen the survey. After the user responds or dismisses it, call `posthog.surveys.markSurveyAsSeen(survey.id, { iteration: survey.current_iteration })` so the survey doesn't show again. This method needs `posthog-js` 1.396.6 or later.
+When you capture `survey sent` or `survey dismissed` with `posthog-js` 1.249.2 or later, the SDK marks the survey as seen in the browser and records the response or dismissal on the person, so the survey doesn't show again. Include `$survey_iteration` in the event so the SDK marks the right iteration of a repeating survey.
+
+If you capture these events from your backend or another SDK instead, set the person properties yourself (see [event properties](#event-properties)) and call `posthog.surveys.markSurveyAsSeen(survey.id, { iteration: survey.current_iteration })` in the browser. This method needs `posthog-js` 1.396.6 or later.
 
 ## Capture survey responses
 
@@ -437,6 +439,7 @@ const responseProperties = Object.fromEntries(
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration,
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,
     $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
@@ -459,11 +462,12 @@ posthog.capture("survey sent", {
 | Property | Description |
 | --- | --- |
 | `$survey_id` | Required. The ID of the survey. |
+| `$survey_iteration` | The survey's `current_iteration`. Send it on `survey shown`, `survey sent`, and `survey dismissed` so repeating surveys track each iteration separately. |
 | `$survey_response_<question_id>` | One property per answered question. Send ratings as strings and multiple choice answers as an array of strings. |
 | `$survey_submission_id` | A unique ID for each submission, for example from `crypto.randomUUID()`. Reuse the same ID for the partial and final sends of one submission. PostHog deduplicates responses and counts them for billing by this ID, so events without it each count as a separate response. |
 | `$survey_completed` | `true` on the final send, `false` for a partial response. |
 | `$survey_questions` | Recommended. The survey's questions as `[{ id, question }]`. Queries that look up a response by question position read it. |
-| `$set` | Set `{ '$survey_responded/<survey_id>': true }` to mark the person as having responded, so targeting excludes them. If the survey has a `current_iteration` greater than 0, the key is `$survey_responded/<survey_id>/<iteration>`. |
+| `$set` | Only needed when you capture outside `posthog-js`, which sets it for you. Set `{ '$survey_responded/<survey_id>': true }` on `survey sent` and `{ '$survey_dismissed/<survey_id>': true }` on `survey dismissed`, so targeting excludes the person. If the survey has a `current_iteration` greater than 0, append it to the key, for example `$survey_responded/<survey_id>/<iteration>`. |
 
 ### Response formats
 
@@ -520,6 +524,7 @@ const responseProperties = Object.fromEntries(
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration,
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,
     $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
