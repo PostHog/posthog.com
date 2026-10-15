@@ -302,6 +302,19 @@ export const dataPipelines = {
             ],
         },
         {
+            name: 'ELT destinations',
+            url: '/docs/data-pipelines/destinations/elt-destinations',
+            icon: 'IconServer',
+            color: 'purple',
+            featured: true,
+        },
+        {
+            name: 'Monitoring your syncs',
+            url: '/docs/data-pipelines/destinations/monitoring',
+            icon: 'IconGraph',
+            color: 'orange',
+        },
+        {
             name: 'Batch exports',
             url: '/docs/data-pipelines/batch-exports',
             icon: 'IconShare',
@@ -6798,14 +6811,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Where rows are written',
-                    url: '/docs/data-warehouse/destinations',
+                    url: '/docs/data-pipelines/destinations/elt-destinations',
                     icon: 'IconServer',
                     color: 'purple',
                     featured: true,
                 },
                 {
                     name: 'Monitoring your syncs',
-                    url: '/docs/data-warehouse/monitoring',
+                    url: '/docs/data-pipelines/destinations/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
                 },

@@ -6714,6 +6714,16 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/data-warehouse/destinations:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations/elt-destinations:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/monitoring:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations/monitoring:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/cdp:ext(\\.md)?",
             "destination": "/docs/data-pipelines:ext?",
             "statusCode": 301
