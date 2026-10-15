@@ -14,6 +14,10 @@ category: Startups
 tags:
   - Open source
   - Y Combinator
+  - Founders
+  - Raising money
+crosspost:
+  - Founders
 ---
 
 Open source projects have long battled with how to finance themselves. [PostHog](https://github.com/posthog/posthog) is lucky to have significant funding and wanted to share what we did to help other cool projects take off.

@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Appfollow
-beta: true
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 [AppFollow](https://appfollow.io) aggregates App Store and Google Play data for app analytics, review management, and app store optimization. This connector pulls your tracked apps, their reviews, their rating history, and their app store optimization data (category ranks, tracked keyword positions, release history, and review statistics) into the PostHog data warehouse, where you can join them with product analytics, build insights, and monitor review sentiment over time.
 

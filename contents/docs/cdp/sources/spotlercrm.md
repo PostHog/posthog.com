@@ -12,9 +12,6 @@ sourceId: SpotlerCRM
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Spotler CRM (formerly Really Simple Systems) connector syncs your CRM data – accounts, contacts, opportunities, activities, and more – into PostHog, so you can analyze your sales pipeline alongside your product data.
 

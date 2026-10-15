@@ -61,8 +61,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         learnPath: '/docs/ai-observability/learn',
     },
     {
-        id: 'context-warehouse',
-        title: 'Context Warehouse',
+        id: 'data-stack',
+        title: 'Data Stack',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',

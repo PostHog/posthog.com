@@ -9,12 +9,9 @@ availability:
 sourceId: Lacework
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Lacework FortiCNAPP (Fortinet) connector syncs your cloud security data – alerts, host and container vulnerabilities, compliance evaluations, machines, agents, and console audit logs – into PostHog, so you can trend cloud risk, audit control coverage, and correlate security findings with the rest of your data.
 

@@ -9,12 +9,6 @@ availability:
 sourceId: AmazonAds
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Amazon Ads connector pulls your Amazon advertising entity data – profiles, Sponsored Products campaigns, and ad groups – into the PostHog data warehouse.
 
 You need a Login with Amazon (LWA) application with Advertising API access. PostHog uses your LWA credentials to authenticate with Amazon's Advertising API and sync entity data from every advertising profile your token can access.

@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Maxio
-beta: true
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Maxio connector syncs your Maxio Advanced Billing (formerly Chargify) data into PostHog – customers, subscriptions, invoices, products, components, coupons, and billing events – so you can analyze revenue and billing activity alongside your product data.
 

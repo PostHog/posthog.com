@@ -9,12 +9,6 @@ availability:
 sourceId: Braze
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Braze connector syncs your Braze data — campaigns, canvases, segments, events, and templates — into the PostHog data warehouse.
 
 ## Adding a data source

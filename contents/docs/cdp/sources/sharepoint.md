@@ -12,9 +12,6 @@ sourceId: SharePoint
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The SharePoint connector syncs your SharePoint Online sites, lists, list items, document libraries, and file metadata into PostHog, so you can analyze your SharePoint data alongside your product data.
 

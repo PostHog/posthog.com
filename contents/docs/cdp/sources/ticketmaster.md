@@ -9,12 +9,6 @@ availability:
 sourceId: Ticketmaster
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Sync public events, attractions, and venues from the [Ticketmaster Discovery API](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) into the PostHog data warehouse.
 
 This source uses the public Discovery API v2. Private data like ticket orders, sales transactions, and attendee information is not available through this source.

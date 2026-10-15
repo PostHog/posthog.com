@@ -30,6 +30,7 @@ import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
+import SourceReleaseCallout, { hasReleaseCallout } from 'components/Docs/SourceReleaseCallout'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
 import NewsletterForm from 'components/NewsletterForm'
@@ -354,6 +355,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     } = post
 
     const sourceFields = postHogSource?.sourceFields ?? null
+    const sourceReleaseStatus = postHogSource?.releaseStatus ?? null
     const sourceTables = postHogSource?.tables ?? null
     const posthog = usePostHog()
     const { pathname } = useLocation()
@@ -367,11 +369,30 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
 
     // Same nudge for AI observability SDK installation pages. The coding-agent integrations
     // (Claude Code, OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so
-    // running the wizard in a project doesn't set them up. The installation index has its own
-    // AI wizard section in the MDX.
+    // running the wizard in a project doesn't set them up. Anthropic renders the hint inside its
+    // Claude SDK tab only, because its Claude Platform tab has no project code to set up.
+    // The installation index has its own AI wizard section in the MDX.
     const showAIObservabilityWizardHint =
         pathname.startsWith('/docs/ai-observability/installation/') &&
-        !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+        !['anthropic', 'claude-code', 'openclaw', 'opencode', 'pi'].includes(
+            pathname.split('/').filter(Boolean).pop() ?? ''
+        )
+
+    const releaseCallout = hasReleaseCallout(sourceReleaseStatus) ? (
+        <SourceReleaseCallout releaseStatus={sourceReleaseStatus} />
+    ) : null
+    const wizardHint =
+        (showWarehouseWizardHint && <WarehouseWizardHint />) ||
+        (showAIObservabilityWizardHint && <AIObservabilityWizardHint />) ||
+        null
+    // `undefined` when there is nothing to show, so ReaderView skips the wrapper's margin.
+    const belowTitle =
+        releaseCallout || wizardHint ? (
+            <>
+                {releaseCallout}
+                {wizardHint}
+            </>
+        ) : undefined
 
     // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
     // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
@@ -468,10 +489,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             }}
             title={title}
             titleClassName={isProductDocsPage ? PRODUCT_SURFACE_H1 : undefined}
-            belowTitle={
-                (showWarehouseWizardHint && <WarehouseWizardHint />) ||
-                (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
-            }
+            belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
             commits={commits}
@@ -515,6 +533,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
         postHogSource(mdx: { id: { eq: $id } }) {
+            releaseStatus
             sourceFields {
                 name
                 label

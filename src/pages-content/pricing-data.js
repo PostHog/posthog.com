@@ -230,8 +230,8 @@ const faqs = [
             <p>
                 Usage is calculated on a per-product level. Events for product and web analytics, recordings for session
                 replay, requests for feature flags and experiments, exceptions for error tracking, responses for
-                surveys, synced rows for data warehouse, messages for workflows, GB ingested for logs, and GB-months
-                kept for Logs custom retention.
+                surveys, synced rows for sources, messages for workflows, GB ingested for logs, and GB-months kept for
+                Logs custom retention.
             </p>
         ),
     },
