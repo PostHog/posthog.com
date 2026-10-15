@@ -2118,6 +2118,16 @@ export const handbookSidebar = [
             },
         ],
     },
+    {
+        name: 'Gradiated',
+        url: '/handbook/gradiated',
+        children: [
+            {
+                name: 'About Gradiated',
+                url: '/handbook/gradiated',
+            },
+        ],
+    },
 ]
 
 export const productEngineerHandbookSidebar = [
@@ -2698,6 +2708,10 @@ export const docsMenu = {
                 {
                     name: 'Context',
                     url: '/docs/self-driving/context',
+                },
+                {
+                    name: 'Steering',
+                    url: '/docs/self-driving/steering',
                 },
                 {
                     name: 'Scouts',
@@ -6494,6 +6508,67 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Business Knowledge',
+            url: '/docs/business-knowledge',
+            icon: 'IconBook',
+            color: 'purple',
+            description: 'Facts PostHog AI, Support, and MCP use when they answer questions about your business',
+            children: [
+                {
+                    name: 'Business Knowledge',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/business-knowledge',
+                    icon: 'IconHome',
+                    color: 'purple',
+                },
+                {
+                    name: 'Setup',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/business-knowledge/start',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'purple',
+                },
+                {
+                    name: 'Before answers',
+                    url: '/docs/business-knowledge/requirements',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                },
+                {
+                    name: 'Add and manage sources',
+                    url: '/docs/business-knowledge/sources',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'GitHub repositories',
+                    url: '/docs/business-knowledge/github',
+                    icon: 'IconGithub',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Learn from support',
+                    url: '/docs/business-knowledge/learn-from-support',
+                    icon: 'IconSupport',
+                    color: 'teal',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/business-knowledge/playground',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'Support',
             url: '/docs/support',
             icon: 'IconSupport',
@@ -7628,6 +7703,10 @@ export const docsMenu = {
                         {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
+                        },
+                        {
+                            name: 'WebMCP',
+                            url: '/docs/mcp-analytics/installation/webmcp',
                         },
                     ],
                 },
