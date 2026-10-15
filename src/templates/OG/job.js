@@ -1,3 +1,4 @@
+// Job cards render through job.tsx. This HTML string is the previous template.
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')

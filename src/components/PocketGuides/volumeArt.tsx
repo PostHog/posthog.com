@@ -17,7 +17,7 @@ export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; cla
     'product-analytics': HedgehogTrenchcoat,
     'self-driving': HedgehogImTheDriver,
     'ai-observability': HedgehogXRay,
-    'context-warehouse': HedgehogDollHouse,
+    'data-stack': HedgehogDollHouse,
     'session-replay': HedgehogDirector,
 }
 
