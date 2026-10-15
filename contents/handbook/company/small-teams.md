@@ -190,7 +190,6 @@ A small team may also realize they no longer need someone, or that they could re
 
 -   **You've been on your current team for at least a year.** You need time to go deep on something before you have fresh ideas to bring somewhere else.
 -   **Your current work is in a good spot.** If the thing you're working on is really hard, that's a reason to stick with it until it's in good shape. Everything you own should have a clear new owner before you go.
--   **It's not about a conflict with someone.** See below.
 
 #### How to move
 
