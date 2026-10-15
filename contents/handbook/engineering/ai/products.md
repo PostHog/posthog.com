@@ -401,7 +401,7 @@ This would turn the Wizard from a one-time setup tool into an ongoing assistant 
 
 ### Current status & ownership
 
-The Wizard is in general availability and actively used during customer onboarding. It's currently [owned](/handbook/engineering/feature-ownership) by the <SmallTeam slug="Content" />.
+The Wizard is in general availability and actively used during customer onboarding. The <SmallTeam slug="wizard-and-docs" /> owns the wizard harness, and product teams own the programs for their products. See [who owns what](/handbook/wizard-and-docs/wizard#who-owns-what).
 
 ## MCP: PostHog for third-party tools [General availability]
 

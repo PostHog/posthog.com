@@ -4,23 +4,83 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The [context mill](https://github.com/PostHog/context-mill) repo gathers up-to-date context from multiple sources, packaging developer docs, prompts, and working example code into a versioned manifest, which can be shipped anywhere.
-
-The PostHog MCP server currently fetches the context mill repo manifest and exposes it to any MCP-compatible client as resources and slash commands. This is what currently powers the PostHog [AI wizard](/handbook/wizard-and-docs/developing-the-wizard).
+The [context mill](https://github.com/PostHog/context-mill) packages PostHog knowledge for AI agents. It turns docs, prompts, and example apps into skills that the wizard, the PostHog MCP server, and the [AI plugin](https://github.com/PostHog/ai-plugin) load.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/context_mill_5b0f0323b7.png"
     alt="Context mill"
 />
 
-The context mill effectively acts as an assembly line for turning disparate PostHog knowledge into something portable, something AI systems can reliably consume.
+## What goes in the context mill
 
-You can break its context engineering flow into three main stages.
+Knowledge about PostHog goes in the context mill. Code that runs the agent goes in the wizard.
 
-1. **Context sourcing**: The context mill can pull from the entire PostHog developer docs, with pages delivered from posthog.com as raw Markdown. It also includes curated, hand-crafted prompts and working example apps.
+| Repo | What goes there |
+|---|---|
+| Context mill | Skills, agent prompts, example apps, and the `cli:` blocks that make skills into commands |
+| Wizard | The agent, programs, TUI, CLI, and any new top-level command |
+| [Warlock](https://github.com/PostHog/warlock) | Security rules that scan what the agent writes |
 
-2. **Context assembly**: The context mill transforms and packages the sourced context into a zip file manifest, which is meant to be portable and self-contained. We can structure and shape the manifest however we need.
+If a change touches both repos, ship the context mill PR first.
 
-3. **Context delivery**: The context mill creates a versioned release for the manifest, which can be consumed by any agent or MCP server as a skill or resource.
+## How a skill gets built
 
-Getting the best results requires some hand-cranking and refining. Context mill packages are created using a simple declarative YAML spec, so it’s worth spending some time experimenting and tuning things until they feel right.
+1. **Sourcing.** A skill pulls docs from posthog.com as Markdown, plus hand-written prompts and example apps.
+2. **Assembly.** The build packages each skill into a ZIP, and writes menus that list every skill and command.
+3. **Delivery.** A release publishes the ZIPs and menus to GitHub, with a mirror at `context-mill.posthog.com`.
+
+Each skill is a folder in `context/skills/` with a `config.yaml`. Expect to iterate on a skill until the wizard's output looks right.
+
+## Orchestrator flows
+
+Some programs run as an orchestrator flow instead of one long conversation. Each flow is a folder in `context/agents/`. Every file in it is one task, with the model and effort it runs at, and a `dependsOn` field that says which tasks must finish first. A planner, the seed, starts the flow. Tasks with nothing left to wait on run in parallel, each as a focused conversation with only the skills and tools it needs.
+
+This is the replay vision flow:
+
+<ProductScreenshot
+    imageLight="/images/handbook/wizard-and-docs/replay-vision-dag.png"
+    alt="The replay vision orchestrator flow: a planner, then install and init in parallel, then enable replay, then three scanners in parallel, then the report"
+/>
+
+To see every flow, run this in the context mill repo. It writes the page to your temp folder and opens it in a browser.
+
+```bash
+npm run visual-dags
+```
+
+## Releases reach users right away
+
+<CalloutBox icon="IconWarning" title="No wizard release needed" type="caution">
+
+The wizard always loads the latest context mill release. When a release merges, every wizard run uses it right away. Test a skill change in the workbench before you merge it.
+
+</CalloutBox>
+
+## Who owns which skill
+
+Each product team owns the skills for its product. The <SmallTeam slug="wizard-and-docs" /> owns the build and every skill without a product owner.
+
+| Skills in `context/skills/` | Owner |
+|---|---|
+| `integration`, `integration-v2` | <SmallTeam slug="growth" /> |
+| `migrate`, `audit`, `audit-*`, `events-audit` | <SmallTeam slug="forward-deployed-engineering" /> |
+| `error-tracking`, `error-tracking-upload-source-maps`, `error-tracking-link-releases` | <SmallTeam slug="error-tracking" /> |
+| `revenue-analytics`, `web-analytics` | <SmallTeam slug="web-analytics" /> |
+| `data-warehouse-source` | <SmallTeam slug="warehouse-sources" /> |
+| `self-driving` | <SmallTeam slug="self-driving" /> |
+| `mcp-analytics` | <SmallTeam slug="mcp-analytics" /> |
+| `metrics` | <SmallTeam slug="apm" /> |
+| `replay-vision`, `replay-vision-*` | <SmallTeam slug="replay" /> |
+| `ai-observability`, `llm-analytics` | <SmallTeam slug="ai-observability" /> |
+| Every other skill, like `feature-flags`, `logs`, and `tracing` | <SmallTeam slug="wizard-and-docs" /> |
+
+[`CODEOWNERS`](https://github.com/PostHog/context-mill/blob/main/.github/CODEOWNERS) requests reviews from these owners.
+
+## Future work
+
+The context mill is a band-aid. We built it when it was unclear where skills should live, and what context would still be useful for humans if everyone codes with agents. The goal is to retire it, so the docs themselves package cleanly into skills.
+
+## Go deeper
+
+- [Contributing guide](https://github.com/PostHog/context-mill/blob/main/CONTRIBUTING.md)
+- [AGENTS.md](https://github.com/PostHog/context-mill/blob/main/AGENTS.md)
