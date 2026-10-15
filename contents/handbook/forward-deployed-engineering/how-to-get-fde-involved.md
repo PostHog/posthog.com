@@ -28,7 +28,7 @@ For the smaller questions that come up along the way, **PostHog AI** and the **P
 
 For certain types of FDE engagements, TAEs / TAMs can self-serve and price standard packages without needing to wait for FDE to scope it out manually. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
-- **PostHog Foundations 0-1**, for customers in a PoC or trial who would benefit from FDE assistance to ensure they are production-ready from day 1. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/foundation-jumpstart/">PostHog Foundations 0-1 proposal builder</PrivateLink>.
+- **PostHog Foundations 0-1**, for customers in a PoC or trial who would benefit from FDE assistance to ensure they are production-ready from day 1. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/foundations/">PostHog Foundations 0-1 proposal builder</PrivateLink>.
 - **Managed Migrations**, for customers moving to PostHog from another product analytics tool. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink>.
 
 If the customer doesn't fit a standard package, bring it to #team-fde instead.
