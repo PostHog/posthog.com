@@ -110,7 +110,7 @@ Each approval policy includes:
 
 ### Conditions
 
-Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval. For feature flag update policies, this means both rollout percentage and release condition changes are gated.
 
 > **Note**: Conditions on an **Update feature flag** policy apply to the rollout percentage. A policy with a rollout percentage condition doesn't require approval for [release condition changes](#release-condition-changes). To require approval for those too, leave the conditions empty.
 
