@@ -156,6 +156,10 @@
         {
             "source": "/docs/session-replay/learn/:path*",
             "destination": "/docs/session-replay/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/docs/feature-flags/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
@@ -192,6 +196,11 @@
         {
             "source": "/pocket-guides/session-replay/:path*",
             "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags/:path*",
+            "destination": "/docs/feature-flags/learn/:path*",
             "statusCode": 301
         },
         {

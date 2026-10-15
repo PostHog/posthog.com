@@ -1,0 +1,66 @@
+---
+title: The off switch
+shortTitle: Off switch
+subtitle: Turn a feature off from PostHog, without a rollback.
+pocketGuideOrder: 4
+section: Release
+pocketGuideCta:
+  kind: link
+  label: Open your feature flags
+  href: https://app.posthog.com/feature_flags
+  note: Find the flag and switch it off.
+---
+
+<RightPage>
+
+# The off switch
+
+A rollback is a revert, a build, and a deploy, and your users see the bug for as long as all three take. If the change is behind a flag, you switch the flag off in PostHog instead, and each place that checks it stops serving the feature the next time it gets fresh flags.
+
+An off switch you can trust has four parts: a safe default, a tested fallback, a known propagation time, and monitoring that tells you when to flip it.
+
+## A safe default
+
+The off switch works only if the off path still works. Keep the old code working until the flag is gone, and make it the answer whenever the flag isn't a clear `true`:
+
+```js
+const useNewCheckout = flags.getFlag(NEW_CHECKOUT_FLAG) ?? false
+
+if (!useNewCheckout) return renderCheckout()
+return renderNewCheckout()
+```
+
+A disabled flag, a flag that hasn't loaded yet, and a check that gets no answer all land on the path that already works.
+
+## A tested fallback
+
+Test that path before you need it. Flip the flag off in staging and confirm the old path works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is a kill switch you hope works.
+
+## A known propagation time
+
+A disabled flag stops matching everywhere it's checked, but each side notices at its own pace. Here's `new-checkout` being switched off:
+
+| Time | What happens |
+| --- | --- |
+| 14:00 | `new-checkout` raised to 25% |
+| 14:11 | Checkout errors triple for people with the flag |
+| 14:12 | Flag disabled in PostHog |
+| 14:12 | Servers that evaluate remotely: off on the next request |
+| By 14:13 | Servers that evaluate locally: off at the next poll, 30 seconds by default |
+| Later | Browsers: off at the next flag fetch |
+
+A browser fetches flags on page load, on `identify()`, on a property or group change, and on `reloadFeatureFlags()`, so a tab that stays open can keep the old value for a while. If the feature does damage for as long as one tab holds it, check that flag on the server.
+
+## Monitoring that tells you to flip it
+
+You can only flip the switch as fast as you notice. The 14:11 in the timeline above came from watching, not from a customer email. Put an alert on the signal the change could break, like checkout errors, filtered to people with the flag, so it fires within minutes of the raise. Then send flag changes to Slack, so everyone watching the incident knows who flipped what and when.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Best practices](/docs/feature-flags/best-practices) · [Fallback defaults](/docs/feature-flags/local-evaluation#cold-start-and-fallback-defaults) · [Don't make these feature flag mistakes](/newsletter/feature-flag-mistakes) · [Slack alerts when flags change](/tutorials/feature-flag-slack-notifications)
+
+</SeeAlso>
+
+</RightPage>
