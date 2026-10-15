@@ -15,12 +15,25 @@ Reader clicks only change local example state – they do not send practice even
 `TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
 be reviewed on both sites.
 
-`ProductAnalyticsRetentionExhibits.tsx` supplies two static figures for the retention chapter.
-`RepeatBookingFigure` uses Twig catalog stays and photos with two matching `booking_completed`
-rows for one fictional person. The booked trip dates and event dates are separate.
-`BookingRetentionFigure` shows three selected months from a separate,
-simulated 10-person cohort. Neither figure records events or makes bookings. Both are registered
-in `bookComponents.tsx` for use in MDX.
+`ProductAnalyticsRetentionExhibits.tsx` supplies four figures for the retention chapter.
+`RepeatBookingFigure` pairs the shared Twig `RepeatBookingPreview` and its catalog photos with the
+same Inspector pattern used earlier. Edgar completes a booking in September and another in March.
+The Inspector shows both `booking_completed` events and their timestamps for
+`user_812`. `BookingRetentionFigure` uses month tabs for a separate 10-person cohort.
+A PostHog-style retention view keeps all ten guests visible and shows who booked in the selected month.
+`SavedStayJourneyFigure` uses Twig's save control, saved-stays view, and booking preview.
+The visitor saves a stay, opens it from Saved stays, and books it. The Inspector then shows
+`stay_saved` and `booking_completed`. `SavedCohortRetentionFigure` filters a compact retention grid
+to show which of the same 10 guests returned in the selected month. The figures do not record events or make
+bookings. All four are registered in `bookComponents.tsx` for use in MDX.
+`ProductAnalyticsDashboardExhibits.tsx` shows three guide-owned PostHog dashboard excerpts.
+Readers build each view by adding or removing tiles. The overview uses the saved filter trend,
+funnel, and retention insights; its booking investigation note appears with the funnel.
+The focused dashboards reuse the guide's destination selections, weekly filter trend, and January
+retention examples. They keep click counts, unique people, and cohort sizes distinct.
+`ProductAnalyticsDashboardNextSteps.tsx` ends the guide with one project-aware prompt. Its PostHog AI
+link starts that prompt in the app; its Claude Code and Codex buttons open the same prompt in those
+agents. It also shows the MCP wizard command for readers who still need to connect their agent.
 
 ```
 contents/pocket-guides/<volume>/

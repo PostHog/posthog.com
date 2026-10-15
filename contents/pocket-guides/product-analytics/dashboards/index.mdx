@@ -1,0 +1,74 @@
+---
+title: Dashboards
+shortTitle: Dashboards
+subtitle: Bring your insights together and decide what to investigate next.
+pocketGuideOrder: 5
+---
+
+<RightPage>
+
+# Dashboards
+
+Twig's engineers have recorded filter selections, connected visits to signed-in guests, and built insights for filter use, booking completion, and repeat bookings. Now they need to review those answers together and decide what to investigate.
+
+A dashboard groups saved insights around a product question. It shows where to look; the engineers still need to inspect the evidence before choosing a change.
+
+## Start with an overview
+
+The engineers choose **Dashboards → New Dashboard → Blank Dashboard** and name it **Exploring and booking stays**. Their events and identified users already power three saved insights: a weekly filter trend, a booking funnel, and repeat-booking retention.
+
+**Try it:** Select each saved insight to build their dashboard. Select it again to remove it.
+
+<BookingDashboardFigure />
+
+Adding the funnel also brings in a note about one failed request. Each tile keeps its own population and clock: weekly filter users, people who completed a booking within 14 days, and monthly cohorts of first-time bookers. The engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
+
+## Look closer at finding stays
+
+The filter trend says more people used filters. To see what they chose, the engineers put their destination breakdown beside the weekly trend on a focused dashboard.
+
+**Try it:** Add the destination breakdown and filter trend.
+
+<FindingStaysDashboardFigure />
+
+With both tiles added, the bars count five example clicks; the line counts unique people over two weeks. These are different samples, so the engineers don't use the clicks to explain the weekly change. To see whether filters helped guests find stays, they can investigate selections where `has_results` was false.
+
+## Compare returning guests
+
+The engineers use a third dashboard to ask whether guests who saved a stay before their first booking return more often. It brings together the January first-booking retention insight and two views filtered to the static cohorts from the previous chapter.
+
+**Try it:** Add the overall retention view, then the two saved-stay groups.
+
+<ReturningGuestsDashboardFigure />
+
+With all three tiles added, the top row's Month 12 returners are the same two people in the saved group and one in the other group. The groups contain only four and six guests, so January's difference is a lead, not proof that saving caused another booking. The engineers would compare later first-booking cohorts once their Month 12 periods are complete.
+
+## Choose what to investigate
+
+The booking funnel offers the clearest immediate lead: one of the four people who did not finish had a failed request. Twig's `request_id` connects that person's `booking_started` event to the server response. The engineers will inspect the other three booking trails and the server evidence before choosing a fix. A replay can show what a visitor saw, but it cannot establish the server's cause.
+
+If they change the booking flow, they'll compare the funnel again after a full 14-day conversion window, keeping its events, order, and filters the same. A higher completion rate would show that a larger share of starters finished the measured sequence. It wouldn't prove the change caused the increase; an experiment could test that question.
+
+## Apply the process to your product
+
+Twig started with a filter click. Its event name and destination property made that choice measurable. Identity connected activity across visits. A trend counted people using filters, a funnel measured booking completion, and retention followed later bookings. Each dashboard now helps the engineers review a question and decide what evidence to inspect next.
+
+Try the same path with one question about your product:
+
+1. Check that your events and identities represent the behavior you want to understand.
+2. Build an insight that counts the right people and time period, then add it to a dashboard.
+3. Inspect the evidence behind a result before changing the product. Keep the measurement consistent afterward.
+
+## Build a dashboard for your product
+
+Use your project's real events to build a dashboard you can investigate. Choose PostHog AI or an MCP-connected coding agent to get started.
+
+<ProductAnalyticsDashboardNextSteps />
+
+<LessonFooter>
+
+<a href="/docs/product-analytics/dashboards">Dashboards</a> · <a href="/docs/product-analytics/insights">Creating insights</a> · <a href="/docs/experiments">Experiments</a>
+
+</LessonFooter>
+
+</RightPage>

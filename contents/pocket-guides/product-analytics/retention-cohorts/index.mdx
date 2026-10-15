@@ -9,70 +9,63 @@ pocketGuideOrder: 4
 
 # Retention and cohorts
 
-Twig's engineers have followed a visitor from a filter selection to a confirmed booking. Their trend shows how many people use filters, and their funnel shows that 6 of 10 people who started booking finished within 14 days. Neither insight tells them whether those guests ever book again.
+On Twig, guests filter stays, save places they like, and book trips. Twig's engineers record those actions in PostHog. When a guest signs in, Twig passes their account ID to PostHog to connect earlier browsing to that account. Their trend shows how many people use filters each week. Their funnel shows that 6 of 10 people who started booking completed one within 14 days.
 
-They now want to follow people after their first booking and see when they book another stay.
+Neither insight tells them what happens after a guest's first booking. **Do guests come back and book another stay?**
 
 ## Define a repeat booking
 
-The earlier chapters connected Edgar's activity to an account and showed a confirmed booking. A later visit to browse or filter stays would bring Edgar back to the site, but it would not be another booking.
+Edgar is one of Twig's guests. He used a filter, saved a stay, and completed a booking. If he comes back to browse or filter stays, he's a returning visitor, but he hasn't booked again. He must complete another booking to count as a repeat booker.
 
-A <Term name="retention insight" /> measures how many people perform a starting action, then perform a return action in a later period. The actions can differ. To measure repeat booking, Twig's engineers use `booking_completed` for both. That event is sent only when Twig confirms a booking.
+A <Term name="retention insight" /> counts people who perform a starting action, then a return action in a later period. Those actions can differ, but for repeat bookings, Twig's engineers use `booking_completed` for both. Twig sends this event only when it confirms a booking.
 
-Only another completed booking in a later period counts as a return in this insight. If Edgar books again with the same identified account, PostHog can connect the new event to the earlier one across visits and devices.
+If Edgar signs in with the same account and books again, PostHog can connect the later event to his first booking, even across visits or devices.
 
-Guests may book trips months apart, so the engineers look at monthly periods. They want to see **when** another booking happens, not assume guests should book every month.
+<RepeatBookingFigure />
 
-## Follow first-time guests over time
+The inspector shows two `booking_completed` events for Edgar's account, each with its own timestamp. Now the engineers want to measure repeat bookings across other guests.
 
-In a new retention insight, the engineers select `booking_completed` as both the start and return event, then count **Unique users**. They choose **First ever occurrence** so PostHog checks all recorded activity, not just the insight's date range, to find each person's first completed booking.
+## When do first-time guests book again?
 
-They use monthly intervals and **On** for the returning time criteria, so each month shows who booked again in that specific month. They use **Period 0** as the percentage reference, so each month's percentage is compared with the original group.
+Twig's engineers ask: **Of guests who first booked in January 2025, how many book again six or twelve months later?** Guests may book trips months apart, so they use monthly periods.
 
-The funnel's 10 people started booking. This retention example starts with a different group: 10 people whose first recorded booking was completed in January 2025. PostHog puts them in the January <Term name="cohort" /> because they share the month of their first booking. These are selected months from that cohort's retention row – the full insight also shows the months between them.
+They keep `booking_completed` as both events and count **Unique users**. They choose **First ever occurrence** for the start event so PostHog checks all recorded activity, not just January, to find each person's first completed booking. With January 2025 in the date range, PostHog automatically puts the 10 people who first booked that month into a <Term name="cohort" />. The engineers don't add them by hand.
 
-| Month | Guests who book | Retention |
-| ----- | --------------- | --------- |
-| 0     | 10              | 100%      |
-| 6     | 2               | 20%       |
-| 12    | 3               | 30%       |
+This is a different group from the funnel's 10 booking starters. The funnel starts with people who tried to book; this cohort starts with people who completed their first booking.
 
-**Month 0** is January 2025. It is 100% because all 10 people made their first booking then, not because they returned. In **Month 6** (July), two book again, so retention for that month is 2 out of 10, or 20%. In **Month 12** (the following January), three of the original 10 book again, so retention is 30%.
+They choose **On** to count a return only in the month another booking happens and **Period 0** to compare each month with the original 10 guests. This visual focuses on January. In a full retention insight, PostHog adds a row for each month with first-time bookers, so the engineers can compare groups that started at different times.
 
-Month 12 does not show everyone who booked again **by** then. It shows only those who booked in that month. It also isn't three out of the two who booked in Month 6: someone can skip months and book later. Each person counts once per month, even if they complete several bookings that month.
+<BookingRetentionFigure />
 
-Identity still matters. If a later booking isn't connected to the same account, PostHog could count it as a different person. A second booking in Month 0 also doesn't appear as a return in a later month.
+Select a month to see which of the original 10 guests booked then. **Month 0** is their first booking in January, so it starts at 100% – it doesn't mean they returned. In **Month 6** (July), 2 of 10 booked again: 20%. In **Month 12** (the following January), 3 of 10 booked again: 30%.
 
-The engineers compare only completed months. A month still in progress can gain more repeat guests, and a Month 12 comparison needs a cohort old enough to have reached Month 12.
+Month 12's 30% means three of the original 10 booked **in** that month, not at any time **by** then. Someone can skip Month 6 and book in Month 12. Each person counts once per month, even if they book more than once.
+
+The later booking must also connect to the same person. Otherwise, PostHog may count it as a new guest instead of a return. As later first-booking cohorts reach Month 12, the engineers compare that column across rows: are newer guests more or less likely to book again after a year? They compare completed months because a month still in progress can gain more returning guests.
 
 ## Compare people who saved a stay
 
-Earlier, Edgar saved a stay before signing in. Once PostHog connected that activity to the account, the engineers could see the `stay_saved` event alongside the booking. They wonder whether guests who saved a stay before their first booking are more likely to book again.
+Edgar saved a stay before signing in and making his first booking. PostHog connected that earlier `stay_saved` event to his account after he signed in. His example raises another question about the January 2025 guests: **Do guests who save a stay before their first booking book again more often?**
 
-For this small example, all 10 guests who booked for the first time have signed in, so PostHog has person profiles for them. Saved cohorts need those profiles; anonymous events alone aren't enough.
+All 10 guests in this example have signed in, so PostHog has person profiles for them. The engineers inspect each person's events and manually add their profiles to two **static cohorts**: four saved a stay before their first booking, and six did not. A static cohort is a fixed list, so saving a stay later won't move someone between these groups.
 
-For this ten-person example, the engineers inspect each person's events, then add their profiles to two **static cohorts**: four people who saved a stay before their first booking, and six who didn't. A static cohort is a fixed list, so someone who saves a stay later doesn't move between groups.
+<SavedStayJourneyFigure />
 
-These saved cohorts differ from the January group that the retention insight creates automatically. The engineers use each saved cohort to filter the same retention insight, keeping both events and the monthly intervals the same.
+The visitor's `stay_saved` event on January 10 comes before their first `booking_completed` on January 15. Both belong to `user_202`, whom the engineers add to **Saved before first booking**. The January booking also places this person in the first-booking cohort above.
 
-In Month 12, the groups look like this:
+The engineers apply each static cohort as a filter to the same retention insight. Only the January 2025 row appears here because the two static cohorts contain only those 10 guests. The filter changes which guests appear in that row. Select a month in the table to see who counted. In Month 12 (January 2026), `user_202`'s January 18 `booking_completed` counts as a return.
 
-| Group        | Guests | Book again | Retention |
-| ------------ | ------ | ---------- | --------- |
-| Saved a stay | 4      | 2          | 50%       |
-| Didn't save  | 6      | 1          | 17%       |
+<SavedCohortRetentionFigure />
 
-Together, two savers and one non-saver make up the three people who book again in Month 12. The percentages help compare groups of different sizes, while the counts show how little data this example has.
+In the saved group, `user_202` and `user_203` booked again: 2 of 4, or 50%. In the other group, only `user_205` did: 1 of 6, or about 17%. Together, they're the three returning guests in the January cohort above. The percentages compare groups of different sizes; the counts show how small this example is.
 
-## Separate a pattern from an explanation
+To see whether this difference holds beyond January, the engineers would add first-time bookers from later months to the appropriate static cohort. Then they could compare saved and unsaved guests in each row once its Month 12 period is complete. If the gap appears across several rows, it's a pattern worth investigating. January alone is too small to draw a conclusion.
 
-More savers booked again in this example. That doesn't prove saving a stay caused another booking. Someone who travels often might be more likely to do both.
+Even a repeated gap wouldn't prove saving a stay caused another booking. People who travel often might be more likely to save stays and book again. The engineers inspect event histories and any available replays before deciding whether to change Twig.
 
-The engineers inspect those people's event trails and any available replays to understand how saved stays fit into their first booking. With only 10 people in the example, they need more evidence before changing the experience.
+Next, the engineers put these insights on a dashboard. The team can see filter use, booking completion, and repeat bookings together before choosing what to investigate.
 
-The trend shows how many people use the filters. The funnel shows how many finish a booking. Retention shows when guests return to book again. Next, the engineers put these insights on a dashboard so the team can follow the whole journey and decide what to investigate.
-
-<LessonFooter nextLabel="Dashboards and decisions" nextHref="/docs/product-analytics/learn/dashboards-decisions">
+<LessonFooter nextLabel="Dashboards" nextHref="/docs/product-analytics/learn/dashboards">
 
 <a href="/docs/product-analytics/retention">Retention</a> · <a href="/docs/data/cohorts">Cohorts</a>
 
