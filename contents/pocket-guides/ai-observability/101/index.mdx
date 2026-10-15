@@ -6,24 +6,6 @@ pocketGuideOrder: 1
 isPrimer: true
 ---
 
-<LeftPage>
-
-<TraceFigure
-    n={1}
-    caption="One trace: everything a single user request did."
-    rows={[
-        { kind: 'trace', label: 'summarize_thread', meta: 'person 4821 · 8.4s · $0.031' },
-        { kind: 'span', label: 'retrieve_context', meta: '0.6s · 14 documents', depth: 1 },
-        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '1,240 in · 380 out · $0.011', depth: 1 },
-        { kind: 'span', label: 'search_tickets', meta: '1.9s · tool call', depth: 1 },
-        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '3,100 in · 210 out · $0.020', depth: 1 },
-    ]}
-/>
-
-</LeftPage>
-
-<RightPage>
-
 # AI Observability 101
 
 Every LLM call in your product is valuable performance and user insight. You can use PostHog AI Observability (AIO) to see what your model is doing in the wild, how much it costs, and whether the outputs it returns are what users want.
@@ -40,6 +22,18 @@ There are three AIO event types: `$ai_trace`, `$ai_span`, and `$ai_generation`:
 One level up sits the <Term name="ai session">AI session</Term>. Set `$ai_session_id` when you capture and related traces group into one conversation instead of scattered requests. It's a property rather than a fourth event type, and it's separate from the PostHog session behind a replay.
 
 Below, <SeeFig n={1} /> shows all three in one request. It's best to read from bottom to top.
+
+<TraceFigure
+    n={1}
+    caption="One trace: everything a single user request did."
+    rows={[
+        { kind: 'trace', label: 'summarize_thread', meta: 'person 4821 · 8.4s · $0.031' },
+        { kind: 'span', label: 'retrieve_context', meta: '0.6s · 14 documents', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '1,240 in · 380 out · $0.011', depth: 1 },
+        { kind: 'span', label: 'search_tickets', meta: '1.9s · tool call', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '3,100 in · 210 out · $0.020', depth: 1 },
+    ]}
+/>
 
 ## What lands on a generation
 
@@ -82,5 +76,3 @@ None of it works until your LLM calls arrive in PostHog. The wizard instruments 
 See also: [AI Observability docs](/docs/ai-observability) · [Installation](/docs/ai-observability/installation)
 
 </SeeAlso>
-
-</RightPage>

@@ -20,7 +20,20 @@ pocketGuideCta:
     how to instrument AI observability using the wizard or manual install.
 ---
 
-<LeftPage>
+# Score your AI's answers with evals
+
+We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you monitor stays green.
+
+You probably have numbers that describe how the model performed – its speed, cost, and responsiveness. The piece you're missing is whether what it said was true.
+
+## What scores a model's output
+
+An <Term name="evaluation" /> scores the model's output. AI Observability (AIO) runs three kinds of evaluations against your live traffic:
+- An <Term name="LLM-as-a-judge" /> that scores each generation against a prompt you write
+- A <Term name="code-based evaluation">code-based eval</Term> that checks something you can express exactly
+- Built-in <Term name="sentiment analysis" /> that classifies how the user sounds
+
+Each result lands on the generation it scored, with the reason it passed or failed – <SeeFig n={1} /> is an example of that list in the app.
 
 <EvalRunsFigure
     n={1}
@@ -47,6 +60,12 @@ pocketGuideCta:
     ]}
 />
 
+## What quality drop looks like
+
+When you've collected enough of those scores, you get a pass rate: one number for how often your AI feature gets it right. If you watch a pass rate over time, a bad change stops being invisible.
+
+In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off at the moment a prompt changed. Without an evaluation running, the first you'd hear of that is a customer email, weeks later.
+
 <DivergenceFigure
     n={2}
     caption="A prompt change went out on the 4th. Nothing errored, volume held, and the answers got worse."
@@ -66,31 +85,6 @@ pocketGuideCta:
         },
     ]}
 />
-
-</LeftPage>
-
-<RightPage>
-
-# Score your AI's answers with evals
-
-We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you monitor stays green.
-
-You probably have numbers that describe how the model performed – its speed, cost, and responsiveness. The piece you're missing is whether what it said was true.
-
-## What scores a model's output
-
-An <Term name="evaluation" /> scores the model's output. AI Observability (AIO) runs three kinds of evaluations against your live traffic:
-- An <Term name="LLM-as-a-judge" /> that scores each generation against a prompt you write
-- A <Term name="code-based evaluation">code-based eval</Term> that checks something you can express exactly
-- Built-in <Term name="sentiment analysis" /> that classifies how the user sounds
-
-Each result lands on the generation it scored, with the reason it passed or failed – <SeeFig n={1} /> is an example of that list in the app.
-
-## What quality drop looks like
-
-When you've collected enough of those scores, you get a pass rate: one number for how often your AI feature gets it right. If you watch a pass rate over time, a bad change stops being invisible.
-
-In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off at the moment a prompt changed. Without an evaluation running, the first you'd hear of that is a customer email, weeks later.
 
 ## How to write evaluation criteria
 
@@ -117,5 +111,3 @@ Splitting by prompt version means being able to see which prompt version caused 
 The prompt below sets up a judge on a retrieval-backed feature, with the criteria from earlier: does the answer contradict, invent, or refuse what the context supports? Swap those for the failure your product actually has – the structure is what matters.
 
 <Action />
-
-</RightPage>

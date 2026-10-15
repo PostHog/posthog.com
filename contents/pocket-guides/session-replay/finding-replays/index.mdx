@@ -14,12 +14,35 @@ pocketGuideOrder: 5
 section: Observe
 ---
 
-<LeftPage>
+# Finding the replay you need
+
+A month of recording gives you thousands of sessions, and no obvious way in.
+
+Scrolling the list is the worst place to start. You don't know which session matters until you've already found it. The faster routes start somewhere else and arrive at a replay.
+
+## From an insight
+
+<!-- Source: how-to-watch-recordings.mdx – click a data point in an insight to get the people it
+    counted, each with their recordings. Funnels are the strong case: a step's converted and
+    dropped users are both one click away. -->
+
+Every insight is data related to a set of <Term name="person">people</Term>, and every person has recordings.
+
+Click a point on a trend, or a step in a funnel <SeeFig n={1} />, and you can watch the sessions behind it. The trend or funnel tells you what happened, and the replay tells you how it happened.
 
 <PersonsModalFigure
     n={1}
     caption="Click a step in a funnel and you get the people it counted, each one a click away from their recording."
 />
+
+## From an error
+
+<!-- Source: /docs/error-tracking – an exception belongs to a session, and the replay is linked
+    from the issue. Console and network are on the player's own timeline (see the 101). -->
+
+Sessions and Error Tracking issues are also linked by a person's session. You can see the errors that occur during a replay, and you can also find all replays containing a given error.
+
+Just look for the <ViewRecordings /> button, or open the **Recording** tab on the exception you have selected <SeeFig n={2} />.
 
 <ScreenshotFigure
     n={2}
@@ -43,35 +66,6 @@ section: Observe
         },
     ]}
 />
-
-</LeftPage>
-
-<RightPage>
-
-# Finding the replay you need
-
-A month of recording gives you thousands of sessions, and no obvious way in.
-
-Scrolling the list is the worst place to start. You don't know which session matters until you've already found it. The faster routes start somewhere else and arrive at a replay.
-
-## From an insight
-
-<!-- Source: how-to-watch-recordings.mdx – click a data point in an insight to get the people it
-    counted, each with their recordings. Funnels are the strong case: a step's converted and
-    dropped users are both one click away. -->
-
-Every insight is data related to a set of <Term name="person">people</Term>, and every person has recordings.
-
-Click a point on a trend, or a step in a funnel <SeeFig n={1} />, and you can watch the sessions behind it. The trend or funnel tells you what happened, and the replay tells you how it happened.
-
-## From an error
-
-<!-- Source: /docs/error-tracking – an exception belongs to a session, and the replay is linked
-    from the issue. Console and network are on the player's own timeline (see the 101). -->
-
-Sessions and Error Tracking issues are also linked by a person's session. You can see the errors that occur during a replay, and you can also find all replays containing a given error.
-
-Just look for the <ViewRecordings /> button, or open the **Recording** tab on the exception you have selected <SeeFig n={2} />.
 
 ## Saved filters
 
@@ -109,5 +103,3 @@ The [Replay Vision lesson](/pocket-guides/session-replay/replay-vision) introduc
 See also: [How to watch recordings](/docs/session-replay/how-to-watch-recordings) · [Find replays with AI](/docs/session-replay/find-replays-ai) · [Watching replays yourself](/pocket-guides/session-replay/watching-replays) · [Getting a robot to watch for you](/pocket-guides/session-replay/replay-vision)
 
 </SeeAlso>
-
-</RightPage>

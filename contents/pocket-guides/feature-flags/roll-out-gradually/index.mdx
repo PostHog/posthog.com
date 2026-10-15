@@ -13,17 +13,6 @@ pocketGuideCta:
     at 100%, and to 5% of all other users.
 ---
 
-<LeftPage>
-
-<ReleaseConditionsFigure
-    n={1}
-    caption="Two condition sets on new-checkout: the team at 100%, then 5% of everyone else."
-/>
-
-</LeftPage>
-
-<RightPage>
-
 # Roll out gradually
 
 A flag at 0% is live code that nobody runs. A rollout lets people in a few at a time, so a bug reaches 5% of your users instead of all of them. Every step answers the same three questions: who is eligible, what signal are you watching, and what would make you continue or roll back.
@@ -42,6 +31,11 @@ A typical ladder for `new-checkout`:
 ## Who is eligible
 
 Each flag has one or more <Term name="release condition">release conditions</Term> <SeeFig n={1} />. A condition set matches when every property filter passes and the person falls inside its rollout percentage, and a person who matches any set gets the flag.
+
+<ReleaseConditionsFigure
+    n={1}
+    caption="Two condition sets on new-checkout: the team at 100%, then 5% of everyone else."
+/>
 
 At PostHog, a flag often starts with only the engineer who made the change. Next comes the team, by email domain: `email ends with @yourcompany.com`. Use `ends with`, not `contains`, because `contains` also matches lookalike domains.
 
@@ -66,5 +60,3 @@ If you already know the next step and its date, schedule the flag change and let
 See also: [Release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) · [Phased rollout](/docs/feature-flags/phased-rollout) · [Scheduled changes](/docs/feature-flags/scheduled-flag-changes) · [Testing in production](/product-engineers/testing-in-production) · [Sticky flags](/tutorials/sticky-feature-flags)
 
 </SeeAlso>
-
-</RightPage>

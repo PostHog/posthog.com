@@ -12,37 +12,15 @@ pocketGuideOrder: 6
 section: Observe
 ---
 
-<LeftPage>
+# Watching replays yourself
 
-<ScreenshotFigure
-    n={3}
-    product="session_replay"
-    screenshot="player-controls"
-    caption="The foot of the player, in the pinned layout: seek bar above, transport and capture controls below."
-    annotations={[
-        {
-            x: 72.1,
-            y: 58.7,
-            title: 'The seek bar',
-            description:
-                'Drag it, or click anywhere on it, to move through the session. The bars above it mark where the activity was.',
-        },
-        {
-            x: 25.5,
-            y: 72,
-            title: 'Play, pause, and seek',
-            description:
-                'Skip ten seconds either way, or jump to the start or end of the session. Hold alt and the seek buttons move a millisecond at a time.',
-        },
-        {
-            x: 96.3,
-            y: 72,
-            title: 'Comment, react, and capture',
-            description:
-                'Comment, emoji reaction, screenshot, GIF clip, and fullscreen. Each has a key, listed opposite.',
-        },
-    ]}
-/>
+Everything on this page is about spending less time per replay. The Session Replay player has a bunch of hotkeys that let you fly through replays without ever leaving the keyboard (a great flex during planning meetings).
+
+You can also get a robot to watch replays for you. If that sounds more like you, read the [Replay Vision lesson](/pocket-guides/session-replay/replay-vision).
+
+## Anatomy of a replay
+
+When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you'll be greeted with a player <SeeFig n={1} /> with all your recordings. You'll spend a lot of time here, so let's go on a tour.
 
 <ScreenshotFigure
     n={1}
@@ -72,6 +50,20 @@ section: Observe
         },
     ]}
 />
+
+Select a session on the left and it plays back in the middle, with everything PostHog knows about it on the right. That context is what makes PostHog's Session Replay powerful.
+
+## Session context
+
+The right-hand inspector lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
+
+- **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
+- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, <Term name="console log">console logs</Term>, <Term name="network request">network requests</Term>, and <Term name="comment">comments</Term>, filterable down to one kind at a time.
+- **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
+- **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
+- **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
+
+You'll find them all on the right of the player <SeeFig n={2} />.
 
 <ScreenshotFigure
     n={2}
@@ -104,34 +96,6 @@ section: Observe
     ]}
 />
 
-</LeftPage>
-
-<RightPage>
-
-# Watching replays yourself
-
-Everything on this page is about spending less time per replay. The Session Replay player has a bunch of hotkeys that let you fly through replays without ever leaving the keyboard (a great flex during planning meetings).
-
-You can also get a robot to watch replays for you. If that sounds more like you, read the [Replay Vision lesson](/pocket-guides/session-replay/replay-vision).
-
-## Anatomy of a replay
-
-When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you'll be greeted with a player <SeeFig n={1} /> with all your recordings. You'll spend a lot of time here, so let's go on a tour.
-
-Select a session on the left and it plays back in the middle, with everything PostHog knows about it on the right. That context is what makes PostHog's Session Replay powerful.
-
-## Session context
-
-The right-hand inspector lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
-
-- **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
-- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, <Term name="console log">console logs</Term>, <Term name="network request">network requests</Term>, and <Term name="comment">comments</Term>, filterable down to one kind at a time.
-- **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
-- **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
-- **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
-
-You'll find them all on the right of the player <SeeFig n={2} />.
-
 ## Playback controls
 
 - Change the playback speed. Most sessions are watchable at 2x or faster.
@@ -139,6 +103,36 @@ You'll find them all on the right of the player <SeeFig n={2} />.
 - Play, pause, and seek as normal. Hold `alt` to move the seek buttons to 1 millisecond steps.
 - Controls sit in one of two layouts: **floating**, the default, which overlays the recording and appears on hover, or **pinned** <SeeFig n={3} />, which sits below and stays visible. Your choice persists across sessions.
 - Take a screenshot, clip a GIF around the current moment, or export a whole session as MP4.
+
+<ScreenshotFigure
+    n={3}
+    product="session_replay"
+    screenshot="player-controls"
+    caption="The foot of the player, in the pinned layout: seek bar above, transport and capture controls below."
+    annotations={[
+        {
+            x: 72.1,
+            y: 58.7,
+            title: 'The seek bar',
+            description:
+                'Drag it, or click anywhere on it, to move through the session. The bars above it mark where the activity was.',
+        },
+        {
+            x: 25.5,
+            y: 72,
+            title: 'Play, pause, and seek',
+            description:
+                'Skip ten seconds either way, or jump to the start or end of the session. Hold alt and the seek buttons move a millisecond at a time.',
+        },
+        {
+            x: 96.3,
+            y: 72,
+            title: 'Comment, react, and capture',
+            description:
+                'Comment, emoji reaction, screenshot, GIF clip, and fullscreen. Each has a key, listed opposite.',
+        },
+    ]}
+/>
 
 Most of the player is reachable from the keyboard:
 
@@ -182,5 +176,3 @@ Two things make this better than pasting a link into the ticket yourself:
 See also: [How to watch recordings](/docs/session-replay/how-to-watch-recordings) · [Integrations](/docs/session-replay/integrations) · [Sharing replays](/docs/session-replay/sharing) · [Finding the replay you need](/pocket-guides/session-replay/finding-replays)
 
 </SeeAlso>
-
-</RightPage>

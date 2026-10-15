@@ -6,17 +6,11 @@ pocketGuideOrder: 2
 section: Instrument
 ---
 
-<LeftPage>
-
-<SkillFigure n={1} caption="A skill that applies this page's rules. Copy it and give it to your agent before it adds your next flag check." />
-
-</LeftPage>
-
-<RightPage>
-
 # Server and client
 
 PostHog can evaluate a flag in the browser, on the server, or in both places. Choose the runtime based on where the gated code runs and which side has the data needed to evaluate it. An agent adding flag checks can follow the same rules <SeeFig n={1} />.
+
+<SkillFigure n={1} caption="A skill that applies this page's rules. Copy it and give it to your agent before it adds your next flag check." />
 
 ## Choose where a flag is evaluated
 
@@ -55,5 +49,3 @@ Two catches. Bootstrap every flag the page checks, including the ones your serve
 See also: [Local evaluation](/docs/feature-flags/local-evaluation) · [Bootstrapping](/docs/feature-flags/bootstrapping) · [Evaluation contexts](/docs/feature-flags/evaluation-contexts) · [Stable identity](/docs/feature-flags/stable-identity-for-flags) · [Bootstrap flags in React and Express](/tutorials/bootstrap-feature-flags-react) · [Evaluation runtimes and contexts](/tutorials/evaluation-runtimes-and-contexts) · [Local evaluation, from Django to Rust](/blog/local-flag-evals-rust)
 
 </SeeAlso>
-
-</RightPage>

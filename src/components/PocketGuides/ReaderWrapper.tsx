@@ -3,9 +3,9 @@ import React from 'react'
 import { useEntry } from './bookContext'
 
 /**
- * Authoring markers, not layout: `<LeftPage>` holds a page's figures, `<RightPage>` its prose.
- * The reader's wrapper consumes both by `mdxType` and interleaves them – these components only
- * render if something bypasses the wrapper, so they pass their children through unstyled.
+ * Legacy standalone guide markers: `<LeftPage>` holds figures, `<RightPage>` prose.
+ * Learn chapters put figures directly in reading order and do not need these markers.
+ * The wrapper consumes markers by `mdxType`; if bypassed, they pass children through unstyled.
  */
 export const LeftPage = ({ children }: { children: React.ReactNode }): JSX.Element => <>{children}</>
 export const RightPage = ({ children }: { children: React.ReactNode }): JSX.Element => <>{children}</>
@@ -27,8 +27,9 @@ function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
 }
 
 /**
- * The reader: as the MDX `wrapper` it re-orders the compiled LeftPage/RightPage trees (matched
- * by `mdxType` and `n`) so each figure follows the first block citing it.
+ * The MDX wrapper keeps unmarked chapters in source order. For legacy marked chapters, it
+ * re-orders LeftPage/RightPage trees (matched by `mdxType` and `n`) so each figure follows the
+ * first block citing it.
  */
 export default function ReaderWrapper({ children }: { children: React.ReactNode }): JSX.Element {
     const isLearn = Boolean(useEntry()?.basePath)
@@ -60,7 +61,7 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
         } else if (type === 'RightPage') {
             prose = React.Children.toArray((page.props as { children?: React.ReactNode }).children)
         } else {
-            // Anything authored outside the two pages still renders, after the prose.
+            // Unmarked Learn chapters render in source order.
             prose.push(page)
         }
     })

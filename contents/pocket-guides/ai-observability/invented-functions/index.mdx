@@ -19,57 +19,6 @@ pocketGuideCta:
     has no real $ai_generation traffic yet, create the eval disabled anyway, skip the breakdowns, and tell me how to instrument AI observability using the wizard or manual install.
 ---
 
-<LeftPage>
-
-<EvalRunsFigure
-    n={1}
-    caption="The eval's runs tab: one row per generation it scored, with whatever the eval printed."
-    runs={[
-        {
-            time: '14:02:11',
-            target: 'gen_8f21c4',
-            result: 'True',
-            reasoning: 'No calls to undefined helpers',
-        },
-        {
-            time: '14:01:58',
-            target: 'gen_8f21b9',
-            result: 'False',
-            reasoning: 'Called formatCurrency, not defined in the provided context',
-        },
-        {
-            time: '14:01:40',
-            target: 'gen_8f21a2',
-            result: 'N/A',
-            reasoning: 'No file context on this generation',
-        },
-    ]}
-/>
-
-<DivergenceFigure
-    n={2}
-    caption="Prompt v12 shipped on the 4th. Volume held, nothing errored, and the assistant started making things up."
-    markerAt={0.44}
-    markerLabel="prompt v12"
-    series={[
-        {
-            label: 'Generations',
-            note: 'flat at ~9,000/day',
-            values: [0.5, 0.53, 0.49, 0.52, 0.5, 0.54, 0.51, 0.5, 0.52, 0.51],
-        },
-        {
-            label: 'Eval pass rate',
-            note: '94% → 71%',
-            emphasis: true,
-            values: [0.92, 0.94, 0.91, 0.93, 0.74, 0.7, 0.72, 0.69, 0.71, 0.7],
-        },
-    ]}
-/>
-
-</LeftPage>
-
-<RightPage>
-
 # Catch a code assistant inventing functions
 
 The coding assistant you built suggests a call to `formatCurrency()`, a function that doesn't exist. The syntax of the call is valid, the tone of the conversation is confident, and the call looks like it succeeded. 
@@ -140,11 +89,56 @@ Every result lands on the generation it scored:
 
 An example of these results is outlined in <SeeFig n={1} /> below.
 
+<EvalRunsFigure
+    n={1}
+    caption="The eval's runs tab: one row per generation it scored, with whatever the eval printed."
+    runs={[
+        {
+            time: '14:02:11',
+            target: 'gen_8f21c4',
+            result: 'True',
+            reasoning: 'No calls to undefined helpers',
+        },
+        {
+            time: '14:01:58',
+            target: 'gen_8f21b9',
+            result: 'False',
+            reasoning: 'Called formatCurrency, not defined in the provided context',
+        },
+        {
+            time: '14:01:40',
+            target: 'gen_8f21a2',
+            result: 'N/A',
+            reasoning: 'No file context on this generation',
+        },
+    ]}
+/>
+
 ## When it starts failing
 
 Once enough generations have been scored you have a pass rate: how often your assistant only calls things that exist.
 
 In <SeeFig n={2} />, generations hold flat at around 9,000 a day and nothing errors, while the pass rate drops from 94% to 71% the day prompt v12 shipped. That prompt told the model to reuse existing helpers where it could, so it invented them to comply. Without the eval running, the first you'd hear is a developer complaining weeks later. You can also split the pass rate by `$ai_model` and `$ai_prompt_version` to see which one broke.
+
+<DivergenceFigure
+    n={2}
+    caption="Prompt v12 shipped on the 4th. Volume held, nothing errored, and the assistant started making things up."
+    markerAt={0.44}
+    markerLabel="prompt v12"
+    series={[
+        {
+            label: 'Generations',
+            note: 'flat at ~9,000/day',
+            values: [0.5, 0.53, 0.49, 0.52, 0.5, 0.54, 0.51, 0.5, 0.52, 0.51],
+        },
+        {
+            label: 'Eval pass rate',
+            note: '94% → 71%',
+            emphasis: true,
+            values: [0.92, 0.94, 0.91, 0.93, 0.74, 0.7, 0.72, 0.69, 0.71, 0.7],
+        },
+    ]}
+/>
 
 ## Build it with PostHog AI
 
@@ -162,5 +156,3 @@ Swap the function list for the ones your own assistant keeps inventing:
 See also: [Evaluations](/docs/ai-evals) · [Hog](/docs/hog) · [Score your AI's answers with evals](/pocket-guides/ai-observability/quality-output)
 
 </SeeAlso>
-
-</RightPage>

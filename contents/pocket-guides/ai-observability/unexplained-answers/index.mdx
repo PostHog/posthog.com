@@ -19,22 +19,6 @@ pocketGuideCta:
     how to instrument AI observability using the wizard or manual install.
 ---
 
-<LeftPage>
-
-<TraceFigure
-    n={1}
-    caption="Retrieval handed the model the old header."
-    rows={[
-        { kind: 'trace', label: 'answer_docs_question', meta: 'person 8815 · 6.1s · $0.014' },
-        { kind: 'span', label: 'retrieve_docs', meta: '0.4s · 3 docs · top hit: auth-v1', depth: 1 },
-        { kind: 'generation', label: 'answer_question', meta: '2,900 in · 180 out · no error', depth: 1 },
-    ]}
-/>
-
-</LeftPage>
-
-<RightPage>
-
 # Debug a wrong answer with traces
 
 Your docs assistant tells a user to authenticate with a header your API dropped two versions ago. Everything looks normal and the call succeeded.
@@ -65,6 +49,16 @@ Each step is its own event:
 You can read the trace top to bottom to see what the model knew at each point.
 
 In <SeeFig n={1} />, the top hit from retrieval is `auth-v1`. The model was handed the old authentication page and answered from it faithfully. That's the first cause, and you can only see it because the span sits above the generation in the same trace.
+
+<TraceFigure
+    n={1}
+    caption="Retrieval handed the model the old header."
+    rows={[
+        { kind: 'trace', label: 'answer_docs_question', meta: 'person 8815 · 6.1s · $0.014' },
+        { kind: 'span', label: 'retrieve_docs', meta: '0.4s · 3 docs · top hit: auth-v1', depth: 1 },
+        { kind: 'generation', label: 'answer_question', meta: '2,900 in · 180 out · no error', depth: 1 },
+    ]}
+/>
 
 ## What else is attached
 
@@ -103,5 +97,3 @@ This is the pattern check from earlier, run for you. A scout reads real traces o
 See also: [Traces](/docs/ai-observability/traces) · [Link to Session Replay](/docs/ai-observability/link-session-replay) · [Errors](/docs/ai-observability/errors)
 
 </SeeAlso>
-
-</RightPage>

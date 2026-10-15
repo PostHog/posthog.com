@@ -4,7 +4,7 @@ Pocket Guide content is shared by product Learn tabs and the remaining standalon
 Product Analytics is the layout reference for guides embedded in Learn. Its Twig examples retain
 Twig styling inside the shared docs reader.
 
-**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
+**Every chapter is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
 Components here supply layout, interactions, and short labels for the data they display.
 
 The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
@@ -70,34 +70,25 @@ shortTitle: Flag debt      # tab label, falls back to title
 pocketGuideOrder: 3               # reading order; 0 is the front matter, omit to keep a draft unlisted
 ---
 
-<LeftPage>
-
-<ReportFigure n={1} caption="…" legend="…" />
-
-</LeftPage>
-
-<RightPage>
-
 # Remove the feature flags you already rolled out
 
-Prose, **markdown**, and <Term name="scout" /> definitions.
+Prose, **markdown**, and <Term name="scout" /> definitions. This is the figure <SeeFig n={1} />.
+
+<ReportFigure n={1} caption="…" legend="…" />
 
 ## A section heading
 
 <Enable />
-
-</RightPage>
 ```
 
-`<LeftPage>` holds a page's figures, `<RightPage>` its prose – authoring markers, not layout.
-The reader interleaves them at render time (see below). Content outside either wrapper renders
-after the prose.
+Write Learn chapters in reading order, with each figure directly after the text that introduces it.
+Data Stack and self-driving still use `<LeftPage>` and `<RightPage>` in the standalone reader.
 
 ### Components available in a body
 
 | Component | What it does |
 |---|---|
-| `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
+| `<LeftPage>` / `<RightPage>` | Legacy figure and prose markers for the standalone Data Stack and self-driving guides |
 | `<Eyebrow>` | The small line above a standalone title-page heading; hidden in Learn |
 | `<Setup />` | The volume's wizard command, for the front matter |
 | `<Frontispiece />` | The standalone title page's hedgehog illustration; hidden in Learn |
@@ -122,12 +113,11 @@ content is a code block or a table.
 
 ### How the reader lays a page out
 
-Every page is one linear scroll. `ReaderWrapper` (ReaderWrapper.tsx) re-orders the compiled
-elements by their `mdxType` and `n` props at render time: each figure is embedded after the
-first block that cites it via `<SeeFig>`, and a figure nobody cites prints at the end of the
-page. Landing-page introductions render in one column in both the standalone reader and docs'
-Learn surface. Contents navigation belongs to each surface's sidebar, so introductory MDX does
-not include a separate contents page.
+Every page is one linear scroll. Learn chapters render in the order written. For Data Stack and
+self-driving, `ReaderWrapper` (ReaderWrapper.tsx) still places figures from `<LeftPage>` after the
+first prose block in `<RightPage>` that cites them with `<SeeFig>`. Landing-page introductions
+render in one column in both the standalone reader and docs' Learn surface. Contents navigation
+belongs to each surface's sidebar, so introductory MDX does not include a separate contents page.
 
 The hover markers and their hint line show at reading widths only – below ~672px of container
 width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
@@ -210,7 +200,7 @@ sidebar styles until the last guide closes; the reader's saved display setting i
 | `BookReader.tsx` | The full-window page: pinned sidebar, compact book tabs, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
-| `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
+| `ReaderWrapper.tsx` | Linear Learn chapter wrapper; also handles legacy LeftPage/RightPage markers in standalone guides |
 | `guideProse.css` | Shared chapter headings, See also blocks, and reading sizes |
 | `postHogInspector.css` | Shared inspector frame, tabs, trees, status, and replay event list |
 | `twigGuide.css` | Compact Twig frame and card variants for guide exhibits |

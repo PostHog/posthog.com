@@ -13,8 +13,6 @@ pocketGuideOrder: 4
 section: Instrument
 ---
 
-<RightPage>
-
 # Reverse proxy
 
 Ad blockers keep lists of know analytics domains and block requests to them. This will result in incomplete or missing replays being captured. Using a <Term name="reverse proxy" /> lets you route through your own domain, so captures are not blocked.
@@ -34,7 +32,6 @@ or `ph` is already on the block lists you're trying to avoid.
 **Turn your DNS provider's own proxy off.** On Cloudflare that's the grey cloud, not the orange
 one. Leaving it on breaks certificate provisioning.
 
-
 ## Limits of a proxy
 
 The managed proxy routes traffic through Cloudflare, a listed <Term name="subprocessor" /> in our <Term name="DPA" />. It's also not <Term name="HIPAA" />-compliant, so a <Term name="BAA" /> with PostHog doesn't cover it – run your own if you handle <Term name="PHI" />.
@@ -48,5 +45,3 @@ Your own <Term name="content security policy">`Content-Security-Policy`</Term> w
 See also: [Deploy a reverse proxy](/docs/advanced/proxy) · [Managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) · [Content security policy](/docs/advanced/content-security-policy) · [Replay troubleshooting](/docs/session-replay/troubleshooting)
 
 </SeeAlso>
-
-</RightPage>

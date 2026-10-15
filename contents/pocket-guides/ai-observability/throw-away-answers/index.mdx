@@ -17,7 +17,13 @@ pocketGuideCta:
     how to instrument AI observability using the wizard or manual install.
 ---
 
-<LeftPage>
+# Measure whether users keep the answer
+
+You can have an AI feature that's fast, cheap, stays on-topic, and passes its evals – but users still regenerate outputs consistently. Every regeneration is a user telling you the first answer wasn't good enough.
+
+Typical monitoring won't show why because the call succeeded and the cost was normal, nothing errored.
+
+When you monitor for this scenario, <SeeFig n={1} /> is what that looks like.
 
 <LeakFigure
     n={1}
@@ -30,18 +36,6 @@ pocketGuideCta:
     startsLabel="Answers shown"
     finishesLabel="Answers accepted · 84% → 55%"
 />
-
-</LeftPage>
-
-<RightPage>
-
-# Measure whether users keep the answer
-
-You can have an AI feature that's fast, cheap, stays on-topic, and passes its evals – but users still regenerate outputs consistently. Every regeneration is a user telling you the first answer wasn't good enough.
-
-Typical monitoring won't show why because the call succeeded and the cost was normal, nothing errored.
-
-When you monitor for this scenario, <SeeFig n={1} /> is what that looks like.
 
 ## How PostHog connects the two
 
@@ -88,5 +82,3 @@ Rename the events to match yours before you send it:
 See also: [Custom properties](/docs/ai-observability/custom-properties) · [Collecting user feedback](/docs/ai-observability/collect-user-feedback) · [Funnels](/docs/product-analytics/funnels)
 
 </SeeAlso>
-
-</RightPage>

@@ -11,7 +11,15 @@ pocketGuideCta:
   note: A scout that checks your flags every day and reports the ones ready to remove.
 ---
 
-<LeftPage>
+# Cleaning up
+
+Flags come in two kinds. Release flags and experiment flags are temporary: they exist to get a change out safely or to measure it, and once that's done they're debt. Operational flags are permanent on purpose: a kill switch for an expensive feature under load, a disaster recovery switch, or an entitlement that decides which plan gets a feature. Cleanup is for the first kind.
+
+A temporary flag you leave behind is a code path nobody tests anymore, and it can cost money too. The web SDK evaluates every active flag available to the browser on load, so a request can bill for a flag your code stopped checking months ago.
+
+## Let the rollout state decide
+
+For a temporary flag, the rollout state tells you which code path to keep <SeeFig n={1} />:
 
 <LedgerFigure
     n={1}
@@ -44,20 +52,6 @@ pocketGuideCta:
     ]}
 />
 
-</LeftPage>
-
-<RightPage>
-
-# Cleaning up
-
-Flags come in two kinds. Release flags and experiment flags are temporary: they exist to get a change out safely or to measure it, and once that's done they're debt. Operational flags are permanent on purpose: a kill switch for an expensive feature under load, a disaster recovery switch, or an entitlement that decides which plan gets a feature. Cleanup is for the first kind.
-
-A temporary flag you leave behind is a code path nobody tests anymore, and it can cost money too. The web SDK evaluates every active flag available to the browser on load, so a request can bill for a flag your code stopped checking months ago.
-
-## Let the rollout state decide
-
-For a temporary flag, the rollout state tells you which code path to keep <SeeFig n={1} />:
-
 | Rollout state | Keep | Then |
 | --- | --- | --- |
 | 100%, with no property filters | The enabled path | Remove the checks, deploy, confirm nothing still checks it, and delete the flag |
@@ -86,5 +80,3 @@ Then let a process do the remembering. A <Term name="scout">scout</Term> can che
 See also: [Cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags) · [Flag debt](/pocket-guides/self-driving/flag-debt) · [How GitHub and GitLab ship behind flags](/product-engineers/github-gitlab-feature-flags)
 
 </SeeAlso>
-
-</RightPage>
