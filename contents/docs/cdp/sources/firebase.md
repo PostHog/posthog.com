@@ -9,9 +9,9 @@ availability:
 sourceId: Firebase
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Firebase connector syncs your database data into the PostHog data warehouse, so you can analyze it alongside your product data.
 
@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Connect a Firebase project to pull Cloud Firestore collections, Firebase Auth users, and Realtime Database paths.
+Connect a Firebase project to pull Cloud Firestore collections, Firebase Auth users, Identity Platform tenant users, and Realtime Database paths.
 
 Create a service account key in the Firebase console under Project settings, Service accounts, Generate new private key, then upload that JSON file here. Grant the service account **Firebase Viewer** to read Auth users, **Cloud Datastore Viewer** to read Firestore, and **Firebase Realtime Database Viewer** to read the Realtime Database.
 
@@ -44,6 +44,8 @@ All Firebase tables are full refresh. Each sync replaces the contents of the tab
 ## Supported tables
 
 <SourceTables />
+
+> **Note:** The `auth_tenant_users` table only appears in the schema picker if your Firebase project has at least one Identity Platform tenant configured. Most Firebase projects don't use tenants, so you may not see this table.
 
 ## Troubleshooting
 
