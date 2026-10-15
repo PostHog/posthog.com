@@ -553,12 +553,14 @@ There are two other events you should capture to track the full lifecycle of a s
 ```js-web
 // 1. When a user is shown a survey
 posthog.capture("survey shown", {
-    $survey_id: survey.id // required
+    $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration
 })
 
 // 2. When a user has dismissed a survey
 posthog.capture("survey dismissed", {
-    $survey_id: survey.id // required
+    $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration
 })
 ```
 
