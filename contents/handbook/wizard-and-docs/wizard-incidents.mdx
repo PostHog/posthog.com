@@ -43,14 +43,9 @@ We don't move npm's `latest` tag back. Instead, publish a new version that conta
 A context mill rollback is simpler, because the wizard always reads the release marked latest.
 
 1. On the [releases page](https://github.com/PostHog/context-mill/releases), mark the last good release as latest.
-2. Delete the bad release.
-3. Fix the problem and ship a new release as usual.
-
-<CalloutBox icon="IconWarning" title="Check the mirror too" type="caution">
-
-The S3 mirror at `context-mill.posthog.com` only updates when the release workflow runs. Marking an old release as latest on GitHub doesn't change it, so the wizard can still fetch the bad version from the mirror. Ship the fixed release quickly, and confirm the mirror serves it.
-
-</CalloutBox>
+2. Point the S3 mirror back at the same release. The mirror keeps every release, and `context-mill.posthog.com/latest` is a pointer in a CloudFront key-value store. Ask someone with AWS access to move its `latest` key to the good version, then check that `https://context-mill.posthog.com/latest/skill-menu.json` serves it.
+3. Delete the bad release.
+4. Fix the problem and ship a new release as usual.
 
 ## Cloud runs use their own pinned version
 
