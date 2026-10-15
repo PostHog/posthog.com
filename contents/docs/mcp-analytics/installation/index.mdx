@@ -35,7 +35,7 @@ posthog.init("<ph_project_token>", {
 
 The SDK captures one `$mcp_tool_call` event when a tool call finishes or fails. The event includes the tool name, description, site hostname, duration, and error status. It also includes the current distinct ID and browser session. If Session Replay is active, the session ID connects the call to its replay.
 
-The SDK does not capture tool arguments or tool results. For a failed call, it records the error type and a redacted error message. If [exception autocapture](/docs/error-tracking/installation/web) is enabled, the SDK also sends an `$exception` event to Error Tracking with the same redaction and the normal exception rate limit. Your normal consent, opt-out, `before_send`, batching, and delivery settings still apply.
+The SDK does not capture tool arguments or tool results. For a failed call, it records the error type and a redacted error message. If [exception autocapture](/docs/error-tracking/installation/web) is enabled, the SDK also sends an `$exception` event to Error Tracking. The event has the same redacted message and, for a thrown error, its stack trace. The normal exception rate limit applies. With the [slim bundle](/docs/libraries/js#tree-shaking), add `ErrorTrackingExtensions` next to `WebMCPExtensions` to get these events. Your normal consent, opt-out, `before_send`, batching, and delivery settings still apply.
 
 By default, the SDK adds two required fields to compatible tool schemas:
 
