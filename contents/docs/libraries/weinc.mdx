@@ -1,0 +1,33 @@
+---
+title: WeInc
+platformIconName: IconCode
+---
+
+PostHog makes it easy to get data about traffic and usage of a site built with [WeInc](https://we.inc), an AI website builder. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+
+WeInc has a built-in PostHog add-on that adds the [JavaScript Web SDK](/docs/libraries/js) snippet to every page of your published site, so you don't need to edit any code.
+
+## Installation
+
+1. In PostHog, go to your [project settings](https://us.posthog.com/settings/project) and copy your project API key (it starts with `phc_`). Note whether your project is on US Cloud or EU Cloud.
+2. Open your site in the WeInc editor and open the **Add-ons** panel from the panels menu.
+3. Find **PostHog** in the list (it's under Analytics, or use the search box) and click it.
+4. Check **Turn on**.
+5. Paste your project API key into the **Project API key** field.
+6. In the **Region** field, type `us` or `eu` to match your PostHog cloud.
+7. Click **Save**.
+8. Publish your site. The PostHog snippet is added to the `<head>` of every page when you publish, so the change goes live on your next publish.
+
+Once published, visit your site and you should see events appear in the [activity tab](https://us.posthog.com/activity/explore) of your PostHog project.
+
+## Capture custom events
+
+The add-on loads PostHog as `window.posthog`, so you can [capture custom events](/docs/product-analytics/capture-events) from your site's code. For example, you can ask the WeInc AI to add a call like this to a button's click handler:
+
+```js
+window.posthog.capture('clicked_signup_button')
+```
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/usage).
