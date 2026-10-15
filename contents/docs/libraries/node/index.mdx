@@ -514,14 +514,18 @@ The length bound reaches inside a value, including strings nested in arrays and 
 
 Both `flush()` and `shutdown()` export spans that have already ended. A span still open at `flush()` is exported once it ends; a span still open at `shutdown()` is discarded, so end your spans before shutting down – `withSpan` does this for you.
 
-If your serverless handler reuses a client across invocations, await `flush()` before returning. It flushes events and ended spans concurrently without stopping flag polling or cleaning up cache-provider resources. Reserve `shutdown()` for a disposable client or program exit.
+If your serverless handler reuses a client across invocations, await `flush()` before returning. It flushes events and ended spans concurrently without stopping flag polling or cleaning up cache-provider resources. Reserve `shutdown()` for a disposable client or program exit. Catch and log flush failures so telemetry errors don't fail the invocation or replace an application error.
 
 ```ts
 export const handler = async () => {
   try {
     await posthog.withSpan("handler", () => doWork())
   } finally {
-    await posthog.flush()
+    try {
+      await posthog.flush()
+    } catch (err) {
+      console.error("PostHog flush failed", err)
+    }
   }
 }
 ```
@@ -702,7 +706,7 @@ client.on("error", (err) => {
 
 The Node SDK queues and batches events in the background. AWS Lambda or [Vercel Functions](/docs/libraries/vercel) can freeze the runtime after a handler returns, before background requests finish.
 
-Keep a shared client outside the handler to reuse it across invocations in the same runtime. Await `flush()` before returning, including when application code throws:
+Keep a shared client outside the handler to reuse it across invocations in the same runtime. Await `flush()` before returning, including when application code throws. Catch and log flush failures so telemetry errors don't fail the invocation or replace an application error:
 
 ```node
 import { PostHog } from "posthog-node"
@@ -724,7 +728,11 @@ export const handler = async () => {
       event: "other_thing_happened",
     })
   } finally {
-    await client.flush()
+    try {
+      await client.flush()
+    } catch (err) {
+      console.error("PostHog flush failed", err)
+    }
   }
 }
 ```
