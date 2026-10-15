@@ -82,7 +82,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         title: 'Feature Flags',
         description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
         token: 'orange',
-        volume: 5,
+        volume: 6,
         docsProduct: 'feature-flags',
     },
 ]
