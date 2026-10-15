@@ -16,6 +16,8 @@ tags:
   - Marketing
 ---
 
+After 6 years at PostHog, I am delighted to share that I have learned _exactly_ 6 things.
+
 ## 80% of being a good manager is good hiring
 
 The other 20% is giving context and getting out of the way. If you hold an extremely high bar when you're hiring, it genuinely makes everything else much easier, even if it feels like you're saying no to everyone and are never going to find the right person.
