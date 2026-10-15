@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The bol.com Retailer connector syncs your seller data into the PostHog data warehouse: orders, shipments, returns, offers, inventory and invoices.
+The bol.com Retailer connector syncs your seller data into the PostHog data warehouse: order items, shipments, returns, offers, inventory and invoices.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ This source needs client credentials for the Retailer API:
 
 <SyncModes />
 
-- `orders` supports incremental sync on `latestChangedDateTime`, the newest change across the order's items. Use incremental sync to keep orders older than three months: bol's API only lists the last three months, so a full refresh replaces the table with that window.
+- `order_items` has one row per order line and supports incremental sync on `latestChangedDateTime`. Use incremental sync to keep items older than three months: bol's API only lists the last three months, so a full refresh replaces the table with that window.
 - `offers` supports incremental sync on `lastModifiedDateTime`.
 - The other tables use full refresh. `shipments` covers the last three months.
 - `invoices` covers the last two years. `inventory` covers stock in bol's warehouses (fulfilment by bol), not stock you ship yourself.
@@ -55,6 +55,6 @@ bol rejected the client ID or secret. Create new client credentials in API setti
 
 ### Syncs take a long time
 
-bol limits the order and shipment lists to 25 requests a minute, and each request returns 50 rows. A large seller account takes several minutes per table.
+bol limits the order and shipment lists to 25 requests a minute, and each request returns 50 rows. The first sync of `order_items` asks for each of the last 91 days, so it takes several minutes.
 
 <TroubleshootingLink />
