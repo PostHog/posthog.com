@@ -59,7 +59,7 @@ When the page asks for a monthly budget in credits (1,000 credits is about $10),
 - Picks the model by how much judgment the goal needs.
 - Chooses a session coverage mode and the highest sampling rate the budget covers, based on recent recording volume.
 - Sets the scanner's credit limit to your budget, so a wrong estimate can't overspend it.
-- Can scope the scanner to an action, a cohort, a survey, or an experiment's participants when your goal names one.
+- Can scope the scanner to an action, a cohort, or a survey when your goal names one.
 
 Nothing is saved until you review the draft and click **Create scanner**. A budget-based draft opens on an overview: what PostHog AI understood, the name, the question the scanner asks, the eligible recordings with a count from recent days, and the sampling budget. Each section has an **Edit** button that opens the matching editor step. A draft from the **Set up with AI** box opens in the editor steps instead, with a note on why PostHog AI chose that setup.
 
@@ -185,7 +185,7 @@ A scanner with no filters matches every eligible session in your project, and th
 
 One limit applies regardless of filters: recordings with more than 1 hour of active interaction take too long to analyze well, so Vision always skips them.
 
-If you set the scanner up from an experiment (**Set up scanner for this experiment** on the experiment's replay tab), it watches only sessions of people exposed to that experiment. An **Experiment targeting** card on the **Recordings** step names the experiment, lets you narrow it to one variant, and has a **Remove targeting** button. Filters you add yourself still apply on top. To compare what users do in each variant, use an [experiment scanner](/docs/replay-vision/scanner-types#experiment) instead.
+To watch the sessions of an experiment, create an [experiment scanner](/docs/replay-vision/scanner-types#experiment). It is the only scanner type that can watch an experiment. It adds each session's variant and lets you compare what users do in each variant.
 
 A good default discipline: start with a narrow filter while you're tuning the prompt, then widen the filter once you trust the results.
 
