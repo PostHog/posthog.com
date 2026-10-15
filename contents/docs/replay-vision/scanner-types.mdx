@@ -190,13 +190,15 @@ A summarizer produces a prose summary of what happened in the session, plus a ti
 
 <CalloutBox icon="IconFlask" title="Experiment scanners are in beta" type="action">
 
-Experiment scanners are in beta and available to some organizations. To ask for access, [contact us](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+Experiment scanners are in beta. We're still improving them and would love your [feedback](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
 
 </CalloutBox>
 
 An experiment scanner watches the sessions of people exposed to one [experiment](/docs/experiments) and summarizes each session. It shows the summaries for each variant side by side, so you can see what users do differently in each variant.
 
-An experiment scanner is a summarizer with experiment context. PostHog gives the model the experiment's name, its hypothesis, and the forms the changed part of your product can take. The model is not told which variant the user is in, so it describes only what the recording shows. PostHog adds the variant to each observation from the exposure data.
+An experiment scanner is a summarizer with experiment context. PostHog gives the model the experiment's name, its hypothesis, and the names of the feature flag's variants. The model is not told which variant the user is in, so it describes only what the recording shows. PostHog adds the variant to each observation from the exposure data.
+
+The model uses the variant names to tell the versions apart, so name each variant by what users see, for example "Single-page checkout" and "Three-step checkout". When two versions look alike, also say what is different on screen in **What to focus on**.
 
 This also helps you find a broken flag check. If summaries of control sessions describe the new design, check how your code reads the feature flag.
 
@@ -215,7 +217,8 @@ The same as a [summarizer](#summarizer): `title`, `summary`, `chapters`, and `co
 - **Experiment** – the running experiment to watch. You can't change it after you create the scanner.
 - **Variants** – the variants to watch. Leave it empty to watch every variant.
 - **Sample variants evenly** – on by default, so each variant gets enough sessions, even with an uneven split. Turn it off to sample in proportion to traffic.
-- **Additional context** and **Summary length** – the same as for a summarizer.
+- **What to focus on** – what the summaries should cover, for example the step the experiment changes and where people get stuck.
+- **Summary length** – the same as for a summarizer.
 
 **Which sessions it watches**
 
