@@ -195,6 +195,16 @@
             "statusCode": 301
         },
         {
+            "source": "/pocket-guides/context-warehouse",
+            "destination": "/pocket-guides/data-stack",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse/:path*",
+            "destination": "/pocket-guides/data-stack/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/replay-vision/actions:ext(\\.md)?",
             "destination": "/docs/replay-vision/scouts:ext?",
             "statusCode": 301
