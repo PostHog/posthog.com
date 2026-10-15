@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
+import PrivateBeta from "./_snippets/private-beta.mdx";
 
 <PrivateBeta />
 
@@ -34,3 +34,7 @@ You can select up to 100 repositories.
 ## Disconnect
 
 **Disconnect** stops Business Knowledge from reading those repositories. The GitHub App stays installed.
+
+## Libraries
+
+Repositories can belong to [libraries](/docs/business-knowledge/sources#libraries). Open a library and add repositories in the library dialog. Pass `library_id` to repository search or file read to search only the repositories in that library. A repository link is removed only when no environment in the project still allows that repository.
