@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useEntry } from './bookContext'
+
 /**
  * Authoring markers, not layout: `<LeftPage>` holds a page's figures, `<RightPage>` its prose.
  * The reader's wrapper consumes both by `mdxType` and interleaves them – these components only
@@ -29,6 +31,7 @@ function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
  * by `mdxType` and `n`) so each figure follows the first block citing it.
  */
 export default function ReaderWrapper({ children }: { children: React.ReactNode }): JSX.Element {
+    const isLearn = Boolean(useEntry()?.basePath)
     // Non-figure left-page content (the front matter's title block) leads the column.
     const preface: React.ReactNode[] = []
     const figures = new Map<number, React.ReactNode>()
@@ -87,7 +90,11 @@ export default function ReaderWrapper({ children }: { children: React.ReactNode 
         // No hover on touch: below @2xl the hover hint disappears, markers stay visible, and
         // each figure prints its glosses as a numbered key instead. At @2xl+ the markers go
         // back to hover-reveal (group-hover and focus outrank the opacity-0 by specificity).
-        <div className="px-5 py-6 @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:opacity-0">
+        <div
+            className={`pocket-guide-page${
+                isLearn ? '' : ' pocket-guide-page--standalone'
+            } [&_.anatomy-hint]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:opacity-0`}
+        >
             {React.Children.toArray(stream)}
         </div>
     )

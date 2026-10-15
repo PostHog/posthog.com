@@ -1,0 +1,61 @@
+.pocket-guide-learn-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pocket-guide-learn-nav__item {
+    margin: 0;
+    padding: 0;
+}
+
+.pocket-guide-learn-nav__back-item {
+    margin: 0 0 0.5rem;
+    padding: 0 0 0.5rem;
+    border-bottom: 1px solid rgb(var(--border) / 0.2);
+}
+
+.pocket-guide-learn-nav .pocket-guide-learn-nav__link {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    color: rgb(var(--text-primary));
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-decoration: none;
+    outline-offset: -2px;
+}
+
+.pocket-guide-learn-nav .pocket-guide-learn-nav__link:hover {
+    background-color: rgb(var(--text-primary) / 0.1);
+}
+
+.pocket-guide-learn-nav .pocket-guide-learn-nav__link[aria-current='page'] {
+    background-color: rgb(var(--text-primary) / 0.15);
+    font-weight: 600;
+}
+
+.pocket-guide-learn-nav__back-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.pocket-guide-learn-nav__back-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+
+.pocket-guide-learn-nav .pocket-guide-learn-nav__section {
+    margin: 0;
+    padding: 0.75rem 0.5rem 0.25rem;
+    color: rgb(var(--text-secondary));
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+}

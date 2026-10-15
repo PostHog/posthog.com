@@ -1,5 +1,5 @@
 import React from 'react'
-import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorCode, InspectorStatus } from './PostHogInspector'
+import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
 
 type PostHogEventInspectorProps = {
     clicked: string | null
@@ -26,7 +26,7 @@ export default function PostHogEventInspector({
     )
 
     return (
-        <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+        <PostHogInspector compact>
             {label ? (
                 <>
                     <InspectorCode label="Clicked element" value={`<button aria-pressed="true">${label}</button>`} />

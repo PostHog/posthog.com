@@ -82,6 +82,9 @@ jobs:
             - name: Check pocket guide conventions
               run: pnpm test:pocket-guides
 
+            - name: Lint pocket guide layout
+              run: pnpm lint:pocket-guide-layout
+
             - name: Build site
               run: pnpm build
               env:

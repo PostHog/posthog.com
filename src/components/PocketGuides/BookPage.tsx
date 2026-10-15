@@ -7,8 +7,10 @@ import { getProseClasses } from '../../constants'
 
 import { EnableScoutBar } from 'components/SelfDrivingInbox/EnableScout'
 
+import './guideProse.css'
 import { ActionBar } from './Action'
 import BookReader from './BookReader'
+import usePocketGuideReading from './usePocketGuideReading'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import {
     BookPageEntry,
@@ -38,10 +40,7 @@ function MdxBody({
 }): JSX.Element {
     return (
         <EntryProvider value={{ entry, pages }}>
-            <div
-                className={`${getProseClasses('sm')} font-medium`}
-                style={fontSize === FONT_SIZES[0] ? undefined : { fontSize }}
-            >
+            <div className={`${getProseClasses('base')} pocket-guide-prose font-medium`} data-font-size={fontSize}>
                 <MDXProvider components={bookMdxComponents}>
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
@@ -65,6 +64,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
 
     const index = pages.findIndex((page) => page.url === url)
     const entry = pages[index]
+    usePocketGuideReading(Boolean(entry))
     const previous = pages[index - 1]
     const next = pages[index + 1]
     const total = pageCount(pages)

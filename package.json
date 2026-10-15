@@ -38,6 +38,7 @@
         "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts src/navs/applicationMetricsPresence.test.ts src/components/ReaderView/tabNavigation.test.ts src/components/PocketGuides/learnRoutes.test.ts",
         "test:sdk-references": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/SdkReferences/utils.test.ts",
         "test:pocket-guides": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/PocketGuides/pocketGuides.test.ts",
+        "lint:pocket-guide-layout": "eslint src/components/PocketGuides/BookPage.tsx src/components/PocketGuides/BookReader.tsx src/components/PocketGuides/Callout.tsx src/components/PocketGuides/Figure.tsx src/components/PocketGuides/LearnPage.tsx src/components/PocketGuides/LearnSurface.tsx src/components/PocketGuides/ReaderWrapper.tsx src/components/PocketGuides/UIButton.tsx src/components/PocketGuides/bookPieces.tsx src/components/PocketGuides/*Inspector*.tsx src/components/PocketGuides/TwigBrowse*.tsx src/components/PocketGuides/ProductAnalyticsIdentityExhibits.tsx src/components/PocketGuides/ProductAnalyticsTrendsFunnelsExhibits.tsx src/components/Products/ReaderViewProduct/buildProductMenuTabs.tsx",
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "check-src-links": "node scripts/check-src-links.js",
         "check-product-changelogs": "node scripts/check-product-changelogs.js",

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 import type { StaySetting } from '@posthog/twig-components/filters'
-import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorCode, InspectorStatus } from './PostHogInspector'
+import PostHogInspector, { InspectorCode, InspectorStatus } from './PostHogInspector'
 import TwigBrowseFigure from './TwigBrowseFigure'
 import ExhibitResetButton from './ExhibitResetButton'
 
@@ -39,7 +39,7 @@ export function Exhibit({
     children: React.ReactNode
 }): JSX.Element {
     return (
-        <figure className="not-prose my-6 mx-0 overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @container @md:p-4">
+        <figure className="not-prose pocket-guide-panel pocket-guide-exhibit pocket-guide-exhibit--interactive @container">
             {onReset && <ExhibitResetButton onReset={onReset} />}
             {header}
             <div
@@ -49,9 +49,7 @@ export function Exhibit({
             >
                 {children}
             </div>
-            {caption && (
-                <figcaption className="mt-2 font-rounded text-xs leading-snug text-secondary">{caption}</figcaption>
-            )}
+            {caption && <figcaption className="pocket-guide-exhibit__caption">{caption}</figcaption>}
         </figure>
     )
 }
@@ -91,7 +89,7 @@ export function AutocaptureFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+            <PostHogInspector compact>
                 {clickedLabel ? (
                     <>
                         <InspectorCode
@@ -145,7 +143,7 @@ export function FilterPropertiesFigure(): JSX.Element {
                     setCapturedAt(new Date().toISOString())
                 }}
             />
-            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+            <PostHogInspector compact>
                 {choice && capturedAt ? (
                     <InspectorCode label="Event payload · selected properties" value={eventPayload} />
                 ) : (
@@ -253,7 +251,7 @@ export function DestinationChartFigure(): JSX.Element {
                     </div>
                 </div>
             </section>
-            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
+            <PostHogInspector compact>
                 {selectedEvent && eventPayload ? (
                     <InspectorCode
                         label="Event payload · selected properties"

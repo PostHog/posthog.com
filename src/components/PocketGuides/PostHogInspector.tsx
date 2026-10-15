@@ -1,32 +1,28 @@
 import React from 'react'
-
-const BORDER = 'border-[#d3d0c8]'
-
-export const COMPACT_INSPECTOR_CLASSES =
-    '[&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words [&_summary]:!bg-transparent'
+import './postHogInspector.css'
 
 /** The PostHog side of Twig interactions, styled like a light developer inspector. */
 export default function PostHogInspector({
     children,
     className = '',
+    compact = false,
     headerAction,
 }: {
     children: React.ReactNode
     className?: string
+    compact?: boolean
     headerAction?: React.ReactNode
 }): JSX.Element {
     return (
         <section
             aria-label="Inspector"
-            className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm [&_details]:!m-0 [&_details]:!rounded-none [&_details]:!border-0 [&_details]:!bg-transparent [&_details]:!pb-0 ${className}`}
+            className={`posthog-inspector${compact ? ' posthog-inspector--compact' : ''} ${className}`}
         >
-            <div
-                className={`flex items-center justify-between gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}
-            >
+            <div className="posthog-inspector__header">
                 <span>Inspector</span>
                 {headerAction}
             </div>
-            <div aria-live="polite" className="min-w-0 text-sm">
+            <div aria-live="polite" className="posthog-inspector__body">
                 {children}
             </div>
         </section>
@@ -37,18 +33,10 @@ export function InspectorCode({ label, value, meta }: { label: string; value: st
     const isElement = label === 'Clicked element'
 
     return (
-        <div className={`min-w-0 border-b ${BORDER}`}>
-            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#faf8f3] px-3 text-xs`}>
-                <span className="border-b-2 border-orange py-2 font-semibold text-[#292724]">
-                    {isElement ? 'Elements' : 'Event data'}
-                </span>
-                <span
-                    className={`ml-auto font-code text-[10px] ${
-                        meta
-                            ? `rounded border ${BORDER} bg-[#fffdfa] px-2 py-0.5 font-semibold text-[#292724]`
-                            : 'text-[#716c63]'
-                    }`}
-                >
+        <div className="posthog-inspector__panel">
+            <div className="posthog-inspector__tabs">
+                <span className="posthog-inspector__tab">{isElement ? 'Elements' : 'Event data'}</span>
+                <span className={`posthog-inspector__meta${meta ? ' posthog-inspector__meta--badge' : ''}`}>
                     {meta ?? (isElement ? 'selected node' : 'selected properties')}
                 </span>
             </div>
@@ -67,36 +55,29 @@ export function InspectorJavaScript({
     meta?: string
 }): JSX.Element {
     return (
-        <div className={`min-w-0 border-b ${BORDER}`}>
-            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#faf8f3] px-3 text-xs`}>
-                <span className="border-b-2 border-orange py-2 font-semibold text-[#292724]">SDK call</span>
-                {meta && (
-                    <span
-                        className={`ml-auto rounded border ${BORDER} bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold text-[#292724]`}
-                    >
-                        {meta}
-                    </span>
-                )}
+        <div className="posthog-inspector__panel">
+            <div className="posthog-inspector__tabs">
+                <span className="posthog-inspector__tab">SDK call</span>
+                {meta && <span className="posthog-inspector__meta posthog-inspector__meta--badge">{meta}</span>}
             </div>
-            <div className="px-3 py-2">
-                <div className="flex items-center gap-2 rounded bg-[#e4e5df] px-3 py-2 font-code text-xs font-semibold text-[#5f5a52]">
+            <div className="posthog-inspector__code-body">
+                <div className="posthog-inspector__code-label">
                     <svg aria-hidden="true" className="size-3 shrink-0" viewBox="0 0 12 12">
                         <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                     </svg>
                     browser tracking code
                 </div>
-                <div className="ml-[5px] mt-2 border-l border-[#dedad2] pl-4">
-                    <pre className="!m-0 overflow-x-auto !rounded-none !border-0 !bg-transparent !p-0 font-code text-[11px] leading-5">
-                        <code className="!rounded-none !border-0 !bg-transparent !p-0 !shadow-none">
+                <div className="posthog-inspector__tree-indent posthog-inspector__tree-indent--code">
+                    <pre className="posthog-inspector__pre">
+                        <code className="posthog-inspector__code">
                             {lines.map((line, index) => (
                                 <span
                                     key={`${index}-${line}`}
-                                    className={`block min-h-5 whitespace-pre pr-2 ${
-                                        index === highlightedLine ? 'font-semibold' : ''
-                                    }`}
+                                    className="posthog-inspector__code-line"
+                                    data-highlighted={index === highlightedLine || undefined}
                                 >
                                     {index === highlightedLine ? (
-                                        <mark className="bg-[#fff0dc] px-1 text-inherit">{line}</mark>
+                                        <mark className="posthog-inspector__highlight">{line}</mark>
                                     ) : (
                                         line
                                     )}
@@ -122,25 +103,19 @@ export function InspectorDetails({
     rows: Array<{ label: string; value: string }>
 }): JSX.Element {
     return (
-        <div className={`min-w-0 border-b ${BORDER}`}>
-            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#faf8f3] px-3 text-xs`}>
-                <span className="border-b-2 border-orange py-2 font-semibold text-[#292724]">{tab}</span>
-                {meta && (
-                    <span
-                        className={`ml-auto rounded border ${BORDER} bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold text-[#292724]`}
-                    >
-                        {meta}
-                    </span>
-                )}
+        <div className="posthog-inspector__panel">
+            <div className="posthog-inspector__tabs">
+                <span className="posthog-inspector__tab">{tab}</span>
+                {meta && <span className="posthog-inspector__meta posthog-inspector__meta--badge">{meta}</span>}
             </div>
-            <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
-                <details open className="min-w-0 px-3">
-                    <summary className="cursor-pointer select-none text-[#5f5a52]">{title}</summary>
-                    <div className="ml-[5px] border-l border-[#dedad2] pl-4">
+            <div className="posthog-inspector__tree">
+                <details open className="posthog-inspector__details">
+                    <summary className="posthog-inspector__summary">{title}</summary>
+                    <div className="posthog-inspector__tree-indent">
                         {rows.map(({ label, value }) => (
-                            <div key={`${label}-${value}`} className="whitespace-pre">
-                                <span className="text-[#77529a]">{label}</span>:{' '}
-                                <span className="text-[#9a4b1c]">{JSON.stringify(value)}</span>
+                            <div key={`${label}-${value}`} className="posthog-inspector__tree-row">
+                                <span className="posthog-inspector__key">{label}</span>:{' '}
+                                <span className="posthog-inspector__value">{JSON.stringify(value)}</span>
                             </div>
                         ))}
                     </div>
@@ -154,18 +129,18 @@ function ElementTree({ value }: { value: string }): JSX.Element {
     const match = value.match(/^<(\w+)\s+([^=]+)="([^"]+)">([^<]+)<\/(\w+)>$/)
 
     return (
-        <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
-            <div className="flex min-w-0 border-l-[3px] border-orange bg-[#fff0dc] px-3 text-[#292724]">
-                <span aria-hidden="true" className="mr-4 select-none text-[#878177]">
+        <div className="posthog-inspector__tree">
+            <div className="posthog-inspector__selected-element">
+                <span aria-hidden="true" className="posthog-inspector__line-number">
                     1
                 </span>
-                <samp className="min-w-0 whitespace-pre">
+                <samp className="posthog-inspector__tree-row">
                     {match ? (
                         <>
-                            &lt;<span className="text-[#135e91]">{match[1]}</span>{' '}
-                            <span className="text-[#77529a]">{match[2]}</span>=
-                            <span className="text-[#9a4b1c]">"{match[3]}"</span>&gt;{match[4]}&lt;/
-                            <span className="text-[#135e91]">{match[5]}</span>&gt;
+                            &lt;<span className="posthog-inspector__tag">{match[1]}</span>{' '}
+                            <span className="posthog-inspector__key">{match[2]}</span>=
+                            <span className="posthog-inspector__value">"{match[3]}"</span>&gt;{match[4]}&lt;/
+                            <span className="posthog-inspector__tag">{match[5]}</span>&gt;
                         </>
                     ) : (
                         value
@@ -185,34 +160,36 @@ function EventTree({ value }: { value: string }): JSX.Element {
     const properties = Object.entries(payload.properties)
 
     return (
-        <div className="min-w-0 overflow-x-auto py-2 font-code text-xs leading-6">
-            <details open className="min-w-0 px-3">
-                <summary className="cursor-pointer select-none text-[#5f5a52]">capture payload</summary>
-                <div className="ml-[5px] border-l border-[#dedad2] pl-4">
-                    <div className="whitespace-pre">
-                        <span className="text-[#77529a]">event</span>:{' '}
-                        <span className="text-[#9a4b1c]">"{payload.event}"</span>
+        <div className="posthog-inspector__tree">
+            <details open className="posthog-inspector__details">
+                <summary className="posthog-inspector__summary">capture payload</summary>
+                <div className="posthog-inspector__tree-indent">
+                    <div className="posthog-inspector__tree-row">
+                        <span className="posthog-inspector__key">event</span>:{' '}
+                        <span className="posthog-inspector__value">"{payload.event}"</span>
                     </div>
                     {payload.timestamp && (
-                        <div className="whitespace-pre">
-                            <span className="text-[#77529a]">timestamp</span>:{' '}
-                            <span className="text-[#9a4b1c]">"{payload.timestamp}"</span>
+                        <div className="posthog-inspector__tree-row">
+                            <span className="posthog-inspector__key">timestamp</span>:{' '}
+                            <span className="posthog-inspector__value">"{payload.timestamp}"</span>
                         </div>
                     )}
                     <details open>
-                        <summary className="cursor-pointer select-none text-[#77529a]">
-                            properties <span className="text-[#716c63]">{'{' + properties.length + '}'}</span>
+                        <summary className="posthog-inspector__summary posthog-inspector__key">
+                            properties <span className="posthog-inspector__muted">{'{' + properties.length + '}'}</span>
                         </summary>
-                        <div className="ml-[5px] border-l border-[#dedad2] pl-4">
+                        <div className="posthog-inspector__tree-indent">
                             {properties.length ? (
                                 properties.map(([key, propertyValue]) => (
-                                    <div key={key} className="whitespace-pre">
-                                        <span className="text-[#77529a]">{key}</span>:{' '}
-                                        <span className="text-[#9a4b1c]">{JSON.stringify(propertyValue)}</span>
+                                    <div key={key} className="posthog-inspector__tree-row">
+                                        <span className="posthog-inspector__key">{key}</span>:{' '}
+                                        <span className="posthog-inspector__value">
+                                            {JSON.stringify(propertyValue)}
+                                        </span>
                                     </div>
                                 ))
                             ) : (
-                                <div className="text-[#716c63]">No properties</div>
+                                <div className="posthog-inspector__muted">No properties</div>
                             )}
                         </div>
                     </details>
@@ -229,18 +206,9 @@ export function InspectorStatus({
     children: React.ReactNode
     tone?: 'neutral' | 'error'
 }): JSX.Element {
-    const error = tone === 'error'
-
     return (
-        <div
-            className={`flex items-start gap-2 px-3 py-2 text-xs leading-relaxed ${
-                error ? 'bg-[#fff1ef] text-[#8f3328]' : 'bg-[#faf8f3] text-[#5f5a52]'
-            }`}
-        >
-            <span
-                aria-hidden="true"
-                className={`mt-[5px] size-1.5 shrink-0 rounded-full ${error ? 'bg-[#a93228]' : 'bg-orange'}`}
-            />
+        <div className="posthog-inspector__status" data-tone={tone}>
+            <span aria-hidden="true" className="posthog-inspector__status-dot" />
             <span>{children}</span>
         </div>
     )

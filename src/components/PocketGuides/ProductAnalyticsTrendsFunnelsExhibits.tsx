@@ -4,13 +4,9 @@ import { StayCardContent } from '@posthog/twig-components/stay-card'
 import { stays } from '@posthog/twig-components/catalog'
 import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import '@posthog/twig-components/catalog.css'
+import './twigGuide.css'
 
-import PostHogInspector, {
-    COMPACT_INSPECTOR_CLASSES,
-    InspectorCode,
-    InspectorDetails,
-    InspectorStatus,
-} from './PostHogInspector'
+import PostHogInspector, { InspectorCode, InspectorDetails, InspectorStatus } from './PostHogInspector'
 import { Exhibit } from './ProductAnalyticsExhibits'
 
 const bookingExamples = {
@@ -54,7 +50,8 @@ export function FilterUsersTrendFigure(): JSX.Element {
                     {showEvent ? (
                         <div className="min-w-0 snap-start">
                             <PostHogInspector
-                                className={`${COMPACT_INSPECTOR_CLASSES} h-full`}
+                                compact
+                                className="h-full"
                                 headerAction={
                                     <button
                                         type="button"
@@ -72,11 +69,9 @@ export function FilterUsersTrendFigure(): JSX.Element {
                     ) : (
                         <section
                             aria-label="Week 2 filter events counted as people"
-                            className="flex min-w-0 snap-start flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                            className="posthog-demo-panel posthog-demo-panel--stretch snap-start"
                         >
-                            <div className="border-b border-[#d3d0c8] bg-[#f6f3ed] px-2 py-1.5 text-xs font-semibold @md:px-3">
-                                Week 2
-                            </div>
+                            <div className="posthog-demo-panel__header posthog-demo-panel__header--compact">Week 2</div>
                             <div className="grid flex-1 grid-cols-[1fr_auto_1fr] items-center gap-1 px-2 py-3 text-center @md:px-3">
                                 <div>
                                     <strong className="block text-2xl leading-none">19</strong>
@@ -101,11 +96,9 @@ export function FilterUsersTrendFigure(): JSX.Element {
                     )}
                     <section
                         aria-label="Simplified PostHog Trends insight for Twig destination filters"
-                        className="flex min-w-0 snap-start flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                        className="posthog-demo-panel posthog-demo-panel--stretch snap-start"
                     >
-                        <div className="border-b border-[#d3d0c8] bg-[#f6f3ed] px-2 py-1.5 text-xs font-semibold @md:px-3">
-                            Trends
-                        </div>
+                        <div className="posthog-demo-panel__header posthog-demo-panel__header--compact">Trends</div>
                         <div className="border-b border-[#d3d0c8] px-2 py-2 text-[10px] @md:px-3 @md:text-xs">
                             <span className="break-all font-code text-[#292724]">stay_filter_selected</span>
                             <p className="!my-0 text-[#716c63]">Unique users · weekly</p>
@@ -216,14 +209,14 @@ export function BookingStepsFigure(): JSX.Element {
                 <div className="grid min-w-[38rem] grid-cols-2 items-start gap-2 @md:gap-4">
                     <section
                         aria-label="Twig booking example"
-                        className="twig-browser min-w-0 snap-start overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
+                        className="twig-browser pocket-guide-twig-browser snap-start"
                     >
-                        <div className="flex items-center justify-between gap-2 border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">
+                        <div className="pocket-guide-twig-browser__header">
                             <span>Twig</span>
-                            <span className="text-xs font-normal text-[#6d6258]">{example.visitor}</span>
+                            <span className="pocket-guide-twig-browser__visitor">{example.visitor}</span>
                         </div>
-                        <div className="p-3 pb-4 @md:p-4 @md:pb-5">
-                            <article className="vac-card grid grid-cols-1 items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 @sm:grid-cols-[6rem_minmax(0,1fr)] [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[16/7] @sm:[&_.vac-image]:aspect-[4/3]">
+                        <div className="pocket-guide-twig-browser__body pocket-guide-twig-browser__body--booking">
+                            <article className="vac-card pocket-guide-twig-stay-card pocket-guide-twig-stay-card--booking">
                                 <StayCardContent
                                     stay={exampleStay}
                                     image={
@@ -282,7 +275,7 @@ export function BookingStepsFigure(): JSX.Element {
                             </div>
                         </div>
                     </section>
-                    <PostHogInspector className={`${COMPACT_INSPECTOR_CLASSES} snap-start`}>
+                    <PostHogInspector compact className="snap-start">
                         {started ? (
                             <>
                                 <InspectorDetails
@@ -355,9 +348,9 @@ export function BookingFunnelFigure(): JSX.Element {
                 <div className="grid min-w-[38rem] grid-cols-2 items-start gap-2 @md:gap-4">
                     <section
                         aria-label="Simplified PostHog Funnels insight for bookings"
-                        className="min-w-0 snap-start overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
+                        className="posthog-demo-panel snap-start"
                     >
-                        <div className="flex items-center justify-between gap-2 border-b border-[#d3d0c8] bg-[#f6f3ed] px-3 py-2 text-sm font-semibold">
+                        <div className="posthog-demo-panel__header">
                             <span>Funnels</span>
                             <span className="font-code text-[10px] font-normal text-[#716c63]">14-day window</span>
                         </div>
@@ -392,7 +385,7 @@ export function BookingFunnelFigure(): JSX.Element {
                             <span className="shrink-0 font-semibold underline">Inspect one →</span>
                         </button>
                     </section>
-                    <PostHogInspector className={`${COMPACT_INSPECTOR_CLASSES} snap-start`}>
+                    <PostHogInspector compact className="snap-start">
                         {showPerson ? (
                             <>
                                 <InspectorDetails

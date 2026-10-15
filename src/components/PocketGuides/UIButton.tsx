@@ -13,12 +13,8 @@ import OSButton from 'components/OSButton'
  * so every mention of the same control looks the same everywhere in the volume.
  */
 
-/** The shared chrome: bordered, rounded, and vertically centered on the text baseline. */
-const CHROME_CLASSES =
-    'mx-0.5 inline-flex translate-y-[0.05em] items-center gap-1 rounded border border-primary bg-primary px-1.5 py-0.5 align-baseline text-[0.8em] font-semibold leading-none text-primary'
-
 function Chrome({ children }: { children: React.ReactNode }): JSX.Element {
-    return <span className={`${CHROME_CLASSES} select-none whitespace-nowrap`}>{children}</span>
+    return <span className="pocket-guide-inline-control pocket-guide-inline-control--static">{children}</span>
 }
 
 /** The recording buttons, singular and plural – one drawing, so they can't drift apart. */
@@ -26,7 +22,7 @@ function RecordingButton({ label }: { label: string }): JSX.Element {
     return (
         <Chrome>
             {label}
-            <IconRewindPlay className="size-[1.1em] shrink-0" aria-hidden="true" />
+            <IconRewindPlay className="pocket-guide-inline-control__icon" aria-hidden="true" />
         </Chrome>
     )
 }
@@ -57,15 +53,12 @@ export function AskAI({ q, children }: { q: string; children?: React.ReactNode }
             href={maxPromptUrl(q)}
             // A short label is a control and shouldn't break across lines; a whole prompt spelled
             // out has to wrap or it overflows the page column.
-            className={`group/ask ${CHROME_CLASSES} no-underline hover:border-orange hover:text-orange ${
-                children ? 'whitespace-nowrap' : ''
+            className={`pocket-guide-inline-control pocket-guide-inline-control--link${
+                children ? ' pocket-guide-inline-control--short' : ''
             }`}
         >
             {children ?? q}
-            <IconArrowUpRight
-                className="size-[1.1em] shrink-0 text-secondary group-hover/ask:text-orange"
-                aria-hidden="true"
-            />
+            <IconArrowUpRight className="pocket-guide-inline-control__icon" aria-hidden="true" />
         </a>
     )
 }
@@ -97,23 +90,16 @@ export function ScannerTemplate({
     return (
         <a
             href={`https://app.posthog.com/replay-vision/new/details?template=${template}`}
-            className="group/tpl not-prose mb-2 block rounded border border-primary bg-primary px-3 py-2 no-underline hover:border-orange"
+            className="not-prose pocket-guide-template"
         >
-            <span className="flex items-baseline gap-2">
-                <span className="text-[0.85em] font-bold leading-snug text-primary group-hover/tpl:text-orange">
-                    {name}
-                </span>
-                <span className="rounded bg-accent px-1 py-0.5 text-[0.65em] font-bold uppercase leading-none tracking-wide text-secondary dark:bg-accent-dark">
-                    {type}
-                </span>
-                <IconArrowUpRight
-                    className="ml-auto size-[1em] shrink-0 text-secondary group-hover/tpl:text-orange"
-                    aria-hidden="true"
-                />
+            <span className="pocket-guide-template__heading">
+                <span className="pocket-guide-template__name">{name}</span>
+                <span className="pocket-guide-template__type">{type}</span>
+                <IconArrowUpRight className="pocket-guide-template__icon" aria-hidden="true" />
             </span>
-            <span className="mt-1 block text-[0.8em] italic leading-snug text-primary">“{asks}”</span>
-            <span className="mt-0.5 block text-[0.75em] leading-snug text-secondary">
-                {answers} · <code className="text-[0.95em]">{property}</code>
+            <span className="pocket-guide-template__question">“{asks}”</span>
+            <span className="pocket-guide-template__answer">
+                {answers} · <code>{property}</code>
             </span>
         </a>
     )
@@ -136,7 +122,7 @@ export function CTA({
     external?: boolean
 }): JSX.Element {
     return (
-        <span className="not-prose my-[0.8em] block">
+        <span className="not-prose pocket-guide-cta">
             <OSButton asLink to={to} external={external} variant="primary" size="md">
                 {children}
             </OSButton>

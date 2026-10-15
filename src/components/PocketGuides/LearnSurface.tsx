@@ -3,6 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
+import './guideProse.css'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 
@@ -64,7 +65,7 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
 
     return (
         // ReaderView supplies the docs prose styles and padding for this surface.
-        <div className="@container [&>div]:!p-0">
+        <div className="@container">
             <EntryProvider value={{ entry, pages, basePath }}>
                 <MDXProvider components={bookMdxComponents}>
                     <MDXRenderer>{body}</MDXRenderer>

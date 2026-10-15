@@ -1,6 +1,6 @@
 // OS window chrome — full literal strings so Tailwind JIT picks up every class.
-// Default: frosted glass. Solid opaque when body[data-reduce-transparency="true"]
-// or prefers-reduced-transparency (via the `reduce-transparency:` variant).
+// Default: frosted glass. Solid opaque for the saved reduce-transparency setting,
+// an open pocket guide, or prefers-reduced-transparency (via the Tailwind variant).
 
 /** App windows — frosted by default; solid when reduce transparency is on */
 export const WINDOW_BG =

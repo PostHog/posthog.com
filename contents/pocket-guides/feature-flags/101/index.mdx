@@ -55,7 +55,7 @@ In the browser, flags load asynchronously, and until they arrive `getFeatureFlag
 const showNewCheckout = posthog.getFeatureFlag(NEW_CHECKOUT_FLAG) ?? false
 ```
 
-You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, which [the next page](/docs/feature-flags/learn/server-and-client) covers.
+You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, [Server and client](/docs/feature-flags/learn/server-and-client) covers how to do that.
 
 ## Flag checks record exposure
 

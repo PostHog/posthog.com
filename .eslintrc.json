@@ -23,5 +23,50 @@
         "react/prop-types": "off",
         "no-const-assign": "off",
         "no-undef": "off"
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "src/components/PocketGuides/BookPage.tsx",
+                "src/components/PocketGuides/BookReader.tsx",
+                "src/components/PocketGuides/Callout.tsx",
+                "src/components/PocketGuides/Figure.tsx",
+                "src/components/PocketGuides/LearnPage.tsx",
+                "src/components/PocketGuides/LearnSurface.tsx",
+                "src/components/PocketGuides/ReaderWrapper.tsx",
+                "src/components/PocketGuides/bookPieces.tsx",
+                "src/components/PocketGuides/*Inspector*.tsx",
+                "src/components/PocketGuides/TwigBrowse*.tsx",
+                "src/components/PocketGuides/UIButton.tsx",
+                "src/components/PocketGuides/ProductAnalyticsIdentityExhibits.tsx",
+                "src/components/PocketGuides/ProductAnalyticsTrendsFunnelsExhibits.tsx",
+                "src/components/Products/ReaderViewProduct/buildProductMenuTabs.tsx"
+            ],
+            "rules": {
+                "no-restricted-syntax": [
+                    "error",
+                    {
+                        "selector": "JSXAttribute[name.name='style']",
+                        "message": "Use the shared pocket guide component classes for layout and prose. Dynamic figure styles belong in figure components."
+                    }
+                ]
+            }
+        },
+        {
+            "files": ["src/components/PocketGuides/LearnPage.tsx", "src/components/PocketGuides/LearnSurface.tsx"],
+            "rules": {
+                "no-restricted-syntax": [
+                    "error",
+                    {
+                        "selector": "JSXAttribute[name.name='style']",
+                        "message": "Use the shared pocket guide component classes for layout and prose."
+                    },
+                    {
+                        "selector": "JSXOpeningElement[name.name='nav']",
+                        "message": "Learn navigation belongs in the shared LearnNav rendered by buildProductMenuTabs."
+                    }
+                ]
+            }
+        }
+    ]
 }

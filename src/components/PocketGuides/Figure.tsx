@@ -12,14 +12,11 @@ interface FigureProps {
 /** A framed exhibit wrapping live components rather than screenshots. */
 export default function Figure({ number, caption, legend, children }: FigureProps): JSX.Element {
     return (
-        <figure className="not-prose my-6 mx-0">
-            <div className="overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
-                {children}
-            </div>
+        <figure className="not-prose pocket-guide-exhibit">
+            <div className="pocket-guide-panel">{children}</div>
             {caption && (
-                <figcaption className="mt-2 text-sm leading-snug text-secondary">
-                    <span className="text-xs font-bold uppercase tracking-wide text-orange">Fig. {number}</span> –{' '}
-                    {caption}
+                <figcaption className="pocket-guide-exhibit__caption">
+                    <span className="pocket-guide-exhibit__number">Fig. {number}</span> – {caption}
                     {legend}
                 </figcaption>
             )}

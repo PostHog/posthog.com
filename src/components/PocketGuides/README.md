@@ -1,8 +1,8 @@
 # PocketGuides
 
-The digital book format for pocket guides – the docs-site sibling of the marketing team's field
-guide microsites. Educational register, not marketing: the structure does the teaching, and the
-reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
+Pocket Guide content is shared by product Learn tabs and the remaining standalone readers.
+Product Analytics is the layout reference for guides embedded in Learn. Its Twig examples retain
+Twig styling inside the shared docs reader.
 
 **Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
 Components here supply layout, interactions, and short labels for the data they display.
@@ -17,7 +17,7 @@ be reviewed on both sites.
 
 ```
 contents/pocket-guides/<volume>/
-├── index.mdx              pocketGuideOrder: 0 – the front matter (title page + contents)
+├── index.mdx              pocketGuideOrder: 0 – the introduction
 ├── 101/index.mdx          pocketGuideOrder: 1 – the primer
 └── <use-case>/
     ├── index.mdx          pocketGuideOrder: 2+ – one use case
@@ -48,13 +48,14 @@ action and the shortcut to it can't drift apart.
 
 ## Adding a volume
 
-`pnpm test:pocket-guides` checks every rule below and runs in the deploy preview workflow.
+`pnpm test:pocket-guides` checks these conventions and runs in the deploy preview workflow.
+`pnpm lint:pocket-guide-layout` checks the shared reader and Learn layout locally and in CI.
 
 | Where | What | Why |
 |---|---|---|
-| `contents/pocket-guides/<id>/` | `index.mdx` at order 0 with `<Setup />` and `<Frontispiece />`, a 101 at order 1 | The reader builds the book from this directory |
+| `contents/pocket-guides/<id>/` | `index.mdx` at order 0 and a 101 at order 1 | Learn navigation and the standalone reader both use this order |
 | `src/constants/pocketGuides.ts` | The shelf row | Cover, spine, and volume number |
-| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
+| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | Art stays on the shelf cover and, for standalone guides, the title page; Learn pages use the docs reader instead |
 | `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard command for the volume, if it has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
 | `pocketGuideVolume` in `src/hooks/productData/<product>.tsx`, and `src/pages/docs/<product>/learn/[...chapter].tsx` | The docs Learn tab, for a volume with `docsProduct` | The product's docs link to the book it teaches |
 
@@ -97,9 +98,9 @@ after the prose.
 | Component | What it does |
 |---|---|
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
-| `<Eyebrow>` | The small line above a title-page heading |
+| `<Eyebrow>` | The small line above a standalone title-page heading; hidden in Learn |
 | `<Setup />` | The volume's wizard command, for the front matter |
-| `<Frontispiece />` | The volume's hedgehog illustration, for the title page |
+| `<Frontispiece />` | The standalone title page's hedgehog illustration; hidden in Learn |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
@@ -109,10 +110,11 @@ after the prose.
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
 | `<Enable />` | The scout CTA – one click to add this page's scout |
 | `<Action />` | The CTA for volumes whose answer isn't a scout, from `pocketGuideCta:` frontmatter |
-| `<SeeAlso>` | A print footnote at the foot of the column |
+| `<SeeAlso>` | A resource aside in Learn; a print-style footnote in the standalone reader |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
-Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
+Paragraphs, lists, tables, and inline code use the docs prose styling. Chapter headings use the
+shared scale in `guideProse.css`.
 
 Write code samples and tables as native Markdown in the prose. A figure is for an exhibit
 Markdown can't render, like annotated mock UI; `pocketGuides.test.ts` fails a figure whose only
@@ -134,7 +136,17 @@ on phones.
 ### Adding new content elements
 
 The standalone reader applies the shared docs prose classes, and the Learn surface inherits
-them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
+them from `ReaderView`. `guideProse.css` defines the chapter heading hierarchy, See also block,
+and the standalone reader's Aa sizes. The Aa control starts at 17px.
+The Learn sidebar is rendered only by `LearnNav` in `buildProductMenuTabs.tsx`; its shared styles
+live in `learnNav.css`. Change those classes to update all four Learn guides together.
+`guideProse.css` also styles the shared figure and callout panels, inline controls, and scanner
+templates. `PostHogInspector` owns the inspector's shared frame, tabs, data rows, and status styles in
+`postHogInspector.css`. `twigGuide.css` holds guide-specific framing and compact card variants
+around the shared `@posthog/twig-components` components; the package remains the source of their
+base styles. ESLint rejects inline styles in these presentational components and the reader layout,
+and rejects a second `<nav>` in the Learn page components. Calculated positions and colors inside
+interactive figures can still use inline styles.
 When a guide introduces a new content element, check its rendered appearance against docs in
 light and dark mode and at narrow and wide widths. Keep book-specific mappings in
 [bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
@@ -167,6 +179,10 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 
 ## The reader UI
 
+Learn chapters use `ReaderView`'s large prose size, while standalone chapters start at 17px and
+keep the Aa controls. Opening any guide applies the site's reduced-transparency window and
+sidebar styles until the last guide closes; the reader's saved display setting is untouched.
+
 - **`BookReader`** – wide windows pin the Contents panel on the left, with a compact Home and
   reading-size control bar. `BookPage` uses Explorer's `transparent` option so the standard
   frosted app-window background shows through, as it does in the docs reader. The sidebar
@@ -195,6 +211,9 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
 | `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
+| `guideProse.css` | Shared chapter headings, See also blocks, and reading sizes |
+| `postHogInspector.css` | Shared inspector frame, tabs, trees, status, and replay event list |
+| `twigGuide.css` | Compact Twig frame and card variants for guide exhibits |
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, SeeAlso, prose styling |
 | `Action.tsx` | The non-scout CTA and its pinned bar, from `pocketGuideCta:` frontmatter |

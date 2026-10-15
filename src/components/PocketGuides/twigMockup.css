@@ -5,5 +5,66 @@
 }
 
 .twig-pocket-mockup {
+    --twig-paper: #f7eddf;
+    --twig-ink: #2d2b29;
+    --twig-muted: #6d6258;
+    --twig-line: #d7c8b6;
+    --twig-fill: #efe1ce;
+
+    overflow: hidden;
+    background: var(--twig-paper);
+    color: var(--twig-ink);
     font-family: TwigHalfrePocketGuide, sans-serif;
+}
+
+.twig-pocket-mockup--framed {
+    border: 1px solid var(--twig-line);
+    border-radius: 0.25rem;
+}
+
+.twig-pocket-mockup__title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--twig-ink);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.twig-pocket-mockup__filter {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--twig-line);
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.twig-pocket-mockup__filter[data-selected='true'] {
+    border-color: var(--twig-ink);
+    background: var(--twig-ink);
+    color: var(--twig-paper);
+}
+
+.twig-pocket-mockup__count {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    color: var(--twig-muted);
+    font-size: 0.875rem;
+}
+
+.twig-pocket-mockup__stay {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    border: 1px solid var(--twig-line);
+    border-radius: 0.25rem;
+}
+
+.twig-pocket-mockup__stay-image {
+    display: block;
+    width: 4rem;
+    height: 3rem;
+    flex-shrink: 0;
+    border-radius: 0.25rem;
+    background: var(--twig-fill);
 }

@@ -6,6 +6,7 @@ import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import coast from '@posthog/twig-components/assets/coast.jpg'
 import city from '@posthog/twig-components/assets/city.jpg'
 import '@posthog/twig-components/catalog.css'
+import './twigGuide.css'
 
 const photos: Record<Stay['setting'], string> = { Forest: cabin, Coast: coast, City: city }
 
@@ -26,12 +27,9 @@ export default function TwigBrowseFigure({
     const matches = filterStays(selectedSetting, '')
     const stay = matches[0]
     return (
-        <section
-            aria-label="Twig"
-            className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
-        >
-            <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
-            <div className="p-4 @md:p-5">
+        <section aria-label="Twig" className="twig-browser pocket-guide-twig-browser">
+            <div className="pocket-guide-twig-browser__header">Twig</div>
+            <div className="pocket-guide-twig-browser__body">
                 <fieldset id={`${id}-filters`} className="vac-filters !my-3">
                     <legend className="vac-sr-only">Filter by destination type</legend>
                     {staySettings
@@ -56,7 +54,7 @@ export default function TwigBrowseFigure({
                     {matches.length} {matches.length === 1 ? 'stay' : 'stays'}
                 </p>
                 {stay && (
-                    <article className="vac-card grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[4/3]">
+                    <article className="vac-card pocket-guide-twig-stay-card">
                         <StayCardContent
                             stay={stay}
                             image={

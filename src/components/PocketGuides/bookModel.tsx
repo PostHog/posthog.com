@@ -153,8 +153,8 @@ export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
     }))
 }
 
-/** Optional Aa size choices; the default is styled by the shared docs prose classes. */
-export const FONT_SIZES = [15, 17, 19, 21] as const
+/** Optional Aa size choices, styled by guideProse.css. */
+export const FONT_SIZES = [17, 19, 21, 23] as const
 const FONT_SIZE_KEY = 'pocket-guide-font-size'
 const DEFAULT_FONT_SIZE = FONT_SIZES[0]
 

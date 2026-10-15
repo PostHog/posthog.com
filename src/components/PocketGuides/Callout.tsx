@@ -24,8 +24,8 @@ export default function Callout({
 
     return (
         // Same box as a figure, so it reads as part of the book.
-        <aside className="my-[0.8em] rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
-            <p className={`m-0 text-[0.9em] leading-relaxed text-secondary ${hasAction ? 'mb-3' : ''}`}>{children}</p>
+        <aside className="pocket-guide-panel pocket-guide-callout" data-has-action={hasAction || undefined}>
+            <p>{children}</p>
             {hasAction && (
                 <OSButton
                     asLink

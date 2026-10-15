@@ -1,0 +1,243 @@
+/* Compact Twig examples share a frame and card scale inside Pocket Guides. */
+.twig-browser.pocket-guide-twig-browser {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--vac-line);
+    border-radius: 0.25rem;
+    background: var(--vac-paper);
+    color: var(--vac-ink);
+}
+
+.twig-browser.pocket-guide-twig-browser--open {
+    overflow: visible;
+}
+
+.twig-browser.pocket-guide-twig-browser--menu-open {
+    min-height: 22rem;
+}
+
+.pocket-guide-twig-browser__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--vac-line);
+    font-family: RoundHog, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.pocket-guide-twig-browser__header--profile {
+    position: relative;
+    z-index: 10;
+}
+
+.pocket-guide-twig-browser__visitor {
+    color: var(--vac-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.pocket-guide-twig-browser__body {
+    padding: 1rem;
+}
+
+@container (min-width: 28rem) {
+    .pocket-guide-twig-browser__body {
+        padding: 1.25rem;
+    }
+}
+
+.pocket-guide-twig-browser__body--compact {
+    padding: 0.75rem;
+}
+
+@container (min-width: 28rem) {
+    .pocket-guide-twig-browser__body--compact {
+        padding: 1rem;
+    }
+}
+
+.pocket-guide-twig-browser__body--fixed {
+    padding: 1rem;
+}
+
+.pocket-guide-twig-browser__body--booking {
+    padding: 0.75rem 0.75rem 1rem;
+}
+
+@container (min-width: 28rem) {
+    .pocket-guide-twig-browser__body--booking {
+        padding: 1rem 1rem 1.25rem;
+    }
+}
+
+.vac-card.pocket-guide-twig-stay-card {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--vac-line, #d7c8b6);
+    border-radius: 0.25rem;
+    background: #fff8ee;
+}
+
+.pocket-guide-twig-stay-card .vac-card-body {
+    padding: 0;
+}
+
+.pocket-guide-twig-stay-card .vac-card-body h3 {
+    font-size: 1rem;
+}
+
+.pocket-guide-twig-stay-card .vac-card-body p {
+    font-size: 0.75rem;
+}
+
+.pocket-guide-twig-stay-card .vac-card-body > p:nth-of-type(2) {
+    display: none;
+}
+
+.pocket-guide-twig-stay-card .vac-card-body > p:last-child {
+    margin-bottom: 0;
+}
+
+.pocket-guide-twig-stay-card .vac-image {
+    aspect-ratio: 4 / 3;
+}
+
+.vac-card.pocket-guide-twig-stay-card--account {
+    position: relative;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    overflow: hidden;
+    padding: 0;
+}
+
+.pocket-guide-twig-stay-card--account .vac-card-body {
+    padding: 0.75rem;
+}
+
+.pocket-guide-twig-stay-card--account .vac-image {
+    height: 100%;
+    min-height: 8rem;
+    aspect-ratio: auto;
+}
+
+.vac-card.pocket-guide-twig-stay-card--booking {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.pocket-guide-twig-stay-card--booking .vac-image {
+    aspect-ratio: 16 / 7;
+}
+
+@container (min-width: 24rem) {
+    .vac-card.pocket-guide-twig-stay-card--booking {
+        grid-template-columns: 6rem minmax(0, 1fr);
+    }
+
+    .pocket-guide-twig-stay-card--booking .vac-image {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* The package owns account components; these classes only size them for guide exhibits. */
+.pocket-guide-twig-saved-stays .twig-account-page > h1 {
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+}
+
+.pocket-guide-twig-saved-stays .twig-account-page > .twig-account-muted {
+    margin-bottom: 0.75rem;
+}
+
+.pocket-guide-twig-saved-stays .twig-account-stay-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+}
+
+.pocket-guide-twig-saved-stays .twig-account-stay-card > a {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid var(--vac-line, #d7c8b6);
+    border-radius: 0.25rem;
+    background: #fff8ee;
+}
+
+.pocket-guide-twig-saved-stays .vac-card-body {
+    padding: 0.75rem;
+}
+
+.pocket-guide-twig-saved-stays .vac-card-body h3 {
+    font-size: 1rem;
+}
+
+.pocket-guide-twig-saved-stays .vac-card-body p {
+    font-size: 0.75rem;
+}
+
+.pocket-guide-twig-saved-stays .vac-card-body > p:nth-of-type(2) {
+    display: none;
+}
+
+.pocket-guide-twig-saved-stays .vac-card-body > p:last-child {
+    margin-bottom: 0;
+}
+
+.pocket-guide-twig-saved-stays .vac-image {
+    height: 100%;
+    min-height: 8rem;
+    aspect-ratio: auto;
+}
+
+.pocket-guide-twig-login {
+    min-height: 0;
+    padding: 0;
+}
+
+.pocket-guide-twig-login .twig-login-card {
+    width: 100%;
+    max-width: none;
+    padding: 1rem;
+    box-shadow: 4px 4px 0 #efe1ce;
+}
+
+.pocket-guide-twig-login .twig-login-card h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.pocket-guide-twig-login .twig-login-hint {
+    margin-bottom: 0.75rem;
+}
+
+.pocket-guide-twig-login .twig-login-card label {
+    margin-top: 0.5rem;
+}
+
+.pocket-guide-twig-login .twig-login-card input {
+    min-height: 36px;
+    padding-block: 0.5rem;
+}
+
+.pocket-guide-twig-login .twig-login-submit {
+    min-height: 38px;
+    margin-top: 0.75rem;
+}
+
+.pocket-guide-twig-profile .twig-profile-popover {
+    top: calc(100% + 6px);
+    width: 8rem;
+}
+
+.pocket-guide-twig-profile .twig-profile-summary,
+.pocket-guide-twig-profile .twig-profile-popover nav {
+    display: none;
+}
+
+.pocket-guide-twig-profile .twig-profile-signout {
+    padding: 0.625rem;
+}

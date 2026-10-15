@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 
 import LearnSurface from './LearnSurface'
+import usePocketGuideReading from './usePocketGuideReading'
 
 interface LearnPageProps {
     /** `handle` from `src/hooks/productData/*`, e.g. `ai_observability`. */
@@ -40,6 +41,7 @@ export default function LearnPage({
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
     const isLearnLanding = Boolean(volumeId && Landing && !chapter)
+    usePocketGuideReading(Boolean(volumeId && !isLearnLanding))
     const learnBasePath = productData ? surfaceBasePath(productData.slug, 'learn') : ''
     const landingProps = {
         productName: productData?.name,
@@ -62,6 +64,7 @@ export default function LearnPage({
                 // Learn navigation already lives in the product sidebar.
                 hideRightSidebar
                 hideTitle
+                proseSize={isLearnLanding ? 'sm' : 'lg'}
                 hideMarkdownActions={isLearnLanding}
                 showQuestions={false}
                 menuTabs={productMenuTabs}

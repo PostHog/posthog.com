@@ -1,0 +1,261 @@
+/* The prose typography uses em units, so one class controls the whole reading scale. */
+.pocket-guide-page--standalone {
+    padding: 1.5rem 1.25rem;
+}
+
+@container (min-width: 36rem) {
+    .pocket-guide-page--standalone {
+        padding: 2.5rem 3rem;
+    }
+}
+
+.prose.pocket-guide-prose[data-font-size='17'] {
+    font-size: 1.0625rem;
+}
+
+.prose.pocket-guide-prose[data-font-size='19'] {
+    font-size: 1.1875rem;
+}
+
+.prose.pocket-guide-prose[data-font-size='21'] {
+    font-size: 1.3125rem;
+}
+
+.prose.pocket-guide-prose[data-font-size='23'] {
+    font-size: 1.4375rem;
+}
+
+/* Every MDX chapter shares this heading hierarchy, including new volumes. */
+.pocket-guide-page > h1 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 1.75em;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.pocket-guide-page > h2 {
+    font-size: 1.5em;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+}
+
+.pocket-guide-page > h3 {
+    font-size: 1.25em;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+}
+
+.pocket-guide-see-also {
+    margin-top: 2em;
+    color: rgb(var(--text-secondary));
+    font-size: 0.875em;
+    line-height: 1.6;
+}
+
+.pocket-guide-see-also--standalone {
+    margin-top: 3em;
+    margin-bottom: 0.5em;
+}
+
+.pocket-guide-see-also p {
+    margin: 0;
+}
+
+.pocket-guide-see-also a {
+    text-decoration: underline;
+}
+
+.pocket-guide-see-also__rule {
+    display: block;
+    width: 6rem;
+    margin-bottom: 0.625em;
+    border-top: 1px solid rgb(var(--border));
+}
+
+.pocket-guide-panel {
+    overflow: hidden;
+    padding: 0.75rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: 0.25rem;
+    background: rgb(var(--accent));
+}
+
+.dark .pocket-guide-panel {
+    background: #232429;
+}
+
+@container (min-width: 28rem) {
+    .pocket-guide-panel {
+        padding: 1rem;
+    }
+}
+
+.pocket-guide-exhibit {
+    margin: 1.5rem 0;
+}
+
+.pocket-guide-exhibit__caption {
+    margin-top: 0.5rem;
+    color: rgb(var(--text-secondary));
+    font-size: 0.875rem;
+    line-height: 1.375;
+}
+
+.pocket-guide-exhibit__number {
+    color: #eb9d2a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+.pocket-guide-exhibit--interactive .pocket-guide-exhibit__caption {
+    font-family: RoundHog, sans-serif;
+    font-size: 0.75rem;
+}
+
+.pocket-guide-callout {
+    margin-block: 0.8em;
+}
+
+.pocket-guide-callout p {
+    margin: 0;
+    color: rgb(var(--text-secondary));
+    font-size: 0.9em;
+    line-height: 1.625;
+}
+
+.pocket-guide-callout[data-has-action='true'] p {
+    margin-bottom: 0.75rem;
+}
+
+.pocket-guide-inline-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    margin-inline: 0.125em;
+    padding: 0.15em 0.45em;
+    transform: translateY(0.05em);
+    border: 1px solid rgb(var(--border));
+    border-radius: 0.25rem;
+    background: rgb(var(--bg));
+    color: rgb(var(--text-primary));
+    font-size: 0.8em;
+    font-weight: 600;
+    line-height: 1;
+    vertical-align: baseline;
+}
+
+.pocket-guide-inline-control--static {
+    user-select: none;
+    white-space: nowrap;
+}
+
+.pocket-guide-inline-control--short {
+    white-space: nowrap;
+}
+
+.pocket-guide-inline-control--link {
+    text-decoration: none;
+}
+
+.pocket-guide-inline-control--link:hover {
+    border-color: #eb9d2a;
+    color: #eb9d2a;
+}
+
+.pocket-guide-inline-control__icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+}
+
+.pocket-guide-inline-control--link .pocket-guide-inline-control__icon {
+    color: rgb(var(--text-secondary));
+}
+
+.pocket-guide-inline-control--link:hover .pocket-guide-inline-control__icon {
+    color: #eb9d2a;
+}
+
+.pocket-guide-template {
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: 0.25rem;
+    background: rgb(var(--bg));
+    text-decoration: none;
+}
+
+.pocket-guide-template:hover {
+    border-color: #eb9d2a;
+}
+
+.pocket-guide-template__heading {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.pocket-guide-template__name {
+    color: rgb(var(--text-primary));
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1.375;
+}
+
+.pocket-guide-template__type {
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    background: rgb(var(--accent));
+    color: rgb(var(--text-secondary));
+    font-size: 0.65em;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.dark .pocket-guide-template__type {
+    background: #232429;
+}
+
+.pocket-guide-template__icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    margin-left: auto;
+    color: rgb(var(--text-secondary));
+}
+
+.pocket-guide-template:hover :is(.pocket-guide-template__name, .pocket-guide-template__icon) {
+    color: #eb9d2a;
+}
+
+.pocket-guide-template__question {
+    display: block;
+    margin-top: 0.25rem;
+    color: rgb(var(--text-primary));
+    font-size: 0.8em;
+    font-style: italic;
+    line-height: 1.375;
+}
+
+.pocket-guide-template__answer {
+    display: block;
+    margin-top: 0.125rem;
+    color: rgb(var(--text-secondary));
+    font-size: 0.75em;
+    line-height: 1.375;
+}
+
+.pocket-guide-template__answer code {
+    font-size: 0.95em;
+}
+
+.pocket-guide-cta {
+    display: block;
+    margin-block: 0.8em;
+}

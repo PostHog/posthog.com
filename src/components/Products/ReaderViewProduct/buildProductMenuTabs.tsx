@@ -17,6 +17,7 @@ import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
+import './learnNav.css'
 
 const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
@@ -121,34 +122,31 @@ const LearnNav = ({
     }
 
     return (
-        <nav>
-            <ul className="list-none m-0 p-0 flex flex-col gap-px">
+        <nav className="pocket-guide-learn-nav" aria-label="Pocket guide chapters">
+            <ul className="pocket-guide-learn-nav__list">
                 {hasLanding ? (
-                    <li className="m-0 mb-2 border-b border-primary/20 p-0 pb-2">
-                        <Link
-                            to={basePath}
-                            className="block w-full rounded px-2 py-1 text-sm !text-primary !no-underline hover:bg-dark/10 focus-visible:outline-offset-[-2px] dark:hover:bg-light/10"
-                        >
-                            <span className="inline-flex items-center gap-1.5">
-                                <IconArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+                    <li className="pocket-guide-learn-nav__back-item">
+                        <Link to={basePath} className="pocket-guide-learn-nav__link">
+                            <span className="pocket-guide-learn-nav__back-label">
+                                <IconArrowLeft className="pocket-guide-learn-nav__back-icon" aria-hidden="true" />
                                 <span data-sidebar-label>Back to Learn</span>
                             </span>
                         </Link>
                     </li>
                 ) : null}
-                {pages.map((page) => {
+                {pages.map((page, index) => {
                     const to =
                         page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
-                    const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
+                    const active = normalizedCurrentPath === to
                     return (
-                        <li key={page.url} className="m-0 p-0">
+                        <li key={page.url} className="pocket-guide-learn-nav__item">
+                            {page.section && page.section !== pages[index - 1]?.section && (
+                                <h2 className="pocket-guide-learn-nav__section">{page.section}</h2>
+                            )}
                             <Link
                                 to={to}
-                                className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
-                                    active
-                                        ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
-                                        : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
-                                }`}
+                                aria-current={active ? 'page' : undefined}
+                                className="pocket-guide-learn-nav__link"
                             >
                                 <span data-sidebar-label>{page.shortTitle || page.title}</span>
                             </Link>

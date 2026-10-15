@@ -17,15 +17,16 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
 }
 
-/** Introductory text uses the same prose styling as docs. */
-export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
-    return <p>{children}</p>
+/** Book-cover furniture stays in the standalone reader. */
+export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element | null {
+    return useEntry()?.basePath ? null : <p>{children}</p>
 }
 
 /** The volume's specimen drawing, on the pages that open a book. */
 export function Frontispiece(): JSX.Element | null {
-    const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
-    if (!Art) {
+    const book = useEntry()
+    const Art = volumeArt(volumeIdFromUrl(book?.entry.url ?? ''))
+    if (!Art || book?.basePath) {
         return null
     }
     return (
@@ -79,10 +80,16 @@ export function Enable(): JSX.Element | null {
 
 /** A print footnote: short rule, small type, at the foot of the text column. */
 export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Element {
+    const isLearn = Boolean(useEntry()?.basePath)
+
+    if (isLearn) {
+        return <aside className="pocket-guide-see-also">{children}</aside>
+    }
+
     return (
         // Bottom margin keeps the rule off the folio border.
-        <aside className="mb-2 mt-12 text-[0.85em] leading-relaxed text-secondary [&_a]:underline [&_p]:m-0">
-            <span aria-hidden="true" className="mb-2.5 block w-24 border-t border-primary" />
+        <aside className="pocket-guide-see-also pocket-guide-see-also--standalone">
+            <span aria-hidden="true" className="pocket-guide-see-also__rule" />
             {children}
         </aside>
     )
@@ -97,7 +104,12 @@ function BookLink({ href, ...props }: any): JSX.Element {
     // A link to another chapter of this book: inside the Learn tab it turns the page there,
     // rather than sending the reader out to the standalone reader in a new window.
     const basePath = book?.basePath
-    const chapter = basePath ? book?.pages.find((page) => page.url === normalizeUrl(href ?? '')) : undefined
+    const chapter = basePath
+        ? book?.pages.find(
+              (page) =>
+                  page.url === normalizeUrl(href ?? '') || learnChapterPath(basePath, page) === normalizeUrl(href ?? '')
+          )
+        : undefined
     const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : undefined
 
     const trackLinkClick = () =>
