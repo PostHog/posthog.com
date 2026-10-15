@@ -130,18 +130,22 @@ const arrivingEvent = (elapsed: number): SessionEvent | undefined =>
 
 const formatSessionTime = (ms: number): string => `0:${String(Math.floor(ms / 1000)).padStart(2, '0')}`
 
-export function useSessionClock(ref: RefObject<HTMLElement>): number {
+export function useSessionClock(
+    ref: RefObject<HTMLElement>,
+    loopMs = LOOP_MS,
+    reducedMotionMoment = REDUCED_MOTION_MOMENT
+): number {
     const inView = useInView(ref, { amount: 0.35 })
     const shouldReduceMotion = useReducedMotion()
     const [elapsed, setElapsed] = useState(0)
 
     useEffect(() => {
         if (shouldReduceMotion || !inView) return
-        const id = window.setInterval(() => setElapsed((current) => (current + TICK_MS) % LOOP_MS), TICK_MS)
+        const id = window.setInterval(() => setElapsed((current) => (current + TICK_MS) % loopMs), TICK_MS)
         return () => window.clearInterval(id)
-    }, [inView, shouldReduceMotion])
+    }, [inView, shouldReduceMotion, loopMs])
 
-    return shouldReduceMotion ? REDUCED_MOTION_MOMENT : elapsed
+    return shouldReduceMotion ? reducedMotionMoment : elapsed
 }
 
 const CARD_NUMBER = '4242 4242 4242 4242'

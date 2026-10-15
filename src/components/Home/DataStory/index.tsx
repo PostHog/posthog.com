@@ -4,6 +4,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import FeedbackPopup from './FeedbackPopup'
 import FormPointer from './FormPointer'
 import IngestStep from './Ingest/IngestStep'
+import QueryStep from './Query/QueryStep'
 import Link from 'components/Link'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 
@@ -80,6 +81,8 @@ export const StepsSection = (): JSX.Element => (
         {STEPS.map(({ title, description }, index) =>
             index === 0 ? (
                 <IngestStep key={title} title={title} description={description} />
+            ) : index === 1 ? (
+                <QueryStep key={title} index={index} title={title} description={description} />
             ) : (
                 <div key={title}>
                     <h3>

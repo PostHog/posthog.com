@@ -143,7 +143,7 @@ export default function IngestStep({
     }
 
     return (
-        <div className="@container mt-10">
+        <div className="@container mt-20">
             <div
                 ref={containerRef}
                 className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-start @3xl:gap-x-0"
