@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
+import PrivateBeta from "./_snippets/private-beta.mdx";
 
 <PrivateBeta />
 
@@ -40,7 +40,7 @@ PostHog checks for resolved tickets every five minutes. It waits at least five m
 
 A public reply from a person is the only text PostHog learns from. Private notes, customer messages, deleted replies, and AI replies are skipped, so an internal note or an AI draft never becomes a source.
 
-PostHog checks each reply for reusable information, personal data, secrets, and overlap with existing Business Knowledge. It adds accepted answers as their own learned sources, named after the topic. You can open, edit, or delete a learned source. PostHog doesn't change a source that already exists when it analyzes the same ticket again.
+PostHog checks each reply for reusable information, personal data, secrets, and overlap with existing Business Knowledge. It adds accepted answers as their own learned sources, named after the topic. Each new learned source also joins a [library](/docs/business-knowledge/sources#libraries) named Learned. If you remove a source from Learned, it stays removed. Deleting the Learned library doesn't delete the sources. The next new learned source creates the library again and joins only itself. You can open, edit, or delete a learned source. PostHog doesn't change a source that already exists when it analyzes the same ticket again.
 
 If a later reply contradicts an earlier learned source, PostHog keeps the newer answer and disables the older learned source so it stops being used in replies. PostHog keeps the older source and its content, and records the change in the activity log. PostHog only replaces a learned source that holds one document, so a crawled site with many pages stays as it is. PostHog never disables a source you wrote this way. It keeps that source and skips the newer answer.
 
