@@ -20,7 +20,7 @@ CSMs cover all customers above $20k ARR, whether they're long-time customers who
 
 Our primary goal is retention, and the team target is 110% quarterly NRR (see [how we work](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms) for how that's calculated and how it ties to bonus). We hit that by being genuinely helpful.
 
-A big part of the work is spotting customers who need help before they ask. The loudest ones will find us anyway. The ones quietly struggling won't, and those are the ones where a well-timed outreach, a usage pattern in Vitally, or just reading between the lines on a ticket makes the difference.
+A big part of the work is spotting customers who need help before they ask. The loudest ones will find us anyway. The ones quietly struggling won't, and those are the ones where a well-timed outreach, a usage pattern in Customer analytics, or just reading between the lines on a ticket makes the difference.
 
 No two accounts need the same thing. Some need deep ticket involvement, some need strategic time, some just need a catch-up call every quarter.
 

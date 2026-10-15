@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Campfire
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Campfire connector syncs your accounting data from [Campfire](https://www.meetcampfire.com/) into PostHog: general ledger transactions, journal entries, invoices, bills, payments, bank activity, revenue recognition contracts, and company objects like vendors and the chart of accounts. This lets you analyze your financial data alongside your product data.
 

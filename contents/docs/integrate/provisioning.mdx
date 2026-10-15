@@ -124,9 +124,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
     "can_provision_resources": true
   },
   "capabilities": {
-    "account_requests": true,
-    "github_grants": false,
-    "wizard_runs": false
+    "account_requests": true
   },
   "checks": [
     { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
@@ -134,13 +132,13 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
     {
       "name": "jwks",
       "ok": true,
-      "detail": "No jwks_uri, so this client authenticates with PKCE only and cannot use the GitHub grant endpoints"
+      "detail": "No jwks_uri, so this client authenticates with PKCE only"
     }
   ]
 }
 ```
 
-`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call, including the ones PostHog has to enable for you.
+`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call.
 
 Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check.
 
@@ -705,26 +703,15 @@ Each refresh token is single-use. The response includes a new refresh token for 
 
 ### Available scopes
 
-The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. The default set does not include every scope below, so explicitly request the scopes your integration needs. Available scopes:
+The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted – it does not include every available scope, so explicitly request the ones your integration needs.
 
-| Scope | Description |
-|---|---|
-| `customer_journey:read` | Read customer journey data |
-| `query:read` | Execute read-only queries |
-| `session_recording:read` | Read session recordings |
-| `conversation:read` | Read PostHog AI conversations |
-| `conversation:write` | Create and update PostHog AI conversations |
-| `experiment:read` | Read experiments |
-| `feature_flag:read` | Read feature flags |
-| `insight:read` | Read insights |
-| `organization:read` | Read organization details |
-| `person:read` | Read person data |
-| `project:read` | Read project settings |
-| `ticket:read` | Read tickets |
-| `ticket:write` | Create and update tickets |
-| `user:read` | Read user information |
-| `hog_flow:read` | Read Hog flows |
-| `hog_flow:write` | Create and update Hog flows |
+The full, always-current list of grantable scopes is published in the `scopes_supported` field of PostHog's [OAuth server metadata](/docs/api/oauth#supported-scopes), so you can read it straight from the source rather than a list that can fall out of date:
+
+```bash
+curl https://us.posthog.com/.well-known/oauth-authorization-server | jq '.scopes_supported'
+```
+
+Use `eu.posthog.com` for the EU region. The list holds only the scopes an OAuth client can request, so it leaves out some scopes that [personal API keys](/docs/api/personal-api-keys) accept. Common choices for a provisioning integration include `query:read`, `endpoint:read` and `endpoint:write` (read analytics back through [endpoints](/docs/endpoints)), `insight:read`, `person:read`, `project:read`, `project:write`, `session_recording:read`, and `sharing_configuration:write`.
 
 ## What the user gets
 
@@ -808,7 +795,7 @@ At the 1x tier:
 
 So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers, and token exchanges at 20/40/100/200. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
 
-Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x. Polling a GitHub grant's repositories is the one budget that does not scale with tier: 30 burst and 120/hour per grant, because how fast a visitor's repo picker polls has nothing to do with how strongly your app identifies itself.
+Deep links have no budget at the 1x and 2x tiers: a public client gets a 403 `forbidden` from that endpoint. Declare `private_key_jwt` and they run at 150 burst and 600/hour at 5x, or 300 burst and 1,200/hour at 10x.
 
 Limits are per region: US and EU count separately.
 

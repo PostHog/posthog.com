@@ -9,6 +9,12 @@ availability:
 sourceId: Outbrain
 ---
 
+<CalloutBox icon="IconInfo" title="Before you start" type="action">
+
+The Outbrain Amplify API needs account-manager approval before it accepts API calls. If your requests are rejected, contact your Outbrain account manager to enable Amplify API access.
+
+</CalloutBox>
+
 The Outbrain connector syncs your Outbrain Amplify advertising data into PostHog, including marketers, campaigns, budgets, promoted links, and performance reports.
 
 ## Requirements

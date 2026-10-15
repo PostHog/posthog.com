@@ -6,15 +6,11 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: Neo4j
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Neo4j connector syncs nodes and relationships from your Neo4j graph database into PostHog, so you can query graph data alongside your product data using SQL.
 

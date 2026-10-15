@@ -12,9 +12,6 @@ sourceId: PyPI
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The PyPI connector syncs Python package metadata from the [PyPI JSON API](https://docs.pypi.org/api/json/) into the PostHog Data warehouse: project details, release files, and known vulnerabilities for the packages you track.
 

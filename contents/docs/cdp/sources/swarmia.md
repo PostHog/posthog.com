@@ -12,9 +12,6 @@ sourceId: Swarmia
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Swarmia connector syncs your engineering effectiveness reports – pull request metrics, DORA metrics, investment balance, software capitalization, and effort reporting – into the PostHog Data Warehouse, so you can blend engineering metrics with your product, finance, and headcount data.
 

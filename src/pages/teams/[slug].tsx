@@ -140,10 +140,13 @@ type TeamPageProps = {
     params: {
         slug: string
     }
+    pageContext: {
+        slug?: string
+    }
 }
 
 export default function TeamPage(props: TeamPageProps) {
-    const slug = props?.params?.slug || (props?.params as any)?.['*']
+    const slug = props?.params?.slug || (props?.params as any)?.['*'] || props?.pageContext?.slug
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
@@ -955,7 +958,7 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {body && (
                     <>
-                        <h2>Handbook</h2>
+                        {slug !== 'demand-gen' && <h2>Handbook</h2>}
                         <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

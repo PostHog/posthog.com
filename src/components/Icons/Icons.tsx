@@ -4,11 +4,11 @@ const Icon = ({ children }: { children: React.ReactNode }): JSX.Element => (
     <span className="inline-block">{children}</span>
 )
 
-export const Bang = ({ className = '' }: { className?: string }): JSX.Element => (
+export const Bang = ({ className = '', color = '#F1A82C' }: { className?: string; color?: string }): JSX.Element => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 189 139">
         <path
             d="M162.525 126.754L121.278 111.361L111.429 138.448L92.9646 113.213L72.0271 135.989L68.9485 110.748L30.1657 135.369L44.9387 95.9742L19.0835 102.744L36.3224 82.4267L-0.00151825 68.8865L44.937 62.7293L14.1584 25.7854L62.7956 40.5658V0.55072L88.6508 33.7958L97.2666 7.3207L105.27 40.5658L148.983 6.70078L134.823 42.4123L164.989 33.7966L147.138 62.7306L188.998 79.9695L138.514 89.198L162.525 126.754Z"
-            fill="#F1A82C"
+            fill={color}
         />
     </svg>
 )

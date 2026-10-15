@@ -12,10 +12,7 @@ sourceId: PlanetScaleMySQL
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx"
-
-<AlphaRelease />
 
 The PlanetScale connector links your PlanetScale database tables to PostHog, so you can query them alongside your product data. PlanetScale offers both MySQL and Postgres databases, and PostHog has a source for each.
 

@@ -12,9 +12,6 @@ sourceId: Courier
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Courier connector syncs your notification data – messages, audit events, audiences, brands, and tenants – into PostHog, so you can analyze notification delivery and engagement alongside your product data.
 

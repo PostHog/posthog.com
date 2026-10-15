@@ -31,10 +31,10 @@ const catalogSections: {
                 iconColor: 'text-blue',
             },
             {
-                name: 'Managed Warehouse',
+                name: 'Warehouse',
                 description:
                     'Store, query, and join your product and business data in one place without maintaining any infrastructure.',
-                url: '/context-warehouse/managed-warehouse',
+                url: '/context-warehouse/warehouse',
                 Icon: IconDatabase,
                 iconColor: 'text-purple',
             },

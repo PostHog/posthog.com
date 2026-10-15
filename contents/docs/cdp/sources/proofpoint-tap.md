@@ -9,12 +9,9 @@ availability:
 sourceId: ProofpointTap
 ---
 
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Proofpoint TAP (Targeted Attack Protection) connector syncs your email security data – blocked and permitted clicks, blocked and delivered messages – into PostHog, so you can analyze email threat activity, track attack patterns, and correlate security findings with the rest of your data.
 

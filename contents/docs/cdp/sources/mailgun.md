@@ -24,28 +24,36 @@ Once the syncs are complete, you can start using Mailgun data in PostHog.
 
 ## Available tables
 
-| Table           | Description                                                 | Sync method  |
-| --------------- | ----------------------------------------------------------- | ------------ |
-| `domains`       | Sending domains configured in your Mailgun account          | Full refresh |
-| `events`        | Email events such as deliveries, opens, clicks, and bounces | Incremental  |
-| `bounces`       | Bounced email addresses per domain                          | Full refresh |
-| `complaints`    | Spam complaint addresses per domain                         | Full refresh |
-| `unsubscribes`  | Unsubscribed addresses per domain                           | Full refresh |
-| `mailing_lists` | Mailing lists                                               | Full refresh |
-| `tags`          | Tags per domain                                             | Full refresh |
-| `templates`     | Email templates per domain                                  | Full refresh |
+| Table                  | Description                                                                                   | Sync method  |
+| ---------------------- | --------------------------------------------------------------------------------------------- | ------------ |
+| `allowlist`            | Allowlisted email addresses or domains that Mailgun never adds to the bounce list, per domain | Full refresh |
+| `bounces`              | Bounced email addresses per domain                                                            | Full refresh |
+| `complaints`           | Spam complaint addresses per domain                                                           | Full refresh |
+| `domains`              | Sending domains configured in your Mailgun account                                            | Full refresh |
+| `events`               | Email events such as deliveries, opens, clicks, and bounces                                   | Incremental  |
+| `logs`                 | Account-wide message events from the Logs API (accepted, delivered, failed, opened, clicked)  | Incremental  |
+| `mailing_list_members` | Members of mailing lists                                                                      | Full refresh |
+| `mailing_lists`        | Mailing lists                                                                                 | Full refresh |
+| `subaccounts`          | Subaccounts under the Mailgun account                                                         | Full refresh |
+| `tags`                 | Tags per domain                                                                               | Full refresh |
+| `templates`            | Email templates per domain                                                                    | Full refresh |
+| `unsubscribes`         | Unsubscribed addresses per domain                                                             | Full refresh |
 
 **Incremental** tables sync only new records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-- **Incremental sync for events only** – Only the `events` table supports incremental syncing using the `timestamp` field. All other tables use full refresh because those Mailgun API endpoints don't expose a server-side time filter.
+- **Incremental sync for events and logs** – Only the `events` and `logs` tables support incremental syncing using the `timestamp` field. All other tables use full refresh because those Mailgun API endpoints don't expose a server-side time filter.
 
 - **Event retention limits** – Mailgun retains events for a limited period depending on your plan (1 day on free plans, up to 30 days on paid plans). The initial events sync is bounded by your plan's retention window.
 
 - **30-minute event lag** – Events sync with a 30-minute lag to account for Mailgun's eventual consistency. Recent events within this window appear on the next sync.
 
-- **Domain-scoped data** – Most tables (`events`, `bounces`, `complaints`, `unsubscribes`, `tags`, `templates`) are scoped per sending domain. The source automatically enumerates all your domains and syncs data for each one. A `domain` column is added to these tables so records stay unique across domains.
+- **30-day lookback for logs** – The `logs` table reads from the account-wide Logs API with a 30-day lookback window. Like the `events` table, it syncs with a 30-minute lag for consistency.
+
+- **Domain-scoped data** – Most tables (`events`, `bounces`, `complaints`, `unsubscribes`, `allowlist`, `tags`, `templates`) are scoped per sending domain. The source automatically enumerates all your domains and syncs data for each one. A `domain` column is added to these tables so records stay unique across domains.
+
+- **List-scoped data** – The `mailing_list_members` table is scoped per mailing list. A `list_address` column identifies which list each member belongs to.
 
 ## Configuration
 

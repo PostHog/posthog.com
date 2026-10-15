@@ -12,9 +12,6 @@ sourceId: PlatformSh
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Platform.sh connector syncs your Platform.sh (or Upsun) organizations, projects, environments, deploy activity, subscriptions, and organization members into PostHog, so you can analyze your deployments and infrastructure alongside your product data.
 

@@ -12,9 +12,6 @@ sourceId: Shippo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Shippo connector syncs your shipping data – shipments, purchased labels, orders, addresses, parcels, refunds, customs data, and carrier accounts – into the PostHog Data warehouse, so you can analyze fulfillment and delivery alongside your product data.
 

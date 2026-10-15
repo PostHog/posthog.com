@@ -12,9 +12,6 @@ sourceId: Checkly
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Checkly connector syncs your synthetic monitoring data – checks, check groups, alert channels, check statuses, and check results – into PostHog, so you can analyze uptime, performance, and alerting alongside your product data.
 
