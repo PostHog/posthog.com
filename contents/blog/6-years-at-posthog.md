@@ -38,7 +38,9 @@ Here are a few things that were really important to our strategy, but spread far
 - Hitting $100m ARR is fine as a target. But hitting The Hundy has become PostHog lore at this point (355 mentions in Slack and rising), and you see people genuinely asking "How can we help hit the hundy?"
 - We want PostHog to be known for making it easy to reliably capture and use data from your product from a positioning perspective. But Steve Ballmer has made this point much more effectively in GIF and Slackmoji form, and we frequently use him when product teams are thinking about what to build next. Thanks Steve.
 
-![Steve Ballmer gesturing toward the word "DATA"](https://raw.githubusercontent.com/PostHog/pr-assets/215032ecfaa9b88ed295529c45e8ddf69888dfd8/2026/10/4798c85c-2175-4c87-9ced-36928b9a6632.gif)
+<div className="flex justify-center">
+<img src="https://raw.githubusercontent.com/PostHog/pr-assets/215032ecfaa9b88ed295529c45e8ddf69888dfd8/2026/10/4798c85c-2175-4c87-9ced-36928b9a6632.gif" alt="Steve Ballmer gesturing toward the word DATA" />
+</div>
 
 ## Your competition is TikTok, not your competitor's lame blog
 
@@ -46,7 +48,9 @@ When it comes to attention on the internet, you are competing with Shorts of cap
 
 I've found that if what we're doing is not actually funny – aka "corporate try hard" – then it's not good enough. At one point we realized we were getting too cutesy ("ooh a hedgehog"), which isn't interesting enough for people outside PostHog, even if we think it's cool, so we dialed it down.
 
-![PostHog tweet asking about a hedgehog desktop background](https://raw.githubusercontent.com/PostHog/pr-assets/215032ecfaa9b88ed295529c45e8ddf69888dfd8/2026/10/f168ee22-4238-4e2b-83cc-6d16cb91bc18.png)
+<div className="flex justify-center">
+<img src="https://raw.githubusercontent.com/PostHog/pr-assets/215032ecfaa9b88ed295529c45e8ddf69888dfd8/2026/10/f168ee22-4238-4e2b-83cc-6d16cb91bc18.png" alt="PostHog tweet asking about a hedgehog desktop background" />
+</div>
 
 This is why we encourage our team to be rogue/sarcastic/meme-y/unhinged/weird. Our competitors are (i) more defensive and self-interested in their approach (focused on optimizing revenue growth), and (ii) more boring. We believe that if we have fun, we'll stick it out longer and win in the long term.
 
