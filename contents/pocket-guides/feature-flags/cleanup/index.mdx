@@ -50,7 +50,9 @@ pocketGuideCta:
 
 # Cleaning up
 
-Flags come in two kinds. Release flags and experiment flags are temporary: they exist to get a change out safely or to measure it, and once that's done they're debt. Operational flags are permanent on purpose: a kill switch for an expensive feature under load, a disaster recovery switch, or an entitlement that decides which plan gets a feature. Cleanup is for the first kind.
+Flags come in two kinds. Release flags and experiment flags are temporary: they exist to get a change out safely or to measure it, and once that's done they're debt. Operational flags are permanent on purpose: a kill switch for an expensive feature under load, a disaster recovery switch, or an entitlement that decides which plan gets a feature.
+
+Cleanup is for the first kind.
 
 A temporary flag you leave behind is a code path nobody tests anymore, and it can cost money too. The web SDK evaluates every active flag available to the browser on load, so a request can bill for a flag your code stopped checking months ago.
 

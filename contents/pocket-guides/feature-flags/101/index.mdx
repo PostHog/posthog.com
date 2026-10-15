@@ -10,11 +10,20 @@ section: Instrument
 
 # Feature Flags 101
 
-A flag is a question your code asks PostHog: should this person get this feature? PostHog answers `true` or `false`, or, for a multivariate flag, a variant such as `control` or `test`. You change the flag's configuration in PostHog, and the code stays the same.
+A flag is a question your code asks PostHog: should this person get this feature? PostHog answers depending on the type of flag:
+
+- Boolean flags: `true` or `false`
+- Multivariate flags: a variant, such as `control` or `test`
+
+Any flag can also carry a JSON payload, which you read with `getFeatureFlagPayload()`. See [Payloads](/docs/feature-flags/learn/payloads).
+
+You change the flag's configuration in PostHog, and the code stays the same.
 
 ## Deploy is not release
 
-Without a flag, shipping a change and giving it to users are the same event: the deploy lands, and everyone gets the new code at once. A flag splits them apart. You deploy `new-checkout` turned off, and the new code sits in production doing nothing. Releasing it is a change in PostHog, and so is taking it back: you decide who gets it, how many, and for how long.
+Deployed code is expensive to revert. You can separate shipping that code from giving users access to it.
+
+A feature flag splits deployment and release. You deploy `new-checkout` turned off, and the new code sits in production doing nothing. Releasing it is a change in PostHog, and so is taking it back: you decide who gets it, how many, and for how long.
 
 The check itself is a few lines. On the server, it runs once at the top of the request, with the signed-in user's ID:
 
@@ -54,6 +63,8 @@ In the browser, flags load asynchronously, and until they arrive `getFeatureFlag
 ```js
 const showNewCheckout = posthog.getFeatureFlag(NEW_CHECKOUT_FLAG) ?? false
 ```
+
+Whatever the flag returns, or if it returns nothing, your app must keep working. A broken flag must never take down production.
 
 You can also wait for flags with `posthog.onFeatureFlags()`, or send the server's answer along with the page so the gap never opens, which [the next page](/docs/feature-flags/learn/server-and-client) covers.
 
