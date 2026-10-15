@@ -18,7 +18,7 @@ import WizardHint from 'components/WizardHint'
 Prefer the preconfigured variants where one exists:
 
 - `components/WarehouseWizardHint` — data warehouse sources (`npx @posthog/wizard warehouse`). Rendered by `templates/DataWarehouseSource.tsx`, `templates/Handbook.tsx` (data warehouse source paths), and `pages/context-warehouse/sources.tsx`.
-- `components/AIObservabilityWizardHint` — AI observability SDK installation (`npx @posthog/wizard ai-observability`). Rendered by `templates/Handbook.tsx` on `/docs/ai-observability/installation/*` pages.
+- `components/AIObservabilityWizardHint` — AI observability SDK installation (`npx @posthog/wizard ai-observability`). Rendered by `templates/Handbook.tsx` on `/docs/ai-observability/installation/*` pages, and inside the Claude SDK tab of the Anthropic page.
 
 ## Props
 

@@ -185,7 +185,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # reading order, but not one of the "N guides" the cover prints.
       isPrimer: Boolean
       # Groups a book's contents into named sections (e.g. "Ask a quick question" vs
-      # "Long-term modeling"). Pages without one print in a single flat list, as before.
+      # "Data modeling"). Pages without one print in a single flat list, as before.
       section: String
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]

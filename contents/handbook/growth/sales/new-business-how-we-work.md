@@ -59,6 +59,7 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
   - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
     - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
  - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+ - Only accounts that you [own in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics) count toward quota. Your assignment comes from Salesforce automatically, but the `AE Managed` tag does not. Add the `AE Managed` tag in Customer Analytics once you've aligned with team leadership.
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
