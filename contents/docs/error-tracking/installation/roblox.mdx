@@ -17,7 +17,7 @@ Via Wally, add the dependency to your `wally.toml`, run `wally install`, and map
 
 ```toml
 [dependencies]
-PostHog = "posthog/posthog-roblox@0.1.0"
+PostHog = "posthog/posthog-roblox@0.2.0"
 ```
 
 You can also download the latest `posthog-roblox.rbxm` from the [releases page](https://github.com/PostHog/posthog-roblox/releases) and insert it into `ReplicatedStorage` in Studio. Either way you should end up with `ReplicatedStorage > PostHog`.
@@ -35,7 +35,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local PostHog = require(ReplicatedStorage:WaitForChild("PostHog"))
 
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     host = "<ph_client_api_host>",
     captureErrors = true,
     errorDebounceSeconds = 1,
@@ -66,6 +66,16 @@ if not ok then
 end
 ```
 
+To set a custom exception type, pass a table instead of a message:
+
+```lua
+PostHog:CaptureException(player, {
+    type = "SaveError",
+    message = tostring(err),
+    trace = debug.traceback(),
+})
+```
+
 <CalloutBox icon="IconInfo" title="Identified users" type="fyi">
 
 Server events are already attributed to the player you pass as the subject (by their `UserId`), so exceptions are linked to known users in PostHog automatically.
@@ -85,7 +95,7 @@ To disable automatic exception capture:
 
 ```lua
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     captureErrors = false,
 })
 ```

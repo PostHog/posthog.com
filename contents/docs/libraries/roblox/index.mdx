@@ -70,7 +70,7 @@ By default, player events create person profiles and server-scoped events (those
 
 ```lua
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     personProfiles = "identified_only", -- default
 })
 ```
@@ -178,7 +178,7 @@ PostHog:CaptureException("Something went wrong", debug.traceback())
 
 ```lua
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     captureErrors = true,        -- Enable automatic capture (default: true)
     errorDebounceSeconds = 1,    -- Minimum gap between auto-captured server errors (default: 1)
 })
@@ -204,7 +204,7 @@ To turn autocapture off:
 
 ```lua
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     captureLifecycleEvents = false,
 })
 ```
@@ -242,7 +242,7 @@ PostHog:Init()
 PostHog:Capture("button_clicked", { button = "play" })
 ```
 
-The client is treated as untrusted. The server validates every relayed message, caps the number of properties, rate-limits per player, blocks reserved (`$`-prefixed) event names, and always attributes events to the sender, so a client can never spoof another player or the server. Set `enableClientRelay = false` during `Init` if you only capture on the server and want no client surface at all.
+The client is treated as untrusted. The server validates every relayed message, caps the number of properties, rate-limits per player, blocks reserved (`$`-prefixed) event names, and always attributes events to the sender, so a client can never spoof another player or the server. Set `allowClientEvents = false` during `Init` if you only capture on the server and want no client surface at all.
 
 ## Opt out of data capture
 
@@ -255,13 +255,30 @@ PostHog:OptOut(player)
 PostHog:OptIn(player)
 ```
 
+## Modify or drop events
+
+To change or drop events before they're sent, pass a `beforeSend` function to `Init`. It runs on every event after the SDK adds its own properties. Return the event to send it, or `nil` to drop it. If `beforeSend` errors, the event is dropped.
+
+```lua
+PostHog:Init({
+    projectToken = "<ph_project_token>",
+    beforeSend = function(event)
+        if event.event == "player_idle" then
+            return nil
+        end
+        event.properties.email = nil
+        return event
+    end,
+})
+```
+
 ## Debug mode
 
 If you're not seeing the events or feature flags you expect, raise the log level to see what the SDK is doing in the output:
 
 ```lua
 PostHog:Init({
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     host = "<ph_client_api_host>",
     logLevel = "debug",
 })
@@ -298,4 +315,4 @@ PostHog:Shutdown()
 
 ### Client events not arriving
 
-Client events are relayed to the server, so the server SDK must be initialized with `enableClientRelay = true` (the default). If the client logs that the relay `RemoteEvent` wasn't found, the server SDK isn't running.
+Client events are relayed to the server, so the server SDK must be initialized with `allowClientEvents = true` (the default). If the client logs that the relay `RemoteEvent` wasn't found, the server SDK isn't running.
