@@ -199,8 +199,7 @@ const PricingPage = ({ elapsed }: { elapsed: number }) => (
                     Current plan
                 </div>
             </div>
-            <div className="relative overflow-hidden rounded-[1.8cqw] bg-gradient-to-br from-[#4F46E5] to-[#8B5CF6] p-[2.4cqw] text-white shadow-[0_2cqw_4cqw_-2cqw_rgba(79,70,229,0.7)]">
-                <div className="pointer-events-none absolute -right-[20%] -top-[40%] size-[80%] rounded-full bg-white/20 blur-[3cqw]" />
+            <div className="relative overflow-hidden rounded-[1.8cqw] bg-gradient-to-br from-[var(--acme)] to-[color-mix(in_srgb,var(--acme)_75%,black)] p-[2.4cqw] text-white shadow-[0_2cqw_4cqw_-2cqw_color-mix(in_srgb,var(--acme)_70%,transparent)]">
                 <div className="relative text-[2.21cqw] font-semibold text-white/80">Pro</div>
                 <div className="relative mt-[0.6cqw] text-[5.2cqw] font-bold tracking-tight">
                     $49<span className="text-[2.34cqw] font-medium text-white/70">/mo</span>
@@ -208,7 +207,7 @@ const PricingPage = ({ elapsed }: { elapsed: number }) => (
                 <motion.div
                     animate={{ scale: isPressed(elapsed, UPGRADE_CLICK_AT) ? 0.93 : 1 }}
                     transition={PRESS_SPRING}
-                    className="relative mt-[2cqw] flex items-center justify-center gap-[1cqw] rounded-full bg-white py-[1cqw] text-[2.08cqw] font-bold text-[#4F46E5]"
+                    className="relative mt-[2cqw] flex items-center justify-center gap-[1cqw] rounded-full bg-white py-[1cqw] text-[2.08cqw] font-bold text-[var(--acme)]"
                 >
                     {elapsed >= UPGRADE_CLICK_AT ? (
                         <>
@@ -252,10 +251,12 @@ const CheckoutPage = ({ elapsed }: { elapsed: number }) => {
                 <div className="mt-[3cqw] text-[1.82cqw] font-semibold text-secondary">Card number</div>
                 <div
                     className={`mt-[0.8cqw] flex h-[5cqw] items-center gap-[1.2cqw] rounded-[1.2cqw] bg-white px-[1.6cqw] text-[2.34cqw] tabular-nums shadow-[0_0.3cqw_1cqw_-0.4cqw_rgba(0,0,0,0.12)] transition-shadow duration-200 dark:bg-white/5 ${
-                        cardFocused ? 'ring-[0.35cqw] ring-[#4F46E5]/60' : 'ring-1 ring-black/10 dark:ring-white/15'
+                        cardFocused
+                            ? 'ring-[0.35cqw] ring-[color-mix(in_srgb,var(--acme)_60%,transparent)]'
+                            : 'ring-1 ring-black/10 dark:ring-white/15'
                     }`}
                 >
-                    <span className="h-[2cqw] w-[3cqw] shrink-0 rounded-[0.4cqw] bg-gradient-to-br from-[#8C85FF] to-[#5146F0]" />
+                    <span className="h-[2cqw] w-[3cqw] shrink-0 rounded-[0.4cqw] bg-gradient-to-br from-[color-mix(in_srgb,var(--acme)_65%,white)] to-[var(--acme)]" />
                     {typed(CARD_NUMBER, 4500, elapsed)}
                     {elapsed > 4300 && elapsed < 6000 && <span className="h-[2.4cqw] w-px animate-pulse bg-current" />}
                 </div>
@@ -279,7 +280,7 @@ const CheckoutPage = ({ elapsed }: { elapsed: number }) => {
                         }
                         transition={{ duration: isRageClick ? 0.16 : 0.22, ease: 'easeOut' }}
                         className={`flex items-center justify-center gap-[1cqw] rounded-[1.2cqw] py-[1.4cqw] text-[2.34cqw] font-semibold text-white transition-colors duration-200 ${
-                            processing ? 'bg-[#4F46E5]/70' : 'bg-[#4F46E5]'
+                            processing ? 'bg-[color-mix(in_srgb,var(--acme)_70%,transparent)]' : 'bg-[var(--acme)]'
                         }`}
                     >
                         {processing ? (
@@ -329,10 +330,10 @@ const SupportChat = ({ elapsed }: { elapsed: number }) => {
                     exit={{ opacity: 0 }}
                     transition={IOS_SPRING}
                     style={{ transformOrigin: 'bottom right' }}
-                    className="absolute bottom-[14%] right-[4%] flex w-[34%] flex-col gap-[1cqw] rounded-[1.8cqw] bg-white p-[1.6cqw] text-[#1B1A3A] shadow-[0_2cqw_5cqw_-1cqw_rgba(0,0,0,0.3)] ring-1 ring-black/5 dark:bg-[#24243F] dark:text-[#ECEBFF] dark:ring-white/10"
+                    className="absolute bottom-[14%] right-[4%] flex w-[34%] flex-col gap-[1cqw] rounded-[1.8cqw] bg-white p-[1.6cqw] text-[color-mix(in_srgb,var(--acme)_18%,#111)] shadow-[0_2cqw_5cqw_-1cqw_rgba(0,0,0,0.3)] ring-1 ring-black/5 dark:bg-[color-mix(in_srgb,var(--acme)_16%,#1b1b1f)] dark:text-[color-mix(in_srgb,var(--acme)_8%,white)] dark:ring-white/10"
                 >
                     <div className="text-[1.95cqw] font-bold">Chat with Acme</div>
-                    <div className="w-fit max-w-[85%] rounded-[1.4cqw] rounded-bl-[0.3cqw] bg-[#ECEBFB] px-[1.4cqw] py-[0.8cqw] text-[1.8cqw] dark:bg-white/10">
+                    <div className="w-fit max-w-[85%] rounded-[1.4cqw] rounded-bl-[0.3cqw] bg-[color-mix(in_srgb,var(--acme)_10%,white)] px-[1.4cqw] py-[0.8cqw] text-[1.8cqw] dark:bg-white/10">
                         Hi Jo! How can we help?
                     </div>
                     <AnimatePresence>
@@ -342,7 +343,7 @@ const SupportChat = ({ elapsed }: { elapsed: number }) => {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 transition={IOS_SPRING}
                                 style={{ transformOrigin: 'bottom right' }}
-                                className="ml-auto w-fit max-w-[85%] rounded-[1.4cqw] rounded-br-[0.3cqw] bg-[#4F46E5] px-[1.4cqw] py-[0.8cqw] text-[1.8cqw] text-white"
+                                className="ml-auto w-fit max-w-[85%] rounded-[1.4cqw] rounded-br-[0.3cqw] bg-[var(--acme)] px-[1.4cqw] py-[0.8cqw] text-[1.8cqw] text-white"
                             >
                                 {CHAT_MESSAGE}
                             </motion.div>
@@ -350,7 +351,7 @@ const SupportChat = ({ elapsed }: { elapsed: number }) => {
                     </AnimatePresence>
                     <div
                         className={`flex h-[5cqw] items-center gap-[0.8cqw] rounded-full border pl-[1.4cqw] pr-[0.5cqw] transition-colors ${
-                            focused ? 'border-[#4F46E5]' : 'border-black/15 dark:border-white/20'
+                            focused ? 'border-[var(--acme)]' : 'border-black/15 dark:border-white/20'
                         }`}
                     >
                         <span className="flex-1 truncate text-[1.8cqw]">
@@ -362,7 +363,7 @@ const SupportChat = ({ elapsed }: { elapsed: number }) => {
                         <motion.span
                             animate={{ scale: sending ? 0.85 : 1, opacity: draft || sending ? 1 : 0.4 }}
                             transition={{ type: 'spring', stiffness: 600, damping: 20 }}
-                            className="flex size-[4cqw] shrink-0 items-center justify-center rounded-full bg-[#4F46E5] text-white"
+                            className="flex size-[4cqw] shrink-0 items-center justify-center rounded-full bg-[var(--acme)] text-white"
                         >
                             <SendIcon />
                         </motion.span>
@@ -380,7 +381,7 @@ export const ReplayScreen = ({ elapsed }: { elapsed: number }) => {
     const onCheckout = elapsed >= PAGE_CHANGE_AT
 
     return (
-        <div className="@container relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-b from-[#F5F5FF] to-[#E8E9FB] text-[#1B1A3A] dark:from-[#1C1C38] dark:to-[#131329] dark:text-[#ECEBFF]">
+        <div className="@container relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-b from-[color-mix(in_srgb,var(--acme)_4%,white)] to-[color-mix(in_srgb,var(--acme)_10%,white)] text-[color-mix(in_srgb,var(--acme)_18%,#111)] dark:from-[color-mix(in_srgb,var(--acme)_16%,#141418)] dark:to-[color-mix(in_srgb,var(--acme)_10%,#111114)] dark:text-[color-mix(in_srgb,var(--acme)_8%,white)]">
             <AnimatePresence initial={false}>
                 <motion.div
                     key={onCheckout ? 'checkout' : 'pricing'}
@@ -396,7 +397,7 @@ export const ReplayScreen = ({ elapsed }: { elapsed: number }) => {
             <motion.div
                 animate={{ scale: isPressed(elapsed, HELP_CLICK_AT) ? 0.85 : 1 }}
                 transition={PRESS_SPRING}
-                className="absolute bottom-[4%] right-[3%] flex size-[5cqw] items-center justify-center rounded-full bg-[#4F46E5] text-[2.6cqw] font-bold text-white shadow-[0_1cqw_2cqw_-0.5cqw_rgba(79,70,229,0.6)]"
+                className="absolute bottom-[4%] right-[3%] flex size-[5cqw] items-center justify-center rounded-full bg-[var(--acme)] text-[2.6cqw] font-bold text-white shadow-[0_1cqw_2cqw_-0.5cqw_color-mix(in_srgb,var(--acme)_60%,transparent)]"
             >
                 ?
             </motion.div>
@@ -453,16 +454,26 @@ const NOISE_SVG =
     "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0 0 0 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")"
 
 const WINDOW_TEXTURE: React.CSSProperties = {
-    backgroundImage: `${NOISE_SVG}, linear-gradient(160deg, rgba(124,108,242,0.10), rgba(124,108,242,0.04))`,
+    backgroundImage: `${NOISE_SVG}, linear-gradient(160deg, color-mix(in srgb, var(--acme) 10%, transparent), color-mix(in srgb, var(--acme) 4%, transparent))`,
 }
 
-export const SessionWindow = ({ elapsed, className }: { elapsed: number; className?: string }) => (
+export const DEFAULT_ACME_COLOR = '#565D70'
+
+export const SessionWindow = ({
+    elapsed,
+    accent = DEFAULT_ACME_COLOR,
+    className,
+}: {
+    elapsed: number
+    accent?: string
+    className?: string
+}) => (
     <div
         className={cn(
-            'flex flex-col overflow-hidden rounded-lg border border-[#7C6CF2]/25 bg-[#F6F5FA] shadow-md dark:border-[#9D90FF]/25 dark:bg-[#2A2640]',
+            'flex flex-col overflow-hidden rounded-lg border border-[color-mix(in_srgb,var(--acme)_25%,transparent)] bg-[color-mix(in_srgb,var(--acme)_4%,white)] shadow-md dark:border-[color-mix(in_srgb,var(--acme)_30%,transparent)] dark:bg-[color-mix(in_srgb,var(--acme)_18%,#1d1d22)]',
             className
         )}
-        style={WINDOW_TEXTURE}
+        style={{ ...WINDOW_TEXTURE, '--acme': accent } as React.CSSProperties}
     >
         <div className="flex items-center gap-1.5 px-2 py-1">
             <IconRewindPlay className="size-4 text-yellow" />
