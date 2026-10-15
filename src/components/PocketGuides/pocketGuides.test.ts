@@ -38,7 +38,7 @@ describe('pocket guide pages', () => {
     })
 
     test('write a lone code block or table as Markdown, not inside a figure', () => {
-        const volumesPredatingTheRule = ['context-warehouse']
+        const volumesPredatingTheRule = ['data-stack']
         const figureWrappingOnlyMarkdown = /<\w+Figure\b[^>]*>\s*(```[\s\S]*?```|(?:\|[^\n]*\n\s*)+)\s*<\/\w+Figure>/
         const pagesWithMarkdownFigures = guidePages
             .filter((page) => !volumesPredatingTheRule.includes(path.relative(guidesDir, page).split(path.sep)[0]))
