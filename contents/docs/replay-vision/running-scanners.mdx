@@ -4,7 +4,7 @@ title: Running scanners
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-There are three ways a scanner produces observations: automatically in the background as new recordings come in, on demand against recordings you pick, or as a backfill over a past date range. All three produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered. The scanner's **Observations** tab shows which one triggered each scan: **Schedule**, **On demand**, **Retry**, or **Backfill**.
+There are three ways a scanner produces observations: automatically in the background as new recordings come in, on demand against recordings you pick, or as a backfill over a past date range. A [workflow step](#from-a-workflow) can also scan the session behind an event. All three produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered. The scanner's **Observations** tab shows which one triggered each scan: **Schedule**, **On demand**, **Retry**, or **Backfill**.
 
 ## Automatically on matching sessions
 
@@ -87,6 +87,12 @@ On-demand scans:
 - Are attributed to the user who triggered them, so you can tell a person's spot-check apart from the background sweep.
 
 When a batch can't start every scan, PostHog tells you why: too many scans are already running, your organization's credits for the billing period are used up, or the scanner reached its own credit limit. Wait for running scans to finish, or see [quota and limits](/docs/replay-vision/quota-and-limits).
+
+### From a workflow
+
+The [Replay Vision workflow step](/docs/workflows/replay-vision) scans the session behind the event that started a workflow, and hands the answer to the next steps. It can use a saved scanner, or ask its own question, category, score, or summary.
+
+A saved scanner's workflow scans are on-demand scans: they show as **On demand** on its **Observations** tab and skip its filters and sampling. Questions set up in the step itself don't appear on any scanner. Workflows have their own daily scan limits on top of your credits. See [limits and credits](/docs/workflows/replay-vision#limits-and-credits).
 
 ## Backfill a date range
 

@@ -48,6 +48,10 @@ A scanner stops when the credits it has left cannot pay for one more observation
 
 A scanner-level limit is a cap on one scanner, not a reserved share of the organization budget. The organization budget still applies on top of it, so a scanner below its own limit stops when the organization budget is exhausted.
 
+## Workflow scan limits
+
+[Workflows](/docs/workflows/replay-vision) can start scans from a trigger, which can fire far more often than you'd scan by hand. So each workflow can start 100 scans in a rolling 24 hours, and all workflows in a project 500, before the credit budget comes into it. Change both in [**Settings > Workflows > Replay Vision scan limits**](https://app.posthog.com/settings/project-workflows#workflows-replay-vision-limits), up to 500 per workflow and 2,500 per project, or set one to zero to pause workflow scans. A scan past a limit is skipped and costs nothing.
+
 ## What counts against the budget
 
 | Observation outcome | Counts against budget?                                 |
@@ -73,6 +77,7 @@ The same check applies however a scan starts:
 - **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until budget frees up. The spend card on the **Scanners** tab says **Spend limit reached** (or **Free credits used up** on the free plan) with a link to raise the limit, and the **Usage** tab says scanning is paused.
 - **On-demand triggers** – scanning from the player and on-demand MCP tools such as `vision-scanners-scan-session` return a `402 Payment Required` response.
 - **Backfills** – a running backfill pauses when the budget runs out, and can be resumed once there's room again.
+- **Workflow steps** – a [Replay Vision workflow step](/docs/workflows/replay-vision) returns `skipped` with a warning that the credits are used up, and the workflow continues.
 
 Before you get there, Replay Vision warns you when enabled scanners are on track to hit the limit before the period ends, with the date it expects them to.
 
