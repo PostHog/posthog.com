@@ -27,7 +27,7 @@ The [`monitoring-a-wizard-release`](https://github.com/PostHog/wizard/tree/main/
 
 ## Test the release candidate
 
-Release-please keeps each release PR up to date with everything merged since the last release. That PR is the release candidate. Run every check below on it before you merge it. The [release checklist](https://github.com/PostHog/wizard/blob/main/docs/releasing.md) in the wizard repo has every command and option.
+Release-please keeps each release PR up to date with everything merged since the last release. That PR is the release candidate. Run every check below on it before you merge it.
 
 <Steps>
 
@@ -56,7 +56,7 @@ Comment on the release PR:
 
 `sample` runs the first app for each framework, about 45 apps. To pair the wizard with an unreleased context mill branch, add `context-mill:<branch>`. On a context mill release PR, the same comment takes `wizard:<branch>` instead.
 
-The bot posts a results table and updates it as each app finishes. Apps that change code score out of 5, and warehouse and feature flag apps show pass or fail. Look for 4 or 5, or a pass, on everything outside the [known broken evals](https://github.com/PostHog/wizard/blob/main/docs/releasing.md#known-broken-evals).
+The bot posts a results table and updates it as each app finishes. Apps that change code score out of 5, and warehouse and feature flag apps show pass or fail. Look for 4 or 5, or a pass, on everything outside the [known broken evals](#known-broken-evals).
 
 </Step>
 
@@ -88,7 +88,22 @@ Merge the release PR. When the publish workflow finishes, run `npx -y @posthog/w
 
 ## Known broken evals
 
-Some wizard CI apps fail today for reasons unrelated to most releases, like warehouse sources that never get created and programs that can't run in CI mode. The current list lives in the [wizard repo](https://github.com/PostHog/wizard/blob/main/docs/releasing.md#known-broken-evals). Update it in the same PR that fixes or breaks an eval.
+These wizard CI apps fail today for reasons unrelated to most releases. A failure here doesn't block a release unless your change touches it. Last checked on 2026-10-13. Update this list when you fix or break an eval.
+
+| App | Why it fails |
+|---|---|
+| `warehouse/multi-source-next` | Postgres is not detected, so the source is never created |
+| `warehouse/zero-source` | The abort message changed, and the test still expects the old one |
+| `warehouse-seeded/next-stripe`, `warehouse-seeded/next-stripe-declined` | The Stripe source is never created |
+| `warehouse/stripe-node` | Flaky, it failed twice in scheduled runs and then passed |
+| `feature-flags/django/django3-saas`, `feature-flags/next-js/15-app-router-saas` | The flags API returns 403, so no report is written |
+| `audit/*` | Audit is read-only, so there's no diff and no PR to open |
+| `migrate/triplex` | Wizard CI never passes the required `--product` flag |
+| `self-driving/*` | Self-driving can't run in CI mode |
+| `basic-integration/flutter/localsend` | The app is a git submodule, so nothing gets committed |
+| `mcp-stub-drift` job | A stubbed MCP tool is missing a scope |
+
+Snapshot CI has gaps too. The test key lacks the scopes for warehouse sources, replay vision, self-driving, and audit, so the sweep passes those programs without running them. A failed run can also hang or mislabel frames.
 
 ## Sample prompt for a snapshot sweep
 
@@ -129,5 +144,4 @@ Post:
 
 ## Go deeper
 
-- [Release checklist](https://github.com/PostHog/wizard/blob/main/docs/releasing.md), with every command and the known broken evals
 - [Handling wizard incidents](/handbook/wizard-and-docs/wizard-incidents), to undo a release
