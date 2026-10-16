@@ -122,6 +122,14 @@ Before the call:
 - **Leave room for Q&A on the product.**
 - **Plan next steps and an ideal cadence.**
 
+### Build a tailored demo
+
+A generic walkthrough is forgettable. A demo built from your account audit — their funnel, their events, the business questions their insight titles reveal — shows you did your homework and gets the customer to "I didn't know PostHog could do that" fast. Going the extra mile here is encouraged: an incredible custom demo is one of the strongest first impressions you can make.
+
+- **Use their own data first.** Build the dashboard or insight that answers a question they clearly care about, in their project, before the call. Nothing lands harder than their own numbers. This is [show, don't tell](/handbook/cs-and-onboarding/customer-success#principles) in practice.
+- **For products they haven't adopted,** use [DemoHog](/handbook/growth/sales/sandboxes) to generate a sandbox tailored to their product — their personas, events, and journeys in a product they haven't tried yet beats a generic ecommerce demo.
+- **Make it a springboard, not a script.** Open with the wow moment, then hand the wheel to the customer — see [customer-led calls](/handbook/cs-and-onboarding/customer-led-calls) for why the rest of the call goes better when they drive.
+
 ### Question bank
 
 Don't interrogate the customer — pick a few that are relevant.
