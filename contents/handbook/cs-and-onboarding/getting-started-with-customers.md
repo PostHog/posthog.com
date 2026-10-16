@@ -89,6 +89,10 @@ In Vitally, an account's Active conversations tab is a good place to see how tea
 
 Follow up after 2-3 business days. Try engineering, product, or data folks. Emphasize that you're not selling — you want to understand their use case and help optimize their PostHog integration. Reach out to users directly, avoid large group messages.
 
+Try a different channel too. If Slack is quiet, email the same people. Some teams barely look at shared channels.
+
+Quiet isn't the same as disengaged. Some customers never reply but act on everything you send: the stale flag gets cleaned up, the setting changes, a new insight appears. Check for that (replays of their team in PostHog help) before treating silence as a problem. If they're acting on your tips, keep them coming (see [steady drumbeat of usage-specific tips](/handbook/cs-and-onboarding/engaging-unengaged-customers#steady-drumbeat-of-usage-specific-tips)) and don't push for a call.
+
 ### Connecting with a champion
 
 Once you've got someone responsive, aim to build a 1-1 relationship — ideally with someone in engineering, product, or data.
@@ -102,6 +106,8 @@ Acknowledge their time, make clear you're not pitching, and ask for a 15-minute 
 A quick discovery call is one of the most effective ways to learn about a customer. It beats a month of back-and-forth in Slack.
 
 Typically 15-30 minutes. Aim: rapport, pain points, and a sense of where you can help.
+
+If they'd rather stay async, that's fine too. Run discovery as a Slack thread instead: share what you've already learned from their data, then ask three or four questions from the bank below so they're only filling in the gaps.
 
 ### Goals to clarify
 
