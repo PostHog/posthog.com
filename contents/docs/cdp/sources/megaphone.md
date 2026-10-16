@@ -9,9 +9,8 @@ sourceId: Megaphone
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 
-<AlphaRelease />
+> **Alpha:** This source is in alpha. If you run into issues, reach out to [our support team](/docs/support).
 
 The Megaphone connector syncs your podcast networks, podcasts and episodes into PostHog. Use it to join your episode catalog with product and marketing data.
 
