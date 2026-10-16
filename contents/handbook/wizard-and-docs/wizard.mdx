@@ -61,6 +61,50 @@ The wizard has a shared ownership model. The <SmallTeam slug="wizard-and-docs" /
 | Run any skill with `wizard skill` | <SmallTeam slug="wizard-and-docs" /> | `agent-skill` |
 | Feature flags, for now | <SmallTeam slug="wizard-and-docs" /> | `feature-flags` |
 
+```mermaid
+%%{init: {"block": {"padding": 16}}}%%
+block-beta
+  columns 4
+  surfBand["Wizard surfaces · owner per surface"]:4
+  tui["TUI wizard<br/>team-wizard-docs"]
+  headless["Headless CLI wizard<br/>team-growth"]
+  cloud["Cloud in-app wizard<br/>team-growth"]
+  mcpw["MCP wizard<br/>team-context-mcp · coming soon"]
+  progBand["Wizard programs · owner per program"]:4
+  integ["PostHog integration<br/>team-wizard-docs"]
+  audit["Audit<br/>team-fde"]
+  eaudit["Events audit<br/>team-fde"]
+  askill["Agent skill<br/>team-wizard-docs"]
+  et["Error tracking<br/>team-error-tracking"]
+  sm["Source maps upload<br/>team-error-tracking"]
+  ff["Feature flags<br/>team-wizard-docs · for now"]
+  mig["Migration<br/>team-fde"]
+  aio["AI observability<br/>team-ai-observability"]
+  mcpa["MCP analytics<br/>mcp-analytics"]
+  met["Metrics<br/>team-apm"]
+  rv["Replay vision<br/>team-replay"]
+  rev["Revenue analytics<br/>team-web-analytics"]
+  wad["Web analytics doctor<br/>team-web-analytics"]
+  sd["Self-driving<br/>team-self-driving"]
+  wh["Warehouse source<br/>team-warehouse-sources"]
+  platBand["Wizard platform · owner team-wizard-docs"]:4
+  agent["agent"]
+  tuip["TUI"]
+  cli["CLI"]
+  svc["services"]
+
+  classDef wd fill:#3b82f626,stroke:#3b82f6,stroke-width:2px
+  classDef pt fill:#22c55e26,stroke:#22c55e,stroke-width:2px
+  classDef soon fill:none,stroke:#9ca3af,stroke-dasharray:4 3
+  classDef band fill:#9ca3af40,stroke:none
+  class tui,integ,askill,ff,agent,tuip,cli,svc wd
+  class headless,cloud,audit,eaudit,et,sm,mig,aio,mcpa,met,rv,rev,wad,sd,wh pt
+  class mcpw soon
+  class surfBand,progBand,platBand band
+```
+
+Blue is the <SmallTeam slug="wizard-and-docs" />, green is another team, and dashed is coming soon. Surfaces run programs, and programs run on the platform.
+
 New top-level command names need sign-off from the <SmallTeam slug="wizard-and-docs" />, because a public command is hard to remove.
 
 Programs live in [`src/programs/`](https://github.com/PostHog/wizard/tree/main/src/programs). [`CODEOWNERS`](https://github.com/PostHog/wizard/blob/main/.github/CODEOWNERS) requests reviews from the owner. For who owns each skill, see the [context mill](/handbook/wizard-and-docs/context-mill#who-owns-which-skill).
