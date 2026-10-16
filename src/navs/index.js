@@ -8303,6 +8303,10 @@ export const docsMenu = {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
                         },
+                        {
+                            name: 'Watch sessions with Replay Vision',
+                            url: '/docs/workflows/replay-vision',
+                        },
                     ],
                 },
                 {
