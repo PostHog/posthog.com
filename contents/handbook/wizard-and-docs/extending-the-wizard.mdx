@@ -117,7 +117,6 @@ These PRs predate the current layout. The wizard command now goes in `src/cli/co
 
 - **Unit test in the wizard repo.** Add a case to [`programs-cli.test.ts`](https://github.com/PostHog/wizard/blob/main/src/cli/__tests__/programs-cli.test.ts) that checks the command registers in the right shape and runs the right skill.
 - **Test app in the workbench.** Add an app under [`apps/`](https://github.com/PostHog/wizard-workbench/tree/main/apps) and an entry in `apps/manifest.json`, so CI can run the real agent against it. Add one app per distinct path the skill handles.
-
 - **Evals.** Wizard CI grades each run against a [rubric](https://github.com/PostHog/wizard-workbench/tree/main/services/pr-evaluator/prompts) and scores it out of 5. The workbench apps are working examples of what good output looks like.
 
 See [Developing the wizard](/handbook/wizard-and-docs/developing-the-wizard) for how to run them.
