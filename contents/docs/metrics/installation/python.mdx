@@ -11,6 +11,8 @@ import MetricsNextSteps from './_snippets/metrics-next-steps.mdx'
 
 The [posthog-python](/docs/libraries/python) SDK includes the `posthog.metrics` API, so you can record metrics with the same client you use for events and feature flags.
 
+To collect process CPU and memory automatically, use the [OpenTelemetry and psutil example below](#collect-process-cpu-and-memory). Installing PostHog or configuring an OTLP exporter alone doesn't collect these measurements.
+
 <Steps>
 
 <Step title="Install posthog-python" badge="required">
@@ -93,3 +95,102 @@ View your metrics in PostHog
 <MetricsNextSteps />
 
 </Steps>
+
+## Collect process CPU and memory
+
+Use [psutil](https://psutil.readthedocs.io/) to read the current Python process's CPU and memory usage, and OpenTelemetry observable gauges to export the readings to PostHog every 15 seconds. This uses PostHog's standard OTLP endpoint and works alongside `posthog-python` without requiring it.
+
+### Install the dependencies
+
+```bash
+pip install psutil opentelemetry-sdk opentelemetry-exporter-otlp-proto-http
+```
+
+### Start collecting
+
+Save this as `process_metrics.py`, replace the host and project token, and run `python process_metrics.py`. Keep it running for at least 30 seconds, then press **Ctrl+C** to stop.
+
+```python
+import time
+import uuid
+
+import psutil
+from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
+from opentelemetry.metrics import Observation
+from opentelemetry.sdk.metrics import MeterProvider
+from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+from opentelemetry.sdk.resources import Resource
+
+process = psutil.Process()
+# Discard the first reading so subsequent calls measure CPU use since this call.
+process.cpu_percent(interval=None)
+
+exporter = OTLPMetricExporter(
+    endpoint="<ph_client_api_host>/i/v1/metrics",
+    headers={"Authorization": "Bearer <ph_project_token>"},
+)
+reader = PeriodicExportingMetricReader(exporter, export_interval_millis=15000)
+meter_provider = MeterProvider(
+    resource=Resource.create({
+        "service.name": "billing-worker",
+        "service.instance.id": str(uuid.uuid4()),
+        "process.pid": process.pid,
+    }),
+    metric_readers=[reader],
+)
+meter = meter_provider.get_meter("process-metrics")
+
+def read_cpu(options):
+    return [Observation(process.cpu_percent(interval=None))]
+
+def read_memory(options):
+    return [Observation(process.memory_info().rss)]
+
+meter.create_observable_gauge(
+    "app.process.cpu.percent",
+    callbacks=[read_cpu],
+    unit="%",
+    description="Process CPU usage, with 100% equal to one fully used CPU core",
+)
+meter.create_observable_gauge(
+    "app.process.memory.rss",
+    callbacks=[read_memory],
+    unit="By",
+    description="Process resident set size in bytes",
+)
+
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    pass
+finally:
+    meter_provider.shutdown()
+```
+
+OpenTelemetry calls the callbacks during collection. They read values without blocking for a sampling interval; you don't need to call `record()` yourself. The example uses custom metric names to keep these definitions separate from OpenTelemetry's standard process metrics.
+
+For an existing application, run this setup inside the process you want to monitor and replace the `while` loop with your application's entry point. A separate monitoring script reports its own usage, not your application's. Shut down the provider when your application exits. If you already have an OpenTelemetry meter provider and exporter, register the gauges on that provider instead of creating a second export pipeline.
+
+For multi-worker servers such as Gunicorn, initialize this setup in each worker after it forks, not in the parent process. Each worker needs its own `psutil.Process`, meter provider, and `service.instance.id`. Keep the instance ID stable for that worker's lifetime so workers don't overwrite each other's series. Each worker creates two metric series; don't add request IDs or user IDs as attributes.
+
+### Understand the measurements
+
+| Metric | Unit | Meaning |
+| --- | --- | --- |
+| `app.process.cpu.percent` | `%` | CPU usage since the previous reading. `100` means one fully used core; multi-threaded processes can exceed `100`. This isn't divided by the machine's core count or a container's CPU quota. |
+| `app.process.memory.rss` | `By` | Resident set size (RSS), the process's memory resident in physical RAM, in bytes. This isn't virtual memory, Python heap size, or a percentage of a memory limit. |
+
+These readings cover only the current process, not its child processes, the whole host, or the whole container. RSS can include shared pages, so summing workers' RSS can overstate their combined physical memory use.
+
+For host or container usage and capacity, collect those measurements separately, for example with an [OpenTelemetry Collector host metrics receiver](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) for host metrics, or existing infrastructure exporters through the [Docker](/docs/metrics/installation/docker) or [Kubernetes](/docs/metrics/installation/kubernetes) scraping setup. The PostHog metrics agent forwards existing metrics; installing it alone doesn't create CPU or memory measurements.
+
+### Chart CPU and memory in PostHog
+
+1. Open **Metrics** in PostHog and select **Enable metrics** if needed.
+2. In **Viewer**, filter to `service.name=billing-worker` and select `app.process.cpu.percent` or `app.process.memory.rss`.
+3. Choose `avg` for either gauge, then group by `service.instance.id` to see one line per worker. Keep this grouping so a busy worker isn't hidden by a fleet-wide average. Don't use `rate` or `increase` on these gauges.
+4. Use a line chart and a recent time range. Enable **Auto-refresh** while testing. An idle process can report CPU values near zero; memory should remain above zero.
+5. Click **Save as insight** or **Add to dashboard** to keep the chart. See [Use your metrics](/docs/metrics/explore) for chart settings and alerts.
+
+The CPU values are already percentages (`25` means 25% of one core). Memory values are bytes (`1048576` means 1 MiB). If a chart shows raw numbers, interpret them using these units; don't assume it converts bytes to MiB or scales CPU values automatically. Avoid a fixed CPU maximum of 100 when a process can use multiple cores.
