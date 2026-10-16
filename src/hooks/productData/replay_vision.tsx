@@ -298,8 +298,8 @@ export const replayVision = {
     },
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_hero_overview_18dd71be33.png',
-            alt: 'A Replay Vision scanner overview: its status, configuration, and findings over time',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_9_69b51af8fd.png',
+            alt: 'Replay Vision scanner observations',
         },
     },
     useCases: {
