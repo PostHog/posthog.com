@@ -37,7 +37,7 @@ The other 35 or so are skills I built for how I actually work, and those are the
     alt="A Slack message from a teammate, Jake: wow. yeah i had no idea the skills product was this powerful... it seems more like an agents product to me. Basically you have a skill (directory of files/context/instructions) that you can invoke with your own local harness."
 />
 
-*A teammate, after I shared how I use the skills store.*
+*A teammate, who is now skills pilled too.*
 
 So this post is my attempt to explain what changed my mind, and to show you the actual skills I lean on every day. 
 
@@ -119,12 +119,12 @@ You don't need all this structure on day one, though. For a new, messy project, 
 
 That's how `autoresearch`, the skill behind the biggest (side-quest) thing I've built this year, went. It started on April 27 as a single design spec. Over five months and 551 versions it grew whatever the work needed: a decision log, a backlog, a plan to cut a PR stack 31 layers (yes 31 i kid you not) deep into reviewable pieces, a brief for reviewers, and a few one-off scripts for slicing the stack. Once the stack landed, I had the agent refactor it into the same tidy project tracker shape as `self-driving-work`. The messy stack-era files are still in the version history if anyone needs them.
 
-## 2. Skills as a map of the stuff I own
+## 2. Skills as a map of the stuff I work on
 
 Filter our skills store to `self-driving-` and you get a map of how self-driving works inside PostHog: the alerts, the dashboards, the data warehouse layer, the Temporal workers, the debugging runbook, and the support rotation. Eleven skills, written by several people on the team. A new teammate, or a fresh agent session, can read that list and know where everything lives.
 
 <ProductScreenshot
-    imageLight="TODO_upload_self_driving_skills_map.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_skills_map_fd16fed5c2.png"
     classes="rounded"
     alt="The self-driving group in the PostHog skills store. It lists 11 skills, including self-driving-alerts, self-driving-dashboards, self-driving-debugging, self-driving-dwh, self-driving-temporal, and self-driving-work, each with a description, an author, a version count, and when it last changed."
 />
@@ -134,12 +134,12 @@ Filter our skills store to `self-driving-` and you get a map of how self-driving
 The most detailed part of the map is `self-driving-dwh`. It's the blueprint for the [data warehouse](/docs/data-warehouse) views behind our self-driving analytics: an entity diagram of how scout runs, signals, reports, tasks, and PRs join, the keys that stitch them together, the two rules you'll get wrong if you don't read them first (reports are cross-customer, and everything is cross-region), and a `recipes/` folder of SQL that actually works.
 
 <ProductScreenshot
-    imageLight="TODO_upload_self_driving_dwh_erd.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_dwh_erd_585528b470.png"
     classes="rounded"
     alt="An entity relationship diagram from the self-driving-dwh skill. It shows how scout runs, signals, emissions, reports, action presses, tasks, traces, and PRs join, with the primary and foreign keys for each, followed by a list of the keys that stitch everything together."
 />
 
-*The entity diagram in `self-driving-dwh`. Any agent that loads the skill gets the same picture I have in my head.*
+*The entity diagram in `self-driving-dwh`. Any agent that loads the skill gets the same picture I have in my head. Also, no one likes making ERDs but agents love it!*
 
 When I say "use the /self-driving-dwh skill to help here", the agent knows how everything joins before it writes a query. The skill is on version 458, and I didn't write most of it. A scout, `signals-scout-self-driving-dwh`, checks that the views still sync, catches drift when a source table changes, and updates the skill when it fixes something. A skill maintained by a skill.
 
