@@ -29,8 +29,8 @@ bookings. All four are registered in `bookComponents.tsx` for use in MDX.
 `ProductAnalyticsDashboardExhibits.tsx` shows three guide-owned PostHog dashboard excerpts.
 An animated cursor adds each tile when its figure comes into view; Reset replays the sequence, and reduced-motion readers see the completed dashboards. The overview uses the saved filter trend,
 funnel, and retention insights; its booking investigation note appears with the funnel.
-The focused dashboards reuse the guide's destination selections, weekly filter trend, and January
-retention examples. They keep click counts, unique people, and cohort sizes distinct.
+The focused dashboards break down the weekly filter trend by destination and reuse the January
+retention examples. They keep unique people and cohort sizes distinct.
 `ProductAnalyticsDashboardNextSteps.tsx` ends the guide with one project-aware prompt. Its PostHog AI
 link starts that prompt in the app; its Claude Code and Codex buttons open the same prompt in those
 agents. It also shows the MCP wizard command for readers who still need to connect their agent.

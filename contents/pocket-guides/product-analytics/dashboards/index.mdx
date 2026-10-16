@@ -19,7 +19,7 @@ The engineers build their first dashboard, and name it **Exploring and booking s
 
 <BookingDashboardFigure />
 
-Adding the funnel to this dashboard shows Twig's note about failed requests and booking trails to inspect. This gives the engineers a path to go down if they notice something "off" in their dashboard. The tiles use different measures: filter users per week, booking completion within 14 days, and repeat bookings by month – so the engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
+Beside the funnel, the engineers add a note: one booking request failed, and three other drop-offs need inspecting. That gives them a place to start when booking completion changes. The tiles measure different things: weekly filter users, booking completion within 14 days, and monthly repeat bookings. The engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
 
 ## Build a drill-down dashboard
 
@@ -27,7 +27,7 @@ Twig's Trends insight shows more people using filters in week 2, but it doesn't 
 
 <FindingStaysDashboardFigure />
 
-The destination tile shows five example clicks: three for Coast and one each for Forest and City. The trend counts five people in week 1 and eight in week 2. The clicks are a different sample, so they cannot explain the weekly rise. The engineers can inspect selections with `has_results: false` to find filters that returned no stays.
+The destination breakdown counts unique people, just like the trend. Coast rises from two people in week 1 to five in week 2; Forest and City stay flat. That gives Twig a specific change to investigate. The engineers can inspect Coast selections with `has_results: false` to see whether the filter returned no stays.
 
 ## Compare cohorts side by side
 

@@ -365,30 +365,53 @@ export function BookingDashboardFigure(): JSX.Element {
     )
 }
 
-const destinationSelections = [
-    { name: 'Coast', count: 3, color: colors.blue.core },
-    { name: 'Forest', count: 1, color: colors.purple.core },
-    { name: 'City', count: 1, color: colors.teal.darker },
+const destinationUsers = [
+    { name: 'Coast', week1: 2, week2: 5 },
+    { name: 'Forest', week1: 2, week2: 2 },
+    { name: 'City', week1: 1, week2: 1 },
 ]
 
 function DestinationChoicesTile({ className = '' }: { className?: string }): JSX.Element {
     return (
-        <section aria-label="Five example filter selections by destination" className={`${tileClasses} ${className}`}>
-            <h4 className={`!m-0 ${titleClasses}`}>Destination choices</h4>
-            <div className="px-3 pt-2 text-xs text-[#716c63]">5 filter selections</div>
-            <div className="space-y-3 p-3 text-xs">
-                {destinationSelections.map(({ name, count, color }) => (
-                    <div key={name} className="grid grid-cols-[3.5rem_minmax(0,1fr)_1rem] items-center gap-2">
-                        <span>{name}</span>
-                        <div className="h-4 rounded-sm bg-[#e9e7e1]" aria-hidden="true">
-                            <div
-                                className="h-full rounded-sm"
-                                style={{ width: `${(count / 3) * 100}%`, backgroundColor: color }}
-                            />
-                        </div>
-                        <strong className="text-right">{count}</strong>
-                    </div>
-                ))}
+        <section aria-label="Weekly filter users by destination" className={`${tileClasses} ${className}`}>
+            <h4 className={`!m-0 ${titleClasses}`}>Filter users by destination</h4>
+            <div className="p-2">
+                <table className="w-full table-fixed border-separate border-spacing-1 !text-xs">
+                    <thead className="text-[#716c63]">
+                        <tr>
+                            <th scope="col" className="text-left font-normal">
+                                Destination
+                            </th>
+                            <th scope="col" className="w-[25%] text-center font-normal">
+                                Week 1
+                            </th>
+                            <th scope="col" className="w-[25%] text-center font-normal">
+                                Week 2
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {destinationUsers.map(({ name, week1, week2 }) => (
+                            <tr key={name}>
+                                <th scope="row" className="text-left font-semibold">
+                                    {name}
+                                </th>
+                                <td className="text-center">{week1}</td>
+                                <td
+                                    className="rounded py-2 text-center font-semibold"
+                                    style={{
+                                        backgroundColor:
+                                            week2 > week1
+                                                ? `color-mix(in srgb, ${colors.blue.lighter} 70%, white)`
+                                                : undefined,
+                                    }}
+                                >
+                                    {week2}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </section>
     )
@@ -400,7 +423,7 @@ export function FindingStaysDashboardFigure(): JSX.Element {
             title="Finding stays"
             contentClassName="min-h-[25rem] @lg:min-h-[15rem]"
             options={[
-                { id: 'destinations', label: 'Destination choices' },
+                { id: 'destinations', label: 'By destination' },
                 { id: 'trend', label: 'Filter users' },
             ]}
         >

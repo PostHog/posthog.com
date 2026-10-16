@@ -26,7 +26,7 @@ export default function ProductAnalyticsDashboardNextSteps(): JSX.Element {
                 </SingleCodeBlock>
             </div>
             <div className="mt-5 grid gap-4 @2xl:grid-cols-2">
-                <section className="flex min-w-0 flex-col rounded border border-primary bg-accent p-4 dark:bg-accent-dark">
+                <section className="flex min-w-0 flex-col self-start rounded border border-primary bg-accent p-4 dark:bg-accent-dark">
                     <h3 className="m-0 text-lg font-semibold">PostHog AI</h3>
                     <p className="mb-5 mt-2 text-secondary">Run this prompt in your PostHog project.</p>
                     <OSButton asLink to={maxPromptUrl} external hideExternalIcon variant="primary" size="md">
