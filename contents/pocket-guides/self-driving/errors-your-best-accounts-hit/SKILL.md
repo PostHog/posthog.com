@@ -56,13 +56,14 @@ Four reads cold-start a run:
   keys to varies by project:
 
   ```sql
-  SELECT countIf(external_id IN (SELECT DISTINCT $group_0 FROM events WHERE timestamp > now() - INTERVAL 30 DAY AND $group_0 != '')) AS g0,
-         countIf(external_id IN (SELECT DISTINCT $group_1 FROM events WHERE timestamp > now() - INTERVAL 30 DAY AND $group_1 != '')) AS g1,
-         countIf(external_id IN (SELECT DISTINCT $group_2 FROM events WHERE timestamp > now() - INTERVAL 30 DAY AND $group_2 != '')) AS g2,
-         countIf(external_id IN (SELECT DISTINCT $group_3 FROM events WHERE timestamp > now() - INTERVAL 30 DAY AND $group_3 != '')) AS g3,
-         countIf(external_id IN (SELECT DISTINCT $group_4 FROM events WHERE timestamp > now() - INTERVAL 30 DAY AND $group_4 != '')) AS g4,
-         count() AS total
-  FROM system.accounts WHERE external_id != ''
+  SELECT g.index AS group_type_index,
+         count(DISTINCT a.external_id) AS matched,
+         (SELECT count() FROM system.accounts WHERE external_id != '') AS total
+  FROM system.accounts a
+  INNER JOIN groups g ON g.key = a.external_id
+  WHERE a.external_id != ''
+  GROUP BY group_type_index
+  ORDER BY matched DESC
   ```
 
   Record the winning index as `pattern:account-value:group-type` so later runs skip this. No
