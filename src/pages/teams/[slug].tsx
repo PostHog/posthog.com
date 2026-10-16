@@ -802,6 +802,7 @@ export default function TeamPage(props: TeamPageProps) {
                                 setFieldValue={setFieldValue}
                                 teamImage={teamImage}
                                 editing={editing}
+                                unframed={slug === 'platform-features'}
                             />
                         )}
                     </div>

@@ -6,11 +6,13 @@ export default function TeamImage({
     setFieldValue,
     teamImage,
     editing,
+    unframed = false,
 }: {
     values: any
     setFieldValue: (field: string, value: any) => void
     teamImage: any
     editing: boolean
+    unframed?: boolean
 }): JSX.Element | null {
     const handleDrop = (image: Image) => {
         setFieldValue('teamImage', image)
@@ -18,9 +20,13 @@ export default function TeamImage({
 
     return !!teamImage?.image?.data || editing ? (
         <figure className="rotate-2 max-w-md w-full flex flex-col gap-2 mx-auto @2xl/reader-content:mr-0">
-            <div className="bg-accent flex justify-center items-center shadow-xl border-8 border-white rounded-md">
+            <div
+                className={`flex justify-center items-center ${
+                    unframed ? 'drop-shadow-md' : 'bg-accent shadow-xl border-8 border-white rounded-md'
+                }`}
+            >
                 {editing ? (
-                    <div className="w-96">
+                    <div className="w-full max-w-96">
                         <ImageDrop
                             onRemove={() => setFieldValue('teamImage', null)}
                             onDrop={handleDrop}
