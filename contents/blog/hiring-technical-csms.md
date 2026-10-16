@@ -26,7 +26,7 @@ So roughly 1 in 500 people who we heard from or reached out to got an offer. For
 
 ![AAAAAA](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/exec_b6f3e104_ebd8_4791_9da4_5cccd1dabc4f_a470fc5800.png)
 
-There's no AI automation rejecting these people. We review every application and send every message manually. It's not because we sadistically like rejecting people either. To prove this, here's all the secrets of what I, a talent partner, look for in technical customer success managers and what the candidates that succeed do differently.
+Don't like this discourage you from applying. There's no AI automation rejecting these people. We review every application and send every message manually. It's not because we sadistically like rejecting people either. To prove this, here's all the secrets of what I, a talent partner, look for in technical customer success managers and what the candidates that succeed do differently.
 
 ## What we look for in technical customer success managers
 
