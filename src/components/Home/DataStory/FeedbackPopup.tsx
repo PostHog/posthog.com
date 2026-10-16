@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, TargetAndTransition, Transition } from 'framer-motion'
 import { IconX } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { OSTextarea } from 'components/OSForm'
@@ -13,7 +13,7 @@ const DATE_FORMAT: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric'
 
 const TOMBSTONE_LANDS_AT = 0.28
 
-const TOMBSTONE_SLAM = {
+const TOMBSTONE_SLAM: { initial: TargetAndTransition; animate: TargetAndTransition; transition: Transition } = {
     initial: { scale: 3, rotate: -12, opacity: 0 },
     animate: { scale: [3, 0.9, 1], rotate: [-12, -3, -3], opacity: [0, 1, 1] },
     transition: { duration: 0.48, times: [0, 0.58, 1], ease: ['easeIn', 'easeOut'] },
@@ -24,7 +24,7 @@ const GROUND_SHAKE = { delay: TOMBSTONE_LANDS_AT, duration: 0.3 }
 const EPITAPH_FADE = { delay: TOMBSTONE_LANDS_AT + 0.15, duration: 0.3 }
 
 const POP_IN_VIEWPORT = { once: true, amount: 0.6 }
-const POP_IN_SPRING = { type: 'spring', stiffness: 420, damping: 22, delay: 0.2 }
+const POP_IN_SPRING = { type: 'spring', stiffness: 420, damping: 22, delay: 0.2 } as const
 
 type PopupState = 'open' | 'dismissed' | 'sent'
 

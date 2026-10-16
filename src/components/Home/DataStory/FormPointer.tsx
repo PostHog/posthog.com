@@ -1,14 +1,14 @@
 import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, Variants } from 'framer-motion'
 
 const DRAW_VIEWPORT = { once: true, amount: 0.8 }
 
-const shaft = {
+const shaft: Variants = {
     hidden: { pathLength: 0 },
     drawn: { pathLength: 1, transition: { duration: 0.6, ease: 'easeOut', delay: 0.7 } },
 }
 
-const head = {
+const head: Variants = {
     hidden: { pathLength: 0 },
     drawn: { pathLength: 1, transition: { duration: 0.25, ease: 'easeOut', delay: 1.3 } },
 }
