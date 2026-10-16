@@ -23,9 +23,11 @@ The Particle connector sends events from your [Particle](https://www.particle.io
 
 You need three values:
 
-- **Access token**: create an API user in the Particle console. Open your product (or your sandbox), go to **Team**, and click **Add API user**. Give it these scopes:
-  - `devices:list` to sync your device list
-  - `integrations:list`, `integrations:create`, and `integrations:remove` so PostHog can manage its webhooks
+- **Access token**: the token depends on where your devices are.
+  - **Product devices**: create an API user in the Particle console. Open your product, go to **Team**, and click **Add API user**. Give it these scopes:
+    - `devices:list` to sync your device list
+    - `integrations:list`, `integrations:create`, and `integrations:remove` so PostHog can manage its webhooks
+  - **Sandbox devices**: Particle has no API users for the personal sandbox, so use a personal access token for your account. Create one with the Particle CLI: `particle token create --never-expires`. This token can read your devices and manage your webhooks.
 - **Product ID**: the ID of your Particle product. Leave it empty to use the devices you own in your sandbox.
 - **Event name prefixes**: a comma-separated list of the event names to send to PostHog. Particle matches event names by prefix and has no wildcard, so `env/` receives `env/temp` and `env/humidity`.
 
@@ -75,7 +77,7 @@ If PostHog can't create the webhooks, for example because the token is missing a
 ## Troubleshooting
 
 - **No events arrive**: check that your event names start with one of your prefixes. Prefixes are case sensitive. In the Particle console event log, a `hook-sent` event shows that Particle sent the webhook, and a `hook-error` event shows that it failed.
-- **The token can't manage integrations**: add the `integrations:list`, `integrations:create`, and `integrations:remove` scopes to the API user, then reconnect.
+- **The token can't manage integrations**: for a product, add the `integrations:list`, `integrations:create`, and `integrations:remove` scopes to the API user, then reconnect. For sandbox devices, use a personal access token instead of a product API user token.
 - **Product not found**: check the product ID, and check that the API user belongs to that product.
 
 <TroubleshootingLink />
