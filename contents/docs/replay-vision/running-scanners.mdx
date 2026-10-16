@@ -4,7 +4,7 @@ title: Running scanners
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-There are three ways a scanner produces observations: automatically in the background as new recordings come in, on demand against recordings you pick, or as a backfill over a past date range. All three produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered. The scanner's **Observations** tab shows which one triggered each scan: **Schedule**, **On demand**, **Retry**, or **Backfill**.
+There are four ways a scanner produces observations: automatically in the background as new recordings come in, on demand against recordings you pick, as a backfill over a past date range, or from a workflow step. All four produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered. The scanner's **Observations** tab shows which one triggered each scan: **Schedule**, **On demand**, **Retry**, **Backfill**, or **Workflow**.
 
 ## Automatically on matching sessions
 
@@ -88,6 +88,22 @@ On-demand scans:
 
 When a batch can't start every scan, PostHog tells you why: too many scans are already running, your organization's credits for the billing period are used up, or the scanner reached its own credit limit. Wait for running scans to finish, or see [quota and limits](/docs/replay-vision/quota-and-limits).
 
+## From a workflow
+
+You can run Replay Vision scans from a [workflow](/docs/workflows) using the **Replay Vision** step. This lets you automate scans based on events, schedules, or webhooks – for example, scanning a session whenever a user hits an error or completes a key action.
+
+The **Replay Vision** step appears in the **AI** section of the [workflow builder](/docs/workflows/workflow-builder)'s step picker. It's available in a project's main environment.
+
+When you add a Replay Vision step to a workflow:
+
+1. Choose what the scan should do: **Ask a question**, **Categorize**, **Score**, **Summarize**, or **Use a saved scanner**.
+2. Configure the fields for your choice – a prompt for inline types, categories for Categorize, a From/To scale for Score, or a scanner picker for a saved scanner.
+3. The workflow waits for the scan to complete, then continues with the result.
+
+Each workflow can run up to 100 Replay Vision scans per day by default, and a project can run up to 500 across all workflows. Admins can adjust both in [**Settings → Workflows → Replay Vision scan limits**](https://app.posthog.com/settings/project-workflows#workflows-replay-vision-limits). Set a limit to zero to pause scans.
+
+Every scan spends [Replay Vision credits](/docs/replay-vision/quota-and-limits) the same way an on-demand or background scan does.
+
 ## Backfill a date range
 
 A backfill scans every recording in a past date range that matches the scanner's filters, including recordings from before you created the scanner. Use it after creating a scanner, after broadening its filters, or to cover time it was disabled.
@@ -126,16 +142,16 @@ Only succeeded observations cost credits, at the price of the scanner's model wh
 
 Some recordings can't be analyzed – there's no recording data, nothing to play back, or no events. Rather than fail noisily, these come back marked **ineligible**, with the reason in the status tooltip and on the observation page.
 
-| Reason | What it means |
-| --- | --- |
-| **No recording** | No recording was found for the session. It may have expired or never been captured. |
-| **Nothing to play back** | The recording has no screen data to play back. Screen data may still be ingesting. |
-| **Too short** | The recording is shorter than 15 seconds. |
-| **Too inactive** | The recording has fewer than 10 seconds of activity. |
-| **Too long** | The recording has more than an hour of activity. |
-| **Too large** | The recording is too large to render as a video. |
-| **No events** | The session has no analytics events. |
-| **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran. |
+| Reason                      | What it means                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| **No recording**            | No recording was found for the session. It may have expired or never been captured. |
+| **Nothing to play back**    | The recording has no screen data to play back. Screen data may still be ingesting.  |
+| **Too short**               | The recording is shorter than 15 seconds.                                           |
+| **Too inactive**            | The recording has fewer than 10 seconds of activity.                                |
+| **Too long**                | The recording has more than an hour of activity.                                    |
+| **Too large**               | The recording is too large to render as a video.                                    |
+| **No events**               | The session has no analytics events.                                                |
+| **AI analysis not allowed** | AI data processing was turned off for your organization when the scan ran.          |
 
 Ineligible observations:
 
