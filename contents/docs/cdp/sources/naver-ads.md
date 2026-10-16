@@ -13,12 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
-
-This source is in alpha. It hasn't been tested against a live Naver Search Ads account yet, so you may run into unexpected issues. Please report any problems you find.
-
-</CalloutBox>
-
 The Naver Ads connector syncs your [Naver Search Ads](https://searchad.naver.com) campaigns, ad groups, ads, keywords, and daily performance into the PostHog data warehouse. Use it to compare search ad spend and clicks with what those visitors do in your product.
 
 ## Prerequisites

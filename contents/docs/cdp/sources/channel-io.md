@@ -13,12 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
-
-This source is in alpha. It hasn't been tested against a live Channel.io account yet, so you may run into unexpected issues. Please report any problems you find.
-
-</CalloutBox>
-
 The Channel.io connector syncs your [Channel.io](https://channel.io) (Channel Talk) conversations into the PostHog data warehouse. Import user chats, messages, managers, groups, chat tags, bots, and campaigns so you can join support conversations with your product analytics.
 
 ## Prerequisites
