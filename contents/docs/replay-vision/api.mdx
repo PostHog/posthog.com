@@ -83,13 +83,20 @@ curl -X POST "https://us.posthog.com/api/projects/:project_id/hog_functions/" \
     "template_id": "template-webhook",
     "name": "Replay Vision request finished",
     "enabled": true,
-    "inputs": { "url": { "value": "https://example.com/replay-vision-callback" } },
+    "inputs": {
+      "url": { "value": "https://example.com/replay-vision-callback" },
+      "method": { "value": "POST" },
+      "headers": { "value": { "Content-Type": "application/json" } },
+      "body": { "value": { "event": "{event.event}", "properties": "{event.properties}" } }
+    },
     "filters": {
       "source": "internal-events",
       "events": [{ "id": "$replay_vision_request_completed", "type": "events" }]
     }
   }'
 ```
+
+Set `method`, `headers`, and `body` yourself. Inputs you leave out don't get the template's defaults through the API, so the webhook would arrive without the event. The body above sends the event's properties, including the `request_id`.
 
 This call needs a personal API key with the `hog_function:write` scope.
 
