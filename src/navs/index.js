@@ -2121,10 +2121,6 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
-                name: 'Pocket guides',
-                url: '/handbook/wizard-and-docs/pocket-guides',
-            },
-            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2142,6 +2138,18 @@ export const handbookSidebar = [
             },
             {
                 name: 'Learn',
+            },
+            {
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs/learn',
+            },
+            {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
+                name: 'How to contribute to Twig',
+                url: '/handbook/wizard-and-docs/twig',
             },
         ],
     },
