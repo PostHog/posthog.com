@@ -114,6 +114,25 @@ Unchanged regions are automatically collapsed in the diff view. Click **Compare 
 
 Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it. Archiving also removes the prompt's labels.
 
+### Restore an archived prompt
+
+Archived prompts stay in your project. To see them, turn on **Show archived** on the prompts list. Each archived prompt appears once, at its most recent version.
+
+Click **Restore** to bring a prompt back. All of its versions come back with the same numbers, so code that fetches by name or by version works again. Labels are not restored: set them again on the versions you want to release.
+
+Restoring fails in these cases:
+
+- An active prompt with the same name exists. Names are immutable, so the archived prompt can't be restored while the new one exists. Archiving the new one does not help: both would then share version numbers and neither could be restored. Keep the active prompt, or create a new prompt with the archived content.
+- The name was archived more than once and the archived versions overlap. Create a new prompt instead.
+- The latest archived version references a prompt that is still archived, or references a label that no longer exists. Restore the referenced prompt first, and if the reference follows a label, set that label again before restoring the referencing prompt.
+
+With the API, list archived prompts with `?archived=true` and restore one with a `POST` request:
+
+```bash
+curl -X POST "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/unarchive/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY"
+```
+
 ## Labels
 
 A label is a movable pointer to exactly one version of a prompt. Fetching by a label like `production` returns whatever version the label points to right now.
