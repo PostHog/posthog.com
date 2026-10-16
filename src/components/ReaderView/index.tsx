@@ -32,8 +32,8 @@ import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
-import { MenuItem, useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
+import BlogComments from '../Blog/BlogComments'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown from 'components/MarkdownActionsDropdown'
@@ -76,6 +76,7 @@ interface ReaderViewProps {
     parent?: MenuItem
     showQuestions?: boolean
     sourceInstanceName?: string
+    postSlug?: string
 }
 
 interface BackgroundImageOption {
@@ -170,7 +171,9 @@ const ContributorsSmall = ({ contributors }) => {
                                         }`}
                                     />
                                 ) : (
-                                    ''
+                                    <div className="w-6 h-6 rounded-full bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs border border-red-200 dark:border-red-800 shrink-0">
+                                        {name?.charAt(0)?.toUpperCase() || 'A'}
+                                    </div>
                                 )}
                                 <span className="text-sm font-semibold">{name}</span>
                             </Container>
@@ -366,6 +369,7 @@ export default function ReaderView({
     parent,
     showQuestions = true,
     sourceInstanceName,
+    postSlug,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -394,6 +398,7 @@ export default function ReaderView({
                 parent={parent}
                 showQuestions={showQuestions}
                 sourceInstanceName={sourceInstanceName}
+                postSlug={postSlug}
             >
                 {children}
             </ReaderViewContent>
@@ -527,7 +532,8 @@ function ReaderViewContent({
     parent,
     showQuestions = true,
     sourceInstanceName,
-}) {
+    postSlug,
+}: ReaderViewProps) {
     const { openNewChat, compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
@@ -785,18 +791,7 @@ function ReaderViewContent({
                                                 : contentMaxWidthClass || 'max-w-2xl'
                                         }`}
                                     >
-                                        <h3 id="squeak-questions" className="mb-4">
-                                            Community questions
-                                        </h3>
-                                        <Questions
-                                            slug={appWindow?.path}
-                                            parentName={activeInternalMenu?.name}
-                                            className={`mx-auto transition-all ${
-                                                fullWidthContent || body?.type !== 'mdx'
-                                                    ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
-                                            }`}
-                                        />
+                                        <BlogComments postSlug={postSlug || appWindow?.path || pathname || homeURL || ''} />
                                     </div>
                                 )}
                                 {showSurvey && (

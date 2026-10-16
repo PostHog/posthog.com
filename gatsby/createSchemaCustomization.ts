@@ -42,6 +42,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       avatar_url: String
       html_url: String
       login: String
+      type: String
     }
     type AshbyJobPostingTableOfContents {
       value: String,
@@ -59,6 +60,59 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       hint: String
       description: String
     }
+    type SqueakMediaAttributes {
+      url: String
+    }
+    type SqueakMediaData {
+      attributes: SqueakMediaAttributes
+    }
+    type SqueakProfileThumbnail {
+      url: String
+    }
+    type SqueakProfileFormats {
+      thumbnail: SqueakProfileThumbnail
+    }
+    type SqueakProfileAvatar {
+      url: String
+      formats: SqueakProfileFormats
+      data: SqueakMediaData
+    }
+    type SqueakProfileQuote {
+      id: ID
+      quote: String
+    }
+    type SqueakTeamDataAttributes {
+      id: ID
+      name: String
+      slug: String
+    }
+    type SqueakTeamDataItem {
+      id: ID
+      attributes: SqueakTeamDataAttributes
+    }
+    type SqueakTeamData {
+      id: ID
+      data: [SqueakTeamDataItem]
+    }
+    type SqueakProfile implements Node {
+      squeakId: Int
+      github: String
+      firstName: String
+      lastName: String
+      companyRole: String
+      avatar: SqueakProfileAvatar
+      quotes: [SqueakProfileQuote]
+      color: String
+      biography: String
+      country: String
+      location: String
+      pronouns: String
+      pineappleOnPizza: Boolean
+      startDate: Date
+      teams: SqueakTeamData
+      leadTeams: SqueakTeamData
+      isTeamLead: Boolean
+    }
     type Contributors {
       avatar: String
       url: String
@@ -73,6 +127,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterFilters {
+      type: [String]
+      maintainer: String
+    }
+    type FrontmatterFeatures {
+      eventCapture: Boolean
+      userIdentification: Boolean
+      autoCapture: Boolean
+      sessionRecording: Boolean
+      featureFlags: Boolean
+      groupAnalytics: Boolean
+      errorTracking: Boolean
+      surveys: Boolean
+      llmAnalytics: Boolean
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
@@ -83,6 +152,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      description: String
+      thumbnail: File @fileByRelativePath
+      icon: File @fileByRelativePath
+      filters: FrontmatterFilters
+      documentation: String
+      features: FrontmatterFeatures
+      featuredTutorial: Boolean
     }
     type TeamData {
       name: String
@@ -120,6 +196,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       name: String,
       url: String,
       items: String,
+      nextURL: String,
     }
     type ApiComponents implements Node {
       id: String,
@@ -252,9 +329,40 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type MdxFrontmatterProductSections implements Node {
       sections: [ProductSectionsSections]
     }
+    type RoadmapCTA {
+      url: String
+      label: String
+    }
+    type SqueakTopicAttributes {
+      id: ID
+      label: String
+      slug: String
+    }
+    type SqueakTopicData {
+      id: ID
+      attributes: SqueakTopicAttributes
+    }
+    type SqueakTopicRelation {
+      id: ID
+      data: SqueakTopicData
+    }
     type Roadmap implements Node {
+      strapiID: Int
+      squeakId: Int
+      date: Date @dateformat
+      title: String
+      description: String
+      complete: Boolean
+      type: String
       year: Int
+      category: String
+      projectedCompletion: Date @dateformat
+      dateCompleted: Date @dateformat
       githubPRMetadata: GitHubPRMetadata
+      cta: RoadmapCTA
+      teams: SqueakTeamData
+      topic: SqueakTopicRelation
+      features: JSON
     }
     type GitHubPRMetadata {
       url: String
@@ -273,12 +381,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       commenters: [GitHubUser]
       reviewers: [GitHubUser]
       reviews_url: String
-    }
-    type GitHubUser {
-      login: String
-      avatar_url: String
-      html_url: String
-      type: String
     }
     type ProductDataProductsPlans {
       contact_support: Boolean
@@ -404,13 +506,85 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       commits: Int
       contributors: Int
     }
-    type ProductDataProductsAddons {
-      legacy_product: Boolean
+    type ProductData implements Node {
+      products: [ProductDataProducts]
     }
     type ProductDataProducts {
+      description: String
+      docs_url: String
+      headline: String
+      image_url: String
+      icon_key: String
+      inclusion_only: Boolean
+      contact_support: Boolean
       legacy_product: Boolean
+      name: String
+      type: String
+      unit: String
+      usage_key: String
+      addons: [ProductDataProductsAddons]
+      plans: [ProductDataProductsPlans]
+      features: [ProductDataProductsFeatures]
+    }
+    type ProductDataProductsPlans {
+      description: String
+      docs_url: String
+      image_url: String
+      name: String
+      plan_key: String
+      product_key: String
+      unit: String
+      flat_rate: Boolean
+      unit_amount_usd: String
+      free_allocation: Int
+      included_if: String
+      contact_support: Boolean
+      note: String
+      features: [ProductDataProductsPlansFeatures]
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Int
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Int
+      projected_usage: Int
+      projected_amount_usd: String
+    }
+    type ProductDataProductsAddons {
+      contact_support: Boolean
+      description: String
+      docs_url: String
+      image_url: String
+      icon_key: String
+      inclusion_only: Boolean
+      legacy_product: Boolean
+      name: String
+      type: String
+      unit: String
+      usage_key: String
+      headline: String
+      plans: [ProductDataProductsPlans]
+      features: [ProductDataProductsFeatures]
+    }
+    type ProductDataProductsFeatures {
+      key: String
+      name: String
+      description: String
+      limit: String
+      note: String
+      unit: String
+      entitlement_only: Boolean
+      is_plan_default: Boolean
+      category: String
+      icon_key: String
+      type: String
     }
     type ProductDataProductsAddonsFeatures {
+        key: String
+        name: String
+        description: String
         category: String
         limit: String
         note: String
@@ -419,6 +593,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         unit: String
     }
     type ProductDataProductsAddonsPlansFeatures {
+        key: String
+        name: String
+        description: String
         category: String
         limit: String
         note: String
@@ -427,6 +604,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         unit: String
     }
     type ProductDataProductsPlansFeatures {
+        key: String
+        name: String
+        description: String
         category: String
         limit: String
         note: String
@@ -434,10 +614,116 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         is_plan_default: Boolean
         unit: String
     }
+    type StrapiImage implements Node {
+        id: ID!
+        url: String!
+    }
+    type SqueakCrestOption {
+        textColor: String
+        textShadow: String
+        fontSize: String
+        frame: String
+        frameColor: String
+        plaque: String
+        plaqueColor: String
+        imageScale: Int
+        imageXOffset: Int
+        imageYOffset: Int
+    }
+    type GithubReactions {
+        hooray: Int
+        heart: Int
+        eyes: Int
+        plus1: Int
+        minus1: Int
+        total_count: Int
+    }
+    type GithubPage {
+        title: String
+        html_url: String
+        number: String
+        closed_at: String
+        reactions: GithubReactions
+    }
+    type SqueakLikeData {
+        id: ID
+    }
+    type SqueakLikes {
+        data: [SqueakLikeData]
+    }
+    type SqueakRoadmap implements Node {
+        id: ID!
+        squeakId: Int
+        title: String
+        description: String
+        image: StrapiImage
+        tagline: String
+        slug: String
+        createdAt: Date @dateformat
+        dateCompleted: Date @dateformat
+        projectedCompletion: Date @dateformat
+        category: String
+        milestone: Boolean
+        completed: Boolean
+        complete: Boolean
+        betaAvailable: Boolean
+        githubUrls: [String]
+        githubPages: [GithubPage]
+        teams: [SqueakTeam]
+        cta: RoadmapCTA
+        likes: SqueakLikes
+    }
+    type SqueakTopic implements Node {
+        id: ID!
+        squeakId: Int
+        slug: String
+        label: String
+    }
+    type SqueakTopicGroup implements Node {
+        id: ID!
+        squeakId: Int
+        slug: String
+        label: String
+        topics: [SqueakTopic]
+    }
+    type SqueakMedia {
+        data: SqueakMediaData
+        publicId: String
+        gatsbyImageData(width: Int, height: Int): JSON
+    }
+    type SqueakProfileAttributes {
+        country: String
+        firstName: String
+        lastName: String
+        companyRole: String
+        location: String
+        startDate: Date
+        pineappleOnPizza: Boolean
+        color: String
+        avatar: SqueakProfileAvatar
+        leadTeams: SqueakTeamData
+    }
+    type SqueakProfileDataItem {
+        id: ID
+        attributes: SqueakProfileAttributes
+    }
+    type SqueakProfilesData {
+        id: ID
+        data: [SqueakProfileDataItem]
+    }
     type SqueakTeam implements Node {
+        name: String
+        slug: String
         tagline: String
         description: String
         createdAt: Date
+        crest: SqueakMedia
+        miniCrest: SqueakMedia
+        crestOptions: SqueakCrestOption
+        roadmaps: [SqueakRoadmap]
+        profiles: SqueakProfilesData
+        leadProfiles: SqueakProfilesData
+        teamImage: JSON
     }
     type EventVenue {
         name: String

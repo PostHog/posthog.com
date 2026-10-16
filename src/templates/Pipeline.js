@@ -143,34 +143,4 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
     )
 }
 
-export const query = graphql`
-    query Pipeline($id: String!, $documentation: String!) {
-        pageData: mdx(id: { eq: $id }) {
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-                description
-                filters {
-                    type
-                    maintainer
-                }
-                thumbnail {
-                    publicURL
-                }
-            }
-        }
-        documentation: mdx(fields: { slug: { eq: $documentation } }) {
-            fields {
-                slug
-            }
-            headings {
-                depth
-                value
-            }
-        }
-    }
-`
+export const query = null

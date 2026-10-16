@@ -789,23 +789,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
 export const useCustomers = () => {
     const { products } = useProducts()
 
-    // Query only to detect which customers have case studies
-    const data = useStaticQuery(graphql`
-        query {
-            allCustomers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                }
-            }
-        }
-    `)
-
-    // Create a set of customer slugs that have MDX case studies
-    const customersWithCaseStudies = new Set(
-        data.allCustomers.nodes.map((node: any) => node.fields.slug.split('/').pop() || '')
-    )
+    const customersWithCaseStudies = new Set<string>()
 
     const getProductTitleByHandle = (handle: string) => {
         return products.find((product) => product.handle === handle)?.name

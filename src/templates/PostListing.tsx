@@ -1,21 +1,17 @@
-import { getParams } from 'components/Edition/Posts'
 import Editor from 'components/Editor'
 import OSTable from 'components/OSTable'
 import SEO from 'components/seo'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { getSortOption } from './BlogPost'
 import Link from 'components/Link'
 import TeamMember from 'components/TeamMember'
-import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 import slugify from 'slugify'
 import { graphql, useStaticQuery } from 'gatsby'
-import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
-import { IconSpinner } from '@posthog/icons'
+import useSWR from 'swr'
 
 dayjs.extend(relativeTime)
 
@@ -55,64 +51,184 @@ export const FeaturedImage = ({ url }: { url: string }) => {
     )
 }
 
-export default function Posts({ pageContext }) {
-    const { allPostCategory } = useStaticQuery(graphql`
+export default function Posts({ pageContext }: { pageContext?: any }) {
+    const { allBlogMdx, categories } = useStaticQuery(graphql`
         {
-            allPostCategory(
+            allBlogMdx: allMdx(
+                sort: { order: DESC, fields: [frontmatter___date] }
                 filter: {
-                    attributes: {
-                        folder: { nin: [null, "customers", "spotlight", "changelog", "comparisons", "notes", "repost"] }
-                    }
+                    isFuture: { ne: true }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/blog/" } }
                 }
             ) {
                 nodes {
-                    attributes {
-                        label
-                        folder
-                        post_tags {
-                            data {
-                                attributes {
-                                    label
-                                    folder
-                                }
-                            }
+                    id
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        date
+                        category
+                        tags
+                        featuredImage {
+                            publicURL
+                        }
+                        authors: authorData {
+                            name
+                            handle
                         }
                     }
                 }
             }
+            categories: allMdx(
+                filter: {
+                    isFuture: { ne: true }
+                    frontmatter: { date: { ne: null } }
+                    fields: { slug: { regex: "/^/blog/" } }
+                }
+            ) {
+                categories: group(field: frontmatter___category) {
+                    totalCount
+                    category: fieldValue
+                }
+                tags: group(field: frontmatter___tags) {
+                    totalCount
+                    tag: fieldValue
+                }
+            }
         }
     `)
+
+    // Also support live updates from local /api/admin-posts if available
+    const { data: adminData } = useSWR(
+        '/api/admin-posts',
+        (url) => fetch(url).then((r) => r.json()),
+        { revalidateOnFocus: true }
+    )
+
     const articleRef = useRef<HTMLDivElement>(null)
-    const [authors, setAuthors] = useState<any[]>([])
-    const [selectedTag, setSelectedTag] = useState(pageContext.selectedTag)
-    const [root, setRoot] = useState(pageContext.root || null)
-    const [selectedAuthor, setSelectedAuthor] = useState()
-    const [params, setParams] = useState(
-        getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
-    )
-    const allTags = useMemo(
-        () =>
-            allPostCategory.nodes
-                .flatMap((category) => category.attributes.post_tags.data)
-                .sort((a, b) => a.attributes.label.localeCompare(b.attributes.label))
-                .filter(
-                    (tag, index, self) => index === self.findIndex((t) => t.attributes.label === tag.attributes.label)
-                ),
-        []
-    )
-    const selectedCategory = useMemo(
-        () => allPostCategory.nodes.find((category) => category.attributes.folder === root),
-        [root]
-    )
-    const tags = root === null ? allTags : selectedCategory?.attributes.post_tags.data
-    const allCategories = useMemo(
-        () =>
-            allPostCategory.nodes.filter(
-                (category, index, self) =>
-                    index === self.findIndex((c) => c.attributes.folder === category.attributes.folder)
-            ),
-        []
-    )
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+    const [selectedTag, setSelectedTag] = useState<string | null>(pageContext?.selectedTag || null)
+    const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null)
+    const [currentPage, setCurrentPage] = useState<number>(0)
+    const PAGE_SIZE = 20
+
+    const authorMap = useMemo(() => {
+        const map = new Map<string, string>()
+        if (adminData?.authors && Array.isArray(adminData.authors)) {
+            adminData.authors.forEach((a: any) => {
+                if (a.handle && a.name) {
+                    map.set(a.handle.toLowerCase(), a.name)
+                }
+            })
+        }
+        return map
+    }, [adminData])
+
+    const formatAuthor = (handle: string) => {
+        if (!handle) return { name: 'PostHog Team', handle: 'posthog' }
+        const name =
+            authorMap.get(handle.toLowerCase()) ||
+            handle
+                .split(/[-_]+/)
+                .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ')
+        return { name, handle }
+    }
+
+    // Build unified posts list (prioritizing live local API data, fallback to build-time GraphQL)
+    const allPosts = useMemo(() => {
+        if (adminData?.posts && Array.isArray(adminData.posts) && adminData.posts.length > 0) {
+            return adminData.posts.map((p: any) => ({
+                id: p.slug || p.filename,
+                slug: p.slug?.startsWith('/') ? p.slug : `/blog/${p.slug}`,
+                title: p.title || 'Untitled',
+                date: p.date,
+                category: p.category || 'General',
+                tags: Array.isArray(p.tags) ? p.tags : [],
+                featuredImage: p.featuredImage || null,
+                authors: Array.isArray(p.author)
+                    ? p.author.map((a: string) => formatAuthor(a))
+                    : typeof p.author === 'string' && p.author
+                    ? [formatAuthor(p.author)]
+                    : [{ name: 'PostHog Team', handle: 'posthog' }],
+            }))
+        }
+
+        return (allBlogMdx?.nodes || []).map((node: any) => {
+            const fm = node.frontmatter || {}
+            return {
+                id: node.id,
+                slug: node.fields?.slug,
+                title: fm.title || 'Untitled',
+                date: fm.date,
+                category: fm.category || 'General',
+                tags: Array.isArray(fm.tags) ? fm.tags : [],
+                featuredImage: fm.featuredImage?.publicURL || null,
+                authors:
+                    Array.isArray(fm.authors) && fm.authors.length > 0
+                        ? fm.authors.map((a: any) => ({
+                              name: a?.name || a?.handle || 'PostHog Team',
+                              handle: a?.handle || '',
+                          }))
+                        : [{ name: 'PostHog Team', handle: 'posthog' }],
+            }
+        })
+    }, [adminData, allBlogMdx])
+
+    // Available categories, tags, authors
+    const allCategories = useMemo(() => {
+        if (adminData?.categories && adminData.categories.length > 0) {
+            return adminData.categories
+        }
+        return (categories?.categories?.map((c: any) => c.category) || []).filter(Boolean).sort()
+    }, [adminData, categories])
+
+    const allTags = useMemo(() => {
+        if (adminData?.tags && adminData.tags.length > 0) {
+            return adminData.tags
+        }
+        return (categories?.tags?.map((t: any) => t.tag) || []).filter(Boolean).sort()
+    }, [adminData, categories])
+
+    const allAuthors = useMemo(() => {
+        const map = new Map<string, { name: string; handle: string }>()
+        allPosts.forEach((post) => {
+            post.authors.forEach((author) => {
+                if (author.name && !map.has(author.name)) {
+                    map.set(author.name, author)
+                }
+            })
+        })
+        return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name))
+    }, [allPosts])
+
+    // Filter posts
+    const filteredPosts = useMemo(() => {
+        return allPosts.filter((post) => {
+            if (selectedCategory && post.category !== selectedCategory) {
+                return false
+            }
+            if (selectedTag && !post.tags.includes(selectedTag)) {
+                return false
+            }
+            if (selectedAuthor) {
+                const match = post.authors.some(
+                    (a) => a.handle === selectedAuthor || a.name === selectedAuthor
+                )
+                if (!match) return false
+            }
+            return true
+        })
+    }, [allPosts, selectedCategory, selectedTag, selectedAuthor])
+
+    const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE) || 1
+    const paginatedPosts = useMemo(() => {
+        const start = currentPage * PAGE_SIZE
+        return filteredPosts.slice(start, start + PAGE_SIZE)
+    }, [filteredPosts, currentPage, PAGE_SIZE])
 
     const scrollToTop = () => {
         const viewport = articleRef.current?.closest('[data-radix-scroll-area-viewport]')
@@ -122,61 +238,46 @@ export default function Posts({ pageContext }) {
         })
     }
 
-    const handlePageChange = () => {
+    const handleFilterChange = (filters: any) => {
+        if ('category' in filters) {
+            setSelectedCategory(filters.category?.value || null)
+        } else if ('root' in filters) {
+            setSelectedCategory(filters.root?.value || null)
+        }
+        if ('tags' in filters) {
+            setSelectedTag(filters.tags?.value || null)
+        } else if ('post_tags' in filters) {
+            setSelectedTag(filters.post_tags?.value || null)
+        }
+        if ('author' in filters) {
+            setSelectedAuthor(filters.author?.value || null)
+        } else if ('authors' in filters) {
+            setSelectedAuthor(filters.authors?.value || null)
+        }
+        setCurrentPage(0)
         scrollToTop()
     }
 
-    const { posts, isValidating, totalPages, currentPage, nextPage, prevPage, hasNextPage, hasPrevPage, goToPage } =
-        usePaginatedPosts({ params, onPageChange: handlePageChange })
-
-    const handleFilterChange = (filters) => {
-        if (filters.post_tags) {
-            const currentRoot = filters.root?.value || root
-            const exists = allCategories
-                .find((category) => category.attributes.folder === currentRoot)
-                ?.attributes.post_tags.data.some((tag) => tag.attributes.label === filters.post_tags.value)
-            const selectedTag = currentRoot === null || exists ? filters.post_tags.value : null
-            setSelectedTag(selectedTag)
-        }
-        if (filters.root) {
-            setRoot(filters.root.value)
-        }
-        if (filters.authors) {
-            setSelectedAuthor(filters.authors.value)
+    const nextPage = () => {
+        if (currentPage < totalPages - 1) {
+            setCurrentPage((p) => p + 1)
+            scrollToTop()
         }
     }
 
-    useEffect(() => {
-        const query = qs.stringify(
-            {
-                sort: ['firstName'],
-                pagination: {
-                    page: 1,
-                    pageSize: 100,
-                },
-                filters: {
-                    authorPosts: {
-                        title: {
-                            $notNull: true,
-                        },
-                    },
-                },
-            },
-            {
-                encodeValuesOnly: true,
-            }
-        )
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setAuthors(data?.data)
-            })
-    }, [])
+    const prevPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage((p) => p - 1)
+            scrollToTop()
+        }
+    }
 
-    useEffect(() => {
-        setParams(getParams(root, selectedTag, getSortOption(root).sort, selectedAuthor))
-        scrollToTop()
-    }, [selectedTag, root, selectedAuthor])
+    const goToPage = (page: number) => {
+        if (page >= 0 && page < totalPages) {
+            setCurrentPage(page)
+            scrollToTop()
+        }
+    }
 
     return (
         <>
@@ -186,65 +287,46 @@ export default function Posts({ pageContext }) {
                 title="posts"
                 type="psheet"
                 maxWidth="100%"
-                dataToFilter={posts}
+                dataToFilter={paginatedPosts}
                 handleFilterChange={handleFilterChange}
                 showFilters
                 availableFilters={[
                     {
                         label: 'category',
-                        value: 'root',
-                        initialValue: root,
+                        value: 'category',
+                        initialValue: selectedCategory,
                         options: [
-                            {
-                                label: 'All',
-                                value: null,
-                            },
-                            ...allCategories.map((category) => ({
-                                label: category.attributes.label,
-                                value: category.attributes.folder,
-                            })),
+                            { label: 'All', value: null },
+                            ...allCategories.map((c: string) => ({ label: c, value: c })),
                         ],
                         operator: 'eq',
                     },
-                    ...(tags?.length > 0
+                    ...(allTags.length > 0
                         ? [
                               {
                                   label: 'tags',
-                                  value: 'post_tags',
+                                  value: 'tags',
                                   initialValue: selectedTag,
                                   options: [
-                                      {
-                                          label: 'All',
-                                          value: null,
-                                      },
-                                      ...tags.map((tag) => ({
-                                          label: tag.attributes.label,
-                                          value: tag.attributes.label,
-                                      })),
+                                      { label: 'All', value: null },
+                                      ...allTags.map((t: string) => ({ label: t, value: t })),
                                   ],
                                   operator: 'includes',
                               },
                           ]
                         : []),
-                    ...(authors.length > 0
+                    ...(allAuthors.length > 0
                         ? [
                               {
                                   label: 'author',
-                                  value: 'authors',
+                                  value: 'author',
+                                  initialValue: selectedAuthor,
                                   options: [
-                                      {
-                                          label: 'All',
-                                          value: null,
-                                      },
-                                      ...authors.map((author) => {
-                                          const name = [author.attributes.firstName, author.attributes.lastName]
-                                              .filter(Boolean)
-                                              .join(' ')
-                                          return {
-                                              label: name,
-                                              value: author.id,
-                                          }
-                                      }),
+                                      { label: 'All', value: null },
+                                      ...allAuthors.map((a: any) => ({
+                                          label: a.name,
+                                          value: a.handle || a.name,
+                                      })),
                                   ],
                                   operator: 'includes',
                               },
@@ -252,15 +334,15 @@ export default function Posts({ pageContext }) {
                         : []),
                 ]}
             >
-                {posts.length > 0 && (
+                {paginatedPosts.length > 0 && (
                     <OSTable
                         pagination={{
                             totalPages,
                             currentPage,
                             nextPage,
                             prevPage,
-                            hasNextPage,
-                            hasPrevPage,
+                            hasNextPage: currentPage < totalPages - 1,
+                            hasPrevPage: currentPage > 0,
                             goToPage,
                         }}
                         rowAlignment="top"
@@ -286,25 +368,25 @@ export default function Posts({ pageContext }) {
                                 width: '1fr',
                             },
                         ]}
-                        rows={posts.map((post, index) => {
-                            const featuredImageURL = post.attributes?.featuredImage?.url
+                        rows={paginatedPosts.map((post) => {
+                            const featuredImageURL = post.featuredImage
                             return {
                                 cells: [
                                     {
                                         content: (
                                             <span className="text-muted font-semibold">
-                                                {dayjs(post.attributes.date).format('MMM D, YYYY')}
+                                                {dayjs(post.date).format('MMM D, YYYY')}
                                             </span>
                                         ),
                                     },
                                     {
                                         content: (
                                             <div className="flex justify-between items-start w-full">
-                                                <Link className="font-semibold flex-1" to={post.attributes.slug}>
-                                                    {post.attributes.title}
+                                                <Link className="font-semibold flex-1" to={post.slug}>
+                                                    {post.title}
                                                 </Link>
                                                 {featuredImageURL ? (
-                                                    <Link to={post.attributes.slug}>
+                                                    <Link to={post.slug}>
                                                         <FeaturedImage url={featuredImageURL} />
                                                     </Link>
                                                 ) : null}
@@ -316,20 +398,14 @@ export default function Posts({ pageContext }) {
                                         content: (
                                             <ul className="list-none m-0 p-0">
                                                 <li className="text-sm">
-                                                    {post.attributes.post_tags.data.map((tag, index) => {
-                                                        const label = tag.attributes.label
-                                                        const base =
-                                                            post.attributes.post_category.data.attributes.folder
-                                                        const url = `/${base}/${slugify(label, { lower: true })}`
-                                                        const isLast =
-                                                            index === post.attributes.post_tags.data.length - 1
+                                                    {post.tags.map((tag: string, index: number) => {
+                                                        const url = `/blog/tags/${slugify(tag, { lower: true })}`
+                                                        const isLast = index === post.tags.length - 1
                                                         return (
-                                                            <>
-                                                                <Link key={tag.id} to={url}>
-                                                                    {label}
-                                                                </Link>
+                                                            <React.Fragment key={tag}>
+                                                                <Link to={url}>{tag}</Link>
                                                                 {!isLast && ', '}
-                                                            </>
+                                                            </React.Fragment>
                                                         )
                                                     })}
                                                 </li>
@@ -339,19 +415,11 @@ export default function Posts({ pageContext }) {
                                     {
                                         content: (
                                             <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
-                                                {post.attributes.authors.data.map((author) => {
-                                                    const name = [
-                                                        author.attributes.firstName,
-                                                        author.attributes.lastName,
-                                                    ]
-                                                        .filter(Boolean)
-                                                        .join(' ')
-                                                    return (
-                                                        <li key={author.id}>
-                                                            <TeamMember name={name} photo />
-                                                        </li>
-                                                    )
-                                                })}
+                                                {post.authors.map((author: any) => (
+                                                    <li key={author.handle || author.name}>
+                                                        <TeamMember name={author.name} photo />
+                                                    </li>
+                                                ))}
                                             </ul>
                                         ),
                                     },
@@ -359,11 +427,6 @@ export default function Posts({ pageContext }) {
                             }
                         })}
                     />
-                )}
-                {isValidating && !posts.length && (
-                    <div className="flex items-center justify-center">
-                        <IconSpinner className="size-7 opacity-60 animate-spin" />
-                    </div>
                 )}
             </Editor>
         </>

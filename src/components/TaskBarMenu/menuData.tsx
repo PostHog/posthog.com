@@ -29,6 +29,7 @@ import {
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 interface DocsMenuItem {
     name: string
@@ -714,6 +715,42 @@ export function useMenuData(): MenuType[] {
         },
     ]
 
+    const { menuItems: dynamicMenuItems } = useSiteSettings()
+
+    const finalNavItems: MenuType[] =
+        dynamicMenuItems && dynamicMenuItems.length > 0
+            ? dynamicMenuItems.map((item) => {
+                  const found = mainNavItems.find(
+                      (m) => typeof m.trigger === 'string' && m.trigger.toLowerCase() === item.name.toLowerCase()
+                  )
+                  if (found) {
+                      return {
+                          ...found,
+                          trigger: item.name,
+                          mobileLink: item.url || found.mobileLink,
+                      }
+                  }
+                  return {
+                      trigger: item.name,
+                      items:
+                          item.items && item.items.length > 0
+                              ? item.items.map((sub) => ({
+                                    type: 'item' as const,
+                                    label: sub.name,
+                                    link: sub.url,
+                                }))
+                              : [
+                                    {
+                                        type: 'item' as const,
+                                        label: item.name,
+                                        link: item.url,
+                                    },
+                                ],
+                      mobileLink: item.url,
+                  }
+              })
+            : mainNavItems
+
     // Define base logo menu items (system items)
     const baseLogoMenuItems = [
         {
@@ -740,7 +777,7 @@ export function useMenuData(): MenuType[] {
     const processMobileNavItems = (): MenuItemType[] => {
         const mobileItems: MenuItemType[] = []
 
-        mainNavItems.forEach((menu) => {
+        finalNavItems.forEach((menu) => {
             // If menu has mobileLink, convert to simple item
             if (menu.mobileLink) {
                 mobileItems.push({
@@ -864,7 +901,7 @@ export function useMenuData(): MenuType[] {
             items: logoMenuItems,
         },
         // On desktop, show main navigation items
-        ...(!isMobile ? mainNavItems : []),
+        ...(!isMobile ? finalNavItems : []),
     ]
 }
 

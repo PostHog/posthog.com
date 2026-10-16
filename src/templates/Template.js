@@ -77,27 +77,4 @@ export default function Template({ data }) {
     )
 }
 
-export const query = graphql`
-    query Template($id: String!) {
-        pageData: mdx(id: { eq: $id }) {
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-                subtitle
-                description
-                filters {
-                    type
-                }
-                featuredImage {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
-            }
-        }
-    }
-`
+export const query = null

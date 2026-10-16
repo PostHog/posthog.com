@@ -44,19 +44,4 @@ const Tutorials = ({
 
 export default Tutorials
 
-export const pageQuery = graphql`
-    query ($skip: Int!, $limit: Int!) {
-        allPostsRecent: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { isFuture: { ne: true }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-    }
-`
+export const pageQuery = null

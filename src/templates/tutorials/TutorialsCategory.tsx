@@ -54,31 +54,4 @@ const TutorialsCategory = ({
 
 export default TutorialsCategory
 
-export const pageQuery = graphql`
-    query ($skip: Int!, $limit: Int!, $activeFilter: String) {
-        allPostsRecent: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { tags: { in: [$activeFilter] } }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-        allPostsPopular: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [fields___pageViews] }
-            filter: { frontmatter: { tags: { in: [$activeFilter] } }, fields: { slug: { regex: "/^/tutorials/" } } }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-    }
-`
+export const pageQuery = null

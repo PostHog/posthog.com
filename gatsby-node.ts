@@ -46,17 +46,8 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         })
     }
 
-    if (page.path.match(/^\/community\/profiles/)) {
-        page.matchPath = '/community/profiles/*'
-        createPage(page)
-    }
-    if (page.path.match(/^\/next\-steps/)) {
-        page.matchPath = '/next-steps/*'
-        createPage(page)
-    }
-    // Add client-side routing for custom presentations
-    if (page.path.match(/^\/for\//)) {
-        page.matchPath = '/for/*'
+    if (page.path.match(/^\/admin/)) {
+        page.matchPath = '/admin/*'
         createPage(page)
     }
 }
@@ -101,7 +92,23 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                     'docs',
                     'onboarding'
                 ),
+                'onboarding/llm-analytics': path.resolve(
+                    __dirname,
+                    '.cache',
+                    'gatsby-source-git',
+                    'posthog-main-repo',
+                    'docs',
+                    'onboarding',
+                    'ai-observability'
+                ),
                 'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
+                    __dirname,
+                    'src',
+                    'components',
+                    'Docs',
+                    'OnboardingContentWrapper.tsx'
+                ),
+                'scenes/onboarding/shared/OnboardingDocsContentWrapper': path.resolve(
                     __dirname,
                     'src',
                     'components',

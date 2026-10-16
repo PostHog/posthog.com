@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react'
 import menu, { docsMenu } from '../../navs'
+import useSiteSettings from '../../hooks/useSiteSettings'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
@@ -58,9 +59,26 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
+
+    const { menuItems } = useSiteSettings()
+
+    const dynamicMenu = useMemo(() => {
+        if (!menuItems || menuItems.length === 0) return menu
+        return menuItems.map((item) => ({
+            name: item.name,
+            url: item.url,
+            children: item.items?.map((child) => ({
+                name: child.name,
+                url: child.url,
+            })) || [],
+        }))
+    }, [menuItems])
+
+    const currentMenu = dynamicMenu.length > 0 ? dynamicMenu : menu
+
     const parent =
         other.parent ??
-        menu.find(({ children, url }) => {
+        currentMenu.find(({ children, url }: any) => {
             const currentURL = pathname
             return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
         })
@@ -69,7 +87,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
 
     const activeInternalMenu =
         other.activeInternalMenu ??
-        internalMenu?.find((menuItem) => {
+        internalMenu?.find((menuItem: any) => {
             const currentURL = pathname
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
@@ -176,7 +194,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     return (
         <Context.Provider
             value={{
-                menu,
+                menu: currentMenu,
                 parent,
                 internalMenu,
                 activeInternalMenu,

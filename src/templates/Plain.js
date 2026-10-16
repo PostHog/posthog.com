@@ -75,33 +75,4 @@ export default function Plain({ data }) {
     )
 }
 
-export const query = graphql`
-    query PlainLayout($id: String!) {
-        pageData: mdx(id: { eq: $id }) {
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-                showTitle
-                featuredImageType
-                featuredImage {
-                    publicURL
-                }
-                images {
-                    childImageSharp {
-                        gatsbyImageData
-                    }
-                }
-                width
-                noindex
-                isInFrame
-                seo {
-                    ...SEOFragment
-                }
-            }
-        }
-    }
-`
+export const query = null

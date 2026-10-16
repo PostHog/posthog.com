@@ -743,29 +743,4 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
     )
 }
 
-export const query = graphql`
-    query ApiEndpoint($id: String!, $regex: String!) {
-        allMdx(filter: { fields: { slug: { regex: $regex } } }) {
-            nodes {
-                slug
-                body
-            }
-        }
-        data: apiEndpoint(id: { eq: $id }) {
-            id
-            internal {
-                content
-                description
-                ignoreType
-                mediaType
-            }
-            items
-            name
-            url
-            nextURL
-        }
-        apiComponents: apiComponents {
-            components
-        }
-    }
-`
+export const query = null

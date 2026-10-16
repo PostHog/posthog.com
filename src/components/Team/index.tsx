@@ -263,46 +263,9 @@ export default function Team({
         team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
-    const {
-        allSlackEmoji: { totalCount: totalSlackEmojis },
-        allTeams,
-        allAshbyJobPosting,
-    } = useStaticQuery(graphql`
-        {
-            allSlackEmoji {
-                totalCount
-            }
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-            allAshbyJobPosting(filter: { isListed: { eq: true } }) {
-                nodes {
-                    fields {
-                        title
-                        slug
-                    }
-                    parent {
-                        ... on AshbyJob {
-                            customFields {
-                                value
-                                title
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const totalSlackEmojis = 0
+    const allTeams = { nodes: [] }
+    const allAshbyJobPosting = { nodes: [] }
 
     const { handleChange, values, submitForm, setFieldValue } = useFormik({
         enableReinitialize: true,

@@ -1,0 +1,103 @@
+diff --git a/node_modules/webpack/lib/dependencies/CommonJsExportRequireDependency.js b/node_modules/webpack/lib/dependencies/CommonJsExportRequireDependency.js
+index fc16baa..1d87144 100644
+--- a/node_modules/webpack/lib/dependencies/CommonJsExportRequireDependency.js
++++ b/node_modules/webpack/lib/dependencies/CommonJsExportRequireDependency.js
+@@ -246,6 +246,7 @@ class CommonJsExportRequireDependency extends ModuleDependency {
+ 		}
+ 
+ 		const isNamespaceImport =
++			importedModule &&
+ 			importedModule.getExportsType(moduleGraph, false) === "namespace";
+ 
+ 		/** @type {Set<string>} */
+diff --git a/node_modules/webpack/lib/dependencies/ContextElementDependency.js b/node_modules/webpack/lib/dependencies/ContextElementDependency.js
+index abe3d73..1f2fc6d 100644
+--- a/node_modules/webpack/lib/dependencies/ContextElementDependency.js
++++ b/node_modules/webpack/lib/dependencies/ContextElementDependency.js
+@@ -83,6 +83,7 @@ class ContextElementDependency extends ModuleDependency {
+ 				const importedModule =
+ 					/** @type {Module} */
+ 					(moduleGraph.getModule(this));
++				if (!importedModule) return Dependency.EXPORTS_OBJECT_REFERENCED;
+ 				const exportsType = importedModule.getExportsType(
+ 					moduleGraph,
+ 					selfModule.options.namespaceObject === "strict"
+diff --git a/node_modules/webpack/lib/dependencies/HarmonyExportImportedSpecifierDependency.js b/node_modules/webpack/lib/dependencies/HarmonyExportImportedSpecifierDependency.js
+index 84eabaf..a9a481f 100644
+--- a/node_modules/webpack/lib/dependencies/HarmonyExportImportedSpecifierDependency.js
++++ b/node_modules/webpack/lib/dependencies/HarmonyExportImportedSpecifierDependency.js
+@@ -228,11 +228,13 @@ const getMode = (moduleGraph, dep, runtimeKey) => {
+ 		return mode;
+ 	}
+ 
+-	const importedExportsType = importedModule.getExportsType(
+-		moduleGraph,
+-		/** @type {BuildMeta} */
+-		(parentModule.buildMeta).strictHarmonyModule
+-	);
++	const importedExportsType = importedModule
++		? importedModule.getExportsType(
++				moduleGraph,
++				/** @type {BuildMeta} */
++				(parentModule.buildMeta).strictHarmonyModule
++		  )
++		: "auto";
+ 
+ 	const ids = dep.getIds(moduleGraph);
+ 
+@@ -1068,10 +1070,10 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
+ 						.getExportsInfo(module)
+ 						.getUsedName(mode.name ? mode.name : [], runtime),
+ 					importVar,
+-					importedModule.getExportsType(
++					(importedModule ? importedModule.getExportsType(
+ 						moduleGraph,
+ 						module.buildMeta && module.buildMeta.strictHarmonyModule
+-					),
++					) : "auto"),
+ 					runtimeRequirements
+ 				)
+ 			);
+diff --git a/node_modules/webpack/lib/dependencies/HarmonyImportSpecifierDependency.js b/node_modules/webpack/lib/dependencies/HarmonyImportSpecifierDependency.js
+index bf3f707..51d0ae8 100644
+--- a/node_modules/webpack/lib/dependencies/HarmonyImportSpecifierDependency.js
++++ b/node_modules/webpack/lib/dependencies/HarmonyImportSpecifierDependency.js
+@@ -157,6 +157,7 @@ class HarmonyImportSpecifierDependency extends HarmonyImportDependency {
+ 			const importedModule =
+ 				/** @type {Module} */
+ 				(moduleGraph.getModule(this));
++			if (!importedModule) return this._getReferencedExportsInDestructuring();
+ 			switch (
+ 				importedModule.getExportsType(
+ 					moduleGraph,
+@@ -361,11 +362,13 @@ HarmonyImportSpecifierDependency.Template = class HarmonyImportSpecifierDependen
+ 				const importedModule =
+ 					/** @type {Module} */
+ 					(moduleGraph.getModule(dep));
+-				const exportsType = importedModule.getExportsType(
+-					moduleGraph,
+-					/** @type {BuildMeta} */
+-					(selfModule.buildMeta).strictHarmonyModule
+-				);
++				const exportsType = importedModule
++					? importedModule.getExportsType(
++							moduleGraph,
++							/** @type {BuildMeta} */
++							(selfModule.buildMeta).strictHarmonyModule
++					  )
++					: "auto";
+ 				if (
+ 					(exportsType === "default-only" ||
+ 						exportsType === "default-with-named") &&
+diff --git a/node_modules/webpack/lib/dependencies/ImportDependency.js b/node_modules/webpack/lib/dependencies/ImportDependency.js
+index 1368d40..c09ed29 100644
+--- a/node_modules/webpack/lib/dependencies/ImportDependency.js
++++ b/node_modules/webpack/lib/dependencies/ImportDependency.js
+@@ -61,6 +61,7 @@ class ImportDependency extends ModuleDependency {
+ 				const importedModule =
+ 					/** @type {Module} */
+ 					(moduleGraph.getModule(this));
++				if (!importedModule) return Dependency.EXPORTS_OBJECT_REFERENCED;
+ 				const exportsType = importedModule.getExportsType(
+ 					moduleGraph,
+ 					/** @type {BuildMeta} */

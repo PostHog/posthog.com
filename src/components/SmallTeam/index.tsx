@@ -13,31 +13,7 @@ export interface SmallTeamProps {
 }
 
 export default function SmallTeam({ slug, children, inline = false, noMiniCrest = false, className = '' }: SmallTeamProps): JSX.Element | null {
-    const {
-        allSqueakTeam: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            allSqueakTeam {
-                nodes {
-                    id
-                    name
-                    tagline
-                    slug
-                    miniCrest {
-                        gatsbyImageData(width: 20, height: 20)
-                    }
-                    crest {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
+    const nodes: any[] = []
     const team = nodes.find((node: any) => node.slug === slug)
 
     if (!team) {

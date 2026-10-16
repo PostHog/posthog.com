@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import { IconDemoThumb, AppIcon, IconChangelogThumb } from 'components/OSIcons'
@@ -14,6 +14,7 @@ import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 declare global {
     interface Window {
@@ -160,11 +161,10 @@ const STORAGE_KEY = 'desktop-icon-positions'
 const validateIconPositions = (
     positions: IconPositions,
     constraintsRef: React.RefObject<HTMLDivElement>,
-    productLinks: ReturnType<typeof useProductLinks>
+    allApps: AppItem[]
 ): boolean => {
     const iconWidth = 112
     const iconHeight = 75
-    const allApps = [...productLinks, ...apps]
 
     for (const app of allApps) {
         if (!positions[app.label]) {
@@ -195,7 +195,39 @@ const validateIconPositions = (
 }
 
 export default function Desktop() {
-    const productLinks = useProductLinks()
+    const defaultProductLinks = useProductLinks()
+    const { desktopIcons } = useSiteSettings()
+
+    const dynamicProductLinks = useMemo(() => {
+        if (!desktopIcons || desktopIcons.length === 0) return defaultProductLinks
+        return desktopIcons
+            .filter((item) => item.section !== 'apps')
+            .map((item) => ({
+                label: item.label,
+                Icon: <AppIcon name={item.icon as any || 'doc'} />,
+                url: item.url,
+                external: item.external,
+                source: 'desktop' as const,
+            }))
+    }, [desktopIcons, defaultProductLinks])
+
+    const dynamicApps = useMemo(() => {
+        if (!desktopIcons || desktopIcons.length === 0) return apps
+        return desktopIcons
+            .filter((item) => item.section === 'apps')
+            .map((item) => ({
+                label: item.label,
+                Icon: <AppIcon name={item.icon as any || 'posthog'} />,
+                url: item.url,
+                external: item.external,
+                source: 'desktop' as const,
+            }))
+    }, [desktopIcons])
+
+    const productLinks = dynamicProductLinks
+    const currentApps = dynamicApps
+    const allApps = useMemo(() => [...productLinks, ...currentApps], [productLinks, currentApps])
+
     const {
         constraintsRef,
         siteSettings,
@@ -237,7 +269,7 @@ export default function Desktop() {
 
         // Position productLinks starting from the left
         let currentColumn = 0
-        const leftIcons = columns === 1 ? [...productLinks, ...apps] : productLinks
+        const leftIcons = columns === 1 ? allApps : productLinks
         leftIcons.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
@@ -260,7 +292,7 @@ export default function Desktop() {
         const minStartFromLeft = (currentColumn + 1) * columnSpacing + paddingHorizontal
         const rightStartColumn = Math.max(rightmostStart, minStartFromLeft)
 
-        apps.forEach((app, index) => {
+        currentApps.forEach((app, index) => {
             const columnIndex = Math.floor(index / maxIconsPerColumn)
             const positionInColumn = index % maxIconsPerColumn
 
@@ -294,7 +326,7 @@ export default function Desktop() {
                 const parsedPositions = JSON.parse(savedPositions)
 
                 // Validate that all positions are within viewport bounds
-                if (validateIconPositions(parsedPositions, constraintsRef, productLinks)) {
+                if (validateIconPositions(parsedPositions, constraintsRef, allApps)) {
                     setIconPositions(parsedPositions)
                 } else {
                     // Some icons are out of bounds, reset to initial positions
@@ -321,7 +353,7 @@ export default function Desktop() {
         return () => {
             window.removeEventListener('resize', handleResize)
         }
-    }, [posthogInstance])
+    }, [posthogInstance, allApps])
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -335,8 +367,6 @@ export default function Desktop() {
         setIconPositions(newPositions)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
     }
-
-    const allApps = [...productLinks, ...apps]
 
     const handleScreensaverDismiss = () => {
         addToast({

@@ -118,32 +118,4 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     )
 }
 
-export const query = graphql`
-    query TutorialLayout($id: String!) {
-        pageData: mdx(id: { eq: $id }) {
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-                date(formatString: "MMM DD, YYYY")
-                description
-                categories: tags
-                featuredVideo
-                featuredImage {
-                    publicURL
-                    childImageSharp {
-                        gatsbyImageData(placeholder: NONE)
-                    }
-                }
-            }
-            parent {
-                ... on File {
-                    relativePath
-                }
-            }
-        }
-    }
-`
+export const query = null

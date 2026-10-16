@@ -1,0 +1,26 @@
+services:
+  gatsby:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6464:6464"
+    environment:
+      TAILWIND_MODE: watch
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      NODE_OPTIONS: --max_old_space_size=4096
+      GATSBY_TELEMETRY_DISABLED: "1"
+      BILLING_SERVICE_URL: https://billing.posthog.com
+    volumes:
+      - .:/app
+      - gatsby_node_modules:/app/node_modules
+      - gatsby_cache:/app/.cache
+      - gatsby_public:/app/public
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+volumes:
+  gatsby_node_modules:
+  gatsby_cache:
+  gatsby_public:

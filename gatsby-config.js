@@ -70,24 +70,6 @@ module.exports = {
     trailingSlash: 'never',
     plugins: [
         {
-            resolve: `gatsby-source-ashby`,
-            options: {
-                apiKey: process.env.ASHBY_API_KEY,
-            },
-        },
-        {
-            resolve: `gatsby-source-squeak`,
-            options: {
-                apiHost: process.env.GATSBY_SQUEAK_API_HOST,
-            },
-        },
-        {
-            resolve: `gatsby-mapbox-locations`,
-            options: {
-                mapboxToken: process.env.MAPBOX_TOKEN,
-            },
-        },
-        {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
                 endpoint:
@@ -114,7 +96,24 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                ignore: [
+                    '**/docs/**',
+                    '**/handbook/**',
+                    '**/tutorials/**',
+                    '**/newsletter/**',
+                    '**/cdp/**',
+                    '**/product-engineers/**',
+                    '**/founders/**',
+                    '**/customers/**',
+                    '**/teams/**',
+                    '**/templates/**',
+                    '**/library/**',
+                    '**/spotlight/**',
+                    '**/apps/**',
+                    '**/hosthog/**',
+                    '**/notes/**',
+                    '**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}',
+                ],
             },
         },
         {
@@ -169,26 +168,8 @@ module.exports = {
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
-        {
-            resolve: `gatsby-source-strapi-pages`,
-            options: {
-                strapiURL: process.env.STRAPI_URL,
-                strapiKey: process.env.STRAPI_API_KEY,
-            },
-        },
         `gatsby-plugin-image`,
-        {
-            resolve: `gatsby-plugin-manifest`,
-            options: {
-                name: 'PostHog | How developers build successful products',
-                short_name: 'starter',
-                start_url: '/',
-                background_color: '#E5E7E0',
-                theme_color: '#E5E7E0',
-                display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
-            },
-        },
+        // gatsby-plugin-manifest disabled (avoids sharp native dependency issue)
         `gatsby-plugin-postcss`,
         {
             resolve: `gatsby-plugin-sitemap`,
@@ -212,29 +193,11 @@ module.exports = {
                     return site.siteMetadata.siteUrl
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
-                    const transformedPages = allPages.map(({ path }) => {
+                    return allPages.map(({ path }) => {
                         return {
                             path: `${site.siteMetadata.siteUrl}${path}`,
                         }
                     })
-
-                    let plugins = []
-                    try {
-                        const pluginsResponse = await fetch(
-                            'https://raw.githubusercontent.com/PostHog/plugin-repository/main/repository.json'
-                        )
-                        plugins = await pluginsResponse.json()
-                    } catch (e) {
-                        console.log(e)
-                    }
-
-                    plugins = plugins.map((plugin) => ({
-                        path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
-                    }))
-
-                    const questionPages = await getQuestionPages(site.siteMetadata.siteUrl)
-
-                    return [...transformedPages, ...questionPages, ...plugins]
                 },
                 serialize: async ({ path }) => {
                     let changefreq = 'monthly'

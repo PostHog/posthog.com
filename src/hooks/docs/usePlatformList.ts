@@ -83,21 +83,7 @@ export default function usePlatformList(
     titleSuffix?: string,
     options?: UsePlatformListOptions
 ): Platform[] {
-    const { allMdx } = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { frontmatter: { title: { ne: null } } }) {
-                nodes {
-                    slug
-                    frontmatter {
-                        title
-                        platformLogo
-                        platformIconName
-                        platformSourceType
-                    }
-                }
-            }
-        }
-    `)
+    const allMdx = { nodes: [] }
 
     const pathPattern = new RegExp(`^${basePath}/[^/]+$`)
 

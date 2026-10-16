@@ -501,5 +501,15 @@
         "link_type": "linkedin",
         "link_url": "https://linkedin.com/in/jinayoon963",
         "profile_id": 38655
+    },
+    {
+        "handle": "budi-santoso",
+        "name": "Budi Santoso",
+        "role": "Senior Tech Writer"
+    },
+    {
+        "handle": "citra-lestari",
+        "name": "Citra Lestari",
+        "role": "AI Researcher"
     }
 ]

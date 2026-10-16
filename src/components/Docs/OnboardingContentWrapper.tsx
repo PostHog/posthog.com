@@ -135,3 +135,35 @@ export const OnboardingContentWrapper: React.FC<OnboardingContentWrapperProps> =
         </MDXComponentsContext.Provider>
     )
 }
+
+export const OnboardingDocsContentWrapper = OnboardingContentWrapper
+export { dedent }
+
+export function OnboardingSelectedFileProvider({ children }: { children: React.ReactNode }): JSX.Element {
+    return <>{children}</>
+}
+
+export function createInstallation(
+    getSteps: (ctx: DocsComponents) => any[]
+): React.ComponentType<any> {
+    return function Installation({ modifySteps }: any = {}) {
+        const components = useMDXComponents()
+        const { Steps, Step } = components
+
+        let steps = getSteps ? getSteps(components) : []
+        if (modifySteps && typeof modifySteps === 'function') {
+            steps = modifySteps(steps)
+        }
+
+        return (
+            <Steps>
+                {Array.isArray(steps) && steps.map((step: any, index: number) => (
+                    <Step key={index} title={step?.title} badge={step?.badge}>
+                        {step?.content}
+                    </Step>
+                ))}
+            </Steps>
+        )
+    }
+}
+

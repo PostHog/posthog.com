@@ -4,20 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 export function useSmallTeamsMenuItems() {
-    const { allTeams } = useStaticQuery(graphql`
-        {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-                nodes {
-                    id
-                    name
-                    slug
-                    miniCrest {
-                        gatsbyImageData(width: 64, height: 64)
-                    }
-                }
-            }
-        }
-    `)
+    const allTeams = { nodes: [] }
 
     // Sort teams alphabetically by name
     const sortedTeams = [...allTeams.nodes].sort((a, b) => a.name.localeCompare(b.name))

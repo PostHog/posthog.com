@@ -1,21 +1,16 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import { PricingTiers } from 'components/Pricing/Plans'
-import { allProductsData } from 'components/Pricing/Pricing'
 
-export default function GroupAnalytics() {
+export default function GroupAnalytics({ data }: { data: any }) {
     // Get product data from useProduct hook
     const groupAnalyticsProduct = useProduct({ handle: 'group_analytics' }) as any
 
     // Get billing data from GraphQL
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(allProductsData)
+    const billingProducts = data?.allProductData?.nodes?.[0]?.products || []
 
     // Find the group analytics addon in billing products
     const productAddons = billingProducts.flatMap((product: any) => product.addons || [])
@@ -149,6 +144,22 @@ export const query = graphql`
             body
             frontmatter {
                 title
+            }
+        }
+        allProductData {
+            nodes {
+                products {
+                    addons {
+                        name
+                        type
+                        plans {
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                }
             }
         }
     }

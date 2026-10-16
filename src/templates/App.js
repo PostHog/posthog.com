@@ -118,45 +118,4 @@ export default function App({ data }) {
     )
 }
 
-export const query = graphql`
-    query App($id: String!, $documentation: String!) {
-        pageData: mdx(id: { eq: $id }) {
-            body
-            excerpt(pruneLength: 150)
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-                description
-                filters {
-                    type
-                    maintainer
-                }
-                thumbnail {
-                    publicURL
-                }
-            }
-        }
-        documentation: mdx(fields: { slug: { eq: $documentation } }) {
-            fields {
-                slug
-            }
-            headings {
-                depth
-                value
-            }
-        }
-        apps: allMdx(filter: { fields: { slug: { regex: "/^/apps/" } } }) {
-            nodes {
-                id
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                }
-            }
-        }
-    }
-`
+export const query = null

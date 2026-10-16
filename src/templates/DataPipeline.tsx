@@ -126,25 +126,4 @@ export default function DataPipeline({
     )
 }
 
-export const query = graphql`
-    query ($id: String!) {
-        postHogPipeline(id: { eq: $id }) {
-            id
-            name
-            description
-            type
-            icon_url
-            inputs_schema {
-                key
-                type
-                label
-                secret
-                required
-                description
-            }
-            status
-            introSnippet
-            installationSnippet
-        }
-    }
-`
+export const query = null

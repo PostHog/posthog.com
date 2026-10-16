@@ -32,7 +32,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import AskMax from 'components/AskMax'
 import ImageSlider from 'components/ImageSlider'
 import ReaderView from 'components/ReaderView'
-import { usePosts } from 'components/Edition/hooks/usePosts'
+import { useLocalPosts } from '../hooks/useLocalPosts'
 import { TreeMenu } from 'components/TreeMenu'
 import { postsMenu as menu } from '../navs/posts'
 import MenuBar from 'components/RadixUI/MenuBar'
@@ -292,9 +292,33 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         featuredVideo,
         featuredImageType,
         contributors,
+        author,
         tags,
         seo,
-    } = postData?.frontmatter
+    } = postData?.frontmatter || {}
+
+    const displayContributors = useMemo(() => {
+        if (contributors && contributors.length > 0) {
+            return contributors
+        }
+        if (author) {
+            const list = Array.isArray(author) ? author : [author]
+            return list.map((handle: string) => {
+                const name = handle
+                    .split(/[-_]+/)
+                    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                    .join(' ')
+                return {
+                    name,
+                    role: 'Author',
+                    profile_id: null,
+                    image: null,
+                }
+            })
+        }
+        return []
+    }, [contributors, author])
+
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
     const category = postData?.parent?.category
@@ -328,7 +352,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     const { tableOfContents, askMax } = pageContext
     const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
-    const [postID, setPostID] = useState()
     const [posthogInstance, setPosthogInstance] = useState()
 
     const activeMenu = useMemo(() => {
@@ -338,9 +361,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
     const [sort, setSort] = useState(getSortOption(root))
     const [tag, setTag] = useState(initialTag)
 
-    const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
-
-    const { posts, isLoading, isValidating, fetchMore, mutate, hasMore } = usePosts({ params })
+    const { posts, isLoading, isValidating, fetchMore, hasMore } = useLocalPosts({ root, tag, sort })
 
     useEffect(() => {
         if (window) {
@@ -353,32 +374,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             }
         }
     }, [])
-
-    useEffect(() => {
-        fetch(
-            `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${qs.stringify(
-                {
-                    fields: ['id'],
-                    filters: {
-                        slug: {
-                            $eq: pathname,
-                        },
-                    },
-                },
-                { encodeValuesOnly: true }
-            )}`
-        )
-            .then((res) => res.json())
-            .then((posts) => {
-                if (posts?.data?.length > 0) {
-                    setPostID(posts.data[0].id)
-                }
-            })
-    }, [pathname])
-
-    useEffect(() => {
-        setParams(getParams(root, tag, sort.sort))
-    }, [root, tag, sort])
 
     return (
         <>
@@ -403,10 +398,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         ) : (
                             <TreeMenu
                                 key={`posts-${posts?.length}`}
-                                items={posts?.map((post) => {
+                                items={posts?.map((post: any) => {
                                     return {
-                                        name: post.attributes.title,
-                                        url: post.attributes.slug,
+                                        name: post.title,
+                                        url: post.slug,
                                     }
                                 })}
                             />
@@ -429,7 +424,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     content: body,
                     featuredImage,
                     featuredImageCaption,
-                    contributors,
+                    contributors: displayContributors,
                     date,
                     featuredVideo,
                     tags: tags?.map((tag) => ({ label: tag, url: `/${root}/${slugify(tag, { lower: true })}` })),
@@ -438,6 +433,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
                 homeURL={`/${root}`}
+                postSlug={fields?.slug}
             />
         </>
     )
@@ -479,6 +475,7 @@ export const query = graphql`
                 category
                 hideAnchor
                 description
+                author
                 featuredImageType
                 featuredVideo
                 featuredImage {
@@ -509,10 +506,6 @@ export const query = graphql`
             parent {
                 ... on File {
                     relativePath
-                    category
-                    fields {
-                        gitLogLatestDate(formatString: "MMM DD, YYYY")
-                    }
                 }
             }
         }

@@ -384,14 +384,4 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     )
 }
 
-export const query = graphql`
-    query SdkReferencesQuery {
-        allSdkReferences {
-            nodes {
-                id
-                version
-                referenceId
-            }
-        }
-    }
-`
+export const query = null

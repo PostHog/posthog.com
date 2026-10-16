@@ -4,9 +4,7 @@ import React from 'react'
 import Link from 'components/Link'
 
 export default function TutorialsList({ topic, slugs }: { topic?: string; slugs?: string[] }): any {
-    const {
-        allMdx: { nodes },
-    } = useStaticQuery(query)
+    const nodes: any[] = []
     const tutorials = nodes.filter((tutorial) => {
         return slugs
             ? slugs.includes(tutorial.fields.slug)
@@ -29,31 +27,4 @@ export default function TutorialsList({ topic, slugs }: { topic?: string; slugs?
     )
 }
 
-export const query = graphql`
-    query TutorialsListQuery {
-        allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }, limit: 1000) {
-            nodes {
-                id
-                fields {
-                    slug
-                }
-                frontmatter {
-                    title
-                    tags
-                    featuredImage {
-                        childImageSharp {
-                            gatsbyImageData(width: 514, height: 289)
-                        }
-                    }
-                }
-                parent {
-                    ... on File {
-                        fields {
-                            date: gitLogLatestDate(formatString: "MMM 'YY")
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
+export const query = null

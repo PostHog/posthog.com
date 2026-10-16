@@ -48,21 +48,7 @@ function getFrameworksNavOrder(): string[] {
 }
 
 export default function useFrameworkList(): Framework[] {
-    const { allMdx } = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { frontmatter: { title: { ne: null } } }) {
-                nodes {
-                    slug
-                    frontmatter {
-                        title
-                        icon {
-                            publicURL
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const allMdx = { nodes: [] }
 
     // Get the list of framework URLs from nav to filter and order by
     const frameworkUrls = getFrameworksNavOrder()

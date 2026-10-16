@@ -13,32 +13,8 @@ const isOverlapping = (location: Location, locations: Location[], offset = 2) =>
 }
 
 const GEO_URL = '/world-countries-sans-antarctica.json'
-const QUERY = graphql`
-    query {
-        allMapboxLocation {
-            nodes {
-                location
-                coordinates {
-                    latitude
-                    longitude
-                }
-            }
-        }
-    }
-`
-
-interface Location {
-    location: string
-    coordinates: {
-        latitude: number
-        longitude: number
-    }
-}
-
 export default function Map(): JSX.Element {
-    const data = useStaticQuery(QUERY)
-
-    const allLocations: Location[] = data.allMapboxLocation.nodes
+    const allLocations: Location[] = []
     const nonOverlappingLocations: Location[] = allLocations.reduce((otherLocations, location) => {
         if (isOverlapping(location, otherLocations)) return otherLocations
 

@@ -36,6 +36,7 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import SideModal from 'components/Modal/SideModal'
 import { Authentication } from 'components/Squeak'
 import { useChat } from 'hooks/useChat'
+import { useLocalAuth } from '../../hooks/useLocalAuth'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -415,6 +416,7 @@ const TheoTooltip = () => {
 
 export const Main = () => {
     const { user, logout } = useUser()
+    const localAuth = useLocalAuth()
     const { openChat, hasUnread } = useChat()
     const {
         menu,
@@ -551,6 +553,32 @@ export const Main = () => {
                         ) : (
                             <SignupCTA size="sm" type="outline" className="hidden sm:flex mr-2" text="Get started" />
                         )}
+                        {localAuth.isLoggedIn ? (
+                            <Link
+                                to={localAuth.isAdmin ? '/admin' : '/account'}
+                                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full bg-primary/10 hover:bg-primary/20 text-primary dark:text-primary-dark mr-2 border border-primary/20 transition-colors"
+                            >
+                                <span
+                                    className={`size-2 rounded-full ${
+                                        localAuth.isAdmin ? 'bg-red-500' : 'bg-emerald-500'
+                                    }`}
+                                />
+                                <span>{localAuth.user?.name || localAuth.user?.username}</span>
+                                {localAuth.isAdmin && (
+                                    <span className="text-[10px] uppercase font-bold text-red-500 bg-red-500/10 px-1 rounded">
+                                        Admin
+                                    </span>
+                                )}
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold rounded-md border border-primary/30 hover:border-primary text-primary dark:text-primary-dark mr-2 transition-colors"
+                            >
+                                <IconUser className="size-3.5 opacity-70" />
+                                <span>Login</span>
+                            </Link>
+                        )}
                         <HoverTooltip
                             content={() => (
                                 <div className="text-xs">
@@ -656,6 +684,67 @@ export const Main = () => {
                                                 </button>
                                             )}
                                         </li>
+
+                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
+                                            Local Account
+                                        </li>
+                                        {localAuth.isLoggedIn ? (
+                                            <>
+                                                <li className="px-2 py-1 text-xs opacity-70">
+                                                    Signed in: <strong>{localAuth.user?.name || localAuth.user?.username}</strong> ({localAuth.user?.role})
+                                                </li>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                        to="/account"
+                                                    >
+                                                        <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        My Account
+                                                    </Link>
+                                                </li>
+                                                {localAuth.isAdmin && (
+                                                    <li className="px-1">
+                                                        <Link
+                                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full font-semibold text-red-600 dark:text-red-400"
+                                                            to="/admin"
+                                                        >
+                                                            <IconApp className="opacity-70 group-hover/item:opacity-100 inline-block mr-2 w-6" />
+                                                            Admin Suite
+                                                        </Link>
+                                                    </li>
+                                                )}
+                                                <li className="px-1">
+                                                    <button
+                                                        onClick={() => localAuth.logout()}
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full text-red-500"
+                                                    >
+                                                        <IconLock className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        Log out
+                                                    </button>
+                                                </li>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                        to="/login"
+                                                    >
+                                                        <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        Login / Register
+                                                    </Link>
+                                                </li>
+                                                <li className="px-1">
+                                                    <Link
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full text-xs text-muted"
+                                                        to="/admin"
+                                                    >
+                                                        <IconApp className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                        Admin Suite
+                                                    </Link>
+                                                </li>
+                                            </>
+                                        )}
 
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
                                             Display options

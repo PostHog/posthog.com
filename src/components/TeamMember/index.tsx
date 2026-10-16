@@ -154,30 +154,7 @@ export default function TeamMember({
     showOnlyFirstName?: boolean
     children?: JSX.Element
 }): JSX.Element | null {
-    const {
-        profiles: { nodes },
-    } = useStaticQuery(graphql`
-        {
-            profiles: allSqueakProfile {
-                nodes {
-                    avatar {
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
-                    }
-                    firstName
-                    lastName
-                    squeakId
-                    companyRole
-                    location
-                    country
-                    color
-                }
-            }
-        }
-    `)
+    const nodes: any[] = []
 
     const person = nodes.find(
         ({ firstName, lastName }: { firstName: string; lastName: string }) =>

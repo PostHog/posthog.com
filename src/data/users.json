@@ -1,0 +1,22 @@
+[
+    {
+        "id": "usr-admin-1",
+        "username": "admin",
+        "email": "admin@posthog.local",
+        "password": "admin",
+        "name": "Administrator",
+        "role": "admin",
+        "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/v1738943658/James_H_5cb4c53d9a.png",
+        "createdAt": "2026-10-01T00:00:00.000Z"
+    },
+    {
+        "id": "usr-member-1",
+        "username": "user",
+        "email": "user@posthog.local",
+        "password": "user",
+        "name": "Community User",
+        "role": "user",
+        "avatar": "",
+        "createdAt": "2026-10-02T00:00:00.000Z"
+    }
+]

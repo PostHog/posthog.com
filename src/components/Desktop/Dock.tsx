@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { apps, productLinks } from '.'
-import { AppItem, AppLink } from 'components/OSIcons/AppIcon'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { AppItem, AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import { motion } from 'framer-motion'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 const Folder = ({
     items,
@@ -75,8 +75,33 @@ const Folder = ({
 }
 
 export default function Dock() {
+    const { desktopIcons } = useSiteSettings()
     const [openFolder, setOpenFolder] = useState<string | null>(null)
     const ref = useRef<HTMLDivElement>(null)
+
+    const productLinks = useMemo(() => {
+        return (desktopIcons || [])
+            .filter((item) => item.section !== 'apps')
+            .map((item) => ({
+                label: item.label,
+                Icon: <AppIcon name={item.icon as any || 'doc'} />,
+                url: item.url,
+                external: item.external,
+                source: 'desktop' as const,
+            }))
+    }, [desktopIcons])
+
+    const apps = useMemo(() => {
+        return (desktopIcons || [])
+            .filter((item) => item.section === 'apps')
+            .map((item) => ({
+                label: item.label,
+                Icon: <AppIcon name={item.icon as any || 'posthog'} />,
+                url: item.url,
+                external: item.external,
+                source: 'desktop' as const,
+            }))
+    }, [desktopIcons])
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

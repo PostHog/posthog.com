@@ -1,0 +1,28 @@
+[
+    {
+        "id": "cmt-1",
+        "postSlug": "logs-beta",
+        "parentId": null,
+        "content": "Sangat membantu artikel ini! Apakah logs beta ini sudah mendukung full-text search?",
+        "createdAt": "2026-10-06T10:30:00.000Z",
+        "authorType": "user",
+        "userId": "usr-member-1",
+        "authorName": "Community User",
+        "authorEmail": "user@posthog.local",
+        "notifyReplies": true,
+        "status": "approved"
+    },
+    {
+        "id": "cmt-2",
+        "postSlug": "logs-beta",
+        "parentId": "cmt-1",
+        "content": "Halo! Ya, fitur search sudah mendukung pencarian teks dan regex untuk logs secara real-time.",
+        "createdAt": "2026-10-06T11:15:00.000Z",
+        "authorType": "admin",
+        "userId": "usr-admin-1",
+        "authorName": "Administrator",
+        "authorEmail": "admin@posthog.local",
+        "notifyReplies": true,
+        "status": "approved"
+    }
+]

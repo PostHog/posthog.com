@@ -1,0 +1,15 @@
+[
+  { "id": "home", "name": "Home", "url": "/" },
+  {
+    "id": "blog",
+    "name": "Blog",
+    "url": "/blog",
+    "items": [
+      { "name": "All posts", "url": "/blog/all" },
+      { "name": "PostHog news", "url": "/blog/categories/posthog-news" },
+      { "name": "Engineering", "url": "/blog/categories/engineering" }
+    ]
+  },
+  { "id": "questions", "name": "Community", "url": "/questions" },
+  { "id": "admin", "name": "Admin", "url": "/admin", "badge": "EDIT" }
+]

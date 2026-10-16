@@ -51,23 +51,4 @@ const BlogCategory = ({
 
 export default BlogCategory
 
-export const pageQuery = graphql`
-    query ($skip: Int!, $limit: Int!) {
-        allPostsRecent: allMdx(
-            limit: $limit
-            skip: $skip
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: {
-                isFuture: { ne: true }
-                frontmatter: { date: { ne: null } }
-                fields: { slug: { regex: "/^/blog/" } }
-            }
-        ) {
-            edges {
-                node {
-                    ...BlogFragment
-                }
-            }
-        }
-    }
-`
+export const pageQuery = null

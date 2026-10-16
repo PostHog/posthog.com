@@ -25,6 +25,7 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { useLocalAuth } from '../../hooks/useLocalAuth'
 
 export default function TaskBarMenu() {
     const {
@@ -43,6 +44,7 @@ export default function TaskBarMenu() {
     const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
+    const localAuth = useLocalAuth()
     const menuData = useMenuData()
 
     const isLoggedIn = !!user
@@ -87,7 +89,7 @@ export default function TaskBarMenu() {
         {
             trigger: (
                 <>
-                    {isLoggedIn ? (
+                    {isLoggedIn || localAuth.isLoggedIn ? (
                         <>
                             <div className="relative">
                                 {avatarURL ? (
@@ -102,8 +104,16 @@ export default function TaskBarMenu() {
                                 ) : (
                                     <IconUser className="size-6" />
                                 )}
-                                {notifications?.length > 0 && (
-                                    <span className="absolute top-4 -right-1 size-2.5 bg-red border border-bg-primary rounded-full" />
+                                {localAuth.isLoggedIn ? (
+                                    <span
+                                        className={`absolute top-4 -right-1 size-2.5 rounded-full border border-bg-primary ${
+                                            localAuth.isAdmin ? 'bg-red-500' : 'bg-emerald-500'
+                                        }`}
+                                    />
+                                ) : (
+                                    notifications?.length > 0 && (
+                                        <span className="absolute top-4 -right-1 size-2.5 bg-red border border-bg-primary rounded-full" />
+                                    )
                                 )}
                             </div>
                         </>
@@ -112,8 +122,9 @@ export default function TaskBarMenu() {
                     )}
                 </>
             ),
-            items: user
-                ? [
+            items: [
+                ...(user
+                    ? [
                       {
                           type: 'item' as const,
                           label: 'Go to...',
@@ -233,7 +244,57 @@ export default function TaskBarMenu() {
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
                       },
-                  ],
+                  ]),
+                {
+                    type: 'separator' as const,
+                },
+                {
+                    type: 'item' as const,
+                    label: localAuth.isLoggedIn
+                        ? `Local: ${localAuth.user?.name || localAuth.user?.username} (${localAuth.user?.role})`
+                        : 'Local Account',
+                    disabled: true,
+                },
+                ...(localAuth.isLoggedIn
+                    ? [
+                          {
+                              type: 'item' as const,
+                              label: 'My Account',
+                              link: '/account',
+                              icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          },
+                          ...(localAuth.isAdmin
+                              ? [
+                                    {
+                                        type: 'item' as const,
+                                        label: 'Admin Suite',
+                                        link: '/admin',
+                                        icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                    },
+                                ]
+                              : []),
+                          {
+                              type: 'item' as const,
+                              label: 'Log out',
+                              onClick: () => localAuth.logout(),
+                              icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          },
+                      ]
+                    : [
+                          {
+                              type: 'item' as const,
+                              label: 'Login / Register',
+                              link: '/login',
+                              icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          },
+                          {
+                              type: 'item' as const,
+                              label: 'Admin Suite',
+                              link: '/admin',
+                              icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          },
+                      ]),
+            ],
         },
     ]
 

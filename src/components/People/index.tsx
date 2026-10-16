@@ -290,10 +290,8 @@ interface PeopleProps {
 export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
 
-    const {
-        team: { teamMembers },
-        allTeams,
-    } = useStaticQuery(teamQuery)
+    const teamMembers: any[] = []
+    const allTeams = { nodes: [] }
     const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
     // Use filteredMembers from props if provided
@@ -461,60 +459,4 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     )
 }
 
-export const teamQuery = graphql`
-    query TeamQuery {
-        team: allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
-            sort: { fields: startDate, order: ASC }
-        ) {
-            teamMembers: nodes {
-                squeakId
-                avatar {
-                    url
-                }
-                biography
-                lastName
-                firstName
-                companyRole
-                country
-                color
-                location
-                pronouns
-                pineappleOnPizza
-                startDate
-                teams {
-                    data {
-                        id
-                        attributes {
-                            name
-                            slug
-                        }
-                    }
-                }
-                leadTeams {
-                    data {
-                        attributes {
-                            name
-                        }
-                    }
-                }
-            }
-        }
-        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
-            nodes {
-                id
-                name
-                crest {
-                    data {
-                        attributes {
-                            url
-                        }
-                    }
-                }
-                miniCrest {
-                    gatsbyImageData(width: 20, height: 20)
-                }
-            }
-        }
-    }
-`
+export const teamQuery = null

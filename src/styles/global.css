@@ -2642,3 +2642,35 @@ article.reader-view-content-container:has(.quest-sidebar) {
 .dark .ph-mapbox-popup.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
     border-left-color: rgb(30 31 35) !important;
 }
+
+/* Form controls contrast fix for dark mode */
+.dark input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']),
+.dark select,
+.dark textarea {
+    background-color: #212227 !important;
+    color: #f3f4f6 !important;
+    border-color: #3f424e !important;
+}
+
+.dark input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']):focus,
+.dark select:focus,
+.dark textarea:focus {
+    border-color: #f54e00 !important;
+    outline: none !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+    color: #8c8f9f !important;
+}
+
+.dark select option {
+    background-color: #212227 !important;
+    color: #f3f4f6 !important;
+}
+
+.light input:not([type='checkbox']):not([type='radio']):not([type='submit']):not([type='button']),
+.light select,
+.light textarea {
+    color: #111827;
+}

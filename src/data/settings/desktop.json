@@ -1,0 +1,32 @@
+{
+  "icons": [
+    {
+      "id": "home",
+      "label": "home.mdx",
+      "icon": "doc",
+      "url": "/",
+      "section": "products"
+    },
+    {
+      "id": "blog",
+      "label": "Blog",
+      "icon": "notebook",
+      "url": "/blog",
+      "section": "products"
+    },
+    {
+      "id": "questions",
+      "label": "Community",
+      "icon": "forums",
+      "url": "/questions",
+      "section": "products"
+    },
+    {
+      "id": "admin",
+      "label": "Blog Admin",
+      "icon": "typewriter",
+      "url": "/admin",
+      "section": "products"
+    }
+  ]
+}

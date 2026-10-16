@@ -31,15 +31,7 @@ export default function AskMax({
     const { openNewChat } = useApp()
     const { appWindow } = useWindow()
     const location = useLocation()
-    const {
-        allDocsPages: { totalDocsCount },
-    } = useStaticQuery(graphql`
-        query {
-            allDocsPages: allMdx(filter: { slug: { regex: "^/docs/" } }) {
-                totalDocsCount: totalCount
-            }
-        }
-    `)
+    const totalDocsCount = 0
 
     const borderClasses = border ? 'py-6 mt-4 border-y border-primary' : 'mb-8'
 
