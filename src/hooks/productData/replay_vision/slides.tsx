@@ -287,7 +287,7 @@ export const topFeatures: CarouselSlide[] = [
                 <p>
                     Replay Vision runs <strong>scanners</strong> – AI probes you configure and point at your sessions.
                     Pick a type, describe what to look for, and it produces structured output on each session it scans.
-                    Start from a built-in template or from scratch.
+                    Describe what you want to find out and PostHog AI drafts the scanner, or start from scratch.
                 </p>
                 <div className="@container">
                     <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4 my-6">

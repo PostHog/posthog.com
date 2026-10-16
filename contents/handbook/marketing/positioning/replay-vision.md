@@ -44,7 +44,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 **Solution:** Scanners read the recordings for you and deliver a standing read on your sessions, on a cadence you determine. 
 
 **Supporting features:**
-- Built-in [scanner templates](/docs/replay-vision/creating-scanners#start-from-a-template) cover the common shapes, so a customer can start without writing a prompt
+- A customer describes a goal, or clicks a [common starting point](/docs/replay-vision/creating-scanners#start-from-a-common-question), and PostHog AI drafts the scanner, so they can start without writing a prompt
 - Scanners summarize and label any set of recordings automatically, across hundreds at once
 - Bulk-scan on demand, or set scanners to run on a schedule
 - Findings land as queryable events and get routed to your Inbox, so what matters surfaces to you instead of piling up as a backlog to review
@@ -102,7 +102,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 - Their AI output is one number. The friction score is the only thing that becomes queryable, chartable, or usable in experiments and cohorts. PostHog turns every observation into an event you can use anywhere.
 - Configurable scanner types (monitor, classifier, scorer, summarizer) against their fixed planned analyses.
 - No 100-per-run cap, plus sampling and coverage controls they don't have.
-- Their score encodes their definition of friction on a fixed scale. The Frustration score scanner template lets you set the scale and the criteria.
+- Their score encodes their definition of friction on a fixed scale. A frustration scorer lets you set the scale and the criteria.
 - Custom prompting is still beta for them.
 
 **Where they win, say so:** their score works with no configuration on day one. If the buyer wants a number handed to them rather than criteria they define, Contentsquare is the easier sell.

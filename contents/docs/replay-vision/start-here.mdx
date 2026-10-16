@@ -5,7 +5,7 @@ title: Getting started with Replay Vision
 import { ProductScreenshot } from "components/ProductScreenshot";
 import WizardCommand from 'components/WizardCommand'
 
-This walkthrough takes you from zero to your first observation in about five minutes. We'll create a scanner from a built-in starting point, run it on a recording you pick, and then query the result as a regular PostHog event.
+This walkthrough takes you from zero to your first observation in about five minutes. We'll have PostHog AI draft a scanner from a common starting point, run it on a recording you pick, and then query the result as a regular PostHog event.
 
 You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
 
@@ -24,26 +24,20 @@ Prefer to create your first scanner by hand, or want to understand each piece? F
 Open **Replay Vision** from the side menu, then click **New scanner**. Replay Vision sends recordings to an AI model, so your organization has to allow AI data processing first. If it hasn't yet, the button reads **Allow AI analysis and create scanner** for admins, or **Ask an admin to enable AI analysis** for everyone else.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_templates_picker_20773fc549.png"
-  alt="The scanner templates grid: five built-in templates, Create from scratch, and the Set up with AI box"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_flow_7d752f988b.png"
+  alt="The What should the scanner find out? page: a goal box, how much the scanner should use, and one-click starting points"
   classes="rounded"
 />
 
-The first screen gives you three ways to start:
+The **What should the scanner find out?** page gives you three ways to start:
 
-- **Describe a goal** – type what you want to find out, and PostHog AI drafts the whole scanner for your project.
-- **Start from a common question** – five built-in starting points that cover the four [scanner types](/docs/replay-vision/scanner-types).
+- **Describe a goal** – type which sessions to watch and what you want to find out, and PostHog AI drafts the whole scanner for your project.
+- **Common starting points** – one-click questions, such as "Where do people get stuck?", that PostHog AI drafts into a scanner the same way.
 - **Create from scratch** – pick a type and write the prompt yourself.
 
-The built-in starting points are:
+Under **How much should this scanner use?**, leave **Free** selected if it's available. The scanner then uses only your organization's free monthly credits and never adds to your bill.
 
-- **Dead ends** (monitor) – flag sessions where the user appears stuck
-- **Session summary** (summarizer) – short narrative of what happened
-- **User intent** (classifier) – tag each session with the likely intent
-- **Frustration score** (scorer) – numeric score for how frustrated the user appeared
-- **Session outcome** (classifier) – tag the outcome (completed, abandoned, errored, …)
-
-Pick the dead ends one ("where do people get stuck?") to follow along. Depending on your project, PostHog either pre-fills the scanner from the built-in template or drafts one fitted to your product. Nothing is saved until you click **Create scanner**, and you can change anything before then.
+Click **Where do people get stuck?** to follow along. PostHog AI drafts a scanner fitted to your product. This takes a few seconds. Nothing is saved until you click **Create scanner**, and you can change anything before then.
 
 ## 2. Look over the scanner
 
@@ -53,29 +47,23 @@ Pick the dead ends one ("where do people get stuck?") to follow along. Depending
   classes="rounded"
 />
 
-The scanner editor has four steps:
+The draft opens on an overview of what PostHog AI set up:
 
-- **Details** – the name, an optional description, and tags. The scanning model doesn't see the description or tags.
-- **Configure** – the scanner type, the model, the prompt, and the type's own options.
-- **Recordings** – the recording filters that decide which sessions the scanner watches.
-- **Budget** – the sampling rate, session coverage, an optional credit limit, and the estimated cost.
+- **What it understood** – your goal in PostHog AI's words.
+- **Name** – the scanner's name and a short description.
+- **What it will ask** – the scanner type and the prompt, for example a monitor that describes what "stuck" looks like on your pages.
+- **Eligible recordings** – the recording filters, chosen from your product's real pages and events, with a count of matching recordings from recent days.
+- **Sampling and budget** – the model, the sampling rate, the session coverage, and the estimated cost.
 
-If PostHog AI drafted the scanner, you may land on an overview of the whole draft instead, with an **Edit** button for each section.
+Each section has an **Edit** button that opens the matching step of the scanner editor: **Details**, **Configure**, **Recordings**, or **Budget**. **Start over** throws the draft away.
 
-Started from the built-in template, the dead ends scanner arrives with:
+The draft picks its own scanner type. The rest of this walkthrough assumes a monitor, so if the draft chose another type, the result in step 5 and the query in step 6 look different. See [scanner types](/docs/replay-vision/scanner-types) for what each one returns.
 
-- A **prompt** describing what "stuck" looks like.
-- No **recording filters**, so the scanner matches every eligible session in your project. The editor warns you about this.
-- A **sampling rate** of 20%, with session coverage set to skip recordings where almost nothing happens.
-- The default model, Gemini 3 Flash.
-
-A drafted scanner comes with filters chosen from your goal and your product's pages and events instead. When you gave a monthly budget, the draft also picks a model and a sampling rate that fit it, and caps the scanner's spend at that budget. A draft also picks its own scanner type. The rest of this walkthrough assumes a monitor, so if the draft chose another type, the result in step 5 and the query in step 6 look different. See [scanner types](/docs/replay-vision/scanner-types) for what each one returns.
-
-For a first run, leave the prompt and model alone. To keep volume low while you experiment, narrow the filters on the **Recordings** step, for example to one page or a specific cohort, and lower the sampling rate on the **Budget** step.
+For a first run, leave the prompt and model alone. To keep volume low while you experiment, narrow the filters, for example to one page or a specific cohort, and lower the sampling rate.
 
 <CalloutBox type="fyi" title="Estimate your usage first">
 
-The **Budget** step shows an estimated monthly cost based on your project's recent recording volume, the filters you set, the session coverage, the sampling rate, and the model. Use that to size against your [budget](/docs/replay-vision/quota-and-limits) before saving.
+The overview and the editor's **Budget** step show an estimated monthly cost based on your project's recent recording volume, the filters you set, the session coverage, the sampling rate, and the model. Use that to size against your [budget](/docs/replay-vision/quota-and-limits) before saving.
 
 </CalloutBox>
 
@@ -119,7 +107,7 @@ Spend a minute here. Watching the moments the model cited next to its reasoning 
 
 ## 6. Query it as an event
 
-Every successful observation is also captured as a `$recording_observed` event in your project. Open a new [SQL insight](/docs/data-warehouse/sql) and run the query below, swapping in your scanner's name if it isn't `Dead-end pages`:
+Every successful observation is also captured as a `$recording_observed` event in your project. Open a new [SQL insight](/docs/data-warehouse/sql) and run the query below, swapping in your scanner's name for `Dead-end pages`:
 
 ```sql
 SELECT
