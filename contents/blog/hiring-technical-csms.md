@@ -92,7 +92,7 @@ Everything about how we interview is [in the handbook](/handbook/people/hiring-p
 
 ## What’s changed about hiring TCSMs?
 
-When we first started hiring for this role, we leaned towards people who’d owned a book of business before. But as the team’s grown, we’ve realized it’s easier to teach someone renewals and account planning than it is to teach them to be technical, curious, and a builder. You can’t really teach someone to be curious, sadly.
+When we first started hiring for this role, we leaned towards people who’d owned a book of business before. But as the team’s grown, we’ve realized it’s easier to teach someone renewals and account planning than it is to [teach them to be technical](/blog/how-to-become-a-technical-csm), curious, and a builder. You can’t really teach someone to be curious, sadly.
 
 Working in public helps a lot here too. How we run onboarding, handle renewals, or think about expansion… It’s all in our [handbook](/handbook/cs-and-onboarding/customer-success).
 
