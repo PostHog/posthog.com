@@ -17,7 +17,7 @@ export interface PocketGuideVolume {
     docsProduct?: string
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
-    /** Count all listed pages, including the primer. */
+    /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
@@ -26,8 +26,8 @@ export interface PocketGuideVolume {
 }
 
 /**
- * Most volumes have front matter at `pocketGuideOrder: 0` and a 101 at 1. Product Analytics
- * starts at 1. Guides are what follows. Authors count from here when assigning reading order.
+ * Every volume opens the same way: front matter at `pocketGuideOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `pocketGuideOrder` in a volume's MDX frontmatter count from here.
  */
 export const FIRST_GUIDE_BOOK_ORDER = 2
 
@@ -39,7 +39,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'blue',
         volume: 5,
         docsProduct: 'product-analytics',
-        learnPath: '/docs/product-analytics/learn/101',
+        learnPath: '/docs/product-analytics/learn/introduction',
         countOrientationPages: true,
     },
     {
