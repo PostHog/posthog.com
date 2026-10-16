@@ -22,28 +22,10 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 
 -   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
 -   Help users understand what was found, what changed, and what evidence supports it, so they can review work confidently with fewer decisions.
--   Make work status and review responsibilities clear as report volumes and team sizes grow.
-
-#### Make users confident that every assigned report is for them or their team – Dylan
-
--   Assign reports to people or teams who can act on them and care about them.
--   Map GitHub contributors to PostHog members and teams.
--   Handle missing mappings, team changes, and people who leave an organization.
--   Make incorrect assignments easy to skip, reassign, or correct.
--   Support clear ownership for individuals, teams, and larger organizations.
-
-#### Put the most relevant assigned reports first – Dylan and Andy
-
--   Rank reports only within the Self-Driving Inbox.
--   Start with simple rules. Use learned scores when they improve the experience.
--   Andy owns the probabilities that a user will open, act on, or fix each report. Andy adds project and user context and measures model quality.
--   Dylan owns how the Inbox combines model scores, agent context, work status, and product rules.
--   Measure whether ranking helps users find useful work through offline evaluations and online experiments.
-
-#### Notify the right people about useful reports – Dylan
-
--   Send relevant findings to assigned people or teams when the reports need attention.
--   Use assignment and relevance quality to prevent noisy notifications.
+-   Make assignment and personalization useful: show what each person or team owns, what needs their attention, and what matters to them. Make incorrect assignments easy to skip or reassign, and handle missing mappings between GitHub contributors and PostHog members.
+-   Help users find the assigned reports that need attention first in the Self-Driving Inbox, based on urgency, relevance, and work status. Use Andy's probability scores for opening, acting on, or fixing a report as one input. Andy owns the model inputs and relevance quality. Dylan owns Inbox policy and presentation.
+-   Improve report notifications so relevant findings reach the right people.
+-   Support use by larger orgs as report volumes and team sizes grow. Make reports work for teams with more than a few engineers, and keep ownership, work status, and review responsibilities clear.
 
 ### Make the report layer independent of our UI – Dylan, Georgiy
 
@@ -100,6 +82,7 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 
 ### Only if capacity remains
 
+-   Further ranking improvements: explore more advanced or learned ranking if report ordering prevents users from finding useful work. Basic prioritization remains part of the core report experience.
 -   Take ReviewHog to the next level and add other last-mile features (visual reviews, etc.).
 -   Make implementation better.
 -   Autoresearch: get v1 shipped for internal dogfooding – Andy.
