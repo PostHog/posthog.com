@@ -121,17 +121,29 @@ That's how `autoresearch`, the skill behind the biggest (side-quest) thing I've 
 
 ## 2. Skills as a map of the stuff I own
 
-All of the PostHog [data warehouse](/docs/data-warehouse) views that power our self-driving analytics live in a skill called `self-driving-dwh`. It's an index and query guide for the whole view layer: what each view is for, the join keys, the two rules you'll get wrong if you don't read them first (reports are cross-customer, and everything is cross-region), and a `recipes/` folder of SQL that actually works.
+Filter our skills store to `self-driving-` and you get a map of how self-driving works inside PostHog: the alerts, the dashboards, the data warehouse layer, the Temporal workers, the debugging runbook, and the support rotation. Eleven skills, written by several people on the team. A new teammate, or a fresh agent session, can read that list and know where everything lives.
 
-It gives any agent all the context it needs to work on our core ETLs as the data models change. When I say "use the /self-driving-dwh skill to help here" in any chat, the agent gets the same picture I have in my head, without me typing it out again.
+<ProductScreenshot
+    imageLight="TODO_upload_self_driving_skills_map.png"
+    classes="rounded"
+    alt="The self-driving group in the PostHog skills store. It lists 11 skills, including self-driving-alerts, self-driving-dashboards, self-driving-debugging, self-driving-dwh, self-driving-temporal, and self-driving-work, each with a description, an author, a version count, and when it last changed."
+/>
 
-That skill was created on June 2 and is on version 458. Its `changelog.md` alone is about 410KB. Again, I didn't write most of that. There's a scout, `signals-scout-self-driving-dwh`, whose job is to maintain the view layer cataloged in the skill: check that views still sync, catch drift when a source table changes, and update the skill when it fixes something. A skill maintained by a skill.
+*Every `self-driving-` skill in our store. Read top to bottom, it's a map of the team.*
 
-The same pattern covers the rest of what my team owns. `self-driving-dashboards` is a human-readable index of every dashboard we lean on, with the gotchas that bite when reading them. `tasks-vision-scanner` is the registry of every [Replay Vision](/docs/replay-vision) scanner watching the Tasks product. Each one has a scout that keeps it honest.
+The most detailed part of the map is `self-driving-dwh`. It's the blueprint for the [data warehouse](/docs/data-warehouse) views behind our self-driving analytics: an entity diagram of how scout runs, signals, reports, tasks, and PRs join, the keys that stitch them together, the two rules you'll get wrong if you don't read them first (reports are cross-customer, and everything is cross-region), and a `recipes/` folder of SQL that actually works.
+
+<ProductScreenshot
+    imageLight="TODO_upload_self_driving_dwh_erd.png"
+    classes="rounded"
+    alt="An entity relationship diagram from the self-driving-dwh skill. It shows how scout runs, signals, emissions, reports, action presses, tasks, traces, and PRs join, with the primary and foreign keys for each, followed by a list of the keys that stitch everything together."
+/>
+
+*The entity diagram in `self-driving-dwh`. Any agent that loads the skill gets the same picture I have in my head.*
+
+When I say "use the /self-driving-dwh skill to help here", the agent knows how everything joins before it writes a query. The skill is on version 458, and I didn't write most of it. A scout, `signals-scout-self-driving-dwh`, checks that the views still sync, catches drift when a source table changes, and updates the skill when it fixes something. A skill maintained by a skill.
 
 Another favorite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When an alert fires and I ask an agent to look into it, the agent loads this skill first, so it knows the alert's baseline, its history of false positives, and what fixed it last time before it touches a query. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it.
-
-The alerts live in PostHog. The context about the alerts lives in the skill so a human or agent can easily get at it while a scout can also proactively maintain it.
 
 Yet another cool thing here is that each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
