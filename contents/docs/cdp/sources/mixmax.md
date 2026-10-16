@@ -9,9 +9,9 @@ availability:
 sourceId: MixMax
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Mixmax connector syncs sequences, sequence folders, messages, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -38,6 +38,8 @@ You'll be asked for:
 <SyncModes />
 
 All Mixmax tables are full refresh. Each sync replaces the contents of the table.
+
+The `live_feed_events` table makes one request per live feed message, so it is not selected by default. Enable it only if you need per-event detail (opens, clicks, downloads, and replies), and expect a large live feed to take a while to sync.
 
 ## Configuration
 

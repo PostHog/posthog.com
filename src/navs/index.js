@@ -2066,12 +2066,36 @@ export const handbookSidebar = [
                 name: 'Wizard',
             },
             {
-                name: 'AI wizard',
-                url: '/handbook/wizard-and-docs/developing-the-wizard',
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs/wizard',
+            },
+            {
+                name: 'Architecture',
+                url: '/handbook/wizard-and-docs/wizard-architecture',
             },
             {
                 name: 'Context mill',
                 url: '/handbook/wizard-and-docs/context-mill',
+            },
+            {
+                name: 'Developing the wizard',
+                url: '/handbook/wizard-and-docs/developing-the-wizard',
+            },
+            {
+                name: 'Extending the wizard',
+                url: '/handbook/wizard-and-docs/extending-the-wizard',
+            },
+            {
+                name: 'Releasing the wizard',
+                url: '/handbook/wizard-and-docs/wizard-releases',
+            },
+            {
+                name: 'Handling incidents',
+                url: '/handbook/wizard-and-docs/wizard-incidents',
+            },
+            {
+                name: "The wizard's bestiary",
+                url: '/handbook/wizard-and-docs/wizard-edge-cases',
             },
             {
                 name: 'Docs',
@@ -2115,6 +2139,16 @@ export const handbookSidebar = [
             {
                 name: 'API specs and docs',
                 url: '/handbook/wizard-and-docs/api-specifications',
+            },
+        ],
+    },
+    {
+        name: 'Gradiated',
+        url: '/handbook/gradiated',
+        children: [
+            {
+                name: 'About Gradiated',
+                url: '/handbook/gradiated',
             },
         ],
     },
@@ -2698,6 +2732,10 @@ export const docsMenu = {
                 {
                     name: 'Context',
                     url: '/docs/self-driving/context',
+                },
+                {
+                    name: 'Steering',
+                    url: '/docs/self-driving/steering',
                 },
                 {
                     name: 'Scouts',
@@ -6494,6 +6532,67 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Business Knowledge',
+            url: '/docs/business-knowledge',
+            icon: 'IconBook',
+            color: 'purple',
+            description: 'Facts PostHog AI, Support, and MCP use when they answer questions about your business',
+            children: [
+                {
+                    name: 'Business Knowledge',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/business-knowledge',
+                    icon: 'IconHome',
+                    color: 'purple',
+                },
+                {
+                    name: 'Setup',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/business-knowledge/start',
+                    icon: 'IconRocket',
+                    featured: true,
+                    color: 'purple',
+                },
+                {
+                    name: 'Before answers',
+                    url: '/docs/business-knowledge/requirements',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                },
+                {
+                    name: 'Add and manage sources',
+                    url: '/docs/business-knowledge/sources',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'GitHub repositories',
+                    url: '/docs/business-knowledge/github',
+                    icon: 'IconGithub',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Learn from support',
+                    url: '/docs/business-knowledge/learn-from-support',
+                    icon: 'IconSupport',
+                    color: 'teal',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/business-knowledge/playground',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
             name: 'Support',
             url: '/docs/support',
             icon: 'IconSupport',
@@ -6762,8 +6861,8 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'red',
                     badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     children: [
                         {
@@ -7538,6 +7637,10 @@ export const docsMenu = {
                             name: 'A/B testing prompts',
                             url: '/docs/prompt-management/prompt-experiments',
                         },
+                        {
+                            name: 'Temporal workflows',
+                            url: '/docs/prompt-management/temporal',
+                        },
                     ],
                 },
                 {
@@ -7624,6 +7727,10 @@ export const docsMenu = {
                         {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
+                        },
+                        {
+                            name: 'WebMCP',
+                            url: '/docs/mcp-analytics/installation/webmcp',
                         },
                     ],
                 },
@@ -8219,6 +8326,10 @@ export const docsMenu = {
                         {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
+                        },
+                        {
+                            name: 'Watch sessions with Replay Vision',
+                            url: '/docs/workflows/replay-vision',
                         },
                     ],
                 },

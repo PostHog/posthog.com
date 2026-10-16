@@ -98,9 +98,11 @@ This is useful for:
 
 Click the save menu (prompt management icon next to the system prompt) to save or load prompts:
 
-- **Save as new prompt** — Creates a new [managed prompt](/docs/prompt-management) from the current system prompt
+- **Save as new prompt** — Creates a new [managed prompt](/docs/prompt-management) from the current setup. The system prompt becomes the prompt content, and the model, parameters, tools, and messages are stored in the version's [config](/docs/prompt-management#configuration)
 - **Save as new evaluation** — Creates a new [evaluation](/docs/ai-evals) with the prompt and model configuration
-- **Load prompt / Load evaluation** — Load an existing prompt or evaluation into the playground
+- **Load prompt / Load evaluation** — Load an existing prompt or evaluation into the playground. Loading a prompt restores the saved model, parameters, tools, and messages, including from a pinned version. A prompt saved without playground config loads its content only
+
+When you save to a prompt, the playground writes these config keys: `model`, `provider`, `provider_key_id`, `temperature`, `max_tokens`, `top_p`, `thinking`, `reasoning_effort`, `tools`, and `messages`. Other keys in the config, for example ones written through the API, are preserved. `{{variables}}` in messages are stored as written, not substituted.
 
 You can also open the playground directly from the [traces](/docs/ai-observability/traces), [prompt management](/docs/prompt-management), or [evaluations](/docs/ai-evals) pages. When you do, the playground pre-populates the model, system prompt, and messages, and links back to the source so you can save changes directly — publishing a new prompt version or updating the evaluation configuration.
 

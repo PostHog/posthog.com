@@ -182,14 +182,24 @@ You're actively encouraged to raise pull requests or propose changes to stuff th
 
 ### Can people change teams?
 
-We try to keep moves infrequent and when needed. We anticipate moving people roughly every 3-9 months. We'd rather hire new people than create gaps by shifting people around.
+Yes. If you've been on a team for a while and feel like you're running low on energy or new ideas, it might be time to think about a move. A fresh pair of eyes helps the team you join, and a change of problem helps you. It's also how ideas spread across PostHog.
 
-There are two scenarios that will trigger a move:
+A small team may also realize they no longer need someone, or that they could really do with someone currently in another small team. The same process applies.
 
--   The small team may realize they no longer need someone, or that they could really do with someone currently in another small team internally.
--   An individual team member may wish to move in order to develop their skills or experience.
+#### When you can move
 
-It is **very important** to raise any desire for a team change with your relevant [Blitzscale team](/teams/blitzscale) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
+-   **You've been on your current team for at least a year.** You need time to go deep on something before you have fresh ideas to bring somewhere else.
+-   **Your current work is in a good spot.** If the thing you're working on is really hard, that's a reason to stick with it until it's in good shape. Everything you own should have a clear new owner before you go.
+
+#### How to move
+
+1. **Talk to your [Blitzscale team](/teams/blitzscale) member first.** Any move is at their discretion. They have the overview of which teams need help and where you'd be a good fit, and they make sure moves fit our hiring plans. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations.
+2. **Check [the proposed hires section](https://ops.posthog.dev/proposed-hires) in the ops platform** to see which teams currently have openings. You can also move to a team without an open role if Blitzscale thinks it makes sense.
+3. **Your old seat goes on the proposed hires board** so we can fill it with an internal or external hire. You need to be replaced in your current team before you can move. This is at discretion of Blitzscale.
+
+#### Moves because of a conflict
+
+If you have a conflict with someone, work it out with them directly first, or bring in your Blitzscale team member. A team move only happens if Blitzscale decides it's the only option. 
 
 ### Aren't most small teams way too small?
 

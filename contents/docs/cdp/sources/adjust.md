@@ -9,11 +9,11 @@ availability:
 sourceId: Adjust
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Adjust connector syncs daily report, partner report, campaign report, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Adjust connector syncs performance reports, retention cohorts, SKAdNetwork data, in-app event metrics, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -37,7 +37,13 @@ You'll be asked for:
 
 <SyncModes />
 
-All Adjust tables are full refresh. Each sync replaces the contents of the table.
+All Adjust report tables use **incremental** sync on the `day` field. Each sync re-reads a trailing lookback window to pick up late-arriving attributions, then deduplicates on merge:
+
+- **Most report tables** – 3-day lookback
+- **`retention_report`** – 31-day lookback (cohort metrics keep changing until the d30 window elapses)
+- **`skad_report`** – 35-day lookback (SKAdNetwork postbacks have privacy delays of up to ~5 weeks)
+
+The `events` catalog table uses **full refresh** – the whole table is reloaded on every sync.
 
 ## Configuration
 

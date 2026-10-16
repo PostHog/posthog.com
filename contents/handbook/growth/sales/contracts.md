@@ -35,7 +35,7 @@ The quoting interface is intuitive and, of course, uses the same pricing we disp
 
 Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
 
-QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
 
@@ -53,6 +53,12 @@ When building a quote for an annual plan conversion or renewal, consider:
 You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
 The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
+
+### Automatic renewal quotes
+
+QuoteHog can draft a renewal quote for you once a renewal opportunity in Salesforce will close within 90 days. A daily job picks up the opportunity, builds a quote from the customer's last billing cycle of Stripe usage, and sends the opportunity owner a Slack message in #sales-alerts with the link. Treat it as a starting point and tweak it according to the usage trends above before you share it with the customer.
+
+The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>.
 
 ## Order form
 
@@ -153,7 +159,7 @@ You do not need the RevOps or billing team to change a customer's business name,
     - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
 4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
 
-An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in #team-billing for an updated invoice PDF.
+An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) for an updated invoice PDF.
 
 > Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
 
@@ -166,7 +172,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the RevOps team in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) to pause collection. Flag it as early as possible, because RevOps can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, RevOps releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 

@@ -12,6 +12,8 @@ export interface BookTab {
     url: string
     /** Printed after the label – a folio number, or `i` for the front matter. */
     number?: string
+    /** Contents heading – printed above the first tab of each run that shares one. */
+    section?: string
     active?: boolean
 }
 
@@ -91,8 +93,13 @@ function ContentsList({ tabs }: { tabs: BookTab[] }): JSX.Element {
                 Contents
             </p>
             <ul className="m-0 list-none space-y-1 p-3">
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                     <li key={tab.url}>
+                        {tab.section && tab.section !== tabs[index - 1]?.section && (
+                            <p className="m-0 px-1.5 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.14em] text-secondary">
+                                {tab.section}
+                            </p>
+                        )}
                         <Link
                             to={tab.url}
                             aria-current={tab.active ? 'page' : undefined}

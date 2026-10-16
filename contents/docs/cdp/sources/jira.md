@@ -26,24 +26,34 @@ Once the syncs are complete, you can start using Jira data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `issues` | Issues across the projects your account can access | Incremental |
-| `projects` | Projects in your Jira instance | Full refresh |
-| `users` | Users in your Jira instance | Full refresh |
-| `fields` | Field definitions, including custom fields | Full refresh |
-| `issue_types` | Issue type definitions | Full refresh |
-| `statuses` | Workflow status definitions | Full refresh |
-| `priorities` | Priority definitions | Full refresh |
-| `resolutions` | Resolution definitions | Full refresh |
-| `dashboards` | Dashboards | Full refresh |
-| `filters` | Saved filters | Full refresh |
+| Table           | Description                                                       | Sync method  |
+| --------------- | ----------------------------------------------------------------- | ------------ |
+| `issues`        | Issues across the projects your account can access                | Incremental  |
+| `projects`      | Projects in your Jira instance                                    | Full refresh |
+| `users`         | Users in your Jira instance                                       | Full refresh |
+| `fields`        | Field definitions, including custom fields                        | Full refresh |
+| `issue_types`   | Issue type definitions                                            | Full refresh |
+| `statuses`      | Workflow status definitions                                       | Full refresh |
+| `priorities`    | Priority definitions                                              | Full refresh |
+| `resolutions`   | Resolution definitions                                            | Full refresh |
+| `dashboards`    | Dashboards                                                        | Full refresh |
+| `filters`       | Saved filters                                                     | Full refresh |
+| `worklogs`      | Time logged against issues by users                               | Incremental  |
+| `boards`        | Jira Software boards (scrum or kanban)                            | Full refresh |
+| `sprints`       | Jira Software sprints (time-boxed iterations on scrum boards)     | Full refresh |
+| `sprint_issues` | Membership of an issue in a sprint, one row per sprint–issue pair | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-Only the `issues` table supports incremental syncing, using Jira's server-side `updated` timestamp filter. Per-issue streams such as comments, worklogs, votes, watchers, remote links, and transitions are not synced, as each requires a separate request per issue and does not scale well on large instances.
+The `issues` and `worklogs` tables support incremental syncing using Jira's server-side `updated` timestamp filter. Worklogs sync through the instance-wide `/worklog/updated` feed rather than per-issue requests, so they scale to large instances. Deleted worklogs are not removed automatically – they remain in the table until you run a full resync.
+
+The `sprints` table fans out over boards. Kanban boards are skipped because they don't have sprints. Each sprint is deduplicated by ID, with `originBoardId` identifying the board that owns it.
+
+The `sprint_issues` table reads the Sprint field on each issue rather than the deprecated agile issue listing. Sites without Jira Software (no Sprint field) sync an empty `sprint_issues` table.
+
+Per-issue streams such as comments, votes, watchers, remote links, and transitions are not synced, as each requires a separate request per issue and does not scale well on large instances.
 
 ## Configuration
 
