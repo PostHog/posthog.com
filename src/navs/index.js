@@ -2140,6 +2140,9 @@ export const handbookSidebar = [
                 name: 'API specs and docs',
                 url: '/handbook/wizard-and-docs/api-specifications',
             },
+            {
+                name: 'Learn',
+            },
         ],
     },
     {
