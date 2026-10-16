@@ -112,7 +112,7 @@ from posthog.integrations.drf import create_exception_handler
 
 
 def capture_auth_errors(exception, response, context):
-    return response.status_code in {401, 403}
+    return response.status_code >= 500 or response.status_code in {401, 403}
 
 
 exception_handler = create_exception_handler(
