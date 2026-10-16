@@ -6,7 +6,7 @@ import { ProductScreenshot } from "components/ProductScreenshot";
 
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
-The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
+The key idea is that Replay Vision actually _watches the video_ of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_overview_light_9ab73ecdb3.png"
@@ -43,6 +43,18 @@ A few examples of what teams use Replay Vision for:
 - **Summarize sessions** – generate a short narrative of what happened in each session, so you can skim instead of watching.
 
 Each of these maps to a [scanner type](/docs/replay-vision/scanner-types).
+
+## Use in workflows
+
+You can run Replay Vision as a step in a [workflow](/docs/workflows). The **Replay Vision step** scans the session that triggered the workflow and passes the result to later steps, so your workflow can branch on what Vision found or include session context in messages.
+
+Three workflow templates use this:
+
+- **Negative survey feedback with session context** – When a survey is completed with a low rating, summarize the session before the feedback and post it to Slack.
+- **Support tickets with session context** – When a support ticket is created, summarize what the customer did before asking for help.
+- **Onboarding friction alerts** – When a user signs up, score their onboarding experience and post low scores to Slack.
+
+See the [Replay Vision workflow step](/docs/workflows/workflow-builder#replay-vision-step) documentation for configuration details.
 
 ## Finding your way around
 
