@@ -71,3 +71,16 @@ To remove a role's instructions, clear its field and select **Save**. Agents in 
 ## Manage instructions through MCP
 
 An assistant connected to the [PostHog MCP server](/docs/model-context-protocol) can read and update steering instructions and shared project instructions for your current project.
+
+| Tool                                 | What it does                                                                                                                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `inbox-steering-instructions-get`    | Reads the **Research**, **Implementation**, and **Scouts** instructions. A role without instructions returns an empty string. |
+| `inbox-steering-instructions-update` | Saves instructions for one or more roles.                                                                                     |
+
+When you use `inbox-steering-instructions-update`:
+
+- You must be a project admin.
+- Send the full text for each role that you change. The tool replaces that role's instructions. It doesn't apply a diff.
+- Roles that you don't send keep their current instructions.
+- Send an empty string to clear a role.
+- Each role accepts up to 20,000 characters.
