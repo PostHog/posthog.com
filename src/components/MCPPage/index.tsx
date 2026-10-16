@@ -19,19 +19,64 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import TeamMember from 'components/TeamMember'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
 import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { buildMcpBrief } from './agentBrief'
+import WaitingRoom from './WaitingRoom'
 import mcpToolsData from '../../data/mcp-tools.json'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
 // between builds. Round down to the nearest hundred to keep the claim true either way.
-const { categories: toolCategories } = mcpToolsData as { categories: { tools: unknown[] }[] | null }
+const { categories: toolCategories } = mcpToolsData as {
+    categories: { name: string; tools: { name: string }[] }[] | null
+}
 const toolCount = toolCategories?.reduce((total, category) => total + category.tools.length, 0) ?? 0
 const categoryCount = toolCategories?.length ?? 0
 const toolCountLabel = toolCount >= 100 ? `${Math.floor(toolCount / 100) * 100}+ tools` : 'Hundreds of tools'
+const toolNames = toolCategories?.flatMap((category) => category.tools.map((tool) => tool.name)) ?? []
+
+type Reader = 'human' | 'agent'
+
+function ReaderToggle({ reader, onChange }: { reader: Reader; onChange: (reader: Reader) => void }): JSX.Element {
+    return (
+        <div className="not-prose flex items-center justify-end gap-2">
+            <span className="text-xs text-secondary">Reading as</span>
+            <ToggleGroup
+                title="Reading as"
+                hideTitle
+                size="sm"
+                className="w-40"
+                value={reader}
+                onValueChange={(value) => onChange(value as Reader)}
+                options={[
+                    { label: 'Human', value: 'human', default: true },
+                    { label: 'Agent', value: 'agent' },
+                ]}
+            />
+        </div>
+    )
+}
+
+// What an agent gets from /mcp: the same brief the build writes to /mcp.md.
+function AgentView(): JSX.Element {
+    return (
+        <section className="not-prose flex flex-col gap-3">
+            <p className="text-sm text-secondary m-0">
+                This is what an agent gets when it reads this page. It is also at{' '}
+                <a href="/mcp.md" className="font-semibold underline">
+                    /mcp.md
+                </a>
+                .
+            </p>
+            <pre className="m-0 p-4 bg-accent border border-primary rounded-md text-[13px] leading-relaxed whitespace-pre-wrap break-words">
+                {buildMcpBrief(toolCategories)}
+            </pre>
+        </section>
+    )
+}
 
 function MCPHeader(): JSX.Element {
     return (
@@ -46,9 +91,9 @@ function MCPHeader(): JSX.Element {
                         </span>
                     </h1>
                     <p className="!mt-0 !mb-5 text-base @sm:text-lg opacity-80">
-                        We don't think the future has a UI.
+                        This page is written for your agent.
                         <br />
-                        So we built one without one.
+                        You&apos;re welcome to read over its shoulder.
                     </p>
                     <MCPInstallCTA
                         className="max-w-md mx-auto @3xl/reader-content:mx-0 text-left"
@@ -455,129 +500,6 @@ function Capabilities(): JSX.Element {
     )
 }
 
-interface SocialCardProps {
-    username: string
-    handle: string
-    quote: string
-    platform: 'twitter' | 'reddit'
-    avatarColor: string
-}
-
-const complaintList: SocialCardProps[] = [
-    {
-        username: 'Maya',
-        handle: 'productpilled',
-        quote: "I just spent 20 minutes trying to find where to add a property filter. I'm a senior engineer.",
-        platform: 'twitter',
-        avatarColor: 'red',
-    },
-    {
-        username: 'Dan',
-        handle: 'toomanymenus',
-        quote: 'The PostHog UI has, conservatively, 14,000 menus.',
-        platform: 'reddit',
-        avatarColor: 'blue',
-    },
-    {
-        username: 'Sam',
-        handle: 'phdrequired',
-        quote: 'PostHog is great if you have 6 hours and a PhD in product analytics.',
-        platform: 'twitter',
-        avatarColor: 'orange',
-    },
-    {
-        username: 'Jess',
-        handle: 'tabhoarder',
-        quote: 'I have 14 PostHog tabs open. I do not know why.',
-        platform: 'reddit',
-        avatarColor: 'yellow',
-    },
-]
-
-function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }): JSX.Element {
-    return (
-        <div
-            className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${rotation}`}
-        >
-            <div className="flex items-center gap-2">
-                <div
-                    className={`size-7 rounded-full bg-${c.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0`}
-                >
-                    {c.username.charAt(0).toUpperCase()}
-                </div>
-                <div className="leading-tight">
-                    <p className="font-semibold text-[13px] m-0">{c.username}</p>
-                    <p className="text-[11px] text-secondary m-0">
-                        {c.platform === 'twitter' ? `@${c.handle}` : `u/${c.handle}`}
-                    </p>
-                </div>
-                <span
-                    className={`ml-auto ${
-                        c.platform === 'twitter' ? 'text-base' : 'text-[10px]'
-                    } text-secondary opacity-60 uppercase tracking-wider self-start`}
-                >
-                    {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
-                </span>
-            </div>
-            <p className="text-[13px] m-0 leading-snug flex-1">"{c.quote}"</p>
-            <div className="flex items-center gap-1.5 mt-1">
-                <span className="inline-flex items-center gap-1 bg-yellow text-primary text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wider">
-                    <IconCheck className="size-2.5" />
-                    Should've used MCP
-                </span>
-            </div>
-        </div>
-    )
-}
-
-function FutureNoUI(): JSX.Element {
-    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]']
-    return (
-        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,1fr] gap-6 @lg:gap-8 items-start">
-            <div className="prose dark:prose-invert max-w-none text-[15px] leading-relaxed">
-                <p>
-                    PostHog has a lot of tools. We know &mdash; we built them. We also kept hearing the same thing: the
-                    UI is overwhelming, and most people only use a fraction of what's actually there.
-                </p>
-                <p>
-                    We could have run a campaign telling you the UI is fine. We could have A/B tested a new sidebar
-                    every week. We did neither, because we don&apos;t think the future has a UI at all.
-                </p>
-                <p className="font-semibold">That&apos;s where the MCP comes in.</p>
-                <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
-                    <p className="font-bold text-[15px] m-0 mb-1">
-                        &ldquo;But I <span className="bg-green/20 text-green rounded-sm px-0.5">like</span> the PostHog
-                        UI&rdquo;
-                    </p>
-                    <p className="text-[13px] m-0 text-secondary leading-snug">
-                        Then carry on. It&apos;s not going anywhere. And while you&apos;re in there, tell{' '}
-                        <TeamMember name="Adam Leith" photo /> &mdash; he&apos;ll be thrilled.
-                    </p>
-                </div>
-            </div>
-            <div className="grid grid-cols-1 @sm:grid-cols-2 gap-3">
-                {complaintList.map((c, idx) => (
-                    <ComplaintCard key={c.handle} c={c} rotation={rotations[idx % rotations.length]} />
-                ))}
-            </div>
-        </div>
-    )
-}
-
-function WhyMCP(): JSX.Element {
-    return (
-        <section id="why-mcp" className="scroll-mt-20 not-prose">
-            <SectionHeading>
-                You don&apos;t need to use PostHog to{' '}
-                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
-                    use PostHog
-                </span>
-            </SectionHeading>
-            <FutureNoUI />
-        </section>
-    )
-}
-
 function MCPInstallation(): JSX.Element {
     return (
         <section id="installation" className="scroll-mt-20 not-prose">
@@ -680,7 +602,7 @@ function MCPResources(): JSX.Element {
 
 function MCPCTA(): JSX.Element {
     return (
-        <section id="get-started" className="scroll-mt-20 not-prose mb-20">
+        <section id="get-started" className="scroll-mt-20 not-prose">
             <SectionHeading>Get started &ndash; free</SectionHeading>
             <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
         </section>
@@ -688,6 +610,7 @@ function MCPCTA(): JSX.Element {
 }
 
 export default function MCPPage(): JSX.Element {
+    const [reader, setReader] = useState<Reader>('human')
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -714,15 +637,22 @@ export default function MCPPage(): JSX.Element {
                 showQuestions={false}
             >
                 <div className="flex flex-col gap-12 max-w-5xl mx-auto w-full">
-                    <MCPHeader />
-                    <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
-                        <WhatIsMCP />
-                        <MCPUseCases />
-                        <WhyMCP />
-                        <MCPInstallation />
-                        <MCPResources />
-                    </div>
-                    <MCPCTA />
+                    <ReaderToggle reader={reader} onChange={setReader} />
+                    {reader === 'agent' ? (
+                        <AgentView />
+                    ) : (
+                        <>
+                            <MCPHeader />
+                            <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
+                                <WhatIsMCP />
+                                <MCPUseCases />
+                                <MCPInstallation />
+                                <MCPResources />
+                            </div>
+                            <MCPCTA />
+                            <WaitingRoom toolNames={toolNames} />
+                        </>
+                    )}
                 </div>
             </ReaderView>
         </>

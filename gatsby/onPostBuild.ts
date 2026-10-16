@@ -13,6 +13,7 @@ import {
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
+    generateMcpMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -142,6 +143,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()
     generateProductPagesMarkdown()
+    generateMcpMd()
 
     // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
     // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.

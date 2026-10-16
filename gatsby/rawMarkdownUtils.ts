@@ -15,6 +15,7 @@ import {
     preprocessHtmlForTabs,
 } from './turndownService'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
+import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -640,7 +641,7 @@ export const generateProductPagesMarkdown = () => {
     const publicPath = path.resolve(__dirname, '../public')
 
     const pages = [
-        // Web / MCP point at existing pages, no bespoke .md
+        // Web points at an existing page, no bespoke .md. MCP has its own: generateMcpMd
         ...PLATFORM_ITEMS.filter((item) => item.slug).map((item) => ({
             name: item.name,
             slug: item.slug as string,
@@ -673,6 +674,25 @@ For features, screenshots, and details, see ${page.pageLink}.
         fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
         console.log(`Generated: ${page.slug}.md`)
     }
+}
+
+// The /mcp page is a React page, so the HTML-scrape path can't produce useful markdown for it.
+// The page's "Agent" view renders the same brief, so the two can't drift.
+export const generateMcpMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    const toolsPath = path.resolve(__dirname, '../src/data/mcp-tools.json')
+    let categories: BriefToolCategory[] | null = null
+    try {
+        categories = JSON.parse(fs.readFileSync(toolsPath, 'utf8')).categories
+    } catch {
+        // The tool list is fetched in onPreBootstrap. Without it, the brief links to the tools reference.
+    }
+    fs.writeFileSync(
+        path.join(publicPath, 'mcp.md'),
+        buildMcpBrief(categories, new Date().toISOString().slice(0, 10)),
+        'utf8'
+    )
+    console.log('Generated: mcp.md')
 }
 
 type ChangelogRoadmapNode = {
