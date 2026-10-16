@@ -124,7 +124,7 @@ Restoring fails in these cases:
 
 - An active prompt with the same name exists. Names are immutable, so the archived prompt can't be restored while the new one exists. Archiving the new one does not help: both would then share version numbers and neither could be restored. Keep the active prompt, or create a new prompt with the archived content.
 - The name was archived more than once and the archived versions overlap. Create a new prompt instead.
-- The latest archived version references a prompt that is still archived. Restore the referenced prompt first.
+- The latest archived version references a prompt that is still archived, or references a label that no longer exists. Restore the referenced prompt first, and if the reference follows a label, set that label again before restoring the referencing prompt.
 
 With the API, list archived prompts with `?archived=true` and restore one with a `POST` request:
 
