@@ -34,7 +34,7 @@ This source needs one credential:
 - `campaign_statistics_daily` supports incremental sync on `date`. Each sync re-reads the last 7 days to pick up late conversions.
 - `campaigns` and `creatives` use full refresh. `campaigns` covers campaigns that are not archived.
 
-The first sync of `campaign_statistics_daily` reads the last 180 days, the longest range the TrafficStars report accepts.
+The first sync of `campaign_statistics_daily` reads the last 180 days. A full refresh reads again from the day the first sync started, so it keeps every day synced since then.
 
 ## Configuration
 
@@ -49,5 +49,9 @@ The first sync of `campaign_statistics_daily` reads the last 180 days, the longe
 ### The source fails with an authentication error
 
 TrafficStars rejected the API key. Generate a new key on your profile page and update the source.
+
+### The source fails with a 403 error
+
+The API key belongs to an account that can't read advertiser data. Use an API key from an advertiser account.
 
 <TroubleshootingLink />

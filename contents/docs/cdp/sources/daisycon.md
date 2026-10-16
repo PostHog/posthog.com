@@ -26,7 +26,7 @@ You need a Daisycon publisher login with access to the publisher account you wan
 This source connects with your Daisycon login:
 
 1. Under **Daisycon account**, open **Choose Daisycon connection**, connect a new account, and sign in to Daisycon. Approve the access request.
-2. **Publisher ID** – Leave this empty when your login reaches one publisher. Otherwise, enter the publisher ID shown under your account name in Daisycon.
+2. **Publisher** – Pick the publisher account to sync. The list shows the publishers your login could read when you connected it.
 3. **Statistics currency** – The currency for the `statistics_daily` table. It defaults to `EUR`.
 
 ## Sync modes
@@ -51,8 +51,8 @@ This source connects with your Daisycon login:
 
 Daisycon ends the authorization after 30 days without a sync. Reconnect your Daisycon account in the source settings.
 
-### The source asks for a publisher ID
+### A publisher is missing from the list
 
-Your login reaches more than one publisher. Enter the ID of the publisher you want to sync. The error message lists the IDs your login can read.
+The list comes from the moment you connected. If your login got access to a publisher after that, connect your Daisycon account again, then pick the publisher.
 
 <TroubleshootingLink />

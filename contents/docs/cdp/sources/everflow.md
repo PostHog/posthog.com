@@ -35,9 +35,9 @@ This source needs:
 
 - `conversions` supports incremental sync on `conversion_unix_timestamp`. Each sync re-reads the last 30 days, because conversion statuses and payouts change after the conversion.
 - `daily_performance` supports incremental sync on `date` and also re-reads the last 30 days.
-- `offers`, `affiliates` and `advertisers` use full refresh.
+- `offers`, `affiliates` (your partners) and `advertisers` use full refresh.
 
-Everflow's conversions report only reaches the last 365 days, so the first sync of `conversions` and `daily_performance` starts there.
+Everflow's conversions report only reaches the last 365 days, so the first sync of `conversions` and `daily_performance` starts there. A full refresh replaces both tables with the last 365 days, so keep them on incremental sync to keep older rows.
 
 ## Configuration
 
@@ -52,5 +52,9 @@ Everflow's conversions report only reaches the last 365 days, so the first sync 
 ### The source fails with a 401 or 403 error
 
 A 401 means Everflow rejected the key or the region doesn't match your network. A 403 means the key belongs to a partner or advertiser portal. Create a network API key and update the source.
+
+### The daily_performance table fails with a 10,000-row limit error
+
+One day of Everflow's daily report has more than 10,000 offer and partner pairs, which Everflow can't return in one request. Deselect the `daily_performance` table.
 
 <TroubleshootingLink />

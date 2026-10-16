@@ -25,15 +25,13 @@ You need a Rewardful account with access to **Company settings**, where the API 
 
 This source needs one credential:
 
-- **API secret** – In Rewardful, open **Company settings** and copy the **API secret**. The secret gives full read access to your Rewardful account.
+- **API secret** – In Rewardful, open **Company settings** and copy the **API secret**. The secret gives full access to your Rewardful account, so treat it like a password. PostHog only reads data with it.
 
 ## Sync modes
 
 <SyncModes />
 
 The `referrals` table supports incremental sync on `updated_at`, because Rewardful can filter referrals by their last update. The other tables have no server-side date filter, so they use full refresh.
-
-Rewardful doesn't have a customers endpoint. Customer details appear on each referral in the `customer` column.
 
 ## Configuration
 
@@ -42,6 +40,8 @@ Rewardful doesn't have a customers endpoint. Customer details appear on each ref
 ## Supported tables
 
 <SourceTables />
+
+Rewardful doesn't have a customers endpoint. Customer details appear on each referral in the `customer` column.
 
 ## Troubleshooting
 

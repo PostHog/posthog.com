@@ -34,7 +34,7 @@ This source needs three values:
 
 Both tables support incremental sync on `timestamp`, the day a row covers. Each sync re-reads the last 30 days, because 7-day revenue and retention keep changing after the install.
 
-The first sync reads the last year. Unity allows 30 requests every 30 minutes, so a first sync of `campaigns_daily_by_country` takes a while.
+The first sync reads the last year. Unity builds each report when PostHog asks for it, so the first sync of `campaigns_daily_by_country` can take a while. A full refresh replaces both tables with the last year, so keep them on incremental sync to keep older days.
 
 ## Configuration
 
@@ -45,6 +45,10 @@ The first sync reads the last year. Unity allows 30 requests every 30 minutes, s
 <SourceTables />
 
 ## Troubleshooting
+
+### The source fails with a 401 error
+
+Unity rejected the service account key. Create a new key in the Unity dashboard and update the source.
 
 ### The source fails with a 403 error
 
