@@ -60,6 +60,7 @@ export default function useTeam({ slug }: { slug: string }) {
             setTeam(data?.[0] ?? [])
         } catch (err) {
             console.error('Failed to fetch team', err)
+            setTeam(undefined)
         }
     }
 
@@ -154,6 +155,7 @@ export default function useTeam({ slug }: { slug: string }) {
     }
 
     useEffect(() => {
+        setLoading(true)
         fetchTeam().finally(() => setLoading(false))
     }, [slug, isModerator])
 
