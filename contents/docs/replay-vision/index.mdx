@@ -44,6 +44,8 @@ A few examples of what teams use Replay Vision for:
 
 Each of these maps to a [scanner type](/docs/replay-vision/scanner-types).
 
+Replay Vision also works as a step in a [workflow](/docs/workflows/replay-vision). The step watches the session behind the event that started the workflow, and the next steps act on its answer: post a summary to Slack with a support ticket, or reach out to new signups who struggled.
+
 ## Finding your way around
 
 Open **Replay Vision** from the side menu. The page has four tabs:
@@ -63,6 +65,7 @@ Open **Replay Vision** from the side menu. The page has four tabs:
 - **Is the scanner getting it right?** Rate each observation with a thumbs up or down, and add a note on what it got right or wrong. The scanner learns from your team's ratings on later scans. See [improving scanners with ratings](/docs/replay-vision/calibration).
 - **Want a regular write-up?** Put a [scout](/docs/replay-vision/scouts) on the scanner to read its findings on a schedule and report what's worth a look.
 - **Want to be notified?** Add an [alert](/docs/replay-vision/alerts) that fires on matching observations or a metric threshold, and sends to Slack or a webhook.
+- **Want to act on what it sees?** Add a [Replay Vision step to a workflow](/docs/workflows/replay-vision) to scan the session behind an event, then branch on the answer or send it to your team.
 - **Hit a snag?** Check [troubleshooting](/docs/replay-vision/troubleshooting).
 
 ## Further reading

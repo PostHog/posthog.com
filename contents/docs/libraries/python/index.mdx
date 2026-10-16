@@ -651,7 +651,38 @@ Keep one `AsyncPosthog` client for the lifetime of your application. Use buffere
 
 ## Django
 
-See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our library includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. The [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) adds request properties and authenticated user identity to events captured during a request. You can also opt in to browser session and distinct ID headers.
+
+## ASGI request middleware
+
+Version `7.69.0` and later of the Python SDK includes framework-independent ASGI middleware for FastAPI, Starlette, Litestar, and raw ASGI applications. It creates a PostHog context for each HTTP or WebSocket request, enriches captured events with request properties, and captures exceptions that escape the application.
+
+For FastAPI or Starlette, add the middleware to your app:
+
+```python
+from fastapi import FastAPI
+from posthog import Posthog
+from posthog.integrations.asgi import PosthogASGIMiddleware
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    enable_exception_autocapture=True,
+)
+
+app = FastAPI()
+app.add_middleware(PosthogASGIMiddleware, client=posthog)
+```
+
+The middleware's `capture_exceptions` option defaults to `None`, which inherits the client's `enable_exception_autocapture` setting. Set it to `True` or `False` to override the client. Use `request_filter` to skip selected requests and `extra_properties` to add properties from the ASGI scope. Both callbacks can be synchronous or asynchronous.
+
+The middleware ignores `X-PostHog-Distinct-ID` and `X-PostHog-Session-ID` by default because clients can control them. Set `trust_tracing_headers=True` only when you want to accept these headers as analytics context. Don't use them for authentication or authorization.
+
+To instrument another ASGI framework or a raw ASGI app, wrap the application directly:
+
+```python
+app = PosthogASGIMiddleware(app, client=posthog)
+```
 
 ## Alternative name
 

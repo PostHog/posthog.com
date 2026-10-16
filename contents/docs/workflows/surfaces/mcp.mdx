@@ -15,7 +15,7 @@ The PostHog [MCP server](/docs/model-context-protocol) brings Workflows into Cla
 
 Through MCP tools, your agent can:
 
-- **Create and edit workflows.** `workflows-create` makes a draft, `workflows-patch-graph` and `workflows-update` change it, and `workflows-discard-draft` throws the draft away.
+- **Create and edit workflows.** `workflows-create` makes a draft, `workflows-patch-graph` and `workflows-update` change it, and `workflows-discard-draft` throws the draft away. Drafts can include any step, including [Replay Vision](/docs/workflows/replay-vision) and [AI tasks](/docs/workflows/ai-tasks).
 - **Test and publish.** `workflows-test-run` runs a workflow without sending to real recipients, and `workflows-publish` makes the draft live.
 - **Read and list.** `workflows-list` and `workflows-get` pull workflows into your session, and `workflows-update-schedule` changes when a scheduled workflow runs.
 - **Debug a run.** `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs`, and `workflows-list-batch-jobs` show what actually happened on a given run.

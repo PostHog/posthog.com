@@ -40,6 +40,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
 - Usage is measured before discounts and excludes tax.
 - If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
+- If we offer a customer a product trial where we will provide credit for their usage back, this will be removed from their usage in the NRR to align with billing addon trials which are not counted towards revenue either.  The goal of a trial is to ascertain whether a product is fit for purpose for a customer's needs and as such isn't considered 'retained' as a product until that customer is paying for it.
 - If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
 - Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
 

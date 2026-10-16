@@ -79,6 +79,9 @@ jobs:
             - name: Check Markdown exports
               run: pnpm test:markdown
 
+            - name: Check pocket guide conventions
+              run: pnpm test:pocket-guides
+
             - name: Build site
               run: pnpm build
               env:

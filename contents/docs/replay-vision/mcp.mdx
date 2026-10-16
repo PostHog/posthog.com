@@ -46,6 +46,8 @@ Call the first two before `vision-scanners-create` to avoid creating a scanner t
 
 Scans run asynchronously. Poll `vision-scanners-observations-list` until each observation leaves `pending` or `running`.
 
+To scan sessions every time an event happens, have your agent build a workflow with a [Replay Vision step](/docs/workflows/replay-vision) instead. The workflow MCP tools create it as a draft.
+
 ### Backfills
 
 - `vision-scanners-backfills-estimate` – count the sessions a backfill over a past window would scan, and the most it could cost.
