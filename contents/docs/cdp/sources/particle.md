@@ -10,12 +10,6 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha" type="fyi">
-
-The Particle source is in alpha. It is available to a small number of projects first, and it can change before general availability.
-
-</CalloutBox>
-
 The Particle connector sends events from your [Particle](https://www.particle.io) devices to PostHog, with no server of your own. Every `Particle.publish()` that matches your event name prefixes arrives as a PostHog event on that device, so you can build insights, dashboards, and alerts on device data. PostHog also syncs your device list into the data warehouse.
 
 ## Prerequisites
