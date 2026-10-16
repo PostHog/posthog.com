@@ -21,6 +21,7 @@ import {
     getAddonTiers as getBillingAddonTiers,
     getCalculatorTotal,
     getRetentionMonths,
+    getRetentionMonthsForKey,
     getRetentionVolume,
     readLegacyRetention,
     RETENTION_SLIDER_STEPS,
@@ -254,6 +255,23 @@ describe('Logs custom retention', () => {
             [...reached].sort((a, b) => a - b),
             Array.from({ length: 87 }, (_, months) => months)
         )
+    })
+
+    test('moves the retention slider by whole months from the keyboard', () => {
+        const press = (months: number, key: string) => getRetentionMonthsForKey(retentionConfig, months, key)
+        // The slider's own step at the 14-day default rounds back to 0 months, so keys must move whole months
+        assert.equal(monthsAt(position(0) + position(86) / RETENTION_SLIDER_STEPS), 0)
+        assert.equal(press(0, 'ArrowRight'), 1)
+        assert.equal(press(12, 'ArrowUp'), 13)
+        assert.equal(press(12, 'ArrowLeft'), 11)
+        assert.equal(press(0, 'ArrowDown'), 0)
+        assert.equal(press(86, 'ArrowRight'), 86)
+        assert.equal(press(12, 'PageUp'), 24)
+        assert.equal(press(80, 'PageUp'), 86)
+        assert.equal(press(5, 'PageDown'), 0)
+        assert.equal(press(40, 'Home'), 0)
+        assert.equal(press(0, 'End'), 86)
+        assert.equal(press(12, 'Tab'), null)
     })
 
     /** A calculator link as Tabbed.tsx writes it with `qs`, read back as numbers the way `readProductInputs` does. */

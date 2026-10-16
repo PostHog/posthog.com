@@ -126,6 +126,25 @@ export const getRetentionMonths = (retention: RetentionConfig, months?: number |
         ? Math.min(Math.max(Math.round(months), 0), retention.maxMonths)
         : 0
 
+const RETENTION_KEY_STEPS: Record<string, number> = {
+    ArrowRight: 1,
+    ArrowUp: 1,
+    ArrowLeft: -1,
+    ArrowDown: -1,
+    PageUp: 12,
+    PageDown: -12,
+}
+
+/**
+ * Where a key press moves the retention slider, in whole months. The slider's own keyboard step is a tiny
+ * fraction of its curved scale, which rounds back to the same month. Null for keys the slider ignores.
+ */
+export const getRetentionMonthsForKey = (retention: RetentionConfig, months: number, key: string): number | null => {
+    if (key === 'Home') return 0
+    if (key === 'End') return retention.maxMonths
+    return key in RETENTION_KEY_STEPS ? getRetentionMonths(retention, months + RETENTION_KEY_STEPS[key]) : null
+}
+
 /**
  * Reads a link from the old calculator, which took GB with custom retention as a second volume
  * (`addons.<retention key>.volume` and `.months`). The volume becomes the total GB, so ingestion stays exact,

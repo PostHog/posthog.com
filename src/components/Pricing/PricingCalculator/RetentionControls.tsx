@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from '../PricingSlider/Slider'
-import { getRetentionMonths, RETENTION_SLIDER_STEPS } from './calculatorLogic'
+import { getRetentionMonths, getRetentionMonthsForKey, RETENTION_SLIDER_STEPS } from './calculatorLogic'
 import type { RetentionConfig } from './calculatorLogic'
 
 const monthsText = (months: number) => `${months} ${months === 1 ? 'month' : 'months'}`
@@ -22,21 +22,32 @@ export const RetentionSlider = ({
     value: number
     onChange: (months: number) => void
 }): JSX.Element => (
-    <NonLinearSlider
-        stepsInRange={RETENTION_SLIDER_STEPS}
-        marks={retention.marks || []}
-        min={0}
-        max={retention.maxMonths}
-        value={nonLinearCurve(value)}
-        onChange={(position) => onChange(getRetentionMonths(retention, reverseNonLinearCurve(position)))}
-        formatMark={(months) =>
-            months === 0 ? retention.includedMark || '' : months % 12 === 0 ? `${months / 12}y` : `${months}m`
-        }
-        formatTip={(position) => {
-            const months = getRetentionMonths(retention, position)
-            return months ? monthsText(months) : retention.includedLabel || ''
+    // Keys move whole months here, before the slider's own keyboard handling sees them
+    <div
+        onKeyDownCapture={(event) => {
+            const months = getRetentionMonthsForKey(retention, value, event.key)
+            if (months === null) return
+            event.preventDefault()
+            event.stopPropagation()
+            onChange(months)
         }}
-    />
+    >
+        <NonLinearSlider
+            stepsInRange={RETENTION_SLIDER_STEPS}
+            marks={retention.marks || []}
+            min={0}
+            max={retention.maxMonths}
+            value={nonLinearCurve(value)}
+            onChange={(position) => onChange(getRetentionMonths(retention, reverseNonLinearCurve(position)))}
+            formatMark={(months) =>
+                months === 0 ? retention.includedMark || '' : months % 12 === 0 ? `${months / 12}y` : `${months}m`
+            }
+            formatTip={(position) => {
+                const months = getRetentionMonths(retention, position)
+                return months ? monthsText(months) : retention.includedLabel || ''
+            }}
+        />
+    </div>
 )
 
 /** Months kept, as a number. Empty or 0 is the included default; values are kept within 0 and `maxMonths`. */
