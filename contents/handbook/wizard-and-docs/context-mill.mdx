@@ -29,6 +29,8 @@ If a change touches both repos, ship the context mill PR first.
 2. **Assembly.** The build packages each skill into a ZIP, and writes menus that list every skill and command.
 3. **Delivery.** A release publishes the ZIPs and menus to GitHub, with a mirror at `context-mill.posthog.com`.
 
+A skill can be docs only. Some docs pages already hold everything an agent needs, so the skill just points at them, like the [logs skill](https://github.com/PostHog/context-mill/blob/main/context/skills/logs/config.yaml).
+
 Each skill is a folder in `context/skills/` with a `config.yaml`. Expect to iterate on a skill until the wizard's output looks right.
 
 ## Orchestrator flows
