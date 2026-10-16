@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_survey_v1_be1f1494d7.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/6things_e730f926cf.png
 featuredImageType: full
 category: Inside PostHog
 tags:
@@ -22,7 +22,7 @@ After 6 years at PostHog, I am delighted to share that I have learned _exactly_ 
 
 The other 20% is giving context and getting out of the way. If you hold an extremely high bar when you're hiring, it genuinely makes everything else much easier, even if it feels like you're saying no to everyone and are never going to find the right person.
 
-Whenever I have managed a first-time manager at PostHog, pretty much the first thing I ask them to do is less. A lot of people assume that they need to transform into some inauthentic corporate drone once they adopt the lofty mantle of management, but the reality is most of the work is done up front, when you hire the right person. If you've hired good people, then your job is about giving them the context they need to do their jobs.
+Whenever I have managed a first-time manager at PostHog, the first thing I ask them to do is less. A lot of people assume that they need to transform into some inauthentic corporate drone once they adopt the lofty mantle of management, but the reality is most of the work is done up front, when you hire the right person. If you've hired good people, then your job is about giving them the context they need to do their jobs.
 
 Of course there is occasional conflict or performance management to deal with, but a) that is a tiny part of the job, and b) if you are doing a lot of it, you or someone else probably hired badly in the first place. You cannot hire badly and then extremely hands-on manage them into being good.
 
@@ -34,8 +34,8 @@ Memes are not just funny images – they can be a devastatingly effective way of
 
 Here are a few things that were really important to our strategy, but spread far more effectively when dressed up in meme form:
 
-- Our graphics team wanted to spend a quarter on more systems-focused work and improving what we already have, vs. spending too much time on shipping net new stuff. We called this Serious Summer and it made it much easier to know whether to say yes or no to something.
-- Hitting $100m ARR is fine as a target. But hitting The Hundy has become PostHog lore at this point (355 mentions in Slack and rising), and you see people genuinely asking "How can we help hit the hundy?"
+- Our graphics team wanted to spend a quarter on more systems-focused work and improving what we already have, vs. spending too much time on shipping net new stuff. We called this **Serious Summer** and it made it much easier to know whether to say yes or no to something.
+- Hitting $100m ARR is fine as a target. But hitting **The Hundy** has become [PostHog lore](/handbook/company/lore) at this point (355 mentions in Slack and rising), and you see people genuinely asking "How can we help hit the hundy?"
 - We want PostHog to be known for making it easy to reliably capture and use data from your product from a positioning perspective. But Steve Ballmer has made this point much more effectively in GIF and Slackmoji form, and we frequently use him when product teams are thinking about what to build next. Thanks Steve.
 
 <div className="flex justify-center">
@@ -64,7 +64,7 @@ There's a long list of things that got us here and are still getting us there, i
 - Talking to users. Our assumptions about what they want and how they might use our product may have changed. Actually, they definitely have. You can only partially outsource this to reading brand mentions and LLM summaries of sales call transcripts.
 - Going upmarket doesn't mean neutering your brand; enterprises are full of real people too who like to read fun stuff.
 - Selling features over benefits works surprisingly well upmarket too. Sometimes people at giant corporations really do just want "a tool that does X".
-- People will tell you hiring technical people to sell software does not scale beyond the first handful. This is not true, it's just hard.
+- People will tell you [hiring technical people to sell software](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer) does not scale beyond the first handful. This is not true, it's just hard.
 
 If you find yourself saying "we need to do things differently", think about whether you are doing it because you believe it from first principles, or because you're copying other cool-looking companies (who, by the way, always look way more impressive online than on the inside).
 
