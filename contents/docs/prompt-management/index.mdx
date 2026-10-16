@@ -120,10 +120,11 @@ Archived prompts stay in your project. To see them, turn on **Show archived** on
 
 Click **Restore** to bring a prompt back. All of its versions come back with the same numbers, so code that fetches by name or by version works again. Labels are not restored: set them again on the versions you want to release.
 
-Restoring fails in two cases:
+Restoring fails in these cases:
 
-- An active prompt with the same name exists. Archive it first.
+- An active prompt with the same name exists. Names are immutable, so the archived prompt can't be restored while the new one exists. Archiving the new one does not help: both would then share version numbers and neither could be restored. Keep the active prompt, or create a new prompt with the archived content.
 - The name was archived more than once and the archived versions overlap. Create a new prompt instead.
+- The latest archived version references a prompt that is still archived. Restore the referenced prompt first.
 
 With the API, list archived prompts with `?archived=true` and restore one with a `POST` request:
 
