@@ -260,6 +260,8 @@ Config is versioned together with the prompt content. Publishing a config change
 
 Don't store secrets in the config. It's returned to anyone who can read the prompt.
 
+The [playground](/docs/ai-observability/playground#saving-and-loading) uses the config too. Saving a playground setup to a prompt stores the model, parameters, tools, and messages under keys like `model`, `temperature`, and `messages`, and loading the prompt restores them. A playground save replaces only those keys and keeps any others you wrote through the API. If your app reads the config, expect these keys on prompts saved from the playground.
+
 ### In the app
 
 When editing a prompt, click **Add configuration** and enter a JSON object, for example:
