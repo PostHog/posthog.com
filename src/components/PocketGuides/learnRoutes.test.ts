@@ -33,6 +33,7 @@ test('other volumes keep their configured entry routes', () => {
     for (const [id, expected] of [
         ['ai-observability', '/docs/ai-observability/learn'],
         ['session-replay', '/docs/session-replay/learn'],
+        ['feature-flags', '/docs/feature-flags/learn'],
         ['self-driving', '/pocket-guides/self-driving'],
     ]) {
         const volume = volumeById(id)
@@ -43,7 +44,7 @@ test('other volumes keep their configured entry routes', () => {
 
 test('every client-only Learn chapter route is rewritten to its Gatsby page', () => {
     const rewrites = vercelConfig.rewrites as Array<{ source: string; destination: string }>
-    const products = ['product-analytics', 'ai-observability', 'session-replay']
+    const products = ['product-analytics', 'ai-observability', 'session-replay', 'feature-flags']
 
     for (const product of products) {
         assert.ok(
