@@ -7,29 +7,43 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 1. Why aren't more people trying Self-Driving?
 2. Do improvements to report quality deliver enough value for users to keep coming back?
 
-### Make Self-Driving easy to start and useful for ongoing work – Georgiy, Dylan, and Andy
+### Make Self-Driving easy to start and useful for ongoing work – Chris, Dylan, and Andy
 
-#### Increase activation – Georgiy
+#### Increase activation – Chris
 
--   Let users start from PostHog web with a GitHub connection.
--   Test report access without GitHub when the work does not need code.
--   Use sensible defaults for sources and canonical scouts. Introduce more sources, scouts, and suggestions when useful – Andy.
--   Use onboarding and empty states to help users get their first useful report when their data is ready.
+-   Improve adoption. Let new users start from PostHog web. Simplify onboarding by making it UI-first. Run the CLI wizard in a cloud sandbox instead of on the user's machine.
+-   Improve onboarding and empty states so users understand the value and know how to get their first useful report.
+-   Help users discover and adopt more capabilities after their first useful report.
+-   Help users activate later in the user journey when they have data.
+-   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
+-   Scouts on by default: every project has the canonical scouts and project-specific suggestions waiting, so turning one on is the whole journey – Andy.
 
 #### Help committed users turn reports into completed work – Dylan
 
--   Build a clear UI for understanding reports, managing tasks, and selecting the next action.
--   Explain each finding, change, and supporting evidence so users can review work with confidence.
--   Show each person what they own and what needs their attention.
--   Keep ownership, notifications, work status, and review responsibilities clear as teams grow.
+-   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
+-   Help users understand what was found, what changed, and what evidence supports it, so they can review work confidently with fewer decisions.
+-   Make work status and review responsibilities clear as report volumes and team sizes grow.
 
-#### Put the right reports first – Dylan and Andy
+#### Make users confident that every assigned report is for them or their team – Dylan
 
--   Provide one ranking system for the inbox, home page, API, PostHog AI, and external agents.
--   Score whether each user will open, act on, or fix a report. Use project and user context when useful.
--   Measure ranking quality with offline evaluations and online experiments.
--   Andy owns the ranking inputs, models, and relevance quality.
--   Dylan defines product policy and how the self-driving inbox uses ranking output.
+-   Assign reports to people or teams who can act on them and care about them.
+-   Map GitHub contributors to PostHog members and teams.
+-   Handle missing mappings, team changes, and people who leave an organization.
+-   Make incorrect assignments easy to skip, reassign, or correct.
+-   Support clear ownership for individuals, teams, and larger organizations.
+
+#### Put the most relevant assigned reports first – Dylan and Andy
+
+-   Rank reports only within the Self-Driving Inbox.
+-   Start with simple rules. Use learned scores when they improve the experience.
+-   Andy owns the probabilities that a user will open, act on, or fix each report. Andy adds project and user context and measures model quality.
+-   Dylan owns how the Inbox combines model scores, agent context, work status, and product rules.
+-   Measure whether ranking helps users find useful work through offline evaluations and online experiments.
+
+#### Notify the right people about useful reports – Dylan
+
+-   Send relevant findings to assigned people or teams when the reports need attention.
+-   Use assignment and relevance quality to prevent noisy notifications.
 
 ### Make the report layer independent of our UI – Dylan, Georgiy
 
