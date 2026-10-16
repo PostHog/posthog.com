@@ -799,7 +799,7 @@ export default function TeamPage(props: TeamPageProps) {
                             <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
                         ) : slug === 'platform-features' ? (
                             <figure className="rotate-2 max-w-md w-full mx-auto @2xl/reader-content:mr-0">
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Edit_7442a20723.png" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Restoration_974fb5ccb9.png" />
                             </figure>
                         ) : (
                             <TeamImage
