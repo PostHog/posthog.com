@@ -11,31 +11,25 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 
 #### Increase activation – Georgiy
 
--   Let new users start from PostHog web. Make the GitHub connection the only required onboarding step.
--   Move signal source and scout setup into progressive discovery. Use sensible defaults and introduce each option when it becomes useful.
--   Improve onboarding and empty states. Help users understand the value and get their first useful report.
--   Help users discover more capabilities after their first useful report.
--   Help users activate later in the user journey when they have data.
--   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
--   Give every project canonical scouts and project-specific suggestions. Make scout activation a single action after onboarding – Andy.
+-   Let users start from PostHog web with a GitHub connection.
+-   Test report access without GitHub when the work does not need code.
+-   Use sensible defaults for sources and canonical scouts. Introduce more sources, scouts, and suggestions when useful – Andy.
+-   Use onboarding and empty states to help users get their first useful report when their data is ready.
 
 #### Help committed users turn reports into completed work – Dylan
 
--   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
--   Help users understand what was found, what changed, and what evidence supports it, so they can review work confidently with fewer decisions.
--   Make assignment and personalization useful: show what each person owns, what needs their attention, and what matters to them.
--   Improve report notifications so relevant findings reach the right people.
--   Support use by larger orgs as report volumes and team sizes grow. Make reports work for teams with more than a few engineers, and keep ownership, work status, and review responsibilities clear.
+-   Build a clear UI for understanding reports, managing tasks, and selecting the next action.
+-   Explain each finding, change, and supporting evidence so users can review work with confidence.
+-   Show each person what they own and what needs their attention.
+-   Keep ownership, notifications, work status, and review responsibilities clear as teams grow.
 
 #### Put the right reports first – Dylan and Andy
 
--   Own one shared ranking system for the inbox, home page, API, PostHog AI, and external agents.
--   Provide stable probabilities that a user will open, act on, or fix each report. Improve these models over time.
--   Add project and user context when the available data supports useful personalization.
+-   Provide one ranking system for the inbox, home page, API, PostHog AI, and external agents.
+-   Score whether each user will open, act on, or fix a report. Use project and user context when useful.
 -   Measure ranking quality with offline evaluations and online experiments.
--   Dylan owns how the self-driving inbox selects, presents, and explains reports.
 -   Andy owns the ranking inputs, models, and relevance quality.
--   Dylan and Andy share the user outcome: people find the right report and complete useful work.
+-   Dylan defines product policy and how the self-driving inbox uses ranking output.
 
 ### Make the report layer independent of our UI – Dylan, Georgiy
 
