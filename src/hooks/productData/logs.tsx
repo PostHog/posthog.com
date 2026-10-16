@@ -177,34 +177,28 @@ export const logs = {
         headline: 'Set a billing limit on ingestion.',
         body: "Custom retention isn't capped by it.",
     },
-    addonSliders: [
-        {
-            key: 'logs_retention_custom',
-            label: 'Custom retention',
-            // Billing meters all ingested GB (any retention) on the base logs product, then bills
-            // retained GB again at the add-on rate for each month of retention.
-            countsTowardParentVolume: true,
-            // Months of retention input on both calculators, up to 86
-            multiplier: { unit: 'month', initial: 1, max: 86, marks: [1, 12, 36, 86] },
-            // Shown on /logs/pricing
-            pricingDescription:
-                "Keep logs and traces longer than the 14-day default. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. These GB also count toward ingestion above. Set it per service or per source in your logs and traces settings.",
-            // Shown on /pricing
-            note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. These GB also count toward ingestion above.",
-            // Added to both once billing reports `no_billing_limit` for custom retention
-            noBillingLimitNote:
-                "Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention can't have a limit of its own.",
-            sliderConfig: {
-                marks: [0, 10, 100, 1000, 5000],
-                min: 0,
-                scaleMin: 1,
-                max: 5000,
-            },
-            volume: 0,
-            unit: 'GB',
-            freeAllocation: 0,
-        },
-    ],
+    // Retention input on both calculators. Customers set one retention for each project, so it applies to
+    // every GB ingested: 14 days are included, and each month kept bills every GB again.
+    retention: {
+        key: 'logs_retention_custom',
+        label: 'Retention',
+        // Names the volume input, which counts every GB ingested whatever its retention
+        volumeLabel: 'Logs/Tracing ingestion',
+        includedLabel: '14 days (included)',
+        includedMark: '14d',
+        includedNote: 'The 14-day default is included in the ingestion price.',
+        // Billing takes 14 days or any whole number of months up to 86; marks are labels only
+        maxMonths: 86,
+        marks: [0, 1, 3, 12, 36, 84],
+        // Shown on /logs/pricing and /tracing/pricing
+        pricingDescription:
+            "Keep logs and traces longer than the 14-day default. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. Set it per service or per source in your logs and traces settings.",
+        // Shown on /pricing
+        note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires.",
+        // Added to both once billing reports `no_billing_limit` for custom retention
+        noBillingLimitNote:
+            "Your Logs billing limit stops ingestion but doesn't cap custom retention, and custom retention can't have a limit of its own.",
+    },
     customers: {
         key: {
             headline: '',

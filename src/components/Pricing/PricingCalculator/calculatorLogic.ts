@@ -35,29 +35,17 @@ export interface BillingProduct {
     [key: string]: any
 }
 
-/** A second input that multiplies an add-on's volume, like the months Logs custom retention keeps each GB. */
-export interface AddonMultiplier {
-    unit: string
-    initial: number
-    max?: number
-    marks?: number[]
-}
-
-/** An add-on slider from our product data (`addonSliders`). */
-export interface AddonSlider {
+/** A retention input from our product data (`retention`), like Logs custom retention. */
+export interface RetentionConfig {
+    // The billing type that prices retention
     key: string
-    volume?: number
-    sliderConfig?: { min?: number }
-    // The add-on's volume also bills through the parent product's tiers
-    countsTowardParentVolume?: boolean
-    multiplier?: AddonMultiplier | null
-    [key: string]: any
-}
-
-/** What the calculator keeps for each add-on slider, in state and in the URL. */
-export interface AddonInput {
-    volume: number
-    months?: number
+    maxMonths: number
+    label?: string
+    // The default retention, which costs nothing extra, in full and as a slider mark
+    includedLabel?: string
+    includedMark?: string
+    // Months labelled on the slider (0 is the included default)
+    marks?: number[]
 }
 
 /** A product as the calculator sees it – our own product data joined to its billing product. */
@@ -132,48 +120,30 @@ export const getAddonTiers = (
 ): BillingTier[] | null | undefined =>
     product?.addons?.find((addon) => addon.type === type)?.plans.find((plan) => plan.tiers)?.tiers
 
-/** Months an add-on bills for, kept within what it allows. An add-on without a multiplier bills once. */
-export const getAddonMonths = (multiplier?: AddonMultiplier | null, months?: number | null): number => {
-    if (!multiplier) return 1
-    const value = typeof months === 'number' && Number.isFinite(months) ? Math.round(months) : multiplier.initial
-    return Math.min(Math.max(value, 1), multiplier.max ?? Infinity)
-}
-
-/** The add-on inputs to start from: saved ones if there are any, else the add-on defaults. */
-export const getAddonInputs = (
-    addonSliders: AddonSlider[],
-    saved: Record<string, Partial<AddonInput> | undefined> = {}
-): Record<string, AddonInput> =>
-    Object.fromEntries(
-        addonSliders.map((addon) => [
-            addon.key,
-            {
-                volume: saved[addon.key]?.volume ?? addon.volume ?? addon.sliderConfig?.min ?? 0,
-                ...(addon.multiplier && { months: getAddonMonths(addon.multiplier, saved[addon.key]?.months) }),
-            },
-        ])
-    )
+/** Months kept, from 0 (the included default retention) up to what the product allows. */
+export const getRetentionMonths = (retention: RetentionConfig, months?: number | null): number =>
+    typeof months === 'number' && Number.isFinite(months)
+        ? Math.min(Math.max(Math.round(months), 0), retention.maxMonths)
+        : 0
 
 /**
- * Price an add-on slider. Logs custom retention bills in GB-months: each GB you keep costs the
- * add-on rate again for every month you keep it, on top of the ingestion it also bills as.
+ * Steps on the retention slider's track. It uses the volume sliders' curve (position = months^0.4), which is
+ * steepest at the top, so the track needs enough steps for every whole month to stay reachable there.
  */
-export const calculateAddonPrice = (
-    tiers: BillingTier[] | null | undefined,
-    input?: Partial<AddonInput>,
-    multiplier?: AddonMultiplier | null
-): ReturnType<typeof calculatePrice> =>
-    calculatePrice((input?.volume ?? 0) * getAddonMonths(multiplier, input?.months), tiers)
+export const RETENTION_SLIDER_STEPS = 500
 
-/** The add-on volume that also bills through the parent product's tiers, like retained logs as ingestion. */
-export const getParentMeteredVolume = (
-    addonSliders: AddonSlider[],
-    inputs: Record<string, Partial<AddonInput> | undefined>
-): number =>
-    addonSliders.reduce(
-        (sum, addon) => (addon.countsTowardParentVolume ? sum + (inputs[addon.key]?.volume ?? 0) : sum),
-        0
-    )
+/** Retention bills in GB-months: every GB ingested, once for each month it is kept. */
+export const getRetentionVolume = (volume: number, months: number): number => volume * months
+
+/**
+ * Price retention: every GB ingested costs the retention rate again for each month it is kept, on top
+ * of its ingestion price. 0 months, the included default, costs nothing.
+ */
+export const calculateRetentionPrice = (
+    tiers: BillingTier[] | null | undefined,
+    volume: number,
+    months: number
+): ReturnType<typeof calculatePrice> => calculatePrice(getRetentionVolume(volume, months), tiers)
 
 /**
  * Build the calculator's add-on state from the products it shows.

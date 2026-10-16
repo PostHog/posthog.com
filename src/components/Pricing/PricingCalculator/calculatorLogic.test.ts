@@ -11,19 +11,21 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, test } from 'node:test'
 
+import qs from 'qs'
+
 import {
     buildProductAddons,
-    calculateAddonPrice,
     calculatePrice,
-    getAddonInputs,
-    getAddonMonths,
+    calculateRetentionPrice,
     getAddonsCostForProduct,
     getAddonTiers as getBillingAddonTiers,
     getCalculatorTotal,
-    getParentMeteredVolume,
+    getRetentionMonths,
+    getRetentionVolume,
+    RETENTION_SLIDER_STEPS,
     withCompanionAddons,
 } from './calculatorLogic.ts'
-import type { AddonSlider, BillingAddon, BillingProduct, CalculatorAddon } from './calculatorLogic.ts'
+import type { BillingAddon, BillingProduct, CalculatorAddon, RetentionConfig } from './calculatorLogic.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -174,68 +176,105 @@ describe('withCompanionAddons', () => {
 
 describe('Logs custom retention', () => {
     // As in src/hooks/productData/logs.tsx
-    const retentionSlider: AddonSlider = {
-        key: 'logs_retention_custom',
-        countsTowardParentVolume: true,
-        multiplier: { unit: 'month', initial: 1, max: 86 },
-        volume: 0,
-    }
+    const retentionConfig: RetentionConfig = { key: 'logs_retention_custom', maxMonths: 86 }
 
-    /** What both calculators bill for Logs: ingestion on every GB, plus retention on the GB kept. */
-    const logsEstimate = (products: BillingProduct[], volume: number, retained: number, months?: number) => {
+    /** What both calculators bill for Logs: ingestion on every GB, plus retention on every GB for each month kept. */
+    const logsEstimate = (products: BillingProduct[], volume: number, months?: number) => {
         const logs = withCompanionAddons(products[0], products)
-        const inputs = { logs_retention_custom: { volume: retained, months } }
-        const ingestion = calculatePrice(volume + getParentMeteredVolume([retentionSlider], inputs), logsPlans[0].tiers)
-        const retentionTiers = getBillingAddonTiers(logs, 'logs_retention_custom')
-        const kept = calculateAddonPrice(retentionTiers, inputs.logs_retention_custom, retentionSlider.multiplier)
-        return { ingestion: ingestion.total, retention: kept.total }
+        const kept = getRetentionMonths(retentionConfig, months)
+        const ingestion = calculatePrice(volume, logs.plans.find((plan) => plan.tiers)?.tiers).total
+        const retention = calculateRetentionPrice(getBillingAddonTiers(logs, retentionConfig.key), volume, kept).total
+        return { ingestion, retention }
     }
 
-    test('bills 100 GB kept for 12 months as 1,200 GB-months in both shapes', () => {
-        assert.deepEqual(logsEstimate(addonShape, 0, 100, 12), { ingestion: 23, retention: 60 })
-        assert.deepEqual(logsEstimate(companionShape, 0, 100, 12), { ingestion: 23, retention: 60 })
+    test('bills 100 GB kept for 12 months as ingestion plus 1,200 GB-months in both shapes', () => {
+        // 10 GB free, then 90 GB at $0.25 = $22.50, which the calculators round to $23
+        assert.deepEqual(logsEstimate(addonShape, 100, 12), { ingestion: 23, retention: 60 })
+        assert.deepEqual(logsEstimate(companionShape, 100, 12), { ingestion: 23, retention: 60 })
+        assert.equal(getRetentionVolume(100, 12), 1_200)
     })
 
-    test('bills retained GB as ingestion too', () => {
-        // 10 GB at 14-day retention plus 100 GB kept longer: 110 GB ingested, 10 of them free
-        assert.equal(logsEstimate(companionShape, 10, 100, 1).ingestion, 25)
-        assert.equal(logsEstimate(companionShape, 110, 0).ingestion, 25)
+    test('counts ingestion once, whatever the retention', () => {
+        assert.equal(logsEstimate(companionShape, 100, 0).ingestion, 23)
+        assert.equal(logsEstimate(companionShape, 100, 86).ingestion, 23)
     })
 
-    test('bills one month when months are left out, as an old calculator URL does', () => {
-        assert.equal(logsEstimate(companionShape, 0, 100).retention, 5)
+    test('charges nothing for the included 14-day default', () => {
+        assert.deepEqual(logsEstimate(addonShape, 100, 0), { ingestion: 23, retention: 0 })
+        assert.deepEqual(logsEstimate(companionShape, 100), { ingestion: 23, retention: 0 })
     })
 
-    test('keeps months between 1 and 86', () => {
-        const { multiplier } = retentionSlider
-        assert.equal(getAddonMonths(multiplier, 0), 1)
-        assert.equal(getAddonMonths(multiplier, 12.4), 12)
-        assert.equal(getAddonMonths(multiplier, 1000), 86)
-        assert.equal(getAddonMonths(multiplier, undefined), 1)
-        assert.equal(getAddonMonths(undefined, 12), 1)
-        assert.equal(logsEstimate(companionShape, 0, 100, 1000).retention, 430)
+    test('has no free tier, so every GB kept bills', () => {
+        // 10 GB is free to ingest, but keeping it for a month costs 10 × $0.05
+        const logs = withCompanionAddons(companionShape[0], companionShape)
+        const kept = calculateRetentionPrice(getBillingAddonTiers(logs, 'logs_retention_custom'), 10, 1)
+        assert.equal(kept.costByTier[0].tierCost, 0.5)
+        assert.equal(logsEstimate(companionShape, 10, 1).ingestion, 0)
     })
 
-    test('saves months with the add-on inputs and restores them', () => {
-        assert.deepEqual(getAddonInputs([retentionSlider]), { logs_retention_custom: { volume: 0, months: 1 } })
-        const saved = getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100, months: 12 } })
-        assert.deepEqual(saved, { logs_retention_custom: { volume: 100, months: 12 } })
-        assert.deepEqual(getAddonInputs([retentionSlider], JSON.parse(JSON.stringify(saved))), saved)
-        // A URL from before the months input, and one with months out of range
-        assert.deepEqual(getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100 } }), {
-            logs_retention_custom: { volume: 100, months: 1 },
-        })
-        assert.deepEqual(getAddonInputs([retentionSlider], { logs_retention_custom: { volume: 100, months: 0 } }), {
-            logs_retention_custom: { volume: 100, months: 1 },
-        })
+    test('reads the retention price from billing', () => {
+        const pricier = [
+            companionShape[0],
+            { ...companionShape[1], plans: [{ tiers: [{ up_to: null, unit_amount_usd: '0.07' }] }] },
+        ]
+        assert.equal(logsEstimate(pricier, 100, 12).retention, 84)
     })
 
-    test('leaves add-ons without months as they were', () => {
-        const groupAnalytics: AddonSlider = { key: 'group_analytics', volume: 2_000_000 }
-        assert.deepEqual(getAddonInputs([groupAnalytics]), { group_analytics: { volume: 2_000_000 } })
-        const tiers = getAddonTiers('product_analytics', 'group_analytics')
-        assert.equal(calculateAddonPrice(tiers, { volume: 2_000_000, months: 12 }).total, 71)
-        assert.equal(getParentMeteredVolume([groupAnalytics], { group_analytics: { volume: 2_000_000 } }), 0)
+    test('keeps months between 0 (the 14-day default) and 86', () => {
+        assert.equal(getRetentionMonths(retentionConfig, undefined), 0)
+        assert.equal(getRetentionMonths(retentionConfig, null), 0)
+        assert.equal(getRetentionMonths(retentionConfig, NaN), 0)
+        assert.equal(getRetentionMonths(retentionConfig, -3), 0)
+        assert.equal(getRetentionMonths(retentionConfig, 12.4), 12)
+        assert.equal(getRetentionMonths(retentionConfig, 1000), 86)
+        assert.equal(logsEstimate(companionShape, 100, 1000).retention, 430)
+    })
+
+    // The retention slider's scale, as `nonLinearCurve` and `reverseNonLinearCurve` in PricingSlider/Slider.tsx
+    const position = (months: number) => Math.pow(months, 0.4)
+    const monthsAt = (at: number) => getRetentionMonths(retentionConfig, Math.pow(at, 1 / 0.4))
+
+    test('maps slider positions to whole months between the 14-day default and 86', () => {
+        assert.equal(monthsAt(0), 0)
+        assert.equal(monthsAt(position(12)), 12)
+        assert.equal(monthsAt(position(86)), 86)
+        assert.equal(monthsAt(position(86) * 1.1), 86)
+        // Between two months the slider lands on the nearer whole month
+        assert.equal(monthsAt(position(11.4)), 11)
+        assert.equal(monthsAt(position(11.6)), 12)
+        // The first year takes about half the track
+        assert.ok(Math.abs(position(12) / position(86) - 0.5) < 0.06)
+    })
+
+    test('can reach every whole month on the slider', () => {
+        const step = position(retentionConfig.maxMonths) / RETENTION_SLIDER_STEPS
+        const reached = new Set(Array.from({ length: RETENTION_SLIDER_STEPS + 1 }, (_, i) => monthsAt(i * step)))
+        assert.deepEqual(
+            [...reached].sort((a, b) => a - b),
+            Array.from({ length: 87 }, (_, months) => months)
+        )
+    })
+
+    /** A calculator link as Tabbed.tsx writes it with `qs`, read back as numbers the way `readProductInputs` does. */
+    const roundTrip = (logs: Record<string, unknown>) => {
+        const query = qs.stringify({ products: 'logs', logs }, { encodeValuesOnly: true })
+        const parsed = qs.parse(query).logs as Record<string, unknown>
+        const months = typeof parsed.retentionMonths === 'string' ? Number(parsed.retentionMonths) : undefined
+        return { query, volume: Number(parsed.volume), months: getRetentionMonths(retentionConfig, months) }
+    }
+
+    test('restores volume and months from a shared calculator link', () => {
+        const link = roundTrip({ volume: 100, retentionMonths: 12 })
+        assert.equal(link.query, 'products=logs&logs[volume]=100&logs[retentionMonths]=12')
+        assert.deepEqual({ volume: link.volume, months: link.months }, { volume: 100, months: 12 })
+        assert.deepEqual(logsEstimate(companionShape, link.volume, link.months), { ingestion: 23, retention: 60 })
+        assert.equal(roundTrip({ volume: 100, retentionMonths: 0 }).months, 0)
+        assert.equal(roundTrip({ volume: 100, retentionMonths: 500 }).months, 86)
+    })
+
+    test('falls back to the 14-day default for a link from the old two-input calculator', () => {
+        const link = roundTrip({ volume: 100, addons: { logs_retention_custom: { volume: 50, months: 12 } } })
+        assert.deepEqual({ volume: link.volume, months: link.months }, { volume: 100, months: 0 })
     })
 
     test('reads the billing limit flag only from the companion shape', () => {

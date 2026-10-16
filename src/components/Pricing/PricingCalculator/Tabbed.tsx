@@ -161,7 +161,7 @@ export const TabContent = ({
                             {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares a free
                             tier and volume pricing.
                         </div>
-                    ) : activeProduct.addonSliders ? (
+                    ) : activeProduct.addonSliders || activeProduct.retention ? (
                         <StandaloneAddonsTab
                             activeProduct={activeProduct}
                             setVolume={setVolume}
@@ -567,6 +567,7 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
             setVolume(product.handle, 0)
             setProduct(product.handle, {
                 addons: undefined,
+                retentionMonths: undefined,
                 model: undefined,
                 observations: undefined,
                 hours: undefined,
