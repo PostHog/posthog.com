@@ -22,6 +22,7 @@ Workflows are composed of the following components:
 | [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
 | [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                      |
 | [AI tasks](/docs/workflows/ai-tasks)  | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
+| [Replay Vision](#replay-vision)       | Run a [Replay Vision](/docs/replay-vision) scan on a session recording to ask questions, categorize, score, or summarize it.                                    |
 
 ## Draft and enabled workflows
 
@@ -369,3 +370,35 @@ Result paths let you extract specific data from a step's response. Use dot notat
 | `body.results[0].id` | A property from the first array item   |
 
 Leave the result path blank to store the entire step result.
+
+## Replay Vision
+
+The **Replay Vision** step runs an AI scan on the triggering event's session recording from within a workflow. Use it to automatically analyze recordings that match certain criteria, such as sessions where a user encountered an error or dropped off during checkout.
+
+Replay Vision is available in the **AI ✨** section of the step picker. It only appears in your project's main environment.
+
+To add a Replay Vision step:
+
+1. Open a workflow in the [workflow builder](/docs/workflows/workflow-builder) and add a step.
+2. Choose **Replay Vision** from the **AI ✨** section.
+3. Select what Replay Vision should do:
+
+| Capability              | Description                                             | Required fields              |
+| ----------------------- | ------------------------------------------------------- | ---------------------------- |
+| **Ask a question**      | Ask a natural language question about the session       | Prompt                       |
+| **Categorize**          | Classify the session into one of several categories     | Prompt, categories list      |
+| **Score**               | Score the session on a numeric scale                    | Prompt, from/to scale values |
+| **Summarize**           | Generate a summary of the session                       | Prompt                       |
+| **Use a saved scanner** | Run an existing scanner you've created in Replay Vision | Scanner picker               |
+
+The step waits for the scan to complete, then continues with the result. You can use the result in later steps, such as branching based on a category or sending a Slack message with the summary.
+
+### Limits
+
+Each workflow can run up to 100 Replay Vision scans per day by default, and a project can run up to 500 across all its workflows. A project admin can adjust these limits in [**Settings → Workflows → Replay Vision scan limits**](https://app.posthog.com/settings/environment-workflows#workflows-replay-vision-limits). Set a limit to zero to pause scans.
+
+The trigger volume estimate in the workflow builder shows this limit when a Replay Vision step is present. Every scan spends [Replay Vision credits](/docs/replay-vision/quota-and-limits).
+
+Scans that exceed the limit are skipped, and the step fails. The step's **On error** setting decides what happens next.
+
+For more on Replay Vision scanners and how they work, see [Replay Vision](/docs/replay-vision).
