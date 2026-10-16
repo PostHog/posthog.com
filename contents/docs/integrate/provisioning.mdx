@@ -70,13 +70,17 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 | Higher [rate limits](#rate-limits) | Self-serve. Signing your requests gives you 5x the base limits, and [linking your app to an organization](#link-your-partner-app-to-a-posthog-organization-optional) doubles that. |
 | [Deep links](#deep-linking) that log users into their project | Ask PostHog. Your app must also sign its requests. |
 | A personal API key with each provisioned project | Ask PostHog. |
-| Paying for your users' PostHog usage | Ask PostHog. Your users' organizations bill to you instead of to them. |
+| Paying for your users' PostHog usage | Needs a partner agreement. See [pay for your users' usage](#pay-for-your-users-usage). |
 | Custom rate limits | Ask PostHog, if the top [tier](#your-tier) isn't enough. |
 | A Verified badge | Ask PostHog. |
 
-To ask for any of these, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
+To ask for any of these, open a [support request](https://app.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
 
 Verification changes what your users see, not what your app can do. A verified app shows a Verified badge in your users' organization settings and skips the [first-login question](#what-the-user-gets) about keeping it connected.
+
+### Pay for your users' usage
+
+PostHog can bill the organizations your app creates to you instead of to your users. PostHog only turns this on for partners with a partner agreement, and the agreement includes a volume commitment. To discuss an agreement, [talk to a human](/talk-to-a-human).
 
 ## Set up as a partner
 
@@ -765,7 +769,7 @@ When you provision a new account, the user receives:
 
 Your integration gets back the project token and host, so you can start sending events the moment the API call returns.
 
-If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization-optional) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
+If PostHog hasn't verified your app, the user is asked the first time they log in whether to keep your app connected to their account. If they disconnect it, your app loses access to their account. Your flow doesn't change, because the account request still returns the authorization code right away. A [verification token](#link-your-partner-app-to-a-posthog-organization-optional) links your app to an organization but doesn't verify it. To ask PostHog to verify your app, open a [support request](https://app.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app.
 
 ## Error handling
 
@@ -853,7 +857,7 @@ Limits are per region: US and EU count separately.
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-If the top tier still isn't enough for production use, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app. PostHog can set per-endpoint overrides for your app.
+If the top tier still isn't enough for production use, open a [support request](https://app.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app. PostHog can set per-endpoint overrides for your app.
 
 ### Check your limits
 
