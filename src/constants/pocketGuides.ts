@@ -88,8 +88,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'error-tracking',
-        title: 'Error tracking',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.',
+        title: 'Error Tracking',
+        description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
         token: 'red',
         volume: 7,
     },

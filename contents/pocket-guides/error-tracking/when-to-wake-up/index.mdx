@@ -39,7 +39,7 @@ An assignment rule matches on the exception's properties and assigns the issue t
 
 Rules run during ingestion, after <Term name="source map">source maps</Term> have been applied, so they see the unminified <Term name="stack trace" />. That is what lets you route by source file: exceptions under `checkout/` go to the payments team, and nobody has to read the trace to know whose it is.
 
-An issue can be sent to GitHub, GitLab, Linear, or Jira from the issue page. The tracker issue carries a link back, so whoever picks it up sees the exception, the <Term name="stack trace" />, and the people it hit, rather than your description of it <SeeFig n={2} />.
+An issue can be sent to GitHub, GitLab, Linear, or Jira from the issue page. The tracker issue carries a link back, so whoever picks it up sees the exception, the stack trace, and the people it hit, rather than your description of it <SeeFig n={2} />.
 
 <Prompt>
 Suggest error tracking assignment rules for my project based on which source files and URL paths my recent exceptions come from, grouped by the team that likely owns each.

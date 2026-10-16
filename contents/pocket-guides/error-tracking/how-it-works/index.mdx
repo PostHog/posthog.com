@@ -85,7 +85,7 @@ section: Observe
             marker: {
                 n: 2,
                 label: 'A dependency',
-                gloss: 'Still readable, but not yours. PostHog only falls back to these when the trace holds nothing from your own code.',
+                gloss: 'Still readable, but not yours. New issues group on these frames too, alongside your own.',
             },
         },
         { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
@@ -156,27 +156,23 @@ An exception joins an <Term name="issue" /> by the first of these that applies:
 2. **A grouping rule you defined in PostHog.** Runs at ingestion, no deployment or release needed.
 3. **The fingerprint PostHog generates.** What you get when you have done neither.
 
-By default, PostHog builds a <Term name="fingerprint" /> from the exception type, its message when there is no readable <Term name="stack trace" />, and frames from your own code when the trace has any. Generated fingerprints can be fragile without a <Term name="source map" />: every deploy can split one bug into a new issue.
+By default, PostHog builds a <Term name="fingerprint" /> from the exception type, its message when there is no readable <Term name="stack trace" />, and the frames in the trace. Issues created before the current grouping version can keep their older fingerprints. Generated fingerprints can be fragile without a <Term name="source map" />: every deploy can split one bug into a new issue.
 
 A grouping rule runs during ingestion, so it can match on any event property without a code change <SeeFig n={1} />. You can also pass `$exception_fingerprint` at capture time when a changing value in the message would otherwise open an issue for every ID.
 
 ## Resolve stack traces
 
-A <Term name="stack trace" /> shows you the exact line of code that caused the exception. If you bundle, compile, or minify the code you distribute, the trace shows up as **unresolved** <SeeFig n={2} />.
+A stack trace shows you the exact line of code that caused the exception. If you bundle, compile, or minify the code you distribute, the trace shows up as **unresolved** <SeeFig n={2} />.
 
-Upload a <Term name="source map" /> and the same trace points back to your source code <SeeFig n={3} />. For web, the wizard wires it into your build:
+Give PostHog a source map and the same trace points back to your source code <SeeFig n={3} />. You can upload source maps from your build, host them publicly, or embed them in the bundle. [Upload source maps](/docs/error-tracking/upload-source-maps) has the setup for each framework.
 
-```bash
-npx @posthog/wizard@latest upload-source-maps
-```
-
-When stack traces aren't enough, adding breadcrumbs let you leave additional traces. Breadcrumbs let you insert additional context that's captured only when an exception occurs, it's then shown in the issue's **Timeline** tab alongside everything else from the session <SeeFig n={4} />.
+When stack traces aren't enough, add breadcrumbs for context that's captured only when an exception occurs. That context appears in the issue's **Timeline** tab alongside everything else from the session <SeeFig n={4} />.
 
 ## Keep noise out
 
 What gets stored is decided before anyone looks at it:
 
-- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per <Term name="issue" />.
+- **Rate limits** cap how many exceptions PostHog ingests, project-wide or per issue.
 - **Burst protection** stops one browser in a loop from spending your quota before the server sees it.
 - **Suppression rules** drop every future exception that matches before it becomes an event.
 - **`before_send`** is the last hook before anything leaves the client, where you can drop or redact an exception.

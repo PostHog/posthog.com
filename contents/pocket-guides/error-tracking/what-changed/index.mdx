@@ -34,7 +34,7 @@ The deploy that shipped the bug is on the same event as the bug. A <Term name="r
 
 ## What the scout watches
 
-Every exception carries the release it was thrown in. The flags a person had are ordinary properties on the exception, so the scout can compare error volume across releases and feature flag variants.
+When you set up [release tracking](/docs/error-tracking/releases), each exception carries the release it was thrown in. The flags a person had are ordinary properties on the exception, so the scout can compare error volume across releases and feature flag variants. Exceptions without release information can only be compared by flag variant.
 
 ## What makes it report
 

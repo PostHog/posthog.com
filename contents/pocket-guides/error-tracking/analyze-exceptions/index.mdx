@@ -8,30 +8,8 @@ section: Report
 
 <LeftPage>
 
-<ExampleFigure n={1} caption="Example: checkout fails less often than search, but affects customers who generated twelve times as much revenue. Both counts and revenue cover the last 30 days.">
-
-| Issue | Exceptions | Customers affected | Customer revenue |
-| --- | ---: | ---: | ---: |
-| Checkout confirm fails | 620 | 240 | **$48,000** |
-| Invoice download fails | 180 | 64 | $16,000 |
-| Search request times out | 9,000 | 50 | $4,000 |
-
-</ExampleFigure>
-
-<ExampleFigure n={2} caption="Example: Acme's errors over the last seven days. Search produces the most exceptions, but checkout affects more of the account's users.">
-
-<div className="mb-3 text-[0.8em] text-secondary">Cohort: <strong className="text-primary">Acme users</strong></div>
-
-| Issue | Users affected | Exceptions |
-| --- | ---: | ---: |
-| Checkout confirm fails | **186** | 314 |
-| Invoice download fails | 27 | 41 |
-| Search request times out | 2 | 2,840 |
-
-</ExampleFigure>
-
 <LeakFigure
-    n={3}
+    n={1}
     caption="Example: checkout attempts hold steady, but completion falls from 80% to 50% when the error appears."
     markerAt={0.45}
     markerLabel="Error first seen"
@@ -43,7 +21,7 @@ section: Report
 />
 
 <DivergenceFigure
-    n={4}
+    n={2}
     caption="Example: after a deploy, the new checkout's affected-session rate rises to 8% while control stays at 2%. Both lines use the same scale."
     markerAt={0.45}
     markerLabel="Checkout deploy"
@@ -85,7 +63,15 @@ An exception carries a handful of properties of its own:
 
 The goal is to get an insight that helps you assess the potential cost of each exception, so you can prioritize your efforts.
 
-Revenue from purchase events or a connected payment system gives you one way to do that. Connect it to the people affected by an <Term name="issue" /> to see which errors affect your most valuable customers <SeeFig n={1} />. This shows the customer revenue behind an issue, not how much revenue the error has lost.
+Revenue from purchase events or a connected payment system gives you one way to do that. Connect it to the people affected by an <Term name="issue" /> to see which errors affect your most valuable customers. This shows the customer revenue behind an issue, not how much revenue the error has lost.
+
+In this example, checkout fails less often than search, but affects customers who generated twelve times as much revenue. Both counts and revenue cover the last 30 days.
+
+| Issue | Exceptions | Customers affected | Customer revenue |
+| --- | ---: | ---: | ---: |
+| Checkout confirm fails | 620 | 240 | **$48,000** |
+| Invoice download fails | 180 | 64 | $16,000 |
+| Search request times out | 9,000 | 50 | $4,000 |
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
@@ -97,7 +83,13 @@ Build an insight showing which issues affect our highest-value customers.
 
 You can also focus on a single account. The goal is to see which issues its users are running into, so you can respond to the problems that matter to that customer.
 
-A <Term name="cohort" /> uses <Term name="person property">person properties</Term>, such as organization, to select an account's users. Apply it to your exception data and you can see both the issues they hit and how many people are affected <SeeFig n={2} />.
+A <Term name="cohort" /> uses <Term name="person property">person properties</Term>, such as organization, to select an account's users. Apply it to your exception data and you can see both the issues they hit and how many people are affected. This example shows the issues for a cohort of Acme users over the last seven days:
+
+| Issue | Users affected | Exceptions |
+| --- | ---: | ---: |
+| Checkout confirm fails | **186** | 314 |
+| Invoice download fails | 27 | 41 |
+| Search request times out | 2 | 2,840 |
 
 Acme's search error fired 2,840 times, but only two people hit it. Checkout affected 186. Start with checkout to investigate the problem reaching more of the account, then inspect the repeated search failures separately.
 
@@ -111,7 +103,7 @@ Build a dashboard showing the errors Acme's users are running into.
 
 An error count doesn't tell you how many people failed to finish what they came to do. Understanding how exceptions relate to conversion helps you prioritize bugs that interrupt important actions.
 
-A <Term name="funnel" /> connects the start and completion events for an action. Tracking its completion rate alongside exceptions shows whether an error appeared when completion fell <SeeFig n={3} />.
+A <Term name="funnel" /> connects the start and completion events for an action. Tracking its completion rate alongside exceptions shows whether an error appeared when completion fell <SeeFig n={1} />.
 
 Completion fell from 80% to 50%, with the same number of checkout starts. Compare sessions with and without the exception, then watch affected recordings in <Term name="session replay" /> to see whether people got stuck, retried successfully, or finished another way.
 
@@ -125,7 +117,7 @@ Show me how this error affects checkout completion rate.
 
 An <Term name="experiment" /> can improve one metric while introducing errors elsewhere. Comparing exceptions across variants helps you decide whether a promising result comes with a reliability problem.
 
-Feature-flag data identifies which version people saw. Their exceptions show what failed. Together, they let you compare error rates across variants, so differences in traffic don't hide a problem <SeeFig n={4} />.
+Feature-flag data identifies which version people saw. Their exceptions show what failed. Together, they let you compare error rates across variants, so differences in traffic don't hide a problem <SeeFig n={2} />.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
