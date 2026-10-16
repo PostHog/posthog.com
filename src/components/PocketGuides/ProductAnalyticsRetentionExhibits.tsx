@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import { Tabs } from 'radix-ui'
 import { colors } from '@posthog/brand/colors'
 import { SavedStaysView } from '@posthog/twig-components/account'
-import { RepeatBookingPreview } from '@posthog/twig-components/repeat-booking-preview'
 import { SavedStay } from '@posthog/twig-components/saved-stay'
+import { StayCardContent } from '@posthog/twig-components/stay-card'
 import { stays } from '@posthog/twig-components/catalog'
 import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import coast from '@posthog/twig-components/assets/coast.jpg'
@@ -11,6 +11,11 @@ import '@posthog/twig-components/catalog.css'
 
 import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorDetails, InspectorStatus } from './PostHogInspector'
 import { Exhibit } from './ProductAnalyticsExhibits'
+
+const twigBookingPanelClasses =
+    'twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]'
+const twigBookingCardClasses =
+    'vac-card grid min-w-0 grid-cols-1 items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-2 @sm:grid-cols-[6rem_minmax(0,1fr)] [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:!text-base [&_.vac-card-body_p]:!text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-image]:aspect-[16/7] @sm:[&_.vac-image]:aspect-[4/3]'
 
 type BookingStep = 0 | 1 | 2 | 3
 
@@ -80,16 +85,36 @@ export function RepeatBookingFigure(): JSX.Element {
         >
             <div ref={rootRef} className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div className="relative min-w-0">
-                    <RepeatBookingPreview
-                        stay={stay}
-                        image={
-                            <div className="vac-image">
-                                <img src={photo} alt={stay.images[0]?.alt ?? ''} />
+                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
+                        <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">Twig</div>
+                        <div className="grid gap-3 p-3">
+                            <article className={twigBookingCardClasses}>
+                                <StayCardContent
+                                    stay={stay}
+                                    image={
+                                        <div className="vac-image">
+                                            <img src={photo} alt={stay.images[0]?.alt ?? ''} />
+                                        </div>
+                                    }
+                                />
+                            </article>
+                            <div className="twig-account-layout !m-0 !block !w-full">
+                                {step === 1 || step === 3 ? (
+                                    <div className="vac-button vac-primary !flex w-full !cursor-default" role="status">
+                                        Booking confirmed
+                                    </div>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="vac-button vac-primary w-full"
+                                        onClick={() => setStep(firstStay ? 1 : 3)}
+                                    >
+                                        Book stay
+                                    </button>
+                                )}
                             </div>
-                        }
-                        bookingState={step === 1 || step === 3 ? 'confirmed' : 'idle'}
-                        onBookStay={() => setStep(firstStay ? 1 : 3)}
-                    />
+                        </div>
+                    </section>
                     {inView && (step === 0 || step === 2) && (
                         <div
                             aria-hidden="true"
@@ -361,11 +386,7 @@ export function SavedStayJourneyFigure(): JSX.Element {
             }
 
             const target = page.querySelector(
-                step === 0
-                    ? '.twig-saved-control'
-                    : step === 1
-                    ? '.twig-account-stay-card a'
-                    : '.twig-repeat-booking-preview-book'
+                step === 0 ? '.twig-saved-control' : step === 1 ? '.twig-account-stay-card a' : '.vac-primary'
             )
             if (!target) return
             const panel = twig.getBoundingClientRect()
@@ -436,12 +457,9 @@ export function SavedStayJourneyFigure(): JSX.Element {
                             }`}
                         >
                             {step === 1 ? (
-                                <section
-                                    className="twig-browser twig-repeat-booking-preview min-w-0"
-                                    aria-label="Twig saved stays"
-                                >
-                                    <div className="twig-repeat-booking-preview-header">
-                                        <strong>Twig</strong>
+                                <section className={twigBookingPanelClasses} aria-label="Twig saved stays">
+                                    <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">
+                                        Twig
                                     </div>
                                     <div className="p-3 [&_.twig-account-page>h1]:!mt-0 [&_.twig-account-page>h1]:!mb-3 [&_.twig-account-page>h1]:!text-xl [&_.twig-account-page>.vac-eyebrow]:hidden [&_.twig-account-page>.twig-account-muted]:hidden [&_.twig-account-stay-grid]:!grid-cols-1 [&_.twig-account-stay-card>a]:!grid [&_.twig-account-stay-card>a]:!grid-cols-[5rem_minmax(0,1fr)] [&_.twig-account-stay-card>a]:!overflow-hidden [&_.twig-account-stay-card>a]:!rounded [&_.twig-account-stay-card>a]:!border [&_.twig-account-stay-card>a]:!border-[#d7c8b6] [&_.twig-account-stay-card>a]:!bg-[#fff8ee] [&_.vac-card-body]:!p-2 [&_.vac-card-body_h3]:!text-sm [&_.vac-card-body_p]:!text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-image]:!h-full [&_.vac-image]:!aspect-auto @md:[&_.twig-account-stay-card>a]:!grid-cols-[7rem_minmax(0,1fr)]">
                                         <SavedStaysView
@@ -454,20 +472,37 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                 </section>
                             ) : (
                                 <>
-                                    <div className={step === 0 ? '[&_.twig-repeat-booking-preview-book]:hidden' : ''}>
-                                        <RepeatBookingPreview
-                                            stay={stays[0]}
-                                            image={image}
-                                            bookingState={
-                                                step === 3
-                                                    ? 'confirmed'
-                                                    : step === 2 && cursorPressed
-                                                    ? 'pending'
-                                                    : 'idle'
-                                            }
-                                            onBookStay={() => changeStep(3)}
-                                        />
-                                    </div>
+                                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
+                                        <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">
+                                            Twig
+                                        </div>
+                                        <div className="grid gap-3 p-3">
+                                            <article className={twigBookingCardClasses}>
+                                                <StayCardContent stay={stays[0]} image={image} />
+                                            </article>
+                                            {step > 0 && (
+                                                <div className="twig-account-layout !m-0 !block !w-full">
+                                                    {step === 3 ? (
+                                                        <div
+                                                            className="vac-button vac-primary !flex w-full !cursor-default"
+                                                            role="status"
+                                                        >
+                                                            Booking confirmed
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            type="button"
+                                                            className="vac-button vac-primary w-full"
+                                                            disabled={cursorPressed}
+                                                            onClick={() => changeStep(3)}
+                                                        >
+                                                            {cursorPressed ? 'Confirming…' : 'Book stay'}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </section>
                                     {step === 0 && (
                                         <div className="twig-saved-control absolute right-4 top-[3.15rem] z-10">
                                             <SavedStay

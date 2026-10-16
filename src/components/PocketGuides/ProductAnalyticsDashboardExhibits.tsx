@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { colors } from '@posthog/brand/colors'
 
 import { Exhibit } from './ProductAnalyticsExhibits'
@@ -9,21 +9,25 @@ const titleClasses = 'border-b border-[#d3d0c8] bg-[#f6f3ed] px-3 py-2 text-sm f
 function DashboardFrame({
     title,
     controls,
+    onReset,
+    contentClassName = '',
     children,
 }: {
     title: string
     controls?: React.ReactNode
+    onReset?: () => void
+    contentClassName?: string
     children: React.ReactNode
 }): JSX.Element {
     return (
-        <Exhibit stacked>
+        <Exhibit stacked onReset={onReset}>
             {controls}
             <section
                 aria-label={`${title} dashboard example`}
                 className="overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724]"
             >
                 <h3 className="!m-0 border-b border-[#d3d0c8] bg-[#f6f3ed] px-3 py-2 text-sm font-semibold">{title}</h3>
-                <div className="grid gap-2 p-2 @lg:grid-cols-2">{children}</div>
+                <div className={`grid content-start gap-2 p-2 @lg:grid-cols-2 ${contentClassName}`}>{children}</div>
             </section>
         </Exhibit>
     )
@@ -34,50 +38,167 @@ type DashboardOption = { id: string; label: string }
 function DashboardBuilder({
     title,
     options,
+    contentClassName,
     children,
 }: {
     title: string
     options: DashboardOption[]
+    contentClassName: string
     children: (has: (id: string) => boolean) => React.ReactNode
 }): JSX.Element {
-    const [added, setAdded] = useState<string[]>([])
-    const has = (id: string): boolean => added.includes(id)
+    const [inView, setInView] = useState(false)
+    const [addedCount, setAddedCount] = useState(0)
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+    const [cursorVisible, setCursorVisible] = useState(false)
+    const [cursorPressed, setCursorPressed] = useState(false)
+    const [resetKey, setResetKey] = useState(0)
+    const rootRef = useRef<HTMLDivElement>(null)
+    const controlsRef = useRef<HTMLDivElement>(null)
+    const previousTarget = useRef<number | null>(null)
+    const has = (id: string): boolean => {
+        const index = options.findIndex((option) => option.id === id)
+        return index >= 0 && index < addedCount
+    }
+
+    useEffect(() => {
+        const root = rootRef.current
+        if (!root) return
+        if (typeof IntersectionObserver === 'undefined') {
+            setInView(true)
+            return
+        }
+        const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.1 })
+        observer.observe(root)
+        return () => observer.disconnect()
+    }, [])
+
+    useEffect(() => {
+        if (!inView || addedCount >= options.length) return
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setAddedCount(options.length)
+            return
+        }
+        setCursorPressed(false)
+        const duration = addedCount === 0 ? 2600 : 2200
+        const pressTimeout = window.setTimeout(() => setCursorPressed(true), duration - 350)
+        const addTimeout = window.setTimeout(() => setAddedCount((count) => count + 1), duration)
+        return () => {
+            window.clearTimeout(pressTimeout)
+            window.clearTimeout(addTimeout)
+        }
+    }, [addedCount, inView, options.length, resetKey])
+
+    useEffect(() => {
+        if (addedCount !== options.length) return
+        const timeout = window.setTimeout(() => setCursorVisible(false), 700)
+        return () => window.clearTimeout(timeout)
+    }, [addedCount, options.length])
+
+    useLayoutEffect(() => {
+        const controls = controlsRef.current
+        if (!controls || !inView || addedCount >= options.length) return
+        let frame: number
+        const update = () => {
+            const target = controls.querySelectorAll<HTMLElement>('[data-dashboard-option]')[addedCount]
+            if (!target) return
+            const bounds = controls.getBoundingClientRect()
+            const button = target.getBoundingClientRect()
+            const position = {
+                x: button.left - bounds.left + button.width / 2 - 6,
+                y: button.top - bounds.top + button.height / 2 - 6,
+            }
+            if (previousTarget.current === null) {
+                setCursorPosition({ x: Math.max(0, position.x - 55), y: position.y + 45 })
+                frame = window.requestAnimationFrame(() => {
+                    setCursorPosition(position)
+                    setCursorVisible(true)
+                })
+            } else {
+                setCursorPosition(position)
+            }
+            previousTarget.current = addedCount
+        }
+        update()
+        if (typeof ResizeObserver === 'undefined') return () => window.cancelAnimationFrame(frame)
+        const observer = new ResizeObserver(update)
+        observer.observe(controls)
+        return () => {
+            observer.disconnect()
+            window.cancelAnimationFrame(frame)
+        }
+    }, [addedCount, inView, options.length, resetKey])
+
+    const reset = () => {
+        previousTarget.current = null
+        setAddedCount(0)
+        setCursorVisible(false)
+        setCursorPressed(false)
+        setResetKey((key) => key + 1)
+    }
 
     return (
-        <DashboardFrame
-            title={title}
-            controls={
-                <div role="group" aria-label="Dashboard tiles" className="mb-3 flex flex-wrap gap-2">
-                    {options.map(({ id, label }) => (
-                        <button
-                            key={id}
-                            type="button"
-                            aria-pressed={has(id)}
-                            onClick={() =>
-                                setAdded((current) =>
-                                    current.includes(id) ? current.filter((tile) => tile !== id) : [...current, id]
-                                )
-                            }
-                            className={`rounded border px-3 py-2 font-rounded text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a94b] ${
-                                has(id)
-                                    ? 'border-[#f7a94b] bg-[#fff0dc] text-[#292724]'
-                                    : 'border-[#d3d0c8] bg-[#fffdfa] text-[#292724] hover:border-[#f7a94b]'
-                            }`}
-                        >
-                            <span aria-hidden="true" className="mr-2">
-                                {has(id) ? '✓' : '+'}
+        <div ref={rootRef}>
+            <DashboardFrame
+                title={title}
+                onReset={reset}
+                contentClassName={contentClassName}
+                controls={
+                    <div
+                        ref={controlsRef}
+                        aria-label="Insights added to dashboard"
+                        className="relative mb-3 flex flex-wrap gap-2"
+                    >
+                        {options.map(({ id, label }) => (
+                            <span
+                                key={id}
+                                data-dashboard-option
+                                className={`rounded border px-3 py-2 font-rounded text-sm font-semibold shadow-sm ${
+                                    has(id)
+                                        ? 'border-[#f7a94b] bg-[#fff0dc] text-[#292724]'
+                                        : 'border-[#d3d0c8] bg-[#fffdfa] text-[#292724]'
+                                }`}
+                            >
+                                <span aria-hidden="true" className="mr-2">
+                                    {has(id) ? '✓' : '+'}
+                                </span>
+                                {label}
                             </span>
-                            {label}
-                        </button>
-                    ))}
-                </div>
-            }
-        >
-            {added.length === 0 && (
-                <p className="!m-0 col-span-full px-3 py-5 text-center text-sm text-[#716c63]">Add a tile above</p>
-            )}
-            {children(has)}
-        </DashboardFrame>
+                        ))}
+                        {inView && (
+                            <div
+                                aria-hidden="true"
+                                className="pointer-events-none absolute z-10 motion-reduce:hidden"
+                                style={{
+                                    left: cursorPosition.x,
+                                    top: cursorPosition.y,
+                                    opacity: cursorVisible ? 1 : 0,
+                                    transition:
+                                        'left 1050ms cubic-bezier(0.42, 0, 0.22, 1), top 1050ms cubic-bezier(0.42, 0, 0.22, 1), opacity 1600ms ease-in-out',
+                                }}
+                            >
+                                <svg
+                                    className={`transition-transform duration-300 ${cursorPressed ? 'scale-90' : ''}`}
+                                    width="24"
+                                    height="30"
+                                    viewBox="0 0 24 30"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M2 2v21l5.8-5.4 4.1 9.2 4.2-1.8-4.1-9.1H20L2 2Z"
+                                        fill="#1d1d1d"
+                                        stroke="white"
+                                        strokeWidth="2"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        )}
+                    </div>
+                }
+            >
+                {children(has)}
+            </DashboardFrame>
+        </div>
     )
 }
 
@@ -182,6 +303,7 @@ export function BookingDashboardFigure(): JSX.Element {
     return (
         <DashboardBuilder
             title="Exploring and booking stays"
+            contentClassName="min-h-[35rem] @lg:min-h-[23rem]"
             options={[
                 { id: 'trend', label: 'Filter users' },
                 { id: 'funnel', label: 'Booking completion' },
@@ -276,6 +398,7 @@ export function FindingStaysDashboardFigure(): JSX.Element {
     return (
         <DashboardBuilder
             title="Finding stays"
+            contentClassName="min-h-[25rem] @lg:min-h-[15rem]"
             options={[
                 { id: 'destinations', label: 'Destination choices' },
                 { id: 'trend', label: 'Filter users' },
@@ -348,6 +471,7 @@ export function ReturningGuestsDashboardFigure(): JSX.Element {
     return (
         <DashboardBuilder
             title="Returning guests"
+            contentClassName="min-h-[24rem] @lg:min-h-[16rem]"
             options={[
                 { id: 'retention', label: 'Repeat bookings' },
                 { id: 'saved', label: 'Saved before booking' },

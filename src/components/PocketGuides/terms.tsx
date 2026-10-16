@@ -23,13 +23,13 @@ export const TERMS = {
         slug: '/docs/product-analytics/insights',
     },
     trend: {
-        title: 'Trend',
+        title: 'Trends',
         description:
             'An insight that shows how often an event happens over time, with an optional breakdown by a property.',
         slug: '/docs/product-analytics/insights',
     },
     'retention insight': {
-        title: 'Retention insight',
+        title: 'Retention',
         description:
             'Shows how many users return during later periods. You choose a start event and a return event, which can be the same or different.',
         slug: '/docs/product-analytics/retention',
@@ -39,6 +39,18 @@ export const TERMS = {
         description:
             'Answers what people actually do in your product using the events you send to PostHog. Explore trends, funnels, retention, and paths to understand behavior.',
         slug: '/docs/product-analytics',
+    },
+    'posthog ai': {
+        title: 'PostHog AI',
+        description:
+            'An AI product analyst inside PostHog that can use your project data to answer questions, build insights, and create dashboards.',
+        slug: '/docs/posthog-ai',
+    },
+    'posthog mcp': {
+        title: 'PostHog MCP',
+        description:
+            'A server that connects your AI agent to PostHog so it can inspect project data and work with insights and dashboards from your editor.',
+        slug: '/docs/model-context-protocol',
     },
     'ai observability': {
         title: 'AI Observability',
@@ -161,7 +173,7 @@ export const TERMS = {
         slug: '/docs/ai-observability/custom-properties',
     },
     'session replay': {
-        title: 'Session replay',
+        title: 'Session Replay',
         description:
             'Records what real users do in your product and plays it back like a DVR, with console logs, network requests, and errors at the exact moment they happened.',
         slug: '/docs/session-replay',
@@ -239,13 +251,13 @@ export const TERMS = {
         slug: '/docs/data/sessions',
     },
     experiment: {
-        title: 'Experiment',
+        title: 'Experiments',
         description:
             'Experiments let you test a change against a control and find out whether it actually worked. You define variants and metrics; PostHog randomizes your users and runs the statistics.',
         slug: '/docs/experiments',
     },
     funnel: {
-        title: 'Funnel',
+        title: 'Funnels',
         description:
             'Funnels enable you to visualize your flows and understand where the friction points are so that you can improve them.',
         slug: '/docs/product-analytics/funnels',
@@ -295,8 +307,14 @@ export const TERMS = {
     cohort: {
         title: 'Cohort',
         description:
-            'A group of users with something in common. Retention groups people by when they did the start event; saved cohorts are reusable lists you can use to filter insights.',
+            'A group of people with something in common. In a retention insight, PostHog automatically groups people by when they did the start event. Saved cohorts are separate lists you create and can use to filter insights.',
         slug: '/docs/data/cohorts',
+    },
+    'static cohort': {
+        title: 'Static cohort',
+        description:
+            'A saved list of people that changes only when someone updates it. You can add people manually, upload a CSV, or take a one-time snapshot of people matching criteria.',
+        slug: '/docs/data/cohorts#static-and-dynamic-cohorts',
     },
     'self-driving': {
         title: 'Self-driving',

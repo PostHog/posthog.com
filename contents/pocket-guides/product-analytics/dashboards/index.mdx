@@ -9,59 +9,45 @@ pocketGuideOrder: 5
 
 # Dashboards
 
-Twig's engineers have recorded filter selections, connected visits to signed-in guests, and built insights for filter use, booking completion, and repeat bookings. Now they need to review those answers together and decide what to investigate.
+Twig's engineers have recorded filter selections, connected visits to signed-in guests, and built insights for filter use, booking completion, and repeat bookings. Now they need a way to view that data together and use it to decide what to build next.
 
-A dashboard groups saved insights around a product question. It shows where to look; the engineers still need to inspect the evidence before choosing a change.
+A dashboard puts saved insights on one page. Twig starts with an overview, then builds two dashboards to answer narrower questions.
 
-## Start with an overview
+## Build an overview dashboard
 
-The engineers choose **Dashboards → New Dashboard → Blank Dashboard** and name it **Exploring and booking stays**. Their events and identified users already power three saved insights: a weekly filter trend, a booking funnel, and repeat-booking retention.
-
-**Try it:** Select each saved insight to build their dashboard. Select it again to remove it.
+The engineers build their first dashboard, and name it **Exploring and booking stays**. They add three saved insights: their trends insight for weekly filter use, funnels insight for booking completion, and retention insight for repeat bookings:
 
 <BookingDashboardFigure />
 
-Adding the funnel also brings in a note about one failed request. Each tile keeps its own population and clock: weekly filter users, people who completed a booking within 14 days, and monthly cohorts of first-time bookers. The engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
+Adding the funnel to this dashboard shows Twig's note about failed requests and booking trails to inspect. This gives the engineers a path to go down if they notice something "off" in their dashboard. The tiles use different measures: filter users per week, booking completion within 14 days, and repeat bookings by month – so the engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
 
-## Look closer at finding stays
+## Build a drill-down dashboard
 
-The filter trend says more people used filters. To see what they chose, the engineers put their destination breakdown beside the weekly trend on a focused dashboard.
-
-**Try it:** Add the destination breakdown and filter trend.
+Twig's Trends insight shows more people using filters in week 2, but it doesn't show which destinations they chose. The engineers create a **Finding stays** dashboard and put the destination breakdown beside the weekly trend:
 
 <FindingStaysDashboardFigure />
 
-With both tiles added, the bars count five example clicks; the line counts unique people over two weeks. These are different samples, so the engineers don't use the clicks to explain the weekly change. To see whether filters helped guests find stays, they can investigate selections where `has_results` was false.
+The destination tile shows five example clicks: three for Coast and one each for Forest and City. The trend counts five people in week 1 and eight in week 2. The clicks are a different sample, so they cannot explain the weekly rise. The engineers can inspect selections with `has_results: false` to find filters that returned no stays.
 
-## Compare returning guests
+## Compare cohorts side by side
 
-The engineers use a third dashboard to ask whether guests who saved a stay before their first booking return more often. It brings together the January first-booking retention insight and two views filtered to the static cohorts from the previous chapter.
-
-**Try it:** Add the overall retention view, then the two saved-stay groups.
+Twig also wants to know whether guests who saved a stay before their first booking return more often. The engineers build a **Returning guests** dashboard with three views of January 2025: all first-time bookers, the four who saved a stay, and the six who didn't. The last two use their static cohorts as filters:
 
 <ReturningGuestsDashboardFigure />
 
-With all three tiles added, the top row's Month 12 returners are the same two people in the saved group and one in the other group. The groups contain only four and six guests, so January's difference is a lead, not proof that saving caused another booking. The engineers would compare later first-booking cohorts once their Month 12 periods are complete.
+Of the 10 January guests, three booked again in Month 12. Two of four in the saved group did (50%); one of six in the other group did (17%). This small comparison doesn't show that saving caused another booking. The engineers would compare later first-booking cohorts after they reach Month 12.
 
-## Choose what to investigate
+## Use dashboards as evidence
 
-The booking funnel offers the clearest immediate lead: one of the four people who did not finish had a failed request. Twig's `request_id` connects that person's `booking_started` event to the server response. The engineers will inspect the other three booking trails and the server evidence before choosing a fix. A replay can show what a visitor saw, but it cannot establish the server's cause.
+The booking funnel gives the engineers an immediate lead. Of 10 people who started booking, four didn't finish within 14 days and one had a failed request. Twig's `request_id` connects that person's `booking_started` event to the server response. The engineers inspect the other three booking trails and the failed response before deciding what to fix. A <Term name="session replay">Session Replay</Term> can show what a visitor saw, but not why the server request failed.
 
-If they change the booking flow, they'll compare the funnel again after a full 14-day conversion window, keeping its events, order, and filters the same. A higher completion rate would show that a larger share of starters finished the measured sequence. It wouldn't prove the change caused the increase; an experiment could test that question.
-
-## Apply the process to your product
-
-Twig started with a filter click. Its event name and destination property made that choice measurable. Identity connected activity across visits. A trend counted people using filters, a funnel measured booking completion, and retention followed later bookings. Each dashboard now helps the engineers review a question and decide what evidence to inspect next.
-
-Try the same path with one question about your product:
-
-1. Check that your events and identities represent the behavior you want to understand.
-2. Build an insight that counts the right people and time period, then add it to a dashboard.
-3. Inspect the evidence behind a result before changing the product. Keep the measurement consistent afterward.
+After a booking-flow change, they check the funnel again after a full 14-day conversion window, keeping its events, order, and filters the same. A higher completion rate means more starters finished within that window. It doesn't prove their change caused the increase – they could test that with <Term name="experiment">Experiments</Term>.
 
 ## Build a dashboard for your product
 
-Use your project's real events to build a dashboard you can investigate. Choose PostHog AI or an MCP-connected coding agent to get started.
+Start with one question about your product and check which events and people PostHog records, build an insight with the right count and time period, and save it to a dashboard.
+
+The following prompt asks PostHog AI or your MCP-connected agent to inspect your events and build a dashboard from the data you have. Happy building!
 
 <ProductAnalyticsDashboardNextSteps />
 
