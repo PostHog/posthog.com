@@ -54,6 +54,8 @@ On the goal page, the same starting points appear as questions. Clicking one has
 
 Type what you want to find out, for example "watch users who enter the checkout flow and summarize why they convert or drop off". PostHog AI reads your goal alongside your product's real pages, events, and existing scanners, then drafts the type, name, prompt, type-specific settings, and recording filters. Filters only use pages, events, and other definitions that exist in your project, so the draft doesn't invent an event name that matches nothing.
 
+The page may ask how much the scanner should use. **Free** makes a [free-credits-only scanner](/docs/replay-vision/quota-and-limits#free-credits-only), which pauses when your organization's free monthly credits run out and never adds to your bill. **Set a budget** takes a monthly budget in credits instead. **Free** isn't available once this period's free credits are used up.
+
 When the page asks for a monthly budget in credits (1,000 credits is about $10), the draft also:
 
 - Picks the model by how much judgment the goal needs.
@@ -234,6 +236,8 @@ If the estimate looks too high, you have four knobs:
 ## Scanner limit: capping one scanner
 
 Turn on **Scanner limit** on the **Budget** step to cap what this scanner can spend in a billing period, on top of your organization's limit. Enter the limit in **Credits**, or select **Observations** to enter a number of observations. The editor converts an observation count to credits at the selected model's price. When the scanner reaches its limit, it stops scanning until the next billing period. It stays enabled, but the sessions it skipped aren't scanned later, even if you raise the limit. The editor warns you when the limit is below the scanner's estimated monthly cost, or too low to pay for a single scan.
+
+Above it, **Free credits only** keeps the scanner to your organization's free monthly credits, so it never adds to your bill. It pauses when they run out and starts again when the billing period resets. See [free credits only](/docs/replay-vision/quota-and-limits#free-credits-only).
 
 ## Enabling and disabling
 

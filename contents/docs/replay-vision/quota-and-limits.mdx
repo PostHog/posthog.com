@@ -48,6 +48,16 @@ A scanner stops when the credits it has left cannot pay for one more observation
 
 A scanner-level limit is a cap on one scanner, not a reserved share of the organization budget. The organization budget still applies on top of it, so a scanner below its own limit stops when the organization budget is exhausted.
 
+## Free credits only
+
+Turn on **Free credits only** on a scanner to make sure it never adds to your bill. The scanner scans only while your organization has free monthly credits left. When they run out, it pauses until the billing period resets, then starts again by itself. Set it in the scanner editor's **Budget** step, or with the `free_only` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools.
+
+The free credits are the organization's, not the scanner's. Everything else that spends credits uses them up too, including scanners without this setting, so a free-only scanner can pause early in a busy month. A free-only scanner can also have its own [scanner limit](#per-scanner-limits): it stops at whichever runs out first.
+
+While a free-only scanner is paused, its status says so, and a **Free credits only** switch lets you turn the setting off to keep scanning. PostHog asks you to confirm first, because scans past your free credits are billed. Scanning the scanner on demand while it's paused fails with a message that says the same.
+
+As with a scanner limit, sessions skipped while the scanner is paused aren't scanned later.
+
 ## Workflow scan limits
 
 [Workflows](/docs/workflows/replay-vision) can start scans from a trigger, which can fire far more often than you'd scan by hand. So each workflow can start 100 scans in a rolling 24 hours, and all workflows in a project 500, before the credit budget comes into it. Change both in [**Settings > Workflows > Replay Vision scan limits**](https://app.posthog.com/settings/project-workflows#workflows-replay-vision-limits), up to 500 per workflow and 2,500 per project, or set one to zero to pause workflow scans. A scan past a limit is skipped and costs nothing.

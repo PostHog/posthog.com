@@ -1,0 +1,118 @@
+---
+title: Scan sessions from your backend
+---
+
+Scan requests let your own code ask Replay Vision about specific sessions. Use them when something outside PostHog decides which sessions matter: a support tool that wants a summary of what the customer did before they wrote in, a job that checks every session behind a failed payment, or an internal tool that scores sessions on request.
+
+One request scans up to 200 sessions, with a saved [scanner](/docs/replay-vision/creating-scanners) or a question you ask inline. You get back one request ID to poll, and can have a webhook or Slack message sent when it finishes.
+
+To scan sessions every time an event happens, a [workflow with a Replay Vision step](/docs/workflows/replay-vision) needs no code at all.
+
+## Before you start
+
+- **Accept AI data processing.** Your organization must allow AI analysis before any scan runs.
+- **Use the project's main environment.** Scan requests aren't available in child environments.
+- **Create a key.** Use a [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) with the `replay_scanner:write` and `session_recording:read` scopes. A project secret API key belongs to the project rather than a person, so it keeps working when people leave. A [personal API key](/docs/api/personal-api-keys) with the same scopes works too, and scans with that person's access.
+
+## Start a request
+
+Send the session IDs and either a saved scanner's `scanner_id` or an `inline` question:
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/:project_id/vision/requests/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session_ids": ["0199a1b2-c3d4-7e5f-8a9b-0c1d2e3f4a5b"],
+    "inline": {
+      "prompt": "Did the user see an error message before they left the checkout page?",
+      "scanner_type": "monitor"
+    },
+    "idempotency_key": "ticket-48213",
+    "reference": "ticket-48213",
+    "wait_for_session_end": true
+  }'
+```
+
+Use `eu.posthog.com` if your project is in the EU.
+
+| Field | Required | What it does |
+| --- | --- | --- |
+| `session_ids` | Yes | Up to 200 session recording IDs. Duplicates are ignored. |
+| `scanner_id` | One of these two | Scan with a saved scanner. Its filters and sampling don't apply: every session you send is scanned if it's eligible. |
+| `inline` | One of these two | Ask a question without saving a scanner. Takes `prompt`, plus optional `scanner_type` (`monitor` by default, or `classifier`, `scorer`, `summarizer`), `scanner_config` (`tags` for a classifier, `scale` for a scorer) and `model`. See [scanner types](/docs/replay-vision/scanner-types). |
+| `idempotency_key` | No | Any unique string for this request. Sending the same key again returns the first request instead of starting new scans, so a retry after a timeout never charges twice. |
+| `reference` | No | Your own ID for the request, such as a ticket or job ID. It comes back unchanged. |
+| `wait_for_session_end` | No | Waits until each session has been quiet for 35 minutes before scanning it, so the scan sees the whole session. Use it when sessions may still be recording. Sessions still active after 6 hours are scanned as they are. Off by default. |
+
+A new request answers `202` with the request. A repeated `idempotency_key` answers `200` with the original request. If the key belongs to a request made by another key or user, you get `409` and should send a new key.
+
+Asking the same inline question about the same session again reuses the earlier answer at no charge. A saved scanner never scans a session it has already observed: you get its existing observation.
+
+## Read the results
+
+Poll the request with its `id`:
+
+```bash
+curl "https://us.posthog.com/api/projects/:project_id/vision/requests/:request_id/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
+
+The request's `status` is `running` until every session has settled, then `completed`. Each entry in `sessions` has:
+
+| Field | What it holds |
+| --- | --- |
+| `session_id` | The session. |
+| `state` | `pending` or `running` while in progress. Then `succeeded`, `failed`, `ineligible`, `skipped` (a limit stopped it before it started), or `lost` (the scan ran out of time). |
+| `scan_outcome` | How the scan started: `started`, `already_running`, `already_scanned`, `skipped_limit`, `skipped_quota`, `skipped_scanner_limit`, or `failed`. Null while the request waits for the session to end. |
+| `observation_id` | The [observation](/docs/replay-vision/observations), once one exists. |
+| `scanner_result` | The answer, once the session succeeds. `model_output` holds the fields for the scanner type, such as `verdict` and `reasoning` for a monitor. |
+
+Scans usually take a few minutes. A session that hits a credit or concurrency limit comes back `skipped` rather than failing the whole request. See [quota and limits](/docs/replay-vision/quota-and-limits) for what each limit means.
+
+## Get notified when a request finishes
+
+Instead of polling, send a webhook or Slack message when a request completes. PostHog emits a `$replay_vision_request_completed` event for each finished request, and [Data pipelines](/docs/cdp) can send it on. Create the destination through the [Hog functions API](/docs/api/hog-functions) as an `internal_destination` that filters on that event. For example, a webhook:
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/:project_id/hog_functions/" \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "internal_destination",
+    "template_id": "template-webhook",
+    "name": "Replay Vision request finished",
+    "enabled": true,
+    "inputs": { "url": { "value": "https://example.com/replay-vision-callback" } },
+    "filters": {
+      "source": "internal-events",
+      "events": [{ "id": "$replay_vision_request_completed", "type": "events" }]
+    }
+  }'
+```
+
+This call needs a personal API key with the `hog_function:write` scope.
+
+The event carries:
+
+| Property | What it holds |
+| --- | --- |
+| `request_id` | The request to fetch results for |
+| `reference` | Your `reference` from the request |
+| `scanner_id` | The scanner that ran, or the hidden one behind an inline question |
+| `session_count` | How many sessions the request had |
+| `succeeded_count`, `failed_count`, `ineligible_count`, `skipped_count`, `lost_count` | How many sessions ended in each state |
+
+The event has counts only. Anyone who can add a destination can receive it, so session IDs and answers stay behind the request endpoint, which checks recording access. Fetch the request to read them.
+
+A destination may occasionally receive the same request twice. Use `request_id` to ignore repeats.
+
+## Costs and limits
+
+Each session costs the scanner model's [credits](/docs/replay-vision/quota-and-limits), like any other scan. An inline question uses Gemini 3 Flash at 5 credits per session unless you pick another `model`.
+
+You can start 60 requests a minute and 1,000 an hour. With a project secret API key, the same limits also apply across all keys in the project.
+
+## Over MCP
+
+Agents can make the same requests with the `vision-requests-create` and `vision-requests-get` [MCP tools](/docs/replay-vision/mcp).

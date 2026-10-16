@@ -43,8 +43,10 @@ Call the first two before `vision-scanners-create` to avoid creating a scanner t
 - `vision-scanners-scan-session` – run an existing scanner against one session now, bypassing its sampling and schedule.
 - `vision-scanners-scan-sessions` – run an existing scanner against up to 200 sessions now. Sessions it has already observed are skipped.
 - `vision-observations-retry` – re-run a failed or ineligible observation. It costs credits like any scan.
+- `vision-requests-create` – scan up to 200 sessions with a saved scanner or an inline question, and get back one request ID. An `idempotency_key` makes retries safe. See [scan sessions from your backend](/docs/replay-vision/api).
+- `vision-requests-get` – read a request's status and each session's state and answer.
 
-Scans run asynchronously. Poll `vision-scanners-observations-list` until each observation leaves `pending` or `running`.
+Scans run asynchronously. Poll `vision-scanners-observations-list` until each observation leaves `pending` or `running`, or poll `vision-requests-get` until the request is `completed`.
 
 To scan sessions every time an event happens, have your agent build a workflow with a [Replay Vision step](/docs/workflows/replay-vision) instead. The workflow MCP tools create it as a draft.
 
