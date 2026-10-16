@@ -15,6 +15,26 @@ Reader clicks only change local example state – they do not send practice even
 `TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
 be reviewed on both sites.
 
+`ProductAnalyticsRetentionExhibits.tsx` supplies four figures for the retention chapter.
+`RepeatBookingFigure` pairs Twig's shared stay card and catalog photos with the
+same Inspector pattern used earlier. Edgar completes a booking in September and another in March.
+The Inspector shows both `booking_completed` events and their timestamps for
+`user_812`. `BookingRetentionFigure` uses month tabs for a separate 10-person cohort.
+A PostHog-style retention view keeps all ten guests visible and shows who booked in the selected month.
+`SavedStayJourneyFigure` uses Twig's save control, saved-stays view, stay card, and primary button styling.
+The visitor saves a stay, opens it from Saved stays, and books it. The Inspector then shows
+`stay_saved` and `booking_completed`. `SavedCohortRetentionFigure` filters a compact retention grid
+to show which of the same 10 guests returned in the selected month. The figures do not record events or make
+bookings. All four are registered in `bookComponents.tsx` for use in MDX.
+`ProductAnalyticsDashboardExhibits.tsx` shows three guide-owned PostHog dashboard excerpts.
+An animated cursor adds each tile when its figure comes into view; Reset replays the sequence, and reduced-motion readers see the completed dashboards. The overview uses the saved filter trend,
+funnel, and retention insights; its booking investigation note appears with the funnel.
+The focused dashboards break down the weekly filter trend by destination and reuse the January
+retention examples. They keep unique people and cohort sizes distinct.
+`ProductAnalyticsDashboardNextSteps.tsx` ends the guide with one project-aware prompt. Its PostHog AI
+link starts that prompt in the app; its Claude Code and Codex buttons open the same prompt in those
+agents. It also shows the MCP wizard command for readers who still need to connect their agent.
+
 ```
 contents/pocket-guides/<volume>/
 ├── index.mdx              pocketGuideOrder: 0 – the front matter (title page + contents)
@@ -168,20 +188,20 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 ## The reader UI
 
 - **`BookReader`** – wide windows pin the Contents panel on the left, with a compact Home and
-  reading-size control bar. `BookPage` uses Explorer's `transparent` option so the standard
-  frosted app-window background shows through, as it does in the docs reader. The sidebar
-  has no separate background or shadow, so it shares that same surface.
-  The page scrolls independently, and long contents
-  lists scroll within the sidebar. Below `@4xl`, compact book tabs keep the Contents and Aa
-  popovers. The reading column has its own container queries, click-to-turn page margins, and
-  a foot line with prev/next turns, "All guides" (except where prev already is the shelf), and
-  "p. N of M".
+reading-size control bar. `BookPage` uses Explorer's `transparent` option so the standard
+frosted app-window background shows through, as it does in the docs reader. The sidebar
+has no separate background or shadow, so it shares that same surface.
+The page scrolls independently, and long contents
+lists scroll within the sidebar. Below `@4xl`, compact book tabs keep the Contents and Aa
+popovers. The reading column has its own container queries, click-to-turn page margins, and
+a foot line with prev/next turns, "All guides" (except where prev already is the shelf), and
+"p. N of M".
 - **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
-  `pocketGuideOrder` and produces that volume's reading order; the bar, contents, and page turns all
-  derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
-  inserting a chapter renumbers what follows without anyone editing a number by hand.
+`pocketGuideOrder` and produces that volume's reading order; the bar, contents, and page turns all
+derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
+inserting a chapter renumbers what follows without anyone editing a number by hand.
 - **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
-  left/right arrow keys all walk the same sequence.
+left/right arrow keys all walk the same sequence.
 
 ## Files
 
