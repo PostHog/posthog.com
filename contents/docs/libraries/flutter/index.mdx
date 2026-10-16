@@ -282,18 +282,20 @@ The PostHog Flutter SDK will continue to capture events when the device is offli
 
 ## Opt out of data capture
 
-You can disable data collection for a user at any time using the `disable()` method:
+You can disable data collection for a user at any time using the `optOut()` method:
 
 ```dart
-await Posthog().disable();
+await Posthog().optOut();
 ```
 
 This prevents any future events from being sent. It doesn't remove events already captured for the user.
 To opt the user back in:
 
 ```dart
-await Posthog().enable();
+await Posthog().optIn();
 ```
+
+`optOut()` and `optIn()` require version 5.51.0 or later. Earlier versions use `disable()` and `enable()`, which version 6 removes.
 
 To check if a user is opted out:
 
@@ -398,3 +400,82 @@ You can also enable debug by calling the `Posthog().debug()` method in your code
 await Posthog().debug(true);
 await Posthog().debug(false);
 ```
+
+## Upgrading from version 5 to version 6
+
+Version 6 moves the iOS and macOS SDK to `posthog-ios` 4.0, raises the minimum iOS and macOS versions, and removes the APIs that version 5 deprecated.
+
+Before you upgrade, update to the latest version 5 release and fix its deprecation warnings. The replacements below work in both versions, with one exception: the parameter of `getFeatureFlagResult()` that controls the `$feature_flag_called` event is named `sendEvent` in version 5 and `sendFeatureFlagEvent` in version 6. Version 6 also removes a few members that version 5 never marked as deprecated: the `sendEvent` parameter itself, the `toMap()` and `fromMap()` helpers, and some members of the platform interface classes.
+
+### Platform requirements
+
+| Platform | Version 5 | Version 6 |
+| --- | --- | --- |
+| iOS | 13.0 | 15.0 |
+| macOS | 10.15 | 11.0 |
+| Xcode | – | 26 or later |
+| Android | API 23 | API 23 (unchanged) |
+
+For CocoaPods projects, raise the platform version in your `Podfile`:
+
+```ruby file=ios/Podfile
+platform :ios, '15.0'
+```
+
+If your app also targets macOS, do the same in `macos/Podfile`:
+
+```ruby file=macos/Podfile
+platform :osx, '11.0'
+```
+
+For Swift Package Manager projects without a `Podfile`, set **Minimum Deployments** for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**), then regenerate the project's configuration files:
+
+```bash
+flutter build ios --config-only
+# If your app also targets macOS
+flutter build macos --config-only
+```
+
+### Removed APIs
+
+| Removed in version 6 | Use instead |
+| --- | --- |
+| `PostHogConfig.apiKey` | `PostHogConfig.projectToken` |
+| `com.posthog.posthog.API_KEY` in `AndroidManifest.xml` or `Info.plist` | `com.posthog.posthog.PROJECT_TOKEN` |
+| `Posthog().disable()` and `Posthog().enable()` | `Posthog().optOut()` and `Posthog().optIn()` |
+| `Posthog().getFeatureFlagPayload(key)` | `Posthog().getFeatureFlagResult(key, sendFeatureFlagEvent: false)`, then read `payload` (`sendEvent: false` in version 5) |
+| The `sendEvent` parameter of `getFeatureFlagResult()` | `sendFeatureFlagEvent` |
+| `PostHogConfig.sendFeatureFlagEvents` | `PostHogConfig.sendFeatureFlagEvent` |
+| `PostHogSessionReplayConfig.debouncerDelay` | `PostHogSessionReplayConfig.throttleDelay` |
+| `PostHogDataMode.cellular` | `PostHogDataMode.any`, which `cellular` always behaved like |
+| `toMap()` on the config classes, and `PostHogFeatureFlagResult.fromMap()` | None. They serialize the SDK's internal format and aren't meant for app code |
+
+For example, to read a flag payload. Pass `false` to keep the old behavior: `getFeatureFlagResult()` captures a `$feature_flag_called` event by default, and `getFeatureFlagPayload()` didn't.
+
+```dart
+// Version 5
+final payload = await Posthog().getFeatureFlagPayload('my-flag');
+
+// Version 6
+final result = await Posthog().getFeatureFlagResult(
+  'my-flag',
+  sendFeatureFlagEvent: false,
+);
+final payload = result?.payload;
+```
+
+If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` or `PosthogFlutterWeb` directly, for example in tests:
+
+- Rename `enable()` and `disable()` to `optIn()` and `optOut()`.
+- Remove `getFeatureFlagPayload()`.
+- Rename the `sendEvent` parameter of `getFeatureFlagResult()` to `sendFeatureFlagEvent`.
+
+Calls to `Posthog()` aren't affected by these.
+
+### Behavior changes on iOS and macOS
+
+These changes come from `posthog-ios` 4.0 and need no code changes, but they can affect your data:
+
+- **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. PostHog rejects malformed payloads when you save a flag, so this rarely comes up.
+- **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
+- **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
