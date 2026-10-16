@@ -87,4 +87,5 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 </MultiLanguage>
 
+> **Note:** Setting `$process_person_profile` to `false` only makes an event anonymous if its `distinct_id` doesn't already have a person profile. If the `distinct_id` belongs to a user you've already identified (for example, on your frontend), the event is still processed and billed as identified. To capture these events as anonymous, send them with a separate `distinct_id` that has no person profile.
 
