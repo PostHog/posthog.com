@@ -115,52 +115,11 @@ My favorite part of the template is a small table the agent has to consult befor
 
 The most common failure of the skill is durable detail written into the changelog, because the changelog is the file the agent was already editing. That table exists because I watched it happen many times.
 
-## 2. Skills as the one place a big build lives
+You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. Don't worry much about the layout. Agents these days do something sensible on their own, and in my experience it only starts to get messy at around version 50. The important part is that the context is in a skill you can see, version, and load from anywhere. As the project matures, you add structure.
 
-The project tracker pattern scales further than I expected. `autoresearch` is the skill behind the biggest, most sprawling thing I'm building right now: an agent-driven predictive modeling product. You name a target event, a population, and a horizon ("who will download a file in the next 30 days?"), and a sandboxed agent loops on edit, eval, keep-if-improved until it has a model worth shipping. Then the product scores the population on a schedule and emits predictions as events.
+That's how `autoresearch`, the skill behind the biggest (side-quest) thing I've built this year, went. It started on April 27 as a single design spec. Over five months and 551 versions it grew whatever the work needed: a decision log, a backlog, a plan to cut a PR stack 31 layers (yes 31 i kid you not) deep into reviewable pieces, a brief for reviewers, and a few one-off scripts for slicing the stack. Once the stack landed, I had the agent refactor it into the same tidy project tracker shape as `self-driving-work`. The messy stack-era files are still in the version history if anyone needs them.
 
-That's a lot of moving parts, a lot of design calls, and a PR stack 31 layers deep. Every bit of context anyone internally needs to work on it is in one skill.
-
-```
-autoresearch              v551, 17 bundled files
-├── SKILL.md              the thin index
-├── HANDOVER.md           rewritten every session
-├── CHANGELOG.md
-├── design.md             spec + decision log
-├── architecture.md
-├── TODO.md               the backlog
-├── PORTBACK.md
-├── stack-split-plan.md
-├── reviewer-brief.md
-├── local-e2e-testing.md
-├── demo-runbook.md
-├── pr-bodies-31-30-22.md
-├── wave-e-pr-bodies.md
-├── wave-e-manifest.txt
-├── wave-e-layers.json
-├── wave-e-slicer.py
-├── wave-e-replay.sh
-└── sign_and_push.sh
-```
-
-*The skill at the height of the stack: 551 versions, 17 bundled files, and five months of a product taking shape.*
-
-The skill started on April 27 as a design spec. At the height of the stack, it had 17 bundled files:
-
-- `design.md` is the spec, including the trust boundaries, the open questions, the things we ruled out, and a decision log. The first rule in the skill body is to check that log before reopening anything, because settled questions stay settled.
-- `TODO.md` is the backlog, split into items that fold into the current stack, items that wait until it lands, and items blocked on a call from me. PRs and review replies cite them by id.
-- `stack-split-plan.md` is how the integration branch gets cut into 31 reviewable PRs, with per-PR checks. `PORTBACK.md` tracks what each merged layer still owes the branch.
-- `reviewer-brief.md` is a one-page starting point I hand as-is to anyone helping review a stack PR.
-- `local-e2e-testing.md` is how to actually run the training loop against a dev stack, including the failure modes that produce silently wrong output.
-- Plus `architecture.md` with the system diagrams, a `HANDOVER.md` that every session overwrites, a changelog, and a handful of scripts for slicing and replaying layers of the stack.
-
-When a teammate or an agent picks up a layer of that stack, they don't need me. They load the skill, read the handover and the backlog, and start. When a reviewer asks "why did you do it this way?", the answer is in the decision log with a date. When I come back to it after two weeks on something else, the skill knows more about where I left off than I do.
-
-The stack has since landed, and I've shipped autoresearch internally for dogfooding. Now the thing is built, I've refactored the skill into a more typical project tracker, like `self-driving-work` above. The stack-era files are gone from the latest version, but they're still in the version history if anyone needs them.
-
-I've tried to run projects this size out of a GitHub issue, a Notion doc, and a very long Slack thread. None of them survived contact with five months and several hundred agent sessions. This did.
-
-## 3. Skills as a map of the stuff I own
+## 2. Skills as a map of the stuff I own
 
 All of the PostHog [data warehouse](/docs/data-warehouse) views that power our self-driving analytics live in a skill called `self-driving-dwh`. It's an index and query guide for the whole view layer: what each view is for, the join keys, the two rules you'll get wrong if you don't read them first (reports are cross-customer, and everything is cross-region), and a `recipes/` folder of SQL that actually works.
 
@@ -196,7 +155,7 @@ Yet another cool thing here is that each skill is version tracked and we have an
 
 I used to keep this kind of thing in my head, a Notion page nobody read, or a README that went stale the week after I wrote it. Now it's in a place both my agents and my teammates can read, and something is checking it every hour.
 
-## 4. Skills as a runbook that learns
+## 3. Skills as a runbook that learns
 
 `self-driving-debugging` is the operational runbook for when self-driving misbehaves in production for any customer: a Create PR press that produced no task, a run that died with an internal error, a PR that never appeared, review comments that went unaddressed, or a 429 nobody can explain.
 
@@ -209,7 +168,7 @@ The part I like most is the `investigations/` folder. The skill body says: **add
 
 Its sibling, `scouts-debugging`, does the same job for the scout fleet itself. Between them, "debug self-driving for team N" is a sentence I can say to an agent on any surface and get a real answer.
 
-## 5. Skills as a daily driver
+## 4. Skills as a daily driver
 
 The `andy-inbox` skill is how I start most days. It pulls every report in the [self-driving inbox](/docs/self-driving/inbox) where I'm a suggested reviewer, maps each one to its GitHub PR and issues, and renders one plain line per report: priority, age, review state, CI, and one next action.
 
@@ -246,7 +205,7 @@ There's a whole family of these:
 
 A scout called `signals-scout-andy-github` runs the GitHub one every hour and keeps a single living report current in my inbox, so most mornings the answer is already waiting for me. A generic version, [`my-inbox`](https://github.com/PostHog/community-skills/tree/main/skills/my-inbox), is in the community store.
 
-## 6. Skills as a handover to humans
+## 5. Skills as a handover to humans
 
 Before I went on holiday recently, I posted a state-of-the-world message to my team's Slack channel. It was long. It had a section on current state, a section on operational stuff, and a section on where to dig when something breaks.
 
@@ -269,7 +228,7 @@ This is the bit I think people miss about a shared skills store: the handover do
 
 The same trick works for complex PR stacks and big reviews. When a teammate opened a large PR that touched shared plumbing a lot of other code runs through, I made a skill just for reviewing it. It holds what the PR changes, a findings folder with a status for each finding, a log of what I'd already posted on GitHub and Slack, who owes what, and the commands to re-check a diff too big for `gh pr diff`. We still write everything up in the PR, of course. The skill is the context around it. I can pick the review back up in a fresh agent session after every push without starting from zero, and when I want to talk it through with a teammate, I point them (and their agent) at the skill. It hit 19 versions in its first day.
 
-## 7. Skills that run themselves
+## 6. Skills that run themselves
 
 Every scout in PostHog [is a skill](/docs/self-driving/whats-in-a-scout). Same format, same store, same version history. The only difference is a schedule and a harness that runs it. Which means when I've built a skill for how I do a job, turning it into a job that does itself is a small step, not a new project.
 
@@ -279,7 +238,7 @@ A few are about skills themselves. `signals-scout-skills-best-practices` checks 
 
 Yes, I have skills that maintain skills. I did warn you.
 
-## 8. Skills as a place to think
+## 7. Skills as a place to think
 
 This one surprised me. `andy-hogs-2026q4` is my draft of Hopes, Obstructions, Growth, and Sneak attacks for our quarterly planning.
 
