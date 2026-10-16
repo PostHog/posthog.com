@@ -13,12 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha" type="fyi">
-
-The Azure API Management source is in alpha. [Tell us](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) how it works for you, and report anything that looks wrong.
-
-</CalloutBox>
-
 The Azure API Management connector syncs gateway logs into PostHog: every request through the gateway, token usage for language model APIs behind the AI gateway, and WebSocket connections. Use it to see API usage and LLM token usage next to your product data.
 
 ## Prerequisites

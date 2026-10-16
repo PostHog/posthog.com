@@ -14,12 +14,6 @@ import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 import InboundIpAddresses from "../\_snippets/inbound-ip-addresses.mdx"
 
-<CalloutBox icon="IconInfo" title="Alpha" type="fyi">
-
-The Azure Cosmos DB source is in alpha. [Tell us](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) how it works for you, and report anything that looks wrong.
-
-</CalloutBox>
-
 The Azure Cosmos DB connector syncs the containers of one Cosmos DB for NoSQL database into PostHog. Each container becomes a table, so you can join your application documents with your product data.
 
 ## Prerequisites
