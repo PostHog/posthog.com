@@ -48,7 +48,11 @@ Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels
    - **Weekly** checks once a week.
    - **Monthly** checks once a month.
 
-   The form shows the next planned evaluation.
+   Automatic hourly checks are scheduled between 2 and 13 minutes after the hour, and 15-minute checks between 1 and 3 minutes after each quarter hour.
+   Daily, weekly, and monthly checks run at a consistent minute within their scheduled hour.
+   Each alert keeps a consistent minute to spread evaluations out.
+   If you select a specific minute for an hourly alert, it keeps that minute.
+   The form shows the next planned evaluation. Quiet hours and skipped weekends can move it later.
 10. Select the users to notify. Subscribed users get in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs in the alert form. See [notifications](#notifications).
 11. Click **Create alert**. Open **Monitor** > **Alerts** on the insight to review or edit its alerts. Open **Alerts** from the sidebar to manage alerts across insights.
 
@@ -296,7 +300,7 @@ To enable quiet hours, select **Quiet hours** in the alert form and configure on
 - Times are based on your project's timezone
 - Each window must span at least 30 minutes
 - You can add up to five time windows per alert
-- If a scheduled check falls during quiet hours, the next check runs after the window ends
+- If a scheduled check falls during quiet hours, it runs after the window ends. Automatic schedules can add up to 59 minutes to spread checks out, while staying outside blocked windows.
 
 A preset for overnight hours (10 PM – 7 AM) is available for quick setup.
 
