@@ -9,9 +9,6 @@ sourceId: Scarf
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Scarf connector syncs your package downloads, tracking pixel views, and the companies Scarf matched to them, so you can connect open source adoption to product usage.
 
@@ -35,8 +32,11 @@ You need:
 <SyncModes />
 
 `package_events` and `tracking_pixel_events` support incremental syncs on `time`.
-Each sync reads one day per request, from the day of the last event it saw through today.
+Each sync reads one day per request, from the day of the previous sync through today.
 Each day counts as one Scarf export run, so a long backfill uses many runs.
+
+A full refresh of an event table exports the whole history window again on every sync, and replaces the table with only those days.
+Use incremental syncs for the event tables.
 
 Scarf exports are at-least-once, so the same event can arrive twice. Incremental syncs merge on `id`, which keeps one row per event.
 
@@ -53,7 +53,9 @@ Scarf exports are at-least-once, so the same event can arrive twice. Incremental
 ## Troubleshooting
 
 - **"Scarf rejected your API token"**: the token is wrong or revoked. Create a new one.
-- **"Scarf refused the export"**: event exports need a Basic or Premium plan. Turn off the event tables, or upgrade the plan.
+- **"Scarf refused the export"**: event exports need a Basic or Premium plan, and a member role or higher. Turn off the event tables, or upgrade the plan.
+- **"Scarf couldn't find that account or organization"**: check the owner name, as it appears in your Scarf URLs.
+- **"One day of Scarf events is larger than PostHog can import in one piece"**: contact PostHog support.
 - **"Your Scarf organization has no export runs left"**: add runs in Scarf, then resync.
 
 <TroubleshootingLink />

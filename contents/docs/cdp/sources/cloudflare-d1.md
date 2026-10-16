@@ -9,9 +9,6 @@ sourceId: CloudflareD1
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Cloudflare D1 connector syncs the tables and views of a D1 database into PostHog, so you can query your Workers app data next to your product analytics.
 
@@ -37,10 +34,14 @@ PostHog only runs read queries against your database.
 <SyncModes />
 
 Incremental syncs are available on integer, real, date, and datetime columns.
-Keep dates in one column in one format, in UTC. PostHog writes the sync position in that format, so the comparison can use an index on the column.
+Incremental tables merge on their key; append is not offered.
+Keep dates in one column in one format, in UTC.
+PostHog writes the sync position in that format, so the comparison can use an index on the column.
+Pick a column that leads an index: without one, every page reads the whole table, and D1 bills each row a query reads.
+Views without a key sync with a full refresh only.
 Rows where the incremental column is empty are skipped in incremental syncs. Use a full refresh if you need them.
 
-Each page is one query against your database, and every query counts toward Cloudflare's API rate limit of 1,200 requests every five minutes per token.
+Each page is one query against your database, and every query counts toward Cloudflare's API rate limit of 1,200 requests every five minutes per user, shared with the dashboard and your other tokens.
 
 ## Configuration
 
@@ -50,11 +51,13 @@ Each page is one query against your database, and every query counts toward Clou
 
 <SourceTables />
 
-PostHog lists every table and view in the database except D1's internal `_cf_` tables.
+PostHog lists every table and view in the database except D1's internal `_cf_` tables and SQLite's own `sqlite_` tables.
 
 ## Troubleshooting
 
 - **"Cloudflare rejected your API token"**: the token is wrong, expired, or revoked. Create a new one with D1 read permission.
+- **"Your Cloudflare API token can't read this D1 database"**: give the token the **D1 Read** permission for the account that holds the database.
+- **"no such table"**: the table was dropped or renamed in D1. Remove it from the source, or recreate it.
 - **"Cloudflare couldn't find that D1 database"**: check the account ID and database ID. The database must belong to the account the token can read.
 - **"The incremental column no longer exists"**: the column was dropped or renamed. Pick another incremental column in the table's settings.
 
