@@ -1,5 +1,5 @@
 ---
-date: 2026-10-15
+date: 2026-10-16
 title: "6 things I've learned in 6 years at PostHog"
 author:
   - charles-cook
