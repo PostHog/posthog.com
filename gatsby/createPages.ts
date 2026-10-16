@@ -2,9 +2,11 @@ import { GatsbyNode } from 'gatsby'
 
 import path from 'path'
 import slugify from 'slugify'
+import vercelConfig from '../vercel.json'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+import { HOGPEDIA_RESERVED } from '../src/components/Hogpedia/categories'
 import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
@@ -92,7 +94,26 @@ const SDK_REFERENCE_QUERY_FIELDS = `
     }
 `
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+// The "From our inbox" examples and curator scout are data files for one docs page, not pages.
+// They have no title, and the docs query's `title: { ne: "" }` filter can still match a node with no title.
+const isInboxExampleFile = (slug?: string): boolean => /^\/docs\/self-driving\/from-our-inbox\/_/.test(slug ?? '')
+
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql, getNodesByType }) => {
+    const redirectedPaths = new Set(vercelConfig.redirects.map(({ source }) => source))
+
+    for (const team of getNodesByType('SqueakTeam')) {
+        if (typeof team.slug !== 'string' || !team.slug || team.name === 'Hedgehogs') continue
+
+        const teamPath = `/teams/${team.slug}`
+        if (redirectedPaths.has(teamPath)) continue
+
+        createPage({
+            path: teamPath,
+            component: path.resolve('src/pages/teams/[slug].tsx'),
+            context: { slug: team.slug },
+        })
+    }
+
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
     }
@@ -120,6 +141,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Docs
     const ApiEndpoint = path.resolve(`src/templates/ApiEndpoint.tsx`)
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
+    const HogpediaTemplate = path.resolve(`src/templates/Hogpedia.tsx`)
+    const HogpediaCategoryTemplate = path.resolve(`src/templates/HogpediaCategory.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
@@ -218,6 +241,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         slug
                     }
                     rawBody
+                }
+            }
+            hogpedia: allMdx(
+                filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        hogpedia {
+                            categories
+                        }
+                    }
                 }
             }
             tutorials: allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -355,23 +397,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     frontmatter {
                         category
                         tags
-                    }
-                }
-            }
-            localizedNewsletter: allMdx(
-                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
-            ) {
-                nodes {
-                    id
-                    headings {
-                        depth
-                        value
-                    }
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        translationOf
                     }
                 }
             }
@@ -557,44 +582,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const menuFlattened = flattenMenu(menu)
-    const localizedNewsletterNodes = result.data.localizedNewsletter.nodes
-    const englishNewsletterSlugs = new Set<string>(
-        result.data.libraryArticles.nodes
-            .map((node: any) => replacePath(node.fields.slug))
-            .filter((slug: string) => slug.startsWith('/newsletter/'))
-    )
-    localizedNewsletterNodes.forEach((node) => {
-        const translationOf = node.frontmatter?.translationOf
-        if (!translationOf) return
-        const normalized = replacePath(translationOf)
-        if (!englishNewsletterSlugs.has(normalized)) {
-            console.warn(
-                `[i18n] Korean translation ${node.fields.slug} references missing English slug: ${translationOf}`
-            )
-        }
-    })
-    const indexableNewsletterTranslations = localizedNewsletterNodes.filter(
-        (node) =>
-            node.frontmatter?.translationOf && englishNewsletterSlugs.has(replacePath(node.frontmatter.translationOf))
-    )
-    const koreanByEnglishSlug = indexableNewsletterTranslations.reduce<Record<string, string>>((acc, node) => {
-        acc[replacePath(node.frontmatter.translationOf)] = replacePath(node.fields.slug)
-        return acc
-    }, {})
-
-    const getNewsletterLanguageAlternates = (slug: string, translationOf?: string) => {
-        const currentSlug = replacePath(slug)
-        const englishSlug = translationOf ? replacePath(translationOf) : currentSlug
-        const koreanSlug = translationOf ? currentSlug : koreanByEnglishSlug[englishSlug]
-
-        if (!koreanSlug) return undefined
-
-        return [
-            { hrefLang: 'en', href: englishSlug },
-            { hrefLang: 'ko', href: koreanSlug },
-            { hrefLang: 'x-default', href: englishSlug },
-        ]
-    }
 
     const findNext = (menu, currentURL) => {
         for (let i = 0; i < menu.length; i++) {
@@ -685,10 +672,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         const plainSlug = node.fields?.slug || node.slug
         if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
+        // Hogpedia articles get the MonoBook template from the dedicated loop below, so a
+        // generic Plain page would be a duplicate at the same path.
+        if (plainSlug?.startsWith('/hogpedia/')) return
         // `_`-prefixed template directories are starters to copy from, not pages. They carry a
         // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
         // above doesn't exclude them the way it excludes sibling SKILL.md files.
-        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides)/.test(plainSlug ?? '')) return
+        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides|from-our-inbox)/.test(plainSlug ?? '')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -794,7 +784,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
             // Folders with hand-written index pages in src/pages/ are excluded here
-            if (!isHub && categoryFolder !== 'newsletter' && categoryFolder !== 'blog') {
+            if (
+                !isHub &&
+                categoryFolder !== 'newsletter' &&
+                categoryFolder !== 'blog' &&
+                categoryFolder !== 'compare'
+            ) {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -839,11 +834,53 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         name: 'Product Engineer Handbook',
         url: '/product-engineer',
     })
-    createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
+    createPosts(
+        result.data.docs.nodes.filter((node) => !isInboxExampleFile(node.fields?.slug)),
+        'docs',
+        HandbookTemplate,
+        { name: 'Docs', url: '/docs' }
+    )
     createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
         regex: `$${node.url}/`,
     }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
+
+    // Hogpedia: one page per article, plus one page per category the articles declare.
+    //
+    // `createPosts` is deliberately not used. It resolves breadcrumbs out of the shared nav in
+    // `src/navs/index.js`, and Hogpedia is intentionally absent from that nav — it brings its
+    // own sidebar, the way /context-warehouse does.
+    const hogpediaCategories = new Set<string>()
+    result.data.hogpedia.nodes.forEach((node) => {
+        const slug = replacePath(node.fields.slug)
+        if (HOGPEDIA_RESERVED.some((reserved) => slug === `/hogpedia/${reserved}`)) {
+            throw new Error(
+                `contents${node.fields.slug}.mdx collides with a Hogpedia meta page. ` +
+                    `Reserved names: ${HOGPEDIA_RESERVED.join(', ')}`
+            )
+        }
+        ;(node.frontmatter?.hogpedia?.categories || []).forEach((category) => hogpediaCategories.add(category))
+        createPage({
+            path: slug,
+            component: HogpediaTemplate,
+            context: {
+                id: node.id,
+                slug,
+                // The template asks whether a talk page exists, so the discussion tab is only a
+                // link when it leads somewhere.
+                talkSlug: slug.replace('/hogpedia/', '/hogpedia/talk/'),
+                tableOfContents: node.headings && formatToc(node.headings),
+            },
+        })
+    })
+
+    Array.from(hogpediaCategories).forEach((category) => {
+        createPage({
+            path: `/hogpedia/category/${slugify(category, { lower: true, strict: true })}`,
+            component: HogpediaCategoryTemplate,
+            context: { category },
+        })
+    })
 
     result.data.tutorials.nodes.forEach((node) => {
         const { slug } = node.fields
@@ -897,7 +934,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.libraryArticles.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
-        const isEnglishNewsletter = replacePath(slug).startsWith('/newsletter/')
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
@@ -907,30 +943,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
-                languageAlternates: isEnglishNewsletter ? getNewsletterLanguageAlternates(slug) : undefined,
-            },
-        })
-    })
-
-    result.data.localizedNewsletter.nodes.forEach((node) => {
-        const { slug } = node.fields
-        const { translationOf } = node.frontmatter || {}
-        const isIndexableTranslation = translationOf && englishNewsletterSlugs.has(replacePath(translationOf))
-        const tableOfContents = node.headings && formatToc(node.headings)
-
-        createPage({
-            path: replacePath(slug),
-            component: BlogPostTemplate,
-            context: {
-                id: node.id,
-                tableOfContents,
-                slug,
-                post: true,
-                article: true,
-                localizedRoot: 'newsletter',
-                languageAlternates: isIndexableTranslation
-                    ? getNewsletterLanguageAlternates(slug, translationOf)
-                    : undefined,
             },
         })
     })
@@ -1307,8 +1319,17 @@ async function createMinimalPages({
                     }
                 }
             }
-            localizedNewsletter: allMdx(
-                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
+            ${SDK_REFERENCE_QUERY_FIELDS}
+            pocketGuides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                }
+            }
+            hogpedia: allMdx(
+                filter: { fields: { slug: { regex: "/^/hogpedia//" } }, frontmatter: { title: { ne: "" } } }
             ) {
                 nodes {
                     id
@@ -1319,14 +1340,10 @@ async function createMinimalPages({
                     fields {
                         slug
                     }
-                }
-            }
-            ${SDK_REFERENCE_QUERY_FIELDS}
-            pocketGuides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
+                    frontmatter {
+                        hogpedia {
+                            categories
+                        }
                     }
                 }
             }
@@ -1413,10 +1430,10 @@ async function createMinimalPages({
         handbook: { nodes: any[] }
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
-        localizedNewsletter: { nodes: any[] }
         allSdkReferences: { nodes: any[] }
         allSdkTypes: { nodes: any[] }
         pocketGuides: { nodes: any[] }
+        hogpedia: { nodes: any[] }
     }
 
     // Pocket guides render in preview builds too - reviewers need to click through the book.
@@ -1433,7 +1450,39 @@ async function createMinimalPages({
         })
     })
 
-    createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+    // Hogpedia renders in preview builds too - a reviewer has to click through the
+    // encyclopedia, and every link in it has to resolve.
+    const minimalHogpediaCategories = new Set<string>()
+    data.hogpedia.nodes.forEach((node) => {
+        const slug = replacePath(node.fields?.slug)
+        if (!slug) return
+        ;(node.frontmatter?.hogpedia?.categories || []).forEach((category: string) =>
+            minimalHogpediaCategories.add(category)
+        )
+        createPage({
+            path: slug,
+            component: path.resolve(`src/templates/Hogpedia.tsx`),
+            context: {
+                id: node.id,
+                slug,
+                talkSlug: slug.replace('/hogpedia/', '/hogpedia/talk/'),
+                tableOfContents: node.headings && formatToc(node.headings),
+            },
+        })
+    })
+    Array.from(minimalHogpediaCategories).forEach((category) => {
+        createPage({
+            path: `/hogpedia/category/${slugify(category, { lower: true, strict: true })}`,
+            component: path.resolve(`src/templates/HogpediaCategory.tsx`),
+            context: { category },
+        })
+    })
+
+    createHandbookPreviewPosts(
+        data.docs.nodes.filter((node) => !isInboxExampleFile(node.fields?.slug)),
+        'docs',
+        { name: 'Docs', url: '/docs' }
+    )
 
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
     createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
@@ -1441,23 +1490,6 @@ async function createMinimalPages({
         url: '/product-engineer',
     })
     createBlogPreviewPosts(data.posts.nodes)
-    data.localizedNewsletter.nodes.forEach((node) => {
-        const slug = node.fields?.slug
-        if (!slug) return
-        const tableOfContents = node.headings && formatToc(node.headings)
-        createPage({
-            path: replacePath(slug),
-            component: BlogPostTemplate,
-            context: {
-                id: node.id,
-                tableOfContents,
-                slug,
-                post: true,
-                article: true,
-                localizedRoot: 'newsletter',
-            },
-        })
-    })
 
     // Render SDK reference pages (latest only) so /docs/references/* is reviewable in previews
     // without the full site's file count exceeding Cloudflare Pages' 20k-file deploy limit.

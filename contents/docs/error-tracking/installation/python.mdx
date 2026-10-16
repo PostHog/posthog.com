@@ -13,3 +13,11 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 import { ErrorTrackingPythonInstallationWrapper } from './_snippets/et-installation-wrapper.tsx'
 
 <ErrorTrackingPythonInstallationWrapper /> 
+
+## Web framework integrations
+
+The Python SDK includes request context and error tracking integrations for common web frameworks:
+
+- [Django and Django REST Framework](/docs/libraries/django#capture-django-rest-framework-exceptions)
+- [Flask](/docs/libraries/flask#request-contexts)
+- [ASGI frameworks such as FastAPI, Starlette, and Litestar](/docs/libraries/python#asgi-request-middleware)

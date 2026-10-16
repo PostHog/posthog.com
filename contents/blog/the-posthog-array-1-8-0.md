@@ -26,7 +26,7 @@ If you're self hosting and want these features - [update your PostHog](/docs/sel
 
 This feature is designed for startups.
 
-We built it because we our own team had to create an investor presentation showing PostHog signups and realized that cumulative graphs can *only* go up and to the right. Just the thing for nailing that valuation!
+We built it because our own team had to create an investor presentation showing PostHog signups and realized that cumulative graphs can *only* go up and to the right. Just the thing for nailing that valuation!
 
 ### [Paths got more powerful](https://github.com/PostHog/posthog/pull/897)
 

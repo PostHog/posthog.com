@@ -6,6 +6,9 @@
 export const WINDOW_BG =
     'bg-primary/75 backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
+export const WINDOW_TINT = 'bg-primary/75 reduce-transparency:!bg-primary'
+export const WINDOW_SCHEME = 'tertiary'
+
 /** Reader sidebar overlays */
 export const PANEL_BG =
     'bg-primary/75 dark:bg-primary backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'

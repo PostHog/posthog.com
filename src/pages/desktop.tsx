@@ -45,11 +45,13 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { DottedConnection } from 'components/Code/DottedConnection'
+import { Receipt } from 'components/Code/Receipt'
 import {
     StickerTombstone,
     StickerMayor,
     StickerPullRequest,
     StickerAi,
+    StickerCloud,
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -617,76 +619,21 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 // rendered as a $0.00 grocery receipt punchline.
 // ─────────────────────────────────────────────
 
-// Deliberate skeuomorphic object: fixed paper/ink colors (like KeyBadge) so the
-// receipt reads as a physical receipt in both light and dark mode.
-const RECEIPT_PAPER = '#f7f4ee'
-
-// A torn/zigzag paper edge. Flush along the top, sawtooth teeth pointing down.
-// preserveAspectRatio="none" stretches a fixed tooth count across the receipt width.
-function TornEdge({ className = '' }: { className?: string }) {
-    const width = 200
-    const height = 12
-    const teeth = 20
-    const step = width / teeth
-    let d = `M0 0 H${width}`
-    for (let i = 0; i <= teeth; i++) {
-        const x = (width - i * step).toFixed(1)
-        const y = i % 2 === 0 ? height : 0
-        d += ` L${x} ${y}`
-    }
-    d += ' Z'
-    return (
-        <svg
-            className={className}
-            viewBox={`0 0 ${width} ${height}`}
-            preserveAspectRatio="none"
-            aria-hidden
-            focusable="false"
-        >
-            <path d={d} fill={RECEIPT_PAPER} />
-        </svg>
-    )
-}
-
-function ReceiptRow({ label, price = '$0.00' }: { label: string; price?: string }) {
-    return (
-        <div className="flex items-baseline justify-between gap-4">
-            <span>{label}</span>
-            <span>{price}</span>
-        </div>
-    )
-}
-
 function AgentMartReceipt() {
     return (
-        <div className="mx-auto w-full max-w-xs rotate-1">
-            <div
-                className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
-                style={{ backgroundColor: RECEIPT_PAPER }}
-            >
-                <p className="m-0 text-center font-bold tracking-widest">TABLE STAKES 2026</p>
-                <p className="m-0 mb-4 text-center text-xs italic text-[#8a8272]">(yep, PostHog has that)</p>
-
-                <div className="space-y-1">
-                    <ReceiptRow label="parallel agents" />
-                    <ReceiptRow label="multi model" />
-                    <ReceiptRow label="MCP servers" />
-                    <ReceiptRow label="code diffs" />
-                    <ReceiptRow label="cloud sandboxes" />
-                    <ReceiptRow label="AI sparkles" />
-                </div>
-
-                <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
-
-                <div className="flex items-baseline justify-between gap-4 font-bold">
-                    <span>TOTAL</span>
-                    <span>$0.00</span>
-                </div>
-
-                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thanks for shopping at agent mart</p>
-            </div>
-            <TornEdge className="w-full h-3" />
-        </div>
+        <Receipt
+            title="TABLE STAKES 2026"
+            subtitle="(yep, PostHog has that)"
+            rows={[
+                { label: 'parallel agents' },
+                { label: 'multi model' },
+                { label: 'MCP servers' },
+                { label: 'code diffs' },
+                { label: 'cloud sandboxes' },
+                { label: 'AI sparkles' },
+            ]}
+            footer="thanks for shopping at agent mart"
+        />
     )
 }
 
@@ -1834,6 +1781,98 @@ const SupportedLLMs = () => {
     )
 }
 
+const cloudEnvironmentItems = [
+    {
+        Icon: IconStack,
+        label: 'Environments',
+        desc: "Repos, hosts, and base image in one profile. Yours, or the whole team's.",
+    },
+    {
+        Icon: IconBrowser,
+        label: 'Access',
+        desc: 'Trusted domains, the whole internet, or your own list. Keys stay encrypted.',
+    },
+    { Icon: IconTerminal, label: 'Base images', desc: 'Bake your tools in once. No run starts with a fresh install.' },
+]
+
+// Cloud agents: the "close the lid, they keep going" pitch. Sits between the model list and the
+// MCP marketplace so it doesn't butt up against the self-driving box further down the page.
+const CloudAgentsCallout = () => {
+    return (
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-blue bg-gradient-to-br from-blue/20 via-blue/5 to-purple/10 p-6 shadow-xl @xl:p-8">
+                <div className="grid gap-6 @2xl:grid-cols-[1fr_auto] @2xl:gap-10">
+                    <div>
+                        <div className="mb-3 flex items-center gap-2">
+                            <StickerCloud className="size-8 -rotate-3" />
+                            <h2 className="m-0 text-2xl font-bold">Seven cloud agents, one closed laptop</h2>
+                        </div>
+                        <p className="m-0 text-secondary">
+                            Run tasks in a PostHog-managed sandbox instead of on your machine. Quit the app, sleep the
+                            laptop, change networks: the agents keep building, and the branches are waiting when you get
+                            back.
+                        </p>
+                        <p className="m-0 mt-3 text-secondary">
+                            An environment is the profile a sandbox boots with. Set one up and every cloud task starts
+                            on the repos you picked, with the keys and the tools already there.
+                        </p>
+                    </div>
+
+                    <div className="relative mx-auto w-40 shrink-0 @sm:w-52 @2xl:w-56">
+                        {/* Decorative clouds behind the artwork */}
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_1_6ec7ea72d6.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -left-6 top-2 z-0 w-12 opacity-50"
+                            imgClassName="w-full"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_2_553c4f548d.svg"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-3 bottom-14 z-0 w-10 opacity-40"
+                            imgClassName="w-full"
+                        />
+                        <div className="relative z-10">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cloud_hog_katy_237c11a9fe.png"
+                                alt="A hedgehog in a pink wig lounging on a cloud with a candy swirl"
+                                className="w-full"
+                                imgClassName="w-full"
+                            />
+                            <p className="m-0 mt-1 text-center text-sm text-secondary">Baby, you're a firewall.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-5 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    {cloudEnvironmentItems.map(({ Icon, label, desc }) => (
+                        <div key={label}>
+                            <div className="flex items-center gap-1.5">
+                                <Icon className="size-5 shrink-0 text-blue" />
+                                <span className="text-base font-bold text-primary">{label}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <OSButton
+                    asLink
+                    to="/docs/posthog-desktop/environments"
+                    state={{ newWindow: true }}
+                    variant="primary"
+                    size="md"
+                    className="mt-5"
+                >
+                    Set up an environment
+                </OSButton>
+            </div>
+        </section>
+    )
+}
+
 const MCPMarketplace = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
@@ -2433,6 +2472,8 @@ export default function CodePage() {
                         <SkillsCallout />
 
                         <SupportedLLMs />
+
+                        <CloudAgentsCallout />
 
                         <MCPMarketplace />
 

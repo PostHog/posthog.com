@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
 
-import { IconBook, IconChevronLeft, IconChevronRight, IconList } from '@posthog/icons'
+import { IconChevronLeft, IconChevronRight, IconGraduationCap, IconHome, IconList } from '@posthog/icons'
 
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 export interface BookTab {
     label: string
     url: string
     /** Printed after the label – a folio number, or `i` for the front matter. */
     number?: string
+    /** Contents heading – printed above the first tab of each run that shares one. */
+    section?: string
     active?: boolean
 }
 
@@ -21,13 +24,15 @@ interface BookReaderProps {
     actionBar?: React.ReactNode
     prev?: { url: string; label: string }
     next?: { url: string; label: string }
-    /** The contents popover's entries, one per page you can turn to. */
+    /** The contents entries, one per page you can turn to. */
     tabs?: BookTab[]
-    /** The way out – an edge tab and a foot link, so leaving the book is always one click. */
+    /** The way out – a sidebar control and a foot link. */
     shelf?: { url: string; label: string }
+    /** A separate learning hub, when the volume has one. Never replaces the shelf. */
+    learn?: { url: string; label: string }
     /** Where you are, printed in the foot line. Front matter is unnumbered. */
     position?: { page?: number; total: number }
-    /** Reading size in px, applied to the body so the em-based prose scales. */
+    /** Reading size control; the default body size comes from the docs prose styles. */
     fontSize?: number
     onFontSize?: (delta: number) => void
     fontSizes?: readonly number[]
@@ -35,7 +40,7 @@ interface BookReaderProps {
 
 type Panel = 'contents' | 'type' | null
 
-/** The reading-size control, inside the Aa pop-out. */
+/** The reading-size control, shared by the sidebar and compact Aa pop-out. */
 function BookControls({
     fontSize,
     sizes,
@@ -88,8 +93,13 @@ function ContentsList({ tabs }: { tabs: BookTab[] }): JSX.Element {
                 Contents
             </p>
             <ul className="m-0 list-none space-y-1 p-3">
-                {tabs.map((tab) => (
+                {tabs.map((tab, index) => (
                     <li key={tab.url}>
+                        {tab.section && tab.section !== tabs[index - 1]?.section && (
+                            <p className="m-0 px-1.5 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.14em] text-secondary">
+                                {tab.section}
+                            </p>
+                        )}
                         <Link
                             to={tab.url}
                             aria-current={tab.active ? 'page' : undefined}
@@ -140,9 +150,8 @@ function PageTurnZone({
 }
 
 /**
- * The e-reader: the window itself is the page. Reading controls are book tabs on the page's
- * left edge – small handles that belong to the page, not a toolbar. Left, because that's where
- * readers expect navigation, and their popovers open over the page instead of off the window.
+ * The e-reader: contents and controls stay beside the scrolling page in wide windows.
+ * Narrow windows keep the compact book tabs and popovers to leave room for the page.
  */
 export default function BookReader({
     children,
@@ -151,6 +160,7 @@ export default function BookReader({
     next,
     tabs,
     shelf,
+    learn,
     position,
     fontSize,
     onFontSize,
@@ -177,16 +187,91 @@ export default function BookReader({
             active ? 'bg-primary text-primary' : 'bg-accent text-secondary hover:text-primary dark:bg-accent-dark'
         }`
 
+    const readingSizeControls = fontSize && onFontSize && fontSizes && (
+        <BookControls
+            fontSize={fontSize}
+            sizes={fontSizes}
+            onStep={(delta) => {
+                posthog?.capture('pocket_guide_interaction', { kind: 'font_size_step', delta })
+                onFontSize(delta)
+            }}
+        />
+    )
+
+    const destinationControl = (url: string, label: string, icon: React.ReactNode, compact = false) => (
+        <Tooltip
+            side="bottom"
+            sideOffset={6}
+            trigger={
+                <Link
+                    to={url}
+                    aria-label={label}
+                    className={
+                        compact
+                            ? edgeTabClasses()
+                            : 'flex size-8 items-center justify-center rounded text-secondary no-underline hover:bg-accent hover:text-primary'
+                    }
+                >
+                    {icon}
+                </Link>
+            }
+        >
+            {label}
+        </Tooltip>
+    )
+
     return (
-        <div className="relative flex h-full min-h-0 w-full flex-col bg-primary">
+        <div className="relative flex h-full min-h-0 w-full flex-col @4xl:flex-row">
+            <aside
+                aria-label="Pocket guide sidebar"
+                className="m-4 mr-0 hidden min-h-0 w-64 shrink-0 flex-col overflow-hidden rounded-md border border-primary @4xl:flex"
+            >
+                {(shelf || learn || readingSizeControls) && (
+                    <div
+                        role="group"
+                        aria-label="Controls"
+                        className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-primary px-3 py-2"
+                    >
+                        <div className="flex items-center gap-1">
+                            {shelf &&
+                                destinationControl(
+                                    shelf.url,
+                                    shelf.label,
+                                    <IconHome className="size-4" aria-hidden="true" />
+                                )}
+                            {learn &&
+                                destinationControl(
+                                    learn.url,
+                                    learn.label,
+                                    <IconGraduationCap className="size-4" aria-hidden="true" />
+                                )}
+                        </div>
+                        {readingSizeControls}
+                    </div>
+                )}
+                {tabs && tabs.length > 0 && (
+                    <nav aria-label="Pocket guide contents" className="min-h-0 flex-1 overflow-y-auto">
+                        <ContentsList tabs={tabs} />
+                    </nav>
+                )}
+            </aside>
             {/* Book tabs: in-flow above the page on narrow containers (floating tabs would sit
                 on the text), attached to the left edge at reading widths. */}
-            <div className="relative z-30 flex shrink-0 self-start flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0">
-                {shelf && (
-                    <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={edgeTabClasses()}>
-                        <IconBook className="size-4" />
-                    </Link>
-                )}
+            <div className="relative z-30 flex shrink-0 self-start flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0 @4xl:hidden">
+                {shelf &&
+                    destinationControl(
+                        shelf.url,
+                        shelf.label,
+                        <IconHome className="size-4" aria-hidden="true" />,
+                        true
+                    )}
+                {learn &&
+                    destinationControl(
+                        learn.url,
+                        learn.label,
+                        <IconGraduationCap className="size-4" aria-hidden="true" />,
+                        true
+                    )}
                 {tabs && tabs.length > 0 && (
                     <button
                         type="button"
@@ -227,75 +312,70 @@ export default function BookReader({
                     <div className="absolute left-4 top-full mt-1 w-max rounded-md border border-primary bg-primary p-3 shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0">
                         <div className="flex items-center justify-between gap-4">
                             <span className="text-xs font-semibold text-secondary">Font size</span>
-                            <BookControls
-                                fontSize={fontSize}
-                                sizes={fontSizes}
-                                onStep={(delta) => {
-                                    posthog?.capture('pocket_guide_interaction', { kind: 'font_size_step', delta })
-                                    onFontSize(delta)
-                                }}
-                            />
+                            {readingSizeControls}
                         </div>
                     </div>
                 )}
             </div>
 
-            <div className="relative min-h-0 flex-1 bg-white dark:bg-accent">
-                {prev && <PageTurnZone to={prev.url} label={prev.label} direction="prev" />}
-                {next && <PageTurnZone to={next.url} label={next.label} direction="next" />}
-                <div className="h-full overflow-y-auto">
-                    {/* min-h-full + mt-auto: on a short page the nav pins to the page's
+            <div className="@container flex min-h-0 min-w-0 flex-1 flex-col">
+                <div className="relative min-h-0 flex-1">
+                    {prev && <PageTurnZone to={prev.url} label={prev.label} direction="prev" />}
+                    {next && <PageTurnZone to={next.url} label={next.label} direction="next" />}
+                    <div className="h-full overflow-y-auto">
+                        {/* min-h-full + mt-auto: on a short page the nav pins to the page's
                         foot instead of floating mid-page above empty paper. */}
-                    <div className="mx-auto flex min-h-full w-full max-w-[52rem] flex-col @3xl:max-w-[56rem]">
-                        <div style={{ fontSize }}>{children}</div>
-                        <nav
-                            aria-label="Pocket guide pages"
-                            className="mt-auto flex items-baseline justify-between gap-4 px-5 pb-8 text-sm @xl:px-12"
-                        >
-                            {prev ? (
-                                <Link
-                                    to={prev.url}
-                                    wrapperClassName="min-w-0 truncate"
-                                    className="text-secondary hover:text-primary"
-                                >
-                                    ‹ {prev.label}
-                                </Link>
-                            ) : (
-                                <span />
-                            )}
-                            <span className="flex shrink-0 items-baseline gap-3">
-                                {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
-                                {shelf && prev?.url !== shelf.url && (
-                                    <Link to={shelf.url} className="text-secondary hover:text-primary">
-                                        All guides
+                        <div className="mx-auto flex min-h-full w-full max-w-[52rem] flex-col @3xl:max-w-[56rem]">
+                            <div>{children}</div>
+                            <nav
+                                aria-label="Pocket guide pages"
+                                className="mt-auto flex items-baseline justify-between gap-4 px-5 pb-8 text-sm @xl:px-12"
+                            >
+                                {prev ? (
+                                    <Link
+                                        to={prev.url}
+                                        wrapperClassName="min-w-0 truncate"
+                                        className="text-secondary hover:text-primary"
+                                    >
+                                        ‹ {prev.label}
                                     </Link>
+                                ) : (
+                                    <span />
                                 )}
-                                {position?.page && (
-                                    <span className="tabular-nums text-secondary">
-                                        p. {position.page} of {position.total}
-                                    </span>
+                                <span className="flex shrink-0 items-baseline gap-3">
+                                    {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
+                                    {shelf && prev?.url !== shelf.url && (
+                                        <Link to={shelf.url} className="text-secondary hover:text-primary">
+                                            {learn ? shelf.label : 'All guides'}
+                                        </Link>
+                                    )}
+                                    {position?.page && (
+                                        <span className="tabular-nums text-secondary">
+                                            p. {position.page} of {position.total}
+                                        </span>
+                                    )}
+                                </span>
+                                {next ? (
+                                    <Link
+                                        to={next.url}
+                                        wrapperClassName="min-w-0 truncate text-right"
+                                        className="text-secondary hover:text-primary"
+                                    >
+                                        {next.label} ›
+                                    </Link>
+                                ) : (
+                                    <span />
                                 )}
-                            </span>
-                            {next ? (
-                                <Link
-                                    to={next.url}
-                                    wrapperClassName="min-w-0 truncate text-right"
-                                    className="text-secondary hover:text-primary"
-                                >
-                                    {next.label} ›
-                                </Link>
-                            ) : (
-                                <span />
-                            )}
-                        </nav>
+                            </nav>
+                        </div>
                     </div>
                 </div>
+                {actionBar && (
+                    <div className="m-4 shrink-0 rounded-md border border-primary">
+                        <div className="mx-auto w-full max-w-[52rem] @3xl:max-w-[56rem]">{actionBar}</div>
+                    </div>
+                )}
             </div>
-            {actionBar && (
-                <div className="shrink-0 border-t border-primary">
-                    <div className="mx-auto w-full max-w-[52rem] @3xl:max-w-[56rem]">{actionBar}</div>
-                </div>
-            )}
         </div>
     )
 }

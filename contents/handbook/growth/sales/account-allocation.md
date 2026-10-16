@@ -37,9 +37,56 @@ When both a TAM and a CSM are on the account, they co-own the save. Both are res
 
 An account going at risk is also not a reason to add a TAM. Churn saves are generally not a legitimate TAM opportunity. Risk on a CSM-only account stays with the CSM unless a genuine expansion opportunity qualifies through the normal path.
 
+
+### Competitive renewal
+
+Accounts owned only by a CSM can benefit from TAM overlay where we know a competitor is being evaluated ahead of renewal time.  CSMs should be having renewal conversations early (3 months out from the renewal date) so that we can get a TAM involved and compete hard to win the renewal.
+
+> Trying to layer in a TAM to a competitive situation 30 days from a renewal isn't enough time to meaningfully impact the competitive evaluation.
+
 ### Below $20k
 
 Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/sales/customer-journey#coverage-map) covers who (or what) handles them, including Growth TAM coverage and automation.
+
+---
+
+## Account ownership in Customer Analytics
+
+Customer Analytics is the source of truth for account ownership. Billing and Salesforce get owner changes from Customer Analytics. The sync goes in one direction only: Customer Analytics to billing to Salesforce. A change shows in Salesforce in 5-10 minutes.
+
+### Assigned is not the same as owned
+
+**You are considered assigned to the account in Customer Analytics when you are assigned to the correct field (account executive, csm, etc)  and relevant tags are applied to the account.** 
+
+Only accounts assigned to you count toward quota and commission.
+
+### Automated assignments are temporary
+
+The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
+
+A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics and remove any relevant tags.
+
+Do not change the owner in Salesforce. For an account that Customer Analytics controls, Customer Analytics writes over the Salesforce owner. An account without a PostHog organization is not in Customer Analytics, so you can manage it in Salesforce. If the account gets a PostHog organization later, the Salesforce owner becomes the owner in Customer Analytics.
+
+### Technical Account Managers
+
+- Team Leads will assign you as the TAM on the account in Customer Analytics and add the 'AM Managed' tag. 
+- The account must have the `AM Managed` tag to count toward your quota. Do not add or tag yourself. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
+
+### Technical Account Executives
+
+- Your TAE assignment comes from Salesforce automatically. The `AE Managed` tag does not.
+- Add the `AE Managed` tag in Customer Analytics yourself, with approval from your team lead. Without it, the account does not count toward your quota.
+
+### Ownership history
+
+The `system.account_relationships` table keeps the history of all account relationships. Each row is one person in one role on one account:
+
+- `started_at` is the date the relationship started.
+- `ended_at` is the date the relationship stopped. It is empty while the relationship is active.
+- `definition_id` joins to `system.account_relationship_definitions` for the role name. `account_id` joins to `system.accounts`.
+
+Use this table to find who owned an account at a given date.
 
 ---
 
@@ -71,9 +118,11 @@ There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, w
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
+To flag an account, add the `tam overlay needed` tag to it in Customer Analytics. TAM team leads check accounts with this tag and assign them to a TAM. Before you tag an account, use the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential) to check that there is a real expansion opportunity. Add a Customer Analytics note that tells the TAM what you saw.
+
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.
+We track coverage in Customer Analytics with the CSM account relationship for the base layer and the TAM assigned for the TAM overlay. An account can have both.
 
 ---
 
@@ -94,7 +143,7 @@ The CSM stays on, so nothing about the customer relationship changes from their 
 - **A handover note in Customer Analytics** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, who the real decision makers are, and who on the customer side owns the renewal (champion or procurement, and how the last one went). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
-- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` tag from the account, with Ben's approval.
+- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead clears the TAM field from the account, with Ben's approval.
 
 If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
 
@@ -123,7 +172,7 @@ A TAM is added on top of CSM coverage where an opportunity qualifies. At the sta
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics. When the TAM is assigned, remove the `tam overlay needed` tag.
 
 To request CSM coverage, add:
 
@@ -138,7 +187,7 @@ Every $20k+ account should have a CSM. At the start of each quarter, CSM team le
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
 3. **CSM books outside the current target** to identify which accounts should be rebalanced
 
-For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics. Once the CSM is assigned, a <PrivateLink url="https://us.posthog.com/project/2/workflows/01a00fc0-0f90-0000-6aa7-b78a941c08cb/workflow">workflow removes the tags automatically</PrivateLink>.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
@@ -150,7 +199,7 @@ Account removals should only happen at the end of the quarter so that quota can 
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
-> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the `AM Managed` tag to be added until you're confident there's growth potential.
+> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the TAM field to be set until you're confident there's growth potential.
 
 ---
 

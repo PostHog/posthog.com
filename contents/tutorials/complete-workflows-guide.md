@@ -76,68 +76,14 @@ As a prerequisite, you need to sync the language code of the user with PostHog. 
 
 ### Sending push notifications
 
-Sending push notifications is currently not yet possible. As a workaround, webhooks can be used. You can integrate an endpoint in your application that receives a POST request with a specific body, for example:
+Workflows can send native mobile push notifications directly. Add a **Push notification** step to a workflow, the same way you add an email step. Push is in open beta.
 
-```json
-{
-    "title": "Hello Max",
-    "message": "Welcome to our application",
-    "deeplink": "http://localhost:3000/welcome"
-}
-```
+Two things have to be in place first:
 
-If Firebase Cloud Messaging is already integrated in your backend and the users' message tokens are stored, you can directly send the push notification to the user. Here’s an example Express handler that validates a secret and forwards the payload to your push service:
+1. Connect a channel under **Workflows > Channels**: Firebase Cloud Messaging for Android, Apple Push Notification service for iOS. See [Configure a workflows channel](/docs/workflows/configure-channels?tab=Push).
+2. Register each user's device token from your app through the PostHog mobile SDK. See [Push notifications](/docs/workflows/push-notifications). The SDK does not collect tokens on its own, and it does not request notification permission for you.
 
-```ts
-import { Response, Request } from 'express'
-
-const secret = 'random-secret-string'
-
-export async function POST(req: Request, res: Response) {
-    // Validate secret that not everybody can send push notifications
-    if (req.headers['x-webhook-secret'] !== secret) {
-        return res.status(401).json({
-            error: 'Invalid webhook secret',
-        })
-    }
-
-    const userId = req.body.userId
-    const message = req.body.message
-    const title = req.body.title
-    const deeplink = req.body.deeplink
-
-    if (!userId || !message || !title) {
-        return res.status(400).json({
-            error: 'Missing userId, message, or title',
-        })
-    }
-
-    // send push notification
-    await sendPushNotification({ userId, title, message, deeplink })
-
-    return res.status(200).json({ success: true })
-}
-```
-#### Variables for content personalization
-
-Variables from the event or user can also be used in the JSON body to personalize the content.
-
-<p className="text-center">
-    <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr6_aabec89aef.webp"
-        alt="variables for content personalization"
-    />
-</p>
-
-#### Using custom header fields
-
-To prevent your webhook from being misused, you can also send custom header fields, such as `x-webhook-secret=random-value`. If the value doesn't match the defined secret, you can return a 401 Unauthorized error.
-
-#### Outlook
-
-It probably won't be long before push notifications are directly supported in PostHog, making the workaround obsolete. This is already mentioned in the roadmap and documentation.
-
-However, the webhook can continue to be used to execute internal processing or processes.
+Each send counts toward your workflows destinations usage and quota.
 
 ### Using variables in emails or webhooks
 

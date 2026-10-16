@@ -9,12 +9,6 @@ availability:
 sourceId: IncidentIo
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The incident.io connector syncs your incident management data – incidents, alerts, escalations, follow-ups, users, schedules, and configuration – into PostHog.
 
 ## Adding a data source

@@ -149,6 +149,143 @@
     }
 }
 
+/* A single foil glint for the rare human-coded changelog row. */
+.human-coded-foil {
+    background-size: 250% 250%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: human-coded-foil-shift 5s ease-in-out infinite;
+}
+
+@keyframes human-coded-foil-shift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.human-coded-glint::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.3) 50%, transparent 65%);
+    transform: translateX(-120%);
+    opacity: 0;
+}
+
+.group:hover > .human-coded-glint::after,
+.group:focus-visible > .human-coded-glint::after {
+    animation: human-coded-glint 650ms ease-out 1;
+}
+
+/* Tint the panel itself so its foil never flashes at full strength while the contents slide in. */
+.human-coded-panel {
+    background-image: linear-gradient(rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.55)), var(--human-coded-foil-light);
+}
+
+.human-coded-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+        110deg,
+        transparent 37%,
+        rgb(255 255 255 / 0.04) 44%,
+        rgb(255 255 255 / 0.12) 50%,
+        rgb(255 255 255 / 0.04) 56%,
+        transparent 63%
+    );
+    transform: translateX(-65%);
+    animation: human-coded-panel-reflection 11s ease-in-out infinite;
+}
+
+@keyframes human-coded-panel-reflection {
+    0% {
+        transform: translateX(-65%);
+    }
+    40%,
+    100% {
+        transform: translateX(65%);
+    }
+}
+
+.dark .human-coded-panel {
+    background-image: linear-gradient(rgb(20 20 24 / 0.6), rgb(20 20 24 / 0.6)), var(--human-coded-foil-dark);
+}
+
+.human-coded-panel-header {
+    background-color: transparent;
+}
+
+.human-coded-panel-title {
+    padding-right: 112px;
+}
+
+@container (max-width: 340px) {
+    .human-coded-panel-title {
+        padding-right: 76px;
+    }
+
+    .human-coded-panel-starburst {
+        transform: scale(0.7);
+        transform-origin: top right;
+    }
+}
+
+.human-coded-panel-body {
+    background-color: rgb(255 255 255 / 0.38);
+}
+
+.human-coded-panel-footer {
+    background-color: rgb(255 255 255 / 0.29);
+}
+
+.dark .human-coded-panel-header {
+    background-color: transparent;
+}
+
+.dark .human-coded-panel-body {
+    background-color: rgb(20 20 24 / 0.375);
+}
+
+.dark .human-coded-panel-footer {
+    background-color: rgb(20 20 24 / 0.25);
+}
+
+@keyframes human-coded-glint {
+    0% {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .human-coded-panel::after {
+        display: none;
+    }
+
+    .group:hover > .human-coded-glint::after,
+    .group:focus-visible > .human-coded-glint::after,
+    .human-coded-foil,
+    .human-coded-starburst-bang {
+        animation: none;
+    }
+}
+
 @layer not-prose {
     .not-prose h1 {
         font-size: 1.875rem;
@@ -1045,6 +1182,13 @@ fieldset {
 }
 
 /* applies to question and reply content */
+.question-content,
+.reply-content {
+    img {
+        @apply max-h-[28rem];
+    }
+}
+
 .question-content {
     a {
         @apply font-semibold underline;
@@ -1396,11 +1540,11 @@ body.dark {
 }
 
 .rc-slider.slider .rc-slider-track {
-    @apply bg-black/60 dark:bg-white/50;
+    @apply h-1.5 bg-black/60 dark:bg-white/50;
 }
 
 .rc-slider.slider .rc-slider-handle {
-    @apply bg-red border-3 border-white h-[21px] w-[21px] shadow-md -mt-[7px];
+    @apply bg-black dark:bg-white border-0 size-4 shadow-none -mt-[5px];
 }
 
 .rc-slider.slider .rc-slider-handle:active {
@@ -2133,12 +2277,12 @@ li.squeak-left-border {
 .rc-slider {
     /* entire bar */
     .rc-slider-rail {
-        @apply h-[8px] rounded-full bg-black/10 dark:bg-white/10;
+        @apply h-1.5 rounded-full bg-black/15 dark:bg-white/15;
     }
 
     /* filled in portion of bar */
     .rc-slider-track {
-        @apply h-[8px];
+        @apply h-1.5;
     }
 
     /* legend plots */

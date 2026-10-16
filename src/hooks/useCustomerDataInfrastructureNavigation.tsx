@@ -27,8 +27,8 @@ export const customerDataInfrastructureNav = {
             name: 'Data tools',
         },
         {
-            name: 'Managed DuckDB warehouse',
-            url: '/context-warehouse/managed-warehouse',
+            name: 'Warehouse',
+            url: '/context-warehouse/warehouse',
         },
         {
             name: 'PostHog AI',

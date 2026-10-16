@@ -17,7 +17,9 @@ For mechanics, see [Contract rules](/handbook/growth/sales/contract-rules) and [
 - **Customers on track to use up all their credits early:** 3 months before they are due to run out of credits.
   -  The credit bot will ping you in Slack if a customer is set to run out of credits before their renewal date, but you should also keep on top of their credit burn proactively as their CSM. 
 - **Other customers:** 3 months before the credit expiry date.
-  - At the 3-month mark, the customer moves into the `Upcoming renewal` segment, a Vitally task is assigned to you, and Slack pings you.
+  - At the 3-month mark, the renewal workflow pings you in #sales-alerts.
+
+If you've turned on [automatic renewal quotes](/handbook/growth/sales/contracts#automatic-renewal-quotes) in QuoteHog, you will also get a notification in #sales-alerts when your quote draft in QuoteHog is ready for your review.
 
 Customers who fit into either of the above buckets will also appear on the <PrivateLink url="https://us.posthog.com/project/2/insights/OXGSYc9k">CSM Managed — credits expiring in next 3 months</PrivateLink> insight.
 
@@ -33,10 +35,22 @@ Work back from the end of the customer's final billing period (if they are going
 
 Regardless, have a checkpoint the week before the final billing period closes. If signature is going to slip, either:
 
-1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for a few days so the credits land first. Flag it as early as you can, because [they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued).
+1. **Ask RevOps to pause collection.** Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA). If the invoice hasn't been issued yet, RevOps can hold it for 48 hours so the credits land first. The pause is [48 hours with no extension, and they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued), so flag it as early as you can. If signature is going to take longer than 48 hours, use option 2 instead.
 2. **Re-paper with the next period's start date.** If the period is going to close before signature, don't hold the original start date. Move the `Contract.EffectiveDate` to the beginning of the next billing period and tell the customer the new credits apply from that date. The period we already invoiced stays payable separately.
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting. If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit). Credits only apply to upcoming invoices.
+
+### When the contract dates and the billing dates don't match
+
+The credit expiry date comes from the customer's metadata in Stripe (`annual_plan_starts_at`, `annual_plan_ends_at`, and `credit_expires_at`), not from the date on the order form. The two should not disagree. If for some reason the contract didn't have the right start date, we should note the mismatch with an explanation in opportunity record.
+
+Check the order form dates against <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink> or Stripe when you start a renewal. If they don't match, you own the cleanup as the account owner:
+
+1. Ask the revops team in #team-revops which date is correct, and ask them to correct the metadata if the order form is right.
+2. Add a comment on the opportunity that records both dates, the confirmed date, and the reason they differ. The next person on the account must not have to repeat the investigation.
+3. Update the renewal opportunity dates to the confirmed dates, including the close date and the contract start date.
+
+Do this as soon as you find the mismatch. The renewal dates drive the ping in #sales-alerts, so a stale date makes the renewal start late.
 
 ## Unique renewal cases
 

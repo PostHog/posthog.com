@@ -65,7 +65,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-red',
     },
     {
-        name: 'Data warehouse',
+        name: 'Sources',
         allocation: '1M rows + FREE historical',
         note: (
             <>
@@ -94,6 +94,12 @@ export const freeTierProducts: FreeTierProduct[] = [
         allocation: '100K events',
         icon: Icons.IconLlmAnalytics,
         iconColor: 'text-purple',
+    },
+    {
+        name: 'Evaluations',
+        description: 'Billed with AI observability',
+        icon: Icons.IconListCheck,
+        iconColor: 'text-lilac',
     },
     {
         name: 'PostHog AI',

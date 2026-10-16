@@ -12,9 +12,6 @@ sourceId: Unstructured
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Unstructured connector syncs metadata from your [Unstructured](https://unstructured.io) platform account – workflows, job runs, and source/destination connectors – into the PostHog data warehouse so you can monitor document pipeline health alongside the rest of your data.
 

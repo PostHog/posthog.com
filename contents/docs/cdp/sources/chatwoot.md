@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Chatwoot
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Chatwoot connector syncs your customer support data – conversations, messages, contacts, inboxes, agents, teams, and more – into PostHog, whether you use Chatwoot Cloud or a self-hosted instance.
 

@@ -186,11 +186,11 @@ const BenefitsUnexpected: React.FC = () => {
                         Access to the <span className="text-red dark:text-yellow">Hedge Houses</span>
                     </h3>
                     <p className="max-w-lg mb-3">
-                        We have a dedicated [coworking space](https://posthog.com/handbook/people/hogpatch) in San
-                        Francisco (SF) where you'll often find YC founders/members and some of our team working
-                        together. In London, we have a house where you can both work and relax, giving you options for
-                        collaborative or solo work in the city. There's also a house in Cambridge, UK available for
-                        employees to work from or stay at.
+                        We have a dedicated <Link to="/handbook/people/hogpatch">coworking space</Link> in San Francisco
+                        (SF) where you'll often find YC founders/members and some of our team working together. In
+                        London, we have a house where you can both work and relax, giving you options for collaborative
+                        or solo work in the city. There's also a house in Cambridge, UK available for employees to work
+                        from or stay at.
                     </p>
                 </div>
             </div>

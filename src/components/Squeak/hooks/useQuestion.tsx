@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import useSWR from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
@@ -44,7 +44,7 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                     select: ['id'],
                 },
                 profile: {
-                    select: ['id', 'firstName', 'lastName', 'color', 'reputation'],
+                    select: ['id', 'firstName', 'lastName', 'color', 'reputation', 'startDate'],
                     populate: {
                         avatar: {
                             select: ['id', 'url'],
@@ -52,7 +52,7 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                         ...(isModerator
                             ? {
                                   user: {
-                                      fields: ['distinctId', 'email'],
+                                      fields: ['distinctId', 'email', 'blocked'],
                                   },
                               }
                             : null),
@@ -99,13 +99,24 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                                 teams: {
                                     fields: ['id'],
                                 },
+                                ...(isModerator
+                                    ? {
+                                          user: {
+                                              fields: ['blocked'],
+                                          },
+                                      }
+                                    : null),
                             },
                         },
                     },
                 },
                 topics: true,
-                pinnedTopics: true,
                 slugs: true,
+                forumTopic: {
+                    fields: ['label', 'slug', 'icon', 'solutionsEnabled', 'aiRepliesEnabled'],
+                    populate: { allowedTags: { fields: ['label', 'slug'] } },
+                },
+                forumTags: { fields: ['label', 'slug'] },
             },
         },
         {
@@ -249,6 +260,19 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         const profileID = user?.profile?.id
         if (!profileID) return
 
+        // A second click on the same button takes the vote back, so the event says which of the two it was.
+        const votedReply = questionData?.attributes.replies?.data?.find((r) => r.id === replyId)
+        const undo = (
+            type === 'up' ? votedReply?.attributes.upvoteProfiles?.data : votedReply?.attributes.downvoteProfiles?.data
+        )?.some((p) => p.id === profileID)
+
+        posthog?.capture('squeak vote reply start', {
+            questionId: questionID,
+            replyId,
+            type,
+            undo: !!undo,
+        })
+
         if (questionData) {
             const profileRef = { id: profileID }
             const replies = questionData.attributes.replies?.data || []
@@ -292,15 +316,35 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
         try {
             const jwt = await getJwt()
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyId}/${type}`, {
+            const voteRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyId}/${type}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${jwt}`,
                 },
             })
+
+            if (!voteRes.ok) {
+                throw new Error('Failed to vote on reply')
+            }
+
             await mutate()
-        } catch {
+
+            posthog?.capture('squeak vote reply', {
+                questionId: questionID,
+                replyId,
+                type,
+                undo: !!undo,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.voteReply',
+                questionId: questionID,
+                replyId,
+                type,
+                error: JSON.stringify(error),
+            })
+
             await mutate()
         }
     }
@@ -497,78 +541,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        if (questionData) {
-            const currentTopics = questionData.attributes.topics?.data || []
-            mutate(
-                {
-                    ...questionData,
-                    attributes: {
-                        ...questionData.attributes,
-                        topics: { data: [...currentTopics, topic] },
-                    },
-                },
-                false
-            )
-        }
-
-        try {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    data: {
-                        topics: {
-                            connect: [topic.id],
-                        },
-                    },
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${await getJwt()}`,
-                },
-            })
-            await mutate()
-        } catch {
-            await mutate()
-        }
-    }
-
-    const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        if (questionData) {
-            const currentTopics = questionData.attributes.topics?.data || []
-            mutate(
-                {
-                    ...questionData,
-                    attributes: {
-                        ...questionData.attributes,
-                        topics: { data: currentTopics.filter((t) => t.id !== topic.id) },
-                    },
-                },
-                false
-            )
-        }
-
-        try {
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    data: {
-                        topics: {
-                            disconnect: [topic.id],
-                        },
-                    },
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${await getJwt()}`,
-                },
-            })
-            await mutate()
-        } catch {
-            await mutate()
-        }
-    }
-
     const archive = async (shouldArchive: boolean) => {
         if (questionData) {
             mutate(
@@ -595,26 +567,6 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    const pinTopics = async (topicIDs: number[]) => {
-        if (!topicIDs) return
-        const body = JSON.stringify({
-            data: {
-                pinnedTopics: topicIDs,
-            },
-        })
-
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-            method: 'PUT',
-            body,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
-
-        mutate()
-    }
-
     return {
         question: questionData,
         reply,
@@ -625,10 +577,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         handleResolve,
         handleReplyDelete,
         voteReply,
-        addTopic,
-        removeTopic,
         archive,
-        pinTopics,
         mutate,
     }
 }

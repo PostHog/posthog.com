@@ -1,0 +1,86 @@
+---
+title: Steer Self-driving agents
+sidebarTitle: Steering
+sidebar: Docs
+showTitle: true
+---
+
+Use steering instructions to tell Self-driving agents what matters to your project and how to approach their work. Set shared project instructions for every agent, then add guidance for research agents, implementation agents, or scouts.
+
+## Add instructions for an agent role
+
+1. Open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings) in the project you want to configure.
+2. Find **Steering**, below **Autonomy**.
+3. Choose **Research**, **Implementation**, or **Scouts**.
+4. Write your instructions in plain text or Markdown, then select **Save**.
+
+You must be a project admin to save instructions. Each role has its own field, with a limit of 20,000 characters. Saving one role keeps the other roles' instructions unchanged.
+
+| Role               | What these agents do                                                                                        | What to put in their instructions                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Research**       | Investigate signals, find root causes, assess impact and priority, and recommend what to do next.           | Evidence to check, how to judge impact, and what makes a finding worth acting on.   |
+| **Implementation** | Turn reports into code changes, run checks, open pull requests, and address review feedback.                | Code conventions, validation steps, and pull request expectations.                  |
+| **Scouts**         | Explore product data and connected sources, find problems and opportunities, and create signals or reports. | Areas to explore, customers or environments to exclude, and what deserves a report. |
+
+Switching tabs keeps unsaved drafts while the editor stays open. Save each role you change. **Discard changes** restores that role's saved instructions.
+
+## Share instructions across agents
+
+Select the **project instructions** link in the Steering section to open [**Settings > Agent instructions > Project instructions**](https://app.posthog.com/settings/environment-task-agent-instructions#task-agent-project-instructions). Put guidance that applies across roles there, such as your product's terminology, repository ownership, or coding conventions.
+
+All Self-driving agents receive project instructions, including research, implementation, scouts, and the agents that support them. Other eligible PostHog cloud tasks also use these shared instructions.
+
+A role's steering instructions supplement the project instructions. You don't need a special tag such as `<self-driving-research>`: selecting the **Research** tab assigns the instructions to research agents.
+
+Autonomous Self-driving runs don't use your personal [**My instructions**](https://app.posthog.com/settings/environment-task-agent-instructions#task-agent-my-instructions) setting.
+
+### Instructions for one scout
+
+The **Scouts** tab applies to every scout in the project. Each scout also keeps its own brief. Edit an [individual scout](/docs/self-driving/scouts) in [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) when the guidance should apply only to that scout.
+
+## Write useful instructions
+
+Describe the behavior you want and the evidence the agent should use. Keep shared rules in project instructions and put guidance for a particular stage in that role's tab.
+
+### Research example
+
+```text
+Check whether the behavior is intentional before recommending a fix. Use session recordings and event data to explain which users are affected. Prioritize failures that prevent signup or checkout over cosmetic issues.
+```
+
+### Implementation example
+
+```text
+Keep changes focused on the report's root cause. Follow the repository's existing conventions, add regression coverage for behavior changes, and include the validation results in the pull request description.
+```
+
+### Scouts example
+
+```text
+Focus on onboarding and activation. Exclude internal test accounts and demo environments from impact estimates. Group related symptoms into one finding and include evidence before recommending action.
+```
+
+Steering guides the agent's decisions. Use **Autonomy** to control automatic pull request generation and use the agent's access settings to control its tools.
+
+## Change or clear instructions
+
+Saved instructions apply when an agent starts or resumes. Saving instructions doesn't interrupt a running agent.
+
+To remove a role's instructions, clear its field and select **Save**. Agents in that role still receive the shared project instructions. Clearing the **Scouts** field also preserves each scout's individual brief.
+
+## Manage instructions through MCP
+
+An assistant connected to the [PostHog MCP server](/docs/model-context-protocol) can read and update steering instructions and shared project instructions for your current project.
+
+| Tool                                 | What it does                                                                                                                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `inbox-steering-instructions-get`    | Reads the **Research**, **Implementation**, and **Scouts** instructions. A role without instructions returns an empty string. |
+| `inbox-steering-instructions-update` | Saves instructions for one or more roles.                                                                                     |
+
+When you use `inbox-steering-instructions-update`:
+
+- You must be a project admin.
+- Send the full text for each role that you change. The tool replaces that role's instructions. It doesn't apply a diff.
+- Roles that you don't send keep their current instructions.
+- Send an empty string to clear a role.
+- Each role accepts up to 20,000 characters.

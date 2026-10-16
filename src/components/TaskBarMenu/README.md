@@ -16,7 +16,7 @@ The TaskBar menu system provides a desktop-style navigation experience that adap
 On mobile, the main navigation items are moved from the top-level menu bar into the logo menu dropdown. This consolidates navigation into a single menu button to save space.
 
 ```
-Desktop: [Logo Menu] [Products] [Pricing] [Docs] [Library] [Company]
+Desktop: [Logo Menu] [Products] [Tools] [Pricing] [Docs] [Community] [Company] [More]
 Mobile:  [Logo Menu ▼] (contains all navigation items)
 ```
 

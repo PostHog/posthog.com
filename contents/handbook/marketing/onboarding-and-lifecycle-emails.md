@@ -6,7 +6,7 @@ showTitle: true
 
 How PostHog's automated onboarding and lifecycle emails work in Customer.io, and what to do when you launch a new product. Aimed at product marketers. These are the patterns we use *today* — conventions, not hard rules. Build something new when a launch calls for it.
 
-> **Launching something, or want a second pair of eyes?** <TeamMember name="Joe Martin" photo /> owns customer comms — loop him in early.
+> **Launching something, or want a second pair of eyes?** <TeamMember name="Joe Black" photo /> owns customer comms — loop him in early.
 
 This is about *marketing* onboarding (emails new users get automatically), not the Sales/CS [onboarding program](/handbook/onboarding/onboarding-program). For the underlying email setup — topics, unsubscribes, sending addresses — see [email marketing](/handbook/marketing/email-comms).
 
@@ -77,7 +77,7 @@ Inside the onboarding emails is an email with a block that recommends each perso
 | `intent_primary_product` | "Primary Intent: [product]" | `"session_replay"` |
 | `intent_secondary_product` | "Secondary Intent: [product]" | `"feature_flags"` |
 
-The email's Liquid reads these to pick the person's top un-activated product (biased toward their primary, then secondary intent) and personalizes the bullets, **subject line, headline, CTA, and a closing "ask PostHog AI this" prompt** — all tied to that same product. The editable copy lives in aligned lists at the top of the snippet, which lives in the email in Customer.io (ask <TeamMember name="Joe Martin" photo /> for the current version).
+The email's Liquid reads these to pick the person's top un-activated product (biased toward their primary, then secondary intent) and personalizes the bullets, **subject line, headline, CTA, and a closing "ask PostHog AI this" prompt** — all tied to that same product. The editable copy lives in aligned lists at the top of the snippet, which lives in the email in Customer.io (ask <TeamMember name="Joe Black" photo /> for the current version).
 
 > **If you edit the Liquid:** variables are **per-block** (include the logic in every block/field that uses it — including the subject), and use **single quotes only** (code blocks HTML-encode double quotes and break Liquid).
 
@@ -102,7 +102,7 @@ Not every step applies to every launch, but this is the path of least surprise:
 3. **Add the product to the snippet** — its key, display name, app URL, and recommendation sentence to the aligned lists (keep them the same length and order), its `activated_[product]` check, and its PostHog AI question.
 4. **Test** against a profile with the new attributes set.
 
-It's fiddly and easy to get subtly wrong (misaligned lists, or a campaign that wasn't backfilled) — loop in <TeamMember name="Joe Martin" photo /> rather than guessing.
+It's fiddly and easy to get subtly wrong (misaligned lists, or a campaign that wasn't backfilled) — loop in <TeamMember name="Joe Black" photo /> rather than guessing.
 
 ## Rules of practice
 
@@ -114,4 +114,4 @@ It's fiddly and easy to get subtly wrong (misaligned lists, or a campaign that w
 - **Name things clearly**, and check for an existing segment/campaign before creating a near-duplicate.
 - **Test before you launch.**
 
-These are conventions, not a cage — launches often need something the structure doesn't quite cover, and that's expected. For anything substantial (a new flow, a big change to the main campaign), talk to <TeamMember name="Joe Martin" photo /> first.
+These are conventions, not a cage — launches often need something the structure doesn't quite cover, and that's expected. For anything substantial (a new flow, a big change to the main campaign), talk to <TeamMember name="Joe Black" photo /> first.

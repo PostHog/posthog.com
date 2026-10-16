@@ -28,7 +28,7 @@ This creates version 1 of your prompt. Each subsequent edit creates a new immuta
 
 ### Markdown preview
 
-When viewing a prompt, markdown rendering is enabled by default, formatting your prompt text with headings, lists, bold, and other markdown elements. Click the markdown icon next to the **Prompt** label to toggle it off and view plain text. When editing a prompt, the view switches to plain text automatically.
+When viewing a prompt, markdown rendering is enabled by default, formatting your prompt text with headings, lists, bold, and other markdown elements. Click the markdown icon next to the **Prompt** label to toggle it off and view plain text. PostHog remembers your choice and applies it to every prompt you open. When editing a prompt, the view switches to plain text automatically.
 
 ### Prompt naming rules
 
@@ -40,16 +40,17 @@ When viewing a prompt, markdown rendering is enabled by default, formatting your
 
 You can also manage prompts through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
 
-The MCP server provides six prompt management tools:
+The MCP server provides seven prompt management tools:
 
 | Tool | Description |
 |------|-------------|
-| `prompt-list` | List all team prompts with optional name filtering |
-| `prompt-get` | Get a prompt by name, including full content, optionally by version or label |
-| `prompt-create` | Create a new prompt with a unique name and content |
-| `prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
-| `prompt-label-set` | Point a label at a version, creating the label or moving it from another version |
-| `prompt-label-delete` | Remove a label from a prompt |
+| `llma-prompt-list` | List all team prompts with optional name filtering |
+| `llma-prompt-get` | Get a prompt by name, including full content, optionally by version or label |
+| `llma-prompt-create` | Create a new prompt with a unique name and content |
+| `llma-prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
+| `llma-prompt-duplicate` | Copy a prompt's latest version to a new prompt under a new name, for forking or renaming |
+| `llma-prompt-label-set` | Point a label at a version, creating the label or moving it from another version |
+| `llma-prompt-label-delete` | Remove a label from a prompt |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -82,7 +83,7 @@ Every prompt change creates a new immutable version. Previous versions are prese
 3. Click **Publish** — the button shows the number the new version will get, for example **Publish v4**
 4. Review the diff of your changes, optionally add a note describing what changed, and confirm
 
-The note appears alongside the version in the **Version history** sidebar, so you can scan past changes without opening diffs. It can also be set programmatically via the `version_description` field on the publish API and the MCP `prompt-update` tool.
+The note appears alongside the version in the **Version history** sidebar, so you can scan past changes without opening diffs. It can also be set programmatically via the `version_description` field on the publish API and the MCP `llma-prompt-update` tool.
 
 If someone else published a new version while you were editing, publishing fails with a warning. Your edits are preserved in the editor — review them against the new latest version and publish again.
 
@@ -112,6 +113,25 @@ Unchanged regions are automatically collapsed in the diff view. Click **Compare 
 ### Archive a prompt
 
 Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it. Archiving also removes the prompt's labels.
+
+### Restore an archived prompt
+
+Archived prompts stay in your project. To see them, turn on **Show archived** on the prompts list. Each archived prompt appears once, at its most recent version.
+
+Click **Restore** to bring a prompt back. All of its versions come back with the same numbers, so code that fetches by name or by version works again. Labels are not restored: set them again on the versions you want to release.
+
+Restoring fails in these cases:
+
+- An active prompt with the same name exists. Names are immutable, so the archived prompt can't be restored while the new one exists. Archiving the new one does not help: both would then share version numbers and neither could be restored. Keep the active prompt, or create a new prompt with the archived content.
+- The name was archived more than once and the archived versions overlap. Create a new prompt instead.
+- The latest archived version references a prompt that is still archived, or references a label that no longer exists. Restore the referenced prompt first, and if the reference follows a label, set that label again before restoring the referencing prompt.
+
+With the API, list archived prompts with `?archived=true` and restore one with a `POST` request:
+
+```bash
+curl -X POST "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/unarchive/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY"
+```
 
 ## Labels
 
@@ -183,13 +203,54 @@ curl -X PUT "https://us.posthog.com/api/environments/:project_id/llm_prompts/nam
     -d '{"version": 3}'
 ```
 
-Remove a label with a `DELETE` request to the same URL. You can also manage labels through the MCP tools (`prompt-label-set`, `prompt-label-delete`).
+Remove a label with a `DELETE` request to the same URL. You can also manage labels through the MCP tools (`llma-prompt-label-set`, `llma-prompt-label-delete`).
 
 ### How label changes propagate
 
 Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
 
-If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version. The SDKs log a warning when this happens on a single fetch, and a bulk fetch by label with `get_all` / `getAll` fails with an error.
+
+## Prompt references (partials)
+
+Share common content across prompts instead of repeating it. Define a block once as its own prompt, then reference it from other prompts. When your app fetches a prompt, PostHog replaces each reference with the referenced prompt's content and returns one assembled prompt, so your code doesn't change.
+
+This is useful for content every prompt needs, like guardrails, tone guidelines, or output format instructions: edit the shared prompt once and every prompt that references it picks up the change.
+
+### Referencing another prompt
+
+A reference is a tag in the prompt text:
+
+```text
+You are a support assistant.
+
+@@@prompt:name=guardrails|label=production@@@
+
+Answer the question from {{user_name}}.
+```
+
+Every reference names the prompt to include and how to resolve it:
+
+- `@@@prompt:name=guardrails|label=production@@@` follows the label. Moving the `production` label on `guardrails` updates every prompt that references it on the next fetch, without publishing new versions of those prompts.
+- `@@@prompt:name=guardrails|version=3@@@` pins version 3 forever.
+
+In the editor, click **Insert reference** to pick a prompt and a label or version instead of typing the tag. References display as clickable chips under the content, and **Show resolved** shows the assembled content exactly as a fetch returns it.
+
+### How references resolve
+
+Resolution happens on the PostHog API at fetch time:
+
+- The SDK receives one assembled prompt with each tag replaced by the referenced content. No SDK changes are needed.
+- The response includes `resolved_references`: the exact versions that were spliced in. The same information is recorded on the `$llm_prompt_fetched` event, so you can trace which shared content each call actually used.
+- Pass `resolve=false` to get the raw text with the tags, for example for exporting. Resolution applies to full content only: `content=preview` and `content=none` responses show raw tag text in previews and outlines.
+- If a referenced prompt can't be resolved, the fetch fails with an error naming it rather than returning a prompt with missing content.
+
+### Rules and limits
+
+- A referenced prompt must exist, with the named label or version, when you publish. References go one level deep: a prompt that contains references can't itself be referenced.
+- References only work in plain-text prompts. A prompt whose content is JSON can't contain a reference, and a JSON prompt can't be referenced.
+- A prompt can reference up to 20 other prompts, and the assembled content counts toward the 1 MB prompt size limit.
+- A prompt that others reference can't be archived, and a label that references follow can't be deleted or moved to a version that would break resolution. The error lists the referencing prompts.
 
 ## Configuration
 
@@ -198,6 +259,8 @@ A prompt version can store a `config`: a JSON object with model parameters or an
 Config is versioned together with the prompt content. Publishing a config change creates a new version, moving a label releases it, and rolling a label back rolls the config back too. You can publish a version that changes only the config, so tuning a parameter doesn't require touching the prompt text.
 
 Don't store secrets in the config. It's returned to anyone who can read the prompt.
+
+The [playground](/docs/ai-observability/playground#saving-and-loading) uses the config too. Saving a playground setup to a prompt stores the model, parameters, tools, and messages under keys like `model`, `temperature`, and `messages`, and loading the prompt restores them. A playground save replaces only those keys and keeps any others you wrote through the API. If your app reads the config, expect these keys on prompts saved from the playground.
 
 ### In the app
 
@@ -229,7 +292,7 @@ Three things to know about publishing:
 - Send `"config": null` to remove it.
 - You can send `config` on its own, without `prompt` or `edits`. The prompt content carries forward unchanged.
 
-The MCP `prompt-create` and `prompt-update` tools accept `config` the same way.
+The MCP `llma-prompt-create` and `llma-prompt-update` tools accept `config` the same way.
 
 ### In your code
 
@@ -387,6 +450,46 @@ const config = result.config ?? {}
 // ... your OpenAI/Anthropic call here
 ```
 
+### Fetching all prompts in one request
+
+If your app uses many prompts, fetch them all in one request instead of one request per prompt. Each fetched prompt is stored in the cache, so later `get()` calls are served from cache until the TTL expires:
+
+<MultiLanguage>
+
+```python
+# One request loads every prompt the 'production' label points to
+prod_prompts = prompts.get_all(label='production')
+
+# Served from cache, no extra request
+result = prompts.get('support-system-prompt', with_metadata=True, label='production')
+
+# Without a label, one request loads the latest version of every prompt
+all_prompts = prompts.get_all()
+
+# Served from cache, no extra request
+latest = prompts.get('support-system-prompt', with_metadata=True)
+```
+
+```typescript
+// One request loads every prompt the 'production' label points to
+const prodPrompts = await prompts.getAll({ label: 'production' })
+
+// Served from cache, no extra request
+const result = await prompts.get('support-system-prompt', { label: 'production' })
+
+// Without a label, one request loads the latest version of every prompt
+const allPrompts = await prompts.getAll()
+
+// Served from cache, no extra request
+const latest = await prompts.get('support-system-prompt')
+```
+
+</MultiLanguage>
+
+With a label, the result maps each prompt name to the version the label points to, and prompts that don't carry the label are not included. On a self-hosted PostHog instance that predates label support on the list endpoint, a labeled call fails with an error instead of returning latest versions.
+
+Without a label, every prompt is included at its latest version, the same version a plain `get(name)` returns. This includes prompts whose latest version has never been released through a label.
+
 ## Caching
 
 Prompts are cached on the SDK side to minimize latency and API calls:
@@ -394,8 +497,10 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Default TTL**: 5 minutes (300 seconds)
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
+- **Refetch cooldown**: After a failed refetch, the stale value is served for 60 seconds before the SDK tries the network again. When the server sends a `Retry-After` header, the SDK waits that long instead, up to 1 hour
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
 - **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
+- **Bulk warm-up**: `get_all` (Python) and `getAll` (JavaScript) load every prompt in one request, at a label or at the latest version, and fill the cache for later fetches
 
 ## Linking prompts to traces
 
@@ -432,6 +537,17 @@ Once linked, you can:
 - View related traces from the prompt detail page
 - See which specific version was used in each trace
 - Analyze which prompt versions perform best
+
+## Prompt usage
+
+Every SDK fetch of a prompt by name captures a `$llm_prompt_fetched` event. The **Usage** tab on a prompt shows these events in two views:
+
+- **Trend**: a graph of prompt fetches over time
+- **Log**: the individual fetch events, including the version each fetch resolved to
+
+Both views can show fetches of the selected version only, or of all versions of the prompt. Use this to check whether a version is still being fetched, for example before you move a label or archive the prompt.
+
+Bulk fetches with `get_all` / `getAll` capture one `$llm_prompt_fetched` event per request, with the prompt count and label instead of a prompt name. These fetches do not appear on any prompt's **Usage** tab, so if your app loads prompts in bulk, an empty usage view does not mean the prompt is unused.
 
 ## Limits
 

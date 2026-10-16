@@ -15,6 +15,8 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) and [reports](/docs/self-driving/reports) the rest of the loop can act on.
 
+See [task environment detection](/docs/tasks/agent-environment) for the variables available to code and agent instructions in a scout's cloud sandbox.
+
 ## How a scout works
 
 A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
@@ -26,6 +28,8 @@ A scout runs on a schedule. Each run, it looks at one slice of your data, decide
 | **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric). |
 
 For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
+
+Those three are about *what* a scout files, not where the output ends up. Reports and signals land in your [inbox](/docs/self-driving/inbox) by default, and any scout can also send what it files to a Slack channel or a direct message – see [sending a scout's output to Slack](#sending-a-scouts-output-to-slack).
 
 A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
@@ -48,7 +52,15 @@ Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open th
 | **Tags** | Group scouts so you can filter the fleet list by them. |
 | **Slack destination** | Send this scout's output to a Slack channel or a direct message. See [sending a scout's output to Slack](#sending-a-scouts-output-to-slack). |
 | **MCP servers** | Which of your team's shared MCP servers this scout can use, on top of the PostHog MCP it always has. |
+| **Repositories** | Repositories from your connected GitHub account that the scout's sandbox clones before each run, so a scout that reasons about code can read the tree and run its checks. Read-only, up to 10 per scout. |
+| **Write access** | What the scout may change in your project, beyond its own reports and memory. Off by default. See [letting a scout maintain things](#letting-a-scout-maintain-things). |
 | **Delete scout** | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead. |
+
+### Instructions for all scouts
+
+A scout's settings and brief apply to that scout only. To give the same guidance to every scout in the project, a project admin can open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings), find **Steering**, and write instructions in the **Scouts** tab. The same section has separate tabs for **Research** and **Implementation** agents.
+
+These instructions supplement your shared project instructions and each scout's brief. New and resumed runs receive them. See [steer Self-driving agents](/docs/self-driving/steering) for details and examples.
 
 ## Setting a scout's schedule
 
@@ -122,6 +134,32 @@ To set it up, [connect your Slack workspace](/docs/self-driving/setup) once. The
 
 With a channel selected, you can also turn on **Post reports as a thread**. PostHog then posts a short lead message in the channel and splits the rest of the report by its headings into replies, so the channel stays readable and a long summary isn't cut off. To stop sending a scout's output to Slack, click the trash button next to the channel or member picker.
 
+## Letting a scout maintain things
+
+Every scout can read your project and write to the inbox. Some jobs need more than that. Dashboards go stale as instrumentation changes, alerts keep firing on a metric that moved, warehouse views stop materializing, and a Replay Vision scanner prompt names UI that has since been renamed. A scout that only describes those problems leaves the fix to you. A scout with **write access** can make the fix itself, in the same run it finds the problem.
+
+Open the scout's [settings](#configuring-a-scout) and expand **Write access**. Each switch grants one kind of object:
+
+| Group | Objects | What the scout can do |
+|---|---|---|
+| Analytics | Dashboards, insights, annotations | Create, update, and delete dashboards and their tiles, saved insights, and annotations |
+| Monitoring | Alerts | Create, update, and delete insight alerts, and post them to a connected Slack channel |
+| Scouts and skills | Skills | Create, update, and archive shared skills and their files |
+| Data | Warehouse views, warehouse tables | Create, update, run, and materialize views, refresh table schemas, and manage data quality checks |
+| Replay vision | Scanners | Create and update scanners and rate observations |
+
+Notebooks, reports, and the scout's own memory are always writable and don't need a grant.
+
+A few things to know before you turn a switch on:
+
+- **Write access covers the whole project.** A scout that can write dashboards can change or delete any dashboard in the project, not only the ones it created. Annotations include organization-wide ones that other projects see, and skills include the ones your other scouts run from. Grant only what the scout's job needs.
+- **Most deletes can be undone.** Deleted alerts and deleted data quality checks cannot.
+- **A dry run never holds the grant.** Switch a scout to [dry run](#dry-runs) and its writes stop, so you can preview a maintaining scout without it changing anything.
+- **Changes apply from the scout's next run**, and each grant is recorded in your project's activity log. So is every change the scout makes: look for edits by the scout's owner marked as made via MCP inside the run's time window.
+- **Only the scout's author or a project admin can grant write access.** The scout runs as its author, so it can never do more than that person could.
+
+A well-built maintaining scout keeps a curated list of what it looks after, applies small, verified fixes itself (re-running a stale view, retuning an alert it has back-tested, repairing a dead dashboard tile), caps how many changes it makes per run, and hands anything that drops data or changes meaning to a person with the exact change spelled out. Ask your agent to build one with the [authoring skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/SKILL.md), which carries the pattern.
+
 ## Every report is also an event
 
 When a scout emits a report, PostHog also captures a `$scout_report_emitted` event into your project (and a `$scout_report_edited` event when a scout later updates one). The event carries the scout's name, the report's title, summary, priority, and actionability, whether it surfaced in your inbox or was held back, and a `report_url` link straight to the report.
@@ -137,6 +175,8 @@ WHERE event = '$scout_report_emitted'
 ORDER BY timestamp DESC
 LIMIT 20
 ```
+
+A scout can also change its decision on a report after it files it. When new evidence changes its judgment, it can revise the report's actionability and priority. These edits run the automatic pull request check again, but they do not change the report's status in your inbox. When a fix has landed or is in progress, the scout can mark the report as already addressed. This stops PostHog from opening a duplicate pull request.
 
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
 
@@ -171,9 +211,26 @@ A few things to know:
 
 Like scout report events, these are captured with person processing off, so they never create person profiles or mix into your user analytics.
 
+### Compare experiment variants
+
+For a [Replay Vision](/docs/replay-vision) scanner that watches an experiment, create a **Variant analysis** scout from the scanner's scout templates. Each run compares the themes in session summaries across the experiment's variants, and records the comparison as structured output. The comparison shows in the scanner's **Variants** view. A scanner can have one variant analysis scout.
+
+The scout describes what users do in each variant. It does not choose a winner. Use your [experiment](/docs/experiments) metrics to decide which variant performs better.
+
 ## Built-in and custom scouts
 
 PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
+
+### Suggested for your project
+
+[**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) also shows scouts suggested for your project. PostHog picks them from your project's data and the scouts you already run. Each suggestion shows:
+
+- Why PostHog suggests it for your project.
+- Whether it turns on a built-in scout or starts a new draft, and a **Gap** tag when no scout in your fleet covers it.
+- How confident PostHog is in the suggestion.
+- How often the scout runs, and whether it is a dry run.
+
+Click a suggestion to see the draft in the create form before anything runs. From there you can enable a built-in scout or create the new one. Click **Refine with AI** to change the draft with an agent, or dismiss a suggestion so it does not come back. Click **Refresh** to scan your project again. To build a scout from scratch, see [make your own](/docs/self-driving/scout-examples#make-your-own).
 
 ## Custom scouts suggest improvements to themselves
 
@@ -198,5 +255,5 @@ Neither is the upgrade from the other and most projects run both. You turn them 
 Meet the scouts PostHog ships with, and steal ideas for your own.
 
 <CallToAction type="primary" to="/docs/self-driving/scout-examples">
-  Scout examples
+Scout examples
 </CallToAction>

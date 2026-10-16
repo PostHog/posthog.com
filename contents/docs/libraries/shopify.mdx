@@ -111,13 +111,23 @@ analytics.subscribe("checkout_completed", (event) => {
         for (
           void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
             u.people = u.people || [],
-            u.toString = function (t) {
-              var e = "posthog";
-              return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
-            },
-            u.people.toString = function () {
-              return u.toString(1) + ".people (stub)";
-            },
+            Object.defineProperty(u, "toString", {
+              configurable: !0,
+              enumerable: !0,
+              writable: !0,
+              value: function (t) {
+                var e = "posthog";
+                return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
+              },
+            }),
+            Object.defineProperty(u.people, "toString", {
+              configurable: !0,
+              enumerable: !0,
+              writable: !0,
+              value: function () {
+                return u.toString(1) + ".people (stub)";
+              },
+            }),
             o =
               "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(
                 " ",
@@ -134,6 +144,7 @@ analytics.subscribe("checkout_completed", (event) => {
   posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>",
     defaults: "<ph_posthog_js_defaults>",
+    disable_session_recording: true,
   });
 
   const checkout = event.data.checkout;
@@ -168,6 +179,9 @@ analytics.subscribe("checkout_completed", (event) => {
 In the above code, we capture the event with details like `userID`, `order_number`, and the product array with `product_id`, `price`, and more. This is then viewable in PostHog:
 
 <ProductScreenshot imageLight={eventLight} imageDark={eventDark} alt="Shopify events in PostHog" />
+
+> **Keep session recording turned off in the pixel**
+> The pixel runs in a blank sandbox page on your store's domain, so it shares the session with PostHog in your theme. If the pixel records, its blank page ends up in the same recording and the replay goes blank. Setting `disable_session_recording: true` in the pixel's `posthog.init` prevents this. The pixel still captures events, and your theme keeps recording.
 
 We recommend _only_ using a Shopify pixel for tracking conversions. If using a pixel for other events (like `collection_viewed` or `product_viewed`), you may see CORS errors when viewing those webpages. While it doesn't affect the functionality of the pixel, everything else can be done using PostHog installed globally on your site.
 

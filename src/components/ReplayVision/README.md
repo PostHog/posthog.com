@@ -25,7 +25,7 @@ observations slider. It renders in **two places**:
 - **`estimateReplayVisionPricing()`** is the pure math (React-free, like
   `Pricing/PricingCalculator/calculatorLogic.ts`): it converts credit tiers to observation tiers
   for the selected model (`up_to ÷ creditsPerObservation`, `unit price × creditsPerObservation`),
-  clamps observations to `[freeObservations, MAX_OBSERVATIONS]`, and walks the tiers with the
+  clamps observations to `[0, MAX_OBSERVATIONS]`, and walks the tiers with the
   shared `calculatePrice`. It also reports `credits` (clamped observations converted back), which
   is the denomination the shared `/pricing` calculator state uses.
 - **`MODELS`** (credits per observation for Standard/Premium/Lightweight) is product knowledge that

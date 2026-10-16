@@ -4,6 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import { SingleCodeBlock } from 'components/CodeBlock'
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
+import { InlineCommand } from 'components/PlatformInstall/InlineCommand'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import OSButton from 'components/OSButton'
 
@@ -83,6 +84,7 @@ export default function Action(): JSX.Element | null {
  */
 const VOLUME_SUBCOMMAND: Record<string, string> = {
     'ai-observability': 'ai-observability',
+    'feature-flags': 'feature-flags',
 }
 
 /** The wizard command for the volume the reader is in. */
@@ -103,12 +105,13 @@ export function Setup(): JSX.Element {
         posthog?.capture('pocket_guide_interaction', { kind: 'setup_command_copy', placement: 'front_matter' })
 
     return (
-        <CopyableCommand
-            className="my-[0.8em]"
-            command={wizard.displayCommand}
-            copyCommand={wizard.copyCommand}
-            onCopy={trackSetupCopy}
-        />
+        <div className="my-[0.8em]">
+            <InlineCommand
+                displayCommand={wizard.displayCommand}
+                copyCommand={wizard.copyCommand}
+                onCopy={trackSetupCopy}
+            />
+        </div>
     )
 }
 
@@ -157,7 +160,7 @@ export function ActionBar({
     const trackCtaClick = () => posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'pinned_bar' })
 
     return (
-        <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
+        <div className="flex items-center gap-3 px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">{title}</span>
             <OSButton asLink to={href} external variant="primary" size="sm" onClick={trackCtaClick}>
                 {cta.label}

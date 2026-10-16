@@ -92,7 +92,7 @@ Everyone takes a mandatory two weeks off over Christmas to relax.
 
 We raised a $15m Series B [a little ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investor Y Combinator. 
 
-We're now focused on achieving strong [product-market fit](/blog/product-market-fit-game) with our target segment in 2021. 
+We're now focused on achieving strong [product-market fit](/founders/product-market-fit-game) with our target segment in 2021. 
 
 Our team had grown to 25 people in 10 countries. 
 

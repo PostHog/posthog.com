@@ -7,4 +7,5 @@ export const internalToolsNav = [
     { name: 'Community directory', url: '/community/directory' },
     { name: 'HogWatch 3000', url: '/hogwatch' },
     { name: 'Image annotation', url: '/image-annotator' },
+    { name: 'QR mogging', url: 'https://qr-mogging.hosthog.dev' },
 ]

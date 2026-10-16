@@ -59,6 +59,7 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
   - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
     - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
  - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
+ - Only accounts that you [own in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics) count toward quota. Your assignment comes from Salesforce automatically, but the `AE Managed` tag does not. Add the `AE Managed` tag in Customer Analytics once you've aligned with team leadership.
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
@@ -96,17 +97,16 @@ These standards are likely to change as the TAE role evolves. Any changes will b
   - Getting people in who fit our ICP, ie. are easier for us to sell to
 - We aim for a 70/30 split between base/commission when calculating OTE by default.
 
-In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
-
 > This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
 **Variables**
 
-- Quota is based on the number of sales qualified opportunities you generate - basically when an account moves into the Opportunity stage in SFDC
+- Quota is based on the number of sales qualified opportunities you generate - basically when an account is moved into the initial Opportunity stage in SFDC.
+- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+- After your ramp period, the 30% commission portion of your OTE will be based on 9 sales-qualified opportunities per quarter per representative, which breaks down to 3 sales-qualified opportunities per month per representative. 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
 - Commission is paid out quarterly.
-- There is no guaranteed commission during ramp, as the ramp period for BDRs is much shorter than for TAMs/TAEs. 
 
 ## Team lead quota
 

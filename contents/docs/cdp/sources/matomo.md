@@ -9,12 +9,6 @@ availability:
 sourceId: Matomo
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Connect your Matomo instance to pull web analytics data into the PostHog data warehouse. Works with both Matomo Cloud and self-hosted instances.
 
 ## Adding a data source
@@ -30,21 +24,30 @@ Once the syncs are complete, you can query your Matomo data in PostHog.
 
 ## Available tables
 
-| Table             | Description                                               | Sync method |
-| ----------------- | --------------------------------------------------------- | ----------- |
-| `visits`          | Raw visit log with visitor details, actions, and metadata | Incremental |
-| `visits_summary`  | Per-day aggregate visit statistics                        | Incremental |
-| `actions_summary` | Per-day aggregate action statistics                       | Incremental |
-| `referrers`       | Per-day referrer breakdown                                | Incremental |
-| `countries`       | Per-day visitor country breakdown                         | Incremental |
+| Table              | Description                                               | Sync method  |
+| ------------------ | --------------------------------------------------------- | ------------ |
+| `visits`           | Raw visit log with visitor details, actions, and metadata | Incremental  |
+| `visits_summary`   | Per-day aggregate visit statistics                        | Incremental  |
+| `actions_summary`  | Per-day aggregate action statistics                       | Incremental  |
+| `referrers`        | Per-day referrer breakdown                                | Incremental  |
+| `countries`        | Per-day visitor country breakdown                         | Incremental  |
+| `pages`            | Per-day page URL breakdown                                | Incremental  |
+| `goals_summary`    | Per-day aggregate goal conversion metrics                 | Incremental  |
+| `goals`            | Goal definitions lookup table                             | Full refresh |
+| `event_categories` | Per-day event breakdown by category                       | Incremental  |
+| `event_actions`    | Per-day event breakdown by action                         | Incremental  |
+| `event_names`      | Per-day event breakdown by name                           | Incremental  |
 
 **Incremental** tables sync only new or updated records on each run.
 
+**Full refresh** tables are re-synced entirely on each run.
+
 ## Sync details
 
-- The first sync backfills up to 365 days of history for all tables.
+- The first sync backfills up to 365 days of history for all date-based tables.
 - The `visits` table uses `serverTimestamp` as its incremental cursor. Visits newer than one hour are deferred to the next sync to ensure their action lists are complete before storing.
-- Aggregate report tables (`visits_summary`, `actions_summary`, `referrers`, `countries`) walk one day at a time and re-pull a 3-day trailing window on incremental runs to account for late archiving. Records are merged on `_date` (and `label` where applicable).
+- Aggregate report tables (`visits_summary`, `actions_summary`, `referrers`, `countries`, `pages`, `goals_summary`, `event_categories`, `event_actions`, `event_names`) walk one day at a time and re-pull a 3-day trailing window on incremental runs to account for late archiving. Records are merged on `_date` (and `label` where applicable).
+- The `goals` table is a small lookup table containing goal definitions. It has no date dimension and is fully refreshed on each sync.
 
 ## Configuration
 

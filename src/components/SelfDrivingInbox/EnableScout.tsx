@@ -23,7 +23,7 @@ export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 
         })
 
     return (
-        <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
+        <div className="flex items-center gap-3 px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">
                 <span className="font-mono text-[13px] text-primary">{scout?.name || templateTitle}</span>
             </span>

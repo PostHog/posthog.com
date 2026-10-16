@@ -15,7 +15,7 @@ This guide is relevant to users wanting to migrate both:
 
 ## Requirements
 
-1. An existing project, either on PostHog Cloud or on a self-hosted instance running at least `1.30.0`. For upgrade instructions, take a look at [this guide](/docs/runbook/upgrading-posthog).
+1. An existing project, either on PostHog Cloud or on a self-hosted instance running at least `1.30.0`. For upgrade instructions, take a look at [this guide](/docs/self-host#upgrading).
 2. A [new PostHog Cloud project](https://us.posthog.com/signup) hosted in the region of your choice.
 
 ## Approach
@@ -55,7 +55,7 @@ For more information on the options see the [migrate metadata repo's readme](htt
 
 ## Migrate your events to Cloud
 
-Before you start, transformations and filtering apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
+Before you start, disable transformations and filtering apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
 
 > For more details about historical migrations, see our [migration docs](/docs/migrate).
 

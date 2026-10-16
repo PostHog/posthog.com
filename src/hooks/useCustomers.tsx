@@ -29,6 +29,7 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
+import JunoLogo from '../components/CustomerLogos/JunoLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -47,6 +48,8 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
+import RunableLogo from '../images/customers/runable-light.svg'
+import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
@@ -65,6 +68,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
 
 export type CustomerLogo =
     | React.ComponentType<{ className?: string }>
@@ -96,6 +100,7 @@ export interface Customer {
             quotes?: string[]
         }
     >
+    yc?: string
     featured: boolean
     hasCaseStudy: boolean // Now always populated dynamically
 }
@@ -123,6 +128,8 @@ interface BaseCustomer {
             quotes?: string[]
         }
     >
+    // YC batch, eg 'W20'. Only set when verified on ycombinator.com/companies
+    yc?: string
     featured: boolean
 }
 
@@ -131,7 +138,7 @@ interface BaseCustomer {
 const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     '4dayweek': {
         name: '4DayWeek',
-        toolsUsed: ['experiments', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'experiments'],
         industries: ['Recruitment'],
         users: ['Marketing', 'Leadership', 'Founders'],
         notes: 'Job board',
@@ -156,7 +163,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     '11x': {
         name: '11x',
-        toolsUsed: ['experiments', 'product_analytics', 'ai_observability', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
@@ -204,8 +220,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     airbus: {
         name: 'Airbus',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'logs',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
@@ -214,6 +240,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     assemblyai: {
         name: 'AssemblyAI',
+        yc: 'S17',
         toolsUsed: ['experiments', 'product_analytics'],
         industries: ['API Platform'],
         users: ['Leadership', 'Marketing', 'Engineering'],
@@ -241,13 +268,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     arena: {
         name: 'Arena',
         toolsUsed: [
-            'web_analytics',
             'product_analytics',
-            'marketing_analytics',
+            'web_analytics',
             'feature_flags',
             'experiments',
-            'error_tracking',
             'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
             'posthog_ai',
         ],
         industries: ['LLMs'],
@@ -283,7 +311,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
-        toolsUsed: ['experiments', 'product_analytics'],
+        yc: 'W22',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'ai_observability'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Marketing'],
         notes: 'Collaborative DevOps',
@@ -305,7 +334,20 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     carvertical: {
         name: 'carVertical',
-        toolsUsed: ['feature_flags', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['Automotive'],
         users: ['Growth', 'Engineering', 'Product'],
         notes: 'Vehicle history reports',
@@ -328,7 +370,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     clerk: {
         name: 'Clerk',
-        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics', 'cdp', 'data_warehouse', 'posthog_ai'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         // users: ['Product', 'Engineering'],
         notes: 'Identity and access management',
@@ -338,7 +389,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     cloudpeek: {
         name: 'CloudPeek',
-        toolsUsed: ['logs', 'error_tracking', 'ai_observability'],
+        toolsUsed: ['product_analytics', 'error_tracking', 'logs', 'ai_observability', 'workflows_emails'],
         industries: ['Cybersecurity'],
         users: ['Engineering'],
         notes: 'Agentic AI platform for cybersecurity',
@@ -364,9 +415,21 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    conductor: {
+        name: 'Conductor',
+        toolsUsed: ['product_analytics', 'feature_flags', 'cdp'],
+        industries: ['Devtool'],
+        notes: 'Cloud coding agents',
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_dark_b51da32b43.svg',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/conductor_wordmark_light_9d1162725f.svg',
+        },
+        featured: true,
+        height: 6,
+    },
     contra: {
         name: 'Contra',
-        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'cdp'],
         industries: ['SaaS'],
         users: ['Product', 'Engineering'],
         notes: 'Creative freelance marketplace',
@@ -388,7 +451,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     convex: {
         name: 'Convex',
-        toolsUsed: [],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         users: [],
         notes: 'Backend web app platform',
@@ -398,7 +469,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     creatify: {
         name: 'Creatify',
-        toolsUsed: ['web_analytics', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI video editor',
@@ -424,7 +505,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     croissant: {
         name: 'Croissant',
-        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'surveys', 'workflows_emails'],
         industries: ['SaaS'],
         users: ['Growth', 'Product', 'Marketing'],
         notes: 'Workspace finder',
@@ -450,7 +531,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     counterpress: {
         name: 'CounterPress',
-        toolsUsed: ['endpoints', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'error_tracking', 'endpoints'],
         industries: ['SaaS', 'Publishing'],
         users: ['Engineering', 'Product'],
         notes: 'Publishing platform for sports journalism',
@@ -479,7 +560,20 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'surveys'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Marketing', 'Growth', 'Engineering'],
         notes: 'AI voice generator',
@@ -505,7 +599,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
-        toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
+        yc: 'S21',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI', 'Search'],
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
@@ -525,7 +630,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     fastr: {
         name: 'Fastr',
-        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'feature_flags', 'endpoints'],
         industries: ['E-commerce, MarTech'],
         users: ['Product', 'Marketing'],
         notes: 'A conversion rate optimization platform',
@@ -552,7 +657,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     fireworksai: {
         name: 'Fireworks AI',
-        toolsUsed: [],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         notes: 'AI inference platform',
         logo: FireworksAILogo,
@@ -605,15 +718,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     grantable: {
         name: 'Grantable',
         toolsUsed: [
-            'workflows_emails',
-            'feature_flags',
-            'session_replay',
-            'experiments',
             'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
             'surveys',
             'error_tracking',
             'ai_observability',
             'data_warehouse',
+            'workflows_emails',
         ],
         industries: ['SaaS'],
         users: ['Data', 'Product', 'Marketing'],
@@ -637,9 +750,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     kilocode: {
         name: 'KiloCode',
-        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        notes: 'Open source AI coding platform',
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
@@ -692,7 +815,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     greptile: {
         name: 'Greptile',
-        // toolsUsed: ['product_analytics'],
+        yc: 'W24',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS'],
         // users: ['Engineering', 'Product'],
         notes: 'AI code reviewer',
@@ -727,7 +859,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hasura: {
         name: 'Hasura',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Devtool'],
         users: ['Engineering', 'User Experience', 'Marketing'],
         notes: 'Open source GraphQL engine',
@@ -737,7 +869,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     headshotpro: {
         name: 'HeadshotPro',
-        toolsUsed: ['data_warehouse', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse'],
         industries: ['AI'],
         users: ['Growth', 'Engineering', 'Product'],
         notes: 'AI photo generator',
@@ -760,8 +892,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     heygen: {
         name: 'Heygen',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'ai_observability',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'AI video generator',
         logo: HeygenLogo,
@@ -770,7 +912,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
-        toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
+        yc: 'W24',
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
@@ -793,17 +936,29 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     jaxxon: {
         name: 'Jaxxon',
-        // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'error_tracking'],
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
-        featured: true,
+        featured: false,
         logo: JaxxonLogo,
         height: 12,
     },
     juicebox: {
         name: 'Juicebox',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'ai_observability'],
+        yc: 'S22',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
@@ -824,9 +979,39 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    juno: {
+        name: 'Juno',
+        toolsUsed: ['error_tracking', 'product_analytics'],
+        industries: ['Healthcare', 'AI'],
+        users: ['Engineering', 'Product'],
+        notes: 'AI health assistant for chronic illness',
+        featured: false,
+        logo: JunoLogo,
+        height: 10,
+        quotes: {
+            marshall_gould: {
+                name: 'Marshall Gould',
+                role: 'CEO',
+                image: {
+                    thumb: '/images/customers/marshall-gould.jpeg',
+                },
+                products: {
+                    self_driving:
+                        "It's incredible that these agents can run autonomously to identify these things. You wake up in the morning and there are PRs waiting for you. All you have to do is review and merge.",
+                },
+            },
+        },
+    },
     'mention-me': {
         name: 'Mention Me',
-        toolsUsed: ['funnels', 'session_replay'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'ai_observability',
+        ],
         industries: ['Marketing platform'],
         users: ['Product', 'Engineering', 'User Experience'],
         notes: 'Marketing referral campaigns',
@@ -857,9 +1042,28 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
+    },
     mintlify: {
         name: 'Mintlify',
-        toolsUsed: ['session_replay', 'api'],
+        yc: 'W22',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['SaaS', 'Devtool'],
         users: ['Leadership', 'Engineering', 'Product'],
         notes: 'Product and technical docs',
@@ -881,8 +1085,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     mistralai: {
         name: 'Mistral AI',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: ['product_analytics', 'feature_flags'],
         // users: [], // TODO: Add users
         notes: 'Open source LLMs',
         logo: MistralAILogo,
@@ -891,8 +1094,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     nationaldesignstudio: {
         name: 'National Design Studio',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: ['product_analytics', 'error_tracking'],
         // users: [], // TODO: Add users
         notes: 'Design studio of the US Government',
         logo: NationalDesignStudioLogo,
@@ -901,7 +1103,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     netdata: {
         name: 'Netdata',
-        toolsUsed: ['session_replay', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'cdp', 'data_warehouse'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering'],
         notes: 'Open source monitoring',
@@ -948,7 +1150,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     opensauced: {
         name: 'OpenSauced',
-        toolsUsed: ['product_analytics'],
+        toolsUsed: ['product_analytics', 'feature_flags'],
         industries: ['SaaS', 'Devtool'],
         users: ['Leadership', 'Investors', 'Founders', 'Marketing', 'Design', 'Engineering'],
         notes: 'Open source contribution tracker',
@@ -967,7 +1169,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     paper: {
         name: 'Paper',
-        toolsUsed: ['session_replay'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay', 'error_tracking', 'data_warehouse'],
         industries: ['SaaS'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Design tool',
@@ -1003,7 +1205,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
-        toolsUsed: ['product_analytics', 'funnels', 'session_replay', 'heatmaps'],
+        yc: 'W21',
+        toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Financial planning for SMBs, acquired by Brex',
@@ -1026,6 +1229,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     posthog: {
         name: 'PostHog',
+        yc: 'W20',
         toolsUsed: [
             'web_analytics',
             'product_analytics',
@@ -1048,7 +1252,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     purplewave: {
         name: 'Purple Wave',
-        toolsUsed: ['surveys'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'surveys',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['E-commerce'],
         users: ['Product'],
         notes: 'Heavy duty equipment marketplace',
@@ -1071,7 +1284,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     qred: {
         name: 'Qred',
-        toolsUsed: ['feature_flags', 'session_replay', 'experiments', 'product_analytics', 'cdp'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['Fintech'],
         users: ['Engineering', 'Product', 'Marketing'],
         notes: 'Business loans and financial services',
@@ -1101,7 +1323,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'session_replay',
             'surveys',
             'ai_observability',
-            'warehouse_sources',
+            'data_warehouse',
         ],
         industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
         users: ['Engineering'],
@@ -1127,7 +1349,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
-        toolsUsed: [], // TODO: Add toolsUsed
+        yc: 'W20',
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'The MacOS Spotlight that Apple should have built',
@@ -1137,7 +1360,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     rayfit: {
         name: 'RayFit',
-        toolsUsed: ['product_analytics', 'experiments', 'feature_flags', 'data_warehouse', 'posthog_ai'],
+        toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         industries: ['Fitness'],
         users: ['Product', 'Engineering'],
         notes: 'AI personal training app',
@@ -1163,16 +1386,71 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     railway: {
         name: 'Railway',
-        toolsUsed: [],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'cdp',
+            'data_warehouse',
+            'workflows_emails',
+            'posthog_ai',
+        ],
         industries: ['Devtool'],
         notes: 'Cloud infrastructure platform',
         logo: RailwayLogo,
         featured: true,
         height: 8,
     },
+    runable: {
+        name: 'Runable',
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'logs',
+            'ai_observability',
+            'data_warehouse',
+            'cdp',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Growth'],
+        notes: 'AI agent platform for small business owners',
+        featured: false,
+        logo: {
+            light: RunableLogo,
+            dark: RunableLogoDark,
+        },
+        height: 8,
+        quotes: {
+            ankit_kumar: {
+                // This is the author handle used in OSQuote
+                name: 'Ankit Kumar',
+                role: 'Software Development Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ankit_caa4201fc2.png',
+                },
+                quotes: [
+                    'All decisions are driven by PostHog metrics. It gives us the direction when something is failing or impacts a specific event that really helps us a lot.',
+                ],
+            },
+            eshaan_pawan: {
+                name: 'Eshaan Pawan',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Eshaan_dfad398910.png',
+                },
+                quotes: [
+                    "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
+                    'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
+    },
     rebtel: {
         name: 'Rebtel',
-        toolsUsed: ['product_analytics', 'experiments'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'feature_flags', 'experiments', 'cdp', 'data_warehouse'],
         industries: ['Telecom'],
         users: ['Data'],
         notes: 'International calling and messaging',
@@ -1192,7 +1470,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     researchgate: {
         name: 'ResearchGate',
-        toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+        ],
         industries: ['Science', 'Social network'],
         users: ['Growth', 'Engineering', 'Product', 'Marketing'],
         notes: "World's largest professional network for scientists",
@@ -1214,7 +1499,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     resend: {
         name: 'Resend',
-        // toolsUsed: ['product_analytics', 'experiments'],
+        yc: 'W23',
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         notes: 'Email delivery service',
         logo: ResendLogo,
         featured: true,
@@ -1222,7 +1516,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     significa: {
         name: 'Significa',
-        toolsUsed: ['web_analytics', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'web_analytics', 'session_replay'],
         industries: ['Agency'],
         users: ['Marketing'],
         notes: 'Digital agency',
@@ -1246,7 +1540,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     speakeasy: {
         name: 'Speakeasy',
-        toolsUsed: ['feature_flags', 'product_analytics', 'dashboards'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Developer Relations'],
         notes: 'API generator',
@@ -1268,7 +1570,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     squadsventures: {
         name: 'SquadS Ventures',
-        toolsUsed: ['product_analytics', 'session_replay', 'error_tracking'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'surveys', 'error_tracking'],
         notes: 'Venture funding for LatAm startups',
         logo: SquadSVenturesLogo,
         featured: false,
@@ -1290,7 +1592,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
-        toolsUsed: ['posthog_ai', 'experiments', 'product_analytics'],
+        yc: 'S20',
+        toolsUsed: [
+            'product_analytics',
+            'feature_flags',
+            'experiments',
+            'surveys',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         industries: ['Devtool'],
         users: ['Engineering', 'Growth', 'Marketing'],
         notes: 'Postgres in the cloud',
@@ -1317,7 +1629,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     suped: {
         name: 'Suped',
-        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'data_warehouse', 'workflows_emails'],
         industries: ['SaaS'],
         users: ['Leadership', 'Product', 'Engineering'],
         notes: 'Email authentication and deliverability platform',
@@ -1343,8 +1655,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     startengine: {
         name: 'StartEngine',
-        toolsUsed: [], // TODO: Add toolsUsed
-        // industries: [], // TODO: Add industries
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'ai_observability',
+            'posthog_ai',
+        ],
         // users: [], // TODO: Add users
         notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
@@ -1353,7 +1673,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     trust: {
         name: 'Trust',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'feature_flags'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Crypto wallet',
@@ -1363,7 +1683,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Most popular country with a King',
@@ -1373,7 +1693,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     vendasta: {
         name: 'Vendasta',
-        toolsUsed: ['experiments', 'cdp'],
+        toolsUsed: ['product_analytics', 'experiments', 'cdp'],
         industries: ['SaaS'],
         users: ['Product', 'Engineering'],
         notes: 'Channel partner platform',
@@ -1395,7 +1715,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     webshare: {
         name: 'Webshare',
-        toolsUsed: ['experiments', 'product_analytics', 'session_replay', 'feature_flags'],
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'error_tracking',
+            'cdp',
+            'data_warehouse',
+        ],
         industries: ['Devtool'],
         users: ['Marketing', 'Leadership', 'Customer Success'],
         notes: 'Proxy server',
@@ -1421,8 +1749,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wisprflow: {
         name: 'WisprFlow',
-        //toolsUsed: [''],
-        //industries: ['Devtool'],
+        toolsUsed: [
+            'product_analytics',
+            'web_analytics',
+            'session_replay',
+            'feature_flags',
+            'experiments',
+            'cdp',
+            'data_warehouse',
+            'posthog_ai',
+        ],
         // users: ['Marketing', 'Leadership', 'Customer Success'],
         notes: 'AI voice dictation',
         logo: WisprFlowLogo,
@@ -1431,7 +1767,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     wittyworks: {
         name: 'Witty Works',
-        toolsUsed: ['dashboards'],
+        toolsUsed: ['product_analytics'],
         industries: ['SaaS', 'Browser extension'],
         users: ['Marketing', 'Engineering'],
         notes: 'AI writing assistant',
@@ -1454,7 +1790,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ycombinator: {
         name: 'Y Combinator',
-        toolsUsed: ['experiments', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments'],
         industries: ['SaaS', 'Education'],
         users: ['Leadership', 'Engineering', 'Product'],
         notes: "World's premier startup accelerator",
@@ -1480,7 +1816,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['ai_observability', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'ai_observability'],
         industries: ['Recruitment'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',

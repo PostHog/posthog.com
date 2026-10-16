@@ -47,6 +47,7 @@ If you're inheriting an existing contact:
 - Review the [Sales → CSM Handover](/handbook/growth/sales/account-allocation#handing-over-customers) process.
 - Get introduced in the existing Slack/Teams channel or via email.
 - Coordinate with the previous owner for continuity.
+- Set your own [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship) rating on the account. Start at 2 — do not keep the rating the previous owner gave it.
 
 ### Cold (no established contact)
 

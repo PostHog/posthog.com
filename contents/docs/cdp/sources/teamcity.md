@@ -12,9 +12,6 @@ sourceId: Teamcity
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The JetBrains TeamCity connector syncs your CI/CD data - builds, test results, build problems, VCS changes, projects, and agents - into the PostHog Data warehouse, so you can analyze build duration, pass rates, and deployment frequency alongside your product data.
 

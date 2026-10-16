@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Link from 'components/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
+import { LabeledList, SECTION_H2 } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 
-/** Opens PostHog AI pre-filled (and auto-submitted) with the prompt. */
-const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
-
 const INTRO =
-    'Ask your AI agent to author scanners, scan a session, or read what Replay Vision found – without leaving your editor. Works in any MCP client via the PostHog MCP: Cursor, Claude Code, Codex, VS Code, and more. Already signed in? Click a prompt to try it.'
+    'Ask your AI agent to author scanners, scan a session, or read what Replay Vision found – without leaving your editor. Works in any MCP client via the PostHog MCP: Cursor, Claude Code, Codex, VS Code, and more.'
 
 // Detective hedgehog surveilling a wall of monitors – sits where Session
 // Replay's "AI prompts" section floats its hog.
@@ -100,7 +96,7 @@ const AIPromptsSection = ({ id }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">AI prompts</h2>
+            <h2 className={SECTION_H2}>AI prompts</h2>
             <p className="text-base text-secondary mb-4">{INTRO}</p>
             <ToggleGroup
                 title="View"
@@ -137,15 +133,7 @@ const AIPromptsSection = ({ id }: SectionComponentProps) => {
                                         </h3>
                                         <ul className="list-none pl-0 m-0 space-y-1 text-sm text-secondary italic leading-relaxed">
                                             {g.prompts.map((p) => (
-                                                <li key={p}>
-                                                    <Link
-                                                        to={maxPromptUrl(p)}
-                                                        externalNoIcon
-                                                        className="text-secondary hover:text-primary underline-offset-2 hover:underline"
-                                                    >
-                                                        &ldquo;{p}&rdquo;
-                                                    </Link>
-                                                </li>
+                                                <li key={p}>&ldquo;{p}&rdquo;</li>
                                             ))}
                                         </ul>
                                     </div>

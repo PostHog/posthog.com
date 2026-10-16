@@ -17,7 +17,6 @@ import {
     IconStack,
     IconCompass,
     IconPullRequest,
-    IconArrowRight,
     IconGraph,
     IconPieChart,
     IconToggle,
@@ -34,7 +33,7 @@ import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogHahaBizzniss, HedgehogTransformer } from '@posthog/brand/hoggies'
+import { HedgehogDaddAI, HedgehogHahaBizzniss } from '@posthog/brand/hoggies'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
 
@@ -152,12 +151,6 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
         copy: 'Build MCPs & skills with Speakeasy and get 50% off for 6 months.',
     },
     {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png',
-        alt: '$5,000 of Chroma credit',
-        title: '$5,000 of Chroma credit',
-        copy: "Chroma's search infra for AI is fast, serverless, and scalable.",
-    },
-    {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/598171862_7fff97b6_15e5_4ff8_8f7c_46148f81efa1_515ee89918.png',
         alt: '$5,000 of Depot credit',
         title: '$5,000 of Depot credit',
@@ -165,7 +158,7 @@ const perks: { image: string; alt: string; title: string; copy: string }[] = [
     },
 ]
 
-// The four things a self-driving product does for you, straight from the pitch.
+// The four things PostHog does for you, straight from the pitch.
 const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: string; copy: React.ReactNode }[] = [
     {
         Icon: IconStack,
@@ -227,19 +220,6 @@ const toolkit: {
 
 // Visible FAQ (JSX, with links). The plain-text version below feeds FAQPage structured data.
 const faqItems = [
-    {
-        trigger: 'What is a self-driving product?',
-        content: (
-            <p>
-                A product that improves itself without waiting to be prompted. PostHog watches how people use your
-                product, finds what's worth fixing, writes the code, and opens a pull request – all you do is hit merge.{' '}
-                <Link to="/self-driving" state={{ newWindow: true }} className="underline font-semibold">
-                    Learn more about self-driving
-                </Link>
-                .
-            </p>
-        ),
-    },
     {
         trigger: 'Can I use my credits on all PostHog products?',
         content: (
@@ -395,7 +375,7 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'How do I get the Incident.io/Speakeasy/Chroma/Depot discount?',
+        trigger: 'How do I get the Incident.io/Speakeasy/Depot discount?',
         content: (
             <p>
                 Once you're accepted into the PostHog for Startups program, we'll email you with details on how to get
@@ -428,10 +408,6 @@ const faqItems = [
 
 // Plain-text FAQ for schema.org FAQPage (buildProductStructuredData skips entries without an answer).
 const faqStructuredData = [
-    {
-        question: 'What is a self-driving product?',
-        answer: 'A product that improves itself without waiting to be prompted. PostHog watches how people use your product, finds what is worth fixing, writes the code, and opens a pull request – all you do is hit merge.',
-    },
     {
         question: 'Can I use my PostHog for Startups credits on all PostHog products?',
         answer: 'Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such as PostHog Desktop, the PostHog Slack app, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else, including AI observability and the context warehouse.',
@@ -474,12 +450,12 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
         <>
             <SEO
                 title="PostHog for Startups | $50K in credits for early-stage teams"
-                description="Get over $50,000 in PostHog credits for analytics, session replay, feature flags, and more, while you build a self-driving product. Plus merch and partner perks. Apply in 2 minutes."
+                description="Get over $50,000 in PostHog credit to build better products – analytics, session replay, feature flags, and more. Plus merch and partner perks. Apply in 2 minutes."
                 image="/images/og/default.png"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog for Startups',
                     description:
-                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams building self-driving products.',
+                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams.',
                     slug: 'startups',
                     faq: faqStructuredData,
                 })}
@@ -508,7 +484,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         {/* show is set explicitly because the scroll trigger's -15% rootMargin never
                             fires for a heading this close to the top of the pane. */}
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-                            {creditValue} in credits while you build a{' '}
+                            {creditValue} in PostHog credit to{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -517,7 +493,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                 delay={300}
                                 show
                             >
-                                self-driving product
+                                build better products
                             </RoughAnnotation>
                         </h1>
 
@@ -525,9 +501,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         <div className="flex flex-col items-start gap-6 @2xl/reader-content:flex-row @2xl/reader-content:gap-8">
                             <div className="min-w-0 @2xl/reader-content:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
-                                    PostHog finds what's worth fixing, writes the code, and opens the pull request. You
-                                    get credits for the whole platform – plus swag and partner perks perfect for anyone
-                                    building AI products.
+                                    PostHog ingests and stores your analytics, errors, replays, and business data so you
+                                    and your agents can query and act on it. You get credits for the whole platform –
+                                    plus swag and partner perks perfect for anyone building AI products.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {heroBullets.map((item) => (
@@ -552,8 +528,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </div>
 
                             <div className="w-full flex justify-center self-center @2xl/reader-content:w-auto @2xl/reader-content:flex-[0_0_240px] @4xl/reader-content:flex-[0_0_300px]">
-                                <HedgehogTransformer
-                                    title="A hedgehog mid-transformation into a robot, like your product about to become self-driving"
+                                <HedgehogDaddAI
+                                    variant="1"
+                                    title="A hedgehog lounging in heart-shaped sunglasses and a gold P chain"
                                     className="w-full max-w-[280px] @2xl/reader-content:max-w-none"
                                 />
                             </div>
@@ -561,9 +538,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </section>
                     <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
-                    <h3>
+                    <h2>
                         What you'll <Highlight>actually</Highlight> get
-                    </h3>
+                    </h2>
                     <p>
                         Credits are the headline, but the program comes with perks from partners we use ourselves.
                         Here's the full haul:
@@ -580,13 +557,14 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         ))}
                     </div>
 
-                    <h3>
-                        Build a <Highlight>self-driving product</Highlight> with PostHog
-                    </h3>
+                    <h2>
+                        How PostHog helps you <Highlight>build better products</Highlight>
+                    </h2>
                     <p>
                         Building products used to mean manually writing code, running analysis, diagnosing bugs, and
-                        rolling out changes across a bloated stack of tools. PostHog is the only platform that does it
-                        all for you autonomously while still keeping everything at your fingertips.
+                        rolling out changes across a bloated stack of tools. PostHog keeps all of that context in one
+                        platform and gives your agents what they need to diagnose problems, uncover opportunities, and
+                        ship fixes.
                     </p>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-8 gap-y-6 my-6">
                         {selfDrivingCapabilities.map(({ Icon, color, title, copy }) => (
@@ -599,20 +577,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </div>
                         ))}
                     </div>
-                    <p>
-                        <Link
-                            to="/self-driving"
-                            state={{ newWindow: true }}
-                            className="inline-flex items-center gap-1.5 font-semibold text-red dark:text-yellow"
-                        >
-                            See how self-driving works
-                            <IconArrowRight className="size-4" />
-                        </Link>
-                    </p>
-
-                    <h3>
+                    <h2>
                         How far does <Highlight>{creditValue}</Highlight> go?
-                    </h3>
+                    </h2>
                     <p>
                         A <em>very</em> long way. Here's what your credits are worth if you spent them all in one place,
                         but you can mix and match them across most PostHog products. The exceptions are AI tools such as
@@ -629,9 +596,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         ))}
                     </div>
 
-                    <h3>
+                    <h2>
                         Everything you (and our agents) <Highlight>can use</Highlight>
-                    </h3>
+                    </h2>
                     <p>
                         PostHog has over a dozen tools you can use however you want. Use any and all of them in our app,
                         via MCP, or in Slack.
@@ -677,9 +644,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         – and built for engineers, with 30k+ stars and 500+ contributors on GitHub.
                     </p>
 
-                    <h3>
+                    <h2>
                         Take <Highlight>their</Highlight> word for it
-                    </h3>
+                    </h2>
                     <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 my-6">
                         <div className="border border-primary rounded-md p-4 bg-primary">
                             <img src={YCombinatorLight} className="h-10" alt="Y Combinator" />
@@ -715,9 +682,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         </div>
                     </div>
 
-                    <h3>
+                    <h2>
                         How PostHog <Highlight>stacks up</Highlight>
-                    </h3>
+                    </h2>
                     <p>
                         More credits, fewer limits, and partner perks you won't find elsewhere – plus the only startup
                         program with free laptop stickers.
@@ -863,7 +830,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     >
                         <div className="grid @lg/reader-content:grid-cols-[1fr_220px] gap-6 items-center">
                             <div>
-                                <h3 className="mt-0 mb-2 text-2xl font-bold">Ready to build a self-driving product?</h3>
+                                <h3 className="mt-0 mb-2 text-2xl font-bold">Ready to build better products?</h3>
                                 <p className="mt-0 mb-4">
                                     Get {creditValue} in PostHog credits, exclusive merch, and partner perks worth
                                     $12,000+. Applying takes 2 minutes.
@@ -888,7 +855,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         </div>
                     </div>
 
-                    <h3>FAQ</h3>
+                    <h2>FAQ</h2>
                     <div className="not-prose mt-4">
                         <Accordion
                             type="multiple"

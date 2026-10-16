@@ -9,12 +9,6 @@ availability:
 sourceId: Svix
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. It has been tested against Svix's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Svix connector syncs your webhook infrastructure data — applications and event types — into PostHog.
 
 ## Adding a data source

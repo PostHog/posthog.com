@@ -15,6 +15,10 @@ export interface PocketGuideVolume {
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
+    /** Route where Pocket Guide touchpoints should open this volume. */
+    learnPath?: string
+    /** Count the front matter and primer while this volume consists of those two learning pages. */
+    countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
     /** Announced but unwritten – renders as a cover with a sash and no link. */
@@ -28,6 +32,16 @@ export interface PocketGuideVolume {
 export const FIRST_GUIDE_BOOK_ORDER = 2
 
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
+    {
+        id: 'product-analytics',
+        title: 'Product Analytics',
+        description: 'Record what people do in Twig, connect their activity, and build reports you can explain.',
+        token: 'blue',
+        volume: 5,
+        docsProduct: 'product-analytics',
+        learnPath: '/docs/product-analytics/learn/introduction',
+        countOrientationPages: true,
+    },
     {
         id: 'self-driving',
         title: 'Self-driving',
@@ -44,10 +58,11 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'purple',
         volume: 2,
         docsProduct: 'ai-observability',
+        learnPath: '/docs/ai-observability/learn',
     },
     {
-        id: 'context-warehouse',
-        title: 'Context Warehouse',
+        id: 'data-stack',
+        title: 'Data Stack',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',
@@ -55,18 +70,28 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     },
     {
         id: 'session-replay',
-        title: 'Session replay',
+        title: 'Session Replay',
         description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
         token: 'yellow',
         volume: 4,
         docsProduct: 'session-replay',
+        learnPath: '/docs/session-replay/learn',
+    },
+    {
+        id: 'feature-flags',
+        title: 'Feature Flags',
+        description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
+        token: 'orange',
+        volume: 6,
+        docsProduct: 'feature-flags',
+        learnPath: '/docs/feature-flags/learn',
     },
     {
         id: 'error-tracking',
         title: 'Error tracking',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.',
         token: 'red',
-        volume: 5,
+        volume: 7,
     },
 ]
 
@@ -77,4 +102,9 @@ export function volumeForProduct(docsProduct: string): PocketGuideVolume | undef
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
+}
+
+/** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
+export function pocketGuideUrl(volume: PocketGuideVolume): string {
+    return volume.learnPath ?? `/pocket-guides/${volume.id}`
 }

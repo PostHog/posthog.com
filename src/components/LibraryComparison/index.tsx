@@ -26,6 +26,7 @@ type LibraryFeatures = {
     aiObservability?: boolean
     errorTracking?: boolean
     logs?: boolean
+    tracing?: boolean
 }
 
 export const LibraryComparison = () => {
@@ -59,6 +60,7 @@ export const LibraryComparison = () => {
                     groupAnalytics
                     errorTracking
                     logs
+                    tracing
                 }
             }
         }
@@ -81,6 +83,7 @@ export const LibraryComparison = () => {
         { name: 'Group analytics', width: '1fr', align: 'center' as const },
         { name: 'Error tracking', width: '1fr', align: 'center' as const },
         { name: 'Logs', width: '1fr', align: 'center' as const },
+        { name: 'Tracing', width: '1fr', align: 'center' as const },
     ]
 
     const rows = sdks.nodes
@@ -118,6 +121,9 @@ export const LibraryComparison = () => {
                 },
                 {
                     content: renderAvailability(lib.frontmatter.features?.logs),
+                },
+                {
+                    content: renderAvailability(lib.frontmatter.features?.tracing),
                 },
             ],
         }))

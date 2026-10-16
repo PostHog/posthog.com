@@ -8,9 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
     - Founders
-    - Product engineers
-    - Engineering
-    - Culture
+    - Building the team
 crosspost:
     - Product engineers
     - Blog

@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Kernel
-beta: true
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 [Kernel](https://www.kernel.sh) is browser infrastructure for AI agents. This connector syncs your Kernel apps, deployments, action invocations, cloud browser sessions, and saved profiles into the PostHog data warehouse so you can join agent run history with your product data.
 

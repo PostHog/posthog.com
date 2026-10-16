@@ -12,9 +12,6 @@ sourceId: Everhour
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Everhour connector syncs your time-tracking data into the PostHog Data warehouse, so you can analyze your time entries and projects alongside your product data.
 

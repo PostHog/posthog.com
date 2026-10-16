@@ -183,7 +183,7 @@ export const matomo = {
             zendesk: false,
         },
         pricing: {
-            free_tier: false,
+            free_tier: 'Self-hosted only', // On-Premise is free under GPL v3; Cloud is trial-only
             self_serve: 'Trial only',
             transparent_pricing: true,
             usage_based_pricing: true,

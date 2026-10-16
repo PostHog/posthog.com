@@ -7,15 +7,6 @@
     },
     "headers": [
         {
-            "source": "/.well-known/http-message-signatures-directory",
-            "headers": [
-                {
-                    "key": "Content-Type",
-                    "value": "application/http-message-signatures-directory+json"
-                }
-            ]
-        },
-        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -26,6 +17,33 @@
         },
         {
             "source": "/handbook/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/blog/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/newsletter/:path*",
+            "headers": [
+                {
+                    "key": "Vary",
+                    "value": "Accept"
+                }
+            ]
+        },
+        {
+            "source": "/changelog",
             "headers": [
                 {
                     "key": "Vary",
@@ -43,11 +61,33 @@
             ]
         },
         {
+            "source": "/.well-known/oauth/:app/client-metadata.json",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=3600"
+                }
+            ]
+        },
+        {
+            "source": "/.well-known/oauth/:app/logo.png",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=86400"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
                     "key": "Content-Security-Policy-Report-Only",
-                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
+                    "value": "default-src 'self'; script-src 'self' https://*.posthog.com https://www.youtube.com https://fast.wistia.com https://fast.wistia.net https://import-cdn.default.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.posthog.com https://res.cloudinary.com https://www.gravatar.com https://raw.githubusercontent.com https://obuldanrptloktxcffvn.supabase.co https://cdn.shopify.com https://i.ytimg.com https://embed-ssl.wistia.com https://fast.wistia.com https://cdn.jsdelivr.net https://user-images.githubusercontent.com https://brandbadge.clearbit.com; font-src 'self' data: https://d27nj4tzr3d5tm.cloudfront.net https://res.cloudinary.com https://fonts.gstatic.com https://r2cdn.perplexity.ai https://fast.wistia.com https://fast.wistia.net https://use.typekit.net; connect-src 'self' https://*.posthog.com https://api.github.com https://lottie.host https://better-animal-d658c56969.strapiapp.com https://forms.default.com https://nucleus.default.com https://import-cdn.default.com https://posthog.myshopify.com https://*.algolia.net https://*.algolianet.com https://api.io.inkeep.com https://fast.wistia.net https://fast.wistia.com https://embed-cloudfront.wistia.com https://api.inkeep.com; media-src 'self' https://d1hovhsvet4m1p.cloudfront.net https://res.cloudinary.com blob:; frame-src 'self' https://www.youtube-nocookie.com https://hogwars.vercel.app https://hedgehog-mode-playground.vercel.app; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; frame-ancestors 'none'; report-uri https://us.i.posthog.com/report/?token=sTMFPsFhdP1Ssg&sample_rate=0.1&v=1; report-to posthog"
                 },
                 {
                     "key": "Reporting-Endpoints",
@@ -63,128 +103,7 @@
         },
         {
             "source": "/docs/references/:slug(.*-\\d.*)",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/docs/references/version-unavailable.md"
-        },
-        {
-            "source": "/docs/references/:slug(.*-\\d.*)",
             "destination": "/docs/references/version-unavailable/index.html"
-        },
-        {
-            "source": "/docs/:path*/",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/docs/:path*.md"
-        },
-        {
-            "source": "/docs/:path*",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/docs/:path*.md"
-        },
-        {
-            "source": "/handbook/:path*/",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/handbook/:path*.md"
-        },
-        {
-            "source": "/handbook/:path*",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/handbook/:path*.md"
-        },
-        {
-            "source": "/blog/:path*/",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/blog/:path*.md"
-        },
-        {
-            "source": "/blog/:path*",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/blog/:path*.md"
-        },
-        {
-            "source": "/newsletter/:path*/",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/newsletter/:path*.md"
-        },
-        {
-            "source": "/newsletter/:path*",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/newsletter/:path*.md"
-        },
-        {
-            "source": "/changelog/",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/changelog.md"
-        },
-        {
-            "source": "/changelog",
-            "has": [
-                {
-                    "type": "header",
-                    "key": "accept",
-                    "value": "(?:.*text/markdown.*)"
-                }
-            ],
-            "destination": "/changelog.md"
         },
         {
             "source": "/community/profiles/:path*",
@@ -199,8 +118,16 @@
             "destination": "/next-steps/index.html"
         },
         {
-            "source": "/questions/:path((?!topic).*)",
-            "destination": "/questions/[permalink]/index.html"
+            "source": "/forum/t/:topic/tags",
+            "destination": "/forum/t/[topic]/tags/index.html"
+        },
+        {
+            "source": "/forum/t/:topic",
+            "destination": "/forum/t/[topic]/index.html"
+        },
+        {
+            "source": "/forum/p/:permalink",
+            "destination": "/forum/p/[permalink]/index.html"
         },
         {
             "source": "/careers/(.*)",
@@ -217,9 +144,88 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/docs/feature-flags/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/ko/newsletter/:path*",
+            "destination": "/newsletter/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/ko",
+            "destination": "/",
+            "statusCode": 302
+        },
+        {
+            "source": "/myspace",
+            "destination": "/hogspace",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics",
+            "destination": "/docs/product-analytics/learn/introduction",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/:path*",
+            "destination": "/docs/product-analytics/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability/:path*",
+            "destination": "/docs/ai-observability/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay/:path*",
+            "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags/:path*",
+            "destination": "/docs/feature-flags/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse",
+            "destination": "/pocket-guides/data-stack",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse/:path*",
+            "destination": "/pocket-guides/data-stack/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/actions:ext(\\.md)?",
+            "destination": "/docs/replay-vision/scouts:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/kbd",
+            "destination": "/"
+        },
+        {
+            "source": "/credits",
+            "destination": "/"
+        },
         {
             "source": "/blog/posthog-vs-fathom",
             "destination": "/compare/posthog-vs-fathom"
@@ -537,6 +543,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/marketing-analytics:ext(\\.md)?",
+            "destination": "/docs/web-analytics/marketing-analytics:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
             "statusCode": 301
@@ -574,6 +585,16 @@
         {
             "source": "/docs/data/cookieless-tracking.md",
             "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/activity-log:ext(\\.md)?",
+            "destination": "/docs/settings/activity-logs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/team-collaboration:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?",
             "statusCode": 301
         },
         {
@@ -682,6 +703,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/mcp-analytics/custom-servers:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/installation:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/settings/environments:ext(\\.md)?",
             "destination": "/docs/settings/projects:ext?",
             "statusCode": 301
@@ -737,6 +763,31 @@
             "statusCode": 301
         },
         {
+            "source": "/open-positions",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/news",
+            "destination": "/blog",
+            "statusCode": 301
+        },
+        {
+            "source": "/press",
+            "destination": "/media",
+            "statusCode": 301
+        },
+        {
+            "source": "/trust",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy-policy",
+            "destination": "/privacy",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -744,6 +795,11 @@
         {
             "source": "/sitemap.xml",
             "destination": "/sitemap/sitemap-0.xml",
+            "statusCode": 301
+        },
+        {
+            "source": "/sitemap_index.xml",
+            "destination": "/sitemap/sitemap-index.xml",
             "statusCode": 301
         },
         {
@@ -762,8 +818,18 @@
             "statusCode": 301
         },
         {
+            "source": "/feed.xml",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/status",
             "destination": "https://status.posthog.com",
+            "statusCode": 301
+        },
+        {
+            "source": "/art-library",
+            "destination": "https://brand.posthog.com",
             "statusCode": 301
         },
         {
@@ -836,12 +902,20 @@
             "destination": "/teams/builder-relations/:path*"
         },
         {
-            "source": "/teams/query-performance",
-            "destination": "/teams/analytics-platform"
+            "source": "/teams/analytics-platform",
+            "destination": "/teams/query-performance"
         },
         {
-            "source": "/teams/query-performance/:path*",
-            "destination": "/teams/analytics-platform/:path*"
+            "source": "/teams/analytics-platform/:path*",
+            "destination": "/teams/query-performance/:path*"
+        },
+        {
+            "source": "/teams/marketing",
+            "destination": "/teams/developer-marketing"
+        },
+        {
+            "source": "/teams/marketing/:path*",
+            "destination": "/teams/developer-marketing/:path*"
         },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
@@ -868,6 +942,14 @@
         {
             "source": "/teams/customer-success/:path*",
             "destination": "/teams/customer-success-eu/:path*"
+        },
+        {
+            "source": "/teams/customer-success-na",
+            "destination": "/teams/customer-success-na-north"
+        },
+        {
+            "source": "/teams/customer-success-na/:path*",
+            "destination": "/teams/customer-success-na-north/:path*"
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
@@ -902,6 +984,11 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
+        {
+            "source": "/blog/is-autocapture-still-bad",
+            "destination": "/docs/product-analytics/autocapture",
+            "statusCode": 301
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -969,6 +1056,21 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/api/environments.md",
+            "destination": "/docs/api.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments:ext(\\.md)?",
+            "destination": "/docs/api/projects:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/api/environments-:n(\\d+)",
+            "destination": "/docs/api/projects",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/api/product-tours/:path*",
             "destination": "/docs/api",
             "statusCode": 301
@@ -990,6 +1092,11 @@
         {
             "source": "/handbook/growth/revops/lead-assignment-ooo",
             "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/growth/use-case-selling",
+            "destination": "/handbook/growth/use-case-selling/use-case-selling",
             "statusCode": 301
         },
         {
@@ -1083,12 +1190,16 @@
             "destination": "/teams/self-driving"
         },
         {
+            "source": "/teams/agents",
+            "destination": "/teams/self-driving"
+        },
+        {
             "source": "/tutorials/nps-survey",
             "destination": "/templates/nps-survey"
         },
         {
             "source": "/questions/topics/:path*",
-            "destination": "/questions/topic/:path*"
+            "destination": "/forum"
         },
         {
             "source": "/docs/sdks/:path*",
@@ -1945,6 +2056,10 @@
             "destination": "/docs/api/persons:ext?"
         },
         {
+            "source": "/docs/api/insights-3:ext(\\.md)?",
+            "destination": "/docs/api/insights:ext?"
+        },
+        {
             "source": "/handbook/engineering/k8s-overview",
             "destination": "/docs/self-host/architecture"
         },
@@ -1983,10 +2098,6 @@
         {
             "source": "/handbook/company/1-1s",
             "destination": "/handbook/company/management"
-        },
-        {
-            "source": "/lenny",
-            "destination": "/?utm_source=influencer&utm_medium=newsletter&utm_campaign=lenny"
         },
         {
             "source": "/zizyo",
@@ -2534,7 +2645,7 @@
         },
         {
             "source": "/handbook/people/team-structure/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/people/team-structure/people",
@@ -2565,24 +2676,8 @@
             "destination": "/handbook/small-teams/_team_template"
         },
         {
-            "source": "/marketplace",
-            "destination": "/partners"
-        },
-        {
-            "source": "/marketplace/clickhouse",
-            "destination": "/partners/clickhouse"
-        },
-        {
-            "source": "/marketplace/opsverse",
-            "destination": "/partners/opsverse"
-        },
-        {
-            "source": "/marketplace/restack",
-            "destination": "/partners/restack"
-        },
-        {
-            "source": "/marketplace/altinity",
-            "destination": "/partners/altinity"
+            "source": "/(marketplace|partners)/:path*",
+            "destination": "/partnerships"
         },
         {
             "source": "/handbook/people/team-structure/experimentation",
@@ -2837,6 +2932,10 @@
             "destination": "/tutorials/evaluation-runtimes-and-contexts"
         },
         {
+            "source": "/page-data/tutorials/evaluation-runtimes-and-environments/page-data.json",
+            "destination": "/page-data/tutorials/evaluation-runtimes-and-contexts/page-data.json"
+        },
+        {
             "source": "/docs/integrate:ext(\\.md)?",
             "destination": "/docs/getting-started/install:ext?"
         },
@@ -2986,7 +3085,7 @@
         },
         {
             "source": "/manual/team-collaboration",
-            "destination": "/docs/data/team-collaboration"
+            "destination": "/docs/settings/organizations"
         },
         {
             "source": "/manual/utm-segmentation",
@@ -2994,7 +3093,7 @@
         },
         {
             "source": "/manual/sso",
-            "destination": "/docs/settings/sso"
+            "destination": "/docs/settings/authentication/sso"
         },
         {
             "source": "/manual/support",
@@ -3147,7 +3246,7 @@
         },
         {
             "source": "/questions/topic/session-recording",
-            "destination": "/questions/topic/session-replay"
+            "destination": "/forum"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -3751,7 +3850,7 @@
         },
         {
             "source": "/blog/how-to-product-market-fit",
-            "destination": "/blog/product-market-fit-game"
+            "destination": "/founders/product-market-fit-game"
         },
         {
             "source": "/docs/cdp/zapier-connector:ext(\\.md)?",
@@ -3998,6 +4097,11 @@
             "destination": "/docs/surveys/implementing-custom-surveys:ext?"
         },
         {
+            "source": "/docs/surveys/pricing:ext(\\.md)?",
+            "destination": "/surveys/pricing",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",
             "destination": "/docs/error-tracking/managing-issues:ext?"
         },
@@ -4092,6 +4196,14 @@
         {
             "source": "/blog/ceo-diary-4",
             "destination": "/founders/ceo-diary-4"
+        },
+        {
+            "source": "/blog/ceo-diary-1",
+            "destination": "/founders/ceo-diary-1"
+        },
+        {
+            "source": "/founders/what-recruiters-see",
+            "destination": "/blog/what-recruiters-see"
         },
         {
             "source": "/docs/billing:ext(\\.md)?",
@@ -4310,6 +4422,10 @@
             "destination": "/founders/writing-for-developers"
         },
         {
+            "source": "/newsletter/if-ai-writes-all-the-code-whats-left",
+            "destination": "/newsletter/when-ai-writes-all-code"
+        },
+        {
             "source": "/blog/build-features-users-love",
             "destination": "/newsletter/build-features-users-love"
         },
@@ -4506,8 +4622,8 @@
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/blog/categories/general",
-            "destination": "/blog/general"
+            "source": "/blog/general",
+            "destination": "/blog/categories/general"
         },
         {
             "source": "/product-analytics/customers",
@@ -5107,7 +5223,7 @@
         },
         {
             "source": "/docs/data/sso:ext(\\.md)?",
-            "destination": "/docs/settings/sso:ext?"
+            "destination": "/docs/settings/authentication/sso:ext?"
         },
         {
             "source": "/docs/ab-testing:ext(\\.md)?",
@@ -5131,7 +5247,7 @@
         },
         {
             "source": "/handbook/small-teams/marketing",
-            "destination": "/teams/content"
+            "destination": "/teams/developer-marketing"
         },
         {
             "source": "/handbook/small-teams/exec",
@@ -5155,7 +5271,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/data-stack"
+            "destination": "/teams/managed-warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -5200,6 +5316,10 @@
         {
             "source": "/tutorials/node-external-cache",
             "destination": "/docs/feature-flags/local-evaluation/distributed-environments?tab=Node.js"
+        },
+        {
+            "source": "/page-data/tutorials/node-external-cache/page-data.json",
+            "destination": "/page-data/docs/feature-flags/local-evaluation/distributed-environments/page-data.json"
         },
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
@@ -5321,7 +5441,7 @@
         },
         {
             "source": "/teams/pipeline",
-            "destination": "/teams/cdp"
+            "destination": "/teams/workflows"
         },
         {
             "source": "/teams/feature-success",
@@ -5573,8 +5693,12 @@
             "destination": "/docs/cdp/sources/zendesk:ext?"
         },
         {
+            "source": "/docs/data-warehouse/setup:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/start-here:ext?"
+        },
+        {
             "source": "/docs/data-warehouse/setup/",
-            "destination": "/docs/data-warehouse/query/"
+            "destination": "/docs/data-warehouse/start-here"
         },
         {
             "source": "/handbook/growth/marketing/content",
@@ -5850,7 +5974,7 @@
         },
         {
             "source": "/teams/video",
-            "destination": "/teams/content"
+            "destination": "/teams/youtube"
         },
         {
             "source": "/customers/headshot-pro",
@@ -6058,15 +6182,23 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code",
-            "destination": "/teams/posthog-desktop"
+            "destination": "/teams/surfaces"
         },
         {
             "source": "/teams/posthog-code/:path*",
-            "destination": "/teams/posthog-desktop/:path*"
+            "destination": "/teams/surfaces/:path*"
+        },
+        {
+            "source": "/teams/posthog-desktop",
+            "destination": "/teams/surfaces"
+        },
+        {
+            "source": "/teams/posthog-desktop/:path*",
+            "destination": "/teams/surfaces/:path*"
         },
         {
             "source": "/docs/max-ai:ext(\\.md)?",
@@ -6119,6 +6251,10 @@
         {
             "source": "/handbook/cs-and-onboarding/customer-industry-segments",
             "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/customer-led-calls",
+            "destination": "/handbook/growth/sales/reverse-demo-calls"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
@@ -6311,7 +6447,7 @@
         },
         {
             "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
+            "destination": "/forum"
         },
         {
             "source": "/ai-observability/features",
@@ -6395,7 +6531,7 @@
         },
         {
             "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
+            "destination": "/docs/replay-vision/scouts#webhooks",
             "statusCode": 301
         },
         {
@@ -6443,8 +6579,24 @@
             "destination": "/context-warehouse"
         },
         {
+            "source": "/data-stack/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
             "source": "/data-stack/:path*",
             "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/context-warehouse/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/warehouse:ext?"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse/:path*",
+            "destination": "/docs/data-warehouse/warehouse/:path*"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
@@ -6488,8 +6640,91 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/cdp",
+            "destination": "/teams/workflows"
+        },
+        {
+            "source": "/teams/cdp/:path*",
+            "destination": "/teams/workflows/:path*"
+        },
+        {
+            "source": "/teams/content",
+            "destination": "/teams/marketing"
+        },
+        {
+            "source": "/teams/content/:path*",
+            "destination": "/teams/marketing/:path*"
+        },
+        {
+            "source": "/teams/data-stack",
+            "destination": "/teams/managed-warehouse"
+        },
+        {
+            "source": "/teams/data-stack/:path*",
+            "destination": "/teams/managed-warehouse/:path*"
+        },
+        {
+            "source": "/teams/signals/:path*",
+            "destination": "/teams/self-driving/:path*"
+        },
+        {
+            "source": "/teams/ops",
+            "destination": "/teams/people"
+        },
+        {
+            "source": "/teams/revenue-analytics",
+            "destination": "/teams"
+        },
+        {
+            "source": "/teams/actually-ai",
+            "destination": "/teams"
+        },
+        {
             "source": "/contact-us",
             "destination": "/talk-to-a-human",
+            "statusCode": 301
+        },
+        {
+            "source": "/traces",
+            "destination": "/tracing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/settings/sso:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/sso:ext?"
+        },
+        {
+            "source": "/docs/settings/id-jag:ext(\\.md)?",
+            "destination": "/docs/settings/authentication/id-jag:ext?"
+        },
+        {
+            "source": "/questions",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/subscriptions",
+            "destination": "/forum/following",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/:path*",
+            "destination": "/forum",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/:permalink",
+            "destination": "/forum/p/:permalink",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/alerts",
+            "destination": "/forum/alerts",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/dashboard",
+            "destination": "/forum/following",
             "statusCode": 301
         }
     ]

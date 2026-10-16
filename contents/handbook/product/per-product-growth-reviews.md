@@ -66,7 +66,7 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 
 While monthly metrics reviews are important, they are not always actionable. Or, sometimes a metric might be suboptimal, but we decide not to focus on it, because we have more important topics to work on. Since PostHog's culture leans towards no meetings by default, we are not meeting every month to review the metrics in-sync. For in-sync growth reviews, the following guidelines apply:
 
-- 1 quarterly in-sync growth review for existing products & PMs
+- 1 quarterly in-sync growth review for existing products & PMs, ideally just prior to the quarterly planning
 - 3 monthly in-sync growth reviews in a row for a new product or new PM
 - In-sync growth review any time a PM spots an issue in the metrics they would like to discuss
 - Additionally, the team lead and the responsible exec can also ask for a in-sync growth review

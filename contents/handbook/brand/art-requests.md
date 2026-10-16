@@ -40,19 +40,22 @@ The Art & Brand Planning board uses automations to keep work moving. Each behavi
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
-Please give **two weeks notice** for new briefs — this is the preferred minimum, and more time is always better. For reference, the team receives roughly 25-30 new art requests a month, so new briefs are rarely picked up the day they land. A **one-week turnaround is only possible for actual emergencies.** If your request is a genuine emergency, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Daniel, and/or [Cory](/community/profiles/30200).
+Please give **two weeks notice** for new briefs — this is the preferred minimum, and more time is always better. For reference, the team receives roughly 25-30 new art requests a month, so new briefs are rarely picked up the day they land. A **one-week turnaround is only possible for actual emergencies.** If your request is a genuine emergency, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Heidi and/or Daniel.
+
+**Create your request as early as possible, even if you don't know yet what the graphic will be.** A placeholder issue with a rough idea and a due date is fine – you can add the details later. Early requests help the Graphics team plan their capacity. This is especially important for newsletter and blog graphics, which we know about weeks in advance.
+
+If you make a graphic yourself (with templates, brand assets, or AI) and it is going to be published, share it in the [#design-review channel](https://posthog.slack.com/archives/C09ARM6LBLZ) before it goes out. See [ownership and approvals](/handbook/brand/approvals) for what needs sign-off.
 
 If you need to chase for an update on a request, the best place to do it is a comment on the issue itself, not a Slack DM. Comments keep the context with the brief, notify the assigned artist, and the team triages from the project board.
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+All our currently approved hedgehogs are on [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies). Anyone — team member or not — can browse the library and download any hog as SVG or PNG, without Figma access and without relying on the design team.
 
-Here's how:
+Team members can fall back to [this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0) to export a hog at a custom size, or to grab one that hasn't synced to the library yet. Please make sure you're choosing hogs which are approved, finalized, and match the current brand. 
+
 1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests). 
-
-> Non-team members can find some of the most-used hogs to download on [our press page](/media).
+If you can't find a suitable hog, you can request one with the templates above.

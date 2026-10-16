@@ -10,29 +10,25 @@ Here’s a list of tools PostHog AI can access and use.
 
 | **App** | **Tool** | **Description** |
 |---------|----------|-----------------|
-| Platform | `navigate` | Navigate UI, tabs, and pages within PostHog. |
 | Platform | `read_data` | Read saved insights, dashboards, notebooks, feature flags, experiments, surveys, error tracking issues, data warehouse schema, and more. |
 | Platform | `read_taxonomy` | Read taxonomy for events and properties. |
-| Platform | `read_data.billing_info` | Check your billing data. |
-| Dashboards | `create_dashboard` | Create dashboards with insights based on your requirements. |
-| Dashboards | `edit_current_dashboard` | Add insights to the dashboard you're viewing. |
-| Dashboards | `analyze_dashboard_refresh` | Analyze changes after refreshing a dashboard and summarize significant trends. |
+| Platform | `read_data` | Check your billing data. Use the `billing_info` kind. |
+| Dashboards | `upsert_dashboard` | Create a dashboard, or add insights to the dashboard you're viewing. |
 | Data pipelines | `create_hog_function_filters` | Set up function filters for quick pipeline configuration. |
 | Data pipelines | `create_hog_function_inputs` | Manage function variables in Hog functions. |
 | Data pipelines | `create_hog_transformation_function` | Write and tweak Hog code of transformations. |
-| Data warehouse | `read_data.datawarehouse_schema` | Read your data warehouse schema. |
+| Data warehouse | `read_data` | Read your data warehouse schema. Use the `data_warehouse_schema` kind. |
 | Data warehouse | `fix_hogql_query` | Fix SQL queries automatically. |
-| Data warehouse | `generate_hogql_query` | Write and tweak SQL right there. |
-| Docs | `search.docs` | Search docs for answers regarding PostHog. |
-| Error tracking | `filter_issues` | Filter issues to dig into errors. |
-| Error tracking | `find_impactful_issue_event_list` | Find impactful issues affecting your conversion, activation, or any other events. |
+| Data warehouse | `execute_sql` | Write and run SQL queries. |
+| Docs | `search` | Search docs for answers regarding PostHog. Use the `docs` kind. |
+| Error tracking | `filter_error_tracking_issues` | Filter issues to dig into errors. |
 | Experiments | `experiment_results_summary` | Summarize experiment results for a comprehensive rundown. |
 | Experiments | `create_experiment` | Create an experiment in seconds. |
 | Feature flags | `create_feature_flag` | Create a feature flag in seconds. |
 | AI Observability | `search_llm_traces` | Search and filter LLM traces by date, model, cost, latency, and errors. |
 | Notebooks | `create_notebook` | Create notebooks with rich content including markdown, insights, and session replays. |
-| Product analytics | `create_and_query_insight` | Edit the insight you're viewing. |
-| Product analytics | `search.insights` | Search existing insights for answers. |
+| Product analytics | `create_insight` | Create an insight, or edit the insight you're viewing. |
+| Product analytics | `search` | Search existing insights for answers. Use the `insights` kind. |
 | Session replay | `search_session_recordings` | Search recordings quickly. |
 | Surveys | `analyze_survey_responses` | Analyze survey responses to extract themes and actionable insights. |
 | Surveys | `create_survey` | Create surveys in seconds. |

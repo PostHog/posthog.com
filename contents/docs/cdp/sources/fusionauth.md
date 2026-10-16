@@ -9,12 +9,6 @@ availability:
 sourceId: FusionAuth
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your FusionAuth instance's base URL and an API key to pull your FusionAuth authentication and identity data – users, audit logs, event logs, and login records – into the PostHog data warehouse.
 
 ## Adding a data source

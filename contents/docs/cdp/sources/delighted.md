@@ -9,12 +9,6 @@ availability:
 sourceId: Delighted
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Delighted connector syncs your survey feedback data – responses, people, unsubscribes, bounces, and NPS metrics – into PostHog.
 
 ## Adding a data source

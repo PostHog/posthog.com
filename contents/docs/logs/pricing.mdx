@@ -14,7 +14,13 @@ import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 <Pricing productType="logs" />
 
-Retention is 14 days by default. You can extend retention for newly ingested logs to 30 days with an add-on priced at $0.05/GB ingested.
+## Retention
+
+Retention is 14 days by default. To keep logs for longer, set a custom retention period. Custom retention costs $0.05/GB ingested for each month you keep your logs, so one month costs the same as the previous 30-day retention add-on. For example, 3 months of retention costs $0.15/GB ingested. Custom retention applies to newly ingested logs.
+
+You can set retention per service or per source in your [logs](https://app.posthog.com/settings/environment-logs) and traces settings. This gives you fine-grained control: keep critical services for longer, and keep noisy ones at the 14-day default.
+
+## Reduce your costs
 
 We aim to be significantly cheaper than our competitors. Below are tips to reduce your logs costs.
 

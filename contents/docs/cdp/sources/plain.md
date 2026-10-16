@@ -9,12 +9,6 @@ availability:
 sourceId: Plain
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Plain connector automatically pulls your Plain customer support data – customers, threads, and timeline entries – into the PostHog data warehouse.
 
 ## Adding a data source

@@ -61,7 +61,7 @@ It also supports replay for mobile apps running that use Android, iOS, React Nat
 
 ### How much does PostHog cost?
 
-PostHog is free up to 1 million captured events, 5,000 web recordings, and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
+PostHog is free up to 1 million captured events, 5,000 web and 2,500 mobile recordings per month, and you can set billing limits to avoid surprise bills. 
 
 > #### Bottom line
 >
@@ -159,8 +159,8 @@ UXWizz is a good choice for individuals and small businesses who want quick, qua
 
 UXWizz is self-hosted only with a one-time license fee. 
 
-- The **Personal** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
-- The **Company** license is $799 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
+- The **Solo** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
+- The **Growth & Scale** license is $799 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
 - The **Agency** license is $2,490 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers – intended for agencies managing analytics on behalf of clients. 
 
 All tiers include one year of free support and updates, with extensions available as paid add-ons. There is no cloud version and no free tier, though a free trial is available.
@@ -289,7 +289,7 @@ Most open source session replay tools can be self-hosted, but not all self-hoste
 <details>
 <summary>Which open source session replay tool has the best free tier?</summary>
 
-**PostHog** has the most [generous free cloud tier](/pricing): 5,000 web session replays, 2,500 mobile replays, and 1 million analytics events per month. 
+**PostHog** has the most [generous free cloud tier](/pricing): 5,000 web and 2,500 mobile session replays, and 1 million analytics events per month. 
 
 **OpenReplay** and **Sentry** offer free self-hosted versions with no usage limits if you're willing to manage your own infrastructure. 
  

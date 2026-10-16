@@ -9,12 +9,6 @@ availability:
 sourceId: Shortio
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Short.io API key to pull your branded-link domains into the PostHog data warehouse.
 
 ## Adding a data source

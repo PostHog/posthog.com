@@ -1,10 +1,12 @@
 import React from 'react'
 
 import {
+    HedgehogTrenchcoat,
     HedgehogDirector,
     HedgehogDollHouse,
     HedgehogImTheDriver,
     HedgehogPanic,
+    HedgehogTrafficController,
     HedgehogXRay,
 } from '@posthog/brand/hoggies'
 
@@ -14,11 +16,13 @@ import {
  * what makes a book recognizable once it's off the shelf.
  */
 export const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    'product-analytics': HedgehogTrenchcoat,
     'self-driving': HedgehogImTheDriver,
     'ai-observability': HedgehogXRay,
-    'context-warehouse': HedgehogDollHouse,
+    'data-stack': HedgehogDollHouse,
     'session-replay': HedgehogDirector,
     'error-tracking': HedgehogPanic,
+    'feature-flags': HedgehogTrafficController,
 }
 
 export function volumeArt(id?: string): React.ComponentType<{ size?: number; className?: string }> | undefined {

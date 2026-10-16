@@ -14,7 +14,7 @@ hideAnchor: false
 - Export PostHog data to existing warehouses (Snowflake, BigQuery, Redshift) so it's part of the company's data stack
 - Feed enriched data to downstream tools: BI platforms, ad platforms, CRMs, marketing tools
  
-**Naming note:** the current positioning for this whole area is the **context warehouse** — the managed warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
+**Naming note:** the current positioning for this whole area is the **context warehouse** — the warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
 
 This is the "stickiness" use case. Once PostHog is part of a company's data infrastructure, receiving data from Stripe, HubSpot, and databases AND feeding data out to their BI layer, it becomes very hard to rip out. This also makes their product data more valuable as it is enriched with additional business context. Data infrastructure customers also tend to have the highest retention rates.
  
@@ -196,7 +196,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 - [ ] Verify batch export is running reliably with expected data freshness
 - [ ] Configure at least one [Realtime Destination](/docs/cdp/destinations) if they need event data in downstream tools (Slack alerts, CRM sync, ad platform conversions)
 - [ ] Build a "Unified Analytics" dashboard combining product events with business data
-- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/product-analytics/sql))
+- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/data-warehouse/sql))
 - [ ] Identify additional data sources to connect (CRM, other databases, ad platforms)
  
 ## Cross-sell pathways from this use case

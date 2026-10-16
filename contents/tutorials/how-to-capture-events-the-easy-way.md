@@ -26,7 +26,7 @@ To follow this tutorial you’ll need…
 - To have successful deployed PostHog. 
 - Have added [the PostHog snippet to your website](/docs/integrate?tab=snippet) or product. 
 
-Note that the toolbar is currently only available using [the JavaScript library](/docs/integrate/client/js). 
+Note that the toolbar is currently only available using [the JavaScript library](/docs/libraries/js). 
 
 ## The PostHog Toolbar
 The PostHog toolbar is an overlay across your product and website, which you can summon to create new calculated events, visualize a heatmap, and more.

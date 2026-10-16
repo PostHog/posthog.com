@@ -17,6 +17,7 @@ const getQuestionPages = async (base) => {
         // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
             fields: ['permalink'],
+            filters: { forumTopic: { id: { $notNull: true } } },
             pagination: {
                 page,
                 pageSize: 100,
@@ -51,7 +52,7 @@ const getQuestionPages = async (base) => {
     )
 
     const questions = allResponses.flatMap((response) =>
-        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+        response.data.map((question) => ({ path: `${base}/forum/p/${question.attributes.permalink}` }))
     )
 
     return questions
@@ -72,6 +73,7 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',
@@ -390,6 +392,9 @@ module.exports = {
                         `,
                         output: '/rss.xml',
                         title: "PostHog's RSS Feed",
+                        site_url: 'https://posthog.com',
+                        feed_url: 'https://posthog.com/rss.xml',
+                        language: 'en',
                         // optional configuration to insert feed reference in pages:
                         // if `string` is used, it will be used to create RegExp and then test if pathname of
                         // current page satisfied this regular expression;
@@ -406,6 +411,9 @@ module.exports = {
                                     .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
                                     .replace(/\]\(\//g, `](${siteUrl}/`) // absolutize relative links
                                     .trim()
+                                const profile = node.profiles?.data?.[0]?.attributes
+                                const author = [profile?.firstName, profile?.lastName].filter(Boolean).join(' ')
+                                const media = node.media?.data?.attributes
 
                                 return {
                                     title: node.title,
@@ -414,6 +422,8 @@ module.exports = {
                                     url: `${siteUrl}/changelog?id=${node.strapiID}`,
                                     guid: `posthog-changelog-${node.strapiID}`,
                                     categories: [team && `${team} Team`, topic].filter(Boolean),
+                                    ...(author ? { author } : {}),
+                                    ...(media?.url ? { enclosure: { url: media.url, type: media.mime } } : {}),
                                     custom_elements: [
                                         {
                                             'content:encoded': {
@@ -436,6 +446,22 @@ module.exports = {
                                     title
                                     description
                                     date
+                                    media {
+                                        data {
+                                            attributes {
+                                                url
+                                                mime
+                                            }
+                                        }
+                                    }
+                                    profiles {
+                                        data {
+                                            attributes {
+                                                firstName
+                                                lastName
+                                            }
+                                        }
+                                    }
                                     teams {
                                         data {
                                             attributes {
@@ -456,6 +482,12 @@ module.exports = {
                         `,
                         output: '/changelog.rss',
                         title: 'PostHog Changelog',
+                        description: 'New features, improvements, and fixes shipped in PostHog.',
+                        // Without site_url and feed_url, node-rss falls back to its own repo as the
+                        // channel link and writes no self reference, so readers cannot follow either.
+                        site_url: 'https://posthog.com/changelog',
+                        feed_url: 'https://posthog.com/changelog.rss',
+                        language: 'en',
                         // inserts <link rel="alternate" type="application/rss+xml"> on /changelog pages
                         match: '^/changelog',
                     },

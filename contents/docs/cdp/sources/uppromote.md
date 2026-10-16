@@ -12,9 +12,6 @@ sourceId: UpPromote
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The UpPromote connector syncs your affiliate marketing data – programs, affiliates, referrals, coupons, and payments – into the PostHog Data warehouse, so you can analyze affiliate performance and referral revenue alongside your product data.
 

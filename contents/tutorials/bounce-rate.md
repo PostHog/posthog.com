@@ -43,7 +43,7 @@ PostHog's [web analytics](/web-analytics) makes it easy to see the bounce rate f
 
 ## Calculating bounce rate with SQL insights
 
-You can also use [SQL insights](/docs/product-analytics/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the **SQL** tab. This is where we write our SQL statements.
+You can also use [SQL insights](/docs/data-warehouse/sql) to calculate bounce rate using the `sessions` table. To create a new SQL insight, go to the **Product analytics** tab, click [new insight](https://app.posthog.com/insights/new), then go to the **SQL** tab. This is where we write our SQL statements.
 
 We can use `$is_bounce` to find sessions that meet the default bounce criteria mentioned above. The value of `$is_bounce` is either `1` or `0`, so we can take the average for all sessions to get the bounce rate. We multiply by `100` to view it as a percentage and round to a single decimal place.
 

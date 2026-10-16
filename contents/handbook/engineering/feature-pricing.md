@@ -53,7 +53,7 @@ In general, we should roughly match the pricing of the cheapest big competitor f
 
 We can do this because we can upsell customers multiple of our other products. The total ACV is higher even if the per-product ACV is lower.
 
-It's better for customers because they get all these tools that are well integrated for the cheapest possible price.
+It's better for customers because they get all these products that are well integrated for the cheapest possible price.
 
 For innovative products where there is no established market, we are also the innovator on price. For such products, pricing should match our pricing principles, but we shouldn't be afraid to experiment. This includes changing pricing early if it doesn't work out (e.g. if the product fails to pay for itself, or the usage-based unit we picked is unappealing to customers).
 

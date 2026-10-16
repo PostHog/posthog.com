@@ -13,12 +13,15 @@ Engineers make up around 60% of our team, and we are almost always hiring for En
 
 Beyond the specific skills listed in the job description, we generally look for: 
 
-*   Experience with relevant technologies (Python or similar, React or similar, something to do with big data is a bonus)
+*   Able to pick up a new stack quickly
+    *   This matters more to us than experience with the exact technologies we use. Our [tech stack](/handbook/engineering/stack) is public, so candidates can see what they will work with. Experience with something to do with big data is a bonus.
     *   We don't care how many years of professional experience someone has, but depending on our current team structure we may be looking for more or less experienced people for a role - if that's the case, we will be explicit in the job spec.
 *   Has built something from scratch, ideally with minimal outside help
     *   They may have been the founder of a startup, or built an impressive side project. They may have also worked on a project at work where they were the only developer.
 *   Communication skills
     *   More so than other companies, all of our communication is written and public for the world to see. Good written communication is key.
+*   AI-pilled
+    *   They have built things agents actually use. More and more of what we ship is used by agents, not people, and building for them is genuinely different. We want someone who has done it and has the scars: an API an agent can drive, an MCP server, evals, or docs written for a machine. Side projects count.
 *   User-centric
     *   Our engineering team work very closely with our users - they do customer support, demos, and help with implementation. All potential engineers need to be excited by the prospect of getting to work directly with users.
 
@@ -44,7 +47,7 @@ You should use <PrivateLink url="[https://github.com/Posthog-Interviews/superday
 
 #### Culture & motivation chat
 
-One of our co-founders or execs – [Tim](/tim) or [James](/james), depending on scheduling – will meet with the candidate for a short 15 min chat to dive deeper into culture and motivation. 
+A member of our [Blitzscale](/teams/blitzscale) team – Raquel, Ben, or Paul, depending on scheduling – will meet with the candidate for a 20-25 min chat to dive deeper into culture and motivation. 
 
 #### Engineering SuperDay
 
@@ -60,12 +63,18 @@ An engineering SuperDay usually looks like this (_there is a degree of flexibili
    * This will include:- the talent team, cofounders, exec, hiring lead, & the SuperDay buddy      
 *   Time to focus on the task
 *   An interview with the SuperDay buddy
-*   A chat with [James](/james), [Tim](/tim), or an exec, whoever they didn't meet with in the previous stage
+*   A chat with an exec
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 Usually the Superday buddy will review the output, but they can ask other engineers for input when needed, and we'll get back to the candidate with our final decision ASAP (always within a few days).
 
 Overall, candidates should spend at least 80% of their time and energy on the task and less than 20% on meeting people, as we base our decision on their output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems.
+
+#### AI usage during the SuperDay
+
+Candidates can use AI tools for the SuperDay project – we expect it, as this is how many engineers work. But they must understand what they've built. During the check-in, the SuperDay buddy should ask them to walk through their architecture, explain their decisions, and reason about their code. If a candidate can't explain and defend their solution, it doesn't matter how polished it looks.
+
+AI tools are not allowed in the debugging session. We want to see how the candidate reasons about code. This is also covered in our [guide to preparing for the engineering SuperDay](/handbook/people/hiring-process/engineering-superday#a-note-on-ai-tools).
 
 #### How to become an interviewer at PostHog
 
