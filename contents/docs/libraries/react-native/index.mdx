@@ -30,13 +30,17 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 
 ### Choose an iOS dependency path for the native plugin
 
-The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
+The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use.
+
+`@posthog/react-native-plugin` 3.0 and later requires React Native 0.71 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 11 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
+
+Then choose one iOS dependency path:
 
 | Path | Requirements | What it resolves |
 | --- | --- | --- |
 | CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
 | CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
-| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
+| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later (Xcode 26 or later for plugin 3.0 and later), and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
 
 This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
 
@@ -88,7 +92,7 @@ npx react-native spm add --deintegrate --yes
 
 The `--deintegrate` option removes the complete CocoaPods integration from the iOS project. React Native then finds the plugin's `ios/Package.swift` manifest. Swift Package Manager resolves the plugin and `posthog-ios`. Do not run `pod install` for this path.
 
-PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
+PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. On the CocoaPods and hybrid paths, the plugin podspec's minimum is iOS 15 from `@posthog/react-native-plugin` 3.0, and iOS 13 in earlier versions.
 
 <DetailSetUpReverseProxy />
 
@@ -692,6 +696,21 @@ const MyComponent = () => {
     }, [])
 }
 ```
+
+## Upgrading to `@posthog/react-native-plugin` 3.0
+
+`@posthog/react-native-plugin` 3.0 uses `posthog-ios` 4.0 and requires:
+
+- React Native 0.71 or later
+- Xcode 26 or later, on every iOS dependency path
+- An iOS 15 or later deployment target, and macOS 11 or later for React Native macOS apps
+
+Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
+
+- Call `setup()` instead of the removed `start()` method.
+- Pass `throttleDelayMs` instead of `iOSdebouncerDelayMs` or `androidDebouncerDelayMs`, which the plugin no longer reads. `posthog-react-native` still maps these deprecated options to `throttleDelayMs`.
+
+On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
