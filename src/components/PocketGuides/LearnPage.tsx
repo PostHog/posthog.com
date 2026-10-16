@@ -7,6 +7,7 @@ import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
+import { volumeById } from '../../constants/pocketGuides'
 
 import LearnSurface from './LearnSurface'
 
@@ -44,7 +45,7 @@ export default function LearnPage({
     const landingProps = {
         productName: productData?.name,
         description,
-        storyUrl: `${learnBasePath}/introduction`,
+        storyUrl: volumeById(volumeId)?.learnPath ?? learnBasePath,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({
         productData,

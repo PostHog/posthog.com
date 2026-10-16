@@ -176,7 +176,17 @@
         },
         {
             "source": "/pocket-guides/product-analytics",
-            "destination": "/docs/product-analytics/learn/introduction",
+            "destination": "/docs/product-analytics/learn/101",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics/introduction",
+            "destination": "/docs/product-analytics/learn/101",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/learn/introduction:ext(\\.md)?",
+            "destination": "/docs/product-analytics/learn/101:ext?",
             "statusCode": 301
         },
         {

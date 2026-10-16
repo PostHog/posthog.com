@@ -262,7 +262,8 @@ The Product Analytics Learn hub previews three paths: an agent prompt, the embed
 the external Twig demo. Its landing page remains a choice page; story chapters render on child
 routes under `/docs/product-analytics/learn`, with the Learn tab active and the shared product
 sidebar providing chapter navigation. Legacy standalone Pocket Guide URLs redirect to those Learn
-routes, and bookshelf covers open the embedded introduction directly.
+routes, and bookshelf covers open the first chapter directly.
+Product Analytics starts with `101/index.mdx` and has no front matter page.
 
 The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
 `@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one

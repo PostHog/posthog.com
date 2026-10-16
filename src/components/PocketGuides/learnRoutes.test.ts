@@ -6,21 +6,27 @@ import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides.ts'
 
 const vercelConfig = JSON.parse(readFileSync(new URL('../../../vercel.json', import.meta.url), 'utf8'))
 
-test('Product Analytics opens its story inside Learn and counts both orientation pages', () => {
+test('Product Analytics opens its story at Events and properties', () => {
     const volume = volumeById('product-analytics')
 
     assert.equal(volume?.volume, 5)
     assert.equal(volume?.countOrientationPages, true)
     assert.ok(volume)
-    assert.equal(pocketGuideUrl(volume), '/docs/product-analytics/learn/introduction')
+    assert.equal(pocketGuideUrl(volume), '/docs/product-analytics/learn/101')
 })
 
 test('legacy Product Analytics reader routes redirect into Learn', () => {
     const redirects = vercelConfig.redirects as Array<{ source: string; destination: string }>
     const currentRoot = redirects.find(({ source }) => source === '/pocket-guides/product-analytics')
+    const oldIntroduction = redirects.find(({ source }) => source === '/pocket-guides/product-analytics/introduction')
     const chapterSplat = redirects.find(({ source }) => source === '/pocket-guides/product-analytics/:path*')
+    const oldLearnIntroduction = redirects.find(
+        ({ source }) => source === '/docs/product-analytics/learn/introduction:ext(\\.md)?'
+    )
 
-    assert.equal(currentRoot?.destination, '/docs/product-analytics/learn/introduction')
+    assert.equal(currentRoot?.destination, '/docs/product-analytics/learn/101')
+    assert.equal(oldIntroduction?.destination, '/docs/product-analytics/learn/101')
+    assert.equal(oldLearnIntroduction?.destination, '/docs/product-analytics/learn/101:ext?')
     assert.equal(chapterSplat?.destination, '/docs/product-analytics/learn/:path*')
     assert.equal(
         redirects.some(({ source }) => source.startsWith('/pocket-guides/posthog')),
