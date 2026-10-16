@@ -1,0 +1,26 @@
+[
+    {
+        "title": "The PostHog: London Tabloid Takeover",
+        "slug": "london-tabloid-takeover",
+        "date": "2026-09-01",
+        "datePrecision": "month",
+        "plaque": "Tabloid front page spoofs for the September 2026 London out-of-home run around Old Street, Liverpool Street, Farringdon and Shoreditch. Fake mastheads (The PostHog, Morning PostHog) with headlines like \"AI wrote this\" and \"AI agents priced out of zone 2\", as portrait posters and wide billboards.",
+        "context": null,
+        "heroImage": "img/london-tabloid-takeover-01.webp",
+        "gallery": [
+            "img/london-tabloid-takeover-02.webp",
+            "img/london-tabloid-takeover-03.webp",
+            "img/london-tabloid-takeover-04.webp",
+            "img/london-tabloid-takeover-05.webp",
+            "img/london-tabloid-takeover-06.webp",
+            "img/london-tabloid-takeover-07.webp"
+        ],
+        "videos": [],
+        "links": [],
+        "category": "out-of-home",
+        "type": "tube-ads",
+        "collections": [],
+        "relatedArtifacts": [],
+        "curatorNotes": null
+    }
+]

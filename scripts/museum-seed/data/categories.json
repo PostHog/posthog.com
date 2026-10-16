@@ -1,0 +1,42 @@
+[
+    {
+        "name": "IRL",
+        "slug": "irl",
+        "order": 0
+    },
+    {
+        "name": "Digital Ads",
+        "slug": "digital-ads",
+        "order": 1
+    },
+    {
+        "name": "Social",
+        "slug": "social",
+        "order": 2
+    },
+    {
+        "name": "Email",
+        "slug": "email",
+        "order": 3
+    },
+    {
+        "name": "Out of home",
+        "slug": "out-of-home",
+        "order": 4
+    },
+    {
+        "name": "Video",
+        "slug": "video",
+        "order": 5
+    },
+    {
+        "name": "Merch",
+        "slug": "merch",
+        "order": 6
+    },
+    {
+        "name": "Misc",
+        "slug": "misc",
+        "order": 7
+    }
+]

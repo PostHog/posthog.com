@@ -1,0 +1,65 @@
+{
+    "img/london-tabloid-takeover-01.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850204/museum/london-tabloid-takeover-01.webp",
+        "public_id": "museum/london-tabloid-takeover-01",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 196268
+    },
+    "img/london-tabloid-takeover-02.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850205/museum/london-tabloid-takeover-02.webp",
+        "public_id": "museum/london-tabloid-takeover-02",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1600,
+        "height": 736,
+        "bytes": 84910
+    },
+    "img/london-tabloid-takeover-03.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850206/museum/london-tabloid-takeover-03.webp",
+        "public_id": "museum/london-tabloid-takeover-03",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 137128
+    },
+    "img/london-tabloid-takeover-04.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850207/museum/london-tabloid-takeover-04.webp",
+        "public_id": "museum/london-tabloid-takeover-04",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 98684
+    },
+    "img/london-tabloid-takeover-05.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850208/museum/london-tabloid-takeover-05.webp",
+        "public_id": "museum/london-tabloid-takeover-05",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 169210
+    },
+    "img/london-tabloid-takeover-06.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850210/museum/london-tabloid-takeover-06.webp",
+        "public_id": "museum/london-tabloid-takeover-06",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 183250
+    },
+    "img/london-tabloid-takeover-07.webp": {
+        "url": "https://res.cloudinary.com/dmukukwp6/image/upload/v1790850211/museum/london-tabloid-takeover-07.webp",
+        "public_id": "museum/london-tabloid-takeover-07",
+        "resource_type": "image",
+        "format": "webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 100316
+    }
+}
