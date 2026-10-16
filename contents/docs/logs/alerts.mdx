@@ -81,6 +81,8 @@ An alert sends one notification when it starts firing and one when it resolves. 
 
 The cooldown sets the minimum time between an alert's firing and resolve notifications. PostHog doesn't send them during the cooldown, which cuts noise from an alert that keeps resolving and firing again.
 
+If a fire or resolve notification would fall inside the cooldown window, it is skipped. Cooldown does not apply to PagerDuty incidents.
+
 ## Manage alerts
 
 The alert list shows a table of all your alerts:
