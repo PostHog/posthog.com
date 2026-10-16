@@ -802,7 +802,11 @@ export default function TeamPage(props: TeamPageProps) {
                                 setFieldValue={setFieldValue}
                                 teamImage={teamImage}
                                 editing={editing}
-                                unframed={slug === 'platform-features'}
+                                polaroidSrc={
+                                    slug === 'platform-features'
+                                        ? 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Photo_Edit_8f8dc3171a.png'
+                                        : undefined
+                                }
                             />
                         )}
                     </div>
