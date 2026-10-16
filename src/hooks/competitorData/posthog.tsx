@@ -47,7 +47,7 @@ export const posthog = {
             available: true,
             features: {
                 point_scanner: true,
-                configurable_types: 'Monitor, classifier, scorer, summarizer',
+                configurable_types: 'Monitor, classifier, scorer, summarizer, experiment',
                 custom_prompt: true,
                 yes_no_monitors: true,
                 classify_tag: true,

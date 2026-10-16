@@ -42,7 +42,7 @@ Click **Where do people get stuck?** to follow along. PostHog AI drafts a scanne
 ## 2. Look over the scanner
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_draft_overview_f3a666ab8e.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_draft_overview_ae71faf08a.png"
   alt="A drafted scanner's overview: what PostHog AI understood, the name, what it will ask, eligible recordings, and sampling and budget, each with an Edit button"
   classes="rounded"
 />
@@ -78,8 +78,8 @@ For this walkthrough we won't wait for the sweep – we'll trigger one observati
 Open the [replay](/docs/session-replay) for any session of yours, open the **Observations** tab in the player sidebar, and click **Scan this recording**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_tab_93b1c58fc9.png"
-  alt="The replay player with the Observations sidebar open: the Scan this recording action, a chapter timeline, and the recording's observations"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_sidebar_3966500ea9.png"
+  alt="The Observations tab in the replay player sidebar: the Scan this recording action, a chapter timeline, and the recording's observations"
   classes="rounded"
 />
 
@@ -101,7 +101,7 @@ For a monitor scanner you'll see:
 
 - A **yes/no verdict** with a confidence score.
 - The model's **reasoning**, with **clickable citations** that jump the embedded player to the relevant moment.
-- The **prompt that produced this result** – the exact text Gemini saw, frozen even if you edit the scanner afterwards.
+- The **Question** the scan answered, with a **Show full prompt** link to the scanner prompt that produced this result. It stays the same even if you edit the scanner afterwards.
 
 Spend a minute here. Watching the moments the model cited next to its reasoning is the fastest way to develop intuition for what your prompt actually catches. Then answer **Did the scanner get this right?** with a thumbs up or down, and add a note if it missed something. The scanner learns from your team's ratings on later scans – see [improving scanners with ratings](/docs/replay-vision/calibration).
 

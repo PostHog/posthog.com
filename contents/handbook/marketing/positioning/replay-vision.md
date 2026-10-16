@@ -12,7 +12,7 @@ Replay Vision is batch AI analysis of your session replays. Point a scanner at a
 
 There are several YC startups that do this to a much smaller extent as a separate tool, making them quite limited. They also don't have the full data platform and other engineering tools PostHog has. Replay Vision lets you write the criteria, run your scanners continuously, and use the output anywhere in PostHog.
 
-2,500 credits free every month, which is 500 standard observations (or 1,250 lite ones), no credit card. After that, it's usage-based at $0.01 per credit with volume discounts, roughly $0.02 to $0.15 per observation depending on the model, with no tier upgrade or add-on to buy.
+2,500 credits free every month, which is 500 standard observations (or 1,250 lite ones), no credit card. After that, it's a flat $0.01 per credit, roughly $0.02 to $0.15 per observation depending on the model, with no tier upgrade or add-on to buy.
 
 ## The unique belief (in terms of Replay Vision)
 
@@ -46,7 +46,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 **Supporting features:**
 - A customer describes a goal, or clicks a [common starting point](/docs/replay-vision/creating-scanners#start-from-a-common-question), and PostHog AI drafts the scanner, so they can start without writing a prompt
 - Scanners summarize and label any set of recordings automatically, across hundreds at once
-- Bulk-scan on demand, or set scanners to run on a schedule
+- Scan picked recordings on demand, backfill past recordings over a date range of up to a year, or let scanners run continuously
 - Findings land as queryable events and get routed to your Inbox, so what matters surfaces to you instead of piling up as a backlog to review
 - Sampling and coverage controls scope a scanner to a percentage of matching sessions, or to one segment or page
 
@@ -100,7 +100,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 **Where PostHog wins:**
 - Their AI output is one number. The friction score is the only thing that becomes queryable, chartable, or usable in experiments and cohorts. PostHog turns every observation into an event you can use anywhere.
-- Configurable scanner types (monitor, classifier, scorer, summarizer) against their fixed planned analyses.
+- Configurable scanner types (monitor, classifier, scorer, summarizer, experiment) against their fixed planned analyses.
 - No 100-per-run cap, plus sampling and coverage controls they don't have.
 - Their score encodes their definition of friction on a fixed scale. A frustration scorer lets you set the scale and the criteria.
 - Custom prompting is still beta for them.
@@ -163,7 +163,7 @@ Any of these can be the champion. The common thread is someone drowning in recor
 
 **Follow-up:** How many sessions a month, and is the worry the total or one runaway scanner?
 
-**Answer:** Start with the unit, since that's the opaque part: a credit is $0.01, and an observation costs 2, 5, or 15 depending on the model. The spend widget projects forward, showing what you'll land on by period end and the date you'll hit your limit. You find out in week one, not on the invoice. "View usage by scanner" names the one responsible, so you fix it instead of throttling everything. Before creating a scanner, ask the MCP to estimate its volume. After, cap it with a per-scanner monthly budget – $100 for this one, $50 for that one – on top of the organization-wide limit, and scope it further with sampling and filters. A runaway scanner stops at its own ceiling instead of eating the whole budget.
+**Answer:** Start with the unit, since that's the opaque part: a credit is $0.01, and an observation costs 2, 5, or 15 depending on the model. The spend widget projects forward, showing what you'll land on by period end and the date you'll hit your limit. You find out in week one, not on the invoice. "View usage by scanner" names the one responsible, so you fix it instead of throttling everything. Before creating a scanner, ask the MCP to estimate its volume, or pick Free when creating it so it only uses the free monthly credits and never adds to the bill. After, cap it with a per-scanner monthly budget – $100 for this one, $50 for that one – on top of the organization-wide limit, and scope it further with sampling and filters. A runaway scanner stops at its own ceiling instead of eating the whole budget.
 
 ![Spend widget](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_28_at_16_17_44_2x_d2d76fcca3.png)
 

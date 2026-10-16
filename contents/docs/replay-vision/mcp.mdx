@@ -80,6 +80,7 @@ Across scanners:
 Aggregate stats, rather than the rows themselves:
 
 - `vision-scanners-observations-stats` – one scanner's status mix and success rate, distinct sessions covered, rating totals, and per-type distributions (monitor verdict counts, classifier tag rankings, scorer score summary and histogram).
+- `vision-scanners-variants-list` – compare an experiment scanner's variants side by side: observation and people counts, median session length, and the rate each variant was sampled at, with the latest observations. If the scanner has a variant analysis scout, it also returns the scout's per-variant digests and the differences between variants. Experiment scanners only.
 
 ### Rating results
 
@@ -103,7 +104,7 @@ Aggregate stats, rather than the rows themselves:
 - `vision-alerts-create`, `vision-alerts-update`, and `vision-alerts-delete` – manage them. A new alert notifies nobody until it has a destination.
 - `vision-alerts-destinations-create` and `vision-alerts-destinations-delete` – add or remove a Slack or webhook destination.
 - `vision-alerts-events-list` – an alert's history of checks, firings, and resolutions.
-- `vision-alerts-reset` – reset an errored or broken alert and run a fresh check.
+- `vision-alerts-reset` – reset a broken alert and run a fresh check. Only broken alerts can be reset.
 
 ### Scouts
 

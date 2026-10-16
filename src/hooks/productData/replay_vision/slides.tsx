@@ -11,6 +11,7 @@ import {
     IconGraph,
     IconBell,
     IconEye,
+    IconFlask,
 } from '@posthog/icons'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { LabeledList, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
@@ -82,24 +83,26 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Build a scanner in the wizard – prompt, scanner type, recording filters, and sampling rate – and it
-                    runs continuously on every matching session.
+                    Describe what you want to find out, and PostHog AI drafts a scanner that runs on every matching
+                    session.
                 </p>
                 <div className="@container">
                     <LabeledList
                         items={[
                             {
-                                label: 'Pick a scanner type',
-                                description: 'Summarize, classify intent, score frustration, or monitor for dead ends.',
-                            },
-                            {
-                                label: 'Scope it',
-                                description: 'Filter to the sessions that matter – a page, a cohort, a release.',
-                            },
-                            {
-                                label: 'Set sampling',
+                                label: 'Describe a goal',
                                 description:
-                                    'Choose how much of the matching traffic to scan, so cost stays predictable.',
+                                    'Write what the scanner should find out, or click a common starting point like "Where do people get stuck?" or "Track an experiment".',
+                            },
+                            {
+                                label: 'Choose what it can spend',
+                                description:
+                                    'Free uses only your free monthly credits and never adds to your bill. Set a budget gives it a number of credits a month, and PostHog AI fits the scanner to it.',
+                            },
+                            {
+                                label: 'Review the draft',
+                                description:
+                                    'PostHog AI picks the scanner type, prompt, filters, model, and sampling. Check the overview, edit any part, then create the scanner.',
                             },
                             {
                                 label: 'Let it run',
@@ -109,12 +112,15 @@ export const applications: CarouselSlide[] = [
                         ]}
                     />
                 </div>
+                <p className="text-sm text-secondary italic">
+                    Prefer to set everything yourself? Create a scanner from scratch.
+                </p>
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_53_55_2x_042bd6369d.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_goal_flow_light_8beb9024d2.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_58_56_2x_292863671d.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_goal_flow_dark_bf668d971a.png',
         },
     },
     {
@@ -157,9 +163,9 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_56_27_2x_1fedaa73d8.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_category_mix_light_29713d1d9b.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_57_50_2x_720995e1f8.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_category_mix_dark_84ec02d2b4.png',
         },
     },
     {
@@ -220,7 +226,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-// The six built-in scanner types shown in the "What it looks for" tab.
+// The starting points shown in the "What it looks for" tab, matching the scanner creation page.
 const scannerCards: {
     Icon: React.ComponentType<{ className?: string }>
     color: string
@@ -268,6 +274,13 @@ const scannerCards: {
         title: 'Session outcome',
         type: 'Classifier',
         description: 'Tag what actually happened – task completed, abandoned, errored, and so on.',
+    },
+    {
+        Icon: IconFlask,
+        color: 'text-orange',
+        title: 'Track an experiment',
+        type: 'Experiment',
+        description: 'Compare what users do in each variant of a running experiment.',
     },
 ]
 
@@ -343,9 +356,14 @@ export const topFeatures: CarouselSlide[] = [
                                     'Run a scanner against a single recording straight from the replay player – no schedule needed.',
                             },
                             {
-                                label: 'Bulk scan',
+                                label: 'Scan picked recordings',
                                 description:
-                                    'Select recordings in the list and scan them all at once; great for backfilling after you widen filters.',
+                                    'Select recordings in the list and scan them all at once with any scanner.',
+                            },
+                            {
+                                label: 'Backfill',
+                                description:
+                                    'Scan past recordings over a date range of up to a year. You see a cost estimate before it starts.',
                             },
                             {
                                 label: 'Run from your editor',

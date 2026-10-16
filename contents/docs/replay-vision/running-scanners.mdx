@@ -52,7 +52,7 @@ Every scanner has a **Run** tab with three panels:
 - **Backfill a date range** – see [backfill a date range](#backfill-a-date-range).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_run_tab_bb010c81f4.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_run_tab_384b454263.png"
   alt="A scanner's Run tab, with options to scan a single recording, scan a batch, or backfill a date range"
   classes="rounded"
 />
@@ -62,12 +62,12 @@ Every scanner has a **Run** tab with three panels:
 Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), go to the **Observations** tab in the player sidebar, and use **Scan this recording**. Pick the scanner you want to run, and PostHog queues a single observation against that recording.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_tab_93b1c58fc9.png"
-  alt="The replay player with the Observations sidebar open: the Scan this recording action, a chapter timeline, and the recording's observations"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_player_observations_sidebar_3966500ea9.png"
+  alt="The Observations tab in the replay player sidebar: the Scan this recording action, a chapter timeline, and the recording's observations"
   classes="rounded"
 />
 
-Below the player, **Summarize this recording** writes a summary of the recording you're watching. If your project has exactly one summarizer scanner, it uses that one, otherwise a built-in prompt. Use the menu next to the button to pick a different summarizer, and PostHog remembers your choice. A summary from the built-in prompt isn't saved as a scanner, so there is nothing to open or edit.
+The button in the bar below the player writes a summary of the recording you're watching. If your project has exactly one summarizer scanner, the button reads **Summarize with** and the scanner's name. Otherwise it reads **Summarize this recording** and uses a built-in prompt. Use the menu next to the button to pick a different summarizer, and PostHog remembers your choice. The summary appears in the **Observations** tab in the player sidebar, and after a run the button reads **Summarize again**. A summary from the built-in prompt isn't saved as a scanner, so there is nothing to open or edit.
 
 ### From the recordings list
 
