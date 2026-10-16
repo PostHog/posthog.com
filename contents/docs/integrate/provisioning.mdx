@@ -59,22 +59,41 @@ sequenceDiagram
     PH-->>U: redirect to path (session minted)
 ```
 
+## What your app can do
+
+Most of the provisioning API is self-serve. The rest needs PostHog to turn it on for your app.
+
+| Capability | How to get it |
+| --- | --- |
+| Create accounts and organizations for your users | Self-serve. [Register your app](#register-your-app) and [sign your requests](#sign-requests-with-a-key). |
+| Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register. |
+| Higher [rate limits](#rate-limits) | Self-serve. Signing your requests gives you 5x the base limits, and [linking your app to an organization](#link-your-partner-app-to-a-posthog-organization-optional) doubles that. |
+| [Deep links](#deep-linking) that log users into their project | Ask PostHog. Your app must also sign its requests. |
+| A personal API key with each provisioned project | Ask PostHog. |
+| Paying for your users' PostHog usage | Ask PostHog. Your users' organizations bill to you instead of to them. |
+| Custom rate limits | Ask PostHog, if the top [tier](#your-tier) isn't enough. |
+| A Verified badge | Ask PostHog. |
+
+To ask for any of these, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic.
+
+Verification changes what your users see, not what your app can do. A verified app shows a Verified badge in your users' organization settings and skips the [first-login question](#what-the-user-gets) about keeping it connected.
+
 ## Set up as a partner
 
 ### Host a CIMD metadata document
 
 PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
 
-Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/posthog-client.json`:
+Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well-known/yourapp.json`:
 
 ```json
 {
-  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "client_id": "https://yourapp.com/.well-known/yourapp.json",
   "client_name": "Your App Name",
   "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
   "logo_uri": "https://yourapp.com/logo.png",
   "token_endpoint_auth_method": "private_key_jwt",
-  "jwks_uri": "https://yourapp.com/.well-known/posthog-jwks.json",
+  "jwks_uri": "https://yourapp.com/.well-known/jwks.json",
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
@@ -106,18 +125,18 @@ This call is not authenticated, because an app that hasn't registered yet has no
 curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
   -H "Content-Type: application/json" \
   -H "API-Version: 0.1d" \
-  -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
+  -d '{"client_id": "https://yourapp.com/.well-known/yourapp.json"}'
 ```
 
 **Response** (HTTP 200):
 
 ```json
 {
-  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "client_id": "https://yourapp.com/.well-known/yourapp.json",
   "registered": true,
   "client_type": "confidential",
   "token_endpoint_auth_method": "private_key_jwt",
-  "jwks_uri": "https://yourapp.com/.well-known/posthog-jwks.json",
+  "jwks_uri": "https://yourapp.com/.well-known/jwks.json",
   "scopes": ["insight:read", "project:read"],
   "provisioning": {
     "active": true,
@@ -167,7 +186,7 @@ Do these steps in order: publish your keys, update your metadata document, call 
 
    ```json
    "token_endpoint_auth_method": "private_key_jwt",
-   "jwks_uri": "https://yourapp.com/.well-known/posthog-jwks.json"
+   "jwks_uri": "https://yourapp.com/.well-known/jwks.json"
    ```
 
 3. Call the [registration endpoint](#register-your-app), on both `us.posthog.com` and `eu.posthog.com` if you use both regions. It re-reads your document and switches your app over in the same request. The response shows `"token_endpoint_auth_method": "private_key_jwt"`, and its `jwks` check lists the key IDs PostHog found at your `jwks_uri`. If that check fails, fix it right away: your app has already switched, so signed requests fail until PostHog can read your keys.
@@ -283,7 +302,7 @@ import uuid
 import jwt
 import requests
 
-CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json"
+CLIENT_ID = "https://yourapp.com/.well-known/yourapp.json"
 KEY_ID = "yourapp-example-key-1"
 AUDIENCE = ["https://us.posthog.com", "https://eu.posthog.com"]
 ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
@@ -320,7 +339,7 @@ def refresh_tokens(private_key_pem: str, refresh_token: str) -> dict:
 import crypto from "node:crypto";
 import { SignJWT, importPKCS8 } from "jose";
 
-const CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json";
+const CLIENT_ID = "https://yourapp.com/.well-known/yourapp.json";
 const KEY_ID = "yourapp-example-key-1";
 const AUDIENCE = ["https://us.posthog.com", "https://eu.posthog.com"];
 const ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
@@ -388,12 +407,12 @@ You can link the app to a PostHog organization with a verification token, which 
 
    ```json
    {
-     "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+     "client_id": "https://yourapp.com/.well-known/yourapp.json",
      "client_name": "Your App Name",
      "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
      "logo_uri": "https://yourapp.com/logo.png",
      "token_endpoint_auth_method": "private_key_jwt",
-     "jwks_uri": "https://yourapp.com/.well-known/posthog-jwks.json",
+     "jwks_uri": "https://yourapp.com/.well-known/jwks.json",
      "grant_types": ["authorization_code"],
      "response_types": ["code"],
      "com.posthog": {
@@ -441,7 +460,7 @@ BODY=$(cat <<JSON
   "id": "req_unique_request_id",
   "email": "user@example.com",
   "name": "Jane Doe",
-  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "client_id": "https://yourapp.com/.well-known/yourapp.json",
   "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
   "client_assertion": "$CLIENT_ASSERTION",
   "code_challenge": "$CODE_CHALLENGE",
@@ -633,7 +652,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | `api_key` | The project token (starts with `phc_`) – use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
 
-For authenticated REST API calls, use the OAuth `access_token` from [Step 2](#step-2-exchange-the-code-for-tokens) as a `Bearer` token. It carries the [scopes](#available-scopes) you requested in the account request. Provisioning does not return a `personal_api_key` in this response.
+For authenticated REST API calls, use the OAuth `access_token` from [Step 2](#step-2-exchange-the-code-for-tokens) as a `Bearer` token. It carries the [scopes](#available-scopes) you requested in the account request. By default, provisioning doesn't return a `personal_api_key` in this response.
 
 ### Deep linking
 
@@ -854,7 +873,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
 
 # Or as a private_key_jwt client, with the signed assertion in the form body
 curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
-  -d "client_id=https://yourapp.com/.well-known/posthog-client.json" \
+  -d "client_id=https://yourapp.com/.well-known/yourapp.json" \
   -d "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" \
   -d "client_assertion=eyJhbGci..."
 ```
@@ -888,7 +907,7 @@ Here's a complete example in Node.js. It signs requests as described in [sign re
 import crypto from "node:crypto";
 import { SignJWT, importPKCS8 } from "jose";
 
-const CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json";
+const CLIENT_ID = "https://yourapp.com/.well-known/yourapp.json";
 const BASE_URL = "https://us.posthog.com";
 const KEY_ID = "yourapp-example-key-1";
 const ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
