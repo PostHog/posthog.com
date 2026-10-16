@@ -108,7 +108,7 @@ Requirements:
 - **`com.posthog.provisioning`** must be `true` to use the provisioning API. Your `client_id` is a public URL, so a request that names it proves nothing about who sent it. Declaring the opt-in in the document, which only you can publish, is what grants your app provisioning access. It must be the JSON literal `true`, not the string `"true"`.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key). An app that creates accounts can use `"none"` (a public client, PKCE only) only if it was registered before October 16, 2026, and only until October 23, 2026 at 16:00 UTC. See [when signing is required](#when-signing-is-required).
+- **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 
@@ -172,10 +172,7 @@ With `private_key_jwt`, your app signs a short-lived JWT, called a client assert
 
 #### When signing is required
 
-If your app can create accounts, it must sign. The [registration](#register-your-app) response shows this as `"can_create_accounts": true`.
-
-- **Registered before October 16, 2026** - your app can keep sending unsigned requests until October 23, 2026 at 16:00 UTC, in both regions. After that, unsigned account requests and token calls get a 401.
-- **Registered on or after October 16, 2026** - your app must sign its account requests and token calls from the first one. Unsigned ones get a 401.
+If your app can create accounts, it must sign its account requests and token calls. The [registration](#register-your-app) response shows this as `"can_create_accounts": true`. Unsigned requests get a 401.
 
 #### Turn on key signing
 
@@ -286,7 +283,7 @@ If a private key leaks, remove it from your JWKS, then call the registration end
 
 #### Switch back to a public client
 
-An app that creates accounts can be a public client only if it was registered before October 16, 2026, and only until October 23, 2026 at 16:00 UTC. After that, its unsigned account requests and token calls get a 401.
+An app that creates accounts can't be a public client, because its unsigned account requests and token calls get a 401.
 
 Set `token_endpoint_auth_method` to `"none"`, call the registration endpoint in each region you use, then stop sending assertions, because a public client's account requests fail if they carry one. Your [tier](#your-tier) drops to public: 1x, or 2x if your app is linked to an org via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional). Deep links stop working, with `/deep_links` returning a 403 `forbidden`. Access and refresh tokens you already hold keep working. Removing `jwks_uri` while `token_endpoint_auth_method` stays `"private_key_jwt"` doesn't switch you back: PostHog rejects that document and keeps the configuration it last accepted, and the registration endpoint reports the problem in its `metadata_document` check.
 
@@ -344,7 +341,7 @@ const KEY_ID = "yourapp-example-key-1";
 const AUDIENCE = ["https://us.posthog.com", "https://eu.posthog.com"];
 const ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
-const privateKey = await importPKCS8(process.env.POSTHOG_SIGNING_KEY, "ES256");
+const privateKey = await importPKCS8(process.env.JWKS_PRIVATE_SIGNING_KEY, "ES256");
 
 function buildClientAssertion() {
   return new SignJWT({})
@@ -826,7 +823,7 @@ Budgets scale with how strongly your app identifies itself, on two axes:
 | `none` (public, PKCE) | 1x | 2x |
 | `private_key_jwt` | 5x | 10x |
 
-An app that creates accounts can stay in the `none` row only until October 23, 2026 at 16:00 UTC. See [when signing is required](#when-signing-is-required).
+An app that creates accounts must sign, so it can't use the `none` row. See [when signing is required](#when-signing-is-required).
 
 Both upgrades are self-serve: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. They apply the next time PostHog reads your metadata document, and you can make that happen right away by calling the [registration endpoint](#register-your-app). Nobody to ask.
 
@@ -912,7 +909,7 @@ const BASE_URL = "https://us.posthog.com";
 const KEY_ID = "yourapp-example-key-1";
 const ASSERTION_TYPE = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
 
-const privateKey = await importPKCS8(process.env.POSTHOG_SIGNING_KEY, "ES256");
+const privateKey = await importPKCS8(process.env.JWKS_PRIVATE_SIGNING_KEY, "ES256");
 
 function buildClientAssertion() {
   return new SignJWT({})
