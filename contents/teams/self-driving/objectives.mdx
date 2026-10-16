@@ -7,26 +7,35 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 1. Why aren't more people trying Self-Driving?
 2. Do improvements to report quality deliver enough value for users to keep coming back?
 
-### Make Self-Driving easy to start and useful for ongoing work – Chris and Dylan
+### Make Self-Driving easy to start and useful for ongoing work – Georgiy, Dylan, and Andy
 
-#### Increase activation – Chris
+#### Increase activation – Georgiy
 
--   Improve adoption. Let new users start from PostHog web. Simplify onboarding by making it UI-first. Run the CLI wizard in a cloud sandbox instead of on the user's machine.
--   Improve onboarding and empty states so users understand the value and know how to get their first useful report.
--   Help users discover and adopt more capabilities after their first useful report.
+-   Let new users start from PostHog web. Make the GitHub connection the only required onboarding step.
+-   Move signal source and scout setup into progressive discovery. Use sensible defaults and introduce each option when it becomes useful.
+-   Improve onboarding and empty states. Help users understand the value and get their first useful report.
+-   Help users discover more capabilities after their first useful report.
 -   Help users activate later in the user journey when they have data.
 -   Experiment with report access without GitHub. In this experiment, require a repository connection only for work that needs code access.
--   Scouts on by default: every project has the canonical scouts and project-specific suggestions waiting, so turning one on is the whole journey – Andy.
+-   Give every project canonical scouts and project-specific suggestions. Make scout activation a single action after onboarding – Andy.
 
 #### Help committed users turn reports into completed work – Dylan
 
 -   Build an effective, enjoyable UI for understanding reports and managing tasks. Make the next action clear.
 -   Help users understand what was found, what changed, and what evidence supports it, so they can review work confidently with fewer decisions.
 -   Make assignment and personalization useful: show what each person owns, what needs their attention, and what matters to them.
--   Help users find the reports that need attention first, based on urgency, relevance, and work status.
--   Enable users to move from a report to implementation and review in PostHog Desktop.
 -   Improve report notifications so relevant findings reach the right people.
 -   Support use by larger orgs as report volumes and team sizes grow. Make reports work for teams with more than a few engineers, and keep ownership, work status, and review responsibilities clear.
+
+#### Put the right reports first – Andy
+
+-   Own one shared ranking system for the inbox, home page, API, PostHog AI, and external agents.
+-   Provide stable probabilities that a user will open, act on, or fix each report. Improve these models over time.
+-   Add project and user context when the available data supports useful personalization.
+-   Measure ranking quality with offline evaluations and online experiments.
+-   Dylan owns how each surface selects, presents, and explains reports.
+-   Andy owns the ranking inputs, models, and relevance quality.
+-   Dylan and Andy share the user outcome: people find the right report and complete useful work.
 
 ### Make the report layer independent of our UI – Dylan, Georgiy
 
@@ -83,7 +92,6 @@ Our Q4 priority is to make Self-Driving's research valuable enough that customer
 
 ### Only if capacity remains
 
--   Further ranking improvements: explore more advanced or learned ranking if report ordering prevents users from finding useful work. Basic prioritization remains part of the core report experience.
 -   Take ReviewHog to the next level and add other last-mile features (visual reviews, etc.).
 -   Make implementation better.
 -   Autoresearch: get v1 shipped for internal dogfooding – Andy.
