@@ -79,7 +79,7 @@ Set the cooldown (in minutes) to 0 for no minimum. The default is 0.
 
 An alert sends one notification when it starts firing and one when it resolves. It doesn't notify again unless it resolves and then fires again, even if new matching logs arrive while it's firing.
 
-The cooldown sets the minimum time between an alert's notifications. PostHog doesn't send notifications during the cooldown, which cuts noise from an alert that keeps resolving and firing again.
+The cooldown sets the minimum time between an alert's firing and resolve notifications. PostHog doesn't send them during the cooldown, which cuts noise from an alert that keeps resolving and firing again.
 
 ## Manage alerts
 
