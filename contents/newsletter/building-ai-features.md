@@ -21,7 +21,7 @@ We took our time entering this gold rush. In 2023, when many started adding AI-p
 
 A year later, in an August 2024 hackathon, we built a trends generator agent and it was obvious things had changed. Given the proper context, models were now good enough to generate useful insights.
 
-That was 12 months ago. Since then, we shipped [Max AI](/max), our AI-powered product analyst, and we’ve learned a bunch of lessons along the way.
+That was 12 months ago. Since then, we shipped [Max AI](/max), our AI-powered product analyst, and we’ve learned [a bunch of lessons](/newsletter/building-ai-products) along the way.
 
 The first one? Don’t make your product worse.
 
