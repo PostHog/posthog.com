@@ -15,17 +15,17 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 <CalloutBox icon="IconInfo" title="Alpha" type="fyi">
 
-The Azure Log Analytics source is in alpha. Tell us how it works for you, and report anything that looks wrong.
+The Azure Log Analytics source is in alpha. [Tell us](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) how it works for you, and report anything that looks wrong.
 
 </CalloutBox>
 
-The Azure Log Analytics connector syncs tables from an Azure Monitor Log Analytics workspace into PostHog. Use it to join application logs, requests, and custom log tables with your product data.
+The Azure Log Analytics connector syncs tables from an Azure Monitor Log Analytics workspace into PostHog. Use it to join application logs, requests, and custom log tables with your product data. In the source list, it's called **Microsoft Azure (Azure Monitor / Log Analytics)**.
 
 ## Prerequisites
 
 - A Log Analytics workspace, and permission to assign roles on it.
 - Permission to register an app in Microsoft Entra ID.
-- Tables on the **Analytics** plan. Basic and Auxiliary tables can't be read through the query API this source uses.
+- Tables on the **Analytics** plan. Basic and Auxiliary tables can't be read through the query API this source uses, and the table list marks them.
 
 ## Adding a data source
 
@@ -50,9 +50,9 @@ Role assignments can take a few minutes to apply.
 
 <SyncModes />
 
-Every table supports incremental sync on `TimeGenerated`. Records can reach a workspace a few minutes after their `TimeGenerated`, so each incremental run reads the last hour again. Rows are keyed on `_ItemId`, so the overlap doesn't create duplicates.
+Every table supports incremental sync on `_IngestionTime`, the time Azure stored each record. Records from an agent that was offline can arrive hours after their `TimeGenerated`, and they still sync because they have a recent ingestion time. Each incremental run reads the last 15 minutes again, because Azure ingests records concurrently. Rows are keyed on `_ItemId`, so the overlap doesn't create duplicates. Append only isn't available: only merge removes the duplicates.
 
-A full refresh reads everything the workspace still retains. Workspace retention decides how far back that goes.
+A full refresh reads everything the workspace still retains. The table's interactive retention period decides how far back that goes.
 
 ## Configuration
 
@@ -65,7 +65,8 @@ A full refresh reads everything the workspace still retains. Workspace retention
 ## Troubleshooting
 
 - **The app cannot query this workspace** – the app registration is missing the **Log Analytics Reader** role on the workspace, or the assignment hasn't applied yet.
+- **Microsoft Entra ID rejected the app credentials** – the client secret expired or was copied incorrectly. Create a new secret under **Certificates & secrets** and update the source.
 - **No table with that name** – table names are case-sensitive. Check the name in the workspace's **Logs** page.
-- **A sync fails with a partial result** – the query hit a Log Analytics service limit. Run the sync again. If it keeps failing, contact support with the table name.
+- **A sync fails with a partial result** – the query hit a Log Analytics service limit even after PostHog retried with smaller pages. Contact support with the table name.
 
 <TroubleshootingLink />
