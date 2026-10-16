@@ -37,17 +37,18 @@ export default function TeamImage({
                     <CloudinaryImage src={polaroidSrc ?? teamImage?.image?.data?.attributes?.url} className="" />
                 )}
             </div>
-            {editing ? (
-                <input
-                    name="teamImageCaption"
-                    onChange={(e) => setFieldValue('teamImageCaption', e.target.value)}
-                    value={values.teamImageCaption}
-                    placeholder="Caption"
-                    className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-input"
-                />
-            ) : (
-                <div className="text-right text-[13px] mr-2">{teamImage?.caption}</div>
-            )}
+            {!polaroidSrc &&
+                (editing ? (
+                    <input
+                        name="teamImageCaption"
+                        onChange={(e) => setFieldValue('teamImageCaption', e.target.value)}
+                        value={values.teamImageCaption}
+                        placeholder="Caption"
+                        className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-input"
+                    />
+                ) : (
+                    <div className="text-right text-[13px] mr-2">{teamImage?.caption}</div>
+                ))}
         </figure>
     ) : null
 }

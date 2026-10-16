@@ -804,7 +804,7 @@ export default function TeamPage(props: TeamPageProps) {
                                 editing={editing}
                                 polaroidSrc={
                                     slug === 'platform-features'
-                                        ? 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Photo_Edit_8f8dc3171a.png'
+                                        ? 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Edit_7442a20723.png'
                                         : undefined
                                 }
                             />
