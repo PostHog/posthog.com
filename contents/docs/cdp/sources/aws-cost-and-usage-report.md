@@ -42,7 +42,7 @@ When linking AWS Cost and Usage Report, you'll need:
 - **S3 bucket**: the bucket name only, without `s3://` or a path.
 - **S3 path prefix** (optional): the prefix set on the export. Leave it empty if the export has none.
 - **Export name**: the name of the export in Data Exports.
-- **First billing period to sync** (optional): the earliest billing period to read, in `YYYY-MM` format. Leave it empty to sync every billing period in the bucket.
+- **First billing period to sync**: the earliest billing period to read, in `YYYY-MM` format.
 
 ### Creating IAM credentials
 
@@ -78,7 +78,7 @@ The `cost_and_usage` table only supports full refresh.
 
 AWS rewrites a whole billing period on each delivery, and keeps restating the previous month for up to two weeks after it ends. Line item IDs also change between deliveries, so there is no stable key to merge on. Because of this, every sync rebuilds the table from the latest delivery of each billing period. The table is partitioned by month on the `billing_period` column.
 
-Each sync reads every billing period from the **First billing period to sync** onward. Set it to limit how many months each sync reads.
+Each sync reads every billing period from the **First billing period to sync** onward, and each read counts toward your synced rows. Start at the earliest month you need.
 
 PostHog only reads a billing period once AWS has written its manifest. AWS writes the manifest after every data file of a delivery has landed, so a billing period without one is still being delivered and is skipped until the next sync. If AWS is rewriting a billing period while PostHog reads it, the sync retries and reads the finished delivery.
 

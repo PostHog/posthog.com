@@ -25,6 +25,7 @@ You need:
   - `glue:GetDatabase`
   - `glue:GetTables`
   - `glue:GetTable`
+  - `glue:GetPartitions`, `glue:GetPartition` and `glue:BatchGetPartition`, which Athena checks when it queries a partitioned table
   - `athena:GetWorkGroup`
   - `athena:StartQueryExecution`
   - `athena:GetQueryExecution`
@@ -65,6 +66,9 @@ PostHog lists the tables in the Glue database. Partition key columns are include
         "glue:GetDatabase",
         "glue:GetTables",
         "glue:GetTable",
+        "glue:GetPartitions",
+        "glue:GetPartition",
+        "glue:BatchGetPartition",
         "athena:GetWorkGroup",
         "athena:StartQueryExecution",
         "athena:GetQueryExecution",
