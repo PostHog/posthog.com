@@ -3,7 +3,13 @@ import Tooltip from 'components/Tooltip'
 import { IconInfo, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
-import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
+import {
+    buildProductAddons,
+    calculatePrice,
+    getAddonsCostForProduct,
+    getCalculatorTotal,
+    readLegacyRetention,
+} from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
@@ -460,7 +466,18 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
         )
         let restoredAnalytics = analyticsData
         const restoredProducts = products.map((product) => {
-            const inputs = readProductInputs(params[product.type], getProductInputs(product, analyticsData))
+            const productParams: any = params[product.type]
+            let inputs = readProductInputs(productParams, getProductInputs(product, analyticsData))
+            // Links from the old two-input calculator carry retained GB as an add-on volume
+            const legacyRetention =
+                product.retention && productParams?.retentionMonths === undefined
+                    ? readLegacyRetention(
+                          product.retention,
+                          inputs.volume,
+                          productParams?.addons?.[product.retention.key]
+                      )
+                    : null
+            if (legacyRetention) inputs = { ...inputs, ...legacyRetention }
             if (product.type === 'product_analytics') {
                 restoredAnalytics = Object.fromEntries(
                     Object.entries(analyticsData).map(([key, value]) => [

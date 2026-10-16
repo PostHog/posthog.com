@@ -22,6 +22,7 @@ import {
     getCalculatorTotal,
     getRetentionMonths,
     getRetentionVolume,
+    readLegacyRetention,
     RETENTION_SLIDER_STEPS,
     withCompanionAddons,
 } from './calculatorLogic.ts'
@@ -272,9 +273,22 @@ describe('Logs custom retention', () => {
         assert.equal(roundTrip({ volume: 100, retentionMonths: 500 }).months, 86)
     })
 
-    test('falls back to the 14-day default for a link from the old two-input calculator', () => {
-        const link = roundTrip({ volume: 100, addons: { logs_retention_custom: { volume: 50, months: 12 } } })
-        assert.deepEqual({ volume: link.volume, months: link.months }, { volume: 100, months: 0 })
+    test('converts a link from the old two-input calculator to total GB and months kept', () => {
+        const legacyLink = (logs: Record<string, unknown>) => {
+            const parsed = qs.parse(qs.stringify({ logs }, { encodeValuesOnly: true })).logs as any
+            return readLegacyRetention(retentionConfig, Number(parsed.volume), parsed.addons?.logs_retention_custom)
+        }
+        // 100 GB plus 50 GB kept 12 months: ingestion on 150 GB, and the same 600 GB-months
+        const converted = legacyLink({ volume: 100, addons: { logs_retention_custom: { volume: 50, months: 12 } } })
+        assert.deepEqual(converted, { volume: 150, retentionMonths: 4 })
+        assert.deepEqual(logsEstimate(companionShape, 150, 4), { ingestion: 35, retention: 30 })
+        // Links from before the months input bill one month
+        assert.deepEqual(legacyLink({ volume: 0, addons: { logs_retention_custom: { volume: 100 } } }), {
+            volume: 100,
+            retentionMonths: 1,
+        })
+        assert.equal(legacyLink({ volume: 100, addons: { logs_retention_custom: { volume: 0, months: 12 } } }), null)
+        assert.equal(legacyLink({ volume: 100 }), null)
     })
 
     test('reads the billing limit flag only from the companion shape', () => {

@@ -127,6 +127,25 @@ export const getRetentionMonths = (retention: RetentionConfig, months?: number |
         : 0
 
 /**
+ * Reads a link from the old calculator, which took GB with custom retention as a second volume
+ * (`addons.<retention key>.volume` and `.months`). The volume becomes the total GB, so ingestion stays exact,
+ * and the months keep the GB-months as close as whole months allow. Null when the link has no retained GB.
+ */
+export const readLegacyRetention = (
+    retention: RetentionConfig,
+    volume: number,
+    legacy?: { volume?: unknown; months?: unknown } | null
+): { volume: number; retentionMonths: number } | null => {
+    const retainedVolume = Math.round(Number(legacy?.volume))
+    if (!Number.isFinite(retainedVolume) || retainedVolume <= 0) return null
+    // Links from before the months input bill one month
+    const legacyMonths = legacy?.months === undefined ? 1 : Number(legacy.months)
+    const months = Number.isFinite(legacyMonths) && legacyMonths > 0 ? legacyMonths : 1
+    const total = volume + retainedVolume
+    return { volume: total, retentionMonths: getRetentionMonths(retention, (retainedVolume * months) / total) }
+}
+
+/**
  * Steps on the retention slider's track. It uses the volume sliders' curve (position = months^0.4), which is
  * steepest at the top, so the track needs enough steps for every whole month to stay reachable there.
  */
