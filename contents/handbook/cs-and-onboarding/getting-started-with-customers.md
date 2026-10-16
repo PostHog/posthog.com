@@ -12,6 +12,19 @@ Also read [Get people to talk to you](/handbook/growth/sales/expansion-and-reten
 
 Before you reach out, build context. The more you bring to your first conversation, the faster you get to relevant recommendations.
 
+### Who's already talking to them
+
+A quiet shared channel doesn't mean nobody at PostHog is talking to them. Conversations happen on calls, over email, and in tickets too, so check before you reach out:
+
+- **[Gong](/handbook/growth/sales/sales-and-cs-tools)**: recordings of customer calls. Gong is the default for new calls, so start here. Older calls live in **BuildBetter**: use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history.
+- **Vitally**: the account's Active conversations tab shows past outreach from anyone on our side.
+- **Salesforce**: the account owner, open opportunities, and activity history.
+- **[PostHog Support](https://us.posthog.com/project/2/support/tickets)**: filter tickets on your own `ae_*` or `csm_*` [tag](/handbook/support/posthog-support#customer-and-account-tags) to see every ticket raised for the accounts you own, closed ones included. You can also open a person's profile in PostHog to see any support tickets they've raised. See who the key contacts have been, who's supported them in the past, and whether anything was left hanging. A ticket that went quiet makes a great first message.
+- **[SupportHog](/handbook/growth/sales/slack-channels)**: Slack channel history. Our own tool links [shared Slack (and MS Teams) channels](/handbook/growth/sales/slack-channels) to Salesforce accounts so you can view Slack/Teams interactions for your accounts.
+- **Our own Slack**: search for the company name. Pricing chats, escalations, and engineering threads often never make it into notes.
+
+If someone's already talking to them, start from that conversation and ask them for a warm intro instead of reaching out cold. If you're taking over from a previous owner, use the [account handover checklist](/handbook/growth/sales/account-allocation#account-handover-checklist).
+
 ### Their business
 
 - What industry are they in? What products do they make?
@@ -160,11 +173,7 @@ Prioritize potential churn risks, low engagement, and accounts where something i
 
 ### Account research
 
-A lot of valuable context lives in past conversations:
-
-- **BuildBetter** — recordings of customer success, sales, and onboarding calls. Use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history, or use direct search / AI chat.
-- **[SupportHog](/handbook/growth/sales/slack-channels)** — Slack channel history. Our own tool links [shared Slack (and MS Teams) channels](/handbook/growth/sales/slack-channels) to Salesforce accounts so you can view Slack/Teams interactions for your accounts.
-- **[PostHog Support](https://us.posthog.com/project/2/support/tickets)** — filter tickets on your own `ae_*` or `csm_*` [tag](/handbook/support/posthog-support#customer-and-account-tags) to see every ticket raised for the accounts you own. You can also open a person's profile in PostHog to see any support tickets they've raised. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
+Keep checking the sources in [who's already talking to them](#whos-already-talking-to-them). Recent calls and tickets are the quickest way to catch up before any conversation with the customer.
 
 ### Product usage analysis
 
