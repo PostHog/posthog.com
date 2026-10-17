@@ -993,6 +993,7 @@ const Auth = () => {
 
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
+    const posthog = usePostHog()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
     const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
@@ -1108,11 +1109,27 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         validateOnChange: true,
         validateOnBlur: false,
         onSubmit: async (values, { setSubmitting }) => {
+            // Which step we are on, so a failure can say where it happened instead of
+            // every path landing in the same catch with the same message.
+            let step = 'auth'
             try {
                 const { logoLight, logoDark, logomark, ...rest } = values
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
-                if (!profileID || !jwt) return
+                if (!profileID || !jwt) {
+                    // Used to return silently: the button stopped and the form said nothing.
+                    posthog?.capture('cool_tech_jobs_submit_failed', {
+                        step,
+                        reason: !jwt ? 'missing_jwt' : 'missing_profile_id',
+                    })
+                    setConfirmationMessage({
+                        type: 'error',
+                        title: 'Your session has expired',
+                        description: 'Sign in again and submit once more. Nothing you typed has been lost.',
+                    })
+                    return
+                }
+                step = canUpdate ? 'update_company' : 'create_company'
                 const endpoint = isModerator ? 'companies' : 'pending-companies'
                 const jobBoardChanged =
                     values.jobBoardType !== company?.attributes?.jobBoardType ||
@@ -1142,12 +1159,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     }
                 )
                 if (!companyResponse.ok) {
-                    throw new Error('Failed to create company')
+                    throw new Error(`${step}: ${companyResponse.status} ${companyResponse.statusText}`)
                 }
                 const createdCompany = await companyResponse.json()
                 if (!createdCompany?.data?.id) {
-                    throw new Error('Failed to create company')
+                    throw new Error(`${step}: response had no data.id`)
                 }
+                step = 'upload_logos'
                 // Upload images and update the company
                 const uploadedLogoLight =
                     values.logoLight?.file &&
@@ -1173,6 +1191,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         id: profileID,
                         type: 'api::profile.profile',
                     }))
+                step = 'attach_logos'
                 const updateResponse = await fetch(
                     `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}/${createdCompany.data.id}`,
                     {
@@ -1203,9 +1222,10 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     }
                 )
                 if (!updateResponse.ok) {
-                    throw new Error('Failed to update company')
+                    throw new Error(`${step}: ${updateResponse.status} ${updateResponse.statusText}`)
                 }
                 if (isModerator) {
+                    step = 'scrape_jobs'
                     const { jobsCreated } = await fetch(
                         `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`,
                         {
@@ -1245,6 +1265,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 }
                 onSuccess?.()
             } catch (error) {
+                // The form previously swallowed this: no log, no event, no step. A company
+                // reporting "it does not submit" left nothing behind to look at.
+                console.error('[cool-tech-jobs] submit failed', { step, error })
+                posthog?.capture('cool_tech_jobs_submit_failed', {
+                    step,
+                    message: error instanceof Error ? error.message : String(error),
+                })
                 setConfirmationMessage({
                     type: 'error',
                     title: 'Failed to submit application',
