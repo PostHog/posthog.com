@@ -6,6 +6,7 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/docs',
     '/handbook',
     '/blog',
+    '/compare',
     '/newsletter',
     '/changelog',
     '/pocket-guides',
