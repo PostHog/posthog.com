@@ -1,0 +1,115 @@
+import React from 'react'
+import { UnterPageId } from '../overlay/types'
+import RidePage from './RidePage'
+import HighwayPage from './HighwayPage'
+import HelpPage from './HelpPage'
+import SafetyPage from './SafetyPage'
+
+interface UnterSiteProps {
+    page: UnterPageId
+    onNavigate: (page: UnterPageId) => void
+    /** Fired by the footer's "Quick survey" badge, the survey's trigger. */
+    onToggleSurvey: () => void
+}
+
+const SURVEY_BADGE_PAGES: UnterPageId[] = ['ride', 'highway']
+
+/** Exported so the wayfinding hints can name pages exactly as the nav labels them. */
+export const NAV_ITEMS: { id: UnterPageId; label: string }[] = [
+    { id: 'ride', label: 'Shuffle' },
+    { id: 'highway', label: 'Host' },
+    { id: 'help', label: 'Help' },
+    { id: 'safety', label: 'Safety' },
+]
+
+export default function UnterSite({ page, onNavigate, onToggleSurvey }: UnterSiteProps): JSX.Element {
+    return (
+        <>
+            <nav className="un-topnav" data-unter-id="topnav">
+                <button className="un-wordmark" onClick={() => onNavigate('ride')}>
+                    Unter
+                </button>
+                {NAV_ITEMS.map(({ id, label }) => (
+                    <button
+                        key={id}
+                        className={`un-nlink${page === id ? ' active' : ''}`}
+                        onClick={() => onNavigate(id)}
+                    >
+                        {label}
+                    </button>
+                ))}
+                <span className="un-spacer" />
+                <span className="un-nlink quiet">EN-GB</span>
+                <span className="un-nlink quiet">Log in</span>
+                <button className="un-pill" data-unter-id="btn-signup">
+                    Sign up
+                </button>
+            </nav>
+
+            <main>
+                {page === 'ride' && <RidePage onNavigate={onNavigate} />}
+                {page === 'highway' && <HighwayPage />}
+                {page === 'help' && <HelpPage />}
+                {page === 'safety' && <SafetyPage />}
+            </main>
+
+            <footer className="un-footer">
+                {/* Not on Help or Safety: both already carry their own survey (the CSAT
+                    prompt and the inline "was this helpful", each with its own marker),
+                    so a third one would be noise. */}
+                {SURVEY_BADGE_PAGES.includes(page) && (
+                    <button className="un-survey-badge" data-unter-id="survey-badge" onClick={onToggleSurvey}>
+                        Quick survey
+                    </button>
+                )}
+                <div className="un-shell">
+                    <div className="un-fbrand">Unter</div>
+                    <div className="un-fcols">
+                        <div>
+                            <h5>Company</h5>
+                            <span>Newsroom</span>
+                            <span>Blog</span>
+                            <span>Careers</span>
+                        </div>
+                        <div>
+                            <h5>Products</h5>
+                            <span>Shuffle</span>
+                            <span>Reserve</span>
+                            <span>Unter Host</span>
+                        </div>
+                        <div>
+                            <h5>Responsibility</h5>
+                            <span>Safety</span>
+                            <span>Sustainability</span>
+                            <span>Accessibility</span>
+                        </div>
+                    </div>
+                    <div className="un-fbottom">
+                        <div className="un-real">
+                            <b>Unter is made up. Urban hedgehogs are not.</b> They commute through 13cm gaps in garden
+                            fences every night, and there aren't enough of them. Cut a real one via{' '}
+                            <a href="https://www.hedgehogstreet.org" target="_blank" rel="noreferrer">
+                                Hedgehog Street
+                            </a>
+                            , or watch Sir David Attenborough escort a hedgehog through one in{' '}
+                            <a
+                                href="https://www.youtube.com/watch?v=Gsd5_xzebH0"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-unter-id="footer-outbound"
+                            >
+                                BBC's Wild London
+                            </a>
+                            .
+                        </div>
+                        <div className="un-flinks" data-unter-id="footer-legal">
+                            <span>Privacy</span>
+                            <span>Terms</span>
+                            <span>© 2026 Unter Technologies</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </>
+    )
+}
