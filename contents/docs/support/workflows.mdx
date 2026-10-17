@@ -109,21 +109,25 @@ Two workflow actions are available for ticket management:
 
 ### Get ticket action
 
-Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
+Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla`).
 
 
 | Input field | Type | Default |
 |-------|------|---------|
 | `ticket_id` | string | `{event.properties.ticket_id}` |
+| `include_first_customer_message_text` | boolean | `false` |
 
+
+The output field names are different from the trigger event property names. For example, the ticket number is `number`, not `ticket_number`, and the SLA deadline is `sla`, not `sla_due_at`.
 
 | Output field | Type | Description |
 |-------|------|-------------|
 | `id` | string (UUID) | Ticket ID |
-| `ticket_number` | int | Per-team ticket number |
+| `number` | int | Per-team ticket number |
 | `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
 | `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_detail` | string or null | More detail about the channel source |
 | `distinct_id` | string | Customer's PostHog distinct ID |
 | `created_at` | string (ISO 8601) | When the ticket was created |
 | `updated_at` | string (ISO 8601) | Last update timestamp |
@@ -132,7 +136,19 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `last_message_text` | string or null | Preview of last message |
 | `unread_team_count` | int | Unread messages for the team |
 | `unread_customer_count` | int | Unread messages for the customer |
-| `sla_due_at` | string or null | SLA deadline, or null if none |
+| `sla` | string or null | SLA deadline (ISO 8601), or null if none |
+| `snoozed_until` | string or null | Snooze end time (ISO 8601), or null if not snoozed |
+| `assignee` | object or null | `id`, `type` (`user` or `role`), `user.email`, and `role.name`. Null if not assigned. |
+| `tags` | list of strings | Tag names on the ticket |
+| `url` | string or null | Page URL where the customer opened the ticket |
+| `email_subject` | string or null | Email subject (email tickets) |
+| `email_from` | string or null | Customer's email address (email tickets) |
+| `email_to` | string or null | Your support address that got the email (email tickets) |
+| `cc_participants` | list or null | CC addresses (email tickets) |
+| `slack_channel_id` | string or null | Slack channel ID (Slack tickets) |
+| `slack_thread_ts` | string or null | Slack thread timestamp (Slack tickets) |
+| `slack_team_id` | string or null | Slack workspace ID (Slack tickets) |
+| `first_customer_message_text` | string or null | Short preview of the customer's first message. Only included when `include_first_customer_message_text` is on. |
 
 The output fields are available as `{variables.ticket.*}`.
 
@@ -176,7 +192,7 @@ event.properties.message_content contains "urgent"
 
 ```
 variables.ticket.message_count > 5
-variables.ticket.sla_due_at is set
+variables.ticket.sla is set
 variables.ticket.unread_team_count > 0
 variables.ticket.channel_source = "widget"
 ```
@@ -378,7 +394,7 @@ assignee = Support role
 
 ## SLA reference
 
-SLAs are set as a duration from "now" (the time the workflow runs). The `sla_due_at` field on the ticket stores the absolute deadline.
+SLAs are set as a duration from "now" (the time the workflow runs). The `sla_due_at` field on the ticket stores the absolute deadline. The **Get ticket** action returns this deadline as `sla`.
 
 | `sla_amount` | `sla_unit` | Resulting deadline |
 |--------------|------------|-------------------|
@@ -400,6 +416,6 @@ In the ticket list, SLAs show as one of three states:
 ## Important notes
 
 - **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status does not trigger the "status changed" Workflow again.
-- **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
+- **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla`), use the **Get ticket** action first.
 - **Tags replace, not append** – the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
 - **Rate limits** – the external API used by Workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.
