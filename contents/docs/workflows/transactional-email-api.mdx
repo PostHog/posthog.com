@@ -10,7 +10,7 @@ The transactional email API sends one email to one person from your server code,
 
 <CalloutBox icon="IconInfo" title="The transactional email API is in beta" type="fyi">
 
-The API is in beta, and PostHog enables it per project. To use it, [ask us in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) to enable it for your project. Until then, every route on this page answers `404` with the code [`not_found`](#not_found). Routes, fields, and messages can change while the API is in beta.
+The API is in beta, and PostHog enables it per project. To use it, [ask us in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) to enable it for your project. Until then, the upload route and the send routes answer `404` with the code [`not_found`](#not_found). Routes, fields, and messages can change while the API is in beta.
 
 </CalloutBox>
 
@@ -26,11 +26,13 @@ The same key works in every project, so one codebase can send to a staging proje
 
 ## Before you start
 
-1. **Verify a sender.** [Set up the email channel](/docs/workflows/configure-channels) with a domain that you own, and make the verified sender your project's default sender. The first upload uses the default sender. Without one, the upload fails with [`sender_unavailable`](#sender_unavailable).
+1. **Verify a sender.** [Set up the email channel](/docs/workflows/configure-channels) with a domain that you own, and make the verified sender your project's default sender: click **Make default** next to the sender in the email channel settings. The first upload uses the default sender. Without one, the upload fails with [`sender_unavailable`](#sender_unavailable).
 2. **Create a project secret API key.** Create a [project secret API key](/docs/api/project-secret-api-keys) (it starts with `phs_`) with the `hog_flow:write` scope. Keep it on your server, for example in the `POSTHOG_PROJECT_SECRET_API_KEY` environment variable. Never put it in browser or mobile code.
 3. **Ask for access.** The API must be enabled for your project. See the beta note above.
 
 A project secret API key can only upload templates and send them. It can't read, edit, or delete templates. To call the other template routes, such as [adoption](#adopt-a-template-made-in-posthog), use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:write`.
+
+Project secret API keys are in beta and may not be available in your organization yet. Until they are, the upload and send routes also accept a personal API key with `hog_flow:write` and editor access to Workflows. With a personal API key, put the project ID in the URL instead of `@current`. `posthog-node` always calls `@current`, so use it with a project secret API key.
 
 ## Write a template
 
@@ -89,7 +91,7 @@ if (error) {
 }
 ```
 
-- `templateFile()` takes a `file:` URL or an absolute path to an `.html` file. Options: `key` (defaults to the file name without `.html`) and `name` (the name in the template library, defaults to the subject).
+- `templateFile()` takes a `file:` URL or an absolute path to an `.html` file. It throws a `TypeError` for anything else, so call it once when your module loads. Options: `key` (defaults to the file name without `.html`) and `name` (the name in the template library, defaults to the subject).
 - `to` is the recipient's email address.
 - `data` fills the `{{ variables.* }}` placeholders.
 - `distinctId` is optional. It attributes the send and its [engagement events](/docs/workflows/engagement-events) to that person. Without it, PostHog uses the recipient's email address as the distinct ID.
@@ -109,9 +111,10 @@ So you don't need an upload step or a deploy step: a send from an edited file pu
 
 ### Rolling deploys
 
-During a rolling deploy, your old instances and your new instances run at the same time, each with its own copy of the file. An old instance can never bring old content back:
+During a rolling deploy, your old instances and your new instances run at the same time, each with its own copy of the file. An old instance can't bring back content from any of the last 100 publishes:
 
-- PostHog remembers the content hashes it published before. When a send carries one of them, PostHog sends the current content and adds the [`template_superseded`](#template_superseded) warning. Nothing is uploaded or reverted.
+- PostHog remembers the last 100 content hashes it published. An older hash counts as never published, so a file older than that uploads again.
+- When a send carries one of the remembered hashes, PostHog sends the current content and adds the [`template_superseded`](#template_superseded) warning. Nothing is uploaded or reverted.
 - The automatic upload after `template_outdated` sets `if_not_superseded`, so it never publishes content that newer content already replaced. See [automatic uploads](#automatic-uploads-and-if_not_superseded).
 
 Two side effects to know about:
@@ -146,7 +149,7 @@ When a bundler moves your code to another directory, `import.meta.url` no longer
 
 ### Edge runtimes
 
-Edge runtimes have no file system, so the edge entry of `posthog-node` only takes key strings. Upload the file from a build step or a Node.js script with `uploadTemplate()`, or over HTTP with the [upload route](#upload-a-template-by-key), then send by key.
+Edge runtimes have no file system, so the edge entry of `posthog-node` only takes key strings. `templateFile()` throws there. Upload the file from a build step or a Node.js script with `uploadTemplate()`, or over HTTP with the [upload route](#upload-a-template-by-key), then send by key.
 
 ## Upload a template by key
 
@@ -185,7 +188,7 @@ The response:
   "id": "01a14631-40b7-0000-4dfd-60cd5a2e12ad",
   "key": "welcome",
   "result": "created",
-  "content_hash": "v1:f74cd913f3aa2e5667a588f2865634e56693df77793ca594d18e9b5f89e3d2e6",
+  "content_hash": "v1:67bd514eca757ac54081c4eda9ca9cc9d3704594f0d83843a76a77364a2c6a12",
   "managed_by": "code",
   "source": { "repository": "github.com/example/app", "path": "emails/welcome.html", "ref": "3f2c1ab" },
   "transactional_hog_flow_id": "01a14631-40c1-0000-d930-cf5400ef453a"
@@ -199,7 +202,7 @@ The response:
 | `unchanged` | `200` | The template already had this name and content. PostHog wrote nothing, except source parts that changed. |
 | `superseded` | `200` | Only with `if_not_superseded`. Newer content replaced this content, so PostHog wrote nothing. `content_hash` is the current hash. |
 
-An upload never changes the template's sender, and never turns a paused template back on. When two first uploads of one key run at the same time, both succeed and one template exists.
+An upload never turns a paused template back on. It keeps the template's sender, unless the template's workflow was deleted: then the upload creates a new workflow with the project's default sender. When two first uploads of one key run at the same time, both succeed and one template exists.
 
 ### Automatic uploads and `if_not_superseded`
 
@@ -279,7 +282,7 @@ PostHog doesn't deduplicate sends. Two identical calls send two emails. `posthog
 
 ### Rate limits
 
-The upload route and both send routes share one rate limit per key and one per project. When you go over it, PostHog answers `429` with the code [`throttled`](#throttled).
+The upload route and both send routes share one rate limit per API key, and one across all project secret API keys of a project. When you go over it, PostHog answers `429` with the code [`throttled`](#throttled).
 
 ## Templates managed by code
 
@@ -343,9 +346,10 @@ Every error has a JSON body with a stable `code`:
 - `detail` says what happened, `why` says why, and `fix` says what to change.
 - `attr` names the request field the error is about, such as `subject` or `template__key` (`template.key`), or is `null`.
 - `docs_url` links to the section for the code below.
-- Errors that the template routes share with the rest of the PostHog API, such as `not_found` and `throttled`, have only `type`, `code`, `detail`, and `attr`.
+- Only these codes carry `why`, `fix`, and `docs_url`: `invalid_template_key`, `invalid_request`, `template_not_found`, `template_outdated`, `immutable`, `key_already_set`, and `key_in_use`.
+- All other codes have only `type`, `code`, `detail`, and `attr`: the send pipeline's codes (`template_not_sendable`, `sender_unavailable`, `marketing_template`, `template_not_transactional`, `transactional_email_paused`, `invalid_recipient`, `quota_limited`, `delivery_unavailable`) and the codes shared with the rest of the PostHog API (`not_found`, `authentication_failed`, `not_authenticated`, `permission_denied`, `throttled`). Their sections below give the fix.
 
-In `posthog-node`, `error.code` is the API's `code`, `error.message` is its `detail`, `error.field` is its `attr`, and `error.docsUrl` is its `docs_url`.
+In `posthog-node`, `error.code` is the API's `code`, `error.message` is its `detail`, `error.field` is its `attr`, and `error.docsUrl` is its `docs_url`. For codes without `docs_url`, `error.docsUrl` is `undefined`, so look up `error.code` on this page.
 
 ### `invalid_template_key`
 
@@ -373,11 +377,11 @@ The template has no subject or no body, so it can't be sent. The API says, for e
 
 ### `sender_unavailable`
 
-`400` on the first upload of a key.
+`400` on an upload that has to make the template transactional: the first upload of a key, or an upload that claims an adopted template or a template whose workflow was deleted.
 
 The project has no verified default sender, so PostHog can't make the template transactional. The upload writes nothing. The API says: "The project has no verified default email sender. Verify a sending domain, set it as the default sender, and upload again."
 
-**Fix:** [Verify a sending domain](/docs/workflows/configure-channels), set it as the project's default sender, and upload again.
+**Fix:** [Verify a sending domain](/docs/workflows/configure-channels), click **Make default** next to the sender, and upload again.
 
 ### `marketing_template`
 
@@ -385,7 +389,7 @@ The project has no verified default sender, so PostHog can't make the template t
 
 The template is in a marketing message category. Transactional emails skip opt-outs, so a marketing template can't be sent this way. The API says: "The template is in a marketing category. Only transactional templates can be sent."
 
-**Fix:** Move the template to a transactional category, or remove its category.
+**Fix:** Move the template to a transactional category, or remove its category. If the template is managed by code, [stop managing it in code](#templates-managed-by-code) first, or change the category's type.
 
 ### `key_already_set`
 
@@ -429,9 +433,9 @@ PostHog never published the content that this hash describes, so it sent nothing
 
 ### `not_found`
 
-`404` on every route on this page.
+`404` on the upload route and the send routes.
 
-The transactional email API isn't enabled for this project, or the template ID in the path doesn't exist. The API says: "Not found."
+The transactional email API isn't enabled for this project, or the template ID in the path doesn't exist. Adoption and release don't check the beta flag, so a successful adoption doesn't mean the API is enabled. The API says: "Not found."
 
 **Fix:** The API is in beta. [Ask us in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) to enable it for your project. Don't retry until it's enabled. If it's already enabled, check the project and the template ID.
 
@@ -452,6 +456,8 @@ The key can't do this. For example:
 - "API key missing required scope 'hog_flow:write'": give the key the `hog_flow:write` scope.
 - "This action does not support project secret API key access": a project secret API key can only upload and send. Use a personal API key for other template routes, such as [adoption](#adopt-a-template-made-in-posthog).
 - "You need editor access to this template's transactional email workflow.": a personal API key or a session needs editor access to the template's workflow.
+- "You need editor access to workflows to upload a new template.": a personal API key or a session needs editor access to Workflows to create a template.
+- "API key does not have access to the requested project: ID ...": the key belongs to another project. Use the key of the project that has the template, or `@current`.
 
 **Fix:** Use a project secret API key with `hog_flow:write` for the project that has the template.
 
@@ -459,7 +465,7 @@ The key can't do this. For example:
 
 `429` on every route.
 
-Too many calls in a short time. The upload route and both send routes share one limit per key and one per project. The API says, for example: "Request was throttled. Expected available in 30 seconds."
+Too many calls in a short time. The upload route and both send routes share one limit per API key, and one across all project secret API keys of a project. The API says, for example: "Request was throttled. Expected available in 30 seconds."
 
 **Fix:** Wait for the number of seconds in the `Retry-After` header, then send again.
 
@@ -475,9 +481,10 @@ The template has no workflow to send it, for example a template made in PostHog 
 
 `400` on the send.
 
-The template's workflow is paused or deleted. The API says: "The template's transactional email isn't active." or "The template's transactional email no longer exists."
+The template's workflow is paused or deleted.
 
-**Fix:** Turn the template's workflow back on in Workflows. An upload never turns it back on.
+- "The template's transactional email isn't active.": the workflow is paused. **Fix:** Turn the template's workflow back on in Workflows. An upload never turns a paused workflow back on.
+- "The template's transactional email no longer exists.": the workflow was deleted. **Fix:** Upload the template again. The upload creates a new workflow with the project's default sender. For a template without a key, make it transactional again in PostHog.
 
 ### `invalid_recipient`
 
