@@ -26,7 +26,7 @@ export const slackAddLight =
 export const slackAddDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/subscriptions/slack-subscription-add-dark-mode.png";
 
-Subscriptions enable you to send [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) to your email or Slack on a regular basis.
+Subscriptions enable you to send [insights](/docs/product-analytics/insights) or [dashboards](/docs/product-analytics/dashboards) to email, Slack, or Microsoft Teams on a regular basis.
 
 <FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
@@ -43,8 +43,9 @@ The subscriptions page shows a paginated table of all subscriptions across your 
 
 From here you can:
 
+- **Create** a new subscription with the **New subscription** button
 - **Search** for subscriptions by name
-- **Filter** by delivery channel (email or Slack) and creator
+- **Filter** by delivery channel (email, Slack, or Microsoft Teams) and creator
 - **Sort** by creation date, next delivery date, title, or creator
 - **Edit** a subscription by navigating to its source insight or dashboard
 - **Test delivery** to immediately send a subscription without waiting for the next scheduled delivery
@@ -52,7 +53,16 @@ From here you can:
 
 ## Creating a subscription
 
-To create a subscription, click **Subscribe** in the sidebar of any insight or dashboard.
+You can create a subscription from the subscriptions page, or from an insight or dashboard.
+
+To create a subscription from the subscriptions page:
+
+1. Click **New subscription**.
+2. Select what to send: **An insight**, **A dashboard**, or **An AI prompt**. The AI prompt option shows only when [prompt subscriptions](#prompt-subscriptions) are available to your project.
+3. For an insight or a dashboard, search for it and select it.
+4. Set the delivery and the schedule, then save the subscription.
+
+To create a subscription from an insight or dashboard, click **Subscribe** in its sidebar.
 
 <ProductScreenshot
   imageLight={newSubscriptionLight}
@@ -107,7 +117,7 @@ There are three steps to setting up a Slack subscription:
 
 ### 3. Creating a new Slack subscription in PostHog
 
-After installing the app, head back to PostHog and add a new subscription. You can do this in any dashboard or insight by clicking **Subscribe** in the sidebar, and then **Add subscription**.
+After installing the app, head back to PostHog and add a new subscription. You can do this from the [subscriptions page](#viewing-all-subscriptions) with **New subscription**, or in any dashboard or insight by clicking **Subscribe** in the sidebar, and then **Add subscription**.
 
 <ProductScreenshot
   imageLight={slackAddLight}
@@ -124,6 +134,29 @@ You can then select any channel the app has access to and set a frequency. **Pri
   classes="rounded"
   alt="Slack channel selection"
 />
+
+## Microsoft Teams subscriptions
+
+Microsoft Teams subscriptions post reports to a Teams channel through a workflow webhook. They work for insight, dashboard, and [prompt](#prompt-subscriptions) subscriptions.
+
+### 1. Creating a webhook in Microsoft Teams
+
+1. In Microsoft Teams, go to the channel that you want reports in.
+2. Click the three dots next to the channel name and select **Workflows**.
+3. In the templates section, select **Post to a channel when a webhook request is received**.
+4. Click **Next**, then **Add workflow**.
+5. Copy the webhook URL.
+
+Anyone with the webhook URL can post to the channel. Keep it private.
+
+### 2. Creating a new Microsoft Teams subscription in PostHog
+
+1. Create a new subscription from the [subscriptions page](#viewing-all-subscriptions), or from an insight or dashboard.
+2. Set **Destination** to **Microsoft Teams**.
+3. Paste the webhook URL into **Microsoft Teams webhook URL**.
+4. Set a frequency and save the subscription.
+
+After you save, PostHog shows only the host of the webhook URL, not the full URL. To use a different webhook URL, click **Replace** and paste the new URL.
 
 ## Asking @PostHog about subscription reports
 
@@ -195,7 +228,7 @@ Prompt subscriptions are AI-powered recurring reports generated entirely from a 
 
 For example, you could create a prompt subscription with "Summarize weekly signup trends and highlight any drop-offs in the onboarding funnel" and receive a fresh AI-generated analysis on your chosen schedule.
 
-Prompt subscriptions support the same delivery options as other subscriptions – email or Slack – and the same scheduling frequencies (daily, weekly, monthly).
+Prompt subscriptions support the same delivery options as other subscriptions – email, Slack, or Microsoft Teams – and the same scheduling frequencies (daily, weekly, monthly).
 
 ### Prerequisites
 
@@ -236,7 +269,7 @@ When editing a subscription, a preview of the next delivery date appears below t
 
 ## Testing subscriptions
 
-You can manually trigger a test delivery for any subscription. Click the **...** menu on a subscription in the list and select **Test delivery**. This immediately sends the subscription content to the configured target (email or Slack channel) without waiting for the next scheduled delivery.
+You can manually trigger a test delivery for any subscription. Click the **...** menu on a subscription in the list and select **Test delivery**. This immediately sends the subscription content to the configured target (email, Slack channel, or Microsoft Teams channel) without waiting for the next scheduled delivery.
 
 This is useful for verifying that the subscription is configured correctly and the content looks as expected.
 
@@ -247,6 +280,7 @@ PostHog automatically disables subscriptions when delivery can't succeed. This h
 - **Slack integration disconnected** – The Slack integration was removed or disconnected from your PostHog organization.
 - **Unsupported delivery channel** – The subscription targets a delivery channel that's no longer supported.
 - **Slack channel access issues** – PostHog can't post to the Slack channel. This includes archived channels, channels the PostHog bot was removed from, channels that no longer exist, or a revoked Slack token.
+- **Microsoft Teams webhook rejected** – Microsoft Teams stopped accepting messages from the webhook URL.
 
 When a subscription is auto-disabled, the subscription owner receives an email notification explaining the reason. Disabled subscriptions display a **Disabled** tag in the subscriptions list and on the subscriptions page.
 
@@ -256,7 +290,7 @@ Disabled subscriptions don't deliver on their schedule and can't be test-deliver
 
 To re-enable a disabled subscription:
 
-1. Fix the underlying issue (e.g., reconnect the Slack integration or re-add the PostHog bot to the channel).
+1. Fix the underlying issue (e.g., reconnect the Slack integration, re-add the PostHog bot to the channel, or create a new Microsoft Teams webhook URL and [replace](#microsoft-teams-subscriptions) the old one).
 2. Navigate to the subscription and toggle the **Enabled** checkbox back on.
 
 PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
