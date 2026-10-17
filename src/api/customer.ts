@@ -3,8 +3,8 @@ import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) => {
     try {
         const domain = req.query.domain
-        if (!domain) {
-            return res.status(400).json({ error: 'Domain is required' })
+        if (typeof domain !== 'string' || !/^[a-z0-9-]+(\.[a-z0-9-]+)*$/i.test(domain)) {
+            return res.status(400).json({ error: 'A valid domain is required' })
         }
         const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/customers/${domain}`, {
             headers: { Authorization: `Bearer ${process.env.GATSBY_SQUEAK_CUSTOMERS_API_KEY}` },

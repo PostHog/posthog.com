@@ -11,6 +11,7 @@ import { exportToCSV } from 'lib/hogwatch/csv'
 import type { ChannelResult } from 'lib/hogwatch/types'
 
 async function evaluateChannels(
+    jwt: string | null,
     channels: string[],
     defaultRate: number,
     rateOverrides?: Record<string, number>
@@ -19,7 +20,7 @@ async function evaluateChannels(
 
     const res = await fetch('/api/hogwatch-evaluate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
         body: JSON.stringify({
             channels,
             defaultRate,
@@ -35,7 +36,7 @@ async function evaluateChannels(
 }
 
 export default function HogWatchPage() {
-    const { user, isModerator } = useUser()
+    const { user, isModerator, getJwt } = useUser()
     const [channelInput, setChannelInput] = useState('')
     const [defaultRate, setDefaultRate] = useState(500)
     const [rateOverrides, setRateOverrides] = useState<Record<string, number>>({})
@@ -52,7 +53,7 @@ export default function HogWatchPage() {
                 .split(/[\n,]+/)
                 .map((s) => s.trim())
                 .filter(Boolean)
-            const data = await evaluateChannels(channels, Number(defaultRate) || 500, rateOverrides)
+            const data = await evaluateChannels(await getJwt(), channels, Number(defaultRate) || 500, rateOverrides)
             setResults(data ?? null)
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Something went wrong')
@@ -192,6 +193,7 @@ export default function HogWatchPage() {
                                                 .map((s) => s.trim())
                                                 .filter(Boolean)
                                             const data = await evaluateChannels(
+                                                await getJwt(),
                                                 channels,
                                                 Number(defaultRate) || 500,
                                                 overrides
