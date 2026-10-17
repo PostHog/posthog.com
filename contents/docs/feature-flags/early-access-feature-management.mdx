@@ -93,6 +93,18 @@ You can copy an early access feature to another project in the same organization
 
 The original does not change, and the copy does not sync with it.
 
+## Messaging opted-in users
+
+You can message users who opted in to an early access feature directly from the feature detail screen. Open a saved feature, scroll to the **Users** section, and click **Message opted-in users**. This menu offers two options:
+
+- **Send a broadcast** – Opens a new [broadcast](/docs/workflows/broadcasts) pre-filled with an audience filter matching users who have `$feature_enrollment/<flag key>` set to `true`. The broadcast name defaults to "<feature name> is now available". Use this to send a one-time announcement to everyone currently opted in.
+
+- **Start a workflow** – Opens a new [workflow](/docs/workflows/workflow-builder) with an event trigger on `$feature_enrollment_update`, filtered to the feature's flag key. Only opt-ins enter the workflow (opt-outs are excluded). Use this to automatically welcome each new user as they opt in.
+
+The audience filter matches the same users shown in the **Opted-In Users** tab, so the broadcast reach corresponds to that count.
+
+> **Note:** The **Message opted-in users** button only appears on saved features. It is not shown while creating a new feature or while editing.
+
 ## Payloads
 
 Each early access feature can include a JSON payload – custom metadata that is delivered to users via the Early Access Features API and `posthog-js`. Use payloads to attach configuration, release notes, or UI customization data to a feature.
