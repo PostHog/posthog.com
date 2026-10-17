@@ -7,6 +7,12 @@ availability:
   selfServe: partial
   enterprise: full
   features:
+    socialLogin:
+      free: true
+      selfServe: true
+      boost: true
+      scale: true
+      enterprise: true
     jitUserProvisioning:
       free: false
       selfServe: false
@@ -23,15 +29,26 @@ availability:
 
 ## Single sign-on
 
-SSO makes logging in easier for users to log and compliance easier for administrators.
+SSO makes login easier for your users and compliance easier for your administrators.
 
-We also allow support just-in-time provisioning of users with our platform packages, which means that team members can self-serve creating their account, while still enforcing log in through a specified SSO provider.
+PostHog has two different types of SSO. They are not on the same plans.
 
-Some SSO features are included in our platform packages. Please review each section below for details.
+| Type | What it does | Plans |
+| --- | --- | --- |
+| [Social login](#social-login-providers) | Your users log in with a GitHub, GitLab, or Google account. | All plans, including free |
+| [SAML](/docs/settings/authentication/saml) and [OIDC](/docs/settings/authentication/oidc) | Your users log in through your identity provider, such as Okta, Entra ID, or OneLogin. | The Scale and Enterprise platform packages |
+
+The controls that make SSO mandatory are also part of the platform packages. They apply to social login and to your identity provider.
+
+| Control | What it does | Plans |
+| --- | --- | --- |
+| [Just-in-time user provisioning](#just-in-time-user-provisioning) | Creates an account at first login for each email address on a verified domain. | The Boost, Scale, and Enterprise platform packages |
+| [SSO enforcement](#sso-enforcement) | Prevents passwords and every other provider on a verified domain. | The Boost, Scale, and Enterprise platform packages |
+| [SCIM provisioning](/docs/settings/authentication/scim) | Synchronizes users and roles from your identity provider. | The Enterprise platform package |
 
 ## Authentication domains
 
-SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement, [SAML](#saml) configuration, and [SCIM](#scim) provisioning.
+SSO configuration mostly occurs in your Organization settings and is based on authentication domains. You need to have a verified authentication domain in order to set Just-in-time provisioning, SSO enforcement, [SAML](/docs/settings/authentication/saml) configuration, and [SCIM](/docs/settings/authentication/scim) provisioning.
 
 Authentication domains need to be verified if you are on PostHog Cloud.
 
@@ -53,7 +70,7 @@ Adding a `TXT` record depends on your DNS provider (e.g. Cloudflare, Google Doma
 
 <FeatureAvailability availability={_frontmatter.availability.features.jitUserProvisioning} />
 
-Just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. PostHog Cloud supports GitHub, GitLab, Google, and SAML if you have configured it.
+Just-in-time user provisioning creates a new account whenever a first-time user logs in using any available SSO provider and an email address that matches your verified domain. PostHog Cloud supports GitHub, GitLab, and Google on all plans, and SAML or OIDC if you are on a platform package that includes them.
 
 To enable just-in-time user provisioning, navigate to Authentication domains in your Organization settings and use the **Enable automatic provisioning** toggle.
 
@@ -75,11 +92,15 @@ If you enable SSO enforcement for a particular domain, any user who signs up or 
 
 You can enable SSO enforcement through Authentication domains in your Organization settings.
 
-## Third-party providers
+## Social login providers
 
-PostHog currently supports GitHub, GitLab and Google as SSO providers. All providers are available and readily configured on PostHog Cloud.
+<FeatureAvailability availability={_frontmatter.availability.features.socialLogin} />
 
-This section contains instructions on how to configure each provider in your self-hosted instance. All the providers in this section (i.e. everything except SAML) is **configured instance-based**. SAML is configured domain-based.
+Social login lets your users sign in with an account they already have. PostHog supports GitHub, GitLab, and Google. All three are configured on PostHog Cloud and available on every plan. You do not need a platform package for them.
+
+Social login is not the same as SAML or OIDC. To connect PostHog to your own identity provider, see [SAML](/docs/settings/authentication/saml) or [OIDC](/docs/settings/authentication/oidc). Both of them need the Scale or Enterprise platform package.
+
+This section contains instructions on how to configure each provider in your self-hosted instance. The providers in this section are **configured instance-based**. SAML and OIDC are configured domain-based.
 
 Looking for a provider that's not here? [Reach out to us](https://app.posthog.com/#panel=support), we might be able to help.
 
