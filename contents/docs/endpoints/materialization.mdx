@@ -60,7 +60,7 @@ Materialization is not available when:
 - **The endpoint has incompatible variables** - Only certain [variable](/docs/endpoints/variables) types are supported. See the compatibility table below.
 - **The endpoint is inactive** - Only active endpoints and their versions are materialized.
 - **The query uses cohort breakdowns** - Queries with cohort breakdowns cannot be materialized because they produce complex union queries that prevent accurate result reconstruction.
-- **The query uses compare mode** - Queries with compare mode enabled cannot be materialized because compare mode alters the series count in ways that prevent accurate result reconstruction.
+- **The query uses compare mode and is not eligible** - Compare mode is supported only for Trends queries, and only for projects in the controlled rollout of this feature. Other queries with compare mode enabled cannot be materialized. A materialized compare-mode query stores and computes both periods, so it uses about twice the storage and refresh work.
 
 ### Variable compatibility
 
