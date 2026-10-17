@@ -176,6 +176,10 @@ export const aiObservability = {
     },
     volume: 100000,
     customers: {
+        runable: {
+            headline: 'finds where agent runs get stuck with AI Observability',
+            description: 'The main feature in Runable is the agent run – how the agent is responding to user messages.',
+        },
         kilocode: {
             headline: 'keeps visibility into what its AI coding platform is doing',
             description:

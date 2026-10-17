@@ -176,6 +176,7 @@ const HERO_QUOTES: QuoteSource[] = [
 
 const TOOLS_SHOWN = 5
 const TABLE_ROWS_STEP = 10
+const LATEST_STORIES_SHOWN = 3
 const HERO_ROTATE_MS = 8000
 const HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/will_smith_hog_0248c8f94c.png'
 const NEWSPAPER_HOG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/newspaper_hog_f0dd8cda48.png'
@@ -339,41 +340,51 @@ interface Story {
     frontmatter: { title: string; date: string }
 }
 
-const LatestCaseStudy = ({ story }: { story: Story }): JSX.Element => {
+const LatestCaseStudies = ({ stories }: { stories: Story[] }): JSX.Element => {
     const { customers } = useCustomers()
-    const customer = customers[story.fields.slug.split('/').pop() || '']
 
     return (
-        <HogCard image={NEWSPAPER_HOG_IMAGE} imageClassName="@2xl:w-40" className="mt-3">
+        <HogCard image={NEWSPAPER_HOG_IMAGE} imageClassName="@2xl:w-40">
             <h2 className="mb-4 flex items-center gap-2 text-2xl font-bold tracking-tight">
                 <StickerCoffee className="size-8 -rotate-6" aria-hidden />
                 Hot off the press
             </h2>
-            <Link
-                to={story.fields.slug}
-                state={{ newWindow: true }}
-                className="mb-4 block text-balance text-2xl font-bold leading-tight tracking-tight text-primary hover:underline @2xl:text-3xl"
-            >
-                {story.frontmatter.title}
-            </Link>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                {customer && (
-                    <div className="flex h-8 items-center border-r border-primary pr-4">
-                        <CustomerLogo customer={customer} className="h-6 max-w-40" />
-                    </div>
-                )}
-                <span className="text-sm text-secondary">{story.frontmatter.date}</span>
-                <OSButton
-                    asLink
-                    to={story.fields.slug}
-                    state={{ newWindow: true }}
-                    variant="primary"
-                    size="sm"
-                    className="ml-auto"
-                >
-                    Read the story
-                </OSButton>
-            </div>
+            <ul className="m-0 list-none divide-y divide-primary p-0">
+                {stories.map((story, index) => {
+                    const customer = customers[story.fields.slug.split('/').pop() || '']
+                    return (
+                        <li key={story.fields.slug} className="py-4 first:pt-0 last:pb-0">
+                            <Link
+                                to={story.fields.slug}
+                                state={{ newWindow: true }}
+                                className={`mb-3 block text-balance font-bold leading-tight tracking-tight text-primary hover:underline ${
+                                    index === 0 ? 'text-2xl @2xl:text-3xl' : 'text-lg'
+                                }`}
+                            >
+                                {story.frontmatter.title}
+                            </Link>
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                                {customer && (
+                                    <div className="flex h-8 items-center border-r border-primary pr-4">
+                                        <CustomerLogo customer={customer} className="h-6 max-w-40" />
+                                    </div>
+                                )}
+                                <span className="text-sm text-secondary">{story.frontmatter.date}</span>
+                                <OSButton
+                                    asLink
+                                    to={story.fields.slug}
+                                    state={{ newWindow: true }}
+                                    variant={index === 0 ? 'primary' : 'secondary'}
+                                    size="sm"
+                                    className="ml-auto"
+                                >
+                                    Read the story
+                                </OSButton>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
         </HogCard>
     )
 }
@@ -489,10 +500,10 @@ const customerRow = (customer: CustomerType) => ({
     ],
 })
 
-const sortCustomers = (customers: CustomerType[]) => {
+const sortCustomers = (customers: CustomerType[], order: string[]) => {
     return [...customers].sort((a, b) => {
-        const aIndex = CUSTOMER_ORDER.indexOf(a.slug)
-        const bIndex = CUSTOMER_ORDER.indexOf(b.slug)
+        const aIndex = order.indexOf(a.slug)
+        const bIndex = order.indexOf(b.slug)
         const aOrder = aIndex === -1 ? Infinity : aIndex
         const bOrder = bIndex === -1 ? Infinity : bIndex
         return aOrder - bOrder
@@ -508,19 +519,11 @@ const columns = [
 
 export default function Customers(): JSX.Element {
     const { customers: allCustomers } = useCustomers()
-    const customers = sortCustomers(Object.values(allCustomers))
-    const tableCustomers = customers.filter(hasStory)
-    const noStoryYet = customers.filter((customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug))
-    const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
-    const [role, setRole] = useState(ROLES[0].label)
-    const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
-
     const { stories } = useStaticQuery(graphql`
         query {
             stories: allMdx(
                 filter: { fields: { slug: { regex: "/^/customers/" } } }
                 sort: { order: DESC, fields: [frontmatter___date] }
-                limit: 1
             ) {
                 nodes {
                     fields {
@@ -534,7 +537,15 @@ export default function Customers(): JSX.Element {
             }
         }
     `)
-    const [latestStory]: Story[] = stories.nodes
+    const latestStories: Story[] = stories.nodes.slice(0, LATEST_STORIES_SHOWN)
+    // Customers without a fixed position follow, newest case study first
+    const order = [...CUSTOMER_ORDER, ...stories.nodes.map((story: Story) => story.fields.slug.split('/').pop() || '')]
+    const customers = sortCustomers(Object.values(allCustomers), order)
+    const tableCustomers = customers.filter(hasStory)
+    const noStoryYet = customers.filter((customer) => !hasStory(customer) && !LOGO_WALL_HIDDEN.includes(customer.slug))
+    const [filteredCustomers, setFilteredCustomers] = useState<CustomerType[]>(tableCustomers)
+    const [role, setRole] = useState(ROLES[0].label)
+    const [rowsShown, setRowsShown] = useState(TABLE_ROWS_STEP)
 
     const heroPeople = HERO_QUOTES.flatMap((source) => resolveQuote(allCustomers, source) ?? [])
     // Every role renders at once so the tallest one sets the height of the section
@@ -611,6 +622,8 @@ export default function Customers(): JSX.Element {
                         </div>
                     </SectionLayout>
 
+                    {latestStories.length > 0 && <LatestCaseStudies stories={latestStories} />}
+
                     <SectionLayout className="!mb-4">
                         <SectionHeader>
                             <h2 className="mb-0 text-xl">Every case study, in a table</h2>
@@ -647,7 +660,7 @@ export default function Customers(): JSX.Element {
                             ]}
                             dataToFilter={tableCustomers}
                             onFilterChange={(filtered) => {
-                                setFilteredCustomers(sortCustomers(filtered))
+                                setFilteredCustomers(sortCustomers(filtered, order))
                                 setRowsShown(TABLE_ROWS_STEP)
                             }}
                         />
@@ -669,8 +682,6 @@ export default function Customers(): JSX.Element {
                             </div>
                         )}
                     </SectionLayout>
-
-                    {latestStory && <LatestCaseStudy story={latestStory} />}
 
                     {noStoryYet.length > 0 && (
                         <SectionLayout>

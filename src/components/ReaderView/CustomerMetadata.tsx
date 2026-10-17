@@ -4,6 +4,11 @@ import { useCustomers } from 'hooks/useCustomers'
 import useProduct from 'hooks/useProduct'
 import { IconArrowUpRight } from '@posthog/icons'
 
+// Products without their own slug that have a product page under another path
+const PRODUCT_PAGE_SLUGS: Record<string, string> = {
+    inbox: 'self-driving',
+}
+
 interface CustomerMetadataProps {
     customerKey: string
 }
@@ -78,12 +83,14 @@ export default function CustomerMetadata({ customerKey }: CustomerMetadataProps)
                             // Find the product by its handle
                             const product = allProducts.find((p) => p?.handle === toolHandle)
 
+                            const slug = product?.slug || PRODUCT_PAGE_SLUGS[toolHandle]
+
                             // Check if we have a valid product with required fields
-                            if (product && product.slug && product.name) {
+                            if (product && slug && product.name) {
                                 return (
                                     <li key={toolHandle} className="text-sm">
                                         <Link
-                                            to={`/${product.slug}`}
+                                            to={`/${slug}`}
                                             state={{ newWindow: true }}
                                             className="group text-primary hover:underline flex gap-1 items-center"
                                         >
