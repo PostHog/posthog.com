@@ -4233,7 +4233,7 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
-                                    name: 'Classifying rows with AI',
+                                    name: 'SQL AI functions',
                                     url: '/docs/sql/ai-functions',
                                 },
                                 {
