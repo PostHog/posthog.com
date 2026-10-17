@@ -51,7 +51,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 | Fathom | Multi-site agencies | ✔ | ✖ | ✔ | None |
 | Matomo | GA replacement | ✔ | ✔ | ✔ | Self-host only |
 | Vercel | Vercel users | ✖ | ✖ | ✔ | 50k events |
-| Countly | Mobile apps | ✔ | ✔ | ✖ | 500 MAU |
+| Countly | Mobile apps | ✔ | ✔ | ✖ | Self-host only |
 | TelemetryDeck | iOS/Android apps | ✔ | ✖ | ✔ | 100k signals |
 | GoAccess | Sysadmins | ✔ | ✔ | ✔ | Unlimited |
 
@@ -83,7 +83,7 @@ PostHog is especially helpful for engineers and product teams that want to under
 
 Smaller projects can self-host PostHog Open Source using Docker Compose, but [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany, is **the best option for most users**.
 
-While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a JavaScript object in `memory` that only lasts the duration of the pageview.
+While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). With cookieless server hash mode enabled, PostHog measures visitors using a privacy-preserving hash generated on its servers. The hash changes daily, and PostHog does not store a distinct ID in the visitor's browser.
 
 #### How much does PostHog cost?
 
@@ -279,7 +279,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-The SaaS version is free up to 500 MAU; for additional tracking, the Flex plan starts at $40/month for 1,000 MAU, and can scale up to 160,000 MAU at $4300/month. The Enterprise plan requires a custom quote.
+The Flex plan (private cloud) starts at $175/month with usage-based pricing and a 14-day free trial. The Enterprise plan requires a custom quote.
 
 Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 

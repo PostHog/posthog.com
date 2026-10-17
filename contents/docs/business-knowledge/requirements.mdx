@@ -1,0 +1,28 @@
+---
+title: Before answers can use a source
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+import OSButton from 'components/OSButton'
+
+<PrivateBeta />
+
+Two checks have to pass before PostHog AI, Support, or the Playground can use a source.
+
+<OSButton variant="primary" external asLink to="https://app.posthog.com/#panel=max:!Check%20whether%20AI%20data%20processing%20is%20approved%20for%20this%20organization%20and%20whether%20my%20Business%20Knowledge%20sources%20are%20ready%20to%20answer.%20Tell%20me%20what%20is%20blocking%20answers.">Check this in PostHog AI</OSButton>
+
+## Approve AI data processing
+
+Organization owners and admins approve this under organization settings, in **AI service providers**.
+
+Until that's on, PostHog doesn't send source text to a model. Documents stay unchecked, search leaves them out, and the Playground refuses a question with: `Enable AI data processing before asking another question.`
+
+## Wait for the content check
+
+Search leaves a document out until the content check marks it safe, and leaves out a document marked unsafe. See [Content checks](/docs/business-knowledge/sources#content-checks).
+
+Keyword search works after the content check. Semantic search is built in the background and can take up to an hour after that. The source status shows **indexing** during that window.
+
+If the organization hasn't approved AI data processing, a ready source can still show that semantic search is off.

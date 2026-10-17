@@ -9,12 +9,6 @@ availability:
 sourceId: Coda
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Coda source is currently in alpha. It has been tested against Coda's API documentation but not yet validated with live credentials. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Coda connector syncs your Coda docs, tables, and rows into PostHog. Once linked, you can query your Coda data alongside your product analytics data using SQL.
 
 ## Linking Coda

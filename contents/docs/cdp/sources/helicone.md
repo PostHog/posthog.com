@@ -11,10 +11,7 @@ sourceId: Helicone
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Helicone connector syncs your logged LLM requests, sessions, per-user usage aggregates, and prompts from [Helicone](https://www.helicone.ai/) into PostHog. This lets you join LLM cost, token usage, and latency data with your product analytics.
 

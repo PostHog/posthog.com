@@ -15,7 +15,13 @@ import {
     IconMicrophone,
 } from '@posthog/icons'
 
-const signals = [
+export interface CalloutItem {
+    label: string
+    icon: React.ComponentType<{ className?: string }>
+    color: string
+}
+
+const signals: CalloutItem[] = [
     { label: 'In-app activity', icon: IconActivity, color: 'text-red' },
     { label: 'Logs', icon: IconTerminal, color: 'text-red' },
     { label: 'Errors', icon: IconWarning, color: 'text-yellow' },
@@ -33,20 +39,24 @@ const signals = [
 
 interface SignalsCalloutProps {
     className?: string
+    /** Header label. Defaults to "Signals". */
+    title?: string
+    /** Items in the grid. Defaults to the signal types PostHog Desktop reads. */
+    items?: CalloutItem[]
 }
 
-export function SignalsCallout({ className = '' }: SignalsCalloutProps) {
+export function SignalsCallout({ className = '', title = 'Signals', items = signals }: SignalsCalloutProps) {
     return (
         <div
             data-scheme="secondary"
             className={`relative border border-primary rounded-sm bg-primary p-1 shadow-2xl rotate-1 ${className}`}
         >
             <div className="bg-blue text-center rounded py-1 text-sm font-bold uppercase text-white font-squeak">
-                Signals
+                {title}
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 p-4">
-                {signals.map(({ label, icon: Icon, color }) => (
+                {items.map(({ label, icon: Icon, color }) => (
                     <div key={label} className="flex items-center gap-1.5 text-[13px] text-primary">
                         <Icon className={`size-4 shrink-0 ${color}`} />
                         <span className="whitespace-nowrap">{label}</span>

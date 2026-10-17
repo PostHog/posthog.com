@@ -9,12 +9,6 @@ availability:
 sourceId: Freshdesk
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Freshdesk domain and API key to pull your Freshdesk support data – tickets, contacts, companies, agents, and more – into the PostHog data warehouse.
 
 ## Adding a data source

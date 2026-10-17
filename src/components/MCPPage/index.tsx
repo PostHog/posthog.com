@@ -169,8 +169,8 @@ function MCPUseCases(): JSX.Element {
             <MCPChecklist />
             <Capabilities />
             <p className="text-sm text-secondary leading-relaxed mt-4 mb-0">
-                The semantic layer is also available in beta, so agents can query governed metrics such as MRR with the
-                same definition in every session.{' '}
+                The semantic layer is also available, so agents can query governed metrics such as MRR with the same
+                definition in every session.{' '}
                 <Link to="/docs/semantic-layer" className="font-semibold underline">
                     Learn about the semantic layer
                 </Link>

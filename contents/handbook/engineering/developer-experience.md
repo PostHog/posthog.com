@@ -24,6 +24,7 @@ The DevEx team owns the shared developer tooling and workflows that cut across a
 - **hogli CLI** — start the stack, run tests, format, lint, generate types. `hogli start`
 - **phrocs TUI** — manage local services, restart, view logs
 - **Intent system** — only start the services you need `hogli dev:setup`
+- **Devboxes** — remote dev environments on Coder, for agents or a laptop that can't run the full stack. `hogli devbox:setup`, then see [the setup guide](/handbook/engineering/developing-locally#option-2-developing-with-coder-workspaces-posthog-employees-only)
 
 ### CI
 - **Turborepo product tests** — fast per-product CI instead of full suite

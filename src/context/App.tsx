@@ -542,40 +542,6 @@ const appSettings: AppSettings = {
             },
         },
     },
-    '/ko': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 960,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
-        },
-    },
     '/products': {
         size: {
             min: {
@@ -770,40 +736,6 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-        },
-    },
-    '/careers-og': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 800,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
         },
     },
     '/paint': {
@@ -1648,6 +1580,15 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
+    // The forum's sidebar starts at the top of the window, so each forum route gets a title bar above it.
+    '/forum': { toolbar: true },
+    '/forum/following': { toolbar: true },
+    '/forum/drafts': { toolbar: true },
+    '/forum/alerts': { toolbar: true },
+    '/forum/new': { toolbar: true },
+    '/forum/t/:topic': { toolbar: true },
+    '/forum/t/:topic/tags': { toolbar: true },
+    '/forum/p/:permalink': { toolbar: true },
     '/ai': {
         toolbar: true,
     },
@@ -1679,6 +1620,19 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
+const readStoredSiteSettings = (): Partial<SiteSettings> => {
+    if (typeof window === 'undefined') {
+        return {}
+    }
+    try {
+        const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+    } catch (error) {
+        console.error('Failed to read site settings:', error)
+        return {}
+    }
+}
+
 const getInitialSiteSettings = (): SiteSettings => {
     const siteSettings: SiteSettings = {
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -1691,7 +1645,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         screensaverDisabled: true,
         reduceTransparency: false,
         scrollbars: 'system',
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...readStoredSiteSettings(),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']

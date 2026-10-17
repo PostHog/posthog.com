@@ -17,6 +17,7 @@ const getQuestionPages = async (base) => {
         // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
             fields: ['permalink'],
+            filters: { forumTopic: { id: { $notNull: true } } },
             pagination: {
                 page,
                 pageSize: 100,
@@ -51,7 +52,7 @@ const getQuestionPages = async (base) => {
     )
 
     const questions = allResponses.flatMap((response) =>
-        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+        response.data.map((question) => ({ path: `${base}/forum/p/${question.attributes.permalink}` }))
     )
 
     return questions
@@ -72,6 +73,7 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',

@@ -170,6 +170,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
+    'data-modeling': {
+        feature: 'Data models',
+        owner: ['data-modeling'],
+        notes: 'Views, materialized views, orchestration, and lineage.',
+        label: 'feature/data-modeling',
+    },
+    'data-quality': {
+        feature: 'Data quality checks',
+        owner: ['data-modeling'],
+        label: false,
+    },
     'data-table': {
         feature: 'Data table',
         owner: ['product-analytics'],
@@ -184,7 +195,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Managed warehouse',
+        feature: 'Warehouse',
         owner: ['managed-warehouse'],
         label: 'feature/data-warehouse',
     },
@@ -508,8 +519,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/signup',
         notes: (
             <>
-                Growth owns everything from the moment someone lands on the signup page, plus every path to signup
-                from any surface other than PostHog.com (for example partner integrations and agents). Website owns
+                Growth owns everything from the moment someone lands on the signup page, plus every path to signup from
+                any surface other than PostHog.com (for example partner integrations and agents). Website owns
                 conversion from PostHog.com visits to the signup page.
             </>
         ),
@@ -523,6 +534,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Slack app',
         owner: ['surfaces'],
         label: 'feature/slack-app',
+    },
+    'semantic-layer': {
+        feature: 'Semantic layer and data catalog',
+        owner: ['data-modeling'],
+        label: false,
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -589,6 +605,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'usage-reports': {
         feature: 'Usage reports',
         owner: ['billing', 'platform-features'],
+        label: false,
+    },
+    'warehouse-properties': {
+        feature: 'Warehouse properties',
+        owner: ['data-modeling'],
+        notes: 'Syncs tables and materialized views to person or group properties.',
         label: false,
     },
     variables: {

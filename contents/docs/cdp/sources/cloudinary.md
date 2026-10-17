@@ -12,9 +12,6 @@ sourceId: Cloudinary
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Cloudinary connector syncs your media library metadata into the PostHog data warehouse: images, videos, raw files, folders, transformations, and upload presets. Media files themselves are never downloaded.
 

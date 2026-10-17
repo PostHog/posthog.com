@@ -142,9 +142,9 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
    - receive ~2 months of additional usage for free, applied before the contract start date.
 4. If the customer wants to purchase fewer credits than the option above, then they will receive an additional 1/6 of the amount they wish to purchase for free.
 
-All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
+All free credits associated with startup plan roll-offs are one-time only. By default, use [structure 2](#how-to-structure-free-credits-in-special-terms) below: set the contract start date 2 months later, and when the customer signs, add the free credits as a [one-time credit in billing admin](/handbook/growth/revops/credits) to cover the 2 invoices before the contract start date. You don't need to call these credits out in the contract, and they are not tied to the contract invoice, so the opportunity owner can add them without waiting for billing.
 
-For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
+Only use structure 1 (a fixed amount of free credit inside the 12 month term) if there is a specific reason to. In that case, don't future-date the contract, and state the amount and the expiry clearly in Special Terms: "An additional credit in the amount of XXXXX (offered to Customer in exchange for rolling off the Startup plan), to be applied to Customer's account on the Effective Date and to expire on the same date as the PostHog Cloud Credit purchased under this Order Form." Don't use both structures on the same deal.
 
 #### How to structure free credits in special terms
 
@@ -194,6 +194,10 @@ We will allocate all the credit purchased to the Stripe account when the contrac
 ### Paid yearly
 
 We will allocate the credit for that year to the Stripe account when the contract is signed, and then again when subsequent annual invoices are raised.
+
+In billing, we set up a multi-year contract paid yearly as consecutive 12-month contracts. The order form has a payment table that shows the payment and the credit for each year. Each year's credit has a 12-month expiry, so the Year 1 credit on a 2-year contract expires at the end of Year 1, not at the end of the full term. If the customer has unused credit at the end of a year, we let it roll over into the next year of the same contract.
+
+The dates for the subsequent invoices are in the `Contract Setup` Google calendar. Invoice processing runs on a weekly rotation. The credit captain for the week of the invoice date sends the invoice and allocates the credit for that year.
 
 If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
 
@@ -337,7 +341,7 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
     -   The tier from their initial order form
     -   The tier the additional purchase amount qualifies for by itself
     -   Example: a customer buys $105k of credits (30% tier). Later they add $400k, which qualifies for 35% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 20% on its own, which is lower than the original purchase tier, so they keep the original 30% rate from their initial order form.
--   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends while still on prepaid credits qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date.
+-   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends while still on prepaid credits qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date. Any credit still left when the new term starts carries over in full (see [early renewals](#when-they-will-end-the-contract-term-with-credit-remaining) below).
 -   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. CreditBot gives account owners months of runway warning, so a customer paying list price for a gap is a customer we failed to engage early.
 
 ### When they will end the contract term with credit remaining
@@ -347,6 +351,8 @@ If a customer ends a term with unused credits and signs a renewal of equal or hi
 We scale the rollover to _remaining_ credits rather than the original order form amount. For a customer who underused and renews at equal spend, rolling a share of the original on top of the renewal stacks up more credits than they were ever going to use, which rewards a mis-sized deal with a bigger pile and makes the account harder to expand later. Scaling to what they actually didn't use keeps the balance proportionate.
 
 Where the underuse was outside the customer's control (a PostHog-side incident, a data issue on our side, or a documented disruption on theirs), we can roll over more than the standard amount, up to the full remaining balance, or extend the window to use existing credits. We handle these case by case based on what was logged at the time, so flag it early.
+
+Early renewals are different. If the new term starts before the current term's natural end date (for example, the customer is running out of credit and signs a renewal order form that starts early), we carry over their _full_ remaining balance into the new term, not part of it. The customer renews early because they are spending more, and the credits they already paid for still had time left to run, so we don't cut them. The partial rollover only applies when a term runs to its natural end date.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

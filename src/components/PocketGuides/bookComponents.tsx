@@ -4,8 +4,18 @@ import Term from './terms'
 import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigEventFigure from './TwigEventFigure'
-import TwigIntroductionFigure from './TwigIntroductionFigure'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
+import {
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionGroupingFigure,
+    SessionReplayLinkFigure,
+} from './ProductAnalyticsIdentityExhibits'
+import {
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+} from './ProductAnalyticsTrendsFunnelsExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -23,12 +33,14 @@ import {
     LoopFigure,
     PersonsModalFigure,
     RedirectLoopFigure,
+    ReleaseConditionsFigure,
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
     TriggerGroupFigure,
+    VariantsFigure,
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
@@ -50,10 +62,16 @@ export const bookMdxComponents = {
     Fig,
     TwigFilterFigure,
     TwigEventFigure,
-    TwigIntroductionFigure,
     AutocaptureFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,
+    SessionGroupingFigure,
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionReplayLinkFigure,
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
@@ -70,6 +88,8 @@ export const bookMdxComponents = {
     PersonsModalFigure,
     ScreenshotFigure,
     TriggerGroupFigure,
+    ReleaseConditionsFigure,
+    VariantsFigure,
     RedirectLoopFigure,
     LoopFigure,
     Watches,

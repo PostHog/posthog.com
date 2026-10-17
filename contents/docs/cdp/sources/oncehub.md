@@ -9,12 +9,6 @@ availability:
 sourceId: Oncehub
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The OnceHub connector syncs your scheduling and booking data – bookings, booking calendars, contacts, users, and teams – from the OnceHub Booking Calendars API into PostHog.
 
 ## Adding a data source

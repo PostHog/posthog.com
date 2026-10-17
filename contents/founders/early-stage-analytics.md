@@ -8,9 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Growth
-  - Product
-  - Product analytics
+  - Finding product-market fit
 crosspost:
   - Product engineers
   - Blog

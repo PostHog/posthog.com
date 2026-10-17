@@ -25,7 +25,7 @@ export const sessionReplay = {
     label: 'Web recordings',
     type: 'session_replay',
     teamSlug: 'replay',
-    forumTopicId: 377,
+    forumTag: 'session-replay',
     // Volume id in src/constants/pocketGuides.ts – gives the docs a Learn tab.
     pocketGuideVolume: 'session-replay',
     color: 'yellow',

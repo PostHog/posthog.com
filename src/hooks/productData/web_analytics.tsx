@@ -28,7 +28,7 @@ export const webAnalytics = {
     // Billed as product analytics events – Plans/calculator resolve against this billing product.
     billingType: 'product_analytics',
     teamSlug: 'web-analytics',
-    forumTopicId: 348,
+    forumTag: 'web-analytics',
     color: 'green-2',
     colorSecondary: '[#37945D]',
     wizardSupport: true,

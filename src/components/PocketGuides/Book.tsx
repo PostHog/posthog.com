@@ -6,7 +6,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 interface BookProps {
     volume: PocketGuideVolume
-    /** Guides inside it (the 101 isn't counted), printed the way a series prints its contents. */
+    /** Count configured for this volume, printed the way a series prints its contents. */
     count: number
 }
 
