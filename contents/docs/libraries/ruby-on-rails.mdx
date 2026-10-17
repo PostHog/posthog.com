@@ -176,6 +176,22 @@ Disable tracing header identity/session capture if you do not want client-suppli
 PostHog::Rails.config.use_tracing_headers = false
 ```
 
+## Trace context
+
+PostHog Rails adds missing `sessionId` and `posthogDistinctId` attributes to an active OpenTelemetry SDK request span after it reads the request context. To also add these attributes to child spans, register the optional processor on your existing OpenTelemetry provider before requests start:
+
+```ruby
+require 'posthog/otel/context_span_processor'
+
+OpenTelemetry.tracer_provider.add_span_processor(
+  PostHog::ContextSpanProcessor.new
+)
+```
+
+This integration supports OpenTelemetry SDK 1.0.0 or later. Keep your existing provider, exporter, sampler, and processors. Put the OpenTelemetry request middleware outside the PostHog request middleware so the request span is active when PostHog reads the context. To send spans to PostHog, configure your existing OTLP exporter with the [PostHog trace endpoint](/docs/distributed-tracing/installation).
+
+Explicit span attributes take precedence. Missing IDs stay absent. Spans that already started keep their attributes after the request ends. Separate threads, fibers, and jobs need explicit context transfer. The processor does not create a session, recording, trace provider, or exporter.
+
 ## Logs
 
 To set up [PostHog Logs](/docs/logs) in your Rails app, follow the [Ruby on Rails logs installation guide](/docs/logs/installation/ruby-on-rails). The integration forwards `Rails.logger` output to PostHog Logs over OpenTelemetry, automatically correlated with each request's distinct ID and session ID. Requires Ruby 3.3+.
@@ -456,7 +472,6 @@ Configure these via `PostHog::Rails.configure` or `PostHog::Rails.config`:
 | `current_user_method` | Symbol | `:current_user` | Controller method used to fetch the current user. |
 | `user_id_method` | Symbol | `nil` | Method used to extract the distinct ID from the user object. Auto-detects when nil. |
 
-
 ## Troubleshooting
 
 ### Exceptions not being captured
@@ -483,7 +498,6 @@ Configure these via `PostHog::Rails.configure` or `PostHog::Rails.config`:
 ### Feature flags not working
 
 Ensure you've set `personal_api_key` in your configuration.
-
 
 ## Next steps
 

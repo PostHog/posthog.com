@@ -13,7 +13,7 @@ There are two ways to send spans from Python.
 | ------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------- |
 | **Packages**                   | The SDK you already use for analytics                        | `opentelemetry-sdk` and an OTLP exporter                              |
 | **Instrumentation**            | Manual – you wrap the operations you care about              | Manual, plus auto-instrumentation for Django, Flask, FastAPI, databases, and more |
-| **Person and session join**    | Automatic inside a PostHog context that identifies them      | Set the attributes yourself                                           |
+| **Person and session join**    | Automatic inside a PostHog context that identifies them      | Optional PostHog context processor                                           |
 
 Pick OpenTelemetry if you already run it, if you use `asyncio` with `AsyncPosthog`, or if you want spans from your web framework and database driver without writing them yourself. Pick `posthog` if PostHog is your only tracing backend and you'd rather instrument a handful of operations by hand than add an exporter pipeline.
 
@@ -199,7 +199,23 @@ def checkout(order_id, amount):
         return "confirmed"
 ```
 
-To join these spans to a person or a Session Replay recording, set `posthogDistinctId` and `sessionId` attributes yourself, from the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+To link spans to people and sessions, add the optional PostHog context processor to your existing provider before requests start:
+
+```python
+from posthog.integrations.otel import PostHogContextSpanProcessor
+
+provider.add_span_processor(PostHogContextSpanProcessor())
+```
+
+Keep your existing provider, exporter, and sampler. This integration supports OpenTelemetry SDK 1.20.0 or later. The processor adds missing `posthogDistinctId` and `sessionId` attributes from the active PostHog context when each span starts. Explicit attributes take precedence. If the span has too little attribute capacity, enrichment is skipped to preserve its existing attributes.
+
+The PostHog Django, Flask, and ASGI integrations also enrich an active request span after they read the request context. Put the OpenTelemetry request middleware outside the PostHog middleware. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK and enable tracing-header capture in the [PostHog framework integration](/docs/libraries/python#asgi-request-middleware).
+
+For Celery, initialize the PostHog Celery integration before OpenTelemetry Celery instrumentation. This order also preserves task context for eager or nested execution.
+
+For a custom integration, call `enrich_current_span()` from `posthog.integrations.otel` after you set the request IDs. The processor handles child spans started later in that context.
+
+Missing IDs stay absent. Spans that already started keep their attributes after the context ends. New spans in detached tasks do not receive the ended context's IDs. Set explicit IDs in a new `new_context()` scope for background work. The bridge does not transfer context to another process or thread. Error-response spans created outside the PostHog middleware scope, including outer FastAPI error handling, can omit request IDs.
 
 </Step>
 

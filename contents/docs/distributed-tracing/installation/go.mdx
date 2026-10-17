@@ -117,6 +117,31 @@ func chargeCustomer(ctx context.Context, customerID string) error {
 
 </Step>
 
+<Step title="Link spans to people and sessions" badge="recommended">
+
+Install the optional PostHog OpenTelemetry module:
+
+```bash
+go get github.com/posthog/posthog-go/otel
+```
+
+Register the context processor on your existing provider before requests start, then wrap your HTTP handler:
+
+```go
+import posthogotel "github.com/posthog/posthog-go/otel"
+
+tp.RegisterSpanProcessor(posthogotel.NewContextSpanProcessor())
+handler := posthogotel.NewRequestContextMiddleware(existingHandler)
+```
+
+The wrapper accepts the [core request middleware options](/docs/libraries/go#request-context). Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Put OpenTelemetry HTTP middleware outside the PostHog wrapper to enrich its existing request span. Create child spans with `r.Context()` so the processor can read the request IDs.
+
+The bridge adds missing `sessionId` and `posthogDistinctId` attributes. Explicit attributes take precedence. Missing IDs stay absent. The optional module keeps your existing provider, exporter, and sampler. It does not change the core SDK dependencies.
+
+Request context expires when the handler returns or panics. Spans that already started keep their attributes. New spans from an ended request context omit its IDs. For a separate background job, start from a fresh non-request context and set the job's IDs explicitly. Manual `WithRequestContext` use has no automatic HTTP lifetime management.
+
+</Step>
+
 <Step title="Test your setup" badge="recommended">
 
 Once everything is configured, confirm spans are reaching PostHog:

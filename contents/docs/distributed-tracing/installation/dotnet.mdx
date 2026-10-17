@@ -91,6 +91,25 @@ public void ProcessOrder(string orderId)
 
 </Step>
 
+<Step title="Link spans to people and sessions" badge="recommended">
+
+For ASP.NET Core on .NET 8 or later, use the [PostHog request-context integration](/docs/libraries/dotnet#request-context). Add PostHog to your existing host builder and put the middleware before your routes:
+
+```csharp
+builder.AddPostHog();
+
+var app = builder.Build();
+app.UsePostHogRequestContext();
+```
+
+Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. The middleware adds missing `sessionId` and `posthogDistinctId` tags to the active request `Activity`. The host-owned listener adds those tags to child activities when they start. Keep your existing OpenTelemetry provider, exporter, and sampling configuration.
+
+Explicit tags take precedence. Missing IDs stay absent. Tracing headers are untrusted analytics context. Use authenticated application identity for access decisions.
+
+Activities that already started keep their tags after the request ends. New activities in detached work do not receive the ended request's IDs. Background jobs need their own context transfer. The core PostHog SDK does not provide a native span API or a trace exporter.
+
+</Step>
+
 <Step title="Test your setup" badge="recommended">
 
 Once everything is configured, confirm spans are reaching PostHog:
