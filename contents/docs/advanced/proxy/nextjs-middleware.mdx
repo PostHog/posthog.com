@@ -205,6 +205,7 @@ The proxy does the following:
 - The `matcher` config tells Next.js to only run this proxy for requests starting with `/yourpath`
 - It determines which PostHog host to use: the assets host for `/static/*` and `/array/*` requests (so that cache headers are preserved), the main host for everything else
 - It sets the `host` header so PostHog knows how to route the request. Without this, you'll get 401 errors.
+- It copies the incoming request headers, which keeps the visitor's IP address in `x-forwarded-for`. PostHog needs that IP address for geolocation.
 - It rewrites the URL to PostHog's domain and strips the `/yourpath` prefix
 
 See [Next.js proxy documentation](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) for more details.
@@ -363,3 +364,15 @@ If proxy doesn't resolve the errors, your hosting platform may be incompatible w
 1. A platform-specific proxy like [Netlify redirects](/docs/advanced/proxy/netlify) or [Vercel rewrites](/docs/advanced/proxy/vercel)
 2. [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy)
 3. Self-hosting Next.js where you control the infrastructure
+
+### All users show the same location
+
+PostHog sets country, region, and city from the client IP address of the request it receives. It does not read platform geolocation headers, such as `x-vercel-ip-city` or `cloudfront-viewer-country`. If your proxy sends its own IP address, PostHog resolves every visitor to the location of one edge server. The location breakdown still looks correct, so this failure is silent.
+
+To confirm, open a recent event in the [activity feed](https://us.posthog.com/activity/explore) and read its `$ip` property. If `$ip` is the same for visitors in different places, it is a proxy IP address.
+
+To correct it:
+
+1. Send the visitor's IP address in `x-forwarded-for`. PostHog reads this header first. See [client IP resolution](/docs/advanced/proxy/proxy-reference#client-ip-resolution) for the full order.
+2. If a CDN or a load balancer is in front of your Next.js server, the IP address your Next.js server sees is the CDN edge, not the visitor. Read the visitor's IP address from the header that the CDN adds, then put that value in `x-forwarded-for`. PostHog reads `x-forwarded-for` before every other header, so an edge address there hides the visitor.
+3. If you cannot set the header, set the `$ip` property on the event instead. PostHog keeps the `$ip` property that an event already has, and uses the request IP address only when the event has no `$ip`.
