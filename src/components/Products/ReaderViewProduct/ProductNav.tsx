@@ -7,6 +7,7 @@ interface ProductNavProps {
     items: ProductNavItem[]
     basePath: string
     contentRef?: React.RefObject<HTMLElement>
+    onItemClick?: (slug: string) => void
 }
 
 const linkClass = 'block w-full px-2 py-1 rounded text-sm text-secondary hover:text-primary hover:bg-accent'
@@ -18,10 +19,21 @@ const NavItemLabel = ({ name, icon }: Pick<ProductNavItem, 'name' | 'icon'>) => 
     </span>
 )
 
-const NavItem = ({ slug, name, icon, basePath, contentRef }: ProductNavItem & Omit<ProductNavProps, 'items'>) => {
+const NavItem = ({
+    slug,
+    name,
+    icon,
+    basePath,
+    contentRef,
+    onItemClick,
+}: ProductNavItem & Omit<ProductNavProps, 'items'>) => {
     if (!contentRef) {
         return (
-            <Link to={slug === 'overview' ? basePath : `${basePath}#${slug}`} className={linkClass}>
+            <Link
+                to={slug === 'overview' ? basePath : `${basePath}#${slug}`}
+                className={linkClass}
+                onClick={() => onItemClick?.(slug)}
+            >
                 <NavItemLabel name={name} icon={icon} />
             </Link>
         )
@@ -33,6 +45,7 @@ const NavItem = ({ slug, name, icon, basePath, contentRef }: ProductNavItem & Om
             element={contentRef}
             className={linkClass}
             label={<NavItemLabel name={name} icon={icon} />}
+            onClick={() => onItemClick?.(slug)}
         />
     )
 }
@@ -43,7 +56,12 @@ const ProductNav = (props: ProductNavProps) => (
             <ul className="list-none m-0 p-0 flex flex-col gap-px">
                 {props.items.map((item) => (
                     <li key={item.slug} className="m-0 p-0">
-                        <NavItem {...item} basePath={props.basePath} contentRef={props.contentRef} />
+                        <NavItem
+                            {...item}
+                            basePath={props.basePath}
+                            contentRef={props.contentRef}
+                            onItemClick={props.onItemClick}
+                        />
                     </li>
                 ))}
             </ul>
