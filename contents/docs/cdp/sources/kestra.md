@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Kestra connector syncs workflow executions, flow definitions, and trigger state from your [Kestra](https://kestra.io/) instance into the PostHog data warehouse, so you can analyze orchestration data alongside your product data.
+The Kestra connector syncs workflow executions, task runs, metrics, flow definitions, flow revisions, trigger state, and logs from your [Kestra](https://kestra.io/) instance into the PostHog data warehouse, so you can analyze orchestration data alongside your product data.
 
 ## Prerequisites
 
@@ -49,13 +49,21 @@ You'll be asked for:
 
 <SyncModes />
 
-| Table        | Supported modes             |
-| ------------ | --------------------------- |
-| `executions` | Incremental or full refresh |
-| `flows`      | Full refresh                |
-| `triggers`   | Full refresh                |
+| Table               | Supported modes             |
+| ------------------- | --------------------------- |
+| `executions`        | Incremental or full refresh |
+| `task_runs`         | Incremental or full refresh |
+| `execution_metrics` | Incremental or full refresh |
+| `flows`             | Full refresh                |
+| `flow_revisions`    | Full refresh                |
+| `triggers`          | Full refresh                |
+| `logs`              | Incremental or full refresh |
 
 The `executions` table uses `start_date` as its incremental cursor. By default, each incremental sync re-reads the previous seven days so that recently updated executions are captured. To pick up changes older than seven days, run a full refresh.
+
+The `task_runs` and `execution_metrics` tables fan out over executions, fetching detailed data for each execution in the sync window. They use `execution_start_date` as their incremental cursor and share the same seven-day lookback as `executions`.
+
+The `logs` table uses `timestamp` as its incremental cursor. Because workers write logs asynchronously, each incremental sync re-reads the last hour to capture late-arriving entries. The `logs` table is disabled by default in the schema picker since it can contain a large volume of data.
 
 ## Configuration
 
@@ -67,8 +75,11 @@ The `executions` table uses `start_date` as its incremental cursor. By default, 
 
 ## Sync behavior
 
-- Execution rows use the API's default scope and lightweight response. Full task-run data isn't included.
+- The `task_runs` and `execution_metrics` tables request detail data for every execution in the sync window. For large execution volumes, these syncs can take longer than the base `executions` sync.
+- The `flow_revisions` table fetches all revisions for each flow. This is always a full refresh since revisions are immutable.
+- If an execution or flow is deleted between the list request and the detail request, the sync continues and returns zero rows for that parent rather than failing.
 - Deleted or purged executions can't be recovered from the API. If executions are removed from Kestra, those rows won't reappear in PostHog.
+- Log and metric entries don't have native identifiers in Kestra. PostHog generates an `entry_id` column using a hash of the entry content, which serves as the primary key for merges.
 - Offset pagination can shift if records are deleted during a sync, which may cause rows to be skipped or duplicated in that run.
 
 ## Troubleshooting
@@ -76,5 +87,7 @@ The `executions` table uses `start_date` as its incremental cursor. By default, 
 - **"Kestra rejected your credentials"** – your API token or Basic auth details are wrong, expired, or revoked. Create a new token in **Settings** > **API Tokens** (or check your username and password), then reconnect the source.
 - **"Kestra denied access"** – your credentials don't have read permission for the selected table. Grant read access in the Kestra tenant, then retry the sync.
 - **Older executions aren't updating** – incremental syncs only re-read the last seven days. Run a full refresh to update older execution rows.
+- **Task runs or metrics missing for long-running executions** – `task_runs` and `execution_metrics` share the same seven-day lookback as `executions`. If an execution runs for more than seven days, its task run data won't be refreshed after the watermark passes. Run a full refresh to update these rows.
+- **Logs table has high data volume** – the `logs` table captures every log line from every task, which can be substantial. If you don't need log data, leave the table disabled in the schema picker.
 
 <TroubleshootingLink />
