@@ -3259,6 +3259,10 @@ export const docsMenu = {
                             url: '/docs/libraries/webflow',
                         },
                         {
+                            name: 'WeInc',
+                            url: '/docs/libraries/weinc',
+                        },
+                        {
                             name: 'WooCommerce',
                             url: '/docs/libraries/woocommerce',
                         },
