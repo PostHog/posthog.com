@@ -22,7 +22,7 @@ You can also download invoices or receipts from here by clicking on them under *
 
 ## Can I set a billing limit?
 
-Yes, you can set a billing limit for each of PostHog's products in your organization's [billing settings](https://app.posthog.com/organization/billing). Check out our doc on [billing limits and alerts](/docs/billing/estimating-usage-costs) for more information.
+Yes, you can set a billing limit for most of PostHog's products in your organization's [billing settings](https://app.posthog.com/organization/billing). Check out our doc on [billing limits and alerts](/docs/billing/limits-alerts) for more information.
 
 ## Are events or replays dropped when I reach billing limits?
 
