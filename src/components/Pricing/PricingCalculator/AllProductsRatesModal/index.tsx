@@ -54,7 +54,7 @@ export default function AllProductsRatesModal({
     return (
         <div data-scheme="primary" className="bg-primary text-primary w-[800px] max-w-[95vw]">
             <ScrollArea>
-                <div className="p-5 max-h-[min(70vh,720px)]">
+                <div className="p-5">
                     <p className="text-[15px] text-secondary mb-4">
                         Every product has its own monthly free tier. Rates below are what you pay per unit after it.
                     </p>
