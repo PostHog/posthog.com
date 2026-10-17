@@ -85,13 +85,6 @@ const ROLE_RESULTS: (QuoteSource & { role: string; stat: string; label: string }
     { role: 'Engineering', customer: 'cloudpeek', author: 'craig_hollington', stat: '10x', label: 'faster debugging' },
     {
         role: 'Engineering',
-        customer: 'phantom',
-        author: 'francesco_agosti',
-        stat: '90%',
-        label: 'fewer failed token transfers',
-    },
-    {
-        role: 'Engineering',
         customer: 'adauris',
         author: 'varun_sharma',
         stat: '500%',

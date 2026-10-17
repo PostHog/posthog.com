@@ -190,10 +190,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 //     headline: 'combines analytics with real business data',
                 //     description: 'We connect Stripe data to see revenue alongside product metrics on the same dashboard.',
                 // },
-                // assemblyai: {
-                //     headline: 'replaced multiple tools with unified dashboards',
-                //     description: 'PostHog dashboards give us everything we had in separate tools, all in one place.',
-                // },
             },
             features: [
                 {
@@ -1076,10 +1072,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 //     headline: 'visualizes user behavior',
                 //     description: 'Heatmaps in the toolbar show us exactly where users click and how they interact with our UI.',
                 // },
-                // assemblyai: {
-                //     headline: 'debugs tracking issues',
-                //     description: 'The toolbar helps us verify that actions are firing correctly by highlighting tracked elements.',
-                // },
             },
             features: [
                 {
@@ -1334,10 +1326,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 // contra: {
                 //     headline: 'builds hype with waitlists',
                 //     description: 'Coming soon features generate excitement and help us prioritize based on interest.',
-                // },
-                // assemblyai: {
-                //     headline: 'reduced support tickets by 50%',
-                //     description: 'Users can opt into experimental features knowing they\'re in beta, setting expectations.',
                 // },
             },
             features: [
@@ -1756,10 +1744,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 //     headline: 'researches new ideas seamlessly',
                 //     description: 'Collect insights and add them to your proposal seamlessly, alongside survey results or cohorts.',
                 // },
-                // assemblyai: {
-                //     headline: 'plans feature launches',
-                //     description: 'Embed the feature flags, events, persons, or cohorts you\'ll need to deploy changes and track success.',
-                // },
             },
             features: [
                 {
@@ -2007,10 +1991,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 // contra: {
                 //     headline: 'improves form completion rates',
                 //     description: 'Scrollmaps showed users weren\'t reaching our signup form. Shortening the page increased signups 40%.',
-                // },
-                // assemblyai: {
-                //     headline: 'discovers hidden user patterns',
-                //     description: 'Heatmaps revealed users were trying to click non-clickable elements. We made them interactive.',
                 // },
             },
             features: [

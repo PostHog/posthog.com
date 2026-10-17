@@ -251,26 +251,6 @@
         "quote": "The autocapture and session recording is ridiculously powerful out of the box. Adding custom events and user properties will take you to the next level. The feature flags let us dark-launch without yet-another-service to integrate. You can even use it as a support tool since you can replay user sessions. There might be other services that do those things on their own, but having it all in one place is a huge win and time save."
     },
     {
-        "featuresUsed": ["users", "dashboards"],
-        "author": { "name": "Francesco Agosti", "role": "CTO & Co-founder", "company": { "name": "Phantom" } },
-        "quote": "We use PostHog dashboards in our weekly all-hands meetings. We’ll often share information that’s important with each other directly. Our biggest power user is probably Brandon, the CEO, who is sort of addicted to PostHog - but it’s also popular with the developers too."
-    },
-    {
-        "featuresUsed": ["feature flags", "competitor"],
-        "author": {
-            "name": "Francesco Agosti",
-            "role": "CTO & Co-founder",
-            "image": "/images/customers/francesco.jpg",
-            "company": { "name": "Phantom", "image": "/images/customers/phantom.svg" }
-        },
-        "quote": "Feature flags are really, really critical for us and you don’t see them as a feature in other analytics tools. They are very valuable though, because you can often use feature flag data to make other product decisions."
-    },
-    {
-        "featuresUsed": ["deployment", "open-source", "self-hosting"],
-        "author": { "name": "Francesco Agosti", "role": "CTO & Co-founder", "company": { "name": "Phantom" } },
-        "quote": "I liked how PostHog was open-source and how it just worked out of the box from the get-go. It lets you use your own database and it was really easy to deploy and get going."
-    },
-    {
         "featuresUsed": ["groups", "feature flags"],
         "author": { "name": "Weyert de Boer", "role": "Senior Software Engineer", "company": { "name": "Tapico" } },
         "quote": "The Groups functionality in PostHog gives us the flexibility and power to target users at a higher level. We can enable feature flags per instance,  dark launch features for a specific instance, or implement kill switches or ops flags. Group Analytics also give us more detailed insight into user behavior between instances. We love it!"

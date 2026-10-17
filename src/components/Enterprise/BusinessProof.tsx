@@ -125,11 +125,6 @@ const PILLARS: Pillar[] = [
                 detail: 'Separate projects per environment or business unit, and up to 60 months of replay retention on Enterprise.',
                 href: '/platform-packages',
             },
-            {
-                title: 'Case study: AssemblyAI',
-                detail: 'Moved millions of events a day to PostHog and stopped throttling ingestion.',
-                href: '/customers/assemblyai',
-            },
         ],
     },
     {
