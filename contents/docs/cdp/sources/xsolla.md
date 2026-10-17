@@ -9,7 +9,7 @@ availability:
 sourceId: Xsolla
 ---
 
-The Xsolla connector syncs your payment and subscription data into PostHog, including transactions, subscriptions, payouts, reports, promotions, projects, and per-project subscription details.
+The Xsolla connector syncs your payment and subscription data into PostHog, including transactions, subscriptions, payouts, reports, promotions, projects, and per-project subscription and Store details.
 
 ## Prerequisites
 
@@ -52,13 +52,16 @@ These tables read data at the merchant level:
 
 ### Project-scoped tables
 
-These tables are read once per project that the merchant owns. Each row includes a `project_id` column, and the primary key is `(project_id, id)` because the Xsolla API does not guarantee globally unique IDs across projects.
+These tables are read once per project that the merchant owns. Each row includes a `project_id` column, and the primary key includes `project_id` because the Xsolla API does not guarantee globally unique IDs across projects. Subscription tables use `(project_id, id)`. Store tables use `(project_id, sku)`.
 
-| Table                   | Description                            | Sync         |
-| ----------------------- | -------------------------------------- | ------------ |
-| `subscription_payments` | Subscription charges for each project  | Full refresh |
-| `subscription_plans`    | Subscription plans for each project    | Full refresh |
-| `subscription_products` | Subscription products for each project | Full refresh |
+| Table                   | Description                               | Primary key         | Sync         |
+| ----------------------- | ----------------------------------------- | ------------------- | ------------ |
+| `subscription_payments` | Subscription charges for each project     | `(project_id, id)`  | Full refresh |
+| `subscription_plans`    | Subscription plans for each project       | `(project_id, id)`  | Full refresh |
+| `subscription_products` | Subscription products for each project    | `(project_id, id)`  | Full refresh |
+| `virtual_items`         | Store virtual items for each project      | `(project_id, sku)` | Full refresh |
+| `virtual_currencies`    | Store virtual currencies for each project | `(project_id, sku)` | Full refresh |
+| `bundles`               | Store bundles for each project            | `(project_id, sku)` | Full refresh |
 
 ## Sync details
 
@@ -68,4 +71,4 @@ These tables are read once per project that the merchant owns. Each row includes
 
 - **Resumable syncs** – If a sync is interrupted, it resumes from the last completed window, project, and page offset on the next run.
 
-- **Project fan-out** – For project-scoped tables (`subscription_payments`, `subscription_plans`, `subscription_products`), PostHog first lists the merchant's projects, then reads each project in turn.
+- **Project fan-out** – For project-scoped tables (`subscription_payments`, `subscription_plans`, `subscription_products`, `virtual_items`, `virtual_currencies`, `bundles`), PostHog first lists the merchant's projects, then reads each project in turn.
