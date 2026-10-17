@@ -5,7 +5,7 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
+import PrivateBeta from "./_snippets/private-beta.mdx";
 
 <PrivateBeta />
 
@@ -55,17 +55,29 @@ Turn this on for guidance that should be in every reply: tone, policies, and com
 
 The text injected from these sources is capped at 20,000 characters combined. PostHog leaves out content past that cap.
 
+## Libraries
+
+A library groups sources and repositories so you can scope search to that group. A source can belong to more than one library, or to none.
+
+The sources page shows **All**, each library, and **Unfiled** above the list. The choice is in the `?library=` query parameter. Creating a source while a library is selected adds it to that library.
+
+Open a source to pick which libraries it belongs to. If [GitHub repositories](/docs/business-knowledge/github) are enabled, the library dialog also lets you add selected repositories to a library.
+
+Deleting a library removes only that grouping. The sources, documents, and selected repositories stay.
+
+Pass `library_id` to document search, repository search, and file read in [MCP](/docs/model-context-protocol/tools) to scope results to one library. Leave it out to search the whole project.
+
 ## Source status
 
-| Status | Meaning |
-| --- | --- |
-| Pending | Waiting to start |
-| Processing | Fetching or indexing |
-| Indexing | The content check has passed and keyword search works. Semantic search is still building. This can take up to an hour. |
-| Ready | Keyword and semantic search are both available |
-| Error | The source failed. Open it to read the reason. |
-| Disabled | A learned source that a newer learned answer replaced. PostHog keeps it and doesn't use it in replies. |
-| Unsafe content | At least one page was flagged and search leaves it out |
+| Status         | Meaning                                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Pending        | Waiting to start                                                                                                       |
+| Processing     | Fetching or indexing                                                                                                   |
+| Indexing       | The content check has passed and keyword search works. Semantic search is still building. This can take up to an hour. |
+| Ready          | Keyword and semantic search are both available                                                                         |
+| Error          | The source failed. Open it to read the reason.                                                                         |
+| Disabled       | A learned source that a newer learned answer replaced. PostHog keeps it and doesn't use it in replies.                 |
+| Unsafe content | At least one page was flagged and search leaves it out                                                                 |
 
 If the organization hasn't approved AI data processing, a ready source can still show that semantic search is off. Search leaves out documents that haven't passed the content check, for both keyword and semantic search.
 
@@ -90,16 +102,17 @@ Delete removes the source and its chunks. PostHog records the change in the acti
 
 ## Limits
 
-| Limit | Value |
-| --- | --- |
-| Sources you add | 500 per project |
-| Learned sources | 10,000 per project |
-| Chunks | 250,000 per project |
-| Pasted text | 1 MB |
-| Uploaded file | 50 MB |
-| One fetched page | 10 MB |
-| Pages in one URL source | 5,000 (default 200) |
-| Same-origin depth | 5 (default 2) |
-| PDF pages | 2,000 |
-| CSV rows kept | 10,000 |
-| Always-included text | 20,000 characters combined |
+| Limit                   | Value                      |
+| ----------------------- | -------------------------- |
+| Sources you add         | 500 per project            |
+| Learned sources         | 10,000 per project         |
+| Chunks                  | 250,000 per project        |
+| Pasted text             | 1 MB                       |
+| Uploaded file           | 50 MB                      |
+| One fetched page        | 10 MB                      |
+| Pages in one URL source | 5,000 (default 200)        |
+| Same-origin depth       | 5 (default 2)              |
+| PDF pages               | 2,000                      |
+| CSV rows kept           | 10,000                     |
+| Always-included text    | 20,000 characters combined |
+| Libraries               | 100 per project            |
