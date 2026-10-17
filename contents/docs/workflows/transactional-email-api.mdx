@@ -360,7 +360,7 @@ curl -X POST "<ph_app_host>/api/projects/:project_id/messaging_templates/:id/req
   -d '{ "instruction": "Make the button green." }'
 ```
 
-- `instruction` is required, with at most 2,000 characters, such as `Make the button green.` When it doesn't start with the template's `change_prompt_starter`, PostHog puts the starter in front of it, so the task knows the file.
+- `instruction` is required, with at most 2,000 characters, such as `Make the button green.` When it doesn't start with the template's `change_prompt_starter`, PostHog puts the starter and `what this request asks for:` in front of it, so the task knows the file.
 - The response is `201` with `task_id`, `task_url`, and `repository` (`owner/name`).
 - The PostHog MCP tool `workflows-request-email-template-change` calls this route.
 - The errors are [`instruction_missing`](#instruction_missing), [`template_not_managed_by_code`](#template_not_managed_by_code), [`template_repository_missing`](#template_repository_missing), [`template_repository_unsupported`](#template_repository_unsupported), [`github_repository_not_connected`](#github_repository_not_connected), [`posthog_code_not_available`](#posthog_code_not_available), and [`posthog_code_run_failed`](#posthog_code_run_failed).
@@ -557,14 +557,15 @@ PostHog doesn't accept the key. For example, the key is wrong, deleted, or rolle
 
 The key can't do this. For example:
 
-- "API key missing required scope 'hog_flow:write'": give the key the `hog_flow:write` scope. A [change request](#run-with-posthog-code) needs `hog_flow:read` and `task:write` instead, and names the missing one, such as "API key missing required scope 'task:write'".
+- "API key missing required scope 'hog_flow:write'": give the key the `hog_flow:write` scope. A [change request](#run-with-posthog-code) needs `hog_flow:read` and `task:write` instead, and names the first one the key lacks, such as "API key missing required scope 'task:write'".
 - "This action does not support project secret API key access": a project secret API key can only upload and send. Use a personal API key for other template routes, such as [adoption](#adopt-a-template-made-in-posthog) and a [change request](#run-with-posthog-code).
 - "You need editor access to this template's transactional email workflow.": a personal API key or a session needs editor access to the template's workflow.
 - "You need editor access to workflows to upload a new template.": a personal API key or a session needs editor access to Workflows to create a template.
 - "You need editor access to workflows to make a template transactional.": a personal API key or a session needs editor access to Workflows to make a template transactional.
+- "You do not have editor access to this resource.": a [change request](#run-with-posthog-code) needs editor access to Workflows.
 - "API key does not have access to the requested project: ID ...": the key can't access the project in the URL. With a project secret API key, use `@current`. With a personal API key, use the ID of a project that the key can access.
 
-**Fix:** Use a project secret API key with `hog_flow:write` for the project that has the template.
+**Fix:** For the upload and send routes, use a project secret API key with `hog_flow:write` for the project that has the template. For other routes, use a personal API key with the scopes and access that the route's section names.
 
 ### `throttled`
 
