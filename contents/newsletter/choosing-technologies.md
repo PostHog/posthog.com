@@ -26,7 +26,7 @@ Over the past 12 months, we have:
 
 - Adopted C++ over Python to speed up SQL parsing.
 
-We did all this while shipping multiple new products, such as [web analytics](/docs/web-analytics), [mobile session replay](/blog/mobile-session-replay), and our [data warehouse](/data-warehouse), and dozens of new features for existing ones.
+We did all this while shipping multiple new products, such as [web analytics](/docs/web-analytics), [mobile session replay](/blog/mobile-session-replay), and our [data warehouse](/context-warehouse), and dozens of new features for existing ones.
 
 Ultimately, technology is just a tool to help us [build something people want](/handbook/making-users-happy). We always want to choose the **right** ones, but lengthy procurement processes would slowly kill us. [Shipping fast](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) isn’t optional.
 

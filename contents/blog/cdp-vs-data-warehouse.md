@@ -13,7 +13,7 @@ tags:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-[Customer data platform](/cdp) (CDP) vs [data warehouse](/data-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
+[Customer data platform](/cdp) (CDP) vs [data warehouse](/context-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
 
 There are dozens of articles trying to convince you one or the other is the "right" choice, but, in reality, both (or neither) might be right for you. This article will help you understand what they do and decide whether a CDP and/or data warehouse is right for you.
 

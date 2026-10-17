@@ -34,7 +34,7 @@ The interesting part for us is the second-order effect: the agent doesn't carry 
 
 ## Setting up autoresearch for ClickHouse in a hackathon
 
-Every year, we run [hackathons](/newsletter/hackathons) at company offsites. A lot of what's now PostHog ([session replay](/session-replay), the [data warehouse](/data-warehouse), [logs](/logs), and more) started this way. At a smaller joint team offsite for the [Analytics Platform](/teams/analytics-platform) and [Query Performance](/teams/query-performance) teams in Lisbon, our hackathon project was to do Karpathy's thing, but for ClickHouse query performance.
+Every year, we run [hackathons](/newsletter/hackathons) at company offsites. A lot of what's now PostHog ([session replay](/session-replay), the [data warehouse](/context-warehouse), [logs](/logs), and more) started this way. At a smaller joint team offsite for the [Analytics Platform](/teams/analytics-platform) and [Query Performance](/teams/query-performance) teams in Lisbon, our hackathon project was to do Karpathy's thing, but for ClickHouse query performance.
 
 The stack we used:
 

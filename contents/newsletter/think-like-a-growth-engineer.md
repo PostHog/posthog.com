@@ -74,7 +74,7 @@ Engineers are like bus drivers, helping move a product along its roadmap toward 
 
 To understand what their work looks like, let's look at a recent example from our growth team:
 
-1. **Identify a target area.** Product analytics has seen some massive upgrades lately and we've also added our [data warehouse](/data-warehouse). Onboarding for both these products hasn't kept up, so they identified this as an area to improve.
+1. **Identify a target area.** Product analytics has seen some massive upgrades lately and we've also added our [data warehouse](/context-warehouse). Onboarding for both these products hasn't kept up, so they identified this as an area to improve.
 
 2. **Identify a metric that represents that target area.** They chose the percentage of new organizations that activate, which combines creating a dashboard, analyzing an insight, inviting a teammate, and more. They wanted to improve this metric while keeping retention the same or improving it.
 
