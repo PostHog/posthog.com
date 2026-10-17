@@ -41,6 +41,11 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'link-server-spans-to-sessions',
+        value: 'Link server spans to sessions',
+        depth: 1,
+    },
+    {
         url: 'capture-server-side-request-errors',
         value: 'Capture server-side request errors',
         depth: 1,
@@ -283,6 +288,46 @@ For server-side events and feature flag evaluations, PostHog can use the client-
 > **Note:** Avoid capturing page views or other navigation events while rendering a Server Component or running `getServerSideProps`. Rendering doesn't prove that a navigation completed. The App Router can execute render code while [prefetching](https://nextjs.org/docs/app/guides/prefetching), and Next.js can retry renders. Use `PostHogPageView` for page views, and capture server-side events from handlers invoked for the action you want to measure.
 >
 > Dynamic rendering keeps personalized flag decisions out of Next.js's shared Full Route Cache. The App Router can still reuse a React Server Component payload from its client Router Cache. After an authentication or identity change, use [`router.refresh()`](https://nextjs.org/docs/app/api-reference/functions/use-router#userouter) when the current route's server-rendered flag decisions must be evaluated again.
+
+</Step>
+
+<Step title="Link server spans to sessions" badge="optional">
+
+For Node.js App Router work, use the optional `@posthog/next/otel` entry. This setup requires the releases that include this entry and the shared Node context processor. Reuse the same configuration as `createPostHog()` so analytics and tracing use one cached client:
+
+```ts file=lib/posthog.ts
+import 'server-only'
+import { createPostHog } from '@posthog/next'
+import { createPostHogSpanContext } from '@posthog/next/otel'
+import { auth } from '@/auth'
+
+const config = {
+    getDistinctId: async () => (await auth())?.user?.id,
+}
+
+export const { getPostHog } = createPostHog(config)
+export const { createContextSpanProcessor, withPostHogContext } = createPostHogSpanContext(config)
+```
+
+In your existing Node-only tracing setup, await `createContextSpanProcessor()` and add the returned processor to your provider before it handles requests. Keep your provider, exporters, sampler, and other processors. See the [Node.js tracing guide](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) for setup.
+
+Wrap the request or action work that needs span context:
+
+```ts file=app/api/status/route.ts
+import { withPostHogContext } from '@/lib/posthog'
+
+export const runtime = 'nodejs'
+
+export async function GET() {
+    return withPostHogContext(async () => {
+        return Response.json({ ok: true })
+    })
+}
+```
+
+The helper uses the existing consent, cookie, header, and application identity resolver. It fills missing `sessionId` and `posthogDistinctId` attributes on the active span and its nearest recording server ancestor whose parent chain the processor observed. Existing attributes keep their values. A sampled-out intermediate hides earlier server ancestors; new recording child spans still receive context.
+
+Context ends when the callback settles, including on error. Wrap each server action or awaited Server Component function that needs its own scope. Later child rendering and streamed response work are outside an earlier callback's scope. Detached work needs explicit context and its own lifetime. This entry supports Node.js App Router work; it does not accept Pages Router request arguments or run in the browser or Edge runtime.
 
 </Step>
 

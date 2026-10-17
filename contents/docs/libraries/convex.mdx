@@ -17,16 +17,18 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 | Forward Convex exceptions to PostHog Error Tracking | [Convex dashboard exception reporting](https://docs.convex.dev/production/integrations/exception-reporting) (no code) |
 
 <div className="grid grid-cols-2 gap-2">
-    <ProductScreenshot
-        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_mzyo_3d76c9770a.png"
-        alt="Convex dashboard PostHog Logs configuration form"
-        classes="rounded"
-    />
-    <ProductScreenshot
-        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_naki_c0aa94431b.png"
-        alt="Convex dashboard PostHog Error Tracking configuration form"
-        classes="rounded"
-    />
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_mzyo_3d76c9770a.png"
+alt="Convex dashboard PostHog Logs configuration form"
+classes="rounded"
+/>
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260521_naki_c0aa94431b.png"
+alt="Convex dashboard PostHog Error Tracking configuration form"
+classes="rounded"
+/>
+
 </div>
 
 ## Get your PostHog project token
@@ -38,7 +40,7 @@ Every integration on this page needs the same two values:
 
 ## Capture events and flags from your Convex code
 
-The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component lets you capture events, identify users, evaluate feature flags, and forward exceptions directly from your Convex queries, mutations, and actions.
+The [`@posthog/convex`](https://www.npmjs.com/package/@posthog/convex) component captures events, identifies users, and forwards exceptions from mutations and actions. Local feature flags also work in queries.
 
 Requires Convex 1.39 or newer.
 
@@ -321,7 +323,7 @@ export function AuthSync() {
 
 Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvider>` and below your Convex `<Authenticated>` boundary if you have one. The `me?._id` guard skips the `identify` call until authentication completes.
 
-[Session replays](/docs/session-replay), server-side mutations, exceptions, and logs all land on one timeline for that user.
+Matching IDs connect frontend and backend events for that person. Session links need an explicit session ID. Convex log streams and dashboard exception reporting use separate ID rules, described below.
 
 <CalloutBox icon="IconInfo" title="Session replays" type="fyi">
 
@@ -333,6 +335,78 @@ npx convex env set VITE_POSTHOG_HOST <ph_client_api_host>
 ```
 
 </CalloutBox>
+
+## Pass session IDs to backend functions
+
+Query, mutation, and action calls from the Convex client do not give your handler an HTTP request. Pass the browser IDs as function arguments when you need them. Read the session ID when you call the function, since it can change while the page is open:
+
+```ts
+await updateProfile({
+    plan: "pro",
+    sessionId: posthog.get_session_id(),
+    distinctId: posthog.get_distinct_id(),
+})
+```
+
+Use your existing browser PostHog instance and Convex mutation. Add optional string validators to that mutation, and resolve the authenticated person on the server:
+
+```ts
+import { mutation } from "./_generated/server"
+import { v } from "convex/values"
+import { posthog } from "./posthog"
+
+function cleanId(value: string | undefined): string | undefined {
+    const id = value?.trim()
+    return id && id.length <= 1000 && !/[\x00-\x1f\x7f-\x9f]/.test(id) ? id : undefined
+}
+
+export const updateProfile = mutation({
+    args: {
+        plan: v.string(),
+        sessionId: v.optional(v.string()),
+        distinctId: v.optional(v.string()),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity()
+        const distinctId = identity?.tokenIdentifier ?? cleanId(args.distinctId)
+        if (!distinctId) throw new Error("Missing analytics identity")
+        const sessionId = cleanId(args.sessionId)
+
+        await posthog.capture(ctx, {
+            distinctId,
+            event: "plan_changed",
+            properties: {
+                plan: args.plan,
+                ...(sessionId ? { $session_id: sessionId } : {}),
+            },
+        })
+    },
+})
+```
+
+Add this capture to your existing authorized profile update. This example uses the authenticated `tokenIdentifier`. If your app uses its own user ID, resolve that ID on the server and use the same string with `posthog.identify()` in the browser. The component's optional `identify` callback also takes priority over a supplied `distinctId`.
+
+Browser IDs are analytics hints. Use Convex authentication and authorization to control access to data. Missing or invalid session IDs stay absent; the server does not create browser sessions.
+
+`@posthog/convex` copies event properties into the scheduled capture call. Mutation scheduling commits with the mutation: if the mutation throws, its scheduled capture is rolled back too. Queries cannot schedule captures. Scheduled application functions do not inherit authentication or ambient context. Pass the selected IDs as arguments to an internal scheduled function when it needs them, and keep authorization checks at the public entry point.
+
+### Application spans and logs
+
+`@posthog/convex` does not install an OpenTelemetry provider or attach IDs to function spans. For application-created spans, use `sessionId` and `posthogDistinctId` as span attributes. Keep explicit application attributes when you add these defaults:
+
+```ts
+const span = tracer.startSpan("update_profile", {
+    attributes: {
+        ...(sessionId ? { sessionId } : {}),
+        posthogDistinctId: distinctId,
+        ...applicationAttributes,
+    },
+})
+```
+
+Apply the IDs to each span that needs them. If a Node action already uses `posthog-node` and an application-owned OpenTelemetry provider, the [Node span processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) can apply the IDs inside `withContext()`. Keep those Node imports in a file with `"use node"`. The full Node SDK cannot be bundled into queries or mutations. The default Convex runtime supports `AsyncLocalStorage`, but its values do not cross `ctx.runQuery`, `ctx.runMutation`, or `ctx.runAction` calls. Pass IDs explicitly across these boundaries. Await action work and exporter flushes before the action returns.
+
+Convex's [PostHog log stream](https://docs.convex.dev/production/integrations/log-streams/#posthog) sends function metadata and console output in the OTLP log body. IDs you print in console output remain body content; this does not establish canonical log attributes or trace links. The dashboard's [PostHog exception destination](https://docs.convex.dev/production/integrations/exception-reporting#supported-properties) uses the authenticated `tokenIdentifier`, or the deployment name when unauthenticated. It does not document a browser session ID. Use the component's `captureException()` with an explicit `distinctId` and `$session_id` in `additionalProperties` when you need that session link on a specific exception.
 
 ## Trace LLM calls and Convex Agent
 
@@ -353,4 +427,3 @@ Requires a [Convex Professional plan](https://www.convex.dev/pricing) for Convex
 - [Convex data warehouse source](/docs/cdp/sources/convex)
 - [Convex PostHog log streams](https://docs.convex.dev/production/integrations/log-streams/)
 - [Convex PostHog exception reporting](https://docs.convex.dev/production/integrations/exception-reporting)
-

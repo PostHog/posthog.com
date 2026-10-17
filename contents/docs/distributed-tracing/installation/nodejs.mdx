@@ -226,7 +226,9 @@ Use this configuration in place of the provider configuration above. Keep your e
 
 For Express, put [`setupExpressRequestContext`](/docs/libraries/node#add-request-context-to-express) before your routes. It reads the browser tracing headers and adds missing `posthogDistinctId` and `sessionId` attributes to the active request span. The processor adds the same attributes to child spans when they start. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK.
 
-For a custom integration, call `enrichCurrentSpan(posthog)` from `posthog-node/otel` after you set the IDs inside `posthog.withContext()`. The helper requires the registered processor. It does not manage another framework's request lifetime.
+For a custom integration, call `enrichCurrentSpan(posthog)` from `posthog-node/otel` after you set the IDs inside `posthog.withContext()`. The helper is also exported from the main `posthog-node` entry without loading OpenTelemetry. It requires the registered processor. It does not manage another framework's request lifetime.
+
+At explicit request entry, the processor also fills missing IDs on the nearest recording server ancestor through parent span objects it has observed. This covers HTTP spans that start before framework middleware. If a sampler drops an intermediate span, that parent chain cannot be verified, so the earlier server span stays unchanged. New recording spans inside the request still receive context.
 
 Existing `sessionId` and `posthogDistinctId` span attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. Express context ends when the response finishes or closes. Spans that already started keep their attributes; new spans in detached work do not receive the ended request's IDs. Background jobs need their own context transfer. The processor does not create a session, recording, trace provider, or exporter.
 
