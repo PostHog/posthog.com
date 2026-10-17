@@ -3,10 +3,10 @@ title: "Configure a workflows channel"
 showStepsToc: true
 ---
 
-import Tab from "components/Tab"
+import Tab from "components/Tab";
 
-import AddSlackToWorkspace from './_snippets/add-posthog-to-slack-workspace.mdx'
-import AddSlackToChannel from './_snippets/add-posthog-to-slack-channel.mdx'
+import AddSlackToWorkspace from "./_snippets/add-posthog-to-slack-workspace.mdx";
+import AddSlackToChannel from "./_snippets/add-posthog-to-slack-channel.mdx";
 
 <Steps>
 
@@ -19,6 +19,7 @@ To create a new channel, go to workflows > [**Channels** tab](https://app.postho
 <CalloutBox icon="IconInfo" title="CDP channels" type="fyi">
 
 Other than the channels shown below, you can also dispatch to any [realtime destination](/docs/cdp/destinations) in CDP. If you plan to use a CDP destination, you can configure them directly when you [design a workflow](/docs/workflows/workflow-builder).
+
 </CalloutBox>
 
 <Tab.Group tabs={[
@@ -35,7 +36,7 @@ Other than the channels shown below, you can also dispatch to any [realtime dest
 <Tab.Panels>
 <Tab.Panel>
 
-Email is the default workflows channel in PostHog.  
+Email is the default workflows channel in PostHog.
 
 You can use it to send **[drip campaigns](/docs/workflows/email-drip-campaign), transactional messages, or announcements** directly from the [workflow builder](/docs/workflows/workflow-builder).
 
@@ -43,6 +44,7 @@ To configure the channel, you need to provide the following details:
 
 - Enter your **from name** (e.g. `PostHog Team`).
 - Enter your **from email** (e.g. `team@yourdomain.com`).
+- Optionally, enter a **default reply-to address** (e.g. `support@yourdomain.com`). When an email step has no reply-to address of its own, replies go to this address instead of the sender address.
 
 This is the address that recipients will see in their inbox. Each one is a separate channel, and only a sender that exists shows in the **From** dropdown of an email step in the [workflow builder](/docs/workflows/workflow-builder). To add another sender later, use the [**Channels** tab](https://app.posthog.com/workflows/channels) again.
 
@@ -57,30 +59,30 @@ Once verified, you'll see a green check mark in your settings.
 Verification applies to the domain, not to the address. If the domain is already verified for another sender in the same project, you do not need to add the DNS records again for a new address on that domain.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_light_c2f3b925c5.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_8fc6c512da.png"
-    alt="How to verify your domain in PostHog" 
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_light_c2f3b925c5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_8fc6c512da.png"
+  alt="How to verify your domain in PostHog"
+  classes="rounded"
 />
 
 </Tab.Panel>
 <Tab.Panel>
 
-A Slack connection enables you to deliver messages to a Slack channel. 
+A Slack connection enables you to deliver messages to a Slack channel.
 
-<AddSlackToWorkspace/>
+<AddSlackToWorkspace />
 
-<AddSlackToChannel/>
+<AddSlackToChannel />
 
 </Tab.Panel>
 <Tab.Panel>
 
 Twilio enables you to send SMS messages to your users. To configure the channel, you need to provide the following details:
 
-| Field             | Example                                           | More info                                      |
-|-------------------|---------------------------------------------------|------------------------------------------------|
-| **Account SID**   | `AC5e66a2da9f32addea17ffe6d58891bf`               | [Twilio docs](https://help.twilio.com/articles/14726256820123-What-is-a-Twilio-Account-SID-and-where-can-I-find-it-) |
-| **Auth Token**    | `4C2d86b28811*****111111111111111`                | [Twilio docs](https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them) |
+| Field           | Example                             | More info                                                                                                            |
+| --------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Account SID** | `AC5e66a2da9f32addea17ffe6d58891bf` | [Twilio docs](https://help.twilio.com/articles/14726256820123-What-is-a-Twilio-Account-SID-and-where-can-I-find-it-) |
+| **Auth Token**  | `4C2d86b28811*****111111111111111`  | [Twilio docs](https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them)                         |
 
 Once configured, you'll be able to use the channel in a workflow to send SMS messages to your users.
 
@@ -92,11 +94,13 @@ Push lets you send native mobile push notifications to users who have your app i
 <CalloutBox icon="IconInfo" title="Push notifications are in open beta" type="fyi">
 
 Push is in open beta. It's available in every project, so you don't need to request access. Each send counts toward your workflows destinations usage and quota, the same as a webhook or other destination step. To send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Device tokens come from the mobile SDK" type="fyi">
 
 Push delivery requires your app to register each user's device token with PostHog through the mobile SDK ([iOS](/docs/workflows/push-notifications/ios), [Android](/docs/libraries/android#push-notifications)), which is also where you implement identity verification if you enable it below. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
+
 </CalloutBox>
 
 **Firebase Cloud Messaging (FCM)**
@@ -107,23 +111,23 @@ Paste the contents of your Firebase **service account key JSON**. Generate one i
 
 Provide the following, from your [Apple Developer account](https://developer.apple.com/account/resources/authkeys/list) under **Certificates, Identifiers & Profiles > Keys**:
 
-| Field | Description |
-| --- | --- |
-| **Signing key (.p8)** | Your APNs auth key. Paste the contents or upload the `.p8` file. |
-| **Key ID** | The ID of the signing key. |
-| **Apple team ID** | Your Apple developer team ID. |
-| **Bundle ID** | Your app's bundle identifier (the APNs topic), e.g. `com.example.app`. |
-| **Environment** | `Production` or `Sandbox`. Match how your app build registers with APNs. |
+| Field                 | Description                                                              |
+| --------------------- | ------------------------------------------------------------------------ |
+| **Signing key (.p8)** | Your APNs auth key. Paste the contents or upload the `.p8` file.         |
+| **Key ID**            | The ID of the signing key.                                               |
+| **Apple team ID**     | Your Apple developer team ID.                                            |
+| **Bundle ID**         | Your app's bundle identifier (the APNs topic), e.g. `com.example.app`.   |
+| **Environment**       | `Production` or `Sandbox`. Match how your app build registers with APNs. |
 
 **Identity verification**
 
-A device token says *where* to deliver a notification, not *who* the device belongs to. Identity verification lets your backend sign a short-lived token for the logged-in user that your app sends when registering a device, so a client can't register a device against someone else's user. Pick a mode when connecting the channel:
+A device token says _where_ to deliver a notification, not _who_ the device belongs to. Identity verification lets your backend sign a short-lived token for the logged-in user that your app sends when registering a device, so a client can't register a device against someone else's user. Pick a mode when connecting the channel:
 
-| Mode | Behavior |
-| --- | --- |
-| **Disabled** (default) | Any client with your project API key can register a device for any user. |
-| **Optional** | Tokens are verified and recorded, but devices can still register without one. Use this to confirm your app sends valid tokens before you require them. |
-| **Required** | Devices without a valid token can't register or unregister. Switch to this only once your app sends tokens, otherwise registration stops working. |
+| Mode                   | Behavior                                                                                                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Disabled** (default) | Any client with your project API key can register a device for any user.                                                                               |
+| **Optional**           | Tokens are verified and recorded, but devices can still register without one. Use this to confirm your app sends valid tokens before you require them. |
+| **Required**           | Devices without a valid token can't register or unregister. Switch to this only once your app sends tokens, otherwise registration stops working.      |
 
 When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/workflows/push-notifications/ios#identity-verification), [Android](/docs/libraries/android#identity-verification)).
 
@@ -163,13 +167,13 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 
 <Step checkpoint title="Troubleshooting" subtitle="Common issues you may encounter">
 
-| Issue | Solution |
-| --- | --- |
-| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. |
-| Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
-| Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
-| Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |
-| Push not arriving? | Confirm the device registered a token via the mobile SDK, the channel's provider credentials are valid, and (for APNs) the environment (Production/Sandbox) matches your app build. |
+| Issue                                | Solution                                                                                                                                                                            |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step.               |
+| Emails not sending?                  | Check that your domain is verified and you've added the DNS records correctly.                                                                                                      |
+| Spam folder issues?                  | Ensure SPF/DKIM are valid, and consider setting up DMARC.                                                                                                                           |
+| Variables not populating?            | Confirm the property exists on the person profile (e.g. `person.name`).                                                                                                             |
+| Push not arriving?                   | Confirm the device registered a token via the mobile SDK, the channel's provider credentials are valid, and (for APNs) the environment (Production/Sandbox) matches your app build. |
 
 </Step>
 
