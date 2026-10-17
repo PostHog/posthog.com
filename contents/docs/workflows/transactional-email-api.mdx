@@ -457,6 +457,7 @@ The key can't do this. For example:
 - "This action does not support project secret API key access": a project secret API key can only upload and send. Use a personal API key for other template routes, such as [adoption](#adopt-a-template-made-in-posthog).
 - "You need editor access to this template's transactional email workflow.": a personal API key or a session needs editor access to the template's workflow.
 - "You need editor access to workflows to upload a new template.": a personal API key or a session needs editor access to Workflows to create a template.
+- "You need editor access to workflows to make a template transactional.": a personal API key or a session needs editor access to Workflows to make a template transactional.
 - "API key does not have access to the requested project: ID ...": the key can't access the project in the URL. With a project secret API key, use `@current`. With a personal API key, use the ID of a project that the key can access.
 
 **Fix:** Use a project secret API key with `hog_flow:write` for the project that has the template.
@@ -484,7 +485,7 @@ The template has no workflow to send it, for example a template made in PostHog 
 The template's workflow is paused or deleted.
 
 - "The template's transactional email isn't active.": the workflow is paused. **Fix:** Turn the template's workflow back on in Workflows. An upload never turns a paused workflow back on.
-- "The template's transactional email no longer exists.": the workflow was deleted. **Fix:** Upload the template again. The upload creates a new workflow with the project's default sender. For a template without a key, call `POST /api/projects/:project_id/messaging_templates/:id/make_transactional/` with a personal API key.
+- "The template's transactional email no longer exists.": the workflow was deleted. **Fix:** Upload the template again. The upload creates a new workflow with the project's default sender. For a template without a key, call `POST /api/projects/:project_id/messaging_templates/:id/make_transactional/` with a personal API key that has `hog_flow:write` and editor access to Workflows.
 
 ### `invalid_recipient`
 
