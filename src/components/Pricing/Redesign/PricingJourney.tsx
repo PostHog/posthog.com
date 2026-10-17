@@ -35,7 +35,7 @@ const freeIncludes = [
 const paidAdds = [
     { name: 'Unlimited usage' },
     { name: '6 projects', detail: 'up from 1' },
-    { name: '7-year data retention', detail: 'up from 1 year' },
+    { name: '2-year data retention', detail: 'up from 1 year' },
     { name: 'Email support', detail: 'or Slack over $2k/mo' },
 ]
 
