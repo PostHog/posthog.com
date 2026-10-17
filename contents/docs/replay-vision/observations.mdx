@@ -8,7 +8,7 @@ An **observation** is one scanner's result for one recording. Each scanner has a
 
 ## The Observations tab
 
-The table shows a thumbnail of each recording, the person, the status, the result, and who or what triggered the scan. Filter by person email, date, status, trigger, and, depending on the [scanner type](/docs/replay-vision/scanner-types), by verdict, score range, or category. Observations you haven't opened yet carry a **New** tag, tracked per user.
+The table shows a thumbnail of each recording, the person, the status, the result, and who or what triggered the scan. Filter by person email, date, status, trigger, and, depending on the [scanner type](/docs/replay-vision/scanner-types), by verdict, score range, category, or experiment variant. Observations you haven't opened yet carry a **New** tag, tracked per user.
 
 Each row has two actions: **View details** opens the observation page, and the search icon finds similar observations across all your scanners. **Search observations** above the table opens [search](#searching-observations) scoped to this scanner, and summarizers also get a **Copy all** button that copies the filtered summaries as plain text.
 
@@ -63,7 +63,7 @@ Observations also show up when you watch a recording:
 
 - The **Observations** tab in the player sidebar lists what every scanner found about the session. Click one to read its result, or **View details** to open its page. If the session has a summary with chapters, the tab shows them as a timeline you can click through. **Scan this recording** runs any of your scanners on the session you're watching.
 - Marks on the seekbar show each scan's key moment: the moment its answer rests on most. Hover a mark to see which scanner and what it answered.
-- The bar under the player summarizes the recording. **Summarize this recording** runs one of your summarizer scanners (pick which from the dropdown), or a built-in prompt if you have none, and shows the summary below.
+- The bar under the player summarizes the recording. The button runs one of your summarizer scanners (pick which from the dropdown), or a built-in prompt if you have none, and opens the **Observations** tab in the sidebar, where the summary appears.
 
 ## Searching observations
 
@@ -85,7 +85,7 @@ Every successful observation is captured as a `$recording_observed` event in you
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `scanner_name`                     | Human-readable name of the scanner                                                                                                                   |
 | `scanner_id`                       | Scanner UUID                                                                                                                                         |
-| `scanner_type`                     | `monitor`, `classifier`, `scorer`, or `summarizer`                                                                                                   |
+| `scanner_type`                     | `monitor`, `classifier`, `scorer`, `summarizer`, or `experiment`                                                                                     |
 | `scanner_version`                  | Version of the scanner config that produced this observation                                                                                         |
 | `session_id`                       | The recording that was observed                                                                                                                      |
 | `recording_distinct_id`            | Distinct ID of the person in the recorded session (the subject, not whoever triggered the scan)                                                      |
@@ -108,8 +108,9 @@ Every successful observation is captured as a `$recording_observed` event in you
 | `scanner_output_label`             | **Scorer only** – the name of the scorer's scale                                                                                                     |
 | `scanner_output_title`             | **Summarizer only** – the generated one-line title                                                                                                   |
 | `scanner_output_summary`           | **Summarizer only** – the generated prose summary                                                                                                    |
-| `scanner_output_chapters`          | **Summarizer only** – the recording broken into parts, in order, each with `start_ms`, `end_ms`, and a short `title`                                 |
-| `scanner_output_inactive_periods`  | **Summarizer only** – stretches the replay player marked inactive, each with `start_ms` and `end_ms`                                                 |
+| `scanner_output_chapter_count`     | **Summarizer only** – how many chapters the summary has. The chapters themselves stay on the observation                                             |
+| `experiment_id`                    | **Experiment only** – the experiment the scanner watches                                                                                             |
+| `experiment_variant`               | **Experiment only** – the variant the session was in. Can be empty on older observations                                                             |
 
 The notability and key moment properties can be empty on older observations. The event also carries the recorded session's GeoIP properties and, if you use [group analytics](/docs/product-analytics/group-analytics), its group keys.
 
