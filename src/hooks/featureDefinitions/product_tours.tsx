@@ -3,7 +3,7 @@ export const productToursFeatures = {
         name: 'Product Tours',
         description: 'Communicate with users through product tours, tooltips, and popups',
         // url: '/cdp',
-        // docsUrl: '/docs/cdp',
+        // docsUrl: '/docs/data-pipelines',
     },
     features: {},
 }

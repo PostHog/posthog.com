@@ -1,6 +1,6 @@
 export const dataPipelines = {
     name: 'Data pipelines',
-    url: '/docs/cdp',
+    url: '/docs/data-pipelines',
     color: 'sky-blue',
     icon: 'IconPlug',
     description: 'Collect, enrich, and send data to your destinations',
@@ -10,7 +10,7 @@ export const dataPipelines = {
         },
         {
             name: 'Overview',
-            url: '/docs/cdp',
+            url: '/docs/data-pipelines',
             icon: 'IconHome',
             color: 'seagreen',
         },
@@ -19,7 +19,7 @@ export const dataPipelines = {
         },
         {
             name: 'Start here',
-            url: '/docs/cdp/start-here',
+            url: '/docs/data-pipelines/start-here',
             icon: 'IconListCheck',
             color: 'orange',
             featured: true,
@@ -29,38 +29,38 @@ export const dataPipelines = {
         },
         {
             name: 'PostHog Web',
-            url: '/docs/cdp/surfaces/web-app',
+            url: '/docs/data-pipelines/surfaces/web-app',
             icon: 'IconLaptop',
             color: 'seagreen',
             featured: true,
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/surfaces/web-app',
+                    url: '/docs/data-pipelines/surfaces/web-app',
                 },
                 {
                     name: 'Write Hog functions with PostHog AI',
-                    url: '/docs/cdp/hog-functions-ai',
+                    url: '/docs/data-pipelines/hog-functions-ai',
                 },
             ],
         },
         {
             name: 'PostHog MCP',
-            url: '/docs/cdp/surfaces/mcp',
+            url: '/docs/data-pipelines/surfaces/mcp',
             icon: 'IconLlmPromptEvaluation',
             color: 'green',
             featured: true,
         },
         {
             name: 'PostHog Desktop',
-            url: '/docs/cdp/surfaces/desktop',
+            url: '/docs/data-pipelines/surfaces/desktop',
             icon: 'IconCode',
             color: 'orange',
             featured: true,
         },
         {
             name: 'API',
-            url: '/docs/cdp/surfaces/api',
+            url: '/docs/data-pipelines/surfaces/api',
             icon: 'IconBrackets',
             color: 'blue',
             featured: true,
@@ -70,7 +70,7 @@ export const dataPipelines = {
         },
         {
             name: 'Link sources',
-            url: '/docs/cdp/sources',
+            url: '/docs/data-pipelines/sources',
             icon: 'IconBook',
             color: 'blue',
             featured: true,
@@ -78,11 +78,11 @@ export const dataPipelines = {
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/sources/',
+                    url: '/docs/data-pipelines/sources/',
                 },
                 {
                     name: 'Incoming webhooks',
-                    url: '/docs/cdp/sources/incoming-webhooks',
+                    url: '/docs/data-pipelines/sources/incoming-webhooks',
                 },
                 {
                     name: 'Sources',
@@ -94,7 +94,7 @@ export const dataPipelines = {
         },
         {
             name: 'Realtime destinations',
-            url: '/docs/cdp/destinations',
+            url: '/docs/data-pipelines/destinations',
             icon: 'IconLive',
             color: 'salmon',
             featured: true,
@@ -102,18 +102,18 @@ export const dataPipelines = {
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/destinations',
+                    url: '/docs/data-pipelines/destinations',
                 },
                 {
                     name: 'Customization',
-                    url: '/docs/cdp/destinations/customizing-destinations',
+                    url: '/docs/data-pipelines/destinations/customizing-destinations',
                 },
                 {
                     name: 'Destinations',
                 },
                 {
                     name: 'PostHog Slack',
-                    url: '/docs/cdp/destinations/slack',
+                    url: '/docs/data-pipelines/destinations/slack',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -121,7 +121,7 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Webhook',
-                    url: '/docs/cdp/destinations/webhook',
+                    url: '/docs/data-pipelines/destinations/webhook',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -129,35 +129,35 @@ export const dataPipelines = {
                 },
                 {
                     name: 'ActiveCampaign',
-                    url: '/docs/cdp/destinations/activecampaign',
+                    url: '/docs/data-pipelines/destinations/activecampaign',
                 },
                 {
                     name: 'Airtable',
-                    url: '/docs/cdp/destinations/airtable',
+                    url: '/docs/data-pipelines/destinations/airtable',
                 },
                 {
                     name: 'Attio',
-                    url: '/docs/cdp/destinations/attio',
+                    url: '/docs/data-pipelines/destinations/attio',
                 },
                 {
                     name: 'Avo',
-                    url: '/docs/cdp/destinations/avo',
+                    url: '/docs/data-pipelines/destinations/avo',
                 },
                 {
                     name: 'AWS kinesis',
-                    url: '/docs/cdp/destinations/aws-kinesis',
+                    url: '/docs/data-pipelines/destinations/aws-kinesis',
                 },
                 {
                     name: 'Braze',
-                    url: '/docs/cdp/destinations/braze',
+                    url: '/docs/data-pipelines/destinations/braze',
                 },
                 {
                     name: 'Brevo',
-                    url: '/docs/cdp/destinations/brevo',
+                    url: '/docs/data-pipelines/destinations/brevo',
                 },
                 {
                     name: 'Customer.io',
-                    url: '/docs/cdp/destinations/customerio',
+                    url: '/docs/data-pipelines/destinations/customerio',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -165,7 +165,7 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Discord',
-                    url: '/docs/cdp/destinations/discord',
+                    url: '/docs/data-pipelines/destinations/discord',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -173,27 +173,27 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Engage.so',
-                    url: '/docs/cdp/destinations/engage',
+                    url: '/docs/data-pipelines/destinations/engage',
                 },
                 {
                     name: 'Gleap',
-                    url: '/docs/cdp/destinations/gleap',
+                    url: '/docs/data-pipelines/destinations/gleap',
                 },
                 {
                     name: 'Google Ads',
-                    url: '/docs/cdp/destinations/google-ads',
+                    url: '/docs/data-pipelines/destinations/google-ads',
                 },
                 {
                     name: 'Google cloud storage',
-                    url: '/docs/cdp/destinations/google-cloud-storage',
+                    url: '/docs/data-pipelines/destinations/google-cloud-storage',
                 },
                 {
                     name: 'Google pub/sub',
-                    url: '/docs/cdp/destinations/google-pubsub',
+                    url: '/docs/data-pipelines/destinations/google-pubsub',
                 },
                 {
                     name: 'Hubspot',
-                    url: '/docs/cdp/destinations/hubspot',
+                    url: '/docs/data-pipelines/destinations/hubspot',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -201,7 +201,7 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Intercom',
-                    url: '/docs/cdp/destinations/intercom',
+                    url: '/docs/data-pipelines/destinations/intercom',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -209,19 +209,19 @@ export const dataPipelines = {
                 },
                 {
                     name: 'June',
-                    url: '/docs/cdp/destinations/june',
+                    url: '/docs/data-pipelines/destinations/june',
                 },
                 {
                     name: 'Klaviyo',
-                    url: '/docs/cdp/destinations/klaviyo',
+                    url: '/docs/data-pipelines/destinations/klaviyo',
                 },
                 {
                     name: 'Knock',
-                    url: '/docs/cdp/destinations/knock',
+                    url: '/docs/data-pipelines/destinations/knock',
                 },
                 {
                     name: 'Loops',
-                    url: '/docs/cdp/destinations/loops',
+                    url: '/docs/data-pipelines/destinations/loops',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -229,19 +229,19 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Mailgun',
-                    url: '/docs/cdp/destinations/mailgun',
+                    url: '/docs/data-pipelines/destinations/mailgun',
                 },
                 {
                     name: 'Mailjet',
-                    url: '/docs/cdp/destinations/mailjet',
+                    url: '/docs/data-pipelines/destinations/mailjet',
                 },
                 {
                     name: 'Make',
-                    url: '/docs/cdp/destinations/make',
+                    url: '/docs/data-pipelines/destinations/make',
                 },
                 {
                     name: 'Meta ads',
-                    url: '/docs/cdp/destinations/meta-ads',
+                    url: '/docs/data-pipelines/destinations/meta-ads',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -249,47 +249,47 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Microsoft teams',
-                    url: '/docs/cdp/destinations/microsoft-teams',
+                    url: '/docs/data-pipelines/destinations/microsoft-teams',
                 },
                 {
                     name: 'PostHog',
-                    url: '/docs/cdp/destinations/posthog',
+                    url: '/docs/data-pipelines/destinations/posthog',
                 },
                 {
                     name: 'RudderStack',
-                    url: '/docs/cdp/destinations/rudderstack',
+                    url: '/docs/data-pipelines/destinations/rudderstack',
                 },
                 {
                     name: 'Reddit ads',
-                    url: '/docs/cdp/destinations/reddit-ads-conversion-api',
+                    url: '/docs/data-pipelines/destinations/reddit-ads-conversion-api',
                 },
                 {
                     name: 'Reddit pixel',
-                    url: '/docs/cdp/destinations/reddit-ads-pixel',
+                    url: '/docs/data-pipelines/destinations/reddit-ads-pixel',
                 },
                 {
                     name: 'Salesforce',
-                    url: '/docs/cdp/destinations/salesforce',
+                    url: '/docs/data-pipelines/destinations/salesforce',
                 },
                 {
                     name: 'Sendgrid',
-                    url: '/docs/cdp/destinations/sendgrid',
+                    url: '/docs/data-pipelines/destinations/sendgrid',
                 },
                 {
                     name: 'Snapchat ads',
-                    url: '/docs/cdp/destinations/snapchat-ads',
+                    url: '/docs/data-pipelines/destinations/snapchat-ads',
                 },
                 {
                     name: 'TikTok ads',
-                    url: '/docs/cdp/destinations/tiktok-ads',
+                    url: '/docs/data-pipelines/destinations/tiktok-ads',
                 },
                 {
                     name: 'Twilio',
-                    url: '/docs/cdp/destinations/twilio',
+                    url: '/docs/data-pipelines/destinations/twilio',
                 },
                 {
                     name: 'Zapier',
-                    url: '/docs/cdp/destinations/zapier',
+                    url: '/docs/data-pipelines/destinations/zapier',
                     badge: {
                         title: 'Popular',
                         className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -297,50 +297,50 @@ export const dataPipelines = {
                 },
                 {
                     name: 'Zendesk',
-                    url: '/docs/cdp/destinations/zendesk',
+                    url: '/docs/data-pipelines/destinations/zendesk',
                 },
             ],
         },
         {
             name: 'Batch exports',
-            url: '/docs/cdp/batch-exports',
+            url: '/docs/data-pipelines/batch-exports',
             icon: 'IconShare',
             color: 'purple',
             featured: true,
             children: [
                 {
                     name: 'S3',
-                    url: '/docs/cdp/batch-exports/s3',
+                    url: '/docs/data-pipelines/batch-exports/s3',
                 },
                 {
                     name: 'Snowflake',
-                    url: '/docs/cdp/batch-exports/snowflake',
+                    url: '/docs/data-pipelines/batch-exports/snowflake',
                 },
                 {
                     name: 'BigQuery',
-                    url: '/docs/cdp/batch-exports/bigquery',
+                    url: '/docs/data-pipelines/batch-exports/bigquery',
                 },
                 {
                     name: 'Postgres',
-                    url: '/docs/cdp/batch-exports/postgres',
+                    url: '/docs/data-pipelines/batch-exports/postgres',
                 },
                 {
                     name: 'Redshift',
-                    url: '/docs/cdp/batch-exports/redshift',
+                    url: '/docs/data-pipelines/batch-exports/redshift',
                 },
                 {
                     name: 'Databricks',
-                    url: '/docs/cdp/batch-exports/databricks',
+                    url: '/docs/data-pipelines/batch-exports/databricks',
                 },
                 {
                     name: 'Azure Blob Storage',
-                    url: '/docs/cdp/batch-exports/azureblob',
+                    url: '/docs/data-pipelines/batch-exports/azureblob',
                 },
             ],
         },
         {
             name: 'File download exports',
-            url: '/docs/cdp/file-download-exports',
+            url: '/docs/data-pipelines/file-download-exports',
             icon: 'IconDownload',
             color: 'seagreen',
             featured: true,
@@ -350,25 +350,25 @@ export const dataPipelines = {
         },
         {
             name: 'Transformations',
-            url: '/docs/cdp/transformations',
+            url: '/docs/data-pipelines/transformations',
             icon: 'IconWrench',
             color: 'yellow',
             featured: true,
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/cdp/transformations',
+                    url: '/docs/data-pipelines/transformations',
                 },
                 {
                     name: 'Transformations',
                 },
                 {
                     name: 'Customization',
-                    url: '/docs/cdp/transformations/customizing-transformations',
+                    url: '/docs/data-pipelines/transformations/customizing-transformations',
                 },
                 {
                     name: 'Drop Events',
-                    url: '/docs/cdp/transformations/drop-events',
+                    url: '/docs/data-pipelines/transformations/drop-events',
                 },
             ],
             dynamicChildren: 'data-pipeline-transformations',
@@ -379,20 +379,20 @@ export const dataPipelines = {
         },
         {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
-            url: '/docs/cdp/fivetran-airbyte',
+            url: '/docs/data-pipelines/fivetran-airbyte',
             icon: 'IconBook',
             color: 'seagreen',
         },
         {
             name: 'Troubleshooting',
-            url: '/docs/cdp/troubleshooting',
+            url: '/docs/data-pipelines/troubleshooting',
             icon: 'IconQuestion',
             color: 'blue',
             featured: true,
         },
         {
             name: 'Changelog',
-            url: '/docs/cdp/changelog',
+            url: '/docs/data-pipelines/changelog',
             icon: 'IconRocket',
             color: 'purple',
         },

@@ -29,7 +29,7 @@ The PostHog warehouse is one of this list rather than a special case. When a tab
 
 Set destinations on a source and every table under it follows. Override a single table when it belongs somewhere else.
 
-Destinations reuse the same connections as [batch exports](/docs/cdp/batch-exports), so a warehouse you already connected is ready to pick. Credentials live on the connection, not on the destination.
+Destinations reuse the same connections as [batch exports](/docs/data-pipelines/batch-exports), so a warehouse you already connected is ready to pick. Credentials live on the connection, not on the destination.
 
 > **Adding a destination to a source that has already synced starts a full resync of its tables.** The new destination has none of the history, so PostHog refills it from the beginning. Every destination the source writes to is billed for the rows it receives during that resync, including ones that already had the data. Check the row counts before you turn one on.
 
@@ -38,7 +38,7 @@ Destinations reuse the same connections as [batch exports](/docs/cdp/batch-expor
 Both write to Postgres, Snowflake, BigQuery, Redshift, Databricks, S3, and Azure Blob. They move different data.
 
 - **ELT destinations** move rows PostHog imported from a source: your Stripe charges, your HubSpot contacts, your own Postgres tables.
-- **[Batch exports](/docs/cdp/batch-exports)** move the events, persons, and sessions PostHog captured.
+- **[Batch exports](/docs/data-pipelines/batch-exports)** move the events, persons, and sessions PostHog captured.
 
 If you want your Stripe data in Snowflake, that's a destination. If you want your product analytics events in Snowflake, that's a batch export. Teams often run both.
 

@@ -127,6 +127,6 @@ Here's how to reorder transformations:
 
 ## Further reading
 
-- [Property filter app docs](/docs/cdp/property-filter)
-- [GeoIP enrichment docs](/docs/cdp/geoip-enrichment)
+- [Property filter app docs](/docs/data-pipelines/property-filter)
+- [GeoIP enrichment docs](/docs/data-pipelines/geoip-enrichment)
 - [Product analytics privacy controls docs](/docs/product-analytics/privacy)

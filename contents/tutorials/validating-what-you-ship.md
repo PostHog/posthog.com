@@ -77,7 +77,7 @@ If you need help capturing the necessary events, try our [complete guide to even
 |--------|----------------|-------------------|-----------|
 | Activation | Track completion of key actions that indicate value | Whether users are experiencing value, which predicts retention and downstream metrics | [Activation and why you should care](/newsletter/wtf-is-activation) |
 | Retention | Week-over-week return rate | Does this have lasting impact? | [Track retention](/docs/product-analytics/retention) |
-| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](/docs/cdp/sources/stripe) |
+| Revenue | Conversion to paid | Did this affect the business? | [See Stripe revenue in PostHog](/docs/data-pipelines/sources/stripe) |
 
 **Guardrail metrics** tell you if you broke something:
 
@@ -124,7 +124,7 @@ In PostHog, go to **Experiments** → **New experiment**.
 
 ### Step 5: Set up alerts and qualitative checkpoints
 
-**Proactive alerts** (Workflows → [Slack notification](/docs/cdp/destinations/slack)):
+**Proactive alerts** (Workflows → [Slack notification](/docs/data-pipelines/destinations/slack)):
 - Positive: Alert when a user completes onboarding and activates
 - Negative: Alert when support tickets tagged "onboarding" spike
 
