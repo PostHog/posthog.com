@@ -562,10 +562,10 @@ The key can't do this. For example:
 - "You need editor access to this template's transactional email workflow.": a personal API key or a session needs editor access to the template's workflow.
 - "You need editor access to workflows to upload a new template.": a personal API key or a session needs editor access to Workflows to create a template.
 - "You need editor access to workflows to make a template transactional.": a personal API key or a session needs editor access to Workflows to make a template transactional.
-- "You do not have editor access to this resource.": a [change request](#run-with-posthog-code) needs editor access to Workflows.
+- "You do not have editor access to this resource.": a personal API key or a session needs editor access to Workflows for this route, such as a [change request](#run-with-posthog-code).
 - "API key does not have access to the requested project: ID ...": the key can't access the project in the URL. With a project secret API key, use `@current`. With a personal API key, use the ID of a project that the key can access.
 
-**Fix:** For the upload and send routes, use a project secret API key with `hog_flow:write` for the project that has the template. For other routes, use a personal API key with the scopes and access that the route's section names.
+**Fix:** For the upload and send routes, use a project secret API key with `hog_flow:write` for the project that has the template. For other routes, use a personal API key with `hog_flow:write`, or with `hog_flow:read` and `task:write` for a [change request](#run-with-posthog-code), and the access that the route's section names.
 
 ### `throttled`
 
