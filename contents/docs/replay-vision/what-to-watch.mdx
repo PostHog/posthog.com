@@ -64,13 +64,46 @@ The controls above the feed narrow what it picks from:
 
 Switch between the list and a grid of thumbnails with the toggle next to the filters. Your choice is remembered.
 
-## When the feed is empty
+## When the feed is empty or stale
 
-An empty feed tells you why, and what to do about it:
+The feed adapts to your project's scanner state, showing the most helpful information and actions for each situation.
 
-- **No scanners yet** – the tab explains the feed with example cards and offers **Create your first scanner**.
-- **Your Replay Vision credits are used up for this period** – scans are skipped until the period resets or you raise the limit. See [quota and limits](/docs/replay-vision/quota-and-limits).
-- **None of your scanners are running** – every scanner is turned off. Turn one on and its clips appear after the next matching recording.
-- **Every running scanner has reached its own credit limit** – they stop scanning until the period resets. Raise a scanner's limit to start it again. Sessions they skipped aren't scanned later.
+### No scanners yet
+
+If you haven't created any scanners, the feed walks you through getting started:
+
+1. Click the quickstart button to create **Session highlights** – a free summarizer scanner that reads each new recording and surfaces the ones worth watching.
+2. Confirm the scope and cost in a one-tap card.
+3. The scanner immediately bulk-scans up to 25 of your most recent eligible recordings, so first results appear within minutes.
+
+A running header shows progress during this initial scan. It survives page refreshes and settles after three minutes without progress. Once complete, the feed shows your first picks.
+
+Free credits are the default. If your organization's free credits are exhausted, the setup prompts for a monthly budget with presets of 1,000, 2,500, or 5,000 credits.
+
+### Scanners exist, but no picks yet
+
+When you have scanners but they haven't surfaced any picks in the current window, the feed shows how many scanners are running and when they last swept. A **Scan the last 7 days now** button lets you backfill: pick a scanner, see a live count of matching recordings and the estimated credit cost, then start.
+
+### Stale picks
+
+When your scanners have picks but they're all viewed or older than two days, the feed explains why and what to do:
+
+| State                     | What it means                                                               | What you can do                                                                                                |
+| ------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Caught up**             | Your scanners processed recent recordings and nothing new stood out.        | Wait for new sessions, or widen your date range.                                                               |
+| **Quiet week**            | Few recordings matched recently. The feed shows counts of what was scanned. | Click **Show the newest results anyway** to see them below the ranked rows.                                    |
+| **Drought after an edit** | A scanner's config was changed but it hasn't matched anything since.        | Run a 7-day backfill or review the scanner's filters.                                                          |
+| **Capped**                | One or more scanners hit their credit limit for this billing period.        | Raise the limit inline to resume scanning.                                                                     |
+| **All disabled**          | Every scanner is turned off.                                                | Toggle individual scanners back on with the switches shown.                                                    |
+| **Credits used up**       | Your organization's Replay Vision credits are exhausted.                    | Wait for the period to reset or raise the limit. See [quota and limits](/docs/replay-vision/quota-and-limits). |
+
+### Other empty states
+
 - **No clips match these filters in this window** – loosen your filters or click **Clear filters**.
 - **Nothing stood out in this window** – try a longer date range.
+
+### Default column and refreshing
+
+The **What to watch** column opens by default on first visit, even when empty. After two empty visits without interaction, it switches back to **All recordings** as the default. Tapping **All recordings** or **What to watch** is remembered.
+
+Picks reload automatically when you focus the window after being away for a minute or more. If the feed fails to load, a centered **Retry** button lets you try again.
