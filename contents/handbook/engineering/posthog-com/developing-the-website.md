@@ -208,7 +208,25 @@ Pull request previews on Cloudflare Pages use the same minimal build as above: t
 
 Our website uses various APIs to pull in data from sites like GitHub (for contributors) and Ashby (our applicant tracking system). Without setting these environment variables, you may see various errors when building the site. Most of these errors are dismissible, and you can continue to edit the website.
 
-If you need a specific environment development, ask in <PrivateLink url="https://posthog.slack.com/archives/C08UABF7PB7">#posthogdotcom</PrivateLink>.
+Put your local values in `.env.development.local`. Git ignores that file, and Gatsby loads it before `.env.development`. Do not put a secret in `.env.development` or `.env.production`, because we commit both of those files.
+
+If you need a specific environment variable, ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink>.
+
+#### Testing the Ashby API
+
+Ashby supplies the job data for the [careers page](/careers) and for each job page. The site reads one variable, `ASHBY_API_KEY`, in three places:
+
+- The `gatsby-source-ashby` plugin creates a node for each job and job posting.
+- `gatsby/onCreateNode.ts` calls `location.info` to add a location to each job.
+- `api/apply.js` calls `applicationForm.submit` when a candidate applies for a role.
+
+To test them:
+
+1. Create an API key in [Ashby admin settings](https://app.ashbyhq.com/admin/api/keys) and give it read access to the Jobs module. You need Ashby admin permissions to do this. If you do not have them, ask the People & Ops team (see [managing candidates](/handbook/people/hiring-process#managing-candidates)).
+2. Add `ASHBY_API_KEY=<your key>` to `.env.development.local`.
+3. Run `pnpm start`, then open `/careers` and one of the job pages.
+
+Job pages are only built if you set both `ASHBY_API_KEY` and `GITHUB_API_KEY`. Without an Ashby key, the careers page shows no open roles, and the job pages do not exist. Minimal mode never builds job pages.
 
 ### Finding the content to edit
 
