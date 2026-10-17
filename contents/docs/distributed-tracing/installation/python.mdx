@@ -209,7 +209,7 @@ provider.add_span_processor(PostHogContextSpanProcessor())
 
 Keep your existing provider, exporter, and sampler. This integration supports OpenTelemetry SDK 1.20.0 or later. The processor adds missing `posthogDistinctId` and `sessionId` attributes from the active PostHog context when each span starts. Explicit attributes take precedence. If the span has too little attribute capacity, enrichment is skipped to preserve its existing attributes.
 
-The PostHog Django, Flask, and ASGI integrations also enrich an active request span after they read the request context. Put the OpenTelemetry request middleware outside the PostHog middleware. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK and enable tracing-header capture in the [PostHog framework integration](/docs/libraries/python#asgi-request-middleware).
+The PostHog Django, Flask, and ASGI integrations also enrich an active request span after they read the request context. Put the OpenTelemetry request middleware outside the PostHog middleware. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK. The [PostHog framework integrations](/docs/libraries/python#django) capture these headers by default with Python SDK 7.71.0 or later. Set `capture_tracing_headers=False`, or `POSTHOG_MW_CAPTURE_TRACING_HEADERS = False` in Django, to disable extraction. These headers are untrusted analytics context.
 
 For Celery, initialize the PostHog Celery integration before OpenTelemetry Celery instrumentation. This order also preserves task context for eager or nested execution.
 

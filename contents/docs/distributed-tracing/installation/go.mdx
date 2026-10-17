@@ -136,7 +136,7 @@ handler := posthogotel.NewRequestContextMiddleware(existingHandler)
 
 The wrapper accepts the [core request middleware options](/docs/libraries/go#request-context). Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Put OpenTelemetry HTTP middleware outside the PostHog wrapper to enrich its existing request span. Create child spans with `r.Context()` so the processor can read the request IDs.
 
-The bridge adds missing `sessionId` and `posthogDistinctId` attributes. Explicit attributes take precedence. Missing IDs stay absent. The optional module keeps your existing provider, exporter, and sampler. It does not change the core SDK dependencies.
+The bridge adds missing `sessionId` and `posthogDistinctId` attributes. Existing `sessionId` and `posthogDistinctId` attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. The optional module keeps your existing provider, exporter, and sampler. It does not change the core SDK dependencies.
 
 Request context expires when the handler returns or panics. Spans that already started keep their attributes. New spans from an ended request context omit its IDs. For a separate background job, start from a fresh non-request context and set the job's IDs explicitly. Manual `WithRequestContext` use has no automatic HTTP lifetime management.
 

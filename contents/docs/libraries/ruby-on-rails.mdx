@@ -190,7 +190,7 @@ OpenTelemetry.tracer_provider.add_span_processor(
 
 This integration supports OpenTelemetry SDK 1.0.0 or later. Keep your existing provider, exporter, sampler, and processors. Put the OpenTelemetry request middleware outside the PostHog request middleware so the request span is active when PostHog reads the context. To send spans to PostHog, configure your existing OTLP exporter with the [PostHog trace endpoint](/docs/distributed-tracing/installation).
 
-Explicit span attributes take precedence. Missing IDs stay absent. Spans that already started keep their attributes after the request ends. Separate threads, fibers, and jobs need explicit context transfer. The processor does not create a session, recording, trace provider, or exporter.
+Existing `sessionId` and `posthogDistinctId` span attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. Spans that already started keep their attributes after the request ends. Separate threads, fibers, and jobs need explicit context transfer. The processor does not create a session, recording, trace provider, or exporter.
 
 ## Logs
 

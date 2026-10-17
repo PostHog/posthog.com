@@ -228,7 +228,7 @@ For Express, put [`setupExpressRequestContext`](/docs/libraries/node#add-request
 
 For a custom integration, call `enrichCurrentSpan(posthog)` from `posthog-node/otel` after you set the IDs inside `posthog.withContext()`. The helper requires the registered processor. It does not manage another framework's request lifetime.
 
-Explicit span attributes take precedence. Missing IDs stay absent. Express context ends when the response finishes or closes. Spans that already started keep their attributes; new spans in detached work do not receive the ended request's IDs. Background jobs need their own context transfer. The processor does not create a session, recording, trace provider, or exporter.
+Existing `sessionId` and `posthogDistinctId` span attributes take precedence. Set authenticated application identity with `posthogDistinctId`. Missing IDs stay absent. Express context ends when the response finishes or closes. Spans that already started keep their attributes; new spans in detached work do not receive the ended request's IDs. Background jobs need their own context transfer. The processor does not create a session, recording, trace provider, or exporter.
 
 </Step>
 
