@@ -47,6 +47,19 @@ Find the correct Property ID in Google Analytics under **Admin** > **Property se
 
 <SourceParameters />
 
+## Large properties and API quota
+
+The first sync of each report reads 730 days (2 years) of historical data by default. On large GA4 properties – especially with custom reports that include high-cardinality dimensions – this backfill can exhaust the property's [Data API token quota](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas) before it finishes.
+
+To work around this, set **Days of history to sync initially** to a lower value like `90` or `365` in your source configuration. This reduces how far back the first sync goes.
+
+A few things to note:
+
+- Blank or zero values keep the 730-day default, so existing sources aren't affected.
+- This setting applies to the whole source, not to individual reports.
+- If a sync is already running, changing this value moves the resume point forward to the new window start.
+- After the initial sync completes, incremental syncs fetch only recent data regardless of this setting.
+
 ## Supported tables
 
 <SourceTables />
