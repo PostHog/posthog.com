@@ -10,7 +10,7 @@ The transactional email API sends one email to one person from your server code,
 
 <CalloutBox icon="IconInfo" title="The transactional email API is in beta" type="fyi">
 
-The API is in beta, and PostHog enables it per project. To use it, [ask us in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) to enable it for your project. Until then, the upload route and the send routes answer `404` with the code [`not_found`](#not_found). Routes, fields, and messages can change while the API is in beta.
+The API is in beta, and PostHog enables it per project. To use it, [ask us in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue) to enable it for your project. Until then, the upload route, the send routes, and the change request route answer `404` with the code [`not_found`](#not_found). Routes, fields, and messages can change while the API is in beta.
 
 </CalloutBox>
 
@@ -30,7 +30,7 @@ The same key works in every project, so one codebase can send to a staging proje
 2. **Create a project secret API key.** Create a [project secret API key](/docs/api/project-secret-api-keys) (it starts with `phs_`) with the `hog_flow:write` scope. Keep it on your server, for example in the `POSTHOG_PROJECT_SECRET_API_KEY` environment variable. Never put it in browser or mobile code.
 3. **Ask for access.** The API must be enabled for your project. See the beta note above.
 
-A project secret API key can only upload templates and send them. It can't read, edit, or delete templates. To call the other template routes, such as [adoption](#adopt-a-template-made-in-posthog), use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:write`.
+A project secret API key can only upload templates and send them. It can't read, edit, or delete templates. To call the other template routes, such as [adoption](#adopt-a-template-made-in-posthog), use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:write`. A [change request](#run-with-posthog-code) needs `task:write` instead.
 
 Project secret API keys are in beta and may not be available in your organization yet. Until they are, the upload and send routes also accept a personal API key with `hog_flow:write` and editor access to Workflows. With a personal API key, put the project ID in the URL instead of `@current`. `posthog-node` always calls `@current`, so use it with a project secret API key.
 
@@ -332,7 +332,7 @@ About this file:
 - The template in PostHog: <ph_app_host>/project/:project_id/workflows/library/templates/:id
 ```
 
-The path, repository, and commit come from the template's [source details](#where-the-source-details-come-from). Without a path, the first line tells the agent to find the file that the app loads with `posthog.emails.templateFile()` for the key.
+The path, repository, and commit come from the template's [source details](#where-the-source-details-come-from). Without a path, the first point of the block tells the agent to find the file that the app loads with `posthog.emails.templateFile()` for the key.
 
 An agent that reads the template over the API or the [PostHog MCP](/docs/workflows/surfaces/mcp) gets the same text: the template's `change_prompt_starter` is the start of the sentence, and `change_prompt_context` is the block. Both are `null` for a template that isn't managed by code.
 
@@ -343,6 +343,7 @@ When your organization can use PostHog Code, the popover also shows **Run with P
 The button is disabled when:
 
 - "PostHog doesn't know this template's GitHub repository": the template's source has no repository, or one that isn't on GitHub. Upload the template with its [repository](#where-the-source-details-come-from), stored as `github.com/<owner>/<name>`.
+- "Checking the GitHub connection": PostHog is still loading the project's integrations.
 - "Connect GitHub to run PostHog Code": the project has no GitHub integration. Connect GitHub in the project's integrations, and give the PostHog app access to the repository.
 - "Describe the change first": the sentence has nothing after the start.
 
@@ -357,7 +358,7 @@ curl -X POST "<ph_app_host>/api/projects/:project_id/messaging_templates/:id/req
   -d '{ "instruction": "Make the button green." }'
 ```
 
-- `instruction` is required, with at most 2,000 characters.
+- `instruction` is required, with at most 2,000 characters. Start it with the template's `change_prompt_starter` when you can. Otherwise, PostHog puts the starter in front of it.
 - The response is `201` with `task_id`, `task_url`, and `repository` (`owner/name`).
 - The PostHog MCP tool `workflows-request-email-template-change` calls this route.
 - The errors are [`instruction_missing`](#instruction_missing), [`template_not_managed_by_code`](#template_not_managed_by_code), [`template_repository_missing`](#template_repository_missing), [`template_repository_unsupported`](#template_repository_unsupported), [`github_repository_not_connected`](#github_repository_not_connected), [`posthog_code_not_available`](#posthog_code_not_available), and [`posthog_code_run_failed`](#posthog_code_run_failed).
@@ -366,29 +367,29 @@ Use it only when you can't change the file yourself. A coding agent that has the
 
 ### Ask PostHog AI or the Slack bot
 
-[PostHog AI](/docs/posthog-ai) and the [PostHog bot in Slack](/docs/posthog-ai/surfaces/slack) run inside PostHog Code, and a running PostHog Code task can't start another one. So when you ask either of them to change a code-managed template, it doesn't change the template or open a pull request. It gives you the link to the template. Open it, click **Edit with your agent**, and click **Run with PostHog Code** to open the pull request.
+[PostHog AI](/docs/posthog-ai) and the [PostHog bot in Slack](/docs/posthog-ai/surfaces/slack) run inside PostHog Code, and a running PostHog Code task can't start another one. So when you ask either of them to change a code-managed template, it can't open a pull request. It gives you the link to the template instead. Open it, click **Edit with your agent**, describe the change, and click **Run with PostHog Code** to open the pull request.
 
 A coding agent that has a checkout of the repository, such as one connected to the PostHog MCP in your editor, changes the file itself.
 
 ### Copy the HTML file
 
-A template that you uploaded over the API or the MCP has no file in your repository yet. To make one, click the arrow next to **Edit with your agent**, then **Copy HTML file**. Save the result as the template's file, for example `emails/welcome.html`, and send it with [`templateFile()`](#send-from-nodejs).
+A template that was uploaded without a file, for example by an agent over the MCP, has no file in your repository yet. To make one, click the arrow next to **Edit with your agent**, then **Copy HTML file**. Save the result as an `.html` file named after the template's key, such as `emails/welcome.html` for the key `welcome`, and send it with [`templateFile()`](#send-from-nodejs). For another file name, pass the `key` option to `templateFile()`. Otherwise, the first send uploads a new template under another key.
 
 - The file is in the format that `posthog.emails.templateFile()` reads. The subject goes into the first `<title>`, and the preheader into `<meta name="preheader">`.
 - A template that came from a file copies back as that file, byte for byte.
-- The file has no plain-text part. When the template has one, the toast says: "This file has no plain-text part. The next upload from this file removes the plain-text version."
+- The file has no plain-text part. When the template has one, the toast adds: "This file has no plain-text part. The next upload from this file removes the plain-text version."
 
 ### When the change goes live
 
-Copying a prompt or a file, or starting a PostHog Code task, changes nothing in PostHog. PostHog keeps sending the current version of the template until your app sends the changed file with `templateFile()`, or you upload it. For a pull request, that is after you merge it and deploy your app.
+Copying a prompt or a file, or starting a PostHog Code task, changes nothing in PostHog. PostHog keeps sending the current version of the template until your app sends the changed file with `templateFile()`, or you upload it. For a pull request, that is after you merge it and deploy your app. When your app sends the template by its key, upload the file after the merge.
 
 ## Where the source details come from
 
 An upload's `source` tells PostHog where the template's file is: the `repository`, the `path` of the file in it, and the `ref` it was uploaded from. PostHog shows them on the template and puts them in the [agent prompt](#edit-with-your-agent). [Run with PostHog Code](#run-with-posthog-code) needs the repository.
 
-`posthog-node` fills each part on its own, from the first of these that has a value:
+`posthog-node` fills each part on its own. The repository and the ref come from the first of these that has a value:
 
-1. The `source` option of [`uploadTemplate()`](#roll-back-on-purpose). The automatic upload after a send has no option, so it starts at step 2.
+1. The `source` option of [`uploadTemplate()`](#roll-back-on-purpose). It wins for the path too. The automatic upload after a send has no option, so it starts at step 2.
 2. The variables of a CI or hosting platform.
 3. The git checkout nearest above the template file.
 
@@ -403,8 +404,8 @@ An upload's `source` tells PostHog where the template's file is: the `repository
 - A ref variable counts only when it holds a full commit hash (40 or 64 hex characters).
 - **Git checkout.** The repository is the `origin` remote in the checkout's `.git/config`. The ref is the commit that `HEAD` points to. `posthog-node` reads these as files and never runs `git`. It follows a worktree's `.git` file.
 - **The repository** is stored as `host/owner/name`, such as `github.com/example/app`. SSH and HTTPS remotes give the same value. The user name, any token or password, and the query in a remote URL are never sent.
-- **The path** is relative to the checkout's root. Without a checkout, it is relative to `GITHUB_WORKSPACE` or `CI_PROJECT_DIR` when the file is inside it, then relative to the working directory.
-- **When nothing is available**, the upload leaves out that part, and PostHog keeps the value it stored before. Source detection never fails or blocks a send.
+- **The path** is relative to the checkout's root. Without a checkout, it is relative to `GITHUB_WORKSPACE` or `CI_PROJECT_DIR` when the file is inside it, then relative to the working directory. Outside the working directory, it is the file's absolute path, and the agent prompt then says to find the file by its key.
+- **When nothing is available** for the repository or the ref, the upload leaves out that part, and PostHog keeps the value it stored before. Source detection never fails or blocks a send.
 - `posthog-node` caches what it detects per process. In development, a commit that you make after the first upload shows only after a restart.
 
 Over HTTP and the MCP, send `source` yourself: the repository from `git remote get-url origin`, as `host/owner/name` without credentials, the path relative to the repository's root, and the ref from `git rev-parse HEAD`.
@@ -679,7 +680,7 @@ PostHog Code can't start a task for this request. The API says: "PostHog Code is
 | "This organization can't use PostHog Code." | "Edit the template's file in its repository yourself, then upload it." |
 | "This organization used up its PostHog Code credits." | "Edit the template's file in its repository yourself, then upload it. PostHog Code is available again when the credits renew." |
 
-The first row is what [PostHog AI and the Slack bot](#ask-posthog-ai-or-the-slack-bot) get, because they run inside PostHog Code.
+[PostHog AI and the Slack bot](#ask-posthog-ai-or-the-slack-bot) get the first row when they call this route, because they run inside PostHog Code. An agent that gets it doesn't retry. It gives the person the link to the template, which is the last line of the template's `change_prompt_context`.
 
 ### `posthog_code_run_failed`
 
