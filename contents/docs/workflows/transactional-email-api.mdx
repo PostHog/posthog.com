@@ -30,7 +30,7 @@ The same key works in every project, so one codebase can send to a staging proje
 2. **Create a project secret API key.** Create a [project secret API key](/docs/api/project-secret-api-keys) (it starts with `phs_`) with the `hog_flow:write` scope. Keep it on your server, for example in the `POSTHOG_PROJECT_SECRET_API_KEY` environment variable. Never put it in browser or mobile code.
 3. **Ask for access.** The API must be enabled for your project. See the beta note above.
 
-A project secret API key can only upload templates and send them. It can't read, edit, or delete templates. To call the other template routes, such as [adoption](#adopt-a-template-made-in-posthog), use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:write`. A [change request](#run-with-posthog-code) needs `task:write` instead.
+A project secret API key can only upload templates and send them. It can't read, edit, or delete templates. To call the other template routes, such as [adoption](#adopt-a-template-made-in-posthog), use a [personal API key](/docs/api/personal-api-keys) with `hog_flow:write`. A [change request](#run-with-posthog-code) needs `hog_flow:read` and `task:write` instead.
 
 Project secret API keys are in beta and may not be available in your organization yet. Until they are, the upload and send routes also accept a personal API key with `hog_flow:write` and editor access to Workflows. With a personal API key, put the project ID in the URL instead of `@current`. `posthog-node` always calls `@current`, so use it with a project secret API key.
 
@@ -334,7 +334,7 @@ About this file:
 
 The path, repository, and commit come from the template's [source details](#where-the-source-details-come-from). Without a path, the first point of the block tells the agent to find the file that the app loads with `posthog.emails.templateFile()` for the key.
 
-An agent that reads the template over the API or the [PostHog MCP](/docs/workflows/surfaces/mcp) gets the same text: the template's `change_prompt_starter` is the start of the sentence, and `change_prompt_context` is the block. Both are `null` for a template that isn't managed by code.
+An agent that reads the template over the API or the [PostHog MCP](/docs/workflows/surfaces/mcp) gets the same text: the template's `change_prompt_starter` is the start of the sentence, `change_prompt_context` is the block, and `change_prompt_variables` lists the variables the block names. All three are `null` for a template that isn't managed by code.
 
 ### Run with PostHog Code
 
@@ -342,14 +342,16 @@ When your organization can use PostHog Code, the popover also shows **Run with P
 
 The button is disabled when:
 
-- "PostHog doesn't know this template's GitHub repository": the template's source has no repository, or one that isn't on GitHub. Upload the template with its [repository](#where-the-source-details-come-from), stored as `github.com/<owner>/<name>`.
+- "You don't have sufficient permissions for this workflow.", followed by your access level and the required one: starting a task needs editor access to Workflows. Ask a project admin for it.
+- "PostHog doesn't know this template's GitHub repository": the template's source has no repository. Upload the template with its [repository](#where-the-source-details-come-from), such as `github.com/example/app`. A repository that isn't on GitHub answers [`template_repository_unsupported`](#template_repository_unsupported) when you click.
 - "Checking the GitHub connection": PostHog is still loading the project's integrations.
 - "Connect GitHub to run PostHog Code": the project has no GitHub integration. Connect GitHub in the project's integrations, and give the PostHog app access to the repository.
+- "Shorten the change to 2,000 characters": the sentence is longer than the route takes.
 - "Describe the change first": the sentence has nothing after the start.
 
-When PostHog Code can't start, the popover shows the error and its fix, and keeps your sentence. Each click that succeeds starts another task.
+When PostHog Code can't start, the popover shows the error and its fix, and keeps your sentence. If you closed the popover first, a toast shows them. Each click that succeeds starts another task.
 
-You can start the same task over the API, with a personal API key or OAuth that has the `task:write` scope and editor access to Workflows. A project secret API key can't start a task.
+You can start the same task over the API, with a personal API key or OAuth that has the `hog_flow:read` and `task:write` scopes and editor access to Workflows. `hog_flow:write` covers `hog_flow:read`. A project secret API key can't start a task.
 
 ```bash
 curl -X POST "<ph_app_host>/api/projects/:project_id/messaging_templates/:id/request_change/" \
@@ -358,12 +360,12 @@ curl -X POST "<ph_app_host>/api/projects/:project_id/messaging_templates/:id/req
   -d '{ "instruction": "Make the button green." }'
 ```
 
-- `instruction` is required, with at most 2,000 characters. Start it with the template's `change_prompt_starter` when you can. Otherwise, PostHog puts the starter in front of it.
+- `instruction` is required, with at most 2,000 characters, such as `Make the button green.` When it doesn't start with the template's `change_prompt_starter`, PostHog puts the starter in front of it, so the task knows the file.
 - The response is `201` with `task_id`, `task_url`, and `repository` (`owner/name`).
 - The PostHog MCP tool `workflows-request-email-template-change` calls this route.
 - The errors are [`instruction_missing`](#instruction_missing), [`template_not_managed_by_code`](#template_not_managed_by_code), [`template_repository_missing`](#template_repository_missing), [`template_repository_unsupported`](#template_repository_unsupported), [`github_repository_not_connected`](#github_repository_not_connected), [`posthog_code_not_available`](#posthog_code_not_available), and [`posthog_code_run_failed`](#posthog_code_run_failed).
 
-Use it only when you can't change the file yourself. A coding agent that has the repository edits the file directly, from `change_prompt_context`.
+Use it only when you can't change the file yourself. A coding agent whose workspace holds the repository, or that runs outside PostHog Code and can check it out, edits the file that `change_prompt_context` names, as it describes. Inside PostHog Code, such as PostHog AI or the Slack bot, the route refuses the call with [`posthog_code_not_available`](#posthog_code_not_available).
 
 ### Ask PostHog AI or the Slack bot
 
@@ -515,7 +517,7 @@ Another template in this project has this key. A key names one template in a pro
 
 The template's content comes from a file in a repository, and the next upload of that file replaces changes made in PostHog. The API says: "This template is managed by code, so it can't be changed in PostHog."
 
-**Fix:** The API names the file when it knows it, for example: "When you can reach the repository, edit `emails/welcome.html` in `github.com/example/app` yourself. The next send uploads it. Otherwise, ask PostHog Code to open a pull request with the change: call the `workflows-request-email-template-change` tool, or POST an `instruction` to this template's `request_change/` route. To edit the template in PostHog instead, stop managing it in code first: send a PATCH whose only field is `managed_by` set to `gui`." See [change a code-managed template](#change-a-code-managed-template).
+**Fix:** The API names the file when it knows it, for example: "When the repository is in your workspace, or you run outside PostHog Code and can check it out, edit `emails/welcome.html` in `github.com/example/app` there, as the template's `change_prompt_context` describes. It also says how the change goes live. Inside PostHog Code, such as PostHog AI or the Slack bot, share the template's link instead: on its page, the person clicks Edit with your agent, then Run with PostHog Code. Otherwise, ask PostHog Code to open a pull request with the change: call the `workflows-request-email-template-change` tool, or POST an `instruction` to this template's `request_change/` route. To edit the template in PostHog instead, stop managing it in code first: send a PATCH whose only field is `managed_by` set to `gui`." See [change a code-managed template](#change-a-code-managed-template).
 
 ### `template_not_found`
 
@@ -555,7 +557,7 @@ PostHog doesn't accept the key. For example, the key is wrong, deleted, or rolle
 
 The key can't do this. For example:
 
-- "API key missing required scope 'hog_flow:write'": give the key the `hog_flow:write` scope. A [change request](#run-with-posthog-code) needs `task:write` instead.
+- "API key missing required scope 'hog_flow:write'": give the key the `hog_flow:write` scope. A [change request](#run-with-posthog-code) needs `hog_flow:read` and `task:write` instead, and names the missing one, such as "API key missing required scope 'task:write'".
 - "This action does not support project secret API key access": a project secret API key can only upload and send. Use a personal API key for other template routes, such as [adoption](#adopt-a-template-made-in-posthog) and a [change request](#run-with-posthog-code).
 - "You need editor access to this template's transactional email workflow.": a personal API key or a session needs editor access to the template's workflow.
 - "You need editor access to workflows to upload a new template.": a personal API key or a session needs editor access to Workflows to create a template.
@@ -651,9 +653,9 @@ See [where the source details come from](#where-the-source-details-come-from).
 
 The template's repository isn't on GitHub, or isn't stored as `github.com/<owner>/<name>`. The API says, for example:
 
-- `detail`: "PostHog Code can't change files in `gitlab.com/example/app`."
+- `detail`: "PostHog Code can't change files in `gitlab.com/example/app`." When the stored repository doesn't look like one: "PostHog Code can't change files in this template's repository."
 - `why`: "PostHog Code opens pull requests only on GitHub repositories, stored as `github.com/<owner>/<name>`."
-- `fix`: "Edit the template's file in its repository yourself, then upload it."
+- `fix`: "Edit the template's file in its repository, as its `change_prompt_context` describes."
 
 [Edit with your agent](#edit-with-your-agent) works for any repository.
 
@@ -665,7 +667,7 @@ The project's GitHub integration can't reach the template's repository. The API 
 
 - `detail`: "This project's GitHub integration can't reach `example/app`."
 - `why`: "PostHog Code works only in repositories that the project's GitHub integration can reach."
-- `fix`: "Connect GitHub in the project's integrations and give the PostHog app access to `example/app`, then request the change again."
+- `fix`: "Connect GitHub in the project's integrations and give the PostHog app access to `example/app`, then request the change again. Access you just gave can take a few minutes to show up."
 
 ### `posthog_code_not_available`
 
@@ -675,10 +677,10 @@ PostHog Code can't start a task for this request. The API says: "PostHog Code is
 
 | `why` | `fix` |
 | --- | --- |
-| "A PostHog Code task runs at a person's request, so a task already running can't start another one." | "Ask the person to request the change from the template's page in PostHog, or to call this route themselves." |
+| "A PostHog Code task runs at a person's request, so a task already running can't start another one." | "Share the template's link with the person. On its page, they click Edit with your agent, describe the change, and click Run with PostHog Code, which opens a pull request." |
 | "PostHog couldn't check whether this organization can use PostHog Code." | "Try again in a few minutes." |
-| "This organization can't use PostHog Code." | "Edit the template's file in its repository yourself, then upload it." |
-| "This organization used up its PostHog Code credits." | "Edit the template's file in its repository yourself, then upload it. PostHog Code is available again when the credits renew." |
+| "This organization can't use PostHog Code." | "Edit the template's file in its repository, as its `change_prompt_context` describes." |
+| "This organization used up its PostHog Code credits." | "Edit the template's file in its repository, as its `change_prompt_context` describes. PostHog Code is available again when the credits renew." |
 
 [PostHog AI and the Slack bot](#ask-posthog-ai-or-the-slack-bot) get the first row when they call this route, because they run inside PostHog Code. An agent that gets it doesn't retry. It gives the person the link to the template, which is the last line of the template's `change_prompt_context`.
 
