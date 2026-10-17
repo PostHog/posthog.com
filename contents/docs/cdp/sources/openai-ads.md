@@ -17,7 +17,7 @@ The OpenAI Ads connector syncs your ChatGPT advertising data – campaigns, ad g
 
 ## Prerequisites
 
-You need an OpenAI Ads Manager account with API access. OpenAI Ads is currently a beta product available to US advertisers, and each API key is scoped to a single ad account.
+You need an OpenAI Ads Manager account with API access. OpenAI Ads is currently available to US advertisers, and each API key is scoped to a single ad account.
 
 ## Adding a data source
 
