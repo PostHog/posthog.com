@@ -52,9 +52,18 @@ export default function useTeam({ slug }: { slug: string }) {
     const fetchTeam = async () => {
         if (!slug) return
         return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(slug, isModerator)}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch team: ${res.statusText}`)
+                }
+                return res.json()
+            })
             .then(({ data }) => {
                 setTeam(data?.[0] ?? [])
+            })
+            .catch((error) => {
+                console.error(error)
+                setTeam(undefined)
             })
     }
 
@@ -149,7 +158,8 @@ export default function useTeam({ slug }: { slug: string }) {
     }
 
     useEffect(() => {
-        fetchTeam().then(() => setLoading(false))
+        setLoading(true)
+        fetchTeam().finally(() => setLoading(false))
     }, [slug, isModerator])
 
     return {
