@@ -8355,6 +8355,19 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Transactional email',
+                },
+                {
+                    name: 'Send email from code',
+                    url: '/docs/workflows/transactional-email-api',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Channels',
                 },
                 {
