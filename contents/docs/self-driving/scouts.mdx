@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -21,15 +21,15 @@ See [task environment detection](/docs/tasks/agent-environment) for the variable
 
 A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
 
-| Method | When it applies |
-|---|---|
+| Method                     | When it applies                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **File a report directly** | When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from. |
-| **Emit a signal** | When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report. |
-| **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric). |
+| **Emit a signal**          | When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.                                                                                                                                      |
+| **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric).                                                                                                                                      |
 
 For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
 
-Those three are about *what* a scout files, not where the output ends up. Reports and signals land in your [inbox](/docs/self-driving/inbox) by default, and any scout can also send what it files to a Slack channel or a direct message – see [sending a scout's output to Slack](#sending-a-scouts-output-to-slack).
+Those three are about _what_ a scout files, not where the output ends up. Reports and signals land in your [inbox](/docs/self-driving/inbox) by default, and any scout can also send what it files to a Slack channel or a direct message – see [sending a scout's output to Slack](#sending-a-scouts-output-to-slack).
 
 A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
@@ -43,18 +43,18 @@ Because scouts run on a schedule, the loop keeps noticing problems and opportuni
 
 Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open the scout you want to change, and click **Settings**. Changes take effect on the scout's next run.
 
-| Setting | What it does |
-|---|---|
-| **Write signals to the inbox** | On by default. Turn it off for a [dry run](#dry-runs). |
-| **Schedule** | A rolling cadence, or a set time each day. See [setting a scout's schedule](#setting-a-scouts-schedule). |
-| **Network access** | What the scout can reach while it runs. **Trusted domains**, the default, covers PostHog, GitHub, and common package registries. **Full access** lets it reach any site, for a scout that has to read a vendor's status page or external docs. |
-| **Opt out of auto-pause** | Keeps PostHog from pausing this scout when nobody acts on its reports, and from flagging it when it surfaces nothing. |
-| **Tags** | Group scouts so you can filter the fleet list by them. |
-| **Slack destination** | Send this scout's output to a Slack channel or a direct message. See [sending a scout's output to Slack](#sending-a-scouts-output-to-slack). |
-| **MCP servers** | Which of your team's shared MCP servers this scout can use, on top of the PostHog MCP it always has. |
-| **Repositories** | Repositories from your connected GitHub account that the scout's sandbox clones before each run, so a scout that reasons about code can read the tree and run its checks. Read-only, up to 10 per scout. |
-| **Write access** | What the scout may change in your project, beyond its own reports and memory. Off by default. See [letting a scout maintain things](#letting-a-scout-maintain-things). |
-| **Delete scout** | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead. |
+| Setting                        | What it does                                                                                                                                                                                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Write signals to the inbox** | On by default. Turn it off for a [dry run](#dry-runs).                                                                                                                                                                                         |
+| **Schedule**                   | A rolling cadence, or a set time each day. See [setting a scout's schedule](#setting-a-scouts-schedule).                                                                                                                                       |
+| **Network access**             | What the scout can reach while it runs. **Trusted domains**, the default, covers PostHog, GitHub, and common package registries. **Full access** lets it reach any site, for a scout that has to read a vendor's status page or external docs. |
+| **Opt out of auto-pause**      | Keeps PostHog from pausing this scout when nobody acts on its reports, and from flagging it when it surfaces nothing.                                                                                                                          |
+| **Tags**                       | Group scouts so you can filter the fleet list by them.                                                                                                                                                                                         |
+| **Slack destination**          | Send this scout's output to a Slack channel or a direct message. See [sending a scout's output to Slack](#sending-a-scouts-output-to-slack).                                                                                                   |
+| **MCP servers**                | Which of your team's shared MCP servers this scout can use, on top of the PostHog MCP it always has.                                                                                                                                           |
+| **Repositories**               | Repositories from your connected GitHub account that the scout's sandbox clones before each run, so a scout that reasons about code can read the tree and run its checks. Read-only, up to 10 per scout.                                       |
+| **Write access**               | What the scout may change in your project, beyond its own reports and memory. Off by default. See [letting a scout maintain things](#letting-a-scout-maintain-things).                                                                         |
+| **Delete scout**               | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead.                                                                                                                                     |
 
 ### Instructions for all scouts
 
@@ -66,9 +66,9 @@ These instructions supplement your shared project instructions and each scout's 
 
 Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
 
-| Format | Description |
-|---|---|
-| **An interval** | How long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing. |
+| Format                | Description                                                                                                                                                                                                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **An interval**       | How long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing.                                                                         |
 | **A cron expression** | A standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval. |
 
 Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
@@ -85,7 +85,7 @@ On-demand runs count against the same daily run budget as scheduled runs, so rep
 
 ### Dry runs
 
-A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it *would* have filed, tune it, then switch it to writing for real.
+A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it _would_ have filed, tune it, then switch it to writing for real.
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
 
@@ -101,10 +101,10 @@ An inactivity pause never retries on its own – it stays in place until you ena
 
 Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
 
-| Type | Example |
-|---|---|
-| **Feedback on its output** | "the staging traffic spike you keep flagging is known noise, stop reporting it." |
-| **A pointer** | "dig into the EU signup funnel this week, we think something regressed." |
+| Type                         | Example                                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------------------- |
+| **Feedback on its output**   | "the staging traffic spike you keep flagging is known noise, stop reporting it."        |
+| **A pointer**                | "dig into the EU signup funnel this week, we think something regressed."                |
 | **Context it couldn't know** | "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected." |
 
 A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
@@ -113,7 +113,7 @@ A note can also target a report-pipeline stage with a reserved `pipeline:*` audi
 
 Notes are advisory. They direct a scout's attention, but they don't lower its evidence bar or force it to file anything – a note saying "report X" still gets an honest investigation. Each run says which notes it acted on and how, and folds anything durable into its memory.
 
-A note is the right tool for steering *this project, right now*, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
+A note is the right tool for steering _this project, right now_, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
 
 ### Your inbox feedback steers scouts too
 
@@ -122,6 +122,8 @@ When you dismiss or snooze a [report](/docs/self-driving/reports) and type a not
 Resolving a report doesn't forward anything, because resolving says the report did its job, not that filing it was wrong. Forwarded notes expire after 30 days, so a steady stream of dismissals can't crowd out the steering you leave deliberately.
 
 The practical upshot: triaging your inbox honestly is how scouts get quieter. You don't have to go and edit a scout to stop it repeating itself.
+
+Ask AI conversations about reports can also contribute scout notes. When you share a correction, preference, or missing context during a discussion, Ask AI offers to save it as a scout note that reaches the same steering channel, or as a work-log entry on the report. You choose the destination and confirm the text before anything is written, so the feedback only lands where you want it.
 
 ## Sending a scout's output to Slack
 
@@ -140,13 +142,13 @@ Every scout can read your project and write to the inbox. Some jobs need more th
 
 Open the scout's [settings](#configuring-a-scout) and expand **Write access**. Each switch grants one kind of object:
 
-| Group | Objects | What the scout can do |
-|---|---|---|
-| Analytics | Dashboards, insights, annotations | Create, update, and delete dashboards and their tiles, saved insights, and annotations |
-| Monitoring | Alerts | Create, update, and delete insight alerts, and post them to a connected Slack channel |
-| Scouts and skills | Skills | Create, update, and archive shared skills and their files |
-| Data | Warehouse views, warehouse tables | Create, update, run, and materialize views, refresh table schemas, and manage data quality checks |
-| Replay vision | Scanners | Create and update scanners and rate observations |
+| Group             | Objects                           | What the scout can do                                                                             |
+| ----------------- | --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Analytics         | Dashboards, insights, annotations | Create, update, and delete dashboards and their tiles, saved insights, and annotations            |
+| Monitoring        | Alerts                            | Create, update, and delete insight alerts, and post them to a connected Slack channel             |
+| Scouts and skills | Skills                            | Create, update, and archive shared skills and their files                                         |
+| Data              | Warehouse views, warehouse tables | Create, update, run, and materialize views, refresh table schemas, and manage data quality checks |
+| Replay vision     | Scanners                          | Create and update scanners and rate observations                                                  |
 
 Notebooks, reports, and the scout's own memory are always writable and don't need a grant.
 
@@ -255,5 +257,5 @@ Neither is the upgrade from the other and most projects run both. You turn them 
 Meet the scouts PostHog ships with, and steal ideas for your own.
 
 <CallToAction type="primary" to="/docs/self-driving/scout-examples">
-Scout examples
+  Scout examples
 </CallToAction>
