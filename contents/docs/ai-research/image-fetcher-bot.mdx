@@ -2,7 +2,7 @@
 title: Image fetcher bot
 ---
 
-PostHog runs a bot that downloads images referenced by session recordings. This page explains what it does, how to identify it, and how to block it.
+PostHog runs a bot that downloads images referenced by session recordings. This page explains what it does, how to identify and verify it, and how to block it.
 
 The bot is called `PostHogImageFetcherBot`.
 
@@ -26,7 +26,29 @@ Look for this user agent:
 PostHogImageFetcherBot/1.0 (+https://posthog.com/docs/ai-research/image-fetcher-bot)
 ```
 
-The user agent is the way to identify the bot. We don't publish a list of IP addresses, because the addresses can change and a list you can't rely on is worse than no list. If you need a stable range to add to an allowlist, [contact us](/talk-to-a-human) and tell us what you need it for.
+We don't publish a list of IP addresses, because the addresses can change and a list you can't rely on is worse than no list. If you need a stable range to add to an allowlist, [contact us](/talk-to-a-human) and tell us what you need it for.
+
+## How to verify it
+
+The bot signs every request with [Web Bot Auth](https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/), which uses [HTTP Message Signatures (RFC 9421)](https://www.rfc-editor.org/rfc/rfc9421.html). A valid signature proves that PostHog sent the request.
+
+Each request has these headers:
+
+- `Signature`: the signature.
+- `Signature-Input`: the signature parameters. It has `tag="web-bot-auth"`, `alg="ed25519"`, a `keyid`, `created`, `expires`, and a `nonce`. The `keyid` is the JWK thumbprint of the signing key. The signature expires 60 seconds after it is created.
+- `Signature-Agent`: the origin that serves the public key, as a quoted string.
+
+The signature covers `@method`, `@authority`, `@target-uri`, and `signature-agent`.
+
+The public keys are in the key directory:
+
+```
+https://us.posthog.com/.well-known/http-message-signatures-directory
+```
+
+The key directory can have more than one key, so that we can rotate keys. Use the key whose thumbprint matches the `keyid` in the request.
+
+We test the bot against [Cloudflare's Web Bot Auth implementation](https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/). For all details of the signature, read [section 4 of the image fetch lane README](https://github.com/PostHog/posthog/blob/master/nodejs/src/ingestion/pipelines/sessionreplay/ml-mirror-image-fetch/README.md#4-web-bot-auth).
 
 ## How it behaves
 
