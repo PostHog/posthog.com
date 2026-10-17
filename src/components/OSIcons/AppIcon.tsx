@@ -14,7 +14,7 @@ type AppIconVariants = {
 }
 
 // Single source of truth: keys of this map define available app icon names
-const PRODUCT_ICON_MAP = {
+export const PRODUCT_ICON_MAP = {
     doc: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_classic_7f14381c43.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_2fa451a8e4.png',
