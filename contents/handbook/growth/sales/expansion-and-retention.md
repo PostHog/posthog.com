@@ -57,4 +57,4 @@ Generally speaking you should be trying to regularly see customers in your book 
 
 If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
 
-Make sure to log notes in Vitally when customer visits take place. This can be done by creating a new note with the "On-site" category and describing any key details and takeaways.
+Make sure to log a note on the account's profile in Customer Analytics when customer visits take place. Say that it was an on-site visit and describe any key details and takeaways.
