@@ -146,22 +146,31 @@ For tool call correlation within messages, include:
 
 ### Built-in templates
 
-PostHog provides five pre-built evaluation templates to get you started:
+PostHog provides pre-built templates to get you started. When you click **Create evaluation**, the template picker opens with these tabs:
 
-| Template          | What it checks                                | Best for                            |
-| ----------------- | --------------------------------------------- | ----------------------------------- |
-| **Relevance**     | Whether the output addresses the user's input | Customer support bots, Q&A systems  |
-| **Helpfulness**   | Whether the response is useful and actionable | Chat assistants, productivity tools |
-| **Jailbreak**     | Attempts to bypass safety guardrails          | Security-sensitive applications     |
-| **Hallucination** | Made-up facts or unsupported claims           | RAG systems, knowledge bases        |
-| **Toxicity**      | Harmful, offensive, or inappropriate content  | User-facing applications            |
+- **Recommended** shows a short list of popular templates.
+- **All** shows every template.
+- **Answer quality**, **Safety**, **Agent behavior**, **User insights**, and **Cost & speed** show the templates in that category.
+
+The picker includes LLM judge, Hog code, and sentiment templates. Some LLM judge templates are:
+
+| Template                   | What it checks                                                                    | Output type   |
+| -------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| **Response quality score** | Rates each answer from 1 to 5 for accuracy, completeness, and clarity             | Numeric score |
+| **Task outcome**           | How each conversation ended: resolved, partly resolved, unresolved, or handed off | Categorical   |
+| **User correction**        | Messages where the user corrects the assistant or repeats a request               | Categorical   |
+| **Relevance**              | Whether the answer addresses what the user asked                                  | Boolean       |
+| **Hallucination**          | Claims in the answer that are made up or unsupported                              | Boolean       |
+| **Prompt injection**       | User messages that try to override your instructions or reveal the system prompt  | Boolean       |
+
+This list is not complete. The template catalog changes over time, so check the picker for the current templates.
 
 ### Creating an LLM judge evaluation
 
 1. Navigate to **AI Evals** > **Evaluations**
-2. Click **New evaluation**
-3. Select **LLM-as-a-judge** as the evaluation type
-4. Choose a template or start from scratch
+2. Click **Create evaluation**
+3. Select an LLM judge template, or click **Start from scratch**
+4. If you start from scratch, set **Method** to **LLM as a judge**
 5. Configure the evaluation:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
