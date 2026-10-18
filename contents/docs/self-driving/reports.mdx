@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -35,6 +35,8 @@ A report also accumulates a history as work happens on it: the commits and pull 
 A report is a starting point, not a verdict. Click **Ask AI** on a report to ask a question about what it found – who else is affected, whether the problem is new, what to do next. The agent already has the report and its evidence, so you don't have to re-explain the problem. It works in a task you can follow, and you can keep the conversation going there.
 
 Some reports arrive with suggested questions above the question box. The [scout](/docs/self-driving/scouts) that wrote the report knows which threads it left open, so it offers those as a way in. Click one to fill the box, then send it as written or edit it first – nothing is sent until you click **Ask AI**, so a wrong pick costs you nothing. Not every report suggests questions, and you can always ignore them and write your own.
+
+During a conversation, when you share a correction, a preference, missing context, or a verified fact worth keeping, Ask AI offers to save a concise summary. You can save it as a [scout note](/docs/self-driving/scouts#steering-a-scout-with-a-note) to steer the scout's future runs, or as a work-log entry on the report itself. When both options are available, Ask AI presents both and lets you choose before confirming the text. Pure Q&A exchanges skip this offer. Saving feedback does not resolve or dismiss the report.
 
 ## Where reports go
 
