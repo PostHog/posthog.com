@@ -135,7 +135,7 @@ PostHog receives each Winston record like this:
 | Message | Log body |
 | Level (`info`, `warn`, `error`, etc.) | Severity |
 | Metadata, `defaultMeta`, and child logger fields | Log attributes |
-| `Error` objects | Error message appended to the body, and a `stack` attribute |
+| `Error` objects | Error message appended to the body, a `stack` attribute, and `exception.type`, `exception.message`, and `exception.stacktrace` attributes |
 
 Logs below the logger's `level` are not sent. In the example above, `logger.debug()` calls don't reach PostHog.
 
