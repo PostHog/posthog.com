@@ -4580,8 +4580,8 @@
             "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/migrate/export-events",
-            "destination": "/docs/data-pipelines/troubleshooting"
+            "source": "/docs/migrate/export-events:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/troubleshooting:ext?"
         },
         {
             "source": "/tutorials/mixpanel-to-posthog",
@@ -5136,20 +5136,20 @@
             "destination": "/docs/data-pipelines"
         },
         {
-            "source": "/docs/apps/build/types",
-            "destination": "/docs/data-pipelines/destinations"
+            "source": "/docs/apps/build/types:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/build/tutorial:ext(\\.md)?",
             "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
-            "source": "/docs/apps/build/testing",
-            "destination": "/docs/data-pipelines/destinations"
+            "source": "/docs/apps/build/testing:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/build/testing",
-            "destination": "/docs/data-pipelines/destinations"
+            "source": "/docs/cdp/build/testing:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/build/reference:ext(\\.md)?",
@@ -5172,8 +5172,8 @@
             "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/build/types",
-            "destination": "/docs/data-pipelines/destinations"
+            "source": "/docs/cdp/build/types:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps:ext(\\.md)?",
