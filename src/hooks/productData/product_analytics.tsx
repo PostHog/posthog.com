@@ -37,9 +37,9 @@ export const productAnalytics = {
     pricingDescription:
         'Product analytics is billed on events captured – pageviews, clicks, custom events, and everything autocapture picks up. You get 1 million events free every month.',
     seo: {
-        title: 'Product Analytics – Understand your product with PostHog',
+        title: 'Product Analytics – Funnels, retention, and paths | PostHog',
         description:
-            'Track usage, retention, and feature adoption with Product Analytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+            'Track funnels, retention, user paths, and feature adoption with Product Analytics. Autocapture events, query with SQL, and get 1M events free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     /**
