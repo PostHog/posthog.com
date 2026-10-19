@@ -1,0 +1,273 @@
+---
+title: Upgrading to capture v1 SDKs
+sidebar: Docs
+showTitle: true
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<!-- TODO(capture-v1): replace every TODO(...) comment in this file before merge. Search the PR for "TODO(capture-v1". -->
+
+PostHog SDKs are moving to [capture v1](/docs/api/capture-v1), a new way to send events. Each SDK moves to v1 in a new major version. Capture v1 gives you:
+
+- **A result for every event.** One bad event no longer fails the whole batch, and your SDK tells you which events PostHog didn't store and why.
+- **Event options.** Settings like person processing move out of magic `$` properties into a separate `options` object.
+- **Safer retries.** SDKs retry only what can succeed and resend only the events that need it.
+- **More compression choices.** `gzip`, `deflate`, `br`, and `zstd`.
+- **A separate path for AI events.** Large AI events have their own queue and limits.
+
+The legacy capture endpoints still work, and SDK versions that use them stay supported. We plan to retire the legacy endpoints in the future and will announce a date well in advance.
+
+## SDKs and versions
+
+<CalloutBox icon="IconWarning" title="Major versions with breaking changes" type="caution">
+
+Each SDK below moves to capture v1 in a new major version. These versions include breaking changes. Read your SDK's migration guide before you upgrade.
+
+</CalloutBox>
+
+| SDK | First version with capture v1 | Platforms on v1 | Migration guide |
+|---|---|---|---|
+| [Python](/docs/libraries/python) | `8.0.0` | All | [`7.x` to `8.0`](https://github.com/PostHog/posthog-python/blob/main/docs/migration-7.x-to-8.0.md) <!-- TODO(link): confirm path on main after release --> |
+| [Go](/docs/libraries/go) | `v2.0.0` (module `github.com/posthog/posthog-go/v2`) | All | [`v1` to `v2`](https://github.com/PostHog/posthog-go/blob/main/docs/migration-v2.md) <!-- TODO(link): confirm branch and path after release --> |
+| [Rust](/docs/libraries/rust) | `1.0.0` | All | [`0.x` to `1.0`](https://github.com/PostHog/posthog-rs/blob/main/docs/migration-0.x-to-1.0.md) <!-- TODO(link): confirm path on main after release --> |
+| [Node.js](/docs/libraries/node) | `6.0.0` <!-- TODO(node): confirm version --> | Server (`posthog-node`) | TODO <!-- TODO(node): link the migration guide --> |
+| [iOS](/docs/libraries/ios) | `4.0.0` <!-- TODO(ios): confirm version --> | iOS, macOS, and the other Apple platforms | TODO <!-- TODO(ios): link the migration guide --> |
+| [Flutter](/docs/libraries/flutter) | `6.0.0` <!-- TODO(ios): confirm version --> | iOS and macOS only | TODO <!-- TODO(ios): link the migration guide --> |
+
+<!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
+<!-- TODO(ios): confirm the exact Apple platforms posthog-ios 4.0 covers (iOS, macOS, tvOS, watchOS, visionOS). -->
+
+Other SDKs, including the JavaScript Web SDK, React Native, and Android, move to capture v1 in later major versions. Flutter apps on Android, web, and desktop also keep using legacy capture until then. Until an SDK moves, it keeps working as it does today.
+
+## What changes for everyone
+
+These changes apply to every SDK on capture v1. Your SDK's migration guide covers changes that only apply to it.
+
+### Every event needs its own UUID
+
+SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use a new one for every event. Don't reuse an order ID, request ID, or message ID across events. PostHog rejects a whole batch that contains the same UUID twice.
+
+### Event options replace magic properties
+
+Set processing options in an event's `options`, not in `properties`:
+
+| Option | Replaces |
+|---|---|
+| `process_person_profile` | `$process_person_profile` |
+| `cookieless_mode` | `$cookieless_mode` |
+| `disable_skew_correction` | `$ignore_sent_at` |
+| `product_tour_id` | `$product_tour_id` |
+
+<MultiLanguage>
+
+```python
+posthog.capture(
+    "signed_up",
+    distinct_id="user_123",
+    properties={"plan": "pro"},
+    options={"process_person_profile": True},
+)
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "user_123",
+    Event:      "signed_up",
+    Properties: posthog.NewProperties().Set("plan", "pro"),
+    Options:    posthog.NewOptions().Set("process_person_profile", true),
+})
+```
+
+```rust
+let mut event = posthog_rs::Event::new("signed_up", "user_123");
+event.insert_prop("plan", "pro")?;
+event.insert_option("process_person_profile", true)?;
+client.capture(event);
+```
+
+```node
+// TODO(node): confirm the options API for posthog-node 6
+posthog.capture({
+    distinctId: 'user_123',
+    event: 'signed_up',
+    properties: { plan: 'pro' },
+    options: { process_person_profile: true },
+})
+```
+
+</MultiLanguage>
+
+The legacy `$` properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy property. Use options in new code – the legacy properties are deprecated, and a future major version will stop reading them.
+
+SDKs send options exactly as you set them. PostHog ignores option names it doesn't know, and drops an event whose option value it can't read, with the detail `invalid_options`. See [event options](/docs/api/capture-v1#event-options) for the types each option takes.
+
+### How values combine
+
+You can set properties and options in several places. When the same key is set in more than one place, the most specific value wins:
+
+1. **The capture call** – the properties and options you pass for this event
+2. **Context** – values set for the current request or job, such as Python's `new_context()` and `tag()`, or Go's `RequestContext`
+3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, or Go's `DefaultEventProperties` and `DefaultEventOptions`
+4. **SDK values** – properties the SDK adds itself, such as `$is_server`
+
+Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy `$` properties fill in any option that is still unset.
+
+A few details:
+
+- A value from a lower layer only fills keys you didn't set higher up. This is a change: before v1, some SDKs let global values overwrite the ones you passed on the call.
+- A property set to `null` (or `None`, or `nil`) counts as set, so a lower layer can't replace it. An option set to `null` counts as unset.
+- `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key.
+- A `$set` in a global or context layer adds those person properties to every event that layer reaches.
+- Not every SDK has every layer. Rust has no global or context layers. Your SDK's migration guide lists the layers it has and which calls they reach.
+
+<!-- TODO(node): confirm Node's layer names (global and context properties and options) and add them to the list above. -->
+<!-- TODO(ios): confirm iOS layer names and before_send behavior. -->
+
+### Person processing
+
+- Adding groups to an event no longer turns on person processing. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
+- An event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Setting `$process_person_profile: true` no longer changes that. (The Go SDK returns an error for a missing distinct ID instead.)
+- Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
+
+### Other changes
+
+- **Library name and version.** The SDK sets `$lib` and `$lib_version`. You can't override them from your properties.
+- **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs.
+- **Timestamps.** SDKs send timestamps with at least millisecond precision and keep any extra precision you provide. They no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
+- **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
+- **Logs.** Debug logs no longer include event contents, and some log messages changed. Update any alerts that match on old log text.
+
+## Configuration
+
+Some defaults changed in the new major versions. These are the capture settings that matter most for v1:
+
+| Setting | Default | Python | Go | Rust |
+|---|---|---|---|---|
+| Retries | 3 retries (4 attempts) | `max_retries` | `MaxRetries` | `max_capture_attempts` (counts the first attempt) |
+| Retry wait | 100ms, doubling, up to 30s, with jitter | – | `MaxRetryBackoff` | `retry_initial_backoff_ms`, `retry_max_backoff_ms` |
+| Batch size | 100 events | `flush_at` | `BatchSize` | `flush_at` |
+| Flush interval | 5 seconds | `flush_interval` | `Interval` | `flush_interval_ms` |
+| Compression | None | `capture_compression` | `Compression` | `capture_compression` |
+| Compression formats | – | `gzip`, `deflate`, `zstd` | `gzip`, `deflate`, `br`, `zstd` | `gzip`, `deflate`, `br`, `zstd` |
+| Error handler | – | `on_error` | `Callback` | `on_error` |
+| Modify or drop events | – | `before_send` | `BeforeSend` | `before_send` |
+
+<!-- TODO(node): add a Node.js column. -->
+<!-- TODO(ios): decide whether mobile SDKs get their own table (they persist a queue and retry differently). -->
+<!-- TODO(capture-v1): re-check every name and default against the released packages. -->
+
+SDKs split large batches into requests of 5MB or less, and send any single event that's bigger than that in its own request. Your SDK's migration guide lists every new and changed setting.
+
+## Retries and failures
+
+SDKs on capture v1 retry a request when PostHog or the network has a temporary problem (`408`, `500`, `502`, `503`, `504`, or a network error), and they resend only the events PostHog asked them to retry. Every other response is final, including `429`. Each wait doubles, with some randomness added so many clients don't retry at the same moment.
+
+Let the SDK handle retries. Don't wrap its capture calls in your own retry loop – that can send events twice and slow your app down.
+
+To see what PostHog didn't store, add an error handler. It reports the events PostHog dropped, with the reason from [the result details](/docs/api/capture-v1#result-details). Without a handler, the SDK logs one line per failed batch.
+
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+
+def on_error(error, batch):
+    # error is a CaptureError: status, drops, event_results, verdict_summary()
+    print("PostHog capture failed:", error.verdict_summary())
+
+posthog = Posthog("<ph_project_token>", host="<ph_client_api_host>", on_error=on_error)
+```
+
+```go
+client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
+    Endpoint: "<ph_client_api_host>",
+    Callback: myCallback, // Failure receives CaptureEventError, CaptureRequestError, or CaptureLocalError
+})
+```
+
+```rust
+let options = posthog_rs::ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .on_error(|failure| eprintln!("PostHog capture failed: {failure:?}"))
+    .build()?;
+let client = posthog_rs::client(options).await;
+```
+
+```node
+// TODO(node): show the posthog-node 6 error handler
+```
+
+</MultiLanguage>
+
+<!-- TODO(capture-v1): compile and run each snippet against the released SDKs; confirm Rust on_error signature and Go Callback usage. -->
+
+If your project hits a [billing limit](/docs/billing/limits-alerts), PostHog stops storing events and answers with `402`. The SDK reports this as a failure on each send until the limit resets or you raise it.
+
+## AI events
+
+Send AI events (any event whose name starts with `$ai_`) with your SDK's AI capture method. It has its own queue, compression setting, and size limit, separate from your other events. PostHog owns the `$ai_` prefix, so don't use it for your own events.
+
+| SDK | AI capture method | AI settings |
+|---|---|---|
+| Python | `capture_ai` | `capture_ai_compression`, `capture_ai_max_queue_size`, `capture_ai_timeout` |
+| Go | `EnqueueAI` | `CaptureAICompression`, `CaptureAIMaxQueueSize`, `CaptureAIBatchUploadTimeout` |
+| Rust | `capture_ai` | `capture_ai_compression`, `capture_ai_max_queue_size` |
+| Node.js | `captureAi` <!-- TODO(node): confirm --> | TODO <!-- TODO(node) --> |
+
+<MultiLanguage>
+
+```python
+posthog.capture_ai(
+    "$ai_generation",
+    distinct_id="user_123",
+    properties={"$ai_model": "gpt-5", "$ai_input_tokens": 120},
+)
+```
+
+```go
+client.EnqueueAI(posthog.Capture{
+    DistinctId: "user_123",
+    Event:      "$ai_generation",
+    Properties: posthog.NewProperties().Set("$ai_model", "gpt-5").Set("$ai_input_tokens", 120),
+})
+```
+
+```rust
+let mut event = posthog_rs::Event::new("$ai_generation", "user_123");
+event.insert_prop("$ai_model", "gpt-5")?;
+event.insert_prop("$ai_input_tokens", 120)?;
+client.capture_ai(event);
+```
+
+```node
+// TODO(node): confirm captureAi for posthog-node 6
+posthog.captureAi({
+    distinctId: 'user_123',
+    event: '$ai_generation',
+    properties: { $ai_model: 'gpt-5', $ai_input_tokens: 120 },
+})
+```
+
+</MultiLanguage>
+
+<!-- TODO(capture-v1): check the AI property names and model value in these examples against the AI Observability docs. -->
+
+`capture` doesn't move `$ai_` events to the AI path for you. For now, PostHog still accepts AI events sent with `capture`, so existing code keeps working while you upgrade. This is temporary, and large AI events always need the AI method. Calling `flush` or `shutdown` sends both queues. See [capturing large AI events](/docs/ai-observability/large-events) for limits and the AI integrations.
+
+## Proxies
+
+If you send events through a [reverse proxy](/docs/advanced/proxy), make sure it:
+
+- Forwards `/i/v1/analytics/events` and `/i/v1/ai/events`
+- Passes the `Authorization` header and every `PostHog-*` header through unchanged
+- Returns PostHog's status code and response body unchanged, so your SDK sees the result for each event
+
+<!-- TODO(capture-v1): check whether the proxy guides need per-provider updates for /i/v1 paths and the Authorization header. -->
+
+## Learn more
+
+- [Capture API (v1)](/docs/api/capture-v1) – headers, request and response formats, and every result detail
+- The [SDK specs](https://github.com/PostHog/sdk-specs) – how every SDK behaves on capture v1 <!-- TODO(link): link the published v1 capture and capture_ai specs -->
+- Your SDK's migration guide, linked in the [table above](#sdks-and-versions)
