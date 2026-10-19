@@ -5,12 +5,12 @@ sidebar: Docs
 showTitle: true
 ---
 
-Fixes for the problems we see most often. If the product behavior belongs on a setup page, that page is linked here. This page is only the failure and the check.
+Fixes for the problems we see most often. Each fix links to the setup page that has the full details.
 
 ## The widget does not appear
 
 1. In **Support** > **Settings**, confirm Support is enabled and the in-app widget is on.
-2. If **Allowed domains** is set, the page hostname must match an entry. `example.com` is exact. `*.example.com` matches subdomains. An empty list shows the widget on every domain.
+2. If **Allowed domains** is set, the page must match an entry. `example.com` matches that domain exactly. `*.example.com` matches subdomains, but not `example.com` itself, so add both if you need both. An empty list shows the widget on every domain.
 3. Search your `posthog.init` config for `disable_conversations: true`. That stops the conversations module from loading. [Hiding the widget](/docs/support/widget#show-and-hide-the-widget) with `posthog.conversations.hide()` is different: the module still loads.
 4. Hard-refresh the page. A regenerated public token disconnects chats that are already open until the page loads again.
 

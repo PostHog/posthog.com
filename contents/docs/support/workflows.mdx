@@ -30,6 +30,7 @@ Workflows trigger on and set these ticket statuses:
 
 When ticket or message state changes, certain events are emitted and can be used as workflow triggers:
 
+
 All events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
 ### New ticket created
@@ -110,9 +111,11 @@ Two workflow actions are available for ticket management:
 
 Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
 
+
 | Input field | Type | Default |
 |-------|------|---------|
 | `ticket_id` | string | `{event.properties.ticket_id}` |
+
 
 | Output field | Type | Description |
 |-------|------|-------------|
@@ -136,6 +139,7 @@ The output fields are available as `{variables.ticket.*}`.
 ### Update ticket
 
 Changes one or more fields on a ticket. Only the fields you provide are changed.
+
 
 | Input field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -247,7 +251,7 @@ Automatically change status from New to Open when a team member first replies.
 **Flow:**
 
 1. **If** `event.properties.status` equals `new`
-- **Update ticket:** `status` = `open`
+   - **Update ticket:** `status` = `open`
 
 ```
 status = "open"
@@ -276,7 +280,7 @@ When a customer sends a message on a pending or resolved ticket, reopen it.
 **Flow:**
 
 1. **If** `event.properties.status` equals `pending` **or** `event.properties.status` equals `resolved`
-- **Update ticket:** `status` = `open`
+   - **Update ticket:** `status` = `open`
 
 ### 8. Auto-tag tickets by customer email domain
 
@@ -287,14 +291,14 @@ Tag tickets from specific customer domains for prioritization.
 **Flow:**
 
 1. **If** `event.properties.customer_email` ends with `@bigcorp.com`
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 tags = ["enterprise", "priority"]
 ```
 
 2. **Else if** `event.properties.customer_email` ends with `@startup.io`
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 tags = ["startup"]
@@ -309,7 +313,7 @@ Immediately set a tight SLA and assign to senior support when a high-priority ti
 **Flow:**
 
 1. **If** `event.properties.priority` equals `high`
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 sla_amount = "30"
@@ -342,7 +346,7 @@ A comprehensive example combining multiple conditions for SLA, priority, and ass
 
 1. **Get ticket** (to access full ticket data)
 2. **If** `event.properties.channel_source` equals `slack`
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 priority = "low"
@@ -352,7 +356,7 @@ assignee = Engineering role
 ```
 
 3. **Else if** `event.properties.customer_email` ends with `@enterprise.com`
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 priority = "high"
@@ -363,7 +367,7 @@ tags = ["enterprise", "vip"]
 ```
 
 4. **Else**
-- **Update ticket:**
+   - **Update ticket:**
 
 ```
 priority = "medium"

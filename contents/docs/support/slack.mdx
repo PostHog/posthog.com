@@ -35,7 +35,7 @@ After connecting, configure the integration in **Support** > **Settings**:
 | **Ticket emoji**     | React with this emoji on any message in any channel to create a ticket from it.                                                                     | `:ticket:` |
 | **Bot mentions**     | Always active – `@SupportHog` in any channel the bot is in creates a ticket from that message.                                                      | –          |
 | **Ticket nudges**    | When enabled, SupportHog prompts users in non-support channels to open a ticket via a threaded reply with **Open ticket** / **No thanks** buttons. | On         |
-| **Bot appearance**   | Optional display name and icon URL for messages SupportHog posts. Leave both blank to use the defaults. Reconnect the bot if it was installed before this setting existed. | Defaults   |
+| **Bot appearance**   | Optional display name and icon URL for messages SupportHog posts. Leave both blank to use the defaults. Re-authorize the bot if you connected it before this setting existed. | Defaults   |
 
 ### Picking support channels
 
@@ -93,7 +93,7 @@ SupportHog works in Slack Connect channels you share with customers. This is the
 
 ## Permissions
 
-SupportHog asks for these Slack scopes when you install it. An install from before a scope was added keeps working, but file sync and link unfurls stay off until an admin reconnects the app.
+SupportHog asks for these Slack scopes when you install it. An install from before a scope was added keeps working without that scope. To turn on file sync or **Bot appearance** on an older install, reconnect the app.
 
 | Scope | What it is for |
 | --- | --- |
@@ -137,6 +137,6 @@ You can filter the ticket list by channel source to see only Slack tickets.
 To remove the Slack integration:
 
 1. Go to **Support** > **Settings**
-2. Click **Disconnect** in the Slack section
+2. Click **Remove SupportHog bot** in the Slack section, then confirm
 
 Existing tickets created from Slack are not affected – they remain in your inbox but no longer sync new messages.

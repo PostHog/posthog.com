@@ -15,7 +15,7 @@ Use this when each customer has a shared Slack Connect channel with your team. P
 2. Mark the shared channel as a support channel, or tell the customer to mention `@SupportHog` or react with `:ticket:`.
 3. Reply in the thread. The reply syncs to the ticket. A reply from the inbox posts back to Slack.
 
-Example workflow: on **New ticket created**, if `channel_source` is `slack`, set the SLA to 24 hours and assign the Engineering role. Internal Slack is usually less urgent than the widget. See [automate ticket handling](/docs/support/workflows).
+Example workflow: on **New ticket created**, if `channel_source` is `slack`, set priority to `high` and assign the role that owns your enterprise accounts. A customer with a shared channel is usually one of your largest accounts. See [automate ticket handling](/docs/support/workflows).
 
 [SCREENSHOT: Shared Slack Connect channel with a SupportHog ticket confirmation]
 
@@ -39,7 +39,7 @@ Use this when the customer is already in your product and you want the replay, e
 2. For logged-in users, turn on [identity verification](/docs/support/widget#identity-verification) so tickets follow the person across browsers.
 3. Leave anonymous visitors on the browser session. They can recover tickets by email.
 
-Example workflow: on **New ticket created**, if `channel_source` is `widget`, set a 4 hour SLA. Widget tickets are customer-facing, so they should be faster than an internal Slack thread.
+Example workflow: on **New ticket created**, if `channel_source` is `widget`, set a 4-hour SLA. The customer is often still in your product and waiting for an answer.
 
 [SCREENSHOT: Widget open on a product page, with the inbox showing that ticket's replay]
 

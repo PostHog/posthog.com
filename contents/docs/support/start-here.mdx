@@ -25,80 +25,48 @@ Building your own interface instead? The [JavaScript API](/docs/support/javascri
 Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), [Microsoft Teams](/docs/support/teams) (beta), and [GitHub](/docs/support/github). You can also start tickets from your own code with the [JavaScript API](/docs/support/javascript-api) or the [email compose API](/docs/support/email#start-a-ticket-with-the-api). Every channel syncs both ways so you answer from a single inbox.
 
 <div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
-
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconChat className="size-5 shrink-0 text-blue mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">Widget</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">In-app chat with replay and events attached</p>
-
-</div>
-
-</div>
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconAtSign className="size-5 shrink-0 text-teal mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">Email</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">Forward support@ mail into the inbox</p>
-
-</div>
-
-</div>
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconMessage className="size-5 shrink-0 text-red mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">SupportHog (Slack)</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">Mentions and reactions become tickets</p>
-
-</div>
-
-</div>
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconMessage className="size-5 shrink-0 text-purple mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">SupportHog (Teams)</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">Beta. Channel messages and mentions become tickets</p>
-
-</div>
-
-</div>
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconGithub className="size-5 shrink-0 text-primary mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">GitHub</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">Issues become tickets and replies post back</p>
-
-</div>
-
-</div>
-<div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
-
-<IconBrackets className="size-5 shrink-0 text-seagreen mt-0.5" />
-
-<div>
-
-<p className="m-0 text-sm font-bold text-primary">API</p>
-<p className="m-0 mt-0.5 text-xs text-secondary">Create widget or email tickets from your code</p>
-
-</div>
-
-</div>
-
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconChat className="size-5 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">In-app chat with replay and events attached</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconAtSign className="size-5 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Email</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Forward support@ mail into the inbox</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">SupportHog (Slack)</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Mentions and reactions become tickets</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">SupportHog (Teams)</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Beta. Channel messages and mentions become tickets</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconGithub className="size-5 shrink-0 text-primary mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">GitHub</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Issues become tickets and replies post back</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconBrackets className="size-5 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Create widget or email tickets from your code</p>
+    </div>
+  </div>
 </div>
 
 <OSButton variant="primary" asLink to="/docs/support/email">Connect a channel</OSButton>
@@ -133,31 +101,20 @@ Let rules handle the repetitive parts. [Workflows](/docs/support/workflows) are 
 Support isn't just an inbox – it's a signal source. Recurring issues in your conversations become [Self-driving](/docs/self-driving) reports, and when there's a code fix, a pull request you review and merge. Answering customers still happens in the Support inbox; you review these fixes in the Self-driving inbox.
 
 <div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
-
-<span className="flex items-center gap-1.5 text-sm text-secondary">
-
-<IconMessage className="size-5 shrink-0" />
-
-Tickets
-
-</span>
-<span className="text-muted" aria-hidden="true">→</span>
-<span className="flex items-center gap-1.5 text-sm text-secondary">
-
-<IconMagic className="size-5 shrink-0" />
-
-Self-driving report
-
-</span>
-<span className="text-muted" aria-hidden="true">→</span>
-<span className="flex items-center gap-1.5 text-sm text-secondary">
-
-<IconGithub className="size-5 shrink-0" />
-
-Pull request
-
-</span>
-
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMessage className="size-5 shrink-0" />
+    Tickets
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGithub className="size-5 shrink-0" />
+    Pull request
+  </span>
 </div>
 
 <OSButton variant="primary" asLink to="/docs/self-driving">Support and Self-driving</OSButton>

@@ -10,7 +10,7 @@ import OSButton from 'components/OSButton'
 
 Support is one inbox for every customer conversation, with the sender's [session replay](/docs/session-replay), events, and errors already attached. You see what went wrong instead of asking the customer to reproduce it.
 
-In the API and the SDK, Support is called Conversations. Method names, captured events, and settings use `posthog.conversations`. The product is Support.
+In the API and the SDK, Support is called Conversations: the `posthog.conversations` methods, the `$conversation_*` events, and the `disable_conversations` option. The product is Support.
 
 <CalloutBox icon="IconInfo" title="Need help with PostHog?" type="fyi">
 
@@ -28,61 +28,41 @@ Read and reply in the [Support inbox](/docs/support/inbox). You can also work ti
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
 
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Read and reply to customer tickets, each with the sender's replay and events in view.</p>
+      <a href="/docs/support/inbox" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage tickets →</a>
+    </div>
+  </div>
 
-<IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SupportHog in Slack</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Raise tickets with <code>@SupportHog</code> or a <code>:ticket:</code> reaction, and reply in the thread.</p>
+      <a href="/docs/support/surfaces/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use Support in Slack →</a>
+    </div>
+  </div>
 
-<div>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">List and update tickets from any MCP client.</p>
+      <a href="/docs/support/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use Support over MCP →</a>
+    </div>
+  </div>
 
-<p className="m-0 font-bold text-primary">PostHog Web</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Read and reply to customer tickets, each with the sender's replay and events in view.</p>
-<a href="/docs/support/inbox" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage tickets →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconMessage className="size-6 shrink-0 text-red mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">SupportHog in Slack</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Raise tickets with <code>@SupportHog</code> or a <code>:ticket:</code> reaction, and reply in the thread.</p>
-<a href="/docs/support/surfaces/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use Support in Slack →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">PostHog MCP</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">List and update tickets from any MCP client.</p>
-<a href="/docs/support/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use Support over MCP →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">API</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Build a custom support experience on the <code>posthog.conversations</code> JavaScript API.</p>
-<a href="/docs/support/javascript-api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a custom widget →</a>
-
-</div>
-
-</div>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Build a custom support experience on the <code>posthog.conversations</code> JavaScript API.</p>
+      <a href="/docs/support/javascript-api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a custom widget →</a>
+    </div>
+  </div>
 
 </div>
 
@@ -92,89 +72,59 @@ A ticket can start in the widget, by email, in Slack, in Microsoft Teams, on Git
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-5 my-6">
 
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconChat className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">In-app chat button. Auto-attaches events, session replay, URL, and identity.</p>
+      <a href="/docs/support/widget" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set up the widget →</a>
+    </div>
+  </div>
 
-<IconChat className="size-6 shrink-0 text-blue mt-0.5" />
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconAtSign className="size-6 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Email</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Forward <code>support@</code> mail in, and replies thread back to the customer's inbox.</p>
+      <a href="/docs/support/email" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect email →</a>
+    </div>
+  </div>
 
-<div>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SupportHog (Slack)</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">SupportHog turns messages, mentions, or an emoji reaction into tickets.</p>
+      <a href="/docs/support/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect Slack →</a>
+    </div>
+  </div>
 
-<p className="m-0 font-bold text-primary">Widget</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">In-app chat button. Auto-attaches events, session replay, URL, and identity.</p>
-<a href="/docs/support/widget" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set up the widget →</a>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SupportHog (Microsoft Teams)</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Beta. Channel messages and <code>@SupportHog</code> mentions become tickets.</p>
+      <a href="/docs/support/teams" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect Teams →</a>
+    </div>
+  </div>
 
-</div>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGithub className="size-6 shrink-0 text-primary mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">GitHub</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Issues in monitored repos become tickets, and replies post back as comments.</p>
+      <a href="/docs/support/github" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect GitHub →</a>
+    </div>
+  </div>
 
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconAtSign className="size-6 shrink-0 text-teal mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">Email</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Forward <code>support@</code> mail in, and replies thread back to the customer's inbox.</p>
-<a href="/docs/support/email" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect email →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconMessage className="size-6 shrink-0 text-red mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">SupportHog (Slack)</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">SupportHog turns messages, mentions, or an emoji reaction into tickets.</p>
-<a href="/docs/support/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect Slack →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconMessage className="size-6 shrink-0 text-purple mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">SupportHog (Microsoft Teams)</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Beta. Channel messages and <code>@SupportHog</code> mentions become tickets.</p>
-<a href="/docs/support/teams" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect Teams →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconGithub className="size-6 shrink-0 text-primary mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">GitHub</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">Issues in monitored repos become tickets, and replies post back as comments.</p>
-<a href="/docs/support/github" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect GitHub →</a>
-
-</div>
-
-</div>
-
-<div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-
-<IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
-
-<div>
-
-<p className="m-0 font-bold text-primary">API</p>
-<p className="m-0 mt-0.5 text-sm text-secondary">The JavaScript API creates widget tickets. The compose API starts an email ticket from your backend.</p>
-<a href="/docs/support/javascript-api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">JavaScript API →</a>
-
-</div>
-
-</div>
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">The JavaScript API creates widget tickets. The compose API starts an email ticket from your backend.</p>
+      <a href="/docs/support/concepts/channels#create-tickets-from-your-code" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Create tickets from code →</a>
+    </div>
+  </div>
 
 </div>
 
@@ -182,7 +132,7 @@ See [how channels work](/docs/support/concepts/channels) for the full list, incl
 
 ## We run our support on it
 
-PostHog uses SupportHog for customer support. Enterprise and high-paying customers get a shared Slack channel, or a Microsoft Teams channel when they ask for one. A message in that channel becomes a ticket. Anyone in the thread, including the customer, can also react with `:ticket:` or mention `@SupportHog`.
+PostHog uses SupportHog for its own customer support. Enterprise and high-paying customers can have a shared Slack channel with us, or a Microsoft Teams channel if they prefer Teams. A message in a channel we mark as a support channel becomes a ticket. In any other channel with SupportHog in it, anyone in the thread, including the customer, can mention `@SupportHog`, or react with `:ticket:` in Slack.
 
 That is the setup we recommend for B2B support. [Connect Slack](/docs/support/slack) or [connect Microsoft Teams](/docs/support/teams).
 
@@ -190,13 +140,7 @@ That is the setup we recommend for B2B support. [Connect Slack](/docs/support/sl
 
 The same inbox covers in-app chat, a shared `support@` address, GitHub issues, and a move off Zendesk or Intercom. Recurring bugs can become [Self-driving](/docs/self-driving) pull requests you review.
 
-<OSButton variant="secondary" asLink to="/docs/support/use-cases">
-
-<IconBook className="size-5" />
-
-See use cases
-
-</OSButton>
+<OSButton variant="secondary" asLink to="/docs/support/use-cases" icon={<IconBook />}>See use cases</OSButton>
 
 ## Free to use
 
