@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import { IOS_SPRING } from '../Ingest/session'
 import { transform, useEventClock, useLoopingAnimation } from '../timeline'
 import AgentWindow, { AGENT_THEMES, AgentTheme } from './AgentWindow'
+import { CinematicScale, useStepLayout } from '../layoutMode'
 import { TRACE_BOUNDARIES, TRACE_LOOP_MS, TRACE_RESTING_MOMENT } from './trace'
 
 const MCP_BANNER = [
@@ -165,9 +166,10 @@ const AsciiFrame = () => {
         if (!box || !probe) return
         const draw = () => {
             const cell = probe.getBoundingClientRect()
+            const area = box.getBoundingClientRect()
             if (!cell.width || !cell.height) return
-            const columns = Math.floor(box.clientWidth / cell.width)
-            const rows = Math.floor(box.clientHeight / cell.height)
+            const columns = Math.floor(area.width / cell.width)
+            const rows = Math.floor(area.height / cell.height)
             if (columns < MIN_FRAME_CELLS || rows < MIN_FRAME_CELLS + TITLE_BAR_ROWS) return
             setFrame(frameText(columns, rows))
         }
@@ -195,7 +197,7 @@ const BringYourOwnTool = ({ visible }: { visible: boolean }) => (
     <div
         aria-hidden={!visible}
         className={cn(
-            'relative flex h-[26rem] flex-col justify-center overflow-hidden px-8 font-code text-[11px] leading-[1.35] text-secondary transition-opacity duration-300',
+            'relative flex h-[clamp(26rem,56cqw,44rem)] flex-col justify-center overflow-hidden px-8 font-code text-[11px] leading-[1.35] text-secondary transition-opacity duration-300',
             visible ? 'opacity-100' : 'pointer-events-none opacity-0'
         )}
     >
@@ -261,9 +263,10 @@ const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) 
         const frame = windowRef.current?.getBoundingClientRect()
         const icon = icons.current[app]?.getBoundingClientRect()
         if (!frame || !icon) return { x: 0, y: 0 }
+        const scale = frame.width / (windowRef.current?.offsetWidth || frame.width)
         return {
-            x: icon.left + icon.width / 2 - (frame.left + frame.width / 2),
-            y: icon.top + icon.height / 2 - (frame.top + frame.height / 2),
+            x: (icon.left + icon.width / 2 - (frame.left + frame.width / 2)) / scale,
+            y: (icon.top + icon.height / 2 - (frame.top + frame.height / 2)) / scale,
         }
     }
 
@@ -362,13 +365,18 @@ export default function QueryStep({
     description: React.ReactNode
 }): JSX.Element {
     const [active, setActive] = useState<AgentTheme | null>(null)
+    const layout = useStepLayout({
+        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8',
+        text: '@3xl:col-span-5',
+        visual: '@3xl:col-span-7',
+    })
     const app = AGENT_THEMES.find(({ key }) => key === active)
     const external = Boolean(app?.installUrl.startsWith('http'))
 
     return (
         <div className="@container mt-16">
-            <div className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8">
-                <div className="@3xl:col-span-5">
+            <div className={layout.grid}>
+                <div className={layout.text}>
                     <h3 className="!mt-0">
                         {index + 1}. {title}
                     </h3>
@@ -383,8 +391,10 @@ export default function QueryStep({
                         </Link>
                     </p>
                 </div>
-                <div className="@3xl:col-span-7">
-                    <Desktop onActiveChange={setActive} />
+                <div className={layout.visual}>
+                    <CinematicScale>
+                        <Desktop onActiveChange={setActive} />
+                    </CinematicScale>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { IconCheck, IconCheckCircle, IconComment, IconPullRequest } from '@posth
 import { cn } from '../../../../utils'
 import { useEventClock } from '../timeline'
 import { ScrollToLatest } from '../Query/AgentWindow'
+import { CinematicScale, useStepLayout } from '../layoutMode'
 import {
     CHECKS_SHOWN_AT,
     CheckChart,
@@ -108,7 +109,7 @@ const RailItem = ({ icon, children }: { icon: React.ReactNode; children: React.R
 const PullRequestConversation = ({ elapsed }: { elapsed: number }) => {
     const mergeSettled = elapsed >= MERGE_SETTLED_AT
     return (
-        <div className="flex h-[26rem] flex-col overflow-hidden rounded-lg border border-primary bg-primary shadow-xl">
+        <div className="flex h-[clamp(26rem,56cqw,44rem)] flex-col overflow-hidden rounded-lg border border-primary bg-primary shadow-xl">
             <PrHeader elapsed={elapsed} />
             <motion.div
                 className="flex min-h-0 flex-1 flex-col"
@@ -195,6 +196,11 @@ export default function SelfDriveStep({
     description: React.ReactNode
 }): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
+    const layout = useStepLayout({
+        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8',
+        text: '@3xl:col-span-5',
+        visual: '@3xl:col-span-7',
+    })
     const elapsed = useEventClock(containerRef, {
         loopMs: LOOP_MS,
         boundaries: LOOP_BOUNDARIES,
@@ -203,18 +209,17 @@ export default function SelfDriveStep({
 
     return (
         <div className="@container mt-16">
-            <div
-                ref={containerRef}
-                className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8"
-            >
-                <div className="@3xl:col-span-5">
+            <div ref={containerRef} className={layout.grid}>
+                <div className={layout.text}>
                     <h3 className="!mt-0">
                         {index + 1}. {title}
                     </h3>
                     <p>{description}</p>
                 </div>
-                <div className="not-prose @3xl:col-span-7" aria-hidden="true">
-                    <PullRequestConversation elapsed={elapsed} />
+                <div className={cn('not-prose @container', layout.visual)} aria-hidden="true">
+                    <CinematicScale>
+                        <PullRequestConversation elapsed={elapsed} />
+                    </CinematicScale>
                 </div>
             </div>
         </div>

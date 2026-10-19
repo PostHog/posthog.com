@@ -5,6 +5,7 @@ import { EXTERNAL_SOURCES } from './session'
 import { useToolsProducts } from '../../ToolsTicker'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import Link from 'components/Link'
+import { useLayoutMode, useStepLayout } from '../layoutMode'
 
 const TILT_DEG = 56
 const INNER_RADIUS_PERCENT = 24
@@ -568,6 +569,7 @@ const Orbit = () => {
     const spinning = playing
     const magnets = useMagnets(!shouldReduceMotion)
     const { inner, outer } = useOrbitNodes()
+    const cinematic = useLayoutMode() === 'cinematic'
     const planeRef = useRef<HTMLDivElement>(null)
     const spinnerRef = useRef<HTMLDivElement>(null)
     const innerLayerRef = useRef<HTMLDivElement>(null)
@@ -600,13 +602,19 @@ const Orbit = () => {
             onPointerLeave={magnets.onPointerLeave}
         >
             <div
-                className="relative @3xl:-mx-6 @3xl:-mb-24 @3xl:-mt-6 @3xl:px-6 @3xl:pb-24 @3xl:pt-6 [-webkit-mask-composite:source-in] [mask-composite:intersect] [mask-image:var(--edge-mask)] @3xl:[mask-image:var(--orbit-mask),var(--edge-mask)]"
+                className={cn(
+                    'relative @3xl:-mx-6 @3xl:-mb-24 @3xl:-mt-6 @3xl:px-6 @3xl:pb-24 @3xl:pt-6 [-webkit-mask-composite:source-in] [mask-composite:intersect] [mask-image:var(--edge-mask)]',
+                    !cinematic && '@3xl:[mask-image:var(--orbit-mask),var(--edge-mask)]'
+                )}
                 style={ORBIT_MASK}
             >
                 <div className="relative mx-auto aspect-[16/10] w-full">
                     <div
                         ref={planeRef}
-                        className="absolute left-[1%] right-[11%] top-[42%] aspect-square -translate-y-1/2 [perspective:1300px]"
+                        className={cn(
+                            'absolute top-[42%] aspect-square -translate-y-1/2 [perspective:1300px]',
+                            cinematic ? 'inset-x-[6%]' : 'left-[1%] right-[11%]'
+                        )}
                     >
                         <div
                             className="absolute inset-0 [transform-style:preserve-3d]"
@@ -692,14 +700,19 @@ export default function IngestStep({
     title: string
     description: React.ReactNode
 }): JSX.Element {
+    const layout = useStepLayout({
+        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-0',
+        text: '@3xl:col-start-8 @3xl:col-end-13 @3xl:row-start-1 @3xl:pl-4',
+        visual: '@3xl:col-start-1 @3xl:col-end-10 @3xl:row-start-1',
+    })
     return (
         <div className="@container mt-10">
-            <div className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-0">
-                <div className="relative z-10 @3xl:col-start-8 @3xl:col-end-13 @3xl:row-start-1 @3xl:pl-4">
+            <div className={layout.grid}>
+                <div className={cn('relative z-10', layout.text)}>
                     <h3 className="!mt-0">1. {title}</h3>
                     <p>{description}</p>
                 </div>
-                <div className="not-prose @3xl:col-start-1 @3xl:col-end-10 @3xl:row-start-1">
+                <div className={cn('not-prose', layout.visual)}>
                     <Orbit />
                 </div>
             </div>

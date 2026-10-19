@@ -15,6 +15,7 @@ import { IOS_SPRING } from '../Ingest/session'
 import { transform, useEventClock } from '../timeline'
 import { PostHogMark } from '../Query/AgentWindow'
 import { SourceIcon } from '../Query/trace'
+import { CinematicScale, useStepLayout } from '../layoutMode'
 import {
     EARLIER_REPORTS,
     HANDOFF_AT,
@@ -129,7 +130,7 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
     const arrived = [REPORT, ...OVERNIGHT_REPORTS.slice().reverse()].filter(({ at = 0 }) => elapsed >= at)
     const reports = [...arrived, ...EARLIER_REPORTS]
     return (
-        <div className="flex h-[28rem] overflow-hidden rounded-lg border border-primary bg-accent text-primary shadow-xl">
+        <div className="flex h-[clamp(28rem,58cqw,46rem)] overflow-hidden rounded-lg border border-primary bg-accent text-primary shadow-xl">
             <div className="hidden w-14 shrink-0 flex-col items-center gap-2.5 border-r border-primary py-3 @md:flex">
                 <PostHogMark className="mb-1 h-3.5" />
                 {RAIL_ITEMS.map((item) => (
@@ -223,6 +224,11 @@ export default function ActStep({
     description: React.ReactNode
 }): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
+    const layout = useStepLayout({
+        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-16',
+        text: '@3xl:order-last @3xl:col-span-5',
+        visual: '@3xl:col-span-7',
+    })
     const elapsed = useEventClock(containerRef, {
         loopMs: REPORT_LOOP_MS,
         boundaries: REPORT_BOUNDARIES,
@@ -231,18 +237,17 @@ export default function ActStep({
 
     return (
         <div className="@container mt-16">
-            <div
-                ref={containerRef}
-                className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-16"
-            >
-                <div className="@3xl:order-last @3xl:col-span-5">
+            <div ref={containerRef} className={layout.grid}>
+                <div className={layout.text}>
                     <h3 className="!mt-0">
                         {index + 1}. {title}
                     </h3>
                     <p>{description}</p>
                 </div>
-                <div className="not-prose @container @3xl:col-span-7" aria-hidden="true">
-                    <InboxHandoff elapsed={elapsed} />
+                <div className={cn('not-prose @container', layout.visual)} aria-hidden="true">
+                    <CinematicScale>
+                        <InboxHandoff elapsed={elapsed} />
+                    </CinematicScale>
                 </div>
             </div>
         </div>

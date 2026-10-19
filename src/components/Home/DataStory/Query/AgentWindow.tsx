@@ -46,7 +46,7 @@ export interface WindowControls {
     onMinimize?: () => void
 }
 
-const WINDOW_HEIGHT = 'h-[26rem]'
+const WINDOW_HEIGHT = 'h-[clamp(26rem,56cqw,44rem)]'
 
 export const LINE_ENTER = {
     initial: { opacity: 0, transform: transform({ y: 4 }) },
