@@ -1861,7 +1861,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                     {
-                        name: 'Context warehouse enablement',
+                        name: 'Data Stack enablement',
                         url: '',
                         children: [
                             {
