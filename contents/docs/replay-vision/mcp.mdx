@@ -22,7 +22,7 @@ Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few group
 - `vision-scanners-list` – list every scanner in the project, with its config and credit figures.
 - `vision-scanners-counts` – count the project's scanners, in total and by type, and how many are enabled.
 - `vision-scanners-get` – read one scanner's config.
-- `vision-scanners-draft` – draft a full scanner config from a goal like "find where users get stuck during onboarding". Nothing is saved. Give it a monthly credit budget and it also picks sampling, model, and a credit limit to fit.
+- `vision-scanners-draft` – draft a full scanner config from a goal like "find where users get stuck during onboarding". Nothing is saved. Give it a monthly credit budget and it also picks sampling, model, and a credit limit to fit. With a budget, it can also draft an [experiment scanner](/docs/replay-vision/scanner-types#experiment): pass an `experiment_id`, or name a running experiment in the goal. Without a budget, it ignores `experiment_id`.
 - `vision-scanners-suggest-tags` – suggest tags for a classifier, grounded in your product data or the scanner's own observations. Nothing is saved.
 - `vision-scanners-create` – create a new scanner.
 - `vision-scanners-update` – edit an existing one.
