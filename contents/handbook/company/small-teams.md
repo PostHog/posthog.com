@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, run `/org-change` in Slack and select the relevant change type – it'll create a tracked issue in company-internal with the right checklist.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, search Slack for **Org Change** and select the workflow. Choose the relevant change type to create a tracked issue in company-internal with the right checklist.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -67,7 +67,7 @@ Setting up support processes is a team lead responsibility, but if you need any 
 
 Team leads are responsible for creating a `#support-<team-name>` Slack channel and making sure their team is [set up for support](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support), so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up support hero notifications.
 
-To kick off any org change, run `/org-change` in Slack.
+To kick off any org change, search Slack for **Org Change** and select the workflow.
 
 ### Launching new products and features
 
@@ -141,7 +141,7 @@ We have a defined [process for proposing changes to teams](/handbook/company/tea
 Once a decision is made, the following happens:
 
 -   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] The team lead runs `/org-change` in Slack to kick off the tracking issue. Ops will be notified and picks up execution from there.
+-   [ ] The team lead searches Slack for **Org Change** and selects the workflow to create the tracking issue. Ops will be notified and picks up execution from there.
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
 The small teams template contains a list of tasks for the Ops team and the team lead. 
@@ -182,14 +182,24 @@ You're actively encouraged to raise pull requests or propose changes to stuff th
 
 ### Can people change teams?
 
-We try to keep moves infrequent and when needed. We anticipate moving people roughly every 3-9 months. We'd rather hire new people than create gaps by shifting people around.
+Yes. If you've been on a team for a while and feel like you're running low on energy or new ideas, it might be time to think about a move. A fresh pair of eyes helps the team you join, and a change of problem helps you. It's also how ideas spread across PostHog.
 
-There are two scenarios that will trigger a move:
+A small team may also realize they no longer need someone, or that they could really do with someone currently in another small team. The same process applies.
 
--   The small team may realize they no longer need someone, or that they could really do with someone currently in another small team internally.
--   An individual team member may wish to move in order to develop their skills or experience.
+#### When you can move
 
-It is **very important** to raise any desire for a team change with your relevant [Blitzscale team](/teams/blitzscale) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
+-   **You've been on your current team for at least a year.** You need time to go deep on something before you have fresh ideas to bring somewhere else.
+-   **Your current work is in a good spot.** If the thing you're working on is really hard, that's a reason to stick with it until it's in good shape. Everything you own should have a clear new owner before you go.
+
+#### How to move
+
+1. **Talk to your [Blitzscale team](/teams/blitzscale) member first.** Any move is at their discretion. They have the overview of which teams need help and where you'd be a good fit, and they make sure moves fit our hiring plans. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations.
+2. **Check [the proposed hires section](https://ops.posthog.dev/proposed-hires) in the ops platform** to see which teams currently have openings. You can also move to a team without an open role if Blitzscale thinks it makes sense.
+3. **Your old seat goes on the proposed hires board** so we can fill it with an internal or external hire. You need to be replaced in your current team before you can move. This is at discretion of Blitzscale.
+
+#### Moves because of a conflict
+
+If you have a conflict with someone, work it out with them directly first, or bring in your Blitzscale team member. A team move only happens if Blitzscale decides it's the only option. 
 
 ### Aren't most small teams way too small?
 

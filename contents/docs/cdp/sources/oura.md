@@ -12,9 +12,6 @@ sourceId: Oura
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Oura connector syncs your Oura Ring health data into PostHog, so you can analyze your health and activity metrics alongside your product data.
 

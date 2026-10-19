@@ -9,12 +9,6 @@ availability:
 sourceId: MicrosoftClarity
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Microsoft Clarity connector syncs engagement and frustration-signal metrics into PostHog's data warehouse. It pulls data from the [Clarity Data Export API](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-data-export-api) using a project-level API token.
 
 ## Adding a data source

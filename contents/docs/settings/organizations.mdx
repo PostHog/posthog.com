@@ -70,6 +70,24 @@ By default every time a member joins an organization in an [email-enabled PostHo
 
 If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
 
+### Member notification settings
+
+Organization admins and owners can choose which email notifications members receive. Find this under [**Settings** > **Organization** > **Members**](https://app.posthog.com/settings/organization-members#member-notifications), in the **Member notifications** section.
+
+A setting you choose here overrides the member's own preference, and the member can't change it back. Members get an in-app notification when you change their settings.
+
+- A rule can apply to one project only.
+- An override you set only affects emails sent by your organization. The member's other organizations keep their own choice, which the member cannot change while your override is in place.
+
+Organizations with the [Approvals](/docs/settings/approvals) feature see two additional notification settings:
+
+| Setting                    | Controls                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| **Approval requests**      | Emails sent to approvers when a change request needs their review                         |
+| **Change request updates** | Emails sent to requesters when their request is approved, rejected, expires, or goes live |
+
+> **Note:** Member notification settings are part of Member governance, which is available on the Boost, Scale, and Enterprise add-ons.
+
 ### Personal API key access
 
 Organization admins and owners can view all [personal API keys](/docs/api/personal-api-keys) that have access to their organization or its projects. This includes organization-scoped keys, project-scoped keys, and fully unscoped keys held by any member.

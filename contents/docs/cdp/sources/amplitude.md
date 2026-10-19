@@ -9,12 +9,6 @@ availability:
 sourceId: Amplitude
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Amplitude connector syncs your raw events, cohorts, and annotations into PostHog. It authenticates against Amplitude's Export API, Cohorts API, and Annotations API using your project's API key and secret key.
 
 ## Adding a data source

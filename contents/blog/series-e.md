@@ -6,6 +6,10 @@ author:
 featuredImageType: full
 tags:
   - PostHog news
+  - Founders
+  - Raising money
+crosspost:
+  - Founders
 ---
 
 Hello everyone!

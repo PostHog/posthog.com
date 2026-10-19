@@ -199,15 +199,18 @@ This request deletes all events of the person(s) captured before the deletion re
 
 #### Bulk delete response
 
-When using the [bulk_delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete), the API returns a response with details about the deletion operation:
+The [bulk_delete endpoint](/docs/api/persons#post-api-projects-project_id-persons-bulk_delete) returns a `202` once the request is accepted. Person records are not removed during the request. They are queued and deleted in the background, usually within a few minutes, so a successful call reports the matched persons in `persons_queued_for_deletion` and `persons_deleted` stays `0`. Treat `persons_queued_for_deletion` as the success signal, not `persons_deleted`. The endpoint reports failures in `deletion_errors` rather than with an error status, so check that list: a `202` with entries means those persons were not deleted and you should retry them.
 
-| Field                            | Type    | Description                                                                  |
-| -------------------------------- | ------- | ---------------------------------------------------------------------------- |
-| `persons_found`                  | integer | Number of persons matched by the provided IDs or distinct IDs                |
-| `persons_deleted`                | integer | Number of person records deleted. Returns 0 if `keep_person` was set to true |
-| `events_queued_for_deletion`     | boolean | Whether event deletion was queued for the matched persons                    |
-| `recordings_queued_for_deletion` | boolean | Whether recording deletion was queued for the matched persons                |
-| `deletion_errors`                | array   | List of any persons that could not be deleted, each containing `person_uuid` |
+| Field                            | Type    | Description                                                                                                                                                     |
+| -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `persons_found`                  | integer | Number of persons matched by the provided IDs or distinct IDs                                                                                                   |
+| `persons_queued_for_deletion`    | integer | Number of persons queued for deletion in the background. Their person records and distinct IDs are removed shortly after the request completes. `0` if `keep_person` was set to true |
+| `persons_deleted`                | integer | Number of person records deleted during the request itself. `0` when the deletion was queued or `keep_person` was set to true                                   |
+| `events_queued_for_deletion`     | boolean | Whether event deletion was queued for the matched persons                                                                                                       |
+| `recordings_queued_for_deletion` | boolean | Whether recording deletion was queued for the matched persons                                                                                                   |
+| `deletion_errors`                | array   | Persons whose deletion did not complete during the request, each containing `person_uuid` and the `step` that failed. Always empty when the deletion was queued |
+
+Deleting a single person with `DELETE /api/projects/:project_id/persons/:id` still removes the person during the request and returns an empty `202`.
 
 #### Checking deletion status
 

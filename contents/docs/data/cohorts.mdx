@@ -140,11 +140,14 @@ If you use [Replay Vision](/docs/replay-vision), you can save the users affected
 
 1. Go to [Replay Vision](https://app.posthog.com/replay-vision) and open any scanner.
 
-2. In the impact panel, click **Save as cohort** (for monitors) or click the cohort button next to a specific tag (for classifiers).
+2. On the scanner's **Overview** tab, save the cohort:
+   - **Monitors** – in the **Verdict mix** section, click **Save as cohort** on the verdict row you want (**Yes**, **No**, or **Inconclusive**, which shows only when the scanner has inconclusive results).
+   - **Classifiers** – click the **Save as cohort** icon button next to a category.
+   - **Scorers** – there is no button. Use the API or the `vision-scanners-affected-cohort-create` [MCP](/docs/replay-vision/mcp) tool with `min_score` and/or `max_score`.
 
 The cohort is a dated snapshot: it captures the users matched in the trailing window (default 30 days) and won't live-update as new observations come in. Calling it again creates a new cohort. See [scanner types](/docs/replay-vision/scanner-types) for details on what counts as "affected" for each type.
 
-> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support impact cohorts.
+> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support cohorts.
 
 ## Static and dynamic cohorts
 
@@ -246,6 +249,8 @@ This is useful for use cases like survey targeting, where you want a fixed snaps
 
 ### Dynamic cohorts
 
+Some dynamic cohorts also qualify as [realtime cohorts](/docs/data/realtime-cohorts), currently in beta, which PostHog keeps up to date as events arrive so feature flags can target them.
+
 Dynamic cohorts can be based on existing cohorts, and support the following criteria:
 
 #### Behavioral
@@ -290,6 +295,19 @@ For a complete list of all available operators, including semver operators for v
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
 
+## Copying a cohort to another project
+
+You can copy a saved cohort to another project in the same organization. This option shows only when your organization has more than one project.
+
+1. Open the cohort you want to copy.
+1. Open the actions sidebar.
+1. Click **Copy to another project**.
+1. Select the destination project.
+1. If the page lists dependencies, choose **Copy** or **Use existing** for each one.
+1. Click **Copy**.
+
+The original does not change, and the copy does not sync with it.
+
 ## Viewing cohort history
 
 You can view the edit history of any saved cohort by clicking the **History** tab on the cohort's page. The history log shows who made changes, what changed, and when. Tracked changes include cohort creation, deletion, name and description edits, matching criteria updates, type changes, and manual person additions or removals on static cohorts.
@@ -298,7 +316,7 @@ This is useful for auditing changes to cohort criteria over time or identifying 
 
 > **Note:** The **History** tab only appears on saved cohorts.
 
-For more details on activity tracking across PostHog, see the [activity logs](/docs/data/activity-log) documentation.
+For more details on activity tracking across PostHog, see the [activity logs](/docs/settings/activity-logs) documentation.
 
 ## FAQ
 
@@ -309,6 +327,8 @@ Dynamic cohorts are updated once every 24 hours.
 ### Can you use a dynamic cohort as a feature flag target?
 
 You cannot use dynamic cohorts that include behavioral or lifecycle criteria as a feature flag target. To target these users for a feature flag, A/B test, or survey, you can either duplicate the dynamic cohort as a static cohort or create a new static cohort directly from criteria using the **Criteria · One-time snapshot** option. Dynamic cohorts with only person property criteria can be used directly.
+
+This is changing. [Realtime cohorts](/docs/data/realtime-cohorts) let feature flags target cohorts built from simple event criteria, such as "completed `signed up` in the last 30 days". They're in early beta and rolling out gradually, so they aren't available in most projects yet.
 
 ### Can you use groups in cohorts?
 

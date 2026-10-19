@@ -69,6 +69,8 @@ Being an all-in-one platform has two further benefits:
 
 A BAA is available on PostHog's [platform packages](/platform-packages), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
+Health tech companies like [Juno](/customers/juno), an AI health assistant for people with chronic illness, use PostHog to find and fix bugs while user data stays masked and private.
+
 <WizardCTA />
 
 ### 2. Mixpanel

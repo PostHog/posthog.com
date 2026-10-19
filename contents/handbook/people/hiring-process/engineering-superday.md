@@ -91,7 +91,7 @@ You're allowed to use Google for reference, but we ask that you don't use AI too
 
 You can use AI tools during the project portion of the day -- we know this is how many engineers work. But you need to *understand* what you've built. During the check-in, we'll ask you to walk through your architecture, explain your decisions, and reason about your code. If you can't defend and explain your solution, it won't matter how polished it looks.
 
-For the debugging session, we ask that you don't use AI tools beyond basic autocomplete. We want to see how you reason about code.
+For the debugging session, we ask that you don't use AI tools. We want to see how you reason about code.
 
 ## What comes next
 

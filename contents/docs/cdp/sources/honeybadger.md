@@ -12,9 +12,6 @@ sourceId: Honeybadger
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Honeybadger connector syncs your error monitoring data – projects, errors (faults), error occurrences (notices), deployments, and uptime checks – into PostHog, so you can track error rates across environments and correlate error spikes with releases.
 

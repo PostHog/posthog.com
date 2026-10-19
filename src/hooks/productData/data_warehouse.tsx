@@ -7,13 +7,13 @@ import { getTool } from '../../data/tools'
 
 export const dataWarehouse = {
     ...getTool('data_warehouse'),
-    parentIcon: 'dataWarehouse',
     Icon: IconDatabase,
     type: 'data_warehouse',
+    categoryName: 'Sources',
     color: 'purple',
     colorSecondary: 'lilac',
     seo: {
-        title: 'Managed Warehouse - PostHog',
+        title: 'Warehouse - PostHog',
         description:
             'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },
@@ -52,7 +52,7 @@ export const dataWarehouse = {
     addonSliders: [
         {
             key: 'data_warehouse_historical',
-            label: 'Data warehouse historical syncs',
+            label: 'Historical syncs',
             sliderConfig: {
                 marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,

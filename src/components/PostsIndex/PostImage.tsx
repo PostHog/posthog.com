@@ -22,7 +22,7 @@ export default function PostImage({
     post,
     className = '',
     imgClassName = '',
-    width = 800,
+    width = 1600,
 }: PostImageProps): JSX.Element {
     const image = getImage(post.frontmatter.featuredImage?.childImageSharp ?? null)
     const publicURL = post.frontmatter.featuredImage?.publicURL

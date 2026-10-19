@@ -2,10 +2,18 @@
 
 The digital book format for pocket guides – the docs-site sibling of the marketing team's field
 guide microsites. Educational register, not marketing: the structure does the teaching, and the
-whole thing uses PostHog fonts and tokens only.
+reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
 
-**Every page of a book is an MDX file.** Nothing in this folder contains prose – these components
-are layout and vocabulary, the words all live in `contents/pocket-guides/`.
+**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
+Components here supply layout, interactions, and short labels for the data they display.
+
+The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
+stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example events and chart, while
+`PostHogInspector.tsx` provides the shared frame and event or identity details.
+`SessionReplayInspector.tsx` provides the playback-synced event timeline used beside a replay.
+Reader clicks only change local example state – they do not send practice events to PostHog.
+`TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
+be reviewed on both sites.
 
 ```
 contents/pocket-guides/<volume>/
@@ -21,7 +29,7 @@ contents/pocket-guides/<volume>/
 
 **One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
 off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volume is a directory
-plus a row in `src/constants/pocketGuides.ts` – no reader changes. The shelf counts a volume's
+plus a few registry entries (see [Adding a volume](#adding-a-volume)) – no reader changes. The shelf counts a volume's
 use cases by `pocketGuideOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
 
 **Teach inside the book.** A reader who leaves for the docs mid-page usually doesn't come back, so
@@ -37,6 +45,18 @@ the sibling SKILL.md), and every other volume authors its own in the `pocketGuid
 renders it with `<Action />` – today a PostHog AI prompt (`kind: prompt`) or a plain destination
 (`kind: link`). Both shapes also drive the pinned bar at the foot of the reader, so the page's
 action and the shortcut to it can't drift apart.
+
+## Adding a volume
+
+`pnpm test:pocket-guides` checks every rule below and runs in the deploy preview workflow.
+
+| Where | What | Why |
+|---|---|---|
+| `contents/pocket-guides/<id>/` | `index.mdx` at order 0 with `<Setup />` and `<Frontispiece />`, a 101 at order 1 | The reader builds the book from this directory |
+| `src/constants/pocketGuides.ts` | The shelf row | Cover, spine, and volume number |
+| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
+| `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard command for the volume, if it has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
+| `pocketGuideVolume` in `src/hooks/productData/<product>.tsx`, and `src/pages/docs/<product>/learn/[...chapter].tsx` | The docs Learn tab, for a volume with `docsProduct` | The product's docs link to the book it teaches |
 
 ## Authoring a page
 
@@ -78,6 +98,8 @@ after the prose.
 |---|---|
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
 | `<Eyebrow>` | The small line above a title-page heading |
+| `<Setup />` | The volume's wizard command, for the front matter |
+| `<Frontispiece />` | The volume's hedgehog illustration, for the title page |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
@@ -90,7 +112,11 @@ after the prose.
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
-Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
+
+Write code samples and tables as native Markdown in the prose. A figure is for an exhibit
+Markdown can't render, like annotated mock UI; `pocketGuides.test.ts` fails a figure whose only
+content is a code block or a table.
 
 ### How the reader lays a page out
 
@@ -107,12 +133,11 @@ on phones.
 
 ### Adding new content elements
 
-The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
-browser defaults – silently. When a guide introduces something new (a table was the first),
-check the rendered page, and prefer wrapping the element in the site's native styling over
-book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
-[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
-widths.
+The standalone reader applies the shared docs prose classes, and the Learn surface inherits
+them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
+When a guide introduces a new content element, check its rendered appearance against docs in
+light and dark mode and at narrow and wide widths. Keep book-specific mappings in
+[bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
 
 ### One MDX trap worth knowing
 
@@ -228,3 +253,46 @@ The report frontmatter contract and the `.md` agent-mirror constraints are docum
 **Adding a frontmatter field** needs a matching declaration in
 `gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
 pages declare.
+
+### Twig in Product Analytics
+
+The Product Analytics Learn hub previews three paths: an agent prompt, the embedded story, and
+the external Twig demo. Its landing page remains a choice page; story chapters render on child
+routes under `/docs/product-analytics/learn`, with the Learn tab active and the shared product
+sidebar providing chapter navigation. Legacy standalone Pocket Guide URLs redirect to those Learn
+routes, and bookshelf covers open the embedded introduction directly.
+
+The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
+`@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
+compact stay card, using local filter state and package photos. The examples place the labeled
+Twig view and Inspector side by side in wide containers and stack them in narrow containers.
+Reset clears captured events and restarts the automated visitor. The inspectors show event
+timestamps separately from custom properties. These examples do not send events to a PostHog
+project.
+
+The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView`, and
+`ProfileMenu` from the same package. PostHog.com owns the example identifiers, sessions, and
+person-linking state around those Twig views. The package does not call `identify`, `reset`, or
+capture events.
+
+The Trends and funnels chapter uses `ProductAnalyticsTrendsFunnelsExhibits.tsx` for three small
+figures. `FilterUsersTrendFigure` reduces Week 2's 19 filter events to eight people beside a
+compact Trends view based on the PostHog insight controls. Edgar's original Forest event, with
+its filter, identity, and session fields, is available as a drill-down. The compact time plot compares
+five and eight unique users; Edgar's repeated selections still count as one person
+in the second week. The drill-down has a caption and keeps its back control inside the Inspector header.
+These panels remain side by side; narrow windows show a sideways-scroll cue and snap to each panel.
+`BookingStepsFigure` reuses
+Twig's `StayCardContent` and shared primary button styling. Once the figure is mostly visible, it waits
+three seconds and plays a confirmed request followed by a clearly labeled, separate failed request.
+The sequence plays once, with event arrivals in the Inspector. Selecting Book stay pauses
+autoplay and switches between the two outcomes; reduced motion starts on the confirmed outcome.
+The booking response is simulated locally; it never submits a booking or captures events. `BookingFunnelFigure` pairs the
+10-to-six person funnel result with a shared Inspector that opens one of the four drop-offs and
+matches its `booking_started` event to a failed simulated response by `request_id`. These are guide-owned teaching fixtures, not
+new Twig instrumentation or a live PostHog query. The failed fixture uses `user_409` and
+`req-204`; Edgar's confirmed fixture uses `user_812` and `req-203`.
+
+Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
+and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
+review the Twig views on both sites at narrow and wide widths, in both themes.

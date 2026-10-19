@@ -1,6 +1,21 @@
 import { ProductVideo } from '../ProductVideo'
 
 import Term from './terms'
+import LessonFooter from './LessonFooter'
+import TwigFilterFigure from './TwigFilterFigure'
+import TwigEventFigure from './TwigEventFigure'
+import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
+import {
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionGroupingFigure,
+    SessionReplayLinkFigure,
+} from './ProductAnalyticsIdentityExhibits'
+import {
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+} from './ProductAnalyticsTrendsFunnelsExhibits'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -18,15 +33,17 @@ import {
     LoopFigure,
     PersonsModalFigure,
     RedirectLoopFigure,
+    ReleaseConditionsFigure,
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
     TriggerGroupFigure,
+    VariantsFigure,
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
-import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
+import { AskAI, CTA, ScannerStarter, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -43,6 +60,19 @@ export const bookMdxComponents = {
     Eyebrow,
     Frontispiece,
     Fig,
+    TwigFilterFigure,
+    TwigEventFigure,
+    AutocaptureFigure,
+    FilterPropertiesFigure,
+    DestinationChartFigure,
+    SessionGroupingFigure,
+    IdentifySavedStayFigure,
+    ResetIdentityFigure,
+    SessionReplayLinkFigure,
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+    LessonFooter,
     ReportFigure,
     AnatomyFigure,
     DetailFigure,
@@ -58,6 +88,8 @@ export const bookMdxComponents = {
     PersonsModalFigure,
     ScreenshotFigure,
     TriggerGroupFigure,
+    ReleaseConditionsFigure,
+    VariantsFigure,
     RedirectLoopFigure,
     LoopFigure,
     Watches,
@@ -71,7 +103,7 @@ export const bookMdxComponents = {
     ViewRecording,
     AskAI,
     CTA,
-    ScannerTemplate,
+    ScannerStarter,
     Term,
     ...proseComponents,
 }

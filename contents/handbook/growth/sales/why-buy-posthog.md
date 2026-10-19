@@ -82,7 +82,7 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 ## Per-product sales enablement
 
-The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+The Developer Marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
 
 - [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
 

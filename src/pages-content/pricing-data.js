@@ -82,7 +82,10 @@ const faqs = [
                     retained for 90 days. The Boost and Scale add-ons can increase this to up to one year. The
                     Enterprise add-on can increase retention to 5 years.
                 </p>
-                <p>Logs are retained for 14 days.</p>
+                <p>
+                    Logs are retained for 14 days by default. You can set custom retention per service or per source at
+                    $0.05/GB per month retained.
+                </p>
             </>
         ),
     },
@@ -195,7 +198,7 @@ const faqs = [
             <p>
                 Usage is calculated on a per-product level. Events for product and web analytics, recordings for session
                 replay, requests for feature flags and experiments, exceptions for error tracking, responses for
-                surveys, synced rows for data warehouse, messages for workflows, and GB ingested for logs.
+                surveys, synced rows for sources, messages for workflows, and GB ingested for logs.
             </p>
         ),
     },

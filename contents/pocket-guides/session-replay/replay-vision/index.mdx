@@ -103,23 +103,23 @@ A <Term name="scout" /> lets agents monitor those signals and act on them on you
 You can learn more about scouts in the [self-driving pocket guide](/pocket-guides/self-driving/101). You can read more about the report shown above in [The page people can't leave](/pocket-guides/self-driving/pages-people-cant-leave).
 
 
-## Scanner templates
+## Scanner starting points
 
-Here are some templates to give you inspiration and get you started.
+Here are some starting points to give you inspiration. Each one opens Replay Vision with the goal filled in, and PostHog AI drafts the scanner for your product.
 
-<ScannerTemplate name="Dead ends" template="dead_end" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
+<ScannerStarter name="Dead ends" goal="Find sessions where people get stuck on a page with no clear next step" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
 
-<ScannerTemplate name="User intent" template="user_intent" type="Classifier" asks="What was the user trying to do?" answers="One tag: browsing, purchasing, support_seeking" property="scanner_output_tags" />
+<ScannerStarter name="User intent" goal="Find out what people are trying to do when they visit" type="Classifier" asks="What was the user trying to do?" answers="One tag: browsing, purchasing, support_seeking" property="scanner_output_tags" />
 
-<ScannerTemplate name="Session outcome" template="session_outcome" type="Classifier" asks="How did this session end?" answers="One tag: task_completed, task_abandoned, blocked_by_error" property="scanner_output_tags" />
+<ScannerStarter name="Session outcome" goal="Find out whether people finish what they came to do, give up, or hit an error" type="Classifier" asks="How did this session end?" answers="One tag: task_completed, task_abandoned, blocked_by_error" property="scanner_output_tags" />
 
-<ScannerTemplate name="Frustration score" template="frustration_score" type="Scorer" asks="How much friction did they hit?" answers="A number on a scale you set" property="scanner_output_score" />
+<ScannerStarter name="Frustration score" goal="Find out where people get frustrated and how badly" type="Scorer" asks="How much friction did they hit?" answers="A number on a scale you set" property="scanner_output_score" />
 
-<ScannerTemplate name="Session summary" template="session_summary" type="Summarizer" asks="What happened in this session?" answers="A title and a short narrative" property="scanner_output_title, scanner_output_summary" />
+<ScannerStarter name="Session summary" goal="Summarize what people do in each session and where they run into trouble" type="Summarizer" asks="What happened in this session?" answers="A title and a short narrative" property="scanner_output_title, scanner_output_summary" />
 
 <SeeAlso>
 
-More: [Find replays with PostHog AI](/docs/session-replay/find-replays-ai) · [Get started](/docs/replay-vision/start-here) · [Creating scanners](/docs/replay-vision/creating-scanners) · [Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations) · [Calibration](/docs/replay-vision/calibration) · [Digests and alerts](/docs/replay-vision/actions) · [Pocket guide to self-driving](/pocket-guides/self-driving/101) · [Signal sources](/docs/self-driving/inbox/sources) · [Scouts](/docs/self-driving/scouts)
+More: [Find replays with PostHog AI](/docs/session-replay/find-replays-ai) · [Get started](/docs/replay-vision/start-here) · [Creating scanners](/docs/replay-vision/creating-scanners) · [Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations) · [Calibration](/docs/replay-vision/calibration) · [Scanner scouts](/docs/replay-vision/scouts) · [Alerts](/docs/replay-vision/alerts) · [Pocket guide to self-driving](/pocket-guides/self-driving/101) · [Signal sources](/docs/self-driving/inbox/sources) · [Scouts](/docs/self-driving/scouts)
 
 </SeeAlso>
 

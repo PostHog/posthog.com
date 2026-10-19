@@ -58,6 +58,7 @@ interface ChatContext {
 
 export interface ChatParams {
     path: string
+    sessionKey?: number
     context?: ChatContext[]
     quickQuestions?: string[]
     chatId?: string
@@ -541,40 +542,6 @@ const appSettings: AppSettings = {
             },
         },
     },
-    '/ko': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 960,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
-        },
-    },
     '/products': {
         size: {
             min: {
@@ -769,40 +736,6 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-        },
-    },
-    '/careers-og': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 800,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
         },
     },
     '/paint': {
@@ -1107,41 +1040,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/credits': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 300,
-                height: 700,
-            },
-            max: {
-                width: 300,
-                height: 700,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/kbd': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 600,
-                height: 625,
-            },
-            max: {
-                width: 600,
-                height: 625,
-            },
-            fixed: true,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-    },
     'research-talk': {
         size: {
             min: {
@@ -1163,28 +1061,6 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
-        toolbar: true,
-        size: {
-            min: {
-                width: 960,
-                height: 682,
-            },
-            max: {
-                width: 960,
-                height: 682,
-            },
-            fixed: true,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-        modal: {
-            type: 'standard',
-        },
-    },
-    // Opened from the desktop icon via addWindow — not a route.
-    'the-posthog': {
         toolbar: true,
         size: {
             min: {
@@ -1704,6 +1580,15 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
+    // The forum's sidebar starts at the top of the window, so each forum route gets a title bar above it.
+    '/forum': { toolbar: true },
+    '/forum/following': { toolbar: true },
+    '/forum/drafts': { toolbar: true },
+    '/forum/alerts': { toolbar: true },
+    '/forum/new': { toolbar: true },
+    '/forum/t/:topic': { toolbar: true },
+    '/forum/t/:topic/tags': { toolbar: true },
+    '/forum/p/:permalink': { toolbar: true },
     '/ai': {
         toolbar: true,
     },
@@ -1735,6 +1620,19 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
+const readStoredSiteSettings = (): Partial<SiteSettings> => {
+    if (typeof window === 'undefined') {
+        return {}
+    }
+    try {
+        const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+    } catch (error) {
+        console.error('Failed to read site settings:', error)
+        return {}
+    }
+}
+
 const getInitialSiteSettings = (): SiteSettings => {
     const siteSettings: SiteSettings = {
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
@@ -1747,7 +1645,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         screensaverDisabled: true,
         reduceTransparency: false,
         scrollbars: 'system',
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...readStoredSiteSettings(),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
@@ -2431,7 +2329,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     // than as a managed window. Opening a chat just stores its params and flips the
     // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
     const openNewChat = (params: ChatParams) => {
-        setChatParams(params)
+        setChatParams((previous) => ({ ...params, sessionKey: (previous?.sessionKey ?? 0) + 1 }))
         setChatOpen(true)
     }
 
@@ -2628,11 +2526,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 e.preventDefault()
                 // Open display options
                 navigate('/display-options', { state: { newWindow: true } })
-            }
-            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open keyboard shortcuts pane
-                navigate('/kbd', { state: { newWindow: true } })
             }
 
             // Theme toggle with m key

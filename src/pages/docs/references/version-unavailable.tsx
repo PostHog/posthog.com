@@ -10,21 +10,23 @@ import { parseVersionedReferenceSlug } from 'components/SdkReferences/utils'
  * publishes. Only the newest few versions per SDK are built, so older ones age out — see
  * MAX_VERSIONS_PER_SDK in gatsby/sourceNodes.ts.
  *
- * The rewrite is transparent, so the requested URL is still in the address bar. One page serves
- * every SDK, which is why the copy below is generic and the specifics are filled in on the client.
+ * One page serves every SDK, which is why the copy below is generic and the specifics are filled
+ * in on the client.
  */
 
 export default function VersionUnavailable(): JSX.Element {
-    // The rewrite is server-side, so the address bar still holds the requested versioned URL —
-    // that path is the only place the SDK and version survive. Resolved after mount because one
-    // static page serves every SDK; filling it in during render would break hydration.
+    // The rewrite is server-side, but Gatsby then replaces the path in the address bar with this
+    // page's own path, and keeps only the query string. The navigation timing entry records the
+    // URL the document was requested with, so it survives that replacement. Resolved after mount
+    // because one static page serves every SDK; filling it in during render would break hydration.
     // `?ref=` is a local override, so the page can be viewed without the rewrite in front of it.
     const [requested, setRequested] = useState<{ sdk: string; version: string } | null>(null)
 
     useEffect(() => {
+        const requestedUrl = window.performance.getEntriesByType('navigation')[0]?.name
         const override = new URLSearchParams(window.location.search).get('ref')
         setRequested(
-            parseVersionedReferenceSlug(window.location.pathname) ??
+            (requestedUrl ? parseVersionedReferenceSlug(new URL(requestedUrl).pathname) : null) ??
                 (override ? parseVersionedReferenceSlug(override) : null)
         )
     }, [])

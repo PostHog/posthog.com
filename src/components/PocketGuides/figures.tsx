@@ -13,6 +13,7 @@ import Divergence, { DivergenceSeries } from './Divergence'
 import Figure from './Figure'
 import FactorSplit, { FactorSplitRow } from './FactorSplit'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
+import { ReleaseConditionsForm, VariantsForm } from './FeatureFlagForms'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
 import EvalRuns, { EvalRun } from './EvalRuns'
@@ -58,16 +59,22 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
     )
 }
 
+// `<Figure>` is `not-prose`, so the docs table styles never reach a table inside the frame.
+// Illustrative rows, not live data: small uppercase headers over full-width, divided rows. The
+// frame clips overflow, so a table wider than a phone scrolls sideways instead of losing columns.
+const EXAMPLE_TABLE =
+    'overflow-x-auto [&_table]:w-full [&_table]:border-collapse [&_table]:text-left [&_table]:text-[0.85em] [&_thead]:border-b [&_thead]:border-primary [&_th]:py-1.5 [&_th]:pr-3 [&_th]:text-[0.85em] [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wide [&_th]:text-secondary [&_th:last-child]:pr-0 [&_td]:border-b [&_td]:border-primary/30 [&_td]:py-1.5 [&_td]:pr-3 [&_td]:text-primary [&_td:last-child]:pr-0'
+
 /**
- * A worked example illustrating what an answer looks like – arbitrary MDX content (usually a
- * table) in a numbered frame. A named wrapper around `<Fig>`, not `<Fig>` itself: the reader's
+ * A worked example illustrating what an answer looks like, in a numbered frame. A lone code block
+ * or table belongs in the prose as Markdown instead (see README). A named wrapper around `<Fig>`, not `<Fig>` itself: the reader's
  * wrapper only positions a `<LeftPage>` child by its `<SeeFig>` citation when its component name
  * ends in "Figure" – ambient `<Fig>` prints at the top of the page, uncited.
  */
 export function ExampleFigure({ n = 1, caption, legend, children }: FigProps): JSX.Element {
     return (
         <Fig n={n} caption={caption} legend={legend}>
-            {children}
+            <div className={EXAMPLE_TABLE}>{children}</div>
         </Fig>
     )
 }
@@ -430,6 +437,38 @@ export function TriggerGroupFigure({
         // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
         <Fig n={n} caption={caption} legend={legend}>
             <TriggerGroupForm {...group} />
+        </Fig>
+    )
+}
+
+export function ReleaseConditionsFigure({
+    n = 1,
+    caption,
+    legend,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <ReleaseConditionsForm />
+        </Fig>
+    )
+}
+
+export function VariantsFigure({
+    n = 1,
+    caption,
+    legend,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <VariantsForm />
         </Fig>
     )
 }

@@ -32,7 +32,7 @@ The Monday all-hands features a few regular sections and is recorded in [this do
 - **Acknowledgements:** Opportunity to give [kudos](/handbook/company/kudos) to your colleagues
 - **Topic of the day:** <SmallTeam slug="blitzscale" /> [talks through a particular topic](/handbook/exec/all-hands-topics)
 - **Q&A:** Ask <SmallTeam slug="blitzscale" /> anything you want
-- **Demos:** Show us what you've worked on last week - anyone can demo, though we sometimes ask for a particular theme to tie in with the topic of the day
+- **Demos:** Show us what you've worked on last week – anyone can demo, though we sometimes ask for a particular theme to tie in with the topic of the day. At the end of the call, the host asks for demos. To demo, raise your hand in Google Meet. Demos go in the order that hands went up.
 
 When public holidays overlap around the world and a lot of people are out, we'll move the all-hands to another day that week. Our rule of thumb is to reschedule when 35% or more of the team is away.
 

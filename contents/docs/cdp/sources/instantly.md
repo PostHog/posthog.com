@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Instantly
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-
-<AlphaRelease />
 
 The Instantly connector syncs your cold email outreach data – campaigns, leads, emails, sending accounts, lead lists, and campaign analytics – from [Instantly](https://instantly.ai) into PostHog.
 

@@ -89,7 +89,7 @@ By the end of the week they should:
 
 - Know how to use the data we have to tell whether a customer is getting value from PostHog, prioritize their book, and plan next steps 
 - Know where to find answers and how to verify them
-- Have their own Vitally / Customer Analytics views set up, and a first outreach drafted - maybe even sent! 
+- Have their own Customer Analytics views set up, and a first outreach drafted - maybe even sent! 
  
 Sessions tend to work best as observe, do, review - you do it once, they try it on their own, and you give feedback.
 
@@ -129,7 +129,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 - **Working with support** - how tickets flow, [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues)
 - **Quarterly goal brainstorm** - useful when they join near the start of a quarter
 - **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices, the spike detector
-- **Vitally mechanics** - playbook indicators, renewal alerts
+- **Customer Analytics mechanics** - tags like `churn risk`, the renewal alerts in #sales-alerts
 
 ## First month
 

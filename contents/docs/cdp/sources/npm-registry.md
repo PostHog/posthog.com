@@ -9,12 +9,6 @@ availability:
 sourceId: NpmRegistry
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Pull daily download counts and published-version metadata for npm packages into the PostHog data warehouse. This lets you join npm analytics with your product data in queries, insights, and dashboards.
 
 npm's read APIs are public, so no credentials are required.

@@ -12,9 +12,6 @@ sourceId: Bunny
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The bunny.net connector syncs your bunny.net data – pull zones, storage zones, DNS zones, and Stream video libraries – into PostHog, so you can analyze your content delivery and streaming data alongside your product data.
 

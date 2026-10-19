@@ -12,9 +12,6 @@ sourceId: Tempo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Tempo connector syncs your time-tracking and resource-planning data from [Tempo](https://www.tempo.io) for Jira Cloud into the PostHog Data warehouse – worklogs, accounts, customers, teams, plans, and work schemes – so you can analyze logged and planned time alongside your product data.
 

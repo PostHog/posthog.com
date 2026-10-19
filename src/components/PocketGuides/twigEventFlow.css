@@ -1,0 +1,177 @@
+.twig-click-demo .twig-click-before-filter,
+.twig-click-demo .twig-click-target-filter,
+.twig-click-demo .twig-click-before-stay,
+.twig-click-demo .twig-click-after-stay,
+.twig-click-demo .twig-click-pointer,
+.twig-click-demo .twig-click-ring {
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+}
+
+.twig-click-demo .twig-click-before-filter {
+    animation-name: twig-filter-before;
+}
+
+.twig-click-demo .twig-click-target-filter {
+    animation-name: twig-filter-after;
+}
+
+.twig-click-demo .twig-click-before-stay {
+    opacity: 0;
+    animation-name: twig-stay-before;
+}
+
+.twig-click-demo .twig-click-after-stay {
+    animation-name: twig-stay-after;
+}
+
+.twig-click-demo .twig-click-pointer {
+    opacity: 0;
+    animation-name: twig-pointer-click;
+}
+
+.twig-click-demo .twig-click-ring {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-color: #ffa81c;
+    opacity: 0;
+    animation-name: twig-click-ring;
+}
+
+@keyframes twig-filter-before {
+    0%,
+    36% {
+        background: #2d2b29;
+        border-color: #2d2b29;
+        color: #f7eddf;
+    }
+    43%,
+    90% {
+        background: transparent;
+        border-color: #d7c8b6;
+        color: #2d2b29;
+    }
+    100% {
+        background: #2d2b29;
+        border-color: #2d2b29;
+        color: #f7eddf;
+    }
+}
+
+@keyframes twig-filter-after {
+    0%,
+    36% {
+        background: transparent;
+        border-color: #d7c8b6;
+        color: #2d2b29;
+        transform: scale(1);
+    }
+    39% {
+        background: transparent;
+        border-color: #d7c8b6;
+        color: #2d2b29;
+        transform: scale(0.94);
+    }
+    43%,
+    90% {
+        background: #2d2b29;
+        border-color: #2d2b29;
+        color: #f7eddf;
+        transform: scale(1);
+    }
+    100% {
+        background: transparent;
+        border-color: #d7c8b6;
+        color: #2d2b29;
+        transform: scale(1);
+    }
+}
+
+@keyframes twig-stay-before {
+    0%,
+    39% {
+        opacity: 1;
+    }
+    45%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes twig-stay-after {
+    0%,
+    39% {
+        opacity: 0;
+    }
+    45%,
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes twig-pointer-click {
+    0%,
+    13% {
+        opacity: 0;
+        transform: translate(2.5rem, 2rem);
+    }
+    19% {
+        opacity: 1;
+        transform: translate(2.5rem, 2rem);
+    }
+    35% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    39% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.85);
+    }
+    43%,
+    55% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    63%,
+    100% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes twig-click-ring {
+    0%,
+    34% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    38% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    48%,
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+    .twig-click-demo .twig-click-before-filter,
+    .twig-click-demo .twig-click-target-filter,
+    .twig-click-demo .twig-click-before-stay,
+    .twig-click-demo .twig-click-after-stay,
+    .twig-click-demo .twig-click-pointer,
+    .twig-click-demo .twig-click-ring {
+        animation: none;
+    }
+
+    .twig-click-demo .twig-click-before-stay,
+    .twig-click-demo .twig-click-pointer,
+    .twig-click-demo .twig-click-ring {
+        opacity: 0;
+    }
+}

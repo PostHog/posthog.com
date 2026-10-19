@@ -122,7 +122,7 @@ But that's not all, if you're using Zendesk then you could, in the future, add t
 
 ## The referral scheme
 
-<BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
+<BuiltBy people={["Ben White", "Raquel Smith", "Joe Black"]} />
 
 Everyone loves a pyramid scheme, right?! 
 

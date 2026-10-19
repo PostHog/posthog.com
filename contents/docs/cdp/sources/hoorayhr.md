@@ -12,9 +12,6 @@ sourceId: HoorayHR
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The HoorayHR connector syncs your HR data (employees, time off, sick leave, contracts, time tracking, and more) into the PostHog Data warehouse, so you can analyze it alongside your product data.
 

@@ -67,10 +67,13 @@ export const query = graphql`
                     data {
                         attributes {
                             label
+                            slug
                         }
                     }
                 }
                 githubUrls
+                tags
+                publishedAt
                 githubPRMetadata {
                     number
                     html_url

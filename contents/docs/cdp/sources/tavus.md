@@ -9,12 +9,6 @@ availability:
 sourceId: Tavus
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Tavus source is currently in alpha. It has been tested against Tavus's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
 The Tavus connector syncs your AI video generation data into PostHog, including videos, replicas (trained digital likenesses), personas (conversational AI configurations), and conversations (real-time CVI sessions).
 
 ## Adding a data source

@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import mcpToolsData from '../../../../data/mcp-tools.json'
-import { LabeledList } from '../helpers'
+import { LabeledList, SECTION_H2 } from '../helpers'
 import type { SectionComponentProps } from '../types'
 
 const firstLine = (s: string) => s.split('\n')[0]
@@ -95,7 +95,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">AI prompts</h2>
+            <h2 className={SECTION_H2}>AI prompts</h2>
             {ai?.intro && (
                 <p className="text-base text-secondary mb-4">
                     {ai.intro} Works in{' '}

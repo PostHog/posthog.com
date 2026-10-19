@@ -29,6 +29,8 @@ In PostHog, go to the [feature flag tab](https://app.posthog.com/feature_flags) 
 
 > **Using experiments:** If you want to track the impact your rollout has on key metrics, you can create an experiment for it. After doing this, you can edit the underlying feature flag to match your first phase like you do in a [holdout test](/tutorials/holdout-testing).
 
+For a real example, read how [Runable](/customers/runable) rolled out a new pricing page to a small share of users behind a flag, then turned it off when the data showed it hurt conversion.
+
 After creating your flag, go to your app to implement it. For example, in a Next.js app, your feature might look like this:
 
 ```js
@@ -71,7 +73,7 @@ To create a cohort, go to the [cohorts tab](https://app.posthog.com/cohorts) and
 
 Once created, repeat for the rest of your phases. You can then use the cohorts as the release conditions in feature flags and swap them out as the phased rollout progresses.
 
-> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag).
+> **Note:** You cannot use dynamic behavioral or lifecycle cohorts (based on completed events) with feature flags. Read more details in the [feature flag documentation](/docs/feature-flags/troubleshooting#why-cant-i-use-a-cohort-with-behavioral-or-lifecycle-filters-in-my-feature-flag). [Realtime cohorts](/docs/data/realtime-cohorts) lift this limit for cohorts built from simple event criteria, but they're in early beta and aren't available in most projects yet.
 
 ## Further reading
 

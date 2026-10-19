@@ -33,13 +33,16 @@ If you have any questions as you go, ping your colleagues for support in your te
 
 ## Using MS Teams
 
-Some customers may wish to use MS Teams rather than Slack. SupportHog works in Teams without a separate app - as long as SupportHog is in our Teams instance, customers can raise tickets by mentioning `@SupportHog` in a channel thread. Note that the :ticket: emoji reaction is Slack-only; in Teams customers should `@mention` SupportHog to raise a ticket.
+Some customers may wish to use MS Teams rather than Slack. SupportHog works in Teams without a separate app - as long as SupportHog is in our Teams instance, customers can raise tickets by mentioning `@SupportHog` in a channel thread. For shared channels, you must also add the channel to the SupportHog polling list (see below). Note that the :ticket: emoji reaction is Slack-only; in Teams customers should `@mention` SupportHog to raise a ticket.
 
 First you will need an MS Teams licence - ask Simon, or Dana for one. Then follow these steps:
 
 1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]`. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
-2. Test that mentioning `@SupportHog` in the channel raises a ticket correctly before adding the customer.
-3. Once you've confirmed it's working, invite the relevant customer folks by adding them as members to the team!
+2. If the channel is a shared channel (for example, a channel shared with the customer's own Teams tenant), Teams does not send SupportHog events for it. Add the channel to the polling list in [SupportHog Teams settings](https://us.posthog.com/project/2/support/settings#channel=teams) so that SupportHog polls it for new messages. If you do not do this, `@SupportHog` mentions in the channel do not create tickets.
+3. Test that mentioning `@SupportHog` in the channel raises a ticket correctly before adding the customer.
+4. Once you've confirmed it's working, invite the relevant customer folks by adding them as members to the team!
+
+If a customer says that `@SupportHog` did not create a ticket in Teams, first make sure that their channel is in the polling list.
 
 ## Onboard Your Customer to Slack Support
 

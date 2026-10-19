@@ -12,9 +12,6 @@ sourceId: SmartEngage
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The SmartEngage connector syncs your marketing automation data into the PostHog Data warehouse, so you can analyze your avatars, tags, custom fields, and automation sequences alongside your product data.
 
