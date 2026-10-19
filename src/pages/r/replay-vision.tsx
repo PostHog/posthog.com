@@ -1,77 +1,484 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
+import type { CarouselSlide as CarouselSlideType } from 'components/Products/ReaderViewProduct/types'
+import CarouselSlide from 'components/Products/ReaderViewProduct/CarouselSlide'
+import TabbedCarousel from 'components/TabbedCarousel'
+import { Plans, PricingCalculator } from 'components/Products/ReaderViewProduct/templates'
+import { PricingTLDR, PricingPlans, PricingCredits } from 'components/ReplayVision/PricingSections'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { CallToAction } from 'components/CallToAction'
-import OSButton from 'components/OSButton'
 import Link from 'components/Link'
-import Glow from 'components/Glow'
-import Label from 'components/Label'
 import WizardCommand from 'components/WizardCommand'
 import CloudinaryImage from 'components/CloudinaryImage'
+import CustomerLogo from 'components/CustomerLogo'
+import SlotMachineText from 'components/SlotMachineText'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { PRODUCT_SURFACE_H1, SECTION_H2 } from 'components/Products/ReaderViewProduct/helpers'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { IconPop } from 'components/Code/IconPop'
+import { ChoppyReveal } from 'components/Code/ChoppyReveal'
+import { Receipt } from 'components/Code/Receipt'
+import { SignalsCallout, type CalloutItem } from 'components/Code/SignalsCallout'
+import { DottedConnection } from 'components/Code/DottedConnection'
+import { StickerTombstone } from 'components/Stickers/Stickers'
+import useProduct from 'hooks/useProduct'
+import { useCustomers } from 'hooks/useCustomers'
 import { sessionReplay } from 'hooks/productData/session_replay'
+import { replayVision } from 'hooks/productData/replay_vision'
 import {
+    IconBell,
+    IconCheck,
     IconCheckCircle,
     IconCode,
+    IconCursorClick,
     IconDocument,
     IconFlask,
+    IconGraph,
+    IconLetter,
+    IconList,
     IconMagic,
+    IconPlusSquare,
+    IconTerminal,
     IconTrending,
+    IconVideoCamera,
     IconWarning,
+    IconX,
 } from '@posthog/icons'
-import opportunityMiner from '../../images/replay-vision-opportunity-miner.png'
 
 // Paid-search landing page for "session replay" ads that point at Replay Vision.
-// Built from the product page pieces (`components/Products/ReaderViewProduct`) so it
-// matches /session-replay and /replay-vision. Not linked from the nav, so it's noindex.
+// Built on the /slack page template (centered ReaderView column, highlighted
+// headings) with the /desktop opening narrative ("The old way" → "The PostHog way")
+// and a small version of the /mcp terminal. Not in the nav, so it's noindex.
 
 const TITLE = 'The AI that watches session recordings for you'
-const FREE_TIER =
-    '5,000 recordings free every month, forever. 2,500 Replay Vision credits free every month for a limited time.'
+const FREE_TIER = '5,000 recordings and 2,500 Replay Vision credits free every month.'
+const SIGNUP_URL = 'https://app.posthog.com/signup'
 
-// Same image as the Replay Vision pricing footer CTA.
-const FOOTER_IMAGE =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png' as const
+// Same customers as the /r/session-replay ad page.
+const CUSTOMER_SLUGS = ['elevenlabs', 'kilocode', 'juicebox', 'exa']
+
+const IMAGES = {
+    projectorHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/projector_movie_noir_b2dd613e79.png',
+    monitorsHog:
+        'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png',
+    // Same hogs that frame the /desktop receipt.
+    lemonHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/lemon_9cb7b3a156.png',
+    bananaHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/banana_relax_83149feac6.png',
+} as const
+
+// ─────────────────────────────────────────────
+// Small helpers, same styles as /slack and /desktop
+// ─────────────────────────────────────────────
+
+const Highlight = ({ children }: { children: React.ReactNode }) => (
+    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
+)
+
+// Keyboard key / badge (the "Build ↵" chip on /desktop).
+const KeyBadge = ({ children }: { children: React.ReactNode }) => (
+    <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-sans font-medium align-middle mx-0.5 relative -top-0.5 bg-[#1d1f27] text-white dark:bg-white dark:text-[#1d1f27]">
+        {children}
+    </span>
+)
+
+// Icon that sits in a heading's text flow and pops in (the tombstone on /desktop).
+const InlineIcon = ({
+    icon: Icon,
+    children,
+    className = '',
+}: {
+    icon: React.ComponentType<{ className?: string }>
+    children?: React.ReactNode
+    className?: string
+}) => (
+    <span className="inline-flex items-baseline gap-0.5 whitespace-nowrap">
+        <IconPop>
+            <Icon className={`size-7 inline-block align-middle relative top-1.5 ${className}`} />
+        </IconPop>
+        {children}
+    </span>
+)
+
+// Yellow callout inside a carousel slide (the "dopamine mode" box on /desktop).
+const SlideCallout = ({ children }: { children: React.ReactNode }) => (
+    <div className="mt-5 rounded border border-yellow bg-yellow/10 px-3 py-2.5 text-sm text-secondary">{children}</div>
+)
+
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+    <h2 className="text-2xl font-bold mt-0 mb-4">{children}</h2>
+)
+
+const CARD = 'border border-primary rounded-md p-4 bg-primary'
 
 const scrollToInstall = () => {
     const el = document.getElementById('install')
     if (el) {
         window.history.pushState(null, '', '#install')
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        // Scroll only the reader's viewport. `scrollIntoView` also scrolls the
+        // outer app containers and overshoots.
+        const viewport = el.closest('[data-radix-scroll-area-viewport]')
+        if (viewport) {
+            const top = viewport.scrollTop + el.getBoundingClientRect().top - viewport.getBoundingClientRect().top
+            viewport.scrollTo({ top, behavior: 'smooth' })
+        } else {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
     }
 }
 
-const steps = [
+const CTAButtons = () => (
+    <div className="flex flex-wrap items-center gap-3">
+        <CallToAction to={SIGNUP_URL} size="sm" state={{ newWindow: true, initialTab: 'signup' }}>
+            Get started free
+        </CallToAction>
+        <CallToAction type="secondary" size="sm" onClick={scrollToInstall}>
+            Install with AI
+        </CallToAction>
+    </div>
+)
+
+// ─────────────────────────────────────────────
+// Hero
+// ─────────────────────────────────────────────
+
+const HeroSection = () => {
+    const { getCustomers } = useCustomers()
+
+    return (
+        <section id="overview" className="not-prose w-full tracking-[-0.0125em]">
+            <div className="flex flex-col items-start gap-6 @4xl/reader-content:flex-row @4xl/reader-content:items-center @4xl/reader-content:gap-8">
+                <div className="@4xl/reader-content:flex-1">
+                    <p className="text-sm font-semibold text-secondary m-0 mb-3 flex items-center gap-1.5">
+                        <IconPop show delay={200}>
+                            <sessionReplay.Icon className={`size-5 text-${sessionReplay.color}`} />
+                        </IconPop>
+                        Session Replay
+                        <IconPop show delay={450} className="ml-3">
+                            <replayVision.Icon className={`size-5 text-${replayVision.color}`} />
+                        </IconPop>
+                        Replay Vision
+                    </p>
+                    <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:text-3xl">{TITLE}</h1>
+                    <p className="mt-0 mb-4">
+                        Record what people do in your product: clicks, scrolls, form inputs, page views, network
+                        requests, and console logs. Then point an AI at the sessions you care about, and get back
+                        observations you can query, chart, and alert on.
+                    </p>
+                    <CTAButtons />
+                    <p className="text-sm text-secondary mt-3 mb-0">5,000 recordings free every month, forever.</p>
+                </div>
+                <div className="w-full max-w-xs mx-auto @4xl/reader-content:mx-0 @4xl/reader-content:w-[38%] @4xl/reader-content:max-w-none">
+                    <CloudinaryImage
+                        src={IMAGES.monitorsHog}
+                        alt="A detective hedgehog watching a wall of monitors"
+                        className="w-full"
+                        imgClassName="w-full h-auto"
+                    />
+                </div>
+            </div>
+
+            {/* Logo row and caption from the /r/session-replay ad page. */}
+            <div className="mt-10">
+                <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary">
+                    {getCustomers(CUSTOMER_SLUGS).map((customer) => (
+                        <CustomerLogo key={customer.slug} customer={customer} className="h-8 max-w-40" />
+                    ))}
+                </div>
+                <p className="text-xs mt-3 !mb-0">
+                    <span className="font-semibold">These are some of our paying customers.</span>
+                    <br />
+                    <span className="text-muted">
+                        (Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.)
+                    </span>
+                </p>
+            </div>
+        </section>
+    )
+}
+
+// ─────────────────────────────────────────────
+// "The old way", adapted from /desktop
+// ─────────────────────────────────────────────
+
+const OldWaySection = () => {
+    // Same checklist as /desktop: ticks for what you already have, crosses for what's still on you.
+    const soundFamiliar = [
+        { text: "You're recording user sessions with PostHog Session Replay or a separate tool", checked: true },
+        { text: 'You filter by rage clicks and errors to find the sessions worth a look', checked: true },
+        { text: 'You still have to spend hours finding out what actually happened', checked: false },
+        { text: 'When conversion drops, you go digging through replays to find out why', checked: false },
+    ]
+
+    return (
+        <section className="not-prose relative mb-12">
+            <SectionLabel>
+                The{' '}
+                <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
+                    old way
+                </InlineIcon>{' '}
+                to record user sessions
+            </SectionLabel>
+
+            <p className="text-base leading-loose mb-8">
+                <ChoppyReveal wordDelay={40}>
+                    {'Most session replay tools record everything, then wait for '}
+                    <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
+                        <em>you</em>
+                    </RoughAnnotation>
+                    {' to hit '}
+                    <KeyBadge>
+                        <span className="relative top-px">▶</span> Play
+                    </KeyBadge>
+                    {". This doesn't work if you have "}
+                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2} multiline>
+                        <em>thousands of session recordings</em>
+                    </RoughAnnotation>
+                    {'.'}
+                </ChoppyReveal>
+            </p>
+
+            {/* Checklist + receipt, the same pairing as /desktop. */}
+            <div className="mt-8 grid items-start gap-8 @2xl/reader-content:grid-cols-2 @2xl/reader-content:gap-12">
+                <div>
+                    <h3 className="mb-3 text-lg font-bold text-primary">Sound familiar?</h3>
+                    <ul className="m-0 list-none space-y-2.5 p-0">
+                        {soundFamiliar.map(({ text, checked }) => (
+                            <li key={text} className="flex items-start gap-2.5">
+                                {checked ? (
+                                    <IconCheck className="relative top-0.5 size-5 shrink-0 text-green" />
+                                ) : (
+                                    <IconX className="relative top-0.5 size-5 shrink-0 text-red" />
+                                )}
+                                <span className="text-base">{text}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="@2xl/reader-content:pl-4">
+                    <div className="relative mx-auto w-full max-w-xs">
+                        <img
+                            src={IMAGES.lemonHog}
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-16 top-8 z-0 w-24 rotate-12 hidden @2xl/reader-content:block"
+                        />
+                        <div className="relative z-10">
+                            <Receipt
+                                title="FREE EVERY MONTH"
+                                subtitle="(no credit card required)"
+                                rows={[
+                                    { label: '5,000 web recordings' },
+                                    { label: '2,500 mobile recordings' },
+                                    { label: '2,500 Replay Vision credits' },
+                                ]}
+                                footer="thanks for not watching"
+                            />
+                        </div>
+                        <img
+                            src={IMAGES.bananaHog}
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -bottom-10 -left-16 z-20 w-28 hidden @2xl/reader-content:block"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─────────────────────────────────────────────
+// "The PostHog way", adapted from /desktop
+// ─────────────────────────────────────────────
+
+// What Session Replay captures, so what Replay Vision gets to look at.
+const whatItSees: CalloutItem[] = [
+    { label: 'Clicks', icon: IconCursorClick, color: 'text-red' },
+    { label: 'Scrolls', icon: IconList, color: 'text-blue' },
+    { label: 'Form inputs', icon: IconLetter, color: 'text-green' },
+    { label: 'Page views', icon: IconDocument, color: 'text-purple' },
+    { label: 'Network requests', icon: IconGraph, color: 'text-orange' },
+    { label: 'Console logs', icon: IconTerminal, color: 'text-yellow' },
+    { label: 'The video itself', icon: IconVideoCamera, color: 'text-red' },
+]
+
+const PostHogWaySection = () => {
+    const [p1Done, setP1Done] = useState(false)
+    const watchesWordRef = useRef<HTMLSpanElement>(null)
+    const calloutRef = useRef<HTMLDivElement>(null)
+    const sectionRef = useRef<HTMLElement>(null)
+
+    return (
+        <section ref={sectionRef} className="not-prose relative mb-12">
+            <SectionLabel>
+                The{' '}
+                <InlineIcon icon={replayVision.Icon} className="text-yellow -rotate-2">
+                    {' '}
+                    PostHog way
+                </InlineIcon>
+            </SectionLabel>
+
+            <div className="flex flex-col @2xl/reader-content:block">
+                <div
+                    ref={calloutRef}
+                    className="order-2 mb-5 @2xl/reader-content:order-none @2xl/reader-content:float-right @2xl/reader-content:ml-6 @2xl/reader-content:my-2 @2xl/reader-content:w-[300px]"
+                >
+                    <SignalsCallout title="What it sees" items={whatItSees} />
+                </div>
+
+                <p className="text-base leading-loose mb-5 order-1">
+                    <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
+                        <strong>Replay Vision </strong>
+                        <span ref={watchesWordRef}>
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                            >
+                                <strong>watches</strong>
+                            </RoughAnnotation>
+                        </span>
+                        {' your recordings for you and turns what it sees into '}
+                        <strong>observations</strong>
+                        {'.'}
+                    </ChoppyReveal>
+                </p>
+            </div>
+
+            <p className="text-base leading-loose mb-5">
+                <ChoppyReveal wordDelay={25} initialDelay={p1Done ? 0 : 999999}>
+                    {'Ask a question in plain English and get an answer for every '}
+                    <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
+                        <strong className="inline-block mx-1">session you point it at</strong>
+                    </RoughAnnotation>
+                    {'.'}
+                </ChoppyReveal>
+            </p>
+
+            <p className="text-base leading-loose mb-0">
+                <strong>TL;DR:</strong> Somebody has to watch all those recordings.{' '}
+                <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
+                    <span className="inline-block">It doesn't have to be you.</span>
+                </RoughAnnotation>
+            </p>
+
+            <div className="clear-both" />
+            <DottedConnection sourceRef={watchesWordRef} targetRef={calloutRef} containerRef={sectionRef} desktopOnly />
+        </section>
+    )
+}
+
+// ─────────────────────────────────────────────
+// How it works
+// ─────────────────────────────────────────────
+
+// Each step is a slide in the same tabbed carousel as the Replay Vision "How do I use it?" section.
+const steps: CarouselSlideType[] = [
     {
-        title: 'Record user sessions',
-        description:
-            'Add PostHog and Session Replay starts capturing sessions on web and mobile. Input fields are masked by default, so passwords and card numbers stay out of the recording. Your first 5,000 web recordings each month are free, which is about 5,000 more than you were planning to watch.',
-    },
-    {
-        title: 'Tell the AI what to look for',
-        description:
-            'Write what you\'re looking for in plain English, like "did the user get stuck on checkout?" Use the same filters you already use in Session Replay to choose which recordings it watches, and set what share of them it samples. The scanner runs in the background as new recordings come in, or on demand against sessions you pick. It watches the video and checks the events, so it notices hesitation and confusion that never fire an event.',
-    },
-    {
-        title: 'Get observations you can act on',
+        slug: 'record',
+        label: '1. Record',
+        icon: <IconVideoCamera className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: '1. Record user sessions',
         description: (
             <>
-                Each scanned session becomes an observation: a yes/no verdict, a score, tags, or a summary. Every
-                observation has a confidence score. Observations also land as <code>$recording_observed</code> events,
-                so you can chart them, build cohorts from them, or send alerts to Slack.
+                <p>
+                    Once you get started with PostHog, Session Replay starts capturing sessions on web and mobile. Input
+                    fields are masked by default, so passwords and card numbers stay out of the recording.
+                </p>
+                <SlideCallout>Your first 5,000 web recordings each month are free.</SlideCallout>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
+            alt: 'The Session Replay page: the list of recordings on the left, the player in the middle, the event list on the right',
+            maxWidth: 'max-w-none',
+        },
+    },
+    {
+        slug: 'describe',
+        label: '2. Point the AI',
+        icon: <IconMagic className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: '2. Tell the AI what to look for',
+        description: (
+            <>
+                <p>
+                    Write what you're looking for in plain English, like "did the user get stuck on checkout?" Use the
+                    same filters you already use in Session Replay to choose which recordings it watches, and set what
+                    share of them it samples. It scans new matching recordings as they come in, or sessions you pick,
+                    catching hesitation and confusion that never fire an event.
+                </p>
+                <SlideCallout>
+                    Not sure what to ask? Pick a starting point like{' '}
+                    <strong className="text-primary">"Where do people get stuck?"</strong> and PostHog AI drafts the
+                    scanner for you.
+                </SlideCallout>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_goal_flow_light_8beb9024d2.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_goal_flow_dark_bf668d971a.png',
+            alt: 'The Replay Vision new scanner page, where you describe what the scanner should find out',
+            maxWidth: 'max-w-none',
+        },
+    },
+    {
+        slug: 'observe',
+        label: '3. Observe',
+        icon: <IconGraph className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: '3. Get observations you can act on',
+        description: (
+            <>
+                <p>
+                    Each scanned session becomes an observation: a yes/no verdict, a score, tags, or a summary. Every
+                    observation has a confidence score. Observations also land as <code>$recording_observed</code>{' '}
+                    events, so you can chart them, build cohorts from them, or send alerts to Slack.
+                </p>
+                <SlideCallout>
+                    We do this ourselves. One of our scanners caught a visitor hunting for our changelog RSS feed, and
+                    an agent wrote the fix.{' '}
+                    <Link to="https://github.com/PostHog/posthog.com/pull/20192" className="underline font-bold">
+                        It was merged the same day
+                    </Link>
+                    .
+                </SlideCallout>
+            </>
+        ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_category_mix_light_29713d1d9b.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_product_category_mix_dark_84ec02d2b4.png',
+            alt: 'A Replay Vision classifier scanner, with a chart of its categories over time',
+            maxWidth: 'max-w-none',
+        },
     },
 ]
 
-// Card style matches the scanner cards in the "What it looks for" tab on /replay-vision
-// (`hooks/productData/replay_vision/slides.tsx`).
+// ─────────────────────────────────────────────
+// Scanners
+// ─────────────────────────────────────────────
+
+// Same cards as the "What it looks for" tab on /replay-vision
+// (`hooks/productData/replay_vision/slides.tsx`), with an output line.
 const scanners: {
     Icon: React.ComponentType<{ className?: string }>
     color: string
     title: string
-    badge?: string
     description: string
     output?: string
 }[] = [
@@ -79,7 +486,7 @@ const scanners: {
         Icon: IconDocument,
         color: 'text-green',
         title: 'Session summary',
-        description: "The short version of a session, so you don't sit through 14 minutes of someone scrolling.",
+        description: "The short version of a session, so you don't sit through 3 hours of someone scrolling.",
         output: 'A title and a summary',
     },
     {
@@ -100,7 +507,7 @@ const scanners: {
         Icon: IconWarning,
         color: 'text-red',
         title: 'Dead ends',
-        description: 'Catches the moment someone hits a wall: scrolling, hovering with no CTA, then rage-quitting.',
+        description: "Flags the moment someone can't find the next step and leaves.",
         output: 'A yes/no verdict, with reasoning',
     },
     {
@@ -114,24 +521,219 @@ const scanners: {
         Icon: IconFlask,
         color: 'text-orange',
         title: 'Experiment',
-        badge: 'Beta',
         description:
-            'Summarizes sessions from each variant of an experiment and shows them side by side. Your conversion rate tells you B won. This shows you what people did differently in B.',
+            'Summarizes sessions from each variant of an experiment and puts them side by side, so you see what people did differently.',
         output: 'A summary, labeled with the variant',
-    },
-    {
-        Icon: IconCode,
-        color: 'text-purple',
-        title: 'Create from scratch',
-        description: 'Pick a type and write your own prompt.',
     },
 ]
 
-const prompts = [
-    'Create a Replay Vision scanner that flags sessions where users get stuck on the /checkout page, narrow to enterprise customers, and start at 25% sampling. Estimate the cost first.',
-    'List the last 20 observations from my "Frustration score" scanner and summarize what\'s driving high scores.',
-    'Set up an alert that posts to Slack whenever my "Dead ends" monitor answers yes.',
+// Real prompts teams wrote, from the "Find issues that frustrate users" blog post
+// (capitalized, typos fixed). The MCP terminal uses other prompts from the same post.
+const customExamples = [
+    "Find people who try to sign up but can't.",
+    'Find sessions where users get stuck on mobile.',
+    "I want to understand why we're not converting to paid users.",
+    'I need to track annoying popups, mobile UI flaws, etc.',
 ]
+
+// ─────────────────────────────────────────────
+// MCP terminal, a smaller version of the /mcp "What can you do with it?" terminal
+// ─────────────────────────────────────────────
+
+// Example output only, to show the shape of an answer. Tool names are real
+// (see /docs/replay-vision/mcp), the numbers are illustrative.
+const terminalPrompts: {
+    title: string
+    Icon: React.ComponentType<{ className?: string }>
+    prompt: string
+    lines: string[]
+}[] = [
+    {
+        title: 'Create a scanner',
+        Icon: IconPlusSquare,
+        prompt: 'Create a Replay Vision scanner that flags sessions where users get stuck on the /checkout page, narrow to enterprise customers, and start at 25% sampling. Estimate the cost first.',
+        lines: [
+            'Drafting a monitor for /checkout (vision-scanners-draft)...',
+            'Filters: enterprise customers. Sampling: 25%.',
+            'Estimate: about 1,200 observations a month, or 6,000 credits ($60).',
+        ],
+    },
+    // The next five are prompts real teams wrote, from the "Find issues that frustrate users" blog post.
+    {
+        title: 'Find bugs',
+        Icon: IconWarning,
+        prompt: 'Set up a scanner to help me find bugs, UX issues, and 404s.',
+        lines: [
+            'Drafting a monitor for bugs, UX issues, and 404s (vision-scanners-draft)...',
+            'Filters: sessions with an exception or a 404.',
+            'Created. New sessions get checked every few minutes.',
+        ],
+    },
+    {
+        title: 'Onboarding drop-off',
+        Icon: IconCursorClick,
+        prompt: 'Find where users get stuck in onboarding.',
+        lines: [
+            'Drafting a classifier for onboarding steps (vision-scanners-draft)...',
+            'Tags: create account, invite teammates, connect data, first insight.',
+            'Most stuck sessions stop at: connect data (38%).',
+        ],
+    },
+    {
+        title: 'Checkout',
+        Icon: IconGraph,
+        prompt: 'Why do users abandon checkout?',
+        lines: [
+            "Scanning 50 recent sessions that reached /checkout but didn't pay (vision-scanners-inline-scan)...",
+            'Top reason: the card form clears after a declined payment (14 of 50).',
+            'Next: shipping cost only shows on the last step (9 of 50).',
+        ],
+    },
+    {
+        title: 'Frustration',
+        Icon: IconTrending,
+        prompt: 'Find issues that frustrate users.',
+        lines: [
+            'Starting from the Frustration score template...',
+            'Scale: 1 to 5. Sampling: 10% of sessions.',
+            "Created. I'll report back once the first scores land.",
+        ],
+    },
+    {
+        title: 'Feature adoption',
+        Icon: IconCheckCircle,
+        prompt: 'I want to know if the new edit settings are used, and if people stay on them for long.',
+        lines: [
+            'Drafting a monitor for the new edit settings (vision-scanners-draft)...',
+            'Output: a yes/no verdict, plus how long they stayed on the page.',
+            'Estimate: about 800 observations a month, or 4,000 credits ($40).',
+        ],
+    },
+    {
+        title: 'Get alerted',
+        Icon: IconBell,
+        prompt: 'Set up an alert that posts to Slack whenever my "Dead ends" monitor answers yes.',
+        lines: [
+            'Creating an alert on "Dead ends" (vision-alerts-create)...',
+            'Trigger: every observation that answers yes.',
+            'Destination: #product-alerts in Slack. Done.',
+        ],
+    },
+]
+
+const TYPING_SPEED = 20
+const CYCLE_INTERVAL = 5000
+
+const MCPTerminal = () => {
+    const [active, setActive] = useState(0)
+    const [typed, setTyped] = useState('')
+    const [visibleLines, setVisibleLines] = useState(0)
+    const paused = useRef(false)
+    const item = terminalPrompts[active]
+
+    // Type the prompt, then reveal the response one line at a time.
+    useEffect(() => {
+        setTyped('')
+        setVisibleLines(0)
+        let i = 0
+        let lineTimer: ReturnType<typeof setInterval> | undefined
+        const typeTimer = setInterval(() => {
+            i++
+            setTyped(item.prompt.slice(0, i))
+            if (i >= item.prompt.length) {
+                clearInterval(typeTimer)
+                let l = 0
+                lineTimer = setInterval(() => {
+                    l++
+                    setVisibleLines(l)
+                    if (l >= item.lines.length) clearInterval(lineTimer)
+                }, 350)
+            }
+        }, TYPING_SPEED)
+        return () => {
+            clearInterval(typeTimer)
+            if (lineTimer) clearInterval(lineTimer)
+        }
+    }, [item])
+
+    // Move to the next prompt once the answer is out, unless someone picked a chip.
+    const done = visibleLines >= item.lines.length
+    useEffect(() => {
+        if (!done || paused.current) return
+        const t = setTimeout(() => setActive((a) => (a + 1) % terminalPrompts.length), CYCLE_INTERVAL)
+        return () => clearTimeout(t)
+    }, [done])
+
+    const pick = useCallback((index: number) => {
+        paused.current = true
+        setActive(index)
+    }, [])
+
+    return (
+        <div className="not-prose rounded-md overflow-hidden border border-primary shadow-md my-6">
+            <div className="bg-[#1e1e2e] dark:bg-[#11111b] border-b border-white/10 px-3 py-2 flex items-center gap-2">
+                <div className="flex gap-1.5">
+                    <span className="size-2.5 rounded-full bg-red/60" />
+                    <span className="size-2.5 rounded-full bg-yellow/80" />
+                    <span className="size-2.5 rounded-full bg-green/70" />
+                </div>
+                <span className="text-[11px] font-mono text-white/40 ml-2 truncate">posthog-mcp</span>
+                <span className="ml-auto text-[9px] uppercase tracking-wider font-semibold text-white/30 inline-flex items-center gap-1">
+                    <span className="size-1.5 rounded-full bg-green animate-pulse" />
+                    Live
+                </span>
+            </div>
+            <div className="bg-[#1e1e2e] dark:bg-[#11111b] px-4 py-4 min-h-[210px]">
+                <div className="flex items-center gap-2 mb-1">
+                    <replayVision.Icon className="size-4 shrink-0 text-yellow" />
+                    <span className="text-[10px] uppercase tracking-wider font-semibold text-white/40">
+                        Replay Vision
+                    </span>
+                </div>
+                <p className="m-0 text-[13px] @sm:text-[14px] font-mono text-white/90 leading-relaxed">
+                    <span className="text-yellow mr-1.5">{'>'}</span>
+                    {typed}
+                    {typed.length < item.prompt.length && (
+                        <span className="inline-block w-[2px] h-[14px] bg-yellow ml-0.5 align-middle animate-[pulse_1s_steps(1)_infinite]" />
+                    )}
+                </p>
+                <div className="mt-3 space-y-1">
+                    {item.lines.slice(0, visibleLines).map((line) => (
+                        <p
+                            key={line}
+                            className="m-0 text-[12px] @sm:text-[13px] font-mono text-green/90 leading-relaxed"
+                        >
+                            {line}
+                        </p>
+                    ))}
+                </div>
+            </div>
+            <div className="bg-[#16161e] dark:bg-[#0a0a12] border-t border-white/10 px-3 py-2.5">
+                {/* Chips wrap instead of scrolling, so none get cut off at the edge. */}
+                <div className="flex flex-wrap items-center gap-1.5">
+                    {terminalPrompts.map(({ title, Icon }, i) => (
+                        <button
+                            key={title}
+                            onClick={() => pick(i)}
+                            className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold transition-colors cursor-pointer border-0 whitespace-nowrap shrink-0 ${
+                                i === active
+                                    ? 'bg-white/15 text-white'
+                                    : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
+                            }`}
+                        >
+                            <Icon className="size-3 shrink-0 text-yellow" />
+                            {title}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+// ─────────────────────────────────────────────
+// FAQ and pricing
+// ─────────────────────────────────────────────
 
 const faqs = [
     {
@@ -140,11 +742,11 @@ const faqs = [
     },
     {
         q: 'How much does it cost?',
-        a: 'Session Replay gives you 5,000 web recordings and 2,500 mobile recordings free every month. After that, web recordings start at $0.005 each. Replay Vision gives you 2,500 credits free every month for a limited time. The usual free tier is 500. One credit is $0.01, and each observation costs 2, 5, or 15 credits depending on the model. On the default model, 2,500 credits cover 500 observations a month.',
+        a: 'Session Replay gives you 5,000 web recordings and 2,500 mobile recordings free every month. After that, web recordings start at $0.005 each. Replay Vision gives you 2,500 credits free every month. One credit is $0.01, and each observation costs 2, 5, or 15 credits depending on the model. On the default model, 2,500 credits cover 500 observations a month.',
     },
     {
         q: 'Can I trust what it says?',
-        a: "Every observation shows a confidence score and its reasoning, so you can check it in seconds. Rate observations with a thumbs up or down and the scanner learns from your team's ratings.",
+        a: "Every observation shows a confidence score and its reasoning. Rate observations with a thumbs up or down and the scanner learns from your team's ratings.",
     },
     {
         q: 'What about privacy?',
@@ -167,9 +769,55 @@ const MORE_QUESTIONS = [
     'How do I control which sessions are being captured?',
 ]
 
-const CARD = 'border border-primary rounded p-5 bg-primary'
-const H3 = 'text-lg font-bold text-primary mt-0 mb-2'
-const BODY = 'text-base text-secondary leading-relaxed m-0'
+// The pricing sections from /session-replay/pricing and /replay-vision/pricing,
+// switched with the same toggle as the Replay Vision "AI prompts" section.
+const PricingTabs = () => {
+    const [tab, setTab] = useState<'session_replay' | 'replay_vision'>('session_replay')
+    const sessionReplayData = useProduct({ handle: 'session_replay' }) as any
+
+    return (
+        <div className="not-prose mt-4">
+            <ToggleGroup
+                title="Product"
+                hideTitle
+                value={tab}
+                onValueChange={(value) => {
+                    if (value === 'session_replay' || value === 'replay_vision') setTab(value)
+                }}
+                options={[
+                    { label: 'Session Replay', value: 'session_replay', default: true },
+                    { label: 'Replay Vision', value: 'replay_vision' },
+                ]}
+                className="mb-8 max-w-sm"
+            />
+            {tab === 'session_replay' && sessionReplayData && (
+                <div className="flex flex-col gap-12">
+                    <Plans id="session-replay-plans" productData={sessionReplayData} allProducts={[]} />
+                    <PricingCalculator
+                        id="session-replay-calculator"
+                        productData={sessionReplayData}
+                        allProducts={[]}
+                    />
+                </div>
+            )}
+            {tab === 'replay_vision' && (
+                <div className="flex flex-col gap-12">
+                    <PricingPlans
+                        id="replay-vision-plans"
+                        productData={null}
+                        allProducts={[]}
+                        intro={<PricingTLDR id="replay-vision-tldr" productData={null} allProducts={[]} />}
+                    />
+                    <PricingCredits id="replay-vision-calculator" productData={null} allProducts={[]} />
+                </div>
+            )}
+        </div>
+    )
+}
+
+// ─────────────────────────────────────────────
+// Page
+// ─────────────────────────────────────────────
 
 export default function ReplayVisionLanding(): JSX.Element {
     const moreQuestions = MORE_QUESTIONS.map((question) =>
@@ -179,162 +827,79 @@ export default function ReplayVisionLanding(): JSX.Element {
     return (
         <>
             <SEO
-                title="Session replay that watches itself | PostHog"
+                title="Session Replay that watches itself | PostHog"
                 description="PostHog Session Replay records what users do. Replay Vision watches those recordings for you and turns them into observations you can query and chart."
                 noindex
             />
-            <ReaderView title={TITLE} hideTitle hideLeftSidebar hideRightSidebar proseSize="lg" showQuestions={false}>
-                <div className="flex flex-col gap-12 max-w-7xl w-full mx-auto">
-                    <section id="overview" className="scroll-mt-20 not-prose flex flex-col gap-8">
-                        <div className="space-y-4">
-                            <div>
-                                <p className="text-sm font-semibold text-secondary m-0 mb-2">
-                                    Session replay + Replay Vision
-                                </p>
-                                <h1 className={PRODUCT_SURFACE_H1}>{TITLE}</h1>
-                                <p className="leading-relaxed">
-                                    Record what people do in your product: clicks, scrolls, form inputs, page views,
-                                    network requests, and console logs. Then tell the AI what to look for, point it at
-                                    the sessions you care about, and get back observations you can query, chart, and
-                                    alert on.
-                                </p>
-                            </div>
-                            <div className="@container">
-                                <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
-                                    <CallToAction
-                                        to="https://app.posthog.com/signup"
-                                        size="lg"
-                                        state={{ newWindow: true, initialTab: 'signup' }}
-                                    >
-                                        Get started free
-                                    </CallToAction>
-                                    <CallToAction type="secondary" size="lg" onClick={scrollToInstall}>
-                                        Install with AI
-                                    </CallToAction>
-                                </div>
-                            </div>
-                            <p className="!text-sm text-secondary m-0">{FREE_TIER}</p>
-                        </div>
-                        <Glow color="yellow" className="mx-2">
-                            <img
-                                src={opportunityMiner}
-                                alt="The [Website] Opportunity miner scanner returns a Yes verdict, with timestamped reasoning showing a visitor searching for the changelog RSS feed"
-                                className="w-full h-auto rounded-lg border border-primary block"
+            <ReaderView hideLeftSidebar showQuestions={false} title="replay-vision.md" hideTitle={true}>
+                {/* Centered column, same as /slack and /desktop. */}
+                <div className="max-w-4xl mx-auto">
+                    <HeroSection />
+                    <hr className="border-t border-primary m-0 mb-10 mt-8" />
+
+                    <OldWaySection />
+                    <PostHogWaySection />
+
+                    <section id="how-it-works" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">How it works</h3>
+                        <div className="not-prose my-6">
+                            <TabbedCarousel
+                                tabs={steps.map((s) => ({
+                                    value: s.slug,
+                                    label: s.label,
+                                    icon: s.icon,
+                                    color: s.color,
+                                    activeText: s.activeText,
+                                    progressBar: s.progressBar,
+                                    content: <CarouselSlide slide={s} productData={replayVision} />,
+                                }))}
+                                slideDuration={8000}
+                                showActiveBg={false}
+                                slideClassName="!min-h-0 !p-0 !rounded"
                             />
-                        </Glow>
+                        </div>
                     </section>
 
-                    <section id="how-it-works" className="scroll-mt-20 not-prose">
-                        <h2 className={SECTION_H2}>How it works</h2>
-                        <ol className="m-0 pl-6 flex flex-col gap-6">
-                            {steps.map(({ title, description }) => (
-                                <li key={title} className="list-decimal text-lg font-bold text-primary pl-1">
-                                    <h3 className={H3}>{title}</h3>
-                                    <p className={`${BODY} font-normal`}>{description}</p>
-                                </li>
-                            ))}
-                        </ol>
-                    </section>
-
-                    <section id="scanners" className="scroll-mt-20 not-prose">
-                        <h2 className={SECTION_H2}>What can it watch for?</h2>
-                        <div className="@container">
-                            <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4 my-6">
-                                {scanners.map(({ Icon, color, title, badge, description, output }) => (
-                                    <div key={title} className="rounded-md border border-primary p-4 bg-primary">
+                    <section id="scanners" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">
+                            <SlotMachineText
+                                prefix="Find the"
+                                words={['dead ends', 'rage clicks', 'confused users', 'broken checkouts']}
+                                wordClassName="text-red dark:text-yellow"
+                            />
+                        </h3>
+                        <p>
+                            Replay Vision comes with scanners: AI probes you configure and point at your sessions. Pick
+                            one of ours and tell it what to watch, or create your own.
+                        </p>
+                        <div className="not-prose @container my-6">
+                            <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4">
+                                {scanners.map(({ Icon, color, title, description, output }) => (
+                                    <div key={title} className={CARD}>
                                         <div className="flex items-baseline gap-2 mb-2">
                                             <Icon className={`size-5 shrink-0 self-center ${color}`} />
                                             <h4 className="text-[15px] font-bold m-0">{title}</h4>
-                                            {badge && <Label text={badge} className="self-center" />}
                                         </div>
                                         <p className="text-sm text-secondary m-0">{description}</p>
                                         {output && (
-                                            <p className="text-sm font-semibold text-primary mt-3 m-0">{output}</p>
+                                            <p className="text-sm font-semibold text-primary mt-3 mb-0">{output}</p>
                                         )}
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                        <p className={BODY}>
-                            <strong className="text-primary">Also new: Replay Vision in workflows.</strong>{' '}
-                            <Link to="/docs/workflows/replay-vision" state={{ newWindow: true }} className="underline">
-                                When a support ticket comes in, a survey score is low, or a new signup struggles, Replay
-                                Vision watches that person's session and the workflow acts on its answer.
-                            </Link>
-                        </p>
-                    </section>
-
-                    <section id="install" className="scroll-mt-20 not-prose">
-                        <h2 className={SECTION_H2}>Set up in one command</h2>
-                        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
-                            <div className={CARD}>
-                                <h3 className={H3}>Install with the wizard</h3>
-                                <p className={`${BODY} mb-4`}>
-                                    Run it in your project directory. It reads your codebase, installs the PostHog SDK
-                                    if you don't have it yet, turns on Session Replay, and creates three scanners
-                                    written for your product: one that watches your key flow for breakage, one that
-                                    watches for frustration, and one that summarizes sessions.
+                            <div className="mt-4 rounded-md border border-purple/30 bg-purple/10 p-4 @2xl:p-6">
+                                <div className="flex items-baseline gap-2 mb-2">
+                                    <IconCode className="size-5 shrink-0 self-center text-purple" />
+                                    <h4 className="text-[15px] font-bold m-0">Create your own scanner</h4>
+                                </div>
+                                <p className="text-sm text-secondary m-0 mb-4">
+                                    Pick a scanner type, write the prompt in your own words, and choose which recordings
+                                    it watches. Some prompts teams use:
                                 </p>
-                                <WizardCommand command="replay-vision" variant="bordered" slim />
-                                <p className={`${BODY} text-sm mt-4`}>
-                                    They're ordinary scanners, so you can edit or delete them afterward.
-                                </p>
-                            </div>
-                            <div className={CARD}>
-                                <h3 className={H3}>Start in the app</h3>
-                                <p className={`${BODY} mb-4`}>
-                                    Already recording? Open Replay Vision, click New scanner, and pick a starting point.
-                                    PostHog AI drafts the scanner, you run it on a recording you choose, and you see
-                                    your first observation in about five minutes.
-                                </p>
-                                <CallToAction
-                                    type="secondary"
-                                    size="md"
-                                    to="/docs/replay-vision/start-here"
-                                    state={{ newWindow: true }}
-                                >
-                                    Open Replay Vision
-                                </CallToAction>
-                                <p className={`${BODY} text-sm mt-4`}>
-                                    An organization admin needs to approve AI data processing first.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="mcp" className="scroll-mt-20 not-prose">
-                        <h2 className={SECTION_H2}>Or just ask what you need to know</h2>
-                        <div className="flex flex-col gap-4">
-                            <p className={BODY}>
-                                With the PostHog MCP, your coding agent can do anything you can do in Replay Vision. It
-                                can ask a one-off question about specific sessions without setting up a scanner, draft a
-                                scanner from a goal and estimate its cost before it runs, or pull observations into
-                                context while it writes the fix.
-                            </p>
-                            <p className={BODY}>
-                                The same MCP covers your funnels, flags, and errors, so the agent can go from
-                                "conversion dropped" to the replays that explain it in one conversation.
-                            </p>
-                            <p className={BODY}>
-                                We do this ourselves. One of our scanners caught a visitor hunting for our changelog RSS
-                                feed.{' '}
-                                <Link to="https://github.com/PostHog/posthog.com/pull/20192" className="underline">
-                                    The fix was merged the same day
-                                </Link>
-                                .
-                            </p>
-                            <div>
-                                <WizardCommand command="mcp add" variant="bordered" slim />
-                                <p className={`${BODY} text-sm mt-2`}>
-                                    Works in Cursor, Claude Code, Codex, VS Code, Windsurf, and other MCP clients.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className={H3}>Try prompts like:</h3>
-                                <ul className="m-0 p-0 list-none flex flex-col gap-2">
-                                    {prompts.map((prompt) => (
-                                        <li key={prompt} className={`${CARD} !p-3 text-sm text-primary italic`}>
-                                            {prompt}
+                                <ul className="list-none m-0 p-0 grid @md:grid-cols-2 gap-2">
+                                    {customExamples.map((prompt) => (
+                                        <li key={prompt} className="text-sm text-secondary italic">
+                                            &ldquo;{prompt}&rdquo;
                                         </li>
                                     ))}
                                 </ul>
@@ -342,20 +907,86 @@ export default function ReplayVisionLanding(): JSX.Element {
                         </div>
                     </section>
 
-                    <section id="questions" className="scroll-mt-20 not-prose">
-                        <h2 className={SECTION_H2}>Questions</h2>
-                        <Accordion
-                            type="single"
-                            items={faqs.map(({ q, a }) => ({
-                                trigger: <span className="font-semibold">{q}</span>,
-                                content: <p>{a}</p>,
-                            }))}
-                        />
-                        <h3 className={`${H3} mt-8`}>More questions people ask Session Replay</h3>
-                        <ul className="m-0 pl-6 flex flex-col gap-1">
+                    <section id="install" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">
+                            Set up in <Highlight>one command</Highlight>
+                        </h3>
+                        <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 my-6">
+                            <div className={CARD}>
+                                <h4 className="text-lg font-bold mt-0 mb-2">Install with the wizard</h4>
+                                <p className="text-sm text-secondary leading-relaxed m-0 mb-3">
+                                    Run it in your project directory. It reads your codebase, installs the PostHog SDK
+                                    if you don't have it yet, turns on Session Replay, and creates three scanners
+                                    written for your product: one that watches your key flow for breakage, one that
+                                    watches for frustration, and one that summarizes sessions.
+                                </p>
+                                <WizardCommand command="replay-vision" variant="bordered" slim />
+                                <p className="text-sm text-secondary leading-relaxed mt-3 mb-0">
+                                    They're ordinary scanners, so you can edit or delete them afterward.
+                                </p>
+                            </div>
+                            <div className={CARD}>
+                                <h4 className="text-lg font-bold mt-0 mb-2">Start in the app</h4>
+                                <p className="text-sm text-secondary leading-relaxed m-0 mb-4">
+                                    Already recording? Open Replay Vision, click New scanner, and pick a starting point.
+                                    PostHog AI drafts the scanner, you run it on a recording you choose, and you see
+                                    your first observation in about five minutes.
+                                </p>
+                                <CallToAction
+                                    size="sm"
+                                    type="primary"
+                                    to="/docs/replay-vision/start-here"
+                                    state={{ newWindow: true }}
+                                >
+                                    Open Replay Vision
+                                </CallToAction>
+                                <p className="text-sm text-secondary leading-relaxed mt-3 mb-0">
+                                    An organization admin needs to approve AI data processing first.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="mcp" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">
+                            Or just ask <Highlight>your agent</Highlight>
+                        </h3>
+                        <p>
+                            Connect your agent to the PostHog MCP and ask a one-off question about specific sessions
+                            without setting up a scanner, draft a scanner from a goal and estimate its cost before it
+                            runs, or pull observations into context while it writes the fix.
+                        </p>
+                        {/* Second paragraph on the left, install on the right, both just above the terminal. */}
+                        <div className="not-prose grid gap-4 items-center @2xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] @2xl/reader-content:gap-10">
+                            <p className="m-0">
+                                The same MCP covers your funnels, flags, and errors, so the agent can go from
+                                "conversion dropped" to the replays that explain it in one conversation.
+                            </p>
+                            <div>
+                                <WizardCommand command="mcp add" variant="bordered" slim />
+                                <p className="text-sm text-secondary mt-2 mb-0">
+                                    Works in Cursor, Claude Code, Codex, VS Code, Windsurf, and other MCP clients.
+                                </p>
+                            </div>
+                        </div>
+                        <MCPTerminal />
+                    </section>
+
+                    <section id="questions" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">FAQ</h3>
+                        <div className="not-prose mt-4">
+                            <Accordion
+                                type="single"
+                                triggerClassName="!px-3 !py-2"
+                                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
+                                items={faqs.map(({ q, a }) => ({ trigger: q, content: a }))}
+                            />
+                        </div>
+                        <h4 className="mt-8 mb-2">More questions people ask Session Replay</h4>
+                        <ul>
                             {moreQuestions.map(({ question, url }) => (
-                                <li key={question} className="list-disc">
-                                    <Link to={url} state={{ newWindow: true }} className="underline">
+                                <li key={question}>
+                                    <Link to={url} state={{ newWindow: true }}>
                                         {question}
                                     </Link>
                                 </li>
@@ -363,39 +994,32 @@ export default function ReplayVisionLanding(): JSX.Element {
                         </ul>
                     </section>
 
-                    <section id="get-started" className="scroll-mt-20 not-prose">
-                        <div className="@container relative bg-accent dark:bg-accent-dark rounded-xl overflow-hidden">
-                            <div className="grid gap-8 items-center px-8 py-12 @2xl:px-14 @2xl:py-16 @2xl:grid-cols-[1fr_auto]">
-                                <div className="max-w-lg">
-                                    <h2 className="text-3xl @2xl:text-4xl font-bold text-primary mt-0 mb-4 leading-tight">
-                                        {TITLE}
-                                    </h2>
-                                    <p className="text-base text-primary/70 mb-8">{FREE_TIER}</p>
-                                    <div className="flex flex-wrap gap-3 items-center">
-                                        <OSButton
-                                            variant="primary"
-                                            asLink
-                                            to="https://app.posthog.com/signup"
-                                            size="lg"
-                                        >
-                                            Get started free
-                                        </OSButton>
-                                        <OSButton variant="secondary" size="lg" onClick={scrollToInstall}>
-                                            Install with AI
-                                        </OSButton>
-                                    </div>
-                                </div>
-                                <div className="hidden @2xl:block justify-self-end pointer-events-none select-none">
-                                    <CloudinaryImage
-                                        src={FOOTER_IMAGE}
-                                        alt=""
-                                        className="w-64 @4xl:w-80"
-                                        imgClassName="w-full h-auto"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                    <section id="pricing" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">Pricing</h3>
+                        <PricingTabs />
                     </section>
+
+                    {/* Closing box in the layout of the /slack "Try it" box. */}
+                    <div
+                        id="get-started"
+                        className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-10"
+                    >
+                        <div className="grid @lg/reader-content:grid-cols-[1fr_240px] gap-8 items-center">
+                            <div>
+                                <h3 className="mt-0 mb-2 text-2xl font-bold">
+                                    Go watch sunsets while PostHog watches your user sessions
+                                </h3>
+                                <p className="mt-0 mb-4">{FREE_TIER}</p>
+                                <CTAButtons />
+                            </div>
+                            <CloudinaryImage
+                                src={IMAGES.projectorHog}
+                                alt=""
+                                className="hidden @lg/reader-content:block pointer-events-none select-none"
+                                imgClassName="w-full h-auto"
+                            />
+                        </div>
+                    </div>
                 </div>
             </ReaderView>
         </>
