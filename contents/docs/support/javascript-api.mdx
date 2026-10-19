@@ -90,7 +90,7 @@ interface GetMessagesResponse {
 interface Message {
   id: string
   content: string
-  author_type: 'customer' | 'AI' | 'human'
+  author_type: 'customer' | 'support' | 'AI'
   author_name?: string
   created_at: string     // ISO timestamp
   is_private: boolean    // Internal notes (not shown to customer)
@@ -131,9 +131,9 @@ const response = await posthog.conversations.getTickets({
 
 **Parameters:**
 - `options` (optional) – Object with any of:
-  - `status` (string) – Filter by status: `new`, `open`, `pending`, `on_hold`, or `resolved`
-  - `limit` (number) – Number of tickets to return (default: 20)
-  - `offset` (number) – Pagination offset (default: 0)
+- `status` (string) – Filter by status: `new`, `open`, `pending`, `on_hold`, or `resolved`
+- `limit` (number) – Number of tickets to return (default: 20)
+- `offset` (number) – Pagination offset (default: 0)
 
 **Response:**
 ```typescript
@@ -295,7 +295,7 @@ In addition to the widget events above, the following server-side events are cap
 | `$conversation_ticket_created` | A new support ticket was created | – |
 | `$conversation_ticket_status_changed` | Ticket status was updated | `old_status`, `new_status` |
 | `$conversation_ticket_priority_changed` | Ticket priority was updated | `old_priority`, `new_priority` |
-| `$conversation_ticket_assigned` | Ticket was assigned to a team member or AI | `assignee_type`, `assignee_id` |
+| `$conversation_ticket_assigned` | Ticket was assigned to a user or a role | `assignee_type` (`user` or `role`), `assignee_id` |
 | `$conversation_message_sent` | Team member sent a message on a ticket | `message_id`, `message_content`, `author_type`, `author_id` |
 | `$conversation_message_received` | Customer sent a message on a ticket | `message_id`, `message_content`, `author_type`, `customer_name`, `customer_email` |
 
@@ -364,3 +364,5 @@ try {
 | `getWidgetSessionId()` | Get widget session ID | `string \| null` |
 | `requestRestoreLink(email)` | Send a recovery email to restore tickets | `Promise<void>` |
 | `restoreFromUrlToken()` | Restore tickets from URL recovery token | `Promise<RestoreResult \| null>` |
+| `setIdentity(distinctId, hash)` | Prove ticket ownership with an HMAC from your server. See [identity verification](/docs/support/widget#identity-verification) | `void` |
+| `clearIdentity()` | Drop the verified identity on logout so the widget uses the browser session | `void` |

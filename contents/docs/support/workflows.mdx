@@ -30,7 +30,6 @@ Workflows trigger on and set these ticket statuses:
 
 When ticket or message state changes, certain events are emitted and can be used as workflow triggers:
 
-
 All events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
 ### New ticket created
@@ -42,7 +41,7 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 |----------|------|-------------|
 | `ticket_id` | string (UUID) | The ticket's unique ID |
 | `ticket_number` | int | Human-readable ticket number |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, `teams`, or `github` |
 | `status` | string | Always `new` for this trigger |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
 | `customer_name` | string | Customer name |
@@ -111,11 +110,9 @@ Two workflow actions are available for ticket management:
 
 Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
 
-
 | Input field | Type | Default |
 |-------|------|---------|
 | `ticket_id` | string | `{event.properties.ticket_id}` |
-
 
 | Output field | Type | Description |
 |-------|------|-------------|
@@ -123,7 +120,7 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `ticket_number` | int | Per-team ticket number |
 | `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, `teams`, or `github` |
 | `distinct_id` | string | Customer's PostHog distinct ID |
 | `created_at` | string (ISO 8601) | When the ticket was created |
 | `updated_at` | string (ISO 8601) | Last update timestamp |
@@ -139,7 +136,6 @@ The output fields are available as `{variables.ticket.*}`.
 ### Update ticket
 
 Changes one or more fields on a ticket. Only the fields you provide are changed.
-
 
 | Input field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -251,7 +247,7 @@ Automatically change status from New to Open when a team member first replies.
 **Flow:**
 
 1. **If** `event.properties.status` equals `new`
-   - **Update ticket:** `status` = `open`
+- **Update ticket:** `status` = `open`
 
 ```
 status = "open"
@@ -280,7 +276,7 @@ When a customer sends a message on a pending or resolved ticket, reopen it.
 **Flow:**
 
 1. **If** `event.properties.status` equals `pending` **or** `event.properties.status` equals `resolved`
-   - **Update ticket:** `status` = `open`
+- **Update ticket:** `status` = `open`
 
 ### 8. Auto-tag tickets by customer email domain
 
@@ -291,14 +287,14 @@ Tag tickets from specific customer domains for prioritization.
 **Flow:**
 
 1. **If** `event.properties.customer_email` ends with `@bigcorp.com`
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 tags = ["enterprise", "priority"]
 ```
 
 2. **Else if** `event.properties.customer_email` ends with `@startup.io`
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 tags = ["startup"]
@@ -313,7 +309,7 @@ Immediately set a tight SLA and assign to senior support when a high-priority ti
 **Flow:**
 
 1. **If** `event.properties.priority` equals `high`
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 sla_amount = "30"
@@ -346,7 +342,7 @@ A comprehensive example combining multiple conditions for SLA, priority, and ass
 
 1. **Get ticket** (to access full ticket data)
 2. **If** `event.properties.channel_source` equals `slack`
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 priority = "low"
@@ -356,7 +352,7 @@ assignee = Engineering role
 ```
 
 3. **Else if** `event.properties.customer_email` ends with `@enterprise.com`
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 priority = "high"
@@ -367,7 +363,7 @@ tags = ["enterprise", "vip"]
 ```
 
 4. **Else**
-   - **Update ticket:**
+- **Update ticket:**
 
 ```
 priority = "medium"
@@ -402,4 +398,4 @@ In the ticket list, SLAs show as one of three states:
 - **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status does not trigger the "status changed" Workflow again.
 - **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
 - **Tags replace, not append** – the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
-- **Rate limits** – the external API used by Workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.
+- **Rate limits** – the external API used by Workflows is rate-limited to 120 requests/minute and 1,200 requests/hour per team.

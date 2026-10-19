@@ -29,14 +29,18 @@ Each ticket carries a set of properties you can filter, sort, and act on.
 | **Ticket number** | Auto-incremented unique number, for example #1, #2, #3              |
 | **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                  |
 | **Priority**      | `low`, `medium`, or `high`. Unset by default                        |
-| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, or `github` |
+| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, `teams`, or `github` |
 | **Assignee**      | The user or role responsible for the ticket                         |
 | **Session ID**    | The PostHog session used to load events and exceptions              |
 | **Distinct ID**   | The `distinct_id` used to link the ticket to a person               |
 
 ## Reply with full context
 
-Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them. Each ticket detail page can show:
+Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them.
+
+[SCREENSHOT: Ticket detail page with replay, events, exceptions, previous tickets]
+
+Each ticket detail page can show:
 
 - **Chat thread** - The conversation with the customer. Replies you send reach them on the channel they used.
 - **Session recording** - Watch the customer's [session replay](/docs/session-replay) for widget tickets, if replay is enabled.
@@ -62,6 +66,8 @@ You can mark any message as a private note. Private notes are visible only to yo
 
 Use the **Send** button's dropdown to reply and update the ticket status in one step. Click the arrow next to **Send** to choose **Send and set pending**, **Send and set on hold**, or **Send and set resolved**.
 
+[SCREENSHOT: Send button dropdown with Send and set pending]
+
 When you use one of these options:
 
 - Your reply is sent first, then the ticket status is updated.
@@ -72,7 +78,7 @@ The confirmation dialog gives you two choices: **Send and save** commits all cha
 
 ## Assign, tag, and snooze
 
-Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
+Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. You can also auto-assign with [Workflows](/docs/support/workflows). Each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
 ## Delete a ticket
 

@@ -6,6 +6,12 @@ showTitle: true
 
 The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
+[SCREENSHOT: Widget closed (button) and open (greeting + message) on a sample site – light + dark]
+
+[SCREENSHOT: Widget identification form]
+
+[VIDEO: 30s widget demo – customer sends message, team replies from inbox]
+
 ## Enable the widget
 
 1. Go to **Support** in PostHog and click **Settings**
@@ -128,22 +134,19 @@ With identity verification enabled, users see all their tickets on any browser o
 
 ### Find your secret API key
 
-Copy the key from the **Secret API key** section of [**Support** > **Settings**](https://app.posthog.com/support/settings). If the section is empty, use the button next to it to generate a key.
+1. Go to **Support** > **Settings**
+2. Open the **Secret API key** section. If it is empty, click the button next to it to generate a key
+3. Copy the key. Use it only on your server
 
+The key lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
 
-If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first.
+If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first. See [troubleshooting](/docs/support/troubleshooting#identity-verification-returns-403).
 
 When you rotate the key, PostHog keeps the previous key as a backup, and hashes signed with the backup keep working. Delete the backup key after all your servers use the new key.
 
 ### Server-side implementation
 
 Generate the identity hash on your backend. Never expose the secret API key in client-side code.
-
-**Generate a secret_api_token**
-
-1. Go to **Support** in PostHog and click **Settings**
-2. Go to the **Secret API Key** section 
-3. Click generate key button to generate a new key
 
 <MultiLanguage>
 
@@ -260,8 +263,8 @@ Get notified when new tickets arrive, by email or in your browser.
 
 Configure your team to receive email alerts when new tickets arrive.
 
-1. Go to **Settings** > **Support** in PostHog
-2. Find the **Email notifications** section
+1. Go to **Support** > **Settings** in PostHog
+2. Open the **Notifications** tab and find **Email notifications**
 3. Select team members who should receive alerts
 
 Emails include:

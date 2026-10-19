@@ -1,0 +1,114 @@
+---
+title: Connect Microsoft Teams
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Microsoft Teams support is in beta, and it is not enabled for every project. If you do not see **Microsoft Teams** under **Support** > **Settings**, ask us to turn it on.
+
+</CalloutBox>
+
+The **SupportHog** bot connects a Microsoft Teams tenant to PostHog Support. Channel messages and `@SupportHog` mentions become tickets, and replies you send in PostHog go back to the Teams thread.
+
+This is separate from [PostHog's Microsoft Teams destination](/docs/cdp/destinations/microsoft-teams), which sends alerts. SupportHog has its own bot and its own connection.
+
+[SCREENSHOT: Support > Settings > Microsoft Teams tab with a shared channel showing the Shared · polled tag]
+
+## Connect Teams
+
+Connecting requires an organization admin in PostHog, and a Microsoft account that can authorize the SupportHog app.
+
+1. Go to [**Support** > **Settings**](https://app.posthog.com/support/settings) and open the **Microsoft Teams** channel.
+2. Click **Connect Microsoft Teams**.
+3. Sign in and authorize the app.
+4. Click **Add Teams channel**.
+5. Select a team group. PostHog installs SupportHog into that group.
+6. Select a channel. Shared channels show as `#channel-name (shared)`.
+
+You can add channels from more than one team group. A top-level message in a configured channel creates a ticket. Thread replies on that message sync as ticket messages.
+
+## What the connection can do
+
+| Permission | Purpose |
+| --- | --- |
+| `Team.ReadBasic.All` | List team groups |
+| `Channel.ReadBasic.All` | List channels in those groups |
+| `TeamsAppInstallation.ReadWriteForTeam` | Install SupportHog into a team group |
+| `User.ReadBasic.All` | Resolve a Teams user's name, email, and avatar |
+| `ChannelMessage.Read.All` | Read messages in shared channels |
+| `ChannelMessage.Send` | Post confirmations and replies into shared channels |
+
+The Microsoft account you connect with is the account PostHog uses for these calls, including shared-channel polling. That account needs access to every channel you monitor.
+
+## Bot mentions
+
+**Bot mention** is always on. Anyone can `@SupportHog` in a channel the bot is in, and that message becomes a ticket. There is no emoji trigger in Teams. The `:ticket:` reaction is Slack only.
+
+## Standard and shared channels
+
+| Channel type | How messages arrive | Delay | What you see |
+| --- | --- | --- | --- |
+| **Standard** | Bot Framework, as they are posted | None | Channel name only |
+| **Shared** | Polled with Microsoft Graph | Up to one minute | **Shared · polled** |
+
+Shared and private channels do not push ordinary messages to a bot. PostHog polls `messages/delta` once a minute instead.
+
+- The first poll reads existing history and does not create tickets. Old messages do not appear as new tickets.
+- Later polls create tickets only for messages posted after that.
+- If Microsoft expires the cursor, PostHog starts the cursor again and skips history the same way.
+
+Hover the **Shared · polled** tag in settings for the same explanation.
+
+<CalloutBox icon="IconInfo" title="Replies need one inbound message first" type="fyi">
+
+PostHog learns where to send replies from an inbound Teams event, such as the install welcome, an `@mention`, or a channel message. A shared channel that is only polled cannot receive replies until that address has been captured once.
+
+</CalloutBox>
+
+## Add SupportHog to your org catalog
+
+<a id="org-catalog"></a>
+
+Most tenants install SupportHog from the connection flow. Some tenants block apps that are not in their own catalog. When that happens, PostHog shows **SupportHog isn't available in your Microsoft tenant's app catalog** after you pick a team group.
+
+A Teams admin then uploads the SupportHog app package to the tenant org catalog. This is a one-time step. After the upload, click **Retry install** in PostHog and select the channel again.
+
+PostHog does not publish a separate download link for that package on this page yet. If your admin needs the package, contact us and we will send it.
+
+## How tickets are created
+
+A top-level message in a configured channel, or an `@SupportHog` mention, does all of the following:
+
+- Creates a ticket with the message as the first comment
+- Resolves the sender's name, email, and avatar
+- Sets `channel_source` to `teams`
+- Posts a confirmation card in the thread with the ticket number and a link to PostHog
+
+[SCREENSHOT: Teams channel with SupportHog ticket confirmation card]
+
+Messages from bots, system events, deleted messages, and empty messages are ignored.
+
+## Two-way sync
+
+### Teams to PostHog
+
+- New top-level messages in configured channels create tickets
+- Thread replies sync as ticket messages
+
+### PostHog to Teams
+
+A reply from your team is posted back to the original thread, with that person's name. **Private notes** are never sent to Teams.
+
+## View Teams tickets
+
+Teams tickets appear in the [inbox](/docs/support/inbox) with the other channels. Each one shows a Teams icon, a link to the original thread, and the sender's name and avatar. Filter the list by channel to see only Teams tickets.
+
+## Disconnect
+
+1. Go to [**Support** > **Settings**](https://app.posthog.com/support/settings)
+2. Open **Microsoft Teams**
+3. Click **Disconnect Microsoft Teams**
+
+Existing tickets stay in the inbox. New Teams messages no longer sync.
