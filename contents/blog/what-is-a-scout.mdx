@@ -44,6 +44,8 @@ Scouts don't live on their own, they feed our self-driving product pipeline:
 3. **Signals get picked up by the [self-driving pipeline](/docs/self-driving/self-improving-loop)**, grouped, and turned into **[reports](/docs/self-driving/reports)** that land in your PostHog [Inbox](/docs/self-driving/inbox).
 4. **Reports get actioned** – by you, or automatically by a [self-driving](/docs/self-driving) task that picks up the report and ships a fix or improvement.
 
+This loop is how [SoundBoost](/customers/soundboost) caught a domain migration that had cut its Google clicks to zero – the team rolled back and recovered the traffic.
+
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
 
 A single report – say "this MCP tool keeps blowing the token budget" – might be assembled from a scout finding, error tracking, a few raw events, and a health check, all grouped together because they're about the same underlying problem.

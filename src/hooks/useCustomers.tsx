@@ -1556,6 +1556,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             berkan_cesur: {
                 name: 'Berkan Cesur',
                 role: 'Founder',
+                image: {
+                    thumb: '/images/customers/berkan-cesur.jpg',
+                },
                 quotes: [
                     "We're a small team and we can't find everything that's going on across different browsers, operating systems, and device types. PostHog just finds it for us now.",
                     "PostHog was always a good analytics tool, but it needed a human to understand, analyze, and combine everything to get something valuable from it. Now it's just on autopilot.",
