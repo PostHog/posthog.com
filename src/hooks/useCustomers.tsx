@@ -51,6 +51,8 @@ import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import RunableLogo from '../images/customers/runable-light.svg'
 import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SoundBoostLogo from '../images/customers/soundboost-light.svg'
+import SoundBoostLogoDark from '../images/customers/soundboost-dark.svg'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
@@ -1535,6 +1537,29 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     web_analytics:
                         "PostHog gives me all the same information Plausible used to give us, and a lot more. It's way more powerful and insightful than Plausible.",
                 },
+            },
+        },
+    },
+    soundboost: {
+        name: 'SoundBoost',
+        toolsUsed: ['session_replay', 'feature_flags', 'error_tracking', 'surveys', 'inbox'],
+        industries: ['AI', 'Music'],
+        users: ['Founders', 'Engineering'],
+        notes: 'AI music mastering',
+        featured: false,
+        logo: {
+            light: SoundBoostLogo,
+            dark: SoundBoostLogoDark,
+        },
+        height: 8,
+        quotes: {
+            berkan_cesur: {
+                name: 'Berkan Cesur',
+                role: 'Founder',
+                quotes: [
+                    "We're a small team and we can't find everything that's going on across different browsers, operating systems, and device types. PostHog just finds it for us now. I would never have found that Safari bug, and if there's another way to find things like it, I don't know it.",
+                    "PostHog was always a good analytics tool, but it needed a human to understand, analyze, and combine everything to get something valuable from it. Now it's just on autopilot.",
+                ],
             },
         },
     },
