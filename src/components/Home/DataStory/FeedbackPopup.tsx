@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import { motion, useReducedMotion, TargetAndTransition, Transition } from 'framer-motion'
 import { IconX } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { OSTextarea } from 'components/OSForm'
 import { IconImage, PRODUCT_ICON_MAP } from 'components/OSIcons'
 import { StickerTombstone } from 'components/Stickers/Stickers'
+import usePostHog from '../../../hooks/usePostHog'
 
-const PLACEHOLDER_SKIP_RATE = 99.8
-const PLACEHOLDER_RESPONSE_RATE = Math.round((100 - PLACEHOLDER_SKIP_RATE) * 10) / 10
+const FEEDBACK_SURVEY_ID = '01a154d2-83a7-0000-94c9-677bc3e2be10'
+const FEEDBACK_QUESTION_ID = '233d2514-efa4-4fc8-a962-2b0057f375ef'
+const SUBMITTED_STORAGE_KEY = `ph-feedback-submitted-${FEEDBACK_SURVEY_ID}`
 
 const DATE_FORMAT: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric' }
 
@@ -28,20 +31,64 @@ const POP_IN_SPRING = { type: 'spring', stiffness: 420, damping: 22, delay: 0.2 
 
 type PopupState = 'open' | 'dismissed' | 'sent'
 
-const SkipRate = ({ state }: { state: PopupState }): JSX.Element => (
-    <p className="m-0 mt-3 text-sm text-secondary text-center">
-        {state === 'sent' ? (
-            <>
-                You're in the <strong className="text-primary">{PLACEHOLDER_RESPONSE_RATE}%</strong> who did. Thanks.
-            </>
-        ) : (
-            <>
-                <strong className="text-primary">{PLACEHOLDER_SKIP_RATE}%</strong> of visitors (including you) didn't
-                fill out this form.
-            </>
-        )}
-    </p>
-)
+const useSkipRatePercent = (): number | null => {
+    const { homepageFeedbackStats } = useStaticQuery(graphql`
+        {
+            homepageFeedbackStats {
+                skipRatePercent
+            }
+        }
+    `)
+    return homepageFeedbackStats?.skipRatePercent ?? null
+}
+
+const hasSubmittedBefore = (): boolean => {
+    try {
+        return window.localStorage.getItem(SUBMITTED_STORAGE_KEY) !== null
+    } catch {
+        return false
+    }
+}
+
+const rememberSubmission = (): void => {
+    try {
+        window.localStorage.setItem(SUBMITTED_STORAGE_KEY, new Date().toISOString())
+    } catch {
+        return
+    }
+}
+
+const MIN_DECIMALS = 1
+const FLOATING_POINT_TOLERANCE = 1e-9
+
+const splitAtFirstNonNine = (skipRatePercent: number): { skipRate: string; responseRate: string } => {
+    const gap = 100 - skipRatePercent
+    const decimals = gap > 0 ? Math.max(MIN_DECIMALS, Math.ceil(-Math.log10(gap))) : MIN_DECIMALS
+    const scale = 10 ** decimals
+    const skipRate = Math.floor(skipRatePercent * scale + FLOATING_POINT_TOLERANCE) / scale
+    const format = (value: number) => String(Number(value.toFixed(decimals)))
+    return { skipRate: format(skipRate), responseRate: format(100 - skipRate) }
+}
+
+const SkipRate = ({ submitted }: { submitted: boolean }): JSX.Element | null => {
+    const skipRatePercent = useSkipRatePercent()
+    if (skipRatePercent === null) return null
+    const { skipRate, responseRate } = splitAtFirstNonNine(skipRatePercent)
+    return (
+        <p className="m-0 mt-3 text-sm text-secondary text-center">
+            {submitted ? (
+                <>
+                    You're in the <strong className="text-primary">{responseRate}%</strong> who did. Thanks.
+                </>
+            ) : (
+                <>
+                    <strong className="text-primary">{skipRate}%</strong> of visitors (including you) didn't fill out
+                    this form.
+                </>
+            )}
+        </p>
+    )
+}
 
 const TitleBar = ({ onClose }: { onClose?: () => void }): JSX.Element => (
     <div className="flex items-center gap-1.5 border-b border-primary bg-accent px-2 py-1.5">
@@ -65,9 +112,21 @@ export default function FeedbackPopup(): JSX.Element {
     const [feedback, setFeedback] = useState('')
     const [dismissedOn, setDismissedOn] = useState('')
     const [resurrections, setResurrections] = useState(0)
+    const [submittedBefore, setSubmittedBefore] = useState(false)
+    const shownCaptured = useRef(false)
     const shouldReduceMotion = useReducedMotion()
+    const posthog = usePostHog()
+
+    useEffect(() => setSubmittedBefore(hasSubmittedBefore()), [])
+
+    const captureShown = () => {
+        if (shownCaptured.current) return
+        shownCaptured.current = true
+        posthog?.capture('survey shown', { $survey_id: FEEDBACK_SURVEY_ID })
+    }
 
     const dismiss = () => {
+        posthog?.capture('survey dismissed', { $survey_id: FEEDBACK_SURVEY_ID })
         setDismissedOn(new Date().toLocaleDateString('en-US', DATE_FORMAT))
         setState('dismissed')
     }
@@ -79,9 +138,15 @@ export default function FeedbackPopup(): JSX.Element {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()
-        if (feedback.trim()) {
-            setState('sent')
-        }
+        const response = feedback.trim()
+        if (!response) return
+        posthog?.capture('survey sent', {
+            $survey_id: FEEDBACK_SURVEY_ID,
+            $survey_response: response,
+            [`$survey_response_${FEEDBACK_QUESTION_ID}`]: response,
+        })
+        rememberSubmission()
+        setState('sent')
     }
 
     return (
@@ -92,6 +157,7 @@ export default function FeedbackPopup(): JSX.Element {
                     initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.6, y: 24 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={POP_IN_VIEWPORT}
+                    onViewportEnter={captureShown}
                     transition={POP_IN_SPRING}
                     aria-hidden={state === 'dismissed'}
                     className={`[grid-area:1/1] overflow-hidden rounded-md border border-primary bg-light dark:bg-dark shadow-2xl ${
@@ -169,7 +235,7 @@ export default function FeedbackPopup(): JSX.Element {
                     </motion.div>
                 )}
             </div>
-            <SkipRate state={state} />
+            <SkipRate submitted={submittedBefore || state === 'sent'} />
         </div>
     )
 }
