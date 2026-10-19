@@ -5272,6 +5272,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'API',
+                    url: '/docs/replay-vision/api',
+                    icon: 'IconCode',
+                    color: 'yellow',
+                },
+                {
                     name: 'MCP',
                     url: '/docs/replay-vision/mcp',
                     icon: 'IconTerminal',
