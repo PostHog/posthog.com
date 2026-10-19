@@ -70,6 +70,16 @@ The data warehouse then starts syncing your Stripe data. You can see details and
 
 <SourceParameters />
 
+### Sync balance history for every customer
+
+By default, the `CustomerBalanceTransaction` table only syncs transactions for customers whose balance isn't zero. This skips one Stripe API call per zero-balance customer, which keeps syncs fast since most customers never use their credit balance.
+
+The trade-off is that customers who received credits but fully consumed them (bringing their balance back to zero) won't have their balance transaction history in the table.
+
+To include these customers, enable **Sync balance history for every customer** in your Stripe source settings. When enabled, the sync calls Stripe for every customer regardless of their current balance, giving you complete transaction history.
+
+> **Note:** Enabling this setting adds one Stripe API request per customer on each sync, so syncs take longer. Only enable it if you need complete balance transaction history – for example, to rebuild credit ledgers or audit all balance activity.
+
 ## Supported tables
 
 <SourceTables />
