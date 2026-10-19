@@ -9,7 +9,7 @@ PostHog has a powerful API that enables you to capture, evaluate, create, update
 
 The API is available for all users and instances. It contains two types of endpoints:
 
-1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project token](https://app.posthog.com/project/settings) to handle the request.
+1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture), the [capture v1 endpoints](/docs/api/capture-v1), and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project token](https://app.posthog.com/project/settings) to handle the request.
 
 2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key.
 
@@ -44,6 +44,8 @@ There are separate limits for different kinds of resources.
 - For the `/invites` and `/invites/bulk` endpoints, you can send `50` invites per hour and `200` per day, with up to 20 invites per bulk request. This also applies to invites sent from the PostHog UI.
 
 - Public POST-only endpoints such as event capture (`/e`, `/i/v0/e`) and feature flag evaluation (`/flags`) have no request-level rate limits. Event capture still returns `200` when your project is over its billing quota, and names the limited resources in the `quota_limited` field of the response body. It also applies a [per-distinct-ID ingestion protection](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids): if a single distinct ID sends a high, sustained volume of events (roughly 5,000 per minute), those events are still accepted with a `200` response but are processed without strict ordering and without person profile updates for the duration of the spike. PostHog logs an [ingestion warning](/docs/data/ingestion-warnings) when this happens.
+
+- The [capture v1 endpoints](/docs/api/capture-v1) answer differently: a project over its billing limit gets `402`, and an event over a product's quota gets a `drop` result that names the quota. See [status codes](/docs/api/capture-v1#status-codes).
 
 Most of these limits count **per personal API key**, not per team. For example, if a script using one personal API key hits the rate limit, another user calling the persons API with a different personal API key is unaffected.
 

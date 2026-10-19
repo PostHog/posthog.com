@@ -50,6 +50,7 @@ Validation warnings, raised when PostHog rejects a request as it arrives:
 - [Discarded event with no event name](#discarded-event-with-no-event-name)
 - [Discarded session replay batches](#discarded-session-replay-batches)
 - [Discarded AI events](#discarded-ai-events)
+- [Capture v1 validation warnings](#capture-v1-validation-warnings)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -165,7 +166,7 @@ Start with the `lib` and `lib_version` details. Warnings clustered on a single o
 
 Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value – when it's missing from both, `null`, empty, or only whitespace.
 
-PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), events with these placeholder values are stored without a person profile. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
 Most PostHog SDKs block the obvious mistakes for you - for example in the posthog-js SDK, `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 
@@ -199,6 +200,25 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 | Discarded a non-AI event sent to the LLM analytics capture endpoint | An event whose name doesn't start with `$ai_` was sent to the LLM analytics endpoint (`/i/v1/ai/events`). Only that event was discarded. The rest of the batch was ingested. Send events without an `$ai_` name to the standard capture endpoint instead. |
 | Rejected a malformed AI or OpenTelemetry request | The request body couldn't be parsed. |
 | Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them. |
+
+### Capture v1 validation warnings
+
+[Capture v1](/docs/api/capture-v1) checks each event on its own and drops only the events with a problem. It also tells your SDK which events it dropped, and why, in the [result details](/docs/api/capture-v1#result-details). A few problems still reject the whole request with a `400`.
+
+| Warning | Cause |
+| --- | --- |
+| Discarded event whose name exceeds the length limit | The event name is longer than 200 bytes. |
+| Discarded event whose distinct ID exceeds the size limit | The `distinct_id` is longer than 200 bytes. |
+| Discarded event with an invalid timestamp | The `timestamp` isn't in RFC 3339 format. |
+| Discarded event with malformed properties | `properties` isn't a JSON object. |
+| Discarded event with invalid capture options | `options` isn't a JSON object, or an [option](/docs/api/capture-v1#event-options) value can't be read. The warning names the options. |
+| Rejected a request containing no events | The `batch` was empty. |
+| Rejected a batch with invalid metadata | A batch field, such as `created_at`, was missing or invalid. Nothing in the request was stored. |
+| Rejected a batch containing an event with no UUID | An event had no `uuid`. Nothing in the request was stored. |
+| Rejected a batch containing an event with an invalid UUID | An event's `uuid` wasn't a valid UUID. Nothing in the request was stored. |
+| Rejected a batch containing duplicate event UUIDs | Two events in one request had the same `uuid`. Nothing in the request was stored. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
+
+<!-- TODO(capture-v1): confirm these titles match the app's ingestion warnings view at release, and add docs anchors for them in the app. -->
 
 ## Query warnings via MCP
 

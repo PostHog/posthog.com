@@ -536,7 +536,7 @@ When calling either of these with invalid inputs (such as in the examples descri
 2. Merging users will be refused and an ingestion warning will be logged (see [ingestion warnings](/manual/data-management#ingestion-warnings) for more details).
 3. The event will be only be tied to the user associated with `distinct_id`.
 
-PostHog also has built-in protections to stop the most common distinct ID mistakes. See the FAQ at the end of this page for more details.
+PostHog also has built-in protections to stop the most common distinct ID mistakes. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), events sent with a placeholder distinct ID like these are stored without a person profile. See the FAQ at the end of this page for more details.
 
 - We do not allow identifying users with empty space strings of any length, e.g. `' '`, `'       '`, etc.
 - We do not allow identifying users with the following strings (case insensitive):
