@@ -4,37 +4,43 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Pocket guides are our **learn with a story** format. They're for people who'd rather follow a team making product decisions than read a list of features.
+Pocket guides are our **learn with a story** format. They follow product teams using PostHog to make product decisions, with real use cases and examples from Twig.com. They're for humans who want to read and learn, but don't want to read a boring manual.
 
-The [Product Analytics Learn page](/docs/product-analytics/learn) and its [pocket guide](/docs/product-analytics/learn/introduction) show what we're aiming for. The Learn page offers a few ways in: learn with an agent, read the story, or try things in Twig. The guide opens inside the product's Learn tab, with chapters in the docs navigation. Readers don't have to leave that experience to keep going.
+The [Product Analytics Learn page](/docs/product-analytics/learn) and its [pocket guide](/docs/product-analytics/learn/introduction) set the quality bar for every PostHog product. The guide opens inside the Learn platform, with chapters in the left-hand navigation, so readers can follow the whole story without leaving that experience.
 
-## What makes it a pocket guide?
+## What's a pocket guide vs. docs?
 
-In the Product Analytics guide, Twig's engineers start with a small question: which destinations do visitors choose? They add an event, connect activity to people and sessions, and use trends and funnels to understand what happens next. Each chapter picks up where the last one left off.
+Docs are our reference manual: content formatted for agents and for humans who need to skim quickly and get an answer. We're thinking of this as "agent food" for now, though the naming and work to make it real agent food (evals, re-formatting, etc.) is still a work in progress. Docs help readers find a setting, check how something works, or complete a specific task.
 
-That's the model for future guides:
+Pocket guides are stories. They go deeper into how a team uses PostHog to answer product questions and decide what to do next. Storytelling, real use cases, and examples from Twig.com give readers a product and a team to follow. Readers learn the concepts through the team's discoveries, with enough context to understand why they matter.
 
-- **Follow a product question.** Show what the team wants to know, what they can see in PostHog, and what they decide to do with that evidence.
-- **Teach concepts when the story needs them.** Explain an event, session, or insight as it becomes useful. Give readers enough context to stay in the guide, with links to docs when they want to go deeper.
-- **Let readers see the evidence.** Put Twig views, PostHog figures, and small interactions beside the moment they're discussed. The Product Analytics examples use local teaching data, not live bookings or events sent to a PostHog project.
-- **Make it easy to keep reading.** Use the cover, chapter navigation, and next-chapter links in the shared Learn reader. A guide can have a different number of chapters, but it should feel like one connected story.
+In the Product Analytics guide, Twig's engineers start with a small question about their product: which destinations do visitors choose? They add an event, connect activity to people and sessions, and use trends and funnels to understand what happens next. Each chapter builds on the last, giving readers a reason to keep going.
 
-The Product Analytics guide is the reference for the premise and design. A guide about another product will have different questions, figures, Twig components, and actions for readers to take. It doesn't need to copy a fixed "101, then use cases" outline or end every chapter with the same kind of button.
+When writing a pocket guide:
+
+- **Use Twig.com as the canonical example app.** Every pocket guide follows the Twig team, an imaginary product engineering team using PostHog to understand and improve Twig.com. Build the story around their questions, discoveries, and decisions so readers can follow the same app and team across guides.
+- **Build a story around a product question.** Give the team something to figure out and show how they use PostHog to reach a decision. Let each chapter move that story forward.
+- **Teach concepts when the team needs them.** Introduce PostHog concepts and mental models as they become useful in the story. Give readers enough context to keep reading, with links to docs for reference details.
+- **Bring the examples to life.** Use Twig views, PostHog figures, and simple interactions to help readers follow the team's discoveries. Be clear when examples use simulated data. The Product Analytics guide uses local teaching data, not live bookings or events sent to a PostHog project.
+- **Give readers a reason to turn the page.** Connect chapters through the team's next question. Use the cover, chapter navigation, and next-chapter links in the shared Learn reader to make the story easy to follow.
+- **End with a handoff to PostHog.** At the end of the last chapter, every guide should give readers a concrete way to try what they just learned in their own project. That could be a link into the app, a prompt for their agent to use with the PostHog MCP, or steps to set something up. They've followed the Twig team this far – now help them do the thing themselves! Make the action specific to the lesson and easy to start.
+
+A guide about another product will have its own questions, examples, and decisions. Use the Product Analytics guide as a reference for the storytelling and design, with a chapter structure that fits the story you want to tell.
 
 ## Plan the story before writing chapters
 
-Start with what you want someone to understand or do by the end. Then ask: what product question would make them care about learning this?
+Start with what you want a human to understand or do by the end. Then give the Twig team a reason to figure it out. What are they curious about? What's going wrong? What do they want to build next?
 
-1. **Pick an example product and a question.** Twig gives us a shared product to follow, so readers don't have to imagine the app or its users. Look for a natural action in Twig that the PostHog product can help explain.
-2. **Sketch the journey.** List the questions the team asks, the evidence they inspect, and the decisions they make. Give each chapter one step in that journey. The Product Analytics guide moves from recording an action to connecting it to a person, then counting what people do.
-3. **Choose what readers will see.** Use a focused Twig view or PostHog figure where it helps someone understand the evidence. Make any simulated data or behavior clear. The figure should answer a question in the prose, not just decorate the page.
-4. **Choose the next step.** A chapter might lead to the next question, offer a prompt or link, or give someone an action to try. Let the lesson decide the call to action. Ask the relevant product team to check that the PostHog concepts and examples are right.
+1. **Give the Twig team a question.** Twig.com is our example app for every pocket guide, and its imaginary product engineering team drives the story. Maybe guests aren't finishing their bookings, or the team wants to know if the trip planner is actually useful. Pick something the PostHog product can help them answer.
+2. **Develop the lore.** What made the team care about this question? What do they think is happening, and what does the data actually show? Work out how one discovery leads to the next, and where that takes the team. That's your chapter outline! We want readers to follow a team figuring things out, with a reason to turn the page.
+3. **Give readers something to look at.** Bring in Twig views and PostHog figures so readers can see what the team sees. Each one should help explain something in the story. If the team spots a drop-off, show it. If the data is simulated, say so.
+4. **Figure out what happens next.** Does the team have another question? Are they ready to build something? Is there something the reader can try in their own product? Let the story lead you to the next step. And get the relevant product team to check the PostHog concepts and examples before you call it done.
 
 ## Put the guide together
 
 The story lives in `contents/pocket-guides/<volume>/`. Each chapter has an `index.mdx` file. A short block at the top sets its title and reading order. Use the Product Analytics [introduction](https://github.com/PostHog/posthog.com/blob/master/contents/pocket-guides/product-analytics/index.mdx) and [Events and properties chapter](https://github.com/PostHog/posthog.com/blob/master/contents/pocket-guides/product-analytics/101/index.mdx) as examples of the story's shape.
 
-For component syntax and MDX details, use the [`PocketGuides` README](https://github.com/PostHog/posthog.com/blob/master/src/components/PocketGuides/README.md). Scout guides have extra rules in the [`SelfDrivingInbox` README](https://github.com/PostHog/posthog.com/blob/master/src/components/SelfDrivingInbox/README.md).
+For component syntax and MDX details, use the [`PocketGuides` README](https://github.com/PostHog/posthog.com/blob/master/src/components/PocketGuides/README.md). Writing about scouts? The [`SelfDrivingInbox` README](https://github.com/PostHog/posthog.com/blob/master/src/components/SelfDrivingInbox/README.md) documents the current implementation, but that format is still evolving.
 
 Keep the work in the right place:
 
