@@ -1,0 +1,173 @@
+---
+title: Pino Logs installation
+platformLogo: nodejs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+Send your existing [Pino](https://getpino.io) logs to PostHog with the OpenTelemetry Pino instrumentation. You don't need to change your logger calls. Requires Pino v7 or later.
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/sdk-logs @opentelemetry/resources @opentelemetry/instrumentation-pino
+```
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Create an instrumentation file" badge="required">
+
+Create an `instrumentation.js` file. It starts the OpenTelemetry SDK and tells it to send every Pino log to PostHog.
+
+```javascript file=instrumentation.js
+const { NodeSDK } = require('@opentelemetry/sdk-node');
+const { OTLPLogExporter } = require('@opentelemetry/exporter-logs-otlp-http');
+const { BatchLogRecordProcessor } = require('@opentelemetry/sdk-logs');
+const { resourceFromAttributes } = require('@opentelemetry/resources');
+const { PinoInstrumentation } = require('@opentelemetry/instrumentation-pino');
+
+const sdk = new NodeSDK({
+  resource: resourceFromAttributes({
+    'service.name': 'my-node-service',
+  }),
+  logRecordProcessors: [
+    new BatchLogRecordProcessor({
+      exporter: new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs',
+        headers: {
+          'Authorization': 'Bearer <ph_project_token>'
+        }
+      })
+    })
+  ],
+  instrumentations: [new PinoInstrumentation()]
+});
+
+sdk.start();
+
+// Send buffered logs before the process exits
+process.on('SIGTERM', () => {
+  sdk.shutdown().finally(() => process.exit(0));
+});
+```
+
+</Step>
+
+<Step title="Load the instrumentation before your app" badge="required">
+
+The instrumentation must load before your app imports `pino`. Otherwise it can't patch Pino and no logs are sent. Use the `--require` flag when you start your app:
+
+```bash
+node --require ./instrumentation.js app.js
+```
+
+If you can't change the start command (for example, on a hosting platform), set `NODE_OPTIONS` instead:
+
+```bash
+NODE_OPTIONS="--require ./instrumentation.js" npm start
+```
+
+**If your app uses ES modules**
+
+`--require` doesn't patch `import` statements. Install the OpenTelemetry instrumentation package:
+
+```bash
+npm install @opentelemetry/instrumentation
+```
+
+Name the file `instrumentation.mjs`, change the `require` calls to `import` statements, and register the OpenTelemetry loader hook before you start the SDK:
+
+```javascript file=instrumentation.mjs
+import { register } from 'node:module';
+// ...the same imports as instrumentation.js
+
+register('@opentelemetry/instrumentation/hook.mjs', import.meta.url);
+
+// ...the same SDK setup as instrumentation.js
+```
+
+Then start your app with `--import`:
+
+```bash
+node --import ./instrumentation.mjs app.js
+```
+
+</Step>
+
+<Step title="Use your Pino logger" badge="required">
+
+Keep using Pino as before. Your logs still go to their usual destination, and a copy goes to PostHog:
+
+```javascript
+const pino = require('pino');
+
+const logger = pino();
+
+logger.info('Server started');
+logger.warn({ userId: 'user_123', retries: 3 }, 'Payment retry');
+logger.error(new Error('Database connection failed'), 'Query failed');
+```
+
+PostHog receives each Pino record like this:
+
+| Pino | PostHog Logs |
+| --- | --- |
+| Message (`msg`) | Log body |
+| Level (`info`, `warn`, `error`, etc.) | Severity |
+| Object fields and child logger bindings | Log attributes |
+| `Error` objects | `exception.type`, `exception.message`, and `exception.stacktrace` attributes |
+
+To [link logs to a person and their session replay](/docs/logs/link-session-replay), add the `posthogDistinctId` and `sessionId` fields. A child logger adds them to every log in a request:
+
+```javascript
+const requestLogger = logger.child({
+  posthogDistinctId: userId,
+  sessionId: sessionId,
+});
+
+requestLogger.info('Checkout completed');
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Start your app with the instrumentation loaded and trigger a log
+2. Check the PostHog Logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## Troubleshooting
+
+**Logs not appearing in PostHog**
+
+1. Make sure the instrumentation file loads before `pino`. If your app uses ES modules, you need the `--import` flag and the loader hook.
+2. Check your Pino version. Log sending requires Pino v7 or later.
+3. For short-lived scripts, add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends. The SDK sends logs in batches, and a script that ends on its own doesn't send the last batch.
+
+For general Logs troubleshooting (authentication, connection issues, format problems), see the [Logs troubleshooting guide](/docs/logs/troubleshooting).
