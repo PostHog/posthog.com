@@ -1,206 +1,210 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import {
+    IconApps,
+    IconChat,
+    IconChevronDown,
+    IconGear,
+    IconHome,
+    IconRocket,
+    IconSearch,
+    IconTrends,
+} from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { IOS_SPRING } from '../Ingest/session'
 import { transform, useEventClock } from '../timeline'
 import { PostHogMark } from '../Query/AgentWindow'
+import { SourceIcon } from '../Query/trace'
 import {
+    EARLIER_REPORTS,
     HANDOFF_AT,
     HandoffAgent,
-    NIGHT_ENDS_AT,
-    NIGHT_HOURS,
-    OTHER_REPORTS,
+    InboxReport,
+    OVERNIGHT_REPORTS,
     PRESS_AT,
     PressCursor,
+    Priority,
     REPORT,
-    REPORT_AT,
     REPORT_BOUNDARIES,
     REPORT_LOOP_MS,
     REPORT_RESTING_MOMENT,
+    ReportSource,
 } from './report'
 
-const NOTIFICATION_ENTER = {
-    initial: { opacity: 0, transform: transform({ y: -16, scale: 0.96 }) },
+const REPORT_ENTER = {
+    initial: { opacity: 0, transform: transform({ y: -12, scale: 0.98 }) },
     animate: { opacity: 1, transform: transform() },
+    exit: { opacity: 0, transition: { duration: 0.35, ease: 'easeOut' as const } },
     transition: IOS_SPRING,
 }
 
-const DAWN_KEYFRAMES: Keyframe[] = [
-    { opacity: 0, offset: 0 },
-    { opacity: 1, offset: NIGHT_ENDS_AT / REPORT_LOOP_MS },
-    { opacity: 1, offset: 1 },
-]
-
-const MINUTE_TENS = [0, 1, 2, 3, 4, 5, 0]
-const MINUTE_ONES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-const MINUTE_TENS_PER_HOUR = 6
-const HOUR_ROLL_MS = 260
-const nightHoursElapsed = NIGHT_HOURS.length - 1
-const hourStartsAt = (hour: number): number => (hour / nightHoursElapsed) * NIGHT_ENDS_AT
-const loopOffset = (at: number): number => at / REPORT_LOOP_MS
-const stripPosition = (index: number, count: number): string => `translateY(${(-index / count) * 100}%)`
-
-const collapseRepeats = (digits: number[]): number[] =>
-    digits.filter((digit, index) => index === 0 || digit !== digits[index - 1])
-
-const rollingKeyframes = (hourlyDigits: number[]): Keyframe[] => {
-    const strip = collapseRepeats(hourlyDigits)
-    let position = 0
-    return [
-        { offset: 0, transform: stripPosition(0, strip.length) },
-        ...hourlyDigits.slice(1).flatMap((digit, index): Keyframe[] => {
-            if (digit === hourlyDigits[index]) return []
-            const rollsAt = hourStartsAt(index + 1)
-            position += 1
-            return [
-                {
-                    offset: loopOffset(rollsAt),
-                    transform: stripPosition(position - 1, strip.length),
-                    easing: 'ease-in-out',
-                },
-                { offset: loopOffset(rollsAt + HOUR_ROLL_MS), transform: stripPosition(position, strip.length) },
-            ]
-        }),
-        { offset: 1, transform: stripPosition(strip.length - 1, strip.length) },
-    ]
+const PRIORITY_STYLES: Record<Priority, string> = {
+    P1: 'border-red/40 bg-red/10 text-red',
+    P2: 'border-orange/40 bg-orange/10 text-orange',
+    P3: 'border-orange/25 bg-orange/5 text-orange/80',
 }
 
-const HOUR_TENS = NIGHT_HOURS.map((hour) => Math.floor(hour / 10))
-const HOUR_ONES = NIGHT_HOURS.map((hour) => hour % 10)
-const HOUR_TENS_KEYFRAMES = rollingKeyframes(HOUR_TENS)
-const HOUR_ONES_KEYFRAMES = rollingKeyframes(HOUR_ONES)
+const ReportSourceIcon = ({ source }: { source: ReportSource }) =>
+    source === 'scout' ? (
+        <IconRocket className="size-3.5 shrink-0 text-orange" />
+    ) : (
+        <SourceIcon source={source} className="size-3.5 shrink-0" />
+    )
 
-const spinningKeyframes = (digits: number[], cycles: number): Keyframe[] => {
-    const cycleMs = NIGHT_ENDS_AT / cycles
-    return [
-        ...Array.from({ length: cycles }, (_, cycle): Keyframe[] => [
-            { offset: loopOffset(cycle * cycleMs), transform: stripPosition(0, digits.length) },
-            {
-                offset: loopOffset((cycle + 1) * cycleMs),
-                transform: stripPosition(digits.length - 1, digits.length),
-            },
-        ]).flat(),
-        { offset: loopOffset(NIGHT_ENDS_AT), transform: stripPosition(0, digits.length) },
-        { offset: 1, transform: stripPosition(0, digits.length) },
-    ]
-}
-
-const MINUTE_TENS_KEYFRAMES = spinningKeyframes(MINUTE_TENS, nightHoursElapsed)
-const MINUTE_ONES_KEYFRAMES = spinningKeyframes(MINUTE_ONES, nightHoursElapsed * MINUTE_TENS_PER_HOUR)
-
-const RollingDigits = ({
-    items,
-    stripRef,
-    className,
-}: {
-    items: number[]
-    stripRef: React.RefObject<HTMLSpanElement>
-    className?: string
-}) => (
-    <span
-        className={cn(
-            'inline-block h-[1lh] overflow-hidden [mask-image:linear-gradient(transparent,black_18%,black_82%,transparent)]',
-            className
-        )}
-    >
-        <span ref={stripRef} className="flex flex-col">
-            {items.map((item, index) => (
-                <span key={index}>{item}</span>
-            ))}
+const ReportCard = ({ report }: { report: InboxReport }) => (
+    <div className="flex gap-2.5 rounded-md border border-primary bg-primary p-2.5">
+        <span
+            className={cn(
+                'mt-px h-fit shrink-0 rounded border px-1 text-[10px] font-bold leading-4',
+                PRIORITY_STYLES[report.priority]
+            )}
+        >
+            {report.priority}
         </span>
-    </span>
-)
-
-const RollingClock = ({
-    hourTensRef,
-    hourOnesRef,
-    minuteTensRef,
-    minuteOnesRef,
-}: {
-    hourTensRef: React.RefObject<HTMLSpanElement>
-    hourOnesRef: React.RefObject<HTMLSpanElement>
-    minuteTensRef: React.RefObject<HTMLSpanElement>
-    minuteOnesRef: React.RefObject<HTMLSpanElement>
-}) => (
-    <p className="m-0 flex text-5xl font-bold tabular-nums leading-tight text-white">
-        <RollingDigits items={collapseRepeats(HOUR_TENS)} stripRef={hourTensRef} />
-        <RollingDigits items={collapseRepeats(HOUR_ONES)} stripRef={hourOnesRef} />
-        <span>:</span>
-        <RollingDigits items={MINUTE_TENS} stripRef={minuteTensRef} />
-        <RollingDigits items={MINUTE_ONES} stripRef={minuteOnesRef} />
-    </p>
-)
-
-const NightSky = ({ dawnRef }: { dawnRef: React.RefObject<HTMLDivElement> }) => (
-    <>
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0B1020,#1E2747)]" />
-        <div
-            ref={dawnRef}
-            className="absolute inset-0 bg-[radial-gradient(ellipse_70%_45%_at_50%_64%,rgba(255,176,102,0.4),transparent_70%),linear-gradient(180deg,#36487C_0%,#8D76A8_38%,#E8957C_62%,#F6B47E_84%)] opacity-0"
-        />
-    </>
-)
-
-const Notification = ({ scout, title }: { scout: string; title: string }) => (
-    <div className="rounded-xl bg-light/95 px-3 py-2 text-primary shadow-lg dark:bg-dark/95">
-        <p className="m-0 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-secondary">
-            <PostHogMark className="h-2.5" />
-            Inbox · {scout}
-            <span className="ml-auto normal-case tracking-normal">now</span>
-        </p>
-        <p className="m-0 mt-0.5 text-xs font-semibold leading-snug">{title}</p>
+        <div className="min-w-0 flex-1">
+            <p className="m-0 flex min-w-0 items-center gap-1.5 text-[12.5px] font-semibold leading-snug">
+                <code className="shrink-0 rounded border border-primary !bg-transparent px-1 font-code text-[10px] font-normal">
+                    {report.scope}
+                </code>
+                <span className="truncate">{report.title}</span>
+            </p>
+            <p className="m-0 mt-1 truncate text-[11.5px] text-secondary">{report.description}</p>
+            <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-secondary">
+                {report.sources.slice(0, 2).map((source) => (
+                    <ReportSourceIcon key={source} source={source} />
+                ))}
+                <span className="truncate">{report.sourceLabel}</span>
+            </div>
+        </div>
+        <div className="flex shrink-0 flex-col items-end justify-between pl-1 text-[11px] text-secondary">
+            {report.users !== undefined ? (
+                <span className="hidden flex-col items-center pt-1 @md:flex">
+                    <span className="text-sm font-bold leading-none text-primary">{report.users}</span>
+                    <span className="font-code text-[10px]">users</span>
+                </span>
+            ) : (
+                <span />
+            )}
+            <span className="whitespace-nowrap leading-4">{report.age}</span>
+        </div>
     </div>
 )
 
-interface NightRefs {
-    dawnRef: React.RefObject<HTMLDivElement>
-    hourTensRef: React.RefObject<HTMLSpanElement>
-    hourOnesRef: React.RefObject<HTMLSpanElement>
-    minuteTensRef: React.RefObject<HTMLSpanElement>
-    minuteOnesRef: React.RefObject<HTMLSpanElement>
-}
+const FilterChip = ({ children, highlight }: { children: React.ReactNode; highlight?: boolean }) => (
+    <span
+        className={cn(
+            'flex shrink-0 items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-semibold',
+            highlight ? 'border-orange bg-orange/10 text-primary' : 'border-primary bg-primary text-secondary'
+        )}
+    >
+        {children}
+    </span>
+)
 
-const MorningStack = ({ elapsed, nightRefs }: { elapsed: number; nightRefs: NightRefs }) => (
-    <div className="relative">
-        <div className="relative h-[28rem] overflow-hidden rounded-xl [mask-image:linear-gradient(black_15%,rgba(0,0,0,0.85)_38%,rgba(0,0,0,0.55)_58%,rgba(0,0,0,0.25)_76%,rgba(0,0,0,0.08)_88%,transparent_97%)]">
-            <NightSky dawnRef={nightRefs.dawnRef} />
-            <div className="relative flex h-full flex-col items-center px-4 pt-6">
-                <p className="m-0 text-xs font-semibold text-white/70">Tuesday</p>
-                <RollingClock
-                    hourTensRef={nightRefs.hourTensRef}
-                    hourOnesRef={nightRefs.hourOnesRef}
-                    minuteTensRef={nightRefs.minuteTensRef}
-                    minuteOnesRef={nightRefs.minuteOnesRef}
-                />
-                <div className="mt-5 flex w-full max-w-sm flex-col gap-2">
+const RAIL_ITEMS = [
+    { label: 'Home', Icon: IconHome, active: false },
+    { label: 'Chats', Icon: IconChat, active: false },
+    { label: 'Analytics', Icon: IconTrends, active: false },
+    { label: 'Products', Icon: IconApps, active: true },
+]
+
+const RailItem = ({
+    label,
+    Icon,
+    active,
+}: {
+    label: string
+    Icon: React.ComponentType<{ className?: string }>
+    active: boolean
+}) => (
+    <span className={cn('flex flex-col items-center gap-0.5 text-[8.5px]', active ? 'text-primary' : 'text-secondary')}>
+        <span className={cn('flex size-7 items-center justify-center rounded-md', active && 'bg-primary')}>
+            <Icon className="size-4" />
+        </span>
+        {label}
+    </span>
+)
+
+const InboxWindow = ({ elapsed }: { elapsed: number }) => {
+    const arrived = [REPORT, ...OVERNIGHT_REPORTS.slice().reverse()].filter(({ at = 0 }) => elapsed >= at)
+    const reports = [...arrived, ...EARLIER_REPORTS]
+    return (
+        <div className="flex h-[28rem] overflow-hidden rounded-lg border border-primary bg-accent text-primary shadow-xl">
+            <div className="hidden w-14 shrink-0 flex-col items-center gap-2.5 border-r border-primary py-3 @md:flex">
+                <PostHogMark className="mb-1 h-3.5" />
+                {RAIL_ITEMS.map((item) => (
+                    <RailItem key={item.label} {...item} />
+                ))}
+                <span className="mt-auto">
+                    <RailItem label="Settings" Icon={IconGear} active={false} />
+                </span>
+            </div>
+            <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex shrink-0 items-center gap-2 border-b border-primary px-3 py-2 text-xs">
+                    <span className="font-semibold">Acme</span>
+                    <IconChevronDown className="size-3 text-secondary" />
+                    <span className="ml-auto flex items-center gap-1.5 rounded-md border border-primary bg-primary px-2 py-0.5 text-[11px] text-secondary">
+                        <IconSearch className="size-3" /> Search
+                    </span>
+                </div>
+                <div className="shrink-0 border-b border-primary px-3 pt-2">
+                    <p className="m-0 flex items-center gap-1.5 text-xs">
+                        <IconRocket className="size-3.5" />
+                        <span className="font-semibold">Self-driving inbox</span>
+                        <span className="rounded-full border border-orange/60 px-1.5 text-[10px] text-orange">
+                            beta
+                        </span>
+                    </p>
+                    <div className="mt-2 flex gap-4 text-xs">
+                        <span className="border-b-2 border-[#F54E00] pb-1.5 font-semibold text-[#F54E00]">Reports</span>
+                        <span className="pb-1.5 text-secondary">Scouts</span>
+                        <span className="pb-1.5 text-secondary">Settings</span>
+                    </div>
+                </div>
+                <div className="flex shrink-0 gap-1.5 overflow-hidden px-3 py-2">
+                    <FilterChip>
+                        All priorities <IconChevronDown className="size-3" />
+                    </FilterChip>
+                    <FilterChip>
+                        Newest first <IconChevronDown className="size-3" />
+                    </FilterChip>
+                    <span className="ml-auto" />
+                    <FilterChip highlight>
+                        Triage mode <span className="rounded border border-primary px-1 font-code text-[9px]">T</span>
+                    </FilterChip>
+                </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden px-3 pb-3 [mask-image:linear-gradient(black_80%,transparent)]">
                     <AnimatePresence initial={false}>
-                        {elapsed >= REPORT_AT && (
-                            <motion.div key={REPORT.title} layout {...NOTIFICATION_ENTER} className="relative z-10">
-                                <PressCursor elapsed={elapsed} pressAt={PRESS_AT}>
-                                    <Notification scout={REPORT.scout} title={REPORT.title} />
-                                </PressCursor>
+                        {reports.map((report) => (
+                            <motion.div key={report.id} layout="position" {...REPORT_ENTER} className="relative">
+                                {report.id === REPORT.id ? (
+                                    <PressCursor elapsed={elapsed} pressAt={PRESS_AT}>
+                                        <ReportCard report={report} />
+                                    </PressCursor>
+                                ) : (
+                                    <ReportCard report={report} />
+                                )}
                             </motion.div>
-                        )}
-                        {OTHER_REPORTS.filter(({ at }) => elapsed >= at)
-                            .reverse()
-                            .map(({ scout, title }) => (
-                                <motion.div key={title} layout {...NOTIFICATION_ENTER}>
-                                    <Notification scout={scout} title={title} />
-                                </motion.div>
-                            ))}
+                        ))}
                     </AnimatePresence>
                 </div>
             </div>
         </div>
+    )
+}
+
+const InboxHandoff = ({ elapsed }: { elapsed: number }) => (
+    <div className="relative">
+        <InboxWindow elapsed={elapsed} />
         <AnimatePresence>
             {elapsed >= HANDOFF_AT && (
                 <motion.div
-                    key="desktop"
+                    key="agent"
                     initial={{ opacity: 0, transform: transform({ y: 40, scale: 0.94 }) }}
                     animate={{ opacity: 1, transform: transform() }}
                     exit={{ opacity: 0, transform: transform({ y: 20 }) }}
                     transition={IOS_SPRING}
-                    className="absolute -right-6 top-28 w-[78%]"
+                    className="absolute -right-6 top-32 w-[78%]"
                 >
                     <HandoffAgent elapsed={elapsed} className="!h-[20rem]" />
                 </motion.div>
@@ -219,34 +223,17 @@ export default function ActStep({
     description: React.ReactNode
 }): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
-    const dawnRef = useRef<HTMLDivElement>(null)
-    const hourTensRef = useRef<HTMLSpanElement>(null)
-    const hourOnesRef = useRef<HTMLSpanElement>(null)
-    const minuteTensRef = useRef<HTMLSpanElement>(null)
-    const minuteOnesRef = useRef<HTMLSpanElement>(null)
-    const nightRefs = useMemo(() => ({ dawnRef, hourTensRef, hourOnesRef, minuteTensRef, minuteOnesRef }), [])
-    const loopAnimations = useMemo(
-        () => [
-            { ref: dawnRef, keyframes: DAWN_KEYFRAMES },
-            { ref: hourTensRef, keyframes: HOUR_TENS_KEYFRAMES },
-            { ref: hourOnesRef, keyframes: HOUR_ONES_KEYFRAMES },
-            { ref: minuteTensRef, keyframes: MINUTE_TENS_KEYFRAMES },
-            { ref: minuteOnesRef, keyframes: MINUTE_ONES_KEYFRAMES },
-        ],
-        []
-    )
     const elapsed = useEventClock(containerRef, {
         loopMs: REPORT_LOOP_MS,
         boundaries: REPORT_BOUNDARIES,
         restingMs: REPORT_RESTING_MOMENT,
-        loopAnimations,
     })
 
     return (
         <div className="@container mt-16">
             <div
                 ref={containerRef}
-                className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8"
+                className="relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-16"
             >
                 <div className="@3xl:order-last @3xl:col-span-5">
                     <h3 className="!mt-0">
@@ -255,7 +242,7 @@ export default function ActStep({
                     <p>{description}</p>
                 </div>
                 <div className="not-prose @container @3xl:col-span-7" aria-hidden="true">
-                    <MorningStack elapsed={elapsed} nightRefs={nightRefs} />
+                    <InboxHandoff elapsed={elapsed} />
                 </div>
             </div>
         </div>

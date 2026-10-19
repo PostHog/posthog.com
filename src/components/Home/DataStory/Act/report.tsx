@@ -3,16 +3,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { transform, wordStream } from '../timeline'
 import { CodexTerminal } from '../Query/AgentWindow'
 import { TOOL_RUN_MS, ToolCall, TraceState } from '../Query/trace'
+import { SourceKey } from '../Ingest/session'
 
 export const REPORT_LOOP_MS = 15500
 export const REPORT_RESTING_MOMENT = 13000
 
-export const NIGHT_ENDS_AT = 4400
-export const NIGHT_HOURS = [11, 12, 1, 2, 3, 4, 5, 6]
-export const REPORT_AT = 4400
-export const PRESS_AT = 6100
-export const HANDOFF_AT = 6500
-const ANSWER_AT = 10000
+export const REPORT_AT = 3200
+export const PRESS_AT = 4900
+export const HANDOFF_AT = 5300
+const ANSWER_AT = 8800
 const ANSWER_MS_PER_CHAR = 16
 const SECOND_MS = 1000
 const CURSOR_LEAD_MS = 900
@@ -20,16 +19,85 @@ const PRESS_HOLD_MS = 160
 const CURSOR_LINGER_MS = 600
 const CURSOR_ARRIVES_BEFORE_MS = 250
 
-export const REPORT = {
-    number: 12,
-    scout: 'Revenue scout',
-    title: 'Checkout TypeError is blocking Pro upgrades',
+export type Priority = 'P1' | 'P2' | 'P3'
+
+export type ReportSource = SourceKey | 'scout'
+
+export interface InboxReport {
+    id: string
+    priority: Priority
+    scope: string
+    title: string
+    description: string
+    sources: ReportSource[]
+    sourceLabel: string
+    age: string
+    users?: number
+    at?: number
 }
 
-export const OTHER_REPORTS = [
-    { scout: 'Retention scout', title: 'Weekly actives up 12% after the new onboarding', at: 1100 },
-    { scout: 'Funnel scout', title: 'Safari signups dropped 8% after the redesign', at: 2200 },
-    { scout: 'Product scout', title: 'Docs search returns nothing for "flags"', at: 3300 },
+export const REPORT: InboxReport & { number: number } = {
+    id: 'checkout',
+    number: 12,
+    priority: 'P1',
+    scope: 'fix(checkout)',
+    title: 'Guard plan before pricing loads',
+    description: 'Pro upgrades throw a TypeError when checkout loads before pricing, and 31 charges failed this week.',
+    sources: ['errors', 'replay', 'stripe'],
+    sourceLabel: 'Error tracking + 2',
+    age: 'just now',
+    users: 12,
+    at: REPORT_AT,
+}
+
+export const OVERNIGHT_REPORTS: InboxReport[] = [
+    {
+        id: 'safari',
+        priority: 'P2',
+        scope: 'fix(signup)',
+        title: "Safari users can't submit the signup form",
+        description: 'The submit button sits under the cookie banner on Safari 17, so 8% fewer signups finish.',
+        sources: ['scout'],
+        sourceLabel: 'Scout · Signup funnel',
+        age: '2 hours ago',
+        users: 41,
+        at: 900,
+    },
+    {
+        id: 'template',
+        priority: 'P3',
+        scope: 'feat(dashboards)',
+        title: 'Suggest a template after the first dashboard',
+        description: 'Teams who build one dashboard rarely build a second, and most stop at the empty state.',
+        sources: ['replay'],
+        sourceLabel: 'Session replay',
+        age: '1 hour ago',
+        at: 2000,
+    },
+]
+
+export const EARLIER_REPORTS: InboxReport[] = [
+    {
+        id: 'search',
+        priority: 'P3',
+        scope: 'fix(docs)',
+        title: 'Return results for "flags" in docs search',
+        description: 'Searches for "flags" return nothing, so readers open a support ticket instead.',
+        sources: ['zendesk', 'scout'],
+        sourceLabel: 'Zendesk + 1',
+        age: '2 days ago',
+    },
+    {
+        id: 'price',
+        priority: 'P3',
+        scope: 'feat(billing)',
+        title: 'Show the plan price on the upgrade button',
+        description: 'Customers hover the upgrade button to find the price, then leave to check the pricing page.',
+        sources: ['analytics'],
+        sourceLabel: 'Product analytics',
+        age: '4 days ago',
+        users: 27,
+    },
 ]
 
 const CODEX_PROMPT = `Fix report #${REPORT.number} from my PostHog inbox`
@@ -42,7 +110,7 @@ const CODEX_CALLS: ToolCall[] = [
         mcpTool: 'inbox-reports-get',
         args: `report #${REPORT.number}`,
         result: 'Checkout TypeError · 23 replays · 31 failed charges · 4 tickets',
-        at: 7000,
+        at: 5800,
     },
     {
         id: 'replays',
@@ -51,7 +119,7 @@ const CODEX_CALLS: ToolCall[] = [
         mcpTool: 'session-recordings',
         args: `report #${REPORT.number}`,
         result: 'Pay throws before the redirect',
-        at: 8000,
+        at: 6800,
     },
     {
         id: 'trace',
@@ -60,7 +128,7 @@ const CODEX_CALLS: ToolCall[] = [
         mcpTool: 'error-tracking-issues',
         args: `report #${REPORT.number}`,
         result: 'plan is undefined at checkout.tsx:142',
-        at: 9000,
+        at: 7800,
     },
 ]
 
@@ -151,7 +219,7 @@ export const HandoffAgent = ({ elapsed, className }: { elapsed: number; classNam
 )
 
 export const REPORT_BOUNDARIES: number[] = [
-    ...OTHER_REPORTS.map(({ at }) => at),
+    ...OVERNIGHT_REPORTS.map(({ at }) => at ?? 0),
     REPORT_AT,
     ...pressCursorBoundaries(PRESS_AT),
     HANDOFF_AT,
