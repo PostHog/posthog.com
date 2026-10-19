@@ -168,6 +168,6 @@ View your logs in PostHog
 
 1. Make sure the instrumentation file loads before `pino`. If your app uses ES modules, you need the `--import` flag and the loader hook.
 2. Check your Pino version. Log sending requires Pino v7 or later.
-3. For short-lived scripts, add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends. The SDK sends logs in batches, and a script that ends on its own doesn't send the last batch.
+3. The SDK sends logs in batches, so a short-lived script that ends on its own loses the last batch. Add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends.
 
 For general Logs troubleshooting (authentication, connection issues, format problems), see the [Logs troubleshooting guide](/docs/logs/troubleshooting).

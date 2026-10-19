@@ -17,7 +17,7 @@ Send your existing [Winston](https://github.com/winstonjs/winston) logs to PostH
 npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/sdk-logs @opentelemetry/resources @opentelemetry/instrumentation-winston @opentelemetry/winston-transport
 ```
 
-The instrumentation only sends logs when `@opentelemetry/winston-transport` is installed. Don't skip it.
+The instrumentation only sends logs when `@opentelemetry/winston-transport` is installed.
 
 </Step>
 
@@ -177,6 +177,6 @@ View your logs in PostHog
 1. Check that `@opentelemetry/winston-transport` is installed. Without it, the instrumentation doesn't send logs.
 2. Make sure the instrumentation file loads before `winston`. If your app uses ES modules, you need the `--import` flag and the loader hook.
 3. Check your Winston version. Log sending requires Winston v3.
-4. For short-lived scripts, add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends. The SDK sends logs in batches, and a script that ends on its own doesn't send the last batch.
+4. The SDK sends logs in batches, so a short-lived script that ends on its own loses the last batch. Add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends.
 
 For general Logs troubleshooting (authentication, connection issues, format problems), see the [Logs troubleshooting guide](/docs/logs/troubleshooting).
