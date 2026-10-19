@@ -18,6 +18,16 @@ features:
   logs: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1 in 6.0.0" type="fyi">
+
+The Flutter SDK `6.0.0` sends events with [capture v1](/docs/libraries/capture-v1). It's a major version with breaking changes, including event options, per-event results, and new retry and compression settings. Capture v1 applies to iOS and macOS apps. Android, web, and desktop apps keep using legacy capture for now. Read the [upgrade guide](/docs/libraries/capture-v1) before you upgrade.
+
+</CalloutBox>
+<!-- TODO(ios): confirm version, platforms, and wording. TODO(capture-v1): add this callout on release day only; update the rest of this page's examples to the v1 API in the same release PR. -->
+
+
 import FlutterIdentify from './_snippets/identify.mdx'
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.

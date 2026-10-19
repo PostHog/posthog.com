@@ -16,6 +16,17 @@ PostHog automatically computes timestamps for captured events, but you can also 
 
 - Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is used as the event timestamp.
 
+## Capture v1
+
+[Capture v1](/docs/api/capture-v1#timestamps-and-clock-skew) works the same way, with different fields:
+
+- Every event must have a `timestamp`, in RFC 3339 format with at least millisecond precision.
+- The `PostHog-Request-Timestamp` header replaces `sent_at`. PostHog compares it with the time it received the request and adjusts each event's `timestamp` by the difference.
+- The `disable_skew_correction` [event option](/docs/api/capture-v1#event-options) replaces `$ignore_sent_at`.
+- `offset` isn't used.
+
+## Timestamp format
+
 To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`.
 
 > **Note:** `posthog-js` also sends `$time` property, but this isn't used anywhere in the ingestion pipeline.

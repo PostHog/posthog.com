@@ -18,6 +18,16 @@ features:
   logs: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1 in 4.0.0" type="fyi">
+
+The iOS SDK `4.0.0` sends events with [capture v1](/docs/libraries/capture-v1). It's a major version with breaking changes, including event options, per-event results, and new retry and compression settings. Read the [upgrade guide](/docs/libraries/capture-v1) before you upgrade.
+
+</CalloutBox>
+<!-- TODO(ios): confirm version and wording. TODO(capture-v1): add this callout on release day only; update the rest of this page's examples to the v1 API in the same release PR. -->
+
+
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
 import IOSIdentify from './_snippets/identify.mdx'
 import IOSSendEvents from '../../integrate/send-events/_snippets/send-events-ios.mdx'
