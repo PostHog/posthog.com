@@ -113,6 +113,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cache warming',
         owner: ['query-performance'],
     },
+    canvases: {
+        feature: 'Canvases',
+        owner: ['product-analytics'],
+        label: false,
+    },
     cli: {
         feature: 'CLI',
         owner: ['error-tracking', 'context-and-mcp'],
