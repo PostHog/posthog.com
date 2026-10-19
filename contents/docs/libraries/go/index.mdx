@@ -15,6 +15,16 @@ features:
   errorTracking: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1 in v2.0.0" type="fyi">
+
+The Go SDK `v2.0.0` sends events with [capture v1](/docs/libraries/capture-v1). It's a major version with breaking changes, including event options, per-event results, and new retry and compression settings. The module path changes to `github.com/posthog/posthog-go/v2`. Read the [upgrade guide](/docs/libraries/capture-v1) before you upgrade.
+
+</CalloutBox>
+<!-- TODO(capture-v1): add this callout on release day only; update the rest of this page's examples to the v1 API in the same release PR. -->
+
+
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 ## Installation

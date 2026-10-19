@@ -4,6 +4,15 @@ sidebar: Docs
 showTitle: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="A newer capture API is available" type="fyi">
+
+This page covers legacy capture, which stays supported. [Capture v1](/docs/api/capture-v1) is the new API: it returns a result for each event, takes event options, and has clearer status codes and retry rules. We plan to retire legacy capture in the future and will announce a date well in advance.
+
+</CalloutBox>
+
+
 The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want.
 
 Both are POST-only public endpoints that use your [project token](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
