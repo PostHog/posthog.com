@@ -9,7 +9,7 @@ availability:
 sourceId: DoIt
 ---
 
-The DoIt connector can link infrastructure reports to PostHog.
+The DoIt connector syncs infrastructure cost reports, budgets, optimization insights, cost anomalies, and invoices into PostHog.
 
 To link DoIt:
 
@@ -21,9 +21,23 @@ To link DoIt:
 
 4. Back in PostHog, paste the API key in the `API key` field and hit **Next**.
 
-5. On the next page, set up the reports you want to sync and modify the method and frequency as needed. Once done, click **Import**. New reports will show up in your schemas list periodically as they're created on DoIt.
+5. On the next page, select the tables and reports you want to sync and modify the method and frequency as needed. Once done, click **Import**. New reports will show up in your schemas list periodically as they're created on DoIt.
 
 Once the syncs are complete, you can start using DoIt data in PostHog.
+
+## Available data
+
+In addition to your saved cost reports, the DoIt connector provides four fixed tables:
+
+- **Budgets** – Spend limits for a scope of cloud costs over a period, with current utilization, forecast, and risk status.
+
+- **Insights** – Optimization opportunities or risks found in the cloud environment, with aggregate savings and risk counts across affected resources.
+
+- **Anomalies** – Cloud cost anomalies where spend exceeded the expected normal range for a service or SKU.
+
+- **Invoices** – Current or historical DoIt invoices, with totals, outstanding balances, and payment status.
+
+All four tables sync as **full refresh** only. Reports can be synced incrementally.
 
 ## Configuration
 
