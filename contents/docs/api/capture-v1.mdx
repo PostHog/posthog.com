@@ -1,0 +1,387 @@
+---
+title: Capture API (v1)
+sidebar: Docs
+showTitle: true
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<!-- TODO(capture-v1): replace every TODO(...) comment in this file before merge. Search the PR for "TODO(capture-v1". -->
+
+<CalloutBox icon="IconInfo" title="New capture API" type="fyi">
+
+Capture v1 is the new way to send events to PostHog. The [legacy capture endpoints](/docs/api/capture) still work and stay supported. We plan to retire them in the future and will announce a date well in advance.
+
+If you use a PostHog SDK, you don't need to call these endpoints yourself. Upgrade to an SDK version that uses capture v1 – see [upgrading to capture v1 SDKs](/docs/libraries/capture-v1).
+
+</CalloutBox>
+
+Capture v1 has two endpoints: one for analytics events and one for AI events. Both take a batch of events and tell you what happened to **each event** in the batch, so one bad event never costs you the rest.
+
+| | Legacy capture | Capture v1 |
+|---|---|---|
+| Endpoints | `/i/v0/e`, `/batch`, and others | `/i/v1/analytics/events`, `/i/v1/ai/events` |
+| Project token | In the body (`api_key`) | `Authorization: Bearer` header |
+| Response | `200` for the whole request | Per-event results, plus clear status codes |
+| `uuid`, `timestamp`, `distinct_id` | Optional or inferred | Required on every event |
+| Person processing and other settings | Magic `$` properties | An `options` object on each event |
+| Compression | `gzip-js`, `lz64`, `base64`, and others | `gzip`, `deflate`, `br`, `zstd` with `Content-Encoding` |
+
+## Endpoints
+
+| Endpoint | Send |
+|---|---|
+| `POST <ph_client_api_host>/i/v1/analytics/events` | All events except AI events |
+| `POST <ph_client_api_host>/i/v1/ai/events` | AI events only – events whose name starts with `$ai_`, like `$ai_generation` |
+
+Use `https://us.i.posthog.com` for US Cloud and `https://eu.i.posthog.com` for EU Cloud. Both endpoints accept POST only.
+
+<!-- TODO(capture-v1): confirm self-hosted / hobby support for both endpoints at release, and say which versions serve them. -->
+
+### Send each event to its own endpoint
+
+PostHog owns the `$ai_` event name prefix. Don't use it for your own events.
+
+- Send `$ai_` events to `/i/v1/ai/events`. In an SDK, use its AI capture method, such as `capture_ai`.
+- Send every other event to `/i/v1/analytics/events`.
+
+The AI endpoint drops any event that isn't an AI event, with the result detail `misrouted_event`. For now, the analytics endpoint still accepts AI events, so existing setups keep working while you move to v1. This is temporary, and we'll remove it in a future release. Large AI events always need the AI endpoint – see [capturing large AI events](/docs/ai-observability/large-events).
+
+<!-- TODO(capture-v1): confirm the AI-on-analytics transition wording with the AI and ingestion teams before merge. -->
+
+## Headers
+
+Every request needs these headers. A missing or malformed header rejects the whole request.
+
+| Header | Required | Value |
+|---|---|---|
+| `Authorization` | Yes | `Bearer <ph_project_token>` – your [project token](https://app.posthog.com/project/settings). A personal API key (`phx_…`) is refused. |
+| `Content-Type` | Yes | `application/json` |
+| `User-Agent` | Yes | Any value that identifies your client |
+| `PostHog-Sdk-Info` | Yes | `<library>/<version>`, for example `my-backend/1.2.0`. PostHog sets `$lib` and `$lib_version` on every event from this header. |
+| `PostHog-Request-Id` | Yes | A UUID for this request. Send the **same** ID on every retry of the request. PostHog returns it in a response header of the same name. |
+| `PostHog-Attempt` | Yes | The attempt number: `1` for the first try, `2` for the first retry, and so on |
+| `PostHog-Request-Timestamp` | Yes | The time you send this attempt, in RFC 3339 format. Set it again on every retry. PostHog uses it to correct for a wrong client clock. |
+| `Content-Encoding` | No | `gzip`, `deflate`, `br`, or `zstd` when the body is compressed |
+
+Header values must be plain, visible ASCII characters.
+
+## Request body
+
+```json
+{
+  "created_at": "2026-10-19T12:00:00.250Z",
+  "batch": [
+    {
+      "event": "signed_up",
+      "uuid": "019a0000-0000-7000-8000-000000000001",
+      "distinct_id": "user_123",
+      "timestamp": "2026-10-19T12:00:00.123Z",
+      "session_id": "019a0000-0000-7000-8000-0000000000a1",
+      "options": {
+        "process_person_profile": true
+      },
+      "properties": {
+        "plan": "pro"
+      }
+    }
+  ]
+}
+```
+
+| Field | Required | Description |
+|---|---|---|
+| `created_at` | Yes | When you built this batch, in RFC 3339 format |
+| `historical_migration` | No | `true` to send the batch as a [historical migration](/docs/migrate) |
+| `batch` | Yes | The events. It can't be empty. |
+
+Each event in `batch`:
+
+| Field | Required | Description |
+|---|---|---|
+| `event` | Yes | The event name, up to 200 bytes |
+| `uuid` | Yes | A unique ID for this event. Use a UUIDv7. See [event UUIDs](#event-uuids). |
+| `distinct_id` | Yes | Who did it, up to 200 bytes. See [choosing a distinct ID](#choosing-a-distinct-id). |
+| `timestamp` | Yes | When the event happened, in RFC 3339 format with at least millisecond precision. You can send more precise values. |
+| `session_id` | No | The [session](/docs/data/sessions) ID, as a string. Same as the `$session_id` property. |
+| `window_id` | No | The window ID, as a string. Same as the `$window_id` property. |
+| `options` | No | Settings for how PostHog processes this event. See [event options](#event-options). |
+| `properties` | No | The event's properties. Must be a JSON object. |
+
+You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `PostHog-Sdk-Info` header, which wins over any value in `properties`.
+
+<!-- TODO(capture-v1): link sdk-specs for the full wire contract once its v1 pages are published. TODO(link) -->
+
+### Event UUIDs
+
+Every event needs its own `uuid`. Generate a new one for each event, and keep it the same when you retry that event. A UUIDv7 works best because it also records when you created the event.
+
+Don't reuse a UUID from something else, like an order ID or a request ID, across events. A request that contains the same UUID twice is rejected as a whole with `duplicate_event_uuid`.
+
+### Choosing a distinct ID
+
+A distinct ID connects events to one person. Use either:
+
+- An ID for one visitor or device, such as an anonymous ID your client generates and stores, or
+- Your own stable ID for a known user, such as their ID in your database.
+
+Don't use one value for many people or machines, such as `anonymous`, `guest`, `system`, `null`, or a server name. PostHog accepts events with these common placeholder values but processes them without a person profile, and returns the result `warning` with the detail `person_processing_disabled`. A distinct ID that sends far more events than one person could is also [rate limited](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids). See [identifying users](/docs/product-analytics/identify) for more.
+
+<!-- TODO(capture-v1): align the identify page's list of refused IDs with capture v1's placeholder list, or keep both lists described rather than enumerated. -->
+
+## Event options
+
+Options control how PostHog processes an event. They replace the "magic" `$` properties that legacy capture reads from `properties`.
+
+| Option | Type | What it does | Legacy property |
+|---|---|---|---|
+| `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
+| `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
+| `disable_skew_correction` | Boolean | `true` keeps your `timestamp` exactly as sent instead of [correcting for clock skew](#timestamps-and-clock-skew) | `$ignore_sent_at` |
+| `product_tour_id` | String | Links the event to a product tour | `$product_tour_id` |
+
+<!-- TODO(capture-v1): confirm the product_tour_id link target and the cookieless tracking link, and whether product_tour_id belongs in public docs. -->
+
+- Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
+- PostHog ignores option names it doesn't know.
+- An option value PostHog can't read drops the event with the detail `invalid_options`.
+
+### Legacy properties still work, for now
+
+During the move to v1, PostHog still reads the legacy `$` properties above. If you set both, the option wins. Use options in new code – the legacy properties are deprecated, and we'll stop reading them in a future release.
+
+Your stored events don't change shape: PostHog stores options as the same properties you query today, so your insights and filters keep working.
+
+<!-- TODO(capture-v1): wording for "stored events don't change shape" is not final. -->
+
+## Compression
+
+Compress the body and set `Content-Encoding` to one of `gzip`, `deflate`, `br`, or `zstd`. An uncompressed body needs no `Content-Encoding`.
+
+Legacy formats such as `gzip-js`, `lz64`, `base64`, and the `?compression=` query parameter are not accepted on v1. The request fails with `415`.
+
+[SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
+
+## Limits
+
+| Limit | Analytics endpoint |
+|---|---|
+| Request body, as sent | 10MB |
+| Request body, after decompression | 50MB |
+| Event name | 200 bytes |
+| Distinct ID | 200 bytes |
+| Events per request | No limit beyond the body size |
+
+An event too large to store is dropped with the detail `event_too_big`, and the rest of the batch is still ingested. See [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit).
+
+The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events](/docs/ai-observability/large-events#limits).
+
+<!-- TODO(capture-v1): decide whether to publish the AI endpoint's request body limits. -->
+
+## Responses
+
+### Status codes
+
+| Status | Meaning | Retry? |
+|---|---|---|
+| `200` | PostHog read the batch. Check the [result for each event](#per-event-results). | Only events with result `retry` |
+| `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or a repeated `uuid`. Nothing was stored. | No – fix the request |
+| `401` | The project token is missing or invalid, or you used a personal API key | No |
+| `402` | Your project hit a [billing limit](/docs/billing/limits-alerts). Events in this request aren't stored. | No – raise or remove the limit |
+| `408` | The request timed out while PostHog read it | Yes |
+| `413` | The body is over the size limit | No – send smaller requests |
+| `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
+| `429` | Too many requests. A proxy or network layer between you and PostHog may send this. | No – v1 SDKs treat it as final |
+| `500`, `502`, `503`, `504` | A temporary problem | Yes |
+
+<!-- TODO(capture-v1): confirm the 429 row wording; v1 SDKs treat 429 as final today. -->
+
+Errors use this body. `error` is a stable tag you can match on.
+
+```json
+{
+  "error": "duplicate_event_uuid",
+  "error_description": "duplicate event uuid: 019a0000-0000-7000-8000-000000000001",
+  "error_uri": "https://posthog.com/docs/api"
+}
+```
+
+<!-- TODO(capture-v1): paste a real error body from capture; update error_uri if capture starts pointing at this page. -->
+
+### Per-event results
+
+A `200` response has one result for every event, keyed by the event's `uuid`:
+
+```json
+{
+  "results": {
+    "019a0000-0000-7000-8000-000000000001": { "result": "ok" },
+    "019a0000-0000-7000-8000-000000000002": { "result": "warning", "details": "person_processing_disabled" },
+    "019a0000-0000-7000-8000-000000000003": { "result": "drop", "details": "invalid_options" },
+    "019a0000-0000-7000-8000-000000000004": { "result": "retry", "details": "not_persisted" }
+  }
+}
+```
+
+| Result | Meaning | What to do |
+|---|---|---|
+| `ok` | Stored | Nothing |
+| `warning` | Stored, with a change you should know about, named in `details` | Don't resend. Fix the cause. |
+| `drop` | Not stored | Don't resend. Fix the cause named in `details`. |
+| `retry` | Not stored because of a temporary problem | Resend this event (and only this one) |
+
+### Result details
+
+`details` tells you why an event got its result. Common values:
+
+| Detail | Result | Meaning |
+|---|---|---|
+| `missing_event_name` | `drop` | `event` is empty |
+| `event_name_too_long` | `drop` | `event` is over 200 bytes |
+| `missing_distinct_id` | `drop` | `distinct_id` is empty |
+| `distinct_id_too_large` | `drop` | `distinct_id` is over 200 bytes |
+| `invalid_event_timestamp` | `drop` | `timestamp` isn't RFC 3339 |
+| `malformed_event_properties` | `drop` | `properties` isn't a JSON object |
+| `invalid_options` | `drop` | `options` isn't an object, or an option value can't be read |
+| `event_too_big` | `drop` | The event is too large to store |
+| `misrouted_event` | `drop` | A non-AI event was sent to the AI endpoint |
+| `ai_event_too_big` | `drop` | An AI event is over the size limit for the endpoint it was sent to |
+| `person_processing_disabled` | `warning` | Stored without a person profile, for example because the distinct ID is a placeholder like `anonymous` |
+| `not_persisted` | `retry` | PostHog couldn't store it right now |
+
+When an event is over a product's quota or billing limit, the result is `drop` and `details` names the quota that was exceeded, such as `over_quota`.
+
+<!-- TODO(capture-v1): link the full list of detail values in sdk-specs once published. TODO(link) -->
+<!-- TODO(capture-v1): decide whether event_restriction_drop, ai_byte_rate_limited, rejected, and serialization_failed belong in this table. -->
+
+Many drops also raise an [ingestion warning](/docs/data/ingestion-warnings) in your project, so you can find them later.
+
+## Retries
+
+Retry when the response is `408`, `500`, `502`, `503`, or `504`, when the network fails, and for each event whose result is `retry`. Treat every other response as final.
+
+When you retry:
+
+- Resend only the events that need it. Events with `ok`, `warning`, or `drop` are final.
+- Keep the same `PostHog-Request-Id` and each event's `uuid`.
+- Increase `PostHog-Attempt` by one.
+- Set a new `PostHog-Request-Timestamp`.
+- Wait before each retry, doubling the wait each time, and add some randomness (jitter) so many clients don't retry at once. If the response has a `Retry-After` header, wait at least that long.
+
+PostHog SDKs that use v1 do all of this for you. If you use one, don't wrap its capture calls in your own retry logic.
+
+## Timestamps and clock skew
+
+PostHog corrects for a wrong client clock using `PostHog-Request-Timestamp`. It compares that header with the time it received the request, then moves each event's `timestamp` by the difference. Set `disable_skew_correction` to keep your timestamps exactly as sent.
+
+An event whose corrected timestamp is more than 23 hours in the future is stored with the time PostHog received it. See [how PostHog computes timestamps](/docs/data/timestamps).
+
+## Examples
+
+<MultiLanguage>
+
+```bash
+curl -i -X POST "<ph_client_api_host>/i/v1/analytics/events" \
+  -H "Authorization: Bearer <ph_project_token>" \
+  -H "Content-Type: application/json" \
+  -H "User-Agent: my-backend/1.2.0" \
+  -H "PostHog-Sdk-Info: my-backend/1.2.0" \
+  -H "PostHog-Request-Id: $(uuidgen)" \
+  -H "PostHog-Attempt: 1" \
+  -H "PostHog-Request-Timestamp: $(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
+  -d '{
+    "created_at": "2026-10-19T12:00:00.250Z",
+    "batch": [
+      {
+        "event": "signed_up",
+        "uuid": "019a0000-0000-7000-8000-000000000001",
+        "distinct_id": "user_123",
+        "timestamp": "2026-10-19T12:00:00.123Z",
+        "options": { "process_person_profile": true },
+        "properties": { "plan": "pro" }
+      }
+    ]
+  }'
+```
+
+```python
+import uuid
+from datetime import datetime, timezone
+
+import requests
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
+
+# uuid.uuid7() needs Python 3.14 or later. On older versions, use a UUIDv7 library.
+response = requests.post(
+    "<ph_client_api_host>/i/v1/analytics/events",
+    headers={
+        "Authorization": "Bearer <ph_project_token>",
+        "User-Agent": "my-backend/1.2.0",
+        "PostHog-Sdk-Info": "my-backend/1.2.0",
+        "PostHog-Request-Id": str(uuid.uuid4()),
+        "PostHog-Attempt": "1",
+        "PostHog-Request-Timestamp": now(),
+    },
+    json={
+        "created_at": now(),
+        "batch": [
+            {
+                "event": "signed_up",
+                "uuid": str(uuid.uuid7()),
+                "distinct_id": "user_123",
+                "timestamp": now(),
+                "options": {"process_person_profile": True},
+                "properties": {"plan": "pro"},
+            }
+        ],
+    },
+)
+
+for event_uuid, result in response.json()["results"].items():
+    if result["result"] != "ok":
+        print(event_uuid, result["result"], result.get("details"))
+```
+
+```node
+const now = () => new Date().toISOString()
+
+// crypto.randomUUID() makes a UUIDv4. Use a UUIDv7 library for event UUIDs.
+const response = await fetch('<ph_client_api_host>/i/v1/analytics/events', {
+    method: 'POST',
+    headers: {
+        Authorization: 'Bearer <ph_project_token>',
+        'Content-Type': 'application/json',
+        'User-Agent': 'my-backend/1.2.0',
+        'PostHog-Sdk-Info': 'my-backend/1.2.0',
+        'PostHog-Request-Id': crypto.randomUUID(),
+        'PostHog-Attempt': '1',
+        'PostHog-Request-Timestamp': now(),
+    },
+    body: JSON.stringify({
+        created_at: now(),
+        batch: [
+            {
+                event: 'signed_up',
+                uuid: '019a0000-0000-7000-8000-000000000001',
+                distinct_id: 'user_123',
+                timestamp: now(),
+                options: { process_person_profile: true },
+                properties: { plan: 'pro' },
+            },
+        ],
+    }),
+})
+
+const { results } = await response.json()
+for (const [eventUuid, result] of Object.entries(results)) {
+    if (result.result !== 'ok') {
+        console.log(eventUuid, result.result, result.details)
+    }
+}
+```
+
+</MultiLanguage>
+
+<!-- TODO(capture-v1): run every example against US, EU, and a local stack before merge, and paste a real response. -->
