@@ -5,7 +5,7 @@ featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 date: 2026-10-20
 seo:
-  metaTitle: How SoundBoost runs AI mastering for 200,000 users on autopilot
+  metaTitle: How SoundBoost runs AI mastering for 225,000 users on autopilot
   metaDescription: SoundBoost masters music for 200,000 users with a team of four. PostHog reports catch the regressions and open the PRs.
 ---
 
