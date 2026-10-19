@@ -128,5 +128,5 @@ Here's how to reorder transformations:
 ## Further reading
 
 - [Property filter app docs](/docs/data-pipelines/property-filter)
-- [GeoIP enrichment docs](/docs/data-pipelines/geoip-enrichment)
+- [GeoIP enrichment docs](/docs/data-pipelines/transformations/template-geoip)
 - [Product analytics privacy controls docs](/docs/product-analytics/privacy)

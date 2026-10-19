@@ -115,7 +115,7 @@ function AppsPage({ location }) {
                     ),
                     {
                         label: <>Build your own &rarr;</>,
-                        url: '/docs/data-pipelines/build',
+                        url: '/docs/data-pipelines/destinations',
                         image: '/images/builder-hog.png',
                     },
                 ]}
