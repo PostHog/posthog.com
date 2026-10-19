@@ -26,7 +26,7 @@ You'll also need access to the relevant Customer.io account.
 
 ## FAQ
 
-### Why do older events not update a person's attributes?
+### Why can older updates return HTTP 200 without changing profile attributes?
 
 The destination sends the original PostHog event timestamp to Customer.io. Customer.io uses this timestamp to [order attribute updates](https://docs.customer.io/integrations/api/track/tag/track_v2/entity/). An older update to an attribute doesn't replace a newer value, even when Customer.io returns HTTP 200.
 
