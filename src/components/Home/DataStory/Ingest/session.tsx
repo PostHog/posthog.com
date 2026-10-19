@@ -33,5 +33,5 @@ export const EXTERNAL_SOURCES: { key: ExternalKey; label: string; logo: string; 
 
 export const ProductIcon = ({ source, className = 'size-4' }: { source: ProductKey; className?: string }) => {
     const { Icon, className: colorClass } = PRODUCTS[source]
-    return <Icon className={cn(className, colorClass)} />
+    return <Icon className={cn('[&_[clip-path]]:![clip-path:none]', className, colorClass)} />
 }
