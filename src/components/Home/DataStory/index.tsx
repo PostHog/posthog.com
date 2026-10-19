@@ -8,6 +8,7 @@ import QueryStep from './Query/QueryStep'
 import ActStep from './Act/ActStep'
 import SelfDriveStep from './SelfDrive/SelfDriveStep'
 import MergedFeed from './SelfDrive/MergedFeed'
+import LayoutModeSwitch from './dev/LayoutModeSwitch'
 import Link from 'components/Link'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 
@@ -69,25 +70,27 @@ export const ProblemSection = (): JSX.Element => (
 )
 
 export const StepsSection = (): JSX.Element => (
-    <section>
-        <h2>
-            How to build a{' '}
-            <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">
-                usage-informed product
-            </Emphasis>{' '}
-            with PostHog
-        </h2>
-        {STEPS.map(({ title, description }, index) =>
-            index === 0 ? (
-                <IngestStep key={title} title={title} description={description} />
-            ) : index === 1 ? (
-                <QueryStep key={title} index={index} title={title} description={description} />
-            ) : index === 2 ? (
-                <ActStep key={title} index={index} title={title} description={description} />
-            ) : (
-                <SelfDriveStep key={title} index={index} title={title} description={description} />
-            )
-        )}
-        <MergedFeed />
-    </section>
+    <LayoutModeSwitch>
+        <section>
+            <h2>
+                How to build a{' '}
+                <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">
+                    usage-informed product
+                </Emphasis>{' '}
+                with PostHog
+            </h2>
+            {STEPS.map(({ title, description }, index) =>
+                index === 0 ? (
+                    <IngestStep key={title} title={title} description={description} />
+                ) : index === 1 ? (
+                    <QueryStep key={title} index={index} title={title} description={description} />
+                ) : index === 2 ? (
+                    <ActStep key={title} index={index} title={title} description={description} />
+                ) : (
+                    <SelfDriveStep key={title} index={index} title={title} description={description} />
+                )
+            )}
+            <MergedFeed />
+        </section>
+    </LayoutModeSwitch>
 )
