@@ -75,7 +75,10 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                     </p>
                     <ol className="pl-6">
                         <li className="list-decimal">
-                            <Link to={`/docs/${productData.slug}`} className="underline font-bold">
+                            <Link
+                                to={`/docs/${productData.docsSlug ?? productData.slug}`}
+                                className="underline font-bold"
+                            >
                                 Check the docs
                             </Link>
                             <p className="text-secondary text-base">

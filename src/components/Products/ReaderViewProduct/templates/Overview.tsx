@@ -79,7 +79,11 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
                     </div>
                     <div>
-                        <CTAs wizardCommand={productData?.wizardCommand} links={productData?.ctaLinks} />
+                        <CTAs
+                            wizardCommand={productData?.wizardCommand}
+                            links={productData?.ctaLinks}
+                            buttons={productData?.ctaButtons}
+                        />
                     </div>
                 </div>
             </header>
