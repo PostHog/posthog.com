@@ -80,11 +80,14 @@ const AccordionItem = ({
 
     const addonData =
         includeAddonRates && billingData?.addons
-            ? billingData.addons.map((addon: any) => ({
-                  name: addon.name,
-                  billingData: addon,
-                  type: addon.type,
-              }))
+            ? billingData.addons
+                  // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+                  .filter((addon: any) => addon.type !== 'logs_retention_30d')
+                  .map((addon: any) => ({
+                      name: addon.name,
+                      billingData: addon,
+                      type: addon.type,
+                  }))
             : []
     const hasAddonRates = addonData.length > 0
 

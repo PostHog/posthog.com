@@ -1131,7 +1131,8 @@ export const generatePricingMd = (products: any[]) => {
     const productAddons: any[] = []
     for (const product of orderedProducts) {
         for (const addon of withCompanionAddons(product, products).addons || []) {
-            if (addon.legacy_product) continue
+            // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+            if (addon.legacy_product || addon.type === 'logs_retention_30d') continue
             productAddons.push({ ...addon, parentName: product.name })
         }
     }
@@ -1205,7 +1206,7 @@ All prices are in USD. Full interactive pricing calculator: https://posthog.com/
 PostHog has two plans:
 
 - **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
-- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on most products, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
+- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
 
 There are no per-seat charges. Your whole team can use PostHog.
 
@@ -1253,6 +1254,7 @@ For full details on how discounts work, see our transparent contract rules: http
 - **Exception**: A single error or exception captured
 - **Row**: A single row synced from an external data source
 - **Trigger event**: A single event sent to a realtime destination
+- **GB-month**: One GB kept for 30 days, counted by the day
 
 All prices are in USD, excluding taxes.
 `
