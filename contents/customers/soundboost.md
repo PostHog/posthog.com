@@ -9,54 +9,38 @@ seo:
   metaDescription: SoundBoost masters music for 200,000 users with a team of four. PostHog signals find the bugs, catch the regressions, and open the PRs.
 ---
 
-[SoundBoost](https://soundboost.ai) is an AI mastering tool for music producers. Mastering is the final polish on a finished track, and it usually means long sessions tweaking knobs in a DAW. On SoundBoost you upload the track and type what you want instead: "I want to sound like Billie Eilish," or "good stereo on headphones, but analog warmth on the bass." As far as Berkan Cesur, its founder, knows, it's the first prompt-based mastering workflow anywhere. 200,000 people use it – around 10% famous artists, a quarter bedroom producers and indies, and the rest amateurs polishing their first song.
+[SoundBoost](https://soundboost.ai) is an AI mastering tool for music producers that replaces hours spent tweaking knobs in a DAW with an optimized, AI-driven workflow. Producers can upload their tracks, describe what they want, and get a fully mastered output.
 
-All of that runs on a team of four, two of them developers. Berkan has been starting companies for 20 years, including a gaming venture that made millions before going bankrupt. SoundBoost is the company where he finally did music, and the one where he stopped doing analytics by hand.
+Despite running with a team of just four, SoundBoost is already trusted by over 200,000 artists, ranging from household names to bedroom indies polishing their first song.
 
-"I'm a do-it-yourself guy for everything. I was always using Metabase and writing SQL to analyze my statistics, until a friend at Automattic suggested PostHog," Berkan says. "For the first time, a tool thinks what I want to think later, and just implements it."
+"I've been founding companies for over 20 years and have always been a do-it-yourself guy for everything, including writing my own SQL to analyze data," says SoundBoost's founder, Berkan Cesur. "Then a friend at Automattic suggested PostHog and for the first time I had a tool that anticipates what I want to do and takes me from analysis to an actual PR."
 
-"We're a small team and every conversion matters to us. You fix 10% here, 10% there. PostHog compiles that into a menu for me: fix these first, fix those later."
+"We're a small team, so every conversion matters to us. If we fix 10% here, 5% there? Those gains add up – and PostHog compiles that into a menu for me: fix these first, fix those later."
 
-He now uses [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), and [surveys](/surveys). He also paid full price for two years before spotting PostHog's [startup program](/startups), so learn from his mistake and check if you qualify before your first invoice.
+SoundBoost uses [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), and [surveys](/surveys) – but it's the self-driving inbox that sorts data from these tools into measurable change for the team.
 
-## The bugs a four-person team can't find
+## Using PostHog reports to maintain a healthy funnel
 
-Berkan starts every morning in PostHog's inbox, working through the priority signals from [self-driving](/self-driving). It's the layer that watches the things his team is too small to watch.
+With such a small team to find and ship improvements, Berkan starts every morning in PostHog's inbox. Here, PostHog's [reports](/docs/self-driving/reports) help him identify the priorities to focus the team on.
 
-SoundBoost deploys its front end to Cloudflare Pages, which means there are no server logs when something breaks in a user's browser.
+Sometimes that means shipping small bugfixes or performance improvements. Other times it means spotting existential threats before the team would otherwise think to look. In one such case, PostHog's [scouts](/docs/self-driving/scouts) spotted that daily clicks from Google had fallen to zero. This was shortly after SoundBoost migrated from an .ai to a .com domain, so the team assumed this was normal lag while Google picked up the new domain – but PostHog disagreed.
 
-"There are no good logs to see what's going on when a user interacts with something and it breaks on the JavaScript side," he says. "Sometimes it's related to their Chrome plugins. Many different cases."
+"PostHog's reports told us this was a bigger problem. It told us that conversions stopped, traffic was low, and we were losing our best funnel," Berkan recalls. "That was essential information for us and we immediately rolled back to the .ai domain, regaining all our traction from Google."
 
-Then the signals started pointing at his iOS users. Around 300 of them, half paying customers, were hitting audio problems in Safari. Berkan shipped a fix, and he credits roughly 10 similar catches to PostHog since.
+The diagnosis was quick because the data was already there: Berkan tracks every button and feature with [actions](/docs/data/actions), so "how did conversions change after I shipped this?" is a question PostHog can answer directly and automatically.
 
 <OSQuote customer="soundboost" author="berkan_cesur" quote={0} />
 
-Not every signal earns a fix, and triage doesn't repeat itself. When Berkan marks a signal as won't-fix with a reason, PostHog remembers, and the same issue doesn't resurface the next time it happens.
-
-## The domain migration that zeroed their Google traffic
-
-A few weeks before we spoke, SoundBoost migrated from its .ai domain to a .com. Daily clicks from Google fell from between 10,000 and 15,000 to zero. Berkan assumed that was normal lag while Google picked up the new domain. PostHog disagreed.
-
-"PostHog told us everything was going badly. Conversions are wrong, traffic is low, you're losing your best funnel channels, it said," Berkan recalls. "That triggered something for me. I rolled back to the .ai domain, and we got all our traction from Google back."
-
-The diagnosis was quick because the data was already there: Berkan tracks every button and feature with [actions](/docs/data/actions), so "how did conversions change after I shipped this?" is a question PostHog can answer directly.
-
 ## From manual tracking to merged PRs
 
-Berkan set up PostHog by hand at first. Now the [PostHog MCP](/docs/model-context-protocol), running inside Cursor and Windsurf, is the only way he adds tracking.
+Berkan set up all this tracking by hand at first, but now the [PostHog MCP](/mcp), running inside Cursor and Windsurf, is the main way he instruments events and queries the data.
 
 "It's really easy to miss an action, or track it wrong, when you do it manually with code," he says. "After I discovered the MCP, I can even fix what's wrong in PostHog from my editor. It's the only way I develop new features with PostHog now."
 
-When a signal is actionable, PostHog opens [the pull request](/docs/self-driving/anatomy-of-a-pr) itself. At first Berkan read every line. These days a review from Fable, the coding model he runs in his editor, is usually the only check before merge.
+Not every report created by PostHog is actionable, but when it is, PostHog can open [the pull request](/docs/self-driving/anatomy-of-a-pr) to make the fix a one-click thing. Like most users, Berkan was skeptical of this at first and chose to check every line of every self-driving PR personally. Now he trusts PostHog enough that a Fable code review usually covers it.
 
-"At first I was scared, so I reviewed all the pull requests PostHog sent," he says. "But over time Fable always told me it's a good one that doesn't need any additions, so now I just merge them."
+"At first I was scared, so I reviewed all the pull requests PostHog sent," he says. "But over time I learned to trust the data and Fable always told me it was a good PR that doesn't need any additions, so now I just merge them."
 
-He didn't have anything like this loop before, and he's clear about what he'd do without it: "There was no auto-PR thing. Nothing. If PostHog didn't exist, now that I know how this works, I would try to build the same thing myself."
+As a serial entrepreneur and developer, Berkan sees the benefit of self-driving clearly, not just for his team but for the wider industry.
 
-<OSQuote customer="soundboost" author="berkan_cesur" quote={1} />
-
-## A DAW you can talk to
-
-Prompt-based mastering was SoundBoost's first act. The next one is real time: mastering that responds while you work, in something closer to a DAW you prompt instead of program.
-
-"You'll just tell it what's on your mind, and it will do it to your song in real time," Berkan says. "This is our next chapter."
+"At SoundBoost we see a future where agents can work with you on your songs in real time," says Berkan. "PostHog is doing the same but for software development and, now that I know how this works, I'd definitely build it myself if PostHog didn't already exist."
