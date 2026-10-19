@@ -63,7 +63,7 @@ B[PostHog] --> F[Data warehouse e.g. BigQuery / Snowflake]
 
 ### Sending PostHog data to a 3rd party CDP for extra destinations
 
-If PostHog doesn't have your destination and you can't build your own, another option is to send data to your CDP like [RudderStack](/docs/data-pipelines/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
+If PostHog doesn't have your destination and you can't build your own, another option is to send data to your CDP like [RudderStack](/docs/data-pipelines/destinations/rudderstack) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
 
 > **Note:** This won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this, we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
