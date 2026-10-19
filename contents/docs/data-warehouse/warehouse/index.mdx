@@ -12,46 +12,47 @@ Not yet available to everyone – [join the waitlist](/context-warehouse/warehou
 
 </CalloutBox>
 
-The warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/cdp/sources) land in it continuously, and you query it like any Postgres database – from `psql`, from BI tools like Metabase or Grafana, from your own code, or from PostHog itself.
+The warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/cdp/sources) land in it continuously, and you query it with [Trino](https://trino.io/) – from the Trino CLI, from BI tools like Superset or Metabase, from your own code, or from PostHog itself.
 
 It's the difference between "PostHog can query my data" and "PostHog **is** my data warehouse": you get a real database endpoint with its own hostname and credentials, holding your product data and business data side by side.
 
 ## How it works
 
-Under the hood, the warehouse is built on [DuckDB](https://duckdb.org/), with data stored in the open [DuckLake](https://ducklake.select/) lakehouse format on durable object storage. You don't need to know any of that to use it, but it explains the shape of the product:
+Under the hood, the warehouse is a [Trino](https://trino.io/) query engine over open Parquet files on durable object storage. You don't need to know any of that to use it, but it explains the shape of the product:
 
-1. **Provisioning** – When you set up the warehouse, PostHog creates a dedicated database for your organization with its own hostname, like `my-warehouse.dw.us.postwh.com`. Compute is isolated per organization: your queries run on workers spun up for you, not on a shared cluster.
-2. **Getting data in** – PostHog backfills your historical events and persons, then keeps the warehouse up to date as new data arrives. [Sources](/docs/cdp/sources) you've connected (Stripe, Postgres, Salesforce, HubSpot, and so on) sync into the warehouse on the same schedule as their regular imports.
-3. **Storage** – Data lives as columnar files in S3-compatible object storage with a transactional catalog on top. Storage and compute scale independently, and your data survives any individual machine.
-4. **Querying** – The warehouse speaks the PostgreSQL wire protocol over TLS, so any Postgres client, driver, or BI tool connects without special adapters. DuckDB's analytical SQL (things like `SUMMARIZE` and `QUALIFY`) works too.
+1. **Provisioning** – When you set up the warehouse, PostHog creates a dedicated catalog for your organization, with its own hostname like `my-warehouse.dw.us.postwh.com` and its own storage.
+2. **Getting data in** – PostHog backfills your historical events, persons, and groups, then keeps the warehouse up to date with daily loads. [Sources](/docs/cdp/sources) you've connected (Stripe, Postgres, Salesforce, HubSpot, and so on) sync into the warehouse after each of their regular imports.
+3. **Storage** – Data lives as columnar Parquet files in object storage, with a transactional catalog on top. Storage and compute scale independently, and your data survives any individual machine.
+4. **Querying** – The warehouse speaks Trino's client protocol over HTTPS, so the Trino CLI, Trino's JDBC and Python drivers, and any BI tool with a Trino connector work without special adapters.
 
 ## Architecture
 
 A closer look at the pieces PostHog manages for you:
 
-- **A Postgres-compatible front end.** Connections terminate at a control plane that handles TLS, authenticates your connections, and translates PostgreSQL syntax to DuckDB syntax where the two differ. That's why any Postgres tool works unmodified.
-- **Dedicated DuckDB workers.** Queries run on DuckDB workers reserved for your organization, spun up on demand and retired when idle. There's no shared query queue, so a heavy query from another customer never competes with yours.
-- **Open storage.** Tables are columnar Parquet files in object storage, tracked by DuckLake's transactional catalog. Workers come and go; your data doesn't, and it lives in an open format rather than a proprietary store.
+- **An HTTPS front end.** Each warehouse gets its own hostname. Connections terminate over TLS, are authenticated, and are routed to the query engine in your region (US or EU).
+- **Shared, autoscaling Trino compute.** Queries run on a PostHog-managed Trino pool. A coordinator plans each query and splits it across many workers that run in parallel. When queries start to wait for capacity, PostHog adds workers automatically. Each organization has its own concurrency limits, so one organization's heavy workload can't take over the pool.
+- **Isolated storage.** Your organization's tables live in their own catalog and their own storage bucket in your region, as open Parquet files. Access control keeps every organization's credentials scoped to its own catalog. Compute comes and goes; your data doesn't, and it lives in an open format rather than a proprietary store.
 
 ## How this fits into PostHog
 
 The warehouse doesn't replace ClickHouse or any other part of PostHog. Insights, product analytics, and every other PostHog feature keep running on PostHog's existing query engine, unchanged, and your events keep flowing in exactly as before.
 
-The warehouse is an addition: a dedicated database that receives the same data, where you can run isolated workloads with the benefits of DuckDB and DuckLake built in and managed for you. Point BI dashboards, notebooks, and scheduled jobs at it, build your own tables in it, and none of it competes with the queries powering your PostHog project.
+The warehouse is an addition: a dedicated database that receives the same data, where you can run isolated workloads on a Trino engine that PostHog manages for you. Point BI dashboards, notebooks, and scheduled jobs at it, build your own tables in it, and none of it competes with the queries powering your PostHog project.
 
 ## What's in your warehouse
 
-Each project in your organization gets its own schema, chosen during setup. Within a project you'll find:
+Your organization gets one catalog, and each project in your organization gets its own schema name, chosen during setup. With a project schema name of `prod`, you'll find:
 
 | Data | Where it lives |
 |---|---|
-| Events | An events table named after your project's schema, e.g. `events_prod` |
-| Persons | A persons table, e.g. `persons_prod` |
+| Events | `posthog.events_prod` |
+| Persons | `posthog.persons_prod` |
+| Groups | `posthog.groups_prod` |
 | Source imports | A schema per project for imported sources, e.g. `posthog_data_imports_prod`, with one table per synced source table |
 | Modeled data | A schema holding the outputs of your data models |
 | Your own tables | Anything you create yourself with `CREATE TABLE` or `CREATE VIEW` |
 
-The exact layout is still settling during the beta, so the reliable way to see what you have is to ask the warehouse itself – `\dn` and `\dt` in `psql`, or `DESCRIBE` on any table.
+The exact layout is still settling during the beta, so the reliable way to see what you have is to ask the warehouse itself – `SHOW SCHEMAS`, `SHOW TABLES FROM posthog`, or `DESCRIBE` on any table.
 
 ## Where to go next
 
