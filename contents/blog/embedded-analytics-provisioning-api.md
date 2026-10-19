@@ -61,22 +61,28 @@ await fetch(`${HOST}/api/agentic/provisioning/client_registration`, {
 })
 ```
 
-The response reports each check it ran on its own: whether the document could be fetched and validated, whether provisioning is on, and which keys my JWKS serves. Nothing else works until this succeeds, so it's the first thing to re-run when something further down looks wrong.
+The response reports each check it ran on its own: whether the document could be fetched and validated, whether provisioning is on, and which keys my JSON Web Key Set (JWKS) serves. The call can return a 200 while one check fails, so I read the checks rather than the status. Nothing else works until every check passes, so it's the first thing to re-run when something further down looks wrong.
 
-### Signing every request
+### Signing account requests and token calls
 
-A `client_id` is a public URL, so sending it proves nothing about who sent it. Because HogFarm creates accounts, PostHog requires it to [sign its requests](/docs/integrate/provisioning#sign-requests-with-a-key). HogFarm holds an ES256 private key that never leaves its environment, and serves the matching public key at its `jwks_uri`. On every account request and token call, it sends a short-lived JWT, called a client assertion, signed with that key:
+A `client_id` is a public URL, so sending it proves nothing about who sent it. Because HogFarm creates accounts, PostHog requires it to [sign its account requests and token calls](/docs/integrate/provisioning#sign-requests-with-a-key). HogFarm holds an ES256 private key that never leaves its environment, and serves the matching public key in its JWKS at `jwks_uri`. On each of those calls, it sends a short-lived JWT, called a client assertion, signed with that key. Calls that carry a Bearer token, like provisioning a project, don't need one.
+
+I generated the key with `openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256`, which writes the PKCS#8 format that `importPKCS8` expects, and stored it in the `JWKS_PRIVATE_SIGNING_KEY` environment variable:
 
 ```ts
 import { createPublicKey } from "node:crypto"
 import { calculateJwkThumbprint, importPKCS8, SignJWT } from "jose"
 
 const pem = process.env.JWKS_PRIVATE_SIGNING_KEY
+if (!pem) throw new Error("JWKS_PRIVATE_SIGNING_KEY is not set")
+
 const privateKey = await importPKCS8(pem, "ES256")
 const publicJwk = createPublicKey(pem).export({ format: "jwk" })
 const kid = await calculateJwkThumbprint(publicJwk)
 
-async function clientAssertionFields(clientId: string) {
+export const jwks = { keys: [{ ...publicJwk, kid, alg: "ES256", use: "sig" }] }
+
+export async function clientAssertionFields(clientId: string) {
   const assertion = await new SignJWT({})
     .setProtectedHeader({ alg: "ES256", kid })
     .setIssuer(clientId)
@@ -93,18 +99,22 @@ async function clientAssertionFields(clientId: string) {
 }
 ```
 
-The JWKS at `jwks_uri` serves `publicJwk` under the same `kid`, which is how PostHog finds the key to check each signature. PostHog accepts each assertion only once, so every call mints a fresh one with its own `jti`. The full version is in [`lib/client-assertion.ts`](https://github.com/Brooker-Fam/hogfarm/blob/main/lib/client-assertion.ts).
+HogFarm serves `jwks` at its `jwks_uri`. Each assertion names the same `kid` in its header, which is how PostHog finds the key to check the signature. PostHog accepts each assertion once per region, so every call mints a fresh one with its own `jti`. The full version is in [`lib/client-assertion.ts`](https://github.com/Brooker-Fam/hogfarm/blob/main/lib/client-assertion.ts).
 
-On top of the signature, I use PKCE to prove the token exchange. I generate a random verifier and send only its SHA-256 hash with the first call. The verifier gets replayed at token exchange.
+If your app already runs without signing, switch it over in the [order the docs give](/docs/integrate/provisioning#turn-on-key-signing): publish your keys, add `private_key_jwt` and your `jwks_uri` to the metadata document, re-run registration in each region you use, then start signing.
+
+## Creating an account the farmer never sees
+
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+
+Besides the assertion, this call carries a PKCE challenge. I generate a random verifier and send only its SHA-256 hash now. The verifier gets replayed at token exchange.
 
 ```ts
 const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
-## Creating an account the farmer never sees
-
-With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+Then the account request itself:
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
@@ -129,7 +139,7 @@ There are a few cases to handle for this response:
 - **A new email** comes back as `{ type: "oauth", oauth: { code } }`. The account gets created and linked quietly, I get a code on the spot, and the farmer gets a welcome email to set their password.
 - **An email that's already a PostHog user** comes back as `{ type: "requires_auth", requires_auth: { url } }`. They have to consent in the browser first, so I send them to `url` and PostHog redirects back to my `redirect_uri` with a code.
 - **A `client_id` that hasn't been registered** comes back as a `401` naming the registration endpoint, which is the reminder to run the call above after shipping a new metadata URL.
-- **A missing or invalid client assertion** also comes back as a `401`. Re-run the registration call and check that its `jwks` check lists the key ID you sign with.
+- **A missing or invalid client assertion** also comes back as a `401`, with a message that names the cause. The docs have a [table of those errors and their fixes](/docs/integrate/provisioning#troubleshoot-assertion-errors).
 
 ## Getting the farmer's project key
 
