@@ -26,16 +26,16 @@ pocketGuideCta:
 
 # Roll out gradually
 
-A flag at 0% is live code that nobody runs. A rollout lets people in a few at a time, so a bug reaches 5% of your users instead of all of them. Every step answers the same three questions: who is eligible, what signal are you watching, and what would make you continue or roll back.
+A rollout lets people in a few at a time, so a bug reaches 5% of your users instead of all of them. Rollouts answer three questions: who is eligible, what signal are you watching, and what would make you raise the percentage or roll back.
 
 ## The rollout ladder
 
 A typical ladder for `new-checkout`:
 
-| Step | Who's eligible | Watch | Continue when | Roll back when |
+| Step | Who's eligible | Watch | Raise when | Roll back when |
 | --- | --- | --- | --- | --- |
 | Team | `email ends with @yourcompany.com` | Your own use in production | The team used it for real work and found no blockers | Anything a customer would notice |
-| 5% | A small share of everyone else | Errors, replays, and checkout conversion for people with the flag | Errors and conversion match people without the flag over a day of normal traffic | Errors rise or conversion drops |
+| 5% | A small share of everyone else | Errors, replays, latency, and checkout conversion for people with the flag | Every check in the list below passes over a day of normal traffic | Any check in the list fails |
 | 25% | A bigger share | The same, plus load on the services checkout calls | The same | The same, or latency climbs |
 | 100% | Everyone | The same | Nothing left to watch: schedule the cleanup | The same |
 
@@ -51,11 +51,19 @@ To narrow who's eligible, target a <Term name="cohort">cohort</Term> (your beta 
 
 ## What to watch
 
-A rollout is only as safe as what you watch between steps. Watch the signals the change could break: new errors, replays of people who have the flag, and the one metric the change is meant to move. Compare people with the flag to people without it, so a bad day for everyone doesn't read as a bad rollout.
+You should have clear rules on when to increase or decrease rollout. Watch the signals the change could break: new errors, replays of people who have the flag, and the one metric the change is meant to move. Compare people with the flag to people without it, so a bad day for everyone doesn't read as a bad rollout.
 
-## When to continue or roll back
+## When to raise or roll back
 
-Before you raise the percentage, and before you see the numbers, write down when you'll continue and when you'll roll back. Continue when the signals for people with the flag match those without it. Roll back, by lowering the percentage or [switching the flag off](/docs/feature-flags/learn/off-switch), when they don't.
+Before you raise a percentage step, and before you see the numbers, write down your rules. Raise a percentage step only when all of these are true for people with the flag, compared to people without it, over at least a day of normal traffic:
+
+- The error rate is not higher.
+- Error tracking shows no new issue that only people with the flag hit.
+- The metric the change should move, like checkout conversion, is flat or up.
+- Latency on the services the change calls is flat.
+- Support has no new tickets about the change.
+
+If one of them fails, roll back by lowering the percentage or [switching the flag off](/docs/feature-flags/learn/off-switch). Then report the blast radius: how many people had the flag while it was broken, and what they hit. The `$feature_flag_called` events show who got the flag.
 
 If you already know the next step and its date, schedule the flag change and let PostHog make it.
 

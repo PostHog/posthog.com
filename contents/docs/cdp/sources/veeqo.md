@@ -37,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Veeqo tables are full refresh. Each sync replaces the contents of the table.
+The `orders` and `products` tables support incremental sync on `updated_at`, `created_at`, or `id`. Use `updated_at` to also pick up changes to existing records. All other Veeqo tables are full refresh. Each sync replaces the contents of the table.
 
 ## Configuration
 

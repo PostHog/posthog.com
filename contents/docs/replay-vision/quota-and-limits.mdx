@@ -31,7 +31,7 @@ The budget is shared by every project in the organization, and it resets with yo
 The **Scanners** tab on the Replay Vision home shows a **Spend this billing period** card with credits used, a meter projected to the end of the period, and a link to the [Usage tab](#tracking-where-spend-goes).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_usage_tab_9442808c56.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_usage_tab_c928b34d47.png"
   alt="The Usage tab: credits spent this billing period against the organization's budget, with spend per scanner"
   classes="rounded"
 />
@@ -40,13 +40,29 @@ You can also fetch the budget programmatically – the `vision-quota-get` [MCP t
 
 ## Per-scanner limits
 
-The organization budget is shared, so one broad scanner can spend the whole month's credits and leave nothing for the others. To prevent this, give a scanner its own limit: the maximum credits it can spend per billing period. Turn on **Credit limit** in the scanner editor, or set the `credit_limit` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. The editor suggests a starting value from the scanner's estimated monthly spend, and warns you when the limit is below that estimate or too low to pay for a single scan. For example, hold one scanner to 10,000 credits per month ($100) and another to 5,000 ($50).
+The organization budget is shared, so one broad scanner can spend the whole month's credits and leave nothing for the others. To prevent this, give a scanner its own limit: the maximum credits it can spend per billing period. Turn on **Scanner limit** in the scanner editor, or set the `credit_limit` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. When PostHog AI drafts a scanner from your goal, choosing **Set a budget** under **How much should this scanner use?** sets the scanner limit to that monthly credit amount. In the editor, you can enter the limit in **Credits** or in **Observations**. The editor converts an observation count to credits at the selected model's price, and the scanner stores the limit in credits. The **Observations** option is not available when the model's price is unknown. The MCP `credit_limit` field always takes credits. The editor suggests a starting value from the scanner's estimated monthly spend, and warns you when the limit is below that estimate or too low to pay for a single scan. For example, hold one scanner to 10,000 credits per month ($100) and another to 5,000 ($50).
 
 Scanners have no limit by default (`credit_limit` is null), and the minimum limit is 1 credit.
 
 A scanner stops when the credits it has left cannot pay for one more observation. It stays enabled, but it does not scan the sessions it skipped this period, even after you raise the limit – there is no backfill when the period resets, the same as for [a scanner you re-enable](/docs/replay-vision/running-scanners). A running [backfill](/docs/replay-vision/running-scanners#backfill-a-date-range) on that scanner is put on hold. Scanning starts again at the next period reset.
 
 A scanner-level limit is a cap on one scanner, not a reserved share of the organization budget. The organization budget still applies on top of it, so a scanner below its own limit stops when the organization budget is exhausted.
+
+## Free credits only
+
+Turn on **Free credits only** on a scanner to make sure it never adds to your bill. The scanner scans only while your organization has free monthly credits left. When they run out, it pauses until the billing period resets, then starts again by itself. Set it in the scanner editor's **Budget** step, or with the `free_only` field on the `vision-scanners-create` and `vision-scanners-update` MCP tools. When PostHog AI drafts a scanner from your goal, choosing **Free** under **How much should this scanner use?** turns on free credits only, with no scanner limit.
+
+The free credits are the organization's, not the scanner's. Everything else that spends credits uses them up too, including scanners without this setting, so a free-only scanner can pause early in a busy month. A free-only scanner can also have its own [scanner limit](#per-scanner-limits): it stops at whichever runs out first.
+
+While a free-only scanner is paused, its status says so, and a **Free credits only** switch lets you turn the setting off to keep scanning. PostHog asks you to confirm first, because scans past your free credits are billed. Scanning the scanner on demand while it's paused fails with a message that says the same.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_scanner_status_free_credits_paused_243f3b96c1.png"
+  alt="The status card of a paused free-only scanner: stopped until the free credits reset, with the Free credits only switch and the free credits used"
+  classes="rounded"
+/>
+
+As with a scanner limit, sessions skipped while the scanner is paused aren't scanned later.
 
 ## Workflow scan limits
 
@@ -108,8 +124,8 @@ The scanner editor shows an **estimated cost** for the scanner you're configurin
 - The selected model's price.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_f9f280e291.png"
-  alt="The Budget step of the scanner editor: session coverage, sampling rate, credit limit, and the estimated monthly cost"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_free_only_d67ed45096.png"
+  alt="The Budget step of the scanner editor: sampling rate, session coverage, the Free credits only and Scanner limit switches, and the estimated monthly cost"
   classes="rounded"
 />
 

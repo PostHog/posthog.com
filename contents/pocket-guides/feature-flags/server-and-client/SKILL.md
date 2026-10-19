@@ -25,11 +25,17 @@ Read the current docs first. Every PostHog docs URL returns Markdown if you appe
    gets the key from the server's constant, never a string literal.
 4. Evaluate with the identified user's distinct ID. It must be the same ID on the server and in
    the browser, and any property a condition filters on must have the same value on both sides.
-5. On the server, prefer local evaluation. Never ship the Feature Flags secure API key to a client.
+5. On the server, prefer local evaluation. SDKs poll flag definitions every 30 seconds (every 5
+   minutes in Go). Billing counts the polls, not the checks: a poll that downloads definitions
+   counts as 10 flag requests, and one where nothing changed counts as 1. Local evaluation needs
+   a project secret API key with the `feature_flag:read` scope. Never ship it to a client.
 6. Give every check an explicit default for "not loaded" and "unreachable", and make that default
    the old behavior.
 7. Where the server already evaluated a client flag, bootstrap it into the client SDK instead of
-   waiting for /flags.
+   waiting for /flags. The web, React Native, iOS, Android, and Flutter SDKs support bootstrapping.
+   Bootstrap every flag the page checks, including the ones that evaluated to false. The web SDK
+   keeps a bootstrapped false, and the first full /flags response replaces every bootstrapped
+   value.
 
 ## Finally
 

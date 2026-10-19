@@ -32,6 +32,7 @@ import Header from 'components/Team/Header'
 import Profile, { ProfileData } from 'components/Team/Profile'
 import Roadmap from 'components/Team/Roadmap'
 import TeamImage from 'components/Team/TeamImage'
+import CloudinaryImage from 'components/CloudinaryImage'
 import {
     StickerPineappleYes,
     StickerPineappleNo,
@@ -796,6 +797,10 @@ export default function TeamPage(props: TeamPageProps) {
 
                         {loading ? (
                             <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
+                        ) : slug === 'platform-features' ? (
+                            <figure className="rotate-2 max-w-md w-full mx-auto @2xl/reader-content:mr-0">
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Restoration_974fb5ccb9.png" />
+                            </figure>
                         ) : (
                             <TeamImage
                                 values={values}

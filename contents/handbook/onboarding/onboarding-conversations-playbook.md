@@ -198,7 +198,7 @@ You can also draw inspiration from the [Customer Success team's tactics](https:/
 
 **Start from a health check**
 
-Use Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Vitally, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
+Use Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Customer Analytics, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
 
 You can supplement Metabase analysis with the [HogSpy extension](https://github.com/PostHog/hogspy/releases/tag/v1.0.0) to audit the implementation of identify, flags, and experiments.
 
@@ -218,7 +218,7 @@ Customers respond well when we’re proactive, especially when we show them a pa
 
 **Use AI to broaden your angles**
 
-AI can help you sanity-check assumptions and surface ideas you might miss. Customer-facing teams at PostHog use PostHog AI, Claude (with PostHog + Vitally MCPs), Cursor, or Antigravity. Use it to generate questions, identify likely “aha” moments, and draft call checklists, then apply human judgment to keep it relevant.
+AI can help you sanity-check assumptions and surface ideas you might miss. Customer-facing teams at PostHog use PostHog AI, Claude (with PostHog MCP), Cursor, or Antigravity. Use it to generate questions, identify likely “aha” moments, and draft call checklists, then apply human judgment to keep it relevant.
 
 You can also run PostHog AI on the customer instance (visible only to us, no cost incurred) to do the account audit. Prompt below.
 

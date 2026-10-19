@@ -118,6 +118,9 @@ The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path c
 ## Product Analytics teaching examples
 
 - `ProductAnalyticsExhibits.tsx`, `ProductAnalyticsIdentityExhibits.tsx`, and `ProductAnalyticsTrendsFunnelsExhibits.tsx` own guide-specific teaching state and examples.
+- `ProductAnalyticsRetentionExhibits.tsx` supplies `RepeatBookingFigure`, `BookingRetentionFigure`, `SavedStayJourneyFigure`, and `SavedCohortRetentionFigure`. These combine shared Twig views with local event and cohort examples. They do not record events or make bookings.
+- `ProductAnalyticsDashboardExhibits.tsx` supplies three dashboard excerpts built from the guide's trend, funnel, and retention examples. Figures animate tile placement when visible; Reset replays the sequence, and reduced motion shows the completed dashboards.
+- `ProductAnalyticsDashboardNextSteps.tsx` provides the final project-aware prompt. PostHog AI, Claude Code, and Codex actions use the same prompt. The component also supplies the MCP connection command. Reuse this pattern for a final handoff where appropriate.
 - `TwigBrowseFigure.tsx` and related figures reuse version-pinned `@posthog/twig-components` views and assets.
 - `PostHogInspector.tsx` provides the shared event and identity inspection UI. `SessionReplayInspector.tsx` provides a playback-synced event timeline.
 - Practice events and booking responses are local simulations. Do not send them to a live PostHog project or submit real bookings. This constraint concerns teaching data; it does not prohibit the site's own interaction analytics.

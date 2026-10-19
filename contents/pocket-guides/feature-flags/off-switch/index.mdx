@@ -15,7 +15,7 @@ pocketGuideCta:
 
 # The off switch
 
-A rollback is a revert, a build, and a deploy, and your users see the bug for as long as all three take. If the change is behind a flag, you switch the flag off in PostHog instead, and each place that checks it stops serving the feature the next time it gets fresh flags.
+To revert a deployment, you need to run a build and a deploy. Your users see the bug while you fight your revert PR through CI/CD. If the change is behind a flag, you switch the flag off in PostHog instead, and each place that checks it stops serving the feature the next time it gets fresh flags.
 
 An off switch you can trust has four parts: a safe default, a tested fallback, a known propagation time, and monitoring that tells you when to flip it.
 
@@ -34,7 +34,7 @@ A disabled flag, a flag that hasn't loaded yet, and a check that gets no answer 
 
 ## A tested fallback
 
-Test that path before you need it. Flip the flag off in staging and confirm the old path works, and have CI run your tests with the flag both on and off. A kill switch you've never flipped is a kill switch you hope works.
+Test that path before you need it. Flip the flag off in staging and confirm the old path works, and have CI run your tests with the flag both on and off.
 
 ## A known propagation time
 
@@ -54,6 +54,8 @@ A browser fetches flags on page load, on `identify()`, on a property or group ch
 ## Monitoring that tells you to flip it
 
 You can only flip the switch as fast as you notice. The 14:11 in the timeline above came from watching, not from a customer email. Put an alert on the signal the change could break, like checkout errors, filtered to people with the flag, so it fires within minutes of the raise. Then send flag changes to Slack, so everyone watching the incident knows who flipped what and when.
+
+Some failures never throw an error, so an alert on errors misses them. The [silent failures scout](/pocket-guides/self-driving/silent-failure-core-action) checks your most important flow every day and matches a drop in completions to the deploy that caused it.
 
 <Action />
 

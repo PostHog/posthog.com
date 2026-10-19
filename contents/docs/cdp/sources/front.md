@@ -34,12 +34,21 @@ Once the syncs are complete, you can start using Front data in PostHog.
 | `inboxes` | Inboxes | Full refresh |
 | `channels` | Channels | Full refresh |
 | `teams` | Teams | Full refresh |
+| `conversation_followers` | Teammates who follow each conversation (one row per conversation and follower) | Full refresh |
+| `teammate_groups` | Teammate groups | Full refresh |
+| `teammate_group_teammates` | Teammates in each teammate group (one row per group and teammate) | Full refresh |
+| `teammate_group_teams` | Teams in each teammate group (one row per group and team) | Full refresh |
+| `teammate_group_inboxes` | Inboxes that each teammate group can access through its teams (one row per group and inbox) | Full refresh |
+| `contact_lists` | Contact lists | Full refresh |
+| `contact_list_contacts` | Contacts in each contact list (one row per list and contact) | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
 The `events` table only syncs the last 365 days on its initial sync to avoid an unbounded backfill.
+
+The `conversation_followers`, `teammate_group_*`, and `contact_list_contacts` tables send one API request for each parent conversation, teammate group, or contact list. These tables can take longer to sync in large workspaces.
 
 ## Configuration
 

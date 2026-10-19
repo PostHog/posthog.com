@@ -1861,7 +1861,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                     {
-                        name: 'Context warehouse enablement',
+                        name: 'Data Stack enablement',
                         url: '',
                         children: [
                             {
@@ -5280,6 +5280,12 @@ export const docsMenu = {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconPercentage',
+                    color: 'yellow',
+                },
+                {
+                    name: 'API',
+                    url: '/docs/replay-vision/api',
+                    icon: 'IconCode',
                     color: 'yellow',
                 },
                 {
