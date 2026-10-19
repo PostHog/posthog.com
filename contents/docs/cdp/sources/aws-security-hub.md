@@ -68,7 +68,7 @@ When linking AWS Security Hub, you'll need:
 }
 ```
 
-3. Create an access key for the user under **Security credentials** > **Access keys**.
+3. Create an access key for your IAM user under **Security credentials** > **Access keys**.
 4. Copy the **Access key ID** and **Secret access key** – you'll need both when linking the source in PostHog.
 
 ## Sync modes
