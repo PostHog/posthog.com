@@ -159,7 +159,7 @@ You do not need the RevOps or billing team to change a customer's business name,
     - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
 4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
 
-An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in #team-billing for an updated invoice PDF.
+An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) for an updated invoice PDF.
 
 > Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
 
@@ -172,7 +172,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the RevOps team in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) to pause collection. Flag it as early as possible, because RevOps can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, RevOps releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 

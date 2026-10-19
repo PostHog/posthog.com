@@ -28,7 +28,7 @@ export type { BillingTier }
 export const MODELS: { key: string; label: string; creditsPerObservation: number }[] = [
     { key: 'standard', label: 'Standard', creditsPerObservation: 5 },
     { key: 'premium', label: 'Premium', creditsPerObservation: 15 },
-    { key: 'lightweight', label: 'Lightweight', creditsPerObservation: 3 },
+    { key: 'lightweight', label: 'Lightweight', creditsPerObservation: 2 },
 ]
 
 export const MAX_OBSERVATIONS = 50000

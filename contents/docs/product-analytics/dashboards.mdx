@@ -109,6 +109,17 @@ The dashboards list page includes a **Folder** column that shows which folder ea
 
 Click a folder name in the **Folder** column to filter the list to dashboards in that folder. The active filter appears as a clearable chip in the filters bar. The folder filter is saved to the URL as a `?folder=` query parameter, so filtered views persist across page reloads and can be shared with teammates.
 
+## Bulk deleting dashboards
+
+You can select multiple dashboards from the list and delete them all at once.
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard) and select the dashboards you want to delete using the checkboxes.
+2. Click **Delete selected** in the bulk action bar.
+3. In the confirmation dialog, optionally check **Delete the selected dashboards' insights** to also remove insights that don't appear on any remaining dashboard.
+4. Click **Delete dashboards** to confirm.
+
+Dashboards you don't have edit access to are skipped automatically. You can select up to 100 dashboards per request.
+
 ## Copying dashboards and templates between projects
 
 You can copy dashboards and project-scoped dashboard templates from one project to another within the same organization. To copy a single insight, see [copying insights to another project](/docs/product-analytics/insights#copying-insights-to-another-project). This is useful when you want to reuse work you've built without recreating it from scratch.

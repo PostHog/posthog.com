@@ -75,7 +75,11 @@ The alert auto-resolves once the condition is no longer met.
 
 ### Notification cooldown
 
-After an alert fires, you can set a cooldown period (in minutes) before another notification is sent. Set to 0 to notify on every check that matches. The default is 0.
+You can set a cooldown period (in minutes) to limit how often an alert sends firing and resolve notifications. Set it to 0 for no minimum. The default is 0.
+
+An alert sends one notification when it starts firing and one when it resolves. It doesn't notify again unless it resolves and then fires again, even if new matching logs arrive while it's firing.
+
+The cooldown sets the minimum time between an alert's firing and resolve notifications. PostHog doesn't send them during the cooldown, which cuts noise from an alert that keeps resolving and firing again.
 
 ## Manage alerts
 
@@ -96,14 +100,14 @@ The alert list shows a table of all your alerts:
 
 ### Alert states
 
-| State         | Description                                                                                                         |
-| ------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **OK**        | The alert condition is not met.                                                                                     |
-| **Firing**    | The alert condition is met and notifications are being sent.                                                        |
-| **Resolving** | The condition was previously met but is no longer breaching the threshold.                                          |
-| **Errored**   | Something went wrong evaluating the alert.                                                                          |
-| **Snoozed**   | The alert is temporarily silenced.                                                                                  |
-| **Broken**    | The alert has failed 5 consecutive checks and won't be evaluated again until you [reset it](#reset-a-broken-alert). |
+| State         | Description                                                                                                           |
+| ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **OK**        | The alert condition is not met.                                                                                       |
+| **Firing**    | The alert condition is met. PostHog sends a notification when the alert starts firing, and no more until it resolves. |
+| **Resolving** | The condition was previously met but is no longer breaching the threshold.                                            |
+| **Errored**   | Something went wrong evaluating the alert.                                                                            |
+| **Snoozed**   | The alert is temporarily silenced.                                                                                    |
+| **Broken**    | The alert has failed 5 consecutive checks and won't be evaluated again until you [reset it](#reset-a-broken-alert).   |
 
 ### Edit an alert
 
@@ -119,7 +123,7 @@ If an alert errors on 5 consecutive checks, it enters the **Broken** state and s
 
 ### View history
 
-Open the **⋯** menu and select **View history** to see every check, state transition, snooze, and reset for the alert.
+Open the **⋯** menu and select **View history** to see the alert's state transitions, errors, and changes such as enabling, snoozing, editing the threshold, or resetting it. History leaves out checks that neither change the alert's state nor hit an error.
 
 ### Delete an alert
 

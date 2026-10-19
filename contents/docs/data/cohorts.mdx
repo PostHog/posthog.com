@@ -140,11 +140,14 @@ If you use [Replay Vision](/docs/replay-vision), you can save the users affected
 
 1. Go to [Replay Vision](https://app.posthog.com/replay-vision) and open any scanner.
 
-2. In the impact panel, click **Save as cohort** (for monitors) or click the cohort button next to a specific tag (for classifiers).
+2. On the scanner's **Overview** tab, save the cohort:
+   - **Monitors** – in the **Verdict mix** section, click **Save as cohort** on the verdict row you want (**Yes**, **No**, or **Inconclusive**, which shows only when the scanner has inconclusive results).
+   - **Classifiers** – click the **Save as cohort** icon button next to a category.
+   - **Scorers** – there is no button. Use the API or the `vision-scanners-affected-cohort-create` [MCP](/docs/replay-vision/mcp) tool with `min_score` and/or `max_score`.
 
 The cohort is a dated snapshot: it captures the users matched in the trailing window (default 30 days) and won't live-update as new observations come in. Calling it again creates a new cohort. See [scanner types](/docs/replay-vision/scanner-types) for details on what counts as "affected" for each type.
 
-> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support impact cohorts.
+> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support cohorts.
 
 ## Static and dynamic cohorts
 

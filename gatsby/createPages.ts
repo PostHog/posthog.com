@@ -2,6 +2,7 @@ import { GatsbyNode } from 'gatsby'
 
 import path from 'path'
 import slugify from 'slugify'
+import vercelConfig from '../vercel.json'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
@@ -97,7 +98,22 @@ const SDK_REFERENCE_QUERY_FIELDS = `
 // They have no title, and the docs query's `title: { ne: "" }` filter can still match a node with no title.
 const isInboxExampleFile = (slug?: string): boolean => /^\/docs\/self-driving\/from-our-inbox\/_/.test(slug ?? '')
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql, getNodesByType }) => {
+    const redirectedPaths = new Set(vercelConfig.redirects.map(({ source }) => source))
+
+    for (const team of getNodesByType('SqueakTeam')) {
+        if (typeof team.slug !== 'string' || !team.slug || team.name === 'Hedgehogs') continue
+
+        const teamPath = `/teams/${team.slug}`
+        if (redirectedPaths.has(teamPath)) continue
+
+        createPage({
+            path: teamPath,
+            component: path.resolve('src/pages/teams/[slug].tsx'),
+            context: { slug: team.slug },
+        })
+    }
+
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
     }
