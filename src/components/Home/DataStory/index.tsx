@@ -1,11 +1,13 @@
 import React from 'react'
-import { cn } from '../../../utils'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import Emphasis from './Emphasis'
 import FeedbackPopup from './FeedbackPopup'
 import FormPointer from './FormPointer'
 import IngestStep from './Ingest/IngestStep'
 import QueryStep from './Query/QueryStep'
 import ActStep from './Act/ActStep'
+import SelfDriveStep from './SelfDrive/SelfDriveStep'
+import MergedFeed from './SelfDrive/MergedFeed'
 import Link from 'components/Link'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 
@@ -19,10 +21,6 @@ const SourceCountLink = (): JSX.Element => {
         </Link>
     )
 }
-
-const Emphasis = ({ className, children }: { className: string; children: React.ReactNode }): JSX.Element => (
-    <span className={cn('rounded-md px-1 @xl:whitespace-nowrap', className)}>{children}</span>
-)
 
 const STEPS = [
     {
@@ -47,7 +45,7 @@ const STEPS = [
     {
         title: 'Let PostHog self-drive',
         description:
-            'PostHog writes the PR, ships it behind a feature flag, and measures it with an experiment. The results go back into step 1, and the loop starts again.',
+            'When a report is ready to fix, PostHog writes the pull request on its own. You review and merge. After the change ships, PostHog checks whether it worked, and any new problem starts the loop again in step 1.',
     },
 ]
 
@@ -87,13 +85,9 @@ export const StepsSection = (): JSX.Element => (
             ) : index === 2 ? (
                 <ActStep key={title} index={index} title={title} description={description} />
             ) : (
-                <div key={title}>
-                    <h3>
-                        {index + 1}. {title}
-                    </h3>
-                    <p>{description}</p>
-                </div>
+                <SelfDriveStep key={title} index={index} title={title} description={description} />
             )
         )}
+        <MergedFeed />
     </section>
 )
