@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
+import GuideCardActions from 'components/ContextWarehouse/GuideCardActions'
 import {
     IconBell,
     IconBug,
     IconCart,
     IconClock,
-    IconCopy,
     IconFlask,
     IconHandMoney,
     IconHeart,
@@ -20,7 +20,6 @@ import {
     IconRefresh,
     IconRewindPlay,
     IconRocket,
-    IconSparkles,
     IconStack,
     IconTarget,
     IconToggle,
@@ -33,9 +32,6 @@ type IconComponent = React.ComponentType<{ className?: string }>
 
 /** Opens PostHog AI with the prompt pre-filled but not sent, so the reader can fill in the [placeholders] first. */
 const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:${encodeURIComponent(prompt)}`
-
-/** Splits a prompt into plain text and `[placeholder]` segments – placeholders land at odd indexes. */
-const PLACEHOLDER_PATTERN = /(\[[^\]]+\])/g
 
 // Same highlight as the /enterprise hero.
 const HIGHLIGHT_COLOR = 'rgba(247, 165, 1, 0.15)'
@@ -51,48 +47,68 @@ interface Question {
     href: string
 }
 
-const questions: Question[] = [
+interface QuestionGroup {
+    role: string
+    questions: Question[]
+}
+
+const questionGroups: QuestionGroup[] = [
     {
-        Icon: IconPieChart,
-        iconColor: 'text-green',
-        question: 'Which features do my paying customers use?',
-        answer: 'Join Stripe MRR to feature-usage events to rank features by the revenue of the people who use them.',
-        href: '/pocket-guides/context-warehouse/features-drive-revenue',
+        role: 'Product',
+        questions: [
+            {
+                Icon: IconPieChart,
+                iconColor: 'text-green',
+                question: 'Which features do my paying customers use?',
+                answer: 'Join Stripe MRR to feature-usage events to rank features by the revenue of the people who use them.',
+                href: '/pocket-guides/context-warehouse/features-drive-revenue',
+            },
+            {
+                Icon: IconToggle,
+                iconColor: 'text-purple',
+                question: 'Did this new feature move revenue?',
+                answer: "Split users on a feature flag or experiment, then compare Stripe revenue and retention between the group that saw it and the group that didn't.",
+                href: '/pocket-guides/context-warehouse/feature-revenue-impact',
+            },
+        ],
     },
     {
-        Icon: IconToggle,
-        iconColor: 'text-purple',
-        question: 'Did this new feature move revenue?',
-        answer: "Split users on a feature flag or experiment, then compare Stripe revenue and retention between the group that saw it and the group that didn't.",
-        href: '/pocket-guides/context-warehouse/feature-revenue-impact',
+        role: 'Growth',
+        questions: [
+            {
+                Icon: IconTarget,
+                iconColor: 'text-blue',
+                question: 'Which channels bought customers who stuck around?',
+                answer: 'Tie first-touch acquisition source to Stripe revenue, not just signups. The cheapest leads and the customers who still pay in month six may not come from the same channels.',
+                href: '/pocket-guides/context-warehouse/acquisition-channels-retention',
+            },
+            {
+                Icon: IconRocket,
+                iconColor: 'text-orange',
+                question: 'When are customers ready to grow to the next tier?',
+                answer: 'Compare product usage against the plan limits in Stripe and flag accounts sitting near or over the line while still on a smaller tier.',
+                href: '/pocket-guides/context-warehouse/upsell-ready-accounts',
+            },
+        ],
     },
     {
-        Icon: IconTarget,
-        iconColor: 'text-blue',
-        question: 'Which channels bought customers who stuck around?',
-        answer: 'Tie first-touch acquisition source to Stripe revenue, not just signups. The cheapest leads and the customers who still pay in month six may not come from the same channels.',
-        href: '/pocket-guides/context-warehouse/acquisition-channels-retention',
-    },
-    {
-        Icon: IconWarning,
-        iconColor: 'text-red',
-        question: 'What do customers do right before they cancel?',
-        answer: 'Pull cancellation dates from Stripe and look at the 30 days of activity before each one. Find out what the warning signs were so you can act on them next time.',
-        href: '/pocket-guides/context-warehouse/pre-cancellation-behavior',
-    },
-    {
-        Icon: IconRocket,
-        iconColor: 'text-orange',
-        question: 'When are customers ready to grow to the next tier?',
-        answer: 'Compare product usage against the plan limits in Stripe and flag accounts sitting near or over the line while still on a smaller tier.',
-        href: '/pocket-guides/context-warehouse/upsell-ready-accounts',
-    },
-    {
-        Icon: IconHeart,
-        iconColor: 'text-salmon',
-        question: 'Are my biggest customers happy?',
-        answer: "Put each account's revenue next to its engagement and find the high-paying, low-usage accounts so you can contact them before their contract is up for renewal.",
-        href: '/pocket-guides/context-warehouse/value-vs-engagement',
+        role: 'Customer success',
+        questions: [
+            {
+                Icon: IconWarning,
+                iconColor: 'text-red',
+                question: 'What do customers do right before they cancel?',
+                answer: 'Pull cancellation dates from Stripe and look at the 30 days of activity before each one. Find out what the warning signs were so you can act on them next time.',
+                href: '/pocket-guides/context-warehouse/pre-cancellation-behavior',
+            },
+            {
+                Icon: IconHeart,
+                iconColor: 'text-salmon',
+                question: 'Are my biggest customers happy?',
+                answer: "Put each account's revenue next to its engagement and find the high-paying, low-usage accounts so you can contact them before their contract is up for renewal.",
+                href: '/pocket-guides/context-warehouse/value-vs-engagement',
+            },
+        ],
     },
 ]
 
@@ -157,15 +173,15 @@ const syncedTables: SyncedTableGroup[] = [
     {
         group: 'Billing core',
         Icon: IconReceipt,
-        tables: 'customers, charges, invoices, subscriptions, subscription schedules',
+        tables: 'Customers, charges, invoices, subscriptions, and subscription schedules.',
     },
-    { group: 'Catalog', Icon: IconStack, tables: 'products, prices, coupons, discounts, tax rates' },
+    { group: 'Catalog', Icon: IconStack, tables: 'Products, prices, coupons, discounts, and tax rates.' },
     {
         group: 'Money movement',
         Icon: IconHandMoney,
-        tables: 'refunds, credit notes, payment intents, payouts, balance transactions, disputes',
+        tables: 'Refunds, credit notes, payment intents, payouts, balance transactions, and disputes.',
     },
-    { group: 'Checkout', Icon: IconCart, tables: 'checkout sessions, payment links, setup intents, quotes' },
+    { group: 'Checkout', Icon: IconCart, tables: 'Checkout sessions, payment links, setup intents, and quotes.' },
 ]
 
 interface SyncMode {
@@ -188,96 +204,21 @@ const syncModes: SyncMode[] = [
     },
 ]
 
-interface Step {
-    title: string
-    body: React.ReactNode
-}
-
-const steps: Step[] = [
-    {
-        title: 'Add Stripe as a source.',
-        body: (
-            <>
-                On the <strong>Data pipeline</strong> page, choose Stripe and connect with OAuth, or paste a restricted
-                API key with read access to your Core, Billing, and Connect resources.
-            </>
-        ),
-    },
-    {
-        title: 'Pick the tables you want.',
-        body: 'Sync everything or select the objects you care about including customers, invoices, and subscriptions.',
-    },
-    {
-        title: 'Let it sync on your schedule.',
-        body: 'With webhook sync, Stripe pushes creates, updates, and deletes to PostHog within seconds, so your tables stay current without a scheduled job.',
-    },
-]
-
-/** Renders [placeholders] in a prompt as highlighted chips so readers know what to change. */
-const PromptText = ({ prompt }: { prompt: string }) => (
-    <>
-        {prompt.split(PLACEHOLDER_PATTERN).map((part, i) =>
-            i % 2 === 1 ? (
-                <span
-                    key={i}
-                    className="font-code text-[0.9em] not-italic font-semibold text-red dark:text-yellow bg-accent rounded-sm px-1"
-                >
-                    {part}
-                </span>
-            ) : (
-                <React.Fragment key={i}>{part}</React.Fragment>
-            )
-        )}
-    </>
-)
-
-function PromptBlock({ prompt }: { prompt: string }) {
-    const [copied, setCopied] = useState(false)
-
-    const copyPrompt = async () => {
-        try {
-            await navigator.clipboard.writeText(prompt)
-        } catch {
-            return
-        }
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 1500)
-    }
-
-    return (
-        <div className="mt-4 rounded border border-primary bg-accent p-3">
-            <p className="m-0 mb-2 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-muted">
-                <IconSparkles className="size-3.5" />
-                PostHog AI prompt
-            </p>
-            <p className="m-0 text-[14px] italic leading-relaxed text-secondary">
-                <PromptText prompt={prompt} />
-            </p>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-                <OSButton variant="secondary" size="sm" icon={<IconCopy />} onClick={copyPrompt}>
-                    {copied ? 'Copied' : 'Copy prompt'}
-                </OSButton>
-                <Link to={maxPromptUrl(prompt)} external className="text-sm font-semibold">
-                    Open in PostHog AI
-                </Link>
-            </div>
-        </div>
-    )
-}
-
 function Section({
+    id,
     title,
     intro,
     aside,
     children,
 }: {
+    id: string
     title: string
     intro?: React.ReactNode
     aside?: React.ReactNode
     children: React.ReactNode
 }) {
     return (
-        <section className={SECTION}>
+        <section id={id} className={`${SECTION} scroll-mt-4`}>
             <div className="mb-6 grid items-end gap-6 @3xl:grid-cols-[minmax(0,1fr)_auto]">
                 <div className="min-w-0">
                     <h2 className="m-0 text-balance text-2xl font-bold tracking-tight @2xl:text-3xl">{title}</h2>
@@ -287,6 +228,31 @@ function Section({
             </div>
             {children}
         </section>
+    )
+}
+
+const jumpLinks = [
+    { id: 'questions', label: 'Questions you can answer' },
+    { id: 'across-posthog', label: 'Use it across PostHog' },
+    { id: 'what-syncs', label: 'What syncs' },
+    { id: 'connect', label: 'How to connect' },
+]
+
+function JumpLinks() {
+    return (
+        <nav aria-label="On this page" className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <span className="font-semibold text-muted">On this page:</span>
+            {jumpLinks.map((link) => (
+                <button
+                    key={link.id}
+                    type="button"
+                    onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                    className="font-semibold text-red dark:text-yellow"
+                >
+                    {link.label}
+                </button>
+            ))}
+        </nav>
     )
 }
 
@@ -328,9 +294,8 @@ export default function StripeSource(): JSX.Element {
                                 in PostHog
                             </h1>
                             <p className="m-0 mt-4 max-w-xl text-pretty text-lg text-secondary @2xl:text-xl">
-                                Connect Stripe to PostHog and now you can ask questions like{' '}
-                                <em>&ldquo;which features drive revenue?&rdquo;</em> or{' '}
-                                <em>&ldquo;what do customers do before they cancel?&rdquo;</em>
+                                Connect Stripe to PostHog to put your revenue and product data in one place, so you can
+                                see which features drive revenue and what customers do before they cancel.
                             </p>
                             <div className="mt-6">
                                 <OSButton
@@ -340,36 +305,35 @@ export default function StripeSource(): JSX.Element {
                                     variant="primary"
                                     size="xl"
                                 >
-                                    Connect Stripe
+                                    Connect Stripe to get started
                                 </OSButton>
                             </div>
                         </div>
                         <HedgehogMoney className="hidden w-full max-w-[15rem] justify-self-end @3xl:block" />
                     </header>
 
-                    <Section title="Revenue questions you can finally answer">
-                        <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @3xl:grid-cols-3">
-                            {questions.map((q) => (
-                                <div key={q.question} className={CARD}>
-                                    <q.Icon className={`mb-3 size-6 ${q.iconColor}`} />
-                                    <h3 className="m-0 mb-2 text-lg font-bold leading-tight">{q.question}</h3>
-                                    <p className="m-0 text-[15px] text-secondary">{q.answer}</p>
-                                    <div className="mt-auto pt-4">
-                                        <Link to={q.href} state={{ newWindow: true }} className="text-sm font-semibold">
-                                            Read the guide →
-                                        </Link>
-                                    </div>
+                    <JumpLinks />
+
+                    <Section id="questions" title="Questions you can answer with Stripe and PostHog">
+                        {questionGroups.map((group) => (
+                            <div key={group.role} className="mt-8 first:mt-0">
+                                <h3 className="m-0 mb-3 text-xl font-bold tracking-tight">{group.role}</h3>
+                                <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
+                                    {group.questions.map((q) => (
+                                        <div key={q.question} className={CARD}>
+                                            <q.Icon className={`mb-3 size-6 ${q.iconColor}`} />
+                                            <h4 className="m-0 mb-2 text-lg font-bold leading-tight">{q.question}</h4>
+                                            <p className="m-0 text-[15px] text-secondary">{q.answer}</p>
+                                            <GuideCardActions href={q.href} />
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                        <div className="mt-6">
-                            <OSButton asLink to="/context-warehouse/use-cases" variant="secondary" size="md">
-                                Get answers
-                            </OSButton>
-                        </div>
+                            </div>
+                        ))}
                     </Section>
 
                     <Section
+                        id="across-posthog"
                         title="Use Stripe data across PostHog"
                         intro="Once it's in PostHog, Stripe data isn't trapped in an analytics tab. You can use it everywhere you already work."
                     >
@@ -381,7 +345,17 @@ export default function StripeSource(): JSX.Element {
                                         {use.product}
                                     </h3>
                                     <p className="m-0 text-[15px] text-secondary">{use.description}</p>
-                                    <PromptBlock prompt={use.prompt} />
+                                    <div className="mt-auto pt-4">
+                                        <OSButton
+                                            asLink
+                                            to={maxPromptUrl(use.prompt)}
+                                            external
+                                            variant="secondary"
+                                            size="sm"
+                                        >
+                                            Try it in PostHog AI
+                                        </OSButton>
+                                    </div>
                                 </div>
                             ))}
                             <div className="flex h-full overflow-hidden rounded border border-primary bg-primary">
@@ -396,25 +370,7 @@ export default function StripeSource(): JSX.Element {
                     </Section>
 
                     <Section
-                        title="How to connect Stripe"
-                        intro="And you don't need a data engineer or a warehouse of your own."
-                    >
-                        <ol className="m-0 grid list-none grid-cols-1 gap-4 p-0 @3xl:grid-cols-3">
-                            {steps.map((step, i) => (
-                                <li key={step.title} className={`${CARD} m-0`}>
-                                    <span className="mb-3 flex size-6 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold">
-                                        {i + 1}
-                                    </span>
-                                    <h3 className="m-0 mb-1 text-base font-bold">{step.title}</h3>
-                                    <p className="m-0 text-[15px] text-secondary">{step.body}</p>
-                                </li>
-                            ))}
-                        </ol>
-                        <p className="m-0 mt-8 font-semibold">Or save yourself the trouble and use our setup wizard:</p>
-                        <WarehouseWizardHint className="mt-4" />
-                    </Section>
-
-                    <Section
+                        id="what-syncs"
                         title="What syncs from Stripe"
                         intro={
                             <>
@@ -463,6 +419,14 @@ export default function StripeSource(): JSX.Element {
                                 Read the docs
                             </OSButton>
                         </div>
+                    </Section>
+
+                    <Section
+                        id="connect"
+                        title="How to connect Stripe"
+                        intro="You don't need a data engineer or a warehouse of your own. The setup wizard walks you through it, and you choose which tables to sync and what access PostHog gets: connect with OAuth, or use a restricted API key with read access."
+                    >
+                        <WarehouseWizardHint />
                     </Section>
 
                     <section className={SECTION}>

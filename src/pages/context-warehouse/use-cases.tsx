@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
-import { normalizeUrl } from 'components/PocketGuides/bookModel'
-import { useSkillFiles } from 'components/PocketGuides/useSkillFile'
+import GuideCardActions from 'components/ContextWarehouse/GuideCardActions'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -248,30 +247,6 @@ function Chip({ label, kind }: Ingredient) {
     )
 }
 
-const CardActions = ({ href }: { href: string }) => {
-    const skills = useSkillFiles()
-    const skill = skills.get(normalizeUrl(href))
-    const [copied, setCopied] = useState(false)
-
-    const copySkill = () => {
-        if (!skill?.raw) return
-        navigator.clipboard.writeText(skill.raw)
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 1500)
-    }
-
-    return (
-        <div className="mt-auto flex items-center gap-2 pt-4">
-            <CallToAction to={href} size="sm">
-                Read the guide
-            </CallToAction>
-            <CallToAction type="secondary" size="sm" disabled={!skill?.raw} onClick={copySkill}>
-                {copied ? 'Copied' : 'Copy skill'}
-            </CallToAction>
-        </div>
-    )
-}
-
 function RecipeCard({ recipe }: { recipe: Recipe }) {
     return (
         <div className="flex h-full flex-col bg-primary border border-primary rounded p-5">
@@ -285,7 +260,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
                 ))}
             </div>
             <p className="text-[14.5px] text-secondary m-0">{recipe.uncover}</p>
-            <CardActions href={recipe.href} />
+            <GuideCardActions href={recipe.href} />
         </div>
     )
 }
@@ -300,7 +275,7 @@ function SkillCard({ skill }: { skill: ModelingSkill }) {
             <div className="border-t border-primary mt-4 mb-2" />
             <p className="text-[11px] font-bold uppercase tracking-wide text-green mt-2 mb-1">The rule it enforces</p>
             <p className="text-[14.5px] text-secondary m-0">{skill.rule}</p>
-            <CardActions href={skill.href} />
+            <GuideCardActions href={skill.href} />
         </div>
     )
 }
@@ -389,7 +364,7 @@ function UseCases(): JSX.Element {
                                         The rule it enforces
                                     </p>
                                     <p className="m-0 text-[14.5px] text-secondary">{foundationsSkill.rule}</p>
-                                    <CardActions href={foundationsSkill.href} />
+                                    <GuideCardActions href={foundationsSkill.href} />
                                 </div>
                             </div>
                         </div>
