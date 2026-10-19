@@ -3553,23 +3553,23 @@
         },
         {
             "source": "/docs/apps/replicator:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/replicator:ext?"
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
             "source": "/docs/apps/advanced-geoip:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/cdp/advanced-geoip:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/apps/airbyte-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/airbyte-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports:ext?"
         },
         {
             "source": "/docs/apps/amazon-kinesis:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/amazon-kinesis:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/automatic-cohort-creator:ext(\\.md)?",
@@ -3577,15 +3577,15 @@
         },
         {
             "source": "/docs/apps/avo-inspector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/avo-inspector:ext?"
+            "destination": "/docs/data-pipelines/destinations/avo:ext?"
         },
         {
             "source": "/docs/apps/bigquery-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/bigquery-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/bigquery:ext?"
         },
         {
             "source": "/docs/apps/bitbucket-release-tracker:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/bitbucket-release-tracker:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/currency-normalization:ext(\\.md)?",
@@ -3593,7 +3593,7 @@
         },
         {
             "source": "/docs/apps/customer-io:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/customer-io:ext?"
+            "destination": "/docs/data-pipelines/destinations/customerio:ext?"
         },
         {
             "source": "/docs/apps/databricks",
@@ -3601,7 +3601,7 @@
         },
         {
             "source": "/docs/apps/downsampling:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/downsampling:ext?"
+            "destination": "/docs/data-pipelines/transformations/downsampling-plugin:ext?"
         },
         {
             "source": "/docs/apps/email-scoring",
@@ -3609,7 +3609,7 @@
         },
         {
             "source": "/docs/apps/engage-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/engage-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations/engage:ext?"
         },
         {
             "source": "/docs/apps/event-sequence-timer:ext(\\.md)?",
@@ -3621,11 +3621,11 @@
         },
         {
             "source": "/docs/apps/first-time-event-tracker:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/first-time-event-tracker:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/geoip-enrichment:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/geoip-enrichment:ext?"
+            "destination": "/docs/data-pipelines/transformations/template-geoip:ext?"
         },
         {
             "source": "/docs/apps/github-release-tracker",
@@ -3641,11 +3641,11 @@
         },
         {
             "source": "/docs/apps/google-cloud-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/google-cloud-export:ext?"
+            "destination": "/docs/data-pipelines/destinations/google-cloud-storage:ext?"
         },
         {
             "source": "/docs/apps/google-pub-sub-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/google-pub-sub-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations/google-pubsub:ext?"
         },
         {
             "source": "/docs/apps/heartbeat",
@@ -3653,7 +3653,7 @@
         },
         {
             "source": "/docs/apps/hubspot-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/hubspot-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations/hubspot:ext?"
         },
         {
             "source": "/docs/apps/ingestion-alert",
@@ -3661,7 +3661,7 @@
         },
         {
             "source": "/docs/apps/intercom:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/intercom:ext?"
+            "destination": "/docs/data-pipelines/destinations/intercom:ext?"
         },
         {
             "source": "/docs/apps/laudspeaker-connector:ext(\\.md)?",
@@ -3669,11 +3669,11 @@
         },
         {
             "source": "/docs/apps/memphis-exporter:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/memphis-exporter:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/n8n:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/n8n:ext?"
+            "destination": "/docs/libraries/n8n:ext?"
         },
         {
             "source": "/docs/apps/orbit",
@@ -3681,11 +3681,11 @@
         },
         {
             "source": "/docs/apps/outfunnel-exporter:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/outfunnel-exporter:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/pace-integration:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/pace-integration:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/pagerduty-connector:ext(\\.md)?",
@@ -3697,7 +3697,7 @@
         },
         {
             "source": "/docs/apps/postgres-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/postgres-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/postgres:ext?"
         },
         {
             "source": "/docs/apps/property-filter:ext(\\.md)?",
@@ -3709,31 +3709,31 @@
         },
         {
             "source": "/docs/apps/redshift-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/redshift-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/redshift:ext?"
         },
         {
             "source": "/docs/apps/replicator:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/replicator:ext?"
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
             "source": "/docs/apps/route-censor:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/route-censor:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/rudderstack-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/rudderstack-export:ext?"
+            "destination": "/docs/data-pipelines/destinations/rudderstack:ext?"
         },
         {
             "source": "/docs/apps/rudderstack-import:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/rudderstack-import:ext?"
+            "destination": "/docs/libraries/rudderstack:ext?"
         },
         {
             "source": "/docs/apps/s3-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/s3-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/s3:ext?"
         },
         {
             "source": "/docs/apps/salesforce-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/salesforce-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations/salesforce:ext?"
         },
         {
             "source": "/docs/apps/schema-enforcer:ext(\\.md)?",
@@ -3741,15 +3741,15 @@
         },
         {
             "source": "/docs/apps/segment:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/segment:ext?"
+            "destination": "/docs/libraries/segment:ext?"
         },
         {
             "source": "/docs/apps/semver-flattener:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/semver-flattener:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/sendgrid-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/sendgrid-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations/sendgrid:ext?"
         },
         {
             "source": "/docs/apps/sentry-connector:ext(\\.md)?",
@@ -3761,7 +3761,7 @@
         },
         {
             "source": "/docs/apps/snowflake-export:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/snowflake-export:ext?"
+            "destination": "/docs/data-pipelines/batch-exports/snowflake:ext?"
         },
         {
             "source": "/docs/apps/stripe-connector:ext(\\.md)?",
@@ -3777,7 +3777,7 @@
         },
         {
             "source": "/docs/apps/twitter-followers:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/twitter-followers:ext?"
+            "destination": "/docs/data-pipelines:ext?"
         },
         {
             "source": "/docs/apps/unduplicator",
@@ -3797,7 +3797,7 @@
         },
         {
             "source": "/docs/apps/variance-connector:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/variance-connector:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/zapier-connector",
@@ -4581,7 +4581,7 @@
         },
         {
             "source": "/docs/migrate/export-events",
-            "destination": "/docs/data-pipelines/common-questions#why-cant-i-use-the-ui-or-events-api-to-export-data"
+            "destination": "/docs/data-pipelines/troubleshooting"
         },
         {
             "source": "/tutorials/mixpanel-to-posthog",
@@ -5137,43 +5137,43 @@
         },
         {
             "source": "/docs/apps/build/types",
-            "destination": "/docs/data-pipelines/build#types"
+            "destination": "/docs/data-pipelines/destinations"
         },
         {
             "source": "/docs/apps/build/tutorial:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build/tutorial:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/build/testing",
-            "destination": "/docs/data-pipelines/build/reference#writing-tests"
+            "destination": "/docs/data-pipelines/destinations"
         },
         {
             "source": "/docs/cdp/build/testing",
-            "destination": "/docs/data-pipelines/build/reference#writing-tests"
+            "destination": "/docs/data-pipelines/destinations"
         },
         {
             "source": "/docs/apps/build/reference:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build/reference:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/apps/build:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build/api:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build/jobs:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/enabling:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/build:ext?"
+            "destination": "/docs/data-pipelines/destinations:ext?"
         },
         {
             "source": "/docs/cdp/build/types",
-            "destination": "/docs/data-pipelines/build#types"
+            "destination": "/docs/data-pipelines/destinations"
         },
         {
             "source": "/docs/apps:ext(\\.md)?",
@@ -5608,7 +5608,7 @@
         },
         {
             "source": "/docs/data-warehouse/setup/azure-db:ext(\\.md)?",
-            "destination": "/docs/data-pipelines/sources/azure-db:ext?"
+            "destination": "/docs/data-pipelines/sources/microsoft-sql-server:ext?"
         },
         {
             "source": "/docs/data-warehouse/sources/azure-db:ext(\\.md)?",
@@ -5768,7 +5768,7 @@
         },
         {
             "source": "/cdp/downsampling",
-            "destination": "/docs/data-pipelines/downsampling"
+            "destination": "/docs/data-pipelines/transformations/downsampling-plugin"
         },
         {
             "source": "/cdp/engage-connector",
@@ -5780,7 +5780,7 @@
         },
         {
             "source": "/cdp/geoip-enrichment",
-            "destination": "/docs/data-pipelines/geoip-enrichment"
+            "destination": "/docs/data-pipelines/transformations/template-geoip"
         },
         {
             "source": "/cdp/hubspot-connector",
