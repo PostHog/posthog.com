@@ -453,7 +453,7 @@ const Tile = ({ node, size, magnet }: { node: OrbitNode; size: 'sm' | 'md'; magn
                 node.Icon && <node.Icon className={cn('size-full [&_[clip-path]]:![clip-path:none]', node.tone)} />
             )}
         </span>
-        <span className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-primary px-1.5 font-code text-[10px] leading-4 text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded bg-primary px-1.5 font-code text-[10px] leading-4 text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             {node.label}
         </span>
     </Link>
