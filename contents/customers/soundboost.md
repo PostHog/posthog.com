@@ -23,7 +23,7 @@ SoundBoost uses [session replay](/session-replay), [feature flags](/feature-flag
 
 With such a small team to find and ship improvements, Berkan starts every morning in PostHog's inbox. Here, PostHog's [reports](/docs/self-driving/reports) rank the priorities for the team.
 
-Sometimes that means shipping small bugfixes or performance improvements. Other times it means spotting existential threats before the team would otherwise think to look. In one such case, PostHog's [scouts](/docs/self-driving/scouts) spotted that daily clicks from Google had fallen to zero. This was shortly after SoundBoost migrated from an .ai to a .com domain, so the team assumed this was normal lag while Google picked up the new domain – but PostHog disagreed.
+Sometimes that means shipping small bug fixes or performance improvements. Other times it means spotting existential threats before the team would otherwise think to look. In one such case, PostHog's [scouts](/docs/self-driving/scouts) spotted that daily clicks from Google had fallen to zero. This was shortly after SoundBoost migrated from an .ai to a .com domain, so the team assumed this was normal lag while Google picked up the new domain – but the agent disagreed.
 
 "PostHog's reports told us this was a bigger problem. It told us that conversions stopped, traffic was low, and we were losing our best funnel," Berkan recalls. "That was essential information for us and we immediately rolled back to the .ai domain, regaining all our traction from Google."
 
