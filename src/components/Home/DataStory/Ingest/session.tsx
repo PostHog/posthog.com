@@ -1,11 +1,10 @@
-import React, { RefObject, useEffect, useState } from 'react'
-import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
+import React, { RefObject } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { IconGraph, IconRewindPlay, IconSquare, IconWarning, IconX } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { transform } from '../timeline'
 
 export const LOOP_MS = 19000
-const TICK_MS = 50
 export const REDUCED_MOTION_MOMENT = 14500
 export const PACKET_TRAVEL_MS = 900
 export const CAPTION_HOLD_MS = 2400
@@ -139,24 +138,6 @@ const arrivingEvent = (elapsed: number): SessionEvent | undefined =>
     )
 
 const formatSessionTime = (ms: number): string => `0:${String(Math.floor(ms / 1000)).padStart(2, '0')}`
-
-export function useSessionClock(
-    ref: RefObject<HTMLElement>,
-    loopMs = LOOP_MS,
-    reducedMotionMoment = REDUCED_MOTION_MOMENT
-): number {
-    const inView = useInView(ref, { amount: 0.35 })
-    const shouldReduceMotion = useReducedMotion()
-    const [elapsed, setElapsed] = useState(0)
-
-    useEffect(() => {
-        if (shouldReduceMotion || !inView) return
-        const id = window.setInterval(() => setElapsed((current) => (current + TICK_MS) % loopMs), TICK_MS)
-        return () => window.clearInterval(id)
-    }, [inView, shouldReduceMotion, loopMs])
-
-    return shouldReduceMotion ? reducedMotionMoment : elapsed
-}
 
 const CARD_NUMBER = '4242 4242 4242 4242'
 const CHAT_MESSAGE = "Can't upgrade my plan"

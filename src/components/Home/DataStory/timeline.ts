@@ -3,21 +3,27 @@ import { useInView, useReducedMotion } from 'framer-motion'
 
 const timelineNow = (): number => Number(document.timeline.currentTime ?? performance.now())
 
-const PROGRESS_KEYFRAMES: Keyframe[] = [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }]
+export interface LoopAnimation {
+    ref: RefObject<HTMLElement>
+    keyframes: Keyframe[]
+}
 
 const lastStopAtOrBefore = (stops: number[], position: number): number =>
     stops.reduce((latest, stop) => (stop <= position ? stop : latest), 0)
 
 export function useEventClock(
     ref: RefObject<HTMLElement>,
-    { loopMs, boundaries, restingMs }: { loopMs: number; boundaries: number[]; restingMs: number }
-): { elapsed: number; progressRef: RefObject<HTMLDivElement> } {
+    {
+        loopMs,
+        boundaries,
+        restingMs,
+        loopAnimations = [],
+    }: { loopMs: number; boundaries: number[]; restingMs: number; loopAnimations?: LoopAnimation[] }
+): number {
     const inView = useInView(ref, { amount: 0.35 })
     const shouldReduceMotion = useReducedMotion()
     const [elapsed, setElapsed] = useState(0)
     const position = useRef(0)
-    const progressRef = useRef<HTMLDivElement>(null)
-    const progressAnimation = useRef<Animation>()
     const stops = useMemo(
         () =>
             [0, ...Array.from(new Set(boundaries.map(Math.round).filter((at) => at > 0 && at < loopMs)))].sort(
@@ -28,21 +34,29 @@ export function useEventClock(
     const playing = inView && !shouldReduceMotion
 
     useEffect(() => {
-        if (shouldReduceMotion && progressRef.current) {
-            progressRef.current.style.transform = `scaleX(${restingMs / loopMs})`
-        }
-    }, [shouldReduceMotion, restingMs, loopMs])
+        if (!shouldReduceMotion) return
+        const animations = loopAnimations.map(({ ref: element, keyframes }) => {
+            const animation = element.current?.animate(keyframes, { duration: loopMs, fill: 'both' })
+            if (animation) {
+                animation.currentTime = restingMs
+                animation.pause()
+            }
+            return animation
+        })
+        return () => animations.forEach((animation) => animation?.cancel())
+    }, [shouldReduceMotion, loopAnimations, restingMs, loopMs])
 
     useEffect(() => {
         if (!playing) return
         const startedAt = timelineNow() - position.current
-        progressAnimation.current?.cancel()
-        progressAnimation.current = progressRef.current?.animate(PROGRESS_KEYFRAMES, {
-            duration: loopMs,
-            iterations: Infinity,
-            iterationStart: position.current / loopMs,
-        })
         const loopPosition = () => (timelineNow() - startedAt) % loopMs
+        const animations = loopAnimations.map(({ ref: element, keyframes }) =>
+            element.current?.animate(keyframes, {
+                duration: loopMs,
+                iterations: Infinity,
+                iterationStart: position.current / loopMs,
+            })
+        )
         let timer: number
 
         const scheduleNextStop = () => {
@@ -57,12 +71,67 @@ export function useEventClock(
         scheduleNextStop()
         return () => {
             window.clearTimeout(timer)
-            progressAnimation.current?.pause()
+            animations.forEach((animation) => animation?.pause())
             position.current = loopPosition()
         }
-    }, [playing, stops, loopMs])
+    }, [playing, stops, loopMs, loopAnimations])
 
-    return { elapsed: shouldReduceMotion ? restingMs : elapsed, progressRef }
+    return shouldReduceMotion ? restingMs : elapsed
+}
+
+export function useLoopingAnimation<T extends HTMLElement>(
+    keyframes: Keyframe[],
+    { duration, easing }: { duration: number; easing: string }
+): RefObject<T> {
+    const ref = useRef<T>(null)
+    useEffect(() => {
+        const animation = ref.current?.animate(keyframes, { duration, easing, iterations: Infinity })
+        return () => animation?.cancel()
+    }, [keyframes, duration, easing])
+    return ref
+}
+
+export const wordStream = (
+    text: string,
+    startAt: number,
+    msPerChar: number
+): { stops: number[]; textAt: (elapsed: number) => string } => {
+    const wordEnds = Array.from(text.matchAll(/\S+/g), (match) => (match.index ?? 0) + match[0].length)
+    const stops = wordEnds.map((end) => startAt + end * msPerChar)
+    return {
+        stops,
+        textAt: (elapsed) => text.slice(0, wordEnds.filter((_, index) => stops[index] <= elapsed).slice(-1)[0] ?? 0),
+    }
+}
+
+const GLIDE_MS = 450
+const GLIDE_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)'
+
+export function useGlideOnResize<T extends HTMLElement>(enabled: boolean): RefObject<T> {
+    const ref = useRef<T>(null)
+    useEffect(() => {
+        const element = ref.current
+        if (!enabled || !element || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+        let height = element.offsetHeight
+        let glide: Animation | undefined
+        const observer = new ResizeObserver(() => {
+            const changedBy = element.offsetHeight - height
+            height = element.offsetHeight
+            if (changedBy === 0) return
+            const remainingOffset = glide ? new DOMMatrix(getComputedStyle(element).transform).f : 0
+            glide?.cancel()
+            glide = element.animate(
+                [{ transform: `translateY(${changedBy + remainingOffset}px)` }, { transform: 'translateY(0)' }],
+                { duration: GLIDE_MS, easing: GLIDE_EASING }
+            )
+        })
+        observer.observe(element)
+        return () => {
+            observer.disconnect()
+            glide?.cancel()
+        }
+    }, [enabled])
+    return ref
 }
 
 type Length = number | string

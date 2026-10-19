@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
     CAPTION_HOLD_MS,
@@ -22,6 +22,7 @@ import {
 import { transform, useEventClock } from '../timeline'
 
 const WIDE_LAYOUT_MIN_PX = 768
+const PROGRESS_KEYFRAMES: Keyframe[] = [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }]
 
 interface Point {
     x: number
@@ -145,10 +146,13 @@ export default function IngestStep({
     const hubRef = useRef<HTMLDivElement>(null)
     const windowRef = useRef<HTMLDivElement>(null)
     const sourceRefs = useRef<Partial<Record<ExternalKey, HTMLElement | null>>>({})
-    const { elapsed, progressRef } = useEventClock(containerRef, {
+    const progressRef = useRef<HTMLDivElement>(null)
+    const loopAnimations = useMemo(() => [{ ref: progressRef, keyframes: PROGRESS_KEYFRAMES }], [])
+    const elapsed = useEventClock(containerRef, {
         loopMs: LOOP_MS,
         boundaries: SESSION_BOUNDARIES,
         restingMs: REDUCED_MOTION_MOMENT,
+        loopAnimations,
     })
     const geometry = useSpokeGeometry(containerRef, hubRef, windowRef, sourceRefs)
     const latest = latestEvent(elapsed, CAPTION_HOLD_MS)

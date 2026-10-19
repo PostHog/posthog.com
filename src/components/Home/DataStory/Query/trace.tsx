@@ -1,6 +1,7 @@
 import React from 'react'
 import { cn } from '../../../../utils'
 import { EXTERNAL_SOURCES, ProductIcon, SourceKey } from '../Ingest/session'
+import { wordStream } from '../timeline'
 
 export const TRACE_LOOP_MS = 19000
 export const TRACE_RESTING_MOMENT = 16000
@@ -16,6 +17,9 @@ const ANSWER_MS_PER_CHAR = 16
 export const ANSWER =
     "A TypeError in `checkout.tsx` broke Acme's upgrade. Jo rage-clicked Pay, the charge failed, and Jo opened a ticket. Fix: guard `plan` in checkout."
 export const ANSWER_DONE_AT = ANSWER_AT + ANSWER.length * ANSWER_MS_PER_CHAR
+const SECOND_MS = 1000
+
+const ANSWER_STREAM = wordStream(ANSWER, ANSWER_AT, ANSWER_MS_PER_CHAR)
 
 export interface ToolCall {
     id: string
@@ -26,6 +30,8 @@ export interface ToolCall {
     result: string
     at: number
 }
+
+export const codexArguments = ({ args }: ToolCall): string => `{"source":"${args}"}`
 
 export const TOOL_CALLS: ToolCall[] = [
     {
@@ -81,6 +87,7 @@ export interface CallState {
 }
 
 export interface TraceState {
+    question: string
     typed: string
     submitted: boolean
     calls: CallState[]
@@ -92,8 +99,8 @@ export interface TraceState {
 export const traceAt = (elapsed: number): TraceState => {
     const submitted = elapsed >= SUBMIT_AT
     const typedChars = Math.floor(Math.max(0, elapsed - TYPING_STARTS_AT) / TYPING_MS_PER_CHAR)
-    const answerChars = Math.floor(Math.max(0, elapsed - ANSWER_AT) / ANSWER_MS_PER_CHAR)
     return {
+        question: QUESTION,
         typed: submitted ? '' : QUESTION.slice(0, typedChars),
         submitted,
         calls: TOOL_CALLS.filter(({ at }) => elapsed >= at).map((call) => ({
@@ -101,18 +108,24 @@ export const traceAt = (elapsed: number): TraceState => {
             done: elapsed >= call.at + TOOL_RUN_MS,
         })),
         working: submitted && elapsed < ANSWER_DONE_AT,
-        answer: ANSWER.slice(0, answerChars),
+        answer: ANSWER_STREAM.textAt(elapsed),
         secondsWorking: Math.max(0, Math.floor((Math.min(elapsed, ANSWER_DONE_AT) - SUBMIT_AT) / 1000)),
     }
 }
 
 export const finishedCalls = (elapsed: number): ToolCall[] => TOOL_CALLS.filter(({ at }) => elapsed >= at + TOOL_RUN_MS)
 
-const SPINNER_GLYPHS = ['·', '✢', '✳', '✶', '✻', '✽', '✻', '✶', '✳', '✢']
-const SPINNER_FRAME_MS = 110
-
-export const spinnerGlyph = (elapsed: number): string =>
-    SPINNER_GLYPHS[Math.floor(elapsed / SPINNER_FRAME_MS) % SPINNER_GLYPHS.length]
+export const TRACE_BOUNDARIES: number[] = [
+    ...Array.from({ length: QUESTION.length }, (_, index) => TYPING_STARTS_AT + (index + 1) * TYPING_MS_PER_CHAR),
+    SUBMIT_AT,
+    ...TOOL_CALLS.flatMap(({ at }) => [at, at + TOOL_RUN_MS]),
+    ...ANSWER_STREAM.stops,
+    ANSWER_DONE_AT,
+    ...Array.from(
+        { length: Math.floor((ANSWER_DONE_AT - SUBMIT_AT) / SECOND_MS) },
+        (_, second) => SUBMIT_AT + (second + 1) * SECOND_MS
+    ),
+]
 
 export const InlineCode = ({ text, codeClassName }: { text: string; codeClassName?: string }) => (
     <>

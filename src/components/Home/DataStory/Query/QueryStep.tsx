@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { cn } from '../../../../utils'
-import { IOS_SPRING, useSessionClock } from '../Ingest/session'
+import { IOS_SPRING } from '../Ingest/session'
+import { transform, useEventClock } from '../timeline'
 import AgentWindow, { AGENT_THEMES, AgentTheme } from './AgentWindow'
-import { TRACE_LOOP_MS, TRACE_RESTING_MOMENT } from './trace'
+import { TRACE_BOUNDARIES, TRACE_LOOP_MS, TRACE_RESTING_MOMENT } from './trace'
 
 const DECK_STEP_PX = 22
 const DECK_SCALE_STEP = 0.05
 const DEAL_STAGGER_S = 0.3
-const UNDEALT = { opacity: 0, y: 56, scale: 0.9 }
+const UNDEALT = { opacity: 0, transform: transform({ y: 56, scale: 0.9 }) }
 
 function useLoopCount(elapsed: number): number {
     const [loops, setLoops] = useState(0)
@@ -47,8 +48,10 @@ const Deck = ({
                         animate={
                             inView
                                 ? {
-                                      y: depth * -DECK_STEP_PX,
-                                      scale: 1 - depth * DECK_SCALE_STEP,
+                                      transform: transform({
+                                          y: depth * -DECK_STEP_PX,
+                                          scale: 1 - depth * DECK_SCALE_STEP,
+                                      }),
                                       opacity: depth === 2 ? 0.55 : 1,
                                   }
                                 : UNDEALT
@@ -80,7 +83,11 @@ export default function QueryStep({
     description: React.ReactNode
 }): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
-    const elapsed = useSessionClock(containerRef, TRACE_LOOP_MS, TRACE_RESTING_MOMENT)
+    const elapsed = useEventClock(containerRef, {
+        loopMs: TRACE_LOOP_MS,
+        boundaries: TRACE_BOUNDARIES,
+        restingMs: TRACE_RESTING_MOMENT,
+    })
     const loops = useLoopCount(elapsed)
     const [pinned, setPinned] = useState<AgentTheme | null>(null)
     const theme = pinned ?? AGENT_THEMES[loops % AGENT_THEMES.length].key

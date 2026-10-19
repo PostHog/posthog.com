@@ -4,7 +4,8 @@ import { IconCheck, IconPlus, IconSpinner } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import { cn } from '../../../../utils'
 import { IOS_SPRING, SourceKey } from '../Ingest/session'
-import { InlineCode, QUESTION, SourceIcon, TraceState, spinnerGlyph, traceAt } from './trace'
+import { InlineCode, SourceIcon, TraceState, codexArguments, traceAt } from './trace'
+import { transform, useGlideOnResize, useLoopingAnimation } from '../timeline'
 
 export type AgentTheme = 'claude' | 'codex' | 'desktop'
 
@@ -18,10 +19,52 @@ const WINDOW_HEIGHT = 'h-[26rem]'
 const CLAUDE_CLAY = '#D97757'
 
 export const LINE_ENTER = {
-    initial: { opacity: 0, y: 4 },
-    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, transform: transform({ y: 4 }) },
+    animate: { opacity: 1, transform: transform() },
     transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
 } as const
+
+const CARET_BLINK: Keyframe[] = [{ opacity: 1 }, { opacity: 0 }]
+const PENDING_BLINK: Keyframe[] = [{ opacity: 1 }, { opacity: 0.3 }]
+const BLINK_EASING = 'steps(2, jump-none)'
+const SPINNER_GLYPHS = ['·', '✢', '✳', '✶', '✻', '✽', '✻', '✶', '✳', '✢']
+const SPINNER_KEYFRAMES: Keyframe[] = [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }]
+const SPINNER_CYCLE_MS = SPINNER_GLYPHS.length * 110
+
+const Blink = ({
+    keyframes,
+    periodMs,
+    className,
+    children,
+}: {
+    keyframes: Keyframe[]
+    periodMs: number
+    className?: string
+    children?: React.ReactNode
+}) => {
+    const ref = useLoopingAnimation<HTMLSpanElement>(keyframes, { duration: periodMs, easing: BLINK_EASING })
+    return (
+        <span ref={ref} className={className}>
+            {children}
+        </span>
+    )
+}
+
+const GlyphSpinner = () => {
+    const ref = useLoopingAnimation<HTMLSpanElement>(SPINNER_KEYFRAMES, {
+        duration: SPINNER_CYCLE_MS,
+        easing: `steps(${SPINNER_GLYPHS.length}, end)`,
+    })
+    return (
+        <span className="inline-block h-[1lh] overflow-hidden align-top">
+            <span ref={ref} className="flex flex-col">
+                {SPINNER_GLYPHS.map((glyph, index) => (
+                    <span key={index}>{glyph}</span>
+                ))}
+            </span>
+        </span>
+    )
+}
 
 export const PostHogMark = ({ className }: { className?: string }) => (
     <span className={cn('inline-flex [&_svg]:!h-full [&_svg]:!w-auto', className)}>
@@ -38,23 +81,37 @@ const TrafficLights = () => (
     </span>
 )
 
-const Caret = ({ elapsed, className }: { elapsed: number; className?: string }) => (
-    <span
+const Caret = ({ className }: { className?: string }) => (
+    <Blink
+        keyframes={CARET_BLINK}
+        periodMs={1000}
         className={cn('inline-block h-[1.1em] w-[0.55em] align-[-0.2em]', className)}
-        style={{ opacity: Math.floor(elapsed / 500) % 2 === 0 ? 1 : 0 }}
     />
 )
 
-export const ScrollToLatest = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-    <div
-        className={cn(
-            'flex min-h-0 flex-1 flex-col justify-end overflow-hidden [mask-image:linear-gradient(transparent,black_1.5rem)]',
-            className
-        )}
-    >
-        <div className="flex min-h-full shrink-0 flex-col">{children}</div>
-    </div>
-)
+export const ScrollToLatest = ({
+    children,
+    className,
+    smooth = false,
+}: {
+    children: React.ReactNode
+    className?: string
+    smooth?: boolean
+}) => {
+    const contentRef = useGlideOnResize<HTMLDivElement>(smooth)
+    return (
+        <div
+            className={cn(
+                'flex min-h-0 flex-1 flex-col justify-end overflow-hidden [mask-image:linear-gradient(transparent,black_1.5rem)]',
+                className
+            )}
+        >
+            <div ref={contentRef} className="flex min-h-full shrink-0 flex-col">
+                {children}
+            </div>
+        </div>
+    )
+}
 
 const TerminalFrame = ({
     title,
@@ -62,7 +119,7 @@ const TerminalFrame = ({
     children,
 }: {
     title: string
-    className: string
+    className?: string
     children: React.ReactNode
 }) => (
     <div
@@ -80,7 +137,7 @@ const TerminalFrame = ({
     </div>
 )
 
-const ClaudeTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number }) => (
+const ClaudeTerminal = ({ state }: { state: TraceState }) => (
     <TerminalFrame title="claude — ~/acme" className="border-[#3a3835] bg-[#1F1E1D] text-[#E8E6E3]">
         <ScrollToLatest className="px-3.5 pb-3">
             <div className="mb-3 rounded-md border px-3 py-2" style={{ borderColor: CLAUDE_CLAY }}>
@@ -91,7 +148,7 @@ const ClaudeTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number
             </div>
             {state.submitted && (
                 <motion.p {...LINE_ENTER} className="m-0 mb-2 text-[#8F8B85]">
-                    &gt; {QUESTION}
+                    &gt; {state.question}
                 </motion.p>
             )}
             {state.calls.length > 0 && (
@@ -102,15 +159,13 @@ const ClaudeTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number
             {state.calls.map(({ call, done }) => (
                 <motion.div {...LINE_ENTER} key={call.id} className="mb-1.5">
                     <p className="m-0 truncate">
-                        <span
-                            className="mr-2"
-                            style={{
-                                color: done ? '#4EBA65' : '#8F8B85',
-                                opacity: done || Math.floor(elapsed / 300) % 2 === 0 ? 1 : 0.3,
-                            }}
-                        >
-                            ⏺
-                        </span>
+                        {done ? (
+                            <span className="mr-2 text-[#4EBA65]">⏺</span>
+                        ) : (
+                            <Blink keyframes={PENDING_BLINK} periodMs={600} className="mr-2 text-[#8F8B85]">
+                                ⏺
+                            </Blink>
+                        )}
                         <strong>posthog - {call.mcpTool}</strong>
                         <span className="text-[#8F8B85]"> (MCP)(source: "{call.args}")</span>
                     </p>
@@ -127,14 +182,14 @@ const ClaudeTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number
                 <p className="m-0 mb-1 h-[1.55em]" style={{ color: CLAUDE_CLAY }}>
                     {state.working && (
                         <>
-                            {spinnerGlyph(elapsed)} Investigating…{' '}
+                            <GlyphSpinner /> Investigating…{' '}
                             <span className="text-[#8F8B85]">({state.secondsWorking}s · esc to interrupt)</span>
                         </>
                     )}
                 </p>
                 <div className="rounded-md border border-[#5a5752] px-2.5 py-1">
                     &gt; {state.typed}
-                    <Caret elapsed={elapsed} className="bg-[#E8E6E3]" />
+                    <Caret className="bg-[#E8E6E3]" />
                 </div>
                 <p className="m-0 mt-1 pl-2.5 text-[11px] text-[#8F8B85]">? for shortcuts</p>
             </div>
@@ -142,8 +197,8 @@ const ClaudeTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number
     </TerminalFrame>
 )
 
-const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number }) => (
-    <TerminalFrame title="codex — ~/acme" className="border-[#2b2b2b] bg-[#0E0E0E] text-[#EDEDED]">
+export const CodexTerminal = ({ state, className }: { state: TraceState; className?: string }) => (
+    <TerminalFrame title="codex — ~/acme" className={cn('border-[#2b2b2b] bg-[#0E0E0E] text-[#EDEDED]', className)}>
         <ScrollToLatest className="px-3.5 pb-3">
             <div className="mb-3 w-fit rounded-md border border-[#3b3b3b] px-3 py-2">
                 <p className="m-0">
@@ -153,7 +208,7 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
             </div>
             {state.submitted && (
                 <motion.p {...LINE_ENTER} className="-mx-3.5 m-0 mb-2 bg-[#1c1c1c] px-3.5 py-1">
-                    <span className="text-[#8a8a8a]">›</span> {QUESTION}
+                    <span className="text-[#8a8a8a]">›</span> {state.question}
                 </motion.p>
             )}
             {state.calls.map(({ call, done }) => (
@@ -162,7 +217,7 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
                         <span className={done ? 'text-[#5FD787]' : 'text-[#8a8a8a]'}>•</span>{' '}
                         <strong>{done ? 'Called' : 'Calling'}</strong>{' '}
                         <span className="text-[#7FC8FF]">posthog.{call.mcpTool.replace(/-/g, '_')}</span>
-                        <span className="text-[#8a8a8a]">({`{"source":"${call.args}"}`})</span>
+                        <span className="text-[#8a8a8a]">({codexArguments(call)})</span>
                     </p>
                     {done && <p className="m-0 truncate pl-4 text-[#8a8a8a]">└ {call.result}</p>}
                 </motion.div>
@@ -171,7 +226,7 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
                 <>
                     <p className="m-0 my-1.5 flex items-center gap-2 text-[#8a8a8a]">
                         <span className="h-px flex-1 bg-[#3b3b3b]" />
-                        Worked for 8s
+                        Worked for {state.secondsWorking}s
                         <span className="h-px flex-1 bg-[#3b3b3b]" />
                     </p>
                     <p className="m-0">
@@ -183,7 +238,9 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
                 <p className="m-0 mb-1 h-[1.55em]">
                     {state.working && (
                         <>
-                            <span className="text-[#8a8a8a]">{Math.floor(elapsed / 400) % 2 ? '◦' : '•'}</span>{' '}
+                            <Blink keyframes={PENDING_BLINK} periodMs={800} className="text-[#8a8a8a]">
+                                •
+                            </Blink>{' '}
                             <strong>Working</strong>{' '}
                             <span className="text-[#8a8a8a]">({state.secondsWorking}s • esc to interrupt)</span>
                         </>
@@ -192,7 +249,7 @@ const CodexTerminal = ({ state, elapsed }: { state: TraceState; elapsed: number 
                 <div className="-mx-3.5 bg-[#1c1c1c] px-3.5 py-1.5">
                     <span className="text-[#8a8a8a]">›</span>{' '}
                     {state.typed || (state.submitted ? '' : <span className="text-[#6a6a6a]">Ask Codex anything</span>)}
-                    {state.typed && <Caret elapsed={elapsed} className="bg-[#EDEDED]" />}
+                    {state.typed && <Caret className="bg-[#EDEDED]" />}
                 </div>
                 <p className="m-0 mt-1 text-[11px] text-[#6a6a6a]">⏎ send · 98% context left</p>
             </div>
@@ -214,8 +271,8 @@ export const DesktopToolRows = ({ rows }: { rows: ToolRow[] }) => (
             {rows.map(({ id, source, label, result, done }) => (
                 <motion.div
                     key={id}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    initial={{ opacity: 0, transform: transform({ y: 6 }) }}
+                    animate={{ opacity: 1, transform: transform() }}
                     transition={IOS_SPRING}
                     className="border-b border-primary last:border-b-0"
                 >
@@ -312,7 +369,7 @@ export const DesktopShell = ({
     </div>
 )
 
-const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) => (
+const DesktopApp = ({ state }: { state: TraceState }) => (
     <DesktopShell chats={['Acme churn risk', 'Signup funnel', 'Checkout errors']}>
         <ScrollToLatest className="px-3 pt-3">
             {state.submitted && (
@@ -320,7 +377,7 @@ const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) 
                     {...LINE_ENTER}
                     className="m-0 mb-3 ml-auto max-w-[85%] rounded-lg rounded-br-sm bg-accent px-2.5 py-1.5"
                 >
-                    {QUESTION}
+                    {state.question}
                 </motion.p>
             )}
             {state.calls.length > 0 && (
@@ -342,12 +399,12 @@ const DesktopApp = ({ state, elapsed }: { state: TraceState; elapsed: number }) 
         </ScrollToLatest>
         <DesktopComposer status={state.working && 'Thinking…'} sendActive={!!state.typed}>
             {state.typed || <span className="text-muted">Ask PostHog anything…</span>}
-            {state.typed && <Caret elapsed={elapsed} className="w-px bg-current" />}
+            {state.typed && <Caret className="w-px bg-current" />}
         </DesktopComposer>
     </DesktopShell>
 )
 
-const THEME_COMPONENTS: Record<AgentTheme, React.ComponentType<{ state: TraceState; elapsed: number }>> = {
+const THEME_COMPONENTS: Record<AgentTheme, React.ComponentType<{ state: TraceState }>> = {
     claude: ClaudeTerminal,
     codex: CodexTerminal,
     desktop: DesktopApp,
@@ -357,7 +414,7 @@ function AgentWindow({ theme, elapsed }: { theme: AgentTheme; elapsed: number })
     const Theme = THEME_COMPONENTS[theme]
     return (
         <div className="@container not-prose" aria-hidden="true">
-            <Theme state={traceAt(elapsed)} elapsed={elapsed} />
+            <Theme state={traceAt(elapsed)} />
         </div>
     )
 }
