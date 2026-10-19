@@ -22,4 +22,4 @@ Spike detection complements other billing and usage monitoring features, such as
 
 ## Products without a billing limit
 
-Your Logs billing limit stops ingestion but doesn't cap [Logs custom retention](/docs/logs/pricing#retention), and custom retention can't have a limit of its own. Retention for data you keep is billed on top of the limit. The 80% and 100% alerts don't cover it.
+[Logs custom retention](/docs/logs/pricing#retention) can't have a billing limit. Your Logs billing limit stops ingestion only. Retention for data you keep is billed on top of the limit, and the 80% and 100% alerts don't cover it.
