@@ -126,10 +126,22 @@ We track coverage in Customer Analytics with the CSM account relationship for th
 
 ### When to request an overlay
 
-Good retention work naturally creates room for expansion, and CSMs should keep working it. A TAM overlay is for when there's enough expansion at once that working it would pull the CSM away from retention. The TAM takes on that selling, so the CSM stays focused on retention and we don't miss the chance to significantly grow the account.
+Every $20k+ account has a CSM, so every customer has someone who knows them. On a CSM account, a TAM's job is selling expansion nobody on the customer's side is driving yet, like a new team, a new budget, or replacing a competitor. The TAM stays while there's more of that to work.
+
+An overlay isn't extra coverage. If an account needs more hands, ask your team lead first, then bring in another CSM, an FDE, or exec support. The one exception is a [competitive renewal](#competitive-renewal), covered below.
+
+An account's size doesn't add a TAM on its own. [Top 40 accounts](#top-40-account-management) and [TAE handovers](#handing-over-customers) have their own rules.
+
+**Who's pushing decides who works it.**
+- **The customer is pulling.** They're asking for a trial, asking how to switch, or they already want it. The CSM works it, at any size, competitor swaps included.
+- **We're making the case.** We have to find the budget, or get a new team or an exec to care. That's TAM work: multi-threading, exec relationships and deal structuring are what they do best.
+
+CSMs can and should push too. Request a TAM when the push needs more than you can give alongside your retention work, usually because it's stalled on a person or a budget rather than on the product. If it's unclear which side an opportunity sits on, flag it and let the TAM decide.
+
+Flagging is part of the CSM role: a short note with the context. Whether it becomes an overlay is the TAM's call, and they own it.
 
 Request a TAM overlay when:
-- **3 or more products are teed up as qualified expansion opportunities**, each a meaningful expansion rather than a small add-on, and your retention work on the account only leaves room to drive one of them. It's your call: if scoped extra help on expansion is in the customer's interest, request a TAM to push it over the finish line.
+- **A significant expansion opportunity is qualified, and we're the ones pushing it.** It's a meaningful expansion opportunity rather than a small add-on, and your retention work on the account doesn't leave room to drive it. It's your call: if scoped extra help on expansion is in the customer's interest, request a TAM to push it over the finish line.
 
 **What counts as a qualified expansion opportunity?**
 If all of the below are true:
@@ -153,17 +165,18 @@ Do what you can first. Then have an answer for: **what would a TAM take on that 
 
 If all of the above checks out, then add the `tam overlay needed` tag in Customer Analytics and add a note with the context the TAM needs to qualify the opportunity.
 
-TAM team leads review tagged accounts at the start of each quarter. The assigned TAM then qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential), and either joins or documents in Customer Analytics why not.
+TAM team leads answer a request within two weeks: a TAM assigned, a no with the reason, or when a TAM will have room. The assigned TAM then qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential), and either joins or documents in Customer Analytics why not.
 
 Here's what your note in Customer Analytics could look like. This isn't a hard requirement - use it as a concrete way to sense check your request. 
 
 ```
+Title: TAM overlay request [YYYY-MM-DD]
 Account: [account]
 
 Why a TAM:
-[ ] 3+ meaningful products teed up as expansion (listed below)
+[ ] We're pushing this, not the customer: what we'd have to do (find budget, reach a new team, get an exec to care)
 
-Products teed up (one line each):
+The opportunity (this is what the overlay is measured on):
 - [product] — use case — who'd own it
 
 If known:
@@ -186,9 +199,24 @@ Next step: what the TAM should do first
 
 There's no fixed number of TAMs or overlay accounts per CSM. The work comes in bursts and varies by account: number of active users, how often they engage with us, and ARR all shape the load.
 
-A qualified request can sit CSM-only until a TAM has room, and TAM team leads decide that at allocation. Keep working the opportunities in the meantime.
+TAM books are planned with room for mid-quarter requests, so a qualified request shouldn't have to wait for the next quarter's allocation. If no TAM has room, the request can sit CSM-only until one does, and the team lead says when that will be. Keep working the opportunities in the meantime.
 
 When the TAM joins, it might be useful to tell the customer what they're there for (for example, "joining to help explore error tracking with your platform team"), so it reads as an addition with a clear purpose, not a salesy fishing trip. See [kicking off the overlay](/handbook/growth/sales/csm-tam-overlay-coverage#kicking-off-the-overlay) for guidance on kicking off an overlay.
+
+#### What good looks like
+
+The number of overlays isn't the goal. Each quarter, we look at two things:
+
+1. **Is each overlay doing its job?** Of the overlays started, how many turned the opportunity named in the request note into closed-won expansion. Only that opportunity counts, so the overlay gets credit for what it set out to do.
+2. **What happens without an overlay?** Track the requests that were declined or had to wait, and what happened to their requested overlay opportunities. There won't be many, and TAMs will naturally take the strongest ones first, so the two possible results don't mean the same thing:
+    - **The declined or waiting ones close about as often as the accepted ones.** They were the weaker requests and did just as well, so the overlay probably isn't adding much.
+    - **The accepted ones close more often.** That's a good sign, though TAMs may also have taken the best requests, so read it alongside measure 1.
+
+    Either way, it isn't proof positive, but it's a useful signal for the quarterly reviews and the overall evaluation of the overlay model.
+
+We count from Q4 2026, and only overlays a CSM requested. Accounts that already had a TAM before then are left out.
+
+The request note is the record, since the `tam overlay needed` tag comes off once a TAM is assigned. At the end of each quarter, TAM and CSM team leads review the requests together: which were taken or declined and why, what closed, and what happened to the ones declined. TAM team leads then share it in public in Slack. We change these criteria based on what that shows.
 
 ---
 
@@ -234,7 +262,7 @@ Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM al
 
 A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, TAM team leads, with Ben's approval, review:
 
-1. **Accounts tagged `tam overlay needed`** where a CSM has identified a growth opportunity
+1. **Accounts still tagged `tam overlay needed`** that are waiting for a TAM with room. New requests don't wait for this review: they get an answer within two weeks (see [before you tag the account](#before-you-tag-the-account))
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
