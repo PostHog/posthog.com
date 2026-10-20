@@ -203,6 +203,18 @@ const faqs = [
         ),
     },
     {
+        q: 'Do multiple projects share usage and free allowances?',
+        a: (
+            <p>
+                Yes. Billing is organization-wide, so usage from all your projects is combined into one bill with one
+                free allowance. Adding projects doesn't add extra free usage. The free plan includes one project, and
+                paid plans include more. See{' '}
+                <Link to="/docs/settings/projects#how-to-organize-projects">how to organize projects</Link> for our
+                recommended development, staging, and production setup.
+            </p>
+        ),
+    },
+    {
         q: 'How can I manage my spend?',
         a: (
             <p>
