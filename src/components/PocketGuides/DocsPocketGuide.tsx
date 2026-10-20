@@ -5,7 +5,7 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { TreeMenu } from 'components/TreeMenu'
 import { docsMenu } from '../../navs'
-import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
+import { pocketGuidePageTitle, pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 import { learnChapterSlug, useBookPages } from './bookModel'
 import LearnSurface from './LearnSurface'
 
@@ -31,7 +31,7 @@ export default function DocsPocketGuide({
     return (
         <>
             <SEO
-                title={`${entry?.title ?? volume.title} – ${volume.title} pocket guide`}
+                title={pocketGuidePageTitle(volume, entry?.title)}
                 description={description ?? volume.description}
                 image="/images/og/default.png"
             />

@@ -18,9 +18,9 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
 }
 
-/** Introductory text uses the same prose styling as docs. */
+/** The small line above a title-page heading. Sits inside the `#` heading so the h1 reads as the full title. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
-    return <p>{children}</p>
+    return <span className="mb-[0.5em] block text-[0.5em] font-normal">{children}</span>
 }
 
 /** The volume's specimen drawing, on the pages that open a book. */

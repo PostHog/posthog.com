@@ -5,22 +5,26 @@ subtitle: Answer a quick question or build a durable model, on PostHog data ware
 pocketGuideOrder: 0
 ---
 
+import WizardCommand from 'components/WizardCommand'
+
 <LeftPage>
 
-<Eyebrow>Pocket guide to</Eyebrow>
+# <Eyebrow>A pocket guide to</Eyebrow> Data Stack
 
-# Data Stack
+Combine your product data with Stripe, your CRM, or your ad platform to answer questions that neither source can answer on its own.
 
-Congratulations, your business is generating data which means you have people using your product.
-By combining data from PostHog with external data from tools like Stripe, your CRM, or ad platform
-you can answer questions that neither tool could answer on its own.
+Work through questions about revenue, churn, and leads, then build reusable models with PostHog data warehouse views or dbt. 
 
-## Where to start
-
-Getting started on your data journey? If you have a question about revenue, churn, or leads right now, **Ask a quick
-question**. Each has step-by-step instructions and a Skill to build an insight end-to-end.
-
-Beginning to need more complex data modeling? Start with **Data
-modeling**. [Warehouse foundations](/docs/data-warehouse/pocket-guide/warehouse-foundations) covers the view-vs-dbt decision every other Skill builds on.
+<CoverWithChapters />
 
 </LeftPage>
+
+<RightPage>
+
+The chapters include step-by-step instructions and skills you can give your agent to build insights and models.
+
+To follow along with your own data, run the data warehouse setup wizard:
+
+<WizardCommand command="warehouse" />
+
+</RightPage>

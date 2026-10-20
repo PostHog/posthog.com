@@ -32,6 +32,8 @@ export const MCP_SERVER_URL = 'https://mcp.posthog.com/mcp'
 // Twig is PostHog's interactive learning environment. Keep every website touchpoint on this
 // shared URL so a future destination change cannot leave one entry point behind.
 export const TWIG_URL = 'https://twig.com'
+export const TWIG_VISIT_RECORDING_URL =
+    'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_10_02_at_1_05_27_PM_553e7c2693.mp4'
 
 // Default avatar fallback (DrakeHog, flipped horizontally)
 export const AVATAR_FALLBACK_URL =

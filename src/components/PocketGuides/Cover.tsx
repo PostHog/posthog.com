@@ -8,6 +8,7 @@ import { Logo } from '@posthog/brand/logo'
 import { PocketGuideVolume, pocketGuideUrl } from '../../constants/pocketGuides'
 
 import { volumeArt } from './volumeArt'
+import { openPocketGuide } from './bookOpening'
 
 interface CoverProps {
     volume: PocketGuideVolume
@@ -80,8 +81,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                     <Art size={140} className="h-full max-h-[140px] w-auto max-w-full" />
                 </div>
             )}
-            <footer className="flex shrink-0 items-baseline justify-between gap-2 text-[11px] uppercase tracking-wider text-gray">
-                <span>Vol. {volume.volume}</span>
+            <footer className="flex shrink-0 items-baseline justify-end gap-2 text-[11px] uppercase tracking-wider text-gray">
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
                         {count} {count === 1 ? 'guide' : 'guides'}
@@ -112,15 +112,30 @@ export default function Cover({ volume, count, placement, to, onOpen }: CoverPro
     return (
         <Link
             to={to ?? pocketGuideUrl(volume)}
-            state={{ newWindow: true }}
-            onClick={trackCoverClick}
+            data-pocket-guide-cover
+            onClick={(event) => {
+                trackCoverClick()
+                void openPocketGuide(event, event.currentTarget as HTMLElement, to ?? pocketGuideUrl(volume))
+            }}
             // Perspective lives on the link so the hover tilt reads as picking the book up.
-            className="group block no-underline [perspective:1200px]"
+            className="group relative block no-underline [perspective:1200px]"
         >
+            <div aria-hidden="true" className="absolute inset-0 rounded-sm border border-light bg-white p-5 shadow-lg">
+                <div className="flex h-full flex-col justify-between border-l border-gray/20 py-3 pl-4">
+                    {Array.from({ length: 12 }, (_, line) => (
+                        <div key={line} className="h-1 shrink-0 rounded bg-gray/20 shadow-sm last:w-2/3" />
+                    ))}
+                </div>
+            </div>
             {/* Hinged at the spine: the fore-edge lifts toward you like a cover opening, and the
                 spine edge stays planted instead of foreshortening away. */}
-            <div className="transition-transform duration-300 ease-out [transform-origin:left_center] [transform-style:preserve-3d] motion-safe:group-hover:[transform:rotateY(-9deg)_translateY(-4px)] motion-safe:group-hover:drop-shadow-2xl">
-                <CoverBody volume={volume} count={count} />
+            <div
+                data-pocket-guide-cover-face
+                className="relative [transform-origin:left_center] [transform-style:preserve-3d] [backface-visibility:hidden]"
+            >
+                <div className="transition-transform duration-300 ease-out [transform-origin:left_center] [transform-style:preserve-3d] motion-safe:group-hover:[transform:rotateY(-9deg)_translateY(-4px)] motion-safe:group-hover:drop-shadow-2xl">
+                    <CoverBody volume={volume} count={count} />
+                </div>
             </div>
         </Link>
     )

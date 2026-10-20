@@ -5,20 +5,24 @@ subtitle: Scouts that watch your product and open a pull request when something 
 pocketGuideOrder: 0
 ---
 
+import WizardCommand from 'components/WizardCommand'
+
 <LeftPage>
 
-<Eyebrow>Pocket guide to</Eyebrow>
-
-# Self-driving
+# <Eyebrow>A pocket guide to</Eyebrow> Self-driving
 
 PostHog tools tell you what users are doing. Self-driving acts on that data by opening pull requests that improve your product.
 
-## Where to start
+Learn how the self-driving loop works through real scouts. Each use case walks through the report a scout files, the pull request it becomes, and the scout itself, which you can add to your own product.
 
-New to Self-driving? Start with [Self-driving 101](/docs/self-driving/pocket-guide/101) on the next
-page – it covers the loop, what a scout is, and how to apply use cases that follow.
-
-Already Self-driving? Use cases in the **Contents** are scouts you can add to
-your own product in one click.
+<CoverWithChapters />
 
 </LeftPage>
+
+<RightPage>
+
+To follow along with your own product, run the self-driving setup wizard:
+
+<WizardCommand command="self-driving" />
+
+</RightPage>

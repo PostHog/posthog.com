@@ -8,7 +8,7 @@ import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templa
 import { flattenMenu, replacePath } from './utils'
 import { HOGPEDIA_RESERVED } from '../src/components/Hogpedia/categories'
 import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
-import { pocketGuidePageContext } from '../src/constants/pocketGuides'
+import { POCKET_GUIDE_SOURCE, pocketGuidePageContext } from '../src/constants/pocketGuides'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -700,7 +700,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         const plainSlug = node.fields?.slug || node.slug
         // Authored learning content is generated at its configured public reader URL below.
-        if (/^\/learn\/[^/]+\/pocket-guide(?:\/|$)/.test(plainSlug ?? '')) return
+        if (POCKET_GUIDE_SOURCE.test(plainSlug ?? '')) return
         if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
         // Hogpedia articles get the MonoBook template from the dedicated loop below, so a
         // generic Plain page would be a duplicate at the same path.

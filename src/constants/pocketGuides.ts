@@ -3,6 +3,9 @@
 /** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
 export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
 
+/** Optional pages under a Learn hub, at /learn/<product>/<page>. */
+export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
+
 export interface PocketGuideVolume {
     /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
     id: string
@@ -11,7 +14,7 @@ export interface PocketGuideVolume {
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
     token: PocketGuideToken
-    /** Printed on the cover. Order on the shelf follows it. */
+    /** Printed on the docs library spines, which sort by it. The shelf follows array order. */
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
@@ -19,6 +22,8 @@ export interface PocketGuideVolume {
     productHandle?: string
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
+    /** Show an Overview page at /learn/<product> and list the extra hub pages that exist. Omit for a flat chapter list. */
+    learnHub?: { pages?: LearnHubPage[] }
     /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -43,16 +48,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'product-analytics',
         productHandle: 'product_analytics',
         learnPath: '/learn/product-analytics/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
         countOrientationPages: true,
-    },
-    {
-        id: 'self-driving',
-        title: 'Self-driving',
-        description: 'Scouts that watch your product and open a pull request when something breaks.',
-        token: 'orange',
-        volume: 1,
-        docsProduct: 'self-driving',
-        learnPath: '/docs/self-driving/pocket-guide',
     },
     {
         id: 'ai-observability',
@@ -62,7 +59,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 2,
         docsProduct: 'ai-observability',
         productHandle: 'ai_observability',
-        learnPath: '/learn/ai-observability',
+        learnPath: '/learn/ai-observability/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
     },
     {
         id: 'data-stack',
@@ -82,7 +80,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 4,
         docsProduct: 'session-replay',
         productHandle: 'session_replay',
-        learnPath: '/learn/session-replay',
+        learnPath: '/learn/session-replay/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
     },
     {
         id: 'feature-flags',
@@ -92,7 +91,17 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 6,
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
-        learnPath: '/learn/feature-flags',
+        learnPath: '/learn/feature-flags/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
+    },
+    {
+        id: 'self-driving',
+        title: 'Self-driving',
+        description: 'Scouts that watch your product and open a pull request when something breaks.',
+        token: 'orange',
+        volume: 1,
+        docsProduct: 'self-driving',
+        learnPath: '/docs/self-driving/pocket-guide',
     },
 ]
 
@@ -103,6 +112,12 @@ export function volumeForProduct(docsProduct: string): PocketGuideVolume | undef
 
 export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
+}
+
+/** SEO title for a chapter. The intro chapter shares the volume's title, so it reads "A pocket guide to <volume>". */
+export function pocketGuidePageTitle(volume: PocketGuideVolume, chapterTitle?: string): string {
+    if (!chapterTitle || chapterTitle === volume.title) return `A pocket guide to ${volume.title}`
+    return `${chapterTitle} – ${volume.title} pocket guide`
 }
 
 /** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
@@ -118,9 +133,15 @@ export function pocketGuideDestination(url: string): string {
     return volume ? `${pocketGuideUrl(volume)}${match[2]}` : url
 }
 
+/**
+ * Authored guide sources live at `/learn/<id>/pocket-guide/...`. The leading slash is optional
+ * because Gatsby's MDX `slug` field omits it. gatsby/algoliaConfig.js (plain JS) keeps a copy.
+ */
+export const POCKET_GUIDE_SOURCE = /^\/?learn\/([^/]+)\/pocket-guide(?:\/|$)/
+
 /** Identify authored guide content; never infer the topic from a public docs slug. */
 export function pocketGuideSourceVolume(sourceSlug: string): PocketGuideVolume | undefined {
-    const match = sourceSlug.match(/^\/learn\/([^/]+)\/pocket-guide(?:\/|$)/)
+    const match = sourceSlug.match(POCKET_GUIDE_SOURCE)
     return match ? volumeById(match[1]) : undefined
 }
 
