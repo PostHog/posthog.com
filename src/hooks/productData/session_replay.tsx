@@ -36,9 +36,9 @@ export const sessionReplay = {
     pricingDescription:
         'Web session recordings capture clicks, scrolls, console logs, and network calls so you can replay exactly what users did in your product.',
     seo: {
-        title: 'Session Replay – Debug and analyze sessions with PostHog',
+        title: 'Session Replay – Record and watch user sessions | PostHog',
         description:
-            'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
+            'Watch session recordings of real users on web and mobile. See clicks, console logs, and network requests to find friction and debug issues fast.',
     },
     /**
      * Sections rendered on the Product surface (`/session-replay`). Each entry
