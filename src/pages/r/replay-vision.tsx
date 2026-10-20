@@ -196,8 +196,7 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Ask a question in plain English, like "did the user get stuck on checkout?" The AI watches the
-                    sessions you point it at and catches the hesitation and confusion that never show up as an event.
+                    Ask questions, like "did the user get stuck on checkout?" and get the answer you need.
                 </p>
             </>
         ),
@@ -221,9 +220,8 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Each scanned session becomes an observation: a yes/no verdict, a score, tags, or a summary. Every
-                    observation has a confidence score. Observations also land as <code>$recording_observed</code>{' '}
-                    events, so you can chart them, build cohorts from them, or send alerts to Slack.
+                    Scanned sessions lead to observations, verdicts, scores, tags, or summaries – whatever you need to get a read. Track observations as <code>$recording_observed</code>{' '}
+                    events, so you can chart them, build cohorts, or trigger alerts.
                 </p>
                 <SlideCallout>
                     We do this ourselves. One of our scanners caught a visitor hunting for our changelog RSS feed, and
@@ -262,28 +260,28 @@ const scanners: {
         Icon: IconDocument,
         color: 'text-green',
         title: 'Session summary',
-        description: "The short version of a session, so you don't sit through 3 hours of someone scrolling.",
+        description: "Get the short version, so you don't sit through 3 hours of scrolling.",
         output: 'A title and a summary',
     },
     {
         Icon: IconMagic,
         color: 'text-blue',
         title: 'User intent',
-        description: 'Tags each session with what the user seemed to be trying to do.',
+        description: 'Tag sessions with what the user was trying to do.',
         output: 'Tags from a list you define',
     },
     {
         Icon: IconCheckCircle,
         color: 'text-teal',
         title: 'Session outcome',
-        description: 'Tags what actually happened: completed, abandoned, errored, and so on.',
+        description: 'Tags what happened: purchases, errors, and more.',
         output: 'Tags from a list you define',
     },
     {
         Icon: IconWarning,
         color: 'text-red',
         title: 'Dead ends',
-        description: "Flags the moment someone can't find the next step and leaves.",
+        description: "Flags the moment someone can't find the next step.",
         output: 'A yes/no verdict, with reasoning',
     },
     {
@@ -298,7 +296,7 @@ const scanners: {
         color: 'text-orange',
         title: 'Experiment',
         description:
-            'Summarizes sessions from each variant of an experiment and puts them side by side, so you see what people did differently.',
+            'Summarizes an experiment side by side, so you see what changes.',
         output: 'A summary, labeled with the variant',
     },
 ]
