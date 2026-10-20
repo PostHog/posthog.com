@@ -16,9 +16,9 @@ I've been chatting with marketing and growth leads at a few other devtools compa
 
 Everyone sees the potential value, but not everyone feels comfortable investing in it.
 
-The hesitation is usually some mix of (1) it feels unnatural to give your competitors their flowers on your own website, and (2) comparison pages come with maintenance nobody wants to deal with. Competitors ship things, change their pricing, get acquired (or acquire others), and all of a sudden the article you wrote in March is already wrong by June. Now you're the one spreading misinformation.
+The hesitation usually comes from some mix of (1) it feels unnatural to give your competitors their flowers on your own website, and (2) comparison pages come with maintenance overhead nobody wants to deal with. Competitors ship things, change their pricing, get acquired (or acquire others), and all of a sudden the article you wrote in March is already outdated by June.
 
-So how do you walk the line between being fair (complimentary, even) to your competitors while still capturing demand & showing off the strengths of your own product? And how do you keep the content accurate once it's out in the world?
+So how do you walk the line between being fair (complimentary, even) to your competitors while still capturing demand & showing off your product's strengths? And how do you keep the content accurate once it's out in the world to avoid spreading misinformation?
 
 Both worth figuring out if you want to write comparison content that doesn't get dunked on.
 
@@ -26,40 +26,133 @@ Both things I'm here to give some answers to, based on our experience [writing c
 
 ## Why bother with comparison content?
 
-Putting it plainly: because it works. Head-to-head comparisons (PostHog vs 'competitor') are ~8% of our blog's traffic and roughly a quarter of the signups we can trace back to a blog post. Add the "best X tools" roundups and 'alternatives' articles, and comparison content as a whole is a third of the blog's traffic and a whopping 60% of our content-led signups.
+Because it works – at least for us it has. Head-to-head comparisons (PostHog vs 'competitor') are ~8% of our blog's traffic and roughly a quarter of the signups we can trace back to a blog post; add the "best X tools" roundups and 'alternatives' articles, and comparison content as a whole is a third of the blog's traffic and a whopping **60%** of our content-led signups.
 
-Since 2022, over 10,000 people have signed up for PostHog after reading a comparison. Three quarters of them within 30 days of reading it; nearly half within 24 hours. 
+Since 2022, over 10k people have signed up for PostHog after reading a comparison. Three quarters of them within 30 days of reading it; nearly half within 24 hours.
 
 ![Comparison content by year](https://res.cloudinary.com/dmukukwp6/image/upload/TODO_comparison_content_by_year.png)
 
-Roughly one in ten people who read a head-to-head comparison go on to create a PostHog account. That's five times the rest of the blog!
+Roughly one in ten people who read a comparison go on to create a PostHog account. That's five times the rest of the blog!
 
-| Content type (2025) | Unique visitors | Visitors who later signed up | Conversion |
+| Content type (2025 FY) | Unique visitors | Visitors who later signed up | Conversion |
 | --- | --- | --- | --- |
 | Head-to-head comparisons (PostHog vs X) | 30k+ | 3,000+ | **~9%** |
 | Alternatives and "best X tools" roundups | 100k+ | 4,000+ | ~4% |
 | Every other blog post | 250k+ | 4,500+ | ~2% |
 
-The reasons are intuitive: someone searching [brand] vs [brand] has already decided they need something and are choosing between two. Comparison content is perfectly positioned in the funnel to help them make a decision (ideally in your favour, but not always and that's okay. More on that later).
+The reasons are intuitive: someone searching for this type of content has already decided they need something, which makes it perfectly positioned in the funnel to help them make a decision (ideally in your favour, but not always and that's okay. More on that later).
 
 ## How comparison content evolved at PostHog
 
-Our first one, [PostHog vs Amplitude](/blog/posthog-vs-amplitude), first went live in May 2022. It still gets a few hundred readers a month, which is more than I can say for most things anyone published in 2022. [Matomo](/compare/posthog-vs-matomo) and [Mixpanel](/blog/posthog-vs-mixpanel) followed.
+Technically, our first comparison was a roundup. [The best open source analytics tools](/blog/best-open-source-analytics-tools) went live in October 2021 and is still our single most-read piece of comparison content, at 150k+ pageviews and counting. 
 
-2023 was the year it became a thing. Every new PostHog product came with a new set of competitors; [Session Replay](/session-replay) brought [Hotjar](/blog/posthog-vs-hotjar), [FullStory](/blog/posthog-vs-fullstory), and [LogRocket](/blog/posthog-vs-logrocket). [Feature Flags](/feature-flags) brought [LaunchDarkly](/blog/posthog-vs-launchdarkly), [GrowthBook](/blog/posthog-vs-growthbook) and [Statsig](/blog/posthog-vs-statsig). [Web Analytics](/web-analytics) brought [GA4](/blog/posthog-vs-ga4). 
+It set the template for the early days: "best open source X" for [session replay](/blog/best-open-source-session-replay-tools), [A/B testing](/blog/best-open-source-ab-testing-tools), and [feature flags](/compare/best-open-source-feature-flag-tools). Open source was one of our wedges, so that's what we compared on.
 
-We went from three pages to fourteen in a year, and the maintenance problem started flaring up. Keeping 3 pages accurate by hand is straightforward enough; fourteen, each with a feature table and pricing that changes often, is almost a part-time job.
+The first head-to-head, [PostHog vs Amplitude](/blog/posthog-vs-amplitude), followed in May 2022. It still gets a few hundred readers a month, which is more than I can say for most things we published back in 2022. [Matomo](/compare/posthog-vs-matomo) and [Mixpanel](/blog/posthog-vs-mixpanel) came next.
 
-In 2024 we launched [Error Tracking](/error-tracking), wrote [PostHog vs Sentry](/blog/posthog-vs-sentry), and watched it become our most-read comparison of all time within two years. 
+2023 was the year it became a thing. Every new PostHog product came with a new set of competitors. [Session Replay](/session-replay) brought [Hotjar](/compare/posthog-vs-hotjar), [FullStory](/compare/posthog-vs-fullstory), and [LogRocket](/compare/posthog-vs-logrocket). [Feature Flags](/feature-flags) brought [LaunchDarkly](/compare/posthog-vs-launchdarkly), [GrowthBook](/compare/posthog-vs-growthbook), and [Statsig](/compare/posthog-vs-statsig). [Web Analytics](/web-analytics) brought [GA4](/blog/posthog-vs-ga4). 
 
-**2026** brought the AI observability comparisons 
+We went from three to fourteen in a year, and the maintenance problem flared up. Three pages you can keep accurate by hand; fourteen, each with a feature table and pricing that changes every quarter, not so much. It's, to this day, a workflow we're constantly working on solving for and improving.
 
-## Be the page you'd want to read
+**2024 was the alternatives year.** Nearly every head-to-head got a "best X alternatives" companion: [Hotjar](/compare/best-hotjar-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), [Plausible](/compare/best-plausible-alternatives), [Matomo](/compare/best-matomo-alternatives), and about fifteen more. We also launched [error tracking](/error-tracking), wrote [PostHog vs Sentry](/blog/posthog-vs-sentry) in August, and watched it become our most-read head-to-head of all time within two years.
 
-[Our handbook](/handbook/content/seo-guide) has a rule about this, and it sums up a lot of our foundational approach: most companies straw-man their competitors. We don't. Describe what they can actually do, assume they're reading, and assume they will call you out if you lie. 
+2025 followed the products. [Best Sentry alternatives](/blog/best-sentry-alternatives) and [best error tracking tools](/compare/best-error-tracking-tools) for error tracking, [best open source LLM observability tools](/blog/best-open-source-llm-observability-tools) for [AI observability](/ai-observability), and [best Datadog alternatives](/compare/best-datadog-alternatives) as the first hint of what was coming next.
 
-PostHog doesn't have every feature every competitor has. That's fine. Our credibility with the reader is worth more than any row we'd "win" by fudging.
+Finally, in 2026 we started focusing on our observability stack. [PostHog vs Langfuse](/compare/posthog-vs-langfuse) and a full set of AI observability roundups ([best AI observability tools](/compare/best-ai-observability-tools), plus [Langfuse](/compare/best-langfuse-alternatives), [LangSmith](/compare/best-langsmith-alternatives), and [Braintrust](/compare/best-braintrust-alternatives) alternatives). Then [logs](/logs): [best log monitoring tools](/compare/best-log-monitoring-tools), [Grafana Loki](/compare/best-grafana-loki-alternatives) and [Splunk](/compare/best-splunk-alternatives) alternatives, and [PostHog vs Datadog](/compare/posthog-vs-datadog). 
 
-In practice, this looks like picking up a few uncomfortable habits:
+So no, this isn't an AEO fad for us; we were writing comparison content BeFoRe iT wAs cOoL, back when the answer engine was a guy named Greg on Stack Overflow.
+
+And while they have shapeshifted plenty since then, we've stayed true to two principles:
+
+1. Do no harm. [We don't trash-talk competitors](/blog/why-attacking-competitors-is-dumb), we don't straw-man them, and we admit when and where they're better than us. [No sneaky shit](/handbook/marketing#no-sneaky-shit), as our handbook puts it.
+2. Respect the reader's intelligence, and meet them where they are. A developer comparing tools is smart, busy, and already halfway towards a decision. Give them the answer as accurately and as directly as possible, and let them make the right call for their product.
+
+## Be the comparison page you'd want to read
+
+PostHog doesn't have every feature every competitor has (*yet*), and we're fine admitting it. Our credibility with the reader is worth more than whatever we'd "win" by fudging the truth.
+
+We're not the solution for everyone. We are the best solution for someone (a lot of someones, actually), and the job is capturing *their* attention. Which means you will, occasionally, lose a deal on your own website: someone reads PostHog vs Amplitude, concludes Amplitude is the better fit, and goes and buys Amplitude. We wish them godspeed and focus on our ICP anyway.
+
+In practice, this means picking up a few uncomfortable habits:
+
+**Acknowledge your gaps and credit their wins.** "If you need X, they do it better than we do today" is a sentence you'll find on our pages. Softening it with what's coming is fine (a roadmap link, a "we're working on it"), as long as you're clear about where you are *right now* for the readers deciding today. For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not our ambitions.
+
+Readers don't think less of you for crediting a competitor; they think more. It's the cheapest trust signal in content marketing, and almost nobody uses it, which is exactly why it works. Say the nice thing.
+
+There's another reader to keep in mind, too: LLMs. When someone asks Claude "PostHog vs Sentry for a Next.js app," we assume the model pulls from sources it judges to be balanced. So be balanced. You want to read as a source, not an ad. Being honest used to be a brand decision (one we've proudly stood behind), but now it might be a distribution decision too.
+
+**Write a "who should pick them" section.** If you can't write a fair paragraph about where your competitor wins, you don't understand them well enough to compare. Go read their docs. It's also the place to be honest about who you're for: plenty of our competitors are openly built for marketers for example, and while lots of marketers run all their reporting on PostHog (yours truly included), we're still building for AI-pilled engineers first, and we say so.
+
+The reader who isn't a fit should leave feeling helped, not hustled. They'll remember that the next time they're evaluating something we *are* a fit for. Honest pages also don't make enemies: the fastest way to go viral for the wrong reasons is a dodgy comparison, and if you'd rather not be bashed on Hacker News or Twitter for being slimy, be fair.
+
+- **Take corrections from competitors.** We've shipped edits because someone at a competitor emailed us, DMed us, or better yet, opened a PR directly against our blog. We welcome it and encourage it. (Yes, if you're a competitor reading this, this is an invitation.) 
+
+Sometimes you'll be offered a slice of humble pie, and it's important to eat it gracefully.
+
+My litmus test for every comparison: if a competitor wrote this exact page about PostHog, how would I feel reading it? Would it feel like they'd done their homework, or would I feel misrepresented and annoyed? If it's the latter, it's probably worth trying again.
+
+We haven't always gotten this right, but we're committed to doing better every time.
+
+## How to maintain comparison pages
+
+Staying accurate across ~100 comparison and roundup pages for years is an engineering problem, and we started treating it like one.
+
+### 1. Every competitor is a data file.
+
+In the posthog.com repo there's [a folder with one file per competitor](https://github.com/PostHog/posthog.com/tree/master/src/hooks/competitorData): `sentry.tsx`, `amplitude.tsx`, `hotjar.tsx`, and so on. Each file holds everything we claim about that company, in one place; here's a simplified version of what that looks like:
+
+```typescript
+export const sentry = {
+  name: 'Sentry',
+  products: {
+    error_tracking: {
+      available: true,
+      features: { source_maps: true, issue_grouping: true, ... },
+    },
+    session_replay: { available: true, features: { ... } },
+    product_analytics: { available: false },
+  },
+  platform: { self_hosting: true, sso: 'Business plan and above', ... },
+  pricing: { model: 'Usage-based, per event and per replay' },
+}
+```
+
+Feature keys come from a shared dictionary, so "session replay with network payloads" means the same thing on the Hotjar page as the LogRocket page. 
+
+Every comparison table renders from these files through one component. Nothing is hand-typed. When a competitor ships a feature, someone changes one line in one file and every page that mentions them updates on the next deploy. The repo is public, so competitors can see exactly what we say about them and open a pull request if we're wrong.
+
+### 2. A Scout checks our homework
+
+Data files solve "update once, publish everywhere", but they don't solve for "notice that something changed" – that's what [we've used Scouts for](/blog/what-is-a-scout).
+
+Our comparison content scout is a scheduled agent inside PostHog that reads our competitor files, visits each competitor's pricing and docs pages, and reports back when what they say and what we say have drifted apart. A few things make it better than a cron job with a diff:
 
 
+1. **It has memory between runs**, so it doesn't re-flag the same thing every week, and it learns what "normal" looks like for each site.
+2. **It's selective by design.** Most runs end with nothing to report, and that's it working. It ignores changes that don't affect the overall comparison.
+3. **It shows its evidence**: what their page says now, what our file says, and a suggested edit, with sources.
+4. **A human ships the fix.** The scout posts a digest to Slack with a link to open a PR. A person decides whether the change is necessary, opens the PR, and merges it. 
+
+Here's what it looks like in practice. First, the Slack digest:
+
+![Scout Digest Example](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_20_T16_19_30_472_Z_b79c531d30.png)
+
+Then the full report in our [self-driving inbox](/self-driving):
+
+![Scout Full Report Example](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_20_T16_20_14_111_Z_b9daa4f43b.png)
+
+And finally, a pull request ready to merge:
+
+![Scout PR Example](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_20_T16_21_46_652_Z_789b3a4394.png)
+
+The scout does the noticing, a human does the deciding, and nobody needs to add a recurring "re-read every competitor's pricing page" task to their calendar. 
+
+## Where we go from here
+
+We haven't reached our final form yet (will we ever?). One of my goals this quarter is going back through all of this content and making it better, and I'm sure there's plenty we're still getting wrong. 
+
+But the point is we started, and four years, 100-ish pages, and 10,000+ signups later, it's been one of the best decisions we've made for our organic content strategy.
+
+So if you've been circling the plunge, take it. Be fair, be accurate, and let a robot handle the maintenance so you don't have to. (May I suggest trying out [our robots](/docs/self-driving/scouts)?) Worst case, you lose a deal to a competitor who was the better fit anyway. Comes with the territory. Best case, you gain a reader's trust and a new user for your product.
+
+If you're a peer who's nailed this, or spectacularly not, and want to trade notes, [my DMs are always open](https://www.linkedin.com/in/nataliahelenaamorim/).
