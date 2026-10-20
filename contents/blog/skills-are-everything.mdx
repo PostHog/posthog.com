@@ -235,8 +235,6 @@ Almost every bullet was a link to a skill.
 
 This is the bit I think people miss about a shared skills store: the handover doesn't go to a human who then has to load it into their own agent. It goes to the human *and* their agent at the same time, because the skill already lives where both of them can read it.
 
-The same trick works for complex PR stacks and big reviews. When a teammate opened a large PR that touched shared plumbing a lot of other code runs through, I made a skill just for reviewing it. It holds what the PR changes, a findings folder with a status for each finding, a log of what I'd already posted on GitHub and Slack, who owes what, and the commands to re-check a diff too big for `gh pr diff`. We still write everything up in the PR, of course. The skill is the context around it. I can pick the review back up in a fresh agent session after every push without starting from zero, and when I want to talk it through with a teammate, I point them (and their agent) at the skill. It hit 19 versions in its first day.
-
 ## 6. Skills that run themselves
 
 Every scout in PostHog [is a skill](/docs/self-driving/whats-in-a-scout). Same format, same store, same version history. The only difference is a schedule and a harness that runs it. Which means when I've built a skill for how I do a job, turning it into a job that does itself is a small step, not a new project.
