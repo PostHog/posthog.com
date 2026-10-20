@@ -65,6 +65,8 @@ process.on('SIGTERM', () => {
 });
 ```
 
+If your app already handles `SIGTERM` (for example, to drain open requests), don't add a second handler. Export `sdk` and call `await sdk.shutdown()` at the end of your existing shutdown code instead.
+
 </Step>
 
 <Step title="Load the instrumentation before your app" badge="required">
