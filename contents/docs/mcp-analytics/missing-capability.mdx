@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 Missing-capability reports show what agents need but your server does not support. Without these reports, an agent may stop or try a tool name that does not exist.
 
-Turn on missing-capability reports to capture them. They're off by default. The Go SDK doesn't support them yet.
+Turn on missing-capability reports to capture them. They're off by default.
 
 ## Enabling
 
@@ -28,9 +28,17 @@ instrument(server, posthog, MCPAnalyticsOptions(report_missing=True))
 PostHog::MCP.instrument(server, posthog, report_missing: true)
 ```
 
+```go file=Go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithMissingCapabilityTool("get_more_tools"),
+)
+```
+
 </MultiLanguage>
 
 The SDK registers a virtual tool named `get_more_tools`. It advertises this tool through `tools/list`. The description asks the agent to call it when the available tools cannot satisfy a request.
+
+In Go, `WithMissingCapabilityTool` turns the feature on. Pass a different name to rename the tool. An empty name uses `get_more_tools`. The SDK adds the tool to the last page of `tools/list`. If your server registers a tool with the same name, the SDK keeps your tool and does not add its own. A server that registers no tools must set `HasTools` in go-sdk's `ServerOptions`. Without it, clients never list tools and never see `get_more_tools`.
 
 ## What gets captured
 
@@ -77,6 +85,8 @@ FROM listed
 WHERE tool_name NOT IN (SELECT tool_name FROM called)
 ORDER BY tool_name
 ```
+
+The Go SDK sends no `$mcp_tools_list`, so the second query returns nothing for Go servers.
 
 Together, the two queries answer "what tools should I build?" and "what tools should I cut?".
 

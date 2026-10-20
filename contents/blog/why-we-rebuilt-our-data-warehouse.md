@@ -78,7 +78,7 @@ Here's what we built:
 
 ## All your data, ready in PostHog
 
-What makes this different from spinning up a standalone warehouse is that we're already mirroring all PostHog event data to S3, partitioned by organization. When you spin up your managed warehouse instance, your event data is there, no pipeline setup needed.
+What makes this different from spinning up a standalone warehouse is that we're already mirroring all PostHog event data to S3, partitioned by organization. When you spin up your warehouse instance, your event data is there, no pipeline setup needed.
 
 The same goes for data sources you want to connect – [Stripe](/docs/data-warehouse/sources/stripe), [Postgres](/docs/data-warehouse/sources/postgres), whatever external systems you're syncing – all of it lands in your warehouse, queryable through the same endpoint as your PostHog events.
 
@@ -92,6 +92,6 @@ Your failed queries, error patterns, conversion drops, and user behaviour as wel
 
 A unified warehouse gives your agents access to your full business context to do things that weren't possible before. Not just "this funnel dropped", but "this funnel dropped, here's the revenue impact, here are the cohorts affected, here's what those users have in common, here's an action plan and a PR already open to fix the issue." That's the signal quality that makes agentic workflows useful.
 
-Try it for yourself — [join the waitlist](https://posthog.com/context-warehouse/managed-warehouse) to get notified when we release the Managed Warehouse beta.
+Try it for yourself — [join the waitlist](https://posthog.com/context-warehouse/warehouse) to get notified when we release the Warehouse beta.
 
 <DuckDBWaitlistSurvey />

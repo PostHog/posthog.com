@@ -137,7 +137,7 @@ A customer's engineering team pings the shared channel: their experiment results
 
 This is not unusual. Most product-led customers (the ones our CSMs and TAMs inherit) self-serve their implementation.
 
-So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly.
+So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the [technical weeds of someone else's codebase](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer#software-engineering-is-fun) and making sure PostHog is implemented correctly.
 
 ## 11:00 AM: The donut run
 
@@ -189,4 +189,4 @@ Working at PostHog is a grab bag of weird, fun, intense, goofy, and hard work. A
 
 The weird stuff isn't a distraction from the real work because it’s how we do the real work. Being genuine and being effective aren't at odds. If anything, the customer who got a crocheted hedgehog is probably more likely to take your call about trying that new product we launched than the one who got a quarterly business review PDF.
 
-If you think this sounds like a place you'd want to work, [we're always hiring](/careers).
+If you think this sounds like a place you'd want to work, we're always hiring. Our [NA](/careers/technical-customer-success-manager-americas) and [EU](/careers/technical-customer-success-manager-emea) Technical CSM roles are open now.

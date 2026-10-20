@@ -9,39 +9,41 @@ availability:
 sourceId: Env0
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<AlphaRelease />
-
-The env0 connector syncs organizations, projects, teams, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The env0 connector syncs your infrastructure-as-code data into PostHog: organizations, projects, teams, templates, organization members, roles and role assignments, environments, deployment history, the steps and resources behind each deployment, drift causes, audit logs, project budgets, and cloud cost at the environment, project, and organization level. You can attribute cloud spend to teams and projects, compare it against budgets, and analyze deployment and drift activity alongside your product data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+You need an env0 API key. Organization administrators can create an organization API key, or you can use a personal API key scoped to your user. The key needs read access to the organizations you want to sync.
+
+Cost data additionally requires [cost monitoring](https://docs.envzero.com/docs/cost-monitoring) to be configured in env0 for the environments you want cost records for. Project and organization cost roll up the environments below them, so they are empty until cost monitoring is on.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Enter your env0 API key credentials to pull your env0 data.
+To connect env0, you need an API key ID and an API key secret:
 
-You can create an organization API key in your env0 [Organization Settings > API Keys](https://docs.envzero.com/docs/api-keys), or a personal API key from your user settings. The key needs read access to the organizations you want to sync.
-
-Environment cost data is only available for environments with [cost monitoring](https://docs.envzero.com/docs/cost-monitoring) configured.
-
-You'll be asked for:
-
-- **API key ID**
-- **API key secret**
+1. In env0, go to **Organization Settings** → **API Keys** (or create a [personal API key](https://docs.envzero.com/docs/api-keys) from your user settings).
+2. Create a new API key and copy both the **API Key ID** and the **API Key Secret** — the secret is only shown once.
+3. Paste them into the PostHog source setup form.
 
 ## Sync modes
 
 <SyncModes />
 
-All env0 tables are full refresh. Each sync replaces the contents of the table.
+The `deployments` table supports incremental sync on `startedAt`. Deployments can change after they first sync (their status and finish time land when the run completes), so incremental syncs re-pull a one-day window behind the last synced deployment to keep recently-synced rows fresh.
+
+The `deployment_resources` table supports incremental sync on `deployment_started_at`, the start time of the deployment that managed the resource. An incremental sync only visits deployments inside that window, which keeps the table cheap to refresh. A full refresh visits every deployment in every environment, so use incremental sync once the first load finishes.
+
+The `deployment_steps` table works the same way, with incremental sync on `deployment_started_at`.
+
+The `audit_logs` table supports incremental sync on `timestamp`.
+
+The cost tables always sync the last year of daily cost records, so full refresh is the right mode for them. The same goes for `drift_causes` and `organization_users`, which env0 returns in full on every request.
 
 ## Configuration
 
@@ -53,7 +55,12 @@ All env0 tables are full refresh. Each sync replaces the contents of the table.
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the API key ID is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+**Missing cost data:** the cost tables only have rows for environments and projects where env0 cost monitoring is configured. Those without it are skipped. The budget tables only have rows for projects with a budget.
+
+**Rate limits:** env0 limits API usage to 1,000 requests per 60 seconds. Deployments and costs are fetched per environment, and `deployment_resources` and `deployment_steps` are fetched per deployment, so accounts with very many environments or deployments may sync these tables slowly. The connector backs off and retries automatically.
+
+**Audit logs:** reading audit logs needs the `VIEW_AUDIT_LOGS` permission in env0.
+
+**API keys in `organization_users`:** env0 counts organization API keys as users, so they appear in this table alongside people. The `app_metadata` column marks them. They are included because a deployment can be started by an API key, so leaving them out would make the table an incomplete lookup.
 
 <TroubleshootingLink />

@@ -62,7 +62,7 @@ const planAllowances: IFeature[] = [
 ]
 
 const support: IFeature[] = [
-    { title: 'Community support at posthog.com/questions', url: '/questions' },
+    { title: 'Community support at posthog.com/forum', url: '/forum' },
     { title: 'Community Slack' },
 ]
 

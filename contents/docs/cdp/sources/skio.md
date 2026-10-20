@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Skio
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Skio connector syncs your Shopify subscription data into PostHog: subscriptions, subscription lines, orders, customers, products, and more. Use it to analyze subscription revenue and churn alongside your product data.
 

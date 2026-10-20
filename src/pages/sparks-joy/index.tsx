@@ -8,6 +8,7 @@ import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
 import {
     HedgehogBackToTheFuture,
+    HedgehogCodingGroup,
     HedgehogDj,
     HedgehogReading,
     HedgehogReadingIsMagic,
@@ -124,7 +125,7 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'time-machine',
-                                trigger: <span>Time machine (6)</span>,
+                                trigger: <span>Time machine (7)</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
@@ -174,6 +175,14 @@ export default function SparkJoy(): JSX.Element {
                                                 label="OnlyHogs"
                                                 url="/sparks-joy/onlyhogs"
                                                 Icon={<HedgehogRose className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="hogBB"
+                                                url="/hogbb"
+                                                Icon={<HedgehogCodingGroup className="size-12" />}
                                                 className="size-12"
                                             />
                                         </ZoomHover>

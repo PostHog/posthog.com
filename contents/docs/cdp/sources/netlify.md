@@ -12,9 +12,6 @@ sourceId: Netlify
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Netlify connector syncs your Netlify sites, deploys, builds, forms, form submissions, DNS zones, accounts, and members into the PostHog data warehouse for engineering and marketing analytics.
 

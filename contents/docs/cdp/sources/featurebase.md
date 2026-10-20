@@ -12,9 +12,6 @@ sourceId: Featurebase
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Featurebase connector syncs your customer feedback data – posts, boards, comments, upvoters, changelogs, companies, and contacts – into the PostHog Data warehouse, so you can rank feature demand and join feedback against your product usage data.
 

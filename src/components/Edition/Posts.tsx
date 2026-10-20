@@ -44,7 +44,7 @@ const Questions = ({ questions }: { questions: Omit<StrapiResult<QuestionData[]>
                 return (
                     <li className="text-yellow mt-4 first:mt-0" key={id}>
                         <Link
-                            to={`/questions/${permalink}`}
+                            to={`/forum/p/${permalink}`}
                             className="dark:text-yellow dark:hover:text-yellow text-red hover:text-red"
                         >
                             <span className="flex justify-between items-center">

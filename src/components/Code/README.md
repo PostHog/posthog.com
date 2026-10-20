@@ -33,7 +33,10 @@ Feature-flagged launch UI with a detected-platform download, an all-platforms dr
 **Props:** `className`, `align`, `size`
 
 ### `SignalsCallout`
-Grid display of signal types (In-app activity, Logs, Errors, etc.) with icons. Responsive: 3-col at `@2xl`, 2-col below.
+Grid display of signal types (In-app activity, Logs, Errors, etc.) with icons. Responsive: 3-col at `@2xl`, 2-col below. Pass `title` and `items` to reuse the box for another list (the services page uses it for data sources).
+
+### `Receipt`
+A paper till receipt with a torn bottom edge: title, optional subtitle, rows (price defaults to `$0.00`), total, and footer. Fixed paper and ink colors so it reads as paper in both color modes. Used for the "table stakes" punchline on `/desktop` and the contract buyout on `/services`.
 
 ### `FlowDiagram`
 Five-step "old way" flow diagram (Analyze usage -> Decide what to build -> Prompt & context -> Build -> Ship) with Human/Machine actor labels. Responsive: horizontal at `@xl`, stacked below.

@@ -12,9 +12,6 @@ sourceId: Depot
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Depot connector syncs the Depot CI job attempts of one GitHub repository into the PostHog Data warehouse, with one row per attempt. You can then query how long your CI jobs take, how often they fail, and how often they are retried.
 

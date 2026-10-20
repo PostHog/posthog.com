@@ -12,9 +12,6 @@ sourceId: Dbt
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The dbt connector syncs metadata from the dbt platform (dbt Cloud) into PostHog – accounts, projects, environments, job definitions, users, and the full job run history – so you can analyze pipeline reliability, run durations, and failure rates alongside your product data.
 

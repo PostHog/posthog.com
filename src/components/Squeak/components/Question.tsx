@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect, useContext, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
-import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import { QuestionData, StrapiRecord } from 'lib/strapi'
 import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
@@ -12,20 +12,8 @@ import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
-import {
-    IconArchive,
-    IconPencil,
-    IconPin,
-    IconSparkles,
-    IconTrash,
-    IconUndo,
-    IconExpand,
-    IconShieldLock,
-} from '@posthog/icons'
+import { IconArchive, IconPencil, IconSparkles, IconTrash, IconUndo, IconShieldLock } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
-import { Check2 } from 'components/Icons'
 import { navigate } from 'gatsby'
 import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
@@ -33,9 +21,6 @@ import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
-import ScrollArea from 'components/RadixUI/ScrollArea'
-import { TopicSelector } from './TopicSelector'
-import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
 
@@ -51,117 +36,10 @@ type QuestionProps = {
     onQuestionReady?: (question: StrapiRecord<QuestionData>) => void
     subscribeButton?: boolean
     isInForum?: boolean
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
     refreshList?: () => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
-
-const TopicSelect = (props: {
-    selectedTopics: StrapiData<TopicData[]>
-    onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
-}) => {
-    const { pinTopics } = useContext(CurrentQuestionContext)
-    const [topicGroups, setTopicGroups] = useState([])
-    const [selectedTopics, setSelectedTopics] = useState<StrapiRecord<TopicData>[]>([])
-    const { addToast } = useToast()
-
-    const handleChange = async (topics: StrapiRecord<TopicData>[]) => {
-        setSelectedTopics(topics)
-        await pinTopics(topics.map((topic) => topic.id))
-        props.onPinTopics?.(topics)
-        const topicsAdded = topics.length - selectedTopics.length
-        const action = topicsAdded > 0 ? 'pinned' : 'unpinned'
-        addToast({
-            title: `Topic ${action}`,
-            description: `The topic has been ${action} successfully.`,
-        })
-    }
-
-    useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => {
-            setTopicGroups(topicGroups)
-            const selectedTopics: StrapiRecord<TopicData>[] = []
-            topicGroups.forEach(({ attributes: { topics } }) => {
-                topics.data.forEach((topic) => {
-                    if (props.selectedTopics.data.some((selectedTopic) => selectedTopic.id === topic.id)) {
-                        selectedTopics.push(topic)
-                    }
-                })
-            })
-            setSelectedTopics(selectedTopics)
-        })
-    }, [])
-
-    return (
-        <div className="relative [&>*]:inline-flex [&>*]:items-center">
-            <Listbox value={selectedTopics} onChange={handleChange} multiple>
-                <Listbox.Button as={React.Fragment}>
-                    <OSButton
-                        hover="border"
-                        icon={<IconPin />}
-                        tooltip={
-                            <>
-                                <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" /> Pin
-                                thread
-                            </>
-                        }
-                        size="md"
-                    >
-                        <IconExpand className="size-4 inline-block" />
-                    </OSButton>
-                </Listbox.Button>
-                {topicGroups?.length > 0 && (
-                    <Listbox.Options
-                        data-scheme="primary"
-                        className={`list-none p-0 m-0 absolute z-20 max-h-[500px] divide-y divide-primary mt-2 bg-primary shadow-xl border border-primary rounded min-w-52`}
-                    >
-                        <div className="relative w-full">
-                            <ScrollArea className="min-h-0 h-[500px] max-h-[500px]">
-                                {topicGroups
-                                    .sort(
-                                        (a, b) =>
-                                            topicGroupsSorted.indexOf(a?.attributes?.label) -
-                                            topicGroupsSorted.indexOf(b?.attributes?.label)
-                                    )
-                                    .map(({ attributes: { label, topics } }) => {
-                                        return (
-                                            <div key={label}>
-                                                <div className="py-1 px-2 text-[13px] border-b border-primary whitespace-nowrap text-secondary">
-                                                    {label}
-                                                </div>
-                                                {topics?.data.map((topic) => {
-                                                    const active = selectedTopics.some(
-                                                        (selectedTopic) => selectedTopic.id === topic.id
-                                                    )
-                                                    return (
-                                                        <Listbox.Option key={topic.id} value={topic}>
-                                                            <div
-                                                                data-scheme="primary"
-                                                                className={`${
-                                                                    active ? 'font-semibold' : ''
-                                                                } prose-invert py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 text-primary hover:bg-accent bg-primary`}
-                                                            >
-                                                                <span className="flex-shrink-0 w-3">
-                                                                    {active && <Check2 />}
-                                                                </span>
-
-                                                                <span>{topic.attributes.label}</span>
-                                                            </div>
-                                                        </Listbox.Option>
-                                                    )
-                                                })}
-                                            </div>
-                                        )
-                                    })}
-                            </ScrollArea>
-                        </div>
-                    </Listbox.Options>
-                )}
-            </Listbox>
-        </div>
-    )
-}
 
 const DeleteButton = ({ questionID }: { questionID: number }) => {
     const { getJwt } = useUser()
@@ -175,7 +53,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
                 },
                 body: JSON.stringify({ data: { publishedAt: null } }),
             })
-            await navigate('/questions')
+            await navigate('/forum')
         }
     }
     return (
@@ -209,7 +87,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                             <div className="flex items-center !text-black dark:!text-white">
                                 <div className="mr-2 relative">
                                     <Avatar
-                                        className={` ${isInForum ? 'size-[40px]' : 'w-[25px] h-[25px]'} rounded-full`}
+                                        className={` ${isInForum ? 'size-8' : 'w-[25px] h-[25px]'} rounded-full`}
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
@@ -227,7 +105,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                 </Tooltip>
                 <div
                     className={` mt-1 py-2 px-4 bg-accent rounded-md border border-primary ${
-                        isInForum ? 'ml-[calc(44px_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
+                        isInForum ? 'ml-[calc(2rem_+_.5rem)]' : 'ml-[calc(44px_+_.5rem)]'
                     }`}
                 >
                     {children}
@@ -317,7 +195,7 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     )
 }
 
-const AskMax = ({
+export const AskMax = ({
     question,
     refresh,
     manual = false,
@@ -332,6 +210,9 @@ const AskMax = ({
 }) => {
     const [loading, setLoading] = useState(true)
     const [confident, setConfident] = useState(false)
+    // The server refuses automatic replies in forum topics with AI replies off. That is not a failed search, so
+    // nothing shows.
+    const [refused, setRefused] = useState(false)
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -348,8 +229,13 @@ const AskMax = ({
                         manual,
                         withContext,
                     }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
+                })
+                if (response.status === 403) {
+                    setRefused(true)
+                    return
+                }
+                const data = await response.json()
+                setConfident(data.confident)
                 setLoading(false)
                 refresh()
             } catch (error) {
@@ -360,7 +246,7 @@ const AskMax = ({
         window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
-    return loading ? (
+    return refused ? null : loading ? (
         <AskMaxLoading isInForum={isInForum} />
     ) : !confident ? (
         <MaxReply isInForum={isInForum}>
@@ -374,16 +260,7 @@ const AskMax = ({
 }
 
 export function Question(props: QuestionProps) {
-    const {
-        id,
-        question,
-        showSlug,
-        buttonText,
-        showActions = true,
-        isInForum = false,
-        onPinTopics,
-        refreshList,
-    } = props
+    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, refreshList } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator, isForumModerator } = useUser()
@@ -421,9 +298,7 @@ export function Question(props: QuestionProps) {
         handleReplyDelete,
         voteReply,
         archive,
-        pinTopics,
         mutate,
-        removeTopic,
     } = useQuestion(id, { data: question, onResolve: refreshList })
 
     useEffect(() => {
@@ -460,7 +335,7 @@ export function Question(props: QuestionProps) {
             questionId: questionData.id,
             subject: questionData.attributes.subject,
             body: questionData.attributes.body,
-            url: `https://posthog.com/questions/${questionData.attributes.permalink}`,
+            url: `https://posthog.com/forum/p/${questionData.attributes.permalink}`,
             permalink: questionData.attributes.permalink,
             authorName,
             topics: questionData.attributes.topics?.data?.map((topic) => topic.attributes.label),
@@ -491,7 +366,6 @@ export function Question(props: QuestionProps) {
                 handleResolve,
                 handleReplyDelete,
                 voteReply,
-                pinTopics,
                 mutate,
             }}
         >
@@ -520,6 +394,7 @@ export function Question(props: QuestionProps) {
                         }`}
                     >
                         <Profile
+                            compact={isInForum}
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
@@ -532,12 +407,6 @@ export function Question(props: QuestionProps) {
                         <div className="!ml-auto flex items-center space-x-px [&>*]:inline-flex">
                             {isForumModerator && showActions && (
                                 <>
-                                    {isModerator && !archived && (
-                                        <TopicSelect
-                                            onPinTopics={onPinTopics}
-                                            selectedTopics={questionData.attributes.pinnedTopics}
-                                        />
-                                    )}
                                     {!archived ? (
                                         <OSButton
                                             onClick={() => archive(!archived)}
@@ -603,7 +472,7 @@ export function Question(props: QuestionProps) {
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
-                                        to={`/questions/${questionData.attributes.permalink}`}
+                                        to={`/forum/p/${questionData.attributes.permalink}`}
                                         className="!no-underline hover:!underline font-semibold"
                                     >
                                         {questionData.attributes.subject}
@@ -734,38 +603,6 @@ export function Question(props: QuestionProps) {
                                         </OSButton>
                                     </div>
                                 )}
-                                <div className={isModerator ? 'mt-4 border-t border-border' : ''}>
-                                    <div className={isModerator ? 'pt-4' : ''}>
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
-                                                Forum topics
-                                            </h4>
-                                            <TopicSelector
-                                                questionId={questionData.id}
-                                                permalink={questionData.attributes.permalink}
-                                            />
-                                        </div>
-                                        <ul className="flex items-center list-none p-0 flex-wrap">
-                                            {questionData.attributes?.topics?.data.map((topic) => (
-                                                <li
-                                                    key={topic.id}
-                                                    className="bg-white dark:bg-white/10 py-0.5 px-2 rounded-sm whitespace-nowrap mr-2 my-2 inline-flex items-center space-x-1.5"
-                                                >
-                                                    <Link
-                                                        to={`/questions/topic/${topic.attributes.slug}`}
-                                                        className="text-yellow text-sm"
-                                                    >
-                                                        {topic.attributes.label}
-                                                    </Link>
-
-                                                    <button onClick={() => removeTopic(topic)}>
-                                                        <XIcon className="h-4 w-4 text-primary" />
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     )}

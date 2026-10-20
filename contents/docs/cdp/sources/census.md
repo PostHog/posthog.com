@@ -9,13 +9,13 @@ availability:
 sourceId: Census
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+The Census (Fivetran) connector syncs your reverse-ETL workspace metadata into PostHog, including syncs, sync runs, sources, destinations, and datasets. New sources use the Fivetran Activations API V2, which requires an Activations personal access token.
 
-The Census source is currently in alpha. It has been tested against Census's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
+<CalloutBox icon="IconWarning" title="Activations API V1 retiring on January 15, 2027" type="caution">
+
+Fivetran is retiring the Activations API V1 on January 15, 2027. Existing V1 sources continue to work until then, but you should migrate to V2 before the sunset. To migrate, create an Activations personal access token in your Fivetran user settings and set up a new Census source in PostHog with it.
 
 </CalloutBox>
-
-The Census (Fivetran) connector syncs your reverse-ETL workspace metadata into PostHog, including syncs, sync runs, sources, and destinations.
 
 ## Adding a data source
 
@@ -30,7 +30,7 @@ The Census (Fivetran) connector syncs your reverse-ETL workspace metadata into P
 | US    | `app.getcensus.com`    |
 | EU    | `app-eu.getcensus.com` |
 
-4. Enter your **API access token**. This comes from your Census workspace settings (see [Getting your API access token](#getting-your-api-access-token) below).
+4. Enter your **API access token**. New sources require an Activations personal access token (see [Getting your API access token](#getting-your-api-access-token) below).
 
 5. Click **Next**.
 
@@ -40,15 +40,17 @@ The data warehouse then starts syncing your Census data. You can see details and
 
 ## Getting your API access token
 
-To connect Census to PostHog, you need a workspace API access token:
+New Census sources use the Activations API V2, which requires an Activations personal access token:
 
-1. Log in to your Census workspace at [app.getcensus.com](https://app.getcensus.com) (or [app-eu.getcensus.com](https://app-eu.getcensus.com) for EU).
+1. Log in to your Fivetran account.
 
-2. Go to **Workspace settings** > **API Access**.
+2. Go to your Activations **User settings** > **Personal access tokens**.
 
-3. Click **Create new token** (or use an existing one with appropriate permissions).
+3. Create a new personal access token.
 
 4. Copy the token – you'll need it when linking the source in PostHog.
+
+Activations personal access tokens are separate from Fivetran API keys and Fivetran personal access tokens.
 
 ## Configuration
 
@@ -68,6 +70,8 @@ All Census tables use full refresh. Census's API does not expose a server-side f
 | `sync_runs`    | Full refresh |
 | `sources`      | Full refresh |
 | `destinations` | Full refresh |
+| `datasets`     | Full refresh |
+| `workspaces`   | Full refresh |
 
 **Full refresh** syncs reload all data on each run.
 
@@ -79,9 +83,13 @@ All Census tables use full refresh. Census's API does not expose a server-side f
 | `sync_runs`    | Execution records of Census syncs, including status, timing, and per-run record counts.                                                  |
 | `sources`      | Data sources connected to Census – warehouses or databases that Census reads from.                                                       |
 | `destinations` | Destinations connected to Census – SaaS tools or warehouses that Census writes to.                                                       |
+| `datasets`     | Datasets configured in Census.                                                                                                           |
+| `workspaces`   | Workspaces in your Census organization. Only available on legacy V1 sources – V2 does not include this table.                            |
 
 <CalloutBox icon="IconInfo" title="Sensitive fields are stripped" type="fyi">
 
 The `connection_details` field is automatically removed from the `sources` and `destinations` tables. This field contains warehouse account identifiers (account name, user, warehouse name) that shouldn't be accessible to all project members.
+
+On V2 sources, the `notification_emails` and `storage_backend` fields are also removed from the `sources` table.
 
 </CalloutBox>

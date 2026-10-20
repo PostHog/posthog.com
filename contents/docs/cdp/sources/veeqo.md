@@ -12,9 +12,6 @@ sourceId: Veeqo
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Veeqo connector syncs orders, products, customers, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -40,7 +37,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Veeqo tables are full refresh. Each sync replaces the contents of the table.
+The `orders` and `products` tables support incremental sync on `updated_at`, `created_at`, or `id`. Use `updated_at` to also pick up changes to existing records. All other Veeqo tables are full refresh. Each sync replaces the contents of the table.
 
 ## Configuration
 

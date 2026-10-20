@@ -12,9 +12,6 @@ sourceId: Hyperspell
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Hyperspell connector pulls your app's AI memory layer into the PostHog data warehouse: indexed memories, data-source connections, extracted entities, prior queries, and generated context documents.
 

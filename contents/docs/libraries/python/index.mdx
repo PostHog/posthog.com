@@ -103,7 +103,7 @@ The snapshot provides synchronous `is_enabled()`, `get_flag()`, and `get_flag_pa
 
 ### Fetch remote config
 
-Initialize the client with a server-side [feature flags secure API key](/docs/feature-flags/remote-config#step-1-find-your-feature-flags-secure-api-key) as `secret_key`, then await the remote config request:
+Initialize the client with a server-side [secret API key](/docs/feature-flags/remote-config#step-1-get-a-secret-api-key) as `secret_key`, then await the remote config request:
 
 ```python
 config = await posthog.get_remote_config_payload("landing-page-config")
@@ -490,13 +490,15 @@ An invalid value falls back to its default with a warning. The exception is `bef
 
 Spans are exported on a background interval, even with `sync_mode` on. Both `flush()` and `shutdown()` export spans that have already ended. A span still open at `flush()` is exported once it ends; a span still open at `shutdown()` is discarded with a warning, so end your spans before shutting down – a `with` block does this for you. `shutdown()` gives queued spans up to 30 seconds to send.
 
-In a serverless handler, call `flush()` before returning. Events and spans are flushed concurrently, so it costs one round trip, not two.
+If your serverless handler reuses a client across invocations, call `flush()` before returning. It flushes events and ended spans concurrently without stopping the client. Reserve `shutdown()` for a disposable client or process exit.
 
 ```python
 def handler(event, context):
-    with posthog.start_span("handler"):
-        do_work()
-    posthog.flush()
+    try:
+        with posthog.start_span("handler"):
+            do_work()
+    finally:
+        posthog.flush()
 ```
 
 A script that exits without calling `shutdown()` still gets a brief best-effort flush at exit, but don't rely on it for spans you need.
@@ -635,12 +637,13 @@ import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
 ### Synchronous `Posthog`
 
-By default, the synchronous `Posthog` client buffers events before sending them to the capture endpoint. This can lead to lost events if the platform terminates the Python process before the buffer is fully flushed. To avoid this, you can either:
+By default, the synchronous `Posthog` client buffers events before sending them to the capture endpoint. A serverless platform can freeze or terminate the runtime before background delivery finishes.
 
-- Call `posthog.shutdown()` before the process ends. This blocking call attempts to deliver queued events and cleans up the client.
-- Enable `sync_mode` when initializing the client so each `posthog.capture()` call attempts delivery before it returns.
+- For a client shared across invocations, call `posthog.flush()` before the handler returns, including when application code throws. This blocking call attempts to deliver queued events without stopping the client. Its `timeout_seconds` argument defaults to `10` seconds.
+- For a disposable client or process exit, call `posthog.shutdown()` after its final work. It attempts to deliver queued events and cleans up the client. Don't reuse the client afterward. Unlike Node's `shutdown()`, Python's `shutdown()` takes no timeout argument.
+- Alternatively, enable `sync_mode` when initializing the client so each `posthog.capture()` call attempts delivery before it returns.
 
-If you use [distributed tracing](#distributed-tracing), `sync_mode` doesn't apply to spans. Call `posthog.flush()` before the handler returns – see [Shutdown and short-lived processes](#shutdown-and-short-lived-processes).
+These calls do not guarantee that PostHog received every event. If you use [distributed tracing](#distributed-tracing), `sync_mode` doesn't apply to spans. For a shared client, call `posthog.flush()` before the handler returns – see [Shutdown and short-lived processes](#shutdown-and-short-lived-processes).
 
 ### Asyncio `AsyncPosthog`
 
@@ -648,7 +651,38 @@ Keep one `AsyncPosthog` client for the lifetime of your application. Use buffere
 
 ## Django
 
-See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our library includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. The [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) adds request properties and authenticated user identity to events captured during a request. You can also opt in to browser session and distinct ID headers.
+
+## ASGI request middleware
+
+Version `7.69.0` and later of the Python SDK includes framework-independent ASGI middleware for FastAPI, Starlette, Litestar, and raw ASGI applications. It creates a PostHog context for each HTTP or WebSocket request, enriches captured events with request properties, and captures exceptions that escape the application.
+
+For FastAPI or Starlette, add the middleware to your app:
+
+```python
+from fastapi import FastAPI
+from posthog import Posthog
+from posthog.integrations.asgi import PosthogASGIMiddleware
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    enable_exception_autocapture=True,
+)
+
+app = FastAPI()
+app.add_middleware(PosthogASGIMiddleware, client=posthog)
+```
+
+The middleware's `capture_exceptions` option defaults to `None`, which inherits the client's `enable_exception_autocapture` setting. Set it to `True` or `False` to override the client. Use `request_filter` to skip selected requests and `extra_properties` to add properties from the ASGI scope. Both callbacks can be synchronous or asynchronous.
+
+The middleware ignores `X-PostHog-Distinct-ID` and `X-PostHog-Session-ID` by default because clients can control them. Set `trust_tracing_headers=True` only when you want to accept these headers as analytics context. Don't use them for authentication or authorization.
+
+To instrument another ASGI framework or a raw ASGI app, wrap the application directly:
+
+```python
+app = PosthogASGIMiddleware(app, client=posthog)
+```
 
 ## Alternative name
 

@@ -137,7 +137,7 @@ Hotjar
 HubSpot
 Hugging Face
 Hyperengage
-InKeep
+Inkeep
 Inleads
 [Ii]nsider
 Instana
