@@ -71,24 +71,22 @@ export function AskAI({ q, children }: { q: string; children?: React.ReactNode }
 }
 
 /**
- * A Replay Vision scanner template, linked straight into the editor pre-filled with it. Carries
- * the three things that tell you what a scanner is: its type, the question it asks, and the shape
- * of the answer you get back.
+ * A Replay Vision scanner starting point, linked into the app's goal flow with the goal prefilled.
+ * Carries the three things that tell you what a scanner is: its type, the question it asks, and the
+ * shape of the answer you get back.
  *
- * Template keys are the app's own – products/replay_vision/frontend/replay_scanners/scannerTemplates.ts.
- * The route is `/replay-vision/new/details?template=<key>`, which is what the in-app template
- * picker pushes when you click a card.
+ * `?goal=` only prefills the goal box. PostHog AI drafts the scanner when the user clicks Draft my scanner.
  */
-export function ScannerTemplate({
+export function ScannerStarter({
     name,
-    template,
+    goal,
     type,
     asks,
     answers,
     property,
 }: {
     name: string
-    template: string
+    goal: string
     type: string
     asks: string
     answers: string
@@ -96,7 +94,7 @@ export function ScannerTemplate({
 }): JSX.Element {
     return (
         <a
-            href={`https://app.posthog.com/replay-vision/new/details?template=${template}`}
+            href={`https://app.posthog.com/replay-vision/new/template?goal=${encodeURIComponent(goal)}`}
             className="group/tpl not-prose mb-2 block rounded border border-primary bg-primary px-3 py-2 no-underline hover:border-orange"
         >
             <span className="flex items-baseline gap-2">

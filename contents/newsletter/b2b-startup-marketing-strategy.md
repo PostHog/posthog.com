@@ -62,7 +62,7 @@ Trying to go head-to-head with much larger competitors on content output is a lo
 
 High quality articles perform better in the long run, especially SEO ones. Treat your SEO portfolio like a VC treats their investments – invest time updating your content, don’t publish and forget.
 
-*For a look at how this plays out in a startup’s very earliest days — before you even have a strategy — see [the stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing).*
+*For a look at how this plays out in a startup’s very earliest days — before you even have a strategy — see [the stuff nobody tells you about startup marketing](/newsletter/startup-marketing-for-noobs).*
 
 ## 3. Build a channel you truly own 💌
 

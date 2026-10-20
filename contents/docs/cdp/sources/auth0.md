@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Auth0 connector syncs your identity and access management data – users, tenant logs, organizations, roles, clients, connections, actions, log streams, and resource servers – into PostHog, so you can analyze authentication activity alongside your product data.
+The Auth0 connector syncs your identity and access management data – users, tenant logs, organizations, roles, clients, connections, actions, log streams, resource servers, user roles, organization members, organization member roles, and user sessions – into PostHog, so you can analyze authentication activity alongside your product data.
 
 ## Prerequisites
 
@@ -31,17 +31,21 @@ To create one:
 
 Grant the M2M application the read scopes for the tables you plan to sync:
 
-| Table            | Scope                   |
-| ---------------- | ----------------------- |
-| users            | `read:users`            |
-| logs             | `read:logs`             |
-| organizations    | `read:organizations`    |
-| roles            | `read:roles`            |
-| clients          | `read:clients`          |
-| connections      | `read:connections`      |
-| actions          | `read:actions`          |
-| log_streams      | `read:log_streams`      |
-| resource_servers | `read:resource_servers` |
+| Table                     | Scope                            |
+| ------------------------- | -------------------------------- |
+| users                     | `read:users`                     |
+| logs                      | `read:logs`                      |
+| organizations             | `read:organizations`             |
+| roles                     | `read:roles`                     |
+| clients                   | `read:clients`                   |
+| connections               | `read:connections`               |
+| actions                   | `read:actions`                   |
+| log_streams               | `read:log_streams`               |
+| resource_servers          | `read:resource_servers`          |
+| user_roles                | `read:users`                     |
+| organization_members      | `read:organization_members`      |
+| organization_member_roles | `read:organization_member_roles` |
+| user_sessions             | `read:sessions`                  |
 
 You only need to grant scopes for the tables you want to sync. If a scope is missing, PostHog reports which one is needed when the sync runs.
 

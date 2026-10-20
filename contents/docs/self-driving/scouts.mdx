@@ -47,6 +47,7 @@ Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open th
 |---|---|
 | **Write signals to the inbox** | On by default. Turn it off for a [dry run](#dry-runs). |
 | **Schedule** | A rolling cadence, or a set time each day. See [setting a scout's schedule](#setting-a-scouts-schedule). |
+| **Run only when** | A query that lets a scheduled run skip when there is nothing new. See [run only when there is new work](#run-only-when-there-is-new-work). |
 | **Network access** | What the scout can reach while it runs. **Trusted domains**, the default, covers PostHog, GitHub, and common package registries. **Full access** lets it reach any site, for a scout that has to read a vendor's status page or external docs. |
 | **Opt out of auto-pause** | Keeps PostHog from pausing this scout when nobody acts on its reports, and from flagging it when it surfaces nothing. |
 | **Tags** | Group scouts so you can filter the fleet list by them. |
@@ -55,6 +56,12 @@ Go to [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts), open th
 | **Repositories** | Repositories from your connected GitHub account that the scout's sandbox clones before each run, so a scout that reasons about code can read the tree and run its checks. Read-only, up to 10 per scout. |
 | **Write access** | What the scout may change in your project, beyond its own reports and memory. Off by default. See [letting a scout maintain things](#letting-a-scout-maintain-things). |
 | **Delete scout** | Only on scouts your team authored, and permanent. To pause a scout without losing it, turn it off instead. |
+
+### Instructions for all scouts
+
+A scout's settings and brief apply to that scout only. To give the same guidance to every scout in the project, a project admin can open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings), find **Steering**, and write instructions in the **Scouts** tab. The same section has separate tabs for **Research** and **Implementation** agents.
+
+These instructions supplement your shared project instructions and each scout's brief. New and resumed runs receive them. See [steer Self-driving agents](/docs/self-driving/steering) for details and examples.
 
 ## Setting a scout's schedule
 
@@ -70,6 +77,30 @@ Cron expressions are evaluated in your project's timezone, so a scout scheduled 
 Interval scheduling drifts – a run that starts late pushes the next one later – so reach for cron when the timing itself matters: a [digest scout](/docs/self-driving/scout-examples) that should land before standup, or a scout that should look at a full day of data rather than a rolling window.
 
 Since every run costs a share of your project's daily run budget, the schedule is also the main dial on what a scout costs. Most scouts close out without finding anything, so a tighter cadence mostly pays to re-confirm that nothing changed. Slow a chatty or expensive scout down before you turn it off.
+
+### Run only when there is new work
+
+A pre-check lets a scheduled run skip when there is nothing new to look at. Open the scout's [settings](#configuring-a-scout) and expand **Run only when**. Write a HogQL `SELECT` query, click **Test query** to see what the next scheduled run would do, then click **Save query**.
+
+Before each scheduled run, PostHog runs the query:
+
+- If the query returns no rows, or one row with one false value (`false`, `0`, `null`, or an empty string), PostHog skips the run. A skipped run creates no run record, no sandbox, and no model call.
+- Any other result starts the run, and the run receives the rows that the query found.
+- If the query fails, the run starts. An error never stops a scout.
+
+Use these placeholders in the query:
+
+| Placeholder | Value |
+|---|---|
+| `{since}` | The start of the last run that actually ran. Before the first run, the time that you created the scout. |
+| `{now}` | The time of the check. |
+| `{interval_minutes}` | The minutes between scheduled runs. |
+
+For example, `SELECT count() FROM events WHERE event = 'signed_up' AND timestamp > {since}` skips the run when there are no new signups. To make sure that the scout runs at least once a week, add `OR {since} < {now} - INTERVAL 7 DAY`.
+
+Only scheduled runs use the pre-check. Manual, workflow, and report-check runs always start.
+
+A built-in scout can use a default pre-check. To stop all pre-checks for a scout, click **Turn off**. Agents can set the query with the `scout-config-update` MCP tool (`precheck_query`, or `precheck_disabled: true` to turn it off) and test it with `scout-config-precheck-test`. The test changes nothing.
 
 ## Running a scout on demand
 
@@ -90,6 +121,12 @@ PostHog checks whether a scout's output is being used. A scout that stays quiet 
 An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
 
 </CalloutBox>
+
+## Ask a scout about its work
+
+Open a scout from [**Self-driving > Scouts**](https://app.posthog.com/inbox/scouts) and type a question in the box below its header. Click **Ask** to send it to PostHog AI. The answer opens in the side panel. A starter question, such as "What have you found lately?", only fills the box, so you can edit it before you send it.
+
+The conversation already knows which scout you selected, so you do not need to name it again. Ask about its recent findings, its runs, or why it reported nothing. If you give guidance for later runs, such as "ignore staging from now on", PostHog AI offers to save it as a [scout note](#steering-a-scout-with-a-note). It shows the note text and saves the note only after you confirm.
 
 ## Steering a scout with a note
 
