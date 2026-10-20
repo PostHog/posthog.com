@@ -4,7 +4,6 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useAppWindows } from 'context/App'
 import { useWindow } from 'context/Window'
-import usePostHog from 'hooks/usePostHog'
 
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
@@ -51,7 +50,6 @@ interface LearnSurfaceProps {
 /** Count a chapter only after ten visible seconds and reaching its end. */
 function ChapterEngagement({ volume, chapter }: { volume: string; chapter: string }): JSX.Element {
     const endRef = React.useRef<HTMLDivElement>(null)
-    const posthog = usePostHog()
     const { windows } = useAppWindows()
     const { appWindow } = useWindow()
     const readerIsActive = isReaderWindowActive(windows, appWindow?.key)
@@ -68,6 +66,7 @@ function ChapterEngagement({ volume, chapter }: { volume: string; chapter: strin
         let reachedEnd = false
         let captured = false
         const captureIfEngaged = () => {
+            const posthog = window.posthog
             if (
                 captured ||
                 !posthog ||
@@ -108,7 +107,7 @@ function ChapterEngagement({ volume, chapter }: { volume: string; chapter: strin
             observer.disconnect()
             window.clearInterval(timer)
         }
-    }, [volume, chapter, posthog])
+    }, [volume, chapter])
 
     return <div ref={endRef} className="h-px" aria-hidden="true" />
 }

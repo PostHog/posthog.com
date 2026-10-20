@@ -191,11 +191,12 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             size="md"
                             onClick={(event) => {
                                 selectResource('twig', 'explore_twig')
-                                const destination = twigLearnUrl(posthog, TWIG_URL)
+                                const currentPostHog = window.posthog
+                                const destination = twigLearnUrl(currentPostHog, TWIG_URL)
                                 if (destination === TWIG_URL) return
 
                                 // The website project needs a profile to join this anonymous visitor across domains.
-                                posthog?.createPersonProfile?.()
+                                currentPostHog?.createPersonProfile?.()
                                 // Keep the copyable link free of this visitor's ID.
                                 event.preventDefault()
                                 window.open(destination, '_blank', 'noopener,noreferrer')

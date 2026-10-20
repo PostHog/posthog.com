@@ -4,9 +4,17 @@ interface TwigIdentity {
     get_session_id?: () => string
 }
 
-/** Only pass the website identity when analytics consent can be checked. */
+/** Require the site's recorded cookie consent as well as the SDK's opt-out check. */
 export function twigLearnUrl(posthog: TwigIdentity | undefined, twigUrl: string): string {
-    if (!posthog?.has_opted_out_capturing || posthog.has_opted_out_capturing()) return twigUrl
+    try {
+        const consent = window.localStorage.getItem('cookie_consent')
+        // The current toast records acknowledgement; the older banner records explicit acceptance.
+        if (consent !== 'yes' && consent !== 'acknowledged') return twigUrl
+    } catch {
+        // Missing or blocked storage cannot confirm consent.
+        return twigUrl
+    }
+    if (posthog?.has_opted_out_capturing?.() !== false) return twigUrl
     const distinctId = posthog.get_distinct_id?.()
     if (!distinctId) return twigUrl
 
