@@ -46,7 +46,7 @@ When looking at accounts to include in a new CSM's book, the following priority 
 2. Accounts tagged as `csm handover needed` or `csm overlay needed` in PostHog Customer Analytics
 3. Other accounts not covered by a PostHog human in descending ARR order
 
-For accounts in bucket 2 we have region tags which are <PrivateLink url="posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb">automatically</PrivateLink> applied to the account when the handover or overlay tags are added to the customer (runs once a day).  The regions are covered as follows:
+For accounts in bucket 2 we have region tags which are <PrivateLink url="[posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb](https://us.posthog.com/project/2/workflows/01a0e77c-e3fa-0000-0801-1d43e5c7fc05/overview)">automatically</PrivateLink> applied to the account when the handover or overlay tags are added to the customer.  The regions are covered as follows:
 
 - **EU Team**: Europe, Africa, Asia
 - **NA Team**: North America, South America, Oceania
@@ -67,26 +67,15 @@ The Onboarding team operates at scale, supporting hundreds of customers whose MR
 
 ## Other things we collectively need to stay on top of
 
-### Tracking new products
-
-When we know that a new product is being launched, we need to ensure that Vitally tracking is in place for that product before it is launched.  This involves:
-
-1. Updating the Postgres integration to ensure that we are tracking the following traits for the product:
-   - `product_name_ltv` added to the `completed` CTE - the lifetime value of the product
-   - `product_name_forecasted_mrr` added to the `forecasted` CTE - the MRR forecasted for the product
-   - `product_name_last_month` added to the `last_month` CTE - the last month payment for the product
-   - `product_name_billing_limit` added to the main query - the current billing limit for the product
-   - also add the traits from the 3 CTEs above into the main query
-2. Once the traits are in place, create a success metric to capture the product's data usage if applicable.
-   - Sum of a property on events -> `billing usage report` -> `product_count_in_period` over the last 30 days
-3. If there is a specific engagement to track how people use the product in PostHog add it to the Vitally engagement events Action
-   - If you do this, also ensure there is a corresponding success metric for this (Total event count over 14 days)
-
-
 ### Incident comms
 
 We need to ensure that teams are able to proactively follow our [incident comms process](/handbook/growth/sales/communications-templates-incidents).  We're not quite ready for a full on-call rotation yet, but Simon or Dana take the lead as Communications Manager On-Call (CMOC) when an incident is declared in EU working hours, and Landon or Tyler take the lead when it's during the US working day.
 
+### Notifications of change to pricing/contract/discount rules
 
+We need to proactively notify all team members when there is a change to pricing, discounts, or other contract rules which may impact in-flight and future customer conversations.
+
+1. The author of the pull request (normally Ben or RevOps) should post in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-sales-cs-support</PrivateLink> with the pertinent details of the update, as well as a link to the handbook pull request.
+2. Team leads should then make sure all of their team are aware of the change, and any clarifying questions asked in the Slack thread from step 1.
 
 
