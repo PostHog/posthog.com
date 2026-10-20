@@ -68,6 +68,8 @@ interface TreeMenuProps {
      * the `listed` variant.
      */
     expandOnly?: boolean
+    /** Called after a link is clicked, e.g. to capture an analytics event. */
+    onItemClick?: (item: MenuItem) => void
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -431,6 +433,7 @@ export function TreeMenu(props: TreeMenuProps) {
 
     const handleClick = (item: MenuItem) => {
         setActiveItem(item)
+        props.onItemClick?.(item)
     }
 
     const items = props.items
