@@ -41,7 +41,19 @@ export const dataWarehouse = {
     overview: {
         title: 'All your data, one warehouse',
         description: "The Warehouse is in beta. Get in touch and we'll get you set up.",
-        eli5: 'The warehouse puts your PostHog events in the same place as data from Stripe, Postgres, HubSpot, Salesforce, and the rest of your stack. It handles storage, syncs, and query execution, so nobody has to provision a cluster or babysit a sync job. PostHog’s AI features can use it as context, so asking "why did conversion drop?" comes back with the revenue impact, the cohorts affected, and what those users have in common.',
+        eli5: (
+            <>
+                <p>
+                    The warehouse puts your PostHog events in the same place as data from Stripe, Postgres, HubSpot,
+                    Salesforce, and the rest of your stack. It handles storage, syncs, and query execution, so nobody
+                    has to provision a cluster or babysit a sync job.
+                </p>
+                <p>
+                    PostHog’s AI features can use it as context, so asking "why did conversion drop?" comes back with
+                    the revenue impact, the cohorts affected, and what those users have in common.
+                </p>
+            </>
+        ),
         textColor: 'text-white', // tw
     },
     // The warehouse is a sales-led beta, so the hero sends people to sales instead of signup.
