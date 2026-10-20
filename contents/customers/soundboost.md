@@ -1,5 +1,5 @@
 ---
-title: How SoundBoost runs AI mastering for 200,000 users on autopilot
+title: How SoundBoost built a self-driving AI product for 225,000 musicians
 customer: SoundBoost
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
