@@ -7,6 +7,12 @@ import { DesktopDownloadList } from 'components/Code/DesktopDownloadList'
 
 Download PostHog Desktop, sign in with your PostHog account, and choose a repository.
 
+<CalloutBox icon="IconWarning" title="New sign-ups are paused" type="caution">
+
+PostHog Desktop is not open to new PostHog accounts right now. If you created your PostHog account on or after October 1, 2026, the app shows a **Desktop sign-ups are paused** screen after you sign in. [Join the waitlist](https://us.posthog.com/external_surveys/01a15a76-48ce-0000-a2f8-e898869707a7) and we will email you when you can use PostHog Desktop.
+
+</CalloutBox>
+
 <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
   <DownloadButton />
 </div>
@@ -19,7 +25,9 @@ Releases include macOS builds for Apple Silicon and Intel, a Windows installer, 
 
 ## Eligibility
 
-Anyone can download the app. PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for current rates and the monthly free tier.
+Anyone can download the app, but new sign-ups are paused. You can use PostHog Desktop only with a PostHog account that you created before October 1, 2026. Newer accounts can [join the waitlist](https://us.posthog.com/external_surveys/01a15a76-48ce-0000-a2f8-e898869707a7).
+
+PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for current rates and the monthly free tier.
 
 Organizations on the PostHog **startup plan** cannot use AI credits for PostHog Desktop yet. The app shows an eligibility notice instead of allowing tasks to start. You can still download the app and sign in.
 
