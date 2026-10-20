@@ -1605,7 +1605,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding tracking',
+                        name: 'Onboarding process',
                         url: '/handbook/onboarding/onboarding-tracking',
                     },
                     {

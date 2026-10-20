@@ -39,7 +39,7 @@ Remember to add a short summary from meetings in a Note, and if you need to foll
 
 There are two paths for customers to progress through the onboarding process: those who engage with us in some way, and those who show little or no engagement.
 
-User engagement is tracked behind the scenes with the time stamp in Vitally, thanks to which we can query relevant data. 
+User engagement is tracked behind the scenes with the time stamp in Customer Analytics, thanks to which we can query relevant data. 
 
 For day-to-day operations, these are the statuses we use to track users in the **Onboarding Pipeline** property:
 
@@ -66,7 +66,7 @@ The complete Onboarding Journey looks as follows:
 | Week 7    |          |
 | Week 8    | Graduation (automated) - all accounts|
 
-The last two stages of the Onboarding Journey are automated with Vitally playbooks. Second outreach prompts users to surface unanswered questions and book a session with us, and the Graduation email is a nice way to conclude the journey and point out other avenues where users can get help. It's also where we ask for feedback about our Onboarding. 
+The last two stages of the Onboarding Journey are automated with Customer Analytics. Second outreach prompts users to surface unanswered questions and book a session with us, and the Graduation email is a nice way to conclude the journey and point out other avenues where users can get help. It's also where we ask for feedback about our Onboarding. 
 
 #### Email link tracking
 
