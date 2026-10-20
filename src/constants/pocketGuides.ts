@@ -11,7 +11,7 @@ export interface PocketGuideVolume {
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
     token: PocketGuideToken
-    /** Printed on the cover. Order on the shelf follows it. */
+    /** Printed on the cover and the docs library spines, which sort by it. The shelf follows array order. */
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
@@ -44,15 +44,6 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         productHandle: 'product_analytics',
         learnPath: '/learn/product-analytics/pocket-guide',
         countOrientationPages: true,
-    },
-    {
-        id: 'self-driving',
-        title: 'Self-driving',
-        description: 'Scouts that watch your product and open a pull request when something breaks.',
-        token: 'orange',
-        volume: 1,
-        docsProduct: 'self-driving',
-        learnPath: '/docs/self-driving/pocket-guide',
     },
     {
         id: 'ai-observability',
@@ -93,6 +84,15 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
         learnPath: '/learn/feature-flags',
+    },
+    {
+        id: 'self-driving',
+        title: 'Self-driving',
+        description: 'Scouts that watch your product and open a pull request when something breaks.',
+        token: 'orange',
+        volume: 1,
+        docsProduct: 'self-driving',
+        learnPath: '/docs/self-driving/pocket-guide',
     },
 ]
 

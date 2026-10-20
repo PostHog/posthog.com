@@ -16,7 +16,8 @@ function ShelfCover({ volume, count }: { volume: PocketGuideVolume; count: numbe
 
 export default function PocketGuidesPage(): JSX.Element {
     const counts = usePocketGuideCounts()
-    const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
+    // The shelf follows POCKET_GUIDE_VOLUMES order: Product Analytics first, Self-driving last.
+    const volumes = POCKET_GUIDE_VOLUMES
 
     return (
         <>
