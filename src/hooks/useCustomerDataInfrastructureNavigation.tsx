@@ -28,7 +28,7 @@ export const customerDataInfrastructureNav = {
         },
         {
             name: 'Warehouse',
-            url: '/context-warehouse/warehouse',
+            url: '/warehouse',
         },
         {
             name: 'PostHog AI',

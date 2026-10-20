@@ -29,7 +29,7 @@ export const dataWarehouse = {
     categoryName: 'Sources',
     color: 'purple',
     colorSecondary: 'lilac',
-    // The product lives at /context-warehouse/warehouse, but its docs live at /docs/data-warehouse.
+    // The product lives at /warehouse, but its docs live at /docs/data-warehouse.
     docsSlug: 'data-warehouse',
     forumTag: 'data-warehouse',
     teamSlug: 'warehouse',

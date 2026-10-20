@@ -105,7 +105,7 @@ export const groupAnalytics = {
             description: 'Evaluate experiment results using group-level aggregations instead of individual users.',
         },
         {
-            slug: 'context-warehouse/warehouse',
+            slug: 'warehouse',
             description: 'Join group data to warehouse tables and calculate usage across company segments.',
         },
     ],
