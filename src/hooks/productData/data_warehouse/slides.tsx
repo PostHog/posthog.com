@@ -1,6 +1,7 @@
 import React from 'react'
 import {
     IconBrowser,
+    IconDashboard,
     IconDatabaseBolt,
     IconPlug,
     IconRefresh,
@@ -30,6 +31,41 @@ const list = (items: { label: string; description: string }[]) => (
 )
 
 export const applications: CarouselSlide[] = [
+    {
+        ...slideStyle,
+        slug: 'your-tools',
+        label: 'BI & notebooks',
+        icon: <IconDashboard className="size-5" />,
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Point your own tools at it',
+        description: (
+            <>
+                <p>
+                    The Warehouse is a database with its own hostname and credentials. Connect the tools your team
+                    already uses, and their queries run on the Warehouse, not on the queries that power PostHog.
+                </p>
+                {list([
+                    {
+                        label: 'BI dashboards',
+                        description: 'Metabase, Superset, and Tableau connect with their standard Trino connectors.',
+                    },
+                    {
+                        label: 'Notebooks and code',
+                        description: 'Query from Python, JDBC, or any Trino client.',
+                    },
+                    {
+                        label: 'Scheduled jobs',
+                        description: 'Run nightly reports and exports against the Warehouse.',
+                    },
+                    {
+                        label: 'Your own tables',
+                        description: 'Write derived tables next to the synced data, and query them from anywhere.',
+                    },
+                ])}
+            </>
+        ),
+    },
     {
         ...slideStyle,
         slug: 'editor-mcp',
@@ -113,12 +149,11 @@ export const topFeatures: CarouselSlide[] = [
         heading: 'Your PostHog data is already here. Add the rest in a click.',
         description: (
             <>
-                <p>Let PostHog become the center of gravity for understanding your entire business.</p>
+                <p>Every source you connect to PostHog syncs into the Warehouse too, with no extra setup.</p>
                 {list([
                     {
                         label: 'PostHog data, zero config',
-                        description:
-                            'Your events and persons are backfilled, then kept up to date as new data arrives.',
+                        description: 'Your events and persons are backfilled, then updated daily.',
                     },
                     {
                         label: 'Billing and CRM',
@@ -192,21 +227,22 @@ export const topFeatures: CarouselSlide[] = [
         icon: <IconDatabaseBolt className="size-5" />,
         progressBar: 'bg-orange',
         layout: 'stack',
-        heading: 'DuckDB under the hood, Postgres on the outside',
+        heading: 'Built on our fork of Trino',
         description: (
             <>
                 <p>
-                    Queries run on DuckDB workers reserved for your organization, and the warehouse speaks the
-                    PostgreSQL wire protocol. Any Postgres client, driver, or BI tool connects without special adapters.
+                    Queries run on PostHog's fork of Trino, the open source distributed SQL engine. The fork adds a
+                    connector for the Warehouse's storage format and scopes every login to its own warehouse.
                 </p>
                 {list([
                     {
-                        label: 'Bring your own tools',
-                        description: 'Connect from psql, Metabase, Grafana, Tableau, or your own code.',
+                        label: 'Standard clients',
+                        description: 'Any Trino client, driver, or BI connector works without special adapters.',
                     },
                     {
-                        label: 'Dedicated compute',
-                        description: 'No shared query queue, so other customers never compete with your queries.',
+                        label: 'Compute that scales',
+                        description:
+                            'Workers scale automatically, and each organization has its own concurrency limits.',
                     },
                     {
                         label: 'Or stay in PostHog',
@@ -227,7 +263,7 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Data lives as columnar files in S3-compatible object storage, in the open DuckLake format. It
+                    Data lives as open Parquet files in object storage, in a bucket of its own for your organization. It
                     survives any individual machine, and storage and compute scale independently.
                 </p>
                 {list([

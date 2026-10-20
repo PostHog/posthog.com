@@ -40,13 +40,19 @@ export const dataWarehouse = {
     },
     overview: {
         title: 'All your data, one warehouse',
-        description: "The Warehouse is in beta. Get in touch and we'll get you set up.",
+        description:
+            "Your own database for product and business data, with its own hostname, credentials, and storage. It's in beta – get in touch and we'll get you set up.",
         eli5: (
             <>
                 <p>
-                    The warehouse puts your PostHog events in the same place as data from Stripe, Postgres, HubSpot,
-                    Salesforce, and the rest of your stack. It handles storage, syncs, and query execution, so nobody
-                    has to provision a cluster or babysit a sync job.
+                    PostHog already syncs Stripe, HubSpot, Postgres, and the rest of your stack, so you can query it
+                    next to your events. The Warehouse goes one step further: it's an actual database, with its own
+                    hostname, credentials, and storage, holding your product data and business data side by side.
+                </p>
+                <p>
+                    Point Metabase, a notebook, or a scheduled job at it, build your own tables in it, and run heavy
+                    queries without slowing down PostHog. It's the warehouse you'd otherwise set up in Snowflake or
+                    BigQuery, without the pipeline to get your product data into it.
                 </p>
                 <p>
                     PostHog’s AI features can use it as context, so asking "why did conversion drop?" comes back with
