@@ -11,7 +11,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 PostHog SDKs are moving to [capture v1](/docs/api/capture-v1), a new way to send events. Each SDK moves to v1 in a new major version. Capture v1 gives you:
 
 - **A result for every event.** One bad event no longer fails the whole batch, and your SDK tells you which events PostHog didn't store and why.
-- **Event options.** Settings like person processing move out of magic `$` properties into a separate `options` object.
+- **Event options.** Settings like person processing move out of `$`-prefixed properties into a separate `options` object.
 - **Safer retries.** SDKs retry only what can succeed and resend only the events that need it.
 - **More compression choices.** `gzip`, `deflate`, `br`, and `zstd`.
 - **A separate path for AI events.** Large AI events have their own queue and limits.
@@ -48,11 +48,11 @@ These changes apply to every SDK on capture v1. Your SDK's migration guide cover
 
 SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use a new one for every event. Don't reuse an order ID, request ID, or message ID across events. PostHog rejects a whole batch that contains the same UUID twice.
 
-### Event options replace magic properties
+### Event options replace legacy option properties
 
-Set processing options in an event's `options`, not in `properties`:
+Legacy option properties are the `$`-prefixed properties legacy capture reads as settings. Set these settings in an event's `options` instead:
 
-| Option | Replaces |
+| Option | Legacy option property |
 |---|---|
 | `process_person_profile` | `$process_person_profile` |
 | `cookieless_mode` | `$cookieless_mode` |
@@ -98,7 +98,7 @@ posthog.capture({
 
 </MultiLanguage>
 
-The legacy `$` properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy property. Use options in new code – the legacy properties are deprecated, and a future major version will stop reading them.
+The legacy option properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy option property. Use options in new code – the legacy option properties are deprecated, and a future major version will stop reading them.
 
 SDKs send options exactly as you set them. PostHog ignores option names it doesn't know, and drops an event whose option value it can't read, with the detail `invalid_options`. See [event options](/docs/api/capture-v1#event-options) for the types each option takes.
 
@@ -111,7 +111,7 @@ You can set properties and options in several places. When the same key is set i
 3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, or Go's `DefaultEventProperties` and `DefaultEventOptions`
 4. **SDK values** – properties the SDK adds itself, such as `$is_server`
 
-Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy `$` properties fill in any option that is still unset.
+Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
 A few details:
 
