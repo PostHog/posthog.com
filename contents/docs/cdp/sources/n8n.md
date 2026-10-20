@@ -9,9 +9,9 @@ availability:
 sourceId: N8n
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The n8n connector syncs workflows, executions, tags, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -27,7 +27,7 @@ Connect your n8n instance to pull your workflow automation data.
 
 Works with n8n Cloud and self-hosted instances. Enter your instance URL (e.g. `https://myorg.app.n8n.cloud`) and an API key created under **Settings > n8n API**.
 
-Some tables (users, projects, variables) require an owner/admin key or an Enterprise plan; deselect them if your key can't access them.
+Some tables (users, projects, variables, project_users, folders) require an owner/admin key or an Enterprise plan; deselect them if your key can't access them.
 
 You'll be asked for:
 
@@ -38,7 +38,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All n8n tables are full refresh. Each sync replaces the contents of the table.
+Most n8n tables are full refresh – each sync replaces the contents of the table. The `insights_summary` table is incremental, syncing new days since the last run.
 
 ## Configuration
 

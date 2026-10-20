@@ -14,7 +14,7 @@ The wizard detects your server, installs the SDK, and adds the instrumentation. 
 
 ## Install by hand
 
-Choose your server's language:
+Choose your server's language. For tools that a web page registers, choose WebMCP:
 
 <MCPInstallationPlatforms />
 
@@ -22,7 +22,7 @@ Each page has a Markdown version for coding agents. Add `.md` to the URL, such a
 
 ## What each SDK captures
 
-Every SDK sends the core events, `$mcp_tool_call` for each tool call and `$exception` for each failed call, so your insights and dashboards work across languages. The SDKs differ in which other events and features they implement:
+Every server SDK sends the core events, `$mcp_tool_call` for each tool call and `$exception` for each failed call, so your insights and dashboards work across languages. The SDKs differ in which other events and features they implement:
 
 | Feature | TypeScript | Python | Go | Ruby |
 | --- | --- | --- | --- | --- |

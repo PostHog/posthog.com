@@ -34,7 +34,21 @@ You'll be asked for:
 
 <SyncModes />
 
-All Recall.ai tables are full refresh. Each sync replaces the contents of the table.
+Some Recall.ai tables support **incremental** sync. Each incremental sync uses the incremental field to fetch only rows that are newer than the last sync. Full refresh is also available for these tables.
+
+| Table                     | Sync methods                   | Incremental field |
+| ------------------------- | ------------------------------ | ----------------- |
+| `recordings`              | Incremental sync, full refresh | `created_at`      |
+| `transcripts`             | Incremental sync, full refresh | `created_at`      |
+| `participant_events`      | Incremental sync, full refresh | `created_at`      |
+| `meeting_metadata`        | Incremental sync, full refresh | `created_at`      |
+| `calendar_events`         | Incremental sync, full refresh | `updated_at`      |
+| `bots`                    | Full refresh                   | –                 |
+| `calendars`               | Full refresh                   | –                 |
+| `desktop_sdk_uploads`     | Full refresh                   | –                 |
+| `meeting_direct_connects` | Full refresh                   | –                 |
+
+A full refresh sync replaces the contents of the table.
 
 ## Configuration
 

@@ -198,7 +198,19 @@ const faqs = [
             <p>
                 Usage is calculated on a per-product level. Events for product and web analytics, recordings for session
                 replay, requests for feature flags and experiments, exceptions for error tracking, responses for
-                surveys, synced rows for data warehouse, messages for workflows, and GB ingested for logs.
+                surveys, synced rows for sources, messages for workflows, and GB ingested for logs.
+            </p>
+        ),
+    },
+    {
+        q: 'Do multiple projects share usage and free allowances?',
+        a: (
+            <p>
+                Yes. Billing is organization-wide, so usage from all your projects is combined into one bill with one
+                free allowance. Adding projects doesn't add extra free usage. The free plan includes one project, and
+                paid plans include more. See{' '}
+                <Link to="/docs/settings/projects#how-to-organize-projects">how to organize projects</Link> for our
+                recommended development, staging, and production setup.
             </p>
         ),
     },
