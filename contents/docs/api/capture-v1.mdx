@@ -99,7 +99,7 @@ Each event in `batch`:
 
 | Field | Required | Description |
 |---|---|---|
-| `event` | Yes | The event name, up to 200 bytes |
+| `event` | Yes | The event name, up to 200 bytes. See [limits](#limits-and-validation). |
 | `uuid` | Yes | A unique ID for this event. Use a UUIDv7. See [event UUIDs](#event-uuids). |
 | `distinct_id` | Yes | Who did it, up to 200 bytes. See [choosing a distinct ID](#choosing-a-distinct-id). |
 | `timestamp` | Yes | When the event happened, in RFC 3339 format with at least millisecond precision. You can send more precise values. |
@@ -124,6 +124,8 @@ A distinct ID connects events to one person. Use either:
 
 - An ID for one visitor or device, such as an anonymous ID your client generates and stores, or
 - Your own stable ID for a known user, such as their ID in your database.
+
+Keep each distinct ID under 200 bytes. Capture v1 drops events with longer IDs, where legacy capture shortened them.
 
 Don't use one value for many people or machines, such as `anonymous`, `guest`, `system`, `null`, or a server name. PostHog accepts events with these common placeholder values but processes them without a person profile, and returns the result `warning` with the detail `person_processing_disabled`. A distinct ID that sends far more events than one person could is also [rate limited](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids). See [identifying users](/docs/product-analytics/identify) for more.
 
@@ -162,21 +164,47 @@ Legacy formats such as `gzip-js`, `lz64`, `base64`, and the `?compression=` quer
 
 [SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
 
-## Limits
+## Limits and validation
 
-| Limit | Analytics endpoint |
-|---|---|
-| Request body, as sent | 10MB |
-| Request body, after decompression | 50MB |
-| Event name | 200 bytes |
-| Distinct ID | 200 bytes |
-| Events per request | No limit beyond the body size |
+Capture v1 checks every request and every event as it arrives. A problem with the request rejects the whole request. A problem with one event drops only that event and returns its [result detail](#result-details).
 
-An event too large to store is dropped with the detail `event_too_big`, and the rest of the batch is still ingested. See [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit).
+### Request limits
+
+| Limit | Analytics endpoint | If you exceed it |
+|---|---|---|
+| Request body, as sent | 10MB | `413`, nothing stored |
+| Request body, after decompression | 50MB | `413`, nothing stored |
+| Events per request | No limit beyond the body size | – |
+| `batch` | At least one event | `400` `empty_batch` |
+| `uuid` | Present, a valid UUID, and unique within the request | `400` (`missing_event_uuid`, `invalid_event_uuid`, `duplicate_event_uuid`), nothing stored |
+| `created_at` | Present, RFC 3339 | `400` `invalid_batch`, nothing stored |
+| Header values | Visible ASCII characters only | `400` `invalid_header_value` |
+| Field types | `event`, `uuid`, `distinct_id`, `timestamp`, `session_id`, and `window_id` are JSON strings | `400` `request_parsing_error`, nothing stored |
+| `PostHog-Sdk-Info` | `<library>/<version>`, up to 200 bytes | Request accepted, but `$lib` and `$lib_version` are not set |
+
+### Event limits
+
+| Field | Rule | If an event breaks it |
+|---|---|---|
+| `event` | Not empty, up to 200 bytes | `drop` (`missing_event_name`, `event_name_too_long`) |
+| `distinct_id` | Not empty after trimming spaces, up to 200 bytes | `drop` (`missing_distinct_id`, `distinct_id_too_large`) |
+| `timestamp` | RFC 3339 | `drop` (`invalid_event_timestamp`) |
+| `properties` | A JSON object | `drop` (`malformed_event_properties`) |
+| `options` | A JSON object with readable values | `drop` (`invalid_options`) |
+| The whole event | Small enough to store, about 1MB | `drop` (`event_too_big`). See [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit). |
+
+Limits count **bytes** in UTF-8, not characters. A 100-character distinct ID with non-English characters can be more than 200 bytes.
+
+Some of these rules are stricter than legacy capture:
+
+- **Long distinct IDs.** Legacy capture shortens a distinct ID over 200 characters and stores the event. Capture v1 drops the event with `distinct_id_too_large`. Check that your IDs stay under 200 bytes before you upgrade.
+- **Long event names.** Capture v1 drops an event whose name is over 200 bytes.
+- **Event UUIDs.** Every event needs a valid UUID of its own. See [event UUIDs](#event-uuids).
 
 The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events](/docs/ai-observability/large-events#limits).
 
 <!-- TODO(capture-v1): decide whether to publish the AI endpoint's request body limits. -->
+<!-- TODO(capture-v1): confirm legacy capture's event-name behavior over 200 bytes before claiming "stricter" for event names. -->
 
 ## Responses
 
