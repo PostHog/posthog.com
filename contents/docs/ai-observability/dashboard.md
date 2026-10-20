@@ -33,6 +33,10 @@ The AI Observability dashboard is fully customizable. You can add your own insig
 
 Learn more about customizing dashboards in our [dashboard docs](/docs/product-analytics/dashboards).
 
+## Get alerted when something changes
+
+Use **Create anomaly alert** on a dashboard chart to watch it for unusual spikes or drops in cost, latency, or errors. Turn on the investigation agent, and an agent checks each alert before it reaches you, so you only hear about real problems. See [anomaly investigations](/docs/ai-observability/self-driving#anomaly-investigations). <!-- VERIFY: button label -->
+
 ## What can you do with the dashboard?
 
 This dashboard is a great starting point for understanding your LLM usage and performance. You can use it to answer questions like:
