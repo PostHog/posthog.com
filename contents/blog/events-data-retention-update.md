@@ -18,6 +18,17 @@ From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events
 
 **New organizations (created on or after November 1):** Free plans get 1 year, and pay-as-you-go plans get 2 years. We're working on a way to offer longer retention.
 
+## What happens after the retention window?
+
+On the free plan, events older than 1 year are hidden first and deleted later:
+
+- For the first 3 months after this starts, nothing is deleted. If you upgrade to pay-as-you-go during that time, you get back all your events from the last 2 years.
+- After that, events are deleted once they're more than 15 months old, which is 3 months after they pass the 1-year window. Upgrading still brings back hidden events that haven't been deleted yet.
+
+On paid plans, events are deleted once they're older than your window (2 or 7 years).
+
+You can't shorten your window to remove data. To remove events, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
+
 ## If you need a longer window
 
 To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
