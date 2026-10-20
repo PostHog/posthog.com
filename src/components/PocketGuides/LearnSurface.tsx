@@ -10,6 +10,7 @@ import { useWindow } from '../../context/Window'
 import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import Cover from './Cover'
+import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
@@ -204,6 +205,14 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
     const chapters = pages.filter((page) => !page.isFrontMatter)
     const firstChapter = chapters[0]
     const firstChapterPath = firstChapter ? learnChapterPath(basePath, firstChapter) : undefined
+    const chapterPaths = new Set(chapters.map((page) => learnChapterPath(basePath, page)))
+    // Any chapter link opens the book, then lands on that chapter.
+    const openBook = (event: React.MouseEvent<HTMLDivElement>) => {
+        const href = (event.target as Element).closest('a')?.getAttribute('href')?.replace(/\/$/, '')
+        if (!href || !chapterPaths.has(href)) return
+        const cover = coverRef.current?.querySelector<HTMLElement>('[data-pocket-guide-cover]') ?? null
+        void openPocketGuide(event, cover, href)
+    }
 
     const chaptersList =
         coverVolume && chapters.length > 0 ? (
@@ -252,7 +261,10 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
     return (
         // ReaderView supplies the docs prose styles and padding for this surface.
         // Introductions end on the setup wizard; the padding keeps it off the window's bottom edge.
-        <div className={`@container [&>div]:!p-0 ${entry.isFrontMatter ? 'pb-12' : ''}`}>
+        <div
+            className={`@container [&>div]:!p-0 ${entry.isFrontMatter ? 'pb-12' : ''}`}
+            onClickCapture={entry.isFrontMatter ? openBook : undefined}
+        >
             <EntryProvider value={{ entry, pages, basePath }}>
                 <IntroContext.Provider value={intro}>
                     <MDXProvider components={components}>
