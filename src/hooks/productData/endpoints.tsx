@@ -39,7 +39,7 @@ export const endpoints = {
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
-            'Turn PostHog SQL queries into API endpoints. Build embedded analytics, customer dashboards, and data feeds from your product data. Free during beta.',
+            'Turn PostHog SQL queries into API endpoints. Build embedded analytics, customer dashboards, and data feeds from your product data.',
     },
     /**
      * Sections rendered on the Product surface (`/endpoints`). Each entry
