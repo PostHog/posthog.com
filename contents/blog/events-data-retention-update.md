@@ -8,7 +8,7 @@ hideAnchor: true
 category: PostHog news
 ---
 
-From November 1, 2026, paid plans on PostHog Cloud keep events for 2 years instead of 7. The free plan stays at 1 year. Organizations already on a paid plan keep 7 years.
+From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events data retention policy, instead of 7. The free plan will stay at 1 year. Organizations already on a paid plan keep 7 years.
 
 ## What changes
 
