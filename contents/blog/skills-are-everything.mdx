@@ -267,7 +267,7 @@ This isn't just a set of instructions. The skill is a document I'm iterating on 
 
 ## Why the store, and not a folder of Markdown files
 
-You can do all of this with a local `.claude|agents/skills/` folder but that's just crazy, and vibing your own plumbing and CI to get your skills to every agent you use is also totally possible but also crazy. Just use some tool that lets gets you some benefits like:
+You could do all of this with a local `.claude|agents/skills/` folder but that's just crazy. Vibing your own plumbing and CI to get your skills to every agent is also totally possible but crazy. Using a skill store gives you benefits like:
 
 - **It's on every surface.** The same skill loads in Claude Code on my laptop, in a cloud task, in Slack, in Codex, in Cursor, and in PostHog AI.
 - **Agents can write to it.** The `skill-update` tool takes incremental `edits` and `file_edits` with a `base_version` check, so two sessions can maintain the same skill without clobbering each other.
