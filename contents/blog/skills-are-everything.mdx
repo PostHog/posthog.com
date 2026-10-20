@@ -98,17 +98,10 @@ The loop looks like this:
 
 This is the lowest friction and most chill way I have ever found to deliver complex features over long horizons. The skill is the memory, and it's memory I get my agents to intentionally control and maintain.
 
-I don't rely on a model's hidden memory feature that I can't read. I can open the skill in PostHog and see exactly what my agents think is true. Every now and then as things get messy I just tell the agent to clean up or better yet it knows itself to follow certain protocols like trim the changelog after 14 days etc (all skill edits are version tracked anyway so it's all recoverable if I really need it).
+I don't rely on a model's hidden memory feature that I can't read. The skill in PostHog shows exactly what my agents think is true. If it gets messy, I tell the agent to clean up, or better yet, it knows to follow certain protocols like trimming the changelog after 14 days (all skill edits are version tracked so it's recoverable if I need it).
 
-I liked the pattern enough that I turned it into a template. [`project-template`](https://github.com/PostHog/community-skills/tree/main/skills/project-template) is in the [community skills store](/docs/skills/community). Install it once per area of work, bind the project name and the changelog window, and you have a living hub that any agent on your team can read and write.
+I liked this pattern enough that I turned it into a template. [`project-template`](https://github.com/PostHog/community-skills/tree/main/skills/project-template) is in the [community skills store](/docs/skills/community). Install it once per area of work, bind the project name and the changelog window, and you have a living hub that any agent on your team can read and write.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/project_template_community_skill_f836f5a2bb.png"
-    classes="rounded"
-    alt="The Project Template card in the community tab of the PostHog skills store. It describes a starter kit for running one area of ongoing work as a living skill, with tags for project tracking, a GitHub link, and an Install button."
-/>
-
-*`project-template` in the [community tab of the skills store](https://app.posthog.com/skills/community). One click on Install and it's yours to bend into shape.*
 
 My favorite part of the template is a small table the agent has to consult before writing anything down:
 
@@ -121,13 +114,8 @@ My favorite part of the template is a small table the agent has to consult befor
 
 The most common failure of the skill is durable detail written into the changelog, because the changelog is the file the agent was already editing. That table exists because I watched it happen many times.
 
-You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. 
+You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. Don't worry much about the layout. Agents do something sensible on their own, and in my experience, skills only starts to get messy at around version 50. The important part is that the context is in a skill you can see, version, and load from anywhere.
 
-Don't worry much about the layout. Agents these days do something sensible on their own, and in my experience it only starts to get messy at around version 50. 
-
-The important part is that the context is in a skill you can see, version, and load from anywhere. As the project matures, you add structure as suits your needs.
-
-That's how `autoresearch`, the skill behind the biggest (side-quest) thing I've built this year, went. It started on April 27 as a single design spec. Over five months and 551 versions it grew whatever the work needed: a decision log, a backlog, a plan to cut a PR stack 31 layers (yes 31 i kid you not) deep into reviewable pieces, a brief for reviewers, and a few one-off scripts for slicing the stack. Once the stack landed, I had the agent refactor it into the same tidy project tracker shape as `self-driving-work`. The messy stack-era files are still in the version history if we ever need them.
 
 ## 2. Skills as a map of the stuff I work on
 
@@ -139,7 +127,6 @@ Filter our skills store to `self-driving-` and you get a map of how self-driving
     alt="The self-driving group in the PostHog skills store. It lists 11 skills, including self-driving-alerts, self-driving-dashboards, self-driving-debugging, self-driving-dwh, self-driving-temporal, and self-driving-work, each with a description, an author, a version count, and when it last changed."
 />
 
-*Every `self-driving-*` skill in our store. Start here.*
 
 The most detailed part of the map is `self-driving-dwh`. It's the blueprint for the [data warehouse](/docs/data-warehouse) views behind our internal self-driving analytics: an entity diagram of how scout runs, signals, reports, tasks, and PRs join, the keys that stitch them together, and a `recipes/` folder of SQL that actually works.
 
@@ -155,7 +142,7 @@ When I say "use the /self-driving-dwh skill to help here", the agent knows how e
 
 Another favorite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it.
 
-Yet another cool thing here is that each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
+Each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
 <div className="w-fit mx-auto">
     <ProductScreenshot
@@ -165,7 +152,7 @@ Yet another cool thing here is that each skill is version tracked and we have an
     />
 </div>
 
-*Every version of `self-driving-alerts` has a one-line description of what changed, who changed it and why.*
+This also means we can compare any two versions of a skill body. Here, v61 against v73: the alert counts go up as new alerts get added. Remember, this is mostly text for agents to read. 
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_version_diff_9a0c37decf.png"
@@ -173,7 +160,6 @@ Yet another cool thing here is that each skill is version tracked and we have an
     alt="A side-by-side diff of the self-driving-alerts skill body in PostHog, comparing version 61 with version 73. The alert counts on the signals line are highlighted where they changed: 112 to 113 alerts, 110 to 111 active, and 93 to 94 hourly."
 />
 
-*Compare any two versions of a skill body. Here, v61 against v73: the alert counts go up as new alerts get added. Remember, this is mostly text for agents to read*
 
 Stuff like this used to be really annoying to maintain somewhere – now you get it for practically free if you just put it in a skill and let your agents maintain it.
 
@@ -183,7 +169,7 @@ The alerts skill in section 2 records what exists. A runbook records what went w
 
 `self-driving-debugging` is our runbook for when self-driving misbehaves in production and users have some issues we need to dig into.
 
-The whole thing hangs off one line in the skill body: **add or extend a reference every time we run down a new class of issue.** When a support ticket turns into a real investigation, the agent writes up what it found as a dated file in `investigations/`, then extends the matching reference so the next agent doesn't start from zero. Seven investigations in, it covers duplicate reports, competing PRs for one fix, oversold report titles, unaddressed review comments, and a data import source that emitted nothing.
+The whole thing hangs off one line in the skill body: **add or extend a reference every time we run down a new class of issue.** When a support ticket turns into a real investigation, the agent writes what it found as a dated file in `investigations/`, then extends the matching reference so the next agent doesn't start from zero. Seven investigations in, it covers duplicate reports, competing PRs for one fix, oversold report titles, unaddressed review comments, and a data import source that emitted nothing.
 
 Its sibling, `scouts-debugging`, does the same job for the scout fleet. Between them, "debug self-driving for team N" is a sentence I can say to an agent on any surface and get a real answer.
 
@@ -204,7 +190,6 @@ In flight with a PR, newest report first
 7  FIX CI             fix(mcp): make execute-sql join errors iden…  #108284  stamp✓ CI2✗
 ```
 
-*The in-flight table. One line per report, with the thing I need to do next.*
 
 The skill bundles Python scripts to do the boring parts: `render_table.py` builds the table from the API and `gh`, `pr_candidates.py` ranks reports that are ready for a Create PR press, `merge_intent.py` finds PRs I've approved that need agent work to get merged, and `draft_task.py` writes the payload to launch a PostHog [task](/docs/posthog-desktop/tasks) for a stalled row. So "get these three PRs green on CI" turns into three async tasks I can check on later.
 
@@ -215,7 +200,7 @@ It also has a `working-set.md` that records only what I've personally chosen to 
 3. The file is a list of my commitments.
 4. Never report status from the file alone.
 
-There's a whole family of these:
+There's a whole family of daily driver skills like these:
 
 - `my-github` is what needs my attention across GitHub: open PRs, review requests, assigned issues, recent merges.
 - `andy-prs` is every PR I opened, with its size, the issues it closes, the inbox report it came from, and its checks.
@@ -236,7 +221,7 @@ Almost every bullet was a link to a skill.
     alt="Part of Andy's Slack handover message before a holiday. Each bullet links to a skill: scouts-dashboard, signals-dwh, signals-alerts, inbox-alerts, inbox-observability, scouts-dogfooding, scouts-debugging, signals-temporal, and inbox-vision-scanner."
 />
 
-*The holiday handover. Every bullet is a skill, so a teammate or their agent can pick it up.*
+Every bullet was a skill, so a teammate or their agent can pick it up:
 
 - `scouts-dogfooding` for the project log and open issues.
 - `scouts-debugging` for symptom-driven runbooks, including a playbook for digging into one team's experience.
@@ -247,7 +232,7 @@ This is the bit I think people miss about a shared skills store: the handover do
 
 ## 6. Skills that run themselves
 
-Every [scout](/docs/self-driving/scouts) in PostHog [is a skill](/docs/self-driving/whats-in-a-scout). Same format, same store, same version history. The only difference is a schedule and a harness that runs it (I went deep on how that works in [What is a Scout?](/blog/what-is-a-scout)). Which means when I've built a skill for how I do a job, turning it into a job that does itself is a small step, not a new project.
+Every [scout](/docs/self-driving/scouts) in PostHog [is a skill](/docs/self-driving/whats-in-a-scout). Same format, same store, same version history. The only difference is a schedule and a harness that runs it. Which means when I've built a skill for how I do a job, turning it into a job that does itself is a small step, not a new project.
 
 `signals-scout-agent-feedback` watches what agents complain about in our MCP, `signals-scout-self-driving-logs` watches our production logs, and `signals-scout-canonical-drift` checks the canonical scout fleet against the current harness once a week for any drift and inconsistencies as code evolves.
 
@@ -257,9 +242,9 @@ Yes, I have skills that maintain skills. I did warn you.
 
 ## 7. Skills as a place to think
 
-`andy-hogs-2026q4` is my draft of Hopes, Obstructions, Growth, and Sneak attacks ([HOGS](/handbook/company/goal-setting#planning-template)) for our quarterly planning.
+I even used a skill to write this blog. The `andy-blogs` skill has one file per post with the argument, sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. 
 
-And `andy-blogs` is the skill that tracked this post. It has one file per post, with the argument, the sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, and this post is about skills). It's well past 20 versions by now, and this paragraph is in its changelog. I use this to help with all the annoying stuff about writing blog posts like adding the screenshots and stuff like that. And I also use it to tell the agent how I write blog posts these days in that I need to fire up VSCode to eyeball every diff before we commit and push as agents are just to eager to try slip stuff in that i don't want in the final post.
+When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, not skills). It's well past 20 versions by now, and this paragraph is in its changelog. It helps with all the annoying stuff about writing blog posts like adding the screenshots. And I also use it to tell the agent how I write blog posts: I need to fire up VSCode to eyeball every diff before we commit as agents are to eager to try add stuff I don't want in the final post.
 
 This isn't just a set of instructions. The skill is a document I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
 
