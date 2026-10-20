@@ -42,7 +42,7 @@ Roughly one in ten people who read a head-to-head comparison go on to create a P
 
 The reasons are intuitive: someone searching for this type of content has already decided they need something, which makes it perfectly positioned in the funnel to help them make a decision (ideally in your favour, but not always and that's okay. More on that later).
 
-## What we shipped over the years at PostHog
+## Our credentials
 
 Technically, our first comparison was a roundup. [The best open source analytics tools](/blog/best-open-source-analytics-tools) went live in October 2021 and is still our single most-read piece of comparison content, at 150k+ pageviews and counting. 
 
@@ -63,25 +63,25 @@ So no, this isn't an AEO fad for us; we were writing comparison content BeFoRe i
 And while they have shapeshifted plenty since then, we've stayed true to two principles:
 
 1. Do no harm. [We don't trash-talk competitors](/blog/why-attacking-competitors-is-dumb), we don't straw-man them, and we admit when and where they're better than us. [No sneaky shit](/handbook/marketing#no-sneaky-shit), as our handbook puts it.
-2. Respect the reader's intelligence, and meet them where they are. A developer comparing tools is smart, busy, and already halfway towards a decision. Give them the answer as accurately and as directly as possible, and let them make the right call for their product.
+2. Respect the reader's intelligence, and meet them where they are. A developer comparing tools is smart, busy, and already halfway towards a decision. Give them the answer as accurately and as directly as possible, and let them make the right call for their product and use case.
 
 ## Be the comparison page you'd want to read
 
 PostHog doesn't have every feature every competitor has (*yet*), and we're fine admitting it. Our credibility with the reader is worth more than whatever we'd "win" by fudging the truth.
 
-We're not the solution for everyone. We are the best solution for someone (a lot of someones, actually), and the job is capturing *their* attention. Which means you will, occasionally, lose a deal on your own website: someone reads PostHog vs Amplitude, concludes Amplitude is the better fit, and goes and buys Amplitude. We wish them godspeed and focus on our ICP anyway.
+We're not the solution for everyone. We are [the best solution for someone](/handbook/who-we-build-for) (a lot of someones, actually), and the job is capturing *their* attention. Which means you will, occasionally, lose a deal on your own website: someone reads PostHog vs Competitor, concludes Competitor is the better fit, and goes and buys Competitor. We wish them godspeed and focus on our ICP anyway.
 
 In practice, this means picking up a few uncomfortable habits:
 
-**Acknowledge your gaps and credit their wins.** "If you need X, they do it better than we do today" is a sentence you'll find on our pages. Softening it with what's coming is fine (a roadmap link, a "we're working on it"), as long as you're clear about where you are *right now* for the readers deciding today. For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not our ambitions.
+**Acknowledge your gaps and credit their wins.** "If you need X, they do it better than we do today" is a sentence you'll find on our pages. Softening it with what's coming is fine (a roadmap link, a "we're working on it"), as long as you're clear about where you are *right now* for the readers deciding today. For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not just our ambitions.
 
 Readers don't think less of you for crediting a competitor; they think more. It's the cheapest trust signal in content marketing, and almost nobody uses it, which is exactly why it works. Say the nice thing.
 
 There's another reader to keep in mind, too: LLMs. When someone asks Claude "PostHog vs Sentry for a Next.js app," we assume the model pulls from sources it judges to be balanced. So be balanced. You want to read as a source, not an ad. Being honest used to be a brand decision (one we've proudly stood behind), but now it might be a distribution decision too.
 
-**Write a "who should pick them" section.** If you can't write a fair paragraph about where your competitor wins, you don't understand them well enough to compare. Go read their docs. It's also the place to be honest about who you're for: plenty of our competitors are openly built for marketers for example, and while lots of marketers run all their reporting on PostHog (yours truly included), we're still building for AI-pilled engineers first, and we say so.
+**Write a "who should pick them" section.** If you can't write a fair paragraph about where your competitor wins and who they might work better for, you don't understand them well enough to compare. Go read their docs. It's also the place to be honest about who you are and aren't building for: plenty of our competitors are openly built for marketers for example, and while lots of marketers run all their reporting on PostHog (yours truly included), we're still building for AI-pilled engineers first, and we say so.
 
-The reader who isn't a fit should leave feeling helped, not hustled. They'll remember that the next time they're evaluating something we *are* a fit for. Honest pages also don't make enemies: the fastest way to go viral for the wrong reasons is a dodgy comparison, and if you'd rather not be bashed on Hacker News or Twitter for being slimy, be fair.
+The reader who isn't a fit should leave feeling helped, not hustled. Honest pages also don't make enemies: the fastest way to go viral for the wrong reasons is a dodgy comparison, and if you'd rather not be bashed on Hacker News or Twitter for being slimy, be fair.
 
 - **Take corrections from competitors.** We've shipped edits because someone at a competitor emailed us, DMed us, or better yet, opened a PR directly against our blog. We welcome it and encourage it. (Yes, if you're a competitor reading this, this is an invitation.) 
 
@@ -95,7 +95,7 @@ We haven't always gotten this right, but we're committed to doing better every t
 
 Staying accurate across ~90 comparison and roundup pages for years is an engineering problem, and we started treating it like one.
 
-### 1. Every competitor is a data file.
+### 1. Every competitor is a centralized data file.
 
 In the posthog.com repo there's [a folder with one file per competitor](https://github.com/PostHog/posthog.com/tree/master/src/hooks/competitorData): `sentry.tsx`, `amplitude.tsx`, `hotjar.tsx`, and so on. Each file holds everything we claim about that company, in one place; here's a simplified version of what that looks like:
 
@@ -123,8 +123,7 @@ Most of our comparison tables render from these files through one component. Whe
 
 Data files solve "update once, publish everywhere", but they don't solve for "notice that something changed" – that's what [we've used Scouts for](/blog/what-is-a-scout).
 
-Our comparison content scout is a scheduled agent inside PostHog that reads our competitor files, visits each competitor's pricing and docs pages, and reports back when what they say and what we say have drifted apart. A few things make it better than a cron job with a diff:
-
+Our comparison content scout is a scheduled agent inside PostHog that reads our competitor files, visits each competitor's pricing and docs pages, and reports back when what they say and what we say have drifted apart. A few things make it work well for us:
 
 1. **It has memory between runs**, so it doesn't re-flag the same thing every week, and it learns what "normal" looks like for each site.
 2. **It's selective by design.** Most runs end with nothing to report, and that's it working. It ignores changes that don't affect the overall comparison.
@@ -143,7 +142,7 @@ And finally, a pull request ready to merge:
 
 ![Scout PR Example](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_20_T16_21_46_652_Z_789b3a4394.png)
 
-The scout does the noticing, a human does the deciding, and nobody needs to add a recurring "re-read every competitor's pricing page" task to their calendar. 
+The scout does the noticing, a human does the deciding, and nobody needs to add a recurring "re-read every competitor's pricing page" task to their calendar. Amen to that.
 
 ## Where we go from here
 
