@@ -26,12 +26,12 @@ The rendering path is:
 
 | Volume | Public URL |
 | --- | --- |
-| Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide` |
+| Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
 | AI Observability, Session Replay, Feature Flags | Guide at `/learn/<product>` |
 | Self-driving | `/docs/self-driving/pocket-guide` |
 | Data Stack | `/docs/data-warehouse/pocket-guide` |
 
-Product Analytics has a separate choice page, `ProductAnalyticsLearnLanding.tsx`. Every Learn page shows the same flat sidebar: Product Analytics lists Overview and Pocket guide, with chapters nested under the guide; the other products list their chapters. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
+Product Analytics has a separate choice page, `ProductAnalyticsLearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. Product Analytics lists Overview, Pocket guide (chapters nested under it), Agent prompts and MCP, and Live playground, each with an icon. The other products list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
 
 ## Content and registration
 
@@ -55,6 +55,12 @@ contents/learn/<volume>/pocket-guide/
 `useBookPages` selects pages with numeric `pocketGuideOrder`, excludes sibling `SKILL.md` files and `_`-prefixed paths, and sorts by order. Use order 0 for the introduction. Omitting the order removes a page from this reading sequence; it is not an access-control mechanism. `shortTitle` overrides the navigation label; otherwise the title is used.
 
 For a new frontmatter field used in GraphQL, check the declarations in `gatsby/createSchemaCustomization.ts`. Add the required schema declaration rather than relying on inference for sparse fields. Clear Gatsby's cache after schema changes.
+
+## Introductions
+
+Place `<CoverWithChapters />` in every guide introduction, after the opening paragraphs, on the left page. Put setup instructions on the right page. The marker renders the shared `Cover` and a centered Start reading button beside the Chapters list; they stack in narrow containers. `<PocketGuideCover />` and `<StartReading>` also work alone (add `align="center"` to center the button). An introduction without `<CoverWithChapters />` shows the Chapters list after its body.
+
+The cover, Start reading, and every chapter link open chapter 1 or the linked chapter with the book-opening transition. Do not add another reading CTA to an introduction. Keep introduction copy in one section beneath the topic heading, without a separate "Where to start" section. Include a setup wizard only when readers need an installed integration to follow along; keep demos and extra illustrations in chapters.
 
 ## MDX and figure placement
 
@@ -104,7 +110,8 @@ Write code samples and tables as native Markdown. Use figures for teaching UI or
 | `CTA` | Link styled as a call to action; used by the Product Analytics introduction |
 | `LessonFooter` | Next-lesson link and supporting resources; no `nextHref` produces a disabled button |
 | `Action` | Optional action from `pocketGuideCta` frontmatter |
-| `Setup`, `Frontispiece`, `Eyebrow` | Optional setup command and title-page elements |
+| `Setup`, `Frontispiece`, `Eyebrow` | Optional setup command and title-page elements. Put `Eyebrow` inside the heading: `# <Eyebrow>A pocket guide to</Eyebrow> Product Analytics` |
+| `CoverWithChapters`, `PocketGuideCover`, `StartReading` | Introduction layout; see [Introductions](#introductions) |
 | `ReportFigure`, `ScoutFigure`, `SkillFigure`, `Watches`, `Enable` | Existing scout-related content; see the [SelfDrivingInbox README](../SelfDrivingInbox/README.md) |
 
 The scout format is still evolving. Its implementation conventions are not requirements for other guides.
@@ -139,6 +146,12 @@ The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path m
 
 Use the source files for current fixture values, timing, and interaction details rather than treating this README as a second fixture specification.
 
+### Product Analytics Learn hub
+
+- `ProductAnalyticsLearnLanding.tsx` owns the overview's short previews: Learn through a story, Learn with your agent, and Learn by doing. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
+- `AgentTeachingActions.tsx` shares the teaching prompt and the Claude Code and Codex launch controls. It exports `AGENT_TEACHING_PROMPT`, so the displayed and launched instructions stay identical. Keep that prompt unchanged unless someone asks for an instruction change. Pass a chapter-specific prompt through the optional `prompt` prop.
+- The Live playground page stacks `SessionReplayLinkFigure` (pass `autoPlay` for muted, looping playback), `TwigEventFigure`, and `BookingStepsFigure`. Chapter embeds keep manual playback.
+
 ## Styling and verification
 
 Guides inherit docs prose styles from `ReaderView` and use the shared component mappings. Use project color tokens and container queries for resizable app windows. Preserve Twig styling in embedded Twig views.
@@ -159,8 +172,21 @@ For changes:
 
 ## Discovery surfaces
 
-- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`.
-- Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override. Keep routing decisions in the shared helpers.
+- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`. Covers show no volume number. The shelf lists volumes in `POCKET_GUIDE_VOLUMES` order.
+- Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override; the shelf, introductions, and the Product Analytics overview pass chapter 1. `Cover` opens its destination with the book-opening transition in the current window; `Book` opens a new window. Keep routing decisions in the shared helpers.
 - `VolumeCard.tsx` combines a cover, description, and CTA. `GuidesForProduct.tsx` selects a volume by `docsProduct` and returns nothing when none matches.
 - `usePocketGuideCounts.ts` controls displayed counts. By default it counts chapter paths with numeric order greater than 0 and excludes `isPrimer` pages. `countOrientationPages` instead includes numeric orders starting at 0. This display logic does not prescribe a chapter outline.
 - `VOLUME_ART` is exported from `volumeArt.tsx` and accessed through `volumeArt()`. It supplies cover and optional frontispiece art; it is not exclusive to `Cover`.
+
+## Book-opening transition
+
+`bookOpening.ts` exports `openPocketGuide(event, coverElement, destination)`. It runs the whole transition and the navigation, so destination pages need no animation hooks. `Cover` calls it by default. For a separate reading button, keep its real link and call the function from its click handler with the matching cover element, as `LearnSurface` does for Start reading. The cover is marked with `data-pocket-guide-cover`, and its hinged face with `data-pocket-guide-cover-face`.
+
+The transition animates an inert copy of the cover in a temporary layer clipped to the nearest Radix scroll viewport. The copy freezes computed styles, including container-query typography, so it does not reflow. Page content dissolves while the copy centers and zooms. The front cover swings open to become the left page, with a thin gray gutter line on the hinge, and the camera fits the two-page spread. The book then fades out and the destination replaces the page, with no full-window overlay. Sidebars and other windows do not animate.
+
+- Reduced-motion preferences, modified clicks, and missing measurements keep ordinary link behavior.
+- One transition runs per viewport. Cleanup restores the source on completion, cancellation, or failed navigation.
+- If the source cover unmounts, or the reader focuses another window, the transition stops instead of overriding the newer route.
+- A navigation that stalls for 5 seconds restores the source page.
+
+Run `pnpm exec node --test src/components/PocketGuides/bookOpening.test.ts` after changes.
