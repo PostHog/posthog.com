@@ -152,7 +152,7 @@ Unleash's open-source self-hosted version is free with unlimited feature flags. 
 
 ### What is Flipt?
 
-**Flipt** is a popular open-source option for feature flagging. It's 100% open source with no paid editions. It supports all basic [feature flag use cases](/blog/feature-flag-benefits-use-cases), such as rolling out features based on segments (e.g. new users, email, country etc.), multiple variations, and percentage thresholds for rollouts. It also supports storing your flags in Git, so it can be used without a database.
+**Flipt** is a popular open-source option for feature flagging. Its open-source edition is free, and optional paid Pro and Enterprise plans add more features. It supports all basic [feature flag use cases](/blog/feature-flag-benefits-use-cases), such as rolling out features based on segments (e.g. new users, email, country etc.), multiple variations, and percentage thresholds for rollouts. It also supports storing your flags in Git, so it can be used without a database.
 
 ### Supported SDKs
 
@@ -162,7 +162,7 @@ Unleash's open-source self-hosted version is free with unlimited feature flags. 
 
 ### How much does it cost?
 
-Nothing. There is no paid version of Flipt. It's distributed under a GPL-3.0 license.
+The open-source edition is free and distributed under a GPL-3.0 license. Flipt Pro costs $200/month and adds Git provider integrations, pull requests from the UI, GPG-signed commits, and integrated secrets management. Enterprise plans have custom pricing.
 
 ## 6. Flipper
 
@@ -236,7 +236,7 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 - Already have a data warehouse and want feature flags combined with powerful experimentation? Choose **GrowthBook**.
 - Need the most extensive SDK support and largest open-source community? **Unleash** is the most established.
 - Need open-source feature flags with remote configuration and on-premises hosting? Try **Flagsmith**.
-- Want a 100% open-source tool with zero paid tiers and Git-native flag management? **Flipt** is for you.
+- Want a free, open-source tool with Git-native flag management? **Flipt** is for you.
 - Building with Ruby on Rails and want the best developer experience? **Flipper** is purpose-built for your stack.
 - Need a self-hosted, enterprise-grade tool with no artificial feature gates? **FeatBit** offers the most features for free.
 - Want a simple, no-frills open-source tool with cloud-native architecture? **FeatureHub** covers the basics well.
@@ -275,7 +275,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/de
 
 - **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform – its free tier includes 1 million feature flag requests per month. 
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
-- **Flipt** is the best choice if you want a tool that is 100% open source with no paid tiers at all. 
+- **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management – paid Pro and Enterprise plans are optional. 
 
 For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
 
