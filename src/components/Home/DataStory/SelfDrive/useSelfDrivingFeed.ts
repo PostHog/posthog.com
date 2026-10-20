@@ -1,11 +1,12 @@
-import { RefObject, useEffect, useMemo, useState } from 'react'
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useInView } from 'framer-motion'
-import type { SelfDrivingFeed, SelfDrivingPullRequest } from '../../../../api/self-driving-prs'
+import type { SelfDrivingFeed } from '../../../../api/self-driving-prs'
 
 const FEED_URL = '/api/self-driving-prs'
 const REFRESH_MS = 15 * 60 * 1000
 const CLOCK_MS = 60 * 1000
+const FETCH_TIMEOUT_MS = 8000
 const FEED_SIZE = 10
 const BUILD_TIME_REPOSITORY = 'posthog/posthog'
 
@@ -16,8 +17,6 @@ interface BuildTimePullRequest {
     state: string
     mergedAt: string | null
 }
-
-export type { SelfDrivingPullRequest }
 
 export function useSelfDrivingFeed(ref: RefObject<HTMLElement>): {
     feed: SelfDrivingFeed
@@ -54,7 +53,8 @@ export function useSelfDrivingFeed(ref: RefObject<HTMLElement>): {
     }, [data])
 
     const [liveFeed, setLiveFeed] = useState<SelfDrivingFeed | null>(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(buildTimeFeed.pullRequests.length === 0)
+    const lastFetchedAt = useRef(0)
     const [now, setNow] = useState<number | null>(null)
     const inView = useInView(ref, { amount: 0.2 })
 
@@ -62,7 +62,8 @@ export function useSelfDrivingFeed(ref: RefObject<HTMLElement>): {
         if (!inView) return
         const load = () => {
             if (document.hidden) return
-            fetch(FEED_URL)
+            lastFetchedAt.current = Date.now()
+            fetch(FEED_URL, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) })
                 .then((response) => (response.ok ? response.json() : null))
                 .then((feed: SelfDrivingFeed | null) => {
                     if (feed && feed.pullRequests.length > 0) setLiveFeed(feed)
@@ -70,7 +71,7 @@ export function useSelfDrivingFeed(ref: RefObject<HTMLElement>): {
                 .catch(() => undefined)
                 .finally(() => setLoading(false))
         }
-        load()
+        if (Date.now() - lastFetchedAt.current >= REFRESH_MS) load()
         const refresh = window.setInterval(load, REFRESH_MS)
         return () => window.clearInterval(refresh)
     }, [inView])
@@ -98,10 +99,9 @@ export const timeAgo = (mergedAt: string, now: number | null): string => {
     return `${Math.floor(elapsed / DAY_MS)} d ago`
 }
 
-export const parseTitle = (title: string | null, number: number): { type: string; scope: string; summary: string } => {
-    const match = (title ?? '').match(/^(\w+)(?:\(([^)]+)\))?!?:\s*(.+)$/)
-    if (match) return { type: match[1].toLowerCase(), scope: match[2] ?? '', summary: match[3].trim() }
-    return { type: '', scope: '', summary: title || `Pull request #${number}` }
-}
+const CONVENTIONAL_COMMIT_PREFIX = /^\w+(?:\([^)]+\))?!?:\s*/
+
+export const titleSummary = (title: string | null, number: number): string =>
+    title?.replace(CONVENTIONAL_COMMIT_PREFIX, '').trim() || `Pull request #${number}`
 
 export const repositoryLabel = (repository: string): string => repository.replace(/^posthog\//i, '')

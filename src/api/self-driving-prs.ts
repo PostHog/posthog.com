@@ -3,6 +3,7 @@ import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 const ENDPOINT_URL = 'https://us.posthog.com/api/environments/2/endpoints/self_driving_merged_prs/run'
 const EDGE_CACHE = 'public, s-maxage=900, stale-while-revalidate=3600'
 const FAILURE_CACHE = 'public, s-maxage=60'
+const ENDPOINT_TIMEOUT_MS = 8000
 
 export interface SelfDrivingPullRequest {
     repository: string
@@ -45,6 +46,7 @@ const handler = async (_req: GatsbyFunctionRequest, res: GatsbyFunctionResponse)
         const response = await fetch(ENDPOINT_URL, {
             method: 'POST',
             headers: { Authorization: `Bearer ${apiKey}` },
+            signal: AbortSignal.timeout(ENDPOINT_TIMEOUT_MS),
         })
         if (!response.ok) {
             throw new Error(`self_driving_merged_prs returned ${response.status}`)

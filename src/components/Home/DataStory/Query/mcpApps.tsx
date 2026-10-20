@@ -3,6 +3,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconChevronDown, IconChevronRight, IconExpand45, IconGear } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { transform } from '../timeline'
+import { PostHogMark } from './appIcons'
+import { PressCursor } from '../PressCursor'
+import { CLAUDE_BAR_AT, CLAUDE_BAR_HOVER_AT, CLAUDE_BAR_PRESS_AT, CLAUDE_PICKER_PRESS_AT } from './appTraces'
+import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
 const CHART_PALETTE = ['#1d4aff', '#621da6']
 const CARD_ENTER = {
@@ -12,19 +16,16 @@ const CARD_ENTER = {
 } as const
 const DRAW_EASE = [0.22, 1, 0.36, 1] as const
 
-export const McpAppFrame = ({
-    className,
-    children,
-    PostHogMark,
-}: {
-    className?: string
-    children: React.ReactNode
-    PostHogMark: React.ComponentType<{ className?: string }>
-}) => (
+export const McpAppFrame = ({ className, children }: { className?: string; children: React.ReactNode }) => (
     <motion.div {...CARD_ENTER} className={cn('mb-3 overflow-hidden rounded-xl border', className)}>
         <div className="p-3">{children}</div>
-        <div className="flex items-center justify-between border-t border-inherit px-3 py-1.5 text-[11px] @3xl:text-[13.5px] opacity-80">
-            <IconExpand45 className="size-3.5 @3xl:size-[17px] opacity-60" />
+        <div
+            className={cn(
+                SCENE_TEXT[11],
+                'flex items-center justify-between border-t border-inherit px-3 py-1.5 opacity-80'
+            )}
+        >
+            <IconExpand45 className={cn(SCENE_SIZE[14], 'opacity-60')} />
             <span className="flex items-center gap-1.5">
                 <PostHogMark className="h-2.5 @3xl:h-3" />
                 <span className="underline underline-offset-2">View in PostHog</span>
@@ -34,7 +35,7 @@ export const McpAppFrame = ({
 )
 
 const AppHeader = ({ title, children }: { title: string; children?: React.ReactNode }) => (
-    <div className="mb-2 flex items-center gap-2 text-xs @3xl:text-[15px]">
+    <div className={cn(SCENE_TEXT[12], 'mb-2 flex items-center gap-2')}>
         <span className="font-semibold">{title}</span>
         <span className="ml-auto flex items-center gap-1.5">{children}</span>
     </div>
@@ -43,15 +44,14 @@ const AppHeader = ({ title, children }: { title: string; children?: React.ReactN
 const HeaderButton = ({ children, open }: { children: React.ReactNode; open?: boolean }) => (
     <span
         className={cn(
-            'flex items-center gap-1 rounded-md border border-black/10 dark:border-white/15 px-1.5 py-0.5 text-[11px] @3xl:text-[13.5px]',
+            SCENE_TEXT[11],
+            'flex items-center gap-1 rounded-md border border-black/10 dark:border-white/15 px-1.5 py-0.5',
             open && 'bg-black/5 dark:bg-white/10'
         )}
     >
         {children}
     </span>
 )
-
-export type TrendsChart = 'Line' | 'Bar'
 
 const TREND_DAYS = ['Oct 7', 'Oct 10', 'Oct 13', 'Oct 16', 'Oct 20']
 const TREND_SERIES = [
@@ -60,8 +60,9 @@ const TREND_SERIES = [
 ]
 const TREND_MAX = 34
 const TREND_TOOLTIP_INDEX = 12
-const CHART_OPTIONS: TrendsChart[] = ['Line', 'Bar']
 const CHART_MENU = ['Line', 'Area', 'Bar', 'Stacked bar']
+const PICKED_CHART = 'Bar'
+const PICKER_TO_PICKED = { x: 26, y: -66 }
 
 const trendX = (index: number): number => (index / (TREND_SERIES[0].values.length - 1)) * 100
 const trendY = (value: number): number => 100 - (value / TREND_MAX) * 100
@@ -129,7 +130,10 @@ const TrendTooltip = () => (
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9 }}
-        className="pointer-events-none absolute top-1 z-10 -translate-x-full rounded-md border border-black/10 bg-white px-2 py-1 text-[10px] @3xl:text-[12.5px] leading-tight text-[#101828] shadow-md"
+        className={cn(
+            SCENE_TEXT[10],
+            'pointer-events-none absolute top-1 z-10 -translate-x-full rounded-md border border-black/10 bg-white px-2 py-1 leading-tight text-[#101828] shadow-md'
+        )}
         style={{ left: `calc(${trendX(TREND_TOOLTIP_INDEX)}% - 6px)` }}
     >
         <p className="m-0 mb-0.5 font-semibold">Oct 19</p>
@@ -143,42 +147,36 @@ const TrendTooltip = () => (
     </motion.div>
 )
 
-export const TrendsApp = ({
-    chart,
-    menuOpen,
-    hovered,
-    wrapPicker,
-    wrapOption,
-}: {
-    chart: TrendsChart
-    menuOpen: boolean
-    hovered: string | null
-    wrapPicker: (picker: React.ReactNode) => React.ReactNode
-    wrapOption: (option: string, item: React.ReactNode) => React.ReactNode
-}) => (
-    <>
-        <AppHeader title="Trends">
-            <span className="relative">
-                {wrapPicker(
-                    <HeaderButton open={menuOpen}>
-                        {chart} <IconChevronDown className="size-3 @3xl:size-[15px]" />
-                    </HeaderButton>
-                )}
-                <AnimatePresence>
-                    {menuOpen && (
-                        <motion.span
-                            key="menu"
-                            initial={{ opacity: 0, transform: transform({ y: -4 }) }}
-                            animate={{ opacity: 1, transform: transform() }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute right-0 top-full z-20 mt-1 flex w-28 @3xl:w-32 flex-col rounded-md border border-black/10 bg-white p-1 text-[11px] @3xl:text-[13.5px] text-[#101828] shadow-lg"
-                        >
-                            {CHART_MENU.map((option) => (
-                                <React.Fragment key={option}>
-                                    {wrapOption(
-                                        option,
+export const TrendsApp = ({ elapsed }: { elapsed: number }) => {
+    const chart = elapsed >= CLAUDE_BAR_AT ? PICKED_CHART : 'Line'
+    const menuOpen = elapsed >= CLAUDE_PICKER_PRESS_AT && elapsed < CLAUDE_BAR_AT
+    const hovered = elapsed >= CLAUDE_BAR_HOVER_AT ? PICKED_CHART : null
+    return (
+        <>
+            <AppHeader title="Trends">
+                <span className="relative">
+                    <PressCursor elapsed={elapsed} pressAt={CLAUDE_PICKER_PRESS_AT}>
+                        <HeaderButton open={menuOpen}>
+                            {chart} <IconChevronDown className={SCENE_SIZE[12]} />
+                        </HeaderButton>
+                    </PressCursor>
+                    <AnimatePresence>
+                        {menuOpen && (
+                            <motion.span
+                                key="menu"
+                                initial={{ opacity: 0, transform: transform({ y: -4 }) }}
+                                animate={{ opacity: 1, transform: transform() }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.15 }}
+                                className={cn(
+                                    SCENE_TEXT[11],
+                                    'absolute right-0 top-full z-20 mt-1 flex w-28 @3xl:w-32 flex-col rounded-md border border-black/10 bg-white p-1 text-[#101828] shadow-lg'
+                                )}
+                            >
+                                {CHART_MENU.map((option) => {
+                                    const item = (
                                         <span
+                                            key={option}
                                             className={cn(
                                                 'block rounded px-1.5 py-0.5 transition-colors',
                                                 option === hovered && 'bg-[#1d4aff]/10'
@@ -186,43 +184,55 @@ export const TrendsApp = ({
                                         >
                                             {option}
                                         </span>
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </motion.span>
-                    )}
-                </AnimatePresence>
-            </span>
-            <HeaderButton>
-                <IconGear className="size-3 @3xl:size-[15px]" /> Options
-            </HeaderButton>
-        </AppHeader>
-        <div className="mb-1.5 flex gap-3 text-[10.5px] @3xl:text-[13px] opacity-80">
-            {TREND_SERIES.map(({ label }, series) => (
-                <span key={label} className="flex items-center gap-1">
-                    <span className="size-2 rounded-full" style={{ backgroundColor: CHART_PALETTE[series] }} />
-                    {label}
+                                    )
+                                    return option === PICKED_CHART ? (
+                                        <PressCursor
+                                            key={option}
+                                            elapsed={elapsed}
+                                            pressAt={CLAUDE_BAR_PRESS_AT}
+                                            from={PICKER_TO_PICKED}
+                                        >
+                                            {item}
+                                        </PressCursor>
+                                    ) : (
+                                        item
+                                    )
+                                })}
+                            </motion.span>
+                        )}
+                    </AnimatePresence>
                 </span>
-            ))}
-        </div>
-        <div className="relative h-[110px] @3xl:h-[150px] border-b border-l border-black/10 dark:border-white/15">
-            {[25, 50, 75].map((line) => (
-                <span
-                    key={line}
-                    className="absolute inset-x-0 border-t border-black/5 dark:border-white/10"
-                    style={{ top: `${line}%` }}
-                />
-            ))}
-            {chart === CHART_OPTIONS[0] ? <TrendLines key="line" /> : <TrendBars key="bar" />}
-            {chart === 'Line' && <TrendTooltip />}
-        </div>
-        <div className="mt-1 flex justify-between text-[10px] @3xl:text-[12.5px] opacity-60">
-            {TREND_DAYS.map((day) => (
-                <span key={day}>{day}</span>
-            ))}
-        </div>
-    </>
-)
+                <HeaderButton>
+                    <IconGear className={SCENE_SIZE[12]} /> Options
+                </HeaderButton>
+            </AppHeader>
+            <div className={cn(SCENE_TEXT[10.5], 'mb-1.5 flex gap-3 opacity-80')}>
+                {TREND_SERIES.map(({ label }, series) => (
+                    <span key={label} className="flex items-center gap-1">
+                        <span className="size-2 rounded-full" style={{ backgroundColor: CHART_PALETTE[series] }} />
+                        {label}
+                    </span>
+                ))}
+            </div>
+            <div className="relative h-[110px] @3xl:h-[150px] border-b border-l border-black/10 dark:border-white/15">
+                {[25, 50, 75].map((line) => (
+                    <span
+                        key={line}
+                        className="absolute inset-x-0 border-t border-black/5 dark:border-white/10"
+                        style={{ top: `${line}%` }}
+                    />
+                ))}
+                {chart === 'Line' ? <TrendLines key="line" /> : <TrendBars key="bar" />}
+                {chart === 'Line' && <TrendTooltip />}
+            </div>
+            <div className={cn(SCENE_TEXT[10], 'mt-1 flex justify-between opacity-60')}>
+                {TREND_DAYS.map((day) => (
+                    <span key={day}>{day}</span>
+                ))}
+            </div>
+        </>
+    )
+}
 
 const FUNNEL_STEPS = [
     { label: 'Viewed pricing', count: 640 },
@@ -234,7 +244,7 @@ const FUNNEL_TOOLTIP_STEP = 3
 
 const percentOf = (count: number, total: number): string => `${((count / total) * 100).toFixed(1)}%`
 
-export const FunnelApp = () => {
+export const FunnelApp = React.memo(function FunnelApp() {
     const first = FUNNEL_STEPS[0].count
     const last = FUNNEL_STEPS[FUNNEL_STEPS.length - 1].count
     return (
@@ -256,7 +266,10 @@ export const FunnelApp = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.8 }}
-                                className="absolute bottom-1/3 right-full z-10 mr-1.5 whitespace-nowrap rounded-md border border-black/10 bg-white px-2 py-1 text-[10px] @3xl:text-[12.5px] leading-tight text-[#101828] shadow-md"
+                                className={cn(
+                                    SCENE_TEXT[10],
+                                    'absolute bottom-1/3 right-full z-10 mr-1.5 whitespace-nowrap rounded-md border border-black/10 bg-white px-2 py-1 leading-tight text-[#101828] shadow-md'
+                                )}
                             >
                                 <span className="block font-semibold">{label}</span>
                                 <span className="block">
@@ -267,7 +280,7 @@ export const FunnelApp = () => {
                     </div>
                 ))}
             </div>
-            <div className="mt-1.5 flex gap-2 text-[10px] @3xl:text-[12.5px] leading-tight">
+            <div className={cn(SCENE_TEXT[10], 'mt-1.5 flex gap-2 leading-tight')}>
                 {FUNNEL_STEPS.map(({ label, count }) => (
                     <span key={label} className="min-w-0 flex-1">
                         <span className="block truncate opacity-70">{label}</span>
@@ -277,7 +290,7 @@ export const FunnelApp = () => {
                     </span>
                 ))}
             </div>
-            <p className="m-0 mt-2 text-[11px] @3xl:text-[13.5px]">
+            <p className={cn(SCENE_TEXT[11], 'm-0 mt-2')}>
                 <span className="opacity-70">Overall conversion</span>{' '}
                 <span className="font-semibold">{percentOf(last, first)}</span>{' '}
                 <span className="opacity-60">
@@ -286,7 +299,7 @@ export const FunnelApp = () => {
             </p>
         </>
     )
-}
+})
 
 const STACK_SOURCE = [
     { line: 141, code: '' },
@@ -294,50 +307,65 @@ const STACK_SOURCE = [
     { line: 143, code: '' },
 ]
 
-export const ErrorStackApp = () => (
-    <>
-        <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs @3xl:text-[15px]">
-            <span className="rounded bg-[#f14f58] px-1.5 py-px text-[10.5px] @3xl:text-[13px] font-semibold text-white">
-                TypeError
-            </span>
-            <span className="font-code">Cannot read properties of undefined (reading 'plan')</span>
-        </div>
-        <dl className="m-0 mb-2 grid grid-cols-[auto_1fr] gap-x-3 text-[10.5px] @3xl:text-[13px]">
-            {[
-                ['Person', 'jo@acme.com'],
-                ['Browser', 'Chrome 141 · macOS'],
-                ['URL', 'acme.com/checkout'],
-            ].map(([term, value]) => (
-                <React.Fragment key={term}>
-                    <dt className="opacity-60">{term}</dt>
-                    <dd className="m-0 truncate">{value}</dd>
-                </React.Fragment>
-            ))}
-        </dl>
-        <div className="overflow-hidden rounded-md border border-black/10 dark:border-white/15 text-[10.5px] @3xl:text-[13px]">
-            <p className="m-0 flex items-center gap-1 border-b border-black/10 dark:border-white/15 px-2 py-1">
-                <IconChevronDown className="size-3 @3xl:size-[15px]" />
-                <span className="font-semibold">Checkout</span>
-                <span className="truncate font-code opacity-70">src/checkout.tsx:142:23</span>
-            </p>
-            <div className="py-1 font-code">
-                {STACK_SOURCE.map(({ line, code, error }) => (
-                    <p
-                        key={line}
-                        className={cn('m-0 flex whitespace-pre', error && 'bg-[#f14f58]/15 font-medium text-[#d42f3a]')}
-                    >
-                        <span className="w-9 shrink-0 pr-2 text-right opacity-50">{line}</span>
-                        {code || ' '}
-                    </p>
-                ))}
-            </div>
-            <p className="m-0 flex items-center gap-1 border-t border-black/10 dark:border-white/15 px-2 py-1 opacity-60">
-                <IconChevronRight className="size-3 @3xl:size-[15px]" />
-                <span className="font-code">renderWithHooks</span>
-                <span className="ml-auto rounded border border-black/15 dark:border-white/20 px-1 text-[9px] @3xl:text-[11px]">
-                    vendor
+export const ErrorStackApp = React.memo(function ErrorStackApp() {
+    return (
+        <>
+            <div className={cn(SCENE_TEXT[12], 'mb-2 flex flex-wrap items-center gap-1.5')}>
+                <span className={cn(SCENE_TEXT[10.5], 'rounded bg-[#f14f58] px-1.5 py-px font-semibold text-white')}>
+                    TypeError
                 </span>
-            </p>
-        </div>
-    </>
-)
+                <span className="font-code">Cannot read properties of undefined (reading 'plan')</span>
+            </div>
+            <dl className={cn(SCENE_TEXT[10.5], 'm-0 mb-2 grid grid-cols-[auto_1fr] gap-x-3')}>
+                {[
+                    ['Person', 'jo@acme.com'],
+                    ['Browser', 'Chrome 141 · macOS'],
+                    ['URL', 'acme.com/checkout'],
+                ].map(([term, value]) => (
+                    <React.Fragment key={term}>
+                        <dt className="opacity-60">{term}</dt>
+                        <dd className="m-0 truncate">{value}</dd>
+                    </React.Fragment>
+                ))}
+            </dl>
+            <div
+                className={cn(
+                    SCENE_TEXT[10.5],
+                    'overflow-hidden rounded-md border border-black/10 dark:border-white/15'
+                )}
+            >
+                <p className="m-0 flex items-center gap-1 border-b border-black/10 dark:border-white/15 px-2 py-1">
+                    <IconChevronDown className={SCENE_SIZE[12]} />
+                    <span className="font-semibold">Checkout</span>
+                    <span className="truncate font-code opacity-70">src/checkout.tsx:142:23</span>
+                </p>
+                <div className="py-1 font-code">
+                    {STACK_SOURCE.map(({ line, code, error }) => (
+                        <p
+                            key={line}
+                            className={cn(
+                                'm-0 flex whitespace-pre',
+                                error && 'bg-[#f14f58]/15 font-medium text-[#d42f3a]'
+                            )}
+                        >
+                            <span className="w-9 shrink-0 pr-2 text-right opacity-50">{line}</span>
+                            {code || ' '}
+                        </p>
+                    ))}
+                </div>
+                <p className="m-0 flex items-center gap-1 border-t border-black/10 dark:border-white/15 px-2 py-1 opacity-60">
+                    <IconChevronRight className={SCENE_SIZE[12]} />
+                    <span className="font-code">renderWithHooks</span>
+                    <span
+                        className={cn(
+                            SCENE_TEXT[9],
+                            'ml-auto rounded border border-black/15 dark:border-white/20 px-1'
+                        )}
+                    >
+                        vendor
+                    </span>
+                </p>
+            </div>
+        </>
+    )
+})

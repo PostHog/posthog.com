@@ -1,34 +1,22 @@
 import React from 'react'
 import { IconGraph, IconRewindPlay, IconWarning } from '@posthog/icons'
 import { cn } from '../../../../utils'
+import { LOGOS } from '../../../../constants/logos'
 
-export const IOS_SPRING = { type: 'spring', stiffness: 380, damping: 32, mass: 0.9 } as const
-
-export type ProductKey = 'analytics' | 'replay' | 'errors'
-export type ExternalKey = 'stripe' | 'zendesk' | 'hubspot'
+type ProductKey = 'analytics' | 'replay' | 'errors'
+type ExternalKey = 'stripe' | 'zendesk' | 'hubspot'
 export type SourceKey = ProductKey | ExternalKey
 
-const CLOUDINARY = 'https://res.cloudinary.com/dmukukwp6/image/upload'
-
-const PRODUCTS: Record<
-    ProductKey,
-    { Icon: React.ComponentType<{ className?: string }>; className: string; color: string }
-> = {
-    analytics: { Icon: IconGraph, className: 'text-blue', color: '#2F80FA' },
-    replay: { Icon: IconRewindPlay, className: 'text-yellow', color: '#F7A501' },
-    errors: { Icon: IconWarning, className: 'text-orange', color: '#EB9D2A' },
+const PRODUCTS: Record<ProductKey, { Icon: React.ComponentType<{ className?: string }>; className: string }> = {
+    analytics: { Icon: IconGraph, className: 'text-blue' },
+    replay: { Icon: IconRewindPlay, className: 'text-yellow' },
+    errors: { Icon: IconWarning, className: 'text-orange' },
 }
 
-export const EXTERNAL_SOURCES: { key: ExternalKey; label: string; logo: string; color: string; wide?: boolean }[] = [
-    {
-        key: 'stripe',
-        label: 'Stripe',
-        logo: `${CLOUDINARY}/Stripe_Logo_revised_2016_24183d3284.svg`,
-        color: '#635BFF',
-        wide: true,
-    },
-    { key: 'zendesk', label: 'Zendesk', logo: `${CLOUDINARY}/zendesk_icon_f56707bc5c.svg`, color: '#1F7A6E' },
-    { key: 'hubspot', label: 'HubSpot', logo: `${CLOUDINARY}/hubspot_1_f8248c008e.svg`, color: '#FF7A59' },
+export const EXTERNAL_SOURCES: { key: ExternalKey; logo: string; wide?: boolean }[] = [
+    { key: 'stripe', logo: LOGOS.stripe, wide: true },
+    { key: 'zendesk', logo: LOGOS.zendesk },
+    { key: 'hubspot', logo: LOGOS.hubspot },
 ]
 
 export const ProductIcon = ({ source, className = 'size-4' }: { source: ProductKey; className?: string }) => {

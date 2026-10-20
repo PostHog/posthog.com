@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, Variants } from 'framer-motion'
 import { cn } from '../../../../utils'
 import Link from 'components/Link'
-import { IOS_SPRING } from '../Ingest/session'
-import { transform, useEventClock, useLoopingAnimation } from '../timeline'
-import AgentWindow, { AGENT_THEMES, AgentTheme, WINDOW_DRAG, traceFor } from './AgentWindow'
-import { STEP_GRID, STEP_TEXT } from '../stepLayout'
+import { IOS_SPRING, transform, useEventClock } from '../timeline'
+import AgentWindow, { AGENT_THEMES, AgentTheme, Caret, WINDOW_DRAG, WINDOW_HEIGHT, traceFor } from './AgentWindow'
+import { buildWizardCommand } from '../../../PlatformInstall/buildCommand'
+import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
 const MCP_BANNER = [
     ' ___        _   _  _             __  __  ___ ___ ',
@@ -38,7 +38,7 @@ const HEDGEHOG_QUILLS = [
 ]
 const PINNED_IN_PLACE = { top: 0, right: 0, bottom: 0, left: 0 }
 const MINIMIZED_SCALE = 0.06
-const MCP_GLIMPSE_MS = 1100
+const MCP_GLIMPSE_MS = 450
 const MCP_DOCS_URL = '/docs/model-context-protocol'
 
 type Transition = 'switch' | 'close' | 'minimize'
@@ -54,16 +54,6 @@ const WINDOW_VARIANTS: Variants = {
             ? { opacity: 0, transform: transform({ x: dock.x, y: dock.y, scale: MINIMIZED_SCALE }) }
             : { opacity: 0, transform: transform({ y: transition === 'close' ? 10 : 6, scale: 0.97 }) },
     shown: { opacity: 1, transform: transform() },
-}
-
-function useLoopCount(elapsed: number): number {
-    const [loops, setLoops] = useState(0)
-    const previous = useRef(elapsed)
-    useEffect(() => {
-        if (elapsed < previous.current) setLoops((count) => count + 1)
-        previous.current = elapsed
-    }, [elapsed])
-    return loops
 }
 
 const AppWindow = ({
@@ -82,10 +72,11 @@ const AppWindow = ({
     const ref = useRef<HTMLDivElement>(null)
     const { loopMs, boundaries, restingMs } = traceFor(app)
     const elapsed = useEventClock(ref, { loopMs, boundaries, restingMs })
-    const loops = useLoopCount(elapsed)
+    const previousElapsed = useRef(elapsed)
     useEffect(() => {
-        if (loops > 0) onLoop()
-    }, [loops])
+        if (elapsed < previousElapsed.current) onLoop()
+        previousElapsed.current = elapsed
+    }, [elapsed])
     return (
         <motion.div
             ref={ref}
@@ -102,17 +93,12 @@ const AppWindow = ({
 const FRAME_TITLE = ' ~/your-tool — zsh '
 const FRAME_STATUS = ' posthog mcp · ready '
 const LABEL_INSET = 2
-const MCP_COMMAND = 'npx @posthog/wizard mcp add'
-const MCP_COPY_COMMAND = 'npx -y @posthog/wizard@latest mcp add'
+const { displayCommand: MCP_COMMAND, copyCommand: MCP_COPY_COMMAND } = buildWizardCommand({ subcommand: 'mcp add' })
 const COPIED_MS = 1500
-const CURSOR_BLINK: Keyframe[] = [{ opacity: 1 }, { opacity: 0 }]
-const CURSOR_BLINK_MS = 1060
 
-const borderWith = (inner: number, label: string, alignEnd: boolean): string => {
-    if (label.length + LABEL_INSET * 2 > inner) return '─'.repeat(inner)
-    const rest = '─'.repeat(inner - label.length - LABEL_INSET)
-    const inset = '─'.repeat(LABEL_INSET)
-    return alignEnd ? `${rest}${label}${inset}` : `${inset}${label}${rest}`
+const statusBorder = (inner: number): string => {
+    if (FRAME_STATUS.length + LABEL_INSET * 2 > inner) return '─'.repeat(inner)
+    return `${'─'.repeat(inner - FRAME_STATUS.length - LABEL_INSET)}${FRAME_STATUS}${'─'.repeat(LABEL_INSET)}`
 }
 
 const WINDOW_CONTROLS = ' ○ ○ ○'
@@ -181,7 +167,7 @@ const frameAt = (columns: number, rows: number): Frame => {
             `│${titleRow(inner)}│`,
             `├${'─'.repeat(inner)}┤`,
             ...body,
-            `└${borderWith(inner, FRAME_STATUS, true)}┘`,
+            `└${statusBorder(inner)}┘`,
         ],
         hedgehog: placeHedgehog(columns, contentRows),
     }
@@ -203,14 +189,6 @@ const FrameRow = ({ row, index, hedgehog }: { row: string; index: number; hedgeh
     )
 }
 
-const BlinkingCursor = () => {
-    const ref = useLoopingAnimation<HTMLSpanElement>(CURSOR_BLINK, {
-        duration: CURSOR_BLINK_MS,
-        easing: 'steps(2, jump-none)',
-    })
-    return <span ref={ref} className="ml-1 inline-block h-[1.3em] w-[0.62em] bg-current align-[-0.3em] text-primary" />
-}
-
 const CopyCommandLine = () => {
     const [copied, setCopied] = useState(false)
     const copy = () => {
@@ -223,13 +201,21 @@ const CopyCommandLine = () => {
             type="button"
             onClick={copy}
             title="Copy to clipboard"
-            className="group m-0 mt-1 flex w-fit items-center gap-2 text-left font-code text-[11px] @3xl:text-[13.5px] text-secondary"
+            className={cn(
+                SCENE_TEXT[11],
+                'group m-0 mt-1 flex w-fit items-center gap-2 text-left font-code text-secondary'
+            )}
         >
             <span>
                 $ <span className="text-primary group-hover:underline">{MCP_COMMAND}</span>
-                <BlinkingCursor />
+                <Caret className="ml-1 h-[1.3em] w-[0.62em] bg-current align-[-0.3em] text-primary" />
             </span>
-            <span className="text-[10px] @3xl:text-[12.5px] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span
+                className={cn(
+                    SCENE_TEXT[10],
+                    'opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100'
+                )}
+            >
                 {copied ? 'copied ✓' : 'click to copy'}
             </span>
         </button>
@@ -265,7 +251,10 @@ const AsciiFrame = () => {
     return (
         <div
             ref={boxRef}
-            className="pointer-events-none absolute inset-0 flex items-center justify-center font-code text-[12px] @3xl:text-[15px] leading-normal text-black/35 dark:text-white/35"
+            className={cn(
+                SCENE_TEXT[12],
+                'pointer-events-none absolute inset-0 flex items-center justify-center font-code leading-normal text-black/35 dark:text-white/35'
+            )}
             aria-hidden="true"
         >
             <span ref={probeRef} className="invisible absolute">
@@ -287,13 +276,15 @@ const BringYourOwnTool = ({ covered, peeking }: { covered: boolean; peeking: boo
     <div
         aria-hidden={covered}
         className={cn(
-            'relative flex h-[clamp(26rem,62cqw,44rem)] flex-col justify-center overflow-hidden px-8 font-code text-[11px] @3xl:text-[13.5px] leading-[1.35] text-secondary transition-opacity duration-200',
+            SCENE_TEXT[11],
+            'relative flex flex-col justify-center overflow-hidden px-8 font-code leading-[1.35] text-secondary transition-opacity duration-200',
+            WINDOW_HEIGHT,
             covered && 'pointer-events-none',
             covered && !peeking && 'opacity-0'
         )}
     >
         <AsciiFrame />
-        <pre className="m-0 !bg-transparent !p-0 text-[11px] @3xl:text-[13.5px] font-bold leading-[1.25] text-primary @md:text-[12px]">
+        <pre className="m-0 !bg-transparent !p-0 text-[length:min(13.5px,calc((100cqi_-_4rem)/30))] font-bold leading-[1.25] text-primary">
             {MCP_BANNER.join('\n')}
         </pre>
         <p className="m-0 mt-5 text-primary">$ Or bring your own tool and use our MCP</p>
@@ -325,10 +316,21 @@ const Dock = ({
                 onClick={() => onOpen(key)}
                 className="group relative flex flex-col items-center"
             >
-                <span className="pointer-events-none absolute bottom-full mb-2 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 text-[11px] @3xl:text-[13.5px] font-semibold text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span
+                    className={cn(
+                        SCENE_TEXT[11],
+                        'pointer-events-none absolute bottom-full mb-2 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 font-semibold text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100'
+                    )}
+                >
                     {label}
                 </span>
-                <span className="block size-10 @3xl:size-12 text-[16px] @3xl:text-[20px] transition-transform duration-200 ease-out group-hover:-translate-y-1.5 group-hover:scale-110 group-focus-visible:-translate-y-1.5 group-focus-visible:scale-110">
+                <span
+                    className={cn(
+                        SCENE_TEXT[16],
+                        SCENE_SIZE[40],
+                        'block transition-transform duration-200 ease-out group-hover:-translate-y-1.5 group-hover:scale-110 group-focus-visible:-translate-y-1.5 group-focus-visible:scale-110'
+                    )}
+                >
                     <Icon />
                 </span>
                 <span
@@ -393,19 +395,16 @@ const Desktop = () => {
 
     const desktopRef = useRef<HTMLDivElement>(null)
     const inView = useInView(desktopRef, { once: true, amount: 0.5 })
-    const autoplayRef = useRef(autoplay)
-    autoplayRef.current = autoplay
 
     useEffect(() => {
         if (!inView || !autoplay) return
         const first = AGENT_THEMES[0].key
         const timer = window.setTimeout(() => {
-            if (!autoplayRef.current) return
             setContext({ transition: 'minimize', dock: offsetToDock(first) })
             setOpen((current) => current ?? first)
         }, MCP_GLIMPSE_MS)
         return () => window.clearTimeout(timer)
-    }, [inView])
+    }, [inView, autoplay])
 
     useEffect(() => setDragging(false), [open, minimized])
 
@@ -413,7 +412,7 @@ const Desktop = () => {
 
     return (
         <div ref={desktopRef} className="not-prose @container">
-            <div ref={windowRef} className="grid">
+            <div ref={windowRef} className="grid grid-cols-[minmax(0,1fr)]">
                 <div className="[grid-area:1/1]">
                     <BringYourOwnTool covered={showing} peeking={dragging} />
                 </div>
@@ -452,28 +451,4 @@ const Desktop = () => {
     )
 }
 
-export default function QueryStep({
-    index,
-    title,
-    description,
-}: {
-    index: number
-    title: string
-    description: React.ReactNode
-}): JSX.Element {
-    return (
-        <div className="@container mt-16">
-            <div className={STEP_GRID}>
-                <div className={STEP_TEXT}>
-                    <h3 className="!mt-0">
-                        {index + 1}. {title}
-                    </h3>
-                    <p>{description}</p>
-                </div>
-                <div className="w-full">
-                    <Desktop />
-                </div>
-            </div>
-        </div>
-    )
-}
+export default Desktop

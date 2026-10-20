@@ -3,24 +3,20 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Emphasis from './Emphasis'
 import FeedbackPopup from './FeedbackPopup'
 import FormPointer from './FormPointer'
-import IngestStep from './Ingest/IngestStep'
-import QueryStep from './Query/QueryStep'
-import ActStep from './Act/ActStep'
-import SelfDriveStep from './SelfDrive/SelfDriveStep'
+import StepFrame from './StepFrame'
+import MarbleRun from './Ingest/MarbleRun'
+import QueryScene from './Query/QueryStep'
+import ActScene from './Act/ActStep'
+import SelfDriveScene from './SelfDrive/SelfDriveStep'
 import MergedFeed from './SelfDrive/MergedFeed'
 import Link from 'components/Link'
-import useSourcePlatforms from 'hooks/useSourcePlatforms'
+import { SOURCES_DOCS_URL, useSourceCountLabel } from './sourceCount'
 
-const SOURCE_COUNT_ROUNDING = 100
-
-const SourceCountLink = (): JSX.Element => {
-    const sourceCount = useSourcePlatforms().length
-    return (
-        <Link to="/docs/cdp/sources" state={{ newWindow: true }} className="underline underline-offset-2">
-            {Math.round(sourceCount / SOURCE_COUNT_ROUNDING) * SOURCE_COUNT_ROUNDING}+ other tools
-        </Link>
-    )
-}
+const SourceCountLink = (): JSX.Element => (
+    <Link to={SOURCES_DOCS_URL} state={{ newWindow: true }} className="underline underline-offset-2">
+        {useSourceCountLabel()} other tools
+    </Link>
+)
 
 const STEPS = [
     {
@@ -31,21 +27,25 @@ const STEPS = [
                 CRM, and support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
             </>
         ),
+        Scene: MarbleRun,
     },
     {
         title: 'Query the data with your agent',
         description:
             'Every source attaches to the same person. Ask PostHog AI or your own agent why a customer churned, and it follows the trail from the refund to the error to the replay.',
+        Scene: QueryScene,
     },
     {
         title: 'Give the data to your agent to act on',
         description:
             'Scouts watch your data overnight and file reports in your Inbox. Each report carries the replays, errors, and revenue behind it, so your agent can pick it up and start.',
+        Scene: ActScene,
     },
     {
         title: 'Let PostHog self-drive',
         description:
             'When a report is ready to fix, PostHog writes the pull request on its own. You review and merge. After the change ships, PostHog checks whether it worked, and any new problem starts the loop again in step 1.',
+        Scene: SelfDriveScene,
     },
 ]
 
@@ -77,17 +77,11 @@ export const StepsSection = (): JSX.Element => (
             </Emphasis>{' '}
             with PostHog
         </h2>
-        {STEPS.map(({ title, description }, index) =>
-            index === 0 ? (
-                <IngestStep key={title} title={title} description={description} />
-            ) : index === 1 ? (
-                <QueryStep key={title} index={index} title={title} description={description} />
-            ) : index === 2 ? (
-                <ActStep key={title} index={index} title={title} description={description} />
-            ) : (
-                <SelfDriveStep key={title} index={index} title={title} description={description} />
-            )
-        )}
+        {STEPS.map(({ title, description, Scene }, index) => (
+            <StepFrame key={title} number={index + 1} title={title} description={description}>
+                <Scene />
+            </StepFrame>
+        ))}
         <MergedFeed />
     </section>
 )

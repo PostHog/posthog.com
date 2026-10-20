@@ -3,9 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconPullRequest } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import Emphasis from '../Emphasis'
-import { IOS_SPRING } from '../Ingest/session'
-import { transform } from '../timeline'
-import { parseTitle, repositoryLabel, timeAgo, useSelfDrivingFeed } from './useSelfDrivingFeed'
+import { IOS_SPRING, transform } from '../timeline'
+import { repositoryLabel, titleSummary, timeAgo, useSelfDrivingFeed } from './useSelfDrivingFeed'
 
 const VISIBLE_ROWS = 5
 const SKELETON_TITLE_WIDTHS = ['w-4/5', 'w-3/5', 'w-11/12', 'w-2/3', 'w-3/4']
@@ -87,7 +86,7 @@ export default function MergedFeed(): JSX.Element {
                     <ol className="m-0 list-none divide-y divide-primary p-0 @2xl:col-span-8">
                         <AnimatePresence initial={false}>
                             {pullRequests.slice(0, VISIBLE_ROWS).map((pullRequest, index) => {
-                                const { summary } = parseTitle(pullRequest.title, pullRequest.number)
+                                const summary = titleSummary(pullRequest.title, pullRequest.number)
                                 return (
                                     <motion.li key={pullRequest.url} layout="position" {...ARRIVE} className="m-0">
                                         <a

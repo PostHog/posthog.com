@@ -23,6 +23,7 @@ const TOMBSTONE_SLAM: { initial: TargetAndTransition; animate: TargetAndTransiti
 }
 
 const GROUND_SHAKE_X = [0, -5, 5, -3, 3, 0]
+const TOMBSTONE_AT_REST: TargetAndTransition = { scale: 1, rotate: -3, opacity: 1 }
 const GROUND_SHAKE = { delay: TOMBSTONE_LANDS_AT, duration: 0.3 }
 const EPITAPH_FADE = { delay: TOMBSTONE_LANDS_AT + 0.15, duration: 0.3 }
 
@@ -208,13 +209,13 @@ export default function FeedbackPopup(): JSX.Element {
                 {state === 'dismissed' && (
                     <motion.div
                         initial={shouldReduceMotion ? false : { x: 0 }}
-                        animate={{ x: GROUND_SHAKE_X }}
+                        animate={{ x: shouldReduceMotion ? 0 : GROUND_SHAKE_X }}
                         transition={GROUND_SHAKE}
                         className="[grid-area:1/1] flex flex-col items-center justify-center rounded-md border-2 border-dashed border-primary text-center"
                     >
                         <motion.div
                             initial={shouldReduceMotion ? false : TOMBSTONE_SLAM.initial}
-                            animate={TOMBSTONE_SLAM.animate}
+                            animate={shouldReduceMotion ? TOMBSTONE_AT_REST : TOMBSTONE_SLAM.animate}
                             transition={TOMBSTONE_SLAM.transition}
                             className="relative z-10"
                         >

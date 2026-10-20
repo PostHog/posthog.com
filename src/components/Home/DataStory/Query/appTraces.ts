@@ -1,4 +1,5 @@
 import { pressCursorBoundaries } from '../PressCursor'
+import { ticks } from '../timeline'
 import { defineTrace } from './trace'
 
 export const CLAUDE_TRENDS_AT = 7600
@@ -108,10 +109,7 @@ export const CURSOR_REPLAY_CLICKS = [12700, 13200, 13700, 14200]
 export const CURSOR_REPLAY_ERROR_AT = 14700
 export const CURSOR_DIFF_AT = 18600
 export const CURSOR_REPLAY_TICK_MS = 1000
-const CURSOR_REPLAY_TICKS = Array.from(
-    { length: Math.floor((CURSOR_DIFF_AT - CURSOR_REPLAY_AT) / CURSOR_REPLAY_TICK_MS) },
-    (_, tick) => CURSOR_REPLAY_AT + (tick + 1) * CURSOR_REPLAY_TICK_MS
-)
+const CURSOR_REPLAY_TICKS = ticks(CURSOR_REPLAY_AT, CURSOR_DIFF_AT, CURSOR_REPLAY_TICK_MS)
 
 export const CURSOR_TRACE = defineTrace({
     question: "Why is Pro checkout throwing? Show me Jo's session.",

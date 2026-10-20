@@ -58,18 +58,22 @@ export const PressCursor = ({
                         exit={{ opacity: 0 }}
                         transition={{ type: 'spring', stiffness: 110, damping: 18 }}
                     >
-                        <svg viewBox="0 0 16 20" className="block size-full">
-                            <path
-                                d="M1 1 L1 16 L5 12 L8 19 L11 18 L8 11 L14 11 Z"
-                                fill="black"
-                                stroke="white"
-                                strokeWidth="1.4"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <PointerGlyph />
                     </motion.div>
                 )}
             </AnimatePresence>
         </div>
     )
 }
+
+export const PointerGlyph = () => (
+    <svg viewBox="0 0 16 20" className="block size-full">
+        <path
+            d="M1 1 L1 16 L5 12 L8 19 L11 18 L8 11 L14 11 Z"
+            fill="black"
+            stroke="white"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+        />
+    </svg>
+)

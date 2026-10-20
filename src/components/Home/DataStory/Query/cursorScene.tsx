@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { IconArrowUpRight, IconEye, IconPauseFilled, IconPlay } from '@posthog/icons'
 import { cn } from '../../../../utils'
-import { PressCursor } from '../PressCursor'
+import { PointerGlyph, PressCursor } from '../PressCursor'
 import { transform } from '../timeline'
 import {
     CURSOR_BUG_AT,
@@ -16,6 +16,7 @@ import {
     CURSOR_SESSIONS_AT,
     CURSOR_WATCH_PRESS_AT,
 } from './appTraces'
+import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
 interface CodeLine {
     line: number
@@ -60,7 +61,7 @@ const SessionsLens = ({ elapsed }: { elapsed: number }) => (
         <span className="pl-[8ch]">
             <PressCursor elapsed={elapsed} pressAt={CURSOR_LENS_PRESS_AT}>
                 <span className="flex items-center gap-1 hover:underline">
-                    <IconEye className="size-3 @3xl:size-[15px]" /> 12 sessions · 9 users in 24h
+                    <IconEye className={SCENE_SIZE[12]} /> 12 sessions · 9 users in 24h
                 </span>
             </PressCursor>
         </span>
@@ -83,7 +84,7 @@ const CodeView = ({ elapsed }: { elapsed: number }) => {
     const diffing = elapsed >= CURSOR_DIFF_AT
     const flagged = elapsed >= CURSOR_BUG_AT && !diffing
     return (
-        <div className="flex-1 overflow-hidden py-2 font-code text-[11.5px] @3xl:text-[14px] leading-[1.6]">
+        <div className={cn(SCENE_TEXT[11.5], 'flex-1 overflow-hidden py-2 font-code leading-[1.6]')}>
             {CODE.map(({ line, code, flag, event, bug }) => {
                 const shift = diffing && line > 142 ? 1 : 0
                 if (bug && diffing)
@@ -143,22 +144,20 @@ const WatchButton = ({ primary }: { primary?: boolean }) => (
             primary ? 'bg-[#3B82F6] text-white' : 'border border-[#3A3A3A] text-[#8B8B8B]'
         )}
     >
-        <IconPlay className="size-3 @3xl:size-[15px]" /> Watch replay
+        <IconPlay className={SCENE_SIZE[12]} /> Watch replay
     </span>
 )
 
 const SessionsView = ({ elapsed }: { elapsed: number }) => (
     <motion.div
         {...VIEW_ENTER}
-        className="flex min-h-0 flex-1 flex-col gap-2 overflow-hidden p-3 text-[11.5px] @3xl:text-[14px]"
+        className={cn(SCENE_TEXT[11.5], 'flex min-h-0 flex-1 flex-col gap-2 overflow-hidden p-3')}
     >
         <div className="flex items-center gap-2">
             <span className="font-code font-semibold">pay_clicked</span>
-            <span className="rounded border border-[#3A3A3A] px-1.5 text-[10px] @3xl:text-[12.5px] text-[#8B8B8B]">
-                event
-            </span>
+            <span className={cn(SCENE_TEXT[10], 'rounded border border-[#3A3A3A] px-1.5 text-[#8B8B8B]')}>event</span>
             <span className="ml-auto flex items-center gap-0.5 text-[#8B8B8B]">
-                All recordings <IconArrowUpRight className="size-3 @3xl:size-[15px]" />
+                All recordings <IconArrowUpRight className={SCENE_SIZE[12]} />
             </span>
         </div>
         {SESSIONS.map(({ person, when, path, device }, index) => (
@@ -197,15 +196,7 @@ const ReplayPointer = () => (
         animate={{ transform: transform({ x: 6, y: 4 }) }}
         transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
     >
-        <svg viewBox="0 0 16 20" className="block size-full">
-            <path
-                d="M1 1 L1 16 L5 12 L8 19 L11 18 L8 11 L14 11 Z"
-                fill="black"
-                stroke="white"
-                strokeWidth="1.4"
-                strokeLinejoin="round"
-            />
-        </svg>
+        <PointerGlyph />
     </motion.span>
 )
 
@@ -226,8 +217,13 @@ const PlayerBar = ({ elapsed }: { elapsed: number }) => {
     const startShare = REPLAY_START_SECONDS / REPLAY_LENGTH_SECONDS
     const endShare = (REPLAY_START_SECONDS + (CURSOR_DIFF_AT - CURSOR_REPLAY_AT) / 1000) / REPLAY_LENGTH_SECONDS
     return (
-        <div className="flex shrink-0 items-center gap-2 border-t border-black/10 bg-white px-2.5 py-1.5 text-[10.5px] @3xl:text-[13px] text-[#151515]">
-            <IconPauseFilled className="size-3.5 @3xl:size-[17px]" />
+        <div
+            className={cn(
+                SCENE_TEXT[10.5],
+                'flex shrink-0 items-center gap-2 border-t border-black/10 bg-white px-2.5 py-1.5 text-[#151515]'
+            )}
+        >
+            <IconPauseFilled className={SCENE_SIZE[14]} />
             <span className="tabular-nums">
                 {formatReplayTime(seconds)} / {formatReplayTime(REPLAY_LENGTH_SECONDS)}
             </span>
@@ -256,17 +252,24 @@ const ReplayView = ({ elapsed }: { elapsed: number }) => {
     const raging = clicks.length === CURSOR_REPLAY_CLICKS.length
     return (
         <motion.div {...VIEW_ENTER} className="flex min-h-0 flex-1 flex-col">
-            <div className="flex shrink-0 items-center gap-2 border-b border-[#2B2B2B] px-3 py-1.5 text-[11px] @3xl:text-[13.5px]">
+            <div
+                className={cn(SCENE_TEXT[11], 'flex shrink-0 items-center gap-2 border-b border-[#2B2B2B] px-3 py-1.5')}
+            >
                 <span className="flex shrink-0 items-center gap-1 text-[#8B8B8B]">
-                    <IconPlay className="size-3 @3xl:size-[15px]" /> Session replay
+                    <IconPlay className={SCENE_SIZE[12]} /> Session replay
                 </span>
                 <span className="truncate font-semibold">{REPLAY_PERSON}</span>
                 <span className="ml-auto flex shrink-0 items-center gap-0.5 rounded border border-[#3A3A3A] px-1.5 py-0.5">
-                    Open in PostHog <IconArrowUpRight className="size-3 @3xl:size-[15px]" />
+                    Open in PostHog <IconArrowUpRight className={SCENE_SIZE[12]} />
                 </span>
             </div>
             <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-[#F3F4F0] font-sans text-[#151515]">
-                <div className="flex shrink-0 items-center gap-3 border-b border-black/10 bg-white px-3 py-1.5 text-[11px] @3xl:text-[13.5px]">
+                <div
+                    className={cn(
+                        SCENE_TEXT[11],
+                        'flex shrink-0 items-center gap-3 border-b border-black/10 bg-white px-3 py-1.5'
+                    )}
+                >
                     <span className="font-bold">acme</span>
                     <span className="text-black/50">Product</span>
                     <span className="text-black/50">Pricing</span>
@@ -276,20 +279,26 @@ const ReplayView = ({ elapsed }: { elapsed: number }) => {
                     <motion.p
                         initial={{ opacity: 0, transform: transform({ y: -6 }) }}
                         animate={{ opacity: 1, transform: transform() }}
-                        className="absolute inset-x-6 top-10 z-20 m-0 rounded-md bg-[#F14F58] px-2.5 py-1.5 text-center text-[11px] @3xl:text-[13.5px] font-semibold text-white shadow"
+                        className={cn(
+                            SCENE_TEXT[11],
+                            'absolute inset-x-6 top-10 z-20 m-0 rounded-md bg-[#F14F58] px-2.5 py-1.5 text-center font-semibold text-white shadow'
+                        )}
                     >
                         Something went wrong. Please try again.
                     </motion.p>
                 )}
                 <div className="flex flex-1 items-center justify-center">
                     <div className="w-[72%] rounded-lg border border-black/10 bg-white p-3 text-center shadow-sm">
-                        <p className="m-0 text-[11px] @3xl:text-[13.5px] text-black/60">Upgrade to</p>
-                        <p className="m-0 text-base @3xl:text-[20px] font-bold">Pro</p>
-                        <p className="m-0 mb-2.5 text-[11px] @3xl:text-[13.5px] text-black/60">$49 / month</p>
+                        <p className={cn(SCENE_TEXT[11], 'm-0 text-black/60')}>Upgrade to</p>
+                        <p className={cn(SCENE_TEXT[16], 'm-0 font-bold')}>Pro</p>
+                        <p className={cn(SCENE_TEXT[11], 'm-0 mb-2.5 text-black/60')}>$49 / month</p>
                         <span className="relative block">
                             <motion.span
                                 key={clicks.length}
-                                className="block rounded-md bg-[#1D4AFF] py-1.5 text-xs @3xl:text-[15px] font-semibold text-white"
+                                className={cn(
+                                    SCENE_TEXT[12],
+                                    'block rounded-md bg-[#1D4AFF] py-1.5 font-semibold text-white'
+                                )}
                                 animate={
                                     clicks.length > 0
                                         ? {
@@ -310,7 +319,10 @@ const ReplayView = ({ elapsed }: { elapsed: number }) => {
                                 <motion.span
                                     initial={{ opacity: 0, transform: transform({ scale: 0.8 }) }}
                                     animate={{ opacity: 1, transform: transform() }}
-                                    className="absolute left-1/2 top-full ml-5 mt-2 rounded bg-[#F54E00] px-1.5 py-0.5 text-[10px] @3xl:text-[12.5px] font-semibold text-white"
+                                    className={cn(
+                                        SCENE_TEXT[10],
+                                        'absolute left-1/2 top-full ml-5 mt-2 rounded bg-[#F54E00] px-1.5 py-0.5 font-semibold text-white'
+                                    )}
                                 >
                                     Rage click
                                 </motion.span>
@@ -327,7 +339,8 @@ const ReplayView = ({ elapsed }: { elapsed: number }) => {
 const EditorTab = ({ active, children }: { active: boolean; children: React.ReactNode }) => (
     <span
         className={cn(
-            'w-fit min-w-0 shrink truncate border-b px-3 py-1 font-code text-[11px] @3xl:text-[13.5px]',
+            SCENE_TEXT[11],
+            'w-fit min-w-0 shrink truncate border-b px-3 py-1 font-code',
             active ? 'border-[#3B82F6] bg-[#181818]' : 'border-transparent text-[#8B8B8B]'
         )}
     >
@@ -367,7 +380,7 @@ export const CursorReadLine = ({ elapsed }: { elapsed: number }) =>
         <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="m-0 mb-1 flex items-center gap-1.5 text-[11.5px] @3xl:text-[14px] text-[#8B8B8B]"
+            className={cn(SCENE_TEXT[11.5], 'm-0 mb-1 flex items-center gap-1.5 text-[#8B8B8B]')}
         >
             <span>Read</span>
             <span className="truncate font-code text-[#D6D6DD]">checkout.tsx L138–150</span>
@@ -379,7 +392,10 @@ export const CursorDiffChip = ({ elapsed }: { elapsed: number }) =>
         <motion.div
             initial={{ opacity: 0, transform: transform({ y: 4 }) }}
             animate={{ opacity: 1, transform: transform() }}
-            className="mb-2 flex items-center gap-2 rounded-md border border-[#3A3A3A] bg-[#222222] px-2.5 py-1.5 text-[11.5px] @3xl:text-[14px]"
+            className={cn(
+                SCENE_TEXT[11.5],
+                'mb-2 flex items-center gap-2 rounded-md border border-[#3A3A3A] bg-[#222222] px-2.5 py-1.5'
+            )}
         >
             <span className="font-code">checkout.tsx</span>
             <span className="text-[#89D185]">+2</span>

@@ -3,24 +3,26 @@ import { useInView, useReducedMotion } from 'framer-motion'
 
 const timelineNow = (): number => Number(document.timeline.currentTime ?? performance.now())
 
-export interface LoopAnimation {
-    ref: RefObject<HTMLElement>
-    keyframes: Keyframe[]
-}
-
 const lastStopAtOrBefore = (stops: number[], position: number): number =>
     stops.reduce((latest, stop) => (stop <= position ? stop : latest), 0)
 
+const usePageVisible = (): boolean => {
+    const [visible, setVisible] = useState(true)
+    useEffect(() => {
+        const update = () => setVisible(document.visibilityState === 'visible')
+        update()
+        document.addEventListener('visibilitychange', update)
+        return () => document.removeEventListener('visibilitychange', update)
+    }, [])
+    return visible
+}
+
 export function useEventClock(
     ref: RefObject<HTMLElement>,
-    {
-        loopMs,
-        boundaries,
-        restingMs,
-        loopAnimations = [],
-    }: { loopMs: number; boundaries: number[]; restingMs: number; loopAnimations?: LoopAnimation[] }
+    { loopMs, boundaries, restingMs }: { loopMs: number; boundaries: number[]; restingMs: number }
 ): number {
     const inView = useInView(ref, { amount: 0.35 })
+    const pageVisible = usePageVisible()
     const shouldReduceMotion = useReducedMotion()
     const [elapsed, setElapsed] = useState(0)
     const position = useRef(0)
@@ -31,32 +33,12 @@ export function useEventClock(
             ),
         [boundaries, loopMs]
     )
-    const playing = inView && !shouldReduceMotion
-
-    useEffect(() => {
-        if (!shouldReduceMotion) return
-        const animations = loopAnimations.map(({ ref: element, keyframes }) => {
-            const animation = element.current?.animate(keyframes, { duration: loopMs, fill: 'both' })
-            if (animation) {
-                animation.currentTime = restingMs
-                animation.pause()
-            }
-            return animation
-        })
-        return () => animations.forEach((animation) => animation?.cancel())
-    }, [shouldReduceMotion, loopAnimations, restingMs, loopMs])
+    const playing = inView && pageVisible && !shouldReduceMotion
 
     useEffect(() => {
         if (!playing) return
         const startedAt = timelineNow() - position.current
         const loopPosition = () => (timelineNow() - startedAt) % loopMs
-        const animations = loopAnimations.map(({ ref: element, keyframes }) =>
-            element.current?.animate(keyframes, {
-                duration: loopMs,
-                iterations: Infinity,
-                iterationStart: position.current / loopMs,
-            })
-        )
         let timer: number
 
         const scheduleNextStop = () => {
@@ -71,10 +53,9 @@ export function useEventClock(
         scheduleNextStop()
         return () => {
             window.clearTimeout(timer)
-            animations.forEach((animation) => animation?.pause())
             position.current = loopPosition()
         }
-    }, [playing, stops, loopMs, loopAnimations])
+    }, [playing, stops, loopMs])
 
     return shouldReduceMotion ? restingMs : elapsed
 }
@@ -84,10 +65,14 @@ export function useLoopingAnimation<T extends HTMLElement>(
     { duration, easing }: { duration: number; easing: string }
 ): RefObject<T> {
     const ref = useRef<T>(null)
+    const inView = useInView(ref)
+    const shouldReduceMotion = useReducedMotion()
+    const playing = inView && !shouldReduceMotion
     useEffect(() => {
+        if (!playing) return
         const animation = ref.current?.animate(keyframes, { duration, easing, iterations: Infinity })
         return () => animation?.cancel()
-    }, [keyframes, duration, easing])
+    }, [keyframes, duration, easing, playing])
     return ref
 }
 
@@ -150,14 +135,15 @@ export function useStickToBottom<T extends HTMLElement, C extends HTMLElement>()
     return { scrollRef, contentRef }
 }
 
-type Length = number | string
+export const IOS_SPRING = { type: 'spring', stiffness: 380, damping: 32, mass: 0.9 } as const
 
-const toLength = (value: Length): string => (typeof value === 'number' ? `${value}px` : value)
+export const ticks = (from: number, to: number, stepMs: number): number[] =>
+    Array.from({ length: Math.floor((to - from) / stepMs) }, (_, tick) => from + (tick + 1) * stepMs)
 
 export const transform = ({
     x = 0,
     y = 0,
     scale = 1,
     rotate = 0,
-}: { x?: Length; y?: Length; scale?: number; rotate?: number } = {}): string =>
-    `translate(${toLength(x)}, ${toLength(y)}) scale(${scale}) rotate(${rotate}deg)`
+}: { x?: number; y?: number; scale?: number; rotate?: number } = {}): string =>
+    `translate(${x}px, ${y}px) scale(${scale}) rotate(${rotate}deg)`

@@ -2,9 +2,9 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { IconCheck, IconPerson, IconPullRequest, IconSpinner } from '@posthog/icons'
 import { cn } from '../../../../utils'
-import { IOS_SPRING } from '../Ingest/session'
-import { transform } from '../timeline'
+import { IOS_SPRING, transform } from '../timeline'
 import { PressCursor, pressCursorBoundaries } from '../PressCursor'
+import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
 export const LOOP_MS = 16000
 export const RESTING_MOMENT = 12500
@@ -13,7 +13,7 @@ export const LOOP_FADE_OUT_AT = LOOP_MS - 700
 export const PR_OPENED_AT = 1400
 export const CHECKS_SHOWN_AT = PR_OPENED_AT + 400
 export const MERGE_BOX_SHOWN_AT = PR_OPENED_AT + 800
-export const MERGE_PRESS_AT = 4900
+const MERGE_PRESS_AT = 4900
 export const MERGED_AT = 5100
 export const MERGE_SETTLED_AT = MERGED_AT + 650
 export const MERGE_BOX_EXIT_MS = 300
@@ -21,13 +21,13 @@ export const MERGED_EVENT_AT = MERGE_SETTLED_AT + MERGE_BOX_EXIT_MS + 50
 export const SOAK_AT = 7000
 const METRIC_REVEAL_AT = 7400
 const METRIC_REVEAL_MS = 2200
-export const CHECK_PASSED_AT = 9800
+const CHECK_PASSED_AT = 9800
 export const RESOLVED_AT = 10600
 
 export const REPORT_NUMBER = 12
-export const PR = { number: 482, title: 'Guard `plan` in checkout', file: 'checkout.tsx', additions: 4, deletions: 1 }
+export const PR = { number: 482, title: 'Guard `plan` in checkout', additions: 4, deletions: 1 }
 
-export const CHECKS = [
+const CHECKS = [
     { name: 'Lint', passesAt: 2300 },
     { name: 'Unit tests', passesAt: 2900 },
     { name: 'Typecheck', passesAt: 3500 },
@@ -35,8 +35,8 @@ export const CHECKS = [
 
 const CONVERSION = [72, 73, 71, 72, 70, 44, 41, 42, 40, 58, 69, 73, 74, 74]
 const MERGE_INDEX = 8
-export const CONVERSION_BEFORE = 41
-export const CONVERSION_AFTER = 74
+const CONVERSION_BEFORE = 41
+const CONVERSION_AFTER = 74
 
 export const ENTER = {
     initial: { opacity: 0, transform: transform({ y: 8 }) },
@@ -45,28 +45,15 @@ export const ENTER = {
     transition: IOS_SPRING,
 }
 
-export const InlineTitle = ({ text }: { text: string }) => (
-    <>
-        {text.split('`').map((segment, index) =>
-            index % 2 === 1 ? (
-                <code key={index} className="!border-0 !bg-transparent !p-0 font-code !text-[0.95em]">
-                    {segment}
-                </code>
-            ) : (
-                <React.Fragment key={index}>{segment}</React.Fragment>
-            )
-        )}
-    </>
-)
-
 export const StatusPill = ({ merged }: { merged: boolean }) => (
     <span
         className={cn(
-            'inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[11px] @3xl:text-[13.5px] font-semibold text-white transition-colors',
+            SCENE_TEXT[11],
+            'inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 font-semibold text-white transition-colors',
             merged ? 'bg-purple' : 'bg-green'
         )}
     >
-        <IconPullRequest className="size-3 @3xl:size-[15px]" />
+        <IconPullRequest className={SCENE_SIZE[12]} />
         {merged ? 'Merged' : 'Open'}
     </span>
 )
@@ -76,11 +63,11 @@ export const CheckList = ({ elapsed }: { elapsed: number }) => (
         {CHECKS.map(({ name, passesAt }) => {
             const passed = elapsed >= passesAt
             return (
-                <li key={name} className="m-0 flex items-center gap-1.5 text-xs @3xl:text-[15px]">
+                <li key={name} className={cn(SCENE_TEXT[12], 'm-0 flex items-center gap-1.5')}>
                     {passed ? (
-                        <IconCheck className="size-3.5 @3xl:size-[17.5px] text-green" />
+                        <IconCheck className={cn(SCENE_SIZE[14], 'text-green')} />
                     ) : (
-                        <IconSpinner className="size-3.5 @3xl:size-[17.5px] animate-spin text-secondary" />
+                        <IconSpinner className={cn(SCENE_SIZE[14], 'animate-spin text-secondary')} />
                     )}
                     <span className={passed ? 'text-primary' : 'text-secondary'}>{name}</span>
                 </li>
@@ -89,14 +76,15 @@ export const CheckList = ({ elapsed }: { elapsed: number }) => (
     </ul>
 )
 
-export const MergeButton = ({ elapsed }: { elapsed: number }) => {
+const MergeButton = ({ elapsed }: { elapsed: number }) => {
     const merged = elapsed >= MERGED_AT
     const ready = CHECKS.every(({ passesAt }) => elapsed >= passesAt)
     return (
         <PressCursor elapsed={elapsed} pressAt={MERGE_PRESS_AT}>
             <span
                 className={cn(
-                    'inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1 text-xs @3xl:text-[15px] font-semibold transition-colors',
+                    SCENE_TEXT[12],
+                    'inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1 font-semibold transition-colors',
                     merged ? 'bg-purple/15 text-purple' : ready ? 'bg-green text-white' : 'bg-accent text-secondary'
                 )}
             >
@@ -125,7 +113,7 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
     const passed = elapsed >= CHECK_PASSED_AT
     return (
         <div className={cn('flex flex-col gap-1.5', className)}>
-            <div className="flex items-center justify-between gap-2 text-xs @3xl:text-[15px]">
+            <div className={cn(SCENE_TEXT[12], 'flex items-center justify-between gap-2')}>
                 <span className="font-semibold">Follow-up check · checkout conversion</span>
                 <span
                     className={cn(
@@ -134,9 +122,9 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
                     )}
                 >
                     {passed ? (
-                        <IconCheck className="size-3.5 @3xl:size-[17.5px]" />
+                        <IconCheck className={SCENE_SIZE[14]} />
                     ) : (
-                        <IconSpinner className="size-3.5 @3xl:size-[17.5px] animate-spin" />
+                        <IconSpinner className={cn(SCENE_SIZE[14], 'animate-spin')} />
                     )}
                     {passed ? `Passed · ${CONVERSION_BEFORE}% → ${CONVERSION_AFTER}%` : 'Watching'}
                 </span>
@@ -173,7 +161,10 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
                     transition={{ duration: revealing ? METRIC_REVEAL_MS / 1000 : 0, ease: 'easeInOut' }}
                 />
                 <span
-                    className="absolute top-1 -translate-x-1/2 rounded bg-purple px-1 text-[9px] @3xl:text-[11px] font-semibold text-white"
+                    className={cn(
+                        SCENE_TEXT[9],
+                        'absolute top-1 -translate-x-1/2 rounded bg-purple px-1 font-semibold text-white'
+                    )}
                     style={{ left: `${MERGE_X_PERCENT}%` }}
                 >
                     Merged
@@ -183,12 +174,13 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
     )
 }
 
-export const ALL_CHECKS_PASS_AT = Math.max(...CHECKS.map(({ passesAt }) => passesAt))
+const ALL_CHECKS_PASS_AT = Math.max(...CHECKS.map(({ passesAt }) => passesAt))
 
 export const PostHogAvatar = ({ className }: { className?: string }) => (
     <span
         className={cn(
-            'flex size-6 @3xl:size-[30px] shrink-0 items-center justify-center rounded-full border border-primary bg-white',
+            SCENE_SIZE[24],
+            'flex shrink-0 items-center justify-center rounded-full border border-primary bg-white',
             className
         )}
     >
@@ -199,7 +191,8 @@ export const PostHogAvatar = ({ className }: { className?: string }) => (
 export const UserAvatar = ({ className }: { className?: string }) => (
     <span
         className={cn(
-            'flex size-6 @3xl:size-[30px] shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-secondary',
+            SCENE_SIZE[24],
+            'flex shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-secondary',
             className
         )}
     >
@@ -218,10 +211,10 @@ export const MergeBox = ({ elapsed }: { elapsed: number }) => {
             )}
         >
             <div className="min-w-0">
-                <p className="m-0 text-xs @3xl:text-[15px] font-semibold">
+                <p className={cn(SCENE_TEXT[12], 'm-0 font-semibold')}>
                     {merged ? 'Pull request merged' : checksPassed ? 'All checks have passed' : 'Checks are running'}
                 </p>
-                <p className="m-0 text-[11px] @3xl:text-[13.5px] text-secondary">
+                <p className={cn(SCENE_TEXT[11], 'm-0 text-secondary')}>
                     {merged ? 'PostHog will measure the impact over the next week' : 'Review required · you'}
                 </p>
             </div>

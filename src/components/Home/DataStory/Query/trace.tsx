@@ -1,9 +1,10 @@
 import React from 'react'
 import { cn } from '../../../../utils'
 import { EXTERNAL_SOURCES, ProductIcon, SourceKey } from '../Ingest/session'
-import { wordStream } from '../timeline'
+import { ticks, wordStream } from '../timeline'
+import { SCENE_SIZE } from '../sceneScale'
 
-export const TOOL_RUN_MS = 1000
+const TOOL_RUN_MS = 1000
 const TYPING_STARTS_AT = 600
 const TYPING_MS_PER_CHAR = 55
 const SUBMIT_PAUSE_MS = 500
@@ -23,7 +24,7 @@ export interface ToolCall {
 
 export const codexArguments = ({ argName, args }: ToolCall): string => `{"${argName}":"${args}"}`
 
-export interface CallState {
+interface CallState {
     call: ToolCall
     done: boolean
 }
@@ -41,9 +42,6 @@ export interface TraceState {
 export interface Trace {
     loopMs: number
     restingMs: number
-    submitAt: number
-    answerAt: number
-    answerDoneAt: number
     boundaries: number[]
     stateAt: (elapsed: number) => TraceState
 }
@@ -56,6 +54,7 @@ export const defineTrace = ({
     loopMs,
     restingMs,
     moments = [],
+    submittedAt,
 }: {
     question: string
     calls: ToolCall[]
@@ -64,29 +63,25 @@ export const defineTrace = ({
     loopMs: number
     restingMs: number
     moments?: number[]
+    submittedAt?: number
 }): Trace => {
-    const submitAt = TYPING_STARTS_AT + question.length * TYPING_MS_PER_CHAR + SUBMIT_PAUSE_MS
+    const typingStops =
+        submittedAt === undefined
+            ? ticks(TYPING_STARTS_AT, TYPING_STARTS_AT + question.length * TYPING_MS_PER_CHAR, TYPING_MS_PER_CHAR)
+            : []
+    const submitAt = submittedAt ?? TYPING_STARTS_AT + question.length * TYPING_MS_PER_CHAR + SUBMIT_PAUSE_MS
     const answerDoneAt = answerAt + answer.length * ANSWER_MS_PER_CHAR
     const answerStream = wordStream(answer, answerAt, ANSWER_MS_PER_CHAR)
     return {
         loopMs,
         restingMs,
-        submitAt,
-        answerAt,
-        answerDoneAt,
         boundaries: [
-            ...Array.from(
-                { length: question.length },
-                (_, index) => TYPING_STARTS_AT + (index + 1) * TYPING_MS_PER_CHAR
-            ),
+            ...typingStops,
             submitAt,
             ...calls.flatMap(({ at }) => [at, at + TOOL_RUN_MS]),
             ...answerStream.stops,
             answerDoneAt,
-            ...Array.from(
-                { length: Math.floor((answerDoneAt - submitAt) / SECOND_MS) },
-                (_, second) => submitAt + (second + 1) * SECOND_MS
-            ),
+            ...ticks(submitAt, answerDoneAt, SECOND_MS),
             ...moments,
         ],
         stateAt: (elapsed) => {
@@ -195,7 +190,7 @@ export const InlineCode = ({ text, codeClassName }: { text: string; codeClassNam
 
 export const SourceIcon = ({
     source,
-    className = 'size-3.5 @3xl:size-[17.5px]',
+    className = `${SCENE_SIZE[14]} shrink-0`,
 }: {
     source: SourceKey
     className?: string

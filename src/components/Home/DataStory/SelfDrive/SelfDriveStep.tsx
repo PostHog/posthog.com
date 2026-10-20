@@ -3,14 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconCheck, IconCheckCircle, IconComment, IconPullRequest } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { useEventClock } from '../timeline'
-import { ScrollToLatest } from '../Query/AgentWindow'
-import { STEP_GRID, STEP_TEXT } from '../stepLayout'
+import { InlineCode } from '../Query/trace'
+import { ScrollToLatest, WINDOW_HEIGHT } from '../Query/AgentWindow'
 import {
     CHECKS_SHOWN_AT,
     CheckChart,
     CheckList,
     ENTER,
-    InlineTitle,
     LOOP_BOUNDARIES,
     LOOP_FADE_OUT_AT,
     LOOP_MS,
@@ -30,6 +29,7 @@ import {
     StatusPill,
     UserAvatar,
 } from './loop'
+import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
 const MERGE_COMMIT = '3f9a1c2'
 
@@ -51,10 +51,7 @@ const DiffStat = () => {
                 {Array.from({ length: DIFFSTAT_BLOCKS }, (_, index) => (
                     <span
                         key={index}
-                        className={cn(
-                            'size-2 @3xl:size-2.5 rounded-[1px]',
-                            index < addedBlocks ? 'bg-green' : 'bg-red'
-                        )}
+                        className={cn(SCENE_SIZE[8], 'rounded-[1px]', index < addedBlocks ? 'bg-green' : 'bg-red')}
                     />
                 ))}
             </span>
@@ -68,11 +65,12 @@ const PrHeader = ({ elapsed }: { elapsed: number }) => {
         <div className="shrink-0 border-b border-primary bg-accent">
             <div className="flex items-start gap-2 px-4 pb-2 pt-3">
                 <div className="min-w-0 flex-1">
-                    <p className="m-0 text-sm @3xl:text-[17.5px] font-bold leading-snug">
-                        <InlineTitle text={PR.title} /> <span className="font-normal text-secondary">#{PR.number}</span>
+                    <p className={cn(SCENE_TEXT[14], 'm-0 font-bold leading-snug')}>
+                        <InlineCode text={PR.title} codeClassName="!text-[0.95em]" />{' '}
+                        <span className="font-normal text-secondary">#{PR.number}</span>
                     </p>
-                    <p className="m-0 mt-0.5 flex flex-wrap items-center gap-1 text-xs @3xl:text-[15px] text-secondary">
-                        <PostHogAvatar className="size-4 @3xl:size-5 [&_img]:w-2.5" />
+                    <p className={cn(SCENE_TEXT[12], 'm-0 mt-0.5 flex flex-wrap items-center gap-1 text-secondary')}>
+                        <PostHogAvatar className={cn(SCENE_SIZE[16], '[&_img]:w-2.5')} />
                         <span className="font-semibold text-primary">PostHog</span>
                         {merged ? ' · merged into ' : ' wants to merge into '}
                         <code className="!border-0 !bg-primary !px-1 font-code">main</code>
@@ -81,7 +79,7 @@ const PrHeader = ({ elapsed }: { elapsed: number }) => {
                 </div>
                 <StatusPill merged={merged} />
             </div>
-            <div className="flex gap-3 overflow-hidden px-4 text-xs @3xl:text-[15px]">
+            <div className={cn(SCENE_TEXT[12], 'flex gap-3 overflow-hidden px-4')}>
                 {PR_TABS.map(({ label, count, active }) => (
                     <span
                         key={label}
@@ -91,7 +89,7 @@ const PrHeader = ({ elapsed }: { elapsed: number }) => {
                         )}
                     >
                         {label}
-                        <span className="rounded-full bg-primary px-1.5 text-[10px] @3xl:text-[12.5px]">{count}</span>
+                        <span className={cn(SCENE_TEXT[10], 'rounded-full bg-primary px-1.5')}>{count}</span>
                     </span>
                 ))}
                 <DiffStat />
@@ -102,7 +100,12 @@ const PrHeader = ({ elapsed }: { elapsed: number }) => {
 
 const RailItem = ({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) => (
     <motion.div {...ENTER} className="relative flex gap-2.5 pb-3">
-        <span className="relative z-10 flex size-6 @3xl:size-[30px] shrink-0 items-center justify-center rounded-full border border-primary bg-primary">
+        <span
+            className={cn(
+                SCENE_SIZE[24],
+                'relative z-10 flex shrink-0 items-center justify-center rounded-full border border-primary bg-primary'
+            )}
+        >
             {icon}
         </span>
         <div className="min-w-0 flex-1 pt-0.5">{children}</div>
@@ -112,7 +115,12 @@ const RailItem = ({ icon, children }: { icon: React.ReactNode; children: React.R
 const PullRequestConversation = ({ elapsed }: { elapsed: number }) => {
     const mergeSettled = elapsed >= MERGE_SETTLED_AT
     return (
-        <div className="flex h-[clamp(26rem,62cqw,44rem)] flex-col overflow-hidden rounded-lg border border-primary bg-primary shadow-xl">
+        <div
+            className={cn(
+                'flex flex-col overflow-hidden rounded-lg border border-primary bg-primary shadow-xl',
+                WINDOW_HEIGHT
+            )}
+        >
             <PrHeader elapsed={elapsed} />
             <motion.div
                 className="flex min-h-0 flex-1 flex-col"
@@ -124,13 +132,18 @@ const PullRequestConversation = ({ elapsed }: { elapsed: number }) => {
                     <div className="relative">
                         <span className="absolute bottom-3 left-3 top-3 border-l border-primary" aria-hidden="true" />
                         {elapsed >= PR_OPENED_AT && (
-                            <RailItem icon={<PostHogAvatar className="size-6 @3xl:size-[30px] border-0" />}>
+                            <RailItem icon={<PostHogAvatar className={cn(SCENE_SIZE[24], 'border-0')} />}>
                                 <div className="overflow-hidden rounded-md border border-primary">
-                                    <p className="m-0 border-b border-primary bg-accent px-2.5 py-1 text-xs @3xl:text-[15px]">
+                                    <p
+                                        className={cn(
+                                            SCENE_TEXT[12],
+                                            'm-0 border-b border-primary bg-accent px-2.5 py-1'
+                                        )}
+                                    >
                                         <span className="font-semibold">PostHog</span> opened this from Inbox report #
                                         {REPORT_NUMBER}
                                     </p>
-                                    <p className="m-0 px-2.5 py-2 text-xs @3xl:text-[15px]">
+                                    <p className={cn(SCENE_TEXT[12], 'm-0 px-2.5 py-2')}>
                                         <code className="font-code">plan</code> is undefined when checkout loads before
                                         pricing, so Pro upgrades throw. Adds a guard and a test.
                                     </p>
@@ -138,30 +151,30 @@ const PullRequestConversation = ({ elapsed }: { elapsed: number }) => {
                             </RailItem>
                         )}
                         {elapsed >= CHECKS_SHOWN_AT && (
-                            <RailItem icon={<IconCheckCircle className="size-3.5 @3xl:size-[17.5px] text-green" />}>
+                            <RailItem icon={<IconCheckCircle className={cn(SCENE_SIZE[14], 'text-green')} />}>
                                 <CheckList elapsed={elapsed} />
                             </RailItem>
                         )}
                         {elapsed >= MERGED_EVENT_AT && (
-                            <RailItem icon={<IconPullRequest className="size-3.5 @3xl:size-[17.5px] text-purple" />}>
-                                <p className="m-0 flex items-center gap-1.5 text-xs @3xl:text-[15px] text-secondary">
-                                    <UserAvatar className="size-4 @3xl:size-5" />
+                            <RailItem icon={<IconPullRequest className={cn(SCENE_SIZE[14], 'text-purple')} />}>
+                                <p className={cn(SCENE_TEXT[12], 'm-0 flex items-center gap-1.5 text-secondary')}>
+                                    <UserAvatar className={SCENE_SIZE[16]} />
                                     <span className="font-semibold text-primary">You</span> merged commit{' '}
                                     <code className="font-code">{MERGE_COMMIT}</code> into main
                                 </p>
                             </RailItem>
                         )}
                         {elapsed >= SOAK_AT && (
-                            <RailItem icon={<IconComment className="size-3.5 @3xl:size-[17.5px] text-secondary" />}>
-                                <p className="m-0 mb-1.5 text-xs @3xl:text-[15px] text-secondary">
+                            <RailItem icon={<IconComment className={cn(SCENE_SIZE[14], 'text-secondary')} />}>
+                                <p className={cn(SCENE_TEXT[12], 'm-0 mb-1.5 text-secondary')}>
                                     <span className="font-semibold text-primary">PostHog</span> commented 1 week later
                                 </p>
                                 <CheckChart elapsed={elapsed} />
                             </RailItem>
                         )}
                         {elapsed >= RESOLVED_AT && (
-                            <RailItem icon={<IconCheck className="size-3.5 @3xl:size-[17.5px] text-green" />}>
-                                <p className="m-0 text-xs @3xl:text-[15px] text-secondary">
+                            <RailItem icon={<IconCheck className={cn(SCENE_SIZE[14], 'text-green')} />}>
+                                <p className={cn(SCENE_TEXT[12], 'm-0 text-secondary')}>
                                     <span className="font-semibold text-primary">PostHog</span> resolved Inbox report #
                                     {REPORT_NUMBER}
                                 </p>
@@ -189,35 +202,16 @@ const PullRequestConversation = ({ elapsed }: { elapsed: number }) => {
     )
 }
 
-export default function SelfDriveStep({
-    index,
-    title,
-    description,
-}: {
-    index: number
-    title: string
-    description: React.ReactNode
-}): JSX.Element {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const elapsed = useEventClock(containerRef, {
+export default function SelfDriveScene(): JSX.Element {
+    const sceneRef = useRef<HTMLDivElement>(null)
+    const elapsed = useEventClock(sceneRef, {
         loopMs: LOOP_MS,
         boundaries: LOOP_BOUNDARIES,
         restingMs: RESTING_MOMENT,
     })
-
     return (
-        <div className="@container mt-16">
-            <div ref={containerRef} className={STEP_GRID}>
-                <div className={STEP_TEXT}>
-                    <h3 className="!mt-0">
-                        {index + 1}. {title}
-                    </h3>
-                    <p>{description}</p>
-                </div>
-                <div className="not-prose @container w-full" aria-hidden="true">
-                    <PullRequestConversation elapsed={elapsed} />
-                </div>
-            </div>
+        <div ref={sceneRef} className="not-prose @container" aria-hidden="true">
+            <PullRequestConversation elapsed={elapsed} />
         </div>
     )
 }

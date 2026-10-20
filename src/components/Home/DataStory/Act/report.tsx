@@ -1,19 +1,16 @@
 import React from 'react'
-import { wordStream } from '../timeline'
 import { pressCursorBoundaries } from '../PressCursor'
 import { CodexTerminal } from '../Query/AgentWindow'
-import { TOOL_RUN_MS, ToolCall, TraceState } from '../Query/trace'
+import { ToolCall, defineTrace } from '../Query/trace'
 import { SourceKey } from '../Ingest/session'
 
 export const REPORT_LOOP_MS = 15500
 export const REPORT_RESTING_MOMENT = 13000
 
-export const REPORT_AT = 3200
+const REPORT_AT = 3200
 export const PRESS_AT = 4900
 export const HANDOFF_AT = 5300
 const ANSWER_AT = 8800
-const ANSWER_MS_PER_CHAR = 16
-const SECOND_MS = 1000
 
 export type Priority = 'P1' | 'P2' | 'P3'
 
@@ -131,38 +128,23 @@ const CODEX_CALLS: ToolCall[] = [
     },
 ]
 
-const ANSWER =
-    "`plan` is undefined when checkout loads before pricing. I'll guard it in `checkout.tsx`, add a test, and open a PR."
-const ANSWER_DONE_AT = ANSWER_AT + ANSWER.length * ANSWER_MS_PER_CHAR
-const ANSWER_STREAM = wordStream(ANSWER, ANSWER_AT, ANSWER_MS_PER_CHAR)
-
-const codexStateAt = (elapsed: number): TraceState => ({
+const HANDOFF_TRACE = defineTrace({
     question: CODEX_PROMPT,
-    typed: '',
-    submitted: true,
-    calls: CODEX_CALLS.filter(({ at }) => elapsed >= at).map((call) => ({
-        call,
-        done: elapsed >= call.at + TOOL_RUN_MS,
-    })),
-    working: elapsed < ANSWER_DONE_AT,
-    answer: ANSWER_STREAM.textAt(elapsed),
-    secondsWorking: Math.max(0, Math.floor((Math.min(elapsed, ANSWER_DONE_AT) - HANDOFF_AT) / SECOND_MS)),
+    calls: CODEX_CALLS,
+    answer: "`plan` is undefined when checkout loads before pricing. I'll guard it in `checkout.tsx`, add a test, and open a PR.",
+    answerAt: ANSWER_AT,
+    loopMs: REPORT_LOOP_MS,
+    restingMs: REPORT_RESTING_MOMENT,
+    submittedAt: HANDOFF_AT,
 })
 
 export const HandoffAgent = ({ elapsed, className }: { elapsed: number; className?: string }) => (
-    <CodexTerminal state={codexStateAt(elapsed)} className={className} />
+    <CodexTerminal state={HANDOFF_TRACE.stateAt(elapsed)} className={className} />
 )
 
 export const REPORT_BOUNDARIES: number[] = [
     ...OVERNIGHT_REPORTS.map(({ at }) => at ?? 0),
     REPORT_AT,
     ...pressCursorBoundaries(PRESS_AT),
-    HANDOFF_AT,
-    ...CODEX_CALLS.flatMap(({ at }) => [at, at + TOOL_RUN_MS]),
-    ...ANSWER_STREAM.stops,
-    ANSWER_DONE_AT,
-    ...Array.from(
-        { length: Math.floor((ANSWER_DONE_AT - HANDOFF_AT) / SECOND_MS) },
-        (_, second) => HANDOFF_AT + (second + 1) * SECOND_MS
-    ),
+    ...HANDOFF_TRACE.boundaries,
 ]

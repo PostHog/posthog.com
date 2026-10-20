@@ -1559,6 +1559,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const sourceHomepageFeedbackStats = async () => {
         if (!process.env.POSTHOG_APP_API_KEY) return
+        const endpointTimeoutMs = 60_000
 
         try {
             const res = await fetch(
@@ -1570,6 +1571,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
                     },
                     body: JSON.stringify({ refresh: 'force' }),
+                    signal: AbortSignal.timeout(endpointTimeoutMs),
                 }
             )
             if (res.status !== 200) {
