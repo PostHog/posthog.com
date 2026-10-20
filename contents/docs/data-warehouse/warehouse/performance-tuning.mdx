@@ -12,71 +12,37 @@ Need access first? [Join the waitlist](/context-warehouse/warehouse), then [set 
 
 </CalloutBox>
 
-Each active connection gets a dedicated DuckDB worker. The default worker fits most queries, but you can request more CPU or memory for large scans, joins, aggregations, sorts, and window functions.
+Queries run on shared compute that PostHog manages and scales for you. There are no worker sizes to pick: a coordinator plans each query and spreads the work across many workers in parallel.
 
-The cluster also automatically caches object-storage byte ranges on node-local NVMe storage, so workers on the same node can reuse recently read data instead of fetching it again. This is separate from DuckDB's per-worker in-memory cache.
+## How capacity works
 
-## Choose a worker size
+- **Workers scale automatically.** When queries start to wait for capacity, PostHog adds workers to the pool. Adding capacity can take a few minutes, so a sudden burst of heavy queries can queue briefly before it speeds up.
+- **Each organization has concurrency limits.** Your organization can run a set number of queries at once, with more waiting in a queue. Queries over the limit wait their turn instead of failing. The **Monitoring** tab in [Data ops](https://app.posthog.com/data-ops) shows your current limits and activity.
+- **Resource settings are managed.** Session properties that control resources, such as `query_max_memory`, are reserved and can't be changed with `SET SESSION`.
 
-Pass these settings when you open the connection:
+## Limits in the SQL editor
 
-| Setting | Default | Range | What it controls |
-|---|---:|---:|---|
-| `duckgres.worker_cpu` | 15 | 1–46 | Worker CPU cores; DuckDB defaults to 2.5 threads per core, rounded up |
-| `duckgres.worker_memory` | 120 GiB | 4–360 GiB | Worker memory for joins, sorts, caching, and other intermediate data |
-| `duckgres.worker_ttl` | 1 minute | 0–24 hours | How long the worker stays warm after the connection closes |
+Queries you run on **PostHog (Trino)** in the [SQL editor](/docs/data-warehouse/query) have extra limits, to keep the editor responsive:
 
-You can set CPU and memory independently. The default shape uses 8 GiB per CPU core, which is a useful starting point when setting both. A longer TTL reduces cold starts for recurring jobs, but keeps the worker allocated for longer. Values outside the ranges are clamped.
+- They're read-only.
+- They return at most 1,000,000 rows. Add a `LIMIT` clause for larger tables.
+- Long-running queries time out. For long jobs, [connect with an external client](/docs/data-warehouse/warehouse/connect) instead.
 
-For example, this starts a 30-core, 240 GiB worker and keeps it warm for 30 minutes after disconnecting:
+## Write faster queries
 
-```bash
-PGOPTIONS="-c duckgres.worker_cpu=30 -c duckgres.worker_memory=240Gi -c duckgres.worker_ttl=30m" \
-  psql "host=my-warehouse.dw.us.postwh.com dbname=ducklake user=root sslmode=require"
-```
+Your data is stored as columnar Parquet files, so the biggest wins come from reading less of it:
 
-Most Postgres clients expose the same `options` connection parameter. These settings only apply when the connection opens. Running SQL `SET` commands later doesn't resize its worker.
+- **Select only the columns you need.** `SELECT *` on a wide table like `events` reads every column. Naming columns reads only those.
+- **Filter on `timestamp`.** A time range lets the warehouse skip data that's outside it.
+- **Use approximate aggregates for large counts.** `approx_distinct(distinct_id)` is much cheaper than `count(DISTINCT distinct_id)`, and is usually accurate to within a few percent.
+- **Write big results to a table.** For results you query repeatedly, `CREATE TABLE ... AS SELECT` once and query the table, rather than recomputing it every time.
 
-## DuckDB defaults
-
-PostHog sizes DuckDB from the selected worker and provides managed scratch storage. These are the effective defaults:
-
-| DuckDB setting | Effective default | How it works |
-|---|---|---|
-| `threads` | 2.5× worker CPU, rounded up | Sets the maximum parallelism available to the query; the default 15-CPU worker gets 38 threads |
-| `memory_limit` | 90 GB (83.8 GiB) on the default worker | Limits DuckDB's buffer manager; PostHog derives it from the selected worker memory while reserving headroom for results, metadata, and the worker process |
-| `temp_directory` | Worker-local temporary storage | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
-| `max_temp_directory_size` | 90% of available temporary disk | Caps how much spill data DuckDB can write |
-| `disable_parquet_prefetching` | `false` (prefetching on) | Groups nearby Parquet reads to reduce object-storage requests; disabling it can reduce over-reading on selective scans but increase requests |
-| `prefetch_all_parquet_files` | `false` (remote files only) | Restricts prefetching to remote files; warehouse Parquet is remote, so this doesn't turn prefetching off |
-| `enable_external_file_cache` | `true` | Caches external-file byte ranges in memory under `memory_limit`, so repeated scans can avoid object-storage reads |
-| `parquet_metadata_cache` | `false` | Doesn't retain parsed Parquet footer and schema metadata; enabling it can help repeated scans of the same files |
-| `preserve_insertion_order` | `true` | Preserves insertion order where possible; setting it to `false` can reduce memory use for large imports and exports when result order doesn't matter |
-
-Prefetch and cache settings trade object-storage requests, memory, and latency. Benchmark representative cold and repeated scans before changing them.
-
-For more information about these and other settings, see [DuckDB's configuration reference](https://duckdb.org/docs/stable/configuration/overview).
-
-### Example: Tuning threads
-
-The default 15-core worker starts DuckDB with 38 threads. A simple query that reads many remote Parquet ranges but does little computation may run faster with a higher value, such as `SET threads = 60`. Each DuckDB thread can make one HTTP request at a time, so more threads can overlap more network reads.
-
-This kind of tuning will become less important after DuckDB releases [asynchronous I/O](https://duckdb.org/2026/07/31/asynchronous-io), which will handle network concurrency internally instead of relying on extra execution threads.
-
-Inspect the effective settings on your connection with:
+To see where a query spends its time, prefix it with [`EXPLAIN ANALYZE`](https://trino.io/docs/current/sql/explain-analyze.html):
 
 ```sql
-SELECT name, value, description
-FROM duckdb_settings()
-WHERE name IN (
-    'threads',
-    'memory_limit',
-    'temp_directory',
-    'max_temp_directory_size',
-    'disable_parquet_prefetching',
-    'prefetch_all_parquet_files',
-    'enable_external_file_cache',
-    'parquet_metadata_cache',
-    'preserve_insertion_order'
-);
+EXPLAIN ANALYZE
+SELECT event, count(*)
+FROM posthog.events_prod
+WHERE timestamp >= current_date - INTERVAL '7' DAY
+GROUP BY event;
 ```
