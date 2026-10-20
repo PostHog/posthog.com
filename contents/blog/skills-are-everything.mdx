@@ -27,7 +27,7 @@ Here is a blog about all the reasons and ways I love and use skills and how they
 
 Today, almost every single chat and interaction I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills).
 
-No really, my agent looked it up - over the last 30 days 78% of my 578 chats loaded a skill and 47% updated one (shoutout to [AI observability](/docs/ai-observability/installation/claude-code) making this easy as all my Claude Code sessions go there). 
+No really, my agent looked it up – over the last 28 days 78% of my 578 chats loaded a skill and 47% updated one (shoutout to [AI observability](/docs/ai-observability/installation/claude-code) making this easy as all my Claude Code sessions go there). 
 
 I have about 139 skills in the store.
 
@@ -185,7 +185,7 @@ Yet another cool thing here is that each skill is version tracked and we have an
 
 *Compare any two versions of a skill body. Here, v61 against v73: the alert counts go up as new alerts get added. Remember, this is mostly text for agents to read*
 
-Stuff like this used to be really annoying to maintain somewhere - now you get it for practiclly free if you just put it in a skill and let your agents maintain it.
+Stuff like this used to be really annoying to maintain somewhere – now you get it for practically free if you just put it in a skill and let your agents maintain it.
 
 ## 3. Skills as a runbook that learns
 
@@ -273,13 +273,13 @@ And `andy-blogs` is the skill that tracked this post. It has one file per post, 
 
 Neither of these is a set of instructions. They're documents I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
 
-## Why the store, and not a folder of markdown files
+## Why the store, and not a folder of Markdown files
 
 You can do all of this with a local `.claude|agents/skills/` folder but that's just crazy, and vibing your own plumbing and CI to get your skills to every agent you use is also totally possible but also crazy. Just use some tool that lets gets you some benefits like:
 
 - **It's on every surface.** The same skill loads in Claude Code on my laptop, in a cloud task, in Slack, in Codex, in Cursor, and in PostHog AI.
 - **Agents can write to it.** The `skill-update` tool takes incremental `edits` and `file_edits` with a `base_version` check, so two sessions can maintain the same skill without clobbering each other.
-- **It's versioned.** 433 versions of `self-driving-work` means 433 diffs I can read when something looks off. A file on disk gives me one.
+- **It's versioned.** 433 versions of `self-driving-work` means 433 diffs I can read when something looks off. A file on disk gives me one, unless I remember to commit it.
 - **It's shared.** A teammate, or their agent, or a scout, reads the same thing I do.
 - **Progressive disclosure is built in.** `skill-list` returns names and descriptions. `skill-get` returns the body and a file manifest. `skill-file-get` pulls one file.
 
