@@ -16,12 +16,11 @@ From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events
 
 **Existing free organizations:** You'll keep 1-year retention. If you upgrade to pay-as-you-go on or after November 1, you'll move to the 2-year default.
 
-**New organizations (created on or after November 1):** Free plans get 1 year, and pay-as-you-go plans get 2 years.
+**New organizations (created on or after November 1):** Free plans get 1 year, and pay-as-you-go plans get 2 years. If you are on a paid platform package (Boost, Scale, or Enterprise), you can request an extension by contacting our support team.
 
 ## If you need a longer window
 
-- On a platform package (Boost, Scale, or Enterprise), ask support for a longer window.
-- To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
+To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
 
 ## How to check your window
 
