@@ -3215,7 +3215,12 @@
         },
         {
             "source": "/docs/support/surfaces/code:ext(\\.md)?",
-            "destination": "/docs/support/surfaces/desktop:ext?",
+            "destination": "/docs/support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/support:ext?",
             "statusCode": 301
         },
         {

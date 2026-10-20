@@ -61,7 +61,7 @@ Example workflow: if `customer_email` ends with `@bigcorp.com`, tag the ticket `
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_26_17_7a297febf0.png"
-    alt="Teams shared channel"
+    alt="One inbox for support@ and billing@"
     classes="rounded"
 />
 
@@ -78,19 +78,9 @@ GitHub Issues can also be a [Self-driving signal source](/docs/self-driving/inbo
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_27_21_ad5800c8c3.png"
-    alt="Teams shared channel"
+    alt="GitHub issues as the support queue"
     classes="rounded"
 />
-
-## From a bug report to a pull request
-
-Use this when the same bug shows up across tickets and you want a code change, not another reply.
-
-1. Connect at least one channel so the conversations exist.
-2. In [Self-driving](/docs/self-driving), use those conversations as a signal source.
-3. Review the report in the [inbox](/docs/self-driving/inbox) or in [PostHog Desktop](/docs/support/surfaces/desktop). Merge the pull request if the fix holds.
-
-Support replies still happen in the Support inbox. Self-driving does not answer the customer for you. Reports are free. A pull request is billed at $15, and the first three each month are free. See [Self-driving pricing](/docs/self-driving/pricing).
 
 ## Draft how-to answers with the AI agent
 
@@ -102,7 +92,22 @@ Use this when a large share of tickets are "how do I…?" and you want a first d
 
 Example workflow: you do not need one. The agent runs when the ticket is created. Use workflows for SLA and assignment, not for the draft.
 
-[SCREENSHOT: How-to ticket with an AI reply waiting for the team]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_33_38_6f20a86edc.png"
+    alt="Draft how-to answers with the AI agent"
+    classes="rounded"
+/>
+
+## From a bug report to a pull request
+
+Use this when the same bug shows up across tickets and you want a code change, not another reply.
+
+1. Connect at least one channel so the conversations exist.
+2. In [Self-driving](/docs/self-driving), use those conversations as a signal source.
+3. Review the report in the [Self-driving inbox](/docs/self-driving/inbox). Merge the pull request if the fix holds.
+
+Support replies still happen in the Support inbox. Self-driving does not answer the customer for you. Reports are free. A pull request is billed at $15, and the first three each month are free. See [Self-driving pricing](/docs/self-driving/pricing).
+
 
 ## Move off Zendesk or Intercom
 
@@ -114,4 +119,8 @@ Use this when you are leaving another help desk and you do not want an empty inb
 
 Set a default inbox before the import. Tickets whose original recipient does not match a connected address cannot be answered by email until they have one.
 
-[SCREENSHOT: Zendesk import progress with imported, skipped, and failed counts]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_35_28_391d3d3abb.png"
+    alt="Move off Zendesk or Intercom"
+    classes="rounded"
+/>

@@ -6658,12 +6658,6 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/support/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'green',
-                },
-                {
                     name: 'API',
                     url: '/docs/support/javascript-api',
                     icon: 'IconBrackets',
