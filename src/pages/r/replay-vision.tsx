@@ -675,7 +675,6 @@ export default function ReplayVisionLanding(): JSX.Element {
                     </section>
 
                     <section id="install" className="scroll-mt-20">
-                        <h3 className="!text-2xl !font-bold">
                         <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 my-6">
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Install with the wizard</h4>
