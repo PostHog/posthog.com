@@ -23,13 +23,17 @@ When agent skills first came out, I thought they were silly. We are just casting
 
 But over time I bought into the whole "context engineering" thing (as much as I fought the hype initially) and started to use them more, and now I'm convinced they will change your life!
 
-Here is a blog about all the reasons and ways I use and love skills and how they have changed my life. I hope it changes yours too.
+Here is a blog about all the reasons and ways I love and use skills and how they have changed my life.
 
-Today, almost every single chat I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills). I own 139 skills in our internal project as I write this. 
+Today, almost every single chat and interaction I have with an agent, on any surface, loads at least one skill from the [PostHog skills store](/docs/skills).
 
-About 100 of them are [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. 
+No really, my agent looked it up - over the last 30 days 78% of my 578 chats loaded a skill and 47% updated one (shoutout to [AI observability](/docs/ai-observability/installation/claude-code) making this easy as all my Claude Code sessions go there). 
 
-The other 35 or so are skills I built for how I actually work, and those are the ones this post is about.
+I have about 139 skills in the store.
+
+About 100 of them are custom [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. 
+
+The other 39 or so are skills I built for how I actually work, and those are the ones this post is about.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skills_powerful_slack_b2e9c69600.png"
@@ -37,15 +41,13 @@ The other 35 or so are skills I built for how I actually work, and those are the
     alt="A Slack message from a teammate, Jake: wow. yeah i had no idea the skills product was this powerful... it seems more like an agents product to me. Basically you have a skill (directory of files/context/instructions) that you can invoke with your own local harness."
 />
 
-*A teammate, who is now skills pilled too.*
+*Jake gets it.*
 
-So this post is my attempt to explain what changed my mind, and to show you the actual skills I lean on every day. 
+So this post is my attempt to explain what changed my mind, and to show you the actual skills I use every day to keep the charade going. 
 
-Not in a cringe "hey try my skill bro" sort of way. 
+Not in a cringe "try my skill bro" sort of way. There is a little cottage industry in this at the moment which i find a bit confusing (even if they do actually work sometimes). I'm not "taking a dependency" on your skill bro, skills can become technical (agent?) debt so we should set the bar very high when considering adopting them.
 
-All of that is a bit cringe, and I promise the skills I'm about to show you are not magic prompts that make the model smarter. 
-
-I'm much more evangelical about various _ways_ to use skills so that you can be as lazy as possible and make your agents a joy to work with.
+I'm much more evangelical about various _ways_ to use skills so that you can be as lazy as possible and make your agents fun to work with and get stuff done.
 
 ## Skills are magic context bombs
 
@@ -53,17 +55,23 @@ Most people think of skills as better prompts. Something that teaches the agent 
 
 You shouldn't think of skills as tricks. They're **little portable agentic memory systems**. A skill is the perfect abstraction for tagging a bundle of context, so an agent (or I) can pull that context in exactly when it's needed and nowhere else. 
 
-The body is typically a thin index. The bundled files hold the detail. The agent reads them and pulls only the files the current task touches. That's [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#progressive-disclosure-patterns) (another buzz phrase), and it's mostly the whole point.
+The body is typically a thin index. The bundled files hold the detail. The agent reads them and pulls only the files the current task touches. 
+
+That's [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#progressive-disclosure-patterns) (yuck i know, another buzz phrase), and it's mostly the point.
 
 We shouldn't need magical skills to make AI better, and I think that whole category will go away soon. Models will just be good and just "get it" much more while of course using memory and tools to just get what they need.
 
-What won't go away is the need to manage **context**: what's true right now, what happened last session, what's in flight, what bit us before. That's the part I'm skills-pilled on. Eventually the models will probably just learn all this too, but that's a bit further out would be my guess.
+What won't go away (yet) is the need to manage **context**: what's true right now, what happened last session, what's in flight, what bit us before. That's the part I'm skills-pilled on. Eventually the models will probably just learn all this too, but that's a bit further out would be my guess.
 
 Here's how I use the skills store, roughly in order of how much it changed my day.
 
+(p.s. im not even sorry if this reads like an infomercial for the [PostHog skills store](/docs/skills) if you use PostHog and have the MCP you really should just try it for the skills you want all your agents to have access to)
+
 ## 1. Skills as a project tracker
 
-Every meaningful piece of work I do is documented and maintained by my agents in one of two skills: `self-driving-work` and `scouts-work`. They're siblings with identical conventions: a numbered `issues/` backlog with an index, an `ideas/` folder, `open-prs.md`, a rolling 14-day `CHANGELOG.md`, `environment-notes.md` for durable gotchas, and a `HANDOVER.md` that each session overwrites its own section of.
+Every meaningful piece of work I do is documented and maintained by my agents in one of two skills: `self-driving-work` and `scouts-work` (these are the two things i work most on at PostHog). 
+
+They're siblings with identical conventions: a numbered `issues/` backlog with an index, an `ideas/` folder, `open-prs.md`, a rolling 14-day `CHANGELOG.md`, `environment-notes.md` for durable gotchas, and a `HANDOVER.md` that each session overwrites its own section of.
 
 By the time I'm writing this, the `self-driving-work` skill is on version 433 with 126 bundled files, including 55 numbered issues, 17 ideas, and 39 pain points. I didn't write most of those. My agents did, at the end of sessions, because the skill tells them to.
 
@@ -90,11 +98,11 @@ self-driving-work         v433, 126 bundled files
     └── task_summary_sampler.py
 ```
 
-*The file tree of a project-tracker skill after two months of agents maintaining it.*
+*The file tree of a project-tracker skill after two months of agents maintaining it as we work.*
 
 The loop looks like this:
 
-- I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog Desktop, Codex) and say "let's check on /phs self-driving work".
+- I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog AI, Codex) and say "let's check in on /phs self-driving work".
 - The agent uses my local `/phs` [bridge skill](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut), loads the remote skill, reads `HANDOVER.md`, scans the backlog index, and knows where we left off. We do the work in the repo and the product, not in the skill.
 - At the end of the session, the agent logs any new issue or idea, records any PR that opened or merged, adds one changelog line, and overwrites its handover section.
 
