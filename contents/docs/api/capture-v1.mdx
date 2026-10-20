@@ -140,9 +140,8 @@ Options control how PostHog processes an event. They replace the legacy option p
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
 | `disable_skew_correction` | Boolean | `true` keeps your `timestamp` exactly as sent instead of [correcting for clock skew](#timestamps-and-clock-skew) | `$ignore_sent_at` |
-| `product_tour_id` | String | Links the event to a product tour | `$product_tour_id` |
 
-<!-- TODO(capture-v1): confirm the product_tour_id link target and the cookieless tracking link, and whether product_tour_id belongs in public docs. -->
+<!-- TODO(capture-v1): confirm the cookieless tracking link. product_tour_id is left out on purpose: only the browser SDK sets it (prod check 2026-10-20). -->
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
 - PostHog ignores option names it doesn't know.
@@ -219,10 +218,9 @@ The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events
 | `408` | The request timed out while PostHog read it | Yes |
 | `413` | The body is over the size limit | No – send smaller requests |
 | `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
-| `429` | Too many requests. A proxy or network layer between you and PostHog may send this. | No – v1 SDKs treat it as final |
+| `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | No – v1 SDKs treat it as final. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
 
-<!-- TODO(capture-v1): confirm the 429 row wording; v1 SDKs treat 429 as final today. -->
 
 Errors use this body. `error` is a stable tag you can match on.
 
