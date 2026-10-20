@@ -25,9 +25,15 @@ A [signal](/docs/self-driving/signals) is a structured finding: what's happening
 | [Anomaly investigations](#anomaly-investigations) (alpha) | Spikes in cost, latency, or errors | When an anomaly alert fires |
 | [Scouts](#scouts) | Regressions across cost, latency, errors, volume, and eval performance – or anything you describe | On a schedule you set |
 
+Eval reports and anomaly investigations push signals to your inbox when something happens. Scouts pull: they're agents with access to your PostHog data through the [PostHog MCP](/docs/model-context-protocol), and they look for whatever their instructions describe.
+
+AI Observability doesn't send a signal for every trace or evaluation result, since most aren't worth acting on. Each source does some work first: an agent investigates an anomaly before reporting it, and a report summarizes a batch of results. This keeps your inbox to findings worth a look.
+
 ## Eval reports
 
 [Evaluations](/docs/ai-evals) score your live generations in production – with an LLM judge, deterministic Hog code, or sentiment analysis. Eval reports are what make those scores actionable: instead of you watching a pass-rate chart, an agent reviews each batch of results and summarizes what it found, with example generations as evidence.
+
+A single failing result doesn't always mean something is wrong, so PostHog sends one signal per report, not one per result.
 
 To set them up:
 
@@ -53,8 +59,10 @@ Every LLM event behaves like a standard PostHog event, so cost, latency, and err
 To set them up:
 
 1. Create an insight on the metric you care about – cost, latency, or errors. The [AI Observability dashboard](/docs/ai-observability/dashboard) charts are a good starting point.
-2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it – the detectors learn what normal looks like from your data. Fixed-threshold alerts fire like regular alerts, without an investigation.
+2. Add an anomaly detection alert and check **Run investigation agent when this alert fires**. Detectors learn normal behavior from your data. Fixed-threshold alerts don't get investigations. On the [AI Observability dashboard](/docs/ai-observability/dashboard), use **Create anomaly alert** on a chart to do this in one step. <!-- VERIFY: exact labels of the checkbox and the dashboard button -->
 3. Enable the **product analytics** source in your [inbox](https://app.posthog.com/inbox) settings, so investigation findings land there as signals.
+
+To see an investigation in the **Self-driving** tab in AI Observability, add the `AI observability` tag to the insight. Investigations on untagged insights still reach your inbox. <!-- VERIFY: tag name, and that untagged investigations still reach the inbox -->
 
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_alerts_web_clean_0d31748bb1.mp4"
@@ -73,6 +81,8 @@ Create one from the [**Self-driving** tab](https://app.posthog.com/ai-observabil
   alt="Creating a scout from a template in the Self-driving tab"
   classes="rounded"
 />
+
+The **Self-driving** tab in AI Observability only lists scouts tagged `AI observability`. Scouts you create from a template in this tab get the tag automatically. If you create a scout elsewhere, add the tag yourself to see it here. <!-- VERIFY: tag name casing -->
 
 ## What lands in your inbox
 
