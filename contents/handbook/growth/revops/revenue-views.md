@@ -50,6 +50,7 @@ Two rules keep the chain honest:
 | The number used for comp, quota and NRR | `iwa_summary_customer_month_recalc` | `total_mrr` here is the usage basis. It differs from the summary only on pre-2026 annual months. |
 | A single invoice row, or why a month looks odd | `iwa_stg_invoice_rows` | Filter on `customer_id` and `month`. `invoice_type` and `invoice_classification` explain most surprises. |
 | Which accounts are combined into one customer | `iwa_seed_customer_merges` | Names are looked up for display. Joins use the ids. |
+| All accounts of one merged customer | `iwa_summary_customer_month` | `member_customer_ids` and `member_organization_ids` list every account. Filter on `merge_type = 'concurrent'` for customers that run more than one account at the same time. |
 | Which months carry a manual exception, and why | `iwa_seed_manual_overrides` | Read the `note` column first. |
 
 The first month of a customer, the number of paying months, and the months since the last payment are in the summary view as `first_month`, `paying_month_number` and `months_since_last_payment`.
@@ -61,6 +62,15 @@ One customer can hold more than one PostHog account. A customer migrates from on
 `iwa_seed_customer_merges` is the single list of these merges. Each row maps one account's billing customer id and organization id to the canonical ids of that customer. Both staging views apply it, so invoices and usage always land on the same canonical id. To add a merge, add one row to the seed. Do not edit any other view for this.
 
 The seed maps ids, not names. Names are looked up live for readability only.
+
+Each merge has a `merge_type`:
+
+- `migration`: the customer moved from one account to another. The old account stops and the new account continues.
+- `concurrent`: the customer runs two or more accounts at the same time, for example a separate EU account for the data of their EU customers. The accounts are one relationship and one customer.
+
+The summary view carries `merge_type`, `member_customer_ids` and `member_organization_ids` on each row. The member columns list every billing customer id and organization id that is merged into the canonical row. On a customer without a merge, they contain only its own ids and `merge_type` is empty. To find every organization of a customer that runs accounts at the same time, filter on `merge_type = 'concurrent'` and read the member columns.
+
+In revenue reporting, a `concurrent` merge is one customer, not one customer per account.
 
 ## Manual overrides
 
