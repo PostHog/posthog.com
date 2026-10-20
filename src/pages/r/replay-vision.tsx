@@ -14,35 +14,24 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import CustomerLogo from 'components/CustomerLogo'
 import SlotMachineText from 'components/SlotMachineText'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
-import { ChoppyReveal } from 'components/Code/ChoppyReveal'
-import { Receipt } from 'components/Code/Receipt'
-import { SignalsCallout, type CalloutItem } from 'components/Code/SignalsCallout'
-import { DottedConnection } from 'components/Code/DottedConnection'
-import { StickerTombstone } from 'components/Stickers/Stickers'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { sessionReplay } from 'hooks/productData/session_replay'
 import { replayVision } from 'hooks/productData/replay_vision'
 import {
     IconBell,
-    IconCheck,
     IconCheckCircle,
     IconCode,
     IconCursorClick,
     IconDocument,
     IconFlask,
     IconGraph,
-    IconLetter,
-    IconList,
     IconMagic,
     IconPlusSquare,
-    IconTerminal,
     IconTrending,
     IconVideoCamera,
     IconWarning,
-    IconX,
 } from '@posthog/icons'
 
 // Paid-search landing page for "session replay" ads that point at Replay Vision.
@@ -61,9 +50,6 @@ const IMAGES = {
     projectorHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/projector_movie_noir_b2dd613e79.png',
     monitorsHog:
         'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png',
-    // Same hogs that frame the /desktop receipt.
-    lemonHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/lemon_9cb7b3a156.png',
-    bananaHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/banana_relax_83149feac6.png',
 } as const
 
 // ─────────────────────────────────────────────
@@ -74,38 +60,9 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-// Keyboard key / badge (the "Build ↵" chip on /desktop).
-const KeyBadge = ({ children }: { children: React.ReactNode }) => (
-    <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-sans font-medium align-middle mx-0.5 relative -top-0.5 bg-[#1d1f27] text-white dark:bg-white dark:text-[#1d1f27]">
-        {children}
-    </span>
-)
-
-// Icon that sits in a heading's text flow and pops in (the tombstone on /desktop).
-const InlineIcon = ({
-    icon: Icon,
-    children,
-    className = '',
-}: {
-    icon: React.ComponentType<{ className?: string }>
-    children?: React.ReactNode
-    className?: string
-}) => (
-    <span className="inline-flex items-baseline gap-0.5 whitespace-nowrap">
-        <IconPop>
-            <Icon className={`size-7 inline-block align-middle relative top-1.5 ${className}`} />
-        </IconPop>
-        {children}
-    </span>
-)
-
 // Yellow callout inside a carousel slide (the "dopamine mode" box on /desktop).
 const SlideCallout = ({ children }: { children: React.ReactNode }) => (
     <div className="mt-5 rounded border border-yellow bg-yellow/10 px-3 py-2.5 text-sm text-secondary">{children}</div>
-)
-
-const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-    <h2 className="text-2xl font-bold mt-0 mb-4">{children}</h2>
 )
 
 const CARD = 'border border-primary rounded-md p-4 bg-primary'
@@ -160,15 +117,17 @@ const HeroSection = () => {
                     </p>
                     <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:text-3xl">{TITLE}</h1>
                     <p className="mt-0 mb-4">
-See exactly what people do in your product, from clicks and scrolls to network requests and console logs. Then let the AI do the watching. Tell it what to look for and it flags where people got stuck, scores frustration, and summarizes what happened.
+                        See exactly what people do in your product, from clicks and scrolls to network requests and
+                        console logs. Then let the AI do the watching. Tell it what to look for and it flags where
+                        people got stuck, scores frustration, and summarizes what happened.
                     </p>
                     <CTAButtons />
                     <p className="text-sm text-secondary mt-3 mb-0">5,000 recordings free every month, forever.</p>
                 </div>
                 <div className="w-full max-w-xs mx-auto @4xl/reader-content:mx-0 @4xl/reader-content:w-[38%] @4xl/reader-content:max-w-none">
                     <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_8d8c4d3881.png"
-                                alt="A Replay Vision observation showing the verdict, confidence score, and timestamped reasoning"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_8d8c4d3881.png"
+                        alt="A Replay Vision observation showing the verdict, confidence score, and timestamped reasoning"
                         className="w-full"
                         imgClassName="w-full h-auto"
                     />
@@ -212,8 +171,8 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Session Replay captures sessions on web and mobile. Input
-                    fields are masked by default, so passwords and card numbers stay out of the recording.
+                    Session Replay captures sessions on web and mobile. Input fields are masked by default, so passwords
+                    and card numbers stay out of the recording.
                 </p>
                 <SlideCallout>Your first 5,000 web recordings each month are free.</SlideCallout>
             </>
@@ -237,7 +196,8 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                            Ask a question in plain English, like "did the user get stuck on checkout?" The AI watches the sessions you point it at and catches the hesitation and confusion that never show up as an event.
+                    Ask a question in plain English, like "did the user get stuck on checkout?" The AI watches the
+                    sessions you point it at and catches the hesitation and confusion that never show up as an event.
                 </p>
             </>
         ),
@@ -565,17 +525,15 @@ const faqs = [
         a: "Every observation shows a confidence score and its reasoning. Rate observations with a thumbs up or down and the scanner learns from your team's ratings.",
     },
     {
-        q: 'Hoes does Session Replay protect user privacy?',
+        q: 'How does Session Replay protect user privacy?',
         a: "Session Replay masks inputs by default, and you can mask anything else. Replay Vision checks each answer for personal data the scanner didn't ask for. If it finds any, it rewrites the answer, and if the rewrite still has personal data, the scan fails and nothing is saved.",
     },
-    {
-    },
+    {},
     {
         q: 'Can Replay Vision tell me when something goes wrong?',
         a: 'Yes. You can set alerts that fire on matching observations or when a metric crosses a threshold, and send them to Slack or a webhook.',
     },
 ]
-
 
 // The pricing sections from /session-replay/pricing and /replay-vision/pricing,
 // switched with the same toggle as the Replay Vision "AI prompts" section.
@@ -628,10 +586,6 @@ const PricingTabs = () => {
 // ─────────────────────────────────────────────
 
 export default function ReplayVisionLanding(): JSX.Element {
-    const moreQuestions = MORE_QUESTIONS.map((question) =>
-        sessionReplay.questions.find((item: { question: string }) => item.question === question)
-    ).filter(Boolean) as { question: string; url: string }[]
-
     return (
         <>
             <SEO
@@ -644,9 +598,6 @@ export default function ReplayVisionLanding(): JSX.Element {
                 <div className="max-w-4xl mx-auto">
                     <HeroSection />
                     <hr className="border-t border-primary m-0 mb-10 mt-8" />
-
-                    <OldWaySection />
-                    <PostHogWaySection />
 
                     <section id="how-it-works" className="scroll-mt-20">
                         <h3 className="!text-2xl !font-bold">How it works</h3>
@@ -723,7 +674,8 @@ export default function ReplayVisionLanding(): JSX.Element {
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Install with the wizard</h4>
                                 <p className="text-sm text-secondary leading-relaxed m-0 mb-3">
-Run it in your project and it sets everything up, including three scanners written for your product.
+                                    Run it in your project and it sets everything up, including three scanners written
+                                    for your product.
                                 </p>
                                 <WizardCommand command="replay-vision" variant="bordered" slim />
                                 <p className="text-sm text-secondary leading-relaxed mt-3 mb-0">
@@ -787,16 +739,6 @@ Run it in your project and it sets everything up, including three scanners writt
                                 items={faqs.map(({ q, a }) => ({ trigger: q, content: a }))}
                             />
                         </div>
-                        <h4 className="mt-8 mb-2">More questions people ask Session Replay</h4>
-                        <ul>
-                            {moreQuestions.map(({ question, url }) => (
-                                <li key={question}>
-                                    <Link to={url} state={{ newWindow: true }}>
-                                        {question}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
                     </section>
 
                     <section id="pricing" className="scroll-mt-20">
