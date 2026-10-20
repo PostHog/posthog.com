@@ -74,9 +74,9 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events are retained for at least 2 years on pay-as-you-go plans and 1 year on free plans. After 1
-                    year, data may be moved into cold storage so queries may run more slowly. For more information on
-                    data retention, see the <Link to="/docs/data/events-retention">events data retention docs</Link>.
+                    Events are retained for at least 2 years on pay-as-you-go plans and 1 year on free plans. For more
+                    information on data retention, see the{' '}
+                    <Link to="/docs/data/events-retention">events data retention docs</Link>.
                 </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
