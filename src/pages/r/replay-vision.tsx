@@ -400,53 +400,64 @@ const terminalPrompts: {
 const TYPING_SPEED = 20
 const CYCLE_INTERVAL = 5000
 
+const LINE_DELAY = 350
+
 const MCPTerminal = () => {
     const [active, setActive] = useState(0)
-    const [typed, setTyped] = useState('')
+    const [typedLength, setTypedLength] = useState(0)
     const [visibleLines, setVisibleLines] = useState(0)
+    const [isInView, setIsInView] = useState(false)
     const paused = useRef(false)
+    const containerRef = useRef<HTMLDivElement>(null)
     const item = terminalPrompts[active]
+    const typed = item.prompt.slice(0, typedLength)
 
-    // Type the prompt, then reveal the response one line at a time.
+    // Only animate while the terminal is on screen, same as TabbedCarousel: observe
+    // against ReaderView's Radix scroll viewport when there is one, not the window.
     useEffect(() => {
-        setTyped('')
-        setVisibleLines(0)
-        let i = 0
-        let lineTimer: ReturnType<typeof setInterval> | undefined
-        const typeTimer = setInterval(() => {
-            i++
-            setTyped(item.prompt.slice(0, i))
-            if (i >= item.prompt.length) {
-                clearInterval(typeTimer)
-                let l = 0
-                lineTimer = setInterval(() => {
-                    l++
-                    setVisibleLines(l)
-                    if (l >= item.lines.length) clearInterval(lineTimer)
-                }, 350)
-            }
-        }, TYPING_SPEED)
-        return () => {
-            clearInterval(typeTimer)
-            if (lineTimer) clearInterval(lineTimer)
-        }
-    }, [item])
-
-    // Move to the next prompt once the answer is out, unless someone picked a chip.
-    const done = visibleLines >= item.lines.length
-    useEffect(() => {
-        if (!done || paused.current) return
-        const t = setTimeout(() => setActive((a) => (a + 1) % terminalPrompts.length), CYCLE_INTERVAL)
-        return () => clearTimeout(t)
-    }, [done])
-
-    const pick = useCallback((index: number) => {
-        paused.current = true
-        setActive(index)
+        const el = containerRef.current
+        if (!el || typeof IntersectionObserver === 'undefined') return
+        const scrollRoot = (el.closest('[data-radix-scroll-area-viewport]') as Element | null) ?? null
+        const observer = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting), {
+            root: scrollRoot,
+            threshold: 0,
+        })
+        observer.observe(el)
+        return () => observer.disconnect()
     }, [])
 
+    const show = useCallback((index: number) => {
+        setActive(index)
+        setTypedLength(0)
+        setVisibleLines(0)
+    }, [])
+
+    // One step per tick: type a character, then reveal a response line, then move to
+    // the next prompt (unless someone picked a chip). Scrolling away clears the pending
+    // step, so the animation pauses where it is and picks up from there on return.
+    useEffect(() => {
+        if (!isInView) return
+        let t: ReturnType<typeof setTimeout> | undefined
+        if (typedLength < item.prompt.length) {
+            t = setTimeout(() => setTypedLength((n) => n + 1), TYPING_SPEED)
+        } else if (visibleLines < item.lines.length) {
+            t = setTimeout(() => setVisibleLines((n) => n + 1), LINE_DELAY)
+        } else if (!paused.current) {
+            t = setTimeout(() => show((active + 1) % terminalPrompts.length), CYCLE_INTERVAL)
+        }
+        return () => clearTimeout(t)
+    }, [isInView, active, typedLength, visibleLines, item, show])
+
+    const pick = useCallback(
+        (index: number) => {
+            paused.current = true
+            show(index)
+        },
+        [show]
+    )
+
     return (
-        <div className="not-prose rounded-md overflow-hidden border border-primary shadow-md my-6">
+        <div ref={containerRef} className="not-prose rounded-md overflow-hidden border border-primary shadow-md my-6">
             <div className="bg-[#1e1e2e] dark:bg-[#11111b] border-b border-white/10 px-3 py-2 flex items-center gap-2">
                 <div className="flex gap-1.5">
                     <span className="size-2.5 rounded-full bg-red/60" />
@@ -528,7 +539,6 @@ const faqs = [
         q: 'How does Session Replay protect user privacy?',
         a: "Session Replay masks inputs by default, and you can mask anything else. Replay Vision checks each answer for personal data the scanner didn't ask for. If it finds any, it rewrites the answer, and if the rewrite still has personal data, the scan fails and nothing is saved.",
     },
-    {},
     {
         q: 'Can Replay Vision tell me when something goes wrong?',
         a: 'Yes. You can set alerts that fire on matching observations or when a metric crosses a threshold, and send them to Slack or a webhook.',
