@@ -139,7 +139,12 @@ const LearnNav = ({
         }
     }
 
-    return <TreeMenu items={items} appearance="sidebar" activeUrl={currentPath} onItemClick={trackClick} />
+    return (
+        // Master's Learn nav used taller rows (31px) than the docs sidebar; keep that spacing for Learn only.
+        <div className="[&_a]:py-[5.5px]">
+            <TreeMenu items={items} appearance="sidebar" activeUrl={currentPath} onItemClick={trackClick} />
+        </div>
+    )
 }
 
 interface BuildProductMenuTabsArgs {
