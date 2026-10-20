@@ -107,7 +107,7 @@ Countly is a privacy-first platform that supports both BAA-based and full data-c
 1. Hosted cloud (managed by Countly).
 2. On-premise (self-hosted on your own infrastructure).
 
-This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/blog/best-open-source-analytics-tools) for full data control.
+This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/compare/best-open-source-analytics-tools) for full data control.
 
 ### 4. Freshpaint
 
