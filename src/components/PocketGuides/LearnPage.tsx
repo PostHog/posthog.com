@@ -26,6 +26,8 @@ export interface LearnLandingProps {
     productName: string
     description: string
     storyUrl: string
+    /** The hub root, `/learn/<product>`. */
+    learnUrl: string
     volumeId: string
 }
 
@@ -54,6 +56,7 @@ export default function LearnPage({
         productName: productData?.name,
         description,
         storyUrl: guideBasePath,
+        learnUrl: productData ? surfaceBasePath(productData.slug, 'learn') : '',
         volumeId,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({

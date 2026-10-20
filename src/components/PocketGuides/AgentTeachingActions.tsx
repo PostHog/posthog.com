@@ -2,13 +2,21 @@ import React from 'react'
 import OSButton from 'components/OSButton'
 import { IconClaudeCode, LogomarkCodex } from 'components/OSIcons'
 
-export const AGENT_TEACHING_PROMPT = `Teach me PostHog Product Analytics using my own product and PostHog project.
+/** The starter prompt: a learning path built from what the project already has. */
+export const agentTeachingPrompt = (productName: string, docsSlug: string, focus: string): string =>
+    `Teach me PostHog ${productName} using my own product and PostHog project.
 
-Inspect its existing PostHog instrumentation, then create a custom learning path based on its real events, properties, funnels, and gaps. Teach one concept at a time and give me small, safe exercises.
+Inspect its existing PostHog instrumentation, then create a custom learning path based on its real ${focus}. Teach one concept at a time and give me small, safe exercises.
 
-Use the PostHog Product Analytics docs at https://posthog.com/docs/product-analytics.md as the source of truth.
+Use the PostHog ${productName} docs at https://posthog.com/docs/${docsSlug}.md as the source of truth.
 
 Don’t change the project unless I explicitly ask. If you can’t access the project, tell me what context you need.`
+
+export const AGENT_TEACHING_PROMPT = agentTeachingPrompt(
+    'Product Analytics',
+    'product-analytics',
+    'events, properties, funnels, and gaps'
+)
 
 const codexPromptUrl = (prompt: string): string => `codex://new?prompt=${encodeURIComponent(prompt)}`
 const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${encodeURIComponent(prompt)}`

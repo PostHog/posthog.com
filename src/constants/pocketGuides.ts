@@ -60,7 +60,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'ai-observability',
         productHandle: 'ai_observability',
         learnPath: '/learn/ai-observability/pocket-guide',
-        learnHub: {},
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
     },
     {
         id: 'data-stack',
@@ -81,7 +81,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'session-replay',
         productHandle: 'session_replay',
         learnPath: '/learn/session-replay/pocket-guide',
-        learnHub: {},
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
     },
     {
         id: 'feature-flags',
@@ -92,7 +92,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
         learnPath: '/learn/feature-flags/pocket-guide',
-        learnHub: {},
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
     },
     {
         id: 'self-driving',
