@@ -11,7 +11,7 @@ export interface PocketGuideVolume {
     description: string
     /** Project color token, bare – callers build text-/border-/bg- from it. */
     token: PocketGuideToken
-    /** Printed on the cover and the docs library spines, which sort by it. The shelf follows array order. */
+    /** Printed on the docs library spines, which sort by it. The shelf follows array order. */
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string

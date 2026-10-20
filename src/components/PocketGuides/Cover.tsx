@@ -81,8 +81,7 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                     <Art size={140} className="h-full max-h-[140px] w-auto max-w-full" />
                 </div>
             )}
-            <footer className="flex shrink-0 items-baseline justify-between gap-2 text-[11px] uppercase tracking-wider text-gray">
-                <span>Vol. {volume.volume}</span>
+            <footer className="flex shrink-0 items-baseline justify-end gap-2 text-[11px] uppercase tracking-wider text-gray">
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
                         {count} {count === 1 ? 'guide' : 'guides'}
