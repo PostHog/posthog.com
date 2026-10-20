@@ -275,7 +275,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/de
 
 - **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform – its free tier includes 1 million feature flag requests per month. 
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
-- **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management – paid Pro and Enterprise plans are optional. 
+- **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management. 
 
 For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
 
