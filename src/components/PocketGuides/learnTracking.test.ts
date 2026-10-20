@@ -273,6 +273,7 @@ for (const initiallyAvailable of [false, true]) {
             },
             'gatsby-plugin-mdx': { MDXRenderer: passthrough },
             '../../context/App': { useAppWindows: () => ({ windows }) },
+            '../../constants/pocketGuides': { pocketGuideDestination: (url: string) => url },
             '../../context/Window': { useWindow: () => ({ appWindow: { key: 'reader' } }) },
             'hooks/usePostHog': () => window.posthog,
             './bookComponents': { EntryProvider: passthrough, bookMdxComponents: {} },

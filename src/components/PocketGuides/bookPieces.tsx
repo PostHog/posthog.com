@@ -8,6 +8,7 @@ import { InlineCode } from 'components/InlineCode'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
+import { pocketGuideDestination } from '../../constants/pocketGuides'
 import { useEntry, useTemplate } from './bookContext'
 import { learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
@@ -89,7 +90,8 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
 }
 
 /** A prose link, counted like a CTA – some chapters answer with a link, not a button. */
-function BookLink({ href, ...props }: any): JSX.Element {
+function BookLink({ href: authoredHref, ...props }: any): JSX.Element {
+    const href = pocketGuideDestination(authoredHref ?? '')
     const posthog = usePostHog()
     const book = useEntry()
     const entry = book?.entry
@@ -98,7 +100,13 @@ function BookLink({ href, ...props }: any): JSX.Element {
     // rather than sending the reader out to the standalone reader in a new window.
     const basePath = book?.basePath
     const chapter = basePath ? book?.pages.find((page) => page.url === normalizeUrl(href ?? '')) : undefined
-    const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : undefined
+    const isSameBook =
+        basePath &&
+        (href === basePath ||
+            href?.startsWith(`${basePath}/`) ||
+            href?.startsWith(`${basePath}#`) ||
+            href?.startsWith(`${basePath}?`))
+    const chapterPath = basePath && chapter ? learnChapterPath(basePath, chapter) : isSameBook ? href : undefined
 
     const trackLinkClick = () =>
         posthog?.capture('pocket_guide_interaction', {

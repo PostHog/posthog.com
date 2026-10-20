@@ -4,7 +4,7 @@
 export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
 
 export interface PocketGuideVolume {
-    /** URL segment and content directory: /pocket-guides/<id>, contents/pocket-guides/<id>/ */
+    /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
     id: string
     title: string
     /** One line on the shelf. What the volume gets you, not what's in it. */
@@ -15,6 +15,8 @@ export interface PocketGuideVolume {
     volume: number
     /** Docs slug of the product this volume teaches. Omit when it teaches no single product. */
     docsProduct?: string
+    /** Product handle for the tabbed Learn reader. Omit to use the regular docs sidebar. */
+    productHandle?: string
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
     /** Count the front matter and primer while this volume consists of those two learning pages. */
@@ -39,7 +41,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'blue',
         volume: 5,
         docsProduct: 'product-analytics',
-        learnPath: '/docs/product-analytics/learn/introduction',
+        productHandle: 'product_analytics',
+        learnPath: '/learn/product-analytics/pocket-guide',
         countOrientationPages: true,
     },
     {
@@ -49,7 +52,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'orange',
         volume: 1,
         docsProduct: 'self-driving',
-        hasStaticPage: true,
+        learnPath: '/docs/self-driving/pocket-guide',
     },
     {
         id: 'ai-observability',
@@ -58,7 +61,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'purple',
         volume: 2,
         docsProduct: 'ai-observability',
-        learnPath: '/docs/ai-observability/learn',
+        productHandle: 'ai_observability',
+        learnPath: '/learn/ai-observability',
     },
     {
         id: 'data-stack',
@@ -67,6 +71,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',
         volume: 3,
+        docsProduct: 'data-warehouse',
+        learnPath: '/docs/data-warehouse/pocket-guide',
     },
     {
         id: 'session-replay',
@@ -75,7 +81,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'yellow',
         volume: 4,
         docsProduct: 'session-replay',
-        learnPath: '/docs/session-replay/learn',
+        productHandle: 'session_replay',
+        learnPath: '/learn/session-replay',
     },
     {
         id: 'feature-flags',
@@ -84,7 +91,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'orange',
         volume: 6,
         docsProduct: 'feature-flags',
-        learnPath: '/docs/feature-flags/learn',
+        productHandle: 'feature_flags',
+        learnPath: '/learn/feature-flags',
     },
 ]
 
@@ -100,4 +108,31 @@ export function volumeById(id: string): PocketGuideVolume | undefined {
 /** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
 export function pocketGuideUrl(volume: PocketGuideVolume): string {
     return volume.learnPath ?? `/pocket-guides/${volume.id}`
+}
+
+/** Resolve a source MDX URL to its public reader, preserving chapter, query, and fragment. */
+export function pocketGuideDestination(url: string): string {
+    const match =
+        url.match(/^\/pocket-guides\/([^/?#]+)(.*)$/) ?? url.match(/^\/learn\/([^/]+)\/pocket-guide(?=\/|[?#]|$)(.*)$/)
+    const volume = match && volumeById(match[1])
+    return volume ? `${pocketGuideUrl(volume)}${match[2]}` : url
+}
+
+/** Identify authored guide content; never infer the topic from a public docs slug. */
+export function pocketGuideSourceVolume(sourceSlug: string): PocketGuideVolume | undefined {
+    const match = sourceSlug.match(/^\/learn\/([^/]+)\/pocket-guide(?:\/|$)/)
+    return match ? volumeById(match[1]) : undefined
+}
+
+/** Shared by full and preview builds. Skills, starters, and unordered drafts aren't pages. */
+export function pocketGuidePageContext(sourceSlug: string, order?: number | null) {
+    const volume = pocketGuideSourceVolume(sourceSlug)
+    if (!volume || typeof order !== 'number' || sourceSlug.endsWith('/SKILL') || /\/_/.test(sourceSlug))
+        return undefined
+    const publicPath = pocketGuideDestination(sourceSlug).replace(/\/$/, '')
+    return {
+        publicPath,
+        volumeId: volume.id,
+        chapter: order === 0 ? '' : publicPath.split('/').pop() || '',
+    }
 }

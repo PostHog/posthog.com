@@ -144,22 +144,6 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
-        },
-        {
-            "source": "/docs/product-analytics/learn/:path*",
-            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
-        },
-        {
-            "source": "/docs/ai-observability/learn/:path*",
-            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
-        },
-        {
-            "source": "/docs/session-replay/learn/:path*",
-            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
-        },
-        {
-            "source": "/docs/feature-flags/learn/:path*",
-            "destination": "/docs/feature-flags/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
@@ -188,38 +172,153 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/product-analytics/learn",
+            "destination": "/learn/product-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/learn/introduction",
+            "destination": "/learn/product-analytics/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/learn/product-analytics/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/learn",
+            "destination": "/learn/ai-observability",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/learn/ai-observability/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/learn",
+            "destination": "/learn/session-replay",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/learn/session-replay/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/learn",
+            "destination": "/learn/feature-flags",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/learn/feature-flags/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/product-analytics",
-            "destination": "/docs/product-analytics/learn/introduction",
+            "destination": "/learn/product-analytics/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics.md",
+            "destination": "/learn/product-analytics/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/product-analytics/:path*",
-            "destination": "/docs/product-analytics/learn/:path*",
+            "destination": "/learn/product-analytics/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability",
+            "destination": "/learn/ai-observability",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability.md",
+            "destination": "/learn/ai-observability.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/ai-observability/:path*",
-            "destination": "/docs/ai-observability/learn/:path*",
+            "destination": "/learn/ai-observability/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay",
+            "destination": "/learn/session-replay",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay.md",
+            "destination": "/learn/session-replay.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/session-replay/:path*",
-            "destination": "/docs/session-replay/learn/:path*",
+            "destination": "/learn/session-replay/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags",
+            "destination": "/learn/feature-flags",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags.md",
+            "destination": "/learn/feature-flags.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/feature-flags/:path*",
-            "destination": "/docs/feature-flags/learn/:path*",
+            "destination": "/learn/feature-flags/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving",
+            "destination": "/docs/self-driving/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving.md",
+            "destination": "/docs/self-driving/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving/:path*",
+            "destination": "/docs/self-driving/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack",
+            "destination": "/docs/data-warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack.md",
+            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack/:path*",
+            "destination": "/docs/data-warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse",
-            "destination": "/pocket-guides/data-stack",
+            "destination": "/docs/data-warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse.md",
+            "destination": "/docs/data-warehouse/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse/:path*",
-            "destination": "/pocket-guides/data-stack/:path*",
+            "destination": "/docs/data-warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {

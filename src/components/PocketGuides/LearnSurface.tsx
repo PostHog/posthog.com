@@ -5,6 +5,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useAppWindows } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
+import { pocketGuideDestination } from '../../constants/pocketGuides'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
@@ -18,7 +19,7 @@ interface LearnBodyNode {
 function useBookBodies(): Map<string, string> {
     const data = useStaticQuery(graphql`
         query PocketGuideLearnBodiesQuery {
-            pages: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+            pages: allMdx(filter: { fields: { slug: { regex: "/^/learn/[^/]+/pocket-guide/" } } }) {
                 nodes {
                     body
                     fields {
@@ -32,7 +33,7 @@ function useBookBodies(): Map<string, string> {
         const map = new Map<string, string>()
         ;(data?.pages?.nodes ?? []).forEach((node: LearnBodyNode) => {
             if (node?.fields?.slug) {
-                map.set(normalizeUrl(node.fields.slug), node.body)
+                map.set(normalizeUrl(pocketGuideDestination(node.fields.slug)), node.body)
             }
         })
         return map
