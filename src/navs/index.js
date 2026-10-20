@@ -1205,6 +1205,40 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'Community',
+                url: '/handbook/community',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
+                    },
+                    {
+                        name: 'Community channels',
+                        url: '/handbook/community/channels',
+                    },
+                    {
+                        name: 'Covering the community',
+                        url: '/handbook/community/coverage',
+                    },
+                    {
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Community moderator tools',
+                        url: '/handbook/community/moderator-tools',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
+                    },
+                    {
+                        name: 'Points & rewards',
+                        url: '/handbook/community/points',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -2017,36 +2051,6 @@ export const handbookSidebar = [
             {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
-            },
-            {
-                name: 'Community',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/community',
-                    },
-                    {
-                        name: 'Community channels',
-                        url: '/handbook/community/channels',
-                    },
-                    {
-                        name: 'Answering community questions',
-                        url: '/handbook/community/questions',
-                    },
-                    {
-                        name: 'Community moderator tools',
-                        url: '/handbook/community/moderator-tools',
-                    },
-                    {
-                        name: 'Profiles',
-                        url: '/handbook/community/profiles',
-                    },
-                    {
-                        name: 'Points & rewards',
-                        url: '/handbook/community/points',
-                    },
-                ],
             },
         ],
     },
