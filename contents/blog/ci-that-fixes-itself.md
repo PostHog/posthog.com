@@ -120,7 +120,7 @@ You can imagine that finding the right signal-to-noise ratio (ideally all signal
 
 Besides the utility of the MCP-first approach, Engineering Analytics's frontend UI offering has gained traction by the DevEx team, primarily as a "one-stop shop" where we can dig into how our developer workflows are running and get useful at a glance look across our ownership surfaces. Because of this, we are working on optimizing most views by moving them into pre-computed tables and optimizing queries whenever possible. As an added bonus from both UI and MCP sharing the query layer, optimizations here also benefit the performance of agents reaching for these tools!
 
-Finally, once we had GitHub and related CI data ingested, the team has come up with fun and interesting ways to build useful features around the data. As an example, we recently shipped a "CI Viewer" feature that graphs out our CI workflows, and I think it's a lot more intuitive (not to mention faster) than clicking around the static GitHub UI ([related PR](https://github.com/PostHog/posthog/pull/111949)).
+Finally, once we had GitHub and related CI data ingested, the team has come up with fun and interesting ways to build useful features around the data. As an example, we recently shipped a "CI Explorer" feature that graphs out our CI workflows, and I think it's a lot more intuitive (not to mention faster) than clicking around the static GitHub UI ([related PR](https://github.com/PostHog/posthog/pull/111949)).
 
 ![CI Explorer navigating an open PR](https://res.cloudinary.com/dmukukwp6/video/upload/ci_explorer_demo_v3_ec20982dbc.mp4)
 
