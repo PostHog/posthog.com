@@ -73,7 +73,7 @@ We need to ensure that teams are able to proactively follow our [incident comms 
 
 ### Notifications of change to pricing/contract/discount rules
 
-We need to proactively notify all team members when there is a change to pricing, discounts, or other contract rules which may impact in-flight and future customer conversations.
+We need to proactively notify all team members when there is a change to pricing, discounts, or other contract rules which may impact in-flight and future customer conversations.  This section covers any change in the [Contracts & Billing](/handbook/growth/sales/contract-rules) section of the handbook.
 
 1. The author of the pull request (normally Ben or RevOps) should post in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-sales-cs-support</PrivateLink> with the pertinent details of the update, as well as a link to the handbook pull request.
 2. Team leads should then make sure all of their team are aware of the change, and any clarifying questions asked in the Slack thread from step 1.
