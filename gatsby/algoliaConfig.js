@@ -207,7 +207,8 @@ const contentByPath = (nodes, sitePathsByContentId) => {
         .forEach((node) => {
             const path = normalizePath(node.fields?.slug || node.slug)
             // Learning source folders are independent of their published Learn/Docs URLs.
-            if (/^\/learn\/[^/]+\/pocket-guide(?:\/|$)/.test(path)) {
+            // Same pattern as POCKET_GUIDE_SOURCE in src/constants/pocketGuides.ts, which plain JS can't import.
+            if (/^\/?learn\/[^/]+\/pocket-guide(?:\/|$)/.test(path)) {
                 for (const publicPath of sitePathsByContentId.get(node.id) || []) {
                     if (!isExcludedPath(publicPath)) content.set(publicPath, node)
                 }

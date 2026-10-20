@@ -124,9 +124,15 @@ export function pocketGuideDestination(url: string): string {
     return volume ? `${pocketGuideUrl(volume)}${match[2]}` : url
 }
 
+/**
+ * Authored guide sources live at `/learn/<id>/pocket-guide/...`. The leading slash is optional
+ * because Gatsby's MDX `slug` field omits it. gatsby/algoliaConfig.js (plain JS) keeps a copy.
+ */
+export const POCKET_GUIDE_SOURCE = /^\/?learn\/([^/]+)\/pocket-guide(?:\/|$)/
+
 /** Identify authored guide content; never infer the topic from a public docs slug. */
 export function pocketGuideSourceVolume(sourceSlug: string): PocketGuideVolume | undefined {
-    const match = sourceSlug.match(/^\/learn\/([^/]+)\/pocket-guide(?:\/|$)/)
+    const match = sourceSlug.match(POCKET_GUIDE_SOURCE)
     return match ? volumeById(match[1]) : undefined
 }
 

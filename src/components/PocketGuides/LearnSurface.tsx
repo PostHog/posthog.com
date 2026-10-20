@@ -1,6 +1,7 @@
 import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { BookOpen } from 'lucide-react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
@@ -116,7 +117,8 @@ function ChapterHeading(props: React.HTMLAttributes<HTMLHeadingElement>): JSX.El
     return (
         <>
             {chapter ? (
-                <p className="not-prose m-0 mb-[7.5px] text-[15px] font-normal leading-[36px] text-primary">
+                <p className="not-prose m-0 mb-[7.5px] flex items-center gap-1.5 text-[15px] font-normal leading-[36px] text-primary">
+                    <BookOpen className="size-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                     Chapter {String(chapter).padStart(2, '0')}
                 </p>
             ) : null}

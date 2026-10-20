@@ -5,6 +5,7 @@ import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'componen
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
+import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 
 import LearnSurface from './LearnSurface'
 
@@ -41,8 +42,13 @@ export default function LearnPage({
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
     const isLearnLanding = Boolean(volumeId && Landing && !chapter)
-    const learnBasePath = productData ? surfaceBasePath(productData.slug, 'learn') : ''
-    const guideBasePath = productData?.learnHub ? `${learnBasePath}/pocket-guide` : learnBasePath
+    const volume = volumeId ? volumeById(volumeId) : undefined
+    // The registry owns the guide URL, so links match the pages createPages builds.
+    const guideBasePath = volume
+        ? pocketGuideUrl(volume)
+        : productData
+        ? surfaceBasePath(productData.slug, 'learn')
+        : ''
     const landingProps = {
         productName: productData?.name,
         description,

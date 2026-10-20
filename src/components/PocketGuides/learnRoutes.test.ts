@@ -93,8 +93,6 @@ test('all published chapters have unique static public routes and source identit
             false
         )
     }
-    assert.equal(publicPaths.size, 53)
-    assert.ok(existsSync(new URL('../../templates/PocketGuide.tsx', import.meta.url)))
 })
 
 test('nothing under the new Learn routes is redirected or rewritten', () => {

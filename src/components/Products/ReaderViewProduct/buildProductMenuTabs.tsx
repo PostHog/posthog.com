@@ -10,6 +10,7 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
+import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
@@ -96,7 +97,8 @@ const LearnNav = ({
 }) => {
     const pages = useBookPages(volumeId)
     const posthog = usePostHog()
-    const guideBasePath = hub ? `${basePath}/pocket-guide` : basePath
+    const volume = volumeById(volumeId)
+    const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
     const chapters = pages.map((page) => ({
         name: page.page ? `${page.page}. ${page.shortTitle || page.title}` : page.shortTitle || page.title,

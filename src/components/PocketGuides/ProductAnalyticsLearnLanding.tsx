@@ -135,7 +135,7 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                                 volume={volume}
                                 count={counts[volume.id] ?? 0}
                                 placement="product_docs"
-                                to={storyUrl}
+                                to={readUrl}
                             />
                         </div>
                     )}
