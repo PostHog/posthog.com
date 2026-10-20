@@ -12,9 +12,6 @@ sourceId: SigNoz
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 Connect your SigNoz workspace to sync logs, traces, alert rules, dashboards, and notification channels into the PostHog data warehouse. This lets you join observability data with product analytics, for example correlating error logs or slow traces with user behavior.
 

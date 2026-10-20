@@ -12,9 +12,6 @@ sourceId: Stigg
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Stigg connector syncs your pricing, packaging, and monetization data – customers, subscriptions, products, plans, addons, features, and coupons – into PostHog, so you can analyze your billing and entitlement data alongside your product data.
 

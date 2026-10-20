@@ -1,5 +1,5 @@
 import React from 'react'
-import { HedgehogChartHog, HedgehogPearlNecklace, HedgehogRose } from '@posthog/brand/hoggies'
+import { HedgehogChart, HedgehogPearlNecklace, HedgehogRose } from '@posthog/brand/hoggies'
 import {
     IconBell,
     IconHome,
@@ -30,7 +30,7 @@ const creatorPosts = [
         description: 'Every step is on show. Look as long as you like.',
         to: '/funnels',
         cta: 'See my funnel',
-        image: <HedgehogChartHog title="PostHog shows you the full funnel" className="size-full p-4" />,
+        image: <HedgehogChart title="PostHog shows you the full funnel" className="size-full p-4" />,
     },
     {
         id: 'feet-pics',

@@ -9,12 +9,6 @@ availability:
 sourceId: WooCommerce
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The WooCommerce connector pulls your store data – products, orders, customers, coupons, and more – into the PostHog data warehouse.
 
 ## Adding a data source

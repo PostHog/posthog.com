@@ -93,7 +93,7 @@ ORDER BY week
 
 In the early days of AI, developers had to front-load *everything* into agents to compensate for smaller context windows and less capable models.
 
-But as the technology keeps improving, there's a new trend that removes as much context as possible and trusts the model to figure out the rest.
+But as the technology keeps improving, there's a new trend that [removes as much context as possible](/blog/wtf-is-context-engineering#2-the-models-just-kept-getting-better) and trusts the model to figure out the rest.
 
 That works for general-purpose agents since they're designed to be flexible. Anthropic can't predict everything that everyone is [using Claude for](/newsletter/ai-coding-mistakes).
 

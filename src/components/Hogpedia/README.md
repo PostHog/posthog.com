@@ -48,7 +48,7 @@ hogpedia:
     notices: ['lore'] # maintenance banners; see MaintenanceBanner.tsx
     infobox:
         title: Product analytics
-        hog: HedgehogChartHog # must be registered in hogs.ts – see the note below
+        hog: HedgehogChart # must be registered in hogs.ts – see the note below
         caption: Optional caption under the illustration.
         rows:
             - label: Type

@@ -129,6 +129,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
         }
         return event
     },
+    capture_webmcp: true,
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,

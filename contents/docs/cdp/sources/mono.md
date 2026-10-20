@@ -9,13 +9,7 @@ availability:
 sourceId: Mono
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-The Mono source is currently in alpha. It has been tested against Mono's API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
-
-</CalloutBox>
-
-The Mono connector syncs your open banking data into PostHog, including customers, linked bank accounts, and transactions.
+The Mono connector syncs your open banking data into PostHog, including customers, linked bank accounts, transactions, payment collections, and direct debit mandates.
 
 [Mono](https://mono.co) is an African open banking platform that lets businesses access financial data from their customers' bank accounts.
 
@@ -47,26 +41,34 @@ The data warehouse then starts syncing your Mono data. You can see details and p
 
 ## Sync modes
 
-The transactions table supports incremental syncing using the `date` field. All other tables use full refresh.
+The `transactions`, `payments`, and `mandate_debits` tables support incremental syncing. All other tables use full refresh.
 
-| Table          | Sync method                 | Notes                                           |
-| -------------- | --------------------------- | ----------------------------------------------- |
-| `customers`    | Full refresh                |                                                 |
-| `accounts`     | Full refresh                |                                                 |
-| `transactions` | Incremental or full refresh | Uses `date` as the cursor for incremental syncs |
+| Table            | Sync method                 | Notes                                                 |
+| ---------------- | --------------------------- | ----------------------------------------------------- |
+| `customers`      | Full refresh                |                                                       |
+| `accounts`       | Full refresh                |                                                       |
+| `transactions`   | Incremental or full refresh | Uses `date` as the cursor for incremental syncs       |
+| `institutions`   | Full refresh                |                                                       |
+| `payments`       | Incremental or full refresh | Uses `created_at` as the cursor for incremental syncs |
+| `mandates`       | Full refresh                |                                                       |
+| `mandate_debits` | Incremental or full refresh | Uses `date` as the cursor for incremental syncs       |
 
-**Incremental** syncs fetch transactions with a `date` at or after the last synced value, with a one-day overlap to capture late-arriving data. **Full refresh** syncs reload all data from the configured start date.
+**Incremental** syncs fetch rows with a date at or after the last synced value, with a one-day overlap to capture late-arriving data. **Full refresh** syncs reload all data.
 
-<CalloutBox icon="IconInfo" title="When to use full refresh for transactions" type="fyi">
+<CalloutBox icon="IconInfo" title="When to use full refresh" type="fyi">
 
-Incremental syncs only pick up new transactions going forward. If a customer links a new bank account, you need to run a full refresh to import that account's historical transactions. The same applies if you need to capture changes outside the one-day overlap window.
+Incremental syncs only pick up new rows going forward. They don't capture updates to previously synced records, such as payment refunds or status changes, outside the one-day overlap window. Use full refresh if you need the latest state of all records.
 
 </CalloutBox>
 
 ## Available tables
 
-| Table          | Description                                                           |
-| -------------- | --------------------------------------------------------------------- |
-| `customers`    | Customers registered with the Mono business                           |
-| `accounts`     | Bank accounts linked to the Mono business                             |
-| `transactions` | Transactions from linked bank accounts within the selected date range |
+| Table            | Description                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| `customers`      | Customers registered with the Mono business                                                     |
+| `accounts`       | Bank accounts linked to the Mono business                                                       |
+| `transactions`   | Transactions from linked bank accounts within the selected date range                           |
+| `institutions`   | Financial institutions that Mono supports, with their authentication methods and product scopes |
+| `payments`       | One-time and recurring payments collected through Mono DirectPay and Direct Debit               |
+| `mandates`       | Direct debit mandates that customers authorized for the business                                |
+| `mandate_debits` | Debits made against direct debit mandates                                                       |

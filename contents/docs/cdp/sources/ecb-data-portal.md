@@ -12,9 +12,6 @@ sourceId: EcbDataPortal
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The European Central Bank (ECB Data Portal) connector syncs eur exchange rates, key interest rates, hicp inflation, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 

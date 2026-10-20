@@ -9,40 +9,38 @@ availability:
 sourceId: Marketstack
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<AlphaRelease />
-
-The Marketstack connector syncs eod, intraday, splits, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+[Marketstack](https://marketstack.com) (an APILayer product) is a REST API for real-time, intraday, and historical stock market data covering 70+ exchanges and 125,000+ tickers. Linking Marketstack as a source pulls end-of-day, intraday, splits, and dividends data, company profiles, analyst ratings, and SEC filings along with market reference tables (tickers, exchanges, currencies, timezones) into your PostHog data warehouse, where you can join it with your product data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+Before connecting Marketstack, you need:
+
+- A [Marketstack account](https://marketstack.com/signup).
+- Your API **access key**, found in your [Marketstack dashboard](https://marketstack.com/dashboard). The free plan covers end-of-day and all reference tables; intraday data requires a paid plan.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Enter your Marketstack access key to pull end-of-day, intraday, splits, and dividends data plus market reference tables (tickers, exchanges, currencies, timezones).
+When configuring the source, provide:
 
-You can find your access key in your [Marketstack dashboard](https://marketstack.com/dashboard).
+- **Access key** - your Marketstack API access key from the [dashboard](https://marketstack.com/dashboard).
+- **Symbols** (optional) - a comma-separated list of ticker symbols, e.g. `AAPL,MSFT,TSLA`. Symbols are **required** for the EOD, intraday, splits, dividends, ticker info, and company ratings tables — those endpoints return data per symbol. The reference tables (tickers, exchanges, currencies, timezones) don't need symbols.
+- **CIK codes** (optional) - a comma-separated list of SEC Central Index Key codes, e.g. `0000320193`. CIK codes are **required** for the submissions table.
 
-Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the EOD, intraday, splits, and dividends tables - those endpoints require at least one symbol. The reference tables don't need symbols.
+The `tickerinfo`, `companyratings`, and `submissions` tables are only available on Marketstack API v2. The `companyratings` endpoint allows one request per minute, so each symbol adds about a minute to its sync.
 
-Note: Marketstack pricing is a monthly request quota tied to your plan. Some tables (e.g. intraday) require a paid plan.
-
-You'll be asked for:
-
-- **Access key**
+Marketstack enforces a rate limit of 5 requests per second and a monthly request quota tied to your plan, so keep the number of symbols and the historical range in mind when backfilling.
 
 ## Sync modes
 
 <SyncModes />
 
-All Marketstack tables are full refresh. Each sync replaces the contents of the table.
+The time-series tables (`eod`, `intraday`, `splits`, `dividends`) support incremental sync — after the first backfill, each run only requests data on or after the latest synced `date`, using Marketstack's `date_from` filter. The reference and lookup tables (`tickers`, `exchanges`, `currencies`, `timezones`, `tickerinfo`, `companyratings`, `submissions`) are full-refresh snapshots.
 
 ## Configuration
 
@@ -54,7 +52,10 @@ All Marketstack tables are full refresh. Each sync replaces the contents of the 
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the access key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- **`missing_symbols` / no rows for EOD, intraday, splits, dividends, ticker info, or company ratings** - these tables require at least one symbol. Add symbols to the source configuration and resync.
+- **`missing_cik_codes`** - the submissions table requires at least one CIK code. Add CIK codes to the source configuration and resync.
+- **`function_access_restricted`** - your Marketstack plan doesn't include this endpoint (intraday requires a paid plan). Upgrade your plan or deselect the restricted table.
+- **`usage_limit_reached`** - you've hit your monthly request quota. Upgrade your plan or wait for the quota to reset, then resync.
+- **`invalid_access_key`** - the access key is wrong or deactivated. Generate a new key in your Marketstack dashboard and reconnect.
 
 <TroubleshootingLink />

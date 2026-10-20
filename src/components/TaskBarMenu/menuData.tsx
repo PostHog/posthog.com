@@ -3,6 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
+import { HedgehogGardener } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -20,6 +21,7 @@ import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
+import Stickers from 'components/Stickers/Index'
 
 interface DocsMenuItem {
     name: string
@@ -97,6 +99,7 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
+            { type: 'item', label: 'Business Knowledge', link: '/docs/business-knowledge' },
             { type: 'item', label: 'Distributed tracing', link: '/docs/distributed-tracing' },
             { type: 'item', label: 'Endpoints', link: '/docs/endpoints' },
             { type: 'item', label: 'Experiments', link: '/docs/experiments' },
@@ -538,9 +541,9 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'DeskHog',
-                    link: '/deskhog',
-                    icon: <Icons.IconDeskHog className="size-4 text-seagreen" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
                 {
                     type: 'item',
@@ -832,8 +835,21 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             iconName: 'games' as AppIconName,
             customIcon: null,
         },
+        {
+            label: 'PostHog Farm',
+            link: 'https://posthog.farm',
+            iconName: null,
+            customIcon: <HedgehogGardener className="size-12" />,
+            external: true,
+        },
     ],
     notGames: [
+        {
+            label: 'DeskHog',
+            link: '/deskhog',
+            iconName: null,
+            customIcon: <Icons.IconDeskHog className="text-seagreen" />,
+        },
         {
             label: 'PostHog FM',
             link: '/fm',
@@ -936,7 +952,7 @@ export function useMenuSelectOptions() {
             items: [
                 { value: 'sparks-joy', label: 'Things that spark joy', icon: <IconSparksJoy className="size-4" /> },
                 { value: 'merch', label: 'Merch' },
-                { value: 'deskhog', label: 'DeskHog' },
+                { value: 'mcp/leaderboard', label: 'MCP leaderboard' },
                 {
                     value: 'trash',
                     label: 'Trash',

@@ -9,12 +9,9 @@ availability:
 sourceId: Bitrise
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Bitrise connector pulls your CI data into the PostHog data warehouse, including apps, builds, workflows, and build artifacts, so you can analyze build durations, failure rates, and release cadence alongside your product data.
 
@@ -40,6 +37,8 @@ Paste the token in the **API token** field and click **Next**.
 The `builds` table supports incremental sync on `triggered_at`. Note that the Bitrise API only returns builds from roughly the last 200 days, so older builds are not synced.
 
 The `artifacts` table is disabled by default because it makes one API request per build. Enable it only if you need artifact metadata.
+
+The `activities` table is disabled by default because each full refresh pages through the entire account activity history. Enable it only if you need to analyze account-level activity events.
 
 ## Configuration
 

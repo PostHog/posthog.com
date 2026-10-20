@@ -9,12 +9,6 @@ availability:
 sourceId: Twilio
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Enter your Twilio credentials to pull your Twilio data into the PostHog data warehouse.
 
 ## Adding a data source

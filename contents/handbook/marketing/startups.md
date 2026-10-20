@@ -41,7 +41,7 @@ We track all PostHog for Startups applications in [this Zapier table](http://tab
 
 ## PostHog for Y Combinator
 
-This program is similar to our startup program but has some key differences for YC teams. Teams can be in any YC batch, with any amount of funding raised, and can claim the following:
+This program is similar to our startup program but has some key differences for YC teams. Teams can be in any YC batch, with less than $25m raised in total, and can claim the following:
 
 -   $50,000 per year – they only need to register once and it will renew automatically while they're eligible (<$25m raised)
    -   If they previously registered for the old deal and it expired, they need to re-register

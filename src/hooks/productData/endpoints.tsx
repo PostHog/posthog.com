@@ -39,7 +39,7 @@ export const endpoints = {
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
-            'Custom API endpoints powered by your PostHog data – the context agents need to build embedded analytics, data feeds, and make your product self-driving.',
+            'Turn PostHog SQL queries into API endpoints. Build embedded analytics, customer dashboards, and data feeds from your product data.',
     },
     /**
      * Sections rendered on the Product surface (`/endpoints`). Each entry
@@ -238,7 +238,7 @@ export const endpoints = {
                 'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'context-warehouse/managed-warehouse',
+            slug: 'context-warehouse/warehouse',
             description:
                 "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
             className: '!size-6',

@@ -13,9 +13,9 @@ export const cdp = {
     colorSecondary: 'blue',
     hideFromPricingTableAndCalculator: true,
     seo: {
-        title: 'Ingest, transform, and send data between hundreds of tools',
+        title: 'CDP – Data pipelines for 50+ destinations | PostHog',
         description:
-            'Import data from a warehouse, sync with event data, and move it across 50+ destinations – the context agents act on to make your product self-driving.',
+            'Import data from your warehouse, transform events, and send them to 50+ destinations in real time or batch. A customer data platform built into PostHog.',
     },
     answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {

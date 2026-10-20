@@ -12,9 +12,6 @@ sourceId: Bluetally
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The BlueTally connector syncs your IT asset management data into PostHog, so you can analyze your assets alongside your product data.
 

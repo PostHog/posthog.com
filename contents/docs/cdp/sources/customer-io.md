@@ -9,12 +9,6 @@ availability:
 sourceId: CustomerIO
 ---
 
-<CalloutBox icon="IconFlask" title="Beta release" type="action">
-
-This source is currently in **beta**. It works end to end, but you may still hit rough edges – [let us know](https://app.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) if you do.
-
-</CalloutBox>
-
 Connect your Customer.io workspace using an App API key. PostHog uses the key to pull campaigns, broadcasts, segments, newsletters, and more, and to register a reporting webhook for realtime message activity.
 
 ## Adding a data source

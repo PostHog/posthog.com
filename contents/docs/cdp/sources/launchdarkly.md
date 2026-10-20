@@ -9,13 +9,7 @@ availability:
 sourceId: LaunchDarkly
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
-Enter your LaunchDarkly access token to pull your projects, environments, feature flags, metrics, members, and audit log into the PostHog data warehouse.
+Enter your LaunchDarkly access token to pull your projects, environments, feature flags, metrics, members, teams, metric groups, code references, and audit log into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -29,14 +23,20 @@ Once the syncs are complete, you can start using LaunchDarkly data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `projects` | Projects in your LaunchDarkly account | Full refresh |
-| `members` | Account members | Full refresh |
-| `auditlog` | Audit log entries | Full refresh |
-| `environments` | Environments, fetched per project | Full refresh |
-| `metrics` | Metrics, fetched per project | Full refresh |
-| `flags` | Feature flags, fetched per project | Full refresh |
+| Table                   | Description                                    | Sync method  |
+| ----------------------- | ---------------------------------------------- | ------------ |
+| `projects`              | Projects in your LaunchDarkly account          | Full refresh |
+| `members`               | Account members                                | Full refresh |
+| `auditlog`              | Audit log entries                              | Full refresh |
+| `environments`          | Environments, fetched per project              | Full refresh |
+| `metrics`               | Metrics, fetched per project                   | Full refresh |
+| `flags`                 | Feature flags, fetched per project             | Full refresh |
+| `metric_groups`         | Metric groups, fetched per project             | Full refresh |
+| `teams`                 | Teams in your LaunchDarkly account             | Full refresh |
+| `team_maintainers`      | Team maintainers, fetched per team             | Full refresh |
+| `team_roles`            | Team roles, fetched per team                   | Full refresh |
+| `code_ref_repositories` | Code reference repositories                    | Full refresh |
+| `code_ref_statistics`   | Code reference statistics, fetched per project | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

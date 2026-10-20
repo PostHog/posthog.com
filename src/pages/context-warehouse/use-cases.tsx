@@ -10,7 +10,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import { IconTrending, IconWarning, IconTarget, IconDatabase } from '@posthog/icons'
-import { HedgehogChartHog, HedgehogDocBrown } from '@posthog/brand/hoggies'
+import { HedgehogChart, HedgehogDocBrown } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -53,7 +53,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'Which features drive revenue?',
-                href: '/pocket-guides/context-warehouse/features-drive-revenue',
+                href: '/pocket-guides/data-stack/features-drive-revenue',
                 ingredients: [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -63,7 +63,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Which onboarding steps turn trials into paying customers?',
-                href: '/pocket-guides/context-warehouse/onboarding-conversion',
+                href: '/pocket-guides/data-stack/onboarding-conversion',
                 ingredients: [
                     { label: 'PostHog funnels', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -72,7 +72,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Which accounts are ready to upsell?',
-                href: '/pocket-guides/context-warehouse/upsell-ready-accounts',
+                href: '/pocket-guides/data-stack/upsell-ready-accounts',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Stripe plans', kind: 'ext' },
@@ -89,7 +89,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'What do customers do right before they cancel?',
-                href: '/pocket-guides/context-warehouse/pre-cancellation-behavior',
+                href: '/pocket-guides/data-stack/pre-cancellation-behavior',
                 ingredients: [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe / Chargebee', kind: 'ext' },
@@ -99,7 +99,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Do support tickets predict churn?',
-                href: '/pocket-guides/context-warehouse/support-tickets-churn',
+                href: '/pocket-guides/data-stack/support-tickets-churn',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Zendesk / Intercom', kind: 'ext' },
@@ -109,7 +109,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Are our biggest accounts our happiest ones?',
-                href: '/pocket-guides/context-warehouse/value-vs-engagement',
+                href: '/pocket-guides/data-stack/value-vs-engagement',
                 ingredients: [
                     { label: 'PostHog groups', kind: 'ph' },
                     { label: 'Salesforce / HubSpot', kind: 'ext' },
@@ -126,7 +126,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'Which channels bring customers who stick?',
-                href: '/pocket-guides/context-warehouse/acquisition-channels-retention',
+                href: '/pocket-guides/data-stack/acquisition-channels-retention',
                 ingredients: [
                     { label: 'PostHog acquisition', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -136,7 +136,7 @@ const sections: Section[] = [
             },
             {
                 question: "Which leads deserve the sales team's time?",
-                href: '/pocket-guides/context-warehouse/lead-scoring',
+                href: '/pocket-guides/data-stack/lead-scoring',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'HubSpot / Salesforce', kind: 'ext' },
@@ -146,7 +146,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Did the feature we shipped move revenue?',
-                href: '/pocket-guides/context-warehouse/feature-revenue-impact',
+                href: '/pocket-guides/data-stack/feature-revenue-impact',
                 ingredients: [
                     { label: 'PostHog experiments', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -171,7 +171,7 @@ interface ModelingSkill {
 
 const foundationsSkill: ModelingSkill = {
     name: 'modeling-warehouse-foundations',
-    href: '/pocket-guides/context-warehouse/warehouse-foundations',
+    href: '/pocket-guides/data-stack/warehouse-foundations',
     builds: (
         <>
             The groundwork for everything else: PostHog views or dbt, the <Mono>view-create</Mono> to{' '}
@@ -185,25 +185,25 @@ const foundationsSkill: ModelingSkill = {
 const modelingSkills: ModelingSkill[] = [
     {
         name: 'modeling-revenue-metrics',
-        href: '/pocket-guides/context-warehouse/revenue-metrics',
+        href: '/pocket-guides/data-stack/revenue-metrics',
         builds: 'MRR, ARR, expansion and contraction, ARPU, LTV, and revenue per account.',
         rule: 'MRR right now and MRR over time are two different models. A live snapshot never turns into a trend, so know which one you need before you build it.',
     },
     {
         name: 'modeling-conversion-metrics',
-        href: '/pocket-guides/context-warehouse/conversion-metrics',
+        href: '/pocket-guides/data-stack/conversion-metrics',
         builds: 'Funnel and step conversion rates, drop-off, and time-to-convert.',
         rule: 'Pin the time box first: signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
     },
     {
         name: 'modeling-activation-metrics',
-        href: '/pocket-guides/context-warehouse/activation-metrics',
+        href: '/pocket-guides/data-stack/activation-metrics',
         builds: 'An activated flag per user or account, plus an activation rate.',
         rule: "Activation is the early behavior that predicts whether people stick around — test it against retention lift. If it doesn't lift, it isn't activation.",
     },
     {
         name: 'modeling-product-usage-metrics',
-        href: '/pocket-guides/context-warehouse/product-usage-metrics',
+        href: '/pocket-guides/data-stack/product-usage-metrics',
         builds: 'Retention, stickiness, and lifecycle models.',
         rule: (
             <>
@@ -214,7 +214,7 @@ const modelingSkills: ModelingSkill[] = [
     },
     {
         name: 'modeling-dimension-tables',
-        href: '/pocket-guides/context-warehouse/dimension-tables',
+        href: '/pocket-guides/data-stack/dimension-tables',
         builds: (
             <>
                 <Mono>dim_country</Mono>, <Mono>dim_plan</Mono>, <Mono>dim_date</Mono>, and the other lookup tables
@@ -329,13 +329,13 @@ function UseCases(): JSX.Element {
                                 </div>
 
                                 <div className="mt-6 w-fit">
-                                    <CallToAction to="/pocket-guides/context-warehouse" size="md">
+                                    <CallToAction to="/pocket-guides/data-stack" size="md">
                                         See all templates
                                     </CallToAction>
                                 </div>
                             </div>
                             <div className="hidden justify-center @lg/reader-content:flex">
-                                <HedgehogChartHog size={280} className="w-full max-w-[280px]" />
+                                <HedgehogChart size={280} className="w-full max-w-[280px]" />
                             </div>
                         </div>
                     </div>

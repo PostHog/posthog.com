@@ -7,16 +7,12 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Twitter
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<AlphaRelease />
 
 The Twitter (X) connector syncs one X account's profile, posts, mentions, likes, followers, following, and owned lists into PostHog. Use it to join social reach and engagement to your product and revenue data, so you can see which posts bring in signups.
 

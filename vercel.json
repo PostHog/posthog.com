@@ -156,6 +156,10 @@
         {
             "source": "/docs/session-replay/learn/:path*",
             "destination": "/docs/session-replay/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/docs/feature-flags/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
@@ -201,6 +205,21 @@
         {
             "source": "/pocket-guides/session-replay/:path*",
             "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags/:path*",
+            "destination": "/docs/feature-flags/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse",
+            "destination": "/pocket-guides/data-stack",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse/:path*",
+            "destination": "/pocket-guides/data-stack/:path*",
             "statusCode": 301
         },
         {
@@ -533,6 +552,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/marketing-analytics:ext(\\.md)?",
+            "destination": "/docs/web-analytics/marketing-analytics:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
             "statusCode": 301
@@ -575,6 +599,11 @@
         {
             "source": "/docs/data/activity-log:ext(\\.md)?",
             "destination": "/docs/settings/activity-logs:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/team-collaboration:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?",
             "statusCode": 301
         },
         {
@@ -743,6 +772,31 @@
             "statusCode": 301
         },
         {
+            "source": "/open-positions",
+            "destination": "/careers",
+            "statusCode": 301
+        },
+        {
+            "source": "/news",
+            "destination": "/blog",
+            "statusCode": 301
+        },
+        {
+            "source": "/press",
+            "destination": "/media",
+            "statusCode": 301
+        },
+        {
+            "source": "/trust",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy-policy",
+            "destination": "/privacy",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -773,8 +827,18 @@
             "statusCode": 301
         },
         {
+            "source": "/feed.xml",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/status",
             "destination": "https://status.posthog.com",
+            "statusCode": 301
+        },
+        {
+            "source": "/art-library",
+            "destination": "https://brand.posthog.com",
             "statusCode": 301
         },
         {
@@ -887,6 +951,14 @@
         {
             "source": "/teams/customer-success/:path*",
             "destination": "/teams/customer-success-eu/:path*"
+        },
+        {
+            "source": "/teams/customer-success-na",
+            "destination": "/teams/customer-success-na-north"
+        },
+        {
+            "source": "/teams/customer-success-na/:path*",
+            "destination": "/teams/customer-success-na-north/:path*"
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
@@ -1032,6 +1104,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/use-case-selling",
+            "destination": "/handbook/growth/use-case-selling/use-case-selling",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/revops/icp-scoring",
             "destination": "/handbook/growth/revops/icp-fit-score",
             "statusCode": 301
@@ -1119,6 +1196,10 @@
         },
         {
             "source": "/teams/posthog-ai",
+            "destination": "/teams/self-driving"
+        },
+        {
+            "source": "/teams/agents",
             "destination": "/teams/self-driving"
         },
         {
@@ -3013,7 +3094,7 @@
         },
         {
             "source": "/manual/team-collaboration",
-            "destination": "/docs/data/team-collaboration"
+            "destination": "/docs/settings/organizations"
         },
         {
             "source": "/manual/utm-segmentation",
@@ -4025,6 +4106,11 @@
             "destination": "/docs/surveys/implementing-custom-surveys:ext?"
         },
         {
+            "source": "/docs/surveys/pricing:ext(\\.md)?",
+            "destination": "/surveys/pricing",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",
             "destination": "/docs/error-tracking/managing-issues:ext?"
         },
@@ -4119,6 +4205,14 @@
         {
             "source": "/blog/ceo-diary-4",
             "destination": "/founders/ceo-diary-4"
+        },
+        {
+            "source": "/blog/ceo-diary-1",
+            "destination": "/founders/ceo-diary-1"
+        },
+        {
+            "source": "/founders/what-recruiters-see",
+            "destination": "/blog/what-recruiters-see"
         },
         {
             "source": "/docs/billing:ext(\\.md)?",
@@ -6494,8 +6588,24 @@
             "destination": "/context-warehouse"
         },
         {
+            "source": "/data-stack/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
             "source": "/data-stack/:path*",
             "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/context-warehouse/managed-warehouse",
+            "destination": "/context-warehouse/warehouse"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/warehouse:ext?"
+        },
+        {
+            "source": "/docs/data-warehouse/managed-warehouse/:path*",
+            "destination": "/docs/data-warehouse/warehouse/:path*"
         },
         {
             "source": "/customer-data-infrastructure/:path*",

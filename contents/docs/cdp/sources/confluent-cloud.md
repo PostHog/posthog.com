@@ -12,9 +12,6 @@ sourceId: ConfluentCloud
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Confluent Cloud connector syncs operational metrics from the [Confluent Cloud Metrics API](https://api.telemetry.confluent.cloud/docs) into the PostHog Data warehouse: Kafka throughput, consumer lag, connector activity, ksqlDB, Schema Registry, and Flink compute pool utilization. Confluent only retains this data for about 7 days, so warehousing it lets you do capacity planning and cost analysis over longer time ranges.
 

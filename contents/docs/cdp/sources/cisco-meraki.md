@@ -12,15 +12,9 @@ sourceId: CiscoMeraki
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+The Cisco Meraki connector syncs network infrastructure data – networks, devices, device inventory, uplink statuses, assurance alerts, network clients, and network events – into PostHog, so you can analyze network health alongside your product data.
 
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
-The Cisco Meraki connector syncs network infrastructure data – networks, devices, device inventory, uplink statuses, and assurance alerts – into PostHog, so you can analyze network health alongside your product data.
-
-Each connection imports one Meraki organization. All tables use full refresh sync.
+Each connection imports one Meraki organization. Most tables use full refresh sync; network events supports incremental sync.
 
 ## Prerequisites
 
@@ -62,8 +56,10 @@ Changing the region requires re-entering your API key.
 | `inventory_devices` | Device inventory for the selected Meraki organization, including devices without an assigned network  | Full refresh |
 | `uplink_statuses`   | Current uplink status for MX, MG, and Z series devices in the selected Meraki organization            | Full refresh |
 | `assurance_alerts`  | Active health alerts for the selected Meraki organization. Resolved and dismissed alerts are excluded | Full refresh |
+| `network_clients`   | Clients that used each network in the selected Meraki organization in the last 31 days                | Full refresh |
+| `network_events`    | Event log entries for each network and product type in the selected Meraki organization               | Incremental  |
 
-**Full refresh** tables reload all data on each sync.
+**Full refresh** tables reload all data on each sync. **Incremental** tables sync only new data since the last sync.
 
 ## Configuration
 

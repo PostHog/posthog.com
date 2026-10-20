@@ -12,9 +12,6 @@ sourceId: GoogleAnalytics
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../\_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Google Analytics connector syncs daily report data from a Google Analytics 4 property – users, sessions, page views, devices, locations, traffic sources, and events – into PostHog.
 

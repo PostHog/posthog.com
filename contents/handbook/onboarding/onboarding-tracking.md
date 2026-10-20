@@ -1,5 +1,5 @@
 ---
-title: Onboarding process and tracking
+title: Onboarding process
 sidebar: Handbook
 showTitle: true
 ---
@@ -21,23 +21,19 @@ The program is guided by a few key principles:
 
 ### Internal process
 
-#### Vitaly views
+#### Customer Analytics view
 
-**Daily view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b">link</PrivateLink>)
+**Comprehensive onboarding view** (<PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts?view=01a11d0a-3430-73f3-be27-777e0b6c904b">link</PrivateLink>)
 
-Sort your view by the “Next Renewal Date” column to reach out to users in a timely manner. Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them ~14 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
+The view is automatically sorted by Onboarding Priority. The formula weights MRR, renewal date, when we last contacted the account, and more, so you mostly work from the top to the bottom of the queue. Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them ~14 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
 
 Keep an eye on “Onboarding Pipeline,” which indicates whether the account is New or Onboarding has been initiated.
 
 In the view, you have other useful columns like OS Priority, OS Last Messaged, forecasted MRR, or who’s assigned to the account. All these help in prioritizing your work.
 
-Maintaining good hygiene and attention to detail is key here. Keep labels up to date and make sure not to miss accounts that were recently added to the segment—they might appear at the top of the list among accounts you’ve already worked through.
+Maintaining good hygiene and attention to detail is key here. Keep labels up to date and make sure not to miss accounts that were recently added to the queue—they might appear at the top of the list among accounts you’ve already worked through.
 
 Remember to add a short summary from meetings in a Note, and if you need to follow up at some point, create a Task with a due date.
-
-**Kanban view** (<PrivateLink url="https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/15496ad6-4a4b-4c53-a9ea-b36100c301cb">link</PrivateLink>)
-
-A supplementary view that’s great for getting a general overview of progress.
 
 #### Onboarding program - logic and sequence
 
@@ -47,15 +43,13 @@ User engagement is tracked behind the scenes with the time stamp in Vitally, tha
 
 For day-to-day operations, these are the statuses we use to track users in the **Onboarding Pipeline** property:
 
-- `1. New Account` - Where new customers land when they enter the `Onboarding Lead` segment. During the outreach, we audit the account and share observations on current usage and optimization tips. We point out any configuration issues affecting their bill or ability to use the product properly. Our main objective is oriented towards trimming unnecessary spending, and communicating our position that [we are the cheapest for every product](https://posthog.com/why). This step can also involve refunding/adjusting bills for misconfigurations, per [our policy](https://posthog.com/handbook/growth/sales/refunds).
+- `1. New Account` - Where new customers land when they get the `Onboarding Lead` tag. During the outreach, we audit the account and share observations on current usage and optimization tips. We point out any configuration issues affecting their bill or ability to use the product properly. Our main objective is oriented towards trimming unnecessary spending, and communicating our position that [we are the cheapest for every product](https://posthog.com/why). This step can also involve refunding/adjusting bills for misconfigurations, per [our policy](https://posthog.com/handbook/growth/sales/refunds).
 - `2. Onboarding Initiated` - Assigned as soon as we send out the initial outreach email.
 - `3. Onboarded` -  The onboarding program has been completed. The status chances automatically after the Graduation email is sent, or we change it manually for some reason.
 - `Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
 - `Paid call purchased` - Assigned when someone buys our consultation via the merch store. The status is applied automatically via [this Workflow](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow). 
 
 The last two are not numbered, as they happen "outside" of the regular pipeline.
-
-> Note: You may need to add this property to your views in Vitally. It's found under `Custom Traits`.
 
 For higher-spend accounts ($500+), we have `Check-in` **Onboarding Status** property that's triggered between 15-21 day in the Onboarding Journey. It serves us as a visual helper and reminder to circle back to the account, see if our advice was followed, record a Loom video, or share some extra resources. It's a great opportunity to re-engage customers and show them some other PostHog's capabilities that they may not know about.
 
@@ -76,7 +70,7 @@ The last two stages of the Onboarding Journey are automated with Vitally playboo
 
 #### Email link tracking
 
-Every link in the automated onboarding emails carries UTM parameters, so we can measure what customers actually click and report on notebooks created and prompts clicked rather than calls booked. The scheme is `utm_source=vitally`, `utm_medium=email`, `utm_campaign=onb_e1` through `onb_e4` (one value per email in the sequence), and `utm_content` naming the individual link:
+Every link in the automated onboarding emails carries UTM parameters, so we can measure what customers actually click and report on notebooks created and prompts clicked rather than calls booked. The scheme is `utm_source=onboarding`, `utm_medium=email`, `utm_campaign=onb_e1` through `onb_e4` (one value per email in the sequence), and `utm_content` naming the individual link:
 
 | Email | Tracked links (`utm_content`) |
 | -------- | -------- |
@@ -105,62 +99,48 @@ The live templates and their sending playbooks (the templates are the canonical 
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 -   Use Wappalyzer (browser or extension) to understand the customer's tech stack better. Credentials available in 1password.
 
-### How this is organized in Vitally via Playbooks
+### How this is organized in Workflows
 
-#### General playbooks
+All onboarding automation lives in the `Onboarding::` [workflows](https://us.posthog.com/project/2/workflows):
 
-- [Onboarding Pipeline Traits](https://posthog.vitally-eu.io/settings/traits/accounts) track the stage.
-- [Boost plan lead for onboarding specialist](https://posthog.vitally-eu.io/settings/playbooks/992541a3-e1cb-4e87-83c1-0b0c70ac1f7f)
-- [100-500 Onboarding Segment Logic - first payment due >100 (updated 9/2/2025)](https://posthog.vitally-eu.io/settings/playbooks/92d05ad4-11d6-44c7-ae29-fa1636b74920)
-- [[Onboarding Pipeline] 1. New Non-startup Account (Onboarding lead first payment due](https://posthog.vitally-eu.io/settings/playbooks/533794c1-e9dc-479c-925c-7e0487648661)
-- [[Onboarding Pipeline] 1. New Startup Account (Startup lead for onboarding specialist)](https://posthog.vitally-eu.io/settings/playbooks/8fd68f0d-0b86-4b16-876f-fb8097e7bf0d)
-
-#### Setting timestamps for each stage
-
-- [[Onboarding Pipeline] 2. Onboarding Initiated -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/c58150a0-a6f5-43bb-a790-59fbdec6d262)
-- [[Onboarding Pipeline] 3. Engaged (Email/Call) -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/b082beb9-227d-45fc-a73a-5c694688e65a)
-- [[Onboarding Pipeline] 4. (Nurture) -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/d1ff7ceb-8b9f-418c-a354-be8e2325c472)
-- [[Onboarding Pipeline] 6a. Onboarded — No Engagement -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/6deca76c-7a96-4675-bfdc-b9ab7ec6f7e4)
-- [[Onboarding Pipeline] 6b. Onboarded — Engaged -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/1e95eb5b-a2ca-4f47-957f-acc193776a34)
-- [[Onboarding Pipeline] 6c. Sales Handoff -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/df072651-3f6f-409b-892d-74cdf099a77c)
-- [[Onboarding Pipeline] 6d. Churned -> set timestamp](https://posthog.vitally-eu.io/settings/playbooks/65d770f0-fe2f-48e9-9295-0cf632974c94)
-
-#### Automations
-
-- [[Pipeline Automation — Stage 1 -> 2] Has been contacted by Onboarding Specialist](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa) - Accounts we reach out to — any with a convo started by Magda or Dan get set to `2. Onboarding Initiated`
-- [[Pipeline Automation — Stage 2 - 3] Move status from Onboarding Initiated to Call booked](https://posthog.vitally-eu.io/settings/playbooks/bbce230d-ca70-40ef-a44d-c5d338fe80f7)
-- [[Pipeline Automation — Stage X - 5] Update status to Awaiting Final Outreach](https://posthog.vitally-eu.io/settings/playbooks/aa1d8ac8-a602-4906-8508-cd29e95abe60) - This status is assigned ~10 days before the next renewal date (after having gone through any other step in the pipeline)
-- [sales lead - first payment due — all 2000+](https://posthog.vitally-eu.io/settings/playbooks/755bce87-458e-4ab7-b4d4-c8a63dec4ca8)
+- **[Enter queue](https://us.posthog.com/project/2/workflows/01a05810-fb1c-0000-5c4d-7ae187210c4d/workflow)** - Every day, moves eligible accounts with no onboarding stage to `1. New Account` and adds the `Onboarding Lead` tag.
+- **[Email sequence](https://us.posthog.com/project/2/workflows/01a0c9f0-60a6-0000-af22-9cd658e27d6c/workflow)** - Sends all four onboarding emails (first outreach, second outreach, last chance, and graduation) and moves the account through the stages. It skips accounts that have an owner, a referral tag, a booked call, or that opted out.
+- **[Stage reactor](https://us.posthog.com/project/2/workflows/01a0c9ee-f490-0000-4f72-e7640fd225e1/workflow)** - Keeps the tags, stage dates, and Onboarding specialist in step with the stage. It also moves referral accounts to `Sales Handoff`.
+- **[Set "Onboarding Initiated" when contacted by OS](https://us.posthog.com/project/2/workflows/01a12061-1ad1-0000-2b7e-9f88bc570da1/workflow)** - Moves an account from `1. New Account` to `2. Onboarding Initiated` when someone on the team emails it from their own inbox.
+- **[Automated 'check-in' status removal](https://us.posthog.com/project/2/workflows/01a11b55-55c2-0000-ecfc-d8c471e18ffb/workflow)** - Clears the Check-in status after a specialist emails the account.
+- **[Check in after the meeting](https://us.posthog.com/project/2/workflows/01a0859c-b295-0000-9509-e7e282dc9f20/workflow)** - Creates a task for the Onboarding specialist 14 days after a meeting.
+- **[Consider referring to Sales](https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow)** - Every week, creates a task for high-spend accounts that can be a good fit for Sales.
+- **[Close out finished sequences](https://us.posthog.com/project/2/workflows/01a0c97d-358a-0000-6ee6-d8b989c088a3/workflow)** - Every day, moves accounts that finished the sequence from `2. Onboarding Initiated` to `3. Onboarding Completed`.
+- **[Automated Payment Failed](https://us.posthog.com/project/2/workflows/01a07bfe-b0f8-0000-7687-9575eeec3b0f/workflow)** - Emails accounts in stage 1 or 2 when a payment fails.
+- **[Gong call summaries to account notes](https://us.posthog.com/project/2/workflows/01a1165b-7003-0000-42c5-4e13f3d663dc/workflow)** - Every hour, adds a summary note to the account for each new Gong call.
+- **[Create customer tasks from scout reports](https://us.posthog.com/project/2/workflows/01a0ab7a-3d0a-0000-f90b-fa73ccc51695/workflow)** - Creates a "Review onboarding brief" task for each onboarding research report from the scout.
+- **[User orders an onboarding consultation from the merch store](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow)** - Sets the account to `Purchased Onboarding Call`, emails the buyer the booking link, and tells the team.
 
 #### Other
 
 - [Post-onboarding satisfaction survey trigger](https://posthog.vitally-eu.io/settings/playbooks/5d5c0361-5565-4d5f-89e7-21744378a2fb)
 
-### Segments
+### Tags
 
-Going forward, we only have one main segment: `Onboarding Lead`. We'll be retiring `Onboarding - engaged` as soon as we have worked through all the legacy accounts. 
+We only have one main tag: `Onboarding Lead`.
 
-We also use the `Onboarding Lead 100-500MRR` auxiliary segment to provide us with more information about the account and help us prioritize the work. 
+We also use the `Onboarding Lead 100-500MRR` auxiliary tag to provide us with more information about the account and help us prioritize the work. 
 
-`Onboarding Completed` segment corresponds with `3.Onboarded` trait and it serves as a visual indicator for other teams that the Onboarding has been completed.
+`Onboarding Completed` tag corresponds with `3.Onboarded` trait and it serves as a visual indicator for other teams that the Onboarding has been completed.
 
 ### Alerts and revenue tracking
 
-We occasionally shift our attention to help customers who may need more urgent assistance. For these, we have a few types of alerts (tasks) in Vitally, where Magda is a failsafe if the account doesn't have an assigned OS.
+We occasionally shift our attention to help customers who may need more urgent assistance. For these, we have a few types of alerts (tasks) in Customer Analytics, where Magda is a failsafe if the account doesn't have an assigned OS.
 
 -   **Failed payments alert** - This is more of a safety net, as users are informed when it happens. It's a good moment to reach out and offer help in figuring out their volume/billing.
 -   **Upcoming large invoice alert** - It lets us prioritize the customer to touch base and make sure the bill doesn't come as a surprise.
 -   **Event/Feature Flag/Replay/Error tracking spike indicator for OS** - unusually high usage that may point to a misconfiguration and require our assistance.
 
-To help our Revenue team get the forecasting right, we now have a `Payment Risk Assessment` field in the Vitally dashboard, where we can manually mark when we see that the customer is unlikely to pay their invoice.
-
 ### Specific cases
 
 #### How to stop automation
 
-There might be some specific situations where you're actively engaged with the customer, and you don't want the email automation to fire off (e.g., the second outreach). You can easily spot when the email automation is scheduled by checking "Onboarding Pipeline Stage Times" widget in the Vitally dashboard. 
-
-To stop the automation, you can flip the account to the `Onboarding Completed` status. This change will block the second outreach, but will still fire the graduation email. 
+WIP
 
 #### Failed payments
 
@@ -168,6 +148,6 @@ We may get a Failed Payment alert on a customer we still haven't engaged with. I
 
 It's enough to reach out just once, as the finance team monitors the payments and handles the account deactivation.
 
-Currently, we exclude some subject line keywords, like "payment", "outstanding", and "fail" in the ["Set onboarding initiated" playbook](https://posthog.vitally-eu.io/settings/playbooks/754f037e-892b-435a-a189-9f3da9b922fa) in order to avoid the status change from `New Account` to `Onboarding initiated`. In other words, when you reach out regarding a failed payment, the account should stay as `New Account` and resurface in Vitally's queue before the next renewal, if the customer settles the payment. When that happens, do our regular outreach with a deep account analysis and enroll them in the program.
+When you reach out regarding a failed payment, the account should stay as `New Account` and resurface in the Customer Analytics queue before the next renewal, if the customer settles the payment. When that happens, do our regular outreach with a deep account analysis and enroll them in the program.
 
 

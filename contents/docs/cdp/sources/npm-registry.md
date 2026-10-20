@@ -9,12 +9,6 @@ availability:
 sourceId: NpmRegistry
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 Pull daily download counts and published-version metadata for npm packages into the PostHog data warehouse. This lets you join npm analytics with your product data in queries, insights, and dashboards.
 
 npm's read APIs are public, so no credentials are required.
@@ -31,14 +25,17 @@ Once the syncs are complete, you can start using npm data in PostHog.
 
 ## Available tables
 
-| Table       | Description                                                                                                                                                                                       | Sync method  |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `Downloads` | Daily download counts per configured package, from the npm [downloads-counts API](https://github.com/npm/registry/blob/master/docs/download-counts.md).                                           | Incremental  |
-| `Versions`  | Published version metadata (publish time, dist-tags, license, tarball URL) per configured package, from the npm [registry API](https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md). | Full refresh |
+| Table              | Description                                                                                                                                                                                                                                                       | Sync method  |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `Downloads`        | Daily download counts per configured package, from the npm [downloads-counts API](https://github.com/npm/registry/blob/master/docs/download-counts.md).                                                                                                           | Incremental  |
+| `Versions`         | Published version metadata (publish time, dist-tags, license, tarball URL) per configured package, from the npm [registry API](https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md).                                                                 | Full refresh |
+| `VersionDownloads` | Download counts per published version over the last 7 days, per configured package, from the npm [downloads-counts API](https://github.com/npm/registry/blob/master/docs/download-counts.md). Each sync replaces the table with the current rolling 7-day window. | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 The `Versions` table is always full refresh because the npm registry API has no server-side "changed since" filter.
+
+The `VersionDownloads` table joins onto the `Versions` table on `package` and `version`.
 
 ## Sync limitations
 

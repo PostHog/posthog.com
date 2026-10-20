@@ -7,15 +7,11 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Spacelift
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
 
 The Spacelift connector syncs your infrastructure-as-code data into PostHog, including stacks, runs, policies, and managed resources. Use it to analyze deployment frequency, run durations, drift detection, and policy activity across your Terraform, OpenTofu, and Pulumi stacks.
 

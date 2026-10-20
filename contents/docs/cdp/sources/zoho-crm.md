@@ -9,12 +9,9 @@ availability:
 sourceId: ZohoCRM
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
-
-<AlphaRelease />
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Zoho CRM connector syncs leads, contacts, accounts, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -28,7 +25,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect your Zoho CRM account to pull leads, contacts, deals, and your other modules.
 
-In the [Zoho API console](https://api-console.zoho.com), create a **Self Client** and generate a refresh token for the scopes `ZohoCRM.modules.ALL`, `ZohoCRM.settings.fields.READ`, and `ZohoCRM.settings.modules.READ`. Paste the client ID, client secret, and refresh token below, then pick the data center your Zoho account lives in.
+In the [Zoho API console](https://api-console.zoho.com), create a **Self Client** and generate a code for the scopes `ZohoCRM.modules.ALL`, `ZohoCRM.settings.fields.READ`, and `ZohoCRM.settings.modules.READ`. That code is not a refresh token and expires within minutes. Exchange it for a refresh token by sending a POST request to `/oauth/v2/token` on your data center's Zoho accounts domain, with `grant_type=authorization_code`, your client ID, client secret, and the code. Paste the client ID, client secret, and refresh token below, then pick the data center your Zoho account lives in.
 
 You'll be asked for:
 
