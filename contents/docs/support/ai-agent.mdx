@@ -14,7 +14,11 @@ The AI agent drafts a reply when a new ticket arrives. You decide whether that d
 
 Replies are grounded in your [business knowledge](/docs/posthog-ai/allow-access) sources: documents, links, and other context you add.
 
-[SCREENSHOT: Support > Settings > AI agent tab with reply behavior table]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_32_11_4ca06d4936.png"
+    alt="AI agent"
+    classes="rounded"
+/>
 
 ## Turn it on
 
@@ -22,6 +26,12 @@ Replies are grounded in your [business knowledge](/docs/posthog-ai/allow-access)
 2. Turn on **Enable AI agent**.
 3. Confirm AI data processing is allowed for your organization.
 4. Add at least one business knowledge source and wait until it is ready.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_16_52dfe7e34c.png"
+    alt="Turn it on"
+    classes="rounded"
+/>
 
 Without consent and a ready source, the agent has nothing to ground a reply in.
 
@@ -33,9 +43,21 @@ When it is on, a ticket that reports something broken can be checked against you
 
 Leave it off if you want replies grounded only in documentation and business knowledge.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_20_ed671ea867.png"
+    alt="Let it investigate the ticket"
+    classes="rounded"
+/>
+
 ## Choose the channels
 
 Under **Allowed channels**, pick where the agent runs. A channel that is not connected yet stays disabled until you enable it under **Channels**. The list is the widget (including the API), Slack, email, Microsoft Teams, and GitHub.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_42_e502308ad9.png"
+    alt="Choose the channels"
+    classes="rounded"
+/>
 
 ## Choose what the customer sees
 
@@ -49,6 +71,10 @@ For each channel you enabled, set a reply mode per ticket type.
 
 **Private note** is the default. Only your team sees it. **AI reply** sends a safety-reviewed message to the customer. On a channel set to **AI reply**, the agent may also ask the customer one clarifying question.
 
-[SCREENSHOT: Ticket with AI-drafted private note]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_49_ba946a7d3b.png"
+    alt="Choose what the customer sees"
+    classes="rounded"
+/>
 
 Diagnostic and Account/Billing stay private even if you would prefer a customer reply. The product enforces that. Do not paste a private note into the customer thread if it contains project data you would not send yourself.

@@ -14,7 +14,11 @@ The **SupportHog** bot connects a Microsoft Teams tenant to PostHog Support. Cha
 
 This is separate from [PostHog's Microsoft Teams destination](/docs/cdp/destinations/microsoft-teams), which sends alerts. SupportHog has its own bot and its own connection.
 
-[SCREENSHOT: Support > Settings > Microsoft Teams tab with a shared channel showing the Shared · polled tag]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_18_42_5e6bee4257.png"
+    alt="Connect Microsoft Teams"
+    classes="rounded"
+/>
 
 ## Connect Teams
 
@@ -80,7 +84,11 @@ A top-level message in a configured channel, or an `@SupportHog` mention, does a
 - Sets `channel_source` to `teams`
 - Posts a confirmation card in the thread with the ticket number and a link to PostHog
 
-[SCREENSHOT: Teams channel with SupportHog ticket confirmation card]
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_10_01_13_3965af1866.png"
+    alt="Microsoft Teams: How tickets are created"
+    classes="rounded"
+/>
 
 Messages from bots, system events, deleted messages, and empty messages are ignored.
 
