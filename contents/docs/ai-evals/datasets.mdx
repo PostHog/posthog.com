@@ -136,11 +136,9 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 PostHog applies limits to datasets to prevent abuse. These limits are subject to change.
 
-## Coming soon: offline evals reporting
+## Report results with offline evals
 
-Today datasets are the curation and export half of the loop. You export a revision, run it in your own harness, and read the results wherever you run them.
-
-We're working on closing that loop. Soon you'll be able to report the results of an offline evaluation run back into PostHog, scored per dataset item and grouped by run, so you can compare a prompt or model change against the previous run and see which specific items regressed – all next to the [online evaluations](/docs/ai-evals) already scoring your production traffic.
+After your CI run scores each dataset item, send the results to PostHog with [offline evals](/docs/ai-evals/offline-evals). Each run appears as an experiment, with one row per test case and one column per evaluator, so you can compare runs and find the items that regressed.
 
 ## Further reading
 
