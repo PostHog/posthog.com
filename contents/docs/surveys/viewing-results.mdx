@@ -58,6 +58,18 @@ You can filter survey results to focus on specific responses or user segments:
 - **Property filters** - Add filters for event properties, person properties, feature flags, cohorts, or HogQL expressions.
 - **Show archived** - Toggle **Show archived** to include or exclude archived responses.
 
+### Emailing survey respondents
+
+You can email survey respondents directly from the results page. An **Email respondents** button appears next to the export button on both the **Summary** and **Responses** tabs.
+
+When filters are active, the button reads **Email these respondents** so you know the audience matches your current view. Clicking it saves the matching respondents as a static cohort and opens the [broadcast](/docs/workflows/broadcasts) wizard.
+
+The audience includes only people who submitted a response. People who only dismissed the survey are excluded. If someone answered at least one question and then dismissed (in a survey with partial completion enabled), they are still included.
+
+If no responses match the current filters, or if none of the matching respondents has an email address, PostHog shows a message and no cohort is created.
+
+> **Note:** This button is only visible to users with permission to edit workflows.
+
 ## 2. On a dashboard
 
 You can add a Survey Results widget to any [dashboard](/docs/product-analytics/dashboards) to track survey performance alongside other metrics.
