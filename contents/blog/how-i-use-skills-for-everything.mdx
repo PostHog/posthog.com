@@ -1,6 +1,6 @@
 ---
 title: "How I use skills for everything"
-date: 2026-10-13
+date: 2026-10-20
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -15,7 +15,7 @@ tags:
     - Explainers
     - AI
 seo:
-    metaTitle: "Skills are everything (and everything is skills)"
+    metaTitle: "How I use skills for everything"
     metaDescription: "How I use PostHog skills as agent memory for project tracking, data warehouse context, inbox triage, team handovers, and self-maintaining scouts."
 ---
 
@@ -49,11 +49,9 @@ You should think of skills as **little portable agentic memory systems**. They a
 
 The body is typically a thin index. The bundled files hold the detail. The agent reads them and pulls only the files the current task touches. That's [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#progressive-disclosure-patterns), and it's mostly the point.
 
-We shouldn't need magical skills to make AI better, and I think that whole category will go away soon. Models will just be good and just "get it" much more while of course using memory and tools to just get what they need.
-
 A lot of the time skills are used to provide the agent with instructions, but this will likely go away as models get better. They will just use their built in memory and tools to get what they need.
 
-What won't go away is the need to **manage context**. This means telling agents what's true right now, what happened last session, what's in-flight, and what bit us before. That's the part I'm skills-pilled on and part that's changed my work the most. Here's some examples. 
+What won't go away is the need to **manage context**. This means telling agents what's true right now, what happened last session, what's in-flight, and what bit us before. That's the part I'm skills-pilled on, and the part that's changed my work the most. Here are some examples. 
 
 
 
@@ -111,9 +109,9 @@ My favorite part of the template is a small table the agent has to consult befor
 | No, but in flight now  | You, this session              | your `HANDOVER.md` section                |
 | No, it just happened   | Nobody                         | `CHANGELOG.md`, one line                  |
 
-The most common failure of the skill is durable detail written into the changelog, because the changelog is the file the agent was already editing. That table exists because I watched it happen many times.
+The table is there to stop the most common way these skills go wrong: the agent writes durable detail into the changelog, because the changelog is the file it was already editing. I watched that happen many times before I added the table.
 
-You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. Don't worry much about the layout. Agents do something sensible on their own, and in my experience, skills only starts to get messy at around version 50. The important part is that the context is in a skill you can see, version, and load from anywhere.
+You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. Don't worry much about the layout. Agents do something sensible on their own, and in my experience, a skill only starts to get messy at around version 50. The important part is that the context is in a skill you can see, version, and load from anywhere.
 
 
 ## 2. Skills as a map of the stuff I work on
@@ -194,7 +192,7 @@ The skill bundles Python scripts to do the boring parts: `render_table.py` build
 
 It also has a `working-set.md` that records only what I've personally chosen to own, with four rules to guide it:
 
-1. **Live first, memory second.**
+1. **Check the live state first, the file second.**
 2. The API is the truth.
 3. The file is a list of my commitments.
 4. Never report status from the file alone.
@@ -243,13 +241,13 @@ Yes, I have skills that maintain skills. I did warn you.
 
 I even used a skill to write this blog. The `andy-blogs` skill has one file per post with the argument, sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. 
 
-When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, not skills). It's well past 20 versions by now, and this paragraph is in its changelog. It helps with all the annoying stuff about writing blog posts like adding the screenshots. And I also use it to tell the agent how I write blog posts: I need to fire up VSCode to eyeball every diff before we commit as agents are to eager to try add stuff I don't want in the final post.
+When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, not skills). It's well past 20 versions by now, and this paragraph is in its changelog. It helps with all the annoying stuff about writing blog posts like adding the screenshots. And I also use it to tell the agent how I write blog posts: I need to fire up VS Code to eyeball every diff before we commit, as agents are too eager to add stuff I don't want in the final post.
 
 This isn't just a set of instructions. The skill is a document I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
 
 ## Why the store, and not a folder of Markdown files
 
-You could do all of this with a local `.claude|agents/skills/` folder but that's just crazy. Vibing your own plumbing and CI to get your skills to every agent is also totally possible but crazy. Using a skill store gives you benefits like:
+You could do all of this with a local `.claude/skills/` or `.agents/skills/` folder, but that's just crazy. Vibing your own plumbing and CI to get your skills to every agent is also totally possible but crazy. Using a skill store gives you benefits like:
 
 - **It's on every surface.** The same skill loads in Claude Code on my laptop, in a cloud task, in Slack, in Codex, in Cursor, and in PostHog AI.
 - **Agents can write to it.** The `skill-update` tool takes incremental `edits` and `file_edits` with a `base_version` check, so two sessions can maintain the same skill without clobbering each other.
