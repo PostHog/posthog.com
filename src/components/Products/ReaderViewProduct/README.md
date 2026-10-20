@@ -11,7 +11,9 @@ Tabs with an `href` navigate when they are not already active. Clicking the acti
 keeps the current page open. Its Overview link returns to the learning hub.
 
 Products opt in to Learn with `pocketGuideVolume`. Products with `learnHub` use one `TreeMenu`
-on the overview and chapter pages. The tree links to Overview and Pocket guide. Pocket guide
+on the overview, agent teaching page, and chapter pages. The tree contains direct links to
+Overview, Pocket guide, Agent prompts and MCP, and Live playground. All four open
+internal pages; the Live playground page links out to the live Twig site. Pocket guide
 links to the introduction and has nested chapter links sourced from `useBookPages`; the shared
 TreeMenu handles expansion and selection. Learn does not use anchor links or swap menus based
 on the current route. Products without a hub retain a flat list of chapter links.
