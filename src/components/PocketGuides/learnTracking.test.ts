@@ -3,6 +3,7 @@ import test, { type TestContext } from 'node:test'
 import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { runInNewContext } from 'node:vm'
+import { fileURLToPath } from 'node:url'
 
 import { isReaderWindowActive, twigLearnUrl } from './learnTracking.ts'
 
@@ -65,6 +66,33 @@ function sdk(optedOut = false) {
         get_session_id: () => 'session',
     }
 }
+
+test('Gatsby resolves the extensionless Learn tracking import to TypeScript', async (t) => {
+    const requireGatsby = createRequire(requireDependency.resolve('gatsby/package.json'))
+    const mdxOptions = requireDependency('../../../gatsby-config.js').plugins.find(
+        (plugin: { resolve?: string }) => plugin.resolve === 'gatsby-plugin-mdx'
+    ).options
+    const mdxExtensions = requireDependency('gatsby-plugin-mdx/gatsby-node').resolvableExtensions({}, mdxOptions)
+    const tsExtensions = requireGatsby('gatsby-plugin-typescript/gatsby-node').resolvableExtensions()
+    // Gatsby registers MDX before its built-in TypeScript plugin; same-basename notes must not shadow code.
+    const compiler = requireDependency('webpack')({
+        mode: 'none',
+        resolve: { extensions: [...mdxExtensions, ...tsExtensions] },
+    })
+    t.after(() => new Promise<void>((resolve) => compiler.close(resolve)))
+    const resolved = await new Promise<string>((resolve, reject) => {
+        compiler.resolverFactory
+            .get('normal')
+            .resolve(
+                {},
+                fileURLToPath(new URL('.', import.meta.url)),
+                './learnTracking',
+                {},
+                (error: Error | null, result: string) => (error ? reject(error) : resolve(result))
+            )
+    })
+    assert.equal(resolved, fileURLToPath(new URL('./learnTracking.ts', import.meta.url)))
+})
 
 test('an opted-out visitor reaches Twig without an identity handoff', (t) => {
     browser(t).window.localStorage.setItem('cookie_consent', 'yes')
