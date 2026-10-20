@@ -50,7 +50,7 @@ import {
 // headings) with the /desktop opening narrative ("The old way" → "The PostHog way")
 // and a small version of the /mcp terminal. Not in the nav, so it's noindex.
 
-const TITLE = 'The AI that watches session recordings for you'
+const TITLE = 'The AI that watches your product for you'
 const FREE_TIER = '5,000 recordings and 2,500 Replay Vision credits free every month.'
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 
@@ -160,17 +160,15 @@ const HeroSection = () => {
                     </p>
                     <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:text-3xl">{TITLE}</h1>
                     <p className="mt-0 mb-4">
-                        Record what people do in your product: clicks, scrolls, form inputs, page views, network
-                        requests, and console logs. Then point an AI at the sessions you care about, and get back
-                        observations you can query, chart, and alert on.
+See exactly what people do in your product, from clicks and scrolls to network requests and console logs. Then let the AI do the watching. Tell it what to look for and it flags where people got stuck, scores frustration, and summarizes what happened.
                     </p>
                     <CTAButtons />
                     <p className="text-sm text-secondary mt-3 mb-0">5,000 recordings free every month, forever.</p>
                 </div>
                 <div className="w-full max-w-xs mx-auto @4xl/reader-content:mx-0 @4xl/reader-content:w-[38%] @4xl/reader-content:max-w-none">
                     <CloudinaryImage
-                        src={IMAGES.monitorsHog}
-                        alt="A detective hedgehog watching a wall of monitors"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_8d8c4d3881.png"
+                                alt="A Replay Vision observation showing the verdict, confidence score, and timestamped reasoning"
                         className="w-full"
                         imgClassName="w-full h-auto"
                     />
@@ -197,180 +195,6 @@ const HeroSection = () => {
 }
 
 // ─────────────────────────────────────────────
-// "The old way", adapted from /desktop
-// ─────────────────────────────────────────────
-
-const OldWaySection = () => {
-    // Same checklist as /desktop: ticks for what you already have, crosses for what's still on you.
-    const soundFamiliar = [
-        { text: "You're recording user sessions with PostHog Session Replay or a separate tool", checked: true },
-        { text: 'You filter by rage clicks and errors to find the sessions worth a look', checked: true },
-        { text: 'You still have to spend hours finding out what actually happened', checked: false },
-        { text: 'When conversion drops, you go digging through replays to find out why', checked: false },
-    ]
-
-    return (
-        <section className="not-prose relative mb-12">
-            <SectionLabel>
-                The{' '}
-                <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
-                    old way
-                </InlineIcon>{' '}
-                to record user sessions
-            </SectionLabel>
-
-            <p className="text-base leading-loose mb-8">
-                <ChoppyReveal wordDelay={40}>
-                    {'Most session replay tools record everything, then wait for '}
-                    <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
-                        <em>you</em>
-                    </RoughAnnotation>
-                    {' to hit '}
-                    <KeyBadge>
-                        <span className="relative top-px">▶</span> Play
-                    </KeyBadge>
-                    {". This doesn't work if you have "}
-                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2} multiline>
-                        <em>thousands of session recordings</em>
-                    </RoughAnnotation>
-                    {'.'}
-                </ChoppyReveal>
-            </p>
-
-            {/* Checklist + receipt, the same pairing as /desktop. */}
-            <div className="mt-8 grid items-start gap-8 @2xl/reader-content:grid-cols-2 @2xl/reader-content:gap-12">
-                <div>
-                    <h3 className="mb-3 text-lg font-bold text-primary">Sound familiar?</h3>
-                    <ul className="m-0 list-none space-y-2.5 p-0">
-                        {soundFamiliar.map(({ text, checked }) => (
-                            <li key={text} className="flex items-start gap-2.5">
-                                {checked ? (
-                                    <IconCheck className="relative top-0.5 size-5 shrink-0 text-green" />
-                                ) : (
-                                    <IconX className="relative top-0.5 size-5 shrink-0 text-red" />
-                                )}
-                                <span className="text-base">{text}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="@2xl/reader-content:pl-4">
-                    <div className="relative mx-auto w-full max-w-xs">
-                        <img
-                            src={IMAGES.lemonHog}
-                            alt=""
-                            aria-hidden
-                            className="pointer-events-none absolute -right-16 top-8 z-0 w-24 rotate-12 hidden @2xl/reader-content:block"
-                        />
-                        <div className="relative z-10">
-                            <Receipt
-                                title="FREE EVERY MONTH"
-                                subtitle="(no credit card required)"
-                                rows={[
-                                    { label: '5,000 web recordings' },
-                                    { label: '2,500 mobile recordings' },
-                                    { label: '2,500 Replay Vision credits' },
-                                ]}
-                                footer="thanks for not watching"
-                            />
-                        </div>
-                        <img
-                            src={IMAGES.bananaHog}
-                            alt=""
-                            aria-hidden
-                            className="pointer-events-none absolute -bottom-10 -left-16 z-20 w-28 hidden @2xl/reader-content:block"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-// ─────────────────────────────────────────────
-// "The PostHog way", adapted from /desktop
-// ─────────────────────────────────────────────
-
-// What Session Replay captures, so what Replay Vision gets to look at.
-const whatItSees: CalloutItem[] = [
-    { label: 'Clicks', icon: IconCursorClick, color: 'text-red' },
-    { label: 'Scrolls', icon: IconList, color: 'text-blue' },
-    { label: 'Form inputs', icon: IconLetter, color: 'text-green' },
-    { label: 'Page views', icon: IconDocument, color: 'text-purple' },
-    { label: 'Network requests', icon: IconGraph, color: 'text-orange' },
-    { label: 'Console logs', icon: IconTerminal, color: 'text-yellow' },
-    { label: 'The video itself', icon: IconVideoCamera, color: 'text-red' },
-]
-
-const PostHogWaySection = () => {
-    const [p1Done, setP1Done] = useState(false)
-    const watchesWordRef = useRef<HTMLSpanElement>(null)
-    const calloutRef = useRef<HTMLDivElement>(null)
-    const sectionRef = useRef<HTMLElement>(null)
-
-    return (
-        <section ref={sectionRef} className="not-prose relative mb-12">
-            <SectionLabel>
-                The{' '}
-                <InlineIcon icon={replayVision.Icon} className="text-yellow -rotate-2">
-                    {' '}
-                    PostHog way
-                </InlineIcon>
-            </SectionLabel>
-
-            <div className="flex flex-col @2xl/reader-content:block">
-                <div
-                    ref={calloutRef}
-                    className="order-2 mb-5 @2xl/reader-content:order-none @2xl/reader-content:float-right @2xl/reader-content:ml-6 @2xl/reader-content:my-2 @2xl/reader-content:w-[300px]"
-                >
-                    <SignalsCallout title="What it sees" items={whatItSees} />
-                </div>
-
-                <p className="text-base leading-loose mb-5 order-1">
-                    <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                        <strong>Replay Vision </strong>
-                        <span ref={watchesWordRef}>
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(48, 164, 108, 0.2)"
-                                strokeWidth={1}
-                                padding={2}
-                            >
-                                <strong>watches</strong>
-                            </RoughAnnotation>
-                        </span>
-                        {' your recordings for you and turns what it sees into '}
-                        <strong>observations</strong>
-                        {'.'}
-                    </ChoppyReveal>
-                </p>
-            </div>
-
-            <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={25} initialDelay={p1Done ? 0 : 999999}>
-                    {'Ask a question in plain English and get an answer for every '}
-                    <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
-                        <strong className="inline-block mx-1">session you point it at</strong>
-                    </RoughAnnotation>
-                    {'.'}
-                </ChoppyReveal>
-            </p>
-
-            <p className="text-base leading-loose mb-0">
-                <strong>TL;DR:</strong> Somebody has to watch all those recordings.{' '}
-                <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
-                    <span className="inline-block">It doesn't have to be you.</span>
-                </RoughAnnotation>
-            </p>
-
-            <div className="clear-both" />
-            <DottedConnection sourceRef={watchesWordRef} targetRef={calloutRef} containerRef={sectionRef} desktopOnly />
-        </section>
-    )
-}
-
-// ─────────────────────────────────────────────
 // How it works
 // ─────────────────────────────────────────────
 
@@ -388,7 +212,7 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Once you get started with PostHog, Session Replay starts capturing sessions on web and mobile. Input
+                    Session Replay captures sessions on web and mobile. Input
                     fields are masked by default, so passwords and card numbers stay out of the recording.
                 </p>
                 <SlideCallout>Your first 5,000 web recordings each month are free.</SlideCallout>
@@ -403,7 +227,7 @@ const steps: CarouselSlideType[] = [
     },
     {
         slug: 'describe',
-        label: '2. Point the AI',
+        label: '2. Direct the AI',
         icon: <IconMagic className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -413,16 +237,8 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Write what you're looking for in plain English, like "did the user get stuck on checkout?" Use the
-                    same filters you already use in Session Replay to choose which recordings it watches, and set what
-                    share of them it samples. It scans new matching recordings as they come in, or sessions you pick,
-                    catching hesitation and confusion that never fire an event.
+                            Ask a question in plain English, like "did the user get stuck on checkout?" The AI watches the sessions you point it at and catches the hesitation and confusion that never show up as an event.
                 </p>
-                <SlideCallout>
-                    Not sure what to ask? Pick a starting point like{' '}
-                    <strong className="text-primary">"Where do people get stuck?"</strong> and PostHog AI drafts the
-                    scanner for you.
-                </SlideCallout>
             </>
         ),
         image: {
@@ -737,7 +553,7 @@ const MCPTerminal = () => {
 
 const faqs = [
     {
-        q: 'Does it watch every session?',
+        q: 'Does Replay Vision watch every session?',
         a: "No, and you wouldn't want it to. A scanner watches only the recordings that match its filters, at the sampling rate you set, so you control what gets scanned and what it costs.",
     },
     {
@@ -745,29 +561,21 @@ const faqs = [
         a: 'Session Replay gives you 5,000 web recordings and 2,500 mobile recordings free every month. After that, web recordings start at $0.005 each. Replay Vision gives you 2,500 credits free every month. One credit is $0.01, and each observation costs 2, 5, or 15 credits depending on the model. On the default model, 2,500 credits cover 500 observations a month.',
     },
     {
-        q: 'Can I trust what it says?',
+        q: 'Can I trust what Replay Vision says?',
         a: "Every observation shows a confidence score and its reasoning. Rate observations with a thumbs up or down and the scanner learns from your team's ratings.",
     },
     {
-        q: 'What about privacy?',
+        q: 'Hoes does Session Replay protect user privacy?',
         a: "Session Replay masks inputs by default, and you can mask anything else. Replay Vision checks each answer for personal data the scanner didn't ask for. If it finds any, it rewrites the answer, and if the rewrite still has personal data, the scan fails and nothing is saved.",
     },
     {
-        q: 'Which AI model does it use?',
-        a: 'Google Gemini. You pick the model for each scanner, and that choice sets what each observation costs.',
     },
     {
-        q: 'Can it tell me when something goes wrong?',
+        q: 'Can Replay Vision tell me when something goes wrong?',
         a: 'Yes. You can set alerts that fire on matching observations or when a metric crosses a threshold, and send them to Slack or a webhook.',
     },
 ]
 
-const MORE_QUESTIONS = [
-    'Why are users dropping off in my funnel?',
-    'How do I see where errors happen?',
-    'How can I improve customer support with screen recordings?',
-    'How do I control which sessions are being captured?',
-]
 
 // The pricing sections from /session-replay/pricing and /replay-vision/pricing,
 // switched with the same toggle as the Replay Vision "AI prompts" section.
@@ -915,10 +723,7 @@ export default function ReplayVisionLanding(): JSX.Element {
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Install with the wizard</h4>
                                 <p className="text-sm text-secondary leading-relaxed m-0 mb-3">
-                                    Run it in your project directory. It reads your codebase, installs the PostHog SDK
-                                    if you don't have it yet, turns on Session Replay, and creates three scanners
-                                    written for your product: one that watches your key flow for breakage, one that
-                                    watches for frustration, and one that summarizes sessions.
+Run it in your project and it sets everything up, including three scanners written for your product.
                                 </p>
                                 <WizardCommand command="replay-vision" variant="bordered" slim />
                                 <p className="text-sm text-secondary leading-relaxed mt-3 mb-0">
