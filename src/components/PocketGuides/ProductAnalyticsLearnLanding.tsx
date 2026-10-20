@@ -10,7 +10,9 @@ import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
 import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import usePostHog from '../../hooks/usePostHog'
 import Cover from './Cover'
+import { twigLearnUrl } from './learnTracking'
 import type { LearnLandingProps } from './LearnPage'
 
 const AGENT_TEACHING_PROMPT = `Teach me PostHog Product Analytics using my own product and PostHog project.
@@ -28,6 +30,9 @@ const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${e
 export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: LearnLandingProps): JSX.Element {
     const volume = volumeById('product-analytics')
     const counts = usePocketGuideCounts()
+    const posthog = usePostHog()
+    const selectResource = (resource: string, option: string) =>
+        posthog?.capture('learn_resource_selected', { volume: 'product-analytics', resource, option })
 
     return (
         <div className="not-prose mx-auto max-w-5xl pb-8 text-primary">
@@ -73,7 +78,10 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                                 variant="primary"
                                 size="md"
                                 icon={<IconClaudeCode className="[&_path]:!fill-current" />}
-                                onClick={() => window.location.assign(claudeCodePromptUrl(AGENT_TEACHING_PROMPT))}
+                                onClick={() => {
+                                    selectResource('agent_teacher', 'claude_code')
+                                    window.location.assign(claudeCodePromptUrl(AGENT_TEACHING_PROMPT))
+                                }}
                             >
                                 Open in Claude Code
                             </OSButton>
@@ -82,7 +90,10 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                                 variant="primary"
                                 size="md"
                                 icon={<LogomarkCodex className="[&_path]:!fill-current" />}
-                                onClick={() => window.location.assign(codexPromptUrl(AGENT_TEACHING_PROMPT))}
+                                onClick={() => {
+                                    selectResource('agent_teacher', 'codex')
+                                    window.location.assign(codexPromptUrl(AGENT_TEACHING_PROMPT))
+                                }}
                             >
                                 Open in Codex
                             </OSButton>
@@ -96,6 +107,12 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             showCopy
                             showLineNumbers={false}
                             showAskAI={false}
+                            onCopy={() =>
+                                posthog?.capture('learn_prompt_copied', {
+                                    volume: 'product-analytics',
+                                    resource: 'agent_teacher',
+                                })
+                            }
                         >
                             {AGENT_TEACHING_PROMPT}
                         </SingleCodeBlock>
@@ -120,7 +137,13 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             Follow their journey from shipping features to discovering how people use them. See how they
                             decide what to track and use that data to answer questions about their product.
                         </p>
-                        <OSButton asLink to={storyUrl} variant="primary" size="md">
+                        <OSButton
+                            asLink
+                            to={storyUrl}
+                            variant="primary"
+                            size="md"
+                            onClick={() => selectResource('story', 'start_reading')}
+                        >
                             Start reading
                         </OSButton>
                     </div>
@@ -135,6 +158,7 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                                 count={counts[volume.id] ?? 0}
                                 placement="product_docs"
                                 to={storyUrl}
+                                onOpen={() => selectResource('story', 'cover')}
                             />
                         </div>
                     )}
@@ -158,7 +182,26 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             Twig is a working product with PostHog already instrumented in it. Click around and see the
                             data your actions create, then use its embedded Playground to tinker.
                         </p>
-                        <OSButton asLink to={TWIG_URL} external hideExternalIcon variant="primary" size="md">
+                        <OSButton
+                            asLink
+                            to={TWIG_URL}
+                            external
+                            hideExternalIcon
+                            variant="primary"
+                            size="md"
+                            onClick={(event) => {
+                                selectResource('twig', 'explore_twig')
+                                const currentPostHog = window.posthog
+                                const destination = twigLearnUrl(currentPostHog, TWIG_URL)
+                                if (destination === TWIG_URL) return
+
+                                // The website project needs a profile to join this anonymous visitor across domains.
+                                currentPostHog?.createPersonProfile?.()
+                                // Keep the copyable link free of this visitor's ID.
+                                event.preventDefault()
+                                window.open(destination, '_blank', 'noopener,noreferrer')
+                            }}
+                        >
                             Explore Twig
                         </OSButton>
                     </div>

@@ -2,9 +2,12 @@ import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { useAppWindows } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
+import { isReaderWindowActive } from './learnTracking'
 
 interface LearnBodyNode {
     body: string
@@ -44,6 +47,71 @@ interface LearnSurfaceProps {
     basePath: string
 }
 
+/** Count a chapter only after ten visible seconds and reaching its end. */
+function ChapterEngagement({ volume, chapter }: { volume: string; chapter: string }): JSX.Element {
+    const endRef = React.useRef<HTMLDivElement>(null)
+    const { windows } = useAppWindows()
+    const { appWindow } = useWindow()
+    const readerIsActive = isReaderWindowActive(windows, appWindow?.key)
+    const readerIsActiveRef = React.useRef(readerIsActive)
+    React.useEffect(() => {
+        readerIsActiveRef.current = readerIsActive
+    }, [readerIsActive])
+
+    React.useEffect(() => {
+        const end = endRef.current
+        if (!end || !window.IntersectionObserver) return
+
+        let visibleSeconds = 0
+        let reachedEnd = false
+        let captured = false
+        const captureIfEngaged = () => {
+            const posthog = window.posthog
+            if (
+                captured ||
+                !posthog ||
+                document.visibilityState !== 'visible' ||
+                !readerIsActiveRef.current ||
+                visibleSeconds < 10 ||
+                !reachedEnd
+            )
+                return
+            posthog.capture('learn_chapter_engaged', {
+                volume,
+                chapter,
+                threshold: '10_visible_seconds_and_end_reached',
+            })
+            captured = true
+        }
+
+        const scrollViewport = end.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        const root = scrollViewport && scrollViewport.scrollHeight > scrollViewport.clientHeight ? scrollViewport : null
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    reachedEnd = true
+                    captureIfEngaged()
+                }
+            },
+            { root }
+        )
+        observer.observe(end)
+
+        const timer = window.setInterval(() => {
+            if (document.visibilityState === 'visible' && readerIsActiveRef.current) visibleSeconds += 1
+            captureIfEngaged()
+            if (captured) window.clearInterval(timer)
+        }, 1000)
+
+        return () => {
+            observer.disconnect()
+            window.clearInterval(timer)
+        }
+    }, [volume, chapter])
+
+    return <div ref={endRef} className="h-px" aria-hidden="true" />
+}
+
 /** One chapter of a volume, rendered in the docs reader. */
 export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfaceProps): JSX.Element | null {
     const pages = useBookPages(volumeId)
@@ -70,6 +138,11 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
             </EntryProvider>
+            <ChapterEngagement
+                key={entry.url}
+                volume={volumeId}
+                chapter={entry.isFrontMatter ? 'introduction' : learnChapterSlug(entry)}
+            />
         </div>
     )
 }
