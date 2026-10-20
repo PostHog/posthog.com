@@ -12,13 +12,13 @@ Need access first? [Join the waitlist](/context-warehouse/warehouse), then [set 
 
 </CalloutBox>
 
-Queries run on a Trino pool that PostHog manages and scales for you. There are no worker sizes to pick: a coordinator plans each query and spreads the work across many workers in parallel.
+Queries run on shared compute that PostHog manages and scales for you. There are no worker sizes to pick: a coordinator plans each query and spreads the work across many workers in parallel.
 
 ## How capacity works
 
 - **Workers scale automatically.** When queries start to wait for capacity, PostHog adds workers to the pool. Adding capacity can take a few minutes, so a sudden burst of heavy queries can queue briefly before it speeds up.
 - **Each organization has concurrency limits.** Your organization can run a set number of queries at once, with more waiting in a queue. Queries over the limit wait their turn instead of failing. The **Monitoring** tab in [Data ops](https://app.posthog.com/data-ops) shows your current limits and activity.
-- **Resource settings are managed.** Trino's session properties that control resources, such as `query_max_memory`, are reserved and can't be changed with `SET SESSION`.
+- **Resource settings are managed.** Session properties that control resources, such as `query_max_memory`, are reserved and can't be changed with `SET SESSION`.
 
 ## Limits in the SQL editor
 
@@ -33,7 +33,7 @@ Queries you run on **PostHog (Trino)** in the [SQL editor](/docs/data-warehouse/
 Your data is stored as columnar Parquet files, so the biggest wins come from reading less of it:
 
 - **Select only the columns you need.** `SELECT *` on a wide table like `events` reads every column. Naming columns reads only those.
-- **Filter on `timestamp`.** A time range lets Trino skip data that's outside it.
+- **Filter on `timestamp`.** A time range lets the warehouse skip data that's outside it.
 - **Use approximate aggregates for large counts.** `approx_distinct(distinct_id)` is much cheaper than `count(DISTINCT distinct_id)`, and is usually accurate to within a few percent.
 - **Write big results to a table.** For results you query repeatedly, `CREATE TABLE ... AS SELECT` once and query the table, rather than recomputing it every time.
 

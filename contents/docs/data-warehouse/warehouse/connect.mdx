@@ -12,7 +12,7 @@ Need access first? [Join the waitlist](/context-warehouse/warehouse), then [set 
 
 </CalloutBox>
 
-The warehouse runs on [Trino](https://trino.io/), so you connect with the same clients, drivers, and BI tools you'd point at any Trino cluster. No PostHog-specific SDK involved.
+The warehouse runs on [PostHog's fork of Trino](https://github.com/PostHog/trino), which keeps Trino's standard client protocol. You connect with the same clients, drivers, and BI tools you'd point at any Trino cluster. No PostHog-specific SDK involved.
 
 ## Connection details
 
@@ -26,13 +26,13 @@ Your connection details live in [Data ops](https://app.posthog.com/data-ops) und
 | Username | `root` |
 | Password | Shown once at provisioning; reset it from the Settings tab if lost |
 
-Connections use HTTPS, so always connect with TLS. A complete Trino CLI connection looks like:
+Connections use HTTPS, so always connect with TLS. A complete connection with the [Trino CLI](https://trino.io/docs/current/client/cli.html) looks like:
 
 ```bash
 trino --server https://my-warehouse.dw.us.postwh.com:443 --user root --password --catalog org_my_warehouse
 ```
 
-The same details work in anything that talks Trino: the [Trino JDBC driver](https://trino.io/docs/current/client/jdbc.html), the [Python client](https://github.com/trinodb/trino-python-client), and BI and SQL tools with a Trino connector, such as DBeaver, Superset, Metabase, and Tableau.
+The same details work in any Trino client: the [JDBC driver](https://trino.io/docs/current/client/jdbc.html), the [Python client](https://github.com/trinodb/trino-python-client), and BI and SQL tools with a Trino connector, such as DBeaver, Superset, Metabase, and Tableau.
 
 For example, in Python:
 
@@ -78,7 +78,7 @@ SHOW TABLES FROM posthog_data_imports_prod;
 
 ## What SQL works
 
-The warehouse speaks [Trino SQL](https://trino.io/docs/current/language.html), an ANSI SQL dialect: `SELECT`, joins, CTEs, window functions, `UNNEST`, and Trino's full [function library](https://trino.io/docs/current/functions.html), including JSON functions, lambda expressions, and approximate aggregates like `approx_distinct` and `approx_percentile`.
+The warehouse speaks [Trino's SQL dialect](https://trino.io/docs/current/language.html), which follows ANSI SQL: `SELECT`, joins, CTEs, window functions, `UNNEST`, and the full [function library](https://trino.io/docs/current/functions.html), including JSON functions, lambda expressions, and approximate aggregates like `approx_distinct` and `approx_percentile`.
 
 You can also write: `CREATE TABLE`, `CREATE TABLE AS`, `CREATE VIEW`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE` are supported, so the warehouse can hold your own derived tables next to the synced data. Keep your own work in tables or schemas you create – the PostHog-managed tables are maintained by sync, and anything you write into them can be overwritten.
 
@@ -86,8 +86,8 @@ Credentials are managed by PostHog, so `CREATE ROLE` and `GRANT` aren't availabl
 
 ## Querying from PostHog
 
-You don't need an external client to use the warehouse. In PostHog's [SQL editor](/docs/data-warehouse/query), pick **PostHog (Trino)** from the connection menu to run a query on the warehouse. PostHog translates your [SQL](/docs/sql) into Trino SQL and runs it read-only. Most queries work unchanged. A few ClickHouse-specific features, such as `SAMPLE`, `FINAL`, and `WITH FILL`, aren't available, and the editor tells you when a query uses one.
+You don't need an external client to use the warehouse. In PostHog's [SQL editor](/docs/data-warehouse/query), pick **PostHog (Trino)** from the connection menu to run a query on the warehouse. PostHog translates your [SQL](/docs/sql) for the warehouse and runs it read-only. Most queries work unchanged. A few ClickHouse-specific features, such as `SAMPLE`, `FINAL`, and `WITH FILL`, aren't available, and the editor tells you when a query uses one.
 
-External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, writes, or ad-hoc sessions in the Trino CLI.
+External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, writes, or ad-hoc CLI sessions.
 
 For larger workloads, read about [how the warehouse handles performance and limits](/docs/data-warehouse/warehouse/performance-tuning).
