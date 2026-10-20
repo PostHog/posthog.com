@@ -1,5 +1,13 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
+import {
+    IconBook,
+    IconCursorClick,
+    IconEye,
+    IconGraduationCap,
+    IconPiggyBank,
+    IconPresent,
+    IconTerminal,
+} from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -95,14 +103,23 @@ const LearnNav = ({
     }))
     const items = hub
         ? [
-              { name: 'Overview', url: basePath },
+              { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
               {
                   name: 'Pocket guide',
                   url: guideBasePath,
+                  icon: <IconBook className="size-4" />,
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter),
               },
-              { name: 'Agent prompts and MCP', url: `${basePath}/agent-prompts-and-mcp` },
-              { name: 'Live playground', url: `${basePath}/live-playground` },
+              {
+                  name: 'Agent prompts and MCP',
+                  url: `${basePath}/agent-prompts-and-mcp`,
+                  icon: <IconTerminal className="size-4" />,
+              },
+              {
+                  name: 'Live playground',
+                  url: `${basePath}/live-playground`,
+                  icon: <IconCursorClick className="size-4" />,
+              },
           ]
         : chapters
 
