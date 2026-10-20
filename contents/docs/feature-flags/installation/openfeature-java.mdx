@@ -1,0 +1,130 @@
+---
+title: OpenFeature (Java)
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog provides an official [OpenFeature](https://openfeature.dev) provider for server-side JVM applications, so you can evaluate PostHog feature flags through the standard OpenFeature API. It is backed by the [Java SDK](/docs/libraries/java) (`posthog-server`) and the [OpenFeature Java SDK](https://openfeature.dev/docs/reference/technologies/server/java).
+
+- **Package:** `com.posthog:posthog-server-openfeature`
+- **Provider class:** `com.posthog.server.openfeature.PostHogProvider`
+
+The provider requires Java 11 or later, because the OpenFeature Java SDK requires it.
+
+## Installation
+
+Look up the latest version of [`com.posthog.posthog-server-openfeature`](https://central.sonatype.com/artifact/com.posthog/posthog-server-openfeature).
+
+### Gradle
+
+```gradle_kotlin file=build.gradle
+dependencies {
+  implementation 'com.posthog:posthog-server-openfeature:0.+'
+}
+```
+
+### Maven
+
+```xml file=pom.xml
+<dependency>
+  <groupId>com.posthog</groupId>
+  <artifactId>posthog-server-openfeature</artifactId>
+  <version>LATEST</version>
+</dependency>
+```
+
+This adds `posthog-server` and `dev.openfeature:sdk` as dependencies.
+
+## Usage
+
+Create and configure a PostHog client, then register the provider with the OpenFeature SDK:
+
+```java
+import com.posthog.server.PostHog;
+import com.posthog.server.PostHogConfig;
+import com.posthog.server.PostHogInterface;
+import com.posthog.server.openfeature.PostHogProvider;
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.ImmutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.Value;
+import java.util.Map;
+
+PostHogInterface posthog = PostHog.with(
+    PostHogConfig.builder("<ph_project_token>")
+        .host("<ph_client_api_host>")
+        // .personalApiKey("<ph_personal_api_key>") enables local evaluation
+        .build()
+);
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new PostHogProvider(posthog));
+Client client = api.getClient();
+
+EvaluationContext context = new ImmutableContext(
+    "user_distinct_id",
+    Map.of("plan", new Value("pro"))
+);
+
+boolean isEnabled = client.getBooleanValue("my-flag", false, context);
+```
+
+You own the PostHog client lifecycle. Call `posthog.close()` when your app exits. The provider's `shutdown()` does not close the client.
+
+## Evaluation context
+
+The OpenFeature evaluation context maps to PostHog's flag evaluation inputs:
+
+| OpenFeature context | PostHog |
+| --- | --- |
+| `targetingKey` | distinct ID (required unless `defaultDistinctId` is set) |
+| `groups` attribute (structure of group type to group key) | groups |
+| `groupProperties` attribute (structure of group type to properties) | group properties |
+| any other attribute | person properties |
+
+The `PostHogProvider.GROUPS_KEY` and `PostHogProvider.GROUP_PROPERTIES_KEY` constants hold the reserved attribute names:
+
+```java
+EvaluationContext context = new ImmutableContext("user_distinct_id", Map.of(
+    PostHogProvider.GROUPS_KEY, new Value(new ImmutableStructure(Map.of("company", new Value("acme"))))
+));
+```
+
+If the context has no `targetingKey` and no `defaultDistinctId` is set, the provider returns your default value with `error_code = TARGETING_KEY_MISSING`.
+
+## Supported flag types
+
+| OpenFeature method | Resolves to |
+| --- | --- |
+| `getBooleanValue` | whether the flag is enabled |
+| `getStringValue` | the multivariate variant key |
+| `getIntegerValue` / `getLongValue` / `getDoubleValue` | the variant parsed as a number (decimal, or hexadecimal like `0x10`) |
+| `getObjectValue` | the flag's JSON payload, which must be a JSON object or array |
+
+When the flag is off for the user, the string, number, and object methods return your default value with the `DEFAULT` reason. A non-existent flag returns your default value with `error_code = FLAG_NOT_FOUND`. Calling a typed getter on an incompatible flag (for example `getStringValue` on a boolean flag) returns your default value with `error_code = TYPE_MISMATCH`, per the OpenFeature spec.
+
+The reason is `TARGETING_MATCH` when the flag is enabled and `DEFAULT` otherwise. The Java provider does not return the `DISABLED` reason or the `posthog_reason` metadata yet.
+
+## Options
+
+`new PostHogProvider(client, options)`
+
+Pass options with `PostHogProviderOptions.builder()`:
+
+```java
+new PostHogProvider(
+    posthog,
+    PostHogProviderOptions.builder()
+        .defaultDistinctId("anonymous")
+        .build()
+);
+```
+
+- `defaultDistinctId`: distinct ID used when the context has no `targetingKey`. Defaults to `null`, in which case an evaluation without a `targetingKey` returns your default value with `error_code = TARGETING_KEY_MISSING`.
+
+Each evaluation captures a `$feature_flag_called` event. To turn these events off, set `sendFeatureFlagEvent(false)` on the `PostHogConfig`. This setting applies to the whole client.
