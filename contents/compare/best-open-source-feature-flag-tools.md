@@ -162,7 +162,7 @@ Unleash's open-source self-hosted version is free with unlimited feature flags. 
 
 ### How much does it cost?
 
-The open-source edition is free and distributed under a GPL-3.0 license. Flipt Pro costs $200/month and adds Git provider integrations, pull requests from the UI, GPG-signed commits, and integrated secrets management. Enterprise plans have custom pricing.
+The open-source edition is free and distributed under a GPL-3.0 license. Flipt Pro costs $200/month and adds Git provider integrations, pull requests from the UI, and integrated secrets management. Enterprise plans have custom pricing.
 
 ## 6. Flipper
 
