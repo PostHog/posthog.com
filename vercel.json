@@ -492,6 +492,10 @@
             "destination": "/compare/best-product-analytics-tools-for-startups"
         },
         {
+            "source": "/blog/best-open-source-analytics-tools",
+            "destination": "/compare/best-open-source-analytics-tools"
+        },
+        {
             "source": "/blog/best-real-time-analytics-platforms",
             "destination": "/compare/best-real-time-analytics-platforms"
         },
