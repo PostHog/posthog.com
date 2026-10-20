@@ -7,6 +7,7 @@ import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import Cover from './Cover'
+import { learnChapterPath, useBookPages } from './bookModel'
 import TwigBrowseFigure from './TwigBrowseFigure'
 import type { LearnLandingProps } from './LearnPage'
 
@@ -69,6 +70,9 @@ function LearnByDoingPreview(): JSX.Element {
 export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: LearnLandingProps): JSX.Element {
     const volume = volumeById('product-analytics')
     const counts = usePocketGuideCounts()
+    const firstChapter = useBookPages('product-analytics').find((page) => !page.isFrontMatter)
+    // Start reading skips the introduction and opens the first chapter.
+    const readUrl = firstChapter ? learnChapterPath(storyUrl, firstChapter) : storyUrl
 
     return (
         <div className="not-prose mx-auto max-w-5xl pb-8 text-primary">
@@ -108,7 +112,7 @@ export default function ProductAnalyticsLearnLanding({ productName, storyUrl }: 
                             Read how engineers decide what to track and use that data to answer questions about their
                             product.
                         </p>
-                        <OSButton asLink to={storyUrl} variant="primary" size="md">
+                        <OSButton asLink to={readUrl} variant="primary" size="md">
                             Start reading
                         </OSButton>
                     </div>

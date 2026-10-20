@@ -1,11 +1,18 @@
 import Explorer from 'components/Explorer'
 import Cover from 'components/PocketGuides/Cover'
+import { useBookPages } from 'components/PocketGuides/bookModel'
 import SEO from 'components/seo'
 import React from 'react'
 
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { POCKET_GUIDE_VOLUMES, type PocketGuideVolume } from '../../constants/pocketGuides'
+
+/** A shelf cover opens its book on the first chapter, skipping the introduction. */
+function ShelfCover({ volume, count }: { volume: PocketGuideVolume; count: number }): JSX.Element {
+    const firstChapter = useBookPages(volume.id).find((page) => !page.isFrontMatter)
+    return <Cover placement="shelf" volume={volume} count={count} to={firstChapter?.url} />
+}
 
 export default function PocketGuidesPage(): JSX.Element {
     const counts = usePocketGuideCounts()
@@ -50,7 +57,7 @@ export default function PocketGuidesPage(): JSX.Element {
                         <ul className="m-0 flex list-none flex-col items-center gap-8 p-0 @xl:flex-row @xl:flex-wrap @xl:items-stretch @xl:gap-6">
                             {volumes.map((volume) => (
                                 <li key={volume.id} className="w-[250px] @xl:w-[210px] @4xl:w-[230px]">
-                                    <Cover placement="shelf" volume={volume} count={counts[volume.id] ?? 0} />
+                                    <ShelfCover volume={volume} count={counts[volume.id] ?? 0} />
                                 </li>
                             ))}
                         </ul>
