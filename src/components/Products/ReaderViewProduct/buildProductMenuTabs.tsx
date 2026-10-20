@@ -236,8 +236,8 @@ interface BuildProductMenuTabsArgs {
 
 export const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
-    // Under /docs so switching to Learn never leaves the docs sidebar.
-    if (surface === 'learn') return `/docs/${productSlug}/learn`
+    // Learn has its own URL namespace and keeps the shared product sidebar.
+    if (surface === 'learn') return `/learn/${productSlug}`
     return `/${productSlug}`
 }
 

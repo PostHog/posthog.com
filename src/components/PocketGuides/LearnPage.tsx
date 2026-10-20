@@ -1,9 +1,7 @@
 import React, { useRef } from 'react'
 import { useLocation } from '@reach/router'
-import { IconArrowLeft } from '@posthog/icons'
 
 import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
-import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
@@ -19,6 +17,8 @@ interface LearnPageProps {
     description: string
     /** Optional product-specific choice page. Its URL comes from product data. */
     landing?: React.ComponentType<LearnLandingProps>
+    /** Optional non-chapter content, such as the agent teaching page. */
+    children?: React.ReactNode
 }
 
 export interface LearnLandingProps {
@@ -34,6 +34,7 @@ export default function LearnPage({
     title,
     description,
     landing: Landing,
+    children,
 }: LearnPageProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const contentRef = useRef<HTMLElement>(null)
@@ -41,10 +42,11 @@ export default function LearnPage({
     const volumeId = productData?.pocketGuideVolume
     const isLearnLanding = Boolean(volumeId && Landing && !chapter)
     const learnBasePath = productData ? surfaceBasePath(productData.slug, 'learn') : ''
+    const guideBasePath = productData?.learnHub ? `${learnBasePath}/pocket-guide` : learnBasePath
     const landingProps = {
         productName: productData?.name,
         description,
-        storyUrl: `${learnBasePath}/introduction`,
+        storyUrl: guideBasePath,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({
         productData,
@@ -53,7 +55,7 @@ export default function LearnPage({
         currentPath: location?.pathname,
     })
 
-    const guide = volumeId ? <LearnSurface volumeId={volumeId} chapter={chapter} basePath={learnBasePath} /> : null
+    const guide = volumeId ? <LearnSurface volumeId={volumeId} chapter={chapter} basePath={guideBasePath} /> : null
 
     return (
         <>
@@ -66,21 +68,10 @@ export default function LearnPage({
                 showQuestions={false}
                 menuTabs={productMenuTabs}
                 productSelect={<ProductSwitcher activeHandle={productHandle} />}
-                mobileTopBar={
-                    chapter && Landing ? (
-                        <Link
-                            to={learnBasePath}
-                            className="inline-flex min-w-0 items-center gap-1 rounded-sm p-1.5 text-sm !no-underline text-secondary hover:bg-accent hover:text-primary"
-                        >
-                            <IconArrowLeft className="size-4 shrink-0" />
-                            <span className="truncate">Back to Learn</span>
-                        </Link>
-                    ) : undefined
-                }
             >
                 <article ref={contentRef}>
                     {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
-                    {!isLearnLanding ? guide : null}
+                    {!isLearnLanding ? children ?? guide : null}
                 </article>
             </ReaderView>
         </>

@@ -206,6 +206,13 @@ const contentByPath = (nodes, sitePathsByContentId) => {
         )
         .forEach((node) => {
             const path = normalizePath(node.fields?.slug || node.slug)
+            // Learning source folders are independent of their published Learn/Docs URLs.
+            if (/^\/learn\/[^/]+\/pocket-guide(?:\/|$)/.test(path)) {
+                for (const publicPath of sitePathsByContentId.get(node.id) || []) {
+                    if (!isExcludedPath(publicPath)) content.set(publicPath, node)
+                }
+                return
+            }
             if (!sitePathsByContentId.get(node.id)?.has(path) || isExcludedPath(path)) return
             content.set(path, node)
         })
