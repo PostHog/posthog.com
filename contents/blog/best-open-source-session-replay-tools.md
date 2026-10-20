@@ -325,9 +325,9 @@ The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
 - **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with unlimited recordings
-- **[Smartlook](/compare/smartlook-alternatives)** – Best for mobile-first apps with crash reports
 - **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
 - **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+- **[Smartlook](/compare/smartlook-alternatives)** – Strong for mobile-first apps with crash reports, but it no longer sells paid plans and closes on September 30, 2027
  
 See our full guide to the [best session replay tools](/compare/best-session-replay-tools) for more options.
  

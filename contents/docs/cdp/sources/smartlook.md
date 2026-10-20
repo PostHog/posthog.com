@@ -15,6 +15,8 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Smartlook connector syncs visitors, sessions, event definitions, funnels, and visitor events into the PostHog data warehouse, so you can analyze them alongside your product data.
 
+> **Note:** Smartlook is shutting down. All paid subscriptions end by August 31, 2027, and the platform closes on September 30, 2027. Smartlook then deletes all remaining customer data and does not migrate it to another product. To keep your Smartlook data, sync it into PostHog before your access ends. See [Smartlook's end-of-sale notice](https://www.smartlook.com/) for details.
+
 > **Alpha:** This source is in alpha. If you run into issues, please [let us know](https://app.posthog.com/home#supportModal).
 
 ## Prerequisites
