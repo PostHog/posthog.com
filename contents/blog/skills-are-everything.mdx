@@ -143,7 +143,7 @@ The most detailed part of the map is `self-driving-dwh`. It's the blueprint for 
 
 When I say "use the /self-driving-dwh skill to help here", the agent knows how everything joins before it writes a query. The skill is on version 458, and I didn't write most of it. A scout, `signals-scout-self-driving-dwh`, checks that the views still sync, catches drift when a source table changes, and updates the skill when it fixes something. A skill maintained by a skill.
 
-Another favorite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When an alert fires and I ask an agent to look into it, the agent loads this skill first, so it knows the alert's baseline, its history of false positives, and what fixed it last time before it touches a query. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it.
+Another favorite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it.
 
 Yet another cool thing here is that each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
 
@@ -169,16 +169,13 @@ I used to keep this kind of thing in my head, a Notion page nobody read, or a RE
 
 ## 3. Skills as a runbook that learns
 
-`self-driving-debugging` is the operational runbook for when self-driving misbehaves in production for any customer: a Create PR press that produced no task, a run that died with an internal error, a PR that never appeared, review comments that went unaddressed, or a 429 nobody can explain.
+The alerts skill in section 2 records what exists. A runbook records what went wrong and how we fixed it, so it gets better every time something breaks.
 
-The body is a thin index with two parts:
+`self-driving-debugging` is our runbook for when self-driving misbehaves in production and users have some issues we need to dig into.
 
-1. Four rules you have to read before you query, learned the painful way: raw events beat the warehouse views for anything recent, project timestamps are US/Pacific so a UK morning is the previous evening, resolve a person to all their IDs across accounts and regions before you filter, and some throttles are invisible so you may have to prove a 429 by arithmetic from a user's press cadence.
-2. A "pick an avenue" list that routes each symptom to a `references/` file and the `recipes/` SQL that goes with it.
+The whole thing hangs off one line in the skill body: **add or extend a reference every time we run down a new class of issue.** When a support ticket turns into a real investigation, the agent writes up what it found as a dated file in `investigations/`, then extends the matching reference so the next agent doesn't start from zero. Seven investigations in, it covers duplicate reports, competing PRs for one fix, oversold report titles, unaddressed review comments, and a data import source that emitted nothing.
 
-The part I like most is the `investigations/` folder. The skill body says: **add or extend a reference every time we run down a new class of issue.** So when a support ticket turns into a real investigation, the agent writes up what it found as a dated file, then extends the matching reference so the next agent doesn't start from zero. Seven investigations in, the runbook already covers duplicate reports, competing PRs for one fix, oversold report titles, unaddressed review comments, and a data import source that emitted nothing. Each one made the skill better at the next ticket.
-
-Its sibling, `scouts-debugging`, does the same job for the scout fleet itself. Between them, "debug self-driving for team N" is a sentence I can say to an agent on any surface and get a real answer.
+Its sibling, `scouts-debugging`, does the same job for the scout fleet. Between them, "debug self-driving for team N" is a sentence I can say to an agent on any surface and get a real answer.
 
 ## 4. Skills as a daily driver
 
