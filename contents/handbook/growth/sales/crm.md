@@ -326,7 +326,7 @@ The renewal pipeline stages are:
 3. Product Evaluation (50%) - This step becomes relevant if decision makers have changed in organization or if new teams within the company are considering using us.
 4. Commercial & Legal Review (80%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
 5. Closed Won (100%) - They have signed the contract.
-6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
+6. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap. This includes customers who move to monthly payments, even for one month. See [customers moving to monthly](/handbook/cs-and-onboarding/renewals#customers-moving-to-monthly).
 
 ### Opportunity notes
 
