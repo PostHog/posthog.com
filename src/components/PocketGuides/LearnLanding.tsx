@@ -1,8 +1,9 @@
 import React from 'react'
 import { HedgehogEinstein, HedgehogRobot } from '@posthog/brand/hoggies'
-import { IconBook, IconTerminal } from '@posthog/icons'
+import { IconBook, IconPlay, IconTerminal } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
+import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import Cover from './Cover'
@@ -38,6 +39,39 @@ function AgentTeachingPreview({ to }: { to: string }): JSX.Element {
     )
 }
 
+interface LearnLandingPlayground {
+    /** A Twig view for the preview. */
+    figure: React.ReactNode
+    caption?: string
+}
+
+/** Short Twig preview for the Learn overview. */
+function LearnByDoingPreview({ figure, caption }: LearnLandingPlayground): JSX.Element {
+    return (
+        <div className="not-prose grid min-w-0 items-start gap-6 @2xl/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
+            <div>
+                <div className="mb-5 flex items-center gap-3">
+                    <IconPlay className="size-6 shrink-0 text-orange" />
+                    <h2 className="m-0 text-2xl font-bold">Learn by doing</h2>
+                </div>
+                <h3 className="mt-0 mb-3 text-lg font-semibold leading-relaxed">
+                    Explore a fully instrumented product.
+                </h3>
+                <p className="mt-0 mb-5 leading-relaxed text-secondary">
+                    Twig is a real website with a live playground for learning PostHog and exploring real code.
+                </p>
+                <OSButton asLink to={TWIG_URL} external hideExternalIcon variant="primary" size="md">
+                    Explore Twig
+                </OSButton>
+            </div>
+            <div className="min-w-0">
+                {figure}
+                {caption && <p className="mt-2 mb-0 text-sm text-secondary">{caption}</p>}
+            </div>
+        </div>
+    )
+}
+
 interface LearnLandingContent {
     /** Hero line under the product name. Defaults to the page description. */
     intro?: string
@@ -45,11 +79,11 @@ interface LearnLandingContent {
     storyLead?: string
     /** Story section text. Defaults to the volume's shelf description. */
     storyText?: string
-    /** Extra hub sections after the agent preview, such as the playground preview. */
-    children?: React.ReactNode
+    /** Shows the Learn by doing preview, which links to Twig. */
+    playground?: LearnLandingPlayground
 }
 
-/** A Learn hub overview: the product, then its pocket guide. Hubs add their own sections as children. */
+/** A Learn hub overview: the product, its pocket guide, and the agent and Twig previews when the hub has them. */
 export default function LearnLanding({
     productName,
     description,
@@ -59,7 +93,7 @@ export default function LearnLanding({
     intro = description,
     storyLead,
     storyText,
-    children,
+    playground,
 }: LearnLandingProps & LearnLandingContent): JSX.Element {
     const volume = volumeById(volumeId)
     const counts = usePocketGuideCounts()
@@ -136,7 +170,14 @@ export default function LearnLanding({
                 </section>
             )}
 
-            {children}
+            {playground && (
+                <section
+                    id="live-playground"
+                    className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
+                >
+                    <LearnByDoingPreview {...playground} />
+                </section>
+            )}
         </div>
     )
 }
