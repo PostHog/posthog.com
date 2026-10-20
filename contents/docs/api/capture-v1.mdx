@@ -171,14 +171,20 @@ Capture v1 checks every request and every event as it arrives. A problem with th
 
 | Limit | Analytics endpoint | If you exceed it |
 |---|---|---|
+| Request body | Not empty | `400` `empty_body` |
 | Request body, as sent | 10MB | `413`, nothing stored |
 | Request body, after decompression | 50MB | `413`, nothing stored |
 | Events per request | No limit beyond the body size | – |
 | `batch` | At least one event | `400` `empty_batch` |
 | `uuid` | Present, a valid UUID, and unique within the request | `400` (`missing_event_uuid`, `invalid_event_uuid`, `duplicate_event_uuid`), nothing stored |
 | `created_at` | Present, RFC 3339 | `400` `invalid_batch`, nothing stored |
+| Required headers | All present ([headers](#headers)) | `400` `missing_required_headers`; `401` `missing_authorization` for `Authorization` |
+| `Authorization` | `Bearer <ph_project_token>` | `400` `invalid_header_value` without `Bearer`; `401` `invalid_api_token` for an invalid token or a personal API key |
+| `PostHog-Request-Id`, `PostHog-Attempt`, `PostHog-Request-Timestamp` | A UUID, a whole number from 1, and an RFC 3339 time | `400` `invalid_header_value` |
+| `Content-Type` | `application/json` | `415` `unsupported_content_type` |
+| `Content-Encoding` | None, or `gzip`, `deflate`, `br`, or `zstd` | `415` `unsupported_encoding` |
 | Header values | Visible ASCII characters only | `400` `invalid_header_value` |
-| Field types | `event`, `uuid`, `distinct_id`, `timestamp`, `session_id`, and `window_id` are JSON strings | `400` `request_parsing_error`, nothing stored |
+| Field types | `event`, `uuid`, `distinct_id`, `timestamp`, `session_id`, and `window_id` are JSON strings. Send a numeric ID as a string: JSON numbers can lose precision. | `400` `request_parsing_error`, nothing stored |
 | `PostHog-Sdk-Info` | `<library>/<version>`, up to 200 bytes | Request accepted, but `$lib` and `$lib_version` are not set |
 
 ### Event limits
@@ -197,13 +203,13 @@ Limits count **bytes** in UTF-8, not characters. A 100-character distinct ID wit
 Some of these rules are stricter than legacy capture:
 
 - **Long distinct IDs.** Legacy capture shortens a distinct ID over 200 characters and stores the event. Capture v1 drops the event with `distinct_id_too_large`. Check that your IDs stay under 200 bytes before you upgrade.
-- **Long event names.** Capture v1 drops an event whose name is over 200 bytes.
+- **Long event names.** Legacy capture has no limit on event name length. Capture v1 drops an event whose name is over 200 bytes with `event_name_too_long`. Check your event names before you upgrade.
+- **Distinct ID type.** Legacy capture turns a non-string distinct ID, such as a number, into text. Capture v1 rejects the whole request with `400` `request_parsing_error`. PostHog SDKs always send strings.
 - **Event UUIDs.** Every event needs a valid UUID of its own. See [event UUIDs](#event-uuids).
 
 The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events](/docs/ai-observability/large-events#limits).
 
 <!-- TODO(capture-v1): decide whether to publish the AI endpoint's request body limits. -->
-<!-- TODO(capture-v1): confirm legacy capture's event-name behavior over 200 bytes before claiming "stricter" for event names. -->
 
 ## Responses
 
