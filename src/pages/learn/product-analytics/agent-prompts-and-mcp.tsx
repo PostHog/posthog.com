@@ -50,8 +50,7 @@ export default function ProductAnalyticsAgentTeaching(): JSX.Element {
                         Learn with examples from your own product and data.
                     </h2>
                     <p className="m-0 leading-relaxed">
-                        Start with a learning path for your product, or choose a Pocket Guide chapter below. Each prompt
-                        uses your code and data to teach one concept at a time, with small exercises you can try.
+                        Start with a learning path for your product, or choose a topic below. Each prompt uses your code and data to teach one concept at a time, with small exercises you can try.
                     </p>
                     <aside className="mt-6 leading-relaxed">
                         <p className="mt-0 mb-2">Before you start:</p>
