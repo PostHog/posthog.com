@@ -251,7 +251,7 @@ The first problem we encountered was with timestamps. If an agent in a frozen en
 
 The solution for that was simple enough; every time we injected data, we'd correct it to match the frozen timeline by shifting it.
 
-The second problem was less obvious. Even though we tried to make the data slices as realistic as possible, there were still certain types of data that we didn't want to replicate. Part of that is because wanted the slices to be as small as possible since the environments need to be easy to create and reset. We didn't expect the tasks to need all of the data anyway, but thanks to non-deterministism, new models would still sometimes try to look into tables and data sources that we didn't slice. 
+The second problem was less obvious. Even though we tried to make the data slices as realistic as possible, there were still certain types of data that we didn't want to replicate. Part of that is because we wanted the slices to be as small as possible since the environments need to be easy to create and reset. We didn't expect the tasks to need all of the data anyway, but thanks to non-determinism, new models would still sometimes try to look into tables and data sources that we didn't slice. 
 
 A common one we encountered was user tables, which we especially chose *not* to duplicate since they contain PII. But an agent would sometimes decide it wanted to look inside those tables for seemingly unrelated tasks. It would then see that there weren't many users on its local instance, and immediately suspect something was strange.
 
