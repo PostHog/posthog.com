@@ -21,6 +21,17 @@ Because every change is versioned, a dataset is also an audit trail. You can alw
 - **Keep tests reproducible** – Every dataset change creates an immutable revision, so a test run can be pinned to exactly the data it used.
 - **Work programmatically** – Build and update datasets from agents and scripts, not just the PostHog UI.
 
+## Build a regression set from production failures
+
+The most common use for a dataset is making sure a bug you fixed stays fixed:
+
+1. An [evaluation](/docs/ai-evals) or a [trace review](/docs/ai-observability/trace-reviews) flags a trace where your agent did something wrong.
+2. You fix the prompt, model, or agent code, and the agent now handles that input correctly.
+3. On the trace, click **Add to dataset** to save the input that caused the problem, with the bad output as `source_output`. Add the answer you expect as `expected_output`.
+4. In CI, fetch the dataset with the [API](#api) or an [export](#exporting-a-dataset), run your agent on every item, and score the outputs with your evaluators.
+
+Over time the dataset grows into a test suite built from real user behavior, not only the cases you thought of in advance. Mix in synthetic items, written by hand with **Input** and **Expected output**, to cover edge cases you haven't seen in production yet.
+
 ## How datasets work
 
 Datasets have three layers:
