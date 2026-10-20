@@ -103,18 +103,18 @@ The live templates and their sending playbooks (the templates are the canonical 
 
 All onboarding automation lives in the `Onboarding::` [workflows](https://us.posthog.com/project/2/workflows):
 
-- **Enter queue** - Every day, moves eligible accounts with no onboarding stage to `1. New Account` and adds the `Onboarding Lead` tag.
-- **Email sequence** - Sends all four onboarding emails (first outreach, second outreach, last chance, and graduation) and moves the account through the stages. It skips accounts that have an owner, a referral tag, a booked call, or that opted out.
-- **Stage reactor** - Keeps the tags, stage dates, and Onboarding specialist in step with the stage. It also moves referral accounts to `Sales Handoff`.
-- **Set "Onboarding Initiated" when contacted by OS** - Moves an account from `1. New Account` to `2. Onboarding Initiated` when someone on the team emails it from their own inbox.
-- **Automated 'check-in' status removal** - Clears the Check-in status after a specialist emails the account.
-- **Check in after the meeting** - Creates a task for the Onboarding specialist 14 days after a meeting.
-- **Consider referring to Sales** - Every week, creates a task for high-spend accounts that can be a good fit for Sales.
-- **Close out finished sequences** - Every day, moves accounts that finished the sequence from `2. Onboarding Initiated` to `3. Onboarding Completed`.
-- **Automated Payment Failed** - Emails accounts in stage 1 or 2 when a payment fails.
-- **Gong call summaries to account notes** - Every hour, adds a summary note to the account for each new Gong call.
-- **Create customer tasks from scout reports** - Creates a "Review onboarding brief" task for each onboarding research report from the scout.
-- **User orders an onboarding consultation from the merch store** - Sets the account to `Purchased Onboarding Call`, emails the buyer the booking link, and tells the team.
+- **[Enter queue](https://us.posthog.com/project/2/workflows/01a05810-fb1c-0000-5c4d-7ae187210c4d/workflow)** - Every day, moves eligible accounts with no onboarding stage to `1. New Account` and adds the `Onboarding Lead` tag.
+- **[Email sequence](https://us.posthog.com/project/2/workflows/01a0c9f0-60a6-0000-af22-9cd658e27d6c/workflow)** - Sends all four onboarding emails (first outreach, second outreach, last chance, and graduation) and moves the account through the stages. It skips accounts that have an owner, a referral tag, a booked call, or that opted out.
+- **[Stage reactor](https://us.posthog.com/project/2/workflows/01a0c9ee-f490-0000-4f72-e7640fd225e1/workflow)** - Keeps the tags, stage dates, and Onboarding specialist in step with the stage. It also moves referral accounts to `Sales Handoff`.
+- **[Set "Onboarding Initiated" when contacted by OS](https://us.posthog.com/project/2/workflows/01a12061-1ad1-0000-2b7e-9f88bc570da1/workflow)** - Moves an account from `1. New Account` to `2. Onboarding Initiated` when someone on the team emails it from their own inbox.
+- **[Automated 'check-in' status removal](https://us.posthog.com/project/2/workflows/01a11b55-55c2-0000-ecfc-d8c471e18ffb/workflow)** - Clears the Check-in status after a specialist emails the account.
+- **[Check in after the meeting](https://us.posthog.com/project/2/workflows/01a0859c-b295-0000-9509-e7e282dc9f20/workflow)** - Creates a task for the Onboarding specialist 14 days after a meeting.
+- **[Consider referring to Sales](https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow)** - Every week, creates a task for high-spend accounts that can be a good fit for Sales.
+- **[Close out finished sequences](https://us.posthog.com/project/2/workflows/01a0c97d-358a-0000-6ee6-d8b989c088a3/workflow)** - Every day, moves accounts that finished the sequence from `2. Onboarding Initiated` to `3. Onboarding Completed`.
+- **[Automated Payment Failed](https://us.posthog.com/project/2/workflows/01a07bfe-b0f8-0000-7687-9575eeec3b0f/workflow)** - Emails accounts in stage 1 or 2 when a payment fails.
+- **[Gong call summaries to account notes](https://us.posthog.com/project/2/workflows/01a1165b-7003-0000-42c5-4e13f3d663dc/workflow)** - Every hour, adds a summary note to the account for each new Gong call.
+- **[Create customer tasks from scout reports](https://us.posthog.com/project/2/workflows/01a0ab7a-3d0a-0000-f90b-fa73ccc51695/workflow)** - Creates a "Review onboarding brief" task for each onboarding research report from the scout.
+- **[User orders an onboarding consultation from the merch store](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow)** - Sets the account to `Purchased Onboarding Call`, emails the buyer the booking link, and tells the team.
 
 #### Other
 
