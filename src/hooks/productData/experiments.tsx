@@ -195,10 +195,6 @@ export const experiments = {
             description:
                 "This experiment cuts drop-off in half – that's a 50% improvement without a single user complaining!",
         },
-        assemblyai: {
-            headline: 'switched from Mixpanel for a leaner stack',
-            description: 'I feel like, every single week, we discover something new that makes a difference.',
-        },
     },
     useCases: {
         rows: [
