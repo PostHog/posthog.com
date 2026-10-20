@@ -26,7 +26,7 @@ The right warehouse for you depends on how much of that plumbing you need for th
 
 There's no wrong answer here – the right pick comes down to what you care about most:
 
--   **If you want a queryable context warehouse connected to product analytics, replay, flags, errors, logs, and more:** [PostHog](/context-warehouse)
+-   **If you want a queryable context warehouse connected to product analytics, replay, flags, errors, logs, and more:** [PostHog](/warehouse)
 -   **If you're building embedded or local-first analytics:** MotherDuck
 -   **If you need real-time analytics over large event volumes:** ClickHouse
 -   **If you run data engineering and ML on shared data:** Databricks
@@ -35,7 +35,7 @@ There's no wrong answer here – the right pick comes down to what you care abou
 
 ### What's the best data warehouse for developers overall?
 
-For most developers, it's **[PostHog](/context-warehouse)**. It's a [context warehouse](/blog/what-is-a-context-warehouse), not just a data warehouse: your product and business data live together, wired directly into the tools and agents that act on it, with no pipelines to maintain.
+For most developers, it's **[PostHog](/warehouse)**. It's a [context warehouse](/blog/what-is-a-context-warehouse), not just a data warehouse: your product and business data live together, wired directly into the tools and agents that act on it, with no pipelines to maintain.
 
 You get two ways in: connect an existing warehouse ([Snowflake](/docs/data-warehouse/sources/snowflake), [BigQuery](/docs/data-warehouse/sources/bigquery), [Databricks](/docs/data-warehouse/sources/databricks), [ClickHouse](/docs/data-warehouse/sources/clickhouse)) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
 
@@ -63,7 +63,7 @@ Because the data is already unified, PostHog's own agents can query it the same 
  command="warehouse"
  title="Connect the context warehouse with one command"
  subtitle="The wizard auto-detects your databases and APIs and syncs them into PostHog."
- learnMoreTo="/context-warehouse"
+ learnMoreTo="/warehouse"
 />
 
 ### What's the best data warehouse for embedded and local-first analytics?

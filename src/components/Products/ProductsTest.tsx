@@ -26,7 +26,7 @@ const sections = [
         title: 'Context warehouse',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
-        link: { label: 'Data stack README', url: '/context-warehouse' },
+        link: { label: 'Data stack README', url: '/warehouse' },
         groups: [
             {
                 label: 'Data I/O',

@@ -2,14 +2,14 @@ import { navigate } from 'gatsby'
 
 export const customerDataInfrastructureNav = {
     name: 'PostHog context warehouse',
-    url: '/context-warehouse',
+    url: '/warehouse',
     children: [
         {
             name: 'PostHog context warehouse',
         },
         {
             name: 'Overview',
-            url: '/context-warehouse',
+            url: '/warehouse',
         },
         {
             name: 'Start here',

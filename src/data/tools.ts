@@ -221,7 +221,7 @@ export const tools = [
         description: 'CDP manifesto',
         searchDescription: 'Collect, store, transform, and query all the context behind your product.',
         searchTitle: 'Data stack',
-        slug: 'context-warehouse',
+        slug: 'warehouse',
         category: 'data',
         aliases: ['Context warehouse', 'Context data warehouse'],
     },

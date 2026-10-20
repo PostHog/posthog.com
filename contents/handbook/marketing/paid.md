@@ -47,7 +47,7 @@ We use Engaged Visits and platform delivery metrics for early decisions, then co
 
 Ad platforms deliver the ads and help us diagnose delivery via CTRs and impressions. Because we do not use their third-party pixels, we're somewhat limited in how effectively we can use their algorithms. The [PostHog CDP](/cdp) still sends conversions back to each platform in the form of Click IDs and hashed user emails for use in tCPA/tROAS campaigns and to share data on the success of our awareness campaigns.
 
-PostHog's [Context Warehouse](/context-warehouse) is the data backend. The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2104209">paid marketing dashboard</PrivateLink> is the live view, the <PrivateLink url="https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU">media plan</PrivateLink> is where we keep budget and pacing, and the monthly <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.p28mbb7wkucv#heading=h.97gmbiax4fyn">Growth Review</PrivateLink> is where we make and record decisions.
+PostHog's [Context Warehouse](/warehouse) is the data backend. The <PrivateLink url="https://us.posthog.com/project/2/dashboard/2104209">paid marketing dashboard</PrivateLink> is the live view, the <PrivateLink url="https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU">media plan</PrivateLink> is where we keep budget and pacing, and the monthly <PrivateLink url="https://docs.google.com/document/d/1H20mB0gWrISKZMOBlJ12avlyNC5yGRD3e97BVuABtys/edit?tab=t.p28mbb7wkucv#heading=h.97gmbiax4fyn">Growth Review</PrivateLink> is where we make and record decisions.
 
 ### Conversion campaigns
 

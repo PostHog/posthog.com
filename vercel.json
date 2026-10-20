@@ -6576,7 +6576,7 @@
         },
         {
             "source": "/data-stack",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-stack/managed-warehouse",
@@ -6595,6 +6595,10 @@
             "destination": "/warehouse"
         },
         {
+            "source": "/context-warehouse",
+            "destination": "/warehouse"
+        },
+        {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
             "destination": "/docs/data-warehouse/warehouse:ext?"
         },
@@ -6604,11 +6608,11 @@
         },
         {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/sql",

@@ -241,7 +241,7 @@ export const OnePlaceSlide = () => {
                         )}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
-                        <Link to="/context-warehouse" state={{ newWindow: true }} className="text-sm font-semibold">
+                        <Link to="/warehouse" state={{ newWindow: true }} className="text-sm font-semibold">
                             Data stack README
                         </Link>
                     </div>
