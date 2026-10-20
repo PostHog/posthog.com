@@ -47,34 +47,47 @@ import IdentifyBackendCalloutPython from '../_snippets/identify-backend-callout-
 
 ## Request contexts
 
-Use [contexts](/docs/libraries/python#contexts) to share identity, session IDs, and tags across multiple captures during a request.
+Version `7.69.0` and later of the Python SDK includes a Flask integration that creates a fresh [context](/docs/libraries/python#contexts) for every request. It adds the request URL, method, path, route, IP address, and user agent to events captured during the request.
+
+Register the integration after you create your Flask app and PostHog client:
+
+```python file=app.py
+from posthog.integrations.flask import PosthogFlaskIntegration
+
+PosthogFlaskIntegration(
+    app,
+    client=posthog,
+    capture_exceptions=True,
+)
+```
+
+Setting `capture_exceptions=True` captures unhandled Flask exceptions. Set it to `False` for request enrichment without automatic exception capture. If you omit it, the integration inherits the client's `enable_exception_autocapture` setting.
+
+You can also provide:
+
+- `request_filter` to skip both enrichment and automatic exception capture for selected requests
+- `extra_properties` to add application-specific properties to the request context
+- `trust_tracing_headers` to accept PostHog session and distinct ID headers
 
 If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
 
-Then read the incoming headers in your Flask request handler. Tracing headers are client-controlled analytics context, not authentication or authorization, so prefer your authenticated user ID when one is available:
+The integration ignores these headers by default because clients can control them. Set `trust_tracing_headers=True` when registering the integration to accept them as analytics context. Don't use them for authentication or authorization.
+
+Identify the request context from your route when you have an authenticated user ID:
 
 ```python
-from flask import request, session
-from posthog import identify_context, set_context_session, tag
+from flask import session
+from posthog import identify_context
 
-@app.route('/api/dashboard', methods=['POST'])
+@app.route("/api/dashboard", methods=["POST"])
 def api_dashboard():
-    with posthog.new_context(fresh=True):
-        distinct_id = session.get('user_id') or request.headers.get('X-POSTHOG-DISTINCT-ID')
-        if distinct_id:
-            identify_context(str(distinct_id))
+    user_id = session.get("user_id")
+    if user_id:
+        identify_context(str(user_id))
 
-        session_id = request.headers.get('X-POSTHOG-SESSION-ID')
-        if session_id:
-            set_context_session(session_id)
+    posthog.capture("dashboard_api_called")
 
-        tag('$current_url', request.url)
-        tag('$request_method', request.method)
-        tag('$request_path', request.path)
-
-        posthog.capture('dashboard_api_called')
-
-    return '', 204
+    return "", 204
 ```
 
 Events captured without a context or explicit `distinct_id` are sent as [anonymous events](/docs/data/anonymous-vs-identified-events) with an auto-generated `distinct_id`. See the [Python SDK docs](/docs/libraries/python#person-profiles-and-properties) for more details.
@@ -83,7 +96,9 @@ Events captured without a context or explicit `distinct_id` are sent as [anonymo
 
 import PythonFlaskExceptionAutocapture from './python/_snippets/python-flask-exception-autocapture.mdx'
 
-Flask has built-in error handlers. This means PostHog’s default exception autocapture won’t work and we need to manually capture errors instead using `capture_exception()`:
+`PosthogFlaskIntegration` captures unhandled exceptions when you set `capture_exceptions=True` or enable exception autocapture on its client. It doesn't capture expected HTTP exceptions or exceptions consumed by your application's error handlers.
+
+Call `capture_exception()` from a custom error handler when you want to report a handled exception:
 
 <PythonFlaskExceptionAutocapture />
 

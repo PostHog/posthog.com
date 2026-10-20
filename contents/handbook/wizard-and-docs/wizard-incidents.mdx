@@ -1,0 +1,59 @@
+---
+title: Handling wizard incidents
+sidebar: Handbook
+showTitle: true
+---
+
+When the wizard breaks, reproduce it, declare an incident, then find the part that broke and fix or roll it back. If you think it'll hit the whole top of the funnel, [declare the incident](/handbook/engineering/operations/incidents).
+
+## Reproduce it
+
+1. Run the wizard against an app known to work. The [wizard workbench](https://github.com/PostHog/wizard-workbench/tree/main/apps) has a test app for every framework.
+
+   ```bash
+   npx -y @posthog/wizard@latest
+   ```
+
+2. Read the log at `/tmp/posthog-wizard.log`. It's verbose, so an agent can help you find the failing step.
+3. Run an older release with `npx @posthog/wizard@<version>`. If it works, compare its log with the current one. This also confirms a safe version to roll back to.
+
+## Find where it starts
+
+The wizard depends on a few services. Check each one before you blame the wizard.
+
+| Symptom | Likely cause | Where to look |
+|---|---|---|
+| Login fails, or a scope is missing | OAuth | The OAuth apps in Django admin for <PrivateLink url="https://us.posthog.com/admin/posthog/oauthapplication/">US</PrivateLink> and <PrivateLink url="https://eu.posthog.com/admin/posthog/oauthapplication/">EU</PrivateLink>. If OAuth isn't down, check the app's scopes and permissions. |
+| The agent can't reach a model | The AI gateway | Ask in <PrivateLink url="https://posthog.slack.com/archives/C0C1T3V1RJA">#team-agent-infra</PrivateLink>. The <SmallTeam slug="agent-infrastructure" /> owns the gateway. |
+| Skills fail to download | GitHub releases | The wizard falls back to the S3 mirror at `context-mill.posthog.com`. Check that both serve the latest release. |
+| Runs complete, but the integration is wrong | A bad context mill release | Compare the latest [context mill release](https://github.com/PostHog/context-mill/releases) with the one before it. |
+| Everything upstream is healthy | A bug in the wizard | Compare the current npm release with the last good one. |
+
+## Roll back a wizard release
+
+We don't move npm's `latest` tag back. Instead, publish a new version that contains the last good code, so everyone running `@latest` gets the fix.
+
+1. Open a [PR](https://github.com/PostHog/wizard/pulls) that reverts the bad commits. The title needs a [conventional commit](https://www.conventionalcommits.org/) prefix, like `revert: roll back to 2.81.0`.
+2. Merge it. [release-please](https://github.com/PostHog/wizard/blob/main/.github/workflows/release-please.yml) opens a release PR with the version bump.
+3. Merge the release PR. The [publish workflow](https://github.com/PostHog/wizard/blob/main/.github/workflows/publish.yml) publishes the new version to npm.
+4. Run `npx -y @posthog/wizard@latest` and confirm the fix.
+
+## Roll back a context mill release
+
+A context mill rollback is simpler, because the wizard always reads the release marked latest.
+
+1. On the [releases page](https://github.com/PostHog/context-mill/releases), mark the last good release as latest.
+2. Point the S3 mirror back at the same release. The mirror keeps every release, and `context-mill.posthog.com/latest` is a pointer in a CloudFront key-value store. Ask someone with AWS access to move its `latest` key to the good version, then check that `https://context-mill.posthog.com/latest/skill-menu.json` serves it.
+3. Delete the bad release.
+4. Fix the problem and ship a new release as usual.
+
+## Cloud runs use their own pinned version
+
+Cloud wizard runs don't use npm's `latest`. Each program pins an exact wizard version in the payload of the `wizard-program-registry` feature flag, and PostHog installs that version in the sandbox. A wizard rollback on npm doesn't reach cloud runs, and a fix doesn't either until the pin moves.
+
+If cloud runs are broken:
+
+1. Reach out to the <SmallTeam slug="growth" /> in #team-growth. They own cloud runs.
+2. Together, update the `wizard_version` for the affected programs in the `wizard-program-registry` payload to a known good version.
+
+If the payload is missing or invalid, cloud runs fall back to the default version set in the PostHog backend.

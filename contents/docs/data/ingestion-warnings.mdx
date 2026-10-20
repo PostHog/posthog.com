@@ -42,6 +42,7 @@ List of ingestion warnings:
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
+- [Discarded $groupidentify event with $group_type exceeding 400 characters](#discarded-groupidentify-event-with-group_type-exceeding-400-characters)
 - [Discarded cookieless event because cookieless tracking is disabled](#discarded-cookieless-event-because-cookieless-tracking-is-disabled)
 
 Validation warnings, raised when PostHog rejects a request as it arrives:
@@ -138,6 +139,28 @@ posthog.group("company", "company_id_in_your_db", "PostHog");
 
 `null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
 
+## Discarded $groupidentify event with $group_type exceeding 400 characters
+
+PostHog discards `$groupidentify` events when the `$group_type` property exceeds 400 characters. The 400-character limit matches the database column size. The warning details include the first 100 characters of the group type, its full length, and the group key so you can find the call site.
+
+Events with `$groups` naming a type over 400 characters are still ingested, but that specific group association is silently skipped – the event lands without being linked to that group.
+
+To fix this, shorten your group type names to 400 characters or fewer:
+
+```js
+// ✅ Correct - short group type name
+posthog.group("company", "company_id_in_your_db", {
+  name: "PostHog",
+});
+
+// ❌ Wrong - group type name exceeds 400 characters
+posthog.group("a_very_long_group_type_name_that_exceeds_four_hundred_characters...", "id", {
+  name: "PostHog",
+});
+```
+
+Group type names are meant to be category identifiers like `company`, `organization`, or `project` – not dynamic values. If your group type is long, you may be passing data that belongs in `$group_key` or in the group properties instead.
+
 ## Discarded cookieless event because cookieless tracking is disabled
 
 PostHog discards events sent in [cookieless mode](/tutorials/cookieless-tracking) when cookieless tracking is disabled for the project. The event is not ingested, and this warning is the only record of it. The drop happens before any other processing, so heatmap data and exceptions captured in cookieless mode are discarded the same way.
@@ -183,22 +206,22 @@ The `event` field was missing or empty, so there was no name to record the event
 
 These warnings mean a chunk of a [session recording](/docs/session-replay) was dropped. The rest of the recording still exists, but that stretch is missing from it. If the dropped chunk carried the recording's only full snapshot, the player has no starting DOM to replay against and can't play the recording at all.
 
-| Warning | Cause |
-| --- | --- |
-| Discarded a session replay batch with no `$session_id` | The batch didn't identify which session it belonged to. |
+| Warning                                                        | Cause                                                                 |
+| -------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Discarded a session replay batch with no `$session_id`         | The batch didn't identify which session it belonged to.               |
 | Discarded a session replay batch with an invalid `$session_id` | The `$session_id` was present but unusable – most often not a string. |
-| Discarded a session replay batch with no `$snapshot_data` | The batch carried no recording data. |
+| Discarded a session replay batch with no `$snapshot_data`      | The batch carried no recording data.                                  |
 
 ### Discarded AI events
 
 These warnings apply to [AI Observability](/docs/llm-analytics) events.
 
-| Warning | Cause |
-| --- | --- |
-| Discarded an AI event with an unsupported event name or no `$ai_model` | The event name didn't start with `$ai_`, or the required `$ai_model` property was missing. |
-| Discarded a non-AI event sent to the LLM analytics capture endpoint | An event whose name doesn't start with `$ai_` was sent to the LLM analytics endpoint (`/i/v1/ai/events`). Only that event was discarded. The rest of the batch was ingested. Send events without an `$ai_` name to the standard capture endpoint instead. |
-| Rejected a malformed AI or OpenTelemetry request | The request body couldn't be parsed. |
-| Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them. |
+| Warning                                                                    | Cause                                                                                                                                                                                                                                                     |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Discarded an AI event with an unsupported event name or no `$ai_model`     | The event name didn't start with `$ai_`, or the required `$ai_model` property was missing.                                                                                                                                                                |
+| Discarded a non-AI event sent to the LLM analytics capture endpoint        | An event whose name doesn't start with `$ai_` was sent to the LLM analytics endpoint (`/i/v1/ai/events`). Only that event was discarded. The rest of the batch was ingested. Send events without an `$ai_` name to the standard capture endpoint instead. |
+| Rejected a malformed AI or OpenTelemetry request                           | The request body couldn't be parsed.                                                                                                                                                                                                                      |
+| Accepted an OpenTelemetry export with no AI spans, so nothing was ingested | The export was valid but carried no AI spans. Check that your instrumentation is emitting them.                                                                                                                                                           |
 
 ## Query warnings via MCP
 

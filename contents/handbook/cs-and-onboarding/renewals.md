@@ -19,6 +19,8 @@ For mechanics, see [Contract rules](/handbook/growth/sales/contract-rules) and [
 - **Other customers:** 3 months before the credit expiry date.
   - At the 3-month mark, the renewal workflow pings you in #sales-alerts.
 
+If you've turned on [automatic renewal quotes](/handbook/growth/sales/contracts#automatic-renewal-quotes) in QuoteHog, you will also get a notification in #sales-alerts when your quote draft in QuoteHog is ready for your review.
+
 Customers who fit into either of the above buckets will also appear on the <PrivateLink url="https://us.posthog.com/project/2/insights/OXGSYc9k">CSM Managed — credits expiring in next 3 months</PrivateLink> insight.
 
 Start with a message in the shared Slack channel — the person you worked with last time might not be the right contact now. Flag the renewal date and ask about preferred next steps.
@@ -33,7 +35,7 @@ Work back from the end of the customer's final billing period (if they are going
 
 Regardless, have a checkpoint the week before the final billing period closes. If signature is going to slip, either:
 
-1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for 48 hours so the credits land first. The pause is [48 hours with no extension, and they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued), so flag it as early as you can. If signature is going to take longer than 48 hours, use option 2 instead.
+1. **Ask RevOps to pause collection.** Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA). If the invoice hasn't been issued yet, RevOps can hold it for 48 hours so the credits land first. The pause is [48 hours with no extension, and they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued), so flag it as early as you can. If signature is going to take longer than 48 hours, use option 2 instead.
 2. **Re-paper with the next period's start date.** If the period is going to close before signature, don't hold the original start date. Move the `Contract.EffectiveDate` to the beginning of the next billing period and tell the customer the new credits apply from that date. The period we already invoiced stays payable separately.
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting. If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit). Credits only apply to upcoming invoices.

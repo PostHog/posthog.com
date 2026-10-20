@@ -44,7 +44,7 @@ A fast way to confirm the scanner itself works: run it [on demand](/docs/replay-
 
 In the **Run** tab's recording list, **Skipped** means the recording can't pass the scan-time checks, so the background sweep passed it over and an on-demand scan would come back ineligible. Hover the tag to see why, with the recording's own duration or active time next to the limit it misses. Recordings that are still in progress are only skipped for being too long, since they can still grow past the minimums.
 
-Below the player, the same check shows as **Skipped:** next to **Summarize this recording**, and the scan buttons are disabled with the reason.
+Below the player, the same check shows as **Skipped:** next to the summarize button (**Summarize this recording** or **Summarize with** a scanner's name), and the scan buttons are disabled with the reason.
 
 ## A scan started nothing
 
@@ -55,6 +55,12 @@ When you scan several recordings at once and some or all don't start, PostHog sa
 - **This scanner reached its credit limit** for this billing period. Raise the scanner's limit or wait for the next period.
 
 Recordings the scanner has already observed are skipped rather than scanned again. Their existing observation is what you get.
+
+## A workflow's Replay Vision step has no answer
+
+The step's `state` and `warnings` say why. `skipped` means a limit stopped the scan before it started: the workflow's or project's [daily scan limit](/docs/replay-vision/quota-and-limits#workflow-scan-limits), your organization's credits, or the scanner's credit limit. `ineligible` and `failed` mean the same as for any observation: see [I'm getting a lot of ineligible observations](#im-getting-a-lot-of-ineligible-observations) and [failed observations](#failed-observations).
+
+If the step errors with "The triggering event has no session recording to analyze", the event has no `$session_id`. Send it with the event, or point the step's **Session ID** at the property that holds it. See the [workflow step requirements](/docs/workflows/replay-vision#requirements).
 
 ## I'm getting a lot of ineligible observations
 
@@ -128,7 +134,7 @@ A failed observation shows **Scan failed** on its page with the failure's label,
 
 ### AI provider unavailable
 
-The AI provider stayed unreachable across every automatic retry. PostHog retries the provider call up to four times, spaced out over a couple of minutes, before an observation lands here.
+The AI provider stayed unreachable across every automatic retry. PostHog tries the provider call up to four times in total, spaced out over a couple of minutes, before an observation lands here.
 
 **What to do:** retry the scan. If you see a burst across many recordings, the provider is likely having availability issues – wait it out before triggering more on-demand work.
 

@@ -30,7 +30,26 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 
 2. **Assign required permissions:**
 
-- For simplicity, you can assign the **BigQuery Data Editor**, **BigQuery Job User**, and **BigQuery Read Session User** roles if it meets your security requirements.
+Grant these roles to the service account:
+
+**Project-level roles** (grant on the GCP project):
+
+- **BigQuery Job User** – allows the service account to run query jobs
+- **BigQuery Read Session User** – allows reading data via the Storage Read API
+
+**Dataset-level roles** (choose one based on your setup):
+
+_Default setup (temporary tables in synced dataset):_
+
+- **BigQuery Data Editor** on the dataset you're syncing – allows PostHog to read your data and create temporary tables in the same dataset
+
+_Separate temporary dataset (optional):_
+
+- **BigQuery Data Editor** on the temporary dataset – allows PostHog to create temporary tables
+- **BigQuery Data Viewer** on the dataset you're syncing – allows read-only access to your data
+
+> **Note:** The connection check only validates read access. If write permissions are missing, the connection check can pass but the first sync will fail with a write-access error.
+
 - Alternatively, create a custom role that includes only these permissions:
 
   ```
@@ -176,10 +195,10 @@ If you see an error like:
 
 > `BigQuery denied access to the configured dataset or tables.`
 
-This means your service account doesn't have the necessary permissions to read the dataset. To fix this:
+This means your service account doesn't have the necessary permissions. Common causes:
 
-1. In the [Google Cloud Console](https://console.cloud.google.com/), go to **IAM & Admin > IAM**.
-2. Find your service account and ensure it has at least the **BigQuery Data Viewer** role on the dataset you're syncing.
-3. Alternatively, grant the specific `bigquery.tables.getData` permission at the dataset level.
+- **Missing read access** — Grant the **BigQuery Data Viewer** role (or the `bigquery.tables.getData` permission) on the dataset you're syncing.
+- **Missing write access for temporary tables** — The connection check can pass with read-only access, but the sync needs write access to create temporary tables. Grant the **BigQuery Data Editor** role on the dataset where temporary tables are created (your synced dataset by default, or a separate temporary dataset if configured).
+- **Missing job or read session permissions** — Grant the **BigQuery Job User** and **BigQuery Read Session User** roles on the project.
 
 See the [Configuring BigQuery](#configuring-bigquery) section for the full list of required permissions.

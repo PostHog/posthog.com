@@ -1,0 +1,128 @@
+---
+title: Extending the wizard
+sidebar: Handbook
+showTitle: true
+---
+
+## Scope your work first
+
+You're the driver, so open a PR! If your change might touch _everyone else's_ program, ping us in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">#team-wizard-and-docs</PrivateLink> so we can assess the blast radius together. We don't want to block you, but we do want to keep the wizard from exploding.
+
+| You want to | How |
+|---|---|
+| Add a new program | Self-serve |
+| Update your team's program | Self-serve |
+| Change something that reaches across many products, or the core agent and shared code | Open an issue with a design pitch first. The <SmallTeam slug="wizard-and-docs" /> and their agents help design it and provide context. |
+
+## Where your change goes
+
+Most changes to the wizard are a change to the [context mill](/handbook/wizard-and-docs/context-mill), not the wizard repo.
+
+| You want to | Change | Needs a wizard release |
+|---|---|---|
+| Improve how the wizard integrates a product | The skill in context mill | No |
+| Add a skill users run with `wizard skill <name>` | A new skill in context mill | No |
+| Add a subcommand to an existing command, like `wizard audit feature-flags` | A skill with a `cli:` block in context mill | No |
+| Add a new top-level command, like `wizard mcp-analytics` | A skill in context mill and a program in the wizard | Yes |
+| Change how the agent, TUI, or CLI works | The wizard repo | Yes |
+
+## Point your agent here
+
+Each repo has instructions written for coding agents. Start your agent with the ones that match your change.
+
+| Repo | Read first | For |
+|---|---|---|
+| Wizard | [`AGENTS.md`](https://github.com/PostHog/wizard/blob/main/AGENTS.md) | The repo map, layers, and rules |
+| Wizard | [`wizard-development`](https://github.com/PostHog/wizard/tree/main/.claude/skills/wizard-development) | Any structural change: boundaries, agent routing, gateway, security, TUI state |
+| Wizard | [`adding-skill-program`](https://github.com/PostHog/wizard/tree/main/.claude/skills/adding-skill-program) | A new command or program backed by a context mill skill |
+| Wizard | [`adding-framework-support`](https://github.com/PostHog/wizard/tree/main/.claude/skills/adding-framework-support) | A new language or framework |
+| Wizard | [`ink-tui`](https://github.com/PostHog/wizard/tree/main/.claude/skills/ink-tui) | Screens and keyboard handling |
+| Wizard | [`exploring-the-wizard`](https://github.com/PostHog/wizard/tree/main/.claude/skills/exploring-the-wizard) | Driving a real run against a test app |
+| Context mill | [`AGENTS.md`](https://github.com/PostHog/context-mill/blob/main/AGENTS.md) | Skills, the `cli:` block, and the build |
+| Context mill | [`author-stepwise-skill`](https://github.com/PostHog/context-mill/tree/main/.claude/skills/author-stepwise-skill) | A new skill that walks the agent through ordered steps |
+
+## Run it programmatically
+
+Both the agent and programs run without a host, so a test, another agent, or a new surface can call them directly. These are simplified signatures. The source has the full types.
+
+```ts
+// The agent on its own, from '@agent'
+runAgent(
+  config: RunConfig, // what to run: prompt, binding, tools, commandments
+  input: RunInput, // where: install directory, credentials, skill, flags
+  options?: {
+    onProgress?: (event: AgentProgress) => void // optional, never awaited
+    interaction?: AgentInteraction // optional, answers wizard_ask
+    signal?: AbortSignal
+  },
+): Promise<RunResult> // outcome, outro or failure, and a snapshot of the run
+
+// A whole program, from '@programs'
+runProgram(
+  programId: string,
+  input: {
+    store: SessionStore // the run's state, built with buildSession()
+    credentials?: ResolvedProgramCredentials
+    config?: Partial<ProgramConfig> // laid over the registered config
+  },
+  options?: {
+    credentials?: CredentialsProvider
+    interaction?: AgentInteraction
+    onProgress?: (progress: ProgramProgress) => void
+    workflow?: ProgramWorkflowConnector // the host's confirm steps
+    signal?: AbortSignal
+  },
+): Promise<ProgramRunOutcome> // outcome, one RunResult per agent run, report file
+
+// Context mill content, from src/shared and src/agent
+fetchSkillMenu(skillsBaseUrl): Promise<SkillMenu | null> // skill-menu.json
+installSkillById(skillId, installDir, skillsBaseUrl, options) // into .claude/skills/<id>
+loadAgentRegistry(skillsBaseUrl, flow): Promise<AgentRegistry> // one orchestrator flow from agent-menu.json
+```
+
+`skillsBaseUrl` is the latest context mill release on GitHub, or `http://localhost:8765` for a local context mill.
+
+## Commands and skills
+
+The wizard's commands come from context mill. A skill becomes a command when its `config.yaml` has a `cli:` block with `role: command`. For example, `wizard audit events` is the `audit-events` skill.
+
+The wizard reads these commands from the latest context mill release when it runs. A new subcommand under an existing command only needs a context mill release.
+
+A new top-level command also needs a wizard PR. The wizard registers each top-level command in [`src/cli/commands/`](https://github.com/PostHog/wizard/tree/main/src/cli/commands). Ship the context mill PR first, so the skill exists before the wizard looks for it.
+
+The command list is curated. A new `role: command` needs sign-off from a wizard maintainer, because a public command name is hard to remove.
+
+## Adding a program
+
+A program is a folder in the wizard repo. To add one:
+
+1. Create `src/programs/<id>/` with an `index.ts` that exports its `ProgramConfig`, and a `tsconfig.json` copied from a sibling program.
+2. Add it to `PROGRAM_REGISTRY` in `program-registry.ts`, and to the `references` in `src/programs/tsconfig.json`.
+3. Optionally add screens in `src/tui/programs/<id>/`, a command file in `src/cli/commands/`, and a `test/e2e.json` so wizard CI can drive it.
+
+The [programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md) has the full checklist, and the [`adding-skill-program`](https://github.com/PostHog/wizard/tree/main/.claude/skills/adding-skill-program) skill walks an agent through it.
+
+## Worked example: `wizard mcp-analytics`
+
+This command was added in four PRs. Copy its shape.
+
+1. The skill: [context-mill#202](https://github.com/PostHog/context-mill/pull/202)
+2. The wizard command: [wizard#731](https://github.com/PostHog/wizard/pull/731)
+3. The test apps: [wizard-workbench#2158](https://github.com/PostHog/wizard-workbench/pull/2158)
+4. The docs: [posthog.com#17939](https://github.com/PostHog/posthog.com/pull/17939)
+
+These PRs predate the current layout. The wizard command now goes in `src/cli/commands/` instead of `bin.ts`, and the program lives in `src/programs/` instead of `src/lib/programs/`.
+
+## Testing a new command
+
+- **Unit test in the wizard repo.** Add a case to [`programs-cli.test.ts`](https://github.com/PostHog/wizard/blob/main/src/cli/__tests__/programs-cli.test.ts) that checks the command registers in the right shape and runs the right skill.
+- **Test app in the workbench.** Add an app under [`apps/`](https://github.com/PostHog/wizard-workbench/tree/main/apps) and an entry in `apps/manifest.json`, so CI can run the real agent against it. Add one app per distinct path the skill handles.
+- **Evals.** Wizard CI grades each run against a [rubric](https://github.com/PostHog/wizard-workbench/tree/main/services/pr-evaluator/prompts) and scores it out of 5. The workbench apps are working examples of what good output looks like.
+
+See [Developing the wizard](/handbook/wizard-and-docs/developing-the-wizard) for how to run them.
+
+## Go deeper
+
+- [The `cli:` block schema](https://github.com/PostHog/context-mill/blob/main/CONTRIBUTING.md)
+- [Wizard AGENTS.md](https://github.com/PostHog/wizard/blob/main/AGENTS.md)
+- [Programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md)

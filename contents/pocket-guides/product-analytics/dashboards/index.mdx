@@ -1,0 +1,60 @@
+---
+title: Dashboards
+shortTitle: Dashboards
+subtitle: Bring your insights together and decide what to investigate next.
+pocketGuideOrder: 5
+---
+
+<RightPage>
+
+# Dashboards
+
+Twig's engineers have recorded filter selections, connected visits to signed-in guests, and built insights for filter use, booking completion, and repeat bookings. Now they need a way to view that data together and use it to decide what to build next.
+
+A dashboard puts saved insights on one page. Twig starts with an overview, then builds two dashboards to answer narrower questions.
+
+## Build an overview dashboard
+
+The engineers build their first dashboard, and name it **Exploring and booking stays**. They add three saved insights: their trends insight for weekly filter use, funnels insight for booking completion, and retention insight for repeat bookings:
+
+<BookingDashboardFigure />
+
+Beside the funnel, the engineers add a note: one booking request failed, and three other drop-offs need inspecting. That gives them a place to start when booking completion changes. The tiles measure different things: weekly filter users, booking completion within 14 days, and monthly repeat bookings. The engineers leave **No date range override** on so each saved insight keeps its own dates and interval.
+
+## Build a drill-down dashboard
+
+Twig's Trends insight shows more people using filters in week 2, but it doesn't show which destinations they chose. The engineers create a **Finding stays** dashboard and put the destination breakdown beside the weekly trend:
+
+<FindingStaysDashboardFigure />
+
+The destination breakdown counts unique people, just like the trend. Coast rises from two people in week 1 to five in week 2; Forest and City stay flat. That gives Twig a specific change to investigate. The engineers can inspect Coast selections with `has_results: false` to see whether the filter returned no stays.
+
+## Compare cohorts side by side
+
+Twig also wants to know whether guests who saved a stay before their first booking return more often. The engineers build a **Returning guests** dashboard with three views of January 2025: all first-time bookers, the four who saved a stay, and the six who didn't. The last two use their static cohorts as filters:
+
+<ReturningGuestsDashboardFigure />
+
+Of the 10 January guests, three booked again in Month 12. Two of four in the saved group did (50%); one of six in the other group did (17%). This small comparison doesn't show that saving caused another booking. The engineers would compare later first-booking cohorts after they reach Month 12.
+
+## Use dashboards as evidence
+
+The booking funnel gives the engineers an immediate lead. Of 10 people who started booking, four didn't finish within 14 days and one had a failed request. Twig's `request_id` connects that person's `booking_started` event to the server response. The engineers inspect the other three booking trails and the failed response before deciding what to fix. A <Term name="session replay">Session Replay</Term> can show what a visitor saw, but not why the server request failed.
+
+After a booking-flow change, they check the funnel again after a full 14-day conversion window, keeping its events, order, and filters the same. A higher completion rate means more starters finished within that window. It doesn't prove their change caused the increase – they could test that with <Term name="experiment">Experiments</Term>.
+
+## Build a dashboard for your product
+
+Start with one question about your product and check which events and people PostHog records, build an insight with the right count and time period, and save it to a dashboard.
+
+The following prompt asks PostHog AI or your MCP-connected agent to inspect your events and build a dashboard from the data you have. Happy building!
+
+<ProductAnalyticsDashboardNextSteps />
+
+<LessonFooter>
+
+<a href="/docs/product-analytics/dashboards">Dashboards</a> · <a href="/docs/product-analytics/insights">Creating insights</a> · <a href="/docs/experiments">Experiments</a>
+
+</LessonFooter>
+
+</RightPage>

@@ -156,9 +156,22 @@
         {
             "source": "/docs/session-replay/learn/:path*",
             "destination": "/docs/session-replay/learn/[...chapter]/index.html"
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/docs/feature-flags/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/field-guide/foreword",
+            "destination": "/field-guide#about",
+            "statusCode": 301
+        },
+        {
+            "source": "/field-guide/closing-note",
+            "destination": "/field-guide"
+        },
         {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
@@ -192,6 +205,21 @@
         {
             "source": "/pocket-guides/session-replay/:path*",
             "destination": "/docs/session-replay/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags/:path*",
+            "destination": "/docs/feature-flags/learn/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse",
+            "destination": "/pocket-guides/data-stack",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse/:path*",
+            "destination": "/pocket-guides/data-stack/:path*",
             "statusCode": 301
         },
         {
@@ -524,6 +552,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/marketing-analytics:ext(\\.md)?",
+            "destination": "/docs/web-analytics/marketing-analytics:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
             "statusCode": 301
@@ -744,6 +777,26 @@
             "statusCode": 301
         },
         {
+            "source": "/news",
+            "destination": "/blog",
+            "statusCode": 301
+        },
+        {
+            "source": "/press",
+            "destination": "/media",
+            "statusCode": 301
+        },
+        {
+            "source": "/trust",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy-policy",
+            "destination": "/privacy",
+            "statusCode": 301
+        },
+        {
             "source": "/manual/session-recordings",
             "destination": "/docs/session-replay",
             "statusCode": 301
@@ -774,8 +827,18 @@
             "statusCode": 301
         },
         {
+            "source": "/feed.xml",
+            "destination": "/rss.xml",
+            "statusCode": 301
+        },
+        {
             "source": "/status",
             "destination": "https://status.posthog.com",
+            "statusCode": 301
+        },
+        {
+            "source": "/art-library",
+            "destination": "https://brand.posthog.com",
             "statusCode": 301
         },
         {
@@ -1133,6 +1196,10 @@
         },
         {
             "source": "/teams/posthog-ai",
+            "destination": "/teams/self-driving"
+        },
+        {
+            "source": "/teams/agents",
             "destination": "/teams/self-driving"
         },
         {
@@ -4037,6 +4104,11 @@
         {
             "source": "/docs/surveys/events:ext(\\.md)?",
             "destination": "/docs/surveys/implementing-custom-surveys:ext?"
+        },
+        {
+            "source": "/docs/surveys/pricing:ext(\\.md)?",
+            "destination": "/surveys/pricing",
+            "statusCode": 301
         },
         {
             "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",

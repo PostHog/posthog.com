@@ -193,7 +193,7 @@ const Expanded = ({ replies, isInForum }: ExpandedProps) => {
                         key={reply.id}
                         className={`pr-[5px] !mb-0 relative pb-4 border-primary ${
                             isInForum
-                                ? 'border-t pt-4 px-5'
+                                ? 'border-t pt-4 @xl:pl-5'
                                 : 'border-l border-solid squeak-left-border before:border-l-0 pl-[30px]'
                         } ${getComunityClasses(reply, resolvedBy?.data?.id === reply.id)}`}
                     >

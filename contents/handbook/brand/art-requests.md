@@ -50,13 +50,12 @@ If you need to chase for an update on a request, the best place to do it is a co
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+All our currently approved hedgehogs are on [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies). Anyone — team member or not — can browse the library and download any hog as SVG or PNG, without Figma access and without relying on the design team.
 
-Here's how:
+Team members can fall back to [this Figma file](https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0) to export a hog at a custom size, or to grab one that hasn't synced to the library yet. Please make sure you're choosing hogs which are approved, finalized, and match the current brand. 
+
 1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests). 
-
-> Non-team members can find some of the most-used hogs to download on [our press page](/media).
+If you can't find a suitable hog, you can request one with the templates above.

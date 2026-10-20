@@ -137,7 +137,7 @@ A customer's engineering team pings the shared channel: their experiment results
 
 This is not unusual. Most product-led customers (the ones our CSMs and TAMs inherit) self-serve their implementation.
 
-So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly.
+So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the [technical weeds of someone else's codebase](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer#software-engineering-is-fun) and making sure PostHog is implemented correctly.
 
 ## 11:00 AM: The donut run
 
