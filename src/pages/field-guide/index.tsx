@@ -5,6 +5,7 @@ import Hero from 'components/FieldGuide/Hero'
 import NaturalistIntro from 'components/FieldGuide/NaturalistIntro'
 import GuideBody from 'components/FieldGuide/GuideBody'
 import TableOfContents from 'components/FieldGuide/TableOfContents'
+import { FIELD_GUIDE_OG_IMAGE } from 'components/FieldGuide/speciesData'
 
 export default function FieldGuide(): JSX.Element {
     // Scroll to an in-page section when linked via /field-guide#<id> (from the TOC, or
@@ -54,7 +55,7 @@ export default function FieldGuide(): JSX.Element {
             <SEO
                 title="The Field Guide to Wild Users - PostHog"
                 description="A field guide to the species of users you'll spot in your session replays."
-                image={`/images/og/default.png`}
+                image={FIELD_GUIDE_OG_IMAGE}
             />
             <ReaderView
                 hideLeftSidebar

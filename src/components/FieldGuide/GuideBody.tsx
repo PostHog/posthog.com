@@ -53,7 +53,6 @@ export default function GuideBody(): JSX.Element {
                     <p className="gb-ebook-text">
                         <strong>Want an actual book instead?</strong> Take it to the field, along with more of the
                         naturalist's personal notes.{' '}
-                        {/* PDF not uploaded yet — drop the file at static/field-guide-to-wild-users.pdf to activate. */}
                         <a href="/field-guide-to-wild-users.pdf" download className="gb-ebook-link">
                             Download the PDF
                         </a>

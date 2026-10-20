@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import { INK } from './heroData'
-import { Species, SpeciesSection } from './speciesData'
+import { FIELD_GUIDE_OG_IMAGE, Species, SpeciesSection } from './speciesData'
 
 const PLATE_PAPER = '#F0ECD9'
 const CORAL = '#E1554E'
@@ -84,7 +84,7 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
             <SEO
                 title={`${species.name} - The Field Guide to Wild Users`}
                 description={`${species.name} (${species.latin}) — a field guide to the species of users you'll spot in your session replays.`}
-                image={`/images/og/default.png`}
+                image={species.ogImage ?? FIELD_GUIDE_OG_IMAGE}
             />
             <ReaderView
                 hideLeftSidebar

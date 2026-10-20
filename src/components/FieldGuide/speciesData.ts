@@ -17,7 +17,10 @@ export interface Species {
     plateII?: string // "Plate II" action illustration (absent => placeholder box)
     sections: SpeciesSection[]
     map: { top: number; left: number } // % position on the hero map
+    ogImage?: string // social share card (absent => main field guide card)
 }
+
+export const FIELD_GUIDE_OG_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_OG_45b1fdafb3.png'
 
 const img = (base: string, plate: 1 | 2) => `/images/field-guide/plates/${base}-plate-${plate}.png`
 
@@ -31,6 +34,7 @@ export const SPECIES: Species[] = [
         plateI: img('rage-clicker', 1),
         plateII: img('rage-clicker', 2),
         map: { top: 30, left: 15 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_rage_clicker_14be9ccdf8.png',
         sections: [
             {
                 label: 'Appearance',
@@ -67,6 +71,7 @@ export const SPECIES: Species[] = [
         plateI: img('refreshing-pilgrim', 1),
         plateII: img('refreshing-pilgrim', 2),
         map: { top: 66, left: 25 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_refreshing_pilgrim_adce6438d0.png',
         sections: [
             {
                 label: 'Appearance',
@@ -103,6 +108,7 @@ export const SPECIES: Species[] = [
         plateI: img('tab-hopper', 1),
         plateII: img('tab-hopper', 2),
         map: { top: 22, left: 46 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_tab_hopper_566e13590c.png',
         sections: [
             {
                 label: 'Appearance',
@@ -139,6 +145,7 @@ export const SPECIES: Species[] = [
         plateI: img('mid-form-fleer', 1),
         plateII: img('mid-form-fleer', 2),
         map: { top: 58, left: 49 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_mid_form_fleer_b94e4b60df.png',
         sections: [
             {
                 label: 'Appearance',
@@ -175,6 +182,7 @@ export const SPECIES: Species[] = [
         plateI: img('pricing-page-loiterer', 1),
         plateII: img('pricing-page-loiterer', 2),
         map: { top: 34, left: 72 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_pricing_page_loiterer_3c2b63bbfe.png',
         sections: [
             {
                 label: 'Appearance',
@@ -211,6 +219,7 @@ export const SPECIES: Species[] = [
         plateI: img('tutorial-skipper', 1),
         plateII: img('tutorial-skipper', 2),
         map: { top: 70, left: 84 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_tutorial_skipper_1624a246c3.png',
         sections: [
             {
                 label: 'Appearance',
@@ -251,6 +260,7 @@ export const PENDING_SPECIES: Species[] = [
         plateI: img('modal-slammer', 1),
         plateII: img('modal-slammer', 2),
         map: { top: 13, left: 33 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_modal_slammer_16a1bd5cc2.png',
         sections: [
             {
                 label: 'Appearance',
@@ -287,6 +297,7 @@ export const PENDING_SPECIES: Species[] = [
         plateI: img('phantom-returner', 1),
         plateII: img('phantom-returner', 2),
         map: { top: 20, left: 61 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_phantom_returner_643a30eeb3.png',
         sections: [
             {
                 label: 'Appearance',
@@ -323,6 +334,7 @@ export const PENDING_SPECIES: Species[] = [
         plateI: img('dead-end-wanderer', 1),
         plateII: img('dead-end-wanderer', 2),
         map: { top: 54, left: 80 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_dead_end_wanderer_2820f9c98e.png',
         sections: [
             {
                 label: 'Appearance',
@@ -359,6 +371,7 @@ export const PENDING_SPECIES: Species[] = [
         plateI: img('console-opener', 1),
         plateII: img('console-opener', 2),
         map: { top: 50, left: 63 },
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_console_opener_a7b321bedf.png',
         sections: [
             {
                 label: 'Appearance',
