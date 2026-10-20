@@ -129,11 +129,15 @@ A few details:
 - Adding groups to an event no longer turns on person processing. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
 - An event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Setting `$process_person_profile: true` no longer changes that. (The Go SDK returns an error for a missing distinct ID instead.)
 - Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
+- **Distinct IDs over 200 bytes are dropped.** Legacy capture shortened them and kept the event. Capture v1 drops the event with `distinct_id_too_large`, and your error handler reports it. Limits count UTF-8 bytes, not characters.
+- **Group identify without a distinct ID** uses `$<group type>_<group key>` as the event's distinct ID. If that is over 200 bytes, pass a `distinct_id` explicitly, or PostHog drops the event.
+<!-- TODO(capture-v1): the group identify sentence depends on the posthog-python #1053 decision (option a); confirm before merge. -->
 
 ### Other changes
 
 - **Library name and version.** The SDK sets `$lib` and `$lib_version`. You can't override them from your properties.
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs.
+- **Stricter checks.** PostHog checks event names, distinct IDs, timestamps, properties, and options on every event, and drops only the events that break a rule. See [limits and validation](/docs/api/capture-v1#limits-and-validation).
 - **Timestamps.** SDKs send timestamps with at least millisecond precision and keep any extra precision you provide. They no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
 - **Logs.** Debug logs no longer include event contents, and some log messages changed. Update any alerts that match on old log text.
