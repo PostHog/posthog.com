@@ -44,6 +44,8 @@ A proposal records the two tables, the join keys, a confidence score, reasoning,
 
 You can also create, edit, and delete joins manually from the Relationships tab without going through the proposal flow. Click **New join** to open the join editor, or use the more menu on any active join row to edit or delete it. Manually created joins go straight to the active joins list – they don't require proposal review since the human is already making the decision.
 
+To propose a relationship for a specific table, navigate to the Relationships tab with a `table` parameter in the URL (e.g., `?tab=relationships&table=orders`). The search prefills with the table name and the proposals list filters to show only relationships involving that table. You can also click **Propose a relationship** to open a proposal form – if the URL includes a `propose_table` parameter, the source table is prefilled automatically. When you change or clear the search, the table scope is removed from the URL and the full unfiltered list reloads.
+
 Acceptance and rejection both go through a human with a typed "confirm" ([`data-catalog-relationship-accept-prepare` / `-execute`](/docs/semantic-layer/mcp-tools#relationship-tools) and `data-catalog-relationship-reject-prepare` / `-execute`).
 
 <CalloutBox icon="IconWarning" title="Rejection is permanent" type="caution">
