@@ -19,11 +19,11 @@ seo:
 ---
 We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most* of the time, but we spend way too much money on them to trust their output based on vibes alone.
 
-That's why we use benchmarks: repeatable tasks that are scored to evaluate a model or skill's performance.
+That's why we use benchmarks. 
 
-You've probably heard of the term "benchmark" before. Labs like Anthropic and OpenAI use them to measure, compare, and market new models on release, like the popular [SWE-bench](https://www.swebench.com/) which is designed to evaluate model performance on general coding tasks.
+You've probably heard of the term before. Labs like Anthropic and OpenAI use them to measure, compare, and market new models on release, like the popular [SWE-bench](https://www.swebench.com/) which is designed to evaluate model performance on general coding tasks.
 
-But benchmarks aren't just for frontier labs. They're useful for anyone who wants to understand how well an AI tool works in their given stack so that they can make informed decisions. For example, you might run three different models with the same code review prompt on the same PR to choose the best one based on how many known bugs they catch, how long they take, and what they cost.
+But benchmarks aren't just for frontier labs. They're useful for anyone who wants to understand how well a model, harness, or skill works in their given stack so that they can make informed decisions. For example, you might run three different models with the same code review prompt on the same PR to choose the best one based on how many known bugs they catch, how long they take, and what they cost.
 
 The idea is similar to running controlled experiments, but in reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
 
@@ -251,13 +251,13 @@ The first problem we encountered was with timestamps. If an agent in a frozen en
 
 The solution for that was simple enough; every time we injected data, we'd correct it to match the frozen timeline by shifting it.
 
-The second problem was less obvious. Even though we tried to make the data slices as realistic as possible, there were still certain types of data that we didn't want to replicate, nor did we expect the need to. But thanks to non-deterministism, new models would still sometimes try to look into those tables and data sources that we didn't slice. 
+The second problem was less obvious. Even though we tried to make the data slices as realistic as possible, there were still certain types of data that we didn't want to replicate. Part of that is because wanted the slices to be as small as possible since the environments need to be easy to create and reset. We didn't expect the tasks to need all of the data anyway, but thanks to non-deterministism, new models would still sometimes try to look into tables and data sources that we didn't slice. 
 
-For example, we chose not to slice user tables because _____. But an agent would sometimes decide it wanted to look inside, see that there aren't many users on this local instance, and immediately suspect something was strange.
+A common one we encountered was user tables, which we especially chose *not* to duplicate since they contain PII. But an agent would sometimes decide it wanted to look inside those tables for seemingly unrelated tasks. It would then see that there weren't many users on its local instance, and immediately suspect something was strange.
 
 ![September 30 scout trace showing a missing team roster and the decision to leave reviewers unassigned.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/11_trace_sept30_roster_5787996325.png)
 
-On the other hand, you can always *overprepare* and make it as realistic as possible on the MCP tools side, while the rest of the data in the local instance doesn't match the scale. Then the agent gets even more suspicious and starts thinking the data is synthetic.
+On the other hand, it's also possible to *overprepare* the data. You could make it as realistic as possible on the MCP tools side, but if the rest of the data in the local instance doesn't match the scale, then the agent gets even more suspicious and starts thinking the data is synthetic.
 
 ![September 23 scout trace showing the agent questioning whether the data is synthetic.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/12_trace_sept23_synthetic_ecd98649d3.png)
 
