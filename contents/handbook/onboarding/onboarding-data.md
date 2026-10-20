@@ -37,19 +37,7 @@ Data used by Onboarding Specialists comes from three main sources:
   - Event volume metrics
   - Implementation diagnostics
 
-## Onboarding pipeline tracking
-
-### Pipeline stages
-
-We track customers through defined onboarding stages with automated timestamp capture:
-
-1. **Onboarding segment entry** - Customer enters onboarding criteria
-2. **Outreach sent** - Initial contact via email (manual update)
-3. **Customer engagement** - Response received (manual update)
-4. **Nurture phase** - Post-intro call follow-up (manual update)
-5. **Completion/churn** - Final outcome tracking
-
-### Key data tables
+## Key data tables
 
 For onboarding analysis, these tables provide essential data:
 
