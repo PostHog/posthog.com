@@ -28,7 +28,7 @@ Technical Account Managers (TAMs) own a book of business of nominally around 15 
 - Ensure that TAMs are on top of any credit renewals well before they expire.
 - Check the TAM quota tracker to see if there are any discrepancies and encourage your team to do so regularly as well.
 - Coming up to the end of the quarter, work with your team to identify any customers that are ready to be owned by a Customer Success Manager.  Review these with Simon ahead of quarter end so that we can make for a clean transition of customers.
-  - Set the New Owner trait in vitally to `EU CSM` or `US CSM` based on geography. 
+  - Set the New Owner trait in vitally to `EU CSM` or `US CSM` based on geography.
 
 ### Customer Success
 
@@ -75,7 +75,12 @@ We need to ensure that teams are able to proactively follow our [incident comms 
 
 We need to proactively notify all team members when there is a change to pricing, discounts, or other contract rules which may impact in-flight and future customer conversations.  This section covers any change in the [Contracts & Billing](/handbook/growth/sales/contract-rules) section of the handbook.
 
-1. The author of the pull request (normally Ben or RevOps) should post in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-sales-cs-support</PrivateLink> with the pertinent details of the update, as well as a link to the handbook pull request.
+1. The author of the pull request (normally Ben or RevOps) should post in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-sales-cs-support</PrivateLink> with the pertinent details of the update:
+    * A link to the handbook pull request.
+    * Cover every change in the diff, not just the headline ones. In larger, heavily discussed, or longer-running pull requests, a small change can get lost behind the main one(s).
+    * A list of every rule that changed, each written as **Before:** (the old rule) and **After:** (the new rule). For example:
+        * **Before:** If a top-up takes the customer's total credit purchases into a higher discount tier, the top-up gets that tier.
+        * **After:** Each purchase is priced independently. A top-up doesn't combine with earlier purchases to reach a higher tier.
 2. Team leads should then make sure all of their team are aware of the change, and any clarifying questions asked in the Slack thread from step 1.
 
 
