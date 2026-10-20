@@ -102,6 +102,7 @@ const LearnNav = ({
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter),
               },
               { name: 'Agent prompts and MCP', url: `${basePath}/agent-prompts-and-mcp` },
+              { name: 'Live playground', url: `${basePath}/live-playground` },
           ]
         : chapters
 

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { TWIG_VISIT_RECORDING_URL } from '../../constants'
 import { LoginView, ProfileMenu, SavedStaysView } from '@posthog/twig-components/account'
 import { SavedStay } from '@posthog/twig-components/saved-stay'
 import { StayCardContent } from '@posthog/twig-components/stay-card'
@@ -42,9 +43,6 @@ const firstVisit: ExampleEvent[] = [
         sessionId: 'session_a1',
     },
 ]
-
-const REPLAY_VIDEO_URL =
-    'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_10_02_at_1_05_27_PM_553e7c2693.mp4'
 
 const profile = {
     displayName: 'Edgar Hogg',
@@ -484,7 +482,7 @@ function formatReplayTime(milliseconds: number): string {
     return `${(milliseconds / 1000).toFixed(1)}s`
 }
 
-export function SessionReplayLinkFigure(): JSX.Element {
+export function SessionReplayLinkFigure({ autoPlay = false }: { autoPlay?: boolean } = {}): JSX.Element {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [activeReplayEvent, setActiveReplayEvent] = useState(0)
     const [durationMs, setDurationMs] = useState(19_133)
@@ -574,10 +572,12 @@ export function SessionReplayLinkFigure(): JSX.Element {
                             aria-label="Twig visit recording"
                             className="block aspect-video max-h-full w-full object-contain"
                             disablePictureInPicture
+                            autoPlay={autoPlay}
+                            loop={autoPlay}
                             muted
                             playsInline
                             preload="metadata"
-                            src={REPLAY_VIDEO_URL}
+                            src={TWIG_VISIT_RECORDING_URL}
                             onDurationChange={(event) => syncReplayDuration(event.currentTarget)}
                             onEnded={(event) => {
                                 setPlaying(false)
