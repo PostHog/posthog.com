@@ -16,7 +16,7 @@ From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events
 
 **Existing free organizations:** You'll keep 1-year retention. If you upgrade to pay-as-you-go on or after November 1, you'll move to the 2-year default.
 
-**New organizations (created on or after November 1):** Free plans get 1 year, and pay-as-you-go plans get 2 years. If you are on a paid platform package (Boost, Scale, or Enterprise), you can request an extension by contacting our support team.
+**New organizations (created on or after November 1):** Free plans get 1 year, and pay-as-you-go plans get 2 years. We're working on a way to offer longer retention. Until then, if you're on a paid platform package (Boost, Scale, or Enterprise) and need more than 2 years, contact our support team.
 
 ## If you need a longer window
 
