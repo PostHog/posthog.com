@@ -17,13 +17,13 @@ Despite running with a team of just four, SoundBoost is already used by over 225
 
 "We're a small team, so every conversion matters to us. If we fix 10% here, 5% there? Those gains add up – and PostHog compiles that into a menu for me: fix these first, fix those later."
 
-SoundBoost uses [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Error Tracking](/error-tracking), and [Surveys](/surveys) – but it's the self-driving Inbox that turns their data into a ranked to-do list.
+SoundBoost uses [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Error Tracking](/error-tracking), and [Surveys](/surveys), but it's the self-driving Inbox that turns their data into a ranked to-do list.
 
 ## Using PostHog reports to maintain a healthy funnel
 
 With such a small team to find and ship improvements, Berkan starts every morning logging in to PostHog to check the self-driving Inbox. Here, PostHog's [reports](/docs/self-driving/reports) rank the priorities for the team.
 
-Sometimes that means shipping small bug fixes or performance improvements. Other times it means spotting existential threats before the team would otherwise think to look. In one such case, PostHog's [scouts](/docs/self-driving/scouts) spotted that daily clicks from Google had fallen to zero. This was shortly after SoundBoost migrated from an .ai to a .com domain, so the team assumed this was normal lag while Google picked up the new domain – but the agent disagreed.
+Sometimes that means shipping small bug fixes or performance improvements. Other times it means spotting existential threats before the team would otherwise think to look. In one such case, PostHog's [scouts](/docs/self-driving/scouts) spotted that daily clicks from Google had fallen to zero. This was shortly after SoundBoost migrated from an .ai to a .com domain, so the team assumed this was normal lag while Google picked up the new domain, but the agent disagreed.
 
 "PostHog's reports told us this was a bigger problem. It told us that conversions stopped, traffic was low, and we were losing our best funnel," Berkan recalls. "That was essential information for us and we immediately rolled back to the .ai domain, regaining all our traction from Google."
 
