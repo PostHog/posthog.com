@@ -21,9 +21,3 @@ From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events
 ## If you need a longer window
 
 To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
-
-## How to check your window
-
-PostHog shows a warning on any insight whose date range reaches past your retention window. The [events data retention docs](/docs/data/events-retention) explain how retention works and how to read your window through the API.
-
-Questions about your organization's window? [Contact support](/questions).
