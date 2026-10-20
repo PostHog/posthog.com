@@ -193,7 +193,7 @@
         },
         {
             "source": "/docs/ai-observability/learn/:path*",
-            "destination": "/learn/ai-observability/:path*",
+            "destination": "/learn/ai-observability/pocket-guide/:path*",
             "statusCode": 301
         },
         {
@@ -203,7 +203,7 @@
         },
         {
             "source": "/docs/session-replay/learn/:path*",
-            "destination": "/learn/session-replay/:path*",
+            "destination": "/learn/session-replay/pocket-guide/:path*",
             "statusCode": 301
         },
         {
@@ -213,7 +213,7 @@
         },
         {
             "source": "/docs/feature-flags/learn/:path*",
-            "destination": "/learn/feature-flags/:path*",
+            "destination": "/learn/feature-flags/pocket-guide/:path*",
             "statusCode": 301
         },
         {
@@ -233,47 +233,47 @@
         },
         {
             "source": "/pocket-guides/ai-observability",
-            "destination": "/learn/ai-observability",
+            "destination": "/learn/ai-observability/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/ai-observability.md",
-            "destination": "/learn/ai-observability.md",
+            "destination": "/learn/ai-observability/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/ai-observability/:path*",
-            "destination": "/learn/ai-observability/:path*",
+            "destination": "/learn/ai-observability/pocket-guide/:path*",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/session-replay",
-            "destination": "/learn/session-replay",
+            "destination": "/learn/session-replay/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/session-replay.md",
-            "destination": "/learn/session-replay.md",
+            "destination": "/learn/session-replay/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/session-replay/:path*",
-            "destination": "/learn/session-replay/:path*",
+            "destination": "/learn/session-replay/pocket-guide/:path*",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/feature-flags",
-            "destination": "/learn/feature-flags",
+            "destination": "/learn/feature-flags/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/feature-flags.md",
-            "destination": "/learn/feature-flags.md",
+            "destination": "/learn/feature-flags/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/feature-flags/:path*",
-            "destination": "/learn/feature-flags/:path*",
+            "destination": "/learn/feature-flags/pocket-guide/:path*",
             "statusCode": 301
         },
         {

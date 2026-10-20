@@ -27,11 +27,11 @@ The rendering path is:
 | Volume | Public URL |
 | --- | --- |
 | Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
-| AI Observability, Session Replay, Feature Flags | Guide at `/learn/<product>` |
+| AI Observability, Session Replay, Feature Flags | Overview at `/learn/<product>`; guide at `/learn/<product>/pocket-guide` |
 | Self-driving | `/docs/self-driving/pocket-guide` |
 | Data Stack | `/docs/data-warehouse/pocket-guide` |
 
-Product Analytics has a separate choice page, `ProductAnalyticsLearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. Product Analytics lists Overview, Pocket guide (chapters nested under it), Agent prompts and MCP, and Live playground, each with an icon. The other products list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
+Each volume with `learnHub` in `src/constants/pocketGuides.ts` has an overview page at `src/pages/learn/<product>/index.tsx`, which renders `LearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. A hub lists Overview and Pocket guide (chapters nested under it), each with an icon, then the extra pages in `learnHub.pages`. Only Product Analytics has extra pages: Agent prompts and MCP, and Live playground. Volumes without `learnHub` list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
 
 ## Content and registration
 
@@ -148,7 +148,8 @@ Use the source files for current fixture values, timing, and interaction details
 
 ### Product Analytics Learn hub
 
-- `ProductAnalyticsLearnLanding.tsx` owns the overview's short previews: Learn through a story, Learn with your agent, and Learn by doing. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
+- `LearnLanding.tsx` renders every hub overview: the product name, an intro line, and a Learn through a story section with the cover. The intro defaults to the page description, and the story text defaults to the volume description.
+- `ProductAnalyticsLearnLanding.tsx` passes its own copy to `LearnLanding` and adds two previews as children: Learn with your agent, and Learn by doing. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
 - `AgentTeachingActions.tsx` shares the teaching prompt and the Claude Code and Codex launch controls. It exports `AGENT_TEACHING_PROMPT`, so the displayed and launched instructions stay identical. Keep that prompt unchanged unless someone asks for an instruction change. Pass a chapter-specific prompt through the optional `prompt` prop.
 - The Live playground page stacks `SessionReplayLinkFigure` (pass `autoPlay` for muted, looping playback), `TwigEventFigure`, and `BookingStepsFigure`. Chapter embeds keep manual playback.
 

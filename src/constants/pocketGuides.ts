@@ -3,6 +3,9 @@
 /** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
 export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
 
+/** Optional pages under a Learn hub, at /learn/<product>/<page>. */
+export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
+
 export interface PocketGuideVolume {
     /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
     id: string
@@ -19,6 +22,8 @@ export interface PocketGuideVolume {
     productHandle?: string
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
+    /** Show an Overview page at /learn/<product> and list the extra hub pages that exist. Omit for a flat chapter list. */
+    learnHub?: { pages?: LearnHubPage[] }
     /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -43,6 +48,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'product-analytics',
         productHandle: 'product_analytics',
         learnPath: '/learn/product-analytics/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
         countOrientationPages: true,
     },
     {
@@ -53,7 +59,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 2,
         docsProduct: 'ai-observability',
         productHandle: 'ai_observability',
-        learnPath: '/learn/ai-observability',
+        learnPath: '/learn/ai-observability/pocket-guide',
+        learnHub: {},
     },
     {
         id: 'data-stack',
@@ -73,7 +80,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 4,
         docsProduct: 'session-replay',
         productHandle: 'session_replay',
-        learnPath: '/learn/session-replay',
+        learnPath: '/learn/session-replay/pocket-guide',
+        learnHub: {},
     },
     {
         id: 'feature-flags',
@@ -83,7 +91,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 6,
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
-        learnPath: '/learn/feature-flags',
+        learnPath: '/learn/feature-flags/pocket-guide',
+        learnHub: {},
     },
     {
         id: 'self-driving',

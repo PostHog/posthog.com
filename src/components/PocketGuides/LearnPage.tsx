@@ -26,6 +26,7 @@ export interface LearnLandingProps {
     productName: string
     description: string
     storyUrl: string
+    volumeId: string
 }
 
 /** Page shell shared by the index and per-chapter routes. */
@@ -53,6 +54,7 @@ export default function LearnPage({
         productName: productData?.name,
         description,
         storyUrl: guideBasePath,
+        volumeId,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({
         productData,

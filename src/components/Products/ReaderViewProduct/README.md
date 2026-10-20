@@ -10,10 +10,10 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 Tabs with an `href` navigate when they are not already active. Clicking the active Learn tab
 keeps the current page open. Its Overview link returns to the learning hub.
 
-Products opt in to Learn with `pocketGuideVolume`. Products with `learnHub` use one `TreeMenu`
-on the overview, agent teaching page, and chapter pages. The tree contains direct links to
-Overview, Pocket guide, Agent prompts and MCP, and Live playground. All four open
-internal pages; the Live playground page links out to the live Twig site. Pocket guide
+Products opt in to Learn with `pocketGuideVolume`. Volumes with `learnHub` in
+`src/constants/pocketGuides.ts` use one `TreeMenu` on the overview, hub pages, and chapter pages.
+The tree contains direct links to Overview and Pocket guide, then the pages in `learnHub.pages`
+(Agent prompts and MCP, and Live playground, for Product Analytics only). Pocket guide
 links to the introduction and has nested chapter links sourced from `useBookPages`; the shared
 TreeMenu handles expansion and selection. Learn does not use anchor links or swap menus based
 on the current route. Products without a hub retain a flat list of chapter links.

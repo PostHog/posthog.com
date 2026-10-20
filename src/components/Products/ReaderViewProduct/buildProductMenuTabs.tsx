@@ -11,12 +11,18 @@ import {
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
 import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
+
+const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
+    'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
+}
 
 const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
@@ -88,12 +94,10 @@ const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
-    hub,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
-    hub?: boolean
 }) => {
     const pages = useBookPages(volumeId)
     const posthog = usePostHog()
@@ -104,6 +108,7 @@ const LearnNav = ({
         name: page.page ? `${page.page}. ${page.shortTitle || page.title}` : page.shortTitle || page.title,
         url: learnChapterPath(guideBasePath, page),
     }))
+    const hub = volume?.learnHub
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
@@ -113,16 +118,8 @@ const LearnNav = ({
                   icon: <IconBook className="size-4" />,
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter),
               },
-              {
-                  name: 'Agent prompts and MCP',
-                  url: `${basePath}/agent-prompts-and-mcp`,
-                  icon: <IconTerminal className="size-4" />,
-              },
-              {
-                  name: 'Live playground',
-                  url: `${basePath}/live-playground`,
-                  icon: <IconCursorClick className="size-4" />,
-              },
+              // Only the hub pages this volume has, so a smaller hub has no dead links.
+              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
           ]
         : chapters
 
@@ -170,8 +167,6 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Shows a learning hub with page links and nested pocket guide chapters. */
-              learnHub?: boolean
           }
         | null
         | undefined
@@ -226,7 +221,6 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        learnHub,
         docsSlug,
     } = productData
 
@@ -307,7 +301,6 @@ export function buildProductMenuTabs({
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
-                    hub={learnHub}
                 />
             ),
         })

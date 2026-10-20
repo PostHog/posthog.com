@@ -39,11 +39,11 @@ test('legacy Product Analytics reader routes redirect into Learn', () => {
 
 test('other volumes keep their configured entry routes', () => {
     for (const [id, expected] of [
-        ['ai-observability', '/learn/ai-observability'],
-        ['session-replay', '/learn/session-replay'],
+        ['ai-observability', '/learn/ai-observability/pocket-guide'],
+        ['session-replay', '/learn/session-replay/pocket-guide'],
         ['self-driving', '/docs/self-driving/pocket-guide'],
         ['data-stack', '/docs/data-warehouse/pocket-guide'],
-        ['feature-flags', '/learn/feature-flags'],
+        ['feature-flags', '/learn/feature-flags/pocket-guide'],
     ]) {
         const volume = volumeById(id)
         assert.ok(volume)
@@ -117,10 +117,11 @@ test('the Product Analytics pocket guide root is generated without a redirect', 
 test('former docs Learn roots and descendants redirect permanently to the new namespace', () => {
     for (const product of ['product-analytics', 'ai-observability', 'session-replay', 'feature-flags']) {
         assert.equal(existsSync(new URL(`../../pages/docs/${product}/learn.tsx`, import.meta.url)), false)
-        const chapters = product === 'product-analytics' ? '/learn/product-analytics/pocket-guide' : `/learn/${product}`
+        const guide = `/learn/${product}/pocket-guide`
+        // The old Learn tab root opens the new Learn overview; chapters open in the guide.
         for (const [suffix, destination] of [
             ['', `/learn/${product}`],
-            ['/:path*', `${chapters}/:path*`],
+            ['/:path*', `${guide}/:path*`],
         ]) {
             const redirect = vercelConfig.redirects.find(
                 ({ source }: { source: string }) => source === `/docs/${product}/learn${suffix}`
@@ -194,7 +195,7 @@ test('legacy guide navigation preserves chapters, queries, and fragments', () =>
     )
     assert.equal(
         pocketGuideDestination('/learn/ai-observability/pocket-guide/quality-output'),
-        '/learn/ai-observability/quality-output'
+        '/learn/ai-observability/pocket-guide/quality-output'
     )
     assert.equal(pocketGuidePageContext('/learn/self-driving/pocket-guide/_starter', 2), undefined)
     assert.equal(pocketGuidePageContext('/learn/self-driving/pocket-guide/flag-debt/SKILL', 3), undefined)
