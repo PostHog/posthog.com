@@ -676,14 +676,11 @@ export default function ReplayVisionLanding(): JSX.Element {
 
                     <section id="install" className="scroll-mt-20">
                         <h3 className="!text-2xl !font-bold">
-                            Set up in <Highlight>one command</Highlight>
-                        </h3>
                         <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 my-6">
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Install with the wizard</h4>
                                 <p className="text-sm text-secondary leading-relaxed m-0 mb-3">
-                                    Run it in your project and it sets everything up, including three scanners written
-                                    for your product.
+                                    One terminal command installs everything and build your first three scanners.
                                 </p>
                                 <WizardCommand command="replay-vision" variant="bordered" slim />
                                 <p className="text-sm text-secondary leading-relaxed mt-3 mb-0">
