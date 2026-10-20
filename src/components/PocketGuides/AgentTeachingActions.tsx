@@ -1,6 +1,7 @@
 import React from 'react'
 import OSButton from 'components/OSButton'
 import { IconClaudeCode, LogomarkCodex } from 'components/OSIcons'
+import usePostHog from 'hooks/usePostHog'
 
 /** The starter prompt: a learning path built from what the project already has. */
 export const agentTeachingPrompt = (productName: string, docsSlug: string, focus: string): string =>
@@ -22,7 +23,19 @@ const codexPromptUrl = (prompt: string): string => `codex://new?prompt=${encodeU
 const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${encodeURIComponent(prompt)}`
 
 /** Shared launch controls; page copy and layouts belong to their respective pages. */
-export default function AgentTeachingActions({ prompt = AGENT_TEACHING_PROMPT }: { prompt?: string }): JSX.Element {
+export default function AgentTeachingActions({
+    prompt = AGENT_TEACHING_PROMPT,
+    volume,
+}: {
+    prompt?: string
+    /** Volume id for `learn_resource_selected`. */
+    volume?: string
+}): JSX.Element {
+    const posthog = usePostHog()
+    const open = (option: string, url: string) => {
+        posthog?.capture('learn_resource_selected', { volume, resource: 'agent_teacher', option })
+        window.location.assign(url)
+    }
     return (
         <div className="mt-5 flex flex-wrap gap-3">
             <OSButton
@@ -30,7 +43,7 @@ export default function AgentTeachingActions({ prompt = AGENT_TEACHING_PROMPT }:
                 variant="primary"
                 size="md"
                 icon={<IconClaudeCode className="[&_path]:!fill-current" />}
-                onClick={() => window.location.assign(claudeCodePromptUrl(prompt))}
+                onClick={() => open('claude_code', claudeCodePromptUrl(prompt))}
             >
                 Open in Claude Code
             </OSButton>
@@ -39,7 +52,7 @@ export default function AgentTeachingActions({ prompt = AGENT_TEACHING_PROMPT }:
                 variant="primary"
                 size="md"
                 icon={<LogomarkCodex className="[&_path]:!fill-current" />}
-                onClick={() => window.location.assign(codexPromptUrl(prompt))}
+                onClick={() => open('codex', codexPromptUrl(prompt))}
             >
                 Open in Codex
             </OSButton>

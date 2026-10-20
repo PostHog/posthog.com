@@ -6,13 +6,15 @@ import { PRODUCT_SURFACE_H1 } from 'components/Products/ReaderViewProduct'
 import { TWIG_URL } from '../../constants'
 import { volumeById } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import usePostHog from '../../hooks/usePostHog'
 import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { learnChapterPath, useBookPages } from './bookModel'
+import { handOffToTwig } from './learnTracking'
 import type { LearnLandingProps } from './LearnPage'
 
 /** Short agent preview for the Learn overview. */
-function AgentTeachingPreview({ to }: { to: string }): JSX.Element {
+function AgentTeachingPreview({ to, onSelect }: { to: string; onSelect: () => void }): JSX.Element {
     return (
         <div className="not-prose grid min-w-0 items-center gap-6 @lg/reader-content:grid-cols-2">
             <div>
@@ -27,7 +29,7 @@ function AgentTeachingPreview({ to }: { to: string }): JSX.Element {
                     Have your coding agent build a learning path from your existing instrumentation and data.
                 </p>
                 <div className="mt-5">
-                    <OSButton asLink to={to} variant="primary" size="md">
+                    <OSButton asLink to={to} onClick={onSelect} variant="primary" size="md">
                         Browse prompts
                     </OSButton>
                 </div>
@@ -46,7 +48,11 @@ interface LearnLandingPlayground {
 }
 
 /** Short Twig preview for the Learn overview. */
-function LearnByDoingPreview({ figure, caption }: LearnLandingPlayground): JSX.Element {
+function LearnByDoingPreview({
+    figure,
+    caption,
+    onExploreTwig,
+}: LearnLandingPlayground & { onExploreTwig: (event: React.MouseEvent) => void }): JSX.Element {
     return (
         <div className="not-prose grid min-w-0 items-start gap-6 @2xl/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
             <div>
@@ -60,7 +66,15 @@ function LearnByDoingPreview({ figure, caption }: LearnLandingPlayground): JSX.E
                 <p className="mt-0 mb-5 leading-relaxed text-secondary">
                     Twig is a real website with a live playground for learning PostHog and exploring real code.
                 </p>
-                <OSButton asLink to={TWIG_URL} external hideExternalIcon variant="primary" size="md">
+                <OSButton
+                    asLink
+                    to={TWIG_URL}
+                    external
+                    hideExternalIcon
+                    variant="primary"
+                    size="md"
+                    onClick={onExploreTwig}
+                >
                     Explore Twig
                 </OSButton>
             </div>
@@ -98,10 +112,15 @@ export default function LearnLanding({
     const volume = volumeById(volumeId)
     const counts = usePocketGuideCounts()
     const coverRef = React.useRef<HTMLDivElement>(null)
+    const posthog = usePostHog()
+    // Records the choice to open a resource, not what happens inside it.
+    const selectResource = (resource: string, option: string) =>
+        posthog?.capture('learn_resource_selected', { volume: volumeId, resource, option })
     const firstChapter = useBookPages(volumeId).find((page) => !page.isFrontMatter)
     const readUrl = firstChapter ? learnChapterPath(storyUrl, firstChapter) : storyUrl
     // Start reading skips the introduction and opens the book on the first chapter.
     const startReading = (event: React.MouseEvent) => {
+        selectResource('story', 'start_reading')
         const cover = coverRef.current?.querySelector<HTMLElement>('[data-pocket-guide-cover]') ?? null
         void openPocketGuide(event, cover, readUrl)
     }
@@ -155,6 +174,7 @@ export default function LearnLanding({
                                 count={counts[volume.id] ?? 0}
                                 placement="product_docs"
                                 to={readUrl}
+                                onOpen={() => selectResource('story', 'cover')}
                             />
                         </div>
                     )}
@@ -166,7 +186,10 @@ export default function LearnLanding({
                     id="agent-teacher"
                     className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
                 >
-                    <AgentTeachingPreview to={`${learnUrl}/agent-prompts-and-mcp`} />
+                    <AgentTeachingPreview
+                        to={`${learnUrl}/agent-prompts-and-mcp`}
+                        onSelect={() => selectResource('agent_teacher', 'browse_prompts')}
+                    />
                 </section>
             )}
 
@@ -175,7 +198,14 @@ export default function LearnLanding({
                     id="live-playground"
                     className="mt-8 scroll-mt-20 border-t border-primary pt-6 @2xl/reader-content:mt-10 @2xl/reader-content:pt-8"
                 >
-                    <LearnByDoingPreview {...playground} />
+                    <LearnByDoingPreview
+                        {...playground}
+                        onExploreTwig={(event) => {
+                            selectResource('twig', 'explore_twig')
+                            // Read the live SDK: it may load after this page renders.
+                            handOffToTwig(event, window.posthog, TWIG_URL, volumeId)
+                        }}
+                    />
                 </section>
             )}
         </div>

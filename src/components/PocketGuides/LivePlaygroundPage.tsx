@@ -2,8 +2,11 @@ import React from 'react'
 import { IconPlay } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
+import useProduct from 'hooks/useProduct'
+import usePostHog from 'hooks/usePostHog'
 import { TWIG_URL } from '../../constants'
 import LearnPage from './LearnPage'
+import { handOffToTwig } from './learnTracking'
 
 /** Heading and lead-in for the figure that follows it. */
 export function SectionIntro({ title, children }: { title: string; children: React.ReactNode }): JSX.Element {
@@ -32,6 +35,13 @@ export default function LivePlaygroundPage({
     subtitle,
     children,
 }: LivePlaygroundPageProps): JSX.Element {
+    const posthog = usePostHog()
+    const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
+    const exploreTwig = (event: React.MouseEvent) => {
+        posthog?.capture('learn_resource_selected', { volume, resource: 'twig', option: 'explore_twig' })
+        // Read the live SDK: it may load after this page renders.
+        handOffToTwig(event, window.posthog, TWIG_URL, volume)
+    }
     return (
         <LearnPage
             productHandle={productHandle}
@@ -51,7 +61,7 @@ export default function LivePlaygroundPage({
                     is a live vacation rental website with PostHog built in. It's a playground that turns real code and
                     instrumentation into hands-on labs, so you can learn by experimenting.
                 </p>
-                <OSButton asLink to={TWIG_URL} external variant="primary" size="md">
+                <OSButton asLink to={TWIG_URL} external variant="primary" size="md" onClick={exploreTwig}>
                     Explore Twig
                 </OSButton>
                 {children}

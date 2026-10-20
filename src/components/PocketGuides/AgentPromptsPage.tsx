@@ -3,6 +3,8 @@ import { IconTerminal } from '@posthog/icons'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
+import useProduct from 'hooks/useProduct'
+import usePostHog from 'hooks/usePostHog'
 import AgentTeachingActions, { agentTeachingPrompt } from './AgentTeachingActions'
 import LearnPage from './LearnPage'
 
@@ -26,6 +28,8 @@ export default function AgentPromptsPage({
     focus,
     chapterPrompts,
 }: AgentPromptsPageProps): JSX.Element {
+    const posthog = usePostHog()
+    const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
     const teachingPrompts = [
         { title: 'Start with your product', prompt: agentTeachingPrompt(productName, docsSlug, focus) },
         ...chapterPrompts.map(({ title, prompt }) => ({
@@ -92,11 +96,15 @@ Don’t change my project without asking. If context is missing, ask for it.`,
                                 showCopy
                                 showLineNumbers={false}
                                 showAskAI={false}
+                                // Records the copy, not the prompt text.
+                                onCopy={() =>
+                                    posthog?.capture('learn_prompt_copied', { volume, resource: 'agent_teacher' })
+                                }
                             >
                                 {prompt}
                             </SingleCodeBlock>
                         </div>
-                        <AgentTeachingActions prompt={prompt} />
+                        <AgentTeachingActions prompt={prompt} volume={volume} />
                     </section>
                 ))}
             </div>

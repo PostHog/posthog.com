@@ -123,7 +123,7 @@ const LearnNav = ({
           ]
         : chapters
 
-    // Chapter links report their chapter; the Overview link reports its section.
+    // Chapter links report their chapter; Overview and hub page links report their section.
     const chapterByUrl = new Map(
         pages.map((page) => [
             learnChapterPath(guideBasePath, page),
@@ -136,6 +136,9 @@ const LearnNav = ({
             posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })
         } else if (url === basePath) {
             posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
+        } else {
+            const section = hub?.pages?.find((page) => url === `${basePath}/${page}`)
+            if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
         }
     }
 
