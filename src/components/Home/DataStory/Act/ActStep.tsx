@@ -13,9 +13,10 @@ import {
 import { cn } from '../../../../utils'
 import { IOS_SPRING } from '../Ingest/session'
 import { transform, useEventClock } from '../timeline'
-import { PostHogMark } from '../Query/AgentWindow'
+import { PostHogMark, WINDOW_DRAG } from '../Query/AgentWindow'
 import { SourceIcon } from '../Query/trace'
-import { CinematicScale, useStepLayout } from '../layoutMode'
+import { STEP_GRID, STEP_TEXT } from '../stepLayout'
+import { PressCursor } from '../PressCursor'
 import {
     EARLIER_REPORTS,
     HANDOFF_AT,
@@ -23,7 +24,6 @@ import {
     InboxReport,
     OVERNIGHT_REPORTS,
     PRESS_AT,
-    PressCursor,
     Priority,
     REPORT,
     REPORT_BOUNDARIES,
@@ -47,41 +47,43 @@ const PRIORITY_STYLES: Record<Priority, string> = {
 
 const ReportSourceIcon = ({ source }: { source: ReportSource }) =>
     source === 'scout' ? (
-        <IconRocket className="size-3.5 shrink-0 text-orange" />
+        <IconRocket className="size-3.5 @3xl:size-[17.5px] shrink-0 text-orange" />
     ) : (
-        <SourceIcon source={source} className="size-3.5 shrink-0" />
+        <SourceIcon source={source} className="size-3.5 @3xl:size-[17.5px] shrink-0" />
     )
 
 const ReportCard = ({ report }: { report: InboxReport }) => (
     <div className="flex gap-2.5 rounded-md border border-primary bg-primary p-2.5">
         <span
             className={cn(
-                'mt-px h-fit shrink-0 rounded border px-1 text-[10px] font-bold leading-4',
+                'mt-px h-fit shrink-0 rounded border px-1 text-[10px] @3xl:text-[12.5px] font-bold leading-4',
                 PRIORITY_STYLES[report.priority]
             )}
         >
             {report.priority}
         </span>
         <div className="min-w-0 flex-1">
-            <p className="m-0 flex min-w-0 items-center gap-1.5 text-[12.5px] font-semibold leading-snug">
-                <code className="shrink-0 rounded border border-primary !bg-transparent px-1 font-code text-[10px] font-normal">
+            <p className="m-0 flex min-w-0 items-center gap-1.5 text-[12.5px] @3xl:text-[15.5px] font-semibold leading-snug">
+                <code className="shrink-0 rounded border border-primary !bg-transparent px-1 font-code text-[10px] @3xl:text-[12.5px] font-normal">
                     {report.scope}
                 </code>
                 <span className="truncate">{report.title}</span>
             </p>
-            <p className="m-0 mt-1 truncate text-[11.5px] text-secondary">{report.description}</p>
-            <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-secondary">
+            <p className="m-0 mt-1 truncate text-[11.5px] @3xl:text-[14px] text-secondary">{report.description}</p>
+            <div className="mt-1.5 flex items-center gap-1.5 text-[11px] @3xl:text-[13.5px] text-secondary">
                 {report.sources.slice(0, 2).map((source) => (
                     <ReportSourceIcon key={source} source={source} />
                 ))}
                 <span className="truncate">{report.sourceLabel}</span>
             </div>
         </div>
-        <div className="flex shrink-0 flex-col items-end justify-between pl-1 text-[11px] text-secondary">
+        <div className="flex shrink-0 flex-col items-end justify-between pl-1 text-[11px] @3xl:text-[13.5px] text-secondary">
             {report.users !== undefined ? (
                 <span className="hidden flex-col items-center pt-1 @md:flex">
-                    <span className="text-sm font-bold leading-none text-primary">{report.users}</span>
-                    <span className="font-code text-[10px]">users</span>
+                    <span className="text-sm @3xl:text-[17.5px] font-bold leading-none text-primary">
+                        {report.users}
+                    </span>
+                    <span className="font-code text-[10px] @3xl:text-[12.5px]">users</span>
                 </span>
             ) : (
                 <span />
@@ -94,7 +96,7 @@ const ReportCard = ({ report }: { report: InboxReport }) => (
 const FilterChip = ({ children, highlight }: { children: React.ReactNode; highlight?: boolean }) => (
     <span
         className={cn(
-            'flex shrink-0 items-center gap-1 rounded-md border px-2 py-1 text-[11px] font-semibold',
+            'flex shrink-0 items-center gap-1 rounded-md border px-2 py-1 text-[11px] @3xl:text-[13.5px] font-semibold',
             highlight ? 'border-orange bg-orange/10 text-primary' : 'border-primary bg-primary text-secondary'
         )}
     >
@@ -118,9 +120,14 @@ const RailItem = ({
     Icon: React.ComponentType<{ className?: string }>
     active: boolean
 }) => (
-    <span className={cn('flex flex-col items-center gap-0.5 text-[8.5px]', active ? 'text-primary' : 'text-secondary')}>
-        <span className={cn('flex size-7 items-center justify-center rounded-md', active && 'bg-primary')}>
-            <Icon className="size-4" />
+    <span
+        className={cn(
+            'flex flex-col items-center gap-0.5 text-[8.5px] @3xl:text-[10.5px]',
+            active ? 'text-primary' : 'text-secondary'
+        )}
+    >
+        <span className={cn('flex size-7 @3xl:size-9 items-center justify-center rounded-md', active && 'bg-primary')}>
+            <Icon className="size-4 @3xl:size-5" />
         </span>
         {label}
     </span>
@@ -130,7 +137,7 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
     const arrived = [REPORT, ...OVERNIGHT_REPORTS.slice().reverse()].filter(({ at = 0 }) => elapsed >= at)
     const reports = [...arrived, ...EARLIER_REPORTS]
     return (
-        <div className="flex h-[clamp(28rem,58cqw,46rem)] overflow-hidden rounded-lg border border-primary bg-accent text-primary shadow-xl">
+        <div className="flex h-[clamp(28rem,66cqw,46rem)] overflow-hidden rounded-lg border border-primary bg-accent text-primary shadow-xl">
             <div className="hidden w-14 shrink-0 flex-col items-center gap-2.5 border-r border-primary py-3 @md:flex">
                 <PostHogMark className="mb-1 h-3.5" />
                 {RAIL_ITEMS.map((item) => (
@@ -141,22 +148,22 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
                 </span>
             </div>
             <div className="flex min-w-0 flex-1 flex-col">
-                <div className="flex shrink-0 items-center gap-2 border-b border-primary px-3 py-2 text-xs">
+                <div className="flex shrink-0 items-center gap-2 border-b border-primary px-3 py-2 text-xs @3xl:text-[15px]">
                     <span className="font-semibold">Acme</span>
-                    <IconChevronDown className="size-3 text-secondary" />
-                    <span className="ml-auto flex items-center gap-1.5 rounded-md border border-primary bg-primary px-2 py-0.5 text-[11px] text-secondary">
-                        <IconSearch className="size-3" /> Search
+                    <IconChevronDown className="size-3 @3xl:size-[15px] text-secondary" />
+                    <span className="ml-auto flex items-center gap-1.5 rounded-md border border-primary bg-primary px-2 py-0.5 text-[11px] @3xl:text-[13.5px] text-secondary">
+                        <IconSearch className="size-3 @3xl:size-[15px]" /> Search
                     </span>
                 </div>
                 <div className="shrink-0 border-b border-primary px-3 pt-2">
-                    <p className="m-0 flex items-center gap-1.5 text-xs">
-                        <IconRocket className="size-3.5" />
+                    <p className="m-0 flex items-center gap-1.5 text-xs @3xl:text-[15px]">
+                        <IconRocket className="size-3.5 @3xl:size-[17.5px]" />
                         <span className="font-semibold">Self-driving inbox</span>
-                        <span className="rounded-full border border-orange/60 px-1.5 text-[10px] text-orange">
+                        <span className="rounded-full border border-orange/60 px-1.5 text-[10px] @3xl:text-[12.5px] text-orange">
                             beta
                         </span>
                     </p>
-                    <div className="mt-2 flex gap-4 text-xs">
+                    <div className="mt-2 flex gap-4 text-xs @3xl:text-[15px]">
                         <span className="border-b-2 border-[#F54E00] pb-1.5 font-semibold text-[#F54E00]">Reports</span>
                         <span className="pb-1.5 text-secondary">Scouts</span>
                         <span className="pb-1.5 text-secondary">Settings</span>
@@ -164,14 +171,17 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
                 </div>
                 <div className="flex shrink-0 gap-1.5 overflow-hidden px-3 py-2">
                     <FilterChip>
-                        All priorities <IconChevronDown className="size-3" />
+                        All priorities <IconChevronDown className="size-3 @3xl:size-[15px]" />
                     </FilterChip>
                     <FilterChip>
-                        Newest first <IconChevronDown className="size-3" />
+                        Newest first <IconChevronDown className="size-3 @3xl:size-[15px]" />
                     </FilterChip>
                     <span className="ml-auto" />
                     <FilterChip highlight>
-                        Triage mode <span className="rounded border border-primary px-1 font-code text-[9px]">T</span>
+                        Triage mode{' '}
+                        <span className="rounded border border-primary px-1 font-code text-[9px] @3xl:text-[11px]">
+                            T
+                        </span>
                     </FilterChip>
                 </div>
                 <div className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden px-3 pb-3 [mask-image:linear-gradient(black_80%,transparent)]">
@@ -194,25 +204,31 @@ const InboxWindow = ({ elapsed }: { elapsed: number }) => {
     )
 }
 
-const InboxHandoff = ({ elapsed }: { elapsed: number }) => (
-    <div className="relative">
-        <InboxWindow elapsed={elapsed} />
-        <AnimatePresence>
-            {elapsed >= HANDOFF_AT && (
-                <motion.div
-                    key="agent"
-                    initial={{ opacity: 0, transform: transform({ y: 40, scale: 0.94 }) }}
-                    animate={{ opacity: 1, transform: transform() }}
-                    exit={{ opacity: 0, transform: transform({ y: 20 }) }}
-                    transition={IOS_SPRING}
-                    className="absolute -right-6 top-32 w-[78%]"
-                >
-                    <HandoffAgent elapsed={elapsed} className="!h-[20rem]" />
-                </motion.div>
-            )}
-        </AnimatePresence>
-    </div>
-)
+const InboxHandoff = ({ elapsed }: { elapsed: number }) => {
+    const boundsRef = useRef<HTMLDivElement>(null)
+    return (
+        <div className="relative">
+            <InboxWindow elapsed={elapsed} />
+            <div ref={boundsRef} className="pointer-events-none absolute -bottom-4 -left-4 -right-6 -top-4" />
+            <AnimatePresence>
+                {elapsed >= HANDOFF_AT && (
+                    <motion.div
+                        key="agent"
+                        initial={{ opacity: 0, transform: transform({ y: 40, scale: 0.94 }) }}
+                        animate={{ opacity: 1, transform: transform() }}
+                        exit={{ opacity: 0, transform: transform({ y: 20 }) }}
+                        transition={IOS_SPRING}
+                        className="absolute -right-6 top-32 w-[62%]"
+                    >
+                        <motion.div {...WINDOW_DRAG} dragConstraints={boundsRef}>
+                            <HandoffAgent elapsed={elapsed} className="!h-[20rem] @3xl:!h-[25rem]" />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    )
+}
 
 export default function ActStep({
     index,
@@ -224,11 +240,6 @@ export default function ActStep({
     description: React.ReactNode
 }): JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
-    const layout = useStepLayout({
-        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-16',
-        text: '@3xl:order-last @3xl:col-span-5',
-        visual: '@3xl:col-span-7',
-    })
     const elapsed = useEventClock(containerRef, {
         loopMs: REPORT_LOOP_MS,
         boundaries: REPORT_BOUNDARIES,
@@ -237,17 +248,15 @@ export default function ActStep({
 
     return (
         <div className="@container mt-16">
-            <div ref={containerRef} className={layout.grid}>
-                <div className={layout.text}>
+            <div ref={containerRef} className={STEP_GRID}>
+                <div className={STEP_TEXT}>
                     <h3 className="!mt-0">
                         {index + 1}. {title}
                     </h3>
                     <p>{description}</p>
                 </div>
-                <div className={cn('not-prose @container', layout.visual)} aria-hidden="true">
-                    <CinematicScale>
-                        <InboxHandoff elapsed={elapsed} />
-                    </CinematicScale>
+                <div className="not-prose @container w-full" aria-hidden="true">
+                    <InboxHandoff elapsed={elapsed} />
                 </div>
             </div>
         </div>

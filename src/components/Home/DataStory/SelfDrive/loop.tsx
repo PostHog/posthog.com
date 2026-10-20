@@ -4,7 +4,7 @@ import { IconCheck, IconPerson, IconPullRequest, IconSpinner } from '@posthog/ic
 import { cn } from '../../../../utils'
 import { IOS_SPRING } from '../Ingest/session'
 import { transform } from '../timeline'
-import { PressCursor, pressCursorBoundaries } from '../Act/report'
+import { PressCursor, pressCursorBoundaries } from '../PressCursor'
 
 export const LOOP_MS = 16000
 export const RESTING_MOMENT = 12500
@@ -62,11 +62,11 @@ export const InlineTitle = ({ text }: { text: string }) => (
 export const StatusPill = ({ merged }: { merged: boolean }) => (
     <span
         className={cn(
-            'inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold text-white transition-colors',
+            'inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[11px] @3xl:text-[13.5px] font-semibold text-white transition-colors',
             merged ? 'bg-purple' : 'bg-green'
         )}
     >
-        <IconPullRequest className="size-3" />
+        <IconPullRequest className="size-3 @3xl:size-[15px]" />
         {merged ? 'Merged' : 'Open'}
     </span>
 )
@@ -76,11 +76,11 @@ export const CheckList = ({ elapsed }: { elapsed: number }) => (
         {CHECKS.map(({ name, passesAt }) => {
             const passed = elapsed >= passesAt
             return (
-                <li key={name} className="m-0 flex items-center gap-1.5 text-xs">
+                <li key={name} className="m-0 flex items-center gap-1.5 text-xs @3xl:text-[15px]">
                     {passed ? (
-                        <IconCheck className="size-3.5 text-green" />
+                        <IconCheck className="size-3.5 @3xl:size-[17.5px] text-green" />
                     ) : (
-                        <IconSpinner className="size-3.5 animate-spin text-secondary" />
+                        <IconSpinner className="size-3.5 @3xl:size-[17.5px] animate-spin text-secondary" />
                     )}
                     <span className={passed ? 'text-primary' : 'text-secondary'}>{name}</span>
                 </li>
@@ -96,7 +96,7 @@ export const MergeButton = ({ elapsed }: { elapsed: number }) => {
         <PressCursor elapsed={elapsed} pressAt={MERGE_PRESS_AT}>
             <span
                 className={cn(
-                    'inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1 text-xs font-semibold transition-colors',
+                    'inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1 text-xs @3xl:text-[15px] font-semibold transition-colors',
                     merged ? 'bg-purple/15 text-purple' : ready ? 'bg-green text-white' : 'bg-accent text-secondary'
                 )}
             >
@@ -125,7 +125,7 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
     const passed = elapsed >= CHECK_PASSED_AT
     return (
         <div className={cn('flex flex-col gap-1.5', className)}>
-            <div className="flex items-center justify-between gap-2 text-xs">
+            <div className="flex items-center justify-between gap-2 text-xs @3xl:text-[15px]">
                 <span className="font-semibold">Follow-up check · checkout conversion</span>
                 <span
                     className={cn(
@@ -133,7 +133,11 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
                         passed ? 'text-green' : 'text-secondary'
                     )}
                 >
-                    {passed ? <IconCheck className="size-3.5" /> : <IconSpinner className="size-3.5 animate-spin" />}
+                    {passed ? (
+                        <IconCheck className="size-3.5 @3xl:size-[17.5px]" />
+                    ) : (
+                        <IconSpinner className="size-3.5 @3xl:size-[17.5px] animate-spin" />
+                    )}
                     {passed ? `Passed · ${CONVERSION_BEFORE}% → ${CONVERSION_AFTER}%` : 'Watching'}
                 </span>
             </div>
@@ -169,7 +173,7 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
                     transition={{ duration: revealing ? METRIC_REVEAL_MS / 1000 : 0, ease: 'easeInOut' }}
                 />
                 <span
-                    className="absolute top-1 -translate-x-1/2 rounded bg-purple px-1 text-[9px] font-semibold text-white"
+                    className="absolute top-1 -translate-x-1/2 rounded bg-purple px-1 text-[9px] @3xl:text-[11px] font-semibold text-white"
                     style={{ left: `${MERGE_X_PERCENT}%` }}
                 >
                     Merged
@@ -184,7 +188,7 @@ export const ALL_CHECKS_PASS_AT = Math.max(...CHECKS.map(({ passesAt }) => passe
 export const PostHogAvatar = ({ className }: { className?: string }) => (
     <span
         className={cn(
-            'flex size-6 shrink-0 items-center justify-center rounded-full border border-primary bg-white',
+            'flex size-6 @3xl:size-[30px] shrink-0 items-center justify-center rounded-full border border-primary bg-white',
             className
         )}
     >
@@ -195,7 +199,7 @@ export const PostHogAvatar = ({ className }: { className?: string }) => (
 export const UserAvatar = ({ className }: { className?: string }) => (
     <span
         className={cn(
-            'flex size-6 shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-secondary',
+            'flex size-6 @3xl:size-[30px] shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-secondary',
             className
         )}
     >
@@ -214,10 +218,10 @@ export const MergeBox = ({ elapsed }: { elapsed: number }) => {
             )}
         >
             <div className="min-w-0">
-                <p className="m-0 text-xs font-semibold">
+                <p className="m-0 text-xs @3xl:text-[15px] font-semibold">
                     {merged ? 'Pull request merged' : checksPassed ? 'All checks have passed' : 'Checks are running'}
                 </p>
-                <p className="m-0 text-[11px] text-secondary">
+                <p className="m-0 text-[11px] @3xl:text-[13.5px] text-secondary">
                     {merged ? 'PostHog will measure the impact over the next week' : 'Review required · you'}
                 </p>
             </div>

@@ -104,34 +104,50 @@ export const wordStream = (
     }
 }
 
-const GLIDE_MS = 450
-const GLIDE_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)'
+const PINNED_THRESHOLD_PX = 24
+const USER_SCROLL_INTENT_MS = 1000
+const USER_SCROLL_EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'] as const
 
-export function useGlideOnResize<T extends HTMLElement>(enabled: boolean): RefObject<T> {
-    const ref = useRef<T>(null)
+export function useStickToBottom<T extends HTMLElement, C extends HTMLElement>(): {
+    scrollRef: RefObject<T>
+    contentRef: RefObject<C>
+} {
+    const scrollRef = useRef<T>(null)
+    const contentRef = useRef<C>(null)
     useEffect(() => {
-        const element = ref.current
-        if (!enabled || !element || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-        let height = element.offsetHeight
-        let glide: Animation | undefined
-        const observer = new ResizeObserver(() => {
-            const changedBy = element.offsetHeight - height
-            height = element.offsetHeight
-            if (changedBy === 0) return
-            const remainingOffset = glide ? new DOMMatrix(getComputedStyle(element).transform).f : 0
-            glide?.cancel()
-            glide = element.animate(
-                [{ transform: `translateY(${changedBy + remainingOffset}px)` }, { transform: 'translateY(0)' }],
-                { duration: GLIDE_MS, easing: GLIDE_EASING }
-            )
-        })
-        observer.observe(element)
+        const scroller = scrollRef.current
+        const content = contentRef.current
+        if (!scroller || !content) return
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        let pinned = true
+        let userScrolledAt = -Infinity
+        let height = content.offsetHeight
+        const markUserScroll = () => {
+            userScrolledAt = performance.now()
+        }
+        const updatePinned = () => {
+            if (performance.now() - userScrolledAt > USER_SCROLL_INTENT_MS) return
+            pinned = scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < PINNED_THRESHOLD_PX
+        }
+        const follow = () => {
+            const shrank = content.offsetHeight < height
+            height = content.offsetHeight
+            if (shrank) pinned = true
+            if (!pinned) return
+            scroller.scrollTo({ top: scroller.scrollHeight, behavior: reduceMotion || shrank ? 'auto' : 'smooth' })
+        }
+        scroller.scrollTop = scroller.scrollHeight
+        const observer = new ResizeObserver(follow)
+        observer.observe(content)
+        USER_SCROLL_EVENTS.forEach((event) => scroller.addEventListener(event, markUserScroll, { passive: true }))
+        scroller.addEventListener('scroll', updatePinned, { passive: true })
         return () => {
             observer.disconnect()
-            glide?.cancel()
+            USER_SCROLL_EVENTS.forEach((event) => scroller.removeEventListener(event, markUserScroll))
+            scroller.removeEventListener('scroll', updatePinned)
         }
-    }, [enabled])
-    return ref
+    }, [])
+    return { scrollRef, contentRef }
 }
 
 type Length = number | string

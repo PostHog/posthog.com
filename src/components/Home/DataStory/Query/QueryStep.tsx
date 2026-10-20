@@ -4,9 +4,8 @@ import { cn } from '../../../../utils'
 import Link from 'components/Link'
 import { IOS_SPRING } from '../Ingest/session'
 import { transform, useEventClock, useLoopingAnimation } from '../timeline'
-import AgentWindow, { AGENT_THEMES, AgentTheme } from './AgentWindow'
-import { CinematicScale, useStepLayout } from '../layoutMode'
-import { TRACE_BOUNDARIES, TRACE_LOOP_MS, TRACE_RESTING_MOMENT } from './trace'
+import AgentWindow, { AGENT_THEMES, AgentTheme, WINDOW_DRAG, traceFor } from './AgentWindow'
+import { STEP_GRID, STEP_TEXT } from '../stepLayout'
 
 const MCP_BANNER = [
     ' ___        _   _  _             __  __  ___ ___ ',
@@ -15,6 +14,29 @@ const MCP_BANNER = [
     '|_| \\___/__/\\__|_||_\\___/\\__, | |_|  |_|\\___|_|  ',
     '                         |___/                   ',
 ]
+const HEDGEHOG_FACE = [
+    '',
+    '',
+    '  .-.          .-.',
+    " ( (_`--------'_) )",
+    '  \\              /',
+    '   |  __    __  |',
+    '   |  o      o  |',
+    '   |    .--.    |',
+    '  mm   ( \\/ )   mm',
+]
+const HEDGEHOG_QUILLS = [
+    '          /\\/\\/\\/\\/\\',
+    '      /\\/\\ - - - - - /\\',
+    '     /\\- - - -     - - -\\',
+    '                     - -\\',
+    '                    - - - \\',
+    '                   - - - /',
+    '                  - - - - \\',
+    '                   - - - /',
+    '                    - - - \\',
+]
+const PINNED_IN_PLACE = { top: 0, right: 0, bottom: 0, left: 0 }
 const MINIMIZED_SCALE = 0.06
 const MCP_GLIMPSE_MS = 1100
 const MCP_DOCS_URL = '/docs/model-context-protocol'
@@ -49,26 +71,31 @@ const AppWindow = ({
     onLoop,
     onClose,
     onMinimize,
+    onDragging,
 }: {
     app: AgentTheme
     onLoop: () => void
     onClose: () => void
     onMinimize: () => void
+    onDragging: (dragging: boolean) => void
 }) => {
     const ref = useRef<HTMLDivElement>(null)
-    const elapsed = useEventClock(ref, {
-        loopMs: TRACE_LOOP_MS,
-        boundaries: TRACE_BOUNDARIES,
-        restingMs: TRACE_RESTING_MOMENT,
-    })
+    const { loopMs, boundaries, restingMs } = traceFor(app)
+    const elapsed = useEventClock(ref, { loopMs, boundaries, restingMs })
     const loops = useLoopCount(elapsed)
     useEffect(() => {
         if (loops > 0) onLoop()
     }, [loops])
     return (
-        <div ref={ref}>
+        <motion.div
+            ref={ref}
+            {...WINDOW_DRAG}
+            dragConstraints={PINNED_IN_PLACE}
+            onDragStart={() => onDragging(true)}
+            onDragTransitionEnd={() => onDragging(false)}
+        >
             <AgentWindow theme={app} elapsed={elapsed} controls={{ onClose, onMinimize }} />
-        </div>
+        </motion.div>
     )
 }
 
@@ -92,6 +119,8 @@ const WINDOW_CONTROLS = ' ○ ○ ○'
 const TITLE_BAR_ROWS = 3
 const SCROLL_THUMB_SHARE = 0.3
 const SCROLL_THUMB_OFFSET = 1
+const HEDGEHOG_MIN_COLUMNS = 88
+const HEDGEHOG_SCROLLBAR_GAP = 3
 
 const titleRow = (inner: number): string => {
     const title = FRAME_TITLE.trim()
@@ -103,7 +132,42 @@ const titleRow = (inner: number): string => {
     return row.join('')
 }
 
-const frameText = (columns: number, rows: number): string => {
+type HedgehogLayer = 'face' | 'quills'
+
+const HEDGEHOG_LAYER_CLASSES: Record<HedgehogLayer, string> = { face: 'text-secondary', quills: 'text-secondary/60' }
+type HedgehogRun = { layer: HedgehogLayer; text: string }
+
+const HEDGEHOG_WIDTH = Math.max(...HEDGEHOG_QUILLS.map((line) => line.length))
+
+const hedgehogRuns = (row: number): HedgehogRun[] => {
+    const face = HEDGEHOG_FACE[row].padEnd(HEDGEHOG_WIDTH)
+    const quills = HEDGEHOG_QUILLS[row].padEnd(HEDGEHOG_WIDTH)
+    return face.split('').reduce<HedgehogRun[]>((runs, char, column) => {
+        const layer: HedgehogLayer = char === ' ' ? 'quills' : 'face'
+        const glyph = layer === 'face' ? char : quills[column]
+        const last = runs[runs.length - 1]
+        if (last?.layer === layer) last.text += glyph
+        else runs.push({ layer, text: glyph })
+        return runs
+    }, [])
+}
+
+const HEDGEHOG_RUNS = HEDGEHOG_FACE.map((_, row) => hedgehogRuns(row))
+
+interface Frame {
+    rows: string[]
+    hedgehog: { column: number; firstRow: number } | null
+}
+
+const placeHedgehog = (columns: number, contentRows: number): Frame['hedgehog'] => {
+    if (columns < HEDGEHOG_MIN_COLUMNS || contentRows < HEDGEHOG_RUNS.length) return null
+    return {
+        column: columns - 2 - HEDGEHOG_SCROLLBAR_GAP - HEDGEHOG_WIDTH,
+        firstRow: TITLE_BAR_ROWS + contentRows - HEDGEHOG_RUNS.length,
+    }
+}
+
+const frameAt = (columns: number, rows: number): Frame => {
     const inner = columns - 2
     const contentRows = Math.max(0, rows - TITLE_BAR_ROWS - 1)
     const thumbLength = Math.max(1, Math.round(contentRows * SCROLL_THUMB_SHARE))
@@ -111,13 +175,32 @@ const frameText = (columns: number, rows: number): string => {
         const thumb = index >= SCROLL_THUMB_OFFSET && index < SCROLL_THUMB_OFFSET + thumbLength
         return `│${' '.repeat(inner - 1)}${thumb ? '█' : '░'}│`
     })
-    return [
-        `┌${'─'.repeat(inner)}┐`,
-        `│${titleRow(inner)}│`,
-        `├${'─'.repeat(inner)}┤`,
-        ...body,
-        `└${borderWith(inner, FRAME_STATUS, true)}┘`,
-    ].join('\n')
+    return {
+        rows: [
+            `┌${'─'.repeat(inner)}┐`,
+            `│${titleRow(inner)}│`,
+            `├${'─'.repeat(inner)}┤`,
+            ...body,
+            `└${borderWith(inner, FRAME_STATUS, true)}┘`,
+        ],
+        hedgehog: placeHedgehog(columns, contentRows),
+    }
+}
+
+const FrameRow = ({ row, index, hedgehog }: { row: string; index: number; hedgehog: Frame['hedgehog'] }) => {
+    const runs = hedgehog && HEDGEHOG_RUNS[index - hedgehog.firstRow]
+    if (!hedgehog || !runs) return <>{row}</>
+    return (
+        <>
+            {row.slice(0, hedgehog.column)}
+            {runs.map(({ layer, text }, run) => (
+                <span key={run} className={HEDGEHOG_LAYER_CLASSES[layer]}>
+                    {text}
+                </span>
+            ))}
+            {row.slice(hedgehog.column + HEDGEHOG_WIDTH)}
+        </>
+    )
 }
 
 const BlinkingCursor = () => {
@@ -140,13 +223,13 @@ const CopyCommandLine = () => {
             type="button"
             onClick={copy}
             title="Copy to clipboard"
-            className="group m-0 mt-1 flex w-fit items-center gap-2 text-left font-code text-[11px] text-secondary"
+            className="group m-0 mt-1 flex w-fit items-center gap-2 text-left font-code text-[11px] @3xl:text-[13.5px] text-secondary"
         >
             <span>
                 $ <span className="text-primary group-hover:underline">{MCP_COMMAND}</span>
                 <BlinkingCursor />
             </span>
-            <span className="text-[10px] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <span className="text-[10px] @3xl:text-[12.5px] opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                 {copied ? 'copied ✓' : 'click to copy'}
             </span>
         </button>
@@ -158,7 +241,7 @@ const MIN_FRAME_CELLS = 2
 const AsciiFrame = () => {
     const boxRef = useRef<HTMLDivElement>(null)
     const probeRef = useRef<HTMLSpanElement>(null)
-    const [frame, setFrame] = useState('')
+    const [frame, setFrame] = useState<Frame | null>(null)
 
     useEffect(() => {
         const box = boxRef.current
@@ -171,7 +254,7 @@ const AsciiFrame = () => {
             const columns = Math.floor(area.width / cell.width)
             const rows = Math.floor(area.height / cell.height)
             if (columns < MIN_FRAME_CELLS || rows < MIN_FRAME_CELLS + TITLE_BAR_ROWS) return
-            setFrame(frameText(columns, rows))
+            setFrame(frameAt(columns, rows))
         }
         draw()
         const resize = new ResizeObserver(draw)
@@ -182,27 +265,35 @@ const AsciiFrame = () => {
     return (
         <div
             ref={boxRef}
-            className="pointer-events-none absolute inset-0 flex items-center justify-center font-code text-[12px] leading-normal text-black/35 dark:text-white/35"
+            className="pointer-events-none absolute inset-0 flex items-center justify-center font-code text-[12px] @3xl:text-[15px] leading-normal text-black/35 dark:text-white/35"
             aria-hidden="true"
         >
             <span ref={probeRef} className="invisible absolute">
                 ─
             </span>
-            <pre className="m-0 !bg-transparent !p-0 !text-[inherit] leading-normal">{frame}</pre>
+            <pre className="m-0 !bg-transparent !p-0 !text-[inherit] leading-normal">
+                {frame?.rows.map((row, index) => (
+                    <React.Fragment key={index}>
+                        {index > 0 && '\n'}
+                        <FrameRow row={row} index={index} hedgehog={frame.hedgehog} />
+                    </React.Fragment>
+                ))}
+            </pre>
         </div>
     )
 }
 
-const BringYourOwnTool = ({ visible }: { visible: boolean }) => (
+const BringYourOwnTool = ({ covered, peeking }: { covered: boolean; peeking: boolean }) => (
     <div
-        aria-hidden={!visible}
+        aria-hidden={covered}
         className={cn(
-            'relative flex h-[clamp(26rem,56cqw,44rem)] flex-col justify-center overflow-hidden px-8 font-code text-[11px] leading-[1.35] text-secondary transition-opacity duration-300',
-            visible ? 'opacity-100' : 'pointer-events-none opacity-0'
+            'relative flex h-[clamp(26rem,62cqw,44rem)] flex-col justify-center overflow-hidden px-8 font-code text-[11px] @3xl:text-[13.5px] leading-[1.35] text-secondary transition-opacity duration-200',
+            covered && 'pointer-events-none',
+            covered && !peeking && 'opacity-0'
         )}
     >
         <AsciiFrame />
-        <pre className="m-0 !bg-transparent !p-0 text-[11px] font-bold leading-[1.25] text-primary @md:text-[12px]">
+        <pre className="m-0 !bg-transparent !p-0 text-[11px] @3xl:text-[13.5px] font-bold leading-[1.25] text-primary @md:text-[12px]">
             {MCP_BANNER.join('\n')}
         </pre>
         <p className="m-0 mt-5 text-primary">$ Or bring your own tool and use our MCP</p>
@@ -234,10 +325,10 @@ const Dock = ({
                 onClick={() => onOpen(key)}
                 className="group relative flex flex-col items-center"
             >
-                <span className="pointer-events-none absolute bottom-full mb-2 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 text-[11px] font-semibold text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="pointer-events-none absolute bottom-full mb-2 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 text-[11px] @3xl:text-[13.5px] font-semibold text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                     {label}
                 </span>
-                <span className="block size-10 text-[16px] transition-transform duration-200 ease-out group-hover:-translate-y-1.5 group-hover:scale-110 group-focus-visible:-translate-y-1.5 group-focus-visible:scale-110">
+                <span className="block size-10 @3xl:size-12 text-[16px] @3xl:text-[20px] transition-transform duration-200 ease-out group-hover:-translate-y-1.5 group-hover:scale-110 group-focus-visible:-translate-y-1.5 group-focus-visible:scale-110">
                     <Icon />
                 </span>
                 <span
@@ -251,9 +342,10 @@ const Dock = ({
     </div>
 )
 
-const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) => void }) => {
+const Desktop = () => {
     const [open, setOpen] = useState<AgentTheme | null>(null)
     const [minimized, setMinimized] = useState(false)
+    const [dragging, setDragging] = useState(false)
     const [autoplay, setAutoplay] = useState(true)
     const [context, setContext] = useState<MotionContext>({ transition: 'switch', dock: { x: 0, y: 0 } })
     const windowRef = useRef<HTMLDivElement>(null)
@@ -263,10 +355,9 @@ const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) 
         const frame = windowRef.current?.getBoundingClientRect()
         const icon = icons.current[app]?.getBoundingClientRect()
         if (!frame || !icon) return { x: 0, y: 0 }
-        const scale = frame.width / (windowRef.current?.offsetWidth || frame.width)
         return {
-            x: (icon.left + icon.width / 2 - (frame.left + frame.width / 2)) / scale,
-            y: (icon.top + icon.height / 2 - (frame.top + frame.height / 2)) / scale,
+            x: icon.left + icon.width / 2 - (frame.left + frame.width / 2),
+            y: icon.top + icon.height / 2 - (frame.top + frame.height / 2),
         }
     }
 
@@ -316,7 +407,7 @@ const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) 
         return () => window.clearTimeout(timer)
     }, [inView])
 
-    useEffect(() => onActiveChange(open), [open])
+    useEffect(() => setDragging(false), [open, minimized])
 
     const showing = open !== null && !minimized
 
@@ -324,7 +415,7 @@ const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) 
         <div ref={desktopRef} className="not-prose @container">
             <div ref={windowRef} className="grid">
                 <div className="[grid-area:1/1]">
-                    <BringYourOwnTool visible={!showing} />
+                    <BringYourOwnTool covered={showing} peeking={dragging} />
                 </div>
                 <div className={cn('[grid-area:1/1]', !showing && 'pointer-events-none')}>
                     <AnimatePresence initial={false} mode="popLayout" custom={context}>
@@ -338,7 +429,13 @@ const Desktop = ({ onActiveChange }: { onActiveChange: (app: AgentTheme | null) 
                                 exit="hidden"
                                 transition={IOS_SPRING}
                             >
-                                <AppWindow app={open} onLoop={advance} onClose={closeApp} onMinimize={minimizeApp} />
+                                <AppWindow
+                                    app={open}
+                                    onLoop={advance}
+                                    onClose={closeApp}
+                                    onMinimize={minimizeApp}
+                                    onDragging={setDragging}
+                                />
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -364,37 +461,17 @@ export default function QueryStep({
     title: string
     description: React.ReactNode
 }): JSX.Element {
-    const [active, setActive] = useState<AgentTheme | null>(null)
-    const layout = useStepLayout({
-        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-8',
-        text: '@3xl:col-span-5',
-        visual: '@3xl:col-span-7',
-    })
-    const app = AGENT_THEMES.find(({ key }) => key === active)
-    const external = Boolean(app?.installUrl.startsWith('http'))
-
     return (
         <div className="@container mt-16">
-            <div className={layout.grid}>
-                <div className={layout.text}>
+            <div className={STEP_GRID}>
+                <div className={STEP_TEXT}>
                     <h3 className="!mt-0">
                         {index + 1}. {title}
                     </h3>
                     <p>{description}</p>
-                    <p className="text-sm">
-                        <Link
-                            to={app?.installUrl ?? MCP_DOCS_URL}
-                            {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
-                            className="font-semibold underline underline-offset-2"
-                        >
-                            {app ? `Add PostHog to ${app.label}` : 'Set up the PostHog MCP'} →
-                        </Link>
-                    </p>
                 </div>
-                <div className={layout.visual}>
-                    <CinematicScale>
-                        <Desktop onActiveChange={setActive} />
-                    </CinematicScale>
+                <div className="w-full">
+                    <Desktop />
                 </div>
             </div>
         </div>

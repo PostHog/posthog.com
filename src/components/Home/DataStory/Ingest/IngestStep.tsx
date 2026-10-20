@@ -5,7 +5,7 @@ import { EXTERNAL_SOURCES } from './session'
 import { useToolsProducts } from '../../ToolsTicker'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import Link from 'components/Link'
-import { useLayoutMode, useStepLayout } from '../layoutMode'
+import { STEP_GRID, STEP_TEXT } from '../stepLayout'
 
 const TILT_DEG = 56
 const INNER_RADIUS_PERCENT = 24
@@ -555,8 +555,6 @@ const useOrbitNodes = (): { inner: OrbitNode[]; outer: OrbitNode[] } => {
 const ORBIT_MASK = {
     '--edge-mask':
         'linear-gradient(to right, transparent, black 9%, black 91%, transparent), linear-gradient(to bottom, transparent, black 8%, black 86%, transparent)',
-    '--orbit-mask':
-        'radial-gradient(ellipse 50% 74% at 100% 50%, transparent 50%, rgba(0,0,0,0.05) 62%, rgba(0,0,0,0.28) 76%, rgba(0,0,0,0.68) 89%, black 100%)',
 } as React.CSSProperties
 
 const OUTER_PARTICLE_TONES = ['text-purple', 'text-orange', 'text-teal', 'text-blue']
@@ -569,7 +567,6 @@ const Orbit = () => {
     const spinning = playing
     const magnets = useMagnets(!shouldReduceMotion)
     const { inner, outer } = useOrbitNodes()
-    const cinematic = useLayoutMode() === 'cinematic'
     const planeRef = useRef<HTMLDivElement>(null)
     const spinnerRef = useRef<HTMLDivElement>(null)
     const innerLayerRef = useRef<HTMLDivElement>(null)
@@ -603,8 +600,7 @@ const Orbit = () => {
         >
             <div
                 className={cn(
-                    'relative @3xl:-mx-6 @3xl:-mb-24 @3xl:-mt-6 @3xl:px-6 @3xl:pb-24 @3xl:pt-6 [-webkit-mask-composite:source-in] [mask-composite:intersect] [mask-image:var(--edge-mask)]',
-                    !cinematic && '@3xl:[mask-image:var(--orbit-mask),var(--edge-mask)]'
+                    'relative @3xl:-mx-6 @3xl:-mb-24 @3xl:-mt-6 @3xl:px-6 @3xl:pb-24 @3xl:pt-6 [-webkit-mask-composite:source-in] [mask-composite:intersect] [mask-image:var(--edge-mask)]'
                 )}
                 style={ORBIT_MASK}
             >
@@ -613,7 +609,7 @@ const Orbit = () => {
                         ref={planeRef}
                         className={cn(
                             'absolute top-[42%] aspect-square -translate-y-1/2 [perspective:1300px]',
-                            cinematic ? 'inset-x-[6%]' : 'left-[1%] right-[11%]'
+                            'inset-x-[6%]'
                         )}
                     >
                         <div
@@ -700,19 +696,14 @@ export default function IngestStep({
     title: string
     description: React.ReactNode
 }): JSX.Element {
-    const layout = useStepLayout({
-        grid: 'relative mx-auto grid max-w-[58rem] gap-6 @3xl:grid-cols-12 @3xl:items-center @3xl:gap-x-0',
-        text: '@3xl:col-start-8 @3xl:col-end-13 @3xl:row-start-1 @3xl:pl-4',
-        visual: '@3xl:col-start-1 @3xl:col-end-10 @3xl:row-start-1',
-    })
     return (
         <div className="@container mt-10">
-            <div className={layout.grid}>
-                <div className={cn('relative z-10', layout.text)}>
+            <div className={STEP_GRID}>
+                <div className={cn('relative z-10', STEP_TEXT)}>
                     <h3 className="!mt-0">1. {title}</h3>
                     <p>{description}</p>
                 </div>
-                <div className={cn('not-prose', layout.visual)}>
+                <div className="not-prose w-full">
                     <Orbit />
                 </div>
             </div>
