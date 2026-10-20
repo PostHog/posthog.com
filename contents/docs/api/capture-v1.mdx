@@ -24,7 +24,7 @@ Capture v1 has two endpoints: one for analytics events and one for AI events. Bo
 | Project token | In the body (`api_key`) | `Authorization: Bearer` header |
 | Response | `200` for the whole request | Per-event results, plus clear status codes |
 | `uuid`, `timestamp`, `distinct_id` | Optional or inferred | Required on every event |
-| Person processing and other settings | Magic `$` properties | An `options` object on each event |
+| Person processing and other settings | Legacy option properties (`$`-prefixed properties) | An `options` object on each event |
 | Compression | `gzip-js`, `lz64`, `base64`, and others | `gzip`, `deflate`, `br`, `zstd` with `Content-Encoding` |
 
 ## Endpoints
@@ -133,9 +133,9 @@ Don't use one value for many people or machines, such as `anonymous`, `guest`, `
 
 ## Event options
 
-Options control how PostHog processes an event. They replace the "magic" `$` properties that legacy capture reads from `properties`.
+Options control how PostHog processes an event. They replace the legacy option properties: the `$`-prefixed properties legacy capture reads as settings from `properties`.
 
-| Option | Type | What it does | Legacy property |
+| Option | Type | What it does | Legacy option property |
 |---|---|---|---|
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
@@ -148,9 +148,9 @@ Options control how PostHog processes an event. They replace the "magic" `$` pro
 - PostHog ignores option names it doesn't know.
 - An option value PostHog can't read drops the event with the detail `invalid_options`.
 
-### Legacy properties still work, for now
+### Legacy option properties still work, for now
 
-During the move to v1, PostHog still reads the legacy `$` properties above. If you set both, the option wins. Use options in new code – the legacy properties are deprecated, and we'll stop reading them in a future release.
+During the move to v1, PostHog still reads the legacy option properties above. If you set both, the option wins. Use options in new code – the legacy option properties are deprecated, and we'll stop reading them in a future release.
 
 Your stored events don't change shape: PostHog stores options as the same properties you query today, so your insights and filters keep working.
 
