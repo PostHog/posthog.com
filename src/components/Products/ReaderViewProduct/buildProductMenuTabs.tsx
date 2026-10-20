@@ -101,6 +101,7 @@ const LearnNav = ({
                   url: guideBasePath,
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter),
               },
+              { name: 'Agent prompts and MCP', url: `${basePath}/agent-prompts-and-mcp` },
           ]
         : chapters
 
