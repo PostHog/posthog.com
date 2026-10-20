@@ -105,6 +105,12 @@ export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
 }
 
+/** SEO title for a chapter. The intro chapter shares the volume's title, so it reads "A pocket guide to <volume>". */
+export function pocketGuidePageTitle(volume: PocketGuideVolume, chapterTitle?: string): string {
+    if (!chapterTitle || chapterTitle === volume.title) return `A pocket guide to ${volume.title}`
+    return `${chapterTitle} – ${volume.title} pocket guide`
+}
+
 /** Covers, cards, and Pocket Guide links open the volume's configured entry route. */
 export function pocketGuideUrl(volume: PocketGuideVolume): string {
     return volume.learnPath ?? `/pocket-guides/${volume.id}`

@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import DocsPocketGuide from 'components/PocketGuides/DocsPocketGuide'
 import LearnPage from 'components/PocketGuides/LearnPage'
-import { volumeById } from '../constants/pocketGuides'
+import { pocketGuidePageTitle, volumeById } from '../constants/pocketGuides'
 
 interface PocketGuideTemplateProps {
     data: { mdx: { excerpt: string; frontmatter: { title: string; subtitle?: string; description?: string } } }
@@ -22,7 +22,7 @@ export default function PocketGuideTemplate({ data, pageContext }: PocketGuideTe
         <LearnPage
             productHandle={volume.productHandle}
             chapter={chapter}
-            title={`${title} – ${volume.title} pocket guide`}
+            title={pocketGuidePageTitle(volume, title)}
             description={pageDescription}
         />
     )
