@@ -277,19 +277,15 @@ If you're already using the [PostHog MCP](/docs/model-context-protocol), you hav
 
 ## The skill that stops skills slop
 
-Everything above has a failure mode, and it's the same one. An agent that maintains a skill will, left alone, grow it. Every session adds a paragraph to the body. Every fix gets a sentence in the changelog. The handover becomes a log. Six weeks later you have a mono-skill of slop that no agent loads because loading it costs more than it saves.
+There's a catch with all of this. Leave an agent to maintain a skill and it will grow it: a paragraph every session, a changelog line for every fix, until loading the skill costs more than it saves. A mono-skill of slop.
 
-I wrote `skills-best-practices` to stop that happening. It's the house style for our store: the compliance floor from the [Agent Skills spec](https://agentskills.io/specification), 16 named patterns lifted from the skills in this post, a smell checklist, a refactoring workflow, and the write mechanics that don't lose content. It eats its own dogfood: the body is a thin index and the substance is in five bundled files. When an agent creates or edits a skill of mine, it loads this one first. It's in the [community store](https://github.com/PostHog/community-skills/tree/main/skills/skills-best-practices) too, alongside [`skills-spec`](https://github.com/PostHog/community-skills/tree/main/skills/skills-spec), which is the spec itself as a skill.
+So I wrote `skills-best-practices`, and from time to time i tell the agent to use it to clean up if needed or when im making a new project tracker type skill i tell the agent to follow it. It's in the [community store](https://github.com/PostHog/community-skills/tree/main/skills/skills-best-practices) if you want it. The short version:
 
-I think this is the crucial and least talked about part of working with skills. The rules are simple. Holding to them across hundreds of agent sessions is the work.
-
-1. **Give every skill a convention or a workflow.** A skill without one is a blank page, and agents will slop all over a blank page. The project tracker says exactly where an issue, an idea, a PR, and a handover go. The debugging runbook says to add an investigation file and extend a reference. The agent doesn't have to decide how to record things, so it records them consistently.
-2. **Keep the body small, as a wrapper for everything else.** The body is what an agent reads to get up to speed fast: what this is, the gotchas that bite hardest, a file map, companions, and a maintenance contract. About one screen. New detail goes in a bundled file, and the body only gains a pointer to it.
-3. **Set heuristics so nothing grows unbounded.** It's fine for agents to maintain the skill. You just set the rules. The changelog is a rolling 14-day window that gets trimmed as it's appended to, not an archive. `HANDOVER.md` is a clobber file: read first, overwrite last, one section per workstream, deleted when the work lands. The "where does this fact go" table from earlier exists because the most common failure is durable detail written into whichever file the agent was already editing.
-4. **Link skills when it makes sense.** `self-driving-work` and `scouts-work` cross-reference each other constantly, and that's fine. Each has a Companions section that says what its siblings own so nothing gets duplicated. One hub per area beats one hub that covers everything, and a link is cheaper than a copy that drifts.
-5. **Dogfood them, often.** Take a skill for a spin with your agent. Actually use it for the job it's meant for, notice where the agent stumbled or where you had to fill in context by hand, and fix the skill right there in the same session. The best-practices skill has a version bump every time I audited a skill and learned a new smell. The skills in this post are good because they've been used hundreds of times and improved every time they weren't.
-
-Two mechanical rules sit underneath all of that. Use the smallest edit primitive, because a full-body rewrite for a one-line change silently drops content, and chain `base_version` between writes. And keep every bundled file reachable from the index, because a file no index links is invisible to progressive disclosure and no agent will ever find it.
+1. **Give every skill a convention.** Tell the agent exactly where an issue, a handover, or an investigation goes. If you don't, it makes something up, and it makes up something different every time.
+2. **Keep the body small.** About one screen: what this is, the gotchas, and a map of the files. Detail goes in the files.
+3. **Stop things growing forever.** The changelog keeps 14 days. The handover gets overwritten, not appended to.
+4. **Link, don't copy.** One skill per area, with links to its siblings.
+5. **Dogfood them.** Use the skill for its actual job, notice where the agent stumbled, and fix the skill in the same session.
 
 ## Try it
 
