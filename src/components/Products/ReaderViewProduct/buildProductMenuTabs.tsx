@@ -97,8 +97,9 @@ const LearnNav = ({
     const pages = useBookPages(volumeId)
     const posthog = usePostHog()
     const guideBasePath = hub ? `${basePath}/pocket-guide` : basePath
+    // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
     const chapters = pages.map((page) => ({
-        name: page.shortTitle || page.title,
+        name: page.page ? `${page.page}. ${page.shortTitle || page.title}` : page.shortTitle || page.title,
         url: learnChapterPath(guideBasePath, page),
     }))
     const items = hub

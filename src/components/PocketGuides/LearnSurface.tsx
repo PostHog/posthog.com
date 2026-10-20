@@ -12,6 +12,7 @@ import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
+import { useEntry } from './bookContext'
 import { learnChapterPath, learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
 
@@ -106,7 +107,25 @@ function CoverWithChapters({ size }: { size?: 'small' | 'medium' }): JSX.Element
     )
 }
 
-const components = { ...bookMdxComponents, StartReading, PocketGuideCover, CoverWithChapters }
+/**
+ * A chapter's `#` heading, with "Chapter 01" above it in the intro eyebrow's style. The number sits
+ * outside the h1, so the heading and the page title stay the chapter's own title.
+ */
+function ChapterHeading(props: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element {
+    const chapter = useEntry()?.entry.page
+    return (
+        <>
+            {chapter ? (
+                <p className="not-prose m-0 mb-[7.5px] text-[15px] font-normal leading-[36px] text-primary">
+                    Chapter {String(chapter).padStart(2, '0')}
+                </p>
+            ) : null}
+            <h1 {...props} />
+        </>
+    )
+}
+
+const components = { ...bookMdxComponents, h1: ChapterHeading, StartReading, PocketGuideCover, CoverWithChapters }
 
 interface LearnSurfaceProps {
     volumeId: string
