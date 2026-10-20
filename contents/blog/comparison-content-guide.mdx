@@ -16,7 +16,9 @@ I've been chatting with marketing and growth leads at a few other devtools compa
 
 Everyone sees the potential value, but not everyone feels comfortable investing in it.
 
-The hesitation usually comes from some mix of (1) it feels unnatural to give your competitors their flowers on your own website, and (2) comparison pages come with maintenance overhead nobody wants to deal with. Competitors ship things, change their pricing, get acquired (or acquire others), and all of a sudden the article you wrote in March is already outdated by June.
+The hesitation usually comes from some mix of (1) it feels unnatural to give your competitors their flowers on your own website, and (2) comparison pages come with maintenance overhead nobody wants to deal with. 
+
+Competitors ship things, change their pricing, get acquired (or acquire others), and all of a sudden the article you wrote in March is already outdated by June.
 
 So how do you walk the line between being fair (complimentary, even) to your competitors while still capturing demand & showing off your product's strengths? And how do you keep the content accurate once it's out in the world to avoid spreading misinformation?
 
@@ -28,9 +30,9 @@ Both things I'm here to give some answers to, based on our experience [writing c
 
 Because it works.
 
-Head-to-head comparisons (PostHog vs 'competitor') are ~8% of our blog's traffic and roughly a quarter of the signups we can trace back to a blog post. Add the "best X tools" roundups and 'alternatives' articles, and comparison content as a whole is a third of the blog's traffic and nearly **60%** of our content-led signups. 
+Head-to-head comparisons (PostHog vs 'competitor') are ~8% of our blog's traffic and ~25% of the signups we can trace back to a blog post. Add the "best X tools" roundups and 'alternatives' articles, and comparison content as a whole is ~33% of the blog's traffic and nearly 60% of our content-led signups.
 
-Since 2021, over 25k people have signed up for PostHog after reading a comparison. Three quarters of them within 30 days of reading it; nearly half within 24 hours.
+Since 2021, **over 25k people have signed up for PostHog after reading a comparison**. Almost 50% did it within 24 hours of reading; ~75% within 30 days.
 
 ![Comparison content by year](https://res.cloudinary.com/dmukukwp6/image/upload/comparison_content_by_year_ab710856d6.png)
 
@@ -40,7 +42,7 @@ Since 2021, over 25k people have signed up for PostHog after reading a compariso
 | Alternatives and "best X tools" roundups | 100k+ | 4,000+ | ~4% |
 | Every other blog post | 250k+ | 6,000+ | ~2.5% |
 
-It makes sense. Someone searching for this style of content has already decided they need *something*, the only question left is which one. Comparison content sits at the exact spot in the funnel where that decision gets made, and your job is to help make it (ideally in your favour, but not always and that's okay. More on that later).
+It makes sense why they overperform. Someone searching for this style of content has already decided they need *something*, the only question left is which one. Comparison content sits at the sweet spot in the funnel where that decision gets made, and your job is to help make it (ideally in your favour, but not always and that's okay. More on that later).
 
 <details>
   <summary><strong>Our credentials</strong></summary>
@@ -55,7 +57,7 @@ The first head-to-head, [PostHog vs Amplitude](/blog/posthog-vs-amplitude), foll
 
 We went from three to fourteen in a year, and the maintenance problem flared up. Three pages you can keep accurate by hand; fourteen, each with a feature table and pricing that changes every quarter, not so much. It's, to this day, a workflow we're constantly working on solving for and improving.
 
-**2024 was the alternatives year.** A lot of our competitors got a "best X alternatives" piece: [Hotjar](/compare/best-hotjar-alternatives), [Statsig](/compare/best-statsig-alternatives), [Plausible](/compare/best-plausible-alternatives), [Matomo](/compare/best-matomo-alternatives), and about fifteen more. We also launched [error tracking](/error-tracking), wrote [PostHog vs Sentry](/blog/posthog-vs-sentry) in August, and watched it become our most-read head-to-head of all time within two years.
+2024 was the alternatives year. A lot of our competitors got a "best X alternatives" piece: [Hotjar](/compare/best-hotjar-alternatives), [Statsig](/compare/best-statsig-alternatives), [Plausible](/compare/best-plausible-alternatives), [Matomo](/compare/best-matomo-alternatives), and about fifteen more. We also launched [error tracking](/error-tracking), wrote [PostHog vs Sentry](/blog/posthog-vs-sentry) in August, and watched it become our most-read head-to-head of all time within two years.
 
 2025 and 2026 followed the products; [Best Sentry alternatives](/blog/best-sentry-alternatives) and [best error tracking tools](/compare/best-error-tracking-tools) for error tracking, [best open source LLM observability tools](/blog/best-open-source-llm-observability-tools) for [AI observability](/ai-observability), and [best Datadog alternatives](/compare/best-datadog-alternatives) as the first hint of what was coming next. Most recently we started doubling down on our observability stack: [PostHog vs Langfuse](/compare/posthog-vs-langfuse) and a full set of AI observability roundups ([best AI observability tools](/compare/best-ai-observability-tools), plus [Langfuse](/compare/best-langfuse-alternatives), [LangSmith](/compare/best-langsmith-alternatives), and [Braintrust](/compare/best-braintrust-alternatives) alternatives). Then [logs](/logs): [best log monitoring tools](/compare/best-log-monitoring-tools), [Grafana Loki](/compare/best-grafana-loki-alternatives) and [Splunk](/compare/best-splunk-alternatives) alternatives, and [PostHog vs Datadog](/compare/posthog-vs-datadog). 
 
@@ -78,15 +80,21 @@ In practice, this means picking up a few uncomfortable habits:
 
 ### Acknowledge your gaps and credit their wins.
 
-"If you need X, they do it better than we do today" is a sentence you'll find on our pages. Softening it with what's coming is fine (a roadmap link, a "we're working on it"), as long as you're clear about where you are *right now* for the readers deciding today. For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not just our ambitions.
+"If you need X, they do it better than we do today" is a sentence you'll find on our pages. Softening it with what's coming is fine (a roadmap link, a "we're working on it"), as long as you're clear about where you are *right now* for the readers deciding today. 
+
+For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not just our ambitions.
 
 Readers don't think less of you for crediting a competitor; they think more. It's the cheapest trust signal in content marketing, and almost nobody uses it, which is exactly why it works. Say the nice thing.
 
-There's another reader to keep in mind, too: LLMs. When someone asks Claude "PostHog vs Sentry for a Next.js app," we assume the model pulls from sources it judges to be balanced. So be balanced. You want to read as a source, not an ad. Being honest used to be a brand decision (one we've proudly stood behind), but now it might be a distribution decision too.
+There's another reader to keep in mind, too: LLMs. When someone asks Claude "PostHog vs Sentry for a Next.js app," we assume the model pulls from sources it judges to be balanced. So be balanced. You want to read as a source, not an ad. 
+
+Being honest used to be a brand decision (one we've proudly stood behind), but now it might be a distribution decision too.
 
 ### Write a "who should pick them" section.
 
-If you can't write a fair paragraph about where your competitor wins and who they might work better for, you don't understand them well enough to compare. Go read their docs. It's also the place to be honest about who you are and aren't building for: plenty of our competitors are openly built for marketers for example, and while lots of marketers run all their reporting on PostHog (yours truly included), we're still building for AI-pilled engineers first, and we say so.
+If you can't write a fair paragraph about where your competitor wins and who they might work better for, you don't understand them well enough to compare. Go read their docs. 
+
+It's also the place to be honest about who you are and aren't building for: plenty of our competitors are openly built for marketers for example, and while lots of marketers run all their reporting on PostHog (yours truly included), we're still building for AI-pilled engineers first, and we say so.
 
 The reader who isn't a fit should leave feeling helped, not hustled. Honest pages also don't make enemies: the fastest way to go viral for the wrong reasons is a dodgy comparison, and if you'd rather not be bashed on Hacker News or Twitter for being slimy, be fair.
 
