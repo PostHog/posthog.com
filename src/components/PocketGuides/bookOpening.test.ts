@@ -106,11 +106,13 @@ function setup({ reduced = false, failNavigation = false, detached = false } = {
             },
             body: { appendChild: () => calls.push('layer') },
         },
-        requestAnimationFrame: (callback: () => void) => callback(),
+        requestAnimationFrame: (callback: () => void) => setTimeout(callback, 0),
+        // Like Gatsby, the url changes after navigate returns, once the page's data loads.
         require: () => ({
-            navigate: async (to: string) => {
+            navigate: (to: string) => {
                 calls.push(to)
-                if (failNavigation) throw new Error('Failed navigation')
+                if (failNavigation) return Promise.reject(new Error('Failed navigation'))
+                setTimeout(() => (location.pathname = to), 0)
             },
         }),
     })
