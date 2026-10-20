@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Braintrust connector syncs your LLM evaluation and observability data into PostHog's Data Warehouse, so you can analyze your AI projects, experiments, datasets, prompts, and functions alongside your product data.
+The Braintrust connector syncs your LLM evaluation and observability data into PostHog's Data Warehouse, so you can analyze your AI projects, experiments, datasets, prompts, functions, production traces, and user records alongside your product data.
 
 ## Prerequisites
 
@@ -41,8 +41,6 @@ All Braintrust tables use full refresh sync. The Braintrust API doesn't support 
 ## Supported tables
 
 <SourceTables />
-
-Braintrust tables contain object definitions only. Experiment events, dataset records, and raw traces are outside this connector's scope.
 
 ## Troubleshooting
 
