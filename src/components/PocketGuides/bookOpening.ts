@@ -19,6 +19,44 @@ function snapshotCover(cover: HTMLElement): HTMLElement {
     return copy
 }
 
+/**
+ * Turn the copied cover into an open book: the inside of the front cover becomes the left page,
+ * the page under it is the right page, and a spine sits on the hinge between them.
+ */
+function prepareSpread(book: HTMLElement, face: HTMLElement): HTMLElement {
+    const rightPage = book.firstElementChild
+    if (rightPage instanceof HTMLElement) {
+        // Gutter shading on the spine side of each page.
+        rightPage.style.boxShadow = 'inset 14px 0 16px -14px rgba(0, 0, 0, 0.25)'
+        const leftPage = rightPage.cloneNode(true) as HTMLElement
+        Object.assign(leftPage.style, {
+            inset: '0',
+            transform: 'rotateY(180deg)',
+            backfaceVisibility: 'hidden',
+            boxShadow: 'inset -14px 0 16px -14px rgba(0, 0, 0, 0.25)',
+        })
+        // Mirror the ruled lines so the left page's margin rule also faces the spine.
+        if (leftPage.firstElementChild instanceof HTMLElement) leftPage.firstElementChild.style.transform = 'scaleX(-1)'
+        face.append(leftPage)
+    }
+    // The front stays visible until the cover passes 90 degrees; then the inside page shows.
+    if (face.firstElementChild instanceof HTMLElement) face.firstElementChild.style.backfaceVisibility = 'hidden'
+    face.style.backfaceVisibility = 'visible'
+    const spine = document.createElement('div')
+    Object.assign(spine.style, {
+        position: 'absolute',
+        top: '0',
+        bottom: '0',
+        left: '-1px',
+        width: '2px',
+        // A neutral gutter line: the pages are white stock in both themes.
+        background: 'rgba(0, 0, 0, 0.12)',
+        opacity: '0',
+    })
+    book.append(spine)
+    return spine
+}
+
 /** Animate a book visual and navigate, without requiring any destination-page behavior. */
 export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElement | null, to: string): Promise<void> {
     if (!cover || event.defaultPrevented || event.button !== 0) return
@@ -77,10 +115,13 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
     const previousVisibility = cover.style.visibility
     viewport.style.pointerEvents = 'none'
     try {
-        const x = frame.width / 2 - (bookRect.left - frame.left + bookRect.width / 2)
+        // The open book is two pages wide, hinged at the cover's left edge. Center that spine.
+        const x = frame.width / 2 - (bookRect.left - frame.left)
         const y = frame.height / 2 - (bookRect.top - frame.top + bookRect.height / 2)
-        const scale = Math.min(frame.width / bookRect.width, frame.height / bookRect.height) * 0.85
+        const scale = Math.min(frame.width / (bookRect.width * 2), frame.height / bookRect.height) * 0.85
         const face = book.querySelector<HTMLElement>('[data-pocket-guide-cover-face]')
+        const spine = face ? prepareSpread(book, face) : null
+        book.style.transformOrigin = 'left center'
         const originalHover = cover.querySelector<HTMLElement>('[data-pocket-guide-cover-face] > div')
         const hover = face?.firstElementChild
         const hoverReset =
@@ -113,23 +154,17 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
                 delay: 120,
                 easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
             }),
-            play(book, [{ opacity: 1 }, { opacity: 0 }], { duration: 220, delay: 1000, easing: 'ease-in-out' }),
+            play(book, [{ opacity: 1 }, { opacity: 0 }], { duration: 220, delay: 1080, easing: 'ease-in-out' }),
             ...(face
                 ? [
-                      play(
-                          face,
-                          [
-                              { transform: 'rotateY(0deg)', opacity: 1 },
-                              { transform: 'rotateY(-150deg)', opacity: 0 },
-                          ],
-                          {
-                              duration: 800,
-                              delay: 180,
-                              easing: 'cubic-bezier(0.45, 0, 0.2, 1)',
-                          }
-                      ),
+                      play(face, [{ transform: 'rotateY(0deg)' }, { transform: 'rotateY(-180deg)' }], {
+                          duration: 760,
+                          delay: 180,
+                          easing: 'cubic-bezier(0.45, 0, 0.2, 1)',
+                      }),
                   ]
                 : []),
+            ...(spine ? [play(spine, [{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 420 })] : []),
         ])
         if (!cover.isConnected) return
         await play(veil, [{ opacity: 0 }, { opacity: 1 }], { duration: 180 })
