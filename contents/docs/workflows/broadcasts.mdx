@@ -45,11 +45,11 @@ Pick a sender, write a subject, and design the email. You can start from a [mess
 
 Choose when the email goes out:
 
-| Option         | What it does                                                                      |
-| -------------- | --------------------------------------------------------------------------------- |
-| **Send now**   | Sends the email as soon as you launch the broadcast                               |
-| **Send later** | Sends the email once, at a date and time you pick                                 |
-| **Recurring**  | Sends the email on a repeating schedule, like every Monday at 9am                 |
+| Option         | What it does                                                      |
+| -------------- | ----------------------------------------------------------------- |
+| **Send now**   | Sends the email as soon as you launch the broadcast               |
+| **Send later** | Sends the email once, at a date and time you pick                 |
+| **Recurring**  | Sends the email on a repeating schedule, like every Monday at 9am |
 
 Each option that sets a time also has a timezone. Recurring broadcasts use the same schedule picker as [batch triggers](/docs/workflows/workflow-builder#recurring-schedule), so you can type a schedule in plain English and check the next occurrences before you launch.
 
@@ -65,6 +65,8 @@ To spread a large send over time, select **Limit sending rate** and set how many
 ## 5. Review
 
 Check the recipients, goal, email, and schedule before you launch. Emails can't be unsent.
+
+If your project has a [frequency cap](/docs/workflows/configuration) set, broadcast emails count toward it. A recipient who has already reached the cap is skipped.
 
 Use **Send test email** to send the email to an address you enter. Nobody in the audience receives the test. Then click **Send now** or **Schedule broadcast** to launch it.
 
