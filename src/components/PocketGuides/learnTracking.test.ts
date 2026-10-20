@@ -244,8 +244,8 @@ for (const initiallyAvailable of [false, true]) {
                 useStaticQuery: () => ({ pages: { nodes: [{ body: 'chapter', fields: { slug: '/chapter' } }] } }),
             },
             'gatsby-plugin-mdx': { MDXRenderer: passthrough },
-            'context/App': { useAppWindows: () => ({ windows }) },
-            'context/Window': { useWindow: () => ({ appWindow: { key: 'reader' } }) },
+            '../../context/App': { useAppWindows: () => ({ windows }) },
+            '../../context/Window': { useWindow: () => ({ appWindow: { key: 'reader' } }) },
             'hooks/usePostHog': () => window.posthog,
             './bookComponents': { EntryProvider: passthrough, bookMdxComponents: {} },
             './bookModel': {
