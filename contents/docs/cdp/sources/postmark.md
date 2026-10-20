@@ -9,17 +9,18 @@ availability:
 sourceId: Postmark
 ---
 
-The Postmark connector syncs your transactional email data into PostHog, including outbound messages, inbound messages, bounces, templates, and message streams.
+The Postmark connector syncs your transactional email data into PostHog, including outbound messages, inbound messages, bounces, opens, templates, and message streams.
 
 ## Schemas
 
-| Schema              | Description                                        |
-| ------------------- | -------------------------------------------------- |
-| `messages_outbound` | Outbound email messages sent through Postmark      |
-| `messages_inbound`  | Inbound email messages received through Postmark   |
-| `bounces`           | Email bounces and delivery failures                |
-| `templates`         | Email templates configured in your Postmark server |
-| `message_streams`   | Message streams for organizing email types         |
+| Schema              | Description                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| `messages_outbound` | Outbound email messages sent through Postmark                                                  |
+| `messages_inbound`  | Inbound email messages received through Postmark                                               |
+| `bounces`           | Email bounces and delivery failures                                                            |
+| `opens`             | First email opens by recipients (one per message per recipient, when open tracking is enabled) |
+| `templates`         | Email templates configured in your Postmark server                                             |
+| `message_streams`   | Message streams for organizing email types                                                     |
 
 ## Adding a data source
 
