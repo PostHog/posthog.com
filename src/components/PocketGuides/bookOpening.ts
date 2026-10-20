@@ -99,10 +99,7 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
         height: `${bookRect.height}px`,
         margin: '0',
     })
-    const veil = document.createElement('div')
-    veil.className = 'absolute inset-0 bg-primary'
-    veil.style.opacity = '0'
-    stage.append(book, veil)
+    stage.append(book)
     document.body.appendChild(stage)
 
     const animations: Animation[] = []
@@ -111,6 +108,10 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
         animations.push(animation)
         return animation.finished
     }
+    // Focusing another window navigates to its path. Then the reader has moved on, so don't open the book.
+    const startPath = window.location.pathname
+    const stillHere = () => cover.isConnected && window.location.pathname === startPath
+    let navigationTimeout: ReturnType<typeof setTimeout> | undefined
     const previousPointerEvents = viewport.style.pointerEvents
     const previousVisibility = cover.style.visibility
     viewport.style.pointerEvents = 'none'
@@ -166,18 +167,20 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
                 : []),
             ...(spine ? [play(spine, [{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 420 })] : []),
         ])
-        if (!cover.isConnected) return
-        await play(veil, [{ opacity: 0 }, { opacity: 1 }], { duration: 180 })
-        if (!cover.isConnected) return
-        await navigate(to)
+        if (!stillHere()) return
+        // A stalled page load must not leave the source page covered and unclickable.
+        await Promise.race([
+            navigate(to),
+            new Promise<void>((resolve) => {
+                navigationTimeout = setTimeout(resolve, 5000)
+            }),
+        ])
+        // Keep the faded source in place until the destination has painted.
         await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
-        await play(veil, [{ opacity: 1 }, { opacity: 0 }], {
-            duration: 420,
-            easing: 'cubic-bezier(0.45, 0, 0.2, 1)',
-        })
     } catch {
         // Cancellation or failed navigation restores the source instead of leaving it faded.
     } finally {
+        clearTimeout(navigationTimeout)
         animations.forEach((animation) => animation.cancel())
         cover.style.visibility = previousVisibility
         viewport.style.pointerEvents = previousPointerEvents

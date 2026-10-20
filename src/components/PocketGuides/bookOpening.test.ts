@@ -87,6 +87,7 @@ function setup({ reduced = false, failNavigation = false, detached = false } = {
     type OpeningEvent = typeof event
     const exports: { openPocketGuide?: (event: OpeningEvent, cover: ElementMock | null, to: string) => Promise<void> } =
         {}
+    const location = { pathname: '/pocket-guides' }
     runInNewContext(source, {
         exports,
         HTMLElement: ElementMock,
@@ -94,7 +95,9 @@ function setup({ reduced = false, failNavigation = false, detached = false } = {
             Object.assign(Object.keys(element.computed), {
                 getPropertyValue: (property: string) => element.computed[property],
             }),
-        window: { matchMedia: () => ({ matches: reduced }) },
+        window: { matchMedia: () => ({ matches: reduced }), location },
+        setTimeout,
+        clearTimeout,
         document: {
             createElement: () => {
                 const layer = new ElementMock()
@@ -113,7 +116,7 @@ function setup({ reduced = false, failNavigation = false, detached = false } = {
     })
     const open = exports.openPocketGuide
     assert.ok(open)
-    return { open, event, cover, viewport, calls, layers, snapshots, animations }
+    return { open, event, cover, viewport, calls, layers, snapshots, animations, location }
 }
 
 test('the animated copy retains container-dependent typography and artwork dimensions', async () => {
@@ -183,6 +186,15 @@ test('failed navigation restores the source and allows another attempt', async (
 test('leaving the source during the animation does not override the newer route', async () => {
     const fixture = setup({ detached: true })
     await fixture.open(fixture.event, fixture.cover, '/book')
+    assert.deepEqual(fixture.calls, ['layer'])
+    assert.ok(fixture.layers[0].removed)
+})
+
+test('focusing another window during the animation does not open the book there', async () => {
+    const fixture = setup()
+    const opening = fixture.open(fixture.event, fixture.cover, '/book')
+    fixture.location.pathname = '/docs'
+    await opening
     assert.deepEqual(fixture.calls, ['layer'])
     assert.ok(fixture.layers[0].removed)
 })
