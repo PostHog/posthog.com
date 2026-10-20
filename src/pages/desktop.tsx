@@ -404,6 +404,7 @@ function HeroSection() {
                     </ul>
 
                     <DownloadButtons />
+                    <SignupsPausedNote />
                 </div>
 
                 {/* Product shot with the glow + overhanging hog treatment the product pages
@@ -2053,6 +2054,18 @@ const InboxCallout = () => {
     )
 }
 
+const DESKTOP_WAITLIST_URL = 'https://us.posthog.com/external_surveys/01a15a76-48ce-0000-a2f8-e898869707a7'
+
+// New PostHog accounts are blocked in the app while Desktop sign-ups are paused, so say so before people download.
+const SignupsPausedNote = () => (
+    <p className="mt-3 mb-0 text-sm text-secondary">
+        New sign-ups are paused. PostHog Desktop works with PostHog accounts created before October 1, 2026.{' '}
+        <a href={DESKTOP_WAITLIST_URL} className="underline">
+            Join the waitlist
+        </a>
+    </p>
+)
+
 const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
@@ -2063,6 +2076,7 @@ const TLDR = () => {
                         Download PostHog Desktop and sign in with your PostHog account.
                     </p>
                     <DownloadButtons />
+                    <SignupsPausedNote />
                 </div>
                 <div>
                     <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
@@ -2248,6 +2262,14 @@ const FAQ_ITEMS = [
                     It still works. Without PostHog it's a general-purpose coding agent, and the product context is a
                     bonus on top rather than a hard requirement. You do need a PostHog account to sign in, since that's
                     what pays for model usage.
+                </p>
+                <p>
+                    New sign-ups are paused right now, so accounts created on or after October 1, 2026 can't use PostHog
+                    Desktop yet.{' '}
+                    <a href={DESKTOP_WAITLIST_URL} className="underline">
+                        Join the waitlist
+                    </a>{' '}
+                    and we'll email you when you can.
                 </p>
                 <p>
                     That said, the context is the whole point. PostHog is free up to{' '}
