@@ -25,7 +25,7 @@ Here are examples of the types of events you can send:
 
 Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional.
 
-`distinct_id` is limited to 200 characters. Longer values are shortened to the first 200 characters and the event is still ingested, with an [ingestion warning](/docs/data/ingestion-warnings#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit).
+`distinct_id` is limited to 200 characters. Longer values are shortened to the first 200 characters and the event is still ingested, with an [ingestion warning](/docs/data/ingestion-warnings#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit). [Capture v1](/docs/api/capture-v1#limits-and-validation) drops these events instead.
 
 Put `distinct_id` at the top level of the event. PostHog also reads it from `properties.distinct_id` when the top level does not have it, and the top level wins if both are set. This applies to every event in this reference, including `$groupidentify`, `$identify`, and `$create_alias`. Use the top level unless your client can only send properties.
 
