@@ -195,19 +195,19 @@ This is currently rolling out and is in test.
 
 ### How fresh is pre-computed data?
 
-Each pre-computed result has a maximum age that depends on how old the data is. A result can be recalculated sooner, but you never see it past this age. The maximum age includes up to 4 hours by default where we keep showing a result while a new one is calculated in the background:
+Each pre-computed result has a maximum age that depends on how old the data is. Results are almost always recalculated well before this age, and you never see one past it. The maximum age includes the time we keep showing a result while a new one is calculated in the background:
 
 | Date in your range    | Maximum age  |
 | --------------------- | ------------ |
-| Today                 | 8 hours      |
+| Today                 | 2 hours      |
 | Yesterday             | 10 hours     |
 | 2 to 7 days ago       | 5 days       |
 | 8 to 35 days ago      | 7 to 14 days |
 | More than 35 days ago | 90 days      |
 
-Recent days change the most, so their maximum age is shorter. A session can keep receiving events for up to 24 hours after it starts, so metrics like bounce rate and session duration settle about a day after a day ends. A result calculated before a day settles is recalculated once it settles.
+We recalculate today's data about once an hour for dashboards people use, so today's numbers are usually less than an hour old. Older days rarely change. A session can keep receiving events for up to 24 hours after it starts, so metrics like bounce rate and session duration settle about a day after a day ends. A result calculated before a day settles is recalculated once it settles.
 
-We also check popular dashboards about once an hour and recalculate expired results ahead of time, so you rarely wait on a stale tile.
+These ages cover the pre-computed data. A tile can also show a recently cached result. Click **Reload** to skip that cache.
 
 ### How do I see live data?
 
