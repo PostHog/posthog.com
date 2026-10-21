@@ -6117,8 +6117,8 @@
             "destination": "/docs/product-analytics/funnels"
         },
         {
-            "source": "/docs/product-analytics/correlation",
-            "destination": "/docs/product-analytics/funnels"
+            "source": "/docs/product-analytics/correlation:ext(\\.md)?",
+            "destination": "/docs/product-analytics/funnels:ext?"
         },
         {
             "source": "/correlation-analysis",
