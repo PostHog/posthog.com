@@ -1,8 +1,27 @@
 import React from 'react'
 import { cn } from '../../../../utils'
-import { EXTERNAL_SOURCES, ProductIcon, SourceKey } from '../Ingest/session'
+import { IconGraph, IconRewindPlay, IconWarning } from '@posthog/icons'
+import { LOGOS } from '../../../../constants/logos'
 import { ticks, wordStream } from '../timeline'
 import { SCENE_SIZE } from '../sceneScale'
+
+type ProductKey = 'analytics' | 'replay' | 'errors'
+type ExternalKey = 'stripe' | 'zendesk' | 'hubspot'
+export type SourceKey = ProductKey | ExternalKey
+
+const PRODUCT_ICONS: Record<ProductKey, { Icon: React.ComponentType<{ className?: string }>; className: string }> = {
+    analytics: { Icon: IconGraph, className: 'text-blue' },
+    replay: { Icon: IconRewindPlay, className: 'text-yellow' },
+    errors: { Icon: IconWarning, className: 'text-orange' },
+}
+
+const SOURCE_LOGOS: Record<ExternalKey, { logo: string; className?: string }> = {
+    stripe: { logo: LOGOS.stripe, className: 'w-auto' },
+    zendesk: { logo: LOGOS.zendesk, className: 'dark:invert' },
+    hubspot: { logo: LOGOS.hubspot },
+}
+
+const isProduct = (source: SourceKey): source is ProductKey => source in PRODUCT_ICONS
 
 const TOOL_RUN_MS = 1000
 const TYPING_STARTS_AT = 600
@@ -162,32 +181,6 @@ export const TERMINAL_TRACE = defineTrace({
     ],
 })
 
-const TRAILING_PUNCTUATION = /^[.,:;!?)]+/
-
-export const InlineCode = ({ text, codeClassName }: { text: string; codeClassName?: string }) => {
-    const segments = text.split('`')
-    return (
-        <>
-            {segments.map((segment, index) => {
-                if (index % 2 === 0) {
-                    const previousIsCode = index > 0
-                    const punctuation = previousIsCode ? segment.match(TRAILING_PUNCTUATION)?.[0] ?? '' : ''
-                    return <React.Fragment key={index}>{segment.slice(punctuation.length)}</React.Fragment>
-                }
-                const punctuation = segments[index + 1]?.match(TRAILING_PUNCTUATION)?.[0] ?? ''
-                return (
-                    <span key={index} className="whitespace-nowrap">
-                        <code className={cn('!border-0 !bg-transparent !p-0 !text-[inherit] font-code', codeClassName)}>
-                            {segment}
-                        </code>
-                        {punctuation}
-                    </span>
-                )
-            })}
-        </>
-    )
-}
-
 export const SourceIcon = ({
     source,
     className = `${SCENE_SIZE[14]} shrink-0`,
@@ -195,18 +188,10 @@ export const SourceIcon = ({
     source: SourceKey
     className?: string
 }) => {
-    const external = EXTERNAL_SOURCES.find(({ key }) => key === source)
-    if (!external) return <ProductIcon source={source as 'errors' | 'replay' | 'analytics'} className={className} />
-    return (
-        <img
-            src={external.logo}
-            alt=""
-            className={cn(
-                'object-contain',
-                className,
-                external.wide && 'w-auto',
-                source === 'zendesk' && 'dark:invert'
-            )}
-        />
-    )
+    if (isProduct(source)) {
+        const { Icon, className: colorClass } = PRODUCT_ICONS[source]
+        return <Icon className={cn('[&_[clip-path]]:![clip-path:none]', className, colorClass)} />
+    }
+    const { logo, className: logoClass } = SOURCE_LOGOS[source]
+    return <img src={logo} alt="" className={cn('object-contain', className, logoClass)} />
 }

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { IconArrowUpRight, IconCheck, IconSpinner } from '@posthog/icons'
 import Link from 'components/Link'
 import { cn } from '../../../../utils'
-import { InlineCode, SourceIcon, TERMINAL_TRACE, Trace, TraceState, codexArguments } from './trace'
+import { SourceIcon, TERMINAL_TRACE, Trace, TraceState, codexArguments } from './trace'
 import {
     CHATGPT_FUNNEL_AT,
     CHATGPT_TRACE,
@@ -14,7 +14,8 @@ import {
 } from './appTraces'
 import { ErrorStackApp, FunnelApp, McpAppFrame, TrendsApp } from './mcpApps'
 import { CursorDiffChip, CursorEditor, CursorReadLine } from './cursorScene'
-import { transform, useLoopingAnimation, useStickToBottom } from '../timeline'
+import { transform, useLoopingAnimation } from '../timeline'
+import { InlineCode, PostHogMark, ScrollToLatest, WINDOW_HEIGHT } from '../sceneParts'
 import {
     CLAUDE_CLAY,
     ChatGPTIcon,
@@ -24,7 +25,6 @@ import {
     CodexIcon,
     CursorIcon,
     OpenAIMark,
-    PostHogMark,
 } from './appIcons'
 import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
@@ -35,15 +35,6 @@ interface WindowControls {
     onMinimize?: () => void
     install?: { label: string; url: string }
 }
-
-export const WINDOW_HEIGHT = 'h-[clamp(26rem,62cqw,44rem)]'
-
-export const WINDOW_DRAG = {
-    drag: true,
-    dragElastic: 0.08,
-    dragMomentum: false,
-    className: 'cursor-grab select-none [touch-action:pan-y] active:cursor-grabbing',
-} as const
 
 const LINE_ENTER = {
     initial: { opacity: 0, transform: transform({ y: 4 }) },
@@ -158,23 +149,6 @@ export const Caret = ({ className }: { className?: string }) => (
         className={cn('inline-block h-[1.1em] w-[0.55em] align-[-0.2em]', className)}
     />
 )
-
-export const ScrollToLatest = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-    const { scrollRef, contentRef } = useStickToBottom<HTMLDivElement, HTMLDivElement>()
-    return (
-        <div
-            ref={scrollRef}
-            className={cn(
-                'scrollbar-hide flex min-h-0 flex-1 flex-col overflow-y-auto [mask-image:linear-gradient(transparent,black_1.5rem)]',
-                className
-            )}
-        >
-            <div ref={contentRef} className="flex min-h-full shrink-0 flex-col">
-                {children}
-            </div>
-        </div>
-    )
-}
 
 const WindowFrame = ({
     title,

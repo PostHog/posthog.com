@@ -12,8 +12,7 @@ import {
 } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { IOS_SPRING, transform, useEventClock } from '../timeline'
-import { WINDOW_DRAG } from '../Query/AgentWindow'
-import { PostHogMark } from '../Query/appIcons'
+import { PostHogMark, WINDOW_DRAG } from '../sceneParts'
 import { SourceIcon } from '../Query/trace'
 import { PressCursor } from '../PressCursor'
 import {

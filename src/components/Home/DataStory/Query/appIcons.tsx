@@ -1,6 +1,5 @@
 import React from 'react'
 import { cn } from '../../../../utils'
-import { Logo } from '@posthog/brand/logo'
 import { IconClaudeCode, IconOpenAI, LogomarkCursor } from 'components/OSIcons'
 
 const RECOLOR = '[&_path]:!fill-current'
@@ -75,11 +74,4 @@ export const CursorIcon = () => (
     <AppTile className="bg-[#14120B]">
         <CursorMark className="w-[58%] text-[#EDECEC]" />
     </AppTile>
-)
-
-export const PostHogMark = ({ className }: { className?: string }) => (
-    <span className={cn('inline-flex [&_svg]:!h-full [&_svg]:!w-auto', className)}>
-        <Logo layout="logomark" variant="gradient" className="block dark:hidden" />
-        <Logo layout="logomark" variant="mono" className="hidden dark:block" />
-    </span>
 )

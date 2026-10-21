@@ -3,7 +3,8 @@ import { AnimatePresence, motion, useInView, Variants } from 'framer-motion'
 import { cn } from '../../../../utils'
 import Link from 'components/Link'
 import { IOS_SPRING, transform, useEventClock } from '../timeline'
-import AgentWindow, { AGENT_THEMES, AgentTheme, Caret, WINDOW_DRAG, WINDOW_HEIGHT, traceFor } from './AgentWindow'
+import AgentWindow, { AGENT_THEMES, AgentTheme, Caret, traceFor } from './AgentWindow'
+import { WINDOW_DRAG, WINDOW_HEIGHT } from '../sceneParts'
 import { buildWizardCommand } from '../../../PlatformInstall/buildCommand'
 import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
@@ -344,7 +345,7 @@ const Dock = ({
     </div>
 )
 
-const Desktop = () => {
+const QueryScene = () => {
     const [open, setOpen] = useState<AgentTheme | null>(null)
     const [minimized, setMinimized] = useState(false)
     const [dragging, setDragging] = useState(false)
@@ -451,4 +452,4 @@ const Desktop = () => {
     )
 }
 
-export default Desktop
+export default QueryScene

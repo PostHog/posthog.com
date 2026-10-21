@@ -1,8 +1,7 @@
 import React from 'react'
 import { pressCursorBoundaries } from '../PressCursor'
 import { CodexTerminal } from '../Query/AgentWindow'
-import { ToolCall, defineTrace } from '../Query/trace'
-import { SourceKey } from '../Ingest/session'
+import { SourceKey, ToolCall, defineTrace } from '../Query/trace'
 
 export const REPORT_LOOP_MS = 15500
 export const REPORT_RESTING_MOMENT = 13000

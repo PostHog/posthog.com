@@ -3,8 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconCheck, IconCheckCircle, IconComment, IconPullRequest } from '@posthog/icons'
 import { cn } from '../../../../utils'
 import { useEventClock } from '../timeline'
-import { InlineCode } from '../Query/trace'
-import { ScrollToLatest, WINDOW_HEIGHT } from '../Query/AgentWindow'
+import { InlineCode, ScrollToLatest, WINDOW_HEIGHT } from '../sceneParts'
 import {
     CHECKS_SHOWN_AT,
     CheckChart,
