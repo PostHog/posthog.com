@@ -10,7 +10,7 @@ A manager at PostHog has a short list of responsibilities:
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
 5. Collaborating with execs on team performance concerns that need early intervention
-6. [Communicating with teams outside your own](#what-you-owe-other-teams), if you are a team lead
+6. [Communicating about downstream impact outside your team](#working-with-other-teams), if you are a team lead
 
 That's it.
 
