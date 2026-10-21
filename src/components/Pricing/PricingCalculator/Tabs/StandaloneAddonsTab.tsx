@@ -45,8 +45,7 @@ const TriggerEventsModal = ({ onClose, isVisible }) => {
 
 const firstPaidUnitAmount = (tiers) => tiers?.find((tier) => parseFloat(tier.unit_amount_usd) > 0)?.unit_amount_usd
 
-const isDataPipelines = (product) =>
-    product?.categoryName === 'Data pipelines' || product?.handle === 'realtime_destinations'
+const isDestinations = (product) => product?.handle === 'realtime_destinations'
 
 export default function StandaloneAddonsTab({ activeProduct, setVolume, setProduct }) {
     const [mainVolume, setMainVolume] = useState(activeProduct.volume || 0)
@@ -155,7 +154,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     return (
         <div className="@container mb-4">
             <TriggerEventsModal onClose={() => setTriggerEventsModalOpen(false)} isVisible={triggerEventsModalOpen} />
-            {isDataPipelines(activeProduct) && (
+            {isDestinations(activeProduct) && (
                 <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
                     Trigger Events are the events that actually kick off destinations in your pipelines (
                     <button
@@ -293,7 +292,9 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     <p className="my-4 font-bold border-t border-primary pt-4">Here's how your estimate breaks down:</p>
                     <div className="space-y-8">
                         <div>
-                            <h4 className="text-lg m-0">{volumeLabel || activeProduct.name}</h4>
+                            <h4 className="text-lg m-0">
+                                {volumeLabel || activeProduct.categoryName || activeProduct.name}
+                            </h4>
                             <p className="opacity-70 m-0 text-sm mb-2">
                                 <strong>{mainVolume.toLocaleString()}</strong>{' '}
                                 {pluralizeUnit(activeProduct.billingData.unit, mainVolume)}

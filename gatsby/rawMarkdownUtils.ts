@@ -7,13 +7,7 @@ import {
     isLatestVersion,
     typeHasPage,
 } from '../src/components/SdkReferences/utils'
-import {
-    createTurndownService,
-    extractTitleFromHtml,
-    extractMainContent,
-    postProcessMarkdown,
-    preprocessHtmlForTabs,
-} from './turndownService'
+import { convertHtmlToAgentMarkdown, extractTitleFromHtml } from './turndownService'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
 import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
@@ -62,12 +56,7 @@ export const generateRawMarkdownPages = async (
 
             const html = fs.readFileSync(htmlFilePath, 'utf8')
             const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
-            const mainContent = extractMainContent(html)
-            const preprocessedContent = preprocessHtmlForTabs(mainContent)
-
-            const turndownService = createTurndownService(title)
-            let markdown = turndownService.turndown(preprocessedContent)
-            markdown = postProcessMarkdown(markdown, title)
+            const markdown = convertHtmlToAgentMarkdown(html, title, slug)
 
             const outputPath = path.join(publicPath, `${slug}.md`)
             const dirPath = path.dirname(outputPath)

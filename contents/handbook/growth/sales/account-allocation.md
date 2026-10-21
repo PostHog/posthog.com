@@ -3,7 +3,7 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in spend, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
+We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in usage-based spend, or is on a non-legacy Enterprise plan, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
 
 The [customer journey and coverage model](/handbook/growth/sales/customer-journey) covers the phases an account moves through and who covers it at each one. This page covers the operational side: book planning, how TAMs get added and removed, and handover mechanics.
 
@@ -13,7 +13,7 @@ We're partway through this transition. Not every $20k+ account has a CSM yet, so
 
 ### CSMs are the base layer
 
-Every $20k+ account gets a [CSM](/handbook/cs-and-onboarding/customer-success). They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
+Every account at $20k+ in usage-based ARR, or on an Enterprise plan, gets a [CSM](/handbook/cs-and-onboarding/customer-success). The threshold is what the customer actually consumes, not what they've contracted for: signing a prepaid or annual contract doesn't make an account a CSM account on its own. They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
 
 ### TAMs are an overlay
 
@@ -122,7 +122,7 @@ To flag an account, add the `tam overlay needed` tag to it in Customer Analytics
 
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-We track coverage in Customer Analytics with the CSM account relationship for the base layer and the `AM Managed` tag for the TAM overlay. An account can have both.
+We track coverage in Customer Analytics with the CSM account relationship for the base layer and the TAM assigned for the TAM overlay. An account can have both.
 
 ---
 
@@ -143,7 +143,7 @@ The CSM stays on, so nothing about the customer relationship changes from their 
 - **A handover note in Customer Analytics** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, who the real decision makers are, and who on the customer side owns the renewal (champion or procurement, and how the last one went). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
-- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` tag from the account, with Ben's approval.
+- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead clears the TAM field from the account, with Ben's approval.
 
 If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
 
@@ -199,7 +199,7 @@ Account removals should only happen at the end of the quarter so that quota can 
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
-> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the `AM Managed` tag to be added until you're confident there's growth potential.
+> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the TAM field to be set until you're confident there's growth potential.
 
 ---
 
@@ -213,7 +213,7 @@ Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding o
 
 To help the new owner hit the ground running, we should make sure the customer is in a good state and a warm introduction happens.
 
-TAE handoff goes to a CSM, always. This typically happens when onboarded, around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time.
+If the account is at $20k+ in usage-based ARR or on a non-legacy Enterprise plan, the TAE handoff always goes to a CSM. Signing a prepaid or annual contract doesn't trigger the handoff by itself: the account needs to be onboarded and consuming at the $20k threshold. The handover typically happens around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time. If usage is still under the threshold at the 3 month mark, the TAE hands the renewal opportunity over to the relevant CSM team lead to work the renewal and monitor the account. The team lead is responsible for ensuring the renewal is managed by a CSM as per the [renewal handbook guidelines](/handbook/cs-and-onboarding/renewals#when-to-start). The team lead is not responsible for support or proactive adoption work. Once the account reaches $20k+ in usage-base ARR, it will be queued for a CSM's book.
 
 TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding a TAM](#adding-a-tam-to-an-account) and [Removing a TAM](#removing-a-tam-from-an-account) above.
 

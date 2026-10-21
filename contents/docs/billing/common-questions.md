@@ -12,6 +12,12 @@ If you have special circumstances where this doesn't work for you, contact our [
 
 You can check our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs), or use the [pricing calculator](/pricing) to estimate costs. However, often the best way to estimate costs is to signup for free and go from there.
 
+## Do projects share usage and free allowances?
+
+Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.
+
+The free plan includes one project. To create more, add a card to upgrade to a paid plan. See [how to organize projects](/docs/settings/projects#how-to-organize-projects) for our recommended setup.
+
 ## How do I update billing information or see previous months' invoices or usage?
 
 Go to your organization's [billing settings](https://app.posthog.com/organization/billing) and click **Manage card details and view past invoices** to be brought to Stripe where you can update your credit card, billing information, and see your invoice history.

@@ -1205,6 +1205,40 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'Community',
+                url: '/handbook/community',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/community',
+                    },
+                    {
+                        name: 'Community channels',
+                        url: '/handbook/community/channels',
+                    },
+                    {
+                        name: 'Covering the community',
+                        url: '/handbook/community/coverage',
+                    },
+                    {
+                        name: 'Answering community questions',
+                        url: '/handbook/community/questions',
+                    },
+                    {
+                        name: 'Community moderator tools',
+                        url: '/handbook/community/moderator-tools',
+                    },
+                    {
+                        name: 'Profiles',
+                        url: '/handbook/community/profiles',
+                    },
+                    {
+                        name: 'Points & rewards',
+                        url: '/handbook/community/points',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -1605,7 +1639,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-program',
                     },
                     {
-                        name: 'Onboarding tracking',
+                        name: 'Onboarding process',
                         url: '/handbook/onboarding/onboarding-tracking',
                     },
                     {
@@ -1861,7 +1895,7 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                     {
-                        name: 'Context warehouse enablement',
+                        name: 'Data Stack enablement',
                         url: '',
                         children: [
                             {
@@ -2018,36 +2052,6 @@ export const handbookSidebar = [
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
-            {
-                name: 'Community',
-                url: '',
-                children: [
-                    {
-                        name: 'Overview',
-                        url: '/handbook/community',
-                    },
-                    {
-                        name: 'Community channels',
-                        url: '/handbook/community/channels',
-                    },
-                    {
-                        name: 'Answering community questions',
-                        url: '/handbook/community/questions',
-                    },
-                    {
-                        name: 'Community moderator tools',
-                        url: '/handbook/community/moderator-tools',
-                    },
-                    {
-                        name: 'Profiles',
-                        url: '/handbook/community/profiles',
-                    },
-                    {
-                        name: 'Points & rewards',
-                        url: '/handbook/community/points',
-                    },
-                ],
-            },
         ],
     },
     {
@@ -2066,12 +2070,36 @@ export const handbookSidebar = [
                 name: 'Wizard',
             },
             {
-                name: 'AI wizard',
-                url: '/handbook/wizard-and-docs/developing-the-wizard',
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs/wizard',
+            },
+            {
+                name: 'Architecture',
+                url: '/handbook/wizard-and-docs/wizard-architecture',
             },
             {
                 name: 'Context mill',
                 url: '/handbook/wizard-and-docs/context-mill',
+            },
+            {
+                name: 'Developing the wizard',
+                url: '/handbook/wizard-and-docs/developing-the-wizard',
+            },
+            {
+                name: 'Extending the wizard',
+                url: '/handbook/wizard-and-docs/extending-the-wizard',
+            },
+            {
+                name: 'Releasing the wizard',
+                url: '/handbook/wizard-and-docs/wizard-releases',
+            },
+            {
+                name: 'Handling incidents',
+                url: '/handbook/wizard-and-docs/wizard-incidents',
+            },
+            {
+                name: "The wizard's bestiary",
+                url: '/handbook/wizard-and-docs/wizard-edge-cases',
             },
             {
                 name: 'Docs',
@@ -2097,10 +2125,6 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
-                name: 'Pocket guides',
-                url: '/handbook/wizard-and-docs/pocket-guides',
-            },
-            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2115,6 +2139,21 @@ export const handbookSidebar = [
             {
                 name: 'API specs and docs',
                 url: '/handbook/wizard-and-docs/api-specifications',
+            },
+            {
+                name: 'Learn',
+            },
+            {
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs/learn',
+            },
+            {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
+                name: 'How to contribute to Twig',
+                url: '/handbook/wizard-and-docs/twig',
             },
         ],
     },
@@ -2766,15 +2805,48 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Resources',
+                    name: 'Learn',
                 },
                 {
-                    name: 'Pocket guides',
-                    url: '/pocket-guides',
+                    name: 'Pocket guide',
+                    url: '/docs/self-driving/pocket-guide',
+                    children: [
+                        {
+                            name: 'Self-driving 101',
+                            url: '/docs/self-driving/pocket-guide/101',
+                        },
+                        {
+                            name: 'AI spend',
+                            url: '/docs/self-driving/pocket-guide/ai-spend-that-jumps',
+                        },
+                        {
+                            name: 'Flag debt',
+                            url: '/docs/self-driving/pocket-guide/flag-debt',
+                        },
+                        {
+                            name: 'Silent failures',
+                            url: '/docs/self-driving/pocket-guide/silent-failure-core-action',
+                        },
+                        {
+                            name: 'Costly users',
+                            url: '/docs/self-driving/pocket-guide/costly-ai-users',
+                        },
+                        {
+                            name: 'Dead ends',
+                            url: '/docs/self-driving/pocket-guide/pages-people-cant-leave',
+                        },
+                        {
+                            name: 'Error patterns',
+                            url: '/docs/self-driving/pocket-guide/ai-error-patterns',
+                        },
+                    ],
                     badge: {
                         title: 'New',
                         className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
                     },
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'From our inbox',
@@ -5248,6 +5320,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'API',
+                    url: '/docs/replay-vision/api',
+                    icon: 'IconCode',
+                    color: 'yellow',
+                },
+                {
                     name: 'MCP',
                     url: '/docs/replay-vision/mcp',
                     icon: 'IconTerminal',
@@ -6595,6 +6673,12 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
+                    name: 'Use cases',
+                    url: '/docs/support/use-cases',
+                    icon: 'IconBook',
+                    color: 'teal',
+                },
+                {
                     name: 'Set up the widget',
                     url: '/docs/support/widget',
                     icon: 'IconMessage',
@@ -6610,7 +6694,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'PostHog Slack',
+                    name: 'Slack (SupportHog)',
                     url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
@@ -6620,12 +6704,6 @@ export const docsMenu = {
                     url: '/docs/support/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'blue',
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/support/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'green',
                 },
                 {
                     name: 'API',
@@ -6649,10 +6727,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Slack',
+                    name: 'Slack (SupportHog)',
                     url: '/docs/support/slack',
                     icon: 'IconChat',
                     color: 'purple',
+                },
+                {
+                    name: 'Microsoft Teams',
+                    url: '/docs/support/teams',
+                    icon: 'IconMessage',
+                    color: 'blue',
                 },
                 {
                     name: 'GitHub',
@@ -6676,6 +6760,21 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Automation',
+                },
+                {
+                    name: 'Workflows',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
+                {
+                    name: 'AI agent',
+                    url: '/docs/support/ai-agent',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                },
+                {
                     name: 'Resources',
                 },
                 {
@@ -6683,6 +6782,12 @@ export const docsMenu = {
                     url: '/docs/support/pricing',
                     icon: 'IconPiggyBank',
                     color: 'green',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/support/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
             ],
         },
@@ -6929,6 +7034,77 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/warehouse/performance-tuning',
                         },
                     ],
+                },
+                {
+                    name: 'Learn',
+                },
+                {
+                    name: 'Pocket guide',
+                    url: '/docs/data-warehouse/pocket-guide',
+                    children: [
+                        {
+                            name: 'Features & revenue',
+                            url: '/docs/data-warehouse/pocket-guide/features-drive-revenue',
+                        },
+                        {
+                            name: 'Onboarding conversion',
+                            url: '/docs/data-warehouse/pocket-guide/onboarding-conversion',
+                        },
+                        {
+                            name: 'Upsell-ready accounts',
+                            url: '/docs/data-warehouse/pocket-guide/upsell-ready-accounts',
+                        },
+                        {
+                            name: 'Pre-cancellation behavior',
+                            url: '/docs/data-warehouse/pocket-guide/pre-cancellation-behavior',
+                        },
+                        {
+                            name: 'Tickets & churn',
+                            url: '/docs/data-warehouse/pocket-guide/support-tickets-churn',
+                        },
+                        {
+                            name: 'ARR vs engagement',
+                            url: '/docs/data-warehouse/pocket-guide/value-vs-engagement',
+                        },
+                        {
+                            name: 'Channels & retention',
+                            url: '/docs/data-warehouse/pocket-guide/acquisition-channels-retention',
+                        },
+                        {
+                            name: 'Lead scoring',
+                            url: '/docs/data-warehouse/pocket-guide/lead-scoring',
+                        },
+                        {
+                            name: 'Feature revenue impact',
+                            url: '/docs/data-warehouse/pocket-guide/feature-revenue-impact',
+                        },
+                        {
+                            name: 'Foundations',
+                            url: '/docs/data-warehouse/pocket-guide/warehouse-foundations',
+                        },
+                        {
+                            name: 'Revenue',
+                            url: '/docs/data-warehouse/pocket-guide/revenue-metrics',
+                        },
+                        {
+                            name: 'Conversion',
+                            url: '/docs/data-warehouse/pocket-guide/conversion-metrics',
+                        },
+                        {
+                            name: 'Activation',
+                            url: '/docs/data-warehouse/pocket-guide/activation-metrics',
+                        },
+                        {
+                            name: 'Usage',
+                            url: '/docs/data-warehouse/pocket-guide/product-usage-metrics',
+                        },
+                        {
+                            name: 'Dimensions',
+                            url: '/docs/data-warehouse/pocket-guide/dimension-tables',
+                        },
+                    ],
+                    icon: 'IconBook',
+                    color: 'blue',
                 },
                 {
                     name: 'Resources',
@@ -7550,7 +7726,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pocket guides',
-                    url: '/pocket-guides/ai-observability',
+                    url: '/learn/ai-observability',
                     badge: {
                         title: 'New',
                         className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
@@ -7703,6 +7879,10 @@ export const docsMenu = {
                         {
                             name: 'Ruby',
                             url: '/docs/mcp-analytics/installation/ruby',
+                        },
+                        {
+                            name: 'WebMCP',
+                            url: '/docs/mcp-analytics/installation/webmcp',
                         },
                     ],
                 },
@@ -8298,6 +8478,10 @@ export const docsMenu = {
                         {
                             name: 'Run AI tasks from a workflow',
                             url: '/docs/workflows/ai-tasks',
+                        },
+                        {
+                            name: 'Watch sessions with Replay Vision',
+                            url: '/docs/workflows/replay-vision',
                         },
                     ],
                 },

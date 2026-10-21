@@ -41,7 +41,7 @@ export const logs = {
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
-            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
+            'Search, filter, and alert on application logs. Works with OpenTelemetry and links each log to users, errors, and session replays in PostHog.',
     },
     /**
      * Sections rendered on the Product surface (`/logs`). Each entry
