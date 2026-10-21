@@ -842,6 +842,19 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             customIcon: <HedgehogGardener className="size-12" />,
             external: true,
         },
+        {
+            label: 'Bug Survivors',
+            link: 'https://survivors.posthog.com',
+            iconName: null,
+            customIcon: (
+                <img
+                    src="/images/sparks-joy/bug-survivors.png"
+                    alt=""
+                    className="size-12 [image-rendering:pixelated]"
+                />
+            ),
+            external: true,
+        },
     ],
     notGames: [
         {
