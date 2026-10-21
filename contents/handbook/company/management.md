@@ -34,7 +34,7 @@ This includes...
 
 1. Telling downstream teams before you ship something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, try to overcommunicate.
 2. Put your [quarterly goals](/handbook/company/goal-setting#publishing-and-viewing-goals) on your team page, so the exec team can see them on the [WIP page](/wip) without asking you.
-3. If you manage other team leads, clarify to them where you will set goals and track work so that they have appropriate context. 
+3. If you manage other team leads, clarifying to them where you will set goals and track work so that they have appropriate context. 
 
 ### Part-time managers
 
