@@ -132,11 +132,39 @@ An SDK without good docs is only half shipped. Keep the quickstart current, show
 
 Each SDK should have a troubleshooting page for common install, build, configuration, network, and runtime errors.
 
+Document unsupported environments, incompatible feature combinations, and known limitations alongside the relevant setup or usage instructions. Explain alternatives where available.
+
 Examples should be boring, copy-pasteable, and close to how customers write real production code in that ecosystem.
 
 Public methods, configuration options, and types should have documentation comments in the platform's standard style, such as JSDoc, docstrings, KDoc, or Swift documentation comments. Write them for humans, but remember that LLMs and IDEs parse them too. A good comment explains what the method or option does, when to use it, defaults, side effects, and any privacy or performance caveats.
 
 The public API reference should be complete and current. It should cover public methods, types, configuration options, defaults, side effects, return values, errors, and examples where they help.
+
+### Make SDKs easy for agents to use
+
+An agent-first SDK is one a coding agent can discover, integrate, configure, verify, and upgrade using the published package and documentation. It shouldn't need to guess behavior, read SDK internals, or rely on undocumented human steps.
+
+This means reducing ambiguity for humans too, not creating a separate agent-only API. Apply the same [API design](#design-apis-for-forward-compatibility), [documentation](#treat-docs-and-examples-as-part-of-the-sdk), and [debugging](#make-debugging-humane) guidelines with agent-driven integration in mind:
+
+- Recommend one integration path per supported environment. Make prerequisites, package selection, and setup steps explicit.
+
+- Keep the public interface discoverable, well-defined, and hard to misuse. Use types and standard documentation comments to make expected behavior and constraints explicit.
+
+- Keep documentation and examples aligned with released versions. State compatibility requirements, and distinguish stable functionality from experimental or deprecated functionality.
+
+- Provide minimal, runnable examples that include necessary production setup. Check that examples compile or run in CI where practical.
+
+- Explain how to verify that an integration works, not just that the code builds. Diagnostics should explain what failed and what to do next, without exposing secrets or disrupting the host application.
+
+- Support non-interactive setup through the platform's normal configuration mechanisms.
+
+- Every SDK should provide a documented test mode for unit and integration tests without credentials, real customer data, or network requests to PostHog, including background requests. Tests should be able to inspect SDK operations and supply simulated responses or failures through a supported interface, without accessing SDK internals. This mode should support meaningful assertions, not just disable the SDK. Document which behavior it validates and what still requires end-to-end testing.
+
+- Make privacy and security requirements explicit. Following the quickstart should produce a safe integration without requiring the agent to infer missing safeguards.
+
+- Provide version-specific migration instructions with before/after examples. Add codemods or agent skills when they meaningfully reduce migration work, not as a requirement for every SDK.
+
+A practical check: give a coding agent a clean supported project and the public docs. Can it integrate the SDK, verify the expected result, and diagnose a common configuration error without inspecting SDK source? Review the generated integration for correctness and safety, not just whether it builds.
 
 ### Release like people depend on it
 
