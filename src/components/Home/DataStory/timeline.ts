@@ -19,7 +19,12 @@ const usePageVisible = (): boolean => {
 
 export function useEventClock(
     ref: RefObject<HTMLElement>,
-    { loopMs, boundaries, restingMs }: { loopMs: number; boundaries: number[]; restingMs: number }
+    {
+        loopMs,
+        boundaries,
+        restingMs,
+        loop = true,
+    }: { loopMs: number; boundaries: number[]; restingMs: number; loop?: boolean }
 ): number {
     const inView = useInView(ref, { amount: 0.35 })
     const pageVisible = usePageVisible()
@@ -38,14 +43,22 @@ export function useEventClock(
     useEffect(() => {
         if (!playing) return
         const startedAt = timelineNow() - position.current
-        const loopPosition = () => (timelineNow() - startedAt) % loopMs
+        const clockPosition = () => {
+            const raw = timelineNow() - startedAt
+            return loop ? raw % loopMs : Math.min(raw, loopMs)
+        }
         let timer: number
 
         const scheduleNextStop = () => {
-            const now = loopPosition()
+            const now = clockPosition()
+            if (!loop && now >= loopMs) {
+                position.current = loopMs
+                setElapsed(lastStopAtOrBefore(stops, loopMs))
+                return
+            }
             const next = stops.find((stop) => stop > now) ?? loopMs
             timer = window.setTimeout(() => {
-                setElapsed(lastStopAtOrBefore(stops, loopPosition()))
+                setElapsed(lastStopAtOrBefore(stops, clockPosition()))
                 scheduleNextStop()
             }, next - now)
         }
@@ -53,9 +66,9 @@ export function useEventClock(
         scheduleNextStop()
         return () => {
             window.clearTimeout(timer)
-            position.current = loopPosition()
+            position.current = Math.min(clockPosition(), loopMs)
         }
-    }, [playing, stops, loopMs])
+    }, [playing, stops, loopMs, loop])
 
     return shouldReduceMotion ? restingMs : elapsed
 }

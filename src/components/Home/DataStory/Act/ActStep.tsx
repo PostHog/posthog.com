@@ -262,6 +262,7 @@ export default function ActScene(): JSX.Element {
         loopMs: REPORT_LOOP_MS,
         boundaries: REPORT_BOUNDARIES,
         restingMs: REPORT_RESTING_MOMENT,
+        loop: false,
     })
     return (
         <div ref={sceneRef} className="not-prose @container" aria-hidden="true">
