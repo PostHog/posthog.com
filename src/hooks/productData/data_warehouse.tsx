@@ -203,6 +203,11 @@ export const dataWarehouse = {
                 values: [YES, 'GA4 export', NO, NO],
             },
             {
+                label: 'Events in near real time',
+                description: 'New events land within minutes of capture',
+                values: ['US Cloud', 'GA4 streaming export', NO, NO],
+            },
+            {
                 label: 'Serverless compute',
                 description: 'Compute starts on demand, with no cluster to manage',
                 values: [YES, YES, 'You size warehouses', 'Serverless option'],

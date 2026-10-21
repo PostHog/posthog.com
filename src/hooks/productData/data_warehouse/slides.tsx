@@ -153,7 +153,8 @@ export const topFeatures: CarouselSlide[] = [
                 {list([
                     {
                         label: 'PostHog data, zero config',
-                        description: 'Your events and persons are backfilled, then updated daily.',
+                        description:
+                            'Your events and persons are backfilled. Then, on US Cloud, new events arrive within minutes. Persons update daily.',
                     },
                     {
                         label: 'Billing and CRM',
