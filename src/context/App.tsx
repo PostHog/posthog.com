@@ -1602,9 +1602,6 @@ const appSettings: AppSettings = {
     '/forum/t/:topic': { toolbar: true },
     '/forum/t/:topic/tags': { toolbar: true },
     '/forum/p/:permalink': { toolbar: true },
-    '/ai': {
-        toolbar: true,
-    },
     '/hog': {
         toolbar: true,
     },
