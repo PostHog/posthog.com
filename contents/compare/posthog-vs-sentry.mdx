@@ -7,7 +7,7 @@ author:
 rootpage: /compare
 sidebar: Compare
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/Group_144680_1_097fcd5b35.png
 featuredImageType: full
 category: General
 tags:
@@ -19,9 +19,9 @@ seo:
 
 PostHog and [Sentry](/blog/best-sentry-alternatives) are multi-product platforms trusted by developers to help make their apps better. There is some overlap in how both manage to do that (we're both "telemetry" tools), but many features differ.
 
-1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, code coverage, and more. It's built for engineers and devops teams.
+1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, logs, metrics, uptime and cron monitoring, and Seer, a paid AI debugging agent. It's built for engineers and devops teams.
 
-2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [LLM observability](/ai-observability), an [AI assistant](/ai), and more. It's built for engineers and product teams.
+2. **PostHog** is an all-in-one platform for building successful products. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/feature-flags), [distributed tracing](/docs/distributed-tracing), [AI observability](/ai-observability), [logs](/logs), [metrics](/docs/metrics), an [AI assistant](/ai), and more, and you can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
 
 ## How is PostHog different?
 
@@ -36,11 +36,20 @@ Broadly, PostHog is mostly a proactive tool that helps you make your product bet
 
 ### 2. We're free and usage-based
 
-We pride ourselves on having a generous free tier and this shows when compared to Sentry. Our free tier offers 100 times more session replays and 20 times more errors.
+We pride ourselves on [having a generous free tier](/pricing) and this shows when compared to Sentry. Our free tier offers 100 times more session replays and 20 times more errors, and 97% of companies use PostHog for free.
 
-Beyond our free tier, our pricing is usage-based and transparent. We also try to be as cheap as possible. Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator).
+| Free every month | PostHog | Sentry (Developer plan) |
+|---|---|---|
+| Errors | 100,000 | 5,000 |
+| Session replays | 5,000 web + 2,500 mobile | 50 |
+| Logs | 10 GB | 5 GB |
+| Custom dashboards | No limit | 10 |
+| Team members | Unlimited | 1 |
+| Surveys | 1,500 responses | Feedback widget only |
 
-Sentry also limits many of its features (like UI profiling) to its higher, paid tiers.
+Beyond our free tier, our pricing is usage-based and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
+
+Sentry also keeps some features off its free plan, including profiling, SAML SSO, and its Seer AI agent, and the dashboard cap only lifts fully on the Business plan.
 
 ### 3. Flexibility and breadth
 
@@ -48,7 +57,7 @@ Sentry is much more focused and opinionated in how you use it. The tools are tai
 
 PostHog offers more flexibility and breadth. It's built for developers but also used by marketing, growth, and data teams. Startups and scaleups use PostHog for tracking [retention](/docs/product-analytics/retention), running targeted [A/B tests](/experiments), [booking user interviews](/tutorials/feedback-interviews-site-apps), and more.
 
-More examples of this flexibility include PostHog's simpler [custom event capture](/docs/getting-started/send-events#2-capture-custom-events), the ability to [import and use data from external sources](/data-warehouse), and [direct SQL querying](/docs/sql).
+Because all of that is one dataset, you can [query it with SQL](/docs/sql). Data moves the other way too: [batch exports](/docs/cdp/batch-exports) and [CDP destinations](/docs/cdp/destinations) push PostHog data to your warehouse or other tools. Sentry's equivalent, data forwarding, covers error events only and is a Business-plan feature.
 
 <WizardCTA />
 
@@ -80,7 +89,7 @@ The core of PostHog and Sentry are different. Sentry focuses on error and perfor
 />
 </p>
 
--  Sentry offers Discover, Dashboards, and Performance Trends for querying and visualizing application data, but it doesn't include product analytics features like funnels, retention, or user paths found in PostHog.
+-   Sentry offers Explore (for errors, traces, logs, metrics, and replays) and Dashboards for querying and visualizing application data, but it doesn't include product analytics features like funnels, retention, or user paths found in PostHog.
 
 -   PostHog includes [network performance tracking](/docs/session-replay/network-recording) in session replay and [web vitals tracking](/docs/web-analytics/web-vitals) in web analytics. This helps you both analyze performance and requests for specific sessions and get an overview of web vitals and areas for improvement.
 
@@ -105,7 +114,9 @@ The core of PostHog and Sentry are different. Sentry focuses on error and perfor
 
 ### Error and performance monitoring
 
-Error and performance monitoring is the main focus of Sentry. PostHog has a full error tracking product as well as [network performance recording](/docs/session-replay/network-recording), [distributed tracing](/tracing), and [metrics](/docs/metrics) (in alpha), though Sentry's tracing and monitoring features are more mature.
+Error and performance monitoring is the main focus of Sentry, and it keeps adding to it: logs and application metrics are now generally available, alongside uptime monitoring, AI agent tracing, and Seer, a paid AI agent that diagnoses issues and proposes fixes. 
+
+PostHog has a full error tracking product as well as [logs](/logs), [distributed tracing](/tracing), [network performance recording](/docs/session-replay/network-recording), and [metrics](/docs/metrics), though Sentry's tracing and monitoring features are more mature.
 
 <p>
 <ProductComparisonTable
@@ -128,6 +139,12 @@ Error and performance monitoring is the main focus of Sentry. PostHog has a full
 
 Replays enable you to watch how users experience your app, diagnose issues, improve support, and understand real user behavior. Both PostHog and Sentry have this as a core part of their offering.
 
+Where PostHog goes further is in not making you watch. [Replay Vision](/replay-vision) runs AI scanners over your recordings: point one at sessions that hit a particular error and it reviews each session's video and events, flags dead ends and frustration, summarizes what the user was trying to do, and cites the exact moment in the recording so you can check its work. 
+
+Each observation is logged as an event, so you can chart how often a problem shows up or alert on it like any other metric. The first 2,500 credits a month are free.
+
+Sentry's replays are a debugging aid attached to an issue: useful for seeing what happened right before an error, but something you watch one at a time.
+
 <p>
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
@@ -141,33 +158,39 @@ Replays enable you to watch how users experience your app, diagnose issues, impr
         'session_replay.privacy.privacy_masking',
         'session_replay.analysis.console_logs',
         'session_replay.features.canvas_recording',
+        'session_replay.ai.ai_summaries',
+        'session_replay.ai.replay_vision',
+        'session_replay.ai.ai_observations_as_events',
         { label: 'Free allowance', description: 'Free recordings per month', values: ['5,000 web + 2,500 mobile', '50'] },
         { label: '50k replays cost', description: 'Cost per month of 50,000 replays', values: ['$173', '$172'] },
-        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', '$314'] },
+        { label: '100k replays cost', description: 'Cost per month of 100,000 replays', values: ['$273', '$315'] },
     ]}
 />
 </p>
 
-### Feedback and surveys
+Sentry's figures assume the Team plan billed monthly ($29 base) with reserved replay volume; PostHog's are web recordings with no base fee.
 
-Feedback in Sentry is connected to errors and included as part of the price. It is built to capture feedback, bug reports, and crash reports.
-
-[Surveys](/surveys) in PostHog are a standalone product with more customization and targeting options.
+### Logs
+ 
+Both products now ship centralized log management, which matters because logs are usually the second thing you open after an error.
+ 
+- **PostHog [Logs](/logs)** is generally available with 10 GB a month free, then $0.25 per GB. Logs link to the session replay and error that produced them, so the trail from a failing request to what the user saw is one click.
+- **Sentry Logs** became generally available in September 2025, with 5 GB a month free on every plan, then $0.50 per GB. It sits alongside errors and traces in Sentry's Explore view.
 
 <p>
 <ProductComparisonTable
     competitors={['posthog', 'sentry']}
     rows={[
-        'surveys.question_types.freeform_text',
-        'surveys.question_types.rating',
-        'surveys.question_types.multiple_choice',
-        'surveys.branching.multi_step_surveys',
-        'surveys.templates.survey_templates',
-        'surveys.targeting.event_triggered',
-        'surveys.targeting.custom_targeting',
-        'surveys.presentation.custom_ui',
-        'surveys.implementation.api_access',
-        { label: 'Free allowance', description: 'Free responses per month', values: ['1,500', 'Included'] },
+        'logs.pricing.free_tier',
+        'logs.core_logging_and_ingestion.retention',
+        'logs.core_logging_and_ingestion.native_open_telemetry_ingest',
+        'logs.core_logging_and_ingestion.live_tail_real_time_logs',
+        'logs.search.full_text_search',
+        'logs.search.no_proprietary_query_language',
+        'logs.debugging_integrations.built_in_session_replay',
+        'logs.debugging_integrations.product_analytics_context',
+        'logs.observability.metrics',
+        'logs.observability.code_level_profiling',
     ]}
 />
 </p>
@@ -176,7 +199,7 @@ Feedback in Sentry is connected to errors and included as part of the price. It 
 
 On the flip side to error and performance monitoring, analytics is a main focus of PostHog where it shines compared to Sentry.
 
-Sentry does have some analytics capabilities but it is limited compared to PostHog's full suite of product analytics features. On top of this, many of Sentry's features like insights and advanced dashboard controls are exclusive to their more expensive business plan.
+Sentry does have some analytics capabilities, but they're limited compared to PostHog's full suite of product analytics features. Sentry replaced its Insights pages with pre-built Dashboards in 2026; custom dashboards are capped at 10 on the free plan and 20 on Team, and anomaly detection and trend analysis remain Business-only.
 
 <p>
 <ProductComparisonTable
@@ -198,6 +221,30 @@ Sentry does have some analytics capabilities but it is limited compared to PostH
 -   An error in Sentry and an event in PostHog are relatively similar. Using this as a basis, PostHog has a 200x higher free tier (5k vs 1M).
 
 -   Sentry only autocaptures errors. If you really wanted to use it to capture clicks and pageviews, you would need to do so manually.
+
+### Feedback and surveys
+
+Feedback in Sentry is connected to errors and included on every plan. Its widget supports theme, text, position, and screenshot customization, but it's a bug-report widget: there are no question types, branching, or targeting.
+ 
+[Surveys](/surveys) in PostHog are a standalone product with more customization and targeting options.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'sentry']}
+    rows={[
+        'surveys.question_types.freeform_text',
+        'surveys.question_types.rating',
+        'surveys.question_types.multiple_choice',
+        'surveys.branching.multi_step_surveys',
+        'surveys.templates.survey_templates',
+        'surveys.targeting.event_triggered',
+        'surveys.targeting.custom_targeting',
+        'surveys.presentation.custom_ui',
+        'surveys.implementation.api_access',
+        { label: 'Free allowance', description: 'Free responses per month', values: ['1,500', 'Included'] },
+    ]}
+/>
+</p>
 
 ### Security and compliance
 
@@ -237,11 +284,20 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 />
 </p>
 
+### AI agents and MCP
+ 
+Both companies are building on the idea that an agent, not a person, should do the first pass on an error.
+ 
+- **Sentry** has Seer, a paid add-on ($40 per active contributor per month, not available on the free plan) that scans issues, finds root causes, and can open fix PRs, and a hosted MCP server that lets Claude, Cursor, and other clients query your Sentry data.
+- **PostHog** has [PostHog AI](/ai) for asking questions and generating fixes, [Scouts](/blog/what-is-a-scout) that watch your product data and send reports to an [Inbox](/docs/self-driving/inbox) where agents pick them up and open PRs (in beta, three PRs a month free), a free [MCP server](/mcp) with a read-only mode, and a [Slack app](/slack) you can tag in a thread to ask a question or ship a fix.
+
+The difference is scope. Seer works from the error outward. PostHog's agents work from everything the product knows about the user, the session, the flags they saw, and the error, which is the same context argument that runs through this whole comparison.
+
 ## When to choose PostHog vs Sentry
 
 Choosing the right error tracking tool depends on what problem you're solving. Here's a quick guide:
 
-- Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, and more? Go with **PostHog**.
+- Want one platform where every error arrives with the [session replay](/session-replay), [feature flags](/feature-flags), [logs](/logs), and user context behind it, feeds [analytics](/product-analytics), [experiments](/experiments), and a [data warehouse](/context-warehouse) you can query with SQL, and works from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp), all on a free tier most teams never outgrow? Go with **PostHog**.
 
 - Need deep stack traces, distributed tracing, and mature error triage workflows? **Sentry** is probably the right choice.
 
@@ -255,6 +311,9 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 
 **For mobile-focused teams**
 - **Sentry** – More mature crash symbolication, native SDK support, and longer track record with complex mobile debugging.
+
+**For teams building AI features**
+- **PostHog** – AI features fail twice over: the exception your code throws when a provider times out, and the generation that returns fine but gives the user a bad answer. [Error tracking](/error-tracking) catches the first and [AI observability](/ai-observability) catches the second, capturing every LLM generation and trace with its cost, latency, and output, and both land in the same session next to the [replay](/session-replay), so you can see which prompts fail, who they fail for, and what they cost.
 
 **For privacy-conscious and regulated organizations**
 - Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/context-warehouse). **Sentry** provides BAA agreements and enterprise compliance packages.
@@ -277,7 +336,18 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 ## Frequently asked questions
 
 <details>
-<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+It means the data an agent needs to diagnose a problem, spot an opportunity, and ship a fix all exits in one place. [Error tracking](/error-tracking), [session replay](/session-replay), [logs](/logs), [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), and [AI observability](/ai-observability) all write to the same place and share one model of users and sessions, so a stack trace arrives with the replay of what the user did, the flags they were in, and the logs your server wrote at the same moment.
+
+The [data warehouse](/context-warehouse) and [CDP](/cdp) close the loop: business data from Stripe, HubSpot, Postgres, and other sources is synced in alongside your product data, and anything can be pushed back out to the tools you already use. 
+
+And you don't have to be in PostHog to use it. Ask a question or hand off a fix from [Slack](/slack), the [web app](/ai), [PostHog Desktop](/desktop), or your own editor via [the MCP](/mcp), and the agent sees your whole product, not just its errors.
+
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – how does that work?</summary>
 
 It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
 
@@ -292,7 +362,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), or your own editor vi
 <details>
   <summary>What's the difference between PostHog and Sentry?</summary>
 
-**Sentry** focuses primarily on deep error monitoring and performance tracing. **PostHog** provides a broader context by combining error tracking with product analytics, session replays, feature flags, and more.
+**Sentry** focuses primarily on deep error monitoring and performance tracing. **PostHog** provides broader data context by combining error tracking with product analytics, session replays, feature flags, and more.
 
 </details>
 
@@ -316,10 +386,11 @@ Key features to evaluate include: automatic error grouping (so you're not floode
 Sentry has three tiers:
 
 1. Developer: $0, 5k errors, 1 user
-2. Team: $26/m, 50k errors, unlimited users
-3. Business: $80/m, 50k errors, unlimited users
+2. Team: $29/month ($26 billed annually), 50k errors, unlimited users
+3. Business: $89/month ($80 billed annually), 50k errors, unlimited users
+4. Enterprise: custom pricing
 
-Each of these includes unlimited projects, 5M traces, 50 replays, 1 cron monitor, and 1GB of attachments. More errors, traces, replays, and attachments cost more.
+Each self-serve tier includes unlimited projects, 5M spans, 50 replays, 5 GB of logs, 5 GB of application metrics, 1 GB of attachments, 1 cron monitor, and 1 uptime monitor. More errors, spans, replays, logs, and attachments cost more. Profiling and Seer, Sentry's AI debugging agent ($40 per active contributor per month), are paid extras that aren't available on the Developer plan.
 
 </details>
 
@@ -327,7 +398,7 @@ Each of these includes unlimited projects, 5M traces, 50 replays, 1 cron monitor
   <summary>Does Sentry or PostHog offer free trials?</summary>
 
 Do you know what is better than a free trial? Being free forever. This is what we believe at **PostHog** and means you can get all of the features for free, no trial needed.
-
+ 
 **Sentry** has a 14-day free trial for paid features.
 
 </details>
@@ -336,6 +407,8 @@ Do you know what is better than a free trial? Being free forever. This is what w
   <summary>How long does it take to implement PostHog?</summary>
 
 You can get started with **PostHog** in less than 90 seconds using our [AI install wizard](/wizard). Once done, it begins autocapturing events and recordings. [Feature flags](/docs/feature-flags/installation), [A/B tests](/docs/experiments/installation), and [surveys](/docs/surveys) require a bit more setup to create and implement.
+
+<WizardCTA />
 
 </details>
 
@@ -349,9 +422,9 @@ See our docs on using [PostHog with a CDP](/docs/advanced/cdp) for setup instruc
 </details>
 
 <details>
-  <summary>What are the best error tracking tools in 2026?</summary>
+  <summary>What are the best error tracking tools?</summary>
 
-The top error tracking tools for developers in 2026 include:
+The top error tracking tools for developers include:
 
 - **PostHog** – Best all-in-one platform combining error tracking with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), and more
 - **Sentry** – Best for deep error monitoring and performance tracing
@@ -424,16 +497,14 @@ Both **PostHog** and **Sentry** let you customize alert thresholds and notificat
 <details>
   <summary>What languages and frameworks do PostHog and Sentry support?</summary>
 
-Both platforms offer broad SDK support. Sentry supports 100+ platforms including JavaScript, Python, Ruby, PHP, Go, Java, .NET, React, Vue, Angular, iOS (Swift/Objective-C), Android (Java/Kotlin), React Native, Flutter, Unity, and Unreal Engine. [PostHog](/docs/libraries) supports JavaScript, Python, Ruby, PHP, Go, Node.js, React, Next.js, Vue, iOS, Android, React Native, and Flutter. For error tracking specifically, **Sentry** has deeper language coverage due to its longer history as a dedicated error monitoring tool.
+Both platforms offer broad SDK support. Sentry supports 100+ platforms including JavaScript, Python, Ruby, PHP, Go, Java, .NET, React, Vue, Angular, iOS (Swift/Objective-C), Android (Java/Kotlin), React Native, Flutter, Unity, and Unreal Engine. [PostHog](/docs/libraries) has 19 official SDKs: JavaScript, Node.js, Python, Ruby, PHP, Go, Java, .NET, Rust, Elixir, iOS, Android, React Native, Flutter, Kotlin Multiplatform, Capacitor, Unity, Roblox, and React, plus framework guides for Next.js, Vue, and others. For error tracking specifically, **Sentry** has deeper language coverage due to its longer history as a dedicated error monitoring tool.
 
 </details>
 
 <details>
   <summary>What's the learning curve for each platform?</summary>
 
-Both platforms are designed for quick setup. **Sentry** and **PostHog** offer [comprehensive documentation](/docs/error-tracking), active community support, and autocapture features that start collecting data immediately after SDK installation, no manual instrumentation required for basic usage.
-
-**PostHog** also offers an [AI install wizard](/docs/getting-started/install?tab=wizard) that gets you up and running in under 90 seconds. The broader feature set (analytics, replays, flags, experiments) means there's more to explore, but you can adopt features incrementally as your needs grow.
+**PostHog** also offers an [AI install wizard](/wizard) that gets you up and running in under 90 seconds. The broader feature set (analytics, replays, flags, experiments) means there's more to explore, but you can adopt features incrementally as your needs grow.
 
 </details>
 

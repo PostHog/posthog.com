@@ -101,7 +101,7 @@ export const posthog = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                log_management: 'Beta',
+                log_management: true,
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
@@ -184,6 +184,13 @@ export const posthog = {
                     heatmaps: true,
                 },
             },
+            ai: {
+                features: {
+                    ai_summaries: true,
+                    replay_vision: true,
+                    ai_observations_as_events: true,
+                },
+            },
         },
         logs: {
             available: true,
@@ -242,6 +249,7 @@ export const posthog = {
                     ingest_only_pricing: true,
                     no_query_compute_fees: true,
                     predictable_at_scale: true,
+                    free_tier: '10 GB',
                 },
             },
         },
@@ -843,6 +851,9 @@ export const posthog = {
                 react: true,
                 ruby: true,
                 rust: true,
+                roblox: true,
+                unity: true,
+                kotlin_multiplatform: true,
             },
         },
         pricing: {

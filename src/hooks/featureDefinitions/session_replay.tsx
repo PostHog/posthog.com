@@ -126,6 +126,15 @@ export const sessionReplayFeatures = {
                 name: 'AI summaries',
                 description: 'AI-generated summaries of session recordings',
             },
+            replay_vision: {
+                name: 'AI scanners across recordings',
+                description:
+                    'Point configurable AI scanners at many sessions to flag dead ends, frustration, intent, and outcomes, with citations to the exact moment in each recording',
+            },
+            ai_observations_as_events: {
+                name: 'AI findings as events',
+                description: 'Each AI observation is logged as an event you can chart, filter, and alert on',
+            },
         },
     },
     targeting: {
