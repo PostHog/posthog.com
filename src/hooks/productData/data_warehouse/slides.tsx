@@ -43,7 +43,7 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     The Warehouse is a database with its own hostname and credentials. Connect the tools your team
-                    already uses, and their queries run on the Warehouse, not on the queries that power PostHog.
+                    already uses to query the Warehouse, not on the queries that power PostHog.
                 </p>
                 {list([
                     {
@@ -212,7 +212,7 @@ export const topFeatures: CarouselSlide[] = [
             <>
                 <p>
                     When a source table gains new columns, PostHog asks how to handle them, so a schema change doesn't
-                    silently break your data.
+                    break your data without you noticing.
                 </p>
                 {list([
                     { label: 'Sync forward only', description: 'New columns fill in for new data from now on.' },
