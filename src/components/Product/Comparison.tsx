@@ -41,7 +41,7 @@ const companies = {
         comparisonURL: '/compare/posthog-vs-logrocket',
     },
     Sentry: {
-        comparisonURL: '/blog/posthog-vs-sentry',
+        comparisonURL: '/compare/posthog-vs-sentry',
     },
     VWO: {
         comparisonURL: '',
