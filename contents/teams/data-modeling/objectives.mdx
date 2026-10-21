@@ -1,48 +1,50 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
-### Objective 1: Semantic layer (owner: Thiago)
+### Objective 1: Semantic layer (owner: Sinan)
 
-**Motivation:** We are increasingly hearing about inconsistency issues when an agent writes a query or an insight based on its assumptions around a definition. Same problem of "what's the source of truth?" like we humans have, but agent-amplified.
-
-**What we'll ship:**
-- A central semantic layer for all metrics and definitions parts of PostHog that need to do analysis or generate queries on top of a user's shared business understanding
-
-### Objective 2: Integration with the warehouse (owner: Jovan)
-
-**Motivation:** We need to move workloads away from ClickHouse and onto the warehouse — modeling and endpoints included.
+**Motivation:** The biggest bottleneck for the semantic layer is getting metrics and definitions into it. Users also can't see how much of their analysis it covers, so they don't know what to add or how far to trust it.
 
 **What we'll ship:**
-- Endpoints execution running solely on the warehouse with appropriate compute control
-- Move materialization jobs to the warehouse, and limit usage on CH
-- Support pricing and billing instrumentation
+- A coverage mechanism that shows how often metrics are used, what they cover, and what's missing
+- An open spec (OSI-like DSL) for defining the semantic layer
+- A clear split between the semantic layer and the context layer, and what specialized agents on top of them look like
+- Exploration: a standalone semantic layer, depending on demand
+- Answer the question: how do we increase trust in data across all users?
 
-### Objective 3: Version control (owner: Jovan)
+### Objective 2: Self-driving warehouse (owner: Thiago)
 
-**Motivation:** While data modeling can happen inside PostHog, lack of version control makes it difficult to collaborate and safely make changes.
-
-**What we'll ship:**
-- An easy way for agents and humans to interact with their git-based data modeling project
-- And enable a development workflow that doesn't impact the production models
-
-### Objective 4: Testing (owner: Thiago)
-
-**Motivation:** Our agent's SQL writing has significantly improved, but we still have the verifiability gap where the users do not have a way of checking whether the models they build act as intended.
+**Motivation:** Most people don't know which views, materialized views, endpoints, or metrics they need. We can see what they query, so we should act as their data engineer and propose those changes to them.
 
 **What we'll ship:**
-- Schema and data tests for data models
-- That are integrated into the version control workflow
-- And easily used by agents
+- Recommendations on what to materialize, certify, and deprecate, and how to configure materializations
+- Metric proposals based on what users actually query
+- Query optimization and fixes for slow views and endpoints
+- Integration with the Inbox
+- Recommendations delivered through the version control workflow for data modeling
 
-### Side quest 1 (owner: Anna)
+### Objective 3: Modeling on the managed warehouse (owner: Jovan)
 
-**Motivation:** Not every customer has custom and complex data modeling needs. Some are very standard and can be templated into models that take a customer from 0 to 1 in modeling their revenue / active users / attribution.
+**Motivation:** We need to move data modeling workloads off ClickHouse and onto the managed warehouse, so we can charge for modeling and give customers compute that scales with them.
 
 **What we'll ship:**
-- A set of skills that provide all the context to an agent around what data models it needs to create in PostHog and how to verify them
+- PostHog's own revenue dbt project running on data modeling
+- All data models running on Trino
+- Faster modeling jobs on Trino
+- A defined transition from ClickHouse to Trino, including limits on ClickHouse and benchmarks against Snowflake and BigQuery
+- Revenue tracking for modeling downstream of the managed warehouse
 
-### Side quest 2 (owner: Anna)
+### Objective 4: Version control (owner: Jovan)
 
-**Motivation:** We need to stay on top of the data space and how it's evolving. A lot has happened recently, and we want to make sure that what we're building is aligned with the field.
+**Motivation:** dbt is ahead of us on trust. To compete, data teams need versioned models and tests they can review and roll back, the same way they work today.
 
-**What we'll do:**
-- Introduce recurring data space wrap-up research automation
+**What we'll ship:**
+- A git-backed, dbt-style data modeling workflow for agents and humans, including data quality checks
+- A CLI to manage the project
+- A way to take over your PostHog data modeling project and host it yourself
+- Integration with Trino
+- PostHog's own revenue dbt project managed this way
+
+### Stretch: Python in the modeling lineage (owner: Sinan)
+
+**What we'll ship:**
+- Run a Python script as a step in a larger modeling lineage
