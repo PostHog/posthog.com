@@ -38,22 +38,24 @@ Both feed signals into the same pipeline. A single problem usually shows up as s
 
 Neither is the upgrade from the other, and most projects run both. They make a real trade against each other, and knowing which way it runs is what tells you where to point each one.
 
-**A signal source is deterministic and exhaustive.** Turn on error tracking as a source and every qualifying signal in that stream gets processed, continuously, as it happens. Nothing is skipped because an agent weighed it and decided it wasn't interesting. You can reason about coverage: the behavior is the same today and next month, and there's no bar for something to clear.
+**A signal source is continuous and predictable, but you can steer it.** By default, qualifying records pass through the source's actionability gate. In the source settings, you can add plain-language rules about what matters, what to skip, and what is out of scope. You can also choose a strict default that keeps only records that clearly match the actionable criteria. These rules apply from the next sync and do not remove signals already in your inbox.
 
-**A scout trades some of that determinism for judgement.** It runs on a schedule rather than continuously, explores rather than following a fixed stream, and decides what clears the bar you set – so it can weigh, rank, cluster, and stay quiet on a quiet day, but it isn't exhaustive by design and it's making a call each run.
+Without steering, a source processes every qualifying item in its stream. With steering, coverage is intentionally selective, so use an unsteered source when missing any qualifying item is unacceptable.
+
+**A scout trades some of that predictability for judgement.** It runs on a schedule rather than continuously, explores rather than following a fixed stream, and decides what clears the bar you set – so it can weigh, rank, cluster, and stay quiet on a quiet day, but it isn't exhaustive by design and it's making a call each run.
 
 | | **Signal sources** | **Scouts** |
 |---|---|---|
-| **Coverage** | Exhaustive – every qualifying item in the stream | Selective – what clears the bar, holding the rest |
+| **Coverage** | Every qualifying item in the stream, or selective when steering rules are set | Selective – what clears the bar, holding the rest |
 | **Timing** | Continuous, as events arrive | Scheduled, from every 30 minutes to every 30 days |
-| **Behavior** | Predictable and repeatable | Uses judgement each run; ranks, clusters, and weighs |
+| **Behavior** | Predictable and repeatable, including any steering rules you set | Uses judgement each run; ranks, clusters, and weighs |
 | **Scope** | One stream, deeply | Across surfaces, or any slice you point it at |
 | **Setup** | Toggle it on | Authored – you describe what's worth your attention |
-| **Tuning** | Configuration | Steerable in plain English, and it learns between runs |
+| **Tuning** | Configuration, plus optional plain-language steering rules | Steerable in plain English, and it learns between runs |
 
-So: reach for a **source** when the stream is well-defined and missing an item would be unacceptable. Reach for a **scout** when everything in the stream is technically "something" and you need judgement applied, when the interesting thing spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define.
+So: reach for a **source** when the stream is well-defined and missing an item would be unacceptable, and leave it unsteered. Reach for a **scout** when everything in the stream is technically "something" and you need judgement applied, when the interesting thing spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define.
 
-They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its deterministic coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned. An issue tracker splits cleanly this way. The GitHub Issues or Linear source catches each new issue as it arrives. A scout re-reads the open backlog and finds the issues whose state changed after someone filed them.
+They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its continuous coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned. An issue tracker splits cleanly this way. The GitHub Issues or Linear source catches each new issue as it arrives. A scout re-reads the open backlog and finds the issues whose state changed after someone filed them.
 
 ## From signals to reports
 
