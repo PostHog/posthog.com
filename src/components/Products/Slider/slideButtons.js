@@ -1,5 +1,4 @@
 import {
-    IconCorrelationAnalysis,
     IconDatabase,
     IconDashboard,
     IconFlask,
@@ -33,11 +32,6 @@ export const slideButtons = [
         title: 'User paths',
         Icon: IconUserPaths,
         color: 'teal',
-    },
-    {
-        title: 'Correlation analysis',
-        Icon: IconCorrelationAnalysis,
-        color: 'purple',
     },
     {
         title: 'Retention',

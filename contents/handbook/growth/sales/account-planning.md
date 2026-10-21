@@ -85,7 +85,7 @@ Collect as much context as you can about the customer and their goals. Look for 
 
 This can be easily checked in Vitally. Thinking through this in a structured fashion may be helpful when taking on a new account.
 
-- Asses the usage or maturity level for each product: Basic (simple insights), Intermediate (custom events, funnels), Advanced (correlation analysis, complex flags)    
+- Asses the usage or maturity level for each product: Basic (simple insights), Intermediate (custom events, funnels), Advanced (SQL, complex flags)    
 
 #### A. Underutilized products & cross-sell mapping:
 
@@ -103,7 +103,7 @@ In Vitally, you can often easily identify which products are underutilized or no
 
 #### B. Optimization opportunities (for existing products):
 
-- "Not using custom events enough; could help them track X more granularly." "Could benefit from more complex funnels to understand Y." "Haven't explored correlation analysis for Z." "Feature flags could be used for targeted rollouts to segment A."
+- "Not using custom events enough; could help them track X more granularly." "Could benefit from more complex funnels to understand Y." "Feature flags could be used for targeted rollouts to segment A."
 
 ### VII. Context / suggestions from others at PostHog:
 

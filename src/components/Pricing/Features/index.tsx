@@ -5,7 +5,6 @@ import {
     Analytics,
     API,
     AppLibrary,
-    CorrelationAnalysis,
     DataWarehouse,
     EventAutocapture,
     EventPipelines,
@@ -38,7 +37,6 @@ const features: IFeature[] = [
     { title: 'Feature flags', icon: <FeatureFlags /> },
     { title: 'Heatmaps', icon: <Heatmaps /> },
     { title: 'Experiments', icon: <AbTesting /> },
-    { title: 'Correlation analysis', icon: <CorrelationAnalysis /> },
     { title: 'Group analytics', icon: <GroupAnalytics /> },
     { title: 'Team collaboration', icon: <TeamCollaboration /> },
 ]

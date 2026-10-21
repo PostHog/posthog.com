@@ -27,7 +27,6 @@ export const ga4 = {
                     available: true,
                     features: {
                         conversion_funnels: true,
-                        correlation_analysis: false,
                     },
                 },
                 retention: {
