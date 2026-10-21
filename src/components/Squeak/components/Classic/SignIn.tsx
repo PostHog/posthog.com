@@ -58,7 +58,9 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
             if (!user) {
                 setErrorMessage('There was an error signing in. Please try again.')
             } else if ('error' in user) {
-                setErrorMessage(errorMessages[user?.error] || user?.error)
+                setErrorMessage(
+                    errorMessages[user?.error] || user?.error || 'There was an error signing in. Please try again.'
+                )
             } else {
                 addToast({
                     title: 'Successfully signed in to PostHog.com',
