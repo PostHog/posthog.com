@@ -38,7 +38,7 @@ Sometimes you just need to rank for things, so others don’t, such as:
 *   How to integrate your product with other popular ones
 *   The best tools in your product category
     
-This is why we have articles comparing [PostHog and Sentry](/blog/posthog-vs-sentry), or guides to [open source analytics tools](/blog/best-open-source-analytics-tools).
+This is why we have articles comparing [PostHog and Sentry](/blog/posthog-vs-sentry), or guides to [open source analytics tools](/compare/best-open-source-analytics-tools).
 
 Content like this can serve as sales collateral, but it’s also high-intent, so it helps you acquire new users and supports word-of-mouth. Even if someone doesn’t end up using your product, they might tell someone else about it.
 
