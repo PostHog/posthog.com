@@ -10,6 +10,10 @@ import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { Tweet } from 'components/Tweet'
+import Toggle from 'components/Toggle'
+import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby'
+import usePostHog from 'hooks/usePostHog'
 
 const termsClasses = cntl`
   full-terms
@@ -49,6 +53,13 @@ const termsClasses = cntl`
   @2xl:[&>div:nth-child(even)]:border-primary
   [&>div:nth-child(odd)_p]:text-[15px]
   [&>div:nth-child(even)>p]:text-lg
+`
+
+const legalModeTermsClasses = cntl`
+  legal-mode
+  @2xl:!grid-cols-1
+  [&>div:nth-child(even)]:hidden
+  [&>div:first-child>p]:hidden
 `
 
 const sectionAnchors: Record<string, string> = {
@@ -114,6 +125,26 @@ function SectionLink({ section, label }: { section: string; label?: string }) {
 
 function Terms() {
     const [headers, setHeaders] = useState<HTMLElement[]>([])
+    const [legalMode, setLegalMode] = useState(false)
+    const { pathname, search, hash } = useLocation()
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        setLegalMode(new URLSearchParams(search).get('mode') === 'legal')
+    }, [search])
+
+    const handleLegalModeChange = (checked: boolean) => {
+        setLegalMode(checked)
+        posthog?.capture('terms_legal_mode_toggled', { enabled: checked })
+        const params = new URLSearchParams(search)
+        if (checked) {
+            params.set('mode', 'legal')
+        } else {
+            params.delete('mode')
+        }
+        const query = params.toString()
+        navigate(`${pathname}${query ? `?${query}` : ''}${hash}`, { replace: true })
+    }
 
     useEffect(() => {
         const fullTerms = document.querySelector('.full-terms')
@@ -130,7 +161,13 @@ function Terms() {
         >
             <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
             <div className="prose dark:prose-invert">
-                <div className="@container/legal-content max-w-2xl mx-auto py-4 @2xl:py-8">
+                <div className="flex justify-end max-w-6xl mx-auto px-4 lg:px-8 pt-4 print:hidden">
+                    <Toggle checked={legalMode} onChange={handleLegalModeChange} label="Boring legal mode" />
+                </div>
+                {legalMode && <h1 className="max-w-6xl mx-auto px-4 lg:px-8 pt-4 mb-0">PostHog Terms of Service</h1>}
+                <div
+                    className={`@container/legal-content max-w-2xl mx-auto py-4 @2xl:py-8 ${legalMode ? 'hidden' : ''}`}
+                >
                     <h1 className="text-5xl text-center">
                         Terms,{' '}
                         <span className="whitespace-nowrap text-red dark:text-yellow">
@@ -256,11 +293,14 @@ function Terms() {
                     </Tweet>
                 </div>
 
-                <h2 id="full-terms" className="text-[2.5rem] mb-4 md:mb-8 px-4 md:text-center">
+                <h2
+                    id="full-terms"
+                    className={`text-[2.5rem] mb-4 md:mb-8 px-4 md:text-center ${legalMode ? 'hidden' : ''}`}
+                >
                     The full <span className="text-red dark:text-yellow">(but still easy to understand)</span> terms
                 </h2>
 
-                <div className="max-w-2xl mx-auto">
+                <div className={`max-w-2xl mx-auto ${legalMode ? 'hidden' : ''}`}>
                     <p className="">For your sanity, we've summarized each paragraph of legalese with plain English.</p>
                     <p className=" text-secondary">
                         (This was inspired by{' '}
@@ -311,7 +351,7 @@ function Terms() {
                     </ol>
                 </div>
 
-                <div className={`${termsClasses}`}>
+                <div className={`${termsClasses} ${legalMode ? legalModeTermsClasses : ''}`}>
                     <div>
                         <h2 id="intro" className="mb-1 text-4xl">
                             The full Terms of Service

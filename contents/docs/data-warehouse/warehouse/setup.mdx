@@ -24,9 +24,9 @@ Setting up the warehouse takes a few minutes: you pick a name, PostHog provision
 1. Go to [Data ops](https://app.posthog.com/data-ops) and open the **Settings** tab.
 2. Choose a **warehouse name** – lowercase letters, numbers, and hyphens. This becomes the subdomain you connect to: pick `my-warehouse` and your host is `my-warehouse.dw.us.postwh.com` (or `.dw.eu.postwh.com` on EU Cloud). PostHog checks availability as you type.
 3. Choose a **schema name** for the current project – lowercase letters, numbers, and underscores. This names your project's schema and its tables, so a schema name of `prod` gives you `events_prod` and `persons_prod`. Choose carefully: the schema name can't be changed later.
-4. Click **Provision warehouse**, and **save the password it returns**. It's shown exactly once. If you lose it, an admin can use **Reset password** in the same Settings tab to generate a new one (which invalidates the old one immediately).
+4. Click **Provision warehouse**, and **save the password it returns**. It's shown exactly once. If you lose it, an admin can use **Reset password** in the same Settings tab to generate a new one. The new password can take up to five minutes to apply.
 
-Provisioning runs in the background and should take less than 5 minutes. The Settings tab shows the state as it moves through provisioning to ready, and once ready it displays your full connection details.
+Provisioning runs in the background and should take less than 5 minutes. The Settings tab shows the state as the warehouse and its query engine move through provisioning to ready, and once ready it displays your full connection details.
 
 ## Watch your data arrive
 
@@ -47,6 +47,8 @@ Each dataset shows one of these statuses:
 | Not configured | This dataset isn't enabled for the warehouse |
 
 You don't need to wait for backfills to finish before connecting – data that's already landed is queryable immediately.
+
+The **Monitoring** tab shows the queries in flight in your warehouse – running, queued, and blocked – against your organization's limits on running and queued queries.
 
 ## Add sources
 

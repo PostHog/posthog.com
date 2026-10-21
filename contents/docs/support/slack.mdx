@@ -13,8 +13,15 @@ This is separate from PostHog's main Slack integration (used for alerts and dash
 1. Go to **Support** > **Settings** in PostHog
 2. Click **Add SupportHog to Slack**
 3. Authorize the app in your Slack workspace
-4. Select a **support channel** – messages posted there automatically become tickets
-5. You're redirected back to PostHog settings
+4. Select one or more **support channels**. Messages posted there automatically become tickets
+5. In each of those channels, invite the bot: `/invite @SupportHog`. The bot only sees channels it has been invited to
+6. You're redirected back to PostHog settings
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_16_53_502675fbe8.png"
+    alt="Connecting Slack"
+    classes="rounded"
+/>
 
 <CalloutBox icon="IconInfo" title="One workspace per project" type="fyi">
 
@@ -28,14 +35,15 @@ After connecting, configure the integration in **Support** > **Settings**:
 
 | Setting             | Description                                                                                                                                        | Default    |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages.                                                  | –          |
-| **Ticket emoji**    | React with this emoji on any message in any channel to create a ticket from it.                                                                    | `:ticket:` |
-| **Bot mentions**    | Always active – `@SupportHog` in any channel creates a ticket from that message.                                                                   | –          |
-| **Ticket nudges**   | When enabled, SupportHog prompts users in non-support channels to open a ticket via a threaded reply with **Open ticket** / **No thanks** buttons. | On         |
+| **Support channels** | Every top-level message in these channels becomes a ticket. Thread replies sync as ticket messages. Invite SupportHog to each one.                    | –          |
+| **Ticket emoji**     | React with this emoji on any message in any channel to create a ticket from it.                                                                     | `:ticket:` |
+| **Bot mentions**     | Always active – `@SupportHog` in any channel the bot is in creates a ticket from that message.                                                      | –          |
+| **Ticket nudges**    | When enabled, SupportHog prompts users in non-support channels to open a ticket via a threaded reply with **Open ticket** / **No thanks** buttons. | On         |
+| **Bot appearance**   | Optional display name and icon URL for messages SupportHog posts. Leave both blank to use the defaults. Re-authorize the bot if you connected it before this setting existed. | Defaults   |
 
-### Picking a support channel
+### Picking support channels
 
-When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select the channel you want to use as your dedicated support inbox.
+When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select every channel you want to use as a support inbox. If a channel is missing, run `/invite @SupportHog` in that channel, then click **Refresh**.
 
 ## How tickets are created
 
@@ -43,7 +51,7 @@ There are four ways a Slack message becomes a support ticket:
 
 ### 1. Support channel messages
 
-Any top-level message in your configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
+Any top-level message in a configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
 
 ### 2. Bot mentions
 
@@ -76,8 +84,31 @@ All four methods:
 - Set `channel_source` to `slack` on the ticket
 - Resolve the Slack user's name, email, and avatar
 - Convert Slack message formatting to PostHog's rich text format
-- Download and re-host any image attachments (up to 4 MB per image)
+- Download and re-host attachments (up to 20 MiB per file, and up to 20 files per message)
 - Post a confirmation reply in the Slack thread with the ticket number and a link to view it in PostHog
+
+## Shared channels (Slack Connect)
+
+SupportHog works in Slack Connect channels you share with customers. This is the setup PostHog uses with enterprise customers.
+
+- Top-level messages, `@SupportHog` mentions, and the ticket emoji create tickets the same way they do in an internal channel.
+- Thread replies still sync both ways.
+- Link unfurls do not run in shared, externally shared, or org-shared channels. Ticket creation is not affected.
+
+## Permissions
+
+SupportHog asks for these Slack scopes when you install it. An install from before a scope was added keeps working without that scope. To turn on file sync or **Bot appearance** on an older install, reconnect the app.
+
+| Scope | What it is for |
+| --- | --- |
+| `channels:history`, `groups:history` | Read messages in public and private channels |
+| `channels:read`, `groups:read` | List the channels the bot can join |
+| `chat:write` | Post ticket confirmations and replies |
+| `chat:write.customize` | Use the display name and icon from **Bot appearance** |
+| `files:read`, `files:write` | Download inbound files and upload images from PostHog replies |
+| `links:read`, `links:write` | Unfurl PostHog links in internal channels |
+| `reactions:read` | See the ticket emoji |
+| `users:read`, `users:read.email` | Resolve the Slack user's name, email, and avatar |
 
 ## Two-way sync
 
@@ -110,6 +141,6 @@ You can filter the ticket list by channel source to see only Slack tickets.
 To remove the Slack integration:
 
 1. Go to **Support** > **Settings**
-2. Click **Disconnect** in the Slack section
+2. Click **Remove SupportHog bot** in the Slack section, then confirm
 
 Existing tickets created from Slack are not affected – they remain in your inbox but no longer sync new messages.

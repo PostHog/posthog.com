@@ -9,7 +9,7 @@ availability:
 sourceId: Paddle
 ---
 
-The Paddle connector syncs customers, discounts, prices, products, subscriptions, transactions, and adjustments from your Paddle account into PostHog.
+The Paddle connector syncs customers, discounts, prices, products, subscriptions, transactions, adjustments, and explore metrics from your Paddle account into PostHog.
 
 ## Adding a data source
 
@@ -18,7 +18,6 @@ The Paddle connector syncs customers, discounts, prices, products, subscriptions
 2. Click **+ New source** and then click **Link** next to Paddle.
 
 3. Next, you need an API key from Paddle. In your Paddle dashboard, go to **Developer tools** > **Authentication** and click **New API key**. Give the key a name and grant it **Read** access to the following entities:
-
    - Customers
    - Discounts
    - Prices
@@ -26,6 +25,7 @@ The Paddle connector syncs customers, discounts, prices, products, subscriptions
    - Subscriptions
    - Transactions
    - Adjustments
+   - Metrics (only required for the `explore_metrics` table — a key without this permission can still sync all other tables)
 
    Copy the generated API key (it starts with `pdl_live_...` for live keys or `pdl_sdbx_...` for sandbox keys).
 
@@ -45,4 +45,4 @@ Once the syncs are complete, you can start using Paddle data in PostHog.
 
 ## Sync methods
 
-Only the `transactions` table supports incremental and append-only syncing, using `billed_at` as the replication key. All other tables (customers, discounts, prices, products, subscriptions, and adjustments) are synced via full table refresh.
+The `transactions` and `explore_metrics` tables support incremental syncing. The `transactions` table uses `billed_at` as its replication key, while `explore_metrics` uses `timestamp`. All other tables (customers, discounts, prices, products, subscriptions, and adjustments) are synced via full table refresh.

@@ -12,7 +12,7 @@ Need access first? [Join the waitlist](/warehouse), then [set up your warehouse]
 
 </CalloutBox>
 
-The warehouse speaks the PostgreSQL wire protocol, so you connect with the same clients, drivers, and BI tools you'd point at any Postgres database. No PostHog-specific SDK involved.
+The warehouse runs on [PostHog's fork of Trino](https://github.com/PostHog/trino), which keeps Trino's standard client protocol. You connect with the same clients, drivers, and BI tools you'd point at any Trino cluster. No PostHog-specific SDK involved.
 
 ## Connection details
 
@@ -21,18 +21,37 @@ Your connection details live in [Data ops](https://app.posthog.com/data-ops) und
 | Field | Value |
 |---|---|
 | Host | `<your-warehouse-name>.dw.us.postwh.com` (US) or `<your-warehouse-name>.dw.eu.postwh.com` (EU) |
-| Port | `5432` |
-| Database | `ducklake` – always, regardless of warehouse name |
+| Port | `443` |
+| Catalog | Shown in the Settings tab, derived from your warehouse name – e.g. `org_my_warehouse` |
 | Username | `root` |
 | Password | Shown once at provisioning; reset it from the Settings tab if lost |
 
-TLS is required, so include `sslmode=require`. A complete `psql` connection looks like:
+Connections use HTTPS, so always connect with TLS. A complete connection with the [Trino CLI](https://trino.io/docs/current/client/cli.html) looks like:
 
 ```bash
-psql "host=my-warehouse.dw.us.postwh.com port=5432 dbname=ducklake user=root sslmode=require"
+trino --server https://my-warehouse.dw.us.postwh.com:443 --user root --password --catalog org_my_warehouse
 ```
 
-The same details work in anything that talks Postgres: pgAdmin, DBeaver, Metabase, Grafana, Superset, Tableau, and the standard drivers (psycopg, pgx, JDBC, node-postgres, SQLAlchemy, and friends).
+The same details work in any Trino client: the [JDBC driver](https://trino.io/docs/current/client/jdbc.html), the [Python client](https://github.com/trinodb/trino-python-client), and BI and SQL tools with a Trino connector, such as DBeaver, Superset, Metabase, and Tableau.
+
+For example, in Python:
+
+```python
+from trino.dbapi import connect
+from trino.auth import BasicAuthentication
+
+conn = connect(
+    host="my-warehouse.dw.us.postwh.com",
+    port=443,
+    http_scheme="https",
+    user="root",
+    auth=BasicAuthentication("root", "<your-password>"),
+    catalog="org_my_warehouse",
+)
+cur = conn.cursor()
+cur.execute("SELECT count(*) FROM posthog.events_prod")
+print(cur.fetchone())
+```
 
 ## Find your way around
 
@@ -40,36 +59,35 @@ Your first stop after connecting should be discovering what's there:
 
 ```sql
 -- List schemas and tables
-\dn
-\dt
+SHOW SCHEMAS;
+SHOW TABLES FROM posthog;
 
--- DuckDB's DESCRIBE and SUMMARIZE work too
-DESCRIBE events_prod;
-SUMMARIZE persons_prod;
+-- Inspect a table's columns
+DESCRIBE posthog.events_prod;
 ```
 
 With a project schema named `prod`, the layout looks like:
 
 ```sql
--- Your PostHog events and persons
-SELECT count(*) FROM events_prod;
+-- Your PostHog events, persons, and groups
+SELECT count(*) FROM posthog.events_prod;
 
 -- Imported source tables live in a per-project imports schema
-SELECT * FROM posthog_data_imports_prod.stripe_charge LIMIT 10;
+SHOW TABLES FROM posthog_data_imports_prod;
 ```
 
 ## What SQL works
 
-Standard PostgreSQL queries work as-is: `SELECT`, joins, CTEs, window functions, prepared statements, transactions, and `COPY ... TO STDOUT` for bulk export (including `\copy` in `psql`).
+The warehouse speaks [Trino's SQL dialect](https://trino.io/docs/current/language.html), which follows ANSI SQL: `SELECT`, joins, CTEs, window functions, `UNNEST`, and the full [function library](https://trino.io/docs/current/functions.html), including JSON functions, lambda expressions, and approximate aggregates like `approx_distinct` and `approx_percentile`.
 
-Because the engine is DuckDB, its analytical SQL passes through transparently as well – `DESCRIBE`, `SUMMARIZE`, `QUALIFY`, `SELECT * EXCLUDE (...)`, `FROM`-first queries, and `ASOF` joins all work. You get DuckDB's full function library on top of the Postgres compatibility layer.
+You can also write: `CREATE TABLE`, `CREATE TABLE AS`, `CREATE VIEW`, `INSERT`, `UPDATE`, `DELETE`, and `MERGE` are supported, so the warehouse can hold your own derived tables next to the synced data. Keep your own work in tables or schemas you create – the PostHog-managed tables are maintained by sync, and anything you write into them can be overwritten.
 
-You can also write: `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE`, and `DELETE` are supported, so the warehouse can hold your own derived tables next to the synced data. Keep your own work in tables or schemas you create – the PostHog-managed tables are maintained by sync, and anything you write into them can be overwritten.
-
-A few things a Postgres veteran will notice are absent: server-side functions and triggers (PL/pgSQL), sequences, and `LISTEN`/`NOTIFY` don't exist in DuckDB, and credentials are managed by PostHog rather than through `CREATE ROLE`.
+Credentials are managed by PostHog, so `CREATE ROLE` and `GRANT` aren't available.
 
 ## Querying from PostHog
 
-You don't need an external client to use the warehouse. Once provisioned, it's available in PostHog's [SQL editor](/docs/data-warehouse/query) alongside your other sources, and PostHog's AI features can use it as context. External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, or ad-hoc `psql` sessions.
+You don't need an external client to use the warehouse. In PostHog's [SQL editor](/docs/data-warehouse/query), pick **PostHog (Trino)** from the connection menu to run a query on the warehouse. PostHog translates your [SQL](/docs/sql) for the warehouse and runs it read-only. Most queries work unchanged. A few ClickHouse-specific features, such as `SAMPLE`, `FINAL`, and `WITH FILL`, aren't available, and the editor tells you when a query uses one.
 
-For larger or latency-sensitive workloads, [tune the worker's CPU, memory, and idle lifetime](/docs/data-warehouse/warehouse/performance-tuning).
+External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, writes, or ad-hoc CLI sessions.
+
+For larger workloads, read about [how the warehouse handles performance and limits](/docs/data-warehouse/warehouse/performance-tuning).

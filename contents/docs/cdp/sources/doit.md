@@ -9,7 +9,7 @@ availability:
 sourceId: DoIt
 ---
 
-The DoIt connector syncs infrastructure cost reports, budgets, optimization insights, cost anomalies, and invoices into PostHog.
+The DoIt connector syncs infrastructure cost reports, budgets, optimization insights, cost anomalies, invoices, billing assets, cost annotations, support tickets, and per-resource insight results into PostHog.
 
 To link DoIt:
 
@@ -27,7 +27,7 @@ Once the syncs are complete, you can start using DoIt data in PostHog.
 
 ## Available data
 
-In addition to your saved cost reports, the DoIt connector provides four fixed tables:
+In addition to your saved cost reports, the DoIt connector provides eight fixed tables:
 
 - **Budgets** – Spend limits for a scope of cloud costs over a period, with current utilization, forecast, and risk status.
 
@@ -37,7 +37,15 @@ In addition to your saved cost reports, the DoIt connector provides four fixed t
 
 - **Invoices** – Current or historical DoIt invoices, with totals, outstanding balances, and payment status.
 
-All four tables sync as **full refresh** only. Reports can be synced incrementally.
+- **Assets** – Cloud billing accounts or licensed subscriptions (e.g. Google Workspace, Microsoft 365) that can be joined to cost data.
+
+- **Annotations** – Notes attached to specific dates in cost reports, such as deployments or pricing changes.
+
+- **SupportTickets** – Support requests opened with DoiT, including severity, status, and resolution details.
+
+- **InsightResourceResults** – Per-resource results behind each optimization insight, showing savings or risk for individual cloud resources. Each row includes `insight_source` and `insight_key` columns that join back to the Insights table.
+
+All eight tables sync as **full refresh** only. Reports can be synced incrementally.
 
 ## Configuration
 
