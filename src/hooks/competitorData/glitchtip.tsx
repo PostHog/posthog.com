@@ -8,7 +8,7 @@ export const glitchtip = {
         error_tracking: {
             available: true,
             features: {
-                console_log_capture: '',
+                console_log_capture: false,
                 error_alerts: true,
                 error_grouping: true,
                 exception_capture: true,
@@ -124,7 +124,7 @@ export const glitchtip = {
             role_based_access_control: '',
             saml_sso: false,
             soc2_certified: false,
-            two_factor_auth: '',
+            two_factor_auth: false,
             user_privacy_options: false,
         },
         analytics_integration: {
