@@ -689,9 +689,8 @@ export default function ReplayVisionLanding(): JSX.Element {
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Start in the app</h4>
                                 <p className="text-sm text-secondary leading-relaxed m-0 mb-4">
-                                    Already recording? Open Replay Vision, click New scanner, and pick a starting point.
-                                    PostHog AI drafts the scanner, you run it on a recording you choose, and you see
-                                    your first observation in about five minutes.
+                                    Already recording? Pick a starting point and get
+                                    your first observation in five minutes.
                                 </p>
                                 <CallToAction
                                     size="sm"
