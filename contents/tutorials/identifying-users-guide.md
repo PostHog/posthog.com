@@ -49,7 +49,7 @@ If you don’t have a unique ID like an email, you can always generate a UUID or
 - Storing the ID on the frontend and passing the values to the backend when they make a request
 - Use an ID based on the resources they are accessing on the backend
 
-> **Note:** `posthog.identify()` works differently in non-JavaScript libraries. It only updates the user’s properties, and won’t connect the user you identify with future events captured. Check out [your library’s docs](/docs/integrate#server-libraries) for more details (here’s [Python](/docs/integrate/server/python#identify) for example).
+> **Note:** `posthog.identify()` works differently in non-JavaScript libraries. It only updates the user’s properties, and won’t connect the user you identify with future events captured. Check out [your library’s docs](/docs/getting-started/install) for more details (here’s [Python](/docs/integrate/server/python#identify) for example).
 
 ## The importance of setting accurate distinct user IDs
 

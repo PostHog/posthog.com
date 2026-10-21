@@ -41,7 +41,7 @@ There are two ways to estimate your event count. One takes a bit of time but wil
 
 The most accurate way to figure out your event count is to take advantage of our [1 million event per month free tier](/pricing) on PostHog Cloud.
 
-Simply use one of our [libraries](/docs/integrate#libraries) to send your event data to PostHog ([autocapture](/docs/integrate/ingest-live-data#use-autocapture) is easiest) and check your event usage on the [Billing](https://app.posthog.com/organization/billing) page in the app.
+Simply use one of our [libraries](/docs/getting-started/install) to send your event data to PostHog ([autocapture](/docs/integrate/ingest-live-data#use-autocapture) is easiest) and check your event usage on the [Billing](https://app.posthog.com/organization/billing) page in the app.
 
 Once you've sent a typical week's worth of data then you can do some multiplication to project your monthly event count. 
 

@@ -24,7 +24,7 @@ There are two main ways to create new events, including creating them from any o
 To follow this tutorial you’ll need…
 
 - To have successful deployed PostHog. 
-- Have added [the PostHog snippet to your website](/docs/integrate?tab=snippet) or product. 
+- Have added [the PostHog snippet to your website](/docs/getting-started/install) or product. 
 
 Note that the toolbar is currently only available using [the JavaScript library](/docs/libraries/js). 
 
