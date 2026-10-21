@@ -22,8 +22,14 @@ You need an AWS account with Cost Explorer enabled. Cost Explorer can take up to
 You also need an IAM user or role with the following permissions:
 
 - `ce:GetCostAndUsage`
+- `ce:GetCostAndUsageWithResources`
+- `ce:GetDimensionValues`
 - `ce:GetReservationUtilization`
+- `ce:GetReservationCoverage`
 - `ce:GetSavingsPlansUtilization`
+- `ce:GetSavingsPlansCoverage`
+
+The existing tables work without the four new permissions. Add them only if you want the new tables.
 
 To see spend across every member account, connect the management (payer) account.
 
@@ -51,8 +57,12 @@ When linking AWS Cost Explorer, you'll need:
       "Effect": "Allow",
       "Action": [
         "ce:GetCostAndUsage",
+        "ce:GetCostAndUsageWithResources",
+        "ce:GetDimensionValues",
         "ce:GetReservationUtilization",
-        "ce:GetSavingsPlansUtilization"
+        "ce:GetReservationCoverage",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetSavingsPlansCoverage"
       ],
       "Resource": "*"
     }
@@ -69,16 +79,20 @@ When linking AWS Cost Explorer, you'll need:
 
 <SyncModes />
 
-All four tables support incremental sync using `period_start` as the cursor.
+Most tables support incremental sync using `period_start` as the cursor. The `dimension_values` table is full refresh only.
 
 AWS restates recent cost periods until bills finalize (rows come back marked as estimated). To capture these corrections, incremental syncs automatically re-read a trailing window behind the last synced value:
 
-| Table                             | Lookback window |
-| --------------------------------- | --------------- |
-| `cost_and_usage_daily`            | 7 days          |
-| `cost_and_usage_monthly`          | 45 days         |
-| `reservation_utilization_daily`   | 7 days          |
-| `savings_plans_utilization_daily` | 7 days          |
+| Table                                 | Lookback window | Notes                                                                                     |
+| ------------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
+| `cost_and_usage_daily`                | 7 days          |                                                                                           |
+| `cost_and_usage_monthly`              | 45 days         |                                                                                           |
+| `cost_and_usage_with_resources_daily` | 7 days          | Only covers last 14 days. Requires resource-level data enabled in Cost Explorer settings. |
+| `dimension_values`                    | –               | Full refresh only (no incremental sync).                                                  |
+| `reservation_utilization_daily`       | 7 days          |                                                                                           |
+| `reservation_coverage_daily`          | 7 days          | Covers EC2, RDS, ElastiCache, and Redshift.                                               |
+| `savings_plans_utilization_daily`     | 7 days          |                                                                                           |
+| `savings_plans_coverage_daily`        | 7 days          |                                                                                           |
 
 Duplicate rows are merged by primary key, so re-read periods don't create duplicates.
 
@@ -94,8 +108,10 @@ Duplicate rows are merged by primary key, so re-read periods don't create duplic
 
 - If you see "AWS rejected the access key", check that the access key ID and secret access key are correct and that the key is still active in IAM.
 - If you see a signature error, re-enter the secret access key. If you are using temporary credentials, the session token may have expired.
-- If you see "missing Cost Explorer permissions", grant `ce:GetCostAndUsage`, `ce:GetReservationUtilization`, and `ce:GetSavingsPlansUtilization` to the IAM user or role.
+- If you see "missing Cost Explorer permissions", grant `ce:GetCostAndUsage`, `ce:GetCostAndUsageWithResources`, `ce:GetDimensionValues`, `ce:GetReservationUtilization`, `ce:GetReservationCoverage`, `ce:GetSavingsPlansUtilization`, and `ce:GetSavingsPlansCoverage` to the IAM user or role.
 - If you see "no Cost Explorer data", make sure Cost Explorer is enabled on the AWS account. It can take up to 24 hours after enabling for data to appear.
 - If you see "dates are older than the data AWS keeps", move the start date forward and try again.
+- If the `cost_and_usage_with_resources_daily` table has no data, enable resource-level data in your AWS Cost Explorer settings. Go to **AWS Console** > **Cost Explorer** > **Settings** > **Cost Explorer Settings** and turn on resource-level data for EC2, Lambda, and any other services you want to track.
+- If the start date is older than 14 days for the resource table, the sync automatically clamps it to 14 days ago. AWS does not serve resource-level data beyond this window.
 
 <TroubleshootingLink />

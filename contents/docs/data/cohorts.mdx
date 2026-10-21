@@ -140,11 +140,14 @@ If you use [Replay Vision](/docs/replay-vision), you can save the users affected
 
 1. Go to [Replay Vision](https://app.posthog.com/replay-vision) and open any scanner.
 
-2. In the impact panel, click **Save as cohort** (for monitors) or click the cohort button next to a specific tag (for classifiers).
+2. On the scanner's **Overview** tab, save the cohort:
+   - **Monitors** – in the **Verdict mix** section, click **Save as cohort** on the verdict row you want (**Yes**, **No**, or **Inconclusive**, which shows only when the scanner has inconclusive results).
+   - **Classifiers** – click the **Save as cohort** icon button next to a category.
+   - **Scorers** – there is no button. Use the API or the `vision-scanners-affected-cohort-create` [MCP](/docs/replay-vision/mcp) tool with `min_score` and/or `max_score`.
 
 The cohort is a dated snapshot: it captures the users matched in the trailing window (default 30 days) and won't live-update as new observations come in. Calling it again creates a new cohort. See [scanner types](/docs/replay-vision/scanner-types) for details on what counts as "affected" for each type.
 
-> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support impact cohorts.
+> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support cohorts.
 
 ## Static and dynamic cohorts
 
@@ -233,6 +236,12 @@ For multi-column files, PostHog will extract the user identifiers from the speci
 
 To update the list, you can upload another CSV to add more users. You can also remove users by deleting their [person profile](/docs/data/persons) from the list, noting that this will completely remove the person from PostHog.
 
+**Upload limits:**
+
+CSV uploads are limited to **50 MB** and **1,000,000 rows**. Files exceeding either limit are rejected, and no cohort is created or modified. If you have a larger file, split it into smaller parts and upload them one at a time — uploading a CSV to an existing static cohort adds to the list rather than replacing it.
+
+Self-hosted users can adjust these limits using the `COHORT_CSV_UPLOAD_MAX_BYTES` and `COHORT_CSV_UPLOAD_MAX_ROWS` environment variables.
+
 #### Create a static cohort from criteria
 
 When creating a new static cohort, you can choose how to populate it using the **Populate from** dropdown:
@@ -266,18 +275,18 @@ You can select `days`, `weeks`, `months` or `years` time ranges here.
 
 Has or doesn't have a person property with the following operators:
 
-| **Operator**                                 | **Example**                                                     |
-| -------------------------------------------- | --------------------------------------------------------------- |
-| `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true"           |
-| `contains` or `does not contain`             | `Job title` property `contains` "engineer"                      |
-| `starts with` or `does not start with`       | `$initial_current_url` property `starts with` "https://app."    |
+| **Operator**                                 | **Example**                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| `equals` or `does not equal`                 | `Pineapple on pizza` property `does not equal` "true"                           |
+| `contains` or `does not contain`             | `Job title` property `contains` "engineer"                                      |
+| `starts with` or `does not start with`       | `$initial_current_url` property `starts with` "https://app."                    |
 | `ends with` or `does not end with`           | `email` property `does not end with` "@gmail.com", "@yahoo.com", "@hotmail.com" |
-| `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us\|uk\|aus"           |
-| `greater than` or `greater than or equal to` | `Age` property `greater than` "21"                              |
-| `less than` or `less than or equal to`       | `Age` property `less than or equal to` "21"                     |
-| `is set` or `is not set`                     | `UTM Source` property `is not set`                              |
-| `between` or `not between`                   | `Age` property is between "18" and "30"                         |
-| `minimum` or `maximum` value                 | `Organization size` property has a `minimum` of "5"             |
+| `matches regex` or `does not match regex`    | `Country code` property `matches regex` "us\|uk\|aus"                           |
+| `greater than` or `greater than or equal to` | `Age` property `greater than` "21"                                              |
+| `less than` or `less than or equal to`       | `Age` property `less than or equal to` "21"                                     |
+| `is set` or `is not set`                     | `UTM Source` property `is not set`                                              |
+| `between` or `not between`                   | `Age` property is between "18" and "30"                                         |
+| `minimum` or `maximum` value                 | `Organization size` property has a `minimum` of "5"                             |
 
 For a complete list of all available operators, including semver operators for version-based filtering, see the [property filter operators reference](/docs/data/property-filters).
 

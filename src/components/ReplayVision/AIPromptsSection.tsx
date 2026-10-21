@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { LabeledList, SECTION_H2 } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
@@ -21,8 +22,9 @@ interface PromptGroup {
 const promptGroups: PromptGroup[] = [
     {
         title: 'Create a scanner',
-        tools: ['vision-scanners-create'],
+        tools: ['vision-scanners-draft', 'vision-scanners-create'],
         prompts: [
+            'Draft a Replay Vision scanner that finds out where people get stuck in onboarding, then create it.',
             'Create a Replay Vision scanner that flags sessions where users get stuck on the /checkout page, narrow to enterprise customers, and start at 25% sampling. Estimate the cost first.',
             'Set up a summarizer scanner for my onboarding flow.',
             'Make a scanner that scores how frustrated users are on the /pricing page.',
@@ -30,7 +32,7 @@ const promptGroups: PromptGroup[] = [
     },
     {
         title: 'Size it before you commit',
-        tools: ['vision-scanners-estimate-create', 'vision-quota-retrieve'],
+        tools: ['vision-scanners-estimate', 'vision-quota-get'],
         prompts: [
             'Estimate how many observations that scanner would produce this month before creating it.',
             'How much Replay Vision quota do we have left this month?',
@@ -65,6 +67,7 @@ const toolGroups: { job: string; tools: string[] }[] = [
     {
         job: 'Author scanners',
         tools: [
+            'vision-scanners-draft',
             'vision-scanners-list',
             'vision-scanners-get',
             'vision-scanners-create',
@@ -74,20 +77,29 @@ const toolGroups: { job: string; tools: string[] }[] = [
     },
     {
         job: 'Size before creating',
-        tools: ['vision-scanners-estimate-create', 'vision-quota-retrieve'],
+        tools: ['vision-scanners-estimate', 'vision-quota-get'],
     },
     {
         job: 'Scan on demand',
-        tools: ['vision-scanners-scan-session'],
+        tools: ['vision-scanners-scan-session', 'vision-requests-create', 'vision-requests-get'],
+    },
+    {
+        job: 'Backfill past recordings',
+        tools: ['vision-scanners-backfills-estimate', 'vision-scanners-backfills-create'],
     },
     {
         job: 'Read observations',
         tools: [
             'vision-observations-list',
-            'vision-observations-retrieve',
+            'vision-observations-get',
+            'vision-observations-search',
             'vision-scanners-observations-list',
             'vision-scanners-observations-get',
         ],
+    },
+    {
+        job: 'Get alerted',
+        tools: ['vision-alerts-create', 'vision-alerts-list', 'vision-alerts-update'],
     },
 ]
 
@@ -146,7 +158,11 @@ const AIPromptsSection = ({ id }: SectionComponentProps) => {
                         <>
                             <p className="text-sm text-secondary mb-4">
                                 All Replay Vision MCP tools are prefixed{' '}
-                                <code className="font-mono text-[13px]">vision-</code>:
+                                <code className="font-mono text-[13px]">vision-</code>. These are the main ones. See{' '}
+                                <Link to="/docs/replay-vision/mcp" className="underline">
+                                    Replay Vision MCP
+                                </Link>{' '}
+                                for the full list.
                             </p>
                             <div className="@container">
                                 <LabeledList

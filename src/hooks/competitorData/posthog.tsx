@@ -47,7 +47,7 @@ export const posthog = {
             available: true,
             features: {
                 point_scanner: true,
-                configurable_types: 'Monitor, classifier, scorer, summarizer',
+                configurable_types: 'Monitor, classifier, scorer, summarizer, experiment',
                 custom_prompt: true,
                 yes_no_monitors: true,
                 classify_tag: true,
@@ -194,7 +194,7 @@ export const posthog = {
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
-                    retention: '14 days (custom retention add-on)',
+                    retention: '14 days (custom retention available)',
                 },
             },
             search: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
 import Slider from 'components/Slider'
@@ -31,9 +31,13 @@ export const Tab: React.FC & {
     )
 }
 
+const InsideTabGroupContext = createContext(false)
+
 const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const hasTabs = tabs?.length > 0
+    const isNested = useContext(InsideTabGroupContext)
+    // A nested group would overwrite the `tab` param that selects the outer group's tab.
+    const hasTabs = tabs?.length > 0 && !isNested
 
     const handleChange = (index: number) => {
         if (hasTabs && typeof window !== 'undefined') {
@@ -54,7 +58,7 @@ const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
 
     return (
         <HeadlessTab.Group selectedIndex={selectedIndex} onChange={handleChange} as="div" className="my-4">
-            {children}
+            <InsideTabGroupContext.Provider value={true}>{children}</InsideTabGroupContext.Provider>
         </HeadlessTab.Group>
     )
 }

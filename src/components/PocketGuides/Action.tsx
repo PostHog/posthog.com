@@ -84,6 +84,7 @@ export default function Action(): JSX.Element | null {
  */
 const VOLUME_SUBCOMMAND: Record<string, string> = {
     'ai-observability': 'ai-observability',
+    'feature-flags': 'feature-flags',
 }
 
 /** The wizard command for the volume the reader is in. */

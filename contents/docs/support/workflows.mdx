@@ -33,6 +33,12 @@ When ticket or message state changes, certain events are emitted and can be used
 
 All events include these base properties: `ticket_id`, `ticket_number`, `channel_source`, `status`, and `priority`.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_17_23_08_71d9ff8923.png"
+    alt="Trigger events"
+    classes="rounded"
+/>
+
 ### New ticket created
 
 - **Event ID** - `$conversation_ticket_created`
@@ -42,7 +48,7 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 |----------|------|-------------|
 | `ticket_id` | string (UUID) | The ticket's unique ID |
 | `ticket_number` | int | Human-readable ticket number |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, `teams`, or `github` |
 | `status` | string | Always `new` for this trigger |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
 | `customer_name` | string | Customer name |
@@ -107,6 +113,12 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 Two workflow actions are available for ticket management:
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_17_23_59_bcdffe54fe.png"
+    alt="Actions"
+    classes="rounded"
+/>
+
 ### Get ticket action
 
 Fetches the full ticket into workflow variables. Use this when you need fields beyond what's in the trigger event properties (e.g. `message_count`, `sla_due_at`).
@@ -123,7 +135,7 @@ Fetches the full ticket into workflow variables. Use this when you need fields b
 | `ticket_number` | int | Per-team ticket number |
 | `status` | string | `new`, `open`, `pending`, `on_hold`, `resolved` |
 | `priority` | string or null | `low`, `medium`, `high`, or null |
-| `channel_source` | string | `widget`, `email`, or `slack` |
+| `channel_source` | string | `widget`, `email`, `slack`, `teams`, or `github` |
 | `distinct_id` | string | Customer's PostHog distinct ID |
 | `created_at` | string (ISO 8601) | When the ticket was created |
 | `updated_at` | string (ISO 8601) | Last update timestamp |
@@ -402,4 +414,4 @@ In the ticket list, SLAs show as one of three states:
 - **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status does not trigger the "status changed" Workflow again.
 - **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
 - **Tags replace, not append** – the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
-- **Rate limits** – the external API used by Workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.
+- **Rate limits** – the external API used by Workflows is rate-limited to 120 requests/minute and 1,200 requests/hour per team.

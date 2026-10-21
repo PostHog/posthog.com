@@ -23,13 +23,13 @@ Once the sync completes, you can query your Opinion Stage data in PostHog.
 
 ## Available tables
 
-| Table   | Description                                                     | Sync method  |
-| ------- | --------------------------------------------------------------- | ------------ |
-| `items` | Interactive content widgets such as quizzes, surveys, and forms | Full refresh |
+| Table       | Description                                                                      | Sync method  |
+| ----------- | -------------------------------------------------------------------------------- | ------------ |
+| `items`     | Interactive content widgets such as quizzes, surveys, and forms                  | Full refresh |
+| `responses` | A single submission of an item by a respondent, with the answer to each question | Full refresh |
+| `questions` | A question of an item, used to resolve question IDs on response answers          | Full refresh |
 
 **Full refresh** tables reload all data on each sync.
-
-> **Note:** Per-item responses and questions are not included in this version of the connector. Only account-level item data is synced.
 
 ## Sync limitations
 

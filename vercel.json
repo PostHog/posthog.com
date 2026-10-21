@@ -144,21 +144,23 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
-        },
-        {
-            "source": "/docs/product-analytics/learn/:path*",
-            "destination": "/docs/product-analytics/learn/[...chapter]/index.html"
-        },
-        {
-            "source": "/docs/ai-observability/learn/:path*",
-            "destination": "/docs/ai-observability/learn/[...chapter]/index.html"
-        },
-        {
-            "source": "/docs/session-replay/learn/:path*",
-            "destination": "/docs/session-replay/learn/[...chapter]/index.html"
         }
     ],
     "redirects": [
+        {
+            "source": "/field-guide/foreword",
+            "destination": "/field-guide#about",
+            "statusCode": 301
+        },
+        {
+            "source": "/field-guide/closing-note",
+            "destination": "/field-guide"
+        },
+        {
+            "source": "/field-guide/the-mid-form-fleer",
+            "destination": "/field-guide/the-halfway-houdini",
+            "statusCode": 301
+        },
         {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
@@ -175,23 +177,153 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/product-analytics/learn",
+            "destination": "/learn/product-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/learn/introduction",
+            "destination": "/learn/product-analytics/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/learn/:path*",
+            "destination": "/learn/product-analytics/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/learn",
+            "destination": "/learn/ai-observability",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/learn/:path*",
+            "destination": "/learn/ai-observability/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/learn",
+            "destination": "/learn/session-replay",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/learn/:path*",
+            "destination": "/learn/session-replay/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/learn",
+            "destination": "/learn/feature-flags",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/learn/:path*",
+            "destination": "/learn/feature-flags/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/product-analytics",
-            "destination": "/docs/product-analytics/learn/introduction",
+            "destination": "/learn/product-analytics/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/product-analytics.md",
+            "destination": "/learn/product-analytics/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/product-analytics/:path*",
-            "destination": "/docs/product-analytics/learn/:path*",
+            "destination": "/learn/product-analytics/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability",
+            "destination": "/learn/ai-observability/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/ai-observability.md",
+            "destination": "/learn/ai-observability/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/ai-observability/:path*",
-            "destination": "/docs/ai-observability/learn/:path*",
+            "destination": "/learn/ai-observability/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay",
+            "destination": "/learn/session-replay/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/session-replay.md",
+            "destination": "/learn/session-replay/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/session-replay/:path*",
-            "destination": "/docs/session-replay/learn/:path*",
+            "destination": "/learn/session-replay/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags",
+            "destination": "/learn/feature-flags/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags.md",
+            "destination": "/learn/feature-flags/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/feature-flags/:path*",
+            "destination": "/learn/feature-flags/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving",
+            "destination": "/docs/self-driving/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving.md",
+            "destination": "/docs/self-driving/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/self-driving/:path*",
+            "destination": "/docs/self-driving/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack",
+            "destination": "/docs/data-warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack.md",
+            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/data-stack/:path*",
+            "destination": "/docs/data-warehouse/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse",
+            "destination": "/docs/data-warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse.md",
+            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/pocket-guides/context-warehouse/:path*",
+            "destination": "/docs/data-warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {
@@ -524,13 +656,13 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
-            "destination": "/docs/web-analytics/dashboard:ext?",
+            "source": "/docs/marketing-analytics:ext(\\.md)?",
+            "destination": "/docs/web-analytics/marketing-analytics:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/support/teams:ext(\\.md)?",
-            "destination": "/docs/support:ext?",
+            "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
+            "destination": "/docs/web-analytics/dashboard:ext?",
             "statusCode": 301
         },
         {
@@ -796,6 +928,26 @@
         {
             "source": "/leadership",
             "destination": "/people",
+            "statusCode": 301
+        },
+        {
+            "source": "/news",
+            "destination": "/blog",
+            "statusCode": 301
+        },
+        {
+            "source": "/press",
+            "destination": "/media",
+            "statusCode": 301
+        },
+        {
+            "source": "/trust",
+            "destination": "/handbook/company/security",
+            "statusCode": 301
+        },
+        {
+            "source": "/privacy-policy",
+            "destination": "/privacy",
             "statusCode": 301
         },
         {
@@ -1198,6 +1350,10 @@
         },
         {
             "source": "/teams/posthog-ai",
+            "destination": "/teams/self-driving"
+        },
+        {
+            "source": "/teams/agents",
             "destination": "/teams/self-driving"
         },
         {
@@ -3227,7 +3383,12 @@
         },
         {
             "source": "/docs/support/surfaces/code:ext(\\.md)?",
-            "destination": "/docs/support/surfaces/desktop:ext?",
+            "destination": "/docs/support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/support:ext?",
             "statusCode": 301
         },
         {
@@ -4102,6 +4263,11 @@
         {
             "source": "/docs/surveys/events:ext(\\.md)?",
             "destination": "/docs/surveys/implementing-custom-surveys:ext?"
+        },
+        {
+            "source": "/docs/surveys/pricing:ext(\\.md)?",
+            "destination": "/surveys/pricing",
+            "statusCode": 301
         },
         {
             "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",

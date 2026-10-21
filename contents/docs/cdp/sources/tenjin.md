@@ -37,7 +37,12 @@ You'll be asked for:
 
 <SyncModes />
 
-All Tenjin tables are full refresh. Each sync replaces the contents of the table.
+All Tenjin report tables support **incremental** sync on the `date` field. Tenjin restates recent days, for example when late SKAdNetwork postbacks or ad network cost corrections arrive. Each incremental sync re-reads a trailing lookback window and deduplicates on merge:
+
+- **Most report tables** – 7-day lookback
+- **`campaign_cohort_report`** – 37-day lookback (cohort metrics keep changing until the 30-day window elapses)
+
+Full refresh is also available. Each full refresh sync replaces the contents of the table.
 
 ## Configuration
 

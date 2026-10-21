@@ -3,6 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
+import { HedgehogGardener } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -98,6 +99,7 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
+            { type: 'item', label: 'Business Knowledge', link: '/docs/business-knowledge' },
             { type: 'item', label: 'Distributed tracing', link: '/docs/distributed-tracing' },
             { type: 'item', label: 'Endpoints', link: '/docs/endpoints' },
             { type: 'item', label: 'Experiments', link: '/docs/experiments' },
@@ -545,6 +547,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Field guide to wild users',
+                    link: '/field-guide',
+                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
+                },
+                {
+                    type: 'item',
                     label: 'Things that spark joy',
                     link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
@@ -826,6 +834,26 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/sparks-joy/hogpatch',
             iconName: 'games' as AppIconName,
             customIcon: null,
+        },
+        {
+            label: 'PostHog Farm',
+            link: 'https://posthog.farm',
+            iconName: null,
+            customIcon: <HedgehogGardener className="size-12" />,
+            external: true,
+        },
+        {
+            label: 'Bug Survivors',
+            link: 'https://survivors.posthog.com',
+            iconName: null,
+            customIcon: (
+                <img
+                    src="/images/sparks-joy/bug-survivors.png"
+                    alt=""
+                    className="size-12 [image-rendering:pixelated]"
+                />
+            ),
+            external: true,
         },
     ],
     notGames: [
