@@ -25,7 +25,7 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-import { ProblemSection, StepsSection } from 'components/Home/DataStory'
+import { StepsSection } from 'components/Home/DataStory'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -169,7 +169,6 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <ProblemSection />
                 <StepsSection />
                 <ShamelessCTASection />
                 <HitCounter />

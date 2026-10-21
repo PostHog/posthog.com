@@ -1,8 +1,5 @@
 import React from 'react'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Emphasis from './Emphasis'
-import FeedbackPopup from './FeedbackPopup'
-import FormPointer from './FormPointer'
 import StepFrame from './StepFrame'
 import MarbleRun from './Ingest/MarbleRun'
 import QueryScene from './Query/QueryStep'
@@ -48,25 +45,6 @@ const STEPS = [
         Scene: SelfDriveScene,
     },
 ]
-
-export const ProblemSection = (): JSX.Element => (
-    <section className="grid gap-8 items-start @2xl:grid-cols-2">
-        <div>
-            <h2>
-                Knowing <Emphasis className="bg-purple/10 dark:bg-purple/20 text-purple">what users want</Emphasis> is
-                now the{' '}
-                <RoughAnnotation type="underline" strokeWidth={2} delay={400} multiline>
-                    hardest part of building software
-                </RoughAnnotation>
-            </h2>
-            <p>Most users never tell you. Don't believe us? Go ahead and fill out this feedback form.</p>
-            <FormPointer />
-        </div>
-        <div className="@2xl:mt-28">
-            <FeedbackPopup />
-        </div>
-    </section>
-)
 
 export const StepsSection = (): JSX.Element => (
     <section>
