@@ -241,8 +241,8 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
         }
     })
 
-// Tools promoted to the top level of the Products menu, in display order.
-// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
+// Tools listed first in the Products menu, in display order.
+// Everything else in BROWSE_TOOLS_HANDLES follows them.
 const PRIMARY_TOOL_HANDLES: string[] = [
     'product_analytics',
     'ai_observability',
@@ -259,13 +259,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
 
     const items: any[] = [
-        ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
-        {
-            type: 'expandable' as const,
-            label: 'More',
-            expandedLabel: 'Less',
-            items: buildProductMenuItems(moreToolHandles, allProducts),
-        },
+        ...buildProductMenuItems([...PRIMARY_TOOL_HANDLES, ...moreToolHandles], allProducts),
         {
             type: 'separator',
         },
