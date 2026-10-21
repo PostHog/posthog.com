@@ -62,7 +62,7 @@ export default function MergedFeed(): JSX.Element {
     } = useSelfDrivingFeed(sectionRef)
 
     return (
-        <div ref={sectionRef} className="@container mx-auto mt-24 max-w-[58rem]">
+        <div ref={sectionRef} className="@container mx-auto mt-24">
             <h3 className="!mt-0">Self-driving in PostHog, right now</h3>
             <p>
                 We run PostHog on PostHog. These pull requests came from Inbox reports on our own product. PostHog wrote
