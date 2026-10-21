@@ -216,7 +216,7 @@ Select multiple schemas using the checkboxes in the schemas table to perform bul
 - **Set frequency** - Change the sync frequency for all selected schemas at once. If the selection includes non-CDC schemas, only frequencies of 5 minutes or longer are available.
 - **Sync now** - Trigger an immediate sync for all selected schemas that are enabled and have a sync method configured. Schemas that are disabled or don't have a sync method set up are skipped.
 - **Delete tables and resync** - Delete the synced data in PostHog and re-import it from scratch.
-- **Delete tables from PostHog** - Remove the synced tables from PostHog and turn off syncing for them. The sync schedule is paused, so the table won't be rebuilt on the next run. To sync again, re-enable syncing and trigger a reload. To delete and immediately re-import, use **Delete tables and resync** instead. The data in the source is not touched.
+- **Delete tables from PostHog** - Remove the synced tables from PostHog and turn off syncing for them. The data in the source is not affected.
 
 Bulk enable is not available – you must enable schemas individually since each one requires selecting a sync method and configuration.
 
