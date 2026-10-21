@@ -71,15 +71,15 @@ These tools manage [data warehouse](/docs/data-warehouse) import sources – ext
 
 These tools manage individual table schemas within a data warehouse source:
 
-| Tool                                   | Description                                                                          |
-| -------------------------------------- | ------------------------------------------------------------------------------------ |
-| `external-data-schemas-list`           | List all table schemas across all sources with sync status and configuration.        |
-| `external-data-schemas-retrieve`       | Get a single table schema by ID with full sync details.                              |
-| `external-data-schemas-partial-update` | Update a table's sync type, frequency, incremental field, or enable/disable syncing. |
-| `external-data-schemas-reload`         | Trigger a sync for a single table using its configured sync method.                  |
-| `external-data-schemas-resync`         | Discard all synced data and re-import a table from scratch.                          |
-| `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                     |
-| `external-data-schemas-delete-data`    | Delete synced table data from PostHog but keep the schema entry for re-syncing.      |
+| Tool                                   | Description                                                                                                                                                                                           |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-schemas-list`           | List all table schemas across all sources with sync status and configuration.                                                                                                                         |
+| `external-data-schemas-retrieve`       | Get a single table schema by ID with full sync details.                                                                                                                                               |
+| `external-data-schemas-partial-update` | Update a table's sync type, frequency, incremental field, or enable/disable syncing.                                                                                                                  |
+| `external-data-schemas-reload`         | Trigger a sync for a single table using its configured sync method.                                                                                                                                   |
+| `external-data-schemas-resync`         | Discard all synced data and re-import a table from scratch.                                                                                                                                           |
+| `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                                                                                                                                      |
+| `external-data-schemas-delete-data`    | Delete synced table data from PostHog and turn off syncing. The schema entry is kept. To sync again, re-enable `should_sync` and reload. To clear data without pausing syncing, use `resync` instead. |
 
 ## Column annotation tools
 
