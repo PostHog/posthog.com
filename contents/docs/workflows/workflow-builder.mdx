@@ -13,16 +13,16 @@ Workflows are a collection of steps that automate a process or deliver messages 
 
 Workflows are composed of the following components:
 
-| Component                             | Description                                                                                                                                                     |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, a Slack message, manually, or on a schedule. |
-| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                        |
-| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                             |
-| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
-| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
-| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                      |
-| [AI tasks](/docs/workflows/ai-tasks)  | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
-| [Replay Vision](/docs/workflows/replay-vision) | Have Replay Vision watch the triggering event's session recording, then continue with its answer. |
+| Component                                      | Description                                                                                                                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                          | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, a tracking pixel, a Slack message, manually, or on a schedule. |
+| [Dispatches](#dispatches)                      | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                        |
+| [Delays](#delays)                              | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                             |
+| [Audience splits](#audience-splits)            | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
+| [PostHog actions](#posthog-actions)            | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
+| [Output variables](#output-variables)          | Store data from step results in workflow variables for use in later steps.                                                                                      |
+| [AI tasks](/docs/workflows/ai-tasks)           | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
+| [Replay Vision](/docs/workflows/replay-vision) | Have Replay Vision watch the triggering event's session recording, then continue with its answer.                                                               |
 
 ## Draft and enabled workflows
 
@@ -82,6 +82,36 @@ To set this up:
 2. Add a **Capture Event** action step to create a PostHog event from the incoming data.
 3. Optionally add delays, branching, person property updates, or dispatches.
 4. Enable the workflow and point your external system at the webhook URL which can be copied from the trigger step.
+
+#### Safe retries with idempotency keys
+
+Webhook triggers accept an optional `Idempotency-Key` header to prevent duplicate workflow runs when callers retry requests. This is useful when your system uses at-least-once delivery and may send the same request more than once.
+
+Include the header in your webhook request:
+
+```bash
+curl -X POST '<your-webhook-url>' \
+  -H 'Content-Type: application/json' \
+  -H 'Idempotency-Key: your-unique-key-here' \
+  -d '{"your": "payload"}'
+```
+
+PostHog responds differently depending on whether the key has been seen before:
+
+| Scenario                                        | Response                      | Behavior                             |
+| ----------------------------------------------- | ----------------------------- | ------------------------------------ |
+| First call with a key                           | `201 {"status": "queued"}`    | Queues the workflow run              |
+| Repeat call with the same key (within 24 hours) | `200 {"status": "duplicate"}` | No new run is queued                 |
+| Repeat call while the first is still queueing   | `409 {"status": "in_flight"}` | Caller should retry                  |
+| Key longer than 255 characters                  | `400`                         | Error, no run is queued              |
+| No `Idempotency-Key` header                     | `201 {"status": "queued"}`    | Queues the run with no deduplication |
+
+A few things to note:
+
+- Keys are scoped to the team and workflow. The same key on two different workflows queues a run on each.
+- Keys expire after 24 hours. After that, the same key starts a new run.
+- If the idempotency store is temporarily unavailable, PostHog queues the run anyway to avoid dropping requests.
+- Only webhook triggers read this header. Tracking pixel, manual, and other trigger types ignore it.
 
 ### Batch triggers
 
@@ -323,7 +353,7 @@ When Support is enabled, you can trigger workflows using these events:
 
 | Event                                   | Description                                | Properties                                                                        |
 | --------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------- |
-| `$conversation_ticket_created`          | A new support ticket was created           | `$session_id`, when the customer created the ticket from a recorded session        |
+| `$conversation_ticket_created`          | A new support ticket was created           | `$session_id`, when the customer created the ticket from a recorded session       |
 | `$conversation_ticket_status_changed`   | Ticket status was updated                  | `old_status`, `new_status`                                                        |
 | `$conversation_ticket_priority_changed` | Ticket priority was updated                | `old_priority`, `new_priority`                                                    |
 | `$conversation_ticket_assigned`         | Ticket was assigned to a team member or AI | `assignee_type`, `assignee_id`                                                    |
