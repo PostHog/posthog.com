@@ -93,7 +93,7 @@ Remember, these benchmarks are specific to *our* use cases. Just because this co
 
 Overall, there were still some downsides of this "larger golden set" method, but it was still acceptable:
 
-- For 33 incidents, we needed to resurrect 66 PRs total: the PR that caused each incident and the PR that fixed it. This created lots of noise and triggered false alarms from our GitHub bots.
+- For 33 incidents, we had to resurrect the 33 PRs that caused them and then analyze the 33 PRs that fixed them. This created lots of noise and triggered false alarms from our GitHub bots.
 - We didn't re-add the bugs to the codebase. That would be bad. Instead, we kept them as isolated PRs by properly locking the branch for the agent.
 - With open-source repos like ours, an agent with web access can still look up the public repo, merged PRs, and cheat. (More on this later.)
 
