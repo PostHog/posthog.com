@@ -7,6 +7,7 @@ PostHog mobile SDKs can register a device for [Workflows](/docs/workflows) push 
 <CalloutBox icon="IconInfo" title="Push notifications are in open beta" type="fyi">
 
 Push is in open beta. It's available in every project, so you don't need to request access. Each send counts toward your workflows destinations usage and quota. To send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
@@ -29,9 +30,23 @@ Follow the guide for your SDK:
 - [React Native](/docs/workflows/push-notifications/react-native)
 - [Flutter](/docs/workflows/push-notifications/flutter)
 
+## Recipient selection
+
+The push step's **Distinct ID** field controls who receives the notification. By default this is `{{ person.distinct_id }}` – the person who triggered the workflow.
+
+You can change this field to send to a different person:
+
+- Use `{{ event.distinct_id }}` when the triggering event's distinct ID differs from the workflow run's person.
+- Use a workflow variable like `{{ variables.ticket.distinct_id }}` to target someone resolved in an earlier step.
+- Type a hardcoded distinct ID to always send to the same person.
+
+PostHog looks up the named person and delivers the notification to all their registered devices. Marketing opt-out checks and frequency caps apply to the named recipient, not the person who started the run.
+
+If the distinct ID doesn't match any person, the step skips with a message in the workflow logs. If the named person has no registered device tokens, each channel is skipped individually.
+
 ## Identity verification
 
-A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
+A device token says _where_ to deliver a notification, not _who_ the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
 Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id` (your Firebase project ID or APNs bundle ID), `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control.
 
