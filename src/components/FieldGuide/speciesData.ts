@@ -138,7 +138,7 @@ export const SPECIES: Species[] = [
     },
     {
         slug: 'mid-form-fleer',
-        route: '/field-guide/the-mid-form-fleer',
+        route: '/field-guide/the-halfway-houdini',
         name: 'The Halfway Houdini',
         latin: 'Abandonus formularis',
         heroImage: '/images/field-guide/mid-form-fleer.png',
