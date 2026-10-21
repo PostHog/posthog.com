@@ -36,7 +36,7 @@ Before Plausible, Significa used Google Analytics to track their traffic. While 
 
 “Google Analytics is not intuitive at all and requires you to use cookies across your site,” explained Tomás. “We switched away from it and now the only thing we use from Google is AdWords. Users hate cookie banners, so we prefer not to use any cookies at all — and PostHog is much, much easier to use.”
 
-The [toolbar](/toolbar) in particular has made PostHog more accessible than other tools, said Tomás. With it, the team can both create new events and also visualize user interactions on a [heatmap](/heatmaps). The latter is especially useful when dealing with client proposals.
+The [toolbar](/toolbar) in particular has made PostHog more accessible than other tools, said Tomás. With it, the team can both create new events and also visualize user interactions on a [heatmap](/docs/toolbar/heatmaps). The latter is especially useful when dealing with client proposals.
 
 “When we work with a new client we create an online proposal that exists as a private page on our site,” said Tomás. “We send this URL to them and then, because we know it’s only gone to that client, we can see how they interact with the proposal and learn from that.”
 
