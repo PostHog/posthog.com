@@ -4,7 +4,7 @@ import { PIECE_SIZE, Point, RAIL_THICKNESS, RunLayout } from './layout'
 
 type Matter = typeof MatterModule
 
-export type Payload = { type: 'event'; kind: EventKind } | { type: 'source'; source: number }
+export type Payload = { type: 'event'; kind: EventKind } | { type: 'source'; source: number; fact?: string }
 
 interface Piece {
     body: MatterModule.Body

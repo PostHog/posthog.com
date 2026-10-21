@@ -1,20 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import Link from 'components/Link'
 import { cn } from '../../../../utils'
 import { SOURCES_DOCS_URL, useSourceCountLabel } from '../sourceCount'
+import { useRandomInterval } from '../timeline'
 import { captureUserEvents } from './capture'
 import { EVENT_KINDS, EVENT_ORDER, EventKind, EventTile } from './eventKinds'
-import { Box, PIECE_SIZE, Point, RAIL_THICKNESS, RunLayout, runLayout } from './layout'
-import { SPOTLIGHT_SOURCES } from './sources'
-import StoreWindow from './StoreWindow'
+import { Box, Point, RAIL_THICKNESS, RunLayout, runLayout } from './layout'
+import { SOURCE_AMBIENT_MS, SPOTLIGHT_SOURCES, STRIPE, SourceLogo, SourceTile, useSpotlightLogos } from './sources'
+import StoreWindow, { Order, formatDollars } from './StoreWindow'
 import { MarbleWorld, Payload } from './world'
 
 const DEFAULT_STORE_HEIGHT = 230
 const DEFAULT_STAGE_HEIGHT = 640
-const AMBIENT_MIN_MS = 2600
-const AMBIENT_MAX_MS = 5200
 const TOWARD_CENTER_SPEED = 0.6
 const REST_OPACITY = 0.45
 const ARM_MS = 300
@@ -37,9 +35,7 @@ interface ProfileRow {
 
 const emptyProfile = (): ProfileRow[] => PROFILE_LABELS.map(() => ({ count: 0, fact: '' }))
 const profileRowFor = (payload: Payload): number => (payload.type === 'event' ? 0 : payload.source + 1)
-const randomBetween = (min: number, max: number): number => min + Math.random() * (max - min)
 const pathOf = (points: Point[]): string => points.map(({ x, y }, index) => `${index ? 'L' : 'M'}${x} ${y}`).join(' ')
-const normalizeName = (name: string): string => name.toLowerCase().replace(/\s/g, '')
 
 const boxStyle = (box: Box): React.CSSProperties => ({
     left: box.left,
@@ -84,18 +80,6 @@ const Track = React.memo(function Track({ tracks }: { tracks: RunLayout['tracks'
         </svg>
     )
 })
-
-const SourceLogo = ({ logo, className }: { logo?: string; className?: string }) =>
-    logo ? <img src={logo} alt="" className={cn('object-contain', className)} /> : null
-
-const SourceTile = ({ logo }: { logo?: string }) => (
-    <span
-        className="flex shrink-0 items-center justify-center rounded-[5px] border border-primary bg-white shadow-sm"
-        style={{ width: PIECE_SIZE, height: PIECE_SIZE }}
-    >
-        <SourceLogo logo={logo} className="size-3.5" />
-    </span>
-)
 
 const SignalIcon = ({ signal, children }: { signal: string; children: React.ReactNode }) => (
     <span data-signal={signal} className="flex shrink-0" style={{ opacity: REST_OPACITY }}>
@@ -184,14 +168,7 @@ export default function MarbleRun(): JSX.Element {
     inViewRef.current = inView
     const reduceMotion = useReducedMotion()
     const sourceCount = useSourceCountLabel()
-    const platforms = useSourcePlatforms() as { label: string; image: string }[]
-    const logos = useMemo(
-        () =>
-            SPOTLIGHT_SOURCES.map(
-                ({ name }) => platforms.find(({ label }) => normalizeName(label) === normalizeName(name))?.image
-            ),
-        [platforms]
-    )
+    const logos = useSpotlightLogos()
     const layout = useMemo(() => (width ? runLayout(width, storeHeight) : null), [width, storeHeight])
     const layoutRef = useRef(layout)
     layoutRef.current = layout
@@ -208,7 +185,7 @@ export default function MarbleRun(): JSX.Element {
                         kind: payload.kind,
                     }
                 const facts = SPOTLIGHT_SOURCES[payload.source].profileFacts
-                return { count: row.count + 1, fact: facts[row.count % facts.length] }
+                return { count: row.count + 1, fact: payload.fact ?? facts[row.count % facts.length] }
             })
         )
     }, [])
@@ -290,6 +267,16 @@ export default function MarbleRun(): JSX.Element {
 
     const dropSource = useCallback((source: number) => fire(`source-${source}`, { type: 'source', source }), [fire])
 
+    const dropPayment = useCallback(
+        ({ amount }: Order) =>
+            fire(`source-${STRIPE}`, {
+                type: 'source',
+                source: STRIPE,
+                fact: `Paid ${formatDollars(amount)} for stickers`,
+            }),
+        [fire]
+    )
+
     useEffect(() => {
         const region = storeRef.current
         if (!region) return
@@ -303,19 +290,10 @@ export default function MarbleRun(): JSX.Element {
         emitEvent('pageview')
     }, [inView, worldReady, reduceMotion])
 
-    useEffect(() => {
-        if (!inView) return
-        let timer: number
-        const schedule = () => {
-            timer = window.setTimeout(() => {
-                if (document.visibilityState === 'visible')
-                    dropSource(Math.floor(Math.random() * SPOTLIGHT_SOURCES.length))
-                schedule()
-            }, randomBetween(AMBIENT_MIN_MS, AMBIENT_MAX_MS))
-        }
-        schedule()
-        return () => window.clearTimeout(timer)
-    }, [inView, dropSource])
+    useRandomInterval(() => dropSource(Math.floor(Math.random() * SPOTLIGHT_SOURCES.length)), {
+        ...SOURCE_AMBIENT_MS,
+        active: inView,
+    })
 
     return (
         <div
@@ -332,6 +310,8 @@ export default function MarbleRun(): JSX.Element {
             <StoreWindow
                 ref={storeRef}
                 captured={captured}
+                onCheckout={() => emitEvent('pageview')}
+                onPaid={dropPayment}
                 className="absolute top-0 z-10"
                 style={layout ? { left: layout.store.left, width: layout.store.width } : undefined}
             />

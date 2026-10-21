@@ -148,6 +148,26 @@ export function useStickToBottom<T extends HTMLElement, C extends HTMLElement>()
     return { scrollRef, contentRef }
 }
 
+export function useRandomInterval(
+    callback: () => void,
+    { minMs, maxMs, active }: { minMs: number; maxMs: number; active: boolean }
+): void {
+    const latest = useRef(callback)
+    latest.current = callback
+    useEffect(() => {
+        if (!active) return
+        let timer: number
+        const schedule = () => {
+            timer = window.setTimeout(() => {
+                if (document.visibilityState === 'visible') latest.current()
+                schedule()
+            }, minMs + Math.random() * (maxMs - minMs))
+        }
+        schedule()
+        return () => window.clearTimeout(timer)
+    }, [minMs, maxMs, active])
+}
+
 export const IOS_SPRING = { type: 'spring', stiffness: 380, damping: 32, mass: 0.9 } as const
 
 export const ticks = (from: number, to: number, stepMs: number): number[] =>

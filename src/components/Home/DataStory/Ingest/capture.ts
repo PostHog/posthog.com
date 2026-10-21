@@ -2,7 +2,7 @@ import type { EventKind } from './eventKinds'
 
 interface CaptureOptions {
     region: HTMLElement
-    emit: (kind: EventKind) => void
+    emit: (kind: EventKind, detail: string) => void
     isActive: () => boolean
 }
 
@@ -27,7 +27,24 @@ const KEY_REPEAT_MS = 160
 const RAGE_CLICK_COUNT = 3
 const RAGE_CLICK_WINDOW_MS = 1000
 const RAGE_CLICK_RADIUS = 40
+const CLICK_TARGET = 'button, a, input, [role]'
+const MAX_LABEL_LENGTH = 24
 const MODIFIER_KEYS = new Set(['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Fn', 'Dead'])
+
+const visibleLabel = (target: EventTarget | null): string => {
+    if (!(target instanceof Element)) return ''
+    const element = target.closest('label') ?? target.closest(CLICK_TARGET) ?? target
+    const text =
+        element.getAttribute('aria-label') ||
+        element.textContent ||
+        (element instanceof HTMLInputElement ? element.placeholder : '')
+    return text.replace(/\s+/g, ' ').trim().slice(0, MAX_LABEL_LENGTH)
+}
+
+const clickDetail = (target: EventTarget | null): string => {
+    const label = visibleLabel(target)
+    return label ? `clicked "${label}"` : 'clicked'
+}
 
 export function captureUserEvents({ region, emit, isActive }: CaptureOptions): () => void {
     const listeners = new AbortController()
@@ -62,7 +79,7 @@ export function captureUserEvents({ region, emit, isActive }: CaptureOptions): (
                 return
             }
             press.lastDragAt = now
-            emit('snapshot')
+            emit('snapshot', 'dragged')
         },
         options
     )
@@ -80,7 +97,7 @@ export function captureUserEvents({ region, emit, isActive }: CaptureOptions): (
                 ignoreNextClick = false
                 return
             }
-            emit('autocapture')
+            emit('autocapture', clickDetail(event.target))
             if (event.detail === 0) return
             const now = performance.now()
             recentClicks = recentClicks.filter(
@@ -91,13 +108,20 @@ export function captureUserEvents({ region, emit, isActive }: CaptureOptions): (
             recentClicks.push({ at: now, x: event.clientX, y: event.clientY })
             if (recentClicks.length >= RAGE_CLICK_COUNT) {
                 recentClicks = []
-                emit('rageclick')
+                emit('rageclick', `${clickDetail(event.target)} ${RAGE_CLICK_COUNT} times`)
             }
         },
         options
     )
 
-    region.addEventListener('copy', () => emit('copy'), options)
+    region.addEventListener(
+        'copy',
+        () => {
+            const copied = document.getSelection()?.toString().replace(/\s+/g, ' ').trim().slice(0, MAX_LABEL_LENGTH)
+            emit('copy', copied ? `copied "${copied}"` : 'copied text')
+        },
+        options
+    )
 
     region.addEventListener(
         'keydown',
@@ -105,7 +129,7 @@ export function captureUserEvents({ region, emit, isActive }: CaptureOptions): (
             const now = performance.now()
             if (event.repeat || MODIFIER_KEYS.has(event.key) || now - lastKeyEventAt < KEY_REPEAT_MS) return
             lastKeyEventAt = now
-            emit('snapshot')
+            emit('snapshot', 'typed')
         },
         options
     )
@@ -124,7 +148,7 @@ export function captureUserEvents({ region, emit, isActive }: CaptureOptions): (
             if (scrolledSinceLastEvent < SCROLL_DISTANCE_PER_EVENT || now - lastScrollEventAt < SCROLL_REPEAT_MS) return
             scrolledSinceLastEvent = 0
             lastScrollEventAt = now
-            emit('snapshot')
+            emit('snapshot', 'scrolled')
         },
         options
     )
