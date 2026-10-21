@@ -145,7 +145,7 @@ export const SPECIES: Species[] = [
         plateI: img('mid-form-fleer', 1),
         plateII: img('mid-form-fleer', 2),
         map: { top: 58, left: 49 },
-        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_mid_form_fleer_b94e4b60df.png',
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_halfway_houdini_3c9fcc0e0b.png',
         sections: [
             {
                 label: 'Appearance',
