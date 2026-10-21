@@ -9,9 +9,9 @@ availability:
 sourceId: Instagram
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Instagram connector syncs an Instagram professional account into PostHog: the profile, its posts, stories and comments, and the insights Meta reports for the account and for each post. You can then analyze social activity alongside your product data.
 
@@ -35,10 +35,9 @@ When linking Instagram, you'll need:
 
 <SyncModes />
 
-Two tables sync incrementally:
+`account_insights` syncs incrementally: it uses the metric's date and continues from the last day it synced.
 
-- `media` uses each post's creation time, so a run fetches only posts created since the previous run.
-- `account_insights` uses the metric's date and continues from the last day it synced.
+`media` re-reads all posts from your start date on every sync so that engagement metrics like `like_count` and `comments_count` stay current. The merge deduplicates on `id`, so existing rows are updated rather than doubled.
 
 The rest have no time filter on Meta's side, so they do a full refresh on every run.
 
