@@ -498,7 +498,6 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
-    closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
 }
@@ -945,7 +944,6 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -1024,7 +1022,6 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -1586,7 +1583,7 @@ const appSettings: AppSettings = {
     '/field-guide/the-rage-clicker': { toolbar: false, hideTitle: true },
     '/field-guide/the-refreshing-pilgrim': { toolbar: false, hideTitle: true },
     '/field-guide/the-tab-hopper': { toolbar: false, hideTitle: true },
-    '/field-guide/the-mid-form-fleer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-halfway-houdini': { toolbar: false, hideTitle: true },
     '/field-guide/the-pricing-page-loiterer': { toolbar: false, hideTitle: true },
     '/field-guide/the-tutorial-skipper': { toolbar: false, hideTitle: true },
     '/field-guide/the-modal-slammer': { toolbar: false, hideTitle: true },

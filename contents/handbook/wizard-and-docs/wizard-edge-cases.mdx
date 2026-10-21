@@ -40,7 +40,7 @@ export function PostHogInitializer() {
 import posthog from 'posthog-js'
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN!, {
   api_host: '/ingest',
-  defaults: '2026-01-30',
+  defaults: '<ph_posthog_js_defaults>',
 })
 // components: useFeatureFlagEnabled('flag') works without PostHogProvider
 ```
@@ -350,7 +350,7 @@ if (!apiKey || !apiHost) {
     throw new Error(`${missingVariable} variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once ${missingVariable} is configured`);
   }
 } else {
-  posthog.init(apiKey, { api_host: apiHost, defaults: '2026-01-30' });
+  posthog.init(apiKey, { api_host: apiHost, defaults: '<ph_posthog_js_defaults>' });
 }
 // where a build has no env (mobile release), embed the real public token instead
 ```
@@ -470,7 +470,7 @@ posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN, {
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN, {
   api_host: '/ingest',
   ui_host: 'https://us.posthog.com',
-  defaults: '2026-01-30',
+  defaults: '<ph_posthog_js_defaults>',
 })
 // plus framework rewrites: /ingest/static, /ingest/array -> assets origin; /ingest -> us.i.posthog.com
 ```
@@ -955,7 +955,7 @@ posthog.init(token, { api_host: host })
 ```js file=Wizard
 posthog.init(token, {
   api_host: host,
-  capture_pageview: 'history_change',   // or defaults: '2026-01-30'
+  capture_pageview: 'history_change',   // or defaults: '<ph_posthog_js_defaults>'
 })
 ```
 
@@ -1100,7 +1100,7 @@ Exception capture is never turned on, or errors are sent in a shape Error Tracki
 **Impact.** Silent: uncaught browser errors never reach PostHog. Users conclude Error Tracking does not work. Same for Python, where the option is enable_exception_autocapture.
 
 ```js file=Generic agent
-posthog.init(apiKey, { api_host: '/ingest', defaults: '2026-01-30' })
+posthog.init(apiKey, { api_host: '/ingest', defaults: '<ph_posthog_js_defaults>' })
 // no capture_exceptions, no captureException anywhere
 // React: <PostHogProvider apiKey={key} options={{ api_host: '/ingest' }}>
 ```
@@ -1108,7 +1108,7 @@ posthog.init(apiKey, { api_host: '/ingest', defaults: '2026-01-30' })
 ```js file=Wizard
 posthog.init(apiKey, {
   api_host: '/ingest',
-  defaults: '2026-01-30',
+  defaults: '<ph_posthog_js_defaults>',
   capture_exceptions: true, // unhandled exceptions -> Error Tracking
 })
 ```

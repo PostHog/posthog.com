@@ -21,6 +21,7 @@ Through MCP tools, your agent can:
 - **Debug a run.** `workflows-list-invocations`, `workflows-get-invocation`, `workflows-logs`, and `workflows-list-batch-jobs` show what actually happened on a given run.
 - **Check performance.** `workflows-stats` reports on one workflow and `workflows-global-stats` across all of them.
 - **Move between revisions.** `workflows-list-revisions`, `workflows-get-revision`, and `workflows-restore-revision` let you inspect history and roll back.
+- **Organize with tags.** `workflows-create` and `workflows-update` accept a `tags` array to label workflows by team or topic, and `workflows-list` takes a `tags` filter to return only matching workflows.
 
 For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
 

@@ -8,20 +8,31 @@ A channel is a way a customer conversation reaches Support. Whatever channel a m
 
 Channels are your support context. In [Self-driving](/docs/self-driving) terms, the conversations they bring in are a signal source: recurring issues across your tickets become reports and actionable reports become pull requests.
 
-## The four channels
+## The channels
 
 | Channel | How tickets arrive | Guide |
 | --- | --- | --- |
 | **Widget** | An in-app chat button. Auto-attaches the session, replay, URL, and identity | [Set up the widget](/docs/support/widget) |
 | **Email** | Forward `support@` mail in. Replies thread back to the customer's inbox | [Connect email](/docs/support/email) |
 | **Slack** | SupportHog turns messages, mentions, or a `:ticket:` reaction into tickets | [Connect Slack](/docs/support/slack) |
+| **Microsoft Teams** | Beta. SupportHog turns channel messages or an `@SupportHog` mention into tickets. There is no emoji trigger | [Connect Teams](/docs/support/teams) |
 | **GitHub** | Issues in monitored repos become tickets. Replies post back as comments | [Connect GitHub](/docs/support/github) |
+| **API** | Your code creates the ticket. See below for which `channel_source` you get | [JavaScript API](/docs/support/javascript-api) |
 
-Every channel syncs both ways. A reply you send in PostHog reaches the customer on the channel they used, and their responses sync back to the ticket.
+Every connected channel syncs both ways. A reply you send in PostHog reaches the customer on the channel they used, and their responses sync back to the ticket.
+
+## Create tickets from your code
+
+There is no separate `api` value on `channel_source`. The two public ways to create a ticket map onto channels you already have:
+
+- **JavaScript API** (`posthog.conversations.sendMessage`) creates a **widget** ticket. The inbox shows `widget`. Use this for a custom chat UI. See the [JavaScript API](/docs/support/javascript-api).
+- **Compose API** (`POST /api/projects/:project_id/conversations/tickets/compose/`) starts an **email** ticket and sends the first message to the customer. You need a verified sending domain and a personal API key with the `ticket:write` scope. See [start a ticket with the API](/docs/support/email#start-a-ticket-with-the-api).
+
+`POST /api/projects/:project_id/conversations/tickets/` does not create a ticket. It returns `405`. Use one of the two calls above.
 
 ## Slack and GitHub each play two roles
 
-Two of these channels share a name with something else in PostHog, which is worth untangling.
+Two of these channels share a name with something else in PostHog.
 
-- **Slack** is a channel when SupportHog turns messages into tickets. It's also a *surface* when you mention `@PostHog` to review Self-driving work. The channel is where tickets come *from*; the surface is where you *work*. See [Use Support in Slack](/docs/support/surfaces/slack).
-- **GitHub** is a channel when issues become support tickets. GitHub Issues is *also* a [Self-driving signal source](/docs/self-driving/inbox/sources), where issues feed the loop directly. Same integration, two jobs.
+- **Slack** is a channel when SupportHog turns messages into tickets. It is also the surface where your team replies in the thread, because a teammate's Slack reply is stored as a team message on the ticket. Mention `@PostHog` only when you want an agent to query ticket data or review Self-driving work. That is a different app. See [Use Support in Slack](/docs/support/surfaces/slack).
+- **GitHub** is a channel when issues become support tickets. GitHub Issues is also a [Self-driving signal source](/docs/self-driving/inbox/sources), where issues feed the loop directly. Same integration, two jobs.

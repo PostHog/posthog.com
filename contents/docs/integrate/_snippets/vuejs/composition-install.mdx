@@ -15,7 +15,7 @@ const app = createApp(App);
 
 posthog.init(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN || '<ph_project_token>', {
   api_host: import.meta.env.VITE_POSTHOG_HOST || '<ph_client_api_host>',
-  defaults: '2026-05-30',
+  defaults: '<ph_posthog_js_defaults>',
 });
 
 app.use(createPinia())

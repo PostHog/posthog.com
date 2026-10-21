@@ -157,6 +157,11 @@
             "destination": "/field-guide"
         },
         {
+            "source": "/field-guide/the-mid-form-fleer",
+            "destination": "/field-guide/the-halfway-houdini",
+            "statusCode": 301
+        },
+        {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
             "statusCode": 301
@@ -658,11 +663,6 @@
         {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/support/teams:ext(\\.md)?",
-            "destination": "/docs/support:ext?",
             "statusCode": 301
         },
         {
@@ -3328,7 +3328,12 @@
         },
         {
             "source": "/docs/support/surfaces/code:ext(\\.md)?",
-            "destination": "/docs/support/surfaces/desktop:ext?",
+            "destination": "/docs/support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/support:ext?",
             "statusCode": 301
         },
         {
