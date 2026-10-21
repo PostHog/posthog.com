@@ -167,6 +167,25 @@ Legacy formats such as `gzip-js`, `lz64`, `base64`, and the `?compression=` quer
 
 Capture v1 checks every request and every event as it arrives. A problem with the request rejects the whole request. A problem with one event drops only that event and returns its [result detail](#result-details).
 
+### Field types
+
+Every field must have the JSON type below. A field with the wrong type, such as a number where a string belongs, rejects the **whole request** with `400` `request_parsing_error`, and nothing in it is stored. Send IDs as strings, even when they're numbers: JSON numbers can lose precision.
+
+| Field | Type |
+|---|---|
+| `batch` | Array of event objects |
+| `created_at` | String (RFC 3339) |
+| `historical_migration` | Boolean, optional |
+| `event` | String |
+| `uuid` | String (UUID) |
+| `distinct_id` | String |
+| `timestamp` | String (RFC 3339) |
+| `session_id`, `window_id` | String, optional |
+| `options` | Object, optional |
+| `properties` | Object, optional |
+
+PostHog SDKs always send these types. If you change an event in a `before_send` hook, keep these types.
+
 ### Request limits
 
 | Limit | Analytics endpoint | If you exceed it |
@@ -184,7 +203,7 @@ Capture v1 checks every request and every event as it arrives. A problem with th
 | `Content-Type` | `application/json` | `415` `unsupported_content_type` |
 | `Content-Encoding` | None, or `gzip`, `deflate`, `br`, or `zstd` | `415` `unsupported_encoding` |
 | Header values | Visible ASCII characters only | `400` `invalid_header_value` |
-| Field types | `event`, `uuid`, `distinct_id`, `timestamp`, `session_id`, and `window_id` are JSON strings. Send a numeric ID as a string: JSON numbers can lose precision. | `400` `request_parsing_error`, nothing stored |
+| Field types | See [field types](#field-types) | `400` `request_parsing_error`, nothing stored |
 | `PostHog-Sdk-Info` | `<library>/<version>`, up to 200 bytes | Request accepted, but `$lib` and `$lib_version` are not set |
 
 ### Event limits
