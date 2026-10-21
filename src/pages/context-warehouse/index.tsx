@@ -5,7 +5,7 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
-import { CallToAction } from 'components/CallToAction'
+import ContextWarehouseCTA from 'components/ContextWarehouseCTA'
 import {
     Hedgehog996,
     HedgehogCaveman,
@@ -613,14 +613,7 @@ export default function DataStack(): JSX.Element {
                                         ))}
                                     </ul>
                                     <div className="mt-6">
-                                        <CallToAction
-                                            to="https://app.posthog.com/data-management/sources"
-                                            externalNoIcon
-                                            size="md"
-                                            className="max-w-[175px]"
-                                        >
-                                            Get started
-                                        </CallToAction>
+                                        <ContextWarehouseCTA label="Get started" />
                                     </div>
                                 </div>
                                 <div className="hidden justify-center @lg/reader-content:flex">
@@ -706,13 +699,7 @@ export default function DataStack(): JSX.Element {
                                         the whole point.
                                     </p>
                                     <div className="flex flex-wrap items-center gap-3">
-                                        <CallToAction
-                                            to="https://app.posthog.com/data-management/sources"
-                                            externalNoIcon
-                                            size="md"
-                                        >
-                                            Get Started
-                                        </CallToAction>
+                                        <ContextWarehouseCTA label="Get Started" />
                                         <p className="mb-0 text-sm text-secondary">
                                             Not using PostHog?{' '}
                                             <Link
