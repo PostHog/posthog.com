@@ -615,20 +615,6 @@ interface AgentApp {
 }
 
 const APPS: Record<AgentTheme, AgentApp> = {
-    claude: {
-        label: 'Claude Code',
-        Icon: ClaudeCodeIcon,
-        installUrl: '/docs/model-context-protocol/claude-code',
-        Component: ClaudeTerminal,
-        trace: TERMINAL_TRACE,
-    },
-    codex: {
-        label: 'Codex',
-        Icon: CodexIcon,
-        installUrl: '/docs/model-context-protocol/codex',
-        Component: CodexTerminal,
-        trace: TERMINAL_TRACE,
-    },
     claudeApp: {
         label: 'Claude',
         Icon: ClaudeAppIcon,
@@ -649,6 +635,20 @@ const APPS: Record<AgentTheme, AgentApp> = {
         installUrl: '/docs/model-context-protocol/cursor',
         Component: CursorApp,
         trace: CURSOR_TRACE,
+    },
+    claude: {
+        label: 'Claude Code',
+        Icon: ClaudeCodeIcon,
+        installUrl: '/docs/model-context-protocol/claude-code',
+        Component: ClaudeTerminal,
+        trace: TERMINAL_TRACE,
+    },
+    codex: {
+        label: 'Codex',
+        Icon: CodexIcon,
+        installUrl: '/docs/model-context-protocol/codex',
+        Component: CodexTerminal,
+        trace: TERMINAL_TRACE,
     },
 }
 
