@@ -171,7 +171,7 @@ Capture v1 checks every request and every event as it arrives. A problem with th
 
 Every field must have the JSON type below. A field with the wrong type, such as a number where a string belongs, rejects the **whole request** with `400` `request_parsing_error`, and nothing in it is stored. Send IDs as strings, even when they're numbers: JSON numbers can lose precision.
 
-The response's `error_description` says where parsing failed, for example `Failed to parse request body: wrong JSON type or value at line 1, column 87.`. It never repeats the data you sent.
+The response's `error_description` says where parsing failed, for example `Failed to parse request body: wrong JSON type or value at batch[3].distinct_id (line 1, column 481).` It names the field when it can, and never repeats the data you sent.
 
 <!-- TODO(capture-v1): keep this line only once posthog #120820 is deployed (format matches it). -->
 
