@@ -46,6 +46,20 @@ Connect PostHog to your Google Ads account using a Google account. The Google ac
 
 <SourceParameters />
 
+### Skip removed keywords
+
+The **Skip removed keywords?** setting filters out removed keywords from the `keyword` and `ad_group_criterion` tables. It is set to **No** by default.
+
+When set to **Yes**, these tables exclude:
+
+- Keywords with a status of `REMOVED`
+- Keywords in a removed ad group
+- Keywords in a removed campaign
+
+The filter is applied at the Google Ads query level, so removed rows are never fetched. This is useful for accounts with a large number of removed keywords, since the `keyword` and `ad_group_criterion` tables do a full refresh on every sync and each row counts towards your billed row usage.
+
+> **Note:** Enabling this setting means removed keywords are no longer present in the synced tables. Queries that join keyword data to historical stats tables will not find names for removed keywords after the next sync.
+
 ## Supported tables
 
 <SourceTables />
