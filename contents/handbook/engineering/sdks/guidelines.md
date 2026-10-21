@@ -126,13 +126,15 @@ The happy path matters, but SDK bugs often hide in shutdown, retries, offline mo
 
 Prefer tests that match how customers use the SDK. Add small example apps where they help. For mobile and browser SDKs, remember that customers can't always roll out fixes quickly, so a little extra caution before release is worth it.
 
+Every SDK should provide a documented test mode for unit and integration tests without credentials, real customer data, or network requests to PostHog, including background requests. Tests should be able to inspect SDK operations and supply simulated responses or failures through a supported interface, without accessing SDK internals. This mode should support meaningful assertions, not just disable the SDK. Document which behavior it validates and what still requires end-to-end testing.
+
 ### Treat docs and examples as part of the SDK
 
 An SDK without good docs is only half shipped. Keep the quickstart current, show idiomatic examples, and explain common production setup: flushing on shutdown, identifying users, using custom hosts, handling feature flags, and enabling debug logs.
 
 Each SDK should have a troubleshooting page for common install, build, configuration, network, and runtime errors.
 
-Document unsupported environments, incompatible feature combinations, and known limitations alongside the relevant setup or usage instructions. Explain alternatives where available.
+Place compatibility constraints and known limitations next to the setup or usage instructions they affect, with alternatives where available.
 
 Examples should be boring, copy-pasteable, and close to how customers write real production code in that ecosystem.
 
@@ -144,25 +146,13 @@ The public API reference should be complete and current. It should cover public 
 
 An agent-first SDK is one a coding agent can discover, integrate, configure, verify, and upgrade using the published package and documentation. It shouldn't need to guess behavior, read SDK internals, or rely on undocumented human steps.
 
-This means reducing ambiguity for humans too, not creating a separate agent-only API. Apply the same [API design](#design-apis-for-forward-compatibility), [documentation](#treat-docs-and-examples-as-part-of-the-sdk), and [debugging](#make-debugging-humane) guidelines with agent-driven integration in mind:
+This means reducing ambiguity for humans too, not creating a separate agent-only API. Apply the same [API design](#design-apis-for-forward-compatibility), [documentation](#treat-docs-and-examples-as-part-of-the-sdk), [debugging](#make-debugging-humane), and [testing](#test-the-boring-paths-and-the-weird-paths) guidelines with agent-driven integration in mind:
 
 - Recommend one integration path per supported environment. Make prerequisites, package selection, and setup steps explicit.
-
-- Keep the public interface discoverable, well-defined, and hard to misuse. Use types and standard documentation comments to make expected behavior and constraints explicit.
-
-- Keep documentation and examples aligned with released versions. State compatibility requirements, and distinguish stable functionality from experimental or deprecated functionality.
-
-- Provide minimal, runnable examples that include necessary production setup. Check that examples compile or run in CI where practical.
-
-- Explain how to verify that an integration works, not just that the code builds. Diagnostics should explain what failed and what to do next, without exposing secrets or disrupting the host application.
-
+- Keep documentation and examples aligned with released versions. When SDK behavior changes, update affected agent-facing setup tools, context sources, and documentation, not just package docs.
+- Check that examples compile or run in CI where practical.
+- Explain how to verify that an integration works, not just that the code builds.
 - Support non-interactive setup through the platform's normal configuration mechanisms.
-
-- Every SDK should provide a documented test mode for unit and integration tests without credentials, real customer data, or network requests to PostHog, including background requests. Tests should be able to inspect SDK operations and supply simulated responses or failures through a supported interface, without accessing SDK internals. This mode should support meaningful assertions, not just disable the SDK. Document which behavior it validates and what still requires end-to-end testing.
-
-- Make privacy and security requirements explicit. Following the quickstart should produce a safe integration without requiring the agent to infer missing safeguards.
-
-- Provide version-specific migration instructions with before/after examples. Add codemods or agent skills when they meaningfully reduce migration work, not as a requirement for every SDK.
 
 A practical check: give a coding agent a clean supported project and the public docs. Can it integrate the SDK, verify the expected result, and diagnose a common configuration error without inspecting SDK source? Review the generated integration for correctness and safety, not just whether it builds.
 
