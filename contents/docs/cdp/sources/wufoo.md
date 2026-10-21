@@ -9,7 +9,7 @@ availability:
 sourceId: Wufoo
 ---
 
-The Wufoo connector syncs your form data – forms, reports, and users – into PostHog, letting you analyze form activity alongside your product data.
+The Wufoo connector syncs your form data – including form entries, fields, report data, and users – into PostHog, letting you analyze form submissions alongside your product data.
 
 ## Adding a data source
 
@@ -25,11 +25,15 @@ Once the syncs are complete, you can start using Wufoo data in PostHog.
 
 ## Available tables
 
-| Table     | Description                                              | Sync method  |
-| --------- | -------------------------------------------------------- | ------------ |
-| `forms`   | Form definitions including URL, status, and settings     | Full refresh |
-| `reports` | Saved visualizations and summaries built on form entries | Full refresh |
-| `users`   | Users on your Wufoo account with their roles and access  | Full refresh |
+| Table            | Description                                                            | Sync method  |
+| ---------------- | ---------------------------------------------------------------------- | ------------ |
+| `forms`          | Form definitions including URL, status, and settings                   | Full refresh |
+| `form_entries`   | Submitted form answers and metadata for each form                      | Full refresh |
+| `form_fields`    | Field definitions for each form, mapping field IDs to titles and types | Full refresh |
+| `reports`        | Saved visualizations and summaries built on form entries               | Full refresh |
+| `report_entries` | Entries included in each report after its filters are applied          | Full refresh |
+| `report_fields`  | Field definitions for each report, mapping field IDs to titles         | Full refresh |
+| `users`          | Users on your Wufoo account with their roles and access                | Full refresh |
 
 All tables sync using **full refresh**, which reloads all data on each sync.
 
