@@ -26,13 +26,15 @@ A manager at PostHog is _not_ responsible for:
 
 This guidance applies to all teams, irrespective of whether you manage an engineering or non-engineering team. 
 
-## What you owe other teams
+## Working with other teams
 
-Everything above is about your own team. If you are a [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead), you also owe a few things to everyone else:
+Everything above is about your own team. If you are a [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead), you also owe a few things to other teams and are responsible for communicating downstream impact to them. 
 
-1. Tell downstream teams before you ship something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, overcommunicate.
+This includes...
+
+1. Telling downstream teams before you ship something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, try to overcommunicate.
 2. Put your [quarterly goals](/handbook/company/goal-setting#publishing-and-viewing-goals) on your team page, so the exec team can see them on the [WIP page](/wip) without asking you.
-3. If you manage other team leads, agree on a goal with each of their teams and make sure each team publishes its goals too.
+3. If you manage other team leads, clarify to them where you will set goals and track work so that they have appropriate context. 
 
 ### Part-time managers
 
