@@ -1,54 +1,61 @@
 ---
 title: 'The best Sentry alternatives & competitors, compared'
-date: 2026-01-26
+date: 2026-10-20
 author:
     - ian-vanagas
     - natalia-amorim
-rootpage: /blog
+sidebar: Compare
+rootpage: /compare
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/sentry_0369fbe6bf.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/Group_144681_371d424250.png
 featuredImageType: full
 category: General
 tags:
-    - Comparisons
+    - Alternatives
+seo:
+    metaTitle: The best Sentry alternatives & competitors, compared
+    metaDescription: Discover the top alternatives to Sentry for error tracking, session replay, and product analytics. Compare features, pricing, and more to find the right fit for your team.
 ---
 
 import { ProductComparisonTable } from 'components/ProductComparisonTable'
-
+ 
 [Sentry](/blog/posthog-vs-sentry) is one of the most widely-used error tracking tools on the market, and for good reason. It's mature, reliable, and most developers have used it at some point.
 
 But Sentry isn't the only option. Whether you're looking for deeper product context, a more generous free tier, or a tool that combines error tracking with analytics and session replay, there are [strong alternatives worth considering](/compare/best-error-tracking-tools).
 
-In this guide, we compare the best Sentry alternatives, including tools that go beyond traditional error monitoring to help you understand *who* is affected and *why* it matters – not just what broke.
+In this guide, we compare the best Sentry alternatives, including tools that go beyond traditional error monitoring to help you understand *who* is affected and *why* it matters.
+
+Here's the short version:
 
 ## 1. PostHog
 
 - **Founded:** 2020
-- **Similar to:** Sentry, LogRocket
-- **Typical users:** Engineers and product teams
-- **Typical customers:** Mid-size B2Bs and startups
+- **Who it's for:** Developers, AI product builders, and startups or scaleups who want error tracking to be part of understanding their product rather than a separate tool. 
+- **Who it isn't for:** SRE teams who need deep APM, profiling, and infrastructure monitoring; Sentry, Datadog, or New Relic will serve them better.
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_24_at_11_05_43_2x_4bd442ec11.png)
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform combining [error tracking](/error-tracking), [session replays](/session-replay), [product analytics](/product-analytics), [web analytics](/web-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [user surveys](/surveys), [LLM observability](/ai-observability), and more into one product. 
+[PostHog](/) (that's us 👋) is an all-in-one developer platform combining [error tracking](/error-tracking), [session replays](/session-replay), [product analytics](/product-analytics), [web analytics](/web-analytics), [A/B testing](/experiments), [feature flags](/feature-flags), [logs](/logs), [AI observability](/ai-observability), and a lot more into one product. 
 
-This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but also tools like [Amplitude](/blog/posthog-vs-amplitude) and [LaunchDarkly](/compare/posthog-vs-launchdarkly).
+This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but also tools like [Amplitude](/blog/posthog-vs-amplitude), [LaunchDarkly](/compare/posthog-vs-launchdarkly), and [Langfuse](/compare/posthog-vs-langfuse).
 
-#### Key features
+PostHog acts as your product's context layer: an error shows up with the replay, flags, logs, and user behind it already attached, and the built-in [data warehouse](/context-warehouse) adds your Stripe, HubSpot, or Postgres data alongside it. You can query all of it with SQL or hand it to an agent from [Slack](/slack) or your editor via [the MCP](/mcp).
 
-- **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Correlate with product usage data.
+### Key features
 
-- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, performance monitoring, and 90-day data retention.
+- **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation) with stack traces and source maps, group them into issues you can assign and resolve, tag them with the release that shipped them, and alert Slack, Discord, Teams, or a webhook. 
 
-- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
+- **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and performance monitoring, with retention from 30 days on the free plan to a year on Boost and Scale. [Replay Vision](/replay-vision) runs AI scanners across recordings so you don't have to watch them one by one.
+
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/sql) for power users.
 
 - **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
-- **A/B tests:** Optimize your app and website with up to nine test variations and track impact on primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+- **AI observability:** Capture every LLM generation and trace with its cost, latency, tokens, and errors, tied to the user and session that triggered it. Run evals on production traffic and A/B test prompts or models behind a flag. 
 
-- **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- **Data warehouse and CDP:** Sync Stripe, HubSpot, Postgres, and other sources into the [data warehouse](/context-warehouse) and query them alongside your product data, then push events back out to your tools with [CDP destinations](/cdp) or batch exports. 
 
 ### How does PostHog compare to Sentry?
 
@@ -68,7 +75,7 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
         'error_tracking.features.console_log_capture',
         'product_analytics',
         'session_replay',
-        'surveys',
+        'ai_observability',
         'platform.security.history_audit_logs',
         'platform.security.role_based_access_control',
         'platform.deployment.open_source',
@@ -81,9 +88,10 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
   <summary>Main differences between PostHog and Sentry</summary>
 
 * PostHog offers 100k free errors and 5,000 web and 2,500 mobile recordings free per month vs Sentry's 5k errors and 50 recordings on the free tier.
-* PostHog ties every error to user sessions, product analytics, session recordings, feature flags, and [distributed traces](/tracing). Sentry focuses on stack traces and performance monitoring.
-* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors.
-* Sentry supports 100+ platforms including Unity, Unreal Engine, Rust, and Elixir; PostHog covers major web and mobile frameworks but has narrower SDK coverage.
+* PostHog ties every error to user sessions, product analytics, session recordings, feature flags, [logs](/logs), and [distributed traces](/tracing). Sentry focuses on stack traces and performance monitoring.
+* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors, and its data forwarding covers error events only on the Business plan.
+* Sentry supports 100+ platforms, including Unreal Engine, Godot, and game consoles; PostHog has 19 official SDKs (including Rust, Elixir, .NET, Unity, and Roblox) but doesn't cover Unreal or consoles.
+* PostHog's AI features are included: 500 [PostHog AI](/ai) credits a month, a free [MCP server](/mcp), and a [Slack app](/slack). Sentry's Seer agent is a paid add-on at $40 per active contributor per month and isn't available on the free plan.
 
 </details>
 
@@ -91,21 +99,21 @@ This means it's not only an alternative to [Sentry](/blog/posthog-vs-sentry) but
   <summary>Main similarities between PostHog and Sentry</summary>
 
 * Both capture exceptions with detailed stack traces and environment context.
-* Both recently launched [logs](/docs/logs) and [LLM observability](/ai-observability) features
-* Both offer AI assistants: [PostHog AI](/ai) can be used for querying data and debugging; Sentry has Seer for automated root cause analysis and fix suggestions.
+* Both offer [logs](/docs/logs) and [AI observability](/ai-observability) (Sentry calls its version AI agent monitoring), and both have free MCP servers.
+* Both offer AI assistants: [PostHog AI](/ai) can be used for querying data, debugging, and shipping fixes; Sentry has Seer for automated root cause analysis and fix suggestions.
 * Both integrate with GitHub, Slack, and popular CI/CD tools.
 
 </details>
 
-### Why do companies use PostHog?
+### PostHog and Sentry pricing comparison
 
-According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
-
-1. **It replaces multiple tools:** PostHog can replace [Mixpanel](/blog/posthog-vs-mixpanel) (product analytics), [Fullstory](/compare/posthog-vs-fullstory) (session replay), and [Optimizely](/compare/posthog-vs-optimizely) (feature flags and A/B testing). This simplifies workflows and ensures product data is all in one place.
-
-2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever. Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
-
-3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, gathering feedback with user surveys, and monitoring errors.
+| | PostHog | Sentry |
+|---|---|---|
+| **Free plan** | 100k errors, 5,000 web + 2,500 mobile replays, 1M events, 10 GB logs | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Unlimited | 1 |
+| **Paid plans** | No base fee; usage-based per product | Team $29/month, Business $89/month, plus usage |
+| **AI features** | PostHog AI (500 credits a month free), MCP server, and Slack app included | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | Free (MIT, open core) | Free (FSL, source-available) |
 
 > #### Bottom line
 >
@@ -116,17 +124,16 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 ## 2. Rollbar
 
 - **Founded:** 2012
-- **Similar to:** Sentry, Appsignal, Raygun
-- **Typical users:** Developers, engineers, and operations teams
-- **Typical customers:** Enterprise organizations, SaaS companies, and tech startups
+- **Who it's for:** Small teams that want focused error tracking with AI fixes and nothing else to configure
+- **Who it isn't for:** Teams that need performance monitoring, log management, or a self-hosted option.
 
 ![Rollbar](https://res.cloudinary.com/dmukukwp6/image/upload/rollbar_c04782ffbc.png)
 
 ### What is Rollbar?
 
-[Rollbar](/compare/best-rollbar-alternatives) helps teams find and fix errors in their code fast through real-time error tracking, issue management, and AI-assisted workflows. Their whole platform is designed to help teams quickly detect, prioritize, and resolve issues in their applications.
+[Rollbar](/compare/best-rollbar-alternatives) helps teams find and fix errors in their code fast through real-time error tracking, issue management, and AI root cause analysis. In 2025 it added session replay, and in 2026 it launched Resolve, an agent that writes a fix, runs the tests, and opens a PR. Their whole platform is designed to help teams quickly detect, prioritize, and resolve issues in their applications.
 
-#### Key features
+### Key features
 
 - **Error tracking:** Real-time error detection with automatic grouping and issue tracking.
 
@@ -135,6 +142,8 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 - **Error context:** Detailed error context including stack traces, code, and telemetry.
 
 - **Custom workflows**: Use Rollbar's rules engine to trigger API or webhook-based actions.
+
+- **Session replay and AI fixes:** Replays attached to errors (1,000 a month free), plus AI root cause analysis and the Resolve fix agent, both billed through AI credits that paid plans include.
 
 ### How does Rollbar compare to Sentry?
 
@@ -183,15 +192,15 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 </details>
 
-### Why do companies use Rollbar?
+### Rollbar and Sentry pricing comparison
 
-According to [reviews on G2](https://www.g2.com/products/rollbar/reviews), companies choose Rollbar for its:
-
-1. **Ease-of-use:** Reviewers like that Rollbar makes it easy to track and monitor errors to ensure their apps are running smoothly.
-
-2. **Integrations:** Rollbar integrates with the tools reviewers already use like Slack, GitHub, Jira, and more.
-
-3. **Customer support:** Reviewers appreciate Rollbar's responsiveness to support requests and feedback.
+| | Rollbar | Sentry |
+|---|---|---|
+| **Free plan** | 5k error occurrences, 1,000 session replays, 30-day retention | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Unlimited | 1 |
+| **Paid plans** | Essentials from $9/month, Advanced from $13/month | Team $29/month, Business $89/month, plus usage |
+| **AI features** | Root cause analysis and Resolve via AI credits (none on the free plan) | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | None | Free (FSL, source-available) |
 
 > #### Bottom line
 >
@@ -199,18 +208,17 @@ According to [reviews on G2](https://www.g2.com/products/rollbar/reviews), compa
 
 ## 3. Raygun
 
--   **Founded:** 2007
--   **Similar to:** Sentry, Rollbar
--   **Typical users:** Development teams and SREs
--   **Typical customers:** Ecommerce and media companies
+- **Founded:** 2007
+- **Who it's for:** .NET-heavy teams, and ecommerce or media sites, that want crash reporting, real user monitoring, and APM from one vendor with AI error resolution included.
+- **Who it isn't for:** Small projects, since there's no free tier and Crash Reporting starts at $40 a month billed annually, or teams outside .NET, Node.js, and Ruby who want APM.
 
 ![Raygun](https://res.cloudinary.com/dmukukwp6/image/upload/raygun2_1f01c82ebe.png)
 
 ### What is Raygun?
 
-Raygun is a full-stack monitoring platform focused on ecommerce and media companies.
+**Raygun** is a full-stack monitoring platform focused on ecommerce and media companies (if you got here searching for the Australian B-girl: wrong Raygun, but if your app ever does the kangaroo in production, this one will catch it).
 
-It provides crashing reporting, performance monitoring, and user experience insights. Its suite of tools enables teams to quickly detect, diagnose, and resolve issues across their entire tech stack. It's also built an AI error resolution system to help with this.
+It provides crash reporting, performance monitoring, and user experience insights. Its suite of tools enables teams to quickly detect, diagnose, and resolve issues across their entire tech stack. It's also built an AI error resolution system to help with this.
 
 #### Key features
 
@@ -252,10 +260,10 @@ It provides crashing reporting, performance monitoring, and user experience insi
 <details>
   <summary>Main differences between Raygun and Sentry</summary>
 
-* Raygun includes AI-powered error resolution; Sentry recently added Seer AI but it's an add-on.
-* Sentry offers a free tier; Raygun only provides a 14-day free trial.
+* Raygun includes AI error resolution in every Crash Reporting plan; Sentry's Seer is a paid add-on.
+* Sentry offers a free tier; Raygun only provides a 14-day free trial, with Crash Reporting starting at $40 a month billed annually.
 * Sentry is source-available (FSL) and can be self-hosted or used in the cloud; Raygun is subscription only.
-* Raygun has a stronger focus on .NET and Flutter SDKs; Sentry has broader framework coverage.
+* Raygun is .NET-first (its APM covers .NET, Node.js, and Ruby); Sentry has broader framework coverage.
 
 </details>
 
@@ -269,15 +277,15 @@ It provides crashing reporting, performance monitoring, and user experience insi
 
 </details>
 
-### Why do companies use Raygun?
+### Raygun and Sentry pricing comparison
 
-According to G2 reviews, Raygun is chosen because:
-
-1. **Alerting:** Reviewers like that Raygun helps them stay on top of issues in real-time. This helps them maintain a high level of satisfaction.
-
-2. **Stack traces:** Raygun helps reviewers find the exact code or request that is causing an issue. Grouping also helps them figure out which issues are causing the most pain.
-
-3. **Simplicity:** Compared to other tools, reviewers find Raygun easier to set up and use. They appreciate the UI Raygun has built.
+| | Raygun | Sentry |
+|---|---|---|
+| **Free plan** | None (14-day trial) | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Trial only | 1 |
+| **Paid plans** | Crash Reporting from $40/month billed annually; RUM and APM from $80/month each | Team $29/month, Business $89/month, plus usage |
+| **AI features** | AI Error Resolution included in every Crash Reporting plan | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | None | Free (FSL, source-available) |
 
 > #### Bottom line
 >
@@ -286,9 +294,8 @@ According to G2 reviews, Raygun is chosen because:
 ## 4. Datadog
 
 - **Founded:** 2010
-- **Similar to:** New Relic
-- **Typical users:** DevOps teams, IT, and software engineers
-- **Typical customers:** Huge, cloud-native enterprises
+- **Who it's for:** Enterprises already running Datadog for infrastructure, APM, and logs who want errors in the same place, with the backend trace a click away.
+- **Who it isn't for:** Small teams; the free plan is 5 hosts with 1-day retention, Error Tracking is a separate line item, and there's no self-hosted option.
 
 ![Datadog](https://res.cloudinary.com/dmukukwp6/image/upload/datadog_db7bb8e269.jpeg)
 
@@ -305,6 +312,8 @@ According to G2 reviews, Raygun is chosen because:
 - **Infrastructure monitoring:** Get visibility into your infrastructure's performance, health, and security across your cloud or hybrid environment.
 
 - **Security and compliance monitoring:** Ensure your data is secure and compliant with industry standards. Protect against reported vulnerabilities.
+
+- **Integrations:** 1,000+ integrations covering nearly every cloud service, database, and framework you're likely to run.
 
 ### How does Datadog compare to Sentry?
 
@@ -355,15 +364,15 @@ According to G2 reviews, Raygun is chosen because:
 
 </details>
 
-### Why do companies use Datadog?
+### Datadog and Sentry pricing comparison
 
-According to G2 reviewers, Datadog is chosen because:
-
-1. **Multi-product:** From infrastructure monitoring to application performance monitoring to log management, Datadog has products for nearly every part of your stack. Reviewers also appreciate that all these products are interconnected.
-
-2. **Integrations:** Reviewers claim that Datadog has integrations for "literally everything." This means it can hook into nearly every tool they use.
-
-3. **Depth:** The amount of data Datadog can collect is huge. Along with their range of analysis tools, reviewers find it's super customizable to their needs.
+| | Datadog | Sentry |
+|---|---|---|
+| **Free plan** | Infrastructure for 5 hosts with 1-day retention; no free Error Tracking | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | No per-seat pricing | 1 |
+| **Paid plans** | Per product (per host, per GB, per million spans); Error Tracking billed by error volume as its own line item | Team $29/month, Business $89/month, plus usage |
+| **AI features** | Watchdog anomaly detection and root cause analysis built in | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | None (BYOC for log storage only) | Free (FSL, source-available) |
 
 > #### Bottom line
 >
@@ -371,16 +380,15 @@ According to G2 reviewers, Datadog is chosen because:
 
 ## 5. New Relic
 
--   **Founded:** 2008
--   **Similar to:** Datadog
--   **Typical users:** Engineers, DevOps, SREs, and IT Ops
--   **Typical customers:** Enterprises, mid-market technology companies, and cloud-native organizations
+- **Founded:** 2008
+- **Who it's for:** Teams that want full-stack observability on a usable free tier (100 GB a month and one full-platform user), including session replay for web and mobile.
+- **Who it isn't for:** Teams that only need error tracking; per-user pricing adds up past one full-platform seat, and setup is heavier than a dedicated error tracker.
 
 ![New Relic](https://res.cloudinary.com/dmukukwp6/image/upload/newrelic_63d08e13fe.jpeg)
 
 ### What is New Relic?
 
-New Relic is a cloud-based observability and analytics platform that provides full-stack visibility into application performance, infrastructure, and user experience. It helps organizations monitor, troubleshoot, and optimize their software in real time, enabling proactive issue resolution and improved customer experiences.
+**New Relic** is a cloud-based observability and analytics platform that provides full-stack visibility into application performance, infrastructure, and user experience. It helps organizations monitor, troubleshoot, and optimize their software in real time, enabling proactive issue resolution and improved customer experiences.
 
 #### Key features
 
@@ -441,13 +449,15 @@ New Relic is a cloud-based observability and analytics platform that provides fu
 
 </details>
 
-### Why do companies use New Relic?
+### New Relic and Sentry pricing comparison
 
-G2 reviewers like New Relic because:
-
-1. **It's all-in-one:** Reviewers find that New Relic provides all the functionality they need to monitor their apps and infrastructure, as well as find issues and solve them.
-
-2. **It's easy to get started:** Reviewers praise New Relic for how easy it is to set up and its pre-built queries and dashboards. This helps them get started quickly and transition into more complex use cases when needed.
+| | New Relic | Sentry |
+|---|---|---|
+| **Free plan** | 100 GB data ingest a month | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | 1 full-platform user, unlimited basic users | 1 |
+| **Paid plans** | $0.40/GB beyond 100 GB; full-platform users from $10 for the first and $99 each after | Team $29/month, Business $89/month, plus usage |
+| **AI features** | New Relic AI for queries, anomaly detection, and root cause analysis; agentic features in preview | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | None | Free (FSL, source-available) |
 
 > #### Bottom line
 >
@@ -475,6 +485,8 @@ G2 reviewers like New Relic because:
 - **Performance monitoring:** Monitor frontend performance such as web vitals, CPU and memory usage, and network speed.
 
 - **Product analytics:** Capture usage data and visualize it with conversion funnels, path analysis, and retention charts.
+
+- **Galileo AI:** Session summaries, automatically surfaced issues, and funnel insights, included on Pro plans and above.
 
 ### How does LogRocket compare to Sentry?
 
@@ -523,32 +535,31 @@ G2 reviewers like New Relic because:
 
 </details>
 
-### Why do companies use LogRocket?
+### LogRocket and Sentry pricing comparison
 
-According to G2 reviews, customers use LogRocket because:
-
-1. **Identifying problems:** LogRocket's combination of error tracking, performance monitoring, and session replay makes it uniquely powerful at finding bugs and issues. Unlike other tools, it uncovers both user and software issues.
-
-2. **Improves user experience:** LogRocket seems to have succeeded at their goal of helping users fix issues. Reviewers find it provides all the tools to improve their user experience.
-
-3. **Usability:** LogRocket provides a lot of functionality out of the box. It captures the details users need, provides useful visualizations, and automatically triages some issues.
+| | LogRocket | Sentry |
+|---|---|---|
+| **Free plan** | None (14-day trial) | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Trial only | 1 |
+| **Paid plans** | Core from $176/month billed annually; Pro for 100k+ sessions; Enterprise custom | Team $29/month, Business $89/month, plus usage |
+| **AI features** | Galileo AI on Pro and above | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | Enterprise plans only | Free (FSL, source-available) |
 
 > #### Bottom line
 >
-> LogRocket, like PostHog, is focused more engineering, product and support teams. It's a good alternative to Sentry for these types of teams.
+> LogRocket, like PostHog, is focused more on engineering, product, and support teams. It's a good alternative to Sentry for these types of teams, though without a free plan it's a harder sell for small ones.
 
 ## 7. AppSignal
 
--   **Founded:** 2012
--   **Similar to:** Sentry, Raygun
--   **Typical users:** Developers and DevOps teams
--   **Typical customers:** Startups and mid-sized SaaS companies
+- **Founded:** 2012
+- **Who it's for:** Ruby, Elixir, Node.js, and Python teams who want errors, APM, host metrics, and logs in one simple tool, with a free plan of 30k requests.
+- **Who it isn't for:** frontend-heavy or mobile teams, or anyone who needs session replay or self-hosting.
 
 ![AppSignal](https://res.cloudinary.com/dmukukwp6/image/upload/appsignal_56624799c6.jpeg)
 
 ### What is AppSignal?
 
-AppSignal is an application performance monitoring (APM) and error tracking tool designed for developers. It offers insight into errors, performance issues, host metrics, uptime monitoring, and logs in one unified platform. It's known for its ease of setup, developer-friendly experience, and real-time alerting.
+**AppSignal** is an application performance monitoring (APM) and error tracking tool designed for developers. It offers insight into errors, performance issues, host metrics, uptime monitoring, and logs in one unified platform. It's known for its ease of setup, developer-friendly experience, and real-time alerting.
 
 #### Key features
 
@@ -609,27 +620,113 @@ AppSignal is an application performance monitoring (APM) and error tracking tool
 
 </details>
 
-### Why do companies use AppSignal?
+### AppSignal and Sentry pricing comparison
 
-According to [reviews on G2](https://www.g2.com/products/appsignal/reviews), AppSignal is praised for:
-
-1. **Language-focus**: Reviewers appreciate AppSignal's support for their favorite languages, like Ruby and Elixir. They say it makes it easier to integrate AppSignal into their existing product.
-
-2. **Ease-of-use**: AppSignal is easy to set up and use. It has a bunch of pre-built metrics and visualizations for monitoring their app.
+| | AppSignal | Sentry |
+|---|---|---|
+| **Free plan** | 30k requests, 1 GB logs, 5-day retention | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Unlimited | 1 |
+| **Paid plans** | From $279/year for 250k requests; long-term log storage add-on $89/month | Team $29/month, Business $89/month, plus usage |
+| **AI features** | None advertised | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | None (only the collector runs on your infrastructure) | Free (FSL, source-available) |
 
 > #### Bottom line
 >
 > For developers using one of the languages AppSignal supports, it's a great alternative to Sentry. With OTel support and a lightweight free plan, it’s easy to adopt and covers the essentials without extra complexity.
 
+## 8. GlitchTip
+ 
+- **Founded:** 2020
+- **Who it's for:** Teams leaving Sentry over cost or licensing who want to keep their SDKs and self-host, or pay $15 a month for the hosted version.
+- **Who it isn't for:** Teams that want session replay, profiling, AI root cause analysis, or the user context around an error.
+
+### What is GlitchTip?
+ 
+**GlitchTip** is an open-source (MIT) reimplementation of Sentry's backend, built by Burke Software. It's compatible with Sentry's SDKs, so you point the Sentry client you already use at a GlitchTip DSN and keep going. You can self-host it with Docker Compose or Helm on as little as 512 MB of RAM, or use the hosted version, which has EU hosting on every plan.
+ 
+It covers the basics well and skips the rest: there's no session replay, profiling, or AI root cause analysis, and alerts are email and webhooks only.
+ 
+#### Key features
+ 
+- **Error tracking:** Exceptions, log messages, and CSP violations, grouped into issues you can comment on, assign, and resolve. Source maps upload through its CLI.
+
+- **Uptime monitoring:** Ping, GET, POST, and heartbeat checks with alerts when a service goes down.
+
+- **Performance monitoring:** Transactions and spans with p50 and p95 timings, captured through the Sentry SDK's tracing options.
+
+- **Logs:** Added in 2026, with native OpenTelemetry log ingest, alongside an MCP server for agents.
+
+### How does GlitchTip compare to Sentry?
+ 
+<p>
+<ProductComparisonTable
+    competitors={['glitchtip', 'sentry']}
+    rows={[
+        'platform.pricing.self_serve',
+        'platform.pricing.free_tier',
+        'error_tracking',
+        'error_tracking.monitoring.features.performance_monitoring',
+        'error_tracking.monitoring.distributed_tracing',
+        'error_tracking.features.profiling',
+        'error_tracking.features.error_alerts',
+        'error_tracking.monitoring.features.release_tracking',
+        'error_tracking.features.log_management',
+        'error_tracking.features.console_log_capture',
+        'product_analytics',
+        'session_replay',
+        'surveys',
+        'platform.security.history_audit_logs',
+        'platform.security.role_based_access_control',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+  <summary>Main differences between GlitchTip and Sentry</summary>
+
+* GlitchTip is MIT-licensed and free to self-host on modest hardware; Sentry's main web app is source-available (FSL) and its self-hosted stack is far heavier to run.
+* Sentry includes session replay, profiling, metrics, and the paid Seer agent; GlitchTip has none of these and keeps to errors, uptime, performance, and logs.
+* GlitchTip's hosted free plan covers 1,000 events a month with unlimited users; Sentry's covers 5k errors for 1 user.
+* GlitchTip alerts by email and webhook only; Sentry has native Slack, PagerDuty, and issue-tracker integrations.
+
+</details>
+
+<details>
+  <summary>Main similarities between GlitchTip and Sentry</summary>
+
+* Both use the same SDKs, so switching doesn't mean re-instrumenting your code.
+* Both offer error tracking, uptime monitoring, and performance monitoring.
+* Both can be self-hosted or used as a hosted service with EU data residency.
+* Both are open to inspection: GlitchTip is fully open source, Sentry is source-available.
+
+</details>
+
+### GlitchTip and Sentry pricing comparison
+ 
+| | GlitchTip | Sentry |
+|---|---|---|
+| **Free plan** | 1,000 events a month hosted; unlimited self-hosted | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Users on the free plan** | Unlimited | 1 |
+| **Paid plans** | Small $15/month (100k events), Medium $50, Large $250 | Team $29/month, Business $89/month, plus usage |
+| **AI features** | None (has an MCP server) | Seer at $40 per active contributor per month, not on the free plan |
+| **Self-hosting** | Free (MIT) | Free (FSL, source-available) |
+ 
+> #### Bottom line
+>
+> If you want Sentry's SDKs without Sentry's bill or license, and you don't need replays, profiling, or AI, GlitchTip is the most direct swap on this list. Teams that want the user context around an error will outgrow it quickly.
+
 ## Which Sentry alternative should you choose?
 
-* Want an all-in-one platform that connects errors to user sessions, analytics, feature flags, experiments, LLM observability, and more? Go with **PostHog**.
+* Want every error to arrive with the replay, flags, logs, and user behind it, in a platform your agents can work from via the MCP, on a free tier you won't outgrow? Go with **PostHog**.
 * Need simple, reliable error tracking without complexity? Try **Rollbar**.
 * Looking for AI-powered error resolution and strong .NET/Flutter support? Consider **Raygun**.
 * Enterprise-scale observability across your entire stack? **Datadog** ties everything together.
 * Full-stack monitoring with a generous free tier? **New Relic** is worth exploring.
 * Frontend-focused debugging with visual replays? **LogRocket** excels here.
 * Ruby or Elixir shop wanting deep language support? **AppSignal** is purpose-built for you.
+* Want a drop-in, open-source Sentry replacement you can self-host for free? **GlitchTip** speaks Sentry's SDK protocol.
 
 ## Is PostHog right for you?
 
@@ -640,12 +737,22 @@ We're biased, obviously, but we think PostHog is the perfect Sentry replacement 
 -   You value transparency. We're open source and open core.
 -   You want all the tools to help you build a better product (like product analytics, session replays, and A/B testing).
 -   You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+-   You're building with AI agents. The [MCP server](/mcp), [Slack app](/slack), and [CLI](/docs/cli) give them the same context you have.
 
 It's completely free to get started – no credit card required. Our [AI setup wizard](/wizard) handles configuration in minutes, or you can check out the [error tracking install guide](/docs/error-tracking/installation) to do it yourself.
 
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+Most Sentry alternatives give you a better or cheaper view of the same thing: the error. PostHog stores the error next to everything else your product generates, so [error tracking](/error-tracking), [session replay](/session-replay), [logs](/logs), [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), and [AI observability](/ai-observability) share one model of users and sessions.
+ 
+The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to business data from Stripe, HubSpot, Postgres, and other sources, synced in and pushed back out. The upshot for debugging: "which errors hit paying customers this week" is one query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product, not just its exceptions.
+ 
+</details>
 
 <details>
 <summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
@@ -677,7 +784,7 @@ Common reasons include: needing more context around errors, wanting a more gener
 <details>
   <summary>What's the best Sentry alternative overall?</summary>
 
-**PostHog** is the best all-around Sentry alternative for most teams. It combines [error tracking](/error-tracking) with [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [LLM observability](/ai-observability), and [surveys](/surveys), giving you a complete view of both the technical issue and its user impact.
+**PostHog** is the best all-around Sentry alternative for most teams. It combines [error tracking](/error-tracking) with [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [AI observability](/ai-observability), and [surveys](/surveys), giving you a complete view of both the technical issue and its user impact.
 
 </details>
 
