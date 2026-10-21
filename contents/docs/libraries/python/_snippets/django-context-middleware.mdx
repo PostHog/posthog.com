@@ -12,7 +12,20 @@ MIDDLEWARE = [
 ]
 ```
 
-The middleware uses the globally configured `posthog` client by default, so you don't need to create or pass it a separate client instance.
+The middleware uses the globally configured `posthog` client by default. If you create your own client with `Posthog(...)`, pass it to the middleware with `POSTHOG_MW_CLIENT`. Otherwise the middleware sends exceptions to the unconfigured global client, and they don't reach PostHog:
+
+```python
+# settings.py
+from posthog import Posthog
+
+POSTHOG_MW_CLIENT = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    enable_exception_autocapture=True,
+)
+```
+
+`POSTHOG_MW_CLIENT` only selects where the middleware sends the exceptions it captures. Events you capture through another client go to that client.
 
 The middleware automatically extracts and uses:
 
@@ -58,7 +71,7 @@ If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, co
 
 ### Exception capture
 
-By default, the middleware captures exceptions and sends them to PostHog's error tracking using the globally configured `posthog` client. This includes Django view exceptions that Django converts into error responses.
+By default, the middleware captures exceptions and sends them to PostHog's error tracking using `POSTHOG_MW_CLIENT`, or the globally configured `posthog` client when you leave it unset. This includes Django view exceptions that Django converts into error responses.
 
 Disable this by setting:
 
