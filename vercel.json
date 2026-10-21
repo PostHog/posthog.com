@@ -157,6 +157,11 @@
             "destination": "/field-guide"
         },
         {
+            "source": "/field-guide/the-mid-form-fleer",
+            "destination": "/field-guide/the-halfway-houdini",
+            "statusCode": 301
+        },
+        {
             "source": "/ko/newsletter/:path*",
             "destination": "/newsletter/:path*",
             "statusCode": 301
