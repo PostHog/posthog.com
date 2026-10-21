@@ -43,7 +43,7 @@ export const applications: CarouselSlide[] = [
             <>
                 <p>
                     The Warehouse is a database with its own hostname and credentials. Connect the tools your team
-                    already uses to query the Warehouse, not on the queries that power PostHog.
+                    already uses to query the Warehouse directly, separate from the queries that power PostHog.
                 </p>
                 {list([
                     {
