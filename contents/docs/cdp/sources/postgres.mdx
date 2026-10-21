@@ -662,4 +662,26 @@ When PostgreSQL invalidates a replication slot due to `max_slot_wal_keep_size`, 
 
 No manual intervention is required. Tables re-sync from their current state and streaming resumes once the snapshot completes. The `_cdc` history table has a gap for the window between the last confirmed position and the new slot.
 
+### Row-level security policy or custom function denied the read
+
+This error occurs when a row-level security (RLS) policy or custom PL/pgSQL function on one of your synced tables raises an exception that denies PostHog's read. This is common with Supabase, where RLS is enabled by default and policies often expect an authenticated application user — which PostHog's sync connection doesn't have.
+
+To fix this, either:
+
+1. **Allow PostHog's role to bypass the policy** by adding a permissive policy for the connecting role:
+
+   ```sql
+   CREATE POLICY "posthog_read" ON your_table FOR SELECT TO posthog USING (true);
+   ```
+
+2. **Grant the role `BYPASSRLS`** if PostHog should see all rows across all tables:
+
+   ```sql
+   ALTER USER posthog WITH BYPASSRLS;
+   ```
+
+3. **Remove the affected tables** from the sync if they should not be read by PostHog.
+
+After making changes, re-enable the sync in PostHog.
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
