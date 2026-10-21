@@ -10,6 +10,7 @@ A manager at PostHog has a short list of responsibilities:
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
 5. Collaborating with execs on team performance concerns that need early intervention
+6. [Communicating with teams outside your own](#what-you-owe-other-teams), if you are a team lead
 
 That's it.
 
@@ -24,6 +25,14 @@ A manager at PostHog is _not_ responsible for:
 8. Deciding to hire or fire people - the exec team do this
 
 This guidance applies to all teams, irrespective of whether you manage an engineering or non-engineering team. 
+
+## What you owe other teams
+
+Everything above is about your own team. If you are a [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead), you also owe a few things to everyone else:
+
+1. Tell downstream teams before you ship something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, overcommunicate.
+2. Put your [quarterly goals](/handbook/company/goal-setting#publishing-and-viewing-goals) on your team page, so the exec team can see them on the [WIP page](/wip) without asking you.
+3. If you manage other team leads, agree on a goal with each of their teams and make sure each team publishes its goals too.
 
 ### Part-time managers
 
