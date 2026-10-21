@@ -6673,6 +6673,12 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
+                    name: 'Use cases',
+                    url: '/docs/support/use-cases',
+                    icon: 'IconBook',
+                    color: 'teal',
+                },
+                {
                     name: 'Set up the widget',
                     url: '/docs/support/widget',
                     icon: 'IconMessage',
@@ -6688,7 +6694,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'PostHog Slack',
+                    name: 'Slack (SupportHog)',
                     url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
@@ -6698,12 +6704,6 @@ export const docsMenu = {
                     url: '/docs/support/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'blue',
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/support/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'green',
                 },
                 {
                     name: 'API',
@@ -6727,10 +6727,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Slack',
+                    name: 'Slack (SupportHog)',
                     url: '/docs/support/slack',
                     icon: 'IconChat',
                     color: 'purple',
+                },
+                {
+                    name: 'Microsoft Teams',
+                    url: '/docs/support/teams',
+                    icon: 'IconMessage',
+                    color: 'blue',
                 },
                 {
                     name: 'GitHub',
@@ -6754,6 +6760,21 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Automation',
+                },
+                {
+                    name: 'Workflows',
+                    url: '/docs/support/workflows',
+                    icon: 'IconDecisionTree',
+                    color: 'orange',
+                },
+                {
+                    name: 'AI agent',
+                    url: '/docs/support/ai-agent',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                },
+                {
                     name: 'Resources',
                 },
                 {
@@ -6761,6 +6782,12 @@ export const docsMenu = {
                     url: '/docs/support/pricing',
                     icon: 'IconPiggyBank',
                     color: 'green',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/support/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
             ],
         },

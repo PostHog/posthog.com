@@ -661,11 +661,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/support/teams:ext(\\.md)?",
-            "destination": "/docs/support:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/session-replay/network-performance-recording:ext(\\.md)?",
             "destination": "/docs/session-replay/network-recording:ext?",
             "statusCode": 301
@@ -3328,7 +3323,12 @@
         },
         {
             "source": "/docs/support/surfaces/code:ext(\\.md)?",
-            "destination": "/docs/support/surfaces/desktop:ext?",
+            "destination": "/docs/support:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/support:ext?",
             "statusCode": 301
         },
         {
