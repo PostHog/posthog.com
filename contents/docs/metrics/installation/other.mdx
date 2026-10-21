@@ -68,6 +68,58 @@ Or as a query parameter on the endpoint:
 
 </Step>
 
+<Step title="Send metrics without an SDK" badge="optional">
+
+The metrics endpoint is a standard [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) receiver, so you can also `POST` metrics to it directly, for example from a platform with no OpenTelemetry SDK.
+
+We recommend an SDK instead where you can. The OTLP payload is verbose, and an SDK handles aggregation, batching, retries, and flushing for you. If your app runs [JavaScript](/docs/metrics/installation/javascript), [Node.js](/docs/metrics/installation/nodejs), or [Python](/docs/metrics/installation/python), use the `posthog.metrics` API in the PostHog SDK. For other languages, use an [OpenTelemetry SDK](https://opentelemetry.io/ecosystem/registry/).
+
+To send a request by hand, the body is an [`ExportMetricsServiceRequest`](https://github.com/open-telemetry/opentelemetry-proto/blob/main/opentelemetry/proto/collector/metrics/v1/metrics_service.proto) in the [OTLP JSON encoding](https://opentelemetry.io/docs/specs/otlp/#json-protobuf-encoding). This example sends one counter data point:
+
+```bash
+curl -X POST "<ph_client_api_host>/i/v1/metrics" \
+  -H "Authorization: Bearer <ph_project_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "resourceMetrics": [{
+      "resource": {
+        "attributes": [
+          { "key": "service.name", "value": { "stringValue": "my-app" } }
+        ]
+      },
+      "scopeMetrics": [{
+        "scope": { "name": "manual" },
+        "metrics": [{
+          "name": "orders.created",
+          "unit": "1",
+          "sum": {
+            "aggregationTemporality": 1,
+            "isMonotonic": true,
+            "dataPoints": [{
+              "timeUnixNano": "1767225600000000000",
+              "asInt": "3",
+              "attributes": [
+                { "key": "plan", "value": { "stringValue": "pro" } }
+              ]
+            }]
+          }
+        }]
+      }]
+    }]
+  }'
+```
+
+Replace `timeUnixNano` with the current time in nanoseconds since the Unix epoch. The main rules of the JSON encoding are:
+
+- Field names are lowerCamelCase, for example `timeUnixNano`, not `time_unix_nano`.
+- Enums are integers. For `aggregationTemporality`, `1` is delta (the change since the last data point) and `2` is cumulative (the running total).
+- 64-bit integers, such as `timeUnixNano` and `asInt`, are strings. Use `asDouble` for decimal values.
+- Each metric has one data field: `sum` for counters, `gauge` for current values, or `histogram` for distributions. See the [metrics data model](https://opentelemetry.io/docs/specs/otel/metrics/data-model/) for the fields of each type.
+
+A `200` response means that PostHog accepted the data. You can also send the binary protobuf encoding with `Content-Type: application/x-protobuf`, and compress either body with `Content-Encoding: gzip`.
+
+</Step>
+
 <Step title="Test your setup" badge="recommended">
 
 1. Trigger the code path that records a metric
