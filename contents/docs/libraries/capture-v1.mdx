@@ -137,7 +137,7 @@ PostHog checks every event and drops only the events that break a rule. Your err
 
 - **Event names: up to 200 bytes.** This is new: legacy capture had no limit. Longer names are dropped (`event_name_too_long`).
 - **Distinct IDs: up to 200 bytes.** Legacy capture shortened longer IDs and kept the event. Capture v1 drops the event (`distinct_id_too_large`).
-- **Distinct IDs are strings.** SDKs send them as strings for you.
+- **Distinct IDs are strings.** SDKs send them as strings for you. If a `before_send` hook changes `distinct_id`, keep it a string: PostHog rejects a whole request that contains a non-string ID, so the SDK drops that event before sending. See [field types](/docs/api/capture-v1#field-types).
 - **Properties are an object, and option values are readable.** Otherwise PostHog drops the event (`malformed_event_properties`, `invalid_options`).
 - **Event UUIDs are unique.** See [every event needs its own UUID](#every-event-needs-its-own-uuid).
 
