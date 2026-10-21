@@ -4,7 +4,7 @@ Shared content and teaching components for pocket guides inside the Learn platfo
 
 ## Authoring requirements
 
-- Follow the [pocket guide handbook](../../../contents/handbook/wizard-and-docs/pocket-guides.mdx). Use the [Product Analytics guide](../../../contents/pocket-guides/product-analytics/) as the current reference for story and design.
+- Follow the [pocket guide handbook](../../../contents/handbook/wizard-and-docs/pocket-guides.mdx). Use the [Product Analytics guide](../../../contents/learn/product-analytics/pocket-guide/) as the current reference for story and design.
 - Use Twig.com as the canonical example app and its imaginary product engineering team as the story's characters.
 - Teach concepts through the team's questions, evidence, and decisions. Explain enough in the guide to keep reading; link to docs for reference details.
 - Choose a chapter structure that fits the story. A fixed "101, then use cases" outline and a CTA in every chapter are not required.
@@ -13,21 +13,30 @@ Shared content and teaching components for pocket guides inside the Learn platfo
 
 ## Learn integration
 
-Pocket guides should open and remain inside their product's Learn tab, with chapters in the product sidebar. Product Analytics already uses this integration. The standalone `BookReader` remains available during migration and is planned for deprecation after the remaining guides move to Learn.
+Pocket guides open and remain inside their product's Learn tab, with chapters in the product sidebar. Guides without a Learn tab render inside their product's docs. There is no standalone book reader.
 
-The Learn rendering path is:
+The rendering path is:
 
-1. `src/pages/docs/<product>/learn.tsx` and `learn/[...chapter].tsx` render `LearnPage`.
-2. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`.
-3. `LearnSurface.tsx` selects a chapter from `useBookPages(volumeId)` and loads its compiled MDX body. An empty or unknown chapter falls back to the introduction.
-4. `EntryProvider` supplies page data and the Learn `basePath`. `MDXProvider` uses `bookMdxComponents`, including `ReaderWrapper`, to render the body.
+1. `gatsby/createPages.ts` builds one page per chapter. `pocketGuidePageContext` in `src/constants/pocketGuides.ts` maps each source file to its volume's `learnPath`, and every page uses `src/templates/PocketGuide.tsx`. Full and minimal builds share this helper. Each chapter has its own title and canonical URL in the initial HTML. There are no client-only chapter routes.
+2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving and Data Stack. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
+3. `LearnSurface.tsx` renders the chapter from page context, using `useBookPages(volumeId)` for reading order. An empty or unknown chapter falls back to the introduction.
+4. `EntryProvider` supplies page data and the guide's `basePath`. `MDXProvider` uses `bookMdxComponents`, including `ReaderWrapper`, to render the body.
 
-Product Analytics has a separate choice page, `ProductAnalyticsLearnLanding.tsx`, at `/docs/product-analytics/learn`. Its story starts at `/docs/product-analytics/learn/introduction`. Legacy Product Analytics pocket-guide URLs redirect to Learn routes.
+### Routes
+
+| Volume | Public URL |
+| --- | --- |
+| Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
+| AI Observability, Session Replay, Feature Flags | Overview at `/learn/<product>`; guide at `/learn/<product>/pocket-guide` |
+| Self-driving | `/docs/self-driving/pocket-guide` |
+| Data Stack | `/docs/data-warehouse/pocket-guide` |
+
+Each volume with `learnHub` in `src/constants/pocketGuides.ts` has an overview page at `src/pages/learn/<product>/index.tsx`, which renders `LearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. A hub lists Overview and Pocket guide (chapters nested under it), each with an icon, then the extra pages in `learnHub.pages`. Every hub has Agent prompts and MCP. Product Analytics, AI Observability, and Session Replay also have Live playground, because Twig has labs for them. Feature Flags has no Twig lab yet. Volumes without `learnHub` list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
 
 ## Content and registration
 
 ```text
-contents/pocket-guides/<volume>/
+contents/learn/<volume>/pocket-guide/
 ├── index.mdx              pocketGuideOrder: 0 — introduction
 └── <chapter>/
     └── index.mdx          pocketGuideOrder: 1+ — subsequent chapters
@@ -35,16 +44,23 @@ contents/pocket-guides/<volume>/
 
 | Location | Purpose |
 | --- | --- |
-| `contents/pocket-guides/<id>/` | Introduction and chapter MDX |
-| `src/constants/pocketGuides.ts` | Volume metadata and destination helpers |
-| `src/hooks/productData/<product>.tsx` | Product's `pocketGuideVolume` |
-| `src/pages/docs/<product>/learn.tsx` and `learn/[...chapter].tsx` | Learn entry and chapter routes; follow Product Analytics |
+| `contents/learn/<id>/pocket-guide/` | Introduction and chapter MDX |
+| `src/constants/pocketGuides.ts` | Volume metadata, `learnPath`, and route helpers |
+| `src/hooks/productData/<product>.tsx` | Product's `pocketGuideVolume`, which adds the Learn tab |
+| `src/templates/PocketGuide.tsx` | Generated chapter page; no per-product route files are needed |
+| `vercel.json` | Permanent redirects from any former URL |
 | `volumeArt.tsx` | Shared cover illustration registry; reuse existing brand art |
 | `Action.tsx` / `VOLUME_SUBCOMMAND` | Optional wizard command for `<Setup />` |
 
 `useBookPages` selects pages with numeric `pocketGuideOrder`, excludes sibling `SKILL.md` files and `_`-prefixed paths, and sorts by order. Use order 0 for the introduction. Omitting the order removes a page from this reading sequence; it is not an access-control mechanism. `shortTitle` overrides the navigation label; otherwise the title is used.
 
 For a new frontmatter field used in GraphQL, check the declarations in `gatsby/createSchemaCustomization.ts`. Add the required schema declaration rather than relying on inference for sparse fields. Clear Gatsby's cache after schema changes.
+
+## Introductions
+
+Place `<CoverWithChapters />` in every guide introduction, after the opening paragraphs, on the left page. Put setup instructions on the right page. The marker renders the shared `Cover` and a centered Start reading button beside the Chapters list; they stack in narrow containers. `<PocketGuideCover />` and `<StartReading>` also work alone (add `align="center"` to center the button). An introduction without `<CoverWithChapters />` shows the Chapters list after its body.
+
+The cover, Start reading, and every chapter link open chapter 1 or the linked chapter with the book-opening transition. Do not add another reading CTA to an introduction. Keep introduction copy in one section beneath the topic heading, without a separate "Where to start" section. Include a setup wizard only when readers need an installed integration to follow along; keep demos and extra illustrations in chapters.
 
 ## MDX and figure placement
 
@@ -71,7 +87,7 @@ Readers can inspect the destination filter in <SeeFig n={1} />.
 </RightPage>
 ```
 
-`LeftPage` and `RightPage` are authoring markers, not a two-column layout. Both Learn and standalone BookReader use `ReaderWrapper`:
+`LeftPage` and `RightPage` are authoring markers, not a two-column layout. `ReaderWrapper` places the figures:
 
 - Direct children of `LeftPage` whose compiled `mdxType` ends in `Figure` and whose `n` prop is numeric are collected as figures.
 - Each collected figure is inserted after the first prose block citing its number with `<SeeFig n={...} />`.
@@ -94,14 +110,15 @@ Write code samples and tables as native Markdown. Use figures for teaching UI or
 | `CTA` | Link styled as a call to action; used by the Product Analytics introduction |
 | `LessonFooter` | Next-lesson link and supporting resources; no `nextHref` produces a disabled button |
 | `Action` | Optional action from `pocketGuideCta` frontmatter |
-| `Setup`, `Frontispiece`, `Eyebrow` | Optional setup command and title-page elements |
+| `Setup`, `Frontispiece`, `Eyebrow` | Optional setup command and title-page elements. Put `Eyebrow` inside the heading: `# <Eyebrow>A pocket guide to</Eyebrow> Product Analytics` |
+| `CoverWithChapters`, `PocketGuideCover`, `StartReading` | Introduction layout; see [Introductions](#introductions) |
 | `ReportFigure`, `ScoutFigure`, `SkillFigure`, `Watches`, `Enable` | Existing scout-related content; see the [SelfDrivingInbox README](../SelfDrivingInbox/README.md) |
 
 The scout format is still evolving. Its implementation conventions are not requirements for other guides.
 
-### MDX parsing constraints shared by Learn and BookReader
+### MDX parsing constraints
 
-Learn renders the same compiled MDX bodies and component map as standalone BookReader. Changing the surface does not change the source parser or bypass the remark plugins.
+Learn and docs guides render the same compiled MDX bodies and component map. Changing the surface does not change the source parser or bypass the remark plugins.
 
 Keep inline components inside the same source line as surrounding prose:
 
@@ -109,11 +126,11 @@ Keep inline components inside the same source line as surrounding prose:
 The team inspects an <Term name="event" /> before continuing.
 ```
 
-Avoid starting a continuation line with inline JSX. This is a defensive authoring convention for the current MDX pipeline, not a BookReader-only layout rule. The exact paragraph-splitting behavior has not been reproduced in this audit; do not assume every line-leading tag produces the same result.
+Avoid starting a continuation line with inline JSX. This is a defensive authoring convention for the current MDX pipeline. The exact paragraph-splitting behavior has not been reproduced in this audit; do not assume every line-leading tag produces the same result.
 
 Block components such as figures should have their own blocks with blank lines around them.
 
-The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path contains `/contents/pocket-guides/`. This exemption applies in both Learn and BookReader. Outside that directory, the plugin wraps top-level, single-line capitalized JSX with a matching closing tag or self-closing tag in `<p>`. It is not limited to self-closing components. Check the plugin guard if a pocket-guide block component receives invalid paragraph nesting.
+The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path matches `/contents/learn/<volume>/pocket-guide/`. Outside that directory, the plugin wraps top-level, single-line capitalized JSX with a matching closing tag or self-closing tag in `<p>`. It is not limited to self-closing components. Check the plugin guard if a pocket-guide block component receives invalid paragraph nesting.
 
 ## Product Analytics teaching examples
 
@@ -129,40 +146,50 @@ The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path c
 
 Use the source files for current fixture values, timing, and interaction details rather than treating this README as a second fixture specification.
 
+### Product Analytics Learn hub
+
+- `LearnLanding.tsx` renders every hub overview: the product name, an intro line, a Learn through a story section with the cover, a Learn with your agent preview when the hub lists `agent-prompts-and-mcp`, and a Learn by doing preview when the page passes `playground`. The intro defaults to the page description, and the story text defaults to the volume description.
+- `ProductAnalyticsLearnLanding.tsx` passes its own copy and its Twig filter preview to `LearnLanding`. The AI Observability and Session Replay overview pages pass a Twig figure only.
+- `AgentPromptsPage.tsx` renders each hub's `agent-prompts-and-mcp` page: MCP setup steps, a starter prompt, and one prompt per topic, each with Claude Code and Codex actions. Each product page passes its name, docs slug, starter focus, and topic prompts.
+- `LivePlaygroundPage.tsx` renders the shared top of each hub's `live-playground` page: the title, the Twig introduction, and the Explore Twig link. Each page writes its own sections as children, a `SectionIntro` followed by its figure. By convention, every playground opens with the Twig session replay (`SessionReplayLinkFigure`). `AiObservabilityPlaygroundExhibits.tsx` builds its trace, event, and code figures from the `@posthog/twig-components/ai-lab` fixtures and reducer. `SessionReplayPlaygroundExhibits.tsx` shows input masking with the `replay-lab` `searchValue` helper. These are focused views; the full labs stay on Twig.com. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
+- `AgentTeachingActions.tsx` shares the teaching prompt and the Claude Code and Codex launch controls. It exports `agentTeachingPrompt()` for every product's starter prompt, and `AGENT_TEACHING_PROMPT` for Product Analytics, so the displayed and launched instructions stay identical. Keep the prompt text unchanged unless someone asks for an instruction change. Pass a chapter-specific prompt through the optional `prompt` prop.
+- The Live playground page stacks `SessionReplayLinkFigure` (pass `autoPlay` for muted, looping playback), `TwigEventFigure`, and `BookingStepsFigure`. Chapter embeds keep manual playback.
+
 ## Styling and verification
 
-Learn inherits docs prose styles from `ReaderView`; standalone `BookPage` applies `getProseClasses`. Both use the shared component mappings. Use project color tokens and container queries for resizable app windows. Preserve Twig styling in embedded Twig views.
+Guides inherit docs prose styles from `ReaderView` and use the shared component mappings. Use project color tokens and container queries for resizable app windows. Preserve Twig styling in embedded Twig views.
 
 `ReaderWrapper` hides the annotation hint below `@2xl`; annotation markers remain visible. At wider container sizes, its marker opacity rule supports hover reveal. Keep captions sufficient to explain the figure without hover, and check the figure's own annotation implementation.
 
 For changes:
 
 1. Run `pnpm test:pocket-guides` for shared content and registration constraints. This also runs in the deploy preview workflow; it does not enforce every authoring recommendation.
-2. Run the relevant navigation checks (`pnpm test:navs`) when changing Learn routes or navigation helpers.
+2. Run the navigation checks (`pnpm test:navs`, which includes `learnRoutes.test.ts`) when changing routes, redirects, or navigation helpers.
 3. Start the site with `pnpm start` and load affected Learn pages. Check links, chapter navigation, console errors, and interactive examples.
 4. For visual changes, follow the repository's screenshot requirements at narrow and wide widths in light and dark mode. Verify reduced-motion behavior for animated examples.
-5. If standalone pages are also affected, check those separately while BookReader remains supported. Run redirect checks when changing redirects.
+5. When changing redirects, also check the old URLs on the deploy preview. The local dev server does not apply `vercel.json`.
 
-## Standalone BookReader only: retained during migration
+## Calls to action
 
-The following behavior belongs to the existing standalone view. Do not use it as the target architecture for new Learn integrations.
+`pocketGuideCta` frontmatter drives the optional `<Action />` body component. There is no pinned action bar, so place `<Action />` in the body where the reader should act.
 
-| File | Standalone responsibility |
-| --- | --- |
-| `BookPage.tsx` | Explorer window, standalone prose styles, font-size setting, and optional pinned action bar |
-| `BookReader.tsx` | Contents panel, compact navigation, Aa control, margin turn zones, and page-position footer |
-| `bookModel.tsx` | Also exports standalone font-size and page-turn hooks; `useBookPages` and route helpers remain shared with Learn |
+## Discovery surfaces
 
-`src/templates/Template.tsx` sends standalone `/pocket-guides/` slugs to `BookPage`. Its `ActionBar` or `EnableScoutBar` is supplied by `BookPage`, not by `LearnSurface`. Do not assume authoring `pocketGuideCta` creates a pinned bar inside Learn. The optional `<Action />` body component remains available through the shared component map.
-
-Standalone front matter is unnumbered; subsequent pages receive generated page numbers. BookReader's arrow keys, margin zones, and footer links use the shared sequence. These controls are not supplied by `LearnSurface`.
-
-## Existing discovery surfaces
-
-These components remain in use during migration. They are distinct from the standalone BookReader itself:
-
-- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`.
-- Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override. Keep routing decisions in the shared helpers.
+- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`. Covers show no volume number. The shelf lists volumes in `POCKET_GUIDE_VOLUMES` order.
+- Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override; the shelf, introductions, and the Product Analytics overview pass chapter 1. `Cover` opens its destination with the book-opening transition in the current window; `Book` opens a new window. Keep routing decisions in the shared helpers.
 - `VolumeCard.tsx` combines a cover, description, and CTA. `GuidesForProduct.tsx` selects a volume by `docsProduct` and returns nothing when none matches.
 - `usePocketGuideCounts.ts` controls displayed counts. By default it counts chapter paths with numeric order greater than 0 and excludes `isPrimer` pages. `countOrientationPages` instead includes numeric orders starting at 0. This display logic does not prescribe a chapter outline.
 - `VOLUME_ART` is exported from `volumeArt.tsx` and accessed through `volumeArt()`. It supplies cover and optional frontispiece art; it is not exclusive to `Cover`.
+
+## Book-opening transition
+
+`bookOpening.ts` exports `openPocketGuide(event, coverElement, destination)`. It runs the whole transition and the navigation, so destination pages need no animation hooks. `Cover` calls it by default. For a separate reading button, keep its real link and call the function from its click handler with the matching cover element, as `LearnSurface` does for Start reading. The cover is marked with `data-pocket-guide-cover`, and its hinged face with `data-pocket-guide-cover-face`.
+
+The transition animates an inert copy of the cover in a temporary layer clipped to the nearest Radix scroll viewport. The copy freezes computed styles, including container-query typography, so it does not reflow. Page content dissolves while the copy centers and zooms. The front cover swings open to become the left page, with a thin gray gutter line on the hinge, and the camera fits the two-page spread. The book then fades out and the destination replaces the page, with no full-window overlay. Sidebars and other windows do not animate.
+
+- Reduced-motion preferences, modified clicks, and missing measurements keep ordinary link behavior.
+- One transition runs per viewport. Cleanup restores the source on completion, cancellation, or failed navigation.
+- If the source cover unmounts, or the reader focuses another window, the transition stops instead of overriding the newer route.
+- A navigation that stalls for 5 seconds restores the source page.
+
+Run `pnpm exec node --test src/components/PocketGuides/bookOpening.test.ts` after changes.

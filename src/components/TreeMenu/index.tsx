@@ -68,6 +68,8 @@ interface TreeMenuProps {
      * the `listed` variant.
      */
     expandOnly?: boolean
+    /** Called after a link is clicked, e.g. to capture an analytics event. */
+    onItemClick?: (item: MenuItem) => void
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -192,6 +194,10 @@ const MarqueeLabel = ({
     )
 }
 
+/** An element icon before a `sidebar` link label, as in ProductNav. String icon names are ignored. */
+const SidebarIcon = ({ icon }: { icon: MenuItem['icon'] }) =>
+    icon && typeof icon !== 'string' ? <span className="mr-1 size-4 inline-flex shrink-0">{icon}</span> : null
+
 /** ProductNav-matching link used by the `sidebar` appearance. */
 const SidebarLink = ({
     menuItem,
@@ -229,6 +235,7 @@ const SidebarLink = ({
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
+            <SidebarIcon icon={menuItem.icon} />
             <MarqueeLabel hovering={hovering}>{menuItem.name}</MarqueeLabel>
             {arrow && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
         </Link>
@@ -318,6 +325,7 @@ function SidebarCollapsibleItem({
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
+                    <SidebarIcon icon={item.icon} />
                     <MarqueeLabel hovering={hovering}>{item.name}</MarqueeLabel>
                 </Link>
                 <button
@@ -431,6 +439,7 @@ export function TreeMenu(props: TreeMenuProps) {
 
     const handleClick = (item: MenuItem) => {
         setActiveItem(item)
+        props.onItemClick?.(item)
     }
 
     const items = props.items
