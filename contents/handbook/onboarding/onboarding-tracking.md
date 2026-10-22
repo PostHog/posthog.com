@@ -85,11 +85,7 @@ Where the numbers live:
 - Calendly clicks never reach PostHog. Calendly stores the UTMs on each booking instead, so filter the Calendly Meetings page by `utm_campaign` to attribute booked calls to emails.
 - The YouTube link in E3 is deliberately untracked (YouTube ignores UTM parameters, and we cannot read its analytics).
 
-The live templates and their sending playbooks (the templates are the canonical copies of the audit prompts and the full tracked URLs; we avoid pasting the tracked URLs here so stray clicks from this page do not pollute the data):
-
-- E1: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/dcf5f62b-463d-47b2-81df-ea522c240463">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/427384ad-f753-40fd-9473-c705d9911cbb">playbook</PrivateLink>
-- E2: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/4d8b1690-1a1e-4de2-a71e-3c08839df8aa">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/34522df1-065a-449b-9fc3-16a97c7921cf">playbook</PrivateLink>
-- E3: <PrivateLink url="https://posthog.vitally-eu.io/settings/templates/conversations/5e2637d8-29e9-4700-b227-33e1fe282f62">template</PrivateLink>, <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/c8e8cd60-2af3-4f8b-945a-7eafae4148eb">playbook</PrivateLink>
+The live email templates are in the Workflows <PrivateLink url="https://us.posthog.com/project/2/workflows/library">library</PrivateLink>. The templates are the canonical copies of the audit prompts and the full tracked URLs. We avoid pasting the tracked URLs here so stray clicks from this page do not pollute the data.
 
 #### Account analysis for outreach and meetings
 
