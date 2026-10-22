@@ -63,7 +63,7 @@ Cover:
 
 ### Value nugget ideas
 
-Pull from Customer Analytics and Metabase to find something specific to mention:
+Pull from PostHog and Metabase to find something specific to mention:
 
 - Event count spike or drop — make sure it's expected and tracking is correct.
 - Recent support ticket — follow up to confirm it's resolved.
@@ -83,7 +83,7 @@ Find what feels natural to you — keep it in PostHog's voice. Examples:
 - "hi from PostHog"
 - "Checking in from PostHog"
 
-In Customer Analytics, an account's Active conversations tab is a good place to see how teammates have reached out in the past.
+In Customer Analytics, an account's Conversations tab is a good place to see how teammates have reached out in the past.
 
 ### No response?
 

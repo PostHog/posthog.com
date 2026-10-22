@@ -48,12 +48,12 @@ Once live, the stream posts each call to the channel after it ends. Everyone wor
 * inactivity periods to flag engagement reviews  
 * New product usage (any amount) creates cross-sell opportunity indicator  
 * Payment failures and low credit balances to send Slack alerts to assigned CSM  
-* Health score changes trigger Customer Analytics indicators  
+* Health score changes can trigger Customer Analytics tasks or PostHog automation  
 * Annual renewal dates trigger preparation workflows in advance and a ping in Slack
 
 ### **Human-first automation philosophy**
 
-Every automated workflow includes deliberate human decision points. For example, when an account begins using session replay, Customer Analytics creates an indicator suggesting outreach about their use case \- but the CSM determines whether and how to engage based on the account relationship and context.
+Every automated workflow includes deliberate human decision points. For example, when an account begins using session replay, Customer Analytics can create an task suggesting outreach about their use case \- but the CSM determines whether and how to engage based on the account relationship and context.
 
 This approach ensures automation enhances rather than replaces the human elements of customer success.
 
@@ -61,9 +61,9 @@ This approach ensures automation enhances rather than replaces the human element
 
 **Best practices:**
 
-* Review automated tasks such as Customer Analytics indicators, Slack alerts, and customer health scores at least twice weekly.   
+* Review automated tasks such as Customer Analytics tasks, Slack alerts, and customer health scores at least twice weekly.   
 * Treat automated insights as starting points for investigation, not final answers\!  
-* Set-up individual alerts in Customer Analytics or PostHog CDP that match your own portfolio and experiences  
+* Set-up individual alerts in Customer Analytics or PostHog that match your own portfolio and experiences  
   * As an example, setting up your accounts as a Cohort in PostHog and then setting up CDP alerts/notifications to Slack based on product usage and activity.
 
 **What remains purely human:**
