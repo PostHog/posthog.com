@@ -10,13 +10,13 @@ We are transparent about how we contract with customers, including what discount
 
 We don't offer discounts to customers paying monthly, irrespective of commitment.
 
-Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
+Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. Our approach is inspired by the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
 ### The discount levers & why they matter to us
 
 Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
 
-1. **Volume:** The amount of credits purchased. *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
+1. **Annual commitment discount:** The amount of credits purchased. *The commitment itself is what we’re paying for — a year of anticipated usage, paid upfront, that we can invest immediately*
 2. **Timing of Cash:** When we receive payment. *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
 3. **Ability to Forecast:** Mutual agreement to timing. *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
 
@@ -29,31 +29,31 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on three levers:
 
-#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 and 3)
-- **$25-59k:** 20% base discount
-- **$60-99k:** 25% base discount
-- **$100-249k:** 30% base discount
-- **$250-499k:** 35% base discount
-- **$500-999k:** 40% base discount
+#### 1. Annual commitment discount (based on 12 months of credit purchased per contract year, usage estimated in good faith - Customers **must** qualify for this discount before receiving discounts 2 and 3)
+- **$25-59k:** 15% base discount
+- **$60-99k:** 20% base discount
+- **$100-249k:** 25% base discount
+- **$250-499k:** 30% base discount
+- **$500-999k:** 35% base discount
 - **$1M+:** Contact us for custom pricing
 
 > Two things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
-> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 30%, not the $500-999k tier at 35% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Multi-year deals:** +2.5% per additional year paid upfront (+2.5% for 2 years, +5% for 3 years. capped at +5%)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. 
 
 #### 3. Ability to forecast - mutual commitment to timing (additive)
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
-- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
+- To include the 5% discount on the order form, we require written confirmation of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 - Not available while the customer can claim a further partner-program credit grant (for example, a renewed YC deal grant) during the proposed contract term. This discount buys a firm conversion date, and a customer with another free grant on the way has no single conversion moment for us to secure. Once the customer is no longer eligible to claim the grant again, they count as ordinary net new and the discount is available.
@@ -103,7 +103,7 @@ Requirements for self-serve discounts:
 
 Additional notes on self-serve discounts:
 
--   For credit purchases below $25,000, the discount is 10% off. Credit purchases of $25,000 and above follow the standard volume discount structure above.
+-   For credit purchases below $25,000, the discount is 10% off. Credit purchases of $25,000 and above follow the discount structure above.
 -   Instead of providing all credits upfront, we apply 1/12 of the credits each month for the next 12 months. These credits do not expire for 1 year after they've been applied.
 -   If a customer uses all credits in a month, they will be billed for extra usage at the standard rate.
 
@@ -112,16 +112,14 @@ Additional notes on self-serve discounts:
 We offer additional discounts to non-profits:
 
 - For credit purchases below $25k: 15% discount (instead of standard 10% self-serve or no discount)
-- For credit purchases $25k - $100k: An additional 5% on top of standard volume discount
-- For credit purchases above $100k: Standard volume discounts apply (no additional non-profit discount)
+- For credit purchases $25k - $100k: An additional 5% on top of standard discounts
+- For credit purchases above $100k: Standard discounts apply (no additional non-profit discount)
 
 We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
-When evaluating a discount, it’s important to <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">review our margin calculations</PrivateLink> to ensure we remain margin positive, especially for larger accounts.
-
 To set up the non-profit discount in Stripe, [follow these instructions](/handbook/growth/sales/billing#coupons-and-discounts).
 
-> Non-profit discounts only provide an additional 5% on top of standard volume discounts, and only for credit purchases between $25,000 and $100,000.
+> Non-profit discounts only provide an additional 5% on top of the standard discounts above, and only for credit purchases between $25,000 and $100,000.
 
 ### Legacy discounts
 
@@ -278,7 +276,7 @@ Instead, fold the buyout period into the contract term:
 -   **Everything else is standard** — term start date, payment terms, and signature dates all follow our normal rules. There is no future-dating and no separate payment schedule.
 -   Call out the buyout credit in Special Terms: _"In consideration of Customer migrating to PostHog from its incumbent provider prior to the expiration of Customer's existing agreement with that provider, PostHog will provide a one-time credit in the amount of $NNNNN."_
 
-As a worked example: a customer expected to use ~$100k of credit a year, with 6 months left on their incumbent contract, at a 30% discount. They buy $100k of credit for $70k, we add $50k of buyout credit on top, and the order form is an 18 month term for $150k of total credit at a 30% discount. The effective discount lands north of 50%, which is expected and stays off the order form.
+As a worked example: a customer expected to use ~$100k of credit a year, with 6 months left on their incumbent contract, at a 25% discount. They buy $100k of credit for $75k, we add $50k of buyout credit on top, and the order form is an 18 month term for $150k of total credit at a 25% discount. The effective discount lands at 50%, which is expected and stays off the order form.
 
 This is also structure 3 in [how to structure free credits in special terms](#how-to-structure-free-credits-in-special-terms).
 
@@ -289,7 +287,9 @@ If a customer is currently _not_ a paying user of PostHog, but is a user of one 
 1. If the competitor matches our much lower offer, and the customer accepts, we've reduced their revenue by a significant amount
 2. If the customer accepts, we've gained net new revenue we otherwise would have missed out on, and we have the opportunity to sell more.
 
-In order for this to not mess up later renewals, the way we do this is by giving them credit for the first year in order to reach a total discount of 40%. For example, if the quote from the competitor is $50k, and the total cost for our product (including other discounts) is $40k, we will give them additional credits worth $10k, in order to undercut the total quote by 40%.
+In order for this to not mess up later renewals, the way we do this is by giving them credit for the first year so that what they pay lands 30% below the competitor’s quoted renewal price. Size the credit purchase so the payment hits that number, then add free credit to bring their total credit up to the quoted value. The order form keeps its standard contracted discount, which is the whole point — the renewal anchors on that rate rather than on the effective one.
+
+For example, if the quote from the competitor is $50k: they buy $46.7k of credit, which at the standard levers (25%) costs them $35k, or 30% below the quote. We add $3.3k of free credit so they hold $50k of credit in total. The effective discount is 30%; the contracted discount on the order form is still 25%. Below $60k of quoted value, the free credit works out at roughly 6.7% of the quote. At $60k and above the standard levers already reach 30% on their own, so no free credit is needed. Quotes under about $27k don’t work either, because the credit purchase falls below the $25k minimum for lever 1.
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
@@ -321,7 +321,7 @@ Apply your usual growth assumption to both halves. The post-plan run rate is the
 
 ### Tell the customer about the step-up
 
-Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
+Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better annual commitment discount tier as well, which is a much better trade than giving away the plan benefits.
 
 ## Credit over/under usage for contracts
 
@@ -336,12 +336,12 @@ Running out of credit early neither creates nor destroys eligibility for the ear
 
 ### When they don't have enough credit to cover their term
 
-We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
+We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Customer Analytics account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
 
 -   If they run out of credit in the first half of the term, they can purchase additional credits that expire with the current term. Each purchase is priced independently — we don't add it to previous purchases to reach a higher discount tier. The customer gets whichever of these two is better for them:
     -   The tier from their initial order form
     -   The tier the additional purchase amount qualifies for by itself
-    -   Example: a customer buys $105k of credits (30% tier). Later they add $400k, which qualifies for 35% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 20% on its own, which is lower than the original purchase tier, so they keep the original 30% rate from their initial order form.
+    -   Example: a customer buys $105k of credits (25% tier). Later they add $400k, which qualifies for 30% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 15% on its own, which is lower than the original purchase tier, so they keep the original 25% rate from their initial order form.
 -   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends, while still on prepaid credits and for at least as much credit as the current contract's amount per contract year, qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date. Any credit still left when the new term starts carries over in full (see [early renewals](#when-they-will-end-the-contract-term-with-credit-remaining) below).
 -   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. CreditBot gives account owners months of runway warning, so a customer paying list price for a gap is a customer we failed to engage early.
 
