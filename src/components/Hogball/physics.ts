@@ -1,18 +1,31 @@
 export type Point = { x: number; y: number }
 export type Wall = { a: Point; b: Point; kick?: number }
+export type Target = Wall & { down: boolean }
 export type Bumper = Point & { radius: number; flash: number }
 export type Flipper = { pivot: Point; side: 1 | -1; angle: number; speed: number }
 export type Input = { left: boolean; right: boolean; plunger: boolean }
+export type Sound = 'launch' | 'bumper' | 'sling' | 'target' | 'lane' | 'hole' | 'rocket' | 'drain' | 'over'
 export type Game = {
     ball: Point & { vx: number; vy: number; angle: number }
     flippers: [Flipper, Flipper]
     bumpers: Bumper[]
+    targets: Target[]
     lanes: boolean[]
     inLane: boolean[]
     charge: number
     score: number
     multiplier: number
     balls: number
+    bumperHits: number
+    fuel: number
+    rank: number
+    rockets: number
+    hold: number
+    holeCooldown: number
+    targetReset: number
+    message: string
+    messageTime: number
+    sounds: Sound[]
     state: 'ready' | 'playing' | 'over'
 }
 
@@ -23,13 +36,19 @@ export const FLIPPER_LENGTH = 58
 export const FLIPPER_RADIUS = 6
 export const LANE_X = [125, 185, 245]
 export const LANE_Y = 105
+export const HOLE = { x: 300, y: 330, radius: 12 }
+export const MAX_FUEL = 5
+// A post on the top arc that turns a launched ball down into the lanes and bumpers
+export const POST = { x: 81, y: 81 }
 export const BALLS_PER_GAME = 3
+export const RANKS = ['Cadet', 'Ensign', 'Lieutenant', 'Captain', 'Commander', 'Admiral']
 const GRAVITY = 800
 const MAX_SPEED = 1400
 const REST_ANGLE = 0.5
 const UP_ANGLE = -0.5
 const FLIPPER_SPEED = 24
 const PLUNGER = { x: 365, y: 596 }
+const HITS_PER_FUEL = 3
 
 const arc = (cx: number, cy: number, r: number, from: number, to: number, steps: number): Point[] =>
     Array.from({ length: steps + 1 }, (_, i) => {
@@ -39,8 +58,23 @@ const arc = (cx: number, cy: number, r: number, from: number, to: number, steps:
 
 const path = (points: Point[], kick?: number): Wall[] => points.slice(1).map((b, i) => ({ a: points[i], b, kick }))
 
+export const OUTLINE: Point[] = [{ x: 20, y: 470 }, ...arc(200, 200, 180, Math.PI, Math.PI * 2, 32), { x: 380, y: 610 }]
+
+export const SLINGSHOTS: Point[][] = [
+    [
+        { x: 62, y: 410 },
+        { x: 62, y: 460 },
+        { x: 104, y: 497 },
+    ],
+    [
+        { x: 308, y: 410 },
+        { x: 308, y: 460 },
+        { x: 266, y: 497 },
+    ],
+]
+
 export const WALLS: Wall[] = [
-    ...path([{ x: 20, y: 470 }, ...arc(200, 200, 180, Math.PI, Math.PI * 2, 32), { x: 380, y: 610 }]),
+    ...path(OUTLINE),
     ...path([
         { x: 20, y: 470 },
         { x: 113, y: 556 },
@@ -54,31 +88,9 @@ export const WALLS: Wall[] = [
         { x: 350, y: 610 },
         { x: 380, y: 610 },
     ]),
-    ...path([
-        { x: 62, y: 410 },
-        { x: 62, y: 460 },
-        { x: 104, y: 497 },
-    ]),
-    ...path(
-        [
-            { x: 104, y: 497 },
-            { x: 62, y: 410 },
-        ],
-        380
-    ),
-    ...path([
-        { x: 308, y: 410 },
-        { x: 308, y: 460 },
-        { x: 266, y: 497 },
-    ]),
-    ...path(
-        [
-            { x: 266, y: 497 },
-            { x: 308, y: 410 },
-        ],
-        380
-    ),
+    ...SLINGSHOTS.flatMap(([top, bottom, tip]) => [...path([top, bottom, tip]), ...path([tip, top], 380)]),
     ...[95, 155, 215, 275].map((x) => ({ a: { x, y: 85 }, b: { x, y: 125 } })),
+    { a: { x: POST.x - 3, y: POST.y }, b: { x: POST.x + 3, y: POST.y } },
 ]
 
 export const flipperTip = ({ pivot, side, angle }: Flipper): Point => ({
@@ -98,12 +110,23 @@ export function createGame(): Game {
             { x: 225, y: 235, radius: 22, flash: 0 },
             { x: 185, y: 305, radius: 22, flash: 0 },
         ],
+        targets: [290, 312, 334].map((y) => ({ a: { x: 58, y }, b: { x: 58, y: y + 16 }, down: false })),
         lanes: LANE_X.map(() => false),
         inLane: LANE_X.map(() => false),
         charge: 0,
         score: 0,
         multiplier: 1,
         balls: BALLS_PER_GAME,
+        bumperHits: 0,
+        fuel: 0,
+        rank: 0,
+        rockets: 0,
+        hold: 0,
+        holeCooldown: 0,
+        targetReset: 0,
+        message: 'Welcome aboard, Cadet',
+        messageTime: 3,
+        sounds: [],
         state: 'ready',
     }
 }
@@ -140,11 +163,35 @@ const award = (game: Game, points: number) => {
     game.score += points * game.multiplier
 }
 
+const say = (game: Game, message: string) => {
+    game.message = message
+    game.messageTime = 2.5
+}
+
 export function launch(game: Game): void {
     if (game.state === 'over' || !ballInPlunger(game)) return
     game.ball.vy = -(700 + 800 * game.charge)
     game.charge = 0
     game.state = 'playing'
+    game.sounds.push('launch')
+}
+
+function enterHole(game: Game) {
+    game.hold = 1.2
+    Object.assign(game.ball, { x: HOLE.x, y: HOLE.y, vx: 0, vy: 0 })
+    if (game.fuel < MAX_FUEL) {
+        award(game, 1000)
+        say(game, 'Launch pad needs fuel')
+        game.sounds.push('hole')
+        return
+    }
+    award(game, 25000)
+    game.rockets += 1
+    game.rank = Math.min(RANKS.length - 1, game.rank + 1)
+    game.fuel = 0
+    game.bumperHits = 0
+    say(game, `Rocket launch! Promoted to ${RANKS[game.rank]}`)
+    game.sounds.push('rocket')
 }
 
 export function step(game: Game, input: Input, dt: number): void {
@@ -155,6 +202,12 @@ export function step(game: Game, input: Input, dt: number): void {
         flipper.speed = delta / dt
     }
     for (const bumper of game.bumpers) bumper.flash = Math.max(0, bumper.flash - dt)
+    game.messageTime = Math.max(0, game.messageTime - dt)
+    game.holeCooldown = Math.max(0, game.holeCooldown - dt)
+    if (game.targetReset > 0) {
+        game.targetReset -= dt
+        if (game.targetReset <= 0) game.targets.forEach((target) => (target.down = false))
+    }
 
     const { ball } = game
     if (game.state === 'over') return
@@ -163,6 +216,15 @@ export function step(game: Game, input: Input, dt: number): void {
         ball.vx = 0
         ball.vy = 0
         ball.y = PLUNGER.y
+        return
+    }
+    if (game.hold > 0) {
+        game.hold -= dt
+        if (game.hold <= 0) {
+            ball.vx = -420
+            ball.vy = -260
+            game.holeCooldown = 0.6
+        }
         return
     }
 
@@ -182,16 +244,32 @@ export function step(game: Game, input: Input, dt: number): void {
             ball.vx += hit.nx * wall.kick
             ball.vy += hit.ny * wall.kick
             award(game, 10)
+            game.sounds.push('sling')
+        }
+    }
+    for (const target of game.targets) {
+        if (target.down || !bounce(game, closest(ball, target), BALL_RADIUS + 2, 0.3)) continue
+        target.down = true
+        award(game, 500)
+        game.sounds.push('target')
+        if (game.targets.every((t) => t.down)) {
+            award(game, 5000)
+            game.targetReset = 1.5
+            say(game, 'Drop targets cleared')
         }
     }
     for (const bumper of game.bumpers) {
         const hit = bounce(game, bumper, bumper.radius + BALL_RADIUS, 0.5)
-        if (hit) {
-            ball.vx += hit.nx * 300
-            ball.vy += hit.ny * 300
-            bumper.flash = 0.15
-            award(game, 100)
-        }
+        if (!hit) continue
+        ball.vx += hit.nx * 300
+        ball.vy += hit.ny * 300
+        bumper.flash = 0.15
+        award(game, 100)
+        game.sounds.push('bumper')
+        game.bumperHits += 1
+        const fuel = Math.min(MAX_FUEL, Math.floor(game.bumperHits / HITS_PER_FUEL))
+        if (fuel === MAX_FUEL && game.fuel < MAX_FUEL) say(game, 'Fuel full. Hit the launch pad')
+        game.fuel = fuel
     }
     for (const flipper of game.flippers) {
         const contact = closest(ball, { a: flipper.pivot, b: flipperTip(flipper) })
@@ -201,11 +279,14 @@ export function step(game: Game, input: Input, dt: number): void {
         bounce(game, contact, BALL_RADIUS + FLIPPER_RADIUS, 0.3, { x: -w * ry, y: w * rx })
     }
 
+    if (!game.holeCooldown && Math.hypot(ball.x - HOLE.x, ball.y - HOLE.y) < HOLE.radius) enterHole(game)
+
     LANE_X.forEach((x, i) => {
         const inside = Math.abs(ball.x - x) < 20 && Math.abs(ball.y - LANE_Y) < 20
         if (inside && !game.inLane[i]) {
             game.lanes[i] = true
             award(game, 250)
+            game.sounds.push('lane')
         }
         game.inLane[i] = inside
     })
@@ -213,6 +294,7 @@ export function step(game: Game, input: Input, dt: number): void {
         award(game, 1000)
         game.multiplier = Math.min(5, game.multiplier + 1)
         game.lanes = game.lanes.map(() => false)
+        say(game, `Bonus ${game.multiplier}x`)
     }
 
     if (ball.y > HEIGHT + BALL_RADIUS * 2) {
@@ -220,5 +302,7 @@ export function step(game: Game, input: Input, dt: number): void {
         game.multiplier = 1
         Object.assign(ball, { ...PLUNGER, vx: 0, vy: 0, angle: 0 })
         game.state = game.balls > 0 ? 'ready' : 'over'
+        game.sounds.push(game.state === 'over' ? 'over' : 'drain')
+        say(game, game.state === 'over' ? 'Game over' : 'Ball lost')
     }
 }
