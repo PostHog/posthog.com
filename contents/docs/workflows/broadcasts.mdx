@@ -34,6 +34,8 @@ A goal is optional. It counts the recipients who do something after they get the
 
 Pick a sender, write a subject, and design the email. You can start from a [message template](/docs/workflows/library) or build the email in the editor.
 
+The Content step also includes UTM parameter fields for tracking links. If your team has UTM defaults configured in [**Settings → Workflows**](https://app.posthog.com/settings/environment-workflows#workflows-utm-defaults), new broadcasts start with those values. You can customize them per broadcast or save your current values as the new team default.
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_content_light_44734105fd.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_content_dark_a59e59442c.png"
@@ -45,11 +47,11 @@ Pick a sender, write a subject, and design the email. You can start from a [mess
 
 Choose when the email goes out:
 
-| Option         | What it does                                                                      |
-| -------------- | --------------------------------------------------------------------------------- |
-| **Send now**   | Sends the email as soon as you launch the broadcast                               |
-| **Send later** | Sends the email once, at a date and time you pick                                 |
-| **Recurring**  | Sends the email on a repeating schedule, like every Monday at 9am                 |
+| Option         | What it does                                                      |
+| -------------- | ----------------------------------------------------------------- |
+| **Send now**   | Sends the email as soon as you launch the broadcast               |
+| **Send later** | Sends the email once, at a date and time you pick                 |
+| **Recurring**  | Sends the email on a repeating schedule, like every Monday at 9am |
 
 Each option that sets a time also has a timezone. Recurring broadcasts use the same schedule picker as [batch triggers](/docs/workflows/workflow-builder#recurring-schedule), so you can type a schedule in plain English and check the next occurrences before you launch.
 
