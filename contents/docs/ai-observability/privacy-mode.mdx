@@ -2,7 +2,7 @@
 title: Privacy mode
 ---
 
-To avoid storing potentially sensitive prompt, reasoning, and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured.
+To avoid storing potentially sensitive prompt, reasoning, and completion data, you can enable privacy mode. This excludes the `$ai_input` and `$ai_output_choices` properties from being captured, along with any other content that can carry them.
 
 <CalloutBox icon="IconInfo" type="fyi" title="Data retention">
 
@@ -37,6 +37,8 @@ const phClient = new PostHog(
 ```
 
 </MultiLanguage>
+
+The client setting applies to every AI integration that uses the client. A request-level setting can turn privacy mode on for a single request, but it can't turn it off when the client has it on.
 
 ## Request parameter
 
@@ -84,3 +86,55 @@ callback_handler = PosthogCallbackHandler(
 ```
 
 </MultiLanguage>
+
+## OpenTelemetry
+
+The PostHog span processor follows the privacy mode of the client you pass to it. You can also turn privacy mode on for the span processor or the trace exporter directly:
+
+<MultiLanguage>
+
+```python
+from posthog.ai.otel import PostHogSpanProcessor
+
+processor = PostHogSpanProcessor(
+    # ...your existing options
+    privacy_mode=True,
+)
+```
+
+```ts
+import { PostHogSpanProcessor } from '@posthog/ai/otel'
+
+const processor = new PostHogSpanProcessor({
+  // ...your existing options
+  privacyMode: true,
+})
+```
+
+</MultiLanguage>
+
+In privacy mode, spans are sent without prompt, completion, tool argument, tool result, and error message attributes.
+
+## What privacy mode removes
+
+With privacy mode on, PostHog SDKs don't send:
+
+- Prompts, system prompts, and instructions (`$ai_input`, `$ai_instructions`)
+- Model outputs (`$ai_output_choices`), including partial output from a failed stream
+- Span and trace inputs and outputs (`$ai_input_state`, `$ai_output_state`)
+- Embedding inputs
+- Error messages and stack traces. `$ai_error` only holds the error class, HTTP status, provider error code, the name of the request parameter that caused the error, the request ID, and the classes of any underlying errors. For example: `BadRequestError: 400 invalid_request_error param=messages[3].content`.
+- Exceptions from AI calls to [error tracking](/docs/error-tracking). The SDK still raises the error, so your own error handling sees it.
+
+## What is still sent
+
+Privacy mode doesn't remove metadata that describes the call:
+
+- Model, provider, token counts, costs, latency, and HTTP status
+- Model parameters such as `temperature` and `max_tokens`
+- Tool definitions (`$ai_tools`). These are the names, descriptions, and parameter schemas you pass to the model, not the tool calls the model makes.
+- Span names, trace names, and any custom properties you add
+
+Remote MCP tool `headers` and `authorization` values are always replaced with `[REDACTED]`, whether or not privacy mode is on.
+
+Make sure your custom properties, span names, and tool descriptions don't include sensitive data.
