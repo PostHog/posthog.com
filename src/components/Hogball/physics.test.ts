@@ -1,6 +1,18 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { ballInPlunger, bump, createGame, HOLE, launch, MAX_FUEL, RAMP_GATE, step } from './physics.ts'
+import {
+    advanceMission,
+    ballInPlunger,
+    bump,
+    createGame,
+    HOLE,
+    launch,
+    MAX_FUEL,
+    MISSIONS,
+    RAMP_GATE,
+    step,
+    WORMHOLE,
+} from './physics.ts'
 import type { Game, Input } from './physics.ts'
 
 const idle: Input = { left: false, right: false, plunger: false }
@@ -93,7 +105,6 @@ test('a full fuel tank turns the launch pad into a rocket launch', () => {
     Object.assign(game.ball, { x: HOLE.x, y: HOLE.y - 4, vx: 0, vy: 50 })
     run(game, 0.1)
     assert.equal(game.rockets, 1)
-    assert.equal(game.rank, 1)
     assert.equal(game.fuel, 0)
     assert.equal(game.score, 25000)
 })
@@ -166,4 +177,31 @@ test('a ball that rolls up into the ramp exit goes up the ramp backwards and sco
     assert.ok(top > 0, 'ball never went onto the ramp')
     assert.equal(game.combo, 0)
     assert.equal(game.ramp, null)
+})
+
+test('missions complete in order, and every two missions give a promotion', () => {
+    const game = createGame()
+    game.state = 'playing'
+    for (let n = 0; n < MISSIONS[0].goal; n++) advanceMission(game, MISSIONS[0].kind)
+    assert.equal(game.missionsDone, 1)
+    assert.equal(game.mission, 1)
+    assert.equal(game.rank, 0)
+    assert.equal(game.score, 20000)
+    advanceMission(game, MISSIONS[0].kind === MISSIONS[1].kind ? 'hole' : MISSIONS[0].kind)
+    assert.equal(game.missionProgress, 0)
+    for (let n = 0; n < MISSIONS[1].goal; n++) advanceMission(game, MISSIONS[1].kind)
+    assert.equal(game.rank, 1)
+})
+
+test('the wormhole holds the ball, then sends it out of one of the two holes', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: WORMHOLE.x, y: WORMHOLE.y - 4, vx: 0, vy: 50 })
+    run(game, 0.3)
+    assert.deepEqual([game.ball.x, game.ball.y], [WORMHOLE.x, WORMHOLE.y])
+    assert.ok(game.score >= 2500)
+    run(game, 2)
+    const fromPad = Math.hypot(game.ball.x - HOLE.x, game.ball.y - HOLE.y)
+    const fromWormhole = Math.hypot(game.ball.x - WORMHOLE.x, game.ball.y - WORMHOLE.y)
+    assert.ok(fromPad > 15 && fromWormhole > 15, 'ball stays in a hole')
 })

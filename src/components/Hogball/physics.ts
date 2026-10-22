@@ -19,6 +19,8 @@ export type Sound =
     | 'tilt'
     | 'save'
     | 'extra'
+    | 'mission'
+    | 'wormhole'
     | 'drain'
     | 'over'
 export type Game = {
@@ -48,6 +50,10 @@ export type Game = {
     saveTime: number
     saveAvailable: boolean
     padSave: boolean
+    mission: number
+    missionProgress: number
+    missionsDone: number
+    holeExit: 'pad' | 'wormhole'
     extraBallGiven: boolean
     shake: number
     message: string
@@ -82,7 +88,31 @@ export const RAMP_PATH: RampPoint[] = [
     { x: 42, y: 425, h: 0 },
 ]
 export const BALLS_PER_GAME = 3
-export const RANKS = ['Cadet', 'Ensign', 'Lieutenant', 'Captain', 'Commander', 'Admiral']
+export const RANKS = [
+    'Cadet',
+    'Ensign',
+    'Lieutenant',
+    'Captain',
+    'Lt Commander',
+    'Commander',
+    'Commodore',
+    'Admiral',
+    'Fleet Admiral',
+]
+export type MissionKind = 'ramp' | 'lanes' | 'bumper' | 'target' | 'hole'
+// Missions run in order and repeat. Each two missions give a promotion to the next rank.
+export const MISSIONS: { name: string; kind: MissionKind; goal: number }[] = [
+    { name: 'Target practice', kind: 'bumper', goal: 8 },
+    { name: 'Re-entry training', kind: 'lanes', goal: 1 },
+    { name: 'Science', kind: 'target', goal: 6 },
+    { name: 'Launch training', kind: 'ramp', goal: 2 },
+    { name: 'Rendezvous', kind: 'hole', goal: 2 },
+    { name: 'Bug hunt', kind: 'bumper', goal: 15 },
+    { name: 'Rescue', kind: 'ramp', goal: 3 },
+    { name: 'Alien menace', kind: 'target', goal: 9 },
+]
+// A second hole above the bumpers. The launch pad and the wormhole can send the ball out of either one.
+export const WORMHOLE = { x: 185, y: 172, radius: 12 }
 export const BALL_SAVE_SECONDS = 8
 export const EXTRA_BALL_SCORE = 150000
 const GRAVITY = 800
@@ -214,6 +244,10 @@ export function createGame(): Game {
         saveTime: 0,
         saveAvailable: true,
         padSave: false,
+        mission: 0,
+        missionProgress: 0,
+        missionsDone: 0,
+        holeExit: 'pad',
         extraBallGiven: false,
         shake: 0,
         message: 'Welcome aboard, Cadet',
@@ -302,10 +336,36 @@ export function bump(game: Game, direction: Bump): void {
     } else if (game.tiltMeter > TILT_LIMIT - 1) say(game, 'Careful!')
 }
 
-function enterHole(game: Game) {
+export function advanceMission(game: Game, kind: MissionKind): void {
+    const mission = MISSIONS[game.mission]
+    if (game.tilted || mission.kind !== kind) return
+    game.missionProgress += 1
+    if (game.missionProgress < mission.goal) return
+    award(game, 20000 * (game.rank + 1))
+    game.missionsDone += 1
+    game.mission = (game.mission + 1) % MISSIONS.length
+    game.missionProgress = 0
+    game.sounds.push('mission')
+    if (game.missionsDone % 2 === 0 && game.rank < RANKS.length - 1) {
+        game.rank += 1
+        game.shake = 0.4
+        say(game, `Mission complete! Promoted to ${RANKS[game.rank]}`)
+    } else say(game, `Mission complete: ${mission.name}`)
+}
+
+function enterHole(game: Game, from: 'pad' | 'wormhole') {
+    const hole = from === 'pad' ? HOLE : WORMHOLE
     game.hold = 1 + Math.random() * 0.8
-    Object.assign(game.ball, { x: HOLE.x, y: HOLE.y, vx: 0, vy: 0 })
+    game.holeExit = Math.random() < 0.5 ? 'pad' : 'wormhole'
+    Object.assign(game.ball, { x: hole.x, y: hole.y, vx: 0, vy: 0 })
     if (game.tilted) return
+    advanceMission(game, 'hole')
+    if (from === 'wormhole') {
+        award(game, 2500)
+        say(game, 'Wormhole!')
+        game.sounds.push('wormhole')
+        return
+    }
     if (game.fuel < MAX_FUEL) {
         award(game, 1000)
         say(game, 'Launch pad needs fuel')
@@ -314,11 +374,10 @@ function enterHole(game: Game) {
     }
     award(game, 25000)
     game.rockets += 1
-    game.rank = Math.min(RANKS.length - 1, game.rank + 1)
     game.fuel = 0
     game.bumperHits = 0
     game.shake = 0.5
-    say(game, `Rocket launch! Promoted to ${RANKS[game.rank]}`)
+    say(game, 'Rocket launch! 25,000')
     game.sounds.push('rocket')
 }
 
@@ -328,6 +387,7 @@ function finishRamp(game: Game) {
     award(game, 2500 * game.combo)
     addFuel(game, game.fuel + 1)
     game.sounds.push('ramp')
+    advanceMission(game, 'ramp')
     if (game.combo === 3) {
         award(game, 10000)
         say(game, 'Hyperspace! 10,000')
@@ -416,8 +476,15 @@ export function step(game: Game, input: Input, dt: number): void {
     if (game.hold > 0) {
         game.hold -= dt
         if (game.hold <= 0) {
-            ball.vx = HOLE_KICK.x + (Math.random() - 0.5) * 2 * HOLE_KICK.spread
-            ball.vy = HOLE_KICK.y + (Math.random() - 0.5) * HOLE_KICK.spread
+            if (game.holeExit === 'pad') {
+                Object.assign(ball, { x: HOLE.x, y: HOLE.y })
+                ball.vx = HOLE_KICK.x + (Math.random() - 0.5) * 2 * HOLE_KICK.spread
+                ball.vy = HOLE_KICK.y + (Math.random() - 0.5) * HOLE_KICK.spread
+            } else {
+                Object.assign(ball, { x: WORMHOLE.x, y: WORMHOLE.y })
+                ball.vx = (Math.random() - 0.5) * 300
+                ball.vy = 150 + Math.random() * 100
+            }
             game.holeCooldown = 0.6
             // A drain soon after the kick-out gives the ball back, like ball save, without using up ball save
             if (game.saveTime <= 0) game.padSave = true
@@ -469,6 +536,7 @@ export function step(game: Game, input: Input, dt: number): void {
         target.down = true
         award(game, 500)
         game.sounds.push('target')
+        advanceMission(game, 'target')
         if (game.targets.every((t) => t.down)) {
             award(game, 5000)
             game.targetReset = 1.5
@@ -483,6 +551,7 @@ export function step(game: Game, input: Input, dt: number): void {
         bumper.flash = 0.15
         award(game, 100)
         game.sounds.push('bumper')
+        advanceMission(game, 'bumper')
         game.bumperHits += 1
         if (game.bumperHits % HITS_PER_FUEL === 0) addFuel(game, game.fuel + 1)
     }
@@ -494,7 +563,9 @@ export function step(game: Game, input: Input, dt: number): void {
         bounce(game, contact, BALL_RADIUS + FLIPPER_RADIUS, 0.3, { x: -w * ry, y: w * rx })
     }
 
-    if (!game.holeCooldown && Math.hypot(ball.x - HOLE.x, ball.y - HOLE.y) < HOLE.radius) enterHole(game)
+    if (!game.holeCooldown && Math.hypot(ball.x - HOLE.x, ball.y - HOLE.y) < HOLE.radius) enterHole(game, 'pad')
+    else if (!game.holeCooldown && Math.hypot(ball.x - WORMHOLE.x, ball.y - WORMHOLE.y) < WORMHOLE.radius)
+        enterHole(game, 'wormhole')
 
     LANE_X.forEach((x, i) => {
         const inside = Math.abs(ball.x - x) < 20 && Math.abs(ball.y - LANE_Y) < 20
@@ -508,6 +579,7 @@ export function step(game: Game, input: Input, dt: number): void {
     if (game.lanes.every(Boolean)) {
         award(game, 1000)
         game.multiplier = Math.min(5, game.multiplier + 1)
+        advanceMission(game, 'lanes')
         game.lanes = game.lanes.map(() => false)
         say(game, `Bonus ${game.multiplier}x`)
     }

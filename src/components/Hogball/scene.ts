@@ -43,6 +43,7 @@ import {
     HEIGHT,
     HOLE,
     MAX_FUEL,
+    WORMHOLE,
     POST,
     RAMP_LENGTH,
     RAMP_PATH,
@@ -288,6 +289,10 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     pad.rotation.x = -Math.PI / 2
     pad.position.set(X(HOLE.x), 1, Z(HOLE.y))
     scene.add(pad)
+    const wormhole = new Mesh(new TorusGeometry(WORMHOLE.radius + 2, 2.4, 12, 40), plastic(PURPLE, 1.2))
+    wormhole.rotation.x = -Math.PI / 2
+    wormhole.position.set(X(WORMHOLE.x), 1, Z(WORMHOLE.y))
+    scene.add(wormhole)
 
     const flippers = [0, 1].map(() => {
         const group = new Group()

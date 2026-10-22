@@ -1,4 +1,4 @@
-import { HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH } from './physics'
+import { HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH, WORMHOLE } from './physics'
 import type { Game } from './physics'
 
 export const RED = '#F54E00'
@@ -166,5 +166,24 @@ export function drawFloor(ctx: CanvasRenderingContext2D, game: Game, time: numbe
     ctx.beginPath()
     ctx.arc(HOLE.x, HOLE.y, HOLE.radius, 0, Math.PI * 2)
     ctx.fill()
+
+    // The wormhole: a dark hole with a purple swirl around it
+    ctx.save()
+    ctx.translate(WORMHOLE.x, WORMHOLE.y)
+    for (let i = 0; i < 3; i++) {
+        ctx.rotate(time * 1.5 + (i * Math.PI * 2) / 3)
+        ctx.strokeStyle = PURPLE
+        ctx.globalAlpha = 0.7
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.arc(0, 0, WORMHOLE.radius + 6, 0, Math.PI * 0.9)
+        ctx.stroke()
+    }
+    ctx.restore()
+    ctx.fillStyle = '#05060d'
+    ctx.beginPath()
+    ctx.arc(WORMHOLE.x, WORMHOLE.y, WORMHOLE.radius, 0, Math.PI * 2)
+    ctx.fill()
+    text(ctx, 'WORMHOLE', WORMHOLE.x, WORMHOLE.y - 26, 8, 'rgba(255, 255, 255, 0.6)')
     text(ctx, full ? 'LAUNCH!' : 'LAUNCH PAD', HOLE.x, HOLE.y - 24, 8, full ? YELLOW : 'rgba(255, 255, 255, 0.6)')
 }

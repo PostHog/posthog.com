@@ -246,6 +246,7 @@ export default function Hogball(): JSX.Element {
             high_score: best,
             rockets: game.rockets,
             rank: RANKS[game.rank],
+            missions: game.missionsDone,
             player_name: pilotRef.current,
             duration_seconds: Math.round((Date.now() - startedRef.current) / 1000),
         })

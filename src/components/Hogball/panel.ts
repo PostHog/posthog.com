@@ -1,4 +1,4 @@
-import { BALLS_PER_GAME, HEIGHT, MAX_FUEL, RANKS, WIDTH } from './physics'
+import { BALLS_PER_GAME, HEIGHT, MAX_FUEL, MISSIONS, RANKS, WIDTH } from './physics'
 import type { Game } from './physics'
 import { GREEN, OFF, RED, YELLOW, text } from './floor'
 import type { Leader } from './pilots'
@@ -70,8 +70,8 @@ export const messageOf = (game: Game): string =>
         : game.tilted
         ? 'Tilt!'
         : game.fuel >= MAX_FUEL
-        ? 'Hit the launch pad'
-        : 'Shoot the ramp or the bumpers to fill the fuel tank'
+        ? 'Fuel full. Hit the launch pad'
+        : `Mission: ${MISSIONS[game.mission].name} ${game.missionProgress}/${MISSIONS[game.mission].goal}`
 
 const pad = (score: number) => String(score).padStart(9, ' ')
 const ballLabel = (game: Game) => `${Math.max(1, BALLS_PER_GAME - game.balls + 1)}`

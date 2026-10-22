@@ -28,9 +28,28 @@ A table bump moves the ball a little. Three bumps in quick succession **tilt** t
 | Drop target | 500 | All three down: 5,000 points. The targets stand up again after 1.5 seconds |
 | Ramp | 2,500 × combo | Adds one fuel light. Another ramp within 5 seconds raises the combo, to a maximum of 5x. The third ramp in a combo is **Hyperspace**: 10,000 more points |
 | Launch pad | 1,000 | Holds the ball for 1 to 1.8 seconds, then kicks it up into the bumpers at a random angle. A drain in the next 6 seconds gives the ball back |
-| Launch pad with a full fuel tank | 25,000 | Rocket launch: the rank goes up (Cadet to Admiral) and the fuel tank empties |
+| Launch pad with a full fuel tank | 25,000 | Rocket launch: the fuel tank empties |
+| Wormhole | 2,500 | The hole above the bumpers. Like the launch pad, it holds the ball, then sends it out of the launch pad or the wormhole at random |
+| Mission complete | 20,000 × rank | See [Missions](#missions) |
 
 All points are multiplied by the bonus multiplier. The multiplier goes back to 1x when a ball drains. Each game has three balls, and 150,000 points gives one extra ball. If a ball drains in the first 8 seconds after launch, **ball save** gives it back once. The best score is kept in `localStorage` (`hogball-high-score`), and the sound setting in `hogball-muted`.
+
+## Missions
+
+Like the original game, the LED panel always shows a mission and its progress. A mission is complete when the player does its task, and then the next mission starts. Each two missions give a promotion to the next rank: Cadet, Ensign, Lieutenant, Captain, Lt Commander, Commander, Commodore, Admiral, and Fleet Admiral.
+
+| Mission | Task |
+|---|---|
+| Target practice | Hit the bumpers 8 times |
+| Re-entry training | Light **H**, **O**, and **G** |
+| Science | Knock down 6 drop targets |
+| Launch training | Shoot the ramp 2 times |
+| Rendezvous | Get into the launch pad or the wormhole 2 times |
+| Bug hunt | Hit the bumpers 15 times |
+| Rescue | Shoot the ramp 3 times |
+| Alien menace | Knock down 9 drop targets |
+
+After the last mission, the list starts again from the top.
 
 A slow shot does not get to the top of the ramp. It rolls back down to the playfield. A ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing. Walls close off the low end of the ramp, so the ball cannot roll under it.
 
@@ -67,4 +86,4 @@ Without the key, the function returns an empty list and the game shows no leader
 | Event | Properties |
 |---|---|
 | `hogball_game_started` | – |
-| `hogball_game_ended` | `score`, `high_score` (boolean, a new personal best), `rockets`, `rank`, `player_name`, `duration_seconds` |
+| `hogball_game_ended` | `score`, `high_score` (boolean, a new personal best), `rockets`, `rank`, `missions`, `player_name`, `duration_seconds` |
