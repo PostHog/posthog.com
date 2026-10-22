@@ -13,6 +13,9 @@ const path = require('path')
 
 const SOURCES_DIR = path.join(__dirname, '..', 'contents', 'docs', 'data-pipelines', 'sources')
 
+// `SUBJECT` keeps the patterns pointed at the PostHog source, connector, integration, or sync
+// method. A stage the vendor puts on its own API or product ("Mistral's beta endpoints") is a fact
+// about their product, not a PostHog release stage, so it has to keep passing.
 const STAGE = '(?:alpha|beta)'
 const SUBJECT = '(?:source|connector|integration|sync(?:\\s+method)?)'
 
