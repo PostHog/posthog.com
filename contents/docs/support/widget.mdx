@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { Steps, Step } from 'components/Docs/Steps'
+
 The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
 
@@ -13,15 +15,57 @@ The Support widget is a chat interface that appears on your website so your cust
     classes="rounded"
 />
 
-## Enable the widget
+<Steps>
 
-1. Go to **Support** in PostHog and click **Settings**
-2. Click **Enable support**
-3. Go to the **In-app widget** section and enable it
-4. Configure your settings
-5. Click **Save**
+<Step title="Install the PostHog JavaScript SDK" badge="required">
 
-The widget appears as a floating button on your site. By default it appears in the bottom-right corner, but you can customize its position in the settings.
+The widget is part of the [JavaScript SDK](/docs/libraries/js). If PostHog already runs on your site, skip this step.
+
+</Step>
+
+<Step title="Turn on Support and the widget" badge="required">
+
+1. Go to [**Support** > **Settings**](https://app.posthog.com/support/settings) and click **Enable support**.
+2. In the **In-app widget** section, turn on the widget.
+3. Click **Save**.
+
+The widget appears as a floating button in the bottom-right corner of your site.
+
+</Step>
+
+<Step title="Set your domains" badge="recommended">
+
+Add your site under **Allowed domains**, so the widget only loads where you expect it. An empty list shows it on every domain. See [Restrict domains](#restrict-domains).
+
+</Step>
+
+<Step title="Set your branding" badge="optional">
+
+Set the button color, position, and greeting, or ask for an email before a chat starts. See [Widget settings](#widget-settings).
+
+</Step>
+
+<Step title="Get notified about new tickets" badge="optional">
+
+Turn on email or browser alerts in [**Support** > **Settings** > **Notifications**](https://app.posthog.com/support/settings#selectedSetting=conversations-notifications). For Slack pings or routing by priority, start from a [workflow template](/docs/support/workflows#start-from-a-template). See [Notifications](#notifications).
+
+</Step>
+
+<Step title="Verify logged-in users" badge="optional">
+
+If your app has logged-in users, sign each user's distinct ID on your server. Their tickets then follow them across browsers and devices. See [Identity verification](#identity-verification).
+
+</Step>
+
+<Step title="Send a test message" checkpoint>
+
+Open your site, click the widget, and send a message. It shows up as a new ticket in the [Support inbox](/docs/support/inbox).
+
+</Step>
+
+</Steps>
+
+## Widget settings
 
 ### Configuration options
 

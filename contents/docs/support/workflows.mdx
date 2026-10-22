@@ -20,6 +20,20 @@ Ticket updated
 
 Updates made by Workflows do not re-emit ticket events, so you won't get infinite loops.
 
+## Start from a template
+
+[**Support** > **Settings** > **Notifications**](https://app.posthog.com/support/settings#selectedSetting=conversations-notifications) lists workflow templates for common jobs:
+
+- **New ticket → Slack channel**
+- **Team reply → email customer**
+- **Customer message → notify team**
+- **SLA: no response in 4h → escalate**
+- **First team reply → mark Pending**
+- **Resolved → CSAT email**
+- **VIP cohort → high priority + auto-assign**
+
+Each template shows the event that triggers it. **Create workflow** opens a new workflow, where you set that trigger and add the steps. The [examples](#examples) below build several of these.
+
 ## Ticket statuses
 
 Workflows trigger on and set these ticket statuses:

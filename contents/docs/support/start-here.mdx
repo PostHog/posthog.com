@@ -14,15 +14,31 @@ import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic, IconBrackets 
 
 The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/docs/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
 
-Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget.
+Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget. Support's core features are free. See [pricing](/docs/support/pricing).
 
 <OSButton variant="primary" asLink to="/docs/support/widget">Set up the widget</OSButton>
 
 </QuestLogItem>
 
+<QuestLogItem title="Let the AI agent draft replies" subtitle="Beta" icon="IconMagic">
+
+The [AI agent](/docs/support/ai-agent) drafts a reply when a ticket arrives. You choose, per channel and ticket type, whether that draft stays a private note or goes to the customer. Diagnostic and billing replies always stay private. Turn it on only if you want it.
+
+<OSButton variant="primary" asLink to="/docs/support/ai-agent">Set up the AI agent</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Give the AI agent your knowledge" subtitle="Business Knowledge" icon="IconBook">
+
+The AI agent writes its replies from your [Business Knowledge](/docs/business-knowledge) sources: your docs, website, and policies. The agent can't be turned on until at least one source is ready.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/start-here">Set up Business Knowledge</OSButton>
+
+</QuestLogItem>
+
 <QuestLogItem title="Connect your other channels" subtitle="Email, Slack, Teams, GitHub, and the API" icon="IconMessage">
 
-Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), [Microsoft Teams](/docs/support/teams) (beta), and [GitHub](/docs/support/github). You can also start tickets from your own code with the [JavaScript API](/docs/support/javascript-api) or the [email compose API](/docs/support/email#start-a-ticket-with-the-api). Every channel syncs both ways so you answer from a single inbox.
+Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), [Microsoft Teams](/docs/support/teams) (beta), and [GitHub](/docs/support/github). You can also start tickets from your own code with the [JavaScript API](/docs/support/javascript-api) or the [email compose API](/docs/support/email#start-a-ticket-with-the-api). Every channel syncs both ways so you answer from a single inbox. Not sure which channels you need? Start from a [use case](/docs/support/use-cases).
 
 <div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
   <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
@@ -69,7 +85,7 @@ Meet customers wherever they are. Beyond the widget, conversations can arrive fr
   </div>
 </div>
 
-<OSButton variant="primary" asLink to="/docs/support/email">Connect a channel</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/concepts/channels">Connect a channel</OSButton>
 
 </QuestLogItem>
 
@@ -100,7 +116,7 @@ Let rules handle the repetitive parts. [Workflows](/docs/support/workflows) are 
 
 </QuestLogItem>
 
-<QuestLogItem title="Turn tickets into fixes" subtitle="Support feeds Self-driving" icon="IconMagic">
+<QuestLogItem title="Turn tickets into fixes" subtitle="Optional: Self-driving" icon="IconMagic">
 
 Support isn't just an inbox – it's a signal source. Recurring issues in your conversations become [Self-driving](/docs/self-driving) reports, and when there's a code fix, a pull request you review and merge. Answering customers still happens in the Support inbox; you review these fixes in the Self-driving inbox.
 
@@ -125,23 +141,7 @@ Support isn't just an inbox – it's a signal source. Recurring issues in your c
 
 </QuestLogItem>
 
-<QuestLogItem title="Let the AI agent draft replies" subtitle="Beta, and opt-in" icon="IconMagic">
-
-The [AI agent](/docs/support/ai-agent) drafts a reply when a ticket arrives. You choose, per channel and ticket type, whether that draft stays a private note or goes to the customer. Diagnostic and billing replies always stay private. Turn it on only if you want it.
-
-<OSButton variant="primary" asLink to="/docs/support/ai-agent">Set up the AI agent</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem title="Learn by use case" subtitle="Pick the setup that matches your customers" icon="IconBook">
-
-The same product covers shared Slack channels, in-app chat, a `support@` inbox, GitHub issues, and a move off another help desk. Start from the [use case](/docs/support/use-cases) that matches how your customers already reach you.
-
-<OSButton variant="primary" asLink to="/docs/support/use-cases">Browse use cases</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem title="Migrating from another tool?" subtitle="Bring your tickets with you" icon="IconUpload">
+<QuestLogItem title="Migrating from another tool?" subtitle="Optional" icon="IconUpload">
 
 Bring your history with you so the inbox starts with context instead of an empty slate. The [Zendesk](/docs/support/imports/zendesk) import (beta) brings over:
 
@@ -151,14 +151,6 @@ Bring your history with you so the inbox starts with context instead of an empty
 - Attachments and original timestamps
 
 <OSButton variant="primary" asLink to="/docs/support/imports">Import tickets</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem title="Know what's free" subtitle="Opt-in AI agent" icon="IconPiggyBank">
-
-Support's core features are free. That includes the widget, the inbox, every channel, workflow automation, and historical imports. There is no ticket cap and no per-seat charge. The [AI agent](/docs/support/ai-agent) is free while it is in beta. We will set a price later, and we will tell you before any charge starts. See [pricing](/docs/support/pricing) for the limits.
-
-<OSButton variant="primary" asLink to="/docs/support/pricing">See pricing</OSButton>
 
 </QuestLogItem>
 
