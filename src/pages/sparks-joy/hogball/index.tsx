@@ -1,25 +1,25 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
-import Pinball from 'components/Pinball'
+import Hogball from 'components/Hogball'
 
-export default function PinballGame(): JSX.Element {
+export default function HogballGame(): JSX.Element {
     return (
         <>
             <SEO
-                title="Hog pinball - PostHog"
+                title="Hogball - PostHog"
                 description="A pinball table with a hedgehog for a ball."
                 image={`/images/og/default.png`}
             />
             <Explorer
                 template="generic"
-                slug="pinball"
-                title="Hog pinball"
+                slug="hogball"
+                title="Hogball"
                 showAddressBar={false}
                 headerBarOptions={[]}
                 fullScreen
             >
-                <Pinball />
+                <Hogball />
             </Explorer>
         </>
     )

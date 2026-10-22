@@ -21,7 +21,7 @@ import {
 import type { Game, Input } from './physics'
 
 const STEP = 1 / 480
-const HIGH_SCORE_KEY = 'pinball-high-score'
+const HIGH_SCORE_KEY = 'hogball-high-score'
 const BUMPER_COLORS = ['#F54E00', '#F7A501', '#2F80FA']
 const KEYS: Record<string, keyof Input> = {
     z: 'left',
@@ -51,7 +51,7 @@ const sameStatus = (a: Status, b: Status) =>
     a.charge === b.charge &&
     a.lanes.every((lit, i) => lit === b.lanes[i])
 
-export default function Pinball(): JSX.Element {
+export default function Hogball(): JSX.Element {
     const posthog = usePostHog()
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const tableRef = useRef<HTMLDivElement>(null)
@@ -76,7 +76,7 @@ export default function Pinball(): JSX.Element {
         if (game.state === 'over') return newGame()
         if (game.state === 'ready' && game.balls === BALLS_PER_GAME && !startedRef.current) {
             startedRef.current = Date.now()
-            posthog?.capture('pinball_game_started')
+            posthog?.capture('hogball_game_started')
         }
         launch(game)
     }
@@ -192,7 +192,7 @@ export default function Pinball(): JSX.Element {
             setHighScore(status.score)
             localStorage.setItem(HIGH_SCORE_KEY, String(status.score))
         }
-        posthog?.capture('pinball_game_ended', {
+        posthog?.capture('hogball_game_ended', {
             score: status.score,
             high_score: best,
             duration_seconds: Math.round((Date.now() - startedRef.current) / 1000),
@@ -244,7 +244,7 @@ export default function Pinball(): JSX.Element {
             <div
                 ref={tableRef}
                 tabIndex={0}
-                aria-label="Pinball table. Hold Space to launch the ball. Use Z and slash, or the arrow keys, for the flippers."
+                aria-label="Hogball table. Hold Space to launch the ball. Use Z and slash, or the arrow keys, for the flippers."
                 className="relative min-h-[480px] flex-1 rounded-md border border-primary bg-accent outline-none focus-visible:ring-2"
                 onKeyDown={(e) => {
                     const key = KEYS[e.key]
