@@ -36,9 +36,11 @@ A slow shot does not get to the top of the ramp. It rolls back down to the playf
 
 ## Leaderboard
 
-Each player gets a random hedgehog pilot name, like "Admiral Pincushion", from `names.json`. **New pilot name** picks another one between games. Players cannot type a name, so the leaderboard cannot show rude text. The name is kept in `localStorage` (`hogball-pilot`).
+Each player gets a random hedgehog pilot name, like "Admiral Pincushion", from `names.json`. **New pilot name** picks another one between games. The name is kept in `localStorage` (`hogball-pilot`).
 
-The game sends the pilot name with `hogball_game_ended`. `GET /api/hogball-leaderboard` returns the all-time top 10: the best score for each player, read from those events with a fixed HogQL query. The function drops any name that is not in `names.json`, so a fake event cannot put other text on the page. Between games, the LED panel shows the top 6 pilots. In a narrow window, a list under the table shows the top 10. A new score shows at once as a pending row, because the event takes a short time to reach PostHog.
+When a game ends with a score that makes the all-time top 10, the game asks for the player's initials, like an arcade machine: three letters from A to Z, then <kbd>Enter</kbd> (<kbd>Esc</kbd> skips). The game sends `hogball_score_submitted` with the score, the initials, and the pilot name, and keeps the initials in `localStorage` (`hogball-initials`) for next time. Players cannot type other text, and the server drops initials in the `blocked` list in `names.json`.
+
+`GET /api/hogball-leaderboard` returns the all-time top 10: the best submitted score for each player, read from those events with a fixed HogQL query. The function drops any entry whose initials or pilot name are not valid, so a fake event cannot put other text on the page. Between games, the LED panel shows the top 6. In a narrow window, a list under the table shows the top 10. A new score shows at once as a pending row, because the event takes a short time to reach PostHog.
 
 The function code is in `api/_hogball-leaderboard.js`. `api/hogball-leaderboard.js` runs it on Vercel and `functions/api/hogball-leaderboard.ts` runs it on Cloudflare Pages previews. It needs these environment variables:
 

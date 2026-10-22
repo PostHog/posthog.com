@@ -2,9 +2,9 @@
  * Hogball all-time leaderboard, shared by the Vercel function (api/hogball-leaderboard.js) and the
  * Cloudflare Pages function (functions/api/hogball-leaderboard.ts).
  *
- * Scores come from the `hogball_game_ended` events that the game sends to PostHog. The query reads only
- * those events, and only names from the game's own name list are shown, so a fake event cannot put
- * other text on the page.
+ * Scores come from the `hogball_score_submitted` events that the game sends when a player enters their
+ * initials. The query reads only those events. Only three-letter initials (A to Z, not in the blocked list)
+ * and pilot names from the game's own name list are shown, so a fake event cannot put other text on the page.
  *
  * Needs HOGBALL_LEADERBOARD_API_KEY (a personal API key with only the query:read scope) and
  * HOGBALL_LEADERBOARD_PROJECT_ID. HOGBALL_LEADERBOARD_HOST is optional.
@@ -17,11 +17,15 @@ const MAX_SCORE = 5000000
 const SIZE = 10
 const FIRST = new Set(names.first)
 const LAST = new Set(names.last)
+const BLOCKED = new Set(names.blocked)
 
 const QUERY = `
-    SELECT argMax(properties.player_name, toInt(properties.score)) AS name, max(toInt(properties.score)) AS score
+    SELECT
+        argMax(properties.player_initials, toInt(properties.score)) AS initials,
+        argMax(properties.player_name, toInt(properties.score)) AS name,
+        max(toInt(properties.score)) AS score
     FROM events
-    WHERE event = 'hogball_game_ended'
+    WHERE event = 'hogball_score_submitted'
         AND timestamp >= toDateTime('2026-10-01')
         AND properties.player_name IS NOT NULL
         AND toInt(properties.score) BETWEEN 1 AND ${MAX_SCORE}
@@ -36,6 +40,8 @@ const isPilotName = (name) => {
     return FIRST.has(first) && LAST.has(rest.join(' '))
 }
 
+const isInitials = (initials) => typeof initials === 'string' && /^[A-Z]{3}$/.test(initials) && !BLOCKED.has(initials)
+
 async function getLeaderboard(env) {
     const key = env.HOGBALL_LEADERBOARD_API_KEY
     const project = env.HOGBALL_LEADERBOARD_PROJECT_ID
@@ -49,10 +55,10 @@ async function getLeaderboard(env) {
     if (!response.ok) throw new Error(`PostHog query returned ${response.status}`)
     const { results = [] } = await response.json()
     const leaders = results
-        .filter(([name]) => isPilotName(name))
+        .filter(([initials, name]) => isInitials(initials) && isPilotName(name))
         .slice(0, SIZE)
-        .map(([name, score]) => ({ name, score: Number(score) }))
+        .map(([initials, name, score]) => ({ initials, name, score: Number(score) }))
     return { configured: true, leaders }
 }
 
-module.exports = { getLeaderboard, isPilotName, LEADERBOARD_CACHE_CONTROL }
+module.exports = { getLeaderboard, isInitials, isPilotName, LEADERBOARD_CACHE_CONTROL }

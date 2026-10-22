@@ -9,13 +9,15 @@ import { PANEL_WIDTH, STRIP_HEIGHT, drawPanel, drawStrip, messageOf } from './pa
 import { createTable } from './scene'
 import type { Table } from './scene'
 import { chargeUp, play, stopCharge, unlockAudio } from './sound'
-import { randomPilot } from './pilots'
+import { cleanInitials, randomPilot } from './pilots'
 import type { Leader } from './pilots'
 
 const STEP = 1 / 480
 const HIGH_SCORE_KEY = 'hogball-high-score'
 const MUTED_KEY = 'hogball-muted'
 const PILOT_KEY = 'hogball-pilot'
+const INITIALS_KEY = 'hogball-initials'
+const LEADERBOARD_SIZE = 10
 const LEADERBOARD_URL = '/api/hogball-leaderboard'
 const ROCKET_SECONDS = 1.6
 // The same keys as the original Windows game
@@ -55,6 +57,9 @@ export default function Hogball(): JSX.Element {
     const leadersRef = useRef<Leader[]>([])
     const [pilot, setPilot] = useState('')
     const [leaders, setLeaders] = useState<Leader[]>([])
+    const entryRef = useRef<HTMLFormElement>(null)
+    const [entry, setEntry] = useState<number | null>(null)
+    const [initials, setInitials] = useState('')
 
     const showLeaders = (next: Leader[]) => {
         leadersRef.current = next
@@ -67,9 +72,13 @@ export default function Hogball(): JSX.Element {
             .then((response) => (response.ok ? response.json() : null))
             .then((data: { leaders?: Leader[] } | null) => {
                 const list = data?.leaders || []
-                const known = pending && list.some((l) => l.name === pending.name && l.score >= pending.score)
+                const known =
+                    pending &&
+                    list.some(
+                        (l) => l.initials === pending.initials && l.name === pending.name && l.score >= pending.score
+                    )
                 const next = pending && !known ? [...list, pending].sort((a, b) => b.score - a.score) : list
-                showLeaders(next.slice(0, 10))
+                showLeaders(next.slice(0, LEADERBOARD_SIZE))
             })
             .catch(() => undefined)
 
@@ -241,8 +250,29 @@ export default function Hogball(): JSX.Element {
             duration_seconds: Math.round((Date.now() - startedRef.current) / 1000),
         })
         startedRef.current = 0
-        loadLeaders({ name: pilotRef.current, score: game.score, pending: true })
+        const board = leadersRef.current
+        if (game.score > 0 && (board.length < LEADERBOARD_SIZE || game.score > board[board.length - 1].score)) {
+            setInitials(localStorage.getItem(INITIALS_KEY) || '')
+            setEntry(game.score)
+        }
     }, [status.state])
+
+    // A score that makes the all-time top 10 asks for the player's initials, like an arcade machine
+    const submitInitials = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (entry === null || initials.length !== 3) return
+        posthog?.capture('hogball_score_submitted', {
+            score: entry,
+            player_initials: initials,
+            player_name: pilotRef.current,
+        })
+        localStorage.setItem(INITIALS_KEY, initials)
+        loadLeaders({ initials, name: pilotRef.current, score: entry, pending: true })
+        setEntry(null)
+        tableRef.current?.focus()
+    }
+
+    const inEntry = (target: EventTarget) => !!entryRef.current?.contains(target as Node)
 
     const hold = (key: keyof Input) => ({
         onPointerDown: (e: React.PointerEvent) => {
@@ -270,6 +300,7 @@ export default function Hogball(): JSX.Element {
                 className="relative min-h-[480px] flex-1 select-none overflow-hidden rounded-md border border-primary outline-none focus-visible:ring-2"
                 style={{ touchAction: 'none', backgroundColor: '#07081a' }}
                 onKeyDown={(e) => {
+                    if (inEntry(e.target)) return
                     const key = KEYS[e.nativeEvent.code]
                     const direction = BUMP_KEYS[e.nativeEvent.code]
                     if (!key && !direction && e.nativeEvent.code !== 'F2') return
@@ -282,6 +313,7 @@ export default function Hogball(): JSX.Element {
                     if (e.nativeEvent.code === 'F2') newGame()
                 }}
                 onKeyUp={(e) => {
+                    if (inEntry(e.target)) return
                     const key = KEYS[e.nativeEvent.code]
                     if (!key) return
                     e.preventDefault()
@@ -289,6 +321,7 @@ export default function Hogball(): JSX.Element {
                     press(key, false)
                 }}
                 onMouseDown={(e) => {
+                    if (inEntry(e.target)) return
                     const key = MOUSE_BUTTONS[e.button]
                     tableRef.current?.focus()
                     if (!key || Date.now() - lastTouchRef.current < 800) return
@@ -297,7 +330,7 @@ export default function Hogball(): JSX.Element {
                 }}
                 onContextMenu={(e) => e.preventDefault()}
                 onPointerDown={(e) => {
-                    if (e.pointerType === 'mouse') return
+                    if (e.pointerType === 'mouse' || inEntry(e.target)) return
                     lastTouchRef.current = Date.now()
                     tableRef.current?.focus()
                     if (ballInPlunger(gameRef.current)) return
@@ -312,6 +345,37 @@ export default function Hogball(): JSX.Element {
             >
                 <canvas ref={sceneRef} className="absolute" />
                 <canvas ref={panelRef} className="absolute" />
+                {entry !== null && (
+                    <form
+                        ref={entryRef}
+                        onSubmit={submitInitials}
+                        className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 rounded-md border-2 border-yellow p-4 text-center text-yellow"
+                        style={{ backgroundColor: '#05060a', fontFamily: '"Courier New", monospace' }}
+                    >
+                        <div className="text-xl font-bold">NEW HIGH SCORE!</div>
+                        <div className="text-lg tabular-nums">{entry.toLocaleString('en-US')}</div>
+                        <label htmlFor="hogball-initials" className="text-sm">
+                            ENTER YOUR INITIALS
+                        </label>
+                        <input
+                            id="hogball-initials"
+                            autoFocus
+                            autoComplete="off"
+                            value={initials}
+                            onChange={(e) => setInitials(cleanInitials(e.target.value))}
+                            onKeyDown={(e) => e.key === 'Escape' && setEntry(null)}
+                            maxLength={3}
+                            className="w-28 border-b-2 border-yellow bg-transparent text-center text-3xl font-bold uppercase tracking-[0.4em] text-yellow outline-none"
+                            aria-describedby="hogball-initials-help"
+                        />
+                        <div id="hogball-initials-help" className="text-xs">
+                            Three letters, then Enter. Esc to skip.
+                        </div>
+                        <OSButton size="sm" variant="primary" type="submit" disabled={initials.length !== 3}>
+                            Save to leaderboard
+                        </OSButton>
+                    </form>
+                )}
                 <span className="sr-only" role="status" aria-live="polite">
                     {status.message}
                 </span>
@@ -345,7 +409,7 @@ export default function Hogball(): JSX.Element {
                     <ol className="m-0 pl-5 text-sm">
                         {leaders.map((leader, i) => (
                             <li key={`${leader.name}-${i}`} className={leader.name === pilot ? 'font-bold' : ''}>
-                                {leader.name} – {leader.score.toLocaleString('en-US')}
+                                {leader.initials} {leader.name} – {leader.score.toLocaleString('en-US')}
                             </li>
                         ))}
                     </ol>

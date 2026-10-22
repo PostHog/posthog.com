@@ -1,9 +1,16 @@
 import names from './names.json'
 
-export type Leader = { name: string; score: number; pending?: boolean }
+export type Leader = { initials: string; name: string; score: number; pending?: boolean }
 
 const pick = (list: string[], random: () => number) => list[Math.floor(random() * list.length)]
 
 // A funny hedgehog pilot name, like "Admiral Pincushion". Players cannot type their own name, so the
 // leaderboard can only show names from this list.
 export const randomPilot = (random = Math.random): string => `${pick(names.first, random)} ${pick(names.last, random)}`
+
+// Arcade-style initials: three letters from A to Z
+export const cleanInitials = (value: string): string =>
+    value
+        .toUpperCase()
+        .replace(/[^A-Z]/g, '')
+        .slice(0, 3)

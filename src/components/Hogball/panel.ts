@@ -141,7 +141,7 @@ export function drawPanel(
             const y = 472 + i * 15
             ctx.fillStyle = leader.name === pilot ? '#ffffff' : LED
             ctx.textAlign = 'left'
-            ctx.fillText(`${i + 1} ${leader.name.toUpperCase()}`.slice(0, 22), 22, y)
+            ctx.fillText(`${i + 1} ${leader.initials} ${leader.name.toUpperCase()}`.slice(0, 22), 22, y)
             ctx.textAlign = 'right'
             ctx.fillText(leader.score.toLocaleString('en-US'), w - 22, y)
         })
