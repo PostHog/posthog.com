@@ -120,7 +120,7 @@ export const CATEGORIES: Record<
     Tracing: { product: 'traces', docs: '/docs/distributed-tracing' },
     Utilities: { Icon: IconWrench, color: 'blue', docs: '/docs/model-context-protocol/tools' },
     'Visual review': { Icon: IconCameraFrame, color: 'salmon', docs: '/docs/model-context-protocol/tools' },
-    'Warehouse sources': { product: 'data_in', docs: '/docs/data-warehouse/sources' },
+    'Warehouse sources': { product: 'data_in', docs: '/docs/data-pipelines/sources' },
     'Web analytics': { product: 'web_analytics', docs: '/docs/web-analytics' },
     Workflows: { product: 'workflows_emails', docs: '/docs/workflows' },
     Uncategorized: { Icon: IconEllipsis, color: 'muted', docs: '/docs/model-context-protocol/tools' },
