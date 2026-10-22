@@ -9,7 +9,7 @@ availability:
 sourceId: Bugherd
 ---
 
-The BugHerd connector syncs your bug tracking and QA data – organization details, projects, tasks, and users – into the PostHog data warehouse.
+The BugHerd connector syncs your bug tracking and QA data into the PostHog data warehouse, including organization details, projects, tasks, task attachments, and user data.
 
 ## Adding a data source
 
@@ -20,17 +20,6 @@ The BugHerd connector syncs your bug tracking and QA data – organization detai
 5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
 Once the syncs are complete, you can start using BugHerd data in PostHog.
-
-## Available tables
-
-| Table          | Description                        | Sync method  |
-| -------------- | ---------------------------------- | ------------ |
-| `Organization` | Your BugHerd organization details  | Full refresh |
-| `Users`        | Users in your BugHerd organization | Full refresh |
-| `Projects`     | Projects in your BugHerd account   | Full refresh |
-| `Tasks`        | Tasks (bugs) across all projects   | Incremental  |
-
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 

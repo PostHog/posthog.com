@@ -3417,7 +3417,8 @@ html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizar
     [data-app='AppWindow'][data-focused] [data-app='ReaderView'] button[aria-label='Open navigation'],
     [data-app='AppWindow'][data-focused] .app-scrollbar,
     [data-app='AppWindow'][data-focused] .scrollarea-fade,
-    [data-app='AppWindow'][data-focused] .scrollarea-fade-x {
+    [data-app='AppWindow'][data-focused] .scrollarea-fade-x,
+    [data-app='AppWindow'][data-focused]:has(.legal-mode) [role='tablist'] {
         display: none !important;
     }
 }

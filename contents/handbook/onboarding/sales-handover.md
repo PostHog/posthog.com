@@ -30,11 +30,11 @@ Historically, there's still a good chance that they'll talk with Sales after pas
 If there are any pending config issues that you raised before but the customer didn't respond to, just provide relevant context to the fellow AE/TAM in Customer Analytics - sometimes it might be a good conversation starter!
 
 ### Lead creation
-If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add them to the `AE/TAM Referral` segment in Customer Analytics. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
+If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past two - three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement, you can add the `AE/TAM Referral` tag to the account in Customer Analytics. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic.
 
 After a few minutes, your lead will appear in the `#sales-leads` Slack channel, tagged as "AE/TAM Referral". As a good practice, leave a note in Customer Analytics for the Account Executive with some relevant context on the customer. You can also ping an assigned AE on Slack, if any further follow up is needed.
 
-The automation flips the Customer Analytics Onboarding pipeline trait to `Sales Handoff` so that we have not only data on the leads passed, but also a visual indication.
+The automation flips the Customer Analytics Onboarding pipeline property to `Sales Handoff` so that we have not only data on the leads passed, but also a visual indication.
 
 ### Proactively looking out for opportunities
 - If you see an account with a promising, positive growth trajectory, but they may achieve the $ threshold after finishing the onboarding program, **set a task in Customer Analytics assigned to yourself** in order to circle back after some time and see if they're eligible for being passed on to Sales.
@@ -44,10 +44,10 @@ The automation flips the Customer Analytics Onboarding pipeline trait to `Sales 
 
 Some pointers on what to pay attention to in Customer Analytics while checking for prior Sales engagement:
 
-- Pin `temporary owner` trait in your Customer Analytics sidebar - the trait is set when a Salesforce lead task exists (otherwise it's "null")
-- Segments (e.g. TAM/CSM Candidate, $20k MRR, Active Trial, Active Self-serve Trial, Annual Plan, etc.)
+- Check the "Sales info" widget in the Onboarding dashboard view. It should indicate engagement or lack of engagement.
+- Tags (e.g. TAM/CSM Candidate, $20k MRR, Active Trial, Active Self-serve Trial, Annual Plan, etc.)
 - Slack channel (following the naming convention `#posthog-[company name]`)
-- Key Roles (is someone assigned to the account?)
+- Check out the Relationships tab to double-check potential account ownership
 - Trial Status widget in the Onboarding dashboard
 - Active Conversations and Meetings (any trace of a booked call or an ongoing conversation)
 - Notes
@@ -60,4 +60,4 @@ If it’s clear there’s a duplication issue and we shouldn’t be involved, pi
 
 ### What to do when Sales is involved?
 
-If an account is in the `Onboarding Lead` segment, but there are recent Active Conversations in Customer Analytics from a TAE/TAM (or scheduled meetings), and TAE/TAM confirms they are already actively engaged with the account, add a Customer Analytics note saying: “Removing from Onboarding Lead segment — Sales already engaged.” Then remove the account from the segment and delete both the pipeline trait and the timestamp.
+If an account has the `Onboarding Lead` tag, but there are recent Active Conversations in Customer Analytics from a TAE/TAM (or scheduled meetings), and TAE/TAM confirms they are already actively engaged with the account, add a Customer Analytics note saying: “Removing Onboarding Lead tag — Sales already engaged.” Then remove the tag from the account and delete both the pipeline property and the timestamp.

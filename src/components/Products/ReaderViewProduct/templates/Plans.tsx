@@ -74,6 +74,11 @@ const ValueCell = ({ value }: { value: PlanFeatureValue }) => {
     )
 }
 
+const billingLimitDetail = {
+    headline: 'Set a billing limit and never get an unexpected bill.',
+    body: "You're always in control of what you spend.",
+}
+
 const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }> = [
     {
         headline: 'More than 90% of companies use PostHog for free.',
@@ -87,10 +92,7 @@ const pricingDetails: Array<{ headline: React.ReactNode; body: React.ReactNode }
         headline: 'Volume discounts kick in automatically.',
         body: 'No negotiations needed.',
     },
-    {
-        headline: 'Set a billing limit and never get an unexpected bill.',
-        body: "You're always in control of what you spend.",
-    },
+    billingLimitDetail,
     {
         headline: 'We make a profit with every product.',
         body: 'No loss-leader pricing that goes up later or gets retired after a bad quarter.',
@@ -210,6 +212,11 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
     const paidTiers = paidPlan?.tiers || []
     const unit = billing.unit || 'unit'
     const addons = billing.addons || []
+
+    // Billing sets `no_billing_limit` on add-ons that billing limits don't cap, like Logs custom retention
+    const noBillingLimitDetail = addons.some((addon: any) => addon.no_billing_limit === true)
+        ? product?.noBillingLimitDetail
+        : undefined
 
     const firstPaidTier = paidTiers.find((t: any) => parseFloat(t.unit_amount_usd) > 0)
     const dp = getMaxDecimalPlaces(paidTiers)
@@ -585,12 +592,14 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
             <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
                 <h3 className="mb-4 !text-sm font-normal text-secondary">Things you should know about our pricing</h3>
                 <ul className="space-y-6 list-none m-0 p-0">
-                    {pricingDetails.map((point, i) => (
-                        <li key={i}>
-                            <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
-                            <p className="text-sm text-primary/60 mb-0">{point.body}</p>
-                        </li>
-                    ))}
+                    {pricingDetails
+                        .map((detail) => (detail === billingLimitDetail && noBillingLimitDetail) || detail)
+                        .map((point, i) => (
+                            <li key={i}>
+                                <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
+                                <p className="text-sm text-primary/60 mb-0">{point.body}</p>
+                            </li>
+                        ))}
                 </ul>
             </aside>
         </section>
