@@ -168,4 +168,4 @@ For more help, see the [Data Warehouse troubleshooting guide](/docs/data-warehou
 
 ### The webhook sync method only shows changes after sync
 
-The webhook sync method sends data to PostHog in realtime, but the events land in the database after a sync. The sync doesn't pull data from Stripe directly in this sync mode, instead it uses the data sent from Stripe via the webhook, creating, updating, and deleting at the scheduled sync interval. Webhook events do not update the source table immediately.
+The webhook sync method sends data to PostHog in realtime, but the events land in the table after a sync. The sync doesn't pull data from Stripe directly in this sync mode, instead it uses the data sent from Stripe via the webhook, creating, updating, and deleting at the scheduled sync interval. Webhook events do not update the source table immediately.
