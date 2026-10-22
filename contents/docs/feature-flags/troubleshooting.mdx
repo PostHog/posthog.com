@@ -225,13 +225,16 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 ## Where does PostHog store flag calls?
 
-When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the `events` table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls.
+When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the `events` table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls. The move has two steps:
+
+1. **Reads move.** PostHog starts to read flag calls from `flag_evaluations`. PostHog still writes them to the `events` table, so nothing you built stops working. This step starts about a week after we email you.
+2. **Writes move.** PostHog stops writing flag calls to the `events` table. This step starts at least 30 days after we email you.
 
 Flag calls [aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill), so the move doesn't change your bill.
 
 <CalloutBox icon="IconInfo" title="You don't need to do anything yet" type="info">
 
-We'll email you before anything changes. PostHog won't stop writing flag calls to the `events` table for your organization until at least 30 days after that email.
+We'll email you before anything changes. PostHog won't stop writing flag calls to the `events` table for your organization (step 2) until at least 30 days after that email.
 
 </CalloutBox>
 
