@@ -1,0 +1,69 @@
+---
+title: UTM parameters on email links
+sidebar: Docs
+showTitle: true
+---
+
+UTM parameters are query string tags added to URLs so analytics tools – including [Web Analytics](/docs/web-analytics) – can tell where a click came from. When you enable UTM tags on your workflow emails, PostHog appends parameters like `utm_source`, `utm_medium`, `utm_campaign`, and `utm_content` to every link in the email body. Recipients who click through show up as email traffic in your analytics, broken down by campaign.
+
+## Set team-level UTM defaults
+
+Team defaults apply to every new broadcast and workflow email step. They're off by default, so nothing changes until you turn them on.
+
+1. Go to [**Settings** > **Environment** > **Workflows**](https://app.posthog.com/settings/environment-workflows#workflows-utm-defaults).
+2. Toggle **Add UTM tags to links in new emails** on.
+3. Fill in the values you want. Leave a field empty to use the built-in fallback shown in the placeholder.
+4. Click **Save**.
+
+| Parameter      | Built-in fallback when empty   |
+| -------------- | ------------------------------ |
+| `utm_source`   | `posthog`                      |
+| `utm_medium`   | `email`                        |
+| `utm_campaign` | The broadcast or workflow name |
+| `utm_content`  | The email step name            |
+
+After you save, every new email step you add in the [workflow builder](/docs/workflows/workflow-builder) or [broadcast wizard](/docs/workflows/broadcasts) starts with these values. Existing emails keep their current values.
+
+## Use Liquid variables in UTM values
+
+UTM fields accept [Liquid](https://shopify.github.io/liquid/) syntax. Variables are resolved at send time for each recipient, so every person can get a different value.
+
+For example, setting `utm_campaign` to:
+
+```liquid
+{{ workflow.name }} - {{ person.properties.plan }}
+```
+
+produces `?utm_campaign=onboarding%20-%20pro` for a person whose `plan` property is `pro`.
+
+## Customize UTM parameters on a single email
+
+Each email can override the team defaults. Open the email step in the workflow builder or the **Content** step in a broadcast, and edit any UTM field. Changing a value removes that field from the "following default" tracking, so future changes to the team default won't overwrite your edit.
+
+Leave a field empty to fall back to the built-in value shown in the placeholder.
+
+## Save current values as the team default
+
+If you've configured UTM values on a specific email and want every new email to start with those same values, click **Save as team default** below the UTM fields. This updates your team's defaults in **Settings** without leaving the editor.
+
+When an email's values already match the team defaults, you'll see **Using your team's default values** instead of the button.
+
+## How UTM parameters appear in Web Analytics
+
+Links in your emails include the UTM query string – for example:
+
+```
+https://example.com/pricing?utm_source=posthog&utm_medium=email&utm_campaign=launch&utm_content=cta
+```
+
+When a recipient clicks, PostHog [Web Analytics](/docs/web-analytics) records the visit with these parameters. You can then:
+
+- Filter by `utm_source` or `utm_campaign` in the **Web Analytics** dashboard to see traffic from your emails.
+- Build a [trend](/docs/product-analytics/trends) or [funnel](/docs/product-analytics/funnels) filtered to `utm_medium = email` to measure conversions driven by email campaigns.
+- Compare campaigns by breaking down pageviews or conversions by `utm_campaign`.
+
+## API behavior
+
+When you create a workflow through the API (`POST /api/projects/:id/hog_flows/`) and the email step omits `utm_tags_enabled`, PostHog copies the team defaults into the new step automatically. If you supply your own `utm_params`, your values take priority and only the keys you left out are filled from the defaults.
+
+The team API (`PATCH /api/projects/:id/`) rejects unrecognized UTM keys (for example, `utm_soucre`) with a `400` response, so typos are caught before they reach your emails.
