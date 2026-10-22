@@ -92,10 +92,19 @@ If you want this material for a different product, tell the team in the **#team-
 
 ### How product marketers make sales enablement material
 
-1. **Start with how the product helps a salesperson hit quota.** If a product mostly keeps customers instead of adding revenue, explain the retention value. Don't present it as an immediate revenue opportunity.
+1. **Make it usable on a call.** For each product, say who to approach, when, and what shows that they are ready to buy. Write each signal as something an agent can query: an event, a property, a billing field, or a threshold. A description of a customer's attitude is not a signal. If a product has little to show on screen, add a demo or another asset that shows it working.
 
-2. **Make it usable on a call.** Include the signals that show a customer is ready to buy: who to approach, when, and for which product. If a product has little to show on screen, add a demo or another asset that shows it working.
+2. **Write it so that agents can read it.** Many people on the sales team prepare for calls with an agent such as Claude Code or PostHog Desktop (see [AI investigation tools](/handbook/growth/sales/sales-and-cs-tools#ai-investigation-tools)). A deck is good for a presentation, but an agent can't use it well. Put the content in Markdown, in this handbook or as a skill in the <PrivateLink url="https://us.posthog.com/project/2/llm-analytics/skills">PostHog skills store</PrivateLink>, which agents load through the PostHog MCP. Use one skill for each product, plain headings, and the signals from rule 1. [Turning knowledge into agent skills](/handbook/growth/sales/turning-knowledge-into-agent-skills) explains how.
 
-3. **Keep it current after launch.** We announced earlier guides once, then nobody maintained them or mentioned them again, so the sales team did not use them reliably. Update the material when the product changes, and bring it back to the team regularly. The [SME update calls](/handbook/growth/sales/product-enablement#staying-current) are a good place for this.
+3. **Make signals run on their own.** If an agent can query a signal, PostHog can check it on a schedule in our own project:
 
-4. **Start where the sales team needs the most help.** Ask the sales team to rank products from easiest to hardest to sell, and work on the hardest ones first.
+   - A [scout](/docs/self-driving/scouts) checks the signal and sends the accounts that match to a Slack channel or to a salesperson's direct messages.
+   - A [Replay Vision scanner](/docs/replay-vision) watches session recordings for behavior that events don't show, such as a user who tries a product and gets stuck. A [scout on the scanner](/docs/replay-vision/scouts) sends a digest of the sessions to look at.
+
+   Include the scout instructions or the scanner prompt in your material, so that a salesperson can copy it and run it for their own accounts.
+
+4. **Keep it current after launch.** We announced earlier guides once, then nobody maintained them or mentioned them again, so the sales team did not use them reliably. Update the material when the product changes, and bring it back to the team regularly. The [SME update calls](/handbook/growth/sales/product-enablement#staying-current) are a good place for this.
+
+5. **Start where the sales team needs the most help.** Ask the sales team to rank products from easiest to hardest to sell, and work on the hardest ones first.
+
+6. **Say what the salesperson gets from it.** Some products help a salesperson hit quota. Others mostly keep customers. Say which it is. For a retention product, explain the retention value, and don't present it as an immediate revenue opportunity.
