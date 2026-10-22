@@ -12,7 +12,7 @@ Not yet available to everyone – [join the waitlist](/context-warehouse/warehou
 
 </CalloutBox>
 
-The warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/cdp/sources) land in it continuously, and you query it with SQL – from a command-line client, from BI tools like Superset or Metabase, from your own code, or from PostHog itself.
+The warehouse is a full analytical database that PostHog provisions and runs for your organization. Your PostHog data and your [connected sources](/docs/data-pipelines/sources) land in it continuously, and you query it with SQL – from a command-line client, from BI tools like Superset or Metabase, from your own code, or from PostHog itself.
 
 It's the difference between "PostHog can query my data" and "PostHog **is** my data warehouse": you get a real database endpoint with its own hostname and credentials, holding your product data and business data side by side.
 
@@ -21,7 +21,7 @@ It's the difference between "PostHog can query my data" and "PostHog **is** my d
 Under the hood, the warehouse runs [PostHog's fork of Trino](https://github.com/PostHog/trino), the open source distributed SQL engine, over open Parquet files on durable object storage. You don't need to know any of that to use it, but it explains the shape of the product:
 
 1. **Provisioning** – When you set up the warehouse, PostHog creates a dedicated catalog for your organization, with its own hostname like `my-warehouse.dw.us.postwh.com` and its own storage.
-2. **Getting data in** – PostHog backfills your historical events, persons, and groups, then keeps the warehouse up to date with daily loads. [Sources](/docs/cdp/sources) you've connected (Stripe, Postgres, Salesforce, HubSpot, and so on) sync into the warehouse after each of their regular imports.
+2. **Getting data in** – PostHog backfills your historical events, persons, and groups, then keeps the warehouse up to date with daily loads. [Sources](/docs/data-pipelines/sources) you've connected (Stripe, Postgres, Salesforce, HubSpot, and so on) sync into the warehouse after each of their regular imports.
 3. **Storage** – Data lives as columnar Parquet files in object storage, with a transactional catalog on top. Storage and compute scale independently, and your data survives any individual machine.
 4. **Querying** – The fork keeps Trino's standard client protocol over HTTPS, so existing Trino clients, drivers, and BI tool connectors work without special adapters.
 

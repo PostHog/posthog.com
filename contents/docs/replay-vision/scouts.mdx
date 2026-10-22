@@ -54,7 +54,7 @@ Pick a frequency (**Every day**, **Weekdays**, or **Weekly (Mondays)**) and a ru
 Optional, and set up alongside the rest of the scout rather than afterwards:
 
 - **Slack** – post each report to a channel in a connected Slack workspace. Reports post as a thread: a short lead message in the channel, with the rest of the report in replies.
-- **Webhook** – `POST` each report to an HTTPS URL of yours. Delivery runs through a destination in [Data Pipelines](/docs/cdp/destinations), where you can see each attempt.
+- **Webhook** – `POST` each report to an HTTPS URL of yours. Delivery runs through a destination in [Data Pipelines](/docs/data-pipelines/destinations), where you can see each attempt.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_scout_form_delivery_b4d495e4a4.png"
@@ -128,7 +128,7 @@ Watcher scouts are selective on purpose. When nothing clears their bar, they fil
 
 ## Sending reports somewhere else
 
-Every report a scout surfaces is also captured in your project as a `$scout_report_emitted` event, carrying its title, summary, priority, and a link back to it. You can build [insights](/docs/product-analytics/insights) on that event, or send it anywhere the Slack and webhook options don't cover with a [destination in Data Pipelines](/docs/cdp/destinations).
+Every report a scout surfaces is also captured in your project as a `$scout_report_emitted` event, carrying its title, summary, priority, and a link back to it. You can build [insights](/docs/product-analytics/insights) on that event, or send it anywhere the Slack and webhook options don't cover with a [destination in Data Pipelines](/docs/data-pipelines/destinations).
 
 ## Letting a scout edit scanners
 
