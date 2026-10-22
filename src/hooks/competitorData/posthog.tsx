@@ -199,7 +199,7 @@ export const posthog = {
             },
             search: {
                 features: {
-                    full_text_search: 'Attribute search',
+                    full_text_search: 'Message and attribute search',
                     no_proprietary_query_language: true,
                 },
             },
