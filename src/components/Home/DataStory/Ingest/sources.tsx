@@ -50,13 +50,8 @@ export function useSpotlightLogos(): (string | undefined)[] {
 const SourceLogo = ({ logo, className }: { logo?: string; className?: string }) =>
     logo ? <img src={logo} alt="" className={cn('object-contain', className)} /> : null
 
-export const SourceTile = ({ logo, className }: { logo?: string; className?: string }) => (
-    <span
-        className={cn(
-            'flex size-5 shrink-0 items-center justify-center rounded-[5px] border border-primary bg-white shadow-sm',
-            className
-        )}
-    >
+export const SourceTile = ({ logo }: { logo?: string }) => (
+    <span className="flex size-5 shrink-0 items-center justify-center rounded-[5px] border border-primary bg-white shadow-sm">
         <SourceLogo logo={logo} className="size-3.5" />
     </span>
 )

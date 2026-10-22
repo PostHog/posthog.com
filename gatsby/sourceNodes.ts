@@ -1557,46 +1557,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
-    const sourceHomepageFeedbackStats = async () => {
-        if (!process.env.POSTHOG_APP_API_KEY) return
-        const endpointTimeoutMs = 60_000
-
-        try {
-            const res = await fetch(
-                'https://us.posthog.com/api/environments/2/endpoints/homepage_feedback_skip_rate/run',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
-                    },
-                    body: JSON.stringify({ refresh: 'force' }),
-                    signal: AbortSignal.timeout(endpointTimeoutMs),
-                }
-            )
-            if (res.status !== 200) {
-                console.error('Failed to fetch homepage_feedback_skip_rate endpoint:', res.status)
-                return
-            }
-            const body: any = await res.json()
-            const skipRatePercent = body.results?.[0]?.[0]
-            if (typeof skipRatePercent !== 'number') return
-            const data = { skipRatePercent }
-            createNode({
-                id: createNodeId('homepage-feedback-stats'),
-                parent: null,
-                children: [],
-                internal: {
-                    type: 'HomepageFeedbackStats',
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            })
-        } catch (err) {
-            console.error('Error fetching homepage_feedback_skip_rate endpoint:', err)
-        }
-    }
-
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
@@ -1612,7 +1572,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceGithubNodes(),
         sourceResearchMergedPRs(),
         sourceSelfDrivingPRs(),
-        sourceHomepageFeedbackStats(),
         fetchWorkflowTemplates(),
         fetchReferences(),
         fetchEvents(),

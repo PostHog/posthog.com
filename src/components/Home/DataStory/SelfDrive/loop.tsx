@@ -32,6 +32,7 @@ const CHECKS = [
     { name: 'Unit tests', passesAt: 2900 },
     { name: 'Typecheck', passesAt: 3500 },
 ]
+const ALL_CHECKS_PASS_AT = Math.max(...CHECKS.map(({ passesAt }) => passesAt))
 
 const CONVERSION = [72, 73, 71, 72, 70, 44, 41, 42, 40, 58, 69, 73, 74, 74]
 const MERGE_INDEX = 8
@@ -78,7 +79,7 @@ export const CheckList = ({ elapsed }: { elapsed: number }) => (
 
 const MergeButton = ({ elapsed }: { elapsed: number }) => {
     const merged = elapsed >= MERGED_AT
-    const ready = CHECKS.every(({ passesAt }) => elapsed >= passesAt)
+    const ready = elapsed >= ALL_CHECKS_PASS_AT
     return (
         <PressCursor elapsed={elapsed} pressAt={MERGE_PRESS_AT}>
             <span
@@ -108,11 +109,11 @@ const LINE = CONVERSION.map((value, index) => `${index === 0 ? 'M' : 'L'} ${char
 const AREA = `${LINE} L ${CHART_WIDTH} ${CHART_HEIGHT} L 0 ${CHART_HEIGHT} Z`
 const MERGE_X_PERCENT = (chartX(MERGE_INDEX) / CHART_WIDTH) * 100
 
-export const CheckChart = ({ elapsed, className }: { elapsed: number; className?: string }) => {
+export const CheckChart = ({ elapsed }: { elapsed: number }) => {
     const revealing = elapsed >= METRIC_REVEAL_AT
     const passed = elapsed >= CHECK_PASSED_AT
     return (
-        <div className={cn('flex flex-col gap-1.5', className)}>
+        <div className="flex flex-col gap-1.5">
             <div className={cn(SCENE_TEXT[12], 'flex items-center justify-between gap-2')}>
                 <span className="font-semibold">Follow-up check · checkout conversion</span>
                 <span
@@ -173,8 +174,6 @@ export const CheckChart = ({ elapsed, className }: { elapsed: number; className?
         </div>
     )
 }
-
-const ALL_CHECKS_PASS_AT = Math.max(...CHECKS.map(({ passesAt }) => passesAt))
 
 export const PostHogAvatar = ({ className }: { className?: string }) => (
     <span

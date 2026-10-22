@@ -754,9 +754,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         unique_users: Int
         unique_orgs: Int
     }
-    type HomepageFeedbackStats implements Node {
-        skipRatePercent: Float
-    }
     type McpLeaderboardRow {
         week: String!
         facet: String!

@@ -14,11 +14,12 @@ import { cn } from '../../../../utils'
 import { IOS_SPRING, transform, useEventClock } from '../timeline'
 import { PostHogMark, WINDOW_DRAG } from '../sceneParts'
 import { SourceIcon } from '../Query/trace'
+import { CodexTerminal } from '../Query/AgentWindow'
 import { PressCursor } from '../PressCursor'
 import {
     EARLIER_REPORTS,
     HANDOFF_AT,
-    HandoffAgent,
+    HANDOFF_TRACE,
     InboxReport,
     OVERNIGHT_REPORTS,
     PRESS_AT,
@@ -246,7 +247,10 @@ const InboxHandoff = ({ elapsed }: { elapsed: number }) => {
                         className="absolute right-0 top-32 w-[62%] @3xl:-right-6"
                     >
                         <motion.div {...WINDOW_DRAG} dragConstraints={boundsRef}>
-                            <HandoffAgent elapsed={elapsed} className="h-[20rem] @3xl:h-[25rem]" />
+                            <CodexTerminal
+                                state={HANDOFF_TRACE.stateAt(elapsed)}
+                                className="h-[20rem] @3xl:h-[25rem]"
+                            />
                         </motion.div>
                     </motion.div>
                 )}

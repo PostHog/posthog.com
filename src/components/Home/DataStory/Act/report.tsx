@@ -1,6 +1,4 @@
-import React from 'react'
 import { pressCursorBoundaries } from '../PressCursor'
-import { CodexTerminal } from '../Query/AgentWindow'
 import { SourceKey, ToolCall, defineTrace } from '../Query/trace'
 
 export const REPORT_LOOP_MS = 15500
@@ -127,7 +125,7 @@ const CODEX_CALLS: ToolCall[] = [
     },
 ]
 
-const HANDOFF_TRACE = defineTrace({
+export const HANDOFF_TRACE = defineTrace({
     question: CODEX_PROMPT,
     calls: CODEX_CALLS,
     answer: "`plan` is undefined when checkout loads before pricing. I'll guard it in `checkout.tsx`, add a test, and open a PR.",
@@ -136,10 +134,6 @@ const HANDOFF_TRACE = defineTrace({
     restingMs: REPORT_RESTING_MOMENT,
     submittedAt: HANDOFF_AT,
 })
-
-export const HandoffAgent = ({ elapsed, className }: { elapsed: number; className?: string }) => (
-    <CodexTerminal state={HANDOFF_TRACE.stateAt(elapsed)} className={className} />
-)
 
 export const REPORT_BOUNDARIES: number[] = [
     ...OVERNIGHT_REPORTS.map(({ at }) => at ?? 0),
