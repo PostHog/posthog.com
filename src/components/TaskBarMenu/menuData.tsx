@@ -541,6 +541,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
+                    label: 'Things that spark joy',
+                    link: '/sparks-joy',
+                    icon: <IconSparksJoy className="size-4" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
                     label: 'Display options',
                     onClick: () => {
                         navigate('/display-options', { state: { newWindow: true } })
@@ -554,12 +563,6 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Things that spark joy',
-                    link: '/sparks-joy',
-                    icon: <IconSparksJoy className="size-4" />,
                 },
                 {
                     type: 'separator',
