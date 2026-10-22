@@ -7,15 +7,17 @@ showTitle: true
 The materialized view failures check fires when a [materialized view](/docs/data-warehouse/views) in your Data Warehouse fails to refresh, which leaves anything that reads from it serving stale data.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_34_953_Z_fcf2cbacd9.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_39_618_Z_108a9e2e6e.png"
-    alt="Materialized view failures check in the Health checks section in the PostHog app"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_34_953_Z_fcf2cbacd9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_39_618_Z_108a9e2e6e.png"
+  alt="Materialized view failures check in the Health checks section in the PostHog app"
+  classes="rounded"
 />
 
 ## What this check looks for
 
 Once a day, the check looks at your Data Warehouse saved queries and raises a **warning** for any materialized view whose latest materialization failed (or that recorded an error and isn't currently running). The issue includes the view name and the error from the failed run.
+
+Separately, if a view fails enough times in a row to be [suspended](/docs/data-warehouse/views/materialization-troubleshooting#the-view-isnt-refreshing), PostHog sends an immediate email and in-app notification at the moment of suspension. This is independent of the daily check — it tells you the view has stopped refreshing right when it happens, rather than waiting for the next digest.
 
 ## Why it matters
 
