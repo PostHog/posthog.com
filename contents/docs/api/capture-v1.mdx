@@ -173,8 +173,6 @@ Every field must have the JSON type below. A field with the wrong type, such as 
 
 The response's `error_description` names the field and what's wrong with it, for example `Failed to parse request body: batch[3].distinct_id must be a string, got number.` or `Failed to parse request body: batch[0].event is missing.` If the body isn't valid JSON, it gives the line and column instead. It never repeats the data you sent.
 
-<!-- TODO(capture-v1): keep this line only once posthog #120820 is deployed (format matches it). -->
-
 | Field | Type |
 |---|---|
 | `batch` | Array of event objects |
