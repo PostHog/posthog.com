@@ -292,69 +292,105 @@ If requests to your proxy path return 404 or don't get proxied:
 
 ### Using with Clerk or other auth solutions
 
-If you're using Clerk or similar auth solutions, handle PostHog routes before authentication. Add the proxy logic to your `beforeAuth` function and exclude the proxy path from auth:
+If you use Clerk or a similar auth middleware, send PostHog requests to the proxy before the auth middleware runs. PostHog requests then work for logged-out users, and the auth middleware never sees them. This example uses Clerk's `clerkMiddleware`:
 
 <MultiLanguage>
 
 ```js file=US
-export default authMiddleware({
-  beforeAuth(req) {
-    if (req.nextUrl.pathname.startsWith('/yourpath')) {
-      const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
-        ? 'us-assets.i.posthog.com'
-        : 'us.i.posthog.com'
+import { clerkMiddleware } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
-      const requestHeaders = new Headers(req.headers)
-      requestHeaders.set('host', hostname)
-      // Remove cookies and auth headers before forwarding to PostHog
-      requestHeaders.delete('cookie')
-      requestHeaders.delete('authorization')
+function posthogProxy(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
+    ? 'us-assets.i.posthog.com'
+    : 'us.i.posthog.com'
 
-      url.protocol = 'https'
-      url.hostname = hostname
-      url.port = '443'
-      url.pathname = url.pathname.replace(/^\/yourpath/, '')
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+  // Remove cookies and auth headers before forwarding to PostHog
+  requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
-      return NextResponse.rewrite(url, {
-        headers: requestHeaders,
-      })
-    }
-  },
-  ignoredRoutes: ['/yourpath(.*)'],
-})
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+const clerk = clerkMiddleware()
+
+export function proxy(request, event) {
+  if (request.nextUrl.pathname.startsWith('/yourpath')) {
+    return posthogProxy(request)
+  }
+  return clerk(request, event)
+}
+
+export const config = {
+  matcher: [
+    // Clerk's default matcher: skip Next.js internals and static files
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)',
+    // The PostHog path, including the .js files that the pattern above skips
+    '/yourpath/:path*',
+  ],
+}
 ```
 
 ```js file=EU
-export default authMiddleware({
-  beforeAuth(req) {
-    if (req.nextUrl.pathname.startsWith('/yourpath')) {
-      const url = req.nextUrl.clone()
-      const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
-        ? 'eu-assets.i.posthog.com'
-        : 'eu.i.posthog.com'
+import { clerkMiddleware } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
-      const requestHeaders = new Headers(req.headers)
-      requestHeaders.set('host', hostname)
-      // Remove cookies and auth headers before forwarding to PostHog
-      requestHeaders.delete('cookie')
-      requestHeaders.delete('authorization')
+function posthogProxy(request) {
+  const url = request.nextUrl.clone()
+  const hostname = url.pathname.startsWith('/yourpath/static/') || url.pathname.startsWith('/yourpath/array/')
+    ? 'eu-assets.i.posthog.com'
+    : 'eu.i.posthog.com'
 
-      url.protocol = 'https'
-      url.hostname = hostname
-      url.port = '443'
-      url.pathname = url.pathname.replace(/^\/yourpath/, '')
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('host', hostname)
+  // Remove cookies and auth headers before forwarding to PostHog
+  requestHeaders.delete('cookie')
+  requestHeaders.delete('authorization')
 
-      return NextResponse.rewrite(url, {
-        headers: requestHeaders,
-      })
-    }
-  },
-  ignoredRoutes: ['/yourpath(.*)'],
-})
+  url.protocol = 'https'
+  url.hostname = hostname
+  url.port = '443'
+  url.pathname = url.pathname.replace(/^\/yourpath/, '')
+
+  return NextResponse.rewrite(url, {
+    headers: requestHeaders,
+  })
+}
+
+const clerk = clerkMiddleware()
+
+export function proxy(request, event) {
+  if (request.nextUrl.pathname.startsWith('/yourpath')) {
+    return posthogProxy(request)
+  }
+  return clerk(request, event)
+}
+
+export const config = {
+  matcher: [
+    // Clerk's default matcher: skip Next.js internals and static files
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)',
+    // The PostHog path, including the .js files that the pattern above skips
+    '/yourpath/:path*',
+  ],
+}
 ```
 
 </MultiLanguage>
+
+Add `/yourpath/:path*` to the `matcher` even if you already use Clerk's default matcher. The default matcher skips paths that end in `.js`, such as `/yourpath/static/array.js`. On Next.js 15 or earlier, put this code in `middleware.js` and name the function `middleware`.
 
 ### 503 or 400 errors persist
 
