@@ -439,7 +439,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                             aria-label="Delete post"
                                         />
                                     )}
-                                    {isAuthor && !editing && !locked && (
+                                    {(isModerator || (isAuthor && !locked)) && !editing && (
                                         <OSButton
                                             onClick={() => setEditing(true)}
                                             icon={<IconPencil />}

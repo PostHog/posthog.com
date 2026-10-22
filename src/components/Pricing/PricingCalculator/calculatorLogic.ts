@@ -21,6 +21,8 @@ export interface BillingAddon {
     type: string
     inclusion_only?: boolean | null
     plans: BillingPlan[]
+    // True when billing limits don't cap it, like Logs custom retention once it is a companion product
+    no_billing_limit?: boolean | null
     [key: string]: any
 }
 
@@ -28,7 +30,22 @@ export interface BillingProduct {
     type: string
     addons?: BillingAddon[] | null
     plans: BillingPlan[]
+    companion_of?: string | null
+    no_billing_limit?: boolean | null
     [key: string]: any
+}
+
+/** A retention input from our product data (`retention`), like Logs custom retention. */
+export interface RetentionConfig {
+    // The billing type that prices retention
+    key: string
+    maxMonths: number
+    label?: string
+    // The default retention, which costs nothing extra, in full and as a slider mark
+    includedLabel?: string
+    includedMark?: string
+    // Months labelled on the slider (0 is the included default)
+    marks?: number[]
 }
 
 /** A product as the calculator sees it – our own product data joined to its billing product. */
@@ -80,6 +97,91 @@ export const calculatePrice = (
 
     return { total: Math.round(finalCost), costByTier }
 }
+
+/**
+ * Billing can list a product billed with another (`companion_of`) at the top level instead of in
+ * the parent's add-ons. Fold those companions into the add-ons so both shapes read the same way.
+ */
+export const withCompanionAddons = <T extends BillingProduct>(product: T, products: BillingProduct[]): T => {
+    const addons = product.addons || []
+    const companions = products.filter(
+        (other) =>
+            !!other.companion_of &&
+            other.companion_of === product.type &&
+            !addons.some((addon) => addon.type === other.type)
+    )
+    return companions.length > 0 ? { ...product, addons: [...addons, ...companions] } : product
+}
+
+/** The tiers of one of a product's add-ons, companions included once `withCompanionAddons` has run. */
+export const getAddonTiers = (
+    product: { addons?: BillingAddon[] | null } | null | undefined,
+    type: string
+): BillingTier[] | null | undefined =>
+    product?.addons?.find((addon) => addon.type === type)?.plans.find((plan) => plan.tiers)?.tiers
+
+/** Months kept, from 0 (the included default retention) up to what the product allows. */
+export const getRetentionMonths = (retention: RetentionConfig, months?: number | null): number =>
+    typeof months === 'number' && Number.isFinite(months)
+        ? Math.min(Math.max(Math.round(months), 0), retention.maxMonths)
+        : 0
+
+const RETENTION_KEY_STEPS: Record<string, number> = {
+    ArrowRight: 1,
+    ArrowUp: 1,
+    ArrowLeft: -1,
+    ArrowDown: -1,
+    PageUp: 12,
+    PageDown: -12,
+}
+
+/**
+ * Where a key press moves the retention slider, in whole months. The slider's own keyboard step is a tiny
+ * fraction of its curved scale, which rounds back to the same month. Null for keys the slider ignores.
+ */
+export const getRetentionMonthsForKey = (retention: RetentionConfig, months: number, key: string): number | null => {
+    if (key === 'Home') return 0
+    if (key === 'End') return retention.maxMonths
+    return key in RETENTION_KEY_STEPS ? getRetentionMonths(retention, months + RETENTION_KEY_STEPS[key]) : null
+}
+
+/**
+ * Reads a link from the old calculator, which took GB with custom retention as a second volume
+ * (`addons.<retention key>.volume` and `.months`). The volume becomes the total GB, so ingestion stays exact,
+ * and the months keep the GB-months as close as whole months allow. Null when the link has no retained GB.
+ */
+export const readLegacyRetention = (
+    retention: RetentionConfig,
+    volume: number,
+    legacy?: { volume?: unknown; months?: unknown } | null
+): { volume: number; retentionMonths: number } | null => {
+    const retainedVolume = Math.round(Number(legacy?.volume))
+    if (!Number.isFinite(retainedVolume) || retainedVolume <= 0) return null
+    // Links from before the months input bill one month
+    const legacyMonths = legacy?.months === undefined ? 1 : Number(legacy.months)
+    const months = Number.isFinite(legacyMonths) && legacyMonths > 0 ? legacyMonths : 1
+    const total = volume + retainedVolume
+    return { volume: total, retentionMonths: getRetentionMonths(retention, (retainedVolume * months) / total) }
+}
+
+/**
+ * Steps on the retention slider's track. It uses the volume sliders' curve (position = months^0.4), which is
+ * steepest at the top, so the track needs enough steps for every whole month to stay reachable there.
+ */
+export const RETENTION_SLIDER_STEPS = 500
+
+/** Retention bills in GB-months: every GB ingested, once for each month it is kept. */
+export const getRetentionVolume = (volume: number, months: number): number => volume * months
+
+/**
+ * Price retention: every GB ingested costs the retention rate again for each month it is kept, on top
+ * of its ingestion price. 0 months, the included default, costs nothing.
+ */
+export const calculateRetentionPrice = (
+    tiers: BillingTier[] | null | undefined,
+    volume: number,
+    months: number
+): ReturnType<typeof calculatePrice> => calculatePrice(getRetentionVolume(volume, months), tiers)
 
 /**
  * Build the calculator's add-on state from the products it shows.

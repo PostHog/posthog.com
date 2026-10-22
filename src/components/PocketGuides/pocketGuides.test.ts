@@ -6,7 +6,8 @@ import { describe, test } from 'node:test'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides.ts'
 
 const repoRoot = path.resolve(import.meta.dirname, '../../..')
-const guidesDir = path.join(repoRoot, 'contents/pocket-guides')
+// Each volume's guide lives at contents/learn/<id>/pocket-guide/.
+const guidesDir = path.join(repoRoot, 'contents/learn')
 const volumeIds = new Set(POCKET_GUIDE_VOLUMES.map((volume) => volume.id))
 
 function readRepoFile(relativePath: string): string {
@@ -56,7 +57,9 @@ describe('pocket guide pages', () => {
 
 describe('pocket guide volumes', () => {
     test('each has a content directory', () => {
-        const missing = [...volumeIds].filter((id) => !existsSync(path.join(guidesDir, id, 'index.mdx')))
+        const missing = [...volumeIds].filter(
+            (id) => !existsSync(path.join(guidesDir, id, 'pocket-guide', 'index.mdx'))
+        )
         assert.deepEqual(missing, [])
     })
 
@@ -75,18 +78,19 @@ describe('pocket guide volumes', () => {
         assert.deepEqual(unknown, [])
     })
 
-    test('a volume teaching a docs product has a Learn tab on that product', () => {
+    test('a volume with a Learn tab is wired to its product', () => {
         const productData = readdirSync(path.join(repoRoot, 'src/hooks/productData'))
             .filter((file) => file.endsWith('.tsx'))
             .map((file) => readRepoFile(`src/hooks/productData/${file}`))
             .join('\n')
+        // Chapter pages are generated from the volume's learnPath, so there is no route file to check.
         const volumesWithoutLearnTab = POCKET_GUIDE_VOLUMES.filter(
-            (volume) => volume.docsProduct && !volume.hasStaticPage && !volume.comingSoon
+            (volume) => volume.productHandle && !volume.comingSoon
         )
             .filter(
                 (volume) =>
                     !productData.includes(`pocketGuideVolume: '${volume.id}'`) ||
-                    !existsSync(path.join(repoRoot, `src/pages/docs/${volume.docsProduct}/learn/[...chapter].tsx`))
+                    !volume.learnPath?.startsWith(`/learn/${volume.docsProduct}`)
             )
             .map((volume) => volume.id)
         assert.deepEqual(volumesWithoutLearnTab, [])

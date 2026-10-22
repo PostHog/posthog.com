@@ -183,7 +183,7 @@ This guy gets it.
 
 PostHog is an open source platform and one of the key benefits is you don't have to wait for us to build a specific integration you need. You can build it yourself. 
 
-[The PostHog App Store](/apps) has numerous examples of useful apps built by our community, such as [URL Normalizer](/apps/url-normalizer) (thanks to Mark Bennett), the [Property Filter](/apps/property-filter) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/apps/user-agent-populator) (thanks to Weyert).
+[The PostHog App Store](/apps) has numerous examples of useful apps built by our community, such as [URL Normalizer](/docs/data-pipelines/transformations/template-url-normalization) (thanks to Mark Bennett), the [Property Filter](/docs/data-pipelines/transformations/template-filter-properties) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/docs/data-pipelines/transformations/template-user-agent) (thanks to Weyert).
 
 There's no shortage of official PostHog apps, too. We've built over 40 apps and integrations so far, including import and export apps for most of the popular data warehouses on the market. 
 
@@ -223,7 +223,7 @@ We created the [GeoIP Enricher](/apps/geoip-enrichment) app to enhance events an
 
 But what if you want geographic data, but don't want to collect more personally identifiable IP data? 
 
-Enter the [Property Filter](/apps/property-filter) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
+Enter the [Property Filter](/docs/data-pipelines/transformations/template-filter-properties) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
 
 ## 21. Visualize user behavior using the PostHog Toolbar
 

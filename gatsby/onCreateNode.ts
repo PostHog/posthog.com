@@ -292,7 +292,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
+        if (/^\/docs\/(apps|data-pipelines)/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)
 
             try {
@@ -338,7 +338,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+        if (/^\/docs\/(apps|data-pipelines)/.test(slug) && node?.frontmatter?.templateId) {
             const templateIds = node.frontmatter.templateId
 
             try {

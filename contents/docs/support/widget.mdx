@@ -6,6 +6,13 @@ showTitle: true
 
 The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_18_51_fb4157c892.png"
+    alt="The Support widget channel"
+    classes="rounded"
+/>
+
 ## Enable the widget
 
 1. Go to **Support** in PostHog and click **Settings**
@@ -28,6 +35,12 @@ Configure these settings in the **In-app widget** section of Support settings:
 | **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
 | **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_09_56_ac25e5a9fc.png"
+    alt="The Support widget: Configuration options"
+    classes="rounded"
+/>
+
 ### Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
@@ -38,6 +51,12 @@ You can optionally require users to identify themselves before starting a conver
 | **Collect name** | Additionally collect a name | `false` |
 | **Form title** | Heading shown on the identification form | `"Before we start..."` |
 | **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_10_03_e1531a421e.png"
+    alt="The Support widget: Identification form"
+    classes="rounded"
+/>
 
 When enabled, the form appears before they can send their first message. PostHog uses this information to link the ticket to a person.
 
@@ -57,6 +76,12 @@ domains: [
   "https://app.example.com"   // With protocol (protocol is stripped)
 ]
 ```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_15_02_b890db240b.png"
+    alt="The Support widget: Allowed domains"
+    classes="rounded"
+/>
 
 If `domains` is empty or not set, the widget shows on all domains.
 
@@ -128,22 +153,19 @@ With identity verification enabled, users see all their tickets on any browser o
 
 ### Find your secret API key
 
-Copy the key from the **Secret API key** section of [**Support** > **Settings**](https://app.posthog.com/support/settings). If the section is empty, use the button next to it to generate a key.
+1. Go to **Support** > **Settings**
+2. Open the **Secret API key** section. If it is empty, click the button next to it to generate a key
+3. Copy the key. Use it only on your server
 
+The key lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
 
-If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first.
+If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first. See [troubleshooting](/docs/support/troubleshooting#identity-verification-returns-403).
 
 When you rotate the key, PostHog keeps the previous key as a backup, and hashes signed with the backup keep working. Delete the backup key after all your servers use the new key.
 
 ### Server-side implementation
 
 Generate the identity hash on your backend. Never expose the secret API key in client-side code.
-
-**Generate a secret_api_token**
-
-1. Go to **Support** in PostHog and click **Settings**
-2. Go to the **Secret API Key** section 
-3. Click generate key button to generate a new key
 
 <MultiLanguage>
 
@@ -256,12 +278,18 @@ If your project has no secret API key, requests that carry identity fields get `
 
 Get notified when new tickets arrive, by email or in your browser.
 
+<CalloutBox icon="IconLightBulb" title="Use Workflows for advanced notifications" type="fyi">
+
+For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+
+</CalloutBox>
+
 ### Email notifications
 
 Configure your team to receive email alerts when new tickets arrive.
 
-1. Go to **Settings** > **Support** in PostHog
-2. Find the **Email notifications** section
+1. Go to **Support** > **Settings** in PostHog
+2. Open the **Notifications** tab and find **Email notifications**
 3. Select team members who should receive alerts
 
 Emails include:
@@ -273,18 +301,18 @@ Emails include:
 
 Recipients must have access to the team to receive notifications.
 
-<CalloutBox icon="IconLightBulb" title="Use Workflows for advanced notifications" type="fyi">
-
-For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
-
-</CalloutBox>
-
 ### Browser notifications
 
 Individual team members can enable browser notifications for new ticket activity.
 
 1. Go to **Support** in PostHog
 2. Enable **Browser notifications** in the notification settings
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_17_08_692dad5608.png"
+    alt="Email and browser notification settings"
+    classes="rounded"
+/>
 
 When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications – you can use one or both.
 

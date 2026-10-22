@@ -1,8 +1,8 @@
 /**
  * Serve raw markdown to clients that ask for it with `Accept: text/markdown`,
- * and to agents that fetch a page for a user but do not ask for markdown.
+ * and to agents that fetch a page for a user unless they ask for HTML (#21381).
  * Crawlers such as Googlebot and ClaudeBot keep the HTML. Mintlify-hosted docs
- * use the same user-agent split.
+ * use the same user-agent and Accept split.
  *
  * This has to be middleware rather than a `vercel.json` rewrite. Vercel gives
  * the filesystem precedence over rewrites, and Gatsby writes an index.html for
@@ -22,12 +22,14 @@ export const config = {
     matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
 }
 
-const USER_AGENT_FETCHERS = ["ChatGPT-User", "Claude-User", "Perplexity-User"]
-const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join("|")})\\b`, "i")
+const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']
+const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('|')})\\b`, 'i')
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
-    const acceptsMarkdown = (request.headers.get('accept') || '').includes('text/markdown')
-    const isAgentFetch = USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '')
+    const accept = request.headers.get('accept') || ''
+    const acceptsMarkdown = accept.includes('text/markdown')
+    const isAgentFetch =
+        USER_AGENT_FETCHERS_REGEX.test(request.headers.get('user-agent') || '') && !accept.includes('text/html')
     if (!acceptsMarkdown && !isAgentFetch) return
 
     const url = new URL(request.url)

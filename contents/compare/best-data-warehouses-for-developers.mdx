@@ -37,9 +37,9 @@ There's no wrong answer here – the right pick comes down to what you care abou
 
 For most developers, it's **[PostHog](/context-warehouse)**. It's a [context warehouse](/blog/what-is-a-context-warehouse), not just a data warehouse: your product and business data live together, wired directly into the tools and agents that act on it, with no pipelines to maintain.
 
-You get two ways in: connect an existing warehouse ([Snowflake](/docs/data-warehouse/sources/snowflake), [BigQuery](/docs/data-warehouse/sources/bigquery), [Databricks](/docs/data-warehouse/sources/databricks), [ClickHouse](/docs/data-warehouse/sources/clickhouse)) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
+You get two ways in: connect an existing warehouse ([Snowflake](/docs/data-pipelines/sources/snowflake), [BigQuery](/docs/data-pipelines/sources/bigquery), [Databricks](/docs/data-pipelines/sources/databricks), [ClickHouse](/docs/data-pipelines/sources/clickhouse)) as a source and sync the tables you need, or use PostHog's integrated warehouse so data never travels.
 
-Other popular sources are [Stripe](/docs/data-warehouse/sources/stripe), [Postgres](/docs/data-warehouse/sources/postgres), and [Google Sheets](/docs/data-warehouse/sources/google-sheets), which can be fiddly to wire into a general-purpose warehouse, but are just a few clicks in PostHog.
+Other popular sources are [Stripe](/docs/data-pipelines/sources/stripe), [Postgres](/docs/data-pipelines/sources/postgres), and [Google Sheets](/docs/data-pipelines/sources/google-sheets), which can be fiddly to wire into a general-purpose warehouse, but are just a few clicks in PostHog.
 
 Either way, queries run on PostHog compute and the results sit next to [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), [and more](/products) – so a query that turns up an odd event leads straight to the user's session or the error behind it, without matching records across tools.
 
@@ -165,7 +165,7 @@ A general-purpose warehouse stores data for varied reporting, engineering, and M
 
 It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your warehouse, product data, and errors, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge.
 
-You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it all from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
