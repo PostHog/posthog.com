@@ -206,6 +206,7 @@ const docsMenuItems: MenuItemType[] = [
 ]
 
 const docsProductIconFallbacks = {
+    'business-knowledge': { Icon: Icons.IconBook, color: 'purple' },
     'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
     'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
     skills: { Icon: Icons.IconMagic, color: 'purple' },
