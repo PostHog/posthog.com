@@ -7,9 +7,11 @@ import {
     BufferGeometry,
     CanvasTexture,
     CatmullRomCurve3,
+    CurvePath,
     CircleGeometry,
     Color,
     CylinderGeometry,
+    LineCurve3,
     DirectionalLight,
     DoubleSide,
     ExtrudeGeometry,
@@ -183,6 +185,7 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     sun.shadow.mapSize.set(2048, 2048)
     Object.assign(sun.shadow.camera, { left: -280, right: 280, top: 380, bottom: -380, near: 100, far: 1400 })
     sun.shadow.bias = -0.0005
+    sun.shadow.normalBias = 0.6
     scene.add(sun)
     for (const [color, x, y] of [
         [PURPLE, 110, 190],
@@ -229,8 +232,11 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     }
 
     const rail = chrome()
+    // Slingshot edges get a rubber ring below, not a rail. A rail in the same place as the slingshot side
+    // makes the two surfaces flicker.
+    const slingPoints = new Set(SLINGSHOTS.flat())
     for (const wall of WALLS) {
-        if (wall.kick) continue
+        if (wall.kick || (slingPoints.has(wall.a) && slingPoints.has(wall.b))) continue
         const length = Math.hypot(wall.b.x - wall.a.x, wall.b.y - wall.a.y)
         const piece = box(length + 3, WALL_HEIGHT, 5, rail)
         piece.position.set(X((wall.a.x + wall.b.x) / 2), WALL_HEIGHT / 2, Z((wall.a.y + wall.b.y) / 2))
@@ -244,11 +250,12 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
         body.position.set(X(0), 0, Z(0))
         body.castShadow = true
         scene.add(body)
-        const length = Math.hypot(tip.x - top.x, tip.y - top.y)
-        const band = box(length, WALL_HEIGHT + 2, 4, rubber)
-        band.position.set(X((tip.x + top.x) / 2), (WALL_HEIGHT + 2) / 2, Z((tip.y + top.y) / 2))
-        band.rotation.y = -Math.atan2(tip.y - top.y, tip.x - top.x)
-        scene.add(band)
+        const outline = new CurvePath<Vector3>()
+        const corners = [top, bottom, tip, top].map((p) => new Vector3(X(p.x), WALL_HEIGHT / 2, Z(p.y)))
+        corners.slice(1).forEach((corner, i) => outline.add(new LineCurve3(corners[i], corner)))
+        const ring = new Mesh(new TubeGeometry(outline, 90, 3, 10, false), rubber)
+        ring.castShadow = true
+        scene.add(ring)
     }
 
     const post = new Mesh(new CylinderGeometry(6, 6, 18, 20), plastic(RED, 0.5))
