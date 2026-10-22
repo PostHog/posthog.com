@@ -116,9 +116,7 @@ You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `
 
 Every event needs its own `uuid`. Generate a new one for each event, and keep it the same when you retry that event. A UUIDv7 works best because it also records when you created the event.
 
-Don't reuse a UUID from something else, like an order ID or a request ID, across events. If a request contains the same UUID more than once, PostHog keeps the first event with that UUID and drops the rest. That UUID's [result](#per-event-results) counts the dropped copies in `duplicates_dropped`.
-
-<!-- TODO(capture-v1): keep the duplicate-UUID text only once posthog #122305 is deployed. -->
+Don't reuse a UUID from something else, like an order ID or a request ID, across events. If a request contains the same UUID more than once, PostHog keeps the first event with that UUID and drops the rest. That UUID's [result](#per-event-results) counts the dropped copies in `duplicates_dropped`, and PostHog raises a `duplicate_event_uuid` [ingestion warning](/docs/data/ingestion-warnings) in your project.
 
 ### Choosing a distinct ID
 
@@ -281,8 +279,6 @@ A `200` response has one result for every event, keyed by the event's `uuid`:
 ```
 
 `duplicates_dropped` appears only when the request repeated that event's UUID. It's the number of later copies PostHog dropped. The result and `details` belong to the first copy, which PostHog kept.
-
-<!-- TODO(capture-v1): keep the duplicate-UUID text only once posthog #122305 is deployed. -->
 
 | Result | Meaning | What to do |
 |---|---|---|
