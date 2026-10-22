@@ -541,39 +541,6 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'MCP leaderboard',
-                    link: '/mcp/leaderboard',
-                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Field guide to wild users',
-                    link: '/field-guide',
-                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Things that spark joy',
-                    link: '/sparks-joy',
-                    icon: <IconSparksJoy className="size-4" />,
-                },
-                // {
-                //     type: 'item',
-                //     label: 'Video library',
-                //     link: '/videos',
-                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
-                // },
-                {
-                    type: 'item',
-                    label: 'Services',
-                    link: '/services',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
                     label: 'Display options',
                     onClick: () => {
                         navigate('/display-options', { state: { newWindow: true } })
@@ -587,6 +554,27 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Things that spark joy',
+                    link: '/sparks-joy',
+                    icon: <IconSparksJoy className="size-4" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Services',
+                    link: '/services',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -618,7 +606,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'SOC 2',
-                    link: '/handbook/company/security#soc-2',
+                    link: '/docs/privacy/soc2',
                     icon: <Icons.IconShieldLock className="size-4 text-teal" />,
                 },
                 {
@@ -638,10 +626,22 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Enterprise',
-                    link: '/enterprise',
-                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
+                {
+                    type: 'item',
+                    label: 'Field guide to wild users',
+                    link: '/field-guide',
+                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
+                },
+                // {
+                //     type: 'item',
+                //     label: 'Video library',
+                //     link: '/videos',
+                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                // },
             ],
         },
     ]
