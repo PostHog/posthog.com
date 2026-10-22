@@ -43,14 +43,12 @@ Connect a source with a read-only key, pick the tables you want and the destinat
 ## Common use cases
 
 ### Apps to warehouse
-
 | Use case | Who it's for | What changes |
 |----------|--------------|--------------|
 | Replace an expensive Fivetran or Airbyte bill | Data leads paying Fivetran or running Airbyte | Very similar usage experience. At 100M rows a month the saving is roughly $1,500 to $2,150. |
 | Get data into a warehouse to model and query | Data teams pulling apps and databases into one place | Every source lands in one warehouse as raw tables, ready to model with SQL views and query together, with no pipelines to build or maintain. |
 
 ### Data to PostHog
-
 | Use case | Who it's for | What changes |
 |----------|--------------|--------------|
 | Revenue and churn analysis | Teams with Stripe or billing data | Stripe syncs next to product events, so you can see how usage turns into revenue. |
@@ -76,13 +74,6 @@ They use PostHog but have no warehouse or other data tools yet. Pitch Sources as
 
 ## PostHog vs Fivetran vs Airbyte
 
-### Where they're stronger
-
-- Both have a longer connector list. Ask which sources the prospect uses; most teams need a handful, and Stripe, HubSpot, Salesforce and Postgres are all covered. We also take requests and have a fast turnaround time for creating new connections.
-- Airbyte's open-source version is free if you host it, but someone has to run and fix it.
-
-### Comparison
-
 |  | PostHog Sources | Fivetran | Airbyte Cloud |
 |--|-----------------|----------|---------------|
 | 100M rows/month (list) | $735 | $2,894 (Standard, one Postgres connection) | $2,226 (Plus, 603 credits); $3,010 on Standard |
@@ -92,11 +83,16 @@ They use PostHog but have no warehouse or other data tools yet. Pitch Sources as
 | Historical backfills | Free for each new source's first 7 days | Count towards usage | Count towards credits |
 | Managed schema changes, retries, rate limits | Yes | Yes | Yes |
 | Data usable in analytics, experiments and agents | Yes, out of the box | No, needs a separate BI and product stack | No, needs a separate BI and product stack |
+### Where they're stronger
+
+- Both have a longer connector list. Ask which sources the prospect uses; most teams need a handful, and Stripe, HubSpot, Salesforce and Postgres are all covered. We also take requests and have a fast turnaround time for creating new connections.
+- Airbyte's open-source version is free if you host it, but someone has to run and fix it.
 
 ## Pricing framework
 
 - The first 1 million rows synced every month are free.
 - Historical syncs are free: every row synced in a new source's first 7 days costs nothing.
+See the [pricing calculator](/pricing).
 
 | Monthly rows synced | Price per row | Monthly cost at the top of the tier (list) |
 |---------------------|---------------|--------------------------------------------|
@@ -107,8 +103,6 @@ They use PostHog but have no warehouse or other data tools yet. Pitch Sources as
 | 50M–100M | $0.000005 | $735 at 100M |
 | 100M–1B | $0.000002 | $1,535 at 500M; $2,535 at 1B |
 | Above 1B | $0.000001 | $2,535 + $1 per extra 1M rows |
-
-See the [pricing calculator](/pricing).
 
 ### Competitor pricing
 
