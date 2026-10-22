@@ -239,10 +239,26 @@ function emptyResult(input, defaultRate, errorMsg) {
     }
 }
 
+async function isModerator(req) {
+    const token = req.headers.authorization?.match(/^Bearer (.+)$/)?.[1]
+    if (!token) return false
+    const squeakHost = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
+    const meRes = await fetch(`${squeakHost}/api/users/me?populate=role`, {
+        headers: { Authorization: `Bearer ${token}` },
+    })
+    if (!meRes.ok) return false
+    const me = await meRes.json()
+    return me?.role?.type === 'moderator'
+}
+
 const handler = async (req, res) => {
     if (req.method !== 'POST') {
         res.setHeader('Allow', 'POST')
         return res.status(405).json({ error: 'Method not allowed' })
+    }
+
+    if (!(await isModerator(req).catch(() => false))) {
+        return res.status(403).json({ error: 'Forbidden' })
     }
 
     try {
