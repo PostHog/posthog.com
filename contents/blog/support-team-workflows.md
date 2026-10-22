@@ -9,13 +9,13 @@ tags:
   - Workflows
 ---
 
-In July we moved our support team off Zendesk and onto [PostHog Support](https://posthog.com/docs/support). Before we made the switch, this felt like a mammoth task and almost impossible to maintain our existing automations and ways of working.
+In July we moved our support team off Zendesk and onto [PostHog Support](/docs/support). Before we made the switch, this felt like a mammoth task and almost impossible to maintain our existing automations and ways of working.
 
 PostHog Support had virtually none of the features we had relied on in Zendesk. No native understanding of Service Level Agreements (SLAs), when they should be set, or how they should be calculated. No way of triaging and routing tickets. No handling of Customer Satisfaction surveys (CSATs). No out-of-office handling.
 
 How were we going to achieve all of that? Did we build it into the product ourselves, alongside a full support queue? Ask engineering teams whose focus was, rightly, elsewhere? Or just live without it?
 
-Actually, the whole move was made a lot easier by Workflows. Almost everything we needed, I built with [Workflows](https://posthog.com/docs/workflows). I now have 27 active workflows related to support, and I think the result is better than if we'd built it all natively.
+Actually, the whole move was made a lot easier by Workflows. Almost everything we needed, I built with [Workflows](/docs/workflows). I now have 27 active workflows related to support, and I think the result is better than if we'd built it all natively.
 
 ## Why we built it with workflows instead
 
@@ -41,20 +41,20 @@ I do all of our triage and categorization in one workflow. On every new ticket i
 
 1. Fetches the ticket.
 2. Runs a spam pre-filter, and skips and auto-resolves anything we don't want classified.
-3. Runs a [PostHog AI](https://posthog.com/docs/posthog-ai) task that:
+3. Runs a [PostHog AI](/docs/posthog-ai) task that:
     1. Applies a team tag and an SME tag in a format I've defined
     2. Sets the ticket's priority, based on the examples in our handbook
     3. Captures a custom PostHog event to say the ticket has been classified and which tags were applied
     4. Investigates the ticket and pulls useful context onto it before a human picks it up (including events, replays, customer analytics, errors, past tickets, etc)
 
-The coolest part of this is that I don't need to worry about team changes anymore. The task uses what's currently in our [teams page](https://posthog.com/teams), the [feature ownership page](https://posthog.com/handbook/engineering/feature-ownership), and the [support SME page](https://posthog.com/handbook/support/support-smes) to decide which team owns it.
+The coolest part of this is that I don't need to worry about team changes anymore. The task uses what's currently in our [teams page](/teams), the [feature ownership page](/handbook/engineering/feature-ownership), and the [support SME page](/handbook/support/support-smes) to decide which team owns it.
 
 Having the tags automatically applied like this also means that
 
 - I can easily report on these
 - If a ticket does need escalating to engineering, the support engineer can see straight away which team it belongs to, without having to look anything up.
 
-Another cool thing to know: I get the custom PostHog classification event I capture to trigger a custom [destination](https://posthog.com/docs/cdp/destinations). The source code I wrote for the destination works out the Slack channel name from the team tag, using our naming convention i.e. a product analytics ticket notifies `#support-product-analytics`. This way, if a team changes name or a new team is created, I don't have to update anything - it's all based on their name on our [teams page](https://posthog.com/teams). I actually have a second custom destination which listens for the  `$conversation_ticket_assigned` event. So similarly, whenever a ticket is assigned, it works out the new assignee's team and notifies that team's channel.
+Another cool thing to know: I get the custom PostHog classification event I capture to trigger a custom [destination](/docs/cdp/destinations). The source code I wrote for the destination works out the Slack channel name from the team tag, using our naming convention i.e. a product analytics ticket notifies `#support-product-analytics`. This way, if a team changes name or a new team is created, I don't have to update anything - it's all based on their name on our [teams page](/teams). I actually have a second custom destination which listens for the  `$conversation_ticket_assigned` event. So similarly, whenever a ticket is assigned, it works out the new assignee's team and notifies that team's channel.
 
 FYI workflows can also know which email address a ticket was sent to or what channel was used (email, widget, Slack, etc). So I do have a workflow that sends tickets sent to our merch email address directly to our merch team.
 
@@ -85,7 +85,7 @@ Other workflows clear the SLA when a ticket moves to resolved, pending, or on ho
 
 #### First response
 
-For every new ticket that comes in, the workflow checks the customer's organization in [Customer Analytics](https://posthog.com/docs/customer-analytics) for internal segments: customers Sales/CS have marked as high priority or churn risks. These get special alerts into our internal channels.
+For every new ticket that comes in, the workflow checks the customer's organization in [Customer Analytics](/docs/customer-analytics) for internal segments: customers Sales/CS have marked as high priority or churn risks. These get special alerts into our internal channels.
 
 **Try it yourself:** with the **prioritize important customers** template, which also sets high priority and assigns the ticket to a lead.
 
@@ -131,7 +131,7 @@ The Slack alert shows the deadline, the assignee, the priority, and the status, 
 
 ### Sales and CS
 
-As you might imagine, this one hooks into [Customer Analytics](https://posthog.com/docs/customer-analytics). When a ticket is created, the workflow finds the customer's account and checks who's assigned to it:
+As you might imagine, this one hooks into [Customer Analytics](/docs/customer-analytics). When a ticket is created, the workflow finds the customer's account and checks who's assigned to it:
 
 - If there's an account executive (AE), it adds an `AE_<name>` tag.
 - If there's a customer success manager (CSM), it adds a `CSM_<name>` tag.
@@ -156,7 +156,7 @@ The date range is the important part: it only applies while you're away, so you 
 
 I have two workflows that handle CSAT. The first sends the survey, and the second handles completed responses.
 
-The first workflow is triggered when a ticket is resolved, then waits 24 hours and checks that the ticket is still resolved. If it is, it emails the customer with our CSAT survey. The email has a row of faces, and clicking one opens a survey we host with [Surveys](https://posthog.com/docs/surveys) (with that face already selected so customers don't have to pick twice).
+The first workflow is triggered when a ticket is resolved, then waits 24 hours and checks that the ticket is still resolved. If it is, it emails the customer with our CSAT survey. The email has a row of faces, and clicking one opens a survey we host with [Surveys](/docs/surveys) (with that face already selected so customers don't have to pick twice).
 
 The second triggers based on a partial or completed survey response. It:
 
@@ -195,7 +195,7 @@ Chris built two workflows that connect tickets to our [incident.io](https://inci
 
 I know this looks like a lot to build, but it's honestly been less effort than it sounds.
 
-I rarely build a workflow from scratch in the editor. Mostly I describe what I want to an AI agent, like PostHog AI or Claude through the [PostHog MCP](https://posthog.com/docs/model-context-protocol), and it builds the workflow for me. I also sometimes ask the [PostHog Slack app](https://posthog.com/docs/posthog-ai/surfaces/slack) in a thread to make changes to workflows for me. I usually ask them to stage a draft so that I can open the editor to review, or to make a quick tweak.
+I rarely build a workflow from scratch in the editor. Mostly I describe what I want to an AI agent, like PostHog AI or Claude through the [PostHog MCP](/docs/model-context-protocol), and it builds the workflow for me. I also sometimes ask the [PostHog Slack app](/docs/posthog-ai/surfaces/slack) in a thread to make changes to workflows for me. I usually ask them to stage a draft so that I can open the editor to review, or to make a quick tweak.
 
 The same goes for understanding a workflow. For my longest, most complex workflows, the quickest way to see what's happening is to talk it through with an AI agent. I ask it to explain exactly which steps happen, in short bullet points or a table. Then I can check it against what I think should happen, and step through any changes with the agent.
 
@@ -220,6 +220,6 @@ I've turned most of these into [support workflow templates](https://app.posthog.
 
 ## Thank you
 
-Massive thanks to the [Workflows team](https://posthog.com/teams/workflows) for building the product and for putting up with all my requests. Whenever I've needed something that didn't exist yet, they've been really quick to build it.
+Massive thanks to the [Workflows team](/teams/workflows) for building the product and for putting up with all my requests. Whenever I've needed something that didn't exist yet, they've been really quick to build it.
 
 And thank you to the support team for building out workflows wherever we needed them, and for trying out everything I've thrown at them along the way.
