@@ -53,7 +53,8 @@ export type Game = {
     mission: number
     missionProgress: number
     missionsDone: number
-    holeExit: 'pad' | 'wormhole'
+    holeExit: 'pad' | 'wormhole' | 'plunger'
+    flap: number
     extraBallGiven: boolean
     shake: number
     message: string
@@ -69,7 +70,7 @@ export const FLIPPER_LENGTH = 58
 export const FLIPPER_RADIUS = 6
 export const LANE_X = [125, 185, 245]
 export const LANE_Y = 105
-export const HOLE = { x: 300, y: 330, radius: 12 }
+export const HOLE = { x: 262, y: 355, radius: 12 }
 export const MAX_FUEL = 5
 // A post on the top arc that turns a launched ball down into the lanes and bumpers
 export const POST = { x: 81, y: 81 }
@@ -112,7 +113,10 @@ export const MISSIONS: { name: string; kind: MissionKind; goal: number }[] = [
     { name: 'Alien menace', kind: 'target', goal: 9 },
 ]
 // A second hole above the bumpers. The launch pad and the wormhole can send the ball out of either one.
-export const WORMHOLE = { x: 185, y: 172, radius: 12 }
+export const WORMHOLE = { x: 305, y: 128, radius: 12 }
+// A one-way flapper on the right. A ball that goes up through it falls into the black hole, then the
+// plunger fires it out again.
+export const CHUTE = { gateY: 300, left: 318, right: 350, hole: { x: 334, y: 252 } }
 export const BALL_SAVE_SECONDS = 8
 export const EXTRA_BALL_SCORE = 150000
 const GRAVITY = 800
@@ -128,6 +132,9 @@ const HITS_PER_FUEL = 3
 // The launch pad holds the ball for a random time, then kicks it up into the bumpers at a random angle
 const HOLE_KICK = { x: -180, y: -800, spread: 100 }
 const PAD_SAVE_SECONDS = 6
+// A hole catches the ball only when the ball rolls slowly over the center
+const CAPTURE_RADIUS = 8
+const CAPTURE_SPEED = 650
 const COMBO_SECONDS = 5
 const TILT_LIMIT = 2.6
 const BUMPS: Record<Bump, Point> = { left: { x: 150, y: -60 }, right: { x: -150, y: -60 }, up: { x: 0, y: -200 } }
@@ -173,12 +180,19 @@ export const WALLS: Wall[] = [
     ...SLINGSHOTS.flatMap(([top, bottom, tip]) => [...path([top, bottom, tip]), ...path([tip, top], 380)]),
     ...[95, 155, 215, 275].map((x) => ({ a: { x, y: 85 }, b: { x, y: 125 } })),
     { a: { x: POST.x - 3, y: POST.y }, b: { x: POST.x + 3, y: POST.y } },
-    // The low end of the ramp is too low to roll under, so walls close it off at the side and the top
+    // The low end of the ramp is too low to roll under, so walls close it off at the side and the top.
+    // The top is a slope, so a ball cannot come to rest on it.
     ...path([
-        { x: 20, y: 300 },
+        { x: 20, y: 195 },
+        { x: 47, y: 218 },
         { x: 49, y: 300 },
         { x: 51, y: 380 },
         { x: 53, y: 422 },
+    ]),
+    ...path([
+        { x: CHUTE.left, y: CHUTE.gateY },
+        { x: CHUTE.left, y: 238 },
+        { x: CHUTE.right, y: 218 },
     ]),
 ]
 
@@ -248,6 +262,7 @@ export function createGame(): Game {
         missionProgress: 0,
         missionsDone: 0,
         holeExit: 'pad',
+        flap: 0,
         extraBallGiven: false,
         shake: 0,
         message: 'Welcome aboard, Cadet',
@@ -381,6 +396,18 @@ function enterHole(game: Game, from: 'pad' | 'wormhole') {
     game.sounds.push('rocket')
 }
 
+function enterBlackHole(game: Game) {
+    game.flap = 0.4
+    game.hold = 1.4
+    game.holeExit = 'plunger'
+    Object.assign(game.ball, { x: CHUTE.hole.x, y: CHUTE.hole.y, vx: 0, vy: 0 })
+    if (game.tilted) return
+    award(game, 7500)
+    advanceMission(game, 'hole')
+    say(game, 'Black hole! 7,500')
+    game.sounds.push('wormhole')
+}
+
 function finishRamp(game: Game) {
     game.combo = game.comboTime > 0 ? Math.min(5, game.combo + 1) : 1
     game.comboTime = COMBO_SECONDS
@@ -457,6 +484,7 @@ export function step(game: Game, input: Input, dt: number): void {
     game.comboTime = Math.max(0, game.comboTime - dt)
     game.tiltMeter = Math.max(0, game.tiltMeter - dt * 0.66)
     game.shake = Math.max(0, game.shake - dt)
+    game.flap = Math.max(0, game.flap - dt)
     if (game.targetReset > 0) {
         game.targetReset -= dt
         if (game.targetReset <= 0) game.targets.forEach((target) => (target.down = false))
@@ -476,7 +504,11 @@ export function step(game: Game, input: Input, dt: number): void {
     if (game.hold > 0) {
         game.hold -= dt
         if (game.hold <= 0) {
-            if (game.holeExit === 'pad') {
+            if (game.holeExit === 'plunger') {
+                Object.assign(ball, { x: 365, y: 596, vx: 0, vy: -1500 })
+                game.sounds.push('launch')
+                say(game, 'Hyperspace launch!')
+            } else if (game.holeExit === 'pad') {
                 Object.assign(ball, { x: HOLE.x, y: HOLE.y })
                 ball.vx = HOLE_KICK.x + (Math.random() - 0.5) * 2 * HOLE_KICK.spread
                 ball.vy = HOLE_KICK.y + (Math.random() - 0.5) * HOLE_KICK.spread
@@ -513,6 +545,17 @@ export function step(game: Game, input: Input, dt: number): void {
         ball.x < RAMP_GATE.right
     ) {
         game.ramp = { s: 0, v: -ball.vy }
+        return
+    }
+    if (
+        !game.holeCooldown &&
+        ball.vy < 0 &&
+        previousY > CHUTE.gateY &&
+        ball.y <= CHUTE.gateY &&
+        ball.x > CHUTE.left &&
+        ball.x < CHUTE.right
+    ) {
+        enterBlackHole(game)
         return
     }
     // A ball that rolls up into the ramp exit goes up the ramp backwards, and scores nothing
@@ -563,8 +606,9 @@ export function step(game: Game, input: Input, dt: number): void {
         bounce(game, contact, BALL_RADIUS + FLIPPER_RADIUS, 0.3, { x: -w * ry, y: w * rx })
     }
 
-    if (!game.holeCooldown && Math.hypot(ball.x - HOLE.x, ball.y - HOLE.y) < HOLE.radius) enterHole(game, 'pad')
-    else if (!game.holeCooldown && Math.hypot(ball.x - WORMHOLE.x, ball.y - WORMHOLE.y) < WORMHOLE.radius)
+    const catchable = !game.holeCooldown && Math.hypot(ball.vx, ball.vy) < CAPTURE_SPEED
+    if (catchable && Math.hypot(ball.x - HOLE.x, ball.y - HOLE.y) < CAPTURE_RADIUS) enterHole(game, 'pad')
+    else if (catchable && Math.hypot(ball.x - WORMHOLE.x, ball.y - WORMHOLE.y) < CAPTURE_RADIUS)
         enterHole(game, 'wormhole')
 
     LANE_X.forEach((x, i) => {

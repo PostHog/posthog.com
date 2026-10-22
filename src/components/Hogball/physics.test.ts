@@ -4,6 +4,7 @@ import {
     advanceMission,
     ballInPlunger,
     bump,
+    CHUTE,
     createGame,
     HOLE,
     launch,
@@ -204,4 +205,17 @@ test('the wormhole holds the ball, then sends it out of one of the two holes', (
     const fromPad = Math.hypot(game.ball.x - HOLE.x, game.ball.y - HOLE.y)
     const fromWormhole = Math.hypot(game.ball.x - WORMHOLE.x, game.ball.y - WORMHOLE.y)
     assert.ok(fromPad > 15 && fromWormhole > 15, 'ball stays in a hole')
+})
+
+test('a ball that goes up through the flapper falls into the black hole, then the plunger fires it out', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: 334, y: CHUTE.gateY + 20, vx: 0, vy: -500 })
+    run(game, 0.2)
+    assert.equal(game.holeExit, 'plunger')
+    assert.deepEqual([game.ball.x, game.ball.y], [CHUTE.hole.x, CHUTE.hole.y])
+    assert.equal(game.score, 7500)
+    run(game, 1.6)
+    assert.ok(game.ball.y < 400, `ball stays at y=${game.ball.y}`)
+    assert.equal(game.balls, 3)
 })

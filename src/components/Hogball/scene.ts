@@ -43,6 +43,7 @@ import {
     HEIGHT,
     HOLE,
     MAX_FUEL,
+    CHUTE,
     WORMHOLE,
     POST,
     RAMP_LENGTH,
@@ -289,6 +290,13 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     pad.rotation.x = -Math.PI / 2
     pad.position.set(X(HOLE.x), 1, Z(HOLE.y))
     scene.add(pad)
+    // The one-way flapper in front of the black hole. It swings up when the ball goes through.
+    const flapper = new Group()
+    const flap = box(CHUTE.right - CHUTE.left - 4, 12, 2, plastic(RED, 0.4))
+    flap.position.y = -6
+    flapper.add(flap)
+    flapper.position.set(X((CHUTE.left + CHUTE.right) / 2), 13, Z(CHUTE.gateY))
+    scene.add(flapper)
     const wormhole = new Mesh(new TorusGeometry(WORMHOLE.radius + 2, 2.4, 12, 40), plastic(PURPLE, 1.2))
     wormhole.rotation.x = -Math.PI / 2
     wormhole.position.set(X(WORMHOLE.x), 1, Z(WORMHOLE.y))
@@ -457,6 +465,7 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
         })
         previousTargets = game.targets.map((target) => target.down)
 
+        flapper.rotation.x = -(game.flap / 0.4) * 1.3
         const full = game.fuel >= MAX_FUEL
         padMaterial.emissiveIntensity = full ? 1.5 + Math.sin(time * 10) : 0.2
 

@@ -1,4 +1,4 @@
-import { HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH, WORMHOLE } from './physics'
+import { CHUTE, HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH, WORMHOLE } from './physics'
 import type { Game } from './physics'
 
 export const RED = '#F54E00'
@@ -185,5 +185,19 @@ export function drawFloor(ctx: CanvasRenderingContext2D, game: Game, time: numbe
     ctx.arc(WORMHOLE.x, WORMHOLE.y, WORMHOLE.radius, 0, Math.PI * 2)
     ctx.fill()
     text(ctx, 'WORMHOLE', WORMHOLE.x, WORMHOLE.y - 26, 8, 'rgba(255, 255, 255, 0.6)')
+
+    // The black hole behind the flapper, with arrows that point up through the flapper
+    const { hole } = CHUTE
+    const swirl = ctx.createRadialGradient(hole.x, hole.y, 2, hole.x, hole.y, 16)
+    swirl.addColorStop(0, '#000000')
+    swirl.addColorStop(0.6, '#05060d')
+    swirl.addColorStop(1, RED)
+    ctx.fillStyle = swirl
+    ctx.beginPath()
+    ctx.arc(hole.x, hole.y, 15, 0, Math.PI * 2)
+    ctx.fill()
+    text(ctx, 'BLACK', hole.x, hole.y + 24, 7, 'rgba(255, 255, 255, 0.6)')
+    text(ctx, 'HOLE', hole.x, hole.y + 33, 7, 'rgba(255, 255, 255, 0.6)')
+    for (let i = 0; i < 2; i++) chevron(ctx, hole.x, CHUTE.gateY + 18 + i * 14, RED, i === Math.floor(time * 3) % 2)
     text(ctx, full ? 'LAUNCH!' : 'LAUNCH PAD', HOLE.x, HOLE.y - 24, 8, full ? YELLOW : 'rgba(255, 255, 255, 0.6)')
 }
