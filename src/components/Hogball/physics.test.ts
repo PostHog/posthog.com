@@ -70,7 +70,19 @@ test('the launch pad holds the ball, then kicks it out', () => {
     assert.deepEqual([game.ball.x, game.ball.y], [HOLE.x, HOLE.y])
     assert.equal(game.score, 1000)
     run(game, 1)
-    assert.ok(game.ball.x < HOLE.x - 40, `ball stays at x=${game.ball.x}`)
+    assert.ok(game.ball.x > HOLE.x + 10, `ball stays at x=${game.ball.x}`)
+})
+
+test('the launch pad feeds the ball to the right flipper, not down the middle', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: HOLE.x, y: HOLE.y - 4, vx: 0, vy: 50 })
+    let crossing = 0
+    run(game, 6, (g) => {
+        if (!crossing && g.ball.y > 548 && g.ball.vy > 0) crossing = g.ball.x
+        return idle
+    })
+    assert.ok(crossing > 210, `ball reaches the flipper line at x=${crossing}`)
 })
 
 test('a full fuel tank turns the launch pad into a rocket launch', () => {

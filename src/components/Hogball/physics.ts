@@ -94,6 +94,8 @@ const UP_ANGLE = -0.5
 const FLIPPER_SPEED = 24
 const PLUNGER = { x: 365, y: 596 }
 const HITS_PER_FUEL = 3
+// The launch pad drops the ball into the right inlane, which feeds it to the right flipper
+const HOLE_KICK = { x: 60, y: -240 }
 const COMBO_SECONDS = 5
 const TILT_LIMIT = 2.6
 const BUMPS: Record<Bump, Point> = { left: { x: 150, y: -60 }, right: { x: -150, y: -60 }, up: { x: 0, y: -200 } }
@@ -401,8 +403,8 @@ export function step(game: Game, input: Input, dt: number): void {
     if (game.hold > 0) {
         game.hold -= dt
         if (game.hold <= 0) {
-            ball.vx = -420
-            ball.vy = -260
+            ball.vx = HOLE_KICK.x
+            ball.vy = HOLE_KICK.y
             game.holeCooldown = 0.6
         }
         return
