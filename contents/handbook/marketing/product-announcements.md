@@ -64,7 +64,7 @@ New product launches are our biggest tier. They have their own GitHub template: 
 Here are some activities your Tier 1 launch could include:
 
 - New product page 
-- Sales enablement doc
+- [Sales enablement material](/handbook/growth/sales/why-buy-posthog#per-product-sales-enablement), and a plan to keep it current after launch
 - Competitive comparison (can be added to the product page)
 - A case study
 - Blog announcement

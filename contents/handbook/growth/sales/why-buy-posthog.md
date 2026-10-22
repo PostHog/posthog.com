@@ -82,8 +82,20 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 ## Per-product sales enablement
 
-The Developer Marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+Product marketers on the [Developer Marketing team](/teams/developer-marketing) make sales enablement material for the products they own. It covers product information and objection handling. Some of it is in Google Docs, because it changes frequently, and some of it is in decks.
 
 - [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+- TODO: Lizzie Epton to add the title and link of their deck
+- TODO: Sara Miteva to add the title and link of their deck
 
-If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
+If you want this material for a different product, tell the team in the **#team-marketing** Slack channel.
+
+### How product marketers make sales enablement material
+
+1. **Start with how the product helps a salesperson hit quota.** If a product mostly keeps customers instead of adding revenue, explain the retention value. Don't present it as an immediate revenue opportunity.
+
+2. **Make it usable on a call.** Include the signals that show a customer is ready to buy: who to approach, when, and for which product. If a product has little to show on screen, add a demo or another asset that shows it working.
+
+3. **Keep it current after launch.** We announced earlier guides once, then nobody maintained them or mentioned them again, so the sales team did not use them reliably. Update the material when the product changes, and bring it back to the team regularly. The [SME update calls](/handbook/growth/sales/product-enablement#staying-current) are a good place for this.
+
+4. **Start where the sales team needs the most help.** Ask the sales team to rank products from easiest to hardest to sell, and work on the hardest ones first.
