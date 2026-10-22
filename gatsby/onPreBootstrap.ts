@@ -171,21 +171,18 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {
         const pageViews: Record<string, number> = {}
 
-        const params = new URLSearchParams({
-            events: `[{"id":"$pageview","name":"$pageview","type":"events","order":0,"properties":[{"key":"$host","type":"event","value":["posthog.com"],"operator":"exact"}]}]`,
-            date_from: '-30d',
-            breakdown: '$pathname',
-            filter_test_accounts: 'false',
-            breakdown_normalize_url: 'true',
-            breakdown_limit: '2000',
-            offset: '0',
-        })
-
-        const res = await fetch(`https://app.posthog.com/api/projects/2/insights/trend?${params.toString()}`, {
+        const res = await fetch('https://us.posthog.com/api/projects/2/query/', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
             },
+            body: JSON.stringify({
+                query: {
+                    kind: 'HogQLQuery',
+                    query: "SELECT properties.$pathname, count() FROM events WHERE event = '$pageview' AND properties.$host = 'posthog.com' AND timestamp >= now() - INTERVAL 30 DAY GROUP BY properties.$pathname ORDER BY count() DESC LIMIT 2000",
+                },
+            }),
         })
 
         if (res.status !== 200) {
@@ -195,8 +192,8 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
 
         const data = await res.json()
 
-        data.result.forEach((result) => {
-            pageViews[result.breakdown_value] = result.count
+        data.results.forEach(([pathname, count]) => {
+            pageViews[pathname.replace(/\/$/, '')] = count
         })
 
         await cache.set(PAGEVIEW_CACHE_KEY, pageViews)
