@@ -6924,6 +6924,16 @@
             "source": "/docs/cdp/:path*",
             "destination": "/docs/data-pipelines/:path*",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/business-knowledge/requirements:ext(\\.md)?",
+            "destination": "/docs/business-knowledge/ai-data-processing:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/business-knowledge/start:ext(\\.md)?",
+            "destination": "/docs/business-knowledge/start-here:ext?",
+            "statusCode": 301
         }
     ]
 }

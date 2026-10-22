@@ -8,35 +8,34 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-The Playground shows what Business Knowledge holds right now, and what's missing. Ask a question a customer or teammate would ask. The answer uses only the sources in this project.
+The Playground shows what Business Knowledge holds right now, and what's missing. It has two tabs: **Chat** checks the answer a customer or teammate would get, and **Search** checks that a source is found at all.
 
-If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
+Open the [**Playground**](https://app.posthog.com/business-knowledge/playground) tab in Business Knowledge. Only you can see your chats. The Playground needs [AI data processing](/docs/business-knowledge/ai-data-processing) turned on.
 
-Open [**Business Knowledge**](https://app.posthog.com/business-knowledge/playground) and choose the **Playground** tab.
+## Chat
 
-Your chats are visible to you. They're grouped by when they were last used: today, yesterday, the last 7 days, the last 30 days, and older.
+Ask a question a customer or teammate would ask. If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again.
 
-## Ask a question
+Open **Looked through business knowledge** under an answer to see each step it took. Open a step to see the chunks it returned. A chunk from a source the answer cited is tagged **Cited**.
 
-Type a question and submit it. The placeholder is **Ask anything about your business using this project's business knowledge**.
+<ProductScreenshot
+    imageLight="/images/docs/business-knowledge/playground-chat-citations-light.png"
+    imageDark="/images/docs/business-knowledge/playground-chat-citations-dark.png"
+    alt="A Playground chat with the Looked through business knowledge row open, showing a search step and its ranked chunks, one tagged Cited"
+    classes="rounded"
+/>
 
-The Playground needs [AI data processing](/docs/business-knowledge/requirements) approved for the organization. If it's off, the request is refused with: `Enable AI data processing before asking another question.`
+The chunks under an answer load again when you open them. If your sources changed after the answer, they can differ from what the answer used.
 
-## What the answer is allowed to read
+### What the answer reads
 
-The answer is limited to this project's Business Knowledge.
+The answer uses only this project's Business Knowledge:
 
-- It searches your sources.
-- It can read more of a document around a matching passage.
-- If [GitHub repositories](/docs/business-knowledge/github) are selected and the document search returns nothing, it can search file names and README text in those repositories, then read one file.
+- Your sources, plus more of a document around a matching passage.
+- [GitHub repositories](/docs/business-knowledge/github) you selected, when your sources have nothing. It searches file names and READMEs, then reads one file.
+- Every source set to **Always include in replies**, even when it doesn't match the question.
 
-The thread shows each of those steps: **Searched business knowledge**, **Read document context**, **Searched repositories**, and **Read file**.
-
-Text marked as learned from support is team practice from a resolved ticket, not a page you uploaded.
-
-A source with **Always include in replies** is included even when it doesn't match the question, after the same content check as search.
-
-## When an answer is wrong
+### When an answer is wrong
 
 The Playground doesn't change a source. Use the thread to see which step produced the answer, then fix that source and ask again.
 
@@ -46,3 +45,14 @@ The Playground doesn't change a source. Use the thread to see which step produce
 4. Ask the question again.
 
 A source with **Always include in replies** is in every answer. Turn it off, or edit it, when that text is what made the answer wrong.
+
+## Search
+
+Enter a query to see the chunks that match it, ranked, without an answer. Use it to check that a source is found at all, and how high it ranks.
+
+<ProductScreenshot
+    imageLight="/images/docs/business-knowledge/playground-search-results-light.png"
+    imageDark="/images/docs/business-knowledge/playground-search-results-dark.png"
+    alt="Playground Search results for the query refund, listing two ranked chunks"
+    classes="rounded"
+/>

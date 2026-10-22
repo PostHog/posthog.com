@@ -13,49 +13,72 @@ import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 Business Knowledge stores the facts PostHog uses when it answers questions about your business. PostHog AI, Support, and the Business Knowledge MCP tools all read the same sources.
 
-<OSButton variant="primary" asLink to="/docs/business-knowledge/start">Get started</OSButton>
+<ProductScreenshot
+    imageLight="/images/docs/business-knowledge/libraries-light.png"
+    imageDark="/images/docs/business-knowledge/libraries-dark.png"
+    alt="The Business Knowledge Libraries tab, listing text and URL sources grouped into two libraries"
+    classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/start-here">Get started</OSButton>
 
 ## Where you can use it
 
-Add sources in PostHog. PostHog AI, Support, and MCP then read those same sources.
-
 <SurfaceCards columns={2}>
 
-<SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/business-knowledge/start" cta="Add a source">
-Add a text source, a public page, or a file, then ask in the Playground what's covered and what's missing.
+<SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/business-knowledge/start-here" cta="Add a source">
+Add text, URLs, and files, then check what's covered in the Playground.
 </SurfaceCard>
 
-<SurfaceCard icon="IconSparkles" color="purple" title="PostHog AI" url="/docs/posthog-ai" cta="Ask PostHog AI">
-PostHog AI searches these sources when a question is about your product, policies, or team.
+<SurfaceCard icon="IconSparkles" color="purple" title="PostHog AI" url="/docs/business-knowledge/where-to-use#posthog-ai" cta="How PostHog AI uses it">
+Answers questions about your product, policies, and team from these sources.
 </SurfaceCard>
 
-<SurfaceCard icon="IconSupport" color="teal" title="Support" url="/docs/business-knowledge/learn-from-support" cta="Learn from support">
-Support reads the same sources when it drafts a reply.
+<SurfaceCard icon="IconSupport" color="teal" title="Support" url="/docs/business-knowledge/where-to-use#support" cta="How Support uses it">
+The Support AI agent drafts ticket replies grounded in these sources.
 </SurfaceCard>
 
-<SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/model-context-protocol/tools" cta="MCP tools reference">
-Search sources, read the surrounding text, and add or update a source. The tools need the `business_knowledge:read` or `business_knowledge:write` scope.
+<SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/business-knowledge/where-to-use#mcp" cta="MCP tools and scopes">
+Search, read, add, and update sources from any MCP client or agent.
 </SurfaceCard>
 
 </SurfaceCards>
 
 ## Where knowledge comes from
 
-| Source | What you add | Guide |
-| --- | --- | --- |
-| Text | A policy, an FAQ, or any other text you paste | [Text](/docs/business-knowledge/sources#text) |
-| URL | A public page, a sitemap, or a crawl of one site | [URL](/docs/business-knowledge/sources#url) |
-| File | A PDF, DOCX, Markdown, CSV, or plain text file | [File](/docs/business-knowledge/sources#file) |
-| Learned | Reusable answers from resolved support tickets | [Learn from support](/docs/business-knowledge/learn-from-support) |
-| GitHub | Selected repositories. File names and the README are searched, then a file is read. The code isn't indexed. | [GitHub repositories](/docs/business-knowledge/github) |
+Every answer comes from sources you add or turn on.
+
+<SurfaceCards columns={3}>
+
+<SurfaceCard icon="IconPencil" color="purple" title="Text" url="/docs/business-knowledge/sources#text" cta="Add text">
+Paste a policy, an FAQ, or any other text. Edit the source when the text changes.
+</SurfaceCard>
+
+<SurfaceCard icon="IconGlobe" color="blue" title="URL" url="/docs/business-knowledge/sources#url" cta="Add a URL">
+Index a public page, a sitemap, or a crawl of one site, and refresh it on a schedule.
+</SurfaceCard>
+
+<SurfaceCard icon="IconUpload" color="orange" title="File" url="/docs/business-knowledge/sources#file" cta="Upload a file">
+Upload a PDF, DOCX, Markdown, CSV, or plain text file.
+</SurfaceCard>
+
+<SurfaceCard icon="IconSupport" color="teal" title="Learned from support" url="/docs/business-knowledge/learn-from-support" cta="Learn from support">
+Reusable answers from resolved Support tickets, once you turn on learning.
+</SurfaceCard>
+
+<SurfaceCard icon="IconGithub" color="seagreen" title="GitHub" url="/docs/business-knowledge/github" cta="Connect a repository">
+Finds files by name and README in repositories you select. Your code is not indexed.
+</SurfaceCard>
+
+</SurfaceCards>
 
 ## Use cases
 
-- A customer asks for your refund rules. The reply comes from the refund policy you pasted or from the page you indexed.
-- Someone asks PostHog AI which plan includes a limit. The answer comes from your pricing page.
-- Every reply should follow the same tone. Turn on **Always include in replies** for that source.
-- Your docs site changes. A URL source on a daily refresh picks up the new pages.
-- A human resolved the same support question last week. With [Learn from support](/docs/business-knowledge/learn-from-support) on, that answer can be reused.
-- The handbook lives in GitHub. Select that repository and an agent can find the file by name, then read it.
+- **A customer asks about refunds.** Support drafts the reply from the refund policy you pasted or the page you indexed.
+- **A teammate asks which plan includes a limit.** PostHog AI answers from your pricing page.
+- **Every reply needs the same tone.** Turn on **Always include in replies** for your tone guide, and every answer includes it.
+- **Your docs change.** A URL source on a daily refresh picks up the new pages.
+- **Your team answered the same question last week.** With [Learn from support](/docs/business-knowledge/learn-from-support) on, PostHog reuses that answer.
+- **Your handbook lives in GitHub.** Select the repository, and agents find the file by name and read it.
 
-Answers stay empty until two checks pass. See [Before answers can use a source](/docs/business-knowledge/requirements).
+Answers stay empty until two checks pass. See [Turn on AI data processing](/docs/business-knowledge/ai-data-processing).
