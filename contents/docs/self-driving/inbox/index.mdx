@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -35,7 +35,9 @@ From the inbox you:
 
 Nothing ships without you. The inbox is where you stay in control of what self-driving does.
 
-A resolved report stays resolved. If the same problem returns later, self-driving files a new report. It does not reopen the old one. Dismissed reports stay available in the `Dismissed` view, so you can review them or restore one.
+Use **Resolve** when a useful report is complete. Self-driving prompts you to choose a reason – whether the fix was implemented manually, no action was needed, or the issue was already fixed. A resolved report stays resolved. If the same problem returns later, self-driving files a new report. It does not reopen the old one.
+
+Use **Dismiss** when a report is unhelpful or you don't want self-driving to continue with it. Add a reason so the loop can learn what to surface next time. Dismissed reports stay available in the `Dismissed` view, so you can review them or restore one.
 
 Triage is also how you teach the loop. When you dismiss or snooze a report and say why, that note is [forwarded to the scout that filed it](/docs/self-driving/scouts#your-inbox-feedback-steers-scouts-too), so later runs read it before deciding what to surface. Explaining a bad report is the cheapest way to stop getting it.
 

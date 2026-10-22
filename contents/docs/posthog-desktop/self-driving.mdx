@@ -10,9 +10,9 @@ PostHog Self-driving watches your product data, investigates problems, and colle
 Self-driving uses the same reports and configuration in PostHog Desktop and the PostHog web app. Changes you make in either app apply to the same project.
 
 <ProductScreenshot
-imageLight="/images/docs/posthog-desktop/self-driving-report.png"
-classes="rounded"
-alt="A Self-driving report with its summary, evidence, chat, and GitHub actions"
+  imageLight="/images/docs/posthog-desktop/self-driving-report.png"
+  classes="rounded"
+  alt="A Self-driving report with its summary, evidence, chat, and GitHub actions"
 />
 
 ## Open Self-driving
@@ -35,7 +35,18 @@ Open a report to read its summary and the evidence behind it. Depending on the r
 
 ## Report controls
 
-Use **Defer** to remove the report from your current working set until more evidence arrives. Use **Resolve** when the work is done. A resolved report stays resolved. If the same problem returns later, Self-driving files a new report instead of reopening this one. Use **Dismiss** when you do not want Self-driving to continue with the report. Add a reason when you dismiss a report to help improve future reports. Dismissed reports stay available in the `Dismissed` view.
+Use **Defer** to remove the report from your current working set until more evidence arrives.
+
+Use **Resolve** when a useful report is complete. Self-driving prompts you to choose a reason:
+
+- **Implemented manually** – the fix was done outside of Self-driving
+- **No action needed** – the report surfaced something that doesn't require changes
+- **Was already fixed before this report** – the issue was resolved before the report landed
+- **Something else…** – another reason (add an optional note)
+
+If the report has an open pull request, resolving it also closes the PR. A resolved report stays resolved. If the same problem returns later, Self-driving files a new report instead of reopening this one.
+
+Use **Dismiss** when you do not want Self-driving to continue with the report. Add a reason when you dismiss to help improve future reports. Dismissed reports stay available in the `Dismissed` view.
 
 When a report has a pull request, select **Open PR in GitHub** to review it in GitHub. PostHog Desktop does not merge changes automatically.
 
