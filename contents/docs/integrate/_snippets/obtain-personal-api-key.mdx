@@ -2,7 +2,7 @@ Personal API keys can enable full access to your account, like logging in with y
 
 #### How to obtain a personal API key
 
-1. Go to the [Personal API keys](https://us.posthog.com/settings/user-api-keys) section in your account settings
+1. Go to the [Personal API keys](https://app.posthog.com/settings/user-api-keys) section in your account settings
 
 2. Click **+ Create a personal API Key**.
 
@@ -10,7 +10,9 @@ Personal API keys can enable full access to your account, like logging in with y
 
 4. Choose the scopes for your key. We recommended selecting only the scopes required for the API endpoints you really need. This is a security best practice. You can always modify the scopes later if you need to.
 
-5. At the top of the list, you should see your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page.
+5. Optionally set an **expiration** for the key. Options are **Never** (default), **1 day**, **7 days**, **30 days**, **90 days**, or **1 year**. A hint below the field shows the date and time the key stops working. Expired keys are automatically rejected.
+
+6. At the top of the list, you should see your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page.
 
 You can create up to 10 personal API keys. Personal API keys are deleted when a user is deleted.
 
@@ -27,3 +29,5 @@ To upgrade a legacy key to the modern sha256 hashing format:
 3. Confirm the action in the dialog.
 
 Rolling a key generates a new key value and invalidates the old one. Update the new key value wherever the old key was used.
+
+When rolling a key, you can also set a new expiration. The roll dialog defaults to **30 days** for keys that already have an expiry, or **Never** for keys without one.
