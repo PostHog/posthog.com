@@ -116,7 +116,7 @@ import { PostHogErrorBoundary, PostHogProvider } from '@posthog/react' // +
 // Initialize PostHog
 posthog.init(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN, { // +
   api_host: import.meta.env.VITE_POSTHOG_HOST, // +
-  defaults: '2026-05-30', // +
+  defaults: '<ph_posthog_js_defaults>', // +
 }); // +
 
 const root = document.getElementById("root");
@@ -207,7 +207,7 @@ To help PostHog track your user sessions across the client and server, you'll ne
 ```tsx
 posthog.init(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN, {
   api_host: import.meta.env.VITE_POSTHOG_HOST,
-  defaults: '2026-05-30',
+  defaults: '<ph_posthog_js_defaults>',
   tracing_headers: [ window.location.hostname, 'localhost' ], // +
 });
 ```

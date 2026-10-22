@@ -162,6 +162,7 @@ export default function Link({
             posthog.capture(event)
         }
         onClick && onClick(e)
+        if (e.defaultPrevented) return
         if (compact && url && !internal) {
             e.preventDefault()
             if (isPostHogAppUrl) {

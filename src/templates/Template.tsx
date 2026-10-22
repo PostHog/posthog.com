@@ -15,9 +15,6 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import TemplateCTAs from 'components/TemplateCTAs'
-import BookPage from 'components/PocketGuides/BookPage'
-import { volumeIdFromUrl } from 'components/PocketGuides/bookModel'
-import { volumeById } from '../constants/pocketGuides'
 
 const A = (props) => <Link {...props} />
 
@@ -94,22 +91,6 @@ export default function Template({ data }) {
         a: A,
         ...shortcodes,
         Section,
-    }
-
-    // Every page of a pocket guide is an MDX file rendered into the book layout – the volume's
-    // front matter, its chapters, and its use cases all take this branch.
-    if (slug.startsWith('/pocket-guides/')) {
-        return (
-            <>
-                <SEO
-                    // Named for its own volume: the shelf holds more than one book.
-                    title={`${title} – ${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`}
-                    description={pageData?.frontmatter?.subtitle || description || excerpt}
-                    image="/images/og/default.png"
-                />
-                <BookPage slug={slug} body={body} />
-            </>
-        )
     }
 
     return (
