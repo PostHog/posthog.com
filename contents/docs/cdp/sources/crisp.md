@@ -40,7 +40,12 @@ To get these:
 
 <SyncModes />
 
-All Crisp tables use full refresh. Each sync replaces the contents of the table. The Crisp API doesn't expose reliable timestamp filters for incremental sync on any table.
+The `conversations` and `messages` tables support incremental sync. Full refresh is the default — you can opt in to incremental sync in the schema settings for each table.
+
+- **conversations** – incremental sync uses the `updated_at` field. Each sync fetches only conversations updated since the last run.
+- **messages** – incremental sync uses the `conversation_updated_at` field, which tracks when the parent conversation was last updated. Only conversations updated since the last run are fetched, and all their messages are synced. Messages use merge mode on `(session_id, fingerprint)` — append is not available because it would duplicate every message in a changed conversation.
+
+The `people`, `people_events`, and all other tables use full refresh only. The Crisp people API filters on creation date, not update date, so it can't detect updated profiles.
 
 Conversations, people, and operators sync by default. Enable the other tables during setup or in the source settings.
 
