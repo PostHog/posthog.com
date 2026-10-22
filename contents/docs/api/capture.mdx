@@ -63,7 +63,7 @@ import fetch from "node-fetch";
 async function sendPosthogEvent() {
   const url = "<ph_client_api_host>/i/v0/e/";
   const headers = {
-      "Content-Type": "application/json",
+    "Content-Type": "application/json",
   };
   const payload = {
     api_key: "<ph_project_token>",
@@ -85,7 +85,7 @@ async function sendPosthogEvent() {
   console.log(data);
 }
 
-sendPosthogEvent()
+sendPosthogEvent();
 ```
 
 </MultiLanguage>
@@ -128,7 +128,7 @@ response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response)
 ```
 
-```node
+````node
 import fetch from "node-fetch";
 
 async function sendAnonymousPosthogEvent() {
@@ -192,7 +192,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     }
   ]
 }' <ph_client_api_host>/batch/
-```
+````
 
 ```python
 import requests
@@ -235,7 +235,7 @@ The `historical_migration` field is optional. For realtime events, it can be lef
 
 When running [migrations](/docs/migrate), the `historical_migration` field must be set to `true`. This ensures that events are processed in order without triggering our spike detection systems.
 
-import ApiMigration from "../migrate/_snippets/api-migration.mdx"
+import ApiMigration from "../migrate/_snippets/api-migration.mdx";
 
 <ApiMigration />
 
@@ -571,3 +571,26 @@ PostHog **does not return an error** to the client when the following happens:
 These three cases above cause the event to not be ingested, but you still receive a `200: OK` response from PostHog.
 
 This approach enables us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.
+
+### Parse errors
+
+If the request body can't be parsed, PostHog returns a `400` with a JSON error response that identifies the problem. The response body has this shape:
+
+```json
+{
+  "error": "request_parsing_error",
+  "error_description": "Failed to parse request body: batch[0].distinct_id must be a string, got number.",
+  "error_uri": "https://posthog.com/docs/api"
+}
+```
+
+PostHog validates the following fields on each event in batch order: `event`, `uuid`, `distinct_id`, `timestamp`, `session_id`, and `window_id`. It also validates `created_at` at the batch level. Each of these fields must be a string (or absent for optional fields). Validation stops at the first problem, so only one error is returned per request.
+
+Error messages vary by issue:
+
+- **Wrong type** – `batch[0].distinct_id must be a string, got number.`
+- **Missing required field** – `batch[1].event is missing.`
+- **Invalid JSON** – `invalid JSON at line 1, column 2.`
+- **Truncated body** – `unexpected end of JSON at line 5, column 10.`
+
+> **Note:** Error messages never include the values you sent – they only name the field and the wrong JSON type. This prevents accidentally exposing sensitive data in error responses.
