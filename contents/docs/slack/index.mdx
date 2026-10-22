@@ -24,6 +24,31 @@ Before you can mention the bot you'll need to [connect the integrations](/docs/s
 - A Slack workspace connection for each project
 - A personal GitHub connection for each teammate who wants to ship PRs.
 
+## Ask about your product data
+
+Ask the bot a question about your product data and it answers in the thread. It can query anything in your PostHog project, including insights, SQL, session replays, errors, and feature flags. You don't need a connected repo for this.
+
+```
+@PostHog why did EU signups drop last week? Break it down by acquisition channel
+```
+
+```
+@PostHog which marketing channels brought in the most activated users this month,
+and how does that compare to last month?
+```
+
+For trends, funnels, and other results that are easier to read as a chart, the agent adds a chart under its reply. Reply in the thread to ask a follow-up or change the breakdown.
+
+### Dig into a subscription or report
+
+To ask about an insight or dashboard [subscription](/docs/libraries/slack#subscribing-to-insights-and-dashboards) delivered to Slack, reply in its thread and mention `@PostHog`. The agent reads the subscription message, so you don't need to say which insight or dashboard you mean:
+
+```
+@PostHog paid signups dropped 18% week over week here – which campaigns drove the drop?
+```
+
+Anyone in the channel can ask follow-ups in the same thread. This also works for other messages PostHog posts to Slack, such as [Self-driving](/docs/self-driving) inbox notifications.
+
 ## Start a task
 
 Mention the bot with what you want done:
@@ -141,7 +166,19 @@ Find the component and fix the spacing.
 
 Send a stack trace, a log file, or a CSV export the same way, in place of a wall of pasted text.
 
-The agent can produce artifacts of its own too – uploading files back to the thread, or creating a Slack canvas when the output is a longer document.
+### What the agent sends back
+
+Most answers are text, but the agent can also send:
+
+- **Charts** – a chart image under the reply, with a button to open it in PostHog.
+- **Canvases** – a Slack canvas for longer documents, like reports or plans. Ask for changes in the thread and the agent updates the same canvas.
+- **Files** – a file uploaded to the thread, such as an image (PNG or SVG), a spreadsheet (XLSX or CSV), a PDF, a Word document, an HTML page, or a ZIP archive.
+
+```
+@PostHog put last quarter's activation numbers in a canvas
+```
+
+Canvases and files need the `canvases:write` and `files:write` Slack scopes. Slack doesn't add new scopes to an existing install, so if you get text instead of a canvas or file, ask a project admin to [reconnect the Slack app](/docs/slack/setup#connect-slack-to-your-project).
 
 ## The App Home tab
 

@@ -36,9 +36,9 @@ export const sessionReplay = {
     pricingDescription:
         'Web session recordings capture clicks, scrolls, console logs, and network calls so you can replay exactly what users did in your product.',
     seo: {
-        title: 'Session Replay – Debug and analyze sessions with PostHog',
+        title: 'Session Replay – Record and watch user sessions | PostHog',
         description:
-            'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
+            'Watch session recordings of real users on web and mobile. See clicks, console logs, and network requests to find friction and debug issues fast.',
     },
     /**
      * Sections rendered on the Product surface (`/session-replay`). Each entry
@@ -154,7 +154,7 @@ export const sessionReplay = {
             alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
             // 2578x1300. The light and dark variants show different sessions but the same three
             // panels at the same size, so one set of panel-level coordinates holds for both.
-            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
         },
         'player-inspector': {
             // Cropped to the player and the inspector beside it, 3649x2074 at source. The
@@ -165,7 +165,7 @@ export const sessionReplay = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
             alt: "A session playing back on the left, with the inspector's event list and its five views on the right",
             // Both variants are the same screen at the same size, so one set of coordinates holds.
-            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
         },
         'issue-recordings': {
             // Cropped to the issue's right-hand pane, where both ways into a replay sit. Source
@@ -176,7 +176,7 @@ export const sessionReplay = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_1043,y_20,w_1565,h_1550/w_1600,c_limit,q_auto,f_auto/session_from_error_dark_8efab34ebd.png',
             alt: 'An Error Tracking issue, with the button for every recording of the issue above and the Recording tab for this one exception below',
             // Both variants are the same screen at the same size, so one set of coordinates holds.
-            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/finding-replays.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/finding-replays.
         },
         'player-controls': {
             // The foot of the player, recropped from the same 3649x2074 source as
@@ -187,7 +187,7 @@ export const sessionReplay = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_0,y_1440,w_1752,h_634/w_1600,c_limit,q_auto,f_auto/player_dark_227437debc.png',
             alt: 'The bottom of the replay player: the seek bar, the transport controls, and the row of capture and comment buttons',
             // Both variants are the same screen at the same size, so one set of coordinates holds.
-            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/watching-replays.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/watching-replays.
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
@@ -197,7 +197,7 @@ export const sessionReplay = {
             imgClasses: 'rounded-tr-md shadow-2xl',
             // 1110x640, measured against the light variant – the dark one is the same screen at
             // the same size, so coordinates hold for both.
-            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+            // The pocket guide annotates this inline – see contents/learn/session-replay/pocket-guide/101.
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',

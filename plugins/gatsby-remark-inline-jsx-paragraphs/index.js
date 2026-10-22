@@ -59,7 +59,7 @@ const isTopLevelNode = (parent) => !parent || parent.type === 'root'
 module.exports = ({ markdownAST, markdownNode }) => {
     // Pocket guides lay themselves out: wrapping their block JSX (figures, lists) in <p>
     // produces invalid nesting like <p><figure> and breaks hydration.
-    if (markdownNode?.fileAbsolutePath?.includes('/contents/pocket-guides/')) {
+    if (/\/contents\/learn\/[^/]+\/pocket-guide\//.test(markdownNode?.fileAbsolutePath || '')) {
         return markdownAST
     }
 

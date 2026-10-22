@@ -69,6 +69,14 @@ Supabase sources created after February 18, 2026 require SSL/TLS encryption for 
 
 > **Permissions** The Supabase source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role in Supabase rather than using the default `postgres` superuser.
 
+<CalloutBox icon="IconWarning" title="Row-level security may block syncs" type="caution">
+
+Supabase enables [row-level security (RLS)](https://supabase.com/docs/guides/database/postgres/row-level-security) by default on many tables. RLS policies typically expect an authenticated application user, which PostHog's sync connection doesn't have. If a policy denies the read, PostHog stops retrying and disables the sync.
+
+To fix this, either add a permissive policy for PostHog's connecting role, grant the role `BYPASSRLS`, or remove the affected tables from the sync. See the [Postgres troubleshooting guide](/docs/data-pipelines/sources/postgres#row-level-security-policy-or-custom-function-denied-the-read) for details.
+
+</CalloutBox>
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />
