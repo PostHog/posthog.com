@@ -58,6 +58,8 @@ Two more things sit between storage and the chart:
 
 Metrics are stored in a columnar time series table and exposed to SQL as `posthog.metrics`, scoped to your project like every other PostHog table. The SQL tab in the metrics viewer is a full escape hatch: anything the chart controls can't express, you can write directly, and join against the rest of your PostHog data.
 
+The `posthog.metrics` table includes a `series` field that provides direct access to series metadata without requiring a manual join. Use `series.attributes['key']` or `series.resource_attributes['key']` to access the labels that identify each time series. This is a lazy join – it only loads the series data when you reference the `series` field, so queries that don't need labels pay no overhead.
+
 ## What the alpha means here
 
 While metrics is in open alpha, ingestion details and limits may still change, and metrics data is kept for 30 days. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
