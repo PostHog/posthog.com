@@ -249,6 +249,8 @@ The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events
 | `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | No – v1 SDKs treat it as final. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
 
+<!-- TODO(capture-v1): 404 and 429 retry behavior is still being decided (tracking repo FQ-16); update this if it changes. -->
+
 
 Errors use this body. `error` is a stable tag you can match on.
 
@@ -316,6 +318,8 @@ Many drops also raise an [ingestion warning](/docs/data/ingestion-warnings) in y
 ## Retries
 
 Retry when the response is `408`, `500`, `502`, `503`, or `504`, when the network fails, and for each event whose result is `retry`. Treat every other response as final.
+
+<!-- TODO(capture-v1): 404 and 429 retry behavior is still being decided (tracking repo FQ-16); update this if it changes. -->
 
 When you retry:
 
