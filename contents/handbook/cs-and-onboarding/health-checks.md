@@ -21,7 +21,7 @@ analytics at the company or workspace level rather than an individual person.  T
 do however need to [implement group tracking](/docs/product-analytics/group-analytics#how-to-create-groups) in their PostHog SDK.  Customers who haven't 
 done this may end up paying for Group Analytics but not able to use it.
 
-You can check in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink> to see who are paying for Group Analytics 
+You can [ask @PostHog in Slack](/docs/posthog-ai/surfaces/slack) or use the [PostHog MCP](/docs/model-context-protocol) to check who is paying for Group Analytics 
 but not using it.  
 
 To help the customer you should figure out whether they are B2B or could otherwise benefit
