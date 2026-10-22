@@ -20,6 +20,25 @@ const SOUNDS: Record<Sound | 'flipper', Note[]> = {
         { from: 784, at: 0.48, length: 0.12 },
         { from: 1047, at: 0.62, length: 0.3 },
     ],
+    ramp: [
+        { from: 392, length: 0.08, wave: 'triangle' },
+        { from: 523, at: 0.08, length: 0.08, wave: 'triangle' },
+        { from: 659, at: 0.16, length: 0.08, wave: 'triangle' },
+        { from: 784, at: 0.24, length: 0.16, wave: 'triangle' },
+    ],
+    bump: [{ from: 90, to: 45, length: 0.12, wave: 'sine', volume: 0.12 }],
+    tilt: [{ from: 110, length: 0.8, wave: 'sawtooth', volume: 0.06 }],
+    save: [
+        { from: 784, length: 0.1, wave: 'triangle' },
+        { from: 1047, at: 0.1, length: 0.25, wave: 'triangle' },
+    ],
+    extra: [
+        { from: 523, length: 0.1 },
+        { from: 659, at: 0.1, length: 0.1 },
+        { from: 784, at: 0.2, length: 0.1 },
+        { from: 1047, at: 0.3, length: 0.1 },
+        { from: 1319, at: 0.4, length: 0.35 },
+    ],
     drain: [{ from: 420, to: 70, length: 0.6, wave: 'triangle' }],
     over: [
         { from: 392, length: 0.2, wave: 'triangle' },
@@ -52,4 +71,28 @@ export function play(sound: Sound | 'flipper'): void {
         oscillator.start(now + at)
         oscillator.stop(now + at + length)
     }
+}
+
+let charge: { oscillator: OscillatorNode; gain: GainNode } | null = null
+
+// A rising hum while the plunger is pulled back. The pitch follows the charge, from 0 to 1.
+export function chargeUp(level: number): void {
+    if (!audio || audio.state !== 'running') return
+    if (!charge) {
+        const oscillator = audio.createOscillator()
+        const gain = audio.createGain()
+        oscillator.type = 'sawtooth'
+        gain.gain.setValueAtTime(0.025, audio.currentTime)
+        oscillator.connect(gain).connect(audio.destination)
+        oscillator.start()
+        charge = { oscillator, gain }
+    }
+    charge.oscillator.frequency.setTargetAtTime(110 + level * 550, audio.currentTime, 0.02)
+}
+
+export function stopCharge(): void {
+    if (!charge || !audio) return
+    charge.gain.gain.setTargetAtTime(0.0001, audio.currentTime, 0.02)
+    charge.oscillator.stop(audio.currentTime + 0.1)
+    charge = null
 }

@@ -3,34 +3,21 @@ import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import ballSvg from '@posthog/brand/hoggies/svg/ball'
 import rocketSvg from '@posthog/brand/hoggies/svg/rocket'
-import { BALLS_PER_GAME, HEIGHT, RANKS, WIDTH, ballInPlunger, createGame, launch, step } from './physics'
-import type { Game, Input } from './physics'
-import {
-    GAP,
-    PANEL_WIDTH,
-    STRIP_HEIGHT,
-    drawPanel,
-    drawRocket,
-    drawStrip,
-    drawTable,
-    drawTilted,
-    messageOf,
-} from './render'
-import type { Images } from './render'
-import { play, unlockAudio } from './sound'
+import { BALLS_PER_GAME, HEIGHT, RANKS, WIDTH, ballInPlunger, bump, createGame, launch, step } from './physics'
+import type { Bump, Game, Input } from './physics'
+import { PANEL_WIDTH, STRIP_HEIGHT, drawPanel, drawStrip, messageOf } from './panel'
+import { createTable } from './scene'
+import type { Table } from './scene'
+import { chargeUp, play, stopCharge, unlockAudio } from './sound'
 
 const STEP = 1 / 480
 const HIGH_SCORE_KEY = 'hogball-high-score'
 const MUTED_KEY = 'hogball-muted'
 const ROCKET_SECONDS = 1.6
-const KEYS: Record<string, keyof Input> = {
-    z: 'left',
-    ArrowLeft: 'left',
-    '/': 'right',
-    ArrowRight: 'right',
-    ' ': 'plunger',
-    ArrowDown: 'plunger',
-}
+// The same keys as the original Windows game
+const KEYS: Record<string, keyof Input> = { KeyZ: 'left', Slash: 'right', Space: 'plunger' }
+const BUMP_KEYS: Record<string, Bump> = { KeyX: 'left', Period: 'right', ArrowUp: 'up' }
+const MOUSE_BUTTONS: Record<number, keyof Input> = { 0: 'left', 2: 'right' }
 
 type Status = { state: Game['state']; charge: number; message: string }
 
@@ -48,10 +35,13 @@ const image = (svg: string) => {
 
 export default function Hogball(): JSX.Element {
     const posthog = usePostHog()
-    const canvasRef = useRef<HTMLCanvasElement>(null)
     const tableRef = useRef<HTMLDivElement>(null)
+    const sceneRef = useRef<HTMLCanvasElement>(null)
+    const panelRef = useRef<HTMLCanvasElement>(null)
     const gameRef = useRef<Game>(createGame())
     const inputRef = useRef<Input>({ left: false, right: false, plunger: false })
+    const touchesRef = useRef(new Map<number, keyof Input>())
+    const lastTouchRef = useRef(0)
     const startedRef = useRef(0)
     const bestRef = useRef(0)
     const mutedRef = useRef(false)
@@ -80,6 +70,8 @@ export default function Hogball(): JSX.Element {
         launch(game)
     }
 
+    const releaseAll = () => (Object.keys(inputRef.current) as (keyof Input)[]).forEach((key) => press(key, false))
+
     const toggleMuted = () => {
         mutedRef.current = !mutedRef.current
         setMuted(mutedRef.current)
@@ -87,59 +79,56 @@ export default function Hogball(): JSX.Element {
     }
 
     useEffect(() => {
+        const container = tableRef.current
+        const sceneCanvas = sceneRef.current
+        const panelCanvas = panelRef.current
+        if (!container || !sceneCanvas || !panelCanvas) return
         bestRef.current = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0
         mutedRef.current = localStorage.getItem(MUTED_KEY) === 'true'
         setMuted(mutedRef.current)
-        const images: Images = { ball: image(ballSvg), rocket: image(rocketSvg) }
-        const table = document.createElement('canvas')
+        const images = { ball: image(ballSvg), rocket: image(rocketSvg) }
+        let table: Table
+        try {
+            table = createTable(sceneCanvas, images)
+        } catch (error) {
+            setStatus((previous) => ({ ...previous, message: 'Hogball needs WebGL, which this browser does not have' }))
+            return
+        }
+        let wide = true
         let frame = 0
         let last = performance.now()
         let spare = 0
         let rocketAt = -Infinity
 
-        const draw = (now: number) => {
-            const canvas = canvasRef.current
-            if (!canvas || !canvas.clientWidth || !canvas.clientHeight) return
+        // The panel goes to the right of the table in a wide window, and above it in a narrow one
+        const layout = () => {
+            const width = container.clientWidth
+            const height = container.clientHeight
             const dpr = window.devicePixelRatio || 1
-            const width = Math.round(canvas.clientWidth * dpr)
-            const height = Math.round(canvas.clientHeight * dpr)
-            if (canvas.width !== width || canvas.height !== height) {
-                canvas.width = width
-                canvas.height = height
-            }
-            const ctx = canvas.getContext('2d')
-            const tableCtx = table.getContext('2d')
-            if (!ctx || !tableCtx) return
-            const game = gameRef.current
-            const wide = width / height > (WIDTH + GAP + PANEL_WIDTH) / HEIGHT - 0.15
-            const layoutWidth = wide ? WIDTH + GAP + PANEL_WIDTH : WIDTH
-            const layoutHeight = wide ? HEIGHT : STRIP_HEIGHT + GAP + HEIGHT
-            const scale = Math.min(width / layoutWidth, height / layoutHeight)
-            const left = (width - layoutWidth * scale) / 2
-            const top = (height - layoutHeight * scale) / 2
-            const tableTop = top + (wide ? 0 : (STRIP_HEIGHT + GAP) * scale)
-
-            if (table.width !== Math.round(WIDTH * scale) || table.height !== Math.round(HEIGHT * scale)) {
-                table.width = Math.round(WIDTH * scale)
-                table.height = Math.round(HEIGHT * scale)
-            }
-            tableCtx.setTransform(table.width / WIDTH, 0, 0, table.height / HEIGHT, 0, 0)
-            drawTable(tableCtx, game, images, now / 1000)
-
-            ctx.setTransform(1, 0, 0, 1, 0, 0)
-            ctx.fillStyle = '#07081a'
-            ctx.fillRect(0, 0, width, height)
-            drawTilted(ctx, table, left, tableTop, WIDTH * scale, HEIGHT * scale)
-            if (wide) {
-                ctx.setTransform(scale, 0, 0, scale, left + (WIDTH + GAP) * scale, top)
-                drawPanel(ctx, game, bestRef.current, images)
-            } else {
-                ctx.setTransform(scale, 0, 0, scale, left, top)
-                drawStrip(ctx, game)
-            }
-            ctx.setTransform(1, 0, 0, 1, 0, 0)
-            drawRocket(ctx, images, (now - rocketAt) / 1000 / ROCKET_SECONDS, width, height)
+            wide = width / height > 0.95
+            const panelWidth = wide ? Math.min(width * 0.38, (height * PANEL_WIDTH) / HEIGHT) : width
+            const panelHeight = wide ? (panelWidth * HEIGHT) / PANEL_WIDTH : (width * STRIP_HEIGHT) / WIDTH
+            const sceneWidth = wide ? width - panelWidth : width
+            const sceneHeight = wide ? height : height - panelHeight
+            Object.assign(sceneCanvas.style, {
+                left: '0px',
+                top: wide ? '0px' : `${panelHeight}px`,
+                width: `${sceneWidth}px`,
+                height: `${sceneHeight}px`,
+            })
+            Object.assign(panelCanvas.style, {
+                left: wide ? `${sceneWidth}px` : '0px',
+                top: wide ? `${(height - panelHeight) / 2}px` : '0px',
+                width: `${panelWidth}px`,
+                height: `${panelHeight}px`,
+            })
+            panelCanvas.width = Math.round(panelWidth * dpr)
+            panelCanvas.height = Math.round(panelHeight * dpr)
+            if (sceneWidth > 0 && sceneHeight > 0) table.resize(sceneWidth, sceneHeight, dpr)
         }
+        layout()
+        const observer = new ResizeObserver(layout)
+        observer.observe(container)
 
         const tick = (now: number) => {
             const game = gameRef.current
@@ -149,12 +138,30 @@ export default function Hogball(): JSX.Element {
                 step(game, inputRef.current, STEP)
                 spare -= STEP
             }
+            const charging = inputRef.current.plunger && ballInPlunger(game) && game.state !== 'over'
+            if (charging && !mutedRef.current) chargeUp(game.charge)
+            else stopCharge()
             for (const sound of Array.from(new Set(game.sounds))) {
                 if (!mutedRef.current) play(sound)
                 if (sound === 'rocket') rocketAt = now
             }
             game.sounds.length = 0
-            draw(now)
+
+            table.render(game, now / 1000, (now - rocketAt) / 1000 / ROCKET_SECONDS)
+            const panel = panelCanvas.getContext('2d')
+            if (panel) {
+                panel.setTransform(1, 0, 0, 1, 0, 0)
+                panel.clearRect(0, 0, panelCanvas.width, panelCanvas.height)
+                if (wide) {
+                    const scale = panelCanvas.width / PANEL_WIDTH
+                    panel.setTransform(scale, 0, 0, scale, 0, 0)
+                    drawPanel(panel, game, bestRef.current, images.rocket)
+                } else {
+                    const scale = panelCanvas.width / WIDTH
+                    panel.setTransform(scale, 0, 0, scale, 0, 0)
+                    drawStrip(panel, game)
+                }
+            }
             setStatus((previous) => {
                 const next = statusOf(game)
                 return previous.state === next.state &&
@@ -166,7 +173,19 @@ export default function Hogball(): JSX.Element {
             frame = requestAnimationFrame(tick)
         }
         frame = requestAnimationFrame(tick)
-        return () => cancelAnimationFrame(frame)
+
+        const releaseMouse = (e: MouseEvent) => {
+            const key = MOUSE_BUTTONS[e.button]
+            if (key) press(key, false)
+        }
+        window.addEventListener('mouseup', releaseMouse)
+        return () => {
+            cancelAnimationFrame(frame)
+            observer.disconnect()
+            window.removeEventListener('mouseup', releaseMouse)
+            stopCharge()
+            table.dispose()
+        }
     }, [])
 
     useEffect(() => {
@@ -197,56 +216,71 @@ export default function Hogball(): JSX.Element {
         onPointerCancel: () => press(key, false),
     })
 
+    const releaseTouch = (e: React.PointerEvent) => {
+        const key = touchesRef.current.get(e.pointerId)
+        if (!key) return
+        touchesRef.current.delete(e.pointerId)
+        press(key, false)
+    }
+
     return (
         <div className="flex h-full flex-col gap-2 p-2 pt-10 text-primary @2xl:p-4 @2xl:pt-10">
             <div
                 ref={tableRef}
                 tabIndex={0}
-                aria-label="Hogball table. Hold Space to launch the ball. Use Z and slash, or the arrow keys, for the flippers."
-                className="relative min-h-[480px] flex-1 overflow-hidden rounded-md border border-primary outline-none focus-visible:ring-2"
+                aria-label="Hogball table. Hold Space to pull the plunger. Z and slash, or the left and right mouse buttons, move the flippers. X, period, and the up arrow bump the table. F2 starts a new game."
+                className="relative min-h-[480px] flex-1 select-none overflow-hidden rounded-md border border-primary outline-none focus-visible:ring-2"
+                style={{ touchAction: 'none', backgroundColor: '#07081a' }}
                 onKeyDown={(e) => {
-                    const key = KEYS[e.key]
-                    if (!key) return
+                    const key = KEYS[e.nativeEvent.code]
+                    const direction = BUMP_KEYS[e.nativeEvent.code]
+                    if (!key && !direction && e.nativeEvent.code !== 'F2') return
                     e.preventDefault()
                     e.stopPropagation()
-                    if (!e.repeat) press(key, true)
+                    if (e.repeat) return
+                    unlockAudio()
+                    if (key) press(key, true)
+                    if (direction) bump(gameRef.current, direction)
+                    if (e.nativeEvent.code === 'F2') newGame()
                 }}
                 onKeyUp={(e) => {
-                    const key = KEYS[e.key]
+                    const key = KEYS[e.nativeEvent.code]
                     if (!key) return
                     e.preventDefault()
                     e.stopPropagation()
                     press(key, false)
                 }}
-                onBlur={() => (Object.keys(inputRef.current) as (keyof Input)[]).forEach((key) => press(key, false))}
+                onMouseDown={(e) => {
+                    const key = MOUSE_BUTTONS[e.button]
+                    tableRef.current?.focus()
+                    if (!key || Date.now() - lastTouchRef.current < 800) return
+                    e.preventDefault()
+                    press(key, true)
+                }}
+                onContextMenu={(e) => e.preventDefault()}
+                onPointerDown={(e) => {
+                    if (e.pointerType === 'mouse') return
+                    lastTouchRef.current = Date.now()
+                    tableRef.current?.focus()
+                    if (ballInPlunger(gameRef.current)) return
+                    const rect = e.currentTarget.getBoundingClientRect()
+                    const key = e.clientX - rect.left < rect.width / 2 ? 'left' : 'right'
+                    touchesRef.current.set(e.pointerId, key)
+                    press(key, true)
+                }}
+                onPointerUp={releaseTouch}
+                onPointerCancel={releaseTouch}
+                onBlur={releaseAll}
             >
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 size-full"
-                    style={{ touchAction: 'none' }}
-                    onPointerDown={(e) => {
-                        e.currentTarget.parentElement?.focus()
-                        unlockAudio()
-                        const rect = e.currentTarget.getBoundingClientRect()
-                        if (ballInPlunger(gameRef.current)) return
-                        press(e.clientX - rect.left < rect.width / 2 ? 'left' : 'right', true)
-                    }}
-                    onPointerUp={() => {
-                        press('left', false)
-                        press('right', false)
-                    }}
-                    onPointerCancel={() => {
-                        press('left', false)
-                        press('right', false)
-                    }}
-                />
+                <canvas ref={sceneRef} className="absolute" />
+                <canvas ref={panelRef} className="absolute" />
                 <span className="sr-only" role="status" aria-live="polite">
                     {status.message}
                 </span>
             </div>
             <div className="flex flex-wrap gap-2">
                 <OSButton size="sm" variant="primary" onClick={newGame}>
-                    New game
+                    New game (F2)
                 </OSButton>
                 <OSButton size="sm" onClick={toggleMuted} aria-pressed={!muted}>
                     {muted ? 'Sound off' : 'Sound on'}
