@@ -160,6 +160,25 @@ Skills come from the latest [context mill](/handbook/wizard-and-docs/context-mil
 
 The wizard can run in a cloud sandbox from the PostHog app, through the headless runner, with its progress streamed back into PostHog. See the [headless README](https://github.com/PostHog/wizard/blob/main/src/headless/README.md).
 
+## Audits
+
+An audit reads the user's code and their PostHog project, and changes neither. `wizard audit` runs the events audit by default. Each audit subcommand is a [context mill](/handbook/wizard-and-docs/context-mill) skill, for example `wizard audit events` is the `audit-events` skill.
+
+The agent audits the code in place, where the wizard runs. It does not upload or copy the repository. It finds PostHog calls with `Grep`, and subagents `Read` only the files that it needs. The model sees the prompt, the content that the agent reads, and the results of its tool calls, through the PostHog AI gateway.
+
+The events audit uses two sources:
+
+- **The code.** Capture call sites, event names, and properties. Each finding has a `file:line`.
+- **The PostHog project.** SQL through the PostHog MCP server, for example which events saved insights use, and how much of the volume is pageviews. These findings come from the project, not from a line of code. If MCP is not available, these checks become suggestions and the audit continues.
+
+The audit is read-only:
+
+- The skill tells the agent not to edit project files or change PostHog. It writes only a Markdown report at the project root, and a checks ledger that it deletes at the end.
+- The wizard blocks `Read` and `Grep` on `.env` files.
+- Warlock scans the content that the agent reads for prompt injection, and the content that it writes for secrets.
+
+The audit also accepts the headless flag, so it can run as a [cloud run](#cloud-runs) on a copy of the repository instead of on the user's machine.
+
 ## Go deeper
 
 - [Layer rules](https://github.com/PostHog/wizard/blob/main/.claude/skills/wizard-development/references/ARCHITECTURE.md)
