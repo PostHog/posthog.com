@@ -57,7 +57,7 @@ features high-revenue customers already use, with no rollout involved, that's
    [results page](/docs/experiments/analyzing-results) directly and add a Stripe revenue metric
    there. PostHog computes exposed-vs-control for you natively, no SQL needed.
 2. **If it was a plain feature flag** instead, connect [Stripe](/docs/data-pipelines/sources/stripe) via
-   [Data pipeline > Sources](/docs/data-warehouse/sources), then build a
+   [Data pipeline > Sources](/docs/data-pipelines/sources), then build a
    [Trends](/docs/product-analytics/trends/overview) insight of `$feature_flag_called` broken down
    by `$feature_flag_response` to see the exposure split.
 3. **Join to revenue** using the [SQL editor](/docs/data-warehouse/sql) or asking PostHog AI to compare
