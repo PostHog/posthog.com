@@ -36,7 +36,7 @@ In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alter
 ## 1. PostHog
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
-[PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
+[PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/docs/toolbar/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
 
 This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
 

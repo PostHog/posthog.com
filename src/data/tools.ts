@@ -198,7 +198,7 @@ export const tools = [
         handle: 'group_analytics',
         name: 'Group Analytics',
         description: 'Analyze multi-seat accounts and other groups.',
-        slug: 'group-analytics',
+        slug: 'docs/product-analytics/group-analytics',
         category: 'analytics',
     },
     {
@@ -336,7 +336,7 @@ export const tools = [
         handle: 'heatmaps',
         name: 'Heatmaps',
         description: 'See where users click, scroll, and move on your site',
-        slug: 'heatmaps',
+        slug: 'docs/toolbar/heatmaps',
         category: 'dataviz',
     },
     {

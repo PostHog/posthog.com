@@ -2088,7 +2088,22 @@
         },
         {
             "source": "/product/heatmaps",
-            "destination": "/heatmaps",
+            "destination": "/docs/toolbar/heatmaps",
+            "statusCode": 301
+        },
+        {
+            "source": "/heatmaps",
+            "destination": "/docs/toolbar/heatmaps",
+            "statusCode": 301
+        },
+        {
+            "source": "/group-analytics",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/group-analytics/pricing",
+            "destination": "/docs/product-analytics/group-analytics",
             "statusCode": 301
         },
         {

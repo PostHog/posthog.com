@@ -55,7 +55,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 ### Use cases
 - [Replace Google Analytics](/web-analytics) to get a view on your marketing data which is familiar to experienced marketers.  Recent updates to GA4 have not sat well with that persona so folks are looking for something more familiar.
 - [Define conversion funnels](/funnels) to understand which content drives your users to sign up to your product.  
-- [View aggregated page engagement](/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
+- [View aggregated page engagement](/docs/toolbar/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
 - [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
 
 ## Data Engineers
