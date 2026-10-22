@@ -153,3 +153,17 @@ test('too many table bumps tilt the table, and the drain clears the tilt', () =>
     assert.ok(!game.tilted)
     assert.equal(game.balls, 2)
 })
+
+test('a ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: 40, y: 440, vx: 0, vy: -600 })
+    let top = 0
+    run(game, 1.5, (g) => {
+        top = Math.max(top, g.ball.z)
+        return idle
+    })
+    assert.ok(top > 0, 'ball never went onto the ramp')
+    assert.equal(game.combo, 0)
+    assert.equal(game.ramp, null)
+})

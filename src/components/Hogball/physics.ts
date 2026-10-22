@@ -39,7 +39,7 @@ export type Game = {
     hold: number
     holeCooldown: number
     targetReset: number
-    ramp: { s: number; v: number } | null
+    ramp: { s: number; v: number; reverse?: boolean } | null
     rampCooldown: number
     combo: number
     comboTime: number
@@ -143,6 +143,13 @@ export const WALLS: Wall[] = [
     ...SLINGSHOTS.flatMap(([top, bottom, tip]) => [...path([top, bottom, tip]), ...path([tip, top], 380)]),
     ...[95, 155, 215, 275].map((x) => ({ a: { x, y: 85 }, b: { x, y: 125 } })),
     { a: { x: POST.x - 3, y: POST.y }, b: { x: POST.x + 3, y: POST.y } },
+    // The low end of the ramp is too low to roll under, so walls close it off at the side and the top
+    ...path([
+        { x: 20, y: 300 },
+        { x: 49, y: 300 },
+        { x: 51, y: 380 },
+        { x: 53, y: 422 },
+    ]),
 ]
 
 const RAMP_LENGTHS = RAMP_PATH.slice(1).map((b, i) => Math.hypot(b.x - RAMP_PATH[i].x, b.y - RAMP_PATH[i].y))
@@ -341,7 +348,8 @@ function rideRamp(game: Game, dt: number) {
         const exit = Math.min(ramp.v, RAMP_EXIT_SPEED)
         Object.assign(ball, { vx: next.dx * exit, vy: next.dy * exit, z: 0 })
         game.ramp = null
-        if (!game.tilted) finishRamp(game)
+        game.rampCooldown = 0.4
+        if (!game.tilted && !ramp.reverse) finishRamp(game)
     } else if (ramp.s <= 0) {
         Object.assign(ball, { vx: 0, vy: Math.max(120, -ramp.v), z: 0 })
         game.ramp = null
@@ -438,6 +446,12 @@ export function step(game: Game, input: Input, dt: number): void {
         ball.x < RAMP_GATE.right
     ) {
         game.ramp = { s: 0, v: -ball.vy }
+        return
+    }
+    // A ball that rolls up into the ramp exit goes up the ramp backwards, and scores nothing
+    const exit = RAMP_PATH[RAMP_PATH.length - 1]
+    if (!game.rampCooldown && ball.vy < 0 && previousY > exit.y && ball.y <= exit.y && ball.x > 20 && ball.x < 53) {
+        game.ramp = { s: RAMP_LENGTH, v: ball.vy, reverse: true }
         return
     }
 

@@ -32,7 +32,7 @@ A table bump moves the ball a little. Three bumps in quick succession **tilt** t
 
 All points are multiplied by the bonus multiplier. The multiplier goes back to 1x when a ball drains. Each game has three balls, and 150,000 points gives one extra ball. If a ball drains in the first 8 seconds after launch, **ball save** gives it back once. The best score is kept in `localStorage` (`hogball-high-score`), and the sound setting in `hogball-muted`.
 
-A slow shot does not get to the top of the ramp. It rolls back down to the playfield.
+A slow shot does not get to the top of the ramp. It rolls back down to the playfield. A ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing. Walls close off the low end of the ramp, so the ball cannot roll under it.
 
 ## Leaderboard
 
