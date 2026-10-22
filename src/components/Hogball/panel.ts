@@ -1,6 +1,7 @@
 import { BALLS_PER_GAME, HEIGHT, MAX_FUEL, RANKS, WIDTH } from './physics'
 import type { Game } from './physics'
 import { GREEN, OFF, RED, YELLOW, text } from './floor'
+import type { Leader } from './pilots'
 
 export const PANEL_WIDTH = 220
 export const STRIP_HEIGHT = 84
@@ -75,7 +76,14 @@ export const messageOf = (game: Game): string =>
 const pad = (score: number) => String(score).padStart(9, ' ')
 const ballLabel = (game: Game) => `${Math.max(1, BALLS_PER_GAME - game.balls + 1)}`
 
-export function drawPanel(ctx: CanvasRenderingContext2D, game: Game, best: number, rocket: HTMLImageElement): void {
+export function drawPanel(
+    ctx: CanvasRenderingContext2D,
+    game: Game,
+    best: number,
+    rocket: HTMLImageElement,
+    pilot: string,
+    leaders: Leader[]
+): void {
     const w = PANEL_WIDTH
     const panel = ctx.createLinearGradient(0, 0, w, 0)
     panel.addColorStop(0, '#1b1e33')
@@ -104,8 +112,9 @@ export function drawPanel(ctx: CanvasRenderingContext2D, game: Game, best: numbe
     digits(ctx, game.comboTime > 0 ? `${game.combo}x` : '-', w - 24, 176, 22, 'right')
 
     led(ctx, 14, 214, w - 28, 92)
-    label(ctx, 'RANK', 24, 230)
-    digits(ctx, RANKS[game.rank].toUpperCase(), 24, 250, 16, 'left')
+    label(ctx, 'PILOT', 24, 230)
+    label(ctx, RANKS[game.rank].toUpperCase(), w - 24, 230, 'right')
+    digits(ctx, pilot.toUpperCase(), 24, 250, pilot.length > 18 ? 12 : 14, 'left')
     ctx.font = 'bold 12px "Courier New", monospace'
     ctx.fillStyle = game.tilted ? RED : LED
     ctx.textAlign = 'left'
@@ -122,22 +131,30 @@ export function drawPanel(ctx: CanvasRenderingContext2D, game: Game, best: numbe
     label(ctx, 'BEST', 24, 392)
     digits(ctx, pad(Math.max(best, game.score)), w - 24, 410, 18, 'right')
 
-    if (rocket.complete && rocket.naturalWidth) ctx.drawImage(rocket, 50, 436, 120, 120)
+    // Between games the panel shows the all-time leaderboard, like an arcade attract screen
+    if (game.state !== 'playing' && leaders.length) {
+        led(ctx, 14, 440, w - 28, 120)
+        label(ctx, 'ALL-TIME TOP PILOTS', w / 2, 454, 'center')
+        ctx.font = 'bold 9px "Courier New", monospace'
+        ctx.textBaseline = 'middle'
+        leaders.slice(0, 6).forEach((leader, i) => {
+            const y = 472 + i * 15
+            ctx.fillStyle = leader.name === pilot ? '#ffffff' : LED
+            ctx.textAlign = 'left'
+            ctx.fillText(`${i + 1} ${leader.name.toUpperCase()}`.slice(0, 22), 22, y)
+            ctx.textAlign = 'right'
+            ctx.fillText(leader.score.toLocaleString('en-US'), w - 22, y)
+        })
+    } else if (rocket.complete && rocket.naturalWidth) ctx.drawImage(rocket, 50, 436, 120, 120)
     text(ctx, 'SPACE plunger    Z  /  flippers', w / 2, 578, 9, 'rgba(255, 255, 255, 0.6)')
     text(ctx, 'X  .  ↑  bump table    F2 new game', w / 2, 596, 9, 'rgba(255, 255, 255, 0.6)')
     text(ctx, 'Mouse buttons work as flippers', w / 2, 614, 9, 'rgba(255, 255, 255, 0.6)')
 }
 
-export function drawStrip(ctx: CanvasRenderingContext2D, game: Game): void {
+export function drawStrip(ctx: CanvasRenderingContext2D, game: Game, pilot: string): void {
     led(ctx, 1, 1, WIDTH - 2, STRIP_HEIGHT - 2)
     digits(ctx, pad(game.score), 16, 26, 24, 'left')
-    label(
-        ctx,
-        `BALL ${ballLabel(game)}   BONUS ${game.multiplier}x   ${RANKS[game.rank].toUpperCase()}`,
-        WIDTH - 16,
-        26,
-        'right'
-    )
+    label(ctx, `BALL ${ballLabel(game)}   BONUS ${game.multiplier}x   ${pilot.toUpperCase()}`, WIDTH - 16, 26, 'right')
     ctx.font = 'bold 12px "Courier New", monospace'
     ctx.fillStyle = game.tilted ? RED : LED
     ctx.textAlign = 'left'

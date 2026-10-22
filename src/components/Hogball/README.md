@@ -34,6 +34,22 @@ All points are multiplied by the bonus multiplier. The multiplier goes back to 1
 
 A slow shot does not get to the top of the ramp. It rolls back down to the playfield.
 
+## Leaderboard
+
+Each player gets a random hedgehog pilot name, like "Admiral Pincushion", from `names.json`. **New pilot name** picks another one between games. Players cannot type a name, so the leaderboard cannot show rude text. The name is kept in `localStorage` (`hogball-pilot`).
+
+The game sends the pilot name with `hogball_game_ended`. `GET /api/hogball-leaderboard` returns the all-time top 10: the best score for each player, read from those events with a fixed HogQL query. The function drops any name that is not in `names.json`, so a fake event cannot put other text on the page. Between games, the LED panel shows the top 6 pilots. In a narrow window, a list under the table shows the top 10. A new score shows at once as a pending row, because the event takes a short time to reach PostHog.
+
+The function code is in `api/_hogball-leaderboard.js`. `api/hogball-leaderboard.js` runs it on Vercel and `functions/api/hogball-leaderboard.ts` runs it on Cloudflare Pages previews. It needs these environment variables:
+
+| Variable | Value |
+|---|---|
+| `HOGBALL_LEADERBOARD_API_KEY` | A PostHog personal API key with only the `query:read` scope |
+| `HOGBALL_LEADERBOARD_PROJECT_ID` | The ID of the PostHog project that gets the posthog.com events |
+| `HOGBALL_LEADERBOARD_HOST` | Optional. Defaults to `https://us.posthog.com` |
+
+Without the key, the function returns an empty list and the game shows no leaderboard. Scores are not verified on a server, so a player who sends fake events can put a fake score on the board, up to the 5,000,000 point limit.
+
 ## Files
 
 - `physics.ts` – the table layout and a fixed-step simulation (`createGame`, `launch`, `bump`, `step`). It has no DOM or React code. All units are table pixels on a flat 400 × 640 table. The ramp is a path with a height at each point (`RAMP_PATH`): on the ramp the ball follows the path, and gravity and the climb slow it down. `step` puts sound names in `game.sounds` for the component to play.
@@ -49,4 +65,4 @@ A slow shot does not get to the top of the ramp. It rolls back down to the playf
 | Event | Properties |
 |---|---|
 | `hogball_game_started` | – |
-| `hogball_game_ended` | `score`, `high_score` (boolean, a new personal best), `rockets`, `rank`, `duration_seconds` |
+| `hogball_game_ended` | `score`, `high_score` (boolean, a new personal best), `rockets`, `rank`, `player_name`, `duration_seconds` |

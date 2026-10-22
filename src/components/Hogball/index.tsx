@@ -9,10 +9,14 @@ import { PANEL_WIDTH, STRIP_HEIGHT, drawPanel, drawStrip, messageOf } from './pa
 import { createTable } from './scene'
 import type { Table } from './scene'
 import { chargeUp, play, stopCharge, unlockAudio } from './sound'
+import { randomPilot } from './pilots'
+import type { Leader } from './pilots'
 
 const STEP = 1 / 480
 const HIGH_SCORE_KEY = 'hogball-high-score'
 const MUTED_KEY = 'hogball-muted'
+const PILOT_KEY = 'hogball-pilot'
+const LEADERBOARD_URL = '/api/hogball-leaderboard'
 const ROCKET_SECONDS = 1.6
 // The same keys as the original Windows game
 const KEYS: Record<string, keyof Input> = { KeyZ: 'left', Slash: 'right', Space: 'plunger' }
@@ -47,6 +51,34 @@ export default function Hogball(): JSX.Element {
     const mutedRef = useRef(false)
     const [status, setStatus] = useState<Status>(() => statusOf(gameRef.current))
     const [muted, setMuted] = useState(false)
+    const pilotRef = useRef('')
+    const leadersRef = useRef<Leader[]>([])
+    const [pilot, setPilot] = useState('')
+    const [leaders, setLeaders] = useState<Leader[]>([])
+
+    const showLeaders = (next: Leader[]) => {
+        leadersRef.current = next
+        setLeaders(next)
+    }
+
+    // A new score takes a minute to reach the leaderboard, so show it at once as a pending row
+    const loadLeaders = (pending?: Leader) =>
+        fetch(LEADERBOARD_URL)
+            .then((response) => (response.ok ? response.json() : null))
+            .then((data: { leaders?: Leader[] } | null) => {
+                const list = data?.leaders || []
+                const known = pending && list.some((l) => l.name === pending.name && l.score >= pending.score)
+                const next = pending && !known ? [...list, pending].sort((a, b) => b.score - a.score) : list
+                showLeaders(next.slice(0, 10))
+            })
+            .catch(() => undefined)
+
+    const changePilot = () => {
+        pilotRef.current = randomPilot()
+        setPilot(pilotRef.current)
+        localStorage.setItem(PILOT_KEY, pilotRef.current)
+        tableRef.current?.focus()
+    }
 
     const newGame = () => {
         gameRef.current = createGame()
@@ -86,6 +118,10 @@ export default function Hogball(): JSX.Element {
         bestRef.current = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0
         mutedRef.current = localStorage.getItem(MUTED_KEY) === 'true'
         setMuted(mutedRef.current)
+        pilotRef.current = localStorage.getItem(PILOT_KEY) || randomPilot()
+        localStorage.setItem(PILOT_KEY, pilotRef.current)
+        setPilot(pilotRef.current)
+        loadLeaders()
         const images = { ball: image(ballSvg), rocket: image(rocketSvg) }
         let table: Table
         try {
@@ -155,11 +191,11 @@ export default function Hogball(): JSX.Element {
                 if (wide) {
                     const scale = panelCanvas.width / PANEL_WIDTH
                     panel.setTransform(scale, 0, 0, scale, 0, 0)
-                    drawPanel(panel, game, bestRef.current, images.rocket)
+                    drawPanel(panel, game, bestRef.current, images.rocket, pilotRef.current, leadersRef.current)
                 } else {
                     const scale = panelCanvas.width / WIDTH
                     panel.setTransform(scale, 0, 0, scale, 0, 0)
-                    drawStrip(panel, game)
+                    drawStrip(panel, game, pilotRef.current)
                 }
             }
             setStatus((previous) => {
@@ -201,9 +237,11 @@ export default function Hogball(): JSX.Element {
             high_score: best,
             rockets: game.rockets,
             rank: RANKS[game.rank],
+            player_name: pilotRef.current,
             duration_seconds: Math.round((Date.now() - startedRef.current) / 1000),
         })
         startedRef.current = 0
+        loadLeaders({ name: pilotRef.current, score: game.score, pending: true })
     }, [status.state])
 
     const hold = (key: keyof Input) => ({
@@ -285,6 +323,10 @@ export default function Hogball(): JSX.Element {
                 <OSButton size="sm" onClick={toggleMuted} aria-pressed={!muted}>
                     {muted ? 'Sound off' : 'Sound on'}
                 </OSButton>
+                <OSButton size="sm" onClick={changePilot} disabled={status.state === 'playing'}>
+                    New pilot name
+                </OSButton>
+                {pilot && <span className="self-center text-sm text-secondary">Pilot: {pilot}</span>}
             </div>
             <div className="grid grid-cols-3 gap-2 @2xl:hidden">
                 <OSButton size="md" width="full" {...hold('left')}>
@@ -297,6 +339,18 @@ export default function Hogball(): JSX.Element {
                     Right
                 </OSButton>
             </div>
+            {leaders.length > 0 && (
+                <div className="@2xl:hidden">
+                    <div className="text-sm font-bold">All-time top pilots</div>
+                    <ol className="m-0 pl-5 text-sm">
+                        {leaders.map((leader, i) => (
+                            <li key={`${leader.name}-${i}`} className={leader.name === pilot ? 'font-bold' : ''}>
+                                {leader.name} – {leader.score.toLocaleString('en-US')}
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            )}
         </div>
     )
 }
