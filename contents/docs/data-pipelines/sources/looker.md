@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Note:** This connector is in **alpha**. It's functional but may change based on feedback.
-
 The Looker (Google Cloud) connector syncs users, Looks, dashboards, projects, folders, and LookML models into the PostHog data warehouse, so you can analyze your Looker metadata alongside your product data.
 
 ## Prerequisites

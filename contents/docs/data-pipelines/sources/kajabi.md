@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Alpha:** This source is in alpha. If you run into issues, please [let us know](https://posthog.com/questions).
-
 The Kajabi connector syncs your contacts, customers, purchases, offers, products, courses, orders, transactions, and tags into the PostHog data warehouse so you can analyze them alongside your product data.
 
 ## Prerequisites

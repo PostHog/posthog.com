@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Fails when a data warehouse source doc hardcodes its own alpha or beta release notice.
+ * Fails when a data warehouse source doc states a release stage (alpha, beta, GA).
  *
- * `releaseStatus` on the source's SourceConfig in posthog/posthog is the one source of truth.
- * `src/templates/Handbook.tsx` renders the callout from it at build time, so a hardcoded notice
- * both duplicates that callout and goes stale the moment the source is promoted. Over 700 pages
- * drifted this way before the callout was automated.
+ * posthog.com doesn't show release stages for warehouse sources: a stage in the docs goes stale
+ * the moment the source is promoted, and over 700 pages drifted this way before. A stage the
+ * vendor puts on its own API ("the v2 API is in beta") is fine, so the patterns only match claims
+ * about the PostHog source, connector, or sync method.
  */
 
 const fs = require('fs')
@@ -13,29 +13,36 @@ const path = require('path')
 
 const SOURCES_DIR = path.join(__dirname, '..', 'contents', 'docs', 'data-pipelines', 'sources')
 
-// A notice about a sync method rather than about the source itself is legitimate, so the patterns
-// below only match a claim about "this source" / "the <X> source", or a callout titled for a
-// release stage.
+const STAGE = '(?:alpha|beta)'
+const SUBJECT = '(?:source|connector|integration|sync(?:\\s+method)?)'
+
 const PATTERNS = [
     {
-        id: 'legacy-release-component',
         regex: /<(?:Alpha|Beta)Release\s*\/>/gi,
-        message: 'hardcoded alpha/beta release component',
+        message: 'alpha/beta release component',
     },
     {
-        id: 'release-stage-callout-title',
-        regex: /<CalloutBox[^>]*title="(?:Alpha|Beta)(?: release| source| feature)?"/gi,
-        message: 'callout titled for a release stage',
+        regex: new RegExp(`<CalloutBox[^>]*title="[^"]*\\b${STAGE}\\b[^"]*"`, 'gi'),
+        message: 'callout titled with a release stage',
     },
     {
-        id: 'source-release-claim',
-        regex: /(?:This|The)\s+\S*\s*source\s+is\s+(?:currently\s+)?in\s+\*\*(?:alpha|beta)\*\*/gi,
-        message: 'prose claiming the source is in alpha or beta',
+        regex: new RegExp(`^>\\s*\\*\\*${STAGE}\\b`, 'gim'),
+        message: 'release stage label',
     },
     {
-        id: 'release-frontmatter-flag',
+        regex: new RegExp(
+            `\\b${SUBJECT}\\s+is\\s+(?:currently\\s+|still\\s+|now\\s+)?(?:in\\s+|an?\\s+)\\**${STAGE}\\b`,
+            'gi'
+        ),
+        message: 'prose claiming a release stage',
+    },
+    {
+        regex: new RegExp(`\\b${SUBJECT}\\s+is\\s+(?:now\\s+)?generally\\s+available\\b`, 'gi'),
+        message: 'prose claiming general availability',
+    },
+    {
         regex: /^(?:alpha|beta):\s*(?:true|false)\s*$/gim,
-        message: 'alpha/beta frontmatter flag, which nothing reads',
+        message: 'alpha/beta frontmatter flag',
     },
 ]
 
@@ -56,19 +63,16 @@ for (const entry of fs.readdirSync(SOURCES_DIR, { withFileTypes: true, recursive
 }
 
 if (failures.length > 0) {
-    console.error('Hardcoded release status found in data warehouse source docs:\n')
+    console.error('Release stage found in data warehouse source docs:\n')
     for (const failure of failures) {
         console.error(`  ${failure}`)
     }
     console.error(
         [
             '',
-            'The alpha and beta callouts are rendered automatically from `releaseStatus` on the',
-            "source's SourceConfig in posthog/posthog. Remove the hardcoded notice.",
+            "posthog.com doesn't show alpha, beta, or GA for warehouse sources. Remove the notice.",
             '',
-            "  - To change one source's status, change `releaseStatus` in posthog/posthog.",
-            '  - To change the wording for every source, edit',
-            '    src/components/Docs/SourceReleaseCallout.tsx.',
+            "  - A stage the vendor puts on its own API or product is fine. Name the vendor's API, not the source.",
             '  - A notice about something else, such as a sync method or a missing table, is fine.',
             '    Give it a title that does not name a release stage.',
             '',
@@ -77,4 +81,4 @@ if (failures.length > 0) {
     process.exit(1)
 }
 
-console.log(`No hardcoded release status in ${SOURCES_DIR}.`)
+console.log(`No release stages in ${path.relative(process.cwd(), SOURCES_DIR)}.`)
