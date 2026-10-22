@@ -28,7 +28,6 @@ Technical Account Managers (TAMs) own a book of business of nominally around 15 
 - Ensure that TAMs are on top of any credit renewals well before they expire.
 - Check the TAM quota tracker to see if there are any discrepancies and encourage your team to do so regularly as well.
 - Coming up to the end of the quarter, work with your team to identify any customers that are ready to be owned by a Customer Success Manager.  Review these with Simon ahead of quarter end so that we can make for a clean transition of customers.
-  - Set the New Owner trait in vitally to `EU CSM` or `US CSM` based on geography.
 
 ### Customer Success
 
