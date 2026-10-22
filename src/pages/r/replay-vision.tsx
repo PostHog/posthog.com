@@ -4,9 +4,6 @@ import ReaderView from 'components/ReaderView'
 import type { CarouselSlide as CarouselSlideType } from 'components/Products/ReaderViewProduct/types'
 import CarouselSlide from 'components/Products/ReaderViewProduct/CarouselSlide'
 import TabbedCarousel from 'components/TabbedCarousel'
-import { Plans, PricingCalculator } from 'components/Products/ReaderViewProduct/templates'
-import { PricingTLDR, PricingPlans, PricingCredits } from 'components/ReplayVision/PricingSections'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
@@ -15,7 +12,6 @@ import CustomerLogo from 'components/CustomerLogo'
 import SlotMachineText from 'components/SlotMachineText'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconPop } from 'components/Code/IconPop'
-import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { sessionReplay } from 'hooks/productData/session_replay'
 import { replayVision } from 'hooks/productData/replay_vision'
@@ -195,9 +191,7 @@ const steps: CarouselSlideType[] = [
         heading: '2. Tell the AI what to look for',
         description: (
             <>
-                <p>
-                    Ask questions, like "did the user get stuck on checkout?" and get the answer you need.
-                </p>
+                <p>Ask questions, like "did the user get stuck on checkout?" and get the answer you need.</p>
             </>
         ),
         image: {
@@ -220,8 +214,9 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Scanned sessions lead to observations, verdicts, scores, tags, or summaries – whatever you need to get a read. Track observations as <code>$recording_observed</code>{' '}
-                    events, so you can chart them, build cohorts, or trigger alerts.
+                    Scanned sessions lead to observations, verdicts, scores, tags, or summaries – whatever you need to
+                    get a read. Track observations as <code>$recording_observed</code> events, so you can chart them,
+                    build cohorts, or trigger alerts.
                 </p>
                 <SlideCallout>
                     We do this ourselves. One of our scanners caught a visitor hunting for our changelog RSS feed, and
@@ -295,8 +290,7 @@ const scanners: {
         Icon: IconFlask,
         color: 'text-orange',
         title: 'Experiment',
-        description:
-            'Summarizes an experiment side by side, so you see what changes.',
+        description: 'Summarizes an experiment side by side, so you see what changes.',
         output: 'A summary, labeled with the variant',
     },
 ]
@@ -517,7 +511,7 @@ const MCPTerminal = () => {
 }
 
 // ─────────────────────────────────────────────
-// FAQ and pricing
+// FAQ
 // ─────────────────────────────────────────────
 
 const faqs = [
@@ -527,7 +521,27 @@ const faqs = [
     },
     {
         q: 'How much does it cost?',
-        a: 'Session Replay gives you 5,000 web recordings and 2,500 mobile recordings free every month. After that, web recordings start at $0.005 each. Replay Vision gives you 2,500 credits free every month. One credit is $0.01, and each observation costs 2, 5, or 15 credits depending on the model. On the default model, 2,500 credits cover 500 observations a month.',
+        a: (
+            <>
+                <p className="m-0 mb-3">
+                    Session Replay gives you 5,000 web recordings and 2,500 mobile recordings free every month. After
+                    that, web recordings start at $0.005 each. See{' '}
+                    <Link to="/session-replay/pricing" className="underline" state={{ newWindow: true }}>
+                        Session Replay pricing
+                    </Link>
+                    .
+                </p>
+                <p className="m-0">
+                    Replay Vision gives you 2,500 credits free every month. One credit is $0.01, and each observation
+                    costs 2, 5, or 15 credits depending on the model. On the default model, 2,500 credits cover 500
+                    observations a month. See{' '}
+                    <Link to="/replay-vision/pricing" className="underline" state={{ newWindow: true }}>
+                        Replay Vision pricing
+                    </Link>
+                    .
+                </p>
+            </>
+        ),
     },
     {
         q: 'Can I trust what Replay Vision says?',
@@ -542,52 +556,6 @@ const faqs = [
         a: 'Yes. You can set alerts that fire on matching observations or when a metric crosses a threshold, and send them to Slack or a webhook.',
     },
 ]
-
-// The pricing sections from /session-replay/pricing and /replay-vision/pricing,
-// switched with the same toggle as the Replay Vision "AI prompts" section.
-const PricingTabs = () => {
-    const [tab, setTab] = useState<'session_replay' | 'replay_vision'>('session_replay')
-    const sessionReplayData = useProduct({ handle: 'session_replay' }) as any
-
-    return (
-        <div className="not-prose mt-4">
-            <ToggleGroup
-                title="Product"
-                hideTitle
-                value={tab}
-                onValueChange={(value) => {
-                    if (value === 'session_replay' || value === 'replay_vision') setTab(value)
-                }}
-                options={[
-                    { label: 'Session Replay', value: 'session_replay', default: true },
-                    { label: 'Replay Vision', value: 'replay_vision' },
-                ]}
-                className="mb-8 max-w-sm"
-            />
-            {tab === 'session_replay' && sessionReplayData && (
-                <div className="flex flex-col gap-12">
-                    <Plans id="session-replay-plans" productData={sessionReplayData} allProducts={[]} />
-                    <PricingCalculator
-                        id="session-replay-calculator"
-                        productData={sessionReplayData}
-                        allProducts={[]}
-                    />
-                </div>
-            )}
-            {tab === 'replay_vision' && (
-                <div className="flex flex-col gap-12">
-                    <PricingPlans
-                        id="replay-vision-plans"
-                        productData={null}
-                        allProducts={[]}
-                        intro={<PricingTLDR id="replay-vision-tldr" productData={null} allProducts={[]} />}
-                    />
-                    <PricingCredits id="replay-vision-calculator" productData={null} allProducts={[]} />
-                </div>
-            )}
-        </div>
-    )
-}
 
 // ─────────────────────────────────────────────
 // Page
@@ -689,8 +657,8 @@ export default function ReplayVisionLanding(): JSX.Element {
                             <div className={CARD}>
                                 <h4 className="text-lg font-bold mt-0 mb-2">Start in the app</h4>
                                 <p className="text-sm text-secondary leading-relaxed m-0 mb-4">
-                                    Already recording? Pick a starting point and get
-                                    your first observation in five minutes.
+                                    Already recording? Pick a starting point and get your first observation in five
+                                    minutes.
                                 </p>
                                 <CallToAction
                                     size="sm"
@@ -744,11 +712,6 @@ export default function ReplayVisionLanding(): JSX.Element {
                         </div>
                     </section>
 
-                    <section id="pricing" className="scroll-mt-20">
-                        <h3 className="!text-2xl !font-bold">Pricing</h3>
-                        <PricingTabs />
-                    </section>
-
                     {/* Closing box in the layout of the /slack "Try it" box. */}
                     <div
                         id="get-started"
@@ -759,7 +722,12 @@ export default function ReplayVisionLanding(): JSX.Element {
                                 <h3 className="mt-0 mb-2 text-2xl font-bold">
                                     Go watch sunsets while PostHog watches your user sessions
                                 </h3>
-                                <p className="mt-0 mb-4">{FREE_TIER}</p>
+                                <p className="mt-0 mb-4">
+                                    {FREE_TIER}{' '}
+                                    <Link to="/pricing" className="underline" state={{ newWindow: true }}>
+                                        See pricing
+                                    </Link>
+                                </p>
                                 <CTAButtons />
                             </div>
                             <CloudinaryImage
