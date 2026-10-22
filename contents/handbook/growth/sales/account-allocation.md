@@ -204,34 +204,22 @@ TAM books are planned with room for mid-quarter requests, so a qualified request
 
 When the TAM joins, it might be useful to tell the customer what they're there for (for example, "joining to help explore error tracking with your platform team"), so it reads as an addition with a clear purpose, not a salesy fishing trip. See [kicking off the overlay](/handbook/growth/sales/csm-tam-overlay-coverage#kicking-off-the-overlay) for guidance on kicking off an overlay.
 
-#### How overlays are credited
-
-Expansion a TAM pushes over the finish line counts toward the CSM's NRR, as a shared win between the CSM and TAM. A CSM shouldn't have to choose between working an opportunity alone and giving up credit to bring in a TAM.
-
-The [CSM bonus](/handbook/cs-and-onboarding/how-we-work#how-csm-bonus-works) target of 110% NRR assumes mostly natural expansion: the customer's business growing, or expansion the customer pulls in. A CSM should be able to hit it without a TAM. TAM-pushed deals are on top of that.
-
-On an overlay a CSM requested, the TAM is paid only on what they add, measured by the closed-won opportunity named in the request note, not on what the account was already spending. For these overlays, this replaces the all-cash rule in the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
-
 #### What good looks like
 
 This section covers overlays a CSM requests. Accounts where the TAM was there before the CSM aren't measured here.
 
 The number of overlays isn't the goal. Each quarter, we look at two things:
 
-1. **Is each overlay doing its job?** Of the overlays started, how many turned the opportunity named in the request note into closed-won expansion. Only that opportunity counts, so the overlay gets credit for what it set out to do.
+1. **Is each overlay doing its job?** Of the overlays started, how many turned the opportunity named in the request note into closed-won expansion. Only that opportunity counts, so the overlay is judged on what it set out to do.
 2. **What happens without an overlay?** Track the requests that were declined or had to wait, and what happened to their requested overlay opportunities. There won't be many, and TAMs will naturally take the strongest ones first, so the two possible results don't mean the same thing:
     - **The declined or waiting ones close about as often as the accepted ones.** They were the weaker requests and did just as well, so the overlay probably isn't adding much.
     - **The accepted ones close more often.** That's a good sign, though TAMs may also have taken the best requests, so read it alongside measure 1.
 
-    Either way, it doesn't prove anything on its own, but it's a useful signal for the quarterly reviews and the overall evaluation of the overlay model.
+    Either way, it doesn't prove anything on its own, but it's a useful signal for the quarterly reviews.
 
 We count from Q1 2027, and only overlays a CSM requested. Accounts that already had a TAM before then are left out.
 
-An opportunity doesn't have to close in the quarter the overlay starts. At each quarterly review, the TAM and CSM team leads check every open opportunity with the TAM. If it can still close next quarter, it stays open. If not, it counts as not closed. The TAM team lead signs off on keeping an opportunity open, and after two quarters it needs a stated reason in the review.
-
 The request note is the record, since the `tam overlay needed` tag comes off once a TAM is assigned. At the end of each quarter, TAM and CSM team leads review the requests together: which were taken or declined and why, what closed, and what happened to the ones declined. TAM team leads then share it in public in Slack. We change these criteria based on what that shows.
-
-TAM and CSM team leads share each quarterly review with Simon and Ben. Once there have been enough overlay decisions and enough quarters have passed, they review the overlay model as a whole. If we can't tell closed-won expansion a TAM pushed apart from expansion the customer pulled in or organic growth, then it's time for the overlay model to pivot or retire.
 
 ---
 
