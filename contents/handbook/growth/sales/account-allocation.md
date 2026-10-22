@@ -181,7 +181,7 @@ To request CSM coverage, add:
 
 ### CSM allocation
 
-Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads, with Simon's approval, review:
+Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads will review:
 
 1. **The <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas** to find accounts without a CSM
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
