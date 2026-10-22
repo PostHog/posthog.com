@@ -48,8 +48,6 @@ These changes apply to every SDK on capture v1. Your SDK's migration guide cover
 
 SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use a new one for every event. Don't reuse an order ID, request ID, or message ID across events. If one request repeats a UUID, PostHog keeps the first event with it and drops the rest, and your SDK reports the dropped copies.
 
-<!-- TODO(capture-v1): keep this only once each v1 SDK reports `duplicates_dropped` (tracking repo FQ-17 rollout step 3). -->
-
 ### Event options replace legacy option properties
 
 Legacy option properties are the `$`-prefixed properties legacy capture reads as settings. Set these settings in an event's `options` instead:
@@ -177,6 +175,8 @@ SDKs split large batches into requests of 5MB or less, and send any single event
 ## Retries and failures
 
 SDKs on capture v1 retry a request when PostHog or the network has a temporary problem (`408`, `500`, `502`, `503`, `504`, or a network error), and they resend only the events PostHog asked them to retry. Every other response is final, including `429`. Each wait doubles, with some randomness added so many clients don't retry at the same moment.
+
+<!-- TODO(capture-v1): 404 and 429 retry behavior is still being decided (tracking repo FQ-16); update this if it changes. -->
 
 Let the SDK handle retries. Don't wrap its capture calls in your own retry loop – that can send events twice and slow your app down.
 
