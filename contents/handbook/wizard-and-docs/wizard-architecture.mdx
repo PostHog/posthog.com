@@ -8,11 +8,11 @@ The wizard is built in layers for composability. The context and skills, the age
 
 1. **The CLI layer** reads the command and starts a host.
 2. **The host layer** shows a run. The TUI draws it in the terminal, and the headless runner logs it.
-3. **The program layer** decides what to run, how many agents to spawn, and what each one gets. Its session store holds the state of a run.
+3. **The program layer** decides what to run, how many agents to spawn, and what each one gets. Its services, such as the session store and detection, do the work programs share.
 4. **The agent layer** runs AI work against the user's code. It has no opinion about what runs, and never sees the UI or the store.
 
 <div className="text-primary my-6">
-<svg viewBox="-2 -2 688 716" width="100%" role="img" aria-label="Wizard layers: CLI, hosts, programs, agent, harnesses">
+<svg viewBox="-2 -2 712 772" width="100%" role="img" aria-label="Wizard layers: CLI, hosts, programs and services, program contract, agent, harnesses">
 <defs><marker id="wizard-arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" fillOpacity="0.7" /></marker></defs>
 <rect x="0" y="0" width="684" height="26" rx="3" fill="rgba(156,163,175,0.25)" stroke="none" />
 <text x="342.0" y="13.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/cli</text>
@@ -28,50 +28,57 @@ The wizard is built in layers for composability. The context and skills, the age
 <text x="431.0" y="196.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">screens · logs</text>
 <rect x="534" y="178" width="150" height="36" rx="3" fill="rgba(168,85,247,0.14)" stroke="#a855f7" strokeWidth="2" />
 <text x="609.0" y="196.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">WizardAsk</text>
-<rect x="0" y="244" width="684" height="26" rx="3" fill="rgba(34,197,94,0.25)" stroke="none" />
-<text x="342.0" y="257.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/programs</text>
+<rect x="0" y="244" width="328" height="26" rx="3" fill="rgba(34,197,94,0.25)" stroke="none" />
+<text x="215.0" y="257.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/programs</text>
+<rect x="356" y="244" width="328" height="26" rx="3" fill="rgba(34,197,94,0.25)" stroke="none" />
+<text x="520.0" y="257.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/services</text>
 <rect x="0" y="300" width="328" height="36" rx="3" fill="rgba(34,197,94,0.14)" stroke="#22c55e" strokeWidth="2" />
 <text x="164.0" y="318.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">runProgram</text>
 <rect x="356" y="300" width="150" height="36" rx="3" fill="rgba(34,197,94,0.14)" stroke="#22c55e" strokeWidth="2" />
 <text x="431.0" y="318.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">SessionStore</text>
-<rect x="0" y="366" width="684" height="26" rx="3" fill="rgba(59,130,246,0.25)" stroke="none" />
-<text x="342.0" y="379.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/agent</text>
-<rect x="0" y="422" width="328" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="164.0" y="440.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">runAgent</text>
-<rect x="356" y="422" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="431.0" y="440.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">AgentProgress</text>
-<rect x="534" y="422" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="609.0" y="440.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">interaction.ask</text>
-<rect x="0" y="488" width="328" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="164.0" y="506.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">switchboard</text>
-<rect x="0" y="554" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="75.0" y="572.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">Pi harness</text>
-<rect x="178" y="554" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
-<text x="253.0" y="572.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">Anthropic harness</text>
-<rect x="0" y="620" width="328" height="36" rx="3" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeDasharray="4 3" />
-<text x="164.0" y="638.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">gateway · MCP · skills</text>
-<rect x="0" y="686" width="684" height="26" rx="3" fill="rgba(156,163,175,0.25)" stroke="#9ca3af" strokeDasharray="4 3" />
-<text x="342.0" y="699.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/shared · src/env</text>
+<rect x="534" y="300" width="150" height="36" rx="3" fill="rgba(34,197,94,0.14)" stroke="#22c55e" strokeWidth="2" />
+<text x="609.0" y="311.5" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="11" fontFamily="ui-monospace, monospace">detection · scans</text>
+<text x="609.0" y="324.5" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="11" fontFamily="ui-monospace, monospace">frameworks</text>
+<rect x="0" y="366" width="684" height="26" rx="3" fill="rgba(34,197,94,0.25)" stroke="none" />
+<text x="297.0" y="379.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/programs/program-contract</text>
+<rect x="0" y="422" width="684" height="26" rx="3" fill="rgba(59,130,246,0.25)" stroke="none" />
+<text x="342.0" y="435.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/agent</text>
+<rect x="0" y="478" width="328" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="164.0" y="496.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">runAgent</text>
+<rect x="356" y="478" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="431.0" y="496.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">AgentProgress</text>
+<rect x="534" y="478" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="609.0" y="496.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">interaction.ask</text>
+<rect x="0" y="544" width="328" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="164.0" y="562.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">switchboard</text>
+<rect x="0" y="610" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="75.0" y="628.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">Pi harness</text>
+<rect x="178" y="610" width="150" height="36" rx="3" fill="rgba(59,130,246,0.14)" stroke="#3b82f6" strokeWidth="2" />
+<text x="253.0" y="628.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">Anthropic harness</text>
+<rect x="0" y="676" width="328" height="36" rx="3" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeDasharray="4 3" />
+<text x="164.0" y="694.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12" fontFamily="ui-monospace, monospace">gateway · MCP · skills</text>
+<rect x="0" y="742" width="684" height="26" rx="3" fill="rgba(156,163,175,0.25)" stroke="#9ca3af" strokeDasharray="4 3" />
+<text x="342.0" y="755.0" textAnchor="middle" dominantBaseline="central" fill="currentColor" fontSize="12">src/shared · src/env</text>
 <path d="M 164.0 92 L 164.0 135.0 L 75.0 135.0 L 75.0 176" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
 <path d="M 164.0 92 L 164.0 135.0 L 253.0 135.0 L 253.0 176" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 75.0 214 L 75.0 257.0 L 164.0 257.0 L 164.0 298" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 253.0 214 L 253.0 257.0 L 164.0 257.0 L 164.0 298" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 164.0 336 L 164.0 420" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 164.0 458 L 164.0 486" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 164.0 524 L 164.0 539.0 L 75.0 539.0 L 75.0 552" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 164.0 524 L 164.0 539.0 L 253.0 539.0 L 253.0 552" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 75.0 590 L 75.0 605.0 L 164.0 605.0 L 164.0 618" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 253.0 590 L 253.0 605.0 L 164.0 605.0 L 164.0 618" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 328 440.0 L 354 440.0" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 431.0 422 L 431.0 338" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
-<text x="437.0" y="380.0" dominantBaseline="central" fill="currentColor" fillOpacity="0.7" fontSize="10" fontStyle="italic">optional</text>
+<path d="M 75.0 214 L 75.0 229.0 L 164.0 229.0 L 164.0 298" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 253.0 214 L 253.0 229.0 L 164.0 229.0 L 164.0 298" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 164.0 336 L 164.0 476" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 164.0 514 L 164.0 542" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 164.0 580 L 164.0 595.0 L 75.0 595.0 L 75.0 608" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 164.0 580 L 164.0 595.0 L 253.0 595.0 L 253.0 608" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 75.0 646 L 75.0 661.0 L 164.0 661.0 L 164.0 674" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 253.0 646 L 253.0 661.0 L 164.0 661.0 L 164.0 674" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 328 496.0 L 354 496.0" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
+<path d="M 431.0 478 L 431.0 338" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
+<text x="437.0" y="351.0" dominantBaseline="central" fill="currentColor" fillOpacity="0.7" fontSize="10" fontStyle="italic">optional</text>
 <path d="M 431.0 300 L 431.0 216" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" markerEnd="url(#wizard-arch-arrow)" />
-<path d="M 609.0 422 L 609.0 216" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
-<text x="615.0" y="319.0" dominantBaseline="central" fill="currentColor" fillOpacity="0.7" fontSize="10" fontStyle="italic">optional</text>
+<path d="M 684 496.0 L 704 496.0 L 704 196.0 L 686 196.0" fill="none" stroke="currentColor" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="3 3" markerEnd="url(#wizard-arch-arrow)" />
+<text x="698.0" y="351.0" textAnchor="end" dominantBaseline="central" fill="currentColor" fillOpacity="0.7" fontSize="10" fontStyle="italic">optional</text>
 </svg>
 </div>
 
-The two left lanes are the calls going down, one per host. The third lane is progress coming back up into the store, and the right lane is a question for the user coming back up. Both are optional, so they're dotted: `runAgent` only sends progress through `onProgress` and questions through `interaction.ask` when the host passes them in. Each colour is one owner: grey for the CLI, purple for the hosts, green for programs and the store, and blue for the agent. The dashed box is outside the wizard repo: the AI gateway, the PostHog MCP server, and context mill skills. The bottom band is shared code every layer imports.
+The two left lanes are the calls going down, one per host. The third lane is progress coming back up into the store, and the right lane is a question for the user coming back up. Both are optional, so they're dotted: `runAgent` only sends progress through `onProgress` and questions through `interaction.ask` when the host passes them in. Each colour is one owner: grey for the CLI, purple for the hosts, green for the program layer, and blue for the agent. The program layer's three bands are the programs, the services they consume, and the program contract below both, which they import. The dashed box is outside the wizard repo: the AI gateway, the PostHog MCP server, and context mill skills. The bottom band is shared code every layer imports.
 
 ## The CLI layer
 
@@ -103,9 +110,17 @@ A program is a job with a purpose, like "set up error tracking". The program dec
 
 Programs can't import each other, so a product team can own its program without touching anyone else's. You can also run a program from code. See the [programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md).
 
+The program layer has three parts, which import in one direction:
+
+- **The program contract** defines what a program is: `ProgramConfig`, `ProgramSession`, `RunnerContext` and `FrameworkConfig`. It imports no service. It lives in [`src/programs/program-contract/`](https://github.com/PostHog/wizard/tree/main/src/programs/program-contract).
+- **Services** are what programs consume: the session store, detection, the framework configs, the codebase scan and the warehouse tool catalog. They live in [`src/services/`](https://github.com/PostHog/wizard/tree/main/src/services).
+- **Programs** are the jobs themselves, one folder each in `src/programs/`. The program runner, `runProgram`, runs them.
+
+A service knows what a program, a session or an agent run is. Code that doesn't goes in `src/shared`. Each part is its own TypeScript project, so an import in the wrong direction fails the type check. See the [services README](https://github.com/PostHog/wizard/blob/main/src/services/README.md).
+
 ### Session store
 
-The session store holds the state of one run. Programs write to it, and hosts read from it. It also streams that state into the PostHog app. See the [programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md#session-store-and-task-streams).
+The session store is a service. It holds the state of one run. Programs write to it, and hosts read from it. It also streams that state into the PostHog app. See the [services README](https://github.com/PostHog/wizard/blob/main/src/services/README.md#session-store-and-task-streams).
 
 ### Login
 
@@ -167,3 +182,4 @@ The wizard can run in a cloud sandbox from the PostHog app, through the headless
 - [Agent README](https://github.com/PostHog/wizard/blob/main/src/agent/README.md)
 - [Switchboard](https://github.com/PostHog/wizard/tree/main/src/agent/runner/switchboard)
 - [Programs README](https://github.com/PostHog/wizard/blob/main/src/programs/README.md)
+- [Services README](https://github.com/PostHog/wizard/blob/main/src/services/README.md)
