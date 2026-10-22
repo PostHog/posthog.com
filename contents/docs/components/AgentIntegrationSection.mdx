@@ -1,6 +1,7 @@
 ---
 props:
     framework: string
+    flagCommand: object
 ---
 
 ## Install with the wizard
@@ -9,6 +10,6 @@ props:
 
 import WizardCommand from 'components/WizardCommand'
 
-<WizardCommand />
+<WizardCommand flagCommand={props.flagCommand} />
 
 <p>Or set it up manually by following the rest of this guide.</p>
