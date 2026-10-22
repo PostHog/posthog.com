@@ -21,6 +21,10 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 
 > **Use a single client instance (singleton)** — Create the PostHog client once and reuse it throughout your application. Multiple client instances with the same API key can cause dropped events and inconsistent behavior. The SDK logs a warning if it detects multiple instances.
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Ruby" />
+
 ## Installation
 
 import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
