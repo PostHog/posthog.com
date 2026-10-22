@@ -337,7 +337,7 @@ Every capture method takes these fields:
 | Field | Becomes | Notes |
 | --- | --- | --- |
 | `distinctId` | `distinct_id` | Turns on person processing. Omit it for anonymous traffic. |
-| `sessionId` | `$session_id` | Omitted when you don't pass one. |
+| `sessionId` | `$session_id` | Omitted when you don't pass one. Keep it to 128 characters or fewer. |
 | `protocolVersion` | `$mcp_protocol_version` | Pass the revision of each request. |
 | `clientUserAgent` | `$mcp_client_user_agent` | The raw `User-Agent` header on HTTP transports. |
 | `vendorClient` | `$mcp_vendor_client` | A vendor client header, such as `x-anthropic-client`. |
