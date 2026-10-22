@@ -116,7 +116,9 @@ You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `
 
 Every event needs its own `uuid`. Generate a new one for each event, and keep it the same when you retry that event. A UUIDv7 works best because it also records when you created the event.
 
-Don't reuse a UUID from something else, like an order ID or a request ID, across events. A request that contains the same UUID twice is rejected as a whole with `duplicate_event_uuid`.
+Don't reuse a UUID from something else, like an order ID or a request ID, across events. If a request contains the same UUID more than once, PostHog keeps the first event with that UUID and drops the rest. That UUID's [result](#per-event-results) counts the dropped copies in `duplicates_dropped`.
+
+<!-- TODO(capture-v1): keep the duplicate-UUID text only once posthog #122305 is deployed. -->
 
 ### Choosing a distinct ID
 
@@ -197,7 +199,8 @@ PostHog SDKs always send these types. If you change an event in a `before_send` 
 | Request body, after decompression | 50MB | `413`, nothing stored |
 | Events per request | No limit beyond the body size | – |
 | `batch` | At least one event | `400` `empty_batch` |
-| `uuid` | Present, a valid UUID, and unique within the request | `400` (`missing_event_uuid`, `invalid_event_uuid`, `duplicate_event_uuid`), nothing stored |
+| `uuid` | Present and a valid UUID | `400` (`missing_event_uuid`, `invalid_event_uuid`), nothing stored |
+| `uuid` repeated in one request | Each UUID once | The first event is kept, later copies are dropped and counted in `duplicates_dropped` |
 | `created_at` | Present, RFC 3339 | `400` `invalid_batch`, nothing stored |
 | Required headers | All present ([headers](#headers)) | `400` `missing_required_headers`; `401` `missing_authorization` for `Authorization` |
 | `Authorization` | `Bearer <ph_project_token>` | `400` `invalid_header_value` without `Bearer`; `401` `invalid_api_token` for an invalid token or a personal API key |
@@ -239,7 +242,7 @@ The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events
 | Status | Meaning | Retry? |
 |---|---|---|
 | `200` | PostHog read the batch. Check the [result for each event](#per-event-results). | Only events with result `retry` |
-| `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or a repeated `uuid`. Nothing was stored. | No – fix the request |
+| `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or an invalid `uuid`. Nothing was stored. | No – fix the request |
 | `401` | The project token is missing or invalid, or you used a personal API key | No |
 | `402` | Your project hit a [billing limit](/docs/billing/limits-alerts). Events in this request aren't stored. | No – raise or remove the limit |
 | `408` | The request timed out while PostHog read it | Yes |
@@ -253,8 +256,8 @@ Errors use this body. `error` is a stable tag you can match on.
 
 ```json
 {
-  "error": "duplicate_event_uuid",
-  "error_description": "duplicate event uuid: 019a0000-0000-7000-8000-000000000001",
+  "error": "empty_batch",
+  "error_description": "request batch is empty",
   "error_uri": "https://posthog.com/docs/api"
 }
 ```
@@ -271,10 +274,15 @@ A `200` response has one result for every event, keyed by the event's `uuid`:
     "019a0000-0000-7000-8000-000000000001": { "result": "ok" },
     "019a0000-0000-7000-8000-000000000002": { "result": "warning", "details": "person_processing_disabled" },
     "019a0000-0000-7000-8000-000000000003": { "result": "drop", "details": "invalid_options" },
-    "019a0000-0000-7000-8000-000000000004": { "result": "retry", "details": "not_persisted" }
+    "019a0000-0000-7000-8000-000000000004": { "result": "retry", "details": "not_persisted" },
+    "019a0000-0000-7000-8000-000000000005": { "result": "ok", "duplicates_dropped": 2 }
   }
 }
 ```
+
+`duplicates_dropped` appears only when the request repeated that event's UUID. It's the number of later copies PostHog dropped. The result and `details` belong to the first copy, which PostHog kept.
+
+<!-- TODO(capture-v1): keep the duplicate-UUID text only once posthog #122305 is deployed. -->
 
 | Result | Meaning | What to do |
 |---|---|---|
@@ -299,7 +307,7 @@ A `200` response has one result for every event, keyed by the event's `uuid`:
 | `event_too_big` | `drop` | The event is too large to store |
 | `misrouted_event` | `drop` | A non-AI event was sent to the AI endpoint |
 | `ai_event_too_big` | `drop` | An AI event is over the size limit for the endpoint it was sent to |
-| `person_processing_disabled` | `warning` | Stored without a person profile, for example because the distinct ID is a placeholder like `anonymous` |
+| `person_processing_disabled` | `ok` or `warning` | Stored without a person profile. The result is `ok` when the distinct ID is a placeholder like `anonymous`, and `warning` when PostHog's rate limiter turned person processing off |
 | `not_persisted` | `retry` | PostHog couldn't store it right now |
 
 When an event is over a product's quota or billing limit, the result is `drop` and `details` names the quota that was exceeded, such as `over_quota`.
