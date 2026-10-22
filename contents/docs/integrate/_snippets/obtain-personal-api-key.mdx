@@ -14,8 +14,6 @@ Personal API keys can enable full access to your account, like logging in with y
 
 6. At the top of the list, you should see your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page.
 
-7. At the top of the list, you should see your brand new key. **Immediately** copy its value, as you'll **never** see it again after refreshing the page.
-
 You can create up to 10 personal API keys. Personal API keys are deleted when a user is deleted.
 
 ![How to create an api key](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/api/create-api-key.png)
@@ -28,8 +26,6 @@ To upgrade a legacy key to the modern sha256 hashing format:
 
 1. Click on the key in the keys table to open the edit modal.
 2. Click **Roll key** in the warning banner.
-   Rolling a key generates a new key value and invalidates the old one. You'll be asked to choose an expiration for the new key. Update the new key value wherever the old key was used.
+3. Choose an expiration for the new key and confirm the action.
 
 Rolling a key generates a new key value and invalidates the old one. Update the new key value wherever the old key was used.
-
-When rolling a key, you can also set a new expiration. The roll dialog defaults to **30 days** for keys that already have an expiry, or **Never** for keys without one.
