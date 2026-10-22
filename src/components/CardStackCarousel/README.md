@@ -48,6 +48,7 @@ export function MyOtherCarousel() {
 | `loop`        | `boolean`                             | `true`           | Loop from last → first (and vice versa).       |
 | `className`   | `string`                              | `''`             | Extra classes on the outer container.          |
 | `ariaLabel`   | `string`                              | `Card carousel`  | Accessible label for the carousel region.      |
+| `formatCounter` | `(current: number, total: number) => React.ReactNode` | `"1 of 6"` style | Live counter text. `current` starts at 1. |
 
 ### Behavior
 

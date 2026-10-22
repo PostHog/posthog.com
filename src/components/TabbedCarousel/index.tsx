@@ -46,6 +46,16 @@ export interface TabbedCarouselProps {
      *   active-tab reorder on small screens, always paints active color. Matches the homepage hero.
      */
     variant?: TabbedCarouselVariant
+    /**
+     * Holds auto-advance while true, alongside the built-in hover, offscreen, and pause-button holds — useful
+     * when a slide has its own pause control, or for reduced motion. Default: false.
+     */
+    paused?: boolean
+    /**
+     * When true, auto-advance also pauses while focus is inside the carousel, so keyboard users get the same
+     * hold as hover. Default: false.
+     */
+    pauseOnFocus?: boolean
 }
 
 interface VariantConfig {
@@ -104,10 +114,13 @@ export default function TabbedCarousel({
     slideClassName,
     showActiveBg = true,
     variant = 'minimal',
+    paused = false,
+    pauseOnFocus = false,
 }: TabbedCarouselProps) {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
+    const [isFocused, setIsFocused] = useState(false)
     const [isOffscreen, setIsOffscreen] = useState(false)
     // Holds auto-advance paused until `autoplayStartDelay` ms have elapsed after mount.
     const [isWaitingToStart, setIsWaitingToStart] = useState(autoplayStartDelay > 0)
@@ -141,7 +154,8 @@ export default function TabbedCarousel({
         return () => observer.disconnect()
     }, [])
 
-    const effectivelyPaused = isPaused || isHovering || isOffscreen || isWaitingToStart
+    const effectivelyPaused =
+        paused || isPaused || isHovering || isOffscreen || isWaitingToStart || (pauseOnFocus && isFocused)
 
     const advance = useCallback(() => {
         setActiveTab((prev) => {
@@ -194,6 +208,14 @@ export default function TabbedCarousel({
             className={`@container ${className || ''}`}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
+            onFocus={pauseOnFocus ? () => setIsFocused(true) : undefined}
+            onBlur={
+                pauseOnFocus
+                    ? (event) => {
+                          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsFocused(false)
+                      }
+                    : undefined
+            }
         >
             <Tabs.Root value={activeTab} onValueChange={handleTabChange} className="flex flex-col">
                 <Tabs.List className="flex items-center gap-0 relative z-10">

@@ -5,8 +5,9 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 type Layer = {
     src: `https://res.cloudinary.com/${string}`
-    /** Natural image width in px. Sets the layer's width relative to the others. */
+    /** Natural image size in px. Sets the layer's size relative to the others. */
     naturalWidth: number
+    naturalHeight: number
     /** Left edge when open, as a percent of the container width. */
     openLeft: number
     /** How far left of the front hog it sits when closed, in percent. Small gaps keep it looking sliced. */
@@ -18,36 +19,42 @@ const LAYERS: Layer[] = [
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/back_hog_203f4b58bd.png',
         naturalWidth: 1111,
+        naturalHeight: 1321,
         openLeft: 0,
         tuck: 19.5,
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/4_slice_17f56d54c6.png',
         naturalWidth: 1012,
+        naturalHeight: 1224,
         openLeft: 14,
         tuck: 14,
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/3_slice_a5fde2abfa.png',
         naturalWidth: 1027,
+        naturalHeight: 1233,
         openLeft: 27,
         tuck: 10.5,
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/2_slice_ef37167f3a.png',
         naturalWidth: 1037,
+        naturalHeight: 1255,
         openLeft: 40,
         tuck: 7,
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/1_slice_80f9cf3a3b.png',
         naturalWidth: 1023,
+        naturalHeight: 1234,
         openLeft: 53,
         tuck: 3.5,
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/front_hog_b2e22c2f66.png',
         naturalWidth: 1103,
+        naturalHeight: 1299,
         openLeft: 65.5,
         tuck: 0,
     },
@@ -55,14 +62,16 @@ const LAYERS: Layer[] = [
 
 // The front hog spans the last 34.5% of the container when open, and sits in the middle when closed
 const FRONT_WIDTH = 34.5
-const SCALE = FRONT_WIDTH / 1103
+const SCALE = FRONT_WIDTH / LAYERS[LAYERS.length - 1].naturalWidth
 const FRONT_CLOSED_LEFT = (100 - FRONT_WIDTH) / 2
 // Shifts the closed stack right by half its spread, so it sits in the middle of the container
 const CLOSED_CENTERING = Math.max(...LAYERS.map(({ tuck }) => tuck)) / 2
 // Requested from Cloudinary in place of the ~1,100px originals. Enough for a 2x screen at max-w-3xl.
 const IMAGE_WIDTH = 600
-const BACK_HEIGHT = 1321
-const ASPECT_RATIO = 100 / (BACK_HEIGHT * SCALE)
+// How far each step from the middle moves when it breathes, as a percent of the layer's width
+const BREATH = 2.5
+// The container is as tall as the tallest layer
+const ASPECT_RATIO = 100 / (Math.max(...LAYERS.map(({ naturalHeight }) => naturalHeight)) * SCALE)
 
 interface SlicedHogProps {
     className?: string
@@ -71,8 +80,8 @@ interface SlicedHogProps {
 }
 
 /**
- * A hedgehog that opens into slices when it scrolls into view, then floats. Click it to close and open it again.
- * With reduced motion, it starts open, does not float, and a click switches state without animation.
+ * A hedgehog that opens into slices when it scrolls into view, then floats and breathes. Click it to close and open it again.
+ * With reduced motion, it starts open, stays still, and a click switches state without animation.
  */
 export default function SlicedHog({
     className = '',
@@ -98,7 +107,7 @@ export default function SlicedHog({
         }
     }, [inView, shouldReduceMotion])
 
-    // Once open and on screen, the slices drift up and down, each on its own cycle
+    // Once open and on screen, the slices float and breathe
     const floating = open && onScreen && !shouldReduceMotion
 
     return (
@@ -116,8 +125,9 @@ export default function SlicedHog({
                 const closedLeft = FRONT_CLOSED_LEFT + CLOSED_CENTERING - tuck
                 // Percent of the layer's own width, which is what a translateX percentage resolves against
                 const closedOffset = ((closedLeft - openLeft) / width) * 100
-                // The outer layers lead, and the middle slices follow
-                const delay = Math.abs(index - (LAYERS.length - 1) / 2) * -0.06 + 0.18
+                // Signed distance from the middle of the stack: the outer layers lead the reveal and move most when it breathes
+                const spread = index - (LAYERS.length - 1) / 2
+                const delay = 0.18 - Math.abs(spread) * 0.06
 
                 return (
                     <motion.div
@@ -132,17 +142,36 @@ export default function SlicedHog({
                                 : { type: 'spring', stiffness: 140, damping: 16, delay: open ? delay : 0 }
                         }
                     >
-                        {/* A separate element, so the float on y never fights the spring on x */}
+                        {/* A separate element, so the idle motion never fights the open/close spring */}
                         <motion.div
                             initial={false}
-                            animate={floating ? { y: ['0%', '-1.5%', '0%'] } : { y: '0%' }}
+                            animate={
+                                floating
+                                    ? {
+                                          y: ['0%', '-1.5%', '0%'],
+                                          x: ['0%', `${-spread * BREATH}%`, `${spread * BREATH}%`, '0%'],
+                                      }
+                                    : { y: '0%', x: '0%' }
+                            }
                             transition={
                                 floating
                                     ? {
-                                          duration: 3 + index * 0.4,
-                                          delay: 0.9 + index * 0.2,
-                                          repeat: Infinity,
-                                          ease: 'easeInOut',
+                                          // Each layer floats on its own cycle, out of step with the others
+                                          y: {
+                                              duration: 3 + index * 0.4,
+                                              delay: 0.9 + index * 0.2,
+                                              repeat: Infinity,
+                                              ease: 'easeInOut',
+                                          },
+                                          // All layers breathe together: squeeze in, burst out, settle
+                                          x: {
+                                              duration: 2.4,
+                                              times: [0, 0.35, 0.7, 1],
+                                              delay: 2,
+                                              repeat: Infinity,
+                                              repeatDelay: 3,
+                                              ease: 'easeInOut',
+                                          },
                                       }
                                     : { duration: 0.3 }
                             }

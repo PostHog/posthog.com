@@ -18,6 +18,8 @@ export type CardStackCarouselProps = {
     className?: string
     /** Optional accessible label */
     ariaLabel?: string
+    /** Format the one-based current index and total for the live counter. */
+    formatCounter?: (current: number, total: number) => React.ReactNode
 }
 
 const STACK_OFFSETS = [-1, 0, 1] as const
@@ -179,6 +181,7 @@ export function CardStackCarousel({
     loop = true,
     className = '',
     ariaLabel = 'Card carousel',
+    formatCounter,
 }: CardStackCarouselProps) {
     const stageRef = useRef<HTMLDivElement>(null)
     const cardWidthRef = useRef(0)
@@ -339,7 +342,7 @@ export function CardStackCarousel({
                 className="text-center text-sm text-secondary pt-3 pb-5 select-none relative z-[60]"
                 aria-live="polite"
             >
-                {current + 1} of {count}
+                {formatCounter ? formatCounter(current + 1, count) : `${current + 1} of ${count}`}
             </div>
 
             <div ref={stageRef} className="relative h-[285px] @md:h-[325px]">
