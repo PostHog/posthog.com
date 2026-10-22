@@ -1,31 +1,28 @@
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import React, { useEffect, useReducer, useRef } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import Link from 'components/Link'
 import { cn } from '../../../../utils'
 import { SOURCES_DOCS_URL, useSourceCountLabel } from '../sourceCount'
-import { transform, useRandomInterval } from '../timeline'
+import { transform, useEventClock, useRandomInterval } from '../timeline'
 import {
-    AmbientShoppers,
+    AmbientRiders,
+    BoardAction,
     BoardRow,
     Origin,
-    CHECKOUT_PATH,
-    STICKER_PATH,
     TICK_MS,
-    YOU,
     emptyBoard,
-    paymentRow,
+    eventRow,
     reduceBoard,
+    ridePaymentRow,
     seedBoard,
     sourceRecord,
-    BIG_ORDER_DELAY_MS,
-    bigOrderRow,
 } from './board'
-import RevenueChart from './RevenueChart'
+import BoxPlotChart from './BoxPlotChart'
 import BoardWindow from './BoardWindow'
-import { captureUserEvents } from './capture'
-import { EVENT_KINDS, EventKind, EventTile } from './eventKinds'
+import { EVENT_KINDS, EventTile } from './eventKinds'
+import { CHAT_BOUNDARIES, CHAT_DONE_AT, CHAT_EVENTS, CHAT_LENGTH_MS, CHAT_RIDER, ChatEvent } from './fetchScript'
+import FetchWindow from './FetchWindow'
 import { SOURCE_AMBIENT_MS, SPOTLIGHT_SOURCES, SourceTile, useSpotlightLogos } from './sources'
-import StoreWindow, { Order } from './StoreWindow'
 
 const AMBIENT_EVENT_MS = { minMs: 700, maxMs: 2200 }
 const ROW_COLUMNS =
@@ -60,19 +57,17 @@ const RowName = ({ origin, logos }: { origin: Origin; logos: (string | undefined
         </>
     )
 
-const EventsTable = ({
+const EventsTable = React.memo(function EventsTable({
     rows,
     now,
     logos,
-    onSource,
     className,
 }: {
     rows: BoardRow[]
     now: number
     logos: (string | undefined)[]
-    onSource: (source: number) => void
     className?: string
-}) => {
+}) {
     const reduceMotion = useReducedMotion()
     const sourceCount = useSourceCountLabel()
     return (
@@ -84,16 +79,7 @@ const EventsTable = ({
                 </>
             }
             aside={SPOTLIGHT_SOURCES.map(({ name }, index) => (
-                <button
-                    key={name}
-                    type="button"
-                    onClick={() => onSource(index)}
-                    title={`Send a ${name} record`}
-                    aria-label={`Send a ${name} record`}
-                    className="rounded transition-transform hover:-translate-y-0.5"
-                >
-                    <SourceTile logo={logos[index]} />
-                </button>
+                <SourceTile key={name} logo={logos[index]} />
             ))}
             className={className}
         >
@@ -117,22 +103,21 @@ const EventsTable = ({
                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                             className={cn(
                                 ROW_COLUMNS,
-                                'border-b border-primary py-1.5',
-                                person === YOU && 'bg-orange/10'
+                                'h-11 border-b border-primary',
+                                person === CHAT_RIDER && 'bg-orange/10'
                             )}
                         >
                             <span className="flex min-w-0 items-center gap-2">
                                 <RowName origin={origin} logos={logos} />
                                 <span className="hidden min-w-0 truncate text-xs text-muted @md:block">{detail}</span>
                             </span>
-                            <span className="truncate font-mono text-[11px] text-secondary">
-                                {person === YOU ? (
-                                    <span className="rounded bg-orange px-1.5 py-px font-sans font-semibold text-white">
-                                        You
-                                    </span>
-                                ) : (
-                                    person
+                            <span
+                                className={cn(
+                                    'truncate font-mono text-[11px]',
+                                    person === CHAT_RIDER ? 'font-semibold text-orange' : 'text-secondary'
                                 )}
+                            >
+                                {person}
                             </span>
                             <span className="text-right font-mono text-[11px] tabular-nums text-muted">
                                 {timeAgo(at, now)}
@@ -152,20 +137,43 @@ const EventsTable = ({
             </footer>
         </BoardWindow>
     )
+})
+
+const chatEventAction = (event: ChatEvent, at: number): BoardAction => {
+    if (event.type === 'generation') return { type: 'generation', samples: event.samples }
+    if (event.type === 'payment')
+        return { type: 'add', row: ridePaymentRow(CHAT_RIDER, at, event.ride.fare, event.ride.dropoff) }
+    return { type: 'add', row: eventRow(event.kind, event.detail, CHAT_RIDER, at) }
+}
+
+const capturedBy = (elapsed: number): number =>
+    CHAT_EVENTS.filter(({ type, at }) => type !== 'generation' && at <= elapsed).length
+
+const usePlayChatEvents = (elapsed: number, dispatch: React.Dispatch<BoardAction>) => {
+    const fired = useRef(0)
+    useEffect(() => {
+        while (fired.current < CHAT_EVENTS.length && CHAT_EVENTS[fired.current].at <= elapsed) {
+            dispatch(chatEventAction(CHAT_EVENTS[fired.current], Date.now()))
+            fired.current += 1
+        }
+    }, [elapsed])
 }
 
 export default function EventBoard(): JSX.Element {
     const rootRef = useRef<HTMLDivElement>(null)
-    const storeRef = useRef<HTMLDivElement>(null)
     const inView = useInView(rootRef, { amount: 0.25 })
-    const inViewRef = useRef(inView)
-    inViewRef.current = inView
     const logos = useSpotlightLogos()
-    const [captured, setCaptured] = useState(0)
     const [board, dispatch] = useReducer(reduceBoard, undefined, emptyBoard)
-    const shoppers = useRef(new AmbientShoppers())
+    const riders = useRef(new AmbientRiders())
+    const elapsed = useEventClock(rootRef, {
+        loopMs: CHAT_LENGTH_MS,
+        boundaries: CHAT_BOUNDARIES,
+        restingMs: CHAT_DONE_AT,
+        loop: false,
+    })
 
-    useEffect(() => dispatch(seedBoard(shoppers.current, Date.now())), [])
+    useEffect(() => dispatch(seedBoard(riders.current, Date.now())), [])
+    usePlayChatEvents(elapsed, dispatch)
 
     useEffect(() => {
         if (!inView) return
@@ -175,80 +183,35 @@ export default function EventBoard(): JSX.Element {
         return () => window.clearInterval(timer)
     }, [inView])
 
-    const emitEvent = useCallback((kind: EventKind, detail: string) => {
-        setCaptured((count) => count + 1)
-        dispatch({
-            type: 'add',
-            row: {
-                at: Date.now(),
-                origin: { type: 'event', kind },
-                detail,
-                person: YOU,
-            },
-        })
-    }, [])
-
-    const sendSource = useCallback(
-        (source: number) => dispatch({ type: 'add', row: sourceRecord(source, Date.now()) }),
-        []
-    )
-
-    const recordPayment = useCallback(
-        (order: Order) => dispatch({ type: 'add', row: paymentRow(YOU, Date.now(), order) }),
-        []
-    )
-
-    useEffect(() => {
-        const region = storeRef.current
-        if (!region) return
-        return captureUserEvents({ region, emit: emitEvent, isActive: () => inViewRef.current })
-    }, [emitEvent])
-
-    const sentPageview = useRef(false)
-    useEffect(() => {
-        if (!inView || sentPageview.current) return
-        sentPageview.current = true
-        emitEvent('pageview', STICKER_PATH)
-    }, [inView])
-
-    const bigOrderPlaced = useRef(false)
-    useEffect(() => {
-        if (!inView || bigOrderPlaced.current) return
-        const timer = window.setTimeout(() => {
-            bigOrderPlaced.current = true
-            dispatch({ type: 'add', row: bigOrderRow(Date.now()) })
-        }, BIG_ORDER_DELAY_MS)
-        return () => window.clearTimeout(timer)
-    }, [inView])
-
-    useRandomInterval(() => dispatch({ type: 'add', row: shoppers.current.next(Date.now()) }), {
+    useRandomInterval(() => dispatch({ type: 'add', row: riders.current.next(Date.now()) }), {
         ...AMBIENT_EVENT_MS,
         active: inView,
     })
-    useRandomInterval(() => sendSource(Math.floor(Math.random() * SPOTLIGHT_SOURCES.length)), {
-        ...SOURCE_AMBIENT_MS,
-        active: inView,
-    })
+    useRandomInterval(
+        () =>
+            dispatch({
+                type: 'add',
+                row: sourceRecord(Math.floor(Math.random() * SPOTLIGHT_SOURCES.length), Date.now()),
+            }),
+        { ...SOURCE_AMBIENT_MS, active: inView }
+    )
 
     return (
         <div ref={rootRef} className="not-prose @container">
             <div className="flex flex-col gap-4 @2xl:grid @2xl:grid-cols-12 @2xl:gap-x-0 @2xl:gap-y-5">
-                <StoreWindow
-                    ref={storeRef}
-                    captured={captured}
-                    onCheckout={() => emitEvent('pageview', CHECKOUT_PATH)}
-                    onPaid={recordPayment}
+                <FetchWindow
+                    elapsed={elapsed}
+                    captured={capturedBy(elapsed)}
                     className="relative z-20 mr-6 @2xl:col-[1/7] @2xl:row-[1] @2xl:-mr-6 @2xl:self-start"
                 />
                 <EventsTable
                     rows={board.rows}
                     now={board.now}
                     logos={logos}
-                    onSource={sendSource}
-                    className="relative z-10 ml-6 @2xl:[&>header]:pl-11 h-[24rem] @2xl:col-[7/13] @2xl:row-[1/3] @2xl:ml-0 @2xl:mt-12 @2xl:h-[26rem]"
+                    className="relative z-10 ml-6 h-[24rem] @2xl:col-[7/13] @2xl:row-[1/3] @2xl:mb-10 @2xl:ml-0 @2xl:mt-12 @2xl:h-auto @2xl:[contain:size] @2xl:[&>header]:pl-11"
                 />
-                <RevenueChart
-                    board={board}
+                <BoxPlotChart
+                    samples={board.samples}
                     className="relative z-30 mr-10 @2xl:col-[1/7] @2xl:row-[2] @2xl:-mr-8 @2xl:ml-10 @2xl:self-start"
                 />
             </div>

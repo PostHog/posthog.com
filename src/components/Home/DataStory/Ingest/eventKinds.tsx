@@ -29,8 +29,6 @@ export const EVENT_KINDS: Record<EventKind, EventKindStyle> = {
     rageclick: { event: '$rageclick', description: 'frustrated clicks', color: '#F54E00', Icon: IconBolt },
 }
 
-export const EVENT_ORDER: EventKind[] = ['pageview', 'autocapture', 'snapshot', 'copy', 'rageclick']
-
 const tileBorder = (color: string): string => `color-mix(in srgb, ${color} 70%, black)`
 
 export const EventTile = ({ kind, className }: { kind: EventKind; className?: string }) => {

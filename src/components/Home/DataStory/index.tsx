@@ -1,7 +1,7 @@
 import React from 'react'
 import Emphasis from './Emphasis'
 import StepFrame from './StepFrame'
-import IngestVariantSwitch from './dev/IngestVariantSwitch'
+import EventBoard from './Ingest/EventBoard'
 import QueryScene from './Query/QueryScene'
 import ActScene from './Act/ActScene'
 import SelfDriveScene from './SelfDrive/SelfDriveScene'
@@ -24,7 +24,7 @@ const STEPS = [
                 CRM, and support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
             </>
         ),
-        Scene: IngestVariantSwitch,
+        Scene: EventBoard,
     },
     {
         title: 'Query the data with your agent',

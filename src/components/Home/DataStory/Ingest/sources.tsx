@@ -4,7 +4,6 @@ import { cn } from '../../../../utils'
 
 interface SpotlightSource {
     name: string
-    record: string
     profileFacts: string[]
 }
 
@@ -13,28 +12,23 @@ export const SOURCE_AMBIENT_MS = { minMs: 2600, maxMs: 5200 }
 export const SPOTLIGHT_SOURCES: SpotlightSource[] = [
     {
         name: 'Stripe',
-        record: 'payments and refunds',
-        profileFacts: ['Paid $49.00 for Pro', 'Upgraded to Pro monthly', 'Invoice #1042 paid'],
+        profileFacts: [],
     },
     {
         name: 'Postgres',
-        record: 'your app tables',
-        profileFacts: ['users.plan = pro', 'workspaces.seats = 4', 'projects.count = 3'],
+        profileFacts: ['rides.status = completed', 'drivers.on_shift = 14', 'rides.squirrel_stops = 2'],
     },
     {
         name: 'Google Ads',
-        record: 'campaigns and spend',
-        profileFacts: ['Clicked "Product analytics for devs"', 'Searched "session replay tool"'],
+        profileFacts: ['Searched "uber for dogs"', 'Clicked "Rides by good dogs"'],
     },
     {
         name: 'Meta Ads',
-        record: 'ad views and spend',
-        profileFacts: ['Saw "Ship faster with flags"', 'Clicked the Hogzilla ad'],
+        profileFacts: ['Saw "Your driver is a good boy"', 'Clicked the golden retriever ad'],
     },
     {
-        name: 'GitHub',
-        record: 'issues and PRs',
-        profileFacts: ['Opened issue #482', 'Commented on PR #1931'],
+        name: 'Zendesk',
+        profileFacts: ['Ticket: "Driver stopped for a squirrel"', 'Ticket: "Can dogs parallel park?"'],
     },
 ]
 
@@ -53,7 +47,7 @@ export function useSpotlightLogos(): (string | undefined)[] {
     )
 }
 
-export const SourceLogo = ({ logo, className }: { logo?: string; className?: string }) =>
+const SourceLogo = ({ logo, className }: { logo?: string; className?: string }) =>
     logo ? <img src={logo} alt="" className={cn('object-contain', className)} /> : null
 
 export const SourceTile = ({ logo, className }: { logo?: string; className?: string }) => (
