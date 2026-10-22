@@ -149,7 +149,6 @@ See [limits and validation](/docs/api/capture-v1#limits-and-validation) for ever
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs.
 - **Timestamps.** SDKs send timestamps with at least millisecond precision and keep any extra precision you provide. They no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
-- **Tracing headers.** Server middleware reads the `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` headers only when you turn it on, because any client can set them. To keep linking backend events to frontend sessions, use `WithCaptureTracingHeaders(true)` in Go, or `trust_tracing_headers=True` (ASGI) or `POSTHOG_MW_TRUST_TRACING_HEADERS` (Django) in Python, where it's been opt-in since `7.68`.
 - **Logs.** Debug logs no longer include event contents, and some log messages changed. Update any alerts that match on old log text.
 
 ## Configuration
