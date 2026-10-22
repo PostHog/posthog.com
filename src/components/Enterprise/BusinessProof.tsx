@@ -66,7 +66,7 @@ const PILLARS: Pillar[] = [
             {
                 title: 'SOC 2 Type 2',
                 detail: 'Audited every year by an external firm. The latest report is public and available via the link above.',
-                href: '/handbook/company/security#soc-2',
+                href: '/docs/privacy/soc2',
             },
             {
                 title: 'Annual third-party penetration testing',
