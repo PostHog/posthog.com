@@ -27,7 +27,7 @@ A table bump moves the ball a little. Three bumps in quick succession **tilt** t
 | **H**, **O**, or **G** lane | 250 | All three lit: 1,000 points and the bonus multiplier goes up by one, to a maximum of 5x |
 | Drop target | 500 | All three down: 5,000 points. The targets stand up again after 1.5 seconds |
 | Ramp | 2,500 × combo | Adds one fuel light. Another ramp within 5 seconds raises the combo, to a maximum of 5x. The third ramp in a combo is **Hyperspace**: 10,000 more points |
-| Launch pad | 1,000 | Holds the ball for 1.2 seconds, then kicks it out |
+| Launch pad | 1,000 | Holds the ball for 1 to 1.8 seconds, then kicks it up into the bumpers at a random angle. A drain in the next 6 seconds gives the ball back |
 | Launch pad with a full fuel tank | 25,000 | Rocket launch: the rank goes up (Cadet to Admiral) and the fuel tank empties |
 
 All points are multiplied by the bonus multiplier. The multiplier goes back to 1x when a ball drains. Each game has three balls, and 150,000 points gives one extra ball. If a ball drains in the first 8 seconds after launch, **ball save** gives it back once. The best score is kept in `localStorage` (`hogball-high-score`), and the sound setting in `hogball-muted`.

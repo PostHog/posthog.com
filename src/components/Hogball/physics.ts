@@ -47,6 +47,7 @@ export type Game = {
     tilted: boolean
     saveTime: number
     saveAvailable: boolean
+    padSave: boolean
     extraBallGiven: boolean
     shake: number
     message: string
@@ -94,8 +95,9 @@ const UP_ANGLE = -0.5
 const FLIPPER_SPEED = 24
 const PLUNGER = { x: 365, y: 596 }
 const HITS_PER_FUEL = 3
-// The launch pad drops the ball into the right inlane, which feeds it to the right flipper
-const HOLE_KICK = { x: 60, y: -240 }
+// The launch pad holds the ball for a random time, then kicks it up into the bumpers at a random angle
+const HOLE_KICK = { x: -180, y: -800, spread: 100 }
+const PAD_SAVE_SECONDS = 6
 const COMBO_SECONDS = 5
 const TILT_LIMIT = 2.6
 const BUMPS: Record<Bump, Point> = { left: { x: 150, y: -60 }, right: { x: -150, y: -60 }, up: { x: 0, y: -200 } }
@@ -204,6 +206,7 @@ export function createGame(): Game {
         tilted: false,
         saveTime: 0,
         saveAvailable: true,
+        padSave: false,
         extraBallGiven: false,
         shake: 0,
         message: 'Welcome aboard, Cadet',
@@ -268,6 +271,7 @@ export function launch(game: Game): void {
     game.ball.vy = -(700 + 800 * game.charge)
     game.charge = 0
     game.state = 'playing'
+    game.padSave = false
     if (game.saveAvailable) game.saveTime = BALL_SAVE_SECONDS
     game.sounds.push('launch')
 }
@@ -292,7 +296,7 @@ export function bump(game: Game, direction: Bump): void {
 }
 
 function enterHole(game: Game) {
-    game.hold = 1.2
+    game.hold = 1 + Math.random() * 0.8
     Object.assign(game.ball, { x: HOLE.x, y: HOLE.y, vx: 0, vy: 0 })
     if (game.tilted) return
     if (game.fuel < MAX_FUEL) {
@@ -356,7 +360,8 @@ function drain(game: Game) {
     game.saveTime = 0
     game.state = 'ready'
     if (saved) {
-        game.saveAvailable = false
+        if (!game.padSave) game.saveAvailable = false
+        game.padSave = false
         game.sounds.push('save')
         say(game, 'Ball saved. Shoot again')
         return
@@ -403,9 +408,12 @@ export function step(game: Game, input: Input, dt: number): void {
     if (game.hold > 0) {
         game.hold -= dt
         if (game.hold <= 0) {
-            ball.vx = HOLE_KICK.x
-            ball.vy = HOLE_KICK.y
+            ball.vx = HOLE_KICK.x + (Math.random() - 0.5) * 2 * HOLE_KICK.spread
+            ball.vy = HOLE_KICK.y + (Math.random() - 0.5) * HOLE_KICK.spread
             game.holeCooldown = 0.6
+            // A drain soon after the kick-out gives the ball back, like ball save, without using up ball save
+            if (game.saveTime <= 0) game.padSave = true
+            game.saveTime = Math.max(game.saveTime, PAD_SAVE_SECONDS)
         }
         return
     }
