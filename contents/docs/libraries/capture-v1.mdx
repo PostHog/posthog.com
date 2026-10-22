@@ -46,7 +46,9 @@ These changes apply to every SDK on capture v1. Your SDK's migration guide cover
 
 ### Every event needs its own UUID
 
-SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use a new one for every event. Don't reuse an order ID, request ID, or message ID across events. PostHog rejects a whole batch that contains the same UUID twice.
+SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use a new one for every event. Don't reuse an order ID, request ID, or message ID across events. If one request repeats a UUID, PostHog keeps the first event with it and drops the rest, and your SDK reports the dropped copies.
+
+<!-- TODO(capture-v1): keep this only once posthog #122305 is deployed and each SDK reports `duplicates_dropped`. -->
 
 ### Event options replace legacy option properties
 
