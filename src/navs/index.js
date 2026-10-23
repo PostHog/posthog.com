@@ -904,6 +904,10 @@ export const handbookSidebar = [
                         name: 'Writing AI skills',
                         url: '/handbook/engineering/ai/writing-skills',
                     },
+                    {
+                        name: 'Report and digest best practices',
+                        url: '/handbook/engineering/ai/report-best-practices',
+                    },
                 ],
             },
             {
