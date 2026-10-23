@@ -59,7 +59,7 @@ Engage with users. Look for cues that signal gaps that Error Tracking can fill:
 * Visiting the error tracking product page (https://posthog.com/error-tracking) and clicking "Get started - free"
 * Reading blog posts about error tracking:
   * https://posthog.com/blog/posthog-vs-sentry
-  * https://posthog.com/blog/best-sentry-alternatives
+  * https://posthog.com/compare/best-sentry-alternatives
 * Asking PostHog AI about error tracking
 * Asking MCP about error tracking
 

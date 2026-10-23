@@ -348,6 +348,10 @@
             "destination": "/compare/posthog-vs-fullstory"
         },
         {
+            "source": "/blog/best-sentry-alternatives",
+            "destination": "/compare/best-sentry-alternatives"
+        },
+        {
             "source": "/blog/posthog-vs-growthbook",
             "destination": "/compare/posthog-vs-growthbook"
         },
