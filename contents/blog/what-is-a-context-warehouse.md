@@ -98,14 +98,14 @@ The context warehouse today is deliberately not a full data stack: land your eve
 
 | Direction | What it means |
 | :---- | :---- |
-| Making our Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/context-warehouse/warehouse) and be the first to hear about it. |
+| Making our Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/warehouse) and be the first to hear about it. |
 | Deeper modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
 | More sources | Expanding [Warehouse Sources](/context-warehouse/sources) coverage so fewer teams need a custom sync to get their systems in. |
 | More of the loop exposed to agents | As the [self-driving product](/blog/self-driving-product) loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
 
 ## Try it yourself
 
-[Join the waitlist](/context-warehouse/warehouse) for the warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
+[Join the waitlist](/warehouse) for the warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
 
 ## FAQ
 

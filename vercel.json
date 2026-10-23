@@ -6748,7 +6748,7 @@
         },
         {
             "source": "/data-stack/managed-warehouse",
-            "destination": "/context-warehouse/warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-stack/:path*",
@@ -6756,7 +6756,11 @@
         },
         {
             "source": "/context-warehouse/managed-warehouse",
-            "destination": "/context-warehouse/warehouse"
+            "destination": "/warehouse"
+        },
+        {
+            "source": "/context-warehouse/warehouse",
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
