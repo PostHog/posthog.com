@@ -41,7 +41,7 @@ We want team offsites to be social events and encourage you to optimize offsites
 - They're places where there are already a lot of PostHog people that you can hang out with. If most teams do their offsites there, you're much more likely to run into even more people
   - The more we have random cross-pollination, the more ambitious ideas we'll come up with and the more successful we'll be.
   - These hubs are places where you can get to know people outside your current team, which means you'll be more effective at getting stuff done.
-- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently. This doesn't happen on its own though - founders are usually pitching or in calls, and other PostHog teams are only around if your offsites overlap. Put a specific slot in the agenda, like a lunch, a Q&A, or a shared hackathon session, with other Hogpatch residents or an overlapping team, otherwise it won't happen.
 
 
 Traveling to new places is a perk for PostHog employees. At the same time, going to the hubs, especially for newer joiners, can be beneficial to you as an employee and to the company as a whole. We trust you to make the right decision here, balancing personal preference with what's best for the company. 
@@ -97,7 +97,7 @@ Ideas for the agenda:
 
 Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
-The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
+The budget for these trips is up to $2,000 per person in total. Treat this as a guide rather than a hard cap. Hub offsites where several people fly in from overseas will usually go over it - a five-night hotel stay in SF alone has come to around $3,000 per person - so flag the expected overage to Kendal while you're planning rather than discovering it afterwards. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
