@@ -224,7 +224,7 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-PostHog's API endpoints use trailing slashes (like `/e/`). Without this setting, Next.js redirects these requests by removing the trailing slash, which breaks event capture.
+PostHog API paths end with a slash, such as `/e/` and `/flags/`. Without this setting, Next.js answers these requests with a `308` redirect to the same path without the slash. Browsers follow the redirect, so events still arrive, but each request takes an extra round trip.
 
 </Step>
 
