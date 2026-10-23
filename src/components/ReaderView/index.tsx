@@ -47,6 +47,7 @@ import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
+import MoreCustomerStories from './MoreCustomerStories'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 import { shouldNavigateMenuTab } from './tabNavigation'
@@ -1932,6 +1933,8 @@ function ReaderViewContent({
                                                 <MDXProvider components={mdxComponents}>
                                                     <MDXRenderer>{body.content}</MDXRenderer>
                                                 </MDXProvider>
+
+                                                {isCustomerPage && <MoreCustomerStories currentSlug={appWindow.path} />}
                                             </div>
                                         ) : (
                                             children
