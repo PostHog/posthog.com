@@ -29,6 +29,10 @@ PostHog Cloud users can create, manage, and join organizations without limits.
 
 Organization members have different access levels based on their membership type. See more in our [access control docs](/docs/settings/access-control).
 
+### Organization ID
+
+Every organization has a unique ID. You can find and copy it in [**Settings** > **Organization** > **General**](https://app.posthog.com/settings/organization-details#organization-id). This ID is required for organization-scoped [API](/docs/api) endpoints and is useful when filing support requests.
+
 ### Adding new members
 
 By default, any organization member can create and view organization invites. Admins and owners can restrict this by disabling **Members can invite** in organization settings – when disabled, only admins and owners can create and view invites. Members can only see invites at or below their own membership level. Invites are valid **for 3 days** after creation and **only for the specified email**. Emails can be resent by removing and re-adding the invitee.
