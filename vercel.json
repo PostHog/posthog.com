@@ -1179,6 +1179,26 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/posthog-desktop/skills:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/self-driving:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/git-github-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/mcp-servers:ext(\\.md)?",
+            "destination": "/docs/model-context-protocol:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/posthog-desktop:ext(\\.md)?",
             "destination": "/docs/self-driving:ext?",
             "statusCode": 301
