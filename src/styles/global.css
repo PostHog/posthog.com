@@ -488,7 +488,19 @@
     }
 
     .light[data-wallpaper='keyboard-garden'] [data-app='AppWindow'] {
-        --bg: 209 219 188; /* #d1dbbc */
+        --bg: 211 218 198; /* #d3dac6 */
+    }
+
+    .light[data-wallpaper='hogzilla'] [data-app='AppWindow'] {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='startup-monopoly'] [data-app='AppWindow'] {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
+    .light[data-wallpaper='office-party'] [data-app='AppWindow'] {
+        --bg: 223 222 212; /* #dfded4 */
     }
 
     .dark [data-scheme='primary'] {
