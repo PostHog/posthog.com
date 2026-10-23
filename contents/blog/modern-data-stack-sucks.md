@@ -113,7 +113,7 @@ We want to make it easy to evaluate whether products are working or not. Key to 
 
 To change this, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
 
-- Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
+- Receive data from your app(s) and site(s) with our [SDKs](/docs/getting-started/install?tab=sdks)
 - Receive data from sources like [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
 - Export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
 

@@ -103,7 +103,7 @@ If you would like to dive even deeper the related source code can be found in th
 
 Once data reaches the CDP ingestion worker, we start the first of steps that augment or transform our raw event data before it gets written into ClickHouse.
 
-This first step runs any [transformations](/docs/cdp) you have enabled. This is the only chance for transformations to modify or exclude an event before it is written into ClickHouse.
+This first step runs any [transformations](/docs/data-pipelines) you have enabled. This is the only chance for transformations to modify or exclude an event before it is written into ClickHouse.
 
 ### 2. Person processing
 
@@ -193,7 +193,7 @@ This is our last chance to change anything about the event, which can include:
 
 ### 4. Writing to ClickHouse
 
-We combine the fully-processed event and the person, send it to a separate Kafka topic that ClickHouse consumes from, and then write to the [events table](/docs/data-warehouse/sources/posthog).
+We combine the fully-processed event and the person, send it to a separate Kafka topic that ClickHouse consumes from, and then write to the [events table](/docs/data-pipelines/sources/posthog).
 
 > **Further reading:** 
 > - [How data is stored in ClickHouse](/docs/how-posthog-works/clickhouse)
@@ -201,6 +201,6 @@ We combine the fully-processed event and the person, send it to a separate Kafka
 
 ### 5. CDP destinations
 
-The final step in the ingestion pipeline is triggering any [CDP destinations](/docs/cdp) that are enabled (e.g. webhooks, Hubspot, Slack).
+The final step in the ingestion pipeline is triggering any [CDP destinations](/docs/data-pipelines) that are enabled (e.g. webhooks, Hubspot, Slack).
 
 Since this event has already been written to ClickHouse, it is effectively immutable — destinations cannot modify events. Any transformations that need to modify or exclude events must run in [step 1](#1-cdp-transformations).

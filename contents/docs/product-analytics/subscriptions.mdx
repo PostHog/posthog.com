@@ -30,7 +30,7 @@ Subscriptions enable you to send [insights](/docs/product-analytics/insights) or
 
 <FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
-> **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
+> **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/data-pipelines/destinations) to learn how to send event or action data to webhooks, Slack, and more.
 
 ## Viewing all subscriptions
 
@@ -124,6 +124,19 @@ You can then select any channel the app has access to and set a frequency. **Pri
   classes="rounded"
   alt="Slack channel selection"
 />
+
+### How Slack reports are formatted
+
+Slack subscription reports use native Slack formatting to preserve the structure of your data:
+
+- **Tables** - Data tables render with proper column alignment and spacing
+- **Headings and lists** - Structured content maintains its hierarchy and readability
+- **Code blocks** - Any code in your report preserves its formatting
+- **Charts** - Insight charts appear in a compact image gallery with direct links to each insight in PostHog
+
+For large reports, PostHog automatically splits the content across multiple messages while keeping tables and code blocks intact.
+
+AI-generated summaries also render with full formatting, including clickable links to relevant insights and dashboards.
 
 ## Asking @PostHog about subscription reports
 
