@@ -2,8 +2,17 @@
 title: Taggers
 ---
 
-Taggers automatically classify and label generations so you can filter, group, and analyze your LLM traffic by the categories that matter to your product.
+<CalloutBox icon="IconWarning" title="Taggers are moving into evaluations" type="caution">
 
-## Documentation coming soon
+Taggers are being merged into [evaluations](/docs/ai-evals). New tagging should use an evaluation with a [categorical output](/docs/ai-evals#choosing-an-output-type). <!-- VERIFY with Bernat: timeline, and whether existing taggers migrate automatically -->
 
-We're still writing the full guide for taggers. In the meantime, see the [AI Evals overview](/docs/ai-evals) to learn how taggers fit alongside evaluations and trace reviews.
+</CalloutBox>
+
+Taggers label generations with categories you define, such as the product area or intent a conversation is about, so you can filter and group your LLM traffic by them.
+
+Evaluations now do the same job. To label generations:
+
+1. Go to **AI Evals** > **Evaluations** and click **Create evaluation**.
+2. Choose **LLM as a judge**, or **Code-based (Hog)** if a deterministic rule can pick the label.
+3. Set **Output type** to **Categorical**, and add a key and label for each category.
+4. Choose **One** or **Multiple** categories per result.

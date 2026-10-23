@@ -26,8 +26,8 @@ Clusters automatically group similar LLM [traces](/docs/ai-observability/traces)
 
 ## How clusters work
 
-1. PostHog analyzes your recent traces or generations from the past 7 days. This requires at least 1,000 traces or 1,000 generations in that window (see the requirements above); projects below this volume won't generate clusters.
-2. Similar items are grouped together based on their content.
+1. Summarize each trace or generation from the past 7 days, subject to the volume threshold. Raw traces are long and noisy, and grouping summaries gives better clusters than grouping the raw text.
+2. Convert each summary into an embedding, a list of numbers that captures its meaning, and group items whose embeddings are close together.
 3. AI generates a title and description for each cluster.
 4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.
 
@@ -116,6 +116,8 @@ Below the scatter plot, a grid of cards shows each cluster with:
 Expand a card to preview the traces or generations in that cluster.
 
 Items that don't fit any cluster appear in a special **Outliers** cluster with a dashed border.
+
+**Tip:** Check the **Outliers** cluster regularly. Items there don't fit any existing group yet, so they're often use cases you didn't plan for.
 
 ## Cluster detail page
 

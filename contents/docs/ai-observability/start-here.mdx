@@ -63,6 +63,8 @@ Prefer to do it by hand? Choose your platform below:
 />
 
 PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
+
+Once you have enough traffic, [clusters](/docs/ai-observability/clusters) group similar conversations so you can see what users ask for without reading every trace.
   
 <OSButton variant="primary" asLink to="/docs/ai-observability/generations">
   Learn about generations
@@ -87,6 +89,8 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   alt="AI Observability evaluations"
   classes="rounded"
 />
+
+To test changes before they reach production, save failing traces to a [dataset](/docs/ai-evals/datasets) and rerun them in CI.
 
   <OSButton variant="primary" asLink to="/docs/ai-evals">
     Measure LLM performance

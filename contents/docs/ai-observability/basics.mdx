@@ -88,6 +88,14 @@ Here's a breakdown of this hierarchy:
 | [Generation](/docs/ai-observability/generations) | An LLM call, tracked as `$ai_generation` events | Sending a prompt to Claude |
 | [Embedding](/docs/ai-observability/embeddings) | Converts text into vectors | Vectorizing documents for RAG |
 
+If your app has a chat interface, think of it this way:
+
+- **Generation** – One call to the model.
+- **Trace** – One turn in the conversation: a user message and your app's reply. A simple feature makes one generation per turn. An agent runs a loop of generations and tool calls (spans) before it replies, and all of them belong to the same trace.
+- **Session** – The whole conversation, made of many turns.
+
+The same structure applies to apps that aren't chats, such as background agents or document pipelines.
+
 <CalloutBox icon="IconInfo" title="A session here usually means a conversation" type="fyi">
 
 In AI Observability, a session (`$ai_session_id`) typically represents a single **conversation** – one thread of back-and-forth turns with your assistant. This is different from a standard PostHog [session](/docs/data/sessions) (`$session_id`), like the ones you see in [Session replay](/docs/session-replay), which represents one continuous visit to your app.
