@@ -1,0 +1,355 @@
+---
+title: Offline evals
+---
+
+<CalloutBox icon="IconFlask" title="Offline evals are rolling out" type="fyi">
+
+We're currently rolling out offline evals to users. If you don't see them in your project yet, [contact us](https://app.posthog.com/ai-evals#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) to request access.
+
+</CalloutBox>
+
+Offline evals test your AI agent against a set of known inputs. Run them locally or in your CI to check whether a prompt, model, or code change improves your answers or breaks something that worked before.
+
+Your code runs your agent and scores its outputs. The PostHog SDK uploads the results so you can compare runs, follow scores over time, and inspect the answers behind a regression. You can use your existing test framework and evaluators.
+
+[Online evaluations](/docs/ai-evals) score production traffic. Offline evals give you a repeatable set of cases to check before you ship. Use failures you find in production to grow that test set.
+
+## How offline evals work
+
+Each run follows four steps:
+
+1. **Choose test cases** – Each case has an input and, optionally, an expected output. Keep them in your code, a file, or a PostHog [dataset](/docs/ai-evals/datasets).
+2. **Run your agent** – Send each input through your agent, including the tools it uses. An _experiment_ is one run of these cases. An _experiment item_ holds one case's input, actual output, and expected output.
+3. **Score the output** – Your evaluator calculates a result for each item. For example, it might check whether the agent called the right tool or ask an LLM to judge its answer.
+4. **Upload the results** – Send each score to PostHog, then mark the experiment complete. PostHog displays the items and scores together.
+
+A _scorer_ defines what a result means: its name, value type, and passing rule. It doesn't run your evaluation code. For example, a boolean scorer named **Task completed correctly** records whether your evaluator returned `true` or `false`.
+
+## Run your first experiment
+
+This example tests an agent against a set of requests and expected outcomes. Connect your own agent and evaluator using these placeholder functions:
+
+-   `run_agent(input)` / `runAgent(input)` runs your agent and returns its output.
+-   `evaluate_answer(input, output, expected)` / `evaluateAnswer(input, output, expected)` checks whether the agent achieved the expected outcome and returns a boolean. This can use an LLM judge or your existing evaluation code.
+
+These functions belong to your code, not the PostHog SDK.
+
+### 1. Install the SDK and configure access
+
+Use Python 3.10 or later, or a server-side JavaScript/TypeScript environment.
+
+```bash file=Python
+pip install --upgrade posthog
+```
+
+```bash file=TypeScript
+pnpm add @posthog/ai
+```
+
+Create a [personal API key](/docs/api#authentication) with access to your project and these scopes:
+
+| Scope                                | Used for                                                     |
+| ------------------------------------ | ------------------------------------------------------------ |
+| `offline_evaluation_ingestion:write` | Creating experiments, uploading results, and completing runs |
+| `llm_analytics:read`                 | Reading an existing scorer                                   |
+| `llm_analytics:write`                | Creating the scorer in the next step                         |
+| `dataset:read`                       | Reading a PostHog dataset, if you use one later              |
+
+Set these environment variables in your terminal or your CI secrets:
+
+```bash
+export POSTHOG_PERSONAL_API_KEY="<your_personal_api_key>"
+export POSTHOG_PROJECT_ID="<your_project_id>"
+export POSTHOG_HOST="https://us.posthog.com"
+```
+
+Find your project ID in [project settings](https://app.posthog.com/settings/project). For an EU project, set `POSTHOG_HOST` to `https://eu.posthog.com`. These examples use the app API host and a secret API key, rather than the public project token used to capture analytics events. Keep the key on your server or in your CI.
+
+### 2. Create a scorer
+
+Run this once to create the **Task completed correctly** scorer. A value of `true` passes, and `false` fails.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+import os
+from posthog.ai.evaluations import OfflineEvaluations
+
+with OfflineEvaluations(
+    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
+    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    host=os.environ["POSTHOG_HOST"],
+) as evaluations:
+    scorer = evaluations.scorers.create(
+        name="Task completed correctly",
+        kind="boolean",
+        config={"true_is_failure": False},
+    )
+    print(scorer.id)
+```
+
+```typescript file=TypeScript
+import { OfflineEvaluations } from "@posthog/ai/evaluations"
+
+const evaluations = new OfflineEvaluations({
+    projectId: Number(process.env.POSTHOG_PROJECT_ID),
+    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    host: process.env.POSTHOG_HOST!,
+})
+
+try {
+    const scorer = await evaluations.scorers.create({
+        name: "Task completed correctly",
+        kind: "boolean",
+        config: { trueIsFailure: false },
+    })
+    console.log(scorer.id)
+} finally {
+    evaluations.close()
+}
+```
+
+</MultiLanguage>
+
+Results use the scorer version ID: `scorer.current_version_id` in Python or `scorer.currentVersionId` in TypeScript. You can save this ID in your code and update it when you change the scorer. Or fetch the scorer by `scorer.id` at the start of each experiment to use its current version.
+
+The examples below fetch the current version. Save the printed scorer ID as `POSTHOG_SCORER_ID`:
+
+```bash
+export POSTHOG_SCORER_ID="<scorer_id>"
+```
+
+Reuse this scorer across experiments. Creating a new scorer with the same name creates a separate scorer, which splits its history.
+
+### 3. Run the cases and upload scores
+
+The following code creates an experiment, runs each test case through your agent, and uploads one score per item. Replace the example cases with requests and expected outcomes for your agent.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+import os
+from posthog.ai.evaluations import EvaluationItem, OfflineEvaluations
+
+cases = [
+    {
+        "id": "refund_eligibility",
+        "input": "Am I eligible for a refund on my last order?",
+        "expected": "Check the order and refund policy before answering.",
+    },
+    {
+        "id": "delivery_status",
+        "input": "Where is my order?",
+        "expected": "Look up the order and report its current delivery status.",
+    },
+]
+
+with OfflineEvaluations(
+    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
+    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    host=os.environ["POSTHOG_HOST"],
+) as evaluations:
+    scorer = evaluations.scorers.get(os.environ["POSTHOG_SCORER_ID"])
+    experiment = evaluations.create_experiment(
+        name="Support agent baseline",
+        suite_key="support-agent",
+        run_source="local",
+        expected_item_count=len(cases),
+        expected_result_count=len(cases),
+    )
+
+    for case in cases:
+        output = run_agent(case["input"])
+        passed = evaluate_answer(case["input"], output, case["expected"])
+        item = EvaluationItem(
+            case_key=case["id"],
+            input=case["input"],
+            output=output,
+            expected_output=case["expected"],
+        )
+        experiment.upload_result(
+            item=item,
+            scorer_version_id=scorer.current_version_id,
+            value=passed,
+        )
+
+    experiment.complete()
+    print(f"Completed experiment: {experiment.id}")
+```
+
+```typescript file=TypeScript
+import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations"
+
+const cases = [
+    {
+        id: "refund_eligibility",
+        input: "Am I eligible for a refund on my last order?",
+        expected: "Check the order and refund policy before answering.",
+    },
+    {
+        id: "delivery_status",
+        input: "Where is my order?",
+        expected: "Look up the order and report its current delivery status.",
+    },
+]
+
+const evaluations = new OfflineEvaluations({
+    projectId: Number(process.env.POSTHOG_PROJECT_ID),
+    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    host: process.env.POSTHOG_HOST!,
+})
+
+try {
+    const scorer = await evaluations.scorers.get(process.env.POSTHOG_SCORER_ID!)
+    const experiment = await evaluations.createExperiment({
+        name: "Support agent baseline",
+        suiteKey: "support-agent",
+        runSource: "local",
+        expectedItemCount: cases.length,
+        expectedResultCount: cases.length,
+    })
+
+    for (const testCase of cases) {
+        const output = await runAgent(testCase.input)
+        const passed = await evaluateAnswer(testCase.input, output, testCase.expected)
+        const item = new EvaluationItem({
+            caseKey: testCase.id,
+            input: testCase.input,
+            output,
+            expectedOutput: testCase.expected,
+        })
+        await experiment.uploadResult({
+            item,
+            scorerVersionId: scorer.currentVersionId,
+            value: passed,
+        })
+    }
+
+    await experiment.complete()
+    console.log(`Completed experiment: ${experiment.id}`)
+} finally {
+    evaluations.close()
+}
+```
+
+</MultiLanguage>
+
+The results depend on your agent and evaluator. After changing a prompt, model, or tool, run the same cases again under a new experiment name to compare the scores.
+
+The SDK sends results directly to PostHog. There's no analytics client to initialize or event queue to flush. Closing the client releases connections; it doesn't complete the experiment. Always call `complete()` after uploading the results. If your run stops early, call `experiment.fail()` to mark it failed.
+
+## Review and compare experiments
+
+Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments). Select an experiment to inspect its results:
+
+-   Each row is an experiment item, and each scorer has its own column.
+-   Open an item to inspect its input, expected output, actual output, and score details.
+-   Follow **Score trends** across experiments, then open a scorer's history to investigate a change.
+
+Use the same test cases and scorer versions when you compare an agent change. Changing the cases or passing threshold can change your scores even when your agent hasn't changed.
+
+In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
+
+Completing an experiment means the run finished, not that every case passed. To block a deployment, check scores against your own threshold in the test script and exit with a failure code.
+
+## Use a PostHog dataset (optional)
+
+You can keep all your test cases in code, files, or another system. A PostHog [dataset](/docs/ai-evals/datasets) is another option if you want to manage cases in PostHog or save them from production traces.
+
+The example below fetches the cases once before starting the experiment. It keeps the items locally and records which dataset revision they came from.
+
+To try it, set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorer, agent, evaluator, and final `complete()` call.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+snapshot = evaluations.datasets.snapshot(os.environ["POSTHOG_DATASET_ID"])
+items = list(snapshot.iter_items())
+
+experiment = evaluations.create_experiment(
+    name="Support agent from a dataset",
+    suite_key="support-agent",
+    dataset_revision_id=snapshot.revision_id,
+    run_source="local",
+)
+
+for row in items:
+    output = run_agent(row.input)
+    passed = evaluate_answer(row.input, output, row.expected_output)
+    item = EvaluationItem.from_dataset_item(row, output=output)
+    experiment.upload_result(
+        item=item,
+        scorer_version_id=scorer.current_version_id,
+        value=passed,
+    )
+```
+
+```typescript file=TypeScript
+const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
+const items = []
+for await (const row of snapshot) {
+    items.push(row)
+}
+
+const experiment = await evaluations.createExperiment({
+    name: "Support agent from a dataset",
+    suiteKey: "support-agent",
+    datasetRevisionId: snapshot.revisionId,
+    runSource: "local",
+})
+
+for (const row of items) {
+    const output = await runAgent(row.input)
+    const passed = await evaluateAnswer(row.input, output, row.expectedOutput)
+    const item = EvaluationItem.fromDatasetItem(row, { output })
+    await experiment.uploadResult({
+        item,
+        scorerVersionId: scorer.currentVersionId,
+        value: passed,
+    })
+}
+```
+
+</MultiLanguage>
+
+`from_dataset_item` / `fromDatasetItem` copies the input, expected output, metadata, and dataset item version into the experiment item. Supply the output from the new run. The dataset's `source_output` is a record of an earlier answer, not the output you're evaluating now.
+
+By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript.
+
+## Add more scores
+
+Use a separate scorer for each thing you want to measure, such as correctness, relevance, or whether the agent selected the right tool.
+
+| Scorer type | Result value            | Example                                                 |
+| ----------- | ----------------------- | ------------------------------------------------------- |
+| Boolean     | `true` or `false`       | Did the agent complete the task correctly?              |
+| Numeric     | A number                | How relevant is the answer, from zero to five?          |
+| Categorical | A list of category keys | Which failure types occurred, such as `["wrong_tool"]`? |
+
+Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Their configuration defines valid values and, optionally, a passing rule. Each result references an immutable scorer version, so changing a scorer's configuration doesn't reinterpret earlier results.
+
+For each additional score, call `upload_result()` / `uploadResult()` with the same `EvaluationItem` and the additional scorer's version ID. Reuse the item object so all scores belong to the same execution. If you set an expected result count, include every item's scores in that count.
+
+Your evaluator can use a code check, an LLM judge, or another evaluation library. Run it in your own environment and upload its result. Use `reasoning` to include an explanation and `application_trace_id` / `applicationTraceId` on the item to link the run to an [AI Observability trace](/docs/ai-observability/traces).
+
+### Failed checks and evaluator errors
+
+A failed quality check is still a valid score. For example, upload `value=False` / `value: false` when the agent doesn't complete the task correctly. The default result status, `ok`, means the evaluator produced a score; it doesn't mean the item passed.
+
+If the evaluator can't produce a score, upload `status="error"` / `status: "error"`, omit `value`, and include an `error_message` / `errorMessage`. Use `skipped` for a check you didn't run, or `not_applicable` when a scorer doesn't apply to an item.
+
+## Use MCP
+
+All offline evals SDK operations are also available through the [PostHog MCP server](/docs/model-context-protocol). You can ask your agent to set up scorers, manage datasets, and work with your offline experiments.
+
+## Data retention
+
+Experiment item payloads have a 30-day retention period. This includes the input, actual output, expected output, and payload metadata you upload for each item. Keep your own copy if you need to inspect those payloads after 30 days.
+
+This retention policy applies to the experiment's copy of the item payload.
+
+## Pricing
+
+Each item metric counts as one AI Observability event. An item metric is one scorer's result for one experiment item. For example, 100 items with three scores each count as 300 events.
+
+Offline evals share the [AI Observability event pricing and free tier](/pricing) with your other AI Observability events. They don't have a separate free allowance.
