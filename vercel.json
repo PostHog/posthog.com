@@ -642,7 +642,7 @@
         },
         {
             "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
-            "destination": "/docs/self-driving",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
@@ -1184,6 +1184,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/posthog-desktop/:path(.*).md",
+            "destination": "/docs/self-driving.md",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/posthog-desktop/:path*",
             "destination": "/docs/self-driving",
             "statusCode": 301
@@ -1639,6 +1644,11 @@
         {
             "source": "/docs/posthog-code:ext(\\.md)?",
             "destination": "/docs/self-driving:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/:path(.*).md",
+            "destination": "/docs/self-driving.md",
             "statusCode": 301
         },
         {
