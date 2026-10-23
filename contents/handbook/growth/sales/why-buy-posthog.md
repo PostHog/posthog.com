@@ -84,9 +84,10 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 Product marketers on the [Developer Marketing team](/teams/developer-marketing) make sales enablement material for the products they own. Current material:
 
-- [Data foundations](/handbook/growth/sales/data-foundations) – how to sell the data warehouse and the rest of the data stack, with the training deck and a recording of the session
+- [Data foundations](/handbook/growth/sales/data-foundations) – how to sell the data warehouse and the rest of the data stack, with a recording of the training session
+- [Data foundations training deck](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit) – by Lizzie Epton
+- [Sales training deck](https://www.figma.com/deck/yHjzK2vmjWdbkcNA9Ee4ph) – by Sara Miteva
 - [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
-- TODO: Sara Miteva to add the title and link of their deck
 
 If you want material for a different product, ask in the **#team-marketing** Slack channel.
 
