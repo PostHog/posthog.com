@@ -127,10 +127,6 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         min-height: 100%;
                         align-items: start;
                     }
-                    @container (max-width: 720px) {
-                        .se-spread { grid-template-columns: 1fr; }
-                        .se-plates { position: static; }
-                    }
                     .se-plates {
                         display: flex;
                         flex-direction: column;
@@ -138,6 +134,12 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         position: sticky;
                         top: clamp(1.25rem, 4cqw, 3rem);
                         align-self: start;
+                    }
+                    /* Same specificity as the sticky rule above, so this has to follow it.
+                       Otherwise the plates stay stuck after the spread stacks to one column. */
+                    @container (max-width: 720px) {
+                        .se-spread { grid-template-columns: 1fr; }
+                        .se-plates { position: static; }
                     }
                     .se-plate { margin: 0; }
                     .se-plate-label {
