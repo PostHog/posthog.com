@@ -21,6 +21,64 @@ import AstroInstall from "../integrate/_snippets/install-astro.mdx"
 
 <AstroInstall />
 
+## Node.js server context and traces
+
+For on-demand rendering with `@astrojs/node` in middleware mode, use the shared Node SDK on your Express server. The browser setup above does not add server context.
+
+Reuse one server `posthog-node` client. Add `PostHogContextSpanProcessor` from `posthog-node/otel` to your application's existing OpenTelemetry provider. Keep your exporter, sampler, and other processors. Load your tracing setup, including HTTP and Express instrumentation, before importing the server modules below.
+
+Configure the Node adapter for middleware mode:
+
+```js
+import { defineConfig } from 'astro/config'
+import node from '@astrojs/node'
+
+export default defineConfig({
+    output: 'server',
+    adapter: node({ mode: 'middleware' }),
+})
+```
+
+Place the request middleware before the generated Astro handler. Pass the same client through the adapter's public `locals` argument so pages, endpoints, actions, and Astro middleware can reuse it:
+
+```js
+import express from 'express'
+import { handler as ssrHandler } from './dist/server/entry.mjs'
+import { setupExpressRequestContext } from 'posthog-node'
+import posthog from './posthog.server.mjs'
+
+const app = express()
+app.use(express.static('dist/client'))
+setupExpressRequestContext(posthog, app)
+app.use((req, res, next) => ssrHandler(req, res, next, { posthog }))
+app.listen(4321)
+```
+
+The middleware reads PostHog tracing headers. An existing application identity takes precedence over the browser fallback. The headers are untrusted analytics context and must not be used for authentication or authorization. Only requests that carry the headers receive browser IDs; standard browser document navigations do not gain fetch/XHR-added tracing headers.
+
+The optional processor adds `sessionId` and `posthogDistinctId` to recording application spans. Explicit canonical attributes keep their values. At request entry, it also fills missing IDs on the nearest recording HTTP server ancestor through parent objects it has observed. A sampler-dropped intermediate span breaks that verified chain, so the earlier server span stays unchanged. New recording spans inside the request still receive context.
+
+Express owns the request lifetime. Context stays active until the response finishes or closes, including while a response body streams. Do not end it when Astro middleware's `next()` promise returns: the body can still be streaming. New spans from detached work after response completion have no request IDs. A background job that needs IDs must use a new explicit context.
+
+Astro can handle errors before they reach Express's error middleware. To capture errors thrown by `next()`, use the same client from your existing Astro middleware chain:
+
+```js
+import { defineMiddleware } from 'astro:middleware'
+
+export const onRequest = defineMiddleware(async ({ locals }, next) => {
+    try {
+        return await next()
+    } catch (error) {
+        locals.posthog.captureException(error)
+        throw error
+    }
+})
+```
+
+Keep your other middleware when adding error capture. Capture errors from later streaming work where they occur, because `next()` may already have returned.
+
+This setup covers the Node adapter's middleware mode. Prerendered pages and static assets use the browser integration; standalone and edge deployments need their own verified context and response lifetime setup. See [Astro's Node adapter guide](https://docs.astro.build/en/guides/integrations-guide/node/#middleware) and the [Node.js tracing guide](/docs/distributed-tracing/installation/nodejs).
+
 ## Identifying users
 
 import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'

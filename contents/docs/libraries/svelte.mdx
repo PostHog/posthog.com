@@ -45,6 +45,66 @@ import SvelteInstallServer from "../integrate/_snippets/install-svelte-server.md
 
 <SvelteInstallServer />
 
+## Server span context
+
+For a Node server with SvelteKit 2.31.0 or later, use the same server client for PostHog events and OpenTelemetry span context. This setup needs the optional `posthog-node/otel` entrypoint and `ContextOptions.signal` support.
+
+Enable [SvelteKit server tracing and instrumentation](https://svelte.dev/docs/kit/observability). In SvelteKit 3, configure `tracing: { server: true }` in the `sveltekit(...)` Vite plugin options. In SvelteKit 2.31, configure `kit.experimental.tracing.server` and `kit.experimental.instrumentation.server` in `svelte.config.js`.
+
+Add `new PostHogContextSpanProcessor(posthog)` to the span processors in your existing OpenTelemetry setup in `src/instrumentation.server.js`. Import the processor from `posthog-node/otel` and the client from `$lib/server/posthog`. Keep your existing provider, exporters, and sampler. The processor fills missing `posthogDistinctId` and `sessionId` attributes on child spans.
+
+Add this server hook. If you already have hooks, add this scope around their request work and add the capture call to your existing `handleError` function. An authentication hook can establish the verified identity with `posthog.withContext` before this scope starts. Header IDs are analytics context and must not authorize access.
+
+```js file=src/hooks.server.js
+import { context, trace, isSpanContextValid } from '@opentelemetry/api';
+import { enrichCurrentSpan } from 'posthog-node/otel';
+import { posthog } from '$lib/server/posthog';
+
+function tracingId(value) {
+  return value?.replace(/[\x00-\x1F\x7F-\x9F]/g, '').trim().slice(0, 1000) || undefined;
+}
+
+export async function handle({ event, resolve }) {
+  const controller = new AbortController();
+  const existing = posthog.getContext();
+  const data = {
+    distinctId: existing?.distinctId ?? tracingId(event.request.headers.get('x-posthog-distinct-id')),
+    sessionId: existing?.sessionId ?? tracingId(event.request.headers.get('x-posthog-session-id')),
+  };
+  const spanContext = event.tracing.root.spanContext();
+  event.locals.posthogError = {
+    distinctId: data.distinctId,
+    properties: {
+      ...(data.sessionId ? { $session_id: data.sessionId } : {}),
+      ...(event.tracing.enabled && isSpanContextValid(spanContext)
+        ? { $trace_id: spanContext.traceId, $span_id: spanContext.spanId }
+        : {}),
+    },
+  };
+
+  return posthog.withContext(data, async () => {
+    try {
+      if (event.tracing.enabled) {
+        context.with(trace.setSpan(context.active(), event.tracing.root), () => enrichCurrentSpan(posthog));
+      }
+      enrichCurrentSpan(posthog);
+      return await resolve(event);
+    } finally {
+      controller.abort();
+    }
+  }, { fresh: true, signal: controller.signal });
+}
+
+export function handleError({ error, event, message }) {
+  posthog.captureException(error, event.locals.posthogError?.distinctId, event.locals.posthogError?.properties);
+  return { message };
+}
+```
+
+SvelteKit starts its request root span before this hook. The two `enrichCurrentSpan` calls fill missing IDs on that public root span and on the active span. Explicit span attributes remain unchanged. A missing or blank header adds no ID.
+
+The scope ends when `resolve(event)` settles. Work that continues after that point, including a streamed response body, has no PostHog request context. Pass explicit context to separate jobs when needed. The saved values on `event.locals` let `handleError` attribute a hook error after the scope has ended. Errors before this hook runs have no saved request identity. Add the `posthogError` field to `App.Locals` if your app uses TypeScript.
+
 ## Feature flags
 
 To use client-side feature flags, import PostHog into your Svelte component and check if the feature is enabled (while ensuring the code only runs in the browser).
@@ -69,20 +129,15 @@ To use client-side feature flags, import PostHog into your Svelte component and 
 {/if}
 ```
 
-To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled. 
+To use server-side feature flags, import PostHog into your SvelteKit `load` function and check if the feature is enabled.
 
 ```js file=routes/+page.server.js
-import { PostHog } from 'posthog-node';
-
-const client = new PostHog(
-  '<ph_project_token>',
-  { host: '<ph_client_api_host>' }
-);
+import { posthog } from '$lib/server/posthog';
 
 export async function load() {
   const distinctId = 'distinct_id_of_the_user';
   
-  const megaFeature = await client.isFeatureEnabled(
+  const megaFeature = await posthog.isFeatureEnabled(
     'mega-feature',
     distinctId
   );
@@ -118,4 +173,3 @@ Alternatively, the following tutorials can help you get started:
 - [How to set up Svelte analytics, feature flags, and more](/tutorials/svelte-analytics)
 - [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)
 - [How to set up surveys in Svelte](/tutorials/svelte-surveys)
-

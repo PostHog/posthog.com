@@ -651,7 +651,7 @@ Keep one `AsyncPosthog` client for the lifetime of your application. Use buffere
 
 ## Django
 
-See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. The [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) adds request properties and authenticated user identity to events captured during a request. You can also opt in to browser session and distinct ID headers.
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. The [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) adds request properties and authenticated user identity to events captured during a request. With SDK 7.71.0 or later, it also reads browser session and distinct ID headers by default. Set `POSTHOG_MW_CAPTURE_TRACING_HEADERS = False` to disable header extraction.
 
 ## ASGI request middleware
 
@@ -676,7 +676,7 @@ app.add_middleware(PosthogASGIMiddleware, client=posthog)
 
 The middleware's `capture_exceptions` option defaults to `None`, which inherits the client's `enable_exception_autocapture` setting. Set it to `True` or `False` to override the client. Use `request_filter` to skip selected requests and `extra_properties` to add properties from the ASGI scope. Both callbacks can be synchronous or asynchronous.
 
-The middleware ignores `X-PostHog-Distinct-ID` and `X-PostHog-Session-ID` by default because clients can control them. Set `trust_tracing_headers=True` only when you want to accept these headers as analytics context. Don't use them for authentication or authorization.
+With SDK 7.71.0 or later, the middleware reads `X-PostHog-Distinct-ID` and `X-PostHog-Session-ID` by default. Set `capture_tracing_headers=False` to disable header extraction. Clients can control these headers. Use them only as analytics context, never for authentication or authorization.
 
 To instrument another ASGI framework or a raw ASGI app, wrap the application directly:
 

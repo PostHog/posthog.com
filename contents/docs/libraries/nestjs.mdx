@@ -141,6 +141,16 @@ The interceptor uses an RxJS `catchError` operator to observe exceptions without
 
 For more details on Error Tracking setup, see the [NestJS Error Tracking installation guide](/docs/error-tracking/installation/nestjs).
 
+## Trace context
+
+Register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Use the same client passed to `PostHogInterceptor`. Keep your provider, exporter, and sampler.
+
+The interceptor adds missing `sessionId` and `posthogDistinctId` attributes to an active request span after reading the request headers. The processor adds them to child spans when they start. Existing canonical attributes take precedence. Missing IDs stay absent.
+
+With the Express and Fastify HTTP adapters, the context expires when the response finishes or closes. Observable completion alone does not end a response that is still active. Existing spans keep their IDs; new spans in detached work after expiry omit them. Background jobs need explicit context transfer.
+
+This setup was verified for HTTP on both adapters. WebSocket, GraphQL, and custom adapters need separate verification.
+
 ## Next steps
 
 To read more about how to integrate specific PostHog features into NestJS, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:

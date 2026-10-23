@@ -64,6 +64,34 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 Tracing headers are client-controlled analytics context, not authentication or authorization. Pass an authenticated `distinct_id` explicitly for security-sensitive server-side decisions.
 
+## Trace context
+
+To link application spans to people and sessions, install the optional `opentelemetry` dependency and add this entry before the export processors in your existing OpenTelemetry `:processors` list:
+
+```elixir
+{PostHog.OpenTelemetry.ContextSpanProcessor, %{supervisor_name: PostHog}}
+```
+
+Use your named PostHog supervisor in place of `PostHog` if needed. Keep your existing provider, exporter, and sampler. The processor supports OpenTelemetry SDK 1.7.0 or later. It adds missing `sessionId` and `posthogDistinctId` attributes from the current process's PostHog context when spans start. Existing canonical attributes take precedence.
+
+The PostHog plug sets context for child spans. Phoenix with Cowboy starts its request span before the endpoint plugs run. To also link that earlier span, change your existing Cowboy instrumentation setup to capture only the two PostHog headers:
+
+```elixir
+:opentelemetry_cowboy.setup(%{
+  request_headers: ["x-posthog-session-id", "x-posthog-distinct-id"]
+})
+
+OpentelemetryPhoenix.setup(adapter: :cowboy2)
+```
+
+Configure instrumentation once, before the endpoint starts. Keep other existing options in the same configuration. Do not capture all request headers. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK so it sends these headers to your selected backend hostname.
+
+Cowboy supplies the captured headers as initial span attributes. The processor sanitizes them and uses them only when no process identity or explicit canonical span attribute is present. Without header capture, an earlier request span stays unchanged. Missing IDs stay absent.
+
+This request path was tested with Phoenix 1.8.15, `opentelemetry_phoenix` 2.0.1, and `opentelemetry_cowboy` 1.0.0. The same setup has not been verified with Bandit. HTTP request context does not transfer into LiveView processes automatically.
+
+Context is process-local and ends when the request process exits. Clear it before you reuse the same process for unrelated work. Tasks and other processes need their own explicit context. Spans keep the IDs captured when they start. No trace provider, exporter, session, or recording is created by this bridge.
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"

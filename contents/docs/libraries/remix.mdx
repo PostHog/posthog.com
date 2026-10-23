@@ -27,11 +27,11 @@ npm install --save posthog-js @posthog/react
 
 Start by setting `posthog-js` and `@posthog/react` as external packages in your `vite.config.ts` file.
 
-```
-
 import CspAllowancesCallout from "../_snippets/csp-allowances-callout.mdx"
 
-<CspAllowancesCallout />ts
+<CspAllowancesCallout />
+
+```ts
 // vite.config.ts
 // ... imports and rest of config
 
@@ -114,6 +114,51 @@ export default function App() {
 ```
 
 When you run your app now, PostHog will automatically capture events and pageviews. You can also use the other features of PostHog by importing and using the `usePostHog` hook in your components.
+
+## Node.js server context and traces
+
+For a Remix server on Node.js, use the `@remix-run/express` adapter and the shared Node SDK request middleware. The browser setup above does not add server context.
+
+Reuse one `posthog-node` client from your server setup. Add `PostHogContextSpanProcessor` from `posthog-node/otel` to your application's existing OpenTelemetry provider. Keep your exporter, sampler, and other processors. Load your tracing setup, including HTTP and Express instrumentation, before importing the server modules below.
+
+```ts
+import express from 'express'
+import { createRequestHandler } from '@remix-run/express'
+import { setupExpressRequestContext } from 'posthog-node'
+import posthog from './posthog.server.js'
+import * as build from './build/server/index.js'
+
+const app = express()
+
+setupExpressRequestContext(posthog, app)
+
+app.all('*', createRequestHandler({
+    build,
+    getLoadContext: () => ({ posthog }),
+}))
+```
+
+Place the middleware before `createRequestHandler`. This covers document requests, loader data requests, actions, resource routes, server rendering, and streamed responses. Wrapping only `entry.server` misses loader and action requests that do not render a document.
+
+The middleware reads the PostHog tracing headers and fills missing context. An existing application identity takes precedence over the browser value. Use your existing authentication setup for application identity. These headers are analytics context and must not be used for authentication or authorization.
+
+Only requests that carry the headers receive browser context. Fetch/XHR instrumentation does not add these headers to standard browser document navigations, so initial server rendering can have no browser IDs.
+
+The optional processor adds `sessionId` and `posthogDistinctId` to application spans. At request entry, it can also fill missing IDs on the nearest recording HTTP server span through parent objects observed by the processor. Explicit canonical attributes keep their values. If the sampler drops an intermediate span, the processor cannot verify the earlier server ancestor and leaves it unchanged. Recording spans created within the request still receive context.
+
+Request context stays active until the Express response finishes or closes. Async work that produces the response, including streaming work, can use it. New spans from detached work after that point have no request IDs. Use a new explicit context for a background job that needs its own IDs.
+
+Remix handles many loader and action errors inside its router, so an Express error handler alone does not capture all of them. To capture these errors, use Remix's `handleError` export in `app/entry.server.tsx` with the same server client:
+
+```ts
+import posthog from '../posthog.server.js'
+
+export function handleError(error: unknown) {
+    posthog.captureException(error)
+}
+```
+
+This setup was checked with Remix 2.17.5 and its Node.js Express adapter. Other adapters and runtimes need their own context and lifetime setup. See the [Node.js tracing guide](/docs/distributed-tracing/installation/nodejs) for the shared processor setup and limits.
 
 ## Identifying users
 

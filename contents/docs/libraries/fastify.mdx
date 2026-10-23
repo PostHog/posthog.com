@@ -84,6 +84,53 @@ If authentication runs later, pass the verified ID directly to `captureException
 
 Do not use `x-posthog-distinct-id` as proof of identity. Tracing headers are client-controlled analytics values, and this example does not read them. To link Session Replay, you can explicitly add a validated `sessionId` to the context. Never use it for authorization.
 
+## Trace context
+
+This optional setup requires the Node SDK release with `posthog-node/otel` and `ContextOptions.signal`. The base SDK version stated above does not include these APIs.
+
+To add browser session and person IDs to application spans, register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Reuse the `posthog` client above and keep the existing exporter and sampler.
+
+Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Replace the earlier `onRequest` hook with this Node.js setup:
+
+```js
+import { enrichCurrentSpan } from 'posthog-node/otel'
+
+function readTracingId(value) {
+    if (typeof value !== 'string') return undefined
+    return value.replace(/[\x00-\x1f\x7f-\x9f]/g, '').trim().slice(0, 1000) || undefined
+}
+
+app.addHook('onRequest', (request, reply, done) => {
+    const controller = new AbortController()
+    const complete = () => {
+        controller.abort()
+        reply.raw.removeListener('finish', complete)
+        reply.raw.removeListener('close', complete)
+        request.raw.removeListener('aborted', complete)
+    }
+    reply.raw.once('finish', complete)
+    reply.raw.once('close', complete)
+    request.raw.once('aborted', complete)
+
+    posthog.withContext(
+        {
+            distinctId: request.user?.id ?? readTracingId(request.headers['x-posthog-distinct-id']),
+            sessionId: readTracingId(request.headers['x-posthog-session-id']),
+            properties: { $request_method: request.method, request_id: request.id },
+        },
+        () => {
+            enrichCurrentSpan(posthog)
+            done()
+        },
+        { fresh: true, signal: controller.signal }
+    )
+})
+```
+
+Keep this hook after authentication and before routes, in the same Fastify scope. The helper adds missing `sessionId` and `posthogDistinctId` attributes to an active request span. The processor adds them to child spans when they start. Explicit canonical attributes take precedence; missing IDs stay absent.
+
+The signal ends context when the response finishes, closes, or the request is aborted. Do not abort when `done()` returns: the handler can still be running. Existing spans keep their IDs; new spans in detached work after expiry omit them. Background jobs need their own explicit context. Keep your existing error and shutdown handlers.
+
 ## Capture events
 
 Add this route before `app.listen()` to capture an event for an authenticated request. The event inherits the verified identity and request properties from `withContext`.
