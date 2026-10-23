@@ -338,16 +338,18 @@ A failed quality check is still a valid score. For example, upload `value=False`
 
 If the evaluator can't produce a score, upload `status="error"` / `status: "error"`, omit `value`, and include an `error_message` / `errorMessage`. Use `skipped` for a check you didn't run, or `not_applicable` when a scorer doesn't apply to an item.
 
+## Use MCP
+
+All offline evals SDK operations are also available through the [PostHog MCP server](/docs/model-context-protocol). You can ask your agent to set up scorers, manage datasets, and work with your offline experiments.
+
 ## Data retention
 
 Experiment item payloads have a 30-day retention period. This includes the input, actual output, expected output, and payload metadata you upload for each item. Keep your own copy if you need to inspect those payloads after 30 days.
 
-This retention policy applies to the experiment's copy of the item payload. It doesn't apply to items stored in a PostHog dataset.
+This retention policy applies to the experiment's copy of the item payload.
 
 ## Pricing
 
 Each item metric counts as one AI Observability event. An item metric is one scorer's result for one experiment item. For example, 100 items with three scores each count as 300 events.
 
 Offline evals share the [AI Observability event pricing and free tier](/pricing) with your other AI Observability events. They don't have a separate free allowance.
-
-Any model calls you make to run your agent or an LLM judge are billed separately by your model provider.
