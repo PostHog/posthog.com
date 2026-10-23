@@ -1,6 +1,19 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { ballInPlunger, bump, createGame, HOLE, launch, MAX_FUEL, RAMP_GATE, step } from './physics.ts'
+import {
+    advanceMission,
+    ballInPlunger,
+    bump,
+    CHUTE,
+    createGame,
+    HOLE,
+    launch,
+    MAX_FUEL,
+    MISSIONS,
+    RAMP_GATE,
+    step,
+    WORMHOLE,
+} from './physics.ts'
 import type { Game, Input } from './physics.ts'
 
 const idle: Input = { left: false, right: false, plunger: false }
@@ -69,8 +82,21 @@ test('the launch pad holds the ball, then kicks it out', () => {
     run(game, 0.5)
     assert.deepEqual([game.ball.x, game.ball.y], [HOLE.x, HOLE.y])
     assert.equal(game.score, 1000)
+    run(game, 1.6)
+    assert.ok(Math.hypot(game.ball.x - HOLE.x, game.ball.y - HOLE.y) > 20, 'ball stays in the launch pad')
+})
+
+test('a drain soon after the launch pad kick-out does not lose the ball or use up ball save', () => {
+    const game = createGame()
+    game.state = 'playing'
+    game.saveAvailable = true
+    Object.assign(game.ball, { x: HOLE.x, y: HOLE.y - 4, vx: 0, vy: 50 })
+    run(game, 2)
+    assert.ok(game.saveTime > 0)
+    Object.assign(game.ball, { x: 185, y: 600, vx: 0, vy: 400 })
     run(game, 1)
-    assert.ok(game.ball.x < HOLE.x - 40, `ball stays at x=${game.ball.x}`)
+    assert.equal(game.balls, 3)
+    assert.ok(game.saveAvailable)
 })
 
 test('a full fuel tank turns the launch pad into a rocket launch', () => {
@@ -80,7 +106,6 @@ test('a full fuel tank turns the launch pad into a rocket launch', () => {
     Object.assign(game.ball, { x: HOLE.x, y: HOLE.y - 4, vx: 0, vy: 50 })
     run(game, 0.1)
     assert.equal(game.rockets, 1)
-    assert.equal(game.rank, 1)
     assert.equal(game.fuel, 0)
     assert.equal(game.score, 25000)
 })
@@ -139,4 +164,72 @@ test('too many table bumps tilt the table, and the drain clears the tilt', () =>
     run(game, 10, () => ({ left: true, right: true, plunger: false }))
     assert.ok(!game.tilted)
     assert.equal(game.balls, 2)
+})
+
+test('a ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: 40, y: 440, vx: 0, vy: -600 })
+    let top = 0
+    run(game, 1.5, (g) => {
+        top = Math.max(top, g.ball.z)
+        return idle
+    })
+    assert.ok(top > 0, 'ball never went onto the ramp')
+    assert.equal(game.combo, 0)
+    assert.equal(game.ramp, null)
+})
+
+test('missions complete in order, and every two missions give a promotion', () => {
+    const game = createGame()
+    game.state = 'playing'
+    for (let n = 0; n < MISSIONS[0].goal; n++) advanceMission(game, MISSIONS[0].kind)
+    assert.equal(game.missionsDone, 1)
+    assert.equal(game.mission, 1)
+    assert.equal(game.rank, 0)
+    assert.equal(game.score, 20000)
+    advanceMission(game, MISSIONS[0].kind === MISSIONS[1].kind ? 'hole' : MISSIONS[0].kind)
+    assert.equal(game.missionProgress, 0)
+    for (let n = 0; n < MISSIONS[1].goal; n++) advanceMission(game, MISSIONS[1].kind)
+    assert.equal(game.rank, 1)
+})
+
+test('the wormhole holds the ball, then sends it out of one of the two holes', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: WORMHOLE.x, y: WORMHOLE.y - 4, vx: 0, vy: 50 })
+    run(game, 0.3)
+    assert.deepEqual([game.ball.x, game.ball.y], [WORMHOLE.x, WORMHOLE.y])
+    assert.ok(game.score >= 2500)
+    run(game, 2)
+    const fromPad = Math.hypot(game.ball.x - HOLE.x, game.ball.y - HOLE.y)
+    const fromWormhole = Math.hypot(game.ball.x - WORMHOLE.x, game.ball.y - WORMHOLE.y)
+    assert.ok(fromPad > 15 && fromWormhole > 15, 'ball stays in a hole')
+})
+
+test('a ball that goes up through the flapper falls into the black hole, then the plunger fires it out', () => {
+    const game = createGame()
+    game.state = 'playing'
+    Object.assign(game.ball, { x: 334, y: CHUTE.gateY + 20, vx: 0, vy: -500 })
+    run(game, 0.2)
+    assert.equal(game.holeExit, 'plunger')
+    assert.deepEqual([game.ball.x, game.ball.y], [CHUTE.hole.x, CHUTE.hole.y])
+    assert.equal(game.score, 7500)
+    run(game, 1.6)
+    assert.ok(game.ball.y < 400, `ball stays at y=${game.ball.y}`)
+    assert.equal(game.balls, 3)
+})
+
+test('a ball that comes down from behind the on-ramp does not roll through it', () => {
+    for (const x of [82, 88, 94, 100]) {
+        const game = createGame()
+        game.state = 'playing'
+        Object.assign(game.ball, { x, y: 120, vx: 0, vy: 250 })
+        let through = false
+        run(game, 1, (g) => {
+            if (!g.ramp && g.ball.x > 80 && g.ball.x < 102 && g.ball.y > 185 && g.ball.y < 212) through = true
+            return idle
+        })
+        assert.ok(!through, `ball from x=${x} went through the ramp`)
+    }
 })

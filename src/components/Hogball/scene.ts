@@ -7,9 +7,11 @@ import {
     BufferGeometry,
     CanvasTexture,
     CatmullRomCurve3,
+    CurvePath,
     CircleGeometry,
     Color,
     CylinderGeometry,
+    LineCurve3,
     DirectionalLight,
     DoubleSide,
     ExtrudeGeometry,
@@ -43,6 +45,8 @@ import {
     HEIGHT,
     HOLE,
     MAX_FUEL,
+    CHUTE,
+    WORMHOLE,
     POST,
     RAMP_LENGTH,
     RAMP_PATH,
@@ -70,6 +74,8 @@ const FLOOR_SCALE = 1.5
 const CAMERA_PITCH = (56 * Math.PI) / 180
 const BUMPER_COLORS = [RED, BLUE, PURPLE]
 const SPARKS = 160
+// The floor lights change slowly, so the floor texture does not need a redraw every frame
+const FLOOR_FRAME_SECONDS = 1 / 24
 
 const chrome = () => new MeshStandardMaterial({ color: '#dfe3f5', metalness: 1, roughness: 0.2 })
 const plastic = (color: string, emissive = 0.25) =>
@@ -181,6 +187,7 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     sun.shadow.mapSize.set(2048, 2048)
     Object.assign(sun.shadow.camera, { left: -280, right: 280, top: 380, bottom: -380, near: 100, far: 1400 })
     sun.shadow.bias = -0.0005
+    sun.shadow.normalBias = 0.6
     scene.add(sun)
     for (const [color, x, y] of [
         [PURPLE, 110, 190],
@@ -227,8 +234,11 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     }
 
     const rail = chrome()
+    // Slingshot edges get a rubber ring below, not a rail. A rail in the same place as the slingshot side
+    // makes the two surfaces flicker.
+    const slingPoints = new Set(SLINGSHOTS.flat())
     for (const wall of WALLS) {
-        if (wall.kick) continue
+        if (wall.kick || (slingPoints.has(wall.a) && slingPoints.has(wall.b))) continue
         const length = Math.hypot(wall.b.x - wall.a.x, wall.b.y - wall.a.y)
         const piece = box(length + 3, WALL_HEIGHT, 5, rail)
         piece.position.set(X((wall.a.x + wall.b.x) / 2), WALL_HEIGHT / 2, Z((wall.a.y + wall.b.y) / 2))
@@ -242,11 +252,12 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
         body.position.set(X(0), 0, Z(0))
         body.castShadow = true
         scene.add(body)
-        const length = Math.hypot(tip.x - top.x, tip.y - top.y)
-        const band = box(length, WALL_HEIGHT + 2, 4, rubber)
-        band.position.set(X((tip.x + top.x) / 2), (WALL_HEIGHT + 2) / 2, Z((tip.y + top.y) / 2))
-        band.rotation.y = -Math.atan2(tip.y - top.y, tip.x - top.x)
-        scene.add(band)
+        const outline = new CurvePath<Vector3>()
+        const corners = [top, bottom, tip, top].map((p) => new Vector3(X(p.x), WALL_HEIGHT / 2, Z(p.y)))
+        corners.slice(1).forEach((corner, i) => outline.add(new LineCurve3(corners[i], corner)))
+        const ring = new Mesh(new TubeGeometry(outline, 90, 3, 10, false), rubber)
+        ring.castShadow = true
+        scene.add(ring)
     }
 
     const post = new Mesh(new CylinderGeometry(6, 6, 18, 20), plastic(RED, 0.5))
@@ -288,6 +299,17 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     pad.rotation.x = -Math.PI / 2
     pad.position.set(X(HOLE.x), 1, Z(HOLE.y))
     scene.add(pad)
+    // The one-way flapper in front of the black hole. It swings up when the ball goes through.
+    const flapper = new Group()
+    const flap = box(CHUTE.right - CHUTE.left - 4, 12, 2, plastic(RED, 0.4))
+    flap.position.y = -6
+    flapper.add(flap)
+    flapper.position.set(X((CHUTE.left + CHUTE.right) / 2), 13, Z(CHUTE.gateY))
+    scene.add(flapper)
+    const wormhole = new Mesh(new TorusGeometry(WORMHOLE.radius + 2, 2.4, 12, 40), plastic(PURPLE, 1.2))
+    wormhole.rotation.x = -Math.PI / 2
+    wormhole.position.set(X(WORMHOLE.x), 1, Z(WORMHOLE.y))
+    scene.add(wormhole)
 
     const flippers = [0, 1].map(() => {
         const group = new Group()
@@ -419,11 +441,14 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     let previousTargets = [false, false, false]
     let previousCombo = 0
 
+    let lastFloor = -Infinity
+
     const render = (game: Game, time: number, rocketProgress: number) => {
         const dt = Math.min(0.05, Math.max(0, time - lastTime))
         lastTime = time
 
-        if (floorContext) {
+        if (floorContext && time - lastFloor >= FLOOR_FRAME_SECONDS) {
+            lastFloor = time
             floorContext.setTransform(FLOOR_SCALE, 0, 0, FLOOR_SCALE, 0, 0)
             drawFloor(floorContext, game, time)
             floorTexture.needsUpdate = true
@@ -452,6 +477,7 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
         })
         previousTargets = game.targets.map((target) => target.down)
 
+        flapper.rotation.x = -(game.flap / 0.4) * 1.3
         const full = game.fuel >= MAX_FUEL
         padMaterial.emissiveIntensity = full ? 1.5 + Math.sin(time * 10) : 0.2
 
@@ -525,6 +551,8 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
             for (const texture of [floorTexture, ballTexture, rocketMaterial.map, environment]) texture?.dispose()
             pmrem.dispose()
             renderer.dispose()
+            // Free the WebGL context at once. Browsers allow only a few at a time.
+            renderer.forceContextLoss()
         },
     }
 }

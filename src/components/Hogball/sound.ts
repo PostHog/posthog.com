@@ -39,6 +39,14 @@ const SOUNDS: Record<Sound | 'flipper', Note[]> = {
         { from: 1047, at: 0.3, length: 0.1 },
         { from: 1319, at: 0.4, length: 0.35 },
     ],
+    mission: [
+        { from: 523, length: 0.12 },
+        { from: 784, at: 0.12, length: 0.12 },
+        { from: 1047, at: 0.24, length: 0.12 },
+        { from: 784, at: 0.36, length: 0.12 },
+        { from: 1047, at: 0.48, length: 0.4 },
+    ],
+    wormhole: [{ from: 1200, to: 80, length: 0.7, wave: 'sine', volume: 0.08 }],
     drain: [{ from: 420, to: 70, length: 0.6, wave: 'triangle' }],
     over: [
         { from: 392, length: 0.2, wave: 'triangle' },

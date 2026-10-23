@@ -9,11 +9,20 @@ import { PANEL_WIDTH, STRIP_HEIGHT, drawPanel, drawStrip, messageOf } from './pa
 import { createTable } from './scene'
 import type { Table } from './scene'
 import { chargeUp, play, stopCharge, unlockAudio } from './sound'
+import { cleanInitials, randomPilot } from './pilots'
+import type { Leader } from './pilots'
 
 const STEP = 1 / 480
 const HIGH_SCORE_KEY = 'hogball-high-score'
 const MUTED_KEY = 'hogball-muted'
+const PILOT_KEY = 'hogball-pilot'
+const INITIALS_KEY = 'hogball-initials'
+const LEADERBOARD_SIZE = 10
+const LEADERBOARD_URL = '/api/hogball-leaderboard'
 const ROCKET_SECONDS = 1.6
+// Without focus the game pauses and redraws only a few times a second, so the lights still blink
+const IDLE_FRAME_MS = 250
+const PANEL_FRAME_MS = 100
 // The same keys as the original Windows game
 const KEYS: Record<string, keyof Input> = { KeyZ: 'left', Slash: 'right', Space: 'plunger' }
 const BUMP_KEYS: Record<string, Bump> = { KeyX: 'left', Period: 'right', ArrowUp: 'up' }
@@ -45,8 +54,44 @@ export default function Hogball(): JSX.Element {
     const startedRef = useRef(0)
     const bestRef = useRef(0)
     const mutedRef = useRef(false)
+    const focusedRef = useRef(false)
     const [status, setStatus] = useState<Status>(() => statusOf(gameRef.current))
     const [muted, setMuted] = useState(false)
+    const pilotRef = useRef('')
+    const leadersRef = useRef<Leader[]>([])
+    const [pilot, setPilot] = useState('')
+    const [leaders, setLeaders] = useState<Leader[]>([])
+    const entryRef = useRef<HTMLFormElement>(null)
+    const [entry, setEntry] = useState<number | null>(null)
+    const [initials, setInitials] = useState('')
+
+    const showLeaders = (next: Leader[]) => {
+        leadersRef.current = next
+        setLeaders(next)
+    }
+
+    // A new score takes a minute to reach the leaderboard, so show it at once as a pending row
+    const loadLeaders = (pending?: Leader) =>
+        fetch(LEADERBOARD_URL)
+            .then((response) => (response.ok ? response.json() : null))
+            .then((data: { leaders?: Leader[] } | null) => {
+                const list = data?.leaders || []
+                const known =
+                    pending &&
+                    list.some(
+                        (l) => l.initials === pending.initials && l.name === pending.name && l.score >= pending.score
+                    )
+                const next = pending && !known ? [...list, pending].sort((a, b) => b.score - a.score) : list
+                showLeaders(next.slice(0, LEADERBOARD_SIZE))
+            })
+            .catch(() => undefined)
+
+    const changePilot = () => {
+        pilotRef.current = randomPilot()
+        setPilot(pilotRef.current)
+        localStorage.setItem(PILOT_KEY, pilotRef.current)
+        tableRef.current?.focus()
+    }
 
     const newGame = () => {
         gameRef.current = createGame()
@@ -86,6 +131,10 @@ export default function Hogball(): JSX.Element {
         bestRef.current = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0
         mutedRef.current = localStorage.getItem(MUTED_KEY) === 'true'
         setMuted(mutedRef.current)
+        pilotRef.current = localStorage.getItem(PILOT_KEY) || randomPilot()
+        localStorage.setItem(PILOT_KEY, pilotRef.current)
+        setPilot(pilotRef.current)
+        loadLeaders()
         const images = { ball: image(ballSvg), rocket: image(rocketSvg) }
         let table: Table
         try {
@@ -99,6 +148,9 @@ export default function Hogball(): JSX.Element {
         let last = performance.now()
         let spare = 0
         let rocketAt = -Infinity
+        let lastDraw = 0
+        let lastPanel = 0
+        let onScreen = true
 
         // The panel goes to the right of the table in a wide window, and above it in a narrow one
         const layout = () => {
@@ -124,20 +176,27 @@ export default function Hogball(): JSX.Element {
             })
             panelCanvas.width = Math.round(panelWidth * dpr)
             panelCanvas.height = Math.round(panelHeight * dpr)
+            lastPanel = 0
             if (sceneWidth > 0 && sceneHeight > 0) table.resize(sceneWidth, sceneHeight, dpr)
         }
         layout()
         const observer = new ResizeObserver(layout)
         observer.observe(container)
+        const visibility = new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting))
+        visibility.observe(container)
 
         const tick = (now: number) => {
             const game = gameRef.current
-            spare = Math.min(spare + (now - last) / 1000, 0.1)
+            const active = focusedRef.current && document.visibilityState === 'visible'
+            spare = active ? Math.min(spare + (now - last) / 1000, 0.1) : 0
             last = now
             while (spare >= STEP) {
                 step(game, inputRef.current, STEP)
                 spare -= STEP
             }
+            frame = requestAnimationFrame(tick)
+            if (!onScreen || (!active && now - lastDraw < IDLE_FRAME_MS)) return
+            lastDraw = now
             const charging = inputRef.current.plunger && ballInPlunger(game) && game.state !== 'over'
             if (charging && !mutedRef.current) chargeUp(game.charge)
             else stopCharge()
@@ -148,18 +207,19 @@ export default function Hogball(): JSX.Element {
             game.sounds.length = 0
 
             table.render(game, now / 1000, (now - rocketAt) / 1000 / ROCKET_SECONDS)
-            const panel = panelCanvas.getContext('2d')
+            const panel = now - lastPanel >= PANEL_FRAME_MS ? panelCanvas.getContext('2d') : null
             if (panel) {
+                lastPanel = now
                 panel.setTransform(1, 0, 0, 1, 0, 0)
                 panel.clearRect(0, 0, panelCanvas.width, panelCanvas.height)
                 if (wide) {
                     const scale = panelCanvas.width / PANEL_WIDTH
                     panel.setTransform(scale, 0, 0, scale, 0, 0)
-                    drawPanel(panel, game, bestRef.current, images.rocket)
+                    drawPanel(panel, game, bestRef.current, images.rocket, pilotRef.current, leadersRef.current)
                 } else {
                     const scale = panelCanvas.width / WIDTH
                     panel.setTransform(scale, 0, 0, scale, 0, 0)
-                    drawStrip(panel, game)
+                    drawStrip(panel, game, pilotRef.current)
                 }
             }
             setStatus((previous) => {
@@ -170,7 +230,6 @@ export default function Hogball(): JSX.Element {
                     ? previous
                     : next
             })
-            frame = requestAnimationFrame(tick)
         }
         frame = requestAnimationFrame(tick)
 
@@ -182,6 +241,7 @@ export default function Hogball(): JSX.Element {
         return () => {
             cancelAnimationFrame(frame)
             observer.disconnect()
+            visibility.disconnect()
             window.removeEventListener('mouseup', releaseMouse)
             stopCharge()
             table.dispose()
@@ -201,10 +261,34 @@ export default function Hogball(): JSX.Element {
             high_score: best,
             rockets: game.rockets,
             rank: RANKS[game.rank],
+            missions: game.missionsDone,
+            player_name: pilotRef.current,
             duration_seconds: Math.round((Date.now() - startedRef.current) / 1000),
         })
         startedRef.current = 0
+        const board = leadersRef.current
+        if (game.score > 0 && (board.length < LEADERBOARD_SIZE || game.score > board[board.length - 1].score)) {
+            setInitials(localStorage.getItem(INITIALS_KEY) || '')
+            setEntry(game.score)
+        }
     }, [status.state])
+
+    // A score that makes the all-time top 10 asks for the player's initials, like an arcade machine
+    const submitInitials = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (entry === null || initials.length !== 3) return
+        posthog?.capture('hogball_score_submitted', {
+            score: entry,
+            player_initials: initials,
+            player_name: pilotRef.current,
+        })
+        localStorage.setItem(INITIALS_KEY, initials)
+        loadLeaders({ initials, name: pilotRef.current, score: entry, pending: true })
+        setEntry(null)
+        tableRef.current?.focus()
+    }
+
+    const inEntry = (target: EventTarget) => !!entryRef.current?.contains(target as Node)
 
     const hold = (key: keyof Input) => ({
         onPointerDown: (e: React.PointerEvent) => {
@@ -232,6 +316,7 @@ export default function Hogball(): JSX.Element {
                 className="relative min-h-[480px] flex-1 select-none overflow-hidden rounded-md border border-primary outline-none focus-visible:ring-2"
                 style={{ touchAction: 'none', backgroundColor: '#07081a' }}
                 onKeyDown={(e) => {
+                    if (inEntry(e.target)) return
                     const key = KEYS[e.nativeEvent.code]
                     const direction = BUMP_KEYS[e.nativeEvent.code]
                     if (!key && !direction && e.nativeEvent.code !== 'F2') return
@@ -244,6 +329,7 @@ export default function Hogball(): JSX.Element {
                     if (e.nativeEvent.code === 'F2') newGame()
                 }}
                 onKeyUp={(e) => {
+                    if (inEntry(e.target)) return
                     const key = KEYS[e.nativeEvent.code]
                     if (!key) return
                     e.preventDefault()
@@ -251,6 +337,7 @@ export default function Hogball(): JSX.Element {
                     press(key, false)
                 }}
                 onMouseDown={(e) => {
+                    if (inEntry(e.target)) return
                     const key = MOUSE_BUTTONS[e.button]
                     tableRef.current?.focus()
                     if (!key || Date.now() - lastTouchRef.current < 800) return
@@ -259,7 +346,7 @@ export default function Hogball(): JSX.Element {
                 }}
                 onContextMenu={(e) => e.preventDefault()}
                 onPointerDown={(e) => {
-                    if (e.pointerType === 'mouse') return
+                    if (e.pointerType === 'mouse' || inEntry(e.target)) return
                     lastTouchRef.current = Date.now()
                     tableRef.current?.focus()
                     if (ballInPlunger(gameRef.current)) return
@@ -270,10 +357,50 @@ export default function Hogball(): JSX.Element {
                 }}
                 onPointerUp={releaseTouch}
                 onPointerCancel={releaseTouch}
-                onBlur={releaseAll}
+                onFocus={() => (focusedRef.current = true)}
+                onBlur={() => {
+                    focusedRef.current = false
+                    releaseAll()
+                    const game = gameRef.current
+                    if (game.state === 'playing') {
+                        game.message = 'Paused. Click the table to play'
+                        game.messageTime = 1
+                    }
+                }}
             >
                 <canvas ref={sceneRef} className="absolute" />
                 <canvas ref={panelRef} className="absolute" />
+                {entry !== null && (
+                    <form
+                        ref={entryRef}
+                        onSubmit={submitInitials}
+                        className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 rounded-md border-2 border-yellow p-4 text-center text-yellow"
+                        style={{ backgroundColor: '#05060a', fontFamily: '"Courier New", monospace' }}
+                    >
+                        <div className="text-xl font-bold">NEW HIGH SCORE!</div>
+                        <div className="text-lg tabular-nums">{entry.toLocaleString('en-US')}</div>
+                        <label htmlFor="hogball-initials" className="text-sm">
+                            ENTER YOUR INITIALS
+                        </label>
+                        <input
+                            id="hogball-initials"
+                            autoFocus
+                            autoComplete="off"
+                            value={initials}
+                            onChange={(e) => setInitials(cleanInitials(e.target.value))}
+                            onKeyDown={(e) => e.key === 'Escape' && setEntry(null)}
+                            maxLength={3}
+                            className="w-28 border-b-2 border-yellow bg-transparent text-center text-3xl font-bold uppercase tracking-[0.4em] text-yellow outline-none"
+                            aria-describedby="hogball-initials-help"
+                        />
+                        <div id="hogball-initials-help" className="text-xs">
+                            Three letters, then Enter. Esc to skip.
+                        </div>
+                        <OSButton size="sm" variant="primary" type="submit" disabled={initials.length !== 3}>
+                            Save to leaderboard
+                        </OSButton>
+                    </form>
+                )}
                 <span className="sr-only" role="status" aria-live="polite">
                     {status.message}
                 </span>
@@ -285,6 +412,10 @@ export default function Hogball(): JSX.Element {
                 <OSButton size="sm" onClick={toggleMuted} aria-pressed={!muted}>
                     {muted ? 'Sound off' : 'Sound on'}
                 </OSButton>
+                <OSButton size="sm" onClick={changePilot} disabled={status.state === 'playing'}>
+                    New pilot name
+                </OSButton>
+                {pilot && <span className="self-center text-sm text-secondary">Pilot: {pilot}</span>}
             </div>
             <div className="grid grid-cols-3 gap-2 @2xl:hidden">
                 <OSButton size="md" width="full" {...hold('left')}>
@@ -297,6 +428,18 @@ export default function Hogball(): JSX.Element {
                     Right
                 </OSButton>
             </div>
+            {leaders.length > 0 && (
+                <div className="@2xl:hidden">
+                    <div className="text-sm font-bold">All-time top pilots</div>
+                    <ol className="m-0 pl-5 text-sm">
+                        {leaders.map((leader, i) => (
+                            <li key={`${leader.name}-${i}`} className={leader.name === pilot ? 'font-bold' : ''}>
+                                {leader.initials} {leader.name} – {leader.score.toLocaleString('en-US')}
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            )}
         </div>
     )
 }

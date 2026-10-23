@@ -1,4 +1,4 @@
-import { HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH } from './physics'
+import { CHUTE, HEIGHT, HOLE, LANE_X, LANE_Y, MAX_FUEL, OUTLINE, RAMP_GATE, WIDTH, WORMHOLE } from './physics'
 import type { Game } from './physics'
 
 export const RED = '#F54E00'
@@ -105,25 +105,26 @@ export function drawFloor(ctx: CanvasRenderingContext2D, game: Game, time: numbe
         ctx.fill()
     }
     ctx.globalAlpha = 1
-    const planet = ctx.createRadialGradient(282, 158, 4, 290, 166, 30)
+    const planet = ctx.createRadialGradient(224, 162, 4, 232, 170, 30)
     planet.addColorStop(0, '#ffd08a')
     planet.addColorStop(0.6, YELLOW)
     planet.addColorStop(1, '#7a3b00')
     ctx.fillStyle = planet
     ctx.beginPath()
-    ctx.arc(290, 166, 26, 0, Math.PI * 2)
+    ctx.arc(232, 170, 26, 0, Math.PI * 2)
     ctx.fill()
     ctx.strokeStyle = 'rgba(255, 220, 160, 0.7)'
     ctx.lineWidth = 2
     ctx.beginPath()
-    ctx.ellipse(290, 166, 42, 9, -0.35, 0, Math.PI * 2)
+    ctx.ellipse(232, 170, 42, 9, -0.35, 0, Math.PI * 2)
     ctx.stroke()
 
-    // A ring of lights around the center, like a warp gate. It spins faster with each rank.
-    const spin = time * (0.6 + game.rank * 0.5)
+    // A ring of lamps around the center, like a warp gate. The lamps stay still and the light chases
+    // around them, faster with each rank.
+    const chase = Math.floor(time * (6 + game.rank * 2))
     for (let i = 0; i < 16; i++) {
-        const angle = spin + (i / 16) * Math.PI * 2
-        light(ctx, 185 + Math.cos(angle) * 58, 395 + Math.sin(angle) * 22, 3, BLUE, i % 4 === 0)
+        const angle = (i / 16) * Math.PI * 2
+        light(ctx, 185 + Math.cos(angle) * 58, 395 + Math.sin(angle) * 22, 3, BLUE, (i + chase) % 4 === 0)
     }
     ctx.restore()
 
@@ -166,5 +167,37 @@ export function drawFloor(ctx: CanvasRenderingContext2D, game: Game, time: numbe
     ctx.beginPath()
     ctx.arc(HOLE.x, HOLE.y, HOLE.radius, 0, Math.PI * 2)
     ctx.fill()
+
+    // The wormhole: a dark hole with a purple swirl around it
+    ctx.save()
+    ctx.translate(WORMHOLE.x, WORMHOLE.y)
+    for (let i = 0; i < 3; i++) {
+        ctx.rotate(time * 0.6 + (i * Math.PI * 2) / 3)
+        ctx.strokeStyle = PURPLE
+        ctx.globalAlpha = 0.7
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.arc(0, 0, WORMHOLE.radius + 6, 0, Math.PI * 0.9)
+        ctx.stroke()
+    }
+    ctx.restore()
+    ctx.fillStyle = '#05060d'
+    ctx.beginPath()
+    ctx.arc(WORMHOLE.x, WORMHOLE.y, WORMHOLE.radius, 0, Math.PI * 2)
+    ctx.fill()
+    text(ctx, 'WORMHOLE', WORMHOLE.x, WORMHOLE.y - 26, 8, 'rgba(255, 255, 255, 0.6)')
+
+    // The black hole behind the flapper, with arrows that point up through the flapper
+    const { hole } = CHUTE
+    const swirl = ctx.createRadialGradient(hole.x, hole.y, 2, hole.x, hole.y, 16)
+    swirl.addColorStop(0, '#000000')
+    swirl.addColorStop(0.6, '#05060d')
+    swirl.addColorStop(1, RED)
+    ctx.fillStyle = swirl
+    ctx.beginPath()
+    ctx.arc(hole.x, hole.y, 15, 0, Math.PI * 2)
+    ctx.fill()
+    text(ctx, 'BLACK HOLE', hole.x - 18, CHUTE.gateY + 52, 7, 'rgba(255, 255, 255, 0.6)')
+    for (let i = 0; i < 2; i++) chevron(ctx, hole.x, CHUTE.gateY + 18 + i * 14, RED, i === Math.floor(time * 3) % 2)
     text(ctx, full ? 'LAUNCH!' : 'LAUNCH PAD', HOLE.x, HOLE.y - 24, 8, full ? YELLOW : 'rgba(255, 255, 255, 0.6)')
 }

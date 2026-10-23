@@ -3,7 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogGardener } from '@posthog/brand/hoggies'
+import { HedgehogBall, HedgehogGardener } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -838,6 +838,12 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/sparks-joy/hogpatch',
             iconName: 'games' as AppIconName,
             customIcon: null,
+        },
+        {
+            label: 'Hogball',
+            link: '/sparks-joy/hogball',
+            iconName: null,
+            customIcon: <HedgehogBall className="size-12" />,
         },
         {
             label: 'PostHog Farm',

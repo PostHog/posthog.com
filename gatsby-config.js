@@ -60,7 +60,7 @@ const getQuestionPages = async (base) => {
 
 module.exports = {
     developMiddleware: (app) => {
-        ;['luma-events', 'notion-events', 'posthog-desktop-pricing'].forEach((route) => {
+        ;['luma-events', 'notion-events', 'posthog-desktop-pricing', 'hogball-leaderboard'].forEach((route) => {
             app.use(`/api/${route}`, async (req, res) => {
                 try {
                     await require(`./api/${route}`)(req, res)
