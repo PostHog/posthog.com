@@ -81,7 +81,7 @@ You can find a list of failed and overdue payments <PrivateLink url='https://us.
 PostHog Workflows send these messages for you. Do not send the same reminder yourself.
 
 - **Payment reminders:** For an open invoice that the customer pays by bank transfer, the customer gets an email 7 days and 3 days before the due date. The email comes from collections@posthog.com and goes to the billing contacts in Stripe. The account owners are in CC.
-- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page.
+- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page. If the customer already paid or agreed a different date, reply in the alert thread so the team knows.
   - For an invoice that the customer pays by bank transfer, day 0 is the due date.
   - For a card payment, day 0 is the first failed payment. We send this alert only if the account has an owner.
 

@@ -45,11 +45,23 @@ Once live, the stream posts each call to the channel after it ends. Everyone wor
 
 * MRR changes exceeding certain thresholds generate investigation tasks  
 * inactivity periods to flag engagement reviews  
-* New product usage (any amount) creates cross-sell opportunity indicator  
+* The first real use of a paid product that the account did not use before creates a Customer Analytics task for the account owner (see [company-wide scouts](#company-wide-scouts))  
 * Overdue invoices and failed card payments send Slack alerts to the assigned AE, CSM, or TAM (see [failed/late payments](/handbook/growth/sales/billing#failedlate-payments))  
 * Low credit balances send Slack alerts to the assigned CSM  
 * Health score changes can trigger Customer Analytics tasks or PostHog automation  
 * Annual renewal dates trigger preparation workflows in advance and a ping in Slack
+
+### **Company-wide scouts**
+
+Three [scouts](/docs/self-driving/scouts) watch every account that has a CSM, TAM, or AE in Customer Analytics. When a scout finds something, it creates a Customer Analytics task for the account owner, due in 3 working days. It also tags the account owners in <PrivateLink url="https://posthog.slack.com/archives/C0C7GP99CP3">#project-managed-customers-consolidated-scouts</PrivateLink>.
+
+| Scout | What it finds | Task name starts with |
+|-------|---------------|-----------------------|
+| Billing intent | A billing page session where the customer is quota limited, struggled, changed a setting, looked into a cost change, or checked their limits several times. Replay Vision reads the session. | `Billing:` |
+| New tool adoption | The first real use of a paid product that nobody at the account used in the last 400 days. | `New tool:` |
+| Survey responses | An in-app survey answer that needs action, for example a low score, a bug, a cost concern, or a request for help. Replay Vision adds what the person did before and after the answer. Each owner also gets a weekly digest on Mondays with all other answers from their accounts. | `Survey:` |
+
+Close the task when you act on it. Reply in the Slack thread when a task was useful or was noise, so that we can tune the scouts.
 
 ### **Human-first automation philosophy**
 
@@ -63,7 +75,7 @@ This approach ensures automation enhances rather than replaces the human element
 
 * Review automated tasks such as Customer Analytics tasks, Slack alerts, and customer health scores at least twice weekly.   
 * Treat automated insights as starting points for investigation, not final answers\!  
-* Set-up individual alerts in Customer Analytics or PostHog that match your own portfolio and experiences  
+* Set up individual alerts in Customer Analytics or PostHog for signals that the [company-wide scouts](#company-wide-scouts) do not cover. Do not copy those scouts for your own book, because they already watch every owned account.  
   * As an example, setting up your accounts as a Cohort in PostHog and then setting up CDP alerts/notifications to Slack based on product usage and activity.
 
 **What remains purely human:**
