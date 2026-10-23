@@ -4,14 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 You can stop a materialized view from publishing new data when its error-severity checks fail. PostHog tests the unpublished data first, keeps the existing published version available when the test fails, and skips downstream views that depend on the blocked view.
 
 The setting applies to every materialized view in the project. It is off by default.
@@ -42,14 +34,14 @@ If the setting is off, PostHog publishes the materialization and then runs its c
 
 Only a completed **Failed** result from an error-severity check guarantees a block.
 
-| Check outcome | Blocks publication |
-| --- | --- |
-| An error-severity check returns **Failed** | Yes |
-| A warning-severity check returns **Failed** | No |
-| A check returns **Passed** | No |
-| A check returns **Errored** because it couldn't compile or execute | No |
-| A check returns **Skipped** | No |
-| The staged audit can't return a verdict | No |
+| Check outcome                                                      | Blocks publication |
+| ------------------------------------------------------------------ | ------------------ |
+| An error-severity check returns **Failed**                         | Yes                |
+| A warning-severity check returns **Failed**                        | No                 |
+| A check returns **Passed**                                         | No                 |
+| A check returns **Errored** because it couldn't compile or execute | No                 |
+| A check returns **Skipped**                                        | No                 |
+| The staged audit can't return a verdict                            | No                 |
 
 The gate fails open for query errors and unavailable audits. These outcomes don't prove the staged data is valid, but they also don't provide a failing assertion that PostHog can use to block publication. PostHog records check errors so you can investigate them. When PostHog refreshes multiple related views, an audit without a verdict doesn't stop the remaining checks.
 

@@ -4,14 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 A query can run successfully and still return the wrong answer. A source can stop updating, a join key can become null, duplicate rows can change a total, or a status column can gain a value that downstream logic doesn't handle. SQL reports none of these as query errors.
 
 Data quality checks turn those assumptions into assertions that PostHog can run repeatedly. You can add checks to:
