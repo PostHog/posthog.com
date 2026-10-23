@@ -246,24 +246,26 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 -   Open an item to inspect its input, expected output, actual output, and score details.
 -   Follow **Score trends** across experiments, then open a scorer's history to investigate a change.
 
-Use the same test cases and scorer versions when you compare an agent change. A new dataset or passing threshold can change your scores even when your agent hasn't changed.
+Use the same test cases and scorer versions when you compare an agent change. Changing the cases or passing threshold can change your scores even when your agent hasn't changed.
 
 In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
 
 Completing an experiment means the run finished, not that every case passed. To block a deployment, check scores against your own threshold in the test script and exit with a failure code.
 
-## Use a PostHog dataset
+## Use a PostHog dataset (optional)
 
-Once you have more cases, store them in a [dataset](/docs/ai-evals/datasets). You can add cases manually or save them from production traces. Each item's input is a request for your agent, and its expected output describes the outcome your evaluator should check.
+You can keep all your test cases in code, files, or another system. A PostHog [dataset](/docs/ai-evals/datasets) is another option if you want to manage cases in PostHog or save them from production traces.
 
-Take a snapshot before running the experiment. A snapshot fixes the dataset revision, so edits made during the run don't change its test cases. Pass the snapshot's revision ID when you create the experiment.
+The example below fetches the cases once before starting the experiment. It keeps the items locally and records which dataset revision they came from.
 
-Replace the experiment creation and loop in the previous example with the following. Keep the same client, scorer, agent, evaluator, and final `complete()` call. Set `POSTHOG_DATASET_ID` to your dataset's ID first.
+To try it, set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorer, agent, evaluator, and final `complete()` call.
 
 <MultiLanguage selector="tabs">
 
 ```python file=Python
 snapshot = evaluations.datasets.snapshot(os.environ["POSTHOG_DATASET_ID"])
+items = list(snapshot.iter_items())
+
 experiment = evaluations.create_experiment(
     name="Support agent from a dataset",
     suite_key="support-agent",
@@ -271,7 +273,7 @@ experiment = evaluations.create_experiment(
     run_source="local",
 )
 
-for row in snapshot.iter_items():
+for row in items:
     output = run_agent(row.input)
     passed = evaluate_answer(row.input, output, row.expected_output)
     item = EvaluationItem.from_dataset_item(row, output=output)
@@ -284,6 +286,11 @@ for row in snapshot.iter_items():
 
 ```typescript file=TypeScript
 const snapshot = await evaluations.datasets.snapshot(process.env.POSTHOG_DATASET_ID!)
+const items = []
+for await (const row of snapshot) {
+    items.push(row)
+}
+
 const experiment = await evaluations.createExperiment({
     name: "Support agent from a dataset",
     suiteKey: "support-agent",
@@ -291,7 +298,7 @@ const experiment = await evaluations.createExperiment({
     runSource: "local",
 })
 
-for await (const row of snapshot) {
+for (const row of items) {
     const output = await runAgent(row.input)
     const passed = await evaluateAnswer(row.input, output, row.expectedOutput)
     const item = EvaluationItem.fromDatasetItem(row, { output })
@@ -335,7 +342,7 @@ If the evaluator can't produce a score, upload `status="error"` / `status: "erro
 
 Experiment item payloads have a 30-day retention period. This includes the input, actual output, expected output, and payload metadata you upload for each item. Keep your own copy if you need to inspect those payloads after 30 days.
 
-This retention policy applies to the experiment's copy of the item payload, not the source dataset you use to run the experiment.
+This retention policy applies to the experiment's copy of the item payload. It doesn't apply to items stored in a PostHog dataset.
 
 ## Pricing
 
