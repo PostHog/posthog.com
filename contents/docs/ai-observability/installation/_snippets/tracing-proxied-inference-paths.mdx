@@ -1,0 +1,29 @@
+A proxy can call a model from HTTP routes, WebSocket handlers, and jobs, so trace every path before capture. Capture one `$ai_generation` per provider request, including failures and interrupted streams. Use the same `$ai_trace_id` for related [spans](/docs/ai-observability/spans).
+
+<details>
+
+<summary>Checklist for your agents</summary>
+
+Trace each entry point to its provider call before you add capture:
+
+- **Find entry points.** Include HTTP routes, WebSocket handlers, background jobs, and direct provider calls. Search SDK methods and raw HTTP clients, including passthrough endpoints.
+- **Follow branches.** Record each provider, JSON or streamed response, retry, and tool path. Check whether every branch reaches the shared capture helper.
+- **Mark context.** Record where the user ID and trace ID enter each path. Give each tool execution a `$ai_span` under that trace. Capture a new generation if the tool leads to another provider request.
+- **Check outcomes.** Find success returns, provider HTTP errors, timeouts, stream errors, and client disconnects. Record where each outcome becomes visible.
+
+For each path, write down its route or job name, upstream call site, provider, response format, and capture point. A shared helper covers a path only if every provider call on that path uses it.
+
+The response format determines when you have enough data to capture the event:
+
+| Provider outcome | Capture point |
+| --- | --- |
+| Complete JSON response | Capture after reading the response body. |
+| Complete streamed response | Parse the provider's streaming format, such as server-sent events or newline-delimited JSON. Capture once after its final event. Set `$ai_stream` to `true`, and include `$ai_time_to_first_token` only if you measured it. |
+| Provider HTTP error | Capture before returning the error, whether or not the provider sends a body. Set `$ai_is_error` to `true`. Use a short status or category in `$ai_error`, not the raw provider body. |
+| Stream ends before completion | Capture the partial call with `$ai_is_error` set to `true`. Use a short reason in `$ai_error`, such as `stream interrupted` or `client disconnected`. |
+
+Map token counts from the provider's documented response. For example, native Ollama returns `prompt_eval_count` and `eval_count` at the top level of its [chat response](https://docs.ollama.com/api/chat). Don't assume another provider uses the same fields.
+
+Test each listed path with a successful response. Also test an HTTP error and an interrupted stream. Check the resulting [generations](/docs/ai-observability/generations) and [errors](/docs/ai-observability/errors) in PostHog.
+
+</details>
