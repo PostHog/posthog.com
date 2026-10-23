@@ -29,11 +29,11 @@ Each SDK below moves to capture v1 in a new major version. These versions includ
 | SDK | First version with capture v1 | Platforms on v1 | Migration guide |
 |---|---|---|---|
 | [Python](/docs/libraries/python) | `8.0.0` | All | [`7.x` to `8.0`](https://github.com/PostHog/posthog-python/blob/main/docs/migration-7.x-to-8.0.md) <!-- TODO(link): confirm path on main after release --> |
-| [Go](/docs/libraries/go) | `v2.0.0` (module `github.com/posthog/posthog-go/v2`) | All | [`v1` to `v2`](https://github.com/PostHog/posthog-go/blob/main/docs/migration-v2.md) <!-- TODO(link): confirm branch and path after release --> |
+| [Go](/docs/libraries/go) | `v2.0.0` (module `github.com/posthog/posthog-go/v2`; the `otel` and `posthogmcpsdk` modules move to `/v2` too) | All | [`v1` to `v2`](https://github.com/PostHog/posthog-go/blob/main/docs/migration-v2.md) <!-- TODO(link): confirm branch and path after release --> |
 | [Rust](/docs/libraries/rust) | `1.0.0` | All | [`0.x` to `1.0`](https://github.com/PostHog/posthog-rs/blob/main/docs/migration-0.x-to-1.0.md) <!-- TODO(link): confirm path on main after release --> |
 | [Node.js](/docs/libraries/node) | `6.0.0` <!-- TODO(node): confirm version --> | Server (`posthog-node`) | TODO <!-- TODO(node): link the migration guide --> |
-| [iOS](/docs/libraries/ios) | `4.0.0` <!-- TODO(ios): confirm version --> | iOS, macOS, and the other Apple platforms | TODO <!-- TODO(ios): link the migration guide --> |
-| [Flutter](/docs/libraries/flutter) | `6.0.0` <!-- TODO(ios): confirm version --> | iOS and macOS only | TODO <!-- TODO(ios): link the migration guide --> |
+| [iOS](/docs/libraries/ios) | `4.0.0` <!-- TODO(ios): confirm version --> | iOS, macOS, and the other Apple platforms | [`3.x` to `4.0`](https://github.com/PostHog/posthog-ios/blob/main/docs/migration-3.x-to-4.0.md) <!-- TODO(link): confirm path on main after release --> |
+| [Flutter](/docs/libraries/flutter) | `6.0.0` <!-- TODO(ios): confirm version --> | iOS and macOS only | TODO <!-- TODO(ios): link Flutter's upgrade notes, or the iOS 4.0 guide if Flutter adds none (asked on posthog-flutter #649) --> |
 
 <!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
 <!-- TODO(ios): confirm the exact Apple platforms posthog-ios 4.0 covers (iOS, macOS, tvOS, watchOS, visionOS). -->
