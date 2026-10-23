@@ -81,7 +81,11 @@ const COMPARISON: { label: string; values: React.ReactNode[] }[] = [
     { label: 'Minimum spend', values: ['None', '$5/month per connection', '$20/month on Standard'] },
     {
         label: 'Historical backfills',
-        values: ["Free for each new source's first seven days", 'Count toward usage', 'Count toward credits'],
+        values: [
+            "Free for each new source's first seven days (up to 100M rows on the free plan)",
+            'Count toward usage',
+            'Count toward credits',
+        ],
     },
 ]
 
@@ -404,8 +408,8 @@ export default function SourcesLanding(): JSX.Element {
                             </ol>
 
                             <p>
-                                Every row synced in a new source's first seven days is free, so the backfill costs
-                                nothing while you check it.
+                                Every row synced in a new source's first seven days is free (up to 100M rows on the free
+                                plan, unlimited on paid plans), so the backfill costs nothing while you check it.
                             </p>
 
                             {/* Placeholder – point at the migration docs once they exist */}
@@ -418,9 +422,9 @@ export default function SourcesLanding(): JSX.Element {
 
                         <QuestLogItem title="Start for free" subtitle="Free 1M rows/mo" icon="IconHandMoney">
                             <p>
-                                The first 1M rows you sync every month are free, and historical syncs for new sources
-                                don't count toward your bill. Since we don't charge per seat, your whole team can use
-                                it.
+                                The first 1M rows you sync every month are free, and so are historical syncs in a new
+                                source's first seven days (up to 100M rows on the free plan, unlimited on paid plans).
+                                Since we don't charge per seat, your whole team can use it.
                             </p>
 
                             <p>That's it! Time to connect your first source.</p>
