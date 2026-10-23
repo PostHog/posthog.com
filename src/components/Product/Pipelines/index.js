@@ -538,7 +538,7 @@ const PipelinePreview = ({ pipeline }) => {
                     <NotifyMe pipeline={pipeline} />
                 ) : (
                     <CallToAction
-                        to={pipeline.mdx?.fields?.slug || `/docs/cdp/${pipeline.type}s/${pipeline.slug}`}
+                        to={pipeline.mdx?.fields?.slug || `/docs/data-pipelines/${pipeline.type}s/${pipeline.slug}`}
                         type="secondary"
                     >
                         Learn more in docs

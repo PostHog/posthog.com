@@ -80,7 +80,7 @@ Here's what we built:
 
 What makes this different from spinning up a standalone warehouse is that we're already mirroring all PostHog event data to S3, partitioned by organization. When you spin up your warehouse instance, your event data is there, no pipeline setup needed.
 
-The same goes for data sources you want to connect – [Stripe](/docs/data-warehouse/sources/stripe), [Postgres](/docs/data-warehouse/sources/postgres), whatever external systems you're syncing – all of it lands in your warehouse, queryable through the same endpoint as your PostHog events.
+The same goes for data sources you want to connect – [Stripe](/docs/data-pipelines/sources/stripe), [Postgres](/docs/data-pipelines/sources/postgres), whatever external systems you're syncing – all of it lands in your warehouse, queryable through the same endpoint as your PostHog events.
 
 We still support SQL for everything within PostHog. But you're free to connect any of your data tools to the warehouse as you'd expect with any other database.
 
