@@ -13,7 +13,7 @@ const DWInstallationPlatforms = ({ showFiltering = false, maxItems }: DWInstalla
     const managedPlatforms = useSourcePlatforms()
     const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
         label: s.name,
-        url: `/docs/data-warehouse/sources/${s.slug}`,
+        url: `/docs/data-pipelines/sources/${s.slug}`,
         image: getLogo(s.logo),
     }))
     const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))

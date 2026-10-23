@@ -19,7 +19,7 @@ Make sure you have a RudderStack account **and** a PostHog account, using [PostH
       1. In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side. Additionally, this will enable the toolbar and heatmaps.
       2. Set `Enable autocapture with PostHog` to `true`. This will automatically capture events from your website or web app  
         ![RudderStack Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/rs-device-mode.png)
-    - If it's not a website or web app (e.g. a mobile app or server), to use the full set of features such as feature flags and session recordings manually install the [PostHog SDK docs](/docs/integrate) in addition to adding PostHog as the event destination in RudderStack.
+    - If it's not a website or web app (e.g. a mobile app or server), to use the full set of features such as feature flags and session recordings manually install the [PostHog SDK docs](/docs/getting-started/install) in addition to adding PostHog as the event destination in RudderStack.
 
 For more information see the [RudderStack guide for setting up PostHog](https://www.rudderstack.com/docs/destinations/streaming-destinations/posthog/setting-up-posthog/)
 

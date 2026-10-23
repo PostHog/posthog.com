@@ -41,7 +41,7 @@ While ready-made integrations were available for many tools, such as Sentry and 
 />
 </BorderWrapper>
 
-[Witty Works’ Property Filter app](/integrations/property-filter) does this by deleting all configured properties inside an ingested event so that PostHog doesn’t collect any unwanted data. Running this app last in a chain makes sure that it applies to data bought in by any other apps too.
+[Witty Works’ Property Filter app](/docs/data-pipelines/transformations/template-filter-properties) does this by deleting all configured properties inside an ingested event so that PostHog doesn’t collect any unwanted data. Running this app last in a chain makes sure that it applies to data bought in by any other apps too.
 
 This whole process was achieved with just 26 lines of code and was released to all PostHog users as a community app. Plus, because the app is open source like PostHog, the community has been able to enhance it even further — [the current version is now 44 lines of code and even came with tests](https://github.com/witty-works/posthog-property-filter-plugin/blob/dev/index.js) made by [the PostHog community](/posts)!  and has now been released to all PostHog users as a community app after a quick review from PostHog’s team. 
 

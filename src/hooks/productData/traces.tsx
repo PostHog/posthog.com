@@ -39,7 +39,7 @@ export const traces = {
     seo: {
         title: 'Tracing – Distributed tracing with PostHog',
         description:
-            'Tracing pinpoints the exact query that broke. PostHog Desktop opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
+            'Distributed tracing with OpenTelemetry. Follow requests across services, find slow spans and failed queries, and link traces to logs and users.',
     },
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },

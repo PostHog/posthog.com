@@ -1,298 +1,195 @@
 # PocketGuides
 
-The digital book format for pocket guides – the docs-site sibling of the marketing team's field
-guide microsites. Educational register, not marketing: the structure does the teaching, and the
-reader UI uses PostHog fonts and tokens. The Product Analytics guide's Twig views retain Twig styling.
+Shared content and teaching components for pocket guides inside the Learn platform.
 
-**Every page of a book is an MDX file.** Narrative prose lives in `contents/pocket-guides/`.
-Components here supply layout, interactions, and short labels for the data they display.
+## Authoring requirements
 
-The Product Analytics figures use commit-pinned `@posthog/twig-components` views for browsing and
-stay cards. `ProductAnalyticsExhibits.tsx` owns the guide's example events and chart, while
-`PostHogInspector.tsx` provides the shared frame and event or identity details.
-`SessionReplayInspector.tsx` provides the playback-synced event timeline used beside a replay.
-Reader clicks only change local example state – they do not send practice events to PostHog.
-`TwigBrowseFigure.tsx` imports Twig's styles and photos from the package, so a package update must
-be reviewed on both sites.
+- Follow the [pocket guide handbook](../../../contents/handbook/wizard-and-docs/pocket-guides.mdx). Use the [Product Analytics guide](../../../contents/learn/product-analytics/pocket-guide/) as the current reference for story and design.
+- Use Twig.com as the canonical example app and its imaginary product engineering team as the story's characters.
+- Teach concepts through the team's questions, evidence, and decisions. Explain enough in the guide to keep reading; link to docs for reference details.
+- Choose a chapter structure that fits the story. A fixed "101, then use cases" outline and a CTA in every chapter are not required.
+- End the final chapter with a concrete handoff into PostHog: an app link, a prompt for an agent using the PostHog MCP, or setup steps that apply the lesson to the reader's project. No specific CTA component is required.
+- Keep narrative prose in MDX. Reuse existing teaching components and Twig views before adding new components.
 
+## Learn integration
+
+Pocket guides open and remain inside their product's Learn tab, with chapters in the product sidebar. Guides without a Learn tab render inside their product's docs. There is no standalone book reader.
+
+The rendering path is:
+
+1. `gatsby/createPages.ts` builds one page per chapter. `pocketGuidePageContext` in `src/constants/pocketGuides.ts` maps each source file to its volume's `learnPath`, and every page uses `src/templates/PocketGuide.tsx`. Full and minimal builds share this helper. Each chapter has its own title and canonical URL in the initial HTML. There are no client-only chapter routes.
+2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving and Data Stack. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
+3. `LearnSurface.tsx` renders the chapter from page context, using `useBookPages(volumeId)` for reading order. An empty or unknown chapter falls back to the introduction.
+4. `EntryProvider` supplies page data and the guide's `basePath`. `MDXProvider` uses `bookMdxComponents`, including `ReaderWrapper`, to render the body.
+
+### Routes
+
+| Volume | Public URL |
+| --- | --- |
+| Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
+| AI Observability, Session Replay, Feature Flags | Overview at `/learn/<product>`; guide at `/learn/<product>/pocket-guide` |
+| Self-driving | `/docs/self-driving/pocket-guide` |
+| Data Stack | `/docs/data-warehouse/pocket-guide` |
+
+Each volume with `learnHub` in `src/constants/pocketGuides.ts` has an overview page at `src/pages/learn/<product>/index.tsx`, which renders `LearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. A hub lists Overview and Pocket guide (chapters nested under it), each with an icon, then the extra pages in `learnHub.pages`. Every hub has Agent prompts and MCP. Product Analytics, AI Observability, and Session Replay also have Live playground, because Twig has labs for them. Feature Flags has no Twig lab yet. Volumes without `learnHub` list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
+
+## Content and registration
+
+```text
+contents/learn/<volume>/pocket-guide/
+├── index.mdx              pocketGuideOrder: 0 — introduction
+└── <chapter>/
+    └── index.mdx          pocketGuideOrder: 1+ — subsequent chapters
 ```
-contents/pocket-guides/<volume>/
-├── index.mdx              pocketGuideOrder: 0 – the front matter (title page + contents)
-├── 101/index.mdx          pocketGuideOrder: 1 – the primer
-└── <use-case>/
-    ├── index.mdx          pocketGuideOrder: 2+ – one use case
-    └── SKILL.md           the scout itself, rendered as a figure (scout volumes only)
-```
 
-`gatsby/createPages.ts` already routes everything under `contents/pocket-guides/` through
-`src/templates/Template.tsx`, which hands any `/pocket-guides/` slug to `BookPage`.
+| Location | Purpose |
+| --- | --- |
+| `contents/learn/<id>/pocket-guide/` | Introduction and chapter MDX |
+| `src/constants/pocketGuides.ts` | Volume metadata, `learnPath`, and route helpers |
+| `src/hooks/productData/<product>.tsx` | Product's `pocketGuideVolume`, which adds the Learn tab |
+| `src/templates/PocketGuide.tsx` | Generated chapter page; no per-product route files are needed |
+| `vercel.json` | Permanent redirects from any former URL |
+| `volumeArt.tsx` | Shared cover illustration registry; reuse existing brand art |
+| `Action.tsx` / `VOLUME_SUBCOMMAND` | Optional wizard command for `<Setup />` |
 
-**One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
-off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volume is a directory
-plus a few registry entries (see [Adding a volume](#adding-a-volume)) – no reader changes. The shelf counts a volume's
-use cases by `pocketGuideOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
+`useBookPages` selects pages with numeric `pocketGuideOrder`, excludes sibling `SKILL.md` files and `_`-prefixed paths, and sorts by order. Use order 0 for the introduction. Omitting the order removes a page from this reading sequence; it is not an access-control mechanism. `shortTitle` overrides the navigation label; otherwise the title is used.
 
-**Teach inside the book.** A reader who leaves for the docs mid-page usually doesn't come back, so
-a concept they might not know should be a `<Term>` (definition on hover, with its own "Read the
-docs" button) or an annotated figure marker – not a link in the prose. Keep plain links for things
-the reader is meant to go *do*, like an install guide. Term definitions are quoted from the docs
-page that owns the concept, so this can't drift into a second source of truth.
+For a new frontmatter field used in GraphQL, check the declarations in `gatsby/createSchemaCustomization.ts`. Add the required schema declaration rather than relying on inference for sparse fields. Clear Gatsby's cache after schema changes.
 
-**Every use case ends in a CTA, and only use cases have one.** Front matter and the 101 send
-people onward with ordinary links in the prose – a CTA there devalues the one that matters.
-Which CTA depends on the volume: self-driving chapters enable a scout (`<Enable />`, driven by
-the sibling SKILL.md), and every other volume authors its own in the `pocketGuideCta:` frontmatter block and
-renders it with `<Action />` – today a PostHog AI prompt (`kind: prompt`) or a plain destination
-(`kind: link`). Both shapes also drive the pinned bar at the foot of the reader, so the page's
-action and the shortcut to it can't drift apart.
+## Introductions
 
-## Adding a volume
+Place `<CoverWithChapters />` in every guide introduction, after the opening paragraphs, on the left page. Put setup instructions on the right page. The marker renders the shared `Cover` and a centered Start reading button beside the Chapters list; they stack in narrow containers. `<PocketGuideCover />` and `<StartReading>` also work alone (add `align="center"` to center the button). An introduction without `<CoverWithChapters />` shows the Chapters list after its body.
 
-`pnpm test:pocket-guides` checks every rule below and runs in the deploy preview workflow.
+The cover, Start reading, and every chapter link open chapter 1 or the linked chapter with the book-opening transition. Do not add another reading CTA to an introduction. Keep introduction copy in one section beneath the topic heading, without a separate "Where to start" section. Include a setup wizard only when readers need an installed integration to follow along; keep demos and extra illustrations in chapters.
 
-| Where | What | Why |
-|---|---|---|
-| `contents/pocket-guides/<id>/` | `index.mdx` at order 0 with `<Setup />` and `<Frontispiece />`, a 101 at order 1 | The reader builds the book from this directory |
-| `src/constants/pocketGuides.ts` | The shelf row | Cover, spine, and volume number |
-| `VOLUME_ART` in `volumeArt.tsx` | The volume's one hedgehog illustration, from the [PostHog brand site](https://brand.posthog.com/hoggies) | The same character on the cover and title page makes the book recognizable. Chapters get none: the brand asks for Max "thoughtfully, not just to fill space", and no other volume puts hogs in chapters |
-| `VOLUME_SUBCOMMAND` in `Action.tsx` | The wizard command for the volume, if it has one | `<Setup />` renders it with `@latest` pinned and copies tracked; a pasted `npx` command gets neither |
-| `pocketGuideVolume` in `src/hooks/productData/<product>.tsx`, and `src/pages/docs/<product>/learn/[...chapter].tsx` | The docs Learn tab, for a volume with `docsProduct` | The product's docs link to the book it teaches |
-
-## Authoring a page
-
-Frontmatter carries structured data; the body carries every word.
+## MDX and figure placement
 
 ```mdx
 ---
-title: Remove the feature flags you already rolled out
-shortTitle: Flag debt      # tab label, falls back to title
-pocketGuideOrder: 3               # reading order; 0 is the front matter, omit to keep a draft unlisted
+title: Events and properties
+shortTitle: Events
+pocketGuideOrder: 1
 ---
 
 <LeftPage>
 
-<ReportFigure n={1} caption="…" legend="…" />
+<TwigFilterFigure n={1} />
 
 </LeftPage>
 
 <RightPage>
 
-# Remove the feature flags you already rolled out
+# Events and properties
 
-Prose, **markdown**, and <Term name="scout" /> definitions.
-
-## A section heading
-
-<Enable />
+The Twig team starts by recording an <Term name="event" />.
+Readers can inspect the destination filter in <SeeFig n={1} />.
 
 </RightPage>
 ```
 
-`<LeftPage>` holds a page's figures, `<RightPage>` its prose – authoring markers, not layout.
-The reader interleaves them at render time (see below). Content outside either wrapper renders
-after the prose.
+`LeftPage` and `RightPage` are authoring markers, not a two-column layout. `ReaderWrapper` places the figures:
 
-### Components available in a body
+- Direct children of `LeftPage` whose compiled `mdxType` ends in `Figure` and whose `n` prop is numeric are collected as figures.
+- Each collected figure is inserted after the first prose block citing its number with `<SeeFig n={...} />`.
+- Uncited collected figures are appended after the prose in numeric order.
+- Other `LeftPage` content becomes a preface. In particular, bare `<Fig>` does not participate in citation-based placement. Use an existing named `*Figure` component or `<ExampleFigure>` when appropriate.
+- Use one `RightPage` for the prose. Keep chapter content inside the markers rather than depending on ordering of content outside them.
 
-| Component | What it does |
-|---|---|
-| `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
-| `<Eyebrow>` | The small line above a title-page heading |
-| `<Setup />` | The volume's wizard command, for the front matter |
-| `<Frontispiece />` | The volume's hedgehog illustration, for the title page |
-| `<Fig n caption legend>` | Any exhibit, in a numbered frame |
-| `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
-| `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
-| `<SkillFigure n caption>` | This page's own `SKILL.md`, for guides with no `InboxTemplate` |
-| `<LoopFigure n caption>` | The self-driving loop diagram |
-| `<TraceFigure n caption rows>` | One LLM trace, nested – generations and spans with their numbers |
-| `<Watches />` | The signal sources from this page's `watches` frontmatter |
-| `<Enable />` | The scout CTA – one click to add this page's scout |
-| `<Action />` | The CTA for volumes whose answer isn't a scout, from `pocketGuideCta:` frontmatter |
-| `<SeeAlso>` | A print footnote at the foot of the column |
-| `<Term name="scout">` | An orange dotted-underline definition with a hover card |
+Write code samples and tables as native Markdown. Use figures for teaching UI or other exhibits that need components. `pocketGuides.test.ts` rejects figures containing only a code block or table, with an existing exception for the data-stack volume.
 
-Headings, paragraphs, lists, tables, and inline code use the same prose styling as docs.
+### Component reference
 
-Write code samples and tables as native Markdown in the prose. A figure is for an exhibit
-Markdown can't render, like annotated mock UI; `pocketGuides.test.ts` fails a figure whose only
-content is a code block or a table.
+`bookComponents.tsx` is the authoritative list of available MDX components and their imports.
 
-### How the reader lays a page out
+| Component | Purpose |
+| --- | --- |
+| `LeftPage`, `RightPage`, `SeeFig` | Prose and figure placement |
+| `Term` | Short definition and link to its owning docs; definitions live in `terms.tsx` |
+| Product Analytics `*Figure` components | Interactive teaching examples used by the reference guide |
+| `Fig`, `ExampleFigure` | Figure frame and citation-compatible example wrapper |
+| `CTA` | Link styled as a call to action; used by the Product Analytics introduction |
+| `LessonFooter` | Next-lesson link and supporting resources; no `nextHref` produces a disabled button |
+| `Action` | Optional action from `pocketGuideCta` frontmatter |
+| `Setup`, `Frontispiece`, `Eyebrow` | Optional setup command and title-page elements. Put `Eyebrow` inside the heading: `# <Eyebrow>A pocket guide to</Eyebrow> Product Analytics` |
+| `CoverWithChapters`, `PocketGuideCover`, `StartReading` | Introduction layout; see [Introductions](#introductions) |
+| `ReportFigure`, `ScoutFigure`, `SkillFigure`, `Watches`, `Enable` | Existing scout-related content; see the [SelfDrivingInbox README](../SelfDrivingInbox/README.md) |
 
-Every page is one linear scroll. `ReaderWrapper` (ReaderWrapper.tsx) re-orders the compiled
-elements by their `mdxType` and `n` props at render time: each figure is embedded after the
-first block that cites it via `<SeeFig>`, and a figure nobody cites prints at the end of the
-page. Landing-page introductions render in one column in both the standalone reader and docs'
-Learn surface. Contents navigation belongs to each surface's sidebar, so introductory MDX does
-not include a separate contents page.
+The scout format is still evolving. Its implementation conventions are not requirements for other guides.
 
-The hover markers and their hint line show at reading widths only – below ~672px of container
-width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
-on phones.
+### MDX parsing constraints
 
-### Adding new content elements
+Learn and docs guides render the same compiled MDX bodies and component map. Changing the surface does not change the source parser or bypass the remark plugins.
 
-The standalone reader applies the shared docs prose classes, and the Learn surface inherits
-them from `ReaderView`. The Aa control overrides the text size only after a reader changes it.
-When a guide introduces a new content element, check its rendered appearance against docs in
-light and dark mode and at narrow and wide widths. Keep book-specific mappings in
-[bookPieces.tsx](./bookPieces.tsx) only for behavior the shared prose styles cannot provide.
-
-### One MDX trap worth knowing
-
-**Never start a line with an inline component.** MDX treats a line-leading JSX tag as a *block*,
-which splits the paragraph around it and leaves the tail unstyled:
+Keep inline components inside the same source line as surrounding prose:
 
 ```mdx
-<!-- Broken: the sentence splits into three pieces -->
-…first the report as it lands in your
-<Term name="inbox" /> and the pull request it becomes…
-
-<!-- Fine: the tag sits mid-line -->
-…first the report as it lands in
-your <Term name="inbox" /> and the pull request it becomes…
+The team inspects an <Term name="event" /> before continuing.
 ```
 
-Block components (`<Watches />`, `<Enable />`, the figures) are meant to start their own line.
-Only inline ones – `<Term>` – need to stay mid-sentence.
+Avoid starting a continuation line with inline JSX. This is a defensive authoring convention for the current MDX pipeline. The exact paragraph-splitting behavior has not been reproduced in this audit; do not assume every line-leading tag produces the same result.
 
-There is a mirror-image trap at the site level: the `gatsby-remark-inline-jsx-paragraphs` plugin
-wraps any *standalone single-line self-closing* component in a `<p>` so docs prose keeps its
-max-width. For block components here that produced invalid `<p><figure>` nesting, so the plugin
-skips everything under `contents/pocket-guides/` (see the guard at the top of
-`plugins/gatsby-remark-inline-jsx-paragraphs/index.js`). If a figure ever renders wrapped in a
-paragraph again, check that guard first – and note Gatsby caches compiled MDX, so the fix only
-shows after the `.mdx` file itself changes (or `pnpm clean`).
+Block components such as figures should have their own blocks with blank lines around them.
 
-## The reader UI
+The `gatsby-remark-inline-jsx-paragraphs` plugin skips files whose source path matches `/contents/learn/<volume>/pocket-guide/`. Outside that directory, the plugin wraps top-level, single-line capitalized JSX with a matching closing tag or self-closing tag in `<p>`. It is not limited to self-closing components. Check the plugin guard if a pocket-guide block component receives invalid paragraph nesting.
 
-- **`BookReader`** – wide windows pin the Contents panel on the left, with a compact Home and
-  reading-size control bar. `BookPage` uses Explorer's `transparent` option so the standard
-  frosted app-window background shows through, as it does in the docs reader. The sidebar
-  has no separate background or shadow, so it shares that same surface.
-  The page scrolls independently, and long contents
-  lists scroll within the sidebar. Below `@4xl`, compact book tabs keep the Contents and Aa
-  popovers. The reading column has its own container queries, click-to-turn page margins, and
-  a foot line with prev/next turns, "All guides" (except where prev already is the shelf), and
-  "p. N of M".
-- **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
-  `pocketGuideOrder` and produces that volume's reading order; the bar, contents, and page turns all
-  derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
-  inserting a chapter renumbers what follows without anyone editing a number by hand.
-- **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
-  left/right arrow keys all walk the same sequence.
+## Product Analytics teaching examples
 
-## Files
+- `ProductAnalyticsExhibits.tsx`, `ProductAnalyticsIdentityExhibits.tsx`, and `ProductAnalyticsTrendsFunnelsExhibits.tsx` own guide-specific teaching state and examples.
+- `ProductAnalyticsRetentionExhibits.tsx` supplies `RepeatBookingFigure`, `BookingRetentionFigure`, `SavedStayJourneyFigure`, and `SavedCohortRetentionFigure`. These combine shared Twig views with local event and cohort examples. They do not record events or make bookings.
+- `ProductAnalyticsDashboardExhibits.tsx` supplies three dashboard excerpts built from the guide's trend, funnel, and retention examples. Figures animate tile placement when visible; Reset replays the sequence, and reduced motion shows the completed dashboards.
+- `ProductAnalyticsDashboardNextSteps.tsx` provides the final project-aware prompt. PostHog AI, Claude Code, and Codex actions use the same prompt. The component also supplies the MCP connection command. Reuse this pattern for a final handoff where appropriate.
+- `TwigBrowseFigure.tsx` and related figures reuse version-pinned `@posthog/twig-components` views and assets.
+- `PostHogInspector.tsx` provides the shared event and identity inspection UI. `SessionReplayInspector.tsx` provides a playback-synced event timeline.
+- Practice events and booking responses are local simulations. Do not send them to a live PostHog project or submit real bookings. This constraint concerns teaching data; it does not prohibit the site's own interaction analytics.
+- Twig.com owns its application and real instrumentation. `twig-components` owns reusable Twig views, data, styles, and lab UI. PostHog.com owns guide prose, teaching fixtures, and PostHog figures.
+- Review package updates in both consuming sites. Check narrow and wide containers in light and dark mode.
 
-| File | Responsibility |
-|---|---|
-| `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
-| `Book.tsx` | The volume as a coloured spine for the `/docs` library column, plus the `BookShelf` it sits in |
-| `VolumeCard.tsx` | One volume pitched as a card: cover, pitch, button. Shared by the docs pages and `/self-driving` |
-| `GuidesForProduct.tsx` | Looks up the volume for a docs slug and renders a `VolumeCard`. Renders nothing when there is none |
-| `BookReader.tsx` | The full-window page: pinned sidebar, compact book tabs, turn zones, foot nav |
-| `BookPage.tsx` | Renders one MDX page into the reader |
-| `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
-| `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
-| `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
-| `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, SeeAlso, prose styling |
-| `Action.tsx` | The non-scout CTA and its pinned bar, from `pocketGuideCta:` frontmatter |
-| `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
-| `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
-| `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
-| `useSkillFile.ts` | Pairs a page with its sibling `SKILL.md`, for `<SkillFigure>` |
-| `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
-| `InboxFigure.tsx` | One use case's inbox moment, annotated |
-| `TraceTree.tsx` | An LLM trace drawn as nested rows – the AI Observability volume's hero |
+Use the source files for current fixture values, timing, and interaction details rather than treating this README as a second fixture specification.
 
-`Cover` and `Book` are two views of one volume. `Cover` is the shelf at `/pocket-guides`, where a
-book stands face-out with its art. `Book` is the library column on the `/docs` index, where each
-volume is a single coloured spine – `bg-<token>` with `Vol. N`, the title, and the guide count
-printed along it. Both take `{ volume, count }`, both link with `state={{ newWindow: true }}`, and
-both skip the link for a `comingSoon:` volume. Counts for either come from
-`src/hooks/usePocketGuideCounts.ts`.
+### Product Analytics Learn hub
 
-**Every spine is the same height.** The guide count is printed on the spine, so it does not also
-need to be implied by the size – and a shelf whose proportions shift each time someone writes a page
-never looks composed.
+- `LearnLanding.tsx` renders every hub overview: the product name, an intro line, a Learn through a story section with the cover, a Learn with your agent preview when the hub lists `agent-prompts-and-mcp`, and a Learn by doing preview when the page passes `playground`. The intro defaults to the page description, and the story text defaults to the volume description.
+- `ProductAnalyticsLearnLanding.tsx` passes its own copy and its Twig filter preview to `LearnLanding`. The AI Observability and Session Replay overview pages pass a Twig figure only.
+- `AgentPromptsPage.tsx` renders each hub's `agent-prompts-and-mcp` page: MCP setup steps, a starter prompt, and one prompt per topic, each with Claude Code and Codex actions. Each product page passes its name, docs slug, starter focus, and topic prompts.
+- `LivePlaygroundPage.tsx` renders the shared top of each hub's `live-playground` page: the title, the Twig introduction, and the Explore Twig link. Each page writes its own sections as children, a `SectionIntro` followed by its figure. By convention, every playground opens with the Twig session replay (`SessionReplayLinkFigure`). `AiObservabilityPlaygroundExhibits.tsx` builds its trace, event, and code figures from the `@posthog/twig-components/ai-lab` fixtures and reducer. `SessionReplayPlaygroundExhibits.tsx` shows input masking with the `replay-lab` `searchValue` helper. These are focused views; the full labs stay on Twig.com. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
+- `AgentTeachingActions.tsx` shares the teaching prompt and the Claude Code and Codex launch controls. It exports `agentTeachingPrompt()` for every product's starter prompt, and `AGENT_TEACHING_PROMPT` for Product Analytics, so the displayed and launched instructions stay identical. Keep the prompt text unchanged unless someone asks for an instruction change. Pass a chapter-specific prompt through the optional `prompt` prop.
+- The Live playground page stacks `SessionReplayLinkFigure` (pass `autoPlay` for muted, looping playback), `TwigEventFigure`, and `BookingStepsFigure`. Chapter embeds keep manual playback.
 
-**Cover art is `Cover`-only.** `VOLUME_ART` is deliberately not exported. A spine is a few
-characters tall; art belongs on the face-out covers, where there is room for it.
+## Styling and verification
 
-**The hover differs between the two on purpose.** `Cover` tilts, hinged at the spine, like picking a
-book off a shelf. `Book` only scales slightly – a tilt on a thin horizontal bar reads as a glitch
-rather than as an object. Both are `motion-safe:`.
+Guides inherit docs prose styles from `ReaderView` and use the shared component mappings. Use project color tokens and container queries for resizable app windows. Preserve Twig styling in embedded Twig views.
 
-`BookShelf` is layout only: a `max-w-[420px]` column. The cap is what keeps a spine spine-shaped –
-when the docs index stacks into one column the library gets the full window width, and without it
-the volumes stretch into wall-wide slivers.
+`ReaderWrapper` hides the annotation hint below `@2xl`; annotation markers remain visible. At wider container sizes, its marker opacity rule supports hover reveal. Keep captions sufficient to explain the figure without hover, and check the figure's own annotation implementation.
 
-`GuidesForProduct` is the tool-docs entry point: `<GuidesForProduct product="ai-observability" />`,
-imported into whichever page owns that product's syllabus – `start-here.mdx` for AI Observability,
-`index.mdx` for Self-driving. It matches the slug against `docsProduct` on a volume via `volumeForProduct`
-and **returns `null` when nothing matches** – most products have no volume, so dropping it on a page
-is always safe. Adding a product to the mechanism is one line: set `docsProduct` on its volume in
-`src/constants/pocketGuides.ts`.
+For changes:
 
-Both it and the "Learn it by use case" block on `/self-driving` (`src/pages/self-driving/index.tsx`)
-render `VolumeCard`, so the card is defined once. `VolumeCard` takes the pitch, the link, and the
-button label as props, because those are the only things the two surfaces disagree on – the docs
-pages send a reader to the volume, `/self-driving` sends them to the whole shelf.
+1. Run `pnpm test:pocket-guides` for shared content and registration constraints. This also runs in the deploy preview workflow; it does not enforce every authoring recommendation.
+2. Run the navigation checks (`pnpm test:navs`, which includes `learnRoutes.test.ts`) when changing routes, redirects, or navigation helpers.
+3. Start the site with `pnpm start` and load affected Learn pages. Check links, chapter navigation, console errors, and interactive examples.
+4. For visual changes, follow the repository's screenshot requirements at narrow and wide widths in light and dark mode. Verify reduced-motion behavior for animated examples.
+5. When changing redirects, also check the old URLs on the deploy preview. The local dev server does not apply `vercel.json`.
 
-`VolumeCard` deliberately has no `overflow-hidden`: the cover's hover tilt lifts a drop shadow, and
-clipping the card would cut it off.
+## Calls to action
 
-In `.mdx`, wrap the component in a `<div>`. On its own line MDX treats it as a paragraph and emits
-`<p>`, which cannot legally hold the cover's `<article>` and `<header>`.
+`pocketGuideCta` frontmatter drives the optional `<Action />` body component. There is no pinned action bar, so place `<Action />` in the body where the reader should act.
 
-Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
-The report frontmatter contract and the `.md` agent-mirror constraints are documented in
-`components/SelfDrivingInbox/README.md`.
+## Discovery surfaces
 
-**Adding a frontmatter field** needs a matching declaration in
-`gatsby/createSchemaCustomization.ts` plus `pnpm clean` – Gatsby won't infer fields that only some
-pages declare.
+- `Cover.tsx` renders a face-out cover; `Book.tsx` renders a compact spine and exports `BookShelf`. Covers show no volume number. The shelf lists volumes in `POCKET_GUIDE_VOLUMES` order.
+- Both use `pocketGuideUrl(volume)` for their default destination. `Cover` also accepts a destination override; the shelf, introductions, and the Product Analytics overview pass chapter 1. `Cover` opens its destination with the book-opening transition in the current window; `Book` opens a new window. Keep routing decisions in the shared helpers.
+- `VolumeCard.tsx` combines a cover, description, and CTA. `GuidesForProduct.tsx` selects a volume by `docsProduct` and returns nothing when none matches.
+- `usePocketGuideCounts.ts` controls displayed counts. By default it counts chapter paths with numeric order greater than 0 and excludes `isPrimer` pages. `countOrientationPages` instead includes numeric orders starting at 0. This display logic does not prescribe a chapter outline.
+- `VOLUME_ART` is exported from `volumeArt.tsx` and accessed through `volumeArt()`. It supplies cover and optional frontispiece art; it is not exclusive to `Cover`.
 
-### Twig in Product Analytics
+## Book-opening transition
 
-The Product Analytics Learn hub previews three paths: an agent prompt, the embedded story, and
-the external Twig demo. Its landing page remains a choice page; story chapters render on child
-routes under `/docs/product-analytics/learn`, with the Learn tab active and the shared product
-sidebar providing chapter navigation. Legacy standalone Pocket Guide URLs redirect to those Learn
-routes, and bookshelf covers open the embedded introduction directly.
+`bookOpening.ts` exports `openPocketGuide(event, coverElement, destination)`. It runs the whole transition and the navigation, so destination pages need no animation hooks. `Cover` calls it by default. For a separate reading button, keep its real link and call the function from its click handler with the matching cover element, as `LearnSurface` does for Start reading. The cover is marked with `data-pocket-guide-cover`, and its hinged face with `data-pocket-guide-cover-face`.
 
-The Events and properties chapter uses destination filters and `StayCardContent` from the pinned
-`@posthog/twig-components` package. `TwigBrowseFigure` shows three destination buttons and one
-compact stay card, using local filter state and package photos. The examples place the labeled
-Twig view and Inspector side by side in wide containers and stack them in narrow containers.
-Reset clears captured events and restarts the automated visitor. The inspectors show event
-timestamps separately from custom properties. These examples do not send events to a PostHog
-project.
+The transition animates an inert copy of the cover in a temporary layer clipped to the nearest Radix scroll viewport. The copy freezes computed styles, including container-query typography, so it does not reflow. Page content dissolves while the copy centers and zooms. The front cover swings open to become the left page, with a thin gray gutter line on the hinge, and the camera fits the two-page spread. The book then fades out and the destination replaces the page, with no full-window overlay. Sidebars and other windows do not animate.
 
-The Identity and sessions chapter uses `SavedStay`, `LoginView`, `SavedStaysView`, and
-`ProfileMenu` from the same package. PostHog.com owns the example identifiers, sessions, and
-person-linking state around those Twig views. The package does not call `identify`, `reset`, or
-capture events.
+- Reduced-motion preferences, modified clicks, and missing measurements keep ordinary link behavior.
+- One transition runs per viewport. Cleanup restores the source on completion, cancellation, or failed navigation.
+- If the source cover unmounts, or the reader focuses another window, the transition stops instead of overriding the newer route.
+- A navigation that stalls for 5 seconds restores the source page.
 
-The Trends and funnels chapter uses `ProductAnalyticsTrendsFunnelsExhibits.tsx` for three small
-figures. `FilterUsersTrendFigure` reduces Week 2's 19 filter events to eight people beside a
-compact Trends view based on the PostHog insight controls. Edgar's original Forest event, with
-its filter, identity, and session fields, is available as a drill-down. The compact time plot compares
-five and eight unique users; Edgar's repeated selections still count as one person
-in the second week. The drill-down has a caption and keeps its back control inside the Inspector header.
-These panels remain side by side; narrow windows show a sideways-scroll cue and snap to each panel.
-`BookingStepsFigure` reuses
-Twig's `StayCardContent` and shared primary button styling. Once the figure is mostly visible, it waits
-three seconds and plays a confirmed request followed by a clearly labeled, separate failed request.
-The sequence plays once, with event arrivals in the Inspector. Selecting Book stay pauses
-autoplay and switches between the two outcomes; reduced motion starts on the confirmed outcome.
-The booking response is simulated locally; it never submits a booking or captures events. `BookingFunnelFigure` pairs the
-10-to-six person funnel result with a shared Inspector that opens one of the four drop-offs and
-matches its `booking_started` event to a failed simulated response by `request_id`. These are guide-owned teaching fixtures, not
-new Twig instrumentation or a live PostHog query. The failed fixture uses `user_409` and
-`req-204`; Edgar's confirmed fixture uses `user_812` and `req-203`.
-
-Twig.com owns its pages and instrumentation. The package owns reusable Twig UI, data, styles,
-and assets. PostHog.com owns the teaching prose and example data. When the package pin changes,
-review the Twig views on both sites at narrow and wide widths, in both themes.
+Run `pnpm exec node --test src/components/PocketGuides/bookOpening.test.ts` after changes.

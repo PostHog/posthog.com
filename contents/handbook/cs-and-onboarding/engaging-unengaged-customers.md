@@ -48,7 +48,7 @@ Ordered roughly by how often the trigger comes up — the first few you can do f
 
 ### SDK health — flag outdated SDKs
 
-Use the SDK health check to see if the customer is running outdated SDKs. If the user is more than one major version behind, follow the instructions below. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
+Use the [SDK health check](/docs/health-checks/sdk-health) to see if the customer is running outdated SDKs. If the user is more than one major version behind, follow the instructions below. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
 
 **Suggested cadence:** Run the SDK health check on each of your accounts quarterly, or whenever a customer is ramping up usage of a specific SDK.
 
@@ -188,9 +188,9 @@ Our MCP can be a great tool for understanding silent user frustation. Below are 
 
 **Rage clicks:** This can be great to understand if there are specific pages or insights the user is showing higher than usual frustration. Understanding what the page or insight is about, and coupling this with session replay can give you an idea as to what the user was trying to accomplish as a way to be helpful.
 
-**Product engagement:** By default, AI will sometimes assume certain users are not engaged because it's measuring PostHog UI engagement. To get around this, ask about MCP engagement as well to better understand how active users are engaging with PostHog. Additionally, Vitally may sometimes report low dashboard activities or product usage but this can be a false positive as its measuring dashboard views and not specific insights. Checking actual user engagement will get you a more accurate view of who is active and who isn't, and specifically what products they're engaging in to reach out with specific questions or help.
+**Product engagement:** By default, AI will sometimes assume certain users are not engaged because it's measuring PostHog UI engagement. To get around this, ask about MCP engagement as well to better understand how active users are engaging with PostHog. Checking actual user engagement will get you a more accurate view of who is active and who isn't, and specifically what products they're engaging in to reach out with specific questions or help.
 
-**Query failures:** Vitally can help surface query failtures but MCP can get more specific on the failures customers are encountering so this could be an opportunity to reach out with a specific message to see if the customer may want assistance with getting a specific query working. Sometimes the MCP will highlight the specific query that is failing giving you something to directly investigate and fix before reaching out.
+**Query failures:** PostHog can help surface query failures but MCP can get more specific on the failures customers are encountering so this could be an opportunity to reach out with a specific message to see if the customer may want assistance with getting a specific query working. Sometimes the MCP will highlight the specific query that is failing giving you something to directly investigate and fix before reaching out.
 
 **Client request failures:** This is separate from query failures and can mean customers are having issues loading specific data and could be a great opportunity to resolve the issue for them or reach out to confirm and file a bug fix on their behalf.
 

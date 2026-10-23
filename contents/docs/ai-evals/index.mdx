@@ -4,7 +4,7 @@ title: Evaluations
 
 Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations). PostHog supports three types of evaluations:
 
-- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories. Chat judges also provide written reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
+- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories. You [choose a judge method](#choosing-a-judge-method): **LLM with explanation** provides written reasoning, while **Decision model** returns typed results without reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
 - **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result, a numeric score, or categories. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
 - **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
 
@@ -13,17 +13,17 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 - **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
 - **Detect problematic content** – Catch hallucinations, toxicity, or jailbreak attempts before they reach users.
 - **Track quality trends** – See pass rates across models, prompts, or user segments over time.
-- **Debug with reasoning** – Chat judges provide written reasoning, and Hog evaluations can include reasoning through `print()`. Typed decision judges return results without written reasoning.
+- **Debug with reasoning** – LLM judges using the **LLM with explanation** method provide written reasoning, and Hog evaluations can include reasoning through `print()`. Decision model judges return results without written reasoning.
 
 ## Choosing an evaluation type
 
-|              | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                     |
-| ------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
-| **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations           |
-| **Cost**     | LLM API call per evaluation                                  | Free                                                       | Free                                                   |
-| **Speed**    | Seconds                                                      | Milliseconds                                               | Milliseconds                                           |
-| **Output**   | Pass/fail, numeric score, or categories; written reasoning for chat judges | Pass/fail, numeric score, or categories; optional reasoning from `print()` | Positive, neutral, or negative with a confidence score |
-| **Setup**    | Write a prompt                                               | Write Hog code                                             | Pick the type – no prompt or code required             |
+|              | LLM-as-a-judge                                                                                                                 | Code-based (Hog)                                                           | Sentiment analysis                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **Best for** | Subjective quality checks (tone, helpfulness, hallucination)                                                                   | Deterministic rule-based checks (format, keywords, length)                 | Tracking how users feel during conversations           |
+| **Cost**     | LLM API call per evaluation                                                                                                    | Free                                                                       | Free                                                   |
+| **Speed**    | Seconds                                                                                                                        | Milliseconds                                                               | Milliseconds                                           |
+| **Output**   | Pass/fail, numeric score, or categories; written reasoning with **LLM with explanation**, no reasoning with **Decision model** | Pass/fail, numeric score, or categories; optional reasoning from `print()` | Positive, neutral, or negative with a confidence score |
+| **Setup**    | Write a prompt                                                                                                                 | Write Hog code                                                             | Pick the type – no prompt or code required             |
 
 ## Choosing what to evaluate
 
@@ -84,7 +84,7 @@ With **Multiple categories**, an empty list (`[]`) is a valid, applicable result
 
 ### How they work
 
-When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](#choosing-an-output-type), which is stored and linked to the original generation. Chat judges also return written reasoning. Typed decision judges don't return written reasoning.
+When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](#choosing-an-output-type), which is stored and linked to the original generation. The behavior depends on the [judge method](#choosing-a-judge-method) you select: **LLM with explanation** judges use chat completions and return written reasoning alongside the result, while **Decision model** judges return typed results without reasoning.
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
@@ -146,25 +146,47 @@ For tool call correlation within messages, include:
 
 ### Built-in templates
 
-PostHog provides five pre-built evaluation templates to get you started:
+PostHog provides pre-built templates to get you started. When you click **Create evaluation**, the template picker opens with these tabs:
 
-| Template          | What it checks                                | Best for                            |
-| ----------------- | --------------------------------------------- | ----------------------------------- |
-| **Relevance**     | Whether the output addresses the user's input | Customer support bots, Q&A systems  |
-| **Helpfulness**   | Whether the response is useful and actionable | Chat assistants, productivity tools |
-| **Jailbreak**     | Attempts to bypass safety guardrails          | Security-sensitive applications     |
-| **Hallucination** | Made-up facts or unsupported claims           | RAG systems, knowledge bases        |
-| **Toxicity**      | Harmful, offensive, or inappropriate content  | User-facing applications            |
+- **Recommended** shows a short list of popular templates.
+- **All** shows every template.
+- **Answer quality**, **Safety**, **Agent behavior**, **User insights**, and **Cost & speed** show the templates in that category.
+
+The picker includes LLM judge, Hog code, and sentiment templates. Some LLM judge templates are:
+
+| Template                   | What it checks                                                                    | Output type   |
+| -------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| **Response quality score** | Rates each answer from 1 to 5 for accuracy, completeness, and clarity             | Numeric score |
+| **Task outcome**           | How each conversation ended: resolved, partly resolved, unresolved, or handed off | Categorical   |
+| **User correction**        | Messages where the user corrects the assistant or repeats a request               | Categorical   |
+| **Relevance**              | Whether the answer addresses what the user asked                                  | Boolean       |
+| **Hallucination**          | Claims in the answer that are made up or unsupported                              | Boolean       |
+| **Prompt injection**       | User messages that try to override your instructions or reveal the system prompt  | Boolean       |
+
+This list is not complete. The template catalog changes over time, so check the picker for the current templates.
+
+### Choosing a judge method
+
+LLM-as-a-judge evaluations have a **Judge method** setting that controls how the judge processes your prompt:
+
+- **LLM with explanation** – Uses chat completions. The judge returns a result and written reasoning explaining its decision. Choose this when you want to understand why the judge passed or failed a generation.
+- **Decision model** – Uses typed decisions. The judge returns a result without written reasoning. Choose this when you need faster, lower-cost evaluations and don't need explanations.
+
+The model picker filters to models that support the selected method. Some models support both methods and remain available regardless of your choice. Switching methods keeps a compatible model and its saved connection. If the current model doesn't support the new method, it's cleared without changing your prompt or output settings.
+
+Existing evaluations without an explicit method selection continue using automatic routing until you choose a method.
 
 ### Creating an LLM judge evaluation
 
 1. Navigate to **AI Evals** > **Evaluations**
-2. Click **New evaluation**
-3. Select **LLM-as-a-judge** as the evaluation type
-4. Choose a template or start from scratch
+2. Click **Create evaluation**
+3. Select an LLM judge template, or click **Start from scratch**
+4. If you start from scratch, set **Method** to **LLM as a judge**
 5. Configure the evaluation:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
+   - **Judge method**: Choose **LLM with explanation** or **Decision model** (see [Choosing a judge method](#choosing-a-judge-method))
+   - **Model**: Select a model from your configured AI providers – the list is filtered by the selected judge method
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
    - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
 6. Enable the evaluation and click **Save**
