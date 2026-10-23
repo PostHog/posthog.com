@@ -7638,6 +7638,10 @@ export const docsMenu = {
                             url: '/docs/ai-evals/datasets',
                         },
                         {
+                            name: 'Offline evals',
+                            url: '/docs/ai-evals/offline-evals',
+                        },
+                        {
                             name: 'Taggers',
                             url: '/docs/ai-evals/taggers',
                         },

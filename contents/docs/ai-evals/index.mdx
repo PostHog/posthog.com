@@ -25,7 +25,7 @@ Where each part comes from is what separates the three ways to run evaluations:
 | Evaluator runs in | PostHog | PostHog | Your code |
 | Answers | Is production working right now? | What would this new evaluation have said about last week? | Does this change break something that used to work? |
 
-This page covers online evaluations and backfills. For offline evaluations, see [datasets](/docs/ai-evals/datasets).
+This page covers online evaluations and backfills. For offline evaluations, see [offline evals](/docs/ai-evals/offline-evals).
 
 ## Why use evaluations?
 
@@ -445,7 +445,7 @@ You can also filter generations by evaluation results or create [insights](/docs
 
 ## Evaluating past data
 
-An evaluation only grades data captured after you create it, so a new evaluation starts with no baseline. A backfill runs it over generations, traces, or sessions you've already captured, so you see results right away instead of waiting for new traffic. Backfills use your existing live data. To test changes before they reach production, use [datasets](/docs/ai-evals/datasets) instead.
+An evaluation only grades data captured after you create it, so a new evaluation starts with no baseline. A backfill runs it over generations, traces, or sessions you've already captured, so you see results right away instead of waiting for new traffic. Backfills use your existing live data. To test changes before they reach production, use [offline evaluations](/docs/ai-evals/offline-evals) instead.
 
 To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
 
