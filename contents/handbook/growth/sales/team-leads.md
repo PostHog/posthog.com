@@ -77,7 +77,7 @@ We need to proactively notify all team members when there is a change to pricing
 1. The author of the pull request (normally Ben or RevOps) should post in <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-sales-cs-support</PrivateLink> with the pertinent details of the update:
     * A link to the handbook pull request.
     * Cover every change in the diff, not just the headline ones. In larger, heavily discussed, or longer-running pull requests, a small change can get lost behind the main one(s).
-    * A list of every rule that changed, each written as **Before:** (the old rule) and **After:** (the new rule). For example:
+    * A list of every substantive rule that changed, each written as **Before:** (the old rule) and **After:** (the new rule). For example:
         * **Before:** If a top-up takes the customer's total credit purchases into a higher discount tier, the top-up gets that tier.
         * **After:** Each purchase is priced independently. A top-up doesn't combine with earlier purchases to reach a higher tier.
 2. Team leads should then make sure all of their team are aware of the change, and any clarifying questions asked in the Slack thread from step 1.
