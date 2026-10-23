@@ -113,7 +113,7 @@ const processor = new PostHogSpanProcessor({
 
 </MultiLanguage>
 
-In privacy mode, spans are sent without prompt, completion, tool argument, tool result, and error message attributes.
+In privacy mode, spans are sent without attributes that hold prompts, completions, tool arguments and results, retrieved documents, or error messages. Span events other than exceptions are also removed.
 
 ## What privacy mode removes
 
