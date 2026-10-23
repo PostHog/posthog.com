@@ -10,7 +10,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Particle connector sends events from your [Particle](https://www.particle.io) devices to PostHog, with no server of your own. Every `Particle.publish()` that matches your event name prefixes arrives as a PostHog event on that device, so you can build insights, dashboards, and alerts on device data. PostHog also syncs your device list into the Data Warehouse.
+[Particle](https://www.particle.io) forwards the events your devices publish, but it doesn't store them. Connect Particle to PostHog to keep a history of your IoT (internet of things) device data, with no server of your own. Every `Particle.publish()` that matches your event name prefixes arrives as a PostHog event on that device, so you can build insights, dashboards, and alerts on device data. PostHog also syncs your device list into the Data Warehouse.
 
 ## Prerequisites
 
