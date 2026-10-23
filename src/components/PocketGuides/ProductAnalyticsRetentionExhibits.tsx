@@ -85,7 +85,7 @@ export function RepeatBookingFigure(): JSX.Element {
         >
             <div ref={rootRef} className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div className="relative min-w-0">
-                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
+                    <section className={`${twigBookingPanelClasses} relative`} aria-label="Twig booking preview">
                         <div className="twig-compact-header">
                             <TwigWordmark />
                         </div>
@@ -476,7 +476,10 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                 </section>
                             ) : (
                                 <>
-                                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
+                                    <section
+                                        className={`${twigBookingPanelClasses} relative`}
+                                        aria-label="Twig booking preview"
+                                    >
                                         <div className="twig-compact-header">
                                             <TwigWordmark />
                                         </div>
@@ -506,19 +509,19 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                                 </div>
                                             )}
                                         </div>
+                                        {step === 0 && (
+                                            <div className="twig-saved-control absolute left-4 top-[3.15rem] z-10">
+                                                <SavedStay
+                                                    stayName={stays[0].title ?? 'Stay'}
+                                                    signedIn
+                                                    saved={false}
+                                                    onSavedChange={(nextSaved) => {
+                                                        if (nextSaved) changeStep(1)
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
                                     </section>
-                                    {step === 0 && (
-                                        <div className="twig-saved-control absolute left-4 top-[3.15rem] z-10">
-                                            <SavedStay
-                                                stayName={stays[0].title ?? 'Stay'}
-                                                signedIn
-                                                saved={false}
-                                                onSavedChange={(nextSaved) => {
-                                                    if (nextSaved) changeStep(1)
-                                                }}
-                                            />
-                                        </div>
-                                    )}
                                 </>
                             )}
                         </div>

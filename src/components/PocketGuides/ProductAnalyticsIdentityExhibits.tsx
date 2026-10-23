@@ -331,7 +331,7 @@ export function ResetIdentityFigure(): JSX.Element {
                         <TwigWordmark />
                         {signedIn && (
                             <ProfileMenu
-                                className="[&_.twig-profile-popover]:!top-[calc(100%+6px)] [&_.twig-profile-popover]:!w-32 [&_.twig-profile-summary]:hidden [&_.twig-profile-popover_nav]:hidden [&_.twig-profile-signout]:!px-2.5 [&_.twig-profile-signout]:!py-2.5"
+                                className="twig-compact-profile"
                                 profile={profile}
                                 links={[]}
                                 open={menuOpen}

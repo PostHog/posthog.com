@@ -193,3 +193,30 @@ The transition animates an inert copy of the cover in a temporary layer clipped 
 - A navigation that stalls for 5 seconds restores the source page.
 
 Run `pnpm exec node --test src/components/PocketGuides/bookOpening.test.ts` after changes.
+
+### Product Analytics compact Twig audit
+
+All current Product Analytics Twig figure consumers use `/compact.css` and the
+shared compact primitives. The guide retains its PostHog inspector styling.
+
+| Consumer | Compact Twig parts |
+| --- | --- |
+| `TwigBrowseFigure` (101 autocapture, events, filters, properties, and Learn overview) | Wordmark, destination filters, photo/name/location/price card |
+| `SessionGroupingFigure` | Forest/Coast filters and compact stay |
+| `IdentifySavedStayFigure` | Stay, bookmark, login, saved-stay list |
+| `ResetIdentityFigure` | Profile menu/sign-out, saved-stay list, signed-out stay |
+| `BookingStepsFigure` | Stay and booking action/disabled state |
+| `RepeatBookingFigure` | Stay and booking action/confirmation |
+| `SavedStayJourneyFigure` | Bookmark, saved list, stay and booking action |
+
+The retention bookmark must remain inside `.twig-compact`, including when
+positioned over the photo. Otherwise it inherits the legacy standalone control
+palette. Profile-menu layout belongs in the shared compact stylesheet rather
+than host overrides. Event figures need no extra host border around the Twig
+surface.
+
+Trends, funnels, retention charts, cohorts, dashboards, and replay-player chrome
+are PostHog UI, not compact Twig. Replay footage remains a recorded asset.
+`TwigBrowseStaysMockup` has no consumers; it and the package's read-only
+`BrowseStaysPreview` are not used by this guide. Other guide volumes are outside
+this change. No guide prose, simulated event payloads, or lesson flow changes.
