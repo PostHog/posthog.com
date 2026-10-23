@@ -143,15 +143,17 @@ Organization ID: <organization ID from step 1>
    - observations_viewed: "replay_vision_observation_viewed" events
    - last_seen: the date of their latest event in this list
 
-3. Rank people by experiment_views plus refreshes. Give each person the first role that matches:
-   - "Experiment results reader who also watches recordings": in the top 3, and experiment_recordings is 1 or more.
-   - "Experiment results reader": in the top 3.
+3. Rank the people whose experiment_views is 1 or more by experiment_views plus refreshes. Only people in this ranking can get a reader role.
+   Give each person the first role that matches:
+   - "Experiment results reader who also watches recordings": in the top 3 of the ranking, and experiment_recordings is 1 or more.
+   - "Experiment results reader": in the top 3 of the ranking.
    - "Experiment creator": created_or_launched is 2 or more.
    - "Replay Vision user": observations_viewed is 1 or more.
    - Leave all other people out.
 
 4. Pick the champion: the first "Experiment results reader who also watches recordings". If there is none, the first "Experiment results reader".
    Pick the second contact: the first "Experiment creator". If there is none, the first "Replay Vision user".
+   If there is no reader, write "No champion: nobody viewed experiment results in the last 30 days." Then do step 5 and skip steps 6 and 7.
 
 5. Return a table with: email, role, experiment_views, experiments_viewed, refreshes, created_or_launched, experiment_recordings, recordings_viewed, observations_viewed, last_seen. Mark the champion and the second contact.
 
@@ -252,7 +254,9 @@ Do not create, edit, or delete anything. Do not run Replay Vision scans.
    - Keep **Sample variants evenly** on. A 90/10 split then still gives the small variant enough sessions.
    - Start with the default model at 5 credits per observation, it should be enough for a layout or flow change.
 
-5. Test before the scanner goes live. Scan two or three sessions from each variant on demand, and read the summaries with your champion to make sure it all looks good. Then let the customer turn the scanner on.
+   A new scanner turns on when you save it, and its [first sweep starts within minutes](/docs/replay-vision/creating-scanners#enabling-and-disabling). From the experiment form, it turns on when the experiment launches. Turn the scanner off in the **Scanners** list right after it turns on. It then spends no credits before you test the focus text.
+
+5. Test before the scanner goes live. Scan two or three sessions from each variant on demand, and read the summaries with your champion to make sure it all looks good. On-demand scans work while the scanner is off, and they also use credits. Then let the customer turn the scanner on.
 
 ### Read the results
 
