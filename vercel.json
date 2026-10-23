@@ -642,7 +642,7 @@
         },
         {
             "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "destination": "/docs/self-driving",
             "statusCode": 301
         },
         {
@@ -1179,6 +1179,81 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/posthog-desktop:ext(\\.md)?",
+            "destination": "/docs/self-driving:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/:path*",
+            "destination": "/docs/self-driving",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/ai-observability/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-pipelines/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/endpoints/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/endpoints/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/error-tracking/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/error-tracking/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/experiments/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/experiments/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/feature-flags/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/logs/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/logs/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/mcp-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/product-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/session-replay/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/surveys/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/surveys/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/web-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/start-here:ext(\\.md)?",
             "destination": "/docs/self-driving:ext?",
             "statusCode": 301
@@ -1429,7 +1504,7 @@
         },
         {
             "source": "/docs/posthog-code/quick-tour:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
@@ -1558,17 +1633,17 @@
         },
         {
             "source": "/docs/posthog-code/download-posthog-code:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop/download-posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/:path*",
-            "destination": "/docs/posthog-desktop/:path*",
+            "destination": "/docs/self-driving",
             "statusCode": 301
         },
         {
