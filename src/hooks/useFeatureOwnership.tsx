@@ -659,21 +659,35 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'wizard-app-handoffs': {
         feature: 'Wizard (app handoffs)',
         owner: ['wizard-and-docs', 'growth'],
+        notes: (
+            <>
+                Moving a task between the wizard and the PostHog app, so users can start in one and finish in the other.
+                For example, the wizard finds a data warehouse source and the user finishes creating it in the app.
+            </>
+        ),
         label: false,
     },
     'wizard-cloud': {
         feature: 'Wizard (cloud in-app)',
         owner: ['growth'],
+        notes: (
+            <>
+                The wizard running in our cloud, started from inside the PostHog app. It does point implementations,
+                such as adding a new product, and shows cross-sell and upgrade opportunities.
+            </>
+        ),
         label: false,
     },
     'wizard-headless-cli': {
         feature: 'Wizard (headless CLI)',
         owner: ['growth'],
+        notes: <>A version of the wizard without the TUI, so any coding agent can run it.</>,
         label: false,
     },
     'wizard-migration': {
         feature: 'Wizard (migration)',
         owner: ['forward-deployed-engineering'],
+        notes: <>A wizard program that moves a customer to PostHog from a competitor.</>,
         label: false,
     },
 }
