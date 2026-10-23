@@ -20,7 +20,6 @@ import { applications, GetAccess, topFeatures } from './data_warehouse/slides'
 
 const YES = true
 const NO = false
-const NOT_DOCUMENTED = 'Not documented'
 
 export const dataWarehouse = {
     ...getTool('data_warehouse'),
@@ -184,8 +183,7 @@ export const dataWarehouse = {
     },
     /**
      * Honest comparison against mature cloud warehouses. Every cell was checked against
-     * vendor docs in October 2026 – re-check before changing a value. A PostHog cell reads
-     * "Not documented" when the warehouse docs don't mention the feature.
+     * vendor docs in October 2026 – re-check before changing a value.
      * Values are in column order: PostHog, BigQuery, Snowflake, Redshift.
      */
     comparison: {
@@ -231,18 +229,7 @@ export const dataWarehouse = {
             {
                 label: 'Machine learning in the warehouse',
                 description: 'Train or run models where the data lives',
-                values: [NOT_DOCUMENTED, YES, YES, YES],
-            },
-            { label: 'Data management', description: 'Recovering and sharing data' },
-            {
-                label: 'Time travel',
-                description: 'Query or restore data as it was earlier',
-                values: [NOT_DOCUMENTED, 'Up to 7 days', 'Up to 90 days', 'Snapshots'],
-            },
-            {
-                label: 'Share live data with other accounts',
-                description: 'Without copying it',
-                values: [NOT_DOCUMENTED, YES, YES, YES],
+                values: [NO, YES, YES, YES],
             },
             { label: 'In the product', description: 'Using warehouse data without writing SQL' },
             {
@@ -255,9 +242,6 @@ export const dataWarehouse = {
                 description: 'For example revenue from Stripe',
                 values: [YES, NO, NO, NO],
             },
-            { label: 'Governance', description: 'Who can see what' },
-            { label: 'Row-level permissions', values: [NO, YES, 'Enterprise plan', YES] },
-            { label: 'Audit log', values: [NOT_DOCUMENTED, YES, YES, YES] },
         ],
     },
     screenshots: {
