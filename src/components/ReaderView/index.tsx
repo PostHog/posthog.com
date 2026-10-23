@@ -1188,9 +1188,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >

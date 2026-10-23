@@ -6,7 +6,7 @@ export const WINDOW_BG = 'bg-primary/75 backdrop-blur-3xl transform-gpu'
 export const WINDOW_SCHEME = 'tertiary'
 
 /** Reader sidebar overlays */
-export const PANEL_BG = 'bg-primary/75 dark:bg-primary backdrop-blur-3xl transform-gpu'
+export const PANEL_BG = 'bg-primary transform-gpu'
 
 /** Taskbar — solid, same --bg as the open windows */
 export const TASKBAR_BG = 'bg-primary transform-gpu'

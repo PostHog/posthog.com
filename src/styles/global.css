@@ -519,6 +519,26 @@
         --bg: 223 222 212; /* #dfded4 */
     }
 
+    .light[data-wallpaper='keyboard-garden'] .reader-panel-overlay {
+        --bg: 211 218 198; /* #d3dac6 */
+    }
+
+    .light[data-wallpaper='hogzilla'] .reader-panel-overlay {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='startup-monopoly'] .reader-panel-overlay {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
+    .light[data-wallpaper='office-party'] .reader-panel-overlay {
+        --bg: 223 222 212; /* #dfded4 */
+    }
+
+    .dark .reader-panel-overlay[data-scheme='secondary'] {
+        --bg: 45 46 55;
+    }
+
     .dark [data-scheme='primary'] {
         --bg: 30 31 35;
         --accent: 45 46 55;
