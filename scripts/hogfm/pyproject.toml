@@ -20,6 +20,8 @@ handbook-audio = "handbook.generate:main"
 [tool.uv]
 package = true
 exclude-newer = "7 days"
+# certifi 2026.10.19 drops the compromised eMudhra root and is newer than the 7-day cooldown.
+exclude-newer-package = { certifi = "1 day" }
 
 [build-system]
 requires = ["hatchling"]
