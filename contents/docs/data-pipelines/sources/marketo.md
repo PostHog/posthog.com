@@ -9,9 +9,9 @@ availability:
 sourceId: Marketo
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Marketo connector syncs leads, activities, activity types, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -39,7 +39,10 @@ You'll be asked for:
 
 <SyncModes />
 
-All Marketo tables are full refresh. Each sync replaces the contents of the table.
+Marketo tables sync in two ways:
+
+- **Incremental**: `leads`, `activities`, and `program_members` sync incrementally from the start date. Each run fetches rows created or updated since the previous sync.
+- **Full refresh**: All other tables (`activity_types`, `campaigns`, `lists`, `programs`, `emails`, `forms`, `landing_pages`, `smart_campaigns`, `folders`, `channels`, `list_members`) replace their contents on every sync.
 
 ## Configuration
 
