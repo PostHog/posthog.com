@@ -15,6 +15,11 @@ const names = require('../src/components/Hogball/names.json')
 const LEADERBOARD_CACHE_CONTROL = 's-maxage=60, stale-while-revalidate=300'
 const MAX_SCORE = 5000000
 const SIZE = 10
+// The CDN may not cache function responses, so keep a copy here too. This limits PostHog queries to
+// one a minute for each server instance, whatever the traffic.
+const CACHE_MS = 60 * 1000
+const TIMEOUT_MS = 5000
+let cache = { at: 0, value: null }
 const FIRST = new Set(names.first)
 const LAST = new Set(names.last)
 const BLOCKED = new Set(names.blocked)
@@ -46,11 +51,13 @@ async function getLeaderboard(env) {
     const key = env.HOGBALL_LEADERBOARD_API_KEY
     const project = env.HOGBALL_LEADERBOARD_PROJECT_ID
     if (!key || !project) return { configured: false, leaders: [] }
+    if (cache.value && Date.now() - cache.at < CACHE_MS) return cache.value
     const host = env.HOGBALL_LEADERBOARD_HOST || 'https://us.posthog.com'
     const response = await fetch(`${host}/api/projects/${project}/query/`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: { kind: 'HogQLQuery', query: QUERY }, name: 'hogball leaderboard' }),
+        signal: AbortSignal.timeout(TIMEOUT_MS),
     })
     if (!response.ok) throw new Error(`PostHog query returned ${response.status}`)
     const { results = [] } = await response.json()
@@ -58,7 +65,8 @@ async function getLeaderboard(env) {
         .filter(([initials, name]) => isInitials(initials) && isPilotName(name))
         .slice(0, SIZE)
         .map(([initials, name, score]) => ({ initials, name, score: Number(score) }))
-    return { configured: true, leaders }
+    cache = { at: Date.now(), value: { configured: true, leaders } }
+    return cache.value
 }
 
 module.exports = { getLeaderboard, isInitials, isPilotName, LEADERBOARD_CACHE_CONTROL }

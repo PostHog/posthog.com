@@ -18,6 +18,13 @@ The table must have focus to receive keys. A click on the table gives it focus. 
 
 A table bump moves the ball a little. Three bumps in quick succession **tilt** the table: the flippers stop and nothing scores until the ball drains.
 
+## Performance
+
+- `three` loads only with this page. Opening the game adds about 265 KB of compressed JavaScript, and other pages load nothing extra.
+- Without focus (a click outside the table, a window on top, a minimized window, or a hidden tab), the game pauses and redraws 4 times a second so the lights still blink. A click on the table resumes play. When the table is off screen, the game does not draw.
+- During play, the floor texture redraws 24 times a second and the LED panel 10 times a second. The 3D scene draws every frame.
+- On unmount, the component disposes of all geometry, materials, and textures, and frees the WebGL context at once.
+
 ## Scoring
 
 | Feature | Points | Effect |
@@ -70,7 +77,7 @@ The function code is in `api/_hogball-leaderboard.js`. `api/hogball-leaderboard.
 | `HOGBALL_LEADERBOARD_PROJECT_ID` | The ID of the PostHog project that gets the posthog.com events |
 | `HOGBALL_LEADERBOARD_HOST` | Optional. Defaults to `https://us.posthog.com` |
 
-Without the key, the function returns an empty list and the game shows no leaderboard. Scores are not verified on a server, so a player who sends fake events can put a fake score on the board, up to the 5,000,000 point limit.
+The function keeps each result for 60 seconds and sends `Cache-Control: s-maxage=60`, so it runs at most one PostHog query a minute for each server instance. A query that takes more than 5 seconds fails. Without the key, the function returns an empty list and the game shows no leaderboard. Scores are not verified on a server, so a player who sends fake events can put a fake score on the board, up to the 5,000,000 point limit.
 
 ## Files
 

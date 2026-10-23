@@ -74,6 +74,8 @@ const FLOOR_SCALE = 1.5
 const CAMERA_PITCH = (56 * Math.PI) / 180
 const BUMPER_COLORS = [RED, BLUE, PURPLE]
 const SPARKS = 160
+// The floor lights change slowly, so the floor texture does not need a redraw every frame
+const FLOOR_FRAME_SECONDS = 1 / 24
 
 const chrome = () => new MeshStandardMaterial({ color: '#dfe3f5', metalness: 1, roughness: 0.2 })
 const plastic = (color: string, emissive = 0.25) =>
@@ -439,11 +441,14 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
     let previousTargets = [false, false, false]
     let previousCombo = 0
 
+    let lastFloor = -Infinity
+
     const render = (game: Game, time: number, rocketProgress: number) => {
         const dt = Math.min(0.05, Math.max(0, time - lastTime))
         lastTime = time
 
-        if (floorContext) {
+        if (floorContext && time - lastFloor >= FLOOR_FRAME_SECONDS) {
+            lastFloor = time
             floorContext.setTransform(FLOOR_SCALE, 0, 0, FLOOR_SCALE, 0, 0)
             drawFloor(floorContext, game, time)
             floorTexture.needsUpdate = true
@@ -546,6 +551,8 @@ export function createTable(canvas: HTMLCanvasElement, images: Images): Table {
             for (const texture of [floorTexture, ballTexture, rocketMaterial.map, environment]) texture?.dispose()
             pmrem.dispose()
             renderer.dispose()
+            // Free the WebGL context at once. Browsers allow only a few at a time.
+            renderer.forceContextLoss()
         },
     }
 }

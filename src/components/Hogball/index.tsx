@@ -20,6 +20,9 @@ const INITIALS_KEY = 'hogball-initials'
 const LEADERBOARD_SIZE = 10
 const LEADERBOARD_URL = '/api/hogball-leaderboard'
 const ROCKET_SECONDS = 1.6
+// Without focus the game pauses and redraws only a few times a second, so the lights still blink
+const IDLE_FRAME_MS = 250
+const PANEL_FRAME_MS = 100
 // The same keys as the original Windows game
 const KEYS: Record<string, keyof Input> = { KeyZ: 'left', Slash: 'right', Space: 'plunger' }
 const BUMP_KEYS: Record<string, Bump> = { KeyX: 'left', Period: 'right', ArrowUp: 'up' }
@@ -51,6 +54,7 @@ export default function Hogball(): JSX.Element {
     const startedRef = useRef(0)
     const bestRef = useRef(0)
     const mutedRef = useRef(false)
+    const focusedRef = useRef(false)
     const [status, setStatus] = useState<Status>(() => statusOf(gameRef.current))
     const [muted, setMuted] = useState(false)
     const pilotRef = useRef('')
@@ -144,6 +148,9 @@ export default function Hogball(): JSX.Element {
         let last = performance.now()
         let spare = 0
         let rocketAt = -Infinity
+        let lastDraw = 0
+        let lastPanel = 0
+        let onScreen = true
 
         // The panel goes to the right of the table in a wide window, and above it in a narrow one
         const layout = () => {
@@ -169,20 +176,27 @@ export default function Hogball(): JSX.Element {
             })
             panelCanvas.width = Math.round(panelWidth * dpr)
             panelCanvas.height = Math.round(panelHeight * dpr)
+            lastPanel = 0
             if (sceneWidth > 0 && sceneHeight > 0) table.resize(sceneWidth, sceneHeight, dpr)
         }
         layout()
         const observer = new ResizeObserver(layout)
         observer.observe(container)
+        const visibility = new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting))
+        visibility.observe(container)
 
         const tick = (now: number) => {
             const game = gameRef.current
-            spare = Math.min(spare + (now - last) / 1000, 0.1)
+            const active = focusedRef.current && document.visibilityState === 'visible'
+            spare = active ? Math.min(spare + (now - last) / 1000, 0.1) : 0
             last = now
             while (spare >= STEP) {
                 step(game, inputRef.current, STEP)
                 spare -= STEP
             }
+            frame = requestAnimationFrame(tick)
+            if (!onScreen || (!active && now - lastDraw < IDLE_FRAME_MS)) return
+            lastDraw = now
             const charging = inputRef.current.plunger && ballInPlunger(game) && game.state !== 'over'
             if (charging && !mutedRef.current) chargeUp(game.charge)
             else stopCharge()
@@ -193,8 +207,9 @@ export default function Hogball(): JSX.Element {
             game.sounds.length = 0
 
             table.render(game, now / 1000, (now - rocketAt) / 1000 / ROCKET_SECONDS)
-            const panel = panelCanvas.getContext('2d')
+            const panel = now - lastPanel >= PANEL_FRAME_MS ? panelCanvas.getContext('2d') : null
             if (panel) {
+                lastPanel = now
                 panel.setTransform(1, 0, 0, 1, 0, 0)
                 panel.clearRect(0, 0, panelCanvas.width, panelCanvas.height)
                 if (wide) {
@@ -215,7 +230,6 @@ export default function Hogball(): JSX.Element {
                     ? previous
                     : next
             })
-            frame = requestAnimationFrame(tick)
         }
         frame = requestAnimationFrame(tick)
 
@@ -227,6 +241,7 @@ export default function Hogball(): JSX.Element {
         return () => {
             cancelAnimationFrame(frame)
             observer.disconnect()
+            visibility.disconnect()
             window.removeEventListener('mouseup', releaseMouse)
             stopCharge()
             table.dispose()
@@ -342,7 +357,16 @@ export default function Hogball(): JSX.Element {
                 }}
                 onPointerUp={releaseTouch}
                 onPointerCancel={releaseTouch}
-                onBlur={releaseAll}
+                onFocus={() => (focusedRef.current = true)}
+                onBlur={() => {
+                    focusedRef.current = false
+                    releaseAll()
+                    const game = gameRef.current
+                    if (game.state === 'playing') {
+                        game.message = 'Paused. Click the table to play'
+                        game.messageTime = 1
+                    }
+                }}
             >
                 <canvas ref={sceneRef} className="absolute" />
                 <canvas ref={panelRef} className="absolute" />
