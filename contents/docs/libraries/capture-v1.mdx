@@ -108,7 +108,7 @@ You can set properties and options in several places. When the same key is set i
 1. **The capture call** – the properties and options you pass for this event
 2. **Context** – values set for the current request or job, such as Python's `new_context()` and `tag()`, or Go's `RequestContext`
 3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, or Go's `DefaultEventProperties` and `DefaultEventOptions`
-4. **SDK values** – properties the SDK adds itself, such as `$is_server`
+4. **SDK values** – properties the SDK adds itself, such as `$is_server`, and the `$feature/<key>` and `$active_feature_flags` properties from the feature flags you attach to an event
 
 Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
