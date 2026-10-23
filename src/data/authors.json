@@ -810,5 +810,13 @@
         "link_type": "github",
         "link_url": "https://github.com/tatoalo",
         "profile_id": 34600
+    },
+    {
+        "handle": "ryan-mccrary",
+        "name": "Ryan McCrary",
+        "role": "Technical Account Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/ryanmccrary/",
+        "profile_id": 35044
     }
 ]

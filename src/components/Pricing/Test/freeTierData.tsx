@@ -77,7 +77,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-purple',
     },
     {
-        name: 'Data pipelines',
+        name: 'Destinations',
         allocation: '10K events + 1M rows',
         note: (
             <>

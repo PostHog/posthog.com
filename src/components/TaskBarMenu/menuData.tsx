@@ -3,6 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
+import { HedgehogGardener } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -98,6 +99,7 @@ const docsMenuItems: MenuItemType[] = [
         icon: <Icons.IconApps className="size-4 text-blue" />,
         items: [
             { type: 'item', label: 'Application metrics', link: '/docs/metrics' },
+            { type: 'item', label: 'Business Knowledge', link: '/docs/business-knowledge' },
             { type: 'item', label: 'Distributed tracing', link: '/docs/distributed-tracing' },
             { type: 'item', label: 'Endpoints', link: '/docs/endpoints' },
             { type: 'item', label: 'Experiments', link: '/docs/experiments' },
@@ -154,7 +156,7 @@ const docsMenuItems: MenuItemType[] = [
     {
         type: 'item',
         label: 'Data pipelines',
-        link: '/docs/cdp',
+        link: '/docs/data-pipelines',
         icon: <Icons.IconPlug className="size-4 text-sky-blue" />,
     },
     {
@@ -204,6 +206,7 @@ const docsMenuItems: MenuItemType[] = [
 ]
 
 const docsProductIconFallbacks = {
+    'business-knowledge': { Icon: Icons.IconBook, color: 'purple' },
     'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
     'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
     skills: { Icon: Icons.IconMagic, color: 'purple' },
@@ -539,27 +542,9 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'MCP leaderboard',
-                    link: '/mcp/leaderboard',
-                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
-                },
-                {
-                    type: 'item',
                     label: 'Things that spark joy',
                     link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
-                },
-                // {
-                //     type: 'item',
-                //     label: 'Video library',
-                //     link: '/videos',
-                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
-                // },
-                {
-                    type: 'item',
-                    label: 'Services',
-                    link: '/services',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -579,6 +564,21 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Services',
+                    link: '/services',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -610,7 +610,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'SOC 2',
-                    link: '/handbook/company/security#soc-2',
+                    link: '/docs/privacy/soc2',
                     icon: <Icons.IconShieldLock className="size-4 text-teal" />,
                 },
                 {
@@ -630,10 +630,22 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Enterprise',
-                    link: '/enterprise',
-                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
+                {
+                    type: 'item',
+                    label: 'Field guide to wild users',
+                    link: '/field-guide',
+                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
+                },
+                // {
+                //     type: 'item',
+                //     label: 'Video library',
+                //     link: '/videos',
+                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                // },
             ],
         },
     ]
@@ -826,6 +838,26 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/sparks-joy/hogpatch',
             iconName: 'games' as AppIconName,
             customIcon: null,
+        },
+        {
+            label: 'PostHog Farm',
+            link: 'https://posthog.farm',
+            iconName: null,
+            customIcon: <HedgehogGardener className="size-12" />,
+            external: true,
+        },
+        {
+            label: 'Bug Survivors',
+            link: 'https://survivors.posthog.com',
+            iconName: null,
+            customIcon: (
+                <img
+                    src="/images/sparks-joy/bug-survivors.png"
+                    alt=""
+                    className="size-12 [image-rendering:pixelated]"
+                />
+            ),
+            external: true,
         },
     ],
     notGames: [

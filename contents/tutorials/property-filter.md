@@ -14,7 +14,7 @@ date: 2024-12-09
 
 When collecting data with PostHog, you may want to avoid collecting certain properties for privacy reasons. For example, you may want to ensure you never collect IP addresses or exact locations.
 
-That's where the [property filter app](/apps/property-filter), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it.
+That's where the [property filter app](/docs/data-pipelines/transformations/template-filter-properties), which was created by the team at [Witty Works](https://www.witty.works/), comes in. It gives you fine-grained control over which properties are kept or discarded from your events, helping you balance data collection needs with privacy requirements. Here's how to use it.
 
 > **Note:** If you prefer not to use the property filter app, you can also filter properties by using the `sanitize` configuration option when initializing the PostHog client. See the [sanitize docs](/docs/product-analytics/privacy#sanitize-properties) for more details.
 
@@ -38,7 +38,7 @@ The property filter app works by setting the selected properties to `null` when 
 
 ## List of default PostHog properties
 
-Below is a list of some of the properties that PostHog captures by default. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts). 
+Below is a list of some of the properties that PostHog captures by default. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser-common/src/utils/event-utils.ts). 
 
 Note that PostHog's default properties begin with `$`, so you'll need to include this when adding them to the property filter app. For example, `$ip,$os`.
 
@@ -127,6 +127,6 @@ Here's how to reorder transformations:
 
 ## Further reading
 
-- [Property filter app docs](/docs/cdp/property-filter)
-- [GeoIP enrichment docs](/docs/cdp/geoip-enrichment)
+- [Property filter app docs](/docs/data-pipelines/transformations/template-filter-properties)
+- [GeoIP enrichment docs](/docs/data-pipelines/transformations/template-geoip)
 - [Product analytics privacy controls docs](/docs/product-analytics/privacy)

@@ -85,7 +85,7 @@ The most common patterns:
  
 **Product Intelligence → Growth and Marketing.** The product team is measuring user behavior. The growth team wants to measure acquisition funnels, run landing page experiments, and track marketing attribution. Same platform, different team.
  
-**Any use case → Data Infrastructure.** Once multiple teams are in PostHog, someone wants all that data in their warehouse. [Data Pipelines](/docs/cdp) and [Data Warehouse](/docs/data-warehouse) become relevant not as standalone products but as the connective tissue that makes PostHog the source of truth for product data.
+**Any use case → Data Infrastructure.** Once multiple teams are in PostHog, someone wants all that data in their warehouse. [Data Pipelines](/docs/data-pipelines) and [Data Warehouse](/docs/data-warehouse) become relevant not as standalone products but as the connective tissue that makes PostHog the source of truth for product data.
  
 The key insight is that each expansion uses a different entry point with a different champion. The PM who loves Product Analytics is not the person who decides to adopt Feature Flags for the engineering team. You need a new champion for each use case. The existing champion can introduce you (see [getting people to talk to you](/handbook/growth/sales/getting-people-to-talk-to-you)), but the new buyer needs to hear the pitch in their language, tied to their problem.
  

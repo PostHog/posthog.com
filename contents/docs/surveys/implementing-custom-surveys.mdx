@@ -284,7 +284,7 @@ For more control over your surveys, you can use API surveys. Fetching a survey a
 
 1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
 
-2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This returns the active surveys the user matches the display conditions for, as long as the user (determined by their distinct ID) has not already dismissed or responded to the survey.
+2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This returns the active surveys the user matches the display conditions for, as long as the user (determined by their distinct ID) has not already dismissed or responded to the survey. This also returns popover and widget surveys, so filter to API surveys with `surveys.filter((survey) => survey.type === 'api')`.
 
 Surveys are requested on first load and then cached by default by the JavaScript SDK. If you want to force an API call to get an updated list of surveys, pass `true` to the `forceReload` parameter. You only need to do this if you want changed surveys to appear mid-session for users.
 
@@ -329,6 +329,7 @@ Call it inside `posthog.onFeatureFlags()` to avoid this. That callback runs as s
 posthog.onFeatureFlags(() => {
   posthog.getActiveMatchingSurveys((surveys) => {
     // Flag values are available here, so display conditions are evaluated against them
+    const apiSurveys = surveys.filter((survey) => survey.type === 'api');
   });
 });
 ```
@@ -352,9 +353,9 @@ export default function Feedback() {
     // Wait for feature flags so surveys targeted with a flag are evaluated against real values
     return posthog.onFeatureFlags(() => {
       posthog.getActiveMatchingSurveys((surveys) => {
-        if (surveys.length > 0) {
-          const survey = surveys[0];
-          setSurvey(survey)
+        const apiSurveys = surveys.filter((survey) => survey.type === 'api');
+        if (apiSurveys.length > 0) {
+          setSurvey(apiSurveys[0])
         }
       });
     });
@@ -366,6 +367,9 @@ export default function Feedback() {
     const responseKey = `$survey_response_${survey.questions[0].id}`; // $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11
     posthog.capture("survey sent", {
       $survey_id: survey.id,
+      $survey_iteration: survey.current_iteration,
+      $survey_submission_id: crypto.randomUUID(),
+      $survey_completed: true,
       [responseKey]: feedback
     })
   }
@@ -391,15 +395,11 @@ export default function Feedback() {
 }
 ```
 
-> **Tip:** To keep track of surveys shown, dismissed, or responded to, store values in a cookie or local storage like this:
-> ```js-web
-> //... other code
-> posthog.capture("survey sent", {
->   $survey_id: survey.id,
->   $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11: feedback
-> })
-> localStorage.setItem(`hasInteractedWithSurvey_${survey.id}`, 'true');
-> ```
+### Mark a survey as seen
+
+When you capture `survey sent` or `survey dismissed` with `posthog-js` 1.249.2 or later, the SDK marks the survey as seen in the browser and records the response or dismissal on the person, so the survey doesn't show again. Include `$survey_iteration` in the event so the SDK marks the right iteration of a repeating survey.
+
+If you capture these events from your backend or another SDK instead, set the person properties yourself (see [event properties](#event-properties)) and call `posthog.surveys.markSurveyAsSeen(survey.id, { iteration: survey.current_iteration })` in the browser. This method needs `posthog-js` 1.396.6 or later.
 
 ## Capture survey responses
 
@@ -427,16 +427,23 @@ The main event you must capture to track survey results is `survey sent`. PostHo
  * }]
  */
 
-const responses = survey.questions.map((question) => {
-  const responseKey = `$survey_response_${question.id}`;
-  return {
-    [responseKey]: questionResponse // this is the response you're tracking in your survey implementation
-  }
-})
+// answers maps each question ID to the response you're tracking in your survey implementation
+const answers = {
+  "7ce5b831-dc71-4648-b6b0-b583d48a0c11": "Yes",
+  "cbeee176-54e0-4757-befd-f4e8fb33b9a9": "Blue"
+}
+
+const responseProperties = Object.fromEntries(
+  survey.questions.map((question) => [`$survey_response_${question.id}`, answers[question.id]])
+)
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    ...responses
+    $survey_iteration: survey.current_iteration,
+    $survey_submission_id: crypto.randomUUID(),
+    $survey_completed: true,
+    $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
+    ...responseProperties
 })
 ```
 
@@ -449,6 +456,18 @@ posthog.capture("survey sent", {
     $survey_response_1: questionResponseForSecondQuestion // Index-based (legacy, position 1)
 })
 ```
+
+### Event properties
+
+| Property | Description |
+| --- | --- |
+| `$survey_id` | Required. The ID of the survey. |
+| `$survey_iteration` | The survey's `current_iteration`. Send it on `survey shown`, `survey sent`, and `survey dismissed` so repeating surveys track each iteration separately. |
+| `$survey_response_<question_id>` | One property per answered question. Send ratings as strings and multiple choice answers as an array of strings. |
+| `$survey_submission_id` | A unique ID for each submission, for example from `crypto.randomUUID()`. Reuse the same ID for the partial and final sends of one submission. PostHog deduplicates responses and counts them for billing by this ID, so events without it each count as a separate response. |
+| `$survey_completed` | `true` on the final send, `false` for a partial response. |
+| `$survey_questions` | Recommended. The survey's questions as `[{ id, question }]`. Queries that look up a response by question position read it. |
+| `$set` | Only needed when you capture outside `posthog-js`, which sets it for you. Set `{ '$survey_responded/<survey_id>': true }` on `survey sent` and `{ '$survey_dismissed/<survey_id>': true }` on `survey dismissed`, so targeting excludes the person. If the survey has a `current_iteration` greater than 0, append it to the key, for example `$survey_responded/<survey_id>/<iteration>`. |
 
 ### Response formats
 
@@ -486,29 +505,30 @@ For surveys with multiple questions, use ID-based properties to ensure your resp
  *       "question": "What should we build next?",
  *       "type": "multiple_choice",
  *       "choices": ["Better analysis tools", "Better documentation and more examples", "More templates"],
- *       "id": "cbeee176-54e0-4757-befd-f4e8fb33b9a9"
+ *       "id": "b1f7d2a4-6c3e-4a51-9d08-2e5f7a1c9b34"
  *     }
  *   ],
  * }]
  */
 
-const responses = survey.questions.map((question) => {
-  const responseKey = `$survey_response_${question.id}`;
+// answers maps each question ID to the response you're tracking in your survey implementation
+const answers = {
+  "cbeee176-54e0-4757-befd-f4e8fb33b9a9": "Faster dashboards", // open text
+  "7ce5b831-dc71-4648-b6b0-b583d48a0c11": "8", // rating, as a string
+  "b1f7d2a4-6c3e-4a51-9d08-2e5f7a1c9b34": ["Better analysis tools", "More templates"] // multiple choice, as an array
+}
 
-  if (question.type === 'multiple_choice') {
-    return {
-      [responseKey]: ["Better analysis tools", "More templates"] // this is the response you're tracking in your survey implementation
-    }
-  }
-
-  return {
-    [responseKey]: questionResponse // this is the response you're tracking in your survey implementation
-  }
-})
+const responseProperties = Object.fromEntries(
+  survey.questions.map((question) => [`$survey_response_${question.id}`, answers[question.id]])
+)
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
-    ...responses
+    $survey_iteration: survey.current_iteration,
+    $survey_submission_id: crypto.randomUUID(),
+    $survey_completed: true,
+    $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
+    ...responseProperties
 })
 ```
 
@@ -533,12 +553,14 @@ There are two other events you should capture to track the full lifecycle of a s
 ```js-web
 // 1. When a user is shown a survey
 posthog.capture("survey shown", {
-    $survey_id: survey.id // required
+    $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration
 })
 
 // 2. When a user has dismissed a survey
 posthog.capture("survey dismissed", {
-    $survey_id: survey.id // required
+    $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration
 })
 ```
 

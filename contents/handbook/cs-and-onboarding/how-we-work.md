@@ -30,7 +30,10 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - CSMs are paid on the NRR of their own book.
   - CSM Team Leads are paid on the combined NRR of their team's books.
   - The overall CS Lead is paid on the combined NRR of all CSM books.
-- Your bonus is guaranteed at 100% for your first 3 months at PostHog. If you exceed your target during that time, you get the higher amount.
+- If you are ramping, your bonus is guaranteed at 100% and held flat for your first 3 months at PostHog.
+  - For example: 
+    -  If you start in September, your Q3 bonus is flat at 100% and prorated to one month, and two thirds (for October and November) are flat at 100%, and then we will prorate the December component based on your actual NRR performance. 
+    - Similarly, if you start in July, your Q3 bonus is flat at 100% until Q4.
 - Bonuses are paid at the end of January, April, July and October. We wait to see which invoices are paid in the first two weeks of the next quarter, then send you a breakdown of your result.
 
 ### How NRR is calculated
@@ -40,6 +43,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
 - Usage is measured before discounts and excludes tax.
 - If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
+- If we offer a customer a product trial where we will provide credit for their usage back, this will be removed from their usage in the NRR to align with billing addon trials which are not counted towards revenue either.  The goal of a trial is to ascertain whether a product is fit for purpose for a customer's needs and as such isn't considered 'retained' as a product until that customer is paying for it.
 - If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
 - Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
 

@@ -6,7 +6,7 @@ import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
-import { getProductMetafieldByNamespace } from './utils'
+import { getDisplayTitle, getProductMetafieldByNamespace } from './utils'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -20,6 +20,8 @@ import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
 import { useCartStore } from './store'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
+import { IconX } from '@posthog/icons'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -362,6 +364,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setCartIsOpen(false) // Close cart when product is opened
     }
 
+    const handleProductClose = () => setSelectedProduct(null)
+
     // Cart handlers - close product when cart is opened
     const handleCartOpen = () => {
         setCartIsOpen(true)
@@ -452,6 +456,18 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                             initial={false}
                         >
                             <div className="h-full flex flex-col">
+                                {selectedProduct && !cartIsOpen && !orderHistoryIsOpen && (
+                                    <div className="flex items-center justify-between px-4 py-2 border-b border-primary flex-shrink-0">
+                                        <h3 className="text-lg font-semibold text-primary m-0">
+                                            {getDisplayTitle(selectedProduct)}
+                                        </h3>
+                                        <OSButton
+                                            icon={<IconX />}
+                                            aria-label="Close product"
+                                            onClick={handleProductClose}
+                                        />
+                                    </div>
+                                )}
                                 <div className="flex-1 overflow-auto">
                                     {cartIsOpen ? (
                                         <Cart className="h-full overflow-y-auto" />
@@ -466,7 +482,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                             onClick={() => undefined} // Fix linter error - return undefined instead of empty function
                                             updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
                                             onCartOpen={handleCartOpen} // Allow opening cart from product panel
-                                            className="!p-4 !pt-4" // Override default padding
+                                            className="!p-4 !pt-6"
                                             containerWidth={asideWidth}
                                         />
                                     ) : null}
@@ -519,7 +535,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                     onClick={() => undefined}
                                     updateURL={handleProductSelect}
                                     onCartOpen={handleCartOpen}
-                                    className="!p-4 !pt-4"
+                                    className="!p-4 !pt-6"
                                     containerWidth={asideWidth}
                                 />
                             ) : null}

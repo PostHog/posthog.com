@@ -32,7 +32,7 @@ export default function ReverseETLExport(): JSX.Element {
                     Deliver cleaned and modeled data from your PostHog data warehouse to your operational tools for
                     marketing, sales, and customer success via our{' '}
                     <Link to="/cdp#integrations-library">CDP destinations</Link> like you can with{' '}
-                    <Link to="/docs/cdp/destinations">realtime data</Link> already.
+                    <Link to="/docs/data-pipelines/destinations">realtime data</Link> already.
                 </p>
 
                 <h2>Batch exports</h2>
@@ -77,7 +77,7 @@ export default function ReverseETLExport(): JSX.Element {
                 </ul>
 
                 <p>
-                    <Link to="/docs/cdp/batch-exports" state={{ newWindow: true }}>
+                    <Link to="/docs/data-pipelines/batch-exports" state={{ newWindow: true }}>
                         Configure batch exports →
                     </Link>
                 </p>

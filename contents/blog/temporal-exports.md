@@ -16,7 +16,7 @@ category: Engineering
 
 PostHog aspires to be the single source of truth for our users, but we also believe they should own their data. We don't (yet) fulfill every need, and even if we did, users still want to use their data on other platforms. It's non-negotiable.
 
-That's why we built export apps, which enabled users to own their PostHog data and move it where they liked. These apps supported users for some time, but haven't scaled well as PostHog and our customers have grown. Our solution is the [newly upgraded exports system](/docs/cdp/batch-exports), now in public beta. Built using Temporal, this post covers why and how we made the change, and what we are building next.
+That's why we built export apps, which enabled users to own their PostHog data and move it where they liked. These apps supported users for some time, but haven't scaled well as PostHog and our customers have grown. Our solution is the [newly upgraded exports system](/docs/data-pipelines/batch-exports), now in public beta. Built using Temporal, this post covers why and how we made the change, and what we are building next.
 
 ## The trouble with export apps
 
@@ -75,7 +75,7 @@ We didn’t completely rebuild our export system; many of the pieces still worke
 
 - `BatchExportRun`: An instance of `BatchExport` for each triggered workflow. Users aren’t meant to create these, only Temporal. They mostly report on the progress and status of individual workflow executions.
 
-Users create a `BatchExport` that includes a schedule and a destination (stored as a `BatchExportDestination`). Temporal then triggers the workflow execution to read data from PostHog, export data to the destination, and return results to the user. You can read a full description of [how batch exports work in our docs](/docs/cdp/batch-exports#how-do-batch-exports-work).
+Users create a `BatchExport` that includes a schedule and a destination (stored as a `BatchExportDestination`). Temporal then triggers the workflow execution to read data from PostHog, export data to the destination, and return results to the user. You can read a full description of [how batch exports work in our docs](/docs/data-pipelines/batch-exports#how-do-batch-exports-work).
 
 With this structure in place, we began working on improving reliability, transparency, and performance.
 
@@ -155,7 +155,7 @@ Having a reliable, transparent, and performant export system enables us to furth
 
 ## What’s next?
 
-As mentioned, we built the structure for `BatchExports`, a UI, and destinations like [Snowflake](/docs/cdp/batch-exports/snowflake), [S3](/docs/cdp/batch-exports/s3), and [BigQuery](/docs/cdp/batch-exports/bigquery), but there’s still a lot to do including:
+As mentioned, we built the structure for `BatchExports`, a UI, and destinations like [Snowflake](/docs/data-pipelines/batch-exports/snowflake), [S3](/docs/data-pipelines/batch-exports/s3), and [BigQuery](/docs/data-pipelines/batch-exports/bigquery), but there’s still a lot to do including:
 
 - More destinations like [Postgres](https://github.com/PostHog/posthog/pull/17045) and Redshift.
 - Improve our [webhook system](https://github.com/PostHog/posthog/issues/16976) to enable multiple inputs, workflows, and destinations. 

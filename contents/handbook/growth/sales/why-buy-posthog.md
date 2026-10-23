@@ -56,7 +56,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 - [Replace Google Analytics](/web-analytics) to get a view on your marketing data which is familiar to experienced marketers.  Recent updates to GA4 have not sat well with that persona so folks are looking for something more familiar.
 - [Define conversion funnels](/funnels) to understand which content drives your users to sign up to your product.  
 - [View aggregated page engagement](/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
-- [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
+- [Ad platform connection](/docs/data-pipelines/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
 
 ## Data Engineers
 
@@ -69,7 +69,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
 ### Use cases
-- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/cdp/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
+- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/data-pipelines/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
 - Let your engineers and product team self-serve analytics and error tracking from within a familiar platform.
 
 # General talking points for all roles

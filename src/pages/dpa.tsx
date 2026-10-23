@@ -1542,10 +1542,6 @@ function DpaGenerator() {
                             <p>N/A</p>
 
                             <p>
-                                If sensitive data are transferred, see Annex C, Part B for applicable restrictions and
-                                safeguards
-                            </p>
-                            <p>
                                 <em>
                                     Frequency of transfer (e.g. whether on a one-off or continuous basis) (EU Standard
                                     Contractual Clauses only):

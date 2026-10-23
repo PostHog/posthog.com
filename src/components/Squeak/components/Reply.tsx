@@ -5,6 +5,7 @@ import Markdown from './Markdown'
 import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
 import { BlockedBadge } from './Profile'
+import { ProfileHoverCard } from './References'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
@@ -394,28 +395,30 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         </p>
                     </Tooltip>
                 ) : (
-                    <Link
-                        state={{ newWindow: true }}
-                        className="flex items-center !text-black dark:!text-white"
-                        to={`/community/profiles/${profile.data.id}`}
-                    >
-                        <div className="mr-2 relative ml-[-2px] shrink-0">
-                            <Avatar
-                                className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
-                                    profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
-                                }`}
-                                image={getAvatarURL(profile?.data)}
-                                color={profile?.data.attributes.color}
-                            />
-                            {isTeamMember && (
-                                <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                    <Logo layout="logomark" className="w-[16px]" />
-                                </span>
-                            )}
-                        </div>
-                        <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
-                        {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
-                    </Link>
+                    <ProfileHoverCard profileId={profile.data.id} triggerClassName="flex">
+                        <Link
+                            state={{ newWindow: true }}
+                            className="flex items-center !text-black dark:!text-white"
+                            to={`/community/profiles/${profile.data.id}`}
+                        >
+                            <div className="mr-2 relative ml-[-2px] shrink-0">
+                                <Avatar
+                                    className={`${isInForum ? 'size-8' : 'size-[25px]'} rounded-full ${
+                                        profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
+                                    }`}
+                                    image={getAvatarURL(profile?.data)}
+                                    color={profile?.data.attributes.color}
+                                />
+                                {isTeamMember && (
+                                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
+                                        <Logo layout="logomark" className="w-[16px]" />
+                                    </span>
+                                )}
+                            </div>
+                            <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                            {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
+                        </Link>
+                    </ProfileHoverCard>
                 )}
                 <BlockedBadge profile={profile?.data} />
                 {!isMax && <LevelBadge points={profile?.data?.attributes?.reputation} />}
@@ -467,7 +470,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         />
                     )}
 
-                    {isReplyAuthor && (
+                    {(isReplyAuthor || isModerator) && (
                         <OSButton
                             size="sm"
                             tooltip="Edit reply"
