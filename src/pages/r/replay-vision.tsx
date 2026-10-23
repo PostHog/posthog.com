@@ -700,19 +700,7 @@ export default function ReplayVisionLanding(): JSX.Element {
                         <MCPTerminal />
                     </section>
 
-                    <section id="questions" className="scroll-mt-20">
-                        <h3 className="!text-2xl !font-bold">FAQ</h3>
-                        <div className="not-prose mt-4">
-                            <Accordion
-                                type="single"
-                                triggerClassName="!px-3 !py-2"
-                                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
-                                items={faqs.map(({ q, a }) => ({ trigger: q, content: a }))}
-                            />
-                        </div>
-                    </section>
-
-                    {/* Closing box in the layout of the /slack "Try it" box. */}
+                    {/* Free tier box in the layout of the /slack "Try it" box. */}
                     <div
                         id="get-started"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-10"
@@ -738,6 +726,18 @@ export default function ReplayVisionLanding(): JSX.Element {
                             />
                         </div>
                     </div>
+
+                    <section id="questions" className="scroll-mt-20">
+                        <h3 className="!text-2xl !font-bold">FAQ</h3>
+                        <div className="not-prose mt-4">
+                            <Accordion
+                                type="single"
+                                triggerClassName="!px-3 !py-2"
+                                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
+                                items={faqs.map(({ q, a }) => ({ trigger: q, content: a }))}
+                            />
+                        </div>
+                    </section>
                 </div>
             </ReaderView>
         </>
