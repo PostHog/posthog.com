@@ -491,7 +491,15 @@
         --bg: 211 218 198; /* #d3dac6 */
     }
 
+    .light[data-wallpaper='keyboard-garden'] #taskbar {
+        --bg: 203 213 185; /* #cbd5b9 */
+    }
+
     .light[data-wallpaper='hogzilla'] [data-app='AppWindow'] {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='hogzilla'] #taskbar {
         --bg: 231 231 227; /* #e7e7e3 */
     }
 
@@ -499,7 +507,15 @@
         --bg: 221 222 213; /* #ddded5 */
     }
 
+    .light[data-wallpaper='startup-monopoly'] #taskbar {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
     .light[data-wallpaper='office-party'] [data-app='AppWindow'] {
+        --bg: 223 222 212; /* #dfded4 */
+    }
+
+    .light[data-wallpaper='office-party'] #taskbar {
         --bg: 223 222 212; /* #dfded4 */
     }
 
