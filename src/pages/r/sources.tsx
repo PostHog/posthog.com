@@ -112,7 +112,11 @@ const FULLY_MANAGED: IconItem[] = [
 
 const SECURE_BY_DEFAULT: IconItem[] = [
     { Icon: IconLock, color: 'text-red', text: 'We encrypt your credentials at rest.' },
-    { Icon: IconEye, color: 'text-teal', text: 'Connect with a read-only user, so Sources can never change your data.' },
+    {
+        Icon: IconEye,
+        color: 'text-teal',
+        text: 'Connect with a read-only user, so Sources can never change your data.',
+    },
     {
         Icon: IconShieldLock,
         color: 'text-seagreen',
