@@ -41,7 +41,7 @@ We are not moving away from conversion campaigns. Search will remain the backbon
 
 <TeamMember name="Brian Young" /> and <a href="https://www.heydigital.co/">Hey Digital</a> build the next month's <PrivateLink url="https://docs.google.com/spreadsheets/d/1ArZG48QUZ81y1RMCJ0PrA50DnAqoIyvo2cWmc4l-cYU">media plan</PrivateLink> one week before that month starts, while Brian is preparing the Growth Review. <TeamMember name="Charles Cook" /> approves the monthly cap at the same time. The media plan is not set in stone, and we update it as reporting comes in.
 
-We use Engaged Visits and platform delivery metrics for early decisions, then compare those signals with signups, Healthy Orgs, and revenue as the results mature. Brian uses that data to reallocate budget within the monthly cap. When spend needs to exceed the cap, Brian and Charles work through the increase together, update the media plan, and record the decision in the Growth Review.
+We use Engaged Visits and platform delivery metrics for early decisions, then compare those signals with org signups, Healthy Orgs, and revenue as the results mature. Brian uses that data to reallocate budget within the monthly cap. When spend needs to exceed the cap, Brian and Charles work through the increase together, update the media plan, and record the decision in the Growth Review.
 
 ## How we measure campaigns
 
@@ -53,12 +53,12 @@ PostHog's [Context Warehouse](/context-warehouse) is the data backend. The <Priv
 
 We use the following sequence to judge conversion campaigns:
 
-- <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2"><strong>Non-freemail signups</strong></PrivateLink> tell us whether a campaign is attracting people using work emails. They function as a canary for newer tool ad campaigns and validate changes to ad copy and landing pages.
+- <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2"><strong>Non-freemail org signups</strong></PrivateLink> tell us whether a campaign is attracting people using work emails. They function as a canary for newer tool ad campaigns and validate changes to ad copy and landing pages.
 - <PrivateLink url="https://us.posthog.com/project/2/data-management/events/billing%20subscription%20activated"><strong>Billing activation</strong></PrivateLink> is a useful leading indicator, but activating billing does not guarantee that an organization will pay an invoice.
 - <PrivateLink url="https://us.posthog.com/project/2/insights/Z0ZA1hLR"><strong>Healthy Orgs</strong></PrivateLink> are the quality indicator.
 - **Revenue** is a lagging result and needs roughly three months to mature, so we use it to validate long-term effectiveness, not to judge or pivot ad campaigns month to month.
 
-See the <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2">Google Ads report for non-freemail signups by product over the last 12 weeks</PrivateLink>.
+See the <PrivateLink url="https://us.posthog.com/project/2/insights/EyekVfx2">Google Ads report for non-freemail org signups by product over the last 12 weeks</PrivateLink>.
 
 ### Awareness campaigns
 
@@ -82,7 +82,7 @@ We treat awareness metrics as directional and only use conversion metrics for de
 
 We currently run ads on:
 
-- Google Search – _conversion_ (non-freemail signups and Healthy Orgs)
+- Google Search – _conversion_ (non-freemail org signups and Healthy Orgs)
 - Reddit – _awareness_ (impressions and Engaged Visits)
 - Meta/Instagram – _awareness_ (impressions and Engaged Visits, experimental)
 - LinkedIn – _awareness_ (impressions and Engaged Visits)
