@@ -95,14 +95,14 @@ const FULLY_MANAGED: IconItem[] = [
     {
         Icon: IconColumns,
         color: 'text-blue',
-        text: "Schema changes are picked up automatically, so a new column upstream doesn't break your sync",
+        text: "Schema changes are picked up automatically, so a new column upstream doesn't break your sync.",
     },
     {
         Icon: IconTrending,
         color: 'text-green',
-        text: 'Incremental syncs only move rows that changed since the last run',
+        text: 'Incremental syncs only move rows that changed since the last run.',
     },
-    { Icon: IconRefresh, color: 'text-orange', text: 'Retries and rate limits are handled for you, per source' },
+    { Icon: IconRefresh, color: 'text-orange', text: 'Retries and rate limits are handled for you, per source.' },
     {
         Icon: IconDatabase,
         color: 'text-purple',
@@ -111,8 +111,8 @@ const FULLY_MANAGED: IconItem[] = [
 ]
 
 const SECURE_BY_DEFAULT: IconItem[] = [
-    { Icon: IconLock, color: 'text-red', text: 'We encrypt your credentials at rest' },
-    { Icon: IconEye, color: 'text-teal', text: 'Connect with a read-only user, so Sources can never change your data' },
+    { Icon: IconLock, color: 'text-red', text: 'We encrypt your credentials at rest.' },
+    { Icon: IconEye, color: 'text-teal', text: 'Connect with a read-only user, so Sources can never change your data.' },
     {
         Icon: IconShieldLock,
         color: 'text-seagreen',
@@ -120,12 +120,12 @@ const SECURE_BY_DEFAULT: IconItem[] = [
             <>
                 PostHog is{' '}
                 <Link to="/docs/privacy/soc2" state={{ newWindow: true }} className="underline font-semibold">
-                    SOC 2 certified
+                    SOC 2 certified.
                 </Link>
             </>
         ),
     },
-    { Icon: IconGlobe, color: 'text-yellow', text: 'EU data residency, and a HIPAA BAA if you need one' },
+    { Icon: IconGlobe, color: 'text-yellow', text: 'EU data residency, and a HIPAA BAA if you need one.' },
 ]
 
 const MIGRATION_REPORT: IconItem[] = [
@@ -255,7 +255,7 @@ export default function SourcesLanding(): JSX.Element {
 
                             <p>
                                 Got a lot of sources? The <strong>PostHog Wizard</strong> finds the databases and APIs
-                                in your code and connects them for you:
+                                in your code and connects them for you.
                             </p>
 
                             <WizardCTA
