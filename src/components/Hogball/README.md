@@ -1,6 +1,6 @@
 # Hogball
 
-**Hogball** is a 3D pinball table at `/sparks-joy/hogball`, in the style of the old Windows space pinball games. The table is a [three.js](https://threejs.org) scene with a perspective camera, raised chrome rails, 3D bumpers and flippers, a ramp on the left, lights, and shadows. The ball is the `HedgehogBall` illustration and the panel art is `HedgehogRocket`, both from `@posthog/brand`. The page is not linked from a menu yet.
+**Hogball** is a 3D pinball table at `/sparks-joy/hogball`, in the style of the old Windows space pinball games. The table is a [three.js](https://threejs.org) scene with a perspective camera, raised chrome rails, 3D bumpers and flippers, a ramp on the left, lights, and shadows. The ball is the `HedgehogBall` illustration and the panel art is `HedgehogRocket`, both from `@posthog/brand`. The page is in the "Things that spark joy" games list (`SparksJoyItems` in `src/components/TaskBarMenu/menuData.tsx`).
 
 ## Playing
 
@@ -59,7 +59,7 @@ Like the original game, the LED panel always shows a mission and its progress. A
 
 After the last mission, the list starts again from the top.
 
-A slow shot does not get to the top of the ramp. It rolls back down to the playfield. A ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing. Walls close off the low end of the ramp, so the ball cannot roll under it.
+A slow shot does not get to the top of the ramp. It rolls back down to the playfield. A ball that rolls up into the ramp exit goes up the ramp backwards and scores nothing. Walls close off the low end of the ramp and the sides of the on-ramp near its entrance, so the ball cannot roll through them. The top of the on-ramp walls is a peak, so a ball cannot stop on it.
 
 ## Leaderboard
 

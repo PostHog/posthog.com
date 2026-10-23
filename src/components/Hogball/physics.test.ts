@@ -219,3 +219,17 @@ test('a ball that goes up through the flapper falls into the black hole, then th
     assert.ok(game.ball.y < 400, `ball stays at y=${game.ball.y}`)
     assert.equal(game.balls, 3)
 })
+
+test('a ball that comes down from behind the on-ramp does not roll through it', () => {
+    for (const x of [82, 88, 94, 100]) {
+        const game = createGame()
+        game.state = 'playing'
+        Object.assign(game.ball, { x, y: 120, vx: 0, vy: 250 })
+        let through = false
+        run(game, 1, (g) => {
+            if (!g.ramp && g.ball.x > 80 && g.ball.x < 102 && g.ball.y > 185 && g.ball.y < 212) through = true
+            return idle
+        })
+        assert.ok(!through, `ball from x=${x} went through the ramp`)
+    }
+})

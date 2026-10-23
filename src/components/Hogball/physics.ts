@@ -180,6 +180,15 @@ export const WALLS: Wall[] = [
     ...SLINGSHOTS.flatMap(([top, bottom, tip]) => [...path([top, bottom, tip]), ...path([tip, top], 380)]),
     ...[95, 155, 215, 275].map((x) => ({ a: { x, y: 85 }, b: { x, y: 125 } })),
     { a: { x: POST.x - 3, y: POST.y }, b: { x: POST.x + 3, y: POST.y } },
+    // The on-ramp is too low to roll under near its entrance, so walls close off its sides. The top is a
+    // peak, so a ball that comes down from behind the ramp rolls off to one side.
+    ...path([
+        { x: 80, y: 215 },
+        { x: 74, y: 178 },
+        { x: 84, y: 160 },
+        { x: 96, y: 178 },
+        { x: 102, y: 215 },
+    ]),
     // The low end of the ramp is too low to roll under, so walls close it off at the side and the top.
     // The top is a slope, so a ball cannot come to rest on it.
     ...path([
