@@ -2735,6 +2735,10 @@
             "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
+            "source": "/docs/migrate/migrate-between-posthog-instances:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
+        },
+        {
             "source": "/handbook/product/pm-rampup",
             "destination": "/handbook/people/ramp-up/product-manager"
         },
