@@ -111,16 +111,9 @@ try {
 
 </MultiLanguage>
 
-Creating a scorer returns an object with both a scorer ID and a scorer version ID:
+Results use the scorer version ID: `scorer.current_version_id` in Python or `scorer.currentVersionId` in TypeScript. You can save this ID in your code and update it when you change the scorer. Or fetch the scorer by `scorer.id` at the start of each experiment to use its current version.
 
-| Python                      | TypeScript                | Use                                               |
-| --------------------------- | ------------------------- | ------------------------------------------------- |
-| `scorer.id`                 | `scorer.id`               | Fetch and reuse the scorer across experiments     |
-| `scorer.current_version_id` | `scorer.currentVersionId` | Upload a result against this exact scorer version |
-
-The upload API requires the scorer version ID. In the next step, you fetch the scorer by its ID, then use its current version ID for every result in the run.
-
-Save the printed scorer ID as `POSTHOG_SCORER_ID`:
+The examples below fetch the current version. Save the printed scorer ID as `POSTHOG_SCORER_ID`:
 
 ```bash
 export POSTHOG_SCORER_ID="<scorer_id>"
@@ -130,7 +123,7 @@ Reuse this scorer across experiments. Creating a new scorer with the same name c
 
 ### 3. Run the cases and upload scores
 
-The following code creates an experiment, runs each test case through your agent, and uploads one score per item. It reads the scorer once and uses that exact scorer version for every result in the run. Replace the example cases with requests and expected outcomes for your agent.
+The following code creates an experiment, runs each test case through your agent, and uploads one score per item. Replace the example cases with requests and expected outcomes for your agent.
 
 <MultiLanguage selector="tabs">
 
