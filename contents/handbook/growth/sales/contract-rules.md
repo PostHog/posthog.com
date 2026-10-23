@@ -336,7 +336,7 @@ Running out of credit early neither creates nor destroys eligibility for the ear
 
 ### When they don't have enough credit to cover their term
 
-We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
+We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The account owner (AE or CSM) in Customer Analytics will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
 
 -   If they run out of credit in the first half of the term, they can purchase additional credits that expire with the current term. Each purchase is priced independently — we don't add it to previous purchases to reach a higher discount tier. The customer gets whichever of these two is better for them:
     -   The tier from their initial order form
