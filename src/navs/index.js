@@ -3542,6 +3542,10 @@ export const docsMenu = {
                             url: '/docs/api/capture',
                         },
                         {
+                            name: 'Capture (v1)',
+                            url: '/docs/api/capture-v1',
+                        },
+                        {
                             name: 'Flags',
                             url: '/docs/api/flags',
                         },

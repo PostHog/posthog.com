@@ -4386,6 +4386,10 @@
             "destination": "/docs/billing/pre-paid-plans:ext?"
         },
         {
+            "source": "/docs/billing/limits:ext(\\.md)?",
+            "destination": "/docs/billing/limits-alerts:ext?"
+        },
+        {
             "source": "/legal",
             "destination": "/terms"
         },
