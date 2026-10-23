@@ -487,6 +487,10 @@
         --bg: 253 253 248;
     }
 
+    .light[data-wallpaper='keyboard-garden'] [data-app='AppWindow'] {
+        --bg: 209 219 188; /* #d1dbbc */
+    }
+
     .dark [data-scheme='primary'] {
         --bg: 30 31 35;
         --accent: 45 46 55;
