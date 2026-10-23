@@ -7,6 +7,8 @@ import { stays } from '@posthog/twig-components/catalog'
 import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import coast from '@posthog/twig-components/assets/coast.jpg'
 import '@posthog/twig-components/catalog.css'
+import '@posthog/twig-components/compact.css'
+import { TwigWordmark, CompactStayFilters } from '@posthog/twig-components/compact'
 import '@posthog/twig-components/lab.css'
 
 import PostHogInspector, {
@@ -77,28 +79,21 @@ function CompactBrowseStays({
     const photo = selected === 'Coast' ? coast : cabin
 
     return (
-        <section
-            aria-label="Twig"
-            className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
-        >
-            <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
+        <section aria-label="Twig" className="twig-compact">
+            <div className="twig-compact-header">
+                <TwigWordmark />
+            </div>
             <div className="p-4 @md:p-5">
-                <fieldset className="vac-filters !my-3">
-                    <legend className="vac-sr-only">Filter by destination type</legend>
-                    {(['Forest', 'Coast'] as const).map((destination) => (
-                        <button
-                            key={destination}
-                            type="button"
-                            className="vac-filter text-sm font-semibold"
-                            aria-pressed={selected === destination}
-                            onClick={() => onSelect(destination)}
-                        >
-                            {destination}
-                        </button>
-                    ))}
-                </fieldset>
-                <article className="vac-card grid grid-cols-[6rem_minmax(0,1fr)] items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[4/3]">
+                <CompactStayFilters
+                    value={selected}
+                    options={['Forest', 'Coast']}
+                    onChange={(destination) => {
+                        if (destination === 'Forest' || destination === 'Coast') onSelect(destination)
+                    }}
+                />
+                <article className="twig-compact-stay">
                     <StayCardContent
+                        compact
                         stay={stay}
                         image={
                             <div className="vac-image">
@@ -168,13 +163,13 @@ export function SessionGroupingFigure(): JSX.Element {
 
 type SignInStage = 'stay' | 'login' | 'identified' | 'saved'
 
-const compactSavedStaysClassName =
-    '[&_.twig-account-page>h1]:!mt-1 [&_.twig-account-page>h1]:!text-2xl [&_.twig-account-page>.twig-account-muted]:!mb-3 [&_.twig-account-stay-grid]:!grid-cols-1 [&_.twig-account-stay-grid]:!gap-3 [&_.twig-account-stay-card>a]:!grid [&_.twig-account-stay-card>a]:!grid-cols-[7rem_minmax(0,1fr)] [&_.twig-account-stay-card>a]:!overflow-hidden [&_.twig-account-stay-card>a]:!rounded [&_.twig-account-stay-card>a]:!border [&_.twig-account-stay-card>a]:!border-[#d7c8b6] [&_.twig-account-stay-card>a]:!bg-[#fff8ee] [&_.vac-card-body]:!p-3 [&_.vac-card-body_h3]:!text-base [&_.vac-card-body_p]:!text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:!h-full [&_.vac-image]:!min-h-[8rem] [&_.vac-image]:!aspect-auto'
+const compactSavedStaysClassName = 'twig-compact-saved'
 
 function CompactSavedStays(): JSX.Element {
     return (
         <div className={compactSavedStaysClassName}>
             <SavedStaysView
+                compact
                 stays={[forestStay]}
                 renderImage={() => (
                     <div className="vac-image">
@@ -193,8 +188,9 @@ function CompactSignedOutBrowse(): JSX.Element {
         <div>
             <span className="vac-eyebrow">Browse stays</span>
             <h3 className="!mt-1 !mb-3 text-xl">Find your next stay</h3>
-            <article className="vac-card grid grid-cols-[7rem_minmax(0,1fr)] overflow-hidden rounded border border-[#d7c8b6] bg-[#fff8ee] [&_.vac-card-body]:p-3 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:h-full [&_.vac-image]:min-h-[8rem] [&_.vac-image]:aspect-auto">
+            <article className="twig-compact-stay">
                 <StayCardContent
+                    compact
                     stay={forestStay}
                     image={
                         <div className="vac-image">
@@ -209,8 +205,9 @@ function CompactSignedOutBrowse(): JSX.Element {
 
 function StayCard({ signedIn, onSignIn, onSave }: { signedIn: boolean; onSignIn: () => void; onSave: () => void }) {
     return (
-        <article className="vac-card relative grid grid-cols-[7rem_minmax(0,1fr)] overflow-hidden rounded border border-[#d7c8b6] bg-[#fff8ee] [&_.vac-card-body]:p-3 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:h-full [&_.vac-image]:min-h-[8rem] [&_.vac-image]:aspect-auto">
+        <article className="twig-compact-stay">
             <StayCardContent
+                compact
                 stay={forestStay}
                 image={
                     <div className="vac-image">
@@ -218,7 +215,7 @@ function StayCard({ signedIn, onSignIn, onSave }: { signedIn: boolean; onSignIn:
                     </div>
                 }
             />
-            <div className="absolute right-3 top-3">
+            <div className="twig-compact-save">
                 {signedIn ? (
                     <SavedStay
                         stayName={forestStay.title ?? 'Forest stay'}
@@ -240,18 +237,13 @@ export function IdentifySavedStayFigure(): JSX.Element {
     return (
         <Exhibit stacked onReset={() => setStage('stay')}>
             <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
-                <section
-                    aria-label="Twig"
-                    className="twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
-                >
-                    <div className="border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">Twig</div>
+                <section aria-label="Twig" className="twig-compact">
+                    <div className="twig-compact-header">
+                        <TwigWordmark />
+                    </div>
                     <div className="p-3 @md:p-4">
                         {stage === 'login' ? (
-                            <LoginView
-                                className="!min-h-0 !p-0 [&_.twig-login-card]:!w-full [&_.twig-login-card]:!max-w-none [&_.twig-login-card]:!p-4 [&_.twig-login-card]:!shadow-[4px_4px_0_#efe1ce] [&_.twig-login-card_h1]:!mt-0 [&_.twig-login-card_h1]:!text-2xl [&_.twig-login-hint]:!mb-3 [&_.twig-login-card_label]:!mt-2 [&_.twig-login-card_input]:!min-h-[36px] [&_.twig-login-card_input]:!py-2 [&_.twig-login-submit]:!mt-3 [&_.twig-login-submit]:!min-h-[38px]"
-                                email={profile.email}
-                                onLogin={() => setStage('identified')}
-                            />
+                            <LoginView email={profile.email} onLogin={() => setStage('identified')} />
                         ) : stage === 'saved' ? (
                             <CompactSavedStays />
                         ) : (
@@ -333,15 +325,13 @@ export function ResetIdentityFigure(): JSX.Element {
             <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <section
                     aria-label="Twig"
-                    className={`twig-browser overflow-visible rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29] ${
-                        signedIn && menuOpen ? 'min-h-[22rem]' : ''
-                    }`}
+                    className={`twig-compact overflow-visible ${signedIn && menuOpen ? 'min-h-[22rem]' : ''}`}
                 >
-                    <div className="relative z-10 flex items-center justify-between border-b border-[#d7c8b6] px-3 py-2">
-                        <span className="font-rounded text-sm font-semibold">Twig</span>
+                    <div className="twig-compact-header relative z-10">
+                        <TwigWordmark />
                         {signedIn && (
                             <ProfileMenu
-                                className="[&_.twig-profile-popover]:!top-[calc(100%+6px)] [&_.twig-profile-popover]:!w-32 [&_.twig-profile-summary]:hidden [&_.twig-profile-popover_nav]:hidden [&_.twig-profile-signout]:!px-2.5 [&_.twig-profile-signout]:!py-2.5"
+                                className="twig-compact-profile"
                                 profile={profile}
                                 links={[]}
                                 open={menuOpen}
