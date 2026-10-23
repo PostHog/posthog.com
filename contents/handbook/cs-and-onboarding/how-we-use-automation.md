@@ -45,13 +45,13 @@ Once live, the stream posts each call to the channel after it ends. Everyone wor
 
 * MRR changes exceeding certain thresholds generate investigation tasks  
 * inactivity periods to flag engagement reviews  
-* The first real use of a paid product that the account did not use before creates a Customer Analytics task for the account owner (see [company-wide scouts](#company-wide-scouts))  
+* The first real use of a paid product that the account did not use before creates a Customer Analytics task for the account owner (see [managed customer scouts](#managed-customer-scouts))  
 * Overdue invoices and failed card payments send Slack alerts to the assigned AE, CSM, or TAM (see [failed/late payments](/handbook/growth/sales/billing#failedlate-payments))  
 * Paid credit that will run out at least a month before it expires sends Slack alerts to the assigned AE, CSM, or TAM (see [when they don't have enough credit](/handbook/growth/sales/contract-rules#when-they-dont-have-enough-credit-to-cover-their-term))  
 * Health score changes can trigger Customer Analytics tasks or PostHog automation  
 * Annual renewal dates trigger preparation workflows in advance and a ping in Slack
 
-### **Company-wide scouts**
+### **Managed customer scouts**
 
 Three [scouts](/docs/self-driving/scouts) watch every account that has a CSM, TAM, or AE in Customer Analytics. When a scout finds something, it creates a Customer Analytics task for the account owner, due in 3 working days. It also tags the account owners in <PrivateLink url="https://posthog.slack.com/archives/C0C7GP99CP3">#project-managed-customers-consolidated-scouts</PrivateLink>.
 
@@ -75,7 +75,7 @@ This approach ensures automation enhances rather than replaces the human element
 
 * Review automated tasks such as Customer Analytics tasks, Slack alerts, and customer health scores at least twice weekly.   
 * Treat automated insights as starting points for investigation, not final answers\!  
-* Set up individual alerts in Customer Analytics or PostHog for signals that the [company-wide scouts](#company-wide-scouts) do not cover. Do not copy those scouts for your own book, because they already watch every owned account.  
+* Set up individual alerts in Customer Analytics or PostHog for signals that the [managed customer scouts](#managed-customer-scouts) do not cover. Do not copy those scouts for your own book, because they already watch every owned account.  
   * As an example, setting up your accounts as a Cohort in PostHog and then setting up CDP alerts/notifications to Slack based on product usage and activity.
 
 **What remains purely human:**
