@@ -13,9 +13,14 @@ Generally speaking, companies already using PostHog and spending money will be r
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce, and are routed either to Technical Account Executives or Technical Account Managers depending on the type.
 
 **Product-led sales team**
+1. Signals from their named book
+
+Stopped for Q4 2026:
+
 1. Customers with MRR between $500-1,667, employee count > 50, user count > 7, based in ICP country, and has been paying for at least 3 months
 2. Customers who have high ICP score and subscribe to the Scale plan
 3. Customers with MRR >$1K and >50% forecasted spend increase this month
+
 
 **New business sales team**
 1. Completed the book a demo form (organic inbound, paid ads campaign, or outbound)
@@ -25,7 +30,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 5. Customers set to roll off startup plan in the next ~100 days with last invoice between $2k–$5k
 6. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500
 7. [AE named lists](https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE)
-8. Emailed sales@ 
+8. Emailed sales@
 
 **Customer success team**
 1. Unmanaged customers with >$20K ARR who raise a support ticket
