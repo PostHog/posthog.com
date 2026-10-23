@@ -12,7 +12,7 @@ PostHog Sources is a fully managed tool that extracts data from your apps and da
 
 - **Move data anywhere.** PostHog Sources syncs Stripe, Postgres, HubSpot, Salesforce and the rest of your stack into any data warehouse, including PostHog's.
 - **Stop maintaining pipelines.** Pipeline maintenance is 70% of a data engineer's job. We handle schema changes, incremental syncs, retries and rate limits. No more being on-call for a broken connector or wondering if your data is accurate and up to date.
-- **Predictable pricing.** Per-row pricing is published on our pricing page; it gets cheaper as you grow and has no per-seat charges. No surprise invoices, and a fraction of the cost of competitors.
+- **Predictable pricing.** Per-row pricing is published on our pricing page; it gets cheaper as you grow and has no per-seat charges. No surprise invoices, and a fraction of the cost of competitors who have opaque pricing that results in surprise bills for users.
 
 ## Key features
 
@@ -26,7 +26,7 @@ Move data in minutes, set and forget.
 
 ## Sources, or ELT?
 
-Sources is our name for it. The rest of the industry calls this kind of tool ELT (or ETL). Data people search for, compare and budget for "ELT tools".
+Sources is our name for it. The rest of the industry calls this kind of tool ELT (or ETL). Data people search for, compare and budget for "ELT tools". We call it Sources because we aren't solely serving data professionals, when were targeting product engineers we should talk primarily about Sources as ELT would be an unknown and confusing term. 
 
 ELT stands for Extract, Load, Transform:
 
@@ -38,7 +38,7 @@ Older ETL tools transformed data before loading it. ELT loads the raw data first
 
 ## How does it work?
 
-Connect a source with a read-only key, pick the tables you want and the destination you want to send it to, and the first sync starts straight away. After that, PostHog keeps the copy up to date on a schedule that you set and fixes things when an API changes or has a bad day.
+[Connect a source](/docs/data-pipelines/sources) with a read-only key, pick the tables you want and the destination you want to send it to, and the first sync starts straight away. After that, PostHog keeps the copy up to date on a schedule that you set and fixes things when an API changes or has a bad day.
 
 ## Common use cases
 
@@ -85,7 +85,7 @@ They use PostHog but have no warehouse or other data tools yet. Pitch PostHog So
 | Data usable in analytics, experiments and agents | Yes, out of the box | No, needs a separate BI and product stack | No, needs a separate BI and product stack |
 ### Where they're stronger
 
-- Both have a longer connector list. Ask which sources the prospect uses; most teams need a handful, and Stripe, HubSpot, Salesforce and Postgres are all covered. We also take requests and have a fast turnaround time for creating new connections.
+- Both have a better brand recognition and well established footholds. Point to PostHogs established rputation in other fields and entering new markets.
 - Airbyte's open-source version is free if you host it, but someone has to run and fix it.
 
 ## Pricing framework
