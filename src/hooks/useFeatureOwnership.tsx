@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
 import TeamMember from '../components/TeamMember'
+import Link from '../components/Link'
 
 export interface Feature {
     slug: string
@@ -120,7 +121,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'context-and-mcp'],
+        owner: ['growth', 'error-tracking'],
         notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
@@ -648,6 +649,32 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     wizard: {
         feature: 'Wizard',
         owner: ['wizard-and-docs'],
+        notes: (
+            <>
+                Wizard and docs owns the wizard platform, agent library, and TUI wizard. Product teams own the programs
+                for their products. See <Link to="/handbook/wizard-and-docs/wizard#who-owns-what">who owns what</Link>.
+            </>
+        ),
+    },
+    'wizard-app-handoffs': {
+        feature: 'Wizard (app handoffs)',
+        owner: ['wizard-and-docs', 'growth'],
+        label: false,
+    },
+    'wizard-cloud': {
+        feature: 'Wizard (cloud in-app)',
+        owner: ['growth'],
+        label: false,
+    },
+    'wizard-headless-cli': {
+        feature: 'Wizard (headless CLI)',
+        owner: ['growth'],
+        label: false,
+    },
+    'wizard-migration': {
+        feature: 'Wizard (migration)',
+        owner: ['forward-deployed-engineering'],
+        label: false,
     },
 }
 
