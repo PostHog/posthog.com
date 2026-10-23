@@ -72,29 +72,32 @@ Goal: list the organizations that I own that fit the Replay Vision experiment sc
    - last_launch: the date of the latest event
 
 3. Give each organization an experiment fit:
-   - Strong: experiments_launched is 10 or more, people_launching is 2 or more, and last_launch is in the last 30 days.
-   - Possible: experiments_launched is 3 to 9, and last_launch is in the last 30 days.
-   - Not yet: all others. Leave these organizations out.
+   - Strong: experiments_launched is 8 or more, people_launching is 2 or more, and last_launch is in the last 30 days.
+   - Possible: experiments_launched is 3 to 7, and last_launch is in the last 30 days.
+   - Long-shot: all other organizations with 1 or more experiments launched in the last 90 days.
+   - Not yet: no experiments launched in the last 90 days. Leave these organizations out.
 
-4. For each Strong or Possible organization, get:
+4. For each Strong, Possible, or Long-shot organization, get:
    - recordings: the group property recording_count_in_period plus mobile_recording_count_in_period (treat null as 0)
    - exceptions: the group property exceptions_captured_in_period (treat null as 0)
    - From the event "replay_vision_scan_completed", matched on the event property organization_id:
      scans_30d (last 30 days), scans_7d (last 7 days), and experiment_scans_30d (last 30 days, where the event property scanner_type is "experiment")
    - older_experiment_scanner: yes if the organization has a "replay_vision_scanner_created" event where has_experiment_targeting is true and scanner_type is not "experiment"
 
-5. Give each organization the first status that matches, with its next move:
-   - "Scans experiments now" if experiment_scans_30d > 0. Next move: add their other experiments and the Variant analysis scout.
-   - "Stopped using Replay Vision" if scans_30d > 0 and scans_7d = 0. Next move: contact them this week, ask what stopped them, and show the experiment scanner.
-   - "Uses Replay Vision, not on experiments" if scans_7d > 0. Next move: short pitch for the experiment scanner type.
+5. If experiment_scans_30d > 0, the organization already uses the experiment scanner. Leave it out.
+
+6. Give each other organization the first bucket that matches, with its next move:
+   - "Uses Replay Vision on experiments without new scanner type" if scans_7d > 0 and older_experiment_scanner is yes. Next move: short pitch. They know scanners, so show them the experiment type.
+   - "Uses Replay Vision, not on experiments" if scans_7d > 0. Next move: short pitch. Show them the value of qualitatively capturing user behavior across variants.
+   - "Stopped using Replay Vision" if scans_30d > 0 and scans_7d = 0. Next move: ask what stopped them, then show the experiment scanner on an experiment they run now.
    - "Records sessions, no Replay Vision" if recordings > 0. Next move: full pitch and a trial.
    - "No Session Replay" for all others. Next move: pitch Session Replay first with trigger groups. If exceptions > 0, start with an $exception trigger group for Error Tracking.
 
-6. Sort by status in this order: Stopped using Replay Vision, Uses Replay Vision not on experiments, Records sessions no Replay Vision, No Session Replay, Scans experiments now. Inside each status, sort by experiments_launched, highest first.
+7. Sort by bucket in the order of the list in step 6. Inside each bucket, sort by fit (Strong, Possible, Long-shot), then by experiments_launched, highest first.
 
-7. Return one table with these columns: account name, organization ID, fit, experiments_launched, people_launching, last_launch, status, recordings, uses Error Tracking (exceptions > 0), older_experiment_scanner, next move.
+8. Return one table with these columns: account name, organization ID, fit, experiments_launched, people_launching, last_launch, bucket, recordings, uses Error Tracking (exceptions > 0), older_experiment_scanner, next move.
 
-8. Under the table, add one line: the recording and exception counts cover the current billing period only, so they are low in the first days of a period.
+9. Under the table, add one line: the recording and exception counts cover the current billing period only, so they are low in the first days of a period.
 ```
 
 </details>
@@ -141,14 +144,14 @@ Organization ID: <organization ID from step 1>
    - last_seen: the date of their latest event in this list
 
 3. Rank people by experiment_views plus refreshes. Give each person the first role that matches:
-   - "Reader who watches recordings": in the top 3, and experiment_recordings is 1 or more.
-   - "Results reader": in the top 3.
-   - "Launcher": created_or_launched is 2 or more.
+   - "Experiment results reader who also watches recordings": in the top 3, and experiment_recordings is 1 or more.
+   - "Experiment results reader": in the top 3.
+   - "Experiment creator": created_or_launched is 2 or more.
    - "Replay Vision user": observations_viewed is 1 or more.
    - Leave all other people out.
 
-4. Pick the champion: the first "Reader who watches recordings". If there is none, the first "Results reader".
-   Pick the second contact: the first "Launcher". If there is none, the first "Replay Vision user".
+4. Pick the champion: the first "Experiment results reader who also watches recordings". If there is none, the first "Experiment results reader".
+   Pick the second contact: the first "Experiment creator". If there is none, the first "Replay Vision user".
 
 5. Return a table with: email, role, experiment_views, experiments_viewed, refreshes, created_or_launched, experiment_recordings, recordings_viewed, observations_viewed, last_seen. Mark the champion and the second contact.
 
