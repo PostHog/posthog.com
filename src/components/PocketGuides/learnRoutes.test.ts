@@ -42,7 +42,7 @@ test('other volumes keep their configured entry routes', () => {
         ['ai-observability', '/learn/ai-observability/pocket-guide'],
         ['session-replay', '/learn/session-replay/pocket-guide'],
         ['self-driving', '/docs/self-driving/pocket-guide'],
-        ['data-stack', '/docs/data-warehouse/pocket-guide'],
+        ['data-stack', '/learn/warehouse/pocket-guide'],
         ['feature-flags', '/learn/feature-flags/pocket-guide'],
     ]) {
         const volume = volumeById(id)
@@ -151,10 +151,7 @@ test('the old Product Analytics introduction URL takes precedence over the chapt
 })
 
 test('docs-only books retain their docs sidebar and list every published chapter', () => {
-    for (const [id, product] of [
-        ['self-driving', 'self-driving'],
-        ['data-stack', 'data-warehouse'],
-    ]) {
+    for (const [id, product] of [['self-driving', 'self-driving']]) {
         const volume = volumeById(id)
         assert.ok(volume)
         const basePath = pocketGuideUrl(volume)
@@ -187,11 +184,11 @@ test('legacy guide navigation preserves chapters, queries, and fragments', () =>
         pocketGuideDestination('/pocket-guides/self-driving/flag-debt?from=guide#setup'),
         '/docs/self-driving/pocket-guide/flag-debt?from=guide#setup'
     )
-    assert.equal(pocketGuideDestination('/pocket-guides/data-stack'), '/docs/data-warehouse/pocket-guide')
+    assert.equal(pocketGuideDestination('/pocket-guides/data-stack'), '/learn/warehouse/pocket-guide')
     assert.equal(pocketGuideDestination('/pocket-guides'), '/pocket-guides')
     assert.equal(
         pocketGuideDestination('/learn/data-stack/pocket-guide/revenue-metrics/SKILL'),
-        '/docs/data-warehouse/pocket-guide/revenue-metrics/SKILL'
+        '/learn/warehouse/pocket-guide/revenue-metrics/SKILL'
     )
     assert.equal(
         pocketGuideDestination('/learn/ai-observability/pocket-guide/quality-output'),
@@ -199,4 +196,19 @@ test('legacy guide navigation preserves chapters, queries, and fragments', () =>
     )
     assert.equal(pocketGuidePageContext('/learn/self-driving/pocket-guide/_starter', 2), undefined)
     assert.equal(pocketGuidePageContext('/learn/self-driving/pocket-guide/flag-debt/SKILL', 3), undefined)
+})
+
+test('the Warehouse Learn tab keeps the former docs guide URLs working', () => {
+    const volume = volumeById('data-stack')
+    assert.ok(volume)
+    assert.equal(volume.productHandle, 'data_warehouse')
+    for (const [source, destination] of [
+        ['/docs/data-warehouse/pocket-guide', '/learn/warehouse/pocket-guide'],
+        ['/docs/data-warehouse/pocket-guide.md', '/learn/warehouse/pocket-guide.md'],
+        ['/docs/data-warehouse/pocket-guide/:path*', '/learn/warehouse/pocket-guide/:path*'],
+    ]) {
+        const redirect = vercelConfig.redirects.find((r: { source: string }) => r.source === source)
+        assert.equal(redirect?.destination, destination)
+        assert.equal(redirect?.statusCode, 301)
+    }
 })

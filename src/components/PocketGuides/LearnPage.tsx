@@ -66,7 +66,14 @@ export default function LearnPage({
         currentPath: location?.pathname,
     })
 
-    const guide = volumeId ? <LearnSurface volumeId={volumeId} chapter={chapter} basePath={guideBasePath} /> : null
+    const guide = volumeId ? (
+        <LearnSurface
+            volumeId={volumeId}
+            chapter={chapter}
+            basePath={guideBasePath}
+            section={productData?.pocketGuideSection}
+        />
+    ) : null
 
     return (
         <>

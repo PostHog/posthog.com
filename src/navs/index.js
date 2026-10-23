@@ -7032,69 +7032,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pocket guide',
-                    url: '/docs/data-warehouse/pocket-guide',
-                    children: [
-                        {
-                            name: 'Features & revenue',
-                            url: '/docs/data-warehouse/pocket-guide/features-drive-revenue',
-                        },
-                        {
-                            name: 'Onboarding conversion',
-                            url: '/docs/data-warehouse/pocket-guide/onboarding-conversion',
-                        },
-                        {
-                            name: 'Upsell-ready accounts',
-                            url: '/docs/data-warehouse/pocket-guide/upsell-ready-accounts',
-                        },
-                        {
-                            name: 'Pre-cancellation behavior',
-                            url: '/docs/data-warehouse/pocket-guide/pre-cancellation-behavior',
-                        },
-                        {
-                            name: 'Tickets & churn',
-                            url: '/docs/data-warehouse/pocket-guide/support-tickets-churn',
-                        },
-                        {
-                            name: 'ARR vs engagement',
-                            url: '/docs/data-warehouse/pocket-guide/value-vs-engagement',
-                        },
-                        {
-                            name: 'Channels & retention',
-                            url: '/docs/data-warehouse/pocket-guide/acquisition-channels-retention',
-                        },
-                        {
-                            name: 'Lead scoring',
-                            url: '/docs/data-warehouse/pocket-guide/lead-scoring',
-                        },
-                        {
-                            name: 'Feature revenue impact',
-                            url: '/docs/data-warehouse/pocket-guide/feature-revenue-impact',
-                        },
-                        {
-                            name: 'Foundations',
-                            url: '/docs/data-warehouse/pocket-guide/warehouse-foundations',
-                        },
-                        {
-                            name: 'Revenue',
-                            url: '/docs/data-warehouse/pocket-guide/revenue-metrics',
-                        },
-                        {
-                            name: 'Conversion',
-                            url: '/docs/data-warehouse/pocket-guide/conversion-metrics',
-                        },
-                        {
-                            name: 'Activation',
-                            url: '/docs/data-warehouse/pocket-guide/activation-metrics',
-                        },
-                        {
-                            name: 'Usage',
-                            url: '/docs/data-warehouse/pocket-guide/product-usage-metrics',
-                        },
-                        {
-                            name: 'Dimensions',
-                            url: '/docs/data-warehouse/pocket-guide/dimension-tables',
-                        },
-                    ],
+                    url: '/learn/warehouse',
                     icon: 'IconBook',
                     color: 'blue',
                 },

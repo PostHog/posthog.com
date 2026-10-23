@@ -9,7 +9,7 @@ import {
     IconTerminal,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/PocketGuides/bookModel'
 import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -94,18 +94,28 @@ const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
+    section,
+    fullTitles,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
+    /** Only list the pages with this `section:` frontmatter. */
+    section?: string
+    /** Label pages with their full title instead of their `shortTitle`. */
+    fullTitles?: boolean
 }) => {
-    const pages = useBookPages(volumeId)
+    const pages = sectionPages(useBookPages(volumeId), section)
     const posthog = usePostHog()
     const volume = volumeById(volumeId)
     const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
     // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
     const chapters = pages.map((page) => ({
-        name: page.page ? `${page.page}. ${page.shortTitle || page.title}` : page.shortTitle || page.title,
+        name: fullTitles
+            ? page.title
+            : page.page
+            ? `${page.page}. ${page.shortTitle || page.title}`
+            : page.shortTitle || page.title,
         url: learnChapterPath(guideBasePath, page),
     }))
     const hub = volume?.learnHub
@@ -145,7 +155,15 @@ const LearnNav = ({
     return (
         // Master's Learn nav used taller rows (31px) than the docs sidebar; keep that spacing for Learn only.
         <div className="[&_a]:py-[5.5px]">
-            <TreeMenu items={items} appearance="sidebar" activeUrl={currentPath} onItemClick={trackClick} />
+            <TreeMenu
+                items={items}
+                appearance="sidebar"
+                // A section-only tab opens its first page at the Learn root, so mark that page there.
+                activeUrl={
+                    section && !hub && currentPath?.replace(/\/$/, '') === basePath ? items[0]?.url : currentPath
+                }
+                onItemClick={trackClick}
+            />
         </div>
     )
 }
@@ -170,6 +188,10 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
+              /** Limits the Learn tab to the volume's pages with this `section:` frontmatter. */
+              pocketGuideSection?: string
+              /** Labels the Learn sidebar with each page's full title instead of its `shortTitle`. */
+              learnNavFullTitles?: boolean
           }
         | null
         | undefined
@@ -224,6 +246,8 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
+        pocketGuideSection,
+        learnNavFullTitles,
         docsSlug,
     } = productData
 
@@ -302,6 +326,8 @@ export function buildProductMenuTabs({
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
+                    section={pocketGuideSection}
+                    fullTitles={learnNavFullTitles}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
                 />

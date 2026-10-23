@@ -53,7 +53,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'Which features drive revenue?',
-                href: '/docs/data-warehouse/pocket-guide/features-drive-revenue',
+                href: '/learn/warehouse/pocket-guide/features-drive-revenue',
                 ingredients: [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -63,7 +63,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Which onboarding steps turn trials into paying customers?',
-                href: '/docs/data-warehouse/pocket-guide/onboarding-conversion',
+                href: '/learn/warehouse/pocket-guide/onboarding-conversion',
                 ingredients: [
                     { label: 'PostHog funnels', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -72,7 +72,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Which accounts are ready to upsell?',
-                href: '/docs/data-warehouse/pocket-guide/upsell-ready-accounts',
+                href: '/learn/warehouse/pocket-guide/upsell-ready-accounts',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Stripe plans', kind: 'ext' },
@@ -89,7 +89,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'What do customers do right before they cancel?',
-                href: '/docs/data-warehouse/pocket-guide/pre-cancellation-behavior',
+                href: '/learn/warehouse/pocket-guide/pre-cancellation-behavior',
                 ingredients: [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe / Chargebee', kind: 'ext' },
@@ -99,7 +99,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Do support tickets predict churn?',
-                href: '/docs/data-warehouse/pocket-guide/support-tickets-churn',
+                href: '/learn/warehouse/pocket-guide/support-tickets-churn',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Zendesk / Intercom', kind: 'ext' },
@@ -109,7 +109,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Are our biggest accounts our happiest ones?',
-                href: '/docs/data-warehouse/pocket-guide/value-vs-engagement',
+                href: '/learn/warehouse/pocket-guide/value-vs-engagement',
                 ingredients: [
                     { label: 'PostHog groups', kind: 'ph' },
                     { label: 'Salesforce / HubSpot', kind: 'ext' },
@@ -126,7 +126,7 @@ const sections: Section[] = [
         recipes: [
             {
                 question: 'Which channels bring customers who stick?',
-                href: '/docs/data-warehouse/pocket-guide/acquisition-channels-retention',
+                href: '/learn/warehouse/pocket-guide/acquisition-channels-retention',
                 ingredients: [
                     { label: 'PostHog acquisition', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -136,7 +136,7 @@ const sections: Section[] = [
             },
             {
                 question: "Which leads deserve the sales team's time?",
-                href: '/docs/data-warehouse/pocket-guide/lead-scoring',
+                href: '/learn/warehouse/pocket-guide/lead-scoring',
                 ingredients: [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'HubSpot / Salesforce', kind: 'ext' },
@@ -146,7 +146,7 @@ const sections: Section[] = [
             },
             {
                 question: 'Did the feature we shipped move revenue?',
-                href: '/docs/data-warehouse/pocket-guide/feature-revenue-impact',
+                href: '/learn/warehouse/pocket-guide/feature-revenue-impact',
                 ingredients: [
                     { label: 'PostHog experiments', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
@@ -171,7 +171,7 @@ interface ModelingSkill {
 
 const foundationsSkill: ModelingSkill = {
     name: 'modeling-warehouse-foundations',
-    href: '/docs/data-warehouse/pocket-guide/warehouse-foundations',
+    href: '/learn/warehouse/pocket-guide/warehouse-foundations',
     builds: (
         <>
             The groundwork for everything else: PostHog views or dbt, the <Mono>view-create</Mono> to{' '}
@@ -185,25 +185,25 @@ const foundationsSkill: ModelingSkill = {
 const modelingSkills: ModelingSkill[] = [
     {
         name: 'modeling-revenue-metrics',
-        href: '/docs/data-warehouse/pocket-guide/revenue-metrics',
+        href: '/learn/warehouse/pocket-guide/revenue-metrics',
         builds: 'MRR, ARR, expansion and contraction, ARPU, LTV, and revenue per account.',
         rule: 'MRR right now and MRR over time are two different models. A live snapshot never turns into a trend, so know which one you need before you build it.',
     },
     {
         name: 'modeling-conversion-metrics',
-        href: '/docs/data-warehouse/pocket-guide/conversion-metrics',
+        href: '/learn/warehouse/pocket-guide/conversion-metrics',
         builds: 'Funnel and step conversion rates, drop-off, and time-to-convert.',
         rule: 'Pin the time box first: signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
     },
     {
         name: 'modeling-activation-metrics',
-        href: '/docs/data-warehouse/pocket-guide/activation-metrics',
+        href: '/learn/warehouse/pocket-guide/activation-metrics',
         builds: 'An activated flag per user or account, plus an activation rate.',
         rule: "Activation is the early behavior that predicts whether people stick around — test it against retention lift. If it doesn't lift, it isn't activation.",
     },
     {
         name: 'modeling-product-usage-metrics',
-        href: '/docs/data-warehouse/pocket-guide/product-usage-metrics',
+        href: '/learn/warehouse/pocket-guide/product-usage-metrics',
         builds: 'Retention, stickiness, and lifecycle models.',
         rule: (
             <>
@@ -214,7 +214,7 @@ const modelingSkills: ModelingSkill[] = [
     },
     {
         name: 'modeling-dimension-tables',
-        href: '/docs/data-warehouse/pocket-guide/dimension-tables',
+        href: '/learn/warehouse/pocket-guide/dimension-tables',
         builds: (
             <>
                 <Mono>dim_country</Mono>, <Mono>dim_plan</Mono>, <Mono>dim_date</Mono>, and the other lookup tables
@@ -329,7 +329,7 @@ function UseCases(): JSX.Element {
                                 </div>
 
                                 <div className="mt-6 w-fit">
-                                    <CallToAction to="/docs/data-warehouse/pocket-guide" size="md">
+                                    <CallToAction to="/learn/warehouse/pocket-guide" size="md">
                                         See all templates
                                     </CallToAction>
                                 </div>
