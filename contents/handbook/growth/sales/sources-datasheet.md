@@ -6,11 +6,11 @@ showTitle: true
 
 ## What is PostHog Sources?
 
-PostHog Sources is a fully managed tool that extracts data from your apps and databases and loads it into a warehouse. It started life moving data into PostHog so that you can query business and product data in one place, and now works standalone: your data can go from Postgres to Snowflake, or Stripe to BigQuery, without ever touching PostHog. We handle pipeline maintenance like schema changes, incremental syncs, retries and rate limits.
+PostHog Sources is a fully managed tool that extracts data from your apps and databases and loads it into any data warehouse. It isn't reliant on PostHog at all: your data can go from Postgres to Snowflake, or Stripe to BigQuery, without ever touching PostHog. We handle pipeline maintenance like schema changes, incremental syncs, retries and rate limits.
 
 ## Key messages
 
-- **Move data anywhere.** PostHog Sources syncs Stripe, Postgres, HubSpot, Salesforce and the rest of your stack into PostHog or any other warehouse.
+- **Move data anywhere.** PostHog Sources syncs Stripe, Postgres, HubSpot, Salesforce and the rest of your stack into any data warehouse, including PostHog's.
 - **Stop maintaining pipelines.** Pipeline maintenance is 70% of a data engineer's job. We handle schema changes, incremental syncs, retries and rate limits. No more being on-call for a broken connector or wondering if your data is accurate and up to date.
 - **Predictable pricing.** Per-row pricing is published on our pricing page; it gets cheaper as you grow and has no per-seat charges. No surprise invoices, and a fraction of the cost of competitors.
 
@@ -45,7 +45,7 @@ Connect a source with a read-only key, pick the tables you want and the destinat
 ### Apps to warehouse
 | Use case | Who it's for | What changes |
 |----------|--------------|--------------|
-| Replace an expensive Fivetran or Airbyte bill | Data leads paying Fivetran or running Airbyte | Very similar usage experience. At 100M rows a month the saving is roughly $1,500 to $2,150. |
+| Replace an expensive tool like Fivetran or Airbyte | Data leads paying Fivetran or running Airbyte | Very similar usage experience. At 100M rows a month the saving is roughly $1,500 to $2,150. |
 | Get data into a warehouse to model and query | Data teams pulling apps and databases into one place | Every source lands in one warehouse as raw tables, ready to model with SQL views and query together, with no pipelines to build or maintain. |
 
 ### Data to PostHog
@@ -59,13 +59,13 @@ Connect a source with a read-only key, pick the tables you want and the destinat
 
 ### Established data stack: ready to replace Fivetran or Airbyte
 
-They already have an external warehouse and the tools around it. Pitch Sources as a cheaper, fully managed alternative to the ELT tool they use today.
+They already have an external warehouse and the tools around it. Pitch PostHog Sources as a cheaper, fully managed alternative to the ELT tool they use today.
 
 - **They already use batch exports:** They send PostHog data out to their own warehouse.
 
 ### Early days: ready to connect their first source
 
-They use PostHog but have no warehouse or other data tools yet. Pitch Sources as the quickest way to get business data next to their product data.
+They use PostHog but have no warehouse or other data tools yet. Pitch PostHog Sources as the quickest way to get business data next to their product data.
 
 - **They use PostHog but have no sources connected:** Everything they analyze today comes from events alone.
 - **They ask questions events can't answer:** Revenue, churn, plan tier or which ad campaigns bring in good users.
