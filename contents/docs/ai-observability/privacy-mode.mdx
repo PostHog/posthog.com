@@ -124,7 +124,7 @@ With privacy mode on, PostHog SDKs don't send:
 - Span and trace inputs and outputs (`$ai_input_state`, `$ai_output_state`)
 - Embedding inputs
 - Error messages and stack traces. `$ai_error` only holds the error class, HTTP status, provider error code, the name of the request parameter that caused the error, the request ID, and the classes of any underlying errors. For example: `BadRequestError: 400 invalid_request_error param=messages[3].content`.
-- Exceptions from AI calls to [error tracking](/docs/error-tracking). The SDK still raises the error, so your own error handling sees it.
+- Exceptions from AI calls to [Error Tracking](/docs/error-tracking). The SDK still raises the error, so your own error handling sees it.
 
 ## What is still sent
 
