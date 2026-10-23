@@ -173,10 +173,6 @@ export const productAnalyticsFeatures = {
                 name: 'Breakdown by person property',
                 description: 'Break down funnel results by user properties',
             },
-            correlation_analysis: {
-                name: 'Correlation analysis',
-                description: 'Automatically identify significant factors that impact conversion',
-            },
         },
     },
     user_paths: {

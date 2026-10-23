@@ -64,7 +64,7 @@ We also default to charging as little as possible while still making a sensible 
 
 **PostHog** uses usage-based pricing with a generous free tier – no credit card required, and unlimited teammates on every plan. Every month, you get 1 million events, 5,000 web and 2,500 mobile session replays, 1 million feature flag requests, and more for free. After that, you only pay for what you use, and pricing gets cheaper at scale.
 
-Adding a credit card unlocks additional features like advanced paths, correlation analysis, lifecycle insights, and dashboard subscriptions. [Startups can qualify for $50k in free credits](/startups), and you can set billing limits per product to avoid surprises. See the [pricing page](/pricing) for a full breakdown.
+Adding a credit card unlocks additional features like advanced paths, lifecycle insights, and dashboard subscriptions. [Startups can qualify for $50k in free credits](/startups), and you can set billing limits per product to avoid surprises. See the [pricing page](/pricing) for a full breakdown.
 
 - **Product Analytics and Web Analytics**: 1 million events/month
 - **Session Replay**: 5,000 web and 2,500 mobile recordings/month
@@ -120,15 +120,12 @@ This difference is reflected in all levels of the product, but especially in pro
         'product_analytics.user_paths',
         'product_analytics.retention',
         'web_analytics.features.utm_tracking',
-        'product_analytics.funnels.features.correlation_analysis',
         'product_analytics.group_analytics',
         'product_analytics.insights.features.formula_mode',
         'product_analytics.insights.features.sql_editor',
     ]}
 />
 </p>
-
--   **Correlation analysis:** [Correlation analysis](/product-analytics) automatically highlights significant linking properties or events relevant to an insight. For example, you can find if users who complete a funnel are likely to be from a certain location, or have completed another event. In PostHog, correlation analysis is a standard part of analytics.
 
 -   **Formulas:** Formulas in PostHog enable you to create custom insights using your data. A simple example of a formula would be an equation to figure out a ratio or percentage (e.g. the percentage of users who completed two different events), though advanced formulas can use more elaborate functions, such as `COS` and `SIN`.
 
@@ -388,7 +385,7 @@ After the free tier, you pay only for what you use, and pricing gets cheaper at 
 
 **Pendo** offers a free tier (Pendo Free) rather than a time-limited trial. It supports up to 500 MAUs with basic analytics, in-app guides, and branded NPS surveys. Once you exceed 500 MAUs, you can no longer create guides or segments, and usage data is sampled. Pendo does not offer free trials of its paid plans – you need to contact sales.
 
-**PostHog** is free to start with no restrictions on features or time. All users get 1 million events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests free every month. You can set billing limits to keep usage within the free allowance indefinitely, and there's no Pendo-style branding on free accounts. Adding a credit card unlocks advanced features like correlation analysis and lifecycle insights while still staying on the free tier.
+**PostHog** is free to start with no restrictions on features or time. All users get 1 million events, 5,000 web and 2,500 mobile session replays, and 1 million feature flag requests free every month. You can set billing limits to keep usage within the free allowance indefinitely, and there's no Pendo-style branding on free accounts. Adding a credit card unlocks advanced features like advanced paths and lifecycle insights while still staying on the free tier.
 
 </details>
 
@@ -447,7 +444,7 @@ Pendo also offers EU data residency via GCP's EU multi-region (including Frankfu
 <details>
 <summary>Can PostHog replace Pendo?</summary>
 
-**For analytics, yes.** PostHog offers deeper product analytics than Pendo, including funnels, retention, user paths, cohorts, correlation analysis, formula mode, and SQL access. PostHog also includes session replay, surveys (NPS, CSAT, CES, and custom), and [Workflows](/workflows) for automated behavior-triggered messaging.
+**For analytics, yes.** PostHog offers deeper product analytics than Pendo, including funnels, retention, user paths, cohorts, formula mode, and SQL access. PostHog also includes session replay, surveys (NPS, CSAT, CES, and custom), and [Workflows](/workflows) for automated behavior-triggered messaging.
 
 **For in-app guides, partially.** PostHog's [Surveys](/surveys) can display targeted popovers and prompts, and [Workflows](/workflows) can trigger emails, Slack messages, and SMS based on user behavior. But PostHog doesn't have Pendo's visual drag-and-drop editor for tooltips, product tours, and walkthroughs. If your team relies heavily on no-code in-app guides, Pendo's editor is still a differentiator.
 

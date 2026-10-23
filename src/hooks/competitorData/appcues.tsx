@@ -36,9 +36,7 @@ export const appcues = {
                 },
                 funnels: {
                     available: true,
-                    features: {
-                        correlation_analysis: false,
-                    },
+                    features: {},
                 },
                 retention: {
                     available: false,

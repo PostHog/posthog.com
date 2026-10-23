@@ -8,11 +8,6 @@ availability:
   free: partial
   selfServe: full
   enterprise: full
-  features:
-    correlation:
-      free: false
-      selfServe: true
-      enterprise: true
 ---
 
 import { CalloutBox } from "components/Docs/CalloutBox";
@@ -394,13 +389,9 @@ A common seasonality to watch out for is weekends, particularly if your product 
 
 In this view, you can adjust the date ranges to observe key seasonal trends. You can then look at your funnel to determine if it's just a seasonal trend or whether something else has affected the experiece of your product (like a product change).
 
-### Correlation analysis
+### Find what drives conversion
 
-<FeatureAvailability availability={_frontmatter.availability.features.correlation} />
-
-[Correlation Analysis](/docs/product-analytics/correlation) automatically highlights significant factors that affect the conversion rate of users within the funnel.
-
-Correlation analysis works well when you don't already have a hypothesis for what is affecting conversion through a funnel. This report will automatically highlighting significant events or properties that either negatively or positively impact conversion rate.
+To find the events and properties that correlate with conversion or drop-off, ask [PostHog AI](/docs/posthog-ai/start-here). For example, ask "What do users who complete my signup funnel do differently?"
 
 ## Further reading
 
