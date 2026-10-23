@@ -15,7 +15,7 @@ const Controls = () => {
     const { zoomIn, zoomOut, resetTransform } = useControls()
 
     return (
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity space-x-1 absolute bottom-0 right-0 z-10">
+        <div className="opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity space-x-1 absolute bottom-0 right-0 z-10">
             <ControlButton onClick={() => zoomIn()}>
                 <IconPlus className="w-4" />
             </ControlButton>

@@ -1,0 +1,29 @@
+.ui-reveal {
+    --reveal-start-transform: translateY(12px);
+}
+.ui-reveal[data-reveal-effect='fade'] {
+    --reveal-start-transform: none;
+}
+.ui-reveal[data-reveal-effect='scale'] {
+    --reveal-start-transform: scale(0.96);
+}
+.ui-reveal[data-reveal-entered]:not([data-reveal-parts]),
+.ui-reveal[data-reveal-entered] > .ui-reveal-part {
+    animation: ui-reveal-entry var(--reveal-duration) cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay) both;
+}
+@keyframes ui-reveal-entry {
+    from {
+        opacity: 0.4;
+        transform: var(--reveal-start-transform);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ui-reveal[data-reveal-entered]:not([data-reveal-parts]),
+    .ui-reveal[data-reveal-entered] > .ui-reveal-part {
+        animation: none;
+    }
+}

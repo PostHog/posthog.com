@@ -1,0 +1,29 @@
+.ui-sticker-art {
+    transform: rotate(var(--ui-sticker-tilt, 0deg));
+}
+
+@supports (animation-timeline: view()) {
+    .ui-sticker-pop {
+        animation: ui-sticker-pop linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+    }
+}
+
+@keyframes ui-sticker-pop {
+    0% {
+        transform: rotate(calc(var(--ui-sticker-tilt, 0deg) - 12deg)) scale(0.8);
+    }
+    75% {
+        transform: rotate(calc(var(--ui-sticker-tilt, 0deg) + 3deg)) scale(1.08);
+    }
+    100% {
+        transform: rotate(var(--ui-sticker-tilt, 0deg)) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-sticker-pop {
+        animation: none;
+    }
+}

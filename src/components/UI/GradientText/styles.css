@@ -1,0 +1,68 @@
+.ui-gradient-text {
+    color: var(--gradient-a);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .ui-gradient-text {
+        background-image: linear-gradient(
+            90deg,
+            var(--gradient-a) 0%,
+            var(--gradient-b) 25%,
+            var(--gradient-c) 50%,
+            var(--gradient-b) 75%,
+            var(--gradient-a) 100%
+        );
+        background-size: 200% 100%;
+        background-position: 0% 50%;
+        background-repeat: repeat-x;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+
+    @supports (background-image: linear-gradient(90deg in oklch, var(--gradient-a), var(--gradient-b))) {
+        .ui-gradient-text {
+            background-image: linear-gradient(
+                90deg in oklch shorter hue,
+                var(--gradient-a) 0%,
+                var(--gradient-b) 25%,
+                var(--gradient-c) 50%,
+                var(--gradient-b) 75%,
+                var(--gradient-a) 100%
+            );
+        }
+    }
+
+    .ui-gradient-text[data-animate] {
+        animation: ui-gradient-flow var(--gradient-duration) linear infinite;
+        animation-play-state: paused;
+    }
+
+    .ui-gradient-text[data-active] {
+        animation-play-state: running;
+    }
+}
+
+@keyframes ui-gradient-flow {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 200% 50%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-gradient-text[data-animate] {
+        animation: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .ui-gradient-text {
+        background: none;
+        color: CanvasText;
+    }
+}

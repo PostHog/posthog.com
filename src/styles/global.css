@@ -350,7 +350,7 @@
         --bg: 253 253 248;
     }
 
-    .dark [data-scheme='primary'] {
+    .dark [data-scheme='primary']:not(:where(.ui-force-light *)) {
         --bg: 30 31 35;
         --accent: 45 46 55;
         --border: 62 66 79;
@@ -387,7 +387,7 @@
         }
     }
 
-    .dark [data-scheme='secondary'] {
+    .dark [data-scheme='secondary']:not(:where(.ui-force-light *)) {
         --bg: 37 38 43;
         --accent: 50 52 63;
         --border: 74 78 92;
@@ -422,7 +422,7 @@
         }
     }
 
-    .dark [data-scheme='tertiary'] {
+    .dark [data-scheme='tertiary']:not(:where(.ui-force-light *)) {
         --bg: 45 46 55;
         --accent: 56 58 71;
         --border: 98 102 116;

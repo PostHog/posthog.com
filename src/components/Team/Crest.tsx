@@ -99,7 +99,7 @@ export default function Crest({
                                         ) : (
                                             <button
                                                 onClick={() => setFieldValue('crestImage', null)}
-                                                className="group-hover:opacity-100 opacity-0 transition-opacity absolute size-8 bg-white rounded-full border border-input flex items-center justify-center"
+                                                className="group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100 opacity-0 transition-opacity absolute size-8 bg-white rounded-full border border-input flex items-center justify-center"
                                             >
                                                 <IconX className="size-4" />
                                             </button>

@@ -132,7 +132,7 @@ function Avatar({ values, setFieldValue, error }) {
             <div
                 className={`grid ${
                     imageURL ? 'grid-cols-2' : 'grid-cols-1'
-                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 transition-opacity`}
+                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity`}
             >
                 {imageURL && (
                     <button

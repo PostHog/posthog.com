@@ -1,0 +1,24 @@
+@supports (animation-timeline: view()) {
+    .ui-annotation-draw path {
+        stroke-dasharray: 1;
+        animation: ui-annotation-draw linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+    }
+}
+
+@keyframes ui-annotation-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-annotation-draw path {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}

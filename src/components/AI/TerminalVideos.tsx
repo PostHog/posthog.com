@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ASCIIBox } from './TerminalSection'
 import Link from 'components/Link'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Chapter {
     title: string
@@ -32,21 +32,11 @@ function VideoThumbnail({ video, videoKey }: { video: Video; videoKey: string })
     const videoUrl = `/videos/play?source=wistia&videoId=${video.wistia}`
 
     return (
-        <Link
-            to={videoUrl}
-            state={{ newWindow: true }}
-            className="block text-left transition-all hover:scale-[1.02]"
-        >
+        <Link to={videoUrl} state={{ newWindow: true }} className="block text-left transition-all hover:scale-[1.02]">
             {video.customThumb ? (
-                <img
-                    src={video.customThumb}
-                    alt={video.title}
-                    className="w-full h-auto block"
-                />
+                <img src={video.customThumb} alt={video.title} className="w-full h-auto block" />
             ) : (
-                <div className="text-[rgba(238,239,233,0.9)] text-sm">
-                    {video.title}
-                </div>
+                <div className="text-[rgba(238,239,233,0.9)] text-sm">{video.title}</div>
             )}
         </Link>
     )
@@ -87,7 +77,7 @@ function VideoItem({ videoKey, video }: { videoKey: string; video: Video }): JSX
                             {chapter.copyable && (
                                 <button
                                     onClick={() => handleCopy(chapter.title, idx)}
-                                    className="text-[#1D4AFF] hover:text-[#00FF00] opacity-0 group-hover:opacity-100 transition-opacity text-[12px] cursor-pointer bg-transparent border-none p-0 font-code"
+                                    className="text-[#1D4AFF] hover:text-[#00FF00] opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100 transition-opacity text-[12px] cursor-pointer bg-transparent border-none p-0 font-code"
                                     title="Copy prompt"
                                 >
                                     {copiedIdx === idx ? '✓' : '📋'}

@@ -264,7 +264,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                                             e.preventDefault()
                                                             handleTeamLead(member.id, false)
                                                         }}
-                                                        className="group-hover:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-muted invisible"
+                                                        className="group-hover:visible group-focus-within:visible [@media(hover:none)]:visible inline-block border-2 border-primary/10 dark:border-primary-dark/10 border-dashed rounded-sm text-[12px] px-2 py-1 !leading-none font-semibold text-muted invisible"
                                                     >
                                                         Team lead?
                                                     </button>
@@ -282,7 +282,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
                                 </Link>
                                 {isModerator && (
                                     <button
-                                        className="p-1 hidden group-hover:flex rounded-full justify-center items-center bg-accent border border-input absolute -top-3 -right-3"
+                                        className="p-1 hidden group-hover:flex group-focus-within:flex [@media(hover:none)]:flex rounded-full justify-center items-center bg-accent border border-input absolute -top-3 -right-3"
                                         onClick={(e) => removeTeamMember(member)}
                                     >
                                         <Close className="w-3 h-3" />

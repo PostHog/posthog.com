@@ -1,0 +1,30 @@
+@keyframes ui-carousel-progress {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.ui-carousel-progress {
+    transform-origin: left;
+    animation-name: ui-carousel-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+.ui-carousel-track[data-peek] {
+    mask-image: linear-gradient(
+        to right,
+        #000 calc(100% - var(--carousel-peek) - var(--carousel-gap)),
+        rgb(0 0 0 / 0.35) calc(100% - var(--carousel-peek)),
+        transparent calc(100% - var(--carousel-peek) * 0.35)
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-carousel-progress {
+        animation: none;
+    }
+}

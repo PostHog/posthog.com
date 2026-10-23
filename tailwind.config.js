@@ -5,7 +5,10 @@ module.exports = {
             // use safelist.txt
         ],
     },
-    darkMode: 'class', // or 'media' or 'class'
+    darkMode: ['variant', '&:is(.dark *):not(:where(.ui-force-light, .ui-force-light *))'],
+    future: {
+        hoverOnlyWhenSupported: true,
+    },
     theme: {
         screens: {
             '2xs': '425px',
