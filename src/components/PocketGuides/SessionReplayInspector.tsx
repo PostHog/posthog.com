@@ -20,7 +20,7 @@ export default function SessionReplayInspector({
     const pageCount = events.filter((event) => event.kind === 'Pageview').length
 
     return (
-        <PostHogInspector>
+        <PostHogInspector className="flex max-h-96 min-h-0 flex-col [&>div:last-child]:min-h-0 [&>div:last-child]:overflow-y-auto">
             <div className="border-b border-[#d3d0c8] bg-[#faf8f3] px-3 text-xs font-semibold">
                 <span className="inline-block border-b-2 border-orange py-2">Events</span>
             </div>
