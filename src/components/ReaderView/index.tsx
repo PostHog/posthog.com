@@ -1956,7 +1956,7 @@ function ReaderViewContent({
                                                     : contentMaxWidthClass || 'max-w-2xl'
                                             } overflow-x-hidden`}
                                         >
-                                            <h3 id="squeak-questions" className="mb-4">
+                                            <h3 id="community-questions" className="mb-4">
                                                 Community questions
                                             </h3>
                                             <Questions

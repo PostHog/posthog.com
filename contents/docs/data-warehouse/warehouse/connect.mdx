@@ -90,4 +90,15 @@ You don't need an external client to use the warehouse. In PostHog's [SQL editor
 
 External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, writes, or ad-hoc CLI sessions.
 
+## Outbound IP addresses
+
+When the warehouse connects to a database or service you run, such as a Postgres database you query from the warehouse, those connections come from a fixed set of IP addresses for your region. If your database only accepts connections from known addresses, add the range for your region to its firewall or security group:
+
+| Region | IP range |
+|---|---|
+| US | `3.41.210.208/28` |
+| EU | `3.40.8.64/28` |
+
+These ranges are shared by every organization's warehouse in that region, so allowlisting them isn't a substitute for authentication. Keep requiring credentials and TLS on anything you expose to them.
+
 For larger workloads, read about [how the warehouse handles performance and limits](/docs/data-warehouse/warehouse/performance-tuning).

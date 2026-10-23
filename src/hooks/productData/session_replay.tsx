@@ -18,6 +18,7 @@ import {
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
+import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 
 export const sessionReplay = {
     ...getTool('session_replay'),
@@ -67,6 +68,7 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
+        { slug: 'field-guide', name: 'Field guide', component: FieldGuideCallout, hideFromNav: true },
         {
             slug: 'applications',
             name: 'How do I use it?',
