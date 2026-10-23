@@ -820,7 +820,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         data-app="AppWindowContent"
                         // With a toolbar above it, the content must be able to shrink below its content's minimum
                         // height, or it overflows the bottom of the window by the toolbar's height.
-                        className={`relative isolate size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
+                        className={`relative size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
                             chrome
                                 ? `${
                                       // A modal's auto height makes percentage heights inside it resolve to
