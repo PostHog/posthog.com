@@ -10,6 +10,8 @@ A manager at PostHog has a short list of responsibilities:
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
 5. Collaborating with execs on team performance concerns that need early intervention
+6. [Communicating downstream impact to other teams](#working-with-other-teams) as needed
+7. Leading [quarterly goal setting](/handbook/company/goal-setting) for your team and ensuring goals are published
 
 That's it.
 
@@ -24,6 +26,16 @@ A manager at PostHog is _not_ responsible for:
 8. Deciding to hire or fire people - the exec team do this
 
 This guidance applies to all teams, irrespective of whether you manage an engineering or non-engineering team. 
+
+## Working with other teams
+
+Everything above is about your own team. If you are a [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead), you also owe a few things to other teams and are responsible for communicating downstream impact to them. 
+
+This includes...
+
+1. Making sure downstream teams are told before your team ships something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, try to overcommunicate.
+2. Put your [quarterly goals](/handbook/company/goal-setting#publishing-and-viewing-goals) on your team page, so other teams can see them on the [WIP page](/wip) without asking you.
+3. If you manage other team leads, clarifying to them where you will set goals and track work so that they have appropriate context. 
 
 ### Part-time managers
 

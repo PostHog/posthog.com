@@ -1,0 +1,287 @@
+---
+title: "How I use skills for everything"
+date: 2026-10-20
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/how_i_use_skills_featured_1201300510.png
+featuredImageType: full
+author:
+    - andy-maguire
+category: Engineering
+tags:
+    - Explainers
+    - AI
+seo:
+    metaTitle: "How I use skills for everything"
+    metaDescription: "How I use PostHog skills as agent memory for project tracking, data warehouse context, inbox triage, team handovers, and self-maintaining scouts."
+---
+
+When agent skills first came out, I thought they were silly. We are just casting magic spells now are we? Is that where we are?
+
+But over time, I bought into the whole "context engineering" thing (as much as I fought the hype initially) and started using them more. Today, almost every interaction I have with an agent on any surface loads at least one skill from the [PostHog skills store](/docs/skills).
+
+No really, my agent looked it up. Over the last 28 days, 78% of my 578 chats loaded a skill and 47% updated one (shoutout [AI observability](/docs/ai-observability/installation/claude-code) for making this easy as all my Claude Code sessions go there). 
+
+I have about 139 skills in the store. About 100 of them are custom [scouts](/docs/self-driving/scouts), which are skills that run themselves on a schedule. The other 39 are for how I actually work, and those are what this post is about.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skills_powerful_slack_b2e9c69600.png"
+    classes="rounded"
+    alt="A Slack message from a teammate, Jake: wow. yeah i had no idea the skills product was this powerful... it seems more like an agents product to me. Basically you have a skill (directory of files/context/instructions) that you can invoke with your own local harness."
+/>
+
+*Jake gets it.*
+
+To be clear, this isn't a "try my magic skill bro" pitch. There's a little cottage industry of skills that promise to fix your agent, and I find it a bit cringe. I'm not taking a dependency on your skill, bro. Skills can turn into tech debt (agent debt?), so the bar for adopting someone else's should be very high.
+
+What I'm evangelical about is the _ways_ you use them.
+
+## Skills are magic context bombs
+
+Most people think of skills as better prompts. Something that teaches the agent a trick. They aren't.
+
+You should think of skills as **little portable agentic memory systems**. They are the perfect abstraction for tagging a bundle of context, so an agent (or I) can pull that context in exactly when it's needed and nowhere else. 
+
+The body is typically a thin index. The bundled files hold the detail. The agent reads them and pulls only the files the current task touches. That's [progressive disclosure](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices#progressive-disclosure-patterns), and it's mostly the point.
+
+A lot of the time skills are used to provide the agent with instructions, but this will likely go away as models get better. They will just use their built in memory and tools to get what they need.
+
+What won't go away is the need to **manage context**. This means telling agents what's true right now, what happened last session, what's in-flight, and what bit us before. That's the part I'm skills-pilled on, and the part that's changed my work the most. Here are some examples. 
+
+
+
+## 1. Skills as a project tracker
+
+Every meaningful piece of work I do is documented and maintained by my agents in one of two skills: `self-driving-work` and `scouts-work` (these are the two things I work on the most). 
+
+They're siblings with identical conventions: a numbered `issues/` backlog with an index, an `ideas/` folder, `open-prs.md`, a rolling 14-day `CHANGELOG.md`, `environment-notes.md` for durable gotchas, and a `HANDOVER.md` that each session overwrites its own section of.
+
+At the time I'm writing this, the `self-driving-work` skill is on version 433 with 126 bundled files, including 55 numbered issues, 17 ideas, and 39 pain points. I didn't write most of those. My agents did, at the end of sessions, because the skill tells them to.
+
+```
+self-driving-work         v433, 126 bundled files
+├── SKILL.md              the thin index
+├── HANDOVER.md           one section per thread of work
+├── CHANGELOG.md          rolling 14-day window
+├── environment-notes.md  durable gotchas
+├── open-prs.md
+├── roadmap.md
+├── dogfooding.md
+├── field-feedback.md
+├── issues/               55 issues + index
+│   ├── 01-reviewer-suggestion-regression.md
+│   ├── 02-crowd-fallback-provenance.md
+│   └── ...
+├── ideas/                17 ideas + index
+│   ├── 01-rank-by-author-association.md
+│   └── ...
+├── pain-points/          39 bad examples + index
+├── feedback/             3 + index
+└── scripts/
+    └── task_summary_sampler.py
+```
+
+
+The loop looks like this:
+
+- I start a session on any surface (local Claude Code, a cloud task, Slack, PostHog AI, Codex) and say "let's check in on /phs self-driving work".
+- The agent uses my local `/phs` [bridge skill](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut), loads the remote skill, reads `HANDOVER.md`, scans the backlog index, and knows where we left off. We do the work in the repo and the product, not in the skill.
+- At the end of the session, the agent logs any new issue or idea, records any PR that opened or merged, adds one changelog line, and overwrites its handover section.
+
+This is the lowest friction and most chill way I have ever found to deliver complex features over long horizons. The skill is the memory, and it's memory I get my agents to intentionally control and maintain.
+
+I don't rely on a model's hidden memory feature that I can't read. The skill in PostHog shows exactly what my agents think is true. If it gets messy, I tell the agent to clean up, or better yet, it knows to follow certain protocols like trimming the changelog after 14 days (all skill edits are version tracked so it's recoverable if I need it).
+
+I liked this pattern enough that I turned it into a template. [`project-template`](https://github.com/PostHog/community-skills/tree/main/skills/project-template) is in the [community skills store](/docs/skills/community). Install it once per area of work, bind the project name and the changelog window, and you have a living hub that any agent on your team can read and write.
+
+
+My favorite part of the template is a small table the agent has to consult before writing anything down:
+
+| Still true in 30 days? | Has an owner who refreshes it? | Goes in                                   |
+| ---------------------- | ------------------------------ | ----------------------------------------- |
+| Yes                    | Yes, a tracked work item       | `issues/NN` or `ideas/NN`                 |
+| Yes                    | No, durable reference          | `environment-notes.md` or a `references/` file |
+| No, but in flight now  | You, this session              | your `HANDOVER.md` section                |
+| No, it just happened   | Nobody                         | `CHANGELOG.md`, one line                  |
+
+The table is there to stop the most common way these skills go wrong: the agent writes durable detail into the changelog, because the changelog is the file it was already editing. I watched that happen many times before I added the table.
+
+You don't need all this structure on day one, though. For a new, messy project, just start a skill and tell your agent to keep its context there. Don't worry much about the layout. Agents do something sensible on their own, and in my experience, a skill only starts to get messy at around version 50. The important part is that the context is in a skill you can see, version, and load from anywhere.
+
+
+## 2. Skills as a map of the stuff I work on
+
+Filter our skills store to `self-driving-` and you get a map of how self-driving works inside PostHog: the alerts, the dashboards, the data warehouse layer, the Temporal workers, the debugging runbook, and the support rotation. Eleven skills, written by several people on the team. A new teammate, or a fresh agent session, can read that list and know where everything lives.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_skills_map_fd16fed5c2.png"
+    classes="rounded"
+    alt="The self-driving group in the PostHog skills store. It lists 11 skills, including self-driving-alerts, self-driving-dashboards, self-driving-debugging, self-driving-dwh, self-driving-temporal, and self-driving-work, each with a description, an author, a version count, and when it last changed."
+/>
+
+
+The most detailed part of the map is `self-driving-dwh`. It's the blueprint for the [data warehouse](/docs/data-warehouse) views behind our internal self-driving analytics: an entity diagram of how scout runs, signals, reports, tasks, and PRs join, the keys that stitch them together, and a `recipes/` folder of SQL that actually works.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_dwh_erd_585528b470.png"
+    classes="rounded"
+    alt="An entity relationship diagram from the self-driving-dwh skill. It shows how scout runs, signals, emissions, reports, action presses, tasks, traces, and PRs join, with the primary and foreign keys for each, followed by a list of the keys that stitch everything together."
+/>
+
+*The entity diagram in `self-driving-dwh`. Any agent that loads the skill gets the same picture I have in my head. Also, no one likes making ERDs but agents love it! (or have no choice)*
+
+When I say "use the /self-driving-dwh skill to help here", the agent knows how everything joins before it writes a query. The skill is on version 458, and I didn't write most of it. A scout, `signals-scout-self-driving-dwh`, checks that the views still sync, catches drift when a source table changes, and updates the skill when it fixes something. A skill maintained by a skill.
+
+Another favorite example is `self-driving-alerts`. It's the single store for all 178 of our [anomaly alerts](/docs/alerts): what each one watches, which dashboard tile it hangs off, which Slack channel it posts to, and why it exists. When we want a new alert, the agent reads the skill to see if we already have one, then adds the new one to the inventory as part of creating it.
+
+Each skill is version tracked and we have an optional description string on all changes so you can easily see how the skill changed and by whom. Very useful for team level skills like this.
+
+<div className="w-fit mx-auto">
+    <ProductScreenshot
+        imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_version_history_6b161f26e5.png"
+        classes="rounded max-w-xs"
+        alt="The version history panel for the self-driving-alerts skill in PostHog. It shows 73 versions. Each version has a short description of what changed, a timestamp, and the person who published it. The latest version was published by a teammate."
+    />
+</div>
+
+This also means we can compare any two versions of a skill body. Here, v61 against v73: the alert counts go up as new alerts get added. Remember, this is mostly text for agents to read. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skill_version_diff_9a0c37decf.png"
+    classes="rounded"
+    alt="A side-by-side diff of the self-driving-alerts skill body in PostHog, comparing version 61 with version 73. The alert counts on the signals line are highlighted where they changed: 112 to 113 alerts, 110 to 111 active, and 93 to 94 hourly."
+/>
+
+
+Stuff like this used to be really annoying to maintain somewhere – now you get it for practically free if you just put it in a skill and let your agents maintain it.
+
+## 3. Skills as a runbook that learns
+
+The alerts skill above records what exists. A runbook records what went wrong and how we fixed it, so it gets better every time something breaks.
+
+`self-driving-debugging` is our runbook for when self-driving misbehaves in production and users have some issues we need to dig into.
+
+The whole thing hangs off one line in the skill body: **add or extend a reference every time we run down a new class of issue.** When a support ticket turns into a real investigation, the agent writes what it found as a dated file in `investigations/`, then extends the matching reference so the next agent doesn't start from zero. Seven investigations in, it covers duplicate reports, competing PRs for one fix, oversold report titles, unaddressed review comments, and a data import source that emitted nothing.
+
+Its sibling, `scouts-debugging`, does the same job for the scout fleet. Between them, "debug self-driving for team N" is a sentence I can say to an agent on any surface and get a real answer.
+
+## 4. Skills as a daily driver
+
+The `andy-inbox` skill is how I start most days. It pulls every report in the [self-driving inbox](/docs/self-driving/inbox) where I'm a suggested reviewer, maps each one to its GitHub PR and issues, and renders one plain line per report: priority, age, review state, CI, and one next action.
+
+```
+In flight with a PR, newest report first
+
+#  Next               Report                                        PR       Signals
+1  ENQUEUE (YOUR GO)  fix(signals): give the revenue scout a supp…  #108959  stamp✓ CI✓
+2  FIX CI             fix(mcp): paginate large GitHub repository…   #108947  stamp✓ CI2✗
+3  ENQUEUE (YOUR GO)  fix(mcp): document the usable --json flag p…  #108934  stamp✓ CI✓
+4  ENQUEUE (YOUR GO)  fix(hogql): system schema discovery relapse…  #108866  stamp✓ CI✓
+5  FIX CI             fix(inbox): show why follow-up checks failed…  #108829  stamp? CI2✗
+6  ENQUEUE (YOUR GO)  fix(mcp): bound health-issues-list payloads…  #108798  stamp✓ CI✓
+7  FIX CI             fix(mcp): make execute-sql join errors iden…  #108284  stamp✓ CI2✗
+```
+
+
+The skill bundles Python scripts to do the boring parts: `render_table.py` builds the table from the API and `gh`, `pr_candidates.py` ranks reports that are ready for a Create PR press, `merge_intent.py` finds PRs I've approved that need agent work to get merged, and `draft_task.py` writes the payload to launch a PostHog [task](/docs/posthog-desktop/tasks) for a stalled row. So "get these three PRs green on CI" turns into three async tasks I can check on later.
+
+It also has a `working-set.md` that records only what I've personally chosen to own, with four rules to guide it:
+
+1. **Check the live state first, the file second.**
+2. The API is the truth.
+3. The file is a list of my commitments.
+4. Never report status from the file alone.
+
+There's a whole family of daily driver skills like these:
+
+- `my-github` is what needs my attention across GitHub: open PRs, review requests, assigned issues, recent merges.
+- `andy-prs` is every PR I opened, with its size, the issues it closes, the inbox report it came from, and its checks.
+- `andy-issues` is every issue I filed, mapped to the inbox report that picked it up and the PR that came out of it, so I can see which of my specs turned into code.
+- `andy-approvals` is the bot-authored PRs I approved or sent `/trunk merge` on, and whether the bot has pushed since, because approving an agent's PR and then losing track of it is a real failure mode.
+
+A scout called `signals-scout-andy-github` runs the GitHub one every hour and keeps a single living report current in my inbox, so most mornings the answer is already waiting for me. A generic version, [`my-inbox`](https://github.com/PostHog/community-skills/tree/main/skills/my-inbox), is in the community store.
+
+## 5. Skills as a handover to humans
+
+Before I went on holiday recently, I posted a state-of-the-world message to my team's Slack channel. It was long. It had a section on current state, a section on operational stuff, and a section on where to dig when something breaks.
+
+Almost every bullet was a link to a skill.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/holiday_handover_slack_edc435a4a1.png"
+    classes="rounded"
+    alt="Part of Andy's Slack handover message before a holiday. Each bullet links to a skill: scouts-dashboard, signals-dwh, signals-alerts, inbox-alerts, inbox-observability, scouts-dogfooding, scouts-debugging, signals-temporal, and inbox-vision-scanner."
+/>
+
+Every bullet was a skill, so a teammate or their agent can pick it up:
+
+- `scouts-dogfooding` for the project log and open issues.
+- `scouts-debugging` for symptom-driven runbooks, including a playbook for digging into one team's experience.
+- `scouts-dashboard` for the dashboard I look at.
+- `signals-alerts` for what pages us. And the line I'm least sorry about: "if you have complex questions and analysis, say 'use the signals-dwh skill in PostHog MCP to help here'."
+
+This is the bit I think people miss about a shared skills store: the handover doesn't go to a human who then has to load it into their own agent. It goes to the human *and* their agent at the same time, because the skill already lives where both of them can read it.
+
+## 6. Skills that run themselves
+
+Every [scout](/docs/self-driving/scouts) in PostHog [is a skill](/docs/self-driving/whats-in-a-scout). Same format, same store, same version history. The only difference is a schedule and a harness that runs it. Which means when I've built a skill for how I do a job, turning it into a job that does itself is a small step, not a new project.
+
+`signals-scout-agent-feedback` watches what agents complain about in our MCP, `signals-scout-self-driving-logs` watches our production logs, and `signals-scout-canonical-drift` checks the canonical scout fleet against the current harness once a week for any drift and inconsistencies as code evolves.
+
+A few are about skills themselves. `signals-scout-skills-best-practices` checks recently-changed skills in our repo against the [Agent Skills spec](https://agentskills.io/specification). `signals-scout-skills-maintenance` catches merged PRs that make an in-repo skill stale. Both lean on `skills-best-practices`, which gets its own section below.
+
+Yes, I have skills that maintain skills. I did warn you.
+
+## 7. Skills as a place to think
+
+I even used a skill to write this blog. The `andy-blogs` skill has one file per post with the argument, sources, a dated log of every decision, a list of what I cut for being too sensitive, and the open TODOs. 
+
+When I start a new session on the post, the agent already knows which branch the draft is on, which numbers it still has to re-check, and which Slack screenshot I already rejected (it was about scouts, not skills). It's well past 20 versions by now, and this paragraph is in its changelog. It helps with all the annoying stuff about writing blog posts like adding the screenshots. And I also use it to tell the agent how I write blog posts: I need to fire up VS Code to eyeball every diff before we commit, as agents are too eager to add stuff I don't want in the final post.
+
+This isn't just a set of instructions. The skill is a document I'm iterating on with an agent, over weeks, across surfaces. A skill turned out to be a better home for that than a Google Doc, because the agent can read it, edit it with the smallest possible change, and every edit is a version I can diff.
+
+## Why the store, and not a folder of Markdown files
+
+You could do all of this with a local `.claude/skills/` or `.agents/skills/` folder, but that's just crazy. Vibing your own plumbing and CI to get your skills to every agent is also totally possible but crazy. Using a skill store gives you benefits like:
+
+- **It's on every surface.** The same skill loads in Claude Code on my laptop, in a cloud task, in Slack, in Codex, in Cursor, and in PostHog AI.
+- **Agents can write to it.** The `skill-update` tool takes incremental `edits` and `file_edits` with a `base_version` check, so two sessions can maintain the same skill without clobbering each other.
+- **It's versioned.** 433 versions of `self-driving-work` means 433 diffs I can read when something looks off. A file on disk gives me one, unless I remember to commit it.
+- **It's shared.** A teammate, or their agent, or a scout, reads the same thing I do.
+- **Progressive disclosure is built in.** `skill-list` returns names and descriptions. `skill-get` returns the body and a file manifest. `skill-file-get` pulls one file.
+
+It's not just me, either. Here's every skill created in our internal project since late April:
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/skills_store_growth_insight_3473c68bd8.png"
+    classes="rounded"
+    alt="A PostHog SQL insight showing the cumulative number of skills created in PostHog's internal project, by week, rising from 62 in late April to 761 at the end of September."
+/>
+
+
+If you're already using the [PostHog MCP](/docs/model-context-protocol), you have this today. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) and your agent already knows the `skills-store` skill. I keep a tiny local bridge called `/phs` that just loads it; the [docs show how](/docs/skills#step-3-set-up-a-bridge-skill-optional-shortcut).
+
+## The skill that stops skills slop
+
+There's a catch with all of this. Leave an agent to maintain a skill and it will grow it: a paragraph every session, a changelog line for every fix, until loading the skill costs more than it saves. A mono-skill of slop.
+
+So I wrote `skills-best-practices`. I tell the agent to use it to clean up if needed and also, when I'm making a new project tracker type skill, I tell the agent to follow it. It's in the [community store](https://github.com/PostHog/community-skills/tree/main/skills/skills-best-practices) if you want it. The short version:
+
+1. **Give every skill a convention.** Tell the agent exactly where an issue, a handover, or an investigation goes. If you don't, it makes something up, and it's different every time.
+2. **Keep the body small.** About one screen: what this is, the gotchas, and a map of the files. Detail goes in the files.
+3. **Stop things growing forever.** The changelog keeps 14 days. The handover gets overwritten, not appended to.
+4. **Link, don't copy.** One skill per area, with links to its siblings.
+5. **Dogfood them.** Use the skill for its actual job, notice where the agent stumbled, and fix the skill in the same session.
+
+## Try it
+
+- Read the [skills docs](/docs/skills) and connect the [PostHog MCP](/docs/model-context-protocol) to whatever agent you use.
+- Then just ask your agent about the PostHog skills store. With the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) installed, it already has the [`skills-store`](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) skill and knows how to list, load, and edit your skills.
+- Install [`project-template`](https://github.com/PostHog/community-skills/tree/main/skills/project-template) from the [community store](/docs/skills/community) for one area of work you're tired of re-explaining to your agent.
+- Install [`skills-best-practices`](https://github.com/PostHog/community-skills/tree/main/skills/skills-best-practices) next to it, and tell your agent to load it before it creates or edits any skill.
+- When you have a skill for how you do a job, [turn it into a scout](/docs/self-driving/scouts) and let it do the job for you.
+
+And if you build a skill for something in your life that has no business being a skill, tell me. I have a hedgehog joke scout. I'm not going to judge.

@@ -19,11 +19,11 @@ tags:
 
 ## Wait, what's changing?
 
-Until now, billing for [data pipelines](/docs/cdp) has been based on all your **events ingested**, regardless of whether they were used in pipelines or not. That made sense at first, but it also meant you were sometimes paying for functionality you didn't really use — like being billed for a buffet when you only ate the bread rolls.
+Until now, billing for [data pipelines](/docs/data-pipelines) has been based on all your **events ingested**, regardless of whether they were used in pipelines or not. That made sense at first, but it also meant you were sometimes paying for functionality you didn't really use — like being billed for a buffet when you only ate the bread rolls.
 
 We're fixing that. From now on, you'll pay based on:
 
-1. **Rows exported:** The actual data leaving PostHog via [batch exports](/docs/cdp/batch-exports) and landing in your destinations.  
+1. **Rows exported:** The actual data leaving PostHog via [batch exports](/docs/data-pipelines/batch-exports) and landing in your destinations.  
 2. **Trigger events:** The events that actually kick off actions in your pipelines.
 
 No more phantom charges for uneaten bread rolls.
@@ -48,7 +48,7 @@ One of our most important pricing principles is that it should be free to use Po
 - **10,000 trigger events free** each month  
 - **1 million rows exported free** each month  
 
-That's a lot of [Slack messages](/docs/cdp/destinations/slack), [ad conversions](https://posthog.com/docs/cdp/destinations/linkedin-ads), and [data backed up to S3](/docs/cdp/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup. 
+That's a lot of [Slack messages](/docs/data-pipelines/destinations/slack), [ad conversions](https://posthog.com/docs/data-pipelines/destinations/linkedin-ads), and [data backed up to S3](/docs/data-pipelines/batch-exports/s3). It should be plenty to get started, or even to keep going, depending on your setup. 
 
 To learn more about usage-based pricing beyond free tiers and to calculate potential costs, check out our [pricing page and calculator](/pricing).
 
