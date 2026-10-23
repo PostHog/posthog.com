@@ -390,7 +390,7 @@ export const config = {
 
 </MultiLanguage>
 
-Add `/yourpath/:path*` to the `matcher` even if you already use Clerk's default matcher. The default matcher skips paths that end in `.js`, such as `/yourpath/static/array.js`. On Next.js 15 or earlier, put this code in `middleware.js` and name the function `middleware`.
+Keep the `/yourpath/:path*` entry in the `matcher`. Clerk's default matcher skips paths that end in `.js`, such as `/yourpath/static/array.js`, so without this entry the PostHog SDK files never reach the proxy. On Next.js 15 or earlier, put this code in `middleware.js` and name the function `middleware`.
 
 ### 503 or 400 errors persist
 
