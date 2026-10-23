@@ -70,7 +70,8 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         token: 'blue',
         volume: 3,
         docsProduct: 'data-warehouse',
-        learnPath: '/docs/data-warehouse/pocket-guide',
+        productHandle: 'data_warehouse',
+        learnPath: '/learn/warehouse/pocket-guide',
     },
     {
         id: 'session-replay',

@@ -32,6 +32,11 @@ export const dataWarehouse = {
     docsSlug: 'data-warehouse',
     forumTag: 'data-warehouse',
     teamSlug: 'warehouse',
+    // The Learn tab shows only the "Ask a quick question" part of the Data Stack pocket guide.
+    pocketGuideVolume: 'data-stack',
+    pocketGuideSection: 'Ask a quick question',
+    // Each of those chapters is a question, so the full title says more than the short label.
+    learnNavFullTitles: true,
     seo: {
         title: 'Warehouse – All your data, one warehouse',
         description:
