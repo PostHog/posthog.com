@@ -30,6 +30,7 @@ This page is written with the assumed `defaults: '2026-06-25'` when initializing
 </CalloutBox>
 
 When setting up recording rules, there are three questions to ask yourself:
+
 - Which sessions are worth starting a recording for
 - How many of those matching sessions you actually need
 - How short is too short to be worth keeping
@@ -75,14 +76,14 @@ A trigger group with no conditions matches every session, so its sample rate bec
 
 ### Controls available
 
-| Control | What it does |
-| --- | --- |
-| [Sampling](#sampling) | Records a percentage of the sessions that matched this group. |
-| [URL triggers](#url-triggers) | Starts recording when the user visits a matching URL. |
-| [Event triggers](#event-triggers) | Starts recording when a matching event is captured. |
-| [Feature flag triggers](#feature-flag-triggers) | Records only the users who have the flag enabled. |
-| [Minimum duration](#minimum-duration) | Discards sessions shorter than the threshold you set. |
-| [Combining controls](#combining-controls) | Decides whether a group needs any of its conditions, or all of them. |
+| Control                                         | What it does                                                         |
+| ----------------------------------------------- | -------------------------------------------------------------------- |
+| [Sampling](#sampling)                           | Records a percentage of the sessions that matched this group.        |
+| [URL triggers](#url-triggers)                   | Starts recording when the user visits a matching URL.                |
+| [Event triggers](#event-triggers)               | Starts recording when a matching event is captured.                  |
+| [Feature flag triggers](#feature-flag-triggers) | Records only the users who have the flag enabled.                    |
+| [Minimum duration](#minimum-duration)           | Discards sessions shorter than the threshold you set.                |
+| [Combining controls](#combining-controls)       | Decides whether a group needs any of its conditions, or all of them. |
 
 ### Sampling
 
@@ -90,13 +91,13 @@ Sampling enables you to record a percentage of sessions. Each trigger group has 
 
 Sampling is supported on the following SDKs:
 
-| Platform | Minimum version |
-| --- | --- |
-| [Web](/docs/libraries/js) | posthog-js 1.85.0+ |
-| [Android](/docs/libraries/android) | 3.34.0+ |
-| [iOS](/docs/libraries/ios) | 3.42.0+ |
-| [React Native](/docs/libraries/react-native) | 4.37.0+ |
-| [Flutter](/docs/libraries/flutter) | 5.26.0+ |
+| Platform                                     | Minimum version    |
+| -------------------------------------------- | ------------------ |
+| [Web](/docs/libraries/js)                    | posthog-js 1.85.0+ |
+| [Android](/docs/libraries/android)           | 3.34.0+            |
+| [iOS](/docs/libraries/ios)                   | 3.42.0+            |
+| [React Native](/docs/libraries/react-native) | 4.37.0+            |
+| [Flutter](/docs/libraries/flutter)           | 5.26.0+            |
 
 Our recommendation is to start with capturing 100% of sessions and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
 
@@ -123,7 +124,15 @@ Sampling reduces the number of sessions you record, but you cannot control which
 You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
 The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see how they arrived at the page.
 
-URL trigger patterns are regular expressions and are automatically anchored: PostHog wraps your pattern in `^` and `$`, so it must match the full URL including the path. A bare domain like `https://example.com` won't match `https://example.com/` or any subpage.
+<CalloutBox icon="IconWarning" title="Path-only patterns don't work" type="caution">
+
+URL trigger patterns are matched against the full URL (including `https://`, the domain, path, and query string). A path-only pattern like `/checkout/.*` will never match because it doesn't include the protocol and domain.
+
+Write the full URL, e.g., `https://example.com/checkout.*`
+
+</CalloutBox>
+
+URL trigger patterns are regular expressions. PostHog automatically wraps your pattern in `^` and `$` anchors, so it must match the entire URL from start to end. A bare domain like `https://example.com` won't match `https://example.com/` or any subpage.
 
 To record on a domain, all of its subdomains, and every path:
 
@@ -146,13 +155,13 @@ Property filters are not applied, so an event trigger can't be scoped to a speci
 
 Event triggers are supported on the following SDKs:
 
-| Platform | Minimum version |
-| --- | --- |
-| [Web](/docs/libraries/js) | posthog-js 1.186.0+ |
-| [iOS](/docs/libraries/ios) | 3.48.0+ |
-| [Android](/docs/libraries/android) | 3.40.1+ |
-| [React Native](/docs/libraries/react-native) | 4.52.0+ |
-| [Flutter](/docs/libraries/flutter) | 5.25.0+ |
+| Platform                                     | Minimum version     |
+| -------------------------------------------- | ------------------- |
+| [Web](/docs/libraries/js)                    | posthog-js 1.186.0+ |
+| [iOS](/docs/libraries/ios)                   | 3.48.0+             |
+| [Android](/docs/libraries/android)           | 3.40.1+             |
+| [React Native](/docs/libraries/react-native) | 4.52.0+             |
+| [Flutter](/docs/libraries/flutter)           | 5.25.0+             |
 
 <CalloutBox icon="IconInfo" title="Mobile platforms have no pre-buffer" type="fyi">
 
@@ -199,13 +208,13 @@ In your [replay ingestion settings](https://app.posthog.com/replay/settings#sele
 
 Supported on the following SDKs:
 
-| Platform | Minimum version |
-| --- | --- |
-| [Web](/docs/libraries/js) | posthog-js 1.291.0+ |
-| [iOS](/docs/libraries/ios) | 3.53.0+ |
-| [Android](/docs/libraries/android) | 3.44.0+ |
-| [React Native](/docs/libraries/react-native) | 4.52.0+ |
-| [Flutter](/docs/libraries/flutter) | 5.24.3+ |
+| Platform                                     | Minimum version     |
+| -------------------------------------------- | ------------------- |
+| [Web](/docs/libraries/js)                    | posthog-js 1.291.0+ |
+| [iOS](/docs/libraries/ios)                   | 3.53.0+             |
+| [Android](/docs/libraries/android)           | 3.44.0+             |
+| [React Native](/docs/libraries/react-native) | 4.52.0+             |
+| [Flutter](/docs/libraries/flutter)           | 5.24.3+             |
 
 Use this to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
@@ -298,9 +307,9 @@ To record both patterns independently at different rates, use two groups rather 
 
 Since posthog-js 1.369.0, all of these controls live in [trigger groups](#trigger-groups). The settings below are kept for backward compatibility. You get them in either of these cases:
 
-| Your SDK | What you get |
-| --- | --- |
-| posthog-js before 1.369.0 | Always the legacy controls below |
+| Your SDK                    | What you get                                                 |
+| --------------------------- | ------------------------------------------------------------ |
+| posthog-js before 1.369.0   | Always the legacy controls below                             |
 | posthog-js 1.369.0 or later | Trigger groups, unless your project has no groups configured |
 
 If you are using the controls below, upgrade to a current SDK and migrate your configuration to trigger groups.
@@ -327,7 +336,6 @@ This preserves the original behavior where recording starts if **any** condition
 
 </CalloutBox>
 
-
 ### Project-wide match type and sampling
 
 **Applies to posthog-js 1.238.0 through 1.368.x, and to 1.369.0 or later when no trigger groups are configured.** Match type arrived in 1.238.0. Before that, you could not choose how triggers combined.
@@ -349,7 +357,6 @@ To fix this, either lower your sample rate or switch to "all" matching.
 </CalloutBox>
 
 This trap does not apply to trigger groups, where the sample rate is applied after a group's conditions match rather than as another condition alongside them.
-
 
 ### Legacy minimum duration mode
 
@@ -377,7 +384,6 @@ For example, with a 12 second minimum:
 - Result: You get 6 seconds of recording from page B, but miss the 6 seconds from page A
 
 Use legacy mode if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes. Use [strict mode](#how-minimum-duration-is-enforced) if you want to only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users.
-
 
 ## Billing limits
 
