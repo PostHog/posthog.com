@@ -2876,6 +2876,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bootstrapping',
                         },
                         {
+                            name: 'Upgrading to capture v1',
+                            url: '/docs/libraries/capture-v1',
+                        },
+                        {
                             name: 'JavaScript Web',
                             url: '/docs/libraries/js',
                             badge: {
