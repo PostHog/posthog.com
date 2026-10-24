@@ -8503,6 +8503,15 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Transactional emails',
+                },
+                {
+                    name: 'Send transactional emails',
+                    url: '/docs/workflows/transactional-emails',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
+                {
                     name: 'Channels',
                 },
                 {
