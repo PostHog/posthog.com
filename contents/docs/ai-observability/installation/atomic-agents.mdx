@@ -1,0 +1,22 @@
+---
+title: Atomic Agents AI Observability installation
+platformLabel: Atomic Agents
+platformIconName: IconCode
+showStepsToc: true
+tableOfContents:
+    [
+        { url: 'install-dependencies', value: 'Install dependencies', depth: 1 },
+        { url: 'set-up-opentelemetry-tracing', value: 'Set up OpenTelemetry tracing', depth: 1 },
+        { url: 'run-an-agent', value: 'Run an agent', depth: 1 },
+        { url: 'verify-traces-and-generations', value: 'Verify traces and generations', depth: 1 },
+        { url: 'next-steps', value: 'Next steps', depth: 1 },
+    ]
+---
+
+import { AtomicAgentsInstallation } from 'onboarding/ai-observability/atomic-agents.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
+
+<OnboardingContentWrapper>
+    <AtomicAgentsInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>

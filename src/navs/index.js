@@ -7368,6 +7368,11 @@ export const docsMenu = {
                             platformLogo: 'instructor',
                         },
                         {
+                            name: 'Atomic Agents',
+                            url: '/docs/ai-observability/installation/atomic-agents',
+                            platformIconName: 'IconCode',
+                        },
+                        {
                             name: 'Pydantic AI',
                             url: '/docs/ai-observability/installation/pydantic-ai',
                             platformLogo: 'pydanticAI',
