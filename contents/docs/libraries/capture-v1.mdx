@@ -108,7 +108,7 @@ You can set properties and options in several places. When the same key is set i
 1. **The capture call** – the properties and options you pass for this event
 2. **Context** – values set for the current request or job, such as Python's `new_context()` and `tag()`, or Go's `RequestContext`
 3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, or Go's `DefaultEventProperties` and `DefaultEventOptions`
-4. **SDK values** – properties the SDK adds itself, such as `$is_server`, and the `$feature/<key>` and `$active_feature_flags` properties from the feature flags you attach to an event
+4. **SDK values** – properties the SDK adds itself, such as `$is_server`, the `$feature/<key>` and `$active_feature_flags` properties from the feature flags you attach to an event, and the `$trace_id` and `$span_id` of the active OpenTelemetry span. The SDK adds the trace IDs only when no layer set either one
 
 Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
@@ -163,6 +163,7 @@ Some defaults changed in the new major versions. These are the capture settings 
 | Flush interval | 5 seconds | `flush_interval` | `Interval` | `flush_interval_ms` |
 | Compression | None | `capture_compression` | `Compression` | `capture_compression` |
 | Compression formats | – | `gzip`, `deflate`, `zstd` | `gzip`, `deflate`, `br`, `zstd` | `gzip`, `deflate`, `br`, `zstd` |
+| Skip GeoIP lookup | On for Python and Go, off for Rust | `disable_geoip` | `DisableGeoIP` | `disable_geoip` |
 | Error handler | – | `on_error` | `Callback` | `on_error` |
 | Modify or drop events | – | `before_send` | `BeforeSend` | `before_send` |
 
