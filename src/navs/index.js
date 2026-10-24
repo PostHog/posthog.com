@@ -1119,6 +1119,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/collaborating-with-pms',
                     },
                     {
+                        name: 'Sales enablement',
+                        url: '/handbook/marketing/sales-enablement',
+                    },
+                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
