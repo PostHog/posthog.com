@@ -1,4 +1,3 @@
-import { createHubSpotContact } from 'lib/utils'
 import React from 'react'
 import { Squeak } from 'components/Squeak'
 
