@@ -127,7 +127,7 @@ A distinct ID connects events to one person. Use either:
 
 Keep each distinct ID under 200 bytes. Capture v1 drops events with longer IDs, where legacy capture shortened them.
 
-Don't use one value for many people or machines, such as `anonymous`, `guest`, `system`, `null`, or a server name. PostHog accepts events with these common placeholder values but processes them without a person profile, and returns the result `warning` with the detail `person_processing_disabled`. A distinct ID that sends far more events than one person could is also [rate limited](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids). See [identifying users](/docs/product-analytics/identify) for more.
+Don't use one value for many people or machines, such as `anonymous`, `guest`, `system`, `null`, or a server name. PostHog accepts events with these common placeholder values but processes them without a person profile, and returns the result `ok` with the detail `person_processing_disabled`. A distinct ID that sends far more events than one person could is also [rate limited](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids). See [identifying users](/docs/product-analytics/identify) for more.
 
 <!-- TODO(capture-v1): align the identify page's list of refused IDs with capture v1's placeholder list, or keep both lists described rather than enumerated. -->
 
@@ -159,7 +159,7 @@ Your stored events don't change shape: PostHog stores options as the same proper
 
 Compress the body and set `Content-Encoding` to one of `gzip`, `deflate`, `br`, or `zstd`. An uncompressed body needs no `Content-Encoding`.
 
-Legacy formats such as `gzip-js`, `lz64`, `base64`, and the `?compression=` query parameter are not accepted on v1. The request fails with `415`.
+Legacy formats such as `gzip-js`, `lz64`, and `base64` are not accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
 
 [SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
 
@@ -207,7 +207,7 @@ PostHog SDKs always send these types. If you change an event in a `before_send` 
 | `Content-Encoding` | None, or `gzip`, `deflate`, `br`, or `zstd` | `415` `unsupported_encoding` |
 | Header values | Visible ASCII characters only | `400` `invalid_header_value` |
 | Field types | See [field types](#field-types) | `400` `request_parsing_error`, nothing stored |
-| `PostHog-Sdk-Info` | `<library>/<version>`, up to 200 bytes | Request accepted, but `$lib` and `$lib_version` are not set |
+| `PostHog-Sdk-Info` | `<library>/<version>`, with a `/`, up to 200 bytes | Request accepted, but `$lib` and `$lib_version` are not set |
 
 ### Event limits
 
@@ -308,7 +308,7 @@ A `200` response has one result for every event, keyed by the event's `uuid`:
 | `person_processing_disabled` | `ok` or `warning` | Stored without a person profile. The result is `ok` when the distinct ID is a placeholder like `anonymous`, and `warning` when PostHog's rate limiter turned person processing off |
 | `not_persisted` | `retry` | PostHog couldn't store it right now |
 
-When an event is over a product's quota or billing limit, the result is `drop` and `details` names the quota that was exceeded, such as `over_quota`.
+When an event is over a product's quota, the result is `drop` and `details` names the quota that was exceeded.
 
 <!-- TODO(capture-v1): link the full list of detail values in sdk-specs once published. TODO(link) -->
 <!-- TODO(capture-v1): decide whether event_restriction_drop, ai_byte_rate_limited, rejected, and serialization_failed belong in this table. -->
