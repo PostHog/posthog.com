@@ -149,6 +149,7 @@ See [limits and validation](/docs/api/capture-v1#limits-and-validation) for ever
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs.
 - **Timestamps.** SDKs send timestamps with at least millisecond precision and keep any extra precision you provide. They no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
+- **Redirects.** SDKs follow a redirect only to the same scheme, host, and port, and only a `307` or `308`. Any other redirect is an error. If you send events through a proxy that redirects, point the SDK at the final address.
 - **Logs.** Debug logs no longer include event contents, and some log messages changed. Update any alerts that match on old log text.
 
 ## Configuration
