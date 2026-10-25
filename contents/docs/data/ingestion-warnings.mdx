@@ -218,7 +218,7 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 | Rejected a batch with invalid metadata | A batch field, such as `created_at`, was missing or invalid. Nothing in the request was stored. |
 | Rejected a batch containing an event with no UUID | An event had no `uuid`. Nothing in the request was stored. |
 | Rejected a batch containing an event with an invalid UUID | An event's `uuid` wasn't a valid UUID. Nothing in the request was stored. |
-| Rejected a batch containing duplicate event UUIDs | Two events in one request had the same `uuid`. Nothing in the request was stored. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
+| Discarded events that reused another event's UUID in the same request | Two or more events in one request had the same `uuid`. PostHog kept the first and dropped the rest. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
 
 <!-- TODO(capture-v1): confirm these titles match the app's ingestion warnings view at release, and add docs anchors for them in the app. -->
 
