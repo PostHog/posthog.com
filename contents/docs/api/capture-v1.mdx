@@ -328,6 +328,7 @@ When you retry:
 - Increase `PostHog-Attempt` by one.
 - Set a new `PostHog-Request-Timestamp`.
 - Wait before each retry, doubling the wait each time, and add some randomness (jitter) so many clients don't retry at once. If the response has a `Retry-After` header, wait at least that long.
+- Turn off automatic retries in your HTTP library, or make sure each of its retries follows these rules. A library retry that resends the old `PostHog-Request-Timestamp` makes PostHog shift your events' timestamps by the time it spent retrying.
 
 PostHog SDKs that use v1 do all of this for you. If you use one, don't wrap its capture calls in your own retry logic.
 
