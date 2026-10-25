@@ -5250,7 +5250,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/forum/t/questions?tag=session-replay',
+                    url: '/forum/t/ask-the-hogs?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,
