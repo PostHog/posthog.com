@@ -158,7 +158,7 @@ Image previews appear when hovering over events in the event selector, such as w
 
 Every event has a `uuid`. Events that share the same `uuid`, `event` name, `timestamp`, and `distinct_id` are treated as duplicates and are eventually de-duplicated. This matters because failures and retries happen, so your app or one of our SDKs might send the same event more than once.
 
-On [capture v1](/docs/api/capture-v1#event-uuids), every event must have its own `uuid`, and PostHog rejects a whole request that contains the same `uuid` twice. Re-sending an event in a later request to update it works the same way.
+On [capture v1](/docs/api/capture-v1#event-uuids), every event must have its own `uuid`. If one request repeats a `uuid`, PostHog keeps the first event with it and drops the rest. Re-sending an event in a later request to update it works the same way.
 <!-- TODO(capture-v1): verify upsert-by-resend behaves the same on v1 end to end before merge. -->
 
 Most of the time you don't need to think about this. PostHog generates a `uuid` for each event, and client-side SDKs like [JavaScript Web](/docs/libraries/js) set one automatically, so retried events are de-duplicated for you.
