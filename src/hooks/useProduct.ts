@@ -22,7 +22,7 @@ import {
     IconAsterisk,
     IconAI,
     IconTestTube,
-    IconArrowUpRight,
+    IconShuffle,
     IconTrends,
     IconCursorClick,
     IconAtSign,
@@ -2582,8 +2582,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             ...getTool('data_out'),
-            parentIcon: 'dataOut',
-            Icon: IconArrowUpRight,
+            Icon: IconShuffle,
             color: 'orange',
             colorSecondary: 'orange',
             seo: {
