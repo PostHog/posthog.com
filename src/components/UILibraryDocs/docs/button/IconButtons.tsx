@@ -8,9 +8,9 @@ export default function IconButtons(): JSX.Element {
             {(['sm', 'md', 'lg'] as const).map((size) => (
                 <IconButton key={size} aria-label={`Settings, ${size}`} icon={<IconGear />} size={size} />
             ))}
-            <IconButton aria-label="Add" icon={<IconPlus />} variant="primary" />
-            <IconButton aria-label="Share" icon={<IconShare />} variant="secondary" />
-            <IconButton aria-label="Delete" icon={<IconTrash />} variant="primary" disabled />
+            <IconButton aria-label="Add" icon={<IconPlus />} appearance="raised" variant="primary" />
+            <IconButton aria-label="Share" icon={<IconShare />} appearance="raised" />
+            <IconButton aria-label="Delete" icon={<IconTrash />} appearance="raised" variant="primary" disabled />
             <IconButton aria-label="Copy event" icon={<IconCopy />} />
             <IconButton aria-label="Copy unavailable event" icon={<IconCopy />} disabled />
             <IconButton aria-label="Copy event in progress" icon={<IconCopy />} loading />

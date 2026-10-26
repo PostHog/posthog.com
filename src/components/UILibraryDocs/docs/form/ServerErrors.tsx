@@ -28,7 +28,7 @@ export default function ServerErrors(): JSX.Element {
                 <Field.Error />
             </Field.Root>
             <div className="flex items-center gap-3">
-                <Button type="submit" variant="primary">
+                <Button type="submit" appearance="raised" variant="primary">
                     Claim
                 </Button>
                 {claimedUsername && <span className="text-sm text-secondary">You are {claimedUsername}</span>}

@@ -13,7 +13,7 @@ export default function Sizes(): JSX.Element {
                         placeholder="Write a message"
                         className="min-w-0 flex-1"
                     />
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

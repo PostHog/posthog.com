@@ -7,10 +7,10 @@ export default function Headlines(): JSX.Element {
                 Your product's <Emphasis>context layer</Emphasis>
             </h2>
             <h3 className="!m-0 !text-2xl">
-                Your data stack, <Emphasis tone="success">working together</Emphasis>
+                Your data stack, <Emphasis color="green">working together</Emphasis>
             </h3>
             <p className="!m-0 text-lg">
-                Connect PostHog to your <Emphasis tone="brand">favorite coding agent</Emphasis>.
+                Connect PostHog to your <Emphasis color="red">favorite coding agent</Emphasis>.
             </p>
         </div>
     )

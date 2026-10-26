@@ -13,7 +13,9 @@ export default function CardBasic(): JSX.Element {
             </Card.Header>
             <Card.Footer>
                 <Button>Learn more</Button>
-                <Button variant="primary">Turn on</Button>
+                <Button appearance="raised" variant="primary">
+                    Turn on
+                </Button>
             </Card.Footer>
         </Card.Root>
     )

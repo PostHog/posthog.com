@@ -15,11 +15,11 @@ const iconTransition =
     'col-start-1 row-start-1 size-full transition-[opacity,transform] duration-150 ease-out motion-reduce:transition-none'
 
 export const CopyButton = React.forwardRef<HTMLElement, CopyButtonProps>(function CopyButton(
-    { text, getText, label = 'Copy', onCopy, onClick, size = 'sm', variant = 'default', ...props },
+    { text, getText, label = 'Copy', onCopy, onClick, size = 'sm', variant = 'secondary', ...props },
     ref
 ) {
     const [status, setStatus] = React.useState<'idle' | 'copied' | 'error'>('idle')
-    const tintResult = variant === 'default' || variant === 'secondary'
+    const tintResult = variant === 'secondary'
     const timer = React.useRef<ReturnType<typeof setTimeout>>()
     const mounted = React.useRef(false)
     const copying = React.useRef(false)

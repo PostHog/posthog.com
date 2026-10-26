@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
-import { Button } from '../Button'
+import { IconButton } from '../Button'
 import { dialogBackdrop, dialogPopup, dialogViewport, surfacePaddings, surfaceDivider } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
@@ -11,7 +11,7 @@ export type DialogPopupProps = BaseDialog.Popup.Props & {
 }
 
 const Popup = React.forwardRef<HTMLDivElement, DialogPopupProps>(function DialogPopup(
-    { className, container, ...props },
+    { className, container, children, ...props },
     ref
 ) {
     return (
@@ -23,7 +23,9 @@ const Popup = React.forwardRef<HTMLDivElement, DialogPopupProps>(function Dialog
                     data-scheme="primary"
                     className={mergeClassName(`${dialogPopup} max-w-lg`, className)}
                     {...props}
-                />
+                >
+                    {children}
+                </BaseDialog.Popup>
             </BaseDialog.Viewport>
         </BaseDialog.Portal>
     )
@@ -36,19 +38,14 @@ export type DialogHeaderProps = {
 }
 
 const Header = ({ children, className, showCloseButton = true }: DialogHeaderProps): JSX.Element => (
-    <div
-        className={cn(
-            'flex min-h-[35px] shrink-0 items-center justify-between gap-2 border-b border-primary bg-accent p-1',
-            className
-        )}
-    >
-        <BaseDialog.Title className="my-0 ml-3 truncate text-left text-sm font-semibold text-primary">
+    <div className={cn('flex shrink-0 items-start justify-between gap-2 pl-4 pr-2.5 pt-3.5', className)}>
+        <BaseDialog.Title className="my-0 min-w-0 pt-0.5 text-left text-base font-bold leading-6 text-primary">
             {children}
         </BaseDialog.Title>
         {showCloseButton && (
-            <BaseDialog.Close render={<Button aria-label="Close" className="p-1" />}>
-                <IconX className="size-4" />
-            </BaseDialog.Close>
+            <BaseDialog.Close
+                render={<IconButton aria-label="Close" size="sm" icon={<IconX className="size-4" />} />}
+            />
         )}
     </div>
 )

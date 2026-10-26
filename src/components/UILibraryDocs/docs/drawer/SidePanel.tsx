@@ -22,7 +22,7 @@ export default function DrawerSidePanel(): JSX.Element {
                 </Drawer.Content>
                 <Drawer.Footer separator>
                     <Drawer.Close render={<Button />}>Cancel</Drawer.Close>
-                    <Drawer.Close render={<Button variant="primary" />}>Save</Drawer.Close>
+                    <Drawer.Close render={<Button appearance="raised" variant="primary" />}>Save</Drawer.Close>
                 </Drawer.Footer>
             </Drawer.Popup>
         </Drawer.Root>

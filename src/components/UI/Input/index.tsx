@@ -1,14 +1,20 @@
 import React from 'react'
 import { Input as BaseInput } from '@base-ui/react/input'
-import { textInput, fieldSizes } from '../styles'
-import type { FieldSize } from '../styles'
+import { fieldSizes, textInputFor } from '../styles'
+import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName } from '../utils'
 
-export type InputProps = Omit<BaseInput.Props, 'size'> & { size?: FieldSize }
+export type InputProps = Omit<BaseInput.Props, 'size'> & { size?: FieldSize; appearance?: FieldAppearance }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
-    { size = 'md', className, ...props },
+    { size = 'md', appearance = 'inset', className, ...props },
     ref
 ) {
-    return <BaseInput ref={ref} className={mergeClassName(`${textInput} ${fieldSizes[size]}`, className)} {...props} />
+    return (
+        <BaseInput
+            ref={ref}
+            className={mergeClassName(`${textInputFor(appearance)} ${fieldSizes[size]}`, className)}
+            {...props}
+        />
+    )
 })

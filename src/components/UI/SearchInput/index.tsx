@@ -4,12 +4,30 @@ import { Input } from '@base-ui/react/input'
 import type { InputProps } from '../Input'
 import { Kbd } from '../Kbd'
 import { Spinner } from '../Spinner'
-import { bareInput, fieldSizes, inputGroup, insetFocusRing } from '../styles'
+import { IconButton } from '../Button'
+import {
+    bareInput,
+    fieldIconButtonIconSize,
+    fieldIconButtonSizes,
+    fieldSizes,
+    searchGroupFor,
+    searchRoundPadding,
+} from '../styles'
+import type { SearchAppearance } from '../styles'
 import { cn } from '../../../utils'
 
 const searchIconSizes = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' } as const
 
-export type SearchInputProps = Omit<InputProps, 'value' | 'defaultValue' | 'onValueChange' | 'className' | 'render'> & {
+const clearButtonEdge = {
+    box: { sm: '-mr-[6px]', md: '-mr-[7px]', lg: '-mr-[9px]' },
+    round: { sm: '-mr-[10px] rounded-full', md: '-mr-[13px] rounded-full', lg: '-mr-[17px] rounded-full' },
+} as const
+
+export type SearchInputProps = Omit<
+    InputProps,
+    'value' | 'defaultValue' | 'onValueChange' | 'className' | 'render' | 'appearance'
+> & {
+    appearance?: SearchAppearance
     value?: string
     defaultValue?: string
     onValueChange?: (value: string) => void
@@ -27,6 +45,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         defaultValue = '',
         onValueChange,
         size = 'md',
+        appearance = 'inset',
         loading = false,
         loadingLabel = 'Searching',
         clearLabel = 'Clear search',
@@ -54,6 +73,8 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         onValueChange?.(nextValue)
     }
 
+    const round = appearance === 'pill' || appearance === 'floating'
+
     function clear() {
         changeValue('')
         inputRef.current?.focus()
@@ -61,9 +82,20 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
 
     return (
         <div
-            className={cn(inputGroup, fieldSizes[size], 'min-h-0 gap-2', className)}
+            className={cn(
+                searchGroupFor(appearance),
+                fieldSizes[size],
+                round && searchRoundPadding[size],
+                'min-h-0 gap-2',
+                className
+            )}
             data-disabled={disabled ? '' : undefined}
             data-invalid={props['aria-invalid'] === true || props['aria-invalid'] === 'true' ? '' : undefined}
+            onMouseDown={(event) => {
+                if ((event.target as HTMLElement).closest('input, button')) return
+                event.preventDefault()
+                inputRef.current?.focus()
+            }}
         >
             {loading ? (
                 <Spinner size={size} label={loadingLabel} className="text-secondary" />
@@ -106,17 +138,18 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
                 }}
             />
             {canClear ? (
-                <button
+                <IconButton
                     type="button"
+                    size={fieldIconButtonIconSize[size]}
                     aria-label={clearLabel}
+                    icon={<IconX />}
                     className={cn(
-                        'flex size-5 shrink-0 items-center justify-center rounded text-secondary hover:bg-[rgb(var(--text-primary)/0.07)] hover:text-primary',
-                        insetFocusRing
+                        fieldIconButtonSizes[size],
+                        'mt-0 self-center',
+                        clearButtonEdge[round ? 'round' : 'box'][size]
                     )}
                     onClick={clear}
-                >
-                    <IconX aria-hidden="true" className="size-3.5" />
-                </button>
+                />
             ) : shortcut && !currentValue && !focused ? (
                 <Kbd.Shortcut keys={shortcut} size={size === 'lg' ? 'md' : 'sm'} className="shrink-0" />
             ) : null}

@@ -39,7 +39,7 @@ export default function AlertDialogLongContent(): JSX.Element {
                 </AlertDialog.Body>
                 <AlertDialog.Footer separator>
                     <AlertDialog.Close render={<Button />}>Cancel</AlertDialog.Close>
-                    <AlertDialog.Close render={<Button variant="danger" />}>
+                    <AlertDialog.Close render={<Button appearance="raised" variant="danger" />}>
                         Delete {flags.length} flags
                     </AlertDialog.Close>
                 </AlertDialog.Footer>

@@ -67,10 +67,16 @@ export const doc: ComponentDoc = {
             rows: [
                 { name: 'to', type: 'string', description: 'A site path or a full URL. Required.' },
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined.',
+                },
+                {
                     name: 'variant',
-                    type: "'default' | 'primary' | 'secondary' | 'danger'",
-                    defaultValue: "'default'",
-                    description: 'Flat, raised orange, raised white, or raised red.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description: 'The meaning and color: brand orange, neutral, or destructive red.',
                 },
                 {
                     name: 'size',

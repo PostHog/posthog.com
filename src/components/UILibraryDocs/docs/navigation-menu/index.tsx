@@ -10,8 +10,6 @@ import outlinedSource from '!!../../rawSourceLoader!./Outlined.tsx?raw'
 import Plain from './Plain'
 import plainSource from '!!../../rawSourceLoader!./Plain.tsx?raw'
 
-const variantType = "'outlined' | 'plain'"
-
 const containerType = 'HTMLElement | ShadowRoot | RefObject | null'
 
 export const doc: ComponentDoc = {
@@ -32,14 +30,14 @@ export const doc: ComponentDoc = {
             id: 'outlined',
             title: 'Outlined',
             description:
-                'Set surface="outlined" on List to draw a border. Each Trigger opens its Content in the shared Popup.',
+                'Set appearance="outlined" on List to draw a border. Each Trigger opens its Content in the shared Popup.',
             Component: Outlined,
             source: outlinedSource,
         },
         {
             id: 'plain',
             title: 'Plain',
-            description: 'Set variant="plain" on List to remove the border.',
+            description: 'Set appearance="plain" on List to remove the border.',
             Component: Plain,
             source: plainSource,
         },
@@ -65,8 +63,8 @@ export const doc: ComponentDoc = {
             the open item.
         </>,
         <>
-            Set <code>surface</code> on <code>List</code>. The default is raised. The popup keeps its own solid overlay
-            surface.
+            Set <code>appearance</code> on <code>List</code>. The default is raised. The popup keeps its own solid
+            overlay surface.
         </>,
         <>
             <code>Link</code> looks like a menu row inside <code>Content</code>, and like a trigger in the{' '}
@@ -83,16 +81,10 @@ export const doc: ComponentDoc = {
             component: 'NavigationMenu.List',
             rows: [
                 {
-                    name: 'surface',
+                    name: 'appearance',
                     type: "'plain' | 'outlined' | 'raised'",
                     defaultValue: "'raised'",
-                    description:
-                        'Sets the list surface. Takes priority over variant. Raised adds a translucent fill and a shadow.',
-                },
-                {
-                    name: 'variant',
-                    type: variantType,
-                    description: 'Compatibility alias for surface. Use surface in new code.',
+                    description: 'Sets the list surface. Raised adds a translucent fill and a shadow.',
                 },
             ],
         },

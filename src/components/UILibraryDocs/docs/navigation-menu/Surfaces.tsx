@@ -4,11 +4,11 @@ import { NavigationMenu } from 'components/UI/NavigationMenu'
 export default function Surfaces(): JSX.Element {
     return (
         <div className="flex flex-col gap-5">
-            {(['plain', 'outlined', 'raised'] as const).map((surface) => (
-                <div key={surface} className="flex flex-col gap-2">
-                    <span className="text-sm font-medium capitalize">{surface}</span>
+            {(['plain', 'outlined', 'raised'] as const).map((appearance) => (
+                <div key={appearance} className="flex flex-col gap-2">
+                    <span className="text-sm font-medium capitalize">{appearance}</span>
                     <NavigationMenu.Root>
-                        <NavigationMenu.List surface={surface} aria-label={`${surface} product navigation`}>
+                        <NavigationMenu.List appearance={appearance} aria-label={`${appearance} product navigation`}>
                             <NavigationMenu.Item>
                                 <NavigationMenu.Trigger>
                                     Products

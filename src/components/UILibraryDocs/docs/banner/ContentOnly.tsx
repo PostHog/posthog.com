@@ -15,7 +15,7 @@ export default function ContentOnly(): JSX.Element {
                 <Banner.Icon />
                 <Banner.Content>Read the migration guide before you update your SDK.</Banner.Content>
                 <Banner.Action>
-                    <ButtonLink to="/docs/libraries" size="sm" variant="secondary">
+                    <ButtonLink to="/docs/libraries" size="sm" appearance="raised">
                         Read guide
                     </ButtonLink>
                 </Banner.Action>

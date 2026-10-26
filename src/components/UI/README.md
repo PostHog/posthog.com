@@ -10,6 +10,8 @@ The site uses Radix UI wrappers (`src/components/RadixUI`), Headless UI, and man
 
 ## Components
 
+Use `appearance` for shape and material. Card, Tabs, FeatureTabs, Badge, Menubar, NavigationMenu, Table, and Toolbar use this prop. Buttons use `variant` for meaning and color. Status components use `tone` for status color.
+
 | Component | Import | Base UI docs |
 | --- | --- | --- |
 | Accordion | `components/UI/Accordion` | [Accordion](https://base-ui.com/react/components/accordion) |
@@ -90,7 +92,7 @@ Parts with no visual style (for example, `Root` on popups and most `Trigger` par
 Unstyled triggers render a plain `<button>`. Use the `render` prop to show a library `Button`:
 
 ```tsx
-<Popover.Trigger render={<Button variant="primary" />}>Open</Popover.Trigger>
+<Popover.Trigger render={<Button appearance="raised" variant="primary" />}>Open</Popover.Trigger>
 ```
 
 The `render` element must forward its `ref` and spread its props on the DOM node. `components/UI/Button` does this. `OSButton` does not, so do not pass it to `render`.

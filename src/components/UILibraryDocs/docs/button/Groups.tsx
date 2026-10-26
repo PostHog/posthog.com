@@ -15,12 +15,12 @@ export default function ButtonGroups(): JSX.Element {
                 <IconButton aria-label="Download" icon={<IconDownload />} />
                 <IconButton aria-label="Share" icon={<IconShare />} />
             </ButtonGroup>
-            <ButtonGroup aria-label="Export" variant="primary">
+            <ButtonGroup aria-label="Export" appearance="raised" variant="primary">
                 <IconButton aria-label="Copy" icon={<IconCopy />} />
                 <IconButton aria-label="Download" icon={<IconDownload />} />
                 <IconButton aria-label="Share" icon={<IconShare />} />
             </ButtonGroup>
-            <ButtonGroup aria-label="Date range" variant="secondary">
+            <ButtonGroup aria-label="Date range" appearance="raised">
                 <Button>Day</Button>
                 <Button>Week</Button>
                 <Button>Month</Button>

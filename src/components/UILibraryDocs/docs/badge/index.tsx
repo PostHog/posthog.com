@@ -61,7 +61,7 @@ export const doc: ComponentDoc = {
                     description: 'Sets the status color.',
                 },
                 {
-                    name: 'variant',
+                    name: 'appearance',
                     type: "'soft' | 'solid'",
                     defaultValue: "'soft'",
                     description: 'Sets the fill and border.',

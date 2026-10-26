@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { insetFocusRing, surfaceVariants } from '../styles'
-import type { Surface } from '../styles'
+import { insetFocusRing, surfaceAppearances } from '../styles'
+import type { SurfaceAppearance } from '../styles'
 import { withClassName } from '../utils'
 
 export type TableDensity = 'compact' | 'default'
@@ -9,7 +9,7 @@ export type TableSort = 'ascending' | 'descending' | 'none'
 export type TableAlign = 'start' | 'center' | 'end'
 
 export type TableRootProps = React.TableHTMLAttributes<HTMLTableElement> & {
-    surface?: Surface
+    appearance?: SurfaceAppearance
     density?: TableDensity
     striped?: boolean
     interactive?: boolean
@@ -27,12 +27,12 @@ export type TableCellProps = Omit<React.TdHTMLAttributes<HTMLTableCellElement>, 
     align?: TableAlign
 }
 
-type TableContextValue = { density: TableDensity; stickyHeader: boolean; surface: Surface }
+type TableContextValue = { density: TableDensity; stickyHeader: boolean; appearance: SurfaceAppearance }
 
 const TableContext = React.createContext<TableContextValue>({
     density: 'default',
     stickyHeader: false,
-    surface: 'outlined',
+    appearance: 'outlined',
 })
 
 const alignment = { start: 'text-start', center: 'text-center', end: 'text-end' }
@@ -55,7 +55,7 @@ const rowHover = '[:where(&>tbody>tr:hover>*)]:bg-[rgb(var(--text-primary)/0.05)
 
 const stickyHeaderFill = 'sticky top-0 z-10 !bg-primary'
 
-const stickyHeaderTints: Record<Surface, string> = {
+const stickyHeaderTints: Record<SurfaceAppearance, string> = {
     plain: '',
     outlined: '',
     raised: 'bg-[image:linear-gradient(rgb(255_255_255/0.6),rgb(255_255_255/0.6))] dark:bg-[image:linear-gradient(rgb(255_255_255/0.06),rgb(255_255_255/0.06))]',
@@ -65,7 +65,7 @@ const sortButton = `group/sort -mx-1.5 -my-1 inline-flex max-w-[calc(100%+0.75re
 
 const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRoot(
     {
-        surface = 'outlined',
+        appearance = 'outlined',
         density = 'default',
         striped = false,
         interactive = false,
@@ -77,12 +77,12 @@ const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRo
     ref
 ) {
     const { className: containerClassName, ...scrollProps } = containerProps
-    const context = React.useMemo(() => ({ density, stickyHeader, surface }), [density, stickyHeader, surface])
+    const context = React.useMemo(() => ({ density, stickyHeader, appearance }), [density, stickyHeader, appearance])
     return (
         <TableContext.Provider value={context}>
             <div
                 {...scrollProps}
-                className={cn(surfaceVariants[surface], 'overflow-auto text-primary', containerClassName)}
+                className={cn(surfaceAppearances[appearance], 'overflow-auto text-primary', containerClassName)}
             >
                 <table
                     {...props}
@@ -101,14 +101,14 @@ const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRo
 
 const Header = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
     function TableHeader({ className, ...props }, ref) {
-        const { stickyHeader, surface } = React.useContext(TableContext)
+        const { stickyHeader, appearance } = React.useContext(TableContext)
         return (
             <thead
                 {...props}
                 ref={ref}
                 className={cn(
                     '!bg-transparent [&>tr>th]:border-b',
-                    stickyHeader && cn(stickyHeaderFill, stickyHeaderTints[surface]),
+                    stickyHeader && cn(stickyHeaderFill, stickyHeaderTints[appearance]),
                     className
                 )}
             />

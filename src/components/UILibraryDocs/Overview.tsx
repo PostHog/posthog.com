@@ -29,6 +29,7 @@ export default function Overview(): JSX.Element {
                 hideMobileTableOfContents
             >
                 <div className="@container text-primary">
+                    <div className="not-prose mb-3"></div>
                     <p className="mb-4 mt-0 text-lg text-secondary">
                         Accessible components for PostHog.com, built on{' '}
                         <Link to="https://base-ui.com/react/overview/quick-start" externalNoIcon>

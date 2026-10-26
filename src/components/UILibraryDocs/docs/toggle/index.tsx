@@ -10,8 +10,6 @@ import multipleSource from '!!../../rawSourceLoader!./Multiple.tsx?raw'
 import Variants from './Variants'
 import variantsSource from '!!../../rawSourceLoader!./Variants.tsx?raw'
 
-const variantType = "'default' | 'primary' | 'secondary' | 'danger'"
-
 const sizeType = "'sm' | 'md' | 'lg'"
 
 export const doc: ComponentDoc = {
@@ -82,10 +80,16 @@ export const doc: ComponentDoc = {
             component: 'Toggle',
             rows: [
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined.',
+                },
+                {
                     name: 'variant',
-                    type: variantType,
-                    defaultValue: "'default'",
-                    description: 'Flat, or raised orange, or raised white. In a ToggleGroup, the group sets it.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description: 'The meaning and color: brand orange, neutral, or destructive red.',
                 },
                 {
                     name: 'size',
@@ -99,10 +103,17 @@ export const doc: ComponentDoc = {
             component: 'ToggleGroup',
             rows: [
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
+                },
+                {
                     name: 'variant',
-                    type: variantType,
-                    defaultValue: "'default'",
-                    description: 'Sets the variant of every toggle in the group.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description:
+                        'The meaning and color: brand orange, neutral, or destructive red. Sets it for every button in the group.',
                 },
                 {
                     name: 'required',

@@ -12,7 +12,7 @@ export default function Sizes(): JSX.Element {
                         <Field.Control size={size} aria-label={`${size} field`} placeholder="Field control" />
                     </Field.Root>
                     <Input size={size} aria-label={`${size} input`} placeholder="Input" className="min-w-0 flex-1" />
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

@@ -73,6 +73,12 @@ export const doc: ComponentDoc = {
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
                 },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'soft'",
+                    defaultValue: "'inset'",
+                    description: 'Sets the field shape. Use soft inside cards and popovers.',
+                },
             ],
         },
         {

@@ -29,7 +29,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'ScreenshotFrame uses Gallery for zoom. Set frame={false} and renderThumbnail to reuse an existing frame. Thumbnail content must not contain interactive controls.',
+        'Set frame={false} and renderThumbnail to put the zoom on an existing frame. Thumbnail content must not contain interactive controls.',
         'Set showThumbnailCaptions={false} when the caller already shows the caption. The lightbox still shows the caption.',
         'The column count never exceeds the image count. Use columns={1} for a single full-width frame.',
         'Replaces: groups of ProductScreenshot images can become Gallery items. Map imageLight, imageDark, and alt directly. Add a caption when useful.',

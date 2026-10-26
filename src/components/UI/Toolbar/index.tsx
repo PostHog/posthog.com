@@ -1,20 +1,20 @@
 import React from 'react'
 import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar'
-import { focusRing, surfaceVariants, textInput } from '../styles'
-import type { Surface } from '../styles'
+import { focusRing, surfaceAppearances, textInput } from '../styles'
+import type { SurfaceAppearance } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
-export type ToolbarRootProps = BaseToolbar.Root.Props & { surface?: Surface }
+export type ToolbarRootProps = BaseToolbar.Root.Props & { appearance?: SurfaceAppearance }
 
 const Root = React.forwardRef<HTMLDivElement, ToolbarRootProps>(function ToolbarRoot(
-    { surface = 'raised', className, ...props },
+    { appearance = 'raised', className, ...props },
     ref
 ) {
     return (
         <BaseToolbar.Root
             ref={ref}
             className={mergeClassName(
-                `flex w-full items-center gap-1 p-1 data-[orientation=vertical]:w-fit data-[orientation=vertical]:flex-col ${surfaceVariants[surface]}`,
+                `flex w-full items-center gap-1 p-1 data-[orientation=vertical]:w-fit data-[orientation=vertical]:flex-col ${surfaceAppearances[appearance]}`,
                 className
             )}
             {...props}

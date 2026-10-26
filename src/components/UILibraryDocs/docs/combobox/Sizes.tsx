@@ -24,7 +24,7 @@ export default function Sizes(): JSX.Element {
                             </Combobox.List>
                         </Combobox.Popup>
                     </Combobox.Root>
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

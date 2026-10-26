@@ -308,5 +308,5 @@ const loopTabs: FeatureTabsTab[] = [
 ]
 
 export default function SelfDriving(): JSX.Element {
-    return <FeatureTabs tabs={loopTabs} variant="hero" />
+    return <FeatureTabs tabs={loopTabs} appearance="hero" />
 }

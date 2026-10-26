@@ -15,7 +15,7 @@ export default function NoResults(): JSX.Element {
                 {reset ? 'Enter a new search to find a team member.' : 'Try a different search or clear the filters.'}
             </EmptyState.Description>
             <EmptyState.Actions>
-                <Button variant="secondary" onClick={() => setReset(true)}>
+                <Button appearance="raised" onClick={() => setReset(true)}>
                     Reset filters
                 </Button>
             </EmptyState.Actions>

@@ -72,6 +72,13 @@ export const doc: ComponentDoc = {
                     defaultValue: "'md'",
                     description: 'Sets the trigger height, the chevron, and the item text size in the list.',
                 },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'soft'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the trigger shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
+                },
             ],
         },
         {

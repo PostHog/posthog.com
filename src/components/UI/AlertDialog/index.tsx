@@ -10,7 +10,7 @@ export type AlertDialogPopupProps = BaseAlertDialog.Popup.Props & {
 }
 
 const Popup = React.forwardRef<HTMLDivElement, AlertDialogPopupProps>(function AlertDialogPopup(
-    { className, container, ...props },
+    { className, container, children, ...props },
     ref
 ) {
     return (
@@ -22,7 +22,9 @@ const Popup = React.forwardRef<HTMLDivElement, AlertDialogPopupProps>(function A
                     data-scheme="primary"
                     className={mergeClassName(`${dialogPopup} max-w-lg`, className)}
                     {...props}
-                />
+                >
+                    {children}
+                </BaseAlertDialog.Popup>
             </BaseAlertDialog.Viewport>
         </BaseAlertDialog.Portal>
     )

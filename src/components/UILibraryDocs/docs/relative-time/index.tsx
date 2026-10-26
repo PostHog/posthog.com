@@ -57,6 +57,13 @@ export const doc: ComponentDoc = {
                     defaultValue: "'relative'",
                     description: 'Selects relative text or an absolute UTC date.',
                 },
+                {
+                    name: 'tooltip',
+                    type: 'boolean',
+                    defaultValue: 'true',
+                    description:
+                        'Shows the exact local and UTC time on hover and focus. Set it to false to render plain text.',
+                },
                 { name: 'tabIndex', type: 'number', defaultValue: '0', description: 'Sets keyboard focus order.' },
             ],
         },

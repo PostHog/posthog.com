@@ -7,7 +7,7 @@ import { Snippet } from 'components/UI/Snippet'
 export default function Bars(): JSX.Element {
     return (
         <div className="grid gap-4 @2xl:grid-cols-2">
-            <Card.Root variant="solid">
+            <Card.Root appearance="solid">
                 <Card.TitleBar icon={<IconCart className="text-red" />} meta="cart 0">
                     Your product
                 </Card.TitleBar>
@@ -16,7 +16,7 @@ export default function Bars(): JSX.Element {
                     <span className="text-sm text-secondary">Matte, glossy, or holographic.</span>
                 </div>
                 <div>
-                    <Button variant="primary" size="sm">
+                    <Button appearance="raised" variant="primary" size="sm">
                         Add to cart
                     </Button>
                 </div>

@@ -18,7 +18,7 @@ export interface FeatureTabsTab {
     triggerClassName?: string
 }
 
-export type FeatureTabsVariant = 'minimal' | 'hero'
+export type FeatureTabsAppearance = 'minimal' | 'hero'
 
 export interface FeatureTabsProps {
     tabs: FeatureTabsTab[]
@@ -27,10 +27,10 @@ export interface FeatureTabsProps {
     className?: string
     slideClassName?: string
     showActiveBg?: boolean
-    variant?: FeatureTabsVariant
+    appearance?: FeatureTabsAppearance
 }
 
-interface VariantConfig {
+interface AppearanceConfig {
     tabsRowClassName: string
     triggerBaseClassName: string
     triggerActiveClassName: string
@@ -42,7 +42,7 @@ interface VariantConfig {
     alwaysShowActiveBg: boolean
 }
 
-const VARIANT_CONFIG: Record<FeatureTabsVariant, VariantConfig> = {
+const APPEARANCE_CONFIG: Record<FeatureTabsAppearance, AppearanceConfig> = {
     minimal: {
         tabsRowClassName: '',
         triggerBaseClassName: 'py-2.5 transition-colors',
@@ -76,7 +76,7 @@ export default function FeatureTabs({
     className,
     slideClassName,
     showActiveBg = true,
-    variant = 'minimal',
+    appearance = 'minimal',
 }: FeatureTabsProps): JSX.Element {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
@@ -140,7 +140,7 @@ export default function FeatureTabs({
     const isFirst = activeIndex === 0
     const isLast = activeIndex === tabs.length - 1
 
-    const config = VARIANT_CONFIG[variant]
+    const config = APPEARANCE_CONFIG[appearance]
     const hasAnyIcon = tabs.some((t) => !!t.icon)
     const triggerLayoutClassName = hasAnyIcon ? 'flex flex-col gap-1 items-center' : ''
     const paintActiveBg = config.alwaysShowActiveBg || showActiveBg

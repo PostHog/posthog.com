@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import Appearances from './Appearances'
+import appearancesSource from '!!../../rawSourceLoader!./Appearances.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Disabled from './Disabled'
@@ -73,6 +75,14 @@ export const doc: ComponentDoc = {
             Component: Sizes,
             source: sizesSource,
         },
+        {
+            id: 'appearances',
+            title: 'Appearances',
+            description:
+                'Inset is the default for forms. Soft suits fields inside cards and popovers, where a second inset box looks heavy. For a search bar, use SearchInput, which also has pill and floating shapes.',
+            Component: Appearances,
+            source: appearancesSource,
+        },
     ],
     props: [
         {
@@ -83,6 +93,13 @@ export const doc: ComponentDoc = {
                     type: "'sm' | 'md' | 'lg'",
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
+                },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'soft'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the field shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
                 },
             ],
         },
@@ -95,10 +112,22 @@ export const doc: ComponentDoc = {
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
                 },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'soft'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the field shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
+                },
             ],
         },
     ],
     notes: [
+        <>
+            Use the default <code>inset</code> appearance for form fields. Use <code>soft</code> when the field sits
+            inside a card, a popover, or a dialog. Do not mix appearances in one form. For a search bar, use{' '}
+            <Link to="/components/ui/search-input">SearchInput</Link>.
+        </>,
         <>
             The default <code>validationMode</code> is <code>onSubmit</code>. A field outside a form thus never shows
             its errors. Put the field in a <Link to="/components/ui/form">Form</Link>, or set{' '}

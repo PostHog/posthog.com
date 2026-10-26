@@ -35,7 +35,9 @@ export default function CardLevels(): JSX.Element {
                 </Card.Root>
                 <Card.Footer>
                     <Button>Cancel</Button>
-                    <Button variant="primary">Save</Button>
+                    <Button appearance="raised" variant="primary">
+                        Save
+                    </Button>
                 </Card.Footer>
             </Card.Root>
         </Section.Root>

@@ -3,23 +3,23 @@ import { Button as BaseButton } from '@base-ui/react/button'
 import { cn } from '../../../utils'
 import Link from '../../Link'
 import type { Props as LinkProps } from '../../Link'
-import { focusRing, toneSolid } from '../styles'
+import { focusRing, toneSolid, toneText } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
 
-export type ButtonVariant = 'default' | 'primary' | 'secondary' | 'danger'
+export type ButtonAppearance = 'flat' | 'raised' | 'outline'
+export type ButtonVariant = 'primary' | 'secondary' | 'danger'
 export type ButtonSize = 'sm' | 'md' | 'lg'
 export type ButtonIconPosition = 'start' | 'end'
 
-type RaisedVariant = Exclude<ButtonVariant, 'default'>
-
-type ButtonAppearance = {
+type ButtonLook = {
+    appearance?: ButtonAppearance
     variant?: ButtonVariant
     size?: ButtonSize
 }
 
 export type ButtonProps = BaseButton.Props &
-    ButtonAppearance & {
+    ButtonLook & {
         icon?: React.ReactNode
         iconPosition?: ButtonIconPosition
         iconEnd?: React.ReactNode
@@ -27,7 +27,7 @@ export type ButtonProps = BaseButton.Props &
     }
 
 export type IconButtonProps = Omit<BaseButton.Props, 'children'> &
-    ButtonAppearance & {
+    ButtonLook & {
         icon: React.ReactNode
         loading?: boolean
         'aria-label': string
@@ -35,7 +35,7 @@ export type IconButtonProps = Omit<BaseButton.Props, 'children'> &
 
 export type ButtonLinkProps = Pick<LinkProps, 'to' | 'state' | 'event' | 'contextMenu' | 'onClick'> &
     Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className' | 'children' | 'href' | 'onClick'> &
-    ButtonAppearance & {
+    ButtonLook & {
         icon?: React.ReactNode
         iconPosition?: ButtonIconPosition
         iconEnd?: React.ReactNode
@@ -45,13 +45,13 @@ export type ButtonLinkProps = Pick<LinkProps, 'to' | 'state' | 'event' | 'contex
     }
 
 export type ButtonGroupProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'className'> &
-    ButtonAppearance & {
+    ButtonLook & {
         className?: string
         disabled?: boolean
         children?: React.ReactNode
     }
 
-const ButtonGroupContext = React.createContext<(Required<ButtonAppearance> & { disabled: boolean }) | null>(null)
+const ButtonGroupContext = React.createContext<(Required<ButtonLook> & { disabled: boolean }) | null>(null)
 
 const iconSizes: Record<ButtonSize, string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
 
@@ -59,12 +59,39 @@ const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
 const disabledFade = '[&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:opacity-50'
 
-const flatBase = `relative inline-flex items-center justify-center rounded border border-transparent bg-transparent text-primary transition-colors duration-150 ease-out hover:border-primary [&:not([data-disabled]):active]:border-primary [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.1)] data-[pressed]:border-primary data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:border-primary data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:border-transparent motion-reduce:transition-none skin-classic:border-b-3 ${busyCursor} ${focusRing}`
+const flatBase = `relative inline-flex items-center justify-center rounded border border-transparent bg-transparent text-primary transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent motion-reduce:transition-none skin-classic:border-b-3 ${busyCursor} ${focusRing}`
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
     md: 'gap-1 px-2.5 py-1.5 text-[13px] leading-[22px]',
     lg: 'gap-1 rounded-[6px] px-3 py-2 text-[15px] leading-[26px]',
+}
+
+const flatTones: Record<ButtonVariant, string> = {
+    secondary: '',
+    primary:
+        'text-red hover:bg-orange/10 [&:not([data-disabled]):active]:bg-orange/20 data-[pressed]:bg-orange/15 data-[popup-open]:bg-orange/15 dark:text-yellow',
+    danger: `${toneText.error} hover:bg-salmon/10 [&:not([data-disabled]):active]:bg-salmon/20 data-[pressed]:bg-salmon/15 data-[popup-open]:bg-salmon/15`,
+}
+
+const outlineTones: Record<ButtonVariant, string> = {
+    secondary:
+        'border-[rgb(var(--text-primary)/0.22)] hover:border-[rgb(var(--text-primary)/0.4)] hover:bg-[rgb(var(--text-primary)/0.05)] data-[disabled]:hover:border-[rgb(var(--text-primary)/0.22)]',
+    primary:
+        'border-orange text-red hover:border-orange hover:bg-orange/10 [&:not([data-disabled]):active]:border-orange [&:not([data-disabled]):active]:bg-orange/15 data-[pressed]:border-orange data-[pressed]:bg-orange/15 data-[popup-open]:border-orange data-[popup-open]:bg-orange/15 data-[disabled]:hover:border-orange dark:text-yellow',
+    danger: `border-salmon/70 ${toneText.error} hover:border-salmon hover:bg-salmon/10 [&:not([data-disabled]):active]:border-salmon [&:not([data-disabled]):active]:bg-salmon/15 data-[pressed]:border-salmon data-[pressed]:bg-salmon/15 data-[popup-open]:border-salmon data-[popup-open]:bg-salmon/15 data-[disabled]:hover:border-salmon/70`,
+}
+
+const flatSegmentTones: Record<ButtonVariant, string> = {
+    secondary: '',
+    primary: 'hover:bg-orange/10',
+    danger: 'hover:bg-salmon/10',
+}
+
+const flatGroupTones: Record<ButtonVariant, string> = {
+    secondary: '',
+    primary: 'border-orange [&>[data-segment]~[data-segment]]:border-orange',
+    danger: 'border-salmon/70 [&>[data-segment]~[data-segment]]:border-salmon/70',
 }
 
 const flatSquarePadding: Record<ButtonSize, string> = { sm: 'p-[5px]', md: 'p-[9px]', lg: 'p-[11px]' }
@@ -82,15 +109,16 @@ const raisedUnderside =
 
 const raisedUndersideWidth: Record<ButtonSize, string> = {
     sm: 'p-px before:border',
-    md: 'p-[1.5px] before:border-[1.5px]',
-    lg: 'p-[1.5px] before:border-[1.5px]',
+    md: 'p-px before:border',
+    lg: 'p-px before:border',
 }
 
 const raisedFrameBase = `relative inline-block text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
 
-const raisedFrames: Record<RaisedVariant, string> = {
+const raisedFrames: Record<ButtonVariant, string> = {
     danger: 'before:border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] before:bg-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_76%,black)]',
-    primary: 'before:border-button before:bg-button-shadow dark:before:bg-button-shadow-dark',
+    primary:
+        'before:border-button before:bg-button-shadow dark:before:border-button-dark dark:before:bg-button-shadow-dark',
     secondary: 'before:border-gray before:bg-[rgb(var(--border))]',
 }
 
@@ -109,21 +137,21 @@ const raisedUndersideRadius: Record<ButtonSize, string> = {
 const raisedFaceBase =
     'relative flex select-none items-center justify-center font-bold transition-[transform,background-color,border-color,color,box-shadow] duration-100 motion-reduce:transition-none'
 
-const raisedFaces: Record<RaisedVariant, string> = {
-    danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
+const raisedFaces: Record<ButtonVariant, string> = {
+    danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
     primary:
-        'border-button bg-orange text-black [[data-pressed]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.22),inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:border-button-dark',
+        'border-button bg-orange text-black [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:border-button-dark',
     secondary:
-        'border-gray bg-white text-primary [[data-pressed]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.14),inset_0_0_0_999px_rgb(0_0_0/0.08)] [:not([data-disabled]):active>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.14),inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.14),inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.5),inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.5),inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_2px_3px_rgb(0_0_0/0.5),inset_0_0_0_999px_rgb(255_255_255/0.1)]',
+        'border-gray bg-white text-primary [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
 }
 
 const raisedFaceBorder: Record<ButtonSize, string> = {
     sm: 'border',
-    md: 'border-[1.5px]',
-    lg: 'border-[1.5px]',
+    md: 'border',
+    lg: 'border',
 }
 
-const raisedFaceInset: Record<ButtonSize, string> = { sm: 'mx-[-1px]', md: 'mx-[-1.5px]', lg: 'mx-[-1.5px]' }
+const raisedFaceInset: Record<ButtonSize, string> = { sm: 'mx-[-1px]', md: 'mx-[-1px]', lg: 'mx-[-1px]' }
 
 const raisedFaceMotion: Record<ButtonSize, string> = {
     sm: 'translate-y-[-1.5px] [:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)>&]:translate-y-[-2.5px] [:not([data-disabled]):active>&]:translate-y-[-0.5px] [[data-disabled]>&]:translate-y-[-1.5px] [[data-pressed]>&]:translate-y-[-0.5px] [[data-popup-open]>&]:translate-y-[-0.5px]',
@@ -133,11 +161,11 @@ const raisedFaceMotion: Record<ButtonSize, string> = {
 
 const raisedFacePadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-[3px] text-xs leading-4',
-    md: 'gap-1 px-2.5 py-1 text-[13px] leading-[22px]',
-    lg: 'gap-1 px-3 py-1.5 text-[15px] leading-[26px]',
+    md: 'gap-1 px-2.5 py-[5px] text-[13px] leading-[22px]',
+    lg: 'gap-1 px-3 py-[7px] text-[15px] leading-[26px]',
 }
 
-const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-[7px]', lg: 'p-[9px]' }
+const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-2', lg: 'p-2.5' }
 
 const raisedGroupBase = `relative inline-flex data-[disabled]:opacity-50 ${raisedUnderside}`
 
@@ -145,18 +173,24 @@ const raisedSegment = `relative flex focus-visible:z-10 data-[disabled]:cursor-n
 
 const raisedSegmentFace: Record<ButtonSize, string> = {
     sm: '-ml-px rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[4px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-px [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[4px]',
-    md: '-ml-[1.5px] rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-[1.5px] [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[6px]',
-    lg: '-ml-[1.5px] rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-[1.5px] [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[6px]',
+    md: '-ml-px rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-px [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[6px]',
+    lg: '-ml-px rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-px [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[6px]',
 }
 
-type ButtonShape = Required<ButtonAppearance> & {
+type ButtonShape = Required<ButtonLook> & {
     square: boolean
     isSegment: boolean
 }
 
-function useButtonShape(ownVariant: ButtonVariant, ownSize: ButtonSize, square: boolean): ButtonShape {
+function useButtonShape(
+    ownAppearance: ButtonAppearance,
+    ownVariant: ButtonVariant,
+    ownSize: ButtonSize,
+    square: boolean
+): ButtonShape {
     const group = React.useContext(ButtonGroupContext)
     return {
+        appearance: group?.appearance ?? ownAppearance,
         variant: group?.variant ?? ownVariant,
         size: group?.size ?? ownSize,
         square,
@@ -164,24 +198,26 @@ function useButtonShape(ownVariant: ButtonVariant, ownSize: ButtonSize, square: 
     }
 }
 
-function frameClassName({ variant, size, square, isSegment }: ButtonShape): string {
-    if (variant === 'default') {
-        return cn(
-            flatBase,
-            square ? flatSquarePadding[size] : flatPadding[size],
-            isSegment && flatSegment,
-            isSegment && !square && flatSegmentPadding[size]
-        )
+function frameClassName({ appearance, variant, size, square, isSegment }: ButtonShape): string {
+    if (appearance === 'raised') {
+        return isSegment
+            ? raisedSegment
+            : cn(
+                  raisedFrameBase,
+                  raisedUndersideWidth[size],
+                  raisedFrames[variant],
+                  raisedRadius[size],
+                  raisedUndersideRadius[size]
+              )
     }
-    return isSegment
-        ? raisedSegment
-        : cn(
-              raisedFrameBase,
-              raisedUndersideWidth[size],
-              raisedFrames[variant],
-              raisedRadius[size],
-              raisedUndersideRadius[size]
-          )
+    return cn(
+        flatBase,
+        appearance === 'outline' ? outlineTones[variant] : flatTones[variant],
+        square ? flatSquarePadding[size] : flatPadding[size],
+        isSegment && flatSegment,
+        isSegment && flatSegmentTones[variant],
+        isSegment && !square && flatSegmentPadding[size]
+    )
 }
 
 type ButtonContentProps = {
@@ -194,7 +230,7 @@ type ButtonContentProps = {
 }
 
 function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }: ButtonContentProps): JSX.Element {
-    const { variant, size, square, isSegment } = shape
+    const { appearance, variant, size, square, isSegment } = shape
     const iconSlot = cn('flex shrink-0 items-center justify-center [&>svg]:size-full', iconSizes[size])
     const leadingIcon = square || iconPosition === 'start' ? icon : null
     const trailingIcon = square || iconPosition === 'start' ? null : icon
@@ -207,7 +243,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
                 'flex items-center justify-center [gap:inherit]',
                 spinnerCoversLabel && 'opacity-0',
                 isSegment &&
-                    variant !== 'default' &&
+                    appearance === 'raised' &&
                     '[button[data-disabled]:not([aria-busy=true]):not([data-group-disabled])_&]:opacity-40'
             )}
         >
@@ -245,7 +281,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
         label
     )
 
-    if (variant === 'default') {
+    if (appearance !== 'raised') {
         return content
     }
 
@@ -267,7 +303,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
 }
 
 type ButtonRootProps = BaseButton.Props &
-    ButtonAppearance & {
+    ButtonLook & {
         icon?: React.ReactNode
         iconPosition?: ButtonIconPosition
         square?: boolean
@@ -277,7 +313,8 @@ type ButtonRootProps = BaseButton.Props &
 
 const ButtonRoot = React.forwardRef<HTMLElement, ButtonRootProps>(function ButtonRoot(
     {
-        variant = 'default',
+        appearance = 'flat',
+        variant = 'secondary',
         size = 'md',
         icon,
         iconPosition = 'start',
@@ -290,7 +327,7 @@ const ButtonRoot = React.forwardRef<HTMLElement, ButtonRootProps>(function Butto
     },
     ref
 ) {
-    const shape = useButtonShape(variant, size, square)
+    const shape = useButtonShape(appearance, variant, size, square)
     const group = React.useContext(ButtonGroupContext)
 
     return (
@@ -320,7 +357,8 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(functio
 })
 
 export function ButtonLink({
-    variant = 'default',
+    appearance = 'flat',
+    variant = 'secondary',
     size = 'md',
     icon,
     iconPosition = 'start',
@@ -331,7 +369,7 @@ export function ButtonLink({
     children,
     ...props
 }: ButtonLinkProps): JSX.Element {
-    const shape = useButtonShape(variant, size, false)
+    const shape = useButtonShape(appearance, variant, size, false)
 
     return (
         <Link
@@ -349,26 +387,26 @@ export function ButtonLink({
 }
 
 export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(
-    { variant = 'default', size = 'md', className, disabled = false, children, ...props },
+    { appearance = 'flat', variant = 'secondary', size = 'md', className, disabled = false, children, ...props },
     ref
 ) {
-    const appearance = React.useMemo(() => ({ variant, size, disabled }), [variant, size, disabled])
+    const look = React.useMemo(() => ({ appearance, variant, size, disabled }), [appearance, variant, size, disabled])
     return (
-        <ButtonGroupContext.Provider value={appearance}>
+        <ButtonGroupContext.Provider value={look}>
             <div
                 ref={ref}
                 role="group"
                 data-disabled={disabled ? '' : undefined}
                 className={cn(
-                    variant === 'default'
-                        ? flatGroup
-                        : cn(
+                    appearance === 'raised'
+                        ? cn(
                               raisedGroupBase,
                               raisedUndersideWidth[size],
                               raisedFrames[variant],
                               raisedRadius[size],
                               raisedUndersideRadius[size]
-                          ),
+                          )
+                        : cn(flatGroup, flatGroupTones[variant]),
                     className
                 )}
                 {...props}

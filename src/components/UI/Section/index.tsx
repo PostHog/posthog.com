@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { Card, CardVariantContext } from '../Card'
-import { cardVariants, sectionSurface, surfacePaddings } from '../styles'
+import { Card, CardAppearanceContext } from '../Card'
+import { cardAppearances, sectionSurface, surfacePaddings } from '../styles'
 
 export type SectionPadding = keyof typeof surfacePaddings
 
@@ -13,15 +13,15 @@ const Root = React.forwardRef<HTMLDivElement, SectionRootProps>(function Section
     { padding = 'md', className, ...props },
     ref
 ) {
-    const parentVariant = React.useContext(CardVariantContext)
-    const cleanSurface = parentVariant === 'solid'
+    const parentAppearance = React.useContext(CardAppearanceContext)
+    const cleanSurface = parentAppearance === 'solid'
     return (
         <div
             ref={ref}
             className={cn(
                 'flex flex-col text-primary',
                 sectionSurface,
-                cleanSurface && cardVariants.solid,
+                cleanSurface && cardAppearances.solid,
                 surfacePaddings[padding],
                 className
             )}

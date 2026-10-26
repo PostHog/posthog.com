@@ -24,7 +24,7 @@ export default function Sizes(): JSX.Element {
                             </Autocomplete.List>
                         </Autocomplete.Popup>
                     </Autocomplete.Root>
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

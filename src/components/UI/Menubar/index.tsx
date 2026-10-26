@@ -1,28 +1,26 @@
 import React from 'react'
 import { Menubar as BaseMenubar } from '@base-ui/react/menubar'
 import { Menu as BaseMenu } from '@base-ui/react/menu'
-import { menubarTrigger, menubarVariants, surfaceVariants } from '../styles'
-import type { Surface } from '../styles'
+import { menubarTrigger, surfaceAppearances } from '../styles'
+import type { SurfaceAppearance } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
-export type MenubarVariant = keyof typeof menubarVariants
+export type MenubarAppearance = SurfaceAppearance
 
 export type MenubarRootProps = Omit<BaseMenubar.Props, 'ref'> & {
-    variant?: MenubarVariant
-    surface?: Surface
+    appearance?: MenubarAppearance
 }
 
 const Root = React.forwardRef<HTMLDivElement, MenubarRootProps>(function MenubarRoot(
-    { surface, variant, className, ...props },
+    { appearance = 'raised', className, ...props },
     ref
 ) {
-    const resolvedSurface = surface ?? variant ?? 'raised'
     return (
         <BaseMenubar
             ref={ref}
             className={mergeClassName(
-                `flex items-center gap-px py-0.5 ${resolvedSurface === 'plain' ? '' : 'w-fit px-1'} ${
-                    surfaceVariants[resolvedSurface]
+                `flex items-center gap-px py-0.5 ${appearance === 'plain' ? '' : 'w-fit px-1'} ${
+                    surfaceAppearances[appearance]
                 }`,
                 className
             )}

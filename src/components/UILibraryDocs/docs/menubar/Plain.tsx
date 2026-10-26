@@ -10,7 +10,7 @@ const menubarMenus = [
 
 export default function MenubarPlain(): JSX.Element {
     return (
-        <Menubar.Root variant="plain">
+        <Menubar.Root appearance="plain">
             {menubarMenus.map((menu) => (
                 <Menu.Root key={menu.label}>
                     <Menubar.Trigger>{menu.label}</Menubar.Trigger>

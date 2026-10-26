@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
-import { insetFocusRing } from '../styles'
+import { grainSurface, insetFocusRing } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const Root = withClassName(BaseScrollArea.Root, 'relative min-h-0 overflow-hidden')
@@ -35,7 +35,7 @@ const Scrollbar = withClassName(
 
 const Thumb = withClassName(
     BaseScrollArea.Thumb,
-    'rounded-full bg-[rgb(var(--text-primary)/0.28)] hover:bg-[rgb(var(--text-primary)/0.4)] active:bg-[rgb(var(--text-primary)/0.5)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full'
+    `${grainSurface} rounded-full bg-[rgb(var(--text-primary)/0.28)] hover:bg-[rgb(var(--text-primary)/0.4)] active:bg-[rgb(var(--text-primary)/0.5)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full`
 )
 
 const Corner = withClassName(BaseScrollArea.Corner, 'bg-transparent')

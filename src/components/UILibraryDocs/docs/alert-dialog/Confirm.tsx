@@ -15,7 +15,9 @@ export default function AlertDialogConfirm(): JSX.Element {
                 </AlertDialog.Body>
                 <AlertDialog.Footer>
                     <AlertDialog.Close render={<Button />}>Cancel</AlertDialog.Close>
-                    <AlertDialog.Close render={<Button variant="danger" />}>Discard</AlertDialog.Close>
+                    <AlertDialog.Close render={<Button appearance="raised" variant="danger" />}>
+                        Discard
+                    </AlertDialog.Close>
                 </AlertDialog.Footer>
             </AlertDialog.Popup>
         </AlertDialog.Root>

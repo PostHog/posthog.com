@@ -5,10 +5,10 @@ import { Menubar } from 'components/UI/Menubar'
 export default function Surfaces(): JSX.Element {
     return (
         <div className="flex flex-col gap-5">
-            {(['plain', 'outlined', 'raised'] as const).map((surface) => (
-                <div key={surface} className="flex flex-col gap-2">
-                    <span className="text-sm font-medium capitalize">{surface}</span>
-                    <Menubar.Root surface={surface} aria-label={`${surface} insight commands`}>
+            {(['plain', 'outlined', 'raised'] as const).map((appearance) => (
+                <div key={appearance} className="flex flex-col gap-2">
+                    <span className="text-sm font-medium capitalize">{appearance}</span>
+                    <Menubar.Root appearance={appearance} aria-label={`${appearance} insight commands`}>
                         <Menu.Root>
                             <Menubar.Trigger>Insight</Menubar.Trigger>
                             <Menu.Popup>

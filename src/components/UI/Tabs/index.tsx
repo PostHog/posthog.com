@@ -4,12 +4,12 @@ import { cn } from '../../../utils'
 import { focusRing, surfaceDivider } from '../styles'
 import { assignRef, mergeClassName, useSmoothHeight, withClassName } from '../utils'
 
-type Variant = 'pane' | 'underline'
-const VariantContext = React.createContext<Variant>('pane')
+type Appearance = 'pane' | 'underline'
+const AppearanceContext = React.createContext<Appearance>('pane')
 const root = 'flex w-full flex-col gap-2 data-[orientation=vertical]:flex-row data-[orientation=vertical]:items-start'
 
-const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> & { variant?: Variant }>(
-    function TabsRoot({ variant = 'pane', className, onValueChange, ...props }, ref) {
+const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> & { appearance?: Appearance }>(
+    function TabsRoot({ appearance = 'pane', className, onValueChange, ...props }, ref) {
         const tabChanged = React.useRef(false)
         const smoothHeight = useSmoothHeight(() => {
             const changed = tabChanged.current
@@ -28,14 +28,14 @@ const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> &
             onValueChange?.(...args)
         }
         return (
-            <VariantContext.Provider value={variant}>
+            <AppearanceContext.Provider value={appearance}>
                 <BaseTabs.Root
                     ref={setRef}
                     className={mergeClassName(root, className)}
                     onValueChange={changeTab}
                     {...props}
                 />
-            </VariantContext.Provider>
+            </AppearanceContext.Provider>
         )
     }
 )
@@ -49,14 +49,14 @@ const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref'>>(
     { className, children, ...props },
     ref
 ) {
-    const variant = React.useContext(VariantContext)
+    const appearance = React.useContext(AppearanceContext)
     return (
         <BaseTabs.List
             ref={ref}
             className={mergeClassName(
                 cn(
                     'relative flex shrink-0 gap-0.5 data-[orientation=vertical]:flex-col',
-                    variant === 'pane'
+                    appearance === 'pane'
                         ? 'p-1'
                         : `border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l ${surfaceDivider}`
                 ),
@@ -65,7 +65,7 @@ const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref'>>(
             {...props}
         >
             {children}
-            {variant === 'underline' && <Indicator />}
+            {appearance === 'underline' && <Indicator />}
         </BaseTabs.List>
     )
 })
@@ -87,11 +87,11 @@ const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref'>>(funct
     { className, children, ...props },
     ref
 ) {
-    const variant = React.useContext(VariantContext)
+    const appearance = React.useContext(AppearanceContext)
     return (
         <BaseTabs.Tab
             ref={ref}
-            className={mergeClassName(cn(tab, variant === 'pane' ? paneTab : underlineTab), className)}
+            className={mergeClassName(cn(tab, appearance === 'pane' ? paneTab : underlineTab), className)}
             {...props}
         >
             <span className="grid">

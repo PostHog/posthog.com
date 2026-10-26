@@ -18,7 +18,7 @@ export default function AlertDialogDelete(): JSX.Element {
 
     return (
         <AlertDialog.Root open={open} onOpenChange={(next) => !deleting && setOpen(next)}>
-            <AlertDialog.Trigger render={<Button variant="secondary" />}>Delete project</AlertDialog.Trigger>
+            <AlertDialog.Trigger render={<Button appearance="raised" />}>Delete project</AlertDialog.Trigger>
             <AlertDialog.Popup>
                 <AlertDialog.Header>Delete project?</AlertDialog.Header>
                 <AlertDialog.Body>
@@ -30,7 +30,7 @@ export default function AlertDialogDelete(): JSX.Element {
                     <AlertDialog.Close render={<Button />} disabled={deleting}>
                         Cancel
                     </AlertDialog.Close>
-                    <Button variant="danger" loading={deleting} onClick={deleteProject}>
+                    <Button appearance="raised" variant="danger" loading={deleting} onClick={deleteProject}>
                         Delete project
                     </Button>
                 </AlertDialog.Footer>

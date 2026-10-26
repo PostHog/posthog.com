@@ -6,7 +6,7 @@ export default function Basic(): JSX.Element {
     const [status, setStatus] = React.useState('Unsaved insight')
     return (
         <div className="flex flex-col items-start gap-3">
-            <SplitButton.Root variant="primary" aria-label="Save insight">
+            <SplitButton.Root appearance="raised" variant="primary" aria-label="Save insight">
                 <SplitButton.Button onClick={() => setStatus('Insight saved')}>Save</SplitButton.Button>
                 <SplitButton.Trigger aria-label="More save actions" />
                 <SplitButton.Popup>

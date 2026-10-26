@@ -3,7 +3,7 @@ import { Tabs } from 'components/UI/Tabs'
 
 export default function UnderlineVertical(): JSX.Element {
     return (
-        <Tabs.Root variant="underline" defaultValue="overview" orientation="vertical">
+        <Tabs.Root appearance="underline" defaultValue="overview" orientation="vertical">
             <Tabs.List>
                 <Tabs.Tab value="overview">Overview</Tabs.Tab>
                 <Tabs.Tab value="pricing">Pricing</Tabs.Tab>

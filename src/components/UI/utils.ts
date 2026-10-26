@@ -3,6 +3,16 @@ import { cn } from '../../utils'
 
 export const useId: () => string = (React as typeof React & { useId: () => string }).useId
 
+type SyncExternalStore = <Snapshot>(
+    subscribe: (onChange: () => void) => () => void,
+    getSnapshot: () => Snapshot,
+    getServerSnapshot: () => Snapshot
+) => Snapshot
+
+export const useSyncExternalStore: SyncExternalStore = (
+    React as typeof React & { useSyncExternalStore: SyncExternalStore }
+).useSyncExternalStore
+
 export type ClassNameProp<State> = string | ((state: State) => string | undefined) | undefined
 
 export function mergeClassName<State>(baseClassName: string, className: ClassNameProp<State>): ClassNameProp<State> {

@@ -3,7 +3,7 @@ import { Tabs } from 'components/UI/Tabs'
 
 export default function Underline(): JSX.Element {
     return (
-        <Tabs.Root variant="underline" defaultValue="overview">
+        <Tabs.Root appearance="underline" defaultValue="overview">
             <Tabs.List>
                 <Tabs.Tab value="overview">Overview</Tabs.Tab>
                 <Tabs.Tab value="pricing">Pricing</Tabs.Tab>

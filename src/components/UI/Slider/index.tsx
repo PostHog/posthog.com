@@ -1,6 +1,6 @@
 import React from 'react'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
-import { trackSurface } from '../styles'
+import { grainSurface, trackSurface } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const RANGE_SEPARATOR = ' – '
@@ -72,7 +72,7 @@ const Indicator = withClassName(BaseSlider.Indicator, 'rounded-full bg-orange')
 
 const Thumb = withClassName(
     BaseSlider.Thumb,
-    'size-4 rounded-full border border-button bg-orange shadow-[0_1px_0_rgb(0_0_0/0.18)] dark:border-button-dark has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[rgb(var(--text-primary))]'
+    `${grainSurface} size-4 rounded-full border border-button bg-orange shadow-[0_1px_0_rgb(0_0_0/0.18)] dark:border-button-dark has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[rgb(var(--text-primary))]`
 )
 
 export const Slider = { Root, Label, Value, Control, Track, Indicator, Thumb }

@@ -57,10 +57,17 @@ export const doc: ComponentDoc = {
             component: 'SplitButton.Root',
             rows: [
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
+                },
+                {
                     name: 'variant',
-                    type: "'default' | 'primary' | 'secondary' | 'danger'",
-                    defaultValue: "'default'",
-                    description: 'Sets the appearance of both segments.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description:
+                        'The meaning and color: brand orange, neutral, or destructive red. Sets it for every button in the group.',
                 },
                 {
                     name: 'size',

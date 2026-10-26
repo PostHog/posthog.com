@@ -79,7 +79,7 @@ export const doc: ComponentDoc = {
             component: 'Toolbar.Root',
             rows: [
                 {
-                    name: 'surface',
+                    name: 'appearance',
                     type: "'plain' | 'outlined' | 'raised'",
                     defaultValue: "'raised'",
                     description:

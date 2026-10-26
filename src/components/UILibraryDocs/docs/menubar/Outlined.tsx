@@ -10,7 +10,7 @@ const menubarMenus = [
 
 export default function MenubarOutlined(): JSX.Element {
     return (
-        <Menubar.Root surface="outlined">
+        <Menubar.Root appearance="outlined">
             {menubarMenus.map((menu) => (
                 <Menu.Root key={menu.label}>
                     <Menubar.Trigger>{menu.label}</Menubar.Trigger>

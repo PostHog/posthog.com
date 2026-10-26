@@ -13,7 +13,7 @@ export default function Sizes(): JSX.Element {
                             <NumberField.Steppers />
                         </NumberField.Group>
                     </NumberField.Root>
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

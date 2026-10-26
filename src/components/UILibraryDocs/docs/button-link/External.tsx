@@ -7,6 +7,7 @@ export default function ButtonLinkExternal(): JSX.Element {
         <ButtonLink
             to="https://app.posthog.com/signup"
             external
+            appearance="raised"
             variant="primary"
             icon={<IconArrowUpRight />}
             iconPosition="end"

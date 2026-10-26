@@ -11,7 +11,7 @@ const insightTypes = [
 export default function NonModal(): JSX.Element {
     return (
         <Drawer.Root modal={false} swipeDirection="right" disablePointerDismissal>
-            <Drawer.Trigger render={<Button variant="secondary" />}>Insight reference</Drawer.Trigger>
+            <Drawer.Trigger render={<Button appearance="raised" />}>Insight reference</Drawer.Trigger>
             <Drawer.Popup className="w-80">
                 <Drawer.Header>Insight reference</Drawer.Header>
                 <Drawer.Content className="flex flex-col gap-3">

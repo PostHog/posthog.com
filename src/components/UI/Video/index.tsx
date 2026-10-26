@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import type { ReactNode, VideoHTMLAttributes } from 'react'
 import { useApp } from '../../../context/App'
 import { IconPause, IconPlay } from '@posthog/icons'
-import { IconButton } from '../Button'
+import { FloatingIconButton } from '../FloatingButton'
 import { cn } from '../../../utils'
 import { cardLevels, insetFocusRing } from '../styles'
 import { useId } from '../utils'
@@ -172,13 +172,13 @@ export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(function Vid
                     <a href={resolvedSrc}>Download video: {label}</a>
                 </video>
                 {showPlaybackToggle && (
-                    <IconButton
+                    <FloatingIconButton
                         size="sm"
                         aria-label={`${isPlaying ? 'Pause' : 'Play'} video: ${label}`}
                         icon={isPlaying ? <IconPause /> : <IconPlay />}
                         onClick={togglePlayback}
                         className={cn(
-                            'absolute bottom-2 right-2 border-[rgb(var(--text-primary)/0.16)] bg-white/70 backdrop-blur-sm transition-opacity duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.24)] hover:bg-white/90 focus-visible:opacity-100 active:bg-white/90 group-hover/video:opacity-100 dark:bg-black/50 dark:hover:bg-black/70 dark:active:bg-black/70 motion-reduce:transition-none [@media(hover:none)]:opacity-100',
+                            'absolute bottom-2 right-2 transition-[opacity,transform,background-color] focus-visible:opacity-100 group-hover/video:opacity-100 [@media(hover:none)]:opacity-100',
                             pausedByUser ? 'opacity-100' : 'opacity-0'
                         )}
                     />

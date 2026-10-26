@@ -24,7 +24,7 @@ export default function ContactForm(): JSX.Element {
                 </Field.Root>
             </Fieldset.Root>
             <div className="flex items-center gap-3">
-                <Button type="submit" variant="primary">
+                <Button type="submit" appearance="raised" variant="primary">
                     Send
                 </Button>
                 {sentFrom && <span className="text-sm text-secondary">Sent from {sentFrom}</span>}

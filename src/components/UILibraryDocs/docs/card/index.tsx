@@ -27,7 +27,7 @@ export const doc: ComponentDoc = {
             id: 'variants',
             title: 'Materials and nesting',
             description:
-                'Each variant appears alone, as an inset well, and with nested content. Use the Light and Dark controls to check both themes on glass.',
+                'Each appearance appears alone, as an inset well, and with nested content. Use the Light and Dark controls to check both themes on glass.',
             Component: Variants,
             source: variantsSource,
         },
@@ -106,20 +106,20 @@ export const doc: ComponentDoc = {
         </>,
         <>Do not use a card only to add space. A card groups content that belongs together.</>,
         <>
-            Variant selects the material. Level selects the elevation. Every variant supports both levels. Variants do
-            not change padding.
+            Appearance selects the material. Level selects the elevation. Every appearance supports both levels.
+            Appearances do not change padding.
         </>,
         <>Glass keeps the existing appearance. Solid uses opaque white in light mode and near-black in dark mode.</>,
         <>
-            Nested cards use solid faces by default inside solid cards. Other parents use glass children. Set variant on
-            a child to override this choice.
+            Nested cards use solid faces by default inside solid cards. Other parents use glass children. Set appearance
+            on a child to override this choice.
         </>,
         <>
             Dashed means a later or optional step, as on /pricing. State this meaning in text. It does not disable
             content or change its accessibility.
         </>,
         <>
-            Replaces: use variant="dashed" for the later-step outline in PricingJourney. Existing pages remain
+            Replaces: use appearance="dashed" for the later-step outline in PricingJourney. Existing pages remain
             unchanged.
         </>,
     ],
@@ -141,10 +141,10 @@ export const doc: ComponentDoc = {
             component: 'Card.Root',
             rows: [
                 {
-                    name: 'variant',
+                    name: 'appearance',
                     type: "'glass' | 'solid' | 'dashed'",
                     defaultValue: "'glass'; 'solid' inside solid cards",
-                    description: 'Selects the material independently of level. A child can select its own variant.',
+                    description: 'Selects the material independently of level. A child can select its own appearance.',
                 },
                 {
                     name: 'level',

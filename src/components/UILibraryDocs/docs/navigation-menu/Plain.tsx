@@ -23,7 +23,7 @@ const menus = [
 export default function NavigationMenuPlain(): JSX.Element {
     return (
         <NavigationMenu.Root>
-            <NavigationMenu.List variant="plain">
+            <NavigationMenu.List appearance="plain">
                 {menus.map((menu) => (
                     <NavigationMenu.Item key={menu.label}>
                         <NavigationMenu.Trigger>

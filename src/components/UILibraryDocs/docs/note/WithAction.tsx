@@ -14,7 +14,7 @@ export default function WithAction(): JSX.Element {
                             <p>Read the guide before you change the configuration.</p>
                         </Note.Content>
                         <Note.Action>
-                            <ButtonLink to="/docs" size="sm" variant="secondary">
+                            <ButtonLink to="/docs" size="sm" appearance="raised">
                                 Read the docs
                             </ButtonLink>
                         </Note.Action>

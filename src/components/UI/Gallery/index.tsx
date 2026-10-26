@@ -175,14 +175,14 @@ export function Gallery({
                             <div className="flex gap-2">
                                 <IconButton
                                     type="button"
-                                    variant="secondary"
+                                    appearance="raised"
                                     aria-label="Previous image"
                                     icon={<IconArrowLeft />}
                                     onClick={() => navigate(-1)}
                                 />
                                 <IconButton
                                     type="button"
-                                    variant="secondary"
+                                    appearance="raised"
                                     aria-label="Next image"
                                     icon={<IconArrowRight />}
                                     onClick={() => navigate(1)}

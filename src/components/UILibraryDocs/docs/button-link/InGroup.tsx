@@ -10,8 +10,8 @@ const productDocs = [
 export default function ButtonLinkInGroup(): JSX.Element {
     return (
         <div className="flex flex-col items-start gap-3">
-            {(['default', 'secondary'] as const).map((variant) => (
-                <ButtonGroup key={variant} aria-label="Product docs" variant={variant}>
+            {(['flat', 'raised'] as const).map((appearance) => (
+                <ButtonGroup key={appearance} aria-label="Product docs" appearance={appearance}>
                     {productDocs.map(({ to, label }) => (
                         <ButtonLink key={to} to={to}>
                             {label}

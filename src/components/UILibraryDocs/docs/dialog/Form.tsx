@@ -7,7 +7,7 @@ export default function DialogForm(): JSX.Element {
     const [open, setOpen] = useState(false)
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger render={<Button variant="secondary" />}>Invite a teammate</Dialog.Trigger>
+            <Dialog.Trigger render={<Button appearance="raised" />}>Invite a teammate</Dialog.Trigger>
             <Dialog.Popup className="max-w-md">
                 <Dialog.Header>Invite a teammate</Dialog.Header>
                 <form
@@ -26,7 +26,7 @@ export default function DialogForm(): JSX.Element {
                     </Dialog.Body>
                     <Dialog.Footer>
                         <Dialog.Close render={<Button />}>Cancel</Dialog.Close>
-                        <Button type="submit" variant="primary">
+                        <Button type="submit" appearance="raised" variant="primary">
                             Send invite
                         </Button>
                     </Dialog.Footer>

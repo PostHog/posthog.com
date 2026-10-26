@@ -7,7 +7,7 @@ type BadgeSize = 'sm' | 'md'
 
 export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
     tone?: Tone
-    variant?: 'soft' | 'solid'
+    appearance?: 'soft' | 'solid'
     size?: BadgeSize
     icon?: React.ReactNode
 }
@@ -23,7 +23,7 @@ const iconSizes: Record<BadgeSize, string> = {
 }
 
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-    { tone = 'neutral', variant = 'soft', size = 'sm', icon, children, className, ...props },
+    { tone = 'neutral', appearance = 'soft', size = 'sm', icon, children, className, ...props },
     ref
 ) {
     return (
@@ -32,7 +32,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badg
             className={cn(
                 'inline-flex max-w-full items-center whitespace-nowrap rounded-[4px] border align-middle font-semibold',
                 badgeSizes[size],
-                variant === 'soft'
+                appearance === 'soft'
                     ? cn(toneFill[tone], toneBorder[tone], toneText[tone])
                     : cn('border-transparent', toneSolid[tone]),
                 className

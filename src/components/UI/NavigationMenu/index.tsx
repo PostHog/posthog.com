@@ -4,35 +4,32 @@ import { IconChevronDown } from '@posthog/icons'
 import {
     menuItem,
     menubarTrigger,
-    menubarVariants,
     popupArrow,
     popupSurface,
     popupTransition,
     positionerLayer,
-    surfaceVariants,
+    surfaceAppearances,
 } from '../styles'
-import type { Surface } from '../styles'
+import type { SurfaceAppearance } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
 
-export type NavigationMenuVariant = keyof typeof menubarVariants
+export type NavigationMenuAppearance = SurfaceAppearance
 
 export type NavigationMenuListProps = BaseNavigationMenu.List.Props & {
-    variant?: NavigationMenuVariant
-    surface?: Surface
+    appearance?: NavigationMenuAppearance
 }
 
 const List = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(function NavigationMenuList(
-    { surface, variant, className, ...props },
+    { appearance = 'raised', className, ...props },
     ref
 ) {
-    const resolvedSurface = surface ?? variant ?? 'raised'
     return (
         <BaseNavigationMenu.List
             ref={ref}
             className={mergeClassName(
-                `m-0 flex list-none items-center gap-px py-0.5 ${resolvedSurface === 'plain' ? 'px-0' : 'w-fit px-1'} ${
-                    surfaceVariants[resolvedSurface]
+                `m-0 flex list-none items-center gap-px py-0.5 ${appearance === 'plain' ? 'px-0' : 'w-fit px-1'} ${
+                    surfaceAppearances[appearance]
                 }`,
                 className
             )}

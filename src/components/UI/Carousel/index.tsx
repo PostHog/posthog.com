@@ -2,6 +2,7 @@ import React, { Children, useCallback, useEffect, useLayoutEffect, useRef, useSt
 import type { CSSProperties, FocusEvent, ReactNode } from 'react'
 import { IconArrowLeft, IconArrowRight, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { IconButton } from '../Button'
+import { FloatingIconButton } from '../FloatingButton'
 import { focusRing, scrollbarHidden } from '../styles'
 import { useId } from '../utils'
 import { cn } from '../../../utils'
@@ -14,6 +15,7 @@ export type CarouselProps = {
     peek?: boolean
     autoplay?: number
     dots?: boolean
+    arrows?: boolean
     className?: string
     slideClassName?: string
     onActiveIndexChange?: (index: number) => void
@@ -36,6 +38,9 @@ const slidesPerViewClasses = {
 const slideBasis =
     'calc((100% - var(--carousel-peek) - (var(--carousel-n) - 1 + var(--carousel-peek-gaps)) * var(--carousel-gap)) / var(--carousel-n))'
 
+const sideArrow =
+    'absolute top-1/2 z-[1] -translate-y-1/2 opacity-0 transition-[opacity,transform,background-color] group-hover/carousel:opacity-100 group-focus-within/carousel:opacity-100 [@media(hover:none)]:opacity-100'
+
 const isKeyboardFocus = (event: FocusEvent<HTMLElement>): boolean => {
     try {
         return (event.target as HTMLElement).matches(':focus-visible')
@@ -57,6 +62,7 @@ export function Carousel({
     peek = false,
     autoplay = 0,
     dots = true,
+    arrows = false,
     className,
     slideClassName,
     onActiveIndexChange,
@@ -229,7 +235,7 @@ export function Carousel({
             role="region"
             aria-roledescription="carousel"
             aria-label={label}
-            className={cn('@container/carousel not-prose min-w-0 text-primary', className)}
+            className={cn('group/carousel @container/carousel not-prose min-w-0 text-primary', className)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onFocusCapture={(event) => {
@@ -286,25 +292,29 @@ export function Carousel({
                     aria-hidden="true"
                     className="pointer-events-none absolute -inset-1 hidden rounded-md outline outline-2 outline-[rgb(var(--text-primary))] peer-focus-visible:block"
                 />
-            </div>
-            {multiple && (
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-                    <div className="flex items-center gap-1">
-                        <IconButton
+                {multiple && arrows && (
+                    <>
+                        <FloatingIconButton
                             type="button"
                             aria-label="Previous slide"
                             aria-controls={id}
                             onClick={() => navigate(-1)}
                             icon={<IconArrowLeft />}
+                            className={cn(sideArrow, 'left-2')}
                         />
-                        <IconButton
+                        <FloatingIconButton
                             type="button"
                             aria-label="Next slide"
                             aria-controls={id}
                             onClick={() => navigate(1)}
                             icon={<IconArrowRight />}
+                            className={cn(sideArrow, 'right-2')}
                         />
-                    </div>
+                    </>
+                )}
+            </div>
+            {multiple && (dots || canAutoplay) && (
+                <div className="relative mt-3 flex min-h-8 items-center justify-center">
                     {dots ? (
                         <div role="group" aria-label="Choose a slide" className="flex max-w-full flex-wrap">
                             {slides.map((_, index) => {
@@ -340,21 +350,17 @@ export function Carousel({
                     ) : (
                         progress && <span className="relative size-px overflow-hidden opacity-0">{progress}</span>
                     )}
-                    <div className="flex items-center gap-1">
-                        <span className="px-1 text-xs tabular-nums text-secondary">
-                            {active + 1} / {count}
-                        </span>
-                        {canAutoplay && (
-                            <IconButton
-                                ref={rotationControl}
-                                type="button"
-                                size="sm"
-                                onClick={() => setRequested(!requested)}
-                                aria-label={requested ? 'Pause automatic slides' : 'Play automatic slides'}
-                                icon={requested ? <IconPauseFilled /> : <IconPlayFilled />}
-                            />
-                        )}
-                    </div>
+                    {canAutoplay && (
+                        <IconButton
+                            ref={rotationControl}
+                            type="button"
+                            size="sm"
+                            onClick={() => setRequested(!requested)}
+                            aria-label={requested ? 'Pause automatic slides' : 'Play automatic slides'}
+                            icon={requested ? <IconPauseFilled /> : <IconPlayFilled />}
+                            className="absolute right-0"
+                        />
+                    )}
                 </div>
             )}
             <div className="sr-only" aria-live={running ? 'off' : 'polite'} aria-atomic="true">

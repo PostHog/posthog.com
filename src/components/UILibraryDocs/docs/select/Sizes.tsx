@@ -22,7 +22,7 @@ export default function Sizes(): JSX.Element {
                             ))}
                         </Select.Popup>
                     </Select.Root>
-                    <Button size={size} variant="secondary">
+                    <Button size={size} appearance="raised">
                         {size}
                     </Button>
                 </div>

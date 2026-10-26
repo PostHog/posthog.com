@@ -12,7 +12,7 @@ export default function WithAction(): JSX.Element {
                         <Banner.Title>Product updates</Banner.Title>
                         <Banner.Content>Read the latest product updates.</Banner.Content>
                         <Banner.Action>
-                            <ButtonLink to="/changelog" variant="primary" size="sm">
+                            <ButtonLink to="/changelog" appearance="raised" variant="primary" size="sm">
                                 View changelog
                             </ButtonLink>
                         </Banner.Action>

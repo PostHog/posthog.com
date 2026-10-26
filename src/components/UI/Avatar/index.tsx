@@ -18,9 +18,7 @@ const groupOverlap: Record<AvatarSize, string> = {
 }
 
 const avatarCircle =
-    'inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full border border-primary bg-accent align-middle font-semibold leading-none text-secondary'
-
-const stackedRing = 'ring-2 ring-[rgb(var(--bg))]'
+    'inline-flex shrink-0 select-none items-center justify-center overflow-hidden rounded-full border border-primary bg-accent align-middle font-semibold leading-none text-secondary ring-2 ring-white dark:ring-[rgb(var(--bg))]'
 
 const AvatarGroupContext = React.createContext<AvatarSize | null>(null)
 
@@ -38,7 +36,7 @@ const Root = React.forwardRef<HTMLSpanElement, AvatarRootProps>(function AvatarR
     return (
         <BaseAvatar.Root
             ref={ref}
-            className={mergeClassName(cn(avatarCircle, avatarSizes[size], groupSize && stackedRing), className)}
+            className={mergeClassName(cn(avatarCircle, avatarSizes[size]), className)}
             {...props}
         />
     )
@@ -93,7 +91,7 @@ const Group = React.forwardRef<HTMLDivElement, AvatarGroupProps>(function Avatar
             >
                 {stackedAvatars}
                 {hiddenCount > 0 && (
-                    <span className={cn(avatarCircle, avatarSizes[size], stackedRing, 'tabular-nums')}>
+                    <span className={cn(avatarCircle, avatarSizes[size], 'tabular-nums')}>
                         +{hiddenCount}
                         <span className="sr-only"> more</span>
                     </span>

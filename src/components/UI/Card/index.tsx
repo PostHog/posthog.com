@@ -1,21 +1,21 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { cardInnerBottomRadius, cardInnerTopRadius, cardLevels, cardVariants, surfacePaddings } from '../styles'
+import { cardInnerBottomRadius, cardInnerTopRadius, cardLevels, cardAppearances, surfacePaddings } from '../styles'
 
 export type CardLevel = keyof typeof cardLevels
 export type CardPadding = keyof typeof surfacePaddings
-export type CardVariant = keyof typeof cardVariants
+export type CardAppearance = keyof typeof cardAppearances
 
 const MAX_LEVEL: CardLevel = 2
 
 const CardLevelContext = React.createContext<CardLevel | 0>(0)
-export const CardVariantContext = React.createContext<CardVariant>('glass')
+export const CardAppearanceContext = React.createContext<CardAppearance>('glass')
 const CardPaddingContext = React.createContext<CardPadding>('md')
 
 export function CardLevelBoundary({ children }: { children?: React.ReactNode }): JSX.Element {
     return (
         <CardLevelContext.Provider value={0}>
-            <CardVariantContext.Provider value="glass">{children}</CardVariantContext.Provider>
+            <CardAppearanceContext.Provider value="glass">{children}</CardAppearanceContext.Provider>
         </CardLevelContext.Provider>
     )
 }
@@ -41,37 +41,37 @@ const barSurface = 'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-pr
 export type CardRootProps = React.HTMLAttributes<HTMLDivElement> & {
     level?: CardLevel
     padding?: CardPadding
-    variant?: CardVariant
+    appearance?: CardAppearance
 }
 
 const Root = React.forwardRef<HTMLDivElement, CardRootProps>(function CardRoot(
-    { level, padding = 'md', variant, className, ...props },
+    { level, padding = 'md', appearance, className, ...props },
     ref
 ) {
     const parentLevel = React.useContext(CardLevelContext)
-    const parentVariant = React.useContext(CardVariantContext)
+    const parentAppearance = React.useContext(CardAppearanceContext)
     const resolvedLevel = level ?? (Math.min(parentLevel + 1, MAX_LEVEL) as CardLevel)
-    const resolvedVariant = variant ?? (parentVariant === 'solid' ? 'solid' : 'glass')
+    const resolvedAppearance = appearance ?? (parentAppearance === 'solid' ? 'solid' : 'glass')
 
     return (
         <CardLevelContext.Provider value={resolvedLevel}>
-            <CardVariantContext.Provider value={resolvedVariant}>
+            <CardAppearanceContext.Provider value={resolvedAppearance}>
                 <CardPaddingContext.Provider value={padding}>
                     <div
                         ref={ref}
                         data-level={resolvedLevel}
-                        data-variant={resolvedVariant}
+                        data-appearance={resolvedAppearance}
                         className={cn(
                             'flex flex-col text-primary',
                             cardLevels[resolvedLevel],
-                            cardVariants[resolvedVariant],
+                            cardAppearances[resolvedAppearance],
                             surfacePaddings[padding],
                             className
                         )}
                         {...props}
                     />
                 </CardPaddingContext.Provider>
-            </CardVariantContext.Provider>
+            </CardAppearanceContext.Provider>
         </CardLevelContext.Provider>
     )
 })

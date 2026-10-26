@@ -24,7 +24,8 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Basic table',
-            description: 'Use a caption and native header cells to describe the data. The default surface is outlined.',
+            description:
+                'Use a caption and native header cells to describe the data. The default appearance is outlined.',
             Component: Basic,
             source: basicSource,
         },
@@ -72,7 +73,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Root wraps a native table in a scroll container. The default surface is outlined. Raised adds a translucent fill and a shadow.',
+        'Root wraps a native table in a scroll container. The default appearance is outlined. Raised adds a translucent fill and a shadow.',
         'A sticky header has a solid fill in the color of the nearest color scheme. It does not use a blur, because a blur inside a glass window often does not show in Chrome.',
         'Root forwards its ref and native props to the table. Pass scroll styles and attributes through containerProps.',
         'Use Caption to name the table. Use scope="row" on row headers. Native colSpan and rowSpan are available.',
@@ -89,7 +90,7 @@ export const doc: ComponentDoc = {
             component: 'Table.Root',
             rows: [
                 {
-                    name: 'surface',
+                    name: 'appearance',
                     type: "'plain' | 'outlined' | 'raised'",
                     defaultValue: "'outlined'",
                     description:

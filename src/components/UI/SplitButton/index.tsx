@@ -2,15 +2,21 @@ import React from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { Button, ButtonGroup, IconButton } from '../Button'
-import type { ButtonGroupProps, ButtonProps, ButtonSize, ButtonVariant } from '../Button'
+import type { ButtonAppearance, ButtonGroupProps, ButtonProps, ButtonSize, ButtonVariant } from '../Button'
 import { Menu } from '../Menu'
 import type { MenuPopupProps } from '../Menu'
 
-type SplitButtonContextValue = { disabled: boolean; variant: ButtonVariant; size: ButtonSize }
+type SplitButtonContextValue = {
+    disabled: boolean
+    appearance: ButtonAppearance
+    variant: ButtonVariant
+    size: ButtonSize
+}
 
 const SplitButtonContext = React.createContext<SplitButtonContextValue>({
     disabled: false,
-    variant: 'default',
+    appearance: 'flat',
+    variant: 'secondary',
     size: 'md',
 })
 
@@ -23,12 +29,13 @@ const raisedTriggerPadding: Record<ButtonSize, string> = {
 }
 
 export type SplitButtonRootProps = Omit<React.ComponentProps<typeof Menu.Root>, 'children'> &
-    Pick<ButtonGroupProps, 'variant' | 'size' | 'className' | 'aria-label' | 'children'> & {
+    Pick<ButtonGroupProps, 'appearance' | 'variant' | 'size' | 'className' | 'aria-label' | 'children'> & {
         disabled?: boolean
     }
 
 function Root({
-    variant = 'default',
+    appearance = 'flat',
+    variant = 'secondary',
     size = 'md',
     className,
     disabled = false,
@@ -36,11 +43,21 @@ function Root({
     'aria-label': label,
     ...props
 }: SplitButtonRootProps): JSX.Element {
-    const context = React.useMemo(() => ({ disabled, variant, size }), [disabled, variant, size])
+    const context = React.useMemo(
+        () => ({ disabled, appearance, variant, size }),
+        [disabled, appearance, variant, size]
+    )
     return (
         <SplitButtonContext.Provider value={context}>
             <Menu.Root {...props}>
-                <ButtonGroup variant={variant} size={size} disabled={disabled} className={className} aria-label={label}>
+                <ButtonGroup
+                    appearance={appearance}
+                    variant={variant}
+                    size={size}
+                    disabled={disabled}
+                    className={className}
+                    aria-label={label}
+                >
                     {children}
                 </ButtonGroup>
             </Menu.Root>
@@ -59,7 +76,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, SplitButtonTriggerProps>(fun
     { 'aria-label': label = 'More actions', ...props },
     ref
 ) {
-    const { disabled, variant, size } = React.useContext(SplitButtonContext)
+    const { disabled, appearance, size } = React.useContext(SplitButtonContext)
     return (
         <Menu.Trigger
             ref={ref}
@@ -69,7 +86,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, SplitButtonTriggerProps>(fun
                 <IconButton
                     icon={<IconChevronDown className="scale-125" />}
                     aria-label={label}
-                    className={cn(variant === 'default' ? flatTriggerPadding[size] : raisedTriggerPadding[size])}
+                    className={cn(appearance === 'raised' ? raisedTriggerPadding[size] : flatTriggerPadding[size])}
                 />
             }
         />

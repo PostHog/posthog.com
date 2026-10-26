@@ -12,7 +12,9 @@ export default function PopoverWithClose(): JSX.Element {
                     This project now records sessions. Watch them in the replay tab.
                 </Popover.Description>
                 <div className="mt-2 flex justify-end">
-                    <Popover.Close render={<Button size="sm" variant="primary" />}>Got it</Popover.Close>
+                    <Popover.Close render={<Button size="sm" appearance="raised" variant="primary" />}>
+                        Got it
+                    </Popover.Close>
                 </div>
             </Popover.Popup>
         </Popover.Root>

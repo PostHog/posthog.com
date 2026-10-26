@@ -271,7 +271,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                     if (value === undefined) setInternalValue(nextId)
                     onValueChange?.(nextId)
                 }}
-                variant="underline"
+                appearance="underline"
                 className="gap-0"
             >
                 <div
@@ -288,7 +288,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                                 const tab = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]')
                                 if (tab) revealTab(event.currentTarget, tab)
                             }}
-                            className={`min-w-0 shrink overflow-x-auto border-0 p-0 ${scrollbarHidden}`}
+                            className={`min-w-0 shrink overflow-x-auto overflow-y-hidden border-0 p-0 ${scrollbarHidden}`}
                         >
                             {snippets.map((snippet) => (
                                 <Tabs.Tab

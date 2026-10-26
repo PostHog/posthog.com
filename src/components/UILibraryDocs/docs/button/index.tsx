@@ -23,9 +23,9 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'variants',
-            title: 'Variants and sizes',
+            title: 'Appearances and variants',
             description:
-                'default is flat. primary, secondary, and danger are raised buttons. Buttons of the same size have the same height.',
+                'appearance sets the shape: flat (the default), raised, or outline. variant sets the meaning: secondary (the default), primary, or danger. Every pair works. Buttons of the same size have the same height.',
             Component: Variants,
             source: variantsSource,
         },
@@ -60,6 +60,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        'Pick the appearance from where the button sits and the variant from what it does. Use raised primary for the main action in a section, flat for toolbars and bars, and outline for a secondary action next to a raised one. For a button over images or video, use FloatingButton. Use danger only for destructive actions.',
         'Disabled flat buttons use muted text. Loading buttons keep their normal color.',
         'Disabled raised buttons fade the face and base together. In an enabled group, only the disabled segment content dims.',
         'Set disabled on ButtonGroup to block all buttons and fade the group as one unit.',
@@ -94,10 +95,16 @@ export const doc: ComponentDoc = {
             component: 'Button',
             rows: [
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined.',
+                },
+                {
                     name: 'variant',
-                    type: "'default' | 'primary' | 'secondary' | 'danger'",
-                    defaultValue: "'default'",
-                    description: 'Flat, raised orange, raised white, or raised red.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description: 'The meaning and color: brand orange, neutral, or destructive red.',
                 },
                 { name: 'size', type: sizeType, defaultValue: "'md'", description: 'Height and text size.' },
                 { name: 'icon', type: 'ReactNode', description: 'An icon next to the text.' },
@@ -131,10 +138,17 @@ export const doc: ComponentDoc = {
             component: 'ButtonGroup',
             rows: [
                 {
+                    name: 'appearance',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
+                },
+                {
                     name: 'variant',
-                    type: "'default' | 'primary' | 'secondary' | 'danger'",
-                    defaultValue: "'default'",
-                    description: 'Sets the variant of every button in the group.',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description:
+                        'The meaning and color: brand orange, neutral, or destructive red. Sets it for every button in the group.',
                 },
                 { name: 'size', type: sizeType, defaultValue: "'md'", description: 'Sets the size of every button.' },
                 {

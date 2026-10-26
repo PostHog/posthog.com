@@ -26,7 +26,9 @@ export default function DrawerBottom(): JSX.Element {
                     </ul>
                 </Drawer.Content>
                 <Drawer.Footer>
-                    <Drawer.Close render={<Button variant="primary" />}>Mark all as read</Drawer.Close>
+                    <Drawer.Close render={<Button appearance="raised" variant="primary" />}>
+                        Mark all as read
+                    </Drawer.Close>
                 </Drawer.Footer>
             </Drawer.Popup>
         </Drawer.Root>

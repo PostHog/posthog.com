@@ -1,23 +1,26 @@
 import React from 'react'
 import { Field as BaseField } from '@base-ui/react/field'
-import { textInput, fieldSizes } from '../styles'
-import type { FieldSize } from '../styles'
+import { fieldSizes, textInputFor } from '../styles'
+import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const Root = withClassName(BaseField.Root, 'flex flex-col gap-1')
 
 const Label = withClassName(BaseField.Label, 'text-sm font-semibold text-primary data-[disabled]:text-muted')
 
-export type FieldControlProps = Omit<BaseField.Control.Props, 'size'> & { size?: FieldSize }
+export type FieldControlProps = Omit<BaseField.Control.Props, 'size'> & {
+    size?: FieldSize
+    appearance?: FieldAppearance
+}
 
 const Control = React.forwardRef<HTMLInputElement, FieldControlProps>(function FieldControl(
-    { size = 'md', className, ...props },
+    { size = 'md', appearance = 'inset', className, ...props },
     ref
 ) {
     return (
         <BaseField.Control
             ref={ref}
-            className={mergeClassName(`${textInput} ${fieldSizes[size]}`, className)}
+            className={mergeClassName(`${textInputFor(appearance)} ${fieldSizes[size]}`, className)}
             {...props}
         />
     )

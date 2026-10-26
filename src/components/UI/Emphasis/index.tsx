@@ -1,30 +1,22 @@
 import React from 'react'
 import type { HTMLAttributes } from 'react'
-import type { Tone } from '../styles'
-import { toneFill } from '../styles'
 import { cn } from '../../../utils'
 
-export type EmphasisProps = HTMLAttributes<HTMLSpanElement> & { tone?: Tone }
-const darkFill: Record<Tone, string> = {
-    neutral: 'dark:bg-[rgb(var(--text-primary)/0.1)]',
-    info: 'dark:bg-blue/20',
-    success: 'dark:bg-green/20',
-    warning: 'dark:bg-yellow/20',
-    error: 'dark:bg-salmon/20',
-    brand: 'dark:bg-yellow/20',
-}
-const emphasisFill: Record<Tone, string> = { ...toneFill, brand: 'bg-red/10' }
-const emphasisText: Record<Tone, string> = {
-    neutral: 'text-primary',
-    info: 'text-blue',
-    success: 'text-[color:color-mix(in_srgb,theme(colors.green)_80%,black)] dark:text-green',
-    warning: 'text-[color:color-mix(in_srgb,theme(colors.yellow)_62%,black)] dark:text-yellow',
-    error: 'text-[color:color-mix(in_srgb,theme(colors.salmon)_85%,black)] dark:text-salmon',
-    brand: 'text-red dark:text-yellow',
+export type EmphasisColor = 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'gray'
+
+export type EmphasisProps = Omit<HTMLAttributes<HTMLSpanElement>, 'color'> & { color?: EmphasisColor }
+
+const emphasisColors: Record<EmphasisColor, string> = {
+    red: 'bg-red/10 text-red dark:bg-yellow/20 dark:text-yellow',
+    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
+    green: 'bg-green/25 text-green-dark dark:text-lime-green',
+    yellow: 'bg-yellow/15 text-yellow dark:bg-yellow/20',
+    purple: 'bg-purple/10 text-purple dark:bg-purple/20',
+    gray: 'bg-[rgb(var(--text-primary)/0.06)] text-primary dark:bg-[rgb(var(--text-primary)/0.1)]',
 }
 
 export const Emphasis = React.forwardRef<HTMLSpanElement, EmphasisProps>(function Emphasis(
-    { tone = 'info', className, ...props },
+    { color = 'blue', className, ...props },
     ref
 ) {
     return (
@@ -33,9 +25,7 @@ export const Emphasis = React.forwardRef<HTMLSpanElement, EmphasisProps>(functio
             {...props}
             className={cn(
                 'inline box-decoration-clone rounded-[0.15em] px-[0.12em] [-webkit-box-decoration-break:clone]',
-                emphasisFill[tone],
-                darkFill[tone],
-                emphasisText[tone],
+                emphasisColors[color],
                 className
             )}
         />

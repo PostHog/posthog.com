@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
             id: 'confirm',
             title: 'Confirm an action',
             description:
-                'AlertDialog.Header uses the standard title bar without a close button. Put each action in an AlertDialog.Close.',
+                'AlertDialog.Header uses the standard header without a close button. Put each action in an AlertDialog.Close.',
             Component: Confirm,
             source: confirmSource,
         },
@@ -35,7 +35,7 @@ export const doc: ComponentDoc = {
         {
             id: 'long-content',
             title: 'Long content',
-            description: 'The body scrolls. The title bar and footer stay fixed. Set separator on the footer.',
+            description: 'The body scrolls. The header and footer stay fixed. Set separator on the footer.',
             Component: LongContent,
             source: longContentSource,
         },
@@ -58,11 +58,11 @@ export const doc: ComponentDoc = {
         </>,
         <>
             <code>AlertDialog</code> looks the same as <code>Dialog</code>. <code>AlertDialog.Header</code> is the{' '}
-            shared 35-pixel title bar that Drawer uses. Use it as the standard header. It has no close button by
-            default, because the user must select an action.
+            shared header that Dialog and Drawer use. Use it as the standard header. It has no close button by default,
+            because the user must select an action.
         </>,
         <>
-            For a custom layout that needs no title bar, omit <code>AlertDialog.Header</code> and put{' '}
+            For a custom layout that needs no header, omit <code>AlertDialog.Header</code> and put{' '}
             <code>AlertDialog.Title</code> in the body. Every alert dialog needs a title.
         </>,
         <>
@@ -117,9 +117,9 @@ export const doc: ComponentDoc = {
                     name: 'showCloseButton',
                     type: 'boolean',
                     defaultValue: 'false',
-                    description: 'Shows a close button at the right of the title bar.',
+                    description: 'Shows a close button at the right of the header.',
                 },
-                { name: 'className', type: 'string', description: 'Classes for the title bar.' },
+                { name: 'className', type: 'string', description: 'Classes for the header.' },
             ],
         },
         {

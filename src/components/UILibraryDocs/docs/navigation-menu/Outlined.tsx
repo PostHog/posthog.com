@@ -32,7 +32,7 @@ const menus = [
 export default function NavigationMenuOutlined(): JSX.Element {
     return (
         <NavigationMenu.Root>
-            <NavigationMenu.List surface="outlined">
+            <NavigationMenu.List appearance="outlined">
                 <NavigationMenu.Item>
                     <NavigationMenu.Trigger>
                         Products

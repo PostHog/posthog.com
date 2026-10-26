@@ -10,10 +10,10 @@ const events = [
 export default function Surfaces(): JSX.Element {
     return (
         <div className="grid gap-5 @[52rem]:grid-cols-3">
-            {(['plain', 'outlined', 'raised'] as const).map((surface) => (
-                <div key={surface} className="flex min-w-0 flex-col gap-2">
-                    <span className="text-sm font-medium capitalize text-secondary">{surface}</span>
-                    <Table.Root surface={surface}>
+            {(['plain', 'outlined', 'raised'] as const).map((appearance) => (
+                <div key={appearance} className="flex min-w-0 flex-col gap-2">
+                    <span className="text-sm font-medium capitalize text-secondary">{appearance}</span>
+                    <Table.Root appearance={appearance}>
                         <Table.Header>
                             <Table.Row>
                                 <Table.Head>Event</Table.Head>

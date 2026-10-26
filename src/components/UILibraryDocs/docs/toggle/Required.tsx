@@ -12,7 +12,7 @@ export default function Required(): JSX.Element {
             </ToggleGroup>
             <ToggleGroup
                 required
-                variant="secondary"
+                appearance="raised"
                 value={value}
                 onValueChange={setValue}
                 aria-label="Report frequency"

@@ -19,7 +19,7 @@ export const doc: ComponentDoc = {
             id: 'bottom',
             title: 'Bottom drawer',
             description:
-                'A drawer opens from the bottom edge by default. It shows a grab handle on the title bar. Swipe down to close it.',
+                'A drawer opens from the bottom edge by default. It shows a grab handle above the header. Swipe down to close it.',
             Component: Bottom,
             source: bottomSource,
         },
@@ -46,7 +46,7 @@ export const doc: ComponentDoc = {
             <code>&quot;right&quot;</code>.
         </>,
         <>
-            A bottom drawer shows its grab handle on the title bar, so start it with <code>Drawer.Header</code>.
+            A bottom drawer shows its grab handle above the header, so start it with <code>Drawer.Header</code>.
         </>,
         <>
             <code>Drawer.Header</code>, <code>Drawer.Footer</code>, <code>Drawer.Title</code>, and{' '}
@@ -60,7 +60,7 @@ export const doc: ComponentDoc = {
             Put the body in <code>Drawer.Content</code>. It has padding, and it scrolls when the content is long.
         </>,
         <>
-            A mouse drag in <code>Drawer.Content</code> selects text. So a mouse user drags the title bar to close the
+            A mouse drag in <code>Drawer.Content</code> selects text. So a mouse user drags the header to close the
             drawer.
         </>,
         <>
@@ -98,9 +98,9 @@ export const doc: ComponentDoc = {
                     name: 'showCloseButton',
                     type: 'boolean',
                     defaultValue: 'true',
-                    description: 'Shows a close button at the right of the title bar.',
+                    description: 'Shows a close button at the right of the header.',
                 },
-                { name: 'className', type: 'string', description: 'Classes for the title bar.' },
+                { name: 'className', type: 'string', description: 'Classes for the header.' },
             ],
         },
         {

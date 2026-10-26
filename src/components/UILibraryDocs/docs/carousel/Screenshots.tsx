@@ -4,7 +4,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 export default function Screenshots(): JSX.Element {
     return (
-        <Carousel label="Explore PostHog" peek>
+        <Carousel arrows label="Explore PostHog" peek>
             <figure className="m-0">
                 <ProductScreenshot
                     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_17_at_08_43_32_2x_aa22220b10.png"

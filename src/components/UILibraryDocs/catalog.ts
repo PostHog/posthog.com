@@ -9,7 +9,7 @@ export const componentCategories = [
     'Display',
 ] as const
 
-export const designCategories = ['Text effects', 'Accents', 'Showcase', 'Frames and motion'] as const
+export const designCategories = ['Text effects', 'Showcase'] as const
 
 export const docCategories = [...componentCategories, ...designCategories] as const
 
@@ -53,6 +53,12 @@ export const catalog: CatalogEntry[] = [
         slug: 'button',
         name: 'Button',
         description: 'Flat and raised buttons, icon buttons, and groups.',
+        category: 'Actions',
+    },
+    {
+        slug: 'floating-button',
+        name: 'FloatingButton',
+        description: 'A liquid glass button that floats over images, video, and content.',
         category: 'Actions',
     },
     { slug: 'button-link', name: 'ButtonLink', description: 'A link that looks like a button.', category: 'Actions' },
@@ -110,7 +116,7 @@ export const catalog: CatalogEntry[] = [
         category: 'Inputs',
     },
     { slug: 'otp-field', name: 'OTPField', description: 'One box per character of a code.', category: 'Inputs' },
-    { slug: 'dialog', name: 'Dialog', description: 'A modal window with the OS title bar.', category: 'Overlays' },
+    { slug: 'dialog', name: 'Dialog', description: 'A modal window on window glass.', category: 'Overlays' },
     {
         slug: 'alert-dialog',
         name: 'AlertDialog',
@@ -299,15 +305,9 @@ export const catalog: CatalogEntry[] = [
         category: 'Display',
     },
     {
-        slug: 'highlight',
-        name: 'Highlight',
-        description: 'A hand-drawn marker stroke behind text, across lines.',
-        category: 'Text effects',
-    },
-    {
-        slug: 'underline',
-        name: 'Underline',
-        description: 'A sketched underline, circle, or scribble that draws in.',
+        slug: 'rough-annotation',
+        name: 'RoughAnnotation',
+        description: 'Hand-drawn underlines, circles, boxes, and highlights that draw in.',
         category: 'Text effects',
     },
     {
@@ -327,24 +327,6 @@ export const catalog: CatalogEntry[] = [
         name: 'RollingText',
         description: 'A word that rolls through a list of options.',
         category: 'Text effects',
-    },
-    {
-        slug: 'sticker',
-        name: 'Sticker',
-        description: 'A die-cut sticker illustration, inline or on its own.',
-        category: 'Accents',
-    },
-    {
-        slug: 'annotation',
-        name: 'Annotation',
-        description: 'A hand-drawn arrow and note that points at something.',
-        category: 'Accents',
-    },
-    {
-        slug: 'speech-bubble',
-        name: 'SpeechBubble',
-        description: 'A comic speech bubble with a tail.',
-        category: 'Accents',
     },
     {
         slug: 'carousel',
@@ -369,24 +351,6 @@ export const catalog: CatalogEntry[] = [
         name: 'FeatureTabs',
         description: 'Tabs that play through features with a progress bar.',
         category: 'Showcase',
-    },
-    {
-        slug: 'screenshot-frame',
-        name: 'ScreenshotFrame',
-        description: 'A browser, laptop, or phone frame for product screenshots.',
-        category: 'Frames and motion',
-    },
-    {
-        slug: 'compare',
-        name: 'Compare',
-        description: 'A slider that compares two images.',
-        category: 'Frames and motion',
-    },
-    {
-        slug: 'reveal',
-        name: 'Reveal',
-        description: 'Content that fades or slides in as it scrolls into view.',
-        category: 'Frames and motion',
     },
 ]
 

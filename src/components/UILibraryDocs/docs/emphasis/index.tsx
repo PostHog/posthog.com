@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
         },
         {
             id: 'tones',
-            title: 'All tones and line breaks',
+            title: 'All colors and line breaks',
             description: 'Each line gets its own rounded tint.',
             Component: Tones,
             source: tonesSource,
@@ -28,8 +28,8 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         'Replaces: the tinted heading spans in HeroCopy, DataStackSection, MCPPage, MCPLeaderboard, and Pricing/Redesign/Hero.tsx.',
-        'Map blue spans to info, green spans to success, and yellow spans to warning. Map the red/yellow spans (text-red dark:text-yellow) to brand.',
-        'Info uses the vivid hero blue. Brand keeps the site red in light mode and yellow in dark mode. Other tones use darker shades in light mode for contrast.',
+        'The color is decoration only. It does not mean an error, a warning, or a success. Pick the color that suits the page.',
+        'The colors match the live site. Red, blue, and green match the hero headings: red turns yellow in dark mode, and green uses a darker green in light mode. Yellow and purple match the carousel slide titles on the desktop and self-driving pages. Gray is the neutral option.',
         'Padding and corner sizes use em units. The tint scales with heading size.',
         'Cloned box decoration keeps padding and corners at line breaks. The component permits wrapping.',
         'This span adds visual emphasis. Use an em or strong child if you need semantic emphasis.',
@@ -38,7 +38,12 @@ export const doc: ComponentDoc = {
         {
             component: 'Emphasis',
             rows: [
-                { name: 'tone', type: 'Tone', defaultValue: "'info'", description: 'Sets the tint and text color.' },
+                {
+                    name: 'color',
+                    type: "'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'gray'",
+                    defaultValue: "'blue'",
+                    description: 'Sets the tint and text color.',
+                },
             ],
         },
     ],

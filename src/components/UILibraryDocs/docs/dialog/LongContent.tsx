@@ -42,7 +42,7 @@ export default function DialogLongContent(): JSX.Element {
                     </ul>
                 </Dialog.Body>
                 <Dialog.Footer separator>
-                    <Dialog.Close render={<Button variant="secondary" />}>Done</Dialog.Close>
+                    <Dialog.Close render={<Button appearance="raised" />}>Done</Dialog.Close>
                 </Dialog.Footer>
             </Dialog.Popup>
         </Dialog.Root>

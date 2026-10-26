@@ -25,14 +25,14 @@ export const doc: ComponentDoc = {
         {
             id: 'outlined',
             title: 'Outlined',
-            description: 'Set surface="outlined" to draw a border around the bar.',
+            description: 'Set appearance="outlined" to draw a border around the bar.',
             Component: Outlined,
             source: outlinedSource,
         },
         {
             id: 'plain',
             title: 'Plain',
-            description: 'Set variant="plain" to remove the border. Use it for a bar in a window header.',
+            description: 'Set appearance="plain" to remove the border. Use it for a bar in a window header.',
             Component: Plain,
             source: plainSource,
         },
@@ -55,16 +55,10 @@ export const doc: ComponentDoc = {
             component: 'Menubar.Root',
             rows: [
                 {
-                    name: 'surface',
+                    name: 'appearance',
                     type: "'plain' | 'outlined' | 'raised'",
                     defaultValue: "'raised'",
-                    description:
-                        'Sets the bar surface. Takes priority over variant. Raised adds a translucent fill and a shadow.',
-                },
-                {
-                    name: 'variant',
-                    type: "'outlined' | 'plain'",
-                    description: 'Compatibility alias for surface. Use surface in new code.',
+                    description: 'Sets the bar surface. Raised adds a translucent fill and a shadow.',
                 },
             ],
         },

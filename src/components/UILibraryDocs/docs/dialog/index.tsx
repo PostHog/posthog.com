@@ -17,9 +17,9 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'title-bar',
-            title: 'With a title bar',
+            title: 'With a header',
             description:
-                'Dialog.Header is the OS title bar. It shows the title and a close button. Use Dialog.Body for the content.',
+                'Dialog.Header shows the title and a close button on the glass, with no separate bar. Use Dialog.Body for the content.',
             Component: TitleBar,
             source: titleBarSource,
         },
@@ -35,7 +35,7 @@ export const doc: ComponentDoc = {
             id: 'long-content',
             title: 'Long content',
             description:
-                'The dialog is never taller than the screen. The body scrolls, and the title bar and footer stay fixed.',
+                'The dialog is never taller than the screen. The body scrolls, and the header and footer stay fixed.',
             Component: LongContent,
             source: longContentSource,
         },
@@ -50,12 +50,12 @@ export const doc: ComponentDoc = {
             below the body. Set <code>separator</code> to add a divider for long content.
         </>,
         <>
-            Use <code>Dialog.Header</code> as the standard header. It shares the 35-pixel title bar with Drawer. It
-            shows the title and a close button. The title aligns with the body text. A long title ends with an ellipsis.
+            Use <code>Dialog.Header</code> as the standard header. Drawer and AlertDialog use the same header. It shows
+            the title and a close button. The title aligns with the body text. A long title wraps.
         </>,
         <>
-            For a custom layout that needs no title bar, omit <code>Dialog.Header</code> and put{' '}
-            <code>Dialog.Title</code> in the body. Every dialog needs a title.
+            For a custom layout that needs no header, omit <code>Dialog.Header</code> and put <code>Dialog.Title</code>{' '}
+            in the body. Every dialog needs a title.
         </>,
         <>
             <code>Dialog.Popup</code> is <code>max-w-lg</code> wide and no taller than the screen. It hides content that
@@ -121,9 +121,9 @@ export const doc: ComponentDoc = {
                     name: 'showCloseButton',
                     type: 'boolean',
                     defaultValue: 'true',
-                    description: 'Shows a close button at the right of the title bar.',
+                    description: 'Shows a close button at the right of the header.',
                 },
-                { name: 'className', type: 'string', description: 'Classes for the title bar.' },
+                { name: 'className', type: 'string', description: 'Classes for the header.' },
             ],
         },
         {

@@ -18,7 +18,7 @@ export const doc: ComponentDoc = {
             id: 'screenshots',
             title: 'Product screenshots',
             description:
-                'Show one screenshot with a small part of the next slide. These sources also appear in ProductScreenshot call sites.',
+                'Show one screenshot with a small part of the next slide. Set arrows to add previous and next buttons on the sides. These sources also appear in ProductScreenshot call sites.',
             Component: Screenshots,
             source: screenshotsSource,
         },
@@ -90,6 +90,13 @@ export const doc: ComponentDoc = {
                     type: 'boolean',
                     defaultValue: 'true',
                     description: 'Shows buttons for distinct scroll stops.',
+                },
+                {
+                    name: 'arrows',
+                    type: 'boolean',
+                    defaultValue: 'false',
+                    description:
+                        'Shows previous and next buttons on the left and right of the slides. They appear on hover and keyboard focus, and always on touch screens.',
                 },
                 {
                     name: 'onActiveIndexChange',

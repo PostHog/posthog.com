@@ -22,7 +22,7 @@ export const doc: ComponentDoc = {
         {
             id: 'desktop',
             title: 'Desktop features',
-            description: 'Plan and Prompt copy the content from /desktop. The default variant is minimal.',
+            description: 'Plan and Prompt copy the content from /desktop. The default appearance is minimal.',
             Component: Desktop,
             source: desktopSource,
         },
@@ -79,7 +79,7 @@ export const doc: ComponentDoc = {
                     description: 'Paints the active color in minimal mode. Hero always paints it.',
                 },
                 {
-                    name: 'variant',
+                    name: 'appearance',
                     type: "'minimal' | 'hero'",
                     defaultValue: "'minimal'",
                     description: 'Selects quiet tabs or bordered hero tabs with color halos.',

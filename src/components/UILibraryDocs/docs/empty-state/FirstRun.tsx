@@ -15,7 +15,7 @@ export default function FirstRun(): JSX.Element {
                 {created ? 'This example confirms the action.' : 'Create the first topic for your team.'}
             </EmptyState.Description>
             <EmptyState.Actions>
-                <Button variant="primary" onClick={() => setCreated(true)}>
+                <Button appearance="raised" variant="primary" onClick={() => setCreated(true)}>
                     Create topic
                 </Button>
             </EmptyState.Actions>

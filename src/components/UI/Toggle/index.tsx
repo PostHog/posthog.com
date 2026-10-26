@@ -3,33 +3,40 @@ import { Toggle as BaseToggle } from '@base-ui/react/toggle'
 import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
 import { cn } from '../../../utils'
 import { Button, ButtonGroup } from '../Button'
-import type { ButtonSize, ButtonVariant } from '../Button'
+import type { ButtonAppearance, ButtonSize, ButtonVariant } from '../Button'
 
+export type ToggleAppearance = ButtonAppearance
 export type ToggleVariant = ButtonVariant
 
 const flatToggleText = 'text-secondary data-[pressed]:text-primary'
 
-const ToggleGroupVariantContext = React.createContext<ToggleVariant | null>(null)
+const ToggleGroupLookContext = React.createContext<{ appearance: ToggleAppearance; variant: ToggleVariant } | null>(
+    null
+)
 
 export type ToggleProps = Omit<BaseToggle.Props, 'ref' | 'render' | 'className'> & {
+    appearance?: ToggleAppearance
     variant?: ToggleVariant
     size?: ButtonSize
     className?: string
 }
 
 export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(
-    { variant: ownVariant = 'default', size = 'md', className, ...props },
+    { appearance: ownAppearance = 'flat', variant: ownVariant = 'secondary', size = 'md', className, ...props },
     ref
 ) {
-    const variant = React.useContext(ToggleGroupVariantContext) ?? ownVariant
+    const group = React.useContext(ToggleGroupLookContext)
+    const appearance = group?.appearance ?? ownAppearance
+    const variant = group?.variant ?? ownVariant
     return (
         <BaseToggle
             ref={ref}
             render={
                 <Button
+                    appearance={appearance}
                     variant={variant}
                     size={size}
-                    className={cn(variant === 'default' && flatToggleText, className)}
+                    className={cn(appearance === 'flat' && variant === 'secondary' && flatToggleText, className)}
                 />
             }
             {...props}
@@ -38,6 +45,7 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function 
 })
 
 export type ToggleGroupProps = Omit<BaseToggleGroup.Props, 'ref' | 'render' | 'className'> & {
+    appearance?: ToggleAppearance
     variant?: ToggleVariant
     size?: ButtonSize
     className?: string
@@ -46,7 +54,8 @@ export type ToggleGroupProps = Omit<BaseToggleGroup.Props, 'ref' | 'render' | 'c
 
 export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(function ToggleGroup(
     {
-        variant = 'default',
+        appearance = 'flat',
+        variant = 'secondary',
         size = 'md',
         className,
         required = false,
@@ -57,11 +66,20 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(fu
     },
     ref
 ) {
+    const look = React.useMemo(() => ({ appearance, variant }), [appearance, variant])
     return (
-        <ToggleGroupVariantContext.Provider value={variant}>
+        <ToggleGroupLookContext.Provider value={look}>
             <BaseToggleGroup
                 ref={ref}
-                render={<ButtonGroup variant={variant} size={size} disabled={disabled} className={className} />}
+                render={
+                    <ButtonGroup
+                        appearance={appearance}
+                        variant={variant}
+                        size={size}
+                        disabled={disabled}
+                        className={className}
+                    />
+                }
                 {...props}
                 disabled={disabled}
                 multiple={multiple}
@@ -73,6 +91,6 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(fu
                     onValueChange?.(value, details)
                 }}
             />
-        </ToggleGroupVariantContext.Provider>
+        </ToggleGroupLookContext.Provider>
     )
 })

@@ -56,6 +56,10 @@ export const doc: ComponentDoc = {
             <code>Combobox.Chip</code> uses the same styles as <Link to="/components/ui/chip">Chip</Link>.
         </>,
         <>
+            While the list is open below the field, a new row of chips scrolls the page up by the same height, so the
+            list stays in place and every chip stays visible.
+        </>,
+        <>
             <code>Clear</code> and <code>ChipRemove</code> show an icon by default. Pass <code>children</code> to
             replace it.
         </>,
@@ -81,6 +85,13 @@ export const doc: ComponentDoc = {
                     type: "'sm' | 'md' | 'lg'",
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
+                },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'soft'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the field shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
                 },
             ],
         },

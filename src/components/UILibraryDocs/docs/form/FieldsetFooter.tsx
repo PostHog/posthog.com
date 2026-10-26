@@ -14,7 +14,7 @@ export default function FieldsetFooter(): JSX.Element {
             </Field.Root>
             <Fieldset.Footer>
                 <span role="status">{saved ? 'Settings saved.' : 'Your team sees this name in PostHog.'}</span>
-                <Button size="sm" variant="secondary" onClick={() => setSaved(true)}>
+                <Button size="sm" appearance="raised" onClick={() => setSaved(true)}>
                     Save settings
                 </Button>
             </Fieldset.Footer>

@@ -55,8 +55,8 @@ export const doc: ComponentDoc = {
             Keep tab labels to text and icons. Do not put an <code>id</code> or interactive content in a tab.
         </>,
         <>
-            The default variant shows a light pane with a thin edge. The underline variant changes only the text on
-            hover.
+            The default appearance shows a light pane with a thin edge. The underline appearance changes only the text
+            on hover.
         </>,
     ],
     props: [
@@ -64,7 +64,7 @@ export const doc: ComponentDoc = {
             component: 'Tabs.Root',
             rows: [
                 {
-                    name: 'variant',
+                    name: 'appearance',
                     type: "'pane' | 'underline'",
                     defaultValue: "'pane'",
                     description: 'Show a raised pane or an orange underline on the selected tab.',

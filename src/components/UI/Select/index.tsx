@@ -6,29 +6,33 @@ import {
     fieldListItemSizes,
     fieldSizes,
     checkListItem,
-    fieldFocusVisible,
-    fieldState,
-    fieldSurface,
+    fieldTriggerSurface,
     menuGroupLabel,
     menuSeparator,
     popupSurface,
     popupTransition,
     positionerLayer,
 } from '../styles'
-import type { FieldSize } from '../styles'
+import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
 
 const selectPositionerPropNames = [...positionerPropNames, 'alignItemWithTrigger'] as const
 
 const SizeContext = React.createContext<FieldSize>('md')
+const AppearanceContext = React.createContext<FieldAppearance>('inset')
 
-export type SelectRootProps = React.ComponentProps<typeof BaseSelect.Root> & { size?: FieldSize }
+export type SelectRootProps = React.ComponentProps<typeof BaseSelect.Root> & {
+    size?: FieldSize
+    appearance?: FieldAppearance
+}
 
-function Root({ size = 'md', ...props }: SelectRootProps): JSX.Element {
+function Root({ size = 'md', appearance = 'inset', ...props }: SelectRootProps): JSX.Element {
     return (
         <SizeContext.Provider value={size}>
-            <BaseSelect.Root {...props} />
+            <AppearanceContext.Provider value={appearance}>
+                <BaseSelect.Root {...props} />
+            </AppearanceContext.Provider>
         </SizeContext.Provider>
     )
 }
@@ -42,12 +46,17 @@ const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(function
     ref
 ) {
     const contextSize = React.useContext(SizeContext)
+    const appearance = React.useContext(AppearanceContext)
     const size = ownSize ?? contextSize
     return (
         <BaseSelect.Trigger
             ref={ref}
             className={mergeClassName(
-                `${fieldSurface} ${fieldFocusVisible} ${fieldState} flex min-w-32 select-none items-center justify-between gap-2 leading-none text-primary outline-none data-[popup-open]:border-orange ${fieldSizes[size]}`,
+                `${fieldTriggerSurface(
+                    appearance
+                )} flex min-w-32 select-none items-center justify-between gap-2 leading-none text-primary outline-none data-[popup-open]:border-orange ${
+                    fieldSizes[size]
+                }`,
                 className
             )}
             {...props}
