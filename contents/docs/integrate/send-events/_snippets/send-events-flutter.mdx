@@ -154,6 +154,8 @@ On Flutter Web, a `$rageclick` event names the widget a user tapped, but only af
    }
    ```
 
+   Semantics also changes how Flutter Web delivers taps. On a tappable widget, the engine sends a semantic tap action instead of raw pointer events. `onPressed` and `onTap` keep working, but code that relies on `Listener`, `onTapDown`/`onTapUp`, custom gesture recognizers, or drags that start on a button needs testing. Flutter already turns semantics on when a screen reader is active, so assistive-technology users get this behavior today. A custom Dart rage click detector built on raw pointer events can't coexist with semantics on the same widgets, so choose one approach.
+
 3. **Optional: give key widgets a stable identifier.** Wrap a widget in `Semantics(identifier: 'cashier_deposit', child: ...)` and the identifier appears in `$elements_chain` as `attr__flt-semantics-identifier`. Flutter puts the identifier on a parent `group` node rather than on the button node itself, so filter with **Elements chain contains** `cashier_deposit` instead of matching the clicked element.
 
 Semantics adds per-frame work on web. If a screen has many widgets, profile it before and after you turn semantics on.
