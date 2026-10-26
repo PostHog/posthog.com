@@ -36,7 +36,7 @@ Capture v1 has two endpoints: one for analytics events and one for AI events. Bo
 
 Use `https://us.i.posthog.com` for US Cloud and `https://eu.i.posthog.com` for EU Cloud. Both endpoints accept POST only.
 
-<!-- TODO(capture-v1): confirm self-hosted / hobby support for both endpoints at release, and say which versions serve them. -->
+Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints, and v1 SDKs drop events that get a `404`.
 
 ### Send each event to its own endpoint
 
