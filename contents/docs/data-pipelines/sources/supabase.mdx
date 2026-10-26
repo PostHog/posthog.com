@@ -37,7 +37,12 @@ To link Supabase:
      - For password authentication, enter your SSH username and password.
      - For key-based authentication, enter your SSH username, private key, and optional passphrase.
    - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
-5. Click **Link**
+5. Optionally configure TLS certificate verification:
+   - **Verify the server certificate?** Whether to check that your database's TLS certificate comes from a trusted authority and matches the host. Through an SSH tunnel, PostHog checks the certificate chain but not the hostname. Disabled by default.
+   - **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private or self-signed certificate. Adding a certificate authority automatically turns on certificate verification.
+   - **Client certificate (optional):** A PEM certificate that PostHog presents to your database. Add it when your database requires client certificate authentication.
+   - **Client key (optional):** The private key of the client certificate, in PEM format and without a passphrase.
+6. Click **Link**
 
 The data warehouse then starts syncing your Supabase data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
 
@@ -64,6 +69,8 @@ See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#se
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 Supabase sources created after February 18, 2026 require SSL/TLS encryption for database connections. Supabase enforces SSL/TLS by default, so this is typically already in place. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
+
+You can also verify your database's TLS certificate, add a custom certificate authority, or configure client certificate authentication. See the [Postgres TLS documentation](/docs/data-pipelines/sources/postgres) for details on how these options work, since the Supabase connector uses the same underlying integration.
 
 </CalloutBox>
 
