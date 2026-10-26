@@ -1,6 +1,6 @@
 ---
 date: "2026-10-26"
-title: All the ways Replay Vision helps users find (and solve) product problems
+title: How Replay Vision helps users find (and solve) product problems
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/replay_vision_1x_517390c431.png
 featuredImageType: full
 author:
