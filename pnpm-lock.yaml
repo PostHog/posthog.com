@@ -576,6 +576,9 @@ importers:
       '@babel/core':
         specifier: ^7.15.5
         version: 7.28.4
+      '@babel/preset-typescript':
+        specifier: 7.27.1
+        version: 7.27.1(@babel/core@7.28.4)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.5
         version: 0.5.17(@types/webpack@4.41.40)(react-refresh@0.14.2)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(webpack@5.101.3)

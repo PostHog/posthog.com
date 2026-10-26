@@ -464,7 +464,7 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                     <div className="twig-compact-header">
                                         <TwigWordmark />
                                     </div>
-                                    <div className="p-3">
+                                    <div className="twig-account-layout p-3">
                                         <SavedStaysView
                                             compact
                                             stays={[stays[0]]}

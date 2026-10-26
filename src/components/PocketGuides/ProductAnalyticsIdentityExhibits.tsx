@@ -163,11 +163,9 @@ export function SessionGroupingFigure(): JSX.Element {
 
 type SignInStage = 'stay' | 'login' | 'identified' | 'saved'
 
-const compactSavedStaysClassName = 'twig-compact-saved'
-
 function CompactSavedStays(): JSX.Element {
     return (
-        <div className={compactSavedStaysClassName}>
+        <div className="twig-account-layout">
             <SavedStaysView
                 compact
                 stays={[forestStay]}
