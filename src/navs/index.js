@@ -4302,7 +4302,7 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
-                                    name: 'Classifying rows with AI',
+                                    name: 'SQL AI functions',
                                     url: '/docs/sql/ai-functions',
                                 },
                                 {
@@ -5250,7 +5250,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/forum/t/questions?tag=session-replay',
+                    url: '/forum/t/ask-the-hogs?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,
@@ -7697,6 +7697,10 @@ export const docsMenu = {
                         {
                             name: 'Datasets',
                             url: '/docs/ai-evals/datasets',
+                        },
+                        {
+                            name: 'Offline evals',
+                            url: '/docs/ai-evals/offline-evals',
                         },
                         {
                             name: 'Taggers',

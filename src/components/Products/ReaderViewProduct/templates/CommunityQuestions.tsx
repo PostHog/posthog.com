@@ -107,7 +107,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                 ) : (
                                     "There's "
                                 )}{' '}
-                                a good chance your answer is already answered!
+                                a good chance your question is already answered!
                             </p>
                         </li>
                         <li className="list-decimal">

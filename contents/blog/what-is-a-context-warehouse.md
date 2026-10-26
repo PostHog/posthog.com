@@ -105,7 +105,7 @@ The context warehouse today is deliberately not a full data stack: land your eve
 
 ## Try it yourself
 
-[Join the waitlist](/warehouse) for the warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
+[Join the waitlist](/warehouse) for the Warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, Warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
 
 ## FAQ
 

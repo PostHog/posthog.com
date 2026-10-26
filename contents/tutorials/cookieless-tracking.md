@@ -24,7 +24,7 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 
 <GDPRForm />
 
-> **Note:** Before configuring cookieless tracking, you need to enable "Cookieless server hash mode" in your PostHog project settings under Project Settings > Web analytics.
+> **Note:** Before configuring cookieless tracking, go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
 
 ## If you want to delete your cookie banner
 
