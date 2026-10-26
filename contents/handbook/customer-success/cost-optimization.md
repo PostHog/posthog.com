@@ -10,11 +10,11 @@ This page covers how we work on cost optimizations, how we record them with the 
 
 ## The principle
 
-One of our [customer success principles](/handbook/cs-and-onboarding/customer-success#principles) is to help customers save money, even when it costs us in the short term. A customer who overpays because of a bad implementation isn't revenue, they're a churn risk who hasn't churned yet. Doing what's right for them is the job.
+One of our [customer success principles](/handbook/customer-success/customer-success#principles) is to help customers save money, even when it costs us in the short term. A customer who overpays because of a bad implementation isn't revenue, they're a churn risk who hasn't churned yet. Doing what's right for them is the job.
 
 You are not expected to justify a revenue decline that comes from a cost optimization. You are expected to add context to it, so anyone reading the number later can tell the difference between a customer we helped and a customer we aren't fully engaged with. The tag and a Slack message are how you add that context.
 
-This is also why inherited accounts come with a [3 month grace period](/handbook/cs-and-onboarding/how-we-work#how-contractual-bonus-works---technical-csms). We want you to right-size customers, not to leave a bad implementation in place because it happens to pay well.
+This is also why inherited accounts come with a [3 month grace period](/handbook/customer-success/how-we-work#how-contractual-bonus-works---technical-csms). We want you to right-size customers, not to leave a bad implementation in place because it happens to pay well.
 
 ## Two ways a cost optimization starts
 
@@ -64,7 +64,7 @@ The last point is the one people skip and the one worth the most. A cost optimiz
 
 Cost optimizations are much easier to handle before the customer finds them:
 
-- **Run a [health check](/handbook/cs-and-onboarding/health-checks)** on accounts you've just inherited, and on anyone who hasn't had a technical review in a year. Most of the patterns above come straight out of that checklist.
+- **Run a [health check](/handbook/customer-success/health-checks)** on accounts you've just inherited, and on anyone who hasn't had a technical review in a year. Most of the patterns above come straight out of that checklist.
 - **Read event composition, not just totals.** Use the usage tab on the account in PostHog Customer Analytics and their Metabase usage dashboard. A large `$identify`, `$groupidentify`, or autocapture share is the tell.
 - **Watch #spike-detector.** A spike with no launch behind it is usually a bug or a loop, not growth. These are the most urgent optimizations, and they may [qualify for credits](/handbook/growth/sales/refunds#eligibility-criteria).
 - **Listen for cost on calls and in Slack.** A customer who mentions their bill once will mention it again to their finance team.
@@ -91,7 +91,7 @@ Quantify roughly, keep the saving separate from the tradeoff, and say what the c
 
 ## Common cost optimizations
 
-Most of the money sits in a handful of patterns. This isn't the full list, and it isn't the diagnostic guide – [checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) has a checklist and some queries to run.
+Most of the money sits in a handful of patterns. This isn't the full list, and it isn't the diagnostic guide – [checking the health of a customer's deployment](/handbook/customer-success/health-checks) has a checklist and some queries to run.
 
 | Pattern | Why it costs them | Where to point them |
 |---|---|---|
@@ -102,4 +102,4 @@ Most of the money sits in a handful of patterns. This isn't the full list, and i
 | **Autocapture noise** | Most of their events are autocapture and they've defined no autocapture actions, so they're paying for events nobody looks at. | [Tune or turn off autocapture](/docs/product-analytics/autocapture) |
 | **Session replay recording everything** | Short, low-value recordings bill the same as useful ones. | [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) |
 
-For customers with significant LLM spend, [LLM cost optimization](/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization) is a field guide you can work from and share with them.
+For customers with significant LLM spend, [LLM cost optimization](/handbook/customer-success/shareable-guides/llm-cost-optimization) is a field guide you can work from and share with them.

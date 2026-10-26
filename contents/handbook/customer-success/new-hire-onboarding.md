@@ -26,10 +26,10 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 **Focus on:**
 
 - Setting up the day-to-day tools you'll be using - <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
-- Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
+- Reading the [CS](/handbook/customer-success/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
-- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
+- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
@@ -65,9 +65,9 @@ This is when you start working with your customers. Reach out, take the first ca
 
 **Focus on:**
 
-- Reaching out to customers in your book to establish contact, scheduling handovers for any coming from existing owners. [Getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers) covers the playbook for early outreach and intro calls.
-- Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) for how tickets flow.
-- Evaluating implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
+- Reaching out to customers in your book to establish contact, scheduling handovers for any coming from existing owners. [Getting started with customers](/handbook/customer-success/getting-started-with-customers) covers the playbook for early outreach and intro calls.
+- Picking up customer questions and tickets as they come in - this is where the bulk of customer work happens. See [handling customer issues](/handbook/customer-success/handling-customer-issues) for how tickets flow.
+- Evaluating implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](/handbook/customer-success/foundation-check) and [health check](/handbook/customer-success/health-checks) are the structured ways to do this.
 - Refining your demo with each conversation.
 - Starting to respond to signals on your book - what triggers your attention, what's the right next move? You'll feel confused at first, and that's fine, the goal is to start building a feel for it.
 
@@ -118,7 +118,7 @@ PostHog has a lot of products, and you can't learn them all upfront, so trying t
 
 **Start with the foundations, then focus on what your book uses.** Events, persons, and product analytics are useful regardless of who your customers are. Session replay, feature flags, and experiments are the next priority - they're PostHog's most mature products and have the most overlap with everything else. Past that, prioritise the products that show up most in your book, that keep coming up in customer conversations, and that have expansion opportunities. Implementation, billing, and MCP are worth learning alongside all of the above.
 
-**If you learn better by doing, check out the [HogLabs](https://github.com/PostHog/hoglabs-gtm).** It's a self-contained course on implementing PostHog: create a PostHog project, instrument a small app from zero, and use product analytics, session replay, feature flags, and experiments on data you generated. Then the lab will break your implementation using failure modes from [health checks](/handbook/cs-and-onboarding/health-checks) and the [basic implementation review](/handbook/cs-and-onboarding/foundation-check), and you diagnose each one and draft the reply you'd send. The lab is modular, so you can do just the foundations, or explore sections based on what your customers use.
+**If you learn better by doing, check out the [HogLabs](https://github.com/PostHog/hoglabs-gtm).** It's a self-contained course on implementing PostHog: create a PostHog project, instrument a small app from zero, and use product analytics, session replay, feature flags, and experiments on data you generated. Then the lab will break your implementation using failure modes from [health checks](/handbook/customer-success/health-checks) and the [basic implementation review](/handbook/customer-success/foundation-check), and you diagnose each one and draft the reply you'd send. The lab is modular, so you can do just the foundations, or explore sections based on what your customers use.
 
 **When you hit something you don't know:**
 

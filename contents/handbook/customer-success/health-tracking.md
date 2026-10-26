@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We track customer health in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently accounts with an assigned owner contacted us, see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship).
+We track customer health in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. Each paying or trialing account gets a health score out of 10, refreshed once every 24 hours. For how recently accounts with an assigned owner contacted us, see [Automated relationship score](/handbook/customer-success/health-tracking#automated-relationship-score). For the rating you set by hand on your own accounts, see [CSM relationship](/handbook/customer-success/health-tracking#csm-relationship).
 
 > We can't yet see historic trends of customer health, because the score is a materialized view that is rebuilt each day.
 
@@ -38,7 +38,7 @@ The dashboard shows:
 - **Stickiness inputs:** pipelines, Replay Vision scanners, scouts, evals, and MCP use.
 - **Weekly active people by product:** the 12-week trend behind the engagement score.
 - **Weekly MCP use:** people who use the MCP each week, compared with calls from agents.
-- **Relationship score:** the [automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only accounts with an assigned CSM, TAM, or AE have this data.
+- **Relationship score:** the [automated relationship score](/handbook/customer-success/health-tracking#automated-relationship-score), the data behind each signal, and weekly inbound emails and meetings. Only accounts with an assigned CSM, TAM, or AE have this data.
 
 ### The `account_health_scores` view
 
@@ -88,7 +88,7 @@ Two accounts at 6.5 overall can be completely different problems. Always read th
 
 ### Why 61.5 / 38.5
 
-The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score` (see [Automated relationship score](/handbook/cs-and-onboarding/health-tracking#automated-relationship-score)). This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
+The full health model weights product engagement at 0.40, stickiness at 0.25, and customer relationship at 0.35. Relationship is not in this score. It is a separate property, `Relationship score` (see [Automated relationship score](/handbook/customer-success/health-tracking#automated-relationship-score)). This view only covers the two product axes, so those weights are renormalized to sum to 1: `0.40 / 0.65 = 0.615` and `0.25 / 0.65 = 0.385`.
 
 ## How stickiness is measured
 

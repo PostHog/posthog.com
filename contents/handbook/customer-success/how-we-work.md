@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page covers more of the operational detail of how our team generally works - for a broader overview of roles and responsibilities, visit the [customer success team page](/handbook/cs-and-onboarding/customer-success).
+> This page covers more of the operational detail of how our team generally works - for a broader overview of roles and responsibilities, visit the [customer success team page](/handbook/customer-success/customer-success).
 
 ## Main metrics for each role
 
@@ -107,7 +107,7 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - Engineers at PostHog [talk to customers](/handbook/making-users-happy#engineers-talk-to-users-and-provide-support). It's much better to bring engineers onto calls to speak to large customer to talk to them directly than just do the call yourself and copy and paste notes back and forth. This is especially useful if a) the team was already considering building the feature at some point, b) it's an interesting new use case, or c) the customer is really unhappy for valid reasons and could churn.
 - Provide as much internal context as you can. If a customer sends a one-liner in Slack, don't just copy and paste into a product team's channel - find out as much as you reasonably can first, ask clarifying questions up front etc. Otherwise the relevant team will just ask you to do this anyway.
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
-- For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those on the Feature requests tab in Customer analytics.
+- For any [feature requests](/handbook/customer-success/feature-requests) customers care deeply about, we should file and track those on the Feature requests tab in Customer analytics.
 
 **Inviting a product engineer into a customer conversation**
 
@@ -119,7 +119,7 @@ Separately from product requests, there are moments where it's worth seeing whet
 
 **Why not just always invite one?**
 
-CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/cs-and-onboarding/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
+CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/customer-success/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
 
 Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 

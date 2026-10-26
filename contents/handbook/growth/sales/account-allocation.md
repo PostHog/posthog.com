@@ -3,7 +3,7 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in usage-based spend, or is on a non-legacy Enterprise plan, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
+We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in usage-based spend, or is on a non-legacy Enterprise plan, a [Customer Success Manager](/handbook/customer-success/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
 
 The [customer journey and coverage model](/handbook/growth/sales/customer-journey) covers the phases an account moves through and who covers it at each one. This page covers the operational side: book planning, how TAMs get added and removed, and handover mechanics.
 
@@ -13,7 +13,7 @@ We're partway through this transition. Not every $20k+ account has a CSM yet, so
 
 ### CSMs are the base layer
 
-Every account at $20k+ in usage-based ARR, or on an Enterprise plan, gets a [CSM](/handbook/cs-and-onboarding/customer-success). The threshold is what the customer actually consumes, not what they've contracted for: signing a prepaid or annual contract doesn't make an account a CSM account on its own. They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
+Every account at $20k+ in usage-based ARR, or on an Enterprise plan, gets a [CSM](/handbook/customer-success/customer-success). The threshold is what the customer actually consumes, not what they've contracted for: signing a prepaid or annual contract doesn't make an account a CSM account on its own. They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
 
 ### TAMs are an overlay
 
@@ -92,7 +92,7 @@ Use this table to find who owned an account at a given date.
 
 ## TAM book balance
 
-TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
+TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/customer-success/how-we-work) are balanced, by shape as well as total.
 
 - **Target:** Around $1.5M to $2M ARR per TAM. This usually works out to 12-18 accounts. There is a little in-quarter wiggle room, but generally TAMs should focus on a defined book of business. 
 - **Rough makeup:** 1-2 accounts around $200k ARR, 3-4 around $100k, and the rest in the $30k-$100k range.
@@ -108,7 +108,7 @@ If your book is outside these bounds at quarter start, work with your team lead 
 
 ## CSM book balance
 
-CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. The current account mix and live capacity calculation are covered in [how the Customer Success team works](/handbook/cs-and-onboarding/how-we-work#account-allocation).
+CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. The current account mix and live capacity calculation are covered in [how the Customer Success team works](/handbook/customer-success/how-we-work#account-allocation).
 
 If your book is outside the current target at quarter start, work with your team lead to rebalance it.
 
@@ -213,7 +213,7 @@ Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding o
 
 To help the new owner hit the ground running, we should make sure the customer is in a good state and a warm introduction happens.
 
-If the account is at $20k+ in usage-based ARR or on a non-legacy Enterprise plan, the TAE handoff always goes to a CSM. Signing a prepaid or annual contract doesn't trigger the handoff by itself: the account needs to be onboarded and consuming at the $20k threshold. The handover typically happens around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time. If usage is still under the threshold at the 3 month mark, the TAE hands the renewal opportunity over to the relevant CSM team lead to work the renewal and monitor the account. The team lead is responsible for ensuring the renewal is managed by a CSM as per the [renewal handbook guidelines](/handbook/cs-and-onboarding/renewals#when-to-start). The team lead is not responsible for support or proactive adoption work. Once the account reaches $20k+ in usage-base ARR, it will be queued for a CSM's book.
+If the account is at $20k+ in usage-based ARR or on a non-legacy Enterprise plan, the TAE handoff always goes to a CSM. Signing a prepaid or annual contract doesn't trigger the handoff by itself: the account needs to be onboarded and consuming at the $20k threshold. The handover typically happens around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time. If usage is still under the threshold at the 3 month mark, the TAE hands the renewal opportunity over to the relevant CSM team lead to work the renewal and monitor the account. The team lead is responsible for ensuring the renewal is managed by a CSM as per the [renewal handbook guidelines](/handbook/customer-success/renewals#when-to-start). The team lead is not responsible for support or proactive adoption work. Once the account reaches $20k+ in usage-base ARR, it will be queued for a CSM's book.
 
 TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding a TAM](#adding-a-tam-to-an-account) and [Removing a TAM](#removing-a-tam-from-an-account) above.
 
@@ -234,7 +234,7 @@ Every account being handed over should have an up-to-date [Account Plan](/handbo
 
 ### Product Onboarding
 
-Before handing over a customer, the existing owner needs to ensure that the customer is onboarded properly to the products they are paying for. We should first ensure that they are only paying for what they need to as detailed in the [health checks](/handbook/cs-and-onboarding/health-tracking) section of the handbook and then ensure the following steps have been completed, depending on the products they are paying for:
+Before handing over a customer, the existing owner needs to ensure that the customer is onboarded properly to the products they are paying for. We should first ensure that they are only paying for what they need to as detailed in the [health checks](/handbook/customer-success/health-tracking) section of the handbook and then ensure the following steps have been completed, depending on the products they are paying for:
 
 > This is an initial pass at what good onboarding looks like for each product. We will refine this checklist as we learn what works.
 
@@ -385,7 +385,7 @@ CSMs receive every $20k+ account, whether from a TAE at close or when a TAM come
 ### Product adoption
 
 - **Core product coverage** - see [How coverage works](#how-coverage-works). Receiving accounts with only 1 core product adopted is normal. It just means the previous owner determined there isn't a realistic path to expand right now, and that reasoning should be documented.
-- **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
+- **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/customer-success/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
 - **Unexplained usage changes** — big spikes or drops that aren't documented, or where there's no record of a conversation with the customer about them. These can indicate problems nobody's looked into yet.
 
 ### Engagement

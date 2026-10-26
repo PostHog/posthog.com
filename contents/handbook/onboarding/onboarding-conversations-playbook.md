@@ -192,7 +192,7 @@ Tailor the email to their likely concerns:
 
 A small, human touch can help here! Use what’s publicly obvious or clearly relevant (their product category, their website messaging, their goals). If you genuinely relate (e.g., you’re learning a language and they build a language app), one sentence can be enough to build rapport. That’s also a great tip for the first outreach. 
 
-You can also draw inspiration from the [Customer Success team's tactics](https://posthog.com/handbook/cs-and-onboarding/engaging-unengaged-customers), such as flagging outdated SDKs.
+You can also draw inspiration from the [Customer Success team's tactics](https://posthog.com/handbook/customer-success/engaging-unengaged-customers), such as flagging outdated SDKs.
 
 ## Preparing for the call
 

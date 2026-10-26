@@ -22,7 +22,7 @@ Before you reach out, build context. The more you bring to your first conversati
 
 - Which PostHog products are they using?
 - Which are they *not* using?
-- Does their setup look complete? Are they paying for products they don't use? Run the [customer deployment health check](/handbook/cs-and-onboarding/health-checks).
+- Does their setup look complete? Are they paying for products they don't use? Run the [customer deployment health check](/handbook/customer-success/health-checks).
 - Review their [product onboarding](/handbook/growth/sales/account-allocation#product-onboarding) status.
 
 ### Data management
@@ -34,7 +34,7 @@ In their project(s), check the data management tab:
 - Do custom events have meaningful [properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event)?
 - If they identify persons or groups, are the profile properties meaningful?
 
-Also worth running through the [basic implementation review](/handbook/cs-and-onboarding/foundation-check).
+Also worth running through the [basic implementation review](/handbook/customer-success/foundation-check).
 
 ## 2. Reach out
 
@@ -47,7 +47,7 @@ If you're inheriting an existing contact:
 - Review the [Sales → CSM Handover](/handbook/growth/sales/account-allocation#handing-over-customers) process.
 - Get introduced in the existing Slack/Teams channel or via email.
 - Coordinate with the previous owner for continuity.
-- Set your own [CSM relationship](/handbook/cs-and-onboarding/health-tracking#csm-relationship) rating on the account. Start at 2 — do not keep the rating the previous owner gave it.
+- Set your own [CSM relationship](/handbook/customer-success/health-tracking#csm-relationship) rating on the account. Start at 2 — do not keep the rating the previous owner gave it.
 
 ### Cold (no established contact)
 
@@ -67,7 +67,7 @@ Pull from PostHog and Metabase to find something specific to mention:
 
 - Event count spike or drop — make sure it's expected and tracking is correct.
 - Recent support ticket — follow up to confirm it's resolved.
-- Concrete ways to [optimize spend](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) or [improve implementation](/handbook/cs-and-onboarding/health-checks#have-they-implemented-tracking-incorrectly).
+- Concrete ways to [optimize spend](/handbook/customer-success/health-checks#are-they-paying-for-things-they-dont-need) or [improve implementation](/handbook/customer-success/health-checks#have-they-implemented-tracking-incorrectly).
 - Invite to a shared Slack channel.
 - High user count or low engagement — offer a training session.
 - Legacy pricing plan: "We moved off legacy plans over a year ago. I'd like to transition you to standard pricing — happy to walk through the changes."
@@ -111,7 +111,7 @@ Use the call to figure out how deeply you'll work with this customer. Think thro
 - Do they need help fixing their current setup?
 - Do they have plans to implement new PostHog products?
 
-If they need help or are expanding their use, that's an opening to work with them more closely — collaborate on a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan). Some customers won't want to engage deeply, and that's fine — keep monitoring their usage and check in when appropriate.
+If they need help or are expanding their use, that's an opening to work with them more closely — collaborate on a detailed [success plan](/handbook/customer-success/onboarding-success-plan). Some customers won't want to engage deeply, and that's fine — keep monitoring their usage and check in when appropriate.
 
 ### Prep
 
@@ -144,7 +144,7 @@ Don't interrogate the customer — pick a few that are relevant.
 - Which teams currently use PostHog at your company?
 - Are there opportunities for other teams to adopt PostHog?
 - Could you introduce me to champions on other teams to learn about their use case?
-- [Review their current implementation](/handbook/cs-and-onboarding/foundation-check) — any concerns?
+- [Review their current implementation](/handbook/customer-success/foundation-check) — any concerns?
 - Would training or workshops be useful for you and your team?
 - How do you feel about PostHog overall?
 

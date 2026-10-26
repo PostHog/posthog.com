@@ -24,7 +24,7 @@ The structure outlined on this page should be treated as a guideline & should be
 
 ### CSM
 
-- Operational health and [health score](/handbook/cs-and-onboarding/health-tracking) monitoring
+- Operational health and [health score](/handbook/customer-success/health-tracking) monitoring
 - Support escalation and follow-through
 - Credit usage optimization
 - Onboarding, getting new users set up, training and adoption of products they already have
@@ -91,7 +91,7 @@ A competitor showing up before a renewal on a CSM-only account is one of the bes
 
 ### Account health
 
-The CSM owns reading the [health score](/handbook/cs-and-onboarding/health-tracking) and keeping it current, but it isn't the CSM's problem alone. Both of you watching it might feel like duplicated work, but you're asking different questions despite looking at the same numbers.
+The CSM owns reading the [health score](/handbook/customer-success/health-tracking) and keeping it current, but it isn't the CSM's problem alone. Both of you watching it might feel like duplicated work, but you're asking different questions despite looking at the same numbers.
 
 The score on its own also won't tell you enough, as it's only designed to answer whether an account is at risk. Product engagement makes up most of it which usually confirms something that already happened rather than warning you. Total product count, a better headroom signal for a TAM, doesn't count much towards it. And it won't show you a single team going quiet, which is most likely on strategic accounts where several teams use PostHog for different things.
 
@@ -144,7 +144,7 @@ The internal channel replaces DMs about the account, and you're both responsible
 
 Gather as much context as you can before jumping in with questions. Share what you find, and let the gaps guide what you ask.
 
-As a CSM, treat it like your standard deep dive when [inheriting an account](/handbook/cs-and-onboarding/getting-started-with-customers), pointed at where you can add value fastest:
+As a CSM, treat it like your standard deep dive when [inheriting an account](/handbook/customer-success/getting-started-with-customers), pointed at where you can add value fastest:
 
 - Are there cost optimizations to surface?
 - Opportunities to deepen value on products they're already using heavily?
@@ -319,6 +319,6 @@ How can you both be the driver if there are two people in the same car? It's oka
 
 - [Account allocation](/handbook/growth/sales/account-allocation) covers [adding a TAM](/handbook/growth/sales/account-allocation#adding-a-tam-to-an-account), [removing a TAM](/handbook/growth/sales/account-allocation#removing-a-tam-from-an-account), and [keeping the context with the CSM](/handbook/growth/sales/account-allocation#keeping-the-context-with-the-csm) when the overlay ends
 - [Customer journey](/handbook/growth/sales/customer-journey#ownership-rules) for the coverage matrix by phase, and co-owned churn saves
-- [Customer health tracking](/handbook/cs-and-onboarding/health-tracking) for what the score is made of
+- [Customer health tracking](/handbook/customer-success/health-tracking) for what the score is made of
 - [Quarterly account planning](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) for the account plan note format
 - [Evaluating growth potential](/handbook/growth/sales/evaluating-growth-potential) for judging whether the headroom on an account is worth working
