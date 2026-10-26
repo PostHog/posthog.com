@@ -158,7 +158,7 @@ When a human reviewer dismissed its reports with handwritten feedback, the agent
 
 ![Turn any agent into a self-improving loop](https://res.cloudinary.com/dmukukwp6/image/upload/Dev_loops_graphic_improving_agent_prompts_generic_loop_v2_b393015612.png)
 
-### Steal this:
+### Steal this prompt:
 
 ```
 Set up a scheduled agent that runs daily and flags docs that newly merged code made wrong – removed or renamed features, changed defaults, stale beta labels – with the page, the PR, and a suggested edit. A removed feature flag means a rollout, not a release, so ask before calling anything generally available.
