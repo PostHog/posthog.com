@@ -99,8 +99,8 @@ const HeroSection = () => {
 
     return (
         <section id="overview" className="not-prose w-full tracking-[-0.0125em]">
-            <div className="flex flex-col items-start gap-6 @xl/reader-content:flex-row @xl/reader-content:items-center @4xl/reader-content:gap-8">
-                <div className="@xl/reader-content:flex-1">
+            <div className="flex flex-col items-start gap-6 @lg/reader-content:flex-row @lg/reader-content:items-center @4xl/reader-content:gap-8">
+                <div className="@lg/reader-content:flex-1">
                     <p className="text-sm font-semibold text-secondary m-0 mb-3 flex items-center gap-1.5">
                         <IconPop show delay={200}>
                             <sessionReplay.Icon className={`size-5 text-${sessionReplay.color}`} />
@@ -120,7 +120,7 @@ const HeroSection = () => {
                     <CTAButtons />
                     <p className="text-sm text-secondary mt-3 mb-0">5,000 recordings free every month, forever.</p>
                 </div>
-                <div className="w-full max-w-xs mx-auto @xl/reader-content:mx-0 @xl/reader-content:w-[32%] @xl/reader-content:max-w-none @4xl/reader-content:w-[38%]">
+                <div className="w-full max-w-xs mx-auto @lg/reader-content:mx-0 @lg/reader-content:w-[32%] @lg/reader-content:max-w-none @4xl/reader-content:w-[38%]">
                     <CloudinaryImage
                         src={IMAGES.monitorsHog}
                         alt="A detective relaxing at a desk while watching three product monitors"
