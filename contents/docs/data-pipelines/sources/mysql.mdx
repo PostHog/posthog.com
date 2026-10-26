@@ -40,7 +40,7 @@ The data warehouse then starts syncing your MySQL data. You can see details and 
 
 ## Verify the server certificate
 
-By default, PostHog encrypts the connection when **Use SSL** is on, but does not check the certificate. To make sure PostHog connects to your real database, set these fields when you link the source:
+By default, PostHog does not check your database's TLS certificate. To make sure PostHog connects to your real database, set these fields when you link the source:
 
 - **Verify the server certificate?** Checks that your database's TLS certificate comes from a trusted authority and matches the host you entered. Off by default.
 - **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate, such as the regional certificate bundle for Amazon RDS. Adding one turns on verification, even when the toggle above is off. Without it, PostHog checks against a standard set of public authorities.
@@ -48,7 +48,7 @@ By default, PostHog encrypts the connection when **Use SSL** is on, but does not
 
 Through an SSH tunnel, PostHog checks that the certificate comes from a trusted authority, but not that it matches the host. The tunnel presents your database on a local address, so the host name can't match.
 
-Any of these fields turns on TLS, whatever **Use SSL** says. If you leave them all empty, **Use SSL** alone decides whether the connection is encrypted.
+Any of these fields turns on TLS, whatever **Use SSL** says. If you leave them all empty, **Use SSL** asks for an encrypted connection, but PostHog still connects without encryption when the server does not offer TLS. To refuse an unencrypted connection, turn on **Verify the server certificate?**.
 
 ### Certificate errors
 
