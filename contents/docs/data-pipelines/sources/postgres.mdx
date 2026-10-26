@@ -42,6 +42,25 @@ The data warehouse then starts syncing your Postgres data. You can see details a
 
 <SourceParameters />
 
+## TLS certificate verification
+
+You can optionally verify your database's TLS certificate and authenticate with a client certificate. These fields appear in the source form below the schema field:
+
+- **Verify the server certificate?** — Check that your database's TLS certificate comes from a trusted authority and matches the host. Defaults to **No**. When connecting through an SSH tunnel, PostHog checks the certificate chain but not the hostname, because the tunnel presents your database on a local address.
+- **Certificate authority (optional)** — The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate. Adding a certificate authority automatically turns on certificate verification even if the toggle is set to **No**.
+- **Client certificate (optional)** — A PEM certificate that PostHog presents to your database. Add it when your database requires mutual TLS (mTLS) authentication.
+- **Client key (optional)** — The private key of the client certificate, in PEM format and without a passphrase. This is a secret field — API responses do not include it.
+
+A source that sets none of these fields connects with the same TLS behavior as before.
+
+<CalloutBox icon="IconInfo" title="Client certificate requirements" type="fyi">
+
+- A client certificate requires both the certificate and its private key. If one is missing, the credential check fails with an error.
+- The client key must not have a passphrase. An encrypted key fails the credential check.
+- To turn off client certificate authentication, clear the client certificate field. The stored key is ignored when no certificate is set.
+
+</CalloutBox>
+
 ## Selecting columns
 
 By default, PostHog syncs all columns from each table. To sync only specific columns:
@@ -112,6 +131,8 @@ Row filters are not supported for CDC schemas or direct Postgres sources. They o
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
+
+You can also [verify your database's TLS certificate](#tls-certificate-verification) and authenticate with a client certificate for additional security.
 
 </CalloutBox>
 
@@ -683,5 +704,13 @@ To fix this, either:
 3. **Remove the affected tables** from the sync if they should not be read by PostHog.
 
 After making changes, re-enable the sync in PostHog.
+
+### TLS certificate verification failed
+
+This error occurs when PostHog could not verify your database's TLS certificate. The error message tells you what went wrong:
+
+- **"PostHog could not verify your database's TLS certificate"** — The certificate was not signed by an authority PostHog trusts, or it does not match the host. Add the certificate authority that signed it, check the host, or turn off certificate verification and remove the certificate authority.
+- **"Your database's TLS certificate does not match the host"** — The certificate's hostname does not match the host you entered. Use the hostname the certificate was issued for, or turn off certificate verification and remove the certificate authority.
+- **"Your database rejected the client certificate"** — Your database rejected the client certificate PostHog presented, or it requires one. Add a client certificate and key that your database trusts.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
