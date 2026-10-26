@@ -28,6 +28,7 @@ To link Azure SQL Server:
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
    - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `dbo`.
+   - **Require encryption:** (Optional) Whether to require TLS encryption for the connection. Default is off. When enabled, PostHog refuses to connect unless the connection is encrypted. See [Encryption](#encryption) below.
 4. Click **Link**
 
 The data warehouse then starts syncing your Azure SQL Server data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -35,6 +36,14 @@ The data warehouse then starts syncing your Azure SQL Server data. You can see d
 ## Configuration
 
 <SourceParameters />
+
+## Encryption
+
+You can require TLS encryption for the connection to your SQL Server database. When enabled, PostHog refuses to connect if the server does not offer encryption. When disabled (the default), PostHog encrypts only when the server offers it.
+
+To enable encryption, set **Require encryption?** to **Yes** during source setup or on the source's **Configuration** tab.
+
+> **Note:** PostHog does not verify the SQL Server certificate. The driver's certificate authority setting is process-wide, so per-connection verification is not supported. If you need verified TLS, terminate TLS at a proxy or use an SSH tunnel.
 
 ## Selecting columns
 
