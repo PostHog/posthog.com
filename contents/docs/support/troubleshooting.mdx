@@ -20,7 +20,7 @@ Fixes for the problems we see most often. Each fix links to the setup page that 
 
 1. Generate a key under **Support** > **Settings** > **Secret API key**, if the section is empty.
 2. Recompute the HMAC-SHA256 of the user's `distinct_id` with that key, on your server. See [identity verification](/docs/support/widget#identity-verification).
-3. If you rotated the key, hashes signed with the previous key still work until you delete the backup. After every server uses the new key, delete the backup.
+3. If you rotated the key, hashes signed with the previous key keep working for 48 hours, then expire automatically. If it may be compromised, click **Expire now** in **Support** > **Settings**.
 4. Requests with no identity fields keep using the browser session. A `403` means the request sent identity fields the server rejected.
 
 ## Email replies do not send
