@@ -177,7 +177,7 @@ You can also use properties to create [cohorts](/docs/data/cohorts). These are l
 
 The PostHog equivalent to goals and conversions are [actions](/docs/data/actions). An action is one or more events with filters matching a user’s behavior. For example, a "shown interest" action could include a visit to the pricing page, clicking a book demo button, or signing up.
 
-You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/cdp/destinations/slack) or data to [custom webhooks](/docs/cdp/destinations/webhook).
+You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/data-pipelines/destinations/slack) or data to [custom webhooks](/docs/data-pipelines/destinations/webhook).
 
 Beyond actions, PostHog also can run A/B tests, which compare "test" and "control" variants to calculate whether a change impacts a goal metric. This is our version of Google Optimize. For an example, see "[How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)."
 
@@ -235,7 +235,7 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 
-- [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
+- [Data connections](/docs/data-pipelines) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
 - Direct [SQL querying](/docs/data-warehouse/sql) and customization.
 

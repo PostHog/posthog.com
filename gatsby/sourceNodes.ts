@@ -1322,7 +1322,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
                 // matches the committed doc file (e.g. `active-campaign`, not the label-derived
                 // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
-                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
+                const docsSlug = config.docsUrl?.match(
+                    /\/docs\/(?:cdp|data-pipelines|data-warehouse)\/sources\/([^/?#]+)/
+                )?.[1]
                 const labelSlug = displayName
                     .toLowerCase()
                     .replace(/\./g, '')

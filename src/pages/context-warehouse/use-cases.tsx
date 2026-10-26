@@ -432,7 +432,7 @@ function UseCases(): JSX.Element {
                                     payments, CRMs, support desks, ad platforms, your production database, chances are
                                     your question is already answerable.{' '}
                                     <Link
-                                        to="/docs/data-warehouse/sources"
+                                        to="/docs/data-pipelines/sources"
                                         state={{ newWindow: true }}
                                         className="font-semibold"
                                     >

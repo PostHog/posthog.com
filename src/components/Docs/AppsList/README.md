@@ -9,7 +9,7 @@ The list is sourced from `useProducts()` (`src/hooks/useProducts.tsx`), which is
 For most products the docs URL is `/docs/<slug>`, derived from the product's marketing `slug`. A few products have a slug that doesn't map cleanly, so they're overridden by `handle` in `docsUrlOverrides`:
 
 - `data_warehouse` to `/docs/data-warehouse`
-- `realtime_destinations` to `/docs/cdp/destinations`
+- `realtime_destinations` to `/docs/data-pipelines/destinations`
 - `posthog_ai` to `/docs/posthog-ai`
 
 If a new product is added whose slug isn't its docs path, add an override.

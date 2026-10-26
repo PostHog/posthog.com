@@ -119,7 +119,7 @@ For querying alerts:
 - `Show me alerts that check hourly and their last check results.`
 - `Write a HogQL query to find alerts that fired in the last week.`
 
-For schema discovery using [`system.information_schema`](/docs/data-warehouse/sources/posthog#schema-discovery-with-information_schema):
+For schema discovery using [`system.information_schema`](/docs/data-pipelines/sources/posthog#schema-discovery-with-information_schema):
 
 - `Query system.information_schema.columns to find all columns in the events table with their types and descriptions.`
 - `Use system.information_schema.relationships to show me how the events table joins to other tables.`
@@ -168,4 +168,4 @@ See the [MCP server docs](/docs/model-context-protocol) for full setup instructi
 - [Use the data warehouse in PostHog Desktop](/docs/data-warehouse/surfaces/desktop) to work through failing models and syncs.
 - [Manage data quality over MCP and SQL](/docs/data-warehouse/data-quality/mcp) to create checks, start runs, and inspect results.
 - [Views](/docs/data-warehouse/views) and [materialized views](/docs/data-warehouse/views/materialize) for what the view tools manage.
-- [Sources](/docs/data-warehouse/sources) for what the source and schema tools configure.
+- [Sources](/docs/data-pipelines/sources) for what the source and schema tools configure.
