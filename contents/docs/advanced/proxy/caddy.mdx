@@ -60,10 +60,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -89,10 +91,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -105,7 +109,9 @@ Replace `e.yourdomain.com` with your chosen subdomain.
 
 The `header_up Host` directive tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
 
-The `header_up -Cookie` and `header_up -Authorization` directives remove the browser's cookies and auth headers before the request goes to PostHog. PostHog does not need them, because ingestion authenticates on the project token in the request body.
+The `header_up -Cookie` directive removes the browser's cookies before the request goes to PostHog. PostHog does not need them.
+
+The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer `, and remove any other value. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
 
 The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
@@ -205,10 +211,12 @@ In your working directory, create a file named `Caddyfile`:
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -241,10 +249,12 @@ In your working directory, create a file named `Caddyfile`:
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -436,10 +446,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -469,10 +481,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -617,10 +631,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -660,10 +676,12 @@ e.yourdomain.com {
     }
   }
   handle {
+    # Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
+    @non_bearer not header Authorization "Bearer *"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
       header_up -Cookie
-      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
