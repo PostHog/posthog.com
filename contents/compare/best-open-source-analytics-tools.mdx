@@ -6,7 +6,6 @@ sidebar: Compare
 showTitle: true
 hideAnchor: true
 author:
-  - andy-vandervell
   - natalia-amorim
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Group_144679_3_f22fd6f118.png
@@ -625,9 +624,9 @@ Every tool in this guide is free to download. None of them is free to run. So be
 
 This is the default assumption with open source, and for the lightweight tools it's great. Umami, Plausible, Rybbit, and OpenPanel all run from a Docker Compose file on a small server. You'll spend an afternoon on setup, then a few minutes a month on updates and backups. If you were going to rent a server anyway, the analytics is effectively free.
 
-The heavier tools are a different story. PostHog, Matomo, and Superset want more hardware to start with, and the hardware is the easy part. Most of them publish the point where a single box stops being enough: PostHog recommends its cloud above roughly 300k events a month, Matomo wants separate app and database servers past 1 million pageviews, and Superset expects Kubernetes in production. Past those thresholds, self-hosting is an engineer's job, not a side task.
+The heavier tools are a different story. PostHog, Matomo, and Superset want more hardware to start with, and require more resources as you scaled: PostHog recommends its cloud above roughly 300k events a month, Matomo wants separate app and database servers past 1 million pageviews, and Superset expects Kubernetes in production. Past those thresholds, self-hosting requires regular maintenance to run reliably.
 
-One more thing to check before you commit: the database. PostHog, Plausible, OpenPanel, and Rybbit store events in ClickHouse, which handles large volumes but is another service to run. Umami and Metabase use PostgreSQL, Matomo uses MySQL or MariaDB. If your team already operates one of these, favor the tools built on it.
+Also consider what database your prefer. PostHog, Plausible, OpenPanel, and Rybbit store events in ClickHouse, which handles large volumes but is another service to run. Umami and Metabase use PostgreSQL, Matomo uses MySQL, or MariaDB. If your team already operates one of these, favor the tools built on it.
 
 ### Building your own
 
