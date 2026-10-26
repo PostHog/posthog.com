@@ -1,7 +1,7 @@
 ---
-date: "2026-10-19"
+date: "2026-10-26"
 title: '"Find issues that frustrate users" (and other things teams ask AI to watch in their product)'
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/find_issues_that_frustrate_ece77572e7.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/replay_vision_data_study_1x_19a082f6ef.png
 featuredImageType: full
 author:
   - sara-miteva
@@ -20,9 +20,11 @@ seo:
   metaDescription: "What 20,097 Replay Vision scanners across 9,488 organizations were told to look for, the exact prompts people wrote, and where to point your first scanner."
 ---
 
-It's been over two months since [we launched Replay Vision](/blog/replay-vision), our AI layer that watches batch session recordings and reports on them, so it's time to check the data: What are people actually doing with it? Apparently, a lot of things are broken, and there's a lot of rage everywhere.
+It's been over two months since [we launched Replay Vision](/blog/replay-vision). What are people actually doing with it?
 
-Replay Vision points scanners at your session recordings, and then summarizes the findings. A [scanner](/docs/replay-vision/scanner-types) is a standing instruction for Replay Vision. You write what to look for, pick what you want back (a flag, a 1-5 score, a tag, or a written summary), and set filters for which recordings it watches. It checks new sessions every few minutes and returns observations, each one citing the moment in the recording it came from.
+[Replay Vision](/replay-vision) is our AI layer over [Session Replay](/session-replay). It points [scanners](/docs/replay-vision/scanner-types) at your session recordings, watches them, and summarizes the findings, based on parameters you set. Watch the video below to learn more.
+
+[add video here]
 
 Since the launch on August 3, people have created 20,097 scanners across 9,488 organizations. The percentages below are for scanners where someone wrote their own prompt. Many prompts fit more than one of the four categories, which is why the percentages add up to more than 100. (For authenticity purposes, I haven't fixed the typos. Real people typed these.)
 
