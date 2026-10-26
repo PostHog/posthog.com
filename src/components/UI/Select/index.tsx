@@ -6,6 +6,7 @@ import {
     fieldListItemSizes,
     fieldSizes,
     checkListItem,
+    fieldAppearanceShape,
     fieldTriggerSurface,
     menuGroupLabel,
     menuSeparator,
@@ -56,7 +57,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(function
                     appearance
                 )} flex min-w-32 select-none items-center justify-between gap-2 leading-none text-primary outline-none data-[popup-open]:border-orange ${
                     fieldSizes[size]
-                }`,
+                } ${fieldAppearanceShape[appearance]}`,
                 className
             )}
             {...props}

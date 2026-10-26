@@ -1,5 +1,7 @@
 import React from 'react'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Groups from './Groups'
@@ -39,6 +41,14 @@ export const doc: ComponentDoc = {
             Component: Sizes,
             source: sizesSource,
         },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
+        },
     ],
     notes: [
         <>
@@ -74,10 +84,10 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'appearance',
-                    type: "'inset' | 'soft'",
+                    type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the trigger shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
+                        'Sets the trigger shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
                 },
             ],
         },

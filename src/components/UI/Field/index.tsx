@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field as BaseField } from '@base-ui/react/field'
-import { fieldSizes, textInputFor } from '../styles'
+import { fieldAppearanceShape, fieldSizes, textInputFor } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
@@ -20,7 +20,10 @@ const Control = React.forwardRef<HTMLInputElement, FieldControlProps>(function F
     return (
         <BaseField.Control
             ref={ref}
-            className={mergeClassName(`${textInputFor(appearance)} ${fieldSizes[size]}`, className)}
+            className={mergeClassName(
+                `${textInputFor(appearance)} ${fieldSizes[size]} ${fieldAppearanceShape[appearance]}`,
+                className
+            )}
             {...props}
         />
     )

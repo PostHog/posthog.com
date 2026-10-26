@@ -3,7 +3,7 @@ import { Button as BaseButton } from '@base-ui/react/button'
 import { cn } from '../../../utils'
 import Link from '../../Link'
 import type { Props as LinkProps } from '../../Link'
-import { focusRing, toneSolid, toneText } from '../styles'
+import { disabledHatch, focusRing, toneSolid, toneText } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
 
@@ -82,6 +82,8 @@ const outlineTones: Record<ButtonVariant, string> = {
     danger: `border-salmon/70 ${toneText.error} hover:border-salmon hover:bg-salmon/10 [&:not([data-disabled]):active]:border-salmon [&:not([data-disabled]):active]:bg-salmon/15 data-[pressed]:border-salmon data-[pressed]:bg-salmon/15 data-[popup-open]:border-salmon data-[popup-open]:bg-salmon/15 data-[disabled]:hover:border-salmon/70`,
 }
 
+const outlineDisabled = `${disabledHatch} [&[data-disabled]:not([aria-busy=true])]:border-dashed`
+
 const flatSegmentTones: Record<ButtonVariant, string> = {
     secondary: '',
     primary: 'hover:bg-orange/10',
@@ -105,7 +107,7 @@ const flatGroup =
     'inline-flex [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
 
 const raisedUnderside =
-    "before:absolute before:inset-x-0 before:bottom-0 before:top-1/2 before:border-t-0 before:content-['']"
+    "before:absolute before:inset-x-0 before:bottom-0 before:top-1/2 before:border-t-0 before:bg-[repeating-linear-gradient(45deg,rgb(0_0_0/0.15)_0_1px,transparent_1px_5.6569px)] before:bg-[length:8px_8px] before:content-['']"
 
 const raisedUndersideWidth: Record<ButtonSize, string> = {
     sm: 'p-px before:border',
@@ -114,6 +116,12 @@ const raisedUndersideWidth: Record<ButtonSize, string> = {
 }
 
 const raisedFrameBase = `relative inline-block text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
+
+const raisedHatchMotion: Record<ButtonSize, string> = {
+    sm: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-1px] [&:not([data-disabled]):active]:before:[background-position:0_1px] [&[data-pressed]]:before:[background-position:0_1px] [&[data-popup-open]]:before:[background-position:0_1px]',
+    md: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-1px] [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
+    lg: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-2px] [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
+}
 
 const raisedFrames: Record<ButtonVariant, string> = {
     danger: 'before:border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] before:bg-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_76%,black)]',
@@ -167,9 +175,15 @@ const raisedFacePadding: Record<ButtonSize, string> = {
 
 const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-2', lg: 'p-2.5' }
 
-const raisedGroupBase = `relative inline-flex data-[disabled]:opacity-50 ${raisedUnderside}`
+const raisedGroupBase = 'relative inline-flex p-px data-[disabled]:opacity-50'
 
 const raisedSegment = `relative flex focus-visible:z-10 data-[disabled]:cursor-not-allowed ${busyCursor} ${focusRing}`
+
+const raisedSegmentUnderside: Record<ButtonSize, string> = {
+    sm: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[4px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[4px]',
+    md: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[6px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[6px]',
+    lg: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[6px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[6px]',
+}
 
 const raisedSegmentFace: Record<ButtonSize, string> = {
     sm: '-ml-px rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[4px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-px [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[4px]',
@@ -201,9 +215,16 @@ function useButtonShape(
 function frameClassName({ appearance, variant, size, square, isSegment }: ButtonShape): string {
     if (appearance === 'raised') {
         return isSegment
-            ? raisedSegment
+            ? cn(
+                  raisedSegment,
+                  raisedUnderside,
+                  raisedFrames[variant],
+                  raisedHatchMotion[size],
+                  raisedSegmentUnderside[size]
+              )
             : cn(
                   raisedFrameBase,
+                  raisedHatchMotion[size],
                   raisedUndersideWidth[size],
                   raisedFrames[variant],
                   raisedRadius[size],
@@ -212,7 +233,7 @@ function frameClassName({ appearance, variant, size, square, isSegment }: Button
     }
     return cn(
         flatBase,
-        appearance === 'outline' ? outlineTones[variant] : flatTones[variant],
+        appearance === 'outline' ? cn(outlineTones[variant], outlineDisabled) : flatTones[variant],
         square ? flatSquarePadding[size] : flatPadding[size],
         isSegment && flatSegment,
         isSegment && flatSegmentTones[variant],
@@ -399,13 +420,7 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(fu
                 data-disabled={disabled ? '' : undefined}
                 className={cn(
                     appearance === 'raised'
-                        ? cn(
-                              raisedGroupBase,
-                              raisedUndersideWidth[size],
-                              raisedFrames[variant],
-                              raisedRadius[size],
-                              raisedUndersideRadius[size]
-                          )
+                        ? cn(raisedGroupBase, raisedRadius[size])
                         : cn(flatGroup, flatGroupTones[variant]),
                     className
                 )}

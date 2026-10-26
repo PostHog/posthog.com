@@ -1,5 +1,7 @@
 import React from 'react'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import WithSeparator from './WithSeparator'
@@ -27,6 +29,14 @@ export const doc: ComponentDoc = {
             Component: WithSeparator,
             source: withSeparatorSource,
         },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
+        },
     ],
     notes: [
         <>
@@ -41,5 +51,18 @@ export const doc: ComponentDoc = {
         <>
             Put <code>OTPField.Separator</code> between inputs to show the code in groups.
         </>,
+    ],
+    props: [
+        {
+            component: 'OTPField.Root',
+            rows: [
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'line'",
+                    defaultValue: "'inset'",
+                    description: 'Sets the shape of every input. Line shows each character slot as a bottom line.',
+                },
+            ],
+        },
     ],
 }

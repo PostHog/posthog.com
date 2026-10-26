@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input as BaseInput } from '@base-ui/react/input'
-import { fieldSizes, textInputFor } from '../styles'
+import { fieldAppearanceShape, fieldSizes, textInputFor } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName } from '../utils'
 
@@ -13,7 +13,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
     return (
         <BaseInput
             ref={ref}
-            className={mergeClassName(`${textInputFor(appearance)} ${fieldSizes[size]}`, className)}
+            className={mergeClassName(
+                `${textInputFor(appearance)} ${fieldSizes[size]} ${fieldAppearanceShape[appearance]}`,
+                className
+            )}
             {...props}
         />
     )

@@ -1,6 +1,5 @@
 import React from 'react'
 import { SearchInput } from 'components/UI/SearchInput'
-import { Card } from 'components/UI/Card'
 
 const imageLight =
     'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_09_at_17_05_35_2x_42e293fddd.png'
@@ -16,10 +15,8 @@ export default function Appearances(): JSX.Element {
                     <SearchInput aria-label="Search docs" placeholder="Search docs" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span className="text-sm font-bold">Soft</span>
-                    <Card.Root padding="sm">
-                        <SearchInput appearance="soft" aria-label="Search members" placeholder="Search members" />
-                    </Card.Root>
+                    <span className="text-sm font-bold">Line</span>
+                    <SearchInput appearance="line" aria-label="Search members" placeholder="Search members" />
                 </div>
                 <div className="flex flex-col gap-2">
                     <span className="text-sm font-bold">Pill</span>

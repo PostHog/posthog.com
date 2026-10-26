@@ -1,4 +1,6 @@
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Appearances from './Appearances'
 import appearancesSource from '!!../../rawSourceLoader!./Appearances.tsx?raw'
 import States from './States'
@@ -41,9 +43,17 @@ export const doc: ComponentDoc = {
             id: 'appearances',
             title: 'Appearances',
             description:
-                'Inset and soft match the other fields. Pill is a round search bar for the top of a list or a page. Floating is liquid glass for a search bar over images or content.',
+                'Inset and line match the other fields. Pill is a round search bar for the top of a list or a page. Floating is liquid glass for a search bar over images or content.',
             Component: Appearances,
             source: appearancesSource,
+        },
+        {
+            id: 'field-states',
+            title: 'Field states',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
         },
     ],
     notes: [
@@ -67,10 +77,10 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'appearance',
-                    type: "'inset' | 'soft' | 'pill' | 'floating'",
+                    type: "'inset' | 'line' | 'pill' | 'floating'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Use inset in forms, soft inside cards, pill for a search bar that stands alone above a list, and floating for a search bar over images or content.',
+                        'Sets the field shape. Use inset in forms, line where a box looks heavy, pill for a search bar that stands alone above a list, and floating for a search bar over images or content.',
                 },
                 {
                     name: 'value / defaultValue',

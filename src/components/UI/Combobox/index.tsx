@@ -13,6 +13,7 @@ import {
     checkListItem,
     chip,
     chipRemove,
+    fieldAppearanceShape,
     inputGroupFor,
     insetFocusRing,
     menuGroupLabel,
@@ -124,7 +125,12 @@ const InputGroup = React.forwardRef<HTMLDivElement, ComboboxInputGroupProps>(fun
         <SizeContext.Provider value={size}>
             <BaseCombobox.InputGroup
                 ref={setRef}
-                className={mergeClassName(`${inputGroupFor(appearance)} ${fieldGroupSizes[size]}`, className)}
+                className={mergeClassName(
+                    `${inputGroupFor(appearance)} ${fieldGroupSizes[size]} ${fieldAppearanceShape[appearance]} ${
+                        appearance === 'line' ? '[&_input]:px-0' : ''
+                    }`,
+                    className
+                )}
                 {...props}
             />
         </SizeContext.Provider>

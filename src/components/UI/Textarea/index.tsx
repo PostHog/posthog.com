@@ -1,13 +1,13 @@
 import React from 'react'
 import { Input as BaseInput } from '@base-ui/react/input'
-import { textareaSizes, textInputFor } from '../styles'
-import type { FieldSize } from '../styles'
+import { fieldAppearanceShape, textareaSizes, textInputFor } from '../styles'
+import type { FieldAppearance, FieldSize } from '../styles'
 import { assignRef, mergeClassName, useSmoothHeight } from '../utils'
 
 export type TextareaProps = Omit<BaseInput.Props, 'ref' | 'render' | 'type' | 'size'> &
     Pick<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'rows' | 'cols' | 'wrap'> & {
         size?: FieldSize
-        appearance?: 'inset' | 'soft'
+        appearance?: FieldAppearance
         autoExpand?: boolean
     }
 
@@ -32,7 +32,9 @@ export const Textarea = React.forwardRef<HTMLElement, TextareaProps>(function Te
             ref={setRef}
             render={<textarea rows={rows} cols={cols} wrap={wrap} />}
             className={mergeClassName(
-                `${textInputFor(appearance)} h-auto ${textareaSizes[size]} ${autoExpand ? contentHeight : fixedHeight}`,
+                `${textInputFor(appearance)} h-auto ${textareaSizes[size]} ${
+                    autoExpand ? contentHeight : fixedHeight
+                } ${fieldAppearanceShape[appearance]}`,
                 className
             )}
             {...props}

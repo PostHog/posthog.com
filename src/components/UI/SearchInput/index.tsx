@@ -10,6 +10,7 @@ import {
     fieldIconButtonIconSize,
     fieldIconButtonSizes,
     fieldSizes,
+    fieldAppearanceShape,
     searchGroupFor,
     searchRoundPadding,
 } from '../styles'
@@ -21,6 +22,7 @@ const searchIconSizes = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' } as const
 const clearButtonEdge = {
     box: { sm: '-mr-[6px]', md: '-mr-[7px]', lg: '-mr-[9px]' },
     round: { sm: '-mr-[10px] rounded-full', md: '-mr-[13px] rounded-full', lg: '-mr-[17px] rounded-full' },
+    line: { sm: '', md: '', lg: '' },
 } as const
 
 export type SearchInputProps = Omit<
@@ -87,6 +89,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
                 fieldSizes[size],
                 round && searchRoundPadding[size],
                 'min-h-0 gap-2',
+                !round && fieldAppearanceShape[appearance],
                 className
             )}
             data-disabled={disabled ? '' : undefined}
@@ -146,7 +149,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
                     className={cn(
                         fieldIconButtonSizes[size],
                         'mt-0 self-center',
-                        clearButtonEdge[round ? 'round' : 'box'][size]
+                        clearButtonEdge[round ? 'round' : appearance === 'line' ? 'line' : 'box'][size]
                     )}
                     onClick={clear}
                 />

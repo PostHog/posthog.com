@@ -40,7 +40,7 @@ export const cardInnerBottomRadius = 'rounded-b-[calc(var(--ui-card-radius)_-_1p
 
 export const cardAppearances = {
     glass: '',
-    solid: 'bg-white dark:bg-accent-dark',
+    solid: 'bg-white dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(255_255_255/0.05),rgb(255_255_255/0.05))]',
     dashed: 'border-dashed border-[rgb(var(--text-primary)/0.28)] dark:border-[rgb(var(--text-primary)/0.28)]',
 } as const
 
@@ -102,8 +102,10 @@ export const fieldFocusVisible =
 export const fieldFocusWithin =
     'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/70 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.2),0_0_0_3px_rgb(235_157_42/0.28)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
 
-export const fieldState =
-    'data-[disabled]:cursor-not-allowed data-[disabled]:border-dashed data-[disabled]:border-[rgb(var(--text-primary)/0.3)] data-[disabled]:bg-transparent data-[disabled]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)] data-[disabled]:opacity-70 data-[disabled]:shadow-none dark:data-[disabled]:bg-transparent dark:data-[disabled]:shadow-none data-[invalid]:border-red dark:data-[invalid]:border-yellow'
+export const disabledHatch =
+    '[&[data-disabled]:not([aria-busy=true])]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
+
+export const fieldState = `data-[disabled]:cursor-not-allowed data-[disabled]:border-dashed data-[disabled]:border-[rgb(var(--text-primary)/0.3)] data-[disabled]:bg-transparent ${disabledHatch} data-[disabled]:opacity-70 data-[disabled]:shadow-none dark:data-[disabled]:bg-transparent dark:data-[disabled]:shadow-none data-[invalid]:border-red dark:data-[invalid]:border-yellow`
 
 export const formsPluginReset = 'focus:outline-none focus:ring-0 focus:ring-offset-0'
 
@@ -117,28 +119,36 @@ const textInputBase = `${fieldState} ${formsPluginReset} h-9 w-full px-2.5 py-0 
 
 export const textInput = `${fieldSurface} ${fieldFocusVisible} ${textInputBase}`
 
-export type FieldAppearance = 'inset' | 'soft'
+export type FieldAppearance = 'inset' | 'line'
 
 const fieldTransition =
     'transition-[border-color,box-shadow,background-color] duration-150 ease-out motion-reduce:transition-none'
 
 const fieldAppearanceSurfaces: Record<FieldAppearance, string> = {
     inset: fieldSurface,
-    soft: `rounded-md border border-transparent bg-[rgb(var(--text-primary)/0.06)] hover:bg-[rgb(var(--text-primary)/0.09)] dark:bg-white/[0.07] dark:hover:bg-white/[0.1] ${fieldTransition}`,
+    line: `border-0 border-b border-[rgb(var(--text-primary)/0.24)] bg-transparent hover:border-[rgb(var(--text-primary)/0.45)] ${fieldTransition}`,
 }
 
 const fieldAppearanceFocusVisible: Record<FieldAppearance, string> = {
     inset: fieldFocusVisible,
-    soft: 'focus-visible:border-orange focus-visible:bg-[rgb(var(--text-primary)/0.04)] focus-visible:shadow-[0_0_0_3px_rgb(235_157_42/0.22)] dark:focus-visible:bg-white/[0.05] dark:focus-visible:shadow-[0_0_0_3px_rgb(235_157_42/0.3)]',
+    line: 'focus-visible:border-orange focus-visible:shadow-[0_1px_0_rgb(235_157_42)]',
 }
 
 const fieldAppearanceFocusWithin: Record<FieldAppearance, string> = {
     inset: fieldFocusWithin,
-    soft: 'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-[rgb(var(--text-primary)/0.04)] has-[:focus-visible]:shadow-[0_0_0_3px_rgb(235_157_42/0.22)] dark:has-[:focus-visible]:bg-white/[0.05] dark:has-[:focus-visible]:shadow-[0_0_0_3px_rgb(235_157_42/0.3)]',
+    line: 'has-[:focus-visible]:border-orange has-[:focus-visible]:shadow-[0_1px_0_rgb(235_157_42)]',
+}
+
+export const fieldAppearanceShape: Record<FieldAppearance, string> = {
+    inset: '',
+    line: 'rounded-none px-0 [&[data-disabled]:not([aria-busy=true])]:bg-none',
 }
 
 export const fieldTriggerSurface = (appearance: FieldAppearance): string =>
     `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusVisible[appearance]} ${fieldState}`
+
+export const fieldGroupSurface = (appearance: FieldAppearance): string =>
+    `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusWithin[appearance]} ${fieldState}`
 
 export const textInputFor = (appearance: FieldAppearance): string =>
     `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusVisible[appearance]} ${textInputBase}`

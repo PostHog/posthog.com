@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Groups from './Groups'
@@ -40,6 +42,14 @@ export const doc: ComponentDoc = {
             description: 'Select sm, md, or lg. The button uses the same size.',
             Component: Sizes,
             source: sizesSource,
+        },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
         },
     ],
     notes: [

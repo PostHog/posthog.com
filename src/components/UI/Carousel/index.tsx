@@ -314,7 +314,7 @@ export function Carousel({
                 )}
             </div>
             {multiple && (dots || canAutoplay) && (
-                <div className="relative mt-3 flex min-h-8 items-center justify-center">
+                <div className={cn('relative mt-3 flex min-h-8 items-center justify-center', canAutoplay && 'px-9')}>
                     {dots ? (
                         <div role="group" aria-label="Choose a slide" className="flex max-w-full flex-wrap">
                             {slides.map((_, index) => {

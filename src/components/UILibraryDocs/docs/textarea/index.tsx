@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import AutoExpand from './AutoExpand'
 import autoExpandSource from '!!../../rawSourceLoader!./AutoExpand.tsx?raw'
 import Basic from './Basic'
@@ -48,6 +50,14 @@ export const doc: ComponentDoc = {
             Component: Disabled,
             source: disabledSource,
         },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
+        },
     ],
     notes: [
         <>
@@ -75,15 +85,11 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'appearance',
-                    type: "'inset' | 'soft'",
+                    type: "'inset' | 'line'",
                     defaultValue: "'inset'",
-                    description: 'Sets the field shape. Use soft inside cards and popovers.',
+                    description:
+                        'Sets the field shape. Use line for a lighter form that must not look like a card or a section.',
                 },
-            ],
-        },
-        {
-            component: 'Textarea',
-            rows: [
                 {
                     name: 'autoExpand',
                     type: 'boolean',

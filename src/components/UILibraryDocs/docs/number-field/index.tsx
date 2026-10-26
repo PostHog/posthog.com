@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Disabled from './Disabled'
@@ -39,6 +41,14 @@ export const doc: ComponentDoc = {
             Component: Disabled,
             source: disabledSource,
         },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
+        },
     ],
     notes: [
         <>
@@ -69,11 +79,13 @@ export const doc: ComponentDoc = {
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
                 },
-            ],
-        },
-        {
-            component: 'NumberField.Group',
-            rows: [
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'line'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the field shape. Line shows only a bottom line and no divider before the steppers.',
+                },
                 {
                     name: 'children',
                     type: 'ReactNode',

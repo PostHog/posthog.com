@@ -6,12 +6,11 @@ import {
     fieldSizes,
     fieldStepperSizes,
     bareInput,
+    fieldAppearanceShape,
     fieldDivider,
-    fieldFocusWithin,
-    fieldState,
-    fieldSurface,
+    fieldGroupSurface,
 } from '../styles'
-import type { FieldSize } from '../styles'
+import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const Root = withClassName(BaseNumberField.Root, 'flex flex-col gap-1')
@@ -48,16 +47,18 @@ const ScrubAreaCursor = React.forwardRef<HTMLSpanElement, BaseNumberField.ScrubA
 )
 
 const SizeContext = React.createContext<FieldSize>('md')
+const AppearanceContext = React.createContext<FieldAppearance>('inset')
 const Input = React.forwardRef<HTMLInputElement, Omit<BaseNumberField.Input.Props, 'size'>>(function NumberFieldInput(
     { className, ...props },
     ref
 ) {
     const size = React.useContext(SizeContext)
+    const appearance = React.useContext(AppearanceContext)
     return (
         <BaseNumberField.Input
             ref={ref}
             className={mergeClassName(
-                `${bareInput} ${fieldSizes[size]} h-auto tabular-nums data-[disabled]:cursor-not-allowed`,
+                `${bareInput} ${fieldSizes[size]} h-auto tabular-nums data-[disabled]:cursor-not-allowed ${fieldAppearanceShape[appearance]}`,
                 className
             )}
             {...props}
@@ -96,10 +97,12 @@ const Decrement = React.forwardRef<HTMLButtonElement, BaseNumberField.Decrement.
 
 const Steppers = ({ className }: { className?: string }): JSX.Element => {
     const size = React.useContext(SizeContext)
+    const appearance = React.useContext(AppearanceContext)
     return (
         <span
             className={cn(
-                `flex shrink-0 flex-col self-stretch border-l ${fieldDivider} ${fieldStepperSizes[size]}`,
+                `flex shrink-0 flex-col self-stretch ${fieldDivider} ${fieldStepperSizes[size]}`,
+                appearance === 'inset' && 'border-l',
                 className
             )}
         >
@@ -116,23 +119,27 @@ const defaultGroupContent = (
     </>
 )
 
-export type NumberFieldGroupProps = BaseNumberField.Group.Props & { size?: FieldSize }
+export type NumberFieldGroupProps = BaseNumberField.Group.Props & { size?: FieldSize; appearance?: FieldAppearance }
 const Group = React.forwardRef<HTMLDivElement, NumberFieldGroupProps>(function NumberFieldGroup(
-    { size = 'md', className, children = defaultGroupContent, ...props },
+    { size = 'md', appearance = 'inset', className, children = defaultGroupContent, ...props },
     ref
 ) {
     return (
         <SizeContext.Provider value={size}>
-            <BaseNumberField.Group
-                ref={ref}
-                className={mergeClassName(
-                    `${fieldSurface} ${fieldFocusWithin} ${fieldState} flex w-32 overflow-hidden ${fieldSizes[size]} px-0 text-primary`,
-                    className
-                )}
-                {...props}
-            >
-                {children}
-            </BaseNumberField.Group>
+            <AppearanceContext.Provider value={appearance}>
+                <BaseNumberField.Group
+                    ref={ref}
+                    className={mergeClassName(
+                        `${fieldGroupSurface(appearance)} flex w-32 overflow-hidden ${
+                            fieldSizes[size]
+                        } px-0 text-primary ${fieldAppearanceShape[appearance]}`,
+                        className
+                    )}
+                    {...props}
+                >
+                    {children}
+                </BaseNumberField.Group>
+            </AppearanceContext.Provider>
         </SizeContext.Provider>
     )
 })

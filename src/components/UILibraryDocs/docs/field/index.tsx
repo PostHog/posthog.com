@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import AppearanceStates from './AppearanceStates'
+import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Appearances from './Appearances'
 import appearancesSource from '!!../../rawSourceLoader!./Appearances.tsx?raw'
 import Basic from './Basic'
@@ -79,9 +81,17 @@ export const doc: ComponentDoc = {
             id: 'appearances',
             title: 'Appearances',
             description:
-                'Inset is the default for forms. Soft suits fields inside cards and popovers, where a second inset box looks heavy. For a search bar, use SearchInput, which also has pill and floating shapes.',
+                'Inset is the default for forms. Line shows only a bottom line, so a field does not look like a card or a section. It is the field version of the outline button. For a search bar, use SearchInput, which also has pill and floating shapes.',
             Component: Appearances,
             source: appearancesSource,
+        },
+        {
+            id: 'states',
+            title: 'States',
+            description:
+                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+            Component: AppearanceStates,
+            source: appearanceStatesSource,
         },
     ],
     props: [
@@ -96,10 +106,10 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'appearance',
-                    type: "'inset' | 'soft'",
+                    type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
+                        'Sets the field shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
                 },
             ],
         },
@@ -114,19 +124,20 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'appearance',
-                    type: "'inset' | 'soft'",
+                    type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Keep inset for forms. Use soft inside cards, popovers, and dialogs.',
+                        'Sets the field shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
                 },
             ],
         },
     ],
     notes: [
         <>
-            Use the default <code>inset</code> appearance for form fields. Use <code>soft</code> when the field sits
-            inside a card, a popover, or a dialog. Do not mix appearances in one form. For a search bar, use{' '}
-            <Link to="/components/ui/search-input">SearchInput</Link>.
+            Use the default <code>inset</code> appearance for form fields. Use <code>line</code> when boxed fields look
+            heavy, for example inside a card, a popover, or a dialog. Input, Field.Control, Textarea, Select, Combobox,
+            Autocomplete, NumberField, OTPField, and SearchInput all have <code>line</code>. Do not mix appearances in
+            one form. For a search bar, use <Link to="/components/ui/search-input">SearchInput</Link>.
         </>,
         <>
             The default <code>validationMode</code> is <code>onSubmit</code>. A field outside a form thus never shows
