@@ -45,7 +45,7 @@ const CUSTOMER_SLUGS = ['elevenlabs', 'kilocode', 'juicebox', 'exa']
 const IMAGES = {
     projectorHog: 'https://res.cloudinary.com/dmukukwp6/image/upload/projector_movie_noir_b2dd613e79.png',
     monitorsHog:
-        'https://res.cloudinary.com/dmukukwp6/image/upload/noir_desk_relax_surveillance_computer_63a434c398.png',
+        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/noir_desk_relax_surveillance_computer_4d8e09a4f0.png',
 } as const
 
 // ─────────────────────────────────────────────
@@ -122,8 +122,8 @@ const HeroSection = () => {
                 </div>
                 <div className="w-full max-w-xs mx-auto @4xl/reader-content:mx-0 @4xl/reader-content:w-[38%] @4xl/reader-content:max-w-none">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144675_8d8c4d3881.png"
-                        alt="A Replay Vision observation showing the verdict, confidence score, and timestamped reasoning"
+                        src={IMAGES.monitorsHog}
+                        alt="A detective relaxing at a desk while watching three product monitors"
                         className="w-full"
                         imgClassName="w-full h-auto"
                     />
