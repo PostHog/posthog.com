@@ -15,10 +15,20 @@ export const LearnShellContext = createContext(false)
  * Learn's ReaderView and product sidebar. AppWindow renders it around every `/learn/<product>`
  * page, so the sidebar stays mounted when the reader moves between Learn pages.
  */
-export default function LearnShell({ path, children }: { path: string; children: React.ReactNode }): JSX.Element {
+export default function LearnShell({
+    path,
+    productHandle,
+    children,
+}: {
+    path: string
+    /** Skips the lookup by path. `LearnPage` passes it when it renders its own shell. */
+    productHandle?: string
+    children: React.ReactNode
+}): JSX.Element {
     const products = useProduct() as any[]
     const currentPath = path.replace(/\/$/, '')
     const productData = products.find((product) => {
+        if (productHandle) return product.handle === productHandle
         const learnUrl = product.pocketGuideVolume && surfaceBasePath(product.slug, 'learn')
         return learnUrl && (currentPath === learnUrl || currentPath.startsWith(`${learnUrl}/`))
     })

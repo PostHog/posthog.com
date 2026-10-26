@@ -79,5 +79,12 @@ export default function LearnPage({
         </>
     )
 
-    return inShell ? content : <LearnShell path={location.pathname}>{content}</LearnShell>
+    // No shell from AppWindow (the path matched no product), so supply one by handle.
+    return inShell ? (
+        content
+    ) : (
+        <LearnShell path={location.pathname} productHandle={productHandle}>
+            {content}
+        </LearnShell>
+    )
 }
