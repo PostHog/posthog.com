@@ -46,13 +46,19 @@ PostHog is a global company. Our team and our customers are distributed around t
 
 ### Use sentence case for titles
 
-Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay tools", not "PostHog has Product Analytics and Session Replay tools".
+Write "Documentation style guide", not "Documentation Style Guide".
 
-But...
+### Capitalize product names, not categories
 
-### Capitalize product names and proper nouns as appropriate
+Capitalize a product's name when you refer to the product itself – it's a proper noun.
 
-When using a product's name, capitalize it as a proper noun, like: "PostHog's second product was Session Replay." When referring to the general industry term while _not_ referencing a product name, you'd use it lowercase, like: "how many companies now offer product analytics."
+> **Example:** "PostHog's second product was Session Replay." or "PostHog Product Analytics supports SQL insights."
+
+Use lowercase when you refer to the general capability, category, or industry, even when PostHog is the subject.
+
+> **Example:** "PostHog has product analytics and session replay tools." or "How many companies now offer product analytics?"
+
+A quick test: if you can swap in "the product called X", capitalize it. If you can swap in "that kind of tool", use lowercase.
 
 ### Capitalize acronyms and define where needed
 

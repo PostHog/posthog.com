@@ -1,0 +1,62 @@
+---
+title: Linking Elasticsearch as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Elasticsearch
+---
+
+The Elasticsearch connector syncs data from your Elasticsearch cluster into the PostHog data warehouse. Each non-system index and data stream in your cluster becomes a separate table you can query alongside your PostHog data.
+
+## Available tables
+
+Tables are dynamically discovered from your Elasticsearch cluster rather than being predefined. When you connect a cluster, PostHog lists all non-system indices and non-hidden, non-system [data streams](https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams.html). System indices (those starting with `.` like `.kibana`) and hidden or system data streams are filtered out.
+
+For each index:
+
+- The Elasticsearch `_id` field becomes the primary key
+- All fields from `_source` become columns
+
+For each data stream:
+
+- The primary key is a composite of `_index` and `_id`, because `_id` is only unique within a single backing index
+- Each row includes an `_index` column identifying the backing index, plus all fields from `_source`
+
+> **Note:** Data stream discovery requires Elasticsearch 7.9 or later and credentials with the `view_index_metadata` privilege. If either requirement isn't met, data streams won't appear but index discovery still works normally.
+
+## Linking Elasticsearch
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog.
+2. Click **New source** and select **Elasticsearch**.
+3. Enter your Elasticsearch cluster URL (e.g., `https://my-deployment.es.us-east-1.aws.found.io:9243`). If you omit the scheme, `https://` is used by default.
+4. Choose your authentication method:
+   - **Username and password** – enter your Elasticsearch username and password.
+   - **API key** – enter your Elasticsearch API key.
+5. _Optional:_ Add a prefix to your table names.
+6. Click **Next**, select the indices and data streams to sync, then click **Link**.
+
+The data warehouse then starts syncing your Elasticsearch data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Authentication
+
+Elasticsearch supports two authentication methods:
+
+- **Username and password** – uses HTTP basic authentication against your Elasticsearch cluster.
+- **API key** – uses the `Authorization: ApiKey` header for token-based authentication.
+
+The account or API key needs **read** access to the indices you want to sync. To discover data streams, the credentials also need the `view_index_metadata` privilege.
+
+## Sync method
+
+Elasticsearch uses **full refresh** sync only. Each sync re-reads the entire index or data stream because Elasticsearch indices don't have a reliable timestamp field to use as a cursor for incremental sync, and a data stream's `@timestamp` format varies by client.
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />

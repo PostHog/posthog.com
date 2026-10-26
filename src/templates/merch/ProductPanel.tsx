@@ -10,7 +10,7 @@ import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
-import { getProductMetafield, getDisplayTitle, calculateAspectRatioDimensions } from './utils'
+import { getProductMetafield, calculateAspectRatioDimensions } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
@@ -88,6 +88,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
      * variant in product.variants.
      */
     const variantForCart = product.variants.find((v) => v.shopifyId === selectedVariant?.id)
+    const activeSrc = variantForCart?.media?.find((item) => item.preview?.image?.originalSrc)?.preview?.image
+        ?.originalSrc
 
     const handleAddToCart = () => {
         setIsAdding(true)
@@ -109,18 +111,19 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     return (
         <div className={classes}>
-            <div className="image-wrapper mb-8 relative bg-white rounded-md border border-primary">
+            <div className="image-wrapper mb-12 relative bg-white rounded-md border border-primary">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
                     </div>
                 )}
-                <ProductCarousel product={product} containerWidth={containerWidth} />
+                <ProductCarousel product={product} activeSrc={activeSrc} containerWidth={containerWidth} />
             </div>
-            <div className="space-y-0.5 text-center">
-                <h3 className="text-base leading-snug">{getDisplayTitle(product)}</h3>
-                <p className="leading-tight text-sm">{subtitle}</p>
-            </div>
+            {subtitle && (
+                <div className="space-y-0.5 text-center">
+                    <p className="leading-tight text-sm">{subtitle}</p>
+                </div>
+            )}
 
             {loading && (
                 <div role="status" className="max-w-sm animate-pulse">

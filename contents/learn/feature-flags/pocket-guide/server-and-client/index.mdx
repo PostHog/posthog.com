@@ -1,0 +1,61 @@
+---
+title: Server and client-side flags
+shortTitle: Server and client-side flags
+subtitle: Evaluate where the code and data live, then keep both sides agreeing on who the person is.
+pocketGuideOrder: 2
+section: Instrument
+---
+
+<LeftPage>
+
+<SkillFigure n={1} caption="A skill that applies this page's rules. Copy it and give it to your agent before it adds your next flag check." />
+
+</LeftPage>
+
+<RightPage>
+
+# Server and client-side flags
+
+PostHog can evaluate a flag in the browser, on the server, or in both places. Choose the runtime based on where the gated code runs and which side has the data needed to evaluate it. An agent adding flag checks can follow the same rules <SeeFig n={1} />.
+
+## Choose where a flag is evaluated
+
+Evaluate a flag on the side that runs the code it gates and holds the properties its release conditions filter on.
+
+| Evaluate on | When | How |
+| --- | --- | --- |
+| Server | The gated code runs on the server, or the conditions use data only the server has, like the plan or account age | `evaluateFlags(user.id)`, with local evaluation |
+| Browser | The gated code is UI, and the browser knows every property the conditions use | `getFeatureFlag()`, after `identify()` |
+| Server, then browser | Both sides need the answer, or the UI needs it for the first render | Evaluate on the server and bootstrap the result for the first render; the browser then evaluates again |
+
+Default to one side per flag. A flag evaluated separately on the server and in the browser gets two chances to disagree, because each side can have a different distinct ID and different properties. When both sides need the answer, bootstrap the server's result for the first render; the browser then evaluates again, so [identity and properties must match](#keep-identity-and-properties-consistent). For a server-only flag, set its evaluation runtime to **Server-side only** so the browser SDK doesn't load it at all.
+
+Ask whether a person should ever see the other side of the flag. A browser flag hides a feature, but it doesn't protect it: the gated code ships in your JavaScript bundle, and the flag's answer shows in the network tab. If a leak would hurt, like an unannounced launch or new pricing, gate it on the server so the code never reaches the browser.
+
+## On the server, evaluate locally
+
+With <Term name="local evaluation">local evaluation</Term>, the server SDK downloads your flag definitions on a schedule and evaluates them in-process, so a check makes no network request. Billing counts the definition downloads, not the checks, so local evaluation is cheaper as well as faster.
+
+The trade-off is that you pass in the properties your conditions use, like the person's plan, and on the server you usually have those already. Local evaluation also needs a [project secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key), which stays on the server. Never ship it to a browser or a mobile app.
+
+When a check can't be evaluated locally, for example before the first definitions fetch lands, the SDK asks PostHog instead, unless you set `onlyEvaluateLocally`. Give every check a default for the case where neither gives an answer.
+
+## Keep identity and properties consistent
+
+For most flags the hash uses the distinct ID, so if your server checks with `user.id` while the browser still has an anonymous ID, one person can get a different answer on each side. In the browser, call `identify()` with the ID your server uses, before any flag check.
+
+Properties need the same care. If a condition filters on `plan`, the server passes the plan it knows, and the browser needs the same value, either as a person property or set with `setPersonPropertiesForFlags()` before the check. A side that doesn't have the property can reach a different answer from the side that does.
+
+## Pass the server's result to the client
+
+If the server already knows the answer, send it with the page. <Term name="bootstrapping">Bootstrapping</Term> passes those values into `posthog.init` under `bootstrap.featureFlags`, so the browser has them before the first render and never flashes the old version.
+
+Bootstrap every flag the page checks, including the ones your server evaluated as off. A flag you leave out reads as `undefined` until `/flags` responds, so your default in code decides what renders.
+
+<SeeAlso>
+
+See also: [Local evaluation](/docs/feature-flags/local-evaluation) · [Bootstrapping](/docs/feature-flags/bootstrapping) · [Evaluation contexts](/docs/feature-flags/evaluation-contexts) · [Stable identity](/docs/feature-flags/stable-identity-for-flags) · [Bootstrap flags in React and Express](/tutorials/bootstrap-feature-flags-react) · [Evaluation runtimes and contexts](/tutorials/evaluation-runtimes-and-contexts) · [Local evaluation, from Django to Rust](/blog/local-flag-evals-rust)
+
+</SeeAlso>
+
+</RightPage>

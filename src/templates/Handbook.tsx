@@ -122,8 +122,8 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
-            {location.pathname.startsWith('/docs/cdp/destinations') &&
-                location.pathname !== '/docs/cdp/destinations' && (
+            {location.pathname.startsWith('/docs/data-pipelines/destinations') &&
+                location.pathname !== '/docs/data-pipelines/destinations' && (
                     <div className="p-4 mb-8 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
                         <h5 className="m-0 text-lg font-bold leading-tight">Did somebody say destinations?</h5>
                         <p className="text-sm m-0 mb-3 mt-1.5">
@@ -360,20 +360,22 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const posthog = usePostHog()
     const { pathname } = useLocation()
     // Hand-written source docs use this template (not DataWarehouseSource). Show the
-    // warehouse wizard nudge on data-warehouse source URLs and on CDP source pages
-    // linked to a postHogSource.
+    // warehouse wizard nudge on data pipeline source URLs and on any page linked to a postHogSource.
     const showWarehouseWizardHint =
         !!postHogSource ||
-        pathname === '/docs/data-warehouse/sources' ||
-        pathname.startsWith('/docs/data-warehouse/sources/')
+        pathname === '/docs/data-pipelines/sources' ||
+        pathname.startsWith('/docs/data-pipelines/sources/')
 
     // Same nudge for AI observability SDK installation pages. The coding-agent integrations
     // (Claude Code, OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so
-    // running the wizard in a project doesn't set them up. The installation index has its own
-    // AI wizard section in the MDX.
+    // running the wizard in a project doesn't set them up. Anthropic renders the hint inside its
+    // Claude SDK tab only, because its Claude Platform tab has no project code to set up.
+    // The installation index has its own AI wizard section in the MDX.
     const showAIObservabilityWizardHint =
         pathname.startsWith('/docs/ai-observability/installation/') &&
-        !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+        !['anthropic', 'claude-code', 'openclaw', 'opencode', 'pi'].includes(
+            pathname.split('/').filter(Boolean).pop() ?? ''
+        )
 
     const releaseCallout = hasReleaseCallout(sourceReleaseStatus) ? (
         <SourceReleaseCallout releaseStatus={sourceReleaseStatus} />
@@ -392,8 +394,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         ) : undefined
 
     // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
-    // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
-    // which render /docs/cdp/sources/* content — are covered either way. Scoped to /docs so the
+    // Gated on the MDX slug (not `pathname`). Scoped to /docs so the
     // handbook and the Using PostHog manual, which share this template, stay unchanged.
     const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
 

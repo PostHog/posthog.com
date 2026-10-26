@@ -160,7 +160,7 @@ export default function PricingJourney(): JSX.Element {
 
                     <div className="mt-auto border-t border-primary pt-3">
                         <p className="text-sm text-secondary mb-4">
-                            Each product gets its own billing limit - going viral won't require another funding round.
+                            Most products get their own billing limit - going viral won't require another funding round.
                         </p>
                         <TrackedCTA
                             to={billingUrl}

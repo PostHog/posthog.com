@@ -72,7 +72,7 @@ The key to making our CI more efficient is defining the work that does **not** g
 
 - Increasing the speed of CI jobs like using a pre-migrated database schema (which decreased backend CI times from ~23 to ~15 minutes). 
 
-Alongside all this, we're streaming [GitHub data](/docs/data-warehouse/sources/github) into PostHog. This gives us engineering analytics that we can look at using [PostHog AI](/ai):
+Alongside all this, we're streaming [GitHub data](/docs/data-pipelines/sources/github) into PostHog. This gives us engineering analytics that we can look at using [PostHog AI](/ai):
 
 - What workflow jobs cost the most money?
 - Which take the most time?

@@ -390,6 +390,7 @@ export default function LennyProductPass(): JSX.Element {
             <SEO
                 title="PostHog for Lenny's Newsletter | Free Scale + 2x limits for a year"
                 description="Exclusive for Lenny's Newsletter annual subscribers: get PostHog Scale free and double the free tier on every product for 12 months. A $16,500 value, if you haven't paid PostHog before December 1, 2025."
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/677728804_3098b6bc_ef33_4236_946e_8b6f2f0e7fcc_744912cd1f.png"
                 structuredData={buildProductStructuredData({
                     name: "PostHog for Lenny's Newsletter",
                     description:

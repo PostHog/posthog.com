@@ -85,7 +85,7 @@ Qualifying a lead means you're investing time in it. It does not mean adding it 
 - Spend trajectory and engagement back up the expansion thesis you started with
 - You're confident enough to put an account plan in front of your lead and Simon
 
-The AM Managed segment is what triggers quota tracking. Adding an account too early, before you have real traction, locks you into carrying it against your 15-account cap without a clear path to quota credit. Simon reviews and approves AM Managed additions, so come with evidence, not just potential.
+The TAM field is what triggers quota tracking. Adding an account too early, before you have real traction, locks you into carrying it against your 15-account cap without a clear path to quota credit. Simon reviews and approves TAM field additions, so come with evidence, not just potential.
 
 **Track as a "nurture" but don't add yet** when:
 

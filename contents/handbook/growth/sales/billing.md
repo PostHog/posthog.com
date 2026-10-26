@@ -8,6 +8,8 @@ showTitle: true
 ## Managing billing
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+>
+> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA).
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -17,6 +19,8 @@ The Billing Service is the source of truth for product information, what plans a
 
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
+
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) if you have a question about a deal.
 
 For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
 
@@ -49,7 +53,7 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
-- **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
+- **If customer wishes to begin using credits  in the next billing cycle:** apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
 - If the client has an existing subscription, no further action is needed.

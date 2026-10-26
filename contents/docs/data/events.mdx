@@ -72,7 +72,7 @@ If something has been detected incorrectly, you can manually change the type by 
 
 ### Default properties
 
-Below is a list of some of the properties that PostHog captures by default in client-side apps. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts).
+Below is a list of some of the properties that PostHog captures by default in client-side apps. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser-common/src/utils/event-utils.ts).
 
 | Name                        | Key                     | Example value              |
 | --------------------------- | ----------------------- | -------------------------- |
@@ -167,6 +167,6 @@ You can rely on deduplication to modify events, for example if some events were 
 - Keep the `timestamp` identical to the original, or the event won't be deduplicated. Avoid sending a `sent_at` query parameter, as PostHog uses it to [adjust the timestamp](/docs/data/timestamps).
 - Omit `$set` and `$set_once` to avoid overwriting person properties that have changed since the event was originally ingested.
 - Person properties on the re-ingested event reflect the person's current values, not those at the time of the original event.
-- Downstream consumers like realtime destinations, webhooks, and [batch exports](/docs/cdp/batch-exports) may re-trigger or duplicate rows.
+- Downstream consumers like realtime destinations, webhooks, and [batch exports](/docs/data-pipelines/batch-exports) may re-trigger or duplicate rows.
 
 </CalloutBox>

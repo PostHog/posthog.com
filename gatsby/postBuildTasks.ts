@@ -1,4 +1,3 @@
-import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
 import nodeFetch from 'node-fetch'
@@ -8,66 +7,15 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import blogTemplate from '../src/templates/OG/blog.js'
-import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
-import customerTemplate from '../src/templates/OG/customer.js'
-import jobTemplate from '../src/templates/OG/job.js'
+import { createBlogOgImages } from './og/blog'
+import { createCustomerOgImages } from './og/customers'
+import { createDocsOgImages } from './og/docs'
+import { createJobOgImages } from './og/jobs'
+import { createTakumiRenderer, registerMatterFont } from './og/takumi'
 import { flattenMenu } from './utils'
 
 const limit = pLimit(10)
-const ogLimit = pLimit(20)
 const ogImagesDir = path.resolve(__dirname, '../og-images')
-
-export const createCareersOG = async () => {
-    if (!fs.existsSync(ogImagesDir)) fs.mkdirSync(ogImagesDir, { recursive: true })
-
-    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
-    const revisionInfo = await browserFetcher.download('982053')
-
-    const browser = await chromium.puppeteer.launch({
-        args: await chromium.args,
-        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
-        headless: true,
-        defaultViewport: {
-            width: 1200,
-            height: 630,
-        },
-    })
-    const page = await browser.newPage()
-    await page.setViewport({
-        width: 1200,
-        height: 630,
-    })
-
-    const url = 'https://posthog.com/careers-og/'
-    console.log(`Creating OG image for: ${url}`)
-
-    await page.goto(url, {
-        waitUntil: ['domcontentloaded', 'networkidle0'],
-    })
-
-    await page.waitForTimeout(1000)
-
-    await page.addStyleTag({
-        content: `
-            body {
-                width: 1200px;
-                height: 630px;
-            }
-            .ToastRoot {
-                display: none;
-            }
-            `,
-    })
-
-    await page.screenshot({
-        type: 'jpeg',
-        path: `${ogImagesDir}/careers-og.jpeg`,
-        quality: 100,
-    })
-
-    await browser.close()
-}
 
 export const createOGImages = async (data) => {
     if (!fs.existsSync(ogImagesDir)) fs.mkdirSync(ogImagesDir, { recursive: true })
@@ -89,171 +37,21 @@ export const createOGImages = async (data) => {
         })
     })
 
-    const font = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'), {
-        encoding: 'base64',
-    })
-
-    const browserFetcher = chromium.puppeteer.createBrowserFetcher()
-    const revisionInfo = await browserFetcher.download('982053')
-
-    const browser = await chromium.puppeteer.launch({
-        args: await chromium.args,
-        executablePath: revisionInfo.executablePath || process.env.PUPPETEER_EXECUTABLE_PATH,
-        headless: true,
-    })
-    async function createOG({ html, slug }) {
-        const page = await browser.newPage()
-        try {
-            await page.setViewport({
-                width: 1200,
-                height: 630,
-            })
-            await page.setContent(html, {
-                waitUntil: ['domcontentloaded', 'networkidle0'],
-            })
-
-            await page.evaluateHandle('document.fonts.ready')
-
-            const imagePath = `${ogImagesDir}/${slug.replace(/\//g, '')}.jpeg`
-            await page.screenshot({
-                type: 'jpeg',
-                path: imagePath,
-                quality: 100,
-            })
-            console.log(`Created OG image: ${path.basename(imagePath)}`)
-        } finally {
-            await page.close()
-        }
-    }
-
-    const jobs = []
-
-    // Blog post OG
-    for (const post of data.blog.nodes) {
-        const { title, authorData, featuredImage } = post.frontmatter
-        const image = featuredImage?.publicURL
-        const author =
-            authorData &&
-            authorData.map((author) => {
-                const image =
-                    author.profile?.avatar?.url ||
-                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
-                return {
-                    ...author,
-                    image,
-                }
-            })[0]
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: blogTemplate({ title, authorData: author, image, font }),
-                    slug: post.fields.slug,
-                })
-            )
-        )
-    }
-
+    const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
+    const takumi = await createTakumiRenderer()
+    await registerMatterFont(takumi, fontBuffer)
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])
-
-    // Docs and Handbook OG
-    for (const post of [...data.docsHandbook.nodes, ...data.tutorials.nodes]) {
-        const { title } = post.frontmatter
-        const { timeToRead, excerpt, fields, parent } = post
-        const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
-        const contributors = fields?.contributors.map((contributor) => {
-            const { avatar, username } = contributor
-            return {
-                username,
-                avatar,
-            }
-        })
-        let breadcrumbs = null
-        docsHandbookMenus.some((item) => {
-            if (item.url === fields.slug) {
-                breadcrumbs = item.breadcrumb
-                return true
-            }
-        })
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: docsHandbookTemplate({
-                        font,
-                        title,
-                        timeToRead,
-                        excerpt,
-                        lastUpdated,
-                        contributors,
-                        breadcrumbs: [
-                            {
-                                name: fields.slug.startsWith('/docs')
-                                    ? 'Docs'
-                                    : fields.slug.startsWith('/tutorials')
-                                    ? 'Tutorials'
-                                    : 'Handbook',
-                            },
-                            ...(breadcrumbs || []),
-                        ],
-                    }),
-                    slug: fields.slug,
-                })
-            )
-        )
-    }
-
-    // Customers OG
-    for (const post of data.customers.nodes) {
-        const { frontmatter } = post
-        const featuredImage = frontmatter.featuredImage?.publicURL
-        const logo = frontmatter.logo?.publicURL
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: customerTemplate({
-                        title: frontmatter.title,
-                        featuredImage,
-                        logo,
-                        font,
-                    }),
-                    slug: post.fields.slug,
-                })
-            )
-        )
-    }
-
-    for (const job of data.careers.nodes) {
-        const {
-            title,
-            parent,
-            fields: { slug },
-        } = job
-        const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
-        jobs.push(
-            ogLimit(() =>
-                createOG({
-                    html: jobTemplate({ role: title, font, timezone }),
-                    slug,
-                })
-            )
-        )
-    }
-
-    await Promise.all(jobs)
-
-    // Tutorials OG
-    // for (const post of data.tutorials.nodes) {
-    //     const { featuredImage } = post.frontmatter
-    //     const image = fs.readFileSync(featuredImage.absolutePath, {
-    //         encoding: 'base64',
-    //     })
-    //     await createOG({
-    //         html: tutorialTemplate({ image }),
-    //         slug: post.fields.slug,
-    //     })
-    // }
-
-    await browser.close()
+    await Promise.all([
+        createBlogOgImages(takumi, data.blog.nodes, ogImagesDir),
+        createJobOgImages(takumi, data.careers.nodes, ogImagesDir),
+        createDocsOgImages(
+            takumi,
+            [...data.docsHandbook.nodes, ...data.tutorials.nodes],
+            docsHandbookMenus,
+            ogImagesDir
+        ),
+        createCustomerOgImages(takumi, data.customers.nodes, ogImagesDir),
+    ])
 }
 
 export const createOrUpdateStrapiPosts = async (posts, roadmaps) => {

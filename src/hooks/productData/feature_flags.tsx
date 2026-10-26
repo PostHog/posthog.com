@@ -24,6 +24,7 @@ export const featureFlags = {
     Icon: IconToggle,
     type: 'feature_flags',
     teamSlug: 'feature-flags',
+    pocketGuideVolume: 'feature-flags',
     forumTag: 'feature-flags',
     color: 'seagreen',
     colorSecondary: 'seagreen',
@@ -34,7 +35,7 @@ export const featureFlags = {
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
-            "Deploy new features confidently with Feature Flags. Test in production, target cohorts, and measure impact through PostHog's integrated analytics and experiments.",
+            'Roll out features safely with Feature Flags. Target users and cohorts, test in production, and run A/B tests. 1M flag requests free every month.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_f536371cce.jpg',
     },
     /**

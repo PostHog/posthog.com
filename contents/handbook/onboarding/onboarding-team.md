@@ -53,7 +53,7 @@ A few things to keep in mind:
 - If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
 - If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
 
-Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in Vitally for more context, and check whether they booked a call. Change the status in Vitally to `Paid Call purchased` for tracking purposes, and add a note if needed.
+Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in PostHog Customer Analytics for more context, and check whether they booked a call. Change the status in PostHog Customer Analytics to `Paid Call purchased` for tracking purposes, and add a note if needed.
 
 ### Tooling
 
@@ -61,7 +61,7 @@ Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/s
 
 The team-specific tools for this team are:
 
-- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
+- Onboarding hub in PostHog Customer Analytics, and [comprehensive onboarding view](https://us.posthog.com/project/2/customer_analytics/accounts?view=01a11d0a-3430-73f3-be27-777e0b6c904b) with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
 - [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
 - [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.

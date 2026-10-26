@@ -358,7 +358,6 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -446,7 +445,6 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -498,7 +496,6 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
-    closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
 }
@@ -738,40 +735,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/careers-og': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 800,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
-        },
-    },
     '/paint': {
         size: {
             min: {
@@ -979,7 +942,6 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -1058,7 +1020,6 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -1611,6 +1572,22 @@ const appSettings: AppSettings = {
         toolbar: true,
         hideTitle: true,
     },
+    '/field-guide': {
+        toolbar: false,
+        hideTitle: true,
+    },
+    '/field-guide/foreword': { toolbar: false, hideTitle: true },
+    '/field-guide/closing-note': { toolbar: false, hideTitle: true },
+    '/field-guide/the-rage-clicker': { toolbar: false, hideTitle: true },
+    '/field-guide/the-refreshing-pilgrim': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tab-hopper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-halfway-houdini': { toolbar: false, hideTitle: true },
+    '/field-guide/the-pricing-page-loiterer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tutorial-skipper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-modal-slammer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-phantom-returner': { toolbar: false, hideTitle: true },
+    '/field-guide/the-dead-end-wanderer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-console-opener': { toolbar: false, hideTitle: true },
     '/trash': {
         toolbar: true,
     },
@@ -1644,7 +1621,6 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
     scrollbars?: 'system' | 'show' | 'auto'
@@ -1653,6 +1629,24 @@ export interface SiteSettings {
 const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+const readStoredSiteSettings = (): Partial<SiteSettings> => {
+    if (typeof window === 'undefined') {
+        return {}
+    }
+    try {
+        const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
+    } catch (error) {
+        console.error('Failed to read site settings:', error)
+        return {}
+    }
+}
 
 const getInitialSiteSettings = (): SiteSettings => {
     const siteSettings: SiteSettings = {
@@ -1664,9 +1658,8 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        ...readStoredSiteSettings(),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
@@ -1695,7 +1688,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
@@ -1756,18 +1748,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
-    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
+    const sourcesNav = useSourcesNav('/docs/data-pipelines/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': cdpSourcesNav,
-            'data-warehouse-sources': dwSourcesNav,
+            'data-pipeline-sources': sourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )
 
     const desktopParams = useMemo(() => {
@@ -2729,7 +2719,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {

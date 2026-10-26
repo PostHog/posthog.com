@@ -24,13 +24,14 @@ We also have a growing library of **[PostHog skills](https://github.com/PostHog/
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
-## Self-serve and price a standard migration
+## Self-serve and price our standard FDE packages
 
-If a customer is moving to PostHog from another product analytics tool, TAEs / TAMs can price a standard FDE-assisted migration without waiting on us.
+For certain types of FDE engagements, TAEs / TAMs can self-serve and price standard packages without needing to wait for FDE to scope it out manually. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
-You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+- **PostHog Foundations 0-1**, for customers in a PoC or trial who would benefit from FDE assistance to ensure they are production-ready from day 1. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/foundations/">PostHog Foundations 0-1 proposal builder</PrivateLink>.
+- **Managed Migrations**, for customers moving to PostHog from another product analytics tool. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink>.
 
-If the migration doesn't fit the standard package, bring it to #team-fde instead.
+If the customer doesn't fit a standard package, bring it to #team-fde instead.
 
 ## If the customer still needs hands-on help
 

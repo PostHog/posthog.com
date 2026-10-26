@@ -3,7 +3,7 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in spend, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
+We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/new-business-how-we-work). Once an account hits $20k a year in usage-based spend, or is on a non-legacy Enterprise plan, a [Customer Success Manager](/handbook/cs-and-onboarding/how-we-work) becomes the point of contact. A [Technical Account Manager](/handbook/growth/sales/how-we-work#technical-account-managers) is added on top only where there's a qualified growth opportunity.
 
 The [customer journey and coverage model](/handbook/growth/sales/customer-journey) covers the phases an account moves through and who covers it at each one. This page covers the operational side: book planning, how TAMs get added and removed, and handover mechanics.
 
@@ -13,7 +13,7 @@ We're partway through this transition. Not every $20k+ account has a CSM yet, so
 
 ### CSMs are the base layer
 
-Every $20k+ account gets a [CSM](/handbook/cs-and-onboarding/customer-success). They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
+Every account at $20k+ in usage-based ARR, or on an Enterprise plan, gets a [CSM](/handbook/cs-and-onboarding/customer-success). The threshold is what the customer actually consumes, not what they've contracted for: signing a prepaid or annual contract doesn't make an account a CSM account on its own. They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
 
 ### TAMs are an overlay
 
@@ -50,6 +50,46 @@ Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/
 
 ---
 
+## Account ownership in Customer Analytics
+
+Customer Analytics is the source of truth for account ownership. Billing and Salesforce get owner changes from Customer Analytics. The sync goes in one direction only: Customer Analytics to billing to Salesforce. A change shows in Salesforce in 5-10 minutes.
+
+### Assigned is not the same as owned
+
+**You are considered assigned to the account in Customer Analytics when you are assigned to the correct field (account executive, csm, etc)  and relevant tags are applied to the account.** 
+
+Only accounts assigned to you count toward quota and commission.
+
+### Automated assignments are temporary
+
+The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
+
+A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics and remove any relevant tags.
+
+Do not change the owner in Salesforce. For an account that Customer Analytics controls, Customer Analytics writes over the Salesforce owner. An account without a PostHog organization is not in Customer Analytics, so you can manage it in Salesforce. If the account gets a PostHog organization later, the Salesforce owner becomes the owner in Customer Analytics.
+
+### Technical Account Managers
+
+- Team Leads will assign you as the TAM on the account in Customer Analytics and add the 'AM Managed' tag. 
+- The account must have the `AM Managed` tag to count toward your quota. Do not add or tag yourself. See the [TAM book of business rules](/handbook/growth/sales/how-we-work#tam-book-of-business-rules).
+
+### Technical Account Executives
+
+- Your TAE assignment comes from Salesforce automatically. The `AE Managed` tag does not.
+- Add the `AE Managed` tag in Customer Analytics yourself, with approval from your team lead. Without it, the account does not count toward your quota.
+
+### Ownership history
+
+The `system.account_relationships` table keeps the history of all account relationships. Each row is one person in one role on one account:
+
+- `started_at` is the date the relationship started.
+- `ended_at` is the date the relationship stopped. It is empty while the relationship is active.
+- `definition_id` joins to `system.account_relationship_definitions` for the role name. `account_id` joins to `system.accounts`.
+
+Use this table to find who owned an account at a given date.
+
+---
+
 ## TAM book balance
 
 TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
@@ -82,7 +122,104 @@ To flag an account, add the `tam overlay needed` tag to it in Customer Analytics
 
 The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Customer Analytics and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-We track coverage in Customer Analytics with the existing tags: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both tags has both.
+We track coverage in Customer Analytics with the CSM account relationship for the base layer and the TAM assigned for the TAM overlay. An account can have both.
+
+### When to request an overlay
+
+Every $20k+ account has a CSM, so every customer has someone who knows them. On a CSM account, a TAM's job is selling expansion nobody on the customer's side is driving yet, like a new team, a new budget, or replacing a competitor. The TAM stays while there's more of that to work.
+
+An overlay isn't extra coverage. If an account needs more hands, ask your team lead first, then bring in another CSM, an FDE, or exec support.
+
+An account's size doesn't add a TAM on its own. [Top 40 accounts](#top-40-account-management) and [TAE handovers](#handing-over-customers) have their own rules.
+
+**Who's pushing decides who works it.**
+- **The customer is pulling.** They're asking for a trial, asking how to switch, or they already want it. The CSM works it, at any size, competitor swaps included.
+- **We're making the case.** We have to find the budget, or get a new team or an exec to care. That's TAM work: multi-threading, exec relationships and deal structuring are what they do best.
+
+CSMs can and should push too. Request a TAM when the push needs more than you can give alongside your retention work, usually because it's stalled on a person or a budget rather than on the product. If it's unclear which side an opportunity sits on, flag it and let the TAM decide.
+
+A quick litmus test to assess whether you can carry it yourself: can the people you already work with turn this on? If yes, keep going. If it has to go up the chain or across to another team, consider a TAM.
+
+Flagging is part of the CSM role: a short note with the context. Whether it becomes an overlay is the TAM's call, and they own it.
+
+Request a TAM overlay when a significant expansion opportunity is qualified, and we're the ones pushing it. It's a meaningful expansion rather than a small add-on, and your retention work on the account doesn't leave enough room to drive it. It's your call: if scoped extra help on expansion is in the customer's interest, request a TAM to push it over the finish line.
+
+**What counts as a qualified expansion opportunity?**
+If all of the below are true:
+- **There's a real use case and someone who'd own it.**
+- **Someone on the customer's side is interested.** The CSM has already pitched it, you know what they use today and why. If they've said no, respect it and bring it up again only when it comes up naturally.
+- **If the expansion opportunity has stalled, it's because of a person on the customer's team, not the product.**  If no one on the customer's team owns the decision to turn off an existing competitive tool, that's a good problem for a TAM to jump in. If they need a feature we don't have, that's a PR or workaround for the CSM. 
+
+**When not to request an overlay**
+- A single cross-sell that comes up naturally, or a customer who already wants to adopt one product after you pitch it.
+- A large, risky, or very active account with no expansion opportunity. If the account needs more hands to de-risk, ask your team lead first, then bring in another CSM, an FDE, or exec support.
+- A customer who doesn't reply to the CSM. A TAM just gives them another person to ignore. Work out why they've gone quiet first.
+- Churn risk. De-risking an account is CSM work. See [churn saves](#churn-saves).
+- The account is being right-sized (tagged `cost optimizing`). [Pause expansion work](/handbook/growth/sales/risk-mitigation-and-churn-prevention#implementation-health) until they're at their target monthly spend.
+- You've identified other teams that could adopt PostHog, the customer uses a competitor for something we do, or they've just raised a funding round, acquired a company or gone on a hiring push. These are signals to do more discovery first. 
+
+A [competitive renewal](#competitive-renewal) is a separate call the CSM makes and doesn't need these criteria. However, it's a narrower engagement where the TAM is there to help win the renewal, not to work several expansion opportunities over the long term.
+
+#### Before you tag the account
+
+Do what you can first. Then have an answer for: **what would a TAM take on that I can't?** Show what you've done and where you've hit the limit of what you can take on alongside your retention work.
+
+If all of the above checks out, then add the `tam overlay needed` tag in Customer Analytics and add a note with the context the TAM needs to qualify the opportunity.
+
+TAM team leads answer a request within two weeks: a TAM assigned, a no with the reason, or when a TAM will have room. The assigned TAM then qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential), and either joins or documents in Customer Analytics why not.
+
+Here's what your note in Customer Analytics could look like. This isn't a hard requirement - use it as a concrete way to sense check your request. 
+
+```
+Title: TAM overlay request [YYYY-MM-DD]
+Account: [account]
+
+Why a TAM:
+[ ] We're pushing this, not the customer: what we'd have to do (find budget, reach a new team, get an exec to care)
+
+The opportunity (this is what the overlay is measured on):
+- [product] — use case — who'd own it
+
+If known:
+Estimated new ARR, and how you got the number
+Pain: what problem this solves for them
+Economic buyer: who controls the budget
+Champion: who's pushing for it internally
+Competition: what they use today, incl. doing nothing
+
+What I've tried: pitches, calls, links
+
+The opportunity is qualified (check all):
+[ ] Real use case and someone who'd own it
+[ ] Someone on the customer's side is interested: pitched, current tool known, no explicit rejection from the customer
+[ ] If stalled, the stall is on a person, not a missing feature
+Next step: what the TAM should do first
+```
+
+#### Capacity
+
+There's no fixed number of TAMs or overlay accounts per CSM. The work comes in bursts and varies by account: number of active users, how often they engage with us, and ARR all shape the load.
+
+TAM books are planned with room for mid-quarter requests, so a qualified request shouldn't have to wait for the next quarter's allocation. If no TAM has room, the request can sit CSM-only until one does, and the team lead says when that will be. Keep working the opportunities in the meantime.
+
+When the TAM joins, it might be useful to tell the customer what they're there for (for example, "joining to help explore error tracking with your platform team"), so it reads as an addition with a clear purpose, not a salesy fishing trip. See [kicking off the overlay](/handbook/growth/sales/csm-tam-overlay-coverage#kicking-off-the-overlay) for guidance on kicking off an overlay.
+
+#### What good looks like
+
+This section covers overlays a CSM requests. Accounts where the TAM was there before the CSM aren't measured here.
+
+The number of overlays isn't the goal. Each quarter, we look at two things:
+
+1. **Is each overlay doing its job?** Of the overlays started, how many turned the opportunity named in the request note into closed-won expansion. Only that opportunity counts, so the overlay is judged on what it set out to do.
+2. **What happens without an overlay?** Track the requests that were declined or had to wait, and what happened to their requested overlay opportunities. There won't be many, and TAMs will naturally take the strongest ones first, so the two possible results don't mean the same thing:
+    - **The declined or waiting ones close about as often as the accepted ones.** They were the weaker requests and did just as well, so the overlay probably isn't adding much.
+    - **The accepted ones close more often.** That's a good sign, though TAMs may also have taken the best requests, so read it alongside measure 1.
+
+    Either way, it doesn't prove anything on its own, but it's a useful signal for the quarterly reviews.
+
+We count from Q1 2027, and only overlays a CSM requested. Accounts that already had a TAM before then are left out.
+
+The request note is the record, since the `tam overlay needed` tag comes off once a TAM is assigned. At the end of each quarter, TAM and CSM team leads review the requests together: which were taken or declined and why, what closed, and what happened to the ones declined. TAM team leads then share it in public in Slack. We change these criteria based on what that shows.
 
 ---
 
@@ -103,7 +240,7 @@ The CSM stays on, so nothing about the customer relationship changes from their 
 - **A handover note in Customer Analytics** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, who the real decision makers are, and who on the customer side owns the renewal (champion or procurement, and how the last one went). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
-- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` tag from the account, with Ben's approval.
+- **Removing the TAM in Customer Analytics.** Once the note and call are done, the team lead clears the TAM field from the account, with Ben's approval.
 
 If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
 
@@ -128,11 +265,11 @@ Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM al
 
 A TAM is added on top of CSM coverage where an opportunity qualifies. At the start of each quarter, TAM team leads, with Ben's approval, review:
 
-1. **Accounts tagged `tam overlay needed`** where a CSM has identified a growth opportunity
+1. **Accounts still tagged `tam overlay needed`** that are waiting for a TAM with room. New requests don't wait for this review: they get an answer within two weeks (see [before you tag the account](#before-you-tag-the-account))
 2. **TAM books outside the $1.5M-$2M ARR band** to identify which accounts to rebalance
 3. **Accounts where the TAM should be removed** because expansion is exhausted
 
-Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics.
+Once the decision is settled, the team lead updates the tags and assigns the specific TAM in Customer Analytics. When the TAM is assigned, remove the `tam overlay needed` tag.
 
 To request CSM coverage, add:
 
@@ -147,7 +284,7 @@ Every $20k+ account should have a CSM. At the start of each quarter, CSM team le
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
 3. **CSM books outside the current target** to identify which accounts should be rebalanced
 
-For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics.
+For accounts with no previous owner, use PostHog GeoIP data to identify the account's primary region. The relevant team lead then assigns the CSM in Customer Analytics. Once the CSM is assigned, a <PrivateLink url="https://us.posthog.com/project/2/workflows/01a00fc0-0f90-0000-6aa7-b78a941c08cb/workflow">workflow removes the tags automatically</PrivateLink>.
 
 > Once a day an <PrivateLink url='posthog-code://loop/9f441418-1400-4839-b82c-4ce3f8bcb2cb'>automation</PrivateLink> runs which adds a region tag to the account to assist in routing to the correct team.
 
@@ -159,7 +296,7 @@ Account removals should only happen at the end of the quarter so that quota can 
 
 If you're assigned an account with a previous owner, work with them on a proper handover. If the customer isn't in a healthy state (usage and engagement-wise), push back and ask the previous owner to get them to a good state first.
 
-> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the `AM Managed` tag to be added until you're confident there's growth potential.
+> New accounts with no previous owner come with a 3 month grace period – if they churn in that initial period, they won't count against your quota. Don't ask for the TAM field to be set until you're confident there's growth potential.
 
 ---
 
@@ -173,7 +310,7 @@ Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding o
 
 To help the new owner hit the ground running, we should make sure the customer is in a good state and a warm introduction happens.
 
-TAE handoff goes to a CSM, always. This typically happens when onboarded, around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time.
+If the account is at $20k+ in usage-based ARR or on a non-legacy Enterprise plan, the TAE handoff always goes to a CSM. Signing a prepaid or annual contract doesn't trigger the handoff by itself: the account needs to be onboarded and consuming at the $20k threshold. The handover typically happens around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time. If usage is still under the threshold at the 3 month mark, the TAE hands the renewal opportunity over to the relevant CSM team lead to work the renewal and monitor the account. The team lead is responsible for ensuring the renewal is managed by a CSM as per the [renewal handbook guidelines](/handbook/cs-and-onboarding/renewals#when-to-start). The team lead is not responsible for support or proactive adoption work. Once the account reaches $20k+ in usage-base ARR, it will be queued for a CSM's book.
 
 TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding a TAM](#adding-a-tam-to-an-account) and [Removing a TAM](#removing-a-tam-from-an-account) above.
 

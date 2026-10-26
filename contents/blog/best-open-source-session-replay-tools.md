@@ -38,7 +38,7 @@ In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alter
 
 [PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
 
-This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
+This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternatives).
 
 PostHog's [session replay](/docs/session-replay) includes console logs, network activity, a DOM explorer, and performance metrics so you can identify the root cause of bugs without leaving the replay. You can filter recordings by user, event, feature flag, or any combination of properties, save playlists of related sessions, and export recordings offline for safe keeping. 
 
@@ -159,8 +159,8 @@ UXWizz is a good choice for individuals and small businesses who want quick, qua
 
 UXWizz is self-hosted only with a one-time license fee. 
 
-- The **Personal** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
-- The **Company** license is $799 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
+- The **Solo** license is $299 and covers unlimited websites, visitors, recordings, and heatmaps for a single user.
+- The **Growth & Scale** license is $799 and adds unlimited dashboard users for teams. Both include one year of free support and updates, with extensions available as paid add-ons. 
 - The **Agency** license is $2,490 and includes white-labeling, custom branding, custom dashboard pages, domain limits per user, and up to 5 servers – intended for agencies managing analytics on behalf of clients. 
 
 All tiers include one year of free support and updates, with extensions available as paid add-ons. There is no cloud version and no free tier, though a free trial is available.
@@ -262,7 +262,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 

@@ -51,7 +51,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 | Fathom | Multi-site agencies | ✔ | ✖ | ✔ | None |
 | Matomo | GA replacement | ✔ | ✔ | ✔ | Self-host only |
 | Vercel | Vercel users | ✖ | ✖ | ✔ | 50k events |
-| Countly | Mobile apps | ✔ | ✔ | ✖ | 500 MAU |
+| Countly | Mobile apps | ✔ | ✔ | ✖ | Self-host only |
 | TelemetryDeck | iOS/Android apps | ✔ | ✖ | ✔ | 100k signals |
 | GoAccess | Sysadmins | ✔ | ✔ | ✔ | Unlimited |
 
@@ -279,7 +279,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-The SaaS version is free up to 500 MAU; for additional tracking, the Flex plan starts at $40/month for 1,000 MAU, and can scale up to 160,000 MAU at $4300/month. The Enterprise plan requires a custom quote.
+The Flex plan (private cloud) starts at $175/month with usage-based pricing and a 14-day free trial. The Enterprise plan requires a custom quote.
 
 Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 
@@ -369,7 +369,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 

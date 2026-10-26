@@ -21,7 +21,7 @@ analytics at the company or workspace level rather than an individual person.  T
 do however need to [implement group tracking](/docs/product-analytics/group-analytics#how-to-create-groups) in their PostHog SDK.  Customers who haven't 
 done this may end up paying for Group Analytics but not able to use it.
 
-We have a [Vitally](https://posthog.vitally-eu.io/) risk indicator added to customers who are paying for Group Analytics 
+You can [ask @PostHog in Slack](/docs/posthog-ai/surfaces/slack) or use the [PostHog MCP](/docs/model-context-protocol) to check who is paying for Group Analytics 
 but not using it.  
 
 To help the customer you should figure out whether they are B2B or could otherwise benefit
@@ -115,7 +115,7 @@ if (cookiePreference === 'accepted') {
 }
 ```
 
-They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they enable "Cookieless server hash mode" in their project settings under Project Settings > Web analytics.
+They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
 
 Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, the PostHog SDK will generate a privacy-preserving hash, calculated on our servers.
 
