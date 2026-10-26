@@ -168,10 +168,13 @@ Some defaults changed in the new major versions. These are the capture settings 
 | Skip GeoIP lookup | On for Python and Go, off for Rust | `disable_geoip` | `DisableGeoIP` | `disable_geoip` |
 | Error handler | – | `on_error` | `Callback` | `on_error` |
 | Modify or drop events | – | `before_send` | `BeforeSend` | `before_send` |
+| Historical migration | Off | `historical_migration` | `HistoricalMigration` | `capture_batch(events, true)` |
 
 <!-- TODO(node): add a Node.js column. -->
 <!-- TODO(ios): decide whether mobile SDKs get their own table (they persist a queue and retry differently). -->
 <!-- TODO(capture-v1): re-check every name and default against the released packages. -->
+
+Historical migration marks every event in a request, so SDKs never send historical and live events together. In Python and Go, a client with it on sends only historical events, so use a separate client for live events. In Rust, it applies to that `capture_batch` call only.
 
 SDKs split large batches into requests of 5MB or less, and send any single event that's bigger than that in its own request. Your SDK's migration guide lists every new and changed setting.
 
