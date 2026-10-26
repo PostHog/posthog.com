@@ -11,7 +11,7 @@ The SDK captures intent as a single property – `$mcp_intent` – that can come
 1. **A `context` argument** the agent passes on every tool call. Captured with `$mcp_intent_source = "context_parameter"`.
 2. **A fallback callback** you supply on `instrument()`. Captured with `$mcp_intent_source = "inferred"`.
 
-Explicit context always wins. If the agent passes a non-empty `context`, the fallback is not invoked.
+Explicit context always wins. If the agent passes a non-empty `context`, the fallback is not invoked. The Rust SDK also reads a third source first: `userIntent` from the client's `io.modelcontextprotocol/aiInvocation` request metadata, captured with `$mcp_intent_source = "client_metadata"`.
 
 ## The `context` argument
 

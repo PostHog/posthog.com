@@ -30,10 +30,10 @@ Present on most `mcp_*` events.
 
 | Wire key                 | Type                                | Source                                                                                                                                                                                                |
 | ------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). Go also emits `ses_<UUIDv7>` for a session it generates. A custom ID you pass must be 128 characters or fewer. See [session resolution](#session-resolution) below. |
-| `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects. The Go SDK's `$mcp_unknown_tool`, `$mcp_input_required`, and `$mcp_missing_capability` events don't carry it.                                                                                                 |
+| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). Go and Rust also emit `ses_<UUIDv7>` for a session they generate. A custom ID you pass must be 128 characters or fewer. See [session resolution](#session-resolution) below. |
+| `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects. The Go SDK's `$mcp_unknown_tool`, `$mcp_input_required`, and `$mcp_missing_capability` events don't carry it. In the Rust SDK, only `$mcp_tool_call` carries it.                                                                                                 |
 | `$mcp_resource_name`     | string                              | Tool or prompt name, or on resource events the resource URI with its credentials redacted (see [Privacy](/docs/mcp-analytics/privacy))                                                                                                                                                                        |
-| `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`. The Go SDK also sets it on `$mcp_unknown_tool` and `$mcp_input_required`                                                                                                                                            |
+| `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`. The Go and Rust SDKs also set it on `$mcp_unknown_tool` and `$mcp_input_required`                                                                                                                                            |
 | `$mcp_tool_description`  | string                              | The tool's `description` at the moment of the call. Cached from `tools/list` and (for `McpServer`) seeded from `_registeredTools`. Only on `$mcp_tool_call` and the paired `$exception` event.        |
 | `$mcp_tool_category`     | string                              | Your own grouping label for the tool, when you set one. Only on `$mcp_tool_call` and the paired `$exception` event.                                                                                    |
 | `$mcp_listed_tool_names` | string[]                            | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called.             |
@@ -86,7 +86,7 @@ If you see mostly "Other", check whether these properties contain values. On HTT
 
 MCP has no standard field for the calling model. The SDK reads recognized client metadata first, then the agent's self-reported `llm_model` argument, which the SDK adds to compatible tool schemas. Events include `$mcp_llm_model` and `$mcp_llm_model_source` (`"client_metadata"` or `"self_reported"`).
 
-The recognized metadata field is Codex's `params._meta["x-codex-turn-metadata"].model`. The Go SDK reads `io.modelcontextprotocol/aiInvocation` first, then `x-codex-turn-metadata`. Other clients can pass the `llm_model` argument. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted, and reasoning effort isn't captured.
+The recognized metadata field is Codex's `params._meta["x-codex-turn-metadata"].model`. The Go and Rust SDKs read `io.modelcontextprotocol/aiInvocation` first, then `x-codex-turn-metadata`. Other clients can pass the `llm_model` argument. Some clients report an exact model, others a model family. Missing, blank, and `unknown` values are omitted, and reasoning effort isn't captured.
 
 Both sources are unverified client input. Use them to compare tool quality, latency, and errors by model, not for billing or security decisions. To turn model capture off, see the configuration on your [language's installation page](/docs/mcp-analytics/installation).
 
@@ -101,7 +101,7 @@ Present on `$exception` events emitted alongside any failed tool call. The SDK r
 
 Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_*` (including `$mcp_client_user_agent` and `$mcp_vendor_client`), `$mcp_protocol_version`, and the model properties when captured.
 
-In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace, and no user agent, vendor client, or model properties.
+In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace, and no user agent, vendor client, or model properties. In Rust, it has no stack trace and no model properties.
 
 <CalloutBox icon="IconInfo" title="Symbolicating minified MCP servers" type="fyi">
 
@@ -119,7 +119,7 @@ Set on `$identify` events when `identify()` returns a user.
 
 The SDK sends `$set` to update the person profile. PostHog does not retain `$set` on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
 
-In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`, not on a `$identify` event. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
+In Rust, `$set` rides on every MCP event, not on a `$identify` event. In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`, not on a `$identify` event. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
 
 ## Groups (`$groups`)
 

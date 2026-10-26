@@ -16,7 +16,7 @@ Try it, and report bugs or send patches to [posthog-rs](https://github.com/PostH
 
 `posthog_rs::mcp` ships inside the [`posthog-rs`](/docs/libraries/rust) crate, behind the `mcp` feature. It instruments servers built on [`rmcp`](https://github.com/modelcontextprotocol/rust-sdk), the official Rust MCP SDK, over stdio and Streamable HTTP. It serves both the `2025-11-25` and `2026-07-28` protocol revisions.
 
-You need Rust 1.88+, `posthog-rs` 0.29.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `rmcp` server? See [Custom dispatchers](#custom-dispatchers).
+You need Rust 1.88+, `rmcp` 3.7 or later, `posthog-rs` 0.29.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `rmcp` server? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
@@ -60,7 +60,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 `NotesServer` is your own `rmcp` server, such as a `#[tool_router]` struct with a `#[tool_handler]` `ServerHandler` impl. The wrapped server answers every request as yours would. It only adds the analytics arguments to your tools, a conversation handle to tool results, and, when you turn it on, the `get_more_tools` tool.
 
-For Streamable HTTP, hand the wrapped server to `StreamableHttpService` in place of yours. Each clone of the wrapped server serves its own connection and session. Clones share everything else.
+For Streamable HTTP, hand the wrapped server to `StreamableHttpService` in place of yours. Your server must implement `Clone`. Each clone of the wrapped server serves its own connection and session. Clones share everything else.
 
 </Step>
 
@@ -78,7 +78,7 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 
 </Steps>
 
-For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/main/examples/mcp_server.rs):
+For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/0.29.0/examples/mcp_server.rs). It reads the project token from `POSTHOG_API_KEY`:
 
 ```bash
 POSTHOG_API_KEY=phc_... cargo run --example mcp_server --features mcp
@@ -103,17 +103,17 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer)
 | `context(bool)` | `true` | Adds a required `context` argument to capture [agent intent](/docs/mcp-analytics/intent). The SDK removes it before your tool runs. |
 | `context_description(text)` | – | Replaces the `context` argument's description. Keep the default's instruction to leave out personal details. |
 | `intent_fallback(callback)` | – | `Fn(&RequestInfo) -> Option<String>`. Supplies intent when the agent sends no `context`. Captured with `$mcp_intent_source: "inferred"`. |
-| `capture_model(bool)` | `true` | Captures the [calling model](/docs/mcp-analytics/events#model-capture) from the request `_meta`, or from an `llm_model` argument the SDK adds. |
+| `capture_model(bool)` | `true` | Captures the [calling model](/docs/mcp-analytics/events#model-capture) from the request `_meta`, or from a required `llm_model` argument the SDK adds. |
 | `model_description(text)` | – | Replaces the `llm_model` argument's description. |
-| `conversation_id(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
+| `conversation_id(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When the SDK mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. |
 | `identify(callback)` | – | `Fn(&RequestInfo) -> Option<Identity>`. Maps a request to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `missing_capability_tool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability) under this name. A blank name uses `get_more_tools`. |
-| `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. |
+| `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. For a panic, the `posthog-rs` panic hook sends the `$exception` instead when the `error-tracking` feature is on. |
 | `capture_parameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
-| `capture_responses(bool)` | `true` | Captures the tool result as `$mcp_response`. |
+| `capture_responses(bool)` | `true` | Captures the tool result as `$mcp_response`. A failed call's error text is captured either way. |
 | `before_send(hook)` | – | `FnMut(Event) -> Option<Event>`. Changes or drops each MCP event after redaction. Dropping a `$mcp_tool_call` also drops its `$exception`. |
 
-A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. Callbacks that panic never break the request. A panicking `identify` makes the request anonymous, and a panicking `before_send` drops the event.
+A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. A tool whose input schema uses `$ref`, `allOf`, `anyOf`, or `oneOf` at the top level gets no added arguments, so the SDK captures no intent or model from its arguments. This can happen when `Parameters<T>` wraps an enum. Callbacks that panic never break the request. A panicking `identify` makes the request anonymous, and a panicking `before_send` drops the event.
 
 The SDK logs its warnings through [`tracing`](https://docs.rs/tracing), never to stdout. On a stdio server, point your `tracing` subscriber at stderr, because stdout carries the protocol.
 
@@ -136,29 +136,33 @@ let options = McpOptionsBuilder::default()
     .build()?;
 ```
 
-`with_property` values go out as `$set`, and `with_group` values as `$groups`. Without an identity, events are anonymous and create no person profile. Never put a raw credential, such as an `Authorization` header, in a property: person properties aren't redacted. The Rust SDK doesn't send a separate `$identify` event.
+`with_property` values go out as `$set` on every MCP event, and `with_group` values as `$groups`. Without an identity, events are anonymous and create no person profile. Never put a raw credential, such as an `Authorization` header, in a property: person properties aren't redacted. The Rust SDK doesn't send a separate `$identify` event.
 
 ## Sessions
 
 Every event has a `$session_id`:
 
-- **Streamable HTTP with sessions:** the SDK hashes the `Mcp-Session-Id` header into `ses_` plus 32 hex characters. Every PostHog MCP SDK computes the same value, so a session served from several languages groups together. A session token minted by the TypeScript or Python SDK is read back, with its client name and version.
+- **Streamable HTTP with sessions:** the SDK hashes the `Mcp-Session-Id` header into `ses_` plus 32 hex characters. Every PostHog MCP SDK computes the same value, so a session served from several languages groups together. A stateless session token minted by another PostHog SDK is read back, with its client name and version.
 - **stdio:** the SDK generates a `ses_` plus UUIDv7 ID per connection, and starts a new one when a tool call comes 30 minutes or more after the previous call ended.
 - **Stateless HTTP:** there's no transport session, so the SDK uses [conversation IDs](/docs/mcp-analytics/conversation-id). It returns a handle in the first result, and calls that echo it share a `$session_id`. A client that ignores the handle gets a new session per request. Use `identify` to group those calls by user.
 
 A valid conversation handle takes priority over the transport session, so a conversation that reconnects stays in one session.
 
+## Intent from client metadata
+
+When the client sends `_meta["io.modelcontextprotocol/aiInvocation"].userIntent`, the SDK captures it as `$mcp_intent` with `$mcp_intent_source: "client_metadata"`. It takes priority over the `context` argument, and the intent fallback doesn't run.
+
 ## Report missing capabilities
 
 Set `missing_capability_tool` to give agents a `get_more_tools` tool. An agent calls it when no tool fits its request, and the `context` argument is its report. The SDK answers the call itself, so your handlers never see it. The call sends `$mcp_missing_capability`, not `$mcp_tool_call`.
 
-The SDK doesn't advertise the tool when your server has a tool of the same name. It checks your server's `get_tool`, which `#[tool_handler]` servers implement. A server without `get_tool` can't tell the SDK, so give the virtual tool a name your own tools don't use.
+The SDK adds the tool to the first page of `tools/list`. It doesn't advertise the tool when your server has a tool of the same name. It finds your tools through your server's `get_tool`, which `#[tool_handler]` servers implement, and through the tools your server listed. A server that has neither can't tell the SDK, so give the virtual tool a name your own tools don't use.
 
 See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability) for how to read the reports.
 
 ## Custom dispatchers
 
-For a server that isn't an `rmcp` `ServerHandler`, such as a gateway or your own JSON-RPC router, use the manual API on `McpAnalytics`. Given the same traffic, it sends the same events as `instrument`.
+For a server that isn't an `rmcp` `ServerHandler`, such as a gateway or your own JSON-RPC router, use the manual API on `McpAnalytics`. It sends the tool call events: `$mcp_tool_call`, `$exception`, `$mcp_unknown_tool`, and `$mcp_input_required`. It doesn't send `$mcp_tools_list` or `$mcp_initialize`.
 
 When you answer `tools/list`, pass your tools through `list_tools`. It returns them with the analytics arguments added:
 
@@ -188,21 +192,21 @@ match run_tool(call.arguments()).await {
 }
 ```
 
-- `call.arguments()` no longer holds the `context`, `llm_model`, or `conversation_id` arguments.
-- `ToolRegistration::NotRegistered` sends `$mcp_unknown_tool` instead of a tool call. Use `ToolRegistration::NoRegistry` when you can't tell.
+- `call.arguments()` no longer holds the `context`, `llm_model`, or `conversation_id` arguments, when the SDK knows it added them: the tool is `ToolRegistration::Registered`, or it went through `list_tools` earlier.
+- `ToolRegistration::NotRegistered` sends `$mcp_unknown_tool` instead of a tool call. Use `ToolRegistration::NoRegistry` when you can't tell. Then the SDK removes the analytics arguments only for tools it saw in `list_tools`.
 - `ToolCallRequest` also takes the request `_meta` with `.meta()`, the HTTP request with `.http()`, your server's `Implementation` with `.server()`, and the arrival time with `.started_at()`.
 - `TransportSession::Id` groups requests that share a session ID. For a one-client connection, create one `Connection::new()` per connection and pass `TransportSession::Connection`. Without a transport session, the call is a stateless request.
 - On a `2026-07-28` round, call `call.input_required(&round)` to send `$mcp_input_required`. The retry that completes the call is a call of its own.
-- `ToolCallError::new` names the failure by the error's Rust type. `error_type` sets the `$mcp_error_type` label, such as `validation`, `permission`, or `rate_limited`. The `$exception` keeps the error's own type.
+- `ToolCallError::new` names the failure by the error's type name without its path or generics, such as `UpstreamTimeout`. A `Box`, `Arc`, `Rc`, reference, or `dyn` type gives `Error`. `error_type` sets the `$mcp_error_type` label, such as `validation`, `permission`, or `rate_limited`. The `$exception` keeps the error's own type.
 
 The manual API never answers `get_more_tools`. Only `instrument` does.
 
 ## Events
 
-The Rust SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_tools_list`, `$mcp_initialize`, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`.
+The Rust SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_tools_list`, `$mcp_initialize`, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`. Only `$mcp_tool_call` carries `$mcp_source`.
 
 - **`$lib`:** MCP events report `posthog-rs-mcp`. The client you pass in keeps its own `$lib` for everything else it sends.
-- **Errors:** an `McpError` from your tool counts under `McpError`, or `validation` for invalid params. A panic counts under `Panic`, and the SDK re-raises it after capturing. A result with `is_error` set is a failed call with the type `Error`.
+- **Errors:** an `McpError` from your tool counts under `McpError`, or `validation` for invalid params. A panic counts under `Panic`, and the SDK re-raises it after capturing. A result with `is_error` set is a failed call with the type `Error`, or `validation` when `rmcp` couldn't parse the arguments.
 - **Unknown tools:** a call that names a tool your server doesn't have, and that your server rejects as not found, sends `$mcp_unknown_tool` instead of `$mcp_tool_call`.
 - **`input_required` rounds:** a tool that ends a `2026-07-28` round by asking the client for input sends `$mcp_input_required` with the request methods, never their contents. On an older revision, `rmcp` answers the round with an error, so it's a failed `$mcp_tool_call` with `$mcp_error_type` set to `input_required`.
 
@@ -211,7 +215,15 @@ The Rust SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_tools_
 The Rust SDK doesn't yet have:
 
 - Resource and prompt events
+- Task handling. A tool that returns a task handle sends no event
 - A session token for stateless servers. It reads tokens other SDKs mint, but doesn't mint its own
-- An analytics handle for [custom events](/docs/mcp-analytics/custom-events). Call `capture` on your `posthog-rs` client instead
+- Client name and version on stateless HTTP servers, unless the client replays a PostHog session token
+- An event properties callback, or an analytics handle for [custom events](/docs/mcp-analytics/custom-events). Call `capture` on your `posthog-rs` client instead
 - `$identify` and the merge of anonymous events into a user
+- Stack traces and model properties on the `$exception`
 - Wizard support
+
+Some behavior to know about:
+
+- On a stateless server, an `input_required` round and its retry land in different sessions.
+- Events also go through the `before_send` hooks of your `posthog-rs` client.
