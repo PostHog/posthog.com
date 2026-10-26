@@ -146,7 +146,7 @@ Only requests that carry the headers receive browser context. Fetch/XHR instrume
 
 The optional processor adds `sessionId` and `posthogDistinctId` to application spans. At request entry, it can also fill missing IDs on the nearest recording HTTP server span through parent objects observed by the processor. Explicit canonical attributes keep their values. If the sampler drops an intermediate span, the processor cannot verify the earlier server ancestor and leaves it unchanged. Recording spans created within the request still receive context.
 
-Request context stays active until the Express response finishes or closes. Async work that produces the response, including streaming work, can use it. New spans from detached work after that point have no request IDs. Use a new explicit context for a background job that needs its own IDs.
+Request context stays active for async work that the request starts, including streaming work and work that continues after the response ends. Use a new explicit context for a background job that needs its own IDs.
 
 Remix handles many loader and action errors inside its router, so an Express error handler alone does not capture all of them. To capture these errors, use Remix's `handleError` export in `app/entry.server.tsx` with the same server client:
 

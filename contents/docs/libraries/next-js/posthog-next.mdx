@@ -370,7 +370,7 @@ export async function GET() {
 
 The helper uses the existing consent, cookie, header, and application identity resolver. It fills missing `sessionId` and `posthogDistinctId` attributes on the active span and its nearest recording server ancestor whose parent chain the processor observed. Existing attributes keep their values. A sampled-out intermediate hides earlier server ancestors; new recording child spans still receive context.
 
-Context ends when the callback settles, including on error. Wrap each server action or awaited Server Component function that needs its own scope. Later child rendering and streamed response work are outside an earlier callback's scope. Detached work needs explicit context and its own lifetime. This entry supports Node.js App Router work; it does not accept Pages Router request arguments or run in the browser or Edge runtime.
+Work that the callback starts keeps the context after the callback settles, including on error. Wrap each server action or awaited Server Component function that needs its own scope. Later child rendering and streamed response work are outside an earlier callback's scope. A separate job that needs its own IDs needs an explicit context. This entry supports Node.js App Router work; it does not accept Pages Router request arguments or run in the browser or Edge runtime.
 
 </Step>
 

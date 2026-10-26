@@ -58,7 +58,7 @@ The middleware reads PostHog tracing headers. An existing application identity t
 
 The optional processor adds `sessionId` and `posthogDistinctId` to recording application spans. Explicit canonical attributes keep their values. At request entry, it also fills missing IDs on the nearest recording HTTP server ancestor through parent objects it has observed. A sampler-dropped intermediate span breaks that verified chain, so the earlier server span stays unchanged. New recording spans inside the request still receive context.
 
-Express owns the request lifetime. Context stays active until the response finishes or closes, including while a response body streams. Do not end it when Astro middleware's `next()` promise returns: the body can still be streaming. New spans from detached work after response completion have no request IDs. A background job that needs IDs must use a new explicit context.
+Express owns the request context. It stays active for work that the request starts, including while a response body streams and after the response ends. A background job that needs its own IDs must use a new explicit context.
 
 Astro can handle errors before they reach Express's error middleware. To capture errors thrown by `next()`, use the same client from your existing Astro middleware chain:
 

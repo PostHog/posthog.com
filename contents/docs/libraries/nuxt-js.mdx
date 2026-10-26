@@ -137,7 +137,7 @@ export default defineEventHandler((event) => {
 
 ### Request and span context
 
-This setup requires the Nuxt module release with `requestContext` and `getPostHogServerClient()`, plus the Node SDK release with the shared context bridge and signal support. Add the opt-in to your existing Nuxt configuration:
+This setup requires the Nuxt module release with `requestContext` and `getPostHogServerClient()`, plus the Node SDK release with the shared context bridge. Add the opt-in to your existing Nuxt configuration:
 
 ```typescript file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -164,7 +164,7 @@ Call `createPostHogSpanProcessor()` from your existing tracing plugin after the 
 
 The handler scope fills missing `posthogDistinctId` and `sessionId` attributes on an existing recording span. The processor handles new child spans and verified recording server ancestors. Explicit attributes stay unchanged. If a sampler drops an intermediate span, the earlier server ancestor stays unchanged.
 
-The Node setup covers Nitro 2's H3 handler and Nitro 3's fetch handler. Context ends when the handler returns or throws. Later stream-body work and detached tasks have no request IDs. The existing error hook uses the saved two-ID request snapshot; background errors keep anonymous identity. Give separate jobs explicit context and their own lifetime. The module owns client shutdown; do not close it after each request.
+The Node setup covers Nitro 2's H3 handler and Nitro 3's fetch handler. Work that the handler starts, including detached tasks, keeps the request IDs after the handler returns or throws. The existing error hook uses the saved two-ID request snapshot; background errors keep anonymous identity. Give separate jobs that need their own IDs an explicit context. The module owns client shutdown; do not close it after each request.
 
 <DetailSetUpReverseProxy />
 

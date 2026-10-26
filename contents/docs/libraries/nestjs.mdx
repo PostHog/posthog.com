@@ -147,7 +147,7 @@ Register the [optional Node context processor](/docs/distributed-tracing/install
 
 The interceptor adds missing `sessionId` and `posthogDistinctId` attributes to an active request span after reading the request headers. The processor adds them to child spans when they start. Existing canonical attributes take precedence. Missing IDs stay absent.
 
-With the Express and Fastify HTTP adapters, the context expires when the response finishes or closes. Observable completion alone does not end a response that is still active. Existing spans keep their IDs; new spans in detached work after expiry omit them. Background jobs need explicit context transfer.
+With the Express and Fastify HTTP adapters, the context stays active for work that the request starts, including work that continues after the response ends. Existing spans keep their IDs. A background job that needs its own IDs needs an explicit context.
 
 This setup was verified for HTTP on both adapters. WebSocket, GraphQL, and custom adapters need separate verification.
 
