@@ -66,7 +66,7 @@ const PILLARS: Pillar[] = [
             {
                 title: 'SOC 2 Type 2',
                 detail: 'Audited every year by an external firm. The latest report is public and available via the link above.',
-                href: '/handbook/company/security#soc-2',
+                href: '/docs/privacy/soc2',
             },
             {
                 title: 'Annual third-party penetration testing',
@@ -103,12 +103,12 @@ const PILLARS: Pillar[] = [
             {
                 title: 'Sync from your warehouse',
                 detail: 'Pull tables from Snowflake, BigQuery, Redshift, Postgres, MySQL, SQL Server, ClickHouse, Databricks, and object storage.',
-                href: '/docs/cdp/sources',
+                href: '/docs/data-pipelines/sources',
             },
             {
                 title: 'Export back out',
                 detail: 'Batch exports to S3, Snowflake, BigQuery, Redshift, Postgres, Databricks, and Azure Blob. Realtime destinations for everything else.',
-                href: '/docs/cdp/batch-exports',
+                href: '/docs/data-pipelines/batch-exports',
             },
             {
                 title: 'No rate limit on capture',

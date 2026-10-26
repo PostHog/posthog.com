@@ -1,6 +1,6 @@
 # WaitlistForm
 
-A thin wrapper around [`SurveySignup`](../SurveySignup/README.md) preconfigured for the PostHog Desktop waitlist. Defaults to the "PostHog Desktop waitlist" survey and PostHog Desktop's concept-stage Early Access Feature flag (`twig`); other products pass their own `surveyId`, `productHandle`, `productName`, and `flagKey` (see `src/pages/replay-vision.tsx`).
+A thin wrapper around [`SurveySignup`](../SurveySignup/README.md) preconfigured for the PostHog Desktop waitlist. Defaults to the "PostHog Desktop waitlist" survey and PostHog Desktop's concept-stage Early Access Feature flag (`twig`); other products pass their own `surveyId`, `productHandle`, `productName`, and `flagKey`.
 
 ## What it captures on submit
 

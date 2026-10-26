@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { pocketGuideDestination } from '../../constants/pocketGuides'
 import { normalizeUrl } from './bookModel'
 
 export interface SkillFile {
@@ -36,7 +37,7 @@ export function useSkillFiles(): Map<string, SkillFile> {
     return useMemo(() => {
         return new Map(
             (data?.skills?.nodes || []).map((node: any) => [
-                normalizeUrl(node.fields.slug.replace(/\/SKILL$/, '')),
+                normalizeUrl(pocketGuideDestination(node.fields.slug.replace(/\/SKILL$/, ''))),
                 {
                     name: node.frontmatter?.name,
                     description: node.frontmatter?.description,

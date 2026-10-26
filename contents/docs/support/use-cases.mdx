@@ -1,0 +1,126 @@
+---
+title: Support use cases
+sidebarTitle: Use cases
+sidebar: Docs
+showTitle: true
+---
+
+Pick the setup that matches how your customers already reach you. Each one uses the same [inbox](/docs/support/inbox).
+
+## B2B support in a shared Slack channel
+
+Use this when each customer has a shared Slack Connect channel with your team. PostHog runs enterprise support this way.
+
+1. [Connect Slack](/docs/support/slack) and invite SupportHog: `/invite @SupportHog`.
+2. Mark the shared channel as a support channel, or tell the customer to mention `@SupportHog` or react with `:ticket:`.
+3. Reply in the thread. The reply syncs to the ticket. A reply from the inbox posts back to Slack.
+
+Example workflow: on **New ticket created**, if `channel_source` is `slack`, set priority to `high` and assign the role that owns your enterprise accounts. A customer with a shared channel is usually one of your largest accounts. See [automate ticket handling](/docs/support/workflows).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_9_58_04_18d5a79233.png"
+    alt="Slack thread with a SupportHog ticket confirmation"
+    classes="rounded"
+/>
+
+## Enterprise customers on Microsoft Teams
+
+Use this when the customer will not use Slack. [Microsoft Teams](/docs/support/teams) is in beta.
+
+1. Connect Teams and add the shared channel. Shared channels show **Shared · polled** and are checked about once a minute.
+2. Tell the customer to `@SupportHog`. Teams has no emoji trigger.
+3. If install fails with an org-catalog error, your Teams admin uploads the app package once. See [org catalog](/docs/support/teams#org-catalog).
+
+Example workflow: same as Slack, but filter `channel_source` to `teams`.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_10_01_13_3965af1866.png"
+    alt="Teams shared channel"
+    classes="rounded"
+/>
+
+## In-app chat with the session attached
+
+Use this when the customer is already in your product and you want the replay, events, and exceptions next to the message.
+
+1. [Enable the widget](/docs/support/widget).
+2. For logged-in users, turn on [identity verification](/docs/support/widget#identity-verification) so tickets follow the person across browsers.
+3. Leave anonymous visitors on the browser session. They can recover tickets by email.
+
+Example workflow: on **New ticket created**, if `channel_source` is `widget`, set a 4-hour SLA. The customer is often still in your product and waiting for an answer.
+
+## One inbox for support@ and billing@
+
+Use this when customers email you, and more than one address should land in the same queue.
+
+1. [Connect each address](/docs/support/email). A project can have up to 10.
+2. Add the SPF and DKIM records, then verify the domain. Merge into an existing SPF record. Do not add a second one.
+3. Read the **sender address** on the ticket to see which inbox the customer wrote to.
+
+Example workflow: if `customer_email` ends with `@bigcorp.com`, tag the ticket `enterprise` and assign Senior Support. Email tickets use `channel_source` `email`.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_26_17_7a297febf0.png"
+    alt="One inbox for support@ and billing@"
+    classes="rounded"
+/>
+
+
+## GitHub issues as the support queue
+
+Use this when your users file bugs in a public repository.
+
+1. Install the [PostHog GitHub App](https://app.posthog.com/integrations/github), then [select the repositories](/docs/support/github). You can monitor up to 100.
+2. New issues become tickets. Your reply in PostHog is posted as an issue comment.
+3. Closing the issue resolves the ticket. Reopening it sets the ticket back to open.
+
+GitHub Issues can also be a [Self-driving signal source](/docs/self-driving/inbox/sources). That is a second job for the same integration. The channel puts the issue in your support inbox. The signal source can turn a pattern of issues into a pull request.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_27_21_ad5800c8c3.png"
+    alt="GitHub issues as the support queue"
+    classes="rounded"
+/>
+
+## Draft how-to answers with the AI agent
+
+Use this when a large share of tickets are "how do I…?" and you want a first draft. The [AI agent](/docs/support/ai-agent) is in beta.
+
+1. Add business knowledge, then enable the agent.
+2. For How-to tickets, choose **AI reply** only on channels where a wrong answer is cheap to correct. Start with **Private note** everywhere else.
+3. Leave Diagnostic and Account/Billing on private notes. Those drafts can include project data, and the product will not send them to the customer.
+
+Example workflow: you do not need one. The agent runs when the ticket is created. Use workflows for SLA and assignment, not for the draft.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_33_38_6f20a86edc.png"
+    alt="Draft how-to answers with the AI agent"
+    classes="rounded"
+/>
+
+## From a bug report to a pull request
+
+Use this when the same bug shows up across tickets and you want a code change, not another reply.
+
+1. Connect at least one channel so the conversations exist.
+2. In [Self-driving](/docs/self-driving), use those conversations as a signal source.
+3. Review the report in the [Self-driving inbox](/docs/self-driving/inbox). Merge the pull request if the fix holds.
+
+Support replies still happen in the Support inbox. Self-driving does not answer the customer for you. Reports are free. A pull request is billed at $15, and the first three each month are free. See [Self-driving pricing](/docs/self-driving/pricing).
+
+
+## Move off Zendesk or Intercom
+
+Use this when you are leaving another help desk and you do not want an empty inbox on day one.
+
+1. [Import Zendesk](/docs/support/imports/zendesk) history. The import is a one-time backfill. It does not keep syncing.
+2. Connect [email](/docs/support/email) and point `support@` at PostHog before you turn the old tool off.
+3. If you used Intercom chat, replace it with the [widget](/docs/support/widget). Intercom as a data source for analytics is a [warehouse source](/docs/data-pipelines/sources/intercom), not the Support inbox.
+
+Set a default inbox before the import. Tickets whose original recipient does not match a connected address cannot be answered by email until they have one.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_35_28_391d3d3abb.png"
+    alt="Move off Zendesk or Intercom"
+    classes="rounded"
+/>

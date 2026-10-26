@@ -1,0 +1,128 @@
+---
+# The scout behind this chapter is the canonical inbox validation scout,
+# products/signals/skills/signals-scout-inbox-validation/SKILL.md in PostHog/posthog.
+# <Enable />, <Watches />, <ScoutFigure />, and <DetailFigure /> only render under
+# /docs/self-driving/pocket-guide/, so this page names the scout's sources in prose and writes the
+# report inline on <AnatomyFigure />.
+title: Check whether the fix held
+shortTitle: Verify the fix
+subtitle: Is the error you fixed still firing?
+pocketGuideOrder: 13
+section: Self-drive
+pocketGuideCta:
+  kind: link
+  label: Open your scouts
+  href: https://app.posthog.com/inbox/scouts
+  note: Find Inbox validation in the list and check it's on.
+  requires:
+    label: Needs exceptions reaching PostHog.
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="What the scout saw: The fix merged at 10:30. In the 24 hours after, checkout sessions held steady and the issue fired at nearly the rate it did in the 24 hours before."
+    markerAt={0.5}
+    markerLabel="10:30 fix merged"
+    series={[
+        {
+            label: 'Checkout sessions',
+            note: 'steady',
+            values: [0.55, 0.58, 0.54, 0.57, 0.56, 0.55, 0.57, 0.54, 0.58, 0.56, 0.55, 0.57],
+        },
+        {
+            label: 'Exceptions',
+            note: '312 before, 296 after',
+            emphasis: true,
+            values: [0.7, 0.74, 0.68, 0.72, 0.75, 0.71, 0.69, 0.73, 0.67, 0.71, 0.7, 0.72],
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="This follow-up report card lands in your inbox. It shows the scout's claim and triage, and the evidence is inside the report."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="A day after PR #4812 merged, the checkout TypeError fired 296 times for 38 users, against 312 times for 41 users the day before"
+    report={{
+        title: 'Checkout TypeError still fires at its pre-fix rate a day after the fix merged',
+        source: 'Scout · inbox validation',
+        receivedAgo: '2h',
+        affected: '38 users · 296 exceptions in 24 hours',
+        body: "Follow-up to the resolved report **Checkout confirm fails when the cart contains a discounted item**. Its fix, PR #4812, merged yesterday at 10:30 and set `cart.pricing.total` on the discount path.\n\nIn the 24 hours after the merge, the issue fired 296 times for 38 users. In the 24 hours before, it fired 312 times for 41 users. Checkout sessions held steady across both windows.\n\nEvery stack trace since the merge reaches `checkout/confirm.ts` from `checkout/express.ts`, which builds `cart.pricing` without a `total`. The pull request didn't change that path.",
+        suggestedAction: 'Add the fallback the original report suggested, so the confirm step sums the line items whenever `cart.pricing.total` is missing.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Check whether the fix held
+
+You merge a fix and mark the <Term name="issue" /> resolved. If the exception comes back, Error Tracking reopens the issue, whether the fix failed or a few browser tabs are still running the old code. The <Term name="report" /> behind the fix stays resolved in your <Term name="inbox" />, and self-driving files a recurrence as a new report instead of reopening the old one.
+
+This scout checks each fix that resolved a report, once the fix has had time to reach users, and files a follow-up report when it didn't hold.
+
+## What the scout looks at
+
+Yesterday at `10:30` you merged the fix for a checkout `TypeError`. Today the issue is still firing. Which is it?
+
+- If the rate fell hard and keeps falling, the fix is still reaching users, and the exceptions left come from clients on the old code. The scout stays _quiet_ and checks again later.
+- If the issue fires at about the rate it did before the merge <SeeFig n={1} />, the fix didn't hold. The scout _**reports**_.
+
+For a server-side fix, the scout waits 24 hours after the merge before it measures. For a client-side or mobile fix, which takes longer to reach users, it waits 72 hours or more. Then it compares the issue's exceptions and affected users with a window of the same length before the merge.
+
+A fix that held goes into the scout's memory, and nothing lands in your inbox. Before it calls a fix held, the scout checks your overall traffic, so a quiet weekend doesn't pass for a fix.
+
+## The report in your inbox
+
+When a fix didn't hold, the <Term name="scout" /> files a new <Term name="report" /> in your <Term name="inbox" /> and links it to the original as a follow-up. The link carries the original report's findings and pull requests, so whoever picks up the follow-up sees what was already tried. <SeeFig n={2} /> breaks the card down part by part.
+
+The report names the pull request and when it merged, with the issue's exceptions and affected users before and after. The scout files it at P2 when users are still hitting the error in volume, and at P3 otherwise. If a report about the recurrence is already open in your inbox, the scout cites that report instead of filing a second one.
+
+## The pull request you merge
+
+Most failed fixes need a person to work out why the fix didn't take, so the scout marks those reports as needing your input. When the same issue is still firing and the repository is known from the original pull request, as in <SeeFig n={2} />, the scout marks the report actionable.
+
+When you're ready to open a pull request, PostHog dispatches an agent to do it for you with the report and evidence attached as context. You review and merge it like any other PR.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+A <Term name="scout" /> is a set of instructions an agent follows on a schedule. PostHog ships and maintains this one, and you can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md). The [Self-driving pocket guide](/docs/self-driving/pocket-guide/101) explains how scouts work.
+
+To check a fix to an error, each run reads three kinds of data in PostHog:
+
+- **Your inbox**, for reports resolved in the last 14 days and the pull requests linked to them.
+- **Error Tracking**, for the issue's `$exception` events and affected users before and after the merge, and whether the issue reopened.
+- **Signals**, for new findings since the merge that describe the same problem. These catch a recurrence that shows up under a different issue.
+
+The [spikes and stuck loops](/learn/error-tracking/pocket-guide/errors-as-signals) scout also reports a resolved issue that starts firing again. This scout ties the recurrence to the fix that was meant to stop it, and measures it against the rate before the merge.
+
+For a fix that no report links to, the [PR follow-up](/learn/error-tracking/pocket-guide/what-changed) scout runs the same before-and-after check on pull requests merged in your connected repositories.
+
+## The schedule it runs on
+
+Scouts run every 24 hours by default. You can set an interval from every 30 minutes to every 30 days, or a cron expression for a fixed time of day.
+
+Each run picks up newly resolved reports and schedules a check for when the wait after the merge is over. When the rate dropped but the fix is still reaching users, the check looks again after 24 hours, 72 hours, and 7 days.
+
+## Add this to your scout troop
+
+PostHog ships this scout turned on, and you can turn it off for each project. For an error fix, it needs exceptions reaching PostHog and a resolved report. A report resolves when its linked pull request merges, or when you resolve it yourself.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Scouts](/docs/self-driving/scouts) · [Scout examples](/docs/self-driving/scout-examples) · [Reports](/docs/self-driving/reports) · [Managing issues](/docs/error-tracking/managing-issues)
+
+</SeeAlso>
+
+</RightPage>

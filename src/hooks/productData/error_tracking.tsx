@@ -34,7 +34,7 @@ export const errorTracking = {
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
-            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+            'Capture exceptions with stack traces, group them into issues, and get alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**
@@ -132,7 +132,7 @@ export const errorTracking = {
                 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/issue_dark_b2245fed4f.png',
             alt: 'An error tracking issue: its title, how many people it hit, the exceptions grouped into it, what self-driving is doing about it, and its stack trace',
             // Both variants are the same screen at the same size, so one set of coordinates holds.
-            // The pocket guide annotates this inline – see contents/pocket-guides/error-tracking/101.
+            // The pocket guide annotates this inline – see contents/learn/error-tracking/pocket-guide/101.
         },
         'grouping-rule': {
             // The rule editor, reused from /docs/error-tracking/grouping-issues. Small enough at

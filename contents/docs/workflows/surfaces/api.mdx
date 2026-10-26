@@ -14,6 +14,7 @@ Workflows are stored as **hog flows**, and every one of them is available over t
 ## What you can do here
 
 - **Manage workflows.** `/api/projects/:project_id/hog_flows/` lists, creates, reads, updates, and deletes workflows, including their trigger, graph of actions, and enabled state.
+- **Organize with tags.** Pass a `tags` array when creating or updating a workflow to label it by team or topic. Filter the list with `?tags=["growth","marketing"]` – a JSON-encoded list that returns workflows carrying at least one of the listed tags. Tags are shared across your project, the same as dashboards, insights, actions, and feature flags.
 - **Reuse templates.** `/api/projects/:project_id/hog_flow_templates/` covers the workflow templates in your project.
 - **Honor unsubscribes and resubscribes.** `/api/projects/:project_id/messaging_preferences/` manages the [opt-out list](/docs/workflows/opt-outs): list a category's opt-outs, add them one at a time or in bulk, remove one when a recipient opts back in, and export the list as CSV. Full details in the [messaging preferences API reference](/docs/api/messaging-preferences).
 - **Keep the suppression list current.** `/api/projects/:project_id/messaging_suppressions/` lists, adds, and removes [suppressed addresses](/docs/workflows/opt-outs#the-suppression-list). Full details in the [messaging suppressions API reference](/docs/api/messaging-suppressions).

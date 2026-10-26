@@ -26,6 +26,8 @@ type QuestionFormValues = {
     draft?: boolean
 }
 
+type SubmissionState = 'idle' | 'posting' | 'saving-draft'
+
 // A forum post picks a forum topic instead of a legacy topic. The Forum app renders that field. The server
 // chooses a post's tags when it goes live.
 export type ForumFormOptions = {
@@ -67,7 +69,7 @@ type QuestionFormMainProps = {
     title?: string
     onSubmit: (values: QuestionFormValues, user: User | null) => void
     subject: boolean
-    loading: boolean
+    submissionState: SubmissionState
     initialValues?: Partial<QuestionFormValues> | null
     formType?: 'question' | 'reply'
     disclaimer?: boolean
@@ -131,7 +133,7 @@ function QuestionFormMain({
     title,
     onSubmit,
     subject = true,
-    loading,
+    submissionState,
     initialValues,
     disclaimer = true,
     formType,
@@ -144,6 +146,9 @@ function QuestionFormMain({
     const posthog = usePostHog()
     const { user, logout } = useUser()
     const { status } = useAppStatus()
+    const posting = submissionState === 'posting'
+    const savingDraft = submissionState === 'saving-draft'
+    const loading = posting || savingDraft
     // Which forum button submitted the form. A ref, so the click and the submit agree.
     const saveAsDraft = useRef(false)
 
@@ -268,7 +273,7 @@ function QuestionFormMain({
                                                     type="submit"
                                                     onClick={() => (saveAsDraft.current = true)}
                                                 >
-                                                    Save draft
+                                                    {savingDraft ? loadingLabel || 'Saving…' : 'Save draft'}
                                                 </OSButton>
                                             )}
                                             <OSButton
@@ -277,7 +282,7 @@ function QuestionFormMain({
                                                 variant="primary"
                                                 onClick={() => (saveAsDraft.current = false)}
                                             >
-                                                {loading
+                                                {posting
                                                     ? loadingLabel || 'Posting...'
                                                     : !user
                                                     ? 'Login & post'
@@ -359,7 +364,7 @@ export const QuestionForm = ({
     const posthog = usePostHog()
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
     const [view, setView] = useState<string | null>(initialView || null)
-    const [loading, setLoading] = useState(false)
+    const [submissionState, setSubmissionState] = useState<SubmissionState>('idle')
     const [error, setError] = useState('')
     const [loadingLabel, setLoadingLabel] = useState('')
     const containerRef = useRef<HTMLDivElement>(null)
@@ -516,7 +521,8 @@ export const QuestionForm = ({
             return
         }
 
-        setLoading(true)
+        if (forum) setLoadingLabel(values.draft ? 'Saving…' : 'Posting…')
+        setSubmissionState(forum && values.draft ? 'saving-draft' : 'posting')
         const transformedValues = await transformValues(values, user)
 
         if (formType === 'question') {
@@ -524,18 +530,18 @@ export const QuestionForm = ({
             setError('')
             create(transformedValues)
                 .then((data) => {
-                    setLoading(false)
+                    setSubmissionState('idle')
                     setView(null)
                     setFormValues(null)
                     onSubmit?.(transformedValues, formType, data)
                 })
                 .catch((err) => {
                     // Keep the form and what was typed, and say what went wrong.
-                    setLoading(false)
+                    setSubmissionState('idle')
                     setError((err as Error).message)
                 })
         } else if (formType === 'reply' && questionId && reply) {
-            setLoading(false)
+            setSubmissionState('idle')
             setView(null)
             setFormValues(null)
             reply(transformedValues.body).then((data) => {
@@ -563,7 +569,7 @@ export const QuestionForm = ({
                             disclaimer={disclaimer}
                             subject={subject ?? formType === 'question'}
                             initialValues={formValues}
-                            loading={loading}
+                            submissionState={submissionState}
                             onSubmit={handleMessageSubmit}
                             formType={formType}
                             autoFocus={autoFocus}

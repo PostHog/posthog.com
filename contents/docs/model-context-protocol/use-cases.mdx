@@ -156,6 +156,23 @@ Drop into raw queries when you need precision. See the [SQL guide](/docs/data-wa
   outcome="Cross-references system.cohorts with purchase events."
 />
 
+### Install PostHog from chat
+
+Ask your AI assistant to set up PostHog in your codebase – no terminal required. The wizard runs in the cloud, makes the code changes, and opens a pull request for you to review. See the [AI wizard docs](/docs/ai-engineering/ai-wizard) for more on how the wizard works.
+
+<PromptExample
+  prompt="Install PostHog in my GitHub repository"
+  outcome="Connects to your GitHub, starts a wizard run in the cloud, and returns a pull request link for you to review."
+/>
+<PromptExample
+  prompt="Set up PostHog analytics in my Next.js app on the posthog/demo repo"
+  outcome="Targets a specific repository, runs the wizard, and shows progress updates until the PR is ready."
+/>
+<PromptExample
+  prompt="Check the status of my PostHog setup"
+  outcome="Polls an active wizard run and returns the current stage, progress, and pull request link when available."
+/>
+
 ### Build CDP destinations and workflows
 
 Wire up integrations from a single prompt instead of clicking through the UI.

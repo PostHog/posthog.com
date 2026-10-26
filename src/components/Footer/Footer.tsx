@@ -145,7 +145,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'CDP',
-                url: '/docs/cdp',
+                url: '/docs/data-pipelines',
             },
             {
                 title: 'Data warehouse',

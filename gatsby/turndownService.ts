@@ -5,10 +5,14 @@ import { JSDOM } from 'jsdom'
 // selector engine's cache (about 18 MB per page across thousands of pages).
 let sharedDom: JSDOM | null = null
 
-export const preprocessHtmlForTabs = (html: string): string => {
+export const preprocessHtmlForTabs = (html: string, transformDocument?: (document: Document) => void): string => {
     sharedDom ??= new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>')
     const doc = sharedDom.window.document
     doc.documentElement.innerHTML = html
+    doc.querySelectorAll(
+        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
+    ).forEach((control) => control.remove())
+    transformDocument?.(doc)
 
     const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
     tabContainers.forEach((container) => {
@@ -50,10 +54,6 @@ export const preprocessHtmlForTabs = (html: string): string => {
             })
         }
     })
-
-    doc.querySelectorAll(
-        'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
-    ).forEach((control) => control.remove())
 
     // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
     doc.querySelectorAll('img[class~="dark:hidden"] + img[class~="dark:block"]').forEach((image) => {
@@ -342,19 +342,6 @@ export const createTurndownService = (title: string) => {
         },
     })
 
-    turndownService.addRule('formatFeedbackSections', {
-        filter: (node) => {
-            if (node.nodeName === 'H3') {
-                const text = node.textContent?.trim() || ''
-                return text === 'Community questions' || text === 'Was this page useful?'
-            }
-            return false
-        },
-        replacement: (content) => {
-            return `\n\n### ${content.trim()}\n\n`
-        },
-    })
-
     return turndownService
 }
 
@@ -400,4 +387,194 @@ export const postProcessMarkdown = (markdown: string, title: string): string => 
     }
 
     return result.trim()
+}
+
+const SITE_ORIGIN = 'https://posthog.com'
+const PAGE_FEEDBACK_HEADINGS = new Set(['Still have questions?', 'Was this page useful?', 'Community questions'])
+const MIN_TABLE_OF_CONTENTS_SECTIONS = 3
+
+function removePageFeedback(document: Document) {
+    document.querySelectorAll('h3').forEach((heading) => {
+        if (!PAGE_FEEDBACK_HEADINGS.has((heading.textContent ?? '').trim())) return
+        heading.parentElement?.remove()
+    })
+}
+
+function inlineRecommendedBadges(document: Document) {
+    const badges = Array.from(document.querySelectorAll('h2, h3, h4'))
+        .flatMap((heading) => Array.from(heading.querySelectorAll('span')))
+        .filter((span) => span.children.length === 0 && (span.textContent ?? '').trim() === 'Recommended')
+    badges.forEach((badge) => badge.replaceWith(document.createTextNode('(recommended)')))
+}
+
+function removeTabCountBadges(document: Document) {
+    const countBadges = Array.from(document.querySelectorAll('[role="tab"]'))
+        .flatMap((tab) => Array.from(tab.querySelectorAll('span')))
+        .filter((span) => /^\d+$/.test((span.textContent ?? '').trim()))
+    countBadges.forEach((badge) => badge.remove())
+}
+
+function convertCollapsiblesToSections(document: Document) {
+    const collapsibles = Array.from(document.querySelectorAll('details'))
+    collapsibles.forEach((collapsible) => {
+        const summary = collapsible.querySelector(':scope > summary')
+        if (summary) {
+            const summaryHeading = document.createElement('p')
+            const summaryText = document.createElement('strong')
+            summaryText.textContent = (summary.textContent ?? '').trim()
+            summaryHeading.append(summaryText)
+            summary.replaceWith(summaryHeading)
+        }
+        collapsible.replaceWith(...collapsible.childNodes)
+    })
+}
+
+function flattenBlockLinks(document: Document) {
+    const blockLinks = Array.from(document.querySelectorAll('a[href]')).filter(
+        (link) =>
+            !(link.getAttribute('href') ?? '').startsWith('#quest-item-') &&
+            link.querySelector('h1, h2, h3, h4, h5, h6, p, div')
+    )
+    blockLinks.forEach((link) => {
+        const blockTexts = Array.from(link.querySelectorAll('h1, h2, h3, h4, h5, h6, p'))
+            .map((block) => (block.textContent ?? '').trim())
+            .filter(Boolean)
+        const flatLink = document.createElement('a')
+        flatLink.setAttribute('href', link.getAttribute('href') ?? '')
+        flatLink.textContent = blockTexts.length > 0 ? blockTexts.join(': ') : (link.textContent ?? '').trim()
+        const linkParagraph = document.createElement('p')
+        linkParagraph.append(flatLink)
+        link.replaceWith(linkParagraph)
+    })
+}
+
+function removeClientOnlyToggles(document: Document) {
+    document.querySelectorAll('[role="group"], [role="radiogroup"]').forEach((group) => {
+        if (!group.querySelector('[role="radio"]')) return
+        group.remove()
+    })
+}
+
+function headingSlug(headingText: string) {
+    return headingText
+        .toLowerCase()
+        .replace(/[^\p{L}\p{M}\p{N}\p{Pc} -]/gu, '')
+        .replace(/ /g, '-')
+}
+
+// Markdown renderers make heading anchors from the heading text (GitHub slugger), not from the HTML ids.
+function collectSectionAnchors(document: Document) {
+    const headingCountsBySlug = new Map<string, number>()
+    return Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).flatMap((heading) => {
+        const text = (heading.textContent ?? '').trim()
+        const baseSlug = headingSlug(text)
+        const earlierHeadingCount = headingCountsBySlug.get(baseSlug) ?? 0
+        headingCountsBySlug.set(baseSlug, earlierHeadingCount + 1)
+        if (heading.tagName !== 'H2' || !text || PAGE_FEEDBACK_HEADINGS.has(text)) return []
+        return [{ id: earlierHeadingCount === 0 ? baseSlug : `${baseSlug}-${earlierHeadingCount}`, text }]
+    })
+}
+
+function rewriteProseLines(markdown: string, rewriteLine: (line: string) => string) {
+    let isInsideFence = false
+    return markdown
+        .split('\n')
+        .map((line) => {
+            if (/^\s*(```|~~~)/.test(line)) {
+                isInsideFence = !isInsideFence
+                return line
+            }
+            if (isInsideFence) return line
+            return rewriteLine(line)
+        })
+        .join('\n')
+}
+
+function unescapeLiteralCodeSpans(line: string) {
+    return line.replace(
+        /\\`([^`\n]+?)\\`/g,
+        (_, escapedCode: string) => `\`${escapedCode.replace(/\\([\\`*_{}[\]()#+\-.!>~])/g, '$1')}\``
+    )
+}
+
+function absolutizeRootRelativeLinks(line: string) {
+    return line.replace(/\]\(\/(?!\/)/g, `](${SITE_ORIGIN}/`)
+}
+
+const US_TO_EU_HOST_SWAPS = [
+    { usHost: 'us.i.posthog.com', euHost: 'eu.i.posthog.com', role: 'ingestion host' },
+    { usHost: 'us-assets.i.posthog.com', euHost: 'eu-assets.i.posthog.com', role: 'assets host' },
+    { usHost: 'webhooks.us.posthog.com', euHost: 'webhooks.eu.posthog.com', role: 'webhooks host' },
+    { usHost: 'us.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
+    { usHost: 'app.posthog.com', euHost: 'eu.posthog.com', role: 'app host for links' },
+]
+
+function mentionsHost(markdown: string, host: string) {
+    return new RegExp(`(?<![\\w.-])${host.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`).test(markdown)
+}
+
+function findUsOnlyHostSwaps(markdown: string) {
+    return US_TO_EU_HOST_SWAPS.filter(
+        ({ usHost, euHost }) => mentionsHost(markdown, usHost) && !mentionsHost(markdown, euHost)
+    )
+}
+
+function buildRegionNote(hostSwaps: typeof US_TO_EU_HOST_SWAPS) {
+    const usHostsByEuHost = new Map<string, { role: string; usHosts: string[] }>()
+    hostSwaps.forEach(({ usHost, euHost, role }) => {
+        const swap = usHostsByEuHost.get(euHost) ?? { role, usHosts: [] }
+        swap.usHosts.push(`\`https://${usHost}\``)
+        usHostsByEuHost.set(euHost, swap)
+    })
+    const swapPhrases = Array.from(usHostsByEuHost, ([euHost, { role, usHosts }]) => {
+        return `use \`https://${euHost}\` instead of ${usHosts.join(' or ')} (${role})`
+    })
+    return `> **Cloud region:** This page uses US Cloud hosts. For an EU Cloud project, ${swapPhrases.join(', and ')}.`
+}
+
+function buildPageHeader({
+    docsPath,
+    sectionAnchors,
+    usOnlyHostSwaps,
+}: {
+    docsPath: string
+    sectionAnchors: ReturnType<typeof collectSectionAnchors>
+    usOnlyHostSwaps: typeof US_TO_EU_HOST_SWAPS
+}) {
+    const headerBlocks = [`Canonical URL: ${SITE_ORIGIN}${docsPath}`]
+    if (usOnlyHostSwaps.length > 0) headerBlocks.push(buildRegionNote(usOnlyHostSwaps))
+    if (sectionAnchors.length >= MIN_TABLE_OF_CONTENTS_SECTIONS) {
+        const tableOfContents = sectionAnchors.map((section) => `- [${section.text}](#${section.id})`)
+        headerBlocks.push(['## On this page', '', ...tableOfContents].join('\n'))
+    }
+    return headerBlocks.join('\n\n')
+}
+
+function insertAfterTitle(markdown: string, block: string) {
+    const titleEnd = markdown.indexOf('\n')
+    if (titleEnd === -1) return `${markdown}\n\n${block}`
+    return `${markdown.slice(0, titleEnd)}\n\n${block}\n\n${markdown.slice(titleEnd).trimStart()}`
+}
+
+export const convertHtmlToAgentMarkdown = (html: string, title: string, docsPath: string): string => {
+    let sectionAnchors: ReturnType<typeof collectSectionAnchors> = []
+    const preprocessedContent = preprocessHtmlForTabs(extractMainContent(html), (document) => {
+        removePageFeedback(document)
+        inlineRecommendedBadges(document)
+        removeTabCountBadges(document)
+        convertCollapsiblesToSections(document)
+        flattenBlockLinks(document)
+        removeClientOnlyToggles(document)
+        sectionAnchors = collectSectionAnchors(document)
+    })
+    const bodyMarkdown = rewriteProseLines(
+        postProcessMarkdown(createTurndownService(title).turndown(preprocessedContent), title),
+        (line) => absolutizeRootRelativeLinks(unescapeLiteralCodeSpans(line))
+    )
+    const header = buildPageHeader({
+        docsPath,
+        sectionAnchors,
+        usOnlyHostSwaps: findUsOnlyHostSwaps(bodyMarkdown),
+    })
+    return `${insertAfterTitle(bodyMarkdown, header)}\n`
 }

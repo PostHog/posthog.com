@@ -22,7 +22,7 @@ Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few group
 - `vision-scanners-list` – list every scanner in the project, with its config and credit figures.
 - `vision-scanners-counts` – count the project's scanners, in total and by type, and how many are enabled.
 - `vision-scanners-get` – read one scanner's config.
-- `vision-scanners-draft` – draft a full scanner config from a goal like "find where users get stuck during onboarding". Nothing is saved. Give it a monthly credit budget and it also picks sampling, model, and a credit limit to fit.
+- `vision-scanners-draft` – draft a full scanner config from a goal like "find where users get stuck during onboarding". Nothing is saved. Give it a monthly credit budget and it also picks sampling, model, and a credit limit to fit. With a budget, it can also draft an [experiment scanner](/docs/replay-vision/scanner-types#experiment): pass an `experiment_id`, or name a running experiment in the goal. Without a budget, it ignores `experiment_id`.
 - `vision-scanners-suggest-tags` – suggest tags for a classifier, grounded in your product data or the scanner's own observations. Nothing is saved.
 - `vision-scanners-create` – create a new scanner.
 - `vision-scanners-update` – edit an existing one.
@@ -43,8 +43,12 @@ Call the first two before `vision-scanners-create` to avoid creating a scanner t
 - `vision-scanners-scan-session` – run an existing scanner against one session now, bypassing its sampling and schedule.
 - `vision-scanners-scan-sessions` – run an existing scanner against up to 200 sessions now. Sessions it has already observed are skipped.
 - `vision-observations-retry` – re-run a failed or ineligible observation. It costs credits like any scan.
+- `vision-requests-create` – scan up to 200 sessions with a saved scanner or an inline question, and get back one request ID. An `idempotency_key` makes retries safe. See [scan sessions from your backend](/docs/replay-vision/api).
+- `vision-requests-get` – read a request's status and each session's state and answer.
 
-Scans run asynchronously. Poll `vision-scanners-observations-list` until each observation leaves `pending` or `running`.
+Scans run asynchronously. Poll `vision-scanners-observations-list` until each observation leaves `pending` or `running`, or poll `vision-requests-get` until the request is `completed`.
+
+To scan sessions every time an event happens, have your agent build a workflow with a [Replay Vision step](/docs/workflows/replay-vision) instead. The workflow MCP tools create it as a draft.
 
 ### Backfills
 
@@ -76,6 +80,7 @@ Across scanners:
 Aggregate stats, rather than the rows themselves:
 
 - `vision-scanners-observations-stats` – one scanner's status mix and success rate, distinct sessions covered, rating totals, and per-type distributions (monitor verdict counts, classifier tag rankings, scorer score summary and histogram).
+- `vision-scanners-variants-list` – compare an experiment scanner's variants side by side: observation and people counts, median session length, and the rate each variant was sampled at, with the latest observations. If the scanner has a variant analysis scout, it also returns the scout's per-variant digests and the differences between variants. Experiment scanners only.
 
 ### Rating results
 
@@ -99,7 +104,7 @@ Aggregate stats, rather than the rows themselves:
 - `vision-alerts-create`, `vision-alerts-update`, and `vision-alerts-delete` – manage them. A new alert notifies nobody until it has a destination.
 - `vision-alerts-destinations-create` and `vision-alerts-destinations-delete` – add or remove a Slack or webhook destination.
 - `vision-alerts-events-list` – an alert's history of checks, firings, and resolutions.
-- `vision-alerts-reset` – reset an errored or broken alert and run a fresh check.
+- `vision-alerts-reset` – reset a broken alert and run a fresh check. Only broken alerts can be reset.
 
 ### Scouts
 

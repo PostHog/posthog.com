@@ -1,0 +1,121 @@
+---
+# Scope: what Error Tracking is, the questions it answers, the four steps this guide follows
+# (Capture, Query, Automate, Self-drive), how an exception
+# becomes an issue, and install.
+title: Error Tracking 101
+shortTitle: Error Tracking 101
+subtitle: What an exception carries, how it becomes an issue, and what else in PostHog can read it.
+pocketGuideOrder: 1
+section: Capture
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="issue-anatomy"
+    caption="An issue page shows the error, when it happened, who it affected, and what agents are doing about it."
+    annotations={[
+        {
+            x: 24.4,
+            y: 7.4,
+            title: 'The issue, named by the exception it groups',
+            description:
+                'PostHog names it from the exception type unless you set one, and the pencil renames it. Assigning, resolving, and alerting all happen here rather than on the individual throws.',
+        },
+        {
+            x: 28.8,
+            y: 25.7,
+            title: 'When it started, and whether it still happens',
+            description:
+                'Exception volume over the range, marked first seen and last seen. Bars that restart after a quiet week mean the issue regressed.',
+        },
+        {
+            x: 77.2,
+            y: 12.1,
+            title: 'What self-driving is already doing about it',
+            description:
+                'Agents that picked the issue up, what they are researching, and which ones have a fix ready for you to review.',
+        },
+        {
+            x: 86.2,
+            y: 39,
+            title: 'Stack trace, properties, timeline, and the recording',
+            description:
+                'Four tabs show the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
+        },
+        {
+            x: 80,
+            y: 54.2,
+            title: 'The stack trace, with your code beside it',
+            description:
+                'The frames that led to the throw, innermost first, with the source around the failing line. For bundled code, the frames are readable only if PostHog can get a source map. You can upload it, host it publicly, or embed it in the bundle.',
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="An actionable report in your inbox, with the issue, sessions, and affected accounts attached."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Checkout confirm fails when the cart contains a discounted item. The confirm step reads a total the discount path never set"
+    report={{
+        title: 'Checkout confirm fails when the cart contains a discounted item',
+        source: 'Scout · error tracking',
+        receivedAgo: '2h',
+        affected: '47 sessions, 12 accounts, 3 on paid plans',
+        body: "A new exception, `TypeError: Cannot read properties of undefined (reading 'total')` in `checkout/confirm.ts`, first seen at 09:14, four minutes after release 1.4.2 went out. It only fires for carts holding a discounted item.\n\nThe same sessions show a rage-click cluster on the Confirm order button, and two support conversations this morning describe not being able to complete an order. All three arrived as separate signals and were grouped into this one report.\n\nThe confirm step reads `cart.pricing.total`. The discount path builds `cart.pricing` without a `total`, so the read fails before the order is placed.",
+        suggestedAction: 'Have the discount path set the total, and make the confirm step fall back to summing line items when it is missing.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Error Tracking 101
+
+Your code throws an exception when something goes wrong, such as a `TypeError`. A stack trace tells you what led up to the exception. Error Tracking captures these exceptions and stack traces as queryable PostHog events.
+
+These exception events sit alongside your other PostHog events. That lets you answer questions you can't with just a stack trace:
+
+- Which customers are impacted?
+- Does it impact conversion and retention?
+- Can this error be tied to loss in revenue?
+- Were they part of any feature flag or experiment rollouts?
+- What's shown on the user's page before and after the exception is thrown?
+
+## Exceptions and issues
+
+Like other PostHog tools, each instance of an <Term name="exception" /> is captured as a `$exception` <Term name="event" />. Similar exceptions are aggregated into <Term name="issue">issues</Term> <SeeFig n={1} />. Those issues are the base unit of work: you diagnose, triage, assign, and fix them, not individual exceptions.
+
+## By the end of this pocket guide
+
+Most production apps have more exceptions than your team can fix. Error Tracking helps you find the highest-impact issues, report them, and automate the fixes. We'll introduce each step throughout this guide:
+
+- **Capture** – Group exceptions into issues. Make stack traces readable. Keep noise out.
+- **Query** – Query exceptions as events with SQL and MCP. Join them with revenue, funnels, and experiments to measure impact.
+- **Automate** – Route each issue to the team that owns it. Alert on spikes and regressions.
+- **Self-drive** – Scouts watch for failure patterns and measure their impact. They send reports to your inbox. Agents open pull requests to fix them.
+
+The end result is a report like this one, with a pull request ready to review <SeeFig n={2} />.
+
+## Install and turn it on
+
+Run the Error Tracking wizard. It installs PostHog if your app doesn't have it, turns on exception capture, and sets up source map uploads where your platform needs them. Or [install it yourself](/docs/error-tracking/installation).
+
+<Setup />
+
+To capture uncaught exceptions automatically, switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in your project settings. An autocapture setting in your SDK config overrides the project switch, and exceptions you send yourself with `captureException` don't need it. [The next page](/learn/error-tracking/pocket-guide/group-exceptions) covers how PostHog groups exceptions into issues.
+
+<SeeAlso>
+
+See also: [Error Tracking](/docs/error-tracking) · [Start here](/docs/error-tracking/start-here) · [Issues and exceptions](/docs/error-tracking/issues-and-exceptions) · [Installation](/docs/error-tracking/installation)
+
+</SeeAlso>
+
+</RightPage>

@@ -2,7 +2,6 @@ import React from 'react'
 
 import { IconArrowUpRight, IconRewindPlay } from '@posthog/icons'
 
-import { SingleCodeBlock } from 'components/CodeBlock'
 import OSButton from 'components/OSButton'
 
 /**
@@ -72,46 +71,22 @@ export function AskAI({ q, children }: { q: string; children?: React.ReactNode }
 }
 
 /**
- * A prompt a section ends on, set the way `<Action />` sets a chapter's one CTA – labelled code
- * block with copy, then the button that opens it in PostHog AI. Same treatment, but authored
- * inline so a page can end more than one section on something to run.
- */
-export function Prompt({ children, label = 'Ask PostHog AI' }: { children: string; label?: string }): JSX.Element {
-    const prompt = String(children).trim()
-    return (
-        <span className="not-prose my-[0.8em] block">
-            {/* whitespace-pre would scroll a sentence sideways, so it wraps here. */}
-            <span className="mb-3 block [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-                <SingleCodeBlock language="text" label="Prompt for PostHog AI" showLabel showCopy showAskAI={false}>
-                    {prompt}
-                </SingleCodeBlock>
-            </span>
-            <OSButton asLink to={maxPromptUrl(prompt)} external variant="primary" size="md">
-                {label}
-            </OSButton>
-        </span>
-    )
-}
-
-/**
- * A Replay Vision scanner template, linked straight into the editor pre-filled with it. Carries
- * the three things that tell you what a scanner is: its type, the question it asks, and the shape
- * of the answer you get back.
+ * A Replay Vision scanner starting point, linked into the app's goal flow with the goal prefilled.
+ * Carries the three things that tell you what a scanner is: its type, the question it asks, and the
+ * shape of the answer you get back.
  *
- * Template keys are the app's own – products/replay_vision/frontend/replay_scanners/scannerTemplates.ts.
- * The route is `/replay-vision/new/details?template=<key>`, which is what the in-app template
- * picker pushes when you click a card.
+ * `?goal=` only prefills the goal box. PostHog AI drafts the scanner when the user clicks Draft my scanner.
  */
-export function ScannerTemplate({
+export function ScannerStarter({
     name,
-    template,
+    goal,
     type,
     asks,
     answers,
     property,
 }: {
     name: string
-    template: string
+    goal: string
     type: string
     asks: string
     answers: string
@@ -119,7 +94,7 @@ export function ScannerTemplate({
 }): JSX.Element {
     return (
         <a
-            href={`https://app.posthog.com/replay-vision/new/details?template=${template}`}
+            href={`https://app.posthog.com/replay-vision/new/template?goal=${encodeURIComponent(goal)}`}
             className="group/tpl not-prose mb-2 block rounded border border-primary bg-primary px-3 py-2 no-underline hover:border-orange"
         >
             <span className="flex items-baseline gap-2">

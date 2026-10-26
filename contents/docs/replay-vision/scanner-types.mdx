@@ -64,7 +64,7 @@ PostHog reads your prompt to judge whether a yes is good or bad news (a complete
 
 ### Impact and cohorts
 
-The scanner's **Overview** tab shows the **Verdict mix** for the selected date range (the last 14 days by default). Each verdict row has a **Save as cohort** button that saves the users behind that verdict as a static [cohort](/docs/data/cohorts). The cohort covers as many days as the selected range, counted back from today, up to 90 days.
+The scanner's **Overview** tab shows the **Verdict mix** for the selected date range. The range defaults to the last 14 days, or to the days since the scanner was created if it's less than 7 days old. Each verdict row has a **Save as cohort** button that saves the users behind that verdict as a static [cohort](/docs/data/cohorts). The cohort covers as many days as the selected range, counted back from today, up to 90 days.
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
@@ -109,7 +109,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. The app 
 
 ### Impact and cohorts
 
-The scanner's **Overview** tab ranks the top configured categories and, when freeform categories are allowed, the top freeform ones, for the selected date range (the last 14 days by default). Each category has a **Save as cohort** button that saves the users tagged with it as a static [cohort](/docs/data/cohorts), covering as many days as the selected range, counted back from today, up to 90 days.
+The scanner's **Overview** tab ranks the top configured categories and, when freeform categories are allowed, the top freeform ones, for the selected date range. The range defaults to the last 14 days, or to the days since the scanner was created if it's less than 7 days old. Each category has a **Save as cohort** button that saves the users tagged with it as a static [cohort](/docs/data/cohorts), covering as many days as the selected range, counted back from today, up to 90 days.
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
@@ -206,6 +206,7 @@ This also helps you find a broken flag check. If summaries of control sessions d
 
 - In the new experiment form, on the analytics step, turn on **Compare what users do in each variant**. The scanner turns on when you launch the experiment.
 - On a running experiment's **Recordings** tab, select **Set up experiment scanner**.
+- In Replay Vision, when you create a scanner, click **Track an experiment** under **Common starting points**, pick a running experiment, and click **Draft my scanner**. This starting point only shows when the project has a running experiment.
 - In Replay Vision, create a scanner and select the **Experiment** type.
 
 **Output**

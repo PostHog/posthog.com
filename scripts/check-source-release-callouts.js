@@ -11,7 +11,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const SOURCES_DIR = path.join(__dirname, '..', 'contents', 'docs', 'cdp', 'sources')
+const SOURCES_DIR = path.join(__dirname, '..', 'contents', 'docs', 'data-pipelines', 'sources')
 
 // A notice about a sync method rather than about the source itself is legitimate, so the patterns
 // below only match a claim about "this source" / "the <X> source", or a callout titled for a

@@ -16,6 +16,18 @@ import {
     BookingStepsFigure,
     BookingFunnelFigure,
 } from './ProductAnalyticsTrendsFunnelsExhibits'
+import {
+    BookingRetentionFigure,
+    RepeatBookingFigure,
+    SavedCohortRetentionFigure,
+    SavedStayJourneyFigure,
+} from './ProductAnalyticsRetentionExhibits'
+import {
+    BookingDashboardFigure,
+    FindingStaysDashboardFigure,
+    ReturningGuestsDashboardFigure,
+} from './ProductAnalyticsDashboardExhibits'
+import ProductAnalyticsDashboardNextSteps from './ProductAnalyticsDashboardNextSteps'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -48,7 +60,7 @@ import {
     VariantsFigure,
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
-import { AskAI, CTA, Prompt, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
+import { AskAI, CTA, ScannerStarter, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -77,6 +89,14 @@ export const bookMdxComponents = {
     FilterUsersTrendFigure,
     BookingStepsFigure,
     BookingFunnelFigure,
+    RepeatBookingFigure,
+    BookingRetentionFigure,
+    SavedStayJourneyFigure,
+    SavedCohortRetentionFigure,
+    BookingDashboardFigure,
+    FindingStaysDashboardFigure,
+    ReturningGuestsDashboardFigure,
+    ProductAnalyticsDashboardNextSteps,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
@@ -112,9 +132,8 @@ export const bookMdxComponents = {
     ViewRecordings,
     ViewRecording,
     AskAI,
-    Prompt,
     CTA,
-    ScannerTemplate,
+    ScannerStarter,
     Term,
     ...proseComponents,
 }

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { TWIG_VISIT_RECORDING_URL } from '../../constants'
 import { LoginView, ProfileMenu, SavedStaysView } from '@posthog/twig-components/account'
 import { SavedStay } from '@posthog/twig-components/saved-stay'
 import { StayCardContent } from '@posthog/twig-components/stay-card'
@@ -42,9 +43,6 @@ const firstVisit: ExampleEvent[] = [
         sessionId: 'session_a1',
     },
 ]
-
-const REPLAY_VIDEO_URL =
-    'https://res.cloudinary.com/dmukukwp6/video/upload/Clean_Shot_2026_10_02_at_1_05_27_PM_553e7c2693.mp4'
 
 const profile = {
     displayName: 'Edgar Hogg',
@@ -484,7 +482,7 @@ function formatReplayTime(milliseconds: number): string {
     return `${(milliseconds / 1000).toFixed(1)}s`
 }
 
-export function SessionReplayLinkFigure(): JSX.Element {
+export function SessionReplayLinkFigure({ autoPlay = false }: { autoPlay?: boolean } = {}): JSX.Element {
     const videoRef = useRef<HTMLVideoElement>(null)
     const [activeReplayEvent, setActiveReplayEvent] = useState(0)
     const [durationMs, setDurationMs] = useState(19_133)
@@ -529,41 +527,16 @@ export function SessionReplayLinkFigure(): JSX.Element {
 
     return (
         <Exhibit stacked>
-            <style>{`
-                @media (min-width: 360px) and (pointer: fine) {
-                    .identity-session-replay-grid {
-                        grid-template-columns: minmax(0, 1fr) 11.5rem;
-                        gap: 0.5rem;
-                    }
-
-                    .identity-session-replay-grid .session-replay-inspector-summary {
-                        display: none;
-                    }
-                }
-
-                @media (min-width: 900px) {
-                    .identity-session-replay-grid {
-                        grid-template-columns: minmax(18rem, 1fr) 15rem;
-                        gap: 1rem;
-                    }
-
-                    .identity-session-replay-grid .session-replay-inspector-summary {
-                        display: flex;
-                    }
-                }
-            `}</style>
-            <div className="identity-session-replay-grid grid items-stretch gap-4">
+            <div className="identity-session-replay-grid grid min-w-0 items-stretch gap-4 @xs:h-80 @xs:grid-cols-[minmax(0,1fr)_10rem] @xs:gap-2 @2xl:h-96 @2xl:grid-cols-[minmax(18rem,1fr)_15rem] @2xl:gap-4 @xs:[&_.session-replay-inspector-summary]:hidden @2xl:[&_.session-replay-inspector-summary]:flex">
                 <section
                     aria-label="PostHog Session Replay"
                     className="flex min-h-0 min-w-0 flex-col overflow-hidden rounded border border-[#d3d0c8] bg-[#fffdfa] font-rounded text-[#292724] shadow-sm"
                 >
                     <header className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-[#d3d0c8] bg-[#faf8f3] px-3 py-2 text-xs">
                         <strong className="text-sm">Session replay</strong>
-                        <span className="hidden font-code text-[11px] text-[#716c63] min-[520px]:inline">
-                            twig.com/stays
-                        </span>
-                        <span className="ml-auto hidden font-semibold min-[900px]:inline">Edgar Hogg</span>
-                        <span className="hidden rounded border border-[#d3d0c8] bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold min-[900px]:inline">
+                        <span className="hidden font-code text-[11px] text-[#716c63] @lg:inline">twig.com/stays</span>
+                        <span className="ml-auto hidden font-semibold @2xl:inline">Edgar Hogg</span>
+                        <span className="hidden rounded border border-[#d3d0c8] bg-[#fffdfa] px-2 py-0.5 font-code text-[10px] font-semibold @2xl:inline">
                             session_b2
                         </span>
                     </header>
@@ -574,10 +547,12 @@ export function SessionReplayLinkFigure(): JSX.Element {
                             aria-label="Twig visit recording"
                             className="block aspect-video max-h-full w-full object-contain"
                             disablePictureInPicture
+                            autoPlay={autoPlay}
+                            loop={autoPlay}
                             muted
                             playsInline
                             preload="metadata"
-                            src={REPLAY_VIDEO_URL}
+                            src={TWIG_VISIT_RECORDING_URL}
                             onDurationChange={(event) => syncReplayDuration(event.currentTarget)}
                             onEnded={(event) => {
                                 setPlaying(false)

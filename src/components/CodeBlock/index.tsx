@@ -243,15 +243,19 @@ export const CodeBlock = ({
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
-            .replace(/<ph_posthog_js_defaults>/g, '2026-05-30')
+            .replace(/<ph_posthog_js_defaults>/g, '2026-08-30')
             .replace(
                 /<ph_proxy_path>/g,
                 projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
             )
     }
 
-    const copyToClipboard = (code: string): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+    const copyToClipboard = async (code: string): Promise<void> => {
+        try {
+            await navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+        } catch {
+            return
+        }
         onCopy?.()
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
@@ -334,7 +338,10 @@ export const CodeBlock = ({
                             </Tab.List>
                         </Tab.Group>
                     ) : showLabel ? (
-                        <div className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50">
+                        <div
+                            className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50"
+                            data-md-export={currentLanguage.file || label ? undefined : 'skip'}
+                        >
                             {currentLanguage.file ? (
                                 <div className="flex items-center space-x-1.5">
                                     <svg
@@ -401,7 +408,10 @@ export const CodeBlock = ({
                             return (
                                 <>
                                     {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
-                                        <div className="relative flex items-center justify-center px-1">
+                                        <div
+                                            className="relative flex items-center justify-center px-1"
+                                            data-md-export="skip"
+                                        >
                                             <a
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}
                                                 target="_blank"
