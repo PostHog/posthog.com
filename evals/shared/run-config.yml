@@ -1,0 +1,18 @@
+# Run settings: the harnesses and models every check runs on, the default arms,
+# and how many samples. `verified: true` means the pair is listed by
+# `gauge models list --hosted` for our org and a dry run accepted it.
+# Unverified pairs run only with --include-unverified.
+harnesses:
+    - id: claude-code
+      gauge: CLAUDE_CODE
+      models: [claude-sonnet-5-5]
+      verified: true
+    - id: codex
+      gauge: CODEX_CLI
+      models: [gpt-6-sol]
+      verified: false
+
+# Arms a check gets when its eval file doesn't list any.
+defaultArms: [baseline, link, inline]
+
+samples: 1

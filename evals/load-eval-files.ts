@@ -3,34 +3,32 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { globSync } from 'glob'
 import { parse } from 'yaml'
-import { assertionName, assertionRubric, needsWorkspace, parseAssertion, type Assertion } from './assertions.ts'
 
 // Finds, parses and checks eval files. Nothing in here knows about Gauge.
 
 export const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-export const arms = ['baseline', 'link', 'inline', 'skill'] as const
+export const arms = ['baseline', 'link', 'inline'] as const
 export type Arm = (typeof arms)[number]
 export const statuses = ['active', 'draft', 'skipped'] as const
 export type Status = (typeof statuses)[number]
 export const suites = ['smoke', 'deep'] as const
 export type Suite = (typeof suites)[number]
 
-export type Fixture = { repo: string; ref?: string; folder: string; source?: string }
+export type Codebase = { repo: string; ref?: string; folder: string; source?: string }
 export type Harness = { id: string; gauge: string; models: string[]; verified: boolean }
-export type Matrix = { harnesses: Harness[]; defaultArms: Arm[]; samples: number }
-export type Shared = { criteria: Record<string, string>; fixtures: Record<string, Fixture>; matrix: Matrix }
+export type RunConfig = { harnesses: Harness[]; defaultArms: Arm[]; samples: number }
+export type Shared = { criteria: Record<string, string>; codebases: Record<string, Codebase>; runConfig: RunConfig }
 
 export type EvalCheck = {
     id: string
     description: string | null
-    fixture: string | null
+    codebase: string | null // codebase_to_test: a key in shared/codebases-to-test.yaml; null when answer-only
     pages: string[]
     prompt: string
     suite: Suite
     arms: Arm[] | null
-    shared: string[] // names from criteria.yaml
-    assertions: Assertion[]
+    shared: string[] // names from shared/criteria.yaml
     rubrics: Record<string, string>
 }
 
@@ -50,17 +48,20 @@ export type Problem = { path: string; message: string }
 const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 export const maxPagesPerCheck = 4
 const fileKeys = ['owner', 'tags', 'status', 'pages', 'checks']
-const checkKeys = ['id', 'description', 'workspace', 'pages', 'prompt', 'suite', 'arms', 'criteria']
-const criteriaKeys = ['shared', 'assertions', 'rubrics']
+const checkKeys = ['id', 'description', 'codebase_to_test', 'pages', 'prompt', 'suite', 'arms', 'criteria']
+const criteriaKeys = ['shared', 'rubrics']
 
 const readYaml = (path: string) => parse(readFileSync(join(repoRoot, path), 'utf8'))
 
 export function loadShared(): Shared {
-    const matrix = readYaml('evals/matrix.yaml') as Matrix
+    const runConfig = readYaml('evals/shared/run-config.yml') as RunConfig
     return {
-        criteria: readYaml('evals/criteria.yaml') as Record<string, string>,
-        fixtures: readYaml('evals/fixtures.yaml') as Record<string, Fixture>,
-        matrix: { ...matrix, harnesses: matrix.harnesses.map((h) => ({ ...h, verified: h.verified === true })) },
+        criteria: readYaml('evals/shared/criteria.yaml') as Record<string, string>,
+        codebases: readYaml('evals/shared/codebases-to-test.yaml') as Record<string, Codebase>,
+        runConfig: {
+            ...runConfig,
+            harnesses: runConfig.harnesses.map((h) => ({ ...h, verified: h.verified === true })),
+        },
     }
 }
 
@@ -160,15 +161,15 @@ export function parseEvalFile(
         const suite = (c.suite ?? 'smoke') as Suite
         if (!suites.includes(suite)) problem(`${where}: suite must be one of ${suites.join(', ')}`)
 
-        let fixture: string | null = null
-        if (c.workspace !== undefined) {
-            const workspace = c.workspace as Record<string, unknown> | null
-            if (!workspace || typeof workspace.fixture !== 'string') problem(`${where}: workspace needs a fixture`)
-            else if (!shared.fixtures[workspace.fixture])
-                problem(`${where}: no fixture "${workspace.fixture}" in evals/fixtures.yaml`)
-            else fixture = workspace.fixture
+        let codebase: string | null = null
+        if (c.codebase_to_test !== undefined) {
+            if (typeof c.codebase_to_test !== 'string')
+                problem(`${where}: codebase_to_test must be a name from evals/shared/codebases-to-test.yaml`)
+            else if (!shared.codebases[c.codebase_to_test])
+                problem(`${where}: no codebase "${c.codebase_to_test}" in evals/shared/codebases-to-test.yaml`)
+            else codebase = c.codebase_to_test
         }
-        if (fixture && !description)
+        if (codebase && !description)
             problem(`${where}: code checks need a description: what it tests and what the prompt leaves out`)
 
         const listedPages = c.pages ?? []
@@ -196,10 +197,9 @@ export function parseEvalFile(
             }
         }
 
-        // criteria has three kinds, each under its own key: shared rubrics by name,
-        // typed assertions, and this check's own rubrics.
+        // criteria has two kinds, each under its own key: shared rubrics by name, and
+        // this check's own rubrics.
         const sharedNames: string[] = []
-        const assertions: Assertion[] = []
         const rubrics: Record<string, string> = {}
         if (!c.criteria || typeof c.criteria !== 'object' || Array.isArray(c.criteria))
             problem(`${where}: criteria is required`)
@@ -207,30 +207,15 @@ export function parseEvalFile(
             const criteria = c.criteria as Record<string, unknown>
             for (const key of Object.keys(criteria))
                 if (!criteriaKeys.includes(key))
-                    problem(`${where}: unknown key "criteria.${key}"; use ${criteriaKeys.join(', ')}`)
+                    problem(`${where}: unknown key "criteria.${key}"; use ${criteriaKeys.join(' or ')}`)
 
             if (criteria.shared !== undefined) {
                 if (!isStringList(criteria.shared)) problem(`${where}: criteria.shared must be a list of names`)
                 else
                     for (const name of criteria.shared) {
                         if (!shared.criteria[name])
-                            problem(`${where}: no shared criterion "${name}" in evals/criteria.yaml`)
+                            problem(`${where}: no shared criterion "${name}" in evals/shared/criteria.yaml`)
                         else sharedNames.push(name)
-                    }
-            }
-
-            if (criteria.assertions !== undefined) {
-                if (!Array.isArray(criteria.assertions) || criteria.assertions.length === 0)
-                    problem(`${where}: criteria.assertions must be a non-empty list`)
-                else
-                    for (const rawAssertion of criteria.assertions) {
-                        const parsed = parseAssertion(rawAssertion)
-                        if (!parsed.assertion) problem(`${where}: ${parsed.problem}`)
-                        else if (needsWorkspace(parsed.assertion) && !c.workspace)
-                            problem(`${where}: ${parsed.assertion.kind} assertions need a workspace fixture`)
-                        else if (assertions.some((other) => assertionName(other) === assertionName(parsed.assertion!)))
-                            problem(`${where}: duplicate assertion ${assertionName(parsed.assertion)}`)
-                        else assertions.push(parsed.assertion)
                     }
             }
 
@@ -242,36 +227,32 @@ export function parseEvalFile(
                         if (!kebab.test(name)) problem(`${where}: rubric name "${name}" must be kebab-case`)
                         else if (typeof value !== 'string' || value.trim() === '')
                             problem(`${where}: rubric "${name}" needs text`)
-                        else if (name.startsWith('assert-'))
-                            problem(`${where}: "${name}": names starting with assert- are for assertions`)
                         else if (shared.criteria[name])
                             problem(`${where}: "${name}" is a shared criterion; list it in criteria.shared instead`)
                         else rubrics[name] = value.trim()
                     }
             }
 
-            if (sharedNames.length + assertions.length + Object.keys(rubrics).length === 0)
-                problem(`${where}: criteria needs at least one shared criterion, assertion or rubric`)
+            if (sharedNames.length + Object.keys(rubrics).length === 0)
+                problem(`${where}: criteria needs at least one shared criterion or rubric`)
         }
 
         const usesFolder = [
             prompt,
             ...Object.values(rubrics),
             ...sharedNames.map((name) => shared.criteria[name] ?? ''),
-            ...assertions.filter(needsWorkspace).map(assertionRubric),
         ].some((text) => text.includes('{folder}'))
-        if (usesFolder && !fixture) problem(`${where}: {folder} needs a workspace fixture`)
+        if (usesFolder && !codebase) problem(`${where}: {folder} needs a codebase_to_test`)
 
         checks.push({
             id,
             description,
-            fixture,
+            codebase,
             pages: isStringList(listedPages) ? listedPages : [],
             prompt,
             suite,
             arms: checkArms,
             shared: sharedNames,
-            assertions,
             rubrics,
         })
     }

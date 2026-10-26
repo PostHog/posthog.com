@@ -9,8 +9,7 @@ checks:
           to a project with `posthog.group()` and set the project's name as a
           group property. The prompt asks for per-project analysis and never says
           "group".
-      workspace:
-          fixture: web-vite
+      codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
       prompt: |

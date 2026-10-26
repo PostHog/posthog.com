@@ -9,8 +9,7 @@ checks:
           catch-all distinct ID for backend events, toward a random ID per
           event with person processing off. The prompt never names distinct IDs,
           person profiles or anonymous events.
-      workspace:
-          fixture: node-express
+      codebase_to_test: node-express
       pages:
           - docs/product-analytics/installation/nodejs
       prompt: |

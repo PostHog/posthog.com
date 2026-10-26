@@ -17,9 +17,9 @@ checks:
           I set this up?
       criteria:
           shared: [answers-directly]
-          assertions:
-              - mentions: Filter out internal and test users
           rubrics:
+              names-the-toggle: >-
+                  The final answer mentions "Filter out internal and test users".
               settings-filter: >-
                   The answer says to add filters in the project settings, and that
                   a filter describes the traffic to keep, so it needs a negative

@@ -1,16 +1,14 @@
 /**
- * Offline tests for the docs eval runner: eval file validation, rendering, the Gauge
- * spec and the docs-read report. Nothing here calls Gauge or the network.
+ * Offline tests for the docs eval runner: eval file validation, selection, prompts
+ * and the Gauge spec. Nothing here calls Gauge or the network.
  *
  * Run: pnpm test:evals
  */
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { toGaugeSpecs } from './adapters/gauge.ts'
-import { assertionName, assertionRubric, parseAssertion } from './assertions.ts'
-import { extractRunIds, normalizeDocsUrl, readRun } from './docs-read.ts'
-import { checkKey, renderChecks, renderPrompt, skillName, type RenderedCheck } from './render.ts'
+import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
+import { armPrompt, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
 import { changedSelection, parseArgs, select } from './run.ts'
 import {
     loadEvalFiles,
@@ -20,7 +18,7 @@ import {
     pageIndex,
     parseEvalFile,
     type EvalFile,
-} from './spec.ts'
+} from './load-eval-files.ts'
 
 const shared = loadShared()
 const everyPage = () => true
@@ -85,7 +83,7 @@ describe('eval file validation', () => {
         assert.ok(found.some((m) => m.includes('unknown key "sampleCount"')))
     })
 
-    test('criteria takes only shared, assertions and rubrics', () => {
+    test('criteria takes only shared and rubrics', () => {
         const found = messages('contents/docs/a.eval.yaml', {
             checks: [{ id: 'x', prompt: 'p', criteria: { use: ['builds'], 'my-rubric': 'text' } }],
         })
@@ -94,19 +92,19 @@ describe('eval file validation', () => {
         assert.ok(found.some((m) => m.includes('criteria needs at least one')))
     })
 
-    test('shared criteria and fixtures must exist', () => {
+    test('shared criteria and codebases must exist', () => {
         const found = messages('contents/docs/a.eval.yaml', {
-            checks: [{ id: 'x', prompt: 'p', workspace: { fixture: 'nope' }, criteria: { shared: ['nope'] } }],
+            checks: [{ id: 'x', prompt: 'p', codebase_to_test: 'nope', criteria: { shared: ['nope'] } }],
         })
-        assert.ok(found.some((m) => m.includes('no fixture "nope"')))
+        assert.ok(found.some((m) => m.includes('no codebase "nope"')))
         assert.ok(found.some((m) => m.includes('no shared criterion "nope"')))
     })
 
-    test('{folder} needs a fixture', () => {
+    test('{folder} needs a codebase', () => {
         const found = messages('contents/docs/a.eval.yaml', {
             checks: [{ id: 'x', prompt: 'Change {folder}/', criteria: { rubrics: { c: 'ok' } } }],
         })
-        assert.ok(found.some((m) => m.includes('{folder} needs a workspace fixture')))
+        assert.ok(found.some((m) => m.includes('{folder} needs a codebase')))
     })
 
     test('a check reads at most four pages', () => {
@@ -141,11 +139,11 @@ const fileFor = (path: string, raw: unknown): EvalFile => {
     return file!
 }
 
-describe('descriptions, suites and assertions', () => {
+describe('descriptions and suites', () => {
     const codeCheck = {
         id: 'x',
         description: 'Why this check exists.',
-        workspace: { fixture: 'acme-nextjs' },
+        codebase_to_test: 'acme-nextjs',
         prompt: 'Tie events in {folder}/ to the signed-in user.',
         criteria: { shared: ['stays-in-folder'] },
     }
@@ -171,97 +169,18 @@ describe('descriptions, suites and assertions', () => {
             ['contents/docs/b.eval.yaml']
         )
     })
-
-    test('assertions parse to one kind each, with fixed names and rubrics', () => {
-        const calls = parseAssertion({ calls: 'posthog.reset', in: 'src/store.js' }).assertion!
-        assert.equal(assertionName(calls), 'assert-calls-posthog-reset')
-        assert.equal(
-            assertionRubric(calls),
-            'The code in {folder}/src/store.js calls `posthog.reset`. Cite the file and line.'
-        )
-        assert.equal(assertionName(parseAssertion({ 'no-literal-token': true }).assertion!), 'assert-no-literal-token')
-        assert.match(parseAssertion({ dependency: 'a', command: 'b' }).problem!, /exactly one/)
-        assert.match(parseAssertion({ command: 'make', in: 'x' }).problem!, /only goes with/)
-        assert.match(parseAssertion({ 'file-exists': '../secrets' }).problem!, /inside the fixture folder/)
-    })
-
-    test('workspace assertions need a fixture; mentions does not', () => {
-        const found = messages('contents/docs/a.eval.yaml', {
-            checks: [
-                {
-                    ...answerOnly.checks[0],
-                    criteria: {
-                        shared: ['answers-directly'],
-                        assertions: [{ dependency: 'posthog-js' }, { mentions: 'formula mode' }],
-                    },
-                },
-            ],
-        })
-        assert.deepEqual(found, ['check ask: dependency assertions need a workspace fixture'])
-    })
-
-    test('rubric names cannot take the assert- prefix', () => {
-        const found = messages('contents/docs/a.eval.yaml', {
-            checks: [{ ...answerOnly.checks[0], criteria: { rubrics: { 'assert-mine': 'x' } } }],
-        })
-        assert.ok(found.some((m) => m.includes('names starting with assert- are for assertions')))
-    })
 })
 
-describe('selection and the page index', () => {
-    const anchor = fileFor('contents/docs/a.eval.yaml', {
-        ...answerOnly,
-        checks: [{ ...answerOnly.checks[0], pages: ['docs/b'] }],
-    })
-    const other = fileFor('contents/docs/b.eval.yaml', answerOnly)
-    const draft = fileFor('contents/docs/c.eval.yaml', { ...answerOnly, status: 'draft' })
-
-    test('a check is indexed under its own page and every page it lists', () => {
-        const index = pageIndex([anchor, other])
-        assert.deepEqual(
-            index.get('docs/b')?.map((hit) => hit.file.path),
-            ['contents/docs/a.eval.yaml', 'contents/docs/b.eval.yaml']
-        )
-    })
-
-    test('--changed picks every check that reads a changed page', () => {
-        const keys = changedSelection([anchor, other], ['contents/docs/b.mdx'])
-        assert.deepEqual([...keys].sort(), ['contents/docs/a.eval.yaml#ask', 'contents/docs/b.eval.yaml#ask'])
-    })
-
-    test('drafts are counted, not selected, and unverified harnesses are left out', () => {
-        const { selections, harnesses, inactive } = select([anchor, draft], shared, parseArgs(['plan']), null)
-        assert.equal(selections.length, 1)
-        assert.equal(inactive, 1)
-        assert.ok(harnesses.every((h) => h.verified))
-    })
-
-    test('--page and --arm narrow the selection', () => {
-        const { selections } = select(
-            [anchor, other],
-            shared,
-            parseArgs(['plan', '--page', 'a', '--arm', 'link']),
-            null
-        )
-        assert.deepEqual(
-            selections.map((s) => [s.file.path, s.arms]),
-            [['contents/docs/a.eval.yaml', ['link']]]
-        )
-    })
-})
-
-describe('rendering', () => {
+describe('prompts', () => {
     const pageText = async (page: string) => `# Page ${page}\n\nBody.\n`
 
     test('baseline sends the prompt as written; other arms add only a tail', async () => {
         const pages = ['docs/a', 'docs/b']
-        assert.equal(await renderPrompt('Do it.', 'baseline', pages, 'https://posthog.com', pageText), 'Do it.')
-        const link = await renderPrompt('Do it.', 'link', pages, 'https://preview.example', pageText)
+        assert.equal(await armPrompt('Do it.', 'baseline', pages, 'https://posthog.com', pageText), 'Do it.')
+        const link = await armPrompt('Do it.', 'link', pages, 'https://preview.example', pageText)
         assert.ok(link.includes('https://preview.example/docs/a.md\nhttps://preview.example/docs/b.md'))
-        const inline = await renderPrompt('Do it.', 'inline', pages, 'https://posthog.com', pageText)
+        const inline = await armPrompt('Do it.', 'inline', pages, 'https://posthog.com', pageText)
         assert.ok(inline.includes('<docs-page url="https://posthog.com/docs/b.md">\n# Page docs/b'))
-        const skill = await renderPrompt('Do it.', 'skill', ['docs/a'], 'https://posthog.com', pageText)
-        assert.ok(skill.includes(`the ${skillName('docs/a')} skill`))
     })
 
     test('check keys fit Gauge: lowercase-kebab, at most 64 characters, unique', () => {
@@ -283,15 +202,18 @@ describe('rendering', () => {
                 {
                     id: 'x',
                     prompt: 'Edit {folder}/.',
-                    description: 'Checks the fixture folder fills in.',
-                    workspace: { fixture: 'acme-nextjs' },
-                    criteria: { shared: ['stays-in-folder'], assertions: [{ dependency: 'posthog-js' }] },
+                    description: 'Checks the codebase folder fills in.',
+                    codebase_to_test: 'acme-nextjs',
+                    criteria: {
+                        shared: ['stays-in-folder'],
+                        rubrics: { 'has-sdk': '{folder}/package.json lists posthog-js.' },
+                    },
                 },
             ],
         })
         const ask = fileFor('contents/docs/b.eval.yaml', answerOnly)
-        const harnesses = shared.matrix.harnesses.slice(0, 1)
-        const checks = await renderChecks(
+        const harnesses = shared.runConfig.harnesses.slice(0, 1)
+        const checks = await buildPrompts(
             [
                 { file: code, check: code.checks[0], arms: ['baseline'] },
                 { file: ask, check: ask.checks[0], arms: ['baseline'] },
@@ -303,10 +225,7 @@ describe('rendering', () => {
         )
         assert.equal(checks[0].prompt, 'Edit apps/web/.')
         assert.equal(checks[0].criteria[0].rubric, 'Every changed or added file is inside apps/web/.')
-        assert.deepEqual(checks[0].criteria[1], {
-            name: 'assert-dependency-posthog-js',
-            rubric: 'apps/web/package.json lists `posthog-js` as a dependency.',
-        })
+        assert.deepEqual(checks[0].criteria[1], { name: 'has-sdk', rubric: 'apps/web/package.json lists posthog-js.' })
         const [spec] = toGaugeSpecs(checks, 1)
         assert.equal(spec.cases[0].config.repoUrl, 'https://github.com/gauge-sh/acme-dispatch-nextjs')
         assert.equal(spec.cases[1].config.repoUrl, null)
@@ -317,10 +236,9 @@ describe('rendering', () => {
             key: 'k',
             prompt: 'p',
             criteria: [],
-            harnesses: shared.matrix.harnesses,
-            fixture: null,
-            skillRefs: [],
-        } as unknown as RenderedCheck
+            harnesses: shared.runConfig.harnesses,
+            codebase: null,
+        } as unknown as CheckPrompt
         const specs = toGaugeSpecs(
             Array.from({ length: 45 }, (_, i) => ({ ...one, key: `k-${i}` })),
             1
@@ -329,37 +247,5 @@ describe('rendering', () => {
             specs.map((s) => s.cases.length),
             [20, 20, 5]
         )
-    })
-})
-
-describe('docs-read report', () => {
-    const rendered = {
-        key: 'product-analytics-identify-ask-link',
-        arm: 'link',
-        pages: ['docs/product-analytics/identify'],
-        prompt: 'How?\n\nFollow this guide and rely on it rather than on what you already know:\nhttps://posthog.com/docs/product-analytics/identify.md',
-    } as RenderedCheck
-
-    test('URLs compare equal across hosts, .md and trailing slashes', () => {
-        assert.equal(
-            normalizeDocsUrl('https://preview.example/docs/A/b.md#x'),
-            normalizeDocsUrl('https://posthog.com/docs/a/b/')
-        )
-    })
-
-    test('a URL that only appears in the prompt is not a fetch', () => {
-        const logs = JSON.stringify({ events: [{ prompt: rendered.prompt }] })
-        const read = readRun('run_1', `{"key":"${rendered.key}"}`, logs, [rendered])
-        assert.deepEqual(read.fetchedPages, { 'docs/product-analytics/identify': false })
-    })
-
-    test("the agent's own fetch counts", () => {
-        const logs = `${rendered.prompt}\nWebFetch https://posthog.com/docs/product-analytics/identify.md`
-        const read = readRun('run_1', rendered.key, logs, [rendered])
-        assert.deepEqual(read.fetchedPages, { 'docs/product-analytics/identify': true })
-    })
-
-    test('run ids come from the wait payload', () => {
-        assert.deepEqual(extractRunIds(JSON.stringify({ batches: [{ runs: [{ id: 'a' }, { id: 'b' }] }] })), ['a', 'b'])
     })
 })

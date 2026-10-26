@@ -8,8 +8,7 @@ checks:
           Tests whether the React Router install page alone gets an agent through the
           framework-mode steps on a React Router 7 app: the ssr.noExternal change and a
           new entry.client.tsx with PostHogProvider.
-      workspace:
-          fixture: react-router-7
+      codebase_to_test: react-router-7
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
@@ -17,10 +16,11 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-js
-              - dependency: '@posthog/react'
           rubrics:
+              has-posthog-js: >-
+                  {folder}/package.json lists `posthog-js` as a dependency.
+              has-posthog-react: >-
+                  {folder}/package.json lists `@posthog/react` as a dependency.
               required-steps-done: >-
                   Both of these are done. (1) {folder}/vite.config.ts adds
                   'posthog-js' and '@posthog/react' to ssr.noExternal. The app's

@@ -7,8 +7,7 @@ checks:
       description: >-
           Tests whether the Node.js install page alone gets an agent to a working
           posthog-node client with config from env, on an Express app.
-      workspace:
-          fixture: node-express
+      codebase_to_test: node-express
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
@@ -16,9 +15,9 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-node
           rubrics:
+              has-posthog-node: >-
+                  {folder}/package.json lists `posthog-node` as a dependency.
               required-steps-done: >-
                   The app creates a client with new PostHog(token, { host }) using the
                   PostHog class from posthog-node, passing the project token and a

@@ -9,8 +9,7 @@ checks:
           wire a settings checkbox to the opt-in and opt-out calls, and strip
           the current URL with before_send. The prompt describes the consent
           behavior a user wants and never names those APIs.
-      workspace:
-          fixture: web-vite
+      codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
       prompt: |

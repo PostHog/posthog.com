@@ -1,10 +1,11 @@
-# Starting apps. A check names one with `workspace.fixture`, and `{folder}` in its
-# prompt and criteria resolves to that fixture's folder.
+# The codebases checks run in: a repo, a pinned commit and a folder. A check names
+# one with `codebase_to_test`, and `{folder}` in its prompt and criteria resolves to
+# that codebase's folder. A check with no codebase_to_test is answer-only.
 #
-# Most fixtures live in PostHog/docs-eval-fixtures, built from wizard-workbench
+# Most of these live in PostHog/docs-eval-fixtures, built from wizard-workbench
 # apps with every PostHog and wizard hint removed, so the agent can't copy an
 # existing install (see wizard-workbench services/evals/docs-evals/prepare-fixtures.ts).
-# `source` is the app it was copied from. A fixture with no `ref` isn't built yet:
+# `source` is the app it was copied from. A codebase with no `ref` isn't built yet:
 # the runner refuses to launch checks that use it.
 
 web-vite:
@@ -48,14 +49,14 @@ ios-app:
     source: apps/basic-integration/swift/hackers-ios
 
 # Gauge's public Next.js App Router monorepo. It has no PostHog code, so it needs
-# no fixtures repo and is the quickest first run.
+# docs-eval-fixtures build and is the quickest first run.
 acme-nextjs:
     repo: https://github.com/gauge-sh/acme-dispatch-nextjs
     ref: 2e2646819890345903cfa03eb0e2442a417883ed
     folder: apps/web
 
 # No starting app exists yet for these. Their checks stay `status: draft` until
-# someone adds a small app to the fixtures repo and pins `ref`.
+# someone adds a small app to docs-eval-fixtures and pins `ref`.
 remix-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: remix-app

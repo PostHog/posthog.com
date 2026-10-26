@@ -1,17 +1,17 @@
 import { execFileSync, spawnSync } from 'node:child_process'
 import { join } from 'node:path'
-import { repoRoot } from '../spec.ts'
-import type { RenderedCheck } from '../render.ts'
+import { repoRoot } from '../load-eval-files.ts'
+import type { CheckPrompt } from '../build-eval-prompts.ts'
 
-// The only Gauge-aware file. It turns rendered checks into Gauge's --apply case spec
-// (see `gauge run --schema`), one Gauge case per check, and wraps the CLI calls.
-// Gauge says "case" where the eval files say "check"; this is the only place both
-// words meet. Written against gauge CLI 0.23, which runs in local Docker unless
-// told --hosted, so every call passes it.
-// The CLI runs from evals/ so it picks up evals/gauge.json, which keeps the Gauge
-// GitHub App from treating every posthog.com PR as an eval run.
+// Everything Gauge-specific lives in this folder. This file turns check prompts into
+// Gauge's --apply case spec (see `gauge run --schema`), one Gauge case per check,
+// and wraps the CLI calls. Gauge says "case" where the eval files say "check"; this
+// is the only place both words meet. Written against gauge CLI 0.23, which runs in
+// local Docker unless told --hosted, so every call passes it.
+// The CLI runs from this folder so it picks up gauge.json beside this file, which
+// keeps the Gauge GitHub App from treating every posthog.com PR as an eval run.
 
-const evalsDir = join(repoRoot, 'evals')
+const gaugeDir = join(repoRoot, 'evals', 'gauge')
 export const maxCasesPerRequest = 20
 
 export type GaugeSpec = {
@@ -25,12 +25,11 @@ export type GaugeSpec = {
             sampleCount: number
             repoUrl: string | null
             repoRef: string | null
-            skillRefs?: string[]
         }
     }[]
 }
 
-export function toGaugeSpecs(checks: RenderedCheck[], samples: number): GaugeSpec[] {
+export function toGaugeSpecs(checks: CheckPrompt[], samples: number): GaugeSpec[] {
     const specs: GaugeSpec[] = []
     for (let start = 0; start < checks.length; start += maxCasesPerRequest) {
         specs.push({
@@ -42,10 +41,9 @@ export function toGaugeSpecs(checks: RenderedCheck[], samples: number): GaugeSpe
                 config: {
                     agents: c.harnesses.map((h) => ({ agent: h.gauge, models: h.models })),
                     sampleCount: samples,
-                    // An answer-only check has no starting app.
-                    repoUrl: c.fixture?.repo ?? null,
-                    repoRef: c.fixture?.ref ?? null,
-                    ...(c.skillRefs.length > 0 ? { skillRefs: c.skillRefs } : {}),
+                    // An answer-only check has no codebase.
+                    repoUrl: c.codebase?.repo ?? null,
+                    repoRef: c.codebase?.ref ?? null,
                 },
             })),
         })
@@ -55,7 +53,7 @@ export function toGaugeSpecs(checks: RenderedCheck[], samples: number): GaugeSpe
 
 const gauge = (args: string[]) =>
     execFileSync('gauge', [...args, '--hosted'], {
-        cwd: evalsDir,
+        cwd: gaugeDir,
         encoding: 'utf8',
         stdio: ['ignore', 'pipe', 'inherit'],
         maxBuffer: 64 * 1024 * 1024,
@@ -79,19 +77,12 @@ export function findRequestId(launchJson: string): string | null {
 // With --check, wait exits 1 unless the verdict passes; stdout is still the JSON.
 export function wait(requestId: string): { raw: string; passed: boolean } {
     const result = spawnSync('gauge', ['run', 'wait', requestId, '--check', '-o', 'json', '--hosted'], {
-        cwd: evalsDir,
+        cwd: gaugeDir,
         encoding: 'utf8',
         maxBuffer: 64 * 1024 * 1024,
     })
     if (result.stderr) process.stderr.write(result.stderr)
     return { raw: result.stdout, passed: result.status === 0 }
-}
-
-export const runDetails = (runId: string) => gauge(['run', 'get', runId, '-o', 'json'])
-export const runLogs = (runId: string) => gauge(['run', 'get', runId, '--logs', '-o', 'json'])
-
-export function skillExists(ref: string): boolean {
-    return spawnSync('gauge', ['skills', 'get', ref, '--hosted'], { cwd: evalsDir, stdio: 'ignore' }).status === 0
 }
 
 export function gaugeAvailable(): boolean {

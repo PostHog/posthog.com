@@ -9,8 +9,7 @@ checks:
           login and on reload, and to reset on logout so a shared browser
           doesn't merge two people. The prompt describes who events belong to and
           never names identify, reset or distinct IDs.
-      workspace:
-          fixture: web-vite
+      codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
       prompt: |

@@ -9,8 +9,7 @@ checks:
           Tests whether the Remix install page alone gets an agent through
           ssr.noExternal and a provider that initializes PostHog after hydration. Draft
           until the remix-app fixture exists.
-      workspace:
-          fixture: remix-app
+      codebase_to_test: remix-app
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
@@ -18,10 +17,11 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-js
-              - dependency: '@posthog/react'
           rubrics:
+              has-posthog-js: >-
+                  {folder}/package.json lists `posthog-js` as a dependency.
+              has-posthog-react: >-
+                  {folder}/package.json lists `@posthog/react` as a dependency.
               required-steps-done: >-
                   All of these are done. (1) {folder}/vite.config.ts adds
                   "posthog-js" and "@posthog/react" to ssr.noExternal. (2) A provider

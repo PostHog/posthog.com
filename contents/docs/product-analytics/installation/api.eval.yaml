@@ -8,8 +8,7 @@ checks:
           Tests whether the API install page alone gets an agent to send a correctly
           shaped capture request over plain HTTP, with no SDK, from a standard-library
           Python server.
-      workspace:
-          fixture: python-stdlib
+      codebase_to_test: python-stdlib
       prompt: |
           The app in {folder}/ uses only the Python standard library, and we want to
           keep it that way. Each time a user creates a meeting, send a

@@ -8,8 +8,7 @@ checks:
           Tests whether the React Native install page alone gets an agent to wrap a bare
           (non-Expo) app in PostHogProvider and add the native peer dependencies it
           needs.
-      workspace:
-          fixture: react-native-app
+      codebase_to_test: react-native-app
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
@@ -17,12 +16,15 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-react-native
-              - dependency: '@react-native-async-storage/async-storage'
-              - dependency: react-native-device-info
-              - dependency: react-native-localize
           rubrics:
+              has-posthog-react-native: >-
+                  {folder}/package.json lists `posthog-react-native` as a dependency.
+              has-react-native-async-storage-async-storage: >-
+                  {folder}/package.json lists `@react-native-async-storage/async-storage` as a dependency.
+              has-react-native-device-info: >-
+                  {folder}/package.json lists `react-native-device-info` as a dependency.
+              has-react-native-localize: >-
+                  {folder}/package.json lists `react-native-localize` as a dependency.
               required-steps-done: >-
                   The app's root component (for example in {folder}/src/App.js or
                   {folder}/src/index.js) is wrapped in PostHogProvider imported from

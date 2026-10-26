@@ -8,8 +8,7 @@ checks:
           Tests whether the Kotlin Multiplatform install page alone gets an agent to set
           up posthog-kmp once per target with the right PostHogContext. Draft until the
           kmp-app fixture exists.
-      workspace:
-          fixture: kmp-app
+      codebase_to_test: kmp-app
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from the app's build configuration rather than hard-coding them in source. Make sure the app still builds or starts without errors when you're done.

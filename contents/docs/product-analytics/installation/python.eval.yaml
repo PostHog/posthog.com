@@ -7,16 +7,14 @@ checks:
       description: >-
           Tests whether the Python install page alone gets an agent to a working posthog
           client with config from env, on a standard-library Python server.
-      workspace:
-          fixture: python-stdlib
+      codebase_to_test: python-stdlib
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog
-                in: requirements.txt
           rubrics:
+              has-posthog: >-
+                  {folder}/requirements.txt lists `posthog` as a dependency.
               required-steps-done: >-
                   The app imports Posthog from the posthog package and creates a Posthog client with project_api_key set to the project token and host set to the PostHog host, for example in {folder}/server.py. Cite the file and line(s).

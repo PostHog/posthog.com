@@ -8,8 +8,7 @@ checks:
           Tests whether the React install page alone gets an agent to wrap a Vite React
           app in PostHogProvider, with config from VITE_ env variables and the
           recommended defaults.
-      workspace:
-          fixture: react-vite
+      codebase_to_test: react-vite
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
@@ -17,10 +16,11 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-js
-              - dependency: '@posthog/react'
           rubrics:
+              has-posthog-js: >-
+                  {folder}/package.json lists `posthog-js` as a dependency.
+              has-posthog-react: >-
+                  {folder}/package.json lists `@posthog/react` as a dependency.
               required-steps-done: >-
                   {folder}/src/main.tsx wraps the rendered app in PostHogProvider
                   imported from @posthog/react, passing the project token as apiKey
@@ -37,8 +37,7 @@ checks:
       description: >-
           Tests whether the React install page also teaches enough to capture a custom
           event from a component, here when a user signs in through the login form.
-      workspace:
-          fixture: react-vite
+      codebase_to_test: react-vite
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it, and
           also track an event each time a user signs in through the login form.
@@ -47,10 +46,11 @@ checks:
           app still builds or starts without errors when you're done.
       criteria:
           shared: [config-from-env, stays-in-folder, builds]
-          assertions:
-              - dependency: posthog-js
-              - dependency: '@posthog/react'
           rubrics:
+              has-posthog-js: >-
+                  {folder}/package.json lists `posthog-js` as a dependency.
+              has-posthog-react: >-
+                  {folder}/package.json lists `@posthog/react` as a dependency.
               provider-wraps-app: >-
                   {folder}/src/main.tsx wraps the app in PostHogProvider from
                   @posthog/react. Cite the file and line(s).

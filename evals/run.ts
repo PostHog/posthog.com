@@ -3,17 +3,8 @@ import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { dryRun, gaugeAvailable, launch, skillExists, toGaugeSpecs, wait } from './adapters/gauge.ts'
-import { docsRead } from './docs-read.ts'
-import {
-    fetchPageText,
-    renderChecks,
-    renderSkill,
-    skillName,
-    skillVersion,
-    type RenderedCheck,
-    type Selection,
-} from './render.ts'
+import { dryRun, gaugeAvailable, launch, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
+import { buildPrompts, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
 import {
     arms,
     loadEvalFiles,
@@ -26,26 +17,25 @@ import {
     type Arm,
     type EvalFile,
     type Shared,
-} from './spec.ts'
+} from './load-eval-files.ts'
 
 const usage = `Usage: pnpm evals <command> [filters]
 
 Commands:
   validate        Check every eval file. Free.
   index           Print page → checks, from every eval file and pages: list.
-  plan            Render the selected checks and run gauge --dry-run. Free.
-  run --yes       Launch the selected checks, wait for judging, write the docs-read report. Spends Gauge credits.
-  skills --out <dir>   Write one SKILL.md per selected page, for the skill arm.
+  plan            Build the selected checks' prompts and run gauge --dry-run. Free.
+  run --yes       Launch the selected checks and wait for judging. Spends Gauge credits.
 
 Filters (combine):
   --page <docs path>     e.g. product-analytics/identify; repeatable
   --tag <tag>            repeatable
   --suite <suite>        smoke or deep; repeatable (default: both)
   --arm <arm>            ${arms.join(', ')}; repeatable
-  --harness <id>         from matrix.yaml; repeatable
+  --harness <id>         from shared/run-config.yml; repeatable
   --changed [base]       only checks whose pages or eval file changed against base (default origin/master)
-  --base-url <url>       where link, inline and skill read pages (default https://posthog.com)
-  --include-unverified   add matrix harnesses with verified: false
+  --base-url <url>       where link and inline read pages (default https://posthog.com)
+  --include-unverified   add shared/run-config.yml harnesses with verified: false
   --write <dir>          plan: also write the Gauge specs there`
 
 type Options = {
@@ -60,7 +50,6 @@ type Options = {
     includeUnverified: boolean
     yes: boolean
     write: string | null
-    out: string | null
 }
 
 export function parseArgs(argv: string[]): Options {
@@ -79,7 +68,6 @@ export function parseArgs(argv: string[]): Options {
         includeUnverified: argv.includes('--include-unverified'),
         yes: argv.includes('--yes'),
         write: valuesOf('--write')[0] ?? null,
-        out: valuesOf('--out')[0] ?? null,
     }
 }
 
@@ -116,14 +104,14 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
     for (const arm of options.arms)
         if (!(arms as readonly string[]).includes(arm))
             throw new Error(`Unknown --arm ${arm}; choose from ${arms.join(', ')}`)
-    const knownHarnesses = shared.matrix.harnesses.map((h) => h.id)
+    const knownHarnesses = shared.runConfig.harnesses.map((h) => h.id)
     for (const id of options.harnesses)
         if (!knownHarnesses.includes(id))
             throw new Error(`Unknown --harness ${id}; choose from ${knownHarnesses.join(', ')}`)
     const index = pageIndex(files)
     for (const page of options.pages) if (!index.has(page)) throw new Error(`No eval checks read ${page}`)
 
-    const harnesses = shared.matrix.harnesses.filter((h) =>
+    const harnesses = shared.runConfig.harnesses.filter((h) =>
         options.harnesses.length > 0 ? options.harnesses.includes(h.id) : h.verified || options.includeUnverified
     )
     const selections: Selection[] = []
@@ -140,7 +128,7 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
                 inactive++
                 continue
             }
-            const checkArms = (check.arms ?? shared.matrix.defaultArms).filter(
+            const checkArms = (check.arms ?? shared.runConfig.defaultArms).filter(
                 (arm) => options.arms.length === 0 || options.arms.includes(arm)
             )
             if (checkArms.length > 0) selections.push({ file, check, arms: checkArms as Arm[] })
@@ -150,15 +138,11 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
 }
 
 // What must be true before Gauge can run the checks. Free to check.
-function readinessProblems(checks: RenderedCheck[]): string[] {
+function readinessProblems(checks: CheckPrompt[]): string[] {
     const problems = new Set<string>()
-    for (const c of checks) {
-        if (c.fixture && !c.fixture.ref)
-            problems.add(`fixtures.yaml: ${c.fixture.name} has no ref; build it and pin the commit`)
-    }
-    const skillRefs = [...new Set(checks.flatMap((c) => c.skillRefs))]
-    for (const ref of skillRefs)
-        if (!skillExists(ref)) problems.add(`skill ${ref} isn't registered in Gauge; see pnpm evals skills`)
+    for (const c of checks)
+        if (c.codebase && !c.codebase.ref)
+            problems.add(`shared/codebases-to-test.yaml: ${c.codebase.name} has no ref; build it and pin the commit`)
     return [...problems]
 }
 
@@ -220,52 +204,24 @@ async function main(argv: string[]): Promise<number> {
     }
     const pageText = fetchPageText(options.baseUrl)
 
-    if (options.command === 'skills') {
-        if (!options.out) {
-            console.error('skills needs --out <dir>')
-            return 2
-        }
-        const pages = [
-            ...new Set(
-                selections.flatMap(({ file, check }) =>
-                    [file.page, ...file.pages, ...check.pages].filter((p): p is string => Boolean(p))
-                )
-            ),
-        ]
-        for (const page of pages) {
-            const text = await pageText(page)
-            await mkdir(join(options.out, skillName(page)), { recursive: true })
-            await writeFile(join(options.out, skillName(page), 'SKILL.md'), renderSkill(page, text))
-            console.log(
-                `gauge skills add <owner/repo>/<path>/${skillName(page)}#<commit> --as ${skillName(
-                    page
-                )} --label ${skillVersion(text)} --hosted`
-            )
-        }
-        console.log(
-            `Wrote ${pages.length} skills to ${options.out}. Push them, then run the commands above with the real repo and commit.`
-        )
-        return 0
-    }
-
     if (harnesses.length === 0) {
-        console.error('No harness selected; check matrix.yaml or pass --harness / --include-unverified')
+        console.error('No harness selected; check shared/run-config.yml or pass --harness / --include-unverified')
         return 2
     }
-    const checks = await renderChecks(selections, harnesses, shared, options.baseUrl, pageText)
+    const checks = await buildPrompts(selections, harnesses, shared, options.baseUrl, pageText)
     console.log(
         `${checks.length} Gauge case(s) from ${selections.length} check(s), on ${harnesses
             .map((h) => `${h.id} (${h.models.join(', ')})`)
             .join(', ')}:`
     )
     for (const c of checks)
-        console.log(`  ${c.key}  ${c.criteria.length} criteria${c.fixture ? `  ${c.fixture.name}` : '  answer-only'}`)
+        console.log(`  ${c.key}  ${c.criteria.length} criteria${c.codebase ? `  ${c.codebase.name}` : '  answer-only'}`)
 
     if (options.command !== 'plan' && options.command !== 'run') {
         console.error(`Unknown command ${options.command}\n\n${usage}`)
         return 2
     }
-    const specs = toGaugeSpecs(checks, shared.matrix.samples)
+    const specs = toGaugeSpecs(checks, shared.runConfig.samples)
     const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
     await mkdir(specDir, { recursive: true })
     const specPaths: string[] = []
@@ -309,7 +265,7 @@ async function main(argv: string[]): Promise<number> {
         results.push(JSON.parse(result.raw))
     }
     await writeFile(join(outDir, 'request.json'), `${JSON.stringify(requests, null, 4)}\n`)
-    // One wait result per request; docs-read finds run ids anywhere in the file.
+    // One wait result per request; merge their batches into one file.
     await writeFile(
         join(outDir, 'results.json'),
         `${JSON.stringify(
@@ -320,7 +276,6 @@ async function main(argv: string[]): Promise<number> {
             4
         )}\n`
     )
-    await docsRead(outDir)
     console.log(`Results in ${outDir}`)
     return passed ? 0 : 1
 }

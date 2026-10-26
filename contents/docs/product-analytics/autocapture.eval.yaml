@@ -9,8 +9,7 @@ checks:
           capture: limit which DOM events are recorded, exclude one element, and
           add a property through markup. The prompt asks only for the outcomes and
           never names autocapture or its config options.
-      workspace:
-          fixture: web-vite
+      codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
       prompt: |
