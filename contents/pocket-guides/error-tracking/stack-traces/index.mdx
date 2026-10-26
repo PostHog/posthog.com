@@ -1,0 +1,224 @@
+---
+title: Make stack traces readable
+shortTitle: Stack traces
+subtitle: Map minified frames back to your source code.
+pocketGuideOrder: 3
+section: Capture
+pocketGuideCta:
+  kind: link
+  label: Check your symbol sets
+  href: https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets
+  note: After your next build, find your latest upload in the list.
+---
+
+import { getDarkClassForLogo } from 'constants/logos'
+
+<LeftPage>
+
+<StackTraceFigure
+    n={1}
+    caption="Without source maps, every frame points into a bundle."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'exports.useContext',
+            source: '/node_modules/.vite/deps/chunk-OV4LOSH3.js@911:27',
+            unresolved: true,
+            marker: {
+                n: 1,
+                label: 'An unresolved frame',
+                gloss: 'PostHog couldn\'t map this frame to your source, so it points at a line and column in a bundle. Hover the warning for the message the app shows.',
+            },
+        },
+        { fn: 'useParams', source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@5663:28', unresolved: true },
+        {
+            fn: 'useRouteComponentProps',
+            source: '/node_modules/.vite/deps/chunk-CUMSS5G5.js@6856:13',
+            unresolved: true,
+        },
+        { fn: 'renderWithHooks', source: '/node_modules/.vite/deps/react-dom_client.js@5654:24', unresolved: true },
+        {
+            fn: 'performUnitOfWork',
+            source: '/node_modules/.vite/deps/react-dom_client.js@12561:98',
+            unresolved: true,
+            marker: {
+                n: 2,
+                label: 'Nothing here is yours',
+                gloss: 'Every frame belongs to a dependency or the framework, so the fingerprint has none of your code to group on.',
+            },
+        },
+    ]}
+/>
+
+<StackTraceFigure
+    n={2}
+    caption="With source maps, your own frames show in bold at the top of the trace."
+    type="TypeError"
+    message="Cannot read properties of null (reading 'useContext')"
+    frames={[
+        {
+            fn: 'useWorkspace',
+            source: 'src/workspace/useWorkspace.ts@17:9',
+            inApp: true,
+            marker: {
+                n: 1,
+                label: 'Your own code',
+                gloss: 'Click it to open the source around the failing line.',
+            },
+            context: {
+                startLine: 15,
+                failingLine: 17,
+                lines: [
+                    'export function useWorkspace() {',
+                    '  const { id } = useParams()',
+                    '  const workspace = useContext(WorkspaceContext).byId[id]',
+                    '  return workspace',
+                    '}',
+                ],
+            },
+        },
+        { fn: 'WorkspaceProvider', source: 'src/workspace/WorkspaceProvider.tsx@42:18', inApp: true },
+        {
+            fn: 'useParams',
+            source: 'node_modules/react-router/index.tsx@5663:28',
+            marker: {
+                n: 2,
+                label: 'A dependency',
+                gloss: 'New issues group on dependency frames alongside your own.',
+            },
+        },
+        { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+        { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+    ]}
+/>
+
+<TimelineFigure
+    n={3}
+    caption="The Timeline tab shows your recorded steps in order, next to everything else in the session."
+    rows={[
+        {
+            time: '15:06:58',
+            category: 'pageview',
+            primary: '/workspaces/8f21c4',
+            marker: {
+                n: 1,
+                label: 'A pageview',
+                gloss: 'PostHog captures each page the person opened in the session, with no code from you.',
+            },
+        },
+        {
+            time: '15:07:02',
+            category: 'exception step',
+            primary: 'cache_miss',
+            secondary: 'key workspace:8f21c4',
+            marker: {
+                n: 2,
+                label: 'An exception step',
+                gloss: 'Each addExceptionStep call adds a row. You choose the name and the properties.',
+            },
+        },
+        {
+            time: '15:07:09',
+            category: 'exception step',
+            primary: 'read_from_replica',
+            secondary: 'region eu-west-1 · lag_ms 180',
+        },
+        {
+            time: '15:07:11',
+            category: 'exception',
+            primary: 'Error',
+            secondary: 'Minified React error #418; visit https://reactjs.org/docs/error-deco…',
+            current: true,
+            marker: {
+                n: 3,
+                label: 'The exception',
+                gloss: 'The SDK held the steps above in memory and sent them with this exception.',
+            },
+        },
+        { time: '15:07:19', category: 'pageview', primary: '/workspaces' },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Make stack traces readable
+
+Source maps only matter if you bundle, compile, or minify the code you distribute. You'll likely need them if you use one of these SDKs:
+
+<div className="grid grid-cols-3 @xl:grid-cols-4 gap-x-6 gap-y-3 my-4">
+    {[
+        { label: 'Web', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg' },
+        { label: 'React', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg' },
+        { label: 'Next.js', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg' },
+        { label: 'Angular', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg' },
+        { label: 'Nuxt', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg' },
+        { label: 'Node.js', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg' },
+        { label: 'React Native', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg' },
+        { label: 'iOS', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg' },
+        { label: 'Android', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg' },
+        { label: 'Kotlin', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg' },
+        { label: 'Flutter', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg' },
+        { label: 'Rust', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg' },
+    ].map(({ label, image }) => (
+        <span key={label} className="flex items-center gap-2">
+            <img src={image} alt="" className={`size-6 ${getDarkClassForLogo(image)}`} />
+            {label}
+        </span>
+    ))}
+</div>
+
+## Unresolved stack traces
+
+A <Term name="stack trace" /> shows the exact line of code that caused the exception. Without a <Term name="source map" />, PostHog can't map the frames back to your code, so they show up as **unresolved** <SeeFig n={1} />.
+
+## Upload source maps
+
+Give PostHog a source map and the same trace points back to your source code <SeeFig n={2} />. PostHog can get your maps three ways:
+
+| Option | Trade-off |
+| --- | --- |
+| Upload in CI | The default. Your source stays private, and each build uploads its own maps. |
+| Host them publicly | No upload step, but anyone can read your source. |
+| Embed them in the bundle | No upload, but your users download larger files and can read your source. |
+
+Link each upload to a [release](/docs/error-tracking/releases). PostHog then shows the version and commit on every trace. With a [GitHub or GitLab integration](/docs/error-tracking/integrations), it also links each frame to the file and line in your repository.
+
+If you set up Error Tracking with the wizard, it already added uploads for platforms that need them. To add uploads to an existing setup, run the wizard's source map upload on its own:
+
+<Setup subcommand="upload-source-maps" />
+
+To set it up yourself, follow [Upload source maps](/docs/error-tracking/upload-source-maps) for your framework.
+
+## Add breadcrumbs
+
+Breadcrumbs hold context that only matters if something breaks. PostHog calls them exception steps. Call `addExceptionStep` at checkpoints like a cache miss, a retry, or a fallback path. The SDK keeps the steps in memory and attaches them to the next exception, where they show up in the issue's **Timeline** tab <SeeFig n={3} />.
+
+If no exception happens, the SDK throws the steps away. They're never sent or stored, so runs that succeed cost nothing and keep your logs clean.
+
+Pick where context goes by when you'll need it:
+
+| Record it as | When |
+| --- | --- |
+| An exception step | It only matters if this run fails |
+| A log | You want it kept for every run, failed or not |
+| A property on the exception | You want to filter, group, assign, or count issues by it |
+| An event | You want to count the action on its own |
+
+Steps work in the web, React Native, iOS, Android, and Flutter SDKs.
+
+## Check your symbol sets
+
+PostHog lists each source map it has as a symbol set, both the ones you upload and the ones it fetches from a public URL. A missing symbol set shows why it failed, and you can upload the file from the same list. That upload only resolves exceptions captured after it, so earlier ones stay unresolved.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Stack traces](/docs/error-tracking/stack-traces) · [Upload source maps](/docs/error-tracking/upload-source-maps) · [Releases](/docs/error-tracking/releases)
+
+</SeeAlso>
+
+</RightPage>

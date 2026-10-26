@@ -1,0 +1,116 @@
+---
+title: Exceptions as events
+shortTitle: Exceptions as events
+subtitle: Query exceptions like any other event, and join them to the rest of your data.
+pocketGuideOrder: 5
+section: Query
+pocketGuideCta:
+  kind: prompt
+  label: Build this with PostHog AI
+  note: It builds the insight, then tells you which page has the highest rate.
+  requires:
+    label: Needs exceptions and pageviews reaching PostHog.
+  prompt: >-
+    Build me a trends insight of the share of sessions with an exception over the last 14 days,
+    with $exception as series A and $pageview as series B, both counted as unique sessions, the
+    formula A / B * 100, and a breakdown by $pathname. Then tell me which page has the highest
+    rate among pages with at least 100 sessions.
+---
+
+<RightPage>
+
+# Exceptions as events
+
+Exceptions are part of PostHog's context layer, next to your analytics, session replays, logs, and business data. Each <Term name="exception" /> is a `$exception` <Term name="event" />, stored in the same [`events` table](/docs/data-warehouse/sources/posthog) as every other event you capture.
+
+You and your agents can query exceptions alongside your <Term name="person">people</Term>, [groups](/docs/product-analytics/group-analytics), <Term name="session">sessions</Term>, and the [sources](/docs/data-warehouse/sources) you sync into the data warehouse, like Stripe or Postgres. Chart them in an <Term name="insight" />, or join them to other tables in the [SQL editor](/docs/data-warehouse/query).
+
+## Know the join keys
+
+An exception carries its own properties:
+
+| Property | What it holds |
+| --- | --- |
+| `$exception_list` | The type, the message, the stack frames, and whether your code handled it. Chained exceptions arrive as several entries |
+| `$exception_fingerprint` | The value that decides which issue this exception joins |
+| `$exception_issue_id` | The issue assigned when the exception was ingested |
+| `$exception_level` | How severe it is |
+
+In SQL, `issue_id` gives the issue the exception's <Term name="fingerprint" /> belongs to now. Issue names and statuses are in the `system.error_tracking_issues` table.
+
+It also carries the keys that join it to the rest of your data:
+
+| Key | Joins the exception to |
+| --- | --- |
+| `person_id` | The <Term name="person" /> who hit it |
+| `$session_id` | The <Term name="session" />, and its replay if the session was recorded |
+| `$group_0` | The account, if your first group type is organizations. Other group types use `$group_1` to `$group_4` |
+| `$feature/<flag-key>` | The <Term name="feature flag" /> variant the person saw |
+
+## Turn counts into rates
+
+Busy pages get more exceptions because more people use them. Divide by traffic before you compare pages, releases, or flag variants.
+
+Pageviews are events too, so one <Term name="trend" /> can divide exceptions by them. Add `$exception` as series A and `$pageview` as series B, then set the formula to `A / B * 100` to get exceptions per 100 pageviews. To count each session once, set both series to unique sessions. Break the trend down by `$pathname` to compare pages.
+
+PostHog's own team breaks this rate down by flag variant during a rollout. A variant on 5% of traffic then compares fairly with one on 95%.
+
+## See what happened next
+
+To see whether an error stopped people, look at what they did next. A <Term name="funnel" /> from `$exception` to an outcome, like a cancelled subscription, shows how often that outcome followed the error. It doesn't show that the error caused it.
+
+You can also look for the issues that come right before people leave. This query joins each exception to its session through `$session_id`, then ranks issues by the share of their sessions that end within 30 seconds of the exception:
+
+```sql
+SELECT
+    issue_id,
+    uniq($session_id) AS sessions,
+    uniqIf($session_id, dateDiff('second', timestamp, session.$end_timestamp) <= 30) AS ended_within_30s,
+    round(100 * ended_within_30s / sessions, 1) AS pct_ended
+FROM events
+WHERE event = '$exception'
+  AND timestamp >= now() - INTERVAL 1 DAY
+  AND notEmpty($session_id)
+GROUP BY issue_id
+HAVING sessions >= 50
+ORDER BY pct_ended DESC
+LIMIT 10
+```
+
+[PostHog AI can write queries like this](/docs/data-warehouse/write-sql-ai) from a question in plain language.
+
+## Group by account
+
+In a B2B product, one error can hit several people in the same account. `$group_0` on each exception holds the account's group key, the same key the [`groups` table](/docs/data-warehouse/sources/posthog) uses, so you can count exceptions and affected people per account.
+
+[Warehouse properties](/docs/data-warehouse/warehouse-properties) copy columns like MRR or plan from a synced source onto the account. You can then filter insights by them like any other group property. [Measure impact](/pocket-guides/error-tracking/measure-impact) ranks issues by the MRR of the accounts they hit.
+
+To reach the people an issue hit, create a <Term name="cohort" /> from the **Cohort** section of the issue page. It holds everyone who hit the issue in the last 30 days. To target a flag or survey at them, [duplicate it as a static cohort](/docs/data/cohorts#can-you-use-a-dynamic-cohort-as-a-feature-flag-target) first.
+
+## Join data from outside PostHog
+
+[Sources](/docs/data-warehouse/sources) sync tables from Stripe, Zendesk, or your own Postgres into the data warehouse. [Join](/docs/data-warehouse/join) them to exceptions on the person, the account, or the session.
+
+PostHog's support team uses the replay link in each Zendesk ticket to find the exceptions in that session. That shows which bug reports have a real error behind them.
+
+Before you join, check the [semantic layer](/docs/semantic-layer). Its certified tables and accepted relationships tell you and your agents which table and key to use.
+
+## Open the replay
+
+An exception's `$session_id` links it to the replay of its session, if the session was recorded. The web and mobile SDKs set it on every exception. For a server-side exception, [pass the session ID from your frontend](/docs/data/sessions#server-sdks-and-sessions).
+
+To start recording when an exception happens, add `$exception` as an [event trigger](/docs/session-replay/how-to-control-which-sessions-you-record#event-triggers) in your replay settings. The Session Replay pocket guide covers [which sessions to record](/pocket-guides/session-replay/configure-replays) and [how to watch them](/pocket-guides/session-replay/watching-replays).
+
+## Chart your exception rate
+
+This prompt builds the share of sessions with an exception on your own data, broken down by page:
+
+<Action />
+
+<SeeAlso>
+
+See also: [Issues and exceptions](/docs/error-tracking/issues-and-exceptions) · [PostHog tables in SQL](/docs/data-warehouse/sources/posthog) · [Data warehouse joins](/docs/data-warehouse/join) · [Semantic layer](/docs/semantic-layer)
+
+</SeeAlso>
+
+</RightPage>

@@ -9,6 +9,7 @@ import { useProductScreenshot } from 'components/ImageAnnotations/useProductScre
 import type { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
+import AssignmentRuleForm, { AssignmentRuleFormProps } from './AssignmentRuleForm'
 import Divergence, { DivergenceSeries } from './Divergence'
 import ExternalIssue from './ExternalIssue'
 import Figure from './Figure'
@@ -441,6 +442,25 @@ export function TriggerGroupFigure({
         // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
         <Fig n={n} caption={caption} legend={legend}>
             <TriggerGroupForm {...group} />
+        </Fig>
+    )
+}
+
+/** One assignment rule in the editor: the filters, the assignee, and the 7-day test result. */
+export function AssignmentRuleFigure({
+    n = 1,
+    caption,
+    legend,
+    ...rule
+}: AssignmentRuleFormProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <AssignmentRuleForm {...rule} />
         </Fig>
     )
 }

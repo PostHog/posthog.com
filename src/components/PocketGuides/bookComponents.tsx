@@ -22,6 +22,7 @@ import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
+    AssignmentRuleFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
@@ -79,6 +80,7 @@ export const bookMdxComponents = {
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
+    AssignmentRuleFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,

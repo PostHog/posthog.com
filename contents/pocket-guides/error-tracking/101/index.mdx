@@ -1,18 +1,12 @@
 ---
-# Scaffolded from /docs/error-tracking/index, /docs/error-tracking/issues-and-exceptions,
-# /docs/error-tracking/stack-traces, and /docs/error-tracking/installation.
-#
-# Scope: what the product captures and what a reader sees on an issue. Grouping mechanics,
-# source maps, and volume controls belong to "How Error Tracking works" – this page only
-# names them.
-#
-# Section 4 is the one no standalone error tracker can print: the exception is an event, so
-# every product that reads events can read it too.
+# Scope: what Error Tracking is, the questions it answers, the four steps this guide follows
+# (Capture, Query, Automate, Self-drive), how an exception
+# becomes an issue, and install.
 title: Error Tracking 101
 shortTitle: Error Tracking 101
 subtitle: What an exception carries, how it becomes an issue, and what else in PostHog can read it.
 pocketGuideOrder: 1
-section: Observe
+section: Capture
 ---
 
 <LeftPage>
@@ -35,7 +29,7 @@ section: Observe
             y: 25.7,
             title: 'When it started, and whether it still happens',
             description:
-                'Exception volume over the range, marked first seen and last seen. A bar that stops is a fixed issue. One that restarts after a quiet week is a regression.',
+                'Exception volume over the range, marked first seen and last seen. Bars that restart after a quiet week mean the issue regressed.',
         },
         {
             x: 77.2,
@@ -49,7 +43,7 @@ section: Observe
             y: 39,
             title: 'Stack trace, properties, timeline, and the recording',
             description:
-                'Four views onto the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
+                'Four tabs show the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
         },
         {
             x: 80,
@@ -63,7 +57,7 @@ section: Observe
 
 <AnatomyFigure
     n={2}
-    caption="Where this ends up: one actionable report in your inbox, with the issue, sessions, and affected accounts attached."
+    caption="An actionable report in your inbox, with the issue, sessions, and affected accounts attached."
     priority="P1"
     status="Ready"
     actionability="Actionable"
@@ -85,11 +79,9 @@ section: Observe
 
 # Error Tracking 101
 
-An exception is the error your code throws when something goes wrong, such as a `TypeError` when checkout reads a value that isn't there. A stack trace is the list of function calls that led to it, ending at the line that failed.
+Your code throws an exception when something goes wrong, such as a `TypeError`. A stack trace tells you what led up to the exception. Error Tracking captures these exceptions and stack traces as queryable PostHog events.
 
-Error Tracking captures the exceptions your application throws and groups them into issues. Each issue sits next to the rest of your product data.
-
-This lets you answer questions you can't with just a stack trace:
+These exception events sit alongside your other PostHog events. That lets you answer questions you can't with just a stack trace:
 
 - Which customers are impacted?
 - Does it impact conversion and retention?
@@ -97,31 +89,28 @@ This lets you answer questions you can't with just a stack trace:
 - Were they part of any feature flag or experiment rollouts?
 - What's shown on the user's page before and after the exception is thrown?
 
-With this context, Error Tracking makes your product <Term name="self-driving">self-driving</Term>. Agents will have the context to triage the issues based on impact and open PRs to fix them.
-
 ## Exceptions and issues
 
 Like other PostHog tools, each instance of an <Term name="exception" /> is captured as a `$exception` <Term name="event" />. Similar exceptions are aggregated into <Term name="issue">issues</Term> <SeeFig n={1} />. Those issues are the base unit of work: you diagnose, triage, assign, and fix them, not individual exceptions.
 
-## Path to self-driving
+## By the end of this pocket guide
 
-Error Tracking takes you from finding out what breaks in your product to fixing it, in three steps:
+Most production apps have more exceptions than your team can fix. Error Tracking helps you find the highest-impact issues, report them, and automate the fixes. We'll introduce each step throughout this guide:
 
-- **Observe** – First, make every issue a useful signal. Capture the right exceptions, group one failure once, and attach readable traces and the path to the error.
-- **Report** – Then, include exceptions into your insights and dashboards, triage the issues that matter, and put the right one in front of the right person.
-- **Self-drive** – Finally, let scouts watch for specific failure patterns, investigate their impact, and hand actionable reports to agents that can open pull requests.
+- **Capture** – Group exceptions into issues. Make stack traces readable. Keep noise out.
+- **Query** – Query exceptions as events with SQL and MCP. Join them with revenue, funnels, and experiments to measure impact.
+- **Automate** – Route each issue to the team that owns it. Alert on spikes and regressions.
+- **Self-drive** – Scouts watch for failure patterns and measure their impact. They send reports to your inbox. Agents open pull requests to fix them.
 
-The goal is to get actionable reports and a PR to address the exception automatically, so you can ship fixes while you sleep <SeeFig n={2} />.
-
-This pocket guide covers each step in detail.
+The end result is a report like this one, with a pull request ready to review <SeeFig n={2} />.
 
 ## Install and turn it on
 
-None of it works until a PostHog SDK is in your app. The wizard installs and configures one for you, or you can [install it yourself](/docs/error-tracking/installation).
+Run the Error Tracking wizard. It installs PostHog if your app doesn't have it, turns on exception capture, and sets up source map uploads where your platform needs them. Or [install it yourself](/docs/error-tracking/installation).
 
 <Setup />
 
-To capture uncaught exceptions automatically, switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in your project settings. An autocapture setting in your SDK config overrides the project switch, and exceptions you send yourself with `captureException` don't need it. We'll go over how exceptions become issues in [the next page](/pocket-guides/error-tracking/how-it-works).
+To capture uncaught exceptions automatically, switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in your project settings. An autocapture setting in your SDK config overrides the project switch, and exceptions you send yourself with `captureException` don't need it. [The next page](/pocket-guides/error-tracking/group-exceptions) covers how PostHog groups exceptions into issues.
 
 <SeeAlso>
 

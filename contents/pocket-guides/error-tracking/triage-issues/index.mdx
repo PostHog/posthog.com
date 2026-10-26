@@ -1,0 +1,54 @@
+---
+title: Triage issues automatically
+shortTitle: Triage
+subtitle: Route each issue to the team that owns it.
+pocketGuideOrder: 8
+section: Automate
+pocketGuideCta:
+  kind: prompt
+  label: Suggest rules with PostHog AI
+  note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
+  requires:
+    label: Needs exceptions reaching PostHog.
+  prompt: >-
+    Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
+    $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
+    checkout or billing. Suggest one error tracking assignment rule per group, with the property, operator, and
+    value it filters on. List the rules most specific first, because the first rule that matches assigns the issue.
+---
+
+<LeftPage>
+
+<AssignmentRuleFigure
+    n={1}
+    caption="This rule assigns issues from source files under checkout/ to the Payments role. Before you save it, you can test how many exceptions it would have matched in the last 7 days."
+/>
+
+<ExternalIssueFigure
+    n={2}
+    caption="A GitHub issue created from PostHog. PostHog fills in the link back to the issue, and you can edit the body to add the impact and a suggested fix before you create it."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Triage issues automatically
+
+An assignment rule matches on the exception's properties and assigns the issue to a role or a teammate when the issue is created <SeeFig n={1} />. To assign issues to a team, create a role for that team in your organization settings.
+
+Rules run during ingestion, after <Term name="source map">source maps</Term> have been applied, so they match against the unminified <Term name="stack trace" />. A rule on the exception's source file can assign issues from files under `checkout/` to the Payments role. The first rule that matches assigns the issue, so put your most specific rules first.
+
+Once you [connect](/docs/error-tracking/integrations) GitHub, GitLab, Linear, or Jira, you can create an issue there from the PostHog issue page. The new issue includes the stack trace and a link back to PostHog, where whoever picks it up can see every exception and the people it hit <SeeFig n={2} />.
+
+PostHog AI can group your recent exceptions by source file and URL path, and suggest a rule for each group.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Assign issues to teammates](/docs/error-tracking/assigning-issues) · [Set up integrations](/docs/error-tracking/integrations)
+
+</SeeAlso>
+
+</RightPage>

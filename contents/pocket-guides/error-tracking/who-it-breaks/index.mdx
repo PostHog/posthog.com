@@ -1,12 +1,65 @@
 ---
+# The scout behind this chapter is the custom one in
+# contents/pocket-guides/self-driving/errors-your-best-accounts-hit (its SKILL.md is the source).
+# <Enable />, <Watches />, <ScoutFigure />, and <DetailFigure /> only render under
+# /pocket-guides/self-driving/, so this page names the scout's sources in prose, writes the
+# report inline on <AnatomyFigure />, and sends the reader to the self-driving chapter to add it.
 title: Find the errors your best accounts hit
 shortTitle: Errors by account value
-subtitle: An error that fires 391 times might be eleven customers, or one retry loop.
-pocketGuideOrder: 6
+subtitle: Which issues are your paying accounts hitting?
+pocketGuideOrder: 11
 section: Self-drive
+pocketGuideCta:
+  kind: link
+  label: Open the errors by account value scout
+  href: /pocket-guides/self-driving/errors-your-best-accounts-hit
+  note: A scout that checks your issues every day and reports the ones concentrated in paying accounts.
 ---
 
 <LeftPage>
+
+<FactorSplitFigure
+    n={1}
+    caption="What the scout saw: Four paying accounts send 9% of your traffic. They carry 71% of Issue A and 9% of Issue B, so only Issue A gets a report."
+    totalLabel="Share of the issue"
+    factorLabels={['Share of traffic', 'Concentration']}
+    rows={[
+        {
+            label: 'Issue A',
+            total: '71%',
+            factors: ['9%', '7.9×'],
+            weight: 1,
+            verdict: 'Concentrated',
+            tone: 'concern',
+        },
+        {
+            label: 'Issue B',
+            total: '9%',
+            factors: ['9%', '1.0×'],
+            weight: 0.13,
+            verdict: 'Even spread',
+            tone: 'healthy',
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="The report card in your inbox. The claim is on the card, and the accounts and the comparison are inside the report."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Four paying accounts carry 71% of one issue and send 9% of your traffic. The issue isn't in your top ten by occurrences"
+    report={{
+        title: 'One issue is 71% concentrated in four paying accounts',
+        source: 'Scout · errors by account value',
+        receivedAgo: '3h',
+        affected: '4 paying accounts · 71% of the issue',
+        body: '`TypeError: Cannot read properties of null` fired 2,340 times this week across 31 accounts. Four of them account for 71% of those exceptions while making up 9% of your overall traffic, and all four carry a Stripe customer ID.\n\nThe issue does not rank in your top ten by occurrences. The top issue is a retry loop on one free account, which fired more exceptions this week than all four paying accounts combined.',
+        suggestedAction: 'Reproduce the error in one of the four accounts. All four have a workspace created before the schema change in March.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
 
 </LeftPage>
 
@@ -14,31 +67,63 @@ section: Self-drive
 
 # Find the errors your best accounts hit
 
-Every <Term name="exception" /> is an <Term name="event" />, so it carries the <Term name="person" /> it happened to. That is the difference between knowing an error fires 391 times and knowing it fires for eleven accounts, three of them on your largest plan.
+Error Tracking can sort <Term name="issue">issues</Term> by occurrences, users, or sessions. None of those says which accounts pay you, so an issue that four of your paying accounts keep hitting can rank below a free account's retry loop.
 
-You can sort the <Term name="issue" /> list by occurrences, but occurrences is the number that lies to you the most.
+Each <Term name="exception" /> is a `$exception` <Term name="event" />, stored in PostHog with the rest of your product and business data. When your events carry the account that sent them through [group analytics](/docs/product-analytics/group-analytics), a query can join an issue to the accounts that hit it and check which of them pay you. [Measure impact with your other data](/pocket-guides/error-tracking/measure-impact) shows how to write that join in SQL.
 
-## What the scout watches
+This <Term name="scout" /> runs the join on a schedule and reports the issues that concentrate in your paying accounts.
 
-The questions that rank an issue are further out than error tracking:
+## What the scout looks at
 
-- How many people did it reach?
-- Are any of them paying you?
-- Did they come back afterwards?
-- What do those accounts pay, in total?
+`TypeError: Cannot read properties of null` fired 2,340 times this week across 31 accounts, and it isn't in your top ten issues by occurrences. Four of those accounts pay you, and together they send 9% of your traffic. Which is it?
 
-Every one is answerable because an exception is an event and carries the person it happened to.
+- If the four accounts carry about 9% of the issue, it's spread evenly across your accounts. The scout stays _quiet_.
+- If they carry 71% of it, the issue is concentrated in accounts that pay you. The scout _**reports**_.
 
-## What makes it report
+The scout looks for the second case <SeeFig n={1} />.
 
-All of this is a triage pass you would rather not repeat every morning. A <Term name="scout" /> runs it on a schedule and only writes when an issue concentrates in accounts worth caring about.
+The scout measures each account's share of the issue and share of your traffic over the last seven days, and it only reports an issue that fired in the last 24 hours. It also stays quiet when one account is the whole issue because a single client keeps retrying. PostHog's error tracking scout watches for stuck loops like that, and for broad regressions spread evenly across your users. See [Catch error spikes and stuck loops](/pocket-guides/error-tracking/errors-as-signals).
 
-## What lands in your inbox
+## The report in your inbox
 
-It files a <Term name="report" /> in your <Term name="inbox" /> with paying accounts' share of the issue against their share of your traffic.
+When an issue concentrates in paying accounts, the scout files a <Term name="report" /> in your <Term name="inbox" />. <SeeFig n={2} /> breaks the card down part by part.
 
-## From report to fix
+The report names the issue and the accounts, with their share of the issue next to their share of your traffic. It also says what the scout can't measure. Whether an account pays you is a stand-in for impact, so a paying account that hits an error on a page nobody uses still counts.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim id est laborum.
+If the issue keeps firing, the next run updates the same report instead of filing a new one.
+
+## The pull request you merge
+
+An agent investigates each report. When there's a clear code change to make, the report is actionable and the agent opens a pull request with the report and its evidence as context. You review and merge it like any other pull request.
+
+Reports are free. Pull requests are **$15 each**, and your first three each month are **free**. See self-driving [pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+A scout is a file of instructions that an agent follows on a schedule. This one is a custom scout, and its file is in the [self-driving pocket guide](/pocket-guides/self-driving/errors-your-best-accounts-hit).
+
+It reads three kinds of data in PostHog:
+
+- **Error Tracking** for every exception from the last seven days, grouped by issue and by the account that hit it.
+- **Your product events** for every event each account sent over the same seven days, which gives that account's share of your traffic.
+- **Customer analytics** for your accounts, matched to your events by group key. An account with a Stripe customer ID counts as paying.
+
+## The schedule it runs on
+
+The scout runs **daily**. You can change that to any interval from every 30 minutes to every 30 days, or set a cron expression. It only writes when a live issue concentrates in paying accounts, so most days it files nothing.
+
+## Add this to your scout troop
+
+The scout needs exceptions reaching PostHog and [group analytics](/docs/product-analytics/group-analytics) set up, so each exception carries the account that hit it. It also needs your accounts in Customer analytics, keyed by the same group key your events carry, with a Stripe customer ID on each account that pays you.
+
+The **Add this scout** button in the self-driving pocket guide opens PostHog with the scout prefilled for you to review and create.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Scouts](/docs/self-driving/scouts) · [Group analytics](/docs/product-analytics/group-analytics) · [Monitor and search issues](/docs/error-tracking/monitoring) · [Self-driving pricing](/docs/self-driving/pricing)
+
+</SeeAlso>
 
 </RightPage>

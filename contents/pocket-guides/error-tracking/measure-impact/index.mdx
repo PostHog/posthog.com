@@ -1,0 +1,139 @@
+---
+title: Measure impact with your other data
+shortTitle: Measure impact
+subtitle: Decide which issue to fix first by what it costs you.
+pocketGuideOrder: 7
+section: Query
+pocketGuideCta:
+  kind: prompt
+  label: Rank issues with PostHog AI
+  note: It ranks your issues by the MRR of the organizations they hit and names the one to fix first.
+  requires:
+    label: Needs exceptions reaching PostHog.
+  prompt: >-
+    Rank my error tracking issues from the last 7 days by the total MRR of the organizations that
+    hit them, with the exceptions, organizations, and affected users for each. Then tell me which
+    issue to fix first and why. If my organizations don't have an MRR property, rank the issues by
+    affected organizations instead and tell me how to add MRR with warehouse properties.
+---
+
+<LeftPage>
+
+<LeakFigure
+    n={1}
+    caption="Example: checkout attempts hold steady, but completion falls from 80% to 50% when the error appears."
+    markerAt={0.45}
+    markerLabel="Error first seen"
+    leakLabel="300 fewer completed checkouts per day"
+    startsLabel="Started checkout: 1,000/day"
+    finishesLabel="Completed: 800/day to 500/day"
+    starts={[0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]}
+    finishes={[0.72, 0.72, 0.72, 0.72, 0.72, 0.54, 0.45, 0.45, 0.45, 0.45]}
+/>
+
+<DivergenceFigure
+    n={2}
+    caption="Example: after a deploy, the new checkout's affected-session rate rises to 8% while control stays at 2%. Both lines use the same scale."
+    markerAt={0.45}
+    markerLabel="Checkout deploy"
+    series={[
+        {
+            label: "Control",
+            note: "2% of sessions hit an error",
+            values: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+        },
+        {
+            label: "New checkout",
+            note: "2% to 8% of sessions hit an error",
+            values: [0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.7, 0.8, 0.8, 0.8],
+            emphasis: true,
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Measure impact with your other data
+
+An exception count tells you how often something broke. To decide what to fix first, you also need to know who it hit and what it cost you.
+
+Each <Term name="exception" /> is a `$exception` <Term name="event" />, stored with the rest of your product and business data. You can query exceptions alongside your other events, people, [groups](/docs/product-analytics/group-analytics), and sessions, and [join](/docs/data-warehouse/join) them to the revenue and plan data you sync from [sources](/docs/data-warehouse/sources) like Stripe or Postgres.
+
+## Rank issues by revenue
+
+Join each <Term name="issue" /> to the revenue of the accounts it hit. If MRR lives in Stripe or your own database, [warehouse properties](/docs/data-warehouse/warehouse-properties) copy it onto each organization as a group property.
+
+Run this query in the [SQL editor](/docs/data-warehouse/query). It sums the MRR of the organizations behind each issue over the last 7 days. It reads organizations from `$group_0` (group index 0) and MRR from an `mrr` group property, so change those to match yours:
+
+```sql
+WITH affected AS (
+    SELECT issue_id, $group_0 AS org, count() AS exceptions
+    FROM events
+    WHERE event = '$exception'
+      AND timestamp >= now() - INTERVAL 7 DAY
+      AND notEmpty($group_0)
+    GROUP BY issue_id, org
+)
+SELECT
+    a.issue_id,
+    sum(a.exceptions) AS exceptions,
+    count() AS organizations,
+    round(sum(toFloat(g.properties.mrr))) AS org_mrr
+FROM affected a
+LEFT JOIN groups g ON g.key = a.org AND g.index = 0
+GROUP BY a.issue_id
+ORDER BY org_mrr DESC
+LIMIT 10
+```
+
+In this example, checkout fails less often than search, but the organizations it hits pay twelve times as much in total:
+
+| Issue | Exceptions | Organizations | Their MRR |
+| --- | ---: | ---: | ---: |
+| Checkout confirm fails | 620 | 240 | **$48,000** |
+| Invoice download fails | 180 | 64 | $16,000 |
+| Search request times out | 9,000 | 50 | $4,000 |
+
+MRR is what those organizations pay you. It doesn't measure revenue the error lost.
+
+The [Errors by account value](/pocket-guides/error-tracking/who-it-breaks) scout checks your issues every day and reports the ones concentrated in paying accounts.
+
+## Find one account's errors
+
+When a customer reports a problem, start from their account. Filter the issue list to their organization with a SQL expression like `$group_0 = 'acme'`, or to their users with a person property like email or a <Term name="cohort" />. Then sort by **Users** to see how many people each issue hit:
+
+| Issue | Users affected | Exceptions |
+| --- | ---: | ---: |
+| Checkout confirm fails | **186** | 314 |
+| Invoice download fails | 27 | 41 |
+| Search request times out | 2 | 2,840 |
+
+Checkout hit 186 of their users, so fix it first. Search fired 2,840 times from only 2 users, which points to a retry loop you can look into separately.
+
+## Check conversion
+
+A <Term name="funnel" /> from start to completion, with its graph type set to [historical trends](/docs/product-analytics/funnels#graph-type), shows whether conversion fell when the error appeared <SeeFig n={1} />. In this example, checkout starts hold steady at 1,000 a day, and completions drop from 800 to 500 when the error appears.
+
+To see how the people who hit the error converted, create a cohort from the **Cohort** section of the issue page and [break the funnel down](/docs/product-analytics/funnels#breakdowns) by it. Compare their conversion with the funnel's overall rate, then watch a few of their sessions in <Term name="session replay" /> to see whether they got stuck, retried, or found another way.
+
+## Compare experiment variants
+
+An <Term name="experiment" /> can lift one metric and add errors elsewhere. Add `$exception` to the experiment as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics), and PostHog compares it across variants next to your primary metric.
+
+To see when the errors started, chart the share of sessions with an exception in each variant <SeeFig n={2} />. Use a rate, so a variant with more traffic doesn't look worse just because it's bigger. [Exceptions as events](/pocket-guides/error-tracking/exceptions-as-events#turn-counts-into-rates) shows how to build one, and the Feature Flags pocket guide covers [running the experiment](/pocket-guides/feature-flags/flag-to-experiment).
+
+## Rank your issues with PostHog AI
+
+PostHog AI can run the revenue ranking on your own issues and tell you which one to fix first.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Features that drive revenue](/pocket-guides/data-stack/features-drive-revenue) · [Warehouse properties](/docs/data-warehouse/warehouse-properties) · [Funnels](/docs/product-analytics/funnels)
+
+</SeeAlso>
+
+</RightPage>

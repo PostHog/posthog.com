@@ -79,27 +79,30 @@ export default function Action(): JSX.Element | null {
 
 /**
  * The wizard subcommand a volume needs, if any. AI Observability instruments LLM calls, which the
- * plain wizard doesn't do – see /docs/ai-observability/installation. Everything else wants the
- * default install, so a volume absent from this map gets a bare `npx @posthog/wizard@latest`.
+ * plain wizard doesn't do – see /docs/ai-observability/installation. Error Tracking also sets up
+ * source map upload where the platform needs it. A volume absent from this map gets a bare
+ * `npx @posthog/wizard@latest`.
  */
 const VOLUME_SUBCOMMAND: Record<string, string> = {
     'ai-observability': 'ai-observability',
+    'error-tracking': 'error-tracking',
     'feature-flags': 'feature-flags',
 }
 
-/** The wizard command for the volume the reader is in. */
-function useWizard() {
+/** The wizard command for the volume the reader is in, or for an explicit subcommand. */
+function useWizard(subcommand?: string) {
     const url = useEntry()?.entry.url ?? ''
-    return buildWizardCommand({ subcommand: VOLUME_SUBCOMMAND[volumeIdFromUrl(url)] })
+    return buildWizardCommand({ subcommand: subcommand ?? VOLUME_SUBCOMMAND[volumeIdFromUrl(url)] })
 }
 
 /**
  * The setup command on its own, for a volume's front matter – the prerequisite stated once,
- * before anyone reaches a chapter. `<Prerequisite />` repeats it under each CTA.
+ * before anyone reaches a chapter. `<Prerequisite />` repeats it under each CTA. Pass `subcommand`
+ * for a chapter that needs one wizard program, like `upload-source-maps`.
  */
-export function Setup(): JSX.Element {
+export function Setup({ subcommand }: { subcommand?: string }): JSX.Element {
     const posthog = usePostHog()
-    const wizard = useWizard()
+    const wizard = useWizard(subcommand)
 
     const trackSetupCopy = () =>
         posthog?.capture('pocket_guide_interaction', { kind: 'setup_command_copy', placement: 'front_matter' })

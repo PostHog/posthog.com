@@ -107,6 +107,7 @@ after the prose.
 | `<LoopFigure n caption>` | The self-driving loop diagram |
 | `<TraceFigure n caption rows>` | One LLM trace, nested – generations and spans with their numbers |
 | `<IssueSpikeFigure n caption>` | An annotated issue-volume chart that shows why an error spike earns an alert |
+| `<AssignmentRuleFigure n caption>` | The Error Tracking assignment rule editor, drawn: match mode, a filter on the exception's source file, and the assignee |
 | `<ExternalIssueFigure n caption>` | The GitHub issue created from Error Tracking, including its backlink to PostHog |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
 | `<Enable />` | The scout CTA – one click to add this page's scout |

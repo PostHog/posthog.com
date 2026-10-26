@@ -1,12 +1,57 @@
 ---
 title: Catch error spikes and stuck loops
 shortTitle: Spikes and stuck loops
-subtitle: Find the error patterns that matter without reading every issue yourself.
-pocketGuideOrder: 5
+subtitle: 'Is that error spike a bug many people hit, or a few clients stuck in a loop?'
+pocketGuideOrder: 10
 section: Self-drive
+pocketGuideCta:
+  kind: link
+  label: Open your scouts
+  href: https://app.posthog.com/inbox/scouts
+  note: Find Error tracking in the list and switch it on.
+  requires:
+    label: Needs exceptions reaching PostHog.
 ---
 
 <LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="What the scout saw: At 02:10, exceptions on one issue jumped from about 20 an hour to about 2,400 an hour. Distinct users held at four the whole time."
+    markerAt={0.5}
+    markerLabel="02:10"
+    series={[
+        {
+            label: 'Distinct users',
+            note: 'flat at 4',
+            values: [0.42, 0.4, 0.44, 0.41, 0.43, 0.42, 0.4, 0.43, 0.41, 0.42, 0.44, 0.42],
+        },
+        {
+            label: 'Exceptions',
+            note: '~20/hour → ~2,400/hour',
+            emphasis: true,
+            values: [0.05, 0.04, 0.06, 0.05, 0.04, 0.06, 0.55, 0.82, 0.88, 0.9, 0.87, 0.9],
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="The report card in your inbox shows the scout's claim and triage. The full evidence is inside the report."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Exceptions jumped to ~2,400 an hour at 02:10 while distinct users held at 4, because the poller throws on an empty response and never backs off"
+    report={{
+        title: 'Notifications poller loops on an empty response, ~2,400 exceptions an hour from 4 users',
+        source: 'Scout · error tracking',
+        receivedAgo: '3h',
+        affected: '4 users · ~2,400 exceptions an hour',
+        body: "`TypeError: Cannot read properties of null (reading 'items')` went from about 20 exceptions an hour to about 2,400 at 02:10, and it's still firing. Distinct users held at 4 the whole time, so a few open tabs are looping on the same error.\n\nThe top frame is `pollNotifications` in `src/notifications/poll.ts`. When the notifications endpoint returns an empty body, the poller reads `items` from `null` and throws, then polls again on its usual six-second timer with no backoff. Each of the four users has a dashboard tab open, and each tab throws about 600 times an hour.",
+        suggestedAction: 'Treat an empty response as no new notifications, and back off after a failed poll.',
+        actionNote: 'An agent opens the pull request – you review and merge.',
+    }}
+/>
 
 </LeftPage>
 
@@ -14,28 +59,57 @@ section: Self-drive
 
 # Catch error spikes and stuck loops
 
-A <Term name="scout" /> runs on a schedule rather than continuously, explores rather than following one stream, and decides what clears the bar you set. It can rank, cluster, weigh who is affected, and stay quiet on a day when nothing important happened.
+An error spike can be a regression that many people hit, or a few clients stuck retrying the same failing call. When you sort the issue list by occurrences, the loop can rank above a bug that breaks checkout for hundreds of people.
 
-## What the scout watches
+This scout watches your exceptions for fresh spikes and weighs each one by how many people it reaches.
 
-The error tracking scout watches error spikes, stuck loops, and <Term name="fingerprint" /> clusters, triaged by how many users they hit.
+## What the scout looks at
 
-## What makes it report
+Thousands of exceptions arrived in your project overnight. Which is it?
 
-A scout writes a <Term name="report" /> only when something clears its bar. Unlike a source, it can weigh the evidence and stay quiet when nothing important happened.
+- If they're spread across the issues you always see, at their usual rate, nothing is new. The scout stays _quiet_.
+- If one issue jumped well above its own baseline, it's a fresh problem. The scout _**reports**_.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
+Each exception is an `$exception` event tied to the person who hit it, so the scout counts distinct users next to exceptions and uses the two to set the priority. When both climb together, many people are hitting a fresh regression, and the report is P1, or P2 when the reach is moderate. When exceptions climb and distinct users stay flat, as in <SeeFig n={1} />, a job or a retry is stuck in a loop on a few clients. A loop is usually less urgent, so its report is P3, or P2 when it's fresh and in the thousands. An issue you resolved that starts firing again is also P1.
 
-## What lands in your inbox
+Several new issues that appear in the same window with overlapping stack traces probably share a cause, so the scout files them as one report. It skips an exception that one person hit once in a single session. It also skips errors from an upstream provider it has already noted, like rate limits from your LLM provider.
 
-An actionable report arrives with its evidence attached: what happened, who it happened to, and what the evidence suggests doing about it.
+## The report in your inbox
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sunt in culpa qui officia deserunt mollit anim id est laborum.
+When the scout finds a fresh spike, it files a <Term name="report" /> in your <Term name="inbox" />. <SeeFig n={2} /> labels each part of the card. The report names the <Term name="issue" /> and its <Term name="fingerprint" />, shows exceptions against distinct users, counts the spike hour by hour against the issue's baseline, and gives the hour it started. It includes a chart of the spike next to the numbers.
 
-## From report to fix
+If the issue keeps firing, later runs add the new hours to the same report instead of filing another one.
 
-The agent reads the <Term name="stack trace" />, the sessions, and the code it points at, then opens a pull request in your repository, which you review like any other. Nothing merges without you.
+## The pull request you merge
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
+Most spikes need a person to investigate, so the scout marks those reports as needing your input. When the <Term name="stack trace" /> points at a specific file in one of your repositories, the scout can mark the report actionable instead, like the one in <SeeFig n={2} />.
+
+When you're ready to open a pull request, PostHog dispatches an agent to do it for you with the report and evidence attached as context. You review and merge it like any other PR.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See [self-driving pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+A <Term name="scout" /> is a set of instructions an agent follows on a schedule. PostHog ships and maintains this one, and you can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md). The [Self-driving pocket guide](/pocket-guides/self-driving/101) explains how scouts work.
+
+Each run queries your Error Tracking issues and the `$exception` events behind them through the PostHog MCP, the same one you can [connect to your own agent](/pocket-guides/error-tracking/query-with-mcp). It also reads its notes from earlier runs and the reports already in your inbox, so it doesn't file the same spike twice.
+
+The Error Tracking <Term name="signal source" /> watches the same exceptions. It raises a signal for every new issue, reopened issue, and volume spike, with no bar to clear. You turn the source and the scout on separately, and both feed the same inbox.
+
+## The schedule it runs on
+
+Scouts run every 24 hours by default. In the scout's **Settings**, you can change that to an interval from every 30 minutes to every 30 days, or to a cron expression that runs it at a fixed time of day. Most runs close out without filing anything.
+
+## Add this to your scout troop
+
+You can turn this scout on or off for each project.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Scouts](/docs/self-driving/scouts) · [Scout examples](/docs/self-driving/scout-examples) · [Reports](/docs/self-driving/reports) · [Signal sources](/docs/self-driving/inbox/sources) · [Detect spikes](/docs/error-tracking/spikes)
+
+</SeeAlso>
 
 </RightPage>
