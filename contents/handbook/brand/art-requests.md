@@ -11,7 +11,7 @@ All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />
 
 They can help you with things like:
 
-- Custom visuals for paid ad campaigns
+- Custom visuals for [paid ad campaigns](/handbook/marketing/paid)
 - Blog and social media artwork
 - New themed hedgehogs
 - Custom CTAs and banners

@@ -26,8 +26,6 @@ This constraint has worked out pretty well for us. Distribution is pretty easy w
 
 We even hire full-stack developers into our marketing team to make sure we can cover the full depth needed in a lot of our tutorials, docs, and posts.
 
-We do run a lot of [paid ads](/handbook/marketing/paid) – they are our [largest non-people marketing cost](/founders/actual-marketing-budget-2026). Ads put PostHog in front of people that word of mouth doesn't reach yet. They add to word of mouth, but they don't replace it.
-
 Things you won't find our marketing team doing: removing information from our website to increase conversion, running ads that we'd be embarrassed to see ourselves, or letting colleagues ship content they aren't proud of.
 
 ## We happily spend lots of money on our website

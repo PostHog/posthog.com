@@ -23,7 +23,7 @@ Releases and launches involve lots of moving pieces. It's helpful to be very spe
 
 - **Product team lead** – product readiness for launch, flag setup, and stability.
 - **PM** – pricing and packaging readiness, building the target cohort.
-- **PMM** – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
+- **PMM** – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, [paid ads](/handbook/marketing/paid)).
     
 If you are one of these people, you can give feedback to each but you shouldn't block decisions not in your lane. For example, the team lead can say the product is not ready, but should not block a the content of an email. Similarly, marketing can decide what the product page says, but should not block a pricing decision. 
 
