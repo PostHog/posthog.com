@@ -1,0 +1,1921 @@
+{
+    "source": "https://brand.posthog.com/catalog.json",
+    "version": "0.15.2",
+    "tierColors": ["#FFB8BA", "#FFBDA3", "#FFEBA3", "#B8EAC2", "#A1D3F7"],
+    "hoggies": [
+        {
+            "slug": "70s-dance",
+            "name": "70's Dance",
+            "tags": ["LinkedIn", "Solo", "Saturday Night Hog", "travolta", "leisure suit", "disco"]
+        },
+        {
+            "slug": "996",
+            "name": "996",
+            "tags": ["hog", "solo", "group", "evolution 4", "996", "coder", "yellow shirt", "orange hat"]
+        },
+        { "slug": "angel", "name": "Angel", "tags": ["hog", "solo", "halo", "angel", "white robe"] },
+        { "slug": "ape", "name": "Ape", "tags": ["hog", "solo", "group", "evolution 1", "ape", "monkey", "banana"] },
+        {
+            "slug": "art-thief",
+            "name": "Art Thief",
+            "tags": [
+                "hog",
+                "solo",
+                "thief",
+                "steal",
+                "burglar",
+                "crime",
+                "art",
+                "money",
+                "mask",
+                "hat",
+                "mona lisa",
+                "money bag",
+                "striped clothes",
+                "stripes"
+            ]
+        },
+        {
+            "slug": "asleep",
+            "name": "Asleep",
+            "tags": ["hog", "solo", "naked", "sleep", "eye mask", "blanket", "drool"]
+        },
+        {
+            "slug": "back-to-the-future",
+            "name": "Back To The Future",
+            "tags": [
+                "hog",
+                "group",
+                "back to the future",
+                "bttf",
+                "marty",
+                "doc",
+                "mcfly",
+                "great scott",
+                "gigawatt",
+                "puffer vest"
+            ]
+        },
+        { "slug": "ball", "name": "Ball", "tags": ["hog", "solo", "naked", "ball", "game"] },
+        {
+            "slug": "banana",
+            "name": "Banana",
+            "tags": ["hog", "solo", "banana", "nap", "chilling", "naked", "asleep", "barbados", "relax"]
+        },
+        {
+            "slug": "basketball-coach",
+            "name": "Basketball Coach",
+            "tags": ["hog", "solo", "coach", "sports", "basketball", "clipboard", "mustache", "green shirt", "belt"]
+        },
+        {
+            "slug": "beaker",
+            "name": "Beaker",
+            "tags": ["hog", "solo", "beaker", "pink", "liquid", "drown", "science", "chemistry"]
+        },
+        {
+            "slug": "boombox",
+            "name": "Boombox",
+            "tags": ["hog", "solo", "boombox hog", "radio", "say anything", "john cusack", "trench coat", "brown coat"]
+        },
+        {
+            "slug": "burger",
+            "name": "Burger",
+            "tags": ["hog", "solo", "food", "burger", "hamburger", "pickle", "bun", "spatula"]
+        },
+        {
+            "slug": "burning-money",
+            "name": "Burning Money",
+            "tags": [
+                "hog",
+                "solo",
+                "naked",
+                "burning",
+                "fire",
+                "lighter",
+                "money",
+                "burning money",
+                "stop",
+                "stop burning money",
+                "flames"
+            ]
+        },
+        {
+            "slug": "business-evolution",
+            "name": "Business Evolution",
+            "tags": ["hog", "solo", "group", "evolution 3", "business", "orange phone", "yellow tie", "quick call"]
+        },
+        {
+            "slug": "cake",
+            "name": "Cake",
+            "tags": ["hog", "solo", "cake", "party", "headdress", "pop out", "confetti"]
+        },
+        {
+            "slug": "campfire-cowboy",
+            "name": "Campfire Cowboy",
+            "tags": [
+                "hog",
+                "solo",
+                "campfire",
+                "cowboy",
+                "roasting",
+                "fire",
+                "cooking",
+                "boots",
+                "spurs",
+                "blue hat",
+                "green shirt",
+                "log",
+                "bug"
+            ]
+        },
+        {
+            "slug": "card",
+            "name": "Card",
+            "tags": [
+                "hog",
+                "solo",
+                "cards",
+                "poker",
+                "playing",
+                "orange",
+                "blue",
+                "hiding",
+                "close to vest",
+                "full house"
+            ]
+        },
+        {
+            "slug": "caribana",
+            "name": "Caribana",
+            "tags": ["hog", "solo", "feather", "caribana", "Caribbean", "barbados", "festivale", "dancer", "sunglasses"]
+        },
+        { "slug": "caveman", "name": "Caveman", "tags": ["hog", "solo", "group", "evolution 2", "caveman", "club"] },
+        { "slug": "cereal", "name": "Cereal", "tags": ["hog", "solo", "eating", "cereal", "breakfast", "skeptical"] },
+        {
+            "slug": "chart",
+            "name": "Chart",
+            "tags": [
+                "hog",
+                "solo",
+                "chart",
+                "product analytics",
+                "easel",
+                "bar chart",
+                "sweater vest",
+                "teal",
+                "clipboard",
+                "pointer"
+            ]
+        },
+        {
+            "slug": "chef",
+            "name": "Chef",
+            "tags": [
+                "hog",
+                "solo",
+                "chef",
+                "chef hat",
+                "white coat",
+                "prawn",
+                "shrimp",
+                "tomato",
+                "kerchief",
+                "seafood"
+            ]
+        },
+        {
+            "slug": "climber-1",
+            "name": "Climber (1)",
+            "tags": [
+                "hog",
+                "climb",
+                "outdoorsy",
+                "backpack",
+                "rope",
+                "hiking",
+                "hiker",
+                "helmet",
+                "puffer",
+                "pole",
+                "pink",
+                "harness",
+                "hanging",
+                "belay"
+            ]
+        },
+        {
+            "slug": "climber-2",
+            "name": "Climber (2)",
+            "tags": [
+                "hog",
+                "climb",
+                "outdoorsy",
+                "backpack",
+                "rope",
+                "hiking",
+                "hiker",
+                "helmet",
+                "puffer",
+                "pole",
+                "pink",
+                "harness",
+                "hanging",
+                "belay"
+            ]
+        },
+        {
+            "slug": "coconut",
+            "name": "Coconut",
+            "tags": [
+                "hog",
+                "solo",
+                "coconut",
+                "drink",
+                "tiki",
+                "vacation",
+                "barbados",
+                "in cups",
+                "umbrella",
+                "straw",
+                "flower",
+                "sunglasses"
+            ]
+        },
+        {
+            "slug": "code-bubble",
+            "name": "Code Bubble",
+            "tags": ["hog", "solo", "bubble", "zen", "code", "closed eyes", "meditation"]
+        },
+        {
+            "slug": "coding-group",
+            "name": "Coding Group",
+            "tags": [
+                "hog",
+                "group",
+                "coding party",
+                "on-site",
+                "talking bubbles",
+                "editable",
+                "laptop",
+                "four",
+                "hat",
+                "mug"
+            ]
+        },
+        {
+            "slug": "coffee-cup",
+            "name": "Coffee Cup",
+            "tags": ["hog", "solo", "coffee", "coffee cup", "in your cups", "suit", "tie", "smirk", "happy", "mug"]
+        },
+        {
+            "slug": "coffee-run",
+            "name": "Coffee Run",
+            "tags": ["hog", "solo", "coffee run", "croissant", "latte", "shopping", "coffee", "bag", "red shirt"]
+        },
+        {
+            "slug": "commuter",
+            "name": "Commuter",
+            "tags": [
+                "hog",
+                "solo",
+                "worker",
+                "office",
+                "briefcase",
+                "mobile",
+                "cell phone",
+                "glasses",
+                "tie",
+                "button-up"
+            ]
+        },
+        {
+            "slug": "construction-1",
+            "name": "Construction (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "construction",
+                "can be paired with construction 2",
+                "pipe",
+                "hi-vis",
+                "hard hat",
+                "can be paired with construction 1"
+            ]
+        },
+        {
+            "slug": "construction-2",
+            "name": "Construction (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "construction",
+                "can be paired with construction 2",
+                "pipe",
+                "hi-vis",
+                "hard hat",
+                "can be paired with construction 1"
+            ]
+        },
+        {
+            "slug": "cool-car",
+            "name": "Cool Car",
+            "tags": [
+                "hog",
+                "solo",
+                "driving",
+                "convertible",
+                "yellow",
+                "james dean",
+                "smoking",
+                "smoke",
+                "cool",
+                "suave",
+                "sunglasses",
+                "laid back"
+            ]
+        },
+        {
+            "slug": "cowboy-lasso",
+            "name": "Cowboy Lasso",
+            "tags": ["hog", "solo", "cowboy", "red hat", "lasso", "spurs", "belt buckle"]
+        },
+        { "slug": "croissant", "name": "Croissant", "tags": ["hog", "solo", "croissant", "drool", "blue shirt"] },
+        {
+            "slug": "cursor",
+            "name": "Cursor",
+            "tags": ["hog", "solo", "naked", "arrow", "cursor", "holding", "smiling"]
+        },
+        {
+            "slug": "dadd-ai-1",
+            "name": "Dadd Ai (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "dadd-ai",
+                "daddai",
+                "daddy",
+                "left",
+                "hawaiian shirt",
+                "sunglasses",
+                "gold chain",
+                "P",
+                "speedo",
+                "right"
+            ]
+        },
+        {
+            "slug": "dadd-ai-2",
+            "name": "Dadd Ai (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "dadd-ai",
+                "daddai",
+                "daddy",
+                "left",
+                "hawaiian shirt",
+                "sunglasses",
+                "gold chain",
+                "P",
+                "speedo",
+                "right"
+            ]
+        },
+        {
+            "slug": "data-thief",
+            "name": "Data Thief",
+            "tags": ["hog", "solo", "thief", "data theft", "data", "bag", "hat", "mask", "stripes", "striped clothes"]
+        },
+        {
+            "slug": "desk-wizard",
+            "name": "Desk Wizard",
+            "tags": [
+                "hog",
+                "solo",
+                "wizard",
+                "blue hat",
+                "computer",
+                "laptop",
+                "mr wizard",
+                "name plate",
+                "coffee",
+                "wand"
+            ]
+        },
+        {
+            "slug": "director",
+            "name": "Director",
+            "tags": [
+                "hog",
+                "solo",
+                "director",
+                "movie",
+                "action",
+                "art",
+                "replay",
+                "truman show",
+                "beret",
+                "sunglasses",
+                "director chair"
+            ]
+        },
+        {
+            "slug": "dj",
+            "name": "Dj",
+            "tags": ["hog", "solo", "dj", "laptop", "music", "hoodie", "hacker", "blue shirt", "headphones"]
+        },
+        {
+            "slug": "doc-brown",
+            "name": "Doc Brown",
+            "tags": [
+                "hog",
+                "solo",
+                "endpoints",
+                "connection",
+                "electric",
+                "plugs",
+                "scientist",
+                "doc",
+                "back to the future"
+            ]
+        },
+        {
+            "slug": "doctor-1",
+            "name": "Doctor (1)",
+            "tags": ["hog", "solo", "lab coat", "stethoscope", "doctor", "nurse", "glasses"]
+        },
+        {
+            "slug": "doctor-2",
+            "name": "Doctor (2)",
+            "tags": ["hog", "solo", "lab coat", "stethoscope", "doctor", "nurse", "glasses"]
+        },
+        {
+            "slug": "doll-house",
+            "name": "Doll House",
+            "tags": ["hog", "solo", "house", "doll house", "see inside", "open", "naked"]
+        },
+        {
+            "slug": "dr-manhattan",
+            "name": "Dr. Manhattan",
+            "tags": ["hog", "solo", "meme", "dr", "manhattan", "blue", "brain explode", "watchmen"]
+        },
+        { "slug": "drake-nah", "name": "Drake Nah", "tags": ["hog", "solo", "drake", "no", "bad", "orange coat"] },
+        { "slug": "drake-yah", "name": "Drake Yah", "tags": ["hog", "solo", "drake", "yes", "good", "orange coat"] },
+        {
+            "slug": "driving-hogzilla",
+            "name": "Driving Hogzilla",
+            "tags": [
+                "hog",
+                "solo",
+                "car",
+                "hot rod",
+                "classic car",
+                "hogzilla",
+                "fire",
+                "hat",
+                "driving",
+                "self driving"
+            ]
+        },
+        {
+            "slug": "dynamite",
+            "name": "Dynamite",
+            "tags": ["hog", "solo", "dynamite", "flying", "ahhhhh", "blast", "red", "firework", "fuse", "short fuse"]
+        },
+        { "slug": "einstein", "name": "Einstein", "tags": ["hog", "solo", "einstein", "chalk board", "duplicates"] },
+        {
+            "slug": "einstein-group",
+            "name": "Einstein Group",
+            "tags": ["hog", "group", "einstein", "chalk board", "duplicates"]
+        },
+        {
+            "slug": "error",
+            "name": "Error",
+            "tags": [
+                "hog",
+                "solo",
+                "naked",
+                "error",
+                "warning",
+                "danger",
+                "yield",
+                "caution",
+                "tape",
+                "wrapped up",
+                "yellow"
+            ]
+        },
+        {
+            "slug": "evel",
+            "name": "Evel",
+            "tags": ["hog", "solo", "riding bike", "cape motorcycle", "evel", "stunt", "jump"]
+        },
+        {
+            "slug": "experiment",
+            "name": "Experiment",
+            "tags": [
+                "hog",
+                "solo",
+                "experiments",
+                "science",
+                "beaker",
+                "chemistry",
+                "lab",
+                "test tube",
+                "pink",
+                "naked"
+            ]
+        },
+        {
+            "slug": "explorer",
+            "name": "Explorer",
+            "tags": ["hog", "solo", "map", "binoculars", "bucket hat", "hat", "camo", "shocked", "surprised", "khaki"]
+        },
+        {
+            "slug": "final-evolution",
+            "name": "Final Evolution",
+            "tags": ["hog", "solo", "group", "evolution 5", "flying", "final level"]
+        },
+        {
+            "slug": "float",
+            "name": "Float",
+            "tags": [
+                "hog",
+                "solo",
+                "beach",
+                "inner tube",
+                "laptop",
+                "remote",
+                "offsite",
+                "summer",
+                "float trip",
+                "remote work",
+                "sunglasses"
+            ]
+        },
+        {
+            "slug": "football-coach",
+            "name": "Football Coach",
+            "tags": [
+                "hog",
+                "solo",
+                "football",
+                "American",
+                "sweatsuit",
+                "headband",
+                "coach",
+                "pointing",
+                "whistle",
+                "sports"
+            ]
+        },
+        {
+            "slug": "football-player",
+            "name": "Football Player",
+            "tags": ["hog", "solo", "qb", "football", "helmet", "player", "jersey"]
+        },
+        { "slug": "gardener-1", "name": "Gardener (1)", "tags": [] },
+        { "slug": "gardener-2", "name": "Gardener (2)", "tags": [] },
+        { "slug": "gatsby", "name": "Gatsby", "tags": ["hog", "solo", "gatsby", "cheers", "leo", "tux", "blonde"] },
+        {
+            "slug": "gladiator-1",
+            "name": "Gladiator (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "soldier",
+                "roman",
+                "toga",
+                "shield",
+                "sword",
+                "gladiator",
+                "russel crowe",
+                "3000",
+                "sparta",
+                "gerard butler"
+            ]
+        },
+        {
+            "slug": "gladiator-2",
+            "name": "Gladiator (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "soldier",
+                "roman",
+                "toga",
+                "shield",
+                "sword",
+                "gladiator",
+                "russel crowe",
+                "3000",
+                "sparta",
+                "gerard butler"
+            ]
+        },
+        {
+            "slug": "gravedigger",
+            "name": "Gravedigger",
+            "tags": [
+                "hog",
+                "solo",
+                "overalls",
+                "grave",
+                "digging",
+                "cemetery",
+                "headstone",
+                "blank",
+                "dirt",
+                "sweat",
+                "shovel",
+                "rip",
+                "groundskeeper"
+            ]
+        },
+        {
+            "slug": "greek",
+            "name": "Greek",
+            "tags": ["hog", "solo", "scroll", "greek", "roman", "philosopher", "list", "ceasar", "reading", "news"]
+        },
+        {
+            "slug": "haha-bizzniss",
+            "name": "Haha Bizzniss",
+            "tags": [
+                "hog",
+                "solo",
+                "suit",
+                "blue",
+                "tie",
+                "polka dot",
+                "cell phone",
+                "haha bizzniss",
+                "business",
+                "meme"
+            ]
+        },
+        {
+            "slug": "hand-clasp",
+            "name": "Hand Clasp",
+            "tags": ["hog", "group", "meme", "hand clasp", "plaid shirt", "friends"]
+        },
+        { "slug": "heart", "name": "Heart", "tags": ["hog", "solo", "heart", "holding", "shining", "naked"] },
+        {
+            "slug": "highlighter",
+            "name": "Highlighter",
+            "tags": [
+                "hog",
+                "solo",
+                "markers",
+                "highlighter",
+                "sweat",
+                "spinning",
+                "running",
+                "balancing",
+                "trying",
+                "working hard",
+                "stressed",
+                "pink",
+                "yellow",
+                "green"
+            ]
+        },
+        {
+            "slug": "hipster",
+            "name": "Hipster",
+            "tags": ["hog", "solo", "hipster hog", "coffee", "music", "mustache", "beanie", "record"]
+        },
+        {
+            "slug": "hogpatch",
+            "name": "Hogpatch",
+            "tags": ["hog", "solo", "desk", "plant", "hogpatch", "YC", "happy", "wave"]
+        },
+        {
+            "slug": "honey",
+            "name": "Honey",
+            "tags": ["hog", "solo", "honey", "honeybear", "bear", "squeeze", "sweet bee", "yellow"]
+        },
+        {
+            "slug": "hooligan",
+            "name": "Hooligan",
+            "tags": ["hog", "solo", "soccer", "football", "fan", "cheer", "yell", "bucket hat", "red", "white", "scarf"]
+        },
+        { "slug": "hoot", "name": "Hoot", "tags": ["hog", "solo", "owl", "hoot", "who", "bird", "branch", "feather"] },
+        {
+            "slug": "hot-popcorn",
+            "name": "Hot / Popcorn",
+            "tags": ["hog", "solo", "naked", "popcorn", "tub", "eating", "watching", "entranced", "movie"]
+        },
+        {
+            "slug": "hourglass",
+            "name": "Hourglass",
+            "tags": ["hog", "solo", "time out", "hourglass", "sand", "time", "timer"]
+        },
+        {
+            "slug": "im-the-driver",
+            "name": "I'm The Driver",
+            "tags": ["hog", "solo", "i'm the driver", "jumping car", "red car"]
+        },
+        {
+            "slug": "ichabod",
+            "name": "Ichabod",
+            "tags": [
+                "hog",
+                "solo",
+                "headless",
+                "horseman",
+                "ichabod crane",
+                "cape",
+                "pumpkin",
+                "flame",
+                "fire",
+                "haunted",
+                "halloween",
+                "purple"
+            ]
+        },
+        { "slug": "ipad", "name": "Ipad", "tags": ["hog", "solo", "ipad", "apple", "surprised"] },
+        {
+            "slug": "jack-dawson",
+            "name": "Jack Dawson",
+            "tags": ["hog", "solo", "drawing", "titanic", "leo", "leonardo", "dicaprio", "white shirt", "easel"]
+        },
+        {
+            "slug": "judge",
+            "name": "Judge",
+            "tags": ["hog", "solo", "judge", "judge judy", "justice", "court", "legal", "gavel"]
+        },
+        {
+            "slug": "katy-perry",
+            "name": "Katy Perry",
+            "tags": ["hog", "solo", "cloud", "katy perry", "pink", "lollipop", "heart", "floating", "candy", "clouds"]
+        },
+        {
+            "slug": "lemon-wrangler-1",
+            "name": "Lemon Wrangler (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "cowboy",
+                "lemon",
+                "lemon wrangler",
+                "blue hat",
+                "green shirt",
+                "group",
+                "green hat",
+                "red shirt"
+            ]
+        },
+        {
+            "slug": "lemon-wrangler-2",
+            "name": "Lemon Wrangler (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "cowboy",
+                "lemon",
+                "lemon wrangler",
+                "blue hat",
+                "green shirt",
+                "group",
+                "green hat",
+                "red shirt"
+            ]
+        },
+        {
+            "slug": "lemon-wrangler-3",
+            "name": "Lemon Wrangler (3)",
+            "tags": [
+                "hog",
+                "solo",
+                "cowboy",
+                "lemon",
+                "lemon wrangler",
+                "blue hat",
+                "green shirt",
+                "group",
+                "green hat",
+                "red shirt"
+            ]
+        },
+        {
+            "slug": "lemonade",
+            "name": "Lemonade",
+            "tags": [
+                "hog",
+                "solo",
+                "lemonade",
+                "spill",
+                "lemon",
+                "when life gives you lemons",
+                "pour",
+                "costume",
+                "drink"
+            ]
+        },
+        {
+            "slug": "level-up",
+            "name": "Level Up",
+            "tags": ["hog", "solo", "mario", "1up", "brick", "super", "jump", "level-up"]
+        },
+        {
+            "slug": "lifeguard",
+            "name": "Lifeguard",
+            "tags": ["hog", "solo", "lifeguard", "baywatch", "support", "binoculars", "life preserver"]
+        },
+        {
+            "slug": "loops",
+            "name": "Loops",
+            "tags": [
+                "hog",
+                "solo",
+                "loop",
+                "loops",
+                "self-improving loop",
+                "white shirt",
+                "easel",
+                "artist",
+                "purple",
+                "pencil",
+                "drawing"
+            ]
+        },
+        {
+            "slug": "magnifying-glass",
+            "name": "Magnifying Glass",
+            "tags": ["hog", "solo", "magnifying glass", "searching", "research", "naked"]
+        },
+        {
+            "slug": "mailbox",
+            "name": "Mailbox",
+            "tags": ["hog", "solo", "mail", "envelope", "inbox", "red hat", "blue shirt", "you've got mail"]
+        },
+        {
+            "slug": "marathon",
+            "name": "Marathon",
+            "tags": [
+                "hog",
+                "solo",
+                "runner",
+                "run",
+                "sprint",
+                "bib",
+                "race",
+                "sunglasses",
+                "pit viper",
+                "pink",
+                "blue",
+                "white"
+            ]
+        },
+        {
+            "slug": "megaphone",
+            "name": "Megaphone",
+            "tags": ["hog", "solo", "yelling", "announcement", "megaphone", "bull horn", "naked", "loud"]
+        },
+        {
+            "slug": "money",
+            "name": "Money",
+            "tags": ["hog", "solo", "money", "dollars", "rich", "green", "payment", "dollar", "currency"]
+        },
+        {
+            "slug": "mountie",
+            "name": "Mountie",
+            "tags": ["hog", "solo", "mountie", "RCMP", "canada", "canadian", "flag", "red coat", "hat"]
+        },
+        {
+            "slug": "mr-potato-head-1",
+            "name": "Mr Potato Head (1)",
+            "tags": ["hog", "solo", "group", "mr potato head", "pieces", "toy", "fail", "falling apart"]
+        },
+        {
+            "slug": "mr-potato-head-2",
+            "name": "Mr Potato Head (2)",
+            "tags": ["hog", "solo", "group", "mr potato head", "pieces", "toy", "fail", "falling apart"]
+        },
+        {
+            "slug": "namaste",
+            "name": "Namaste",
+            "tags": ["hog", "solo", "pink", "namaste", "yoga", "yoga mat", "hat", "athletic", "workout"]
+        },
+        {
+            "slug": "noir-1",
+            "name": "Noir (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "detective",
+                "noir",
+                "old-timey",
+                "gray scale",
+                "black and white",
+                "mystery",
+                "crime",
+                "magnifying glass",
+                "searching",
+                "pointing",
+                "shocked",
+                "angry",
+                "binoculars",
+                "shrub",
+                "spy",
+                "stakeout",
+                "projector",
+                "movie",
+                "camera",
+                "film",
+                "reel",
+                "suit",
+                "desk",
+                "relax",
+                "surveillance",
+                "computer",
+                "pink",
+                "charts",
+                "tip back"
+            ]
+        },
+        {
+            "slug": "noir-2",
+            "name": "Noir (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "detective",
+                "noir",
+                "old-timey",
+                "gray scale",
+                "black and white",
+                "mystery",
+                "crime",
+                "magnifying glass",
+                "searching",
+                "pointing",
+                "shocked",
+                "angry",
+                "binoculars",
+                "shrub",
+                "spy",
+                "stakeout",
+                "projector",
+                "movie",
+                "camera",
+                "film",
+                "reel",
+                "suit",
+                "desk",
+                "relax",
+                "surveillance",
+                "computer",
+                "pink",
+                "charts",
+                "tip back"
+            ]
+        },
+        {
+            "slug": "noir-3",
+            "name": "Noir (3)",
+            "tags": [
+                "hog",
+                "solo",
+                "detective",
+                "noir",
+                "old-timey",
+                "gray scale",
+                "black and white",
+                "mystery",
+                "crime",
+                "magnifying glass",
+                "searching",
+                "pointing",
+                "shocked",
+                "angry",
+                "binoculars",
+                "shrub",
+                "spy",
+                "stakeout",
+                "projector",
+                "movie",
+                "camera",
+                "film",
+                "reel",
+                "suit",
+                "desk",
+                "relax",
+                "surveillance",
+                "computer",
+                "pink",
+                "charts",
+                "tip back"
+            ]
+        },
+        {
+            "slug": "noir-4",
+            "name": "Noir (4)",
+            "tags": [
+                "hog",
+                "solo",
+                "detective",
+                "noir",
+                "old-timey",
+                "gray scale",
+                "black and white",
+                "mystery",
+                "crime",
+                "magnifying glass",
+                "searching",
+                "pointing",
+                "shocked",
+                "angry",
+                "binoculars",
+                "shrub",
+                "spy",
+                "stakeout",
+                "projector",
+                "movie",
+                "camera",
+                "film",
+                "reel",
+                "suit",
+                "desk",
+                "relax",
+                "surveillance",
+                "computer",
+                "pink",
+                "charts",
+                "tip back"
+            ]
+        },
+        {
+            "slug": "noir-5",
+            "name": "Noir (5)",
+            "tags": [
+                "hog",
+                "solo",
+                "detective",
+                "noir",
+                "old-timey",
+                "gray scale",
+                "black and white",
+                "mystery",
+                "crime",
+                "magnifying glass",
+                "searching",
+                "pointing",
+                "shocked",
+                "angry",
+                "binoculars",
+                "shrub",
+                "spy",
+                "stakeout",
+                "projector",
+                "movie",
+                "camera",
+                "film",
+                "reel",
+                "suit",
+                "desk",
+                "relax",
+                "surveillance",
+                "computer",
+                "pink",
+                "charts",
+                "tip back"
+            ]
+        },
+        {
+            "slug": "office-worker",
+            "name": "Office Worker",
+            "tags": ["hog", "solo", "file folder", "filing", "worker", "office"]
+        },
+        {
+            "slug": "oprah",
+            "name": "Oprah",
+            "tags": ["hog", "solo", "oprah", "you get a car", "talk show", "host", "red suit", "earrings"]
+        },
+        {
+            "slug": "organized",
+            "name": "Organized",
+            "tags": [
+                "hog",
+                "solo",
+                "naked",
+                "glasses",
+                "clipboard",
+                "organized",
+                "organize",
+                "checklist",
+                "pencil",
+                "notes"
+            ]
+        },
+        {
+            "slug": "panic",
+            "name": "Panic",
+            "tags": [
+                "hog",
+                "solo",
+                "naked",
+                "stop sign",
+                "traffic cone",
+                "construction",
+                "panic sign",
+                "error tracking",
+                "you shall not pass",
+                "panic hog"
+            ]
+        },
+        {
+            "slug": "party",
+            "name": "Party",
+            "tags": ["hog", "solo", "party", "celebrate", "confetti", "birthday", "party hat"]
+        },
+        {
+            "slug": "pearl-necklace",
+            "name": "Pearl Necklace",
+            "tags": ["hog", "solo", "pearl necklace", "shocked", "surprised", "naked"]
+        },
+        {
+            "slug": "peek-over",
+            "name": "Peek Over",
+            "tags": ["hog", "partial", "pop up", "bust", "surprised", "look", "peek"]
+        },
+        {
+            "slug": "phone-call",
+            "name": "Phone Call",
+            "tags": ["hog", "solo", "phone", "business", "blue shirt", "tie", "quick call", "blue phone", "white shirt"]
+        },
+        {
+            "slug": "pinata",
+            "name": "Piñata",
+            "tags": ["hog", "solo", "blindfold", "bat", "baseball", "swing", "piñata", "pink", "pinata"]
+        },
+        {
+            "slug": "pit-viper",
+            "name": "Pit Viper",
+            "tags": ["hog", "solo", "hat", "sporty", "sunglasses", "red hat", "tank top", "workout"]
+        },
+        { "slug": "pope", "name": "Pope", "tags": ["hog", "solo", "pope", "big hat", "robe", "cardinal", "priest"] },
+        {
+            "slug": "puzzle",
+            "name": "Puzzle",
+            "tags": ["hog", "group", "puzzle", "pieces", "together", "fit", "purple", "hold hands", "team", "pair"]
+        },
+        {
+            "slug": "reading",
+            "name": "Reading",
+            "tags": ["hog", "solo", "reading", "newspaper", "news", "t-shirt", "blue"]
+        },
+        {
+            "slug": "reading-is-magic",
+            "name": "Reading Is Magic",
+            "tags": ["hog", "solo", "book", "magic", "enchanted", "knowledge", "reading", "glowing", "stars"]
+        },
+        {
+            "slug": "reaper",
+            "name": "Reaper",
+            "tags": ["hog", "solo", "black", "robe", "hood", "sickle", "grim", "reaper", "flower"]
+        },
+        {
+            "slug": "remote-work",
+            "name": "Remote Work",
+            "tags": [
+                "hog",
+                "solo",
+                "beach",
+                "relax",
+                "vacation",
+                "laptop",
+                "remote",
+                "pool",
+                "hat",
+                "orange hat",
+                "pink float",
+                "floatie",
+                "apple"
+            ]
+        },
+        {
+            "slug": "reporter",
+            "name": "Reporter",
+            "tags": [
+                "hog",
+                "solo",
+                "suit",
+                "presenter",
+                "reporter",
+                "news",
+                "mic",
+                "microphone",
+                "weather",
+                "meteorologist"
+            ]
+        },
+        {
+            "slug": "research",
+            "name": "Research",
+            "tags": ["hog", "solo", "naked", "research", "search", "magnifying glass", "note", "study", "investigate"]
+        },
+        {
+            "slug": "robot",
+            "name": "Robot",
+            "tags": ["hog", "solo", "llm analytics", "robot", "rosie", "satellite", "wires", "wheel"]
+        },
+        {
+            "slug": "rocket",
+            "name": "Rocket",
+            "tags": ["hog", "solo", "startup", "rocket", "flying", "space", "blast", "red"]
+        },
+        {
+            "slug": "roller-coaster",
+            "name": "Roller Coaster",
+            "tags": [
+                "hog",
+                "solo",
+                "hot wheels",
+                "rollercoaster",
+                "cart",
+                "speed",
+                "drive",
+                "car",
+                "fun",
+                "naked",
+                "arms up"
+            ]
+        },
+        {
+            "slug": "rose",
+            "name": "Rose",
+            "tags": [
+                "hog",
+                "solo",
+                "titanic",
+                "french girl hog",
+                "painting",
+                "pouting",
+                "sexy",
+                "wink",
+                "rose",
+                "kate winslet",
+                "heart of the ocean"
+            ]
+        },
+        {
+            "slug": "safari",
+            "name": "Safari",
+            "tags": ["hog", "searching", "hiding", "grass", "bugs", "butterfly", "pith", "binoculars", "khaki"]
+        },
+        {
+            "slug": "sailor",
+            "name": "Sailor",
+            "tags": ["hog", "solo", "sailor", "captain", "navy", "steering", "smoking", "pipe"]
+        },
+        {
+            "slug": "sales",
+            "name": "Sales",
+            "tags": [
+                "hog",
+                "solo",
+                "headset",
+                "microphone",
+                "infomercial",
+                "sales",
+                "call",
+                "salesman",
+                "red tie",
+                "dress shirt",
+                "slacks",
+                "explaining"
+            ]
+        },
+        { "slug": "scientist", "name": "Scientist", "tags": ["hog", "solo", "scientist", "microscope", "researcher"] },
+        {
+            "slug": "scorpion",
+            "name": "Scorpion",
+            "tags": ["hog", "solo", "scorpion", "cowboy", "green hat", "red shirt", "wrangler"]
+        },
+        {
+            "slug": "scott-pilgrim",
+            "name": "Scott Pilgrim",
+            "tags": [
+                "hog",
+                "solo",
+                "guitar",
+                "scott pilgrim",
+                "against the world",
+                "rock",
+                "music",
+                "musician",
+                "green shirt",
+                "heart"
+            ]
+        },
+        {
+            "slug": "self-driving",
+            "name": "Self-driving",
+            "tags": [
+                "hog",
+                "naked",
+                "driving",
+                "self",
+                "autonomous",
+                "car",
+                "futuristic",
+                "sleeping",
+                "chilling",
+                "eyes closed"
+            ]
+        },
+        {
+            "slug": "selfie",
+            "name": "Selfie",
+            "tags": [
+                "hog",
+                "solo",
+                "selfie",
+                "photo",
+                "headphones",
+                "peace",
+                "yellow shirt",
+                "smiling",
+                "eyes closed",
+                "z"
+            ]
+        },
+        { "slug": "shocked", "name": "Shocked", "tags": ["hog", "solo", "naked", "shocked", "surprised"] },
+        {
+            "slug": "sitting",
+            "name": "Sitting",
+            "tags": ["hog", "solo", "sitting", "naked", "neutral", "seated", "take a seat"]
+        },
+        {
+            "slug": "sleepy",
+            "name": "Sleepy",
+            "tags": [
+                "hog",
+                "solo",
+                "sleeping",
+                "sleepy",
+                "chill",
+                "netflix",
+                "watching",
+                "tired",
+                "blanket",
+                "bed",
+                "laptop"
+            ]
+        },
+        {
+            "slug": "soapbox",
+            "name": "Soapbox",
+            "tags": [
+                "hog",
+                "solo",
+                "soapbox",
+                "soap box",
+                "crier",
+                "announcement",
+                "megaphone",
+                "maroon tie",
+                "town square"
+            ]
+        },
+        {
+            "slug": "soccer-coach",
+            "name": "Soccer Coach",
+            "tags": [
+                "hog",
+                "solo",
+                "soccer coach",
+                "coach",
+                "whistle",
+                "stopwatch",
+                "football",
+                "hat",
+                "jersey",
+                "step stool",
+                "ladder",
+                "sports"
+            ]
+        },
+        {
+            "slug": "speaker-1",
+            "name": "Speaker (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "speaker",
+                "microphone",
+                "talk",
+                "business",
+                "white shirt",
+                "blue tie",
+                "reporter",
+                "motivation",
+                "motivational speaker",
+                "announcement",
+                "suit",
+                "happy",
+                "smile"
+            ]
+        },
+        {
+            "slug": "speaker-2",
+            "name": "Speaker (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "speaker",
+                "microphone",
+                "talk",
+                "business",
+                "white shirt",
+                "blue tie",
+                "reporter",
+                "motivation",
+                "motivational speaker",
+                "announcement",
+                "suit",
+                "happy",
+                "smile"
+            ]
+        },
+        { "slug": "stamp-approved", "name": "Stamp Approved", "tags": ["hog", "solo", "stamp", "approved", "naked"] },
+        { "slug": "stamp-denied", "name": "Stamp Denied", "tags": ["hog", "solo", "stamp", "denied", "mad", "naked"] },
+        { "slug": "star", "name": "Star", "tags": ["hog", "solo", "star", "holding", "shining", "naked"] },
+        {
+            "slug": "steve-jobs",
+            "name": "Steve Jobs",
+            "tags": [
+                "hog",
+                "solo",
+                "turtleneck",
+                "steve jobs",
+                "tech",
+                "demo",
+                "glasses",
+                "black shirt",
+                "blue pants",
+                "meme",
+                "apple"
+            ]
+        },
+        {
+            "slug": "stop",
+            "name": "Stop",
+            "tags": [
+                "hog",
+                "solo",
+                "naked",
+                "stop sign",
+                "traffic cone",
+                "construction",
+                "error tracking",
+                "you shall not pass",
+                "stop hog"
+            ]
+        },
+        {
+            "slug": "success",
+            "name": "Success",
+            "tags": ["hog", "solo", "naked", "party", "success", "hooray", "celebrate", "horn", "excite"]
+        },
+        {
+            "slug": "sunburn",
+            "name": "Sunburn",
+            "tags": ["hog", "sunburn", "solo", "spf", "swim", "sunscreen", "summer", "burned"]
+        },
+        {
+            "slug": "superhero",
+            "name": "Superhero",
+            "tags": [
+                "hog",
+                "super",
+                "PH",
+                "solo",
+                "superhero",
+                "hero",
+                "flying",
+                "red",
+                "blue",
+                "cape",
+                "mask",
+                "superman"
+            ]
+        },
+        {
+            "slug": "surfer",
+            "name": "Surfer",
+            "tags": [
+                "hog",
+                "solo",
+                "surf",
+                "surf board",
+                "hat",
+                "swim",
+                "ocean",
+                "water",
+                "flower",
+                "summer",
+                "vacation",
+                "barbados",
+                "sunglasses"
+            ]
+        },
+        {
+            "slug": "survey",
+            "name": "Survey",
+            "tags": [
+                "hog",
+                "group",
+                "survey",
+                "green",
+                "yellow",
+                "red",
+                "stop light",
+                "choose",
+                "naked",
+                "happy",
+                "yes",
+                "no",
+                "maybe",
+                "poll"
+            ]
+        },
+        {
+            "slug": "swimmer-1",
+            "name": "Swimmer (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "red",
+                "swimming",
+                "swimmer",
+                "swimsuit",
+                "goggles",
+                "holding breath",
+                "papers",
+                "file",
+                "underwater",
+                "snorkel",
+                "laptop",
+                "desk",
+                "flippers",
+                "scuba"
+            ]
+        },
+        {
+            "slug": "swimmer-2",
+            "name": "Swimmer (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "red",
+                "swimming",
+                "swimmer",
+                "swimsuit",
+                "goggles",
+                "holding breath",
+                "papers",
+                "file",
+                "underwater",
+                "snorkel",
+                "laptop",
+                "desk",
+                "flippers",
+                "scuba"
+            ]
+        },
+        {
+            "slug": "swole",
+            "name": "Swole",
+            "tags": [
+                "hog",
+                "solo",
+                "swole",
+                "muscle",
+                "workout",
+                "strong",
+                "bicep",
+                "tank top",
+                "red shirt",
+                "sweat",
+                "sweaty"
+            ]
+        },
+        {
+            "slug": "terminator",
+            "name": "Terminator",
+            "tags": [
+                "hog",
+                "solo",
+                "scene",
+                "workflow",
+                "terminator",
+                "gun",
+                "automatic",
+                "sunglasses",
+                "black clothes"
+            ]
+        },
+        {
+            "slug": "the-bride",
+            "name": "The Bride",
+            "tags": [
+                "hog",
+                "solo",
+                "katana",
+                "sword",
+                "jumpsuit",
+                "blonde",
+                "bride",
+                "uma thurman",
+                "black mamba",
+                "bruce lee",
+                "enter the dragon",
+                "fighter"
+            ]
+        },
+        {
+            "slug": "toilet",
+            "name": "Toilet",
+            "tags": ["hog", "solo", "toilet", "reading", "sitting", "toilet reading"]
+        },
+        {
+            "slug": "tourist",
+            "name": "Tourist",
+            "tags": ["hog", "solo", "map", "transit", "lost", "hawaiian", "suitcase", "luggage", "hat"]
+        },
+        {
+            "slug": "town-crier",
+            "name": "Town Crier",
+            "tags": [
+                "hog",
+                "solo",
+                "town crier",
+                "crier",
+                "announcement",
+                "maroon tie",
+                "town square",
+                "ring bell",
+                "sign",
+                "blank",
+                "revolutionary",
+                "old-timey"
+            ]
+        },
+        {
+            "slug": "traffic-controller",
+            "name": "Traffic Controller",
+            "tags": [
+                "hog",
+                "solo",
+                "traffic controller",
+                "safety hog",
+                "air traffic",
+                "light wand",
+                "ear muffs",
+                "headphones",
+                "safety vest",
+                "hi vis"
+            ]
+        },
+        {
+            "slug": "traffic-police",
+            "name": "Traffic Police",
+            "tags": ["hog", "solo", "traffic police", "stop sign", "cop", "utility belt", "blank"]
+        },
+        {
+            "slug": "transformer",
+            "name": "Transformer",
+            "tags": [
+                "hog",
+                "solo",
+                "transformer",
+                "car",
+                "robot",
+                "autobot",
+                "gundam",
+                "in disguise",
+                "optimus",
+                "prime",
+                "driver",
+                "red",
+                "super hero"
+            ]
+        },
+        {
+            "slug": "trenchcoat",
+            "name": "Trenchcoat",
+            "tags": [
+                "hog",
+                "solo",
+                "trenchcoat",
+                "post-its",
+                "tips",
+                "notes",
+                "undercover",
+                "flasher",
+                "hat",
+                "trench coat"
+            ]
+        },
+        {
+            "slug": "two-player",
+            "name": "Two Player",
+            "tags": ["hog", "group", "video game", "controller", "two", "naked", "tv", "television", "glow", "gaming"]
+        },
+        {
+            "slug": "waiter",
+            "name": "Waiter",
+            "tags": [
+                "hog",
+                "solo",
+                "waiter",
+                "server",
+                "restaurant",
+                "food",
+                "beverage",
+                "drink",
+                "hostess",
+                "naked",
+                "wine",
+                "snacks",
+                "towel"
+            ]
+        },
+        {
+            "slug": "will-smith",
+            "name": "Will Smith",
+            "tags": ["hog", "solo", "will smith", "suit", "meme", "black clothes", "tie"]
+        },
+        {
+            "slug": "wizard-1",
+            "name": "Wizard (1)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "wizard",
+                "blue",
+                "hat",
+                "beard",
+                "sorcerer",
+                "stars",
+                "magic",
+                "robe",
+                "wand",
+                "purple",
+                "green",
+                "orange",
+                "bust",
+                "wizard hog",
+                "staff",
+                "star",
+                "sparkles",
+                "old",
+                "wise",
+                "gandalf",
+                "blue robe"
+            ]
+        },
+        {
+            "slug": "wizard-2",
+            "name": "Wizard (2)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "wizard",
+                "blue",
+                "hat",
+                "beard",
+                "sorcerer",
+                "stars",
+                "magic",
+                "robe",
+                "wand",
+                "purple",
+                "green",
+                "orange",
+                "bust",
+                "wizard hog",
+                "staff",
+                "star",
+                "sparkles",
+                "old",
+                "wise",
+                "gandalf",
+                "blue robe"
+            ]
+        },
+        {
+            "slug": "wizard-3",
+            "name": "Wizard (3)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "wizard",
+                "blue",
+                "hat",
+                "beard",
+                "sorcerer",
+                "stars",
+                "magic",
+                "robe",
+                "wand",
+                "purple",
+                "green",
+                "orange",
+                "bust",
+                "wizard hog",
+                "staff",
+                "star",
+                "sparkles",
+                "old",
+                "wise",
+                "gandalf",
+                "blue robe"
+            ]
+        },
+        {
+            "slug": "wizard-4",
+            "name": "Wizard (4)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "wizard",
+                "blue",
+                "hat",
+                "beard",
+                "sorcerer",
+                "stars",
+                "magic",
+                "robe",
+                "wand",
+                "purple",
+                "green",
+                "orange",
+                "bust",
+                "wizard hog",
+                "staff",
+                "star",
+                "sparkles",
+                "old",
+                "wise",
+                "gandalf",
+                "blue robe"
+            ]
+        },
+        {
+            "slug": "wizard-5",
+            "name": "Wizard (5)",
+            "tags": [
+                "hog",
+                "solo",
+                "group",
+                "wizard",
+                "blue",
+                "hat",
+                "beard",
+                "sorcerer",
+                "stars",
+                "magic",
+                "robe",
+                "wand",
+                "purple",
+                "green",
+                "orange",
+                "bust",
+                "wizard hog",
+                "staff",
+                "star",
+                "sparkles",
+                "old",
+                "wise",
+                "gandalf",
+                "blue robe"
+            ]
+        },
+        {
+            "slug": "workflows",
+            "name": "Workflows",
+            "tags": ["hog", "solo", "workflow", "workflows", "chart", "yellow shirt", "blue pants", "happy"]
+        },
+        {
+            "slug": "workmaxxing",
+            "name": "Workmaxxing",
+            "tags": ["hog", "solo", "hat", "coffee", "laptop", "working", "sitting", "green", "shirt"]
+        },
+        {
+            "slug": "x-ray",
+            "name": "X-ray",
+            "tags": ["hog", "group", "x-ray", "doctor", "nurse", "patient", "lab coat", "gown", "skeleton"]
+        }
+    ]
+}
