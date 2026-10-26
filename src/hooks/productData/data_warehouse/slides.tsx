@@ -42,7 +42,7 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The Warehouse is a database with its own hostname and credentials. Connect the tools your team
+                    Warehouse is a database with its own hostname and credentials. Connect the tools your team
                     already uses to query the Warehouse directly, separate from the queries that power PostHog.
                 </p>
                 {list([
@@ -149,7 +149,7 @@ export const topFeatures: CarouselSlide[] = [
         heading: 'Your PostHog data is already here. Add the rest in a click.',
         description: (
             <>
-                <p>Every source you connect to PostHog syncs into the Warehouse too, with no extra setup.</p>
+                <p>Every source you connect to PostHog syncs into Warehouse too, with no extra setup.</p>
                 {list([
                     {
                         label: 'PostHog data, zero config',
@@ -180,7 +180,7 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Incremental syncs only move new or updated rows. For Postgres, change data capture (in alpha)
+                    Incremental syncs only move new or updated rows. For Postgres, change data capture
                     streams inserts, updates, and deletes in near real time instead of rescanning whole tables.
                 </p>
                 {list([
@@ -190,7 +190,7 @@ export const topFeatures: CarouselSlide[] = [
                     },
                     {
                         label: 'Change data capture for Postgres',
-                        description: 'Row-level inserts, updates, and deletes, close to real time. Currently in alpha.',
+                        description: 'Row-level inserts, updates, and deletes, close to real time.',
                     },
                     {
                         label: 'Schedules you control',
@@ -233,7 +233,7 @@ export const topFeatures: CarouselSlide[] = [
             <>
                 <p>
                     Queries run on PostHog's fork of Trino, the open source distributed SQL engine. The fork adds a
-                    connector for the Warehouse's storage format and scopes every login to its own warehouse.
+                    connector for Warehouse's storage format and scopes every login to its own warehouse.
                 </p>
                 {list([
                     {
@@ -281,7 +281,7 @@ export const GetAccess = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose mb-20">
         <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get access</h2>
         <p className="text-base leading-relaxed m-0 mb-4">
-            The Warehouse is in <strong>beta</strong>. Access is set up by our team, so the first step is a conversation
+           Warehouse is in <strong>beta</strong>. Access is set up by our team, so the first step is a conversation
             about your stack and what you want to query.
         </p>
         <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">

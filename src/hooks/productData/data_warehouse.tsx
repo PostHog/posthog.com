@@ -45,8 +45,8 @@ export const dataWarehouse = {
             <>
                 <p>
                     PostHog already syncs Stripe, HubSpot, Postgres, and the rest of your stack, so you can query it
-                    alongside your events. The Warehouse goes one step further: it's a database, with its own hostname,
-                    credentials, and storage, holding your product data and business data side by side.
+                    alongside your events. Warehouse goes further: a database, with its own hostname,
+                    credentials, and storage, holding your product and business data side by side.
                 </p>
                 <p>
                     PostHog’s AI features can use it as context, so asking "why did conversion drop?" comes back with
