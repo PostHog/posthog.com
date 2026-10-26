@@ -273,10 +273,10 @@ posthog.captureAi({
 If you send events through a [reverse proxy](/docs/advanced/proxy), make sure it:
 
 - Forwards `/i/v1/analytics/events` and `/i/v1/ai/events`
-- Passes the `Authorization` header and every `PostHog-*` header through unchanged
+- Passes the `Authorization` header and every `PostHog-*` header through unchanged, along with `Content-Type`, `Content-Encoding`, and `User-Agent`
 - Returns PostHog's status code and response body unchanged, so your SDK sees the result for each event
 
-<!-- TODO(capture-v1): check whether the proxy guides need per-provider updates for /i/v1 paths and the Authorization header. -->
+Capture v1 SDKs send your project token in the `Authorization` header, as `Bearer <token>`. Without it, PostHog returns `401` and the SDK drops the events. Some older versions of our proxy guides removed this header, so check your proxy against the current [proxy guides](/docs/advanced/proxy) and the [proxy reference](/docs/advanced/proxy/proxy-reference). The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already serves both capture v1 endpoints and passes these headers through.
 
 ## Learn more
 
