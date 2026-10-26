@@ -116,7 +116,7 @@ export default function ProductReaderView({
                 proseSize="lg"
                 showQuestions={false}
                 menuTabs={menuTabs}
-                productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+                productSelect={<ProductSwitcher activeHandle={productData.handle} surface={surface} />}
             >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
                     {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {

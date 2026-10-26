@@ -58,7 +58,7 @@ export function LearnShell({ path, children }: { path: string; children: React.R
             hideMarkdownActions={isLearnLanding}
             showQuestions={false}
             menuTabs={buildProductMenuTabs({ productData, activeSurface: 'learn', currentPath })}
-            productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+            productSelect={<ProductSwitcher activeHandle={productData.handle} surface="learn" />}
         >
             <InLearnShell.Provider value>{children}</InLearnShell.Provider>
         </ReaderView>
