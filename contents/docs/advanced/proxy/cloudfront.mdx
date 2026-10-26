@@ -246,7 +246,7 @@ If large events or session recordings aren't reaching PostHog:
 2. If enabled, verify the WAF body size limit is at least 64MB
 3. AWS WAF defaults to 8KB, which will block PostHog traffic
 
-PostHog events can be up to 1MB and session recordings up to 64MB per message. Any size limit below these values will silently drop data.
+PostHog events can be up to 1MB, AI events up to 8MB, and session recordings up to 64MB per message. Any size limit below these values will silently drop data.
 
 ### Static assets aren't loading
 
