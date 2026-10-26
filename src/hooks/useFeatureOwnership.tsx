@@ -378,6 +378,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['cloud-foundations', 'cloud-platform'],
         label: 'feature/platform',
     },
+    'platform-add-ons': {
+        feature: 'Platform add-ons',
+        owner: ['platform-features'],
+        notes: <>Boost, Scale, and Enterprise, including their adoption and growth</>,
+        label: false,
+    },
     'PostHog.com': {
         feature: 'PostHog.com',
         owner: ['website'],
