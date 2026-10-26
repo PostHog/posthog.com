@@ -88,7 +88,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 ### Things we want to be brilliant at
  
-- **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
+- **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than PR. Paid ads add to word of mouth, but they don't replace it. This means being known for quality in all things we do.
 
 - **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-build-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
@@ -104,7 +104,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We have been posting more on [LinkedIn](/handbook/content/linkedin) to promote the newsletter. We don't use any other social media channels. 
 
-- **Paid ads:** We run a lot of paid ads on Google and others. It is fuel for everything else we are doing. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit.
+- **Paid ads:** We run a lot of paid ads – around $488k a month in 2026, our [largest non-people marketing cost](/founders/actual-marketing-budget-2026). It is fuel for everything else we are doing. The <SmallTeam slug="demand-gen" /> owns paid ads. We split the budget about 50/50 between conversion and awareness. Google Search is the backbone for conversion. Reddit, LinkedIn, X, and YouTube are for awareness, and we test Meta and connected TV. We don't optimize for demo bookings. Instead, we optimize for self-serve signups and Healthy Orgs. Right now, we are scaling awareness campaigns to get PostHog and self-driving in front of more of our [ideal customers](/handbook/who-we-build-for). We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit. [More on how we run paid ads](/handbook/marketing/paid).
 
 - **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros on the <SmallTeam slug="graphics" /> to help.
 
