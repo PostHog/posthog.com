@@ -24,7 +24,7 @@ It's been over two months since [we launched Replay Vision](/blog/replay-vision)
 
 [Replay Vision](/replay-vision) is our AI layer over [Session Replay](/session-replay). It points [scanners](/docs/replay-vision/scanner-types) at your session recordings, watches them, and summarizes the findings, based on parameters you set. Watch the video below to learn more.
 
-[add video here]
+<WistiaEmbed mediaId="hte60ngv24" />
 
 Since the launch on August 3, people have created 20,097 scanners across 9,488 organizations. The percentages below are for scanners where someone wrote their own prompt. Many prompts fit more than one of the four categories, which is why the percentages add up to more than 100. (For authenticity purposes, I haven't fixed the typos. Real people typed these.)
 
