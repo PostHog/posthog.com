@@ -3,7 +3,8 @@ import {
     DndContext,
     DragEndEvent,
     DragOverlay,
-    PointerSensor,
+    MouseSensor,
+    TouchSensor,
     KeyboardSensor,
     useDraggable,
     useDndContext,
@@ -53,7 +54,7 @@ function Hog({ slug, onRemove }: { slug: string; onRemove?: () => void }) {
             {...drag.listeners}
             {...drag.attributes}
             aria-label={`Drag ${bySlug.get(slug)?.name}`}
-            className={`size-12 @lg:size-14 p-1 rounded border bg-primary touch-pan-x shrink-0 focus-visible:ring-2 focus-visible:ring-orange ${
+            className={`size-12 @lg:size-14 p-1 rounded border bg-primary touch-auto shrink-0 focus-visible:ring-2 focus-visible:ring-orange ${
                 drop.isOver ? 'border-orange ring-2 ring-orange' : 'border-transparent hover:border-primary'
             } ${drag.isDragging ? 'opacity-30' : ''}`}
         >
@@ -127,7 +128,8 @@ export default function TierList() {
     const board = useRef<HTMLDivElement>(null)
     const trayViewport = useRef<HTMLDivElement>(null)
     const sensors = useSensors(
-        useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+        useSensor(MouseSensor, { activationConstraint: { distance: 8 } }),
+        useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 8 } }),
         useSensor(KeyboardSensor)
     )
     const ranked = useMemo(() => new Set(tierIds.flatMap((id) => ranking[id])), [ranking])
@@ -226,13 +228,23 @@ export default function TierList() {
     }
 
     async function download() {
-        if (!board.current || exporting) return
+        const sourceBoard = board.current
+        if (!sourceBoard || exporting) return
         setExporting(true)
         setMessage('')
         let exportContainer: HTMLDivElement | undefined
-        try {
+        const controller = new AbortController()
+        const timeout = window.setTimeout(() => controller.abort(), 15000)
+        const deadline = new Promise<never>((_, reject) => {
+            controller.signal.addEventListener('abort', () => reject(new Error('Image export timed out')), {
+                once: true,
+            })
+        })
+        async function renderImage(source: HTMLDivElement) {
             await document.fonts.ready
+            controller.signal.throwIfAborted()
             const { toPng } = await import('html-to-image')
+            controller.signal.throwIfAborted()
             // A separate layout keeps the download identical on phones and desktops without resizing the preview.
             exportContainer = document.createElement('div')
             exportContainer.className = '@container'
@@ -244,17 +256,19 @@ export default function TierList() {
                 width: '1200px',
                 pointerEvents: 'none',
             })
-            const exportBoard = board.current.cloneNode(true) as HTMLDivElement
+            const exportBoard = source.cloneNode(true) as HTMLDivElement
             exportBoard.style.width = '1200px'
             exportContainer.appendChild(exportBoard)
-            board.current.parentElement?.appendChild(exportContainer)
+            source.parentElement?.appendChild(exportContainer)
             await Promise.all(Array.from(exportBoard.querySelectorAll('img')).map((img) => img.decode()))
+            controller.signal.throwIfAborted()
             const { width, height } = exportBoard.getBoundingClientRect()
             // Keep typical lists at 4800px wide, with a canvas-area cap for unusually tall rankings.
             const scale = Math.min(4800 / width, Math.sqrt((16 * 1024 * 1024) / (width * height)))
             const outputWidth = Math.floor(width * scale)
             // Render the SVG/foreignObject at its final resolution instead of upscaling a thumbnail raster.
-            const url = await toPng(exportBoard, {
+            return toPng(exportBoard, {
+                fetchRequestInit: { signal: controller.signal },
                 width: outputWidth,
                 height: Math.ceil(height * scale),
                 pixelRatio: 1,
@@ -266,6 +280,9 @@ export default function TierList() {
                 },
                 backgroundColor: getComputedStyle(exportBoard).backgroundColor,
             })
+        }
+        try {
+            const url = await Promise.race([renderImage(sourceBoard), deadline])
             const link = document.createElement('a')
             link.download = 'posthog-hoggie-tier-list.png'
             link.href = url
@@ -274,6 +291,9 @@ export default function TierList() {
         } catch {
             setMessage('The image could not be downloaded. Please try again.')
         } finally {
+            window.clearTimeout(timeout)
+            controller.abort()
+            exportContainer?.querySelectorAll('img').forEach((img) => img.removeAttribute('src'))
             exportContainer?.remove()
             setExporting(false)
         }
@@ -306,7 +326,7 @@ export default function TierList() {
             <div
                 aria-busy={!ready}
                 className={`@container text-primary absolute inset-0 min-h-0 p-3 @lg:p-4 ${
-                    finished ? 'overflow-y-auto bg-accent' : 'flex flex-col overflow-hidden'
+                    finished ? 'overflow-y-auto bg-accent' : 'flex flex-col overflow-y-auto'
                 }`}
             >
                 {finished ? (
@@ -363,7 +383,9 @@ export default function TierList() {
                         <div
                             ref={board}
                             className={`bg-primary border border-primary rounded ${
-                                finished ? 'overflow-hidden' : 'flex flex-col flex-1 min-h-0 overflow-hidden'
+                                finished
+                                    ? 'overflow-hidden'
+                                    : 'flex flex-col flex-1 min-h-[287px] @lg:min-h-[327px] overflow-hidden'
                             }`}
                         >
                             {finished && (
@@ -389,7 +411,7 @@ export default function TierList() {
                                     role="group"
                                     aria-label={`${tier} tier`}
                                     className={`flex flex-1 border-b border-primary ${
-                                        finished ? 'min-h-[48px]' : 'min-h-0 overflow-hidden'
+                                        finished ? 'min-h-[48px]' : 'min-h-[57px] @lg:min-h-[65px] overflow-hidden'
                                     }`}
                                 >
                                     <div
