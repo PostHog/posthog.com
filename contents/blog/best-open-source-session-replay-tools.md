@@ -38,7 +38,7 @@ In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alter
 
 [PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
 
-This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
+This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternatives).
 
 PostHog's [session replay](/docs/session-replay) includes console logs, network activity, a DOM explorer, and performance metrics so you can identify the root cause of bugs without leaving the replay. You can filter recordings by user, event, feature flag, or any combination of properties, save playlists of related sessions, and export recordings offline for safe keeping. 
 
