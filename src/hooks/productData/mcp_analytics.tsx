@@ -1,182 +1,216 @@
 import React from 'react'
 import {
+    IconChat,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconMagic,
+    IconMessage,
     IconPlug,
-    IconTarget,
-    IconThoughtBubble,
-    IconListTreeConnected,
-    IconRewindPlay,
+    IconRocket,
     IconSparkles,
-    IconGraph,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import Link from 'components/Link'
+import { features } from './mcp_analytics/features'
+import { applications, topFeatures } from './mcp_analytics/slides'
+import MCPAnalyticsInstall from './mcp_analytics/install'
+import { ApplicationsWithHowItWorks, LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
 
 // MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
-// gated behind the `mcp-analytics` early access feature. Copy here is sourced from the docs in
-// contents/docs/mcp-analytics/. There are no marketing screenshots yet, so the slides are
-// text/icon-driven — drop Cloudinary image URLs into `screenshots.overview` and the per-feature
-// `images` arrays when they exist. See src/components/EarlyAccessOptIn/README.md for how the
-// opt-in links to the early access feature in the app (identity isn't shared with the website).
+// gated behind the `mcp-analytics` early access feature. Copy comes from the reviewed copy draft,
+// checked against contents/docs/mcp-analytics/. See src/components/EarlyAccessOptIn/README.md for how
+// the opt-in links to the early access feature in the app (identity isn't shared with the website).
 
 export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
     Icon: IconPlug,
     type: 'mcp_analytics',
+    teamSlug: 'mcp-analytics',
+    // The `mcp-analytics` tag does not exist in the forum yet. Until someone creates it, Questions? shows
+    // no recent discussions and the forum link opens an empty feed.
+    forumTag: 'mcp-analytics',
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
+    wizardCommand: 'mcp-analytics',
     seo: {
-        title: 'MCP Analytics – See how agents use your MCP server in PostHog',
+        title: 'MCP Analytics – See everything agents do on your MCP server',
         description:
-            "Understand how agents actually use your MCP server: which tools get called, what the agent wanted, where calls fail, and which capabilities are missing. It's all normal PostHog events.",
+            'Every tool call, agent intent, failure, and missing capability from your MCP server, captured as PostHog events. Wrap your server once and start learning what agents actually need.',
     },
+    /**
+     * Sections rendered on the Product surface (`/mcp-analytics`), in page order. Each entry resolves to a
+     * section template via `templateRegistry[item.template ?? item.slug]`, or to `component` when set.
+     * Page-only sections live in ./mcp_analytics/sections.tsx.
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            component: ApplicationsWithHowItWorks,
+            props: { slides: applications },
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
+        { slug: 'installation', name: 'Install', group: 'divided', icon: <IconCode className="size-4" /> },
+        {
+            slug: 'mcp-leaderboard',
+            name: 'MCP leaderboard',
+            hideFromNav: true,
+            group: 'divided',
+            component: LeaderboardSection,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
     overview: {
-        title: 'See how agents use your MCP server',
+        title: 'See everything agents do on your MCP server',
         description:
-            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event.',
+            'Product analytics for your MCP. Wrap your server once and see every tool call, failure and context of what agents were trying to do.',
+        eli5: "Your MCP server is a product, and agents are its users. To improve it, you need to know which tools were called, what they sent and got back, how long it took, and whether it failed. Our SDK also asks the agent why it is calling each tool, so you'll know the user's end goal too.",
         textColor: 'text-white',
         layout: 'stacked',
     },
-    // TODO (asset step): add `images` on the feature cards below.
-    screenshots: {
-        overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png',
-            alt: 'MCP Analytics dashboard',
-            classes: '',
-            imgClasses: 'rounded-tl-md shadow-2xl',
-        },
+    useCases: {
+        intro: 'For teams whose MCP is becoming an important part of their product.',
+        rows: [
+            [
+                'MCP server builders',
+                'Find and fix broken or slow tools. Get error rates, and p95 latency by tool, without building your own MCP analytics.',
+            ],
+            ['MCP server observers', 'Check the health of the server and how many people use it.'],
+            ['Product managers', 'Learn who uses the server and what those users try to do.'],
+            ['Engineers building MCP tools', 'Find the slow and failing tools and send a coding agent to fix them.'],
+            ['API builders', 'Identify and fix endpoints causing high error rates in tool calls.'],
+        ],
     },
-    features: [
-        {
-            label: 'Features',
-        },
-        {
-            title: 'Every tool call',
-            icon: <IconTarget />,
-            color: 'blue',
-            headline: 'Every tool call',
-            description:
-                'Every tool call becomes an event. See exactly what the agent sent, what came back, how long it took, and whether it failed.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png',
-                    alt: 'MCP tool call activity feed',
-                },
-            ],
-        },
-        {
-            title: 'Agent intent',
-            icon: <IconThoughtBubble />,
-            color: 'seagreen',
-            headline: 'Agent intent',
-            description:
-                'Capture the goal behind each call, so you can tell a useful request from a confused one. The SDK reads the agent intent automatically.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_light_701844569c.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_dark_1b033bf1dc.png',
-                    alt: 'Agent intent captured for each tool call in a session',
-                },
-            ],
-        },
-        {
-            title: 'Advertised vs called',
-            icon: <IconListTreeConnected />,
-            color: 'purple',
-            headline: 'Advertised vs called',
-            description:
-                'See which tools you advertise but agents never call, so you can cut what nobody uses and improve what they do.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_light_2e98fb854f.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_dark_b189093a50.png',
-                    alt: 'Per-tool call volume and reliability table',
-                },
-            ],
-        },
-        {
-            title: 'Clients',
-            icon: <IconPlug />,
-            color: 'red',
-            headline: 'Clients',
-            description:
-                "Know which clients are connecting and which version they're on, whether that's Claude Desktop, Cursor, Codex, or your own.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_light_4a22b61f07.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_dark_42dc6cf72c.png',
-                    alt: 'Share of MCP calls by client',
-                },
-            ],
-        },
-        {
-            title: 'Sessions',
-            icon: <IconRewindPlay />,
-            color: 'yellow',
-            headline: 'Sessions',
-            description:
-                'Follow a whole conversation across every tool call. PostHog stitches multi-turn sessions together so you can see how a task really unfolds.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_light_bdd1eb84cb.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_dark_d5b4aa4577.png',
-                    alt: 'MCP session timeline stepping through tool calls',
-                },
-            ],
-        },
-        {
-            title: 'Capability gaps',
-            icon: <IconSparkles />,
-            color: 'orange',
-            headline: 'Capability gaps',
-            description:
-                "Let agents tell you what they wanted but you don't offer yet. Unmet demand turns into a roadmap written by your users' agents.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png',
-                    alt: 'Missing capabilities broken down by client',
-                },
-            ],
-        },
-        {
-            title: 'See it in PostHog',
-            handle: 'see_it_in_posthog',
-            icon: <IconGraph />,
-            color: 'blue',
-            headline: "One wrapper call, then it's just PostHog",
-            description:
-                "Wrap your server in one line and every request becomes a PostHog event. From there it's all the tools you already know: insights, dashboards, alerts, SQL, and error tracking, with no extra setup.",
-            children: (
-                <div className="p-8 @2xl:p-12 space-y-6">
-                    <pre className="bg-accent rounded-md p-4 text-sm overflow-x-auto">
-                        <code>npm install @posthog/mcp posthog-node</code>
-                    </pre>
-                    <div className="flex flex-wrap gap-2">
-                        <OSButton
-                            variant="primary"
-                            size="md"
-                            asLink
-                            external
-                            to="https://us.posthog.com/mcp-analytics/dashboard"
-                        >
-                            View in PostHog
-                        </OSButton>
-                        <OSButton variant="secondary" size="md" asLink to="/docs/mcp-analytics/start-here">
-                            Read the docs
-                        </OSButton>
-                    </div>
-                </div>
-            ),
-        },
-    ],
+    features,
+    // The platform list is the same one /docs/mcp-analytics/installation uses.
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            "Add the MCP Analytics SDK to your server and wrap it once. The wizard sets up TypeScript and Python servers for you. If you'd rather one-shot it with your own coding agent, every install page has a Markdown version for agents.",
+        productSlug: 'mcp-analytics',
+        children: <MCPAnalyticsInstall />,
+    },
+    // Prompt groups follow the PostHog AI prompt analysis (Oct 2026). Tool names verified against
+    // products/mcp_analytics/mcp/tools.yaml in PostHog/posthog.
+    ai: {
+        intro: 'Ask PostHog AI, or your agent through the PostHog MCP server. Start with the usual questions about usage and errors, then go deeper: exact error messages, release checks, clients, and the tools agents never call.',
+        mcpFeatures: ['mcp_analytics'],
+        hideSurfaces: true,
+        // One example tool per use case for the MCP tools tab, instead of the full searchable list.
+        featuredTools: [
+            'query-mcp-tool-stats',
+            'query-mcp-tool-failures',
+            'query-mcp-harness-breakdown',
+            'mcp-analytics-sessions-list',
+            'query-mcp-tool-sample-intents',
+            'query-mcp-missing-capabilities',
+        ],
+        toolsIntro: (
+            <>
+                See all MCP Analytics tools in the{' '}
+                <Link to="/docs/mcp-analytics/surfaces/mcp" className="font-semibold underline">
+                    docs
+                </Link>
+                .
+            </>
+        ),
+        groups: [
+            {
+                title: 'Usage overview',
+                tool: 'query-mcp-tool-stats',
+                prompts: [
+                    "Summarize how agents are using my MCP server: top tools, error rates, and what they're trying to do",
+                    "Which of my MCP tools are slowest? Show p95 latency by tool, even for tools that don't fail",
+                ],
+            },
+            {
+                title: 'Clients',
+                tool: 'query-mcp-harness-breakdown',
+                prompts: [
+                    'Which clients call my MCP server, like Claude Code, ChatGPT, or Cursor? Which ones fail the most?',
+                ],
+            },
+            {
+                title: 'Errors',
+                tool: 'query-mcp-tool-failure-occurrences',
+                prompts: [
+                    'Which of my MCP tools are least reliable? Error rate and p95 by tool',
+                    "Show me the exact error messages for search_docs's most common failure, and tell me what is causing them",
+                ],
+            },
+            {
+                title: 'Release checks',
+                tool: 'query-mcp-tool-daily-stats',
+                prompts: [
+                    "Did yesterday's release make run_query better or worse? Compare calls, errors, and p95 latency before and after",
+                ],
+            },
+            {
+                title: 'Missing capabilities',
+                tool: 'query-mcp-missing-capabilities',
+                prompts: [
+                    "What did agents ask my server for last month that my tools can't do? Group similar requests",
+                ],
+            },
+            {
+                title: 'Intent',
+                tool: 'mcp-analytics-intent-clusters-retrieve',
+                prompts: [
+                    'What are agents actually trying to do across my MCP sessions? Group the intents into themes',
+                ],
+            },
+            {
+                title: 'Journeys',
+                tool: 'query-mcp-tool-neighbors',
+                prompts: ['Which tools do agents call right before and after create_issue?'],
+            },
+            {
+                title: 'Tool descriptions',
+                tool: 'query-mcp-tool-descriptions',
+                prompts: ['Did changing the description of search_docs change its error rate?'],
+            },
+            {
+                title: 'Accounts and models (SQL)',
+                tool: 'execute-sql',
+                prompts: [
+                    'Which accounts used my MCP in the last 30 days, by plan type?',
+                    'Which LLM models call my MCP server most?',
+                    'Which tools do I list that agents never call?',
+                ],
+            },
+        ],
+    },
     answersDescription: 'Understand how agents actually use your MCP server',
     questions: [
         {

@@ -7,7 +7,8 @@ import type { SectionComponentProps } from '../types'
  * Product page install section. The framework list itself is rendered by the
  * shared `InstallFrameworkGrid` (driven by `constants/installation-taxonomy.ts`)
  * so it is never duplicated. Per-product hooks pick which category `id`s to
- * render via `productData.installation.categories`.
+ * render via `productData.installation.categories`. A product whose install
+ * flow is not in the taxonomy can pass `installation.children` instead.
  */
 const Installation = ({ id, productData }: SectionComponentProps) => {
     const installation = productData?.installation
@@ -25,7 +26,9 @@ const Installation = ({ id, productData }: SectionComponentProps) => {
             {description && <p className="text-base text-secondary mb-4">{description}</p>}
 
             <div className="bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
-                <InstallFrameworkGrid categories={enabledCategories} productSlug={productSlug} />
+                {installation.children || (
+                    <InstallFrameworkGrid categories={enabledCategories} productSlug={productSlug} />
+                )}
             </div>
         </section>
     )
