@@ -110,7 +110,7 @@ For larger pieces of work — a new product page, a significant copy overhaul �
 <details>
 <summary>Hey, can we run some paid ads for my product?</summary>
 
-We probably are already. See [how we run paid ads](/handbook/marketing/paid). If you have something specific in mind, ask the <SmallTeam slug="demand-gen" /> in the `#team-demand-gen` Slack channel. 
+We probably are already – see [paid ads](/handbook/marketing/paid). If you have something specific in mind, ask in the `#team-demand-gen` Slack channel. 
 </details>
 
 <details>

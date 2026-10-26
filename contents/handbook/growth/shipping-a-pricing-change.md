@@ -111,7 +111,7 @@ The [pricing page](/pricing) calculator updates from the billing migration, but 
 
 #### Paid ads
 
-The <SmallTeam slug="demand-gen" /> runs [paid ads](/handbook/marketing/paid) with your price in them, on Google, LinkedIn, Reddit, and more. Give them the date with the same two weeks' notice as everyone else, and tell them you've already handled docs and blogs so they only need to worry about ad copy.
+The [paid ads team](/handbook/marketing/paid) runs ads with your price in them, on Google, LinkedIn, Reddit, and more. Give them the date with the same two weeks' notice as everyone else, and tell them you've already handled docs and blogs so they only need to worry about ad copy.
 
 ### Launch day
 
@@ -127,7 +127,7 @@ The <SmallTeam slug="demand-gen" /> runs [paid ads](/handbook/marketing/paid) wi
 - Send billing the org IDs to grandfather
 - Notify TAMs, AEs, CSMs, and support
 - Notify the Developer Marketing team
-- Notify the <SmallTeam slug="demand-gen" />
+- Notify the paid ads team
 - Ask #team-workflows to add you (or the PMM) as an email sender
 - Create the static cohort of owner and admin emails
 - (If no PMM) Create the email, set up the batch trigger, and add the cohort
