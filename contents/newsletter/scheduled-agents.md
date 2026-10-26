@@ -30,7 +30,7 @@ Here are 6 chores we’ve automated this way, with prompts you can copy to build
 
 Everyone's merging more code than ever. And the smaller the PR, the more annoying it is to stop what you’re doing to check it in prod – especially if you already did that in dev.
 
-Take [this agent-generated string length limit fix](https://github.com/PostHog/posthog/pull/92909) that [Andy Maguire](/community/profiles/37401) from our self-driving team merged. It's a tiny change that takes more effort to validate than to push: he'd have to check back for when it hits prod, open error logs, and verify traffic is still flowing.
+Take [this agent-generated string length limit fix](https://github.com/PostHog/posthog/pull/92909) that [Andy Maguire](/community/profiles/37401) from our self-driving team merged. It's a tiny change that takes more effort to validate than to push: he'd have to check back for when it hits prod, open [error logs](/logs), and verify traffic is still flowing.
 
 Instead, Andy queued it to merge at 09:19 UTC and moved on to other tasks. It reached prod about an hour later, and the next morning a scheduled agent confirmed the fix held across 200K sandbox-creation log lines using a prompt similar to our [PR follow-up skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md).
 
@@ -52,7 +52,7 @@ Ask me where my deploys, logs, and errors live and where reports should go befor
 
 ## 2. Capturing feature requests
 
-We use agents to find recurring themes in user feedback from in-app surveys, support tickets, Discord, Gong, and Slack. A lesson we recently re-learned was the importance of [*prioritizing* that feedback](/newsletter/how-we-decide-what-to-build#3-prioritize-by-effort-vs-impact).
+We use agents to find recurring themes in user feedback from [in-app surveys](/surveys), support tickets, Discord, Gong, and Slack. A lesson we recently re-learned was the importance of [*prioritizing* that feedback](/newsletter/how-we-decide-what-to-build#3-prioritize-by-effort-vs-impact).
 
 When our sales team set up a scheduled agent to post to #feature-request-feed, Raquel from our Blitzscale team said that these automations had been less than useful in her experience:
 
@@ -76,9 +76,9 @@ Ask me where transcripts and channels live before writing anything.
 
 ## 3. Adding event tracking
 
-There are times where even *we* forget to add instrumentation for product analytics. We added a rule in our `AGENTS.md` to make AI do this for us moving forward, but we also have a scheduled agent that catches gaps retroactively.
+There are times where even *we* forget to add instrumentation for [product analytics](/product-analytics). We added a rule in our `AGENTS.md` to make AI do this for us moving forward, but we also have a scheduled agent that catches gaps retroactively.
 
-It works through recently merged PRs and looks for user-facing actions that are missing event tracking. When it finds one, it cross-checks our live PostHog data to confirm the event never fires, and then files a report with a fix. A coding agent then picks up that report and opens a PR to [add the instrumentation](https://github.com/PostHog/ai-plugin/blob/main/skills/instrument-product-analytics/SKILL.md).
+It works through recently merged PRs and looks for user-facing actions that are missing [event tracking](/tutorials/event-tracking-guide). When it finds one, it cross-checks our live PostHog data to confirm the event never fires, and then files a report with a fix. A coding agent then picks up that report and opens a PR to [add the instrumentation](https://github.com/PostHog/ai-plugin/blob/main/skills/instrument-product-analytics/SKILL.md).
 
 ![How a scout adds event tracking to merged PRs](https://res.cloudinary.com/dmukukwp6/image/upload/Dev_loops_graphic_instrumentation_gaps_alt_C_PR_checklist_29381060ab.png)
 
@@ -128,7 +128,7 @@ The problem with all of these is that if you prompt agents to send reports, they
 
 ![Slack thread where Raúl blocks off focus time for DevEx feedback pruning](https://res.cloudinary.com/dmukukwp6/image/upload/84a45bcc_1858_40cd_9663_a1a03e68ec2a_1262x701_ccb0179e9a.webp)
 
-Raúl, an engineer on our DevEx team, used to have an automation to triage these by grouping reports into themes, checking if the root issue has already been fixed, roughly ranking by frequency and impact, then committing the notes to a file in our private DevEx repo.
+[Raúl](/community/profiles/43265), an engineer on our DevEx team, used to have an automation to triage these by grouping reports into themes, checking if the root issue has already been fixed, roughly ranking by frequency and impact, then committing the notes to a file in our private DevEx repo.
 
 Instead, he now just checks on these once a month for a couple of hours, and the reports still lead to low-hanging fixes from across the team, like [rewording a preflight warning](https://github.com/PostHog/posthog/pull/91694) or [updating how code owners are labeled](https://github.com/PostHog/posthog/pull/100166). It's a good example of how some tasks are still better suited for AI-assisted human review, even if they *could* be solved with scheduled automations.
 
@@ -170,4 +170,4 @@ Ask me where our docs and code live before writing anything.
 
 <NewsletterForm />
 
-[^1]: Some people call these "background agents," "ambient agents," or "always-on agents." Others describe them as a type of loop or cron.
+[^1]: Some people call these "background agents," "ambient agents," or "always-on agents." Others describe them as a type of [loop](/newsletter/loops) or cron.
