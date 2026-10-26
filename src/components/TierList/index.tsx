@@ -10,6 +10,8 @@ import {
     useDroppable,
     useSensor,
     useSensors,
+    pointerWithin,
+    rectIntersection,
 } from '@dnd-kit/core'
 import fallbackCatalog from './assets.json'
 import { Catalog, Hoggie, loadLatestCatalog } from './catalog'
@@ -323,6 +325,9 @@ export default function TierList() {
 
                 <DndContext
                     sensors={ready ? sensors : []}
+                    collisionDetection={(args) =>
+                        args.pointerCoordinates ? pointerWithin(args) : rectIntersection(args)
+                    }
                     onDragStart={({ active }) => {
                         setDragging(String(active.id))
                     }}
@@ -478,7 +483,7 @@ export default function TierList() {
                             </div>
                         </section>
                     )}
-                    <DragOverlay>
+                    <DragOverlay style={{ pointerEvents: 'none' }}>
                         {dragging && (
                             <div className="size-20 bg-primary rounded border border-primary shadow-lg p-1">
                                 <HogImage slug={dragging} />
