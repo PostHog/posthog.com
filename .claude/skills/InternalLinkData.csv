@@ -407,30 +407,30 @@ Surveys,zapier surveys,/tutorials/zapier-surveys,Tutorial,Tutorial: zapier surve
 Surveys,beta feedback,/tutorials/beta-feedback,Tutorial,Tutorial: beta feedback
 Surveys,feedback interviews site apps,/tutorials/feedback-interviews-site-apps,Tutorial,Tutorial: feedback interviews site apps
 CDP / Data Pipeline,cdp,/cdp,Product page,General cdp / data pipeline mentions
-CDP / Data Pipeline,cdp / data pipeline docs,/docs/cdp,Docs,Technical docs references
-CDP / Data Pipeline,batch exports,/docs/cdp/batch-exports,Docs,Batch Exports feature or configuration
-CDP / Data Pipeline,bigquery,/docs/cdp/batch-exports/bigquery,Docs,Bigquery feature or configuration
-CDP / Data Pipeline,postgres,/docs/cdp/batch-exports/postgres,Docs,Postgres feature or configuration
-CDP / Data Pipeline,redshift,/docs/cdp/batch-exports/redshift,Docs,Redshift feature or configuration
-CDP / Data Pipeline,s3,/docs/cdp/batch-exports/s3,Docs,S3 feature or configuration
-CDP / Data Pipeline,snowflake,/docs/cdp/batch-exports/snowflake,Docs,Snowflake feature or configuration
-CDP / Data Pipeline,destinations,/docs/cdp/destinations,Docs,Destinations feature or configuration
-CDP / Data Pipeline,braze,/docs/cdp/destinations/braze,Docs,Braze feature or configuration
-CDP / Data Pipeline,customerio,/docs/cdp/destinations/customerio,Docs,Customerio feature or configuration
-CDP / Data Pipeline,google ads,/docs/cdp/destinations/google-ads,Docs,Google Ads feature or configuration
-CDP / Data Pipeline,google cloud storage,/docs/cdp/destinations/google-cloud-storage,Docs,Google Cloud Storage feature or configuration
-CDP / Data Pipeline,hubspot,/docs/cdp/destinations/hubspot,Docs,Hubspot feature or configuration
-CDP / Data Pipeline,intercom,/docs/cdp/destinations/intercom,Docs,Intercom feature or configuration
-CDP / Data Pipeline,meta ads,/docs/cdp/destinations/meta-ads,Docs,Meta Ads feature or configuration
-CDP / Data Pipeline,rudderstack,/docs/cdp/destinations/rudderstack,Docs,Rudderstack feature or configuration
-CDP / Data Pipeline,salesforce,/docs/cdp/destinations/salesforce,Docs,Salesforce feature or configuration
-CDP / Data Pipeline,slack,/docs/cdp/destinations/slack,Docs,Slack feature or configuration
-CDP / Data Pipeline,webhook,/docs/cdp/destinations/webhook,Docs,Webhook feature or configuration
-CDP / Data Pipeline,zapier,/docs/cdp/destinations/zapier,Docs,Zapier feature or configuration
-CDP / Data Pipeline,sources,/docs/cdp/sources,Docs,Sources feature or configuration
-CDP / Data Pipeline,hubspot,/docs/cdp/sources/hubspot,Docs,Hubspot feature or configuration
-CDP / Data Pipeline,salesforce,/docs/cdp/sources/salesforce,Docs,Salesforce feature or configuration
-CDP / Data Pipeline,stripe,/docs/cdp/sources/stripe,Docs,Stripe feature or configuration
+CDP / Data Pipeline,cdp / data pipeline docs,/docs/data-pipelines,Docs,Technical docs references
+CDP / Data Pipeline,batch exports,/docs/data-pipelines/batch-exports,Docs,Batch Exports feature or configuration
+CDP / Data Pipeline,bigquery,/docs/data-pipelines/batch-exports/bigquery,Docs,Bigquery feature or configuration
+CDP / Data Pipeline,postgres,/docs/data-pipelines/batch-exports/postgres,Docs,Postgres feature or configuration
+CDP / Data Pipeline,redshift,/docs/data-pipelines/batch-exports/redshift,Docs,Redshift feature or configuration
+CDP / Data Pipeline,s3,/docs/data-pipelines/batch-exports/s3,Docs,S3 feature or configuration
+CDP / Data Pipeline,snowflake,/docs/data-pipelines/batch-exports/snowflake,Docs,Snowflake feature or configuration
+CDP / Data Pipeline,destinations,/docs/data-pipelines/destinations,Docs,Destinations feature or configuration
+CDP / Data Pipeline,braze,/docs/data-pipelines/destinations/braze,Docs,Braze feature or configuration
+CDP / Data Pipeline,customerio,/docs/data-pipelines/destinations/customerio,Docs,Customerio feature or configuration
+CDP / Data Pipeline,google ads,/docs/data-pipelines/destinations/google-ads,Docs,Google Ads feature or configuration
+CDP / Data Pipeline,google cloud storage,/docs/data-pipelines/destinations/google-cloud-storage,Docs,Google Cloud Storage feature or configuration
+CDP / Data Pipeline,hubspot,/docs/data-pipelines/destinations/hubspot,Docs,Hubspot feature or configuration
+CDP / Data Pipeline,intercom,/docs/data-pipelines/destinations/intercom,Docs,Intercom feature or configuration
+CDP / Data Pipeline,meta ads,/docs/data-pipelines/destinations/meta-ads,Docs,Meta Ads feature or configuration
+CDP / Data Pipeline,rudderstack,/docs/data-pipelines/destinations/rudderstack,Docs,Rudderstack feature or configuration
+CDP / Data Pipeline,salesforce,/docs/data-pipelines/destinations/salesforce,Docs,Salesforce feature or configuration
+CDP / Data Pipeline,slack,/docs/data-pipelines/destinations/slack,Docs,Slack feature or configuration
+CDP / Data Pipeline,webhook,/docs/data-pipelines/destinations/webhook,Docs,Webhook feature or configuration
+CDP / Data Pipeline,zapier,/docs/data-pipelines/destinations/zapier,Docs,Zapier feature or configuration
+CDP / Data Pipeline,sources,/docs/data-pipelines/sources,Docs,Sources feature or configuration
+CDP / Data Pipeline,hubspot,/docs/data-pipelines/sources/hubspot,Docs,Hubspot feature or configuration
+CDP / Data Pipeline,salesforce,/docs/data-pipelines/sources/salesforce,Docs,Salesforce feature or configuration
+CDP / Data Pipeline,stripe,/docs/data-pipelines/sources/stripe,Docs,Stripe feature or configuration
 CDP / Data Pipeline,data stack,/data-stack,Product page,Data Stack feature page
 CDP / Data Pipeline,data docs,/docs/data,Docs,Data documentation
 CDP / Data Pipeline,essential posthog apps,/blog/essential-posthog-apps,Blog,Blog: essential posthog apps
@@ -449,44 +449,44 @@ Data Warehouse,cutting costs,/docs/data-warehouse/cutting-costs,Docs,"Reducing c
 Data Warehouse,insights,/docs/data-warehouse/insights,Docs,Insights feature or configuration
 Data Warehouse,join,/docs/data-warehouse/join,Docs,Join feature or configuration
 Data Warehouse,query,/docs/data-warehouse/query,Docs,Query feature or configuration
-Data Warehouse,sources,/docs/data-warehouse/sources,Docs,Sources feature or configuration
-Data Warehouse,attio,/docs/data-warehouse/sources/attio,Docs,Attio feature or configuration
-Data Warehouse,azure blob,/docs/data-warehouse/sources/azure-blob,Docs,Azure Blob feature or configuration
-Data Warehouse,azure db,/docs/data-warehouse/sources/azure-db,Docs,Azure Db feature or configuration
-Data Warehouse,bigquery,/docs/data-warehouse/sources/bigquery,Docs,Bigquery feature or configuration
-Data Warehouse,bing ads,/docs/data-warehouse/sources/bing-ads,Docs,Bing Ads feature or configuration
-Data Warehouse,buildbetter,/docs/data-warehouse/sources/buildbetter,Docs,Buildbetter feature or configuration
-Data Warehouse,chargebee,/docs/data-warehouse/sources/chargebee,Docs,Chargebee feature or configuration
-Data Warehouse,clerk,/docs/data-warehouse/sources/clerk,Docs,Clerk feature or configuration
-Data Warehouse,doit,/docs/data-warehouse/sources/doit,Docs,Doit feature or configuration
-Data Warehouse,gcs,/docs/data-warehouse/sources/gcs,Docs,Gcs feature or configuration
-Data Warehouse,github,/docs/data-warehouse/sources/github,Docs,Github feature or configuration
-Data Warehouse,google ads,/docs/data-warehouse/sources/google-ads,Docs,Google Ads feature or configuration
-Data Warehouse,google sheets,/docs/data-warehouse/sources/google-sheets,Docs,Google Sheets feature or configuration
-Data Warehouse,hubspot,/docs/data-warehouse/sources/hubspot,Docs,Hubspot feature or configuration
-Data Warehouse,klaviyo,/docs/data-warehouse/sources/klaviyo,Docs,Klaviyo feature or configuration
-Data Warehouse,linear,/docs/data-warehouse/sources/linear,Docs,Linear feature or configuration
-Data Warehouse,linkedin ads,/docs/data-warehouse/sources/linkedin-ads,Docs,Linkedin Ads feature or configuration
-Data Warehouse,mailchimp,/docs/data-warehouse/sources/mailchimp,Docs,Mailchimp feature or configuration
-Data Warehouse,meta ads,/docs/data-warehouse/sources/meta-ads,Docs,Meta Ads feature or configuration
-Data Warehouse,mongodb,/docs/data-warehouse/sources/mongodb,Docs,Mongodb feature or configuration
-Data Warehouse,mysql,/docs/data-warehouse/sources/mysql,Docs,Mysql feature or configuration
-Data Warehouse,pinterest ads,/docs/data-warehouse/sources/pinterest-ads,Docs,Pinterest Ads feature or configuration
-Data Warehouse,postgres,/docs/data-warehouse/sources/postgres,Docs,Postgres feature or configuration
-Data Warehouse,posthog,/docs/data-warehouse/sources/posthog,Docs,Posthog feature or configuration
-Data Warehouse,r2,/docs/data-warehouse/sources/r2,Docs,R2 feature or configuration
-Data Warehouse,reddit ads,/docs/data-warehouse/sources/reddit-ads,Docs,Reddit Ads feature or configuration
-Data Warehouse,redshift,/docs/data-warehouse/sources/redshift,Docs,Redshift feature or configuration
-Data Warehouse,s3,/docs/data-warehouse/sources/s3,Docs,S3 feature or configuration
-Data Warehouse,salesforce,/docs/data-warehouse/sources/salesforce,Docs,Salesforce feature or configuration
-Data Warehouse,shopify,/docs/data-warehouse/sources/shopify,Docs,Shopify feature or configuration
-Data Warehouse,snapchat ads,/docs/data-warehouse/sources/snapchat-ads,Docs,Snapchat Ads feature or configuration
-Data Warehouse,snowflake,/docs/data-warehouse/sources/snowflake,Docs,Snowflake feature or configuration
-Data Warehouse,stripe,/docs/data-warehouse/sources/stripe,Docs,Stripe feature or configuration
-Data Warehouse,temporal,/docs/cdp/sources/temporalio,Docs,Temporal feature or configuration
-Data Warehouse,tiktok ads,/docs/data-warehouse/sources/tiktok-ads,Docs,Tiktok Ads feature or configuration
-Data Warehouse,vitally,/docs/data-warehouse/sources/vitally,Docs,Vitally feature or configuration
-Data Warehouse,zendesk,/docs/data-warehouse/sources/zendesk,Docs,Zendesk feature or configuration
+Data Warehouse,sources,/docs/data-pipelines/sources,Docs,Sources feature or configuration
+Data Warehouse,attio,/docs/data-pipelines/sources/attio,Docs,Attio feature or configuration
+Data Warehouse,azure blob,/docs/data-pipelines/sources/azure-blob,Docs,Azure Blob feature or configuration
+Data Warehouse,azure db,/docs/data-pipelines/sources/azure-db,Docs,Azure Db feature or configuration
+Data Warehouse,bigquery,/docs/data-pipelines/sources/bigquery,Docs,Bigquery feature or configuration
+Data Warehouse,bing ads,/docs/data-pipelines/sources/bing-ads,Docs,Bing Ads feature or configuration
+Data Warehouse,buildbetter,/docs/data-pipelines/sources/buildbetter,Docs,Buildbetter feature or configuration
+Data Warehouse,chargebee,/docs/data-pipelines/sources/chargebee,Docs,Chargebee feature or configuration
+Data Warehouse,clerk,/docs/data-pipelines/sources/clerk,Docs,Clerk feature or configuration
+Data Warehouse,doit,/docs/data-pipelines/sources/doit,Docs,Doit feature or configuration
+Data Warehouse,gcs,/docs/data-pipelines/sources/gcs,Docs,Gcs feature or configuration
+Data Warehouse,github,/docs/data-pipelines/sources/github,Docs,Github feature or configuration
+Data Warehouse,google ads,/docs/data-pipelines/sources/google-ads,Docs,Google Ads feature or configuration
+Data Warehouse,google sheets,/docs/data-pipelines/sources/google-sheets,Docs,Google Sheets feature or configuration
+Data Warehouse,hubspot,/docs/data-pipelines/sources/hubspot,Docs,Hubspot feature or configuration
+Data Warehouse,klaviyo,/docs/data-pipelines/sources/klaviyo,Docs,Klaviyo feature or configuration
+Data Warehouse,linear,/docs/data-pipelines/sources/linear,Docs,Linear feature or configuration
+Data Warehouse,linkedin ads,/docs/data-pipelines/sources/linkedin-ads,Docs,Linkedin Ads feature or configuration
+Data Warehouse,mailchimp,/docs/data-pipelines/sources/mailchimp,Docs,Mailchimp feature or configuration
+Data Warehouse,meta ads,/docs/data-pipelines/sources/meta-ads,Docs,Meta Ads feature or configuration
+Data Warehouse,mongodb,/docs/data-pipelines/sources/mongodb,Docs,Mongodb feature or configuration
+Data Warehouse,mysql,/docs/data-pipelines/sources/mysql,Docs,Mysql feature or configuration
+Data Warehouse,pinterest ads,/docs/data-pipelines/sources/pinterest-ads,Docs,Pinterest Ads feature or configuration
+Data Warehouse,postgres,/docs/data-pipelines/sources/postgres,Docs,Postgres feature or configuration
+Data Warehouse,posthog,/docs/data-pipelines/sources/posthog,Docs,Posthog feature or configuration
+Data Warehouse,r2,/docs/data-pipelines/sources/r2,Docs,R2 feature or configuration
+Data Warehouse,reddit ads,/docs/data-pipelines/sources/reddit-ads,Docs,Reddit Ads feature or configuration
+Data Warehouse,redshift,/docs/data-pipelines/sources/redshift,Docs,Redshift feature or configuration
+Data Warehouse,s3,/docs/data-pipelines/sources/s3,Docs,S3 feature or configuration
+Data Warehouse,salesforce,/docs/data-pipelines/sources/salesforce,Docs,Salesforce feature or configuration
+Data Warehouse,shopify,/docs/data-pipelines/sources/shopify,Docs,Shopify feature or configuration
+Data Warehouse,snapchat ads,/docs/data-pipelines/sources/snapchat-ads,Docs,Snapchat Ads feature or configuration
+Data Warehouse,snowflake,/docs/data-pipelines/sources/snowflake,Docs,Snowflake feature or configuration
+Data Warehouse,stripe,/docs/data-pipelines/sources/stripe,Docs,Stripe feature or configuration
+Data Warehouse,temporal,/docs/data-pipelines/sources/temporalio,Docs,Temporal feature or configuration
+Data Warehouse,tiktok ads,/docs/data-pipelines/sources/tiktok-ads,Docs,Tiktok Ads feature or configuration
+Data Warehouse,vitally,/docs/data-pipelines/sources/vitally,Docs,Vitally feature or configuration
+Data Warehouse,zendesk,/docs/data-pipelines/sources/zendesk,Docs,Zendesk feature or configuration
 Data Warehouse,sql,/docs/data-warehouse/sql,Docs,Sql feature or configuration
 Data Warehouse,data access,/docs/data-warehouse/sql/data-access,Docs,Data Access feature or configuration
 Data Warehouse,useful functions,/docs/data-warehouse/sql/useful-functions,Docs,Useful Functions feature or configuration

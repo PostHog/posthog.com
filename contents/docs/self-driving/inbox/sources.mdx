@@ -20,6 +20,8 @@ Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) 
 
 From the inbox, open **settings** and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces – the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop), and Slack – and your sources stay the same wherever you open it.
 
+You can browse all available external sources using search and category filters. Sources are organized by type – issue trackers, error monitoring, support tools, and more. GitHub, Linear, Zendesk, Sentry, and Jira appear first, followed by the remaining sources sorted by connection status and name.
+
 <CalloutBox icon="IconInfo" title="MCP is handled for you" type="fyi">
 
 You don't need to configure MCP servers for inbox sources manually. Once your repository is connected, research tasks can run automatically.
@@ -108,21 +110,24 @@ These signals require an enabled Endpoints source configuration.
       label: "Surveys",
       url: "/docs/surveys",
       icon: "IconMessage",
-      description: "Score regressions, abandonment spikes, and recurring themes in open-text answers.",
+      description:
+        "Score regressions, abandonment spikes, and recurring themes in open-text answers.",
       lineClamp: 2,
     },
     {
       label: "Data warehouse",
       url: "/docs/data-warehouse",
       icon: "IconDatabase",
-      description: "Failed source connections, stale or stuck syncs, and materialized views that stop refreshing.",
+      description:
+        "Failed source connections, stale or stuck syncs, and materialized views that stop refreshing.",
       lineClamp: 2,
     },
     {
       label: "Data pipelines",
-      url: "/docs/cdp",
+      url: "/docs/data-pipelines",
       icon: "IconPlug",
-      description: "Destinations, transformations, batch exports, and flows where delivery stops matching the config.",
+      description:
+        "Destinations, transformations, batch exports, and flows where delivery stops matching the config.",
       lineClamp: 2,
     },
     {
@@ -164,7 +169,6 @@ New issues from connected project management and issue tracking tools. The inbox
 - GitLab
 - Gitea
 - Shortcut
-- pganalyze
 
 #### Comment back on GitHub issues
 
@@ -176,6 +180,12 @@ This setting is off by default, because the comment is public. Everybody who wat
 
 PostHog does not comment on a closed issue, a locked issue, or a pull request.
 
+### Database performance
+
+Postgres performance findings, slow queries, and index recommendations from database monitoring tools.
+
+- pganalyze
+
 ### Support / helpdesk
 
 Customer support tickets and conversations. The inbox turns actionable bug reports and feature requests into researched implementation work.
@@ -185,6 +195,8 @@ Customer support tickets and conversations. The inbox turns actionable bug repor
 - Freshservice
 - Front
 - Gorgias
+- HubSpot
+- Intercom
 - Kustomer
 - Dixa
 - Plain

@@ -97,7 +97,7 @@ export const optimizely = {
                     local_evaluation: true,
                     bootstrapping: false,
                     api_access: false,
-                    sdk_support: false,
+                    sdk_support: true,
                 },
             },
             targeting: {
@@ -185,7 +185,7 @@ export const optimizely = {
             mobile_sdks: true,
             native_data_sources: false,
             proxies: false,
-            sdks: '14',
+            sdks: '20+',
             server_side_sdks: true,
             sql: false,
             tv_sdks: true,

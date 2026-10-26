@@ -6,7 +6,7 @@ import useProducts from '../../../hooks/useProducts'
 // Point those at the right docs page, keyed on the stable product handle.
 const docsUrlOverrides: Record<string, string> = {
     data_warehouse: '/docs/data-warehouse',
-    realtime_destinations: '/docs/cdp/destinations',
+    realtime_destinations: '/docs/data-pipelines/destinations',
     posthog_ai: '/docs/posthog-ai',
     inbox: '/docs/self-driving/inbox',
     posthog_code: '/docs/posthog-desktop',

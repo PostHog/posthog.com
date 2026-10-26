@@ -30,7 +30,10 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - CSMs are paid on the NRR of their own book.
   - CSM Team Leads are paid on the combined NRR of their team's books.
   - The overall CS Lead is paid on the combined NRR of all CSM books.
-- Your bonus is guaranteed at 100% for your first 3 months at PostHog. If you exceed your target during that time, you get the higher amount.
+- If you are ramping, your bonus is guaranteed at 100% and held flat for your first 3 months at PostHog.
+  - For example: 
+    -  If you start in September, your Q3 bonus is flat at 100% and prorated to one month, and two thirds (for October and November) are flat at 100%, and then we will prorate the December component based on your actual NRR performance. 
+    - Similarly, if you start in July, your Q3 bonus is flat at 100% until Q4.
 - Bonuses are paid at the end of January, April, July and October. We wait to see which invoices are paid in the first two weeks of the next quarter, then send you a breakdown of your result.
 
 ### How NRR is calculated

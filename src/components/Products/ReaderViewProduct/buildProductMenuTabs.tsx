@@ -1,22 +1,28 @@
 import React, { useMemo } from 'react'
 import {
-    IconArrowLeft,
     IconBook,
     IconCursorClick,
     IconEye,
     IconGraduationCap,
-    IconTerminal,
     IconPiggyBank,
     IconPresent,
+    IconTerminal,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import Link from 'components/Link'
-import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, learnChapterSlug, useBookPages } from 'components/PocketGuides/bookModel'
+import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
+import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
+
+const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
+    'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
+}
 
 const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
@@ -83,80 +89,64 @@ const DocsTreeMenu = ({
     )
 }
 
-const LearnHubNav = ({ basePath, contentRef }: { basePath: string; contentRef?: React.RefObject<HTMLElement> }) => (
-    <ProductNav
-        basePath={basePath}
-        contentRef={contentRef}
-        items={[
-            { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-            { slug: 'agent-teacher', name: 'Have your agent teach you', icon: <IconTerminal className="size-4" /> },
-            { slug: 'learn-through-story', name: 'Learn through a story', icon: <IconBook className="size-4" /> },
-            { slug: 'learn-by-doing', name: 'Learn by doing', icon: <IconCursorClick className="size-4" /> },
-        ]}
-    />
-)
-
-/** Standard guides link between chapter pages; hub guides scroll between anchored sections. */
+/** The same Learn tree is shown on the hub, agent page, and every chapter. */
 const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
-    hasLanding,
-    hub,
-    contentRef,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
-    hasLanding?: boolean
-    hub?: boolean
-    contentRef?: React.RefObject<HTMLElement>
 }) => {
     const pages = useBookPages(volumeId)
-    const normalizedCurrentPath = currentPath?.replace(/\/$/, '')
-    const normalizedBasePath = basePath.replace(/\/$/, '')
+    const posthog = usePostHog()
+    const volume = volumeById(volumeId)
+    const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
+    // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
+    const chapters = pages.map((page) => ({
+        name: page.page ? `${page.page}. ${page.shortTitle || page.title}` : page.shortTitle || page.title,
+        url: learnChapterPath(guideBasePath, page),
+    }))
+    const hub = volume?.learnHub
+    const items = hub
+        ? [
+              { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
+              {
+                  name: 'Pocket guide',
+                  url: guideBasePath,
+                  icon: <IconBook className="size-4" />,
+                  children: chapters.filter((_, index) => !pages[index].isFrontMatter),
+              },
+              // Only the hub pages this volume has, so a smaller hub has no dead links.
+              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
+          ]
+        : chapters
 
-    if (hub && (!normalizedCurrentPath || normalizedCurrentPath === normalizedBasePath)) {
-        return <LearnHubNav basePath={basePath} contentRef={contentRef} />
+    // Chapter links report their chapter; Overview and hub page links report their section.
+    const chapterByUrl = new Map(
+        pages.map((page) => [
+            learnChapterPath(guideBasePath, page),
+            page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
+        ])
+    )
+    const trackClick = ({ url }: { url?: string }) => {
+        const chapter = url && chapterByUrl.get(url)
+        if (chapter) {
+            posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })
+        } else if (url === basePath) {
+            posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
+        } else {
+            const section = hub?.pages?.find((page) => url === `${basePath}/${page}`)
+            if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
+        }
     }
 
     return (
-        <nav>
-            <ul className="list-none m-0 p-0 flex flex-col gap-px">
-                {hasLanding ? (
-                    <li className="m-0 mb-2 border-b border-primary/20 p-0 pb-2">
-                        <Link
-                            to={basePath}
-                            className="block w-full rounded px-2 py-1 text-sm !text-primary !no-underline hover:bg-dark/10 focus-visible:outline-offset-[-2px] dark:hover:bg-light/10"
-                        >
-                            <span className="inline-flex items-center gap-1.5">
-                                <IconArrowLeft className="size-4 shrink-0" aria-hidden="true" />
-                                <span data-sidebar-label>Back to Learn</span>
-                            </span>
-                        </Link>
-                    </li>
-                ) : null}
-                {pages.map((page) => {
-                    const to =
-                        page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
-                    const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
-                    return (
-                        <li key={page.url} className="m-0 p-0">
-                            <Link
-                                to={to}
-                                className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
-                                    active
-                                        ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
-                                        : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
-                                }`}
-                            >
-                                <span data-sidebar-label>{page.shortTitle || page.title}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </nav>
+        // Master's Learn nav used taller rows (31px) than the docs sidebar; keep that spacing for Learn only.
+        <div className="[&_a]:py-[5.5px]">
+            <TreeMenu items={items} appearance="sidebar" activeUrl={currentPath} onItemClick={trackClick} />
+        </div>
     )
 }
 
@@ -180,8 +170,6 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Shows a learning hub with Product-style anchor navigation. */
-              learnHub?: boolean
           }
         | null
         | undefined
@@ -206,8 +194,8 @@ interface BuildProductMenuTabsArgs {
 
 export const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
-    // Under /docs so switching to Learn never leaves the docs sidebar.
-    if (surface === 'learn') return `/docs/${productSlug}/learn`
+    // Learn has its own URL namespace and keeps the shared product sidebar.
+    if (surface === 'learn') return `/learn/${productSlug}`
     return `/${productSlug}`
 }
 
@@ -236,10 +224,8 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        learnHub,
         docsSlug,
     } = productData
-    const hasLearnLanding = Boolean(learnHub)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -313,15 +299,11 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
-            navigateOnActiveClick: hasLearnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
-                    hasLanding={hasLearnLanding}
-                    hub={learnHub}
-                    contentRef={activeSurface === 'learn' ? contentRef : undefined}
                 />
             ),
         })

@@ -498,7 +498,6 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
-    closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
 }
@@ -945,7 +944,6 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -1024,7 +1022,6 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -1577,6 +1574,22 @@ const appSettings: AppSettings = {
         toolbar: true,
         hideTitle: true,
     },
+    '/field-guide': {
+        toolbar: false,
+        hideTitle: true,
+    },
+    '/field-guide/foreword': { toolbar: false, hideTitle: true },
+    '/field-guide/closing-note': { toolbar: false, hideTitle: true },
+    '/field-guide/the-rage-clicker': { toolbar: false, hideTitle: true },
+    '/field-guide/the-refreshing-pilgrim': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tab-hopper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-halfway-houdini': { toolbar: false, hideTitle: true },
+    '/field-guide/the-pricing-page-loiterer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tutorial-skipper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-modal-slammer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-phantom-returner': { toolbar: false, hideTitle: true },
+    '/field-guide/the-dead-end-wanderer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-console-opener': { toolbar: false, hideTitle: true },
     '/trash': {
         toolbar: true,
     },
@@ -1735,18 +1748,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
-    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
+    const sourcesNav = useSourcesNav('/docs/data-pipelines/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': cdpSourcesNav,
-            'data-warehouse-sources': dwSourcesNav,
+            'data-pipeline-sources': sourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )
 
     const desktopParams = useMemo(() => {

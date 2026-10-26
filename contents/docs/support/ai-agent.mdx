@@ -1,0 +1,80 @@
+---
+title: AI agent
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Private beta" type="action">
+
+The AI agent is in beta, and it is not enabled for every project. If you do not see **AI agent** under **Support** > **Settings**, ask us to turn it on. It is free while it is in beta. We will set a price later, and we will tell you before any charge starts.
+
+</CalloutBox>
+
+The AI agent drafts a reply when a new ticket arrives. You decide whether that draft stays a private note for your team, or goes to the customer. It does not reply on its own until you choose **AI reply** for that channel and ticket type.
+
+Replies are grounded in your [business knowledge](/docs/business-knowledge) sources: documents, links, and other context you add.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_32_11_4ca06d4936.png"
+    alt="AI agent"
+    classes="rounded"
+/>
+
+## Turn it on
+
+1. Go to **Support** > **Settings** > **AI agent**.
+2. Turn on **Enable AI agent**.
+3. Confirm AI data processing is allowed for your organization.
+4. Add at least one business knowledge source and wait until it is ready.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_16_52dfe7e34c.png"
+    alt="Turn it on"
+    classes="rounded"
+/>
+
+Without consent and a ready source, the agent has nothing to ground a reply in.
+
+## Let it investigate the ticket
+
+Under **Investigate ticket data**, the **Allow the agent to investigate ticket data** switch is separate, and it starts off.
+
+When it is on, a ticket that reports something broken can be checked against your project's events, [error tracking](/docs/error-tracking) issues, [session replays](/docs/session-replay), and [logs](/docs/logs). The agent has read-only access, and only to that project.
+
+Leave it off if you want replies grounded only in documentation and business knowledge.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_20_ed671ea867.png"
+    alt="Let it investigate the ticket"
+    classes="rounded"
+/>
+
+## Choose the channels
+
+Under **Allowed channels**, pick where the agent runs. A channel that is not connected yet stays disabled until you enable it under **Channels**. The list is the widget (including the API), Slack, email, Microsoft Teams, and GitHub.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_42_e502308ad9.png"
+    alt="Choose the channels"
+    classes="rounded"
+/>
+
+## Choose what the customer sees
+
+For each channel you enabled, set a reply mode per ticket type.
+
+| Ticket type | What you can choose | Why |
+| --- | --- | --- |
+| **How-to** | **Private note** or **AI reply** | The customer needs instructions. A reviewed reply can go out. |
+| **Diagnostic** | Private note only | The draft can include data from your project. |
+| **Account/Billing** | Private note only | The draft can include account data. |
+
+**Private note** is the default. Only your team sees it. **AI reply** sends a safety-reviewed message to the customer. On a channel set to **AI reply**, the agent may also ask the customer one clarifying question.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_17_28_49_ba946a7d3b.png"
+    alt="Choose what the customer sees"
+    classes="rounded"
+/>
+
+Diagnostic and Account/Billing stay private even if you would prefer a customer reply. The product enforces that. Do not paste a private note into the customer thread if it contains project data you would not send yourself.

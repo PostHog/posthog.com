@@ -17,6 +17,8 @@ seo:
   metaDescription: "I built a fake farm-website company on PostHog's provisioning API. Here's how it creates accounts for its users and reads their analytics back, with the gotchas I hit."
 ---
 
+> **Updated October 19, 2026:** PostHog now requires apps that create accounts to sign their requests. HogFarm signs them with its own key, and the setup and code below show how.
+
 I live on a little farm and recently built a [website](https://creeksidefields.com/) to sell shares of hogs. My fellow farmers are better versed in the subtle arts of soil, plants, and animals than the [latest coding tool](/desktop), so I threw together a website builder for them: HogFarm.
 
 Knowing who you're selling to is critical to generating demand, so wiring up PostHog for product analytics, session replay, and error reporting was a no-brainer. But farmers want to farm, not sign up for accounts and copy-paste API keys. So HogFarm provisions a PostHog account for each farm behind the scenes, then reads the analytics back into a dashboard the farmer sees without ever leaving HogFarm.
@@ -36,7 +38,8 @@ It looks like this:
   "client_id": "https://hogfarm-guava-tri.vercel.app/.well-known/posthog-client-v6.json",
   "client_name": "HogFarm",
   "redirect_uris": ["https://hogfarm-guava-tri.vercel.app/api/oauth/callback"],
-  "token_endpoint_auth_method": "none",
+  "token_endpoint_auth_method": "private_key_jwt",
+  "jwks_uri": "https://hogfarm-guava-tri.vercel.app/.well-known/jwks.json",
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
@@ -58,18 +61,60 @@ await fetch(`${HOST}/api/agentic/provisioning/client_registration`, {
 })
 ```
 
-The response reports each check it ran on its own: whether the document could be fetched and validated, whether provisioning is on, and which keys my JWKS serves if I published one. Nothing else works until this succeeds, so it's the first thing to re-run when something further down looks wrong.
+The response reports each check it ran on its own: whether the document could be fetched and validated, whether provisioning is on, and which keys my JSON Web Key Set (JWKS) serves. The call can return a 200 while one check fails, so I read the checks rather than the status. Nothing else works until every check passes, so it's the first thing to re-run when something further down looks wrong.
 
-Because HogFarm holds no secret (`token_endpoint_auth_method` is `"none"`), I use PKCE to prove the token exchange. I generate a random verifier and send only its SHA-256 hash with the first call. The verifier gets replayed at token exchange.
+### Signing account requests and token calls
+
+A `client_id` is a public URL, so sending it proves nothing about who sent it. Because HogFarm creates accounts, PostHog requires it to [sign its account requests and token calls](/docs/integrate/provisioning#sign-requests-with-a-key). HogFarm holds an ES256 private key that never leaves its environment, and serves the matching public key in its JWKS at `jwks_uri`. On each of those calls, it sends a short-lived JWT, called a client assertion, signed with that key. Calls that carry a Bearer token, like provisioning a project, don't need one.
+
+I generated the key with `openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256`, which writes the PKCS#8 format that `importPKCS8` expects, and stored it in the `JWKS_PRIVATE_SIGNING_KEY` environment variable:
+
+```ts
+import { createPublicKey } from "node:crypto"
+import { calculateJwkThumbprint, importPKCS8, SignJWT } from "jose"
+
+const pem = process.env.JWKS_PRIVATE_SIGNING_KEY
+if (!pem) throw new Error("JWKS_PRIVATE_SIGNING_KEY is not set")
+
+const privateKey = await importPKCS8(pem, "ES256")
+const publicJwk = createPublicKey(pem).export({ format: "jwk" })
+const kid = await calculateJwkThumbprint(publicJwk)
+
+export const jwks = { keys: [{ ...publicJwk, kid, alg: "ES256", use: "sig" }] }
+
+export async function clientAssertionFields(clientId: string) {
+  const assertion = await new SignJWT({})
+    .setProtectedHeader({ alg: "ES256", kid })
+    .setIssuer(clientId)
+    .setSubject(clientId)
+    .setAudience(["https://us.posthog.com", "https://eu.posthog.com"])
+    .setIssuedAt()
+    .setExpirationTime("60s")
+    .setJti(crypto.randomUUID())
+    .sign(privateKey)
+  return {
+    client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+    client_assertion: assertion,
+  }
+}
+```
+
+HogFarm serves `jwks` at its `jwks_uri`. Each assertion names the same `kid` in its header, which is how PostHog finds the key to check the signature. PostHog accepts each assertion once per region, so every call mints a fresh one with its own `jti`. The full version is in [`lib/client-assertion.ts`](https://github.com/Brooker-Fam/hogfarm/blob/main/lib/client-assertion.ts).
+
+If your app already runs without signing, switch it over in the [order the docs give](/docs/integrate/provisioning#turn-on-key-signing): publish your keys, add `private_key_jwt` and your `jwks_uri` to the metadata document, re-run registration in each region you use, then start signing.
+
+## Creating an account the farmer never sees
+
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+
+Besides the assertion, this call carries a PKCE challenge. I generate a random verifier and send only its SHA-256 hash now. The verifier gets replayed at token exchange.
 
 ```ts
 const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
-## Creating an account the farmer never sees
-
-With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+Then the account request itself:
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
@@ -80,6 +125,7 @@ await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
     email,
     name,
     client_id: clientId,
+    ...(await clientAssertionFields(clientId)),
     code_challenge: challenge,
     code_challenge_method: "S256",
     scopes: ["endpoint:read", "endpoint:write", "query:read", "session_recording:read", "sharing_configuration:write", "project:write"],
@@ -93,16 +139,22 @@ There are a few cases to handle for this response:
 - **A new email** comes back as `{ type: "oauth", oauth: { code } }`. The account gets created and linked quietly, I get a code on the spot, and the farmer gets a welcome email to set their password.
 - **An email that's already a PostHog user** comes back as `{ type: "requires_auth", requires_auth: { url } }`. They have to consent in the browser first, so I send them to `url` and PostHog redirects back to my `redirect_uri` with a code.
 - **A `client_id` that hasn't been registered** comes back as a `401` naming the registration endpoint, which is the reminder to run the call above after shipping a new metadata URL.
+- **A missing or invalid client assertion** also comes back as a `401`, with a message that names the cause. The docs have a [table of those errors and their fixes](/docs/integrate/provisioning#troubleshoot-assertion-errors).
 
 ## Getting the farmer's project key
 
-The account exists but it's empty. Two calls fix that: one to trade the code for an access token, replaying the PKCE verifier to prove it's me, then another to provision the project. Here's the token swap:
+The account exists but it's empty. Two calls fix that: a signed one to trade the code for an access token, replaying the PKCE verifier to prove it's me, then another to provision the project. Here's the token swap:
 
 ```ts
 const res = await fetch(`${HOST}/api/agentic/oauth/token`, {
   method: "POST",
   headers: { "API-Version": "0.1d", "Content-Type": "application/x-www-form-urlencoded" },
-  body: new URLSearchParams({ grant_type: "authorization_code", code, code_verifier: verifier }),
+  body: new URLSearchParams({
+    grant_type: "authorization_code",
+    code,
+    code_verifier: verifier,
+    ...(await clientAssertionFields(clientId)),
+  }),
 })
 const { access_token: accessToken, refresh_token: refreshToken } = await res.json()
 ```
@@ -127,7 +179,7 @@ await fetch(`${HOST}/api/agentic/provisioning/resources`, {
 
 The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away. `service_id: "free"` gives a free-tier project with no card required, which is all HogFarm needs.
 
-Access tokens last an hour, so anything long-lived means holding onto the refresh token. I store both encrypted in Postgres with AES-256-GCM, and the key lives only in the environment, never in the database.
+Access tokens last an hour, so anything long-lived means holding onto the refresh token. Refreshing is a token call too, so it carries a fresh assertion. I store both tokens encrypted in Postgres with AES-256-GCM, and the encryption key lives only in the environment, never in the database.
 
 ![The generated farm site, with the PostHog snippet already wired in](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/generated_farm_site_af6902b4a8.png)
 

@@ -203,7 +203,7 @@ Below is a per-product reading list to work through - the reference you come bac
 
 ### Other products and features
 1. Platform packages (Boost/Scale/Enterprise/Teams)
-2. [Data pipelines](/docs/cdp)
+2. [Data pipelines](/docs/data-pipelines)
     - Sources
     - Destinations
     - Transformations

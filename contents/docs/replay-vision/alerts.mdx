@@ -64,7 +64,7 @@ Quiet hours are also available on **every matching observation** alerts. The oth
 
 ## Delivery
 
-The **Notify** step is where destinations go, and you can add more later by editing the alert. Each destination receives every notification that alert sends:
+The **Notify** step is where destinations go, and you can add more later by editing the alert. On an existing alert, destination, snooze, and **Enabled** changes save automatically, without **Save**. Each destination receives every notification that alert sends:
 
 - **Slack** – a channel in a connected Slack workspace.
 - **Webhook** – an HTTPS URL of yours.
@@ -132,12 +132,16 @@ The **Alerts** tab shows where each alert stands:
 | **Active** | An "every matching observation" alert, watching. These have no firing state. |
 | **Not firing** | The metric is within its threshold. |
 | **Firing** | The metric has crossed its threshold and you've been notified. |
-| **Snoozed** | In a notification cooldown or quiet hours. |
+| **Snoozed** | Someone snoozed the alert until a set time. |
 | **Errored** | A recent check failed. PostHog keeps trying. |
 | **Broken** | Checks failed repeatedly, so the alert was switched off. |
 | **Disabled** | You turned it off. |
 
-Use **Reset** on an errored or broken alert to clear its state and run a fresh check shortly after.
+Notification cooldown and quiet hours hold back notifications, but they don't change the alert's state.
+
+To snooze an alert, open it and pick a time from **Snooze until**. Over the API, set `snooze_until`. The alert starts checking again after that time. **Clear snooze** in the same menu ends a snooze early.
+
+Use **Reset** on a broken alert to clear its state and run a fresh check shortly after.
 
 Alerts don't spend [credits](/docs/replay-vision/quota-and-limits). They read observations the scanner has already produced.
 

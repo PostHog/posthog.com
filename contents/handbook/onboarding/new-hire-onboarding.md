@@ -41,7 +41,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 ## Week 2
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our [Onboarding folder](https://app.buildbetter.app/folders/14521), where you can also find sessions on productivity and workflows.
-- Explore Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
+- Explore Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
 - Try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
@@ -59,7 +59,7 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
-- Deep dive on Vitally and Metabase, i.e., seeing how the systems we use come together day-to-day.
+- Deep dive on Customer Analytics and Metabase, i.e., seeing how the systems we use come together day-to-day.
 - Toolkit and internal processes.
 - No stupid questions session.
 
@@ -75,7 +75,7 @@ This is when you start working with your customers. Reach out, take the first ca
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
 - Evaluate implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](https://posthog.com/handbook/cs-and-onboarding/foundation-check) and [health check](https://posthog.com/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
-- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
+- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Customer Analytics playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 - Keep working on your product knowledge. You can find a couple of [exercises here](https://posthog.com/handbook/onboarding/onboarding-team#how-to-deepen-your-knowledge).
 
 ## How do I know if I'm on track?
@@ -107,12 +107,12 @@ Our customers are always central to our work. There’s time and space to work o
 
 **Core responsibilities**
 
-- Make sure you’re on top of our customer base in Vitally. Don’t let renewals fall through the cracks.
+- Make sure you’re on top of our customer base in Customer Analytics. Don’t let renewals fall through the cracks.
 - It's not a race - quality over quantity, always. Spend time reviewing accounts, be accurate, and genuinely helpful in what you email to customers. 
 - Listen to customers and respond to their needs. It’s a conversation, not a monologue with a set agenda. 
 - Make sure your Calendly schedule stays available for customers. You’re the master of your own calendar, and we trust you, but be reasonable.
 - Do the [Sales handoff](https://posthog.com/handbook/onboarding/sales-handover) where appropriate and always provide context on the customer.
-- Maintain the hygiene - follow the process in Vitally, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
+- Maintain the hygiene - follow the process in Customer Analytics, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
 - You’re the driver, so take initiative. Keep in mind improvements, optimization, process, or content updates as you go. Don’t be afraid to voice your ideas.
 - AI should never be a substitute for learning. Use it to increase efficiency, but don't follow it blindly.
 

@@ -31,7 +31,7 @@ MCP tool calls also run against the PostHog API, so [API rate limits](/docs/api#
 
 Some [AI-powered MCP tools](#how-much-does-it-cost) (for example, sentiment analysis and trace summarization) have their own additional, lower limits because they run LLMs internally.
 
-If you regularly hit these limits, consider pulling data through [batch exports](/docs/cdp/batch-exports) or [endpoints](/docs/endpoints) instead.
+If you regularly hit these limits, consider pulling data through [batch exports](/docs/data-pipelines/batch-exports) or [endpoints](/docs/endpoints) instead.
 
 ### Which AI clients and editors are supported?
 
@@ -229,7 +229,7 @@ Available features:
 | `actions`                | [Action definitions](/docs/data/actions)                                               |
 | `activity_logs`          | Activity log viewing                                                                   |
 | `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
-| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `annotations`            | [Annotation management](/docs/data/annotations)                                        |
 | `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
 | `conversations`          | [Support ticket management](/docs/support)                                             |
 | `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
@@ -242,7 +242,7 @@ Available features:
 | `events`                 | Event and property definitions                                                         |
 | `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
 | `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
-| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_functions`          | [CDP function management](/docs/data-pipelines)                                                   |
 | `hog_function_templates` | CDP function template browsing                                                         |
 | `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
 | `ai_observability`          | [AI observability evaluations](/docs/ai-observability)                                      |

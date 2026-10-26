@@ -89,31 +89,31 @@ const setupSteps: {
         description: (
             <>
                 Pick a source from the list. Authenticate. Done.{' '}
-                <Link to="/docs/cdp/sources/stripe" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/stripe" state={{ newWindow: true }}>
                     Stripe
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/postgres" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/postgres" state={{ newWindow: true }}>
                     Postgres
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/salesforce" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/salesforce" state={{ newWindow: true }}>
                     Salesforce
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/hubspot" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/hubspot" state={{ newWindow: true }}>
                     HubSpot
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/s3" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/s3" state={{ newWindow: true }}>
                     S3
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/mongodb" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/mongodb" state={{ newWindow: true }}>
                     MongoDB
                 </Link>
                 ,{' '}
-                <Link to="/docs/cdp/sources/clickhouse" state={{ newWindow: true }}>
+                <Link to="/docs/data-pipelines/sources/clickhouse" state={{ newWindow: true }}>
                     ClickHouse
                 </Link>
                 , they all sync on a schedule you control, with schema drift handled automatically.
@@ -196,10 +196,10 @@ export default function Warehouse(): JSX.Element {
                     picture.
                 </p>
                 <p>
-                    The Warehouse is your <strong>context layer</strong> for AI-driven product development. It's
-                    a lot more than just storage - it's what all of your PostHog tools run on. This means you're not
-                    left wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's
-                    the revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR
+                    The Warehouse is your <strong>context layer</strong> for AI-driven product development. It's a lot
+                    more than just storage - it's what all of your PostHog tools run on. This means you're not left
+                    wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's the
+                    revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR
                     already open to fix the issue."
                 </p>
                 <ProductScreenshot
@@ -275,9 +275,8 @@ export default function Warehouse(): JSX.Element {
                         <div>
                             <h2 className="!mt-0 mb-2 text-2xl font-bold">You found it before it's finished. Nice.</h2>
                             <p className="mt-0 mb-4 text-secondary">
-                                The Warehouse is in beta. Join the waitlist and we'll let you in as soon as it's
-                                ready. No big bang migration, no infrastructure to provision, just your data in one
-                                place.
+                                The Warehouse is in beta. Join the waitlist and we'll let you in as soon as it's ready.
+                                No big bang migration, no infrastructure to provision, just your data in one place.
                             </p>
                             <div className="max-w-md">
                                 <DuckDBWaitlistSurvey />

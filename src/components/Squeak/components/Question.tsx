@@ -452,7 +452,7 @@ export function Question(props: QuestionProps) {
                             {!archived && (props.subscribeButton ?? true) && (
                                 <SubscribeButton contentType="question" id={questionData?.id} show={showActions} />
                             )}
-                            {isQuestionAuthor && !isEditingQuestion && (
+                            {(isQuestionAuthor || isModerator) && !isEditingQuestion && (
                                 <OSButton
                                     onClick={() => setIsEditingQuestion(true)}
                                     icon={<IconPencil />}

@@ -43,7 +43,7 @@ Choose a join when you only need the data in insights and SQL. A join adds no wr
 
 You need three things:
 
-1. A [linked source](/docs/data-warehouse/sources) that syncs the table you want to read.
+1. A [linked source](/docs/data-pipelines/sources) that syncs the table you want to read.
 2. A column in that table holding each row's distinct ID, for person properties. For group properties, you need the column holding each row's group key.
 3. People or groups that already exist in PostHog.
 
@@ -136,7 +136,7 @@ Each updated person or group sends one event, so it counts toward your event vol
 
 A wide mapping costs more than a narrow one. One changed column resends every property the mapping covers for that person, because the comparison covers the whole bundle rather than each property on its own. Split volatile columns into their own mapping if you map a mix of stable and fast-changing data.
 
-The warehouse sync itself is billed by rows synced. See [data warehouse pricing](/pricing?product=data-warehouse).
+The warehouse sync itself is billed by rows synced. See [Sources pricing](/pricing?products=data_warehouse&calculator=data_warehouse).
 
 ## Troubleshooting
 
