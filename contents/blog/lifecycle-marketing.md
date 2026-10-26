@@ -7,6 +7,9 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/vibes_based_marketing_aff77241ee.png
+featuredImageType: full
 category: Inside PostHog
 tags:
   - Workflows
