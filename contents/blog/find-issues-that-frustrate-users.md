@@ -16,7 +16,7 @@ tags:
   - Replay Vision
   - Session replay
 seo:
-  metaTitle: '"Find issues that frustrate users" (and other things teams ask AI to watch in their product)'
+  metaTitle: How Replay Vision helps users find (and solve) product problems
   metaDescription: "What 20,097 Replay Vision scanners across 9,488 organizations were told to look for, the exact prompts people wrote, and where to point your first scanner."
 ---
 
