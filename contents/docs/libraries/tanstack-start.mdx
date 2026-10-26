@@ -216,8 +216,6 @@ function tracingHeader(request: Request, name: string): string | undefined {
 
 const posthogContext = createMiddleware().server(async ({ request, next }) => {
   const posthog = getPostHogClient()
-  const controller = new AbortController()
-  const signal = AbortSignal.any([request.signal, controller.signal])
   const existing = posthog.getContext()
 
   return posthog.withContext(
@@ -231,13 +229,9 @@ const posthogContext = createMiddleware().server(async ({ request, next }) => {
     },
     async () => {
       enrichCurrentSpan(posthog)
-      try {
-        return await next()
-      } finally {
-        controller.abort()
-      }
+      return await next()
     },
-    { fresh: true, signal }
+    { fresh: true }
   )
 })
 
@@ -250,7 +244,7 @@ This setup was checked with TanStack Start 1.169.3 on Node.js. It runs for SSR, 
 
 The processor fills missing `sessionId` and `posthogDistinctId` span attributes. Explicit canonical attributes stay unchanged, including non-string values. `user.id` alone is not an override. At request entry, the helper also fills missing attributes on the nearest recording server ancestor whose parent chain the processor observed. A sampler-dropped intermediate breaks that chain, so the earlier server span stays unchanged.
 
-The scope ends when `next()` returns a response, throws, or the request signal aborts. Work awaited before that point keeps request context. A streaming response can continue after this point: later stream work and detached tasks do not keep the IDs. This example does not provide full stream-lifetime context or edge-runtime support. Give separately owned background work its own explicit context and lifetime.
+Work that the request starts, including detached tasks, keeps the IDs after `next()` returns or throws. This example does not support the edge runtime. Give separately owned background work that needs its own IDs an explicit context.
 
 TanStack handles some route and server-function errors before middleware can see them. Capture an error once at the application handler that owns it, while request context is active:
 

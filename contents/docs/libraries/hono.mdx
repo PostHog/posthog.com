@@ -99,7 +99,6 @@ function readTracingId(value) {
 }
 
 const posthogServerMiddleware = createMiddleware(async (c, next) => {
-    const controller = new AbortController()
     const user = c.get('user')
     return posthog.withContext(
         {
@@ -107,21 +106,17 @@ const posthogServerMiddleware = createMiddleware(async (c, next) => {
             sessionId: readTracingId(c.req.header('x-posthog-session-id')),
         },
         async () => {
-            try {
-                enrichCurrentSpan(posthog)
-                await next()
-            } finally {
-                controller.abort()
-            }
+            enrichCurrentSpan(posthog)
+            await next()
         },
-        { fresh: true, signal: controller.signal }
+        { fresh: true }
     )
 })
 ```
 
 The optional `user` value belongs to your application. Set it in earlier authentication middleware with a verified string `id`, or omit it and use header fallback for analytics. Header IDs are client-controlled analytics context, never authentication or authorization.
 
-The helper enriches an active request span; the processor snapshots IDs for child spans. Existing canonical `sessionId` and `posthogDistinctId` attributes take precedence. Missing IDs stay absent. The scope ends after `next()` returns, including failures. Work that starts later, including stream body production, needs its own explicit context.
+The helper enriches an active request span; the processor snapshots IDs for child spans. Existing canonical `sessionId` and `posthogDistinctId` attributes take precedence. Missing IDs stay absent. Work that the request starts keeps its IDs after `next()` returns, including after failures. Stream body work that starts outside the request needs its own explicit context.
 
 This automatic context setup requires the Node.js entry point. The SDK's edge entry point does not provide async request context. Explicit event properties in other runtimes are a separate path; this example does not establish Workers span support.
 

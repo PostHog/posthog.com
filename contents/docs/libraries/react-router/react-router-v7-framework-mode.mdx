@@ -259,7 +259,6 @@ function tracingId(value: string | null): string | undefined {
 }
 
 export const posthogMiddleware: MiddlewareFunction<Response> = async ({ request, context }, next) => {
-  const controller = new AbortController();
   const existing = posthog.getContext();
   const data: RequestIds = {
     distinctId: existing?.distinctId ?? tracingId(request.headers.get('x-posthog-distinct-id')),
@@ -268,13 +267,7 @@ export const posthogMiddleware: MiddlewareFunction<Response> = async ({ request,
   context.set(posthogClientContext, posthog);
   context.set(posthogErrorContext, data);
 
-  return posthog.withContext(data, async () => {
-    try {
-      return await next();
-    } finally {
-      controller.abort();
-    }
-  }, { fresh: true, signal: controller.signal });
+  return posthog.withContext(data, () => next(), { fresh: true });
 };
 ```
 
@@ -289,9 +282,9 @@ export const middleware: Route.MiddlewareFunction[] = [
 ];
 ```
 
-The scope ends when `next()` settles. Work after that point, including a streamed response body, has no PostHog request context. Pass explicit context to separate jobs when needed. Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.
+Work that the request starts keeps its IDs after `next()` settles. Pass explicit context to separate jobs that need their own IDs. Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.
 
-To capture server errors, add the capture call to your existing `handleError` export in `app/entry.server.tsx`. The saved IDs remain available when a middleware error reaches this hook after the scope ends. Errors before this middleware runs have no saved request identity.
+To capture server errors, add the capture call to your existing `handleError` export in `app/entry.server.tsx`. The saved IDs remain available when a middleware error reaches this hook outside the scope. Errors before this middleware runs have no saved request identity.
 
 ```ts file=app/entry.server.tsx
 import type { HandleErrorFunction } from 'react-router';
@@ -307,7 +300,7 @@ export const handleError: HandleErrorFunction = (error, { context }) => {
 
 ### Optional server span context
 
-Use the optional `posthog-node/otel` entrypoint when your Node SDK supports `ContextOptions.signal`. Add `new PostHogContextSpanProcessor(posthog)` to the processors in your existing OpenTelemetry setup. Import the processor from `posthog-node/otel` and reuse the client from `posthog.server.ts`. Keep your provider, exporters, and sampler.
+Use the optional `posthog-node/otel` entrypoint when your Node SDK includes it. Add `new PostHogContextSpanProcessor(posthog)` to the processors in your existing OpenTelemetry setup. Import the processor from `posthog-node/otel` and reuse the client from `posthog.server.ts`. Keep your provider, exporters, and sampler.
 
 Import the helper in `posthog-middleware.server.ts`:
 

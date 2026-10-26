@@ -47,7 +47,7 @@ import SvelteInstallServer from "../integrate/_snippets/install-svelte-server.md
 
 ## Server span context
 
-For a Node server with SvelteKit 2.31.0 or later, use the same server client for PostHog events and OpenTelemetry span context. This setup needs the optional `posthog-node/otel` entrypoint and `ContextOptions.signal` support.
+For a Node server with SvelteKit 2.31.0 or later, use the same server client for PostHog events and OpenTelemetry span context. This setup needs the optional `posthog-node/otel` entrypoint.
 
 Enable [SvelteKit server tracing and instrumentation](https://svelte.dev/docs/kit/observability). In SvelteKit 3, configure `tracing: { server: true }` in the `sveltekit(...)` Vite plugin options. In SvelteKit 2.31, configure `kit.experimental.tracing.server` and `kit.experimental.instrumentation.server` in `svelte.config.js`.
 
@@ -65,7 +65,6 @@ function tracingId(value) {
 }
 
 export async function handle({ event, resolve }) {
-  const controller = new AbortController();
   const existing = posthog.getContext();
   const data = {
     distinctId: existing?.distinctId ?? tracingId(event.request.headers.get('x-posthog-distinct-id')),
@@ -83,16 +82,12 @@ export async function handle({ event, resolve }) {
   };
 
   return posthog.withContext(data, async () => {
-    try {
-      if (event.tracing.enabled) {
-        context.with(trace.setSpan(context.active(), event.tracing.root), () => enrichCurrentSpan(posthog));
-      }
-      enrichCurrentSpan(posthog);
-      return await resolve(event);
-    } finally {
-      controller.abort();
+    if (event.tracing.enabled) {
+      context.with(trace.setSpan(context.active(), event.tracing.root), () => enrichCurrentSpan(posthog));
     }
-  }, { fresh: true, signal: controller.signal });
+    enrichCurrentSpan(posthog);
+    return await resolve(event);
+  }, { fresh: true });
 }
 
 export function handleError({ error, event, message }) {
@@ -103,7 +98,7 @@ export function handleError({ error, event, message }) {
 
 SvelteKit starts its request root span before this hook. The two `enrichCurrentSpan` calls fill missing IDs on that public root span and on the active span. Explicit span attributes remain unchanged. A missing or blank header adds no ID.
 
-The scope ends when `resolve(event)` settles. Work that continues after that point, including a streamed response body, has no PostHog request context. Pass explicit context to separate jobs when needed. The saved values on `event.locals` let `handleError` attribute a hook error after the scope has ended. Errors before this hook runs have no saved request identity. Add the `posthogError` field to `App.Locals` if your app uses TypeScript.
+Work that the request starts keeps its IDs after `resolve(event)` settles. Pass explicit context to separate jobs that need their own IDs. The saved values on `event.locals` let `handleError` attribute a hook error that SvelteKit reports outside this scope. Errors before this hook runs have no saved request identity. Add the `posthogError` field to `App.Locals` if your app uses TypeScript.
 
 ## Feature flags
 
