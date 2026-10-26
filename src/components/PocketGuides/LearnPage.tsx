@@ -1,12 +1,12 @@
-import React, { createContext, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from '@reach/router'
 
-import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
-import ReaderView from 'components/ReaderView'
+import { surfaceBasePath } from 'components/Products/ReaderViewProduct'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 
+import LearnShell, { InLearnShell } from './LearnShell'
 import LearnSurface from './LearnSurface'
 
 interface LearnPageProps {
@@ -29,40 +29,6 @@ export interface LearnLandingProps {
     /** The hub root, `/learn/<product>`. */
     learnUrl: string
     volumeId: string
-}
-
-const InLearnShell = createContext(false)
-
-/**
- * Learn's ReaderView and product sidebar. AppWindow renders it around every `/learn/<product>`
- * page, so the sidebar stays mounted when the reader moves between Learn pages.
- */
-export function LearnShell({ path, children }: { path: string; children: React.ReactNode }): JSX.Element {
-    const products = useProduct() as any[]
-    const currentPath = path.replace(/\/$/, '')
-    const productData = products.find((product) => {
-        const learnUrl = product.pocketGuideVolume && surfaceBasePath(product.slug, 'learn')
-        return learnUrl && (currentPath === learnUrl || currentPath.startsWith(`${learnUrl}/`))
-    })
-    if (!productData) return <>{children}</>
-    // A hub root shows the product's landing page, which has no markdown to copy.
-    const isLearnLanding =
-        Boolean(volumeById(productData.pocketGuideVolume)?.learnHub) &&
-        currentPath === surfaceBasePath(productData.slug, 'learn')
-
-    return (
-        <ReaderView
-            // Learn navigation already lives in the product sidebar.
-            hideRightSidebar
-            hideTitle
-            hideMarkdownActions={isLearnLanding}
-            showQuestions={false}
-            menuTabs={buildProductMenuTabs({ productData, activeSurface: 'learn', currentPath })}
-            productSelect={<ProductSwitcher activeHandle={productData.handle} surface="learn" />}
-        >
-            <InLearnShell.Provider value>{children}</InLearnShell.Provider>
-        </ReaderView>
-    )
 }
 
 /** Page content shared by the index and per-chapter routes. */
