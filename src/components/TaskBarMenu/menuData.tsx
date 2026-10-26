@@ -123,12 +123,6 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
         label: 'PostHog Slack',
         link: '/docs/slack',
         icon: <Icons.IconAtSign className="size-4 text-purple" />,
