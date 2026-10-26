@@ -297,33 +297,48 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/data-stack",
-            "destination": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/data-stack.md",
-            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/data-stack/:path*",
-            "destination": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse",
-            "destination": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse.md",
-            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse/:path*",
-            "destination": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {

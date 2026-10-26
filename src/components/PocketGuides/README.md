@@ -18,7 +18,7 @@ Pocket guides open and remain inside their product's Learn tab, with chapters in
 The rendering path is:
 
 1. `gatsby/createPages.ts` builds one page per chapter. `pocketGuidePageContext` in `src/constants/pocketGuides.ts` maps each source file to its volume's `learnPath`, and every page uses `src/templates/PocketGuide.tsx`. Full and minimal builds share this helper. Each chapter has its own title and canonical URL in the initial HTML. There are no client-only chapter routes.
-2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving and Data Stack. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
+2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
 3. `LearnSurface.tsx` renders the chapter from page context, using `useBookPages(volumeId)` for reading order. An empty or unknown chapter falls back to the introduction.
 4. `EntryProvider` supplies page data and the guide's `basePath`. `MDXProvider` uses `bookMdxComponents`, including `ReaderWrapper`, to render the body.
 
@@ -29,7 +29,7 @@ The rendering path is:
 | Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
 | AI Observability, Session Replay, Feature Flags | Overview at `/learn/<product>`; guide at `/learn/<product>/pocket-guide` |
 | Self-driving | `/docs/self-driving/pocket-guide` |
-| Data Stack | `/docs/data-warehouse/pocket-guide` |
+| Data Stack | Warehouse Learn tab at `/learn/warehouse`, which opens on the first "Ask a quick question" chapter; guide at `/learn/warehouse/pocket-guide` |
 
 Each volume with `learnHub` in `src/constants/pocketGuides.ts` has an overview page at `src/pages/learn/<product>/index.tsx`, which renders `LearnLanding.tsx`. Every Learn page shows the same flat sidebar, with no section anchors or Back to Learn mode. A hub lists Overview and Pocket guide (chapters nested under it), each with an icon, then the extra pages in `learnHub.pages`. Every hub has Agent prompts and MCP. Product Analytics, AI Observability, and Session Replay also have Live playground, because Twig has labs for them. Feature Flags has no Twig lab yet. Volumes without `learnHub` list their chapters. Chapters are numbered in the sidebar ("1. Events"), and each chapter page shows a "Chapter 01" eyebrow above its heading. The number sits outside the `h1`, so the heading and page title stay the chapter's own title. The former `/docs/<product>/learn` and `/pocket-guides/<volume>` URLs redirect permanently to these routes in one hop, including chapter and `.md` paths. The source folder names the course, not the URL, so a route change is one edit to the volume's `learnPath`.
 
@@ -46,7 +46,7 @@ contents/learn/<volume>/pocket-guide/
 | --- | --- |
 | `contents/learn/<id>/pocket-guide/` | Introduction and chapter MDX |
 | `src/constants/pocketGuides.ts` | Volume metadata, `learnPath`, and route helpers |
-| `src/hooks/productData/<product>.tsx` | Product's `pocketGuideVolume`, which adds the Learn tab |
+| `src/hooks/productData/<product>.tsx` | Product's `pocketGuideVolume`, which adds the Learn tab. Optional `pocketGuideSection` limits the tab to the chapters with that `section:` frontmatter, and `learnNavFullTitles` labels the sidebar with each chapter's `title` instead of its `shortTitle` |
 | `src/templates/PocketGuide.tsx` | Generated chapter page; no per-product route files are needed |
 | `vercel.json` | Permanent redirects from any former URL |
 | `volumeArt.tsx` | Shared cover illustration registry; reuse existing brand art |
