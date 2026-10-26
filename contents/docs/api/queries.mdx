@@ -442,7 +442,7 @@ Some customers haven't been migrated to the above limit and are on an old limit 
 
 Queries made with a personal API key draw from an hourly read budget per project, and every query debits the bytes it read. The budget refills continuously, and unused budget carries over up to a cap.
 
-Once it is exhausted, queries return a `429` response with the code `api_queries_budget_exceeded` and a `Retry-After` header. Every `/query` response made with a personal API key includes `X-PostHog-Query-Bytes-Read` and `X-PostHog-Query-Budget-Remaining-Bytes`; for asynchronous queries, the same headers arrive on the poll response once the query completes.
+Starting November 2, 2026, the budget is enforced for projects on the free plan. Once it is exhausted, their queries return a `429` response with the code `api_queries_budget_exceeded` and a `Retry-After` header. Every `/query` response made with a personal API key includes `X-PostHog-Query-Bytes-Read` and `X-PostHog-Query-Budget-Remaining-Bytes`; for asynchronous queries, the same headers arrive on the poll response once the query completes.
 
 Cached results still work while the budget is exhausted. Queries made in the PostHog app are not affected.
 
