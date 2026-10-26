@@ -19,7 +19,7 @@ interface BrandCatalog {
     colors: { slug: string; lighter: string }[]
 }
 
-// Use the same flattened, stable image slugs as the saved catalog and shared rankings.
+// Use the same flattened, stable image slugs for illustrations and saved rankings.
 export function normalizeCatalog(value: unknown): Catalog | null {
     try {
         const catalog = value as BrandCatalog

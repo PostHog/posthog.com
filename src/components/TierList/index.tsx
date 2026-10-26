@@ -13,16 +13,13 @@ import {
     pointerWithin,
     rectIntersection,
 } from '@dnd-kit/core'
-import fallbackCatalog from './assets.json'
 import { Catalog, Hoggie, loadLatestCatalog } from './catalog'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo, IconMultiply } from '@posthog/icons'
 import { emptyRanking, moveHog, parseRanking, serializeRanking, tierIds, Ranking, Tier } from './state'
 
-const HoggieNames = createContext<Map<string, Hoggie>>(
-    new Map(fallbackCatalog.hoggies.map((asset) => [asset.slug, asset]))
-)
+const HoggieNames = createContext<Map<string, Hoggie>>(new Map())
 const storageKey = 'posthog-hoggie-tier-list-v1'
 const defaultTitle = 'My hoggie tier list'
 const imageUrl = (slug: string) => `https://brand.posthog.com/hoggies/${slug}.png`
@@ -114,9 +111,11 @@ function DropZone({ id, children }: { id: string; children: React.ReactNode }) {
 }
 
 export default function TierList() {
-    const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog)
-    const assets = catalog.hoggies
-    const tierColors = catalog.tierColors
+    const [catalog, setCatalog] = useState<Catalog | null>(null)
+    const [loadError, setLoadError] = useState(false)
+    const [loadAttempt, setLoadAttempt] = useState(0)
+    const assets = catalog?.hoggies || []
+    const tierColors = catalog?.tierColors || []
     const bySlug = useMemo(() => new Map(assets.map((asset) => [asset.slug, asset])), [assets])
     const [ranking, setRanking] = useState<Ranking>(emptyRanking)
     const [query, setQuery] = useState('')
@@ -143,9 +142,13 @@ export default function TierList() {
         const timeout = window.setTimeout(() => controller.abort(), 5000)
         let cancelled = false
         async function initialize() {
-            const latest = (await loadLatestCatalog(controller.signal)) || fallbackCatalog
+            const latest = await loadLatestCatalog(controller.signal)
             window.clearTimeout(timeout)
             if (cancelled) return
+            if (!latest) {
+                setLoadError(true)
+                return
+            }
             setCatalog(latest)
             // Restore only after loading the current inventory so new shared hoggies survive.
             const available = new Set(latest.hoggies.map(({ slug }) => slug))
@@ -170,7 +173,7 @@ export default function TierList() {
             window.clearTimeout(timeout)
             controller.abort()
         }
-    }, [])
+    }, [loadAttempt])
 
     useEffect(() => {
         if (!ready) return
@@ -197,7 +200,7 @@ export default function TierList() {
         }
         viewport.addEventListener('wheel', scrollSideways, { passive: false })
         return () => viewport.removeEventListener('wheel', scrollSideways)
-    }, [finished])
+    }, [finished, ready])
 
     useEffect(() => {
         if (trayViewport.current) trayViewport.current.scrollLeft = 0
@@ -274,6 +277,28 @@ export default function TierList() {
             exportContainer?.remove()
             setExporting(false)
         }
+    }
+
+    if (!catalog) {
+        return (
+            <div className="@container absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center text-primary">
+                <h1 className="text-2xl !m-0">Hoggie Tier List</h1>
+                <p role="status" className="text-secondary !m-0">
+                    {loadError ? "We couldn't load the hoggies. Please try again." : 'Loading the hoggies…'}
+                </p>
+                {loadError && (
+                    <OSButton
+                        variant="primary"
+                        onClick={() => {
+                            setLoadError(false)
+                            setLoadAttempt((attempt) => attempt + 1)
+                        }}
+                    >
+                        Try again
+                    </OSButton>
+                )}
+            </div>
+        )
     }
 
     return (

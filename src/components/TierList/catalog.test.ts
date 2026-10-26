@@ -28,7 +28,7 @@ test('new catalog releases include all illustrations, variants, names, and searc
     assert.deepEqual(result?.tierColors, Array(5).fill('#abcdef'))
 })
 
-test('malformed or incomplete catalogs select the saved fallback', () => {
+test('malformed or incomplete catalogs are rejected', () => {
     for (const value of [null, {}, { ...fixture(), hoggies: [] }, { ...fixture(), colors: [] }]) {
         assert.equal(normalizeCatalog(value), null)
     }
