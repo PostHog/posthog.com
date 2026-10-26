@@ -17,9 +17,10 @@
 .ui-carousel-track[data-peek] {
     mask-image: linear-gradient(
         to right,
-        #000 calc(100% - var(--carousel-peek) - var(--carousel-gap)),
-        rgb(0 0 0 / 0.35) calc(100% - var(--carousel-peek)),
-        transparent calc(100% - var(--carousel-peek) * 0.35)
+        #000 calc(100% - var(--carousel-peek) - var(--carousel-gap) * 2),
+        rgb(0 0 0 / 0.85) calc(100% - var(--carousel-peek)),
+        rgb(0 0 0 / 0.55) calc(100% - var(--carousel-peek) * 0.5),
+        transparent 100%
     );
 }
 
