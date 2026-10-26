@@ -1,6 +1,6 @@
 ---
 title: Technical customer success managers are harder to hire than engineers
-date: 2026-10-16
+date: 2026-10-26
 author:
   - julia-esteban-edo
 featuredImage: >-
