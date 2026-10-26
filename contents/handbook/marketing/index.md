@@ -110,7 +110,7 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Developer influencers:** We [sponsor creators](/handbook/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
-- **OOH:** Billboards are a way to get our brand in front of a lot of people. So are blimps, busses, and ads on the tube.
+- **OOH:** Billboards are a way to get our brand in front of a lot of people. So are blimps, buses, and ads on the tube.
 
 ### Things we don't want to spend time on
 
