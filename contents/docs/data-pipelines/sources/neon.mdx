@@ -64,7 +64,7 @@ See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#se
 
 > **Permissions** The Neon source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role in Neon rather than using the default `neondb_owner` role.
 
-Neon requires SSL/TLS for all connections, which PostHog uses by default.
+Neon requires SSL/TLS for all connections, which PostHog uses by default. You can also verify your database's TLS certificate and authenticate with a client certificate. See the [Postgres TLS certificate verification documentation](/docs/data-pipelines/sources/postgres#tls-certificate-verification) for details on these options.
 
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
