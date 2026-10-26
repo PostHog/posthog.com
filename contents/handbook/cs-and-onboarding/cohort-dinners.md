@@ -48,11 +48,11 @@ This means anyone that currently has a TAM with open opportunities for cross sel
 
 Who are your most PostHog-pilled customers in the area? They should be at this dinner! Arguably the most important cohort at the cohort dinner are people who use PostHog regularly, love it, and are happy to talk other peoples' ears off about all the different things they do with it.
 
-You should also make sure to bring a number of PostHog people so that they can spread through the room and be part of small groups throughout the night. Everyone at PostHog is an awesome dinner guest (it's basically baked into our interview process), but try to think of the audience that will be at the dinner. Got someone coming who is evaluating our Managed Warehouse? Bring an engineer who is working on it!
+You should also make sure to bring a number of PostHog people so that they can spread through the room and be part of small groups throughout the night. Everyone at PostHog is an awesome dinner guest (it's basically baked into our interview process), but try to think of the audience that will be at the dinner. Got someone coming who is evaluating our Warehouse? Bring an engineer who is working on it!
 
 ## How?
 
-Planning a Cohort Dinner typically follows a couple core steps:
+Planning a Cohort Dinner typically follows a couple core steps. Ideally, start planning about 45 days before the event so you have time to book a venue and build a guest list.
 
 ### Making the event on Luma
 
@@ -68,9 +68,13 @@ A key part of the dinner is the location - ideally, the restaurant you pick shou
 
 A number of our location-based Slack channels have PostHog employees' personal dining recommendations for people visiting, these are a great place to start. Outside of those recommendations, feel free to use your best judgement to pick a location that lends itself to good conversation (not too loud), excites and sparks joy, and can be booked for large groups.
 
+If possible, pick a venue with a separate space for the group, like a private dining room. This limits the noise from the rest of the restaurant and makes the dinner feel more like a VIP experience.
+
 ### Spreading the word
 
 Invite your customers! In our experience, the most effective outreach is in DMs with people you already have a relationship with, closely followed by a message in a shared Slack channel with individual tags.
+
+Send invitations at least 2-3 weeks before the dinner. This gives attendees a chance to make it work with their schedules.
 
 ### The dinner itself
 
@@ -81,6 +85,8 @@ At the dinner, have fun and talk to people about PostHog! The intention is not t
 - If a cool new feature comes up, dive into it with the people at your table
 - If someone voices a pain they deal with regularly that PostHog solves, explain how we can help
 - Let your evangelists do the selling for you!
+
+Consider including merch in the dinner itself, such as a small gift at each seat, as a gesture of appreciation for the guests who came. For info on how to order merch, see the [merch store](/handbook/company/merch-store) page. Order it early so that it arrives in time.
 
 ### Documenting
 

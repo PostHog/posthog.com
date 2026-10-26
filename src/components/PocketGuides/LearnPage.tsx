@@ -5,6 +5,7 @@ import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'componen
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
+import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 
 import LearnSurface from './LearnSurface'
 
@@ -17,13 +18,17 @@ interface LearnPageProps {
     description: string
     /** Optional product-specific choice page. Its URL comes from product data. */
     landing?: React.ComponentType<LearnLandingProps>
+    /** Optional non-chapter content, such as the agent teaching page. */
+    children?: React.ReactNode
 }
 
 export interface LearnLandingProps {
     productName: string
     description: string
-    pocketGuideUrl: string
-    interactiveLearningUrl: string
+    storyUrl: string
+    /** The hub root, `/learn/<product>`. */
+    learnUrl: string
+    volumeId: string
 }
 
 /** Page shell shared by the index and per-chapter routes. */
@@ -33,18 +38,26 @@ export default function LearnPage({
     title,
     description,
     landing: Landing,
+    children,
 }: LearnPageProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
-    const interactiveLearningUrl = productData?.interactiveLearningUrl as string | undefined
-    const isLearnLanding = Boolean(!chapter && volumeId && Landing && interactiveLearningUrl)
+    const isLearnLanding = Boolean(volumeId && Landing && !chapter)
+    const volume = volumeId ? volumeById(volumeId) : undefined
+    // The registry owns the guide URL, so links match the pages createPages builds.
+    const guideBasePath = volume
+        ? pocketGuideUrl(volume)
+        : productData
+        ? surfaceBasePath(productData.slug, 'learn')
+        : ''
     const landingProps = {
         productName: productData?.name,
         description,
-        pocketGuideUrl: `${surfaceBasePath(productData?.slug, 'learn')}/introduction`,
-        interactiveLearningUrl,
+        storyUrl: guideBasePath,
+        learnUrl: productData ? surfaceBasePath(productData.slug, 'learn') : '',
+        volumeId,
     } as LearnLandingProps
     const productMenuTabs = buildProductMenuTabs({
         productData,
@@ -52,11 +65,14 @@ export default function LearnPage({
         activeSurface: 'learn',
         currentPath: location?.pathname,
     })
+
+    const guide = volumeId ? <LearnSurface volumeId={volumeId} chapter={chapter} basePath={guideBasePath} /> : null
+
     return (
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
             <ReaderView
-                // The book carries its own structure; a second contents column competes.
+                // Learn navigation already lives in the product sidebar.
                 hideRightSidebar
                 hideTitle
                 hideMarkdownActions={isLearnLanding}
@@ -65,15 +81,8 @@ export default function LearnPage({
                 productSelect={<ProductSwitcher activeHandle={productHandle} />}
             >
                 <article ref={contentRef}>
-                    {isLearnLanding && Landing && interactiveLearningUrl ? (
-                        <Landing {...landingProps} />
-                    ) : volumeId ? (
-                        <LearnSurface
-                            volumeId={volumeId}
-                            chapter={chapter}
-                            basePath={surfaceBasePath(productData.slug, 'learn')}
-                        />
-                    ) : null}
+                    {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
+                    {!isLearnLanding ? children ?? guide : null}
                 </article>
             </ReaderView>
         </>

@@ -45,6 +45,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { DottedConnection } from 'components/Code/DottedConnection'
+import { Receipt } from 'components/Code/Receipt'
 import {
     StickerTombstone,
     StickerMayor,
@@ -403,6 +404,7 @@ function HeroSection() {
                     </ul>
 
                     <DownloadButtons />
+                    <SignupsPausedNote />
                 </div>
 
                 {/* Product shot with the glow + overhanging hog treatment the product pages
@@ -618,76 +620,21 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 // rendered as a $0.00 grocery receipt punchline.
 // ─────────────────────────────────────────────
 
-// Deliberate skeuomorphic object: fixed paper/ink colors (like KeyBadge) so the
-// receipt reads as a physical receipt in both light and dark mode.
-const RECEIPT_PAPER = '#f7f4ee'
-
-// A torn/zigzag paper edge. Flush along the top, sawtooth teeth pointing down.
-// preserveAspectRatio="none" stretches a fixed tooth count across the receipt width.
-function TornEdge({ className = '' }: { className?: string }) {
-    const width = 200
-    const height = 12
-    const teeth = 20
-    const step = width / teeth
-    let d = `M0 0 H${width}`
-    for (let i = 0; i <= teeth; i++) {
-        const x = (width - i * step).toFixed(1)
-        const y = i % 2 === 0 ? height : 0
-        d += ` L${x} ${y}`
-    }
-    d += ' Z'
-    return (
-        <svg
-            className={className}
-            viewBox={`0 0 ${width} ${height}`}
-            preserveAspectRatio="none"
-            aria-hidden
-            focusable="false"
-        >
-            <path d={d} fill={RECEIPT_PAPER} />
-        </svg>
-    )
-}
-
-function ReceiptRow({ label, price = '$0.00' }: { label: string; price?: string }) {
-    return (
-        <div className="flex items-baseline justify-between gap-4">
-            <span>{label}</span>
-            <span>{price}</span>
-        </div>
-    )
-}
-
 function AgentMartReceipt() {
     return (
-        <div className="mx-auto w-full max-w-xs rotate-1">
-            <div
-                className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
-                style={{ backgroundColor: RECEIPT_PAPER }}
-            >
-                <p className="m-0 text-center font-bold tracking-widest">TABLE STAKES 2026</p>
-                <p className="m-0 mb-4 text-center text-xs italic text-[#8a8272]">(yep, PostHog has that)</p>
-
-                <div className="space-y-1">
-                    <ReceiptRow label="parallel agents" />
-                    <ReceiptRow label="multi model" />
-                    <ReceiptRow label="MCP servers" />
-                    <ReceiptRow label="code diffs" />
-                    <ReceiptRow label="cloud sandboxes" />
-                    <ReceiptRow label="AI sparkles" />
-                </div>
-
-                <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
-
-                <div className="flex items-baseline justify-between gap-4 font-bold">
-                    <span>TOTAL</span>
-                    <span>$0.00</span>
-                </div>
-
-                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thanks for shopping at agent mart</p>
-            </div>
-            <TornEdge className="w-full h-3" />
-        </div>
+        <Receipt
+            title="TABLE STAKES 2026"
+            subtitle="(yep, PostHog has that)"
+            rows={[
+                { label: 'parallel agents' },
+                { label: 'multi model' },
+                { label: 'MCP servers' },
+                { label: 'code diffs' },
+                { label: 'cloud sandboxes' },
+                { label: 'AI sparkles' },
+            ]}
+            footer="thanks for shopping at agent mart"
+        />
     )
 }
 
@@ -2107,6 +2054,28 @@ const InboxCallout = () => {
     )
 }
 
+const DESKTOP_WAITLIST_URL = 'https://us.posthog.com/external_surveys/01a15a76-48ce-0000-a2f8-e898869707a7'
+
+// The app blocks these accounts, so say so before people download.
+const SignupsPausedNote = () => (
+    <p className="mt-3 mb-0 text-sm text-secondary">
+        New sign-ups are paused. PostHog Desktop only works with PostHog accounts created before October 1, 2026, and
+        not for organizations in the Startup or YC program or with prepaid credits. Everything else in PostHog still
+        works for every account, including the web app,{' '}
+        <Link to="/slack" state={{ newWindow: true }} className="underline">
+            Slack
+        </Link>
+        , and{' '}
+        <Link to="/docs/model-context-protocol" state={{ newWindow: true }} className="underline">
+            MCP
+        </Link>
+        .{' '}
+        <a href={DESKTOP_WAITLIST_URL} className="underline">
+            Join the Desktop waitlist
+        </a>
+    </p>
+)
+
 const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
@@ -2117,6 +2086,7 @@ const TLDR = () => {
                         Download PostHog Desktop and sign in with your PostHog account.
                     </p>
                     <DownloadButtons />
+                    <SignupsPausedNote />
                 </div>
                 <div>
                     <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
@@ -2302,6 +2272,22 @@ const FAQ_ITEMS = [
                     It still works. Without PostHog it's a general-purpose coding agent, and the product context is a
                     bonus on top rather than a hard requirement. You do need a PostHog account to sign in, since that's
                     what pays for model usage.
+                </p>
+                <p>
+                    New sign-ups are paused right now, so PostHog accounts created on or after October 1, 2026 can't use
+                    PostHog Desktop yet. The rest of PostHog works as normal for them, in the web app,{' '}
+                    <Link to="/slack" state={{ newWindow: true }} className="underline">
+                        Slack
+                    </Link>
+                    , and{' '}
+                    <Link to="/docs/model-context-protocol" state={{ newWindow: true }} className="underline">
+                        MCP
+                    </Link>
+                    .{' '}
+                    <a href={DESKTOP_WAITLIST_URL} className="underline">
+                        Join the Desktop waitlist
+                    </a>{' '}
+                    and we'll email you when you can use it.
                 </p>
                 <p>
                     That said, the context is the whole point. PostHog is free up to{' '}

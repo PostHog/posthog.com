@@ -90,7 +90,7 @@ Either way, attach a [private note](/handbook/support/posthog-support#private-no
 
 ## Auditing impersonations
 
-Customers sometimes ask who from PostHog has accessed their account. Use this <PrivateLink url="https://us.posthog.com/project/2/sql">SQL query on project 2</PrivateLink> to get an impersonation log for a specific organization. Get the organization ID from [Vitally](https://posthog.vitally-eu.io/).
+Customers sometimes ask who from PostHog has accessed their account. Use this <PrivateLink url="https://us.posthog.com/project/2/sql">SQL query on project 2</PrivateLink> to get an impersonation log for a specific organization. The organization ID is the account's external ID in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer analytics</PrivateLink>.
 
 ```sql
 -- Get all user emails for an organization from persons table

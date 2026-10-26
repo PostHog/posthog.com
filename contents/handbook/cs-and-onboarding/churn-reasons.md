@@ -12,9 +12,9 @@ Some recurring reasons customers churn, and what we can do about them.
 
 If our champion was the main user, their departure is high risk. The best defense: get more people across the org using PostHog before it happens. More teams using PostHog, more products adopted, more relationships across the org. Build relationships with more than one champion.
 
-### Champion isn't the decision maker
+### Your contact is a coach, not a champion
 
-A great relationship with a non-decision-maker is good for context, but limits influence over PostHog adoption. Use them to introduce you to people who can actually move things — and remember decision-makers aren't always in leadership roles. Ensure team adoption, new feature roll-outs, or other key wins are consistently visible to decision-makers.
+A great relationship with a [coach](/handbook/growth/sales/customer-journey#champions-and-coaches) is good for context, but limits influence over PostHog adoption. Use them to introduce you to a champion who can actually move things, and remember champions aren't always in leadership roles. Ensure team adoption, new feature roll-outs, or other key wins are consistently visible to the people who make the decisions.
 
 ### Customer replaces PostHog
 
@@ -62,7 +62,7 @@ Some customers have constraints we can't fully solve — e.g. they can't store d
 Make sure they know what privacy controls PostHog offers. We're anonymous by default, Session Replay masks sensitive data, and many customers don't realize what's possible. Useful links:
 
 - [Data collection](https://posthog.com/docs/privacy/data-collection)
-- [URL masking](https://posthog.com/docs/cdp/transformations/template-url-masking)
+- [URL masking](https://posthog.com/docs/data-pipelines/transformations/template-url-masking)
 - [Session replay privacy](https://posthog.com/docs/session-replay/privacy)
 - [Cookieless tracking](https://posthog.com/tutorials/cookieless-tracking)
 - [GDPR](https://posthog.com/docs/privacy/gdpr-compliance)

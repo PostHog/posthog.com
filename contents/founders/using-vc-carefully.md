@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Fundraising
+  - Raising money
 crosspost:
   - Blog
 ---

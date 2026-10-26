@@ -179,7 +179,7 @@ const Points = () => {
             <div className="p-4">
                 <p className="text-sm text-secondary m-0">
                     Earn achievements by contributing to{' '}
-                    <Link to="/questions" className="font-bold text-red dark:text-yellow" state={{ newWindow: true }}>
+                    <Link to="/forum" className="font-bold text-red dark:text-yellow" state={{ newWindow: true }}>
                         discussions
                     </Link>
                     , helping others, and achieving milestones in the PostHog community.

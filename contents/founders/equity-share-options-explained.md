@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Ops & finance
-  - People
+  - Running the company
 crosspost:
   - Blog
 ---

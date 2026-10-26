@@ -8,6 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
+  - Lessons from others
 crosspost:
   - Blog
   - Newsletter

@@ -97,7 +97,7 @@ const Row = ({ question }: { question: QuestionData }) => {
         <li className="border-b border-primary first:border-t-0 last:border-b-0">
             <Link
                 state={{ newWindow: true, preventScroll: true }}
-                to={`/questions/${permalink}`}
+                to={`/forum/p/${permalink}`}
                 className="block group py-3"
             >
                 <div className="flex items-center gap-4 @md/reader-content:gap-5">

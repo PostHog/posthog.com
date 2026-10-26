@@ -17,17 +17,40 @@ export interface TermDefinition {
 }
 
 export const TERMS = {
+    insight: {
+        title: 'Insight',
+        description: 'An analysis of events and user behavior, such as a trend or funnel.',
+        slug: '/docs/product-analytics/insights',
+    },
     trend: {
-        title: 'Trend',
+        title: 'Trends',
         description:
             'An insight that shows how often an event happens over time, with an optional breakdown by a property.',
         slug: '/docs/product-analytics/insights',
+    },
+    'retention insight': {
+        title: 'Retention',
+        description:
+            'Shows how many users return during later periods. You choose a start event and a return event, which can be the same or different.',
+        slug: '/docs/product-analytics/retention',
     },
     'product analytics': {
         title: 'Product Analytics',
         description:
             'Answers what people actually do in your product using the events you send to PostHog. Explore trends, funnels, retention, and paths to understand behavior.',
         slug: '/docs/product-analytics',
+    },
+    'posthog ai': {
+        title: 'PostHog AI',
+        description:
+            'An AI product analyst inside PostHog that can use your project data to answer questions, build insights, and create dashboards.',
+        slug: '/docs/posthog-ai',
+    },
+    'posthog mcp': {
+        title: 'PostHog MCP',
+        description:
+            'A server that connects your AI agent to PostHog so it can inspect project data and work with insights and dashboards from your editor.',
+        slug: '/docs/model-context-protocol',
     },
     'ai observability': {
         title: 'AI Observability',
@@ -150,7 +173,7 @@ export const TERMS = {
         slug: '/docs/ai-observability/custom-properties',
     },
     'session replay': {
-        title: 'Session replay',
+        title: 'Session Replay',
         description:
             'Records what real users do in your product and plays it back like a DVR, with console logs, network requests, and errors at the exact moment they happened.',
         slug: '/docs/session-replay',
@@ -160,6 +183,35 @@ export const TERMS = {
         description:
             'Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong.',
         slug: '/docs/feature-flags',
+    },
+    'distinct id': {
+        title: 'Distinct ID',
+        description: 'Every event in PostHog has a distinct ID – a unique identifier that groups events together.',
+        slug: '/docs/data/persons',
+    },
+    'release condition': {
+        title: 'Release conditions',
+        description:
+            'This specifies the conditions a user must meet to access the feature flag and receive a value. Release conditions do not apply to remote config flags.',
+        slug: '/docs/feature-flags/creating-feature-flags#release-conditions',
+    },
+    'local evaluation': {
+        title: 'Local evaluation',
+        description:
+            'Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.',
+        slug: '/docs/feature-flags/local-evaluation',
+    },
+    bootstrapping: {
+        title: 'Bootstrapping',
+        description:
+            'Bootstrapping Feature Flags makes precomputed flag values available as soon as a client-side PostHog SDK initializes. This prevents flicker and enables startup logic, such as redirects, to use flags before the SDK finishes its first /flags request.',
+        slug: '/docs/feature-flags/bootstrapping',
+    },
+    payload: {
+        title: 'Payload',
+        description:
+            'A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).',
+        slug: '/docs/feature-flags/creating-feature-flags#payloads',
     },
     exception: {
         title: 'Exception',
@@ -228,13 +280,13 @@ export const TERMS = {
         slug: '/docs/data/sessions',
     },
     experiment: {
-        title: 'Experiment',
+        title: 'Experiments',
         description:
             'Experiments let you test a change against a control and find out whether it actually worked. You define variants and metrics; PostHog randomizes your users and runs the statistics.',
         slug: '/docs/experiments',
     },
     funnel: {
-        title: 'Funnel',
+        title: 'Funnels',
         description:
             'Funnels enable you to visualize your flows and understand where the friction points are so that you can improve them.',
         slug: '/docs/product-analytics/funnels',
@@ -284,8 +336,14 @@ export const TERMS = {
     cohort: {
         title: 'Cohort',
         description:
-            'Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.',
+            'A group of people with something in common. In a retention insight, PostHog automatically groups people by when they did the start event. Saved cohorts are separate lists you create and can use to filter insights.',
         slug: '/docs/data/cohorts',
+    },
+    'static cohort': {
+        title: 'Static cohort',
+        description:
+            'A saved list of people that changes only when someone updates it. You can add people manually, upload a CSV, or take a one-time snapshot of people matching criteria.',
+        slug: '/docs/data/cohorts#static-and-dynamic-cohorts',
     },
     'self-driving': {
         title: 'Self-driving',

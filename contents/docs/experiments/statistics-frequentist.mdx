@@ -8,7 +8,7 @@ PostHog's frequentist analysis engine provides a statistically rigorous and wide
 
 ## Input data: What goes into the analysis
 
-The frequentist engine processes three types of metrics:
+The frequentist engine processes four types of metrics:
 
 ### Funnel metrics
 
@@ -21,6 +21,10 @@ Measure numeric values for each user, such as revenue per user or session durati
 ### Ratio metrics
 
 Combine two metrics by dividing one by another, like revenue per order or clicks per session. These help understand efficiency and relationship between different user behaviors. ([Learn more about ratio metrics](/docs/experiments/metrics#ratio))
+
+### Retention metrics
+
+Measure whether users return to perform an action within a time window after a start event. These are analyzed as ratio statistics. ([Learn more about retention metrics](/docs/experiments/metrics#retention))
 
 ## What the experimentation pipeline does
 
@@ -71,7 +75,6 @@ Before analysis proceeds, the engine validates the data quality based on metric 
 **Funnel metrics only:**
 
 - **Minimum conversions**: At least 5 conversions per variant
-- **Normal approximation validity**: For proportions, both `np ≥ 5` and `n(1-p) ≥ 5` are required for the t-test to be valid
 
 **Mean and ratio metrics only:**
 

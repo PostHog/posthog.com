@@ -1,0 +1,61 @@
+---
+title: Troubleshooting Support
+sidebarTitle: Troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+Fixes for the problems we see most often. Each fix links to the setup page that has the full details.
+
+## The widget does not appear
+
+1. In **Support** > **Settings**, confirm Support is enabled and the in-app widget is on.
+2. If **Allowed domains** is set, the page must match an entry. `example.com` matches that domain exactly. `*.example.com` matches subdomains, but not `example.com` itself, so add both if you need both. An empty list shows the widget on every domain.
+3. Search your `posthog.init` config for `disable_conversations: true`. That stops the conversations module from loading. [Hiding the widget](/docs/support/widget#show-and-hide-the-widget) with `posthog.conversations.hide()` is different: the module still loads.
+4. Hard-refresh the page. A regenerated public token disconnects chats that are already open until the page loads again.
+
+## Identity verification returns 403
+
+`GET /widget/tickets` or `POST /widget/message` answers `403 Forbidden` with no detail. The response is the same for a wrong key, a bad signature, and a project with no key.
+
+1. Generate a key under **Support** > **Settings** > **Secret API key**, if the section is empty.
+2. Recompute the HMAC-SHA256 of the user's `distinct_id` with that key, on your server. See [identity verification](/docs/support/widget#identity-verification).
+3. If you rotated the key, hashes signed with the previous key still work until you delete the backup. After every server uses the new key, delete the backup.
+4. Requests with no identity fields keep using the browser session. A `403` means the request sent identity fields the server rejected.
+
+## Email replies do not send
+
+1. Open **Support** > **Settings** > **Email channel** and confirm the domain status is verified.
+2. Publish the SPF and DKIM records PostHog shows you. If the domain already has an SPF record, merge the include into that record. A second SPF record is ignored by receivers.
+3. Click **Send test email**.
+4. Outbound replies only work for an address with a verified domain. **New ticket** hides unverified addresses from the **From** list.
+
+## SupportHog does not create a Slack ticket
+
+1. Invite the bot to the channel: `/invite @SupportHog`. Then refresh the channel list in settings.
+2. A project can connect one Slack workspace. If the workspace is already connected to another project, connect fails with an error. Disconnect it there first.
+3. A mention or a `:ticket:` reaction only works in a channel the bot has joined.
+4. Nudges are skipped for messages of three words or fewer, emoji-only messages, internal teammates, and users who were nudged in the last five minutes. Those skips are expected. Turn nudges off under **Nudge users to open tickets** if they are noisy.
+5. In a Slack Connect channel, ticket creation still works. Link unfurls do not. That is not a failed ticket.
+
+## A Teams mention does not create a ticket
+
+1. Confirm **Microsoft Teams** is connected and the channel is in **Support channels**. A mention in a channel the bot has not joined does nothing.
+2. A shared channel that is not in the list is not polled. Add it. The row should show **Shared · polled**. New messages can take up to a minute.
+3. If PostHog says the app is not in your org catalog, a Teams admin must upload the SupportHog package, then you click **Retry install**. To get the package, [open a ticket with us](https://app.posthog.com/#panel=support%3Asupport%3A%3A%3Atrue). See [org catalog](/docs/support/teams#org-catalog).
+4. There is no `:ticket:` reaction in Teams. The customer must `@SupportHog`, or post in a configured support channel.
+
+## GitHub issues do not become tickets
+
+1. Install the PostHog GitHub App from the [GitHub integration page](https://app.posthog.com/integrations/github) before you open the Support GitHub tab.
+2. The repository must be in **Monitored repositories**. Issues in other repos are ignored.
+3. Confirm the connection toggle is on. **Disconnect** stops new issues and comments. Existing tickets stay.
+
+## A customer cannot see old tickets in a new browser
+
+Tickets follow the browser until you verify identity.
+
+1. Ask the customer to open the widget and click **Recover your tickets**, then enter the email they used before. The link expires in one hour.
+2. If you built a custom UI, call `posthog.conversations.restoreFromUrlToken()` when the page loads with `ph_conv_restore`. The default widget does this itself.
+3. For logged-in users, set up [identity verification](/docs/support/widget#identity-verification) so you do not depend on recovery links.
+4. Recovery emails are limited to 3 an hour for the same address. Wait, then try again.

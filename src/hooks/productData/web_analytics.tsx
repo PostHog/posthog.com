@@ -28,7 +28,7 @@ export const webAnalytics = {
     // Billed as product analytics events – Plans/calculator resolve against this billing product.
     billingType: 'product_analytics',
     teamSlug: 'web-analytics',
-    forumTopicId: 348,
+    forumTag: 'web-analytics',
     color: 'green-2',
     colorSecondary: '[#37945D]',
     wizardSupport: true,
@@ -47,9 +47,9 @@ export const webAnalytics = {
     ],
     pricingFooter: 'Even high-traffic sites pay way less than GA 360.',
     seo: {
-        title: 'Web Analytics – Track and measure traffic with PostHog',
+        title: 'Web Analytics – Privacy-friendly website analytics | PostHog',
         description:
-            'Track traffic and performance with Web Analytics – the lightweight measurement layer that feeds your agents the context to make your product self-driving.',
+            'Track website traffic, top pages, referrers, UTMs, and conversions. A simple, cookieless Google Analytics alternative with 1M events free monthly.',
     },
     /**
      * Sections rendered on the Product surface (`/web-analytics`). Each entry

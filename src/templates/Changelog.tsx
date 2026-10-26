@@ -20,6 +20,10 @@ import { AnimatePresence, motion, PanInfo } from 'framer-motion'
 import Markdown from 'components/Squeak/components/Markdown'
 import Link from 'components/Link'
 import Filters from 'components/Changelog/Filters'
+import FactorySign from 'components/Changelog/FactorySign'
+import HumanCodedStarburst from 'components/Changelog/HumanCodedStarburst'
+import { isHumanCoded } from 'components/Changelog/isHumanCoded'
+import { colors } from '@posthog/brand/colors'
 import { getChangelogDocsPath, stripPostHogOrigin } from 'components/Changelog/docsLinks'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import type { IGatsbyImageData } from 'gatsby-plugin-image'
@@ -46,6 +50,11 @@ const updateDescriptors = [
     'spectacular',
     'legendary',
 ]
+
+const humanCodedFoilGradient = `linear-gradient(125deg, ${colors.tangerine.core}, ${colors.yellow.core}, ${colors.green.core}, ${colors.tangerine.core})`
+const humanCodedFoilGradientDark = `linear-gradient(125deg, ${colors.violet.core}, ${colors.blue.core}, ${colors.green.core}, ${colors.blue.core}, ${colors.violet.core})`
+// Provisional last human-coded changelog entry: "Capture Android native crashes" (September 1, 2026).
+const humanCodedBaseline = '2026-09-01T12:57:37.996Z'
 
 type RoadmapNode = {
     id: number | string
@@ -114,6 +123,8 @@ type RoadmapNode = {
     }
     githubUrls?: any
     githubPRMetadata?: any
+    tags?: string[] | null
+    publishedAt?: string
 }
 
 type ChangelogVideo = {
@@ -177,6 +188,7 @@ const Roadmap = ({
     const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const docsPath = getChangelogDocsPath(roadmap)
+    const humanCoded = isHumanCoded(roadmap.tags)
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
 
@@ -226,7 +238,17 @@ const Roadmap = ({
 
     return (
         <motion.div
-            className="border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
+            className={`flex-shrink-0 max-w-full relative overflow-hidden shadow-2xl ${
+                humanCoded ? 'human-coded-panel' : 'border-l border-primary bg-white dark:bg-dark'
+            }`}
+            style={
+                humanCoded
+                    ? ({
+                          '--human-coded-foil-light': humanCodedFoilGradient,
+                          '--human-coded-foil-dark': humanCodedFoilGradientDark,
+                      } as React.CSSProperties)
+                    : undefined
+            }
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
@@ -234,17 +256,32 @@ const Roadmap = ({
         >
             <motion.div
                 className="h-full flex flex-col"
-                style={{ width: containerWidth }}
+                style={{ width: '100%' }}
                 initial={{ x: width }}
                 animate={{ x: 0 }}
                 exit={{ x: width }}
                 transition={{ duration: isResizing || !!initialActiveRoadmap ? 0 : 0.3, ease: 'easeInOut' }}
             >
-                <div className="flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary">
-                    <div className="flex-1">
-                        <h4 className="m-0 text-lg leading-tight">{roadmap.title}</h4>
-                        <p className="m-0 opacity-50 text-sm mt-1">{dayjs.utc(roadmap.date).format('MMMM D, YYYY')}</p>
+                <div
+                    className={`@container relative flex justify-between space-x-2 px-4 pt-4 pb-3.5 border-b border-primary ${
+                        humanCoded ? 'human-coded-panel-header' : ''
+                    }`}
+                >
+                    <div className="min-w-0 flex-1">
+                        <h4 className={`m-0 text-lg leading-tight ${humanCoded ? 'human-coded-panel-title' : ''}`}>
+                            {roadmap.title}
+                        </h4>
+                        <div className="mt-1">
+                            <p className={`m-0 text-sm ${humanCoded ? 'opacity-70' : 'opacity-50'}`}>
+                                {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                            </p>
+                        </div>
                     </div>
+                    {humanCoded && (
+                        <div className="human-coded-panel-starburst pointer-events-none absolute right-14 top-1">
+                            <HumanCodedStarburst />
+                        </div>
+                    )}
                     <aside className="">
                         {isModerator && (
                             <>
@@ -269,7 +306,7 @@ const Roadmap = ({
                         <OSButton size="md" icon={<IconX />} onClick={handleClose} />
                     </aside>
                 </div>
-                <div className="flex-1 min-h-0">
+                <div className={`flex-1 min-h-0 ${humanCoded ? 'human-coded-panel-body' : ''}`}>
                     <ScrollArea className="h-full min-h-0 [&>div]:min-h-0">
                         {roadmap.media?.gatsbyImageData && (
                             <div className="mt-4 px-4 not-prose">
@@ -361,13 +398,22 @@ const Roadmap = ({
                 </div>
 
                 {roadmap.githubPRMetadata && (
-                    <div className="px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm bg-primary border-t border-primary">
+                    <div
+                        className={`px-4 pb-4 pt-4.5 grid grid-cols-3 gap-x-3 gap-y-2 text-sm border-t border-primary ${
+                            humanCoded ? 'human-coded-panel-footer' : 'bg-primary'
+                        }`}
+                    >
+                        {/* Coding origin affects the card styling, not the six PR stats. */}
                         <ChangelogPRMetadata githubPRMetadata={roadmap.githubPRMetadata} />
                     </div>
                 )}
 
                 {roadmap.cta?.url && (
-                    <div className="mt-auto py-2 px-4 border-t border-primary">
+                    <div
+                        className={`mt-auto py-2 px-4 border-t border-primary ${
+                            humanCoded ? 'human-coded-panel-footer' : ''
+                        }`}
+                    >
                         <OSButton
                             asLink
                             to={roadmap.cta.url}
@@ -489,6 +535,7 @@ interface RoadmapCardsProps {
     hideEmpty: boolean
     initialActiveRoadmap: RoadmapNode | null
     videos: ChangelogVideo[]
+    humanCodedSince: string | null
 }
 
 const ChangelogVideo = ({ videoId, title }: { videoId: string; title: string }) => {
@@ -514,10 +561,16 @@ const RoadmapCards = ({
     hideEmpty,
     initialActiveRoadmap,
     videos,
+    humanCodedSince,
 }: RoadmapCardsProps) => {
     const { addWindow } = useApp()
     const width = 340
+    const signWidth = containerWidth ? Math.min(width, Math.max(240, Math.round(containerWidth) - 32)) : width
+    const showSignAtEnd = Boolean(humanCodedSince && containerWidth >= 700)
+    const hasMeasuredContainer = containerWidth > 0
     const containerRef = useRef<HTMLDivElement>(null)
+    const shouldTuckSignRef = useRef(false)
+    const initialScrollDoneRef = useRef(false)
 
     const getWeekOfMonth = (date: string) => {
         return Math.min(4, Math.ceil(dayjs.utc(date).date() / 7))
@@ -609,17 +662,31 @@ const RoadmapCards = ({
 
     const virtualizer = useVirtualizer({
         horizontal: true,
-        count: weeks.length,
+        count: weeks.length + (humanCodedSince ? 1 : 0),
         getScrollElement: () => {
             const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
             return viewport
         },
-        estimateSize: () => width,
+        estimateSize: (index) => (humanCodedSince && index === weeks.length ? signWidth : width),
         overscan: 5,
         gap: 15,
     })
 
+    const scrollSignBehindRoadmap = (viewport: HTMLElement) => {
+        const changelogWidth = viewport.closest('[data-changelog-window]')?.clientWidth ?? viewport.clientWidth
+        viewport.scrollTo({ left: Math.max(0, viewport.scrollWidth - changelogWidth) })
+    }
+
+    const isNearSign = (viewport: HTMLElement) => {
+        const changelogWidth = viewport.closest('[data-changelog-window]')?.clientWidth ?? viewport.clientWidth
+        return viewport.scrollWidth - viewport.scrollLeft - changelogWidth <= width + 15
+    }
+
     const handleRoadmapClick = (roadmap: RoadmapNode) => {
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        initialScrollDoneRef.current = true
+        shouldTuckSignRef.current = Boolean(showSignAtEnd && viewport && isNearSign(viewport))
+        if (viewport && shouldTuckSignRef.current) scrollSignBehindRoadmap(viewport)
         navigate(`?id=${roadmap.id}`)
         onRoadmapClick(roadmap)
     }
@@ -630,7 +697,15 @@ const RoadmapCards = ({
 
     useLayoutEffect(() => {
         virtualizer.measure()
-    }, [width])
+    }, [signWidth])
+
+    useLayoutEffect(() => {
+        if (!activeRoadmap || !shouldTuckSignRef.current || !hasMeasuredContainer) return
+        const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
+        if (!viewport) return
+        if (isNearSign(viewport)) scrollSignBehindRoadmap(viewport)
+        else shouldTuckSignRef.current = false
+    }, [activeRoadmap?.id, hasMeasuredContainer, signWidth, containerWidth])
 
     useEffect(() => {
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
@@ -663,8 +738,9 @@ const RoadmapCards = ({
         }
     }, [])
 
-    // Scroll to latest week with roadmaps on mount
+    // Position the timeline once, using the linked entry when there is one.
     useEffect(() => {
+        if (!hasMeasuredContainer || initialScrollDoneRef.current) return
         const viewport = containerRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         if (!viewport) return
 
@@ -675,9 +751,6 @@ const RoadmapCards = ({
         if (lastNonEmptyWeekIndex === -1) return
 
         const scrollToLastWeek = () => {
-            const virtualItems = virtualizer.getVirtualItems()
-            if (virtualItems.length === 0) return
-
             const targetIndex = Math.max(0, lastNonEmptyWeekIndex)
             const scrollLeft = targetIndex * (width + 15)
 
@@ -686,20 +759,36 @@ const RoadmapCards = ({
             })
         }
 
+        let frame = 0
         const handleInitialScroll = () => {
+            if (initialScrollDoneRef.current) return
+            if (virtualizer.getVirtualItems().length === 0) {
+                frame = requestAnimationFrame(handleInitialScroll)
+                return
+            }
             if (initialActiveRoadmap) {
                 const index = weeks.findIndex((week) => week.roadmaps.some((r) => r.id === initialActiveRoadmap.id))
                 if (index >= 0) {
                     scrollToIndex(index)
+                    initialScrollDoneRef.current = true
                     return
                 }
             }
+            if (showSignAtEnd) {
+                viewport.scrollTo({ left: viewport.scrollWidth - viewport.clientWidth })
+                initialScrollDoneRef.current = true
+                return
+            }
             scrollToLastWeek()
+            initialScrollDoneRef.current = true
         }
 
         const timer = setTimeout(handleInitialScroll, 100)
-        return () => clearTimeout(timer)
-    }, [weeks, width])
+        return () => {
+            clearTimeout(timer)
+            cancelAnimationFrame(frame)
+        }
+    }, [weeks, showSignAtEnd, hasMeasuredContainer, initialActiveRoadmap])
 
     const handlePlayVideo = (video: ChangelogVideo) => {
         const size = {
@@ -741,6 +830,26 @@ const RoadmapCards = ({
                     className="h-full relative"
                 >
                     {virtualizer.getVirtualItems().map((virtualColumn) => {
+                        if (virtualColumn.index === weeks.length && humanCodedSince) {
+                            return (
+                                <div
+                                    key="factory-sign"
+                                    data-factory-sign-column
+                                    className="flex justify-center"
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        height: '100%',
+                                        width: `${virtualColumn.size}px`,
+                                        transform: `translateX(${virtualColumn.start}px)`,
+                                    }}
+                                >
+                                    <FactorySign since={humanCodedSince} />
+                                </div>
+                            )
+                        }
+
                         const weekData = weeks[virtualColumn.index]
                         const monthName = dayjs.utc().year(weekData.year).month(weekData.month).format('MMMM')
                         const count = weekData.roadmaps.length
@@ -806,6 +915,7 @@ const RoadmapCards = ({
                                             ) : (
                                                 weekData.roadmaps.map((roadmap) => {
                                                     const active = activeRoadmap?.id === roadmap.id
+                                                    const humanCoded = isHumanCoded(roadmap.tags)
                                                     const teamName = roadmap.teams?.data?.[0]?.attributes?.name
                                                     const crestUrl =
                                                         roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
@@ -818,12 +928,30 @@ const RoadmapCards = ({
                                                         >
                                                             <button
                                                                 data-scheme="secondary"
-                                                                className={`group w-full text-left py-2.5 px-4 flex justify-between gap-2 ${
-                                                                    active ? 'bg-primary' : 'hover:bg-primary'
-                                                                }`}
+                                                                className={`group relative isolate w-full text-left py-2.5 pr-4 flex justify-between gap-2 ${
+                                                                    humanCoded ? 'pl-[108px]' : 'pl-4'
+                                                                } ${active ? 'bg-primary' : 'hover:bg-primary'}`}
                                                                 onClick={() => handleRoadmapClick(roadmap)}
                                                             >
-                                                                <div className="min-w-0">
+                                                                {humanCoded && (
+                                                                    <>
+                                                                        <span
+                                                                            className="human-coded-foil pointer-events-none absolute inset-0 p-[2px]"
+                                                                            style={{
+                                                                                backgroundImage: humanCodedFoilGradient,
+                                                                            }}
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                        <span
+                                                                            className="human-coded-glint pointer-events-none absolute inset-0 overflow-hidden"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                        <span className="pointer-events-none absolute left-2 top-1/2 z-10 -translate-y-1/2">
+                                                                            <HumanCodedStarburst compact />
+                                                                        </span>
+                                                                    </>
+                                                                )}
+                                                                <div className="relative min-w-0">
                                                                     <h5
                                                                         className={`m-0 text-[15px] leading-tight mb-0.5 ${
                                                                             active ? '' : 'group-hover:underline'
@@ -832,13 +960,13 @@ const RoadmapCards = ({
                                                                         {roadmap.title}
                                                                     </h5>
                                                                     {teamName && (
-                                                                        <p className="!m-0 text-[13px] text-secondary">
+                                                                        <p className="!m-0 min-w-0 truncate text-[13px] text-secondary">
                                                                             {teamName} Team
                                                                         </p>
                                                                     )}
                                                                 </div>
                                                                 {crestUrl && (
-                                                                    <div className="shrink-0 leading-[0]">
+                                                                    <div className="relative shrink-0 leading-[0]">
                                                                         <CloudinaryImage
                                                                             className="w-10"
                                                                             width={80}
@@ -887,6 +1015,7 @@ export default function Changelog({
         if (!id) return null
         return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
     })
+    const initialRoadmapForScroll = useRef(initialActiveRoadmap)
     const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
@@ -921,6 +1050,15 @@ export default function Changelog({
     const handleDrag = (percentageFromLeft: number) => {
         setWindowPercentageFromLeft(percentageFromLeft)
     }
+
+    // The sign counts from the most recent human-coded entry.
+    const humanCodedSince = useMemo(() => {
+        const timestamp = (roadmap: RoadmapNode) => new Date(roadmap.publishedAt || roadmap.date).getTime()
+        const humanCoded = data.allRoadmap.nodes.filter((roadmap: RoadmapNode) => isHumanCoded(roadmap.tags))
+        if (humanCoded.length === 0) return humanCodedBaseline
+        const since = Math.max(...humanCoded.map(timestamp))
+        return new Date(since).toISOString()
+    }, [data.allRoadmap.nodes])
 
     const filteredData = useMemo(() => {
         let filtered = data.allRoadmap.nodes
@@ -1086,6 +1224,7 @@ export default function Changelog({
                 }}
             >
                 <div
+                    data-changelog-window
                     data-scheme="secondary"
                     className="bg-primary text-primary relative h-full flex border-t border-primary"
                 >
@@ -1145,8 +1284,9 @@ export default function Changelog({
                                     containerWidth={containerWidth}
                                     activeRoadmap={activeRoadmap}
                                     hideEmpty={hideEmpty}
-                                    initialActiveRoadmap={initialActiveRoadmap}
+                                    initialActiveRoadmap={initialRoadmapForScroll.current}
                                     videos={playlistVideos}
+                                    humanCodedSince={humanCodedSince}
                                 />
                             )}
                         </div>

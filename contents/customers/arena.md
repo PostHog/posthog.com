@@ -76,7 +76,7 @@ More recently, the team added [error tracking](/error-tracking) to the mix, conn
 ## Why PostHog works for Arena
 So why PostHog? Matt's take: it started as a practical choice, and quickly became foundational.
 
-"Initially we chose PostHog because it was easy to use. It was easy to create [charts](/trends). The API was clean. Every time I hit a snag like, _how do you hook this up with Next.js in some weird edge case?_, there was always great [documentation](/docs)."
+"Initially we chose PostHog because it was easy to use. It was easy to create [charts](/product-analytics). The API was clean. Every time I hit a snag like, _how do you hook this up with Next.js in some weird edge case?_, there was always great [documentation](/docs)."
 
 As Arena grew, so did the stakes. More experiments, more feature flags, and far more data. Over the past six months alone, event volume increased 19×. 
 

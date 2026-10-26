@@ -5,19 +5,18 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconPlug, IconCode, IconBrackets, IconBolt, IconSend, IconPerson, IconProfile, IconGraph, IconNotebook, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconPlug, IconBrackets, IconBolt, IconSend, IconPerson, IconProfile } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
-Product analytics answers what people actually do in your product. Build trends, funnels, retention, paths, stickiness, and lifecycle insights on the events you already send to PostHog, then save them to dashboards, share them, and get alerted when they move.
+Product analytics helps you understand how people use your product. Use the events you capture to explore adoption, conversion, and retention with trends, funnels, paths, stickiness, and lifecycle insights. Save insights to dashboards, share them, and set alerts when metrics change.
 
-Because it runs on the same events, persons, and properties as the rest of PostHog, every number you look at is one click away from the [session replay](/docs/session-replay) behind it, the [feature flag](/docs/feature-flags) that gated it, or the [experiment](/docs/experiments) that changed it. Those same insights feed [Self-driving](/docs/self-driving), which watches your saved insights for regressions and files a report when one starts slipping.
+Product analytics uses the same events, persons, and properties as the rest of PostHog. You can investigate a change in an insight with related [session replays](/docs/session-replay), see which [feature flags](/docs/feature-flags) users saw, or measure the results of an [experiment](/docs/experiments).
 
 <OSButton variant="primary" asLink to="/docs/product-analytics/start-here">Get started</OSButton>
 
 ## Where you can use it
 
-You build and explore insights in the PostHog web app. The other surfaces let you query the same data, act on it, and pull it into your own tools.
+Build and explore insights in the PostHog web app, query the same data from an MCP client, or use the API in your own tools.
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
 
@@ -36,15 +35,6 @@ You build and explore insights in the PostHog web app. The other surfaces let yo
       <p className="m-0 font-bold text-primary">PostHog MCP</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Run trends, funnels, retention, and SQL queries from any MCP client or AI editor.</p>
       <a href="/docs/product-analytics/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Run queries →</a>
-    </div>
-  </div>
-
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Read the Self-driving reports about metric regressions and decide what to do about them.</p>
-      <a href="/docs/product-analytics/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review regressions →</a>
     </div>
   </div>
 
@@ -102,19 +92,3 @@ Product analytics runs on the events your product sends to PostHog and the perso
   </div>
 
 </div>
-
-## How product analytics works with Self-driving
-
-Your product analytics data is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A scout watches your saved funnel, retention, lifecycle, stickiness, and paths insights for rate regressions – a conversion step that started dropping, retention that flattened – and turns what it finds into a report.
-
-<CustomSelfDrivingLoop
-  stages={[
-    { label: 'Insights', icon: IconGraph, color: '#F54E00', description: 'Your saved funnels, retention, and lifecycle insights' },
-    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Rate regressions surfaced by a scout' },
-    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with the replays and events behind the drop' },
-    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'The report is routed to a person, not an agent' },
-    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Read the evidence and choose what to do' },
-  ]}
-/>
-
-The scout stops at the report. A conversion drop can be a bug, a pricing change, a bad release, or seasonality, so deciding what it means is a judgment call rather than a one-line code change – it doesn't open a pull request on its own. You build and explore insights in the [PostHog web app](/docs/product-analytics/surfaces/web-app) and read the reports in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.

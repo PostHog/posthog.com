@@ -842,7 +842,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 // Main Component
 // ============================================
 
-export default function Home2() {
+export default function Home2({ headingTag: Heading = 'h1' }: { headingTag?: 'h1' | 'h2' }) {
     const { siteSettings } = useApp()
     const videoRef = useRef<WistiaVideoRef>(null)
     const tvScreenRef = useRef<HTMLDivElement>(null)
@@ -979,7 +979,7 @@ export default function Home2() {
                 {/* Video Hero Section */}
                 <div className="flex flex-col @2xl:flex-row gap-8">
                     <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8 @2xl:pt-16">
-                        <h1 className="text-4xl font-bold mb-4">The AI platform for engineers</h1>
+                        <Heading className="text-4xl font-bold mb-4">The AI platform for engineers</Heading>
                         <p className="text-xl mb-8 mt-0">
                             Debug products. Ship features faster. <br />
                             With all user and product data in one stack.

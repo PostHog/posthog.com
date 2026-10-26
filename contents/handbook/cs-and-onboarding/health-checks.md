@@ -21,7 +21,7 @@ analytics at the company or workspace level rather than an individual person.  T
 do however need to [implement group tracking](/docs/product-analytics/group-analytics#how-to-create-groups) in their PostHog SDK.  Customers who haven't 
 done this may end up paying for Group Analytics but not able to use it.
 
-We have a [Vitally](https://posthog.vitally-eu.io/) risk indicator added to customers who are paying for Group Analytics 
+You can [ask @PostHog in Slack](/docs/posthog-ai/surfaces/slack) or use the [PostHog MCP](/docs/model-context-protocol) to check who is paying for Group Analytics 
 but not using it.  
 
 To help the customer you should figure out whether they are B2B or could otherwise benefit
@@ -127,7 +127,7 @@ It is important that hitting the flags endpoint does not block an application fr
 ### Server side local evaluation
 Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
-As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key) than other flag requests.
+As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-secret-api-key) than other flag requests.
 
 ## Do they have a custom implementation that's causing issues?
 

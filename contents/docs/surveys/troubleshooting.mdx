@@ -69,7 +69,7 @@ In production, using a [reverse proxy](/docs/advanced/proxy) can help prevent th
 
 ## Survey response is not showing up on my [custom insight, webhook or action]
 
-Since February 25, [we changed the way that survey responses are captured](/docs/surveys/implementing-custom-surveys#survey-response-capture). If you're not seeing them, it's might be because the `$survey_response` property is no longer captured.
+Since February 25, [we changed the way that survey responses are captured](/docs/surveys/implementing-custom-surveys#capture-survey-responses). If you're not seeing them, it's might be because the `$survey_response` property is no longer captured.
 
 To fix this, you need to now use the format `event.properties['$survey_response_<question_id>']` to access the survey response.
 

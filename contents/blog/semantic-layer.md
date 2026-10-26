@@ -42,7 +42,7 @@ The most important thing to understand about it is what it doesn't do. It doesn'
 It fixes is three kinds of knowledge that only exists as tribal memory:
 
 * **What our metrics are:** MRR isn't just "revenue", it's a specific calculation over a specific source.
-* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-warehouse/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid, e.g. they have been deprecated. 
+* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-pipelines/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid, e.g. they have been deprecated. 
 * **How the data joins together:** The Stripe customer ID maps to an organization property, but only after it's reformatted, and nothing tells you that except the analyst who figured it out last time.
 
 If you're a small company with a handful of tables you interact with regularly, you probably know where everything is. But, as you grow, you add more data sources and models, the meaning of those tables stop being obvious, least of all to an AI agent seeing your schema for the first time.
@@ -56,7 +56,7 @@ If you're a small company with a handful of tables you interact with regularly, 
 
 ## Where this lives: The context warehouse
 
-The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your [Stripe data](/docs/cdp/sources/stripe), and data models. The semantic layer makes sure agents know what your data means and can interpret it correctly.
+The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your [Stripe data](/docs/data-pipelines/sources/stripe), and data models. The semantic layer makes sure agents know what your data means and can interpret it correctly.
 
 A catalog actually stores the semantic layer. What integrates it so fully is that it is **just SQL.** Every definition shows up as ordinary tables. Metrics are a table. There's no bespoke "catalog API" for an agent to learn; if it can run `execute-sql`, it already knows how to read the entire semantic layer. Discovery is a query, not an integration.
 
@@ -111,7 +111,7 @@ SQL metrics are defined over a [saved view](/docs/data-warehouse/views). Create 
 
 ## What's next for semantic layering in PostHog
 
-The PostHog semantic layer is in beta right now, you can work with it through [MCP tools](/docs/semantic-layer/mcp-tools), PostHog's UI, and [SQL](/docs/semantic-layer/query).
+The PostHog semantic layer is now generally available. You can work with it through [MCP tools](/docs/semantic-layer/mcp-tools), PostHog's UI, and [SQL](/docs/semantic-layer/query).
 
 We're measuring success around this by checking:
 
@@ -121,4 +121,4 @@ We're measuring success around this by checking:
 
 As more of what [we build becomes agent-driven](/newsletter/2030-shaped-software), reliable data is the difference between an AI you can trust and one you can't.
 
-The semantic layer is in beta. Get started with [these instructions](/docs/semantic-layer/start-here), or setup the [PostHog MCP](/mcp) and ask your agent to recommend a new semantic layer catalog.
+The semantic layer is generally available. Get started with [these instructions](/docs/semantic-layer/start-here), or setup the [PostHog MCP](/mcp) and ask your agent to recommend a new semantic layer catalog.

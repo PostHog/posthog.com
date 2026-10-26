@@ -37,7 +37,7 @@ When defining your funnel metric, you only specify the events that should occur 
 
 Use this to track metrics like total event count or summed values (e.g., revenue). Here's how it works:
 
-1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
+1. We aggregate the chosen value for each user using your selected method: count, sum, average, min, max, or a unique count of users, sessions, or groups.
 2. We then compute the _mean_ of those values for each variant.
 3. This mean is used to determine the statistical difference between variants.
 
@@ -101,7 +101,7 @@ Common use cases:
 
 ## Outlier handling
 
-You can limit the impact of extreme values by clamping metric data at specified percentile thresholds using configurable lower and upper bounds. Values below the lower bound are replaced with the lower bound value, and values above the upper bound are replaced with the upper bound value. No data is excluded, and all users remain in the calculation. This is available for mean, funnel, and ratio metrics.
+You can limit the impact of extreme values by clamping metric data at specified percentile thresholds using configurable lower and upper bounds. Values below the lower bound are replaced with the lower bound value, and values above the upper bound are replaced with the upper bound value. No data is excluded, and all users remain in the calculation. This is available for mean and ratio metrics.
 
 This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
 
@@ -179,16 +179,16 @@ Experiments always compare per-user values between variants, so there's no raw t
 
 ## Set an explicit conversion window
 
-If you don't set a conversion window, trend metrics count conversions from exposure through the experiment end date with no upper bound. This means a user who converts 45 days after exposure is counted the same as one who converts in 5 minutes. Set a window that matches your product's natural conversion cycle. If users typically convert within a week, use a 7-day window.
+If you don't set a conversion window, metrics count conversions from exposure through the experiment end date with no upper bound. This means a user who converts 45 days after exposure is counted the same as one who converts in 5 minutes. Set a window that matches your product's natural conversion cycle. If users typically convert within a week, use a 7-day window.
 
 Two other behaviors to know:
 
-- **Conversions count from first exposure.** Metric events are only counted if they happen after the user's first exposure. If a user is re-exposed later (e.g., flag evaluated from both web and server SDK), the end of the window extends from that later exposure, but earlier conversions are still included.
+- **Conversions count from first exposure.** The conversion window is anchored to the user's first exposure: only metric events between the first exposure and the end of the window are counted. Later re-exposures (e.g., the flag evaluated again from another SDK) don't move or extend the window.
 - **The window extends past the experiment end date.** A 7-day window on an experiment ending March 1 counts conversions through March 8 for users exposed on March 1.
 
 ## Shared metrics
 
-Create a shared metric to easily reuse a funnel or a trend metric across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
+Create a shared metric to reuse a metric across experiments. All metric types can be shared: funnel, mean, ratio, and retention. This is ideal for key company metrics like conversion, revenue, churn, and more.
 
 To create one, go to the [shared metrics tab](https://app.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
 

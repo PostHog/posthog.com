@@ -1,37 +1,32 @@
-# Q3 2026
+# Q4 2026
 
-## Objective 1: Make HogQL-backed data exportable
+## Objective 1: 10% usage comes from HogQL-modeled batch exports
 
 ### Motivation
-* Enables a lot, if not all, products to be data sources of batch exports
-  * Any dashboards, effectively replacing CSV exports (and offering ANY format exports)
-  * Any warehouse views
-  * And more...
-* Have a single consistent way of exporting any type of data
-  * If a new product adds new data sources using HogQL queries, they get batch exports “for free”
-* Allow for more flexibility in the data models that can be exported
+* Understand how far can we get with HogQL as an interface for batch exports.
+* Take ownership of parts of PostHog that could be better served by batch exports.
 
 ### What we’ll ship
-* On-demand export of HogQL-backed data to supported destinations
-* Scheduled sync of HogQL-backed data to supported destinations
+* Complete support for HogQL in scheduled and on demand batch exports.
+* Skill/MCP improvements to better direct agents to use HogQL batch exports.
 
-## Objective 2: Agent-driven batch exports
+## Objective 2: Understand and optimize our product's growth
 
 ### Motivation
-* Improving experience for AI-pilled teams
-* Make it easier for agents to create, validate and run batch exports
+* Without knowing what's costing us:
+  * We can't optimize effectively.
+  * We can't know how to improve our pricing strategy.
 
 ### What we’ll ship
-* Skills for creating, validating, debugging, updating batch exports
-* Integration UI for connecting to destinations
+* Understand which areas of batch exports cost us the most.
+  * Ideally: Cost breakdown per team, batch export, and even individual runs.
+* Act on the findings to deliver cost savings.
 
-## Objective 3: The pipeline must grow
+## Objective 3: Scaling batch exports to many more customers
 
 ### Motivation
-* Reduce time to deployment
-* Ensure current customers are well served
-* Faster, accurate, and self-driven debugging
+* Increase confidence that our pipeline can handle 10x our current volume.
 
 ### What we'll ship
-* Work with devex on implementing CI improvements
-* Better internal observability so we know what to improve
+* Experiment and apply new architectures.
+* Test different file formats and/or compression algorithms.

@@ -138,9 +138,9 @@ const topFeatures: CarouselSlide[] = [
                                 ),
                             },
                             {
-                                label: 'No extra billing',
+                                label: 'Free to ingest',
                                 description:
-                                    'Heatmap data is captured alongside regular analytics events and does not contribute to your bill.',
+                                    'Heatmap data does not contribute to your bill. The free plan collects data for up to 3 pages you choose. Pay-as-you-go unlocks unlimited pages and viewing heatmaps from the toolbar.',
                             },
                         ]}
                     />

@@ -1,4 +1,4 @@
-The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session and user information from each request and tags all events captured during that request with relevant metadata.
+The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session and user information from each request and adds relevant properties to events captured during that request.
 
 ### Basic setup
 
@@ -7,17 +7,30 @@ Add the middleware to your Django settings. If your app uses Django authenticati
 ```python
 MIDDLEWARE = [
     # ... other middleware
-    'posthog.integrations.django.PosthogContextMiddleware',
+    "posthog.integrations.django.PosthogContextMiddleware",
     # ... other middleware
 ]
 ```
 
-The middleware uses the globally configured `posthog` client by default, so you don't need to create or pass it a separate client instance.
+The middleware uses the globally configured `posthog` client by default. If you create your own client with `Posthog(...)`, pass it to the middleware with `POSTHOG_MW_CLIENT`. Otherwise the middleware sends exceptions to the unconfigured global client, and they don't reach PostHog:
+
+```python
+# settings.py
+from posthog import Posthog
+
+POSTHOG_MW_CLIENT = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    enable_exception_autocapture=True,
+)
+```
+
+`POSTHOG_MW_CLIENT` only selects where the middleware sends the exceptions it captures. Events you capture through another client go to that client.
 
 The middleware automatically extracts and uses:
 
-- **Session ID** from the `X-POSTHOG-SESSION-ID` header, if present
-- **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header, if present, falling back to the authenticated Django user's `pk` (Django's primary-key alias, which works with custom user models)
+- **Session ID** from the `X-POSTHOG-SESSION-ID` header when you enable `POSTHOG_MW_TRUST_TRACING_HEADERS`
+- **Distinct ID** from the authenticated Django user's `pk` (Django's primary-key alias, which works with custom user models), or from the `X-POSTHOG-DISTINCT-ID` header when you enable `POSTHOG_MW_TRUST_TRACING_HEADERS`
 - **User email** from the authenticated Django user's `email` as `email`
 - **Current URL** as `$current_url`
 - **Request method** as `$request_method`
@@ -25,7 +38,14 @@ The middleware automatically extracts and uses:
 - **Forwarded IP address** from `X-Forwarded-For` as `$ip`
 - **User agent** from `User-Agent` as `$user_agent`
 
-The session and distinct ID headers are sanitized before use. Empty values are ignored, control characters are removed, values are trimmed, and values are capped at 1000 characters.
+The middleware ignores the session and distinct ID headers by default because clients can control them. To use them as analytics context, enable them in your Django settings:
+
+```python
+# settings.py
+POSTHOG_MW_TRUST_TRACING_HEADERS = True
+```
+
+Don't use these headers for authentication or authorization. The middleware sanitizes trusted header values before use. It ignores empty values, removes control characters, trims values, and caps them at 1000 characters.
 
 All events captured during the request (including exceptions) include these properties and are associated with the extracted session and distinct ID.
 
@@ -47,11 +67,11 @@ def identify_posthog_user(sender, request, user, **kwargs):
 
 Every capture later in that request is then attributed to the user who just logged in. Requests made after login don't need this. The middleware sees the authenticated user from the start.
 
-If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers. You must also set `POSTHOG_MW_TRUST_TRACING_HEADERS = True` in Django to accept them.
 
 ### Exception capture
 
-By default, the middleware captures exceptions and sends them to PostHog's error tracking using the globally configured `posthog` client. This includes Django view exceptions that Django converts into error responses.
+By default, the middleware captures exceptions and sends them to PostHog's error tracking using `POSTHOG_MW_CLIENT`, or the globally configured `posthog` client when you leave it unset. This includes Django view exceptions that Django converts into error responses.
 
 Disable this by setting:
 
@@ -60,25 +80,81 @@ Disable this by setting:
 POSTHOG_MW_CAPTURE_EXCEPTIONS = False
 ```
 
-### Adding custom tags
+Set `POSTHOG_MW_CAPTURE_EXCEPTIONS = None` to inherit the global client's `enable_exception_autocapture` setting. When you omit `POSTHOG_MW_CAPTURE_EXCEPTIONS`, the middleware preserves the existing Django default and captures exceptions.
 
-Use `POSTHOG_MW_EXTRA_TAGS` to add custom properties to all requests:
+### Capture Django REST Framework exceptions
+
+This integration requires version `7.69.0` or later of the Python SDK.
+
+Django REST Framework (DRF) converts many exceptions into responses before Django middleware can observe them. Add PostHog's DRF exception handler to capture these handled errors:
 
 ```python
 # settings.py
-def add_user_tags(request):
-    # type: (HttpRequest) -> Dict[str, Any]
-    tags = {}
-    if hasattr(request, 'user') and request.user.is_authenticated:
-        # Use pk instead of id so this works with custom User primary keys.
-        tags['user_id'] = str(request.user.pk)
-        tags['email'] = request.user.email
-    return tags
-
-POSTHOG_MW_EXTRA_TAGS = add_user_tags
+REST_FRAMEWORK = {
+    # ... other DRF settings
+    "EXCEPTION_HANDLER": "posthog.integrations.drf.exception_handler",
+}
 ```
 
-#### Filtering requests
+Keep `PosthogContextMiddleware` enabled. The middleware adds request properties and identity to the active context, while the DRF handler captures handled API exceptions. The handler captures responses with a `5xx` status by default and ignores expected `4xx` responses. If DRF doesn't handle an exception, Django re-raises it and the middleware captures it instead.
+
+If you already use a custom DRF exception handler, wrap it in an application module:
+
+```python
+# your_app/exception_handlers.py
+from posthog.integrations.drf import create_exception_handler
+from your_app.api import existing_exception_handler
+
+exception_handler = create_exception_handler(existing_exception_handler)
+```
+
+Then point DRF to the wrapper:
+
+```python
+# settings.py
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "your_app.exception_handlers.exception_handler",
+}
+```
+
+To capture selected `4xx` responses, create a handler with `capture_4xx=True` and an exception filter:
+
+```python
+# your_app/exception_handlers.py
+from posthog.integrations.drf import create_exception_handler
+
+
+def capture_auth_errors(exception, response, context):
+    return response.status_code >= 500 or response.status_code in {401, 403}
+
+
+exception_handler = create_exception_handler(
+    capture_4xx=True,
+    exception_filter=capture_auth_errors,
+)
+```
+
+The DRF handler follows `POSTHOG_MW_CAPTURE_EXCEPTIONS` and `POSTHOG_MW_REQUEST_FILTER`. You can also pass `capture_exceptions=True` or `capture_exceptions=False` to `create_exception_handler()` to override the middleware setting.
+
+### Add custom properties
+
+Use `POSTHOG_MW_EXTRA_PROPERTIES` to add custom properties to all requests:
+
+```python
+# settings.py
+def add_user_properties(request):
+    # type: (HttpRequest) -> Dict[str, Any]
+    properties = {}
+    if hasattr(request, "user") and request.user.is_authenticated:
+        # Use pk instead of id so this works with custom User primary keys.
+        properties["user_id"] = str(request.user.pk)
+        properties["email"] = request.user.email
+    return properties
+
+POSTHOG_MW_EXTRA_PROPERTIES = add_user_properties
+```
+
+### Filter requests
 
 Skip tracking for certain requests using `POSTHOG_MW_REQUEST_FILTER`:
 
@@ -87,29 +163,29 @@ Skip tracking for certain requests using `POSTHOG_MW_REQUEST_FILTER`:
 def should_track_request(request):
     # type: (HttpRequest) -> bool
     # Don't track health checks or admin requests
-    if request.path.startswith('/health') or request.path.startswith('/admin'):
+    if request.path.startswith("/health") or request.path.startswith("/admin"):
         return False
     return True
 
 POSTHOG_MW_REQUEST_FILTER = should_track_request
 ```
 
-### Modifying default tags
+### Modify default properties
 
-Use `POSTHOG_MW_TAG_MAP` to modify or remove default tags:
+Use `POSTHOG_MW_PROPERTIES_MAP` to modify or remove default properties:
 
 ```python
 # settings.py
-def customize_tags(tags):
+def customize_properties(properties):
     # type: (Dict[str, Any]) -> Dict[str, Any]
     # Remove URL for privacy
-    tags.pop('$current_url', None)
+    properties.pop("$current_url", None)
     # Add custom prefix to method
-    if '$request_method' in tags:
-        tags['http_method'] = tags.pop('$request_method')
-    return tags
+    if "$request_method" in properties:
+        properties["http_method"] = properties.pop("$request_method")
+    return properties
 
-POSTHOG_MW_TAG_MAP = customize_tags
+POSTHOG_MW_PROPERTIES_MAP = customize_properties
 ```
 
 ### Complete configuration example
@@ -118,35 +194,35 @@ POSTHOG_MW_TAG_MAP = customize_tags
 # settings.py
 def add_request_context(request):
     # type: (HttpRequest) -> Dict[str, Any]
-    tags = {}
-    if hasattr(request, 'user') and request.user.is_authenticated:
-        tags['user_type'] = 'authenticated'
+    properties = {}
+    if hasattr(request, "user") and request.user.is_authenticated:
+        properties["user_type"] = "authenticated"
         # Use pk instead of id so this works with custom User primary keys.
-        tags['user_id'] = str(request.user.pk)
+        properties["user_id"] = str(request.user.pk)
     else:
-        tags['user_type'] = 'anonymous'
+        properties["user_type"] = "anonymous"
 
     # Add request info
-    tags['user_agent'] = request.META.get('HTTP_USER_AGENT', '')
-    return tags
+    properties["user_agent"] = request.META.get("HTTP_USER_AGENT", "")
+    return properties
 
 def filter_tracking(request):
     # type: (HttpRequest) -> bool
     # Skip internal endpoints
-    return not request.path.startswith(('/health', '/metrics', '/admin'))
+    return not request.path.startswith(("/health", "/metrics", "/admin"))
 
-def clean_tags(tags):
+def clean_properties(properties):
     # type: (Dict[str, Any]) -> Dict[str, Any]
     # Remove sensitive data
-    tags.pop('user_agent', None)
-    return tags
+    properties.pop("user_agent", None)
+    return properties
 
-POSTHOG_MW_EXTRA_TAGS = add_request_context
+POSTHOG_MW_EXTRA_PROPERTIES = add_request_context
 POSTHOG_MW_REQUEST_FILTER = filter_tracking
-POSTHOG_MW_TAG_MAP = clean_tags
+POSTHOG_MW_PROPERTIES_MAP = clean_properties
 POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 ```
 
-All events captured within the request context automatically include the configured tags and are associated with the session and user identified from the request headers or Django authentication.
+All events captured within the request context automatically include the configured properties. They use the authenticated Django user as the distinct ID, or the session and distinct ID from request headers when you enable `POSTHOG_MW_TRUST_TRACING_HEADERS`.
 
 The middleware supports both sync (WSGI) and async (ASGI) Django applications. In async mode, it uses Django's `request.auser()` API when available to avoid synchronous user access.

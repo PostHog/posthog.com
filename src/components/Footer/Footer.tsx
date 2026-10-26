@@ -145,7 +145,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'CDP',
-                url: '/docs/cdp',
+                url: '/docs/data-pipelines',
             },
             {
                 title: 'Data warehouse',
@@ -159,11 +159,11 @@ const linklist: IProps[] = [
     },
     {
         title: 'Community',
-        url: '/questions',
+        url: '/forum',
         items: [
             {
                 title: 'Questions?',
-                url: '/questions',
+                url: '/forum',
             },
             {
                 title: 'Guides',
@@ -303,7 +303,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Support',
-                url: '/questions',
+                url: '/forum',
             },
             {
                 title: 'Careers',

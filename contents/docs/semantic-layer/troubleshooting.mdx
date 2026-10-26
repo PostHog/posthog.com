@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import BetaCallout from './_snippets/beta-callout'
-
-<BetaCallout />
-
 ## I don't see the semantic layer tools in my MCP client
 
 If the `data-catalog-*` tools are missing:
@@ -45,13 +41,12 @@ Two things to know before you rely on this:
 
 Reject the proposal with `data-catalog-relationship-reject-prepare` / `-execute`. Rejection persists forever and the pair is never re-proposed – in either direction.
 
-The flip side: **rejection has no undo** in beta. If you rejected a proposal by mistake and need the join anyway, create it directly as a [data warehouse join](/docs/data-warehouse/join) – the catalog's rejection only suppresses re-proposals, not manual joins.
+The flip side: **rejection has no undo**. If you rejected a proposal by mistake and need the join anyway, create it directly as a [data warehouse join](/docs/data-warehouse/join) – the catalog's rejection only suppresses re-proposals, not manual joins.
 
 ## Where's the UI?
 
 Open the command palette with `Cmd/Ctrl + K` and search for **Data Catalog**. From there you can browse and manage your metrics, certifications, and relationships – reviewing and promoting what agents have proposed without leaving PostHog. You can still do everything through MCP tools and SQL if you prefer. Also worth knowing:
 
-- Tool names and behavior may change between releases
 - `last_run_at` is updated at most every 30 minutes, so treat it as approximate
 
 Feedback on any of this shapes what general availability looks like – [tell us what's missing](https://app.posthog.com/home#supportModal).

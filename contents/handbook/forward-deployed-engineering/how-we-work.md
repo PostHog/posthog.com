@@ -28,6 +28,8 @@ Pricing depends on shape, effort, and commercial context, so exact numbers live 
 
 Never invent an exact number on the spot. If a customer asks, say you'll get them a quote within a day and route it through the account owner.
 
+Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside.  This needs approval from Simon (Ben B as backup).
+
 ## Principles
 
 These are the defaults we bring to every engagement to deliver delightful customer outcomes.

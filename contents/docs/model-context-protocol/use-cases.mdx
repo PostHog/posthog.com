@@ -9,6 +9,8 @@ import PromptExample from "./_snippets/prompt-example.tsx";
 
 Once you've [connected the PostHog MCP server](/docs/model-context-protocol#get-started-in-30-seconds), your agent can read and write across PostHog's products. Here's a tour of the most useful things to ask – click the copy icon next to any prompt to grab it for your own agent, then adapt it to your project.
 
+For a real example, read how [Runable](/customers/runable) uses agents in Claude Code, Codex, and its own product to run SQL, rank errors, and build dashboards in PostHog.
+
 ## Single-prompt examples
 
 ### Investigate bugs and errors
@@ -152,6 +154,23 @@ Drop into raw queries when you need precision. See the [SQL guide](/docs/data-wa
 <PromptExample
   prompt="Which cohorts contain users who made a purchase in the last week?"
   outcome="Cross-references system.cohorts with purchase events."
+/>
+
+### Install PostHog from chat
+
+Ask your AI assistant to set up PostHog in your codebase – no terminal required. The wizard runs in the cloud, makes the code changes, and opens a pull request for you to review. See the [AI wizard docs](/docs/ai-engineering/ai-wizard) for more on how the wizard works.
+
+<PromptExample
+  prompt="Install PostHog in my GitHub repository"
+  outcome="Connects to your GitHub, starts a wizard run in the cloud, and returns a pull request link for you to review."
+/>
+<PromptExample
+  prompt="Set up PostHog analytics in my Next.js app on the posthog/demo repo"
+  outcome="Targets a specific repository, runs the wizard, and shows progress updates until the PR is ready."
+/>
+<PromptExample
+  prompt="Check the status of my PostHog setup"
+  outcome="Polls an active wizard run and returns the current stage, progress, and pull request link when available."
 />
 
 ### Build CDP destinations and workflows

@@ -4,6 +4,7 @@ import { SectionComponentProps } from '../types'
 import Glow from 'components/Glow'
 import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { PRODUCT_SURFACE_H1 } from '../helpers'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, overview, screenshots, hogs } = productData ?? {}
@@ -74,7 +75,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
 
                 <div className="space-y-4 @6xl/reader-content:order-1">
                     <div>
-                        <h1 className="!text-4xl font-bold !leading-tight">{overview?.title || name}</h1>
+                        <h1 className={PRODUCT_SURFACE_H1}>{overview?.title || name}</h1>
                         {overview?.description && <p className="leading-relaxed">{overview.description}</p>}
                     </div>
                     <div>

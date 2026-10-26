@@ -1,0 +1,45 @@
+## Q4 2026 Goals
+
+- Hit CSM Net Revenue Retention (NRR) of 110% using quarterly comparison method (CSMs)
+- Hit and track all team revenue goals (Seb)
+
+### Build out a travel planning platform for the GTM team to plan client visits more efficiently <TeamMember name="Luke Baber" photo />
+
+**We'll know we're successful when**:
+- We can easily answer the question "who should I visit" when traveling to a city.
+- Team members can plan out their itinerary, dinners, and which customers to prioritize in a unified platform.
+- You get notified in Slack whenever one of your customers is close to an IRL PostHog event that is happening.
+
+### Help every CSM show up consistently for every customer <TeamMember name="Sebastian Muriel" photo />
+Build a tool that pulls every interaction you've had with each customer in your book. It then shows a weekly view of who is due for outreach, so no customer goes more than a month without a value nugget from you.
+
+**We'll know we're successful when**:
+- No customer goes more than 30 days without meaningful contact from a PostHog human.
+- Attention is spread as evenly as possible across your whole book.
+- You no longer keep a mental note of who's due for some thoughtful outreach.
+
+### Create a framework for engaging unengaged customers <TeamMember name="Steven Truong" photo />
+Build a tool that helps surface signals we haven't looked at historically to help try and engage with unengaged customers
+
+**We'll know we're successful when**:
+- We have a list of active signals that allows us to have additional levers to reach out to unengaged customers with.
+- These signals allow us to help provide value up front by closing the gaps on what customers are missing in their account.
+- We don't rely on reactive signals as the primary driver for outreach.
+
+### A call coach that helps you prep and remembers what to work on <TeamMember name="Sean O'Shaughnessy" photo />
+When one of us asks for feedback on a call in Slack, everyone who replies grades it against their own idea of a good call, and remembering what to fix next time is left to the person who asked. We also have a CSM call scorecard in Gong, but it's not clear it's being filled in. I reviewed a set of team calls that received feedback in Slack and turned what separated the good ones from the rest into a rubric and an initial "call-prep" skill. This quarter I'll build the loop and for the team's benefit: a scout that grades recorded CSM calls against that one rubric and manages a monthly peer review. Each month it picks each CSM's lowest-scored call (Simon says no volunteering the easy ones!) and assigns a teammate to watch it and give feedback, so everyone gives and gets the same number of reviews. A small pilot group reviews calls by hand while it's being built, so the scout has human scores to be checked against. The first team-wide round runs in December, and it goes monthly from January.
+
+**We'll know we're successful when**:
+- There's one rubric, built on the Gong CSM scorecard and the initial set of peer-reviewed in Slack calls
+- On calls scored by both the scout and a human (the dataset from Slack plus the pilot's), the scout's top "work on this" matches the human's on at least 2 of every 3, and every miss goes back into the rubric
+- A skill for call-prep briefs that start with what to work on, taken from the team member's last reviewed call 
+- Anti-goal: not a performance review. The point is everyone gets better at calls, in a consistent way that is coached each time a team member seeks to prep for an upcoming call
+- Stretch: The first team-wide round runs in December; the scout picks a call for every CSM who has one and assigns a reviewer, and every review is done before the holidays
+
+### Build a setup wizard that tells customers what to cut, keep, and add <TeamMember name="Jack Tomei" photo />
+
+A guided wizard, shipped through Christophe's concierge mode, that helps customers fit their PostHog setup to what they're actually trying to do. The customer picks their role (founder, product engineer, product manager, data engineer, or CTO to start, with more to follow) and states their goals. The wizard then asks a short set of questions: are they trying to cut spend, replace other tools in their stack with PostHog, or get more out of what they already pay for? It finishes with recommendations based on their own project: savings where they're overpaying, and expansion where PostHog can replace something they pay for elsewhere. An upgrade to (or replacement for) the current wizard audit: the same idea, but tailored to the customer's role and goals instead of one review for everyone.
+
+**We'll know we're successful when**:
+- The wizard is live in concierge mode with all 5 role paths, and adding a new role is a config change, not a rebuild
+- Customers can find the wizard in the PostHog UI and run it themselves, without a CSM having to point them to it

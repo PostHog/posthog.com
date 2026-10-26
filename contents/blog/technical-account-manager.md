@@ -37,7 +37,7 @@ Products have gotten broader and more technical. Seemingly [everyone is an engin
 
 - Installing PostHog might mean integrating [feature flags](/feature-flags) into page render logic and writing SQL queries across multiple sources using complex joins.
 
-Engineers are skeptical of how much "non-technical" people can help with all this. TAMs must add technical value or engineers will tune them out.
+Engineers are skeptical of how much "non-technical" people can help with all this. TAMs must [add technical value](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer#buying-software-is-not-fun) or engineers will tune them out.
 
 Along with this, SaaS has moved away from simple subscriptions. There is much more usage or credit-based pricing. AI accelerated this trend. This means there is more work to do to figure out what the correct amount of spend is for a given account, as well as work to do to optimize that spend. There's an expectation TAMs will help with this.
 

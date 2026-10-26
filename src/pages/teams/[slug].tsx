@@ -32,6 +32,7 @@ import Header from 'components/Team/Header'
 import Profile, { ProfileData } from 'components/Team/Profile'
 import Roadmap from 'components/Team/Roadmap'
 import TeamImage from 'components/Team/TeamImage'
+import CloudinaryImage from 'components/CloudinaryImage'
 import {
     StickerPineappleYes,
     StickerPineappleNo,
@@ -140,10 +141,13 @@ type TeamPageProps = {
     params: {
         slug: string
     }
+    pageContext: {
+        slug?: string
+    }
 }
 
 export default function TeamPage(props: TeamPageProps) {
-    const slug = props?.params?.slug || (props?.params as any)?.['*']
+    const slug = props?.params?.slug || (props?.params as any)?.['*'] || props?.pageContext?.slug
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
@@ -686,13 +690,13 @@ export default function TeamPage(props: TeamPageProps) {
                     <div className="not-prose mb-8">
                         <Fieldset legend="Community question alerts">
                             <label htmlFor="slackChannel" className="text-sm opacity-75 mb-1">
-                                New questions in this team's subscribed topics get posted to this Slack channel. Use the
-                                channel ID (in Slack: channel name → About → bottom of the panel), not the #name. You
-                                must also add the Community bot app to the channel. If the app is not a member, Slack
-                                rejects the post and no alert appears. Leave blank to stop notifications. Manage which
-                                topics this team subscribes to on{' '}
-                                <Link to="/community/alerts" state={{ newWindow: true }}>
-                                    /community/alerts
+                                New forum posts in the topics and tags this team follows get posted to this Slack
+                                channel. Use the channel ID (in Slack: channel name → About → bottom of the panel), not
+                                the #name. You must also add the Community bot app to the channel. If the app is not a
+                                member, Slack rejects the post and no alert appears. Leave blank to stop notifications.
+                                Manage which topics and tags this team follows on{' '}
+                                <Link to="/forum/alerts" state={{ newWindow: true }}>
+                                    /forum/alerts
                                 </Link>
                                 .
                             </label>
@@ -793,6 +797,10 @@ export default function TeamPage(props: TeamPageProps) {
 
                         {loading ? (
                             <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
+                        ) : slug === 'platform-features' ? (
+                            <figure className="rotate-2 max-w-md w-full mx-auto @2xl/reader-content:mr-0">
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Polaroid_Restoration_974fb5ccb9.png" />
+                            </figure>
                         ) : (
                             <TeamImage
                                 values={values}
@@ -955,7 +963,7 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {body && (
                     <>
-                        <h2>Handbook</h2>
+                        {slug !== 'demand-gen' && <h2>Handbook</h2>}
                         <MDXProvider components={{ PrivateLink, SmallTeam }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>

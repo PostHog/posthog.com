@@ -13,7 +13,6 @@ dayjs.extend(relativeTime)
 
 type QuestionsTableProps = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
-    pinnedQuestions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
     fetchMore: () => void
     hideLoadMore?: boolean
@@ -135,7 +134,7 @@ const Row = ({
         <div ref={fetchMore ? ref : null} key={question.id} className="py-2.5">
             <Link
                 state={currentPage && { previous: currentPage }}
-                to={`/questions/${permalink}`}
+                to={`/forum/p/${permalink}`}
                 className={`${className} group flex items-center relative px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
             >
                 <div className="grid grid-cols-12 items-center w-full">
@@ -220,7 +219,6 @@ export const QuestionsTable = ({
     showBody,
     showAuthor = true,
     sortBy,
-    pinnedQuestions,
     showStatus = true,
 }: QuestionsTableProps) => {
     const questionsFiltered = questions.data.length > 0 && questions.data.filter(Boolean)
@@ -231,26 +229,6 @@ export const QuestionsTable = ({
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
                 <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
             </li>
-            {pinnedQuestions?.data?.length > 0 ? (
-                <li className="list-none">
-                    {pinnedQuestions.data.filter(Boolean).map((question) => {
-                        return (
-                            <Row
-                                showStatus={showStatus}
-                                key={question.id}
-                                className={className}
-                                currentPage={currentPage}
-                                showTopic={showTopic}
-                                showBody={showBody}
-                                showAuthor={showAuthor}
-                                question={question}
-                                sortBy={sortBy}
-                                pinned
-                            />
-                        )
-                    })}
-                </li>
-            ) : null}
             {questionsFiltered
                 ? questionsFiltered.map((question, index) => {
                       return (

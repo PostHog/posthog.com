@@ -18,15 +18,24 @@ Before anything else, point the customer at the **PostHog wizard audit**:
 npx @posthog/wizard audit all
 ```
 
-It runs the same checks our FDE team would do by hand. It's read-only, takes a few minutes, and produces a report (a markdown file plus a shareable PostHog notebook) that names exactly what's wrong and what to fix first. Plenty of teams find their own engineers can take it from there.
+It runs the same checks our FDE team would do by hand. It's read-only, takes a few minutes, and produces a report (a Markdown file plus a shareable PostHog notebook) that names exactly what's wrong and what to fix first. Plenty of teams find their own engineers can take it from there.
 
 We also have a growing library of **[PostHog skills](https://github.com/PostHog/skills)** you can point an agent at to do a lot of this yourself. They cover far more than audits: migrations, config cleanup, spotting what's misconfigured, and plenty else. Most work directly against a customer's instance through the MCP tools, so you don't always need their codebase to dig in. To run them against the customer's own data, do it on their behalf by [impersonating their account](/handbook/company/security#impersonating-users).
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
+## Self-serve and price our standard FDE packages
+
+For certain types of FDE engagements, TAEs / TAMs can self-serve and price standard packages without needing to wait for FDE to scope it out manually. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+
+- **PostHog Foundations 0-1**, for customers in a PoC or trial who would benefit from FDE assistance to ensure they are production-ready from day 1. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/foundations/">PostHog Foundations 0-1 proposal builder</PrivateLink>.
+- **Managed Migrations**, for customers moving to PostHog from another product analytics tool. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink>.
+
+If the customer doesn't fit a standard package, bring it to #team-fde instead.
+
 ## If the customer still needs hands-on help
 
-Before you route anything to us, gather the context we need to get started - it saves you a round-trip. If you find yourself blocked on answering any of the below, just bring it to us and we'll figure it out:
+Before you route anything to us, gather the context we need to get started – it saves you a round-trip. If you find yourself blocked on answering any of the below, just bring it to us and we'll figure it out:
 
 1. **Start with the gap or pain point.** What problem does the customer have today, and what's the business and operational context around it? It also helps to know the dynamic between the business side and their engineers.
    - **If it's to implement a new use case, share your discovery.** Tell us which [use cases](/handbook/growth/use-case-selling/use-case-selling) are in play now, how they could lead into others later, and one layer deeper on each: if they say they want Growth & Marketing, what do they actually mean, and why? The discovery questions in the library cover where the customer is today, what happens if they don't solve it, and what outcomes they want. Agreeing on a set number of use cases up front also helps us keep the scope of the technical work contained.

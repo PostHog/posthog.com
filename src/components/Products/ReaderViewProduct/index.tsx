@@ -20,7 +20,7 @@ export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { ProductNavItem, SectionComponentProps } from './types'
 export type { MenuTab } from 'components/ReaderView'
-export { LabeledList, FilterTag, InlineCode } from './helpers'
+export { LabeledList, FilterTag, InlineCode, PRODUCT_SURFACE_H1 } from './helpers'
 
 interface ProductReaderViewProps {
     productHandle: string

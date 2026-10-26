@@ -555,9 +555,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             // read off `user.profile`, and notifications come from the separate
                             // GET /api/profile/notifications call below. Don't re-add them without
                             // a consumer that actually reads them off `user` at boot.
-                            topicSubscriptions: {
-                                fields: ['slug', 'label'],
-                            },
                             postLikes: {
                                 fields: ['id'],
                             },

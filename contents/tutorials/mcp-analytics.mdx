@@ -97,7 +97,7 @@ It also unlocks signals the manual approach can't easily capture, each a one-lin
 
 Remember to drain queued events on shutdown by calling `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` handler, since you own the client's lifecycle.
 
-> **Note:** `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – so pin a specific version while we iterate. Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).
+> **Note:** `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – so pin a specific version while we iterate. Running a custom dispatcher with no server object to wrap? See the custom dispatcher section of your [language's installation page](/docs/mcp-analytics/installation).
 
 On MCP SDK v2, one thing does need changing: if your `identify`, `intentFallback`, `eventProperties` or `beforeSend` callbacks read HTTP headers, read them through the exported `getRequestHeaders(extra)`. The two majors put headers in different places, and a v1-shaped read returns `undefined` on v2 – so `identify()` returns `null` and every event goes out anonymous. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2).
 

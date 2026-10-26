@@ -39,6 +39,8 @@ Default to a concise summary; share the full file only when the customer specifi
 ## Do and don't
 
 - **Do** treat AI output as a hypothesis until you've checked it against the source data.
+- **Do** check product claims against the current docs yourself. A docs search through an MCP tool can return an outdated page, and one bad input can skew the whole analysis.
+- **Do** ask the model for an adversarial review of its own answer before you rely on it.
 - **Do** label machine-generated content clearly in shared notes and tickets.
 - **Do** send customers a concise summary of verified facts.
 - **Don't** paste a confident AI summary into a ticket as if it were confirmed analysis.

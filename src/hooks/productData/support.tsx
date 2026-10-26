@@ -12,7 +12,28 @@ import {
     IconSparkles,
     IconSupport,
 } from '@posthog/icons'
+import { Tweet } from 'components/Tweet'
+import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { applications, topFeatures } from './support/slides'
+
+const SupportTweet = ({ id }: SectionComponentProps) => (
+    <section id={id} className="scroll-mt-20 not-prose">
+        <SectionHeading>We didn't pay him to say this</SectionHeading>
+        <Tweet
+            name="Mathew Chan"
+            handle="itsmattchan"
+            avatar="https://pbs.twimg.com/profile_images/1905465377280151552/VmDQ3bmf_400x400.jpg"
+            avatarAlt="Mathew Chan"
+            url="https://x.com/itsmattchan/status/2107843274643788213"
+            alertMessage="Go say it on X – this is just a screenshot in HTML form."
+        >
+            Just had my first holy shit moment with @posthog - I had a feedback form wired up to their support ticket
+            feature, and because I had "self-driving" turned on and wired up to my codebase, posthog read the support
+            ticket, identified the fix, then opened a PR. This feels like the future. Well done lads, well done. 👏
+        </Tweet>
+    </section>
+)
 
 export const support = {
     Icon: IconSupport,
@@ -53,6 +74,14 @@ export const support = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'social-proof',
+            name: "We didn't pay him to say this",
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+            component: SupportTweet,
         },
         {
             slug: 'applications',

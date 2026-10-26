@@ -1,0 +1,43 @@
+---
+title: Agent instructions
+sidebar: Docs
+showTitle: true
+---
+
+Agent instructions are standing instructions that PostHog cloud agents read at the start of a task run. They work like an `AGENTS.md` or `CLAUDE.md` file on your computer, but PostHog stores them and gives them to every cloud run that needs them.
+
+Use them to tell agents how your team works. For example:
+
+- Which repository owns which part of your product
+- Which checks to run before a pull request
+- How to write commit messages, pull request descriptions, and code comments
+- Your personal preferences, such as the language or the level of detail in replies
+
+The repository's own `AGENTS.md`, `CLAUDE.md`, and Cursor rules still apply. Use agent instructions for guidance that is not in a repository, or that applies to more than one repository.
+
+## Set your instructions
+
+Go to [Settings > AI > Agent instructions](https://app.posthog.com/settings/project-task-agent-instructions). The section has two fields:
+
+| Field | Who can edit it | Where it applies |
+|---|---|---|
+| **Project instructions** | Project admins | Every cloud task run in the project |
+| **My instructions** | Every project member, for their own text | Cloud task runs that you start |
+
+Each field accepts up to 20,000 characters of Markdown. Agents read the project instructions first, then your personal instructions.
+
+## Which runs use them
+
+| Run | Project instructions | My instructions |
+|---|---|---|
+| A run that a person starts, from [PostHog AI](/docs/posthog-ai), [Slack](/docs/slack), PostHog web, or a [PostHog Desktop cloud run](/docs/posthog-desktop/cloud-runs) | Yes | Yes, from the person who started the run |
+| [Self-driving](/docs/self-driving) runs, such as scouts, report research, and implementation | Yes | No |
+| Scheduled runs and workflows | Yes | No |
+
+Local runs in PostHog Desktop do not use these settings. They read the instruction files on your computer.
+
+## Privacy and safety
+
+- Anyone who continues a task that you started can see your personal instructions. Do not put secrets or private information in them.
+- An agent in a cloud sandbox cannot change agent instructions. This stops one run from writing instructions for later runs.
+- A change applies to runs that start after you save it.

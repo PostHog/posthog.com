@@ -19,7 +19,6 @@ import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
-import { TWIG_URL } from '../../constants'
 
 export const productAnalytics = {
     ...getTool('product_analytics'),
@@ -27,10 +26,10 @@ export const productAnalytics = {
     type: 'product_analytics',
     categoryName: 'Analytics',
     teamSlug: 'product-analytics',
-    forumTopicId: 349,
+    forumTag: 'product-analytics',
     pocketGuideVolume: 'product-analytics',
-    // One setting powers both the Product Analytics Learn landing and its active-tab navigation.
-    interactiveLearningUrl: TWIG_URL,
+    // Product Analytics has a learning hub, separate from the story reader.
+    learnHub: true,
     color: 'blue',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
@@ -38,9 +37,9 @@ export const productAnalytics = {
     pricingDescription:
         'Product analytics is billed on events captured – pageviews, clicks, custom events, and everything autocapture picks up. You get 1 million events free every month.',
     seo: {
-        title: 'Product Analytics – Understand your product with PostHog',
+        title: 'Product Analytics – Funnels, retention, and paths | PostHog',
         description:
-            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+            'Track funnels, retention, user paths, and feature adoption with Product Analytics. Autocapture events, query with SQL, and get 1M events free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     /**

@@ -109,13 +109,13 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 
 ## Objections
 
-### "You don't have distributed tracing or metrics. We need full observability."
+### "We need full observability – traces, metrics, and logs in one tool."
 
 **Follow-up:** What's your current tracing setup, and is it integrated with your logs already, or are they separate tools?
 
-**Answer:** Honest – PostHog doesn't ship distributed tracing or metrics today. Both are on the roadmap, coming this summer. If full observability with traces + metrics + logs in one tool is non-negotiable today, Datadog or Grafana's LGTM+ stack is the right pick and we should say so. What PostHog *does* offer is logs connected to product analytics, session replay, error tracking, and feature flags – context layers no other observability tool ships. Many teams adopt PostHog Logs alongside an existing tracing solution and consolidate later.
+**Answer:** Honest – PostHog ships [distributed tracing](/docs/distributed-tracing) today, billed on the same per-GB meter as Logs, but [metrics](/docs/metrics) is still alpha. Tracing has no service map and no profiling, and there's no infrastructure or Kubernetes monitoring. If those are non-negotiable today, Datadog or Grafana's LGTM+ stack is the right pick and we should say so. What PostHog *does* offer is logs and traces connected to product analytics, session replay, error tracking, and feature flags – context layers no other observability tool ships. Many teams adopt PostHog Logs alongside an existing tracing solution and consolidate later.
 
-**Proof point:** Logs ingest via OpenTelemetry, so an OTel-instrumented backend can send logs to PostHog and traces wherever – the standards make hybrid setups easy.
+**Proof point:** Logs and traces both ingest via OpenTelemetry, so an OTel-instrumented backend points its existing exporter at PostHog with no proprietary SDK – and the standards keep hybrid setups easy.
 
 ### "Better Stack claims 30x cheaper than Datadog and has MCP, AI SRE, and a full observability + IRM bundle. What makes PostHog different?"
 

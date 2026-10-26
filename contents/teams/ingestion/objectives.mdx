@@ -1,47 +1,51 @@
-## Q3 2026 objectives
+## Q4 2026 objectives
 
-### Scale PersonHog for person property updates
+### Roll out PersonHog to production
 
-Person property updates are the next bottleneck to prepare for scale, and PersonHog should own them end to end.
+PersonHog is nearly feature-complete and we feel we're close to running it in production.
 
-- Ship the person property update service to handle all person property writes
-- Ship PersonHog Writer to flush the WAL Kafka backlog to Postgres
-- Ship the distinct ID reconciliation service to own distinct ID → person mapping, merges, and splits
-- Build operational tooling for etcd management, write validation, and cache/data validation
-- Validate ingestion team 2's write path against PersonHog
+We want to fully switch over to improve the performance of person processing. Rolling out PersonHog will also let us plan further work on the scalability and efficiency of the persons store.
 
-### Harden the persons Postgres database
+- Switch all ingestion pipelines and lanes to perform person processing through PersonHog in all production environments
+- Prepare the documentation, dashboards, runbooks, tools, and everything else needed to operate PersonHog with high availability in production
+- Delete the Postgres person processing implementation from the ingestion consumer
 
-The persons database needs headroom and consistency before it can scale further.
+### Ship the Rust ingestion consumer wherever it makes sense
 
-- Eliminate schema drift across prod US, prod EU, and dev
-- Upgrade Postgres to unlock the higher Aurora storage limit (additional 128TB)
-- Migrate integer ID columns nearing their limit to bigint
-- Partition the person distinct ID table
+Early trials of the Rust ingestion consumer showed that we can operate it with far fewer consumer processes than the Node.js pipeline. This lets us run fewer Kafka partitions and have smoother deployments. With the consumer-processor model, we can also scale the ingestion processors to many more pods, and faster, which gives us much more headroom for future growth and new traffic patterns. The new Rust consumer is also the ideal place for shared ingestion features (event restrictions, overflow, and automatic Kafka fallback), so we can roll them out across all ingestion pipelines.
 
-### Faster, more reliable CI/CD
+We want to finish the implementation and roll it out to every pipeline where the consumer-processor model fits. The busiest pipelines come first, because that's where the scaling and performance gains are largest.
 
-CI/CD is a recurring blocker to quick, safe iteration.
+- Deploy the Rust ingestion consumer in all `analytics` lanes across all environments
+- Deploy the Rust ingestion consumer for the smaller stateless pipelines: `heatmaps` and `clientwarnings`
+- [Maybe] Deploy the Rust ingestion consumer in all `errortracking` lanes across all environments
+- [Maybe] Deploy the Rust ingestion consumer in all `ai` lanes across all environments
 
-- Break ingestion into separate services and isolate ingestion code within the Node.js world
-- Add granular tests for ingestion and expand the e2e testing structure
-- Scope deployments to changed code so ingestion doesn't redeploy on every Node image change
-- Add canary deployments on the team 2 lane, gated by acceptance tests
+### Ship a basic capture fallback
 
-### Add redundancy and fallback to capture
+We still can't quickly fail over to an alternative Kafka or WarpStream cluster during outages.
 
-We should never drop customer events, even when MSK is degraded.
+We want a basic fallback in capture so that customers don't lose data. We're explicitly not solving the switchover at the ingestion level. It's complicated, and reducing ingestion lag during Kafka outages is a secondary priority.
 
-- Use WarpStream as a fallback for MSK in capture
-- Add a circuit breaker for MSK in capture
-- Define a replay process that preserves ordering guarantees, with runbooks
-- Run a successful failover drill on dev
+- Refactor capture to make config management for Kafka topics and producers easier
+- Implement a single-environment-variable Kafka cluster switch for capture's Kafka producers
 
-### Help users self-troubleshoot ingestion issues
+### Finish the rollout of the `/i/v1/` endpoints
 
-Most missing-data tickets stem from issues on the customer's side and consume valuable engineering time.
+We implemented a new `/i/v1/analytics/events` capture endpoint. It gives clients a better interface and lets us process events more efficiently in capture. While working on it, we found that the `ai` pipeline also needed a new `/i/v1/ai/events` endpoint to handle AI events with multimodal context. This grew into a major three-team initiative that needed significant involvement from us.
 
-- Ship an ingestion MCP for tracing events through the pipeline
-- Add an event ingestion tracker to follow events end to end through the pipeline
-- Improve ingestion warnings and surface them as signals
-- Build skills that let customers diagnose and resolve common ingestion issues themselves
+We want to switch the major SDKs to the `v1` endpoints for the `analytics` and `ai` pipelines. That way we can start processing events more efficiently and shift our focus to other work in Q1 2027.
+
+- Web and mobile SDKs switched over to the `v1` endpoints for analytics events
+- Major server-side SDKs (Python, Node, Go, and Rust) switched over to the `v1` endpoints for analytics and AI events
+
+### Improve team operations
+
+We're facing new bottlenecks because the cost of writing code has dropped faster than the cost of shipping it to production, and it's easy to get overwhelmed by all the output from the bots. We're also handling more traffic than ever, and our reliability requirements have grown.
+
+We need to adapt to this new reality so that we keep delivering top-quality software in ingestion while maintaining high productivity and morale in the team.
+
+- Write a set of principles and a guide on how we work together as a team
+- Implement ingestion-specific agent workflows to make shipping code less taxing
+- Adapt runbooks to make them easier to use for both agents and humans
+- Review the on-call schedule so it works better for the team

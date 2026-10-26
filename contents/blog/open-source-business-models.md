@@ -10,6 +10,10 @@ author:
 tags:
   - Open source
   - Startups
+  - Founders
+  - Sales and pricing
+crosspost:
+  - Founders
 ---
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L1Ovbzs7vyo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
