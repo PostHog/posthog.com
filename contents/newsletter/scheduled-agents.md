@@ -4,7 +4,7 @@ date: 2026-10-26
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/[PLACEHOLDER_scheduled-agents].png
+  https://res.cloudinary.com/dmukukwp6/image/upload/website_blog_0d50816e8a.png
 featuredImageType: full
 tags:
   - Product engineers
@@ -34,7 +34,7 @@ Take [this agent-generated string length limit fix](https://github.com/PostHog/p
 
 Instead, Andy queued it to merge at 09:19 UTC and moved on to other tasks. It reached prod about an hour later, and the next morning a scheduled agent confirmed the fix held across 200K sandbox-creation log lines using a prompt similar to our [PR follow-up skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md).
 
-![PLACEHOLDER: Validating in prod by hand (5 context switches) vs with agents (1 context switch)](PLACEHOLDER)
+![Validating in prod by hand (5 context switches) vs with agents (1 context switch)](https://res.cloudinary.com/dmukukwp6/image/upload/Dev_loops_graphic_validating_fixes_in_prod_d511522eda.png)
 
 It's even more useful in the opposite case. One time, an agent [fixed](https://github.com/PostHog/posthog-js/pull/4683) an error that looked like it came from our browser SDK, affecting about 45k users a week. A later validation report showed the error was firing more than before from our Node SDK, which has its own copy of the same utility – exactly the kind of thing a human might not have remembered to check.
 
@@ -56,11 +56,11 @@ We use agents to find recurring themes in user feedback from in-app surveys, sup
 
 When our sales team set up a scheduled agent to post to #feature-request-feed, Raquel from our Blitzscale team said that these automations had been less than useful in her experience:
 
-![PLACEHOLDER: Slack message from Raquel skeptical of automated feature requests](PLACEHOLDER)
+![Slack message from Raquel skeptical of automated feature requests](https://res.cloudinary.com/dmukukwp6/image/upload/3136e9b7_58cf_42b9_a305_297d6a097b80_1268x388_a884f020d0.jpg)
 
 [Tyler Crandall](/community/profiles/34069), the TAM who created the feed, updated the prompts to factor in urgency. Each one now gets rated based on the call transcript and customer history, which makes up for the facial expressions and voice cues we'd rely on if we did this manually. Plus, the agent can reference its own ratings as context for future runs, too:
 
-![PLACEHOLDER: Agent-posted feature request with validity and urgency scores](PLACEHOLDER)
+![Agent-posted feature request with validity and urgency scores](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_144687_7ed790365d.png)
 
 ### Steal this prompt:
 
@@ -80,7 +80,7 @@ There are times where even *we* forget to add instrumentation for product analyt
 
 It works through recently merged PRs and looks for user-facing actions that are missing event tracking. When it finds one, it cross-checks our live PostHog data to confirm the event never fires, and then files a report with a fix. A coding agent then picks up that report and opens a PR to [add the instrumentation](https://github.com/PostHog/ai-plugin/blob/main/skills/instrument-product-analytics/SKILL.md).
 
-![PLACEHOLDER: How a scout adds event tracking to merged PRs](PLACEHOLDER)
+![How a scout adds event tracking to merged PRs](https://res.cloudinary.com/dmukukwp6/image/upload/Dev_loops_graphic_instrumentation_gaps_alt_C_PR_checklist_29381060ab.png)
 
 It's useful to have a separate agent doing the actual implementation work. The scheduled agent's original report recommended adding 2 different capture calls in the frontend for [this PR](https://github.com/PostHog/posthog/pull/95414). The coding agent, which has more specialized context, found that multiple sources (including MCP and API callers) sent the same request. It chose a better pattern to instrument these as a single capture on server-side, with session IDs and access method.
 
@@ -100,7 +100,7 @@ Ask me where our code, analytics, and reports live before writing anything.
 
 Flaky tests are a huge bottleneck for engineers working with AI. They cause intermittent CI failures (usually from hard-to-control factors like timing, shared state, or dependencies). These two were the biggest obstacles slowing down our engineers according to our Q2 internal DevEx survey:
 
-![PLACEHOLDER: DevEx survey results – slow builds/CI and flaky tests are the top blockers](PLACEHOLDER)
+![DevEx survey results – slow builds/CI and flaky tests are the top blockers](https://res.cloudinary.com/dmukukwp6/image/upload/7d4a199f_9d94_4e1f_b0df_518f0ee10e7e_1632x506_44609f49fc.png)
 
 To help with this, we added a scheduled agent that checks for newly quarantined Trunk flaky tests every 3 hours and creates (or updates) reports that are actionable enough to be turned into PRs. Since July, it's filed 72 diagnostic reports, and 11 of those have led to merged fixes like [this one](https://github.com/PostHog/posthog/pull/90867), which a coding agent wrote using our [skill for fixing flaky tests](https://github.com/PostHog/posthog/blob/master/.agents/skills/fixing-flaky-tests/SKILL.md).
 
@@ -126,9 +126,9 @@ Our monorepo's [AGENTS.md](https://github.com/PostHog/posthog/blob/master/AGENTS
 
 The problem with all of these is that if you prompt agents to send reports, they'll always try to send *something*. We already have a few thousand reports written by our agents since we shipped it in July, and that’s way too many for anyone on the team to read.
 
-![PLACEHOLDER: Slack thread where Raul blocks off focus time for DevEx feedback pruning](PLACEHOLDER)
+![Slack thread where Raúl blocks off focus time for DevEx feedback pruning](https://res.cloudinary.com/dmukukwp6/image/upload/84a45bcc_1858_40cd_9663_a1a03e68ec2a_1262x701_ccb0179e9a.webp)
 
-Raul, an engineer on our DevEx team, used to have an automation to triage these by grouping reports into themes, checking if the root issue has already been fixed, roughly ranking by frequency and impact, then committing the notes to a file in our private DevEx repo.
+Raúl, an engineer on our DevEx team, used to have an automation to triage these by grouping reports into themes, checking if the root issue has already been fixed, roughly ranking by frequency and impact, then committing the notes to a file in our private DevEx repo.
 
 Instead, he now just checks on these once a month for a couple of hours, and the reports still lead to low-hanging fixes from across the team, like [rewording a preflight warning](https://github.com/PostHog/posthog/pull/91694) or [updating how code owners are labeled](https://github.com/PostHog/posthog/pull/100166). It's a good example of how some tasks are still better suited for AI-assisted human review, even if they *could* be solved with scheduled automations.
 
@@ -156,7 +156,7 @@ When a human reviewer dismissed its reports with handwritten feedback, the agent
 
 - *__After:__ A flag removed from* `FEATURE_FLAGS` *in the window usually means the feature reached everyone, which is rollout, not a GA declaration.*
 
-![PLACEHOLDER: Turn any agent into a self-improving loop](PLACEHOLDER)
+![Turn any agent into a self-improving loop](https://res.cloudinary.com/dmukukwp6/image/upload/Dev_loops_graphic_improving_agent_prompts_generic_loop_v2_b393015612.png)
 
 ### Steal this:
 
