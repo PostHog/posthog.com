@@ -1,0 +1,88 @@
+# Starting apps. A case names one with `workspace.fixture`, and `{folder}` in its
+# task and criteria resolves to that fixture's folder.
+#
+# Most fixtures live in PostHog/docs-eval-fixtures, built from wizard-workbench
+# apps with every PostHog and wizard hint removed, so the agent can't copy an
+# existing install (see wizard-workbench services/evals/docs-evals/prepare-fixtures.ts).
+# `source` is the app it was copied from. A fixture with no `ref` isn't built yet:
+# the runner refuses to launch cases that use it.
+
+web-vite:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: web-vite
+    source: apps/basic-integration/javascript-web/saas-dashboard
+
+react-router-7:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: react-router-7
+    source: apps/basic-integration/react-router/rrv7-starter
+
+react-vite:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: react-vite
+    source: apps/basic-integration/tanstack-router/tanstack-router-file-based-saas
+
+node-express:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: node-express
+    source: apps/basic-integration/javascript-node/express-todo
+
+python-stdlib:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: python-stdlib
+    source: apps/basic-integration/python/meeting-summarizer
+
+react-native-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: react-native-app
+    source: apps/basic-integration/react-native/react-native-saas
+
+android-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: android-app
+    source: apps/basic-integration/android/Jetchat
+
+ios-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: ios-app
+    source: apps/basic-integration/swift/hackers-ios
+
+# Gauge's public Next.js App Router monorepo. It has no PostHog code, so it needs
+# no fixtures repo and is the quickest first run.
+acme-nextjs:
+    repo: https://github.com/gauge-sh/acme-dispatch-nextjs
+    ref: 2e2646819890345903cfa03eb0e2442a417883ed
+    folder: apps/web
+
+# No starting app exists yet for these. Their cases stay `status: draft` until
+# someone adds a small app to the fixtures repo and pins `ref`.
+remix-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: remix-app
+flutter-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: flutter-app
+kmp-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: kmp-app
+php-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: php-app
+ruby-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: ruby-app
+go-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: go-app
+java-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: java-app
+rust-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: rust-app
+dotnet-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: dotnet-app
+elixir-app:
+    repo: https://github.com/PostHog/docs-eval-fixtures
+    folder: elixir-app

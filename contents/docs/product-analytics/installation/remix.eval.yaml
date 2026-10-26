@@ -1,0 +1,33 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, javascript, react, remix]
+# No starting app exists for the remix-app fixture yet.
+status: draft
+
+cases:
+    - id: install
+      workspace:
+          fixture: remix-app
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from
+          environment variables rather than writing them into the code. Make sure the
+          app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              {folder}/package.json lists posthog-js and @posthog/react as
+              dependencies.
+          required-steps-done: >-
+              All of these are done. (1) {folder}/vite.config.ts adds
+              "posthog-js" and "@posthog/react" to ssr.noExternal. (2) A provider
+              component, such as PHProvider in {folder}/app/provider.tsx, calls
+              posthog.init with the project token and an api_host option inside a
+              useEffect, so PostHog only initializes after hydration, and renders
+              PostHogProvider from @posthog/react with client={posthog}. (3)
+              {folder}/app/root.tsx imports that provider and wraps the app's
+              children with it in the Layout component. Cite the files and lines.
+          uses-defaults: >-
+              The posthog.init options include a defaults option set to a date
+              string (the current recommended value is '2026-08-30'). Cite the
+              file and line(s).

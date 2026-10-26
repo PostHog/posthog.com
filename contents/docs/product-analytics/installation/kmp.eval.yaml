@@ -1,0 +1,18 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, kmp]
+status: draft
+
+cases:
+    - id: install
+      workspace:
+          fixture: kmp-app
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from the app's build configuration rather than hard-coding them in source. Make sure the app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              The shared module's build.gradle.kts in {folder}/ adds com.posthog:posthog-kmp to the commonMain dependencies.
+          required-steps-done: >-
+              The app calls PostHog.setup() once, early in its lifecycle, with PostHogConfig(apiKey = <project token>, host = <PostHog host>) and a PostHogContext. On Android, setup runs in an Application subclass's onCreate with PostHogContext(this) and that class is registered with android:name in AndroidManifest.xml; on iOS, web and JVM targets it uses the no-argument PostHogContext(). Cite the file and line(s).

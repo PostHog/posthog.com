@@ -1,0 +1,20 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, rust]
+status: draft
+
+cases:
+    - id: install
+      workspace:
+          fixture: rust-app
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token from an environment variable rather than writing it into the code. Make sure the app still builds or starts without errors when you're done.
+      criteria:
+          use: [stays-in-folder, builds]
+          token-from-env: >-
+              The project token is read from an environment variable. No PostHog project token appears as a literal anywhere in {folder}/.
+          sdk-installed: >-
+              {folder}/Cargo.toml lists the posthog-rs crate under [dependencies].
+          required-steps-done: >-
+              The app creates a client with posthog_rs::client, passing the project token (awaited when using the default async client), and calls flush() or shutdown() on the client before the program exits so buffered events are sent. Cite the file and line(s).

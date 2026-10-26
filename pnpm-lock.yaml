@@ -732,6 +732,9 @@ importers:
       wrangler:
         specifier: ^4.67.0
         version: 4.67.0
+      yaml:
+        specifier: ^2.8.1
+        version: 2.8.1
 
   plugins/gasby-remark-lazy-imgix: {}
 

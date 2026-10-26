@@ -1,0 +1,99 @@
+name: Docs evals
+
+# Free checks run on every PR that touches docs or the runner. Paid Gauge runs only
+# start when someone asks for one; see evals/README.md.
+
+on:
+    pull_request:
+        paths:
+            - 'contents/**'
+            - 'evals/**'
+            - '.github/workflows/evals.yml'
+    workflow_dispatch:
+        inputs:
+            page:
+                description: 'Docs path to run, such as product-analytics/identify (empty runs every active case)'
+                required: false
+            base_url:
+                description: 'Where link, inline and skill read pages'
+                required: false
+                default: 'https://posthog.com'
+            launch:
+                description: 'Launch the runs (spends Gauge credits). Unchecked only plans.'
+                type: boolean
+                default: false
+
+permissions:
+    contents: read
+
+jobs:
+    validate:
+        name: Validate eval files
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Validate
+              run: pnpm evals validate
+
+            - name: Unit tests
+              run: pnpm test:evals
+
+    run:
+        name: Run evals on Gauge
+        if: github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-latest
+        timeout-minutes: 120
+        env:
+            GAUGE_API_TOKEN: ${{ secrets.GAUGE_API_TOKEN }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Install the Gauge CLI
+              run: npm install -g @withgauge/cli@0.23.0
+
+            - name: Plan or launch
+              env:
+                  PAGE: ${{ inputs.page }}
+                  BASE_URL: ${{ inputs.base_url }}
+                  LAUNCH: ${{ inputs.launch }}
+              run: |
+                  args=(run --base-url "$BASE_URL")
+                  if [ -n "$PAGE" ]; then args+=(--page "$PAGE"); fi
+                  if [ "$LAUNCH" = "true" ]; then args+=(--yes); fi
+                  pnpm evals "${args[@]}"
+
+            - name: Upload results
+              if: always()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: evals-results
+                  path: evals/results/
+                  if-no-files-found: ignore

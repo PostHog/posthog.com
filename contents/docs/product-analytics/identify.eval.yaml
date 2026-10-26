@@ -1,0 +1,30 @@
+version: 1
+owner: product-analytics
+tags: [instrumentation, javascript, identify]
+status: active
+
+cases:
+    - id: identify-on-login-web
+      workspace:
+          fixture: web-vite
+      pages:
+          - docs/product-analytics/installation/web
+      task: |
+          PostHog isn't set up yet in the app in {folder}/. Set it up and make
+          sure events are tied to the signed-in team member, including when
+          the app is reloaded while already signed in. When someone signs out,
+          the next person using the same browser must not be counted as them.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          identify-after-login: >-
+              After a successful login (src/pages/login.js, src/api.js or
+              store.login in src/store.js) the code calls
+              `posthog.identify(<member id or email>, { ...person properties })`
+              with a stable per-user ID and person properties such as email and
+              name. Cite the line.
+          identify-on-load: >-
+              On app load, when `store.state.currentUser` is already set, the
+              code also calls `posthog.identify` with the same distinct ID.
+          reset-on-logout: >-
+              The sign-out path (the logout button in src/components/shell.js,
+              api.logout or store.logout) calls `posthog.reset()`.

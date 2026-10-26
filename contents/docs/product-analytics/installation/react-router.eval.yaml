@@ -1,0 +1,34 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, javascript, react, react-router]
+status: active
+
+cases:
+    - id: install
+      workspace:
+          fixture: react-router-7
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from
+          environment variables rather than writing them into the code. Make sure the
+          app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              {folder}/package.json lists both posthog-js and @posthog/react as
+              dependencies.
+          required-steps-done: >-
+              Both of these are done. (1) {folder}/vite.config.ts adds
+              'posthog-js' and '@posthog/react' to ssr.noExternal. The app's
+              config already sets noExternal to true for builds and to ['gsap']
+              otherwise, so the two packages must be added to that list (or
+              noExternal otherwise made to cover them in dev). (2) An
+              {folder}/app/entry.client.tsx file (the app has none to start with,
+              so it must be created) calls posthog.init from posthog-js with the
+              project token and an api_host option, and wraps the hydrated
+              <HydratedRouter /> in PostHogProvider from @posthog/react with
+              client={posthog}. Cite the files and lines.
+          uses-defaults: >-
+              The posthog.init options include a defaults option set to a date
+              string (the current recommended value is '2026-08-30'). Cite the
+              file and line(s).

@@ -1,0 +1,30 @@
+version: 1
+owner: product-analytics
+tags: [instrumentation, javascript, groups]
+status: active
+
+cases:
+    - id: group-by-project-web
+      workspace:
+          fixture: web-vite
+      pages:
+          - docs/product-analytics/installation/web
+      task: |
+          PostHog isn't set up yet in the app in {folder}/. Set it up, and I
+          want to analyze usage per project, not just per user: when someone
+          opens a project, the events they send while working in it should be
+          tied to that project, and the project should show up in PostHog with
+          its name.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          group-call: >-
+              src/pages/project-detail.js (or code it calls when a project is
+              opened) calls `posthog.group('project', <project id>, { name:
+              <project name>, ... })`, using the project's id as the group key
+              and passing at least one group property in the third argument.
+              Cite the line.
+          no-manual-groups-per-event: >-
+              The agent relies on the web SDK associating subsequent events in
+              the session with the group after `posthog.group()`, rather than
+              only adding `$groups` to some events; or it explains this
+              behavior in its final message.

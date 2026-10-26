@@ -1,0 +1,24 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, wizard]
+status: active
+
+cases:
+    - id: one-command-setup
+      task: |
+          Is there a single command I can run to set up PostHog product analytics in
+          my Next.js app, instead of wiring it up by hand? What is it, and where do
+          I run it?
+      criteria:
+          use: [answers-directly]
+          gives-command: >-
+              The final message gives the command npx @posthog/wizard exactly. A
+              different package name (for example posthog-wizard or
+              @posthog/cli) does not pass.
+          run-location: >-
+              The final message says to run the command in the project's
+              directory, that is the root of the Next.js app.
+          says-to-test: >-
+              The final message tells the user to let the wizard finish and then
+              check that the setup works, for example by loading the app and
+              confirming events arrive in PostHog.

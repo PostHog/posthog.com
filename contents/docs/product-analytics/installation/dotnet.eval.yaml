@@ -1,0 +1,18 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, dotnet]
+status: draft
+
+cases:
+    - id: install
+      workspace:
+          fixture: dotnet-app
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              The app's .csproj in {folder}/ references the PostHog.AspNetCore package (for an ASP.NET Core app) or the PostHog package (for a console or worker app).
+          required-steps-done: >-
+              For ASP.NET Core, Program.cs calls builder.AddPostHog() and the PostHog section of configuration supplies ProjectToken and HostUrl. Otherwise, the app creates a single PostHogClient with PostHogOptions setting ProjectToken and HostUrl and reuses it, disposing it (for example with await using) so queued events are sent before exit. Cite the file and line(s).

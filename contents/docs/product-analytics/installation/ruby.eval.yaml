@@ -1,0 +1,18 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, ruby]
+status: draft
+
+cases:
+    - id: install
+      workspace:
+          fixture: ruby-app
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              {folder}/Gemfile lists the posthog-ruby gem.
+          required-steps-done: >-
+              The app requires 'posthog' and creates a client with PostHog::Client.new, passing api_key (the project token) and host (the PostHog host). Cite the file and line(s).

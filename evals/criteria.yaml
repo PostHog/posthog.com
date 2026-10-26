@@ -1,0 +1,19 @@
+# Shared rubrics. A case pulls one in with `criteria.use: [<name>]`, so the same
+# check reads the same way on every page and results line up across pages.
+# {folder} resolves to the case's fixture folder (see fixtures.yaml).
+
+config-from-env: >-
+    The project token and host are read from environment variables or the
+    platform's usual config mechanism. No PostHog project token appears as a
+    literal anywhere in {folder}/.
+
+stays-in-folder: >-
+    Every changed or added file is inside {folder}/.
+
+builds: >-
+    The trace shows the app building, starting, or compiling without errors
+    after the PostHog changes were made.
+
+answers-directly: >-
+    The agent's final message answers the question in its own words, with the
+    steps or code needed. A bare link to a docs page does not pass.

@@ -1,0 +1,37 @@
+version: 1
+owner: product-analytics
+tags: [instrumentation, javascript, autocapture]
+status: active
+
+cases:
+    - id: configure-web-autocapture
+      workspace:
+          fixture: web-vite
+      pages:
+          - docs/product-analytics/installation/web
+      task: |
+          PostHog isn't set up yet in the app in {folder}/. Add it with
+          autocapture turned on, but tune autocapture: only autocapture clicks
+          and form submissions (not input changes), never autocapture the
+          "Reset All Data" button on the settings page, and when someone clicks
+          a task's move, assign or delete button on the project page, the
+          autocaptured event should include that task's id.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          dom-events-limited: >-
+              posthog.init is passed an `autocapture` config object with
+              `dom_event_allowlist` set to click and submit only (no `change`).
+              Cite the file and line.
+          reset-button-excluded: >-
+              The "Reset All Data" button in src/pages/settings.js is excluded
+              from autocapture, either with the `ph-no-autocapture` class or a
+              `data-ph-no-autocapture` attribute on the button, or with an
+              `autocapture.css_selector_ignorelist` entry that matches it.
+              Setting `autocapture: false` globally does not pass.
+          task-id-attribute: >-
+              The task move, assign and delete buttons in
+              src/pages/project-detail.js carry a
+              `data-ph-capture-attribute-<key>` attribute holding the task id
+              (for example `data-ph-capture-attribute-task-id="${task.id}"`),
+              so autocaptured clicks get that property without a manual
+              posthog.capture call.

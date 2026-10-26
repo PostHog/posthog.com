@@ -1,0 +1,52 @@
+version: 1
+owner: wizard-and-docs
+tags: [install, javascript, react]
+status: active
+
+cases:
+    - id: install
+      workspace:
+          fixture: react-vite
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it.
+          Only change files inside {folder}/. Read the project token and host from
+          environment variables rather than writing them into the code. Make sure the
+          app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              {folder}/package.json lists both posthog-js and @posthog/react as
+              dependencies.
+          required-steps-done: >-
+              {folder}/src/main.tsx wraps the rendered app in PostHogProvider
+              imported from @posthog/react, passing the project token as apiKey
+              and an options object with api_host. The token and host come from
+              VITE_-prefixed variables read through import.meta.env (the expected
+              names are VITE_POSTHOG_PROJECT_TOKEN and VITE_POSTHOG_HOST, though
+              other VITE_ names pass). Cite the file and line(s).
+          uses-defaults: >-
+              The PostHog options include a defaults option set to a date string
+              (the current recommended value is '2026-08-30'). Cite the file and
+              line(s).
+
+    - id: capture-login-event
+      workspace:
+          fixture: react-vite
+      task: |
+          The app in {folder}/ needs product analytics. Set up PostHog in it, and
+          also track an event each time a user signs in through the login form.
+          Only change files inside {folder}/. Read the project token and host from
+          environment variables rather than writing them into the code. Make sure the
+          app still builds or starts without errors when you're done.
+      criteria:
+          use: [config-from-env, stays-in-folder, builds]
+          sdk-installed: >-
+              {folder}/package.json lists both posthog-js and @posthog/react as
+              dependencies, and {folder}/src/main.tsx wraps the app in
+              PostHogProvider from @posthog/react. Cite the file and line(s).
+          captures-sign-in: >-
+              The login form's submit handler in {folder}/src/routes/login.tsx
+              calls posthog.capture with a descriptive event name when the user
+              signs in. The posthog instance comes from the usePostHog hook
+              imported from @posthog/react, or from importing posthog from
+              posthog-js. Cite the file and line(s).

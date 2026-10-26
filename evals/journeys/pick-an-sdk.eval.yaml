@@ -1,0 +1,26 @@
+# A journey: no single page owns it, so it lives here and names its own owner.
+version: 1
+owner: wizard-and-docs
+tags: [install, journey]
+status: active
+pages:
+    - docs/product-analytics/installation/react-router
+    - docs/product-analytics/installation/nodejs
+
+cases:
+    - id: frontend-and-backend
+      task: |
+          We have a React Router 7 frontend and an Express API, and we want product analytics
+          events from both into the same PostHog project. Which PostHog packages do we install
+          where, and how do we initialize each one?
+      criteria:
+          use: [answers-directly]
+          frontend-packages: >-
+              The answer installs posthog-js and @posthog/react in the React Router app and
+              initializes posthog-js on the client, wrapping the app in PostHogProvider.
+          backend-package: >-
+              The answer installs posthog-node in the Express API and creates a PostHog client
+              with the project token and a host option.
+          same-project: >-
+              The answer uses the same project token for both apps, so events land in one
+              project.
