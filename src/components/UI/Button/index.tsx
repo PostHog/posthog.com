@@ -143,7 +143,7 @@ const raisedUndersideRadius: Record<ButtonSize, string> = {
 }
 
 const raisedFaceBase =
-    'relative flex select-none items-center justify-center font-bold transition-[transform,background-color,border-color,color,box-shadow] duration-100 motion-reduce:transition-none'
+    'relative flex select-none items-center justify-center font-bold transition-[transform,background-color,border-color,color,box-shadow] duration-100 motion-reduce:transition-none [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
 
 const raisedFaces: Record<ButtonVariant, string> = {
     danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
