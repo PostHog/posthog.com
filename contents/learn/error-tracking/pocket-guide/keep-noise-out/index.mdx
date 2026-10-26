@@ -47,12 +47,12 @@ You can drop noisy exceptions in your app or at ingestion. PostHog doesn't store
 
 | Protection | Use it for |
 | --- | --- |
-| [Filter in your app](#filter-in-your-app) | Dropping exceptions you never want, and redacting data that must not leave your app |
+| [Filters in your app](#filters-in-your-app) | Dropping exceptions you never want, and redacting data that must not leave your app |
 | [Burst protection](#burst-protection) | Stopping one client stuck in a loop from flooding your project |
 | [Suppression rules](#suppression-rules) | Dropping noise you'll never fix, like errors from browser extensions |
 | [Rate limits](#rate-limits) | Capping volume during an outage, for the whole project or for one issue |
 
-## Filter in your app
+## Filters in your app
 
 The `before_send` hook runs in your app before the SDK sends anything. Return `null` to drop an exception, or edit its properties to redact sensitive data. Nothing you drop here reaches PostHog, so it's the cheapest place to filter.
 
@@ -68,19 +68,19 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-The web, Node.js, React Native, iOS, Android, Flutter, Kotlin Multiplatform, Python, Ruby, and Roblox SDKs all have this hook, and some name it `beforeSend`. [Suppressing exceptions](/docs/error-tracking/capture#suppressing-exceptions) shows it for web and React Native.
+The web, Node.js, React Native, iOS, Android, Flutter, Kotlin, Python, Ruby, and Roblox SDKs all have this hook, and some name it `beforeSend`. [Suppressing exceptions](/docs/error-tracking/capture#suppressing-exceptions) shows it for web and React Native.
 
 ## Burst protection
 
-The <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/libraries/js) and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/libraries/node) SDKs cap how many autocaptured exceptions of one type a client sends. By default, a client sends 10, then 1 every 10 seconds. It's on by default, so a loop in one browser can't flood your project. Raise the limits if your app throws in legitimate bursts.
+The <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/libraries/js) and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/libraries/node) SDKs cap how many autocaptured exceptions of one type a client sends: 10, then 1 every 10 seconds. It's on by default, so a loop in one browser can't flood your project. Raise the limits if your app throws in legitimate bursts.
 
 Burst protection only runs in those two SDKs, and only in the client. To cap volume from every SDK, use [rate limits](#rate-limits), which PostHog applies at ingestion.
 
 ## Suppression rules
 
-A suppression rule drops future exceptions that match its exception type or message <SeeFig n={1} />. Use it for noise you can describe, like errors from browser extensions or third-party scripts. Add rules in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules). PostHog applies them at ingestion, and some SDKs apply them in the app too.
+A suppression rule drops future exceptions that match its filters, like the exception type or message <SeeFig n={1} />. Use it for noise you can describe, like errors from browser extensions or third-party scripts. Add rules in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules). PostHog applies them at ingestion, and some SDKs apply them in the app too.
 
-You can also suppress one issue. That drops every future exception in it. An issue's status decides what happens next:
+You can also suppress a single issue, which drops every future exception in it. Each issue has one of three statuses:
 
 - **Active** is the default. The issue needs attention.
 - **Resolved** means it's fixed. PostHog keeps the data and reopens the issue if the error comes back.
@@ -94,9 +94,9 @@ Rate limits cap how many exceptions PostHog ingests in a window of 15 minutes, 3
 
 Bypass rules let critical exceptions skip both limits. PostHog still bills the exceptions they let through.
 
-## Audit noise with your agent
+## Noisy issues
 
-The skill asks these questions about each noisy issue and stops at the first yes.
+Give your agent the skill to find your noisiest issues from the last 7 days and propose a control for each <SeeFig n={2} />. It asks these questions about each issue and stops at the first yes:
 
 ```mermaid
 %%{init: {"block": {"padding": 22}, "themeCSS": ".edgeLabel foreignObject { overflow: visible; } span.edgeLabel { background: transparent !important; } .yes, .no { background: white; padding: 0 3px; } .no { position: relative; left: 30px; }"}}%%
@@ -131,7 +131,7 @@ block-beta
     class redact,assign,flag,burst,rule,limit,suppress act
 ```
 
-Give your agent the skill to find your noisiest issues from the last 7 days and propose a control for each <SeeFig n={2} />. It asks for your approval before it changes anything.
+It asks for your approval before it changes anything.
 
 <SeeAlso>
 

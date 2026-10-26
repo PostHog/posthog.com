@@ -184,11 +184,65 @@ function ElementTree({ value }: { value: string }): JSX.Element {
     )
 }
 
-function EventTree({ value }: { value: string }): JSX.Element {
+type PropertyValue = string | number | boolean | null | PropertyValue[] | { [key: string]: PropertyValue }
+
+/** One property. With `expand`, objects and arrays become nested branches, the way `properties` is. */
+function PropertyNode({
+    name,
+    value,
+    expand,
+    open = true,
+}: {
+    name: string
+    value: PropertyValue
+    expand?: boolean
+    open?: boolean
+}): JSX.Element {
+    if (expand && value !== null && typeof value === 'object') {
+        const children = Array.isArray(value)
+            ? value.map((child, index) => [String(index), child] as const)
+            : Object.entries(value)
+        return (
+            <details open={open}>
+                <summary className="cursor-pointer select-none text-[#77529a]">
+                    {name}{' '}
+                    <span className="text-[#716c63]">
+                        {Array.isArray(value) ? `[${children.length}]` : `{${children.length}}`}
+                    </span>
+                </summary>
+                <div className="ml-[5px] border-l border-[#dedad2] pl-4">
+                    {children.map(([key, child]) => (
+                        <PropertyNode key={key} name={key} value={child} expand />
+                    ))}
+                </div>
+            </details>
+        )
+    }
+    return (
+        <div className="whitespace-pre">
+            <span className="text-[#77529a]">{name}</span>:{' '}
+            <span className="text-[#9a4b1c]">{JSON.stringify(value)}</span>
+        </div>
+    )
+}
+
+/**
+ * A capture payload as a property tree. `expand` shows nested values as branches instead of one
+ * line, and `collapsed` names the top-level branches that start closed.
+ */
+export function EventTree({
+    value,
+    expand,
+    collapsed = [],
+}: {
+    value: string
+    expand?: boolean
+    collapsed?: string[]
+}): JSX.Element {
     const payload = JSON.parse(value) as {
         event: string
         timestamp?: string
-        properties: Record<string, string | number | boolean>
+        properties: Record<string, PropertyValue>
     }
     const properties = Object.entries(payload.properties)
 
@@ -214,10 +268,13 @@ function EventTree({ value }: { value: string }): JSX.Element {
                         <div className="ml-[5px] border-l border-[#dedad2] pl-4">
                             {properties.length ? (
                                 properties.map(([key, propertyValue]) => (
-                                    <div key={key} className="whitespace-pre">
-                                        <span className="text-[#77529a]">{key}</span>:{' '}
-                                        <span className="text-[#9a4b1c]">{JSON.stringify(propertyValue)}</span>
-                                    </div>
+                                    <PropertyNode
+                                        key={key}
+                                        name={key}
+                                        value={propertyValue}
+                                        expand={expand}
+                                        open={!collapsed.includes(key)}
+                                    />
                                 ))
                             ) : (
                                 <div className="text-[#716c63]">No properties</div>

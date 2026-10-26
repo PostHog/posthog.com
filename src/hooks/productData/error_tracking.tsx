@@ -24,6 +24,7 @@ export const errorTracking = {
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
+    pocketGuideVolume: 'error-tracking',
     forumTag: 'error-tracking',
     color: 'orange',
     colorSecondary: 'red',

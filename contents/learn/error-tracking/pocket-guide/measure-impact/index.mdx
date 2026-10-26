@@ -2,25 +2,26 @@
 title: Measure impact with your other data
 shortTitle: Measure impact
 subtitle: Decide which issue to fix first by what it costs you.
-pocketGuideOrder: 7
+pocketGuideOrder: 6
 section: Query
-pocketGuideCta:
-  kind: prompt
-  label: Rank issues with PostHog AI
-  note: It ranks your issues by the MRR of the organizations they hit and names the one to fix first.
-  requires:
-    label: Needs exceptions reaching PostHog.
-  prompt: >-
-    Rank my error tracking issues from the last 7 days by the total MRR of the organizations that
-    hit them, with the exceptions, organizations, and affected users for each. Then tell me which
-    issue to fix first and why. If my organizations don't have an MRR property, rank the issues by
-    affected organizations instead and tell me how to add MRR with warehouse properties.
 ---
 
 <LeftPage>
 
-<LeakFigure
+<SqlBarChartFigure
     n={1}
+    caption="Example: issues ranked by the MRR of the accounts they hit. Search throws the most exceptions, but checkout hits accounts that pay twelve times as much."
+    series="mrr"
+    format="currency"
+    rows={[
+        { label: 'Checkout confirm fails · 620 exceptions', value: 48000 },
+        { label: 'Invoice download fails · 180 exceptions', value: 16000 },
+        { label: 'Search request times out · 9,000 exceptions', value: 4000 },
+    ]}
+/>
+
+<LeakFigure
+    n={2}
     caption="Example: checkout attempts hold steady, but completion falls from 80% to 50% when the error appears."
     markerAt={0.45}
     markerLabel="Error first seen"
@@ -31,8 +32,19 @@ pocketGuideCta:
     finishes={[0.72, 0.72, 0.72, 0.72, 0.72, 0.54, 0.45, 0.45, 0.45, 0.45]}
 />
 
+<SqlBarChartFigure
+    n={3}
+    caption="Example: one account's issues, ranked by how many of its users each one hit. Search fired 2,840 times for only 2 users, which looks like a retry loop."
+    series="users"
+    rows={[
+        { label: 'Checkout confirm fails · 314 exceptions', value: 186 },
+        { label: 'Invoice download fails · 41 exceptions', value: 27 },
+        { label: 'Search request times out · 2,840 exceptions', value: 2 },
+    ]}
+/>
+
 <DivergenceFigure
-    n={2}
+    n={4}
     caption="Example: after a deploy, the new checkout's affected-session rate rises to 8% while control stays at 2%. Both lines use the same scale."
     markerAt={0.45}
     markerLabel="Checkout deploy"
@@ -57,82 +69,178 @@ pocketGuideCta:
 
 # Measure impact with your other data
 
-An exception count tells you how often something broke. To decide what to fix first, you also need to know who it hit and what it cost you.
+Exceptions are just noise if you can't accurately understand their impact and urgency. To justify fixing one before another, you need context from your other PostHog data, like who the issue impacts and what they pay.
 
-Each <Term name="exception" /> is a `$exception` <Term name="event" />, stored with the rest of your product and business data. You can query exceptions alongside your other events, people, [groups](/docs/product-analytics/group-analytics), and sessions, and [join](/docs/data-warehouse/join) them to the revenue and plan data you sync from [sources](/docs/data-warehouse/sources) like Stripe or Postgres.
+## Revenue at risk
 
-## Rank issues by revenue
+<Callout title="Prerequisites">
 
-Join each <Term name="issue" /> to the revenue of the accounts it hit. If MRR lives in Stripe or your own database, [warehouse properties](/docs/data-warehouse/warehouse-properties) copy it onto each organization as a group property.
+- Group analytics to relate users to the company they belong to. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
+- An `mrr` property from a warehouse connection with [Stripe](/docs/data-pipelines/sources/stripe). [Connect your payment data](/docs/data-warehouse/warehouse-properties#set-up-a-warehouse-property)
 
-Run this query in the [SQL editor](/docs/data-warehouse/query). It sums the MRR of the organizations behind each issue over the last 7 days. It reads organizations from `$group_0` (group index 0) and MRR from an `mrr` group property, so change those to match yours:
+</Callout>
 
-```sql
-WITH affected AS (
-    SELECT issue_id, $group_0 AS org, count() AS exceptions
-    FROM events
-    WHERE event = '$exception'
-      AND timestamp >= now() - INTERVAL 7 DAY
-      AND notEmpty($group_0)
-    GROUP BY issue_id, org
-)
-SELECT
-    a.issue_id,
-    sum(a.exceptions) AS exceptions,
-    count() AS organizations,
-    round(sum(toFloat(g.properties.mrr))) AS org_mrr
-FROM affected a
-LEFT JOIN groups g ON g.key = a.org AND g.index = 0
-GROUP BY a.issue_id
-ORDER BY org_mrr DESC
-LIMIT 10
-```
+Rank issues by the revenue of the accounts that hit them. If an issue hits accounts with high MRR, it might be more important, even with fewer occurrences <SeeFig n={1} />.
 
-In this example, checkout fails less often than search, but the organizations it hits pay twelve times as much in total:
+Combine this with the checks below to judge how severe the impact is: whether the error [makes people leave](#churn), and what they saw in [their sessions](#session-replays).
 
-| Issue | Exceptions | Organizations | Their MRR |
-| --- | ---: | ---: | ---: |
-| Checkout confirm fails | 620 | 240 | **$48,000** |
-| Invoice download fails | 180 | 64 | $16,000 |
-| Search request times out | 9,000 | 50 | $4,000 |
+This joins exceptions to accounts on `$groups`:
 
-MRR is what those organizations pay you. It doesn't measure revenue the error lost.
+| Source | What it adds |
+| --- | --- |
+| `$exception` | The accounts each issue hit |
+| `groups` | What each account pays, from its `mrr` property |
 
-The [Errors by account value](/learn/error-tracking/pocket-guide/who-it-breaks) scout checks your issues every day and reports the ones concentrated in paying accounts.
+<TryPrompt prompt="Rank my error tracking issues from the last 7 days by the total MRR of the accounts that hit them, with the exceptions, accounts, and affected users for each. Then tell me which issue to fix first and why. If my accounts don't have an MRR property, rank the issues by affected accounts instead and tell me how to add MRR with warehouse properties." />
 
-## Find one account's errors
+The [Errors by account value](/learn/error-tracking/pocket-guide/who-it-breaks) scout runs a related check every day. It reports issues concentrated in accounts that pay you.
 
-When a customer reports a problem, start from their account. Filter the issue list to their organization with a SQL expression like `$group_0 = 'acme'`, or to their users with a person property like email or a <Term name="cohort" />. Then sort by **Users** to see how many people each issue hit:
+## Churn
 
-| Issue | Users affected | Exceptions |
-| --- | ---: | ---: |
-| Checkout confirm fails | **186** | 314 |
-| Invoice download fails | 27 | 41 |
-| Search request times out | 2 | 2,840 |
+<Callout title="Prerequisites">
 
-Checkout hit 186 of their users, so fix it first. Search fired 2,840 times from only 2 users, which points to a retry loop you can look into separately.
+- Session tracking to see what people did after an error. The web and mobile SDKs do this for you. [Track sessions on your server](/docs/data/sessions#server-sdks-and-sessions)
 
-## Check conversion
+</Callout>
 
-A <Term name="funnel" /> from start to completion, with its graph type set to [historical trends](/docs/product-analytics/funnels#graph-type), shows whether conversion fell when the error appeared <SeeFig n={1} />. In this example, checkout starts hold steady at 1,000 a day, and completions drop from 800 to 500 when the error appears.
+Revenue shows an error's potential impact. Next, confirm whether it actually makes people leave:
 
-To see how the people who hit the error converted, create a cohort from the **Cohort** section of the issue page and [break the funnel down](/docs/product-analytics/funnels#breakdowns) by it. Compare their conversion with the funnel's overall rate, then watch a few of their sessions in <Term name="session replay" /> to see whether they got stuck, retried, or found another way.
+- **Funnels.** Build a <Term name="funnel" /> of a path like checkout, with its graph type set to [historical trends](/docs/product-analytics/funnels#graph-type), to see whether conversion fell when the error appeared <SeeFig n={2} />. [Break it down](/docs/product-analytics/funnels#breakdowns) by the issue's cohort, which you create from the issue page, to compare people who hit the error with people who didn't.
+- **Retention.** Filter a [retention insight](/docs/product-analytics/retention) to the issue's cohort and compare it with all users. If people who hit the error come back less, the error is driving churn.
+- **Session drop-off.** Check whether people did anything within a minute of each error. Some sessions end anyway, so compare each issue with your overall drop-off.
 
-## Compare experiment variants
+The session drop-off check joins exceptions to the events that followed on `$session_id`:
 
-An <Term name="experiment" /> can lift one metric and add errors elsewhere. Add `$exception` to the experiment as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics), and PostHog compares it across variants next to your primary metric.
+| Source | What it adds |
+| --- | --- |
+| `$exception` | When the error fired |
+| `$pageview`, `$autocapture` | Whether the person kept going |
 
-To see when the errors started, chart the share of sessions with an exception in each variant <SeeFig n={2} />. Use a rate, so a variant with more traffic doesn't look worse just because it's bigger. [Exceptions as events](/learn/error-tracking/pocket-guide/exceptions-as-events#turn-counts-into-rates) shows how to build one, and the Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
+<TryPrompt prompt="Build me a funnel over the last 7 days, counted by unique sessions, with a 1-minute conversion window. Step 1 is $exception where $lib is web. Step 2 is either a $pageview or an $autocapture event. Break it down by $exception_issue_id. Then tell me which issues have the highest drop-off among issues with at least 100 sessions." />
 
-## Rank your issues with PostHog AI
+## Session replays
 
-PostHog AI can run the revenue ranking on your own issues and tell you which one to fix first.
+<Callout title="Prerequisites">
 
-<Action />
+- Session replay to watch what people saw when the error happened. [Set up session replay](/docs/session-replay/installation)
+- Recordings of every session with an error, so the one you need exists. [Record sessions with errors](/docs/session-replay/how-to-control-which-sessions-you-record#event-triggers)
+
+</Callout>
+
+When an error makes people leave, watch their sessions to see what happened.
+
+This joins exceptions to recordings on `$session_id`:
+
+| Source | What it adds |
+| --- | --- |
+| `$exception` | The error and when it fired |
+| `session_replay_events` | What the person saw and did |
+
+<TryPrompt prompt="Find session recordings from the last 7 days that include a $exception event from the error tracking issue named [issue name]. List the 5 most recent with links, and tell me what the person did just before the error." />
+
+## A customer's errors
+
+<Callout title="Prerequisites">
+
+- Group analytics to relate users to the company they belong to. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
+
+</Callout>
+
+You can also start from a customer. When one reports a problem, rank every issue their account hit by how many of their users the issue impacts <SeeFig n={3} />. In the issue list, filter to their account and sort by **Users**.
+
+Checkout hit 186 of their users, so fix it first.
+
+This joins exceptions to accounts on `$groups`:
+
+| Source | What it adds |
+| --- | --- |
+| `$exception` | Each issue and how many users it impacts |
+| `groups` | Which customer those users belong to |
+
+<TryPrompt prompt="List the error tracking issues that hit users in the account [account name] in the last 30 days. For each issue, show how many of their users it hit and how many exceptions it fired, sorted by users." />
+
+## Support tickets
+
+<Callout title="Prerequisites">
+
+- Your support tool connected to PostHog, like [Zendesk](/docs/data-pipelines/sources/zendesk) or [Intercom](/docs/data-pipelines/sources/intercom). [Connect your support data](/docs/data-pipelines/sources)
+- Replay links in your tickets, so each ticket points to a session. [Add replay links to tickets](/docs/session-replay/sharing#method-two-automatically-share-replays-to-intercom-or-crisp)
+
+</Callout>
+
+Support tickets work the same way. A ticket with an error behind it points at a bug you can fix.
+
+This joins tickets to exceptions on the session ID in each ticket's replay link:
+
+| Source | What it adds |
+| --- | --- |
+| Your tickets table, like `zendesk.tickets` | What the customer reported |
+| `$exception` | The error behind it |
+
+<TryPrompt prompt="Use my synced support tickets table to find tickets from the last 30 days that contain a PostHog replay link. Take the session ID from each link and check whether that session had a $exception event. List the tickets that did, with the exception type and message." />
+
+## People who hit the error
+
+<Callout title="Prerequisites">
+
+- Identified users, so you know who to contact. [Identify your users](/docs/getting-started/identify-users)
+
+</Callout>
+
+Once you fix an issue, you might want to tell the people the issue impacts, or survey them. Create a <Term name="cohort" /> from the issue page, then [duplicate it as a static cohort](/docs/data/cohorts#can-you-use-a-dynamic-cohort-as-a-feature-flag-target) to target them with a survey or flag.
+
+This joins exceptions to people on `distinct_id`:
+
+| Source | What it adds |
+| --- | --- |
+| `$exception` | The issue each person hit |
+| `persons` | Who they are, so you can reach them |
+
+<TryPrompt prompt="List the people who hit the error tracking issue named [issue name] in the last 30 days, with each person's email and how many exceptions they had." />
+
+## Experiments
+
+<Callout title="Prerequisites">
+
+- Feature flags sent with your events, so you know which variant each person saw. [Send flags with your events](/docs/feature-flags/adding-feature-flag-code)
+
+</Callout>
+
+When you ship the next change as an <Term name="experiment" />, check that it doesn't add errors. Add `$exception` as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics) to compare errors across variants.
+
+To see when the errors started, chart each variant's error rate <SeeFig n={4} />. Use a rate, so a variant on 5% of traffic compares fairly with one on 95%. The Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
+
+This joins exceptions to variants on `$feature/<flag-key>`:
+
+| Source | What it adds |
+| --- | --- |
+| `$exception` | Errors in each variant |
+| `$pageview` | Traffic in each variant, for the rate |
+
+<TryPrompt prompt="Build a trend over the last 14 days, counted by unique sessions. Series A is $exception and series B is $pageview. Set the formula to A / B * 100 and break it down by $feature/my-flag-key. Tell me whether any variant has a higher error rate than control." />
+
+## Crash-free sessions
+
+<Callout title="Prerequisites">
+
+- Crash reporting in your Android, iOS, or React Native app. [Set up Error Tracking](/docs/error-tracking/installation)
+
+</Callout>
+
+To watch your app's stability across all these changes, track your crash-free rate. It's the share of sessions without a fatal exception.
+
+This joins sessions to fatal exceptions on `$session_id`:
+
+| Source | What it adds |
+| --- | --- |
+| `sessions` | Every session |
+| `$exception` with a `fatal` level | Which sessions crashed |
+
+<TryPrompt prompt="Build a trend over the last 30 days, counted by unique sessions. Series A is all events. Series B is $exception where $exception_level is fatal. Set the formula to (A - B) / A * 100 to show the share of sessions that didn't crash, and tell me which days were lowest." />
 
 <SeeAlso>
 
-See also: [Features that drive revenue](/learn/warehouse/pocket-guide/features-drive-revenue) · [Warehouse properties](/docs/data-warehouse/warehouse-properties) · [Funnels](/docs/product-analytics/funnels)
+See also: [Features that drive revenue](/learn/warehouse/pocket-guide/features-drive-revenue) · [Warehouse properties](/docs/data-warehouse/warehouse-properties) · [Funnels](/docs/product-analytics/funnels) · [Session Replay pocket guide](/learn/session-replay/pocket-guide/configure-replays)
 
 </SeeAlso>
 

@@ -19,7 +19,7 @@ import { getDarkClassForLogo } from 'constants/logos'
     n={1}
     caption="Without source maps, every frame points into a bundle."
     type="TypeError"
-    message="Cannot read properties of null (reading 'useContext')"
+    message="Cannot read properties of null (reading 'byId')"
     frames={[
         {
             fn: 'exports.useContext',
@@ -55,7 +55,7 @@ import { getDarkClassForLogo } from 'constants/logos'
     n={2}
     caption="With source maps, your own frames show in bold at the top of the trace."
     type="TypeError"
-    message="Cannot read properties of null (reading 'useContext')"
+    message="Cannot read properties of null (reading 'byId')"
     frames={[
         {
             fn: 'useWorkspace',
@@ -146,7 +146,7 @@ import { getDarkClassForLogo } from 'constants/logos'
 
 # Make stack traces readable
 
-Source maps only matter if you bundle, compile, or minify the code you distribute. You'll likely need them if you use one of these SDKs:
+Source maps only matter if you bundle, compile, or minify the code you distribute. You'll likely need them, or the native equivalent like dSYMs and mapping files, if you use one of these SDKs:
 
 <div className="grid grid-cols-3 @xl:grid-cols-4 gap-x-6 gap-y-3 my-4">
     {[
@@ -174,9 +174,9 @@ Source maps only matter if you bundle, compile, or minify the code you distribut
 
 A <Term name="stack trace" /> shows the exact line of code that caused the exception. Without a <Term name="source map" />, PostHog can't map the frames back to your code, so they show up as **unresolved** <SeeFig n={1} />.
 
-## Upload source maps
+## Source map uploads
 
-Give PostHog a source map and the same trace points back to your source code <SeeFig n={2} />. PostHog can get your maps three ways:
+Give PostHog a source map and a trace like this points back to your source code <SeeFig n={2} />. PostHog can get your maps three ways:
 
 | Option | Trade-off |
 | --- | --- |
@@ -186,17 +186,17 @@ Give PostHog a source map and the same trace points back to your source code <Se
 
 Link each upload to a [release](/docs/error-tracking/releases). PostHog then shows the version and commit on every trace. With a [GitHub or GitLab integration](/docs/error-tracking/integrations), it also links each frame to the file and line in your repository.
 
-If you set up Error Tracking with the wizard, it already added uploads for platforms that need them. To add uploads to an existing setup, run the wizard's source map upload on its own:
+The Wizard's Error Tracking setup already adds uploads where your platform needs them. To add them to an existing setup:
 
 <Setup subcommand="upload-source-maps" />
 
 To set it up yourself, follow [Upload source maps](/docs/error-tracking/upload-source-maps) for your framework.
 
-## Add breadcrumbs
+## Breadcrumbs
 
-Breadcrumbs hold context that only matters if something breaks. PostHog calls them exception steps. Call `addExceptionStep` at checkpoints like a cache miss, a retry, or a fallback path. The SDK keeps the steps in memory and attaches them to the next exception, where they show up in the issue's **Timeline** tab <SeeFig n={3} />.
+Breadcrumbs, which PostHog calls exception steps, hold context that only matters if something breaks. Call `addExceptionStep` at checkpoints like a retry or a fallback path. The SDK attaches the steps to the next exception, and they show up in the issue's **Timeline** tab <SeeFig n={3} />.
 
-If no exception happens, the SDK throws the steps away. They're never sent or stored, so runs that succeed cost nothing and keep your logs clean.
+If no exception happens, the SDK discards the steps, so successful runs cost nothing.
 
 Pick where context goes by when you'll need it:
 
@@ -209,9 +209,9 @@ Pick where context goes by when you'll need it:
 
 Steps work in the web, React Native, iOS, Android, and Flutter SDKs.
 
-## Check your symbol sets
+## Symbol sets
 
-PostHog lists each source map it has as a symbol set, both the ones you upload and the ones it fetches from a public URL. A missing symbol set shows why it failed, and you can upload the file from the same list. That upload only resolves exceptions captured after it, so earlier ones stay unresolved.
+PostHog lists every source map and symbol file it has as a symbol set, along with uploads that failed. A missing one shows why it failed, and you can upload the file from the same list. The upload only resolves exceptions captured after it.
 
 <Action />
 

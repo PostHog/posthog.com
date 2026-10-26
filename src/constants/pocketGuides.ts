@@ -110,7 +110,10 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
         token: 'red',
         volume: 7,
+        docsProduct: 'error-tracking',
+        productHandle: 'error_tracking',
         learnPath: '/learn/error-tracking/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp'] },
     },
 ]
 

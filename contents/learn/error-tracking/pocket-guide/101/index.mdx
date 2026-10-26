@@ -98,7 +98,7 @@ Like other PostHog tools, each instance of an <Term name="exception" /> is captu
 Most production apps have more exceptions than your team can fix. Error Tracking helps you find the highest-impact issues, report them, and automate the fixes. We'll introduce each step throughout this guide:
 
 - **Capture** – Group exceptions into issues. Make stack traces readable. Keep noise out.
-- **Query** – Query exceptions as events with SQL and MCP. Join them with revenue, funnels, and experiments to measure impact.
+- **Query** – Query exceptions as events with HogQL and MCP. Join them with revenue, funnels, and experiments to measure impact.
 - **Automate** – Route each issue to the team that owns it. Alert on spikes and regressions.
 - **Self-drive** – Scouts watch for failure patterns and measure their impact. They send reports to your inbox. Agents open pull requests to fix them.
 
@@ -106,7 +106,7 @@ The end result is a report like this one, with a pull request ready to review <S
 
 ## Install and turn it on
 
-Run the Error Tracking wizard. It installs PostHog if your app doesn't have it, turns on exception capture, and sets up source map uploads where your platform needs them. Or [install it yourself](/docs/error-tracking/installation).
+Run the Error Tracking Wizard. It installs PostHog if your app doesn't have it, turns on exception capture, and sets up source map uploads where your platform needs them. Or [install it yourself](/docs/error-tracking/installation).
 
 <Setup />
 

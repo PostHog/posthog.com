@@ -40,7 +40,7 @@ Walk each candidate through these checks in order, and stop at the first yes:
 
 ## Rules
 
-1. Propose, don't apply. Ask before you suppress an issue, add a suppression rule, or change a
+1. Ask before you suppress an issue, add a suppression rule, or change a
    rate limit.
 2. Suppressed and rate-limited exceptions are dropped for good. Say so in each proposal.
 3. Before you tighten rate limits, propose bypass rules for exceptions that must always arrive.

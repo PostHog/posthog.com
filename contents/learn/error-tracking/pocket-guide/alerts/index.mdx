@@ -2,7 +2,7 @@
 title: Set up alerts
 shortTitle: Alerts
 subtitle: Alert on regressions and spikes.
-pocketGuideOrder: 9
+pocketGuideOrder: 8
 section: Automate
 pocketGuideCta:
   kind: link
@@ -24,13 +24,13 @@ pocketGuideCta:
 
 # Set up alerts
 
-Error Tracking alerts fire when an issue is created, reopened, or spiking.
+Each alert fires on one of three triggers:
 
 - **Issue created** fires once for every new issue, which can mean many messages a day.
 - **Issue reopened** fires when an issue you resolved comes back. Use it to catch regressions.
 - **Issue spiking** fires when an issue suddenly gets far more exceptions than usual. Spike detection compares each 5-minute window with the issue's baseline from the past hour, and ignores windows below a minimum count <SeeFig n={1} />.
 
-Each alert pairs one trigger with one destination, like a Slack channel or PagerDuty, so catching both regressions and spikes takes two alerts.
+Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook), so catching both regressions and spikes takes two alerts.
 
 <Action />
 

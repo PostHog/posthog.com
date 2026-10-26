@@ -35,20 +35,20 @@ By default, PostHog builds a <Term name="fingerprint" /> for each exception and 
 
 PostHog builds the fingerprint from the exception type and the frames in its <Term name="stack trace" />. If the exception has no stack trace, PostHog uses the exception message in place of the frames.
 
-In minified code, the fingerprint uses the bundle's frames until PostHog has the <Term name="source map" /> for that bundle. A new build can change those frames, so after a deploy PostHog can open a new issue for a bug you already have. [Make stack traces readable](/learn/error-tracking/pocket-guide/stack-traces) shows how to give PostHog your source maps.
+In minified code, the fingerprint uses the bundle's frames until PostHog has the bundle's <Term name="source map" />. A new build can change those frames, so a deploy can open a new issue for a bug you already have. [Upload your source maps](/learn/error-tracking/pocket-guide/stack-traces#source-map-uploads) to prevent it.
 
 ## Custom grouping
 
-Customize grouping when the default splits one bug into many issues, or puts different bugs in one issue. You have two options:
+Customize grouping when the default splits one bug into many issues, or puts different bugs in one issue:
 
 - **Grouping rules.** Add a rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping). Filter on any event property, such as the exception type or source file, and test how many exceptions match before you save <SeeFig n={1} />. Rules run in order and the first match wins, so put specific rules first.
-- **Custom fingerprints.** Set `$exception_fingerprint` when you capture the exception. Use it when your code has to pick the group for each exception. For autocaptured exceptions, set it in `before_send`.
+- **Custom fingerprints.** Set `$exception_fingerprint` when you capture the exception. Use it when your code has to pick the group for each exception. For autocaptured exceptions, set it in [`before_send`](/learn/error-tracking/pocket-guide/keep-noise-out#filters-in-your-app), a hook that edits events before the SDK sends them.
 
 Both apply at ingestion, so they only change exceptions captured after you add them. To combine issues that already exist, select them in the issue list and click **Merge**.
 
-## Fix misgrouped issues with your agent
+## Misgrouped issues
 
-The skill asks these questions about each misgrouped issue and stops at the first yes.
+When an issue looks misgrouped, give your agent the skill <SeeFig n={2} />. It asks these questions about each issue and stops at the first yes:
 
 ```mermaid
 %%{init: {"block": {"padding": 22}, "themeCSS": ".edgeLabel foreignObject { overflow: visible; } span.edgeLabel { background: transparent !important; } .yes, .no { background: white; padding: 0 3px; } .no { position: relative; left: 30px; }"}}%%
@@ -80,7 +80,9 @@ block-beta
     class maps,leave,narrow,rule,fingerprint,add act
 ```
 
-Give your agent the skill when an issue looks misgrouped <SeeFig n={2} />. It checks your exceptions and your code, then lists each issue it changed and says which changes need a code deploy.
+It checks your exceptions and your code, then lists each issue it changed and which changes need a deploy.
+
+If no property tells the exceptions apart, the skill tags them in your code, like `service: checkout` on every exception from checkout. A grouping rule can then match on that tag.
 
 <SeeAlso>
 

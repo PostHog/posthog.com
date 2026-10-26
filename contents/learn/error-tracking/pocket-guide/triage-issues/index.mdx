@@ -2,14 +2,12 @@
 title: Triage issues automatically
 shortTitle: Triage
 subtitle: Route each issue to the team that owns it.
-pocketGuideOrder: 8
+pocketGuideOrder: 7
 section: Automate
 pocketGuideCta:
   kind: prompt
   label: Suggest rules with PostHog AI
   note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
-  requires:
-    label: Needs exceptions reaching PostHog.
   prompt: >-
     Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
     $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
@@ -35,11 +33,11 @@ pocketGuideCta:
 
 # Triage issues automatically
 
-An assignment rule matches on the exception's properties and assigns the issue to a role or a teammate when the issue is created <SeeFig n={1} />. To assign issues to a team, create a role for that team in your organization settings.
+Assignment rules route each new issue to the team that owns it. A rule matches on the exception's properties and assigns the issue to a role or a teammate <SeeFig n={1} />. To assign issues to a team, create a role for it in your organization settings.
 
-Rules run during ingestion, after <Term name="source map">source maps</Term> have been applied, so they match against the unminified <Term name="stack trace" />. A rule on the exception's source file can assign issues from files under `checkout/` to the Payments role. The first rule that matches assigns the issue, so put your most specific rules first.
+Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match your unminified <Term name="stack trace" />. For example, a rule on the source file can send issues from `checkout/` to the Payments role. The first match wins, so put specific rules first.
 
-Once you [connect](/docs/error-tracking/integrations) GitHub, GitLab, Linear, or Jira, you can create an issue there from the PostHog issue page. The new issue includes the stack trace and a link back to PostHog, where whoever picks it up can see every exception and the people it hit <SeeFig n={2} />.
+To track the fix in another tool, [connect](/docs/error-tracking/integrations) GitHub, GitLab, Linear, or Jira, and create the issue from the PostHog issue page. It links back to the PostHog issue, with every exception and the people the issue impacts, and you can add the impact before you create it <SeeFig n={2} />.
 
 PostHog AI can group your recent exceptions by source file and URL path, and suggest a rule for each group.
 

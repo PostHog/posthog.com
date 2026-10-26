@@ -14,10 +14,20 @@ import { BookPageCta, volumeIdFromUrl } from './bookModel'
 /** Opens PostHog AI with the prompt prefilled and submitted – the site's standard Max deep link. */
 const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
 
+/** The same link without the `!` that makes PostHog AI send the prompt, so the reader can edit it first. */
+const maxPrefillUrl = (prompt: string) => `https://app.posthog.com/#panel=max:${encodeURIComponent(prompt)}`
+
+/** Volumes whose chapter prompts open unsent, so the reader can edit them before PostHog AI runs. */
+const PREFILL_ONLY_VOLUMES = new Set(['error-tracking'])
+
 /** Where the button goes, and the analytics kind that names the action it is. */
-function destination(cta: BookPageCta): { href: string; kind: string } {
+function destination(cta: BookPageCta, guide: string): { href: string; kind: string } {
     if (cta.kind === 'prompt' && cta.prompt) {
-        return { href: cta.href || maxPromptUrl(cta.prompt), kind: 'ai_prompt_click' }
+        const prefillOnly = PREFILL_ONLY_VOLUMES.has(volumeIdFromUrl(guide))
+        return {
+            href: cta.href || (prefillOnly ? maxPrefillUrl(cta.prompt) : maxPromptUrl(cta.prompt)),
+            kind: 'ai_prompt_click',
+        }
     }
     return { href: cta.href || 'https://app.posthog.com', kind: 'cta_link_click' }
 }
@@ -34,7 +44,7 @@ export default function Action(): JSX.Element | null {
     if (!cta?.label) {
         return null
     }
-    const { href, kind } = destination(cta)
+    const { href, kind } = destination(cta, entry?.url ?? '')
 
     const trackPromptCopy = () =>
         posthog?.capture('pocket_guide_interaction', {
@@ -49,19 +59,8 @@ export default function Action(): JSX.Element | null {
     return (
         <div>
             {cta.kind === 'prompt' && cta.prompt && (
-                // The prompt is the deliverable, so it's set like the scout file in vol. 1 – same
-                // code block, wrapped locally because `whitespace-pre` scrolls a sentence sideways.
-                <div className="mb-4 [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-                    <SingleCodeBlock
-                        language="text"
-                        label="Prompt for PostHog AI"
-                        showLabel
-                        showCopy
-                        showAskAI={false}
-                        onCopy={trackPromptCopy}
-                    >
-                        {cta.prompt}
-                    </SingleCodeBlock>
+                <div className="mb-4">
+                    <PromptBlock label="Prompt for PostHog AI" prompt={cta.prompt} onCopy={trackPromptCopy} />
                 </div>
             )}
 
@@ -73,6 +72,50 @@ export default function Action(): JSX.Element | null {
             </div>
 
             {cta.requires && <Prerequisite requires={cta.requires} />}
+        </div>
+    )
+}
+
+/**
+ * The prompt is the deliverable, so it's set like the scout file in vol. 1 – same code block,
+ * wrapped locally because `whitespace-pre` scrolls a sentence sideways.
+ */
+function PromptBlock({ label, prompt, onCopy }: { label: string; prompt: string; onCopy: () => void }): JSX.Element {
+    return (
+        <div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+            <SingleCodeBlock language="text" label={label} showLabel showCopy showAskAI={false} onCopy={onCopy}>
+                {prompt}
+            </SingleCodeBlock>
+        </div>
+    )
+}
+
+/**
+ * An example's question, for chapters that show several. Unlike `<Action />`, it opens PostHog AI
+ * without sending the prompt, so the reader can swap in their own flag, issue, or table first.
+ */
+export function TryPrompt({ prompt }: { prompt: string }): JSX.Element {
+    const posthog = usePostHog()
+    const guide = useEntry()?.entry.url
+
+    const track = (kind: string) => () =>
+        posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'example' })
+
+    return (
+        <div className="my-4">
+            <PromptBlock label="Try asking PostHog AI" prompt={prompt} onCopy={track('ai_prompt_copy')} />
+            <div className="mt-2">
+                <OSButton
+                    asLink
+                    to={maxPrefillUrl(prompt)}
+                    external
+                    variant="secondary"
+                    size="md"
+                    onClick={track('ai_prompt_click')}
+                >
+                    Open in PostHog AI
+                </OSButton>
+            </div>
         </div>
     )
 }
@@ -158,7 +201,7 @@ export function ActionBar({
     if (!cta.label) {
         return null
     }
-    const { href, kind } = destination(cta)
+    const { href, kind } = destination(cta, guide)
 
     const trackCtaClick = () => posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'pinned_bar' })
 

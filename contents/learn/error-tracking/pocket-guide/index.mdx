@@ -12,7 +12,7 @@ pocketGuideOrder: 0
 
 Error Tracking captures the exceptions your code throws, with their stack traces, and groups them into <Term name="issue">issues</Term> you can assign and resolve.
 
-PostHog is the context layer for your product. Each exception is an event, stored next to your analytics, session replays, logs, and the business data you sync from [sources](/docs/data-warehouse/sources) like Stripe, Postgres, or HubSpot. You and your agents can query exceptions alongside that data, so you can rank issues by the accounts they hit and what those accounts pay you.
+PostHog is the [context warehouse](/docs/self-driving/context) for your product. Each exception is an event, stored next to your analytics, session replays, logs, and the business data you sync from [sources](/docs/data-pipelines/sources) like [Stripe](/docs/data-pipelines/sources/stripe), [Postgres](/docs/data-pipelines/sources/postgres), or [HubSpot](/docs/data-pipelines/sources/hubspot). You and your agents can query exceptions alongside that data, so you can rank issues by the accounts they hit and what those accounts pay you.
 
 PostHog can also <Term name="self-driving">self-drive</Term>. <Term name="scout">Scouts</Term> watch your exceptions and file reports in your inbox. When a report has a clear code change, an agent opens a pull request for you to review.
 
@@ -22,7 +22,7 @@ PostHog can also <Term name="self-driving">self-drive</Term>. <Term name="scout"
 
 <RightPage>
 
-Every page assumes exceptions are already reaching PostHog. If they aren't yet, run the Error Tracking wizard, or [install it yourself](/docs/error-tracking/installation):
+Every page assumes exceptions are already reaching PostHog. If they aren't yet, run the Error Tracking Wizard, or [install it yourself](/docs/error-tracking/installation):
 
 <Setup />
 

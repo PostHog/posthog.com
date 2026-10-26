@@ -4,29 +4,27 @@
 title: Connect a deploy to an error burst
 shortTitle: Deploy regressions
 subtitle: Which merged pull request started the new error after your last deploy?
-pocketGuideOrder: 12
+pocketGuideOrder: 11
 section: Self-drive
 pocketGuideCta:
   kind: link
   label: Open your scouts
   href: https://app.posthog.com/inbox/scouts
   note: Find PR follow-up in the list and check it's on.
-  requires:
-    label: Needs exceptions reaching PostHog.
 ---
 
 <LeftPage>
 
 <DivergenceFigure
     n={1}
-    caption="What the scout saw: Release 1.4.2 went out at 09:10. Checkout exceptions climbed after it while sessions held steady."
+    caption="What the scout saw: Release 1.5.0 went out at 09:10. Checkout exceptions climbed after it while sessions held steady."
     markerAt={0.55}
-    markerLabel="1.4.2 deployed"
+    markerLabel="1.5.0 deployed"
     series={[
         { label: 'Sessions', note: 'unchanged', values: [0.62, 0.64, 0.61, 0.66, 0.63, 0.65, 0.64, 0.62, 0.66, 0.63, 0.65, 0.64] },
         {
             label: 'Checkout exceptions',
-            note: 'starts in 1.4.2',
+            note: 'starts in 1.5.0',
             emphasis: true,
             values: [0.07, 0.05, 0.09, 0.07, 0.05, 0.07, 0.09, 0.38, 0.69, 0.8, 0.85, 0.93],
         },
@@ -39,14 +37,14 @@ pocketGuideCta:
     priority="P2"
     status="Ready"
     actionability="Actionable"
-    headline="A new TypeError on checkout started with the 1.4.2 deploy. Its top frames are in two files acme/web#4821 changed"
+    headline="A new TypeError on checkout started with the 1.5.0 deploy. Its top frames are in two files acme/web#4877 changed"
     report={{
-        title: 'New checkout TypeError since the 1.4.2 deploy, thrown from two files acme/web#4821 changed',
+        title: 'New checkout TypeError since the 1.5.0 deploy, thrown from two files acme/web#4877 changed',
         source: 'Scout · PR follow-up',
         receivedAgo: '2h',
         affected: '420 users, 1,180 exceptions in 6 hours',
-        body: "acme/web#4821, \"Move the shipping address into a shared form\" by @dana, merged at 08:41 and went live at 09:10 with release 1.4.2 (GitHub deployment to production). Its description calls it a refactor with no change in behavior.\n\nA new issue, `TypeError: Cannot read properties of null (reading 'postcode')`, was first seen at 09:16. Its top two frames are in `checkout/AddressForm.tsx` and `checkout/useSavedAddress.ts`, and #4821 changed both. In the 6 hours since the deploy, it fired 1,180 times for 420 users. In the 6 hours before the merge, it didn't fire at all, and checkout sessions held steady across both windows.\n\nThe deploy carried four other pull requests. None of them changed a file in this stack trace.",
-        suggestedAction: 'Handle a saved address with no postcode in `useSavedAddress`, or roll back #4821 while the fix is written.',
+        body: "acme/web#4877, \"Move the shipping address into a shared form\" by @dana, merged at 08:41 and went live at 09:10 with release 1.5.0 (GitHub deployment to production). Its description calls it a refactor with no change in behavior.\n\nA new issue, `TypeError: Cannot read properties of null (reading 'postcode')`, was first seen at 09:16. Its top two frames are in `checkout/AddressForm.tsx` and `checkout/useSavedAddress.ts`, and #4877 changed both. In the 6 hours since the deploy, it fired 1,180 times for 420 users. In the 6 hours before the merge, it didn't fire at all, and checkout sessions held steady across both windows.\n\nThe deploy carried four other pull requests. None of them changed a file in this stack trace.",
+        suggestedAction: 'Handle a saved address with no postcode in `useSavedAddress`, or roll back #4877 while the fix is written.',
         actionNote: 'An agent opens the pull request – you review and merge.',
     }}
 />
@@ -57,75 +55,41 @@ pocketGuideCta:
 
 # Connect a deploy to an error burst
 
-A deploy often carries several merged pull requests. When a new <Term name="issue" /> appears minutes later, its first-seen time points at the deploy, and its <Term name="stack trace" /> points at the files that threw. Tying the two together means reading each pull request in the deploy against the stack trace, often after the authors have moved on to other work.
+This creates a <Term name="scout" />, which is a scheduled agent that queries your PostHog events and files a <Term name="report" /> in your <Term name="inbox" /> when it finds something.
 
-This scout follows up on each merged pull request once it's live and reports a new error whose stack frames are in files that pull request changed.
+This one, PR follow-up, ties a new <Term name="issue" /> after a deploy to the pull request that likely caused it. A deploy often carries several pull requests, so doing this by hand means reading each one against the <Term name="stack trace" />.
 
 ## What the scout looks at
 
-Release 1.4.2 went out at 09:10 with five merged pull requests. Six minutes later, a `TypeError` that PostHog had never seen started firing on checkout. One of the five could have caused it, or something unrelated could have broken at the same time. Which is it?
+Release 1.5.0 went out at 09:10 with five pull requests. Six minutes later, a new `TypeError` started firing on checkout <SeeFig n={1} />. Its stack frames are in a file one of those pull requests changed, so the scout reports it against that pull request. A new issue with no frames in changed files goes to the [spikes and stuck loops](/learn/error-tracking/pocket-guide/errors-as-signals) scout instead.
 
-- If none of the new issue's stack frames are in a file the deploy changed, the scout stays _quiet_ and leaves the issue to the [error tracking scout](/learn/error-tracking/pocket-guide/errors-as-signals).
-- If the issue was first seen after the deploy and its stack frames are in files one of the five changed, it's a side effect of that pull request. The scout _**reports**_.
-
-In <SeeFig n={1} />, checkout exceptions climb after the deploy while sessions hold steady.
-
-A merged pull request isn't live until it deploys, so the scout waits for the deploy. It reads the deploy time from GitHub deployments, GitHub releases, or a deploy annotation that names the commit. Without any of those, it assumes server code is live 24 hours after the merge and web or mobile code 72 hours or more after it. A report built on that assumption says the deploy time is an estimate.
-
-The deploy window runs from that deploy to the next one. An error that starts after a later deploy belongs to the pull requests in that later deploy. An older issue with frames in a file the pull request changed counts too, if it reopens or fires at a clearly higher rate than before the merge.
-
-When one deploy carries several pull requests, including dependency bumps from bots, the scout names the pull request whose files match the stack trace. When more than one matches, it names the whole deploy in one report.
+An older issue counts too if it reopens or fires at a clearly higher rate after the deploy.
 
 ## The report in your inbox
 
-When the scout ties a new error to a pull request, it files a <Term name="report" /> in your <Term name="inbox" />, and <SeeFig n={2} /> breaks the card down part by part. Click **Review** to open the full report.
-
-The report leads with the pull request's number, title, author, merge time, and deploy time. It then compares the error before the merge and after the deploy, over windows of the same length, and recommends a next step, such as fixing the code or rolling the pull request back. It suggests the pull request's author as the reviewer.
-
-A side effect that hits users in volume is P2, and a smaller one is P3. It's P1 only when the error tracking scout would rate the same error P1 and it's still firing. If your inbox already has an open report on the same issue, such as one from the error tracking scout, PR follow-up adds the pull request to that report as evidence instead of filing a second one.
-
-## The pull request you merge
-
-When the stack trace ties the error to one pull request's files, the scout marks the report actionable. PostHog then dispatches an agent to write the fix, with the report and its evidence attached as context. You review and merge it like any other pull request.
-
-If the change shipped behind a <Term name="feature flag" />, switching the flag off stops the errors while the fix is written. [The off switch](/learn/feature-flags/pocket-guide/off-switch) in the Feature Flags pocket guide covers how fast that takes effect.
-
-Once the fix merges and deploys, PR follow-up checks it like any other merged pull request. Merging the fix also resolves the report, and the inbox validation scout then checks whether the error stopped. [Check whether the fix held](/learn/error-tracking/pocket-guide/fix-while-you-sleep) covers that scout.
-
-Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
+The <Term name="report" /> names the pull request, its author, merge time, and deploy time, compares the error before and after, and recommends fixing the code or rolling back <SeeFig n={2} />. Click **Ask AI** on the report to ask who else is affected, whether the problem is new, or what to do next. See [reports](/docs/self-driving/reports#ask-ai-about-a-report).
 
 ## The scout itself
 
-A <Term name="scout" /> is a set of instructions an agent follows on a schedule. PR follow-up is one of the canonical scouts PostHog ships, and you can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md). The [Self-driving pocket guide](/docs/self-driving/pocket-guide/101) explains how scouts work.
-
-It checks whether each merged pull request did what it claimed and whether it broke anything else, such as starting a new error in the files it changed.
-
-Each run reads:
-
-- **Your merged pull requests**, from GitHub connected to PostHog or synced into your data warehouse next to your product data. It reads each one's title, description, and the files it changed.
-- **Your deploys**, from GitHub deployments, GitHub releases, or deploy annotations, to find when each merge went live.
-- **Error Tracking**, for issues that first appeared or reopened in the deploy window, and the files their stack frames name.
-- **The rest of what the pull request touched**, such as the error rate and latency of the service it changed, the volume of the logs it writes, web vitals on the page it renders, and any alerts on them that fired in the deploy window.
+PostHog maintains this scout, and you can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md). It waits for each merged pull request to deploy. Then it matches the stack frames of issues that started in the deploy window against the files the pull request changed. It reads deploy times from GitHub deployments, GitHub releases, or deploy annotations. Without one, it estimates 24 hours after the merge for server code, and 72 hours or more for web and mobile.
 
 ## The schedule it runs on
 
-You choose how often PR follow-up runs, from every 30 minutes to every 30 days, or at set times with a cron expression. See [setting a scout's schedule](/docs/self-driving/scouts#setting-a-scouts-schedule).
-
-Each run judges about eight pull requests, starting with the ones earlier runs held back. The scout keeps a verdict on each pull request in its memory, so later runs skip the ones it has already settled. Most pull requests do what they claim, so most runs end without a report.
+The scout runs on the schedule you set in its **Settings**, but stays quiet unless something needs your attention. Each run judges about eight pull requests.
 
 ## Add this to your scout troop
 
-PostHog ships this scout, and you can turn it on or off for each project. It has one requirement and two recommendations:
+PostHog ships this scout, and you can turn it on or off for each project. It uses:
 
-- **Required:** GitHub connected to PostHog, so the scout can list merged pull requests and the files they changed. See [GitHub](/docs/libraries/github).
-- **Recommended:** a deploy signal, such as GitHub deployments synced through the [GitHub source](/docs/cdp/sources/github), GitHub releases, or deploy annotations that name the commit. Without one, the scout estimates when each merge went live.
-- **Recommended:** <Term name="source map">source maps</Term> for bundled code, so stack frames name files in your repository. See [Make stack traces readable](/learn/error-tracking/pocket-guide/stack-traces).
+- **Required:** GitHub connected to PostHog, so the scout can see merged pull requests and the files they changed. See [GitHub](/docs/libraries/github).
+- **Recommended:** a deploy signal, like GitHub deployments synced through the [GitHub source](/docs/data-pipelines/sources/github). Without one, the scout estimates deploy times.
+- **Recommended:** <Term name="source map">source maps</Term> for bundled code, so stack frames name your files. See [Make stack traces readable](/learn/error-tracking/pocket-guide/stack-traces).
 
 <Action />
 
 <SeeAlso>
 
-See also: [Scouts](/docs/self-driving/scouts) · [Scout examples](/docs/self-driving/scout-examples) · [Reports](/docs/self-driving/reports) · [GitHub source](/docs/cdp/sources/github) · [Releases](/docs/error-tracking/releases)
+See also: [Scouts](/docs/self-driving/scouts) · [Scout examples](/docs/self-driving/scout-examples) · [Reports](/docs/self-driving/reports) · [GitHub source](/docs/data-pipelines/sources/github) · [Releases](/docs/error-tracking/releases)
 
 </SeeAlso>
 

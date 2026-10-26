@@ -1,3 +1,4 @@
+import SqlBarChart, { type SqlBarChartProps } from './SqlBarChart'
 import React from 'react'
 
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
@@ -13,6 +14,7 @@ import AssignmentRuleForm, { AssignmentRuleFormProps } from './AssignmentRuleFor
 import Divergence, { DivergenceSeries } from './Divergence'
 import ExternalIssue from './ExternalIssue'
 import Figure from './Figure'
+import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, EventTree } from './PostHogInspector'
 import FactorSplit, { FactorSplitRow } from './FactorSplit'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import { ReleaseConditionsForm, VariantsForm } from './FeatureFlagForms'
@@ -590,6 +592,68 @@ export function LoopFigure({ n = 1, caption }: { n?: number; caption: string }):
     return (
         <Fig n={n} caption={caption}>
             <CustomSelfDrivingLoop stages={LOOP_STAGES} loop />
+        </Fig>
+    )
+}
+
+/** A SQL editor result drawn as its horizontal bar chart, the way the Visualization tab shows it. */
+export function SqlBarChartFigure({
+    n = 1,
+    caption,
+    legend,
+    ...chart
+}: SqlBarChartProps & { n?: number; caption: string; legend?: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <SqlBarChart {...chart} />
+        </Fig>
+    )
+}
+
+/** The properties an exception adds on top of the ones every event carries, shaped like a stored browser exception. */
+const EXCEPTION_PROPERTIES = {
+    $exception_list: [
+        {
+            type: 'CheckoutError',
+            value: 'Discount total missing',
+            mechanism: { handled: false, synthetic: false },
+            stacktrace: {
+                type: 'resolved',
+                frames: [
+                    {
+                        source: 'src/checkout/confirm.ts',
+                        resolved_name: 'confirmOrder',
+                        line: 42,
+                        column: 18,
+                        in_app: true,
+                    },
+                ],
+            },
+        },
+    ],
+    $exception_level: 'error',
+    $exception_fingerprint: '8d1f3b0e5c2a47f9',
+    $exception_issue_id: '0199e3b2-7c1a-7d40-9e5f-3a6b8c2d1e0f',
+}
+
+/** An exception event in the inspector the AI Observability guide uses. */
+export function ExceptionEventFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    const payload = {
+        event: '$exception',
+        properties: {
+            distinct_id: 'user_123',
+            $session_id: 'session_456',
+            $current_url: 'https://app.example.com/checkout',
+            $groups: { company: 'acme' },
+            '$feature/new-checkout': 'test',
+            ...EXCEPTION_PROPERTIES,
+        },
+    }
+    return (
+        <Fig n={n} caption={caption}>
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES} showHeader={false}>
+                <EventTree value={JSON.stringify(payload)} expand collapsed={['$groups', '$exception_list']} />
+            </PostHogInspector>
         </Fig>
     )
 }

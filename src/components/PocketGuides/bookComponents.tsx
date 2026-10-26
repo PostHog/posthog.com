@@ -29,12 +29,14 @@ import {
 } from './ProductAnalyticsDashboardExhibits'
 import ProductAnalyticsDashboardNextSteps from './ProductAnalyticsDashboardNextSteps'
 
-import Action, { Setup } from './Action'
+import Action, { Setup, TryPrompt } from './Action'
 import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
     AssignmentRuleFigure,
+    SqlBarChartFigure,
+    ExceptionEventFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
@@ -101,6 +103,8 @@ export const bookMdxComponents = {
     ReportFigure,
     AnatomyFigure,
     AssignmentRuleFigure,
+    SqlBarChartFigure,
+    ExceptionEventFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
@@ -128,6 +132,7 @@ export const bookMdxComponents = {
     Callout,
     ProductVideo,
     Setup,
+    TryPrompt,
     SeeAlso,
     ViewRecordings,
     ViewRecording,
