@@ -6433,16 +6433,10 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/business-knowledge/start',
+                    url: '/docs/business-knowledge/start-here',
                     icon: 'IconRocket',
                     featured: true,
                     color: 'purple',
-                },
-                {
-                    name: 'Before answers',
-                    url: '/docs/business-knowledge/requirements',
-                    icon: 'IconListCheck',
-                    color: 'orange',
                 },
                 {
                     name: 'Add and manage sources',
@@ -6451,13 +6445,25 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Where to use',
+                    name: 'AI data processing',
+                    url: '/docs/business-knowledge/ai-data-processing',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                 },
                 {
                     name: 'GitHub repositories',
                     url: '/docs/business-knowledge/github',
                     icon: 'IconGithub',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'PostHog AI, Support, MCP',
+                    url: '/docs/business-knowledge/where-to-use',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
                     name: 'Learn from support',
