@@ -76,6 +76,12 @@ process.on("SIGTERM", async () => {
   await posthog.shutdown()
   process.exit(0)
 })
+
+// stdio only: MCP clients close stdin first and may never send SIGTERM
+process.stdin.on("end", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
 ```
 
 ```python file=Python
