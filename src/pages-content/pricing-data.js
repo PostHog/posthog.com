@@ -74,7 +74,8 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events are retained for at least 2 years on pay-as-you-go plans and 1 year on free plans. For more
+                    Events are retained for 1 year on free plans and at least 2 years on pay-as-you-go plans. Platform
+                    packages extend this to 3 years on Boost, 5 years on Scale, and 7 years on Enterprise. For more
                     information on data retention, see the{' '}
                     <Link to="/docs/data/events-retention">events data retention docs</Link>.
                 </p>
