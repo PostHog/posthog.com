@@ -214,8 +214,7 @@ const steps: CarouselSlideType[] = [
         description: (
             <>
                 <p>
-                    Scanned sessions lead to observations, verdicts, scores, tags, or summaries – whatever you need to
-                    get a read. Track observations as <code>$recording_observed</code> events, so you can chart them,
+                    Scanned sessions lead to observations, verdicts, scores, tags, or summaries. Track observations as <code>$recording_observed</code> events, so you can chart them,
                     build cohorts, or trigger alerts.
                 </p>
                 <SlideCallout>
