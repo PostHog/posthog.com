@@ -15,7 +15,6 @@ export { default as buildProductMenuTabs, surfaceBasePath } from './buildProduct
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'
-export { getProductSurfaceUrl } from './getProductSurfaceUrl'
 export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { ProductNavItem, SectionComponentProps } from './types'

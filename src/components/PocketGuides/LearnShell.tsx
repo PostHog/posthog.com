@@ -9,7 +9,7 @@ import { volumeById } from '../../constants/pocketGuides'
 // Kept apart from LearnPage: AppWindow imports this file on every page, so it must not pull in guide content.
 
 /** True inside `LearnShell`, so `LearnPage` renders only its content. */
-export const InLearnShell = createContext(false)
+export const LearnShellContext = createContext(false)
 
 /**
  * Learn's ReaderView and product sidebar. AppWindow renders it around every `/learn/<product>`
@@ -38,7 +38,7 @@ export default function LearnShell({ path, children }: { path: string; children:
             menuTabs={buildProductMenuTabs({ productData, activeSurface: 'learn', currentPath })}
             productSelect={<ProductSwitcher activeHandle={productData.handle} surface="learn" />}
         >
-            <InLearnShell.Provider value>{children}</InLearnShell.Provider>
+            <LearnShellContext.Provider value={true}>{children}</LearnShellContext.Provider>
         </ReaderView>
     )
 }

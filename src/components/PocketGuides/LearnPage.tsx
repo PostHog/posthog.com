@@ -6,7 +6,7 @@ import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 
-import LearnShell, { InLearnShell } from './LearnShell'
+import LearnShell, { LearnShellContext } from './LearnShell'
 import LearnSurface from './LearnSurface'
 
 interface LearnPageProps {
@@ -40,7 +40,7 @@ export default function LearnPage({
     landing: Landing,
     children,
 }: LearnPageProps): JSX.Element {
-    const inShell = useContext(InLearnShell)
+    const inShell = useContext(LearnShellContext)
     const productData = useProduct({ handle: productHandle }) as any
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
