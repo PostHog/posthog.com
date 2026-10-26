@@ -1,5 +1,5 @@
 ---
-title: A faster events table (and what's changing)
+title: Queries are 2x faster, but we're making some event properties temporary
 date: 2026-10-26
 rootPage: /blog
 sidebar: Blog
@@ -28,9 +28,9 @@ seo:
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
 - All of this takes effect on November 30.
 
-## What's happening
+## We're making queries faster
 
-Every event you send is stored in one very large table. Until now we stored much of each event twice: once as raw JSON and again as columns for fast querying. That made the table slow to change and expensive to scan.
+Every event you capture is stored in one very large table. Until now we stored much of each event twice: once as raw JSON and again as columns for fast querying. That made the table slow to change and expensive to scan.
 
 We're moving to a format that stores each property once, with its real type (numbers stay numbers, booleans stay booleans). It takes far less storage, and a query reads only the properties it asks for.
 
@@ -43,9 +43,9 @@ Here's what we measured by replaying real production queries against the new for
 | Session-based queries | ~2x faster |
 | Heaviest session replay queries | Over 2x faster |
 
-Replay, error tracking, LLM analytics, experiments and PostHog AI all got faster. Queries over many custom properties improve least, and a few may be slightly slower.
+Replay, error tracking, AI observability, experiments and PostHog AI all got faster. Queries over many custom properties improve least, and a few may be slightly slower.
 
-## Why some data becomes temporary
+## Why we're making some properties temporary
 
 We looked at how event properties get queried. A small set, mostly SDK diagnostics and person-update instructions like `$set`, is useful for debugging right after an event arrives. After that it's almost never queried, but we stored it forever on every event.
 
@@ -53,7 +53,7 @@ We looked at how event properties get queried. A small set, mostly SDK diagnosti
 
 From November 30, we keep these properties for 60 days. You can still inspect them while debugging, and we no longer store and scan the same data twice. The tables below list every change.
 
-## What's moving
+## What data is moving
 
 These stay available, in a new place.
 
@@ -66,7 +66,7 @@ These stay available, in a new place.
 | `null` property values | Stored as `null` | Stored as "not set". Exports and event details still show `null` | No. Queries already treat `null` and "not set" the same |
 <!-- | Batch exports | Full event properties | [Export format changes – confirm before publishing] | [TBC] | -->
 
-## What expires after 60 days
+## What properties expire after 60 days
 
 These properties stay queryable for 60 days after we receive the event, then we delete them. The event and all its other properties are kept as normal.
 
@@ -86,7 +86,7 @@ Good to know:
 - **Historical events:** on November 30, events we received more than 60 days earlier (before roughly October 1) lose `$set`, `$set_once` and the other properties in this table. Their person properties are kept.
 - **Not affected:** `$sent_at`, `$sdk_debug_current_session_duration` and `$debug_images` stay permanent, because people use them in longer-term queries and for error symbolication.
 
-## What we're removing
+## What properties we're removing
 
 These properties are deprecated, and we'll stop storing them on events.
 
