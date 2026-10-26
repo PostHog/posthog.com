@@ -1,6 +1,6 @@
 ---
 date: "2026-10-26"
-title: '"Find issues that frustrate users" (and other things teams ask AI to watch in their product)'
+title: All the ways Replay Vision helps users find (and solve) product problems
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/replay_vision_data_study_1x_19a082f6ef.png
 featuredImageType: full
 author:
