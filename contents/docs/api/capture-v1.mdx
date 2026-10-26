@@ -110,7 +110,7 @@ Each event in `batch`:
 
 You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `PostHog-Sdk-Info` header, which wins over any value in `properties`.
 
-<!-- TODO(capture-v1): link sdk-specs for the full wire contract once its v1 pages are published. TODO(link) -->
+The [capture spec in the SDK specs](https://github.com/PostHog/sdk-specs/blob/main/openspec/specs/capture/spec.md) describes the full wire contract that PostHog SDKs follow.
 
 ### Event UUIDs
 
@@ -129,8 +129,6 @@ Keep each distinct ID under 200 bytes. Capture v1 drops events with longer IDs, 
 
 Don't use one value for many people or machines, such as `anonymous`, `guest`, `system`, `null`, or a server name. PostHog accepts events with these common placeholder values but processes them without a person profile, and returns the result `ok` with the detail `person_processing_disabled`. A distinct ID that sends far more events than one person could is also [rate limited](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids). See [identifying users](/docs/product-analytics/identify) for more.
 
-<!-- TODO(capture-v1): align the identify page's list of refused IDs with capture v1's placeholder list, or keep both lists described rather than enumerated. -->
-
 ## Event options
 
 Options control how PostHog processes an event. They replace the legacy option properties: the `$`-prefixed properties legacy capture reads as settings from `properties`.
@@ -141,8 +139,6 @@ Options control how PostHog processes an event. They replace the legacy option p
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
 | `disable_skew_correction` | Boolean | `true` keeps your `timestamp` exactly as sent instead of [correcting for clock skew](#timestamps-and-clock-skew) | `$ignore_sent_at` |
 | `product_tour_id` | String | Links the event to a product tour. PostHog's web SDK sets it on product tour events, so you rarely need it | `$product_tour_id` |
-
-<!-- TODO(capture-v1): confirm the cookieless tracking link. -->
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
 - `product_tour_id` also accepts a whole number. An empty string means "not set".
@@ -233,8 +229,6 @@ Some of these rules are stricter than legacy capture:
 
 The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events](/docs/ai-observability/large-events#limits).
 
-<!-- TODO(capture-v1): decide whether to publish the AI endpoint's request body limits. -->
-
 ## Responses
 
 ### Status codes
@@ -250,8 +244,6 @@ The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events
 | `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
 | `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | No – v1 SDKs treat it as final. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
-
-<!-- TODO(capture-v1): 404 and 429 retry behavior is still being decided; update this if it changes. -->
 
 
 Errors use this body. `error` is a stable tag you can match on.
@@ -312,16 +304,13 @@ A `200` response has one result for every event, keyed by the event's `uuid`:
 
 When an event is over a product's quota, the result is `drop` and `details` names the quota that was exceeded.
 
-<!-- TODO(capture-v1): link the full list of detail values in sdk-specs once published. TODO(link) -->
-<!-- TODO(capture-v1): decide whether event_restriction_drop, ai_byte_rate_limited, rejected, and serialization_failed belong in this table. -->
+The [capture spec in the SDK specs](https://github.com/PostHog/sdk-specs/blob/main/openspec/specs/capture/spec.md) lists how PostHog SDKs handle each result.
 
 Many drops also raise an [ingestion warning](/docs/data/ingestion-warnings) in your project, so you can find them later.
 
 ## Retries
 
 Retry when the response is `408`, `500`, `502`, `503`, or `504`, when the network fails, and for each event whose result is `retry`. Treat every other response as final.
-
-<!-- TODO(capture-v1): 404 and 429 retry behavior is still being decided; update this if it changes. -->
 
 When you retry:
 
