@@ -1,11 +1,13 @@
 import { execFileSync, spawnSync } from 'node:child_process'
 import { join } from 'node:path'
 import { repoRoot } from '../spec.ts'
-import type { RenderedCase } from '../render.ts'
+import type { RenderedCheck } from '../render.ts'
 
-// The only Gauge-aware file. It turns rendered cases into Gauge's --apply case spec
-// (see `gauge run --schema`) and wraps the CLI calls. Written against gauge CLI
-// 0.23, which runs in local Docker unless told --hosted, so every call passes it.
+// The only Gauge-aware file. It turns rendered checks into Gauge's --apply case spec
+// (see `gauge run --schema`), one Gauge case per check, and wraps the CLI calls.
+// Gauge says "case" where the eval files say "check"; this is the only place both
+// words meet. Written against gauge CLI 0.23, which runs in local Docker unless
+// told --hosted, so every call passes it.
 // The CLI runs from evals/ so it picks up evals/gauge.json, which keeps the Gauge
 // GitHub App from treating every posthog.com PR as an eval run.
 
@@ -28,19 +30,19 @@ export type GaugeSpec = {
     }[]
 }
 
-export function toGaugeSpecs(cases: RenderedCase[], samples: number): GaugeSpec[] {
+export function toGaugeSpecs(checks: RenderedCheck[], samples: number): GaugeSpec[] {
     const specs: GaugeSpec[] = []
-    for (let start = 0; start < cases.length; start += maxCasesPerRequest) {
+    for (let start = 0; start < checks.length; start += maxCasesPerRequest) {
         specs.push({
             version: 2,
-            cases: cases.slice(start, start + maxCasesPerRequest).map((c) => ({
+            cases: checks.slice(start, start + maxCasesPerRequest).map((c) => ({
                 key: c.key,
                 prompt: c.prompt,
                 criteria: c.criteria,
                 config: {
                     agents: c.harnesses.map((h) => ({ agent: h.gauge, models: h.models })),
                     sampleCount: samples,
-                    // An answer-only case has no starting app.
+                    // An answer-only check has no starting app.
                     repoUrl: c.fixture?.repo ?? null,
                     repoRef: c.fixture?.ref ?? null,
                     ...(c.skillRefs.length > 0 ? { skillRefs: c.skillRefs } : {}),

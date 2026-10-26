@@ -1,13 +1,15 @@
 import { createHash } from 'node:crypto'
-import { casePages, type Arm, type EvalCase, type EvalFile, type Fixture, type Harness, type Shared } from './spec.ts'
+import { assertionName, assertionRubric } from './assertions.ts'
+import { checkPages, type Arm, type EvalCheck, type EvalFile, type Fixture, type Harness, type Shared } from './spec.ts'
 
-// Turns eval files into rendered cases: one per case × arm, with every selected
-// harness on each. Still harness-neutral; adapters/gauge.ts does the Gauge part.
+// Turns eval files into rendered checks: one per check × arm, with every selected
+// harness on each. Still harness-neutral; adapters/gauge.ts turns each one into a
+// Gauge case.
 
-export type RenderedCase = {
+export type RenderedCheck = {
     key: string // unique, lowercase-kebab, ≤ 64 chars
     file: string
-    caseId: string
+    checkId: string
     arm: Arm
     pages: string[]
     fixture: (Fixture & { name: string }) | null
@@ -60,25 +62,26 @@ export function renderSkill(page: string, pageText: string): string {
     ].join('\n')
 }
 
-export function caseKey(file: EvalFile, evalCase: EvalCase, arm: Arm): string {
+export function checkKey(file: EvalFile, check: EvalCheck, arm: Arm): string {
     const owner = file.page ? slug(file.page) : `journey-${file.path.replace(/^.*\//, '').replace(/\.eval\.yaml$/, '')}`
-    const key = `${owner}-${evalCase.id}-${arm}`
+    const key = `${owner}-${check.id}-${arm}`
     return key.length <= 64 ? key : `${key.slice(0, 51).replace(/-$/, '')}-${shortHash(key)}`
 }
 
-// Markers around pasted pages, so read-check.ts can drop them before looking for fetches.
+// Markers around pasted pages, so docs-read.ts can drop them before looking for fetches.
 export const inlineOpen = (url: string) => `<docs-page url="${url}">`
 export const inlineClose = '</docs-page>'
 const relyOnIt = 'and rely on it rather than on what you already know'
 
+// The baseline arm sends the prompt as written; every other arm adds a tail.
 export async function renderPrompt(
-    task: string,
+    prompt: string,
     arm: Arm,
     pages: string[],
     baseUrl: string,
     pageText: PageText
 ): Promise<string> {
-    const lines = [task]
+    const lines = [prompt]
     const several = pages.length > 1
     if (arm === 'link') {
         lines.push('', `Follow ${several ? 'these guides' : 'this guide'} ${relyOnIt}:`)
@@ -97,23 +100,27 @@ export async function renderPrompt(
     return lines.join('\n')
 }
 
-export type Selection = { file: EvalFile; evalCase: EvalCase; arms: Arm[] }
+export type Selection = { file: EvalFile; check: EvalCheck; arms: Arm[] }
 
-export async function renderCases(
+export async function renderChecks(
     selections: Selection[],
     harnesses: Harness[],
     shared: Shared,
     baseUrl: string,
     pageText: PageText
-): Promise<RenderedCase[]> {
-    const rendered: RenderedCase[] = []
-    for (const { file, evalCase, arms } of selections) {
-        const fixture = evalCase.fixture ? { name: evalCase.fixture, ...shared.fixtures[evalCase.fixture] } : null
+): Promise<RenderedCheck[]> {
+    const rendered: RenderedCheck[] = []
+    for (const { file, check, arms } of selections) {
+        const fixture = check.fixture ? { name: check.fixture, ...shared.fixtures[check.fixture] } : null
         const fill = (text: string) => (fixture ? text.replaceAll('{folder}', fixture.folder) : text)
-        const pages = casePages(file, evalCase)
+        const pages = checkPages(file, check)
         const criteria = [
-            ...evalCase.use.map((name) => ({ name, rubric: fill(shared.criteria[name].trim()) })),
-            ...Object.entries(evalCase.criteria).map(([name, rubric]) => ({ name, rubric: fill(rubric) })),
+            ...check.shared.map((name) => ({ name, rubric: fill(shared.criteria[name].trim()) })),
+            ...check.assertions.map((assertion) => ({
+                name: assertionName(assertion),
+                rubric: fill(assertionRubric(assertion)),
+            })),
+            ...Object.entries(check.rubrics).map(([name, rubric]) => ({ name, rubric: fill(rubric) })),
         ]
         for (const arm of arms) {
             const skillRefs =
@@ -123,14 +130,14 @@ export async function renderCases(
                       )
                     : []
             rendered.push({
-                key: caseKey(file, evalCase, arm),
+                key: checkKey(file, check, arm),
                 file: file.path,
-                caseId: evalCase.id,
+                checkId: check.id,
                 arm,
                 pages,
                 fixture,
                 harnesses,
-                prompt: await renderPrompt(fill(evalCase.task), arm, pages, baseUrl, pageText),
+                prompt: await renderPrompt(fill(check.prompt), arm, pages, baseUrl, pageText),
                 criteria,
                 skillRefs,
             })

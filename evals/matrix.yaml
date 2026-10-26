@@ -1,4 +1,4 @@
-# Harnesses and models the runner sends cases to. `verified: true` means the
+# Harnesses and models the runner sends checks to. `verified: true` means the
 # pair is listed by `gauge models list --hosted` for our org and a dry run
 # accepted it. Unverified pairs run only with --include-unverified.
 harnesses:
@@ -11,8 +11,8 @@ harnesses:
       models: [gpt-6-sol]
       verified: false
 
-# Arms a case gets when its spec doesn't list any. `skill` joins the default
+# Arms a check gets when its eval file doesn't list any. `skill` joins the default
 # once the docs skills are registered in Gauge (see README).
-defaultArms: [prompt, link, inline]
+defaultArms: [baseline, link, inline]
 
 samples: 1

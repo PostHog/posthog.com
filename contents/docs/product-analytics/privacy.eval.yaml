@@ -1,15 +1,19 @@
-version: 1
 owner: product-analytics
 tags: [instrumentation, javascript, privacy]
 status: active
 
-cases:
+checks:
     - id: opt-in-consent
+      description: >-
+          Checks that the privacy page teaches the agent to start opted out,
+          wire a settings checkbox to the opt-in and opt-out calls, and strip
+          the current URL with before_send. The prompt describes the consent
+          behavior a user wants and never names those APIs.
       workspace:
           fixture: web-vite
       pages:
           - docs/product-analytics/installation/web
-      task: |
+      prompt: |
           Add product analytics to the app in {folder}/, but nothing may be
           captured until a user agrees. Add a "Share usage analytics" checkbox
           to the Preferences section of the settings page
@@ -20,14 +24,15 @@ cases:
           Only change files inside {folder}/. Read the project token and host
           from environment variables.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          opted-out-by-default: >-
-              posthog.init is called with opt_out_capturing_by_default: true.
-              Cite the file and line.
-          consent-toggle: >-
-              The checkbox calls posthog.opt_in_capturing() when checked and
-              posthog.opt_out_capturing() when unchecked, and sets its initial
-              state from posthog.has_opted_out_capturing(). Cite the file and lines.
-          strip-current-url: >-
-              posthog.init has a before_send function that removes or nulls
-              event.properties['$current_url'] and returns the event.
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              opted-out-by-default: >-
+                  posthog.init is called with opt_out_capturing_by_default: true.
+                  Cite the file and line.
+              consent-toggle: >-
+                  The checkbox calls posthog.opt_in_capturing() when checked and
+                  posthog.opt_out_capturing() when unchecked, and sets its initial
+                  state from posthog.has_opted_out_capturing(). Cite the file and lines.
+              strip-current-url: >-
+                  posthog.init has a before_send function that removes or nulls
+                  event.properties['$current_url'] and returns the event.

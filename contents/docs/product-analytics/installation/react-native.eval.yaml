@@ -1,26 +1,30 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, javascript, react-native, mobile]
 status: active
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the React Native install page alone gets an agent to wrap a bare
+          (non-Expo) app in PostHogProvider and add the native peer dependencies it
+          needs.
       workspace:
           fixture: react-native-app
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              The app is a bare React Native project, not Expo, so
-              {folder}/package.json lists posthog-react-native together with its
-              peer dependencies @react-native-async-storage/async-storage (already
-              present), react-native-device-info and react-native-localize.
-          required-steps-done: >-
-              The app's root component (for example in {folder}/src/App.js or
-              {folder}/src/index.js) is wrapped in PostHogProvider imported from
-              posthog-react-native, with the project token passed as apiKey and
-              the host passed as options.host. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          assertions:
+              - dependency: posthog-react-native
+              - dependency: '@react-native-async-storage/async-storage'
+              - dependency: react-native-device-info
+              - dependency: react-native-localize
+          rubrics:
+              required-steps-done: >-
+                  The app's root component (for example in {folder}/src/App.js or
+                  {folder}/src/index.js) is wrapped in PostHogProvider imported from
+                  posthog-react-native, with the project token passed as apiKey and
+                  the host passed as options.host. Cite the file and line(s).

@@ -1,31 +1,37 @@
-version: 1
 owner: product-analytics
 tags: [concept, billing]
 status: active
 
-cases:
+checks:
     - id: reduce-analytics-bill
-      task: |
+      description: >-
+          Checks that the cutting costs page explains what drives the product
+          analytics bill: identified versus anonymous events, repeated identify
+          and group calls, and autocapture and pageview volume. The question
+          names identify and group because they describe the user's setup, not
+          the fix.
+      prompt: |
           Our PostHog product analytics bill keeps growing. We use posthog-js
           on our web app with the default config, call identify on every page
           load, and call group on every route change. What's driving the cost
           and what should we change to bring it down?
       criteria:
-          use: [answers-directly]
-          anonymous-events: >-
-              The answer says anonymous events can be up to 4x cheaper than
-              identified events, so identified events should only be captured
-              when needed, and suggests the PostHog billable usage dashboard
-              template to see what drives usage.
-          identify-and-group: >-
-              The answer says repeated `identify()` calls with the same
-              distinct ID do not capture another `$identify` event (only a
-              `$set` when the passed person properties changed), so no custom
-              dedupe check is needed, while `group()` should be called only once
-              per session in client-side SDKs to avoid extra `$groupidentify`
-              events.
-          autocapture-and-pageviews: >-
-              The answer suggests reducing autocapture with an allow or ignore
-              list (or disabling it), and/or setting `capture_pageview: false`
-              and `capture_pageleave: false` in posthog.init, noting that
-              disabling pageviews can break features such as bounce rate.
+          shared: [answers-directly]
+          rubrics:
+              anonymous-events: >-
+                  The answer says anonymous events can be up to 4x cheaper than
+                  identified events, so identified events should only be captured
+                  when needed, and suggests the PostHog billable usage dashboard
+                  template to see what drives usage.
+              identify-and-group: >-
+                  The answer says repeated `identify()` calls with the same
+                  distinct ID do not capture another `$identify` event (only a
+                  `$set` when the passed person properties changed), so no custom
+                  dedupe check is needed, while `group()` should be called only once
+                  per session in client-side SDKs to avoid extra `$groupidentify`
+                  events.
+              autocapture-and-pageviews: >-
+                  The answer suggests reducing autocapture with an allow or ignore
+                  list (or disabling it), and/or setting `capture_pageview: false`
+                  and `capture_pageleave: false` in posthog.init, noting that
+                  disabling pageviews can break features such as bounce rate.

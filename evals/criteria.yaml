@@ -1,6 +1,6 @@
-# Shared rubrics. A case pulls one in with `criteria.use: [<name>]`, so the same
-# check reads the same way on every page and results line up across pages.
-# {folder} resolves to the case's fixture folder (see fixtures.yaml).
+# Shared rubrics. A check pulls one in with `criteria.shared: [<name>]`, so the same
+# rubric reads the same way on every page and results line up across pages.
+# {folder} resolves to the check's fixture folder (see fixtures.yaml).
 
 config-from-env: >-
     The project token and host are read from environment variables or the

@@ -1,22 +1,25 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, javascript, node, server]
 status: active
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the Node.js install page alone gets an agent to a working
+          posthog-node client with config from env, on an Express app.
       workspace:
           fixture: node-express
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              {folder}/package.json lists posthog-node as a dependency.
-          required-steps-done: >-
-              The app creates a client with new PostHog(token, { host }) using the
-              PostHog class from posthog-node, passing the project token and a
-              host option. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          assertions:
+              - dependency: posthog-node
+          rubrics:
+              required-steps-done: >-
+                  The app creates a client with new PostHog(token, { host }) using the
+                  PostHog class from posthog-node, passing the project token and a
+                  host option. Cite the file and line(s).

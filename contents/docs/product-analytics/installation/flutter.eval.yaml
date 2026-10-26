@@ -1,18 +1,23 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, flutter]
 status: draft
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the Flutter install page alone gets an agent through the
+          per-platform setup posthog_flutter needs, with config from the build. Draft
+          until the flutter-app fixture exists.
       workspace:
           fixture: flutter-app
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from the app's build configuration rather than hard-coding them in source. Make sure the app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              {folder}/pubspec.yaml lists posthog_flutter under dependencies.
-          required-steps-done: >-
-              Platform setup is done for each platform the app targets: on Android, android/app/src/main/AndroidManifest.xml has com.posthog.posthog.PROJECT_TOKEN and com.posthog.posthog.POSTHOG_HOST meta-data entries and minSdkVersion is raised in android/app/build.gradle; on iOS, ios/Runner/Info.plist has com.posthog.posthog.PROJECT_TOKEN and com.posthog.posthog.POSTHOG_HOST keys and the Podfile sets platform :ios, '13.0'; on web, web/index.html loads the PostHog snippet and calls posthog.init with the token and api_host. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          assertions:
+              - dependency: posthog_flutter
+                in: pubspec.yaml
+          rubrics:
+              required-steps-done: >-
+                  Platform setup is done for each platform the app targets: on Android, android/app/src/main/AndroidManifest.xml has com.posthog.posthog.PROJECT_TOKEN and com.posthog.posthog.POSTHOG_HOST meta-data entries and minSdkVersion is raised in android/app/build.gradle; on iOS, ios/Runner/Info.plist has com.posthog.posthog.PROJECT_TOKEN and com.posthog.posthog.POSTHOG_HOST keys and the Podfile sets platform :ios, '13.0'; on web, web/index.html loads the PostHog snippet and calls posthog.init with the token and api_host. Cite the file and line(s).

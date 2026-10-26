@@ -4,14 +4,14 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { dryRun, gaugeAvailable, launch, skillExists, toGaugeSpecs, wait } from './adapters/gauge.ts'
-import { readCheck } from './read-check.ts'
+import { docsRead } from './docs-read.ts'
 import {
     fetchPageText,
-    renderCases,
+    renderChecks,
     renderSkill,
     skillName,
     skillVersion,
-    type RenderedCase,
+    type RenderedCheck,
     type Selection,
 } from './render.ts'
 import {
@@ -22,6 +22,7 @@ import {
     pageForSourceFile,
     pageIndex,
     repoRoot,
+    suites,
     type Arm,
     type EvalFile,
     type Shared,
@@ -31,17 +32,18 @@ const usage = `Usage: pnpm evals <command> [filters]
 
 Commands:
   validate        Check every eval file. Free.
-  index           Print page → cases, from every eval file and pages: list.
-  plan            Render the selected cases and run gauge --dry-run. Free.
-  run --yes       Launch the selected cases, wait for judging, run the read check. Spends Gauge credits.
+  index           Print page → checks, from every eval file and pages: list.
+  plan            Render the selected checks and run gauge --dry-run. Free.
+  run --yes       Launch the selected checks, wait for judging, write the docs-read report. Spends Gauge credits.
   skills --out <dir>   Write one SKILL.md per selected page, for the skill arm.
 
 Filters (combine):
   --page <docs path>     e.g. product-analytics/identify; repeatable
   --tag <tag>            repeatable
+  --suite <suite>        smoke or deep; repeatable (default: both)
   --arm <arm>            ${arms.join(', ')}; repeatable
   --harness <id>         from matrix.yaml; repeatable
-  --changed [base]       only cases whose pages or eval file changed against base (default origin/master)
+  --changed [base]       only checks whose pages or eval file changed against base (default origin/master)
   --base-url <url>       where link, inline and skill read pages (default https://posthog.com)
   --include-unverified   add matrix harnesses with verified: false
   --write <dir>          plan: also write the Gauge specs there`
@@ -50,6 +52,7 @@ type Options = {
     command: string
     pages: string[]
     tags: string[]
+    suites: string[]
     arms: string[]
     harnesses: string[]
     changed: string | null
@@ -68,6 +71,7 @@ export function parseArgs(argv: string[]): Options {
         command: argv[0] && !argv[0].startsWith('--') ? argv[0] : 'help',
         pages: valuesOf('--page').map((page) => (page.startsWith('docs/') ? page : `docs/${page}`).replace(/\/$/, '')),
         tags: valuesOf('--tag'),
+        suites: valuesOf('--suite'),
         arms: valuesOf('--arm'),
         harnesses: valuesOf('--harness'),
         changed: changedAt === -1 ? null : valuesOf('--changed')[0] ?? 'origin/master',
@@ -97,15 +101,18 @@ export function changedSelection(files: EvalFile[], changed: string[]): Set<stri
     const keys = new Set<string>()
     for (const path of changed) {
         const page = pageForSourceFile(path)
-        for (const { file, evalCase } of page ? index.get(page) ?? [] : []) keys.add(`${file.path}#${evalCase.id}`)
+        for (const { file, check } of page ? index.get(page) ?? [] : []) keys.add(`${file.path}#${check.id}`)
         if (path.endsWith('.eval.yaml'))
             for (const file of files.filter((f) => f.path === path))
-                for (const c of file.cases) keys.add(`${file.path}#${c.id}`)
+                for (const check of file.checks) keys.add(`${file.path}#${check.id}`)
     }
     return keys
 }
 
 export function select(files: EvalFile[], shared: Shared, options: Options, changed: Set<string> | null) {
+    for (const suite of options.suites)
+        if (!(suites as readonly string[]).includes(suite))
+            throw new Error(`Unknown --suite ${suite}; choose from ${suites.join(', ')}`)
     for (const arm of options.arms)
         if (!(arms as readonly string[]).includes(arm))
             throw new Error(`Unknown --arm ${arm}; choose from ${arms.join(', ')}`)
@@ -114,7 +121,7 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
         if (!knownHarnesses.includes(id))
             throw new Error(`Unknown --harness ${id}; choose from ${knownHarnesses.join(', ')}`)
     const index = pageIndex(files)
-    for (const page of options.pages) if (!index.has(page)) throw new Error(`No eval cases read ${page}`)
+    for (const page of options.pages) if (!index.has(page)) throw new Error(`No eval checks read ${page}`)
 
     const harnesses = shared.matrix.harnesses.filter((h) =>
         options.harnesses.length > 0 ? options.harnesses.includes(h.id) : h.verified || options.includeUnverified
@@ -123,32 +130,33 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
     let inactive = 0
     for (const file of files) {
         if (options.tags.length > 0 && !options.tags.some((tag) => file.tags.includes(tag))) continue
-        for (const evalCase of file.cases) {
+        for (const check of file.checks) {
             const matchesPage =
                 options.pages.length === 0 ||
-                options.pages.some((page) => (index.get(page) ?? []).some((hit) => hit.evalCase === evalCase))
-            if (!matchesPage || (changed && !changed.has(`${file.path}#${evalCase.id}`))) continue
+                options.pages.some((page) => (index.get(page) ?? []).some((hit) => hit.check === check))
+            if (options.suites.length > 0 && !options.suites.includes(check.suite)) continue
+            if (!matchesPage || (changed && !changed.has(`${file.path}#${check.id}`))) continue
             if (file.status !== 'active') {
                 inactive++
                 continue
             }
-            const caseArms = (evalCase.arms ?? shared.matrix.defaultArms).filter(
+            const checkArms = (check.arms ?? shared.matrix.defaultArms).filter(
                 (arm) => options.arms.length === 0 || options.arms.includes(arm)
             )
-            if (caseArms.length > 0) selections.push({ file, evalCase, arms: caseArms as Arm[] })
+            if (checkArms.length > 0) selections.push({ file, check, arms: checkArms as Arm[] })
         }
     }
     return { selections, harnesses, inactive }
 }
 
-// What must be true before Gauge can run the cases. Free to check.
-function readinessProblems(cases: RenderedCase[]): string[] {
+// What must be true before Gauge can run the checks. Free to check.
+function readinessProblems(checks: RenderedCheck[]): string[] {
     const problems = new Set<string>()
-    for (const c of cases) {
+    for (const c of checks) {
         if (c.fixture && !c.fixture.ref)
             problems.add(`fixtures.yaml: ${c.fixture.name} has no ref; build it and pin the commit`)
     }
-    const skillRefs = [...new Set(cases.flatMap((c) => c.skillRefs))]
+    const skillRefs = [...new Set(checks.flatMap((c) => c.skillRefs))]
     for (const ref of skillRefs)
         if (!skillExists(ref)) problems.add(`skill ${ref} isn't registered in Gauge; see pnpm evals skills`)
     return [...problems]
@@ -173,21 +181,21 @@ async function main(argv: string[]): Promise<number> {
         )
         return 1
     }
-    const caseCount = files.reduce((sum, f) => sum + f.cases.length, 0)
+    const checkCount = files.reduce((sum, f) => sum + f.checks.length, 0)
 
     if (options.command === 'validate') {
         const active = files.filter((f) => f.status === 'active')
-        console.log(`${files.length} eval files, ${caseCount} cases (${active.length} files active). All valid.`)
+        console.log(`${files.length} eval files, ${checkCount} checks (${active.length} files active). All valid.`)
         return 0
     }
     if (options.command === 'index') {
         const index = [...pageIndex(files).entries()].sort(([a], [b]) => a.localeCompare(b))
         for (const [page, hits] of index) {
             console.log(page)
-            for (const { file, evalCase } of hits) {
+            for (const { file, check } of hits) {
                 const where = file.page && file.page !== page ? `  (in ${file.path})` : ''
                 console.log(
-                    `  → ${pageForEvalFile(file.path) ?? file.path}#${evalCase.id}${
+                    `  → ${pageForEvalFile(file.path) ?? file.path}#${check.id}${
                         file.status === 'active' ? '' : ` [${file.status}]`
                     }${where}`
                 )
@@ -205,9 +213,9 @@ async function main(argv: string[]): Promise<number> {
         return 2
     }
     const { selections, harnesses, inactive } = selected
-    if (inactive > 0) console.log(`Skipping ${inactive} draft or skipped case(s).`)
+    if (inactive > 0) console.log(`Skipping ${inactive} draft or skipped check(s).`)
     if (selections.length === 0) {
-        console.log('No active cases match.')
+        console.log('No active checks match.')
         return 0
     }
     const pageText = fetchPageText(options.baseUrl)
@@ -219,8 +227,8 @@ async function main(argv: string[]): Promise<number> {
         }
         const pages = [
             ...new Set(
-                selections.flatMap(({ file, evalCase }) =>
-                    [file.page, ...file.pages, ...evalCase.pages].filter((p): p is string => Boolean(p))
+                selections.flatMap(({ file, check }) =>
+                    [file.page, ...file.pages, ...check.pages].filter((p): p is string => Boolean(p))
                 )
             ),
         ]
@@ -244,20 +252,20 @@ async function main(argv: string[]): Promise<number> {
         console.error('No harness selected; check matrix.yaml or pass --harness / --include-unverified')
         return 2
     }
-    const cases = await renderCases(selections, harnesses, shared, options.baseUrl, pageText)
+    const checks = await renderChecks(selections, harnesses, shared, options.baseUrl, pageText)
     console.log(
-        `${cases.length} Gauge case(s) from ${selections.length} eval case(s), on ${harnesses
+        `${checks.length} Gauge case(s) from ${selections.length} check(s), on ${harnesses
             .map((h) => `${h.id} (${h.models.join(', ')})`)
             .join(', ')}:`
     )
-    for (const c of cases)
+    for (const c of checks)
         console.log(`  ${c.key}  ${c.criteria.length} criteria${c.fixture ? `  ${c.fixture.name}` : '  answer-only'}`)
 
     if (options.command !== 'plan' && options.command !== 'run') {
         console.error(`Unknown command ${options.command}\n\n${usage}`)
         return 2
     }
-    const specs = toGaugeSpecs(cases, shared.matrix.samples)
+    const specs = toGaugeSpecs(checks, shared.matrix.samples)
     const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
     await mkdir(specDir, { recursive: true })
     const specPaths: string[] = []
@@ -271,7 +279,7 @@ async function main(argv: string[]): Promise<number> {
         console.error('The gauge CLI is not on PATH: npm install -g @withgauge/cli, then gauge auth login')
         return 1
     }
-    const notReady = readinessProblems(cases)
+    const notReady = readinessProblems(checks)
     if (notReady.length > 0) {
         printProblems('Not ready to run', notReady)
         return 1
@@ -286,7 +294,7 @@ async function main(argv: string[]): Promise<number> {
 
     const outDir = join(repoRoot, 'evals', 'results', new Date().toISOString().replace(/[:.]/g, '-'))
     await mkdir(outDir, { recursive: true })
-    await writeFile(join(outDir, 'cases.json'), `${JSON.stringify(cases, null, 4)}\n`)
+    await writeFile(join(outDir, 'checks.json'), `${JSON.stringify(checks, null, 4)}\n`)
     let passed = true
     const results: unknown[] = []
     const requests: unknown[] = []
@@ -301,7 +309,7 @@ async function main(argv: string[]): Promise<number> {
         results.push(JSON.parse(result.raw))
     }
     await writeFile(join(outDir, 'request.json'), `${JSON.stringify(requests, null, 4)}\n`)
-    // One wait result per request; read-check finds run ids anywhere in the file.
+    // One wait result per request; docs-read finds run ids anywhere in the file.
     await writeFile(
         join(outDir, 'results.json'),
         `${JSON.stringify(
@@ -312,7 +320,7 @@ async function main(argv: string[]): Promise<number> {
             4
         )}\n`
     )
-    await readCheck(outDir)
+    await docsRead(outDir)
     console.log(`Results in ${outDir}`)
     return passed ? 0 : 1
 }

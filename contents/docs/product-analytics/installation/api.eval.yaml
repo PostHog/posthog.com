@@ -1,13 +1,16 @@
-version: 1
 owner: wizard-and-docs
 tags: [api, python, server]
 status: active
 
-cases:
+checks:
     - id: capture-without-sdk
+      description: >-
+          Tests whether the API install page alone gets an agent to send a correctly
+          shaped capture request over plain HTTP, with no SDK, from a standard-library
+          Python server.
       workspace:
           fixture: python-stdlib
-      task: |
+      prompt: |
           The app in {folder}/ uses only the Python standard library, and we want to
           keep it that way. Each time a user creates a meeting, send a
           meeting_created event to PostHog from the server, without adding PostHog's
@@ -16,23 +19,24 @@ cases:
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          no-sdk-added: >-
-              No new dependency is added: {folder}/requirements.txt gains no
-              packages, and no changed file imports posthog, requests or any other
-              third-party module. The HTTP call uses the standard library (for
-              example urllib.request).
-          capture-request: >-
-              The code sends an HTTP POST to the /capture/ endpoint on the PostHog
-              host (for example https://us.i.posthog.com/capture/) with
-              Content-Type: application/json. Cite the file and line(s).
-          payload-fields: >-
-              The JSON body has a top-level api_key set to the project token, a
-              top-level event set to meeting_created, and a properties object that
-              contains distinct_id (for example the current user's ID). A
-              distinct_id at the top level only, outside properties, does not
-              pass. Cite the file and line(s).
-          fires-on-create: >-
-              The event is sent from the POST /api/meetings handler in
-              {folder}/server.py after the meeting is created successfully, and
-              not on failed or unauthorized requests. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              no-sdk-added: >-
+                  No new dependency is added: {folder}/requirements.txt gains no
+                  packages, and no changed file imports posthog, requests or any other
+                  third-party module. The HTTP call uses the standard library (for
+                  example urllib.request).
+              capture-request: >-
+                  The code sends an HTTP POST to the /capture/ endpoint on the PostHog
+                  host (for example https://us.i.posthog.com/capture/) with
+                  Content-Type: application/json. Cite the file and line(s).
+              payload-fields: >-
+                  The JSON body has a top-level api_key set to the project token, a
+                  top-level event set to meeting_created, and a properties object that
+                  contains distinct_id (for example the current user's ID). A
+                  distinct_id at the top level only, outside properties, does not
+                  pass. Cite the file and line(s).
+              fires-on-create: >-
+                  The event is sent from the POST /api/meetings handler in
+                  {folder}/server.py after the meeting is created successfully, and
+                  not on failed or unauthorized requests. Cite the file and line(s).

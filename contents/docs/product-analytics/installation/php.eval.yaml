@@ -1,18 +1,23 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, php]
 status: draft
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the PHP install page alone gets an agent to a working
+          posthog-php setup with config from env. Draft until the php-app fixture
+          exists.
       workspace:
           fixture: php-app
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              {folder}/composer.json requires posthog/posthog-php.
-          required-steps-done: >-
-              The app calls PostHog\PostHog::init with the project token as the first argument and an options array that sets 'host' to the PostHog host. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          assertions:
+              - dependency: posthog/posthog-php
+                in: composer.json
+          rubrics:
+              required-steps-done: >-
+                  The app calls PostHog\PostHog::init with the project token as the first argument and an options array that sets 'host' to the PostHog host. Cite the file and line(s).

@@ -2,11 +2,11 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { runDetails, runLogs } from './adapters/gauge.ts'
-import { skillName, type RenderedCase } from './render.ts'
+import { skillName, type RenderedCheck } from './render.ts'
 import type { Arm } from './spec.ts'
 
-// Works out from each run's logs whether the agent used the docs. It isn't a
-// criterion, because a failed criterion fails the whole run.
+// The docs-read report: works out from each run's logs whether the agent used the
+// docs. It isn't a criterion, because a failed criterion fails the whole run.
 //
 // Gauge's API spec leaves run and log payloads untyped, so this reads them as text
 // instead of depending on a shape we haven't seen yet. Tighten it after the first
@@ -46,40 +46,40 @@ export function extractRunIds(text: string): string[] {
     return [...new Set(text.match(runIdPattern) ?? [])]
 }
 
-// Case keys are unique, so the longest key that appears in the run payload wins.
-export const matchCase = (runText: string, cases: RenderedCase[]) =>
-    [...cases].sort((a, b) => b.key.length - a.key.length).find((c) => runText.includes(c.key)) ?? null
+// Check keys are unique, so the longest key that appears in the run payload wins.
+export const matchCheck = (runText: string, checks: RenderedCheck[]) =>
+    [...checks].sort((a, b) => b.key.length - a.key.length).find((c) => runText.includes(c.key)) ?? null
 
 // Drops what the prompt itself handed the agent (raw or JSON-escaped), so anything
 // left came from the agent's own tool calls.
-export function stripPromptContent(logsText: string, renderedCase: RenderedCase): string {
+export function stripPromptContent(logsText: string, rendered: RenderedCheck): string {
     let text = logsText
-    for (const form of [renderedCase.prompt, JSON.stringify(renderedCase.prompt).slice(1, -1)])
-        text = text.replaceAll(form, '')
+    for (const form of [rendered.prompt, JSON.stringify(rendered.prompt).slice(1, -1)]) text = text.replaceAll(form, '')
     return text
 }
 
-// fetchedPages: which of the case's pages the agent fetched itself. On link that's
-// the read check; on prompt it means the agent found the docs on its own. It's
+// fetchedPages: which of the check's pages the agent fetched itself. On link that
+// shows the agent followed the link; on baseline it means the agent found the docs
+// on its own. It's
 // null on skill, where reading the staged skill puts the page's own URLs in the
 // logs. usedSkill: the logs mention the skill beyond the prompt (skill arm only).
-export type RunReadCheck = {
+export type RunDocsRead = {
     runId: string
-    caseKey: string | null
+    checkKey: string | null
     arm: Arm | null
     fetchedPages: Record<string, boolean> | null
     usedSkill: boolean | null
     docsUrls: string[]
 }
 
-export function checkRun(runId: string, runText: string, logsText: string, cases: RenderedCase[]): RunReadCheck {
-    const matched = matchCase(runText, cases)
+export function readRun(runId: string, runText: string, logsText: string, checks: RenderedCheck[]): RunDocsRead {
+    const matched = matchCheck(runText, checks)
     const ownText = matched ? stripPromptContent(logsText, matched) : logsText
     const docsUrls = extractDocsUrls(ownText)
     const isSkill = matched?.arm === 'skill'
     return {
         runId,
-        caseKey: matched?.key ?? null,
+        checkKey: matched?.key ?? null,
         arm: matched?.arm ?? null,
         fetchedPages:
             matched && !isSkill
@@ -92,34 +92,32 @@ export function checkRun(runId: string, runText: string, logsText: string, cases
     }
 }
 
-// Reads results.json and cases.json from a run folder and writes read-check.json.
-export async function readCheck(outDir: string): Promise<RunReadCheck[]> {
-    const cases = JSON.parse(await readFile(join(outDir, 'cases.json'), 'utf8')) as RenderedCase[]
+// Reads results.json and checks.json from a run folder and writes docs-read.json.
+export async function docsRead(outDir: string): Promise<RunDocsRead[]> {
+    const checks = JSON.parse(await readFile(join(outDir, 'checks.json'), 'utf8')) as RenderedCheck[]
     const runIds = extractRunIds(await readFile(join(outDir, 'results.json'), 'utf8'))
     if (runIds.length === 0)
         throw new Error(`No run ids in ${join(outDir, 'results.json')}; check its shape and update extractRunIds`)
-    const checks = runIds.map((runId) => checkRun(runId, runDetails(runId), runLogs(runId), cases))
-    await writeFile(join(outDir, 'read-check.json'), `${JSON.stringify(checks, null, 4)}\n`)
-    for (const check of checks) {
+    const reads = runIds.map((runId) => readRun(runId, runDetails(runId), runLogs(runId), checks))
+    await writeFile(join(outDir, 'docs-read.json'), `${JSON.stringify(reads, null, 4)}\n`)
+    for (const read of reads) {
         const fetched =
-            check.fetchedPages &&
-            Object.entries(check.fetchedPages).map(([page, yes]) => `${yes ? 'fetched' : 'did not fetch'} ${page}`)
+            read.fetchedPages &&
+            Object.entries(read.fetchedPages).map(([page, yes]) => `${yes ? 'fetched' : 'did not fetch'} ${page}`)
         const notes = [
-            check.caseKey === null ? 'unknown case' : null,
+            read.checkKey === null ? 'unknown check' : null,
             ...(fetched ?? []),
-            check.usedSkill === null ? null : check.usedSkill ? 'used the skill' : 'no sign of the skill',
+            read.usedSkill === null ? null : read.usedSkill ? 'used the skill' : 'no sign of the skill',
         ].filter(Boolean)
-        console.log(
-            `${check.runId}  ${check.caseKey ?? '?'}  ${notes.join(', ')}  (${check.docsUrls.length} docs URLs)`
-        )
+        console.log(`${read.runId}  ${read.checkKey ?? '?'}  ${notes.join(', ')}  (${read.docsUrls.length} docs URLs)`)
     }
-    return checks
+    return reads
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const outDir = process.argv[2]
     if (!outDir) {
-        console.log('Usage: node evals/read-check.ts <results folder>')
+        console.log('Usage: node evals/docs-read.ts <results folder>')
         process.exitCode = 2
-    } else await readCheck(dirname(join(outDir, 'results.json')))
+    } else await docsRead(dirname(join(outDir, 'results.json')))
 }

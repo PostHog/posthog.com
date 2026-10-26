@@ -1,37 +1,44 @@
-version: 1
 owner: product-analytics
 tags: [instrumentation, javascript, autocapture]
 status: active
 
-cases:
+checks:
     - id: configure-web-autocapture
+      description: >-
+          Checks that the autocapture page teaches the agent to tune automatic
+          capture: limit which DOM events are recorded, exclude one element, and
+          add a property through markup. The prompt asks only for the outcomes and
+          never names autocapture or its config options.
       workspace:
           fixture: web-vite
       pages:
           - docs/product-analytics/installation/web
-      task: |
-          PostHog isn't set up yet in the app in {folder}/. Add it with
-          autocapture turned on, but tune autocapture: only autocapture clicks
-          and form submissions (not input changes), never autocapture the
-          "Reset All Data" button on the settings page, and when someone clicks
+      prompt: |
+          PostHog isn't set up yet in the app in {folder}/. Add it so that
+          clicks and form submissions across the app are recorded
+          automatically, without a hand-written tracking call on every button.
+          Don't record typing or other input changes. Never record clicks on
+          the "Reset All Data" button on the settings page. When someone clicks
           a task's move, assign or delete button on the project page, the
-          autocaptured event should include that task's id.
+          recorded click should include that task's id, still without a
+          hand-written tracking call.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          dom-events-limited: >-
-              posthog.init is passed an `autocapture` config object with
-              `dom_event_allowlist` set to click and submit only (no `change`).
-              Cite the file and line.
-          reset-button-excluded: >-
-              The "Reset All Data" button in src/pages/settings.js is excluded
-              from autocapture, either with the `ph-no-autocapture` class or a
-              `data-ph-no-autocapture` attribute on the button, or with an
-              `autocapture.css_selector_ignorelist` entry that matches it.
-              Setting `autocapture: false` globally does not pass.
-          task-id-attribute: >-
-              The task move, assign and delete buttons in
-              src/pages/project-detail.js carry a
-              `data-ph-capture-attribute-<key>` attribute holding the task id
-              (for example `data-ph-capture-attribute-task-id="${task.id}"`),
-              so autocaptured clicks get that property without a manual
-              posthog.capture call.
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              dom-events-limited: >-
+                  posthog.init is passed an `autocapture` config object with
+                  `dom_event_allowlist` set to click and submit only (no `change`).
+                  Cite the file and line.
+              reset-button-excluded: >-
+                  The "Reset All Data" button in src/pages/settings.js is excluded
+                  from autocapture, either with the `ph-no-autocapture` class or a
+                  `data-ph-no-autocapture` attribute on the button, or with an
+                  `autocapture.css_selector_ignorelist` entry that matches it.
+                  Setting `autocapture: false` globally does not pass.
+              task-id-attribute: >-
+                  The prompt move, assign and delete buttons in
+                  src/pages/project-detail.js carry a
+                  `data-ph-capture-attribute-<key>` attribute holding the task id
+                  (for example `data-ph-capture-attribute-task-id="${task.id}"`),
+                  so autocaptured clicks get that property without a manual
+                  posthog.capture call.

@@ -1,30 +1,33 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, javascript, web]
 status: active
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the web install page alone gets an agent to a working posthog-js
+          setup with config from env and the recommended defaults, on a plain Vite app.
       workspace:
           fixture: web-vite
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              {folder}/package.json lists posthog-js as a dependency, or
-              {folder}/index.html contains the PostHog HTML snippet inside the
-              <head> tag. Either method passes.
-          required-steps-done: >-
-              PostHog is initialized exactly once when the app loads, by calling
-              posthog.init with the project token and an api_host option, either
-              in the HTML snippet in {folder}/index.html or by importing posthog
-              from posthog-js in an entry module such as {folder}/src/main.js.
-              Cite the file and line(s).
-          uses-defaults: >-
-              The posthog.init options include a defaults option set to a date
-              string (the current recommended value is '2026-08-30'). Cite the
-              file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists posthog-js as a dependency, or
+                  {folder}/index.html contains the PostHog HTML snippet inside the
+                  <head> tag. Either method passes.
+              required-steps-done: >-
+                  PostHog is initialized exactly once when the app loads, by calling
+                  posthog.init with the project token and an api_host option, either
+                  in the HTML snippet in {folder}/index.html or by importing posthog
+                  from posthog-js in an entry module such as {folder}/src/main.js.
+                  Cite the file and line(s).
+              uses-defaults: >-
+                  The posthog.init options include a defaults option set to a date
+                  string (the current recommended value is '2026-08-30'). Cite the
+                  file and line(s).

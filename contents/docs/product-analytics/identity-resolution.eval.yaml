@@ -1,26 +1,32 @@
-version: 1
 owner: product-analytics
 tags: [instrumentation, nodejs, identity]
 status: active
 
-cases:
+checks:
     - id: no-catch-all-distinct-id
+      description: >-
+          Checks that the identity resolution page steers the agent away from a
+          catch-all distinct ID for backend events, toward a random ID per
+          event with person processing off. The prompt never names distinct IDs,
+          person profiles or anonymous events.
       workspace:
           fixture: node-express
       pages:
           - docs/product-analytics/installation/nodejs
-      task: |
+      prompt: |
           PostHog isn't set up yet in the API in {folder}/. The API has no user
           accounts. Capture server-side events when a todo is created,
-          completed and deleted. We don't need person profiles for these and
+          completed and deleted. These events aren't about any particular
+          person, so PostHog shouldn't create or update people for them, and we
           want to keep costs and ingestion problems down.
       criteria:
-          use: [config-from-env, stays-in-folder]
-          random-distinct-id: >-
-              Each capture uses a generated distinct ID (for example
-              `crypto.randomUUID()` per request), not one shared constant such
-              as "system", "backend", "server" or "anonymous" across all
-              events. Cite the capture calls in index.js.
-          no-person-processing: >-
-              Every capture call sets `$process_person_profile: false` in its
-              `properties`.
+          shared: [config-from-env, stays-in-folder]
+          rubrics:
+              random-distinct-id: >-
+                  Each capture uses a generated distinct ID (for example
+                  `crypto.randomUUID()` per request), not one shared constant such
+                  as "system", "backend", "server" or "anonymous" across all
+                  events. Cite the capture calls in index.js.
+              no-person-processing: >-
+                  Every capture call sets `$process_person_profile: false` in its
+                  `properties`.

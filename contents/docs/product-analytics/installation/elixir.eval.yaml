@@ -1,18 +1,21 @@
-version: 1
 owner: wizard-and-docs
 tags: [install, elixir]
 status: draft
 
-cases:
+checks:
     - id: install
+      description: >-
+          Tests whether the Elixir install page alone gets an agent to a working posthog
+          Elixir setup with config from env. Draft until the elixir-app fixture exists.
       workspace:
           fixture: elixir-app
-      task: |
+      prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
       criteria:
-          use: [config-from-env, stays-in-folder, builds]
-          sdk-installed: >-
-              {folder}/mix.exs lists {:posthog, "~> 2.0"} (or a compatible posthog version) in deps.
-          required-steps-done: >-
-              The app configures :posthog with api_key (the project token) and api_host (the PostHog host), for example in config/config.exs or config/runtime.exs. Cite the file and line(s).
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/mix.exs lists {:posthog, "~> 2.0"} (or a compatible posthog version) in deps.
+              required-steps-done: >-
+                  The app configures :posthog with api_key (the project token) and api_host (the PostHog host), for example in config/config.exs or config/runtime.exs. Cite the file and line(s).
