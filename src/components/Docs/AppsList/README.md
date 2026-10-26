@@ -4,6 +4,8 @@ Renders PostHog's products as a compact, multi-column list of icon links to thei
 
 The list is sourced from `useProducts()` (`src/hooks/useProducts.tsx`), which is the canonical product set, the same data that powers the `/products` page. This keeps the docs "Apps" list in sync with the real product lineup instead of scraping the docs navigation (which pulled in nav entries that aren't standalone products).
 
+PostHog Desktop is excluded from this docs list because its documentation is retired. It remains in the shared product data for marketing and pricing.
+
 ## Docs URLs
 
 For most products the docs URL is `/docs/<slug>`, derived from the product's marketing `slug`. A few products have a slug that doesn't map cleanly, so they're overridden by `handle` in `docsUrlOverrides`:
