@@ -92,7 +92,7 @@ Header values must be plain, visible ASCII characters.
 | Field | Required | Description |
 |---|---|---|
 | `created_at` | Yes | When you built this batch, in RFC 3339 format |
-| `historical_migration` | No | `true` to send the batch as a [historical migration](/docs/migrate) |
+| `historical_migration` | No | `true` to send the batch as a [historical migration](/docs/migrate). It applies to every event in the request, so send historical and live events in separate requests. |
 | `batch` | Yes | The events. It can't be empty. |
 
 Each event in `batch`:
