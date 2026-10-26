@@ -14,7 +14,7 @@ One of our [customer success principles](/handbook/customer-success/customer-suc
 
 You are not expected to justify a revenue decline that comes from a cost optimization. You are expected to add context to it, so anyone reading the number later can tell the difference between a customer we helped and a customer we aren't fully engaged with. The tag and a Slack message are how you add that context.
 
-This is also why inherited accounts come with a [3 month grace period](/handbook/customer-success/how-we-work#how-contractual-bonus-works---technical-csms). We want you to right-size customers, not to leave a bad implementation in place because it happens to pay well.
+This is also why an account nobody has looked after comes with a [grace quarter](/handbook/customer-success/how-we-work#grace-period-accounts-nobody-has-looked-after). We want you to right-size customers, not to leave a bad implementation in place because it happens to pay well.
 
 ## Two ways a cost optimization starts
 

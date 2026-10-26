@@ -73,7 +73,7 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   If you have access to Vitally, find the customer's Metabase dashboard link under the 'Usage Dashboard Link' trait. The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
 -   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
 -   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
 -   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
@@ -122,7 +122,7 @@ If you want more precision when a single event type is inflated, use the 'Event 
 2. Next to 'Credits', click on 'Add'
 3. In the 'Customer' field, use the drop-down menu to find your customer
 4. In the 'Amount' field, set an amount of credits you wish to issue for this customer
-5. In the 'Reason' field, select a reason which best describes why you're issuing the credits
+5. In the 'Reason' field, select a reason which best describes why you're issuing the credits. For an accidental billing spike use `Unwanted Spike`, so the spike is excluded from NRR (see [how NRR is calculated](/handbook/customer-success/how-we-work#how-nrr-is-calculated))
 6. Add an optional note in the 'Notes' field
 7. Include an optional link in the 'Reference link' field, e.g. support ticket, Slack message link, etc.
 8. Click 'Save and view'

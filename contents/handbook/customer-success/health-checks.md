@@ -18,7 +18,7 @@ left unchecked these things will lead to avoidable churn.
 
 [Group Analytics](/docs/product-analytics/group-analytics) can be a real value-add for B2B companies, allowing them to track
 analytics at the company or workspace level rather than an individual person.  They 
-do however need to [implement group tracking](/docs/product-analytics/group-analytics#how-to-create-groups) in their PostHog SDK.  Customers who haven't 
+do however need to [implement group tracking](/docs/product-analytics/group-analytics#set-up-group-analytics) in their PostHog SDK.  Customers who haven't 
 done this may end up paying for Group Analytics but not able to use it.
 
 You can [ask @PostHog in Slack](/docs/posthog-ai/surfaces/slack) or use the [PostHog MCP](/docs/model-context-protocol) to check who is paying for Group Analytics 
@@ -30,9 +30,9 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 ### Autocapture
 
-[Autocapture](/docs/product-analytics/autocapture) is a great way for users to get up and running with event capture without a huge engineering effort.  Autocapture can however get very noisy very quickly, and if users aren't leveraging these events they may not be getting value out of them.  You can understand a customer's Autocapture event volume from their Metabase customer usage dashboard (instructions above on how to get there).  There is a breakdown of the Key event volume Last 30 days which shows the number and % of Autocapture events they are sending across all projects.  If that is high (>50%) then check the Actions (by type) visualization on the same dashboard to see if they have any Autocapture actions defined.  If not they are likely to not be benefitting from Autocapture events.
+[Autocapture](/docs/product-analytics/autocapture) is a great way for users to get up and running with event capture without a huge engineering effort.  Autocapture can however get very noisy very quickly, and if users aren't leveraging these events they may not be getting value out of them.  You can understand a customer's Autocapture event volume from their Metabase customer usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) covers how to get there).  There is a breakdown of the Key event volume Last 30 days which shows the number and % of Autocapture events they are sending across all projects.  If that is high (>50%) then check the Actions (by type) visualization on the same dashboard to see if they have any Autocapture actions defined.  If not they are likely to not be benefitting from Autocapture events.
 
-If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
+If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-interaction-autocapture).
 
 ### Legacy Teams package
 
@@ -67,7 +67,7 @@ You should get in touch and let them know that they only need to call `posthog.i
 
 As with `identify()` above users may also end up calling `posthog.group()` more than they should.  In the Key event volume visualization in Metabase if the $groupidentify count is higher than 5% they've likely set it to call once per page.  
 
-You should get in touch and let them know that they only need to call `posthog.group()` [once per group per session](/docs/product-analytics/group-analytics#how-to-create-groups), or when the group changes.
+You should get in touch and let them know that they only need to call `posthog.group()` [once per group per session](/docs/product-analytics/group-analytics#set-up-group-analytics), or when the group changes.
 
 To see where duplicate groupidentify calls are being generated, you can use the following SQL:
 
@@ -98,7 +98,7 @@ We have guidance on when to call `posthog.reset()` in the [JavaScript Web SDK us
 
 It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
 
-When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
+When using either PostHog's managed reverse proxy or deploying a [non-managed reverse proxy](/docs/advanced/proxy#deploy-your-own-proxy), events should populate the "Library custom API host" property. Host mapping and domains can potentially be seen in Metabase. You should verify the setup with a customer.  
 
 ### Cookieless tracking
 

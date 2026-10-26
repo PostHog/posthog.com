@@ -48,7 +48,7 @@ This can largely mirror what goes in our sprint planning, and shouldn't be dupli
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these are also tracked automatically as [risk indicators in Vitally](/handbook/customer-success/health-tracking#risk-indicators).
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics.
 
 | Signal | Why it matters |
 |--------|----------------|
@@ -109,7 +109,7 @@ Tag the account `cost optimizing` in PostHog Customer Analytics while you work o
 
 **Billing waste:**
 
-- **Group Analytics enabled but not implemented.** We have a Vitally risk indicator for this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
+- **Group Analytics enabled but not implemented.** The [health check](/handbook/customer-success/health-checks) covers how to spot this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
 - **Autocapture noise.** If >50% of events are autocapture and they haven't defined any autocapture actions, they're likely paying for events they don't use. Help them tune or disable it.
 - **Session replay capturing everything.** Default settings capture all sessions. At minimum, recommend setting minimum duration to 2+ seconds to filter out low-value recordings.
 
@@ -138,7 +138,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cu
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
-| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Vitally](/handbook/customer-success/feature-requests) |
+| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Customer Analytics](/handbook/customer-success/feature-requests) |
 | **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
 | **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/data-pipelines/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 

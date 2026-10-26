@@ -108,7 +108,7 @@ If your book is outside these bounds at quarter start, work with your team lead 
 
 ## CSM book balance
 
-CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. The current account mix and live capacity calculation are covered in [how the Customer Success team works](/handbook/customer-success/how-we-work#account-allocation).
+CSM books target around $2.5M ARR and are balanced by account size as well as total ARR. Book targets are covered in [how the Customer Success team works](/handbook/customer-success/how-we-work#book-of-business).
 
 If your book is outside the current target at quarter start, work with your team lead to rebalance it.
 
