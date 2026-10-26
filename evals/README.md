@@ -97,7 +97,7 @@ Each case runs once per arm. The task is the same in every arm; only the tail ch
 ## Run it
 
 ```sh
-pnpm evals validate                         # check every eval file; free, runs in CI
+pnpm evals validate                         # check every eval file; free
 pnpm evals plan --page product-analytics/identify   # render cases, gauge --dry-run; free
 pnpm evals plan --changed                   # only cases whose pages changed against origin/master
 pnpm evals run --page product-analytics/installation/react-router --yes   # spends Gauge credits

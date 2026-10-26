@@ -30,7 +30,7 @@ import {
 const usage = `Usage: pnpm evals <command> [filters]
 
 Commands:
-  validate        Check every eval file. Free; runs in CI.
+  validate        Check every eval file. Free.
   index           Print page → cases, from every eval file and pages: list.
   plan            Render the selected cases and run gauge --dry-run. Free.
   run --yes       Launch the selected cases, wait for judging, run the read check. Spends Gauge credits.
