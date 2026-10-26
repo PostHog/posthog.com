@@ -7,9 +7,12 @@ import { fileURLToPath } from 'node:url'
 import React, { act } from 'react'
 import { createRoot } from 'react-dom/client'
 import { JSDOM } from 'jsdom'
+import postcss from 'postcss'
+import tailwindcss from 'tailwindcss'
+import tailwindConfig from '../../../tailwind.config.js'
 
 // These are deliberately real package imports. A local view mock would hide the
-// missing /compact and /compact.css exports in the currently pinned release.
+// missing /compact and /compact.css exports in an incompatible release.
 import { filterStays } from '@posthog/twig-components/catalog'
 
 const { default: TwigBrowseFigure } = await import('./TwigBrowseFigure.tsx')
@@ -23,6 +26,19 @@ Object.assign(globalThis, {
     HTMLElement: dom.window.HTMLElement,
     IS_REACT_ACT_ENVIRONMENT: true,
 })
+// Compile the real positioning utilities so the cursor regression checks CSS
+// behavior rather than a particular class name. Layout bounds are browser-tested.
+const cursorStyles = await postcss([
+    tailwindcss({
+        ...tailwindConfig,
+        content: [{ raw: readFileSync(new URL('./ProductAnalyticsRetentionExhibits.tsx', import.meta.url), 'utf8') }],
+        corePlugins: ['position', 'inset'],
+        plugins: [],
+    }),
+]).process('@tailwind utilities', { from: undefined })
+const style = document.createElement('style')
+style.textContent = cursorStyles.css
+document.head.append(style)
 dom.window.matchMedia = () => ({ matches: false } as MediaQueryList)
 const container = document.getElementById('root')!
 let root: ReturnType<typeof createRoot> | undefined
@@ -126,14 +142,29 @@ test('profile menu handles Escape, logout, and reset', () => {
 test('saved-stay journey preserves local navigation and account styling', (context) => {
     context.mock.timers.enable({ apis: ['setTimeout'] })
     render(React.createElement(SavedStayJourneyFigure))
+    const visitorLabel = () =>
+        [...container.querySelectorAll('span')].find((span) => span.textContent === 'Twig visitor')
+    const expectLabelRightOfCursor = () => {
+        const label = visitorLabel()
+        assert.ok(label, 'The visitor label must be visible during the booking preview')
+        const left = dom.window.getComputedStyle(label).left
+        const offset = parseFloat(left) * (left.endsWith('rem') ? 16 : 1)
+        const cursor = label.parentElement?.querySelector('svg')
+        assert.ok(cursor, 'The visitor label must belong to its cursor')
+        const cursorWidth = Number(cursor.getAttribute('width'))
+        assert.ok(offset >= cursorWidth, 'The label must sit to the right of the cursor near the left-hand bookmark')
+    }
+    expectLabelRightOfCursor()
     click('.twig-saved-stay-button')
     act(() => context.mock.timers.tick(320))
     const saved = container.querySelector('.twig-account-page')!
     assert.ok(saved, 'Saving must show the saved-stay page')
+    assert.equal(visitorLabel(), undefined, 'The saved-stay page keeps its cursor label hidden')
     assert.ok(saved.closest('.twig-compact .twig-account-layout'), 'Saved stays need the shared account tokens')
     click('.twig-account-stay-card a')
     act(() => context.mock.timers.tick(320))
     assert.equal(container.querySelector('.twig-account-page'), null)
+    expectLabelRightOfCursor()
     click('.vac-primary')
     act(() => context.mock.timers.tick(320))
     assert.match(container.textContent!, /Booking confirmed/)

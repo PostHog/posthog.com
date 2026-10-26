@@ -554,11 +554,7 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                 />
                             </svg>
                             {step !== 1 && (
-                                <span
-                                    className={`absolute whitespace-nowrap rounded border border-[#2d2b29] bg-[#fffdf9] px-2 py-1 font-rounded text-xs font-semibold text-[#2d2b29] shadow-[2px_2px_0_#f7a81b] ${
-                                        step === 0 ? 'right-5 top-5' : 'left-6 top-5'
-                                    }`}
-                                >
+                                <span className="absolute left-6 top-5 whitespace-nowrap rounded border border-[#2d2b29] bg-[#fffdf9] px-2 py-1 font-rounded text-xs font-semibold text-[#2d2b29] shadow-[2px_2px_0_#f7a81b]">
                                     Twig visitor
                                 </span>
                             )}
