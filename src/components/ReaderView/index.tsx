@@ -669,7 +669,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -997,7 +997,7 @@ const LeftSidebar = ({
     mobileOpen = false,
     onMobileClose,
 }: LeftSidebarProps) => {
-    const { searchQuery, setSearchQuery } = useSearch()
+    const { searchQuery } = useSearch()
     const { hasMounted, isWidthMeasured } = useReaderView()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1027,11 +1027,6 @@ const LeftSidebar = ({
     useEffect(() => {
         setActiveTab(initialTab)
     }, [currentPath, initialTab])
-
-    // The search's on-page matches point at the article it ran on, so clear it when the page changes.
-    useEffect(() => {
-        setSearchQuery('')
-    }, [currentPath])
 
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
@@ -1705,7 +1700,11 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            <InlineSearch
+                                contentRef={onSearch ? undefined : contentRef}
+                                onSearch={onSearch}
+                                currentPath={appWindow?.path}
+                            />
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
