@@ -209,7 +209,7 @@ const toolkit: {
     { Icon: IconRewindPlay, color: 'text-yellow', product: 'Session replay', prefix: 'like ', linkText: 'FullStory', href: '/compare/posthog-vs-fullstory' }, // prettier-ignore
     { Icon: IconToggle, color: 'text-seagreen', product: 'Feature flags', prefix: 'like ', linkText: 'LaunchDarkly', href: '/compare/posthog-vs-launchdarkly' }, // prettier-ignore
     { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/compare/posthog-vs-optimizely' }, // prettier-ignore
-    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/blog/posthog-vs-sentry' }, // prettier-ignore
+    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/compare/posthog-vs-sentry' }, // prettier-ignore
     { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/compare/best-langfuse-alternatives' }, // prettier-ignore
     { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/context-warehouse' }, // prettier-ignore
     { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/compare/best-sprig-alternatives' }, // prettier-ignore
