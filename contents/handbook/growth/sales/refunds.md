@@ -122,7 +122,7 @@ If you want more precision when a single event type is inflated, use the 'Event 
 2. Next to 'Credits', click on 'Add'
 3. In the 'Customer' field, use the drop-down menu to find your customer
 4. In the 'Amount' field, set an amount of credits you wish to issue for this customer
-5. In the 'Reason' field, select a reason which best describes why you're issuing the credits. For an accidental billing spike use `Unwanted Spike`, so the spike is excluded from NRR (see [how NRR is calculated](/handbook/customer-success/how-we-work#how-nrr-is-calculated))
+5. In the 'Reason' field, select a reason which best describes why you're issuing the credits
 6. Add an optional note in the 'Notes' field
 7. Include an optional link in the 'Reference link' field, e.g. support ticket, Slack message link, etc.
 8. Click 'Save and view'
