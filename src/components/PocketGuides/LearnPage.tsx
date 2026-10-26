@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { createContext, useContext } from 'react'
 import { useLocation } from '@reach/router'
 
 import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
@@ -31,7 +31,41 @@ export interface LearnLandingProps {
     volumeId: string
 }
 
-/** Page shell shared by the index and per-chapter routes. */
+const InLearnShell = createContext(false)
+
+/**
+ * Learn's ReaderView and product sidebar. AppWindow renders it around every `/learn/<product>`
+ * page, so the sidebar stays mounted when the reader moves between Learn pages.
+ */
+export function LearnShell({ path, children }: { path: string; children: React.ReactNode }): JSX.Element {
+    const products = useProduct() as any[]
+    const currentPath = path.replace(/\/$/, '')
+    const productData = products.find((product) => {
+        const learnUrl = product.pocketGuideVolume && surfaceBasePath(product.slug, 'learn')
+        return learnUrl && (currentPath === learnUrl || currentPath.startsWith(`${learnUrl}/`))
+    })
+    if (!productData) return <>{children}</>
+    // A hub root shows the product's landing page, which has no markdown to copy.
+    const isLearnLanding =
+        Boolean(volumeById(productData.pocketGuideVolume)?.learnHub) &&
+        currentPath === surfaceBasePath(productData.slug, 'learn')
+
+    return (
+        <ReaderView
+            // Learn navigation already lives in the product sidebar.
+            hideRightSidebar
+            hideTitle
+            hideMarkdownActions={isLearnLanding}
+            showQuestions={false}
+            menuTabs={buildProductMenuTabs({ productData, activeSurface: 'learn', currentPath })}
+            productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+        >
+            <InLearnShell.Provider value>{children}</InLearnShell.Provider>
+        </ReaderView>
+    )
+}
+
+/** Page content shared by the index and per-chapter routes. */
 export default function LearnPage({
     productHandle,
     chapter,
@@ -40,8 +74,8 @@ export default function LearnPage({
     landing: Landing,
     children,
 }: LearnPageProps): JSX.Element {
+    const inShell = useContext(InLearnShell)
     const productData = useProduct({ handle: productHandle }) as any
-    const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
     const isLearnLanding = Boolean(volumeId && Landing && !chapter)
@@ -59,12 +93,6 @@ export default function LearnPage({
         learnUrl: productData ? surfaceBasePath(productData.slug, 'learn') : '',
         volumeId,
     } as LearnLandingProps
-    const productMenuTabs = buildProductMenuTabs({
-        productData,
-        contentRef,
-        activeSurface: 'learn',
-        currentPath: location?.pathname,
-    })
 
     const guide = volumeId ? (
         <LearnSurface
@@ -75,23 +103,15 @@ export default function LearnPage({
         />
     ) : null
 
-    return (
+    const content = (
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
-            <ReaderView
-                // Learn navigation already lives in the product sidebar.
-                hideRightSidebar
-                hideTitle
-                hideMarkdownActions={isLearnLanding}
-                showQuestions={false}
-                menuTabs={productMenuTabs}
-                productSelect={<ProductSwitcher activeHandle={productHandle} />}
-            >
-                <article ref={contentRef}>
-                    {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
-                    {!isLearnLanding ? children ?? guide : null}
-                </article>
-            </ReaderView>
+            <article>
+                {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
+                {!isLearnLanding ? children ?? guide : null}
+            </article>
         </>
     )
+
+    return inShell ? content : <LearnShell path={location.pathname}>{content}</LearnShell>
 }
