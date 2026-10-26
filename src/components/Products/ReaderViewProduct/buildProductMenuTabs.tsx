@@ -117,6 +117,8 @@ const LearnNav = ({
             ? `${page.page}. ${page.shortTitle || page.title}`
             : page.shortTitle || page.title,
         url: learnChapterPath(guideBasePath, page),
+        // Full titles are questions, often longer than the sidebar is wide.
+        wrap: fullTitles,
     }))
     const hub = volume?.learnHub
     const items = hub
