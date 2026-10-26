@@ -140,10 +140,12 @@ Options control how PostHog processes an event. They replace the legacy option p
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
 | `disable_skew_correction` | Boolean | `true` keeps your `timestamp` exactly as sent instead of [correcting for clock skew](#timestamps-and-clock-skew) | `$ignore_sent_at` |
+| `product_tour_id` | String | Links the event to a product tour. PostHog's web SDK sets it on product tour events, so you rarely need it | `$product_tour_id` |
 
-<!-- TODO(capture-v1): confirm the cookieless tracking link. product_tour_id is left out on purpose: only the browser SDK sets it (prod check 2026-10-20). -->
+<!-- TODO(capture-v1): confirm the cookieless tracking link. -->
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
+- `product_tour_id` also accepts a whole number. An empty string means "not set".
 - PostHog ignores option names it doesn't know.
 - An option value PostHog can't read drops the event with the detail `invalid_options`.
 
