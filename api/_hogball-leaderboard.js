@@ -2,6 +2,9 @@
  * Hogball all-time leaderboard, shared by the Vercel function (api/hogball-leaderboard.js) and the
  * Cloudflare Pages function (functions/api/hogball-leaderboard.ts).
  *
+ * The game itself lives in the PostHog/hogball repo and runs on GitHub Pages, so this endpoint allows
+ * requests from that origin. `hogball-names.json` must match `src/names.json` in that repo.
+ *
  * Scores come from the `hogball_score_submitted` events that the game sends when a player enters their
  * initials. The query reads only those events. Only three-letter initials (A to Z, not in the blocked list)
  * and pilot names from the game's own name list are shown, so a fake event cannot put other text on the page.
@@ -10,8 +13,9 @@
  * HOGBALL_LEADERBOARD_PROJECT_ID. HOGBALL_LEADERBOARD_HOST is optional.
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const names = require('../src/components/Hogball/names.json')
+const names = require('./hogball-names.json')
 
+const GAME_ORIGIN = 'https://posthog.github.io'
 const LEADERBOARD_CACHE_CONTROL = 's-maxage=60, stale-while-revalidate=300'
 const MAX_SCORE = 5000000
 const SIZE = 10
@@ -69,4 +73,4 @@ async function getLeaderboard(env) {
     return cache.value
 }
 
-module.exports = { getLeaderboard, isInitials, isPilotName, LEADERBOARD_CACHE_CONTROL }
+module.exports = { GAME_ORIGIN, getLeaderboard, isInitials, isPilotName, LEADERBOARD_CACHE_CONTROL }

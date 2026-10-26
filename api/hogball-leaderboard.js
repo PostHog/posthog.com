@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { getLeaderboard, LEADERBOARD_CACHE_CONTROL } = require('./_hogball-leaderboard')
+const { GAME_ORIGIN, getLeaderboard, LEADERBOARD_CACHE_CONTROL } = require('./_hogball-leaderboard')
 
 const handler = async (req, res) => {
     if (req.method !== 'GET') {
@@ -7,6 +7,7 @@ const handler = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' })
     }
 
+    res.setHeader('Access-Control-Allow-Origin', GAME_ORIGIN)
     try {
         res.setHeader('Cache-Control', LEADERBOARD_CACHE_CONTROL)
         return res.status(200).json(await getLeaderboard(process.env))
