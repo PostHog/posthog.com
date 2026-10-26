@@ -145,27 +145,27 @@ You typically call both: `identify()` for analytics tracking, and `setIdentity()
 
 ### How it works
 
-1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Secret API key** from Support settings
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Identity verification secret** from Support settings
 2. You pass this hash along with the `distinct_id` to the widget
 3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
 
 With identity verification enabled, users see all their tickets on any browser or device.
 
-### Find your secret API key
+### Find your identity verification secret
 
 1. Go to **Support** > **Settings**
-2. Open the **Secret API key** section. If it is empty, click the button next to it to generate a key
+2. Open the **Identity verification secret** section. If it is empty, click the button next to it to generate a secret
 3. Copy the key. Use it only on your server
 
-The key lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
+The secret lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
 
 If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first. See [troubleshooting](/docs/support/troubleshooting#identity-verification-returns-403).
 
-When you rotate the key, PostHog keeps the previous key verifying for 48 hours. Update your server-side code within that window. After 48 hours, the previous key expires automatically — no manual deletion needed. If the previous key may be compromised, click **Expire now** in the settings banner to stop it verifying immediately.
+When you rotate the key, PostHog keeps the previous key verifying for 48 hours. Update your server-side code within that window. After 48 hours, the previous key expires on its own. No manual deletion is needed. If the previous key may be compromised, click **Expire now** in the settings banner to stop it verifying immediately.
 
 ### Server-side implementation
 
-Generate the identity hash on your backend. Never expose the secret API key in client-side code.
+Generate the identity hash on your backend. Never expose the identity verification secret in client-side code.
 
 <MultiLanguage>
 
@@ -255,9 +255,9 @@ When a user logs out, clear their identity so the widget falls back to session-b
 posthog.clearIdentity();
 ```
 
-<CalloutBox icon="IconWarning" title="Keep your secret API key secure" type="caution">
+<CalloutBox icon="IconWarning" title="Keep your identity verification secret secure" type="caution">
 
-Your secret API key must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+Your identity verification secret must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
 
 </CalloutBox>
 
@@ -269,7 +269,7 @@ Your secret API key must never be exposed in client-side code. Always compute th
 | **Anonymous visitors** | Use the default widget session (no setup required)                                                  |
 | **Mixed audience**     | Use identity verification when users are logged in, fall back to widget session for anonymous users |
 
-If your project has no secret API key, requests that carry identity fields get `403 Forbidden`. Generate a key in Support settings. Requests without identity fields keep using the browser session.
+If your project has no identity verification secret, requests that carry identity fields get `403 Forbidden`. Generate one in Support settings. Requests without identity fields keep using the browser session.
 
 ## Notifications
 
