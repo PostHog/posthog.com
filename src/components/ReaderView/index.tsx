@@ -997,7 +997,7 @@ const LeftSidebar = ({
     mobileOpen = false,
     onMobileClose,
 }: LeftSidebarProps) => {
-    const { searchQuery } = useSearch()
+    const { searchQuery, setSearchQuery } = useSearch()
     const { hasMounted, isWidthMeasured } = useReaderView()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1027,6 +1027,11 @@ const LeftSidebar = ({
     useEffect(() => {
         setActiveTab(initialTab)
     }, [currentPath, initialTab])
+
+    // The search's on-page matches point at the article it ran on, so clear it when the page changes.
+    useEffect(() => {
+        setSearchQuery('')
+    }, [currentPath])
 
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
