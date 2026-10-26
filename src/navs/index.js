@@ -4302,7 +4302,7 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
-                                    name: 'Classifying rows with AI',
+                                    name: 'SQL AI functions',
                                     url: '/docs/sql/ai-functions',
                                 },
                                 {
@@ -7759,6 +7759,10 @@ export const docsMenu = {
                         {
                             name: 'Datasets',
                             url: '/docs/ai-evals/datasets',
+                        },
+                        {
+                            name: 'Offline evals',
+                            url: '/docs/ai-evals/offline-evals',
                         },
                         {
                             name: 'Taggers',
