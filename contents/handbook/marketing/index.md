@@ -88,11 +88,11 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 ### Things we want to be brilliant at
  
-- **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than PR. This means being known for quality in all things we do.
+- **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
 
 - **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-build-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
-- **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
+- **Launches:** Our team ships a lot of products and features. We need [launches](/handbook/marketing/product-announcements) to break through the noise and get noticed. This helps create the momentum products need to succeed.
 
 - **World-class documentation:** We work with product teams to maintain up-to-date, high quality docs. We work with Website & Docs to ensure users can discover them. Doing this enables users to "self-serve," discover what they need, and get the most out of PostHog.
 
@@ -100,17 +100,17 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Merch:** We make the coolest tech company merch. Let's keep it this way. 
 
-- **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
+- **Events:** We don't just want to be a name on the sponsor list. We want to create superfans. The <SmallTeam slug="builder-relations" /> is figuring out "the PostHog way" to do events and conferences.
 
-- **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We have been posting more on [LinkedIn](/handbook/content/linkedin) to promote the newsletter. We don't use any other social media channels. 
+- **Social media:** Specifically X, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We have been posting more on [LinkedIn](/handbook/content/linkedin) to promote the newsletter, and to [YouTube](/handbook/content/youtube) with original content. We don't use any other social media channels. 
 
-- **Paid ads:** We run a lot of paid ads – about $488k a month in 2026 ([see the budget](/founders/actual-marketing-budget-2026)). It is fuel for everything else we are doing. The <SmallTeam slug="demand-gen" /> splits the budget about 50/50 between conversion (mostly Google Search) and awareness (Reddit, LinkedIn, X, YouTube, and more). Right now, they are scaling awareness to get self-driving in front of more of our ideal customers. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit. See [how we run paid ads](/handbook/marketing/paid).
+- **Paid ads:** The <SmallTeam slug="demand-gen" /> splits the budget about 50/50 between conversion (mostly Google Search) and awareness (Reddit, LinkedIn, X, YouTube, and more). We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit. See [how we run paid ads](/handbook/marketing/paid).
 
 - **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros on the <SmallTeam slug="graphics" /> to help.
 
 - **Developer influencers:** We [sponsor creators](/handbook/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
-- **Billboards:** Billboards are a way to get our brand in front of a lot of people.
+- **OOH:** Billboards are a way to get our brand in front of a lot of people. So are blimps, busses, and ads on the tube.
 
 ### Things we don't want to spend time on
 
@@ -120,8 +120,10 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
 
-- **Being cool and interesting people in online communities:** There are a bunch of communities we *could* be more active in like Reddit and Discord, but we'd prefer to focus on our own community first.
+- **Being cool and interesting people in online communities:** There are a bunch of communities we *could* be more active in like Reddit, but we'd prefer to focus on our own [community](/handbook/community) first.
 
-- **Conferences.** We're not a natural fit for conferences and being a small fish in a big pond isn't really our style. 
+- **Webinars:** Instead, we host cool events where PostHog employees and others can talk about what they're building.
+ 
+- **Conferences.** We're not a natural fit for conferences and being a small fish in a big pond isn't really our style. If we *do* do a conference, it's either to test the waters of a new market (like promoting the Data Warehouse at Big Data London), or in our own weird way (like our LLM Analytics hot dog stand at the AI Engineer Europe Conference).
 
-- **Short-form video.** We tried it, but it didn't work. Our audience *might* be there, but we're not flashy or dedicated enough to reach them.  
+- **Short-form video.** We tried it, but it didn't work. We might try this one again.  
