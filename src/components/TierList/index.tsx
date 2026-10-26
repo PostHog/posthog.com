@@ -259,9 +259,25 @@ export default function TierList() {
             const exportBoard = source.cloneNode(true) as HTMLDivElement
             exportBoard.style.width = '1200px'
             exportContainer.appendChild(exportBoard)
-            source.parentElement?.appendChild(exportContainer)
-            await Promise.all(Array.from(exportBoard.querySelectorAll('img')).map((img) => img.decode()))
+            // Inline artwork ourselves so an aborted fetch cannot poison html-to-image's resource cache.
+            await Promise.all(
+                Array.from(exportBoard.querySelectorAll('img')).map(async (img) => {
+                    const response = await fetch(img.src, { signal: controller.signal })
+                    if (!response.ok) throw new Error(`Image returned ${response.status}`)
+                    const blob = await response.blob()
+                    const dataUrl = await new Promise<string>((resolve, reject) => {
+                        const reader = new FileReader()
+                        reader.onload = () => resolve(reader.result as string)
+                        reader.onerror = () => reject(reader.error)
+                        reader.readAsDataURL(blob)
+                    })
+                    controller.signal.throwIfAborted()
+                    img.src = dataUrl
+                    await img.decode()
+                })
+            )
             controller.signal.throwIfAborted()
+            source.parentElement?.appendChild(exportContainer)
             const { width, height } = exportBoard.getBoundingClientRect()
             // Keep typical lists at 4800px wide, with a canvas-area cap for unusually tall rankings.
             const scale = Math.min(4800 / width, Math.sqrt((16 * 1024 * 1024) / (width * height)))
