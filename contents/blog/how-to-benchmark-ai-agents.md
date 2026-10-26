@@ -1,6 +1,6 @@
 ---
 title: "Do you even benchmark? How we evaluate agents at scale (with real examples)"
-date: 2026-10-21
+date: 2026-10-26
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Do_you_even_benchmark_2x_c0b57d366e.png
 featuredImageType: full
