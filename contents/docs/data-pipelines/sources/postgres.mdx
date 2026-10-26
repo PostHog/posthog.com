@@ -26,6 +26,7 @@ To link Postgres:
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
    - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
+   - **TLS fields:** (Optional) Verify the server certificate, add a certificate authority, or add a client certificate. See [Verify the server certificate](#verify-the-server-certificate).
 4. If you need to connect through an SSH tunnel, enable and configure it (optional):
    - **Tunnel host:** The hostname of your SSH server.
    - **Tunnel port:** The port your SSH server is listening on.
@@ -114,6 +115,32 @@ Row filters are not supported for CDC schemas or direct Postgres sources. They o
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
 
 </CalloutBox>
+
+## Verify the server certificate
+
+By default, PostHog encrypts the connection to your database but does not check its certificate. To make sure PostHog connects to your real database, set these fields when you link the source:
+
+- **Verify the server certificate?** Checks that your database's TLS certificate comes from a trusted authority and matches the host you entered. Off by default.
+- **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate, such as the regional certificate bundle for Amazon RDS. Adding one turns on verification, even when the toggle above is off. Without it, PostHog checks against a standard set of public authorities.
+- **Client certificate (optional)** and **Client key (optional):** A PEM certificate and its private key that PostHog presents to your database. Add both when your database requires client certificates. The key must not have a passphrase. A client certificate always makes PostHog connect over TLS.
+
+Through an SSH tunnel, PostHog checks that the certificate comes from a trusted authority, but not that it matches the host. The tunnel presents your database on a local address, so the host name can't match.
+
+If you leave all of these fields empty, the connection is encrypted but the certificate is not checked.
+
+### Certificate errors
+
+PostHog stops syncing on these errors, because retrying fails the same way until you change the source:
+
+- "PostHog could not verify your database's TLS certificate. Either an authority PostHog trusts did not sign it, or it does not match the host. Add the authority that signed it, check the host, or turn off certificate verification and remove the certificate authority."
+- "Your database's TLS certificate does not match the host you entered. Use the hostname the certificate was issued for, or turn off certificate verification and remove the certificate authority."
+- "Your database rejected the client certificate, or requires one. Add a client certificate and key that your database trusts."
+- "A client certificate needs its private key. Add the key, or clear the certificate."
+- "The client key has a passphrase. Remove the passphrase and paste the key again."
+- For CDC sources: "The TLS certificate check failed. Either the source database's certificate did not pass verification, or the database rejected the client certificate. Check the TLS settings of the source, then re-enable change data capture."
+
+After you fix the certificate or the source settings, re-enable the sync.
+
 
 <InboundIpAddresses />
 
