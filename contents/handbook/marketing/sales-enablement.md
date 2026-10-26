@@ -4,21 +4,27 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Product marketers make sales enablement material for the products they own. This page is about how to make material that doesn't suck, and that GTM folks actually use. [Per-product sales enablement](/handbook/growth/sales/why-buy-posthog#per-product-sales-enablement) links some examples. It isn't a full list – keep the material for your product current in your product's own handbook pages.
-
-These notes come from the first training sessions that product marketers ran for the sales team.
+Product marketers make sales enablement material for the products they own. This page is about how to make material that's worth spending your time on, and that GTM folks actually use. [Per-product sales enablement](/handbook/growth/sales/why-buy-posthog#per-product-sales-enablement) links some examples.  
 
 ## Start with the products that are hardest to sell
 
-Ask GTM folks to rank products from easiest to hardest to sell, and work on the hardest first. Established categories and visual products, such as Product Analytics, Session Replay, and Replay Vision, are easier (nobody needs a training session to sell a product that demos itself). Products with less to show on screen, such as the data warehouse, Error Tracking, and Logs, need more help.
+Ask GTM folks (TAMs, EAs, CSMs) to rank products from easiest to hardest to sell, and work on the hardest first. Established categories and visual products, such as Product Analytics, Session Replay, and Replay Vision, are easier to pitch. Products with less to show on screen, such as the data warehouse, Error Tracking, and Logs, need more help.
 
-## Tell GTM folks who to call, and when
+## Narrow down the buying signals
 
-This is the part GTM folks use the most. Many customers understand a product in theory, but it's the wrong time or the wrong person. Give ready-to-buy signals specific enough that someone can open their book after the session and pick the accounts to call. A signal can be usage data, a change at the company, or something the customer said on a call.
+GTM folks know their accounts and find buying signals better than we do, so don't try to tell them who to call. Tell them which customer profile(s) your product fits, and which signals show an account matches. For example:
+
+- **Usage of a related PostHog product is going up.** Session Replay users who watch a lot of recordings are more likely to try Replay Vision.
+- **They use a tool that pairs well with your product, or leads into it.** Teams that bill through Stripe are a good fit for revenue analytics.
+- **Something changed at the company.** They raised, they're moving into a new market, or they've hired a new role. 
+- **The company is at a certain point of maturity.** A team of 20+ is more likely to adopt the Slack app than a team of 2.
+- **There's a person in a role that the product suits.** A data analyst is a good fit for the data warehouse. A growth marketer is a good fit for Web Analytics and Experiments.
+
+Many customers understand and like a product in theory, but it's the wrong time to pitch it (or the wrong person at the org to sell it to). Say what "the right time" and "the right person" look like for your product.
 
 ## Explain why it's worth selling
 
-Show how the product helps hit quota. A rough number is fine, for example how much a customer might spend on data warehouse sources compared to Product Analytics. If a product mostly keeps customers instead of adding revenue, say that (retention counts too).
+Sales folks aren't coin-operated, but it helps to show how the product helps them hit quota. A rough number is fine, for example how much a customer might spend on data warehouse sources compared to Product Analytics. If a product mostly keeps customers instead of adding revenue, say that (retention counts too).
 
 ## Demo the result, not the setup
 
@@ -26,29 +32,27 @@ For a product that is hard to show, demo the answer it gives. The data foundatio
 
 ## Collect objections, not only FAQs
 
-An FAQ is a question about the product: how pricing works, which sources we support, or what is on the roadmap. Write those yourself from the docs (future you will be glad to send a link instead of answering the same Slack message again).
-
-An objection is a reason a customer gives not to buy:
+An FAQ is a question about the product: how pricing works, which sources we support, or what is on the roadmap. An objection is a reason a customer gives not to buy:
 
 - "I already have a data warehouse. Why do I need yours?"
 - "PostHog doesn't do advanced modeling, does it?"
 - "We can build this ourselves for less."
 
-Objections are the good stuff, and you can't write them at your desk. They come from user interviews and from GTM folks who pitch to real customers. So:
+Objections are the good stuff. They come from user interviews and from GTM folks who pitch to real customers. So:
 
-- Before the session, ask GTM folks for the objections they hear most, and go through them live.
-- Sit in on some customer calls.
+- Before a training session, ask GTM folks for the objections they hear most, and go through them live.
+- Sit in on some customer calls and user interviews (or schedule your own).
 - Ask again a few times as the pitch matures, and update your battle cards. Customers always find new ones.
 
-Answer honestly, even when the answer is "we can't do that yet" (they'll find out on a call anyway, so it's better they hear it from you). For "We can build this ourselves for less," the honest answer is that we don't compete on price with a homegrown solution, and nobody does. It costs less in vendor fees, but the customer's team has to build and maintain it, and that costs engineering time.
+Answer objections honestly, even when the answer is "I'm sorry Dave. I'm afraid I can't do that" (yet). 
 
-## Present for less time than you take questions
+## If you run a session, present for less time than you take questions
 
-The data foundations session had 15 to 20 minutes of content and 45 minutes of questions. The questions were the most useful part, because they showed what GTM folks didn't understand and what to write next (yes, even after all that time on the slides). Record the session and link the recording from your material.
+The data foundations training session had 15 to 20 minutes of content and 45 minutes of questions. The questions were the most useful part, because they showed what GTM folks didn't understand and what to write next (yes, even after all that time spent making the slides). Record the session and link the recording from your material.
 
 ## Write it for agents too
 
-Many GTM folks prepare for calls with an agent such as Claude Code or PostHog Desktop, connected to PostHog, Granola, and Slack (see [AI investigation tools](/handbook/growth/sales/sales-and-cs-tools#ai-investigation-tools)). Agents are bad at reading decks. After the session, put the content in Markdown: a handbook page such as [data foundations](/handbook/growth/sales/data-foundations), or a skill in the <PrivateLink url="https://us.posthog.com/project/2/llm-analytics/skills">PostHog skills store</PrivateLink>. Then someone can ask their agent "Which of my accounts are ready for the data warehouse?" and get an answer that uses your signals and objection answers. [Turning knowledge into agent skills](/handbook/growth/sales/turning-knowledge-into-agent-skills) explains how.
+Many GTM folks prepare for calls with an agent such as Claude Code or PostHog Desktop, connected to PostHog, Granola, and Slack (see [AI investigation tools](/handbook/growth/sales/sales-and-cs-tools#ai-investigation-tools)). Agents are generally bad at reading decks. After the session, put the content in Markdown: a handbook page such as [data foundations](/handbook/growth/sales/data-foundations), or a skill in the <PrivateLink url="https://us.posthog.com/project/2/llm-analytics/skills">PostHog skills store</PrivateLink>. Then someone can ask their agent "Which of my accounts are ready for the data warehouse?" and get an answer that uses your signals and objection answers. [Turning knowledge into agent skills](/handbook/growth/sales/turning-knowledge-into-agent-skills) explains how.
 
 ## Let scouts watch for signals
 
