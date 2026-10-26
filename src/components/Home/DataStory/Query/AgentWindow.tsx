@@ -1,9 +1,18 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { IconArrowUpRight, IconCheck, IconSpinner } from '@posthog/icons'
+import {
+    IconArrowRight,
+    IconArrowUpRight,
+    IconCheck,
+    IconChevronRight,
+    IconCode,
+    IconGraph,
+    IconLock,
+    IconSpinner,
+} from '@posthog/icons'
 import Link from 'components/Link'
 import { cn } from '../../../../utils'
-import { SourceIcon, TERMINAL_TRACE, Trace, TraceState, codexArguments } from './trace'
+import { SourceIcon, TERMINAL_TRACE, ToolCall, Trace, TraceState, codexArguments } from './trace'
 import {
     CHATGPT_FUNNEL_AT,
     CHATGPT_TRACE,
@@ -11,8 +20,9 @@ import {
     CLAUDE_ERROR_CARD_AT,
     CLAUDE_TRENDS_AT,
     CURSOR_TRACE,
+    POSTHOG_AI_TRACE,
 } from './appTraces'
-import { ErrorStackApp, FunnelApp, McpAppFrame, TrendsApp } from './mcpApps'
+import { ErrorStackApp, FunnelApp, McpAppFrame, TrendPlot, TrendsApp } from './mcpApps'
 import { CursorDiffChip, CursorEditor, CursorReadLine } from './cursorScene'
 import { transform, useLoopingAnimation } from '../timeline'
 import { InlineCode, PostHogMark, ScrollToLatest, WINDOW_HEIGHT } from '../sceneParts'
@@ -25,10 +35,11 @@ import {
     CodexIcon,
     CursorIcon,
     OpenAIMark,
+    PostHogAIIcon,
 } from './appIcons'
 import { SCENE_SIZE, SCENE_TEXT } from '../sceneScale'
 
-export type AgentTheme = 'claude' | 'codex' | 'claudeApp' | 'chatgpt' | 'cursor'
+export type AgentTheme = 'claude' | 'codex' | 'claudeApp' | 'chatgpt' | 'posthogAI' | 'cursor'
 
 interface WindowControls {
     onClose?: () => void
@@ -135,7 +146,7 @@ const InstallLink = ({ install }: Pick<WindowControls, 'install'>) => {
                 {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
                 className="flex items-center gap-0.5 opacity-70 transition-opacity hover:opacity-100"
             >
-                <span className="underline underline-offset-2">Add to {install.label}</span>
+                <span className="underline underline-offset-2">{install.label}</span>
                 <IconArrowUpRight className={SCENE_SIZE[12]} />
             </Link>
         </span>
@@ -512,6 +523,131 @@ const ChatGPTApp = ({ state, elapsed, controls }: AppProps) => (
     </WindowFrame>
 )
 
+const POSTHOG_AI_URL = 'us.posthog.com/project/12345/ai'
+const POSTHOG_AI_CHAT_TITLE = 'Pro checkout errors'
+const POSTHOG_AI_SURFACE = 'rounded-lg border border-primary bg-primary'
+const POSTHOG_AI_COLUMN = 'mx-auto w-full max-w-xl'
+
+const PostHogAIActivity = ({ call, done }: { call: ToolCall; done: boolean }) => (
+    <motion.p {...LINE_ENTER} className={cn(SCENE_TEXT[12], 'm-0 flex items-center gap-2 py-1 text-secondary')}>
+        <SourceIcon source={call.source} />
+        <span className={cn('shrink-0', done ? 'font-medium text-primary' : 'animate-pulse')}>
+            {done ? call.label : call.runningLabel ?? call.label}
+        </span>
+        <span className="min-w-0 flex-1 truncate">{done && call.result}</span>
+        <IconChevronRight className={cn(SCENE_SIZE[12], 'shrink-0 opacity-60')} />
+    </motion.p>
+)
+
+const PostHogAIInsight = () => (
+    <motion.div {...LINE_ENTER} className={cn(POSTHOG_AI_SURFACE, 'my-1.5 overflow-hidden')}>
+        <div className="p-3">
+            <p className={cn(SCENE_TEXT[12], 'm-0 mb-2 font-semibold')}>Checkout errors by plan</p>
+            <TrendPlot />
+        </div>
+        <p
+            className={cn(
+                SCENE_TEXT[11],
+                'm-0 flex items-center gap-1.5 border-t border-primary px-3 py-1.5 text-secondary'
+            )}
+        >
+            <IconGraph className={SCENE_SIZE[12]} />
+            Trends
+            <span className="ml-auto flex items-center gap-2.5">
+                <IconCode className={SCENE_SIZE[14]} />
+                <IconArrowUpRight className={SCENE_SIZE[14]} />
+            </span>
+        </p>
+    </motion.div>
+)
+
+const composerPlaceholder = (state: TraceState): React.ReactNode =>
+    state.working ? (
+        'Thinking…'
+    ) : (
+        <>
+            {state.submitted ? 'Ask follow-up' : 'Ask a question'} <span className="opacity-60">or / for commands</span>
+        </>
+    )
+
+const PostHogAIApp = ({ state, controls }: AppProps) => (
+    <WindowFrame
+        title={
+            <span className="flex min-w-0 max-w-[34%] items-center gap-1.5 rounded-md bg-accent px-3 py-0.5 font-normal @2xl:max-w-[45%]">
+                <IconLock className={cn(SCENE_SIZE[12], 'shrink-0')} />
+                <span className="truncate">{POSTHOG_AI_URL}</span>
+            </span>
+        }
+        controls={controls}
+        className={cn(SCENE_TEXT[13], 'border-primary bg-accent leading-snug text-primary')}
+        titleBarClassName="border-b border-primary bg-primary"
+    >
+        <p className={cn(SCENE_TEXT[12.5], 'm-0 flex shrink-0 items-center gap-2 border-b border-primary px-4 py-2')}>
+            <PostHogMark className="h-3.5" />
+            <span className="font-semibold">{state.submitted ? POSTHOG_AI_CHAT_TITLE : 'PostHog AI'}</span>
+        </p>
+        <ScrollToLatest className="px-4 pt-3">
+            <div className={cn(POSTHOG_AI_COLUMN, 'flex flex-col')}>
+                {state.submitted && (
+                    <motion.p
+                        {...LINE_ENTER}
+                        className={cn(POSTHOG_AI_SURFACE, 'm-0 mb-3 ml-auto max-w-[80%] px-3 py-2 font-medium')}
+                    >
+                        {state.question}
+                    </motion.p>
+                )}
+                {state.calls.map(({ call, done }) => (
+                    <React.Fragment key={call.id}>
+                        <PostHogAIActivity call={call} done={done} />
+                        {call.mcpTool === 'create_insight' && done && <PostHogAIInsight />}
+                    </React.Fragment>
+                ))}
+                {state.answer && (
+                    <motion.p {...LINE_ENTER} className={cn(POSTHOG_AI_SURFACE, 'm-0 mb-2 mt-2 px-3 py-2')}>
+                        <InlineCode text={state.answer} codeClassName="rounded bg-accent !px-1" />
+                    </motion.p>
+                )}
+            </div>
+        </ScrollToLatest>
+        <div className="shrink-0 px-4 pb-3 pt-1">
+            <div
+                className={cn(
+                    POSTHOG_AI_COLUMN,
+                    POSTHOG_AI_SURFACE,
+                    'px-3 pb-2 pt-2.5 transition-shadow',
+                    state.typed && 'ring-2 ring-[#9A3BE0] dark:ring-[#EE4AAE]'
+                )}
+            >
+                <p className="m-0 min-h-[1.4em]">
+                    {state.typed || <span className="text-secondary">{composerPlaceholder(state)}</span>}
+                    {state.typed && <Caret className="w-px bg-current" />}
+                </p>
+                <div className="mt-2 flex justify-end">
+                    <span
+                        className={cn(
+                            'rounded-md bg-[#EB9D2A] pb-0.5 transition-opacity',
+                            !state.typed && !state.working && 'opacity-50'
+                        )}
+                    >
+                        <span
+                            className={cn(
+                                SCENE_SIZE[24],
+                                'flex items-center justify-center rounded-md border border-[#B17816] bg-white text-[#151515] dark:bg-[#2B2C32] dark:text-white'
+                            )}
+                        >
+                            {state.working ? (
+                                <span className="size-[35%] rounded-[2px] bg-current" />
+                            ) : (
+                                <IconArrowRight className={SCENE_SIZE[14]} />
+                            )}
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </WindowFrame>
+)
+
 const CursorApp = ({ state, elapsed, controls }: AppProps) => (
     <WindowFrame
         title="acme — checkout.tsx"
@@ -584,6 +720,7 @@ interface AgentApp {
     label: string
     Icon: React.ComponentType
     installUrl: string
+    installLabel?: string
     Component: React.ComponentType<AppProps>
     trace: Trace
 }
@@ -602,6 +739,14 @@ const APPS: Record<AgentTheme, AgentApp> = {
         installUrl: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
         Component: ChatGPTApp,
         trace: CHATGPT_TRACE,
+    },
+    posthogAI: {
+        label: 'PostHog AI',
+        Icon: PostHogAIIcon,
+        installUrl: '/docs/posthog-ai',
+        installLabel: 'PostHog AI docs',
+        Component: PostHogAIApp,
+        trace: POSTHOG_AI_TRACE,
     },
     cursor: {
         label: 'Cursor',
@@ -639,13 +784,13 @@ export default function AgentWindow({
     elapsed: number
     controls?: WindowControls
 }): JSX.Element {
-    const { Component, trace, label, installUrl } = APPS[theme]
+    const { Component, trace, label, installUrl, installLabel = `Add to ${label}` } = APPS[theme]
     return (
         <div className="@container not-prose">
             <Component
                 state={trace.stateAt(elapsed)}
                 elapsed={elapsed}
-                controls={controls && { ...controls, install: { label, url: installUrl } }}
+                controls={controls && { ...controls, install: { label: installLabel, url: installUrl } }}
             />
         </div>
     )

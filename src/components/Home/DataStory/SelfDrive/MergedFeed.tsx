@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconPullRequest } from '@posthog/icons'
 import { cn } from '../../../../utils'
@@ -53,39 +53,35 @@ const ARRIVE = {
     transition: IOS_SPRING,
 }
 
-export default function MergedFeed(): JSX.Element {
-    const sectionRef = useRef<HTMLDivElement>(null)
-    const {
-        feed: { pullRequests, mergedLast7Days },
-        loading,
-        now,
-    } = useSelfDrivingFeed(sectionRef)
+export default function MergedFeed(): JSX.Element | null {
+    const { feed, failed, now } = useSelfDrivingFeed()
+    if (failed) return null
 
     return (
-        <div ref={sectionRef} className="@container mx-auto mt-24">
+        <div className="@container mx-auto mt-24">
             <h3 className="!mt-0">Self-driving in PostHog, right now</h3>
             <p>
                 We run PostHog on PostHog. These pull requests came from Inbox reports on our own product. PostHog wrote
                 each one, and an engineer reviewed and merged it.
             </p>
-            {loading ? (
+            {!feed ? (
                 <SkeletonFeed />
-            ) : pullRequests.length > 0 ? (
+            ) : (
                 <div className="not-prose grid gap-8 @2xl:grid-cols-12 @2xl:items-start">
                     <div className="@2xl:col-span-4">
                         <p className="m-0 text-7xl font-bold leading-none tracking-tight tabular-nums">
                             <Emphasis className="bg-blue/10 px-3 text-blue dark:bg-blue/20">
-                                {mergedLast7Days ?? pullRequests.length}
+                                {feed.mergedLast7Days ?? feed.pullRequests.length}
                             </Emphasis>
                         </p>
                         <p className="m-0 mt-3 text-secondary">
                             pull requests that PostHog wrote and a person merged
-                            {mergedLast7Days !== null ? ' in the last 7 days' : ''}
+                            {feed.mergedLast7Days !== null ? ' in the last 7 days' : ''}
                         </p>
                     </div>
                     <ol className="m-0 list-none divide-y divide-primary p-0 @2xl:col-span-8">
                         <AnimatePresence initial={false}>
-                            {pullRequests.slice(0, VISIBLE_ROWS).map((pullRequest, index) => {
+                            {feed.pullRequests.slice(0, VISIBLE_ROWS).map((pullRequest, index) => {
                                 const summary = titleSummary(pullRequest.title, pullRequest.number)
                                 return (
                                     <motion.li key={pullRequest.url} layout="position" {...ARRIVE} className="m-0">
@@ -114,7 +110,7 @@ export default function MergedFeed(): JSX.Element {
                         </AnimatePresence>
                     </ol>
                 </div>
-            ) : null}
+            )}
         </div>
     )
 }

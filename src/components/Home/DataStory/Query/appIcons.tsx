@@ -1,4 +1,6 @@
 import React from 'react'
+import { Globe } from 'lucide-react'
+import { Logo } from '@posthog/brand/logo'
 import { cn } from '../../../../utils'
 import { IconClaudeCode, IconOpenAI, LogomarkCursor } from 'components/OSIcons'
 
@@ -27,14 +29,27 @@ const AppTile = ({ className, children }: { className: string; children: React.R
     </span>
 )
 
+const TileBadge = ({ children }: { children: React.ReactNode }) => (
+    <span className="absolute -bottom-[6%] -right-[6%] flex size-[52%] items-center justify-center rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
+        {children}
+    </span>
+)
+
 const TerminalTile = ({ badge }: { badge: React.ReactNode }) => (
     <span className="relative block size-full">
         <AppTile className="items-start justify-start bg-gradient-to-b from-[#3A3A3C] to-[#1C1C1E] p-[16%]">
             <span className="font-code text-[0.5em] font-bold leading-none text-[#30D158]">&gt;_</span>
         </AppTile>
-        <span className="absolute -bottom-[6%] -right-[6%] flex size-[52%] items-center justify-center rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.35)]">
-            {badge}
-        </span>
+        <TileBadge>{badge}</TileBadge>
+    </span>
+)
+
+const GlobeTile = ({ badge }: { badge: React.ReactNode }) => (
+    <span className="relative block size-full">
+        <AppTile className="bg-gradient-to-b from-[#3A3A3C] to-[#1C1C1E]">
+            <Globe className="size-[62%] text-white" strokeWidth={1.75} aria-hidden="true" />
+        </AppTile>
+        <TileBadge>{badge}</TileBadge>
     </span>
 )
 
@@ -53,6 +68,16 @@ export const CodexIcon = () => (
         badge={
             <span className="flex size-full items-center justify-center rounded-full bg-white">
                 <OpenAIMark className="w-[88%] text-black" />
+            </span>
+        }
+    />
+)
+
+export const PostHogAIIcon = () => (
+    <GlobeTile
+        badge={
+            <span className="flex size-full items-center justify-center rounded-full bg-white">
+                <Logo layout="logomark" variant="print" className="block h-auto w-[68%]" />
             </span>
         }
     />

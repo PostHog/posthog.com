@@ -1,89 +1,49 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { useInView } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import type { SelfDrivingFeed } from '../../../../api/self-driving-prs'
 
 const FEED_URL = '/api/self-driving-prs'
 const REFRESH_MS = 15 * 60 * 1000
 const CLOCK_MS = 60 * 1000
 const FETCH_TIMEOUT_MS = 8000
-const FEED_SIZE = 10
-const BUILD_TIME_REPOSITORY = 'posthog/posthog'
 
-interface BuildTimePullRequest {
-    prNumber: number
-    title: string
-    url: string
-    state: string
-    mergedAt: string | null
+const fetchFeed = async (): Promise<SelfDrivingFeed> => {
+    const response = await fetch(FEED_URL, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) })
+    if (!response.ok) throw new Error(`${FEED_URL} returned ${response.status}`)
+    const feed: SelfDrivingFeed = await response.json()
+    if (feed.pullRequests.length === 0) throw new Error(`${FEED_URL} returned no pull requests`)
+    return feed
 }
 
-export function useSelfDrivingFeed(ref: RefObject<HTMLElement>): {
-    feed: SelfDrivingFeed
-    loading: boolean
-    now: number | null
-} {
-    const data = useStaticQuery(graphql`
-        {
-            allSelfDrivingPullRequest {
-                nodes {
-                    prNumber
-                    title
-                    url
-                    state
-                    mergedAt
-                }
-            }
-        }
-    `)
-    const buildTimeFeed = useMemo<SelfDrivingFeed>(() => {
-        const nodes: BuildTimePullRequest[] = data?.allSelfDrivingPullRequest?.nodes ?? []
-        const pullRequests = nodes
-            .filter((node) => node.state === 'merged' && node.mergedAt)
-            .map((node) => ({
-                repository: BUILD_TIME_REPOSITORY,
-                number: node.prNumber,
-                title: node.title,
-                url: node.url,
-                mergedAt: node.mergedAt as string,
-            }))
-            .sort((a, b) => Date.parse(b.mergedAt) - Date.parse(a.mergedAt))
-            .slice(0, FEED_SIZE)
-        return { pullRequests, mergedLast7Days: null }
-    }, [data])
-
-    const [liveFeed, setLiveFeed] = useState<SelfDrivingFeed | null>(null)
-    const [loading, setLoading] = useState(buildTimeFeed.pullRequests.length === 0)
-    const lastFetchedAt = useRef(0)
+export function useSelfDrivingFeed(): { feed: SelfDrivingFeed | null; failed: boolean; now: number | null } {
+    const [feed, setFeed] = useState<SelfDrivingFeed | null>(null)
+    const [failed, setFailed] = useState(false)
     const [now, setNow] = useState<number | null>(null)
-    const inView = useInView(ref, { amount: 0.2 })
 
     useEffect(() => {
-        if (!inView) return
-        const load = () => {
-            if (document.hidden) return
-            lastFetchedAt.current = Date.now()
-            fetch(FEED_URL, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) })
-                .then((response) => (response.ok ? response.json() : null))
-                .then((feed: SelfDrivingFeed | null) => {
-                    if (feed && feed.pullRequests.length > 0) setLiveFeed(feed)
+        let mounted = true
+        const load = () =>
+            fetchFeed()
+                .then((loaded) => {
+                    if (!mounted) return
+                    setFeed(loaded)
+                    setFailed(false)
                 })
-                .catch(() => undefined)
-                .finally(() => setLoading(false))
+                .catch(() => mounted && setFailed(true))
+        load()
+        const refresh = window.setInterval(() => !document.hidden && load(), REFRESH_MS)
+        return () => {
+            mounted = false
+            window.clearInterval(refresh)
         }
-        if (Date.now() - lastFetchedAt.current >= REFRESH_MS) load()
-        const refresh = window.setInterval(load, REFRESH_MS)
-        return () => window.clearInterval(refresh)
-    }, [inView])
+    }, [])
 
     useEffect(() => {
         setNow(Date.now())
-        if (!inView) return
         const clock = window.setInterval(() => setNow(Date.now()), CLOCK_MS)
         return () => window.clearInterval(clock)
-    }, [inView])
+    }, [])
 
-    return { feed: liveFeed ?? buildTimeFeed, loading, now }
+    return { feed, failed, now }
 }
 
 const MINUTE_MS = 60 * 1000

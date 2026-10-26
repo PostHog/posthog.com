@@ -152,3 +152,46 @@ export const CURSOR_TRACE = defineTrace({
         },
     ],
 })
+
+export const POSTHOG_AI_TRACE = defineTrace({
+    question: 'Why did Pro checkout errors spike, and are payments failing too?',
+    loopMs: 22000,
+    restingMs: 19500,
+    answerAt: 11000,
+    answer: 'Pro checkout reads `plan` before pricing loads at `checkout.tsx:142`, so every Pro upgrade throws. Payments fail too: 31 Pro charges failed this week, including Jo at Acme. Guard `plan` until pricing is ready.',
+    calls: [
+        {
+            id: 'issues',
+            source: 'errors',
+            label: 'Searched error tracking issues',
+            runningLabel: 'Searching error tracking issues...',
+            mcpTool: 'search',
+            argName: 'kind',
+            args: 'error_tracking_issues',
+            result: "TypeError · checkout.tsx:142 · reading 'plan'",
+            at: 5000,
+        },
+        {
+            id: 'insight',
+            source: 'analytics',
+            label: 'Created an insight',
+            runningLabel: 'Creating an insight...',
+            mcpTool: 'create_insight',
+            argName: 'viz_title',
+            args: 'Checkout errors by plan',
+            result: 'Checkout errors by plan',
+            at: 6200,
+        },
+        {
+            id: 'charges',
+            source: 'stripe',
+            label: 'Executed SQL',
+            runningLabel: 'Writing a SQL query...',
+            mcpTool: 'execute_sql',
+            argName: 'query',
+            args: 'select status from stripe.charges',
+            result: '31 Pro charges failed this week',
+            at: 9000,
+        },
+    ],
+})

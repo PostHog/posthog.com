@@ -61,7 +61,8 @@ const TREND_SERIES = [
 const TREND_MAX = 34
 const TREND_TOOLTIP_INDEX = 12
 const CHART_MENU = ['Line', 'Area', 'Bar', 'Stacked bar']
-const PICKED_CHART = 'Bar'
+type TrendChart = 'Line' | 'Bar'
+const PICKED_CHART: TrendChart = 'Bar'
 const PICKER_TO_PICKED = { x: 26, y: -66 }
 
 const trendX = (index: number): number => (index / (TREND_SERIES[0].values.length - 1)) * 100
@@ -147,8 +148,37 @@ const TrendTooltip = () => (
     </motion.div>
 )
 
+export const TrendPlot = ({ chart = 'Line' }: { chart?: TrendChart }) => (
+    <>
+        <div className={cn(SCENE_TEXT[10.5], 'mb-1.5 flex gap-3 opacity-80')}>
+            {TREND_SERIES.map(({ label }, series) => (
+                <span key={label} className="flex items-center gap-1">
+                    <span className="size-2 rounded-full" style={{ backgroundColor: CHART_PALETTE[series] }} />
+                    {label}
+                </span>
+            ))}
+        </div>
+        <div className="relative h-[110px] @3xl:h-[150px] border-b border-l border-black/10 dark:border-white/15">
+            {[25, 50, 75].map((line) => (
+                <span
+                    key={line}
+                    className="absolute inset-x-0 border-t border-black/5 dark:border-white/10"
+                    style={{ top: `${line}%` }}
+                />
+            ))}
+            {chart === 'Line' ? <TrendLines key="line" /> : <TrendBars key="bar" />}
+            {chart === 'Line' && <TrendTooltip />}
+        </div>
+        <div className={cn(SCENE_TEXT[10], 'mt-1 flex justify-between opacity-60')}>
+            {TREND_DAYS.map((day) => (
+                <span key={day}>{day}</span>
+            ))}
+        </div>
+    </>
+)
+
 export const TrendsApp = ({ elapsed }: { elapsed: number }) => {
-    const chart = elapsed >= CLAUDE_BAR_AT ? PICKED_CHART : 'Line'
+    const chart: TrendChart = elapsed >= CLAUDE_BAR_AT ? PICKED_CHART : 'Line'
     const menuOpen = elapsed >= CLAUDE_PICKER_PRESS_AT && elapsed < CLAUDE_BAR_AT
     const hovered = elapsed >= CLAUDE_BAR_HOVER_AT ? PICKED_CHART : null
     return (
@@ -206,30 +236,7 @@ export const TrendsApp = ({ elapsed }: { elapsed: number }) => {
                     <IconGear className={SCENE_SIZE[12]} /> Options
                 </HeaderButton>
             </AppHeader>
-            <div className={cn(SCENE_TEXT[10.5], 'mb-1.5 flex gap-3 opacity-80')}>
-                {TREND_SERIES.map(({ label }, series) => (
-                    <span key={label} className="flex items-center gap-1">
-                        <span className="size-2 rounded-full" style={{ backgroundColor: CHART_PALETTE[series] }} />
-                        {label}
-                    </span>
-                ))}
-            </div>
-            <div className="relative h-[110px] @3xl:h-[150px] border-b border-l border-black/10 dark:border-white/15">
-                {[25, 50, 75].map((line) => (
-                    <span
-                        key={line}
-                        className="absolute inset-x-0 border-t border-black/5 dark:border-white/10"
-                        style={{ top: `${line}%` }}
-                    />
-                ))}
-                {chart === 'Line' ? <TrendLines key="line" /> : <TrendBars key="bar" />}
-                {chart === 'Line' && <TrendTooltip />}
-            </div>
-            <div className={cn(SCENE_TEXT[10], 'mt-1 flex justify-between opacity-60')}>
-                {TREND_DAYS.map((day) => (
-                    <span key={day}>{day}</span>
-                ))}
-            </div>
+            <TrendPlot chart={chart} />
         </>
     )
 }

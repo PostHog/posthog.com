@@ -34,6 +34,7 @@ export interface ToolCall {
     id: string
     source: SourceKey
     label: string
+    runningLabel?: string
     mcpTool: string
     argName: string
     args: string
