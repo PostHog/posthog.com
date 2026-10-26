@@ -27,10 +27,10 @@ On the free plan, events older than 1 year are hidden first and deleted later:
 
 On paid plans, events are deleted once they're older than your plan's window (2, 3, 5, or 7 years).
 
-A shorter window in project settings hides older events but doesn't delete them. To remove events, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
+A shorter window in organization settings hides older events but doesn't delete them. To remove events, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
 
 ## If you need a longer window
 
-Add a [platform package](/platform-packages): Boost gives 3 years, Scale 5 years, and Enterprise 7 years. Your projects get the longest window your plan allows. To use a shorter window for a project, change it in your project settings.
+Add a [platform package](/platform-packages): Boost gives 3 years, Scale 5 years, and Enterprise 7 years. Your organization gets the longest window your plan allows. To use a shorter window for every project in it, change it in your organization settings.
 
 To keep events for longer than any window, send them to your own warehouse with a [batch export](/docs/cdp/batch-exports).
