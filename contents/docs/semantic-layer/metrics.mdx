@@ -85,11 +85,11 @@ A worked example:
 1. You create a `signups` metric from your "Weekly signups" insight and approve it.
 2. A teammate edits the insight to exclude a country.
 3. The metric now reports `is_drifted: true`, and its `status` stays `approved`. The approved snapshot no longer matches the insight it came from.
-4. Runs still work, but results are labeled noncanonical, and re-approval is blocked until a human resolves the drift – either update the metric to re-snapshot the new query, or unlink it from the insight. Either way, the metric goes back to `proposed` for a fresh approval.
+4. Runs still work, but agents don't present the results as canonical, and re-approval is blocked until a human resolves the drift – either update the metric to re-snapshot the new query, or unlink it from the insight. Either way, the metric goes back to `proposed` for a fresh approval.
 
 <CalloutBox icon="IconWarning" title="The canonical rule" type="caution">
 
-A result is canonical only when `status = 'approved'` and `is_drifted = false`. Agents never present a `proposed` or drifted metric's result as canonical – they label it noncanonical instead.
+A result is canonical only when `status = 'approved'` and `is_drifted = false`. Agents never present a `proposed` or drifted metric's result as canonical. A `proposed` result they use opens with "📝 **Proposed definition in your data catalog**". When the match is drifted, the agent works the number out itself and tells you it's a one-off calculation.
 
 </CalloutBox>
 

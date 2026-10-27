@@ -50,7 +50,7 @@ See the [SQL reference](/docs/semantic-layer/query) for the full schema.
 
 Everything an agent creates lands as `proposed`. A human promotes it – approving a metric, certifying a table, accepting a join – and every promotion requires literally typing "confirm" in the conversation. Editing an approved metric's definition resets it to `proposed`. If a metric was created from an insight and someone later edits that insight, the metric is flagged as drifted.
 
-The rule agents live by: a result is canonical only when `status = 'approved'` and `is_drifted = false`. Everything else gets labeled noncanonical.
+The rule agents live by: a result is canonical only when `status = 'approved'` and `is_drifted = false`. Only a canonical answer opens with "🛡️ **From your data catalog**". Anything else is called out as a proposed definition or a one-off calculation.
 
 Read more in [governance](/docs/semantic-layer/governance).
 
