@@ -5,8 +5,8 @@ import { join } from 'node:path'
 import { repoRoot } from '../load-eval-files.ts'
 import type { CheckPrompt } from '../build-eval-prompts.ts'
 
-// Saved evals in Gauge ("eval sets"): one per check × arm, each with a stable id that
-// every paid run launches under, so Gauge keeps one history per check and arm.
+// Saved evals in Gauge ("eval sets"): one per check, each with a stable id that every
+// paid run launches under, so Gauge keeps one history per check.
 // `pnpm evals sync` creates or updates them from the eval files; `pnpm evals run`
 // launches them. Our evals share the Gauge org with other people's, so we only ever
 // touch evals whose name starts with namePrefix.
@@ -33,6 +33,7 @@ export type SavedEvalDefinition = {
     repoRef: string | null
     agents: { agent: string; models: string[] }[] // agent as Gauge's harness enum, e.g. CLAUDE_CODE
     sampleCount: number
+    mcpRefs: string[] // handle@version
     tags: string[]
 }
 
@@ -46,6 +47,7 @@ export type SavedEval = {
     repoRef: string | null
     agents: { agent: string; models: string[] }[]
     sampleCount: number
+    mcpRefs: string[]
     tags: string[]
 }
 
@@ -60,7 +62,8 @@ export function definitionFor(check: CheckPrompt, samples: number): SavedEvalDef
         repoRef: check.codebase?.ref ?? null,
         agents: check.harnesses.map((h) => ({ agent: h.gauge, models: h.models })),
         sampleCount: samples,
-        tags: [tag, `arm:${check.arm}`],
+        mcpRefs: check.mcp?.ref ? [check.mcp.ref] : [],
+        tags: [tag],
     }
 }
 
@@ -85,6 +88,7 @@ export function isCurrent(saved: SavedEval, wanted: SavedEvalDefinition): boolea
         (saved.repoRef ?? null) === wanted.repoRef &&
         agentsKey(saved.agents) === agentsKey(wanted.agents) &&
         saved.sampleCount === wanted.sampleCount &&
+        JSON.stringify([...(saved.mcpRefs ?? [])].sort()) === JSON.stringify([...wanted.mcpRefs].sort()) &&
         JSON.stringify([...saved.tags].sort()) === JSON.stringify([...wanted.tags].sort())
     )
 }
@@ -110,12 +114,15 @@ function definitionFlags(wanted: SavedEvalDefinition, slugs: Map<string, string>
         : editing
         ? ['--clear-repo']
         : []
+    const mcp =
+        wanted.mcpRefs.length > 0 ? wanted.mcpRefs.flatMap((ref) => ['--mcp', ref]) : editing ? ['--clear-mcp'] : []
     return [
         '--file',
         join(dir, 'prompt.md'),
         '--criteria-file',
         join(dir, 'criteria.json'),
         ...repo,
+        ...mcp,
         ...agents,
         '--samples',
         String(wanted.sampleCount),

@@ -19,11 +19,11 @@ evals/
   shared/                          # config every eval file uses
     criteria.yaml                  # shared rubrics, listed by name in criteria.shared
     codebases-to-test.yaml         # repos the agent works in, by name
-    run-config.yml                 # agents, models, default arms and samples for every run
+    run-config.yml                 # agents, models, samples and MCP servers for every run
   journeys/                        # checks that span pages and no single page owns
   run.ts                           # the CLI: calls the three steps below in order
   load-eval-files.ts               # 1. find, read and validate eval files
-  build-eval-prompts.ts            # 2. build one prompt per check × arm
+  build-eval-prompts.ts            # 2. build one prompt per check
   gauge/                           # everything Gauge-specific
     send-to-gauge.ts               # 3. prompts → Gauge cases for the free dry run; waits for paid runs
     saved-evals.ts                 # sync and launch the saved Gauge evals
@@ -37,7 +37,7 @@ The page URL and its `.md` URL are never written down. The runner derives them f
 
 ## Eval file format
 
-An eval file holds a list of **checks**. A check is one prompt for an agent and the criteria that grade the result. Gauge calls the same thing a case; `gauge/send-to-gauge.ts` turns each check into a Gauge case.
+An eval file holds a list of **checks**. A check is one prompt for an agent, what the agent gets on top of it, and the criteria that grade the result. Each check becomes one saved eval in Gauge. Gauge calls the same thing a case; `gauge/send-to-gauge.ts` turns each check into a Gauge case.
 
 ```yaml
 # contents/docs/product-analytics/installation/react.eval.yaml
@@ -52,11 +52,12 @@ checks:
           app in PostHogProvider, with config from VITE_ env variables and the
           recommended defaults.
       codebase_to_test: react-vite # key in shared/codebases-to-test.yaml
-      prompt: |
+      prompt: &install-prompt |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code.
-      criteria:
+      append_docs_link: true # add the page's .md URL to the end of the prompt
+      criteria: &install-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               has-posthog-js: >-
@@ -64,6 +65,12 @@ checks:
               uses-defaults: >-
                   The PostHog options include a defaults option set to a date string.
                   Cite the file and line(s).
+
+    - id: install-no-docs # the same task with nothing added, to compare against
+      description: Same task as install, with no docs and nothing attached.
+      codebase_to_test: react-vite
+      prompt: *install-prompt # YAML anchors share the prompt and criteria
+      criteria: *install-criteria
 ```
 
 | Field                        | Required                  | Default                    | Meaning                                                                                                                         |
@@ -76,9 +83,12 @@ checks:
 | `checks[].description`       | when there's a codebase   |                            | What the check tests and what the prompt leaves out on purpose. Read it before you edit the prompt. Never sent to the agent.    |
 | `checks[].codebase_to_test`  | when the prompt edits code | none: an answer-only check | The repo the agent works in: a key in `shared/codebases-to-test.yaml`.                                                                                                       |
 | `checks[].pages`             | no                        | `[]`                       | Other pages the check depends on, as `docs/...` paths with no extension. Up to 4. An edit to any of them reruns the check.     |
-| `checks[].prompt`            | yes                       |                            | What the user asks. Say nothing about docs: the runner adds each arm's instructions.                                           |
+| `checks[].prompt`            | yes                       |                            | What the user asks. Say nothing about docs: the `append_` keys add them.                                                        |
 | `checks[].suite`             | no                        | `smoke`                    | `smoke` or `deep`. Filter with `--suite`, so a quick run can skip the expensive checks.                                         |
-| `checks[].arms`              | no                        | `defaultArms` in run-config | Any of `baseline`, `link`, `inline`.                                                                                   |
+| `checks[].append_docs_link`    | no                      | off                        | `true` adds each page's `.md` URL to the end of the prompt. See [What the agent gets](#what-the-agent-gets).                    |
+| `checks[].append_docs_content` | no                      | off                        | `true` adds each page's built text to the end of the prompt.                                                                    |
+| `checks[].attach_mcp`          | no                      | none                       | An MCP server to attach, by name from the `mcp` map in `shared/run-config.yml`, for example `posthog`.                          |
+| `checks[].attach_skill`        | no                      | off                        | `true` attaches the check's pages as skills. A placeholder for now: the check is always skipped.                                |
 | `checks[].criteria`          | yes, with at least one    |                            | How the result is graded: `shared`, `rubrics` or both, below.                                                                          |
 
 ### Criteria
@@ -94,9 +104,12 @@ Rubric names are kebab-case and can't repeat a shared name. The runner sends sha
 
 `{folder}` is the only template variable. It resolves to the codebase's folder, so it can only appear in checks with a `codebase_to_test`.
 
+Checks that test the same task in different setups share the prompt and criteria with YAML anchors: `prompt: &install-prompt |` on the first check, `prompt: *install-prompt` on the others. Then the checks differ only in what they add, and their results compare directly.
+
 ### Writing a good check
 
-- **Ask what a user would ask.** Describe the goal in product terms. Don't name the API or concept the page teaches: an agent that only gets it right when the prompt names the API wasn't helped by the page. A `baseline` pass is the sign that a prompt gives too much away.
+- **Ask what a user would ask.** Describe the goal in product terms. Don't name the API or concept the page teaches: an agent that only gets it right when the prompt names the API wasn't helped by the page. A `-no-docs` pass is the sign that a prompt gives too much away.
+- **Give every check a `-no-docs` twin.** The same prompt and criteria with nothing added. It's how you tell what the page adds.
 - **Say why in `description`.** Especially what the prompt leaves out on purpose, so the next editor doesn't put it back.
 - **Grade what the page says.** A rubric names the exact package, function, option or UI path the page gives, because the judge never sees the page. Cite the page's own words where you can.
 - **Test what the docs add.** Prefer criteria an agent working from memory would likely miss: a required option, a newer API, a step the page marks required.
@@ -105,17 +118,31 @@ Rubric names are kebab-case and can't repeat a shared name. The runner sends sha
 - **Answer-only checks** (no `codebase_to_test`) are graded on the final message. Add `answers-directly` to `criteria.shared`.
 - **Multi-page checks** list the other pages in `pages:`. If the prompt needs PostHog installed first, include the install page.
 
-## Arms
+## What the agent gets
 
-Each check runs once per arm. The prompt is the same in every arm; only the tail changes.
+Each check runs once, as written. Four keys add to it, and any of them combine. Keys that start with `append_` add to the end of the prompt. Keys that start with `attach_` add to the Gauge eval.
 
-| Arm        | What the agent gets on top of the prompt                                         |
-| ---------- | -------------------------------------------------------------------------------- |
-| `baseline` | Nothing. Measures what the agent already knows.                                  |
-| `link`     | The page's `.md` URL (and every `pages:` URL), with an instruction to follow it. |
-| `inline`   | The built `.md` of each page, pasted into the prompt.                            |
+| Key | What the agent gets on top of the prompt | Status |
+| --- | --- | --- |
+| none | Nothing. Measures what the agent already knows. Name the check `<id>-no-docs`. | Works |
+| `append_docs_link: true` | The `.md` URL of the page and every `pages:` page, with an instruction to follow it. | Works |
+| `append_docs_content: true` | The built `.md` of each page, pasted in. With `append_docs_link`, the link comes first. | Works |
+| `attach_mcp: <name>` | The MCP server's tools, logged in. Gauge holds the login; the agent never sees it. | Skipped until a version is pinned |
+| `attach_skill: true` | The check's pages, as skills. | Placeholder: always skipped |
 
-`link` and `inline` read the same build: the runner fetches each page's `.md` from `--base-url` (production by default, or a deploy preview), so every arm sees the same words and nothing needs a snapshot.
+The append keys read the same build: the runner fetches each page's `.md` from `--base-url` (production by default, or a deploy preview), so a link check and a content check see the same words and nothing needs a snapshot.
+
+### MCP checks
+
+`attach_mcp` names an entry in the `mcp` map of `shared/run-config.yml`, which pins a Gauge MCP server as `handle@version`. MCP checks log in to a PostHog project made only for evals, so an agent that creates insights or flags never touches a real project. Until that project exists, `posthog` has no version and every MCP check is skipped. To turn them on:
+
+1. Create the eval project in PostHog.
+2. In Gauge, add a new version of the `mcp.posthog.com` server and complete its OAuth login against that project (`gauge mcp add --name mcp.posthog.com --url https://mcp.posthog.com/mcp --hosted`, then sign in from the Gauge app).
+3. Pin it: `posthog: mcp.posthog.com@<version>` in `shared/run-config.yml`, then `pnpm evals sync`.
+
+### Skill checks
+
+`attach_skill: true` is a placeholder. Write the check now and it validates, but `plan` and `run` always skip it. The plan is to wrap each page's built `.md` in a `SKILL.md` and attach it to the saved eval with `--skill`. Gauge only takes skills from GitHub, and where they live is still to be agreed with Gauge.
 
 ## Running evals
 
@@ -133,7 +160,7 @@ Everything goes through one command, `pnpm evals <command> [filters]`, run from 
 | `pnpm evals validate` | Checks every eval file against the format. Run it after any edit. | Free |
 | `pnpm evals index` | Prints each page and every check that reads it. | Free |
 | `pnpm evals plan [filters]` | Builds the selected checks' prompts and has Gauge dry-run them. Nothing runs. | Free |
-| `pnpm evals sync [filters]` | Creates or updates the saved evals in Gauge, one per check × arm. Starts no sessions. | Free |
+| `pnpm evals sync [filters]` | Creates or updates the saved evals in Gauge, one per check. Starts no sessions. | Free |
 | `pnpm evals run [filters] --yes` | Launches the selected checks under their saved evals and waits for the verdicts. Without `--yes` it's the same as `plan`. | **Paid** |
 | `pnpm test:evals` | The harness's offline unit tests. | Free |
 
@@ -154,7 +181,6 @@ With no filters, a command acts on every active check. Filters narrow that down:
 | --- | --- |
 | `--page <docs path>` | Every check that reads the page: the page's own eval file, plus any other check that lists the page in `pages:`. Write the path without `docs/`, for example `product-analytics/installation/go`. |
 | `--tag <tag>` | Eval files with that tag, for example `install`, `journey` or `python`. |
-| `--arm <arm>` | Only that arm: `baseline`, `link` or `inline`. |
 | `--suite <suite>` | `smoke` or `deep`. |
 | `--harness <id>` | One agent from `shared/run-config.yml`, including an unverified one. |
 | `--changed [base]` | Checks whose page or eval file changed against `base` (default `origin/master`), including uncommitted work. |
@@ -171,12 +197,9 @@ Other options:
 ### Recipes
 
 ```sh
-# One page, all three arms (3 runs per check)
+# One page: every check in its eval file, and any other check that reads it
 pnpm evals sync --page product-analytics/installation/go
 pnpm evals run  --page product-analytics/installation/go --yes
-
-# One page, one arm: the cheapest real run (1 run per check)
-pnpm evals run --page product-analytics/installation/go --arm link --yes
 
 # Several pages
 pnpm evals run --page product-analytics/installation/python --page product-analytics/installation/ruby --yes
@@ -199,23 +222,25 @@ pnpm evals run --yes
 
 Use the same filters and `--base-url` for `sync` and `run`: `run` launches what the saved evals hold, and refuses a check whose saved eval doesn't match.
 
-Not supported yet: selecting a folder (`--page product-analytics/installation` fails, because `--page` matches exact pages; use `--tag install` instead) and selecting one check out of a file with several (narrow with `--page` and `--arm`).
+Not supported yet: selecting a folder (`--page product-analytics/installation` fails, because `--page` matches exact pages; use `--tag install` instead) and selecting one check out of a file with several (narrow with `--page`).
 
 ### Saved evals
 
-Every paid run launches under a **saved eval** in Gauge: one per check × arm, with an id that doesn't change. Gauge keeps each saved eval's run history, so you can see how one check does over time: `gauge run list --eval <id> --hosted`.
+Every paid run launches under a **saved eval** in Gauge: one per check, with an id that doesn't change. Gauge keeps each saved eval's run history, so you can see how one check does over time: `gauge run list --eval <id> --hosted`.
 
-- **`sync` makes Gauge match the eval files.** It creates a saved eval for a new check × arm and edits one whose prompt, criteria, codebase, agents or samples changed. It leaves the rest alone, so a new revision in Gauge means a real change. It records each id in `gauge/saved-evals.json`; commit that file. It skips checks whose codebase has no `ref`.
+- **`sync` makes Gauge match the eval files.** It creates a saved eval for a new check and edits one whose prompt, criteria, codebase, agents, samples or MCP server changed. It leaves the rest alone, so a new revision in Gauge means a real change. It records each id in `gauge/saved-evals.json`; commit that file. It skips the checks that can't run (below).
 - **`run` launches under those ids.** A check with no saved eval, or one whose saved eval no longer matches the eval file, is skipped with "run pnpm evals sync".
-- **Sync again** after you change an eval file, a file in `shared/`, or a page the `inline` arm pastes in.
+- **Sync again** after you change an eval file, a file in `shared/`, or a page that an `append_docs_content` check pastes in.
 - **The Gauge org is shared.** Our saved evals are named `[posthog.com] <check key>` and tagged `posthog-com-evals`, and sync never touches an eval without that prefix.
-- A page edit changes the `inline` prompt, so it starts a new revision. It doesn't change the `link` prompt, which holds only the page's URL, so `link` runs before and after a page edit share a revision.
+- A page edit changes the prompt of an `append_docs_content` check, so it starts a new revision. It doesn't change an `append_docs_link` prompt, which holds only the page's URL, so link runs before and after a page edit share a revision.
 
 ### When something can't run
 
 `plan` and `run` never stop for one bad check. They leave it out, list it with the reason, and run the rest:
 
 - `codebase <name> has no ref in shared/codebases-to-test.yaml`: the check uses a placeholder, a codebase whose repo doesn't exist. To make it runnable, point the check at a real codebase in that file (Gauge's reference apps are listed there, each pinned to a commit) and rewrite any rubric that names files from the old one.
+- `attach_mcp posthog has no version pinned in the mcp map of shared/run-config.yml`: see [MCP checks](#mcp-checks).
+- `attach_skill is a placeholder`: see [Skill checks](#skill-checks).
 - `no saved eval; run pnpm evals sync` or `saved eval is out of date; run pnpm evals sync`
 - `launch failed: <Gauge's error code and message>`: `run` records it and goes on. On `insufficient_credits` it stops launching, since every later launch would fail too, and lists the rest as not launched.
 
@@ -229,16 +254,16 @@ Launching many runs at once has hit `insufficient_credits` while the org still h
 
 | File | Holds |
 | --- | --- |
-| `checks.json` | Every check × arm it tried to launch: prompt, criteria, codebase |
+| `checks.json` | Every check it tried to launch: prompt, criteria, codebase, MCP server |
 | `request.json` | For each launch: the check, its saved eval id and Gauge's launch response |
 | `results.json` | Gauge's verdict for each launched run, plus every check that couldn't run and why |
 
 ## Reading the results
 
-For each check, compare the arms:
+Compare checks that share a prompt:
 
-- **`baseline` passes:** the agent didn't need the docs, so the page isn't really being tested. Often the prompt names what the page should teach.
-- **The delivery arms disagree:** delivery matters. If `inline` passes where `link` fails, read the `link` run's logs to see whether the agent fetched the page at all.
-- **Every delivery arm fails on the same criterion:** the page itself is the problem.
+- **The `-no-docs` twin passes:** the agent didn't need the docs, so the page isn't really being tested. Often the prompt names what the page should teach.
+- **The docs checks disagree:** how the docs reach the agent matters. If a content check passes where a link check fails, read the link run's logs to see whether the agent fetched the page at all.
+- **Every docs check fails on the same criterion:** the page itself is the problem.
 
 Read the failed runs with `gauge run get <run-id> --logs --hosted` before acting. A failure can come from the page, the agent, a badly worded rubric or Gauge itself, and only the first is a docs fix.

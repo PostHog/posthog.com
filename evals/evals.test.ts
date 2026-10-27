@@ -9,8 +9,8 @@ import { describe, test } from 'node:test'
 
 import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
 import { definitionFor, isCurrent, savedEvalName, type SavedEval } from './gauge/saved-evals.ts'
-import { armPrompt, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
-import { changedSelection, parseArgs, select } from './run.ts'
+import { appendDocs, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
+import { cantRunReason, changedSelection, parseArgs, select, setupOf } from './run.ts'
 import {
     loadEvalFiles,
     loadShared,
@@ -134,6 +134,35 @@ describe('eval file validation', () => {
     })
 })
 
+describe('what a check attaches', () => {
+    const check = (keys: Record<string, unknown>) => ({ checks: [{ ...answerOnly.checks[0], ...keys }] })
+
+    test('the four keys pass alone and together', () => {
+        assert.deepEqual(
+            messages(
+                'contents/docs/a.eval.yaml',
+                check({ append_docs_link: true, append_docs_content: true, attach_mcp: 'posthog', attach_skill: true })
+            ),
+            []
+        )
+    })
+
+    test('arms is rejected with a pointer to the new keys', () => {
+        const found = messages('contents/docs/a.eval.yaml', check({ arms: ['baseline', 'link'] }))
+        assert.ok(found.some((m) => m.includes('arms is gone; use append_docs_link')))
+    })
+
+    test('the flags take only true, and attach_mcp must name a server in run-config', () => {
+        const found = messages(
+            'contents/docs/a.eval.yaml',
+            check({ append_docs_link: 'yes', attach_skill: false, attach_mcp: 'nope' })
+        )
+        assert.ok(found.includes('check ask: append_docs_link must be true, or left out'))
+        assert.ok(found.includes('check ask: attach_skill must be true, or left out'))
+        assert.ok(found.some((m) => m.includes('attach_mcp must be one of posthog')))
+    })
+})
+
 const fileFor = (path: string, raw: unknown): EvalFile => {
     const { file, problems } = parse(path, raw)
     assert.deepEqual(problems, [])
@@ -175,21 +204,27 @@ describe('descriptions and suites', () => {
 describe('prompts', () => {
     const pageText = async (page: string) => `# Page ${page}\n\nBody.\n`
 
-    test('baseline sends the prompt as written; other arms add only a tail', async () => {
+    test('no append keys sends the prompt as written; each key adds a tail, link first', async () => {
         const pages = ['docs/a', 'docs/b']
-        assert.equal(await armPrompt('Do it.', 'baseline', pages, 'https://posthog.com', pageText), 'Do it.')
-        const link = await armPrompt('Do it.', 'link', pages, 'https://preview.example', pageText)
+        const none = { link: false, content: false }
+        assert.equal(await appendDocs('Do it.', none, pages, 'https://posthog.com', pageText), 'Do it.')
+        const link = await appendDocs('Do it.', { ...none, link: true }, pages, 'https://preview.example', pageText)
         assert.ok(link.includes('https://preview.example/docs/a.md\nhttps://preview.example/docs/b.md'))
-        const inline = await armPrompt('Do it.', 'inline', pages, 'https://posthog.com', pageText)
-        assert.ok(inline.includes('<docs-page url="https://posthog.com/docs/b.md">\n# Page docs/b'))
+        const content = await appendDocs('Do it.', { ...none, content: true }, pages, 'https://posthog.com', pageText)
+        assert.ok(content.includes('<docs-page url="https://posthog.com/docs/b.md">\n# Page docs/b'))
+        const both = await appendDocs('Do it.', { link: true, content: true }, pages, 'https://posthog.com', pageText)
+        assert.ok(both.indexOf('https://posthog.com/docs/a.md\n') < both.indexOf('<docs-page'))
     })
 
     test('check keys fit Gauge: lowercase-kebab, at most 64 characters, unique', () => {
         const long = fileFor('contents/docs/product-analytics/trends/statistical-analysis.eval.yaml', {
             ...answerOnly,
-            checks: [{ ...answerOnly.checks[0], id: 'a-very-long-check-id-that-keeps-going' }],
+            checks: [
+                { ...answerOnly.checks[0], id: 'a-very-long-check-id-that-keeps-going' },
+                { ...answerOnly.checks[0], id: 'a-very-long-check-id-that-keeps-going-no-docs' },
+            ],
         })
-        const keys = (['baseline', 'link'] as const).map((arm) => checkKey(long, long.checks[0], arm))
+        const keys = long.checks.map((check) => checkKey(long, check))
         for (const key of keys) {
             assert.match(key, /^[a-z0-9]+(?:-[a-z0-9]+)*$/)
             assert.ok(key.length <= 64)
@@ -216,8 +251,8 @@ describe('prompts', () => {
         const harnesses = shared.runConfig.harnesses.slice(0, 1)
         const checks = await buildPrompts(
             [
-                { file: code, check: code.checks[0], arms: ['baseline'] },
-                { file: ask, check: ask.checks[0], arms: ['baseline'] },
+                { file: code, check: code.checks[0] },
+                { file: ask, check: ask.checks[0] },
             ],
             harnesses,
             shared,
@@ -230,6 +265,28 @@ describe('prompts', () => {
         const [spec] = toGaugeSpecs(checks, 1)
         assert.equal(spec.cases[0].config.repoUrl, 'https://github.com/gauge-sh/acme-dispatch-nextjs')
         assert.equal(spec.cases[1].config.repoUrl, null)
+        assert.equal(setupOf(checks[0]), 'no docs')
+    })
+
+    test('MCP and skill checks are skipped until they can run', async () => {
+        const file = fileFor('contents/docs/a.eval.yaml', {
+            checks: [
+                { ...answerOnly.checks[0], id: 'mcp', attach_mcp: 'posthog' },
+                { ...answerOnly.checks[0], id: 'skill', attach_skill: true, append_docs_link: true },
+            ],
+        })
+        const [mcp, skill] = await buildPrompts(
+            file.checks.map((check) => ({ file, check })),
+            shared.runConfig.harnesses.slice(0, 1),
+            shared,
+            'https://posthog.com',
+            pageText
+        )
+        assert.equal(setupOf(skill), 'docs link + skill')
+        assert.match(cantRunReason(skill, shared)!, /attach_skill is a placeholder/)
+        const pinned = { ...shared, runConfig: { ...shared.runConfig, mcp: { posthog: 'mcp.posthog.com@v1' } } }
+        assert.match(cantRunReason(mcp, shared)!, /attach_mcp posthog has no version pinned/)
+        assert.equal(cantRunReason({ ...mcp, mcp: { name: 'posthog', ref: 'mcp.posthog.com@v1' } }, pinned), null)
     })
 
     test('Gauge specs hold at most 20 Gauge cases each', () => {
@@ -253,12 +310,12 @@ describe('prompts', () => {
 
 describe('saved evals', () => {
     const check = {
-        key: 'product-analytics-installation-go-install-link',
-        arm: 'link',
+        key: 'product-analytics-installation-go-install',
         prompt: 'Set up PostHog.',
         criteria: [{ name: 'builds', rubric: 'It builds.' }],
         codebase: { name: 'starter-go', repo: 'https://github.com/gauge-sh/starter-go', ref: 'abc', folder: '.' },
         harnesses: [{ id: 'claude-code', gauge: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'], verified: true }],
+        mcp: { name: 'posthog', ref: 'mcp.posthog.com@v1' },
     } as unknown as CheckPrompt
     const wanted = definitionFor(check, 1)
     const saved: SavedEval = {
@@ -270,11 +327,12 @@ describe('saved evals', () => {
         repoRef: wanted.repoRef,
         agents: wanted.agents,
         sampleCount: 1,
+        mcpRefs: ['mcp.posthog.com@v1'],
         tags: [...wanted.tags].reverse(),
     }
 
     test("names carry our prefix, so sync never touches anyone else's evals", () => {
-        assert.equal(wanted.name, '[posthog.com] product-analytics-installation-go-install-link')
+        assert.equal(wanted.name, '[posthog.com] product-analytics-installation-go-install')
         assert.equal(savedEvalName(check.key), wanted.name)
     })
 
@@ -282,7 +340,9 @@ describe('saved evals', () => {
         assert.ok(isCurrent(saved, wanted))
     })
 
-    test('any change to the prompt, criteria, codebase, agents or samples makes it out of date', () => {
+    test('any change to the prompt, criteria, codebase, agents, samples or MCP makes it out of date', () => {
+        assert.ok(!isCurrent({ ...saved, mcpRefs: ['mcp.posthog.com@v2'] }, wanted))
+        assert.ok(!isCurrent({ ...saved, mcpRefs: [] }, wanted))
         assert.ok(!isCurrent({ ...saved, promptText: 'Set up PostHog now.' }, wanted))
         assert.ok(!isCurrent({ ...saved, criteria: [{ name: 'builds', rubric: 'It compiles.' }] }, wanted))
         assert.ok(!isCurrent({ ...saved, repoRef: 'def' }, wanted))

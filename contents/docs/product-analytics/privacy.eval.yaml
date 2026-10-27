@@ -12,7 +12,7 @@ checks:
       codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
-      prompt: |
+      prompt: &opt-in-consent-prompt |
           Add product analytics to the app in {folder}/, but nothing may be
           captured until a user agrees. Add a "Share usage analytics" checkbox
           to the Preferences section of the settings page
@@ -22,7 +22,8 @@ checks:
           current URL is never sent with events. PostHog isn't set up yet.
           Only change files inside {folder}/. Read the project token and host
           from environment variables.
-      criteria:
+      append_docs_link: true
+      criteria: &opt-in-consent-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               opted-out-by-default: >-
@@ -35,3 +36,11 @@ checks:
               strip-current-url: >-
                   posthog.init has a before_send function that removes or nulls
                   event.properties['$current_url'] and returns the event.
+
+    - id: opt-in-consent-no-docs
+      description: Same task as opt-in-consent, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: web-vite
+      pages:
+          - docs/product-analytics/installation/web
+      prompt: *opt-in-consent-prompt
+      criteria: *opt-in-consent-criteria

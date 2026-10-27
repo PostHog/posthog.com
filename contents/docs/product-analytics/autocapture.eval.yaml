@@ -12,7 +12,7 @@ checks:
       codebase_to_test: web-vite
       pages:
           - docs/product-analytics/installation/web
-      prompt: |
+      prompt: &configure-web-autocapture-prompt |
           PostHog isn't set up yet in the app in {folder}/. Add it so that
           clicks and form submissions across the app are recorded
           automatically, without a hand-written tracking call on every button.
@@ -21,7 +21,8 @@ checks:
           a task's move, assign or delete button on the project page, the
           recorded click should include that task's id, still without a
           hand-written tracking call.
-      criteria:
+      append_docs_link: true
+      criteria: &configure-web-autocapture-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               dom-events-limited: >-
@@ -41,3 +42,11 @@ checks:
                   (for example `data-ph-capture-attribute-task-id="${task.id}"`),
                   so autocaptured clicks get that property without a manual
                   posthog.capture call.
+
+    - id: configure-web-autocapture-no-docs
+      description: Same task as configure-web-autocapture, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: web-vite
+      pages:
+          - docs/product-analytics/installation/web
+      prompt: *configure-web-autocapture-prompt
+      criteria: *configure-web-autocapture-criteria

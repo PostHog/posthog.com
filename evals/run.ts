@@ -20,7 +20,6 @@ import {
 } from './gauge/saved-evals.ts'
 import { buildPrompts, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
 import {
-    arms,
     loadEvalFiles,
     loadShared,
     pageForEvalFile,
@@ -28,7 +27,6 @@ import {
     pageIndex,
     repoRoot,
     suites,
-    type Arm,
     type EvalFile,
     type Shared,
 } from './load-eval-files.ts'
@@ -39,8 +37,8 @@ Commands:
   validate        Check every eval file. Free.
   index           Print page → checks, from every eval file and pages: list.
   plan            Build the selected checks' prompts and run gauge --dry-run. Free.
-  sync            Create or update one saved Gauge eval per selected check × arm, and
-                  record their ids in gauge/saved-evals.json. Starts no sessions.
+  sync            Create or update one saved Gauge eval per selected check, and record
+                  their ids in gauge/saved-evals.json. Starts no sessions.
   run --yes       Launch the selected checks under their saved evals and wait for judging.
                   Spends Gauge credits. Without --yes, the same as plan.
 
@@ -48,10 +46,10 @@ Filters (combine):
   --page <docs path>     e.g. product-analytics/identify; repeatable
   --tag <tag>            repeatable
   --suite <suite>        smoke or deep; repeatable (default: both)
-  --arm <arm>            ${arms.join(', ')}; repeatable
   --harness <id>         from shared/run-config.yml; repeatable
   --changed [base]       only checks whose pages or eval file changed against base (default origin/master)
-  --base-url <url>       where link and inline read pages (default https://posthog.com)
+  --base-url <url>       where append_docs_link and append_docs_content read pages
+                         (default https://posthog.com)
   --include-unverified   add shared/run-config.yml harnesses with verified: false
   --write <dir>          plan: also write the Gauge specs there
   --prune                sync with no filters: delete saved evals whose check no longer exists`
@@ -61,7 +59,6 @@ type Options = {
     pages: string[]
     tags: string[]
     suites: string[]
-    arms: string[]
     harnesses: string[]
     changed: string | null
     baseUrl: string
@@ -80,7 +77,6 @@ export function parseArgs(argv: string[]): Options {
         pages: valuesOf('--page').map((page) => (page.startsWith('docs/') ? page : `docs/${page}`).replace(/\/$/, '')),
         tags: valuesOf('--tag'),
         suites: valuesOf('--suite'),
-        arms: valuesOf('--arm'),
         harnesses: valuesOf('--harness'),
         changed: changedAt === -1 ? null : valuesOf('--changed')[0] ?? 'origin/master',
         baseUrl: valuesOf('--base-url')[0] ?? 'https://posthog.com',
@@ -121,9 +117,6 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
     for (const suite of options.suites)
         if (!(suites as readonly string[]).includes(suite))
             throw new Error(`Unknown --suite ${suite}; choose from ${suites.join(', ')}`)
-    for (const arm of options.arms)
-        if (!(arms as readonly string[]).includes(arm))
-            throw new Error(`Unknown --arm ${arm}; choose from ${arms.join(', ')}`)
     const knownHarnesses = shared.runConfig.harnesses.map((h) => h.id)
     for (const id of options.harnesses)
         if (!knownHarnesses.includes(id))
@@ -148,20 +141,34 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
                 inactive++
                 continue
             }
-            const checkArms = (check.arms ?? shared.runConfig.defaultArms).filter(
-                (arm) => options.arms.length === 0 || options.arms.includes(arm)
-            )
-            if (checkArms.length > 0) selections.push({ file, check, arms: checkArms as Arm[] })
+            selections.push({ file, check })
         }
     }
     return { selections, harnesses, inactive }
 }
 
 // Why a check can't run, or null when it can. Free to check.
-function cantRunReason(check: CheckPrompt): string | null {
+export function cantRunReason(check: CheckPrompt, shared: Shared): string | null {
     if (check.codebase && !check.codebase.ref)
         return `codebase ${check.codebase.name} has no ref in shared/codebases-to-test.yaml`
+    if (check.mcp && !check.mcp.ref)
+        return `attach_mcp ${check.mcp.name} has no version pinned in the mcp map of shared/run-config.yml`
+    if (check.skill)
+        return shared.runConfig.skills.enabled
+            ? "attach_skill isn't built yet; skills need gauge/skills.ts"
+            : 'attach_skill is a placeholder (skills.enabled is false in shared/run-config.yml)'
     return null
+}
+
+// What the agent gets on top of the prompt, for the plan output.
+export function setupOf(check: CheckPrompt): string {
+    const parts = [
+        ...(check.append.link ? ['docs link'] : []),
+        ...(check.append.content ? ['docs content'] : []),
+        ...(check.mcp ? [`mcp ${check.mcp.name}`] : []),
+        ...(check.skill ? ['skill'] : []),
+    ]
+    return parts.length > 0 ? parts.join(' + ') : 'no docs'
 }
 
 function printProblems(title: string, problems: string[]) {
@@ -229,22 +236,22 @@ async function main(argv: string[]): Promise<number> {
     const built = await buildPrompts(selections, harnesses, shared, options.baseUrl, pageText)
     // Checks that can't run are left out and reported, never fatal: the rest still run.
     const cantRun = built.flatMap((c) => {
-        const reason = cantRunReason(c)
+        const reason = cantRunReason(c, shared)
         return reason ? [{ key: c.key, reason }] : []
     })
     const checks = built.filter((c) => !cantRun.some((x) => x.key === c.key))
-    if (cantRun.length > 0 && options.command !== 'sync')
+    if (cantRun.length > 0)
         printProblems(
-            `Can't run ${cantRun.length} Gauge case(s), skipping them`,
+            `Can't run ${cantRun.length} check(s), skipping them`,
             cantRun.map((x) => `${x.key}: ${x.reason}`)
         )
     console.log(
-        `${checks.length} Gauge case(s) from ${
-            new Set(checks.map((c) => `${c.file}#${c.checkId}`)).size
-        } check(s), on ${harnesses.map((h) => `${h.id} (${h.models.join(', ')})`).join(', ')}:`
+        `${checks.length} check(s) to run, on ${harnesses.map((h) => `${h.id} (${h.models.join(', ')})`).join(', ')}:`
     )
     for (const c of checks)
-        console.log(`  ${c.key}  ${c.criteria.length} criteria${c.codebase ? `  ${c.codebase.name}` : '  answer-only'}`)
+        console.log(
+            `  ${c.key}  ${setupOf(c)}  ${c.criteria.length} criteria  ${c.codebase ? c.codebase.name : 'answer-only'}`
+        )
     if (checks.length === 0) {
         console.log('Nothing to run.')
         return cantRun.length > 0 ? 1 : 0
@@ -258,7 +265,7 @@ async function main(argv: string[]): Promise<number> {
         console.error('The gauge CLI is not on PATH: npm install -g @withgauge/cli, then gauge auth login')
         return 1
     }
-    if (options.command === 'sync') return sync(built, shared, options)
+    if (options.command === 'sync') return sync(checks, built, shared, options)
     if (options.command === 'plan' || !options.yes) {
         const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
         await mkdir(specDir, { recursive: true })
@@ -276,17 +283,14 @@ async function main(argv: string[]): Promise<number> {
 }
 
 const unfiltered = (options: Options) =>
-    [options.pages, options.tags, options.suites, options.arms, options.harnesses].every((list) => list.length === 0) &&
+    [options.pages, options.tags, options.suites, options.harnesses].every((list) => list.length === 0) &&
     !options.changed
 
 // Makes Gauge's saved evals match the eval files. An eval is edited only when something
-// in it changed, so Gauge starts a new revision only for a real change.
-function sync(checks: CheckPrompt[], shared: Shared, options: Options): number {
-    const ready = checks.filter((c) => !c.codebase || c.codebase.ref)
-    const unready = [...new Set(checks.filter((c) => !ready.includes(c)).map((c) => c.codebase!.name))]
-    if (unready.length > 0)
-        console.log(`Skipping ${checks.length - ready.length} check(s) on codebases with no ref: ${unready.join(', ')}`)
-
+// in it changed, so Gauge starts a new revision only for a real change. `ready` are the
+// checks that can run; `all` also holds the skipped ones, so their saved evals, if any,
+// don't count as orphans.
+function sync(ready: CheckPrompt[], all: CheckPrompt[], shared: Shared, options: Options): number {
     const slugs = harnessSlugs()
     const saved = listSavedEvals()
     const ids = readIds()
@@ -311,9 +315,9 @@ function sync(checks: CheckPrompt[], shared: Shared, options: Options): number {
 
     // Saved evals for checks that no longer exist. Only knowable when sync saw every check.
     if (unfiltered(options)) {
-        const keys = new Set(checks.map((c) => c.key))
+        const keys = new Set(all.map((c) => c.key))
         for (const key of Object.keys(ids)) if (!keys.has(key)) delete ids[key]
-        const names = new Set(checks.map((c) => savedEvalName(c.key)))
+        const names = new Set(all.map((c) => savedEvalName(c.key)))
         const orphans = [...saved.values()].filter((e) => !names.has(e.name))
         for (const orphan of orphans) {
             if (options.prune) removeSavedEval(orphan.id)

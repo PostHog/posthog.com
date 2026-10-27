@@ -9,12 +9,13 @@ checks:
           app in PostHogProvider, with config from VITE_ env variables and the
           recommended defaults.
       codebase_to_test: react-vite
-      prompt: |
+      prompt: &install-prompt |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
-      criteria:
+      append_docs_link: true
+      criteria: &install-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               has-posthog-js: >-
@@ -33,18 +34,39 @@ checks:
                   (the current recommended value is '2026-08-30'). Cite the file and
                   line(s).
 
+    - id: install-no-docs
+      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: react-vite
+      prompt: *install-prompt
+      criteria: *install-criteria
+
+    - id: install-mcp
+      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
+      codebase_to_test: react-vite
+      prompt: *install-prompt
+      attach_mcp: posthog
+      criteria: *install-criteria
+
+    - id: install-skill # placeholder: skipped until skills are built
+      description: Same task as install, with this page attached as a skill instead of in the prompt.
+      codebase_to_test: react-vite
+      prompt: *install-prompt
+      attach_skill: true
+      criteria: *install-criteria
+
     - id: capture-login-event
       description: >-
           Tests whether the React install page also teaches enough to capture a custom
           event from a component, here when a user signs in through the login form.
       codebase_to_test: react-vite
-      prompt: |
+      prompt: &capture-login-event-prompt |
           The app in {folder}/ needs product analytics. Set up PostHog in it, and
           also track an event each time a user signs in through the login form.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
-      criteria:
+      append_docs_link: true
+      criteria: &capture-login-event-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               has-posthog-js: >-
@@ -60,3 +82,9 @@ checks:
                   signs in. The posthog instance comes from the usePostHog hook
                   imported from @posthog/react, or from importing posthog from
                   posthog-js. Cite the file and line(s).
+
+    - id: capture-login-event-no-docs
+      description: Same task as capture-login-event, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: react-vite
+      prompt: *capture-login-event-prompt
+      criteria: *capture-login-event-criteria

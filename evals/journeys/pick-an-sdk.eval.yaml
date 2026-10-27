@@ -13,11 +13,12 @@ checks:
           the agent to the right package for each side of a full-stack app,
           sending to one project. The question names the frameworks but not the
           PostHog packages.
-      prompt: |
+      prompt: &frontend-and-backend-prompt |
           We have a React Router 7 frontend and an Express API, and we want product analytics
           events from both into the same PostHog project. Which PostHog packages do we install
           where, and how do we initialize each one?
-      criteria:
+      append_docs_link: true
+      criteria: &frontend-and-backend-criteria
           shared: [answers-directly]
           rubrics:
               frontend-packages: >-
@@ -29,3 +30,8 @@ checks:
               same-project: >-
                   The answer uses the same project token for both apps, so events land in one
                   project.
+
+    - id: frontend-and-backend-no-docs
+      description: Same task as frontend-and-backend, with no docs and nothing attached. Compare the two to see what the page adds.
+      prompt: *frontend-and-backend-prompt
+      criteria: *frontend-and-backend-criteria

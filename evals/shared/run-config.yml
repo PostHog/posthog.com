@@ -1,5 +1,5 @@
-# Run settings: the harnesses and models every check runs on, the default arms,
-# and how many samples. `verified: true` means the pair is listed by
+# Run settings: the harnesses and models every check runs on, the MCP servers a
+# check can attach, and how many samples. `verified: true` means the pair is listed by
 # `gauge models list --hosted` for our org and a dry run accepted it.
 # Unverified pairs run only with --include-unverified.
 harnesses:
@@ -12,7 +12,18 @@ harnesses:
       models: [gpt-6-sol]
       verified: false
 
-# Arms a check gets when its eval file doesn't list any.
-defaultArms: [baseline, link, inline]
-
 samples: 1
+
+# MCP servers a check can attach with `attach_mcp: <name>`. Each value pins a Gauge
+# server as handle@version (`gauge mcp list --hosted`). MCP checks log in to a PostHog
+# project made only for evals, never a real one. Until that project exists and its
+# login is added to Gauge as a new version, posthog has no version, and checks that
+# attach it are skipped.
+mcp:
+    posthog: null
+
+# `attach_skill: true` on a check. A placeholder: skills aren't built yet, because
+# Gauge only takes skills from GitHub and we haven't agreed where they live. Every
+# skill check is skipped.
+skills:
+    enabled: false

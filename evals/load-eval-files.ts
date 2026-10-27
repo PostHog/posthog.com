@@ -8,8 +8,6 @@ import { parse } from 'yaml'
 
 export const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-export const arms = ['baseline', 'link', 'inline'] as const
-export type Arm = (typeof arms)[number]
 export const statuses = ['active', 'draft', 'skipped'] as const
 export type Status = (typeof statuses)[number]
 export const suites = ['smoke', 'deep'] as const
@@ -17,7 +15,12 @@ export type Suite = (typeof suites)[number]
 
 export type Codebase = { repo: string; ref?: string; folder: string; source?: string }
 export type Harness = { id: string; gauge: string; models: string[]; verified: boolean }
-export type RunConfig = { harnesses: Harness[]; defaultArms: Arm[]; samples: number }
+export type RunConfig = {
+    harnesses: Harness[]
+    samples: number
+    mcp: Record<string, string | null> // name → Gauge handle@version; null until one is pinned
+    skills: { enabled: boolean }
+}
 export type Shared = { criteria: Record<string, string>; codebases: Record<string, Codebase>; runConfig: RunConfig }
 
 export type EvalCheck = {
@@ -27,7 +30,10 @@ export type EvalCheck = {
     pages: string[]
     prompt: string
     suite: Suite
-    arms: Arm[] | null
+    appendDocsLink: boolean // add each page's .md URL to the end of the prompt
+    appendDocsContent: boolean // add each page's built text to the end of the prompt
+    attachMcp: string | null // a name in run-config.yml's mcp map
+    attachSkill: boolean // a placeholder: skill checks never run yet
     shared: string[] // names from shared/criteria.yaml
     rubrics: Record<string, string>
 }
@@ -48,7 +54,19 @@ export type Problem = { path: string; message: string }
 const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 export const maxPagesPerCheck = 4
 const fileKeys = ['owner', 'tags', 'status', 'pages', 'checks']
-const checkKeys = ['id', 'description', 'codebase_to_test', 'pages', 'prompt', 'suite', 'arms', 'criteria']
+const checkKeys = [
+    'id',
+    'description',
+    'codebase_to_test',
+    'pages',
+    'prompt',
+    'suite',
+    'append_docs_link',
+    'append_docs_content',
+    'attach_mcp',
+    'attach_skill',
+    'criteria',
+]
 const criteriaKeys = ['shared', 'rubrics']
 
 const readYaml = (path: string) => parse(readFileSync(join(repoRoot, path), 'utf8'))
@@ -61,6 +79,8 @@ export function loadShared(): Shared {
         runConfig: {
             ...runConfig,
             harnesses: runConfig.harnesses.map((h) => ({ ...h, verified: h.verified === true })),
+            mcp: runConfig.mcp ?? {},
+            skills: { enabled: runConfig.skills?.enabled === true },
         },
     }
 }
@@ -145,7 +165,13 @@ export function parseEvalFile(
         const c = rawCheck as Record<string, unknown>
         const id = typeof c.id === 'string' ? c.id : `checks[${index}]`
         const where = `check ${id}`
-        for (const key of Object.keys(c)) if (!checkKeys.includes(key)) problem(`${where}: unknown key "${key}"`)
+        for (const key of Object.keys(c)) {
+            if (key === 'arms')
+                problem(
+                    `${where}: arms is gone; use append_docs_link, append_docs_content, attach_mcp or attach_skill, and a separate check for each setup`
+                )
+            else if (!checkKeys.includes(key)) problem(`${where}: unknown key "${key}"`)
+        }
         if (typeof c.id !== 'string' || !kebab.test(c.id)) problem(`${where}: id must be kebab-case`)
         if (seen.has(id)) problem(`${where}: duplicate id`)
         seen.add(id)
@@ -187,15 +213,30 @@ export function parseEvalFile(
                 )
         }
 
-        let checkArms: Arm[] | null = null
-        if (c.arms !== undefined) {
-            if (!isStringList(c.arms) || c.arms.length === 0) problem(`${where}: arms must be a non-empty list`)
-            else {
-                for (const arm of c.arms)
-                    if (!(arms as readonly string[]).includes(arm)) problem(`${where}: unknown arm "${arm}"`)
-                checkArms = c.arms as Arm[]
-            }
+        // What the agent gets on top of the prompt. Any of these combine; a check with
+        // none of them gets the task only.
+        const flag = (key: string) => {
+            if (c[key] !== undefined && c[key] !== true) problem(`${where}: ${key} must be true, or left out`)
+            return c[key] === true
         }
+        const appendDocsLink = flag('append_docs_link')
+        const appendDocsContent = flag('append_docs_content')
+        const attachSkill = flag('attach_skill')
+        let attachMcp: string | null = null
+        if (c.attach_mcp !== undefined) {
+            const names = Object.keys(shared.runConfig.mcp)
+            if (typeof c.attach_mcp !== 'string' || !names.includes(c.attach_mcp))
+                problem(
+                    `${where}: attach_mcp must be one of ${names.join(', ')} (the mcp map in shared/run-config.yml)`
+                )
+            else attachMcp = c.attach_mcp
+        }
+        const pageCount =
+            (page ? 1 : 0) +
+            (isStringList(filePages) ? filePages.length : 0) +
+            (isStringList(listedPages) ? listedPages.length : 0)
+        if ((appendDocsLink || appendDocsContent || attachSkill) && pageCount === 0)
+            problem(`${where}: append_docs_* and attach_skill need a page: the file's own page, or pages`)
 
         // criteria has two kinds, each under its own key: shared rubrics by name, and
         // this check's own rubrics.
@@ -251,7 +292,10 @@ export function parseEvalFile(
             pages: isStringList(listedPages) ? listedPages : [],
             prompt,
             suite,
-            arms: checkArms,
+            appendDocsLink,
+            appendDocsContent,
+            attachMcp,
+            attachSkill,
             shared: sharedNames,
             rubrics,
         })

@@ -9,13 +9,34 @@ checks:
           posthog-ruby client with config from env. Runs in Gauge's starter-rails, a
           bare Rails app, so the agent may also reach for the Rails page.
       codebase_to_test: starter-rails
-      prompt: |
+      prompt: &install-prompt |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
-      criteria:
+      append_docs_link: true
+      criteria: &install-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               has-posthog-ruby: >-
                   {folder}/Gemfile lists `posthog-ruby` as a dependency.
               required-steps-done: >-
                   The app requires 'posthog' and creates a client with PostHog::Client.new, passing api_key (the project token) and host (the PostHog host). Cite the file and line(s).
+
+    - id: install-no-docs
+      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: starter-rails
+      prompt: *install-prompt
+      criteria: *install-criteria
+
+    - id: install-mcp
+      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
+      codebase_to_test: starter-rails
+      prompt: *install-prompt
+      attach_mcp: posthog
+      criteria: *install-criteria
+
+    - id: install-skill # placeholder: skipped until skills are built
+      description: Same task as install, with this page attached as a skill instead of in the prompt.
+      codebase_to_test: starter-rails
+      prompt: *install-prompt
+      attach_skill: true
+      criteria: *install-criteria

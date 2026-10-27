@@ -10,14 +10,15 @@ checks:
           acme-dispatch-django, where every job, from the web UI or the JSON API, is
           created by create_job() in records/services/jobs.py.
       codebase_to_test: acme-dispatch-django
-      prompt: |
+      prompt: &capture-without-sdk-prompt |
           We want to know each time a job is created in the app in {folder}/, without
           adding PostHog's SDK or any other new dependency. Send a job_created event
           to PostHog from the server whenever a job is created.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
-      criteria:
+      append_docs_link: true
+      criteria: &capture-without-sdk-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               no-sdk-added: >-
@@ -41,3 +42,9 @@ checks:
                   from both the web UI and the JSON API send it. Sending it only from the
                   web view in {folder}/web/views/jobs.py does not pass. It is not sent
                   when create_job raises a validation error. Cite the file and line(s).
+
+    - id: capture-without-sdk-no-docs
+      description: Same task as capture-without-sdk, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: acme-dispatch-django
+      prompt: *capture-without-sdk-prompt
+      criteria: *capture-without-sdk-criteria

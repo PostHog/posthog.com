@@ -8,12 +8,13 @@ checks:
           Tests whether the web install page alone gets an agent to a working posthog-js
           setup with config from env and the recommended defaults, on a plain Vite app.
       codebase_to_test: web-vite
-      prompt: |
+      prompt: &install-prompt |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
-      criteria:
+      append_docs_link: true
+      criteria: &install-criteria
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               sdk-installed: >-
@@ -30,3 +31,23 @@ checks:
                   The posthog.init options include a defaults option set to a date
                   string (the current recommended value is '2026-08-30'). Cite the
                   file and line(s).
+
+    - id: install-no-docs
+      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
+      codebase_to_test: web-vite
+      prompt: *install-prompt
+      criteria: *install-criteria
+
+    - id: install-mcp
+      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
+      codebase_to_test: web-vite
+      prompt: *install-prompt
+      attach_mcp: posthog
+      criteria: *install-criteria
+
+    - id: install-skill # placeholder: skipped until skills are built
+      description: Same task as install, with this page attached as a skill instead of in the prompt.
+      codebase_to_test: web-vite
+      prompt: *install-prompt
+      attach_skill: true
+      criteria: *install-criteria

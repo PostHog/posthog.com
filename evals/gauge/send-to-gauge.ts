@@ -26,6 +26,7 @@ export type GaugeSpec = {
             sampleCount: number
             repoUrl: string | null
             repoRef: string | null
+            mcpRefs?: string[]
         }
     }[]
 }
@@ -45,6 +46,7 @@ export function toGaugeSpecs(checks: CheckPrompt[], samples: number): GaugeSpec[
                     // An answer-only check has no codebase.
                     repoUrl: c.codebase?.repo ?? null,
                     repoRef: c.codebase?.ref ?? null,
+                    ...(c.mcp?.ref ? { mcpRefs: [c.mcp.ref] } : {}),
                 },
             })),
         })
