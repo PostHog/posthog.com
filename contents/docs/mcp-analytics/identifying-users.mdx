@@ -26,7 +26,7 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 
 ## Configure `identify`
 
-`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. Except in Go and Rust, the SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request. Go and Rust have no cache, so the resolver runs once for each captured event.
+`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. Except in Go and Rust, the SDK caches identities per session to avoid duplicate `$identify` events. It still calls the callback on every request. Go and Rust have no cache. In Go, the resolver runs once for each captured event. In Rust, it runs once per request, so a failed call's `$mcp_tool_call` and `$exception` share one result.
 
 <MultiLanguage>
 

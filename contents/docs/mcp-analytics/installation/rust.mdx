@@ -108,7 +108,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer)
 | `conversation_id(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When the SDK mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. |
 | `identify(callback)` | – | `Fn(&RequestInfo) -> Option<Identity>`. Maps a request to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `missing_capability_tool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability) under this name. A blank name uses `get_more_tools`. |
-| `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. For a panic, the `posthog-rs` panic hook sends the `$exception` instead when the `error-tracking` feature is on. |
+| `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. For a panic, the `posthog-rs` panic hook sends the `$exception` instead when it's installed, which needs a global client with `capture_panics` on. |
 | `capture_parameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
 | `capture_responses(bool)` | `true` | Captures the tool result as `$mcp_response`. A failed call's error text is captured either way. |
 | `before_send(hook)` | – | `FnMut(Event) -> Option<Event>`. Changes or drops each MCP event after redaction. Dropping a `$mcp_tool_call` also drops its `$exception`. |
@@ -142,7 +142,7 @@ let options = McpOptionsBuilder::default()
 
 Every event has a `$session_id`:
 
-- **Streamable HTTP with sessions:** the SDK hashes the `Mcp-Session-Id` header into `ses_` plus 32 hex characters. Every PostHog MCP SDK computes the same value, so a session served from several languages groups together. A stateless session token minted by another PostHog SDK is read back, with its client name and version.
+- **Streamable HTTP with sessions:** the SDK hashes the `Mcp-Session-Id` header into `ses_` plus 32 hex characters. Every PostHog MCP SDK computes the same value, so a session served from several languages groups together. The `initialize` request comes before the server assigns that header, so its `$mcp_initialize` gets a fresh `ses_` ID of its own. A stateless session token minted by another PostHog SDK is read back, with its client name and version.
 - **stdio:** the SDK generates a `ses_` plus UUIDv7 ID per connection, and starts a new one when a tool call comes 30 minutes or more after the previous call ended.
 - **Stateless HTTP:** there's no transport session, so the SDK uses [conversation IDs](/docs/mcp-analytics/conversation-id). It returns a handle in the first result, and calls that echo it share a `$session_id`. A client that ignores the handle gets a new session per request. Use `identify` to group those calls by user.
 

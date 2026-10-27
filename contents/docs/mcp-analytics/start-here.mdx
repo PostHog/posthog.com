@@ -235,7 +235,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
 
 </MultiLanguage>
 
-In Go and Rust, turning off response capture still sends a failed call's error text. In Go, `WithCaptureResponses(false)` still sends a failed call's error text as `$mcp_error_message` and in `$exception`. A full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. A full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
