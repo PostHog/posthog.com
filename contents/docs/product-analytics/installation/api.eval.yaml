@@ -6,14 +6,14 @@ checks:
     - id: capture-without-sdk
       description: >-
           Tests whether the API install page alone gets an agent to send a correctly
-          shaped capture request over plain HTTP, with no SDK, from a standard-library
-          Python server.
-      codebase_to_test: python-stdlib
+          shaped capture request over plain HTTP, with no SDK. Runs in Gauge's
+          acme-dispatch-django, where every job, from the web UI or the JSON API, is
+          created by create_job() in records/services/jobs.py.
+      codebase_to_test: acme-dispatch-django
       prompt: |
-          The app in {folder}/ uses only the Python standard library, and we want to
-          keep it that way. Each time a user creates a meeting, send a
-          meeting_created event to PostHog from the server, without adding PostHog's
-          SDK or any other new dependency.
+          We want to know each time a job is created in the app in {folder}/, without
+          adding PostHog's SDK or any other new dependency. Send a job_created event
+          to PostHog from the server whenever a job is created.
           Only change files inside {folder}/. Read the project token and host from
           environment variables rather than writing them into the code. Make sure the
           app still builds or starts without errors when you're done.
@@ -21,9 +21,9 @@ checks:
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               no-sdk-added: >-
-                  No new dependency is added: {folder}/requirements.txt gains no
-                  packages, and no changed file imports posthog, requests or any other
-                  third-party module. The HTTP call uses the standard library (for
+                  No new dependency is added: {folder}/pyproject.toml gains no packages,
+                  and no changed file imports posthog, requests, httpx or any other
+                  third-party HTTP client. The HTTP call uses the standard library (for
                   example urllib.request).
               capture-request: >-
                   The code sends an HTTP POST to the /capture/ endpoint on the PostHog
@@ -31,11 +31,13 @@ checks:
                   Content-Type: application/json. Cite the file and line(s).
               payload-fields: >-
                   The JSON body has a top-level api_key set to the project token, a
-                  top-level event set to meeting_created, and a properties object that
-                  contains distinct_id (for example the current user's ID). A
-                  distinct_id at the top level only, outside properties, does not
+                  top-level event set to job_created, and a properties object that
+                  contains distinct_id (for example the job's ID or the acting user's
+                  ID). A distinct_id at the top level only, outside properties, does not
                   pass. Cite the file and line(s).
               fires-on-create: >-
-                  The event is sent from the POST /api/meetings handler in
-                  {folder}/server.py after the meeting is created successfully, and
-                  not on failed or unauthorized requests. Cite the file and line(s).
+                  The event is sent after a job is saved: in create_job() in
+                  {folder}/records/services/jobs.py, or in code it calls, so jobs created
+                  from both the web UI and the JSON API send it. Sending it only from the
+                  web view in {folder}/web/views/jobs.py does not pass. It is not sent
+                  when create_job raises a validation error. Cite the file and line(s).

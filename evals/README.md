@@ -25,7 +25,9 @@ evals/
   load-eval-files.ts               # 1. find, read and validate eval files
   build-eval-prompts.ts            # 2. build one prompt per check × arm
   gauge/                           # everything Gauge-specific
-    send-to-gauge.ts               # 3. prompts → Gauge cases, and the gauge CLI calls
+    send-to-gauge.ts               # 3. prompts → Gauge cases for the free dry run; waits for paid runs
+    saved-evals.ts                 # sync and launch the saved Gauge evals
+    saved-evals.json               # check key → saved Gauge eval id, written by sync
     gauge.json                     # Gauge project settings
 ```
 
@@ -115,25 +117,121 @@ Each check runs once per arm. The prompt is the same in every arm; only the tail
 
 `link` and `inline` read the same build: the runner fetches each page's `.md` from `--base-url` (production by default, or a deploy preview), so every arm sees the same words and nothing needs a snapshot.
 
-## Run it
+## Running evals
+
+Everything goes through one command, `pnpm evals <command> [filters]`, run from the repo root. `pnpm evals help` prints the full list.
+
+### Set up once
+
+1. **Install and sign in to the Gauge CLI:** `npm install -g @withgauge/cli`, then `gauge auth login`. The runner always uses hosted Gauge (`--hosted`), in the org that `gauge/gauge.json` names.
+2. **Check credits** with `gauge billing status --hosted`. Paid runs spend the org's shared credits.
+
+### Commands
+
+| Command | What it does | Cost |
+| --- | --- | --- |
+| `pnpm evals validate` | Checks every eval file against the format. Run it after any edit. | Free |
+| `pnpm evals index` | Prints each page and every check that reads it. | Free |
+| `pnpm evals plan [filters]` | Builds the selected checks' prompts and has Gauge dry-run them. Nothing runs. | Free |
+| `pnpm evals sync [filters]` | Creates or updates the saved evals in Gauge, one per check × arm. Starts no sessions. | Free |
+| `pnpm evals run [filters] --yes` | Launches the selected checks under their saved evals and waits for the verdicts. Without `--yes` it's the same as `plan`. | **Paid** |
+| `pnpm test:evals` | The harness's offline unit tests. | Free |
+
+### The usual workflow
+
+1. Edit a page or its eval file.
+2. `pnpm evals validate`
+3. `pnpm evals sync --page <page>`: brings that page's saved evals in Gauge up to date.
+4. `pnpm evals plan --page <page>`: free; shows what would run and lets Gauge check it.
+5. `pnpm evals run --page <page> --yes`: the paid run.
+6. Commit the eval file and `gauge/saved-evals.json` together.
+
+### Choosing what to run
+
+With no filters, a command acts on every active check. Filters narrow that down:
+
+| Filter | Selects |
+| --- | --- |
+| `--page <docs path>` | Every check that reads the page: the page's own eval file, plus any other check that lists the page in `pages:`. Write the path without `docs/`, for example `product-analytics/installation/go`. |
+| `--tag <tag>` | Eval files with that tag, for example `install`, `journey` or `python`. |
+| `--arm <arm>` | Only that arm: `baseline`, `link` or `inline`. |
+| `--suite <suite>` | `smoke` or `deep`. |
+| `--harness <id>` | One agent from `shared/run-config.yml`, including an unverified one. |
+| `--changed [base]` | Checks whose page or eval file changed against `base` (default `origin/master`), including uncommitted work. |
+
+Repeating a filter widens the selection: `--page a --page b` means page a **or** page b. Different filters narrow it: `--page a --tag journey` means page a **and** tag journey.
+
+Other options:
+
+- `--base-url https://<deploy preview>` reads the pages from a deploy preview instead of production, to test a docs PR before it merges. The default is `https://posthog.com`.
+- `--include-unverified` adds the agents marked `verified: false` in `shared/run-config.yml`.
+- `--write <dir>` (`plan` only) keeps the Gauge spec files it generates.
+- `--prune` (`sync` with no filters only) deletes saved evals whose check no longer exists.
+
+### Recipes
 
 ```sh
-pnpm evals validate                         # check every eval file; free
-pnpm evals plan --page product-analytics/identify   # build prompts, gauge --dry-run; free
-pnpm evals plan --changed                   # only checks whose pages changed against origin/master
-pnpm evals run --page product-analytics/installation/react --yes   # spends Gauge credits
-pnpm evals index                            # print page → checks, from every pages: list
-pnpm test:evals                             # offline unit tests
+# One page, all three arms (3 runs per check)
+pnpm evals sync --page product-analytics/installation/go
+pnpm evals run  --page product-analytics/installation/go --yes
+
+# One page, one arm: the cheapest real run (1 run per check)
+pnpm evals run --page product-analytics/installation/go --arm link --yes
+
+# Several pages
+pnpm evals run --page product-analytics/installation/python --page product-analytics/installation/ruby --yes
+
+# Everything with a tag
+pnpm evals run --tag install --yes
+
+# Every page a branch changed
+pnpm evals run --changed --yes
+
+# A docs PR, against its deploy preview
+pnpm evals sync --page product-analytics/identify --base-url https://<preview-url>
+pnpm evals run  --page product-analytics/identify --base-url https://<preview-url> --yes
+
+# Everything: sync it all, check it for free, then run it
+pnpm evals sync
+pnpm evals plan
+pnpm evals run --yes
 ```
 
-Filters combine: `--page <docs path>` (repeatable), `--tag`, `--suite`, `--arm`, `--harness`, `--changed [base]`. `--base-url https://<preview>` points `link` and the page text at a deploy preview. `--include-unverified` adds the `shared/run-config.yml` harnesses with `verified: false`.
+Use the same filters and `--base-url` for `sync` and `run`: `run` launches what the saved evals hold, and refuses a check whose saved eval doesn't match.
 
-`run` writes `checks.json`, `request.json` and `results.json` under `evals/results/<timestamp>/` (gitignored). Gauge takes at most 20 cases per request, so bigger runs go out in several requests.
+Not supported yet: selecting a folder (`--page product-analytics/installation` fails, because `--page` matches exact pages; use `--tag install` instead) and selecting one check out of a file with several (narrow with `--page` and `--arm`).
 
-## Before the first paid run
+### Saved evals
 
-1. **Sign in to the Gauge CLI**: `npm install -g @withgauge/cli`, then `gauge auth login`. In CI, set `GAUGE_API_TOKEN`. The runner always passes `--hosted`.
-2. **Build the codebases** in `PostHog/docs-eval-fixtures` from wizard-workbench (`pnpm evals:docs:fixtures`), push it, and pin `ref` for each one in `shared/codebases-to-test.yaml`. Until then, only checks on `acme-nextjs` and answer-only checks can launch.
+Every paid run launches under a **saved eval** in Gauge: one per check × arm, with an id that doesn't change. Gauge keeps each saved eval's run history, so you can see how one check does over time: `gauge run list --eval <id> --hosted`.
+
+- **`sync` makes Gauge match the eval files.** It creates a saved eval for a new check × arm and edits one whose prompt, criteria, codebase, agents or samples changed. It leaves the rest alone, so a new revision in Gauge means a real change. It records each id in `gauge/saved-evals.json`; commit that file. It skips checks whose codebase has no `ref`.
+- **`run` launches under those ids.** A check with no saved eval, or one whose saved eval no longer matches the eval file, is skipped with "run pnpm evals sync".
+- **Sync again** after you change an eval file, a file in `shared/`, or a page the `inline` arm pastes in.
+- **The Gauge org is shared.** Our saved evals are named `[posthog.com] <check key>` and tagged `posthog-com-evals`, and sync never touches an eval without that prefix.
+- A page edit changes the `inline` prompt, so it starts a new revision. It doesn't change the `link` prompt, which holds only the page's URL, so `link` runs before and after a page edit share a revision.
+
+### When something can't run
+
+`plan` and `run` never stop for one bad check. They leave it out, list it with the reason, and run the rest:
+
+- `codebase <name> has no ref in shared/codebases-to-test.yaml`: the check uses a placeholder, a codebase whose repo doesn't exist. To make it runnable, point the check at a real codebase in that file (Gauge's reference apps are listed there, each pinned to a commit) and rewrite any rubric that names files from the old one.
+- `no saved eval; run pnpm evals sync` or `saved eval is out of date; run pnpm evals sync`
+- `launch failed: <Gauge's error code and message>`: `run` records it and goes on. On `insufficient_credits` it stops launching, since every later launch would fail too, and lists the rest as not launched.
+
+`run` always waits for everything that did launch, then prints one summary, for example `7 passed, 3 failed, 17 couldn't run`, with each reason. It exits with 0 only when every selected check ran and passed.
+
+Launching many runs at once has hit `insufficient_credits` while the org still had a balance, most likely because runs in flight hold credits. Rerun what wasn't launched once the first runs finish.
+
+### Output
+
+`run --yes` writes three files to `evals/results/<timestamp>/` (gitignored):
+
+| File | Holds |
+| --- | --- |
+| `checks.json` | Every check × arm it tried to launch: prompt, criteria, codebase |
+| `request.json` | For each launch: the check, its saved eval id and Gauge's launch response |
+| `results.json` | Gauge's verdict for each launched run, plus every check that couldn't run and why |
 
 ## Reading the results
 

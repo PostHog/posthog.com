@@ -8,6 +8,7 @@ import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
 import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
+import { definitionFor, isCurrent, savedEvalName, type SavedEval } from './gauge/saved-evals.ts'
 import { armPrompt, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
 import { changedSelection, parseArgs, select } from './run.ts'
 import {
@@ -143,7 +144,7 @@ describe('descriptions and suites', () => {
     const codeCheck = {
         id: 'x',
         description: 'Why this check exists.',
-        codebase_to_test: 'acme-nextjs',
+        codebase_to_test: 'acme-dispatch-nextjs',
         prompt: 'Tie events in {folder}/ to the signed-in user.',
         criteria: { shared: ['stays-in-folder'] },
     }
@@ -203,7 +204,7 @@ describe('prompts', () => {
                     id: 'x',
                     prompt: 'Edit {folder}/.',
                     description: 'Checks the codebase folder fills in.',
-                    codebase_to_test: 'acme-nextjs',
+                    codebase_to_test: 'acme-dispatch-nextjs',
                     criteria: {
                         shared: ['stays-in-folder'],
                         rubrics: { 'has-sdk': '{folder}/package.json lists posthog-js.' },
@@ -247,5 +248,45 @@ describe('prompts', () => {
             specs.map((s) => s.cases.length),
             [20, 20, 5]
         )
+    })
+})
+
+describe('saved evals', () => {
+    const check = {
+        key: 'product-analytics-installation-go-install-link',
+        arm: 'link',
+        prompt: 'Set up PostHog.',
+        criteria: [{ name: 'builds', rubric: 'It builds.' }],
+        codebase: { name: 'starter-go', repo: 'https://github.com/gauge-sh/starter-go', ref: 'abc', folder: '.' },
+        harnesses: [{ id: 'claude-code', gauge: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'], verified: true }],
+    } as unknown as CheckPrompt
+    const wanted = definitionFor(check, 1)
+    const saved: SavedEval = {
+        id: 'e1',
+        name: wanted.name,
+        promptText: wanted.prompt,
+        criteria: wanted.criteria,
+        repoUrl: wanted.repoUrl,
+        repoRef: wanted.repoRef,
+        agents: wanted.agents,
+        sampleCount: 1,
+        tags: [...wanted.tags].reverse(),
+    }
+
+    test("names carry our prefix, so sync never touches anyone else's evals", () => {
+        assert.equal(wanted.name, '[posthog.com] product-analytics-installation-go-install-link')
+        assert.equal(savedEvalName(check.key), wanted.name)
+    })
+
+    test('a saved eval that matches is current, whatever the tag order', () => {
+        assert.ok(isCurrent(saved, wanted))
+    })
+
+    test('any change to the prompt, criteria, codebase, agents or samples makes it out of date', () => {
+        assert.ok(!isCurrent({ ...saved, promptText: 'Set up PostHog now.' }, wanted))
+        assert.ok(!isCurrent({ ...saved, criteria: [{ name: 'builds', rubric: 'It compiles.' }] }, wanted))
+        assert.ok(!isCurrent({ ...saved, repoRef: 'def' }, wanted))
+        assert.ok(!isCurrent({ ...saved, agents: [{ agent: 'CLAUDE_CODE', models: ['claude-opus-5-5'] }] }, wanted))
+        assert.ok(!isCurrent({ ...saved, sampleCount: 3 }, wanted))
     })
 })

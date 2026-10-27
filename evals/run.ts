@@ -3,7 +3,21 @@ import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { dryRun, gaugeAvailable, launch, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
+import { dryRun, findRequestId, gaugeAvailable, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
+import {
+    createSavedEval,
+    definitionFor,
+    editSavedEval,
+    harnessSlugs,
+    idsFile,
+    isCurrent,
+    launchSavedEval,
+    listSavedEvals,
+    readIds,
+    removeSavedEval,
+    savedEvalName,
+    writeIds,
+} from './gauge/saved-evals.ts'
 import { buildPrompts, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
 import {
     arms,
@@ -25,7 +39,10 @@ Commands:
   validate        Check every eval file. Free.
   index           Print page → checks, from every eval file and pages: list.
   plan            Build the selected checks' prompts and run gauge --dry-run. Free.
-  run --yes       Launch the selected checks and wait for judging. Spends Gauge credits.
+  sync            Create or update one saved Gauge eval per selected check × arm, and
+                  record their ids in gauge/saved-evals.json. Starts no sessions.
+  run --yes       Launch the selected checks under their saved evals and wait for judging.
+                  Spends Gauge credits. Without --yes, the same as plan.
 
 Filters (combine):
   --page <docs path>     e.g. product-analytics/identify; repeatable
@@ -36,7 +53,8 @@ Filters (combine):
   --changed [base]       only checks whose pages or eval file changed against base (default origin/master)
   --base-url <url>       where link and inline read pages (default https://posthog.com)
   --include-unverified   add shared/run-config.yml harnesses with verified: false
-  --write <dir>          plan: also write the Gauge specs there`
+  --write <dir>          plan: also write the Gauge specs there
+  --prune                sync with no filters: delete saved evals whose check no longer exists`
 
 type Options = {
     command: string
@@ -50,6 +68,7 @@ type Options = {
     includeUnverified: boolean
     yes: boolean
     write: string | null
+    prune: boolean
 }
 
 export function parseArgs(argv: string[]): Options {
@@ -67,6 +86,7 @@ export function parseArgs(argv: string[]): Options {
         baseUrl: valuesOf('--base-url')[0] ?? 'https://posthog.com',
         includeUnverified: argv.includes('--include-unverified'),
         yes: argv.includes('--yes'),
+        prune: argv.includes('--prune'),
         write: valuesOf('--write')[0] ?? null,
     }
 }
@@ -137,13 +157,11 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
     return { selections, harnesses, inactive }
 }
 
-// What must be true before Gauge can run the checks. Free to check.
-function readinessProblems(checks: CheckPrompt[]): string[] {
-    const problems = new Set<string>()
-    for (const c of checks)
-        if (c.codebase && !c.codebase.ref)
-            problems.add(`shared/codebases-to-test.yaml: ${c.codebase.name} has no ref; build it and pin the commit`)
-    return [...problems]
+// Why a check can't run, or null when it can. Free to check.
+function cantRunReason(check: CheckPrompt): string | null {
+    if (check.codebase && !check.codebase.ref)
+        return `codebase ${check.codebase.name} has no ref in shared/codebases-to-test.yaml`
+    return null
 }
 
 function printProblems(title: string, problems: string[]) {
@@ -208,76 +226,179 @@ async function main(argv: string[]): Promise<number> {
         console.error('No harness selected; check shared/run-config.yml or pass --harness / --include-unverified')
         return 2
     }
-    const checks = await buildPrompts(selections, harnesses, shared, options.baseUrl, pageText)
+    const built = await buildPrompts(selections, harnesses, shared, options.baseUrl, pageText)
+    // Checks that can't run are left out and reported, never fatal: the rest still run.
+    const cantRun = built.flatMap((c) => {
+        const reason = cantRunReason(c)
+        return reason ? [{ key: c.key, reason }] : []
+    })
+    const checks = built.filter((c) => !cantRun.some((x) => x.key === c.key))
+    if (cantRun.length > 0 && options.command !== 'sync')
+        printProblems(
+            `Can't run ${cantRun.length} Gauge case(s), skipping them`,
+            cantRun.map((x) => `${x.key}: ${x.reason}`)
+        )
     console.log(
-        `${checks.length} Gauge case(s) from ${selections.length} check(s), on ${harnesses
-            .map((h) => `${h.id} (${h.models.join(', ')})`)
-            .join(', ')}:`
+        `${checks.length} Gauge case(s) from ${
+            new Set(checks.map((c) => `${c.file}#${c.checkId}`)).size
+        } check(s), on ${harnesses.map((h) => `${h.id} (${h.models.join(', ')})`).join(', ')}:`
     )
     for (const c of checks)
         console.log(`  ${c.key}  ${c.criteria.length} criteria${c.codebase ? `  ${c.codebase.name}` : '  answer-only'}`)
+    if (checks.length === 0) {
+        console.log('Nothing to run.')
+        return cantRun.length > 0 ? 1 : 0
+    }
 
-    if (options.command !== 'plan' && options.command !== 'run') {
+    if (!['plan', 'sync', 'run'].includes(options.command)) {
         console.error(`Unknown command ${options.command}\n\n${usage}`)
         return 2
     }
-    const specs = toGaugeSpecs(checks, shared.runConfig.samples)
-    const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
-    await mkdir(specDir, { recursive: true })
-    const specPaths: string[] = []
-    for (const [i, spec] of specs.entries()) {
-        const path = join(specDir, `spec-${i + 1}.json`)
-        await writeFile(path, `${JSON.stringify(spec, null, 4)}\n`)
-        specPaths.push(path)
-    }
-
     if (!gaugeAvailable()) {
         console.error('The gauge CLI is not on PATH: npm install -g @withgauge/cli, then gauge auth login')
         return 1
     }
-    const notReady = readinessProblems(checks)
-    if (notReady.length > 0) {
-        printProblems('Not ready to run', notReady)
-        return 1
-    }
-    for (const path of specPaths) console.log(dryRun(path))
+    if (options.command === 'sync') return sync(built, shared, options)
     if (options.command === 'plan' || !options.yes) {
+        const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
+        await mkdir(specDir, { recursive: true })
+        for (const [i, spec] of toGaugeSpecs(checks, shared.runConfig.samples).entries()) {
+            const path = join(specDir, `spec-${i + 1}.json`)
+            await writeFile(path, `${JSON.stringify(spec, null, 4)}\n`)
+            console.log(dryRun(path))
+        }
         console.log(
             options.command === 'run' ? 'Plan only. Re-run with --yes to launch these sessions.' : `Specs in ${specDir}`
         )
         return 0
     }
+    return runSavedEvals(checks, shared, cantRun)
+}
+
+const unfiltered = (options: Options) =>
+    [options.pages, options.tags, options.suites, options.arms, options.harnesses].every((list) => list.length === 0) &&
+    !options.changed
+
+// Makes Gauge's saved evals match the eval files. An eval is edited only when something
+// in it changed, so Gauge starts a new revision only for a real change.
+function sync(checks: CheckPrompt[], shared: Shared, options: Options): number {
+    const ready = checks.filter((c) => !c.codebase || c.codebase.ref)
+    const unready = [...new Set(checks.filter((c) => !ready.includes(c)).map((c) => c.codebase!.name))]
+    if (unready.length > 0)
+        console.log(`Skipping ${checks.length - ready.length} check(s) on codebases with no ref: ${unready.join(', ')}`)
+
+    const slugs = harnessSlugs()
+    const saved = listSavedEvals()
+    const ids = readIds()
+    const counts = { created: 0, updated: 0, unchanged: 0 }
+    for (const check of ready) {
+        const wanted = definitionFor(check, shared.runConfig.samples)
+        const existing = saved.get(wanted.name)
+        if (!existing) {
+            ids[check.key] = createSavedEval(wanted, slugs)
+            counts.created++
+            console.log(`  created    ${check.key}  ${ids[check.key]}`)
+        } else if (!isCurrent(existing, wanted)) {
+            editSavedEval(existing.id, wanted, slugs)
+            ids[check.key] = existing.id
+            counts.updated++
+            console.log(`  updated    ${check.key}  ${existing.id}`)
+        } else {
+            ids[check.key] = existing.id
+            counts.unchanged++
+        }
+    }
+
+    // Saved evals for checks that no longer exist. Only knowable when sync saw every check.
+    if (unfiltered(options)) {
+        const keys = new Set(checks.map((c) => c.key))
+        for (const key of Object.keys(ids)) if (!keys.has(key)) delete ids[key]
+        const names = new Set(checks.map((c) => savedEvalName(c.key)))
+        const orphans = [...saved.values()].filter((e) => !names.has(e.name))
+        for (const orphan of orphans) {
+            if (options.prune) removeSavedEval(orphan.id)
+            console.log(`  ${options.prune ? 'deleted' : 'orphan '}    ${orphan.name}  ${orphan.id}`)
+        }
+        if (orphans.length > 0 && !options.prune) console.log('Pass --prune to delete the orphans above.')
+    }
+    writeIds(ids)
+    console.log(
+        `${counts.created} created, ${counts.updated} updated, ${counts.unchanged} unchanged. Ids in ${idsFile.replace(
+            `${repoRoot}/`,
+            ''
+        )}`
+    )
+    return 0
+}
+
+type CantRun = { key: string; reason: string }
+
+// Launches each check under its saved eval, then waits for every one that launched.
+// Nothing here stops the run early except running out of credits: a check that can't
+// run is recorded with its reason, and the summary at the end lists them all.
+async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: CantRun[]): Promise<number> {
+    const ids = readIds()
+    const saved = listSavedEvals()
+    const launchable: CheckPrompt[] = []
+    for (const check of checks) {
+        const live = saved.get(savedEvalName(check.key))
+        if (!ids[check.key] || !live || live.id !== ids[check.key])
+            cantRun.push({ key: check.key, reason: 'no saved eval; run pnpm evals sync' })
+        else if (!isCurrent(live, definitionFor(check, shared.runConfig.samples)))
+            cantRun.push({ key: check.key, reason: 'saved eval is out of date; run pnpm evals sync' })
+        else launchable.push(check)
+    }
 
     const outDir = join(repoRoot, 'evals', 'results', new Date().toISOString().replace(/[:.]/g, '-'))
     await mkdir(outDir, { recursive: true })
-    await writeFile(join(outDir, 'checks.json'), `${JSON.stringify(checks, null, 4)}\n`)
-    let passed = true
-    const results: unknown[] = []
-    const requests: unknown[] = []
-    for (const path of specPaths) {
-        const { raw, requestId } = launch(path)
-        requests.push(JSON.parse(raw))
-        if (!requestId)
-            throw new Error(`No request id in the launch response; check its shape and update findRequestId:\n${raw}`)
-        console.log(`Launched ${requestId}; waiting for judging`)
-        const result = wait(requestId)
-        passed &&= result.passed
-        results.push(JSON.parse(result.raw))
+    await writeFile(join(outDir, 'checks.json'), `${JSON.stringify(launchable, null, 4)}\n`)
+
+    // Launch everything first, so the sessions run side by side, then wait for each.
+    const launched: { check: string; evalId: string; requestId: string; response: unknown }[] = []
+    let stopReason: string | null = null
+    for (const check of launchable) {
+        if (stopReason) {
+            cantRun.push({ key: check.key, reason: `not launched: ${stopReason}` })
+            continue
+        }
+        const launch = launchSavedEval(ids[check.key])
+        if (!launch.ok) {
+            cantRun.push({ key: check.key, reason: `launch failed: ${launch.code}: ${launch.message}` })
+            // Every later launch would fail the same way.
+            if (launch.code === 'insufficient_credits') stopReason = 'Gauge is out of credits'
+            continue
+        }
+        const requestId = findRequestId(launch.raw)
+        if (!requestId) {
+            cantRun.push({ key: check.key, reason: 'launched, but the response had no request id' })
+            continue
+        }
+        console.log(`Launched ${check.key} (${requestId})`)
+        launched.push({ check: check.key, evalId: ids[check.key], requestId, response: JSON.parse(launch.raw) })
     }
-    await writeFile(join(outDir, 'request.json'), `${JSON.stringify(requests, null, 4)}\n`)
-    // One wait result per request; merge their batches into one file.
-    await writeFile(
-        join(outDir, 'results.json'),
-        `${JSON.stringify(
-            results.length === 1
-                ? results[0]
-                : { batches: results.flatMap((r) => (r as { batches?: unknown[] }).batches ?? []) },
-            null,
-            4
-        )}\n`
+    await writeFile(join(outDir, 'request.json'), `${JSON.stringify(launched, null, 4)}\n`)
+
+    const results: Record<string, unknown> = {}
+    const verdicts: { check: string; passed: boolean }[] = []
+    if (launched.length > 0) console.log(`Waiting for judging on ${launched.length} launched run(s)`)
+    for (const run of launched) {
+        const result = wait(run.requestId)
+        results[run.check] = JSON.parse(result.raw)
+        verdicts.push({ check: run.check, passed: result.passed })
+        console.log(`  ${result.passed ? 'passed' : 'failed'}  ${run.check}`)
+    }
+    await writeFile(join(outDir, 'results.json'), `${JSON.stringify({ results, cantRun }, null, 4)}\n`)
+
+    const passed = verdicts.filter((v) => v.passed).length
+    console.log(
+        `\n${passed} passed, ${verdicts.length - passed} failed, ${cantRun.length} couldn't run. Results in ${outDir}`
     )
-    console.log(`Results in ${outDir}`)
-    return passed ? 0 : 1
+    if (cantRun.length > 0)
+        printProblems(
+            "Couldn't run",
+            cantRun.map((x) => `${x.key}: ${x.reason}`)
+        )
+    return passed === verdicts.length && cantRun.length === 0 ? 0 : 1
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) process.exitCode = await main(process.argv.slice(2))

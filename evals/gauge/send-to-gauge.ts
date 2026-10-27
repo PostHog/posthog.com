@@ -4,8 +4,9 @@ import { repoRoot } from '../load-eval-files.ts'
 import type { CheckPrompt } from '../build-eval-prompts.ts'
 
 // Everything Gauge-specific lives in this folder. This file turns check prompts into
-// Gauge's --apply case spec (see `gauge run --schema`), one Gauge case per check,
-// and wraps the CLI calls. Gauge says "case" where the eval files say "check"; this
+// Gauge's --apply case spec (see `gauge run --schema`), one Gauge case per check, for
+// the free dry run that `pnpm evals plan` does, and waits for paid runs. Paid runs
+// launch under saved evals: see saved-evals.ts. Gauge says "case" where the eval files say "check"; this
 // is the only place both words meet. Written against gauge CLI 0.23, which runs in
 // local Docker unless told --hosted, so every call passes it.
 // The CLI runs from this folder so it picks up gauge.json beside this file, which
@@ -60,11 +61,6 @@ const gauge = (args: string[]) =>
     })
 
 export const dryRun = (specPath: string) => gauge(['run', '--apply', specPath, '--dry-run'])
-
-export function launch(specPath: string): { raw: string; requestId: string | null } {
-    const raw = gauge(['run', '--apply', specPath, '--yes', '-o', 'json'])
-    return { raw, requestId: findRequestId(raw) }
-}
 
 // The launch response's id field isn't documented; take the first id-like value.
 export function findRequestId(launchJson: string): string | null {

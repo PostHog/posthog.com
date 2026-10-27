@@ -6,8 +6,9 @@ checks:
     - id: install
       description: >-
           Tests whether the Python install page alone gets an agent to a working posthog
-          client with config from env, on a standard-library Python server.
-      codebase_to_test: python-stdlib
+          client with config from env. Runs in Gauge's starter-django, a bare Django
+          project managed with uv, so the agent may also reach for the Django page.
+      codebase_to_test: starter-django
       prompt: |
           The app in {folder}/ needs product analytics. Set up PostHog in it.
           Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
@@ -15,6 +16,10 @@ checks:
           shared: [config-from-env, stays-in-folder, builds]
           rubrics:
               has-posthog: >-
-                  {folder}/requirements.txt lists `posthog` as a dependency.
+                  {folder}/pyproject.toml lists `posthog` as a dependency.
               required-steps-done: >-
-                  The app imports Posthog from the posthog package and creates a Posthog client with project_api_key set to the project token and host set to the PostHog host, for example in {folder}/server.py. Cite the file and line(s).
+                  The app imports Posthog from the posthog package and creates a Posthog
+                  client with project_api_key set to the project token and host set to
+                  the PostHog host, somewhere the app loads at startup (for example
+                  {folder}/config/settings.py or the pages app's AppConfig.ready()).
+                  Cite the file and line(s).

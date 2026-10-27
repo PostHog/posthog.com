@@ -1,62 +1,93 @@
-# The codebases checks run in: a repo, a pinned commit and a folder. A check names
-# one with `codebase_to_test`, and `{folder}` in its prompt and criteria resolves to
-# that codebase's folder. A check with no codebase_to_test is answer-only.
+# The codebases checks run in: a repo, a pinned commit (`ref`) and the folder the
+# agent works in. A check names one with `codebase_to_test`, and `{folder}` in its
+# prompt and criteria resolves to that codebase's folder. A check with no
+# codebase_to_test is answer-only.
 #
-# Most of these live in PostHog/docs-eval-fixtures, built from wizard-workbench
-# apps with every PostHog and wizard hint removed, so the agent can't copy an
-# existing install (see wizard-workbench services/evals/docs-evals/prepare-fixtures.ts).
-# `source` is the app it was copied from. A codebase with no `ref` isn't built yet:
-# the runner refuses to launch checks that use it.
+# A codebase with no `ref` can't run: the runner refuses to launch checks that use it.
+# To move to a newer commit, update `ref` and rerun the checks that use it.
+
+# --- Gauge reference codebases (github.com/gauge-sh). Real, public, no PostHog code.
+
+# Minimal starters: one small app at the repo root.
+starter-go: # net/http server
+    repo: https://github.com/gauge-sh/starter-go
+    ref: efc83acb02920926322a46967409d885e5b90e32
+    folder: .
+starter-rust: # Axum server
+    repo: https://github.com/gauge-sh/starter-rust
+    ref: a6e903c2ce6cef99c4e2fea249c37447359d36c1
+    folder: .
+starter-rails: # Ruby on Rails app
+    repo: https://github.com/gauge-sh/starter-rails
+    ref: 0f9c6ebb5087f24f64df0b2a6aea98f640b8d369
+    folder: .
+starter-django: # Django project, uv and pyproject.toml
+    repo: https://github.com/gauge-sh/starter-django
+    ref: e53ffed7ea1ee27523ecc2d5d437f69ff6a89670
+    folder: .
+starter-nextjs: # Next.js App Router
+    repo: https://github.com/gauge-sh/starter-nextjs
+    ref: 82b2639bc9921b598e50e3b18d428744a9da4e0f
+    folder: .
+starter-nuxt: # Nuxt (Vue)
+    repo: https://github.com/gauge-sh/starter-nuxt
+    ref: d060ddbcf955602d618ce5bc54ae1f65abdc068b
+    folder: .
+starter-sveltekit: # SvelteKit (Vite)
+    repo: https://github.com/gauge-sh/starter-sveltekit
+    ref: 1fe2ddea789fea3bdef97efc4a18287fe70a768a
+    folder: .
+
+# Acme Dispatch: the same field-service app (jobs, customers, technicians, invoices,
+# user admin) in five stacks. The monorepos have a server-rendered UI in apps/web and
+# a JSON API in apps/api; these entries point at apps/web. Add an `-api` entry with
+# `folder: apps/api` when a check needs the API instead. Rails is one app at the root.
+acme-dispatch-nextjs:
+    repo: https://github.com/gauge-sh/acme-dispatch-nextjs
+    ref: 2e2646819890345903cfa03eb0e2442a417883ed
+    folder: apps/web
+acme-dispatch-go:
+    repo: https://github.com/gauge-sh/acme-dispatch-go
+    ref: 7e7d35e28af46baa3a72ab2823f86c60fb5705af
+    folder: apps/web
+acme-dispatch-rust:
+    repo: https://github.com/gauge-sh/acme-dispatch-rust
+    ref: 7a3c07d7f99708dcff0eabf006e0806647c2eccd
+    folder: apps/web
+acme-dispatch-django:
+    repo: https://github.com/gauge-sh/acme-dispatch-django
+    ref: 2dc148449cb71eb04ce2e976ca09231f0c55ee9e
+    folder: apps/web
+acme-dispatch-rails:
+    repo: https://github.com/gauge-sh/acme-dispatch-rails
+    ref: e6ded42fe15148d937a9bb9a4ecdf4365eea8d18
+    folder: .
+
+# --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned
+# but never built. Checks that use them can't run. Replace each with a real codebase
+# above (and rewrite the check's file paths to match), then delete the placeholder.
 
 web-vite:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: web-vite
-    source: apps/basic-integration/javascript-web/saas-dashboard
-
 react-router-7:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: react-router-7
-    source: apps/basic-integration/react-router/rrv7-starter
-
 react-vite:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: react-vite
-    source: apps/basic-integration/tanstack-router/tanstack-router-file-based-saas
-
 node-express:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: node-express
-    source: apps/basic-integration/javascript-node/express-todo
-
-python-stdlib:
-    repo: https://github.com/PostHog/docs-eval-fixtures
-    folder: python-stdlib
-    source: apps/basic-integration/python/meeting-summarizer
-
 react-native-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: react-native-app
-    source: apps/basic-integration/react-native/react-native-saas
-
 android-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: android-app
-    source: apps/basic-integration/android/Jetchat
-
 ios-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: ios-app
-    source: apps/basic-integration/swift/hackers-ios
-
-# Gauge's public Next.js App Router monorepo. It has no PostHog code, so it needs
-# docs-eval-fixtures build and is the quickest first run.
-acme-nextjs:
-    repo: https://github.com/gauge-sh/acme-dispatch-nextjs
-    ref: 2e2646819890345903cfa03eb0e2442a417883ed
-    folder: apps/web
-
-# No starting app exists yet for these. Their checks stay `status: draft` until
-# someone adds a small app to docs-eval-fixtures and pins `ref`.
 remix-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: remix-app
@@ -69,18 +100,9 @@ kmp-app:
 php-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: php-app
-ruby-app:
-    repo: https://github.com/PostHog/docs-eval-fixtures
-    folder: ruby-app
-go-app:
-    repo: https://github.com/PostHog/docs-eval-fixtures
-    folder: go-app
 java-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: java-app
-rust-app:
-    repo: https://github.com/PostHog/docs-eval-fixtures
-    folder: rust-app
 dotnet-app:
     repo: https://github.com/PostHog/docs-eval-fixtures
     folder: dotnet-app
