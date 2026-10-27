@@ -59,14 +59,11 @@ Another set of events and properties we store duplicates of is feature flags. Ag
 
 Here's more details on what this means:
 
-<!-- TODO: confirm flag evaluations retention ([N] days) and the batch exports row before publishing -->
-
 | What | Before | After | Do you need to do anything? |
 | --- | --- | --- | --- |
 | `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for 90 days | Only if you query these events directly in SQL |
 | `$feature/<flag>` properties | One property per flag on each event | One feature flags map per event | No. Existing insights and HogQL queries keep working |
 | `null` property values | Stored as `null` | Stored as "not set". Exports and event details still show `null` | No. Queries already treat `null` and "not set" the same |
-<!-- | Batch exports | Full event properties | [Export format changes – confirm before publishing] | [TBC] | -->
 
 ## What properties expire after 60 days
 
