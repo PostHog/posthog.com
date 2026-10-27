@@ -38,17 +38,54 @@ Some products have special event names and properties that can be useful to know
 
 The users behind your events are known as [persons](/docs/data/persons) in PostHog.
 
-Some of the columns in the `persons` table are:
+The columns in the `persons` table are:
 
 | Column          | Description                                                                                                                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`            | UUID of the person. Relates to `person_id` in the `events` table.                                                                                                                                       |
 | `created_at`    | Date and time when the person was first created (ISO 8601 format).                                                                                                                                      |
 | `last_seen_at`  | Date and time of the person's most recent event (ISO 8601 format), rounded to the hour. See [skipping `last_seen_at` updates](/docs/product-analytics/person-properties#skipping-last_seen_at-updates). |
-| `properties`    | Object containing all properties associated with the person (stored as a String).                                                                                                                       |
+| `properties`    | Object containing all properties associated with the person (stored as a String). These are the current values.                                                                                        |
 | `is_identified` | Indicates if the person is identified (`1`) or anonymous (`0`).                                                                                                                                         |
+| `pdi`           | Join to the person's distinct IDs. For example, `pdi.distinct_id`.                                                                                                                                      |
+| `revenue_analytics` | Join to the person's revenue from [revenue analytics](/docs/revenue-analytics/connect-to-customers). Has the `revenue` and `mrr` columns.                                                           |
+
+The `persons` table also has virtual fields. PostHog calculates them from other person data when the query runs. Select them like other columns, for example `SELECT id, $virt_initial_channel_type FROM persons`.
+
+| Virtual field                         | Description                                                                                                                                          |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$virt_initial_channel_type`          | The [channel type](/docs/data/channel-type) of the person's first visit, for example `Organic Search` or `Paid Social`. Uses your custom channel types. |
+| `$virt_initial_referring_domain_type` | The type of the person's first referring domain, for example `Search`, `Social`, or `$direct`.                                                       |
+| `$virt_revenue`                       | Total revenue for the person. The same value as `revenue_analytics.revenue`.                                                                         |
+| `$virt_mrr`                           | Monthly recurring revenue for the person. The same value as `revenue_analytics.mrr`.                                                                 |
+
+The revenue fields only have values if you [connect revenue analytics to persons](/docs/revenue-analytics/connect-to-customers).
 
 Beyond storing demographic data about your users, the `persons` table is powerful as it can connect to many other tables. For example, the `persons` table can be queried through the `events` using the `person` field like `SELECT person.properties.$initial_browser FROM events`. It can also be [joined to external sources](/docs/data-warehouse/join) to create extended person properties.
+
+#### Enrich events with person data
+
+There are three ways to add person data to events. They give different values:
+
+| Option                                                                                       | Example                                                                         | Values                                  |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------- |
+| Person properties on events                                                                  | `SELECT person.properties.plan FROM events`                                     | The values when the event was captured  |
+| Current person properties                                                                    | `SELECT pdi.person.properties.plan FROM events`                                 | The values now                          |
+| [Warehouse properties](/docs/data-warehouse/warehouse-properties#warehouse-properties-or-a-join) | `SELECT pdi.person.properties.plan FROM events`, after you map a warehouse column | The values from the most recent sync |
+
+Use person properties on events to see who a user was at the time of an event. This is the fastest option, and it is the default for [persons on events](/docs/how-posthog-works/queries#filtering-on-person-properties). Use current person properties to group past events by who a user is now. This is slower, because the query joins the `persons` table. You can also write the join yourself:
+
+```sql
+SELECT events.event, persons.properties.plan
+FROM events
+LEFT JOIN persons ON events.person_id = persons.id
+```
+
+Some things to know when you enrich events:
+
+- **Events captured before an identify or a merge keep the old properties.** If an anonymous user identifies later, their anonymous events still have the properties from before they identified. For example, `person.properties.email` is empty on those events. `events.person_id` points to the current person, so use current person properties if you need the identified values.
+- **Join on `person_id`, not `distinct_id`.** One person can have many distinct IDs, for example one for each device. If you join your own tables on `distinct_id`, you can miss events or count one person more than once.
+- **Warehouse properties are not on past events.** A warehouse property is written to the person profile. Events captured before the sync do not have it in `person.properties`. Use `pdi.person.properties` to see it on past events.
 
 ### `groups`
 

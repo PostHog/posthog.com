@@ -123,12 +123,6 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
         label: 'PostHog Slack',
         link: '/docs/slack',
         icon: <Icons.IconAtSign className="size-4 text-purple" />,
@@ -892,6 +886,14 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/photobooth',
             iconName: 'photobooth' as AppIconName,
             customIcon: null,
+        },
+        {
+            label: 'Hoggie tier list',
+            link: '/tier-list',
+            iconName: null,
+            customIcon: (
+                <img src="https://brand.posthog.com/hoggies/judge.png" alt="" className="size-12 object-contain" />
+            ),
         },
         {
             label: 'HogPaint',

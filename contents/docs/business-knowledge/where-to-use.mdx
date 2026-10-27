@@ -1,0 +1,34 @@
+---
+title: Where to use Business Knowledge
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+PostHog AI, Support, and MCP clients all read the same sources. A source is used only once it's [ready](/docs/business-knowledge/ai-data-processing).
+
+## PostHog AI
+
+[PostHog AI](/docs/posthog-ai) searches your sources when a question is about your own product, policies, or team. Questions about PostHog itself still go to the PostHog docs.
+
+Answers cite the source name, so you can see where a fact came from. When one passage isn't enough, PostHog AI reads more of the document around it.
+
+## Support
+
+The Support [AI agent](/docs/support/ai-agent) drafts ticket replies from your sources. You can't turn it on until at least one source is ready.
+
+[Learn from support](/docs/business-knowledge/learn-from-support) works the other way: your team's replies to resolved tickets become new sources.
+
+## MCP
+
+The [PostHog MCP server](/docs/model-context-protocol) gives any MCP client tools to search and manage your sources. It tells agents to check Business Knowledge before they answer a question about your company.
+
+| Scope | What the tools do |
+| --- | --- |
+| `business_knowledge:read` | Search sources, read the text around a match, get sources and libraries, and search or read files in selected GitHub repositories |
+| `business_knowledge:write` | Add text and URL sources, update a source, and create, update, or delete libraries |
+
+Upload files and delete sources in PostHog. MCP can't do either. See the [MCP tools reference](/docs/model-context-protocol/tools) for each tool.
