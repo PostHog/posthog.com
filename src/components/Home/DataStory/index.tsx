@@ -20,28 +20,28 @@ const STEPS = [
         title: 'Get the data in',
         description: (
             <>
-                PostHog collects events, replays, errors, surveys, and logs from your product, and aggregates revenue,
+                PostHog ingests product signals from users and AI agents, and combines it with revenue,
                 CRM, and support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
             </>
         ),
         Scene: EventBoard,
     },
     {
-        title: 'Query the data with your agent',
+        title: 'Query the data with your agent (or use ours)',
         description:
-            'Every source attaches to the same person. Ask PostHog AI or your own agent why a customer churned, and it follows the trail from the refund to the error to the replay.',
+            'PostHog builds a profile of every user and team. Ask PostHog AI, or your own agent, why a customer churned, and it follows the trail to find the answer.',
         Scene: QueryScene,
     },
     {
         title: 'Give the data to your agent to act on',
         description:
-            'Scouts watch your data overnight and file reports in your Inbox. Each report carries the replays, errors, and revenue behind it, so your agent can pick it up and start.',
+            '[Scouts](/docs/self-driving/scouts) watch your product 24/7 and file reports in your [Inbox](/docs/self-driving/inbox). Each report carries the context behind it, so your agent can pick it up and start.',
         Scene: ActScene,
     },
     {
         title: 'Let PostHog self-drive',
         description:
-            'When a report is ready to fix, PostHog writes the pull request on its own. You review and merge. After the change ships, PostHog checks whether it worked, and any new problem starts the loop again in step 1.',
+            'If you enable [self-driving](/self-driving), when a report is ready, PostHog writes the pull request for you. You review and merge. After the change ships, PostHog checks whether it worked. Any new problem starts the loop again.',
         Scene: SelfDriveScene,
     },
 ]
@@ -51,9 +51,8 @@ export const StepsSection = (): JSX.Element => (
         <h2>
             How PostHog helps you{' '}
             <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">
-                usage-informed product
+                build better products
             </Emphasis>{' '}
-            with PostHog
         </h2>
         {STEPS.map(({ title, description, Scene }, index) => (
             <StepFrame key={title} number={index + 1} title={title} description={description}>
