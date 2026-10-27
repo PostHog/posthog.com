@@ -103,7 +103,7 @@ OpenReplay offers three ways to deploy, plus a custom enterprise option:
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_03_12_T19_18_34_436_Z_d79ea5531f.png)
 
-[Sentry](/blog/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
+[Sentry](/compare/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
 
 Session replay was added in 2023 and is tightly integrated with Sentry's error data: when an exception fires, the session replay for the affected user is automatically linked, giving you the full interaction context without any additional investigation.
 

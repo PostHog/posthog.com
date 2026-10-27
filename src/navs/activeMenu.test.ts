@@ -64,13 +64,11 @@ describe('getActiveMenuSection', () => {
 })
 
 describe('the real docs nav', () => {
-    // Self-driving is the single home for its products (Slack, Desktop, MCP, CLI, Web) — the
+    // Self-driving is the single home for its products (Slack, MCP, CLI, Web) — the
     // standalone sections for those products are flat drop-down links with no sidebar of their own.
     test('product pages always use the Self-driving sidebar', () => {
         assert.equal(sectionFor('/docs/slack'), 'Self-driving')
         assert.equal(sectionFor('/docs/slack/setup'), 'Self-driving')
-        assert.equal(sectionFor('/docs/posthog-desktop'), 'Self-driving')
-        assert.equal(sectionFor('/docs/posthog-desktop/pricing'), 'Self-driving')
         assert.equal(sectionFor('/docs/model-context-protocol'), 'Self-driving')
         assert.equal(sectionFor('/docs/model-context-protocol/tools'), 'Self-driving')
         assert.equal(sectionFor('/docs/cli'), 'Self-driving')

@@ -238,7 +238,7 @@ To update the list, you can upload another CSV to add more users. You can also r
 
 **Upload limits:**
 
-CSV uploads are limited to **50 MB** and **1,000,000 rows**. Files exceeding either limit are rejected, and no cohort is created or modified. If you have a larger file, split it into smaller parts and upload them one at a time — uploading a CSV to an existing static cohort adds to the list rather than replacing it.
+CSV uploads are limited to **20 MB** and **1,000,000 rows**. Files exceeding either limit are rejected, and no cohort is created or modified. If you have a larger file, split it into smaller parts and upload them one at a time. Uploading a CSV to an existing static cohort adds to the list rather than replacing it.
 
 Self-hosted users can adjust these limits using the `COHORT_CSV_UPLOAD_MAX_BYTES` and `COHORT_CSV_UPLOAD_MAX_ROWS` environment variables.
 

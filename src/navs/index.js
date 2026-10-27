@@ -52,13 +52,6 @@ export const dataPipelines = {
             featured: true,
         },
         {
-            name: 'PostHog Desktop',
-            url: '/docs/data-pipelines/surfaces/desktop',
-            icon: 'IconCode',
-            color: 'orange',
-            featured: true,
-        },
-        {
             name: 'API',
             url: '/docs/data-pipelines/surfaces/api',
             icon: 'IconBrackets',
@@ -1117,6 +1110,10 @@ export const handbookSidebar = [
                     {
                         name: 'Collaborating with PMs',
                         url: '/handbook/marketing/collaborating-with-pms',
+                    },
+                    {
+                        name: 'Sales enablement',
+                        url: '/handbook/marketing/sales-enablement',
                     },
                     {
                         name: 'Incident comms',
@@ -2453,141 +2450,6 @@ export const companyMenu = {
     ],
 }
 
-// PostHog Desktop docs nav — nested inside Self-driving
-const posthogDesktopNav = [
-    {
-        name: 'Setup',
-    },
-    {
-        name: 'Quick Tour',
-        url: '/docs/posthog-desktop',
-        icon: 'IconRewindPlay',
-        color: 'orange',
-        featured: true,
-    },
-    {
-        name: 'Download',
-        url: '/docs/posthog-desktop/download-posthog-desktop',
-        icon: 'IconDownload',
-        color: 'blue',
-        featured: true,
-    },
-    {
-        name: 'Core workflow',
-    },
-    {
-        name: 'Spaces',
-        url: '/docs/posthog-desktop/spaces',
-        icon: 'IconDashboard',
-        color: 'salmon',
-    },
-    {
-        name: 'Canvases',
-        url: '/docs/posthog-desktop/canvases',
-        icon: 'IconGraph',
-        color: 'purple',
-    },
-    {
-        name: 'Tasks',
-        url: '/docs/posthog-desktop/tasks',
-        icon: 'IconListCheck',
-        color: 'blue',
-    },
-    {
-        name: 'PostHog integration',
-        url: '/docs/posthog-desktop/posthog-integration',
-        icon: 'IconSparkles',
-        color: 'seagreen',
-    },
-    {
-        name: 'Code review',
-        url: '/docs/posthog-desktop/code-review',
-        icon: 'IconCode',
-        color: 'blue',
-    },
-    {
-        name: 'Git + GitHub integration',
-        url: '/docs/posthog-desktop/git-github-integration',
-        icon: 'IconGitBranch',
-        color: 'green',
-    },
-    {
-        name: 'Customize PostHog Desktop',
-    },
-    {
-        name: 'Any model and any harness',
-        url: '/docs/posthog-desktop/use-any-model-and-harness',
-        icon: 'IconGraduationCap',
-        color: 'green',
-    },
-    {
-        name: 'Skills',
-        url: '/docs/posthog-desktop/skills',
-        icon: 'IconMagic',
-        color: 'purple',
-    },
-    {
-        name: 'MCP servers',
-        url: '/docs/posthog-desktop/mcp-servers',
-        icon: 'IconServer',
-        color: 'blue',
-    },
-    {
-        name: 'Settings',
-        url: '/docs/posthog-desktop/settings',
-        icon: 'IconGear',
-        color: 'seagreen',
-    },
-    {
-        name: 'Run and automate',
-    },
-    {
-        name: 'Environments',
-        url: '/docs/posthog-desktop/environments',
-        icon: 'IconServer',
-        color: 'purple',
-    },
-    {
-        name: 'Worktrees',
-        url: '/docs/posthog-desktop/worktrees',
-        icon: 'IconGitRepository',
-        color: 'orange',
-    },
-    {
-        name: 'Cloud runs',
-        url: '/docs/posthog-desktop/cloud-runs',
-        icon: 'IconCloud',
-        color: 'blue',
-    },
-    {
-        name: 'Command Center',
-        url: '/docs/posthog-desktop/command-center',
-        icon: 'IconGridMasonry',
-        color: 'orange',
-    },
-    {
-        name: 'Resources',
-    },
-    {
-        name: 'Pricing',
-        url: '/docs/posthog-desktop/pricing',
-        icon: 'IconPiggyBank',
-        color: 'green',
-    },
-    {
-        name: 'Contribute',
-        url: '/docs/posthog-desktop/open-source',
-        icon: 'IconGithub',
-        color: 'seagreen',
-    },
-    {
-        name: 'Community',
-        url: '/docs/posthog-desktop/community',
-        icon: 'IconPeople',
-        color: 'purple',
-    },
-]
-
 // PostHog Slack docs nav — nested inside Self-driving
 const posthogSlackNav = [
     {
@@ -2748,11 +2610,6 @@ export const docsMenu = {
                 {
                     name: 'CLI',
                     url: '/docs/cli',
-                },
-                {
-                    name: 'Desktop',
-                    url: '/docs/posthog-desktop',
-                    children: nestedNav(posthogDesktopNav),
                 },
                 {
                     name: 'Concepts',
@@ -4538,13 +4395,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/product-analytics/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'API',
                     url: '/docs/product-analytics/surfaces/api',
                     icon: 'IconBrackets',
@@ -4862,13 +4712,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/web-analytics/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'API',
                     url: '/docs/web-analytics/surfaces/api',
                     icon: 'IconBrackets',
@@ -5139,13 +4982,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/session-replay/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'API',
                     url: '/docs/session-replay/surfaces/api',
                     icon: 'IconBrackets',
@@ -5250,7 +5086,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Community questions',
-                    url: '/forum/t/questions?tag=session-replay',
+                    url: '/forum/t/ask-the-hogs?tag=session-replay',
                     icon: 'IconMessage',
                     color: 'blue',
                     external: true,
@@ -5477,13 +5313,6 @@ export const docsMenu = {
                     url: '/docs/feature-flags/surfaces/api',
                     icon: 'IconBrackets',
                     color: 'seagreen',
-                    featured: true,
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/feature-flags/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -5852,12 +5681,6 @@ export const docsMenu = {
                     url: '/docs/experiments/surfaces/api',
                     icon: 'IconBrackets',
                     color: 'blue',
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/experiments/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
                 },
                 {
                     name: 'Metrics',
@@ -6305,13 +6128,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/error-tracking/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'PostHog CLI',
                     url: '/docs/error-tracking/surfaces/cli',
                     icon: 'IconTerminal',
@@ -6539,13 +6355,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/surveys/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'Questions and targeting',
                 },
                 {
@@ -6628,16 +6437,10 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/business-knowledge/start',
+                    url: '/docs/business-knowledge/start-here',
                     icon: 'IconRocket',
                     featured: true,
                     color: 'purple',
-                },
-                {
-                    name: 'Before answers',
-                    url: '/docs/business-knowledge/requirements',
-                    icon: 'IconListCheck',
-                    color: 'orange',
                 },
                 {
                     name: 'Add and manage sources',
@@ -6646,13 +6449,25 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Where to use',
+                    name: 'AI data processing',
+                    url: '/docs/business-knowledge/ai-data-processing',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                 },
                 {
                     name: 'GitHub repositories',
                     url: '/docs/business-knowledge/github',
                     icon: 'IconGithub',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'PostHog AI, Support, MCP',
+                    url: '/docs/business-knowledge/where-to-use',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
                     name: 'Learn from support',
@@ -6884,13 +6699,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/data-warehouse/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'API',
                     url: '/docs/data-warehouse/surfaces/api',
                     icon: 'IconBrackets',
@@ -7032,69 +6840,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pocket guide',
-                    url: '/docs/data-warehouse/pocket-guide',
-                    children: [
-                        {
-                            name: 'Features & revenue',
-                            url: '/docs/data-warehouse/pocket-guide/features-drive-revenue',
-                        },
-                        {
-                            name: 'Onboarding conversion',
-                            url: '/docs/data-warehouse/pocket-guide/onboarding-conversion',
-                        },
-                        {
-                            name: 'Upsell-ready accounts',
-                            url: '/docs/data-warehouse/pocket-guide/upsell-ready-accounts',
-                        },
-                        {
-                            name: 'Pre-cancellation behavior',
-                            url: '/docs/data-warehouse/pocket-guide/pre-cancellation-behavior',
-                        },
-                        {
-                            name: 'Tickets & churn',
-                            url: '/docs/data-warehouse/pocket-guide/support-tickets-churn',
-                        },
-                        {
-                            name: 'ARR vs engagement',
-                            url: '/docs/data-warehouse/pocket-guide/value-vs-engagement',
-                        },
-                        {
-                            name: 'Channels & retention',
-                            url: '/docs/data-warehouse/pocket-guide/acquisition-channels-retention',
-                        },
-                        {
-                            name: 'Lead scoring',
-                            url: '/docs/data-warehouse/pocket-guide/lead-scoring',
-                        },
-                        {
-                            name: 'Feature revenue impact',
-                            url: '/docs/data-warehouse/pocket-guide/feature-revenue-impact',
-                        },
-                        {
-                            name: 'Foundations',
-                            url: '/docs/data-warehouse/pocket-guide/warehouse-foundations',
-                        },
-                        {
-                            name: 'Revenue',
-                            url: '/docs/data-warehouse/pocket-guide/revenue-metrics',
-                        },
-                        {
-                            name: 'Conversion',
-                            url: '/docs/data-warehouse/pocket-guide/conversion-metrics',
-                        },
-                        {
-                            name: 'Activation',
-                            url: '/docs/data-warehouse/pocket-guide/activation-metrics',
-                        },
-                        {
-                            name: 'Usage',
-                            url: '/docs/data-warehouse/pocket-guide/product-usage-metrics',
-                        },
-                        {
-                            name: 'Dimensions',
-                            url: '/docs/data-warehouse/pocket-guide/dimension-tables',
-                        },
-                    ],
+                    url: '/learn/warehouse',
                     icon: 'IconBook',
                     color: 'blue',
                 },
@@ -7550,13 +7296,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog Desktop',
-                    url: '/docs/ai-observability/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'Skills',
                     url: '/docs/ai-observability/skills',
                     icon: 'IconMagicWand',
@@ -7903,13 +7642,6 @@ export const docsMenu = {
                     url: '/docs/mcp-analytics/surfaces/mcp',
                     icon: 'IconPlug',
                     color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/mcp-analytics/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -8386,13 +8118,6 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'PostHog Desktop',
-            icon: 'IconCoffee',
-            color: 'yellow',
-            url: '/docs/posthog-desktop',
-            description: 'AI coding environment with deep PostHog integration.',
-        },
-        {
             name: 'PostHog Slack',
             icon: 'IconAtSign',
             color: 'purple',
@@ -8681,13 +8406,6 @@ export const docsMenu = {
                     url: '/docs/logs/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/logs/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -9024,13 +8742,6 @@ export const docsMenu = {
                     url: '/docs/endpoints/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'PostHog Desktop',
-                    url: '/docs/endpoints/surfaces/desktop',
-                    icon: 'IconCode',
-                    color: 'green',
                     featured: true,
                 },
                 {

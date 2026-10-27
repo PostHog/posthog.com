@@ -9,7 +9,7 @@ availability:
 sourceId: Okta
 ---
 
-The Okta connector can link users, groups, applications, logs (audit events), group rules, and user types to PostHog.
+The Okta connector can link users, groups, applications, logs (audit events), group rules, user types, group membership, application assignments, and MFA factors to PostHog.
 
 To link Okta:
 
@@ -37,14 +37,18 @@ Once the syncs are complete, you can start using Okta data in PostHog.
 
 The following schemas are available:
 
-| Schema         | Sync mode                 | Description                                                                |
-| -------------- | ------------------------- | -------------------------------------------------------------------------- |
-| `users`        | Incremental               | Okta user accounts                                                         |
-| `groups`       | Incremental               | Okta groups                                                                |
-| `applications` | Incremental               | Okta applications and SSO integrations                                     |
-| `logs`         | Incremental (append-only) | Okta System Log audit events. Only syncs the last 90 days on initial sync. |
-| `group_rules`  | Full refresh              | Group membership rules                                                     |
-| `user_types`   | Full refresh              | Custom user type definitions                                               |
+| Schema               | Sync mode                 | Description                                                                |
+| -------------------- | ------------------------- | -------------------------------------------------------------------------- |
+| `users`              | Incremental               | Okta user accounts                                                         |
+| `groups`             | Incremental               | Okta groups                                                                |
+| `applications`       | Incremental               | Okta applications and SSO integrations                                     |
+| `logs`               | Incremental (append-only) | Okta System Log audit events. Only syncs the last 90 days on initial sync. |
+| `group_rules`        | Full refresh              | Group membership rules                                                     |
+| `user_types`         | Full refresh              | Custom user type definitions                                               |
+| `group_members`      | Full refresh              | Users belonging to each group                                              |
+| `application_users`  | Full refresh              | Users assigned to each application                                         |
+| `application_groups` | Full refresh              | Groups assigned to each application                                        |
+| `user_factors`       | Full refresh              | MFA factors enrolled by each user                                          |
 
 ## Configuration
 
