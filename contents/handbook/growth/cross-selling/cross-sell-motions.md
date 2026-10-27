@@ -223,7 +223,7 @@ What alerts would be helpful to have that would indicate good cross sell opportu
 
 ## **Discovery through conversation**
 
-Effective [discovery](https://posthog.com/handbook/customer-success/getting-to-know-your-customers) focuses on understanding customer challenges rather than pushing products.
+Effective [discovery](https://posthog.com/handbook/customer-success/getting-started-with-customers#3-your-first-call) focuses on understanding customer challenges rather than pushing products.
 
 ### Example questions to ask
 

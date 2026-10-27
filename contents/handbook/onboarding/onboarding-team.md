@@ -87,6 +87,6 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 -   Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
 -   Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) and [Sales & CS Trainings](https://app.buildbetter.app/folders/18024) BuildBetter folders.
 -   Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/customer-success/new-hire-onboarding-exercise).
--   Go through the [PostHog curriculum](https://posthog.com/handbook/customer-success/new-hire-onboarding#posthog-curriculum).
+-   Go through the [PostHog curriculum](https://posthog.com/handbook/customer-success/new-hire-onboarding#learning-posthog).
 -   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend/watch [Product AMAs](https://drive.google.com/drive/u/0/folders/0ANaJ7VgQLiw-Uk9PVA) that are scheduled periodically.
 -   Take [CoachHog](https://coachhog.lovable.app/) for a spin!
