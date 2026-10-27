@@ -20,7 +20,6 @@ export const getProductInputs = (product: any, analyticsData: ProductInputs = {}
         return { hours: product.hours ?? 0, modelSpend: product.modelSpend ?? (product.volume ?? 0) / 100 }
     return {
         volume: product.volume ?? product.freeLimit ?? product.slider?.min ?? 0,
-        ...(product.type === 'ai_observability' && { offlineEvalMetrics: product.offlineEvalMetrics ?? 0 }),
         ...(product.addonSliders && {
             addons: Object.fromEntries(
                 product.addonSliders.map((addon: any) => [
@@ -58,10 +57,6 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
     const tiers = product.billingData?.plans.find((plan: any) => plan.tiers)?.tiers
     let volume = inputs.volume ?? 0
     let extraCost = 0
-    if (product.type === 'ai_observability') {
-        // Volume remains the combined event count, including in existing share links.
-        inputs = { ...inputs, offlineEvalMetrics: Math.min(inputs.offlineEvalMetrics ?? 0, volume) }
-    }
     if (product.type === 'product_analytics') {
         volume = Object.values(inputs.types).reduce((sum: number, value: any) => sum + value.volume, 0)
         const enhancedTiers = product.billingData?.addons

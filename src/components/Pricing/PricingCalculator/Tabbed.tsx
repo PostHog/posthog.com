@@ -150,7 +150,6 @@ export const TabContent = ({
     const freeAmount = freeLimit || slider?.min
     const unitLabel = pluralizeUnit(billingData.unit, 2)
     const isAIObservability = type === 'ai_observability'
-    const offlineEvalMetrics = activeProduct.offlineEvalMetrics ?? 0
 
     return (
         <>
@@ -186,10 +185,10 @@ export const TabContent = ({
                                     <UsageSliderHeader unit={unitLabel} />
                                     <div className="divide-y divide-primary border-t border-primary">
                                         <UsageSliderRow
-                                            label={isAIObservability ? 'AIO events' : unitLabel}
+                                            label={unitLabel}
                                             subtitle={
                                                 isAIObservability
-                                                    ? 'Includes online evaluations'
+                                                    ? 'Includes online evaluations and offline evaluation metric results'
                                                     : startsAt
                                                     ? `$${startsAt} each${afterFirstFree(
                                                           freeAmount,
@@ -198,36 +197,12 @@ export const TabContent = ({
                                                       )}`
                                                     : undefined
                                             }
-                                            value={isAIObservability ? volume - offlineEvalMetrics : volume}
-                                            onChange={(next) =>
-                                                setVolume(type, isAIObservability ? next + offlineEvalMetrics : next)
-                                            }
+                                            value={volume}
+                                            onChange={(next) => setVolume(type, next)}
                                             marks={slider.marks}
                                             min={0}
                                             max={slider.max}
                                         />
-                                        {isAIObservability && (
-                                            <UsageSliderRow
-                                                label="Offline evaluation metrics"
-                                                value={offlineEvalMetrics}
-                                                onChange={(next) =>
-                                                    setProduct(
-                                                        type,
-                                                        priceProductInputs(
-                                                            activeProduct,
-                                                            {
-                                                                volume: volume - offlineEvalMetrics + next,
-                                                                offlineEvalMetrics: next,
-                                                            },
-                                                            0
-                                                        )
-                                                    )
-                                                }
-                                                marks={slider.marks}
-                                                min={0}
-                                                max={slider.max}
-                                            />
-                                        )}
                                         <Addons
                                             activeProduct={activeProduct}
                                             addons={addons}
@@ -237,11 +212,6 @@ export const TabContent = ({
                                             hideHeading
                                         />
                                     </div>
-                                    {isAIObservability && (
-                                        <p className="m-0 border-t border-primary py-3 text-xs font-bold text-secondary">
-                                            {formatCompact(volume)} events/month combined
-                                        </p>
-                                    )}
                                     {costByTier && (
                                         <div className="pr-1.5 pt-3 border-t border-primary">
                                             <button
@@ -626,7 +596,6 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                 observations: undefined,
                 hours: undefined,
                 modelSpend: undefined,
-                offlineEvalMetrics: undefined,
             })
             const addonTypes = new Set((product.billingData?.addons || []).map((addon) => addon.type))
             setProductAddons((addons) =>
