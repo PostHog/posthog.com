@@ -31,7 +31,7 @@ So naturally, we decided to fight fire with fire 🔥. If self-driving agents ar
 
 We're proud to be open source and use [GitHub to host our monorepo](https://github.com/PostHog/posthog). This means most of our CI-related data lives on GitHub and is queryable from there. But querying this data frequently means we hit rate limits and, in any case, it would be really wasteful to constantly ask GitHub for mostly unchanging data (think last week's merged PRs and completed workflow runs). Above all, PostHog is a data company! So we decided to get CI/CD data into our own product and see what features and ideas we could unlock from there.
 
-For this, we used our data warehouse [GitHub source](/docs/cdp/sources/github), which continuously syncs repository data. Specifically, we were interested in pull request, workflow runs, and workflow jobs data.
+To accomplish this, we rely on our data warehouse [GitHub source](/docs/cdp/sources/github), which continuously syncs repository data. Specifically, we were interested in pull request, workflow runs, and workflow jobs data.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_22_at_16_39_44_2x_fca9283bfb.png"
@@ -57,7 +57,7 @@ In building this, we were able to benefit from the fact that other PostHog produ
 
 Under the hood, the Engineering Analytics product is basically a curated view into the surfaces the DevEx team cares about: our CI system, the merge queue, and tests.
 
-Besides being a useful place for humans (i.e. any interested PostHog engineer) to quickly get a general sense for CI health, we built Engineering Analytics to have MCP support from the start so that our agents could query for specific data when investigating CI troubles or looking for optimization opportunities. This way, agents don't need to rely on the GitHub API and we can better control the data and agentic flows here. We also leverage specific [skills](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills) for agentic steering. For example, the [investigating-ci-failures](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills/investigating-ci-failures) skill helps steer an agent in finding the commit that broke a particular CI job, and then check whether a later commit fixed it.
+Besides being a useful place for humans (i.e. PostHog engineers) to quickly get a general sense for CI health, we included MCP support from the start so our agents could query for specific data when investigating CI troubles or looking for optimization opportunities. This way, agents don't need to rely on the GitHub API and we can better control the data and agentic flows here. We also leverage specific [skills](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills) for agentic steering. For example, the [investigating-ci-failures](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills/investigating-ci-failures) skill helps steer an agent in finding the commit that broke a particular CI job, and then check whether a later commit fixed it.
 
 ## Step 3: Make it self-driving
 
@@ -73,9 +73,9 @@ We decided to start with three deterministic detectors that run over the ingeste
 
 These detectors led to real fixes, like:
 
-1. [Fixing a failing CI](https://github.com/PostHog/posthog/pull/95630) - a WebKit Storybook shard was failing on every push to our default branch.
-2. [Deflaking a Rust test job](https://github.com/PostHog/posthog/pull/75826) - the job flaked twice in one week (two tests were racing over shared tracing state).
-3. [Speeding up a check on every pull request](https://github.com/PostHog/posthog/pull/95082) - a workflow job installed the whole workspace before a dry run that didn't really need any dependencies. After the fix, the whole job takes 33 seconds (down from 51 seconds).
+1. [Fixing a failing CI](https://github.com/PostHog/posthog/pull/95630): a WebKit Storybook shard was failing on every push to our default branch.
+2. [Deflaking a Rust test job](https://github.com/PostHog/posthog/pull/75826): the job flaked twice in one week (two tests were racing over shared tracing state).
+3. [Speeding up a check on every pull request](https://github.com/PostHog/posthog/pull/95082): a workflow job installed the whole workspace before a dry run that didn't really need any dependencies. After the fix, the whole job takes 33 seconds (down from 51 seconds).
 
 We've shipped more than a dozen related improvements since.
 
@@ -91,7 +91,7 @@ Finally, once we had GitHub and related CI data ingested, the team has come up w
 
 ## How you can set up a self-improving CI yourself
 
-We continue to shape Engineering Analytics as an internal beta product for now, but you can still get a lot of value out of your CI data today by using the PostHog data warehouse as an ingestion source and combining it with MCP and signals + scouts.
+As we continue to shape Engineering Analytics as an internal beta product, you can still get a lot of value out of your CI data today by using the PostHog data warehouse as an ingestion source and combining it with MCP and signals + scouts.
 
 1. **Get your CI data into the warehouse.** Link the [GitHub source](/docs/cdp/sources/github) and sync the pull request, workflow run, and workflow job [tables](/docs/cdp/sources/github#supported-tables). Add [webhooks](/docs/cdp/sources/github#webhooks) to keep runs and jobs up to date in real time.
 
