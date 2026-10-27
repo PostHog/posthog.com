@@ -57,7 +57,7 @@ export default function AllProductsRatesModal({
             <ScrollArea>
                 <div className="p-5 max-h-[min(70vh,720px)]">
                     <p className="text-[15px] text-secondary mb-4">
-                        Rates below apply after the monthly free allowance. Some products share an allowance.
+                        Every product has its own monthly free tier. Rates below are what you pay per unit after it.
                     </p>
 
                     <div className="overflow-x-auto">
