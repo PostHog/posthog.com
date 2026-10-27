@@ -16,8 +16,8 @@ tableOfContents: [
         depth: 1,
     },
     {
-        url: 'add-the-middleware',
-        value: 'Add the middleware',
+        url: 'add-the-proxy-file',
+        value: 'Add the proxy file',
         depth: 1,
     },
     {
@@ -132,11 +132,13 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 
 </Step>
 
-<Step title="Add the middleware" badge="recommended">
+<Step title="Add the proxy file" badge="recommended">
 
-The middleware seeds an identity cookie on first visit so client and server share the same user, and optionally proxies API requests through your domain.
+`postHogMiddleware` seeds an identity cookie on the first visit, so the client and the server share the same user. It can also proxy PostHog API requests through your domain.
 
-```ts file=middleware.ts
+Create `proxy.ts` in your project root, at the same level as your `app` or `pages` folder:
+
+```ts file=proxy.ts
 import { postHogMiddleware } from '@posthog/next'
 
 export default postHogMiddleware({ proxy: true })
@@ -146,9 +148,50 @@ export const config = {
 }
 ```
 
+Next.js 16 renamed the `middleware.ts` file convention to `proxy.ts`. On Next.js 15 and earlier, put the same code in `middleware.ts`. Next.js 16 still runs `middleware.ts`, but the build shows a deprecation warning. A named export also works: `export const proxy = postHogMiddleware({ proxy: true })`.
+
 Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`, which helps avoid ad blockers. You can customize the path prefix by passing `proxy: { pathPrefix: '/analytics' }` instead.
 
+When you set `proxy`, also add `skipTrailingSlashRedirect` to your Next.js config:
+
+```ts file=next.config.ts
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+    skipTrailingSlashRedirect: true,
+}
+
+export default nextConfig
+```
+
+PostHog API paths end with a slash, such as `/ingest/e/` and `/ingest/flags/`. Without this setting, Next.js answers these requests with a `308` redirect before the proxy forwards them. This adds a round trip to each request.
+
 > **Note:** Middleware requires a server runtime and is not available with `output: 'export'` (fully static sites). If you can't use middleware, you can set up a [reverse proxy](/docs/advanced/proxy) separately to route traffic through your domain.
+
+### Use with an auth middleware
+
+If your app already has an auth middleware, such as next-auth's `withAuth`, call it first and pass its response to `postHogMiddleware`. Do not call `postHogMiddleware` inside the auth middleware. If you do, requests to `/ingest` from logged-out users redirect to your login page, and PostHog does not set the identity cookie.
+
+```ts file=proxy.ts
+import { NextResponse, type NextFetchEvent, type NextRequest } from 'next/server'
+import { withAuth, type NextRequestWithAuth } from 'next-auth/middleware'
+import { postHogMiddleware } from '@posthog/next'
+
+const auth = withAuth({ pages: { signIn: '/login' } })
+
+export async function proxy(request: NextRequest, event: NextFetchEvent) {
+    const authResponse = await auth(request as NextRequestWithAuth, event)
+    // withAuth is typed to return a Response, so keep only a NextResponse
+    const response = authResponse instanceof NextResponse ? authResponse : undefined
+    return postHogMiddleware({ proxy: true, response })(request)
+}
+
+export const config = {
+    matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico).*)'],
+}
+```
+
+`postHogMiddleware` forwards requests on the proxy path before it uses `response`, so an auth redirect does not block them. For all other requests, it adds the identity cookie to the auth response. Keep your login page inside the `matcher`, so logged-out users also get the cookie.
 
 </Step>
 
@@ -343,7 +386,7 @@ Pass `clientOptions.tracing_headers` to customize the hostnames that receive the
 
 If your app requires consent before setting cookies, disable anonymous cookie seeding in middleware:
 
-```ts file=middleware.ts
+```ts file=proxy.ts
 export default postHogMiddleware({
     proxy: true,
     seedAnonymousCookie: false,
@@ -360,7 +403,7 @@ Then initialize the client with capture disabled until you opt in:
 
 Pass an object to `proxy` to customize the ingest path or host:
 
-```ts file=middleware.ts
+```ts file=proxy.ts
 export default postHogMiddleware({
     proxy: {
         pathPrefix: '/analytics',

@@ -10,7 +10,7 @@ availability:
 
 A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
 
-Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
+Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/getting-started/install), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
 
 Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
 
@@ -25,6 +25,8 @@ For most companies, we recommend creating **three projects**:
 3. Production - for all your production data (e.g. your live website/app)
 
 This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
+
+Usage from every project in your organization counts toward one bill and one free allowance, so extra projects don't give you extra free usage. The free plan includes one project, so you need a paid plan to create separate development and staging projects. See [billing common questions](/docs/billing/common-questions#do-projects-share-usage-and-free-allowances) for details.
 
 We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
 

@@ -149,6 +149,7 @@ export default function UpdateWrapper({
                     socialSharing,
                     profiles,
                     likes,
+                    tags,
                 },
             },
         } = await fetch(
@@ -177,6 +178,7 @@ export default function UpdateWrapper({
             dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
             social: { ...socialDefaults, ...(socialSharing ? JSON.parse(socialSharing) : {}) },
             author: profiles?.data?.[0] || undefined,
+            tags: tags || [],
         })
     }
 

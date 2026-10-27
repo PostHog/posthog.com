@@ -487,6 +487,58 @@
         --bg: 253 253 248;
     }
 
+    .light[data-wallpaper='keyboard-garden'] [data-app='AppWindow'] {
+        --bg: 211 218 198; /* #d3dac6 */
+    }
+
+    .light[data-wallpaper='keyboard-garden'] #taskbar {
+        --bg: 203 213 185; /* #cbd5b9 */
+    }
+
+    .light[data-wallpaper='hogzilla'] [data-app='AppWindow'] {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='hogzilla'] #taskbar {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='startup-monopoly'] [data-app='AppWindow'] {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
+    .light[data-wallpaper='startup-monopoly'] #taskbar {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
+    .light[data-wallpaper='office-party'] [data-app='AppWindow'] {
+        --bg: 223 222 212; /* #dfded4 */
+    }
+
+    .light[data-wallpaper='office-party'] #taskbar {
+        --bg: 223 222 212; /* #dfded4 */
+    }
+
+    .light[data-wallpaper='keyboard-garden'] .reader-panel-overlay {
+        --bg: 211 218 198; /* #d3dac6 */
+    }
+
+    .light[data-wallpaper='hogzilla'] .reader-panel-overlay {
+        --bg: 231 231 227; /* #e7e7e3 */
+    }
+
+    .light[data-wallpaper='startup-monopoly'] .reader-panel-overlay {
+        --bg: 221 222 213; /* #ddded5 */
+    }
+
+    .light[data-wallpaper='office-party'] .reader-panel-overlay {
+        --bg: 223 222 212; /* #dfded4 */
+    }
+
+    .dark .reader-panel-overlay[data-scheme='secondary'] {
+        --bg: 45 46 55;
+    }
+
     .dark [data-scheme='primary'] {
         --bg: 30 31 35;
         --accent: 45 46 55;
@@ -3417,7 +3469,8 @@ html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizar
     [data-app='AppWindow'][data-focused] [data-app='ReaderView'] button[aria-label='Open navigation'],
     [data-app='AppWindow'][data-focused] .app-scrollbar,
     [data-app='AppWindow'][data-focused] .scrollarea-fade,
-    [data-app='AppWindow'][data-focused] .scrollarea-fade-x {
+    [data-app='AppWindow'][data-focused] .scrollarea-fade-x,
+    [data-app='AppWindow'][data-focused]:has(.legal-mode) [role='tablist'] {
         display: none !important;
     }
 }

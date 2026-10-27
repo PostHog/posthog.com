@@ -5,7 +5,7 @@ import { volumeById } from '../constants/pocketGuides'
 export default function usePocketGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/learn/[^/]+/pocket-guide/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -22,7 +22,7 @@ export default function usePocketGuideCounts(): Record<string, number> {
 
     const counts: Record<string, number> = {}
     for (const node of data?.guides?.nodes || []) {
-        const [, , volume, guide] = node.fields.slug.split('/')
+        const [, , volume, , guide] = node.fields.slug.split('/')
         // Skip sibling SKILL.md files, `_`-prefixed starters, and untitled drafts.
         if (!volume || guide?.startsWith('_') || !node.frontmatter?.title) {
             continue

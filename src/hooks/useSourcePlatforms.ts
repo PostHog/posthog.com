@@ -18,7 +18,7 @@ export default function useSourcePlatforms() {
         () =>
             allPostHogSource.nodes.map((node: any) => ({
                 label: node.name,
-                url: `/docs/data-warehouse/sources/${node.slug}`,
+                url: `/docs/data-pipelines/sources/${node.slug}`,
                 image: node.icon_url,
             })),
         [allPostHogSource]

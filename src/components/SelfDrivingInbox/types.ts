@@ -54,7 +54,7 @@ export const UNCATEGORIZED = 'Other'
 export interface InboxTemplate {
     /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */
     category: string
-    /** Route to the guide page, e.g. /pocket-guides/self-driving/silent-failure-core-action */
+    /** Route to the guide page, e.g. /docs/self-driving/pocket-guide/silent-failure-core-action */
     url: string
     /** The template's own title, e.g. "Catch a core action failing without errors" */
     templateTitle: string

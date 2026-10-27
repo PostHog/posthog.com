@@ -18,51 +18,55 @@ You can also give a scanner its own **credit limit**, so it can never spend more
 
 ## Ways to start
 
-Click **New scanner** on the Replay Vision page. Depending on your project, the first screen is either a grid of templates with a **Set up with AI** box below it, or a **What should the scanner find out?** page with a goal box, a monthly budget, and one-click starting points. Both offer the same three ways in: describe a goal, start from a common question, or **Create from scratch**.
+Click **New scanner** on the Replay Vision page. The **What should the scanner find out?** page offers three ways in: describe a goal, click a common starting point, or **Create from scratch**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_flow_7d752f988b.png"
-  alt="The What should the scanner find out? page: a goal box, a monthly budget, and one-click starting points"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_flow_free_2eb0ccd86d.png"
+  alt="The What should the scanner find out? page: a goal box, a Free or Set a budget choice, and common starting points"
   classes="rounded"
 />
 
 If your organization hasn't allowed AI data processing yet, an admin has to approve it before you can create a scanner. The **New scanner** button asks for that approval first.
 
-### Start from a common question
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_templates_picker_20773fc549.png"
-  alt="The scanner templates grid: five built-in templates, Create from scratch, and the Set up with AI box"
-  classes="rounded"
-/>
-
-The five built-in templates cover the most common shapes and are worth starting from even when your real scanner ends up looking quite different:
-
-| Template              | Question                               | Type       | What it does                                                             |
-| --------------------- | -------------------------------------- | ---------- | ------------------------------------------------------------------------ |
-| **Dead ends**         | Where do people get stuck?             | Monitor    | Flag sessions where the user appears stuck with no obvious next action   |
-| **Session summary**   | What happens in each session?          | Summarizer | Short narrative of what the user did                                     |
-| **User intent**       | What are people trying to do?          | Classifier | Tag each session with the likely intent (browsing, purchasing, support…) |
-| **Frustration score** | Where do people get frustrated?        | Scorer     | Numeric score for how frustrated the user appeared                       |
-| **Session outcome**   | Do people finish what they came to do? | Classifier | Tag what happened: task completed, abandoned, errored, etc.              |
-
-On the template grid, picking a template pre-fills the editor with its name, type, and prompt, a 20% sampling rate, session coverage that skips the least active recordings, and no recording filters. The type is fixed by the template you picked; to use a different type, start from another template or from scratch. A classifier template's categories are examples, so edit them to fit your product.
-
-On the goal page, the same starting points appear as questions. Clicking one has PostHog AI draft a scanner from that question for your project, the same way it drafts from a typed goal.
-
 ### Describe a goal
 
-Type what you want to find out, for example "watch users who enter the checkout flow and summarize why they convert or drop off". PostHog AI reads your goal alongside your product's real pages, events, and existing scanners, then drafts the type, name, prompt, type-specific settings, and recording filters. Filters only use pages, events, and other definitions that exist in your project, so the draft doesn't invent an event name that matches nothing.
+Type which sessions to watch and what you want to find out, for example "watch users who enter the checkout flow and summarize why they convert or drop off", then click **Draft my scanner**. PostHog AI reads your goal alongside your product's real pages, events, and existing scanners, then drafts the type, name, prompt, type-specific settings, and recording filters. Filters only use pages, events, and other definitions that exist in your project, so the draft doesn't invent an event name that matches nothing.
 
-When the page asks for a monthly budget in credits (1,000 credits is about $10), the draft also:
+Under **How much should this scanner use?**, pick one:
+
+- **Free** makes a [free-credits-only scanner](/docs/replay-vision/quota-and-limits#free-credits-only). It pauses when your organization's free monthly credits run out, so it never adds to your bill. **Free** isn't available once this period's free credits are used up.
+- **Set a budget** takes a monthly budget in credits. 1,000 credits is about $10.
+
+Either way, the draft:
 
 - Picks the model by how much judgment the goal needs.
-- Chooses a session coverage mode and the highest sampling rate the budget covers, based on recent recording volume.
-- Sets the scanner's credit limit to your budget, so a wrong estimate can't overspend it.
+- Chooses a session coverage mode and the highest sampling rate the budget covers, based on recent recording volume. A free scanner is sized to your monthly free credits.
+- With a budget, sets the scanner's credit limit to it, so a wrong estimate can't overspend it. A free scanner needs no limit, because it stops at your free credits.
 - Can scope the scanner to an action, a cohort, or a survey when your goal names one.
 - Makes an [experiment scanner](/docs/replay-vision/scanner-types#experiment) when your goal names a running experiment.
 
-Nothing is saved until you review the draft and click **Create scanner**. A budget-based draft opens on an overview: what PostHog AI understood, the name, the question the scanner asks, the eligible recordings with a count from recent days, and the sampling budget. Each section has an **Edit** button that opens the matching editor step. A draft from the **Set up with AI** box opens in the editor steps instead, with a note on why PostHog AI chose that setup.
+### Start from a common question
+
+The **Common starting points** list drafts a scanner from a ready-made question with one click. PostHog AI fits it to your project the same way it does a typed goal, using the spend choice you made on the left.
+
+| Starting point | Usually drafts |
+| --- | --- |
+| **Where do people get stuck?** | A monitor that flags sessions where the user appears stuck with no obvious next action |
+| **What happens in each session?** | A summarizer that writes a short narrative of what the user did |
+| **What are people trying to do?** | A classifier that tags each session with the likely intent |
+| **Where do people get frustrated?** | A scorer that rates how frustrated the user appeared |
+| **Do people finish what they came to do?** | A classifier that tags the outcome: completed, abandoned, errored |
+| **Track an experiment** | An [experiment scanner](/docs/replay-vision/scanner-types#experiment) for the running experiment you pick |
+
+### Review the draft
+
+Nothing is saved until you review the draft and click **Create scanner**. The draft opens on an overview: what PostHog AI understood, the name, the question the scanner asks and its model, the eligible recordings with a count from recent days, and the sampling and budget. Each section has an **Edit** button that opens the matching editor step. **Start over** throws the draft away.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_goal_draft_overview_ae71faf08a.png"
+  alt="A drafted scanner's overview: what PostHog AI understood, the name, what it will ask, eligible recordings, and sampling and budget, each with an Edit button"
+  classes="rounded"
+/>
 
 ### Create from scratch
 
@@ -70,7 +74,7 @@ Nothing is saved until you review the draft and click **Create scanner**. A budg
 
 ## Let the wizard write them
 
-Templates are generic by design. If you'd rather start from scanners that already know your product, run the wizard in your project directory:
+To start from scanners written from your codebase, run the wizard in your project directory:
 
 <WizardCommand command="replay-vision" />
 
@@ -80,12 +84,12 @@ These are ordinary scanners, so everything below still applies. Edit the prompt,
 
 ## The editor steps
 
-Whichever way you start, the scanner editor has four steps. A budget-based draft shows the same settings on its overview instead, with an **Edit** button for each.
+Whichever way you start, the scanner editor has the steps below. A drafted scanner shows the same settings on its overview first, with an **Edit** button for each.
 
 - **Details** – a name, a description, and tags. All three are optional, and the scanning model doesn't see the description or tags.
 - **Configure** – the scanner type, the model, the prompt, the type's own options, and the [self-driving](#handing-off-to-responder-agents) toggle.
 - **Recordings** – the [recording filters](#filters-scoping-the-scanner).
-- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), [session coverage](#session-coverage-filtering-by-activity), an optional [credit limit](#credit-limit-capping-one-scanner), and the estimated cost.
+- **Budget** – the [sampling rate](#sampling-rate-controlling-volume), [session coverage](#session-coverage-filtering-by-activity), an optional [scanner limit](#scanner-limit-capping-one-scanner), and the estimated cost.
 
 Editing a saved scanner uses the same steps. The type can't be changed after the scanner is created.
 
@@ -155,7 +159,7 @@ A prompt usually needs a few rounds before it returns what you want. Post yours 
 
 Each scanner type has a few extra knobs. The full reference is on the [scanner types](/docs/replay-vision/scanner-types) page; the highlights:
 
-- **Classifier** – define your **Categories** (or click **Suggest categories with PostHog AI** for suggestions grounded in your prompt, your product, and what's been seen in recordings), choose whether multiple categories per session are allowed, and whether the model can invent categories outside your list.
+- **Classifier** – define your **Categories**, choose whether multiple categories per session are allowed, and whether the model can invent categories outside your list. **Suggest categories with PostHog AI** suggests categories grounded in your prompt, your product, and what's been seen in recordings. On a scanner PostHog AI already drafted, the button reads **Suggest more categories**. Like **Write with PostHog AI**, it doesn't appear on every setup path for a new scanner.
 - **Scorer** – set the numeric scale (min, max) and an optional one-word score label.
 - **Summarizer** – pick a summary length (short / medium / long). The core summarizer prompt is built in, so the prompt field becomes **Additional context**: use it for product context or steering, like what the ideal user flow looks like.
 - **Monitor** – turn on **Allow inconclusive verdicts** to let the model answer `inconclusive` rather than forcing a yes/no answer.
@@ -219,8 +223,8 @@ The sampling rate (0.1–100%) is applied **after** the filters and session cove
 The **Budget** step shows an **Estimated cost** – the credits the scanner is projected to spend per month at the selected model's price, next to what you've spent this billing period, what your other scanners and backfills are projected to spend, and your spend limit. It's based on your project's recent recording volume, the filters you've set, the session coverage mode, the sampling rate, and the model. Use this to size the scanner against your [budget](/docs/replay-vision/quota-and-limits) _before_ saving.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_f9f280e291.png"
-  alt="The Budget step of the scanner editor: session coverage, sampling rate, credit limit, and the estimated monthly cost"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_editor_budget_free_only_d67ed45096.png"
+  alt="The Budget step of the scanner editor: sampling rate, session coverage, the Free credits only and Scanner limit switches, and the estimated monthly cost"
   classes="rounded"
 />
 
@@ -231,9 +235,11 @@ If the estimate looks too high, you have four knobs:
 - Lower the sampling rate.
 - Pick a cheaper model.
 
-## Credit limit: capping one scanner
+## Scanner limit: capping one scanner
 
-Turn on **Credit limit** on the **Budget** step to cap what this scanner can spend in a billing period, on top of your organization's limit. When the scanner reaches its limit, it stops scanning until the next billing period. It stays enabled, but the sessions it skipped aren't scanned later, even if you raise the limit. The editor warns you when the limit is below the scanner's estimated monthly cost, or too low to pay for a single scan.
+Turn on **Scanner limit** on the **Budget** step to cap what this scanner can spend in a billing period, on top of your organization's limit. Enter the limit in **Credits**, or select **Observations** to enter a number of observations. The editor converts an observation count to credits at the selected model's price. When the scanner reaches its limit, it stops scanning until the next billing period. It stays enabled, but the sessions it skipped aren't scanned later, even if you raise the limit. The editor warns you when the limit is below the scanner's estimated monthly cost, or too low to pay for a single scan.
+
+Above it, **Free credits only** keeps the scanner to your organization's free monthly credits, so it never adds to your bill. It pauses when they run out and starts again when the billing period resets. See [free credits only](/docs/replay-vision/quota-and-limits#free-credits-only).
 
 ## Enabling and disabling
 
