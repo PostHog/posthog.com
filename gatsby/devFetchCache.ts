@@ -23,9 +23,9 @@ const cacheFileFor = (url: string, init?: RequestInit): string => {
     return path.join(CACHE_DIR, `${key}.json`)
 }
 
-const readFresh = (file: string): CachedResponse | null => {
+const readCached = (file: string, maxAgeMs: number): CachedResponse | null => {
     try {
-        if (Date.now() - fs.statSync(file).mtimeMs > MAX_AGE_MS) return null
+        if (Date.now() - fs.statSync(file).mtimeMs > maxAgeMs) return null
         return JSON.parse(fs.readFileSync(file, 'utf-8'))
     } catch {
         return null
@@ -45,10 +45,18 @@ export function cacheFetchResponsesInDevelopment(): void {
         if (!isCacheable(input, init)) return networkFetch(input, init)
 
         const file = cacheFileFor(String(input), init)
-        const cached = process.env.GATSBY_FRESH_SOURCE_DATA !== 'true' && readFresh(file)
+        const cached = process.env.GATSBY_FRESH_SOURCE_DATA !== 'true' && readCached(file, MAX_AGE_MS)
         if (cached) return toResponse(cached)
 
-        const response = await networkFetch(input, init)
+        let response: Response
+        try {
+            response = await networkFetch(input, init)
+        } catch {
+            // One failed request during sourcing stops `gatsby develop`, so prefer an old copy or one retry
+            const stale = readCached(file, Infinity)
+            if (stale) return toResponse(stale)
+            response = await networkFetch(input, init)
+        }
         if (!response.ok) return response
 
         const entry: CachedResponse = {
