@@ -52,8 +52,9 @@ index from step 1 picks the column.
 - Label each bar with the exception type and the start of its message. Issue IDs are unreadable on
   an axis.
 - Show the top 10.
-- Match the time window to the question. "New errors" means first seen in the last 7 days. To rank
-  every error, drop that filter.
+- Match the time window to the question. "New errors" means issues created in the last 7 days, from
+  `system.error_tracking_issues`. To rank every error, drop that filter.
+- Group by the issue ID as well as the label. Two issues can share a label.
 
 ## 4. Adapt the example
 
@@ -64,18 +65,10 @@ property, and the time windows to match what you found in steps 1 and 2. Don't r
 ```sql
 WITH issues AS (
     SELECT
-        issue_id,
-        min(timestamp) AS first_seen,
-        concat(
-            any(properties.$exception_list[1].type),
-            ': ',
-            substring(any(properties.$exception_list[1].value), 1, 45)
-        ) AS error
-    FROM events
-    WHERE event = '$exception'
-        AND timestamp >= now() - INTERVAL 21 DAY
-    GROUP BY issue_id
-    HAVING first_seen >= now() - INTERVAL 7 DAY
+        id AS issue_id,
+        concat(name, ': ', substring(description, 1, 45)) AS error
+    FROM system.error_tracking_issues
+    WHERE created_at >= now() - INTERVAL 7 DAY
 ),
 affected AS (
     SELECT DISTINCT issue_id, $group_0 AS account
@@ -91,7 +84,7 @@ SELECT
 FROM affected a
 JOIN issues i ON i.issue_id = a.issue_id
 LEFT JOIN groups g ON g.key = a.account AND g.index = 0
-GROUP BY i.error
+GROUP BY i.issue_id, i.error
 ORDER BY mrr_at_risk DESC
 LIMIT 10
 ```

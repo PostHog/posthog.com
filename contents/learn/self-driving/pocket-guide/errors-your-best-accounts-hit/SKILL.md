@@ -76,41 +76,38 @@ Issues by account, against each account's share of overall traffic. Substitute t
 index for `$group_1`.
 
 ```sql
+-- Shares are window sums over every account, so paid accounts are measured against the whole
+-- issue and fleet, and each CTE scans events once.
 WITH
   fleet AS (
-    SELECT $group_1 AS gk, count() AS all_events
-    FROM events
-    WHERE timestamp > now() - INTERVAL 7 DAY AND $group_1 != ''
-    GROUP BY gk
+    SELECT gk, all_events, all_events / sum(all_events) OVER () AS fleet_share
+    FROM (
+      SELECT $group_1 AS gk, count() AS all_events
+      FROM events
+      WHERE timestamp > now() - INTERVAL 7 DAY AND $group_1 != ''
+      GROUP BY gk
+    )
   ),
   errs AS (
-    SELECT properties.$exception_issue_id AS issue, $group_1 AS gk,
-           count() AS hits, uniq(person_id) AS distinct_users
-    FROM events
-    WHERE event = '$exception'
-      AND timestamp > now() - INTERVAL 7 DAY
-      AND $group_1 != ''
-    GROUP BY issue, gk
-  ),
-  -- Totals cover every account, so paid accounts are measured against the whole issue and fleet.
-  issue_totals AS (
-    SELECT issue, sum(hits) AS issue_hits
-    FROM errs
-    GROUP BY issue
-  ),
-  fleet_total AS (
-    SELECT sum(all_events) AS total_events
-    FROM fleet
+    SELECT issue, gk, hits, distinct_users,
+           hits / sum(hits) OVER (PARTITION BY issue) AS issue_share
+    FROM (
+      SELECT properties.$exception_issue_id AS issue, $group_1 AS gk,
+             count() AS hits, uniq(person_id) AS distinct_users
+      FROM events
+      WHERE event = '$exception'
+        AND timestamp > now() - INTERVAL 7 DAY
+        AND $group_1 != ''
+      GROUP BY issue, gk
+    )
   )
 SELECT e.issue, a.name, e.hits, e.distinct_users,
        f.all_events,
-       round(e.hits / t.issue_hits, 3) AS issue_share,
-       round(f.all_events / ft.total_events, 4) AS fleet_share
+       round(e.issue_share, 3) AS issue_share,
+       round(f.fleet_share, 4) AS fleet_share
 FROM errs e
-INNER JOIN issue_totals t ON t.issue = e.issue
 INNER JOIN fleet f ON f.gk = e.gk
 INNER JOIN system.accounts a ON a.external_id = e.gk
-CROSS JOIN fleet_total ft
 WHERE JSONExtractString(a.properties, 'stripe_customer_id') != ''
 ORDER BY e.issue, issue_share DESC
 ```

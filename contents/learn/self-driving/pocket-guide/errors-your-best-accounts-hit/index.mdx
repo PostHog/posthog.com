@@ -8,7 +8,7 @@
 # This scout borrows that join and points it at $exception.
 #
 # Paired from the error tracking volume – see contents/learn/error-tracking/pocket-guide/who-it-breaks.
-title: Find the errors your best accounts hit
+title: Find the errors your paying accounts hit
 shortTitle: Errors by account value
 subtitle: 'Which broken thing is your paying customers'' problem, not just your loudest?'
 pocketGuideOrder: 8
@@ -72,21 +72,21 @@ report:
 
 <RightPage>
 
-# Find the errors your best accounts hit
+# Find the errors your paying accounts hit
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+This scout reports <Term name="issue">issues</Term> concentrated in your paying accounts. The issue list sorts by occurrences, users, or sessions, so an issue four paying accounts keep hitting can rank below a free account's retry loop.
 
 ## What the scout looks at
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+`TypeError: Cannot read properties of null` fired 2,340 times this week across 31 accounts. Four of them pay you and send 9% of your traffic, but they carry 71% of the issue, so the scout reports it. An issue spread evenly across your accounts gets no report, and neither does an issue driven by one client retrying.
 
 ## The report in your inbox
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore <SeeFig n={1} />.
+The <Term name="report" /> names the issue and the accounts, with each account's share of the issue next to its share of your traffic <SeeFig n={1} />. Click **Ask AI** on the report to ask who else is affected, whether the problem is new, or what to do next.
 
 ## The scout itself
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <SeeFig n={2} />.
+With [group analytics](/docs/product-analytics/group-analytics), each `$exception` event carries the account that sent it. The scout compares each account's share of an issue with its share of your traffic over the last seven days <SeeFig n={2} />. It checks which accounts pay you by their [Stripe](/docs/data-pipelines/sources/stripe) customer ID in Customer analytics, and it only reports issues that fired in the last 24 hours.
 
 <!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
 <Watches />
