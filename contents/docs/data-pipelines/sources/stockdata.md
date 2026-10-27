@@ -9,9 +9,9 @@ availability:
 sourceId: StockData
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The StockData.org connector syncs news, quote, eod, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -27,9 +27,9 @@ Enter your StockData.org API token to pull market news with sentiment plus quote
 
 You can find your API token in your [StockData.org dashboard](https://www.stockdata.org/dashboard).
 
-Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the price tables (quote, EOD, intraday, dividends, splits) - those endpoints require at least one symbol. The news table works without symbols (all market news) and is filtered to your symbols when they are set.
+Add one or more comma-separated **symbols** (e.g. `AAPL,MSFT,TSLA`) to sync the price tables (quote, EOD, intraday, dividends, splits) and `entity_search` — those endpoints require at least one symbol. The news and news stats tables work without symbols and are filtered to your symbols when they are set.
 
-Note: StockData.org plans are limited by daily request quotas (100 requests/day on the free plan), and some tables (dividends, splits) require a Standard or higher plan.
+Note: StockData.org plans are limited by daily request quotas (100 requests/day on the free plan), and some tables (dividends, splits, news_stats_intraday, news_stats_aggregation) require a Standard or higher plan.
 
 You'll be asked for:
 
@@ -39,7 +39,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All StockData.org tables are full refresh. Each sync replaces the contents of the table.
+Some tables (news, eod, intraday, news_stats_intraday) sync incrementally. The rest use full refresh, replacing the table contents on each sync.
 
 ## Configuration
 
