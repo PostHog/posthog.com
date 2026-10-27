@@ -8,31 +8,31 @@ hideAnchor: true
 author:
     - phil-haack
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_26_T15_01_32_848_Z_84682dac82.png
 featuredImageType: full
 category: PostHog news
 tags:
     - PostHog news
     - Infrastructure
 seo:
-    metaTitle: A faster events table (and what's changing)
+    metaTitle: Queries are 2x faster, but we're making some event properties temporary
     metaDescription: "We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries. Here's what changes on November 30."
 ---
 
 ## TL;DR
 
-- We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries.
+- We're rebuilding how PostHog stores events making queries about a third faster on average, and up to 2x faster for common queries.
 - `$set`, `$set_once` and other short-lived debugging properties on events are now kept for 60 days instead of forever.
-- Person properties are unaffected. They stay on your persons and on every event, queryable as before.
 - `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them.
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
+- Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
 - All of this takes effect on November 30.
 
 ## We're making queries faster
 
-Every event you capture is stored in one very large table. Until now we stored much of each event twice: once as raw JSON and again as columns for fast querying. That made the table slow to change and expensive to scan.
+Every event you capture is stored in one very large table, and until now, we stored much of each event twice: once as raw JSON and again as columns for fast querying. That made the table slow to change and expensive to scan.
 
-We're moving to a format that stores each property once, with its real type (numbers stay numbers, booleans stay booleans). It takes far less storage, and a query reads only the properties it asks for.
+We're moving to a format that stores each property once, with its real type (numbers stay numbers, booleans stay booleans). This takes far less storage, and a query reads only the properties it asks for.
 
 Here's what we measured by replaying real production queries against the new format:
 
@@ -43,25 +43,27 @@ Here's what we measured by replaying real production queries against the new for
 | Session-based queries | ~2x faster |
 | Heaviest session replay queries | Over 2x faster |
 
-Replay, error tracking, AI observability, experiments and PostHog AI all got faster. Queries over many custom properties improve least, and a few may be slightly slower.
+Replay, error tracking, AI observability, experiments and PostHog AI all got faster, but for transparency, queries over many custom properties improve least (a few may even be slightly slower).
 
 ## Why we're making some properties temporary
 
-We looked at how event properties get queried. A small set, mostly SDK diagnostics and person-update instructions like `$set`, is useful for debugging right after an event arrives. After that it's almost never queried, but we stored it forever on every event.
+We looked at how event properties get queried. A small set, mostly SDK diagnostics and person-update instructions like `$set`, are useful for debugging right after an event arrives. After that these are almost never queried, but we stored it forever on every event.
 
-`$set` and `$set_once` are the biggest part of this. They're instructions to our person-merging engine ("update this person's properties"), which we apply the moment an event arrives. The result is stored on the person, and on every event as person properties. Keeping the raw instruction forever as well meant storing the same data twice.
+`$set` and `$set_once` are the biggest part of this. They're instructions to our person-merging engine ("update this person's properties"), which we apply the moment an event arrives. The result is stored on the person and on every event as person properties. Keeping the raw instruction forever also meant storing the same data twice, both the properties and the instructions on how to change the properties.
 
-From November 30, we keep these properties for 60 days. You can still inspect them while debugging, and we no longer store and scan the same data twice. The tables below list every change.
+From November 30 2026, we will keep these properties for 60 days before dropping them. This means you can still inspect them and use them to debug, but they won't be included on persons or events forever. This means less data stored twice in PostHog and faster queries for everyone. 
 
-## What data is moving
+## Moving feature flag data to its own table
 
-These stay available, in a new place.
+Another set of events and properties we store duplicates of is feature flags. Again, these are mostly used to debug flags and make sure they are working, but bog down the rest of events table doing so. To prevent this, we're moving `$feature_flag_called` events to their own table and then dropping them after 90 days. We're also changing `$feature/<flag>` from one property for each to one map per flag.
+
+Here's more details on what this means:
 
 <!-- TODO: confirm flag evaluations retention ([N] days) and the batch exports row before publishing -->
 
 | What | Before | After | Do you need to do anything? |
 | --- | --- | --- | --- |
-| `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for [N] days | Only if you query these events directly in SQL |
+| `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for 90 days | Only if you query these events directly in SQL |
 | `$feature/<flag>` properties | One property per flag on each event | One feature flags map per event | No. Existing insights and HogQL queries keep working |
 | `null` property values | Stored as `null` | Stored as "not set". Exports and event details still show `null` | No. Queries already treat `null` and "not set" the same |
 <!-- | Batch exports | Full event properties | [Export format changes – confirm before publishing] | [TBC] | -->
@@ -98,7 +100,7 @@ These properties are deprecated, and we'll stop storing them on events.
 | Data pipeline debugging | `$transformations_succeeded`, `$transformations_skipped` | Internal debugging data |
 | Raw LLM payloads | `$ai_input`, `$ai_output`, `$ai_output_choices`, `$ai_input_state`, `$ai_output_state`, `$ai_tools` | Already moved to a dedicated table (see below) |
 
-**Raw LLM payloads already live somewhere else.** `$ai_input`, `$ai_output` and the rest moved to a dedicated LLM analytics table with 30-day retention, which keeps very heavy data off the events table and LLM analytics affordable. Any copies still on the events table are legacy data older than 30 days, so removing them changes nothing in the product.
+**Raw LLM payloads already live somewhere else.** `$ai_input`, `$ai_output` and the rest moved to a dedicated AI observability table with 30-day retention, which keeps very heavy data off the events table and AI observability affordable. Any copies still on the events table are legacy data older than 30 days, so removing them changes nothing in the product.
 
 ## When
 
