@@ -3,6 +3,14 @@ export type Tier = (typeof tierIds)[number]
 export type Ranking = Record<Tier, string[]>
 export const emptyRanking = (): Ranking => ({ S: [], A: [], B: [], C: [], D: [] })
 
+export function insertionBefore(
+    slots: { slug: string; midpoint: number }[],
+    x: number,
+    active: string
+): string | undefined {
+    return slots.find(({ slug, midpoint }) => slug !== active && x < midpoint)?.slug
+}
+
 export function moveHog(ranking: Ranking, slug: string, destination: Tier | 'tray', before?: string): Ranking {
     const next = Object.fromEntries(tierIds.map((tier) => [tier, ranking[tier].filter((id) => id !== slug)])) as Ranking
     if (destination !== 'tray') {

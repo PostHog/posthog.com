@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { emptyRanking, moveHog, parseRanking, serializeRanking } from './state.ts'
+import { emptyRanking, insertionBefore, moveHog, parseRanking, serializeRanking } from './state.ts'
 
 test('moving a hog between tiers, within a tier, and back to the tray preserves uniqueness', () => {
     const initial = { ...emptyRanking(), S: ['angel', 'judge'], B: ['chef'] }
@@ -44,4 +44,18 @@ test('unknown or duplicated assets never enter restored rankings', () => {
         C: [],
         D: [],
     })
+})
+
+test('drop positions insert before, between, or after hoggies while ignoring the dragged tile', () => {
+    const ranking = { ...emptyRanking(), S: ['angel', 'judge', 'chef'] }
+    const slots = [
+        { slug: 'angel', midpoint: 25 },
+        { slug: 'judge', midpoint: 75 },
+        { slug: 'chef', midpoint: 125 },
+    ]
+    assert.deepEqual(moveHog(ranking, 'chef', 'S', insertionBefore(slots, 10, 'chef')).S, ['chef', 'angel', 'judge'])
+    assert.deepEqual(moveHog(ranking, 'chef', 'S', insertionBefore(slots, 50, 'chef')).S, ['angel', 'chef', 'judge'])
+    assert.deepEqual(moveHog(ranking, 'angel', 'S', insertionBefore(slots, 100, 'angel')).S, ['judge', 'angel', 'chef'])
+    assert.deepEqual(moveHog(ranking, 'angel', 'S', insertionBefore(slots, 150, 'angel')).S, ['judge', 'chef', 'angel'])
+    assert.deepEqual(moveHog(ranking, 'judge', 'S', insertionBefore(slots, 75, 'judge')).S, ranking.S)
 })
