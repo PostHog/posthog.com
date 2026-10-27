@@ -63,13 +63,13 @@ The typed "confirm" is deliberate: it's the human signature that makes a metric 
 
 ## Step 4: Use it everywhere
 
-Open a new session – or a completely different MCP client – and ask a real question:
+Open a new session – or a completely different MCP client – and ask the question from Step 1 again:
 
-> **You:** What was MRR last quarter, month by month?
+> **You:** What's our MRR?
 >
-> **Agent:** _Calls `metric-list` and finds one approved, non-drifted match: `mrr`. Reads its approval with `metric-describe`, then calls `data-catalog-metric-run` with `date_from`, `date_to`, and a monthly `interval`._ 🛡️ **From your data catalog**: MRR, approved definition, reviewed by you on Jul 1, 2026. April **$128,400**, May **$135,100**, June **$142,300**. Here's the `posthog_url` deep link if you want to open the exact query in PostHog.
+> **Agent:** _Calls `metric-list` and finds one approved, non-drifted match: `mrr`. Reads its approval with `metric-describe`, then calls `data-catalog-metric-run`._ 🛡️ **From your data catalog**: MRR, approved definition, reviewed by you on Jul 1, 2026. Your MRR is **$142,300**. Here's the `posthog_url` deep link if you want to open the exact query in PostHog.
 
-This is the payoff. The agent didn't reinvent MRR – it found the approved metric, ran it with your date range, and opened the answer by saying which approved definition the number came from. Every session, every tool, every teammate now gets the same answer, and the [deep link](/docs/semantic-layer/metrics#running-a-metric) lets anyone audit exactly what ran.
+This is the payoff. The agent didn't reinvent MRR – it found the approved metric, ran it, and opened the answer by saying which approved definition the number came from. Every session, every tool, every teammate now gets the same answer, and the [deep link](/docs/semantic-layer/metrics#running-a-metric) lets anyone audit exactly what ran.
 
 ## What you built
 
