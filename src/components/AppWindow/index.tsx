@@ -29,6 +29,7 @@ import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
+import LearnShell from 'components/PocketGuides/LearnShell'
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
@@ -72,6 +73,10 @@ const Router = (props) => {
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
+    }
+    // Learn pages share one shell, so the sidebar stays mounted between them.
+    if (/^\/learn\/[^/]+/.test(path)) {
+        return <LearnShell path={path}>{children}</LearnShell>
     }
     if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
         return <BlogPost {...props} />
