@@ -11,6 +11,12 @@ import FlutterPrivacy from "./_snippets/flutter-privacy.mdx"
 
 PostHog offers a range of controls to limit what data is captured by session recordings. Our privacy controls run in the browser or mobile app. So, masked data is never sent over the network to PostHog.
 
+<CalloutBox icon="IconInfo" title="Is too much content masked in your recordings?" type="fyi">
+
+If your recordings show only the page title and URL, and all other content is masked, see [troubleshooting masking](#troubleshooting-masking).
+
+</CalloutBox>
+
 <Tab.Group tabs={['Web', 'Android', 'iOS', 'React Native', 'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
@@ -37,6 +43,16 @@ PostHog offers a range of controls to limit what data is captured by session rec
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
+
+## Troubleshooting masking
+
+If your web recordings show only the page title and URL, and all other text and images are masked, examine these settings:
+
+1. **Project setting.** Go to [Privacy and masking](https://us.posthog.com/settings/environment-replay#replay-masking) in your session replay settings. The **Total privacy (mask all text/images)** level masks all text and inputs, and blocks all images. To show text and images, select **Normal (mask inputs but not text/images)**. You must be a project admin to change this setting.
+2. **Your code.** Find `maskTextSelector: "*"` or a `blockSelector` in the `session_recording` config of `posthog.init`. The config in your code overrides the project setting.
+3. **Excluded elements.** PostHog shows elements with the `ph-no-capture` class as an empty block. See [other elements](#other-elements).
+
+Masking occurs in the browser before PostHog receives the data. Thus, a change applies only to new recordings. You cannot unmask content in recordings that already exist.
 
 ## Network capture
 
