@@ -34,6 +34,7 @@
         "check:posthog-js-defaults": "node scripts/check-posthog-js-defaults.js",
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
         "test:markdown": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/turndownService.test.ts",
+        "test:tier-list": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/TierList/catalog.test.ts src/components/TierList/state.test.ts",
         "test:middleware": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test middleware.test.ts",
         "test:gatsby-functions": "node --test scripts/gatsby-functions.test.cjs",
         "test:gatsby-utils": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/utils.test.ts",
