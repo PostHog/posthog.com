@@ -9,7 +9,7 @@ availability:
 sourceId: Omnisend
 ---
 
-The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, carts, orders, products, and categories – into PostHog.
+The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, carts, orders, products, categories, automations, segments, and analytics – into PostHog.
 
 ## Adding a data source
 
@@ -23,16 +23,20 @@ Once the syncs are complete, you can start using Omnisend data in PostHog.
 
 ## Available tables
 
-| Table        | Description                       | Sync method  |
-| ------------ | --------------------------------- | ------------ |
-| `contacts`   | Contacts in your Omnisend account | Full refresh |
-| `campaigns`  | Email and SMS campaigns           | Full refresh |
-| `carts`      | Abandoned cart data               | Full refresh |
-| `orders`     | Order data                        | Full refresh |
-| `products`   | Product catalog data              | Full refresh |
-| `categories` | Product categories                | Full refresh |
+| Table                  | Description                                       | Sync method  |
+| ---------------------- | ------------------------------------------------- | ------------ |
+| `contacts`             | Contacts in your Omnisend account                 | Full refresh |
+| `campaigns`            | Email and SMS campaigns                           | Full refresh |
+| `carts`                | Abandoned cart data                               | Full refresh |
+| `orders`               | Order data                                        | Full refresh |
+| `products`             | Product catalog data                              | Full refresh |
+| `categories`           | Product categories                                | Full refresh |
+| `automations`          | Automation workflows                              | Full refresh |
+| `segments`             | Audience segments with contact counts             | Full refresh |
+| `analytics_reports`    | Daily campaign and automation performance metrics | Incremental  |
+| `analytics_statistics` | Daily account-level analytics                     | Incremental  |
 
-All tables use **full refresh**, which reloads all data on each sync.
+Most tables use **full refresh**, which reloads all data on each sync. The analytics tables use **incremental** sync, which only loads new data since the last sync.
 
 ## Configuration
 
