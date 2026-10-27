@@ -756,6 +756,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     <div
                         className={`relative print:hidden ${
                             hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
+                        } ${
+                            hasToolbar && item.appSettings?.toolbarFade
+                                ? "z-20 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-primary after:[mask-image:linear-gradient(to_bottom,black,transparent)] after:content-['']"
+                                : ''
                         }`}
                     >
                         {hasToolbar && (
