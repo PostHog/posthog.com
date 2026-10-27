@@ -1,9 +1,9 @@
 ---
-title: "Import opt-out lists from Customer.io"
+title: "Import opt-out lists and suppressions from Customer.io"
 showStepsToc: true
 ---
 
-In this guide we'll walk through importing your **opt-out lists from Customer.io** into PostHog and keeping them in sync.
+In this guide we'll walk through importing your **opt-out lists and suppressions from Customer.io** into PostHog and keeping them in sync.
 
 Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Import from Customer.io**.
 
@@ -16,9 +16,9 @@ Go to your PostHog app and navigate to **Workflows > Opt-out list**. Click **Imp
 
 <Steps>
 
-<Step title="Import categories and global opt-outs" badge="required">
+<Step title="Import categories, opt-outs, and suppressions" badge="required">
 
-This step imports all subscription topics and globally unsubscribed customers from Customer.io using an App API key.
+This step imports all subscription topics, globally unsubscribed customers, and suppressed email addresses from Customer.io using an App API key.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/step1_light_bf6fe10f61.png"
@@ -40,9 +40,13 @@ Save this API key securely – Customer.io only shows it once.
 Go back to PostHog, paste the key into the first step, and click **Start import**. This will import:
 
 - All available categories from Customer.io
-- All customers who are generally unsubscribed (not subscribed to any category)
+- All customers who are globally unsubscribed (not subscribed to any category)
+- All suppressed email addresses from Customer.io's ESP suppression lists:
+  - Bounced and invalid addresses become **bounce** suppressions, blocking all email
+  - Spam reports become **complaint** suppressions, blocking marketing email only
+  - Existing suppressions in PostHog are preserved
 
-Customer.io only supports importing globally unsubscribed users via API, so per-category opt-outs need to be imported through a CSV in the next step.
+Customer.io only supports importing globally unsubscribed users via API, so per-category opt-outs need to be imported through a CSV in Step 2.
 
 </Step>
 
