@@ -18,6 +18,7 @@ type RatesProduct = {
     startsAt?: string | number
     freeLimit?: number
     billedWith?: string
+    freeAllocationText?: string
 }
 
 interface AllProductsRatesModalProps {
@@ -56,7 +57,7 @@ export default function AllProductsRatesModal({
             <ScrollArea>
                 <div className="p-5 max-h-[min(70vh,720px)]">
                     <p className="text-[15px] text-secondary mb-4">
-                        Every product has its own monthly free tier. Rates below are what you pay per unit after it.
+                        Rates below apply after the monthly free allowance. Some products share an allowance.
                     </p>
 
                     <div className="overflow-x-auto">
@@ -82,6 +83,7 @@ export default function AllProductsRatesModal({
                                         startsAt,
                                         freeLimit,
                                         billedWith,
+                                        freeAllocationText,
                                     }) => {
                                         const added = addedTypes.includes(type)
                                         return (
@@ -117,7 +119,9 @@ export default function AllProductsRatesModal({
                                                     )}
                                                 </td>
                                                 <td className="py-2.5 pr-4">
-                                                    {billedWith ? (
+                                                    {billedWith && freeAllocationText ? (
+                                                        <span className="text-secondary">{freeAllocationText}</span>
+                                                    ) : billedWith ? (
                                                         <span className="text-secondary">—</span>
                                                     ) : freeLimit ? (
                                                         `${Number(freeLimit).toLocaleString()} ${pluralizeUnit(

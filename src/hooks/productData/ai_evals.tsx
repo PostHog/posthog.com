@@ -1,3 +1,4 @@
+import React from 'react'
 import { IconListCheck } from '@posthog/icons'
 
 // Evaluations share AI Observability's product page and are billed as AI Observability events
@@ -19,6 +20,18 @@ export const aiEvals = {
     billingType: 'llm_analytics',
     // Keeps it sorted next to AI Observability in the pricing calculator.
     sharesFreeTier: 'ai_observability',
+    freeAllocationText: 'Shared with AI observability',
+    billingDescription: (
+        <>
+            <p className="m-0 mb-2">
+                <strong>Online evaluations</strong> count as AI observability events.
+            </p>
+            <p className="m-0 mb-3">
+                Each <strong>offline evaluation metric result</strong> counts as one event.
+            </p>
+            <p className="m-0 text-secondary">Both share AI observability’s pricing and free tier.</p>
+        </>
+    ),
     billedWith: 'AI Observability',
     billedWithSlug: 'ai-observability',
 }
