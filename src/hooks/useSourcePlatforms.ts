@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 export default function useSourcePlatforms() {
@@ -13,9 +14,13 @@ export default function useSourcePlatforms() {
         }
     `)
 
-    return allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/data-warehouse/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
+    return useMemo(
+        () =>
+            allPostHogSource.nodes.map((node: any) => ({
+                label: node.name,
+                url: `/docs/data-warehouse/sources/${node.slug}`,
+                image: node.icon_url,
+            })),
+        [allPostHogSource]
+    )
 }

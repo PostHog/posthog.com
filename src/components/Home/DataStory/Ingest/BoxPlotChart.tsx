@@ -28,11 +28,40 @@ const WhiskerCap = ({ at }: { at: number }) => (
     />
 )
 
+const AXIS_SHARES = [0, 0.5, 1]
+const EMPTY_LABEL = '\u00a0'
+
+const BoxMarks = ({ summary, domainMax, color }: { summary: BoxSummary; domainMax: number; color: string }) => {
+    const at = (value: number): number => percentOf(value, domainMax)
+    return (
+        <>
+            <Whisker from={at(summary.whiskerMin)} to={at(summary.p25)} />
+            <Whisker from={at(summary.p75)} to={at(summary.whiskerMax)} />
+            <WhiskerCap at={at(summary.whiskerMin)} />
+            <WhiskerCap at={at(summary.whiskerMax)} />
+            <span
+                className={cn('absolute inset-y-1 rounded-[3px] border', MOVE)}
+                style={{
+                    ...span(at(summary.p25), at(summary.p75)),
+                    borderColor: color,
+                    backgroundColor: `color-mix(in srgb, ${color} ${BOX_FILL_SHARE}, transparent)`,
+                }}
+            />
+            <span
+                className="absolute inset-y-1 w-[3px] -translate-x-1/2 transition-[left] duration-500 ease-out"
+                style={{ left: `${at(summary.median)}%`, backgroundColor: color }}
+            />
+            <span
+                className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border bg-primary transition-[left] duration-500 ease-out"
+                style={{ left: `${at(summary.mean)}%`, borderColor: color }}
+            />
+        </>
+    )
+}
+
 const MetricRow = React.memo(function MetricRow({ metric, samples }: { metric: Metric; samples: number[] }) {
     const summary = useMemo(() => summarize(samples), [samples])
-    if (!summary) return null
-    const domainMax = domainMaxOf(summary)
-    const at = (value: number): number => percentOf(value, domainMax)
+    const domainMax = summary ? domainMaxOf(summary) : null
     return (
         <li className="m-0 grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-3 gap-y-0.5">
             <span className="min-w-0 leading-tight">
@@ -41,37 +70,20 @@ const MetricRow = React.memo(function MetricRow({ metric, samples }: { metric: M
                     <span className="truncate">{metric.label}</span>
                 </span>
                 <span className="block truncate font-mono text-[10px] text-muted">
-                    median {metric.format(summary.median)}
+                    median {summary ? metric.format(summary.median) : EMPTY_LABEL}
                 </span>
             </span>
             <div className="relative h-6">
                 <span className="absolute inset-y-0 left-1/2 border-l border-dashed border-primary" />
-                <Whisker from={at(summary.whiskerMin)} to={at(summary.p25)} />
-                <Whisker from={at(summary.p75)} to={at(summary.whiskerMax)} />
-                <WhiskerCap at={at(summary.whiskerMin)} />
-                <WhiskerCap at={at(summary.whiskerMax)} />
-                <span
-                    className={cn('absolute inset-y-1 rounded-[3px] border', MOVE)}
-                    style={{
-                        ...span(at(summary.p25), at(summary.p75)),
-                        borderColor: metric.color,
-                        backgroundColor: `color-mix(in srgb, ${metric.color} ${BOX_FILL_SHARE}, transparent)`,
-                    }}
-                />
-                <span
-                    className="absolute inset-y-1 w-[3px] -translate-x-1/2 transition-[left] duration-500 ease-out"
-                    style={{ left: `${at(summary.median)}%`, backgroundColor: metric.color }}
-                />
-                <span
-                    className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border bg-primary transition-[left] duration-500 ease-out"
-                    style={{ left: `${at(summary.mean)}%`, borderColor: metric.color }}
-                />
+                {summary && domainMax !== null && (
+                    <BoxMarks summary={summary} domainMax={domainMax} color={metric.color} />
+                )}
             </div>
             <span />
             <span className="flex justify-between font-mono text-[9px] leading-none text-muted">
-                <span>{metric.format(0)}</span>
-                <span>{metric.format(domainMax / 2)}</span>
-                <span>{metric.format(domainMax)}</span>
+                {AXIS_SHARES.map((share) => (
+                    <span key={share}>{domainMax === null ? EMPTY_LABEL : metric.format(domainMax * share)}</span>
+                ))}
             </span>
         </li>
     )

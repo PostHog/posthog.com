@@ -1,6 +1,4 @@
 import React from 'react'
-import { Globe } from 'lucide-react'
-import { Logo } from '@posthog/brand/logo'
 import { cn } from '../../../../utils'
 import { IconClaudeCode, IconOpenAI, LogomarkCursor } from 'components/OSIcons'
 
@@ -44,15 +42,6 @@ const TerminalTile = ({ badge }: { badge: React.ReactNode }) => (
     </span>
 )
 
-const GlobeTile = ({ badge }: { badge: React.ReactNode }) => (
-    <span className="relative block size-full">
-        <AppTile className="bg-gradient-to-b from-[#3A3A3C] to-[#1C1C1E]">
-            <Globe className="size-[62%] text-white" strokeWidth={1.75} aria-hidden="true" />
-        </AppTile>
-        <TileBadge>{badge}</TileBadge>
-    </span>
-)
-
 export const ClaudeCodeIcon = () => (
     <TerminalTile
         badge={
@@ -74,13 +63,9 @@ export const CodexIcon = () => (
 )
 
 export const PostHogAIIcon = () => (
-    <GlobeTile
-        badge={
-            <span className="flex size-full items-center justify-center rounded-full bg-white">
-                <Logo layout="logomark" variant="print" className="block h-auto w-[68%]" />
-            </span>
-        }
-    />
+    <AppTile className="bg-white">
+        <img src="/brand/posthog-logomark.svg" alt="" className="block h-auto w-[72%]" />
+    </AppTile>
 )
 
 export const ClaudeAppIcon = () => (

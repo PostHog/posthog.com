@@ -162,6 +162,8 @@ const usePlayChatEvents = (elapsed: number, dispatch: React.Dispatch<BoardAction
 export default function EventBoard(): JSX.Element {
     const rootRef = useRef<HTMLDivElement>(null)
     const inView = useInView(rootRef, { amount: 0.25 })
+    const reduceMotion = useReducedMotion()
+    const ambientActive = inView && !reduceMotion
     const logos = useSpotlightLogos()
     const [board, dispatch] = useReducer(reduceBoard, undefined, emptyBoard)
     const riders = useRef(new AmbientRiders())
@@ -185,7 +187,7 @@ export default function EventBoard(): JSX.Element {
 
     useRandomInterval(() => dispatch({ type: 'add', row: riders.current.next(Date.now()) }), {
         ...AMBIENT_EVENT_MS,
-        active: inView,
+        active: ambientActive,
     })
     useRandomInterval(
         () =>
@@ -193,7 +195,7 @@ export default function EventBoard(): JSX.Element {
                 type: 'add',
                 row: sourceRecord(Math.floor(Math.random() * SPOTLIGHT_SOURCES.length), Date.now()),
             }),
-        { ...SOURCE_AMBIENT_MS, active: inView }
+        { ...SOURCE_AMBIENT_MS, active: ambientActive }
     )
 
     return (

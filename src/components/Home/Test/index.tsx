@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
@@ -30,7 +30,11 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
-import { StepsSection } from 'components/Home/DataStory'
+
+const StepsSection =
+    typeof window !== 'undefined'
+        ? lazy(() => import('components/Home/DataStory').then((module) => ({ default: module.StepsSection })))
+        : () => null
 
 const DATA_STORY_FLAG = 'homepage-data-story'
 
@@ -187,7 +191,9 @@ export default function HomeTest() {
                         </>
                     }
                 >
-                    <StepsSection />
+                    <Suspense fallback={null}>
+                        <StepsSection />
+                    </Suspense>
                 </FeatureFlagged>
                 <ShamelessCTASection />
                 <HitCounter />

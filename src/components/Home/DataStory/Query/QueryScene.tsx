@@ -95,7 +95,9 @@ const FRAME_TITLE = ' ~/your-tool — zsh '
 const FRAME_STATUS = ' posthog mcp · ready '
 const LABEL_INSET = 2
 const { displayCommand: MCP_COMMAND, copyCommand: MCP_COPY_COMMAND } = buildWizardCommand({ subcommand: 'mcp add' })
-const COPIED_MS = 1500
+const COPY_FEEDBACK_MS = 1500
+const COPY_LABELS = { idle: 'click to copy', copied: 'copied ✓', failed: 'copy failed, select the command' } as const
+type CopyState = keyof typeof COPY_LABELS
 
 const statusBorder = (inner: number): string => {
     if (FRAME_STATUS.length + LABEL_INSET * 2 > inner) return '─'.repeat(inner)
@@ -191,12 +193,13 @@ const FrameRow = ({ row, index, hedgehog }: { row: string; index: number; hedgeh
 }
 
 const CopyCommandLine = () => {
-    const [copied, setCopied] = useState(false)
-    const copy = () => {
-        navigator.clipboard.writeText(MCP_COPY_COMMAND)
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), COPIED_MS)
-    }
+    const [copyState, setCopyState] = useState<CopyState>('idle')
+    const copy = () =>
+        navigator.clipboard
+            .writeText(MCP_COPY_COMMAND)
+            .then(() => setCopyState('copied'))
+            .catch(() => setCopyState('failed'))
+            .finally(() => window.setTimeout(() => setCopyState('idle'), COPY_FEEDBACK_MS))
     return (
         <button
             type="button"
@@ -217,7 +220,7 @@ const CopyCommandLine = () => {
                     'opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100'
                 )}
             >
-                {copied ? 'copied ✓' : 'click to copy'}
+                {COPY_LABELS[copyState]}
             </span>
         </button>
     )
@@ -273,30 +276,36 @@ const AsciiFrame = () => {
     )
 }
 
-const BringYourOwnTool = ({ covered, peeking }: { covered: boolean; peeking: boolean }) => (
-    <div
-        aria-hidden={covered}
-        className={cn(
-            SCENE_TEXT[11],
-            'relative flex flex-col justify-center overflow-hidden px-8 font-code leading-[1.35] text-secondary transition-opacity duration-200',
-            WINDOW_HEIGHT,
-            covered && 'pointer-events-none',
-            covered && !peeking && 'opacity-0'
-        )}
-    >
-        <AsciiFrame />
-        <pre className="m-0 !bg-transparent !p-0 text-[length:min(13.5px,calc((100cqi_-_4rem)/30))] font-bold leading-[1.25] text-primary">
-            {MCP_BANNER.join('\n')}
-        </pre>
-        <p className="m-0 mt-5 text-primary">$ Or bring your own tool and use our MCP</p>
-        <CopyCommandLine />
-        <p className="m-0 mt-4">
-            <Link to={MCP_DOCS_URL} state={{ newWindow: true }} className="underline underline-offset-2">
-                Read the MCP docs →
-            </Link>
-        </p>
-    </div>
-)
+const BringYourOwnTool = ({ covered, peeking }: { covered: boolean; peeking: boolean }) => {
+    const panelRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        panelRef.current?.toggleAttribute('inert', covered)
+    }, [covered])
+    return (
+        <div
+            ref={panelRef}
+            className={cn(
+                SCENE_TEXT[11],
+                'relative flex flex-col justify-center overflow-hidden px-8 font-code leading-[1.35] text-secondary transition-opacity duration-200',
+                WINDOW_HEIGHT,
+                covered && 'pointer-events-none',
+                covered && !peeking && 'opacity-0'
+            )}
+        >
+            <AsciiFrame />
+            <pre className="m-0 !bg-transparent !p-0 text-[length:min(13.5px,calc((100cqi_-_4rem)/30))] font-bold leading-[1.25] text-primary">
+                {MCP_BANNER.join('\n')}
+            </pre>
+            <p className="m-0 mt-5 text-primary">$ Or bring your own tool and use our MCP</p>
+            <CopyCommandLine />
+            <p className="m-0 mt-4">
+                <Link to={MCP_DOCS_URL} state={{ newWindow: true }} className="underline underline-offset-2">
+                    Read the MCP docs →
+                </Link>
+            </p>
+        </div>
+    )
+}
 
 const Dock = ({
     open,

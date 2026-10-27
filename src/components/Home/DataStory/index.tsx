@@ -9,10 +9,14 @@ import MergedFeed from './SelfDrive/MergedFeed'
 import Link from 'components/Link'
 import { SOURCES_DOCS_URL, useSourceCountLabel } from './sourceCount'
 
-const SourceCountLink = (): JSX.Element => (
-    <Link to={SOURCES_DOCS_URL} state={{ newWindow: true }} className="underline underline-offset-2">
-        {useSourceCountLabel()} other tools
+const StepLink = ({ to, children }: { to: string; children: React.ReactNode }): JSX.Element => (
+    <Link to={to} state={{ newWindow: true }} className="underline underline-offset-2">
+        {children}
     </Link>
+)
+
+const SourceCountLink = (): JSX.Element => (
+    <StepLink to={SOURCES_DOCS_URL}>{useSourceCountLabel()} other tools</StepLink>
 )
 
 const STEPS = [
@@ -20,8 +24,8 @@ const STEPS = [
         title: 'Get the data in',
         description: (
             <>
-                PostHog ingests product signals from users and AI agents, and combines it with revenue,
-                CRM, and support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
+                PostHog ingests product signals from users and AI agents, and combines them with revenue, CRM, and
+                support data from Stripe, HubSpot, Zendesk, and <SourceCountLink />.
             </>
         ),
         Scene: EventBoard,
@@ -34,14 +38,24 @@ const STEPS = [
     },
     {
         title: 'Give the data to your agent to act on',
-        description:
-            '[Scouts](/docs/self-driving/scouts) watch your product 24/7 and file reports in your [Inbox](/docs/self-driving/inbox). Each report carries the context behind it, so your agent can pick it up and start.',
+        description: (
+            <>
+                <StepLink to="/docs/self-driving/scouts">Scouts</StepLink> watch your product 24/7 and file reports in
+                your <StepLink to="/docs/self-driving/inbox">Inbox</StepLink>. Each report carries the context behind
+                it, so your agent can pick it up and start.
+            </>
+        ),
         Scene: ActScene,
     },
     {
         title: 'Let PostHog self-drive',
-        description:
-            'If you enable [self-driving](/self-driving), when a report is ready, PostHog writes the pull request for you. You review and merge. After the change ships, PostHog checks whether it worked. Any new problem starts the loop again.',
+        description: (
+            <>
+                If you enable <StepLink to="/self-driving">self-driving</StepLink>, when a report is ready, PostHog
+                writes the pull request for you. You review and merge. After the change ships, PostHog checks whether it
+                worked. Any new problem starts the loop again.
+            </>
+        ),
         Scene: SelfDriveScene,
     },
 ]
@@ -50,9 +64,7 @@ export const StepsSection = (): JSX.Element => (
     <section>
         <h2>
             How PostHog helps you{' '}
-            <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">
-                build better products
-            </Emphasis>{' '}
+            <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">build better products</Emphasis>{' '}
         </h2>
         {STEPS.map(({ title, description, Scene }, index) => (
             <StepFrame key={title} number={index + 1} title={title} description={description}>
