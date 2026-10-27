@@ -1,6 +1,6 @@
 ---
 title: "How to write comparison content that doesn't age like milk"
-date: 2026-10-20
+date: 2026-10-27
 author:
     - natalia-amorim
 featuredImage: >-
@@ -25,7 +25,6 @@ Both are worth figuring out if you want to write comparison content that doesn't
 ## Why bother with comparison content?
 
 Because it works.
-
 
 Since 2021, **over 25k people have signed up for PostHog after reading a comparison**. Almost 50% did it within 24 hours of reading; ~75% within 30 days.
 
@@ -79,7 +78,8 @@ In practice, this means picking up a few uncomfortable habits:
 
 For example, earlier this year our articles admitted we were weaker on APM because we hadn't shipped [distributed tracing](/docs/distributed-tracing) or [metrics](/docs/metrics) yet. True at the time. We've since shipped a full APM suite, and the articles now say that instead. Our content matches our shipping, not just our ambitions.
 
-Readers don't think less of you for crediting a competitor; they think more. It's the cheapest trust signal in content marketing, and almost nobody uses it, which is exactly why it works. Say the nice thing.
+Readers don't think less of you for crediting a competitor; they think more. It's the cheapest trust signal in content marketing, and almost nobody uses it. And as AI eats everything else about content, trust is one of the few things left you can't generate.
+Say the nice thing.
 
 There's another reader to keep in mind, too: LLMs. When someone asks Claude "PostHog vs Sentry for a Next.js app," we assume the model pulls from sources it judges to be balanced. So be balanced. You want to read as a source, not an ad. 
 
@@ -97,11 +97,17 @@ The reader who isn't a fit should leave feeling helped, not hustled. Honest page
 
 We've shipped edits because someone at a competitor emailed us, DMed us, or better yet, opened a PR directly against our blog. We welcome it and encourage it. (Yes, if you're a competitor reading this, this is an invitation.) 
 
+Here's an example from today: Lucas Harras, a Senior Customer Success Architect at Amplitude, read our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) page, found four features we'd marked as missing that Amplitude actually has, and [opened a PR](https://github.com/PostHog/posthog.com/pull/21631). We merged it the same day, and because every comparison table renders from that file (more on that below), every page that mentions Amplitude was correct by the next deploy.
+
+![Example PR](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_27_T16_58_54_817_Z_c7819407f4.png)
+
 Sometimes you'll be offered a slice of humble pie, and it's important to eat it gracefully.
 
 My litmus test for every comparison: if a competitor wrote this exact page about PostHog, how would I feel reading it? Would it feel like they'd done their homework, or would I feel misrepresented and annoyed? If it's the latter, it's probably worth trying again.
 
-We haven't always gotten this right, but we're committed to doing better every time.
+We haven't always gotten this right. Part of it is that not everyone uses the same words for the same features, and some of our competitors have several hundred of them. A "sort of" column doesn't exist, so every row is ultimately a judgment call, and we've made some wrong ones.
+
+But we're committed to doing better every time.
 
 ## How to maintain comparison pages
 
@@ -131,18 +137,24 @@ Feature keys come from a shared dictionary, so "session replay with network payl
 
 Most of our comparison tables render from these files through one component. When a competitor ships a feature, someone changes one line in one file and every page that mentions them updates on the next deploy. The repo is public, so competitors can see exactly what we say about them and open a pull request if we're wrong.
 
-### 2. A Scout checks our homework
+### 2. Scouts checks our homework
 
 Data files solve "update once, publish everywhere", but they don't solve for "notice that something changed" – that's what [we've used Scouts for](/blog/what-is-a-scout).
 
-Our comparison content scout is a scheduled agent inside PostHog that reads our competitor files, visits each competitor's pricing and docs pages, and reports back when what they say and what we say have drifted apart. A few things make it work well for us:
+We run two. The first watches our competitors: it reads the competitor files I mentioned above, visits each competitor's pricing and docs pages, and reports back when what they say and what we say have drifted apart.
+
+The second watches us. It turns out a very embarrassing way to get a comparison wrong isn't overstating a competitor, but understating yourself. (I learned this the hard way… occupational hazard of shipping as fast as we do. \*wink\*)
+
+So the second scout reads our comparison pages against our own changelog, docs, open PRs, and Slack threads, and flags anywhere we might be underselling ourselves.
+
+A few things make both of them better than a script that pings you every time a page changes:
 
 1. **It has memory between runs**, so it doesn't re-flag the same thing every week, and it learns what "normal" looks like for each site.
 2. **It's selective by design.** Most runs end with nothing to report, and that's it working. It ignores changes that don't affect the overall comparison.
 3. **It shows its evidence**: what their page says now, what our file says, and a suggested edit, with sources.
 4. **A human ships the fix.** The scout posts a digest to Slack with a link to open a PR. A person decides whether the change is necessary, opens the PR, and merges it. 
 
-Here's what it looks like in practice. First, the Slack digest:
+Here's an example of what this looks like in practice. First, the Slack digest:
 
 ![Scout Digest Example](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_20_T16_19_30_472_Z_b79c531d30.png)
 
