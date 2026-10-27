@@ -31,7 +31,7 @@ You still need to describe your test in plain language and learn how to set up e
 
 The result is a real PR with real code. And because the variant is baked into the code rather than injected after render, you avoid the DOM manipulation issues that plague no-code tools. The work is also done upfront, not deferred. When the experiment wins, your production code is already shipped. There's no rebuilding step.
 
-And this isn't just a theoretical improvement. We've seen it in practice. 18% of our experiments last week were created through the MCP and we only expect that number to grow.
+And this isn't just a theoretical improvement. We've seen it in practice. 18% of our experiments last week were [created through the MCP](/blog/how-ai-changes-posthog#ai-creates-a-majority-of-dashboards-and-insights) and we only expect that number to grow.
 
 ![PostHog MCP experiments](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/experiments_77596cf342.png)
 
