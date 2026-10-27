@@ -40,7 +40,6 @@ import Spinner from 'components/Spinner'
 import { useUser } from 'hooks/useUser'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
-import { Authentication } from 'components/Squeak'
 import OSTable from 'components/OSTable'
 import Editor from 'components/Editor'
 import { slugifyTeamName } from 'lib/utils'
@@ -969,28 +968,6 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     )
 }
 
-const Auth = () => {
-    return (
-        <div className="-m-4">
-            <div className="p-4">
-                <div className="bg-accent p-4 mt-0 mb-2 rounded-md border border-primary">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-            </div>
-            <div className="">
-                <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-            </div>
-        </div>
-    )
-}
-
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
@@ -1299,9 +1276,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return !user ? (
-        <Auth />
-    ) : !isModerator && !disclaimerConfirmed ? (
+    return !user ? null : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div>
@@ -1600,24 +1575,12 @@ const IssueWindow = () => {
     )
 }
 
-const AddAJobWindow = ({
-    companyId,
-    onSuccess,
-    onClose,
-}: {
-    companyId?: number
-    onSuccess?: () => void
-    onClose?: () => void
-}) => {
+const AddAJobWindow = ({ companyId, onSuccess }: { companyId?: number; onSuccess?: () => void }) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
         setWindowTitle(appWindow, 'Add a company')
-
-        return () => {
-            onClose?.()
-        }
     }, [])
 
     return (
@@ -1632,15 +1595,15 @@ const AddAJobWindow = ({
 }
 
 export default function JobsPage() {
-    const [companyId, setCompanyId] = useState<number>()
     const [filteredCompanies, setFilteredCompanies] = useState<Company[]>()
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
     const [pendingCompaniesCount, setPendingCompaniesCount] = useState<number>(0)
-    const { addWindow } = useApp()
+    const [pendingCompanyWindow, setPendingCompanyWindow] = useState<{ companyId?: number } | null>(null)
+    const { addWindow, openSignIn, windows } = useApp()
     const { appWindow } = useWindow()
-    const { getJwt, isModerator } = useUser()
+    const { user, getJwt, isModerator } = useUser()
 
     const {
         companies: initialCompanies,
@@ -1678,23 +1641,40 @@ export default function JobsPage() {
         )
     }
 
-    const openAddAJobWindow = (companyId?: number) => {
-        addWindow(
-            <AddAJobWindow
-                newWindow
-                location={{ pathname: `cool-tech-jobs-add-a-job` }}
-                key={`cool-tech-jobs-add-a-job`}
-                companyId={companyId}
-                onSuccess={() => {
-                    mutate()
-                    fetchPendingCompaniesCount()
-                }}
-                onClose={() => {
-                    setCompanyId(undefined)
-                }}
-            />
-        )
-    }
+    const openAddAJobWindow = useCallback(
+        (companyId?: number) => {
+            if (!user) {
+                setPendingCompanyWindow({ companyId })
+                openSignIn()
+                return
+            }
+
+            addWindow(
+                <AddAJobWindow
+                    newWindow
+                    location={{ pathname: `cool-tech-jobs-add-a-job` }}
+                    key={`cool-tech-jobs-add-a-job`}
+                    companyId={companyId}
+                    onSuccess={() => {
+                        mutate()
+                        fetchPendingCompaniesCount()
+                    }}
+                />
+            )
+        },
+        [user, openSignIn, addWindow, mutate, fetchPendingCompaniesCount]
+    )
+
+    useEffect(() => {
+        if (!pendingCompanyWindow) return
+
+        if (user) {
+            setPendingCompanyWindow(null)
+            openAddAJobWindow(pendingCompanyWindow.companyId)
+        } else if (!windows.some(({ path }) => path.startsWith('community-auth-'))) {
+            setPendingCompanyWindow(null)
+        }
+    }, [user, windows, pendingCompanyWindow, openAddAJobWindow])
 
     return (
         <>
@@ -1775,7 +1755,7 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => openAddAJobWindow(companyId)}
+                                onClick={() => openAddAJobWindow()}
                             >
                                 Apply to get your jobs listed.
                             </button>
