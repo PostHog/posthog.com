@@ -40,6 +40,25 @@ const StepsSection =
 const DATA_STORY_FLAG = 'homepage-data-story'
 const DATA_STORY_VARIANT = 'test'
 
+class DataStoryErrorBoundary extends React.Component<
+    { fallback: React.ReactNode; children: React.ReactNode },
+    { failed: boolean }
+> {
+    state = { failed: false }
+
+    static getDerivedStateFromError(): { failed: boolean } {
+        return { failed: true }
+    }
+
+    componentDidCatch(error: Error): void {
+        window.posthog?.captureException?.(error)
+    }
+
+    render(): React.ReactNode {
+        return this.state.failed ? this.props.fallback : this.props.children
+    }
+}
+
 const SecondaryActions = ({
     justify = 'center',
     demoTo = '/demo',
@@ -196,9 +215,11 @@ export default function HomeTest() {
                     placeholder={<Control />}
                     render={() =>
                         posthog?.getFeatureFlag?.(DATA_STORY_FLAG) === DATA_STORY_VARIANT ? (
-                            <Suspense fallback={null}>
-                                <StepsSection />
-                            </Suspense>
+                            <DataStoryErrorBoundary fallback={<Control />}>
+                                <Suspense fallback={null}>
+                                    <StepsSection />
+                                </Suspense>
+                            </DataStoryErrorBoundary>
                         ) : (
                             <Control />
                         )
