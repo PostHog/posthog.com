@@ -35,10 +35,13 @@ Start the Gatsby development server at http://localhost:8001
    pnpm start
    ```
 
-6. Wait for server to be ready (check http://localhost:8001), then notify user.
+6. Watch the server output, not the port. The server is ready when the output shows `You can now view`. If the process exits first, read the `ERROR #` block in its output and tell the user. A plain `ERROR` line without a number is only a warning.
+
+7. If the server crashes or stops responding later, stop it and run `pnpm start` again. Use `pnpm clean` only if a restart does not fix it, because a clean start takes several minutes longer.
 
 ## Notes
 
-- First run takes ~3-4 minutes for Gatsby to build
+- First run takes 5-10 minutes for Gatsby to build. A restart takes 1-2 minutes
+- If `pnpm start` says something is already running on the port, do not start a second server. Use the one that runs, or ask the user to stop it
 - Don't use `pnpm build` locally - it runs out of memory on this large site
 - If build fails with "Module not found" errors, try merging master first
