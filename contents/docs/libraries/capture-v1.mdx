@@ -171,7 +171,7 @@ SDKs split large batches into requests of 5MB or less, and send any single event
 
 ## Retries and failures
 
-SDKs on capture v1 retry a request when PostHog or the network has a temporary problem (`408`, `500`, `502`, `503`, `504`, or a network error), and they resend only the events PostHog asked them to retry. Every other response is final, including `429`. Each wait doubles, with some randomness added so many clients don't retry at the same moment.
+SDKs on capture v1 retry a request that fails with `404`, `408`, `429`, `500`, `502`, `503`, `504`, or a network error, and they resend only the events PostHog asked them to retry. Every other response is final. Each wait doubles, with some randomness added so many clients don't retry at the same moment.
 
 Let the SDK handle retries. Don't wrap its capture calls in your own retry loop – that can send events twice and slow your app down.
 
