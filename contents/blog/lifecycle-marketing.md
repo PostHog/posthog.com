@@ -58,18 +58,19 @@ He also quoted Jeff Bezos at me, on listening to customers when they and the dat
 
 Right now, our onboarding personalizes based on product behavior, not person properties. When a PostHog user uses Product Analytics, a email on getting more out of it is probably useful. If your first name happens to be in our database, that's not a reason to use it.
 
-![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
-<Caption>A previous version of our onboarding, back when it was very highly personalized</Caption>
-
 Jeff thinks you should personalize as much as possible. At Calendly, changing just the first paragraph of a newsletter by role doubled activation and conversions. James has never seen one-to-one AI personalization beat a well-crafted email written for a specific segment.
 
 ### Are experiments worth more than taste?
 
 Most of our emails are guided by taste, not experiments. The only consistent finding from the few tests we have run is that hand-drawn hedgehogs beat product screenshots by a point or two as the lead image. I suspect we could have told you that without testing it.
 
-<div className="grid grid-cols-2 gap-2 items-start">
-  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyless_7e06100c19.png" alt="Onboarding email with a product screenshot as the lead image" />
-  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyful_714c44ec34.png" alt="Onboarding email with a hand-drawn hedgehog as the lead image" />
+<div className="grid grid-cols-2 gap-2">
+  <div className="overflow-hidden" style={{ aspectRatio: '1600 / 1316' }}>
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyless_7e06100c19.png" alt="Onboarding email with a product screenshot as the lead image" className="w-full h-full object-cover object-top" />
+  </div>
+  <div className="overflow-hidden" style={{ aspectRatio: '1600 / 1316' }}>
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyful_714c44ec34.png" alt="Onboarding email with a hand-drawn hedgehog as the lead image" className="w-full h-full object-cover object-top" />
+  </div>
 </div>
 <Caption>Not a shock that people prefer hand-drawn art, really</Caption>
 
@@ -91,6 +92,9 @@ He also splits flows into two parallel tracks: a hard onboarding track that's di
 
 At PostHog this has never really been a question, partly because [we work with fuzzy ownership](/handbook/company/fuzzy-ownership) and partly because we don't have a defensive internal culture. I own email marketing mostly because I built it, but people across the company contribute to it freely.
 
+![Joe's reply to an email that accused him of being an AI, with a selfie as proof of life](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/proof_of_posthog_4f1eecf3d1.jpg)
+<Caption>False accusations of AI slop are so common I've started sending proof of life at times</Caption>
+
 Elsewhere, it apparently isn't so simple. James's very first question was who controls email at PostHog, because he's seen engineers self-serve sends at other companies and hurt users. His advice was that marketing should own email wholly and run it from a calendar.
 
 Jeff went further. In his experience, email becomes a political hot potato as product-led companies grow and sales starts asking for more and more from it. He suggested writing a pitch document up front listing what you will and won't do, including a section for the things leadership mandates you do anyway.
@@ -98,6 +102,9 @@ Jeff went further. In his experience, email becomes a political hot potato as pr
 ### How do you cross-sell for a multi-product company?
 
 This was the one I most wanted answered. PostHog ships [12-plus products](/products), and getting people from one to two has always been harder than it looks. We've built entire flows to encourage it and never been sure they're worth the overhead.
+
+![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
+<Caption>A previous version of our onboarding, and a previous attempt at personalized cross-sell</Caption>
 
 James's advice was to stop trying to map all of them. If 90% of your users start with X and power users then move to Y, don't worry about A, B, or C. Get people to adopt X and Y and let everything else compound downstream.
 
@@ -120,6 +127,9 @@ So, what are we actually going to do?
 ### We're leaving Customer.io
 
 The flow currently runs as roughly 100 emails in Customer.io, held together by 46 delays, 50-odd decision events, and a data pipeline that pushes PostHog events across so the emails know what a user has done. The pipeline works, mostly, but only because we've cut back how much data we send to stop it degrading. Even then it breaks, users get the wrong email, and I hear about it in my inbox.
+
+![A Customer.io campaign imported into PostHog Workflows](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/customer_io_migration_9a890070b7.png)
+<Caption>Migrating from Customer.io to PostHog Workflows was effortless thanks to the MCPs both platforms offer</Caption>
 
 We're moving the whole thing into [PostHog Workflows](/workflows), partly because you should use your own product and partly because it deletes the pipeline entirely. Workflows runs on the same data as everything else in PostHog, so an email can trigger on anything a user does, not just the handful of events I remembered to set up six months ago. It can also do things Customer.io can't, like flip a feature flag or trigger a survey off the back of an email.
 
