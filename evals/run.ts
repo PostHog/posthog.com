@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import { fileURLToPath } from 'node:url'
 import { dryRun, findRequestId, gaugeAvailable, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
@@ -280,7 +280,8 @@ async function main(argv: string[]): Promise<number> {
     }
     if (options.command === 'sync') return sync(checks, built, shared, options)
     if (options.command === 'plan') {
-        const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
+        // Absolute, because the gauge CLI runs from evals/gauge/, not from here.
+        const specDir = options.write ? resolve(options.write) : await mkdtemp(join(tmpdir(), 'posthog-evals-'))
         await mkdir(specDir, { recursive: true })
         for (const [i, spec] of toGaugeSpecs(checks, shared.runConfig.samples).entries()) {
             const path = join(specDir, `spec-${i + 1}.json`)
@@ -398,19 +399,31 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
         }
         console.log(`Launched ${check.key} (${requestId})`)
         launched.push({ check: check.key, evalId: ids[check.key], requestId, response: JSON.parse(launch.raw) })
+        // Saved after every launch: these sessions are paid for even if this process dies.
+        await writeFile(join(outDir, 'request.json'), `${JSON.stringify(launched, null, 4)}\n`)
     }
-    await writeFile(join(outDir, 'request.json'), `${JSON.stringify(launched, null, 4)}\n`)
 
     const results: Record<string, unknown> = {}
     const verdicts: { check: string; passed: boolean }[] = []
     if (launched.length > 0) console.log(`Waiting for judging on ${launched.length} launched run(s)`)
+    // Saved after every verdict, so a crash or a CI timeout keeps what already came back.
+    const save = () => writeFile(join(outDir, 'results.json'), `${JSON.stringify({ results, cantRun }, null, 4)}\n`)
     for (const run of launched) {
         const result = wait(run.requestId)
-        results[run.check] = JSON.parse(result.raw)
-        verdicts.push({ check: run.check, passed: result.passed })
-        console.log(`  ${result.passed ? 'passed' : 'failed'}  ${run.check}`)
+        if ('error' in result) {
+            cantRun.push({
+                key: run.check,
+                reason: `launched, but no verdict came back (${result.error}); try gauge run wait ${run.requestId} --hosted`,
+            })
+            console.log(`  no verdict  ${run.check}`)
+        } else {
+            results[run.check] = result.verdict
+            verdicts.push({ check: run.check, passed: result.passed })
+            console.log(`  ${result.passed ? 'passed' : 'failed'}  ${run.check}`)
+        }
+        await save()
     }
-    await writeFile(join(outDir, 'results.json'), `${JSON.stringify({ results, cantRun }, null, 4)}\n`)
+    await save()
 
     const passed = verdicts.filter((v) => v.passed).length
     console.log(

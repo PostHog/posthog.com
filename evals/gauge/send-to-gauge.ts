@@ -72,15 +72,30 @@ export function findRequestId(launchJson: string): string | null {
     return null
 }
 
-// With --check, wait exits 1 unless the verdict passes; stdout is still the JSON.
-export function wait(requestId: string): { raw: string; passed: boolean } {
-    const result = spawnSync('gauge', ['run', 'wait', requestId, '--check', '-o', 'json', '--hosted'], {
-        cwd: gaugeDir,
-        encoding: 'utf8',
-        maxBuffer: 64 * 1024 * 1024,
-    })
-    if (result.stderr) process.stderr.write(result.stderr)
-    return { raw: result.stdout, passed: result.status === 0 }
+const sleep = (ms: number) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+
+export type WaitResult = { verdict: unknown; passed: boolean } | { error: string }
+
+// With --check, wait exits 1 unless the verdict passes; stdout is still the JSON. A
+// network error or a 503 while polling exits with no JSON: that's not a verdict, so wait
+// again on the same request, backing off, and report an error if it never answers.
+export function wait(requestId: string, attempts = 4): WaitResult {
+    let lastError = ''
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+        const result = spawnSync('gauge', ['run', 'wait', requestId, '--check', '-o', 'json', '--hosted'], {
+            cwd: gaugeDir,
+            encoding: 'utf8',
+            maxBuffer: 64 * 1024 * 1024,
+        })
+        if (result.stderr) process.stderr.write(result.stderr)
+        try {
+            return { verdict: JSON.parse(result.stdout), passed: result.status === 0 }
+        } catch {
+            lastError = result.stderr.trim().split('\n').at(-1) || `gauge exited ${result.status} with no JSON`
+            if (attempt < attempts) sleep(15_000 * 2 ** (attempt - 1))
+        }
+    }
+    return { error: lastError }
 }
 
 export function gaugeAvailable(): boolean {

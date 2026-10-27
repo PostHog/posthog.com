@@ -27,15 +27,15 @@ checks:
                   third-party HTTP client. The HTTP call uses the standard library (for
                   example urllib.request).
               capture-request: >-
-                  The code sends an HTTP POST to the /capture/ endpoint on the PostHog
-                  host (for example https://us.i.posthog.com/capture/) with
-                  Content-Type: application/json. Cite the file and line(s).
+                  The code sends an HTTP POST to a PostHog capture endpoint on the
+                  PostHog host: /capture/ (for example
+                  https://us.i.posthog.com/capture/) or /i/v0/e/, with Content-Type:
+                  application/json. Cite the file and line(s).
               payload-fields: >-
                   The JSON body has a top-level api_key set to the project token, a
-                  top-level event set to job_created, and a properties object that
-                  contains distinct_id (for example the job's ID or the acting user's
-                  ID). A distinct_id at the top level only, outside properties, does not
-                  pass. Cite the file and line(s).
+                  top-level event set to job_created, and a distinct_id (for example
+                  the job's ID or the acting user's ID), either at the top level or
+                  inside properties. PostHog accepts both. Cite the file and line(s).
               fires-on-create: >-
                   The event is sent after a job is saved: in create_job() in
                   {folder}/records/services/jobs.py, or in code it calls, so jobs created
