@@ -97,6 +97,8 @@ These properties are deprecated, and we'll stop storing them on events.
 | Data pipeline debugging | `$transformations_succeeded`, `$transformations_skipped` | Internal debugging data |
 | Raw LLM payloads | `$ai_input`, `$ai_output`, `$ai_output_choices`, `$ai_input_state`, `$ai_output_state`, `$ai_tools` | Already moved to a dedicated table (see below) |
 
+Queries using `$active_feature_flags` keep working. HogQL translates them to the new feature flags map, so existing insights and queries won’t break. For new queries, use the map directly.
+
 **Raw LLM payloads already live somewhere else.** `$ai_input`, `$ai_output` and the rest moved to a dedicated AI observability table with 30-day retention, which keeps very heavy data off the events table and AI observability affordable. Any copies still on the events table are legacy data older than 30 days, so removing them changes nothing in the product.
 
 ## When
