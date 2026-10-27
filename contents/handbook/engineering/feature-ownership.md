@@ -41,7 +41,7 @@ Not sure which row fits your change? If all else fails, ask the owning team.
 
 Generating a PR takes minutes, so the PR itself isn't the work. Before you ask the owning team for a review:
 
--   Understand the change well enough to explain it and its tradeoffs on a whiteboard, without the diff open.
+-   Understand the change well enough to explain it and its tradeoffs without the diff open.
 -   Test it, by hand where the tests don't cover it.
 -   Write a description that says what changed and why. "I pointed an agent at this" is not a description.
 
