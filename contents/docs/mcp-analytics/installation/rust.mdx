@@ -26,7 +26,7 @@ You need Rust 1.88+, `rmcp` 3.7 or later, `posthog-rs` 0.29.0 or later, and a Po
 cargo add posthog-rs --features mcp
 ```
 
-The `mcp` feature pulls in `rmcp` with its `server` feature and turns on the async client. Your server already depends on `rmcp` for its tools.
+The `mcp` feature pulls in `rmcp` with its `server` feature and turns on the async client. Your server already depends on `rmcp` for its tools. The snippets on this page also need `tokio` with its `macros` and `rt-multi-thread` features, and `rmcp` with `transport-io` for stdio or `transport-streamable-http-server` for HTTP.
 
 </Step>
 
@@ -47,11 +47,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     let server = posthog_rs::mcp::instrument(NotesServer, posthog.clone());
-    server
-        .serve(rmcp::transport::stdio())
-        .await?
-        .waiting()
-        .await?;
+    server.serve(rmcp::transport::stdio()).await?.waiting().await?;
 
     posthog.shutdown().await;
     Ok(())
@@ -60,7 +56,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 `NotesServer` is your own `rmcp` server, such as a `#[tool_router]` struct with a `#[tool_handler]` `ServerHandler` impl. The wrapped server answers every request as yours would. It only adds the analytics arguments to your tools, a conversation handle to tool results, and, when you turn it on, the `get_more_tools` tool.
 
-For Streamable HTTP, hand the wrapped server to `StreamableHttpService` in place of yours. Your server must implement `Clone`. Each clone of the wrapped server serves its own connection and session. Clones share everything else.
+For Streamable HTTP, hand the wrapped server to `StreamableHttpService` in place of yours:
+
+```rust
+use std::sync::Arc;
+
+use rmcp::transport::streamable_http_server::session::local::LocalSessionManager;
+use rmcp::transport::streamable_http_server::{StreamableHttpServerConfig, StreamableHttpService};
+
+let server = posthog_rs::mcp::instrument(NotesServer, posthog.clone());
+let service = StreamableHttpService::new(
+    move || Ok(server.clone()),
+    Arc::new(LocalSessionManager::default()),
+    StreamableHttpServerConfig::default(),
+);
+// Mount `service` on your HTTP router, such as axum's `Router::new().nest_service("/mcp", service)`.
+```
+
+Your server must implement `Clone`. Each clone of the wrapped server serves its own connection and session. Clones share everything else.
 
 </Step>
 
@@ -72,16 +85,31 @@ For Streamable HTTP, hand the wrapped server to `StreamableHttpService` in place
 
 <Step title="Check your first events" badge="required">
 
-Connect an agent to your server and call a tool. Then open the [activity feed](https://app.posthog.com/activity/explore) and filter for `event = $mcp_tool_call`. See [the event reference](/docs/mcp-analytics/events) for every property.
+Connect an agent to your server and call a tool. Then run this query in the [SQL editor](/docs/data-warehouse/sql), or through the `execute-sql` tool of the [PostHog MCP server](/docs/model-context-protocol):
+
+```sql
+SELECT
+  timestamp,
+  event,
+  properties.$mcp_tool_name AS tool,
+  properties.$mcp_is_error  AS failed
+FROM events
+WHERE properties.$lib = 'posthog-rs-mcp'
+  AND timestamp > now() - INTERVAL 1 HOUR
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
+You should see a `$mcp_tool_call` row for the tool you called. Events can take a minute to arrive. No rows? See [Troubleshooting](#troubleshooting). See [the event reference](/docs/mcp-analytics/events) for every property.
 
 </Step>
 
 </Steps>
 
-For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/0.29.0/examples/mcp_server.rs). It reads the project token from `POSTHOG_API_KEY`:
+For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/0.29.0/examples/mcp_server.rs). The example reads the token from `POSTHOG_API_KEY`, so pass it your `POSTHOG_PROJECT_TOKEN`:
 
 ```bash
-POSTHOG_API_KEY=phc_... cargo run --example mcp_server --features mcp
+POSTHOG_API_KEY="$POSTHOG_PROJECT_TOKEN" cargo run --example mcp_server --features mcp
 ```
 
 ## Configuration
@@ -122,7 +150,15 @@ The SDK logs its warnings through [`tracing`](https://docs.rs/tracing), never to
 The `identify` callback receives a `RequestInfo` with the JSON-RPC method, the tool name and arguments, the request `_meta`, and, on HTTP, the request's `http::request::Parts`. Read the user your HTTP middleware attached to the request extensions:
 
 ```rust
-use posthog_rs::mcp::{Identity, McpOptionsBuilder};
+use posthog_rs::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
+
+/// What your HTTP auth middleware inserts into the request extensions.
+#[derive(Clone)]
+struct AuthenticatedUser {
+    id: String,
+    plan: String,
+    org_id: String,
+}
 
 let options = McpOptionsBuilder::default()
     .identify(|request| {
@@ -134,6 +170,7 @@ let options = McpOptionsBuilder::default()
         )
     })
     .build()?;
+let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer);
 ```
 
 `with_property` values go out as `$set` on every MCP event, and `with_group` values as `$groups`. Without an identity, events are anonymous and create no person profile. Never put a raw credential, such as an `Authorization` header, in a property: person properties aren't redacted. The Rust SDK doesn't send a separate `$identify` event.
@@ -164,36 +201,48 @@ See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability) for 
 
 For a server that isn't an `rmcp` `ServerHandler`, such as a gateway or your own JSON-RPC router, use the manual API on `McpAnalytics`. It sends the tool call events: `$mcp_tool_call`, `$exception`, `$mcp_unknown_tool`, and `$mcp_input_required`. It doesn't send `$mcp_tools_list` or `$mcp_initialize`.
 
-When you answer `tools/list`, pass your tools through `list_tools`. It returns them with the analytics arguments added:
+Create one `McpAnalytics` with `McpAnalytics::new(posthog.clone(), options)` and share it. When you answer `tools/list`, pass your tools through `list_tools`, which adds the analytics arguments. For each `tools/call`, start the call with the arguments as the agent sent them, run the tool with the arguments the SDK hands back, and finish the call:
 
 ```rust
-let analytics = McpAnalytics::new(posthog.clone(), options);
+use posthog_rs::mcp::{
+    McpAnalytics, ToolCallError, ToolCallRequest, ToolRegistration, TransportSession,
+};
+use rmcp::model::{CallToolResult, JsonObject, Tool};
 
-let advertised = analytics.list_tools(my_tools);
-```
+/// Answers `tools/list` with your tools plus the analytics arguments.
+fn list_tools(analytics: &McpAnalytics, my_tools: Vec<Tool>) -> Vec<Tool> {
+    analytics.list_tools(my_tools)
+}
 
-For each `tools/call`, start the call with the arguments as the agent sent them, run the tool with the arguments the SDK hands back, and finish the call:
-
-```rust
-use posthog_rs::mcp::{ToolCallError, ToolCallRequest, ToolRegistration, TransportSession};
-
-let call = analytics.start_tool_call(
-    ToolCallRequest::new("search_docs", arguments)
-        .tool(ToolRegistration::Registered(tool))
-        .transport_session(TransportSession::Id(mcp_session_id)),
-);
-
-match run_tool(call.arguments()).await {
-    Ok(result) => {
-        let result = call.complete(result); // deliver this, it may carry a conversation handle
-        respond(result)
-    }
-    Err(error) => {
-        call.fail(ToolCallError::new(&error).error_type("timeout"));
-        respond_error(error)
+/// Answers one `tools/call` for a tool you have, on a session with an id.
+async fn call_tool(
+    analytics: &McpAnalytics,
+    tool: Tool,
+    arguments: Option<JsonObject>, // as the agent sent them
+    mcp_session_id: String,
+) -> Result<CallToolResult, std::io::Error> {
+    let call = analytics.start_tool_call(
+        ToolCallRequest::new(tool.name.to_string(), arguments)
+            .tool(ToolRegistration::Registered(tool))
+            .transport_session(TransportSession::Id(mcp_session_id)),
+    );
+    match run_tool(call.arguments()).await {
+        // Return what `complete` gives back: it may carry a conversation handle.
+        Ok(result) => Ok(call.complete(result)),
+        Err(error) => {
+            call.fail(ToolCallError::new(&error).error_type("timeout"));
+            Err(error)
+        }
     }
 }
+
+/// Your tool's own code, given the arguments without the analytics ones.
+async fn run_tool(arguments: Option<&JsonObject>) -> Result<CallToolResult, std::io::Error> {
+    todo!("your tool's code, reading {arguments:?}")
+}
 ```
+
+`std::io::Error` stands in for your own error type. `ToolCallError::new` takes any `std::error::Error`.
 
 - `call.arguments()` no longer holds the `context`, `llm_model`, or `conversation_id` arguments, when the SDK knows it added them: the tool is `ToolRegistration::Registered`, or it went through `list_tools` earlier.
 - `ToolRegistration::NotRegistered` sends `$mcp_unknown_tool` instead of a tool call. Use `ToolRegistration::NoRegistry` when you can't tell. Then the SDK removes the analytics arguments only for tools it saw in `list_tools`.
@@ -212,6 +261,17 @@ The Rust SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_tools_
 - **Errors:** an `McpError` from your tool counts under `McpError`, or `validation` for invalid params. A panic counts under `Panic`, and the SDK re-raises it after capturing. A result with `is_error` set is a failed call with the type `Error`, or `validation` when `rmcp` couldn't parse the arguments.
 - **Unknown tools:** a call that names a tool your server doesn't have, and that your server rejects as not found, sends `$mcp_unknown_tool` instead of `$mcp_tool_call`.
 - **`input_required` rounds:** a tool that ends a `2026-07-28` round by asking the client for input sends `$mcp_input_required` with the request methods, never their contents. On an older revision, `rmcp` answers the round with an error, so it's a failed `$mcp_tool_call` with `$mcp_error_type` set to `input_required`.
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+| --- | --- |
+| No events at all | Check that the process calls `posthog.shutdown().await` before it exits, because queued events are lost without it. Check the token is the project token (`phc_...`) and the host matches your region: `https://us.i.posthog.com` or `https://eu.i.posthog.com`. |
+| A stdio client can't connect, or reports invalid JSON | Something writes to stdout, which carries the protocol. Send logs and your `tracing` subscriber to stderr. |
+| Events arrive, but `$mcp_intent` is empty | The tool's input schema uses `$ref`, `allOf`, `anyOf`, or `oneOf` at the top level, so the SDK adds no `context` argument. Use a plain object schema, or set `intent_fallback`. |
+| Every request is a new session on HTTP | The server is stateless and the client ignores the conversation handle. See [Sessions](#sessions), and use `identify` to group calls by user. |
+| `$mcp_initialize` is in a different session from the calls after it | Expected on Streamable HTTP. See [Sessions](#sessions). |
+| Events are anonymous after you set `identify` | `request.http` is `None` on stdio, and your middleware must insert the type you read before the request reaches the MCP service. |
 
 ## Limits
 
