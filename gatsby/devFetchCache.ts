@@ -51,10 +51,14 @@ export function cacheFetchResponsesInDevelopment(): void {
         let response: Response
         try {
             response = await networkFetch(input, init)
-        } catch {
+        } catch (error) {
             // One failed request during sourcing stops `gatsby develop`, so prefer an old copy or one retry
             const stale = readCached(file, Infinity)
-            if (stale) return toResponse(stale)
+            if (stale) {
+                const savedAt = fs.statSync(file).mtime.toISOString()
+                console.warn(`Fetching ${input} failed, using the copy cached at ${savedAt}:`, error)
+                return toResponse(stale)
+            }
             response = await networkFetch(input, init)
         }
         if (!response.ok) return response
