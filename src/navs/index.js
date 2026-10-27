@@ -1739,12 +1739,26 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Coverage and allocation',
+                    },
+                    {
                         name: 'Customer journey and coverage model',
                         url: '/handbook/growth/sales/customer-journey',
                     },
                     {
                         name: 'Allocating accounts',
                         url: '/handbook/growth/sales/account-allocation',
+                    },
+                    {
+                        name: 'Adding and removing a TAM',
+                        url: '/handbook/growth/sales/adding-and-removing-a-tam',
+                    },
+                    {
+                        name: 'Account handovers',
+                        url: '/handbook/growth/sales/account-handovers',
+                    },
+                    {
+                        name: 'Working an account',
                     },
                     {
                         name: 'Account planning',
@@ -1759,44 +1773,50 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/onboarding-success-plan',
                     },
                     {
-                        name: 'Basic implementation review',
-                        url: '/handbook/customer-success/foundation-check',
-                    },
-                    {
-                        name: 'Handling customer issues',
-                        url: '/handbook/customer-success/handling-customer-issues',
-                    },
-                    {
                         name: 'Getting people to talk to you',
                         url: '/handbook/account-management/getting-people-to-talk-to-you',
                     },
                     {
-                        name: 'Health tracking',
-                        url: '/handbook/customer-success/health-tracking',
+                        name: 'Playbook for growing an account',
+                        url: '/handbook/growth/sales/grow-an-account',
+                    },
+                    {
+                        name: 'Health',
+                    },
+                    {
+                        name: 'Basic implementation review',
+                        url: '/handbook/customer-success/foundation-check',
                     },
                     {
                         name: 'Customer health checks',
                         url: '/handbook/customer-success/health-checks',
                     },
                     {
-                        name: 'Risk mitigation and churn prevention',
-                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
+                        name: 'Health tracking',
+                        url: '/handbook/customer-success/health-tracking',
                     },
                     {
-                        name: 'Learn from churn',
-                        url: '/handbook/customer-success/customer-churn-retros',
-                    },
-                    {
-                        name: 'Common churn reasons',
-                        url: '/handbook/customer-success/churn-reasons',
+                        name: 'Handling customer issues',
+                        url: '/handbook/customer-success/handling-customer-issues',
                     },
                     {
                         name: 'Tracking feature requests',
                         url: '/handbook/customer-success/feature-requests',
                     },
                     {
-                        name: 'Playbook for growing an account',
-                        url: '/handbook/growth/sales/grow-an-account',
+                        name: 'Risk and churn',
+                    },
+                    {
+                        name: 'Risk mitigation and churn prevention',
+                        url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
+                    },
+                    {
+                        name: 'Common churn reasons',
+                        url: '/handbook/customer-success/churn-reasons',
+                    },
+                    {
+                        name: 'Learn from churn',
+                        url: '/handbook/customer-success/customer-churn-retros',
                     },
                 ],
             },
