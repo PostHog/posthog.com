@@ -33,14 +33,14 @@ Every event runs through these stages before being sent to PostHog:
 
 The SDK runs a deterministic sanitizer:
 
-- **Image/audio content blocks** -> replaced with `[image redacted: <mime>]` or `[audio redacted: <mime>]`.
-- **Resource blocks with a `.blob`** -> replaced with `[resource redacted: <mime>]`.
-- **Go stubs** have no MIME type. They read `[image content redacted - not supported by PostHog MCP analytics]`, `[audio content redacted - not supported by PostHog MCP analytics]`, and `[binary resource content redacted - not supported by PostHog MCP analytics]`.
+- **Image/audio content blocks** -> replaced with `[image content redacted - not supported by PostHog MCP analytics]` or `[audio content redacted - not supported by PostHog MCP analytics]`.
+- **Resource blocks with a `.blob`** -> replaced with `[binary resource content redacted - not supported by PostHog MCP analytics]`.
 - **Long base64-looking strings (>=10KB)** -> replaced with `"[binary data redacted...]"`.
 - **Keys matching the sensitive-key pattern** – `authorization`, `cookie`, `password`, `token`, `secret`, `api_key`, `private_key`, and similar – have their values replaced with `"[redacted]"`.
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value -> replaced with `"[redacted]"`.
 - **Credentials inside URLs** – replaced with `[redacted]`. This applies to string values in resource names, parameters, responses, and exception messages. See the URL rules below.
 - **Credential-looking words** – detected through entropy and known formats, such as `sk-…` and PEM markers. The SDK replaces these words in parameters, responses, intent, and exception messages. It preserves surrounding diagnostic text.
+- **Personal data in intent** – emails, phone numbers, IP addresses, card numbers, and US Social Security numbers in `$mcp_intent` are replaced with `[redacted]`. This pass applies only to intent and agent feedback text, not to `$mcp_parameters` or `$mcp_response`, because structured tool data often holds the same shapes as legitimate values.
 
 Automatic sanitization is not configurable. It detects known key formats and sensitive property names, but it cannot detect every secret. Other text, including exception messages, remains unchanged. Use your [before-send hook](#3-your-before-send-hook-optional) for additional filtering.
 

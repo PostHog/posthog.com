@@ -100,7 +100,7 @@ A stateless server creates a new instance for each request, often on a different
 
 On `2025-11-25` traffic, the SDK fixes this without a shared store or sticky routing. At `initialize`, it puts a token with the session ID and client metadata in the `Mcp-Session-Id` response header. Clients send the header back, so any pod reads the same values. This works with JSON and SSE responses. The `2026-07-28` revision has no `initialize`, so use [conversation IDs](/docs/mcp-analytics/conversation-id) there.
 
-On `FastMCP` and jlowin's `fastmcp`, `instrument()` wraps `streamable_http_app()` and `sse_app()`, which `run()` also uses. Set the server to stateless mode:
+On `FastMCP` and jlowin's `fastmcp`, `instrument()` wraps `streamable_http_app()`, `sse_app()`, and fastmcp 2.x's `http_app()`, which `run()` also uses. Set the server to stateless mode:
 
 ```python
 server = FastMCP("my-server", stateless_http=True)
@@ -108,13 +108,15 @@ instrument(server, posthog)
 server.run(transport="streamable-http")
 ```
 
-When you build the ASGI app yourself, such as for a low-level `Server` or a [custom dispatcher](#custom-dispatchers), add the middleware once:
+When you build the ASGI app yourself for an instrumented low-level `Server`, add the middleware once and pass it the server. On `mcp` 1.x, the middleware then captures `$mcp_initialize` from the handshake, which `instrument()` can't reach:
 
 ```python
 from posthog.mcp import PostHogMcpStatelessSessionMiddleware
 
-app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+app.add_middleware(PostHogMcpStatelessSessionMiddleware, server=server)
 ```
+
+For a [custom dispatcher](#custom-dispatchers), leave out `server=`, because the dispatcher captures its own events.
 
 ### Resolve tool arguments on fresh low-level servers
 
@@ -150,15 +152,20 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `intent_fallback` | – | `(request, extra) -> str \| None`. Supplies intent when the agent sends no `context`. |
 | `capture_model` | `True` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. |
 | `enable_conversation_id` | `True` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
-| `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
+| `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `report_missing` | `False` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
+| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It covers missing capabilities too, so enable it instead of `report_missing`. |
 | `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
 | `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
+| `should_record_input_key` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
+| `resolve_input_aliases` | – | `(tool_name) -> aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
 | `resolve_original_tool` | – | `(tool_name) -> tool \| None`. Resolves argument ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message: str) -> None`. A stdio-safe sink for SDK warnings. |
+
+MCP events report `$lib: "posthog-python-mcp"`. Because `$lib` belongs to the client, `instrument()` relabels every event the client you pass in sends. If your app also captures other events, give MCP analytics its own `Posthog` client.
 
 On raw low-level servers and standalone FastMCP, the SDK advertises the injected `context` and `llm_model` arguments as optional, not required. On standalone FastMCP with `mcp` 1.x, middleware that overrides tool listing or dispatch turns off `llm_model` injection. Model capture from client metadata still works.
 
@@ -229,7 +236,7 @@ posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **
 posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
 ```
 
-`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, and `mcp_exception_autocapture`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
+`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, `collect_feedback`, and `mcp_exception_autocapture`. When `prepare_tool_call` returns a feedback report, send it with `capture_feedback`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
 
 The two transport headers in `common` matter. `clientInfo.name` reports `claude-code` for the CLI, Agent SDK, VS Code extension, and desktop app. `client_user_agent` tells those builds apart, and `vendor_client` separates Anthropic's products, such as Claude.ai and Claude Design. `instrument()` reads both headers for you. Leave them unset on stdio.
 

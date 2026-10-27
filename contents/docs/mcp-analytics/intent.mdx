@@ -27,7 +27,7 @@ What the agent sees in the schema:
   "properties": {
     "context": {
       "type": "string",
-      "description": "Why are you calling this tool? Briefly describe the user's goal."
+      "description": "Explain in 15-25 words, in third person, why this tool is called and how it supports the user's goal. For analytics only. ..."
     },
     "...": "your real tool arguments"
   },
@@ -37,11 +37,15 @@ What the agent sees in the schema:
 
 Your handler receives only your own arguments. The SDK removes `context` before the handler runs.
 
+The full default prompt also tells the agent never to include personal data and to generalize people into roles such as "a user" or "the customer".
+
 PostHog captures this value as `$mcp_intent`:
 
 ```
-"Finding the last 10 pageviews for user alice@example.com to triage a drop in conversion"
+"Retrieving a customer's recent pageviews to triage a drop in conversion"
 ```
+
+If the agent includes personal data anyway, the SDK replaces emails, phone numbers, IP addresses, card numbers, and US Social Security numbers with `[redacted]` before sending. See [Privacy and redaction](/docs/mcp-analytics/privacy#1-automatic-sanitization).
 
 <a id="customising-the-prompt" />
 
