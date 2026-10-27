@@ -28,14 +28,14 @@ await Posthog().capture(
 
 PostHog autocapture automatically tracks the following events for you:
 
--   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
--   **Application Backgrounded** - when the app is sent to the background by the user
--   **Application Installed** - when the app is installed.
--   **Application Updated** - when the app is updated.
--   **$screen** - when the user navigates, once you add the `PosthogObserver`
--   **$exception** - when the app throws exceptions.
--   **$autocapture** - when the user interacts with elements on Flutter Web, captured by posthog-js (see [Interaction autocapture](#interaction-autocapture))
--   **$rageclick** - when the user rapidly taps in the same area (iOS/macCatalyst by default, Flutter Web via posthog-js)
+-   **Application Opened** – when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** – when the app is sent to the background by the user
+-   **Application Installed** – when the app is installed.
+-   **Application Updated** – when the app is updated.
+-   **$screen** – when the user navigates, once you add the `PosthogObserver`
+-   **$exception** – when the app throws exceptions.
+-   **$autocapture** – when the user interacts with elements on Flutter Web, captured by posthog-js (see [Interaction autocapture](#interaction-autocapture))
+-   **$rageclick** – when the user rapidly taps in the same area (iOS/macCatalyst by default, Flutter Web via posthog-js)
 
 ### Capturing screen views
 
