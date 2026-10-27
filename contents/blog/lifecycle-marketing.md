@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - joe-martin
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/vibes_based_marketing_aff77241ee.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_10_26_T18_47_35_549_Z_d999441147.png
 featuredImageType: full
 category: Inside PostHog
 tags:
