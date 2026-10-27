@@ -47,7 +47,7 @@ Generating a PR takes minutes, so the PR itself isn't the work. Before you ask t
 -   Close an outside PR that conflicts with your team's direction, and say why. The author then gives you context instead.
 -   Write your preferences down where agents read them. Many outside PRs start with an agent, so put your conventions, your bar, and when you'd rather get an issue in an `AGENTS.md` file next to the code you own. For an example, see the [Issue or PR?](https://github.com/PostHog/posthog.com/blob/master/AGENTS.md#issue-or-pr) section of the posthog.com `AGENTS.md`.
 
-If the owning team closes your PR and builds the change their own way, don't take it personally. You gave them the context they needed.
+Expect that the owning team may close your PR and build the change their own way. That's a normal outcome, not a judgment of your work.
 
 ### If you don't usually write code
 
