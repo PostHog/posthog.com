@@ -19,13 +19,13 @@ PostHog's onboarding email flow is the thing I'm asked about most internally, an
 
 But I always worry: could it be better? Most of it was built on intuition and best guesses, and I'd be the first to admit I rarely have a concrete idea of how marketing is supposed to work.
 
-Right now I’m planning the next major overhaul. We're moving the whole thing from Customer.io to PostHog Workflows, rewriting most of the content, and responding to [some feedback](https://github.com/PostHog/requests-for-comments-public/issues/597) I got at our last offsite. This time I want every decision to be a deliberate one, not just something I decided in a vacuum.
+Right now I’m planning the next major overhaul. We're moving the whole thing from Customer.io to [PostHog Workflows](/workflows), rewriting most of the content, and responding to [some feedback](https://github.com/PostHog/requests-for-comments-public/issues/597) I got at our last offsite. This time I want every decision to be a deliberate one, not just something I decided in a vacuum.
 
-At the end of this article I’ll describe what’s changing and why. But first, I decided to go and ask some people who know what they're doing.
+I’ll describe what’s changing and why, but first, I decided to go and ask some people who know what they're doing.
 
 ## So I asked people who actually know
 
-[Lottie](/community/profiles/27881) has been running a [series of LinkedIn posts](https://www.linkedin.com/in/lottiecoxon/recent-activity/articles/) where she interviews other design leads about how they work. It's a good format, so I stole it. I spoke to three lifecycle marketers:
+[Lottie](/community/profiles/27881) has been running a [series](https://www.linkedin.com/in/lottiecoxon/recent-activity/articles/) where she interviews other design leads about how they work. It's a good format, so I stole it. I spoke to three lifecycle marketers:
 
 - [Marc Thomas](https://www.linkedin.com/in/iammarcthomas/), a lifecycle consultant who built the flows at [Balsamiq](https://www.sequenzy.com/email-examples/brands/balsamiq)
 - [James Lester](https://www.linkedin.com/in/james-l-88560512b/), who leads Growth at Fyxer AI
@@ -35,11 +35,11 @@ I asked them all roughly the same things. Here’s what they said.
 
 ### How complex should your flow be?
 
-Over five years, our onboarding flow has grown from a handful of emails into a tree of roughly 100. In theory every new branch gets us more data and better targeting. In practice every new branch is another thing to maintain. Where's the line?
+Over five years, our onboarding flow has grown from a handful of emails into a tree of roughly 100. In theory, every new branch gets us more data and better targeting. In practice, every new branch is another thing to maintain. Where's the line?
 
 Marc thinks traditional multi-branch trees (which is exactly what we have) over-index on setup events that don't reflect real value. Waiting for a trigger like "has created an insight" before deciding what to send _feels_ useful, but it doesn't tell you whether the user got anything out of it, or why they did it.
 
-His advice is a single, simple trunk sequence with one goal. Don't try to drive people who've done X to do Y. Tell everyone to do the one thing that actually moves MRR.
+His advice is a single, simple trunk sequence with one goal. Don't try to drive people who've done X to do Y. Tell everyone to do the one thing that actually moves your MRR.
 
 James agreed, for a simpler reason: 100-branch flows are noisy, slow to learn from, and break every time the product changes. He suggests aiming for two or three high-leverage branches with outcomes you actually measure.
 
@@ -53,9 +53,9 @@ He also quoted Jeff Bezos at me, on listening to customers when they and the dat
 
 ### How should you personalize content?
 
-Right now, our onboarding personalizes based on product behavior, not person properties. If you've used Product Analytics, a tip on getting more out of it is probably useful. If your first name happens to be in our database, that's not a reason to use it.
+Right now, our onboarding personalizes based on product behavior, not person properties. When a PostHog user uses Product Analytics, a email on getting more out of it is probably useful. If your first name happens to be in our database, that's not a reason to use it.
 
-Jeff thinks you should personalize as much as possible. At Calendly, changing just the first paragraph of a newsletter by role doubled activation and conversions. Marc only branches if the user journeys are dramatically different. James has never seen one-to-one AI personalization beat a well-crafted email written for a specific segment.
+Jeff thinks you should personalize as much as possible. At Calendly, changing just the first paragraph of a newsletter by role doubled activation and conversions. James has never seen one-to-one AI personalization beat a well-crafted email written for a specific segment.
 
 ### Are experiments worth more than taste?
 
@@ -105,11 +105,15 @@ That's reassuring and a bit lonely. We already treat [the changelog](/changelog)
 
 So, what are we actually going to do?
 
-**We're leaving Customer.io.** The flow currently runs as roughly 100 emails in Customer.io, held together by 46 delays, 50-odd decision events, and a data pipeline that pushes PostHog events across so the emails know what a user has done. The pipeline works, mostly, but only because we've cut back how much data we send to stop it degrading. Even then it breaks, users get the wrong email, and I hear about it in my inbox.
+### We're leaving Customer.io
+
+The flow currently runs as roughly 100 emails in Customer.io, held together by 46 delays, 50-odd decision events, and a data pipeline that pushes PostHog events across so the emails know what a user has done. The pipeline works, mostly, but only because we've cut back how much data we send to stop it degrading. Even then it breaks, users get the wrong email, and I hear about it in my inbox.
 
 We're moving the whole thing into [PostHog Workflows](/workflows), partly because you should use your own product and partly because it deletes the pipeline entirely. Workflows runs on the same data as everything else in PostHog, so an email can trigger on anything a user does, not just the handful of events I remembered to set up six months ago. It can also do things Customer.io can't, like flip a feature flag or trigger a survey off the back of an email.
 
-**We're rewriting the emails.** Parts of the current flow were written when the most interesting thing a new user could do was create a dashboard. Patching it email by email would leave us with a flow that's half 2023 and half 2026, which is worse than either. So it's all getting rewritten, and this is what the next version looks like:
+### We're rewriting the emails
+
+Parts of the current flow were written when the most interesting thing a new user could do was create a dashboard. Patching it email by email would leave us with a flow that's half 2023 and half 2026, which is worse than either. So it's all getting rewritten, and this is what the next version looks like:
 
 - **One trunk, minimal branching.** Emails get front-loaded into the first few weeks, timed against our own conversion cliff once we've found it. Long-term nurture moves into its own repeating loop. We've got years of content for product engineers to draw on, and we'll watch for it going stale.
 
@@ -127,7 +131,9 @@ We're moving the whole thing into [PostHog Workflows](/workflows), partly becaus
 
 - **One weekly digest instead of four.** Nobody I spoke to mentioned this. I just think it's a good idea.
 
-Finally, I'm also going to be getting out of the way. At a recent PostHog offsite it was [pointed out](https://github.com/PostHog/requests-for-comments-public/issues/597) that while I know a lot about how our email marketing works internally, that makes me a potential point of failure because all of that knowledge lives just in my head and all the user response lives in my inbox.
+### I'm getting out of the way
+
+At a recent PostHog offsite it was [pointed out](https://github.com/PostHog/requests-for-comments-public/issues/597) that while I know a lot about how our email marketing works internally, that makes me a potential point of failure because all of that knowledge lives just in my head and all the user response lives in my inbox.
 
 That's the opposite of how ownership is meant to work at PostHog. We run on [fuzzy ownership](/handbook/company/fuzzy-ownership), which only works if anyone can pick something up and improve it. Right now anyone with Customer.io access _can_ send an email, but not everyone feels enabled to.
 
