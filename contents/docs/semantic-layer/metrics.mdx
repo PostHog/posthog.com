@@ -58,9 +58,11 @@ Use an executable definition whenever the metric is deterministic. Reach for mar
 
 ## Lifecycle: proposed → approved
 
-Every metric lands as `proposed` – whether a human or an agent created it, and even when an existing name is refined (`data-catalog-metric-create` upserts on `name`). A human then approves it, which requires typing "confirm" and the `data_catalog_approval` scope.
+Every metric lands as `proposed` – whether a human or an agent created it. A human then approves it, which requires typing "confirm" and the `data_catalog_approval` scope.
 
 Editing an approved metric's definition, name, description, or unit resets it to `proposed`. A metric is never silently redefined: any change to what the number means goes back through a human. Cosmetic fields – `display_name`, `owner` – never reset approval.
+
+Creating a metric with a name that a live metric already holds fails with a 409 `metric_name_taken` error, and the existing metric stays unchanged. To replace it, send the create again with `overwrite` set to `true`. That writes the fields you send over the existing metric, and resets an approved one to `proposed` the same way an edit does. When the existing metric reads a table you don't have access to, the 409 only says the name is taken, and `overwrite` can't replace it.
 
 ## Renaming and deleting
 
@@ -82,8 +84,8 @@ A worked example:
 
 1. You create a `signups` metric from your "Weekly signups" insight and approve it.
 2. A teammate edits the insight to exclude a country.
-3. The metric now reports `is_drifted: true`. The approved snapshot no longer matches the insight it came from.
-4. Runs still work, but results are labeled noncanonical, and re-approval is blocked until a human resolves the drift – either update the metric to re-snapshot the new query, or unlink it from the insight.
+3. The metric now reports `is_drifted: true`, and its `status` stays `approved`. The approved snapshot no longer matches the insight it came from.
+4. Runs still work, but results are labeled noncanonical, and re-approval is blocked until a human resolves the drift – either update the metric to re-snapshot the new query, or unlink it from the insight. Either way, the metric goes back to `proposed` for a fresh approval.
 
 <CalloutBox icon="IconWarning" title="The canonical rule" type="caution">
 
