@@ -2867,6 +2867,14 @@ export const docsMenu = {
                             url: '/docs/libraries/go',
                         },
                         {
+                            name: 'Godot',
+                            url: '/docs/libraries/godot',
+                            badge: {
+                                title: 'Experimental',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/libraries/ios',
                             badge: {
