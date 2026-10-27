@@ -139,7 +139,6 @@ export default function TierList() {
     )
 
     useEffect(() => {
-        const shared = window.location.hash.startsWith('#ranking=') ? window.location.hash.slice(9) : null
         const controller = new AbortController()
         const timeout = window.setTimeout(() => controller.abort(), 5000)
         let cancelled = false
@@ -152,7 +151,7 @@ export default function TierList() {
                 return
             }
             setCatalog(latest)
-            // Restore only after loading the current inventory so new shared hoggies survive.
+            // Restore the local draft only after loading the current inventory.
             const available = new Set(latest.hoggies.map(({ slug }) => slug))
             let saved: string | null = null
             try {
@@ -160,12 +159,9 @@ export default function TierList() {
             } catch {
                 /* Storage can be disabled. */
             }
-            const restored = shared ? parseRanking(shared, available) : saved ? parseRanking(saved, available) : null
+            const restored = saved ? parseRanking(saved, available) : null
             if (restored) {
                 setRanking(restored.ranking)
-                setFinished(!!shared)
-            } else if (shared) {
-                setMessage('That ranking link could not be loaded. You can make a new one below.')
             }
             setReady(true)
         }
@@ -231,7 +227,7 @@ export default function TierList() {
         const sourceBoard = board.current
         if (!sourceBoard || exporting) return
         setExporting(true)
-        setMessage('')
+        setMessage('Making your image…')
         let exportContainer: HTMLDivElement | undefined
         const controller = new AbortController()
         const timeout = window.setTimeout(() => controller.abort(), 15000)
@@ -351,11 +347,24 @@ export default function TierList() {
                         <p className="text-sm @lg:text-base text-secondary mt-3 mb-0 max-w-2xl mx-auto">
                             Ideally on X would be cool. (Don't forget to tag @posthog!)
                         </p>
-                        <div className="flex justify-center mt-4">
+                        <div className="flex flex-wrap justify-center items-center gap-3 mt-4">
                             <OSButton variant="primary" size="lg" disabled={exporting} onClick={download}>
-                                {exporting ? 'Making your image…' : 'Download image'}
+                                Download image
+                            </OSButton>
+                            <OSButton
+                                size="lg"
+                                disabled={exporting}
+                                onClick={() => {
+                                    setFinished(false)
+                                    setMessage('')
+                                }}
+                            >
+                                Back to editing
                             </OSButton>
                         </div>
+                        <p role="status" aria-live="polite" className="min-h-5 text-sm text-secondary !mt-2 !mb-0">
+                            {message}
+                        </p>
                     </header>
                 ) : (
                     <header className="flex shrink-0 items-center justify-between gap-3 mb-3">
@@ -574,9 +583,11 @@ export default function TierList() {
                     </footer>
                 )}
 
-                <p role="status" aria-live="polite" className={finished ? 'text-sm mt-2' : 'sr-only'}>
-                    {message}
-                </p>
+                {!finished && (
+                    <p role="status" aria-live="polite" className="sr-only">
+                        {message}
+                    </p>
+                )}
             </div>
         </HoggieNames.Provider>
     )

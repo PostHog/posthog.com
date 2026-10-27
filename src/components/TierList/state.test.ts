@@ -12,7 +12,7 @@ test('moving a hog between tiers, within a tier, and back to the tray preserves 
     assert.deepEqual(initial.S, ['angel', 'judge'])
 })
 
-test('shared rankings round trip titles and a subset of hoggies', () => {
+test('saved rankings round trip titles and a subset of hoggies', () => {
     const ranking = { ...emptyRanking(), S: ['angel'], D: ['chef'] }
     const title = 'Sarah’s hogs 🦔 & friends / #1'
     assert.deepEqual(parseRanking(serializeRanking(title, ranking), new Set(['angel', 'chef', 'judge'])), {
@@ -21,7 +21,7 @@ test('shared rankings round trip titles and a subset of hoggies', () => {
     })
 })
 
-test('malformed, oversized, and incompatible shares are rejected', () => {
+test('malformed, oversized, and incompatible saved rankings are rejected', () => {
     for (const value of [
         '%zz',
         'null',
