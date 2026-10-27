@@ -27,16 +27,12 @@
     }
     setTheme(preferredTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preferredTheme)
 
-    // Set initial skin / wallpaper / reduce-transparency before React hydrates
+    // Set initial skin / wallpaper before React hydrates
     try {
         // The classic skin has been retired; always render the modern skin
         document.body.setAttribute('data-skin', 'modern')
         var siteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
         document.body.setAttribute('data-wallpaper', siteSettings.wallpaper || 'keyboard-garden')
-        document.body.setAttribute(
-            'data-reduce-transparency',
-            siteSettings.reduceTransparency ? 'true' : 'false'
-        )
     } catch (err) {}
 
     // Hide dismissed WizardHint variants before first paint

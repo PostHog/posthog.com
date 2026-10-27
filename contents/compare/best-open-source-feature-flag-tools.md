@@ -200,11 +200,11 @@ FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, a
 
 ## How much does it cost?
 
-All features are completely free. FeatBit monetizes its platform by offering premium support packages, which start at $399 per month for dedicated support with a 2-hour reply SLA during business hours. Enterprise and cloud options are also available.
+The self-hosted Foundation tier is free, with no limits on seats, MAUs, or projects. It includes feature flags, targeting, audit logs, and experimentation. SSO, Terraform and GitOps, flag change approvals, scheduling, and shareable segments are only on the Enterprise plan, which costs $3,999 per year. Enterprise Premium adds more capabilities and dedicated support at custom prices.
 
 > ### Bottom line
 >
-> FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with no artificial feature gates. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
+> FeatBit is a strong choice for teams that want a feature-rich, self-hosted feature flag tool with a generous free tier. Its .NET foundation and enterprise-grade scalability make it appealing for larger organizations, though its community is smaller than the other tools on this list.
 
 ## 8. FeatureHub
 
@@ -238,7 +238,7 @@ FeatureHub offers a hosted option in addition to its open-source edition, and bo
 - Need open-source feature flags with remote configuration and on-premises hosting? Try **Flagsmith**.
 - Want a free, open-source tool with Git-native flag management? **Flipt** is for you.
 - Building with Ruby on Rails and want the best developer experience? **Flipper** is purpose-built for your stack.
-- Need a self-hosted, enterprise-grade tool with no artificial feature gates? **FeatBit** offers the most features for free.
+- Need a self-hosted, enterprise-grade tool with a generous free tier? **FeatBit** has no usage limits on its free Foundation tier.
 - Want a simple, no-frills open-source tool with cloud-native architecture? **FeatureHub** covers the basics well.
 
 ## Is PostHog right for you?
@@ -266,7 +266,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 

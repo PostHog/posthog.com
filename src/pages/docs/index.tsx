@@ -111,13 +111,6 @@ const surfaces = [
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
     },
-    {
-        name: 'Desktop',
-        url: '/docs/posthog-desktop',
-        icon: 'IconCoffee',
-        color: 'burnt-orange',
-        description: 'Run tasks, review code, and use any model from your desktop.',
-    },
 ]
 const sdkSections = [
     {

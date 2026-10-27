@@ -8,7 +8,7 @@ compose into figures and CTAs.
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Guides render as book spreads (`components/PocketGuides/BookPage.tsx`); the report appears as a
+Guides render in the shared docs reader (`components/PocketGuides/LearnSurface.tsx`); the report appears as a
 figure via `components/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
 The old standalone master-detail inbox view was deleted when the pocket guides became the whole
 direction – if a browse-all surface returns, build it on the hook, not from git archaeology.
@@ -17,14 +17,14 @@ direction – if a browse-all surface returns, build it on the hook, not from gi
 
 ## Adding a template
 
-**Copy `contents/pocket-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
+**Copy `contents/learn/self-driving/pocket-guide/_starter/` and rename it.** It's a commented skeleton of both files,
 kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow – you
 should not need to reverse-engineer an existing template.
 
 A template is two files:
 
 ```
-contents/pocket-guides/<volume>/<slug>/
+contents/learn/<volume>/pocket-guide/<slug>/
 ├── index.mdx    everything a human reads
 └── SKILL.md     the scout itself
 ```
@@ -72,7 +72,7 @@ query in `index.tsx` here filters the same way.
 ## Authoring a template's report
 
 The report lives in the template's **frontmatter**, not its MDX body. Add a `report` block to
-`contents/pocket-guides/<volume>/<slug>/index.mdx`:
+`contents/learn/<volume>/pocket-guide/<slug>/index.mdx`:
 
 ```yaml
 ---
@@ -160,11 +160,12 @@ elsewhere on the site (see `suppressHydrationWarning` in `src/pages/self-driving
 ## These files are agent context too
 
 A scout template is read by two audiences from one source. Humans get the inbox UI; agents get a
-markdown mirror of the same page at `https://posthog.com/pocket-guides/<volume>/<slug>.md`.
+markdown mirror of the same page at the public reader URL with `.md` appended (for example,
+`https://posthog.com/docs/self-driving/pocket-guide/flag-debt.md`).
 
 That mirror is produced by the site's existing pipeline, not a bespoke exporter:
 `generateRawMarkdownPages()` in `gatsby/rawMarkdownUtils.ts` converts the **built HTML** of every
-page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/pocket-guides`)
+page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which includes `/learn` and `/docs`)
 with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/robots.txt` blocks
 `/*.md$` from search crawlers, so the mirror exists for agents specifically.
 `context-mill/context/docs.yaml` already consumes posthog.com `.md` URLs this way to feed the

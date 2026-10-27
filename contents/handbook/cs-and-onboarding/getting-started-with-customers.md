@@ -63,7 +63,7 @@ Cover:
 
 ### Value nugget ideas
 
-Pull from Vitally and Metabase to find something specific to mention:
+Pull from PostHog and Metabase to find something specific to mention:
 
 - Event count spike or drop — make sure it's expected and tracking is correct.
 - Recent support ticket — follow up to confirm it's resolved.
@@ -83,7 +83,7 @@ Find what feels natural to you — keep it in PostHog's voice. Examples:
 - "hi from PostHog"
 - "Checking in from PostHog"
 
-In Vitally, an account's Active conversations tab is a good place to see how teammates have reached out in the past.
+In Customer Analytics, an account's Conversations tab is a good place to see how teammates have reached out in the past.
 
 ### No response?
 
@@ -168,7 +168,7 @@ A lot of valuable context lives in past conversations:
 
 ### Product usage analysis
 
-PostHog is the best place to see how customers actually use our product. We also pipe product events to Vitally via the CDP, so you can see active users, MAUs, and which paid products an account uses.
+PostHog is the best place to see how customers actually use our product. Customer Analytics also shows active users, MAUs, and which paid products an account uses.
 
 Metabase has more detail, including cross-sell and upsell signals.
 
@@ -179,8 +179,8 @@ We use [Watch Tower](https://gotwatchtower.com/) to track news about companies i
 To set up:
 
 1. Create an account with your PostHog email.
-2. Create a list and import your book from Vitally or Salesforce.
-3. Check that company names and domains are correct — Vitally and Salesforce often have inaccurate domains, and Watch Tower uses the domain for context.
+2. Create a list and import your book from Customer Analytics or Salesforce.
+3. Check that company names and domains are correct — Customer Analytics and Salesforce often have inaccurate domains, and Watch Tower uses the domain for context.
 4. Set up notifications (email by default, Slack also available).
 
 Watch Tower will scan the news daily and ping you when there's a match.

@@ -1,0 +1,47 @@
+---
+title: Linking Omnisend as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Omnisend
+---
+
+The Omnisend connector syncs your Omnisend eCommerce email and SMS marketing data – contacts, campaigns, carts, orders, products, categories, automations, segments, and analytics – into PostHog.
+
+## Adding a data source
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
+2. Click **+ New source** and then click **Link** next to Omnisend.
+3. Next, you need an API key from Omnisend. In your [Omnisend account settings](https://app.omnisend.com/settings/integrations/api-keys), create a new API key and copy its value.
+4. Back in PostHog, paste the key in the `API key` field and click **Next**.
+5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
+
+Once the syncs are complete, you can start using Omnisend data in PostHog.
+
+## Available tables
+
+| Table                  | Description                                       | Sync method  |
+| ---------------------- | ------------------------------------------------- | ------------ |
+| `contacts`             | Contacts in your Omnisend account                 | Full refresh |
+| `campaigns`            | Email and SMS campaigns                           | Full refresh |
+| `carts`                | Abandoned cart data                               | Full refresh |
+| `orders`               | Order data                                        | Full refresh |
+| `products`             | Product catalog data                              | Full refresh |
+| `categories`           | Product categories                                | Full refresh |
+| `automations`          | Automation workflows                              | Full refresh |
+| `segments`             | Audience segments with contact counts             | Full refresh |
+| `analytics_reports`    | Daily campaign and automation performance metrics | Incremental  |
+| `analytics_statistics` | Daily account-level analytics                     | Incremental  |
+
+Most tables use **full refresh**, which reloads all data on each sync. The analytics tables use **incremental** sync, which only loads new data since the last sync.
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />

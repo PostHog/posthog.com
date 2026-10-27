@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Prior to a customer discovery call, review session replays of the user to see how they interact with PostHog, and where improvements can be made. Check historic conversations in Vitally, or calls in BuildBetter, for wider context.
+Prior to a customer discovery call, review session replays of the user to see how they interact with PostHog, and where improvements can be made. Check historic conversations in Customer Analytics, or calls in Gong and BuildBetter, for wider context.
 
 For fundamentals, use this checklist to check for common issues before a customer discovery call. PostHog only shows you some of this — for backend implementation details, you'll need to ask on the call.
 

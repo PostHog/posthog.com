@@ -59,7 +59,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
-[PostHog](https://posthog.com) is an all-in-one, open-source developer platform that combines [product analytics](/blog/best-open-source-analytics-tools), [web analytics](/web-analytics), [error tracking](/error-tracking), [session replay](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), and [experimentation](/experiments) into a single platform. Think [Amplitude](/blog/posthog-vs-amplitude) + [Hotjar](/compare/posthog-vs-hotjar) + [LaunchDarkly](/compare/posthog-vs-launchdarkly) in one.
+[PostHog](https://posthog.com) is an all-in-one, open-source developer platform that combines [product analytics](/compare/best-open-source-analytics-tools), [web analytics](/web-analytics), [error tracking](/error-tracking), [session replay](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), and [experimentation](/experiments) into a single platform. Think [Amplitude](/blog/posthog-vs-amplitude) + [Hotjar](/compare/posthog-vs-hotjar) + [LaunchDarkly](/compare/posthog-vs-launchdarkly) in one.
 
 PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event [autocapture](/docs/product-analytics/autocapture), so you can start collecting useful data immediately without instrumenting events by hand.
 
@@ -369,7 +369,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
