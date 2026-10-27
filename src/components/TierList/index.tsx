@@ -118,29 +118,6 @@ function DropZone({
     )
 }
 
-function BlockedTier({ rejected, disabled }: { rejected: boolean; disabled: boolean }) {
-    const { setNodeRef, isOver } = useDroppable({ id: 'F', disabled })
-    const blocked = !disabled && (isOver || rejected)
-    return (
-        <div
-            ref={setNodeRef}
-            role="group"
-            aria-label="F tier"
-            data-drop-rejected={blocked || undefined}
-            className={`flex flex-1 min-h-[57px] @lg:min-h-[65px] border-b border-primary ${
-                blocked ? 'bg-accent ring-2 ring-inset ring-orange cursor-not-allowed' : ''
-            }`}
-        >
-            <div className="w-12 @lg:w-16 shrink-0 flex items-center justify-center bg-accent text-secondary">
-                <strong className="text-3xl">F</strong>
-            </div>
-            <p className={`text-sm px-3 self-center !m-0 ${blocked ? 'font-semibold' : 'text-secondary'}`}>
-                {blocked ? 'Nice try. No hoggie belongs in F.' : 'Empty. All hoggies are good hoggies.'}
-            </p>
-        </div>
-    )
-}
-
 type DropTarget = { tier: Tier; before?: string }
 
 export default function TierList() {
@@ -154,7 +131,7 @@ export default function TierList() {
     const [query, setQuery] = useState('')
     const [dragging, setDragging] = useState<string | null>(null)
     const [dropTarget, setDropTarget] = useState<DropTarget | null>(null)
-    const [rejected, setRejected] = useState(false)
+    const dragEvent = useRef<Pick<DragMoveEvent, 'active' | 'over'> | null>(null)
     const dropPointer = useRef<{ x: number; y: number } | null>(null)
     const [finished, setFinished] = useState(false)
     const [ready, setReady] = useState(false)
@@ -239,6 +216,55 @@ export default function TierList() {
         if (trayViewport.current) trayViewport.current.scrollLeft = 0
     }, [query])
 
+    useEffect(() => {
+        if (!dragging) return
+        let frame: number
+        let lastTime = performance.now()
+        // Tier viewports are children of their full-row drop targets, so dnd-kit cannot scroll them.
+        function scrollRow(now: number) {
+            const elapsed = Math.min(now - lastTime, 32)
+            lastTime = now
+            const event = dragEvent.current
+            const pointer = dropPointer.current
+            const viewport = event?.over?.data.current?.element.current?.querySelector(
+                '[data-tier-viewport]'
+            ) as HTMLDivElement | null
+            if (pointer && viewport) {
+                const bounds = viewport.getBoundingClientRect()
+                if (
+                    pointer.y >= bounds.top &&
+                    pointer.y <= bounds.bottom &&
+                    pointer.x >= bounds.left &&
+                    pointer.x <= bounds.right
+                ) {
+                    const edge = 36
+                    const speed =
+                        pointer.x < bounds.left + edge
+                            ? -(1 - (pointer.x - bounds.left) / edge)
+                            : pointer.x > bounds.right - edge
+                            ? 1 - (bounds.right - pointer.x) / edge
+                            : 0
+                    const previous = viewport.scrollLeft
+                    viewport.scrollLeft += speed * elapsed * 0.6
+                    if (viewport.scrollLeft !== previous && event) {
+                        const target = getDropTarget(event)
+                        setDropTarget((current) =>
+                            current?.tier === target?.tier && current?.before === target?.before ? current : target
+                        )
+                    }
+                }
+            }
+            frame = requestAnimationFrame(scrollRow)
+        }
+        frame = requestAnimationFrame(scrollRow)
+        return () => cancelAnimationFrame(frame)
+    }, [dragging])
+
+    function updateDropTarget(event: DragMoveEvent) {
+        dragEvent.current = event
+        setDropTarget(getDropTarget(event))
+    }
+
     function place(slug: string, destination: Tier | 'tray', before?: string) {
         setRanking((current) => moveHog(current, slug, destination, before))
 
@@ -263,13 +289,9 @@ export default function TierList() {
 
     function onDragEnd(event: DragEndEvent) {
         const target = getDropTarget(event)
+        dragEvent.current = null
         setDragging(null)
         setDropTarget(null)
-        if (event.over?.id === 'F') {
-            setRejected(true)
-            setMessage('Nice try. No hoggie belongs in F.')
-            return
-        }
         place(String(event.active.id), target?.tier || 'tray', target?.before)
     }
 
@@ -421,8 +443,8 @@ export default function TierList() {
                         <div className="min-w-0">
                             <h1 className="text-xl @lg:text-2xl !m-0">Hoggie Tier List</h1>
                             <p className="text-sm text-secondary !m-0">
-                                Rank your favorite hoggies and share with friends. Choose wisely. Hoggies have feelings
-                                too.
+                                Rank your favorite hoggies and share with friends. No we didn't include "F" – all
+                                hoggies are good hoggies.
                             </p>
                         </div>
                         {!finished && (
@@ -450,13 +472,14 @@ export default function TierList() {
                         return args.pointerCoordinates ? pointerWithin(args) : rectIntersection(args)
                     }}
                     onDragStart={({ active }) => {
+                        dragEvent.current = null
                         setDragging(String(active.id))
                         setDropTarget(null)
-                        setRejected(false)
                     }}
-                    onDragMove={(event) => setDropTarget(getDropTarget(event))}
-                    onDragOver={(event) => setDropTarget(getDropTarget(event))}
+                    onDragMove={updateDropTarget}
+                    onDragOver={updateDropTarget}
                     onDragCancel={() => {
+                        dragEvent.current = null
                         setDragging(null)
                         setDropTarget(null)
                     }}
@@ -468,7 +491,7 @@ export default function TierList() {
                             className={`bg-primary border border-primary rounded ${
                                 finished
                                     ? 'overflow-hidden'
-                                    : 'flex flex-col flex-1 min-h-[344px] @lg:min-h-[392px] overflow-hidden'
+                                    : 'flex flex-col flex-1 min-h-[287px] @lg:min-h-[327px] overflow-hidden'
                             }`}
                         >
                             {finished && (
@@ -488,71 +511,77 @@ export default function TierList() {
                                     </div>
                                 </div>
                             )}
-                            {tierIds.map((tier, index) => {
-                                const remaining = ranking[tier].filter((slug) => slug !== dragging)
-                                const showMarker = dropTarget?.tier === tier
-                                return (
-                                    <DropZone
-                                        key={tier}
-                                        id={tier}
-                                        disabled={finished}
-                                        className={`flex flex-1 border-b border-primary ${
-                                            finished ? 'min-h-[48px]' : 'min-h-[57px] @lg:min-h-[65px] overflow-hidden'
-                                        }`}
-                                    >
-                                        <div
-                                            style={{ backgroundColor: tierColors[index] }}
-                                            className="w-12 @lg:w-16 shrink-0 flex items-center justify-center text-black"
+                            <div className={finished ? 'grid auto-rows-fr' : 'contents'}>
+                                {tierIds.map((tier, index) => {
+                                    const remaining = ranking[tier].filter((slug) => slug !== dragging)
+                                    const showMarker = dropTarget?.tier === tier
+                                    return (
+                                        <DropZone
+                                            key={tier}
+                                            id={tier}
+                                            disabled={finished}
+                                            className={`flex flex-1 border-b border-primary ${
+                                                finished
+                                                    ? 'min-h-[48px]'
+                                                    : 'min-h-[57px] @lg:min-h-[65px] overflow-hidden'
+                                            }`}
                                         >
-                                            <strong className="text-3xl !text-black">{tier}</strong>
-                                        </div>
-                                        {finished ? (
-                                            <div className="flex flex-wrap items-center gap-1 p-2 min-w-0 flex-1">
-                                                {ranking[tier].map((slug) => (
-                                                    <div
-                                                        key={slug}
-                                                        title={bySlug.get(slug)?.name}
-                                                        className="size-12 @lg:size-16 p-1"
-                                                    >
-                                                        <HogImage slug={slug} vector />
-                                                    </div>
-                                                ))}
+                                            <div
+                                                style={{ backgroundColor: tierColors[index] }}
+                                                className="w-12 @lg:w-16 shrink-0 flex items-center justify-center text-black"
+                                            >
+                                                <strong className="text-3xl !text-black">{tier}</strong>
                                             </div>
-                                        ) : (
-                                            <div className="relative flex items-center gap-1 p-1 min-w-0 flex-1 h-full flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                                                {ranking[tier].map((slug) => (
-                                                    <Hog
-                                                        key={slug}
-                                                        slug={slug}
-                                                        marker={
-                                                            !showMarker
-                                                                ? undefined
-                                                                : dropTarget?.before === slug
-                                                                ? 'before'
-                                                                : !dropTarget?.before && slug === remaining.at(-1)
-                                                                ? 'after'
-                                                                : undefined
-                                                        }
-                                                    />
-                                                ))}
-                                                {showMarker && !remaining.length && (
-                                                    <span
-                                                        aria-hidden="true"
-                                                        data-drop-marker="empty"
-                                                        className="absolute inset-y-1 left-1 z-[1000] w-1 rounded bg-orange pointer-events-none"
-                                                    />
-                                                )}
-                                                {!ranking[tier].length && (
-                                                    <span className="text-sm text-secondary px-2">
-                                                        Drop a hoggie here
-                                                    </span>
-                                                )}
-                                            </div>
-                                        )}
-                                    </DropZone>
-                                )
-                            })}
-                            <BlockedTier rejected={rejected} disabled={finished} />
+                                            {finished ? (
+                                                <div className="flex flex-wrap items-center gap-1 p-2 min-w-0 flex-1">
+                                                    {ranking[tier].map((slug) => (
+                                                        <div
+                                                            key={slug}
+                                                            title={bySlug.get(slug)?.name}
+                                                            className="size-12 @lg:size-16 p-1"
+                                                        >
+                                                            <HogImage slug={slug} vector />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div
+                                                    data-tier-viewport
+                                                    className="relative flex items-center gap-1 p-1 min-w-0 flex-1 h-full flex-nowrap overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                                                >
+                                                    {ranking[tier].map((slug) => (
+                                                        <Hog
+                                                            key={slug}
+                                                            slug={slug}
+                                                            marker={
+                                                                !showMarker
+                                                                    ? undefined
+                                                                    : dropTarget?.before === slug
+                                                                    ? 'before'
+                                                                    : !dropTarget?.before && slug === remaining.at(-1)
+                                                                    ? 'after'
+                                                                    : undefined
+                                                            }
+                                                        />
+                                                    ))}
+                                                    {showMarker && !remaining.length && (
+                                                        <span
+                                                            aria-hidden="true"
+                                                            data-drop-marker="empty"
+                                                            className="absolute inset-y-1 left-1 z-[1000] w-1 rounded bg-orange pointer-events-none"
+                                                        />
+                                                    )}
+                                                    {!ranking[tier].length && (
+                                                        <span className="text-sm text-secondary px-2">
+                                                            Drop a hoggie here
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </DropZone>
+                                    )
+                                })}
+                            </div>
                             {finished && (
                                 <div className="flex shrink-0 justify-end px-3 py-2 text-xs text-secondary">
                                     <span>Make yours at posthog.com/tier-list</span>
@@ -582,7 +611,7 @@ export default function TierList() {
                                     <p className="max-w-xs text-sm leading-normal !m-0">
                                         Hover to see a hoggie up close. Scroll sideways to browse, then drag a hoggie
                                         into a tier. Drop outside the tier rows to return it to the tray. On touch
-                                        screens, hold a hoggie briefly to drag. F is off limits.
+                                        screens, hold a hoggie briefly to drag.
                                     </p>
                                 </Tooltip>
                                 <label className="sr-only" htmlFor="hoggie-search">
