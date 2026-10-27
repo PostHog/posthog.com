@@ -1666,13 +1666,11 @@ export default function JobsPage() {
     )
 
     useEffect(() => {
-        if (!pendingCompanyWindow) return
+        if (!pendingCompanyWindow || windows.some(({ path }) => path.startsWith('community-auth-'))) return
 
+        setPendingCompanyWindow(null)
         if (user) {
-            setPendingCompanyWindow(null)
             openAddAJobWindow(pendingCompanyWindow.companyId)
-        } else if (!windows.some(({ path }) => path.startsWith('community-auth-'))) {
-            setPendingCompanyWindow(null)
         }
     }, [user, windows, pendingCompanyWindow, openAddAJobWindow])
 
