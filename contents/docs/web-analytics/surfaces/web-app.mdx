@@ -22,10 +22,40 @@ Open **Web analytics** in [PostHog](https://app.posthog.com/web) to see the over
 - **[Check web vitals](/docs/web-analytics/web-vitals)** – LCP, CLS, INP, and FCP per page, so slow pages show up next to the traffic they're costing you.
 - **Ask [PostHog AI](/docs/posthog-ai)** – investigate a spike or drop, build a dashboard, or set filters in plain language. It's an interaction mode inside the web app, not a separate surface. See [investigating traffic with PostHog AI](/docs/web-analytics/investigate-traffic-ai).
 
+## Self-driving reports
+
+A [scout](/docs/self-driving/scouts) reads your traffic, finds segments that have stepped away from their own baseline, and writes each one up as a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+Unlike [error tracking](/docs/error-tracking), these scouts stop at the report. They don't open a draft pull request.
+
+### How a traffic change becomes a report
+
+A scout watches your `sessions` data for the changes a site-wide total hides:
+
+- **Acquisition divergence** – one channel's session volume stepping away from its own rhythm while overall traffic holds, like an SEO drop, a paused ad account, or a referrer going dark.
+- **Attribution breakage** – campaign traffic that didn't disappear but got reclassified into Direct or Unknown because UTM tagging or referrer propagation broke. The tell is paired opposite moves between channels that net to zero in the total.
+- **Site-health steps** – a landing page whose bounce rate steps above its own history, a 404 surface spiking, or an entry path cliffing.
+
+Each finding is compared against the same window 7, 14, 21, and 28 days back, so day-of-week seasonality doesn't get mistaken for a change. A second scout does the same for [web vitals](/docs/web-analytics/web-vitals) regressions per page, banding each metric by device and connection rather than averaging fast and slow visitors together.
+
+A report only gets filed when the scout has named the specific segment, dated the onset, and can show that the aggregate held – that last part is what makes a segment-level finding worth your time.
+
+### Why there is usually no pull request
+
+Web analytics findings are mostly not code problems, and even when they are, the code usually isn't somewhere PostHog can reach. An SEO drop, a paused ad account, a referrer going dark, or a campaign missing its UTM tags lives in your site, your campaign tooling, or your marketing stack – not in a repository a coding agent can open a pull request against.
+
+So both scouts default to filing the finding as a report for a human reviewer. The rare exception is a finding whose fix is well-localized in a repository the scout can confidently name from your project context – a web vitals regression traced to a specific asset, say. That path exists, but it isn't the default, and you shouldn't plan around it.
+
+### What you can do with a report
+
+- **Read the report** – the segment, the date it moved, the queries behind it, and for a web vitals finding, a cause hypothesis and suggested remediation.
+- **Ask questions** – start a discussion with an agent about the report to dig further before you act.
+- **Follow the activity** – the report's activity log shows what happened to it and when.
+- **Decide what happens next** – fix the tagging, restart the ad account, chase the broken redirect, or dismiss the report. It's your call, and nothing happens until you make it.
+
 ## Related
 
 - Get set up end to end in [Start here](/docs/web-analytics/start-here).
 - Query the same numbers from your editor over [MCP](/docs/web-analytics/surfaces/mcp).
-- Review Self-driving reports about your traffic in [PostHog Desktop](/docs/web-analytics/surfaces/desktop).
 - Pull the same data into your own reports with the [API](/docs/web-analytics/surfaces/api).
 - Not sure which tool to reach for? See [web vs product analytics](/docs/web-analytics/web-vs-product-analytics).

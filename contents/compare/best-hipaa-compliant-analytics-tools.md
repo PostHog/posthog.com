@@ -58,7 +58,7 @@ It gives you every tool you need to understand user behavior and, unlike typical
 
 Being an all-in-one platform has two further benefits:
 
-1. PostHog can replace multiple products – e.g. [Mixpanel](/compare/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/compare/best-launchdarkly-alternatives) for feature management, [Sentry](/blog/best-sentry-alternatives) for error tracking, etc.
+1. PostHog can replace multiple products – e.g. [Mixpanel](/compare/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/compare/best-launchdarkly-alternatives) for feature management, [Sentry](/compare/best-sentry-alternatives) for error tracking, etc.
 2. You only need to sign one BAA to get all these tools, reducing legal complexity and risk.
 
 #### PostHog and HIPAA compliance
