@@ -2592,7 +2592,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Security',
-                    url: '/docs/tasks/security',
+                    url: '/docs/self-driving/security',
                 },
                 {
                     name: 'Apps',
