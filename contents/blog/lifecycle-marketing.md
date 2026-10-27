@@ -33,6 +33,9 @@ I’ll describe what’s changing and why, but first, I decided to go and ask so
 
 I asked them all roughly the same things. Here’s what they said.
 
+![Onboarding 1.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_1.png)
+<Caption>A reminder of how all this started, back in 2022</Caption>
+
 ### How complex should your flow be?
 
 Over five years, our onboarding flow has grown from a handful of emails into a tree of roughly 100. In theory, every new branch gets us more data and better targeting. In practice, every new branch is another thing to maintain. Where's the line?
@@ -55,11 +58,20 @@ He also quoted Jeff Bezos at me, on listening to customers when they and the dat
 
 Right now, our onboarding personalizes based on product behavior, not person properties. When a PostHog user uses Product Analytics, a email on getting more out of it is probably useful. If your first name happens to be in our database, that's not a reason to use it.
 
+![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
+<Caption>A previous version of our onboarding, back when it was very highly personalized</Caption>
+
 Jeff thinks you should personalize as much as possible. At Calendly, changing just the first paragraph of a newsletter by role doubled activation and conversions. James has never seen one-to-one AI personalization beat a well-crafted email written for a specific segment.
 
 ### Are experiments worth more than taste?
 
 Most of our emails are guided by taste, not experiments. The only consistent finding from the few tests we have run is that hand-drawn hedgehogs beat product screenshots by a point or two as the lead image. I suspect we could have told you that without testing it.
+
+<div className="grid grid-cols-2 gap-2 items-start">
+  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyless_7e06100c19.png" alt="Onboarding email with a product screenshot as the lead image" />
+  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/joyful_714c44ec34.png" alt="Onboarding email with a hand-drawn hedgehog as the lead image" />
+</div>
+<Caption>Not a shock that people prefer hand-drawn art, really</Caption>
 
 Jeff puts far more weight on testing. He thinks you should test everything, constantly, including dark patterns, whether you like them or not. At Calendly they stopped sending trial-expiry reminders, for example, because the reminders measurably hurt conversion.
 
