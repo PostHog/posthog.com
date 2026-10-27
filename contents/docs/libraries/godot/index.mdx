@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-> **Warning:** This SDK is experimental and not yet production-ready. APIs and behavior may change without notice. Test thoroughly before using it in a production game.
+> **Note:** This SDK is experimental and not yet production-ready. APIs and behavior may change without notice. Test thoroughly before using it in a production game.
 
 The PostHog SDK for Godot is a GDScript addon for Godot 4.5 and later. It supports custom events, user identification, Feature Flags, Experiments, and Error Tracking without .NET or native dependencies.
 
@@ -44,6 +44,8 @@ func _ready() -> void:
 ```
 
 Set `api_key` to your [project token](https://app.posthog.com/settings/project), not a personal API key. The ingestion host is usually `https://us.i.posthog.com` or `https://eu.i.posthog.com`, depending on your region.
+
+You can also set `host` to your [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) URL, such as `https://analytics.example.com`. For Windows exports, see [TLS certificate failures](#tls-certificate-failures-on-windows).
 
 `setup()` returns `false` and logs a warning if the configuration is invalid or the client is already initialized. It copies the configuration, so changing the original resource after setup doesn't reconfigure the client.
 
@@ -452,6 +454,18 @@ Resource-based initialization skips editor builds by default. Set `skip_auto_ini
 ### Feature flags use their fallback
 
 Wait for `feature_flags_loaded` or check the result of `await PostHog.reload_feature_flags()`. Confirm the flag exists, its targeting matches the current player, and the SDK isn't opted out.
+
+### TLS certificate failures on Windows
+
+Some Windows installations may lack the root certificates needed to verify your managed reverse proxy's certificate chain. Requests can fail in Godot even when the same host works in a browser.
+
+If affected, bundle an up-to-date PEM CA certificate bundle with your game and configure **Project Settings > Network > TLS > Certificate Bundle Override** (`network/tls/certificate_bundle_override`). Ensure the bundle is included in exported builds. See [Godot's TLS certificate documentation](https://docs.godotengine.org/en/4.5/tutorials/networking/ssl_certificates.html).
+
+This setting replaces Godot's default trust configuration for the game, not just PostHog requests. Include the roots needed by your other HTTPS services, keep certificate verification enabled, and test your exported game on target Windows machines.
+
+The managed proxy's certificate chain can change, including the issuing certificate authority. A bundled CA set mitigates missing-root failures but doesn't guarantee compatibility with future chains. Maintain the bundle and plan how to deliver updates to installed games. Bundling only the current proxy certificate or its root isn't a permanent solution.
+
+If you need control over certificate issuance, consider a [self-managed reverse proxy](/docs/advanced/proxy). You still need to manage certificate renewal and client trust compatibility.
 
 ### Web requests fail
 
