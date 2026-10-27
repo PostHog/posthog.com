@@ -87,9 +87,8 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                   devtool: false,
               }
             : null),
-        cache: process.env.NODE_ENV === 'development' || {
-            compression: 'gzip',
-        },
+        // Any `cache` value in develop replaces Gatsby's persistent webpack cache (.cache/webpack/stage-develop)
+        ...(process.env.NODE_ENV === 'development' ? null : { cache: { compression: 'gzip' } }),
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
             modules: [
