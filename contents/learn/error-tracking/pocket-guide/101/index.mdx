@@ -83,11 +83,11 @@ Your code throws an exception when something goes wrong, such as a `TypeError`. 
 
 These exception events sit alongside your other PostHog events. That lets you answer questions you can't with just a stack trace:
 
-- Which customers are impacted?
-- Does it impact conversion and retention?
-- Can this error be tied to loss in revenue?
-- Were they part of any feature flag or experiment rollouts?
-- What's shown on the user's page before and after the exception is thrown?
+- [Which customers are impacted?](/learn/error-tracking/pocket-guide/measure-impact#a-customers-errors)
+- [Does it impact conversion and retention?](/learn/error-tracking/pocket-guide/measure-impact#churn)
+- [Can this error be tied to loss in revenue?](/learn/error-tracking/pocket-guide/measure-impact#revenue-at-risk)
+- [Were they part of any feature flag or experiment rollouts?](/learn/error-tracking/pocket-guide/measure-impact#experiments)
+- [What's shown on the user's page before and after the exception is thrown?](/learn/error-tracking/pocket-guide/measure-impact#session-replays)
 
 ## Exceptions and issues
 
@@ -95,7 +95,7 @@ Like other PostHog tools, each instance of an <Term name="exception" /> is captu
 
 ## By the end of this pocket guide
 
-Most production apps have more exceptions than your team can fix. Error Tracking helps you find the highest-impact issues, report them, and automate the fixes. We'll introduce each step throughout this guide:
+Most production apps have more exceptions than your team can fix. And not all of them matter. That one mysterious React error has been firing for months and no-one notices anyway. Error Tracking helps you find the highest-impact issues, report them, and automate the fixes. We'll introduce each step throughout this guide:
 
 - **Capture** – Group exceptions into issues. Make stack traces readable. Keep noise out.
 - **Query** – Query exceptions as events with HogQL and MCP. Join them with revenue, funnels, and experiments to measure impact.

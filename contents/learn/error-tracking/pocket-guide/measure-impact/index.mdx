@@ -208,7 +208,7 @@ This joins exceptions to people on `distinct_id`:
 
 When you ship the next change as an <Term name="experiment" />, check that it doesn't add errors. Add `$exception` as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics) to compare errors across variants.
 
-To see when the errors started, chart each variant's error rate <SeeFig n={4} />. Use a rate, so a variant on 5% of traffic compares fairly with one on 95%. The Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
+To see when the errors started, chart each variant's error rate <SeeFig n={4} />. When the traffic split isn't even, compare a ratio, like exceptions per pageview, rather than raw counts. A variant on 5% of traffic then compares fairly with one on 95%. The Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
 
 This joins exceptions to variants on `$feature/<flag-key>`:
 

@@ -12,7 +12,9 @@ pocketGuideOrder: 0
 
 Error Tracking captures the exceptions your code throws, with their stack traces, and groups them into <Term name="issue">issues</Term> you can assign and resolve.
 
-PostHog is the [context warehouse](/docs/self-driving/context) for your product. Each exception is an event, stored next to your analytics, session replays, logs, and the business data you sync from [sources](/docs/data-pipelines/sources) like [Stripe](/docs/data-pipelines/sources/stripe), [Postgres](/docs/data-pipelines/sources/postgres), or [HubSpot](/docs/data-pipelines/sources/hubspot). You and your agents can query exceptions alongside that data, so you can rank issues by the accounts they hit and what those accounts pay you.
+Everything is an event in PostHog. You can analyze exceptions together with your analytics, session replays, logs, and the business data you sync from [sources](/docs/data-pipelines/sources) like [Stripe](/docs/data-pipelines/sources/stripe), [Postgres](/docs/data-pipelines/sources/postgres), or [HubSpot](/docs/data-pipelines/sources/hubspot).
+
+This gives you powerful insight into the product and business impact of each error.
 
 PostHog can also <Term name="self-driving">self-drive</Term>. <Term name="scout">Scouts</Term> watch your exceptions and file reports in your inbox. When a report has a clear code change, an agent opens a pull request for you to review.
 
