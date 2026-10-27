@@ -1,5 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 import { SELF_HOSTED_SOURCES } from '../constants/sources'
+import { getSourceDocsPath } from '../lib/sourceDocs'
 
 export default function useSourcesNav(basePath = '/docs/data-pipelines/sources'): { url?: string; name: string }[] {
     const { allPostHogSource } = useStaticQuery(graphql`
@@ -9,13 +10,18 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
                     slug
                     name
                     beta
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                 }
             }
         }
     `)
 
     const managed = allPostHogSource.nodes.map((node: any) => ({
-        url: `${basePath}/${node.slug}`,
+        url: getSourceDocsPath(node, basePath),
         name: node.name,
         ...(node.beta && {
             badge: {

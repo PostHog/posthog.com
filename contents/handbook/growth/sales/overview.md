@@ -94,6 +94,6 @@ Our people are spread across the [teams above](#our-teams), each with its own sm
 
 ## Staying current with what we ship
 
-Being a [power user of PostHog](#our-vision) means knowing what just shipped. The [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) Slack channel makes this easy, and we recommend everyone on the Sales, CS & Onboarding teams joins it. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
+Being a [power user of PostHog](#our-vision) means knowing what just shipped. The [`#posthog-changelog`](https://posthog.slack.com/archives/C06G2G7JSM6) Slack channel makes this easy, and we recommend everyone on the Sales, CS & Onboarding teams joins it. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
 The channel is populated by agentic workflows that scan merged PRs and feature flag changes and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog).

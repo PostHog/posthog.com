@@ -1,7 +1,7 @@
 ---
 date: "2026-10-26"
 title: How Replay Vision helps users find (and solve) product problems
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/replay_vision_1x_517390c431.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/find_issues_that_frustrate_users_addbf16f20.png
 featuredImageType: full
 author:
   - sara-miteva

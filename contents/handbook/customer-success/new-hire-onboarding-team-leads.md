@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-So you've got a new CSM joining your team! This page is for team leads - the joiner-facing plan is [new starter onboarding](/handbook/cs-and-onboarding/new-hire-onboarding). Here's what to prepare and when:
+So you've got a new CSM joining your team! This page is for team leads - the joiner-facing plan is [new starter onboarding](/handbook/customer-success/new-hire-onboarding). Here's what to prepare and when:
 
 1. **Before they join** - prepare their book, book the 1:1s, plan the in-person week
 2. **First week** - welcome 1:1, get the team sharing calls and tips
@@ -17,7 +17,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 
 - Accounts come from a few places (listed by priority): CSMs can offload accounts if they're overloaded, product-led sales and new business sales can have accounts waiting for a CSM handover, and Simon frequently pulls net-new accounts - ask all groups to see what needs coverage. 
 - Tee up ~20 accounts so they're not at capacity immediately - it also leaves room for late handovers. 
-- Follow the [capacity model](/handbook/cs-and-onboarding/how-we-work), and bonus points if accounts can line up with their previous experience.
+- Follow the [capacity model](/handbook/customer-success/how-we-work), and bonus points if accounts can line up with their previous experience.
 
 **Book the 1:1s:** Welcome 1:1 on day 1, a recurring 1:1, and (optionally) an extended 1:1 every 4 weeks.
 
@@ -32,7 +32,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 
 **Welcome 1:1:** 
 
-- Walk through their [onboarding plan](/handbook/cs-and-onboarding/new-hire-onboarding) - week 1 is a lot of reading, watching and shadowing. It'll feel unproductive!
+- Walk through their [onboarding plan](/handbook/customer-success/new-hire-onboarding) - week 1 is a lot of reading, watching and shadowing. It'll feel unproductive!
 - How we work - sprint planning, account review, ask in public by default.
 - Our feedback culture, and give them their SuperDay feedback.
 - How you want to use 1:1 time. Management at PostHog is [relatively light-touch](/handbook/company/management) - worth resetting expectations upfront, especially if the new CSM is used to heavier structure.
@@ -50,7 +50,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 - In the 2nd or 3rd 1:1, bring: an email or outreach message you sent to a customer, a call with a customer, and questions you need my help on
 - Share your first 5 calls in the team channel
 Onboarding
-- Here's your [plan](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding) for the next few weeks (emphasise!)
+- Here's your [plan](https://posthog.com/handbook/customer-success/new-hire-onboarding) for the next few weeks (emphasise!)
 - Week 1 is a lot of reading! watching! shadowing! - probably not a lot of doing, which will feel weird. the aim is to load up on context so you're ready to go in onboarding week. 
   - Share calls to watch - a few recent good ones, ask the team for picks
   - Suggested reading:
@@ -60,7 +60,7 @@ Onboarding
       - How: [what we value](https://posthog.com/handbook/values), [a wide company](https://posthog.com/handbook/wide-company) with [small teams](https://posthog.com/handbook/company/small-teams)
     - GTM / Customer Success:
       - [GTM overview](https://posthog.com/handbook/growth/sales/overview)
-      - [CS overview](https://posthog.com/handbook/cs-and-onboarding/customer-success) + have a skim of the follow-on links
+      - [CS overview](https://posthog.com/handbook/customer-success/customer-success) + have a skim of the follow-on links
       - [Use case selling](https://posthog.com/handbook/growth/use-case-selling/use-case-selling)
       - [CSM + TAM](https://posthog.com/handbook/growth/sales/account-allocation)
       - [Contract rules](https://posthog.com/handbook/growth/sales/contract-rules)
@@ -107,7 +107,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **What is the customer using PostHog for?** The products they pay for, the events they capture, what they do with the data
 - **How's the relationship?** The active users and what they're doing (candidates for outreach), recent tickets and calls, which PostHog humans they've talked to (AE, onboarding, TAM, CSM)
-- **Are they set up well and getting value?** Run the [basic implementation review](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks)
+- **Are they set up well and getting value?** Run the [basic implementation review](/handbook/customer-success/foundation-check) and [health check](/handbook/customer-success/health-checks)
 - **Commercials:**
   - Monthly usage - forecasted MRR, billing limits, platform add-ons
   - The contract, if they're on one - how much credit they bought, when they renew, are they on track? Talk through [contract rules](/handbook/growth/sales/contract-rules) and the tools we use (QuoteHog, PandaDoc, Salesforce)
@@ -126,7 +126,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 #### Optional
 
 - **PostHog fundamentals** - a walkthrough, depending on their familiarity with the product
-- **Working with support** - how tickets flow, [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues)
+- **Working with support** - how tickets flow, [handling customer issues](/handbook/customer-success/handling-customer-issues)
 - **Quarterly goal brainstorm** - useful when they join near the start of a quarter
 - **Billing mechanics** - billing-limit grace periods and trust scores, giving credits, chasing overdue invoices, the spike detector
 - **Customer Analytics mechanics** - tags like `churn risk`, the renewal alerts in #sales-alerts

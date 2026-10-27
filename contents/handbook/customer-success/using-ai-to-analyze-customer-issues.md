@@ -22,7 +22,7 @@ This holds for both audiences below. Internally, we should do our best to explic
 
 ## Internal: separate the analysis from the output
 
-When investigating a customer issue, treat AI output as directional guidance. It is still your responsibility to shoulder the critical thinking around the product with your [investigation workflow](/handbook/cs-and-onboarding/handling-customer-issues#investigating-issues). The model will tell you *where* to look, but your understanding of the trace, the replay, the dashboard, and the query result. This is the analysis.
+When investigating a customer issue, treat AI output as directional guidance. It is still your responsibility to shoulder the critical thinking around the product with your [investigation workflow](/handbook/customer-success/handling-customer-issues#investigating-issues). The model will tell you *where* to look, but your understanding of the trace, the replay, the dashboard, and the query result. This is the analysis.
 
 Label anything that is machine-generated, especially in shared notes and tickets. We're all developing a good eye for it, but mark AI output as AI output: a heading, a quote block, a "(AI draft, unverified)" tag. The goal is that a teammate skimming your investigation can instantly tell which lines are confirmed and which are a model's guess.
 

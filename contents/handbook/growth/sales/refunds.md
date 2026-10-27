@@ -73,7 +73,7 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   If you have access to Vitally, find the customer's Metabase dashboard link under the 'Usage Dashboard Link' trait. The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
 -   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
 -   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
 -   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.

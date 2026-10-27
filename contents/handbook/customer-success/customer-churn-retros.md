@@ -6,7 +6,7 @@ showTitle: true
 
 ## Churn retros
 
-When a human-managed account churns from PostHog, we share learnings in #customer-churn-retros. The goal is simple: learn from what happened so we can prevent it next time.
+When a human-managed account churns from PostHog, we share learnings in #customer-churn. The goal is simple: learn from what happened so we can prevent it next time.
 
 ## Who does this
 
@@ -64,7 +64,7 @@ What do we need to change in how we work?
 - Communication cadence issues
 
 ## Contraction retros
-when an account in an AM's book contracts or fails to grow and the AM wants it removed from the book, we should retro the account like a churn. We should run these any time an account is removed from a book, a cross-sell is lost, or we see usage contraction about 10% (either overall or for a specific product). Use
+When an account in a TAM's book contracts or fails to grow and the TAM wants it removed from the book, we should retro the account like a churn. We should run these any time an account is removed from a book, a cross-sell is lost, or we see usage contraction about 10% (either overall or for a specific product). Use the template below.
 
 ### Basic info
 - **Customer name:**
