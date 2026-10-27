@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Serpstat connector syncs your SEO rank tracking, domain analysis, and backlink data into the PostHog data warehouse, so you can analyze search performance alongside your product data.
 
-> **Note:** This source is in **beta**.
-
 ## Prerequisites
 
 - A Serpstat account on the **Team plan or higher** (required for API access).
