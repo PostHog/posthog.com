@@ -29,6 +29,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
+- Meet with a couple of CSMs on the team to learn how they approach the role.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
@@ -109,6 +110,24 @@ This is the bar for end of month 1.
 - On track to consistently hit your retention targets
 - You've suggested and made changes to our systems that enable you to do your job better
 - Think about customer health scores and add/change anything you learn here
+
+**How to run it:**
+
+- You book it and you drive it. Come with a few questions.
+- Ask them to walk you through something real - their account list, their calendar for the week, a recent email - rather than describing it in the abstract.
+- Talk about approach, not customer detail.
+
+**What to ask.** Pick the ones that matter to you, don't try to cover them all:
+
+- Management: How do you use your 1:1 with your team lead? What do you escalate, and to whom? How do you keep your lead up to date without it becoming a reporting chore?
+- Methodology: How do you decide which accounts get your time this week? Which signals do you check first when reading an account, and which do you ignore? How do you spot churn risk early, and what do you do when you see it? What does a good first call look like? How do you handle a feature request we won't build? How do you work with support and the product teams?
+- Style: How do you write to customers - email, Slack Connect, calls? How do you prep for a call and follow up after it? How do you structure your week? Which tools or automations do you use that aren't on the standard list? What would you do differently in your first two months?
+
+**Afterwards:**
+
+- Pick two or three things to try in your first month. Don't adopt everything.
+- Bring it to a 1:1 with your team lead. It's a good first agenda item, since you set the agenda.
+- Revisit it around the end of month 2. Keep what worked, drop the rest, and add anything useful to the handbook.
 
 ## Learning PostHog
 
