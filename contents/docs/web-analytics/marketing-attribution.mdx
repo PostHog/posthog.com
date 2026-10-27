@@ -1,0 +1,68 @@
+---
+title: Marketing attribution
+sidebar: Docs
+showTitle: true
+---
+
+Marketing attribution tells you which channels, campaigns, and sources bring the users who convert. This page shows how attribution works in PostHog, how it compares to Google Analytics, and which tool to use for each question.
+
+## How PostHog attributes traffic
+
+PostHog captures [UTM parameters](/docs/data/utm-segmentation), the referrer, and ad click IDs like `gclid` automatically. It stores these values in three places:
+
+| Where              | Example properties                                  | Attribution model                                    |
+| ------------------ | --------------------------------------------------- | ---------------------------------------------------- |
+| Session            | `$entry_utm_source`, `$channel_type`                | The first touch of the session                       |
+| Person (initial)   | `$initial_utm_source`, `$initial_referring_domain`  | The first touch of the user (first-touch)            |
+| Person (latest)    | `utm_source`, `utm_campaign`                        | The most recent touch of the user (last-touch)       |
+
+The [web analytics dashboard](/docs/web-analytics/dashboard) uses session properties. Each session gets the [channel type](/docs/data/channel-type), referrer, and UTMs of its first pageview. Every event in the session also gets these values as `$session_entry_` properties. See [sessions](/docs/data/sessions#session-entry-properties-on-events) for the full list.
+
+## Google Analytics concepts in PostHog
+
+| Google Analytics                     | PostHog                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| Key events (conversions)             | [Conversion goals](/docs/web-analytics/conversion-goals)                                                |
+| Default channel group                | [Channel type](/docs/data/channel-type), with [custom channel types](/docs/data/channel-type#custom-channel-types) |
+| Session source / medium              | Session entry properties, for example `$entry_utm_source`                                               |
+| First user source / medium           | Initial person properties, for example `$initial_utm_source`                                            |
+| Google Ads cost and campaign reports | [Marketing analytics](/docs/web-analytics/marketing-analytics)                                          |
+
+PostHog does not have the data-driven attribution model of Google Analytics. Use first-touch or last-touch attribution, or write your own model with [SQL](/docs/data-warehouse/sql).
+
+## Which channels drive conversions?
+
+1. Capture your conversion as a custom event, for example `user_signed_up`. See [capturing custom events](/docs/getting-started/send-events#2-capture-custom-events).
+2. Add the event as a [conversion goal](/docs/web-analytics/conversion-goals) on the web analytics dashboard.
+3. Look at the **Channels** and **UTMs** tiles. These tiles show conversions and conversion rate for each session source.
+
+This gives you session-level attribution: the conversion goes to the source of the session where it happened.
+
+## First-touch and last-touch attribution
+
+To credit the source that first brought a user, use a [trend](/docs/product-analytics/trends/overview) or a [funnel](/docs/product-analytics/funnels) and break down by an initial person property, for example `$initial_utm_source` or `$initial_referring_domain`.
+
+To credit the source of the most recent visit, break down by a latest person property, for example `utm_source`.
+
+In a funnel, the [attribution type](/docs/product-analytics/funnels#attribution-types) setting controls which step gives the breakdown value. For example, break down by `$session_entry_utm_source` and set the attribution type to **First touchpoint** to credit the source of the session where the funnel started.
+
+> **Note:** Initial person properties stay correct when an anonymous user identifies later. Latest person properties do not. See [UTM segmentation](/docs/data/utm-segmentation#capturing-utm-parameters) for details.
+
+## Ad spend and return on ad spend
+
+[Marketing analytics](/docs/web-analytics/marketing-analytics) connects your ad platforms, like Google Ads, Meta Ads, and LinkedIn Ads. It shows cost, clicks, and impressions next to your PostHog conversion goals for each campaign. PostHog matches campaigns to conversions with `utm_campaign` and `utm_source`.
+
+## Send conversions back to ad platforms
+
+To optimize your ad campaigns with PostHog data, send conversions to your ad platforms with a destination, for example [Google Ads](/docs/cdp/destinations/google-ads).
+
+## When attribution looks wrong
+
+The most common cause of missing attribution is that the user gets a new `distinct_id` before they convert. This occurs with in-app browsers, cleared storage, and separate marketing and app domains. See [campaign attribution troubleshooting](/docs/web-analytics/campaign-attribution-troubleshooting) for checks and fixes.
+
+## Further reading
+
+- [UTM segmentation](/docs/data/utm-segmentation)
+- [Channel type](/docs/data/channel-type)
+- [Web vs product analytics](/docs/web-analytics/web-vs-product-analytics)
+- [Migrate from Google Analytics](/docs/migrate/google-analytics)
