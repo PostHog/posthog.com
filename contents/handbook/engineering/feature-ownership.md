@@ -39,20 +39,12 @@ Not sure which row fits your change? If all else fails, ask the owning team.
 
 ### If you open the PR, you own it
 
-Generating a PR takes minutes, so the PR itself isn't the work. Before you ask the owning team for a review:
-
--   Understand the change well enough to explain it and its tradeoffs without the diff open.
--   Test it, by hand where the tests don't cover it.
--   Write a description that says what changed and why. "I pointed an agent at this" is not a description.
-
-The rest of the author checklist is in [Before requesting a review](/handbook/engineering/how-we-review#before-requesting-a-review).
+Generating a PR takes minutes, so the PR itself isn't the work. Before you ask the owning team for a review, understand the change well enough to explain it and its tradeoffs without the diff open. "I pointed an agent at this" is not a description. Then follow [Before requesting a review](/handbook/engineering/how-we-review#before-requesting-a-review).
 
 ### What the owning team does
 
--   Respond within one working day, per our [turnaround](/handbook/engineering/how-we-review#turnaround) norm.
 -   Say what you prefer. If a PR doesn't meet your bar, or you'd rather get an issue than a PR, tell the author.
 -   Close an outside PR that conflicts with your team's direction, and say why. The author then gives you context instead.
--   Own the change once it merges.
 
 If the owning team closes your PR and builds the change their own way, don't take it personally. You gave them the context they needed.
 
